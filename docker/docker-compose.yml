@@ -1,0 +1,74 @@
+services:
+  brainwebviz:
+    # Static site served by Caddy. We build a thin image off caddy:2-alpine
+    # (see docker/Dockerfile) only to strip the binary's cap_net_bind_service
+    # file capability, which otherwise makes exec fail under no-new-privileges.
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: brainwebviz:local
+    container_name: brainwebviz
+    restart: unless-stopped
+
+    # Stamp the container's start time into STARTED_AT (epoch seconds) so the
+    # optional DEV banner can show "restarted X ago". Compose env is static, so
+    # we set it in a tiny shell wrapper, then exec caddy exactly as the base
+    # image's CMD would. Overriding entrypoint to `sh -c` (rather than the
+    # default `caddy`) is why command is a single shell string. `$$` is how
+    # compose escapes a literal `$` so the substitution runs in the container,
+    # not at compose-parse time. Caddy inherits STARTED_AT across the exec and
+    # exposes it to templates via {{env "STARTED_AT"}}.
+    entrypoint: ["sh", "-c"]
+    command: ["export STARTED_AT=$$(date +%s); exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile"]
+
+    # ── Hardening (mirrors parakeet_web) ────────────────────────────────
+    # Run as non-root (UID 1000). Caddy listens on 8359 (>1024) so it needs no
+    # privileged-port capability; combined with cap_drop:ALL,
+    # no-new-privileges and the read-only rootfs this keeps the blast radius of
+    # any compromise minimal.
+    user: "1000:1000"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      # Caddy needs a few writable paths even when only serving files. Mounted
+      # as UID 1000 so the non-root process can write them despite read_only.
+      - /tmp:mode=1777
+      - /data:uid=1000,gid=1000,mode=0700
+      - /config:uid=1000,gid=1000,mode=0700
+    # Resource limits to mitigate denial-of-service risk.
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+
+    volumes:
+      # The whole project root (index.html, js/, data/, shapes/, ...) served
+      # read-only. Relative to this compose file, so it points at
+      # ~/docker/brainwebviz on the VPS.
+      - ../:/srv:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+
+    # Bound to localhost only: a reverse proxy on the host terminates TLS and
+    # forwards to this port.
+    ports:
+      - "127.0.0.1:8359:8359"
+
+    environment:
+      # Privacy-friendly umami metrics, injected at runtime by the Caddyfile's
+      # templates block into /app-config.js. Set these in docker/.env;
+      # leave them empty to disable analytics entirely. ANALYTICS_SRI is an
+      # optional Subresource Integrity hash for the umami script.
+      # ANALYTICS_DNT is umami's data-do-not-track value: "true" (default)
+      # respects the browser Do Not Track signal, "false" tracks all visitors.
+      - ANALYTICS_URL=${ANALYTICS_URL:-}
+      - ANALYTICS_WEBSITE_ID=${ANALYTICS_WEBSITE_ID:-}
+      - ANALYTICS_SRI=${ANALYTICS_SRI:-}
+      - ANALYTICS_DNT=${ANALYTICS_DNT:-true}
+      # DEV=1 shows a top "work in progress / restarted X ago" banner (see
+      # js/dev-banner.js); defaults to 0 (off). STARTED_AT is set by the
+      # entrypoint above, not here.
+      - DEV=${DEV:-0}

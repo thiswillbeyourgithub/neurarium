@@ -1,0 +1,11 @@
+# Environment-specific deploy script (VPS creds via env vars); not committed.
+/deploy.sh
+
+# Per-instance metrics config (umami URL/id, DNT choice); not committed.
+/docker/.env
+
+TODO.md
+
+CLAUDE.md
+
+__pycache__

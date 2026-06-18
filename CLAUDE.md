@@ -1,0 +1,506 @@
+# CLAUDE.md
+
+Guidance for Claude Code (and humans) working in this repository.
+
+> [!IMPORTANT]
+> Keep this file up to date. Whenever a new feature, control, data field, or
+> file is added, update the relevant section below in the same change. This file
+> is meant to stay an accurate map of the project.
+
+## What this is
+
+A browser-based 3D brain visualizer built on [three.js](https://threejs.org/).
+It shows brain regions (cortical lobes, basal ganglia / deep nuclei,
+diencephalon, limbic, hindbrain) as procedurally shaped meshes (gyrified cortex,
+smooth deep nuclei, foliated cerebellum,
+swept-tube caudate/brainstem/hippocampus/cingulate/fornix)
+and draws arrows for neuron projections between them. Region `group` values
+(`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`) drive the legend
+headings + ordering via `GROUP_LABELS` in `js/main.js`; adding a new group means
+adding it there too or its structures are dropped from the legend. At explode 0 the regions are positioned and shaped to
+lock together into a whole brain (the cortical lobes tile a hemisphere with a
+flat medial wall at the longitudinal fissure); the explode slider blows them
+radially apart to reveal the deep nuclei. On load the regions start blown out
+and animate back together into the whole brain. The view can be rotated/zoomed,
+auto-rotated, "blown out" (exploded), and made transparent.
+
+Built with the help of Claude Code.
+
+## Architecture (data vs. rendering, on purpose)
+
+The anatomy is kept as plain data, separate from the rendering code, so the
+project can grow without touching the viewer:
+
+```
+generate_data.py      Single source of truth for the anatomy. Defines every
+                      region + projection once and emits the two artifacts below.
+data/brain.jsonl      One JSON object per line. Each line is one of:
+                        - a "structure" (region): id, name, group, position,
+                          color, shape_file
+                        - a "projection": from, to, kind, label,
+                          neurotransmitter, description, sources[{citation,url}],
+                          and optional bidirectional
+                        - a "circuit": id, name, structures[ids] (a named
+                          functional loop; its arrows are derived in the viewer
+                          as the projections whose endpoints are both in the set)
+shapes/<name>.json    One geometry file per distinct *form* (independent of
+                      where it sits / what it connects to). Symmetric left/right
+                      pairs share a single right-side file; the left member
+                      reflects it (a `mirror` flag on its structure record, see
+                      below), so there is no per-side duplication. Three types:
+                      "blob" {radii, seed, detail, noise, + optional
+                      octaves/ridged/frequency/aniso/clip/clip_planes} = a
+                      gradient-noise-deformed ellipsoid (the optional fields turn
+                      the smooth surface into gyrified cortex or foliated
+                      cerebellum, `clip` cuts axis-aligned flat faces e.g. the
+                      lobes' medial wall, and `clip_planes` are the generated
+                      bisecting cuts between overlapping neighbours so adjacent
+                      regions tile flush like jigsaw pieces instead of inter-
+                      penetrating);
+                      "curve" {points, profile, seed, noise, radial/tubular_
+                      segments} = a round-capped tapered tube swept along a spline
+                      (the C-shaped caudate, the tapering brainstem); "composite"
+                      {parts:[...]} = several sub-shapes (each with optional
+                      offset/scale/rotate) merged into one mesh, for regions that
+                      aren't a single lump (the cerebellum = 2 hemispheres +
+                      vermis).
+index.html            Page shell: loads eruda + three.js (via import map), holds
+                      the single bottom-left collapsible "BrainWebViz" panel
+                      (reset/search buttons, the two sliders, auto-rotate, and the
+                      nested JS-populated legend whose first row is "show all
+                      names") plus the in-place search box and the WIP banner.
+js/data.js            Fetches brain.jsonl + all shape files, returns a normalized
+                      {structures, projections, byId} object.
+js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
+                      dispatches on shape.type to buildBlobGeometry (deformed
+                      ellipsoid), buildCurveGeometry (round-capped tapered tube
+                      along a spline) or buildCompositeGeometry (merged sub-
+                      shapes). A `mirror` flag on the structure reflects the
+                      geometry across x (mirrorGeometryX) for the left member of
+                      a pair. Self-contained gradient (Perlin) noise +
+                      fractal/ridged/domain-warp helpers (fractalNoise). Cortical
+                      lobes also get fine gyri as a procedural normal-map bump
+                      injected into their material (injectGyrusBump /
+                      GYRUS_BUMP), so the geometry stays a smooth broad fold and
+                      the folds are shading, not triangles. buildBlobGeometry also
+                      honours `clip_planes` (the generated inter-region jigsaw
+                      cuts) when the `JIGSAW_CLIP.enabled` flag is on. No JS deps
+                      beyond three.js.
+js/arrows.js          Builds curved tube+cone arrows for projections; colors per
+                      projection `kind` live here (PROJECTION_COLORS).
+js/labels.js          Floating structure-name labels (three.js CSS2DRenderer):
+                      one hidden label per region, shown on hover or all at once.
+js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
+                      explode + transparency logic, the auto-play "assemble"
+                      intro (createIntroAnimation), auto-rotate, hover raycasting
+                      for labels, arrow picking + the connection info panel
+                      (createInfoPanel), the structure+connection search, the
+                      legend builder, and the render loop.
+app-config.js         Tiny config file with {{env}} placeholders; the container
+                      fills them from docker/.env (Caddy templates). Raw in dev.
+                      Named generically (not "analytics-*") so content filters /
+                      proxies that block "analytics" paths don't 404 it. Carries
+                      the umami ANALYTICS_* values plus DEV + STARTED_AT (the
+                      WIP-banner flag and container start time).
+js/app-init.js        Reads that config and injects the umami tag if configured;
+                      no-op otherwise.
+js/dev-banner.js      Reads that config and, when DEV=1, shows the top "work in
+                      progress / restarted X ago" banner (STARTED_AT drives the
+                      "X ago"); no-op otherwise. See "Dev / WIP banner" below.
+version.js            Single source of truth for the app version (a plain
+                      `window.__APP_VERSION__` global, no build step). Shown in
+                      the panel header (js/main.js) + the WIP banner
+                      (js/dev-banner.js). Bump it with a CHANGELOG.md entry.
+CHANGELOG.md          Human-readable version history (semver); paired with
+                      version.js.
+docker/               Deployment: docker-compose.yml (hardened Caddy service),
+                      Dockerfile (strips caddy's cap_net_bind_service so exec
+                      works under no-new-privileges), Caddyfile (serves /srv on
+                      :8359, templates the app config, sends Cache-Control:
+                      no-store so prod never serves a stale module either, same as
+                      tools/serve.py), env.example (copy to docker/.env).
+tools/shot.py         Screenshot helper: serves the repo and drives a browser to
+                      capture index.html (with view params) to a PNG. Lets a
+                      dev/Claude Code see the output. Default is headless; pass
+                      `--headed` to render in a real on-screen browser window
+                      (real-GPU WebGL) and grab it, which is what actually works
+                      from this repo (headless WebGL comes back blank). `--headed`
+                      needs $DISPLAY + xdotool + ImageMagick `import`/`maim`.
+tools/serve.py        Stdlib static dev server that sends Cache-Control:no-store
+                      so the browser never serves a stale ES module (use instead
+                      of `python -m http.server` while developing; see Running).
+deploy.sh             Uncommitted, environment-specific: rsyncs the tree to the
+                      VPS (no GitHub) and restarts the container.
+```
+
+Why a generator instead of hand-written data files: most regions are symmetric
+left/right pairs, and the project is expected to get complex. Defining a region
+once in `generate_data.py` and mirroring it avoids duplicating anatomical data
+across ~20 files. The generated files are committed so the static site can fetch
+them directly.
+
+Coordinate convention (arbitrary units, brain centered on origin):
+`x` left(-)/right(+), `y` down(-)/up(+), `z` posterior(-)/anterior(+).
+
+## Running
+
+The data files are loaded with `fetch()`, so the page must be served over HTTP
+(opening `index.html` via `file://` fails CORS). From the repo root:
+
+```
+python tools/serve.py        # http://localhost:8000/ (recommended for dev)
+# or: python -m http.server 8000
+```
+
+Prefer `tools/serve.py` while developing: it is the same stdlib server but sends
+`Cache-Control: no-store`, so the browser refetches every ES module on each
+reload. Plain `http.server` sends no cache headers, and browsers then *heuristic*-
+cache the JS modules; that can serve a stale `js/*.js` next to a freshly fetched
+one, producing baffling mismatch crashes (e.g. a new `main.js` calling a function
+whose old cached signature differs). If you ever see such an error after editing
+JS, it is almost always a stale cached module: hard-reload (Ctrl/Cmd+Shift+R) or
+switch to `tools/serve.py`.
+
+Debugging: [eruda](https://github.com/liriliri/eruda) is loaded on every page and
+adds a floating button (bottom-right) that opens an on-screen console, usable on
+desktop and mobile.
+
+### Screenshots & deep-link view params
+
+`tools/shot.py` renders the page to a PNG so the output can be inspected (this is
+how shapes are reviewed/refined). It serves the repo, drives a browser, and
+captures the shot:
+
+```
+python tools/shot.py --headed --params "explode=0.5&view=iso" --out /tmp/brain.png
+python tools/shot.py --headed --params "only=putamen_R&view=iso" --out /tmp/putamen.png
+```
+
+> [!IMPORTANT]
+> Use `--headed`. The default headless path relies on software WebGL that comes
+> back **blank** in this environment; `--headed` opens a real browser window on
+> `$DISPLAY` (real-GPU WebGL) and grabs it, which is the only reliable way to
+> *see* the scene here. It needs an X session + `xdotool` + ImageMagick `import`
+> (or `maim`). With `--headed`, `--wait` is real milliseconds (give it ~12000+ so
+> the data loads and a few frames render). To point at a specific browser when
+> autodetect fails: `CHROME=/path/to/chrome python tools/shot.py ...`.
+
+The `--params` string is the URL query parsed by `applyViewParams` in
+`js/main.js`, so the same keys also work as deep links in a normal browser:
+
+| key | effect |
+| --- | --- |
+| `only=id[,id2]` | show only these structure ids (others + all arrows hidden) |
+| `view=front\|back\|left\|right\|top\|bottom\|iso` | frame the visible meshes from that angle |
+| `explode=0..1` | blow-out amount (also moves the slider) |
+| `transparency=0..1` | material opacity |
+| `names=all` | show every structure label |
+| `autorotate=1` | spin |
+| `ui=0` | hide the control panels + legend (clean shape shots) |
+
+`only`/`view` auto-fit the camera to whatever is visible, so a single structure
+fills the frame, handy for reviewing one region's shape at a time.
+
+## Deployment
+
+Deployment does **not** use GitHub. `deploy.sh` (kept uncommitted because it is
+environment-specific) rsyncs the working tree straight to
+`~/docker/brainwebviz` on the VPS, then restarts the container:
+
+```
+VPS_USERNAME=... VPS_IP=... VPS_PORT=... ./deploy.sh
+```
+
+On the server the site is served by a hardened Caddy container
+(`docker/docker-compose.yml`): non-root UID 1000, `cap_drop: ALL`,
+`no-new-privileges`, read-only rootfs (writable paths via tmpfs), CPU/memory
+limits. Caddy listens on `:8359`, published as `127.0.0.1:8359` so a host
+reverse proxy terminates TLS in front of it. The image is a thin build on
+`caddy:2-alpine` (`docker/Dockerfile`) whose only job is to strip the caddy
+binary's `cap_net_bind_service` file capability, which otherwise makes `exec`
+fail under `no-new-privileges` (`exec /usr/bin/caddy: operation not permitted`);
+the project root is bind-mounted read-only at `/srv` at runtime. The deploy runs
+`docker compose build --pull` then `up -d --force-recreate`.
+
+## Analytics (umami)
+
+Optional, privacy-friendly umami tracking. Because this is a no-build static
+site on a read-only rootfs, the config is injected at runtime:
+
+1. Set `ANALYTICS_URL`, `ANALYTICS_WEBSITE_ID` and (optional) `ANALYTICS_SRI` in
+   `docker/.env` (see `docker/env.example`). `ANALYTICS_DNT` is umami's
+   `data-do-not-track` value (mirrors WebSend's `UMAMI_DNT`): `"true"` (default)
+   respects the browser Do Not Track signal, `"false"` tracks all visitors.
+2. compose passes them into the container; the Caddyfile `templates` block fills
+   the `{{env}}` placeholders in `app-config.js`.
+3. `js/app-init.js` reads `window.__APP_CONFIG__` and injects the umami `<script>`
+   (with SRI/crossorigin if a hash is given, and an explicit `data-do-not-track`).
+
+   The client-facing file/global names are intentionally generic (`app-config.js`,
+   `js/app-init.js`, `__APP_CONFIG__`), not "analytics-*": a path containing
+   "analytics" is blocked by many content filters and forward proxies (Squid
+   blocklists), which would 404 it before the browser sees it. The `ANALYTICS_*`
+   env vars stay as-is since they are server-side and never sent to the client.
+
+Leave `ANALYTICS_URL`/`ANALYTICS_WEBSITE_ID` empty (or run locally without
+templating) and analytics is fully disabled, the page works the same.
+
+## Dev / WIP banner
+
+Optional "work in progress" banner across the top of the page, for when the
+instance is being actively redeployed. Same runtime-injection plumbing as
+analytics (no build step):
+
+1. `DEV` in `docker/.env` (default `0`). Set `DEV=1` to enable the banner.
+2. The container also needs to know *when it started* so the banner can say
+   "restarted X ago". Compose env is static, so `docker-compose.yml` overrides
+   the entrypoint to a tiny `sh -c` wrapper that stamps `STARTED_AT=$(date +%s)`
+   (epoch seconds) and then `exec`s caddy as usual. `$$` in the compose command
+   escapes the `$` so the substitution runs in the container.
+3. The Caddyfile `templates` block fills `DEV` + `STARTED_AT` into
+   `app-config.js` (alongside the `ANALYTICS_*` values).
+4. `js/dev-banner.js` reads `window.__APP_CONFIG__`: when `dev === "1"` it
+   reveals `#dev-banner` (an amber bar in `index.html`, hidden by default),
+   computes "X minutes/hours/days ago" from `startedAt` client-side (refreshed
+   each minute), and adds `body.dev-banner-shown` so the top-anchored UI
+   (controls / toolbar / status) nudges down below the bar. Any other `DEV`
+   value, or the un-templated `{{...}}` placeholder in local dev, keeps it
+   hidden, so the banner only ever appears when explicitly turned on in a
+   container.
+
+## Controls
+
+- **Panel layout**: everything except the bottom-right connection info panel
+  lives in one collapsible **"BrainWebViz" panel at the bottom-left** (`#controls`
+  in `index.html`, its header `#controls-toggle` collapses the whole body). From
+  the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
+  the **Blow-out** and **Transparency** sliders, then **Auto-rotate**, then the
+  nested collapsed **Legend** (`#legend`) whose first row is the **Show all
+  names** button. Searching swaps the search box in place of the panel's normal
+  contents (`#controls-main` hidden, `#search` shown) rather than opening a
+  popup; the reset/search buttons stay visible so the magnifier toggles back.
+- **Auto-rotate** checkbox: spins the camera around the brain (OrbitControls
+  `autoRotate`).
+- **Blow-out (explode)** slider (0..1): pushes each region radially outward from
+  the brain center to reveal deep structures. Tuning constant:
+  `EXPLODE_STRENGTH` in `js/main.js`.
+- **Intro animation**: on a plain page load the regions start fully blown out
+  and glide back together into the assembled whole over a swift, eased motion
+  (`createIntroAnimation` in `js/main.js`, advanced once per frame in the render
+  loop; duration `INTRO_DURATION_MS`, easeInOutCubic). It moves the explode
+  slider in sync, is cancelled the moment the user grabs that slider, and is
+  skipped when `?explode=` is pinned (deep links / headless screenshots) so the
+  requested static amount is honored.
+- **Transparency** slider: the value is the material opacity (left = more
+  transparent); depth-writing is disabled while translucent so overlapping
+  regions blend. Opacity is owned by the selection controller
+  (`createSelection` in `js/main.js`), not a standalone helper, so the slider
+  value and the isolate-mode dimming (below) compose into one final per-mesh
+  opacity.
+- **Selection / halo + isolate** (`createSelection` in `js/main.js`): the single
+  source of truth for which structures/arrows are highlighted/focused.
+  - Picking a structure in the 3D view (click/tap, double-click, or a structure
+    search result) gives it a soft glowing **halo** (a back-side additive shell
+    child, `mesh.userData.halo`); this is a lightweight highlight only, no
+    dimming. Picking an **arrow** (click/tap or a connection search result) halos
+    it too (a fatter additive tube along its arc, `ProjectionArrow.setHalo`); the
+    structure halo and arrow halo are mutually exclusive.
+  - Clicking a **structure row in the legend** toggles that structure (both
+    hemispheres) into the **isolate** set; clicking a **category heading** toggles
+    every structure under it at once. While the set is non-empty the scene focuses
+    on it: every other structure drops to a faint opacity (`DIM`), arrows that
+    don't touch an isolated structure fade with them (`ProjectionArrow.
+    setOpacity`), the isolated structures keep full (slider) opacity + halo, and
+    the legend greys its non-isolated rows/headings (`.dimmed`, isolated ones get
+    `.selected`). Legend selection is additive (click more rows to add).
+  - The **Circuits** legend section lists curated functional loops (from the
+    `circuit` records). Clicking one isolates *exactly* that circuit: its
+    structures + the projections between them stay opaque, everything else fades
+    (`selection.setCircuit`, which pins an explicit arrow set instead of the
+    "touching" rule). Clicking the active circuit again clears it.
+  - The **reset** button and a **double-click on empty space** fully clear it
+    (halos + isolate + circuit), restoring default opacity. Framing a connection
+    or arrow just swaps the halo, leaving any isolate set intact.
+- **Structure names**: hovering a region with the mouse (or tapping it on a
+  touch screen) shows its name as a floating label; tapping empty space clears
+  it. Raycast in `js/main.js` -> `js/labels.js`. The **Show all names** button
+  (the legend's first row) forces every label on at once. Labels are boxless:
+  white glyphs outlined in the structure's own color (`--label-color`) plus a
+  black halo, so they stay legible over any region and overlapping names don't
+  hide behind opaque boxes.
+- **Legend**: nested inside the bottom-left panel, collapsed by default; click
+  its header to expand. Its first row is the **Show all names** button (kept
+  first across rebuilds by `buildLegend`, which preserves that node); the rest is
+  generated from the data (see below). Each structure row is clickable to
+  isolate/focus that region (see Selection above); the projection-kind rows are
+  not.
+- **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
+  scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
+- **Reset + search** (the icon-button row at the top of the panel, just above the
+  sliders): a **reset** button (crosshair icon) recenters the camera on the
+  middle of the brain and re-frames the whole thing (useful after panning slides
+  it off-center), and a **search** button (magnifier icon) swaps a search box in
+  place of the panel body (not a popup) that filters **both structures (by name)
+  and connections (by pathway label)**. Picking a structure centers on it and
+  shows its label;
+  picking a connection frames its two endpoints and opens the info panel.
+  Connection results carry a hemisphere tag (`R` / `L` / `L↔R`) so the mirrored
+  twins stay distinct (`connectionSideTag` in `js/main.js`).
+- **Connections / arrows**: clicking or tapping a projection arrow opens the
+  **info panel** (bottom-right): the pathway label, its route (`from → to`, `↔`
+  for a bidirectional/commissural link), kind + neurotransmitter, a one-line
+  description, and its sources (a verified http(s) url renders as a link, a
+  `"TODO"` url as plain text). Built by `createInfoPanel` in `js/main.js` from
+  the projection's metadata. Arrow picking (`pickArrowAt`) takes priority over
+  the region behind it; a click/tap that misses every arrow closes the panel.
+- **Double-click**: on a structure centers and frames it; on empty space
+  recenters the whole brain (same as the reset button).
+- All camera framing above (reset, double-click, search) goes through one smooth
+  tween, `createCameraFocus` in `js/main.js`: it moves the orbit pivot and
+  camera distance but keeps the current view direction, is advanced once per
+  frame in the render loop, and is cancelled the moment the user grabs the
+  controls so a drag always wins.
+- After focusing a single structure (double-click or structure search), moving
+  the **blow-out** slider keeps that structure centered: `createCameraFocus`
+  remembers it (`focused`) and `reaimFocused()` (called from the explode handler)
+  re-points the orbit pivot at its new exploded position. Only the pivot moves,
+  so the camera *rotates in place* to track it (a reorientation, not a
+  translation), preserving the distance + angle you set. Framing a connection or
+  the whole brain clears the tracked structure.
+
+## Changing the data
+
+1. Edit the `PAIRED`, `MIDLINE`, or `PROJECTIONS` lists in `generate_data.py`.
+   - Paired entries are auto-mirrored to both hemispheres (`_R` / `_L`). Define
+     them on the **right** side (x > 0); the generator emits one shared
+     right-side shape file and the `_L` member references it with `mirror:true`,
+     so the viewer reflects the geometry across x (a *true* mirror, not a copy).
+   - A region is a gradient-noise-deformed ellipsoid by default
+     (`radii`/`seed`/`detail`/`noise`). Optional surface knobs shape the
+     character of that noise (consumed by `buildBlobGeometry` in `js/shapes.js`):
+     - `octaves` (default 1): fBm layers; >1 adds finer wrinkles on the broad
+       form. Cortex uses ~2 (kept low on purpose: the *fine* gyri are a normal
+       map, see below, so the geometry only needs broad folds). The ridged path
+       is a ridged-multifractal: each finer octave is gated by the coarser one's
+       ridge strength, so troughs stay smooth instead of filling with creases.
+     - `ridged` (default False): fold the noise into sharp creases along its
+       zero-set. This is what turns lumps into gyri/folia. Needs higher `detail`
+       (6) and lower `noise` than a smooth blob, and a `frequency` that sets how
+       many folds (cortex ~3.6, kept low so each fold spans enough triangles to
+       resolve smoothly; pushing it higher reintroduces per-triangle faceting).
+     - `frequency` (default 2.4): noise lattice frequency; higher = smaller,
+       more numerous folds.
+     - `aniso` ([ax,ay,az], default [1,1,1]): per-axis frequency skew. Equal =
+       isotropic meandering gyri; a big single-axis value stacks near-parallel
+       bands (the cerebellum's folia use a strong y skew).
+     Smooth deep nuclei just use `detail` 5 + a small `noise` (~0.05) and none of
+     the above.
+     - `clip` ({x/y/z min/max}): cut axis-aligned flat faces. Rarely set by hand;
+       setting `medial=True` on a lobe makes the generator derive the right medial
+       clip from its side so the hemispheres meet at the midline (see below).
+     - `clip_planes` (auto, never authored): the generator computes a bisecting
+       cut plane between each blob and every overlapping *same-group* neighbour
+       (`_bisecting_clip_planes` in `generate_data.py`) and clamps vertices past
+       it onto it (`buildBlobGeometry`), so overlapping regions grow flat mating
+       faces and tile flush like jigsaw pieces (the lobes, and the deep nuclei
+       among themselves) instead of one colour poking through another. Adjacency
+       is derived from the geometry (a plane appears only where two bodies' reach
+       overlaps), the seam is split by each body's reach so the larger keeps more,
+       and only blobs take part (curves/composites are skipped). It is built once
+       on the right side and mirrored with the rest of the geometry. The
+       `JIGSAW_CLIP.enabled` flag in `js/shapes.js` is the A/B switch: turn it off
+       to ignore the planes (regions overlap as before) without regenerating; the
+       medial wall is independent and always applied.
+     - Fine cortical gyri are *not* geometry: every `group=="lobe"` structure
+       gets a procedural ridged-fBm bump injected into its material
+       (`injectGyrusBump` / the `GYRUS_BUMP` knobs in `js/shapes.js`), which
+       perturbs the per-fragment normal so the lighting shows crisp winding
+       folds with no extra triangles or faceting. Tune fold size/strength via
+       `GYRUS_BUMP` (`enabled:false` skips the shader entirely; `scale:0` keeps
+       it compiled but flat); it lives in JS, not the data.
+   - Give a region a `shape=dict(type="curve", ...)` for a round-capped tapered
+     tube instead of an ellipsoid (the caudate, the brainstem): `points` is the
+     spine head->tail, `profile` the radius sampled along it (caps close each
+     end). A paired `curve` may now be asymmetric across x (e.g. an off-midline
+     spine): the `_L` member is a true reflection of the right-side geometry, so
+     it flips correctly. Midline curves like the brainstem are emitted once and
+     never mirrored.
+   - Give a region a `shape=dict(type="composite", parts=[...])` to merge several
+     sub-shapes into one mesh; each part is a shape payload (usually a blob) with
+     optional `offset`/`scale`/`rotate`. Used for the cerebellum (two foliated
+     hemispheres + a central vermis). A paired composite is mirrored as a whole
+     for the `_L` side, so its parts may sit asymmetrically across x.
+   - Layout / "lock into place": regions are positioned (the `pos` field) so that
+     at explode 0 they assemble into a whole brain, and the explode slider pushes
+     each radially outward from the origin (`EXPLODE_STRENGTH` in `js/main.js`).
+     The cortical lobes are sized to *overlap* their neighbors (so their union is
+     one continuous hemisphere, not separate balls) and flagged `medial` so a
+     flat wall at `MIDLINE_GAP` forms the longitudinal fissure; the temporal is
+     the exception (lateral, below the Sylvian fissure: no medial wall, just a
+     flat `ymax` top). Deep nuclei sit small and central so they hide inside the
+     cortex at 0 and are revealed by exploding. When moving a lobe, re-render the
+     assembled hemisphere (`only=frontal_R,parietal_R,temporal_R,occipital_R&
+     explode=0&view=right|left|top`) to check the seams and the medial wall.
+   - Projection `from`/`to` reference structure ids (e.g. `putamen_R`). The arrow
+     points `from` -> `to` (a cone at the target end).
+   - A projection carries metadata so the viewer can explain it: `label` (short
+     pathway name, also what the search box matches on), `neurotransmitter` (the
+     specific molecule), `description` (one-line summary), and `sources` (a list
+     of `SOURCES` keys). Keep the `label` unique-ish and human-readable: clicking
+     an arrow or picking it in the search opens an info panel built from these
+     fields, so every connection must have a name.
+   - `sources`: cite shared references by short key from the `SOURCES` registry at
+     the top of `generate_data.py` (so a citation common to several pathways is
+     written once); the generator expands each key to a full `{citation, url}`
+     object in the emitted data (`_expand_sources`, raises on an unknown key). New
+     references go in `SOURCES`; leave `url` as the literal `"TODO"` until a real
+     link is verified (the panel renders an http(s) url as a link, `"TODO"` as
+     plain text). **There are currently TODO urls on every source** awaiting real
+     DOIs/links.
+   - `bidirectional: True` draws a cone at *both* ends (reciprocal / commissural
+     pathways). Use it with `symmetric: False` and explicit `_L`/`_R` endpoints
+     for the commissures (corpus callosum, anterior commissure) so the single
+     cross-midline connection is not mirrored into a duplicate.
+   - Projections are **bilateral by default**: define a symmetric pathway once
+     on the right and the generator emits a hemisphere-flipped twin (`_R` <->
+     `_L` on both endpoints; midline endpoints stay put). Set
+     `"symmetric": False` on an entry to keep a genuinely one-sided pathway from
+     being mirrored. The flag is a generator hint and is stripped from the data.
+   - Projection `kind` must be a key of `PROJECTION_COLORS` in `js/arrows.js`
+     (`excitatory`, `inhibitory`, `dopaminergic`); add new kinds there + in this
+     doc if needed. `kind` drives the arrow *color*; `neurotransmitter` is the
+     finer label shown in the info panel.
+   - To add a named **circuit**, append to the `CIRCUITS` list: `id`, `name`, and
+     `structures` as **base** ids (no `_R`/`_L`). The generator expands each base
+     to whatever was emitted (both hemispheres, or the bare id for a midline form)
+     and raises on a typo; the circuit's arrows are *not* listed (the viewer takes
+     every projection whose endpoints are both in the set), so a circuit never
+     duplicates the pathway list. It shows up in the legend's Circuits section.
+2. Run `python generate_data.py` to regenerate `data/` and `shapes/`.
+3. Commit the generator change and the regenerated artifacts together.
+
+The legend (region colors and projection kinds) is generated at runtime from the
+data, so it updates automatically; no separate legend edit is needed.
+
+## Versioning
+
+Lightweight, no-build versioning suited to this static site:
+
+- The version is a single string in `version.js` (`window.__APP_VERSION__`), the
+  one place to change it. `js/main.js` shows it in the panel header (`v0.1.0`)
+  and `js/dev-banner.js` appends it to the WIP banner; both just read the global,
+  so there is no duplication.
+- Follow [semver](https://semver.org/) (MAJOR.MINOR.PATCH). To release: bump
+  `version.js` and add a matching `CHANGELOG.md` entry in the same commit.
+- It is intentionally *not* derived from git (the site deploys by rsync, not from
+  a repo, so a baked-in string is what actually reaches the browser).
+
+## Conventions
+
+- No JS build step or package manager: three.js is loaded from a CDN via an
+  import map in `index.html` (pinned version). Keep the `three` and
+  `three/addons/` versions in that import map in sync.
+- `generate_data.py` is intentionally stdlib-only so it runs offline with a bare
+  `python` interpreter.
+- Avoid duplicating the anatomy: positions/colors/shape params live only in
+  `generate_data.py`; projection colors live only in `js/arrows.js`.

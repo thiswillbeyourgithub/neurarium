@@ -1,0 +1,54 @@
+# Caddy config for the static brain visualizer.
+#
+# Listens on :8359 (the compose file maps it to 127.0.0.1:8359 on the host, so a
+# reverse proxy is expected in front). Serves the project root, which is
+# bind-mounted read-only at /srv by docker-compose.yml.
+
+{
+	# No ACME/TLS in here: TLS is terminated by the host reverse proxy. Turning
+	# auto_https off keeps Caddy from trying to manage certs (it would fail on
+	# the read-only rootfs anyway). admin off drops the local admin API surface.
+	admin off
+	auto_https off
+}
+
+:8359 {
+	root * /srv
+
+	# Fill the app config file's {{env}} placeholders from the container
+	# environment (ANALYTICS_* set via docker/.env). Scoped to just this file so
+	# nothing else is templated. If the env vars are empty, app-config.js ends up
+	# with empty strings and js/app-init.js stays a no-op. (The file is named
+	# generically, not "analytics-*", so content filters / proxies that block
+	# "analytics" paths don't 404 it.)
+	@appcfg path /app-config.js
+	templates @appcfg {
+		mime text/javascript application/javascript
+	}
+
+	encode gzip zstd
+	file_server
+
+	# Basic hardening headers for a static, same-origin app. No restrictive CSP
+	# because the page intentionally loads three.js + eruda from a CDN.
+	header {
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy no-referrer
+		-Server
+
+		# Never let the browser serve a cached asset. This is a no-build site
+		# whose ES modules / data are deployed by rsync (no content-hashed
+		# filenames), so a heuristically-cached old js/*.js next to a fresh one
+		# would crash with a baffling signature mismatch (see CLAUDE.md "Running").
+		# Mirrors tools/serve.py's dev behaviour so dev and prod cache the same
+		# way: always fetch the deployed version. (Swap to "no-cache" if you want
+		# ETag revalidation / 304s back; "no-store" is the strongest guarantee.)
+		Cache-Control "no-store"
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}

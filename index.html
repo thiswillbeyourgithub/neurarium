@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>BrainWebViz</title>
+
+    <!-- eruda: on-screen console for debugging on desktop and mobile. Loaded
+         first so it captures any later errors. Adds a floating toggle button. -->
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+
+    <!-- Optional privacy-friendly umami metrics. app-config.js is filled from
+         docker/.env by the container (Caddy templates); in local dev it stays
+         unconfigured and js/app-init.js is a no-op. Both are named generically
+         so content filters / proxies that block "analytics" paths let them
+         through. Load order matters: the config must run before the loader. -->
+    <script src="app-config.js"></script>
+    <script src="js/app-init.js"></script>
+
+    <!-- App version (single source). Read by js/main.js (panel header) and
+         js/dev-banner.js (WIP banner). -->
+    <script src="version.js"></script>
+
+    <!-- three.js via import map so the ES modules in js/ can `import "three"`
+         and "three/addons/...". Pinned to a specific version for reproducibility. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <style>
+      :root {
+        --panel-bg: rgba(20, 24, 31, 0.82);
+        --text: #e7ecf2;
+        --muted: #9aa6b3;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #0e1116;
+        color: var(--text);
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        /* Let OrbitControls handle all touch gestures instead of the browser. */
+        touch-action: none;
+      }
+      #scene { display: block; width: 100vw; height: 100vh; }
+
+      .panel {
+        position: fixed;
+        /* Above the CSS2D label overlay so corner controls stay clickable and
+           are never visually covered by a structure label. */
+        z-index: 5;
+        background: var(--panel-bg);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 14px 16px;
+        font-size: 14px;
+        user-select: none;
+      }
+      /* Single bottom-left control panel. padding:0 so the collapse header and
+         body manage their own; capped + scrollable so a tall expanded legend
+         never runs off the top of the screen. */
+      #controls {
+        bottom: 12px;
+        left: 12px;
+        width: 240px;
+        padding: 0;
+        max-height: calc(100vh - 24px);
+        overflow-y: auto;
+      }
+      #controls-body { padding: 0 14px 14px; }
+      /* Shared collapse header (the panel title + the nested legend): a full-
+         width button with a chevron that points down when expanded. */
+      .collapse-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 14px;
+        font: inherit;
+        font-weight: 600;
+        color: var(--text);
+        background: none;
+        border: 0;
+        cursor: pointer;
+        user-select: none;
+      }
+      .collapse-header .chevron { transition: transform 0.15s ease; color: var(--muted); }
+      .collapse-header[aria-expanded="true"] .chevron { transform: rotate(90deg); }
+      /* Version tag next to the panel title (set from version.js by js/main.js). */
+      .collapse-header .version { font-weight: 400; font-size: 11px; color: var(--muted); }
+      .row { margin: 12px 0; }
+      .row label { display: block; margin-bottom: 6px; color: var(--muted); }
+      .row.inline label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        margin: 0;
+        cursor: pointer;
+      }
+      input[type="range"] { width: 100%; accent-color: #4e79a7; }
+      input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4e79a7; }
+
+      /* Shared pill button (the "show all names" toggle). The .active state is
+         set from JS when names are forced on. */
+      .btn {
+        width: 100%;
+        padding: 8px 10px;
+        font: inherit;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .btn:hover { background: rgba(255, 255, 255, 0.12); }
+      .btn.active {
+        background: #4e79a7;
+        border-color: #4e79a7;
+        color: #fff;
+      }
+
+      /* Reset-view + search: a row of icon buttons at the top of the panel body,
+         just before the sliders. */
+      .toolbar-row { display: flex; gap: 8px; margin: 2px 0 4px; }
+      .tool-btn {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .tool-btn:hover { background: rgba(255, 255, 255, 0.12); }
+      .tool-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
+      /* currentColor on the SVG strokes makes the icons follow the button text
+         color, including the blue .active state of the search toggle. */
+      .tool-btn svg { width: 18px; height: 18px; display: block; }
+
+      /* Search shown in place of #controls-main while the magnifier is on. */
+      #search { margin-top: 12px; }
+      #search-input {
+        width: 100%;
+        padding: 8px 10px;
+        font: inherit;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        outline: none;
+      }
+      #search-input:focus { border-color: #4e79a7; }
+      #search-results {
+        list-style: none;
+        margin: 6px 0 0;
+        padding: 0;
+        max-height: 240px;
+        overflow-y: auto;
+      }
+      #search-results li {
+        padding: 7px 9px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      #search-results li:hover { background: rgba(255, 255, 255, 0.12); }
+      #search-results li.empty { color: var(--muted); cursor: default; }
+      #search-results li.empty:hover { background: none; }
+
+      /* Floating HTML labels (CSS2DRenderer) naming each structure. Centered on
+         the structure by the renderer; must not eat pointer events. No box: the
+         name is white glyphs with an outline in the structure's own color (set
+         per-label via --label-color in js/labels.js) plus a soft black halo, so
+         it stays legible over any region and overlapping labels don't hide each
+         other behind opaque rectangles. */
+      .structure-label,
+      .connection-label {
+        pointer-events: none;
+        user-select: none;
+        white-space: nowrap;
+        font-size: 13px;
+        font-weight: 700;
+        color: #ffffff;
+        background: none;
+        --label-color: #000;
+        text-shadow:
+          -1px -1px 0 var(--label-color), 0 -1px 0 var(--label-color), 1px -1px 0 var(--label-color),
+          -1px  0   0 var(--label-color),                              1px  0   0 var(--label-color),
+          -1px  1px 0 var(--label-color), 0  1px 0 var(--label-color), 1px  1px 0 var(--label-color),
+           0    0   4px rgba(0, 0, 0, 0.95);
+      }
+      /* Connection (pathway) labels: a touch smaller and italic so they read as
+         the projection name rather than a region name. Color comes from an
+         inline --label-color set per arrow (its kind color) in js/labels.js. */
+      .connection-label {
+        font-size: 11px;
+        font-weight: 600;
+        font-style: italic;
+      }
+
+      /* Legend nested inside the control panel, set off by a hairline. Its
+         header has no side padding (the panel body already provides it). */
+      #legend {
+        margin-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      #legend .collapse-header { padding: 10px 0 4px; }
+      #legend-body {
+        max-height: 42vh;
+        overflow-y: auto;
+      }
+      /* "Show all names" is the legend's first element; space it off the rows. */
+      #legend-body .btn { margin: 4px 0 12px; }
+      #legend-body h2:first-child { margin-top: 0; }
+      #legend h2:first-child { margin-top: 0; }
+      #legend h2 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin: 0 0 8px;
+      }
+      /* Clickable category headings toggle the whole group; same selected/dimmed
+         states as the rows. */
+      #legend h2.clickable { cursor: pointer; }
+      #legend h2.clickable:hover { color: #fff; }
+      #legend h2.selected { color: #fff; }
+      #legend h2.dimmed { opacity: 0.4; }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 4px 0;
+        font-size: 13px;
+      }
+      /* Structure rows are clickable to isolate that region (projection-kind
+         rows are not). A subtle hover hints at it. */
+      .legend-item.clickable { cursor: pointer; }
+      .legend-item.clickable:hover { color: #fff; }
+      /* Isolate/focus mode (a structure row was clicked): the picked rows stay
+         lit and bold, the rest grey out, mirroring the dimmed structures. */
+      .legend-item.selected { font-weight: 600; color: #fff; }
+      .legend-item.dimmed { opacity: 0.35; }
+      .swatch {
+        width: 14px;
+        height: 14px;
+        border-radius: 3px;
+        flex: 0 0 auto;
+      }
+      .swatch.line { height: 4px; border-radius: 2px; }
+
+      /* Connection info panel (bottom-right, clear of the bottom-left legend).
+         Scrolls if a connection has many sources; capped so it never fills the
+         screen on mobile. */
+      #info-panel {
+        bottom: 12px;
+        right: 12px;
+        width: 300px;
+        max-width: calc(100vw - 24px);
+        max-height: 60vh;
+        overflow-y: auto;
+        /* Room for the absolutely-positioned close button. */
+        padding-right: 34px;
+        user-select: text;
+      }
+      .info-close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        font-size: 18px;
+        line-height: 1;
+        color: var(--muted);
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+      .info-close:hover { color: var(--text); }
+      .info-title { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
+      .info-route { font-size: 13px; color: var(--text); margin-bottom: 10px; }
+      .info-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: capitalize;
+        margin-bottom: 10px;
+      }
+      .info-desc {
+        font-size: 13px;
+        line-height: 1.45;
+        color: var(--text);
+        margin: 0 0 12px;
+      }
+      .info-sources h3 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      .info-sources ul { list-style: none; margin: 0; padding: 0; }
+      .info-sources li {
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      .info-sources a { color: #8fb6e6; text-decoration: underline; }
+      .info-sources .src-todo { color: var(--muted); }
+
+      #status {
+        position: fixed;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--panel-bg);
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        display: none;
+      }
+      #status.error { background: rgba(120, 30, 35, 0.92); color: #ffd9dc; }
+
+      /* Optional "work in progress" banner (shown only when DEV=1; see
+         js/dev-banner.js). A full-width amber warning bar across the very top. */
+      #dev-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50; /* above the panels (z-index 5) and the label overlay */
+        background: rgba(176, 124, 24, 0.95);
+        color: #fff;
+        font-size: 13px;
+        line-height: 1.35;
+        text-align: center;
+        padding: 9px 44px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(6px);
+        user-select: none;
+      }
+      #dev-banner strong { font-weight: 600; }
+      /* When the banner is up, nudge the (top-anchored) status pill down so the
+         bar doesn't cover it. The controls panel sits bottom-left, clear of the
+         banner, so it needs no shift. Toggled by js/dev-banner.js. */
+      body.dev-banner-shown #status { top: 52px; }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="scene"></canvas>
+
+    <!-- Optional "work in progress" banner, hidden unless the container is
+         started with DEV=1. Filled + revealed by js/dev-banner.js. -->
+    <div id="dev-banner" role="status" aria-live="polite" hidden></div>
+
+    <div id="status"></div>
+
+    <!-- Single bottom-left "BrainWebViz" panel: a collapsible window holding the
+         reset/search buttons, the two sliders, auto-rotate, and the nested
+         (collapsed) legend. Searching replaces the panel body in place rather
+         than opening a popup (see wireToolbar in js/main.js). -->
+    <div id="controls" class="panel">
+      <button type="button" id="controls-toggle" class="collapse-header" aria-expanded="true">
+        <span>BrainWebViz <span class="version" id="app-version"></span></span>
+        <span class="chevron" aria-hidden="true">&#9656;</span>
+      </button>
+
+      <div id="controls-body">
+        <!-- Reset the view (handy after panning) + toggle search. Sit just
+             before the sliders, and stay visible while searching so the
+             magnifier doubles as the way back. SVG icons use currentColor so
+             they follow the button text color (incl. the active blue state). -->
+        <div class="toolbar-row">
+          <button type="button" id="reset-view" class="tool-btn" title="Reset view" aria-label="Reset view">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="6" />
+              <line x1="12" y1="1.5" x2="12" y2="5" />
+              <line x1="12" y1="19" x2="12" y2="22.5" />
+              <line x1="1.5" y1="12" x2="5" y2="12" />
+              <line x1="19" y1="12" x2="22.5" y2="12" />
+            </svg>
+          </button>
+          <button type="button" id="search-toggle" class="tool-btn" title="Search" aria-label="Search structures and connections">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="7" />
+              <line x1="16.5" y1="16.5" x2="21" y2="21" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Normal controls; hidden (replaced by #search) while searching. -->
+        <div id="controls-main">
+          <div class="row">
+            <label for="explode">Blow-out (explode)</label>
+            <!-- Default 0 so the page loads with the regions locked together as
+                 a whole brain; dragging right blows it apart to reveal deep
+                 nuclei. -->
+            <input type="range" id="explode" min="0" max="1" step="0.01" value="0" />
+          </div>
+
+          <div class="row">
+            <label for="transparency">Transparency</label>
+            <!-- The slider value is the material opacity; left = more transparent. -->
+            <input type="range" id="transparency" min="0.1" max="1" step="0.01" value="0.75" />
+          </div>
+
+          <div class="row inline">
+            <label>
+              <input type="checkbox" id="autorotate" />
+              Auto-rotate
+            </label>
+          </div>
+
+          <!-- Nested legend, collapsed by default (body ships `hidden`). Its
+               first element is the "Show all names" button (kept first across
+               rebuilds by buildLegend in js/main.js); the category rows below
+               are generated from the dataset so colors never drift from what is
+               actually rendered. -->
+          <div id="legend">
+            <button type="button" id="legend-toggle" class="collapse-header" aria-expanded="false">
+              <span>Legend</span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+            <div id="legend-body" hidden>
+              <!-- Forces every structure name on/off (vs. hover, one at a time). -->
+              <button type="button" id="toggle-names" class="btn" aria-pressed="false">
+                Show all names
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search shown in lieu of #controls-main while active. Matches both
+             structures (by name) and connections (by pathway label). -->
+        <div id="search" hidden>
+          <input type="text" id="search-input" placeholder="Search structure or connection..." autocomplete="off" />
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connection info panel: shown when an arrow is clicked/tapped or a
+         connection is picked in the search. Body is built in js/main.js
+         (createInfoPanel) from the projection's metadata. Hidden until used. -->
+    <div id="info-panel" class="panel" hidden>
+      <button type="button" id="info-close" class="info-close" aria-label="Close">&times;</button>
+      <div id="info-body"></div>
+    </div>
+
+    <!-- WIP banner: plain script (needs document.body + #dev-banner to exist),
+         so loaded at the end of the body rather than in <head>. -->
+    <script src="js/dev-banner.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
