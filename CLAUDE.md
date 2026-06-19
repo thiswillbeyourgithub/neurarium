@@ -761,7 +761,12 @@ arrows. It is split in two on purpose:
   the render loop (like the intro/focus tweens). `STEP_MS` is the per-slot
   duration (one bead's travel); the whole loop is `numSteps * STEP_MS`. A bead
   hides while its arrow is hidden (so the global "Hide projections" toggle clears
-  the beads too).
+  the beads too). As a bead **lands**, its target region briefly brightens (a
+  *node flash*): a back-side additive shell per target node (the same geometry-
+  reuse trick as the selection halo, but owned here and sized a touch larger, so
+  it reads on top of any steady isolate halo) whose opacity is topped up as the
+  bead reaches the surface and then decays (`FLASH_DECAY_MS`), so the hand-off
+  from arrow to arrow around the loop is legible, not just the moving beads.
 
 **Lifecycle (in `js/main.js`).** The circuit legend row calls
 `selection.setCircuit(...)` then `circuitAnim.play(circuitArrows)`. Stopping is

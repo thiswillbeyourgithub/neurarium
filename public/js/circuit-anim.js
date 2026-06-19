@@ -4,6 +4,9 @@
 // circuit, ...) reads as signal *flowing* around it instead of a static set of
 // arrows.
 //
+// As each bead lands, the target region briefly brightens (a "node flash"), so
+// the hand-off from arrow to arrow around the loop is legible, not just the beads.
+//
 // It sits entirely on top of the existing selection.setCircuit() focus: it only
 // ever runs while a circuit is isolated, adds nothing to picking, and owns its
 // own meshes. The viewer starts it from the circuit legend row and stops it the
@@ -30,6 +33,19 @@ const STEP_MS = 650;
 const PULSE_GEOMETRY = new THREE.SphereGeometry(PULSE_RADIUS, 12, 12);
 const WHITE = new THREE.Color(0xffffff);
 
+// Node flash: as a bead lands on its target, that region's rim brightens, then
+// fades. A dedicated back-side additive shell reusing the structure geometry (the
+// same trick as the selection halo, see js/main.js), but owned here and sized a
+// touch larger so it reads as an extra pulse on top of any steady isolate halo.
+const FLASH_SCALE = 1.12;
+const FLASH_MAX_OPACITY = 0.7;
+// Time for a full flash (level 1) to fade back to nothing; a bit under STEP_MS so
+// a node dims again before the next ring lights it.
+const FLASH_DECAY_MS = 520;
+// The bead is "landing" once it is this far along its arc: past here it tops up
+// the target node's flash, ramping to full as it reaches the surface (t = 1).
+const ARRIVAL_ZONE = 0.8;
+
 /**
  * Build the circuit traveling-pulse controller. One per scene; ticked once per
  * frame in the render loop. Driven by js/main.js: `play(circuitArrows)` from the
@@ -39,17 +55,25 @@ const WHITE = new THREE.Color(0xffffff);
  */
 export function createCircuitAnimation({ scene }) {
   let pulses = []; // { arrow, phase, mesh, material }
+  // Target region -> its flash shell + current brightness. One per distinct node
+  // that receives an arrow, so a node hit by several arrows shares one flash.
+  let nodeFlashes = new Map(); // toMesh -> { mesh, shell, material, level }
   let playing = null; // the circuitArrows array currently animating (identity key)
   let numSteps = 1;
   let elapsed = 0;
   let lastTime = null;
 
-  function disposePulses() {
+  function clearVisuals() {
     for (const p of pulses) {
       scene.remove(p.mesh);
       p.material.dispose();
     }
     pulses = [];
+    for (const f of nodeFlashes.values()) {
+      f.mesh.remove(f.shell);
+      f.material.dispose();
+    }
+    nodeFlashes.clear();
   }
 
   return {
@@ -82,12 +106,32 @@ export function createCircuitAnimation({ scene }) {
         scene.add(mesh);
         pulses.push({ arrow, phase, mesh, material });
       }
+      // One flash shell per distinct target region (parented to it, so it tracks
+      // the structure's explode/mirror transform for free, like the halo).
+      for (const arrow of circuitArrows) {
+        const target = arrow.toMesh;
+        if (nodeFlashes.has(target)) continue;
+        const material = new THREE.MeshBasicMaterial({
+          color: new THREE.Color(target.userData.structure.color).lerp(WHITE, 0.6),
+          side: THREE.BackSide, // only the rim poking past the real mesh shows
+          transparent: true,
+          opacity: 0,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+        });
+        const shell = new THREE.Mesh(target.geometry, material); // reuse geometry
+        shell.scale.setScalar(FLASH_SCALE);
+        shell.visible = false;
+        shell.raycast = () => {};
+        target.add(shell);
+        nodeFlashes.set(target, { mesh: target, shell, material, level: 0 });
+      }
       playing = circuitArrows;
     },
 
-    /** Remove every bead and halt. Safe to call when not playing. */
+    /** Remove every bead + flash and halt. Safe to call when not playing. */
     stop() {
-      disposePulses();
+      clearVisuals();
       playing = null;
       lastTime = null;
     },
@@ -104,13 +148,19 @@ export function createCircuitAnimation({ scene }) {
       return playing.every((a) => arrowSet.has(a));
     },
 
-    /** Advance the beads. Call once per frame in the render loop. */
+    /** Advance the beads + node flashes. Call once per frame in the render loop. */
     tick() {
       if (!playing) return;
       const now = performance.now();
       if (lastTime === null) lastTime = now;
-      elapsed = (elapsed + (now - lastTime)) % (numSteps * STEP_MS);
+      const dt = now - lastTime;
       lastTime = now;
+      elapsed = (elapsed + dt) % (numSteps * STEP_MS);
+
+      // Fade every node flash toward nothing; an arriving bead tops it back up.
+      for (const f of nodeFlashes.values()) {
+        f.level = Math.max(0, f.level - dt / FLASH_DECAY_MS);
+      }
 
       const clock = elapsed / STEP_MS; // position in "steps", [0, numSteps)
       for (const p of pulses) {
@@ -127,6 +177,21 @@ export function createCircuitAnimation({ scene }) {
         const edge = 0.12;
         const k = Math.min(t / edge, (1 - t) / edge, 1);
         p.material.opacity = 0.2 + 0.8 * Math.max(0, k);
+        // As the bead lands, brighten its target region, ramping to full at t = 1.
+        if (t >= ARRIVAL_ZONE) {
+          const f = nodeFlashes.get(p.arrow.toMesh);
+          if (f) {
+            const intensity = (t - ARRIVAL_ZONE) / (1 - ARRIVAL_ZONE);
+            if (intensity > f.level) f.level = intensity;
+          }
+        }
+      }
+
+      // Push the decayed / topped-up levels onto the flash shells.
+      for (const f of nodeFlashes.values()) {
+        const opacity = f.level * FLASH_MAX_OPACITY;
+        f.material.opacity = opacity;
+        f.shell.visible = f.mesh.visible && opacity > 0.01;
       }
     },
   };
