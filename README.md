@@ -1,8 +1,10 @@
 # Neurarium
 
 > [!WARNING]
-> **Work in progress.** Neurarium is under active development and far from
-> complete: the anatomy, shapes, and features change often and may be inaccurate.
+> **Work in progress, and very probably wrong.** Neurarium is under active
+> development and far from complete. None of the anatomy has been reviewed or
+> sourced yet, so the regions, shapes, projections, and descriptions very likely
+> contain hallucinations and outright errors. Do not rely on any of it.
 
 Neurarium is an interactive 3D brain visualizer that runs in the browser. It
 shows brain regions (cortical lobes, basal ganglia / deep nuclei, hindbrain) as
