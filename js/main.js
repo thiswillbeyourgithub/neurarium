@@ -267,7 +267,9 @@ function createSelection({ meshes, arrows }) {
       arrow.setOpacity(!active || arrowInFocus(arrow) ? 1 : DIM);
       arrow.setHalo(arrow === highlightedArrow);
     }
-    onIsolateChange(active ? isolated : null);
+    // Pass the pinned-arrow set too (empty unless a circuit/kind is focused) so
+    // the legend can tell *which* projection-kind/circuit row is the active one.
+    onIsolateChange(active ? isolated : null, isolatedArrows);
   }
 
   return {
@@ -443,8 +445,12 @@ function buildLegend(data, meshById, arrows, selection) {
     groupHeadings.push({ heading: h, meshes: groupMeshes });
   }
 
-  // Projection kinds actually present in the data, colored from the single
-  // source in arrows.js. Not clickable (they aren't structures to isolate).
+  // Projection kinds present in the data, colored from the single source in
+  // arrows.js. Clicking a kind row isolates *only* that kind: its arrows + the
+  // structures they connect stay opaque, everything else fades (same focus
+  // machinery as a circuit, via setCircuit). Clicking the active kind clears it.
+  const kindRows = [];
+  let activeKind = null;
   const kinds = [...new Set(data.projections.map((p) => p.kind))];
   if (kinds.length > 0) {
     const h = document.createElement("h2");
@@ -452,7 +458,17 @@ function buildLegend(data, meshById, arrows, selection) {
     legend.appendChild(h);
     for (const kind of kinds) {
       const label = kind.charAt(0).toUpperCase() + kind.slice(1);
-      addLegendItem(legend, PROJECTION_COLORS[kind] || "#fff", label, true);
+      const row = addLegendItem(legend, PROJECTION_COLORS[kind] || "#fff", label, true);
+      const kindArrows = arrows.filter((a) => a.projection.kind === kind);
+      // Endpoints of those arrows, kept opaque so an isolated kind still reads
+      // as connecting real regions rather than floating in a dimmed brain.
+      const kindMeshes = [...new Set(kindArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
+      row.classList.add("clickable");
+      row.addEventListener("click", () => {
+        if (activeKind === kind) selection.clear();
+        else selection.setCircuit(kindMeshes, kindArrows);
+      });
+      kindRows.push({ row, kind, arrowSet: new Set(kindArrows) });
     }
   }
 
@@ -486,16 +502,35 @@ function buildLegend(data, meshById, arrows, selection) {
   // Reflect the isolate set onto the legend: the isolated rows stay lit, the
   // rest grey out. `null` (nothing isolated) clears both states. A heading lights
   // only when its whole group is isolated; a circuit row lights only when the
-  // isolate set is *exactly* that circuit (so toggling a structure unlights it).
-  selection.onIsolate((isolated) => {
+  // isolate set is *exactly* that circuit (so toggling a structure unlights it);
+  // a projection-kind row lights only when the pinned-arrow set is exactly that
+  // kind's arrows. `focusedArrows` is the pinned-arrow set (empty unless a
+  // circuit/kind is focused).
+  selection.onIsolate((isolated, focusedArrows) => {
+    // Detect a projection-kind focus first: the pinned-arrow set is exactly one
+    // kind's arrows. A kind focus dims every structure (only the kind's arrows +
+    // endpoints stay opaque in the scene), so its structure/heading rows grey out
+    // rather than lighting up; that lit-row noise only makes sense for a circuit.
+    const matchesKind = (arrowSet) => arrowSet.size > 0 && focusedArrows
+      && focusedArrows.size === arrowSet.size
+      && [...arrowSet].every((a) => focusedArrows.has(a));
+    activeKind = null;
+    for (const { kind, arrowSet } of kindRows) if (matchesKind(arrowSet)) activeKind = kind;
+    const kindFocus = activeKind !== null;
+
     for (const { row, meshes } of structureRows) {
-      const selected = isolated ? meshes.some((m) => isolated.has(m)) : false;
+      const selected = Boolean(isolated) && !kindFocus && meshes.some((m) => isolated.has(m));
+      row.classList.toggle("selected", selected);
+      row.classList.toggle("dimmed", Boolean(isolated) && !selected);
+    }
+    for (const { row, kind, arrowSet } of kindRows) {
+      const selected = matchesKind(arrowSet);
       row.classList.toggle("selected", selected);
       row.classList.toggle("dimmed", Boolean(isolated) && !selected);
     }
     for (const { heading, meshes } of groupHeadings) {
-      const all = isolated && meshes.length > 0 && meshes.every((m) => isolated.has(m));
-      const any = isolated && meshes.some((m) => isolated.has(m));
+      const all = !kindFocus && isolated && meshes.length > 0 && meshes.every((m) => isolated.has(m));
+      const any = !kindFocus && isolated && meshes.some((m) => isolated.has(m));
       heading.classList.toggle("selected", Boolean(all));
       heading.classList.toggle("dimmed", Boolean(isolated) && !any);
     }

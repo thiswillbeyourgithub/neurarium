@@ -377,6 +377,13 @@ analytics (no build step):
     structures + the projections between them stay opaque, everything else fades
     (`selection.setCircuit`, which pins an explicit arrow set instead of the
     "touching" rule). Clicking the active circuit again clears it.
+  - The **Projections** legend section's kind rows (excitatory / inhibitory /
+    dopaminergic) are clickable too: clicking one isolates *only* that kind via
+    the same `setCircuit` machinery (it pins every arrow of that kind plus the
+    structures they connect, so just that kind's pathways + their endpoints stay
+    opaque and everything else fades). Unlike a circuit, a kind focus dims *every*
+    structure, so its structure/heading rows grey out rather than lighting up;
+    only the kind row lights. Clicking the active kind again clears it.
   - The **reset** button and a **double-click on empty space** fully clear it
     (halos + isolate + circuit), restoring default opacity. Framing a connection
     or arrow just swaps the halo, leaving any isolate set intact.
@@ -393,8 +400,8 @@ analytics (no build step):
   node): **Show all names** and **Hide projections** (off by default; toggles
   every arrow's visibility at once via `arrow.setVisible`, and refreshes labels
   so the connection labels follow). The rest is generated from the data (see
-  below). Each structure row is clickable to isolate/focus that region (see
-  Selection above); the projection-kind rows are not.
+  below). Each structure row is clickable to isolate/focus that region, and each
+  **projection-kind row** is clickable to isolate that kind (see Selection above).
 - **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
   scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
 - **Reset + search** (the icon-button row at the top of the panel, just above the
