@@ -51,7 +51,8 @@ Then open <http://localhost:8000/>.
 | `public/index.html`, `public/js/` | The three.js viewer and UI. |
 | `tools/` | Dev tooling (data generator, dev server, screenshot helper). |
 | `docker/` | Deployment (hardened Caddy container). |
-| `CLAUDE.md` | Architecture notes and how to extend the anatomy. |
+| `ARCHITECTURE.md` | High-level architecture: data flow, module graph, boot sequence. |
+| `CLAUDE.md` | The exhaustive file-by-file map and how to extend the anatomy. |
 
 To change which regions or projections are shown, edit `tools/generate_data.py`
 and run `python tools/generate_data.py` to regenerate `public/data/` and

@@ -30,6 +30,10 @@ Built with the help of Claude Code.
 
 ## Architecture (data vs. rendering, on purpose)
 
+(For a higher-level narrative with diagrams, the module graph, and the boot
+sequence, see [`ARCHITECTURE.md`](ARCHITECTURE.md); this section is the detailed
+map.)
+
 The anatomy is kept as plain data, separate from the rendering code, so the
 project can grow without touching the viewer:
 
