@@ -61,10 +61,12 @@ services:
         max-file: "3"
 
     volumes:
-      # The whole project root (index.html, js/, data/, shapes/, ...) served
-      # read-only. Relative to this compose file, so it points at
-      # ~/docker/neurarium on the VPS.
-      - ../:/srv:ro
+      # Only the served site (public/: index.html, js/, data/, shapes/, ...) is
+      # bind-mounted read-only, NOT the whole repo: the deploy rsyncs the full
+      # tree, but mounting just public/ keeps docker/, tools/, .git, deploy.sh and
+      # docker/.env out of the web root entirely. Relative to this compose file,
+      # so it points at ~/docker/neurarium/public on the VPS.
+      - ../public:/srv:ro
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
 
     # Bound to localhost only: a reverse proxy on the host terminates TLS and

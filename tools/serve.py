@@ -21,7 +21,7 @@ Stdlib-only on purpose (like ``generate_data.py``): it must run with a bare
 
 Usage
 -----
-    python tools/serve.py                 # serve repo root on http://localhost:8000/
+    python tools/serve.py                 # serve public/ on http://localhost:8000/
     python tools/serve.py --port 9000     # different port
     python tools/serve.py --root .        # serve a different directory
 """
@@ -60,9 +60,9 @@ def main() -> None:
     parser.add_argument(
         "--root",
         type=Path,
-        # Default to the repo root (this file lives in tools/).
-        default=Path(__file__).resolve().parent.parent,
-        help="Directory to serve (default: the repository root).",
+        # Default to the served site (public/); this file lives in tools/.
+        default=Path(__file__).resolve().parent.parent / "public",
+        help="Directory to serve (default: the public/ site root).",
     )
     args = parser.parse_args()
 

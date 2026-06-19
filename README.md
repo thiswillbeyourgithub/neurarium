@@ -30,10 +30,12 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 ## Running
 
 The page loads its data with `fetch()`, so it must be served over HTTP (not
-opened directly from disk). From the repository root:
+opened directly from disk). The served site is `public/`. From the repository
+root:
 
 ```sh
-python -m http.server 8000
+python tools/serve.py            # serves public/ with caching disabled
+# or: cd public && python -m http.server 8000
 ```
 
 Then open <http://localhost:8000/>.
@@ -42,15 +44,18 @@ Then open <http://localhost:8000/>.
 
 | Path | Purpose |
 | --- | --- |
-| `generate_data.py` | Single source of truth for the anatomy; generates the data below. |
-| `data/brain.jsonl` | Region metadata and projections, one JSON object per line. |
-| `shapes/<id>.json` | One geometry file per region. |
-| `index.html`, `js/` | The three.js viewer and UI. |
+| `public/` | The served site (and the only web-exposed directory). |
+| `tools/generate_data.py` | Single source of truth for the anatomy; generates the data below. |
+| `public/data/brain.jsonl` | Region metadata and projections, one JSON object per line. |
+| `public/shapes/<id>.json` | One geometry file per region. |
+| `public/index.html`, `public/js/` | The three.js viewer and UI. |
+| `tools/` | Dev tooling (data generator, dev server, screenshot helper). |
+| `docker/` | Deployment (hardened Caddy container). |
 | `CLAUDE.md` | Architecture notes and how to extend the anatomy. |
 
-To change which regions or projections are shown, edit `generate_data.py` and
-run `python generate_data.py` to regenerate `data/` and `shapes/`. See
-[`CLAUDE.md`](CLAUDE.md) for details.
+To change which regions or projections are shown, edit `tools/generate_data.py`
+and run `python tools/generate_data.py` to regenerate `public/data/` and
+`public/shapes/`. See [`CLAUDE.md`](CLAUDE.md) for details.
 
 ## Credits
 

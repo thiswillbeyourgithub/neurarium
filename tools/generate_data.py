@@ -29,8 +29,8 @@ click/loguru dependencies.
 
 Usage
 -----
-    python generate_data.py            # writes into ./data and ./shapes
-    python generate_data.py --root /some/dir
+    python tools/generate_data.py            # writes into ../public/{data,shapes}
+    python tools/generate_data.py --root /some/dir
 """
 
 from __future__ import annotations
@@ -1023,8 +1023,10 @@ def main() -> None:
     parser.add_argument(
         "--root",
         type=Path,
-        default=Path(__file__).resolve().parent,
-        help="Project root to write data/ and shapes/ into (default: script dir).",
+        # This script lives in tools/; the data/ and shapes/ it generates are
+        # *served*, so they belong under the public/ site root, not next to it.
+        default=Path(__file__).resolve().parent.parent / "public",
+        help="Site root to write data/ and shapes/ into (default: ../public).",
     )
     args = parser.parse_args()
     write_artifacts(args.root)

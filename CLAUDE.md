@@ -31,8 +31,17 @@ Built with the help of Claude Code.
 The anatomy is kept as plain data, separate from the rendering code, so the
 project can grow without touching the viewer:
 
+**Project layout.** Everything the browser loads lives under `public/` (the
+served site: `index.html`, `app-config.js`, `version.js`, `js/`, `data/`,
+`shapes/`), and that directory is the *only* thing exposed to the web: Caddy's
+`/srv` and `tools/serve.py` both root at it, so `docker/`, `tools/`, `.git` and
+the uncommitted `.env` / `deploy.sh` / `CLAUDE.local.md` are never web-reachable.
+Authoring + dev tooling live in `tools/` (`generate_data.py`, `serve.py`,
+`shot.py`, `git-hooks/`); deployment config in `docker/`; the README hero shot in
+`docs/`. The map below names files by role; their directories are as just listed.
+
 ```
-generate_data.py      Single source of truth for the anatomy. Defines every
+tools/generate_data.py  Single source of truth for the anatomy. Defines every
                       region + projection once and emits the two artifacts below.
 data/brain.jsonl      One JSON object per line. Each line is one of:
                         - a "structure" (region): id, name, group, position,
@@ -133,7 +142,7 @@ docker/               Deployment: docker-compose.yml (hardened Caddy service),
                       wrapper baked into the image: stamps STARTED_AT, validates
                       ANALYTICS_URL, and renders /gen/app-config.js from the
                       environment, see below).
-tools/shot.py         Screenshot helper (Playwright): serves the repo with
+tools/shot.py         Screenshot helper (Playwright): serves public/ with
                       tools/serve.py, drives a headless Chromium to load
                       index.html (with view params), and captures the canvas with
                       page.screenshot() to a PNG. Lets a dev/Claude Code see the
@@ -169,12 +178,16 @@ Coordinate convention (arbitrary units, brain centered on origin):
 ## Running
 
 The data files are loaded with `fetch()`, so the page must be served over HTTP
-(opening `index.html` via `file://` fails CORS). From the repo root:
+(opening `index.html` via `file://` fails CORS). The served site is `public/`.
+From the repo root:
 
 ```
 python tools/serve.py        # http://localhost:8000/ (recommended for dev)
-# or: python -m http.server 8000
+# or: cd public && python -m http.server 8000
 ```
+
+(`tools/serve.py` roots at `public/` by default regardless of where you run it;
+the bare `http.server` fallback must be started from inside `public/`.)
 
 Prefer `tools/serve.py` while developing: it is the same stdlib server but sends
 `Cache-Control: no-store`, so the browser refetches every ES module on each
@@ -243,8 +256,9 @@ published as `127.0.0.1:8359` so a host reverse proxy terminates TLS in front of
 it. The image is a thin build on `caddy:2-alpine` (`docker/Dockerfile`) whose
 only job is to strip the caddy binary's `cap_net_bind_service` file capability,
 which otherwise makes `exec` fail under `no-new-privileges`
-(`exec /usr/bin/caddy: operation not permitted`); the project root is
-bind-mounted read-only at `/srv` at runtime.
+(`exec /usr/bin/caddy: operation not permitted`); the `public/` site root (only
+the served files, not the rest of the repo) is bind-mounted read-only at `/srv`
+at runtime.
 
 The actual deploy procedure (how the tree reaches the server and the restart
 commands) is environment-specific and intentionally kept out of this committed
@@ -580,7 +594,8 @@ as the WIP banner (`js/error-banner.js`):
      and raises on a typo; the circuit's arrows are *not* listed (the viewer takes
      every projection whose endpoints are both in the set), so a circuit never
      duplicates the pathway list. It shows up in the legend's Circuits section.
-2. Run `python generate_data.py` to regenerate `data/` and `shapes/`.
+2. Run `python tools/generate_data.py` to regenerate `public/data/` and
+   `public/shapes/`.
 3. Commit the generator change and the regenerated artifacts together.
 
 The legend (region colors and projection kinds) is generated at runtime from the

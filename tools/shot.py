@@ -43,7 +43,9 @@ import urllib.request
 from contextlib import closing
 from pathlib import Path
 
-# Repo root = parent of this tools/ directory; served as the web root.
+# Repo root = parent of this tools/ directory. The web root is public/ (served
+# by tools/serve.py's default --root); docs/screenshot.png stays under the repo
+# root, so DEFAULT_OUT keeps using REPO_ROOT.
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUT = REPO_ROOT / "docs" / "screenshot.png"
 
