@@ -1,5 +1,9 @@
 # Neurarium
 
+> [!WARNING]
+> **Work in progress.** Neurarium is under active development and far from
+> complete: the anatomy, shapes, and features change often and may be inaccurate.
+
 Neurarium is an interactive 3D brain visualizer that runs in the browser. It
 shows brain regions (cortical lobes, basal ganglia / deep nuclei, hindbrain) as
 3D shapes and draws arrows for neuron projections between them.
@@ -50,8 +54,4 @@ Built with the help of [Claude Code](https://claude.com/claude-code).
 
 ## License
 
-Licensed under the [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0).
-In short: you are free to use, study, modify and redistribute this project, but
-modified versions, **including ones you run as a network service**, must make
-their complete source available under the same license. See the [`LICENSE`](LICENSE)
-file for the full text.
+[GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE).
