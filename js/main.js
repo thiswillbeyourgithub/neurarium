@@ -1058,9 +1058,9 @@ async function main() {
     data = await loadBrainData();
   } catch (err) {
     console.error(err);
-    setStatus(
-      `${err.message}. Are you serving over http? (see CLAUDE.md)`,
-      true,
+    setStatus(""); // clear the "Loading..." pill; the error shows as a banner
+    window.showErrorBanner?.(
+      `Could not load brain data: ${err.message}. Are you serving over HTTP? (see CLAUDE.md)`,
     );
     return;
   }

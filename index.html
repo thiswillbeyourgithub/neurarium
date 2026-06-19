@@ -352,7 +352,9 @@
 
       #status {
         position: fixed;
-        top: 12px;
+        /* Sit clear of however many banners are stacked at the top: the stack
+           publishes its height as --banners-height (0 when empty). */
+        top: calc(12px + var(--banners-height, 0px));
         left: 50%;
         transform: translateX(-50%);
         background: var(--panel-bg);
@@ -363,14 +365,23 @@
       }
       #status.error { background: rgba(120, 30, 35, 0.92); color: #ffd9dc; }
 
-      /* Optional "work in progress" banner (shown only when DEV=1; see
-         js/dev-banner.js). A full-width amber warning bar across the very top. */
-      #dev-banner {
+      /* Top banner stack: a fixed full-width column holding the optional WIP
+         banner (js/dev-banner.js) and any error banners (js/error-banner.js).
+         Stacking them in one flex column means multiple banners pile up instead
+         of overlapping; js/error-banner.js republishes the stack height to
+         --banners-height so the #status pill stays below it. */
+      #banners {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         z-index: 50; /* above the panels (z-index 5) and the label overlay */
+        display: flex;
+        flex-direction: column;
+      }
+      /* Optional "work in progress" banner (shown only when DEV=1; see
+         js/dev-banner.js). A full-width amber warning bar. */
+      #dev-banner {
         background: rgba(176, 124, 24, 0.95);
         color: #fff;
         font-size: 13px;
@@ -382,19 +393,45 @@
         user-select: none;
       }
       #dev-banner strong { font-weight: 600; }
-      /* When the banner is up, nudge the (top-anchored) status pill down so the
-         bar doesn't cover it. The controls panel sits bottom-left, clear of the
-         banner, so it needs no shift. Toggled by js/dev-banner.js. */
-      body.dev-banner-shown #status { top: 52px; }
+      /* Red, dismissible error banners (js/error-banner.js): the same shape as
+         the dev banner but red, each with a × close button, stacked under it. */
+      .error-banner {
+        position: relative;
+        background: rgba(150, 30, 35, 0.96);
+        color: #ffe3e5;
+        font-size: 13px;
+        line-height: 1.35;
+        text-align: center;
+        padding: 9px 44px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(6px);
+      }
+      .banner-close {
+        position: absolute;
+        top: 6px;
+        right: 12px;
+        padding: 0 4px;
+        font-size: 18px;
+        line-height: 1.2;
+        color: inherit;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        opacity: 0.8;
+      }
+      .banner-close:hover { opacity: 1; }
     </style>
   </head>
 
   <body>
     <canvas id="scene"></canvas>
 
-    <!-- Optional "work in progress" banner, hidden unless the container is
-         started with DEV=1. Filled + revealed by js/dev-banner.js. -->
-    <div id="dev-banner" role="status" aria-live="polite" hidden></div>
+    <!-- Top banner stack: the optional WIP banner (js/dev-banner.js, hidden
+         unless DEV=1) plus any error banners (js/error-banner.js) pile up here
+         in a column instead of overlapping. -->
+    <div id="banners">
+      <div id="dev-banner" role="status" aria-live="polite" hidden></div>
+    </div>
 
     <div id="status"></div>
 
@@ -501,8 +538,11 @@
       <div id="info-body"></div>
     </div>
 
-    <!-- WIP banner: plain script (needs document.body + #dev-banner to exist),
-         so loaded at the end of the body rather than in <head>. -->
+    <!-- Banner scripts: plain (need document.body + #banners to exist), so
+         loaded at the end of the body. error-banner.js installs the global error
+         handlers + the stacking container first (so later scripts' failures are
+         caught and surfaced), then dev-banner.js fills the WIP banner. -->
+    <script src="js/error-banner.js"></script>
     <script src="js/dev-banner.js"></script>
     <script type="module" src="js/main.js"></script>
   </body>

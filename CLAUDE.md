@@ -67,8 +67,9 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
 index.html            Page shell: loads eruda + three.js (via import map), holds
                       the single bottom-left collapsible "Neurarium" panel
                       (reset/search buttons, the two sliders, auto-rotate, and the
-                      nested JS-populated legend whose first row is "show all
-                      names") plus the in-place search box and the WIP banner.
+                      nested JS-populated legend whose first rows are "show all
+                      names" / "hide projections") plus the in-place search box and
+                      the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches brain.jsonl + all shape files, returns a normalized
                       {structures, projections, byId} object.
 js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
@@ -109,7 +110,15 @@ js/app-init.js        Reads that config and injects the umami tag if configured;
                       no-op otherwise.
 js/dev-banner.js      Reads that config and, when DEV=1, shows the top "work in
                       progress / restarted X ago" banner (STARTED_AT drives the
-                      "X ago"); no-op otherwise. See "Dev / WIP banner" below.
+                      "X ago"); no-op otherwise. Lives in the shared #banners
+                      stack. See "Dev / WIP banner" below.
+js/error-banner.js    Surfaces failures as explicit red, dismissible banners in
+                      the #banners stack instead of hiding them in eruda: installs
+                      window error + unhandledrejection handlers, exposes a global
+                      window.showErrorBanner(msg) for app code, de-dupes repeats
+                      into one "(xN)" banner, and republishes the stack height to
+                      the --banners-height CSS var so #status stays clear. See
+                      "Error banners" below.
 version.js            Single source of truth for the app version (a plain
                       `window.__APP_VERSION__` global, no build step). Shown in
                       the panel header (js/main.js) + the WIP banner
@@ -309,17 +318,41 @@ analytics (no build step):
 3. The entrypoint then renders `DEV` + `STARTED_AT` (alongside the `ANALYTICS_*`
    values) into `/gen/app-config.js`, which Caddy serves for `/app-config.js`.
 4. `js/dev-banner.js` reads `window.__APP_CONFIG__`: when `dev === "1"` it
-   reveals `#dev-banner` (an amber bar in `index.html`, hidden by default via the
-   `hidden` attribute, so `banner.hidden = false` shows it),
+   reveals `#dev-banner` (an amber bar in the shared `#banners` stack, hidden by
+   default via the `hidden` attribute, so `banner.hidden = false` shows it) and
    computes "X minutes/hours/days ago" from `startedAt` client-side (refreshed
-   each minute), and adds `body.dev-banner-shown` so the top-anchored UI
-   (controls / toolbar / status) nudges down below the bar. Any other `DEV`
-   value, or the empty local-dev fallback, keeps it hidden, so the banner only
-   ever appears when explicitly turned on in a container.
+   each minute). It does not nudge the rest of the UI itself: the `#banners`
+   stack publishes its height as `--banners-height` (see "Error banners"), which
+   the `#status` pill offsets against. Any other `DEV` value, or the empty
+   local-dev fallback, keeps it hidden, so the banner only ever appears when
+   explicitly turned on in a container.
 5. **Clicking the banner dismisses it** for the rest of the browser session: the
    dismissal is stored in `sessionStorage` (`neurarium:dev-banner-dismissed`) and
    checked before showing, so a reload within the session won't bring it back (a
    new tab / session shows it again).
+
+## Error banners
+
+So a visitor never has to open eruda to find out why something broke, failures
+surface as explicit **red, dismissible banners** in the same top `#banners` stack
+as the WIP banner (`js/error-banner.js`):
+
+- It installs `window` `error` (capture phase, so failed resource loads count
+  too) + `unhandledrejection` handlers that build a banner from the real message
+  and, for script errors, the `file:line` it came from, rather than a vague
+  "something went wrong".
+- It exposes a global **`window.showErrorBanner(message)`** so app code can
+  surface its own explicit errors the same way. `js/main.js` uses it for the
+  brain-data load failure (replacing the old red `#status` pill there).
+- Multiple errors **stack** as separate banners (newest below the dev banner /
+  earlier errors); each has a **×** button to dismiss it. Identical messages are
+  **de-duplicated** into one banner with an `(×N)` repeat counter (so a fault
+  firing every animation frame can't flood the screen), and there is a hard cap
+  (`MAX_BANNERS`) on distinct banners.
+- A `ResizeObserver` on `#banners` republishes the stack height to the
+  `--banners-height` CSS variable, which the `#status` pill's `top` offsets
+  against, so the pill always sits below whatever is stacked (dev banner +
+  errors), with no per-banner body class.
 
 ## Controls
 

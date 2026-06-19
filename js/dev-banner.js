@@ -68,9 +68,10 @@
   };
   if (dismissed()) return;
 
+  // Reveal it in the shared #banners stack. The top-anchored #status pill is
+  // kept below the stack by the --banners-height variable that js/error-banner.js
+  // maintains (a ResizeObserver on #banners), so no per-banner body class here.
   banner.hidden = false;
-  // Push the top-anchored UI (controls / toolbar / status) down below the bar.
-  document.body.classList.add("dev-banner-shown");
   // Keep the "X ago" fresh without a reload while the tab stays open.
   const timer = hasStart ? setInterval(render, 60 * 1000) : null;
 
@@ -78,7 +79,6 @@
   banner.title = "Click to dismiss";
   banner.addEventListener("click", () => {
     banner.hidden = true;
-    document.body.classList.remove("dev-banner-shown");
     if (timer) clearInterval(timer);
     try { sessionStorage.setItem(DISMISS_KEY, "1"); } catch { /* ignore */ }
   });
