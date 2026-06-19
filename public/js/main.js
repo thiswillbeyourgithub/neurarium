@@ -1041,14 +1041,15 @@ function connectionSideTag(proj) {
  * off-center), and a magnifier that swaps a search box in place of the panel's
  * normal controls. Typing filters both structures (by name) and connections (by
  * pathway label); clicking a result (or pressing Enter to take the first one)
- * centers the camera on it. Picking a structure shows its label; picking a
- * connection frames its two endpoints and opens the info panel.
+ * frames the camera on it. A structure result opens its structure panel; a
+ * connection result opens the connection panel. Both go through the shared
+ * selectStructure / selectConnection helpers (with frame:true).
  * @param {{focus:ReturnType<typeof createCameraFocus>, meshes:THREE.Mesh[],
- *   arrows:import("./arrows.js").ProjectionArrow[], labels:object,
- *   info:ReturnType<typeof createInfoPanel>,
- *   selection:ReturnType<typeof createSelection>}} deps
+ *   arrows:import("./arrows.js").ProjectionArrow[],
+ *   selection:ReturnType<typeof createSelection>,
+ *   selectStructure:Function, selectConnection:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, labels, info, selection }) {
+function wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -1071,22 +1072,13 @@ function wireToolbar({ focus, meshes, arrows, labels, info, selection }) {
   const items = [
     ...meshes.map((mesh) => ({
       label: mesh.userData.structure.name,
-      select: () => {
-        focus.focusStructure(mesh);
-        labels.setHovered(mesh);
-        selection.select(mesh);
-        info.showStructure(mesh.userData.structure);
-      },
+      select: () => selectStructure(mesh, { frame: true }),
     })),
     ...arrows.map((arrow) => {
       const tag = connectionSideTag(arrow.projection);
       return {
         label: arrow.projection.label + (tag ? ` · ${tag}` : ""),
-        select: () => {
-          focus.focusConnection(arrow);
-          info.show(arrow.projection);
-          selection.selectArrow(arrow);
-        },
+        select: () => selectConnection(arrow, { frame: true }),
       };
     }),
   ];
@@ -1281,17 +1273,19 @@ async function main() {
       arrow = pickArrowAt(clientX, clientY);
     }
     if (arrow) {
-      info.show(arrow.projection);
-      selection.selectArrow(arrow);
+      selectConnection(arrow); // plain click: no camera move
       return true;
     }
     const mesh = structHit ? structHit.object : null;
-    // A structure opens its own panel (name, group, connections); a true miss on
-    // empty space closes the panel.
-    if (mesh) info.showStructure(mesh.userData.structure);
-    else info.hide();
-    selection.select(mesh);
-    labels.setHovered(mesh);
+    if (mesh) {
+      // A structure opens its own panel (name, group, connections).
+      selectStructure(mesh);
+    } else {
+      // A true miss on empty space clears the halo, label, and panel.
+      selection.select(null);
+      labels.setHovered(null);
+      info.hide();
+    }
     return true;
   };
 
@@ -1376,24 +1370,36 @@ async function main() {
   const focus = createCameraFocus({ camera, controls, meshes });
   controls.addEventListener("start", () => focus.cancel());
 
-  // Clicking a connection row inside a structure panel jumps to that pathway:
-  // frame its endpoints, halo the arrow, and swap in the connection panel (same
-  // behaviour as picking the connection in search).
+  // Every way of picking content (click/tap, double-click, search, a
+  // structure-panel connection row) funnels through these two helpers, so the
+  // "halo it + label/panel it + maybe frame the camera" sequence lives in one
+  // place instead of being copy-pasted at each entry point. `frame` moves the
+  // camera (search / double-click); a plain click leaves the view where it is.
+  const selectStructure = (mesh, { frame = false } = {}) => {
+    if (frame) focus.focusStructure(mesh);
+    selection.select(mesh);
+    labels.setHovered(mesh);
+    info.showStructure(mesh.userData.structure);
+  };
+  const selectConnection = (arrow, { frame = false } = {}) => {
+    if (frame) focus.focusConnection(arrow);
+    selection.selectArrow(arrow);
+    info.show(arrow.projection);
+  };
+
+  // Clicking a connection row inside a structure panel jumps to that pathway
+  // (frames it, halos the arrow, swaps in the connection panel) just like
+  // picking the connection in search.
   info.onConnection((proj) => {
     const arrow = arrows.find((a) => a.projection === proj);
-    if (!arrow) { info.show(proj); return; }
-    focus.focusConnection(arrow);
-    info.show(proj);
-    selection.selectArrow(arrow);
+    if (arrow) selectConnection(arrow, { frame: true });
+    else info.show(proj); // no arrow built for this pathway: details only
   });
 
   canvas.addEventListener("dblclick", (event) => {
     const mesh = pickAt(event.clientX, event.clientY);
     if (mesh) {
-      focus.focusStructure(mesh);
-      labels.setHovered(mesh);
-      selection.select(mesh);
-      info.showStructure(mesh.userData.structure);
+      selectStructure(mesh, { frame: true });
     } else {
       // Double-click on empty space is a full reset, same as the reset button.
       focus.recenter();
@@ -1403,7 +1409,7 @@ async function main() {
 
   buildLegend(data, meshById, arrows, selection);
   wireControls({ controls, meshes, arrows, labels, focus, selection });
-  wireToolbar({ focus, meshes, arrows, labels, info, selection });
+  wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection });
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
   setStatus("");
