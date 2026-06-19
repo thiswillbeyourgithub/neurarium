@@ -260,8 +260,10 @@ fills the frame, handy for reviewing one region's shape at a time.
 The site is served by a hardened Caddy container (`docker/docker-compose.yml`):
 non-root UID 1000, `cap_drop: ALL`, `no-new-privileges`, read-only rootfs
 (writable paths via tmpfs, each `size=`-capped so the RAM-backed mounts can't be
-filled to exhaust host memory), CPU + memory limits, `pids_limit` (anti
-fork-bomb), `mem_swappiness: 0`, and rotated `json-file` logging (so log output
+filled to exhaust host memory), CPU + memory + `pids` limits (the last anti
+fork-bomb, all under `deploy.resources.limits` so `pids` isn't also set as the
+top-level `pids_limit`, which compose rejects as a conflicting double
+definition), `mem_swappiness: 0`, and rotated `json-file` logging (so log output
 can't fill the host disk). Caddy listens on `:8359`,
 published as `127.0.0.1:8359` so a host reverse proxy terminates TLS in front of
 it. The image is a thin build on `caddy:2-alpine` (`docker/Dockerfile`) whose
