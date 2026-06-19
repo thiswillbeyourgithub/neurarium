@@ -441,8 +441,11 @@
           </div>
 
           <div class="row inline">
+            <!-- On by default so the brain slowly turns on load; picking a
+                 structure or projection turns it off (see js/main.js) so the
+                 thing you clicked holds still. -->
             <label>
-              <input type="checkbox" id="autorotate" />
+              <input type="checkbox" id="autorotate" checked />
               Auto-rotate
             </label>
           </div>

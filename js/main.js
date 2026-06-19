@@ -235,6 +235,10 @@ function createSelection({ meshes, arrows }) {
   const isolatedArrows = new Set();
   let baseOpacity = 1; // current transparency-slider value
   let onIsolateChange = () => {}; // legend-greying hook, set via onIsolate()
+  // Fired whenever the user actively picks content (a structure, an arrow, a
+  // legend isolate, or a circuit), but not on a clear. Used to stop auto-rotate
+  // once the user reaches in to inspect something. Set via onPick().
+  let onPickContent = () => {};
 
   const touchesIsolated = (arrow) =>
     isolated.has(arrow.fromMesh) || isolated.has(arrow.toMesh);
@@ -279,6 +283,7 @@ function createSelection({ meshes, arrows }) {
       highlighted = next;
       highlightedArrow = null; // a structure and an arrow halo are mutually exclusive
       apply();
+      if (next) onPickContent();
     },
     /** Halo a single picked arrow (click/search); null clears it. */
     selectArrow(arrow) {
@@ -286,6 +291,7 @@ function createSelection({ meshes, arrows }) {
       highlightedArrow = arrow || null;
       highlighted = null;
       apply();
+      if (highlightedArrow) onPickContent();
     },
     /**
      * Toggle a group of meshes (a legend row's L/R pair, or a whole category) in
@@ -301,6 +307,7 @@ function createSelection({ meshes, arrows }) {
       }
       isolatedArrows.clear();
       apply();
+      onPickContent();
     },
     /**
      * Replace the whole focus with an explicit circuit: just `meshes` opaque +
@@ -314,6 +321,7 @@ function createSelection({ meshes, arrows }) {
       highlighted = null;
       highlightedArrow = null;
       apply();
+      if (circuitMeshes.length) onPickContent();
     },
     /** Clear every highlight + isolate, restoring default opacity everywhere. */
     clear() {
@@ -331,6 +339,14 @@ function createSelection({ meshes, arrows }) {
     onIsolate(fn) {
       onIsolateChange = fn;
       apply();
+    },
+    /**
+     * Register a callback fired whenever the user actively picks content (a
+     * structure, an arrow, a legend isolate, or a circuit) but not on a clear.
+     * Used to stop auto-rotate once the user reaches in to inspect something.
+     */
+    onPick(fn) {
+      onPickContent = fn;
     },
   };
 }
@@ -755,10 +771,11 @@ function applyViewParams(bundle) {
     transparency.value = q.get("transparency");
     transparency.dispatchEvent(new Event("input"));
   }
-  if (q.has("autorotate") && q.get("autorotate") !== "0") {
-    autorotate.checked = true;
-    autorotate.dispatchEvent(new Event("change"));
-  }
+  // Auto-rotate is on by default for a live visit, but a deep link / screenshot
+  // wants its exact framed view to hold still, so set it explicitly here (off
+  // unless the param asks for it) instead of letting the default keep spinning.
+  autorotate.checked = q.has("autorotate") && q.get("autorotate") !== "0";
+  autorotate.dispatchEvent(new Event("change"));
   if (q.get("names") === "all") {
     document.getElementById("toggle-names").click();
   }
@@ -1038,6 +1055,19 @@ async function main() {
   // click / double-click / search, plus the legend-driven isolate/dim mode. Owns
   // the structure + arrow opacity so it composes with the transparency slider.
   const selection = createSelection({ meshes, arrows });
+
+  // Auto-rotate is on by default (a slow turn on load), but the moment the user
+  // reaches in to inspect something it should hold still. Stop it (and untick
+  // the box so the UI stays truthful) on any content pick routed through the
+  // selection controller: a structure/arrow click-tap-or-search, a legend
+  // isolate, or a circuit. Clearing the selection does not re-enable it.
+  const autorotateBox = document.getElementById("autorotate");
+  const stopAutoRotate = () => {
+    if (!controls.autoRotate) return;
+    controls.autoRotate = false;
+    if (autorotateBox) autorotateBox.checked = false;
+  };
+  selection.onPick(stopAutoRotate);
 
   // Pick the arrow under a screen point (or null). Arrows bow outward from the
   // brain so they are usually hittable; arrows hidden in isolated screenshot

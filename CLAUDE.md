@@ -218,7 +218,7 @@ The `--params` string is the URL query parsed by `applyViewParams` in
 | `explode=0..1` | blow-out amount (also moves the slider) |
 | `transparency=0..1` | material opacity |
 | `names=all` | show every structure label |
-| `autorotate=1` | spin |
+| `autorotate=1` | spin (deep links default auto-rotate **off** so the framed view holds; this forces it on) |
 | `ui=0` | hide the control panels + legend (clean shape shots) |
 
 `only`/`view` auto-fit the camera to whatever is visible, so a single structure
@@ -331,7 +331,13 @@ analytics (no build step):
   contents (`#controls-main` hidden, `#search` shown) rather than opening a
   popup; the reset/search buttons stay visible so the magnifier toggles back.
 - **Auto-rotate** checkbox: spins the camera around the brain (OrbitControls
-  `autoRotate`).
+  `autoRotate`). **On by default** (a slow turn on load); it switches itself off
+  (and unticks the box) the moment the user picks content, i.e. any pick routed
+  through the selection controller (a structure/arrow click-tap-or-search, a
+  legend isolate, or a circuit), so what you clicked holds still. Clearing the
+  selection does not re-enable it. Wired via `selection.onPick(stopAutoRotate)`
+  in `js/main.js`. Deep links / screenshots get it forced **off** by
+  `applyViewParams` unless `?autorotate=1` is passed, so a framed view holds.
 - **Blow-out (explode)** slider (0..1): pushes each region radially outward from
   the brain center to reveal deep structures. Tuning constant:
   `EXPLODE_STRENGTH` in `js/main.js`.
