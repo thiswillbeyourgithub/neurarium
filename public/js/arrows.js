@@ -56,7 +56,9 @@ function surfaceToward(mesh, fromPoint) {
   return hits.length ? hits[0].point.clone() : null;
 }
 
-// Arrow color per projection kind. Kept in sync with the legend in index.html.
+// Arrow color per projection kind. The single source of truth for these
+// colours: the legend (js/main.js) and the labels read them back from here, so
+// there is nothing to keep in sync by hand.
 export const PROJECTION_COLORS = {
   excitatory: "#e15759", // glutamatergic / excitatory -> red
   inhibitory: "#4e79a7", // GABAergic / inhibitory -> blue
