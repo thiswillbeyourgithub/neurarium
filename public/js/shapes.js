@@ -653,26 +653,27 @@ function mirrorGeometryX(geometry) {
   return geometry;
 }
 
-// --- Procedural cortex "curl" normal map -----------------------------------
-// The cortex's surface pattern is added as a *shading* detail (a procedural bump
-// that perturbs the per-fragment normal) instead of as geometry. Keeping the
-// mesh smooth means no faceting, while the lighting still shows the pattern, and
-// it costs no extra triangles or texture assets. Only the cortical lobes use it
-// (deep nuclei stay smooth; the cerebellum keeps its own anisotropic folia).
+// --- Cel-shaded cortex with a swirl motif -----------------------------------
+// The cortical lobes are smooth domes rendered in a stylized, Wind-Waker-ish
+// cel-shaded look: MeshToonMaterial bands the lighting into a few flat steps,
+// and a procedural *spiral swirl motif* is drawn onto the surface as darker
+// "ink" iso-contour lines. No geometry and no normal bending: the surface stays
+// perfectly smooth (no faceting, no fingerprint relief), the motif is pure
+// colour. Only the lobes use it (deep nuclei stay smooth-lit; the cerebellum
+// keeps its own foliated geometry).
 //
-// The pattern is a stylized field of "little curls" rather than realistic gyri:
-// a domain-warped fractal-noise field passed through sin() so its iso-bands
-// close into swirling, fingerprint-like loops (the warp is what bends straight
-// bands into curls). The shaded normal is then bent along the field's gradient,
-// so the curls read as gentle raised swirls. Tunables (edit + reload to retune):
-const GYRUS_BUMP = {
-  enabled: true, // false skips the shader injection entirely (true off switch)
-  scale: 0.6, // how hard the shaded normal is bent (0 = flat, but still compiled)
-  freq: 1.1, // overall pattern frequency in local units (higher = smaller curls)
-  warp: 3.0, // domain-warp strength: how much straight bands swirl into curls
-  bands: 0.9, // sine bands per noise unit: how tightly the curl lines pack
-  octaves: 2, // fractal-noise layers feeding the warp + base field (low = clean loops)
-  eps: 0.02, // finite-difference step used to take the height gradient
+// The motif is a domain-warped value-noise field; its evenly-spaced contour
+// lines are what we draw, and the domain warp bends those contours into loose,
+// closed spirals/swirls (straight bands -> curls). Tunables (edit + reload):
+const CORTEX_SWIRL = {
+  enabled: true, // false -> lobes fall back to the plain smooth material
+  freq: 0.95, // pattern scale in local units (higher = smaller, denser swirls)
+  warp: 2.6, // domain-warp strength: how hard contours curl into spirals
+  rings: 3.0, // contour lines per noise unit (how many swirl rings)
+  octaves: 1, // noise layers feeding the field (1 = cleanest closed loops)
+  width: 0.16, // ink line thickness, as a fraction of the ring spacing (0..0.5)
+  ink: 0.62, // line darkness: diffuse is multiplied by this on a line (1 = none)
+  steps: 4, // toon lighting bands (cel-shading quantization)
 };
 
 // Format a JS number as a GLSL float literal (always with a decimal point so it
@@ -682,104 +683,106 @@ const glslFloat = (x) => {
   return /[.e]/.test(s) ? s : s + ".0";
 };
 
+// Shared toon ramp (a tiny N-step grey gradient) so every lobe quantizes its
+// lighting into the same flat cel bands. Built lazily once and reused, so all
+// lobe materials point at one texture.
+let cortexGradient = null;
+function cortexGradientMap() {
+  if (cortexGradient) return cortexGradient;
+  const steps = Math.max(2, CORTEX_SWIRL.steps);
+  const data = new Uint8Array(steps);
+  for (let i = 0; i < steps; i++) data[i] = Math.round((i / (steps - 1)) * 255);
+  const tex = new THREE.DataTexture(data, steps, 1, THREE.RedFormat);
+  tex.minFilter = THREE.NearestFilter;
+  tex.magFilter = THREE.NearestFilter;
+  tex.generateMipmaps = false;
+  tex.needsUpdate = true;
+  cortexGradient = tex;
+  return tex;
+}
+
 /**
- * `onBeforeCompile` hook that injects a procedural ridged-fBm bump into a
- * MeshStandardMaterial so the cortex shades with fine winding gyri without any
- * extra geometry. The height field is sampled in *object* space (folds stay
- * locked to the surface as it rotates/explodes, and mirror with the left
- * hemisphere), its surface gradient is taken by finite differences, rotated
- * into view space via `normalMatrix`, and the shaded normal is bent along it.
+ * `onBeforeCompile` hook that draws the swirl motif onto a (toon) lobe material.
+ * It samples a domain-warped value-noise field in *object* space (so the motif
+ * stays locked to the surface as it rotates / explodes, and mirrors with the
+ * left hemisphere), then darkens `diffuseColor` along the field's evenly-spaced
+ * contour lines. The darkening happens *before* lighting, so the toon ramp then
+ * shades the inked lines along with the rest, keeping them part of the surface.
  *
  * Used as a shared function reference for every lobe material so three.js
  * compiles a single program for them (their colours differ via the `diffuse`
  * uniform, not the shader source).
  * @param {object} shader  The shader descriptor three.js passes in.
  */
-function injectGyrusBump(shader) {
-  // Vertex: hand the object-space position + normal to the fragment stage.
+function injectCortexSwirl(shader) {
+  // Vertex: hand the object-space position to the fragment stage.
   shader.vertexShader = shader.vertexShader
     .replace(
       "#include <common>",
-      "#include <common>\nvarying vec3 vGyrPos;\nvarying vec3 vGyrNormal;",
+      "#include <common>\nvarying vec3 vSwirlPos;",
     )
     .replace(
       "#include <begin_vertex>",
-      "#include <begin_vertex>\n  vGyrPos = position;\n  vGyrNormal = normal;",
+      "#include <begin_vertex>\n  vSwirlPos = position;",
     );
 
-  // Fragment prelude: varyings, the renderer-supplied normalMatrix (vertex-only
-  // by default, so we declare it here to use it in the fragment), and a compact
-  // value-noise field warped + banded into swirling "curls".
+  // Fragment prelude: a compact value-noise + fBm the contour field is built on.
   const prelude = `
-varying vec3 vGyrPos;
-varying vec3 vGyrNormal;
-uniform mat3 normalMatrix;
-#define GYR_OCTAVES ${GYRUS_BUMP.octaves}
-float gyrHash(vec3 p){
+varying vec3 vSwirlPos;
+#define SWIRL_OCTAVES ${CORTEX_SWIRL.octaves}
+float swHash(vec3 p){
   p = fract(p * 0.3183099 + vec3(0.71, 0.113, 0.419));
   p *= 17.0;
   return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
 }
-float gyrNoise(vec3 x){
+float swNoise(vec3 x){
   vec3 i = floor(x);
   vec3 f = fract(x);
   f = f * f * (3.0 - 2.0 * f);
   return mix(
-    mix(mix(gyrHash(i + vec3(0.0,0.0,0.0)), gyrHash(i + vec3(1.0,0.0,0.0)), f.x),
-        mix(gyrHash(i + vec3(0.0,1.0,0.0)), gyrHash(i + vec3(1.0,1.0,0.0)), f.x), f.y),
-    mix(mix(gyrHash(i + vec3(0.0,0.0,1.0)), gyrHash(i + vec3(1.0,0.0,1.0)), f.x),
-        mix(gyrHash(i + vec3(0.0,1.0,1.0)), gyrHash(i + vec3(1.0,1.0,1.0)), f.x), f.y),
+    mix(mix(swHash(i + vec3(0.0,0.0,0.0)), swHash(i + vec3(1.0,0.0,0.0)), f.x),
+        mix(swHash(i + vec3(0.0,1.0,0.0)), swHash(i + vec3(1.0,1.0,0.0)), f.x), f.y),
+    mix(mix(swHash(i + vec3(0.0,0.0,1.0)), swHash(i + vec3(1.0,0.0,1.0)), f.x),
+        mix(swHash(i + vec3(0.0,1.0,1.0)), swHash(i + vec3(1.0,1.0,1.0)), f.x), f.y),
     f.z);
 }
 // Smooth fractal noise (plain fBm), centred ~[-1, 1].
-float gyrFbm(vec3 p){
+float swFbm(vec3 p){
   float sum = 0.0, amp = 0.5, norm = 0.0;
-  for (int o = 0; o < GYR_OCTAVES; o++){
-    sum += amp * (gyrNoise(p) * 2.0 - 1.0);
+  for (int o = 0; o < SWIRL_OCTAVES; o++){
+    sum += amp * (swNoise(p) * 2.0 - 1.0);
     norm += amp;
     amp *= 0.5;
     p *= 2.0;
   }
   return sum / norm;
 }
-// Height of the "little curls" field at object point p, given a *precomputed*
-// domain-warp offset wOff: a fractal field sampled at the warped coordinate
-// (the warp is what swirls the bands), then sin() turns its smooth iso-levels
-// into closed, fingerprint-like loops. wOff is passed in so the per-fragment
-// finite-difference gradient below can reuse one warp for all four taps (the
-// warp varies slowly, so holding it fixed across the tiny eps is invisible but
-// roughly halves the noise-field evaluations: ~7 instead of ~16 per fragment).
-float gyrBandedAt(vec3 p, vec3 wOff){
-  float base = gyrFbm(p * ${glslFloat(GYRUS_BUMP.freq)} + wOff);
-  return sin(base * ${glslFloat(GYRUS_BUMP.bands)} * 6.2831853);
-}
 `;
 
-  // Bend the shaded normal along the surface gradient of the curl field. The
-  // domain warp is computed once here and reused across the gradient taps.
-  const perturb = `#include <normal_fragment_begin>
+  // Darken the diffuse along the warped field's contour lines (the swirl motif).
+  const ink = `#include <color_fragment>
 {
-  float e = ${glslFloat(GYRUS_BUMP.eps)};
-  vec3 q = vGyrPos * ${glslFloat(GYRUS_BUMP.freq)};
-  vec3 wOff = ${glslFloat(GYRUS_BUMP.warp)} * vec3(
-    gyrFbm(q),
-    gyrFbm(q + vec3(5.2, 1.3, 2.8)),
-    gyrFbm(q + vec3(2.1, 7.4, 3.5))
+  vec3 q = vSwirlPos * ${glslFloat(CORTEX_SWIRL.freq)};
+  vec3 wOff = ${glslFloat(CORTEX_SWIRL.warp)} * vec3(
+    swFbm(q),
+    swFbm(q + vec3(5.2, 1.3, 2.8)),
+    swFbm(q + vec3(2.1, 7.4, 3.5))
   );
-  float h0 = gyrBandedAt(vGyrPos, wOff);
-  vec3 grad = vec3(
-    gyrBandedAt(vGyrPos + vec3(e, 0.0, 0.0), wOff) - h0,
-    gyrBandedAt(vGyrPos + vec3(0.0, e, 0.0), wOff) - h0,
-    gyrBandedAt(vGyrPos + vec3(0.0, 0.0, e), wOff) - h0
-  ) / e;
-  vec3 nObj = normalize(vGyrNormal);
-  vec3 tang = grad - dot(grad, nObj) * nObj;  // tangential part, object space
-  normal = normalize(normal - ${glslFloat(GYRUS_BUMP.scale)} * normalMatrix * tang);
+  float field = swFbm(vSwirlPos * ${glslFloat(CORTEX_SWIRL.freq)} + wOff);
+  float phase = field * ${glslFloat(CORTEX_SWIRL.rings)};
+  // Triangle wave: 1 at a contour centre, 0 midway between contours.
+  float tri = abs(fract(phase) - 0.5) * 2.0;
+  float aa = fwidth(phase) * 1.5;
+  float line = smoothstep(
+    1.0 - ${glslFloat(CORTEX_SWIRL.width)} - aa,
+    1.0 - ${glslFloat(CORTEX_SWIRL.width)} + aa,
+    tri);
+  diffuseColor.rgb *= mix(1.0, ${glslFloat(CORTEX_SWIRL.ink)}, line);
 }`;
 
   shader.fragmentShader =
     prelude +
-    shader.fragmentShader.replace("#include <normal_fragment_begin>", perturb);
+    shader.fragmentShader.replace("#include <color_fragment>", ink);
 }
 
 /**
@@ -799,21 +802,30 @@ export function buildStructureMesh(structure) {
   // it so the two hemispheres are true mirror images. (Midline forms never set
   // this flag, so they are emitted once and never reflected.)
   if (structure.mirror) mirrorGeometryX(geometry);
-  const material = new THREE.MeshStandardMaterial({
-    color: new THREE.Color(structure.color),
-    transparent: true,
-    opacity: 1,
-    roughness: 0.65,
-    metalness: 0.05,
-    // Render both sides so the inside stays visible once opacity drops.
-    side: THREE.DoubleSide,
-  });
-  // Cortical lobes get fine gyri as a procedural normal-map bump (the geometry
-  // itself stays a smooth broad fold; see GYRUS_BUMP). A shared function +
-  // cache key means all lobes compile to one program.
-  if (structure.group === "lobe" && GYRUS_BUMP.enabled) {
-    material.onBeforeCompile = injectGyrusBump;
-    material.customProgramCacheKey = () => "gyrus-bump";
+  // Cortical lobes are cel-shaded (flat toon bands) and carry the swirl motif
+  // (see CORTEX_SWIRL); everything else keeps the smooth standard material. A
+  // shared onBeforeCompile + cache key means all lobes compile to one program.
+  const isLobe = structure.group === "lobe" && CORTEX_SWIRL.enabled;
+  const material = isLobe
+    ? new THREE.MeshToonMaterial({
+        color: new THREE.Color(structure.color),
+        gradientMap: cortexGradientMap(),
+        transparent: true,
+        opacity: 1,
+        // Render both sides so the inside stays visible once opacity drops.
+        side: THREE.DoubleSide,
+      })
+    : new THREE.MeshStandardMaterial({
+        color: new THREE.Color(structure.color),
+        transparent: true,
+        opacity: 1,
+        roughness: 0.65,
+        metalness: 0.05,
+        side: THREE.DoubleSide,
+      });
+  if (isLobe) {
+    material.onBeforeCompile = injectCortexSwirl;
+    material.customProgramCacheKey = () => "cortex-swirl";
   }
   const mesh = new THREE.Mesh(geometry, material);
 

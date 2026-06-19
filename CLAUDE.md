@@ -11,8 +11,8 @@ Guidance for Claude Code (and humans) working in this repository.
 
 A browser-based 3D brain visualizer built on [three.js](https://threejs.org/).
 It shows brain regions (cortical lobes, basal ganglia / deep nuclei,
-diencephalon, limbic, hindbrain) as procedurally shaped meshes (curl-shaded
-cortical lobes, smooth deep nuclei, foliated cerebellum,
+diencephalon, limbic, hindbrain) as procedurally shaped meshes (cel-shaded
+cortical lobes carrying a swirl motif, smooth deep nuclei, foliated cerebellum,
 swept-tube caudate/brainstem/hippocampus/cingulate/fornix)
 and draws arrows for neuron projections between them. Region `group` values
 (`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`) drive the legend
@@ -84,9 +84,9 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
                       octaves/ridged/frequency/aniso/clip/clip_planes/carve_tubes}
                       = a gradient-noise-deformed ellipsoid (the optional fields
                       turn the smooth surface into foliated cerebellum; the
-                      cortical lobes stay smooth domes and get their "curl" surface
-                      from a normal-map shader instead, see js/shapes.js
-                      GYRUS_BUMP), `clip` cuts axis-aligned flat faces e.g. the
+                      cortical lobes stay smooth domes and get their cel-shaded
+                      look + swirl motif from a shader instead, see js/shapes.js
+                      CORTEX_SWIRL), `clip` cuts axis-aligned flat faces e.g. the
                       lobes' medial wall, `clip_planes` are the generated
                       bisecting cuts between overlapping neighbours so adjacent
                       regions tile flush like jigsaw pieces instead of inter-
@@ -122,11 +122,13 @@ js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       geometry across x (mirrorGeometryX) for the left member of
                       a pair. Self-contained gradient (Perlin) noise +
                       fractal/ridged/domain-warp helpers (fractalNoise). Cortical
-                      lobes are smooth domes that get a stylized "curl" pattern as
-                      a procedural normal-map bump injected into their material
-                      (injectGyrusBump / GYRUS_BUMP: a domain-warped, sine-banded
-                      noise field whose iso-loops read as little swirls), so the
-                      surface pattern is shading, not triangles. buildBlobGeometry also
+                      lobes are smooth domes rendered cel-shaded (MeshToonMaterial,
+                      flat lighting bands) and carry a stylized swirl motif drawn
+                      as darker "ink" contour lines injected into their material
+                      (injectCortexSwirl / CORTEX_SWIRL: a domain-warped noise
+                      field whose contour lines curl into loose spirals), so the
+                      surface pattern is pure colour, not triangles or relief.
+                      buildBlobGeometry also
                       honours `clip_planes` (the generated inter-region jigsaw
                       cuts) when the `JIGSAW_CLIP.enabled` flag is on, and
                       `carve_tubes` (the caudate hollowing a notch in the lobes it
@@ -848,7 +850,8 @@ trigger is the existing circuit row), so no i18n change.
      character of that noise (consumed by `buildBlobGeometry` in `js/shapes.js`):
      - `octaves` (default 1): fBm layers; >1 adds finer wrinkles on the broad
        form. Cortex uses ~2 with a small `noise` so the lobes stay smooth broad
-       domes (the surface *curls* are a normal map, see below, not geometry). The
+       domes (the surface *swirl motif* is drawn in the shader, see below, not
+       geometry). The
        ridged path is a ridged-multifractal: each finer octave is gated by the
        coarser one's ridge strength, so troughs stay smooth instead of filling
        with creases.
@@ -856,7 +859,7 @@ trigger is the existing circuit row), so no i18n change.
        zero-set. This is what turns lumps into folia (the cerebellum). Needs
        higher `detail` (6) and lower `noise` than a smooth blob, and a `frequency`
        that sets how many folds. (The cortical lobes no longer use it: they are
-       smooth domes carrying a curl normal-map instead.)
+       smooth domes carrying the cel-shaded swirl motif instead.)
      - `frequency` (default 2.4): noise lattice frequency; higher = smaller,
        more numerous folds.
      - `aniso` ([ax,ay,az], default [1,1,1]): per-axis frequency skew. Equal =
@@ -896,14 +899,18 @@ trigger is the existing circuit row), so no i18n change.
        fronto-parietal seam; per-explode it pulls back out of the notch, which is
        expected.)
      - The cortical surface pattern is *not* geometry: every `group=="lobe"`
-       structure gets a procedural "curl" bump injected into its material
-       (`injectGyrusBump` / the `GYRUS_BUMP` knobs in `js/shapes.js`). The height
-       field is a domain-warped, sine-banded noise field whose iso-loops close
-       into little swirls; its gradient perturbs the per-fragment normal so the
-       lighting shows soft curls with no extra triangles or faceting. Tune via
-       `GYRUS_BUMP`: `freq` (curl size), `warp` (how swirly), `bands` (line
-       packing), `scale` (relief), `octaves` (low = clean loops); `enabled:false`
-       skips the shader entirely, `scale:0` keeps it compiled but flat. It lives
+       structure is a smooth dome rendered **cel-shaded** (a `MeshToonMaterial`
+       with a shared N-step grey `gradientMap`, so its lighting falls into flat
+       bands) carrying a **swirl motif** drawn in the shader
+       (`injectCortexSwirl` / the `CORTEX_SWIRL` knobs in `js/shapes.js`). The
+       motif is a domain-warped noise field whose evenly-spaced contour lines are
+       darkened into "ink" lines (the warp curls them into loose spirals); the
+       darkening is applied to `diffuseColor` *before* lighting, so it stays a
+       flat painted-on pattern with no relief, no faceting, no extra triangles.
+       Tune via `CORTEX_SWIRL`: `freq` (swirl size), `warp` (how spirally),
+       `rings` (lines per unit), `width` (line thickness), `ink` (line darkness),
+       `octaves` (low = clean loops), `steps` (toon lighting bands);
+       `enabled:false` drops the lobes back to the plain smooth material. It lives
        in JS, not the data.
    - Give a region a `shape=dict(type="curve", ...)` for a round-capped tapered
      tube instead of an ellipsoid (the caudate, the brainstem): `points` is the
