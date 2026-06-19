@@ -1,11 +1,10 @@
 #!/bin/sh
-# Container entrypoint for the Neurarium static site. Two jobs before handing
+# Container entrypoint for the Neurarium static site. Three jobs before handing
 # off to Caddy:
 #
 #   1. Stamp the container start time into STARTED_AT (epoch seconds) so the
 #      optional DEV banner can show "restarted X ago" (js/dev-banner.js).
-#      Compose env is static, so we stamp it here at run time and Caddy inherits
-#      it across the exec (exposed to templates via {{env "STARTED_AT"}}).
+#      Compose env is static, so we stamp it here at run time.
 #
 #   2. Fail fast on a half-configured ANALYTICS_URL. If it is set it MUST be
 #      reachable AND actually serve JavaScript (the umami tracker, e.g.
@@ -14,6 +13,13 @@
 #      injected by js/app-init.js loads no tracker and records zero events while
 #      looking configured. We refuse to start rather than silently track
 #      nothing. (Empty ANALYTICS_URL = analytics disabled = no check.)
+#
+#   3. Render the runtime app config (window.__APP_CONFIG__) from the environment
+#      into /gen/app-config.js, which Caddy serves for /app-config.js (see
+#      docker/Caddyfile). The project root is mounted read-only, so we write to
+#      /gen (a writable tmpfs). Doing the substitution here, once, instead of via
+#      Caddy's templates module on every request means Caddy never parses the JS
+#      as a Go template and so cannot 500 on a stray brace marker in the file.
 #
 # Note this couples startup to the umami instance being up at that moment; that
 # is intentional (fail loud on misconfig). Relax the check below if you ever
@@ -56,5 +62,22 @@ if [ -n "${ANALYTICS_URL:-}" ]; then
       ;;
   esac
 fi
+
+# Render the app config from the environment into the /gen tmpfs. An unset var
+# becomes an empty string (features stay off); the consumers (js/app-init.js,
+# js/dev-banner.js) treat empty values as "disabled". Keep these keys in sync
+# with the local-dev fallback in app-config.js.
+cat > /gen/app-config.js <<CONFIG
+// Generated from the container environment by docker/entrypoint.sh at startup.
+window.__APP_CONFIG__ = {
+  url: '${ANALYTICS_URL:-}',
+  websiteId: '${ANALYTICS_WEBSITE_ID:-}',
+  sri: '${ANALYTICS_SRI:-}',
+  dnt: '${ANALYTICS_DNT:-}',
+  dev: '${DEV:-}',
+  startedAt: '${STARTED_AT:-}',
+};
+CONFIG
+echo "entrypoint: rendered /gen/app-config.js (dev='${DEV:-}')"
 
 exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile

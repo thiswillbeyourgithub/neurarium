@@ -13,9 +13,9 @@ services:
     # Startup wrapper (docker/entrypoint.sh, baked into the image): stamps the
     # container start time into STARTED_AT (epoch seconds) so the optional DEV
     # banner can show "restarted X ago", validates ANALYTICS_URL (crashes if it
-    # is set but unreachable or not serving JavaScript), then exec's caddy.
-    # Caddy inherits STARTED_AT across the exec and exposes it to templates via
-    # {{env "STARTED_AT"}}.
+    # is set but unreachable or not serving JavaScript), renders
+    # /gen/app-config.js from the environment (Caddy serves it for
+    # /app-config.js), then exec's caddy.
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
 
     # ── Hardening (mirrors parakeet_web) ────────────────────────────────
@@ -35,6 +35,10 @@ services:
       - /tmp:mode=1777
       - /data:uid=1000,gid=1000,mode=0700
       - /config:uid=1000,gid=1000,mode=0700
+      # entrypoint.sh renders /gen/app-config.js here from the environment (the
+      # project root is mounted read-only, so it can't be written next to it);
+      # Caddy serves it for /app-config.js. See docker/Caddyfile + entrypoint.sh.
+      - /gen:uid=1000,gid=1000,mode=0700
     # Resource limits to mitigate denial-of-service risk.
     deploy:
       resources:
@@ -55,8 +59,8 @@ services:
       - "127.0.0.1:8359:8359"
 
     environment:
-      # Privacy-friendly umami metrics, injected at runtime by the Caddyfile's
-      # templates block into /app-config.js. Set these in docker/.env;
+      # Privacy-friendly umami metrics, rendered at startup by entrypoint.sh into
+      # /gen/app-config.js (served for /app-config.js). Set these in docker/.env;
       # leave them empty to disable analytics entirely. ANALYTICS_SRI is an
       # optional Subresource Integrity hash for the umami script.
       # ANALYTICS_DNT is umami's data-do-not-track value: "true" (default)

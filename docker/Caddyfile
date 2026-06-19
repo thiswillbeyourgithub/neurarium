@@ -15,19 +15,25 @@
 :8359 {
 	root * /srv
 
-	# Fill the app config file's {{env}} placeholders from the container
-	# environment (ANALYTICS_* set via docker/.env). Scoped to just this file so
-	# nothing else is templated. If the env vars are empty, app-config.js ends up
-	# with empty strings and js/app-init.js stays a no-op. (The file is named
-	# generically, not "analytics-*", so content filters / proxies that block
-	# "analytics" paths don't 404 it.)
-	@appcfg path /app-config.js
-	templates @appcfg {
-		mime text/javascript application/javascript
-	}
-
 	encode gzip zstd
-	file_server
+
+	# The runtime app config (window.__APP_CONFIG__) is rendered from the
+	# container environment (ANALYTICS_* + DEV from docker/.env, STARTED_AT
+	# stamped at start) by docker/entrypoint.sh into /gen, a writable tmpfs, at
+	# container start; serve THAT for /app-config.js instead of the repo's static
+	# local-dev fallback under /srv. Rendering once at startup, rather than
+	# templating the file on every request, means Caddy never parses the JS as a
+	# Go template, so a stray brace marker in the file can't 500 it (which used to
+	# take analytics AND the DEV banner down together). The file is named
+	# generically, not "analytics-*", so content filters / proxies that block
+	# "analytics" paths don't 404 it.
+	handle /app-config.js {
+		root * /gen
+		file_server
+	}
+	handle {
+		file_server
+	}
 
 	# Basic hardening headers for a static, same-origin app. No restrictive CSP
 	# because the page intentionally loads three.js + eruda from a CDN.

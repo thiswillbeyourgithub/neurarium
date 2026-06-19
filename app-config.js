@@ -7,28 +7,23 @@
 // the URL neutral lets the request through; js/app-init.js + js/dev-banner.js
 // consume it.
 //
-// In production this file is served through Caddy's `templates` module, which
-// replaces the env placeholders below with the container's environment
-// variables (ANALYTICS_* and DEV from docker/.env, STARTED_AT stamped at
-// container start). See docker/Caddyfile + docker/docker-compose.yml.
+// This committed copy is the LOCAL-DEV fallback. tools/serve.py / `python -m
+// http.server` serve it as-is, where there is no container environment to
+// inject, so every field is empty and the umami tag + DEV banner stay off.
 //
-// NOTE: keep Go-template action markers (a doubled curly brace) out of this
-// file's comments. Caddy parses the WHOLE file as one template, so a stray
-// marker in prose makes the parse fail and the file 500s, which takes the umami
-// tag AND the DEV banner down together. Only the deliberate env placeholders
-// below may use them.
-//
-// When served WITHOUT templating (e.g. local dev via `python -m http.server`),
-// the placeholders stay literal; the consumers detect the leftover markers and
-// treat the feature as off, so nothing breaks.
+// In the CONTAINER this file is NOT served. docker/entrypoint.sh renders an
+// equivalent file from the environment (ANALYTICS_* and DEV from docker/.env,
+// STARTED_AT stamped at start) into a writable tmpfs at container start, and
+// docker/Caddyfile serves THAT for /app-config.js. Rendering it once at startup
+// (rather than templating on every request) means Caddy never parses this JS as
+// a template, so the file can contain anything (including brace markers) without
+// breaking. Keep the keys below in sync with the heredoc in
+// docker/entrypoint.sh.
 window.__APP_CONFIG__ = {
-  url: '{{env "ANALYTICS_URL"}}',
-  websiteId: '{{env "ANALYTICS_WEBSITE_ID"}}',
-  sri: '{{env "ANALYTICS_SRI"}}',
-  dnt: '{{env "ANALYTICS_DNT"}}',
-  // "1" turns on the WIP banner; STARTED_AT is the container start time in epoch
-  // seconds (stamped by the compose entrypoint) so the banner can say how long
-  // ago it was last (re)started. See js/dev-banner.js.
-  dev: '{{env "DEV"}}',
-  startedAt: '{{env "STARTED_AT"}}',
+  url: '',
+  websiteId: '',
+  sri: '',
+  dnt: '',
+  dev: '',
+  startedAt: '',
 };
