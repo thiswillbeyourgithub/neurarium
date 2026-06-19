@@ -5,22 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Neurarium</title>
 
-    <!-- eruda: on-screen console for debugging on desktop and mobile. Loaded
-         first so it captures any later errors. Adds a floating toggle button. -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
-
-    <!-- Optional privacy-friendly umami metrics. app-config.js is filled from
-         docker/.env by the container (Caddy templates); in local dev it stays
-         unconfigured and js/app-init.js is a no-op. Both are named generically
-         so content filters / proxies that block "analytics" paths let them
-         through. Load order matters: the config must run before the loader. -->
+    <!-- Optional privacy-friendly umami metrics. app-config.js is rendered from
+         docker/.env by the container; in local dev it stays unconfigured and
+         js/app-init.js is a no-op. Both are named generically so content filters
+         / proxies that block "analytics" paths let them through. Load order
+         matters: the config must run before the loader (and before the eruda gate
+         below, which reads DEV from it). -->
     <script src="app-config.js"></script>
     <script src="js/app-init.js"></script>
 
     <!-- App version (single source). Read by js/main.js (panel header) and
          js/dev-banner.js (WIP banner). -->
     <script src="version.js"></script>
+
+    <!-- eruda on-screen debug console (desktop + mobile). Loaded ONLY in dev
+         (DEV=1 from app-config.js) or when the URL carries ?debug, so normal
+         production visitors never download or expose a debug console; runtime
+         errors still surface to everyone via the red error banners
+         (js/error-banner.js). Reads DEV, so it must run after app-config.js. -->
+    <script>
+      (function () {
+        var cfg = window.__APP_CONFIG__ || {};
+        if (cfg.dev !== "1" && !/[?&]debug(=|&|$)/.test(location.search)) return;
+        var s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/eruda";
+        s.onload = function () { if (window.eruda) window.eruda.init(); };
+        document.head.appendChild(s);
+      })();
+    </script>
 
     <!-- three.js via import map so the ES modules in js/ can `import "three"`
          and "three/addons/...". Vendored locally under public/vendor/three (three

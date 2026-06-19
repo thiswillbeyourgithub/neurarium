@@ -73,7 +73,8 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
                       offset/scale/rotate) merged into one mesh, for regions that
                       aren't a single lump (the cerebellum = 2 hemispheres +
                       vermis).
-index.html            Page shell: loads eruda + three.js (via import map), holds
+index.html            Page shell: loads three.js (vendored, via import map) and,
+                      in debug only, eruda; holds
                       the single bottom-left collapsible "Neurarium" panel
                       (reset/search buttons, the two sliders, auto-rotate, and the
                       nested JS-populated legend whose first rows are "show all
@@ -198,9 +199,14 @@ whose old cached signature differs). If you ever see such an error after editing
 JS, it is almost always a stale cached module: hard-reload (Ctrl/Cmd+Shift+R) or
 switch to `tools/serve.py`.
 
-Debugging: [eruda](https://github.com/liriliri/eruda) is loaded on every page and
-adds a floating button (bottom-right) that opens an on-screen console, usable on
-desktop and mobile.
+Debugging: [eruda](https://github.com/liriliri/eruda) provides an on-screen
+console (a floating button, bottom-right) usable on desktop and mobile. It is
+**gated**: it loads only when `DEV=1` (from `app-config.js`) or the URL carries
+`?debug`, so normal production visitors never download or expose it. Append
+`?debug` to any URL (e.g. `http://localhost:8000/?debug`) to turn it on in dev.
+A small inline gate in `index.html` injects the eruda script when either
+condition holds; otherwise the page ships no debug console (runtime errors still
+surface to everyone via the red error banners, see "Error banners").
 
 ### Screenshots & deep-link view params
 
