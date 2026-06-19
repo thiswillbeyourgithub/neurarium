@@ -18,6 +18,11 @@ import { buildStructureMesh } from "./shapes.js";
 import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
 
+// UI string lookup (js/i18n.js, a classic script that ran before this module).
+// `t(key, vars)` returns the current-language UI string; data strings are
+// already resolved to the chosen language by js/data.js.
+const { t } = window.__I18N__;
+
 // Explode slider is 0..1; this is how much extra radial distance the most
 // outward regions travel at slider = 1 (as a multiple of their base distance
 // from the brain center). Large enough that full separation spreads the regions
@@ -483,7 +488,7 @@ function buildLegend(data, meshById, arrows, selection, projVis) {
   ];
   if (neurotransmitters.length > 0) {
     const h = document.createElement("h2");
-    h.textContent = "Projections";
+    h.textContent = t("legend.projections");
     legend.appendChild(h);
     for (const nt of neurotransmitters) {
       const ntArrows = arrows.filter(
@@ -514,7 +519,7 @@ function buildLegend(data, meshById, arrows, selection, projVis) {
   let activeCircuitId = null;
   if (data.circuits && data.circuits.length > 0) {
     const h = document.createElement("h2");
-    h.textContent = "Circuits";
+    h.textContent = t("legend.circuits");
     legend.appendChild(h);
     for (const circuit of data.circuits) {
       const meshes = circuit.structures.map((id) => meshById.get(id)).filter(Boolean);
@@ -541,21 +546,23 @@ function buildLegend(data, meshById, arrows, selection, projVis) {
   const tentativeArrows = arrows.filter((a) => a.tentative);
   if (tentativeArrows.length > 0 && projVis) {
     const h = document.createElement("h2");
-    h.textContent = "Hypothetical pathways";
+    h.textContent = t("legend.hypothetical");
     legend.appendChild(h);
     const count = new Set(tentativeArrows.map((a) => a.projection.label)).size;
     // A dotted swatch (a repeating gradient, so no extra CSS), echoing the dotted
     // arrows; neutral grey since these span several transmitter colours.
     const dotted =
       "repeating-linear-gradient(90deg, #b0b0b0 0 5px, transparent 5px 9px)";
-    const row = addLegendItem(legend, dotted, `Show speculative (${count})`, true);
+    const row = addLegendItem(
+      legend, dotted, `${t("legend.showSpeculative")} (${count})`, true);
     row.classList.add("clickable");
-    row.title = "Less-certain connections, drawn as dotted arrows. Off by default.";
+    row.title = t("legend.hypotheticalHint");
     row.addEventListener("click", () => {
       const show = !projVis.tentativeShown;
       projVis.setTentativeShown(show);
       row.classList.toggle("selected", show);
-      row.lastChild.textContent = `${show ? "Hide" : "Show"} speculative (${count})`;
+      row.lastChild.textContent =
+        `${show ? t("legend.hideSpeculative") : t("legend.showSpeculative")} (${count})`;
     });
   }
 
@@ -638,7 +645,7 @@ function createInfoPanel(data) {
   return {
     show(proj) {
       body.innerHTML = "";
-      body.appendChild(el("h2", "info-title", proj.label || "Connection"));
+      body.appendChild(el("h2", "info-title", proj.label || t("info.connection")));
 
       // Route line: from -> to (or <-> for a bidirectional/commissural link).
       body.appendChild(el(
@@ -661,7 +668,8 @@ function createInfoPanel(data) {
 
       if (proj.sources && proj.sources.length) {
         const wrap = el("div", "info-sources");
-        wrap.appendChild(el("h3", null, proj.sources.length > 1 ? "Sources" : "Source"));
+        wrap.appendChild(el(
+          "h3", null, proj.sources.length > 1 ? t("info.sources") : t("info.source")));
         const ul = el("ul");
         for (const s of proj.sources) {
           const li = el("li");
@@ -674,7 +682,7 @@ function createInfoPanel(data) {
           } else {
             // No verified link yet: show the citation plus a muted TODO marker.
             li.appendChild(document.createTextNode(s.citation));
-            li.appendChild(el("span", "src-todo", " (link: TODO)"));
+            li.appendChild(el("span", "src-todo", t("info.linkTodo")));
           }
           ul.appendChild(li);
         }
@@ -703,7 +711,7 @@ function createInfoPanel(data) {
       const wikiUrl = structure.wikipedia;
       if (typeof wikiUrl === "string" && /^https?:\/\//i.test(wikiUrl)) {
         const wikiWrap = el("div", "info-wiki");
-        const a = el("a", null, "Wikipedia ↗");
+        const a = el("a", null, t("info.wikipedia"));
         a.href = wikiUrl;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
@@ -715,14 +723,14 @@ function createInfoPanel(data) {
       const conns = data.projections.filter(
         (p) => p.from === structure.id || p.to === structure.id);
       if (conns.length === 0) {
-        body.appendChild(el("p", "info-desc", "No mapped connections yet."));
+        body.appendChild(el("p", "info-desc", t("info.noConnections")));
         panel.hidden = false;
         return;
       }
 
       const wrap = el("div", "info-connections");
       wrap.appendChild(el(
-        "h3", null, `Connections (${conns.length})`));
+        "h3", null, `${t("info.connections")} (${conns.length})`));
       const ul = el("ul");
       for (const proj of conns) {
         // Direction relative to *this* structure: → it projects out, ← it
@@ -1086,7 +1094,7 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     labels.setShowAll(allNames);
     toggleNames.setAttribute("aria-pressed", String(allNames));
     toggleNames.classList.toggle("active", allNames);
-    toggleNames.textContent = allNames ? "Hide all names" : "Show all names";
+    toggleNames.textContent = allNames ? t("legend.hideNames") : t("legend.showNames");
   });
 
   // Hide/show every projection arrow at once (off by default: arrows shown).
@@ -1101,7 +1109,8 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     projVis.setAllHidden(hidden);
     toggleProjections.setAttribute("aria-pressed", String(hidden));
     toggleProjections.classList.toggle("active", hidden);
-    toggleProjections.textContent = hidden ? "Show projections" : "Hide projections";
+    toggleProjections.textContent =
+      hidden ? t("legend.showProjections") : t("legend.hideProjections");
   });
 
   // Apply initial slider values so the scene matches the UI on load.
@@ -1184,7 +1193,7 @@ function wireToolbar({ focus, meshes, arrows, selection, selectStructure, select
     if (matches.length === 0) {
       const li = document.createElement("li");
       li.className = "empty";
-      li.textContent = "No match";
+      li.textContent = t("search.noMatch");
       searchResults.appendChild(li);
       return;
     }
@@ -1238,16 +1247,14 @@ async function main() {
     versionEl.textContent = `v${window.__APP_VERSION__}`;
   }
 
-  setStatus("Loading brain data...");
+  setStatus(t("status.loading"));
   let data;
   try {
     data = await loadBrainData();
   } catch (err) {
     console.error(err);
-    setStatus(""); // clear the "Loading..." pill; the error shows as a banner
-    window.showErrorBanner?.(
-      `Could not load brain data: ${err.message}. Are you serving over HTTP? (see CLAUDE.md)`,
-    );
+    setStatus(""); // clear the loading pill; the error shows as a banner
+    window.showErrorBanner?.(t("status.loadError", { msg: err.message }));
     return;
   }
 

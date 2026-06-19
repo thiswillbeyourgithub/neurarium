@@ -21,6 +21,10 @@
   // Enabled only on an exact "1" so an unset/placeholder value never trips it.
   if (cfg.dev !== "1") return;
 
+  // UI strings via the shared catalogue (js/i18n.js ran first). Fall back to the
+  // key if i18n somehow didn't load, so the banner still shows *something*.
+  const t = (k, v) => (window.__I18N__ ? window.__I18N__.t(k, v) : k);
+
   const banner = document.getElementById("dev-banner");
   if (!banner) return;
 
@@ -35,12 +39,12 @@
    */
   function humanAgo(seconds) {
     const minutes = Math.max(0, Math.round(seconds / 60));
-    if (minutes < 1) return "less than a minute ago";
-    if (minutes < 60) return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+    if (minutes < 1) return t("time.lessThanMinute");
+    if (minutes < 60) return t("time.minutes", { n: minutes, s: minutes === 1 ? "" : "s" });
     const hours = Math.round(minutes / 60);
-    if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    if (hours < 24) return t("time.hours", { n: hours, s: hours === 1 ? "" : "s" });
     const days = Math.round(hours / 24);
-    return `${days} day${days === 1 ? "" : "s"} ago`;
+    return t("time.days", { n: days, s: days === 1 ? "" : "s" });
   }
 
   // Version tag (single source: window.__APP_VERSION__ from version.js), shown
@@ -53,7 +57,7 @@
   const sourceUrl = String(cfg.sourceUrl || "").trim();
   const validSource = /^https?:\/\//i.test(sourceUrl) ? sourceUrl : "";
   const sourceLink = validSource
-    ? ` <a href="${validSource}" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:underline;">Source</a>.`
+    ? ` <a href="${validSource}" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:underline;">${t("dev.source")}</a>.`
     : "";
 
   function render() {
@@ -61,10 +65,10 @@
     // human "restarted ~X ago" cue. Clamp negatives (skewed clocks) to 0.
     const elapsed = hasStart ? Date.now() / 1000 - startedAt : 0;
     const when = hasStart
-      ? `This container was last restarted ${humanAgo(elapsed)}, so it is actively being developed. `
-      : "This site is actively being developed. ";
+      ? t("dev.restarted", { ago: humanAgo(elapsed) })
+      : t("dev.activelyDeveloped");
     banner.innerHTML =
-      `<strong>Work in progress${version}.</strong> ${when}Stay tuned, or come back later.${sourceLink}`;
+      `<strong>${t("dev.wip")}${version}.</strong> ${when}${t("dev.stayTuned")}${sourceLink}`;
   }
 
   render();
@@ -81,7 +85,7 @@
   // the WIP/redeploy warning should keep showing by default, not be silenced for
   // the whole session by a single click.
   banner.style.cursor = "pointer";
-  banner.title = "Click to hide (shows again on reload)";
+  banner.title = t("dev.clickHide");
   banner.addEventListener("click", (e) => {
     // Let the "Source" link navigate without hiding the banner.
     if (e.target.closest("a")) return;

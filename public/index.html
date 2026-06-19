@@ -14,6 +14,12 @@
     <script src="app-config.js"></script>
     <script src="js/app-init.js"></script>
 
+    <!-- Internationalization (en / fr): a classic script so the later module
+         (js/main.js) AND classic scripts (js/error-banner.js, js/dev-banner.js)
+         can read window.__I18N__. Owns the UI message catalogue + the language
+         choice; loaded early so static markup is filled at DOMContentLoaded. -->
+    <script src="js/i18n.js"></script>
+
     <!-- App version (single source). Read by js/main.js (panel header) and
          js/dev-banner.js (WIP banner). -->
     <script src="version.js"></script>
@@ -193,6 +199,25 @@
       /* currentColor on the SVG strokes makes the icons follow the button text
          color, including the blue .active state of the search toggle. */
       .tool-btn svg { width: 18px; height: 18px; display: block; }
+
+      /* Language switch: a small EN/FR segmented control at the top of the panel
+         body. The active language is highlighted (blue, like .tool-btn.active). */
+      .lang-switch { display: flex; gap: 4px; margin: 0 0 6px; }
+      .lang-btn {
+        flex: 0 0 auto;
+        padding: 2px 8px;
+        font: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .lang-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
+      .lang-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
 
       /* Search shown in place of #controls-main while the magnifier is on. */
       #search { margin-top: 12px; }
@@ -501,12 +526,20 @@
       </button>
 
       <div id="controls-body">
+        <!-- Language switch (en / fr). Not a .collapsible-control, so it stays
+             visible while a section is open. Buttons carry data-lang; js/i18n.js
+             marks the active one and reloads on switch. -->
+        <div id="lang-switch" class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="fr">FR</button>
+        </div>
+
         <!-- Reset the view (handy after panning) + toggle search. Sit just
              before the sliders, and stay visible while searching so the
              magnifier doubles as the way back. SVG icons use currentColor so
              they follow the button text color (incl. the active blue state). -->
         <div class="toolbar-row collapsible-control">
-          <button type="button" id="reset-view" class="tool-btn" title="Reset view" aria-label="Reset view">
+          <button type="button" id="reset-view" class="tool-btn" data-i18n-attr="title:toolbar.reset, aria-label:toolbar.reset">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <circle cx="12" cy="12" r="6" />
               <line x1="12" y1="1.5" x2="12" y2="5" />
@@ -515,7 +548,7 @@
               <line x1="19" y1="12" x2="22.5" y2="12" />
             </svg>
           </button>
-          <button type="button" id="search-toggle" class="tool-btn" title="Search" aria-label="Search structures and connections">
+          <button type="button" id="search-toggle" class="tool-btn" data-i18n-attr="title:toolbar.search, aria-label:toolbar.searchAria">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <circle cx="11" cy="11" r="7" />
               <line x1="16.5" y1="16.5" x2="21" y2="21" />
@@ -526,7 +559,7 @@
         <!-- Normal controls; hidden (replaced by #search) while searching. -->
         <div id="controls-main">
           <div class="row collapsible-control">
-            <label for="explode">Separate</label>
+            <label for="explode" data-i18n="panel.separate"></label>
             <!-- Default 0 so the page loads with the regions locked together as
                  a whole brain; dragging right blows it apart to reveal deep
                  nuclei. -->
@@ -534,7 +567,7 @@
           </div>
 
           <div class="row collapsible-control">
-            <label for="transparency">Transparency</label>
+            <label for="transparency" data-i18n="panel.transparency"></label>
             <!-- The slider value is the material opacity; left = more transparent. -->
             <input type="range" id="transparency" min="0.1" max="1" step="0.01" value="0.75" />
           </div>
@@ -545,7 +578,7 @@
                  thing you clicked holds still. -->
             <label>
               <input type="checkbox" id="autorotate" checked />
-              Auto-rotate
+              <span data-i18n="panel.autorotate"></span>
             </label>
           </div>
 
@@ -556,7 +589,7 @@
                actually rendered. -->
           <div id="legend">
             <button type="button" id="legend-toggle" class="collapse-header" aria-expanded="false">
-              <span>Legend</span>
+              <span data-i18n="panel.legend"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
             <div id="legend-body" hidden>
@@ -564,12 +597,10 @@
                    this whole container, then appends the generated rows after). -->
               <div id="legend-actions">
                 <!-- Forces every structure name on/off (vs. hover, one at a time). -->
-                <button type="button" id="toggle-names" class="btn" aria-pressed="false">
-                  Show all names
+                <button type="button" id="toggle-names" class="btn" aria-pressed="false" data-i18n="legend.showNames">
                 </button>
                 <!-- Hides every projection arrow (off by default: arrows shown). -->
-                <button type="button" id="toggle-projections" class="btn" aria-pressed="false">
-                  Hide projections
+                <button type="button" id="toggle-projections" class="btn" aria-pressed="false" data-i18n="legend.hideProjections">
                 </button>
               </div>
             </div>
@@ -580,30 +611,17 @@
                sourceUrl by js/main.js (its row is removed if no valid url). -->
           <div id="about">
             <button type="button" id="about-toggle" class="collapse-header" aria-expanded="false">
-              <span>About</span>
+              <span data-i18n="panel.about"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
             <div id="about-body" hidden>
-              <p class="about-text">
-                Neurarium is a work-in-progress, interactive 3D map of brain
-                regions and the neuron projections between them. The shapes are
-                schematic, meant to help you find and relate structures, not to be
-                anatomically exact.
-              </p>
-              <p class="about-text">
-                Made by
-                <a href="https://olicorne.org/" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a>
-                (developer and psychiatrist) and
-                <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude</a>.
-              </p>
-              <p class="about-text">
-                Under the hood it is a plain static site: vanilla JavaScript
-                modules and <a href="https://threejs.org/" target="_blank" rel="noopener noreferrer">three.js</a>
-                (vendored, no build step), the anatomy stored as generated data
-                files, served by Caddy.
-              </p>
+              <!-- Text + embedded links filled from js/i18n.js (data-i18n-html)
+                   so the prose lives in one place (the catalogue), translated. -->
+              <p class="about-text" data-i18n-html="about.p1"></p>
+              <p class="about-text" data-i18n-html="about.p2"></p>
+              <p class="about-text" data-i18n-html="about.p3"></p>
               <p class="about-text" id="about-source-row">
-                <a id="about-source" href="#" target="_blank" rel="noopener noreferrer">Source code</a>
+                <a id="about-source" href="#" target="_blank" rel="noopener noreferrer" data-i18n="about.sourceCode"></a>
               </p>
             </div>
           </div>
@@ -612,7 +630,7 @@
         <!-- Search shown in lieu of #controls-main while active. Matches both
              structures (by name) and connections (by pathway label). -->
         <div id="search" hidden>
-          <input type="text" id="search-input" placeholder="Search structure or connection..." autocomplete="off" />
+          <input type="text" id="search-input" data-i18n-attr="placeholder:search.placeholder" autocomplete="off" />
           <ul id="search-results"></ul>
         </div>
       </div>

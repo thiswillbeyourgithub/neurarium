@@ -15,6 +15,10 @@
 // catch) can surface its own explicit errors the same way.
 
 (function () {
+  // UI strings via the shared catalogue (js/i18n.js ran first). Fall back to the
+  // key if i18n didn't load, so an error is still surfaced rather than swallowed.
+  const t = (k, v) => (window.__I18N__ ? window.__I18N__.t(k, v) : k);
+
   const container = document.getElementById("banners");
   // message -> { banner, count, countEl }, so a repeat bumps the counter instead
   // of stacking a duplicate, and dismissing frees the message to show again.
@@ -45,7 +49,7 @@
     const close = document.createElement("button");
     close.type = "button";
     close.className = "banner-close";
-    close.setAttribute("aria-label", "Dismiss");
+    close.setAttribute("aria-label", t("error.dismiss"));
     close.textContent = "×"; // ×
     close.addEventListener("click", () => {
       banner.remove();
@@ -64,10 +68,10 @@
       const file = event.filename
         ? ` (${event.filename.split("/").pop()}:${event.lineno || 0})`
         : "";
-      showErrorBanner(`Error: ${event.message || event.error}${file}`);
+      showErrorBanner(`${t("error.prefix", { msg: event.message || event.error })}${file}`);
     } else if (event.target && (event.target.src || event.target.href)) {
       // A failed <script>/<img>/<link> etc.: name what didn't load.
-      showErrorBanner(`Failed to load ${event.target.src || event.target.href}`);
+      showErrorBanner(t("error.failedLoad", { what: event.target.src || event.target.href }));
     }
   }, true);
 
@@ -75,7 +79,7 @@
   window.addEventListener("unhandledrejection", (event) => {
     const reason = event.reason;
     const text = (reason && (reason.message || reason.toString())) || reason;
-    showErrorBanner(`Unhandled error: ${text}`);
+    showErrorBanner(t("error.unhandled", { msg: text }));
   });
 
   // Keep the top-anchored #status pill below however many banners are stacked,

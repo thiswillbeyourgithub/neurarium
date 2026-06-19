@@ -145,6 +145,18 @@ app-config.js         Tiny config file (window.__APP_CONFIG__). This committed
                       public site).
 js/app-init.js        Reads that config and injects the umami tag if configured;
                       no-op otherwise.
+js/i18n.js            Internationalization (en / fr). A classic script (like
+                      app-config.js) loaded early so the module viewer AND the
+                      classic banner scripts can read window.__I18N__. Owns the
+                      single UI message catalogue (both languages), detects the
+                      language (saved choice > browser locale fr* > en), and on
+                      DOMContentLoaded fills the static markup tagged data-i18n /
+                      data-i18n-html / data-i18n-attr so English text is not
+                      duplicated between the HTML and the catalogue. Exposes
+                      t(key,vars) (UI strings) and pick(field) (resolve a
+                      translatable {en,fr} *data* field to the current language,
+                      used by js/data.js). setLang() saves the choice and reloads
+                      (data is resolved at load, see "Internationalization").
 js/dev-banner.js      Reads that config and, when DEV=1, shows the top "work in
                       progress / restarted X ago" banner (STARTED_AT drives the
                       "X ago"); no-op otherwise. Lives in the shared #banners
@@ -317,6 +329,44 @@ must run it once (there is no build/install step otherwise). Current hooks:
 - `pre-push`: refuses to push any ref other than `main` (other branches, tags,
   and deletes all crash the push). Deployment here does not go through git, so
   `main` is the only ref that should ever leave this machine.
+
+## Internationalization (i18n)
+
+The site is bilingual (English / French), no build step. `js/i18n.js` (a classic
+script, loaded early in `index.html`) is the whole mechanism:
+
+- **Two string sources, one pattern.** *UI* strings (panel labels, buttons,
+  info-panel headings, banners, ...) live in the message catalogue **inside
+  `js/i18n.js`** (one object per language). *Data* strings (region names, pathway
+  labels + descriptions, circuit names, legend group headings, neurotransmitters,
+  kind labels) live in the data file as `{en, fr}` objects, authored once in
+  `tools/generate_data.py` (see "Changing the data") and resolved by `js/data.js`.
+- **Language pick.** `detectLang()` uses a saved choice (`localStorage`
+  `neurarium:lang`) if present, else the browser locale (any `fr*` -> French),
+  else English. `window.__I18N__` exposes `lang`, `t(key, vars)` (UI lookup with
+  `{token}` interpolation, falls back to English then the key), `pick(field)`
+  (collapse an `{en,fr}` data field to the current language; a plain string passes
+  through), and `setLang(lang)`.
+- **Static markup** in `index.html` is *not* duplicated into the catalogue: the
+  English text is removed from the HTML and the elements carry `data-i18n="key"`
+  (textContent), `data-i18n-html="key"` (innerHTML, for the About paragraphs'
+  links) or `data-i18n-attr="attr:key,..."` (attributes like `placeholder` /
+  `title`); `i18n.js` fills them from the catalogue at `DOMContentLoaded`.
+  Dynamically-built UI (legend, info panel, banners) calls `t()` directly; the
+  classic banner scripts read `window.__I18N__` with a key-fallback so an error is
+  still surfaced if i18n somehow failed to load.
+- **Switching** is a small `EN/FR` control (`#lang-switch`) at the top of the
+  panel body (not a `.collapsible-control`, so it stays visible when a section is
+  open). Clicking the inactive language calls `setLang`, which **saves the choice
+  and reloads**: `js/data.js` resolves the data language at load, so a reload is
+  simpler and more robust than re-rendering the whole scene live. The chosen
+  language is also written to `<html lang>`.
+
+> [!IMPORTANT]
+> Any new user-visible string must be added to **both** language tables in
+> `js/i18n.js` (UI) or authored as an `{en, fr}` object in `generate_data.py`
+> (data). Don't hardcode a display string in the viewer or the HTML. Source
+> citation text and URLs are intentionally **not** translated.
 
 ## Analytics (umami)
 
