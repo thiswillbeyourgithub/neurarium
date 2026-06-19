@@ -32,19 +32,33 @@ services:
     tmpfs:
       # Caddy needs a few writable paths even when only serving files. Mounted
       # as UID 1000 so the non-root process can write them despite read_only.
-      - /tmp:mode=1777
-      - /data:uid=1000,gid=1000,mode=0700
-      - /config:uid=1000,gid=1000,mode=0700
+      # Each is size-capped: tmpfs is RAM-backed, so an *uncapped* one is a DoS
+      # vector (fill it to exhaust host memory); these caps are generous for a
+      # static-file Caddy that terminates no TLS here.
+      - /tmp:mode=1777,size=16m
+      - /data:uid=1000,gid=1000,mode=0700,size=16m
+      - /config:uid=1000,gid=1000,mode=0700,size=4m
       # entrypoint.sh renders /gen/app-config.js here from the environment (the
       # project root is mounted read-only, so it can't be written next to it);
       # Caddy serves it for /app-config.js. See docker/Caddyfile + entrypoint.sh.
-      - /gen:uid=1000,gid=1000,mode=0700
+      - /gen:uid=1000,gid=1000,mode=0700,size=1m
     # Resource limits to mitigate denial-of-service risk.
     deploy:
       resources:
         limits:
           cpus: "0.5"
           memory: 128M
+    # Cap the process count (anti fork-bomb) and keep this container's pages out
+    # of swap. A static-file Caddy needs only a handful of processes.
+    pids_limit: 128
+    mem_swappiness: 0
+    # Rotate the container logs so a noisy or attacked container can't fill the
+    # host disk with log output.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
     volumes:
       # The whole project root (index.html, js/, data/, shapes/, ...) served
