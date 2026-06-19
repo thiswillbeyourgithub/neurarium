@@ -113,9 +113,7 @@ js/dev-banner.js      Reads that config and, when DEV=1, shows the top "work in
 version.js            Single source of truth for the app version (a plain
                       `window.__APP_VERSION__` global, no build step). Shown in
                       the panel header (js/main.js) + the WIP banner
-                      (js/dev-banner.js). Bump it with a CHANGELOG.md entry.
-CHANGELOG.md          Human-readable version history (semver); paired with
-                      version.js.
+                      (js/dev-banner.js). Bump it on a release.
 docker/               Deployment: docker-compose.yml (hardened Caddy service),
                       Dockerfile (strips caddy's cap_net_bind_service so exec
                       works under no-new-privileges), Caddyfile (serves /srv on
@@ -547,8 +545,8 @@ Lightweight, no-build versioning suited to this static site:
   one place to change it. `js/main.js` shows it in the panel header (`v0.1.0`)
   and `js/dev-banner.js` appends it to the WIP banner; both just read the global,
   so there is no duplication.
-- Follow [semver](https://semver.org/) (MAJOR.MINOR.PATCH). To release: bump
-  `version.js` and add a matching `CHANGELOG.md` entry in the same commit.
+- Follow [semver](https://semver.org/) (MAJOR.MINOR.PATCH). To release, bump
+  `version.js`.
 - It is intentionally *not* derived from git (the site is deployed as plain
   files, not from a repo checkout, so a baked-in string is what actually reaches
   the browser).
