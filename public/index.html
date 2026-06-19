@@ -167,6 +167,15 @@
       /* Reset-view + search: a row of icon buttons at the top of the panel body,
          just before the sliders. */
       .toolbar-row { display: flex; gap: 8px; margin: 2px 0 4px; }
+
+      /* Accordion: opening the Legend or About section hides the controls that
+         sit between the title and Auto-rotate (the reset/search row + the two
+         sliders, tagged .collapsible-control) so the open section's content does
+         not push the panel tall. Auto-rotate, Legend and About headers stay. Only
+         one of Legend/About is open at a time (enforced in js/main.js). A section
+         can only be opened when the controls are visible (no search), so this
+         never hides the toolbar mid-search. */
+      #controls.section-open .collapsible-control { display: none; }
       .tool-btn {
         display: grid;
         place-items: center;
@@ -496,7 +505,7 @@
              before the sliders, and stay visible while searching so the
              magnifier doubles as the way back. SVG icons use currentColor so
              they follow the button text color (incl. the active blue state). -->
-        <div class="toolbar-row">
+        <div class="toolbar-row collapsible-control">
           <button type="button" id="reset-view" class="tool-btn" title="Reset view" aria-label="Reset view">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <circle cx="12" cy="12" r="6" />
@@ -516,7 +525,7 @@
 
         <!-- Normal controls; hidden (replaced by #search) while searching. -->
         <div id="controls-main">
-          <div class="row">
+          <div class="row collapsible-control">
             <label for="explode">Separate</label>
             <!-- Default 0 so the page loads with the regions locked together as
                  a whole brain; dragging right blows it apart to reveal deep
@@ -524,7 +533,7 @@
             <input type="range" id="explode" min="0" max="1" step="0.01" value="0" />
           </div>
 
-          <div class="row">
+          <div class="row collapsible-control">
             <label for="transparency">Transparency</label>
             <!-- The slider value is the material opacity; left = more transparent. -->
             <input type="range" id="transparency" min="0.1" max="1" step="0.01" value="0.75" />

@@ -455,7 +455,15 @@ as the WIP banner (`js/error-banner.js`):
   normal contents (`#controls-main` hidden, `#search` shown) rather than opening
   a popup; the reset/search buttons stay visible so the magnifier toggles back.
   The panel / legend / about collapse headers share one `wireCollapse` helper in
-  `js/main.js`.
+  `js/main.js`. **Legend and About are an accordion**: opening one closes the
+  other (only one open at a time), and while either is open the controls between
+  the title and Auto-rotate (the `.toolbar-row` + the two sliders, tagged
+  `.collapsible-control`) are hidden via the `#controls.section-open` class so the
+  open section's content doesn't push the panel tall; Auto-rotate and the two
+  section headers stay visible. `wireCollapse` takes an `onToggle(open)` callback
+  and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
+  toggles `section-open`. A section can only be opened while the controls are
+  visible (i.e. not searching), so this never hides the toolbar mid-search.
 - **About** (`#about`, collapsed by default): a short blurb (what Neurarium is,
   that it's a WIP, made by Olivier Cornelis + Claude) plus a **Source code** link
   whose href is set from `cfg.sourceUrl` by `js/main.js` (the row is removed if

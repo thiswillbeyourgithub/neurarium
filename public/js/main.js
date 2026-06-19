@@ -990,17 +990,40 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // One collapse-header behaviour shared by the panel, the legend and the about
   // section: toggle aria-expanded + the body's hidden flag. The panel ships
   // expanded; the legend + about ship collapsed (their markup sets the initial
-  // aria-expanded / hidden).
-  const wireCollapse = (toggle, body) => {
+  // aria-expanded / hidden). `onToggle(open)` runs after a click so callers can
+  // react (accordion below).
+  const setSection = (toggle, body, open) => {
+    toggle.setAttribute("aria-expanded", String(open));
+    body.hidden = !open;
+  };
+  const wireCollapse = (toggle, body, onToggle) => {
     toggle.addEventListener("click", () => {
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!expanded));
-      body.hidden = expanded;
+      const open = toggle.getAttribute("aria-expanded") !== "true";
+      setSection(toggle, body, open);
+      onToggle?.(open);
     });
   };
   wireCollapse(controlsToggle, controlsBody);
-  wireCollapse(legendToggle, legendBody);
-  wireCollapse(aboutToggle, aboutBody);
+
+  // Legend + About behave as an accordion: only one open at a time, and while
+  // either is open the controls between the title and Auto-rotate (the
+  // .collapsible-control rows) are hidden via the #controls.section-open class
+  // (see index.html) so the open section's content doesn't push the panel tall.
+  const controlsPanel = document.getElementById("controls");
+  const syncSectionLayout = () => {
+    const anyOpen =
+      legendToggle.getAttribute("aria-expanded") === "true" ||
+      aboutToggle.getAttribute("aria-expanded") === "true";
+    controlsPanel.classList.toggle("section-open", anyOpen);
+  };
+  wireCollapse(legendToggle, legendBody, (open) => {
+    if (open) setSection(aboutToggle, aboutBody, false);
+    syncSectionLayout();
+  });
+  wireCollapse(aboutToggle, aboutBody, (open) => {
+    if (open) setSection(legendToggle, legendBody, false);
+    syncSectionLayout();
+  });
 
   // About: point the "Source code" link at the configured sourceUrl (from
   // app-config.js, default the public site). Drop the row if it isn't a valid
