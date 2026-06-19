@@ -4,6 +4,10 @@
 # Per-instance metrics config (umami URL/id, DNT choice); not committed.
 /docker/.env
 
+# Personal, environment-specific Claude Code notes (deploy procedure, hostnames,
+# etc.); loaded by Claude Code but not committed.
+/CLAUDE.local.md
+
 TODO.md
 
 __pycache__

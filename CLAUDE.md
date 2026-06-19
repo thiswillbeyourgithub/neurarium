@@ -131,13 +131,15 @@ tools/shot.py         Screenshot helper: serves the repo and drives a browser to
 tools/serve.py        Stdlib static dev server that sends Cache-Control:no-store
                       so the browser never serves a stale ES module (use instead
                       of `python -m http.server` while developing; see Running).
-deploy.sh             Uncommitted, environment-specific: rsyncs the tree to the
-                      VPS (no GitHub) and restarts the container.
 tools/git-hooks/      Repo-tracked git hooks (single source of truth). Currently
                       pre-push, which refuses to push any branch other than
                       main. Activated per-clone with
                       `git config core.hooksPath tools/git-hooks` (see Git hooks).
 ```
+
+(There are also two uncommitted, environment-specific files not shown above:
+`deploy.sh` and `CLAUDE.local.md`; both are gitignored. The latter holds
+per-developer setup notes, including the deploy procedure.)
 
 Why a generator instead of hand-written data files: most regions are symmetric
 left/right pairs, and the project is expected to get complex. Defining a region
@@ -209,24 +211,19 @@ fills the frame, handy for reviewing one region's shape at a time.
 
 ## Deployment
 
-Deployment does **not** use GitHub. `deploy.sh` (kept uncommitted because it is
-environment-specific) rsyncs the working tree straight to
-`~/docker/neurarium` on the VPS, then restarts the container:
+The site is served by a hardened Caddy container (`docker/docker-compose.yml`):
+non-root UID 1000, `cap_drop: ALL`, `no-new-privileges`, read-only rootfs
+(writable paths via tmpfs), CPU/memory limits. Caddy listens on `:8359`,
+published as `127.0.0.1:8359` so a host reverse proxy terminates TLS in front of
+it. The image is a thin build on `caddy:2-alpine` (`docker/Dockerfile`) whose
+only job is to strip the caddy binary's `cap_net_bind_service` file capability,
+which otherwise makes `exec` fail under `no-new-privileges`
+(`exec /usr/bin/caddy: operation not permitted`); the project root is
+bind-mounted read-only at `/srv` at runtime.
 
-```
-VPS_USERNAME=... VPS_IP=... VPS_PORT=... ./deploy.sh
-```
-
-On the server the site is served by a hardened Caddy container
-(`docker/docker-compose.yml`): non-root UID 1000, `cap_drop: ALL`,
-`no-new-privileges`, read-only rootfs (writable paths via tmpfs), CPU/memory
-limits. Caddy listens on `:8359`, published as `127.0.0.1:8359` so a host
-reverse proxy terminates TLS in front of it. The image is a thin build on
-`caddy:2-alpine` (`docker/Dockerfile`) whose only job is to strip the caddy
-binary's `cap_net_bind_service` file capability, which otherwise makes `exec`
-fail under `no-new-privileges` (`exec /usr/bin/caddy: operation not permitted`);
-the project root is bind-mounted read-only at `/srv` at runtime. The deploy runs
-`docker compose build --pull` then `up -d --force-recreate`.
+The actual deploy procedure (how the tree reaches the server and the restart
+commands) is environment-specific and intentionally kept out of this committed
+file. See `CLAUDE.local.md` (uncommitted, per-developer setup notes).
 
 ## Git hooks
 
@@ -242,8 +239,8 @@ That setting lives in `.git/config` and is *not* committed, so every fresh clone
 must run it once (there is no build/install step otherwise). Current hooks:
 
 - `pre-push`: refuses to push any ref other than `main` (other branches, tags,
-  and deletes all crash the push). Deploy here is by rsync, not git, so `main`
-  is the only ref that should ever leave this machine.
+  and deletes all crash the push). Deployment here does not go through git, so
+  `main` is the only ref that should ever leave this machine.
 
 ## Analytics (umami)
 
@@ -526,8 +523,9 @@ Lightweight, no-build versioning suited to this static site:
   so there is no duplication.
 - Follow [semver](https://semver.org/) (MAJOR.MINOR.PATCH). To release: bump
   `version.js` and add a matching `CHANGELOG.md` entry in the same commit.
-- It is intentionally *not* derived from git (the site deploys by rsync, not from
-  a repo, so a baked-in string is what actually reaches the browser).
+- It is intentionally *not* derived from git (the site is deployed as plain
+  files, not from a repo checkout, so a baked-in string is what actually reaches
+  the browser).
 
 ## Conventions
 
