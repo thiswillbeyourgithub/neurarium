@@ -63,6 +63,17 @@ if [ -n "${ANALYTICS_URL:-}" ]; then
   esac
 fi
 
+# Origin (scheme://host[:port]) of ANALYTICS_URL, exported for the
+# Content-Security-Policy in docker/Caddyfile (read there as {$ANALYTICS_ORIGIN:}),
+# so the umami tracker script and its beacon are allowed (script-src / connect-
+# src). Empty when analytics is disabled, which leaves the CSP with no extra
+# origin. BRE sed (no -E) so it works under busybox.
+export ANALYTICS_ORIGIN=""
+if [ -n "${ANALYTICS_URL:-}" ]; then
+  ANALYTICS_ORIGIN="$(printf '%s' "$ANALYTICS_URL" | sed 's#^\([a-zA-Z][a-zA-Z0-9+.-]*://[^/]*\).*#\1#')"
+  echo "entrypoint: CSP will allow ANALYTICS_ORIGIN=$ANALYTICS_ORIGIN"
+fi
+
 # Render the app config from the environment into the /gen tmpfs. An unset var
 # becomes an empty string (features stay off); the consumers (js/app-init.js,
 # js/dev-banner.js) treat empty values as "disabled". Keep these keys in sync

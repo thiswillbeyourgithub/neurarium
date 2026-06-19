@@ -138,11 +138,13 @@ docker/               Deployment: docker-compose.yml (hardened Caddy service),
                       works under no-new-privileges), Caddyfile (serves /srv on
                       :8359, serves the startup-rendered /gen/app-config.js for
                       /app-config.js, sends Cache-Control: no-store so prod never
-                      serves a stale module either, same as tools/serve.py),
+                      serves a stale module either, same as tools/serve.py, and
+                      sets the security headers incl. a Content-Security-Policy,
+                      see "Content-Security-Policy" below),
                       env.example (copy to docker/.env), entrypoint.sh (startup
                       wrapper baked into the image: stamps STARTED_AT, validates
-                      ANALYTICS_URL, and renders /gen/app-config.js from the
-                      environment, see below).
+                      ANALYTICS_URL, derives ANALYTICS_ORIGIN for the CSP, and
+                      renders /gen/app-config.js from the environment, see below).
 tools/shot.py         Screenshot helper (Playwright): serves public/ with
                       tools/serve.py, drives a headless Chromium to load
                       index.html (with view params), and captures the canvas with
@@ -325,6 +327,34 @@ container **validates it at startup** (`docker/entrypoint.sh`): when
 the response `Content-Type`), otherwise the container refuses to start (crashes)
 instead of looking configured while tracking nothing. Empty `ANALYTICS_URL`
 skips the check.
+
+## Content-Security-Policy
+
+Caddy sends a `Content-Security-Policy` (plus `X-Content-Type-Options`,
+`X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`) on every response
+(`docker/Caddyfile`). The policy is `default-src 'self'` with `object-src`,
+`base-uri`, `frame-ancestors` and `form-action` locked down; the only
+third-party origins it allows are:
+
+- `https://cdn.jsdelivr.net` in `script-src`, for the **gated eruda** debug
+  console (loaded only on `DEV=1` / `?debug`; see Debugging). Normal visitors
+  never fetch it, but the policy is uniform so the origin is allowed.
+- the **umami origin** in `script-src` + `connect-src`, when analytics is
+  configured. `docker/entrypoint.sh` derives `ANALYTICS_ORIGIN`
+  (`scheme://host[:port]`) from `ANALYTICS_URL` and the Caddyfile interpolates it
+  as `{$ANALYTICS_ORIGIN:}`; empty (analytics off) adds no extra origin.
+
+`script-src`/`style-src` include `'unsafe-inline'` because this is a no-build
+site with an inline `<script type="importmap">`, the inline eruda gate, and an
+inline `<style>` block, and there is no bundler to hash/nonce them. That is the
+one looseness; it could be tightened to hashes later. three.js is vendored
+same-origin (see `public/vendor/three`), so it needs no CDN allowance. The CSP is
+only emitted by Caddy in the container, not by `tools/serve.py` in dev.
+
+> [!IMPORTANT]
+> If you add a new external resource (another CDN script, a remote font, an
+> `<iframe>`, an image host, a cross-origin `fetch`), extend the matching CSP
+> directive in `docker/Caddyfile` or the browser will silently block it in prod.
 
 ## Dev / WIP banner
 
