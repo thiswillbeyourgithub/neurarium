@@ -248,11 +248,22 @@
 
       /* Legend nested inside the control panel, set off by a hairline. Its
          header has no side padding (the panel body already provides it). */
-      #legend {
+      #legend,
+      #about {
         margin-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
-      #legend .collapse-header { padding: 10px 0 4px; }
+      #legend .collapse-header,
+      #about .collapse-header { padding: 10px 0 4px; }
+      /* About blurb: muted body text with readable links. */
+      #about-body { padding: 2px 0 6px; }
+      .about-text {
+        margin: 8px 0;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .about-text a { color: #8fb6e6; text-decoration: underline; }
       #legend-body {
         max-height: 42vh;
         overflow-y: auto;
@@ -534,6 +545,33 @@
                   Hide projections
                 </button>
               </div>
+            </div>
+          </div>
+
+          <!-- About: collapsed by default (body ships `hidden`), mirroring the
+               legend. The "Source code" link's href is set from app-config.js
+               sourceUrl by js/main.js (its row is removed if no valid url). -->
+          <div id="about">
+            <button type="button" id="about-toggle" class="collapse-header" aria-expanded="false">
+              <span>About</span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+            <div id="about-body" hidden>
+              <p class="about-text">
+                Neurarium is a work-in-progress, interactive 3D map of brain
+                regions and the neuron projections between them. The shapes are
+                schematic, meant to help you find and relate structures, not to be
+                anatomically exact.
+              </p>
+              <p class="about-text">
+                Made by
+                <a href="https://olicorne.org/" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a>
+                (developer and psychiatrist) and
+                <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude</a>.
+              </p>
+              <p class="about-text" id="about-source-row">
+                <a id="about-source" href="#" target="_blank" rel="noopener noreferrer">Source code</a>
+              </p>
             </div>
           </div>
         </div>

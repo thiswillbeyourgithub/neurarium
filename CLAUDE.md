@@ -76,9 +76,10 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
 index.html            Page shell: loads three.js (vendored, via import map) and,
                       in debug only, eruda; holds
                       the single bottom-left collapsible "Neurarium" panel
-                      (reset/search buttons, the two sliders, auto-rotate, and the
+                      (reset/search buttons, the two sliders, auto-rotate, the
                       nested JS-populated legend whose first rows are "show all
-                      names" / "hide projections") plus the in-place search box and
+                      names" / "hide projections", and a nested About section)
+                      plus the in-place search box and
                       the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches brain.jsonl + all shape files, returns a normalized
                       {structures, projections, byId} object.
@@ -421,11 +422,18 @@ as the WIP banner (`js/error-banner.js`):
   lives in one collapsible **"Neurarium" panel at the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
-  the **Blow-out** and **Transparency** sliders, then **Auto-rotate**, then the
+  the **Separate** and **Transparency** sliders, then **Auto-rotate**, then the
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
-  names** and **Hide projections** buttons. Searching swaps the search box in place of the panel's normal
-  contents (`#controls-main` hidden, `#search` shown) rather than opening a
-  popup; the reset/search buttons stay visible so the magnifier toggles back.
+  names** and **Hide projections** buttons, then the nested collapsed **About**
+  (`#about`) section. Searching swaps the search box in place of the panel's
+  normal contents (`#controls-main` hidden, `#search` shown) rather than opening
+  a popup; the reset/search buttons stay visible so the magnifier toggles back.
+  The panel / legend / about collapse headers share one `wireCollapse` helper in
+  `js/main.js`.
+- **About** (`#about`, collapsed by default): a short blurb (what Neurarium is,
+  that it's a WIP, made by Olivier Cornelis + Claude) plus a **Source code** link
+  whose href is set from `cfg.sourceUrl` by `js/main.js` (the row is removed if
+  that isn't a valid `http(s)` URL). See "Dev / WIP banner" for `sourceUrl`.
 - **Auto-rotate** checkbox: spins the camera around the brain (OrbitControls
   `autoRotate`). **On by default** (a slow turn on load); it switches itself off
   (and unticks the box) the moment the user picks content, i.e. any pick routed

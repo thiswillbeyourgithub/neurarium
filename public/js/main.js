@@ -850,14 +850,33 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
   const controlsBody = document.getElementById("controls-body");
   const legendToggle = document.getElementById("legend-toggle");
   const legendBody = document.getElementById("legend-body");
+  const aboutToggle = document.getElementById("about-toggle");
+  const aboutBody = document.getElementById("about-body");
 
-  // Collapse the whole "Neurarium" panel down to just its header. Expanded on
-  // load (markup ships aria-expanded="true").
-  controlsToggle.addEventListener("click", () => {
-    const expanded = controlsToggle.getAttribute("aria-expanded") === "true";
-    controlsToggle.setAttribute("aria-expanded", String(!expanded));
-    controlsBody.hidden = expanded;
-  });
+  // One collapse-header behaviour shared by the panel, the legend and the about
+  // section: toggle aria-expanded + the body's hidden flag. The panel ships
+  // expanded; the legend + about ship collapsed (their markup sets the initial
+  // aria-expanded / hidden).
+  const wireCollapse = (toggle, body) => {
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      body.hidden = expanded;
+    });
+  };
+  wireCollapse(controlsToggle, controlsBody);
+  wireCollapse(legendToggle, legendBody);
+  wireCollapse(aboutToggle, aboutBody);
+
+  // About: point the "Source code" link at the configured sourceUrl (from
+  // app-config.js, default the public site). Drop the row if it isn't a valid
+  // http(s) url, so a broken/empty config never shows a dead link.
+  const aboutSource = document.getElementById("about-source");
+  const sourceUrl = String((window.__APP_CONFIG__ || {}).sourceUrl || "").trim();
+  if (aboutSource) {
+    if (/^https?:\/\//i.test(sourceUrl)) aboutSource.href = sourceUrl;
+    else document.getElementById("about-source-row")?.remove();
+  }
 
   controls.autoRotate = autorotate.checked;
   controls.autoRotateSpeed = 1.5;
@@ -902,13 +921,6 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
     toggleProjections.setAttribute("aria-pressed", String(projectionsHidden));
     toggleProjections.classList.toggle("active", projectionsHidden);
     toggleProjections.textContent = projectionsHidden ? "Show projections" : "Hide projections";
-  });
-
-  // Collapsible legend, collapsed on load (markup ships collapsed too).
-  legendToggle.addEventListener("click", () => {
-    const expanded = legendToggle.getAttribute("aria-expanded") === "true";
-    legendToggle.setAttribute("aria-expanded", String(!expanded));
-    legendBody.hidden = expanded;
   });
 
   // Apply initial slider values so the scene matches the UI on load.
