@@ -73,7 +73,7 @@ are committed so the static site can fetch them directly.
 | --- | --- |
 | `meta` (first line) | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading). Makes the dataset self-describing. |
 | `structure` | a region: `id`, `name`, `group`, `position`, `color`, `shape_file`, optional `wikipedia`, optional `mirror`. |
-| `projection` | a directed pathway: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`. |
+| `projection` | a directed pathway: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
 | `circuit` | a named functional loop: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
 
 `public/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric

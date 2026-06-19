@@ -379,7 +379,36 @@ function addLegendItem(container, color, label, line = false) {
  * @param {import("./arrows.js").ProjectionArrow[]} arrows
  * @param {ReturnType<typeof createSelection>} selection
  */
-function buildLegend(data, meshById, arrows, selection) {
+/**
+ * Shared control of which projection arrows are visible, so the global "Hide
+ * projections" button and the legend's off-by-default "Hypothetical pathways"
+ * toggle compose into one final per-arrow visibility instead of fighting over
+ * setVisible(). An arrow shows when projections aren't globally hidden AND it is
+ * either established or (when tentative) its section has been toggled on, so
+ * speculative pathways start hidden.
+ * @param {import("./arrows.js").ProjectionArrow[]} arrows
+ * @param {{refresh: () => void}} labels  Refreshed after a change so the
+ *   connection labels follow their arrows' visibility.
+ */
+function createProjectionVisibility(arrows, labels) {
+  let allHidden = false;
+  let tentativeShown = false;
+  const apply = () => {
+    for (const a of arrows) {
+      a.setVisible(!allHidden && (!a.tentative || tentativeShown));
+    }
+    labels.refresh();
+  };
+  return {
+    apply,
+    get allHidden() { return allHidden; },
+    setAllHidden(v) { allHidden = v; apply(); },
+    get tentativeShown() { return tentativeShown; },
+    setTentativeShown(v) { tentativeShown = v; apply(); },
+  };
+}
+
+function buildLegend(data, meshById, arrows, selection, projVis) {
   // Populate the collapsible body, not the panel itself, so the always-visible
   // "Legend" toggle header (in index.html) is left untouched. The action buttons
   // ("Show all names" / "Hide projections") live in a #legend-actions container
@@ -444,15 +473,21 @@ function buildLegend(data, meshById, arrows, selection) {
   // carries more than one transmitter they split into their own rows for free.
   const ntRows = [];
   let activeNt = null;
+  // Established pathways only: the tentative ones get their own section below, so
+  // they never masquerade as an established transmitter row here.
   const neurotransmitters = [
-    ...new Set(data.projections.map((p) => p.neurotransmitter).filter(Boolean)),
+    ...new Set(data.projections
+      .filter((p) => !p.tentative)
+      .map((p) => p.neurotransmitter)
+      .filter(Boolean)),
   ];
   if (neurotransmitters.length > 0) {
     const h = document.createElement("h2");
     h.textContent = "Projections";
     legend.appendChild(h);
     for (const nt of neurotransmitters) {
-      const ntArrows = arrows.filter((a) => a.projection.neurotransmitter === nt);
+      const ntArrows = arrows.filter(
+        (a) => !a.tentative && a.projection.neurotransmitter === nt);
       // The kind (the functional label) and colour carrying this transmitter,
       // both read off its arrows (each projection carries its resolved colour).
       const sample = ntArrows[0] && ntArrows[0].projection;
@@ -496,6 +531,32 @@ function buildLegend(data, meshById, arrows, selection) {
       });
       circuitRows.push(entry);
     }
+  }
+
+  // Hypothetical / speculative pathways (projection.tentative): their own
+  // section, off by default, drawn as dotted arrows. Clicking the row reveals or
+  // hides just these (via projVis, separate from the global "Hide projections"
+  // button which hides everything). Kept out of the per-transmitter rows above so
+  // they never read as established connections.
+  const tentativeArrows = arrows.filter((a) => a.tentative);
+  if (tentativeArrows.length > 0 && projVis) {
+    const h = document.createElement("h2");
+    h.textContent = "Hypothetical pathways";
+    legend.appendChild(h);
+    const count = new Set(tentativeArrows.map((a) => a.projection.label)).size;
+    // A dotted swatch (a repeating gradient, so no extra CSS), echoing the dotted
+    // arrows; neutral grey since these span several transmitter colours.
+    const dotted =
+      "repeating-linear-gradient(90deg, #b0b0b0 0 5px, transparent 5px 9px)";
+    const row = addLegendItem(legend, dotted, `Show speculative (${count})`, true);
+    row.classList.add("clickable");
+    row.title = "Less-certain connections, drawn as dotted arrows. Off by default.";
+    row.addEventListener("click", () => {
+      const show = !projVis.tentativeShown;
+      projVis.setTentativeShown(show);
+      row.classList.toggle("selected", show);
+      row.lastChild.textContent = `${show ? "Hide" : "Show"} speculative (${count})`;
+    });
   }
 
   // Reflect the isolate set onto the legend: the isolated rows stay lit, the
@@ -913,7 +974,7 @@ function applyViewParams(bundle) {
 }
 
 /** Wire the DOM controls to the scene behaviors. */
-function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
+function wireControls({ controls, meshes, arrows, labels, focus, selection, projVis }) {
   const autorotate = document.getElementById("autorotate");
   const explode = document.getElementById("explode");
   const transparency = document.getElementById("transparency");
@@ -1009,14 +1070,15 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
   // Toggles each arrow group's visibility and refreshes labels so the connection
   // labels (which key off group.visible) follow; hidden arrows also stop being
   // pickable since the pick helpers skip group.visible=false.
-  let projectionsHidden = false;
+  // Global show/hide of every arrow. Composes with the legend's "Hypothetical
+  // pathways" toggle through projVis: hiding wins, and re-showing restores the
+  // tentative arrows only if that section is toggled on.
   toggleProjections.addEventListener("click", () => {
-    projectionsHidden = !projectionsHidden;
-    for (const arrow of arrows) arrow.setVisible(!projectionsHidden);
-    labels.refresh();
-    toggleProjections.setAttribute("aria-pressed", String(projectionsHidden));
-    toggleProjections.classList.toggle("active", projectionsHidden);
-    toggleProjections.textContent = projectionsHidden ? "Show projections" : "Hide projections";
+    const hidden = !projVis.allHidden;
+    projVis.setAllHidden(hidden);
+    toggleProjections.setAttribute("aria-pressed", String(hidden));
+    toggleProjections.classList.toggle("active", hidden);
+    toggleProjections.textContent = hidden ? "Show projections" : "Hide projections";
   });
 
   // Apply initial slider values so the scene matches the UI on load.
@@ -1412,9 +1474,11 @@ async function main() {
     }
   });
 
-  buildLegend(data, meshById, arrows, selection);
-  wireControls({ controls, meshes, arrows, labels, focus, selection });
+  const projVis = createProjectionVisibility(arrows, labels);
+  buildLegend(data, meshById, arrows, selection, projVis);
+  wireControls({ controls, meshes, arrows, labels, focus, selection, projVis });
   wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection });
+  projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
   setStatus("");

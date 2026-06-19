@@ -59,7 +59,9 @@ data/brain.jsonl      One JSON object per line. Each line is one of:
                           URL, shown as a link in the structure info panel)
                         - a "projection": from, to, kind, label,
                           neurotransmitter, description, sources[{citation,url}],
-                          and optional bidirectional
+                          optional bidirectional, and optional tentative (a
+                          speculative pathway: drawn as a dotted arrow in a
+                          separate, off-by-default legend section)
                         - a "circuit": id, name, structures[ids] (a named
                           functional loop; its arrows are derived in the viewer
                           as the projections whose endpoints are both in the set)
@@ -116,7 +118,11 @@ js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
 js/arrows.js          Builds curved tube+cone arrows for projections; each
                       arrow's colour comes from its `projection.color` (resolved
                       by js/data.js from the data's meta map, single source
-                      tools/generate_data.py), not a hardcoded table here.
+                      tools/generate_data.py), not a hardcoded table here. A
+                      `projection.tentative` arrow is drawn as a *dotted* tube
+                      (a gapped run of short segments merged by a small local
+                      mergeIndexedGeometries; no addon) so speculative pathways
+                      read as "maybe".
 js/labels.js          Floating structure-name labels (three.js CSS2DRenderer):
                       one hidden label per region, shown on hover or all at once.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
@@ -511,7 +517,18 @@ as the WIP banner (`js/error-banner.js`):
     pathways + their endpoints stay opaque and everything else fades). Unlike a
     circuit, such a focus dims *every* structure, so its structure/heading rows
     grey out rather than lighting up; only the neurotransmitter row lights.
-    Clicking the active one again clears it.
+    Clicking the active one again clears it. The per-neurotransmitter rows are
+    built from the **non-tentative** projections only (the speculative ones live
+    in their own section below).
+  - The **Hypothetical pathways** legend section is separate and **off by
+    default**: a single "Show speculative (N)" toggle reveals/hides every
+    `tentative` projection's (dotted) arrow at once. They are deliberately kept
+    out of the per-neurotransmitter rows so a speculative link never reads as an
+    established one. Visibility composes with the global **Hide projections**
+    button via `createProjectionVisibility` in `js/main.js`: an arrow shows only
+    when projections aren't globally hidden *and* it is established or (when
+    tentative) its section is toggled on (global-hide wins; re-showing restores
+    the tentative arrows only if their section is on).
   - The **reset** button and a **double-click on empty space** fully clear it
     (halos + isolate + circuit), restoring default opacity. Framing a connection
     or arrow just swaps the halo, leaving any isolate set intact.
@@ -685,6 +702,11 @@ as the WIP banner (`js/error-banner.js`):
      pathways). Use it with `symmetric: False` and explicit `_L`/`_R` endpoints
      for the commissures (corpus callosum, anterior commissure) so the single
      cross-midline connection is not mirrored into a duplicate.
+   - `tentative: True` marks a **speculative / less-certain** pathway. It is
+     carried through to the emitted record; the viewer draws such arrows as a
+     *dotted* tube and lists them in a separate, off-by-default "Hypothetical
+     pathways" legend section (not in the per-neurotransmitter rows), so they read
+     as "maybe" and never masquerade as established connections.
    - Projections are **bilateral by default**: define a symmetric pathway once
      on the right and the generator emits a hemisphere-flipped twin (`_R` <->
      `_L` on both endpoints; midline endpoints stay put). Set

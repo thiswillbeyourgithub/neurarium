@@ -84,6 +84,71 @@ const BOW_FACTOR = 0.25;
 // GPe<->STN loop, or striatonigral vs nigrostriatal between the same nuclei).
 const SIDE_FACTOR = 0.16;
 
+// Tentative (speculative) pathways are drawn as a *dotted* tube instead of a
+// solid one, so they read as "maybe" rather than fact. The dotting is pure
+// geometry (gaps in the tube), so the same material / halo / picking as a solid
+// arrow apply unchanged. DASH_COUNT periods span the shaft; DASH_ON is the solid
+// fraction of each period (the rest is a gap).
+const DASH_COUNT = 9;
+const DASH_ON = 0.55;
+
+/**
+ * Concatenate several indexed BufferGeometries (position + normal + index) into
+ * one. A tiny local stand-in for three/addons BufferGeometryUtils.mergeGeometries
+ * (not vendored), enough for merging the dash segments of a dotted tube. UVs are
+ * dropped: the arrows use a flat solid-colour material that doesn't sample them.
+ * @param {THREE.BufferGeometry[]} geoms  All must be indexed with position+normal.
+ * @returns {THREE.BufferGeometry}
+ */
+function mergeIndexedGeometries(geoms) {
+  let vertexCount = 0;
+  let indexCount = 0;
+  for (const g of geoms) {
+    vertexCount += g.attributes.position.count;
+    indexCount += g.index.count;
+  }
+  const position = new Float32Array(vertexCount * 3);
+  const normal = new Float32Array(vertexCount * 3);
+  const index = new Uint32Array(indexCount);
+  let vOffset = 0;
+  let iOffset = 0;
+  for (const g of geoms) {
+    position.set(g.attributes.position.array, vOffset * 3);
+    normal.set(g.attributes.normal.array, vOffset * 3);
+    const gi = g.index.array;
+    for (let i = 0; i < gi.length; i++) index[iOffset + i] = gi[i] + vOffset;
+    vOffset += g.attributes.position.count;
+    iOffset += gi.length;
+  }
+  const merged = new THREE.BufferGeometry();
+  merged.setAttribute("position", new THREE.BufferAttribute(position, 3));
+  merged.setAttribute("normal", new THREE.BufferAttribute(normal, 3));
+  merged.setIndex(new THREE.BufferAttribute(index, 1));
+  return merged;
+}
+
+/**
+ * A dotted tube along `curve`: DASH_COUNT short tube segments with gaps between
+ * them, merged into one geometry (same radius as a solid tube so a dotted arrow
+ * reads as the same pathway, just uncertain).
+ * @param {THREE.Curve} curve
+ * @param {number} radius
+ * @returns {THREE.BufferGeometry}
+ */
+function dashedTubeGeometry(curve, radius) {
+  const segments = [];
+  for (let i = 0; i < DASH_COUNT; i++) {
+    const t0 = i / DASH_COUNT;
+    const t1 = (i + DASH_ON) / DASH_COUNT;
+    const pts = [];
+    for (let s = 0; s <= 3; s++) pts.push(curve.getPoint(t0 + (t1 - t0) * (s / 3)));
+    segments.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 3, radius, 6, false));
+  }
+  const merged = mergeIndexedGeometries(segments);
+  for (const g of segments) g.dispose();
+  return merged;
+}
+
 /**
  * A single projection arrow. Holds its own meshes (tube + one or two cones)
  * grouped under one Object3D and recomputes them from the live source/target
@@ -101,6 +166,8 @@ export class ProjectionArrow {
     this.fromMesh = fromMesh;
     this.toMesh = toMesh;
     this.projection = projection;
+    // Speculative pathways draw a dotted shaft instead of a solid tube.
+    this.tentative = Boolean(projection.tentative);
     this.group = new THREE.Group();
     // Stable side for the lateral offset: reverse the sign when the endpoints
     // swap, so the two directions of a reciprocal pair take opposite arcs.
@@ -220,7 +287,9 @@ export class ProjectionArrow {
     const shaftCurve = new THREE.QuadraticBezierCurve3(shaftStart, mid, coneBaseEnd);
 
     this.tube.geometry.dispose();
-    this.tube.geometry = new THREE.TubeGeometry(shaftCurve, 24, TUBE_RADIUS, 8, false);
+    this.tube.geometry = this.tentative
+      ? dashedTubeGeometry(shaftCurve, TUBE_RADIUS)
+      : new THREE.TubeGeometry(shaftCurve, 24, TUBE_RADIUS, 8, false);
 
     // Pick proxy spans the whole arc (start -> end) at the fat PICK_RADIUS so the
     // entire arrow, heads included, is comfortably clickable.

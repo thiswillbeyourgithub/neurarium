@@ -38,7 +38,9 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
   pathway label) and frames whatever you pick.
 - **Legend** isolates what you click: a region (both hemispheres), a whole
   category, a named **functional circuit**, or a single **neurotransmitter** (only
-  those pathways and their endpoints stay lit, everything else fades).
+  those pathways and their endpoints stay lit, everything else fades). A separate,
+  off-by-default **Hypothetical pathways** section reveals speculative / less-
+  certain connections, drawn as dotted arrows.
 - **Hover / tap** a region to show its floating name; a **Show all names** button
   labels everything at once, and a **Hide projections** button clears the arrows.
 
