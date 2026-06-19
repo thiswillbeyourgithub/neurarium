@@ -316,6 +316,10 @@ analytics (no build step):
    (controls / toolbar / status) nudges down below the bar. Any other `DEV`
    value, or the empty local-dev fallback, keeps it hidden, so the banner only
    ever appears when explicitly turned on in a container.
+5. **Clicking the banner dismisses it** for the rest of the browser session: the
+   dismissal is stored in `sessionStorage` (`neurarium:dev-banner-dismissed`) and
+   checked before showing, so a reload within the session won't bring it back (a
+   new tab / session shows it again).
 
 ## Controls
 

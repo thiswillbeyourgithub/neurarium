@@ -11,6 +11,9 @@
 // leftover "{{...}}" placeholder (local dev served without templating) all keep
 // it hidden, so production looks normal unless explicitly enabled. Plain script
 // (not a module), loaded after app-config.js so window.__APP_CONFIG__ exists.
+//
+// Clicking the banner dismisses it for the rest of the browser session (the
+// dismissal is remembered in sessionStorage, so a reload won't bring it back).
 
 (function () {
   const cfg = window.__APP_CONFIG__ || {};
@@ -55,9 +58,28 @@
   }
 
   render();
+
+  // Dismissable: clicking the banner hides it and remembers that for the rest of
+  // the browser session (per-tab sessionStorage), so a reload doesn't nag again.
+  // Checked before showing so a dismissed banner never flashes back on reload.
+  const DISMISS_KEY = "neurarium:dev-banner-dismissed";
+  const dismissed = () => {
+    try { return sessionStorage.getItem(DISMISS_KEY) === "1"; } catch { return false; }
+  };
+  if (dismissed()) return;
+
   banner.hidden = false;
   // Push the top-anchored UI (controls / toolbar / status) down below the bar.
   document.body.classList.add("dev-banner-shown");
   // Keep the "X ago" fresh without a reload while the tab stays open.
-  if (hasStart) setInterval(render, 60 * 1000);
+  const timer = hasStart ? setInterval(render, 60 * 1000) : null;
+
+  banner.style.cursor = "pointer";
+  banner.title = "Click to dismiss";
+  banner.addEventListener("click", () => {
+    banner.hidden = true;
+    document.body.classList.remove("dev-banner-shown");
+    if (timer) clearInterval(timer);
+    try { sessionStorage.setItem(DISMISS_KEY, "1"); } catch { /* ignore */ }
+  });
 })();
