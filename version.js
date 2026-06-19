@@ -7,4 +7,4 @@
 //
 // Bump this on a release and add a matching CHANGELOG.md entry. Semantic
 // versioning: MAJOR.MINOR.PATCH.
-window.__APP_VERSION__ = "0.3.0";
+window.__APP_VERSION__ = "0.4.0";

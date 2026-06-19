@@ -8,6 +8,18 @@ change.
 
 Built with the help of Claude Code.
 
+## 0.4.0
+
+- Rewrote the screenshot helper (`tools/shot.py`) as a small self-contained
+  Playwright script: it serves the repo with `tools/serve.py`, drives a headless
+  Chromium, and captures the canvas with `page.screenshot()`. Headless WebGL now
+  renders correctly because Chromium is launched with the SwiftShader GL flags
+  (the old "headless comes back blank" issue was just those flags missing), so
+  the previous `--headed` X11 path (`$DISPLAY` + `xdotool` + ImageMagick) and the
+  manual browser autodetection are gone. Bare `python tools/shot.py` now writes
+  `docs/screenshot.png` (the README hero shot); `--headed` still opens a real
+  window if wanted. Regenerated `docs/screenshot.png` with it.
+
 ## 0.3.0
 
 - Validate `ANALYTICS_URL` at container startup (`docker/entrypoint.sh`): when
