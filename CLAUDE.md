@@ -118,7 +118,9 @@ docker/               Deployment: docker-compose.yml (hardened Caddy service),
                       works under no-new-privileges), Caddyfile (serves /srv on
                       :8359, templates the app config, sends Cache-Control:
                       no-store so prod never serves a stale module either, same as
-                      tools/serve.py), env.example (copy to docker/.env).
+                      tools/serve.py), env.example (copy to docker/.env),
+                      entrypoint.sh (startup wrapper baked into the image:
+                      stamps STARTED_AT and validates ANALYTICS_URL, see below).
 tools/shot.py         Screenshot helper: serves the repo and drives a browser to
                       capture index.html (with view params) to a PNG. Lets a
                       dev/Claude Code see the output. Default is headless; pass
@@ -245,6 +247,16 @@ site on a read-only rootfs, the config is injected at runtime:
 Leave `ANALYTICS_URL`/`ANALYTICS_WEBSITE_ID` empty (or run locally without
 templating) and analytics is fully disabled, the page works the same.
 
+`ANALYTICS_URL` must be the full URL of the umami tracker *script* (e.g.
+`https://umami.example.com/script.js`), not the instance base URL: it is used
+verbatim as a `<script src>`, so the instance's HTML homepage would load nothing
+and silently record zero events. To make that misconfiguration loud, the
+container **validates it at startup** (`docker/entrypoint.sh`): when
+`ANALYTICS_URL` is set it must be reachable *and* serve JavaScript (checked via
+the response `Content-Type`), otherwise the container refuses to start (crashes)
+instead of looking configured while tracking nothing. Empty `ANALYTICS_URL`
+skips the check.
+
 ## Dev / WIP banner
 
 Optional "work in progress" banner across the top of the page, for when the
@@ -253,10 +265,11 @@ analytics (no build step):
 
 1. `DEV` in `docker/.env` (default `0`). Set `DEV=1` to enable the banner.
 2. The container also needs to know *when it started* so the banner can say
-   "restarted X ago". Compose env is static, so `docker-compose.yml` overrides
-   the entrypoint to a tiny `sh -c` wrapper that stamps `STARTED_AT=$(date +%s)`
-   (epoch seconds) and then `exec`s caddy as usual. `$$` in the compose command
-   escapes the `$` so the substitution runs in the container.
+   "restarted X ago". Compose env is static, so the entrypoint
+   (`docker/entrypoint.sh`, baked into the image and set as `entrypoint` in
+   `docker-compose.yml`) stamps `STARTED_AT=$(date +%s)` (epoch seconds), then
+   `exec`s caddy. Caddy inherits `STARTED_AT` across the exec. (The same script
+   also validates `ANALYTICS_URL`, see the Analytics section.)
 3. The Caddyfile `templates` block fills `DEV` + `STARTED_AT` into
    `app-config.js` (alongside the `ANALYTICS_*` values).
 4. `js/dev-banner.js` reads `window.__APP_CONFIG__`: when `dev === "1"` it

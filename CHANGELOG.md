@@ -8,6 +8,15 @@ change.
 
 Built with the help of Claude Code.
 
+## 0.3.0
+
+- Validate `ANALYTICS_URL` at container startup (`docker/entrypoint.sh`): when
+  it is set it must be reachable and actually serve JavaScript (the umami
+  tracker script), otherwise the container refuses to start. This makes a
+  half-configured value (e.g. the umami instance base URL instead of its
+  `script.js`) fail loudly instead of silently recording zero events. The
+  start-time stamping for the DEV banner moved into the same entrypoint script.
+
 ## 0.2.0
 
 - Renamed the project to **Neurarium** (previously "BrainWebViz" / "Brain

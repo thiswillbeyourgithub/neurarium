@@ -11,3 +11,8 @@ FROM caddy:2-alpine
 RUN apk add --no-cache --virtual .build-deps libcap \
     && { setcap -r /usr/sbin/caddy 2>/dev/null || setcap -r /usr/bin/caddy 2>/dev/null || true; } \
     && apk del .build-deps
+
+# Startup wrapper: stamps STARTED_AT and validates ANALYTICS_URL (reachable +
+# actually JavaScript) before exec'ing caddy. See entrypoint.sh.
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh

@@ -10,16 +10,13 @@ services:
     container_name: neurarium
     restart: unless-stopped
 
-    # Stamp the container's start time into STARTED_AT (epoch seconds) so the
-    # optional DEV banner can show "restarted X ago". Compose env is static, so
-    # we set it in a tiny shell wrapper, then exec caddy exactly as the base
-    # image's CMD would. Overriding entrypoint to `sh -c` (rather than the
-    # default `caddy`) is why command is a single shell string. `$$` is how
-    # compose escapes a literal `$` so the substitution runs in the container,
-    # not at compose-parse time. Caddy inherits STARTED_AT across the exec and
-    # exposes it to templates via {{env "STARTED_AT"}}.
-    entrypoint: ["sh", "-c"]
-    command: ["export STARTED_AT=$$(date +%s); exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile"]
+    # Startup wrapper (docker/entrypoint.sh, baked into the image): stamps the
+    # container start time into STARTED_AT (epoch seconds) so the optional DEV
+    # banner can show "restarted X ago", validates ANALYTICS_URL (crashes if it
+    # is set but unreachable or not serving JavaScript), then exec's caddy.
+    # Caddy inherits STARTED_AT across the exec and exposes it to templates via
+    # {{env "STARTED_AT"}}.
+    entrypoint: ["/usr/local/bin/entrypoint.sh"]
 
     # ── Hardening (mirrors parakeet_web) ────────────────────────────────
     # Run as non-root (UID 1000). Caddy listens on 8359 (>1024) so it needs no
