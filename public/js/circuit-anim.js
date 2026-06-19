@@ -1,8 +1,10 @@
-// Circuit "traveling pulse" animation: a glowing bead rides each arrow of an
-// isolated circuit from its source region to its target, sweeping outward from a
-// seed node and looping, so a curated loop (the direct pathway, the Papez memory
-// circuit, ...) reads as signal *flowing* around it instead of a static set of
-// arrows.
+// Circuit "traveling pulse" animation: a volley of glowing beads rides each arrow
+// of an isolated circuit from its source region to its target, sweeping outward
+// from a seed node and looping, so a curated loop (the direct pathway, the Papez
+// memory circuit, ...) reads as signal *flowing* around it instead of a static set
+// of arrows. The volley's size/speed/brightness keys off the arrow's sign (see
+// BURST): excitatory pathways fire a bigger, faster, dramatic burst; inhibitory a
+// smaller, slower, dimmer one.
 //
 // As each bead lands, the target region briefly brightens (a "node flash"), so
 // the hand-off from arrow to arrow around the loop is legible, not just the beads.
@@ -46,6 +48,20 @@ const FLASH_DECAY_MS = 520;
 // the target node's flash, ramping to full as it reaches the surface (t = 1).
 const ARRIVAL_ZONE = 0.8;
 
+// Burst character per projection sign: an excitatory arrow fires a bigger, faster,
+// brighter volley of beads; an inhibitory one a smaller, slower, dimmer trickle;
+// modulatory sits between. Each arrow releases `count` beads spaced `gap` apart
+// (in arc fraction) at the start of its slot; the lead advances at `speed` x the
+// slot rate (> 1 lands the volley early, so it reads as a burst then a pause).
+// `scale` sizes the bead vs PULSE_RADIUS and `bright` scales its glow + the node
+// flash it delivers. Deliberately modest, not over the top.
+const BURST = {
+  excitatory: { count: 4, speed: 1.6, gap: 0.10, scale: 1.05, bright: 1.0 },
+  inhibitory: { count: 2, speed: 1.15, gap: 0.18, scale: 0.82, bright: 0.6 },
+  modulatory: { count: 3, speed: 1.3, gap: 0.14, scale: 0.95, bright: 0.85 },
+};
+const burstFor = (sign) => BURST[sign] || BURST.modulatory;
+
 /**
  * Build the circuit traveling-pulse controller. One per scene; ticked once per
  * frame in the render loop. Driven by js/main.js: `play(circuitArrows)` from the
@@ -54,7 +70,7 @@ const ARRIVAL_ZONE = 0.8;
  * @param {{scene: THREE.Scene}} deps
  */
 export function createCircuitAnimation({ scene }) {
-  let pulses = []; // { arrow, phase, mesh, material }
+  let pulses = []; // { arrow, phase, mesh, material, offset, speed, bright }
   // Target region -> its flash shell + current brightness. One per distinct node
   // that receives an arrow, so a node hit by several arrows shares one flash.
   let nodeFlashes = new Map(); // toMesh -> { mesh, shell, material, level }
@@ -90,21 +106,29 @@ export function createCircuitAnimation({ scene }) {
       elapsed = 0;
       lastTime = null;
       for (const { arrow, phase } of phased) {
+        const burst = burstFor(arrow.projection.sign);
         // Lighten the arrow's own colour toward white so the bead reads as a
         // bright packet of *that* pathway. Additive + no depth write so it glows
         // over the (possibly dimmed) arrow rather than being occluded by it.
-        const material = new THREE.MeshBasicMaterial({
-          color: arrow.material.color.clone().lerp(WHITE, 0.55),
-          transparent: true,
-          opacity: 0,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false,
-        });
-        const mesh = new THREE.Mesh(PULSE_GEOMETRY, material);
-        mesh.visible = false;
-        mesh.raycast = () => {}; // pure decoration, never pickable
-        scene.add(mesh);
-        pulses.push({ arrow, phase, mesh, material });
+        const color = arrow.material.color.clone().lerp(WHITE, 0.55);
+        for (let i = 0; i < burst.count; i++) {
+          const material = new THREE.MeshBasicMaterial({
+            color: color.clone(),
+            transparent: true,
+            opacity: 0,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+          });
+          const mesh = new THREE.Mesh(PULSE_GEOMETRY, material);
+          mesh.scale.setScalar(burst.scale);
+          mesh.visible = false;
+          mesh.raycast = () => {}; // pure decoration, never pickable
+          scene.add(mesh);
+          pulses.push({
+            arrow, phase, mesh, material,
+            offset: i * burst.gap, speed: burst.speed, bright: burst.bright,
+          });
+        }
       }
       // One flash shell per distinct target region (parented to it, so it tracks
       // the structure's explode/mirror transform for free, like the halo).
@@ -164,9 +188,15 @@ export function createCircuitAnimation({ scene }) {
 
       const clock = elapsed / STEP_MS; // position in "steps", [0, numSteps)
       for (const p of pulses) {
-        // This arrow is active during its one-step slot [phase, phase+1).
-        const t = clock - p.phase;
-        if (t < 0 || t >= 1 || !p.arrow.group.visible) {
+        // This arrow's slot is active for local in [phase, phase+1); each bead in
+        // the volley rides the arc offset behind the lead and a touch faster.
+        const local = clock - p.phase;
+        if (local < 0 || local >= 1 || !p.arrow.group.visible) {
+          p.mesh.visible = false;
+          continue;
+        }
+        const t = local * p.speed - p.offset; // this bead's position along the arc
+        if (t < 0 || t > 1) {
           p.mesh.visible = false;
           continue;
         }
@@ -176,12 +206,13 @@ export function createCircuitAnimation({ scene }) {
         // across the middle so the hand-off at each node reads clearly.
         const edge = 0.12;
         const k = Math.min(t / edge, (1 - t) / edge, 1);
-        p.material.opacity = 0.2 + 0.8 * Math.max(0, k);
-        // As the bead lands, brighten its target region, ramping to full at t = 1.
+        p.material.opacity = (0.2 + 0.8 * Math.max(0, k)) * p.bright;
+        // As the bead lands, brighten its target region, ramping to full at t = 1
+        // (scaled by the sign's brightness, so excitatory volleys hit harder).
         if (t >= ARRIVAL_ZONE) {
           const f = nodeFlashes.get(p.arrow.toMesh);
           if (f) {
-            const intensity = (t - ARRIVAL_ZONE) / (1 - ARRIVAL_ZONE);
+            const intensity = ((t - ARRIVAL_ZONE) / (1 - ARRIVAL_ZONE)) * p.bright;
             if (intensity > f.level) f.level = intensity;
           }
         }
