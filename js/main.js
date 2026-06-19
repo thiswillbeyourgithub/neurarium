@@ -797,7 +797,7 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
   const legendToggle = document.getElementById("legend-toggle");
   const legendBody = document.getElementById("legend-body");
 
-  // Collapse the whole "BrainWebViz" panel down to just its header. Expanded on
+  // Collapse the whole "Neurarium" panel down to just its header. Expanded on
   // load (markup ships aria-expanded="true").
   controlsToggle.addEventListener("click", () => {
     const expanded = controlsToggle.getAttribute("aria-expanded") === "true";

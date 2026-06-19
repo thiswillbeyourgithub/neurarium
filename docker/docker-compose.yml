@@ -1,13 +1,13 @@
 services:
-  brainwebviz:
+  neurarium:
     # Static site served by Caddy. We build a thin image off caddy:2-alpine
     # (see docker/Dockerfile) only to strip the binary's cap_net_bind_service
     # file capability, which otherwise makes exec fail under no-new-privileges.
     build:
       context: .
       dockerfile: Dockerfile
-    image: brainwebviz:local
-    container_name: brainwebviz
+    image: neurarium:local
+    container_name: neurarium
     restart: unless-stopped
 
     # Stamp the container's start time into STARTED_AT (epoch seconds) so the
@@ -48,7 +48,7 @@ services:
     volumes:
       # The whole project root (index.html, js/, data/, shapes/, ...) served
       # read-only. Relative to this compose file, so it points at
-      # ~/docker/brainwebviz on the VPS.
+      # ~/docker/neurarium on the VPS.
       - ../:/srv:ro
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
 

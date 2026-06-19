@@ -1,4 +1,4 @@
-// Single source of truth for the app version, shown in the BrainWebViz panel
+// Single source of truth for the app version, shown in the Neurarium panel
 // header and (when enabled) the DEV "work in progress" banner.
 //
 // A plain global (like app-config.js) rather than an ES module, so both the
@@ -7,4 +7,4 @@
 //
 // Bump this on a release and add a matching CHANGELOG.md entry. Semantic
 // versioning: MAJOR.MINOR.PATCH.
-window.__APP_VERSION__ = "0.1.0";
+window.__APP_VERSION__ = "0.2.0";

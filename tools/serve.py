@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Tiny static dev server that forbids the browser from caching responses.
 
-Why this exists: BrainWebViz is a no-build static site whose JavaScript is loaded
+Why this exists: Neurarium is a no-build static site whose JavaScript is loaded
 as ES modules (``<script type="module">`` + relative ``import``s). The stock
 ``python -m http.server`` sends no ``Cache-Control`` header, so the browser falls
 back to *heuristic* caching and may serve a stale module (say an old

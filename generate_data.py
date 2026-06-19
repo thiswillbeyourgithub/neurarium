@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Generate the brain visualizer data artifacts.
+"""Generate the Neurarium brain visualizer data artifacts.
 
 This script is the *single source of truth* for the anatomy shown by the
 viewer. Editing the structures/projections lists here and re-running keeps the

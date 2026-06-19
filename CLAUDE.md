@@ -65,7 +65,7 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
                       aren't a single lump (the cerebellum = 2 hemispheres +
                       vermis).
 index.html            Page shell: loads eruda + three.js (via import map), holds
-                      the single bottom-left collapsible "BrainWebViz" panel
+                      the single bottom-left collapsible "Neurarium" panel
                       (reset/search buttons, the two sliders, auto-rotate, and the
                       nested JS-populated legend whose first row is "show all
                       names") plus the in-place search box and the WIP banner.
@@ -205,7 +205,7 @@ fills the frame, handy for reviewing one region's shape at a time.
 
 Deployment does **not** use GitHub. `deploy.sh` (kept uncommitted because it is
 environment-specific) rsyncs the working tree straight to
-`~/docker/brainwebviz` on the VPS, then restarts the container:
+`~/docker/neurarium` on the VPS, then restarts the container:
 
 ```
 VPS_USERNAME=... VPS_IP=... VPS_PORT=... ./deploy.sh
@@ -271,7 +271,7 @@ analytics (no build step):
 ## Controls
 
 - **Panel layout**: everything except the bottom-right connection info panel
-  lives in one collapsible **"BrainWebViz" panel at the bottom-left** (`#controls`
+  lives in one collapsible **"Neurarium" panel at the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
   the **Blow-out** and **Transparency** sliders, then **Auto-rotate**, then the

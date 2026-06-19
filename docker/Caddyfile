@@ -1,4 +1,4 @@
-# Caddy config for the static brain visualizer.
+# Caddy config for the static Neurarium brain visualizer.
 #
 # Listens on :8359 (the compose file maps it to 127.0.0.1:8359 on the host, so a
 # reverse proxy is expected in front). Serves the project root, which is

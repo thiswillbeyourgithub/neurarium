@@ -8,6 +8,12 @@ change.
 
 Built with the help of Claude Code.
 
+## 0.2.0
+
+- Renamed the project to **Neurarium** (previously "BrainWebViz" / "Brain
+  Visualizer"): the page title, control-panel header, README, docs, Docker
+  service/image/container names, and the screenshot tooling were all updated.
+
 ## 0.1.0
 
 Initial versioned release of the browser-based 3D brain visualizer:

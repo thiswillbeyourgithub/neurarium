@@ -148,7 +148,7 @@ def capture(
     """
     out.parent.mkdir(parents=True, exist_ok=True)
     # Isolated profile dir so concurrent/!repeated runs never hit a profile lock.
-    with tempfile.TemporaryDirectory(prefix="brainwebviz-shot-") as profile:
+    with tempfile.TemporaryDirectory(prefix="neurarium-shot-") as profile:
         cmd = [
             browser,
             "--headless",
@@ -203,7 +203,7 @@ def capture_headed(
     # profile when we tear the dir down, which otherwise raises a spurious
     # "Directory not empty" *after* the shot was already captured.
     with tempfile.TemporaryDirectory(
-        prefix="brainwebviz-shot-", ignore_cleanup_errors=True
+        prefix="neurarium-shot-", ignore_cleanup_errors=True
     ) as profile:
         cmd = [
             browser,
@@ -223,7 +223,7 @@ def capture_headed(
             """Set of window ids whose title matches the page <title>."""
             return set(
                 subprocess.run(
-                    [xdotool, "search", "--name", "BrainWebViz"],
+                    [xdotool, "search", "--name", "Neurarium"],
                     capture_output=True, text=True,
                 ).stdout.split()
             )
@@ -241,7 +241,7 @@ def capture_headed(
             # Wait for the page (the window's title is the page <title>), then let
             # it fetch its data + render a few frames before grabbing it.
             subprocess.run(
-                [xdotool, "search", "--sync", "--name", "BrainWebViz"],
+                [xdotool, "search", "--sync", "--name", "Neurarium"],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30,
             )
             time.sleep(wait_ms / 1000)
@@ -293,8 +293,8 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
-        "--out", type=Path, default=Path("/tmp/brainwebviz.png"),
-        help="Output PNG path (default: /tmp/brainwebviz.png).",
+        "--out", type=Path, default=Path("/tmp/neurarium.png"),
+        help="Output PNG path (default: /tmp/neurarium.png).",
     )
     parser.add_argument(
         "--params", default="",
