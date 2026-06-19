@@ -507,6 +507,11 @@ as the WIP banner (`js/error-banner.js`):
   **projection-kind row** is clickable to isolate that kind (see Selection above).
 - **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
   scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
+  **Shift + wheel** drives the **Separate** slider instead of zooming: a
+  capture-phase `window` wheel listener in `js/main.js` runs before
+  OrbitControls, and on `shiftKey` swallows the event (preventDefault +
+  stopPropagation) and nudges the slider (dispatching its `input` event so the
+  intro-cancel + re-aim fire). Plain wheel falls through to zoom.
 - **Reset + search** (the icon-button row at the top of the panel, just above the
   sliders): a **reset** button (crosshair icon) recenters the camera on the
   middle of the brain and re-frames the whole thing (useful after panning slides

@@ -892,6 +892,29 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
   };
   explode.addEventListener("input", onExplode);
 
+  // Shift + wheel drives the Separate slider instead of zooming the camera. The
+  // capture-phase window listener runs *before* OrbitControls' own wheel handler
+  // on the canvas, so swallowing the event here (preventDefault + stopPropagation)
+  // stops OrbitControls from also zooming. We dispatch the slider's "input" event
+  // rather than calling onExplode directly, so its other listeners fire too
+  // (notably the intro-animation cancel). A plain wheel (no shift) is ignored here
+  // and falls through to OrbitControls zoom as usual.
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (!e.shiftKey) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const current = parseFloat(explode.value);
+      const step = (e.deltaY < 0 ? 1 : -1) * 0.06; // scroll up = more separation
+      const next = Math.min(1, Math.max(0, current + step));
+      if (next === current) return; // already at an end stop
+      explode.value = String(next);
+      explode.dispatchEvent(new Event("input"));
+    },
+    { capture: true, passive: false }
+  );
+
   // Opacity is owned by the selection controller so the slider value and the
   // isolate-mode dimming compose into one final opacity per structure/arrow.
   const onTransparency = () =>
