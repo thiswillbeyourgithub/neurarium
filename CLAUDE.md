@@ -397,10 +397,10 @@ analytics (no build step):
    the `#status` pill offsets against. Any other `DEV` value, or the empty
    local-dev fallback, keeps it hidden, so the banner only ever appears when
    explicitly turned on in a container.
-5. **Clicking the banner dismisses it** for the rest of the browser session: the
-   dismissal is stored in `sessionStorage` (`neurarium:dev-banner-dismissed`) and
-   checked before showing, so a reload within the session won't bring it back (a
-   new tab / session shows it again).
+5. **Clicking the banner hides it for the current view only.** The dismissal is
+   deliberately *not* persisted (no `sessionStorage`), so a reload brings it back:
+   while `DEV=1` the WIP/redeploy warning should keep showing by default rather
+   than being silenced for the session by a single click.
 6. The banner ends with a **"Source" link** to `cfg.sourceUrl` (from the
    `SOURCE_URL` env var, default the public site; point it at the code repository
    in `docker/.env`). Only an `http(s)` value is rendered, and clicking the link

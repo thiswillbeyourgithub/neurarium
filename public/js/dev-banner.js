@@ -12,8 +12,9 @@
 // it hidden, so production looks normal unless explicitly enabled. Plain script
 // (not a module), loaded after app-config.js so window.__APP_CONFIG__ exists.
 //
-// Clicking the banner dismisses it for the rest of the browser session (the
-// dismissal is remembered in sessionStorage, so a reload won't bring it back).
+// Clicking the banner hides it for the current view only; the dismissal is NOT
+// remembered, so a reload brings it back (while DEV=1 the WIP signal should keep
+// showing by default rather than be silenced for the session by one click).
 
 (function () {
   const cfg = window.__APP_CONFIG__ || {};
@@ -68,15 +69,6 @@
 
   render();
 
-  // Dismissable: clicking the banner hides it and remembers that for the rest of
-  // the browser session (per-tab sessionStorage), so a reload doesn't nag again.
-  // Checked before showing so a dismissed banner never flashes back on reload.
-  const DISMISS_KEY = "neurarium:dev-banner-dismissed";
-  const dismissed = () => {
-    try { return sessionStorage.getItem(DISMISS_KEY) === "1"; } catch { return false; }
-  };
-  if (dismissed()) return;
-
   // Reveal it in the shared #banners stack. The top-anchored #status pill is
   // kept below the stack by the --banners-height variable that js/error-banner.js
   // maintains (a ResizeObserver on #banners), so no per-banner body class here.
@@ -84,13 +76,16 @@
   // Keep the "X ago" fresh without a reload while the tab stays open.
   const timer = hasStart ? setInterval(render, 60 * 1000) : null;
 
+  // Clicking hides it for the current view only. The dismissal is deliberately
+  // NOT persisted (no sessionStorage), so a reload brings it back: while DEV=1
+  // the WIP/redeploy warning should keep showing by default, not be silenced for
+  // the whole session by a single click.
   banner.style.cursor = "pointer";
-  banner.title = "Click to dismiss";
+  banner.title = "Click to hide (shows again on reload)";
   banner.addEventListener("click", (e) => {
-    // Let the "Source" link navigate without dismissing the banner.
+    // Let the "Source" link navigate without hiding the banner.
     if (e.target.closest("a")) return;
     banner.hidden = true;
     if (timer) clearInterval(timer);
-    try { sessionStorage.setItem(DISMISS_KEY, "1"); } catch { /* ignore */ }
   });
 })();
