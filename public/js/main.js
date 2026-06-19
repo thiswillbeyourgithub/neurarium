@@ -1184,7 +1184,7 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // createCameraFocus.setScreenOffset); collapsing it, or a wide/landscape
   // screen, restores the centered view. The offset eases in/out via focus.tick.
   const controlsPanel = document.getElementById("controls");
-  const PANEL_PAN = { x: 0.26, y: 0.22 }; // viewport fractions (right, up)
+  const PANEL_PAN = { x: 0.38, y: 0.22 }; // viewport fractions (right, up)
   const narrowOrPortrait = window.matchMedia(
     "(max-width: 700px), (orientation: portrait)"
   );
