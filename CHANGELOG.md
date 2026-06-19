@@ -18,7 +18,12 @@ Built with the help of Claude Code.
   the previous `--headed` X11 path (`$DISPLAY` + `xdotool` + ImageMagick) and the
   manual browser autodetection are gone. Bare `python tools/shot.py` now writes
   `docs/screenshot.png` (the README hero shot); `--headed` still opens a real
-  window if wanted. Regenerated `docs/screenshot.png` with it.
+  window if wanted. The capture is auto-cropped to the rendered content (with a
+  small margin) so the subject fills the frame; pass `--no-crop` to keep the full
+  viewport. Regenerated `docs/screenshot.png` with it.
+- Hid the native scrollbar on the control / legend / search / info panels (they
+  still scroll via wheel / touch / drag); the chunky bar looked out of place over
+  the dark glass UI.
 
 ## 0.3.0
 

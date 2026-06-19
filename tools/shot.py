@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # /// script
 # requires-python = ">=3.9"
-# dependencies = ["playwright>=1.40"]
+# dependencies = ["playwright>=1.40", "pillow>=10"]
 # ///
 """Render the Neurarium viewer to a PNG with a real (headless) browser.
 
@@ -12,7 +12,10 @@ window grabbing: Playwright's own ``page.screenshot()`` captures the WebGL canva
 directly, as long as Chromium is told to use the SwiftShader GL backend (the
 ``GL_ARGS`` below) so headless WebGL actually renders instead of coming back
 blank. (Same idea as simonw's ``shot-scraper``, just self-contained and aware of
-this repo's no-cache dev server.)
+this repo's no-cache dev server.) The capture is then auto-cropped to the
+rendered content (everything that differs from the flat background), keeping a
+small margin, so the subject fills the frame; pass ``--no-crop`` to keep the full
+viewport.
 
 Run it::
 
@@ -73,6 +76,34 @@ def _wait_until_up(url: str, timeout: float = 20.0) -> bool:
     return False
 
 
+def _autocrop(path: Path, margin: int) -> None:
+    """Crop ``path`` down to the rendered subject, then re-pad by ``margin`` px.
+
+    The scene draws on a single flat background colour, so anything differing
+    from the corner pixel is "content". We crop to the bounding box of that
+    content and add ``margin`` pixels of breathing room on each side so the
+    subject is not flush against the edge. No-op if the frame is all background.
+    """
+    from PIL import Image, ImageChops
+
+    image = Image.open(path).convert("RGB")
+    background = Image.new("RGB", image.size, image.getpixel((0, 0)))
+    # Render background is perfectly flat, so a tiny threshold (ignore <=8/255
+    # differences) cleanly separates content without clipping faint arrow glow.
+    diff = ImageChops.difference(image, background).convert("L")
+    box = diff.point(lambda level: 255 if level > 8 else 0).getbbox()
+    if box is None:
+        return
+    left, top, right, bottom = box
+    crop = (
+        max(0, left - margin),
+        max(0, top - margin),
+        min(image.width, right + margin),
+        min(image.height, bottom + margin),
+    )
+    image.crop(crop).save(path)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Screenshot the Neurarium viewer.")
     parser.add_argument(
@@ -97,6 +128,15 @@ def main() -> int:
         "--headed", action="store_true",
         help="open a real (visible) browser window instead of headless; needs a "
              "display, uses the real GPU rather than SwiftShader",
+    )
+    parser.add_argument(
+        "--margin", type=int, default=40,
+        help="px of breathing room kept around the content after auto-crop "
+             "(default 40)",
+    )
+    parser.add_argument(
+        "--no-crop", dest="crop", action="store_false",
+        help="keep the full viewport instead of cropping to the rendered content",
     )
     args = parser.parse_args()
 
@@ -157,6 +197,9 @@ def main() -> int:
             )
             page.screenshot(path=str(out))
             browser.close()
+
+        if args.crop:
+            _autocrop(out, args.margin)
 
         print(f"wrote {out} ({args.params or 'default view'})")
         return 0
