@@ -255,6 +255,7 @@ function createIntroAnimation({ meshes, arrows, slider }) {
  *   select: (mesh: THREE.Mesh|null) => void,
  *   toggleIsolate: (group: THREE.Mesh[]) => void,
  *   clear: () => void,
+ *   getSelected: () => {meshes:Set<THREE.Mesh>, arrows:Set<object>}|null,
  *   onIsolate: (fn: (isolated: Set<THREE.Mesh>|null) => void) => void,
  * }}
  */
@@ -398,6 +399,23 @@ function createSelection({ meshes, arrows }) {
       isolated.clear();
       isolatedArrows.clear();
       apply();
+    },
+    /**
+     * The currently focused meshes + arrows (whatever stays opaque): the isolate
+     * set (legend / circuit / projection-group) plus any single halo'd structure,
+     * and the in-focus arrows plus any single halo'd arrow. Returns null when
+     * nothing is selected. Used to scope "show all names" to just the selection.
+     */
+    getSelected() {
+      const sm = new Set(isolated);
+      if (highlighted) sm.add(highlighted);
+      const sa = new Set();
+      if (isolated.size > 0) {
+        for (const a of arrows) if (arrowInFocus(a)) sa.add(a);
+      }
+      if (highlightedArrow) sa.add(highlightedArrow);
+      if (sm.size === 0 && sa.size === 0) return null;
+      return { meshes: sm, arrows: sa };
     },
     /**
      * Re-emit the current state to every subscriber (halos/opacity/legend greying)
@@ -1279,16 +1297,26 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     selection.setBaseOpacity(parseFloat(transparency.value));
   transparency.addEventListener("input", onTransparency);
 
-  // Button that forces every structure label on/off at once (vs. hover, which
-  // shows just one). aria-pressed + an .active class reflect the state.
+  // Button that forces structure labels on/off at once (vs. hover, which shows
+  // just one). When something is selected (an isolated region, a circuit, a
+  // halo'd structure/arrow), it names only the selection rather than every
+  // structure, so the focus isn't drowned in labels; with nothing selected it
+  // names everything. aria-pressed + an .active class reflect the state.
   let allNames = false;
+  const showAllScoped = () => {
+    const sel = allNames ? selection.getSelected() : null;
+    labels.setShowAll(allNames, sel?.meshes ?? null, sel?.arrows ?? null);
+  };
   toggleNames.addEventListener("click", () => {
     allNames = !allNames;
-    labels.setShowAll(allNames);
+    showAllScoped();
     toggleNames.setAttribute("aria-pressed", String(allNames));
     toggleNames.classList.toggle("active", allNames);
     toggleNames.textContent = allNames ? t("legend.hideNames") : t("legend.showNames");
   });
+  // Keep the named set tracking the selection while show-all is on, so adding /
+  // removing an isolated region (or clearing it) updates which names show.
+  selection.onIsolate(showAllScoped);
 
   // Hide/show every projection arrow at once (off by default: arrows shown).
   // Toggles each arrow group's visibility and refreshes labels so the connection

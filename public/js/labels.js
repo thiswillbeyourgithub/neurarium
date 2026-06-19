@@ -28,7 +28,8 @@ import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer
  *   each must expose `labelAnchor`, `group`, and `projection`.
  * @param {HTMLElement} parentEl  Element to mount the overlay into (e.g. body).
  * @returns {{
- *   setShowAll: (on: boolean) => void,
+ *   setShowAll: (on: boolean, restrictMeshes?: Set<THREE.Mesh>|null,
+ *                restrictArrows?: Set<object>|null) => void,
  *   setHovered: (mesh: THREE.Mesh|null) => void,
  *   render: (scene: THREE.Scene, camera: THREE.Camera) => void,
  *   resize: () => void,
@@ -84,24 +85,40 @@ export function createLabels(meshes, arrows, parentEl) {
   // change so the two triggers (hover, show-all) can never get out of sync.
   let showAll = false;
   let hovered = null;
+  // Optional sets that scope "show all" to just the current selection: when
+  // non-null, only these meshes / arrows get a label while show-all is on (so
+  // naming a focused circuit or isolated region doesn't flood the screen with
+  // every other name). Null means "show all" really means all.
+  let scopeMeshes = null;
+  let scopeArrows = null;
+
+  const meshInScope = (mesh) => showAll && (!scopeMeshes || scopeMeshes.has(mesh));
+  const arrowInScope = (arrow) => showAll && (!scopeArrows || scopeArrows.has(arrow));
 
   function refresh() {
     for (const mesh of meshes) {
       const label = mesh.userData.label;
       // A hidden structure (e.g. isolated-view screenshots) never shows its
       // label, even when "show all" is on.
-      if (label) label.visible = mesh.visible && (showAll || mesh === hovered);
+      if (label) label.visible = mesh.visible && (meshInScope(mesh) || mesh === hovered);
     }
     // Connection labels: only with "show all" (arrows have no hover), and never
     // for an arrow hidden in an isolated view (group.visible=false).
     for (const arrow of arrows) {
-      if (arrow.label) arrow.label.visible = showAll && arrow.group.visible;
+      if (arrow.label) arrow.label.visible = arrowInScope(arrow) && arrow.group.visible;
     }
   }
 
   return {
-    setShowAll(on) {
+    /**
+     * Force every label on/off. Optionally scope it to a selection: pass Sets of
+     * the meshes / arrows to name (null = all), so "show all names" can be
+     * narrowed to just the focused structures when something is selected.
+     */
+    setShowAll(on, restrictMeshes = null, restrictArrows = null) {
       showAll = on;
+      scopeMeshes = restrictMeshes;
+      scopeArrows = restrictArrows;
       refresh();
     },
     setHovered(mesh) {
