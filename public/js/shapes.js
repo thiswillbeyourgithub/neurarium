@@ -519,19 +519,26 @@ function mirrorGeometryX(geometry) {
   return geometry;
 }
 
-// --- Procedural gyrus normal map -------------------------------------------
-// The cortex's fine folds are added as a *shading* detail (a procedural bump
+// --- Procedural cortex "curl" normal map -----------------------------------
+// The cortex's surface pattern is added as a *shading* detail (a procedural bump
 // that perturbs the per-fragment normal) instead of as geometry. Keeping the
-// mesh smooth means no faceting, while the lighting still shows crisp gyri, and
-// it costs no extra triangles or texture assets. Only the cortical lobes use
-// it (deep nuclei stay smooth; the cerebellum keeps its own anisotropic folia).
-// Tunables (edit + reload to retune):
+// mesh smooth means no faceting, while the lighting still shows the pattern, and
+// it costs no extra triangles or texture assets. Only the cortical lobes use it
+// (deep nuclei stay smooth; the cerebellum keeps its own anisotropic folia).
+//
+// The pattern is a stylized field of "little curls" rather than realistic gyri:
+// a domain-warped fractal-noise field passed through sin() so its iso-bands
+// close into swirling, fingerprint-like loops (the warp is what bends straight
+// bands into curls). The shaded normal is then bent along the field's gradient,
+// so the curls read as gentle raised swirls. Tunables (edit + reload to retune):
 const GYRUS_BUMP = {
   enabled: true, // false skips the shader injection entirely (true off switch)
   scale: 0.6, // how hard the shaded normal is bent (0 = flat, but still compiled)
-  freq: 5.5, // base fold frequency in local units (higher = finer gyri)
-  octaves: 3, // ridged-fBm layers of fold detail
-  eps: 0.015, // finite-difference step used to take the height gradient
+  freq: 1.1, // overall pattern frequency in local units (higher = smaller curls)
+  warp: 3.0, // domain-warp strength: how much straight bands swirl into curls
+  bands: 0.9, // sine bands per noise unit: how tightly the curl lines pack
+  octaves: 2, // fractal-noise layers feeding the warp + base field (low = clean loops)
+  eps: 0.02, // finite-difference step used to take the height gradient
 };
 
 // Format a JS number as a GLSL float literal (always with a decimal point so it
@@ -568,7 +575,7 @@ function injectGyrusBump(shader) {
 
   // Fragment prelude: varyings, the renderer-supplied normalMatrix (vertex-only
   // by default, so we declare it here to use it in the fragment), and a compact
-  // value-noise ridged-fBm height field matching the geometry's gyri.
+  // value-noise field warped + banded into swirling "curls".
   const prelude = `
 varying vec3 vGyrPos;
 varying vec3 vGyrNormal;
@@ -590,19 +597,29 @@ float gyrNoise(vec3 x){
         mix(gyrHash(i + vec3(0.0,1.0,1.0)), gyrHash(i + vec3(1.0,1.0,1.0)), f.x), f.y),
     f.z);
 }
-float gyrHeight(vec3 p){
-  vec3 q = p * ${glslFloat(GYRUS_BUMP.freq)};
-  float sum = 0.0, amp = 1.0, norm = 0.0, weight = 1.0;
+// Smooth fractal noise (plain fBm), centred ~[-1, 1].
+float gyrFbm(vec3 p){
+  float sum = 0.0, amp = 0.5, norm = 0.0;
   for (int o = 0; o < GYR_OCTAVES; o++){
-    float n = gyrNoise(q) * 2.0 - 1.0;        // [-1, 1]
-    float r = (1.0 - abs(n)) * weight;        // ridged + multifractal gating
-    sum += amp * r;
-    weight = clamp(r * 2.0, 0.0, 1.0);
+    sum += amp * (gyrNoise(p) * 2.0 - 1.0);
     norm += amp;
     amp *= 0.5;
-    q *= 2.0;
+    p *= 2.0;
   }
   return sum / norm;
+}
+// Height field of "little curls": a fractal field is domain-warped by another
+// fractal vector (this is what swirls the bands), then sin() turns its smooth
+// iso-levels into closed, fingerprint-like loops.
+float gyrHeight(vec3 p){
+  vec3 q = p * ${glslFloat(GYRUS_BUMP.freq)};
+  vec3 w = vec3(
+    gyrFbm(q),
+    gyrFbm(q + vec3(5.2, 1.3, 2.8)),
+    gyrFbm(q + vec3(2.1, 7.4, 3.5))
+  );
+  float base = gyrFbm(q + ${glslFloat(GYRUS_BUMP.warp)} * w);
+  return sin(base * ${glslFloat(GYRUS_BUMP.bands)} * 6.2831853);
 }
 `;
 

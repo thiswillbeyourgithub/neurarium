@@ -420,35 +420,36 @@ PAIRED: list[dict[str, Any]] = [
          # four stay tellable apart: frontal=rose, parietal=pink, temporal=salmon,
          # occipital=mauve-pink.
          pos=(1.3, 1.0, 2.2), color="#c58c9a",
-         # Largest lobe; gyrified cortex rendered with ridged multi-octave noise
-         # so the surface reads as winding gyri/sulci rather than random lumps.
+         # Largest lobe; a smooth gyrified dome whose surface "curls" are a
+         # shading normal-map (GYRUS_BUMP in shapes.js), not geometry, so the mesh
+         # stays smooth (no faceting) and the curls are lighting only.
          # Anterior-superior quadrant of the hemisphere; `medial` gives it a flat
          # wall at the midline so left+right meet at the longitudinal fissure.
          # Lobes are sized to overlap their neighbors so the union reads as one
          # continuous cortical surface (no gaps) when assembled at explode 0.
-         radii=(1.6, 1.8, 2.1), seed=11, detail=6, noise=0.20,
-         octaves=2, ridged=True, frequency=3.6, medial=True),
+         radii=(1.6, 1.8, 2.1), seed=11, detail=6, noise=0.10,
+         octaves=2, medial=True),
     dict(base="parietal", name="Parietal lobe", group="lobe",
          pos=(1.25, 1.8, -0.2), color="#c69597",
          # Superior-posterior quadrant, behind the frontal and above the
-         # occipital; gyrified, with a flat medial wall at the fissure.
-         radii=(1.6, 1.7, 1.8), seed=12, detail=6, noise=0.20,
-         octaves=2, ridged=True, frequency=3.6, medial=True),
+         # occipital; smooth dome with a flat medial wall at the fissure (the
+         # surface "curls" are a shading normal-map, see GYRUS_BUMP in shapes.js).
+         radii=(1.6, 1.7, 1.8), seed=12, detail=6, noise=0.10,
+         octaves=2, medial=True),
     dict(base="temporal", name="Temporal lobe", group="lobe",
          pos=(1.95, -0.75, 0.6), color="#c79a8e",
-         # Inferior-lateral, elongated antero-posteriorly (a finger-shaped lobe);
-         # gyrified, gyri stretch along its long axis. It sits below the Sylvian
-         # fissure so it is NOT medial (stays lateral, not at the midline); its
-         # top is clipped flat (ymax) to seat under the fronto-parietal mass.
-         radii=(1.25, 1.1, 2.15), seed=13, detail=6, noise=0.18,
-         octaves=2, ridged=True, frequency=3.6,
-         clip=dict(ymax=0.95)),
+         # Inferior-lateral, elongated antero-posteriorly (a finger-shaped lobe).
+         # It sits below the Sylvian fissure so it is NOT medial (stays lateral,
+         # not at the midline); its top is clipped flat (ymax) to seat under the
+         # fronto-parietal mass.
+         radii=(1.25, 1.1, 2.15), seed=13, detail=6, noise=0.10,
+         octaves=2, clip=dict(ymax=0.95)),
     dict(base="occipital", name="Occipital lobe", group="lobe",
          pos=(1.1, 0.75, -2.9), color="#bf8da6",
-         # Smallest lobe, the posterior pole; compact and gyrified, behind the
-         # parietal and above the cerebellum, with a flat medial wall.
-         radii=(1.45, 1.5, 1.6), seed=14, detail=6, noise=0.20,
-         octaves=2, ridged=True, frequency=3.6, medial=True),
+         # Smallest lobe, the posterior pole; compact, behind the parietal and
+         # above the cerebellum, with a flat medial wall.
+         radii=(1.45, 1.5, 1.6), seed=14, detail=6, noise=0.10,
+         octaves=2, medial=True),
     dict(base="insula", name="Insula", group="lobe", fr_gender="f",
          pos=(2.5, 0.05, 0.55), color="#ae7aa3",
          # The hidden 5th lobe: cortex buried deep to the lateral (Sylvian)
@@ -459,8 +460,8 @@ PAIRED: list[dict[str, Any]] = [
          # NOTE: as a `lobe` blob it takes part in the same-group jigsaw clip
          # against the big lobes; its small size means the seams cut a fair bit
          # off it. Position/size are an anatomical guess: tune in a browser.
-         radii=(0.5, 1.0, 1.25), seed=15, detail=6, noise=0.16,
-         octaves=2, ridged=True, frequency=3.6),
+         radii=(0.5, 1.0, 1.25), seed=15, detail=6, noise=0.10,
+         octaves=2),
     # --- Basal ganglia & deep nuclei (small, inner) ---
     dict(base="caudate", name="Caudate nucleus", group="basal_ganglia",
          pos=(1.2, 1.2, 0.8), color="#ff9da7",

@@ -11,8 +11,8 @@ Guidance for Claude Code (and humans) working in this repository.
 
 A browser-based 3D brain visualizer built on [three.js](https://threejs.org/).
 It shows brain regions (cortical lobes, basal ganglia / deep nuclei,
-diencephalon, limbic, hindbrain) as procedurally shaped meshes (gyrified cortex,
-smooth deep nuclei, foliated cerebellum,
+diencephalon, limbic, hindbrain) as procedurally shaped meshes (curl-shaded
+cortical lobes, smooth deep nuclei, foliated cerebellum,
 swept-tube caudate/brainstem/hippocampus/cingulate/fornix)
 and draws arrows for neuron projections between them. Region `group` values
 (`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`) drive the legend
@@ -80,8 +80,10 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
                       "blob" {radii, seed, detail, noise, + optional
                       octaves/ridged/frequency/aniso/clip/clip_planes} = a
                       gradient-noise-deformed ellipsoid (the optional fields turn
-                      the smooth surface into gyrified cortex or foliated
-                      cerebellum, `clip` cuts axis-aligned flat faces e.g. the
+                      the smooth surface into foliated cerebellum; the cortical
+                      lobes stay smooth domes and get their "curl" surface from a
+                      normal-map shader instead, see js/shapes.js GYRUS_BUMP),
+                      `clip` cuts axis-aligned flat faces e.g. the
                       lobes' medial wall, and `clip_planes` are the generated
                       bisecting cuts between overlapping neighbours so adjacent
                       regions tile flush like jigsaw pieces instead of inter-
@@ -115,10 +117,11 @@ js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       geometry across x (mirrorGeometryX) for the left member of
                       a pair. Self-contained gradient (Perlin) noise +
                       fractal/ridged/domain-warp helpers (fractalNoise). Cortical
-                      lobes also get fine gyri as a procedural normal-map bump
-                      injected into their material (injectGyrusBump /
-                      GYRUS_BUMP), so the geometry stays a smooth broad fold and
-                      the folds are shading, not triangles. buildBlobGeometry also
+                      lobes are smooth domes that get a stylized "curl" pattern as
+                      a procedural normal-map bump injected into their material
+                      (injectGyrusBump / GYRUS_BUMP: a domain-warped, sine-banded
+                      noise field whose iso-loops read as little swirls), so the
+                      surface pattern is shading, not triangles. buildBlobGeometry also
                       honours `clip_planes` (the generated inter-region jigsaw
                       cuts) when the `JIGSAW_CLIP.enabled` flag is on. No JS deps
                       beyond three.js.
@@ -699,15 +702,16 @@ as the WIP banner (`js/error-banner.js`):
      (`radii`/`seed`/`detail`/`noise`). Optional surface knobs shape the
      character of that noise (consumed by `buildBlobGeometry` in `js/shapes.js`):
      - `octaves` (default 1): fBm layers; >1 adds finer wrinkles on the broad
-       form. Cortex uses ~2 (kept low on purpose: the *fine* gyri are a normal
-       map, see below, so the geometry only needs broad folds). The ridged path
-       is a ridged-multifractal: each finer octave is gated by the coarser one's
-       ridge strength, so troughs stay smooth instead of filling with creases.
+       form. Cortex uses ~2 with a small `noise` so the lobes stay smooth broad
+       domes (the surface *curls* are a normal map, see below, not geometry). The
+       ridged path is a ridged-multifractal: each finer octave is gated by the
+       coarser one's ridge strength, so troughs stay smooth instead of filling
+       with creases.
      - `ridged` (default False): fold the noise into sharp creases along its
-       zero-set. This is what turns lumps into gyri/folia. Needs higher `detail`
-       (6) and lower `noise` than a smooth blob, and a `frequency` that sets how
-       many folds (cortex ~3.6, kept low so each fold spans enough triangles to
-       resolve smoothly; pushing it higher reintroduces per-triangle faceting).
+       zero-set. This is what turns lumps into folia (the cerebellum). Needs
+       higher `detail` (6) and lower `noise` than a smooth blob, and a `frequency`
+       that sets how many folds. (The cortical lobes no longer use it: they are
+       smooth domes carrying a curl normal-map instead.)
      - `frequency` (default 2.4): noise lattice frequency; higher = smaller,
        more numerous folds.
      - `aniso` ([ax,ay,az], default [1,1,1]): per-axis frequency skew. Equal =
@@ -731,13 +735,16 @@ as the WIP banner (`js/error-banner.js`):
        `JIGSAW_CLIP.enabled` flag in `js/shapes.js` is the A/B switch: turn it off
        to ignore the planes (regions overlap as before) without regenerating; the
        medial wall is independent and always applied.
-     - Fine cortical gyri are *not* geometry: every `group=="lobe"` structure
-       gets a procedural ridged-fBm bump injected into its material
-       (`injectGyrusBump` / the `GYRUS_BUMP` knobs in `js/shapes.js`), which
-       perturbs the per-fragment normal so the lighting shows crisp winding
-       folds with no extra triangles or faceting. Tune fold size/strength via
-       `GYRUS_BUMP` (`enabled:false` skips the shader entirely; `scale:0` keeps
-       it compiled but flat); it lives in JS, not the data.
+     - The cortical surface pattern is *not* geometry: every `group=="lobe"`
+       structure gets a procedural "curl" bump injected into its material
+       (`injectGyrusBump` / the `GYRUS_BUMP` knobs in `js/shapes.js`). The height
+       field is a domain-warped, sine-banded noise field whose iso-loops close
+       into little swirls; its gradient perturbs the per-fragment normal so the
+       lighting shows soft curls with no extra triangles or faceting. Tune via
+       `GYRUS_BUMP`: `freq` (curl size), `warp` (how swirly), `bands` (line
+       packing), `scale` (relief), `octaves` (low = clean loops); `enabled:false`
+       skips the shader entirely, `scale:0` keeps it compiled but flat. It lives
+       in JS, not the data.
    - Give a region a `shape=dict(type="curve", ...)` for a round-capped tapered
      tube instead of an ellipsoid (the caudate, the brainstem): `points` is the
      spine head->tail, `profile` the radius sampled along it (caps close each
