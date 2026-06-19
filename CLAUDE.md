@@ -645,7 +645,12 @@ as the WIP banner (`js/error-banner.js`):
   shows its label, and opens its structure panel (below);
   picking a connection frames its two endpoints and opens the connection panel.
   Connection results carry a hemisphere tag (`R` / `L` / `L↔R`) so the mirrored
-  twins stay distinct (`connectionSideTag` in `js/main.js`).
+  twins stay distinct (`connectionSideTag` in `js/main.js`). **Ctrl/Cmd+F** is a
+  shortcut for the same search: a `window` keydown listener intercepts it (so the
+  browser's native page-find, useless on a canvas + data app, never opens),
+  expands the panel if it was collapsed (the search box lives inside the panel
+  body) and opens search focused on its input; pressing it again while open just
+  refocuses + selects the text. **Escape** closes search.
 - **Info panel** (bottom-right, `createInfoPanel` in `js/main.js`): one panel
   that shows either a *connection* or a *structure*.
   - **Clicking/tapping an arrow** (or picking a connection in search) shows the

@@ -1215,7 +1215,21 @@ function wireToolbar({ focus, meshes, arrows, selection, selectStructure, select
     }
   }
 
+  // The search box lives inside the (collapsible) panel body, so opening search
+  // from the Ctrl/Cmd+F shortcut must also expand a collapsed panel, otherwise
+  // the box would be revealed inside a hidden body. Done by DOM here (the panel
+  // collapse lives in wireControls, a separate scope).
+  const controlsToggle = document.getElementById("controls-toggle");
+  const controlsBody = document.getElementById("controls-body");
+  function ensurePanelOpen() {
+    if (controlsToggle && controlsBody && controlsBody.hidden) {
+      controlsToggle.setAttribute("aria-expanded", "true");
+      controlsBody.hidden = false;
+    }
+  }
+
   function openSearch() {
+    ensurePanelOpen();
     controlsMain.hidden = true; // swap the sliders/legend out...
     searchBox.hidden = false; // ...and the search in, in their place
     searchToggle.classList.add("active");
@@ -1240,6 +1254,22 @@ function wireToolbar({ focus, meshes, arrows, selection, selectStructure, select
       if (first) first.click();
     } else if (event.key === "Escape") {
       closeSearch();
+    }
+  });
+
+  // Ctrl/Cmd+F opens our in-panel search instead of the browser's native find
+  // (which would be useless here: the structures/connections are canvas + data,
+  // not page text). If search is already open we just re-focus and select its
+  // text so a second press lets the user retype straight away.
+  window.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && (event.key === "f" || event.key === "F")) {
+      event.preventDefault();
+      if (searchBox.hidden) {
+        openSearch();
+      } else {
+        searchInput.focus();
+        searchInput.select();
+      }
     }
   });
 }
