@@ -133,6 +133,10 @@ tools/serve.py        Stdlib static dev server that sends Cache-Control:no-store
                       of `python -m http.server` while developing; see Running).
 deploy.sh             Uncommitted, environment-specific: rsyncs the tree to the
                       VPS (no GitHub) and restarts the container.
+tools/git-hooks/      Repo-tracked git hooks (single source of truth). Currently
+                      pre-push, which refuses to push any branch other than
+                      main. Activated per-clone with
+                      `git config core.hooksPath tools/git-hooks` (see Git hooks).
 ```
 
 Why a generator instead of hand-written data files: most regions are symmetric
@@ -223,6 +227,23 @@ binary's `cap_net_bind_service` file capability, which otherwise makes `exec`
 fail under `no-new-privileges` (`exec /usr/bin/caddy: operation not permitted`);
 the project root is bind-mounted read-only at `/srv` at runtime. The deploy runs
 `docker compose build --pull` then `up -d --force-recreate`.
+
+## Git hooks
+
+The repo ships its git hooks under `tools/git-hooks/` (tracked, so they are the
+single source of truth, not copied into `.git/hooks`). They are activated
+**per-clone** by pointing git at that directory once:
+
+```
+git config core.hooksPath tools/git-hooks
+```
+
+That setting lives in `.git/config` and is *not* committed, so every fresh clone
+must run it once (there is no build/install step otherwise). Current hooks:
+
+- `pre-push`: refuses to push any ref other than `main` (other branches, tags,
+  and deletes all crash the push). Deploy here is by rsync, not git, so `main`
+  is the only ref that should ever leave this machine.
 
 ## Analytics (umami)
 
