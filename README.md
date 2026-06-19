@@ -21,7 +21,7 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
   inhibitory / dopaminergic).
 - Controls:
   - **Auto-rotate** the view.
-  - **Blow-out (explode)** slider to spread the regions apart and reveal deep
+  - **Separate** slider to spread the regions apart and reveal deep
     structures.
   - **Transparency** slider to see through the outer regions.
   - Rotate with one finger / left-drag, pinch to zoom, two-finger drag to pan.

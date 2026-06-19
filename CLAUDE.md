@@ -434,7 +434,8 @@ as the WIP banner (`js/error-banner.js`):
   selection does not re-enable it. Wired via `selection.onPick(stopAutoRotate)`
   in `js/main.js`. Deep links / screenshots get it forced **off** by
   `applyViewParams` unless `?autorotate=1` is passed, so a framed view holds.
-- **Blow-out (explode)** slider (0..1): pushes each region radially outward from
+- **Separate** slider (0..1, labelled "Separate" in the UI; the explode/`?explode`
+  terminology lives on internally): pushes each region radially outward from
   the brain center to reveal deep structures. Tuning constant:
   `EXPLODE_STRENGTH` in `js/main.js`.
 - **Intro animation**: on a plain page load the regions start fully blown out

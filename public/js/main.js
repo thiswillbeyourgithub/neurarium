@@ -20,7 +20,7 @@ import { createLabels } from "./labels.js";
 
 // Explode slider is 0..1; this is how much extra radial distance the most
 // outward regions travel at slider = 1 (as a multiple of their base distance
-// from the brain center). Large enough that a full blow-out spreads the regions
+// from the brain center). Large enough that full separation spreads the regions
 // well apart (the deep nuclei get plenty of room to be inspected); the camera
 // maxDistance (see initThree) is comfortably beyond the farthest region so the
 // user can zoom out to see the whole spread.
