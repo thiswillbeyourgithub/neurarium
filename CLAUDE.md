@@ -742,18 +742,22 @@ arrows. It is split in two on purpose:
 - **`js/circuit-schedule.js` (the ordering, no three.js).** `scheduleCircuit`
   computes the firing order with **no hand-authored path**: the circuit's arrows
   are a directed graph (node = structure, edge = arrow, direction `from -> to`); a
-  breadth-first search spreads activation from a seed and each arrow's firing slot
-  (`phase`) is the BFS depth of its tail. Stepping a clock through the depths and
-  wrapping sweeps the pulses around and loops. It degrades gracefully on any arrow
-  set: **bilateral duplication** (every circuit is mirrored, so its arrows form
-  two disjoint L/R loops) is handled by seeding each *weakly-connected component*
-  separately, so the hemispheres pulse in sync; an off-cycle **feeder branch**
-  (e.g. the nigrostriatal dopamine input into the direct pathway) just fires when
-  activation reaches its tail, or at the top of the cycle if the seed never
-  reaches it, instead of breaking a single path. The **seed** per component is the
-  node whose structure `group == "lobe"` (cortex is the conventional top of these
-  loops), else the highest-out-degree node, else any. Kept dependency-free so this
-  ordering logic stays isolated and unit-testable.
+  breadth-first search spreads activation from the seeds and each arrow's firing
+  slot (`phase`) is the BFS depth of its tail. Stepping a clock through the depths
+  and wrapping sweeps the pulses around and loops. It degrades gracefully on any
+  arrow set. The **seed** per weakly-connected component is the node whose
+  structure `group == "lobe"` (cortex is the conventional top of these loops), else
+  the highest-out-degree node, else any. **Left-right symmetry** is enforced: the
+  seed set is *mirror-completed* (each seed's `_R`/`_L` twin is added, via
+  `mirrorId`) and the BFS is *multi-source*, so over a mirror-symmetric circuit the
+  mirror-paired nodes get equal depth and the two hemispheres pulse in step,
+  whether the circuit is two disjoint L/R loops (the direct pathway) or a single
+  component whose halves join through a shared **midline hub** (cortex -> brainstem
+  -> cerebellum -> thalamus), which a one-sided seed would otherwise sweep
+  asymmetrically. An off-cycle **feeder branch** (e.g. the nigrostriatal dopamine
+  input into the direct pathway) just fires when activation reaches its tail, or at
+  the top of the cycle if no seed reaches it, instead of breaking a single path.
+  Kept dependency-free so this ordering logic stays isolated and unit-testable.
 - **`js/circuit-anim.js` (the rendering).** `createCircuitAnimation` turns each
   scheduled slot into an additive glowing sphere riding that arrow's live curve
   (`arrow.curve`, exposed by `js/arrows.js` and rebuilt on every explode, so the
