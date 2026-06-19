@@ -174,9 +174,15 @@ export class ProjectionArrow {
     this.side = projection.from < projection.to ? 1 : -1;
 
     const color = new THREE.Color(colorHex);
-    // Arrows are not transparency-controlled with the structures: they should
-    // stay readable, so they use a flat, lit-independent material.
-    this.material = new THREE.MeshBasicMaterial({ color });
+    // Flat, lit-independent material so arrows stay readable. Created
+    // `transparent: true` from the start (like the structure material) even
+    // though it renders fully opaque by default: toggling `transparent` at
+    // runtime would need a material recompile (needsUpdate) to take visual
+    // effect, so setOpacity() below only ever changes `opacity`/`depthWrite` and
+    // the isolate-mode dimming actually shows. The global Transparency slider
+    // deliberately leaves arrows opaque (it never calls setOpacity); only the
+    // isolate/circuit focus fades them.
+    this.material = new THREE.MeshBasicMaterial({ color, transparent: true });
 
     // Tube geometry is rebuilt on every update(); start with a placeholder.
     this.tube = new THREE.Mesh(new THREE.BufferGeometry(), this.material);
@@ -328,10 +334,11 @@ export class ProjectionArrow {
    * don't touch a selected structure. The tube + cone(s) share `this.material`,
    * so one set covers them all; the invisible pick proxy is untouched. A faded
    * arrow stops writing depth so it doesn't occlude the structures behind it.
+   * The material is already `transparent: true` (see the constructor), so we
+   * never toggle that flag here, only the opacity + depth-write.
    * @param {number} opacity  1 = fully opaque (the default), lower = dimmer.
    */
   setOpacity(opacity) {
-    this.material.transparent = opacity < 1;
     this.material.opacity = opacity;
     this.material.depthWrite = opacity >= 1;
   }
