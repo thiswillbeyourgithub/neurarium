@@ -8,12 +8,18 @@
 // consume it.
 //
 // In production this file is served through Caddy's `templates` module, which
-// replaces the {{env "..."}} placeholders with the container's environment
+// replaces the env placeholders below with the container's environment
 // variables (ANALYTICS_* and DEV from docker/.env, STARTED_AT stamped at
 // container start). See docker/Caddyfile + docker/docker-compose.yml.
 //
+// NOTE: keep Go-template action markers (a doubled curly brace) out of this
+// file's comments. Caddy parses the WHOLE file as one template, so a stray
+// marker in prose makes the parse fail and the file 500s, which takes the umami
+// tag AND the DEV banner down together. Only the deliberate env placeholders
+// below may use them.
+//
 // When served WITHOUT templating (e.g. local dev via `python -m http.server`),
-// the placeholders stay literal; the consumers detect the leftover "{{" and
+// the placeholders stay literal; the consumers detect the leftover markers and
 // treat the feature as off, so nothing breaks.
 window.__APP_CONFIG__ = {
   url: '{{env "ANALYTICS_URL"}}',
