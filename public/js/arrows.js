@@ -56,14 +56,10 @@ function surfaceToward(mesh, fromPoint) {
   return hits.length ? hits[0].point.clone() : null;
 }
 
-// Arrow color per projection kind. The single source of truth for these
-// colours: the legend (js/main.js) and the labels read them back from here, so
-// there is nothing to keep in sync by hand.
-export const PROJECTION_COLORS = {
-  excitatory: "#e15759", // glutamatergic / excitatory -> red
-  inhibitory: "#4e79a7", // GABAergic / inhibitory -> blue
-  dopaminergic: "#59a14f", // modulatory dopamine -> green
-};
+// Arrow colour per projection comes from the data: each projection record
+// carries a resolved `color` (data.js fills it from the generator's kind->colour
+// meta map). The viewer reads `projection.color` everywhere, so the palette has
+// a single source (tools/generate_data.py) and the dataset is self-describing.
 
 const TUBE_RADIUS = 0.1;
 const CONE_LENGTH = 0.4;
@@ -99,7 +95,7 @@ export class ProjectionArrow {
    * @param {THREE.Mesh} fromMesh  Source structure mesh.
    * @param {THREE.Mesh} toMesh    Target structure mesh.
    * @param {object} projection    The projection record (from/to/kind/label/...).
-   * @param {string} colorHex      Arrow color (see PROJECTION_COLORS).
+   * @param {string} colorHex      Arrow color (the projection's resolved `color`).
    */
   constructor(fromMesh, toMesh, projection, colorHex) {
     this.fromMesh = fromMesh;
@@ -293,7 +289,7 @@ export function buildArrows(projections, meshById) {
       console.warn(`Skipping projection ${proj.from} -> ${proj.to}: missing structure`);
       continue;
     }
-    const color = PROJECTION_COLORS[proj.kind] || "#ffffff";
+    const color = proj.color || "#ffffff";
     arrows.push(new ProjectionArrow(fromMesh, toMesh, proj, color));
   }
   return arrows;

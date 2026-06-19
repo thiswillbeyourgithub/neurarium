@@ -11,7 +11,6 @@
 // any name text or positioning logic.
 
 import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
-import { PROJECTION_COLORS } from "./arrows.js";
 
 /**
  * Create the label overlay and attach hidden labels to structures and arrows.
@@ -72,7 +71,7 @@ export function createLabels(meshes, arrows, parentEl) {
     el.textContent = arrow.projection.label;
     el.style.setProperty(
       "--label-color",
-      PROJECTION_COLORS[arrow.projection.kind] || "#ffffff",
+      arrow.projection.color || "#ffffff",
     );
     const label = new CSS2DObject(el);
     label.position.set(0, 0, 0);

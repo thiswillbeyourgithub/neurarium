@@ -16,8 +16,10 @@ smooth deep nuclei, foliated cerebellum,
 swept-tube caudate/brainstem/hippocampus/cingulate/fornix)
 and draws arrows for neuron projections between them. Region `group` values
 (`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`) drive the legend
-headings + ordering via `GROUP_LABELS` in `js/main.js`; adding a new group means
-adding it there too or its structures are dropped from the legend. At explode 0 the regions are positioned and shaped to
+headings + ordering via the `GROUP_LABELS` map in `tools/generate_data.py`, which
+is emitted into the data's `meta` record and read by the viewer; adding a new
+group means adding it there too or its structures are dropped from the legend.
+At explode 0 the regions are positioned and shaped to
 lock together into a whole brain (the cortical lobes tile a hemisphere with a
 flat medial wall at the longitudinal fissure); the explode slider blows them
 radially apart to reveal the deep nuclei. On load the regions start blown out
@@ -44,6 +46,10 @@ Authoring + dev tooling live in `tools/` (`generate_data.py`, `serve.py`,
 tools/generate_data.py  Single source of truth for the anatomy. Defines every
                       region + projection once and emits the two artifacts below.
 data/brain.jsonl      One JSON object per line. Each line is one of:
+                        - a "meta" record (the first line): the presentation maps
+                          projection_colors (kind -> arrow colour) and group_labels
+                          (group -> legend heading), so the dataset is self-
+                          describing and a port needs no hardcoded palette
                         - a "structure" (region): id, name, group, position,
                           color, shape_file
                         - a "projection": from, to, kind, label,
@@ -82,7 +88,11 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       plus the in-place search box and
                       the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches brain.jsonl + all shape files, returns a normalized
-                      {structures, projections, byId} object.
+                      {structures, projections, circuits, byId, meta} object. It
+                      reads the meta record's maps and resolves each projection's
+                      arrow `color` from its kind (so the viewer reads
+                      `projection.color`, never a hardcoded palette); `meta`
+                      carries {projectionColors, groupLabels}.
 js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       dispatches on shape.type to buildBlobGeometry (deformed
                       ellipsoid), buildCurveGeometry (round-capped tapered tube
@@ -98,8 +108,10 @@ js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       honours `clip_planes` (the generated inter-region jigsaw
                       cuts) when the `JIGSAW_CLIP.enabled` flag is on. No JS deps
                       beyond three.js.
-js/arrows.js          Builds curved tube+cone arrows for projections; colors per
-                      projection `kind` live here (PROJECTION_COLORS).
+js/arrows.js          Builds curved tube+cone arrows for projections; each
+                      arrow's colour comes from its `projection.color` (resolved
+                      by js/data.js from the data's meta map, single source
+                      tools/generate_data.py), not a hardcoded table here.
 js/labels.js          Floating structure-name labels (three.js CSS2DRenderer):
                       one hidden label per region, shown on hover or all at once.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
@@ -541,7 +553,8 @@ as the WIP banner (`js/error-banner.js`):
     picking (`pickArrowAt`) takes priority over the region behind it.
   - **Clicking/tapping a structure** (or a double-click, or a structure search
     result) shows the **structure** view (`showStructure`): its name, its group
-    (`GROUP_LABELS`), and the list of pathways touching it. Each connection row
+    heading (from `data.meta.groupLabels`), and the list of pathways touching it.
+    Each connection row
     shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
     receives, `↔` reciprocal) and the other endpoint; **clicking a row jumps to
     that pathway** (frames the endpoints, halos the arrow, swaps in the
@@ -664,10 +677,13 @@ as the WIP banner (`js/error-banner.js`):
      `_L` on both endpoints; midline endpoints stay put). Set
      `"symmetric": False` on an entry to keep a genuinely one-sided pathway from
      being mirrored. The flag is a generator hint and is stripped from the data.
-   - Projection `kind` must be a key of `PROJECTION_COLORS` in `js/arrows.js`
-     (`excitatory`, `inhibitory`, `dopaminergic`); add new kinds there + in this
-     doc if needed. `kind` drives the arrow *color*; `neurotransmitter` is the
-     finer label shown in the info panel.
+   - Projection `kind` must be a key of `PROJECTION_COLORS` in
+     `tools/generate_data.py` (`excitatory`, `inhibitory`, `dopaminergic`); add
+     new kinds there (the generator raises if a projection uses an unmapped kind)
+     + in this doc if needed. The map is emitted into the data's `meta` record and
+     each projection gets a resolved `color` at load, so the viewer never
+     hardcodes the palette. `kind` drives the arrow *color*; `neurotransmitter` is
+     the finer label shown in the info panel.
    - To add a named **circuit**, append to the `CIRCUITS` list: `id`, `name`, and
      `structures` as **base** ids (no `_R`/`_L`). The generator expands each base
      to whatever was emitted (both hemispheres, or the bare id for a midline form)
@@ -698,10 +714,14 @@ Lightweight, no-build versioning suited to this static site:
 
 ## Conventions
 
-- No JS build step or package manager: three.js is loaded from a CDN via an
-  import map in `index.html` (pinned version). Keep the `three` and
-  `three/addons/` versions in that import map in sync.
+- No JS build step or package manager: three.js is vendored same-origin under
+  `public/vendor/three` and loaded via an import map in `index.html`. Keep the
+  `three` and `three/addons/` entries in that import map pointing at the vendored
+  files, and bump the vendored copy as a unit.
 - `generate_data.py` is intentionally stdlib-only so it runs offline with a bare
   `python` interpreter.
-- Avoid duplicating the anatomy: positions/colors/shape params live only in
-  `generate_data.py`; projection colors live only in `js/arrows.js`.
+- Avoid duplicating the anatomy *and its presentation maps*:
+  positions/colors/shape params, the projection `kind`->colour map and the
+  `group`->legend-heading map all live only in `generate_data.py`; the latter two
+  are emitted into the data's `meta` record and read by the viewer, so there is
+  no second copy in JS.

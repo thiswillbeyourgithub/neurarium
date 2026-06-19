@@ -15,7 +15,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { loadBrainData } from "./data.js";
 import { buildStructureMesh } from "./shapes.js";
-import { buildArrows, PROJECTION_COLORS } from "./arrows.js";
+import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
 
 // Explode slider is 0..1; this is how much extra radial distance the most
@@ -353,17 +353,6 @@ function createSelection({ meshes, arrows }) {
   };
 }
 
-// Human-friendly headings per structure `group` value, in display order. A
-// structure whose group is missing here is left out of the legend, so keep this
-// in sync with the groups used in generate_data.py.
-const GROUP_LABELS = {
-  lobe: "Lobes",
-  basal_ganglia: "Basal ganglia / deep nuclei",
-  diencephalon: "Diencephalon",
-  limbic: "Limbic",
-  hindbrain: "Hindbrain",
-};
-
 /**
  * Append one swatch+label row to a container. `line` renders a thin bar.
  * @returns {HTMLElement} the created row, so callers can wire it up.
@@ -408,7 +397,7 @@ function buildLegend(data, meshById, arrows, selection) {
   const structureRows = [];
   const groupHeadings = [];
 
-  for (const [group, heading] of Object.entries(GROUP_LABELS)) {
+  for (const [group, heading] of Object.entries(data.meta.groupLabels)) {
     const inGroup = data.structures.filter((s) => s.group === group);
     if (inGroup.length === 0) continue;
     const h = document.createElement("h2");
@@ -464,10 +453,12 @@ function buildLegend(data, meshById, arrows, selection) {
     legend.appendChild(h);
     for (const nt of neurotransmitters) {
       const ntArrows = arrows.filter((a) => a.projection.neurotransmitter === nt);
-      // The kind (hence colour) carrying this transmitter, read off its arrows.
-      const kind = ntArrows[0] && ntArrows[0].projection.kind;
+      // The kind (the functional label) and colour carrying this transmitter,
+      // both read off its arrows (each projection carries its resolved colour).
+      const sample = ntArrows[0] && ntArrows[0].projection;
+      const kind = sample && sample.kind;
       const label = kind ? `${nt} (${kind})` : nt;
-      const row = addLegendItem(legend, PROJECTION_COLORS[kind] || "#fff", label, true);
+      const row = addLegendItem(legend, (sample && sample.color) || "#fff", label, true);
       // Endpoints of those arrows, kept opaque so an isolated transmitter still
       // reads as connecting real regions rather than floating in a dimmed brain.
       const ntMeshes = [...new Set(ntArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
@@ -597,7 +588,7 @@ function createInfoPanel(data) {
       // Kind swatch + kind/transmitter text.
       const meta = el("div", "info-meta");
       const swatch = el("span", "swatch line");
-      swatch.style.background = PROJECTION_COLORS[proj.kind] || "#fff";
+      swatch.style.background = proj.color || "#fff";
       meta.appendChild(swatch);
       meta.appendChild(el(
         "span", null,
@@ -642,7 +633,8 @@ function createInfoPanel(data) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", structure.name));
       body.appendChild(el(
-        "div", "info-group", GROUP_LABELS[structure.group] || structure.group,
+        "div", "info-group",
+        data.meta.groupLabels[structure.group] || structure.group,
       ));
 
       // Pathways with this structure at either end, in the data's order.
@@ -668,7 +660,7 @@ function createInfoPanel(data) {
         const li = el("li");
         li.title = proj.label || "";
         const swatch = el("span", "swatch line");
-        swatch.style.background = PROJECTION_COLORS[proj.kind] || "#fff";
+        swatch.style.background = proj.color || "#fff";
         li.appendChild(swatch);
         li.appendChild(el("span", "conn-dir", glyph));
         li.appendChild(el("span", "conn-label", nameOf(otherId)));

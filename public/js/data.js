@@ -40,11 +40,16 @@ async function fetchOrThrow(url) {
  * @typedef {Object} BrainData
  * @property {object[]} structures  Region records (type === "structure"), each
  *   augmented with a resolved `shape` payload from its shapes/<id>.json file.
- * @property {object[]} projections Directed pathway records (type === "projection").
+ * @property {object[]} projections Directed pathway records (type === "projection"),
+ *   each augmented with a resolved `color` (from the kind->colour meta map).
  * @property {object[]} circuits    Named circuit records (type === "circuit"):
  *   `{id, name, structures:[structure ids]}`. The arrows belonging to a circuit
  *   are derived in the viewer (both endpoints among `structures`).
  * @property {Map<string, object>} byId  structure id -> structure record.
+ * @property {{projectionColors: Object<string,string>,
+ *   groupLabels: Object<string,string>}} meta  Presentation maps emitted by the
+ *   generator (kind->arrow colour, group->legend heading) so the dataset is
+ *   self-describing rather than relying on hardcoded values in the viewer.
  */
 
 /**
@@ -61,6 +66,20 @@ export async function loadBrainData(jsonlUrl = "data/brain.jsonl") {
   const projections = records.filter((r) => r.type === "projection");
   const circuits = records.filter((r) => r.type === "circuit");
 
+  // Presentation maps emitted by the generator (kind->arrow colour,
+  // group->legend heading), so the palette/headings live in the data, not
+  // hardcoded in the viewer.
+  const metaRecord = records.find((r) => r.type === "meta") || {};
+  const projectionColors = metaRecord.projection_colors || {};
+  const groupLabels = metaRecord.group_labels || {};
+
+  // Resolve each projection's arrow colour from its kind, mirroring how each
+  // structure carries its own `color`, so the rest of the app reads
+  // `projection.color` and never reaches for a colour map.
+  for (const p of projections) {
+    p.color = projectionColors[p.kind] || "#ffffff";
+  }
+
   // Fetch all shape files in parallel and attach them to their structure.
   await Promise.all(
     structures.map(async (s) => {
@@ -69,5 +88,11 @@ export async function loadBrainData(jsonlUrl = "data/brain.jsonl") {
   );
 
   const byId = new Map(structures.map((s) => [s.id, s]));
-  return { structures, projections, circuits, byId };
+  return {
+    structures,
+    projections,
+    circuits,
+    byId,
+    meta: { projectionColors, groupLabels },
+  };
 }

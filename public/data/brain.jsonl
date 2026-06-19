@@ -1,3 +1,4 @@
+{"type": "meta", "projection_colors": {"excitatory": "#e15759", "inhibitory": "#4e79a7", "dopaminergic": "#59a14f"}, "group_labels": {"lobe": "Lobes", "basal_ganglia": "Basal ganglia / deep nuclei", "diencephalon": "Diencephalon", "limbic": "Limbic", "hindbrain": "Hindbrain"}}
 {"type": "structure", "id": "frontal_R", "name": "Right frontal lobe", "group": "lobe", "position": [1.3, 1.0, 2.2], "color": "#c58c9a", "shape_file": "shapes/frontal.json"}
 {"type": "structure", "id": "frontal_L", "name": "Left frontal lobe", "group": "lobe", "position": [-1.3, 1.0, 2.2], "color": "#c58c9a", "shape_file": "shapes/frontal.json", "mirror": true}
 {"type": "structure", "id": "parietal_R", "name": "Right parietal lobe", "group": "lobe", "position": [1.25, 1.8, -0.2], "color": "#c69597", "shape_file": "shapes/parietal.json"}

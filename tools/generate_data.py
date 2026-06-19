@@ -47,6 +47,37 @@ log = logging.getLogger("generate_data")
 
 
 # ---------------------------------------------------------------------------
+# Presentation maps (emitted into the data so the dataset is self-describing)
+#
+# Display metadata, not anatomy, but the viewer reads them straight from the
+# data (a ``meta`` record) rather than hardcoding them in JS: a projection
+# ``kind`` -> arrow colour, and a structure ``group`` -> legend heading. Keeping
+# them here (the single source of truth) means another engine consuming
+# brain.jsonl gets the colours + headings for free, with no copy to keep in sync
+# in the viewer. build_records() validates that every kind/group used by the
+# data has an entry here, so an unmapped value fails loudly at generation.
+# ---------------------------------------------------------------------------
+
+# Arrow colour per projection ``kind`` (the functional class): glutamate ->
+# excitatory (red), GABA -> inhibitory (blue), dopamine -> modulatory (green).
+PROJECTION_COLORS: dict[str, str] = {
+    "excitatory": "#e15759",
+    "inhibitory": "#4e79a7",
+    "dopaminergic": "#59a14f",
+}
+
+# Structure ``group`` -> legend heading, in legend display order (object key
+# order is preserved through JSON, so the viewer's legend follows this order).
+GROUP_LABELS: dict[str, str] = {
+    "lobe": "Lobes",
+    "basal_ganglia": "Basal ganglia / deep nuclei",
+    "diencephalon": "Diencephalon",
+    "limbic": "Limbic",
+    "hindbrain": "Hindbrain",
+}
+
+
+# ---------------------------------------------------------------------------
 # Anatomy definition (the single source of truth)
 #
 # Coordinate convention (arbitrary units, brain centered on the origin):
@@ -985,6 +1016,28 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
             "name": circuit["name"],
             "structures": ids,
         })
+
+    # Presentation metadata, emitted as the first record so a consumer reading
+    # brain.jsonl is self-contained (arrow colours + legend headings live in the
+    # data, not only in the viewer's JS). Fail loudly if the data uses a kind or
+    # group with no entry in the maps above.
+    kinds = {r["kind"] for r in jsonl if r["type"] == "projection"}
+    missing_kinds = kinds - PROJECTION_COLORS.keys()
+    if missing_kinds:
+        raise KeyError(
+            f"Projection kind(s) with no PROJECTION_COLORS entry: "
+            f"{sorted(missing_kinds)}")
+    groups = {r["group"] for r in jsonl if r["type"] == "structure"}
+    missing_groups = groups - GROUP_LABELS.keys()
+    if missing_groups:
+        raise KeyError(
+            f"Structure group(s) with no GROUP_LABELS entry: "
+            f"{sorted(missing_groups)}")
+    jsonl.insert(0, {
+        "type": "meta",
+        "projection_colors": PROJECTION_COLORS,
+        "group_labels": GROUP_LABELS,
+    })
 
     return jsonl, shapes
 
