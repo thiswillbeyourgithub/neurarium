@@ -174,13 +174,13 @@
          just before the sliders. */
       .toolbar-row { display: flex; gap: 8px; margin: 2px 0 4px; }
 
-      /* Accordion: opening the Legend or About section hides the controls that
-         sit between the title and Auto-rotate (the reset/search row + the two
-         sliders, tagged .collapsible-control) so the open section's content does
-         not push the panel tall. Auto-rotate, Legend and About headers stay. Only
-         one of Legend/About is open at a time (enforced in js/main.js). A section
-         can only be opened when the controls are visible (no search), so this
-         never hides the toolbar mid-search. */
+      /* Accordion: opening the Legend or About section hides every control above
+         it (the language switch, the reset/search row, the two sliders and the
+         Auto-rotate checkbox, all tagged .collapsible-control) so the open
+         section's content does not push the panel tall. Only the Legend and About
+         headers stay. Only one of Legend/About is open at a time (enforced in
+         js/main.js). A section can only be opened when the controls are visible
+         (no search), so this never hides the toolbar mid-search. */
       #controls.section-open .collapsible-control { display: none; }
       .tool-btn {
         display: grid;
@@ -526,10 +526,11 @@
       </button>
 
       <div id="controls-body">
-        <!-- Language switch (en / fr). Not a .collapsible-control, so it stays
-             visible while a section is open. Buttons carry data-lang; js/i18n.js
-             marks the active one and reloads on switch. -->
-        <div id="lang-switch" class="lang-switch" role="group" aria-label="Language">
+        <!-- Language switch (en / fr). Tagged .collapsible-control so it hides
+             (with the sliders + auto-rotate) while a section is open. Buttons
+             carry data-lang; js/i18n.js marks the active one and reloads on
+             switch. -->
+        <div id="lang-switch" class="lang-switch collapsible-control" role="group" aria-label="Language">
           <button type="button" class="lang-btn" data-lang="en">EN</button>
           <button type="button" class="lang-btn" data-lang="fr">FR</button>
         </div>
@@ -572,10 +573,11 @@
             <input type="range" id="transparency" min="0.1" max="1" step="0.01" value="1" />
           </div>
 
-          <div class="row inline">
+          <div class="row inline collapsible-control">
             <!-- On by default so the brain slowly turns on load; picking a
                  structure or projection turns it off (see js/main.js) so the
-                 thing you clicked holds still. -->
+                 thing you clicked holds still. Tagged .collapsible-control so it
+                 hides with the sliders while a section is open. -->
             <label>
               <input type="checkbox" id="autorotate" checked />
               <span data-i18n="panel.autorotate"></span>

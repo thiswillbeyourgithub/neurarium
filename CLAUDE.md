@@ -382,8 +382,9 @@ script, loaded early in `index.html`) is the whole mechanism:
   classic banner scripts read `window.__I18N__` with a key-fallback so an error is
   still surfaced if i18n somehow failed to load.
 - **Switching** is a small `EN/FR` control (`#lang-switch`) at the top of the
-  panel body (not a `.collapsible-control`, so it stays visible when a section is
-  open). Clicking the inactive language calls `setLang`, which **saves the choice
+  panel body (tagged `.collapsible-control`, so it hides with the sliders +
+  auto-rotate while a section is open). Clicking the inactive language calls
+  `setLang`, which **saves the choice
   and reloads**: `js/data.js` resolves the data language at load, so a reload is
   simpler and more robust than re-rendering the whole scene live. The chosen
   language is also written to `<html lang>`.
@@ -532,11 +533,12 @@ as the WIP banner (`js/error-banner.js`):
   a popup; the reset/search buttons stay visible so the magnifier toggles back.
   The panel / legend / about collapse headers share one `wireCollapse` helper in
   `js/main.js`. **Legend and About are an accordion**: opening one closes the
-  other (only one open at a time), and while either is open the controls between
-  the title and Auto-rotate (the `.toolbar-row` + the two sliders, tagged
-  `.collapsible-control`) are hidden via the `#controls.section-open` class so the
-  open section's content doesn't push the panel tall; Auto-rotate and the two
-  section headers stay visible. `wireCollapse` takes an `onToggle(open)` callback
+  other (only one open at a time), and while either is open every control above
+  it (the `#lang-switch`, the `.toolbar-row`, the two sliders and the Auto-rotate
+  checkbox, all tagged `.collapsible-control`) is hidden via the
+  `#controls.section-open` class so the open section's content doesn't push the
+  panel tall; only the two section headers stay visible. `wireCollapse` takes an
+  `onToggle(open)` callback
   and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
   toggles `section-open`. A section can only be opened while the controls are
   visible (i.e. not searching), so this never hides the toolbar mid-search.
