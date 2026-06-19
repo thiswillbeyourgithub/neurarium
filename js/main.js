@@ -1032,20 +1032,30 @@ async function main() {
   const labels = createLabels(meshes, arrows, document.body);
   window.addEventListener("resize", () => labels.resize());
 
-  // Pick the nearest *visible* structure mesh under a screen point, or null.
-  // Shared by mouse hover and touch tap so the raycast logic isn't duplicated.
+  // Picking helpers, shared by mouse hover, click, and touch tap so the raycast
+  // logic isn't duplicated. `setPointer` maps screen coords to NDC and aims the
+  // ray once; the pick functions then intersect different object sets.
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   const canvas = renderer.domElement;
-  const pickAt = (clientX, clientY) => {
+  const setPointer = (clientX, clientY) => {
     pointer.x = (clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
+  };
+  // Nearest *visible* structure intersection under a screen point (the three.js
+  // hit record, so callers also get `.distance`), or null. The distance lets the
+  // click handler decide whether a structure or an arrow is the front-most thing
+  // under the cursor.
+  const pickStructureHit = (clientX, clientY) => {
+    setPointer(clientX, clientY);
     for (const hit of raycaster.intersectObjects(meshes, false)) {
-      if (hit.object.visible) return hit.object;
+      if (hit.object.visible) return hit;
     }
     return null;
   };
+  // Just the nearest visible structure mesh (hover + double-click only need that).
+  const pickAt = (clientX, clientY) => pickStructureHit(clientX, clientY)?.object || null;
 
   // Connection info panel (populated when an arrow is clicked or a connection is
   // picked in the search). Created here so the click/tap handlers below can use it.
@@ -1069,34 +1079,58 @@ async function main() {
   };
   selection.onPick(stopAutoRotate);
 
-  // Pick the arrow under a screen point (or null). Arrows bow outward from the
-  // brain so they are usually hittable; arrows hidden in isolated screenshot
-  // views (group.visible=false) are ignored.
+  // Arrow picking, two object sets for two purposes:
+  //  - `arrowPickables` includes each arrow's fat invisible pick hull
+  //    (PICK_RADIUS), so a thin arrow over empty space is still easy to
+  //    click/tap; used only as the empty-space fallback below.
+  //  - `visibleArrowPickables` is the *visible* geometry only (tube + cone(s),
+  //    minus that hull), so the click handler can compare an arrow's real
+  //    on-screen depth against a structure's and pick whichever is in front.
+  // Arrows hidden in isolated screenshot views (group.visible=false) are ignored.
   const arrowPickables = arrows.flatMap((arrow) => arrow.meshes);
-  const pickArrowAt = (clientX, clientY) => {
-    pointer.x = (clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-    for (const hit of raycaster.intersectObjects(arrowPickables, false)) {
+  const visibleArrowPickables = arrows.flatMap((a) => a.meshes.filter((m) => m !== a.pick));
+  const firstVisibleArrowHit = (pickables) => {
+    for (const hit of raycaster.intersectObjects(pickables, false)) {
       const arrow = hit.object.userData.arrow;
-      if (arrow && arrow.group.visible) return arrow;
+      if (arrow && arrow.group.visible) return { arrow, distance: hit.distance };
     }
     return null;
   };
+  // Arrow under a point via the generous pick hull (or null).
+  const pickArrowAt = (clientX, clientY) => {
+    setPointer(clientX, clientY);
+    return firstVisibleArrowHit(arrowPickables)?.arrow || null;
+  };
+  // Nearest *visible* arrow part under a point ({arrow, distance}) or null.
+  const pickVisibleArrowHit = (clientX, clientY) => {
+    setPointer(clientX, clientY);
+    return firstVisibleArrowHit(visibleArrowPickables);
+  };
 
-  // What a tap/click does: an arrow takes priority over the region behind it and
-  // opens its info panel (clearing any structure halo). Otherwise the structure
-  // under the point is selected (haloed + named), and a click on empty space
-  // clears the halo, label, and panel. Owns the label set so callers don't need
-  // a separate fallback.
+  // What a tap/click does: select whatever is *visually* front-most under the
+  // point. We compare depths so a click on a region selects the region even when
+  // an arrow's fat (invisible) pick hull happens to pass over it; an arrow wins
+  // only when its *visible* tube/cone is at least as near the camera as the
+  // nearest structure. With nothing solid under the point (empty space) we fall
+  // back to the generous arrow hull, so a thin arrow over the background is still
+  // easy to hit; a true miss clears the halo, label, and panel. handleSelect owns
+  // the label set so callers need no separate fallback.
   const handleSelect = (clientX, clientY) => {
-    const arrow = pickArrowAt(clientX, clientY);
+    const structHit = pickStructureHit(clientX, clientY);
+    const arrowHit = pickVisibleArrowHit(clientX, clientY);
+    let arrow = null;
+    if (arrowHit && (!structHit || arrowHit.distance <= structHit.distance)) {
+      arrow = arrowHit.arrow; // a visible arrow is at/in front of the structure
+    } else if (!structHit) {
+      // Nothing visible under the point: let the fat pick hull catch a thin arrow.
+      arrow = pickArrowAt(clientX, clientY);
+    }
     if (arrow) {
       info.show(arrow.projection);
       selection.selectArrow(arrow);
       return true;
     }
-    const mesh = pickAt(clientX, clientY);
+    const mesh = structHit ? structHit.object : null;
     info.hide();
     selection.select(mesh);
     labels.setHovered(mesh);
