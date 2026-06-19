@@ -121,13 +121,17 @@ docker/               Deployment: docker-compose.yml (hardened Caddy service),
                       tools/serve.py), env.example (copy to docker/.env),
                       entrypoint.sh (startup wrapper baked into the image:
                       stamps STARTED_AT and validates ANALYTICS_URL, see below).
-tools/shot.py         Screenshot helper: serves the repo and drives a browser to
-                      capture index.html (with view params) to a PNG. Lets a
-                      dev/Claude Code see the output. Default is headless; pass
-                      `--headed` to render in a real on-screen browser window
-                      (real-GPU WebGL) and grab it, which is what actually works
-                      from this repo (headless WebGL comes back blank). `--headed`
-                      needs $DISPLAY + xdotool + ImageMagick `import`/`maim`.
+tools/shot.py         Screenshot helper (Playwright): serves the repo with
+                      tools/serve.py, drives a headless Chromium to load
+                      index.html (with view params), and captures the canvas with
+                      page.screenshot() to a PNG. Lets a dev/Claude Code see the
+                      output. Headless renders WebGL fine once Chromium is given
+                      the SwiftShader GL flags (baked in); no $DISPLAY / xdotool /
+                      ImageMagick needed. `--headed` opens a real visible window
+                      (real GPU) if preferred. Bare `python tools/shot.py` writes
+                      docs/screenshot.png (the README hero shot). Needs the
+                      playwright package + `playwright install chromium` once (or
+                      run via `uv run tools/shot.py`; it carries inline deps).
 tools/serve.py        Stdlib static dev server that sends Cache-Control:no-store
                       so the browser never serves a stale ES module (use instead
                       of `python -m http.server` while developing; see Running).
@@ -176,22 +180,28 @@ desktop and mobile.
 ### Screenshots & deep-link view params
 
 `tools/shot.py` renders the page to a PNG so the output can be inspected (this is
-how shapes are reviewed/refined). It serves the repo, drives a browser, and
-captures the shot:
+how shapes are reviewed/refined, and how the README hero shot is made). It is a
+small self-contained Playwright script: it serves the repo with `tools/serve.py`,
+drives a headless Chromium, and captures the canvas with `page.screenshot()`:
 
 ```
-python tools/shot.py --headed --params "explode=0.5&view=iso" --out /tmp/brain.png
-python tools/shot.py --headed --params "only=putamen_R&view=iso" --out /tmp/putamen.png
+python tools/shot.py                                                  # -> docs/screenshot.png
+python tools/shot.py --params "explode=0.5&view=iso" --out /tmp/brain.png
+python tools/shot.py --params "only=putamen_R&view=iso" --out /tmp/putamen.png
 ```
 
-> [!IMPORTANT]
-> Use `--headed`. The default headless path relies on software WebGL that comes
-> back **blank** in this environment; `--headed` opens a real browser window on
-> `$DISPLAY` (real-GPU WebGL) and grabs it, which is the only reliable way to
-> *see* the scene here. It needs an X session + `xdotool` + ImageMagick `import`
-> (or `maim`). With `--headed`, `--wait` is real milliseconds (give it ~12000+ so
-> the data loads and a few frames render). To point at a specific browser when
-> autodetect fails: `CHROME=/path/to/chrome python tools/shot.py ...`.
+It needs the `playwright` package plus the browser binary
+(`playwright install chromium`) once; or run it via `uv run tools/shot.py`, which
+auto-installs the inline dependency. Headless WebGL renders correctly because the
+script launches Chromium with the SwiftShader GL flags (`--use-gl=angle
+--use-angle=swiftshader`); the earlier "headless comes back blank" problem was
+just those flags being absent. No `$DISPLAY` / `xdotool` / ImageMagick is needed.
+
+> [!NOTE]
+> Pass `--headed` to open a real visible browser window (real GPU) instead of
+> headless, e.g. to watch what is being captured. The default headless path is
+> the reliable one and needs no display. `--wait` is milliseconds to let the data
+> load and a few frames render before the capture (default 6000).
 
 The `--params` string is the URL query parsed by `applyViewParams` in
 `js/main.js`, so the same keys also work as deep links in a normal browser:
