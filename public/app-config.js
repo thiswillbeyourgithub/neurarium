@@ -9,7 +9,10 @@
 //
 // This committed copy is the LOCAL-DEV fallback. tools/serve.py / `python -m
 // http.server` serve it as-is, where there is no container environment to
-// inject, so every field is empty and the umami tag + DEV banner stay off.
+// inject, so the feature fields are empty and the umami tag + DEV banner stay
+// off. (`sourceUrl` is not a feature toggle: it defaults to the public site so a
+// "source"/"about" link always has somewhere to point; the container overrides
+// it from the SOURCE_URL env var, e.g. to the code repository.)
 //
 // In the CONTAINER this file is NOT served. docker/entrypoint.sh renders an
 // equivalent file from the environment (ANALYTICS_* and DEV from docker/.env,
@@ -26,4 +29,5 @@ window.__APP_CONFIG__ = {
   dnt: '',
   dev: '',
   startedAt: '',
+  sourceUrl: 'https://neurarium.olicorne.org',
 };

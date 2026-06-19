@@ -108,14 +108,16 @@ js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       (createInfoPanel), the structure+connection search, the
                       legend builder, and the render loop.
 app-config.js         Tiny config file (window.__APP_CONFIG__). This committed
-                      copy is the LOCAL-DEV fallback: all fields empty, so dev
-                      servers keep umami + the DEV banner off. In the container it
-                      is NOT served; entrypoint.sh renders an env-filled copy into
-                      /gen and Caddy serves that instead (see below). Named
-                      generically (not "analytics-*") so content filters / proxies
-                      that block "analytics" paths don't 404 it. Carries the umami
-                      ANALYTICS_* values plus DEV + STARTED_AT (the WIP-banner flag
-                      and container start time).
+                      copy is the LOCAL-DEV fallback: the feature fields are empty,
+                      so dev servers keep umami + the DEV banner off. In the
+                      container it is NOT served; entrypoint.sh renders an
+                      env-filled copy into /gen and Caddy serves that instead (see
+                      below). Named generically (not "analytics-*") so content
+                      filters / proxies that block "analytics" paths don't 404 it.
+                      Carries the umami ANALYTICS_* values, DEV + STARTED_AT (the
+                      WIP-banner flag and container start time), and sourceUrl (the
+                      "source" link target, from SOURCE_URL, defaulting to the
+                      public site).
 js/app-init.js        Reads that config and injects the umami tag if configured;
                       no-op otherwise.
 js/dev-banner.js      Reads that config and, when DEV=1, shows the top "work in
@@ -383,6 +385,12 @@ analytics (no build step):
    dismissal is stored in `sessionStorage` (`neurarium:dev-banner-dismissed`) and
    checked before showing, so a reload within the session won't bring it back (a
    new tab / session shows it again).
+6. The banner ends with a **"Source" link** to `cfg.sourceUrl` (from the
+   `SOURCE_URL` env var, default the public site; point it at the code repository
+   in `docker/.env`). Only an `http(s)` value is rendered, and clicking the link
+   navigates instead of dismissing the banner (the dismiss handler ignores clicks
+   on an `<a>`). The repo URL is deliberately **not hardcoded** in the committed
+   source: it comes from the env var so no specific account/host is baked in.
 
 ## Error banners
 

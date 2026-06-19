@@ -89,3 +89,8 @@ services:
       # js/dev-banner.js); defaults to 0 (off). STARTED_AT is set by the
       # entrypoint above, not here.
       - DEV=${DEV:-0}
+      # SOURCE_URL backs the "source" link (e.g. in the dev banner). Defaults to
+      # the public site; point it at the code repository in docker/.env if you
+      # want the link to go there. ANALYTICS_ORIGIN is derived by the entrypoint
+      # (not set here).
+      - SOURCE_URL=${SOURCE_URL:-https://neurarium.olicorne.org}

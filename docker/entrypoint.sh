@@ -87,6 +87,7 @@ window.__APP_CONFIG__ = {
   dnt: '${ANALYTICS_DNT:-}',
   dev: '${DEV:-}',
   startedAt: '${STARTED_AT:-}',
+  sourceUrl: '${SOURCE_URL:-https://neurarium.olicorne.org}',
 };
 CONFIG
 echo "entrypoint: rendered /gen/app-config.js (dev='${DEV:-}')"

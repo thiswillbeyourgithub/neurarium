@@ -46,6 +46,15 @@
   // in the banner so WIP visitors can tell which build they are looking at.
   const version = window.__APP_VERSION__ ? ` (v${window.__APP_VERSION__})` : "";
 
+  // Optional "source" link (config sourceUrl, e.g. the code repository). Only an
+  // http(s) URL is rendered, so a stray/empty value can't inject markup. The
+  // anchor is excluded from the click-to-dismiss handler below.
+  const sourceUrl = String(cfg.sourceUrl || "").trim();
+  const validSource = /^https?:\/\//i.test(sourceUrl) ? sourceUrl : "";
+  const sourceLink = validSource
+    ? ` <a href="${validSource}" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:underline;">Source</a>.`
+    : "";
+
   function render() {
     // Client clock vs container clock can differ slightly; close enough for a
     // human "restarted ~X ago" cue. Clamp negatives (skewed clocks) to 0.
@@ -54,7 +63,7 @@
       ? `This container was last restarted ${humanAgo(elapsed)}, so it is actively being developed. `
       : "This site is actively being developed. ";
     banner.innerHTML =
-      `<strong>Work in progress${version}.</strong> ${when}Stay tuned, or come back later.`;
+      `<strong>Work in progress${version}.</strong> ${when}Stay tuned, or come back later.${sourceLink}`;
   }
 
   render();
@@ -77,7 +86,9 @@
 
   banner.style.cursor = "pointer";
   banner.title = "Click to dismiss";
-  banner.addEventListener("click", () => {
+  banner.addEventListener("click", (e) => {
+    // Let the "Source" link navigate without dismissing the banner.
+    if (e.target.closest("a")) return;
     banner.hidden = true;
     if (timer) clearInterval(timer);
     try { sessionStorage.setItem(DISMISS_KEY, "1"); } catch { /* ignore */ }
