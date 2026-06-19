@@ -570,6 +570,17 @@ as the WIP banner (`js/error-banner.js`):
   and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
   toggles `section-open`. A section can only be opened while the controls are
   visible (i.e. not searching), so this never hides the toolbar mid-search.
+  **Phone / portrait pan-aside**: on a narrow or portrait screen the bottom-left
+  panel covers much of the centered brain, so while the panel body is **expanded**
+  there the rendered brain is slid up into the **top-right**, clear of the panel,
+  and recentred when it collapses (or on a wide/landscape screen). It is wired in
+  `wireControls` (`updatePanelPan`, gated on `window.matchMedia("(max-width: 700px),
+  (orientation: portrait)")` and on the panel actually being visible, so `?ui=0`
+  shots are unaffected) and applied via `focus.setScreenOffset` (see
+  `createCameraFocus` below): a render-time **camera view offset**
+  (`PerspectiveCamera.setViewOffset`), eased in/out in `focus.tick`, not a move of
+  the orbit target, so the pan survives rotation/zoom/framing and reverts cleanly
+  (and rescales itself on resize).
 - **About** (`#about`, collapsed by default): a short blurb (what Neurarium is,
   that it's a WIP, made by Olivier Cornelis + Claude) plus a **Source code** link
   whose href is set from `cfg.sourceUrl` by `js/main.js` (the row is removed if
@@ -746,7 +757,10 @@ as the WIP banner (`js/error-banner.js`):
   tween, `createCameraFocus` in `js/main.js`: it moves the orbit pivot and
   camera distance but keeps the current view direction, is advanced once per
   frame in the render loop, and is cancelled the moment the user grabs the
-  controls so a drag always wins.
+  controls so a drag always wins. It also owns the **screen offset**
+  (`setScreenOffset(x,y)`, eased in `tick`): a render-time `setViewOffset` that
+  shifts the rendered brain by a fraction of the viewport without touching the
+  orbit target, used for the phone/portrait pan-aside (see "Panel layout").
 - After focusing a single structure (a structure search), moving
   the **blow-out** slider keeps that structure centered: `createCameraFocus`
   remembers it (`focused`) and `reaimFocused()` (called from the explode handler)

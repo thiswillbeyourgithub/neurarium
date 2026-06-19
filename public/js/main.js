@@ -949,6 +949,29 @@ function createCameraFocus({ camera, controls, meshes }) {
   // it moves; cleared whenever we frame something else (a connection or the
   // whole brain) so we don't chase a structure the user has navigated away from.
   let focused = null;
+  // Render-time screen offset (fractions of the viewport: +x slides the rendered
+  // brain right, +y up), eased toward `offsetTarget` each tick and baked into the
+  // camera as a view offset. It is a projection shift, not a move of the orbit
+  // target, so it survives rotation / zoom / framing and reverts cleanly. Used to
+  // slide the brain out from under the expanded panel on a phone (see
+  // setScreenOffset wiring in wireControls).
+  const offset = { x: 0, y: 0 };
+  const offsetTarget = { x: 0, y: 0 };
+  const OFFSET_EPS = 0.0005;
+  // Bake the current offset into the camera's view offset (or clear it). Reads
+  // the live viewport size every call so a resize self-heals without extra
+  // bookkeeping.
+  const applyOffset = () => {
+    if (Math.abs(offset.x) < OFFSET_EPS && Math.abs(offset.y) < OFFSET_EPS) {
+      if (camera.view && camera.view.enabled) camera.clearViewOffset();
+      return;
+    }
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    // offsetX < 0 slides content right; offsetY > 0 slides content up (see the
+    // updateProjectionMatrix math in three's PerspectiveCamera).
+    camera.setViewOffset(w, h, -offset.x * w, offset.y * h, w, h);
+  };
 
   // Distance at which a bounding sphere of `radius` fits the vertical FOV,
   // padded by `margin` (a bigger margin leaves more context around the target).
@@ -1022,18 +1045,42 @@ function createCameraFocus({ camera, controls, meshes }) {
       controls.target.copy(tmpVec);
       if (anim) anim.toTarget.copy(tmpVec);
     },
+    /**
+     * Set the desired render-time screen offset (fractions of the viewport:
+     * +x slides the brain right, +y up). Eased in/out by tick(). Pass 0,0 to
+     * recenter. Survives rotation / zoom / framing (it's a projection shift).
+     */
+    setScreenOffset(x, y) {
+      offsetTarget.x = x;
+      offsetTarget.y = y;
+    },
     /** Abort any running tween (used when the user starts interacting). */
     cancel() {
       anim = null;
     },
     /** Advance the active tween; call once per frame before controls.update(). */
     tick() {
-      if (!anim) return;
-      const t = Math.min(1, (performance.now() - anim.start) / anim.duration);
-      const e = t * t * (3 - 2 * t); // smoothstep ease in/out
-      controls.target.lerpVectors(anim.fromTarget, anim.toTarget, e);
-      camera.position.lerpVectors(anim.fromPos, anim.toPos, e);
-      if (t >= 1) anim = null;
+      if (anim) {
+        const t = Math.min(1, (performance.now() - anim.start) / anim.duration);
+        const e = t * t * (3 - 2 * t); // smoothstep ease in/out
+        controls.target.lerpVectors(anim.fromTarget, anim.toTarget, e);
+        camera.position.lerpVectors(anim.fromPos, anim.toPos, e);
+        if (t >= 1) anim = null;
+      }
+      // Ease the screen offset toward its target and (re)apply it. Runs every
+      // frame independent of the framing tween, so the panel pan animates on its
+      // own and a resize keeps the offset correctly scaled.
+      if (
+        Math.abs(offset.x - offsetTarget.x) > OFFSET_EPS ||
+        Math.abs(offset.y - offsetTarget.y) > OFFSET_EPS
+      ) {
+        offset.x += (offsetTarget.x - offset.x) * 0.18;
+        offset.y += (offsetTarget.y - offset.y) * 0.18;
+      } else {
+        offset.x = offsetTarget.x;
+        offset.y = offsetTarget.y;
+      }
+      applyOffset();
     },
   };
 }
@@ -1130,13 +1177,36 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
       onToggle?.(open);
     });
   };
-  wireCollapse(controlsToggle, controlsBody);
+  // On a phone / portrait screen the bottom-left panel covers a big part of the
+  // centered brain, so the user can't see what they're doing while using the
+  // controls. While the panel is expanded on such a screen, slide the rendered
+  // brain up into the top-right (a render-time view offset, see
+  // createCameraFocus.setScreenOffset); collapsing it, or a wide/landscape
+  // screen, restores the centered view. The offset eases in/out via focus.tick.
+  const controlsPanel = document.getElementById("controls");
+  const PANEL_PAN = { x: 0.26, y: 0.22 }; // viewport fractions (right, up)
+  const narrowOrPortrait = window.matchMedia(
+    "(max-width: 700px), (orientation: portrait)"
+  );
+  const updatePanelPan = () => {
+    const open = controlsToggle.getAttribute("aria-expanded") === "true";
+    // offsetParent is null when the panel is display:none (e.g. ?ui=0 shots).
+    const visible = controlsPanel.offsetParent !== null;
+    const shift = open && visible && narrowOrPortrait.matches;
+    focus.setScreenOffset(shift ? PANEL_PAN.x : 0, shift ? PANEL_PAN.y : 0);
+  };
+  wireCollapse(controlsToggle, controlsBody, updatePanelPan);
+  // Re-evaluate when the breakpoint/orientation flips (covers resizes too: the
+  // offset itself rescales every frame in focus.tick).
+  narrowOrPortrait.addEventListener("change", updatePanelPan);
+  // Apply once now: the panel ships expanded, so on a phone the brain should
+  // already be slid clear on load.
+  updatePanelPan();
 
   // Legend + About behave as an accordion: only one open at a time, and while
   // either is open the controls between the title and Auto-rotate (the
   // .collapsible-control rows) are hidden via the #controls.section-open class
   // (see index.html) so the open section's content doesn't push the panel tall.
-  const controlsPanel = document.getElementById("controls");
   const syncSectionLayout = () => {
     const anyOpen =
       legendToggle.getAttribute("aria-expanded") === "true" ||
