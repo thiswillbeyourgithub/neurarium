@@ -608,30 +608,35 @@ float gyrFbm(vec3 p){
   }
   return sum / norm;
 }
-// Height field of "little curls": a fractal field is domain-warped by another
-// fractal vector (this is what swirls the bands), then sin() turns its smooth
-// iso-levels into closed, fingerprint-like loops.
-float gyrHeight(vec3 p){
-  vec3 q = p * ${glslFloat(GYRUS_BUMP.freq)};
-  vec3 w = vec3(
-    gyrFbm(q),
-    gyrFbm(q + vec3(5.2, 1.3, 2.8)),
-    gyrFbm(q + vec3(2.1, 7.4, 3.5))
-  );
-  float base = gyrFbm(q + ${glslFloat(GYRUS_BUMP.warp)} * w);
+// Height of the "little curls" field at object point p, given a *precomputed*
+// domain-warp offset wOff: a fractal field sampled at the warped coordinate
+// (the warp is what swirls the bands), then sin() turns its smooth iso-levels
+// into closed, fingerprint-like loops. wOff is passed in so the per-fragment
+// finite-difference gradient below can reuse one warp for all four taps (the
+// warp varies slowly, so holding it fixed across the tiny eps is invisible but
+// roughly halves the noise-field evaluations: ~7 instead of ~16 per fragment).
+float gyrBandedAt(vec3 p, vec3 wOff){
+  float base = gyrFbm(p * ${glslFloat(GYRUS_BUMP.freq)} + wOff);
   return sin(base * ${glslFloat(GYRUS_BUMP.bands)} * 6.2831853);
 }
 `;
 
-  // Bend the shaded normal along the surface gradient of the height field.
+  // Bend the shaded normal along the surface gradient of the curl field. The
+  // domain warp is computed once here and reused across the gradient taps.
   const perturb = `#include <normal_fragment_begin>
 {
   float e = ${glslFloat(GYRUS_BUMP.eps)};
-  float h0 = gyrHeight(vGyrPos);
+  vec3 q = vGyrPos * ${glslFloat(GYRUS_BUMP.freq)};
+  vec3 wOff = ${glslFloat(GYRUS_BUMP.warp)} * vec3(
+    gyrFbm(q),
+    gyrFbm(q + vec3(5.2, 1.3, 2.8)),
+    gyrFbm(q + vec3(2.1, 7.4, 3.5))
+  );
+  float h0 = gyrBandedAt(vGyrPos, wOff);
   vec3 grad = vec3(
-    gyrHeight(vGyrPos + vec3(e, 0.0, 0.0)) - h0,
-    gyrHeight(vGyrPos + vec3(0.0, e, 0.0)) - h0,
-    gyrHeight(vGyrPos + vec3(0.0, 0.0, e)) - h0
+    gyrBandedAt(vGyrPos + vec3(e, 0.0, 0.0), wOff) - h0,
+    gyrBandedAt(vGyrPos + vec3(0.0, e, 0.0), wOff) - h0,
+    gyrBandedAt(vGyrPos + vec3(0.0, 0.0, e), wOff) - h0
   ) / e;
   vec3 nObj = normalize(vGyrNormal);
   vec3 tang = grad - dot(grad, nObj) * nObj;  // tangential part, object space
