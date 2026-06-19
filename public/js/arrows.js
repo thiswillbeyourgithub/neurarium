@@ -351,6 +351,18 @@ export class ProjectionArrow {
   setHalo(on) {
     this.halo.visible = on;
   }
+
+  /**
+   * Recolour the arrow, for the panel's colour-mode toggle (per-transmitter vs.
+   * excitatory/inhibitory sign). The tube + cone(s) share `this.material`; the
+   * halo tracks the same hue, lightened toward white like at construction.
+   * @param {string} hex  The new arrow colour.
+   */
+  setColor(hex) {
+    const color = new THREE.Color(hex);
+    this.material.color.copy(color);
+    this.haloMaterial.color.copy(color).lerp(new THREE.Color(0xffffff), 0.4);
+  }
 }
 
 /**

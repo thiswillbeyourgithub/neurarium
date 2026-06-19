@@ -58,8 +58,10 @@ function localize(field) {
  *   `name`/`base_name` are localized to plain strings (the full hemisphere name
  *   and the side-stripped legend label).
  * @property {object[]} projections Directed pathway records (type === "projection"),
- *   each augmented with a resolved `color` (from the kind->colour meta map); its
- *   `label`/`description`/`neurotransmitter` are localized to plain strings.
+ *   each augmented with a resolved `color` (from the kind->colour meta map) plus a
+ *   `sign` (excitatory/inhibitory/modulatory) and its `signColor` for the coarse
+ *   colour mode; its `label`/`description`/`neurotransmitter` are localized to
+ *   plain strings.
  * @property {object[]} circuits    Named circuit records (type === "circuit"):
  *   `{id, name, structures:[structure ids]}` (localized `name`). The arrows
  *   belonging to a circuit are derived in the viewer (both endpoints among
@@ -67,10 +69,13 @@ function localize(field) {
  * @property {Map<string, object>} byId  structure id -> structure record.
  * @property {{projectionColors: Object<string,string>,
  *   groupLabels: Object<string,string>,
- *   kindLabels: Object<string,string>}} meta  Presentation maps emitted by the
- *   generator (kind->arrow colour, group->legend heading, kind->display label),
- *   so the dataset is self-describing rather than relying on hardcoded values in
- *   the viewer. `groupLabels`/`kindLabels` are localized to plain strings.
+ *   kindLabels: Object<string,string>,
+ *   signColors: Object<string,string>,
+ *   signLabels: Object<string,string>}} meta  Presentation maps emitted by the
+ *   generator (kind->arrow colour, group->legend heading, kind->display label,
+ *   and the excit/inhib sign colour + heading for the colour-mode toggle), so the
+ *   dataset is self-describing rather than relying on hardcoded values in the
+ *   viewer. `groupLabels`/`kindLabels`/`signLabels` are localized to plain strings.
  */
 
 /**
@@ -93,16 +98,24 @@ export async function loadBrainData(jsonlUrl = "data/brain.jsonl") {
   // localize their values to plain strings here (the colour map is neutral).
   const metaRecord = records.find((r) => r.type === "meta") || {};
   const projectionColors = metaRecord.projection_colors || {};
+  // Sign (excitatory / inhibitory) colour mode: kind->sign fold + sign->colour.
+  const kindSigns = metaRecord.kind_signs || {};
+  const signColors = metaRecord.sign_colors || {};
   const localizeMap = (m) =>
     Object.fromEntries(Object.entries(m || {}).map(([k, v]) => [k, localize(v)]));
   const groupLabels = localizeMap(metaRecord.group_labels);
   const kindLabels = localizeMap(metaRecord.kind_labels);
+  const signLabels = localizeMap(metaRecord.sign_labels);
 
-  // Resolve each projection's arrow colour from its kind (kept as the raw key,
-  // since it indexes the colour/label maps), and localize its display fields so
-  // the viewer reads plain strings.
+  // Resolve each projection's colours from its kind (kept as the raw key, since it
+  // indexes the colour/label maps): `color` is the per-transmitter colour (default
+  // mode), `sign`/`signColor` the coarse excitatory/inhibitory view the colour
+  // toggle switches to. Localize the display fields so the viewer reads plain
+  // strings.
   for (const p of projections) {
     p.color = projectionColors[p.kind] || "#ffffff";
+    p.sign = kindSigns[p.kind] || "modulatory";
+    p.signColor = signColors[p.sign] || "#ffffff";
     p.label = localize(p.label);
     p.description = localize(p.description);
     p.neurotransmitter = localize(p.neurotransmitter);
@@ -131,6 +144,6 @@ export async function loadBrainData(jsonlUrl = "data/brain.jsonl") {
     projections,
     circuits,
     byId,
-    meta: { projectionColors, groupLabels, kindLabels },
+    meta: { projectionColors, groupLabels, kindLabels, signColors, signLabels },
   };
 }

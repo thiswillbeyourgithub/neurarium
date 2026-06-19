@@ -55,8 +55,11 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                       Each line is one of:
                         - a "meta" record (the first line): the presentation maps
                           projection_colors (kind -> arrow colour), kind_labels
-                          (kind -> {en,fr} functional-class label) and group_labels
-                          (group -> {en,fr} legend heading), so the dataset is self-
+                          (kind -> {en,fr} functional-class label), group_labels
+                          (group -> {en,fr} legend heading), and the colour-mode
+                          maps kind_signs (kind -> excit/inhib/modulatory sign),
+                          sign_colors (sign -> colour) and sign_labels
+                          (sign -> {en,fr} heading), so the dataset is self-
                           describing and a port needs no hardcoded palette
                         - a "structure" (region): id, name ({en,fr}, with the
                           hemisphere prefix/suffix), base_name ({en,fr}, hemisphere-
@@ -132,7 +135,9 @@ js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
 js/arrows.js          Builds curved tube+cone arrows for projections; each
                       arrow's colour comes from its `projection.color` (resolved
                       by js/data.js from the data's meta map, single source
-                      tools/generate_data.py), not a hardcoded table here. A
+                      tools/generate_data.py), not a hardcoded table here, and is
+                      recolourable at runtime via `setColor` (the panel's
+                      excit/inhib colour-mode toggle, see Controls). A
                       `projection.tentative` arrow is drawn as a *dotted* tube
                       (a gapped run of short segments merged by a small local
                       mergeIndexedGeometries; no addon) so speculative pathways
@@ -379,11 +384,13 @@ script, loaded early in `index.html`) is the whole mechanism:
   optional `fr_gender` of `"m"`/`"f"`/`"mp"`/`"fp"`). Each structure record also
   carries a hemisphere-stripped **`base_name`** `{en,fr}` (the legend groups twins
   by it, so no language-specific prefix parsing). The meta record gains
-  **`kind_labels`** (`kind -> {en,fr}` functional-class label) alongside
-  `projection_colors`/`group_labels`; `js/data.js` localizes every such field
-  (incl. `name`/`base_name`, projection `label`/`description`/`neurotransmitter`,
-  circuit `name`, and the `group_labels`/`kind_labels` map values) to plain
-  strings at load via `pick`. Source citation text + URLs are not translated.
+  **`kind_labels`** (`kind -> {en,fr}` functional-class label) and **`sign_labels`**
+  (`sign -> {en,fr}` colour-mode heading) alongside
+  `projection_colors`/`group_labels`/`sign_colors`; `js/data.js` localizes every
+  such field (incl. `name`/`base_name`, projection `label`/`description`/
+  `neurotransmitter`, circuit `name`, and the `group_labels`/`kind_labels`/
+  `sign_labels` map values) to plain strings at load via `pick`. Source citation
+  text + URLs are not translated.
 - **Language pick.** `detectLang()` uses a `?lang=en|fr` query param if present
   (and persists it to `localStorage`, so a deep link *sets the default* for later
   visits too), else a saved choice (`localStorage` `neurarium:lang`), else the
@@ -544,8 +551,8 @@ as the WIP banner (`js/error-banner.js`):
   lives in one collapsible **"Neurarium" panel at the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
-  the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
-  inside**, then the
+  the **Separate** and **Transparency** sliders, then **Auto-rotate**, **See
+  inside** and **Excitatory / inhibitory colours**, then the
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
   names** and **Hide projections** buttons, then the nested collapsed **About**
   (`#about`) section. Searching swaps the search box in place of the panel's
@@ -555,7 +562,8 @@ as the WIP banner (`js/error-banner.js`):
   `js/main.js`. **Legend and About are an accordion**: opening one closes the
   other (only one open at a time), and while either is open every control above
   it (the `#lang-switch`, the `.toolbar-row`, the two sliders and the Auto-rotate
-  + See inside checkboxes, all tagged `.collapsible-control`) is hidden via the
+  / See inside / Excitatory-inhibitory-colours checkboxes, all tagged
+  `.collapsible-control`) is hidden via the
   `#controls.section-open` class so the open section's content doesn't push the
   panel tall; only the two section headers stay visible. `wireCollapse` takes an
   `onToggle(open)` callback
@@ -586,6 +594,20 @@ as the WIP banner (`js/error-banner.js`):
   isolate mode is independent (it dims via opacity, not visibility). Arrows are
   left visible (so the revealed connections still show). `cull.tick()` runs in
   the render loop after `controls.update()`.
+- **Excitatory / inhibitory colours** checkbox (`#color-sign`, off by default):
+  switches the arrow colour mode. Off (the default) colours every arrow per
+  **neurotransmitter** (`projection.color`, the `PROJECTION_COLORS` palette). On
+  recolours every arrow by its coarse **sign** (`projection.signColor`):
+  excitatory red, inhibitory blue, the neuromodulatory kinds (dopaminergic /
+  cholinergic / neuroendocrine) a neutral "modulatory" grey. The maps are emitted
+  by the generator into the data's `meta` record (`signColors` / `signLabels`,
+  with the per-projection `sign` resolved in `js/data.js` from the meta
+  `kind_signs` fold), not hardcoded. Toggling recolours arrows in place
+  (`ProjectionArrow.setColor`) **and rebuilds the legend** so its Projections
+  section shows one row per sign (in sign mode) instead of one per
+  neurotransmitter; the legend's focus-greying callback is registered once and
+  re-pointed on each rebuild (so the toggle never stacks `onIsolate` listeners).
+  See `projectionGroups` + the colour-mode wiring in `js/main.js`.
 - **Separate** slider (0..1, labelled "Separate" in the UI; the explode/`?explode`
   terminology lives on internally): pushes each region radially outward from
   the brain center to reveal deep structures. Tuning constant:
@@ -629,20 +651,23 @@ as the WIP banner (`js/error-banner.js`):
     animation" below): glowing beads sweep its arrows in sequence and loop, so the
     loop reads as signal flowing around it. The animation stops the instant the
     focus stops being that circuit.
-  - The **Projections** legend section lists one row **per neurotransmitter**
-    (the molecule, e.g. `Glutamate (excitatory)`, coloured by its arrow `kind`
-    and labelled with that functional kind in parens). Rows are per-transmitter,
-    not per-kind, so when a kind later carries more than one transmitter they
-    split into their own rows automatically; with today's 1:1 data each kind has
-    exactly one. Each row is clickable: clicking one isolates *only* that
-    neurotransmitter via the same `setCircuit` machinery (it pins every arrow
-    using that transmitter plus the structures they connect, so just those
-    pathways + their endpoints stay opaque and everything else fades). Unlike a
-    circuit, such a focus dims *every* structure, so its structure/heading rows
-    grey out rather than lighting up; only the neurotransmitter row lights.
-    Clicking the active one again clears it. The per-neurotransmitter rows are
-    built from the **non-tentative** projections only (the speculative ones live
-    in their own section below).
+  - The **Projections** legend section lists one row per projection group, the
+    grouping following the active **colour mode** (the "Excitatory / inhibitory
+    colours" checkbox above) so the legend always matches the arrows on screen:
+    in the default per-**neurotransmitter** mode one row per molecule (e.g.
+    `Glutamate (excitatory)`, coloured by its arrow colour and labelled with the
+    functional kind in parens; per-transmitter not per-kind, so a kind carrying
+    more than one transmitter splits automatically, though today's data is 1:1);
+    in **sign** mode one row per sign (Excitatory / Inhibitory / Modulatory,
+    coloured by the sign swatch). The rows are built by `projectionGroups` in
+    `js/main.js`. Each row is clickable: clicking one isolates *only* that group
+    via the same `setCircuit` machinery (it pins every arrow in the group plus the
+    structures they connect, so just those pathways + their endpoints stay opaque
+    and everything else fades). Unlike a circuit, such a focus dims *every*
+    structure, so its structure/heading rows grey out rather than lighting up;
+    only the group row lights. Clicking the active one again clears it. The rows
+    are built from the **non-tentative** projections only (the speculative ones
+    live in their own section below).
   - The **Hypothetical pathways** legend section is separate and **off by
     default**: a single "Show speculative (N)" toggle reveals/hides every
     `tentative` projection's (dotted) arrow at once. They are deliberately kept
@@ -733,11 +758,11 @@ as the WIP banner (`js/error-banner.js`):
 ## Circuit animation
 
 Isolating a circuit (clicking a row in the legend's **Circuits** section) plays a
-**traveling-pulse animation** over that loop: a glowing bead rides each of the
-circuit's arrows from its source region to its target, the beads firing in
-sequence and looping, so a curated loop (the direct pathway, the Papez memory
-circuit, ...) reads as signal *flowing* around it rather than as a static set of
-arrows. It is split in two on purpose:
+**traveling-pulse animation** over that loop: a short **volley** of glowing beads
+rides each of the circuit's arrows from its source region to its target, the
+volleys firing in sequence and looping, so a curated loop (the direct pathway, the
+Papez memory circuit, ...) reads as signal *flowing* around it rather than as a
+static set of arrows. It is split in two on purpose:
 
 - **`js/circuit-schedule.js` (the ordering, no three.js).** `scheduleCircuit`
   computes the firing order with **no hand-authored path**: the circuit's arrows
@@ -763,7 +788,13 @@ arrows. It is split in two on purpose:
   (`arrow.curve`, exposed by `js/arrows.js` and rebuilt on every explode, so the
   beads track the layout). One controller per scene, `tick()`ed once per frame in
   the render loop (like the intro/focus tweens). `STEP_MS` is the per-slot
-  duration (one bead's travel); the whole loop is `numSteps * STEP_MS`. A bead
+  duration; the whole loop is `numSteps * STEP_MS`. Each arrow fires a **burst** of
+  beads at the start of its slot, the burst's character keyed off the projection's
+  `sign` (`BURST` table): an **excitatory** arrow sends more beads, faster and
+  brighter (a dramatic volley); an **inhibitory** one fewer, slower and dimmer;
+  modulatory sits between. The beads in a volley are spaced `gap` apart along the
+  arc and advance at `speed` x the slot rate (> 1, so the volley lands early and
+  reads as a burst then a pause); `scale`/`bright` size + brighten them. A bead
   hides while its arrow is hidden (so the global "Hide projections" toggle clears
   the beads too). As a bead **lands**, its target region briefly brightens (a
   *node flash*): a back-side additive shell per target node (the same geometry-
@@ -778,11 +809,11 @@ driven off the selection state, not scattered call sites: `createSelection`'s
 `onIsolate` is multi-subscriber, and the animation subscribes a watcher that
 calls `circuitAnim.stop()` whenever the live pinned-arrow set is no longer exactly
 the animating circuit (`circuitAnim.matches`). So a clear, a different circuit, a
-neurotransmitter focus, or a legend isolate all stop it, while merely highlighting
-a structure (which leaves the circuit pinned) keeps it running. The animation is
-**circuit-only**: a neurotransmitter focus also goes through `setCircuit` but
-never calls `play`. No new user-visible string (the trigger is the existing
-circuit row), so no i18n change.
+projection-group focus (a neurotransmitter or sign row), or a legend isolate all
+stop it, while merely highlighting a structure (which leaves the circuit pinned)
+keeps it running. The animation is **circuit-only**: a projection-group focus also
+goes through `setCircuit` but never calls `play`. No new user-visible string (the
+trigger is the existing circuit row), so no i18n change.
 
 ## Changing the data
 
@@ -922,7 +953,12 @@ circuit row), so no i18n change.
      + in this doc if needed. The map is emitted into the data's `meta` record and
      each projection gets a resolved `color` at load, so the viewer never
      hardcodes the palette. `kind` drives the arrow *color*; `neurotransmitter` is
-     the finer label shown in the info panel.
+     the finer label shown in the info panel. A new kind must also be folded onto a
+     **sign** in `KIND_TO_SIGN` (`excitatory` / `inhibitory` / `modulatory`) for
+     the panel's excit/inhib colour mode (`SIGN_COLORS` / `SIGN_LABELS` give the
+     sign its grey/red/blue swatch + heading); these are emitted into `meta` too,
+     and the per-projection `sign` is resolved in `js/data.js`. The pulse animation
+     also keys its burst size/speed off that sign (`BURST` in `js/circuit-anim.js`).
    - To add a named **circuit**, append to the `CIRCUITS` list: `id`, `name`, and
      `structures` as **base** ids (no `_R`/`_L`). The generator expands each base
      to whatever was emitted (both hemispheres, or the bare id for a midline form)
@@ -942,9 +978,9 @@ circuit row), so no i18n change.
    `public/shapes/`.
 3. Commit the generator change and the regenerated artifacts together.
 
-The legend (region colors and the per-neurotransmitter projection rows) is
-generated at runtime from the data, so it updates automatically; no separate
-legend edit is needed.
+The legend (region colors and the projection rows, per-neurotransmitter or
+per-sign depending on the colour-mode toggle) is generated at runtime from the
+data, so it updates automatically; no separate legend edit is needed.
 
 ## Versioning
 

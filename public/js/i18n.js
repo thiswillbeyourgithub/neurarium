@@ -56,6 +56,7 @@
       "panel.transparency": "Transparency",
       "panel.autorotate": "Auto-rotate",
       "panel.seeInside": "See inside",
+      "panel.signColors": "Excitatory / inhibitory colours",
       "panel.legend": "Legend",
       "panel.about": "About",
 
@@ -132,6 +133,7 @@
       "panel.transparency": "Transparence",
       "panel.autorotate": "Rotation auto",
       "panel.seeInside": "Voir l'intérieur",
+      "panel.signColors": "Couleurs excitateur / inhibiteur",
       "panel.legend": "Légende",
       "panel.about": "À propos",
 

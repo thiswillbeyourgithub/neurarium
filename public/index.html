@@ -594,6 +594,17 @@
             </label>
           </div>
 
+          <div class="row inline collapsible-control">
+            <!-- Arrow colour mode: off (default) colours arrows per
+                 neurotransmitter; on switches to the coarse excitatory (red) /
+                 inhibitory (blue) sign view. Recolours arrows + the Projections
+                 legend section (js/main.js). Collapsible like auto-rotate. -->
+            <label>
+              <input type="checkbox" id="color-sign" />
+              <span data-i18n="panel.signColors"></span>
+            </label>
+          </div>
+
           <!-- Nested legend, collapsed by default (body ships `hidden`). Its
                first element is the "Show all names" button (kept first across
                rebuilds by buildLegend in js/main.js); the category rows below

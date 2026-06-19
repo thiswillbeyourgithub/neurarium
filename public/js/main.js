@@ -400,6 +400,14 @@ function createSelection({ meshes, arrows }) {
       apply();
     },
     /**
+     * Re-emit the current state to every subscriber (halos/opacity/legend greying)
+     * without changing it. Used after the legend is rebuilt (colour-mode toggle)
+     * so the fresh rows reflect the live isolate set immediately.
+     */
+    refresh() {
+      apply();
+    },
+    /**
      * Register a focus-change callback, invoked with the live isolate set (or
      * null when nothing is isolated) and the pinned-arrow set on every change.
      * Multiple may be registered (legend greying + circuit-pulse stop). Applied
@@ -475,7 +483,54 @@ function createProjectionVisibility(arrows, labels) {
   };
 }
 
-function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim) {
+/**
+ * Group the (established) projection arrows into the rows the legend's Projections
+ * section shows, one entry per row. Two groupings, picked by the colour-mode
+ * toggle, so the legend always matches the arrow colours on screen:
+ *   - "transmitter" (default): one row per neurotransmitter molecule, coloured by
+ *     its arrow colour and labelled "Molecule (kind)";
+ *   - "sign": one row per excitatory/inhibitory/modulatory class, coloured by the
+ *     sign swatch and labelled by the (localized) sign heading.
+ * Each entry is `{ key, label, color, arrows }`; `key` just identifies the row.
+ * @param {import("./arrows.js").ProjectionArrow[]} established  Non-tentative arrows.
+ * @param {import("./data.js").BrainData["meta"]} meta
+ * @param {boolean} signMode
+ */
+function projectionGroups(established, meta, signMode) {
+  if (signMode) {
+    // Sign order follows meta.signLabels (excitatory, inhibitory, modulatory).
+    return Object.keys(meta.signLabels || {})
+      .map((sign) => ({
+        key: `sign:${sign}`,
+        label: meta.signLabels[sign] || sign,
+        color: meta.signColors[sign] || "#fff",
+        arrows: established.filter((a) => a.projection.sign === sign),
+      }))
+      .filter((g) => g.arrows.length > 0);
+  }
+  const molecules = [...new Set(established.map((a) => a.projection.neurotransmitter).filter(Boolean))];
+  return molecules.map((nt) => {
+    const group = established.filter((a) => a.projection.neurotransmitter === nt);
+    const kind = group[0] && group[0].projection.kind;
+    const kindLabel = kind ? (meta.kindLabels[kind] || kind) : "";
+    return {
+      key: `nt:${nt}`,
+      label: kindLabel ? `${nt} (${kindLabel})` : nt,
+      color: (group[0] && group[0].projection.color) || "#fff",
+      arrows: group,
+    };
+  });
+}
+
+/**
+ * Build the legend body from the live dataset. Returns the focus-change `reflect`
+ * callback (greys non-isolated rows); the caller registers it once and re-invokes
+ * buildLegend (reassigning reflect) when the colour mode toggles, so the
+ * Projections rows follow the arrow colours without stacking onIsolate listeners.
+ * @param {boolean} signColorMode  Colour arrows/legend by excit/inhib sign.
+ * @returns {(isolated: Set<THREE.Mesh>|null, focusedArrows: Set<object>) => void}
+ */
+function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode) {
   // Populate the collapsible body, not the panel itself, so the always-visible
   // "Legend" toggle header (in index.html) is left untouched. The action buttons
   // ("Show all names" / "Hide projections") live in a #legend-actions container
@@ -539,41 +594,28 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim) {
   // focus machinery as a circuit, via setCircuit). Clicking the active one clears
   // it. Rows are per-neurotransmitter (finer than kind) so when a kind later
   // carries more than one transmitter they split into their own rows for free.
-  const ntRows = [];
-  let activeNt = null;
   // Established pathways only: the tentative ones get their own section below, so
-  // they never masquerade as an established transmitter row here.
-  const neurotransmitters = [
-    ...new Set(data.projections
-      .filter((p) => !p.tentative)
-      .map((p) => p.neurotransmitter)
-      .filter(Boolean)),
-  ];
-  if (neurotransmitters.length > 0) {
+  // they never masquerade as an established row here. Grouping (per-transmitter or
+  // per-sign) follows the active colour mode so the legend matches the arrows.
+  const projRows = [];
+  let activeProj = null;
+  const established = arrows.filter((a) => !a.tentative);
+  const projGroups = projectionGroups(established, data.meta, signColorMode);
+  if (projGroups.length > 0) {
     const h = document.createElement("h2");
     h.textContent = t("legend.projections");
     legend.appendChild(h);
-    for (const nt of neurotransmitters) {
-      const ntArrows = arrows.filter(
-        (a) => !a.tentative && a.projection.neurotransmitter === nt);
-      // The kind (the functional label) and colour carrying this transmitter,
-      // both read off its arrows (each projection carries its resolved colour).
-      const sample = ntArrows[0] && ntArrows[0].projection;
-      const kind = sample && sample.kind;
-      // Show the localized functional-kind label (data.meta.kindLabels), falling
-      // back to the raw kind key if unmapped.
-      const kindLabel = kind ? (data.meta.kindLabels[kind] || kind) : "";
-      const label = kindLabel ? `${nt} (${kindLabel})` : nt;
-      const row = addLegendItem(legend, (sample && sample.color) || "#fff", label, true);
-      // Endpoints of those arrows, kept opaque so an isolated transmitter still
-      // reads as connecting real regions rather than floating in a dimmed brain.
-      const ntMeshes = [...new Set(ntArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
+    for (const g of projGroups) {
+      const row = addLegendItem(legend, g.color, g.label, true);
+      // Endpoints of those arrows, kept opaque so an isolated group still reads as
+      // connecting real regions rather than floating in a dimmed brain.
+      const groupMeshes = [...new Set(g.arrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
       row.classList.add("clickable");
       row.addEventListener("click", () => {
-        if (activeNt === nt) selection.clear();
-        else selection.setCircuit(ntMeshes, ntArrows);
+        if (activeProj === g.key) selection.clear();
+        else selection.setCircuit(groupMeshes, g.arrows);
       });
-      ntRows.push({ row, nt, arrowSet: new Set(ntArrows) });
+      projRows.push({ row, key: g.key, arrowSet: new Set(g.arrows) });
     }
   }
 
@@ -646,26 +688,26 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim) {
   // a neurotransmitter row lights only when the pinned-arrow set is exactly that
   // transmitter's arrows. `focusedArrows` is the pinned-arrow set (empty unless a
   // circuit/neurotransmitter is focused).
-  selection.onIsolate((isolated, focusedArrows) => {
-    // Detect a neurotransmitter focus first: the pinned-arrow set is exactly one
-    // transmitter's arrows. Such a focus dims every structure (only that
-    // transmitter's arrows + endpoints stay opaque in the scene), so its
-    // structure/heading rows grey out rather than lighting up; that lit-row noise
-    // only makes sense for a circuit.
-    const matchesNt = (arrowSet) => arrowSet.size > 0 && focusedArrows
+  return function reflect(isolated, focusedArrows) {
+    // Detect a projection-group focus first: the pinned-arrow set is exactly one
+    // group's arrows. Such a focus dims every structure (only that group's arrows
+    // + endpoints stay opaque in the scene), so its structure/heading rows grey
+    // out rather than lighting up; that lit-row noise only makes sense for a
+    // circuit.
+    const matchesGroup = (arrowSet) => arrowSet.size > 0 && focusedArrows
       && focusedArrows.size === arrowSet.size
       && [...arrowSet].every((a) => focusedArrows.has(a));
-    activeNt = null;
-    for (const { nt, arrowSet } of ntRows) if (matchesNt(arrowSet)) activeNt = nt;
-    const projFocus = activeNt !== null;
+    activeProj = null;
+    for (const { key, arrowSet } of projRows) if (matchesGroup(arrowSet)) activeProj = key;
+    const projFocus = activeProj !== null;
 
     for (const { row, meshes } of structureRows) {
       const selected = Boolean(isolated) && !projFocus && meshes.some((m) => isolated.has(m));
       row.classList.toggle("selected", selected);
       row.classList.toggle("dimmed", Boolean(isolated) && !selected);
     }
-    for (const { row, arrowSet } of ntRows) {
-      const selected = matchesNt(arrowSet);
+    for (const { row, arrowSet } of projRows) {
+      const selected = matchesGroup(arrowSet);
       row.classList.toggle("selected", selected);
       row.classList.toggle("dimmed", Boolean(isolated) && !selected);
     }
@@ -683,7 +725,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim) {
       row.classList.toggle("selected", selected);
       row.classList.toggle("dimmed", Boolean(isolated) && !selected);
     }
-  });
+  };
 }
 
 /**
@@ -1641,7 +1683,32 @@ async function main() {
   });
 
   const projVis = createProjectionVisibility(arrows, labels);
-  buildLegend(data, meshById, arrows, selection, projVis, circuitAnim);
+
+  // Arrow colour mode + legend. The legend's focus-greying callback is registered
+  // once here; rebuildLegend just swaps which function it delegates to, so the
+  // colour toggle (which rebuilds the legend so its Projections rows match the new
+  // arrow colours) never stacks onIsolate listeners.
+  let signColorMode = false; // false = per-transmitter (default), true = excit/inhib
+  let reflectLegend = () => {};
+  selection.onIsolate((isolated, focusedArrows) => reflectLegend(isolated, focusedArrows));
+  const applyArrowColors = () => {
+    for (const a of arrows) {
+      a.setColor(signColorMode ? a.projection.signColor : a.projection.color);
+    }
+  };
+  const rebuildLegend = () => {
+    reflectLegend = buildLegend(
+      data, meshById, arrows, selection, projVis, circuitAnim, signColorMode);
+    selection.refresh(); // re-grey the fresh rows for the current isolate state
+  };
+  rebuildLegend();
+  const colorSignBox = document.getElementById("color-sign");
+  colorSignBox.addEventListener("change", () => {
+    signColorMode = colorSignBox.checked;
+    applyArrowColors();
+    rebuildLegend();
+  });
+
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
   wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection });
   projVis.apply(); // established arrows visible, tentative ones start hidden

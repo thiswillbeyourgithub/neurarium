@@ -71,6 +71,34 @@ PROJECTION_COLORS: dict[str, str] = {
     "neuroendocrine": "#b07aa1",
 }
 
+# The viewer offers two arrow colour modes (a toggle in the panel):
+#   - "transmitter" (default): one colour per neurotransmitter, i.e. PROJECTION_
+#     COLORS above (today each kind carries exactly one transmitter, so per-kind ==
+#     per-transmitter);
+#   - "sign": a coarse red/blue excitatory-vs-inhibitory view, with the
+#     neuromodulatory kinds (dopaminergic / cholinergic / neuroendocrine) collapsed
+#     to a neutral "modulatory" grey since they have no single excit/inhib sign.
+# KIND_TO_SIGN folds each functional kind onto its sign; SIGN_COLORS / SIGN_LABELS
+# give the sign its swatch + legend heading. All three are emitted into the meta
+# record so the viewer can recolour + relabel the legend with no hardcoded palette.
+KIND_TO_SIGN: dict[str, str] = {
+    "excitatory": "excitatory",
+    "inhibitory": "inhibitory",
+    "dopaminergic": "modulatory",
+    "cholinergic": "modulatory",
+    "neuroendocrine": "modulatory",
+}
+SIGN_COLORS: dict[str, str] = {
+    "excitatory": "#e15759",  # red, same as the excitatory kind
+    "inhibitory": "#4e79a7",  # blue, same as the inhibitory kind
+    "modulatory": "#9aa0a6",  # neutral grey: no single excit/inhib sign
+}
+SIGN_LABELS: dict[str, str] = {
+    "excitatory": "Excitatory",
+    "inhibitory": "Inhibitory",
+    "modulatory": "Modulatory",
+}
+
 # Structure ``group`` -> legend heading, in legend display order (object key
 # order is preserved through JSON, so the viewer's legend follows this order).
 GROUP_LABELS: dict[str, str] = {
@@ -119,6 +147,11 @@ FR: dict[str, str] = {
     "dopaminergic": "dopaminergique",
     "cholinergic": "cholinergique",
     "neuroendocrine": "neuroendocrine",
+    # Sign-mode legend headings (capitalized; distinct from the lowercase kind
+    # labels above, which read inline as "Glutamate (excitatory)").
+    "Excitatory": "Excitateur",
+    "Inhibitory": "Inhibiteur",
+    "Modulatory": "Modulateur",
     # Neurotransmitters
     "Glutamate": "Glutamate",
     "GABA": "GABA",
@@ -1651,6 +1684,12 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         "projection_colors": PROJECTION_COLORS,
         "kind_labels": {kind: _t(kind) for kind in PROJECTION_COLORS},
         "group_labels": {g: _t(label) for g, label in GROUP_LABELS.items()},
+        # Sign (excitatory / inhibitory) colour mode: kind->sign fold, sign->colour
+        # swatch (language-neutral) and sign->{en,fr} legend heading. The viewer's
+        # colour toggle reads these so neither palette nor labels are hardcoded.
+        "kind_signs": KIND_TO_SIGN,
+        "sign_colors": SIGN_COLORS,
+        "sign_labels": {sign: _t(label) for sign, label in SIGN_LABELS.items()},
     })
 
     return jsonl, shapes
