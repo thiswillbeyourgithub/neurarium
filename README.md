@@ -24,9 +24,9 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
   hippocampus, cingulate, and fornix.
 - At rest the regions lock together into a whole brain; an intro animation
   assembles them from an exploded state on load.
-- Curved arrows for directed neuron projections, colored by type (excitatory /
-  inhibitory / dopaminergic), with a cone at the target end (both ends for
-  reciprocal / commissural pathways).
+- Curved arrows for directed neuron projections, colored by type (excitatory,
+  inhibitory, dopaminergic, cholinergic, neuroendocrine), with a cone at the
+  target end (both ends for reciprocal / commissural pathways).
 
 ### Exploring the anatomy
 

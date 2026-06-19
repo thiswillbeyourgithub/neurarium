@@ -59,11 +59,16 @@ log = logging.getLogger("generate_data")
 # ---------------------------------------------------------------------------
 
 # Arrow colour per projection ``kind`` (the functional class): glutamate ->
-# excitatory (red), GABA -> inhibitory (blue), dopamine -> modulatory (green).
+# excitatory (red), GABA -> inhibitory (blue), dopamine -> dopaminergic (green),
+# acetylcholine -> cholinergic (gold), neurosecretory/hormonal -> neuroendocrine
+# (purple). The kind selects the arrow colour; the finer transmitter molecule is
+# the projection's ``neurotransmitter`` field.
 PROJECTION_COLORS: dict[str, str] = {
     "excitatory": "#e15759",
     "inhibitory": "#4e79a7",
     "dopaminergic": "#59a14f",
+    "cholinergic": "#edc948",
+    "neuroendocrine": "#b07aa1",
 }
 
 # Structure ``group`` -> legend heading, in legend display order (object key
@@ -476,6 +481,41 @@ SOURCES: dict[str, dict[str, str]] = {
                     "Neurol Psychiatry 38(4):725-743.",
         "url": "TODO",
     },
+    "price1990": {
+        "citation": "Price JL (1990). Olfactory system. In: Paxinos G (ed), The "
+                    "Human Nervous System. Academic Press, pp. 979-1001.",
+        "url": "TODO",
+    },
+    "dutar1995": {
+        "citation": "Dutar P, Bassant MH, Senut MC, Lamour Y (1995). The "
+                    "septohippocampal pathway: structure and function. Physiol "
+                    "Rev 75(2):393-427.",
+        "url": "TODO",
+    },
+    "swanson_sawchenko1983": {
+        "citation": "Swanson LW, Sawchenko PE (1983). Hypothalamic integration: "
+                    "organization of the paraventricular and supraoptic nuclei. "
+                    "Annu Rev Neurosci 6:269-324.",
+        "url": "TODO",
+    },
+    "haber2010": {
+        "citation": "Haber SN, Knutson B (2010). The reward circuit: linking "
+                    "primate anatomy and human imaging. Neuropsychopharmacology "
+                    "35(1):4-26.",
+        "url": "TODO",
+    },
+    "crick_koch2005": {
+        "citation": "Crick FC, Koch C (2005). What is the function of the "
+                    "claustrum? Philos Trans R Soc Lond B Biol Sci "
+                    "360(1458):1271-1279.",
+        "url": "TODO",
+    },
+    "menon_uddin2010": {
+        "citation": "Menon V, Uddin LQ (2010). Saliency, switching, attention "
+                    "and control: a network model of insula function. Brain "
+                    "Struct Funct 214(5-6):655-667.",
+        "url": "TODO",
+    },
 }
 
 # Directed neuron projections drawn as arrows. Each entry is a connection with
@@ -625,18 +665,87 @@ PROJECTIONS: list[dict[str, Any]] = [
          description="Entorhinal (medial temporal) cortex drives the hippocampus "
                      "via the perforant path.",
          sources=["schmahmann2006"]),
-    dict(**{"from": "hippocampus_R", "to": "hypothalamus_R"},
+    dict(**{"from": "hippocampus_R", "to": "fornix_R"},
          kind="excitatory", neurotransmitter="Glutamate",
-         label="Fornix",
-         description="Major hippocampal output, arching via the fornix to the "
-                     "mammillary bodies of the hypothalamus (Papez circuit).",
+         label="Fornix (hippocampal output)",
+         description="The major hippocampal output gathers into the fornix, the "
+                     "great arching tract of the Papez circuit.",
          sources=["papez1937", "schmahmann2006"]),
-    dict(**{"from": "hypothalamus_R", "to": "thalamus_R"},
+    dict(**{"from": "fornix_R", "to": "mammillary_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Postcommissural fornix",
+         description="The fornix carries hippocampal output forward to the "
+                     "mammillary bodies (Papez circuit).",
+         sources=["papez1937", "schmahmann2006"]),
+    dict(**{"from": "mammillary_R", "to": "thalamus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Mammillothalamic tract",
-         description="Mammillary bodies to the anterior thalamus, continuing the "
-                     "Papez circuit.",
+         description="Mammillary bodies project to the anterior thalamic nuclei, "
+                     "continuing the Papez circuit.",
          sources=["papez1937"]),
+    dict(**{"from": "thalamus_R", "to": "cingulate_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Anterior thalamocingulate",
+         description="The anterior thalamic nuclei project to the cingulate "
+                     "gyrus, the next leg of the Papez circuit.",
+         sources=["papez1937"]),
+    dict(**{"from": "cingulate_R", "to": "hippocampus_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Cingulum (to hippocampus)",
+         description="The cingulate gyrus projects back to the hippocampus via "
+                     "the cingulum, closing the Papez loop.",
+         sources=["papez1937", "schmahmann2006"]),
+    # --- Olfactory, amygdalar and septal limbic links ---
+    dict(**{"from": "olfactory_bulb_R", "to": "amygdala_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Olfactory projection (to amygdala)",
+         description="Mitral cells of the olfactory bulb project to the "
+                     "corticomedial amygdala.",
+         sources=["price1990"]),
+    dict(**{"from": "olfactory_bulb_R", "to": "insula_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Olfactory projection (to olfactory cortex)",
+         description="Bulbar output reaches the piriform / insular olfactory "
+                     "cortex.",
+         sources=["price1990"]),
+    dict(**{"from": "amygdala_R", "to": "hypothalamus_R"},
+         kind="inhibitory", neurotransmitter="GABA",
+         label="Stria terminalis",
+         description="The amygdala projects to the hypothalamus via the stria "
+                     "terminalis, driving autonomic / endocrine responses.",
+         sources=["schmahmann2006"]),
+    dict(**{"from": "hippocampus_R", "to": "septal_nuclei_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Hippocamposeptal projection",
+         description="Hippocampal fibers run in the precommissural fornix to the "
+                     "septal nuclei.",
+         sources=["dutar1995"]),
+    dict(**{"from": "septal_nuclei_R", "to": "hippocampus_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Septohippocampal pathway",
+         description="Medial septal cholinergic neurons project to the "
+                     "hippocampus, pacing the hippocampal theta rhythm.",
+         sources=["dutar1995"]),
+    # --- Ventral striatum (reward) and the neuroendocrine outflow ---
+    dict(**{"from": "substantia_nigra_R", "to": "accumbens_R"},
+         kind="dopaminergic", neurotransmitter="Dopamine",
+         label="Mesolimbic dopamine pathway",
+         description="Midbrain dopaminergic neurons (VTA / substantia nigra) "
+                     "project to the nucleus accumbens, the reward hub.",
+         sources=["haber2010"]),
+    dict(**{"from": "accumbens_R", "to": "globus_pallidus_R"},
+         kind="inhibitory", neurotransmitter="GABA",
+         label="Accumbens to ventral pallidum",
+         description="Nucleus accumbens medium spiny neurons project to the "
+                     "(ventral) pallidum, the ventral-striatal output.",
+         sources=["haber2010"]),
+    dict(**{"from": "hypothalamus_R", "to": "pituitary"},
+         kind="neuroendocrine", neurotransmitter="Releasing hormones",
+         label="Hypothalamo-hypophyseal axis",
+         description="Hypothalamic neurons drive the pituitary via the median "
+                     "eminence / portal system and the posterior hypophyseal "
+                     "tract.",
+         sources=["swanson_sawchenko1983"]),
     # --- Interhemispheric commissures (bidirectional, defined once across the
     #     midline so symmetric=False keeps them from mirroring into duplicates) ---
     dict(**{"from": "frontal_L", "to": "frontal_R"},
@@ -661,6 +770,47 @@ PROJECTIONS: list[dict[str, Any]] = [
          description="Older commissure linking the temporal lobes (and olfactory "
                      "structures).",
          sources=["schmahmann2006"]),
+    # --- Plausible / speculative pathways (tentative=True) -------------------
+    # Anatomically reasonable but less certain or more diffuse than the pathways
+    # above. The viewer lists these in a separate, off-by-default legend section
+    # and draws them as dotted arrows, so they read as "maybe" rather than fact.
+    # ``tentative`` is carried through to the emitted projection record.
+    dict(**{"from": "claustrum_R", "to": "frontal_R"},
+         kind="excitatory", neurotransmitter="Glutamate", tentative=True,
+         label="Claustro-frontal projection", bidirectional=True,
+         description="Reciprocal claustro-cortical link with prefrontal cortex "
+                     "(implicated in salience / attention).",
+         sources=["crick_koch2005"]),
+    dict(**{"from": "claustrum_R", "to": "insula_R"},
+         kind="excitatory", neurotransmitter="Glutamate", tentative=True,
+         label="Claustro-insular projection", bidirectional=True,
+         description="The claustrum tightly interconnects with the adjacent "
+                     "insular cortex.",
+         sources=["crick_koch2005"]),
+    dict(**{"from": "insula_R", "to": "cingulate_R"},
+         kind="excitatory", neurotransmitter="Glutamate", tentative=True,
+         label="Salience network link", bidirectional=True,
+         description="The anterior insula and the cingulate co-activate as the "
+                     "salience network.",
+         sources=["menon_uddin2010"]),
+    dict(**{"from": "amygdala_R", "to": "accumbens_R"},
+         kind="excitatory", neurotransmitter="Glutamate", tentative=True,
+         label="Basolateral amygdala to accumbens",
+         description="Basolateral amygdala glutamatergic input to the ventral "
+                     "striatum (motivational salience).",
+         sources=["haber2010"]),
+    dict(**{"from": "mammillary_R", "to": "hypothalamus_R"},
+         kind="excitatory", neurotransmitter="Glutamate", tentative=True,
+         label="Mammillary-hypothalamic link",
+         description="The mammillary bodies sit within and connect to the "
+                     "posterior hypothalamus.",
+         sources=["schmahmann2006"]),
+    dict(**{"from": "septal_nuclei_R", "to": "hypothalamus_R"},
+         kind="inhibitory", neurotransmitter="GABA", tentative=True,
+         label="Septohypothalamic projection",
+         description="The septal nuclei project to the hypothalamus, a limbic-"
+                     "autonomic relay.",
+         sources=["swanson_sawchenko1983"]),
 ]
 
 # Named circuits: curated bundles of structures that, together, form a classic
@@ -697,11 +847,11 @@ CIRCUITS: list[dict[str, Any]] = [
          # loop running through the brainstem and cerebellum.
          structures=["frontal", "brainstem", "cerebellum", "thalamus"]),
     dict(id="limbic_memory", name="Hippocampal / limbic (Papez)",
-         # The medial-temporal memory loop: cortex -> hippocampus -> fornix ->
-         # hypothalamus (mammillary) -> thalamus. (Routed through the structures
-         # the current projections use; the fornix/cingulate meshes are not yet
-         # wired into pathways.)
-         structures=["temporal", "hippocampus", "hypothalamus", "thalamus"]),
+         # The medial-temporal memory loop, now wired through the real fornix,
+         # mammillary and cingulate nodes: temporal -> hippocampus -> fornix ->
+         # mammillary -> (anterior) thalamus -> cingulate -> hippocampus.
+         structures=["temporal", "hippocampus", "fornix", "mammillary",
+                     "thalamus", "cingulate"]),
     dict(id="commissures", name="Commissures (interhemispheric)",
          # The left-right cortical bridges: corpus callosum + anterior commissure.
          # Only same-lobe cross-midline arrows fall *between* these structures.

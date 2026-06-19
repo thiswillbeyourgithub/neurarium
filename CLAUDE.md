@@ -691,7 +691,8 @@ as the WIP banner (`js/error-banner.js`):
      `"symmetric": False` on an entry to keep a genuinely one-sided pathway from
      being mirrored. The flag is a generator hint and is stripped from the data.
    - Projection `kind` must be a key of `PROJECTION_COLORS` in
-     `tools/generate_data.py` (`excitatory`, `inhibitory`, `dopaminergic`); add
+     `tools/generate_data.py` (`excitatory`, `inhibitory`, `dopaminergic`,
+     `cholinergic`, `neuroendocrine`); add
      new kinds there (the generator raises if a projection uses an unmapped kind)
      + in this doc if needed. The map is emitted into the data's `meta` record and
      each projection gets a resolved `color` at load, so the viewer never
