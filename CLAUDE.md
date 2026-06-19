@@ -136,8 +136,9 @@ js/arrows.js          Builds curved tube+cone arrows for projections; each
                       arrow's colour comes from its `projection.color` (resolved
                       by js/data.js from the data's meta map, single source
                       tools/generate_data.py), not a hardcoded table here, and is
-                      recolourable at runtime via `setColor` (the panel's
-                      excit/inhib colour-mode toggle, see Controls). A
+                      recolourable at runtime via `setColor` (the panel's arrow
+                      colour-mode switch, Neurotransmitter / Potential, see
+                      Controls). A
                       `projection.tentative` arrow is drawn as a *dotted* tube
                       (a gapped run of short segments merged by a small local
                       mergeIndexedGeometries; no addon) so speculative pathways
@@ -551,18 +552,19 @@ as the WIP banner (`js/error-banner.js`):
   lives in one collapsible **"Neurarium" panel at the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
-  the **Separate** and **Transparency** sliders, then **Auto-rotate**, **See
-  inside** and **Excitatory / inhibitory colours**, then the
+  the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
+  inside**, then the
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
-  names** and **Hide projections** buttons, then the nested collapsed **About**
-  (`#about`) section. Searching swaps the search box in place of the panel's
+  names** and **Hide projections** buttons followed by the **arrow colour-mode
+  switch** (Neurotransmitter / Potential, `#color-mode`), then the nested
+  collapsed **About** (`#about`) section. Searching swaps the search box in place of the panel's
   normal contents (`#controls-main` hidden, `#search` shown) rather than opening
   a popup; the reset/search buttons stay visible so the magnifier toggles back.
   The panel / legend / about collapse headers share one `wireCollapse` helper in
   `js/main.js`. **Legend and About are an accordion**: opening one closes the
   other (only one open at a time), and while either is open every control above
   it (the `#lang-switch`, the `.toolbar-row`, the two sliders and the Auto-rotate
-  / See inside / Excitatory-inhibitory-colours checkboxes, all tagged
+  / See inside checkboxes, all tagged
   `.collapsible-control`) is hidden via the
   `#controls.section-open` class so the open section's content doesn't push the
   panel tall; only the two section headers stay visible. `wireCollapse` takes an
@@ -605,20 +607,24 @@ as the WIP banner (`js/error-banner.js`):
   isolate mode is independent (it dims via opacity, not visibility). Arrows are
   left visible (so the revealed connections still show). `cull.tick()` runs in
   the render loop after `controls.update()`.
-- **Excitatory / inhibitory colours** checkbox (`#color-sign`, off by default):
-  switches the arrow colour mode. Off (the default) colours every arrow per
-  **neurotransmitter** (`projection.color`, the `PROJECTION_COLORS` palette). On
-  recolours every arrow by its coarse **sign** (`projection.signColor`):
-  excitatory red, inhibitory blue, the neuromodulatory kinds (dopaminergic /
-  cholinergic / neuroendocrine) a neutral "modulatory" grey. The maps are emitted
-  by the generator into the data's `meta` record (`signColors` / `signLabels`,
-  with the per-projection `sign` resolved in `js/data.js` from the meta
-  `kind_signs` fold), not hardcoded. Toggling recolours arrows in place
-  (`ProjectionArrow.setColor`) **and rebuilds the legend** so its Projections
-  section shows one row per sign (in sign mode) instead of one per
-  neurotransmitter; the legend's focus-greying callback is registered once and
-  re-pointed on each rebuild (so the toggle never stacks `onIsolate` listeners).
-  See `projectionGroups` + the colour-mode wiring in `js/main.js`.
+- **Arrow colour-mode switch** (`#color-mode`, a two-state segmented control that
+  lives in `#legend-actions` right under **Hide projections**, defaulting to
+  **Neurotransmitter**): picks how every arrow is coloured. **Neurotransmitter**
+  (the default) colours each arrow per molecule (`projection.color`, the
+  `PROJECTION_COLORS` palette). **Potential** recolours every arrow by its coarse
+  **sign** (`projection.signColor`): excitatory red, inhibitory blue, the
+  neuromodulatory kinds (dopaminergic / cholinergic / neuroendocrine) a neutral
+  "modulatory" grey. The maps are emitted by the generator into the data's `meta`
+  record (`signColors` / `signLabels`, with the per-projection `sign` resolved in
+  `js/data.js` from the meta `kind_signs` fold), not hardcoded. Picking an option
+  marks the active button, recolours arrows in place (`ProjectionArrow.setColor`)
+  **and rebuilds the legend** so its Projections section shows one row per sign
+  (in Potential mode) instead of one per neurotransmitter; the legend's
+  focus-greying callback is registered once and re-pointed on each rebuild (so the
+  switch never stacks `onIsolate` listeners). The switch sits inside
+  `#legend-actions`, which `buildLegend` preserves as a node across rebuilds, so
+  its click listeners survive. See `projectionGroups` + the colour-mode wiring
+  (`setColorMode`) in `js/main.js`.
 - **Separate** slider (0..1, labelled "Separate" in the UI; the explode/`?explode`
   terminology lives on internally): pushes each region radially outward from
   the brain center to reveal deep structures. Tuning constant:
@@ -663,13 +669,14 @@ as the WIP banner (`js/error-banner.js`):
     loop reads as signal flowing around it. The animation stops the instant the
     focus stops being that circuit.
   - The **Projections** legend section lists one row per projection group, the
-    grouping following the active **colour mode** (the "Excitatory / inhibitory
-    colours" checkbox above) so the legend always matches the arrows on screen:
+    grouping following the active **colour mode** (the arrow colour-mode switch,
+    Neurotransmitter / Potential, just above) so the legend always matches the
+    arrows on screen:
     in the default per-**neurotransmitter** mode one row per molecule (e.g.
     `Glutamate (excitatory)`, coloured by its arrow colour and labelled with the
     functional kind in parens; per-transmitter not per-kind, so a kind carrying
     more than one transmitter splits automatically, though today's data is 1:1);
-    in **sign** mode one row per sign (Excitatory / Inhibitory / Modulatory,
+    in **Potential** (sign) mode one row per sign (Excitatory / Inhibitory / Modulatory,
     coloured by the sign swatch). The rows are built by `projectionGroups` in
     `js/main.js`. Each row is clickable: clicking one isolates *only* that group
     via the same `setCircuit` machinery (it pins every arrow in the group plus the

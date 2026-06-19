@@ -1800,12 +1800,27 @@ async function main() {
     selection.refresh(); // re-grey the fresh rows for the current isolate state
   };
   rebuildLegend();
-  const colorSignBox = document.getElementById("color-sign");
-  colorSignBox.addEventListener("change", () => {
-    signColorMode = colorSignBox.checked;
+  // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
+  // segmented control under "Hide projections". Picking an option recolours the
+  // arrows and rebuilds the Projections legend rows to match. The switch lives
+  // inside #legend-actions, which buildLegend preserves as a node across
+  // rebuilds, so these listeners survive a rebuild.
+  const colorModeSwitch = document.getElementById("color-mode");
+  const modeButtons = colorModeSwitch.querySelectorAll(".mode-btn");
+  const setColorMode = (sign) => {
+    if (sign === signColorMode) return;
+    signColorMode = sign;
+    for (const b of modeButtons) {
+      const on = (b.dataset.mode === "sign") === sign;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-pressed", String(on));
+    }
     applyArrowColors();
     rebuildLegend();
-  });
+  };
+  for (const b of modeButtons) {
+    b.addEventListener("click", () => setColorMode(b.dataset.mode === "sign"));
+  }
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
   wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection });

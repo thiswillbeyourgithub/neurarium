@@ -311,6 +311,25 @@
         margin: 4px 0 12px;
       }
       #legend-actions .btn { margin: 0; }
+      /* Arrow colour-mode switch (Neurotransmitter | Potential): a small heading
+         over a two-button segmented control, the active option highlighted blue
+         like the language switch / .tool-btn.active. Sits in #legend-actions. */
+      .mode-switch { display: flex; flex-direction: column; gap: 6px; }
+      .mode-label { color: var(--muted); font-size: 12px; }
+      .mode-options { display: flex; gap: 4px; }
+      .mode-btn {
+        flex: 1 1 0;
+        padding: 6px 8px;
+        font: inherit;
+        font-size: 12px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .mode-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
+      .mode-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
       #legend-body h2:first-child { margin-top: 0; }
       #legend h2:first-child { margin-top: 0; }
       #legend h2 {
@@ -594,17 +613,6 @@
             </label>
           </div>
 
-          <div class="row inline collapsible-control">
-            <!-- Arrow colour mode: off (default) colours arrows per
-                 neurotransmitter; on switches to the coarse excitatory (red) /
-                 inhibitory (blue) sign view. Recolours arrows + the Projections
-                 legend section (js/main.js). Collapsible like auto-rotate. -->
-            <label>
-              <input type="checkbox" id="color-sign" />
-              <span data-i18n="panel.signColors"></span>
-            </label>
-          </div>
-
           <!-- Nested legend, collapsed by default (body ships `hidden`). Its
                first element is the "Show all names" button (kept first across
                rebuilds by buildLegend in js/main.js); the category rows below
@@ -625,6 +633,20 @@
                 <!-- Hides every projection arrow (off by default: arrows shown). -->
                 <button type="button" id="toggle-projections" class="btn" aria-pressed="false" data-i18n="legend.hideProjections">
                 </button>
+                <!-- Arrow colour mode: a two-state switch. "Neurotransmitter"
+                     (default) colours arrows per molecule; "Potential" switches
+                     to the coarse excitatory (red) / inhibitory (blue) sign view.
+                     js/main.js marks the active button, recolours arrows and
+                     rebuilds the Projections rows. Lives inside #legend-actions
+                     so it sits right above the projection colour rows it drives
+                     (and is preserved across legend rebuilds with them). -->
+                <div id="color-mode" class="mode-switch" role="group" aria-labelledby="color-mode-label">
+                  <span class="mode-label" id="color-mode-label" data-i18n="panel.arrowColors"></span>
+                  <div class="mode-options">
+                    <button type="button" class="mode-btn active" data-mode="nt" aria-pressed="true" data-i18n="panel.colorNt"></button>
+                    <button type="button" class="mode-btn" data-mode="sign" aria-pressed="false" data-i18n="panel.colorPotential"></button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
