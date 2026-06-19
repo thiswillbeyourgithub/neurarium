@@ -1497,10 +1497,10 @@ async function main() {
     }
   });
 
-  // Double-click to focus: on a structure, center and frame it; on empty space,
-  // recenter the whole brain (same as the reset button). The move is a smooth
-  // tween advanced in the render loop; grabbing the controls cancels it so a
-  // drag always wins.
+  // Double-click to focus: on a structure, isolate it (both hemispheres) exactly
+  // like clicking its legend row; on empty space, recenter the whole brain (same
+  // as the reset button). The move is a smooth tween advanced in the render loop;
+  // grabbing the controls cancels it so a drag always wins.
   const focus = createCameraFocus({ camera, controls, meshes });
   controls.addEventListener("start", () => focus.cancel());
 
@@ -1530,10 +1530,20 @@ async function main() {
     else info.show(proj); // no arrow built for this pathway: details only
   });
 
+  // Both hemispheres (plus midline singletons) sharing a clicked mesh's base, so
+  // a double-click isolates the same pair a legend row click does. The id base is
+  // the structure id minus its _R/_L hemisphere suffix (midline ids have none).
+  const baseOf = (id) => id.replace(/_[LR]$/, "");
+  const isolateGroupFor = (mesh) => {
+    const base = baseOf(mesh.userData.structure.id);
+    return meshes.filter((m) => baseOf(m.userData.structure.id) === base);
+  };
+
   canvas.addEventListener("dblclick", (event) => {
     const mesh = pickAt(event.clientX, event.clientY);
     if (mesh) {
-      selectStructure(mesh, { frame: true });
+      // Same as clicking the structure's legend row: isolate/focus the pair.
+      selection.toggleIsolate(isolateGroupFor(mesh));
     } else {
       // Double-click on empty space is a full reset, same as the reset button.
       focus.recenter();

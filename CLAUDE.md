@@ -580,10 +580,11 @@ as the WIP banner (`js/error-banner.js`):
   opacity.
 - **Selection / halo + isolate** (`createSelection` in `js/main.js`): the single
   source of truth for which structures/arrows are highlighted/focused.
-  - Picking a structure in the 3D view (click/tap, double-click, or a structure
+  - Picking a structure in the 3D view (click/tap or a structure
     search result) gives it a soft glowing **halo** (a back-side additive shell
     child, `mesh.userData.halo`); this is a lightweight highlight only, no
-    dimming. Picking an **arrow** (click/tap or a connection search result) halos
+    dimming. (A **double-click** instead isolates the structure, like its legend
+    row, see below.) Picking an **arrow** (click/tap or a connection search result) halos
     it too (a fatter additive tube along its arc, `ProjectionArrow.setHalo`); the
     structure halo and arrow halo are mutually exclusive.
   - Clicking a **structure row in the legend** toggles that structure (both
@@ -671,7 +672,7 @@ as the WIP banner (`js/error-banner.js`):
     description, and its sources (a verified http(s) url renders as a link, a
     `"TODO"` url as plain text). Built from the projection's metadata. Arrow
     picking (`pickArrowAt`) takes priority over the region behind it.
-  - **Clicking/tapping a structure** (or a double-click, or a structure search
+  - **Clicking/tapping a structure** (or a structure search
     result) shows the **structure** view (`showStructure`): its name, its group
     heading (from `data.meta.groupLabels`), a **Wikipedia link** when the
     structure record carries a `wikipedia` url (rendered only for an http(s)
@@ -684,15 +685,15 @@ as the WIP banner (`js/error-banner.js`):
     pathways shows "No mapped connections yet."
   - A click/tap that **misses** every arrow and structure (empty space) closes
     the panel.
-- **Double-click**: on a structure centers and frames it (and opens its
-  structure panel); on empty space recenters the whole brain (same as the reset
-  button).
-- All camera framing above (reset, double-click, search) goes through one smooth
+- **Double-click**: on a structure **isolates/focuses** it (both hemispheres),
+  exactly like clicking its legend row (`selection.toggleIsolate`, see Selection
+  above); on empty space recenters the whole brain (same as the reset button).
+- All camera framing above (reset, search) goes through one smooth
   tween, `createCameraFocus` in `js/main.js`: it moves the orbit pivot and
   camera distance but keeps the current view direction, is advanced once per
   frame in the render loop, and is cancelled the moment the user grabs the
   controls so a drag always wins.
-- After focusing a single structure (double-click or structure search), moving
+- After focusing a single structure (a structure search), moving
   the **blow-out** slider keeps that structure centered: `createCameraFocus`
   remembers it (`focused`) and `reaimFocused()` (called from the explode handler)
   re-points the orbit pivot at its new exploded position. Only the pivot moves,
