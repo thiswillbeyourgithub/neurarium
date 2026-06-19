@@ -240,8 +240,15 @@
         max-height: 42vh;
         overflow-y: auto;
       }
-      /* "Show all names" is the legend's first element; space it off the rows. */
-      #legend-body .btn { margin: 4px 0 12px; }
+      /* Legend action buttons (show-all-names, hide-projections) stack at the
+         top, spaced off the generated category rows below them. */
+      #legend-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 4px 0 12px;
+      }
+      #legend-actions .btn { margin: 0; }
       #legend-body h2:first-child { margin-top: 0; }
       #legend h2:first-child { margin-top: 0; }
       #legend h2 {
@@ -461,10 +468,18 @@
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
             <div id="legend-body" hidden>
-              <!-- Forces every structure name on/off (vs. hover, one at a time). -->
-              <button type="button" id="toggle-names" class="btn" aria-pressed="false">
-                Show all names
-              </button>
+              <!-- Action buttons kept across buildLegend's rebuilds (it preserves
+                   this whole container, then appends the generated rows after). -->
+              <div id="legend-actions">
+                <!-- Forces every structure name on/off (vs. hover, one at a time). -->
+                <button type="button" id="toggle-names" class="btn" aria-pressed="false">
+                  Show all names
+                </button>
+                <!-- Hides every projection arrow (off by default: arrows shown). -->
+                <button type="button" id="toggle-projections" class="btn" aria-pressed="false">
+                  Hide projections
+                </button>
+              </div>
             </div>
           </div>
         </div>

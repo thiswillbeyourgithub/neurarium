@@ -328,8 +328,8 @@ analytics (no build step):
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
   the **Blow-out** and **Transparency** sliders, then **Auto-rotate**, then the
-  nested collapsed **Legend** (`#legend`) whose first row is the **Show all
-  names** button. Searching swaps the search box in place of the panel's normal
+  nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
+  names** and **Hide projections** buttons. Searching swaps the search box in place of the panel's normal
   contents (`#controls-main` hidden, `#search` shown) rather than opening a
   popup; the reset/search buttons stay visible so the magnifier toggles back.
 - **Auto-rotate** checkbox: spins the camera around the brain (OrbitControls
@@ -388,11 +388,13 @@ analytics (no build step):
   black halo, so they stay legible over any region and overlapping names don't
   hide behind opaque boxes.
 - **Legend**: nested inside the bottom-left panel, collapsed by default; click
-  its header to expand. Its first row is the **Show all names** button (kept
-  first across rebuilds by `buildLegend`, which preserves that node); the rest is
-  generated from the data (see below). Each structure row is clickable to
-  isolate/focus that region (see Selection above); the projection-kind rows are
-  not.
+  its header to expand. It starts with the **action buttons** (a `#legend-actions`
+  container kept first across rebuilds by `buildLegend`, which preserves that
+  node): **Show all names** and **Hide projections** (off by default; toggles
+  every arrow's visibility at once via `arrow.setVisible`, and refreshes labels
+  so the connection labels follow). The rest is generated from the data (see
+  below). Each structure row is clickable to isolate/focus that region (see
+  Selection above); the projection-kind rows are not.
 - **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
   scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
 - **Reset + search** (the icon-button row at the top of the panel, just above the

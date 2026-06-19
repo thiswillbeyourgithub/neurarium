@@ -390,13 +390,14 @@ function addLegendItem(container, color, label, line = false) {
  */
 function buildLegend(data, meshById, arrows, selection) {
   // Populate the collapsible body, not the panel itself, so the always-visible
-  // "Legend" toggle header (in index.html) is left untouched. The "Show all
-  // names" button is the legend's first element and is authored in the HTML;
-  // keep that exact node (it carries the wireControls click handler) as the sole
-  // survivor and append the generated category rows after it, so it stays first.
+  // "Legend" toggle header (in index.html) is left untouched. The action buttons
+  // ("Show all names" / "Hide projections") live in a #legend-actions container
+  // authored in the HTML; keep that exact node (it carries the wireControls click
+  // handlers) as the sole survivor and append the generated category rows after
+  // it, so the buttons stay first.
   const legend = document.getElementById("legend-body");
-  const namesBtn = document.getElementById("toggle-names");
-  if (namesBtn) legend.replaceChildren(namesBtn);
+  const actions = document.getElementById("legend-actions");
+  if (actions) legend.replaceChildren(actions);
   else legend.replaceChildren();
 
   // Remember each structure row + the meshes it stands for, so the isolate state
@@ -809,6 +810,7 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
   const explode = document.getElementById("explode");
   const transparency = document.getElementById("transparency");
   const toggleNames = document.getElementById("toggle-names");
+  const toggleProjections = document.getElementById("toggle-projections");
   const controlsToggle = document.getElementById("controls-toggle");
   const controlsBody = document.getElementById("controls-body");
   const legendToggle = document.getElementById("legend-toggle");
@@ -851,6 +853,20 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection }) {
     toggleNames.setAttribute("aria-pressed", String(allNames));
     toggleNames.classList.toggle("active", allNames);
     toggleNames.textContent = allNames ? "Hide all names" : "Show all names";
+  });
+
+  // Hide/show every projection arrow at once (off by default: arrows shown).
+  // Toggles each arrow group's visibility and refreshes labels so the connection
+  // labels (which key off group.visible) follow; hidden arrows also stop being
+  // pickable since the pick helpers skip group.visible=false.
+  let projectionsHidden = false;
+  toggleProjections.addEventListener("click", () => {
+    projectionsHidden = !projectionsHidden;
+    for (const arrow of arrows) arrow.setVisible(!projectionsHidden);
+    labels.refresh();
+    toggleProjections.setAttribute("aria-pressed", String(projectionsHidden));
+    toggleProjections.classList.toggle("active", projectionsHidden);
+    toggleProjections.textContent = projectionsHidden ? "Show projections" : "Hide projections";
   });
 
   // Collapsible legend, collapsed on load (markup ships collapsed too).
