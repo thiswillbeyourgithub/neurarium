@@ -10,6 +10,8 @@ Neurarium is an interactive 3D brain visualizer that runs in the browser. It
 shows brain regions (cortical lobes, basal ganglia / deep nuclei, hindbrain) as
 3D shapes and draws arrows for neuron projections between them.
 
+Live at **<https://neurarium.olicorne.org>**.
+
 ![Neurarium screenshot](docs/screenshot.png)
 
 ## Features
