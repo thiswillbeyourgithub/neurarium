@@ -49,20 +49,27 @@ Authoring + dev tooling live in `tools/` (`generate_data.py`, `serve.py`,
 ```
 tools/generate_data.py  Single source of truth for the anatomy. Defines every
                       region + projection once and emits the two artifacts below.
-data/brain.jsonl      One JSON object per line. Each line is one of:
+                      Every translatable display string below is an {en, fr}
+                      object (see "Internationalization"); js/data.js localizes
+                      them at load. data/brain.jsonl is one JSON object per line.
+                      Each line is one of:
                         - a "meta" record (the first line): the presentation maps
-                          projection_colors (kind -> arrow colour) and group_labels
-                          (group -> legend heading), so the dataset is self-
+                          projection_colors (kind -> arrow colour), kind_labels
+                          (kind -> {en,fr} functional-class label) and group_labels
+                          (group -> {en,fr} legend heading), so the dataset is self-
                           describing and a port needs no hardcoded palette
-                        - a "structure" (region): id, name, group, position,
+                        - a "structure" (region): id, name ({en,fr}, with the
+                          hemisphere prefix/suffix), base_name ({en,fr}, hemisphere-
+                          stripped, used for the legend row), group, position,
                           color, shape_file, and an optional wikipedia (article
                           URL, shown as a link in the structure info panel)
-                        - a "projection": from, to, kind, label,
-                          neurotransmitter, description, sources[{citation,url}],
+                        - a "projection": from, to, kind, label ({en,fr}),
+                          neurotransmitter ({en,fr}), description ({en,fr}),
+                          sources[{citation,url}] (not translated),
                           optional bidirectional, and optional tentative (a
                           speculative pathway: drawn as a dotted arrow in a
                           separate, off-by-default legend section)
-                        - a "circuit": id, name, structures[ids] (a named
+                        - a "circuit": id, name ({en,fr}), structures[ids] (a named
                           functional loop; its arrows are derived in the viewer
                           as the projections whose endpoints are both in the set)
 shapes/<name>.json    One geometry file per distinct *form* (independent of
@@ -341,6 +348,22 @@ script, loaded early in `index.html`) is the whole mechanism:
   labels + descriptions, circuit names, legend group headings, neurotransmitters,
   kind labels) live in the data file as `{en, fr}` objects, authored once in
   `tools/generate_data.py` (see "Changing the data") and resolved by `js/data.js`.
+- **Generator side (`tools/generate_data.py`).** The anatomy is authored in
+  English; a single `FR` table (English string -> French) is the French source,
+  and `_t("English")` wraps any display string into `{"en": ..., "fr": FR[...]}`
+  when the records are built. A string with no `FR` entry is collected and
+  `build_records` **raises listing every missing one**, so the data can never ship
+  half-translated. Per-hemisphere names are **composed, not stored**: `_side_name`
+  prefixes `Right`/`Left` (English) and suffixes the gender/number-agreed
+  `droit/droite/droits/droites` or `gauche/gauches` (French, tuned by an entry's
+  optional `fr_gender` of `"m"`/`"f"`/`"mp"`/`"fp"`). Each structure record also
+  carries a hemisphere-stripped **`base_name`** `{en,fr}` (the legend groups twins
+  by it, so no language-specific prefix parsing). The meta record gains
+  **`kind_labels`** (`kind -> {en,fr}` functional-class label) alongside
+  `projection_colors`/`group_labels`; `js/data.js` localizes every such field
+  (incl. `name`/`base_name`, projection `label`/`description`/`neurotransmitter`,
+  circuit `name`, and the `group_labels`/`kind_labels` map values) to plain
+  strings at load via `pick`. Source citation text + URLs are not translated.
 - **Language pick.** `detectLang()` uses a saved choice (`localStorage`
   `neurarium:lang`) if present, else the browser locale (any `fr*` -> French),
   else English. `window.__I18N__` exposes `lang`, `t(key, vars)` (UI lookup with
@@ -784,6 +807,15 @@ as the WIP banner (`js/error-banner.js`):
      and raises on a typo; the circuit's arrows are *not* listed (the viewer takes
      every projection whose endpoints are both in the set), so a circuit never
      duplicates the pathway list. It shows up in the legend's Circuits section.
+   - **Translations.** Every display string (a region `name`, a projection
+     `label`/`description`/`neurotransmitter`, a circuit `name`, a group/kind
+     label) is wrapped with `_t()` at build time, which looks the English text up
+     in the `FR` table (English -> French) near the top of the file. Add the
+     French there for any new/edited string: the generator **raises listing every
+     untranslated string** if you forget, so it can't ship half-translated. For a
+     paired structure whose French name is feminine or plural, set `fr_gender`
+     (`"f"`/`"mp"`/`"fp"`; default `"m"`) so the composed "droit/droite/..." side
+     suffix agrees. See "Internationalization".
 2. Run `python tools/generate_data.py` to regenerate `public/data/` and
    `public/shapes/`.
 3. Commit the generator change and the regenerated artifacts together.

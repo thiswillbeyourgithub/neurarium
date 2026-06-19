@@ -438,12 +438,13 @@ function buildLegend(data, meshById, arrows, selection, projVis) {
     h.textContent = heading;
     legend.appendChild(h);
 
-    // Collapse left/right twins by cleaned name, but gather *both* hemispheres'
-    // meshes under that one row so isolating it toggles the pair together.
+    // Collapse left/right twins by their base name (the hemisphere-stripped
+    // label the generator emits, so this works in any language without parsing a
+    // "Right "/"Left " prefix), gathering *both* hemispheres' meshes under that
+    // one row so isolating it toggles the pair together.
     const byLabel = new Map();
     for (const s of inGroup) {
-      const pretty = s.name.replace(/^(Left|Right)\s+/i, "");
-      const label = pretty.charAt(0).toUpperCase() + pretty.slice(1);
+      const label = s.base_name || s.name;
       let entry = byLabel.get(label);
       if (!entry) {
         entry = { color: s.color, meshes: [] };
@@ -497,7 +498,10 @@ function buildLegend(data, meshById, arrows, selection, projVis) {
       // both read off its arrows (each projection carries its resolved colour).
       const sample = ntArrows[0] && ntArrows[0].projection;
       const kind = sample && sample.kind;
-      const label = kind ? `${nt} (${kind})` : nt;
+      // Show the localized functional-kind label (data.meta.kindLabels), falling
+      // back to the raw kind key if unmapped.
+      const kindLabel = kind ? (data.meta.kindLabels[kind] || kind) : "";
+      const label = kindLabel ? `${nt} (${kindLabel})` : nt;
       const row = addLegendItem(legend, (sample && sample.color) || "#fff", label, true);
       // Endpoints of those arrows, kept opaque so an isolated transmitter still
       // reads as connecting real regions rather than floating in a dimmed brain.
@@ -658,9 +662,12 @@ function createInfoPanel(data) {
       const swatch = el("span", "swatch line");
       swatch.style.background = proj.color || "#fff";
       meta.appendChild(swatch);
+      // Localized functional kind (falls back to the raw key) + transmitter.
+      const kindLabel = (data.meta.kindLabels && data.meta.kindLabels[proj.kind])
+        || proj.kind;
       meta.appendChild(el(
         "span", null,
-        [proj.kind, proj.neurotransmitter].filter(Boolean).join(" · "),
+        [kindLabel, proj.neurotransmitter].filter(Boolean).join(" · "),
       ));
       body.appendChild(meta);
 

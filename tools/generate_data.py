@@ -83,6 +83,306 @@ GROUP_LABELS: dict[str, str] = {
 
 
 # ---------------------------------------------------------------------------
+# Internationalization (en / fr): the data file is bilingual. The anatomy below
+# is authored in English; every translatable *display* string (region names,
+# group headings, projection-kind labels, neurotransmitters, pathway labels +
+# descriptions, circuit names) is wrapped with ``_t()`` when the records are
+# built, turning "Foo" into {"en": "Foo", "fr": FR["Foo"]}. The viewer
+# (js/data.js + window.__I18N__.pick) collapses that to the chosen language.
+#
+# FR is the single French translation source, keyed by the exact English string
+# (so a string used in several places is translated once and stays consistent).
+# A missing key is collected and raised at build time (see build_records), so the
+# data can never silently ship a half-translated record. Source citations + URLs
+# are intentionally NOT translated.
+#
+# Per-hemisphere names are composed, not stored: English prefixes "Right "/"Left "
+# to the lowercased base name; French suffixes the gender/number-agreed
+# "droit/droite/droits/droites" (right) or "gauche/gauches" (left). A paired
+# entry may set ``fr_gender`` ("m" default, "f", "mp", "fp") for that agreement.
+# ---------------------------------------------------------------------------
+
+_FR_RIGHT = {"m": "droit", "f": "droite", "mp": "droits", "fp": "droites"}
+_FR_LEFT = {"m": "gauche", "f": "gauche", "mp": "gauches", "fp": "gauches"}
+
+# English -> French for every translatable data string.
+FR: dict[str, str] = {
+    # Group headings
+    "Lobes": "Lobes",
+    "Basal ganglia / deep nuclei": "Ganglions de la base / noyaux profonds",
+    "Diencephalon": "Diencéphale",
+    "Limbic": "Système limbique",
+    "Hindbrain": "Rhombencéphale",
+    # Projection-kind labels (the functional class shown next to the molecule)
+    "excitatory": "excitateur",
+    "inhibitory": "inhibiteur",
+    "dopaminergic": "dopaminergique",
+    "cholinergic": "cholinergique",
+    "neuroendocrine": "neuroendocrine",
+    # Neurotransmitters
+    "Glutamate": "Glutamate",
+    "GABA": "GABA",
+    "Dopamine": "Dopamine",
+    "Acetylcholine": "Acétylcholine",
+    "Releasing hormones": "Hormones de libération",
+    # Structure base names
+    "Frontal lobe": "Lobe frontal",
+    "Parietal lobe": "Lobe pariétal",
+    "Temporal lobe": "Lobe temporal",
+    "Occipital lobe": "Lobe occipital",
+    "Insula": "Insula",
+    "Caudate nucleus": "Noyau caudé",
+    "Putamen": "Putamen",
+    "Globus pallidus": "Globus pallidus",
+    "Thalamus": "Thalamus",
+    "Subthalamic nucleus": "Noyau subthalamique",
+    "Substantia nigra": "Substance noire",
+    "Nucleus accumbens": "Noyau accumbens",
+    "Claustrum": "Claustrum",
+    "Hippocampus": "Hippocampe",
+    "Amygdala": "Amygdale",
+    "Cingulate gyrus": "Gyrus cingulaire",
+    "Fornix": "Fornix",
+    "Olfactory bulb": "Bulbe olfactif",
+    "Septal nuclei": "Noyaux septaux",
+    "Hypothalamus": "Hypothalamus",
+    "Mammillary bodies": "Corps mammillaires",
+    "Pituitary gland": "Hypophyse",
+    "Cerebellum": "Cervelet",
+    "Brainstem": "Tronc cérébral",
+    # Circuit names
+    "Direct pathway (motor)": "Voie directe (motrice)",
+    "Indirect pathway": "Voie indirecte",
+    "Nigrostriatal (dopamine)": "Voie nigrostriée (dopamine)",
+    "Cortico-cerebellar (motor)": "Cortico-cérébelleux (moteur)",
+    "Hippocampal / limbic (Papez)": "Hippocampique / limbique (Papez)",
+    "Commissures (interhemispheric)": "Commissures (interhémisphériques)",
+    # Projection labels
+    "Corticostriatal (motor)": "Corticostriée (motrice)",
+    "Corticostriatal (associative)": "Corticostriée (associative)",
+    "Corticostriatal (parietal)": "Corticostriée (pariétale)",
+    "Corticostriatal (temporal)": "Corticostriée (temporale)",
+    "Hyperdirect (corticosubthalamic)": "Hyperdirecte (cortico-subthalamique)",
+    "Striatopallidal (direct)": "Striatopallidale (directe)",
+    "Striatonigral (direct)": "Striatonigrale (directe)",
+    "Pallidosubthalamic (indirect)": "Pallidosubthalamique (indirecte)",
+    "Subthalamopallidal": "Subthalamopallidale",
+    "Nigrostriatal": "Nigrostriée",
+    "Pallidothalamic": "Pallidothalamique",
+    "Nigrothalamic": "Nigrothalamique",
+    "Thalamocortical": "Thalamocorticale",
+    "Corticothalamic (visual)": "Corticothalamique (visuelle)",
+    "Corticopontine": "Corticopontique",
+    "Pontocerebellar (mossy fibers)": "Pontocérébelleuse (fibres moussues)",
+    "Cerebellothalamic (dentatothalamic)": "Cérébellothalamique (dentatothalamique)",
+    "Perforant path": "Voie perforante",
+    "Fornix (hippocampal output)": "Fornix (sortie hippocampique)",
+    "Postcommissural fornix": "Fornix postcommissural",
+    "Mammillothalamic tract": "Faisceau mammillothalamique",
+    "Anterior thalamocingulate": "Thalamo-cingulaire antérieure",
+    "Cingulum (to hippocampus)": "Cingulum (vers l'hippocampe)",
+    "Olfactory projection (to amygdala)": "Projection olfactive (vers l'amygdale)",
+    "Olfactory projection (to olfactory cortex)":
+        "Projection olfactive (vers le cortex olfactif)",
+    "Stria terminalis": "Strie terminale",
+    "Hippocamposeptal projection": "Projection hippocamposeptale",
+    "Septohippocampal pathway": "Voie septohippocampique",
+    "Mesolimbic dopamine pathway": "Voie dopaminergique mésolimbique",
+    "Accumbens to ventral pallidum": "Accumbens vers pallidum ventral",
+    "Hypothalamo-hypophyseal axis": "Axe hypothalamo-hypophysaire",
+    "Corpus callosum (frontal)": "Corps calleux (frontal)",
+    "Corpus callosum (parietal)": "Corps calleux (pariétal)",
+    "Corpus callosum (splenium / occipital)": "Corps calleux (splénium / occipital)",
+    "Anterior commissure": "Commissure antérieure",
+    "Claustro-frontal projection": "Projection claustro-frontale",
+    "Claustro-insular projection": "Projection claustro-insulaire",
+    "Salience network link": "Lien du réseau de saillance",
+    "Basolateral amygdala to accumbens": "Amygdale basolatérale vers accumbens",
+    "Mammillary-hypothalamic link": "Lien mammillo-hypothalamique",
+    "Septohypothalamic projection": "Projection septo-hypothalamique",
+    # Projection descriptions
+    "Sensorimotor frontal cortex drives the putamen, the motor input nucleus "
+    "of the basal ganglia.":
+        "Le cortex frontal sensorimoteur active le putamen, le noyau d'entrée "
+        "moteur des ganglions de la base.",
+    "Prefrontal cortex drives the caudate (associative striatum).":
+        "Le cortex préfrontal active le noyau caudé (striatum associatif).",
+    "Posterior parietal association cortex projects to the caudate.":
+        "Le cortex associatif pariétal postérieur projette vers le noyau caudé.",
+    "Temporal association cortex projects to the striatum.":
+        "Le cortex associatif temporal projette vers le striatum.",
+    "Cortex excites the subthalamic nucleus directly, the fast 'hyperdirect' "
+    "brake on movement.":
+        "Le cortex excite directement le noyau subthalamique, le frein "
+        "« hyperdirect » rapide du mouvement.",
+    "Direct-pathway striatal neurons inhibit the internal pallidum, releasing "
+    "(disinhibiting) the thalamus.":
+        "Les neurones striataux de la voie directe inhibent le pallidum "
+        "interne, libérant (désinhibant) le thalamus.",
+    "Caudate direct-pathway output to the internal pallidum.":
+        "Sortie de la voie directe du noyau caudé vers le pallidum interne.",
+    "Direct-pathway striatal output to the substantia nigra pars reticulata.":
+        "Sortie striatale de la voie directe vers la substance noire pars "
+        "reticulata.",
+    "Caudate direct-pathway output to the substantia nigra.":
+        "Sortie de la voie directe du noyau caudé vers la substance noire.",
+    "External pallidum inhibits the STN in the indirect pathway.":
+        "Le pallidum externe inhibe le noyau subthalamique dans la voie "
+        "indirecte.",
+    "The STN excites the pallidum, amplifying basal-ganglia output "
+    "(indirect/hyperdirect pathways).":
+        "Le noyau subthalamique excite le pallidum, amplifiant la sortie des "
+        "ganglions de la base (voies indirecte/hyperdirecte).",
+    "Substantia nigra pars compacta dopamine sets the balance between the "
+    "direct and indirect striatal pathways.":
+        "La dopamine de la substance noire pars compacta règle l'équilibre "
+        "entre les voies striatales directe et indirecte.",
+    "Dopaminergic modulation of the caudate.":
+        "Modulation dopaminergique du noyau caudé.",
+    "The internal pallidum tonically inhibits the motor thalamus, the output "
+    "gate of the loop.":
+        "Le pallidum interne inhibe de façon tonique le thalamus moteur, la "
+        "porte de sortie de la boucle.",
+    "Substantia nigra pars reticulata inhibitory output to the thalamus.":
+        "Sortie inhibitrice de la substance noire pars reticulata vers le "
+        "thalamus.",
+    "Motor thalamus excites frontal cortex, closing the "
+    "cortico-basal-ganglia-thalamo-cortical loop.":
+        "Le thalamus moteur excite le cortex frontal, fermant la boucle "
+        "cortico-ganglions de la base-thalamo-corticale.",
+    "Occipital (visual) cortex reciprocally connects with the thalamus "
+    "(pulvinar / lateral geniculate).":
+        "Le cortex occipital (visuel) est réciproquement connecté au thalamus "
+        "(pulvinar / corps genouillé latéral).",
+    "Cortex projects to the pontine nuclei (brainstem), the first leg of the "
+    "cortico-ponto-cerebellar route.":
+        "Le cortex projette vers les noyaux du pont (tronc cérébral), première "
+        "étape de la voie cortico-ponto-cérébelleuse.",
+    "Pontine nuclei send mossy fibers to the cerebellar cortex.":
+        "Les noyaux du pont envoient des fibres moussues au cortex cérébelleux.",
+    "Deep cerebellar nuclei drive the motor thalamus, feeding the cerebellar "
+    "loop back to cortex.":
+        "Les noyaux cérébelleux profonds activent le thalamus moteur, renvoyant "
+        "la boucle cérébelleuse vers le cortex.",
+    "Entorhinal (medial temporal) cortex drives the hippocampus via the "
+    "perforant path.":
+        "Le cortex entorhinal (temporal médial) active l'hippocampe via la voie "
+        "perforante.",
+    "The major hippocampal output gathers into the fornix, the great arching "
+    "tract of the Papez circuit.":
+        "La principale sortie hippocampique se rassemble dans le fornix, le "
+        "grand faisceau arqué du circuit de Papez.",
+    "The fornix carries hippocampal output forward to the mammillary bodies "
+    "(Papez circuit).":
+        "Le fornix transporte la sortie hippocampique vers les corps "
+        "mammillaires (circuit de Papez).",
+    "Mammillary bodies project to the anterior thalamic nuclei, continuing the "
+    "Papez circuit.":
+        "Les corps mammillaires projettent vers les noyaux thalamiques "
+        "antérieurs, poursuivant le circuit de Papez.",
+    "The anterior thalamic nuclei project to the cingulate gyrus, the next leg "
+    "of the Papez circuit.":
+        "Les noyaux thalamiques antérieurs projettent vers le gyrus cingulaire, "
+        "étape suivante du circuit de Papez.",
+    "The cingulate gyrus projects back to the hippocampus via the cingulum, "
+    "closing the Papez loop.":
+        "Le gyrus cingulaire reprojette vers l'hippocampe via le cingulum, "
+        "fermant la boucle de Papez.",
+    "Mitral cells of the olfactory bulb project to the corticomedial amygdala.":
+        "Les cellules mitrales du bulbe olfactif projettent vers l'amygdale "
+        "corticomédiale.",
+    "Bulbar output reaches the piriform / insular olfactory cortex.":
+        "La sortie bulbaire atteint le cortex olfactif piriforme / insulaire.",
+    "The amygdala projects to the hypothalamus via the stria terminalis, "
+    "driving autonomic / endocrine responses.":
+        "L'amygdale projette vers l'hypothalamus via la strie terminale, "
+        "déclenchant des réponses autonomes / endocrines.",
+    "Hippocampal fibers run in the precommissural fornix to the septal nuclei.":
+        "Les fibres hippocampiques cheminent dans le fornix précommissural vers "
+        "les noyaux septaux.",
+    "Medial septal cholinergic neurons project to the hippocampus, pacing the "
+    "hippocampal theta rhythm.":
+        "Les neurones cholinergiques du septum médial projettent vers "
+        "l'hippocampe, cadençant le rythme thêta hippocampique.",
+    "Midbrain dopaminergic neurons (VTA / substantia nigra) project to the "
+    "nucleus accumbens, the reward hub.":
+        "Les neurones dopaminergiques du mésencéphale (ATV / substance noire) "
+        "projettent vers le noyau accumbens, le centre de la récompense.",
+    "Nucleus accumbens medium spiny neurons project to the (ventral) pallidum, "
+    "the ventral-striatal output.":
+        "Les neurones épineux moyens du noyau accumbens projettent vers le "
+        "pallidum (ventral), la sortie du striatum ventral.",
+    "Hypothalamic neurons drive the pituitary via the median eminence / portal "
+    "system and the posterior hypophyseal tract.":
+        "Les neurones hypothalamiques commandent l'hypophyse via l'éminence "
+        "médiane / le système porte et le tractus hypophysaire postérieur.",
+    "Homotopic callosal fibers linking the two frontal lobes.":
+        "Fibres calleuses homotopiques reliant les deux lobes frontaux.",
+    "Homotopic callosal fibers linking the two parietal lobes.":
+        "Fibres calleuses homotopiques reliant les deux lobes pariétaux.",
+    "Splenial callosal fibers linking the two occipital lobes.":
+        "Fibres calleuses spléniales reliant les deux lobes occipitaux.",
+    "Older commissure linking the temporal lobes (and olfactory structures).":
+        "Commissure plus ancienne reliant les lobes temporaux (et les "
+        "structures olfactives).",
+    "Reciprocal claustro-cortical link with prefrontal cortex (implicated in "
+    "salience / attention).":
+        "Lien claustro-cortical réciproque avec le cortex préfrontal (impliqué "
+        "dans la saillance / l'attention).",
+    "The claustrum tightly interconnects with the adjacent insular cortex.":
+        "Le claustrum est étroitement interconnecté avec le cortex insulaire "
+        "adjacent.",
+    "The anterior insula and the cingulate co-activate as the salience network.":
+        "L'insula antérieure et le cortex cingulaire s'activent ensemble comme "
+        "réseau de saillance.",
+    "Basolateral amygdala glutamatergic input to the ventral striatum "
+    "(motivational salience).":
+        "Entrée glutamatergique de l'amygdale basolatérale vers le striatum "
+        "ventral (saillance motivationnelle).",
+    "The mammillary bodies sit within and connect to the posterior "
+    "hypothalamus.":
+        "Les corps mammillaires se situent dans l'hypothalamus postérieur et "
+        "s'y connectent.",
+    "The septal nuclei project to the hypothalamus, a limbic-autonomic relay.":
+        "Les noyaux septaux projettent vers l'hypothalamus, un relais "
+        "limbique-autonome.",
+}
+
+# English strings reached by _t() that had no FR entry; build_records raises with
+# the full list so a missing translation fails the build instead of shipping.
+_MISSING_TRANSLATIONS: set[str] = set()
+
+
+def _t(text: str) -> dict[str, str]:
+    """Wrap an English display string as a bilingual ``{"en", "fr"}`` object.
+
+    The French comes from :data:`FR` (the single translation source). A string
+    with no FR entry is recorded in :data:`_MISSING_TRANSLATIONS` (and falls back
+    to English) so :func:`build_records` can fail loudly listing every
+    untranslated string at once.
+    """
+    fr = FR.get(text)
+    if fr is None:
+        _MISSING_TRANSLATIONS.add(text)
+        fr = text
+    return {"en": text, "fr": fr}
+
+
+def _side_name(base: dict[str, str], gender: str, side: str) -> dict[str, str]:
+    """Compose a per-hemisphere display name in both languages from a base name.
+
+    English prefixes ``Right``/``Left`` to the lowercased base; French suffixes
+    the agreed ``droit``/``gauche`` form (see :data:`_FR_RIGHT` / :data:`_FR_LEFT`).
+    """
+    word = "Right" if side == "R" else "Left"
+    fr_word = (_FR_RIGHT if side == "R" else _FR_LEFT)[gender]
+    return {
+        "en": f"{word} {base['en'].lower()}",
+        "fr": f"{base['fr']} {fr_word}",
+    }
+
+
+# ---------------------------------------------------------------------------
 # Anatomy definition (the single source of truth)
 #
 # Coordinate convention (arbitrary units, brain centered on the origin):
@@ -149,7 +449,7 @@ PAIRED: list[dict[str, Any]] = [
          # parietal and above the cerebellum, with a flat medial wall.
          radii=(1.45, 1.5, 1.6), seed=14, detail=6, noise=0.20,
          octaves=2, ridged=True, frequency=3.6, medial=True),
-    dict(base="insula", name="Insula", group="lobe",
+    dict(base="insula", name="Insula", group="lobe", fr_gender="f",
          pos=(2.5, 0.05, 0.55), color="#ae7aa3",
          # The hidden 5th lobe: cortex buried deep to the lateral (Sylvian)
          # sulcus, overlying the putamen, walled off by the fronto-parietal +
@@ -206,7 +506,7 @@ PAIRED: list[dict[str, Any]] = [
          # Tiny biconvex lens; flattened in y, smooth.
          radii=(0.34, 0.26, 0.52), seed=25, detail=5, noise=0.05),
     dict(base="substantia_nigra", name="Substantia nigra",
-         group="basal_ganglia",
+         group="basal_ganglia", fr_gender="f",
          pos=(1.0, -1.4, -1.2), color="#3d3d3d",
          # A thin lamina/band in the midbrain: flat in y, elongated in z.
          radii=(0.5, 0.18, 0.68), seed=26, detail=5, noise=0.05),
@@ -245,7 +545,7 @@ PAIRED: list[dict[str, Any]] = [
              profile=[0.34, 0.32, 0.28, 0.22, 0.13],
              seed=51, noise=0.08, radial_segments=12, tubular_segments=80,
          )),
-    dict(base="amygdala", name="Amygdala", group="limbic",
+    dict(base="amygdala", name="Amygdala", group="limbic", fr_gender="f",
          pos=(1.45, -0.35, 0.95), color="#9b7bb0",
          # Almond-shaped nucleus in the medial temporal lobe, just anterior and
          # superior to the head of the hippocampus (emotion/fear hub). Small
@@ -300,7 +600,7 @@ PAIRED: list[dict[str, Any]] = [
          # the olfactory tract). Stretched in z, near the midline. Position is a
          # guess: tune in a browser.
          radii=(0.18, 0.16, 0.45), seed=57, detail=5, noise=0.05),
-    dict(base="septal_nuclei", name="Septal nuclei", group="limbic",
+    dict(base="septal_nuclei", name="Septal nuclei", group="limbic", fr_gender="mp",
          pos=(0.3, 0.1, 0.85), color="#7f9cc0",
          # Small paramedian grey matter below the rostrum of the corpus callosum,
          # anterior to the thalamus and above the hypothalamus (a Papez/limbic
@@ -311,7 +611,7 @@ PAIRED: list[dict[str, Any]] = [
          # Small nucleus cluster below and anterior to the thalamus, hugging the
          # third ventricle (small x). Smooth (high detail, low noise).
          radii=(0.4, 0.4, 0.55), seed=52, detail=5, noise=0.05),
-    dict(base="mammillary", name="Mammillary bodies", group="diencephalon",
+    dict(base="mammillary", name="Mammillary bodies", group="diencephalon", fr_gender="mp",
          pos=(0.35, -0.8, -0.2), color="#c6b06a",
          # Tiny paired bumps at the posterior base of the hypothalamus (the
          # Papez node between the fornix and the anterior thalamus). Small smooth
@@ -859,7 +1159,8 @@ CIRCUITS: list[dict[str, Any]] = [
 ]
 
 
-def _structure_record(entry: dict[str, Any], structure_id: str, name: str,
+def _structure_record(entry: dict[str, Any], structure_id: str,
+                      name: dict[str, str], base_name: dict[str, str],
                       position: tuple[float, float, float], shape_id: str,
                       mirror: bool = False) -> dict[str, Any]:
     """Build one ``structure`` JSONL record (the non-geometric metadata).
@@ -871,7 +1172,12 @@ def _structure_record(entry: dict[str, Any], structure_id: str, name: str,
     structure_id
         Final id including hemisphere suffix (e.g. ``"putamen_R"``).
     name
-        Display name including hemisphere prefix where relevant.
+        Bilingual ``{"en", "fr"}`` display name including the hemisphere
+        prefix/suffix where relevant (``Right putamen`` / ``Putamen droit``).
+    base_name
+        Bilingual ``{"en", "fr"}`` base name without any hemisphere marker, used
+        for the legend row so the two hemispheres collapse to one entry without
+        the viewer string-stripping a language-specific "Right "/"Left " prefix.
     position
         Final ``(x, y, z)`` after any mirroring.
     shape_id
@@ -892,6 +1198,7 @@ def _structure_record(entry: dict[str, Any], structure_id: str, name: str,
         "type": "structure",
         "id": structure_id,
         "name": name,
+        "base_name": base_name,
         "group": entry["group"],
         "position": [round(c, 3) for c in position],
         "color": entry["color"],
@@ -1111,12 +1418,18 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     The ``sources`` key (a list of :data:`SOURCES` keys) is expanded in place to
     full citation objects, and the expanded metadata (``neurotransmitter``,
     ``label``, ``description``, ``bidirectional``, ...) is carried onto the
-    mirrored twin unchanged so both hemispheres show the same details.
+    mirrored twin unchanged so both hemispheres show the same details. The
+    translatable display fields (``label``, ``description``, ``neurotransmitter``)
+    are wrapped bilingually with :func:`_t` so the data file is self-describing in
+    both languages.
     """
     symmetric = proj.get("symmetric", True)
     fields = {k: v for k, v in proj.items() if k != "symmetric"}
     if "sources" in fields:
         fields["sources"] = _expand_sources(fields["sources"])
+    for key in ("label", "description", "neurotransmitter"):
+        if key in fields:
+            fields[key] = _t(fields[key])
     records = [{"type": "projection", **fields}]
     if symmetric:
         mirrored = {**fields,
@@ -1169,17 +1482,24 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
             if planes:
                 shape["clip_planes"] = planes
         shapes[base] = shape
-        lname = entry["name"].lower()
+        # Bilingual base name (e.g. {"en": "Putamen", "fr": "Putamen"}); the
+        # per-hemisphere display names are composed from it (English prefix,
+        # French gender/number-agreed suffix). ``fr_gender`` tunes the agreement.
+        base_name = _t(entry["name"])
+        gender = entry.get("fr_gender", "m")
         jsonl.append(
-            _structure_record(entry, f"{base}_R", f"Right {lname}", (x, y, z), base))
+            _structure_record(entry, f"{base}_R", _side_name(base_name, gender, "R"),
+                              base_name, (x, y, z), base))
         jsonl.append(
-            _structure_record(entry, f"{base}_L", f"Left {lname}", (-x, y, z), base,
-                              mirror=True))
+            _structure_record(entry, f"{base}_L", _side_name(base_name, gender, "L"),
+                              base_name, (-x, y, z), base, mirror=True))
 
     for entry in MIDLINE:
         sid = entry["base"]
+        # Midline structures have no hemisphere, so the full name is the base.
+        name = _t(entry["name"])
         jsonl.append(
-            _structure_record(entry, sid, entry["name"], entry["pos"], sid))
+            _structure_record(entry, sid, name, name, entry["pos"], sid))
         shapes[sid] = _shape_record(entry, entry["pos"][0])
 
     for proj in PROJECTIONS:
@@ -1203,7 +1523,7 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         jsonl.append({
             "type": "circuit",
             "id": circuit["id"],
-            "name": circuit["name"],
+            "name": _t(circuit["name"]),
             "structures": ids,
         })
 
@@ -1229,10 +1549,20 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         raise KeyError(
             f"WIKIPEDIA entry for unknown structure base(s): "
             f"{sorted(unknown_wiki)}")
+    # Every translatable string went through _t(); fail loudly (listing them all)
+    # if any had no FR entry, so the data can't ship half-translated.
+    if _MISSING_TRANSLATIONS:
+        raise KeyError(
+            "Missing FR translation for: "
+            + "; ".join(repr(s) for s in sorted(_MISSING_TRANSLATIONS)))
     jsonl.insert(0, {
         "type": "meta",
+        # Both presentation maps are emitted bilingually: the kind->arrow colour
+        # map is language-neutral, but kind_labels/group_labels carry {en, fr}
+        # display strings the viewer resolves via window.__I18N__.pick.
         "projection_colors": PROJECTION_COLORS,
-        "group_labels": GROUP_LABELS,
+        "kind_labels": {kind: _t(kind) for kind in PROJECTION_COLORS},
+        "group_labels": {g: _t(label) for g, label in GROUP_LABELS.items()},
     })
 
     return jsonl, shapes
