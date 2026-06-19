@@ -8,6 +8,19 @@ change.
 
 Built with the help of Claude Code.
 
+## 0.5.0
+
+- Fixed `app-config.js` returning HTTP 500, which silently disabled BOTH umami
+  analytics and the DEV "work in progress" banner. Caddy's `templates` module
+  parsed the whole served file as one Go template, and literal template-action
+  markers in the file's own explanatory comments (a `"{{`) broke the parse. The
+  runtime config is no longer templated per request: `docker/entrypoint.sh` now
+  renders `/gen/app-config.js` from the environment once at container start and
+  Caddy serves that file, so it is never parsed as a template and cannot 500 on
+  its contents. The committed `app-config.js` is now the empty local-dev
+  fallback. Touches `docker/Caddyfile`, `docker/entrypoint.sh` and
+  `docker/docker-compose.yml` (new `/gen` tmpfs).
+
 ## 0.4.0
 
 - Rewrote the screenshot helper (`tools/shot.py`) as a small self-contained

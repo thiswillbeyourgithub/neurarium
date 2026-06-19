@@ -96,12 +96,15 @@ js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       for labels, arrow picking + the connection info panel
                       (createInfoPanel), the structure+connection search, the
                       legend builder, and the render loop.
-app-config.js         Tiny config file with {{env}} placeholders; the container
-                      fills them from docker/.env (Caddy templates). Raw in dev.
-                      Named generically (not "analytics-*") so content filters /
-                      proxies that block "analytics" paths don't 404 it. Carries
-                      the umami ANALYTICS_* values plus DEV + STARTED_AT (the
-                      WIP-banner flag and container start time).
+app-config.js         Tiny config file (window.__APP_CONFIG__). This committed
+                      copy is the LOCAL-DEV fallback: all fields empty, so dev
+                      servers keep umami + the DEV banner off. In the container it
+                      is NOT served; entrypoint.sh renders an env-filled copy into
+                      /gen and Caddy serves that instead (see below). Named
+                      generically (not "analytics-*") so content filters / proxies
+                      that block "analytics" paths don't 404 it. Carries the umami
+                      ANALYTICS_* values plus DEV + STARTED_AT (the WIP-banner flag
+                      and container start time).
 js/app-init.js        Reads that config and injects the umami tag if configured;
                       no-op otherwise.
 js/dev-banner.js      Reads that config and, when DEV=1, shows the top "work in
@@ -116,11 +119,13 @@ CHANGELOG.md          Human-readable version history (semver); paired with
 docker/               Deployment: docker-compose.yml (hardened Caddy service),
                       Dockerfile (strips caddy's cap_net_bind_service so exec
                       works under no-new-privileges), Caddyfile (serves /srv on
-                      :8359, templates the app config, sends Cache-Control:
-                      no-store so prod never serves a stale module either, same as
-                      tools/serve.py), env.example (copy to docker/.env),
-                      entrypoint.sh (startup wrapper baked into the image:
-                      stamps STARTED_AT and validates ANALYTICS_URL, see below).
+                      :8359, serves the startup-rendered /gen/app-config.js for
+                      /app-config.js, sends Cache-Control: no-store so prod never
+                      serves a stale module either, same as tools/serve.py),
+                      env.example (copy to docker/.env), entrypoint.sh (startup
+                      wrapper baked into the image: stamps STARTED_AT, validates
+                      ANALYTICS_URL, and renders /gen/app-config.js from the
+                      environment, see below).
 tools/shot.py         Screenshot helper (Playwright): serves the repo with
                       tools/serve.py, drives a headless Chromium to load
                       index.html (with view params), and captures the canvas with
@@ -261,8 +266,14 @@ site on a read-only rootfs, the config is injected at runtime:
    `docker/.env` (see `docker/env.example`). `ANALYTICS_DNT` is umami's
    `data-do-not-track` value (mirrors WebSend's `UMAMI_DNT`): `"true"` (default)
    respects the browser Do Not Track signal, `"false"` tracks all visitors.
-2. compose passes them into the container; the Caddyfile `templates` block fills
-   the `{{env}}` placeholders in `app-config.js`.
+2. compose passes them into the container; `docker/entrypoint.sh` renders
+   `/gen/app-config.js` from those env vars at container start, and the Caddyfile
+   serves that file for `/app-config.js`. (Earlier this was a Caddy `templates`
+   block filling `{{env}}` placeholders in the file; that parsed the whole JS as
+   a Go template on every request and 500'd on any stray brace marker in the
+   file, silently taking both umami and the DEV banner down, so it was replaced
+   by the render-once-at-startup approach. The committed `app-config.js` is now
+   just the empty local-dev fallback.)
 3. `js/app-init.js` reads `window.__APP_CONFIG__` and injects the umami `<script>`
    (with SRI/crossorigin if a hash is given, and an explicit `data-do-not-track`).
 
@@ -295,19 +306,18 @@ analytics (no build step):
 2. The container also needs to know *when it started* so the banner can say
    "restarted X ago". Compose env is static, so the entrypoint
    (`docker/entrypoint.sh`, baked into the image and set as `entrypoint` in
-   `docker-compose.yml`) stamps `STARTED_AT=$(date +%s)` (epoch seconds), then
-   `exec`s caddy. Caddy inherits `STARTED_AT` across the exec. (The same script
-   also validates `ANALYTICS_URL`, see the Analytics section.)
-3. The Caddyfile `templates` block fills `DEV` + `STARTED_AT` into
-   `app-config.js` (alongside the `ANALYTICS_*` values).
+   `docker-compose.yml`) stamps `STARTED_AT=$(date +%s)` (epoch seconds). (The
+   same script also validates `ANALYTICS_URL`, see the Analytics section.)
+3. The entrypoint then renders `DEV` + `STARTED_AT` (alongside the `ANALYTICS_*`
+   values) into `/gen/app-config.js`, which Caddy serves for `/app-config.js`.
 4. `js/dev-banner.js` reads `window.__APP_CONFIG__`: when `dev === "1"` it
-   reveals `#dev-banner` (an amber bar in `index.html`, hidden by default),
+   reveals `#dev-banner` (an amber bar in `index.html`, hidden by default via the
+   `hidden` attribute, so `banner.hidden = false` shows it),
    computes "X minutes/hours/days ago" from `startedAt` client-side (refreshed
    each minute), and adds `body.dev-banner-shown` so the top-anchored UI
    (controls / toolbar / status) nudges down below the bar. Any other `DEV`
-   value, or the un-templated `{{...}}` placeholder in local dev, keeps it
-   hidden, so the banner only ever appears when explicitly turned on in a
-   container.
+   value, or the empty local-dev fallback, keeps it hidden, so the banner only
+   ever appears when explicitly turned on in a container.
 
 ## Controls
 
