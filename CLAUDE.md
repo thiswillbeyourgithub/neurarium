@@ -482,13 +482,18 @@ as the WIP banner (`js/error-banner.js`):
     structures + the projections between them stay opaque, everything else fades
     (`selection.setCircuit`, which pins an explicit arrow set instead of the
     "touching" rule). Clicking the active circuit again clears it.
-  - The **Projections** legend section's kind rows (excitatory / inhibitory /
-    dopaminergic) are clickable too: clicking one isolates *only* that kind via
-    the same `setCircuit` machinery (it pins every arrow of that kind plus the
-    structures they connect, so just that kind's pathways + their endpoints stay
-    opaque and everything else fades). Unlike a circuit, a kind focus dims *every*
-    structure, so its structure/heading rows grey out rather than lighting up;
-    only the kind row lights. Clicking the active kind again clears it.
+  - The **Projections** legend section lists one row **per neurotransmitter**
+    (the molecule, e.g. `Glutamate (excitatory)`, coloured by its arrow `kind`
+    and labelled with that functional kind in parens). Rows are per-transmitter,
+    not per-kind, so when a kind later carries more than one transmitter they
+    split into their own rows automatically; with today's 1:1 data each kind has
+    exactly one. Each row is clickable: clicking one isolates *only* that
+    neurotransmitter via the same `setCircuit` machinery (it pins every arrow
+    using that transmitter plus the structures they connect, so just those
+    pathways + their endpoints stay opaque and everything else fades). Unlike a
+    circuit, such a focus dims *every* structure, so its structure/heading rows
+    grey out rather than lighting up; only the neurotransmitter row lights.
+    Clicking the active one again clears it.
   - The **reset** button and a **double-click on empty space** fully clear it
     (halos + isolate + circuit), restoring default opacity. Framing a connection
     or arrow just swaps the halo, leaving any isolate set intact.
@@ -506,7 +511,8 @@ as the WIP banner (`js/error-banner.js`):
   every arrow's visibility at once via `arrow.setVisible`, and refreshes labels
   so the connection labels follow). The rest is generated from the data (see
   below). Each structure row is clickable to isolate/focus that region, and each
-  **projection-kind row** is clickable to isolate that kind (see Selection above).
+  **neurotransmitter row** is clickable to isolate that transmitter's pathways
+  (see Selection above).
 - **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
   scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
   **Shift + wheel** drives the **Separate** slider instead of zooming: a
@@ -658,8 +664,9 @@ as the WIP banner (`js/error-banner.js`):
    `public/shapes/`.
 3. Commit the generator change and the regenerated artifacts together.
 
-The legend (region colors and projection kinds) is generated at runtime from the
-data, so it updates automatically; no separate legend edit is needed.
+The legend (region colors and the per-neurotransmitter projection rows) is
+generated at runtime from the data, so it updates automatically; no separate
+legend edit is needed.
 
 ## Versioning
 

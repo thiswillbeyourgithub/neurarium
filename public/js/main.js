@@ -445,30 +445,38 @@ function buildLegend(data, meshById, arrows, selection) {
     groupHeadings.push({ heading: h, meshes: groupMeshes });
   }
 
-  // Projection kinds present in the data, colored from the single source in
-  // arrows.js. Clicking a kind row isolates *only* that kind: its arrows + the
-  // structures they connect stay opaque, everything else fades (same focus
-  // machinery as a circuit, via setCircuit). Clicking the active kind clears it.
-  const kindRows = [];
-  let activeKind = null;
-  const kinds = [...new Set(data.projections.map((p) => p.kind))];
-  if (kinds.length > 0) {
+  // Neurotransmitters present in the data, one row each. Each is coloured by the
+  // arrow `kind` it belongs to (the single colour source in arrows.js) and
+  // labelled with the molecule plus that functional kind, e.g. "Glutamate
+  // (excitatory)". Clicking a row isolates *only* that neurotransmitter: its
+  // arrows + the structures they connect stay opaque, everything else fades (same
+  // focus machinery as a circuit, via setCircuit). Clicking the active one clears
+  // it. Rows are per-neurotransmitter (finer than kind) so when a kind later
+  // carries more than one transmitter they split into their own rows for free.
+  const ntRows = [];
+  let activeNt = null;
+  const neurotransmitters = [
+    ...new Set(data.projections.map((p) => p.neurotransmitter).filter(Boolean)),
+  ];
+  if (neurotransmitters.length > 0) {
     const h = document.createElement("h2");
     h.textContent = "Projections";
     legend.appendChild(h);
-    for (const kind of kinds) {
-      const label = kind.charAt(0).toUpperCase() + kind.slice(1);
+    for (const nt of neurotransmitters) {
+      const ntArrows = arrows.filter((a) => a.projection.neurotransmitter === nt);
+      // The kind (hence colour) carrying this transmitter, read off its arrows.
+      const kind = ntArrows[0] && ntArrows[0].projection.kind;
+      const label = kind ? `${nt} (${kind})` : nt;
       const row = addLegendItem(legend, PROJECTION_COLORS[kind] || "#fff", label, true);
-      const kindArrows = arrows.filter((a) => a.projection.kind === kind);
-      // Endpoints of those arrows, kept opaque so an isolated kind still reads
-      // as connecting real regions rather than floating in a dimmed brain.
-      const kindMeshes = [...new Set(kindArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
+      // Endpoints of those arrows, kept opaque so an isolated transmitter still
+      // reads as connecting real regions rather than floating in a dimmed brain.
+      const ntMeshes = [...new Set(ntArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
       row.classList.add("clickable");
       row.addEventListener("click", () => {
-        if (activeKind === kind) selection.clear();
-        else selection.setCircuit(kindMeshes, kindArrows);
+        if (activeNt === nt) selection.clear();
+        else selection.setCircuit(ntMeshes, ntArrows);
       });
-      kindRows.push({ row, kind, arrowSet: new Set(kindArrows) });
+      ntRows.push({ row, nt, arrowSet: new Set(ntArrows) });
     }
   }
 
@@ -503,34 +511,35 @@ function buildLegend(data, meshById, arrows, selection) {
   // rest grey out. `null` (nothing isolated) clears both states. A heading lights
   // only when its whole group is isolated; a circuit row lights only when the
   // isolate set is *exactly* that circuit (so toggling a structure unlights it);
-  // a projection-kind row lights only when the pinned-arrow set is exactly that
-  // kind's arrows. `focusedArrows` is the pinned-arrow set (empty unless a
-  // circuit/kind is focused).
+  // a neurotransmitter row lights only when the pinned-arrow set is exactly that
+  // transmitter's arrows. `focusedArrows` is the pinned-arrow set (empty unless a
+  // circuit/neurotransmitter is focused).
   selection.onIsolate((isolated, focusedArrows) => {
-    // Detect a projection-kind focus first: the pinned-arrow set is exactly one
-    // kind's arrows. A kind focus dims every structure (only the kind's arrows +
-    // endpoints stay opaque in the scene), so its structure/heading rows grey out
-    // rather than lighting up; that lit-row noise only makes sense for a circuit.
-    const matchesKind = (arrowSet) => arrowSet.size > 0 && focusedArrows
+    // Detect a neurotransmitter focus first: the pinned-arrow set is exactly one
+    // transmitter's arrows. Such a focus dims every structure (only that
+    // transmitter's arrows + endpoints stay opaque in the scene), so its
+    // structure/heading rows grey out rather than lighting up; that lit-row noise
+    // only makes sense for a circuit.
+    const matchesNt = (arrowSet) => arrowSet.size > 0 && focusedArrows
       && focusedArrows.size === arrowSet.size
       && [...arrowSet].every((a) => focusedArrows.has(a));
-    activeKind = null;
-    for (const { kind, arrowSet } of kindRows) if (matchesKind(arrowSet)) activeKind = kind;
-    const kindFocus = activeKind !== null;
+    activeNt = null;
+    for (const { nt, arrowSet } of ntRows) if (matchesNt(arrowSet)) activeNt = nt;
+    const projFocus = activeNt !== null;
 
     for (const { row, meshes } of structureRows) {
-      const selected = Boolean(isolated) && !kindFocus && meshes.some((m) => isolated.has(m));
+      const selected = Boolean(isolated) && !projFocus && meshes.some((m) => isolated.has(m));
       row.classList.toggle("selected", selected);
       row.classList.toggle("dimmed", Boolean(isolated) && !selected);
     }
-    for (const { row, kind, arrowSet } of kindRows) {
-      const selected = matchesKind(arrowSet);
+    for (const { row, arrowSet } of ntRows) {
+      const selected = matchesNt(arrowSet);
       row.classList.toggle("selected", selected);
       row.classList.toggle("dimmed", Boolean(isolated) && !selected);
     }
     for (const { heading, meshes } of groupHeadings) {
-      const all = !kindFocus && isolated && meshes.length > 0 && meshes.every((m) => isolated.has(m));
-      const any = !kindFocus && isolated && meshes.some((m) => isolated.has(m));
+      const all = !projFocus && isolated && meshes.length > 0 && meshes.every((m) => isolated.has(m));
+      const any = !projFocus && isolated && meshes.some((m) => isolated.has(m));
       heading.classList.toggle("selected", Boolean(all));
       heading.classList.toggle("dimmed", Boolean(isolated) && !any);
     }
