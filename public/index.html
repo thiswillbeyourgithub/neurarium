@@ -584,6 +584,16 @@
             </label>
           </div>
 
+          <div class="row inline collapsible-control">
+            <!-- "See inside": hide the camera-facing structures each frame so the
+                 deep nuclei aren't blocked by the near cortex (createNearCull in
+                 js/main.js). Off by default. Collapsible like auto-rotate. -->
+            <label>
+              <input type="checkbox" id="see-inside" />
+              <span data-i18n="panel.seeInside"></span>
+            </label>
+          </div>
+
           <!-- Nested legend, collapsed by default (body ships `hidden`). Its
                first element is the "Show all names" button (kept first across
                rebuilds by buildLegend in js/main.js); the category rows below

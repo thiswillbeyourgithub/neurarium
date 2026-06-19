@@ -115,6 +115,63 @@ function applyExplode(meshes, amount, arrows) {
   for (const arrow of arrows) arrow.update();
 }
 
+// "See inside" cull: how far past the orbit-centre plane (toward the camera) a
+// structure's centre must sit before it is hidden. A positive bias keeps the
+// central core (the deep nuclei) visible while the near outer hemisphere drops
+// away, so you can look at the inside without the front cortex in the way.
+const NEAR_CULL_BIAS = 0.9;
+
+/**
+ * Toggleable "see inside" mode: hide the structures on the camera-facing side of
+ * the brain so the deep nuclei aren't blocked by the near cortex. The hidden set
+ * is recomputed every frame from the live camera/target, so it follows as you
+ * orbit. Composes with `?only=` (a mesh already hidden stays hidden) and with
+ * isolate mode (which dims via opacity, not visibility). Off by default.
+ *
+ * @param {{meshes:THREE.Mesh[], camera:THREE.Camera,
+ *          controls:import("three/addons/controls/OrbitControls.js").OrbitControls}} deps
+ */
+function createNearCull({ meshes, camera, controls }) {
+  let enabled = false;
+  const center = new THREE.Vector3();
+  const viewOut = new THREE.Vector3();
+  const toMesh = new THREE.Vector3();
+  return {
+    /** Enable/disable. On enable, snapshot current visibility so disable restores
+     *  exactly that (e.g. meshes hidden by ?only= stay hidden). */
+    setEnabled(on) {
+      if (on === enabled) return;
+      enabled = on;
+      if (on) {
+        for (const m of meshes) m.userData.cullRestore = m.visible;
+      } else {
+        for (const m of meshes) {
+          if (m.userData.cullRestore !== undefined) {
+            m.visible = m.userData.cullRestore;
+          }
+        }
+      }
+    },
+    /** Per-frame: hide every otherwise-visible structure whose centre is more
+     *  than NEAR_CULL_BIAS past the orbit-centre plane toward the camera. */
+    tick() {
+      if (!enabled) return;
+      viewOut.copy(camera.position).sub(controls.target);
+      if (viewOut.lengthSq() < 1e-9) return;
+      viewOut.normalize();
+      center.copy(controls.target);
+      for (const m of meshes) {
+        if (!m.userData.cullRestore) {
+          m.visible = false;
+          continue;
+        }
+        toMesh.copy(m.position).sub(center);
+        m.visible = toMesh.dot(viewOut) <= NEAR_CULL_BIAS;
+      }
+    },
+  };
+}
+
 /**
  * Auto-play intro: start the regions fully blown out and let them glide back
  * together into the assembled brain. Drives the explode amount (and the slider,
@@ -989,8 +1046,9 @@ function applyViewParams(bundle) {
 }
 
 /** Wire the DOM controls to the scene behaviors. */
-function wireControls({ controls, meshes, arrows, labels, focus, selection, projVis }) {
+function wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull }) {
   const autorotate = document.getElementById("autorotate");
+  const seeInside = document.getElementById("see-inside");
   const explode = document.getElementById("explode");
   const transparency = document.getElementById("transparency");
   const toggleNames = document.getElementById("toggle-names");
@@ -1055,6 +1113,10 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   autorotate.addEventListener("change", () => {
     controls.autoRotate = autorotate.checked;
   });
+
+  // "See inside": hide the near hemisphere so the deep structures show through.
+  cull.setEnabled(seeInside.checked);
+  seeInside.addEventListener("change", () => cull.setEnabled(seeInside.checked));
 
   const onExplode = () => {
     applyExplode(meshes, parseFloat(explode.value), arrows);
@@ -1504,6 +1566,9 @@ async function main() {
   const focus = createCameraFocus({ camera, controls, meshes });
   controls.addEventListener("start", () => focus.cancel());
 
+  // "See inside" mode: hide the near hemisphere so the deep nuclei show through.
+  const cull = createNearCull({ meshes, camera, controls });
+
   // Every way of picking content (click/tap, double-click, search, a
   // structure-panel connection row) funnels through these two helpers, so the
   // "halo it + label/panel it + maybe frame the camera" sequence lives in one
@@ -1553,7 +1618,7 @@ async function main() {
 
   const projVis = createProjectionVisibility(arrows, labels);
   buildLegend(data, meshById, arrows, selection, projVis);
-  wireControls({ controls, meshes, arrows, labels, focus, selection, projVis });
+  wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
   wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection });
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
@@ -1579,6 +1644,8 @@ async function main() {
     intro.tick();
     focus.tick();
     controls.update();
+    // After controls.update() so the cull reads this frame's camera + target.
+    cull.tick();
     renderer.render(scene, camera);
     // CSS2D labels render as a separate DOM pass after the WebGL frame.
     labels.render(scene, camera);

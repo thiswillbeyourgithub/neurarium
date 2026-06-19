@@ -532,7 +532,8 @@ as the WIP banner (`js/error-banner.js`):
   lives in one collapsible **"Neurarium" panel at the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
-  the **Separate** and **Transparency** sliders, then **Auto-rotate**, then the
+  the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
+  inside**, then the
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
   names** and **Hide projections** buttons, then the nested collapsed **About**
   (`#about`) section. Searching swaps the search box in place of the panel's
@@ -542,7 +543,7 @@ as the WIP banner (`js/error-banner.js`):
   `js/main.js`. **Legend and About are an accordion**: opening one closes the
   other (only one open at a time), and while either is open every control above
   it (the `#lang-switch`, the `.toolbar-row`, the two sliders and the Auto-rotate
-  checkbox, all tagged `.collapsible-control`) is hidden via the
+  + See inside checkboxes, all tagged `.collapsible-control`) is hidden via the
   `#controls.section-open` class so the open section's content doesn't push the
   panel tall; only the two section headers stay visible. `wireCollapse` takes an
   `onToggle(open)` callback
@@ -561,6 +562,18 @@ as the WIP banner (`js/error-banner.js`):
   selection does not re-enable it. Wired via `selection.onPick(stopAutoRotate)`
   in `js/main.js`. Deep links / screenshots get it forced **off** by
   `applyViewParams` unless `?autorotate=1` is passed, so a framed view holds.
+- **See inside** checkbox (`#see-inside`, off by default): hides the structures
+  on the camera-facing side of the brain so the deep nuclei aren't blocked by the
+  near cortex (a "cutaway" without clipping geometry). `createNearCull` in
+  `js/main.js` recomputes the hidden set **every frame** from the live
+  camera/`controls.target`, so the near hemisphere peels away and follows as you
+  orbit; a structure is hidden once its centre sits more than `NEAR_CULL_BIAS`
+  past the centre plane toward the camera (the bias keeps the central core
+  visible). It snapshots visibility on enable so toggling off restores exactly
+  what was there, composing with `?only=` (already-hidden meshes stay hidden);
+  isolate mode is independent (it dims via opacity, not visibility). Arrows are
+  left visible (so the revealed connections still show). `cull.tick()` runs in
+  the render loop after `controls.update()`.
 - **Separate** slider (0..1, labelled "Separate" in the UI; the explode/`?explode`
   terminology lives on internally): pushes each region radially outward from
   the brain center to reveal deep structures. Tuning constant:
