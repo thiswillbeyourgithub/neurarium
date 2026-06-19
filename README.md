@@ -16,16 +16,60 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 ## Features
 
-- 3D regions rendered with [three.js](https://threejs.org/), colored per region.
+### Visualization
+
+- Brain regions (cortical lobes, basal ganglia / deep nuclei, diencephalon,
+  limbic, hindbrain) as procedurally shaped 3D meshes: gyrified cortex, smooth
+  deep nuclei, foliated cerebellum, and swept tubes for the caudate, brainstem,
+  hippocampus, cingulate, and fornix.
+- At rest the regions lock together into a whole brain; an intro animation
+  assembles them from an exploded state on load.
 - Curved arrows for directed neuron projections, colored by type (excitatory /
-  inhibitory / dopaminergic).
-- Controls:
-  - **Auto-rotate** the view.
-  - **Separate** slider to spread the regions apart and reveal deep
-    structures.
-  - **Transparency** slider to see through the outer regions.
-  - Rotate with one finger / left-drag, pinch to zoom, two-finger drag to pan.
-- On-screen debug console via [eruda](https://github.com/liriliri/eruda).
+  inhibitory / dopaminergic), with a cone at the target end (both ends for
+  reciprocal / commissural pathways).
+
+### Exploring the anatomy
+
+- **Click a region** to open an info panel with its name, group, a **Wikipedia
+  link**, and the list of pathways touching it; click a pathway row to jump to it.
+- **Click an arrow** to see that pathway's details: route, type, neurotransmitter,
+  a one-line description, and its **sources**.
+- **Search** (the magnifier) filters both regions (by name) and connections (by
+  pathway label) and frames whatever you pick.
+- **Legend** isolates what you click: a region (both hemispheres), a whole
+  category, a named **functional circuit**, or a single **neurotransmitter** (only
+  those pathways and their endpoints stay lit, everything else fades).
+- **Hover / tap** a region to show its floating name; a **Show all names** button
+  labels everything at once, and a **Hide projections** button clears the arrows.
+
+### Controls
+
+- **Auto-rotate** the view (on by default; stops as soon as you pick something).
+- **Separate** slider spreads the regions apart to reveal the deep structures
+  (**Shift + scroll** drives it too; plain scroll zooms).
+- **Transparency** slider to see through the outer regions.
+- Rotate with one finger / left-drag, pinch to zoom, two-finger drag to pan;
+  double-click a region to frame it, or empty space to recenter.
+
+### Data & sourcing
+
+- The anatomy is plain **structured data**: `public/data/brain.jsonl` (one JSON
+  object per line: regions, projections, named circuits, and a self-describing
+  `meta` record carrying the colour and legend-heading maps) plus one geometry
+  file per shape under `public/shapes/`. It is generated from a single source
+  (`tools/generate_data.py`) and easy to consume from another engine.
+- Every projection carries a **neurotransmitter** and a list of **sources**
+  (citations; a verified link renders as a hyperlink, an unfilled one as plain
+  text). Every region links to its **Wikipedia** article.
+
+### Deep links & screenshots
+
+- The view is URL-addressable: `?only=`, `?view=`, `?explode=`, `?transparency=`,
+  `?names=all`, `?autorotate=1`, `?ui=0` (see the table in
+  [`CLAUDE.md`](CLAUDE.md)). `tools/shot.py` uses the same params to render PNGs.
+- On-screen debug console via [eruda](https://github.com/liriliri/eruda), loaded
+  only in dev or with `?debug`; runtime errors otherwise surface as dismissible
+  on-screen banners.
 
 ## Running
 
