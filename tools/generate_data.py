@@ -464,12 +464,19 @@ PAIRED: list[dict[str, Any]] = [
          octaves=2),
     # --- Basal ganglia & deep nuclei (small, inner) ---
     dict(base="caudate", name="Caudate nucleus", group="basal_ganglia",
-         pos=(1.2, 1.2, 0.8), color="#ff9da7",
+         # Raised (y 1.2 -> 1.9) so the bulbous head emerges through the
+         # fronto-parietal seam instead of staying buried; `carves` then notches
+         # the lobes around it so it reads as "partly exposed", a jigsaw piece set
+         # into the seam, rather than appearing to go inside them (see _tube_carve
+         # / CARVE_TUBES). It pulls back out of the notch during the explode,
+         # which is fine. Less anatomically deep, but always visible.
+         pos=(1.2, 1.9, 0.8), color="#ff9da7",
          # Genuinely C-shaped: a bulbous head (anterior-superior) arching over
          # and back, then a thin tail curling down and forward. Modeled as a
          # tapered tube along a parasagittal (x~0) spline so it reads as the
          # comma it is rather than a convex blob. Spine runs head -> tail; z is
          # anterior(+), y is superior(+).
+         carves=True,
          shape=dict(
              type="curve",
              points=[
