@@ -419,7 +419,7 @@ PAIRED: list[dict[str, Any]] = [
          # as one cortex, not "pop" colors), each a slightly different hue so the
          # four stay tellable apart: frontal=rose, parietal=pink, temporal=salmon,
          # occipital=mauve-pink.
-         pos=(1.3, 1.0, 2.2), color="#c58c9a",
+         pos=(0.85, 1.0, 2.2), color="#c58c9a",
          # Largest lobe; a smooth gyrified dome whose surface "curls" are a
          # shading normal-map (GYRUS_BUMP in shapes.js), not geometry, so the mesh
          # stays smooth (no faceting) and the curls are lighting only.
@@ -427,14 +427,14 @@ PAIRED: list[dict[str, Any]] = [
          # wall at the midline so left+right meet at the longitudinal fissure.
          # Lobes are sized to overlap their neighbors so the union reads as one
          # continuous cortical surface (no gaps) when assembled at explode 0.
-         radii=(1.6, 1.8, 2.1), seed=11, detail=6, noise=0.10,
+         radii=(1.95, 1.8, 2.1), seed=11, detail=6, noise=0.10,
          octaves=2, medial=True),
     dict(base="parietal", name="Parietal lobe", group="lobe",
-         pos=(1.25, 1.8, -0.2), color="#c69597",
+         pos=(0.85, 1.8, -0.2), color="#c69597",
          # Superior-posterior quadrant, behind the frontal and above the
          # occipital; smooth dome with a flat medial wall at the fissure (the
          # surface "curls" are a shading normal-map, see GYRUS_BUMP in shapes.js).
-         radii=(1.6, 1.7, 1.8), seed=12, detail=6, noise=0.10,
+         radii=(1.9, 1.7, 1.8), seed=12, detail=6, noise=0.10,
          octaves=2, medial=True),
     dict(base="temporal", name="Temporal lobe", group="lobe",
          pos=(1.95, -0.75, 0.6), color="#c79a8e",
@@ -445,10 +445,10 @@ PAIRED: list[dict[str, Any]] = [
          radii=(1.25, 1.1, 2.15), seed=13, detail=6, noise=0.10,
          octaves=2, clip=dict(ymax=0.95)),
     dict(base="occipital", name="Occipital lobe", group="lobe",
-         pos=(1.1, 0.75, -2.9), color="#bf8da6",
+         pos=(0.72, 0.75, -2.9), color="#bf8da6",
          # Smallest lobe, the posterior pole; compact, behind the parietal and
          # above the cerebellum, with a flat medial wall.
-         radii=(1.45, 1.5, 1.6), seed=14, detail=6, noise=0.10,
+         radii=(1.7, 1.5, 1.6), seed=14, detail=6, noise=0.10,
          octaves=2, medial=True),
     dict(base="insula", name="Insula", group="lobe", fr_gender="f",
          pos=(2.5, 0.05, 0.55), color="#ae7aa3",
@@ -1217,7 +1217,7 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
 # Half-width of the longitudinal fissure: each cortical lobe's medial face is
 # cut flat at world x = +/- this, so the left and right hemispheres meet along a
 # thin midline gap instead of overlapping into one ball. Small = tight fissure.
-MIDLINE_GAP = 0.12
+MIDLINE_GAP = 0.06
 
 
 def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
