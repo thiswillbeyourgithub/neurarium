@@ -73,6 +73,19 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
   only in dev or with `?debug`; runtime errors otherwise surface as dismissible
   on-screen banners.
 
+## Roadmap
+
+Planned directions, none implemented yet and the order is not fixed:
+
+- **Animations**: show activity and signal flow along the pathways (e.g. pulses
+  travelling down a projection), beyond the current assemble intro.
+- **Brain receptors**: where the neurotransmitter receptor families sit, layered
+  onto the regions and pathways.
+- **Drugs**: how common psychoactive and therapeutic compounds act on those
+  receptors and pathways.
+- **Pathologies**: how disorders map onto the regions, circuits, and
+  neurotransmitter systems.
+
 ## Running
 
 The page loads its data with `fetch()`, so it must be served over HTTP (not
