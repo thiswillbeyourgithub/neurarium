@@ -369,6 +369,42 @@ MIDLINE: list[dict[str, Any]] = [
          )),
 ]
 
+# Wikipedia article per structure, keyed by ``base`` id (so both hemispheres of a
+# paired region share the one article, written once here). A small registry like
+# SOURCES below: the generator attaches the URL to each structure record
+# (``_structure_record``) and the viewer renders it as a link in the structure
+# info panel. URLs were verified to resolve to the specific anatomical article
+# (e.g. the insula's article is "Insular_cortex", the fornix's is
+# "Fornix_(neuroanatomy)", the septal nuclei's is "Septal_area"). A structure
+# absent from this map simply gets no link; an entry whose key is not a known
+# structure base raises in :func:`build_records` (typo guard).
+WIKIPEDIA: dict[str, str] = {
+    "frontal": "https://en.wikipedia.org/wiki/Frontal_lobe",
+    "parietal": "https://en.wikipedia.org/wiki/Parietal_lobe",
+    "temporal": "https://en.wikipedia.org/wiki/Temporal_lobe",
+    "occipital": "https://en.wikipedia.org/wiki/Occipital_lobe",
+    "insula": "https://en.wikipedia.org/wiki/Insular_cortex",
+    "caudate": "https://en.wikipedia.org/wiki/Caudate_nucleus",
+    "putamen": "https://en.wikipedia.org/wiki/Putamen",
+    "globus_pallidus": "https://en.wikipedia.org/wiki/Globus_pallidus",
+    "thalamus": "https://en.wikipedia.org/wiki/Thalamus",
+    "subthalamic_nucleus": "https://en.wikipedia.org/wiki/Subthalamic_nucleus",
+    "substantia_nigra": "https://en.wikipedia.org/wiki/Substantia_nigra",
+    "accumbens": "https://en.wikipedia.org/wiki/Nucleus_accumbens",
+    "claustrum": "https://en.wikipedia.org/wiki/Claustrum",
+    "hippocampus": "https://en.wikipedia.org/wiki/Hippocampus",
+    "amygdala": "https://en.wikipedia.org/wiki/Amygdala",
+    "cingulate": "https://en.wikipedia.org/wiki/Cingulate_cortex",
+    "fornix": "https://en.wikipedia.org/wiki/Fornix_(neuroanatomy)",
+    "olfactory_bulb": "https://en.wikipedia.org/wiki/Olfactory_bulb",
+    "septal_nuclei": "https://en.wikipedia.org/wiki/Septal_area",
+    "hypothalamus": "https://en.wikipedia.org/wiki/Hypothalamus",
+    "mammillary": "https://en.wikipedia.org/wiki/Mammillary_body",
+    "pituitary": "https://en.wikipedia.org/wiki/Pituitary_gland",
+    "cerebellum": "https://en.wikipedia.org/wiki/Cerebellum",
+    "brainstem": "https://en.wikipedia.org/wiki/Brainstem",
+}
+
 # Reference registry. A pathway cites one or more of these by short key (see the
 # ``sources`` field on PROJECTIONS); the generator expands each key into the full
 # ``{citation, url}`` object inside every projection record, so a reference shared
@@ -711,6 +747,10 @@ def _structure_record(entry: dict[str, Any], structure_id: str, name: str,
         "color": entry["color"],
         "shape_file": f"shapes/{shape_id}.json",
     }
+    # External reference link (same article for both hemispheres of a pair).
+    wiki = WIKIPEDIA.get(entry["base"])
+    if wiki:
+        record["wikipedia"] = wiki
     if mirror:
         record["mirror"] = True
     return record
@@ -1033,6 +1073,12 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         raise KeyError(
             f"Structure group(s) with no GROUP_LABELS entry: "
             f"{sorted(missing_groups)}")
+    known_bases = {e["base"] for e in PAIRED} | {e["base"] for e in MIDLINE}
+    unknown_wiki = WIKIPEDIA.keys() - known_bases
+    if unknown_wiki:
+        raise KeyError(
+            f"WIKIPEDIA entry for unknown structure base(s): "
+            f"{sorted(unknown_wiki)}")
     jsonl.insert(0, {
         "type": "meta",
         "projection_colors": PROJECTION_COLORS,

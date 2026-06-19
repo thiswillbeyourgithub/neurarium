@@ -51,7 +51,8 @@ data/brain.jsonl      One JSON object per line. Each line is one of:
                           (group -> legend heading), so the dataset is self-
                           describing and a port needs no hardcoded palette
                         - a "structure" (region): id, name, group, position,
-                          color, shape_file
+                          color, shape_file, and an optional wikipedia (article
+                          URL, shown as a link in the structure info panel)
                         - a "projection": from, to, kind, label,
                           neurotransmitter, description, sources[{citation,url}],
                           and optional bidirectional
@@ -553,8 +554,9 @@ as the WIP banner (`js/error-banner.js`):
     picking (`pickArrowAt`) takes priority over the region behind it.
   - **Clicking/tapping a structure** (or a double-click, or a structure search
     result) shows the **structure** view (`showStructure`): its name, its group
-    heading (from `data.meta.groupLabels`), and the list of pathways touching it.
-    Each connection row
+    heading (from `data.meta.groupLabels`), a **Wikipedia link** when the
+    structure record carries a `wikipedia` url (rendered only for an http(s)
+    value), and the list of pathways touching it. Each connection row
     shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
     receives, `↔` reciprocal) and the other endpoint; **clicking a row jumps to
     that pathway** (frames the endpoints, halos the arrow, swaps in the
@@ -652,6 +654,13 @@ as the WIP banner (`js/error-banner.js`):
      cortex at 0 and are revealed by exploding. When moving a lobe, re-render the
      assembled hemisphere (`only=frontal_R,parietal_R,temporal_R,occipital_R&
      explode=0&view=right|left|top`) to check the seams and the medial wall.
+   - To give a region a **Wikipedia link**, add its `base` id + article URL to the
+     `WIKIPEDIA` registry near the top of `generate_data.py` (a small map keyed by
+     base id, like `SOURCES`, so both hemispheres of a pair share the one article
+     written once). The generator attaches the URL to each structure record
+     (`_structure_record`) and the viewer shows it as a link in the structure info
+     panel; a base absent from the map just gets no link, and a key that is not a
+     known structure base raises in `build_records` (typo guard).
    - Projection `from`/`to` reference structure ids (e.g. `putamen_R`). The arrow
      points `from` -> `to` (a cone at the target end).
    - A projection carries metadata so the viewer can explain it: `label` (short

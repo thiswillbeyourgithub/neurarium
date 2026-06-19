@@ -637,6 +637,19 @@ function createInfoPanel(data) {
         data.meta.groupLabels[structure.group] || structure.group,
       ));
 
+      // External reference link (Wikipedia), when the data carries one. Only an
+      // http(s) value is rendered, so a stray field can never inject markup.
+      const wikiUrl = structure.wikipedia;
+      if (typeof wikiUrl === "string" && /^https?:\/\//i.test(wikiUrl)) {
+        const wikiWrap = el("div", "info-wiki");
+        const a = el("a", null, "Wikipedia ↗");
+        a.href = wikiUrl;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        wikiWrap.appendChild(a);
+        body.appendChild(wikiWrap);
+      }
+
       // Pathways with this structure at either end, in the data's order.
       const conns = data.projections.filter(
         (p) => p.from === structure.id || p.to === structure.id);
