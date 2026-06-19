@@ -57,6 +57,23 @@ To change which regions or projections are shown, edit `tools/generate_data.py`
 and run `python tools/generate_data.py` to regenerate `public/data/` and
 `public/shapes/`. See [`CLAUDE.md`](CLAUDE.md) for details.
 
+## Stack
+
+Deliberately lightweight, with a small attack surface and no build step:
+
+- **Frontend**: vanilla ES modules + [three.js](https://threejs.org/) loaded via
+  an import map. three.js is vendored under `public/vendor/three`, so the page
+  executes no third-party script at runtime and works offline. No framework, no
+  bundler, no `node_modules`.
+- **Data**: `tools/generate_data.py` (Python standard library only) emits the
+  anatomy as `public/data/brain.jsonl` + `public/shapes/*.json`, fetched at
+  runtime. The plain JSONL/JSON format is easy to consume from another engine.
+- **Serving**: a hardened [Caddy](https://caddyserver.com/) container (non-root,
+  read-only rootfs, dropped capabilities, resource limits) that sends a strict
+  Content-Security-Policy; a reverse proxy terminates TLS in front of it.
+- **Debugging**: an [eruda](https://github.com/liriliri/eruda) on-screen console,
+  loaded only in dev or with `?debug` so it never ships to normal visitors.
+
 ## Credits
 
 Built with the help of [Claude Code](https://claude.com/claude-code).
