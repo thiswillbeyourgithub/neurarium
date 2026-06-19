@@ -23,12 +23,17 @@
     <script src="version.js"></script>
 
     <!-- three.js via import map so the ES modules in js/ can `import "three"`
-         and "three/addons/...". Pinned to a specific version for reproducibility. -->
+         and "three/addons/...". Vendored locally under public/vendor/three (three
+         r170: the core module + only the OrbitControls / CSS2DRenderer addons we
+         use), so the site pulls no third-party script at runtime: nothing to
+         execute from a CDN that could be tampered with, and it works offline. To
+         upgrade, refetch those files from the matching three.js tag and bump the
+         path. -->
     <script type="importmap">
       {
         "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+          "three": "./vendor/three/three.module.js",
+          "three/addons/": "./vendor/three/addons/"
         }
       }
     </script>
