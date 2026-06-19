@@ -78,16 +78,18 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
                       reflects it (a `mirror` flag on its structure record, see
                       below), so there is no per-side duplication. Three types:
                       "blob" {radii, seed, detail, noise, + optional
-                      octaves/ridged/frequency/aniso/clip/clip_planes} = a
-                      gradient-noise-deformed ellipsoid (the optional fields turn
-                      the smooth surface into foliated cerebellum; the cortical
-                      lobes stay smooth domes and get their "curl" surface from a
-                      normal-map shader instead, see js/shapes.js GYRUS_BUMP),
-                      `clip` cuts axis-aligned flat faces e.g. the
-                      lobes' medial wall, and `clip_planes` are the generated
+                      octaves/ridged/frequency/aniso/clip/clip_planes/carve_tubes}
+                      = a gradient-noise-deformed ellipsoid (the optional fields
+                      turn the smooth surface into foliated cerebellum; the
+                      cortical lobes stay smooth domes and get their "curl" surface
+                      from a normal-map shader instead, see js/shapes.js
+                      GYRUS_BUMP), `clip` cuts axis-aligned flat faces e.g. the
+                      lobes' medial wall, `clip_planes` are the generated
                       bisecting cuts between overlapping neighbours so adjacent
                       regions tile flush like jigsaw pieces instead of inter-
-                      penetrating);
+                      penetrating, and `carve_tubes` are swept-tube channels
+                      subtracted from a lobe by a `carves` curve (the caudate) so
+                      it seats into a notch instead of poking through;
                       "curve" {points, profile, seed, noise, radial/tubular_
                       segments} = a round-capped tapered tube swept along a spline
                       (the C-shaped caudate, the tapering brainstem); "composite"
@@ -123,7 +125,9 @@ js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       noise field whose iso-loops read as little swirls), so the
                       surface pattern is shading, not triangles. buildBlobGeometry also
                       honours `clip_planes` (the generated inter-region jigsaw
-                      cuts) when the `JIGSAW_CLIP.enabled` flag is on. No JS deps
+                      cuts) when the `JIGSAW_CLIP.enabled` flag is on, and
+                      `carve_tubes` (the caudate hollowing a notch in the lobes it
+                      threads) when `CARVE_TUBES.enabled` is on. No JS deps
                       beyond three.js.
 js/arrows.js          Builds curved tube+cone arrows for projections; each
                       arrow's colour comes from its `projection.color` (resolved
@@ -737,6 +741,21 @@ as the WIP banner (`js/error-banner.js`):
        `JIGSAW_CLIP.enabled` flag in `js/shapes.js` is the A/B switch: turn it off
        to ignore the planes (regions overlap as before) without regenerating; the
        medial wall is independent and always applied.
+     - `carve_tubes` (auto, never authored): a curve flagged `carves=True` (the
+       caudate) hollows a swept-tube *channel* out of every lobe its spine threads,
+       so it sits in a clean notch ("partly exposed", a jigsaw piece set into the
+       seam) instead of the cortex poking through it. The generator
+       (`_tube_carve` in `generate_data.py`) emits, on each threaded lobe, the
+       carver's spine points + per-station channel radius (its `profile` inflated
+       by noise + `LOBE_CARVE_GAP`) in that lobe's local frame;
+       `buildBlobGeometry` pushes any lobe vertex inside the tube out onto the
+       tube surface. Adjacency is geometry-derived (a spine point reaching inside
+       the lobe), only `group=="lobe"` blobs are carved (a nucleus never carves a
+       lobe), and like the planes it is computed once on the right side and
+       mirrored. The `CARVE_TUBES.enabled` flag in `js/shapes.js` is the A/B
+       switch. (The caudate is also nudged up so its head emerges through the
+       fronto-parietal seam; per-explode it pulls back out of the notch, which is
+       expected.)
      - The cortical surface pattern is *not* geometry: every `group=="lobe"`
        structure gets a procedural "curl" bump injected into its material
        (`injectGyrusBump` / the `GYRUS_BUMP` knobs in `js/shapes.js`). The height
@@ -753,7 +772,9 @@ as the WIP banner (`js/error-banner.js`):
      end). A paired `curve` may now be asymmetric across x (e.g. an off-midline
      spine): the `_L` member is a true reflection of the right-side geometry, so
      it flips correctly. Midline curves like the brainstem are emitted once and
-     never mirrored.
+     never mirrored. A curve may also carry `carves=True` to make it hollow a
+     notch in the lobes it threads (see `carve_tubes` above; only the caudate uses
+     it).
    - Give a region a `shape=dict(type="composite", parts=[...])` to merge several
      sub-shapes into one mesh; each part is a shape payload (usually a blob) with
      optional `offset`/`scale`/`rotate`. Used for the cerebellum (two foliated
