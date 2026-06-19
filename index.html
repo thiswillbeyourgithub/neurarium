@@ -76,6 +76,23 @@
         max-height: calc(100vh - 24px);
         overflow-y: auto;
       }
+      /* Hide the native scrollbar on the scrollable panels (they still scroll
+         via wheel / touch / drag); the chunky bar looks out of place over the
+         dark glass UI. scrollbar-width covers Firefox, ::-webkit-scrollbar
+         covers Chromium/WebKit. */
+      #controls,
+      #legend-body,
+      #search-results,
+      #info-panel {
+        scrollbar-width: none;
+      }
+      #controls::-webkit-scrollbar,
+      #legend-body::-webkit-scrollbar,
+      #search-results::-webkit-scrollbar,
+      #info-panel::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
       #controls-body { padding: 0 14px 14px; }
       /* Shared collapse header (the panel title + the nested legend): a full-
          width button with a chevron that points down when expanded. */
