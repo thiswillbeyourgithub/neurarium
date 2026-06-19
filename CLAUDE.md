@@ -105,9 +105,10 @@ js/labels.js          Floating structure-name labels (three.js CSS2DRenderer):
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
-                      for labels, arrow picking + the connection info panel
-                      (createInfoPanel), the structure+connection search, the
-                      legend builder, and the render loop.
+                      for labels, arrow + structure picking and the info panel
+                      (createInfoPanel: a connection view or a structure view
+                      with its connection list), the structure+connection search,
+                      the legend builder, and the render loop.
 app-config.js         Tiny config file (window.__APP_CONFIG__). This committed
                       copy is the LOCAL-DEV fallback: the feature fields are empty,
                       so dev servers keep umami + the DEV banner off. In the
@@ -420,7 +421,7 @@ as the WIP banner (`js/error-banner.js`):
 
 ## Controls
 
-- **Panel layout**: everything except the bottom-right connection info panel
+- **Panel layout**: everything except the bottom-right info panel
   lives in one collapsible **"Neurarium" panel at the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
@@ -525,20 +526,33 @@ as the WIP banner (`js/error-banner.js`):
   middle of the brain and re-frames the whole thing (useful after panning slides
   it off-center), and a **search** button (magnifier icon) swaps a search box in
   place of the panel body (not a popup) that filters **both structures (by name)
-  and connections (by pathway label)**. Picking a structure centers on it and
-  shows its label;
-  picking a connection frames its two endpoints and opens the info panel.
+  and connections (by pathway label)**. Picking a structure centers on it,
+  shows its label, and opens its structure panel (below);
+  picking a connection frames its two endpoints and opens the connection panel.
   Connection results carry a hemisphere tag (`R` / `L` / `L↔R`) so the mirrored
   twins stay distinct (`connectionSideTag` in `js/main.js`).
-- **Connections / arrows**: clicking or tapping a projection arrow opens the
-  **info panel** (bottom-right): the pathway label, its route (`from → to`, `↔`
-  for a bidirectional/commissural link), kind + neurotransmitter, a one-line
-  description, and its sources (a verified http(s) url renders as a link, a
-  `"TODO"` url as plain text). Built by `createInfoPanel` in `js/main.js` from
-  the projection's metadata. Arrow picking (`pickArrowAt`) takes priority over
-  the region behind it; a click/tap that misses every arrow closes the panel.
-- **Double-click**: on a structure centers and frames it; on empty space
-  recenters the whole brain (same as the reset button).
+- **Info panel** (bottom-right, `createInfoPanel` in `js/main.js`): one panel
+  that shows either a *connection* or a *structure*.
+  - **Clicking/tapping an arrow** (or picking a connection in search) shows the
+    **connection** view: the pathway label, its route (`from → to`, `↔` for a
+    bidirectional/commissural link), kind + neurotransmitter, a one-line
+    description, and its sources (a verified http(s) url renders as a link, a
+    `"TODO"` url as plain text). Built from the projection's metadata. Arrow
+    picking (`pickArrowAt`) takes priority over the region behind it.
+  - **Clicking/tapping a structure** (or a double-click, or a structure search
+    result) shows the **structure** view (`showStructure`): its name, its group
+    (`GROUP_LABELS`), and the list of pathways touching it. Each connection row
+    shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
+    receives, `↔` reciprocal) and the other endpoint; **clicking a row jumps to
+    that pathway** (frames the endpoints, halos the arrow, swaps in the
+    connection view) via the panel's `onConnection` hook, wired in `js/main.js`
+    to the same action as a connection search result. A structure with no mapped
+    pathways shows "No mapped connections yet."
+  - A click/tap that **misses** every arrow and structure (empty space) closes
+    the panel.
+- **Double-click**: on a structure centers and frames it (and opens its
+  structure panel); on empty space recenters the whole brain (same as the reset
+  button).
 - All camera framing above (reset, double-click, search) goes through one smooth
   tween, `createCameraFocus` in `js/main.js`: it moves the orbit pivot and
   camera distance but keeps the current view direction, is advanced once per

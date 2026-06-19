@@ -571,6 +571,11 @@ function createInfoPanel(data) {
   const nameOf = (id) => data.byId.get(id)?.name || id;
   closeBtn.addEventListener("click", () => { panel.hidden = true; });
 
+  // Set by the caller (onConnection): what to do when a connection row in a
+  // structure panel is clicked. The panel only knows projections, so the caller
+  // maps the projection to its arrow and does the framing/halo/connection-panel.
+  let onConnectionPick = () => {};
+
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -626,6 +631,60 @@ function createInfoPanel(data) {
       }
       panel.hidden = false;
     },
+
+    /**
+     * Populate the panel for a *structure* (clicking a region, a double-click,
+     * or a structure search result): its name, group, and the list of pathways
+     * touching it. Each connection row is clickable and routes through
+     * onConnectionPick so the caller can frame it + open the connection panel.
+     */
+    showStructure(structure) {
+      body.innerHTML = "";
+      body.appendChild(el("h2", "info-title", structure.name));
+      body.appendChild(el(
+        "div", "info-group", GROUP_LABELS[structure.group] || structure.group,
+      ));
+
+      // Pathways with this structure at either end, in the data's order.
+      const conns = data.projections.filter(
+        (p) => p.from === structure.id || p.to === structure.id);
+      if (conns.length === 0) {
+        body.appendChild(el("p", "info-desc", "No mapped connections yet."));
+        panel.hidden = false;
+        return;
+      }
+
+      const wrap = el("div", "info-connections");
+      wrap.appendChild(el(
+        "h3", null, `Connections (${conns.length})`));
+      const ul = el("ul");
+      for (const proj of conns) {
+        // Direction relative to *this* structure: → it projects out, ← it
+        // receives, ↔ reciprocal/commissural.
+        const outgoing = proj.from === structure.id;
+        const otherId = outgoing ? proj.to : proj.from;
+        const glyph = proj.bidirectional ? "↔" : outgoing ? "→" : "←";
+
+        const li = el("li");
+        li.title = proj.label || "";
+        const swatch = el("span", "swatch line");
+        swatch.style.background = PROJECTION_COLORS[proj.kind] || "#fff";
+        li.appendChild(swatch);
+        li.appendChild(el("span", "conn-dir", glyph));
+        li.appendChild(el("span", "conn-label", nameOf(otherId)));
+        li.addEventListener("click", () => onConnectionPick(proj));
+        ul.appendChild(li);
+      }
+      wrap.appendChild(ul);
+      body.appendChild(wrap);
+      panel.hidden = false;
+    },
+
+    /** Register the handler run when a structure-panel connection row is clicked. */
+    onConnection(fn) {
+      onConnectionPick = fn;
+    },
+
     hide() {
       panel.hidden = true;
     },
@@ -1016,6 +1075,7 @@ function wireToolbar({ focus, meshes, arrows, labels, info, selection }) {
         focus.focusStructure(mesh);
         labels.setHovered(mesh);
         selection.select(mesh);
+        info.showStructure(mesh.userData.structure);
       },
     })),
     ...arrows.map((arrow) => {
@@ -1226,7 +1286,10 @@ async function main() {
       return true;
     }
     const mesh = structHit ? structHit.object : null;
-    info.hide();
+    // A structure opens its own panel (name, group, connections); a true miss on
+    // empty space closes the panel.
+    if (mesh) info.showStructure(mesh.userData.structure);
+    else info.hide();
     selection.select(mesh);
     labels.setHovered(mesh);
     return true;
@@ -1312,12 +1375,25 @@ async function main() {
   // drag always wins.
   const focus = createCameraFocus({ camera, controls, meshes });
   controls.addEventListener("start", () => focus.cancel());
+
+  // Clicking a connection row inside a structure panel jumps to that pathway:
+  // frame its endpoints, halo the arrow, and swap in the connection panel (same
+  // behaviour as picking the connection in search).
+  info.onConnection((proj) => {
+    const arrow = arrows.find((a) => a.projection === proj);
+    if (!arrow) { info.show(proj); return; }
+    focus.focusConnection(arrow);
+    info.show(proj);
+    selection.selectArrow(arrow);
+  });
+
   canvas.addEventListener("dblclick", (event) => {
     const mesh = pickAt(event.clientX, event.clientY);
     if (mesh) {
       focus.focusStructure(mesh);
       labels.setHovered(mesh);
       selection.select(mesh);
+      info.showStructure(mesh.userData.structure);
     } else {
       // Double-click on empty space is a full reset, same as the reset button.
       focus.recenter();

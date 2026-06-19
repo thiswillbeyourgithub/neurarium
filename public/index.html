@@ -361,14 +361,16 @@
         color: var(--text);
         margin: 0 0 12px;
       }
-      .info-sources h3 {
+      .info-sources h3,
+      .info-connections h3 {
         font-size: 11px;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         color: var(--muted);
         margin: 0 0 6px;
       }
-      .info-sources ul { list-style: none; margin: 0; padding: 0; }
+      .info-sources ul,
+      .info-connections ul { list-style: none; margin: 0; padding: 0; }
       .info-sources li {
         font-size: 12px;
         line-height: 1.4;
@@ -377,6 +379,21 @@
       }
       .info-sources a { color: #8fb6e6; text-decoration: underline; }
       .info-sources .src-todo { color: var(--muted); }
+      /* Structure panel: a clickable list of the structure's connections. */
+      .info-group { font-size: 12px; color: var(--muted); margin: -4px 0 12px; }
+      .info-connections li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--text);
+        padding: 4px 0;
+        cursor: pointer;
+      }
+      .info-connections li:hover { color: #8fb6e6; }
+      .info-connections .conn-label { flex: 1; }
+      .info-connections .conn-dir { color: var(--muted); }
 
       #status {
         position: fixed;
