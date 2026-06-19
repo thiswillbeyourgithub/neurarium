@@ -93,7 +93,7 @@
         "Could not load brain data: {msg}. Are you serving over HTTP? (see CLAUDE.md)",
 
       "about.p1":
-        "Neurarium is a work-in-progress, interactive 3D map of brain regions " +
+        "neurarium is a work-in-progress, interactive 3D map of brain regions " +
         "and the neuron projections between them. The shapes are schematic, " +
         "meant to help you find and relate structures, not to be anatomically " +
         "exact.",
@@ -172,7 +172,7 @@
         "Impossible de charger les données : {msg}. Le site est-il servi via HTTP ? (voir CLAUDE.md)",
 
       "about.p1":
-        "Neurarium est une carte 3D interactive, en cours de développement, " +
+        "neurarium est une carte 3D interactive, en cours de développement, " +
         "des régions cérébrales et des projections neuronales qui les " +
         "relient. Les formes sont schématiques : elles aident à situer et " +
         "relier les structures, sans prétendre à l’exactitude anatomique.",

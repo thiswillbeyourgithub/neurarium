@@ -1,18 +1,18 @@
-# Neurarium
+# neurarium
 
 > [!WARNING]
-> **Work in progress, and very probably wrong.** Neurarium is under active
+> **Work in progress, and very probably wrong.** neurarium is under active
 > development and far from complete. None of the anatomy has been reviewed or
 > sourced yet, so the regions, shapes, projections, and descriptions very likely
 > contain hallucinations and outright errors. Do not rely on any of it.
 
-Neurarium is an interactive 3D brain visualizer that runs in the browser. It
+neurarium is an interactive 3D brain visualizer that runs in the browser. It
 shows brain regions (cortical lobes, basal ganglia / deep nuclei, hindbrain) as
 3D shapes and draws arrows for neuron projections between them.
 
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
-![Neurarium screenshot](docs/screenshot.png)
+![neurarium screenshot](docs/screenshot.png)
 
 ## Features
 
