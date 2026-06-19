@@ -20,9 +20,19 @@
   var STORAGE_KEY = "neurarium:lang";
   var SUPPORTED = ["en", "fr"];
 
-  // Pick the language: a saved choice wins; otherwise sniff the browser locale
-  // (any fr* => French); default English.
+  // Pick the language: a ?lang= query param wins (and is persisted, so a deep
+  // link sets the default); otherwise a saved choice; otherwise the browser
+  // locale (any fr* => French); otherwise English.
   function detectLang() {
+    try {
+      var q = new URLSearchParams(window.location.search).get("lang");
+      if (q && SUPPORTED.indexOf(q.toLowerCase()) !== -1) {
+        q = q.toLowerCase();
+        // Persist like clicking the switch, so the choice sticks on later visits.
+        try { localStorage.setItem(STORAGE_KEY, q); } catch (e2) { /* ignore */ }
+        return q;
+      }
+    } catch (e) { /* no URLSearchParams / weird env: fall through */ }
     try {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (SUPPORTED.indexOf(saved) !== -1) return saved;

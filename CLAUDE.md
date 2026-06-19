@@ -163,7 +163,8 @@ js/i18n.js            Internationalization (en / fr). A classic script (like
                       app-config.js) loaded early so the module viewer AND the
                       classic banner scripts can read window.__I18N__. Owns the
                       single UI message catalogue (both languages), detects the
-                      language (saved choice > browser locale fr* > en), and on
+                      language (?lang= param > saved choice > browser locale fr* >
+                      en), and on
                       DOMContentLoaded fills the static markup tagged data-i18n /
                       data-i18n-html / data-i18n-attr so English text is not
                       duplicated between the HTML and the catalogue. Exposes
@@ -371,9 +372,11 @@ script, loaded early in `index.html`) is the whole mechanism:
   (incl. `name`/`base_name`, projection `label`/`description`/`neurotransmitter`,
   circuit `name`, and the `group_labels`/`kind_labels` map values) to plain
   strings at load via `pick`. Source citation text + URLs are not translated.
-- **Language pick.** `detectLang()` uses a saved choice (`localStorage`
-  `neurarium:lang`) if present, else the browser locale (any `fr*` -> French),
-  else English. `window.__I18N__` exposes `lang`, `t(key, vars)` (UI lookup with
+- **Language pick.** `detectLang()` uses a `?lang=en|fr` query param if present
+  (and persists it to `localStorage`, so a deep link *sets the default* for later
+  visits too), else a saved choice (`localStorage` `neurarium:lang`), else the
+  browser locale (any `fr*` -> French), else English. `window.__I18N__` exposes
+  `lang`, `t(key, vars)` (UI lookup with
   `{token}` interpolation, falls back to English then the key), `pick(field)`
   (collapse an `{en,fr}` data field to the current language; a plain string passes
   through), and `setLang(lang)`.
