@@ -31,12 +31,12 @@ const EXPLODE_STRENGTH = 2.5;
 // to feel swift but legible; eased so it departs and arrives smoothly.
 const INTRO_DURATION_MS = 1700;
 
-/** Update a small status line (also visible as a fallback if eruda is closed). */
-function setStatus(message, isError = false) {
+// Small status pill, used only for the brief "Loading brain data..." message;
+// failures surface as red error banners (js/error-banner.js), not here.
+function setStatus(message) {
   const el = document.getElementById("status");
   if (!el) return;
   el.textContent = message;
-  el.classList.toggle("error", isError);
   el.style.display = message ? "block" : "none";
 }
 
