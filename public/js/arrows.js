@@ -281,6 +281,10 @@ export class ProjectionArrow {
     // approximating via a curve parameter) guarantees the head touches the
     // surface and never overshoots inside the structure.
     const curve = new THREE.QuadraticBezierCurve3(start.clone(), mid, end.clone());
+    // Expose the live source->target arc so external animators (the circuit
+    // traveling-pulse, js/circuit-anim.js) can ride a bead along it. Rebuilt here
+    // every update(), so sampling it always reflects the current explode layout.
+    this.curve = curve;
     const tangentEnd = curve.getTangent(1).normalize(); // points into the target
     const coneBaseEnd = end.clone().addScaledVector(tangentEnd, -CONE_LENGTH);
 

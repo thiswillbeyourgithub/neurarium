@@ -17,6 +17,7 @@ import { loadBrainData } from "./data.js";
 import { buildStructureMesh } from "./shapes.js";
 import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
+import { createCircuitAnimation } from "./circuit-anim.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -296,7 +297,10 @@ function createSelection({ meshes, arrows }) {
   // structure" (so a plain structure isolate still lights up its connections).
   const isolatedArrows = new Set();
   let baseOpacity = 1; // current transparency-slider value
-  let onIsolateChange = () => {}; // legend-greying hook, set via onIsolate()
+  // Focus-change subscribers, each called on every apply() with the live isolate
+  // state. Multiple because both the legend (greying) and the circuit pulse
+  // animation (stop when the focus is no longer its circuit) need to react.
+  const onIsolateSubs = [];
   // Fired whenever the user actively picks content (a structure, an arrow, a
   // legend isolate, or a circuit), but not on a clear. Used to stop auto-rotate
   // once the user reaches in to inspect something. Set via onPick().
@@ -331,7 +335,7 @@ function createSelection({ meshes, arrows }) {
     }
     // Pass the pinned-arrow set too (empty unless a circuit/kind is focused) so
     // the legend can tell *which* projection-kind/circuit row is the active one.
-    onIsolateChange(active ? isolated : null, isolatedArrows);
+    for (const fn of onIsolateSubs) fn(active ? isolated : null, isolatedArrows);
   }
 
   return {
@@ -396,12 +400,13 @@ function createSelection({ meshes, arrows }) {
       apply();
     },
     /**
-     * Register the legend-greying callback, invoked with the live isolate set
-     * (or null when nothing is isolated) on every change. Applied once now so
-     * the legend reflects the current state immediately.
+     * Register a focus-change callback, invoked with the live isolate set (or
+     * null when nothing is isolated) and the pinned-arrow set on every change.
+     * Multiple may be registered (legend greying + circuit-pulse stop). Applied
+     * once now so the new subscriber reflects the current state immediately.
      */
     onIsolate(fn) {
-      onIsolateChange = fn;
+      onIsolateSubs.push(fn);
       apply();
     },
     /**
@@ -470,7 +475,7 @@ function createProjectionVisibility(arrows, labels) {
   };
 }
 
-function buildLegend(data, meshById, arrows, selection, projVis) {
+function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim) {
   // Populate the collapsible body, not the panel itself, so the always-visible
   // "Legend" toggle header (in index.html) is left untouched. The action buttons
   // ("Show all names" / "Hide projections") live in a #legend-actions container
@@ -593,7 +598,14 @@ function buildLegend(data, meshById, arrows, selection, projVis) {
       const entry = { row, id: circuit.id, meshes, meshSet, arrows: circuitArrows };
       row.addEventListener("click", () => {
         if (activeCircuitId === circuit.id) selection.clear();
-        else selection.setCircuit(meshes, circuitArrows);
+        else {
+          // Isolate the circuit, then start the traveling pulses on it. Order
+          // matters: setCircuit fires the focus-change watcher (which stops any
+          // prior animation) before play() begins this one. The watcher stops
+          // these pulses again on the next focus change.
+          selection.setCircuit(meshes, circuitArrows);
+          if (circuitAnim) circuitAnim.play(circuitArrows);
+        }
       });
       circuitRows.push(entry);
     }
@@ -1409,6 +1421,18 @@ async function main() {
   // the structure + arrow opacity so it composes with the transparency slider.
   const selection = createSelection({ meshes, arrows });
 
+  // Circuit "traveling pulse" animation: glowing beads sweeping each isolated
+  // circuit's arrows from source to target (js/circuit-anim.js). Started from the
+  // circuit legend row (in buildLegend) and stopped here the instant the focus
+  // stops being exactly that circuit: every focus change fires this onIsolate
+  // hook with the live pinned-arrow set, and matches() is true only while that
+  // set is still the animating circuit (a clear, a different circuit, a
+  // neurotransmitter focus or a legend isolate all flip it false).
+  const circuitAnim = createCircuitAnimation({ scene });
+  selection.onIsolate((_isolated, focusedArrows) => {
+    if (!circuitAnim.matches(focusedArrows)) circuitAnim.stop();
+  });
+
   // Auto-rotate is on by default (a slow turn on load), but the moment the user
   // reaches in to inspect something it should hold still. Stop it (and untick
   // the box so the UI stays truthful) on any content pick routed through the
@@ -1617,7 +1641,7 @@ async function main() {
   });
 
   const projVis = createProjectionVisibility(arrows, labels);
-  buildLegend(data, meshById, arrows, selection, projVis);
+  buildLegend(data, meshById, arrows, selection, projVis, circuitAnim);
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
   wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection });
   projVis.apply(); // established arrows visible, tentative ones start hidden
@@ -1643,6 +1667,7 @@ async function main() {
     // reads the target + camera position for this frame.
     intro.tick();
     focus.tick();
+    circuitAnim.tick();
     controls.update();
     // After controls.update() so the cull reads this frame's camera + target.
     cull.tick();

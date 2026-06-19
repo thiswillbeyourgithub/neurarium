@@ -139,6 +139,18 @@ js/arrows.js          Builds curved tube+cone arrows for projections; each
                       read as "maybe".
 js/labels.js          Floating structure-name labels (three.js CSS2DRenderer):
                       one hidden label per region, shown on hover or all at once.
+js/circuit-schedule.js  Automatic sequencing for the circuit "traveling pulse"
+                      animation: scheduleCircuit() turns a circuit's arrow set into
+                      a per-arrow firing slot via a BFS over the directed graph
+                      (node=structure, edge=arrow), with no hand-authored path.
+                      Dependency-free (no three.js), so the ordering logic is
+                      isolated + testable. See "Circuit animation" below.
+js/circuit-anim.js    Rendering half of that animation (createCircuitAnimation):
+                      turns each arrow's scheduled slot into a glowing additive
+                      bead riding the arrow's live curve (arrow.curve, exposed by
+                      js/arrows.js) from source to target, looping so a curated
+                      loop reads as signal flowing around it. Runs only while a
+                      circuit is isolated; ticked in the render loop.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
@@ -612,7 +624,11 @@ as the WIP banner (`js/error-banner.js`):
     `circuit` records). Clicking one isolates *exactly* that circuit: its
     structures + the projections between them stay opaque, everything else fades
     (`selection.setCircuit`, which pins an explicit arrow set instead of the
-    "touching" rule). Clicking the active circuit again clears it.
+    "touching" rule). Clicking the active circuit again clears it. Isolating a
+    circuit also starts its **traveling-pulse animation** (see "Circuit
+    animation" below): glowing beads sweep its arrows in sequence and loop, so the
+    loop reads as signal flowing around it. The animation stops the instant the
+    focus stops being that circuit.
   - The **Projections** legend section lists one row **per neurotransmitter**
     (the molecule, e.g. `Glutamate (excitatory)`, coloured by its arrow `kind`
     and labelled with that functional kind in parens). Rows are per-transmitter,
@@ -713,6 +729,51 @@ as the WIP banner (`js/error-banner.js`):
   so the camera *rotates in place* to track it (a reorientation, not a
   translation), preserving the distance + angle you set. Framing a connection or
   the whole brain clears the tracked structure.
+
+## Circuit animation
+
+Isolating a circuit (clicking a row in the legend's **Circuits** section) plays a
+**traveling-pulse animation** over that loop: a glowing bead rides each of the
+circuit's arrows from its source region to its target, the beads firing in
+sequence and looping, so a curated loop (the direct pathway, the Papez memory
+circuit, ...) reads as signal *flowing* around it rather than as a static set of
+arrows. It is split in two on purpose:
+
+- **`js/circuit-schedule.js` (the ordering, no three.js).** `scheduleCircuit`
+  computes the firing order with **no hand-authored path**: the circuit's arrows
+  are a directed graph (node = structure, edge = arrow, direction `from -> to`); a
+  breadth-first search spreads activation from a seed and each arrow's firing slot
+  (`phase`) is the BFS depth of its tail. Stepping a clock through the depths and
+  wrapping sweeps the pulses around and loops. It degrades gracefully on any arrow
+  set: **bilateral duplication** (every circuit is mirrored, so its arrows form
+  two disjoint L/R loops) is handled by seeding each *weakly-connected component*
+  separately, so the hemispheres pulse in sync; an off-cycle **feeder branch**
+  (e.g. the nigrostriatal dopamine input into the direct pathway) just fires when
+  activation reaches its tail, or at the top of the cycle if the seed never
+  reaches it, instead of breaking a single path. The **seed** per component is the
+  node whose structure `group == "lobe"` (cortex is the conventional top of these
+  loops), else the highest-out-degree node, else any. Kept dependency-free so this
+  ordering logic stays isolated and unit-testable.
+- **`js/circuit-anim.js` (the rendering).** `createCircuitAnimation` turns each
+  scheduled slot into an additive glowing sphere riding that arrow's live curve
+  (`arrow.curve`, exposed by `js/arrows.js` and rebuilt on every explode, so the
+  beads track the layout). One controller per scene, `tick()`ed once per frame in
+  the render loop (like the intro/focus tweens). `STEP_MS` is the per-slot
+  duration (one bead's travel); the whole loop is `numSteps * STEP_MS`. A bead
+  hides while its arrow is hidden (so the global "Hide projections" toggle clears
+  the beads too).
+
+**Lifecycle (in `js/main.js`).** The circuit legend row calls
+`selection.setCircuit(...)` then `circuitAnim.play(circuitArrows)`. Stopping is
+driven off the selection state, not scattered call sites: `createSelection`'s
+`onIsolate` is multi-subscriber, and the animation subscribes a watcher that
+calls `circuitAnim.stop()` whenever the live pinned-arrow set is no longer exactly
+the animating circuit (`circuitAnim.matches`). So a clear, a different circuit, a
+neurotransmitter focus, or a legend isolate all stop it, while merely highlighting
+a structure (which leaves the circuit pinned) keeps it running. The animation is
+**circuit-only**: a neurotransmitter focus also goes through `setCircuit` but
+never calls `play`. No new user-visible string (the trigger is the existing
+circuit row), so no i18n change.
 
 ## Changing the data
 
