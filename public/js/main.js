@@ -1195,31 +1195,45 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
       onToggle?.(open);
     });
   };
-  // On a phone / portrait screen the bottom-left panel covers a big part of the
-  // centered brain, so the user can't see what they're doing while using the
-  // controls. While the panel is expanded on such a screen, slide the rendered
-  // brain up into the top-right (a render-time view offset, see
-  // createCameraFocus.setScreenOffset); collapsing it, or a wide/landscape
-  // screen, restores the centered view. The offset eases in/out via focus.tick.
+  // The bottom panel covers the centered brain on small screens, so while it is
+  // expanded there we push the rendered brain clear of it (a render-time camera
+  // view offset, see createCameraFocus.setScreenOffset; collapsing it or a wide
+  // screen restores the centered view, eased in focus.tick):
+  //   - portrait: the panel spans the full width but only the bottom half (see
+  //     the @media rule in index.html), so push the brain straight UP into the
+  //     clear top section. The shove is half the panel's height fraction, so the
+  //     brain ends up centered in the space above the panel whatever its height.
+  //   - narrow landscape: the panel is a bottom-left box, so push the brain to
+  //     the top-RIGHT, clear of it.
   const controlsPanel = document.getElementById("controls");
-  const PANEL_PAN = { x: 0.38, y: 0.22 }; // viewport fractions (right, up)
-  const narrowOrPortrait = window.matchMedia(
-    "(max-width: 700px), (orientation: portrait)"
-  );
+  const LANDSCAPE_PAN = { x: 0.38, y: 0.22 }; // viewport fractions (right, up)
+  const portrait = window.matchMedia("(orientation: portrait)");
+  const narrow = window.matchMedia("(max-width: 700px)");
   const updatePanelPan = () => {
     const open = controlsToggle.getAttribute("aria-expanded") === "true";
     // offsetParent is null when the panel is display:none (e.g. ?ui=0 shots).
     const visible = controlsPanel.offsetParent !== null;
-    const shift = open && visible && narrowOrPortrait.matches;
-    focus.setScreenOffset(shift ? PANEL_PAN.x : 0, shift ? PANEL_PAN.y : 0);
+    if (!open || !visible) {
+      focus.setScreenOffset(0, 0);
+    } else if (portrait.matches) {
+      const frac =
+        controlsPanel.getBoundingClientRect().height / window.innerHeight;
+      focus.setScreenOffset(0, Math.min(0.4, frac / 2));
+    } else if (narrow.matches) {
+      focus.setScreenOffset(LANDSCAPE_PAN.x, LANDSCAPE_PAN.y);
+    } else {
+      focus.setScreenOffset(0, 0);
+    }
   };
   wireCollapse(controlsToggle, controlsBody, updatePanelPan);
-  // Re-evaluate when the breakpoint/orientation flips (covers resizes too: the
-  // offset itself rescales every frame in focus.tick).
-  narrowOrPortrait.addEventListener("change", updatePanelPan);
-  // Apply once now: the panel ships expanded, so on a phone the brain should
-  // already be slid clear on load.
-  updatePanelPan();
+  // Recompute when the breakpoint/orientation flips, and whenever the panel's
+  // own size changes (collapsing/expanding, or opening the Legend/About
+  // accordion, which changes how far up the brain must move in portrait). The
+  // ResizeObserver also fires once on observe, so the initial expanded panel is
+  // handled on load.
+  portrait.addEventListener("change", updatePanelPan);
+  narrow.addEventListener("change", updatePanelPan);
+  new ResizeObserver(updatePanelPan).observe(controlsPanel);
 
   // Legend + About behave as an accordion: only one open at a time, and while
   // either is open the controls between the title and Auto-rotate (the

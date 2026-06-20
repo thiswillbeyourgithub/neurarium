@@ -99,6 +99,21 @@
         max-height: calc(100vh - 24px);
         overflow-y: auto;
       }
+      /* Portrait / vertical screens: a bottom-left box would cover the centered
+         brain, so make the controls span the FULL WIDTH but only the bottom HALF
+         of the screen. js/main.js (updatePanelPan) then pushes the rendered brain
+         straight up into the clear top section, so you can see the brain and use
+         the menus at the same time. The 50vh cap + internal scroll keep a tall
+         expanded legend inside that bottom half. */
+      @media (orientation: portrait) {
+        #controls {
+          left: 8px;
+          right: 8px;
+          width: auto;
+          bottom: 8px;
+          max-height: 50vh;
+        }
+      }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
          dark glass UI. scrollbar-width covers Firefox, ::-webkit-scrollbar
@@ -668,6 +683,10 @@
               <p class="about-text" id="about-source-row">
                 <a id="about-source" href="#" target="_blank" rel="noopener noreferrer" data-i18n="about.sourceCode"></a>
               </p>
+              <!-- License line: independent of the source-code row (which is
+                   removed when no sourceUrl is configured), so the licence always
+                   shows. The link points at the canonical AGPL-3.0 text. -->
+              <p class="about-text" data-i18n-html="about.license"></p>
             </div>
           </div>
         </div>

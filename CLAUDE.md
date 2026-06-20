@@ -574,21 +574,33 @@ as the WIP banner (`js/error-banner.js`):
   and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
   toggles `section-open`. A section can only be opened while the controls are
   visible (i.e. not searching), so this never hides the toolbar mid-search.
-  **Phone / portrait pan-aside**: on a narrow or portrait screen the bottom-left
-  panel covers much of the centered brain, so while the panel body is **expanded**
-  there the rendered brain is slid up into the **top-right**, clear of the panel,
-  and recentred when it collapses (or on a wide/landscape screen). It is wired in
-  `wireControls` (`updatePanelPan`, gated on `window.matchMedia("(max-width: 700px),
-  (orientation: portrait)")` and on the panel actually being visible, so `?ui=0`
-  shots are unaffected) and applied via `focus.setScreenOffset` (see
-  `createCameraFocus` below): a render-time **camera view offset**
-  (`PerspectiveCamera.setViewOffset`), eased in/out in `focus.tick`, not a move of
-  the orbit target, so the pan survives rotation/zoom/framing and reverts cleanly
-  (and rescales itself on resize).
-- **About** (`#about`, collapsed by default): a short blurb (what Neurarium is,
+  **Small-screen pan-aside**: on a small screen the panel covers much of the
+  centered brain, so while the panel body is **expanded** the rendered brain is
+  pushed clear of it (and recentred when it collapses or on a wide screen). The
+  layout differs by orientation:
+  - **portrait**: an `@media (orientation: portrait)` rule (index.html) makes
+    `#controls` span the **full width** but only the **bottom half** (`max-height:
+    50vh`), and the brain is pushed straight **up** into the clear top section by
+    half the panel's height fraction, so it sits centred in the space above the
+    panel whatever the panel's actual height (which the `ResizeObserver` tracks as
+    the Legend/About accordion grows it).
+  - **narrow landscape** (`max-width: 700px`, not portrait): the panel stays a
+    bottom-left box, so the brain is pushed to the **top-right** (`LANDSCAPE_PAN`).
+
+  Wired in `wireControls` (`updatePanelPan`, gated on the panel actually being
+  visible so `?ui=0` shots are unaffected; recomputed on the `orientation` /
+  `max-width:700px` media-query flips and on a `ResizeObserver` over the panel)
+  and applied via `focus.setScreenOffset` (see `createCameraFocus` below): a
+  render-time **camera view offset** (`PerspectiveCamera.setViewOffset`), eased
+  in/out in `focus.tick`, not a move of the orbit target, so the pan survives
+  rotation/zoom/framing and reverts cleanly (and rescales itself on resize).
+- **About** (`#about`, collapsed by default): a short blurb (what neurarium is,
   that it's a WIP, made by Olivier Cornelis + Claude) plus a **Source code** link
   whose href is set from `cfg.sourceUrl` by `js/main.js` (the row is removed if
-  that isn't a valid `http(s)` URL). See "Dev / WIP banner" for `sourceUrl`.
+  that isn't a valid `http(s)` URL), then a **licence line** (`about.license`,
+  linking the canonical AGPL-3.0 text) which is a separate paragraph so it shows
+  even when the source-code row is dropped. See "Dev / WIP banner" for
+  `sourceUrl`.
 - **Auto-rotate** checkbox: spins the camera around the brain (OrbitControls
   `autoRotate`). **On by default** (a slow turn on load); it switches itself off
   (and unticks the box) the moment the user picks content, i.e. any pick routed

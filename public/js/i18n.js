@@ -108,6 +108,9 @@
         'rel="noopener noreferrer">three.js</a> (vendored, no build step), the ' +
         "anatomy stored as generated data files, served by Caddy.",
       "about.sourceCode": "Source code",
+      "about.license":
+        'Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +
+        'target="_blank" rel="noopener noreferrer">GNU AGPL-3.0</a>.',
 
       "dev.wip": "Work in progress",
       "dev.restarted":
@@ -188,6 +191,9 @@
         "build), l’anatomie stockée dans des fichiers de données " +
         "générés, servis par Caddy.",
       "about.sourceCode": "Code source",
+      "about.license":
+        'Sous licence <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +
+        'target="_blank" rel="noopener noreferrer">GNU AGPL-3.0</a>.',
 
       "dev.wip": "En cours de développement",
       "dev.restarted":
