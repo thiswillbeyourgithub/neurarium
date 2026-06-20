@@ -259,6 +259,67 @@
          color, including the blue .active state of the search toggle. */
       .tool-btn svg { width: 18px; height: 18px; display: block; }
 
+      /* Keyboard-shortcuts help popup (#shortcuts-modal): a full-screen dimmed
+         overlay centering a small dialog (reuses .panel for the glass look). */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 60; /* above the panels (5) and the banners / status (50) */
+        display: grid;
+        place-items: center;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.55);
+      }
+      /* The hidden attribute must win over the display:grid above (same fix as
+         .panel-tabs), else the popup would show on load. */
+      .modal-overlay[hidden] { display: none; }
+      .modal {
+        position: relative; /* .panel is fixed; the overlay does the centering */
+        width: min(340px, 100%);
+        max-height: calc(100vh - 32px);
+        overflow-y: auto;
+      }
+      .modal h2 { margin: 2px 0 14px; font-size: 15px; padding-right: 20px; }
+      .modal .info-close {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        font-size: 18px;
+        line-height: 1;
+        color: var(--muted);
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+      .modal .info-close:hover { color: var(--text); }
+      /* key -> action rows: a two-column grid (the key(s) | the action). */
+      #shortcuts-list {
+        margin: 0;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 10px 14px;
+        align-items: center;
+      }
+      #shortcuts-list dt { margin: 0; display: flex; gap: 4px; }
+      #shortcuts-list dd { margin: 0; color: var(--muted); font-size: 13px; }
+      kbd {
+        display: inline-block;
+        min-width: 22px;
+        padding: 2px 7px;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-bottom-width: 2px;
+        border-radius: 6px;
+      }
+
       /* Language switch: a small EN/FR segmented control at the top of the panel
          body. The active language is highlighted (blue, like .tool-btn.active). */
       .lang-switch { display: flex; gap: 4px; margin: 0 0 6px; }
@@ -686,6 +747,19 @@
               <line x1="16.5" y1="16.5" x2="21" y2="21" />
             </svg>
           </button>
+          <!-- Keyboard-shortcuts help: opens the #shortcuts-modal popup (also
+               opened with the ? key). Keyboard icon: a rounded panel with key
+               dots + a space bar (zero-length round-capped lines = dots). -->
+          <button type="button" id="shortcuts-toggle" class="tool-btn" data-i18n-attr="title:shortcuts.title, aria-label:shortcuts.title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2" />
+              <line x1="6" y1="10" x2="6" y2="10" />
+              <line x1="10" y1="10" x2="10" y2="10" />
+              <line x1="14" y1="10" x2="14" y2="10" />
+              <line x1="18" y1="10" x2="18" y2="10" />
+              <line x1="8" y1="14" x2="16" y2="14" />
+            </svg>
+          </button>
         </div>
 
         <!-- Normal controls; hidden (replaced by #search) while searching. -->
@@ -816,6 +890,19 @@
         <div id="details-pane" hidden>
           <div id="info-body"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- Keyboard-shortcuts help popup. A full-screen overlay with a centered
+         dialog; the key/action rows are filled by js/main.js (wireShortcutsHelp)
+         so each language's labels come from the i18n catalogue. Ships hidden;
+         opened by the toolbar's keyboard button or the ? key, closed by the ×,
+         a click on the backdrop, or Esc. -->
+    <div id="shortcuts-modal" class="modal-overlay" hidden>
+      <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+        <button type="button" id="shortcuts-close" class="info-close" aria-label="Close">&times;</button>
+        <h2 id="shortcuts-title" data-i18n="shortcuts.title"></h2>
+        <dl id="shortcuts-list"></dl>
       </div>
     </div>
 

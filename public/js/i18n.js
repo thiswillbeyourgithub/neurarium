@@ -71,6 +71,15 @@
       "search.placeholder": "Search structure, connection or receptor...",
       "search.noMatch": "No match",
 
+      "shortcuts.title": "Keyboard shortcuts",
+      "shortcuts.names": "Toggle all names",
+      "shortcuts.spread": "Spread / collapse",
+      "shortcuts.legend": "Toggle the legend",
+      "shortcuts.seeInside": "Toggle see inside",
+      "shortcuts.reset": "Reset the view",
+      "shortcuts.search": "Open search",
+      "shortcuts.close": "Close search / collapse sections",
+
       "legend.showNames": "Show all names",
       "legend.hideNames": "Hide all names",
       "legend.hideProjections": "Hide projections",
@@ -165,6 +174,15 @@
       "toolbar.searchAria": "Rechercher structures, connexions et récepteurs",
       "search.placeholder": "Rechercher une structure, une connexion ou un récepteur…",
       "search.noMatch": "Aucun résultat",
+
+      "shortcuts.title": "Raccourcis clavier",
+      "shortcuts.names": "Afficher / masquer les noms",
+      "shortcuts.spread": "Séparer / rassembler",
+      "shortcuts.legend": "Afficher / masquer la légende",
+      "shortcuts.seeInside": "Voir l'intérieur",
+      "shortcuts.reset": "Recentrer la vue",
+      "shortcuts.search": "Ouvrir la recherche",
+      "shortcuts.close": "Fermer la recherche / replier les sections",
 
       "legend.showNames": "Afficher tous les noms",
       "legend.hideNames": "Masquer les noms",

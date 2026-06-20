@@ -1783,12 +1783,14 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  *   n  toggle all names            l  collapse / expand the Legend section
  *   s  spread fully / collapse     c  toggle "See inside"
  *   r  reset the camera            f  open search (bare-key Ctrl/Cmd+F)
- *   Esc  close search + collapse any open Legend / Receptors / About section
+ *   ?  open the shortcuts popup    Esc  close popup, else close search +
+ *                                       collapse any open Legend/Receptors/About
  * Ctrl/Cmd+F (search) stays handled in wireToolbar; here `f` is its bare-key
  * twin. preventDefault on a handled key stops `f` typing into the search box it
- * just focused (and any other stray default).
+ * just focused (and any other stray default). `help` is the shortcuts-popup
+ * controller (wireShortcutsHelp): when its dialog is open Esc closes that first.
  */
-function wireShortcuts() {
+function wireShortcuts(help) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -1824,7 +1826,14 @@ function wireShortcuts() {
   window.addEventListener("keydown", (event) => {
     if (event.ctrlKey || event.metaKey || event.altKey) return; // leave combos alone
     if (isTyping(event.target)) return; // let the field keep the key (Esc self-handles)
+    // With the shortcuts popup open, Esc just closes it (and nothing else fires).
+    if (help?.isOpen && event.key === "Escape") {
+      help.close();
+      event.preventDefault();
+      return;
+    }
     switch (event.key) {
+      case "?": help?.open(); break;
       case "n": case "N": click("toggle-names"); break;
       case "s": case "S": toggleSpread(); break;
       case "l": case "L": click("legend-toggle"); break;
@@ -1836,6 +1845,54 @@ function wireShortcuts() {
     }
     event.preventDefault();
   });
+}
+
+/**
+ * Keyboard-shortcuts help popup (#shortcuts-modal). Fills the key -> action rows
+ * from the i18n catalogue (so each language reads right) and returns a small
+ * controller; wireShortcuts opens it on `?` and closes it on Esc, the toolbar's
+ * keyboard button opens it, and the ×, a backdrop click, or Esc close it.
+ * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
+ */
+function wireShortcutsHelp() {
+  const modal = document.getElementById("shortcuts-modal");
+  const list = document.getElementById("shortcuts-list");
+  const noop = { open() {}, close() {}, get isOpen() { return false; } };
+  if (!modal || !list) return noop;
+
+  // One row per shortcut, mirroring the keys wired in wireShortcuts so the popup
+  // can't drift from the actual bindings. The label is a localized action.
+  const ROWS = [
+    { keys: ["N"], desc: "shortcuts.names" },
+    { keys: ["S"], desc: "shortcuts.spread" },
+    { keys: ["L"], desc: "shortcuts.legend" },
+    { keys: ["C"], desc: "shortcuts.seeInside" },
+    { keys: ["R"], desc: "shortcuts.reset" },
+    { keys: ["F"], desc: "shortcuts.search" },
+    { keys: ["Esc"], desc: "shortcuts.close" },
+  ];
+  for (const r of ROWS) {
+    const dt = document.createElement("dt");
+    for (const k of r.keys) {
+      const kbd = document.createElement("kbd");
+      kbd.textContent = k;
+      dt.appendChild(kbd);
+    }
+    const dd = document.createElement("dd");
+    dd.textContent = t(r.desc);
+    list.append(dt, dd);
+  }
+
+  const open = () => { modal.hidden = false; };
+  const close = () => { modal.hidden = true; };
+  document.getElementById("shortcuts-toggle")?.addEventListener("click", open);
+  document.getElementById("shortcuts-close")?.addEventListener("click", close);
+  // A click on the dimmed backdrop (outside the dialog box) closes it.
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) close();
+  });
+
+  return { open, close, get isOpen() { return !modal.hidden; } };
 }
 
 async function main() {
@@ -2235,7 +2292,8 @@ async function main() {
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
   wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor });
-  wireShortcuts(); // single-key shortcuts (n/s/l/c/r/f/Esc), all via the controls above
+  const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
+  wireShortcuts(shortcutsHelp); // single-key shortcuts (n/s/l/c/r/f/?/Esc)
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });

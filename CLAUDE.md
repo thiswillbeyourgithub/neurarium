@@ -132,7 +132,8 @@ data/shapes/<name>.json  One geometry file per distinct *form* (independent of
 index.html            Page shell: loads three.js (vendored, via import map) and,
                       on ?debug=1 only, the vendored eruda console; holds
                       the single bottom-left collapsible "neurarium" panel
-                      (reset/search buttons, the two sliders, auto-rotate, the
+                      (reset / search / keyboard-shortcuts buttons, the two
+                      sliders, auto-rotate, the
                       nested JS-populated legend whose first rows are "show all
                       names" / "hide projections", a nested JS-populated Receptors
                       section, and a nested About section; Legend / Receptors /
@@ -142,7 +143,9 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       Details) that only appears once a detail is picked, so a
                       structure / connection / receptor detail shows in the panel
                       instead of a separate window (createPanelTabs in js/main.js).
-                      Also the in-place search box and
+                      Also the in-place search box, the centered
+                      #shortcuts-modal keyboard-shortcuts popup (filled by
+                      wireShortcutsHelp), and
                       the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches the per-type data files (meta.json + structures/
                       projections/circuits/receptors.jsonl) + all shape files,
@@ -632,7 +635,8 @@ as the WIP banner (`js/error-banner.js`):
   panel" below). Switching back to **Settings** keeps the detail (the bar stays);
   the **×** at the right of the bar (or a clear) dismisses it and hides the bar.
   From
-  the top the Settings pane holds: the **reset + search** icon buttons (a `.toolbar-row`), then
+  the top the Settings pane holds: the **reset + search + keyboard-shortcuts**
+  icon buttons (a `.toolbar-row`), then
   the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
   inside**, then the
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
@@ -857,11 +861,14 @@ as the WIP banner (`js/error-banner.js`):
   handled key calls `preventDefault` so `f` never types into the search box it
   just focused. The same shortcuts are listed in the **shortcuts help popup**
   (see below).
-- **Reset + search** (the icon-button row at the top of the panel, just above the
+- **Reset + search + shortcuts** (the icon-button row at the top of the panel,
+  just above the
   sliders): a **reset** button (crosshair icon) recenters the camera on the
   middle of the brain and re-frames the whole thing (useful after panning slides
-  it off-center), and a **search** button (magnifier icon) swaps a search box in
-  place of the panel body (not a popup) that filters **structures (by name),
+  it off-center), a **search** button (magnifier icon) swaps a search box in
+  place of the panel body (not a popup), and a **keyboard-shortcuts** button
+  (keyboard icon) opens the shortcuts help popup (below). The search box filters
+  **structures (by name),
   connections (by pathway label) and receptors (by name / neurotransmitter /
   system)**. Picking a structure centers on it,
   shows its label, and opens its structure panel (below);
@@ -878,6 +885,18 @@ as the WIP banner (`js/error-banner.js`):
   expands the panel if it was collapsed (the search box lives inside the panel
   body) and opens search focused on its input; pressing it again while open just
   refocuses + selects the text. **Escape** closes search.
+- **Keyboard-shortcuts help popup** (`#shortcuts-modal`, built by
+  `wireShortcutsHelp` in `js/main.js`): a centered dialog over a dimmed full-
+  screen backdrop (a `.modal-overlay`, reusing `.panel` for the glass look)
+  listing each shortcut as a `<kbd>` key + a localized action. The key -> action
+  rows are generated from a list that mirrors the bindings in `wireShortcuts`, so
+  the popup can't drift from the real shortcuts; the action labels come from the
+  `shortcuts.*` i18n keys. Opened by the toolbar's **keyboard** button or the
+  **?** key; closed by the **×**, a click on the backdrop, or **Esc** (when the
+  popup is open `wireShortcuts` routes Esc to close it first, before any
+  search/section collapse). Like `.panel-tabs`, the overlay needs a
+  `.modal-overlay[hidden]` rule so the `hidden` attribute wins over its
+  `display:grid`.
 - **Info panel** (the **Details tab** of the main panel, `createInfoPanel` in
   `js/main.js`, rendered into `#info-body` and surfaced by `createPanelTabs`, see
   "Panel layout"): shows a *connection*, a *structure*, or a *receptor* (the last
