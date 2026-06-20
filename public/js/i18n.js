@@ -65,8 +65,8 @@
 
       "toolbar.reset": "Reset view",
       "toolbar.search": "Search",
-      "toolbar.searchAria": "Search structures and connections",
-      "search.placeholder": "Search structure or connection...",
+      "toolbar.searchAria": "Search structures, connections and receptors",
+      "search.placeholder": "Search structure, connection or receptor...",
       "search.noMatch": "No match",
 
       "legend.showNames": "Show all names",
@@ -158,8 +158,8 @@
 
       "toolbar.reset": "Recentrer la vue",
       "toolbar.search": "Rechercher",
-      "toolbar.searchAria": "Rechercher structures et connexions",
-      "search.placeholder": "Rechercher une structure ou une connexion…",
+      "toolbar.searchAria": "Rechercher structures, connexions et récepteurs",
+      "search.placeholder": "Rechercher une structure, une connexion ou un récepteur…",
       "search.noMatch": "Aucun résultat",
 
       "legend.showNames": "Afficher tous les noms",

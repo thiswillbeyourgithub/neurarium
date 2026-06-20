@@ -1159,6 +1159,25 @@ function createCameraFocus({ camera, controls, meshes }) {
       // A connection isn't a single structure to track, so stop following one.
       focused = null;
     },
+    /**
+     * Frame an arbitrary set of structure meshes by fitting their combined
+     * bounding sphere, used when a receptor is picked in search (it spans several
+     * regions). Ignores hidden meshes; a no-op if none are visible. Doesn't track
+     * a single structure (the set isn't one), so it clears `focused` like
+     * focusConnection.
+     * @param {THREE.Mesh[]} meshList
+     */
+    focusMeshes(meshList) {
+      box.makeEmpty();
+      let any = false;
+      for (const m of meshList) {
+        if (m && m.visible) { box.expandByObject(m); any = true; }
+      }
+      if (!any) return;
+      box.getBoundingSphere(sphere);
+      tweenTo(sphere.center, sphere.radius, 1.8);
+      focused = null;
+    },
     /** Recenter the pivot on the middle of the brain and frame the whole thing. */
     recenter() {
       box.makeEmpty();
@@ -1509,17 +1528,20 @@ function connectionSideTag(proj) {
  * Wire the panel's reset + search buttons (the row just above the sliders): a
  * reset button that recenters the view (handy after panning has slid the brain
  * off-center), and a magnifier that swaps a search box in place of the panel's
- * normal controls. Typing filters both structures (by name) and connections (by
- * pathway label); clicking a result (or pressing Enter to take the first one)
- * frames the camera on it. A structure result opens its structure panel; a
- * connection result opens the connection panel. Both go through the shared
- * selectStructure / selectConnection helpers (with frame:true).
+ * normal controls. Typing filters structures (by name), connections (by pathway
+ * label) and receptors (by name / neurotransmitter / system); clicking a result
+ * (or pressing Enter to take the first one) frames the camera on it. A structure
+ * result opens its structure panel, a connection result the connection panel, a
+ * receptor result focuses the receptor (dim + dots + panel). All go through the
+ * shared selectStructure / selectConnection / selectReceptor helpers.
  * @param {{focus:ReturnType<typeof createCameraFocus>, meshes:THREE.Mesh[],
  *   arrows:import("./arrows.js").ProjectionArrow[],
+ *   data:import("./data.js").BrainData,
  *   selection:ReturnType<typeof createSelection>,
- *   selectStructure:Function, selectConnection:Function}} deps
+ *   selectStructure:Function, selectConnection:Function,
+ *   selectReceptor:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, selectStructure, selectConnection, selectReceptor }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -1536,9 +1558,12 @@ function wireToolbar({ focus, meshes, arrows, selection, selectStructure, select
     selection.clear();
   });
 
-  // One searchable index over structures + connections, each carrying the action
-  // to run when it is picked. Built once; structures keep their full name, while
-  // connections get a hemisphere tag appended so mirrored twins stay distinct.
+  // One searchable index over structures + connections + receptors, each carrying
+  // the action to run when it is picked. Built once; structures keep their full
+  // name, connections get a hemisphere tag appended so mirrored twins stay
+  // distinct, and receptors show their neurotransmitter as a tag (and carry extra
+  // `keywords` so the system / mechanism also match, without cluttering the row).
+  // The match runs over `label` + `keywords`; only `label` is shown.
   const items = [
     ...meshes.map((mesh) => ({
       label: mesh.userData.structure.name,
@@ -1551,6 +1576,13 @@ function wireToolbar({ focus, meshes, arrows, selection, selectStructure, select
         select: () => selectConnection(arrow, { frame: true }),
       };
     }),
+    // Focusable receptors only (a stub has no anatomy to show, so it stays a
+    // legend-only listing). Search by name, neurotransmitter, family or mechanism.
+    ...(data.receptors || []).filter((r) => r.focusable).map((receptor) => ({
+      label: receptor.name + (receptor.neurotransmitter ? ` · ${receptor.neurotransmitter}` : ""),
+      keywords: [receptor.familyLabel, receptor.classLabel, receptor.signLabel].filter(Boolean).join(" "),
+      select: () => selectReceptor(receptor),
+    })),
   ];
 
   // Rebuild the (capped) result list from the current query. An empty query
@@ -1559,7 +1591,7 @@ function wireToolbar({ focus, meshes, arrows, selection, selectStructure, select
     const q = searchInput.value.trim().toLowerCase();
     searchResults.innerHTML = "";
     const matches = items
-      .filter((it) => it.label.toLowerCase().includes(q))
+      .filter((it) => `${it.label} ${it.keywords || ""}`.toLowerCase().includes(q))
       .slice(0, 8);
     if (matches.length === 0) {
       const li = document.createElement("li");
@@ -1735,12 +1767,16 @@ async function main() {
   let activeReceptorId = null;
   let reflectReceptors = () => {};
   const refreshReceptorRows = () => reflectReceptors(activeReceptorId);
-  const focusReceptor = (receptor) => {
-    const meshSet = receptor.structureIds
-      .map((id) => meshById.get(id)).filter(Boolean);
+  const receptorMeshesOf = (receptor) =>
+    receptor.structureIds.map((id) => meshById.get(id)).filter(Boolean);
+  const focusReceptor = (receptor, { frame = false } = {}) => {
+    const meshSet = receptorMeshesOf(receptor);
     selection.setCircuit(meshSet, []);
     receptorMarkers.show(meshSet, receptor.signColor);
     info.showReceptor(receptor);
+    // From the search box, frame the expressing regions (the whole brain for a
+    // ubiquitous receptor); from the legend row, leave the view where it is.
+    if (frame) focus.focusMeshes(meshSet);
     activeReceptorId = receptor.id;
     refreshReceptorRows();
   };
@@ -1748,6 +1784,9 @@ async function main() {
     if (activeReceptorId === receptor.id) selection.clear(); // watcher hides dots
     else focusReceptor(receptor);
   };
+  // Picking a receptor in the search box always focuses it (and frames it), never
+  // toggles it off, the same way a structure/connection search result behaves.
+  const selectReceptor = (receptor) => focusReceptor(receptor, { frame: true });
   selection.onIsolate((isolated) => {
     if (receptorMarkers.active && !receptorMarkers.matches(isolated)) {
       receptorMarkers.hide();
@@ -2007,7 +2046,7 @@ async function main() {
   }
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
-  wireToolbar({ focus, meshes, arrows, selection, selectStructure, selectConnection });
+  wireToolbar({ focus, meshes, arrows, data, selection, selectStructure, selectConnection, selectReceptor });
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });

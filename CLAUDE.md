@@ -819,10 +819,16 @@ as the WIP banner (`js/error-banner.js`):
   sliders): a **reset** button (crosshair icon) recenters the camera on the
   middle of the brain and re-frames the whole thing (useful after panning slides
   it off-center), and a **search** button (magnifier icon) swaps a search box in
-  place of the panel body (not a popup) that filters **both structures (by name)
-  and connections (by pathway label)**. Picking a structure centers on it,
+  place of the panel body (not a popup) that filters **structures (by name),
+  connections (by pathway label) and receptors (by name / neurotransmitter /
+  system)**. Picking a structure centers on it,
   shows its label, and opens its structure panel (below);
-  picking a connection frames its two endpoints and opens the connection panel.
+  picking a connection frames its two endpoints and opens the connection panel;
+  picking a receptor frames the regions expressing it and focuses it (dim + dots +
+  receptor panel), exactly like clicking its Receptors legend row. Receptor rows
+  show their neurotransmitter as a `· tag`; only **focusable** receptors are
+  searchable (stubs are legend-only). The match runs over each item's display
+  label plus hidden `keywords` (a receptor's family / mechanism / sign).
   Connection results carry a hemisphere tag (`R` / `L` / `L↔R`) so the mirrored
   twins stay distinct (`connectionSideTag` in `js/main.js`). **Ctrl/Cmd+F** is a
   shortcut for the same search: a `window` keydown listener intercepts it (so the
