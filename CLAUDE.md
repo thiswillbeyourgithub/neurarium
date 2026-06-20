@@ -845,6 +845,18 @@ as the WIP banner (`js/error-banner.js`):
   OrbitControls, and on `shiftKey` swallows the event (preventDefault +
   stopPropagation) and nudges the slider (dispatching its `input` event so the
   intro-cancel + re-aim fire). Plain wheel falls through to zoom.
+- **Keyboard shortcuts** (`wireShortcuts` in `js/main.js`): single-key, no
+  modifier, ignored while typing in a field (and Ctrl/Cmd/Alt combos are left
+  alone so Ctrl/Cmd+F still works). **n** toggles all names, **s** spreads fully
+  or back to assembled (toggling the **Separate** slider), **l** collapses /
+  expands the **Legend** section, **c** toggles **See inside**, **r** resets the
+  camera, **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Esc** closes
+  search and collapses any open Legend / Receptors / About section. Each maps to
+  an existing control by **clicking the same DOM element** a mouse user would (or
+  dispatching the slider's `input`), so there is no duplicated behaviour; a
+  handled key calls `preventDefault` so `f` never types into the search box it
+  just focused. The same shortcuts are listed in the **shortcuts help popup**
+  (see below).
 - **Reset + search** (the icon-button row at the top of the panel, just above the
   sliders): a **reset** button (crosshair icon) recenters the camera on the
   middle of the brain and re-frames the whole thing (useful after panning slides

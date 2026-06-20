@@ -1776,6 +1776,68 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   });
 }
 
+/**
+ * Global single-key shortcuts (no modifier), ignored while typing in a field.
+ * Each maps to an existing control by clicking the same DOM element a mouse user
+ * would (or nudging the Separate slider), so there is no duplicated behaviour:
+ *   n  toggle all names            l  collapse / expand the Legend section
+ *   s  spread fully / collapse     c  toggle "See inside"
+ *   r  reset the camera            f  open search (bare-key Ctrl/Cmd+F)
+ *   Esc  close search + collapse any open Legend / Receptors / About section
+ * Ctrl/Cmd+F (search) stays handled in wireToolbar; here `f` is its bare-key
+ * twin. preventDefault on a handled key stops `f` typing into the search box it
+ * just focused (and any other stray default).
+ */
+function wireShortcuts() {
+  const click = (id) => document.getElementById(id)?.click();
+  const isTyping = (el) =>
+    !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
+      || el.tagName === "SELECT" || el.isContentEditable);
+
+  // Separate slider: fully spread if collapsed, else back to assembled. Dispatch
+  // "input" (not a direct call) so its other listeners fire too (the intro
+  // cancel, the camera re-aim + explode zoom), like the shift+wheel handler.
+  const toggleSpread = () => {
+    const explode = document.getElementById("explode");
+    if (!explode) return;
+    explode.value = parseFloat(explode.value) > 0 ? "0" : "1";
+    explode.dispatchEvent(new Event("input"));
+  };
+
+  // Esc closes the in-panel search and collapses any open accordion section, by
+  // clicking the same toggles a user would so the existing wiring runs.
+  const collapseOpen = () => {
+    const search = document.getElementById("search");
+    if (search && !search.hidden) click("search-toggle");
+    for (const id of ["legend-toggle", "receptors-toggle", "about-toggle"]) {
+      const tg = document.getElementById(id);
+      if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
+    }
+  };
+
+  // Open search only (never toggle it back off), matching Ctrl/Cmd+F.
+  const openSearch = () => {
+    const search = document.getElementById("search");
+    if (search && search.hidden) click("search-toggle");
+  };
+
+  window.addEventListener("keydown", (event) => {
+    if (event.ctrlKey || event.metaKey || event.altKey) return; // leave combos alone
+    if (isTyping(event.target)) return; // let the field keep the key (Esc self-handles)
+    switch (event.key) {
+      case "n": case "N": click("toggle-names"); break;
+      case "s": case "S": toggleSpread(); break;
+      case "l": case "L": click("legend-toggle"); break;
+      case "c": case "C": click("see-inside"); break;
+      case "r": case "R": click("reset-view"); break;
+      case "f": case "F": openSearch(); break;
+      case "Escape": collapseOpen(); break;
+      default: return; // unhandled key: leave its default intact
+    }
+    event.preventDefault();
+  });
+}
+
 async function main() {
   const { scene, camera, renderer, controls } = initThree();
 
@@ -2173,6 +2235,7 @@ async function main() {
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
   wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor });
+  wireShortcuts(); // single-key shortcuts (n/s/l/c/r/f/Esc), all via the controls above
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
