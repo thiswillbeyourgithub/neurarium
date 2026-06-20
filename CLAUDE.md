@@ -197,14 +197,19 @@ js/circuit-anim.js    Rendering half of that animation (createCircuitAnimation):
                       loop reads as signal flowing around it. Runs only while a
                       circuit is isolated; ticked in the render loop.
 js/receptor-markers.js  Receptor "expression dots" (createReceptorMarkers): when a
-                      receptor is focused (its legend row), scatters small additive
-                      glowing dots over the surface of every structure expressing
-                      it. Each is a THREE.Points cloud sampled from the structure
-                      mesh's own geometry and parented to it (so the dots track its
-                      explode/mirror transform and vanish when it is hidden, like
-                      the selection halo + circuit node-flash shells); colour = the
-                      receptor's sign colour, gently pulsed. One controller per
-                      scene; ticked in the render loop. See "Receptors" below.
+                      receptor is focused (its legend row), scatters dense additive
+                      glowing "gem" dots over the surface of every structure
+                      expressing it (a crisp bright core + a 4-point sparkle-star
+                      sprite, so they read as shiny gems not stains; per-dot
+                      brightness varies). Each structure's dot count scales with its
+                      surface area (so big lobes + tiny nuclei look equally
+                      peppered). Each cloud is a THREE.Points sampled from the
+                      structure mesh's own geometry and parented to it (so the dots
+                      track its explode/mirror transform and vanish when it is
+                      hidden, like the selection halo + circuit node-flash shells);
+                      colour = the receptor's sign colour, gently pulsed. One
+                      controller per scene; ticked in the render loop. See
+                      "Receptors" below.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
@@ -969,8 +974,10 @@ receptor's Wikipedia article. Split, like the rest, into data and rendering:
   (`buildReceptorLegend`) dims the brain to just its regions via
   `selection.setCircuit(regionMeshes, [])` (no arrow pin, so all pathways fade and
   the dots are the only bright thing) and calls
-  `createReceptorMarkers.show(regionMeshes, signColour)`, which scatters small
-  additive glowing **dots** over each region's surface (a `THREE.Points` cloud
+  `createReceptorMarkers.show(regionMeshes, signColour)`, which scatters dense
+  additive glowing **gem dots** over each region's surface (a `THREE.Points` cloud,
+  a crisp bright core + a 4-point sparkle-star sprite so they read as shiny gems
+  rather than stains/spots; count scaled per region by surface area), each cloud
   sampled from the structure mesh's own geometry and parented to it, so the dots
   track the explode/mirror transform and vanish when the mesh is hidden, exactly
   like the selection halo + circuit node-flash shells). The info panel switches to

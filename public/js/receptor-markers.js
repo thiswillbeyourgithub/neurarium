@@ -14,53 +14,105 @@
 // automatically when the mesh is hidden ("See inside" cull, ?only=), so the dots
 // never float over a region that isn't drawn.
 //
-// Additive blending + a soft round sprite make them read as light, not paint, and
-// a gentle global pulse (tick) keeps them looking alive. The dot colour is the
-// receptor's sign colour (excitatory red / inhibitory blue / modulatory grey),
-// lightened, so the dots also encode what the receptor does.
+// Additive blending + a crisp sparkle sprite make them read as shiny gems, not
+// paint: a hard bright core with a tight glow and a faint 4-point star flare, so
+// dense dots stay distinct points of light instead of merging into a stain. The
+// dot colour is the receptor's sign colour (excitatory red / inhibitory blue /
+// modulatory grey), lightened; each dot gets a little random brightness so the
+// field reads as scattered faceted gems, and a gentle global pulse (tick) keeps
+// them twinkling.
 //
 // No new dependency: three.js only.
 
 import * as THREE from "three";
 
 // Dot size in world units (sizeAttenuation on, so dots shrink with distance like
-// real specks on the surface). The arrow tube is ~0.1 and the smallest nuclei are
-// ~0.2 across, so this reads as a fleck, not a blob.
-const DOT_SIZE = 0.14;
-// How many dots to scatter per structure. Capped low so even a ubiquitous
-// receptor lighting every region stays legible (and cheap); a structure with
-// fewer vertices than this just uses all of them.
-const DOTS_PER_STRUCTURE = 16;
+// real gems set in the surface).
+const DOT_SIZE = 0.22;
+// Dot density. Each lit structure gets a count scaled by its surface area (so a
+// big cortical lobe and a tiny nucleus look about equally peppered), clamped to
+// this range. A structure with fewer vertices than the chosen count just uses all
+// of them.
+const MIN_DOTS = 28;
+const MAX_DOTS = 160;
+// Roughly dots per world unit of bounding-sphere surface area; tuned so a small
+// nucleus lands near MIN_DOTS and a cortical lobe near MAX_DOTS.
+const DOT_DENSITY = 6;
 // Push each dot this far off the surface along the vertex normal so it sits just
 // proud of the mesh instead of z-fighting with it.
 const SURFACE_OFFSET = 0.05;
-// Gentle breathing of the whole dot field (opacity), so the markers shimmer.
-const PULSE_MIN = 0.55;
+// Per-dot brightness varies in this range (multiplied into the tint) so the gems
+// glint at different strengths instead of forming a uniform wash.
+const BRIGHT_MIN = 0.55;
+const BRIGHT_MAX = 1.0;
+// Gentle breathing of the whole dot field (opacity), so the markers shimmer. Kept
+// bright at the trough so a focused receptor stays clearly visible.
+const PULSE_MIN = 0.72;
 const PULSE_MAX = 1.0;
 const PULSE_PERIOD_MS = 1600;
 
 const WHITE = new THREE.Color(0xffffff);
 
-// A soft round sprite (white core fading to transparent), built once and shared
-// by every dot material. A radial-gradient canvas keeps the dots round + glowy
-// without shipping an image asset; additive blending turns the alpha falloff into
-// a halo rather than a hard disc.
+// A shiny-gem sprite, built once and shared by every dot material: a crisp bright
+// core with a tight glow falloff, plus a faint 4-point star flare, so each dot
+// twinkles like a faceted gem catching the light rather than reading as a soft
+// smear. Drawn on a canvas (no image asset); additive blending turns the alpha
+// into glow.
 let SPRITE = null;
 function dotSprite() {
   if (SPRITE) return SPRITE;
   const size = 64;
+  const c = size / 2;
   const canvas = document.createElement("canvas");
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
-  const g = ctx.createRadialGradient(
-    size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-  g.addColorStop(0, "rgba(255,255,255,1)");
-  g.addColorStop(0.4, "rgba(255,255,255,0.85)");
-  g.addColorStop(1, "rgba(255,255,255,0)");
-  ctx.fillStyle = g;
+  // A compact bright core (the body of the gem), kept small so the star shine on
+  // top stays the dominant read even when the dot is tiny on screen.
+  const core = ctx.createRadialGradient(c, c, 0, c, c, c * 0.55);
+  core.addColorStop(0.0, "rgba(255,255,255,1)");
+  core.addColorStop(0.35, "rgba(255,255,255,0.85)");
+  core.addColorStop(1.0, "rgba(255,255,255,0)");
+  ctx.fillStyle = core;
   ctx.fillRect(0, 0, size, size);
+  // Sparkle shine: a bold 4-point star over the core (composite "lighter"), the
+  // arms wide enough at the centre to survive downscaling, so each dot reads as a
+  // shiny twinkling gem rather than a flat round spot. The arms taper to points.
+  ctx.globalCompositeOperation = "lighter";
+  ctx.translate(c, c);
+  const arm = () => {
+    const g = ctx.createLinearGradient(-c, 0, c, 0);
+    g.addColorStop(0.0, "rgba(255,255,255,0)");
+    g.addColorStop(0.5, "rgba(255,255,255,1)");
+    g.addColorStop(1.0, "rgba(255,255,255,0)");
+    ctx.fillStyle = g;
+    // A diamond-tapered streak: fat at the centre, points at the tips.
+    ctx.beginPath();
+    ctx.moveTo(-c, 0);
+    ctx.lineTo(0, -5);
+    ctx.lineTo(c, 0);
+    ctx.lineTo(0, 5);
+    ctx.closePath();
+    ctx.fill();
+  };
+  arm();              // horizontal
+  ctx.rotate(Math.PI / 2);
+  arm();              // vertical
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   SPRITE = new THREE.CanvasTexture(canvas);
   return SPRITE;
+}
+
+/**
+ * How many dots to scatter on a structure: scaled by its surface area so big and
+ * small regions look about equally dense, clamped to [MIN_DOTS, MAX_DOTS].
+ * @param {THREE.BufferGeometry} geometry
+ * @returns {number}
+ */
+function dotCountFor(geometry) {
+  if (!geometry.boundingSphere) geometry.computeBoundingSphere();
+  const r = geometry.boundingSphere ? geometry.boundingSphere.radius : 1;
+  const area = 4 * Math.PI * r * r;
+  return Math.max(MIN_DOTS, Math.min(MAX_DOTS, Math.round(area * DOT_DENSITY)));
 }
 
 /**
@@ -126,16 +178,27 @@ export function createReceptorMarkers({ scene }) {
      */
     show(structureMeshes, color) {
       clear();
-      const tint = new THREE.Color(color).lerp(WHITE, 0.3);
+      const tint = new THREE.Color(color).lerp(WHITE, 0.35);
       const sprite = dotSprite();
       for (const mesh of structureMeshes) {
         if (!mesh.geometry) continue;
-        const positions = sampleSurface(mesh.geometry, DOTS_PER_STRUCTURE);
+        const positions = sampleSurface(mesh.geometry, dotCountFor(mesh.geometry));
         if (positions.length === 0) continue;
         const geom = new THREE.BufferGeometry();
         geom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        // Per-dot brightness variation (baked into a vertex-colour attribute) so
+        // the gems glint at different strengths instead of a flat uniform field.
+        const count = positions.length / 3;
+        const colors = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+          const b = BRIGHT_MIN + Math.random() * (BRIGHT_MAX - BRIGHT_MIN);
+          colors[i * 3] = tint.r * b;
+          colors[i * 3 + 1] = tint.g * b;
+          colors[i * 3 + 2] = tint.b * b;
+        }
+        geom.setAttribute("color", new THREE.BufferAttribute(colors, 3));
         const material = new THREE.PointsMaterial({
-          color: tint,
+          vertexColors: true,
           size: DOT_SIZE,
           map: sprite,
           transparent: true,
