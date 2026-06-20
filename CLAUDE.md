@@ -843,7 +843,8 @@ as the WIP banner (`js/error-banner.js`):
     **connection** view: the pathway label, its route (`from → to`, `↔` for a
     bidirectional/commissural link), kind + neurotransmitter, a one-line
     description, and its sources (a verified http(s) url renders as a link, a
-    `"TODO"` url as plain text). Built from the projection's metadata. Arrow
+    `"TODO"` url as a small orange "TODO" pill badge next to the citation). Built
+    from the projection's metadata. Arrow
     picking (`pickArrowAt`) takes priority over the region behind it.
   - **Clicking/tapping a structure** (or a structure search
     result) shows the **structure** view (`showStructure`): its name, its group
@@ -1095,8 +1096,8 @@ To add or edit a receptor, see "Changing the data" below.
      written once); the generator expands each key to a full `{citation, url}`
      object in the emitted data (`_expand_sources`, raises on an unknown key). New
      references go in `SOURCES`; leave `url` as the literal `"TODO"` until a real
-     link is verified (the panel renders an http(s) url as a link, `"TODO"` as
-     plain text). **There are currently TODO urls on every source** awaiting real
+     link is verified (the panel renders an http(s) url as a link, `"TODO"` as a
+     small orange "TODO" pill badge). **There are currently TODO urls on every source** awaiting real
      DOIs/links.
    - `bidirectional: True` draws a cone at *both* ends (reciprocal / commissural
      pathways). Use it with `symmetric: False` and explicit `_L`/`_R` endpoints

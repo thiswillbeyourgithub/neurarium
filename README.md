@@ -70,8 +70,9 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
   under `public/data/shapes/`. It is generated from a single source
   (`tools/generate_data.py`) and easy to consume from another engine.
 - Every projection carries a **neurotransmitter** and a list of **sources**
-  (citations; a verified link renders as a hyperlink, an unfilled one as plain
-  text). Every region, and every receptor, links to its **Wikipedia** article.
+  (citations; a verified link renders as a hyperlink, an unfilled one shows an
+  orange **TODO** pill). Every region, and every receptor, links to its
+  **Wikipedia** article.
 - Each receptor records its **neurotransmitter**, mechanism class (ionotropic /
   metabotropic / chaperone), excitatory / inhibitory / modulatory **sign**,
   synaptic site, and the regions expressing it.

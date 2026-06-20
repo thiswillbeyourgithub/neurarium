@@ -752,7 +752,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
  * projection record on demand (clicking an arrow, or picking a connection in the
  * search), showing the pathway name, its route, kind + neurotransmitter, a one-
  * line description, and its sources (a real http(s) url renders as a link, the
- * placeholder "TODO" url as plain text). DOM is built fresh on each show so the
+ * placeholder "TODO" url as a small orange TODO pill badge). DOM is built fresh on each show so the
  * panel never leaks a previous connection's fields.
  * @param {import("./data.js").BrainData} data  Used to resolve endpoint ids to names.
  * @returns {{show: (proj: object) => void, hide: () => void}}
@@ -817,7 +817,7 @@ function createInfoPanel(data) {
             a.rel = "noopener noreferrer";
             li.appendChild(a);
           } else {
-            // No verified link yet: show the citation plus a muted TODO marker.
+            // No verified link yet: show the citation plus an orange TODO pill.
             li.appendChild(document.createTextNode(s.citation));
             li.appendChild(el("span", "src-todo", t("info.linkTodo")));
           }
