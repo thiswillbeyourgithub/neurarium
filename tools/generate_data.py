@@ -111,6 +111,12 @@ GROUP_LABELS: dict[str, str] = {
     "diencephalon": "Diencephalon",
     "limbic": "Limbic",
     "hindbrain": "Hindbrain",
+    # The monoamine source nuclei (serotonin / noradrenaline / dopamine), added so
+    # receptor expression in them (e.g. raphe 5-HT1A autoreceptors, locus
+    # coeruleus alpha-2 autoreceptors) has somewhere to light up. Small deep
+    # brainstem/midbrain nuclei, kept in their own group so they don't take part
+    # in the cortex/deep-nuclei jigsaw clipping.
+    "brainstem_nuclei": "Brainstem nuclei",
 }
 
 
@@ -187,6 +193,11 @@ FR: dict[str, str] = {
     "Pituitary gland": "Hypophyse",
     "Cerebellum": "Cervelet",
     "Brainstem": "Tronc cérébral",
+    # Monoamine source nuclei + their group heading
+    "Brainstem nuclei": "Noyaux du tronc cérébral",
+    "Raphe nuclei": "Noyaux du raphé",
+    "Locus coeruleus": "Locus cœruleus",
+    "Ventral tegmental area": "Aire tegmentale ventrale",
     # Circuit names
     "Direct pathway (motor)": "Voie directe (motrice)",
     "Indirect pathway": "Voie indirecte",
@@ -663,6 +674,25 @@ PAIRED: list[dict[str, Any]] = [
          # blob, kept just clear of the hypothalamus so they don't fuse. Position
          # is a guess: tune in a browser.
          radii=(0.18, 0.17, 0.2), seed=71, detail=4, noise=0.04),
+    # --- Monoamine source nuclei (added for receptor expression) ---
+    # The noradrenaline + dopamine source nuclei (raphe, the serotonin source, is
+    # midline below). Small paired midbrain/pons nuclei tucked near the brainstem;
+    # in their own `brainstem_nuclei` group so they don't take part in the
+    # cortex/deep-nuclei jigsaw clipping. Positions are anatomical guesses: tune
+    # in a browser.
+    dict(base="locus_coeruleus", name="Locus coeruleus", group="brainstem_nuclei",
+         pos=(0.3, -2.05, -1.15), color="#4a7fae",
+         # "The blue spot": the brain's main noradrenaline source, in the dorsal
+         # rostral pons. Tiny; coloured blue as a nod to its name. Carries the
+         # alpha-2 autoreceptors. Sits inside/behind the brainstem at explode 0.
+         radii=(0.12, 0.22, 0.14), seed=82, detail=4, noise=0.04),
+    dict(base="vta", name="Ventral tegmental area", group="brainstem_nuclei",
+         fr_gender="f",
+         pos=(0.45, -1.35, -1.25), color="#6cab5d",
+         # The midbrain dopamine source medial to the substantia nigra; origin of
+         # the mesolimbic / mesocortical pathways (reward, D2 autoreceptors).
+         # Small smooth blob, dopamine-green to echo the dopaminergic arrows.
+         radii=(0.26, 0.2, 0.3), seed=83, detail=5, noise=0.05),
 ]
 
 # Midline structures (emitted once, no hemisphere suffix)
@@ -717,6 +747,14 @@ MIDLINE: list[dict[str, Any]] = [
              profile=[0.46, 0.58, 0.8, 0.52, 0.34],
              seed=32, noise=0.05, radial_segments=16, tubular_segments=90,
          )),
+    dict(base="raphe", name="Raphe nuclei", group="brainstem_nuclei", fr_gender="mp",
+         pos=(0.0, -1.9, -0.95), color="#b98ac9",
+         # The brain's serotonin source: a midline column of nuclei running the
+         # length of the brainstem. Modeled as a slim vertical blob hugging the
+         # midline (emitted once, never mirrored). Carries the 5-HT1A
+         # somatodendritic autoreceptors. Position/size are a guess: tune in a
+         # browser.
+         radii=(0.12, 0.55, 0.2), seed=81, detail=5, noise=0.05),
 ]
 
 # Wikipedia article per structure, keyed by ``base`` id (so both hemispheres of a
@@ -753,6 +791,9 @@ WIKIPEDIA: dict[str, str] = {
     "pituitary": "https://en.wikipedia.org/wiki/Pituitary_gland",
     "cerebellum": "https://en.wikipedia.org/wiki/Cerebellum",
     "brainstem": "https://en.wikipedia.org/wiki/Brainstem",
+    "raphe": "https://en.wikipedia.org/wiki/Raphe_nuclei",
+    "locus_coeruleus": "https://en.wikipedia.org/wiki/Locus_coeruleus",
+    "vta": "https://en.wikipedia.org/wiki/Ventral_tegmental_area",
 }
 
 # Reference registry. A pathway cites one or more of these by short key (see the

@@ -48,6 +48,10 @@
     "hindbrain": {
       "en": "Hindbrain",
       "fr": "Rhombencéphale"
+    },
+    "brainstem_nuclei": {
+      "en": "Brainstem nuclei",
+      "fr": "Noyaux du tronc cérébral"
     }
   },
   "kind_signs": {
