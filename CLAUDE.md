@@ -803,7 +803,12 @@ as the WIP banner (`js/error-banner.js`):
     or arrow just swaps the halo, leaving any isolate set intact.
 - **Structure names**: hovering a region with the mouse (or tapping it on a
   touch screen) shows its name as a floating label; tapping empty space clears
-  it. Raycast in `js/main.js` -> `js/labels.js`. The **Show all names** button
+  it. Raycast in `js/main.js` -> `js/labels.js`. The hover pick (`pickHover`) is
+  **focus-aware**: while something is focused (a halo'd structure, an isolated
+  set, a circuit, a receptor's regions), a focused region the ray passes through
+  wins over a nearer non-focused one, so hovering the thing you focused names
+  *it* even when a dimmed region (e.g. the near cortex over an isolated deep
+  nucleus) sits in front of it. The **Show all names** button
   (the legend's first row) forces every label on at once. Labels are boxless:
   white glyphs outlined in the structure's own color (`--label-color`) plus a
   black halo, so they stay legible over any region and overlapping names don't

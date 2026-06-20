@@ -1979,11 +1979,30 @@ async function main() {
     return true;
   };
 
+  // Hover picking. When a focus is active (a halo'd structure, an isolated set,
+  // a circuit, a receptor's regions, ...), a focused region the ray passes
+  // through wins even when a non-focused region sits nearer the camera, so the
+  // thing you focused always names *itself* on hover rather than whatever happens
+  // to occlude it (e.g. an isolated deep nucleus hidden behind the dimmed
+  // cortex). With nothing focused this is just the nearest visible structure.
+  const pickHover = (clientX, clientY) => {
+    setPointer(clientX, clientY);
+    const hits = raycaster.intersectObjects(meshes, false);
+    const focus = selection.getSelected();
+    if (focus && focus.meshes.size) {
+      for (const hit of hits) {
+        if (hit.object.visible && focus.meshes.has(hit.object)) return hit.object;
+      }
+    }
+    for (const hit of hits) if (hit.object.visible) return hit.object;
+    return null;
+  };
+
   // Mouse: hover a region to reveal its name. Mouse-only so that touch-drag
   // rotation doesn't flicker labels (touch uses tap, below).
   canvas.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse") return;
-    labels.setHovered(pickAt(event.clientX, event.clientY));
+    labels.setHovered(pickHover(event.clientX, event.clientY));
   });
   canvas.addEventListener("pointerleave", (event) => {
     if (event.pointerType === "mouse") labels.setHovered(null);
