@@ -9,7 +9,7 @@ two consumed artifacts in sync without duplicating anatomical data:
   ``structure`` (a brain region: id, group, anatomical position, color, ...) or
   a ``projection`` (a directed neuron pathway between two structures). The
   viewer reads this to know *what* to draw and *how things relate*.
-- ``shapes/<name>.json``: one file per distinct *form* (ellipsoid radii +
+- ``data/shapes/<name>.json``: one file per distinct *form* (ellipsoid radii +
   organic deformation parameters). The actual mesh deformation happens in JS
   (see ``js/shapes.js``); these files just carry the parameters so the form of a
   region can be tweaked independently of its position/relationships. Symmetric
@@ -29,7 +29,7 @@ click/loguru dependencies.
 
 Usage
 -----
-    python tools/generate_data.py            # writes into ../public/{data,shapes}
+    python tools/generate_data.py            # writes into ../public/data/{brain.jsonl,shapes/}
     python tools/generate_data.py --root /some/dir
 """
 
@@ -1222,7 +1222,7 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
     position
         Final ``(x, y, z)`` after any mirroring.
     shape_id
-        Basename of the shared geometry file (``shapes/<shape_id>.json``). The
+        Basename of the shared geometry file (``data/shapes/<shape_id>.json``). The
         two members of a symmetric pair point at the *same* right-side file; the
         left member sets ``mirror`` so the viewer reflects it across x.
     mirror
@@ -1243,7 +1243,7 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
         "group": entry["group"],
         "position": [round(c, 3) for c in position],
         "color": entry["color"],
-        "shape_file": f"shapes/{shape_id}.json",
+        "shape_file": f"data/shapes/{shape_id}.json",
     }
     # External reference link (same article for both hemispheres of a pair).
     wiki = WIKIPEDIA.get(entry["base"])
@@ -1267,7 +1267,7 @@ LOBE_CARVE_GAP = 0.12
 
 
 def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
-    """Build the geometric ``shapes/<id>.json`` payload for a structure.
+    """Build the geometric ``data/shapes/<id>.json`` payload for a structure.
 
     Most structures are ``blob``s (a noise-deformed ellipsoid) described by the
     ``radii``/``seed``/``detail``/``noise`` keys. An entry may instead provide a
@@ -1696,15 +1696,15 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
 
 
 def write_artifacts(root: Path) -> None:
-    """Write ``data/brain.jsonl`` and ``shapes/*.json`` under ``root``.
+    """Write ``data/brain.jsonl`` and ``data/shapes/*.json`` under ``root``.
 
-    The ``shapes`` directory is cleared of stale ``*.json`` first so removing a
-    structure here also removes its orphaned shape file.
+    The ``data/shapes`` directory is cleared of stale ``*.json`` first so removing
+    a structure here also removes its orphaned shape file.
     """
     jsonl, shapes = build_records()
 
     data_dir = root / "data"
-    shapes_dir = root / "shapes"
+    shapes_dir = data_dir / "shapes"
     data_dir.mkdir(parents=True, exist_ok=True)
     shapes_dir.mkdir(parents=True, exist_ok=True)
 
@@ -1729,10 +1729,10 @@ def main() -> None:
     parser.add_argument(
         "--root",
         type=Path,
-        # This script lives in tools/; the data/ and shapes/ it generates are
-        # *served*, so they belong under the public/ site root, not next to it.
+        # This script lives in tools/; the data/ tree it generates (brain.jsonl
+        # + shapes/) is *served*, so it belongs under the public/ site root.
         default=Path(__file__).resolve().parent.parent / "public",
-        help="Site root to write data/ and shapes/ into (default: ../public).",
+        help="Site root to write data/ (brain.jsonl + shapes/) into (default: ../public).",
     )
     args = parser.parse_args()
     write_artifacts(args.root)

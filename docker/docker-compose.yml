@@ -63,7 +63,7 @@ services:
         max-file: "3"
 
     volumes:
-      # Only the served site (public/: index.html, js/, data/, shapes/, ...) is
+      # Only the served site (public/: index.html, js/, data/ {brain.jsonl + shapes/}, ...) is
       # bind-mounted read-only, NOT the whole repo: the deploy rsyncs the full
       # tree, but mounting just public/ keeps docker/, tools/, .git, deploy.sh and
       # docker/.env out of the web root entirely. Relative to this compose file,

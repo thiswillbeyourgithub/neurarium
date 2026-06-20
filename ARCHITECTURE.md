@@ -41,12 +41,12 @@ This project was built with the help of [Claude Code](https://claude.com/claude-
 
 ```
    AUTHORING                 ARTIFACTS (committed)              VIEWER (browser)
- ┌───────────────┐         ┌───────────────────────┐         ┌──────────────────┐
- │ generate_     │  emits  │ public/data/brain.jsonl│  fetch  │ public/js/*.js   │
- │ data.py       │ ──────► │   meta / structure /   │ ──────► │ + index.html     │
- │ (stdlib only) │         │   projection / circuit │         │ (three.js)       │
- │               │         │ public/shapes/*.json   │         │                  │
- └───────────────┘         └───────────────────────┘         └──────────────────┘
+ ┌───────────────┐         ┌───────────────────────────┐         ┌──────────────────┐
+ │ generate_     │  emits  │ public/data/brain.jsonl    │  fetch  │ public/js/*.js   │
+ │ data.py       │ ──────► │   meta / structure /       │ ──────► │ + index.html     │
+ │ (stdlib only) │         │   projection / circuit     │         │ (three.js)       │
+ │               │         │ public/data/shapes/*.json  │         │                  │
+ └───────────────┘         └───────────────────────────┘         └──────────────────┘
    one definition            plain JSONL + JSON,                renders, no anatomy
    per region/pathway        the data contract                  knowledge of its own
 ```
@@ -62,8 +62,8 @@ Standard-library-only Python. It defines every region once (right-side only for
 symmetric pairs; the generator mirrors it to the left), every projection
 (bilateral by default, mirrored unless flagged one-sided), every named circuit,
 and the registries (`SOURCES`, `WIKIPEDIA`, `PROJECTION_COLORS`, `GROUP_LABELS`).
-Running it regenerates `public/data/` and `public/shapes/`. The generated files
-are committed so the static site can fetch them directly.
+Running it regenerates `public/data/` (`brain.jsonl` + `shapes/`). The generated
+files are committed so the static site can fetch them directly.
 
 ### Artifacts: the data contract
 
@@ -76,7 +76,7 @@ are committed so the static site can fetch them directly.
 | `projection` | a directed pathway: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
 | `circuit` | a named functional loop: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
 
-`public/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
+`public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape
 types: `blob` (a noise-deformed ellipsoid), `curve` (a tube swept along a spline),
 `composite` (several sub-shapes merged).
@@ -100,7 +100,7 @@ the `main.js` entry point.
  (window.__APP_CONFIG__)  (classic; #banners stack)              │
    │                                                             │ imports
  app-init.js                                                     ▼
- (injects umami)             data.js ──fetch──► brain.jsonl + shapes/*.json
+ (injects umami)             data.js ──fetch──► brain.jsonl + data/shapes/*.json
                               (no three.js; returns normalized {structures,
                                projections, circuits, byId, meta})
                                   ▲

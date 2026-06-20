@@ -38,8 +38,9 @@ The anatomy is kept as plain data, separate from the rendering code, so the
 project can grow without touching the viewer:
 
 **Project layout.** Everything the browser loads lives under `public/` (the
-served site: `index.html`, `app-config.js`, `version.js`, `js/`, `data/`,
-`shapes/`), and that directory is the *only* thing exposed to the web: Caddy's
+served site: `index.html`, `app-config.js`, `version.js`, `js/`, `data/` which
+holds `brain.jsonl` + the `shapes/` geometry files), and that directory is the
+*only* thing exposed to the web: Caddy's
 `/srv` and `tools/serve.py` both root at it, so `docker/`, `tools/`, `.git` and
 the uncommitted `.env` / `deploy.sh` / `CLAUDE.local.md` are never web-reachable.
 Authoring + dev tooling live in `tools/` (`generate_data.py`, `serve.py`,
@@ -75,7 +76,7 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                         - a "circuit": id, name ({en,fr}), structures[ids] (a named
                           functional loop; its arrows are derived in the viewer
                           as the projections whose endpoints are both in the set)
-shapes/<name>.json    One geometry file per distinct *form* (independent of
+data/shapes/<name>.json  One geometry file per distinct *form* (independent of
                       where it sits / what it connects to). Symmetric left/right
                       pairs share a single right-side file; the left member
                       reflects it (a `mirror` flag on its structure record, see
@@ -1021,8 +1022,8 @@ trigger is the existing circuit row), so no i18n change.
      paired structure whose French name is feminine or plural, set `fr_gender`
      (`"f"`/`"mp"`/`"fp"`; default `"m"`) so the composed "droit/droite/..." side
      suffix agrees. See "Internationalization".
-2. Run `python tools/generate_data.py` to regenerate `public/data/` and
-   `public/shapes/`.
+2. Run `python tools/generate_data.py` to regenerate `public/data/`
+   (`brain.jsonl` + `shapes/`).
 3. Commit the generator change and the regenerated artifacts together.
 
 The legend (region colors and the projection rows, per-neurotransmitter or

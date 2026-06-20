@@ -1,7 +1,7 @@
 // Loading of the brain dataset produced by generate_data.py.
 //
 // The viewer treats data/brain.jsonl as the source of "what to draw" and the
-// shapes/*.json files as the source of "geometric form". This module fetches
+// data/shapes/*.json files as the source of "geometric form". This module fetches
 // both and returns a single normalized object so the rest of the app never has
 // to know about the on-disk layout.
 //
@@ -54,7 +54,7 @@ function localize(field) {
 /**
  * @typedef {Object} BrainData
  * @property {object[]} structures  Region records (type === "structure"), each
- *   augmented with a resolved `shape` payload from its shapes/<id>.json file.
+ *   augmented with a resolved `shape` payload from its data/shapes/<id>.json file.
  *   `name`/`base_name` are localized to plain strings (the full hemisphere name
  *   and the side-stripped legend label).
  * @property {object[]} projections Directed pathway records (type === "projection"),
