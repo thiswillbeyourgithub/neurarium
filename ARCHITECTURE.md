@@ -1,12 +1,12 @@
 # Architecture
 
-A bird's-eye view of how Neurarium is put together, for contributors. It explains
+A bird's-eye view of how neurarium is put together, for contributors. It explains
 the **shape of the system and the reasoning behind it**; it is intentionally not a
 line-by-line file reference.
 
 > [!NOTE]
 > Three docs, three jobs, no overlap:
-> - **[README.md](README.md)**: what Neurarium is, how to run it, the project layout table.
+> - **[README.md](README.md)**: what neurarium is, how to run it, the project layout table.
 > - **This file**: the architecture, the data flow, the module graph, the boot
 >   sequence, the extension points (the "why" and the "shape").
 > - **[CLAUDE.md](CLAUDE.md)**: the exhaustive, always-current map: every file's

@@ -1,4 +1,4 @@
-// Single source of truth for the app version, shown in the Neurarium panel
+// Single source of truth for the app version, shown in the neurarium panel
 // header and (when enabled) the DEV "work in progress" banner.
 //
 // A plain global (like app-config.js) rather than an ES module, so both the

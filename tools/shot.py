@@ -3,7 +3,7 @@
 # requires-python = ">=3.9"
 # dependencies = ["playwright>=1.40", "pillow>=10"]
 # ///
-"""Render the Neurarium viewer to a PNG with a real (headless) browser.
+"""Render the neurarium viewer to a PNG with a real (headless) browser.
 
 One self-contained command: it serves the repo with ``tools/serve.py``, drives a
 headless Chromium (Playwright) to load ``index.html`` with optional ``?view``
@@ -107,7 +107,7 @@ def _autocrop(path: Path, margin: int) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Screenshot the Neurarium viewer.")
+    parser = argparse.ArgumentParser(description="Screenshot the neurarium viewer.")
     parser.add_argument(
         "--out", default=str(DEFAULT_OUT),
         help=f"output PNG (default: {DEFAULT_OUT.relative_to(REPO_ROOT)})",

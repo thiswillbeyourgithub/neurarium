@@ -1,5 +1,5 @@
 #!/bin/sh
-# Container entrypoint for the Neurarium static site. Three jobs before handing
+# Container entrypoint for the neurarium static site. Three jobs before handing
 # off to Caddy:
 #
 #   1. Stamp the container start time into STARTED_AT (epoch seconds) so the

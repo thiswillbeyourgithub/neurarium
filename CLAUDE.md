@@ -102,7 +102,7 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
                       vermis).
 index.html            Page shell: loads three.js (vendored, via import map) and,
                       on ?debug=1 only, the vendored eruda console; holds
-                      the single bottom-left collapsible "Neurarium" panel
+                      the single bottom-left collapsible "neurarium" panel
                       (reset/search buttons, the two sliders, auto-rotate, the
                       nested JS-populated legend whose first rows are "show all
                       names" / "hide projections", and a nested About section)
@@ -558,7 +558,7 @@ as the WIP banner (`js/error-banner.js`):
 ## Controls
 
 - **Panel layout**: everything except the bottom-right info panel
-  lives in one collapsible **"Neurarium" panel at the bottom-left** (`#controls`
+  lives in one collapsible **"neurarium" panel at the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). From
   the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
   the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
