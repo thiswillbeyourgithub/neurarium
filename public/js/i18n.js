@@ -68,7 +68,7 @@
       "toolbar.reset": "Reset view",
       "toolbar.search": "Search",
       "toolbar.searchAria": "Search structures, connections and receptors",
-      "search.placeholder": "Search structure, connection or receptor...",
+      "search.placeholder": "Search structure, connection, receptor or drug...",
       "search.noMatch": "No match",
 
       "shortcuts.title": "Keyboard shortcuts",
@@ -109,6 +109,16 @@
       "receptor.ubiquitous": "Throughout the brain",
       "receptor.noRole": "No significant role in the central nervous system.",
       "receptor.stubHint": "No significant role in the central nervous system",
+
+      "panel.drugs": "Drugs",
+      "drugs.filter": "Filter drugs…",
+      "drugs.none": "No matching drug.",
+      "drug.class": "Class",
+      "drug.nomenclature": "Nomenclature",
+      "drug.actsOn": "Acts on",
+      "drug.noTargets": "No mapped molecular targets yet.",
+      "drug.source": "Source",
+      "drug.stubHint": "No binding profile recorded yet",
 
       "status.loading": "Loading brain data…",
       "status.loadError":
@@ -172,7 +182,7 @@
       "toolbar.reset": "Recentrer la vue",
       "toolbar.search": "Rechercher",
       "toolbar.searchAria": "Rechercher structures, connexions et récepteurs",
-      "search.placeholder": "Rechercher une structure, une connexion ou un récepteur…",
+      "search.placeholder": "Rechercher une structure, une connexion, un récepteur ou un médicament…",
       "search.noMatch": "Aucun résultat",
 
       "shortcuts.title": "Raccourcis clavier",
@@ -213,6 +223,16 @@
       "receptor.ubiquitous": "Dans tout le cerveau",
       "receptor.noRole": "Pas de rôle significatif dans le système nerveux central.",
       "receptor.stubHint": "Pas de rôle significatif dans le système nerveux central",
+
+      "panel.drugs": "Médicaments",
+      "drugs.filter": "Filtrer les médicaments…",
+      "drugs.none": "Aucun médicament correspondant.",
+      "drug.class": "Classe",
+      "drug.nomenclature": "Nomenclature",
+      "drug.actsOn": "Agit sur",
+      "drug.noTargets": "Aucune cible moléculaire répertoriée pour l'instant.",
+      "drug.source": "Source",
+      "drug.stubHint": "Aucun profil de liaison enregistré pour l'instant",
 
       "status.loading": "Chargement des données du cerveau…",
       "status.loadError":

@@ -404,12 +404,14 @@
          header has no side padding (the panel body already provides it). */
       #legend,
       #receptors,
+      #drugs,
       #about {
         margin-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
       #legend .collapse-header,
       #receptors .collapse-header,
+      #drugs .collapse-header,
       #about .collapse-header { padding: 10px 0 4px; }
       /* About blurb: muted body text with readable links. */
       #about-body { padding: 2px 0 6px; }
@@ -421,7 +423,8 @@
       }
       .about-text a { color: #8fb6e6; text-decoration: underline; }
       #legend-body,
-      #receptors-body {
+      #receptors-body,
+      #drugs-body {
         max-height: 42vh;
         overflow-y: auto;
       }
@@ -431,6 +434,28 @@
       #receptors-body { padding: 4px 0 8px; }
       .legend-item.muted { opacity: 0.4; cursor: default; }
       .legend-item.muted:hover { color: inherit; }
+
+      /* Drugs section: a small filter box pinned at the top of the (scrolling)
+         body, then category headings + drug rows (reusing .legend-item; rows are
+         coloured by the drug's dominant net-effect swatch). The filter reuses the
+         search-input look. */
+      #drugs-body { padding: 4px 0 8px; }
+      .drugs-filter {
+        width: 100%;
+        padding: 7px 9px;
+        margin: 2px 0 8px;
+        font: inherit;
+        font-size: 13px;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        outline: none;
+        box-sizing: border-box;
+      }
+      .drugs-filter:focus { border-color: #4e79a7; }
+      .drug-item[hidden] { display: none; }
+      .drugs-empty { margin: 6px 2px; font-size: 12px; }
       /* Legend action buttons (show-all-names, hide-projections) stack at the
          top, spaced off the generated category rows below them. */
       #legend-actions {
@@ -460,18 +485,22 @@
       .mode-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
       .mode-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
       #legend-body h2:first-child,
-      #receptors-body h2:first-child { margin-top: 0; }
+      #receptors-body h2:first-child,
+      #drugs-list h2:first-child { margin-top: 0; }
       #legend h2:first-child { margin-top: 0; }
       #legend h2,
-      #receptors h2 {
+      #receptors h2,
+      #drugs h2 {
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         color: var(--muted);
         margin: 0 0 8px;
       }
-      /* Receptor family headings stack one after another, so space them apart. */
-      #receptors-body h2 { margin: 14px 0 8px; }
+      /* Receptor family + drug category headings stack one after another, so
+         space them apart. */
+      #receptors-body h2,
+      #drugs-list h2 { margin: 14px 0 8px; }
       /* Clickable category headings toggle the whole group; same selected/dimmed
          states as the rows. */
       #legend h2.clickable { cursor: pointer; }
@@ -537,6 +566,7 @@
       }
       .info-sources h3,
       .info-connections h3,
+      .info-bindings h3,
       .info-locations h3 {
         font-size: 11px;
         text-transform: uppercase;
@@ -546,6 +576,7 @@
       }
       .info-sources ul,
       .info-connections ul,
+      .info-bindings ul,
       .info-locations ul { list-style: none; margin: 0; padding: 0; }
       /* Receptor classification facts: label / value rows. */
       .info-facts {
@@ -605,6 +636,30 @@
       .info-connections li:hover { color: #8fb6e6; }
       .info-connections .conn-label { flex: 1; }
       .info-connections .conn-dir { color: var(--muted); }
+
+      /* Drug panel: the "Acts on" molecular-target list. Each row is the
+         effect swatch + the target name + (action · note); a speculative
+         binding is dimmed + italic. */
+      .info-bindings { margin: 0 0 12px; }
+      .info-bindings li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--text);
+        padding: 4px 0;
+      }
+      .info-bindings .swatch.line { margin-top: 5px; }
+      .info-bindings .bind-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
+      }
+      .info-bindings .bind-target { font-weight: 600; }
+      .info-bindings .bind-action { color: var(--muted); font-size: 11px; }
+      .info-bindings li.tentative { opacity: 0.6; font-style: italic; }
 
       #status {
         position: fixed;
@@ -848,6 +903,23 @@
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
             <div id="receptors-body" hidden></div>
+          </div>
+
+          <!-- Drugs: collapsed by default, an accordion peer of Legend /
+               Receptors / About. A small filter box at the top narrows the list
+               (by name, class or target); the list is generated from the dataset
+               by js/main.js (buildDrugLegend) grouped by category. Clicking a row
+               focuses that drug: it dims the brain to the regions it acts on and
+               animates its effect on each target (see js/drug-anim.js). -->
+          <div id="drugs">
+            <button type="button" id="drugs-toggle" class="collapse-header" aria-expanded="false">
+              <span data-i18n="panel.drugs"></span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+            <div id="drugs-body" hidden>
+              <input type="text" id="drugs-filter" class="drugs-filter" data-i18n-attr="placeholder:drugs.filter" autocomplete="off" />
+              <div id="drugs-list"></div>
+            </div>
           </div>
 
           <!-- About: collapsed by default (body ships `hidden`), mirroring the

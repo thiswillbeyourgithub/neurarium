@@ -19,6 +19,7 @@ import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
 import { createCircuitAnimation } from "./circuit-anim.js";
 import { createReceptorMarkers } from "./receptor-markers.js";
+import { createDrugAnimation } from "./drug-anim.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -848,6 +849,45 @@ function createInfoPanel(data, tabs) {
     return node;
   };
 
+  // Shared by the structure / receptor / drug views: an external reference link,
+  // rendered only for an http(s) url so a stray field can never inject markup.
+  const appendWiki = (url) => {
+    if (typeof url !== "string" || !/^https?:\/\//i.test(url)) return;
+    const wrap = el("div", "info-wiki");
+    const a = el("a", null, t("info.wikipedia"));
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    wrap.appendChild(a);
+    body.appendChild(wrap);
+  };
+
+  // Shared by the connection + drug views: the source list, each a link for a
+  // verified http(s) url or the citation plus an orange TODO pill otherwise.
+  const appendSources = (sources) => {
+    if (!sources || !sources.length) return;
+    const wrap = el("div", "info-sources");
+    wrap.appendChild(el(
+      "h3", null, sources.length > 1 ? t("info.sources") : t("info.source")));
+    const ul = el("ul");
+    for (const s of sources) {
+      const li = el("li");
+      if (typeof s.url === "string" && /^https?:\/\//i.test(s.url)) {
+        const a = el("a", null, s.citation);
+        a.href = s.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        li.appendChild(a);
+      } else {
+        li.appendChild(document.createTextNode(s.citation));
+        li.appendChild(el("span", "src-todo", t("info.linkTodo")));
+      }
+      ul.appendChild(li);
+    }
+    wrap.appendChild(ul);
+    body.appendChild(wrap);
+  };
+
   return {
     show(proj) {
       body.innerHTML = "";
@@ -875,29 +915,7 @@ function createInfoPanel(data, tabs) {
 
       if (proj.description) body.appendChild(el("p", "info-desc", proj.description));
 
-      if (proj.sources && proj.sources.length) {
-        const wrap = el("div", "info-sources");
-        wrap.appendChild(el(
-          "h3", null, proj.sources.length > 1 ? t("info.sources") : t("info.source")));
-        const ul = el("ul");
-        for (const s of proj.sources) {
-          const li = el("li");
-          if (typeof s.url === "string" && /^https?:\/\//i.test(s.url)) {
-            const a = el("a", null, s.citation);
-            a.href = s.url;
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-            li.appendChild(a);
-          } else {
-            // No verified link yet: show the citation plus an orange TODO pill.
-            li.appendChild(document.createTextNode(s.citation));
-            li.appendChild(el("span", "src-todo", t("info.linkTodo")));
-          }
-          ul.appendChild(li);
-        }
-        wrap.appendChild(ul);
-        body.appendChild(wrap);
-      }
+      appendSources(proj.sources);
       tabs.openDetails();
     },
 
@@ -915,18 +933,8 @@ function createInfoPanel(data, tabs) {
         data.meta.groupLabels[structure.group] || structure.group,
       ));
 
-      // External reference link (Wikipedia), when the data carries one. Only an
-      // http(s) value is rendered, so a stray field can never inject markup.
-      const wikiUrl = structure.wikipedia;
-      if (typeof wikiUrl === "string" && /^https?:\/\//i.test(wikiUrl)) {
-        const wikiWrap = el("div", "info-wiki");
-        const a = el("a", null, t("info.wikipedia"));
-        a.href = wikiUrl;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        wikiWrap.appendChild(a);
-        body.appendChild(wikiWrap);
-      }
+      // External reference link (Wikipedia), when the data carries one.
+      appendWiki(structure.wikipedia);
 
       // Pathways with this structure at either end, in the data's order.
       const conns = data.projections.filter(
@@ -976,16 +984,7 @@ function createInfoPanel(data, tabs) {
       body.appendChild(el("h2", "info-title", receptor.name));
       body.appendChild(el("div", "info-group", receptor.familyLabel));
 
-      const wikiUrl = receptor.wikipedia;
-      if (typeof wikiUrl === "string" && /^https?:\/\//i.test(wikiUrl)) {
-        const wikiWrap = el("div", "info-wiki");
-        const a = el("a", null, t("info.wikipedia"));
-        a.href = wikiUrl;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        wikiWrap.appendChild(a);
-        body.appendChild(wikiWrap);
-      }
+      appendWiki(receptor.wikipedia);
 
       if (receptor.description) {
         body.appendChild(el("p", "info-desc", receptor.description));
@@ -1027,6 +1026,69 @@ function createInfoPanel(data, tabs) {
         where.appendChild(ul);
       }
       body.appendChild(where);
+      tabs.openDetails();
+    },
+
+    /**
+     * Populate the panel for a *drug* (clicking a drug legend/list row or a drug
+     * search result): its name, primary category, a Wikipedia link, a one-line
+     * description, its class(es) + nomenclature, then the "Acts on" list of
+     * molecular targets (each binding's effect swatch + target name + action,
+     * with a note / "speculative" marker when present), and the Stahl source.
+     */
+    showDrug(drug) {
+      body.innerHTML = "";
+      body.appendChild(el("h2", "info-title", drug.name));
+      if (drug.category) body.appendChild(el("div", "info-group", drug.category));
+
+      appendWiki(drug.wikipedia);
+
+      if (drug.description) {
+        body.appendChild(el("p", "info-desc", drug.description));
+      }
+
+      // Classification facts: the coarse class(es) and the NbN nomenclature line.
+      const facts = el("div", "info-facts");
+      const addFact = (label, value) => {
+        if (!value) return;
+        const r = el("div", "info-fact");
+        r.appendChild(el("span", "fact-label", label));
+        r.appendChild(el("span", "fact-value", value));
+        facts.appendChild(r);
+      };
+      addFact(t("drug.class"), drug.categoryLabels.join(", "));
+      addFact(t("drug.nomenclature"), drug.nbn);
+      if (facts.childElementCount) body.appendChild(facts);
+
+      // What it binds: one row per target, coloured by the action's net effect.
+      const acts = el("div", "info-bindings");
+      acts.appendChild(el("h3", null, t("drug.actsOn")));
+      if (!drug.bindings.length) {
+        acts.appendChild(el("p", "info-desc", t("drug.noTargets")));
+      } else {
+        const ul = el("ul");
+        for (const b of drug.bindings) {
+          const li = el("li");
+          if (b.tentative) li.classList.add("tentative");
+          const sw = el("span", "swatch line");
+          sw.style.background = b.effectColor;
+          li.appendChild(sw);
+          // Target name (bold) over the action line, stacked so a long target
+          // name (e.g. "Serotonin transporter (SERT)") wraps cleanly inside the
+          // narrow panel instead of pushing the action off the edge.
+          const txt = el("div", "bind-text");
+          txt.appendChild(el("span", "bind-target", b.targetName));
+          const detail = [b.actionLabel, b.note].filter(Boolean).join(" · ");
+          if (detail) txt.appendChild(el("span", "bind-action", detail));
+          li.appendChild(txt);
+          li.title = `${b.effectLabel} · ${b.targetName}`;
+          ul.appendChild(li);
+        }
+        acts.appendChild(ul);
+      }
+      body.appendChild(acts);
+
+      appendSources(drug.sources);
       tabs.openDetails();
     },
 
@@ -1084,6 +1146,121 @@ function buildReceptorLegend(data, onPick) {
         row.title = t("receptor.stubHint");
       }
     }
+  }
+
+  return function reflect(activeId) {
+    for (const { row, id } of rows) {
+      const selected = id === activeId;
+      row.classList.toggle("selected", selected);
+      row.classList.toggle("dimmed", activeId !== null && !selected);
+    }
+  };
+}
+
+/**
+ * The drug's representative swatch colour: the net effect (boost/block/modulate)
+ * most of its bindings share, so an SSRI reads green-ish and an antagonist-heavy
+ * antipsychotic rose-ish at a glance. Falls back to a neutral grey.
+ * @param {object} drug
+ * @param {Object<string,string>} effectColors
+ * @returns {string} hex colour
+ */
+function drugSwatchColor(drug, effectColors) {
+  const counts = {};
+  for (const b of drug.bindings || []) counts[b.effect] = (counts[b.effect] || 0) + 1;
+  let best = null, bestN = -1;
+  for (const [e, n] of Object.entries(counts)) if (n > bestN) { best = e; bestN = n; }
+  return (best && effectColors[best]) || "#9aa0a6";
+}
+
+/**
+ * Build the Drugs legend section (#drugs-list) from the live dataset, grouped by
+ * coarse category (in the meta category-label order, drugs sorted A->Z within
+ * each). Each row is coloured by the drug's dominant net effect and clickable to
+ * focus it (dim the brain to the regions it acts on + animate its targets, via
+ * the caller's `onPick`); a drug with no recorded bindings renders muted + inert.
+ * The #drugs-filter box narrows the visible rows live (matching name + class +
+ * targets), hiding emptied category headings and showing a "no match" note.
+ * Returns a `reflect(activeId)` callback that lights the active drug's row.
+ * @param {import("./data.js").BrainData} data
+ * @param {(drug: object) => void} onPick
+ * @returns {(activeId: string|null) => void}
+ */
+function buildDrugLegend(data, onPick) {
+  const container = document.getElementById("drugs-list");
+  const filterInput = document.getElementById("drugs-filter");
+  if (!container) return () => {};
+  container.replaceChildren();
+  const rows = [];   // { row, id } for the focusable drugs (for reflect)
+  const groups = []; // { heading, rows:[row,...] } for the live filter
+  const effectColors = data.meta.drugEffectColors || {};
+  const cats = data.meta.drugCategoryLabels || {};
+
+  // Group drugs by their primary (first) category.
+  const byCat = new Map();
+  for (const drug of data.drugs || []) {
+    const cat = (drug.categories && drug.categories[0]) || "other";
+    if (!byCat.has(cat)) byCat.set(cat, []);
+    byCat.get(cat).push(drug);
+  }
+  // Category order = the meta order first, then any leftover keys.
+  const order = [...Object.keys(cats),
+                 ...[...byCat.keys()].filter((c) => !(c in cats))];
+  const done = new Set();
+  for (const cat of order) {
+    if (done.has(cat)) continue;
+    done.add(cat);
+    const list = byCat.get(cat);
+    if (!list || !list.length) continue;
+    list.sort((a, b) => a.name.localeCompare(b.name));
+    const h = document.createElement("h2");
+    h.textContent = cats[cat] || cat;
+    container.appendChild(h);
+    const groupRows = [];
+    for (const drug of list) {
+      const row = addLegendItem(
+        container, drugSwatchColor(drug, effectColors), drug.name, true);
+      row.classList.add("drug-item");
+      row._haystack = `${drug.name} ${drug.keywords}`.toLowerCase();
+      if (drug.focusable) {
+        row.classList.add("clickable");
+        row.title = drug.categoryLabels.join(" · ");
+        row.addEventListener("click", () => onPick(drug));
+        rows.push({ row, id: drug.id });
+      } else {
+        row.classList.add("muted");
+        row.title = t("drug.stubHint");
+      }
+      groupRows.push(row);
+    }
+    groups.push({ heading: h, rows: groupRows });
+  }
+
+  // "No match" note for the filter (hidden unless every row is filtered out).
+  const empty = document.createElement("p");
+  empty.className = "drugs-empty info-desc";
+  empty.textContent = t("drugs.none");
+  empty.hidden = true;
+  container.appendChild(empty);
+
+  const applyFilter = () => {
+    const q = (filterInput?.value || "").trim().toLowerCase();
+    let anyVisible = false;
+    for (const g of groups) {
+      let groupVisible = false;
+      for (const row of g.rows) {
+        const match = !q || row._haystack.includes(q);
+        row.hidden = !match;
+        if (match) groupVisible = true;
+      }
+      g.heading.hidden = !groupVisible;
+      if (groupVisible) anyVisible = true;
+    }
+    empty.hidden = anyVisible;
+  };
+  if (filterInput) {
+    filterInput.value = "";
+    filterInput.addEventListener("input", applyFilter);
   }
 
   return function reflect(activeId) {
@@ -1413,6 +1590,8 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const legendBody = document.getElementById("legend-body");
   const receptorsToggle = document.getElementById("receptors-toggle");
   const receptorsBody = document.getElementById("receptors-body");
+  const drugsToggle = document.getElementById("drugs-toggle");
+  const drugsBody = document.getElementById("drugs-body");
   const aboutToggle = document.getElementById("about-toggle");
   const aboutBody = document.getElementById("about-body");
 
@@ -1481,6 +1660,7 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const sections = [
     { toggle: legendToggle, body: legendBody },
     { toggle: receptorsToggle, body: receptorsBody },
+    { toggle: drugsToggle, body: drugsBody },
     { toggle: aboutToggle, body: aboutBody },
   ];
   const syncSectionLayout = () => {
@@ -1639,7 +1819,7 @@ function connectionSideTag(proj) {
  *   selectStructure:Function, selectConnection:Function,
  *   selectReceptor:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor, selectDrug }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -1680,6 +1860,13 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       label: receptor.name + (receptor.neurotransmitter ? ` · ${receptor.neurotransmitter}` : ""),
       keywords: [receptor.familyLabel, receptor.classLabel, receptor.signLabel].filter(Boolean).join(" "),
       select: () => selectReceptor(receptor),
+    })),
+    // Focusable drugs (those with a binding profile). The row shows the primary
+    // class as a tag; keywords carry the full class list + nomenclature + targets.
+    ...(data.drugs || []).filter((d) => d.focusable).map((drug) => ({
+      label: drug.name + (drug.category ? ` · ${drug.category}` : ""),
+      keywords: drug.keywords || "",
+      select: () => selectDrug(drug),
     })),
   ];
 
@@ -1811,7 +1998,8 @@ function wireShortcuts(help) {
   const collapseOpen = () => {
     const search = document.getElementById("search");
     if (search && !search.hidden) click("search-toggle");
-    for (const id of ["legend-toggle", "receptors-toggle", "about-toggle"]) {
+    for (const id of ["legend-toggle", "receptors-toggle", "drugs-toggle",
+                      "about-toggle"]) {
       const tg = document.getElementById(id);
       if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
     }
@@ -2021,6 +2209,44 @@ async function main() {
     }
   });
   reflectReceptors = buildReceptorLegend(data, toggleReceptor);
+
+  // Per-drug animation + focus (js/drug-anim.js), the same shape as the receptor
+  // focus above. Clicking a drug row dims the brain to the union of regions its
+  // targets sit in (setCircuit, no arrow pin) and animates each target's regions
+  // coloured by the binding's net effect (boost/block/modulate). The animation is
+  // dropped the moment the focus stops being exactly that drug's region set
+  // (a clear, a circuit, a receptor, another drug), watched off the selection
+  // state like the receptor markers + circuit pulse.
+  const drugAnim = createDrugAnimation({ scene });
+  let activeDrugId = null;
+  let reflectDrugs = () => {};
+  const refreshDrugRows = () => reflectDrugs(activeDrugId);
+  const drugMeshesOf = (drug) =>
+    drug.structureIds.map((id) => meshById.get(id)).filter(Boolean);
+  const focusDrug = (drug, { frame = false } = {}) => {
+    const meshSet = drugMeshesOf(drug);
+    selection.setCircuit(meshSet, []);
+    drugAnim.show(drug, meshById);
+    info.showDrug(drug);
+    // From the search box, frame the affected regions; from the list row, leave
+    // the view where it is.
+    if (frame && meshSet.length) focus.focusMeshes(meshSet);
+    activeDrugId = drug.id;
+    refreshDrugRows();
+  };
+  const toggleDrug = (drug) => {
+    if (activeDrugId === drug.id) selection.clear(); // watcher hides the animation
+    else focusDrug(drug);
+  };
+  const selectDrug = (drug) => focusDrug(drug, { frame: true });
+  selection.onIsolate((isolated) => {
+    if (drugAnim.active && !drugAnim.matches(isolated)) {
+      drugAnim.hide();
+      activeDrugId = null;
+      refreshDrugRows();
+    }
+  });
+  reflectDrugs = buildDrugLegend(data, toggleDrug);
 
   // Auto-rotate is on by default (a slow turn on load), but the moment the user
   // reaches in to inspect something it should hold still. Stop it (and untick
@@ -2291,7 +2517,7 @@ async function main() {
   }
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
-  wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor });
+  wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor, selectDrug });
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
   wireShortcuts(shortcutsHelp); // single-key shortcuts (n/s/l/c/r/f/?/Esc)
   projVis.apply(); // established arrows visible, tentative ones start hidden
@@ -2319,6 +2545,7 @@ async function main() {
     focus.tick();
     circuitAnim.tick();
     receptorMarkers.tick();
+    drugAnim.tick();
     controls.update();
     // After controls.update() so the cull reads this frame's camera + target.
     cull.tick();

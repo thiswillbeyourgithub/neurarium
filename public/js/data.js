@@ -83,6 +83,12 @@ function localize(field) {
  *   `synapticLabel` and `signColor`, the concrete `structureIds` its `locations`
  *   bases expand to (every structure when `ubiquitous`), the side-stripped
  *   `locationNames`, and a `focusable` flag (false for the inert "stub" receptors).
+ * @property {object[]} drugs  Drug records (from drugs.jsonl, sourced from Stahl's
+ *   Prescriber's Guide). Each is augmented with localized `description` / `nbn`,
+ *   `categoryLabels` (+ primary `category`), and resolved `bindings` (each binding
+ *   carrying `targetName`, `actionLabel`, net `effect` + `effectColor`/`effectLabel`,
+ *   localized `note`, and the concrete `structureIds` it lights), the union
+ *   `structureIds` the focus dims to, a `focusable` flag and search `keywords`.
  * @property {Map<string, object>} byId  structure id -> structure record.
  * @property {{projectionColors: Object<string,string>,
  *   groupLabels: Object<string,string>,
@@ -103,13 +109,14 @@ function localize(field) {
  * @returns {Promise<BrainData>}
  */
 export async function loadBrainData(dataDir = "data") {
-  const [metaRecord, structures, projections, circuits, receptors] =
+  const [metaRecord, structures, projections, circuits, receptors, drugs] =
     await Promise.all([
       fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
       fetchJsonl(`${dataDir}/structures.jsonl`),
       fetchJsonl(`${dataDir}/projections.jsonl`),
       fetchJsonl(`${dataDir}/circuits.jsonl`),
       fetchJsonl(`${dataDir}/receptors.jsonl`),
+      fetchJsonl(`${dataDir}/drugs.jsonl`),
     ]);
 
   // Presentation maps emitted by the generator (kind->arrow colour,
@@ -130,6 +137,15 @@ export async function loadBrainData(dataDir = "data") {
   const receptorFamilyLabels = localizeMap(metaRecord.receptor_family_labels);
   const receptorClassLabels = localizeMap(metaRecord.receptor_class_labels);
   const synapticLabels = localizeMap(metaRecord.synaptic_labels);
+  // Drug legend + animation maps (category headings, binding targets, actions,
+  // and the net-effect swatch colours/labels). drugTargets / drugActions are kept
+  // as raw maps (their `name`/`label` are localized per binding below); the colour
+  // map is language-neutral.
+  const drugCategoryLabels = localizeMap(metaRecord.drug_category_labels);
+  const drugTargets = metaRecord.drug_targets || {};
+  const drugActions = metaRecord.drug_actions || {};
+  const drugEffectColors = metaRecord.drug_effect_colors || {};
+  const drugEffectLabels = localizeMap(metaRecord.drug_effect_labels);
 
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
@@ -195,11 +211,67 @@ export async function loadBrainData(dataDir = "data") {
     r.focusable = r.ubiquitous || r.structureIds.length > 0;
   }
 
+  // Resolve each drug for the viewer. A binding's `target` indexes the merged
+  // drug_targets map; resolve its display name, the action label + net effect (and
+  // the effect's swatch colour, driving the per-drug animation), and the concrete
+  // structure ids it lights: a receptor-linked target reuses that receptor's
+  // already-expanded structureIds, a ubiquitous one lights every structure, and a
+  // non-receptor target expands its region bases to both hemispheres (like a
+  // receptor's locations). The union over all bindings is the drug's affected set
+  // (what the focus dims the brain down to). `keywords` feeds the search box.
+  const receptorStructureIds = new Map(receptors.map((r) => [r.id, r.structureIds]));
+  for (const d of drugs) {
+    d.description = d.description ? localize(d.description) : "";
+    d.nbn = d.nbn ? localize(d.nbn) : "";
+    d.categoryLabels = (d.categories || []).map((c) => drugCategoryLabels[c] || c);
+    d.category = d.categoryLabels[0] || "";
+    const affected = new Set();
+    d.bindings = (d.bindings || []).map((b) => {
+      const tgt = drugTargets[b.target] || {};
+      const act = drugActions[b.action] || {};
+      const effect = b.effect || act.effect || "modulate";
+      let structureIds;
+      if (tgt.ubiquitous) {
+        structureIds = allIds.slice();
+      } else if (tgt.receptor && receptorStructureIds.has(tgt.receptor)) {
+        structureIds = receptorStructureIds.get(tgt.receptor).slice();
+      } else {
+        structureIds = (tgt.regions || []).flatMap((bse) =>
+          [bse, `${bse}_R`, `${bse}_L`].filter((id) => byId.has(id)),
+        );
+      }
+      for (const id of structureIds) affected.add(id);
+      return {
+        target: b.target,
+        targetName: tgt.name ? localize(tgt.name) : b.target,
+        system: tgt.system || null,
+        receptor: tgt.receptor || null,
+        action: b.action,
+        actionLabel: act.label ? localize(act.label) : b.action,
+        effect,
+        effectColor: drugEffectColors[effect] || "#ffffff",
+        effectLabel: drugEffectLabels[effect] || effect,
+        note: b.note ? localize(b.note) : "",
+        tentative: !!b.tentative,
+        structureIds,
+      };
+    });
+    d.structureIds = [...affected];
+    // Focusable if it carries any binding (the info panel + search work even when
+    // a target has no modeled region to light); the generator already cleared it
+    // for a drug with no bindings at all.
+    d.focusable = !!d.focusable && d.bindings.length > 0;
+    d.keywords = [...d.categoryLabels, d.nbn, ...d.bindings.map((b) => b.targetName)]
+      .filter(Boolean)
+      .join(" ");
+  }
+
   return {
     structures,
     projections,
     circuits,
     receptors,
+    drugs,
     byId,
     meta: {
       projectionColors,
@@ -210,6 +282,9 @@ export async function loadBrainData(dataDir = "data") {
       receptorFamilyLabels,
       receptorClassLabels,
       synapticLabels,
+      drugCategoryLabels,
+      drugEffectColors,
+      drugEffectLabels,
     },
   };
 }
