@@ -1089,6 +1089,14 @@ function createCameraFocus({ camera, controls, meshes }) {
   // it moves; cleared whenever we frame something else (a connection or the
   // whole brain) so we don't chase a structure the user has navigated away from.
   let focused = null;
+  // The explode amount last applied, so zoomForExplode() only ever applies the
+  // *incremental* distance change and thus preserves whatever zoom the user has
+  // dialed in. The layout scales linearly with this (applyExplode pushes each
+  // region to base * (1 + amount * EXPLODE_STRENGTH)), so matching the camera
+  // distance to the same factor keeps the spreading brain the same apparent size
+  // instead of letting it overflow the frame.
+  let lastExplode = 0;
+  const spreadScale = (a) => 1 + a * EXPLODE_STRENGTH;
   // Render-time screen offset (fractions of the viewport: +x slides the rendered
   // brain right, +y up), eased toward `offsetTarget` each tick and baked into the
   // camera as a view offset. It is a projection shift, not a move of the orbit
@@ -1203,6 +1211,22 @@ function createCameraFocus({ camera, controls, meshes }) {
       focused.getWorldPosition(tmpVec);
       controls.target.copy(tmpVec);
       if (anim) anim.toTarget.copy(tmpVec);
+    },
+    /**
+     * Pull the camera back (or in) as the brain spreads, so an exploded layout
+     * stays framed instead of overflowing the frame. The layout scales linearly
+     * with the explode amount (see applyExplode), so we scale the camera->target
+     * distance by the same factor; doing it as a ratio against the last amount
+     * applies only the incremental change, preserving any manual zoom the user has
+     * set. OrbitControls' min/maxDistance clamp the result on the next update.
+     * Call from the explode handler with the slider's value.
+     */
+    zoomForExplode(amount) {
+      const ratio = spreadScale(amount) / spreadScale(lastExplode);
+      lastExplode = amount;
+      if (Math.abs(ratio - 1) < 1e-6) return;
+      tmpVec.copy(camera.position).sub(controls.target).multiplyScalar(ratio);
+      camera.position.copy(controls.target).add(tmpVec);
     },
     /**
      * Set the desired render-time screen offset (fractions of the viewport:
@@ -1430,10 +1454,14 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   seeInside.addEventListener("change", () => cull.setEnabled(seeInside.checked));
 
   const onExplode = () => {
-    applyExplode(meshes, parseFloat(explode.value), arrows);
+    const amount = parseFloat(explode.value);
+    applyExplode(meshes, amount, arrows);
     // Keep a double-clicked / searched structure centered as it blows outward,
     // by re-aiming (rotating) the camera rather than translating it.
     focus.reaimFocused();
+    // Pull the camera back as the regions spread (and zoom back in as they
+    // reassemble) so the exploded layout stays framed.
+    focus.zoomForExplode(amount);
   };
   explode.addEventListener("input", onExplode);
 
