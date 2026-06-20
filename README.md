@@ -55,10 +55,11 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 ### Data & sourcing
 
-- The anatomy is plain **structured data**: `public/data/brain.jsonl` (one JSON
-  object per line: regions, projections, named circuits, and a self-describing
-  `meta` record carrying the colour and legend-heading maps) plus one geometry
-  file per shape under `public/data/shapes/`. It is generated from a single source
+- The anatomy is plain **structured data** under `public/data/`, split by record
+  type: `structures.jsonl`, `projections.jsonl`, `circuits.jsonl` (one JSON object
+  per line) plus a self-describing `meta.json` carrying the colour and
+  legend-heading maps, and one geometry file per shape under
+  `public/data/shapes/`. It is generated from a single source
   (`tools/generate_data.py`) and easy to consume from another engine.
 - Every projection carries a **neurotransmitter** and a list of **sources**
   (citations; a verified link renders as a hyperlink, an unfilled one as plain
@@ -105,7 +106,8 @@ Then open <http://localhost:8000/>.
 | --- | --- |
 | `public/` | The served site (and the only web-exposed directory). |
 | `tools/generate_data.py` | Single source of truth for the anatomy; generates the data below. |
-| `public/data/brain.jsonl` | Region metadata and projections, one JSON object per line. |
+| `public/data/meta.json` | Presentation maps (colours, legend headings); makes the dataset self-describing. |
+| `public/data/{structures,projections,circuits}.jsonl` | The anatomy, split by record type, one JSON object per line. |
 | `public/data/shapes/<id>.json` | One geometry file per region. |
 | `public/index.html`, `public/js/` | The three.js viewer and UI. |
 | `tools/` | Dev tooling (data generator, dev server, screenshot helper). |
@@ -115,7 +117,8 @@ Then open <http://localhost:8000/>.
 
 To change which regions or projections are shown, edit `tools/generate_data.py`
 and run `python tools/generate_data.py` to regenerate `public/data/`
-(`brain.jsonl` + `shapes/`). See [`CLAUDE.md`](CLAUDE.md) for details.
+(`meta.json` + the `*.jsonl` files + `shapes/`). See [`CLAUDE.md`](CLAUDE.md) for
+details.
 
 ## Stack
 
@@ -126,7 +129,8 @@ Deliberately lightweight, with a small attack surface and no build step:
   executes no third-party script at runtime and works offline. No framework, no
   bundler, no `node_modules`.
 - **Data**: `tools/generate_data.py` (Python standard library only) emits the
-  anatomy as `public/data/brain.jsonl` + `public/data/shapes/*.json`, fetched at
+  anatomy as the `public/data/` files (`meta.json` + `*.jsonl`) +
+  `public/data/shapes/*.json`, fetched at
   runtime. The plain JSONL/JSON format is easy to consume from another engine.
 - **Serving**: a hardened [Caddy](https://caddyserver.com/) container (non-root,
   read-only rootfs, dropped capabilities, resource limits) that sends a strict

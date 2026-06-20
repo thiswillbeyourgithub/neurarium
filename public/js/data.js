@@ -1,9 +1,11 @@
 // Loading of the brain dataset produced by generate_data.py.
 //
-// The viewer treats data/brain.jsonl as the source of "what to draw" and the
-// data/shapes/*.json files as the source of "geometric form". This module fetches
-// both and returns a single normalized object so the rest of the app never has
-// to know about the on-disk layout.
+// The dataset is split by record type: data/meta.json (presentation maps),
+// data/structures.jsonl, data/projections.jsonl and data/circuits.jsonl tell the
+// viewer "what to draw" and "how things relate", and the data/shapes/*.json files
+// are the source of "geometric form". This module fetches them all and returns a
+// single normalized object so the rest of the app never has to know about the
+// on-disk layout. The file a record lives in encodes its type (no `type` field).
 //
 // NOTE: because these are fetch()ed, the site must be served over http(s); see
 // CLAUDE.md ("Running"). Opening index.html via file:// will fail CORS.
@@ -37,6 +39,15 @@ async function fetchOrThrow(url) {
 }
 
 /**
+ * Fetch a JSONL file and parse it into an array of records.
+ * @param {string} url
+ * @returns {Promise<object[]>}
+ */
+async function fetchJsonl(url) {
+  return parseJsonl(await (await fetchOrThrow(url)).text());
+}
+
+/**
  * Resolve a translatable field to the chosen language. The data file stores
  * translatable strings as `{en, fr}` objects (see generate_data.py's `_t`);
  * `window.__I18N__.pick` collapses one to the active language. A plain string
@@ -53,16 +64,16 @@ function localize(field) {
 
 /**
  * @typedef {Object} BrainData
- * @property {object[]} structures  Region records (type === "structure"), each
+ * @property {object[]} structures  Region records (from structures.jsonl), each
  *   augmented with a resolved `shape` payload from its data/shapes/<id>.json file.
  *   `name`/`base_name` are localized to plain strings (the full hemisphere name
  *   and the side-stripped legend label).
- * @property {object[]} projections Directed pathway records (type === "projection"),
+ * @property {object[]} projections Directed pathway records (from projections.jsonl),
  *   each augmented with a resolved `color` (from the kind->colour meta map) plus a
  *   `sign` (excitatory/inhibitory/modulatory) and its `signColor` for the coarse
  *   colour mode; its `label`/`description`/`neurotransmitter` are localized to
  *   plain strings.
- * @property {object[]} circuits    Named circuit records (type === "circuit"):
+ * @property {object[]} circuits    Named circuit records (from circuits.jsonl):
  *   `{id, name, structures:[structure ids]}` (localized `name`). The arrows
  *   belonging to a circuit are derived in the viewer (both endpoints among
  *   `structures`).
@@ -79,24 +90,24 @@ function localize(field) {
  */
 
 /**
- * Load and assemble the whole dataset: the JSONL plus every referenced shape
- * file (fetched in parallel).
- * @param {string} [jsonlUrl="data/brain.jsonl"]
+ * Load and assemble the whole dataset: the per-type data files (meta.json +
+ * structures/projections/circuits.jsonl) plus every referenced shape file, all
+ * fetched in parallel.
+ * @param {string} [dataDir="data"] Directory the data files live under.
  * @returns {Promise<BrainData>}
  */
-export async function loadBrainData(jsonlUrl = "data/brain.jsonl") {
-  const text = await (await fetchOrThrow(jsonlUrl)).text();
-  const records = parseJsonl(text);
-
-  const structures = records.filter((r) => r.type === "structure");
-  const projections = records.filter((r) => r.type === "projection");
-  const circuits = records.filter((r) => r.type === "circuit");
+export async function loadBrainData(dataDir = "data") {
+  const [metaRecord, structures, projections, circuits] = await Promise.all([
+    fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
+    fetchJsonl(`${dataDir}/structures.jsonl`),
+    fetchJsonl(`${dataDir}/projections.jsonl`),
+    fetchJsonl(`${dataDir}/circuits.jsonl`),
+  ]);
 
   // Presentation maps emitted by the generator (kind->arrow colour,
   // group->legend heading, kind->display label), so the palette/headings live in
   // the data, not hardcoded in the viewer. The label maps are bilingual {en,fr};
   // localize their values to plain strings here (the colour map is neutral).
-  const metaRecord = records.find((r) => r.type === "meta") || {};
   const projectionColors = metaRecord.projection_colors || {};
   // Sign (excitatory / inhibitory) colour mode: kind->sign fold + sign->colour.
   const kindSigns = metaRecord.kind_signs || {};

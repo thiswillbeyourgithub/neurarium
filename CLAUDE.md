@@ -17,7 +17,7 @@ swept-tube caudate/brainstem/hippocampus/cingulate/fornix)
 and draws arrows for neuron projections between them. Region `group` values
 (`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`) drive the legend
 headings + ordering via the `GROUP_LABELS` map in `tools/generate_data.py`, which
-is emitted into the data's `meta` record and read by the viewer; adding a new
+is emitted into the data's `meta.json` and read by the viewer; adding a new
 group means adding it there too or its structures are dropped from the legend.
 At explode 0 the regions are positioned and shaped to
 lock together into a whole brain (the cortical lobes tile a hemisphere with a
@@ -39,8 +39,9 @@ project can grow without touching the viewer:
 
 **Project layout.** Everything the browser loads lives under `public/` (the
 served site: `index.html`, `app-config.js`, `version.js`, `js/`, `data/` which
-holds `brain.jsonl` + the `shapes/` geometry files), and that directory is the
-*only* thing exposed to the web: Caddy's
+holds the per-type dataset files (`meta.json`, `structures.jsonl`,
+`projections.jsonl`, `circuits.jsonl`) + the `shapes/` geometry files), and that
+directory is the *only* thing exposed to the web: Caddy's
 `/srv` and `tools/serve.py` both root at it, so `docker/`, `tools/`, `.git` and
 the uncommitted `.env` / `deploy.sh` / `CLAUDE.local.md` are never web-reachable.
 Authoring + dev tooling live in `tools/` (`generate_data.py`, `serve.py`,
@@ -49,33 +50,36 @@ Authoring + dev tooling live in `tools/` (`generate_data.py`, `serve.py`,
 
 ```
 tools/generate_data.py  Single source of truth for the anatomy. Defines every
-                      region + projection once and emits the two artifacts below.
+                      region + projection once and emits the artifacts below.
                       Every translatable display string below is an {en, fr}
                       object (see "Internationalization"); js/data.js localizes
-                      them at load. data/brain.jsonl is one JSON object per line.
-                      Each line is one of:
-                        - a "meta" record (the first line): the presentation maps
-                          projection_colors (kind -> arrow colour), kind_labels
+                      them at load. The dataset is split by record type for
+                      clarity (the file a record lives in encodes its type, so
+                      there is no "type" field on the lines):
+                        - data/meta.json: a single JSON object, the presentation
+                          maps projection_colors (kind -> arrow colour), kind_labels
                           (kind -> {en,fr} functional-class label), group_labels
                           (group -> {en,fr} legend heading), and the colour-mode
                           maps kind_signs (kind -> excit/inhib/modulatory sign),
                           sign_colors (sign -> colour) and sign_labels
                           (sign -> {en,fr} heading), so the dataset is self-
                           describing and a port needs no hardcoded palette
-                        - a "structure" (region): id, name ({en,fr}, with the
-                          hemisphere prefix/suffix), base_name ({en,fr}, hemisphere-
-                          stripped, used for the legend row), group, position,
-                          color, shape_file, and an optional wikipedia (article
-                          URL, shown as a link in the structure info panel)
-                        - a "projection": from, to, kind, label ({en,fr}),
-                          neurotransmitter ({en,fr}), description ({en,fr}),
-                          sources[{citation,url}] (not translated),
-                          optional bidirectional, and optional tentative (a
-                          speculative pathway: drawn as a dotted arrow in a
-                          separate, off-by-default legend section)
-                        - a "circuit": id, name ({en,fr}), structures[ids] (a named
-                          functional loop; its arrows are derived in the viewer
-                          as the projections whose endpoints are both in the set)
+                        - data/structures.jsonl: one region per line: id, name
+                          ({en,fr}, with the hemisphere prefix/suffix), base_name
+                          ({en,fr}, hemisphere-stripped, used for the legend row),
+                          group, position, color, shape_file, and an optional
+                          wikipedia (article URL, shown as a link in the structure
+                          info panel)
+                        - data/projections.jsonl: one pathway per line: from, to,
+                          kind, label ({en,fr}), neurotransmitter ({en,fr}),
+                          description ({en,fr}), sources[{citation,url}] (not
+                          translated), optional bidirectional, and optional
+                          tentative (a speculative pathway: drawn as a dotted arrow
+                          in a separate, off-by-default legend section)
+                        - data/circuits.jsonl: one named functional loop per line:
+                          id, name ({en,fr}), structures[ids] (its arrows are
+                          derived in the viewer as the projections whose endpoints
+                          are both in the set)
 data/shapes/<name>.json  One geometry file per distinct *form* (independent of
                       where it sits / what it connects to). Symmetric left/right
                       pairs share a single right-side file; the left member
@@ -109,9 +113,10 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       names" / "hide projections", and a nested About section)
                       plus the in-place search box and
                       the top #banners stack (the WIP banner + error banners).
-js/data.js            Fetches brain.jsonl + all shape files, returns a normalized
-                      {structures, projections, circuits, byId, meta} object. It
-                      reads the meta record's maps and resolves each projection's
+js/data.js            Fetches the per-type data files (meta.json + structures/
+                      projections/circuits.jsonl) + all shape files, returns a
+                      normalized {structures, projections, circuits, byId, meta}
+                      object. It reads the meta maps and resolves each projection's
                       arrow `color` from its kind (so the viewer reads
                       `projection.color`, never a hardcoded palette); `meta`
                       carries {projectionColors, groupLabels}.
@@ -393,7 +398,7 @@ script, loaded early in `index.html`) is the whole mechanism:
   `droit/droite/droits/droites` or `gauche/gauches` (French, tuned by an entry's
   optional `fr_gender` of `"m"`/`"f"`/`"mp"`/`"fp"`). Each structure record also
   carries a hemisphere-stripped **`base_name`** `{en,fr}` (the legend groups twins
-  by it, so no language-specific prefix parsing). The meta record gains
+  by it, so no language-specific prefix parsing). `meta.json` gains
   **`kind_labels`** (`kind -> {en,fr}` functional-class label) and **`sign_labels`**
   (`sign -> {en,fr}` colour-mode heading) alongside
   `projection_colors`/`group_labels`/`sign_colors`; `js/data.js` localizes every
@@ -998,7 +1003,7 @@ trigger is the existing circuit row), so no i18n change.
      `tools/generate_data.py` (`excitatory`, `inhibitory`, `dopaminergic`,
      `cholinergic`, `neuroendocrine`); add
      new kinds there (the generator raises if a projection uses an unmapped kind)
-     + in this doc if needed. The map is emitted into the data's `meta` record and
+     + in this doc if needed. The map is emitted into the data's `meta.json` and
      each projection gets a resolved `color` at load, so the viewer never
      hardcodes the palette. `kind` drives the arrow *color*; `neurotransmitter` is
      the finer label shown in the info panel. A new kind must also be folded onto a
@@ -1023,7 +1028,8 @@ trigger is the existing circuit row), so no i18n change.
      (`"f"`/`"mp"`/`"fp"`; default `"m"`) so the composed "droit/droite/..." side
      suffix agrees. See "Internationalization".
 2. Run `python tools/generate_data.py` to regenerate `public/data/`
-   (`brain.jsonl` + `shapes/`).
+   (`meta.json` + `structures.jsonl` + `projections.jsonl` + `circuits.jsonl` +
+   `shapes/`).
 3. Commit the generator change and the regenerated artifacts together.
 
 The legend (region colors and the projection rows, per-neurotransmitter or
@@ -1055,5 +1061,5 @@ Lightweight, no-build versioning suited to this static site:
 - Avoid duplicating the anatomy *and its presentation maps*:
   positions/colors/shape params, the projection `kind`->colour map and the
   `group`->legend-heading map all live only in `generate_data.py`; the latter two
-  are emitted into the data's `meta` record and read by the viewer, so there is
+  are emitted into the data's `meta.json` and read by the viewer, so there is
   no second copy in JS.

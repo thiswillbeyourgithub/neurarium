@@ -3,12 +3,16 @@
 
 This script is the *single source of truth* for the anatomy shown by the
 viewer. Editing the structures/projections lists here and re-running keeps the
-two consumed artifacts in sync without duplicating anatomical data:
+consumed artifacts in sync without duplicating anatomical data:
 
-- ``data/brain.jsonl`` : one JSON object per line. Each line is either a
-  ``structure`` (a brain region: id, group, anatomical position, color, ...) or
-  a ``projection`` (a directed neuron pathway between two structures). The
-  viewer reads this to know *what* to draw and *how things relate*.
+- ``data/`` : the dataset, split by record type for clarity (one file per kind;
+  the file a record lives in encodes its type, so there is no ``type`` field on
+  the lines). ``meta.json`` is a single object carrying the presentation maps
+  (arrow colours + legend headings); ``structures.jsonl`` (one brain region per
+  line: id, group, anatomical position, color, ...), ``projections.jsonl`` (one
+  directed neuron pathway between two structures per line) and ``circuits.jsonl``
+  (one named functional loop per line) are JSONL. The viewer reads these to know
+  *what* to draw and *how things relate*.
 - ``data/shapes/<name>.json``: one file per distinct *form* (ellipsoid radii +
   organic deformation parameters). The actual mesh deformation happens in JS
   (see ``js/shapes.js``); these files just carry the parameters so the form of a
@@ -29,7 +33,7 @@ click/loguru dependencies.
 
 Usage
 -----
-    python tools/generate_data.py            # writes into ../public/data/{brain.jsonl,shapes/}
+    python tools/generate_data.py            # writes into ../public/data/ (meta.json + *.jsonl + shapes/)
     python tools/generate_data.py --root /some/dir
 """
 
@@ -50,10 +54,10 @@ log = logging.getLogger("generate_data")
 # Presentation maps (emitted into the data so the dataset is self-describing)
 #
 # Display metadata, not anatomy, but the viewer reads them straight from the
-# data (a ``meta`` record) rather than hardcoding them in JS: a projection
+# data (``meta.json``) rather than hardcoding them in JS: a projection
 # ``kind`` -> arrow colour, and a structure ``group`` -> legend heading. Keeping
-# them here (the single source of truth) means another engine consuming
-# brain.jsonl gets the colours + headings for free, with no copy to keep in sync
+# them here (the single source of truth) means another engine consuming the
+# dataset gets the colours + headings for free, with no copy to keep in sync
 # in the viewer. build_records() validates that every kind/group used by the
 # data has an entry here, so an unmapped value fails loudly at generation.
 # ---------------------------------------------------------------------------
@@ -1233,10 +1237,9 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
     Returns
     -------
     dict
-        Record ready to be JSON-serialized as one line of ``brain.jsonl``.
+        Record ready to be JSON-serialized as one line of ``structures.jsonl``.
     """
     record = {
-        "type": "structure",
         "id": structure_id,
         "name": name,
         "base_name": base_name,
@@ -1492,7 +1495,7 @@ def _expand_sources(keys: list[str]) -> list[dict[str, str]]:
 
     Pathways cite shared references by short key so a citation lives once in
     :data:`SOURCES`; this expands each key into the ``{citation, url}`` object the
-    viewer renders, keeping ``data/brain.jsonl`` self-contained (the client never
+    viewer renders, keeping ``data/projections.jsonl`` self-contained (the client never
     resolves keys). Raising on an unknown key makes a typo fail the build instead
     of silently dropping a reference.
 
@@ -1538,34 +1541,38 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     for key in ("label", "description", "neurotransmitter"):
         if key in fields:
             fields[key] = _t(fields[key])
-    records = [{"type": "projection", **fields}]
+    records = [fields]
     if symmetric:
         mirrored = {**fields,
                     "from": _mirror_id(fields["from"]),
                     "to": _mirror_id(fields["to"])}
         if (mirrored["from"], mirrored["to"]) != (fields["from"], fields["to"]):
-            records.append({"type": "projection", **mirrored})
+            records.append(mirrored)
     return records
 
 
-def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
-    """Expand the anatomy definition into JSONL lines and shape payloads.
+def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+    """Expand the anatomy definition into the per-type record sets + shapes.
 
     Paired entries are emitted twice (``_R`` and ``_L``) but share a *single*
     right-side shape file: the left member references the same file and is
     reflected across x at load time (``mirror``), so the two hemispheres are
     true mirror images rather than copies, and there is exactly one geometry
     file per distinct form (no duplication). Midline entries are emitted once.
-    Projections are appended after the structures.
 
     Returns
     -------
-    jsonl_records
-        Ordered list of structure/projection dicts (one per JSONL line).
+    data
+        ``{"meta": <dict>, "structures": [...], "projections": [...],
+        "circuits": [...]}`` -- one entry per output file (``meta.json`` plus the
+        three ``*.jsonl``). Records carry **no** ``type`` field: the file a record
+        lives in encodes its type, so it is not duplicated onto every line.
     shapes
         Mapping of shape-file basename -> shape payload dict.
     """
-    jsonl: list[dict[str, Any]] = []
+    structures: list[dict[str, Any]] = []
+    projections: list[dict[str, Any]] = []
+    circuits: list[dict[str, Any]] = []
     shapes: dict[str, dict[str, Any]] = {}
 
     # Same-group blob neighbours for the inter-region jigsaw clipping. Only
@@ -1608,10 +1615,10 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         # French gender/number-agreed suffix). ``fr_gender`` tunes the agreement.
         base_name = _t(entry["name"])
         gender = entry.get("fr_gender", "m")
-        jsonl.append(
+        structures.append(
             _structure_record(entry, f"{base}_R", _side_name(base_name, gender, "R"),
                               base_name, (x, y, z), base))
-        jsonl.append(
+        structures.append(
             _structure_record(entry, f"{base}_L", _side_name(base_name, gender, "L"),
                               base_name, (-x, y, z), base, mirror=True))
 
@@ -1619,18 +1626,18 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         sid = entry["base"]
         # Midline structures have no hemisphere, so the full name is the base.
         name = _t(entry["name"])
-        jsonl.append(
+        structures.append(
             _structure_record(entry, sid, name, name, entry["pos"], sid))
         shapes[sid] = _shape_record(entry, entry["pos"][0])
 
     for proj in PROJECTIONS:
-        jsonl.extend(_projection_records(proj))
+        projections.extend(_projection_records(proj))
 
     # Circuits: expand each base structure id to whatever was emitted (both
     # hemispheres for a paired form, the bare id for a midline one). Built from
-    # the structure records already in `jsonl`, so it can't reference a structure
+    # the structure records already collected, so it can't reference a structure
     # that doesn't exist.
-    structure_ids = {r["id"] for r in jsonl if r["type"] == "structure"}
+    structure_ids = {r["id"] for r in structures}
     for circuit in CIRCUITS:
         ids: list[str] = []
         for base in circuit["structures"]:
@@ -1641,24 +1648,20 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
                     f"Circuit {circuit['id']!r} references unknown structure "
                     f"{base!r} (no {base}, {base}_R or {base}_L emitted).")
             ids.extend(members)
-        jsonl.append({
-            "type": "circuit",
+        circuits.append({
             "id": circuit["id"],
             "name": _t(circuit["name"]),
             "structures": ids,
         })
 
-    # Presentation metadata, emitted as the first record so a consumer reading
-    # brain.jsonl is self-contained (arrow colours + legend headings live in the
-    # data, not only in the viewer's JS). Fail loudly if the data uses a kind or
-    # group with no entry in the maps above.
-    kinds = {r["kind"] for r in jsonl if r["type"] == "projection"}
+    # Fail loudly if the data uses a kind or group with no entry in the maps above.
+    kinds = {r["kind"] for r in projections}
     missing_kinds = kinds - PROJECTION_COLORS.keys()
     if missing_kinds:
         raise KeyError(
             f"Projection kind(s) with no PROJECTION_COLORS entry: "
             f"{sorted(missing_kinds)}")
-    groups = {r["group"] for r in jsonl if r["type"] == "structure"}
+    groups = {r["group"] for r in structures}
     missing_groups = groups - GROUP_LABELS.keys()
     if missing_groups:
         raise KeyError(
@@ -1676,8 +1679,11 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         raise KeyError(
             "Missing FR translation for: "
             + "; ".join(repr(s) for s in sorted(_MISSING_TRANSLATIONS)))
-    jsonl.insert(0, {
-        "type": "meta",
+
+    # Presentation metadata (its own meta.json) so a consumer reading the dataset
+    # is self-contained: arrow colours + legend headings live in the data, not
+    # only in the viewer's JS.
+    meta = {
         # Both presentation maps are emitted bilingually: the kind->arrow colour
         # map is language-neutral, but kind_labels/group_labels carry {en, fr}
         # display strings the viewer resolves via window.__I18N__.pick.
@@ -1690,18 +1696,22 @@ def build_records() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
         "kind_signs": KIND_TO_SIGN,
         "sign_colors": SIGN_COLORS,
         "sign_labels": {sign: _t(label) for sign, label in SIGN_LABELS.items()},
-    })
+    }
 
-    return jsonl, shapes
+    return ({"meta": meta, "structures": structures,
+             "projections": projections, "circuits": circuits}, shapes)
 
 
 def write_artifacts(root: Path) -> None:
-    """Write ``data/brain.jsonl`` and ``data/shapes/*.json`` under ``root``.
+    """Write the dataset under ``root`` (``data/`` + ``data/shapes/``).
 
-    The ``data/shapes`` directory is cleared of stale ``*.json`` first so removing
-    a structure here also removes its orphaned shape file.
+    The dataset is split by record type for clarity: ``data/meta.json`` (a single
+    object) plus one ``*.jsonl`` per collection (``structures``, ``projections``,
+    ``circuits``); the file a record lives in encodes its type. The
+    ``data/shapes`` directory is cleared of stale ``*.json`` first so removing a
+    structure here also removes its orphaned shape file.
     """
-    jsonl, shapes = build_records()
+    data, shapes = build_records()
 
     data_dir = root / "data"
     shapes_dir = data_dir / "shapes"
@@ -1711,11 +1721,20 @@ def write_artifacts(root: Path) -> None:
     for stale in shapes_dir.glob("*.json"):
         stale.unlink()
 
-    jsonl_path = data_dir / "brain.jsonl"
-    with jsonl_path.open("w", encoding="utf-8") as fh:
-        for record in jsonl:
-            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
-    log.info("wrote %s (%d lines)", jsonl_path, len(jsonl))
+    # meta is a single object -> pretty-printed meta.json; the collections are one
+    # JSON object per line -> one *.jsonl each.
+    meta_path = data_dir / "meta.json"
+    meta_path.write_text(
+        json.dumps(data["meta"], ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8")
+    log.info("wrote %s", meta_path)
+
+    for name in ("structures", "projections", "circuits"):
+        path = data_dir / f"{name}.jsonl"
+        with path.open("w", encoding="utf-8") as fh:
+            for record in data[name]:
+                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+        log.info("wrote %s (%d lines)", path, len(data[name]))
 
     for sid, payload in shapes.items():
         path = shapes_dir / f"{sid}.json"
@@ -1729,10 +1748,10 @@ def main() -> None:
     parser.add_argument(
         "--root",
         type=Path,
-        # This script lives in tools/; the data/ tree it generates (brain.jsonl
-        # + shapes/) is *served*, so it belongs under the public/ site root.
+        # This script lives in tools/; the data/ tree it generates (meta.json +
+        # the *.jsonl + shapes/) is *served*, so it belongs under the public/ site root.
         default=Path(__file__).resolve().parent.parent / "public",
-        help="Site root to write data/ (brain.jsonl + shapes/) into (default: ../public).",
+        help="Site root to write data/ (meta.json + *.jsonl + shapes/) into (default: ../public).",
     )
     args = parser.parse_args()
     write_artifacts(args.root)

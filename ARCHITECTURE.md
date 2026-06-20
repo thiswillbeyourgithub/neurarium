@@ -30,9 +30,9 @@ This project was built with the help of [Claude Code](https://claude.com/claude-
    group→legend-heading map, the per-structure Wikipedia links) are all defined
    once in `tools/generate_data.py`; the presentation maps are emitted into the
    data so the viewer never hardcodes a second copy.
-4. **Self-describing data.** `brain.jsonl` carries a `meta` record with the colour
-   and heading maps, so a consumer (this viewer, or a port to another language)
-   needs no out-of-band palette to render it correctly.
+4. **Self-describing data.** `meta.json` carries the colour and heading maps, so
+   a consumer (this viewer, or a port to another language) needs no out-of-band
+   palette to render it correctly.
 5. **Fail loud at generation time.** The generator raises on an unmapped
    projection kind, an unknown circuit structure, or a Wikipedia entry for a
    non-existent structure, so bad data never reaches the browser silently.
@@ -42,10 +42,10 @@ This project was built with the help of [Claude Code](https://claude.com/claude-
 ```
    AUTHORING                 ARTIFACTS (committed)              VIEWER (browser)
  ┌───────────────┐         ┌───────────────────────────┐         ┌──────────────────┐
- │ generate_     │  emits  │ public/data/brain.jsonl    │  fetch  │ public/js/*.js   │
- │ data.py       │ ──────► │   meta / structure /       │ ──────► │ + index.html     │
- │ (stdlib only) │         │   projection / circuit     │         │ (three.js)       │
- │               │         │ public/data/shapes/*.json  │         │                  │
+ │ generate_     │  emits  │ public/data/meta.json      │  fetch  │ public/js/*.js   │
+ │ data.py       │ ──────► │ structures.jsonl           │ ──────► │ + index.html     │
+ │ (stdlib only) │         │ projections / circuits     │         │ (three.js)       │
+ │               │         │ shapes/*.json (geometry)   │         │                  │
  └───────────────┘         └───────────────────────────┘         └──────────────────┘
    one definition            plain JSONL + JSON,                renders, no anatomy
    per region/pathway        the data contract                  knowledge of its own
@@ -62,19 +62,22 @@ Standard-library-only Python. It defines every region once (right-side only for
 symmetric pairs; the generator mirrors it to the left), every projection
 (bilateral by default, mirrored unless flagged one-sided), every named circuit,
 and the registries (`SOURCES`, `WIKIPEDIA`, `PROJECTION_COLORS`, `GROUP_LABELS`).
-Running it regenerates `public/data/` (`brain.jsonl` + `shapes/`). The generated
-files are committed so the static site can fetch them directly.
+Running it regenerates `public/data/` (`meta.json` + the `*.jsonl` files +
+`shapes/`). The generated files are committed so the static site can fetch them
+directly.
 
 ### Artifacts: the data contract
 
-`public/data/brain.jsonl` is one JSON object per line. Five record kinds:
+The dataset under `public/data/` is split by record type for clarity: the file a
+record lives in encodes its type, so there is no `type` field on the lines.
+`meta.json` is a single JSON object; the rest are JSONL (one object per line):
 
-| record | role |
+| file | role |
 | --- | --- |
-| `meta` (first line) | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading). Makes the dataset self-describing. |
-| `structure` | a region: `id`, `name`, `group`, `position`, `color`, `shape_file`, optional `wikipedia`, optional `mirror`. |
-| `projection` | a directed pathway: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
-| `circuit` | a named functional loop: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
+| `meta.json` | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading), and the colour-mode `kind_signs`/`sign_colors`/`sign_labels`. Makes the dataset self-describing. |
+| `structures.jsonl` | one region per line: `id`, `name`, `group`, `position`, `color`, `shape_file`, optional `wikipedia`, optional `mirror`. |
+| `projections.jsonl` | one directed pathway per line: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
+| `circuits.jsonl` | one named functional loop per line: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape
@@ -100,7 +103,7 @@ the `main.js` entry point.
  (window.__APP_CONFIG__)  (classic; #banners stack)              │
    │                                                             │ imports
  app-init.js                                                     ▼
- (injects umami)             data.js ──fetch──► brain.jsonl + data/shapes/*.json
+ (injects umami)             data.js ──fetch──► data/*.{json,jsonl} + data/shapes/*.json
                               (no three.js; returns normalized {structures,
                                projections, circuits, byId, meta})
                                   ▲
@@ -130,7 +133,8 @@ could be reused headless.
 3. The import map points `three` / `three/addons/` at the vendored copy.
 4. `js/main.js` (module) runs: sets up scene/camera/renderer/lights/OrbitControls,
    then `await loadBrainData()`.
-5. `loadBrainData()` fetches `brain.jsonl`, parses the records, reads the `meta`
+5. `loadBrainData()` fetches the per-type data files (`meta.json` +
+   `structures`/`projections`/`circuits.jsonl`) in parallel, reads the `meta`
    maps, resolves each projection's `color` from its kind, and fetches every
    referenced shape file in parallel.
 6. `main.js` builds the meshes (`buildStructureMesh`), the arrows (`buildArrows`),
