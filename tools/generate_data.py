@@ -161,6 +161,241 @@ SYNAPTIC_LABELS: dict[str, str] = {
 
 
 # ---------------------------------------------------------------------------
+# Drug presentation maps + binding vocabularies (emitted into meta.json).
+#
+# Drugs (the psychoactive medications authored in ``tools/drugs_data.json``, see
+# "Changing the data") are sourced from Stahl's Prescriber's Guide, 8th ed. Each
+# drug has one or more coarse ``categories`` (SSRI, tricyclic, ...) and a list of
+# ``bindings`` to molecular targets (receptors, transporters, enzymes, ion
+# channels), each binding carrying an ``action`` (antagonist, agonist, reuptake
+# inhibitor, ...). Focusing a drug in the viewer dims the brain and animates its
+# effect on every region carrying its targets, coloured by each action's net
+# ``effect`` (boost / block / modulate).
+#
+# These four maps are the drug "schema": ``build_records`` validates every
+# category / target / action / effect a drug uses against them (and every target
+# region against the known structure bases), so a typo in the authored JSON fails
+# the build. All are emitted bilingually ({en, fr}) straight into meta.json, so
+# (like the receptor maps) the viewer needs no hardcoded drug palette or labels.
+# Unlike the anatomy strings, the drug maps are authored bilingually inline rather
+# than through the shared FR table: the drug data comes from extraction (a
+# separate JSON), so keeping its translations self-contained avoids growing FR.
+# ---------------------------------------------------------------------------
+
+# Coarse drug category (a key) -> bilingual legend/search label. Object key order
+# is the drug legend's category display order. A drug may list several (e.g. an
+# SNRI that is also a chronic-pain treatment); the first is its primary heading.
+DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
+    "ssri": {"en": "SSRI", "fr": "ISRS"},
+    "snri": {"en": "SNRI", "fr": "IRSN"},
+    "tricyclic": {"en": "Tricyclic / tetracyclic antidepressant",
+                  "fr": "Antidépresseur tricyclique / tétracyclique"},
+    "maoi": {"en": "MAO inhibitor", "fr": "Inhibiteur de la MAO"},
+    "antidepressant_other": {"en": "Other antidepressant",
+                             "fr": "Autre antidépresseur"},
+    "antipsychotic_atypical": {"en": "Atypical antipsychotic",
+                               "fr": "Antipsychotique atypique"},
+    "antipsychotic_conventional": {"en": "Conventional antipsychotic",
+                                   "fr": "Antipsychotique classique"},
+    "anxiolytic": {"en": "Anxiolytic", "fr": "Anxiolytique"},
+    "hypnotic": {"en": "Hypnotic / sedative", "fr": "Hypnotique / sédatif"},
+    "benzodiazepine": {"en": "Benzodiazepine", "fr": "Benzodiazépine"},
+    "mood_stabilizer": {"en": "Mood stabilizer / anticonvulsant",
+                        "fr": "Thymorégulateur / anticonvulsivant"},
+    "stimulant": {"en": "Stimulant / wake-promoting",
+                  "fr": "Stimulant / éveillant"},
+    "adhd_nonstimulant": {"en": "ADHD non-stimulant",
+                          "fr": "Non-stimulant (TDAH)"},
+    "cognitive_enhancer": {"en": "Cognitive enhancer",
+                           "fr": "Activateur cognitif"},
+    "substance_use": {"en": "Substance-use treatment",
+                      "fr": "Traitement des addictions"},
+    "opioid": {"en": "Opioid / opioid modulator",
+               "fr": "Opioïde / modulateur opioïde"},
+    "other": {"en": "Other", "fr": "Autre"},
+}
+
+# Binding action (a key) -> {label {en,fr}, effect}. ``effect`` (boost / block /
+# modulate) is the net direction of the drug's action at that target and drives
+# the animation colour (DRUG_EFFECT_COLORS). A binding may override ``effect`` for
+# an edge case (e.g. an enzyme inhibitor that does not raise a transmitter).
+DRUG_ACTIONS: dict[str, dict[str, Any]] = {
+    "agonist": {"label": {"en": "Agonist", "fr": "Agoniste"}, "effect": "boost"},
+    "partial_agonist": {"label": {"en": "Partial agonist", "fr": "Agoniste partiel"},
+                        "effect": "modulate"},
+    "antagonist": {"label": {"en": "Antagonist", "fr": "Antagoniste"},
+                   "effect": "block"},
+    "inverse_agonist": {"label": {"en": "Inverse agonist", "fr": "Agoniste inverse"},
+                        "effect": "block"},
+    "reuptake_inhibitor": {"label": {"en": "Reuptake inhibitor",
+                                     "fr": "Inhibiteur de la recapture"},
+                           "effect": "boost"},
+    "releaser": {"label": {"en": "Releaser", "fr": "Libérateur"}, "effect": "boost"},
+    "enzyme_inhibitor": {"label": {"en": "Enzyme inhibitor",
+                                   "fr": "Inhibiteur enzymatique"}, "effect": "boost"},
+    "pam": {"label": {"en": "Positive allosteric modulator",
+                      "fr": "Modulateur allostérique positif"}, "effect": "boost"},
+    "nam": {"label": {"en": "Negative allosteric modulator",
+                      "fr": "Modulateur allostérique négatif"}, "effect": "block"},
+    "blocker": {"label": {"en": "Channel blocker", "fr": "Bloqueur de canal"},
+                "effect": "block"},
+    "modulator": {"label": {"en": "Modulator", "fr": "Modulateur"},
+                  "effect": "modulate"},
+}
+
+# Net-effect (a key) -> animation swatch colour and bilingual label. Distinct hues
+# from the projection/sign palette so a drug focus reads as its own thing.
+DRUG_EFFECT_COLORS: dict[str, str] = {
+    "boost": "#34d399",     # emerald: increases activity / transmitter availability
+    "block": "#fb7185",     # rose: blocks / dampens the target
+    "modulate": "#c084fc",  # violet: mixed / context-dependent
+}
+DRUG_EFFECT_LABELS: dict[str, dict[str, str]] = {
+    "boost": {"en": "Enhances", "fr": "Renforce"},
+    "block": {"en": "Blocks", "fr": "Bloque"},
+    "modulate": {"en": "Modulates", "fr": "Module"},
+}
+
+# Non-receptor binding targets (a key) -> {name {en,fr}, system, regions}.
+# Receptors already modeled in RECEPTORS are ALSO valid targets (a binding may use
+# any receptor id directly); the generator merges them into the emitted target map
+# automatically (linking the receptor so its lit regions come from its locations),
+# so this table holds only the targets the receptor dataset lacks: the reuptake
+# pumps (the core of the SSRIs/SNRIs/TCAs/stimulants), metabolic enzymes, ion
+# channels, and a few receptor groups not modeled individually. ``system`` is a
+# RECEPTOR_FAMILY_LABELS key (or None) used only for grouping/tooltip. ``regions``
+# are structure *base* ids the viewer lights for this target (it expands each to
+# both hemispheres), the editorial anatomical footprint of the target, mirroring
+# how RECEPTORS map a transmitter system onto the modeled structures; an empty
+# list means "no modeled footprint" (the binding still lists, but lights nothing).
+DRUG_TARGETS: dict[str, dict[str, Any]] = {
+    # --- Monoamine / GABA transporters (reuptake pumps) ----------------------
+    "sert": {"name": {"en": "Serotonin transporter (SERT)",
+                      "fr": "Transporteur de la sérotonine (SERT)"},
+             "system": "serotonergic",
+             "regions": ["raphe", "frontal", "temporal", "cingulate", "hippocampus",
+                         "amygdala", "thalamus", "hypothalamus", "accumbens"]},
+    "net": {"name": {"en": "Norepinephrine transporter (NET)",
+                     "fr": "Transporteur de la noradrénaline (NET)"},
+            "system": "adrenergic",
+            "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
+                        "hypothalamus", "amygdala", "cerebellum"]},
+    "dat": {"name": {"en": "Dopamine transporter (DAT)",
+                     "fr": "Transporteur de la dopamine (DAT)"},
+            "system": "dopaminergic",
+            "regions": ["vta", "substantia_nigra", "caudate", "putamen",
+                        "accumbens", "frontal"]},
+    "gat": {"name": {"en": "GABA transporter (GAT)",
+                     "fr": "Transporteur du GABA (GAT)"},
+            "system": "gabaergic",
+            "regions": ["frontal", "temporal", "thalamus", "hippocampus",
+                        "cerebellum"]},
+    "vmat2": {"name": {"en": "Vesicular monoamine transporter (VMAT2)",
+                       "fr": "Transporteur vésiculaire des monoamines (VMAT2)"},
+              "system": "dopaminergic",
+              "regions": ["vta", "substantia_nigra", "raphe", "locus_coeruleus",
+                          "caudate", "putamen"]},
+    # --- Metabolic enzymes ---------------------------------------------------
+    "mao_a": {"name": {"en": "Monoamine oxidase A (MAO-A)",
+                       "fr": "Monoamine oxydase A (MAO-A)"},
+              "system": "serotonergic",
+              "regions": ["raphe", "locus_coeruleus", "vta", "substantia_nigra",
+                          "brainstem"]},
+    "mao_b": {"name": {"en": "Monoamine oxidase B (MAO-B)",
+                       "fr": "Monoamine oxydase B (MAO-B)"},
+              "system": "dopaminergic",
+              "regions": ["substantia_nigra", "vta", "raphe", "brainstem"]},
+    "ache": {"name": {"en": "Acetylcholinesterase",
+                      "fr": "Acétylcholinestérase"},
+             "system": "cholinergic",
+             "regions": ["frontal", "temporal", "hippocampus", "thalamus",
+                         "septal_nuclei"]},
+    "bche": {"name": {"en": "Butyrylcholinesterase",
+                      "fr": "Butyrylcholinestérase"},
+             "system": "cholinergic",
+             "regions": ["frontal", "temporal", "hippocampus"]},
+    "carbonic_anhydrase": {"name": {"en": "Carbonic anhydrase",
+                                    "fr": "Anhydrase carbonique"},
+                           "system": None, "regions": []},
+    "pde5": {"name": {"en": "Phosphodiesterase 5 (PDE5)",
+                      "fr": "Phosphodiestérase 5 (PDE5)"},
+             "system": None, "regions": []},
+    # --- Ion channels / vesicle proteins -------------------------------------
+    "nav": {"name": {"en": "Voltage-gated sodium channel",
+                     "fr": "Canal sodique voltage-dépendant"},
+            "system": None,
+            "regions": ["frontal", "parietal", "temporal", "occipital",
+                        "hippocampus", "thalamus"]},
+    "cav": {"name": {"en": "Voltage-gated calcium channel",
+                     "fr": "Canal calcique voltage-dépendant"},
+            "system": None,
+            "regions": ["frontal", "temporal", "thalamus", "hippocampus"]},
+    "cav_a2d": {"name": {"en": "Calcium channel α2δ subunit",
+                         "fr": "Sous-unité α2δ du canal calcique"},
+                "system": None,
+                "regions": ["frontal", "temporal", "thalamus", "hippocampus"]},
+    "cav_t": {"name": {"en": "T-type calcium channel",
+                       "fr": "Canal calcique de type T"},
+              "system": None, "regions": ["thalamus", "frontal", "temporal"]},
+    "sv2a": {"name": {"en": "Synaptic vesicle protein 2A (SV2A)",
+                      "fr": "Protéine 2A des vésicules synaptiques (SV2A)"},
+             "system": None,
+             "regions": ["frontal", "temporal", "hippocampus", "thalamus"]},
+    # --- Receptor groups not modeled individually in RECEPTORS ----------------
+    "muscarinic": {"name": {"en": "Muscarinic receptors (M1–M5)",
+                            "fr": "Récepteurs muscariniques (M1–M5)"},
+                   "system": "cholinergic",
+                   "regions": ["frontal", "temporal", "hippocampus", "caudate",
+                               "putamen", "thalamus", "hypothalamus"]},
+    "nicotinic": {"name": {"en": "Nicotinic receptors",
+                           "fr": "Récepteurs nicotiniques"},
+                  "system": "cholinergic",
+                  "regions": ["frontal", "temporal", "hippocampus", "thalamus",
+                              "vta"]},
+    "alpha1": {"name": {"en": "α1 adrenergic receptors",
+                        "fr": "Récepteurs α1 adrénergiques"},
+               "system": "adrenergic",
+               "regions": ["frontal", "parietal", "temporal", "occipital",
+                           "hippocampus", "thalamus", "brainstem"]},
+    "alpha2": {"name": {"en": "α2 adrenergic receptors",
+                        "fr": "Récepteurs α2 adrénergiques"},
+               "system": "adrenergic",
+               "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
+                           "hypothalamus", "brainstem"]},
+    "beta": {"name": {"en": "β adrenergic receptors",
+                      "fr": "Récepteurs β adrénergiques"},
+             "system": "adrenergic",
+             "regions": ["frontal", "parietal", "cingulate", "accumbens",
+                         "cerebellum"]},
+    "glutamate": {"name": {"en": "Glutamate receptors",
+                           "fr": "Récepteurs du glutamate"},
+                  "system": "glutamatergic",
+                  "regions": ["frontal", "temporal", "hippocampus", "thalamus",
+                              "cerebellum", "caudate", "putamen"]},
+    "melatonin": {"name": {"en": "Melatonin receptors (MT1/MT2)",
+                           "fr": "Récepteurs de la mélatonine (MT1/MT2)"},
+                  "system": "melatonergic", "regions": ["hypothalamus", "thalamus"]},
+    "orexin": {"name": {"en": "Orexin receptors (OX1R/OX2R)",
+                        "fr": "Récepteurs de l'orexine (OX1R/OX2R)"},
+               "system": None,
+               "regions": ["hypothalamus", "locus_coeruleus", "raphe", "vta",
+                           "thalamus"]},
+    "melanocortin": {"name": {"en": "Melanocortin receptors",
+                              "fr": "Récepteurs de la mélanocortine"},
+                     "system": None, "regions": ["hypothalamus"]},
+}
+
+# The constant source backing every drug record (the user-verified fair-use
+# citation). Per-drug specifics (the binding profile) come from this single book;
+# each drug additionally carries its own ``wikipedia`` link for quick reference.
+STAHL_SOURCE: dict[str, str] = {
+    "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential "
+                "Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
+    "url": "TODO",
+}
+
+
+# ---------------------------------------------------------------------------
 # Internationalization (en / fr): the data file is bilingual. The anatomy below
 # is authored in English; every translatable *display* string (region names,
 # group headings, projection-kind labels, neurotransmitters, pathway labels +
@@ -2395,6 +2630,144 @@ def _receptor_record(rec: dict[str, Any],
     return out
 
 
+def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Build the emitted ``drug_targets`` map: DRUG_TARGETS + every receptor.
+
+    A drug binding may target either one of the non-receptor :data:`DRUG_TARGETS`
+    (transporters, enzymes, channels, ...) or any receptor id from
+    ``receptors.jsonl`` directly. This merges both into one self-describing map the
+    viewer reads: each entry is ``{name {en,fr}, system, receptor, regions,
+    ubiquitous?}``. For a receptor-linked target the ``receptor`` field carries the
+    receptor id and ``regions`` mirror the receptor's locations (so the viewer can
+    just reuse that receptor's already-resolved lit regions); for a non-receptor
+    target ``receptor`` is null and ``regions`` are the DRUG_TARGETS footprint.
+
+    Parameters
+    ----------
+    receptors
+        The already-built receptor records (each with ``id``/``name``/``family``/
+        ``locations`` and optional ``ubiquitous``).
+
+    Returns
+    -------
+    dict
+        target id -> target descriptor, ready to emit into ``meta.json``.
+    """
+    targets: dict[str, dict[str, Any]] = {}
+    for tid, spec in DRUG_TARGETS.items():
+        targets[tid] = {
+            "name": spec["name"],
+            "system": spec["system"],
+            "receptor": None,
+            "regions": list(spec["regions"]),
+        }
+    for rec in receptors:
+        # A receptor id is also a valid target; link it so the viewer reuses the
+        # receptor's lit regions. Receptor ids and DRUG_TARGETS keys never collide
+        # (the latter are transporters/enzymes/channels), but guard anyway.
+        if rec["id"] in targets:
+            raise KeyError(f"Drug target id {rec['id']!r} collides with a receptor")
+        targets[rec["id"]] = {
+            "name": {"en": rec["name"], "fr": rec["name"]},
+            "system": rec["family"],
+            "receptor": rec["id"],
+            "regions": list(rec.get("locations", [])),
+            "ubiquitous": bool(rec.get("ubiquitous")),
+        }
+    return targets
+
+
+def _drug_record(drug: dict[str, Any], valid_targets: set[str],
+                 known_bases: set[str]) -> dict[str, Any]:
+    """Validate + normalize one authored drug into its ``drugs.jsonl`` record.
+
+    The authored drug (from ``tools/drugs_data.json``) is mostly passed through;
+    this validates it against the drug vocabularies (categories / targets /
+    actions / effect overrides) and attaches the constant :data:`STAHL_SOURCE`.
+    Translatable free text (``description``, per-binding ``note``, ``nbn``) is
+    authored inline as ``{en, fr}`` (or the literal ``"TODO"``), so it does not go
+    through the shared FR table. A drug with no bindings at all is emitted
+    ``focusable: false`` (listed but not clickable, like a receptor stub).
+
+    Parameters
+    ----------
+    drug
+        One authored drug dict: ``id``, ``name``, ``categories``, ``bindings``
+        and optional ``nbn`` / ``description`` / ``wikipedia``.
+    valid_targets
+        The set of valid binding target ids (DRUG_TARGETS keys + receptor ids).
+    known_bases
+        Known structure base ids (unused targets validation is by id, kept for
+        symmetry with the receptor builder).
+
+    Returns
+    -------
+    dict
+        Record ready to be JSON-serialized as one line of ``drugs.jsonl``.
+    """
+    for key in ("id", "name", "categories", "bindings"):
+        if key not in drug:
+            raise KeyError(f"Drug {drug.get('id', drug.get('name'))!r} missing "
+                           f"required field {key!r}")
+    for cat in drug["categories"]:
+        if cat not in DRUG_CATEGORY_LABELS:
+            raise KeyError(f"Drug {drug['id']!r} category {cat!r} has no "
+                           f"DRUG_CATEGORY_LABELS entry")
+    bindings: list[dict[str, Any]] = []
+    for b in drug["bindings"]:
+        if b["target"] not in valid_targets:
+            raise KeyError(f"Drug {drug['id']!r} binding target {b['target']!r} "
+                           f"is not a known target (DRUG_TARGETS key or receptor id)")
+        if b["action"] not in DRUG_ACTIONS:
+            raise KeyError(f"Drug {drug['id']!r} binding action {b['action']!r} "
+                           f"has no DRUG_ACTIONS entry")
+        out_b: dict[str, Any] = {"target": b["target"], "action": b["action"]}
+        if "effect" in b:
+            if b["effect"] not in DRUG_EFFECT_COLORS:
+                raise KeyError(f"Drug {drug['id']!r} binding effect {b['effect']!r} "
+                               f"has no DRUG_EFFECT_COLORS entry")
+            out_b["effect"] = b["effect"]
+        if b.get("note"):
+            out_b["note"] = b["note"]
+        if b.get("tentative"):
+            out_b["tentative"] = True
+        bindings.append(out_b)
+    out: dict[str, Any] = {
+        "id": drug["id"],
+        "name": drug["name"],
+        "categories": list(drug["categories"]),
+        "bindings": bindings,
+        "sources": [dict(STAHL_SOURCE)],
+        "focusable": len(bindings) > 0,
+    }
+    if drug.get("nbn"):
+        out["nbn"] = drug["nbn"]
+    if drug.get("description"):
+        out["description"] = drug["description"]
+    if drug.get("wikipedia"):
+        out["wikipedia"] = drug["wikipedia"]
+    return out
+
+
+def _load_drugs() -> list[dict[str, Any]]:
+    """Read the authored drug list from ``tools/drugs_data.json`` (if present).
+
+    The drug data is kept in a sibling JSON rather than inline in this module
+    because it is large and comes from extraction (Stahl's Prescriber's Guide);
+    keeping it separate keeps this generator readable. A missing file is not an
+    error (the drugs feature is simply empty), so the generator still runs on a
+    checkout without it.
+    """
+    path = Path(__file__).resolve().parent / "drugs_data.json"
+    if not path.exists():
+        log.warning("no %s; drugs.jsonl will be empty", path.name)
+        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError(f"{path.name} must be a JSON list of drug objects")
+    return data
+
+
 def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     """Expand the anatomy definition into the per-type record sets + shapes.
 
@@ -2418,6 +2791,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     projections: list[dict[str, Any]] = []
     circuits: list[dict[str, Any]] = []
     receptors: list[dict[str, Any]] = []
+    drugs: list[dict[str, Any]] = []
     shapes: dict[str, dict[str, Any]] = {}
 
     # Same-group blob neighbours for the inter-region jigsaw clipping. Only
@@ -2510,6 +2884,25 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         seen_receptor_ids.add(rec["id"])
         receptors.append(_receptor_record(rec, receptor_bases))
 
+    # Drugs: authored in tools/drugs_data.json, validated against the drug
+    # vocabularies + the merged target map (DRUG_TARGETS + receptor ids). Every
+    # DRUG_TARGETS region must be a known structure base (typo guard), like a
+    # receptor location. Duplicate drug ids fail the build.
+    for tid, spec in DRUG_TARGETS.items():
+        for base in spec["regions"]:
+            if base not in receptor_bases:
+                raise KeyError(
+                    f"DRUG_TARGETS[{tid!r}] region {base!r} is not a known "
+                    f"structure base")
+    drug_targets = _build_drug_targets(receptors)
+    valid_targets = set(drug_targets.keys())
+    seen_drug_ids: set[str] = set()
+    for drug in _load_drugs():
+        if drug["id"] in seen_drug_ids:
+            raise KeyError(f"Duplicate drug id {drug['id']!r}")
+        seen_drug_ids.add(drug["id"])
+        drugs.append(_drug_record(drug, valid_targets, receptor_bases))
+
     # Fail loudly if the data uses a kind or group with no entry in the maps above.
     kinds = {r["kind"] for r in projections}
     missing_kinds = kinds - PROJECTION_COLORS.keys()
@@ -2562,11 +2955,19 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             c: _t(label) for c, label in RECEPTOR_CLASS_LABELS.items()},
         "synaptic_labels": {
             s: _t(label) for s, label in SYNAPTIC_LABELS.items()},
+        # Drug legend + animation maps (already bilingual; see the drug schema
+        # block near the top). drug_targets merges DRUG_TARGETS with every
+        # receptor id so a binding can target either.
+        "drug_category_labels": DRUG_CATEGORY_LABELS,
+        "drug_targets": drug_targets,
+        "drug_actions": DRUG_ACTIONS,
+        "drug_effect_colors": DRUG_EFFECT_COLORS,
+        "drug_effect_labels": DRUG_EFFECT_LABELS,
     }
 
     return ({"meta": meta, "structures": structures,
              "projections": projections, "circuits": circuits,
-             "receptors": receptors}, shapes)
+             "receptors": receptors, "drugs": drugs}, shapes)
 
 
 def write_artifacts(root: Path) -> None:
@@ -2596,7 +2997,7 @@ def write_artifacts(root: Path) -> None:
         encoding="utf-8")
     log.info("wrote %s", meta_path)
 
-    for name in ("structures", "projections", "circuits", "receptors"):
+    for name in ("structures", "projections", "circuits", "receptors", "drugs"):
         path = data_dir / f"{name}.jsonl"
         with path.open("w", encoding="utf-8") as fh:
             for record in data[name]:

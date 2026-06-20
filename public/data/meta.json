@@ -161,5 +161,1570 @@
       "en": "Pre- and postsynaptic",
       "fr": "Pré- et postsynaptique"
     }
+  },
+  "drug_category_labels": {
+    "ssri": {
+      "en": "SSRI",
+      "fr": "ISRS"
+    },
+    "snri": {
+      "en": "SNRI",
+      "fr": "IRSN"
+    },
+    "tricyclic": {
+      "en": "Tricyclic / tetracyclic antidepressant",
+      "fr": "Antidépresseur tricyclique / tétracyclique"
+    },
+    "maoi": {
+      "en": "MAO inhibitor",
+      "fr": "Inhibiteur de la MAO"
+    },
+    "antidepressant_other": {
+      "en": "Other antidepressant",
+      "fr": "Autre antidépresseur"
+    },
+    "antipsychotic_atypical": {
+      "en": "Atypical antipsychotic",
+      "fr": "Antipsychotique atypique"
+    },
+    "antipsychotic_conventional": {
+      "en": "Conventional antipsychotic",
+      "fr": "Antipsychotique classique"
+    },
+    "anxiolytic": {
+      "en": "Anxiolytic",
+      "fr": "Anxiolytique"
+    },
+    "hypnotic": {
+      "en": "Hypnotic / sedative",
+      "fr": "Hypnotique / sédatif"
+    },
+    "benzodiazepine": {
+      "en": "Benzodiazepine",
+      "fr": "Benzodiazépine"
+    },
+    "mood_stabilizer": {
+      "en": "Mood stabilizer / anticonvulsant",
+      "fr": "Thymorégulateur / anticonvulsivant"
+    },
+    "stimulant": {
+      "en": "Stimulant / wake-promoting",
+      "fr": "Stimulant / éveillant"
+    },
+    "adhd_nonstimulant": {
+      "en": "ADHD non-stimulant",
+      "fr": "Non-stimulant (TDAH)"
+    },
+    "cognitive_enhancer": {
+      "en": "Cognitive enhancer",
+      "fr": "Activateur cognitif"
+    },
+    "substance_use": {
+      "en": "Substance-use treatment",
+      "fr": "Traitement des addictions"
+    },
+    "opioid": {
+      "en": "Opioid / opioid modulator",
+      "fr": "Opioïde / modulateur opioïde"
+    },
+    "other": {
+      "en": "Other",
+      "fr": "Autre"
+    }
+  },
+  "drug_targets": {
+    "sert": {
+      "name": {
+        "en": "Serotonin transporter (SERT)",
+        "fr": "Transporteur de la sérotonine (SERT)"
+      },
+      "system": "serotonergic",
+      "receptor": null,
+      "regions": [
+        "raphe",
+        "frontal",
+        "temporal",
+        "cingulate",
+        "hippocampus",
+        "amygdala",
+        "thalamus",
+        "hypothalamus",
+        "accumbens"
+      ]
+    },
+    "net": {
+      "name": {
+        "en": "Norepinephrine transporter (NET)",
+        "fr": "Transporteur de la noradrénaline (NET)"
+      },
+      "system": "adrenergic",
+      "receptor": null,
+      "regions": [
+        "locus_coeruleus",
+        "frontal",
+        "hippocampus",
+        "thalamus",
+        "hypothalamus",
+        "amygdala",
+        "cerebellum"
+      ]
+    },
+    "dat": {
+      "name": {
+        "en": "Dopamine transporter (DAT)",
+        "fr": "Transporteur de la dopamine (DAT)"
+      },
+      "system": "dopaminergic",
+      "receptor": null,
+      "regions": [
+        "vta",
+        "substantia_nigra",
+        "caudate",
+        "putamen",
+        "accumbens",
+        "frontal"
+      ]
+    },
+    "gat": {
+      "name": {
+        "en": "GABA transporter (GAT)",
+        "fr": "Transporteur du GABA (GAT)"
+      },
+      "system": "gabaergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "thalamus",
+        "hippocampus",
+        "cerebellum"
+      ]
+    },
+    "vmat2": {
+      "name": {
+        "en": "Vesicular monoamine transporter (VMAT2)",
+        "fr": "Transporteur vésiculaire des monoamines (VMAT2)"
+      },
+      "system": "dopaminergic",
+      "receptor": null,
+      "regions": [
+        "vta",
+        "substantia_nigra",
+        "raphe",
+        "locus_coeruleus",
+        "caudate",
+        "putamen"
+      ]
+    },
+    "mao_a": {
+      "name": {
+        "en": "Monoamine oxidase A (MAO-A)",
+        "fr": "Monoamine oxydase A (MAO-A)"
+      },
+      "system": "serotonergic",
+      "receptor": null,
+      "regions": [
+        "raphe",
+        "locus_coeruleus",
+        "vta",
+        "substantia_nigra",
+        "brainstem"
+      ]
+    },
+    "mao_b": {
+      "name": {
+        "en": "Monoamine oxidase B (MAO-B)",
+        "fr": "Monoamine oxydase B (MAO-B)"
+      },
+      "system": "dopaminergic",
+      "receptor": null,
+      "regions": [
+        "substantia_nigra",
+        "vta",
+        "raphe",
+        "brainstem"
+      ]
+    },
+    "ache": {
+      "name": {
+        "en": "Acetylcholinesterase",
+        "fr": "Acétylcholinestérase"
+      },
+      "system": "cholinergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "hippocampus",
+        "thalamus",
+        "septal_nuclei"
+      ]
+    },
+    "bche": {
+      "name": {
+        "en": "Butyrylcholinesterase",
+        "fr": "Butyrylcholinestérase"
+      },
+      "system": "cholinergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "hippocampus"
+      ]
+    },
+    "carbonic_anhydrase": {
+      "name": {
+        "en": "Carbonic anhydrase",
+        "fr": "Anhydrase carbonique"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": []
+    },
+    "pde5": {
+      "name": {
+        "en": "Phosphodiesterase 5 (PDE5)",
+        "fr": "Phosphodiestérase 5 (PDE5)"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": []
+    },
+    "nav": {
+      "name": {
+        "en": "Voltage-gated sodium channel",
+        "fr": "Canal sodique voltage-dépendant"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "thalamus"
+      ]
+    },
+    "cav": {
+      "name": {
+        "en": "Voltage-gated calcium channel",
+        "fr": "Canal calcique voltage-dépendant"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "thalamus",
+        "hippocampus"
+      ]
+    },
+    "cav_a2d": {
+      "name": {
+        "en": "Calcium channel α2δ subunit",
+        "fr": "Sous-unité α2δ du canal calcique"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "thalamus",
+        "hippocampus"
+      ]
+    },
+    "cav_t": {
+      "name": {
+        "en": "T-type calcium channel",
+        "fr": "Canal calcique de type T"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "thalamus",
+        "frontal",
+        "temporal"
+      ]
+    },
+    "sv2a": {
+      "name": {
+        "en": "Synaptic vesicle protein 2A (SV2A)",
+        "fr": "Protéine 2A des vésicules synaptiques (SV2A)"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "hippocampus",
+        "thalamus"
+      ]
+    },
+    "muscarinic": {
+      "name": {
+        "en": "Muscarinic receptors (M1–M5)",
+        "fr": "Récepteurs muscariniques (M1–M5)"
+      },
+      "system": "cholinergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "hippocampus",
+        "caudate",
+        "putamen",
+        "thalamus",
+        "hypothalamus"
+      ]
+    },
+    "nicotinic": {
+      "name": {
+        "en": "Nicotinic receptors",
+        "fr": "Récepteurs nicotiniques"
+      },
+      "system": "cholinergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "hippocampus",
+        "thalamus",
+        "vta"
+      ]
+    },
+    "alpha1": {
+      "name": {
+        "en": "α1 adrenergic receptors",
+        "fr": "Récepteurs α1 adrénergiques"
+      },
+      "system": "adrenergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "thalamus",
+        "brainstem"
+      ]
+    },
+    "alpha2": {
+      "name": {
+        "en": "α2 adrenergic receptors",
+        "fr": "Récepteurs α2 adrénergiques"
+      },
+      "system": "adrenergic",
+      "receptor": null,
+      "regions": [
+        "locus_coeruleus",
+        "frontal",
+        "hippocampus",
+        "thalamus",
+        "hypothalamus",
+        "brainstem"
+      ]
+    },
+    "beta": {
+      "name": {
+        "en": "β adrenergic receptors",
+        "fr": "Récepteurs β adrénergiques"
+      },
+      "system": "adrenergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "parietal",
+        "cingulate",
+        "accumbens",
+        "cerebellum"
+      ]
+    },
+    "glutamate": {
+      "name": {
+        "en": "Glutamate receptors",
+        "fr": "Récepteurs du glutamate"
+      },
+      "system": "glutamatergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "hippocampus",
+        "thalamus",
+        "cerebellum",
+        "caudate",
+        "putamen"
+      ]
+    },
+    "melatonin": {
+      "name": {
+        "en": "Melatonin receptors (MT1/MT2)",
+        "fr": "Récepteurs de la mélatonine (MT1/MT2)"
+      },
+      "system": "melatonergic",
+      "receptor": null,
+      "regions": [
+        "hypothalamus",
+        "thalamus"
+      ]
+    },
+    "orexin": {
+      "name": {
+        "en": "Orexin receptors (OX1R/OX2R)",
+        "fr": "Récepteurs de l'orexine (OX1R/OX2R)"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "hypothalamus",
+        "locus_coeruleus",
+        "raphe",
+        "vta",
+        "thalamus"
+      ]
+    },
+    "melanocortin": {
+      "name": {
+        "en": "Melanocortin receptors",
+        "fr": "Récepteurs de la mélanocortine"
+      },
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "hypothalamus"
+      ]
+    },
+    "alpha1a": {
+      "name": {
+        "en": "α1A",
+        "fr": "α1A"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha1a",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "cerebellum",
+        "brainstem",
+        "thalamus",
+        "hypothalamus"
+      ],
+      "ubiquitous": false
+    },
+    "alpha1b": {
+      "name": {
+        "en": "α1B",
+        "fr": "α1B"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha1b",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "cerebellum",
+        "brainstem",
+        "thalamus"
+      ],
+      "ubiquitous": false
+    },
+    "alpha1c": {
+      "name": {
+        "en": "α1C",
+        "fr": "α1C"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha1c",
+      "regions": [],
+      "ubiquitous": false
+    },
+    "alpha1d": {
+      "name": {
+        "en": "α1D",
+        "fr": "α1D"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha1d",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "cerebellum",
+        "brainstem",
+        "thalamus"
+      ],
+      "ubiquitous": false
+    },
+    "alpha2a": {
+      "name": {
+        "en": "α2A",
+        "fr": "α2A"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha2a",
+      "regions": [
+        "locus_coeruleus",
+        "brainstem",
+        "hypothalamus",
+        "hippocampus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "cerebellum"
+      ],
+      "ubiquitous": false
+    },
+    "alpha2b": {
+      "name": {
+        "en": "α2B",
+        "fr": "α2B"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha2b",
+      "regions": [
+        "thalamus",
+        "hippocampus",
+        "cerebellum"
+      ],
+      "ubiquitous": false
+    },
+    "alpha2c": {
+      "name": {
+        "en": "α2C",
+        "fr": "α2C"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha2c",
+      "regions": [
+        "thalamus",
+        "amygdala",
+        "hippocampus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "caudate",
+        "putamen",
+        "globus_pallidus",
+        "substantia_nigra",
+        "vta",
+        "brainstem"
+      ],
+      "ubiquitous": false
+    },
+    "alpha2d": {
+      "name": {
+        "en": "α2D",
+        "fr": "α2D"
+      },
+      "system": "adrenergic",
+      "receptor": "alpha2d",
+      "regions": [],
+      "ubiquitous": false
+    },
+    "beta1": {
+      "name": {
+        "en": "β1",
+        "fr": "β1"
+      },
+      "system": "adrenergic",
+      "receptor": "beta1",
+      "regions": [
+        "frontal",
+        "parietal",
+        "cingulate",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "beta2": {
+      "name": {
+        "en": "β2",
+        "fr": "β2"
+      },
+      "system": "adrenergic",
+      "receptor": "beta2",
+      "regions": [
+        "cerebellum",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus"
+      ],
+      "ubiquitous": false
+    },
+    "beta3": {
+      "name": {
+        "en": "β3",
+        "fr": "β3"
+      },
+      "system": "adrenergic",
+      "receptor": "beta3",
+      "regions": [],
+      "ubiquitous": false
+    },
+    "m1": {
+      "name": {
+        "en": "M1",
+        "fr": "M1"
+      },
+      "system": "cholinergic",
+      "receptor": "m1",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "cingulate",
+        "hippocampus",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "m2": {
+      "name": {
+        "en": "M2",
+        "fr": "M2"
+      },
+      "system": "cholinergic",
+      "receptor": "m2",
+      "regions": [
+        "olfactory_bulb",
+        "brainstem",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus"
+      ],
+      "ubiquitous": false
+    },
+    "m3": {
+      "name": {
+        "en": "M3",
+        "fr": "M3"
+      },
+      "system": "cholinergic",
+      "receptor": "m3",
+      "regions": [
+        "hypothalamus",
+        "brainstem",
+        "thalamus",
+        "frontal",
+        "temporal",
+        "occipital"
+      ],
+      "ubiquitous": false
+    },
+    "m4": {
+      "name": {
+        "en": "M4",
+        "fr": "M4"
+      },
+      "system": "cholinergic",
+      "receptor": "m4",
+      "regions": [
+        "caudate",
+        "putamen",
+        "accumbens",
+        "frontal",
+        "cingulate"
+      ],
+      "ubiquitous": false
+    },
+    "m5": {
+      "name": {
+        "en": "M5",
+        "fr": "M5"
+      },
+      "system": "cholinergic",
+      "receptor": "m5",
+      "regions": [
+        "substantia_nigra",
+        "vta",
+        "hypothalamus",
+        "frontal",
+        "amygdala",
+        "hippocampus",
+        "mammillary"
+      ],
+      "ubiquitous": false
+    },
+    "nachr_muscle": {
+      "name": {
+        "en": "Muscle nAChR",
+        "fr": "Muscle nAChR"
+      },
+      "system": "cholinergic",
+      "receptor": "nachr_muscle",
+      "regions": [],
+      "ubiquitous": false
+    },
+    "nachr_a4b2": {
+      "name": {
+        "en": "Neuronal α4β2 nAChR",
+        "fr": "Neuronal α4β2 nAChR"
+      },
+      "system": "cholinergic",
+      "receptor": "nachr_a4b2",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "thalamus",
+        "vta",
+        "substantia_nigra",
+        "accumbens",
+        "caudate",
+        "putamen"
+      ],
+      "ubiquitous": false
+    },
+    "nachr_a7": {
+      "name": {
+        "en": "Neuronal α7 nAChR",
+        "fr": "Neuronal α7 nAChR"
+      },
+      "system": "cholinergic",
+      "receptor": "nachr_a7",
+      "regions": [
+        "hippocampus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "thalamus",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "d1": {
+      "name": {
+        "en": "D1",
+        "fr": "D1"
+      },
+      "system": "dopaminergic",
+      "receptor": "d1",
+      "regions": [
+        "caudate",
+        "putamen",
+        "accumbens",
+        "olfactory_bulb",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "amygdala",
+        "septal_nuclei",
+        "thalamus",
+        "hypothalamus",
+        "cingulate"
+      ],
+      "ubiquitous": false
+    },
+    "d2": {
+      "name": {
+        "en": "D2",
+        "fr": "D2"
+      },
+      "system": "dopaminergic",
+      "receptor": "d2",
+      "regions": [
+        "putamen",
+        "caudate",
+        "accumbens",
+        "olfactory_bulb",
+        "substantia_nigra",
+        "vta",
+        "pituitary",
+        "frontal"
+      ],
+      "ubiquitous": false
+    },
+    "d3": {
+      "name": {
+        "en": "D3",
+        "fr": "D3"
+      },
+      "system": "dopaminergic",
+      "receptor": "d3",
+      "regions": [
+        "accumbens",
+        "olfactory_bulb",
+        "putamen",
+        "caudate",
+        "frontal",
+        "hypothalamus",
+        "hippocampus"
+      ],
+      "ubiquitous": false
+    },
+    "d4": {
+      "name": {
+        "en": "D4",
+        "fr": "D4"
+      },
+      "system": "dopaminergic",
+      "receptor": "d4",
+      "regions": [
+        "frontal",
+        "amygdala",
+        "hypothalamus",
+        "hippocampus",
+        "occipital",
+        "cerebellum"
+      ],
+      "ubiquitous": false
+    },
+    "d5": {
+      "name": {
+        "en": "D5",
+        "fr": "D5"
+      },
+      "system": "dopaminergic",
+      "receptor": "d5",
+      "regions": [
+        "amygdala",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "caudate",
+        "putamen",
+        "thalamus",
+        "hypothalamus",
+        "septal_nuclei",
+        "cerebellum",
+        "brainstem"
+      ],
+      "ubiquitous": false
+    },
+    "gaba_a": {
+      "name": {
+        "en": "GABA-A",
+        "fr": "GABA-A"
+      },
+      "system": "gabaergic",
+      "receptor": "gaba_a",
+      "regions": [],
+      "ubiquitous": true
+    },
+    "gaba_b": {
+      "name": {
+        "en": "GABA-B",
+        "fr": "GABA-B"
+      },
+      "system": "gabaergic",
+      "receptor": "gaba_b",
+      "regions": [],
+      "ubiquitous": true
+    },
+    "gaba_a_rho": {
+      "name": {
+        "en": "GABA-A-ρ",
+        "fr": "GABA-A-ρ"
+      },
+      "system": "gabaergic",
+      "receptor": "gaba_a_rho",
+      "regions": [],
+      "ubiquitous": false
+    },
+    "nmda": {
+      "name": {
+        "en": "NMDA",
+        "fr": "NMDA"
+      },
+      "system": "glutamatergic",
+      "receptor": "nmda",
+      "regions": [],
+      "ubiquitous": true
+    },
+    "ampa": {
+      "name": {
+        "en": "AMPA",
+        "fr": "AMPA"
+      },
+      "system": "glutamatergic",
+      "receptor": "ampa",
+      "regions": [],
+      "ubiquitous": true
+    },
+    "kainate": {
+      "name": {
+        "en": "Kainate",
+        "fr": "Kainate"
+      },
+      "system": "glutamatergic",
+      "receptor": "kainate",
+      "regions": [
+        "hippocampus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "amygdala",
+        "cerebellum"
+      ],
+      "ubiquitous": false
+    },
+    "mglur1": {
+      "name": {
+        "en": "mGluR1",
+        "fr": "mGluR1"
+      },
+      "system": "glutamatergic",
+      "receptor": "mglur1",
+      "regions": [
+        "cerebellum",
+        "hippocampus",
+        "thalamus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital"
+      ],
+      "ubiquitous": false
+    },
+    "mglur2": {
+      "name": {
+        "en": "mGluR2",
+        "fr": "mGluR2"
+      },
+      "system": "glutamatergic",
+      "receptor": "mglur2",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "mglur3": {
+      "name": {
+        "en": "mGluR3",
+        "fr": "mGluR3"
+      },
+      "system": "glutamatergic",
+      "receptor": "mglur3",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "thalamus"
+      ],
+      "ubiquitous": false
+    },
+    "mglur4": {
+      "name": {
+        "en": "mGluR4",
+        "fr": "mGluR4"
+      },
+      "system": "glutamatergic",
+      "receptor": "mglur4",
+      "regions": [
+        "cerebellum",
+        "thalamus",
+        "hypothalamus",
+        "caudate",
+        "putamen"
+      ],
+      "ubiquitous": false
+    },
+    "mglur5": {
+      "name": {
+        "en": "mGluR5",
+        "fr": "mGluR5"
+      },
+      "system": "glutamatergic",
+      "receptor": "mglur5",
+      "regions": [
+        "caudate",
+        "putamen",
+        "accumbens",
+        "hippocampus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "mglur6": {
+      "name": {
+        "en": "mGluR6",
+        "fr": "mGluR6"
+      },
+      "system": "glutamatergic",
+      "receptor": "mglur6",
+      "regions": [],
+      "ubiquitous": false
+    },
+    "mglur7": {
+      "name": {
+        "en": "mGluR7",
+        "fr": "mGluR7"
+      },
+      "system": "glutamatergic",
+      "receptor": "mglur7",
+      "regions": [],
+      "ubiquitous": true
+    },
+    "glycine": {
+      "name": {
+        "en": "Glycine",
+        "fr": "Glycine"
+      },
+      "system": "glycinergic",
+      "receptor": "glycine",
+      "regions": [
+        "brainstem",
+        "cerebellum",
+        "hippocampus"
+      ],
+      "ubiquitous": false
+    },
+    "h1": {
+      "name": {
+        "en": "H1",
+        "fr": "H1"
+      },
+      "system": "histaminergic",
+      "receptor": "h1",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "cingulate",
+        "amygdala",
+        "hippocampus",
+        "thalamus",
+        "hypothalamus",
+        "brainstem"
+      ],
+      "ubiquitous": false
+    },
+    "h2": {
+      "name": {
+        "en": "H2",
+        "fr": "H2"
+      },
+      "system": "histaminergic",
+      "receptor": "h2",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "caudate",
+        "putamen",
+        "hippocampus",
+        "cerebellum"
+      ],
+      "ubiquitous": false
+    },
+    "h3": {
+      "name": {
+        "en": "H3",
+        "fr": "H3"
+      },
+      "system": "histaminergic",
+      "receptor": "h3",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "cingulate",
+        "caudate",
+        "putamen",
+        "accumbens",
+        "hippocampus",
+        "hypothalamus",
+        "olfactory_bulb"
+      ],
+      "ubiquitous": false
+    },
+    "h4": {
+      "name": {
+        "en": "H4",
+        "fr": "H4"
+      },
+      "system": "histaminergic",
+      "receptor": "h4",
+      "regions": [],
+      "ubiquitous": false
+    },
+    "mu": {
+      "name": {
+        "en": "μ (MOR)",
+        "fr": "μ (MOR)"
+      },
+      "system": "opioidergic",
+      "receptor": "mu",
+      "regions": [
+        "brainstem",
+        "thalamus",
+        "caudate",
+        "putamen",
+        "accumbens",
+        "amygdala",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "vta",
+        "hypothalamus",
+        "hippocampus"
+      ],
+      "ubiquitous": false
+    },
+    "delta": {
+      "name": {
+        "en": "δ (DOR)",
+        "fr": "δ (DOR)"
+      },
+      "system": "opioidergic",
+      "receptor": "delta",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "caudate",
+        "putamen",
+        "accumbens",
+        "amygdala",
+        "olfactory_bulb",
+        "hippocampus"
+      ],
+      "ubiquitous": false
+    },
+    "kappa": {
+      "name": {
+        "en": "κ (KOR)",
+        "fr": "κ (KOR)"
+      },
+      "system": "opioidergic",
+      "receptor": "kappa",
+      "regions": [
+        "caudate",
+        "putamen",
+        "accumbens",
+        "claustrum",
+        "hypothalamus",
+        "brainstem",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "5ht1a": {
+      "name": {
+        "en": "5-HT1A",
+        "fr": "5-HT1A"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht1a",
+      "regions": [
+        "raphe",
+        "hippocampus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "amygdala",
+        "septal_nuclei"
+      ],
+      "ubiquitous": false
+    },
+    "5ht1b": {
+      "name": {
+        "en": "5-HT1B",
+        "fr": "5-HT1B"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht1b",
+      "regions": [
+        "caudate",
+        "putamen",
+        "globus_pallidus",
+        "substantia_nigra",
+        "frontal",
+        "hippocampus"
+      ],
+      "ubiquitous": false
+    },
+    "5ht1d": {
+      "name": {
+        "en": "5-HT1D",
+        "fr": "5-HT1D"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht1d",
+      "regions": [
+        "globus_pallidus",
+        "substantia_nigra",
+        "caudate",
+        "putamen",
+        "hippocampus",
+        "frontal",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "5ht1e": {
+      "name": {
+        "en": "5-HT1E",
+        "fr": "5-HT1E"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht1e",
+      "regions": [
+        "frontal",
+        "hippocampus",
+        "olfactory_bulb",
+        "cingulate",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "5ht1f": {
+      "name": {
+        "en": "5-HT1F",
+        "fr": "5-HT1F"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht1f",
+      "regions": [
+        "frontal",
+        "occipital",
+        "thalamus",
+        "subthalamic_nucleus"
+      ],
+      "ubiquitous": false
+    },
+    "5ht2a": {
+      "name": {
+        "en": "5-HT2A",
+        "fr": "5-HT2A"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht2a",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "claustrum"
+      ],
+      "ubiquitous": false
+    },
+    "5ht2b": {
+      "name": {
+        "en": "5-HT2B",
+        "fr": "5-HT2B"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht2b",
+      "regions": [
+        "hypothalamus",
+        "frontal",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "5ht2c": {
+      "name": {
+        "en": "5-HT2C",
+        "fr": "5-HT2C"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht2c",
+      "regions": [
+        "frontal",
+        "hippocampus",
+        "amygdala",
+        "hypothalamus",
+        "substantia_nigra",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "5ht3": {
+      "name": {
+        "en": "5-HT3",
+        "fr": "5-HT3"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht3",
+      "regions": [
+        "brainstem",
+        "hippocampus",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "5ht4": {
+      "name": {
+        "en": "5-HT4",
+        "fr": "5-HT4"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht4",
+      "regions": [
+        "hippocampus",
+        "caudate",
+        "putamen",
+        "frontal",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "5ht5a": {
+      "name": {
+        "en": "5-HT5A",
+        "fr": "5-HT5A"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht5a",
+      "regions": [
+        "frontal",
+        "cingulate",
+        "cerebellum",
+        "hippocampus",
+        "hypothalamus",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "5ht6": {
+      "name": {
+        "en": "5-HT6",
+        "fr": "5-HT6"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht6",
+      "regions": [
+        "caudate",
+        "putamen",
+        "frontal",
+        "hippocampus",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "5ht7": {
+      "name": {
+        "en": "5-HT7",
+        "fr": "5-HT7"
+      },
+      "system": "serotonergic",
+      "receptor": "5ht7",
+      "regions": [
+        "thalamus",
+        "hypothalamus",
+        "hippocampus",
+        "frontal",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "cb1": {
+      "name": {
+        "en": "CB1",
+        "fr": "CB1"
+      },
+      "system": "cannabinoid",
+      "receptor": "cb1",
+      "regions": [
+        "substantia_nigra",
+        "globus_pallidus",
+        "caudate",
+        "putamen",
+        "hippocampus",
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "cerebellum",
+        "amygdala"
+      ],
+      "ubiquitous": false
+    },
+    "a2a": {
+      "name": {
+        "en": "A2A",
+        "fr": "A2A"
+      },
+      "system": "purinergic",
+      "receptor": "a2a",
+      "regions": [
+        "caudate",
+        "putamen",
+        "accumbens"
+      ],
+      "ubiquitous": false
+    },
+    "sigma1": {
+      "name": {
+        "en": "σ1",
+        "fr": "σ1"
+      },
+      "system": "sigma",
+      "receptor": "sigma1",
+      "regions": [
+        "frontal",
+        "parietal",
+        "temporal",
+        "occipital",
+        "hippocampus",
+        "brainstem",
+        "cerebellum"
+      ],
+      "ubiquitous": false
+    },
+    "mt1": {
+      "name": {
+        "en": "MT1",
+        "fr": "MT1"
+      },
+      "system": "melatonergic",
+      "receptor": "mt1",
+      "regions": [
+        "hypothalamus",
+        "pituitary"
+      ],
+      "ubiquitous": false
+    },
+    "mt2": {
+      "name": {
+        "en": "MT2",
+        "fr": "MT2"
+      },
+      "system": "melatonergic",
+      "receptor": "mt2",
+      "regions": [
+        "hypothalamus"
+      ],
+      "ubiquitous": false
+    }
+  },
+  "drug_actions": {
+    "agonist": {
+      "label": {
+        "en": "Agonist",
+        "fr": "Agoniste"
+      },
+      "effect": "boost"
+    },
+    "partial_agonist": {
+      "label": {
+        "en": "Partial agonist",
+        "fr": "Agoniste partiel"
+      },
+      "effect": "modulate"
+    },
+    "antagonist": {
+      "label": {
+        "en": "Antagonist",
+        "fr": "Antagoniste"
+      },
+      "effect": "block"
+    },
+    "inverse_agonist": {
+      "label": {
+        "en": "Inverse agonist",
+        "fr": "Agoniste inverse"
+      },
+      "effect": "block"
+    },
+    "reuptake_inhibitor": {
+      "label": {
+        "en": "Reuptake inhibitor",
+        "fr": "Inhibiteur de la recapture"
+      },
+      "effect": "boost"
+    },
+    "releaser": {
+      "label": {
+        "en": "Releaser",
+        "fr": "Libérateur"
+      },
+      "effect": "boost"
+    },
+    "enzyme_inhibitor": {
+      "label": {
+        "en": "Enzyme inhibitor",
+        "fr": "Inhibiteur enzymatique"
+      },
+      "effect": "boost"
+    },
+    "pam": {
+      "label": {
+        "en": "Positive allosteric modulator",
+        "fr": "Modulateur allostérique positif"
+      },
+      "effect": "boost"
+    },
+    "nam": {
+      "label": {
+        "en": "Negative allosteric modulator",
+        "fr": "Modulateur allostérique négatif"
+      },
+      "effect": "block"
+    },
+    "blocker": {
+      "label": {
+        "en": "Channel blocker",
+        "fr": "Bloqueur de canal"
+      },
+      "effect": "block"
+    },
+    "modulator": {
+      "label": {
+        "en": "Modulator",
+        "fr": "Modulateur"
+      },
+      "effect": "modulate"
+    }
+  },
+  "drug_effect_colors": {
+    "boost": "#34d399",
+    "block": "#fb7185",
+    "modulate": "#c084fc"
+  },
+  "drug_effect_labels": {
+    "boost": {
+      "en": "Enhances",
+      "fr": "Renforce"
+    },
+    "block": {
+      "en": "Blocks",
+      "fr": "Bloque"
+    },
+    "modulate": {
+      "en": "Modulates",
+      "fr": "Module"
+    }
   }
 }
