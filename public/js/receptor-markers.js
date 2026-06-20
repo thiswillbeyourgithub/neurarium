@@ -148,6 +148,55 @@ function sampleSurface(geometry, n) {
   return out;
 }
 
+// World-unit base size of a gem dot, exported so other animations (the per-drug
+// effect dots, js/drug-anim.js) can pulse it around this value.
+export const GEM_DOT_SIZE = DOT_SIZE;
+
+/**
+ * Build one glowing "gem" dot cloud over a structure mesh's surface, in `color`,
+ * and parent it to that mesh (so it inherits the mesh's explode/mirror transform
+ * and vanishes when the mesh is hidden). Shared by the receptor markers and the
+ * per-drug effect animation so the gem look lives in one place. Returns the
+ * created `{ points, material }` (the caller owns disposal), or null if the mesh
+ * has no usable geometry.
+ * @param {THREE.Mesh} mesh
+ * @param {string} color hex colour string
+ * @returns {{points: THREE.Points, material: THREE.PointsMaterial}|null}
+ */
+export function buildGemCloud(mesh, color) {
+  if (!mesh.geometry) return null;
+  const positions = sampleSurface(mesh.geometry, dotCountFor(mesh.geometry));
+  if (positions.length === 0) return null;
+  const tint = new THREE.Color(color).lerp(WHITE, 0.35);
+  const geom = new THREE.BufferGeometry();
+  geom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  // Per-dot brightness variation (baked into a vertex-colour attribute) so the
+  // gems glint at different strengths instead of a flat uniform field.
+  const count = positions.length / 3;
+  const colors = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const b = BRIGHT_MIN + Math.random() * (BRIGHT_MAX - BRIGHT_MIN);
+    colors[i * 3] = tint.r * b;
+    colors[i * 3 + 1] = tint.g * b;
+    colors[i * 3 + 2] = tint.b * b;
+  }
+  geom.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  const material = new THREE.PointsMaterial({
+    vertexColors: true,
+    size: DOT_SIZE,
+    map: dotSprite(),
+    transparent: true,
+    opacity: PULSE_MAX,
+    depthWrite: false, // a glow must not occlude what's behind it
+    blending: THREE.AdditiveBlending,
+    sizeAttenuation: true,
+  });
+  const points = new THREE.Points(geom, material);
+  points.raycast = () => {}; // pure decoration, never pickable
+  mesh.add(points);
+  return { points, material };
+}
+
 /**
  * Build the receptor-marker controller. One per scene, ticked once per frame in
  * the render loop. Driven by js/main.js: `show(meshes, color)` from a receptor
@@ -178,41 +227,12 @@ export function createReceptorMarkers({ scene }) {
      */
     show(structureMeshes, color) {
       clear();
-      const tint = new THREE.Color(color).lerp(WHITE, 0.35);
-      const sprite = dotSprite();
       for (const mesh of structureMeshes) {
-        if (!mesh.geometry) continue;
-        const positions = sampleSurface(mesh.geometry, dotCountFor(mesh.geometry));
-        if (positions.length === 0) continue;
-        const geom = new THREE.BufferGeometry();
-        geom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-        // Per-dot brightness variation (baked into a vertex-colour attribute) so
-        // the gems glint at different strengths instead of a flat uniform field.
-        const count = positions.length / 3;
-        const colors = new Float32Array(count * 3);
-        for (let i = 0; i < count; i++) {
-          const b = BRIGHT_MIN + Math.random() * (BRIGHT_MAX - BRIGHT_MIN);
-          colors[i * 3] = tint.r * b;
-          colors[i * 3 + 1] = tint.g * b;
-          colors[i * 3 + 2] = tint.b * b;
-        }
-        geom.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-        const material = new THREE.PointsMaterial({
-          vertexColors: true,
-          size: DOT_SIZE,
-          map: sprite,
-          transparent: true,
-          opacity: PULSE_MAX,
-          depthWrite: false, // a glow must not occlude what's behind it
-          blending: THREE.AdditiveBlending,
-          sizeAttenuation: true,
-        });
-        const points = new THREE.Points(geom, material);
-        points.raycast = () => {}; // pure decoration, never pickable
-        // Parent to the structure so the dots inherit its transform (and vanish
-        // when it is hidden), like the halo/flash shells.
-        mesh.add(points);
-        clouds.push({ points, material });
+        // buildGemCloud parents the dots to the structure so they inherit its
+        // transform (and vanish when it is hidden), like the halo/flash shells.
+        const cloud = buildGemCloud(mesh, color);
+        if (!cloud) continue;
+        clouds.push(cloud);
         litMeshes.add(mesh);
       }
     },
