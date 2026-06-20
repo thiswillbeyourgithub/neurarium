@@ -1211,8 +1211,10 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const narrow = window.matchMedia("(max-width: 700px)");
   const updatePanelPan = () => {
     const open = controlsToggle.getAttribute("aria-expanded") === "true";
-    // offsetParent is null when the panel is display:none (e.g. ?ui=0 shots).
-    const visible = controlsPanel.offsetParent !== null;
+    // `offsetHeight` is 0 only when the panel is display:none (the ?ui=0 shots);
+    // it stays correct for a position:fixed element, unlike `offsetParent`
+    // (which is always null for fixed, so it can't be used as a visibility test).
+    const visible = controlsPanel.offsetHeight > 0;
     if (!open || !visible) {
       focus.setScreenOffset(0, 0);
     } else if (portrait.matches) {
