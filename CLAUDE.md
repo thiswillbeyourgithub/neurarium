@@ -101,7 +101,7 @@ shapes/<name>.json    One geometry file per distinct *form* (independent of
                       aren't a single lump (the cerebellum = 2 hemispheres +
                       vermis).
 index.html            Page shell: loads three.js (vendored, via import map) and,
-                      in debug only, eruda; holds
+                      on ?debug=1 only, the vendored eruda console; holds
                       the single bottom-left collapsible "Neurarium" panel
                       (reset/search buttons, the two sliders, auto-rotate, the
                       nested JS-populated legend whose first rows are "show all
@@ -276,13 +276,19 @@ JS, it is almost always a stale cached module: hard-reload (Ctrl/Cmd+Shift+R) or
 switch to `tools/serve.py`.
 
 Debugging: [eruda](https://github.com/liriliri/eruda) provides an on-screen
-console (a floating button, bottom-right) usable on desktop and mobile. It is
-**gated**: it loads only when `DEV=1` (from `app-config.js`) or the URL carries
-`?debug`, so normal production visitors never download or expose it. Append
-`?debug` to any URL (e.g. `http://localhost:8000/?debug`) to turn it on in dev.
-A small inline gate in `index.html` injects the eruda script when either
-condition holds; otherwise the page ships no debug console (runtime errors still
-surface to everyone via the red error banners, see "Error banners").
+console (a floating button, pinned **top-right** so the bottom-left panel doesn't
+cover it) usable on desktop and mobile. It is **gated**: it loads only when the
+URL carries **`?debug=1`** (exactly), so normal production visitors never download
+or expose it. Append `?debug=1` to any URL (e.g.
+`http://localhost:8000/?debug=1`) to turn it on. A small inline gate in
+`index.html` injects the eruda script only on that flag and then pins the entry
+button top-right (re-pinning on resize, since eruda resets it otherwise);
+otherwise the page ships no debug console (runtime errors still surface to
+everyone via the red error banners, see "Error banners"). eruda is **vendored
+same-origin** under `public/vendor/eruda/eruda.js` (so the page pulls no
+third-party script; the CSP needs no CDN allowance, only `font-src ... data:` for
+eruda's embedded icon font, see "Content-Security-Policy"). Bump that vendored
+copy as a unit to upgrade.
 
 ### Screenshots & deep-link view params
 
@@ -468,12 +474,14 @@ skips the check.
 Caddy sends a `Content-Security-Policy` (plus `X-Content-Type-Options`,
 `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`) on every response
 (`docker/Caddyfile`). The policy is `default-src 'self'` with `object-src`,
-`base-uri`, `frame-ancestors` and `form-action` locked down; the only
-third-party origins it allows are:
+`base-uri`, `frame-ancestors` and `form-action` locked down. Both three.js and
+the gated eruda debug console are vendored same-origin (`public/vendor/three`,
+`public/vendor/eruda`), so the page pulls **no third-party script** and
+`script-src` needs no CDN allowance. The only relaxations are:
 
-- `https://cdn.jsdelivr.net` in `script-src`, for the **gated eruda** debug
-  console (loaded only on `DEV=1` / `?debug`; see Debugging). Normal visitors
-  never fetch it, but the policy is uniform so the origin is allowed.
+- `font-src 'self' data:`: eruda embeds its icon font as a `data:` URI, so
+  without `data:` the debug console's icons render as tofu/X. (`img-src` already
+  allows `data:`.)
 - the **umami origin** in `script-src` + `connect-src`, when analytics is
   configured. `docker/entrypoint.sh` derives `ANALYTICS_ORIGIN`
   (`scheme://host[:port]`) from `ANALYTICS_URL` and the Caddyfile interpolates it
@@ -482,8 +490,7 @@ third-party origins it allows are:
 `script-src`/`style-src` include `'unsafe-inline'` because this is a no-build
 site with an inline `<script type="importmap">`, the inline eruda gate, and an
 inline `<style>` block, and there is no bundler to hash/nonce them. That is the
-one looseness; it could be tightened to hashes later. three.js is vendored
-same-origin (see `public/vendor/three`), so it needs no CDN allowance. The CSP is
+one looseness; it could be tightened to hashes later. The CSP is
 only emitted by Caddy in the container, not by `tools/serve.py` in dev.
 
 > [!IMPORTANT]

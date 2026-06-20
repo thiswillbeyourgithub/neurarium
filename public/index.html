@@ -24,18 +24,30 @@
          js/dev-banner.js (WIP banner). -->
     <script src="version.js"></script>
 
-    <!-- eruda on-screen debug console (desktop + mobile). Loaded ONLY in dev
-         (DEV=1 from app-config.js) or when the URL carries ?debug, so normal
-         production visitors never download or expose a debug console; runtime
-         errors still surface to everyone via the red error banners
-         (js/error-banner.js). Reads DEV, so it must run after app-config.js. -->
+    <!-- eruda on-screen debug console (desktop + mobile). Loaded ONLY when the
+         URL carries ?debug=1, so normal production visitors never download or
+         expose a debug console; runtime errors still surface to everyone via the
+         red error banners (js/error-banner.js). eruda is vendored same-origin
+         (public/vendor/eruda, see CSP) so the page pulls no third-party script.
+         The entry button is pinned to the top-right corner (the panel covers the
+         bottom on a phone), and re-pinned on resize because eruda's own resize
+         handler resets it to the default bottom-right. -->
     <script>
       (function () {
-        var cfg = window.__APP_CONFIG__ || {};
-        if (cfg.dev !== "1" && !/[?&]debug(=|&|$)/.test(location.search)) return;
+        if (new URLSearchParams(location.search).get("debug") !== "1") return;
         var s = document.createElement("script");
-        s.src = "https://cdn.jsdelivr.net/npm/eruda";
-        s.onload = function () { if (window.eruda) window.eruda.init(); };
+        s.src = "vendor/eruda/eruda.js";
+        s.onload = function () {
+          if (!window.eruda) return;
+          window.eruda.init();
+          var topRight = function () {
+            // eruda reverts to the default bottom-right if x is out of range, so
+            // keep it a button-width in from the right edge.
+            window.eruda.position({ x: window.innerWidth - 50, y: 10 });
+          };
+          topRight();
+          window.addEventListener("resize", topRight);
+        };
         document.head.appendChild(s);
       })();
     </script>

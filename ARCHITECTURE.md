@@ -126,7 +126,7 @@ could be reused headless.
    umami tag if configured), `version.js` (sets `window.__APP_VERSION__`), then
    `error-banner.js` and `dev-banner.js` (install the `#banners` machinery before
    anything that might fail).
-2. A small inline gate injects the eruda debug console only on `DEV=1` or `?debug`.
+2. A small inline gate injects the vendored eruda debug console only on `?debug=1`.
 3. The import map points `three` / `three/addons/` at the vendored copy.
 4. `js/main.js` (module) runs: sets up scene/camera/renderer/lights/OrbitControls,
    then `await loadBrainData()`.
