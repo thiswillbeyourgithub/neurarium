@@ -132,12 +132,14 @@
          covers Chromium/WebKit. */
       #controls,
       #legend-body,
+      #receptors-body,
       #search-results,
       #info-panel {
         scrollbar-width: none;
       }
       #controls::-webkit-scrollbar,
       #legend-body::-webkit-scrollbar,
+      #receptors-body::-webkit-scrollbar,
       #search-results::-webkit-scrollbar,
       #info-panel::-webkit-scrollbar {
         width: 0;
@@ -310,11 +312,13 @@
       /* Legend nested inside the control panel, set off by a hairline. Its
          header has no side padding (the panel body already provides it). */
       #legend,
+      #receptors,
       #about {
         margin-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
       #legend .collapse-header,
+      #receptors .collapse-header,
       #about .collapse-header { padding: 10px 0 4px; }
       /* About blurb: muted body text with readable links. */
       #about-body { padding: 2px 0 6px; }
@@ -325,10 +329,17 @@
         color: var(--muted);
       }
       .about-text a { color: #8fb6e6; text-decoration: underline; }
-      #legend-body {
+      #legend-body,
+      #receptors-body {
         max-height: 42vh;
         overflow-y: auto;
       }
+      /* Receptor rows reuse the .legend-item styling; the family headings reuse
+         the legend h2 look (added to those rules below). A "stub" receptor (no
+         CNS role) renders muted + non-clickable. */
+      #receptors-body { padding: 4px 0 8px; }
+      .legend-item.muted { opacity: 0.4; cursor: default; }
+      .legend-item.muted:hover { color: inherit; }
       /* Legend action buttons (show-all-names, hide-projections) stack at the
          top, spaced off the generated category rows below them. */
       #legend-actions {
@@ -357,15 +368,19 @@
       }
       .mode-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
       .mode-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
-      #legend-body h2:first-child { margin-top: 0; }
+      #legend-body h2:first-child,
+      #receptors-body h2:first-child { margin-top: 0; }
       #legend h2:first-child { margin-top: 0; }
-      #legend h2 {
+      #legend h2,
+      #receptors h2 {
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         color: var(--muted);
         margin: 0 0 8px;
       }
+      /* Receptor family headings stack one after another, so space them apart. */
+      #receptors-body h2 { margin: 14px 0 8px; }
       /* Clickable category headings toggle the whole group; same selected/dimmed
          states as the rows. */
       #legend h2.clickable { cursor: pointer; }
@@ -442,7 +457,8 @@
         margin: 0 0 12px;
       }
       .info-sources h3,
-      .info-connections h3 {
+      .info-connections h3,
+      .info-locations h3 {
         font-size: 11px;
         text-transform: uppercase;
         letter-spacing: 0.06em;
@@ -450,7 +466,27 @@
         margin: 0 0 6px;
       }
       .info-sources ul,
-      .info-connections ul { list-style: none; margin: 0; padding: 0; }
+      .info-connections ul,
+      .info-locations ul { list-style: none; margin: 0; padding: 0; }
+      /* Receptor classification facts: label / value rows. */
+      .info-facts {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin: 0 0 12px;
+      }
+      .info-fact { display: flex; gap: 8px; font-size: 12px; line-height: 1.4; }
+      .info-fact .fact-label { color: var(--muted); flex: 0 0 92px; }
+      .info-fact .fact-value {
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-transform: capitalize;
+      }
+      /* Receptor "found in" region list. */
+      .info-locations { margin-top: 4px; }
+      .info-locations li { font-size: 12px; line-height: 1.5; color: var(--text); }
       .info-sources li {
         font-size: 12px;
         line-height: 1.4;
@@ -676,6 +712,19 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- Receptors: collapsed by default, an accordion peer of Legend /
+               About (only one open at a time). The body is generated from the
+               dataset by js/main.js (buildReceptorLegend): the neurotransmitter
+               receptors grouped by family, each row focusable to scatter glowing
+               dots over the regions it is expressed in and dim the rest. -->
+          <div id="receptors">
+            <button type="button" id="receptors-toggle" class="collapse-header" aria-expanded="false">
+              <span data-i18n="panel.receptors"></span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+            <div id="receptors-body" hidden></div>
           </div>
 
           <!-- About: collapsed by default (body ships `hidden`), mirroring the

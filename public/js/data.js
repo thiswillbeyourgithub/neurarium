@@ -77,6 +77,12 @@ function localize(field) {
  *   `{id, name, structures:[structure ids]}` (localized `name`). The arrows
  *   belonging to a circuit are derived in the viewer (both endpoints among
  *   `structures`).
+ * @property {object[]} receptors  Neurotransmitter receptor records (from
+ *   receptors.jsonl). Each is augmented with localized `neurotransmitter` /
+ *   `description`, a resolved `familyLabel` / `classLabel` / `signLabel` /
+ *   `synapticLabel` and `signColor`, the concrete `structureIds` its `locations`
+ *   bases expand to (every structure when `ubiquitous`), the side-stripped
+ *   `locationNames`, and a `focusable` flag (false for the inert "stub" receptors).
  * @property {Map<string, object>} byId  structure id -> structure record.
  * @property {{projectionColors: Object<string,string>,
  *   groupLabels: Object<string,string>,
@@ -97,12 +103,14 @@ function localize(field) {
  * @returns {Promise<BrainData>}
  */
 export async function loadBrainData(dataDir = "data") {
-  const [metaRecord, structures, projections, circuits] = await Promise.all([
-    fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
-    fetchJsonl(`${dataDir}/structures.jsonl`),
-    fetchJsonl(`${dataDir}/projections.jsonl`),
-    fetchJsonl(`${dataDir}/circuits.jsonl`),
-  ]);
+  const [metaRecord, structures, projections, circuits, receptors] =
+    await Promise.all([
+      fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
+      fetchJsonl(`${dataDir}/structures.jsonl`),
+      fetchJsonl(`${dataDir}/projections.jsonl`),
+      fetchJsonl(`${dataDir}/circuits.jsonl`),
+      fetchJsonl(`${dataDir}/receptors.jsonl`),
+    ]);
 
   // Presentation maps emitted by the generator (kind->arrow colour,
   // group->legend heading, kind->display label), so the palette/headings live in
@@ -117,6 +125,11 @@ export async function loadBrainData(dataDir = "data") {
   const groupLabels = localizeMap(metaRecord.group_labels);
   const kindLabels = localizeMap(metaRecord.kind_labels);
   const signLabels = localizeMap(metaRecord.sign_labels);
+  // Receptor legend maps (family heading, mechanism class, pre/post-synaptic
+  // label). The per-receptor sign reuses signColors/signLabels above.
+  const receptorFamilyLabels = localizeMap(metaRecord.receptor_family_labels);
+  const receptorClassLabels = localizeMap(metaRecord.receptor_class_labels);
+  const synapticLabels = localizeMap(metaRecord.synaptic_labels);
 
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
@@ -150,11 +163,53 @@ export async function loadBrainData(dataDir = "data") {
   );
 
   const byId = new Map(structures.map((s) => [s.id, s]));
+
+  // Resolve each receptor for the viewer. `locations` holds structure *base* ids
+  // (like circuits, but one entry per region rather than per hemisphere); expand
+  // each to the concrete structure ids actually emitted (both hemispheres, or the
+  // bare id for a midline structure) so the marker layer can light them up, and
+  // collect the side-stripped region names for the info panel. A `ubiquitous`
+  // receptor (NMDA, GABA-A, ...) lights every structure. `focusable` is false for
+  // the deliberate "stub" receptors (no CNS role, empty locations) so the legend
+  // can render them as inert rows.
+  const baseOf = (id) => id.replace(/_[RL]$/, "");
+  const baseName = new Map();
+  for (const s of structures) baseName.set(baseOf(s.id), s.base_name);
+  const allIds = structures.map((s) => s.id);
+  for (const r of receptors) {
+    r.neurotransmitter = localize(r.neurotransmitter);
+    r.description = r.description ? localize(r.description) : "";
+    r.familyLabel = receptorFamilyLabels[r.family] || r.family;
+    r.classLabel = receptorClassLabels[r.receptor_class] || r.receptor_class;
+    r.signColor = signColors[r.sign] || "#ffffff";
+    r.signLabel = signLabels[r.sign] || r.sign;
+    r.synapticLabel = synapticLabels[r.synaptic] || r.synaptic;
+    if (r.ubiquitous) {
+      r.structureIds = allIds.slice();
+    } else {
+      r.structureIds = r.locations.flatMap((b) =>
+        [b, `${b}_R`, `${b}_L`].filter((id) => byId.has(id)),
+      );
+    }
+    r.locationNames = r.locations.map((b) => baseName.get(b) || b);
+    r.focusable = r.ubiquitous || r.structureIds.length > 0;
+  }
+
   return {
     structures,
     projections,
     circuits,
+    receptors,
     byId,
-    meta: { projectionColors, groupLabels, kindLabels, signColors, signLabels },
+    meta: {
+      projectionColors,
+      groupLabels,
+      kindLabels,
+      signColors,
+      signLabels,
+      receptorFamilyLabels,
+      receptorClassLabels,
+      synapticLabels,
+    },
   };
 }

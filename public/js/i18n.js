@@ -60,6 +60,7 @@
       "panel.colorNt": "Neurotransmitter",
       "panel.colorPotential": "Potential",
       "panel.legend": "Legend",
+      "panel.receptors": "Receptors",
       "panel.about": "About",
 
       "toolbar.reset": "Reset view",
@@ -87,6 +88,16 @@
       "info.wikipedia": "Wikipedia ↗",
       "info.noConnections": "No mapped connections yet.",
       "info.connections": "Connections",
+
+      "receptor.system": "System",
+      "receptor.neurotransmitter": "Neurotransmitter",
+      "receptor.type": "Type",
+      "receptor.effect": "Effect",
+      "receptor.synaptic": "Synaptic site",
+      "receptor.foundIn": "Found in",
+      "receptor.ubiquitous": "Throughout the brain",
+      "receptor.noRole": "No significant role in the central nervous system.",
+      "receptor.stubHint": "No significant role in the central nervous system",
 
       "status.loading": "Loading brain data…",
       "status.loadError":
@@ -142,6 +153,7 @@
       "panel.colorNt": "Neurotransmetteur",
       "panel.colorPotential": "Potentiel",
       "panel.legend": "Légende",
+      "panel.receptors": "Récepteurs",
       "panel.about": "À propos",
 
       "toolbar.reset": "Recentrer la vue",
@@ -169,6 +181,16 @@
       "info.wikipedia": "Wikipédia ↗",
       "info.noConnections": "Aucune connexion répertoriée pour l’instant.",
       "info.connections": "Connexions",
+
+      "receptor.system": "Système",
+      "receptor.neurotransmitter": "Neurotransmetteur",
+      "receptor.type": "Type",
+      "receptor.effect": "Effet",
+      "receptor.synaptic": "Site synaptique",
+      "receptor.foundIn": "Présent dans",
+      "receptor.ubiquitous": "Dans tout le cerveau",
+      "receptor.noRole": "Pas de rôle significatif dans le système nerveux central.",
+      "receptor.stubHint": "Pas de rôle significatif dans le système nerveux central",
 
       "status.loading": "Chargement des données du cerveau…",
       "status.loadError":

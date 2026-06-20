@@ -18,6 +18,7 @@ import { buildStructureMesh } from "./shapes.js";
 import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
 import { createCircuitAnimation } from "./circuit-anim.js";
+import { createReceptorMarkers } from "./receptor-markers.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -890,6 +891,73 @@ function createInfoPanel(data) {
       panel.hidden = false;
     },
 
+    /**
+     * Populate the panel for a *receptor* (clicking a receptor legend row): its
+     * name, neurotransmitter system, a Wikipedia link, a one-line description, the
+     * classification facts (neurotransmitter, mechanism type, excit/inhib/modulatory
+     * effect with its sign swatch, pre/post-synaptic site) and where it is
+     * expressed (the region list, "Throughout the brain" for a ubiquitous receptor,
+     * or a no-CNS-role note for a stub). Built fresh each call like the others.
+     */
+    showReceptor(receptor) {
+      body.innerHTML = "";
+      body.appendChild(el("h2", "info-title", receptor.name));
+      body.appendChild(el("div", "info-group", receptor.familyLabel));
+
+      const wikiUrl = receptor.wikipedia;
+      if (typeof wikiUrl === "string" && /^https?:\/\//i.test(wikiUrl)) {
+        const wikiWrap = el("div", "info-wiki");
+        const a = el("a", null, t("info.wikipedia"));
+        a.href = wikiUrl;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        wikiWrap.appendChild(a);
+        body.appendChild(wikiWrap);
+      }
+
+      if (receptor.description) {
+        body.appendChild(el("p", "info-desc", receptor.description));
+      }
+
+      // Classification facts as label / value rows; the "effect" value carries the
+      // sign swatch so the colour matches the dots + legend row.
+      const facts = el("div", "info-facts");
+      const addFact = (label, value, color) => {
+        if (!value) return;
+        const r = el("div", "info-fact");
+        r.appendChild(el("span", "fact-label", label));
+        const v = el("span", "fact-value");
+        if (color) {
+          const sw = el("span", "swatch line");
+          sw.style.background = color;
+          v.appendChild(sw);
+        }
+        v.appendChild(document.createTextNode(value));
+        r.appendChild(v);
+        facts.appendChild(r);
+      };
+      addFact(t("receptor.neurotransmitter"), receptor.neurotransmitter);
+      addFact(t("receptor.type"), receptor.classLabel);
+      addFact(t("receptor.effect"), receptor.signLabel, receptor.signColor);
+      addFact(t("receptor.synaptic"), receptor.synapticLabel);
+      body.appendChild(facts);
+
+      // Where it is expressed.
+      const where = el("div", "info-locations");
+      where.appendChild(el("h3", null, t("receptor.foundIn")));
+      if (receptor.ubiquitous) {
+        where.appendChild(el("p", "info-desc", t("receptor.ubiquitous")));
+      } else if (receptor.locationNames.length === 0) {
+        where.appendChild(el("p", "info-desc", t("receptor.noRole")));
+      } else {
+        const ul = el("ul");
+        for (const name of receptor.locationNames) ul.appendChild(el("li", null, name));
+        where.appendChild(ul);
+      }
+      body.appendChild(where);
+      panel.hidden = false;
+    },
+
     /** Register the handler run when a structure-panel connection row is clicked. */
     onConnection(fn) {
       onConnectionPick = fn;
@@ -898,6 +966,60 @@ function createInfoPanel(data) {
     hide() {
       panel.hidden = true;
     },
+  };
+}
+
+/**
+ * Build the Receptors legend section from the live dataset (#receptors-body). The
+ * neurotransmitter receptors are grouped by family (in the meta family-label
+ * order), each row coloured by the receptor's excit/inhib/modulatory sign swatch
+ * and clickable to focus it (dim the brain to the regions expressing it + scatter
+ * glowing dots over them, handled by the caller's `onPick`). A "stub" receptor
+ * with no CNS role renders muted + inert. Returns a `reflect(activeId)` callback
+ * that lights the active receptor's row and greys the rest, called by the caller
+ * whenever the focus changes.
+ * @param {import("./data.js").BrainData} data
+ * @param {(receptor: object) => void} onPick
+ * @returns {(activeId: string|null) => void}
+ */
+function buildReceptorLegend(data, onPick) {
+  const container = document.getElementById("receptors-body");
+  if (!container) return () => {};
+  container.replaceChildren();
+  const rows = []; // { row, id } for the focusable receptors
+
+  const families = data.meta.receptorFamilyLabels || {};
+  for (const [family, heading] of Object.entries(families)) {
+    const inFamily = data.receptors.filter((r) => r.family === family);
+    if (inFamily.length === 0) continue;
+    const h = document.createElement("h2");
+    h.textContent = heading;
+    container.appendChild(h);
+    for (const receptor of inFamily) {
+      const row = addLegendItem(container, receptor.signColor, receptor.name);
+      if (receptor.focusable) {
+        // Tooltip: the full classification at a glance.
+        row.title = [
+          receptor.neurotransmitter, receptor.classLabel,
+          receptor.signLabel, receptor.synapticLabel,
+        ].filter(Boolean).join(" · ");
+        row.classList.add("clickable");
+        row.addEventListener("click", () => onPick(receptor));
+        rows.push({ row, id: receptor.id });
+      } else {
+        // No meaningful CNS role: listed for completeness but not focusable.
+        row.classList.add("muted");
+        row.title = t("receptor.stubHint");
+      }
+    }
+  }
+
+  return function reflect(activeId) {
+    for (const { row, id } of rows) {
+      const selected = id === activeId;
+      row.classList.toggle("selected", selected);
+      row.classList.toggle("dimmed", activeId !== null && !selected);
+    }
   };
 }
 
@@ -1176,6 +1298,8 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const controlsBody = document.getElementById("controls-body");
   const legendToggle = document.getElementById("legend-toggle");
   const legendBody = document.getElementById("legend-body");
+  const receptorsToggle = document.getElementById("receptors-toggle");
+  const receptorsBody = document.getElementById("receptors-body");
   const aboutToggle = document.getElementById("about-toggle");
   const aboutBody = document.getElementById("about-body");
 
@@ -1237,24 +1361,34 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   narrow.addEventListener("change", updatePanelPan);
   new ResizeObserver(updatePanelPan).observe(controlsPanel);
 
-  // Legend + About behave as an accordion: only one open at a time, and while
-  // either is open the controls between the title and Auto-rotate (the
+  // Legend, Receptors and About behave as an accordion: only one open at a time,
+  // and while any is open the controls between the title and Auto-rotate (the
   // .collapsible-control rows) are hidden via the #controls.section-open class
   // (see index.html) so the open section's content doesn't push the panel tall.
+  const sections = [
+    { toggle: legendToggle, body: legendBody },
+    { toggle: receptorsToggle, body: receptorsBody },
+    { toggle: aboutToggle, body: aboutBody },
+  ];
   const syncSectionLayout = () => {
-    const anyOpen =
-      legendToggle.getAttribute("aria-expanded") === "true" ||
-      aboutToggle.getAttribute("aria-expanded") === "true";
+    const anyOpen = sections.some(
+      (s) => s.toggle && s.toggle.getAttribute("aria-expanded") === "true");
     controlsPanel.classList.toggle("section-open", anyOpen);
   };
-  wireCollapse(legendToggle, legendBody, (open) => {
-    if (open) setSection(aboutToggle, aboutBody, false);
-    syncSectionLayout();
-  });
-  wireCollapse(aboutToggle, aboutBody, (open) => {
-    if (open) setSection(legendToggle, legendBody, false);
-    syncSectionLayout();
-  });
+  for (const s of sections) {
+    if (!s.toggle || !s.body) continue;
+    wireCollapse(s.toggle, s.body, (open) => {
+      // Opening one section closes the others (single-open accordion).
+      if (open) {
+        for (const other of sections) {
+          if (other !== s && other.toggle && other.body) {
+            setSection(other.toggle, other.body, false);
+          }
+        }
+      }
+      syncSectionLayout();
+    });
+  }
 
   // About: point the "Source code" link at the configured sourceUrl (from
   // app-config.js, default the public site). Drop the row if it isn't a valid
@@ -1589,6 +1723,40 @@ async function main() {
     if (!circuitAnim.matches(focusedArrows)) circuitAnim.stop();
   });
 
+  // Receptor expression markers + focus (js/receptor-markers.js). Clicking a
+  // receptor row in the Receptors legend section dims the brain to just the
+  // regions expressing it (via setCircuit, no arrow pin, so the pathways fade too
+  // and the dots are the only bright thing) and scatters glowing dots over those
+  // regions' surfaces; a ubiquitous receptor lights every region. Clicking the
+  // active one clears it. The dots are dropped the moment the focus stops being
+  // exactly that receptor's structure set (a clear, a circuit, a legend isolate,
+  // another receptor), watched off the selection state like the circuit pulse.
+  const receptorMarkers = createReceptorMarkers({ scene });
+  let activeReceptorId = null;
+  let reflectReceptors = () => {};
+  const refreshReceptorRows = () => reflectReceptors(activeReceptorId);
+  const focusReceptor = (receptor) => {
+    const meshSet = receptor.structureIds
+      .map((id) => meshById.get(id)).filter(Boolean);
+    selection.setCircuit(meshSet, []);
+    receptorMarkers.show(meshSet, receptor.signColor);
+    info.showReceptor(receptor);
+    activeReceptorId = receptor.id;
+    refreshReceptorRows();
+  };
+  const toggleReceptor = (receptor) => {
+    if (activeReceptorId === receptor.id) selection.clear(); // watcher hides dots
+    else focusReceptor(receptor);
+  };
+  selection.onIsolate((isolated) => {
+    if (receptorMarkers.active && !receptorMarkers.matches(isolated)) {
+      receptorMarkers.hide();
+      activeReceptorId = null;
+      refreshReceptorRows();
+    }
+  });
+  reflectReceptors = buildReceptorLegend(data, toggleReceptor);
+
   // Auto-rotate is on by default (a slow turn on load), but the moment the user
   // reaches in to inspect something it should hold still. Stop it (and untick
   // the box so the UI stays truthful) on any content pick routed through the
@@ -1864,6 +2032,7 @@ async function main() {
     intro.tick();
     focus.tick();
     circuitAnim.tick();
+    receptorMarkers.tick();
     controls.update();
     // After controls.update() so the cull reads this frame's camera + target.
     cull.tick();
