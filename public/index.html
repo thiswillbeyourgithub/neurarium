@@ -133,15 +133,13 @@
       #controls,
       #legend-body,
       #receptors-body,
-      #search-results,
-      #info-panel {
+      #search-results {
         scrollbar-width: none;
       }
       #controls::-webkit-scrollbar,
       #legend-body::-webkit-scrollbar,
       #receptors-body::-webkit-scrollbar,
-      #search-results::-webkit-scrollbar,
-      #info-panel::-webkit-scrollbar {
+      #search-results::-webkit-scrollbar {
         width: 0;
         height: 0;
       }
@@ -211,6 +209,33 @@
          js/main.js). A section can only be opened when the controls are visible
          (no search), so this never hides the toolbar mid-search. */
       #controls.section-open .collapsible-control { display: none; }
+
+      /* Settings / Details tabs at the top of the panel body. The bar ships
+         hidden and is revealed (js/main.js, createPanelTabs) only while a detail
+         (structure / connection / receptor) is open; the Details tab then holds
+         the info that used to live in a separate bottom-right panel. */
+      .panel-tabs {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 4px 0 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .panel-tab {
+        padding: 6px 10px;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        background: none;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        cursor: pointer;
+      }
+      .panel-tab:hover { color: var(--text); }
+      .panel-tab.active { color: var(--text); border-bottom-color: #4e79a7; }
+      #details-pane { user-select: text; }
       .tool-btn {
         display: grid;
         place-items: center;
@@ -410,24 +435,12 @@
       }
       .swatch.line { height: 4px; border-radius: 2px; }
 
-      /* Connection info panel (bottom-right, clear of the bottom-left legend).
-         Scrolls if a connection has many sources; capped so it never fills the
-         screen on mobile. */
-      #info-panel {
-        bottom: 12px;
-        right: 12px;
-        width: 300px;
-        max-width: calc(100vw - 24px);
-        max-height: 60vh;
-        overflow-y: auto;
-        /* Room for the absolutely-positioned close button. */
-        padding-right: 34px;
-        user-select: text;
-      }
-      .info-close {
-        position: absolute;
-        top: 8px;
-        right: 10px;
+      /* Detail info (structure / connection / receptor) lives in the Details tab
+         of the main panel (see .panel-tabs above); the .info-* content styles
+         below are reused there. The close (×) sits at the right end of the tab
+         bar and dismisses the detail. */
+      .panel-tabs .info-close {
+        margin-left: auto;
         width: 24px;
         height: 24px;
         padding: 0;
@@ -438,7 +451,7 @@
         border: 0;
         cursor: pointer;
       }
-      .info-close:hover { color: var(--text); }
+      .panel-tabs .info-close:hover { color: var(--text); }
       .info-title { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
       .info-route { font-size: 13px; color: var(--text); margin-bottom: 10px; }
       .info-meta {
@@ -614,7 +627,10 @@
     <!-- Single bottom-left "neurarium" panel: a collapsible window holding the
          reset/search buttons, the two sliders, auto-rotate, and the nested
          (collapsed) legend. Searching replaces the panel body in place rather
-         than opening a popup (see wireToolbar in js/main.js). -->
+         than opening a popup (see wireToolbar in js/main.js). When a detail
+         (structure / connection / receptor) is picked, a Settings/Details tab bar
+         appears at the top and the detail shows in the Details pane (see
+         createPanelTabs / createInfoPanel in js/main.js). -->
     <div id="controls" class="panel">
       <button type="button" id="controls-toggle" class="collapse-header" aria-expanded="true">
         <span>neurarium <span class="version" id="app-version"></span></span>
@@ -622,6 +638,20 @@
       </button>
 
       <div id="controls-body">
+        <!-- Settings / Details tabs. Shipped hidden; revealed (and the Details
+             tab selected) when a structure / connection / receptor is picked, so
+             the detail shows here instead of in a separate bottom-right panel.
+             The × dismisses the detail and hides the bar again. Wired in
+             js/main.js (createPanelTabs). -->
+        <div id="panel-tabs" class="panel-tabs" role="tablist" hidden>
+          <button type="button" id="tab-settings" class="panel-tab active" role="tab" aria-selected="true" data-i18n="panel.tabSettings"></button>
+          <button type="button" id="tab-details" class="panel-tab" role="tab" aria-selected="false" data-i18n="panel.tabDetails"></button>
+          <button type="button" id="info-close" class="info-close" aria-label="Close">&times;</button>
+        </div>
+
+        <!-- Settings pane: the normal controls. Hidden while the Details tab is
+             active. -->
+        <div id="settings-pane">
         <!-- Language switch (en / fr). Tagged .collapsible-control so it hides
              (with the sliders + auto-rotate) while a section is open. Buttons
              carry data-lang; js/i18n.js marks the active one and reloads on
@@ -772,15 +802,16 @@
           <input type="text" id="search-input" data-i18n-attr="placeholder:search.placeholder" autocomplete="off" />
           <ul id="search-results"></ul>
         </div>
-      </div>
-    </div>
+        </div><!-- #settings-pane -->
 
-    <!-- Connection info panel: shown when an arrow is clicked/tapped or a
-         connection is picked in the search. Body is built in js/main.js
-         (createInfoPanel) from the projection's metadata. Hidden until used. -->
-    <div id="info-panel" class="panel" hidden>
-      <button type="button" id="info-close" class="info-close" aria-label="Close">&times;</button>
-      <div id="info-body"></div>
+        <!-- Details pane: the detail (structure / connection / receptor) built by
+             js/main.js (createInfoPanel) into #info-body. Shown when the Details
+             tab is active, hidden otherwise. Replaces the old separate bottom-
+             right info panel. -->
+        <div id="details-pane" hidden>
+          <div id="info-body"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Banner scripts: plain (need document.body + #banners to exist), so

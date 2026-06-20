@@ -62,6 +62,8 @@
       "panel.legend": "Legend",
       "panel.receptors": "Receptors",
       "panel.about": "About",
+      "panel.tabSettings": "Settings",
+      "panel.tabDetails": "Details",
 
       "toolbar.reset": "Reset view",
       "toolbar.search": "Search",
@@ -155,6 +157,8 @@
       "panel.legend": "Légende",
       "panel.receptors": "Récepteurs",
       "panel.about": "À propos",
+      "panel.tabSettings": "Réglages",
+      "panel.tabDetails": "Détails",
 
       "toolbar.reset": "Recentrer la vue",
       "toolbar.search": "Rechercher",

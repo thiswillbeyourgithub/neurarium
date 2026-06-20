@@ -136,8 +136,13 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       nested JS-populated legend whose first rows are "show all
                       names" / "hide projections", a nested JS-populated Receptors
                       section, and a nested About section; Legend / Receptors /
-                      About are a single-open accordion)
-                      plus the in-place search box and
+                      About are a single-open accordion). The panel body is split
+                      into a #settings-pane (all the above) and a #details-pane
+                      (#info-body) switched by a #panel-tabs bar (Settings /
+                      Details) that only appears once a detail is picked, so a
+                      structure / connection / receptor detail shows in the panel
+                      instead of a separate window (createPanelTabs in js/main.js).
+                      Also the in-place search box and
                       the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches the per-type data files (meta.json + structures/
                       projections/circuits/receptors.jsonl) + all shape files,
@@ -213,9 +218,10 @@ js/receptor-markers.js  Receptor "expression dots" (createReceptorMarkers): when
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
-                      for labels, arrow + structure picking and the info panel
+                      for labels, arrow + structure picking and the detail panel
                       (createInfoPanel: a connection view, a structure view with
-                      its connection list, or a receptor view), the
+                      its connection list, or a receptor view, rendered into the
+                      main panel's Details tab via createPanelTabs), the
                       structure+connection search, the legend builder
                       (buildLegend) and the Receptors legend builder
                       (buildReceptorLegend, wiring each receptor row to dim the
@@ -614,10 +620,19 @@ as the WIP banner (`js/error-banner.js`):
 
 ## Controls
 
-- **Panel layout**: everything except the bottom-right info panel
-  lives in one collapsible **"neurarium" panel at the bottom-left** (`#controls`
-  in `index.html`, its header `#controls-toggle` collapses the whole body). From
-  the top it holds: the **reset + search** icon buttons (a `.toolbar-row`), then
+- **Panel layout**: everything lives in one collapsible **"neurarium" panel at
+  the bottom-left** (`#controls`
+  in `index.html`, its header `#controls-toggle` collapses the whole body). Its
+  body is split into a **`#settings-pane`** (the controls listed below) and a
+  **`#details-pane`** (`#info-body`, the structure/connection/receptor detail),
+  switched by a **`#panel-tabs`** bar (**Settings** / **Details**). The tab bar is
+  hidden until a detail is picked; picking one reveals it, selects **Details** and
+  expands the panel if collapsed, so a detail shows *in the panel* rather than a
+  separate bottom-right window (`createPanelTabs` in `js/main.js`; see "Info
+  panel" below). Switching back to **Settings** keeps the detail (the bar stays);
+  the **×** at the right of the bar (or a clear) dismisses it and hides the bar.
+  From
+  the top the Settings pane holds: the **reset + search** icon buttons (a `.toolbar-row`), then
   the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
   inside**, then the
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
@@ -846,9 +861,12 @@ as the WIP banner (`js/error-banner.js`):
   expands the panel if it was collapsed (the search box lives inside the panel
   body) and opens search focused on its input; pressing it again while open just
   refocuses + selects the text. **Escape** closes search.
-- **Info panel** (bottom-right, `createInfoPanel` in `js/main.js`): one panel
-  that shows a *connection*, a *structure*, or a *receptor* (the last via
-  `showReceptor`, opened from a Receptors legend row, see "Receptors" above).
+- **Info panel** (the **Details tab** of the main panel, `createInfoPanel` in
+  `js/main.js`, rendered into `#info-body` and surfaced by `createPanelTabs`, see
+  "Panel layout"): shows a *connection*, a *structure*, or a *receptor* (the last
+  via `showReceptor`, opened from a Receptors legend row, see "Receptors" above).
+  Opening any of these reveals the Settings/Details tab bar and selects Details;
+  `hide()` (the × or an empty-space click) returns to the Settings view.
   - **Clicking/tapping an arrow** (or picking a connection in search) shows the
     **connection** view: the pathway label, its route (`from → to`, `↔` for a
     bidirectional/commissural link), kind + neurotransmitter, a one-line

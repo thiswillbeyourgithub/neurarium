@@ -757,12 +757,84 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
  * @param {import("./data.js").BrainData} data  Used to resolve endpoint ids to names.
  * @returns {{show: (proj: object) => void, hide: () => void}}
  */
-function createInfoPanel(data) {
-  const panel = document.getElementById("info-panel");
+/**
+ * Settings / Details tabs at the top of the bottom-left panel. The tab bar ships
+ * hidden; opening a detail (structure / connection / receptor) reveals it,
+ * switches to the Details tab and (if the panel was collapsed) expands the body
+ * so the detail is visible. Switching to the Settings tab keeps the detail
+ * around (the bar stays); the × / a clear dismisses it, hiding the bar and
+ * falling back to the plain Settings view. This replaces the old separate
+ * bottom-right info panel: the detail content (createInfoPanel) renders into the
+ * Details pane.
+ * @returns {{openDetails:()=>void, closeDetails:()=>void}}
+ */
+function createPanelTabs() {
+  const bar = document.getElementById("panel-tabs");
+  const tabSettings = document.getElementById("tab-settings");
+  const tabDetails = document.getElementById("tab-details");
+  const settingsPane = document.getElementById("settings-pane");
+  const detailsPane = document.getElementById("details-pane");
+  const controlsToggle = document.getElementById("controls-toggle");
+  const controlsBody = document.getElementById("controls-body");
+  let hasDetail = false;
+
+  // Show one pane and mark its tab active, without touching whether a detail
+  // exists, so the user can flip between Settings and Details while one is open.
+  const activate = (details) => {
+    settingsPane.hidden = details;
+    detailsPane.hidden = !details;
+    tabDetails.classList.toggle("active", details);
+    tabSettings.classList.toggle("active", !details);
+    tabDetails.setAttribute("aria-selected", String(details));
+    tabSettings.setAttribute("aria-selected", String(!details));
+  };
+
+  tabSettings.addEventListener("click", () => activate(false));
+  tabDetails.addEventListener("click", () => { if (hasDetail) activate(true); });
+
+  return {
+    /** A detail was picked: reveal the bar, show Details, expand if collapsed. */
+    openDetails() {
+      hasDetail = true;
+      bar.hidden = false;
+      // The detail must be visible, so make sure the panel body is expanded (the
+      // ResizeObserver in wireControls then re-runs the small-screen pan-aside).
+      if (controlsToggle.getAttribute("aria-expanded") !== "true") {
+        controlsToggle.setAttribute("aria-expanded", "true");
+        controlsBody.hidden = false;
+      }
+      activate(true);
+    },
+    /** Dismiss the detail: hide the bar and fall back to the Settings view. */
+    closeDetails() {
+      hasDetail = false;
+      bar.hidden = true;
+      activate(false);
+    },
+    /**
+     * Switch to the Settings pane without dismissing any open detail (the Details
+     * tab stays available). Used when opening search, whose box lives in the
+     * Settings pane, so Ctrl/Cmd+F while the Details tab is active still reveals
+     * it.
+     */
+    showSettings() {
+      activate(false);
+    },
+  };
+}
+
+/**
+ * Build the detail panel controller. Renders a connection / structure / receptor
+ * into the Details pane's #info-body and drives the Settings/Details tabs
+ * (`tabs`) to reveal + select that pane; `hide()` / the × dismiss it.
+ * @param {import("./data.js").BrainData} data
+ * @param {ReturnType<typeof createPanelTabs>} tabs
+ */
+function createInfoPanel(data, tabs) {
   const body = document.getElementById("info-body");
   const closeBtn = document.getElementById("info-close");
   const nameOf = (id) => data.byId.get(id)?.name || id;
-  closeBtn.addEventListener("click", () => { panel.hidden = true; });
+  closeBtn.addEventListener("click", () => tabs.closeDetails());
 
   // Set by the caller (onConnection): what to do when a connection row in a
   // structure panel is clicked. The panel only knows projections, so the caller
@@ -826,7 +898,7 @@ function createInfoPanel(data) {
         wrap.appendChild(ul);
         body.appendChild(wrap);
       }
-      panel.hidden = false;
+      tabs.openDetails();
     },
 
     /**
@@ -861,7 +933,7 @@ function createInfoPanel(data) {
         (p) => p.from === structure.id || p.to === structure.id);
       if (conns.length === 0) {
         body.appendChild(el("p", "info-desc", t("info.noConnections")));
-        panel.hidden = false;
+        tabs.openDetails();
         return;
       }
 
@@ -888,7 +960,7 @@ function createInfoPanel(data) {
       }
       wrap.appendChild(ul);
       body.appendChild(wrap);
-      panel.hidden = false;
+      tabs.openDetails();
     },
 
     /**
@@ -955,7 +1027,7 @@ function createInfoPanel(data) {
         where.appendChild(ul);
       }
       body.appendChild(where);
-      panel.hidden = false;
+      tabs.openDetails();
     },
 
     /** Register the handler run when a structure-panel connection row is clicked. */
@@ -964,7 +1036,7 @@ function createInfoPanel(data) {
     },
 
     hide() {
-      panel.hidden = true;
+      tabs.closeDetails();
     },
   };
 }
@@ -1305,13 +1377,11 @@ function applyViewParams(bundle) {
   if (q.get("names") === "all") {
     document.getElementById("toggle-names").click();
   }
-  // ?ui=0 hides the control panel (which now nests the toolbar + legend) and the
-  // info panel for clean, uncluttered shots (e.g. reviewing a single shape).
+  // ?ui=0 hides the control panel (which now nests the toolbar, legend and the
+  // detail/info pane) for clean, uncluttered shots (e.g. reviewing a shape).
   if (q.get("ui") === "0") {
-    for (const id of ["controls", "info-panel"]) {
-      const el = document.getElementById(id);
-      if (el) el.style.display = "none";
-    }
+    const el = document.getElementById("controls");
+    if (el) el.style.display = "none";
   }
 
   if (q.has("only")) {
@@ -1569,7 +1639,7 @@ function connectionSideTag(proj) {
  *   selectStructure:Function, selectConnection:Function,
  *   selectReceptor:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, selectStructure, selectConnection, selectReceptor }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -1654,6 +1724,10 @@ function wireToolbar({ focus, meshes, arrows, data, selection, selectStructure, 
 
   function openSearch() {
     ensurePanelOpen();
+    // The search box lives in the Settings pane; if a detail's Details tab is
+    // active, switch back so the box is actually visible (the detail stays
+    // available behind the tab).
+    tabs.showSettings();
     controlsMain.hidden = true; // swap the sliders/legend out...
     searchBox.hidden = false; // ...and the search in, in their place
     searchToggle.classList.add("active");
@@ -1691,6 +1765,10 @@ function wireToolbar({ focus, meshes, arrows, data, selection, selectStructure, 
       if (searchBox.hidden) {
         openSearch();
       } else {
+        // Already open: make sure the Settings pane (which holds the box) is the
+        // visible tab, then refocus + select so a second press lets the user
+        // retype straight away.
+        tabs.showSettings();
         searchInput.focus();
         searchInput.select();
       }
@@ -1764,7 +1842,8 @@ async function main() {
 
   // Connection info panel (populated when an arrow is clicked or a connection is
   // picked in the search). Created here so the click/tap handlers below can use it.
-  const info = createInfoPanel(data);
+  const tabs = createPanelTabs();
+  const info = createInfoPanel(data, tabs);
 
   // Selection + isolation controller: glowing halo on the structure picked by
   // click / double-click / search, plus the legend-driven isolate/dim mode. Owns
@@ -2074,7 +2153,7 @@ async function main() {
   }
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
-  wireToolbar({ focus, meshes, arrows, data, selection, selectStructure, selectConnection, selectReceptor });
+  wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor });
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
