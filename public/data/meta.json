@@ -79,5 +79,87 @@
       "en": "Modulatory",
       "fr": "Modulateur"
     }
+  },
+  "receptor_family_labels": {
+    "adrenergic": {
+      "en": "Adrenergic",
+      "fr": "Adrénergique"
+    },
+    "cholinergic": {
+      "en": "Cholinergic",
+      "fr": "Cholinergique"
+    },
+    "dopaminergic": {
+      "en": "Dopaminergic",
+      "fr": "Dopaminergique"
+    },
+    "gabaergic": {
+      "en": "GABAergic",
+      "fr": "GABAergique"
+    },
+    "glutamatergic": {
+      "en": "Glutamatergic",
+      "fr": "Glutamatergique"
+    },
+    "glycinergic": {
+      "en": "Glycinergic",
+      "fr": "Glycinergique"
+    },
+    "histaminergic": {
+      "en": "Histaminergic",
+      "fr": "Histaminergique"
+    },
+    "opioidergic": {
+      "en": "Opioidergic",
+      "fr": "Opioïdergique"
+    },
+    "serotonergic": {
+      "en": "Serotonergic",
+      "fr": "Sérotoninergique"
+    },
+    "cannabinoid": {
+      "en": "Cannabinoid",
+      "fr": "Cannabinoïde"
+    },
+    "purinergic": {
+      "en": "Purinergic",
+      "fr": "Purinergique"
+    },
+    "sigma": {
+      "en": "Sigma",
+      "fr": "Sigma"
+    },
+    "melatonergic": {
+      "en": "Melatonergic",
+      "fr": "Mélatoninergique"
+    }
+  },
+  "receptor_class_labels": {
+    "ionotropic": {
+      "en": "Ionotropic (ligand-gated ion channel)",
+      "fr": "Ionotrope (canal ionique ligand-dépendant)"
+    },
+    "metabotropic": {
+      "en": "Metabotropic (GPCR)",
+      "fr": "Métabotrope (RCPG)"
+    },
+    "chaperone": {
+      "en": "Intracellular chaperone",
+      "fr": "Chaperon intracellulaire"
+    }
+  },
+  "synaptic_labels": {
+    "presynaptic": {
+      "en": "Presynaptic",
+      "fr": "Présynaptique"
+    },
+    "postsynaptic": {
+      "en": "Postsynaptic",
+      "fr": "Postsynaptique"
+    },
+    "both": {
+      "en": "Pre- and postsynaptic",
+      "fr": "Pré- et postsynaptique"
+    }
   }
 }

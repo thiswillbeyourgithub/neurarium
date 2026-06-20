@@ -119,6 +119,46 @@ GROUP_LABELS: dict[str, str] = {
     "brainstem_nuclei": "Brainstem nuclei",
 }
 
+# ---------------------------------------------------------------------------
+# Receptor presentation maps (emitted into meta.json), analogous to the maps
+# above. Receptors (see RECEPTORS below) are neurotransmitter receptors expressed
+# in the modeled structures; the viewer lists them in a legend section grouped by
+# neurotransmitter *family*, and focusing one lights glowing dots on every
+# structure where it is expressed. Each map is a key -> display label; the
+# per-receptor excit/inhib/modulatory ``sign`` reuses SIGN_COLORS / SIGN_LABELS
+# above (so the receptor legend swatch matches the arrow sign colours). Object key
+# order is the legend display order. build_records validates that every
+# family/class/sign/synaptic value used by a receptor has an entry here.
+# ---------------------------------------------------------------------------
+RECEPTOR_FAMILY_LABELS: dict[str, str] = {
+    "adrenergic": "Adrenergic",
+    "cholinergic": "Cholinergic",
+    "dopaminergic": "Dopaminergic",
+    "gabaergic": "GABAergic",
+    "glutamatergic": "Glutamatergic",
+    "glycinergic": "Glycinergic",
+    "histaminergic": "Histaminergic",
+    "opioidergic": "Opioidergic",
+    "serotonergic": "Serotonergic",
+    "cannabinoid": "Cannabinoid",
+    "purinergic": "Purinergic",
+    "sigma": "Sigma",
+    "melatonergic": "Melatonergic",
+}
+# Receptor mechanism class. "chaperone" is here for the sigma-1 receptor, which is
+# neither a ligand-gated channel nor a GPCR but an intracellular ER chaperone.
+RECEPTOR_CLASS_LABELS: dict[str, str] = {
+    "ionotropic": "Ionotropic (ligand-gated ion channel)",
+    "metabotropic": "Metabotropic (GPCR)",
+    "chaperone": "Intracellular chaperone",
+}
+# Pre-/post-synaptic location of the receptor.
+SYNAPTIC_LABELS: dict[str, str] = {
+    "presynaptic": "Presynaptic",
+    "postsynaptic": "Postsynaptic",
+    "both": "Pre- and postsynaptic",
+}
+
 
 # ---------------------------------------------------------------------------
 # Internationalization (en / fr): the data file is bilingual. The anatomy below
@@ -394,6 +434,38 @@ FR: dict[str, str] = {
     "The septal nuclei project to the hypothalamus, a limbic-autonomic relay.":
         "Les noyaux septaux projettent vers l'hypothalamus, un relais "
         "limbique-autonome.",
+    # --- Receptor family / class / synaptic labels + receptor neurotransmitters.
+    # (Receptor descriptions are authored inline as {en, fr} pairs in RECEPTORS,
+    #  not via this table, since each is unique.)
+    "Adrenergic": "Adrénergique",
+    "Cholinergic": "Cholinergique",
+    "Dopaminergic": "Dopaminergique",
+    "GABAergic": "GABAergique",
+    "Glutamatergic": "Glutamatergique",
+    "Glycinergic": "Glycinergique",
+    "Histaminergic": "Histaminergique",
+    "Opioidergic": "Opioïdergique",
+    "Serotonergic": "Sérotoninergique",
+    "Cannabinoid": "Cannabinoïde",
+    "Purinergic": "Purinergique",
+    "Sigma": "Sigma",
+    "Melatonergic": "Mélatoninergique",
+    "Ionotropic (ligand-gated ion channel)":
+        "Ionotrope (canal ionique ligand-dépendant)",
+    "Metabotropic (GPCR)": "Métabotrope (RCPG)",
+    "Intracellular chaperone": "Chaperon intracellulaire",
+    "Presynaptic": "Présynaptique",
+    "Postsynaptic": "Postsynaptique",
+    "Pre- and postsynaptic": "Pré- et postsynaptique",
+    "Noradrenaline": "Noradrénaline",
+    "Serotonin": "Sérotonine",
+    "Histamine": "Histamine",
+    "Opioid peptides": "Peptides opioïdes",
+    "Glycine": "Glycine",
+    "Endocannabinoids": "Endocannabinoïdes",
+    "Adenosine": "Adénosine",
+    "Sigma ligands": "Ligands sigma",
+    "Melatonin": "Mélatonine",
 }
 
 # English strings reached by _t() that had no FR entry; build_records raises with
@@ -1245,6 +1317,684 @@ CIRCUITS: list[dict[str, Any]] = [
 ]
 
 
+# Neurotransmitter receptors. Each entry is one receptor (the clinically relevant
+# brain receptors from Wikipedia's "Example neurotransmitter receptors" table plus
+# a few major psychiatric ones it omits: CB1, A2A, sigma-1, MT1/MT2). The viewer
+# lists them in a legend section grouped by ``family`` (the neurotransmitter
+# system); focusing a receptor dims the brain and lights glowing dots on every
+# structure in ``locations`` (both hemispheres), and opens an info panel built
+# from these fields. See "Changing the data" in CLAUDE.md.
+#
+#   id              : short slug (also the DOM-safe handle in the viewer)
+#   name            : technical display name (language-neutral, e.g. "5-HT2A")
+#   family          : neurotransmitter system, key of RECEPTOR_FAMILY_LABELS
+#   neurotransmitter: the endogenous ligand (translatable)
+#   receptor_class  : "ionotropic" | "metabotropic" | "chaperone"
+#                     (key of RECEPTOR_CLASS_LABELS)
+#   sign            : "excitatory" | "inhibitory" | "modulatory" (reuses the arrow
+#                     SIGN_COLORS / SIGN_LABELS so the legend swatch matches)
+#   synaptic        : "presynaptic" | "postsynaptic" | "both"
+#                     (key of SYNAPTIC_LABELS)
+#   locations       : list of structure *base* ids where it is expressed, OR the
+#                     sentinel "ALL" for a brain-wide receptor (emitted as
+#                     ``ubiquitous`` so the viewer lights every structure). An
+#                     EMPTY list (no description) is a deliberate "stub": a
+#                     receptor with no meaningful CNS/psychiatric role, listed for
+#                     completeness but not focusable.
+#   description     : one-line {en}; description_fr is its French (authored inline,
+#                     unique per receptor, so it bypasses the shared FR table).
+#                     Omitted on stubs.
+#   wikipedia       : source article (rendered as a link in the info panel)
+#
+# Sourced from each receptor's linked Wikipedia article (the receptor info panel
+# shows that link). Locations were mapped onto the modeled structures (e.g.
+# striatum -> caudate+putamen, "cortex" -> the four lobes, raphe/locus coeruleus/
+# VTA -> the new source nuclei); peripheral-only sites (gut, heart, retina, spinal
+# cord, immune) were dropped as out of scope for a brain viewer.
+RECEPTORS: list[dict[str, Any]] = [
+    # --- Adrenergic (noradrenaline); all GPCRs ---------------------------------
+    dict(id="alpha1a", name="α1A", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
+                    "cerebellum", "brainstem", "thalamus", "hypothalamus"],
+         description="Gq-coupled excitatory NA receptor; modulates cortical, "
+                     "hippocampal and brainstem excitability.",
+         description_fr="Récepteur excitateur de la noradrénaline couplé à Gq ; "
+                        "module l'excitabilité corticale, hippocampique et du "
+                        "tronc cérébral.",
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"),
+    dict(id="alpha1b", name="α1B", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
+                    "cerebellum", "brainstem", "thalamus"],
+         description="Gq-coupled excitatory NA receptor; postsynaptic, widely "
+                     "expressed across cortex and subcortex.",
+         description_fr="Récepteur excitateur de la noradrénaline couplé à Gq ; "
+                        "postsynaptique, largement exprimé dans le cortex et les "
+                        "régions sous-corticales.",
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"),
+    # Stub: α1C is obsolete (found identical to α1A; no distinct human subtype).
+    dict(id="alpha1c", name="α1C", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic", locations=[],
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"),
+    dict(id="alpha1d", name="α1D", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
+                    "cerebellum", "brainstem", "thalamus"],
+         description="Gq-coupled excitatory NA receptor; postsynaptic, in cortex, "
+                     "hippocampus and brainstem.",
+         description_fr="Récepteur excitateur de la noradrénaline couplé à Gq ; "
+                        "postsynaptique, dans le cortex, l'hippocampe et le tronc "
+                        "cérébral.",
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"),
+    dict(id="alpha2a", name="α2A", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["locus_coeruleus", "brainstem", "hypothalamus", "hippocampus",
+                    "frontal", "parietal", "temporal", "occipital", "cerebellum"],
+         description="Gi-coupled inhibitory NA receptor; presynaptic autoreceptor "
+                     "in locus coeruleus, postsynaptic in prefrontal cortex.",
+         description_fr="Récepteur inhibiteur de la noradrénaline couplé à Gi ; "
+                        "autorécepteur présynaptique du locus cœruleus, "
+                        "postsynaptique dans le cortex préfrontal.",
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor"),
+    dict(id="alpha2b", name="α2B", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="postsynaptic",
+         locations=["thalamus", "hippocampus", "cerebellum"],
+         description="Gi-coupled inhibitory NA receptor; limited CNS expression in "
+                     "thalamus, hippocampus and cerebellar Purkinje cells.",
+         description_fr="Récepteur inhibiteur de la noradrénaline couplé à Gi ; "
+                        "expression limitée au thalamus, à l'hippocampe et aux "
+                        "cellules de Purkinje cérébelleuses.",
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor"),
+    dict(id="alpha2c", name="α2C", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["thalamus", "amygdala", "hippocampus", "frontal", "parietal",
+                    "temporal", "occipital", "caudate", "putamen",
+                    "globus_pallidus", "substantia_nigra", "vta", "brainstem"],
+         description="Gi-coupled inhibitory NA receptor; widespread in basal "
+                     "ganglia, amygdala, hippocampus, cortex and midbrain.",
+         description_fr="Récepteur inhibiteur de la noradrénaline couplé à Gi ; "
+                        "répandu dans les noyaux gris centraux, l'amygdale, "
+                        "l'hippocampe, le cortex et le mésencéphale.",
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor"),
+    # Stub: α2D is a rodent/non-human ortholog of human α2A (no human α2D).
+    dict(id="alpha2d", name="α2D", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic", locations=[],
+         wikipedia="https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor"),
+    dict(id="beta1", name="β1", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "cingulate", "accumbens"],
+         description="Gs-coupled excitatory NA receptor; in cortex, cingulate and "
+                     "accumbens; modulates fear and circadian timing.",
+         description_fr="Récepteur excitateur de la noradrénaline couplé à Gs ; "
+                        "dans le cortex, le cingulaire et l'accumbens ; module la "
+                        "peur et le rythme circadien.",
+         wikipedia="https://en.wikipedia.org/wiki/Beta-1_adrenergic_receptor"),
+    dict(id="beta2", name="β2", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["cerebellum", "frontal", "parietal", "temporal", "occipital",
+                    "hippocampus"],
+         description="Gs-coupled excitatory NA receptor; in cerebellum, cortex and "
+                     "hippocampus.",
+         description_fr="Récepteur excitateur de la noradrénaline couplé à Gs ; "
+                        "dans le cervelet, le cortex et l'hippocampe.",
+         wikipedia="https://en.wikipedia.org/wiki/Beta-2_adrenergic_receptor"),
+    # Stub: β3 is predominantly peripheral (adipose/bladder); no brain role.
+    dict(id="beta3", name="β3", family="adrenergic",
+         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic", locations=[],
+         wikipedia="https://en.wikipedia.org/wiki/Beta-3_adrenergic_receptor"),
+
+    # --- Cholinergic (acetylcholine) -------------------------------------------
+    dict(id="m1", name="M1", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "cingulate",
+                    "hippocampus", "accumbens"],
+         description="Gq postsynaptic muscarinic receptor; slow EPSP, drives "
+                     "cortical/hippocampal cognition and memory.",
+         description_fr="Récepteur muscarinique Gq postsynaptique ; PPSE lent, "
+                        "soutient la cognition et la mémoire corticale et "
+                        "hippocampique.",
+         wikipedia="https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor_M1"),
+    dict(id="m2", name="M2", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic",
+         locations=["olfactory_bulb", "brainstem", "frontal", "parietal",
+                    "temporal", "occipital", "hippocampus"],
+         description="Gi-coupled presynaptic autoreceptor; restrains acetylcholine "
+                     "release (also slows the heart).",
+         description_fr="Autorécepteur présynaptique couplé à Gi ; freine la "
+                        "libération d'acétylcholine (ralentit aussi le cœur).",
+         wikipedia="https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor_M2"),
+    dict(id="m3", name="M3", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["hypothalamus", "brainstem", "thalamus", "frontal", "temporal",
+                    "occipital"],
+         description="Gq postsynaptic muscarinic receptor; acts in hypothalamus "
+                     "and brainstem autonomic centres.",
+         description_fr="Récepteur muscarinique Gq postsynaptique ; agit dans "
+                        "l'hypothalamus et les centres autonomes du tronc "
+                        "cérébral.",
+         wikipedia="https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor_M3"),
+    dict(id="m4", name="M4", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic",
+         locations=["caudate", "putamen", "accumbens", "frontal", "cingulate"],
+         description="Gi-coupled receptor enriched in striatum; presynaptic "
+                     "autoreceptor that brakes D1 dopamine drive.",
+         description_fr="Récepteur couplé à Gi enrichi dans le striatum ; "
+                        "autorécepteur présynaptique freinant l'activité "
+                        "dopaminergique D1.",
+         wikipedia="https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor_M4"),
+    dict(id="m5", name="M5", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["substantia_nigra", "vta", "hypothalamus", "frontal",
+                    "amygdala", "hippocampus", "mammillary"],
+         description="Gq receptor on substantia nigra/VTA dopamine neurons; "
+                     "facilitates dopamine release.",
+         description_fr="Récepteur Gq sur les neurones dopaminergiques de la "
+                        "substance noire et de l'ATV ; facilite la libération de "
+                        "dopamine.",
+         wikipedia="https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor_M5"),
+    # Stub: muscle-type nAChR sits at the neuromuscular junction (peripheral).
+    dict(id="nachr_muscle", name="Muscle nAChR", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="ionotropic",
+         sign="excitatory", synaptic="postsynaptic", locations=[],
+         wikipedia="https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor"),
+    dict(id="nachr_a4b2", name="Neuronal α4β2 nAChR", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="ionotropic",
+         sign="excitatory", synaptic="both",
+         locations=["frontal", "parietal", "temporal", "occipital", "thalamus",
+                    "vta", "substantia_nigra", "accumbens", "caudate", "putamen"],
+         description="High-affinity nicotine receptor; cation channel on dopamine "
+                     "terminals, drives nicotine addiction.",
+         description_fr="Récepteur nicotinique à haute affinité ; canal cationique "
+                        "sur les terminaisons dopaminergiques, moteur de "
+                        "l'addiction à la nicotine.",
+         wikipedia="https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor"),
+    dict(id="nachr_a7", name="Neuronal α7 nAChR", family="cholinergic",
+         neurotransmitter="Acetylcholine", receptor_class="ionotropic",
+         sign="excitatory", synaptic="both",
+         locations=["hippocampus", "frontal", "parietal", "temporal", "occipital",
+                    "thalamus", "amygdala"],
+         description="Homomeric Ca2+-permeable cation channel; "
+                     "α-bungarotoxin-sensitive, implicated in schizophrenia.",
+         description_fr="Canal cationique homomérique perméable au Ca2+ ; sensible "
+                        "à l'α-bungarotoxine, impliqué dans la schizophrénie.",
+         wikipedia="https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor"),
+
+    # --- Dopaminergic ----------------------------------------------------------
+    dict(id="d1", name="D1", family="dopaminergic",
+         neurotransmitter="Dopamine", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["caudate", "putamen", "accumbens", "olfactory_bulb", "frontal",
+                    "parietal", "temporal", "occipital", "amygdala",
+                    "septal_nuclei", "thalamus", "hypothalamus", "cingulate"],
+         description="Most abundant dopamine receptor; Gs-coupled, excitatory; "
+                     "drives the striatal direct pathway.",
+         description_fr="Récepteur dopaminergique le plus abondant ; couplé à Gs, "
+                        "excitateur ; active la voie directe striatale.",
+         wikipedia="https://en.wikipedia.org/wiki/Dopamine_receptor_D1"),
+    dict(id="d2", name="D2", family="dopaminergic",
+         neurotransmitter="Dopamine", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["putamen", "caudate", "accumbens", "olfactory_bulb",
+                    "substantia_nigra", "vta", "pituitary", "frontal"],
+         description="Gi-coupled, inhibitory; drives the indirect pathway and acts "
+                     "as a presynaptic autoreceptor; antipsychotic target.",
+         description_fr="Couplé à Gi, inhibiteur ; active la voie indirecte et "
+                        "agit comme autorécepteur présynaptique ; cible des "
+                        "antipsychotiques.",
+         wikipedia="https://en.wikipedia.org/wiki/Dopamine_receptor_D2"),
+    dict(id="d3", name="D3", family="dopaminergic",
+         neurotransmitter="Dopamine", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["accumbens", "olfactory_bulb", "putamen", "caudate", "frontal",
+                    "hypothalamus", "hippocampus"],
+         description="D2-like, Gi-coupled, inhibitory; concentrated in limbic "
+                     "ventral striatum, highest dopamine affinity.",
+         description_fr="De type D2, couplé à Gi, inhibiteur ; concentré dans le "
+                        "striatum ventral limbique, plus forte affinité pour la "
+                        "dopamine.",
+         wikipedia="https://en.wikipedia.org/wiki/Dopamine_receptor_D3"),
+    dict(id="d4", name="D4", family="dopaminergic",
+         neurotransmitter="Dopamine", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="postsynaptic",
+         locations=["frontal", "amygdala", "hypothalamus", "hippocampus",
+                    "occipital", "cerebellum"],
+         description="D2-like, Gi-coupled, inhibitory; enriched in frontal cortex; "
+                     "linked to attention and ADHD.",
+         description_fr="De type D2, couplé à Gi, inhibiteur ; enrichi dans le "
+                        "cortex frontal ; lié à l'attention et au TDAH.",
+         wikipedia="https://en.wikipedia.org/wiki/Dopamine_receptor_D4"),
+    dict(id="d5", name="D5", family="dopaminergic",
+         neurotransmitter="Dopamine", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["amygdala", "frontal", "parietal", "temporal", "occipital",
+                    "hippocampus", "caudate", "putamen", "thalamus", "hypothalamus",
+                    "septal_nuclei", "cerebellum", "brainstem"],
+         description="D1-like, Gs-coupled, excitatory; low-abundance but "
+                     "widespread; high constitutive activity, prominent in "
+                     "hippocampus.",
+         description_fr="De type D1, couplé à Gs, excitateur ; peu abondant mais "
+                        "répandu ; forte activité constitutive, marqué dans "
+                        "l'hippocampe.",
+         wikipedia="https://en.wikipedia.org/wiki/Dopamine_receptor_D5"),
+
+    # --- GABAergic -------------------------------------------------------------
+    dict(id="gaba_a", name="GABA-A", family="gabaergic",
+         neurotransmitter="GABA", receptor_class="ionotropic",
+         sign="inhibitory", synaptic="postsynaptic", locations="ALL",
+         description="Ubiquitous Cl- channel; target of benzodiazepines, alcohol, "
+                     "anaesthetics, neurosteroids; anxiety/epilepsy/insomnia.",
+         description_fr="Canal Cl- ubiquitaire ; cible des benzodiazépines, de "
+                        "l'alcool, des anesthésiques, des neurostéroïdes ; "
+                        "anxiété/épilepsie/insomnie.",
+         wikipedia="https://en.wikipedia.org/wiki/GABAA_receptor"),
+    dict(id="gaba_b", name="GABA-B", family="gabaergic",
+         neurotransmitter="GABA", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both", locations="ALL",
+         description="Widespread Gi/o GPCR; opens K+ channels, curbs Ca2+ and "
+                     "transmitter release; baclofen target.",
+         description_fr="RCPG Gi/o répandu ; ouvre les canaux K+, réduit le Ca2+ "
+                        "et la libération de neurotransmetteur ; cible du "
+                        "baclofène.",
+         wikipedia="https://en.wikipedia.org/wiki/GABAB_receptor"),
+    # Stub: GABA-A-rho (formerly "GABA-C") is predominantly retinal.
+    dict(id="gaba_a_rho", name="GABA-A-ρ", family="gabaergic",
+         neurotransmitter="GABA", receptor_class="ionotropic",
+         sign="inhibitory", synaptic="postsynaptic", locations=[],
+         wikipedia="https://en.wikipedia.org/wiki/GABAA-rho_receptor"),
+
+    # --- Glutamatergic ---------------------------------------------------------
+    dict(id="nmda", name="NMDA", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="ionotropic",
+         sign="excitatory", synaptic="postsynaptic", locations="ALL",
+         description="Coincidence-detecting Ca2+ channel driving LTP/memory; "
+                     "ketamine/memantine target, schizophrenia hypofunction.",
+         description_fr="Canal Ca2+ détecteur de coïncidence pilotant la "
+                        "LTP/mémoire ; cible kétamine/mémantine, hypofonction dans "
+                        "la schizophrénie.",
+         wikipedia="https://en.wikipedia.org/wiki/NMDA_receptor"),
+    dict(id="ampa", name="AMPA", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="ionotropic",
+         sign="excitatory", synaptic="postsynaptic", locations="ALL",
+         description="Fast cation channel mediating most fast excitatory "
+                     "transmission; its trafficking underlies synaptic plasticity.",
+         description_fr="Canal cationique rapide assurant l'essentiel de la "
+                        "transmission excitatrice rapide ; son trafic sous-tend la "
+                        "plasticité.",
+         wikipedia="https://en.wikipedia.org/wiki/AMPA_receptor"),
+    dict(id="kainate", name="Kainate", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="ionotropic",
+         sign="excitatory", synaptic="both",
+         locations=["hippocampus", "frontal", "parietal", "temporal", "occipital",
+                    "amygdala", "cerebellum"],
+         description="Cation channel with more limited distribution; postsynaptic "
+                     "excitation plus presynaptic modulation of release.",
+         description_fr="Canal cationique à distribution plus limitée ; excitation "
+                        "postsynaptique et modulation présynaptique de la "
+                        "libération.",
+         wikipedia="https://en.wikipedia.org/wiki/Kainate_receptor"),
+    dict(id="mglur1", name="mGluR1", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["cerebellum", "hippocampus", "thalamus", "frontal", "parietal",
+                    "temporal", "occipital"],
+         description="Group I Gq receptor; postsynaptic excitation, potentiates "
+                     "NMDA currents; strong in cerebellar Purkinje cells.",
+         description_fr="Récepteur Gq du groupe I ; excitation postsynaptique, "
+                        "potentialise les courants NMDA ; abondant dans les "
+                        "cellules de Purkinje.",
+         wikipedia="https://en.wikipedia.org/wiki/Metabotropic_glutamate_receptor"),
+    dict(id="mglur2", name="mGluR2", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
+                    "amygdala"],
+         description="Group II Gi presynaptic autoreceptor lowering glutamate "
+                     "release; agonists target anxiety and schizophrenia.",
+         description_fr="Autorécepteur présynaptique Gi du groupe II réduisant la "
+                        "libération de glutamate ; agonistes visés pour l'anxiété "
+                        "et la schizophrénie.",
+         wikipedia="https://en.wikipedia.org/wiki/Metabotropic_glutamate_receptor"),
+    dict(id="mglur3", name="mGluR3", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
+                    "thalamus"],
+         description="Group II Gi receptor on terminals and glia reducing "
+                     "glutamate release; neuroprotective, schizophrenia interest.",
+         description_fr="Récepteur Gi du groupe II sur terminaisons et glie "
+                        "réduisant la libération de glutamate ; neuroprotecteur, "
+                        "intérêt schizophrénie.",
+         wikipedia="https://en.wikipedia.org/wiki/Metabotropic_glutamate_receptor"),
+    dict(id="mglur4", name="mGluR4", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic",
+         locations=["cerebellum", "thalamus", "hypothalamus", "caudate", "putamen"],
+         description="Group III Gi presynaptic receptor suppressing release; "
+                     "basal-ganglia activation proposed for Parkinson's.",
+         description_fr="Récepteur présynaptique Gi du groupe III réduisant la "
+                        "libération ; activation des noyaux gris visée pour la "
+                        "maladie de Parkinson.",
+         wikipedia="https://en.wikipedia.org/wiki/Metabotropic_glutamate_receptor"),
+    dict(id="mglur5", name="mGluR5", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["caudate", "putamen", "accumbens", "hippocampus", "frontal",
+                    "parietal", "temporal", "occipital", "amygdala"],
+         description="Group I Gq receptor potentiating NMDA; fragile-X and "
+                     "psychiatric drug target, dense in striatum/cortex.",
+         description_fr="Récepteur Gq du groupe I potentialisant le NMDA ; cible X "
+                        "fragile/psychiatrie, dense dans le striatum et le cortex.",
+         wikipedia="https://en.wikipedia.org/wiki/Metabotropic_glutamate_receptor"),
+    # Stub: mGluR6 is restricted to retinal ON-bipolar cells.
+    dict(id="mglur6", name="mGluR6", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="postsynaptic", locations=[],
+         wikipedia="https://en.wikipedia.org/wiki/Metabotropic_glutamate_receptor"),
+    dict(id="mglur7", name="mGluR7", family="glutamatergic",
+         neurotransmitter="Glutamate", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic", locations="ALL",
+         description="Group III Gi presynaptic autoreceptor, the most widespread "
+                     "mGluR, gating release at active zones; lowest affinity.",
+         description_fr="Autorécepteur présynaptique Gi du groupe III, le mGluR le "
+                        "plus répandu, contrôle la libération aux zones actives ; "
+                        "plus faible affinité.",
+         wikipedia="https://en.wikipedia.org/wiki/Metabotropic_glutamate_receptor"),
+
+    # --- Glycinergic -----------------------------------------------------------
+    dict(id="glycine", name="Glycine", family="glycinergic",
+         neurotransmitter="Glycine", receptor_class="ionotropic",
+         sign="inhibitory", synaptic="postsynaptic",
+         locations=["brainstem", "cerebellum", "hippocampus"],
+         description="Ionotropic Cl- channel; major inhibitory receptor of the "
+                     "brainstem (its dominant spinal-cord site is out of frame).",
+         description_fr="Canal Cl- ionotrope ; principal récepteur inhibiteur du "
+                        "tronc cérébral (son site médullaire dominant est hors "
+                        "champ).",
+         wikipedia="https://en.wikipedia.org/wiki/Glycine_receptor"),
+
+    # --- Histaminergic ---------------------------------------------------------
+    dict(id="h1", name="H1", family="histaminergic",
+         neurotransmitter="Histamine", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "cingulate",
+                    "amygdala", "hippocampus", "thalamus", "hypothalamus",
+                    "brainstem"],
+         description="Gq excitatory; drives wakefulness and arousal; its blockade "
+                     "by antihistamines causes sedation.",
+         description_fr="Gq excitateur ; favorise l'éveil et la vigilance ; son "
+                        "blocage par les antihistaminiques cause la sédation.",
+         wikipedia="https://en.wikipedia.org/wiki/Histamine_H1_receptor"),
+    dict(id="h2", name="H2", family="histaminergic",
+         neurotransmitter="Histamine", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "caudate",
+                    "putamen", "hippocampus", "cerebellum"],
+         description="Gs cAMP receptor; mainly gastric, with a lighter CNS role in "
+                     "basal ganglia and cortex.",
+         description_fr="Récepteur Gs/AMPc ; surtout gastrique, avec un rôle "
+                        "central plus léger dans les noyaux gris et le cortex.",
+         wikipedia="https://en.wikipedia.org/wiki/Histamine_H2_receptor"),
+    dict(id="h3", name="H3", family="histaminergic",
+         neurotransmitter="Histamine", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="presynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "cingulate",
+                    "caudate", "putamen", "accumbens", "hippocampus", "hypothalamus",
+                    "olfactory_bulb"],
+         description="Gi presynaptic auto/heteroreceptor; CNS-wide; curbs "
+                     "transmitter release; cognition and wakefulness target.",
+         description_fr="Auto/hétérorécepteur présynaptique Gi ; pan-cérébral ; "
+                        "freine la libération de neurotransmetteurs ; cible "
+                        "cognition/éveil.",
+         wikipedia="https://en.wikipedia.org/wiki/Histamine_H3_receptor"),
+    # Stub: H4 is an immune/haematopoietic receptor (no neuronal CNS role).
+    dict(id="h4", name="H4", family="histaminergic",
+         neurotransmitter="Histamine", receptor_class="metabotropic",
+         sign="modulatory", synaptic="postsynaptic", locations=[],
+         wikipedia="https://en.wikipedia.org/wiki/Histamine_H4_receptor"),
+
+    # --- Opioidergic -----------------------------------------------------------
+    dict(id="mu", name="μ (MOR)", family="opioidergic",
+         neurotransmitter="Opioid peptides", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["brainstem", "thalamus", "caudate", "putamen", "accumbens",
+                    "amygdala", "frontal", "parietal", "temporal", "occipital",
+                    "vta", "hypothalamus", "hippocampus"],
+         description="Main analgesia/euphoria/dependence opioid receptor; dense in "
+                     "PAG, thalamus, striatum, amygdala.",
+         description_fr="Récepteur opioïde principal de l'analgésie/euphorie/"
+                        "dépendance ; dense dans la SGPA, le thalamus, le "
+                        "striatum, l'amygdale.",
+         wikipedia="https://en.wikipedia.org/wiki/%CE%9C-opioid_receptor"),
+    dict(id="delta", name="δ (DOR)", family="opioidergic",
+         neurotransmitter="Opioid peptides", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["frontal", "parietal", "temporal", "occipital", "caudate",
+                    "putamen", "accumbens", "amygdala", "olfactory_bulb",
+                    "hippocampus"],
+         description="Opioid receptor modulating mood and anxiety; cortex, "
+                     "striatum, amygdala, olfactory bulb.",
+         description_fr="Récepteur opioïde modulant l'humeur et l'anxiété ; "
+                        "cortex, striatum, amygdale, bulbe olfactif.",
+         wikipedia="https://en.wikipedia.org/wiki/%CE%B4-opioid_receptor"),
+    dict(id="kappa", name="κ (KOR)", family="opioidergic",
+         neurotransmitter="Opioid peptides", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["caudate", "putamen", "accumbens", "claustrum", "hypothalamus",
+                    "brainstem", "amygdala"],
+         description="Opioid receptor driving dysphoria and stress; striatum, "
+                     "claustrum, hypothalamus, PAG.",
+         description_fr="Récepteur opioïde induisant dysphorie et réponses au "
+                        "stress ; striatum, claustrum, hypothalamus, SGPA.",
+         wikipedia="https://en.wikipedia.org/wiki/%CE%BA-opioid_receptor"),
+
+    # --- Serotonergic ----------------------------------------------------------
+    dict(id="5ht1a", name="5-HT1A", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["raphe", "hippocampus", "frontal", "parietal", "temporal",
+                    "occipital", "amygdala", "septal_nuclei"],
+         description="Gi-coupled; raphe somatodendritic autoreceptor and "
+                     "postsynaptic; anxiety/depression target (buspirone, SSRIs).",
+         description_fr="Couplé à Gi ; autorécepteur somatodendritique du raphé et "
+                        "postsynaptique ; cible anxiété/dépression (buspirone, "
+                        "ISRS).",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT1A_receptor"),
+    dict(id="5ht1b", name="5-HT1B", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["caudate", "putamen", "globus_pallidus", "substantia_nigra",
+                    "frontal", "hippocampus"],
+         description="Gi-coupled; presynaptic terminal autoreceptor in basal "
+                     "ganglia; triptan target for migraine.",
+         description_fr="Couplé à Gi ; autorécepteur terminal présynaptique des "
+                        "noyaux gris centraux ; cible des triptans (migraine).",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT1B_receptor"),
+    dict(id="5ht1d", name="5-HT1D", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="both",
+         locations=["globus_pallidus", "substantia_nigra", "caudate", "putamen",
+                    "hippocampus", "frontal", "accumbens"],
+         description="Gi-coupled; low-level basal ganglia/cortex; presynaptic "
+                     "terminal autoreceptor; triptan migraine target.",
+         description_fr="Couplé à Gi ; faible niveau noyaux gris/cortex ; "
+                        "autorécepteur terminal présynaptique ; cible triptan "
+                        "(migraine).",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT1D_receptor"),
+    dict(id="5ht1e", name="5-HT1E", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="postsynaptic",
+         locations=["frontal", "hippocampus", "olfactory_bulb", "cingulate",
+                    "accumbens"],
+         description="Gi-coupled; frontal cortex, hippocampus and olfactory bulb; "
+                     "implicated in human memory; poorly characterized.",
+         description_fr="Couplé à Gi ; cortex frontal, hippocampe et bulbe "
+                        "olfactif ; impliqué dans la mémoire humaine ; mal "
+                        "caractérisé.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT1E_receptor"),
+    dict(id="5ht1f", name="5-HT1F", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="postsynaptic",
+         locations=["frontal", "occipital", "thalamus", "subthalamic_nucleus"],
+         description="Gi-coupled; cortex, thalamus, subthalamus; target of "
+                     "lasmiditan for migraine without vasoconstriction.",
+         description_fr="Couplé à Gi ; cortex, thalamus, subthalamus ; cible du "
+                        "lasmiditan contre la migraine sans vasoconstriction.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT1F_receptor"),
+    dict(id="5ht2a", name="5-HT2A", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "parietal", "temporal", "occipital", "claustrum"],
+         description="Gq-coupled; dense on cortical pyramidal cells; mediates "
+                     "psychedelics; atypical antipsychotic target.",
+         description_fr="Couplé à Gq ; dense sur les cellules pyramidales "
+                        "corticales ; médiateur des psychédéliques ; cible "
+                        "antipsychotique atypique.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT2A_receptor"),
+    dict(id="5ht2b", name="5-HT2B", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["hypothalamus", "frontal", "amygdala"],
+         description="Gq-coupled; mostly peripheral (cardiac valves); sparse CNS "
+                     "in hypothalamus, cortex, amygdala; valvulopathy risk.",
+         description_fr="Couplé à Gq ; surtout périphérique (valves cardiaques) ; "
+                        "rare dans le SNC : hypothalamus, cortex, amygdale ; "
+                        "risque de valvulopathie.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT2B_receptor"),
+    dict(id="5ht2c", name="5-HT2C", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["frontal", "hippocampus", "amygdala", "hypothalamus",
+                    "substantia_nigra", "accumbens"],
+         description="Gq-coupled; choroid plexus, cortex, limbic and hypothalamus; "
+                     "regulates appetite and mood (lorcaserin).",
+         description_fr="Couplé à Gq ; plexus choroïde, cortex, limbique et "
+                        "hypothalamus ; régule l'appétit et l'humeur "
+                        "(lorcasérine).",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT2C_receptor"),
+    dict(id="5ht3", name="5-HT3", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="ionotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["brainstem", "hippocampus", "amygdala"],
+         description="Ionotropic cation channel; area postrema drives "
+                     "nausea/vomiting; antiemetic target (ondansetron).",
+         description_fr="Canal cationique ionotrope ; l'area postrema déclenche "
+                        "nausées/vomissements ; cible antiémétique (ondansétron).",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT3_receptor"),
+    dict(id="5ht4", name="5-HT4", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["hippocampus", "caudate", "putamen", "frontal", "accumbens"],
+         description="Gs-coupled; hippocampus, striatum, cortex; cognition and gut "
+                     "motility.",
+         description_fr="Couplé à Gs ; hippocampe, striatum, cortex ; cognition et "
+                        "motilité intestinale.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT4_receptor"),
+    dict(id="5ht5a", name="5-HT5A", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="inhibitory", synaptic="postsynaptic",
+         locations=["frontal", "cingulate", "cerebellum", "hippocampus",
+                    "hypothalamus", "accumbens"],
+         description="Gi-coupled; cortex, cerebellum, hippocampus, hypothalamus; "
+                     "least understood subtype, possible circadian role.",
+         description_fr="Couplé à Gi ; cortex, cervelet, hippocampe, hypothalamus ; "
+                        "sous-type le moins compris, rôle circadien possible.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT5A_receptor"),
+    dict(id="5ht6", name="5-HT6", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["caudate", "putamen", "frontal", "hippocampus", "accumbens"],
+         description="Gs-coupled; striatum, cortex, hippocampus; almost entirely "
+                     "CNS; cognition target.",
+         description_fr="Couplé à Gs ; striatum, cortex, hippocampe ; presque "
+                        "exclusivement SNC ; cible cognition.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT6_receptor"),
+    dict(id="5ht7", name="5-HT7", family="serotonergic",
+         neurotransmitter="Serotonin", receptor_class="metabotropic",
+         sign="excitatory", synaptic="postsynaptic",
+         locations=["thalamus", "hypothalamus", "hippocampus", "frontal",
+                    "amygdala"],
+         description="Gs-coupled; thalamus, hypothalamus, hippocampus; circadian "
+                     "rhythm, mood and thermoregulation.",
+         description_fr="Couplé à Gs ; thalamus, hypothalamus, hippocampe ; rythme "
+                        "circadien, humeur et thermorégulation.",
+         wikipedia="https://en.wikipedia.org/wiki/5-HT7_receptor"),
+
+    # --- Cannabinoid (added; not in the source table) --------------------------
+    dict(id="cb1", name="CB1", family="cannabinoid",
+         neurotransmitter="Endocannabinoids", receptor_class="metabotropic",
+         sign="modulatory", synaptic="presynaptic",
+         locations=["substantia_nigra", "globus_pallidus", "caudate", "putamen",
+                    "hippocampus", "frontal", "parietal", "temporal", "occipital",
+                    "cerebellum", "amygdala"],
+         description="Gi GPCR; presynaptic retrograde signaling, THC target; one "
+                     "of the most abundant brain GPCRs.",
+         description_fr="RCPG Gi ; signalisation rétrograde présynaptique, cible du "
+                        "THC ; parmi les RCPG les plus abondants du cerveau.",
+         wikipedia="https://en.wikipedia.org/wiki/Cannabinoid_receptor_type_1"),
+
+    # --- Purinergic (added) ----------------------------------------------------
+    dict(id="a2a", name="A2A", family="purinergic",
+         neurotransmitter="Adenosine", receptor_class="metabotropic",
+         sign="modulatory", synaptic="both",
+         locations=["caudate", "putamen", "accumbens"],
+         description="Gs GPCR concentrated in striatum on D2 indirect-pathway "
+                     "neurons; caffeine antagonist target.",
+         description_fr="RCPG Gs concentré dans le striatum sur les neurones D2 de "
+                        "la voie indirecte ; cible antagoniste de la caféine.",
+         wikipedia="https://en.wikipedia.org/wiki/Adenosine_A2A_receptor"),
+
+    # --- Sigma (added; sigma-1 is an intracellular ER chaperone, not a channel
+    #     or GPCR, hence receptor_class="chaperone") ---------------------------
+    dict(id="sigma1", name="σ1", family="sigma",
+         neurotransmitter="Sigma ligands", receptor_class="chaperone",
+         sign="modulatory", synaptic="both",
+         locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
+                    "brainstem", "cerebellum"],
+         description="Intracellular ER chaperone (not a classic channel/GPCR); "
+                     "fluvoxamine acts partly via it.",
+         description_fr="Chaperon intracellulaire du RE (ni canal ni RCPG "
+                        "classique) ; la fluvoxamine agit en partie via lui.",
+         wikipedia="https://en.wikipedia.org/wiki/Sigma-1_receptor"),
+
+    # --- Melatonergic (added) --------------------------------------------------
+    dict(id="mt1", name="MT1", family="melatonergic",
+         neurotransmitter="Melatonin", receptor_class="metabotropic",
+         sign="modulatory", synaptic="postsynaptic",
+         locations=["hypothalamus", "pituitary"],
+         description="Gi GPCR in hypothalamic SCN + pituitary pars tuberalis; "
+                     "sleep/circadian, ramelteon target.",
+         description_fr="RCPG Gi dans le NSC hypothalamique et la pars tuberalis "
+                        "hypophysaire ; sommeil/circadien, cible du ramelteon.",
+         wikipedia="https://en.wikipedia.org/wiki/Melatonin_receptor_1A"),
+    dict(id="mt2", name="MT2", family="melatonergic",
+         neurotransmitter="Melatonin", receptor_class="metabotropic",
+         sign="modulatory", synaptic="postsynaptic",
+         locations=["hypothalamus"],
+         description="Gi GPCR in hypothalamic SCN; drives circadian "
+                     "phase-shifting.",
+         description_fr="RCPG Gi dans le NSC hypothalamique ; gère le décalage de "
+                        "phase circadien.",
+         wikipedia="https://en.wikipedia.org/wiki/Melatonin_receptor_1B"),
+]
+
+
 def _structure_record(entry: dict[str, Any], structure_id: str,
                       name: dict[str, str], base_name: dict[str, str],
                       position: tuple[float, float, float], shape_id: str,
@@ -1592,6 +2342,59 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     return records
 
 
+def _receptor_record(rec: dict[str, Any],
+                     known_bases: set[str]) -> dict[str, Any]:
+    """Build one ``receptor`` JSONL record from a :data:`RECEPTORS` entry.
+
+    Validates the ``family`` / ``receptor_class`` / ``sign`` / ``synaptic`` keys
+    against the presentation maps and every ``locations`` base against the known
+    structure bases (so a typo fails the build). The translatable
+    ``neurotransmitter`` is wrapped bilingually via :func:`_t`; ``description`` is
+    already authored as an English/French pair inline on the entry (unique per
+    receptor, so it bypasses the shared FR table) and is copied to an
+    ``{"en", "fr"}`` object. A ``locations`` of the sentinel ``"ALL"`` marks a
+    brain-wide receptor: it is emitted with ``ubiquitous: true`` and an empty
+    location list, which the viewer expands to every structure. An empty
+    ``locations`` with no ``description`` is a deliberate stub (a receptor with no
+    meaningful CNS role) and is emitted as-is, focusable by nothing.
+    """
+    for key, table, what in (
+        ("family", RECEPTOR_FAMILY_LABELS, "RECEPTOR_FAMILY_LABELS"),
+        ("receptor_class", RECEPTOR_CLASS_LABELS, "RECEPTOR_CLASS_LABELS"),
+        ("sign", SIGN_LABELS, "SIGN_LABELS"),
+        ("synaptic", SYNAPTIC_LABELS, "SYNAPTIC_LABELS"),
+    ):
+        if rec[key] not in table:
+            raise KeyError(
+                f"Receptor {rec['id']!r} has {key}={rec[key]!r} with no {what} "
+                f"entry")
+    out: dict[str, Any] = {
+        "id": rec["id"],
+        "name": rec["name"],
+        "family": rec["family"],
+        "neurotransmitter": _t(rec["neurotransmitter"]),
+        "receptor_class": rec["receptor_class"],
+        "sign": rec["sign"],
+        "synaptic": rec["synaptic"],
+    }
+    locations = rec["locations"]
+    if locations == "ALL":
+        out["ubiquitous"] = True
+        out["locations"] = []
+    else:
+        for base in locations:
+            if base not in known_bases:
+                raise KeyError(
+                    f"Receptor {rec['id']!r} location {base!r} is not a known "
+                    f"structure base")
+        out["locations"] = list(locations)
+    if "description" in rec:
+        out["description"] = {"en": rec["description"], "fr": rec["description_fr"]}
+    if "wikipedia" in rec:
+        out["wikipedia"] = rec["wikipedia"]
+    return out
+
+
 def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     """Expand the anatomy definition into the per-type record sets + shapes.
 
@@ -1614,6 +2417,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     structures: list[dict[str, Any]] = []
     projections: list[dict[str, Any]] = []
     circuits: list[dict[str, Any]] = []
+    receptors: list[dict[str, Any]] = []
     shapes: dict[str, dict[str, Any]] = {}
 
     # Same-group blob neighbours for the inter-region jigsaw clipping. Only
@@ -1695,6 +2499,17 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             "structures": ids,
         })
 
+    # Receptors: validate + normalize each against the known structure bases
+    # (locations reference bases like circuits do; the viewer expands them to
+    # both hemispheres). Duplicate ids fail the build.
+    receptor_bases = {e["base"] for e in PAIRED} | {e["base"] for e in MIDLINE}
+    seen_receptor_ids: set[str] = set()
+    for rec in RECEPTORS:
+        if rec["id"] in seen_receptor_ids:
+            raise KeyError(f"Duplicate receptor id {rec['id']!r}")
+        seen_receptor_ids.add(rec["id"])
+        receptors.append(_receptor_record(rec, receptor_bases))
+
     # Fail loudly if the data uses a kind or group with no entry in the maps above.
     kinds = {r["kind"] for r in projections}
     missing_kinds = kinds - PROJECTION_COLORS.keys()
@@ -1737,10 +2552,21 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         "kind_signs": KIND_TO_SIGN,
         "sign_colors": SIGN_COLORS,
         "sign_labels": {sign: _t(label) for sign, label in SIGN_LABELS.items()},
+        # Receptor legend maps: family -> heading, mechanism class -> label, and
+        # pre/post-synaptic -> label (all bilingual). The per-receptor sign reuses
+        # sign_colors / sign_labels above, so the receptor legend needs no extra
+        # colour map. Object key order is the legend's family display order.
+        "receptor_family_labels": {
+            f: _t(label) for f, label in RECEPTOR_FAMILY_LABELS.items()},
+        "receptor_class_labels": {
+            c: _t(label) for c, label in RECEPTOR_CLASS_LABELS.items()},
+        "synaptic_labels": {
+            s: _t(label) for s, label in SYNAPTIC_LABELS.items()},
     }
 
     return ({"meta": meta, "structures": structures,
-             "projections": projections, "circuits": circuits}, shapes)
+             "projections": projections, "circuits": circuits,
+             "receptors": receptors}, shapes)
 
 
 def write_artifacts(root: Path) -> None:
@@ -1770,7 +2596,7 @@ def write_artifacts(root: Path) -> None:
         encoding="utf-8")
     log.info("wrote %s", meta_path)
 
-    for name in ("structures", "projections", "circuits"):
+    for name in ("structures", "projections", "circuits", "receptors"):
         path = data_dir / f"{name}.jsonl"
         with path.open("w", encoding="utf-8") as fh:
             for record in data[name]:
