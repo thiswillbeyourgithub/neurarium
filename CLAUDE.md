@@ -14,8 +14,14 @@ It shows brain regions (cortical lobes, basal ganglia / deep nuclei,
 diencephalon, limbic, hindbrain) as procedurally shaped meshes (cel-shaded
 cortical lobes carrying a swirl motif, smooth deep nuclei, foliated cerebellum,
 swept-tube caudate/brainstem/hippocampus/cingulate/fornix)
-and draws arrows for neuron projections between them. Region `group` values
-(`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`) drive the legend
+and draws arrows for neuron projections between them. It also carries a dataset of
+neurotransmitter **receptors** (which transmitter, mechanism class, excit/inhib
+sign, pre/post-synaptic site, and the regions each is expressed in); focusing one
+dims the brain and scatters glowing dots over the regions carrying it (see
+"Receptors" below). Region `group` values
+(`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`,
+`brainstem_nuclei` for the neuromodulatory source nuclei raphe / locus coeruleus /
+VTA) drive the legend
 headings + ordering via the `GROUP_LABELS` map in `tools/generate_data.py`, which
 is emitted into the data's `meta.json` and read by the viewer; adding a new
 group means adding it there too or its structures are dropped from the legend.
@@ -40,7 +46,8 @@ project can grow without touching the viewer:
 **Project layout.** Everything the browser loads lives under `public/` (the
 served site: `index.html`, `app-config.js`, `version.js`, `js/`, `data/` which
 holds the per-type dataset files (`meta.json`, `structures.jsonl`,
-`projections.jsonl`, `circuits.jsonl`) + the `shapes/` geometry files), and that
+`projections.jsonl`, `circuits.jsonl`, `receptors.jsonl`) + the `shapes/`
+geometry files), and that
 directory is the *only* thing exposed to the web: Caddy's
 `/srv` and `tools/serve.py` both root at it, so `docker/`, `tools/`, `.git` and
 the uncommitted `.env` / `deploy.sh` / `CLAUDE.local.md` are never web-reachable.
@@ -62,8 +69,12 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           (group -> {en,fr} legend heading), and the colour-mode
                           maps kind_signs (kind -> excit/inhib/modulatory sign),
                           sign_colors (sign -> colour) and sign_labels
-                          (sign -> {en,fr} heading), so the dataset is self-
-                          describing and a port needs no hardcoded palette
+                          (sign -> {en,fr} heading), plus the receptor legend maps
+                          receptor_family_labels (family -> {en,fr} heading, its
+                          key order = the receptor legend's family order),
+                          receptor_class_labels (mechanism class -> {en,fr}) and
+                          synaptic_labels (pre/post -> {en,fr}); so the dataset is
+                          self-describing and a port needs no hardcoded palette
                         - data/structures.jsonl: one region per line: id, name
                           ({en,fr}, with the hemisphere prefix/suffix), base_name
                           ({en,fr}, hemisphere-stripped, used for the legend row),
@@ -80,6 +91,19 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           id, name ({en,fr}), structures[ids] (its arrows are
                           derived in the viewer as the projections whose endpoints
                           are both in the set)
+                        - data/receptors.jsonl: one neurotransmitter receptor per
+                          line: id, name (technical, language-neutral, e.g.
+                          "5-HT2A"), family (a key of receptor_family_labels),
+                          neurotransmitter ({en,fr}), receptor_class
+                          (ionotropic/metabotropic/chaperone), sign (excit/inhib/
+                          modulatory, reusing the projection sign maps), synaptic
+                          (presynaptic/postsynaptic/both), locations (structure
+                          *base* ids where it is expressed; the viewer expands each
+                          to both hemispheres), an optional ubiquitous:true (a
+                          brain-wide receptor, empty locations -> lights every
+                          structure), optional description ({en,fr}) and wikipedia.
+                          A receptor with empty locations and no description is a
+                          deliberate "stub" (no CNS role: listed but not focusable)
 data/shapes/<name>.json  One geometry file per distinct *form* (independent of
                       where it sits / what it connects to). Symmetric left/right
                       pairs share a single right-side file; the left member
@@ -110,16 +134,23 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       the single bottom-left collapsible "neurarium" panel
                       (reset/search buttons, the two sliders, auto-rotate, the
                       nested JS-populated legend whose first rows are "show all
-                      names" / "hide projections", and a nested About section)
+                      names" / "hide projections", a nested JS-populated Receptors
+                      section, and a nested About section; Legend / Receptors /
+                      About are a single-open accordion)
                       plus the in-place search box and
                       the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches the per-type data files (meta.json + structures/
-                      projections/circuits.jsonl) + all shape files, returns a
-                      normalized {structures, projections, circuits, byId, meta}
-                      object. It reads the meta maps and resolves each projection's
-                      arrow `color` from its kind (so the viewer reads
-                      `projection.color`, never a hardcoded palette); `meta`
-                      carries {projectionColors, groupLabels}.
+                      projections/circuits/receptors.jsonl) + all shape files,
+                      returns a normalized {structures, projections, circuits,
+                      receptors, byId, meta} object. It reads the meta maps and
+                      resolves each projection's arrow `color` from its kind (so
+                      the viewer reads `projection.color`, never a hardcoded
+                      palette), and resolves each receptor's family/class/sign/
+                      synaptic labels + sign colour and expands its `locations`
+                      bases to concrete `structureIds` (both hemispheres, or every
+                      structure when `ubiquitous`); `meta` carries
+                      {projectionColors, groupLabels, ..., receptorFamilyLabels,
+                      receptorClassLabels, synapticLabels}.
 js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       dispatches on shape.type to buildBlobGeometry (deformed
                       ellipsoid), buildCurveGeometry (round-capped tapered tube
@@ -165,13 +196,25 @@ js/circuit-anim.js    Rendering half of that animation (createCircuitAnimation):
                       js/arrows.js) from source to target, looping so a curated
                       loop reads as signal flowing around it. Runs only while a
                       circuit is isolated; ticked in the render loop.
+js/receptor-markers.js  Receptor "expression dots" (createReceptorMarkers): when a
+                      receptor is focused (its legend row), scatters small additive
+                      glowing dots over the surface of every structure expressing
+                      it. Each is a THREE.Points cloud sampled from the structure
+                      mesh's own geometry and parented to it (so the dots track its
+                      explode/mirror transform and vanish when it is hidden, like
+                      the selection halo + circuit node-flash shells); colour = the
+                      receptor's sign colour, gently pulsed. One controller per
+                      scene; ticked in the render loop. See "Receptors" below.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
                       for labels, arrow + structure picking and the info panel
-                      (createInfoPanel: a connection view or a structure view
-                      with its connection list), the structure+connection search,
-                      the legend builder, and the render loop.
+                      (createInfoPanel: a connection view, a structure view with
+                      its connection list, or a receptor view), the
+                      structure+connection search, the legend builder
+                      (buildLegend) and the Receptors legend builder
+                      (buildReceptorLegend, wiring each receptor row to dim the
+                      brain + light its dots), and the render loop.
 app-config.js         Tiny config file (window.__APP_CONFIG__). This committed
                       copy is the LOCAL-DEV fallback: the feature fields are empty,
                       so dev servers keep umami + the DEV banner off. In the
@@ -383,10 +426,13 @@ The site is bilingual (English / French), no build step. `js/i18n.js` (a classic
 script, loaded early in `index.html`) is the whole mechanism:
 
 - **Two string sources, one pattern.** *UI* strings (panel labels, buttons,
-  info-panel headings, banners, ...) live in the message catalogue **inside
+  info-panel headings, banners, the receptor panel's field labels, ...) live in
+  the message catalogue **inside
   `js/i18n.js`** (one object per language). *Data* strings (region names, pathway
   labels + descriptions, circuit names, legend group headings, neurotransmitters,
-  kind labels) live in the data file as `{en, fr}` objects, authored once in
+  kind labels, and the receptor `neurotransmitter` / `description` + the receptor
+  family / class / synaptic labels) live in the data file as `{en, fr}` objects,
+  authored once in
   `tools/generate_data.py` (see "Changing the data") and resolved by `js/data.js`.
 - **Generator side (`tools/generate_data.py`).** The anatomy is authored in
   English; a single `FR` table (English string -> French) is the French source,
@@ -572,17 +618,22 @@ as the WIP banner (`js/error-banner.js`):
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
   names** and **Hide projections** buttons followed by the **arrow colour-mode
   switch** (Neurotransmitter / Potential, `#color-mode`), then the nested
+  collapsed **Receptors** (`#receptors`) section, then the nested
   collapsed **About** (`#about`) section. Searching swaps the search box in place of the panel's
   normal contents (`#controls-main` hidden, `#search` shown) rather than opening
   a popup; the reset/search buttons stay visible so the magnifier toggles back.
-  The panel / legend / about collapse headers share one `wireCollapse` helper in
-  `js/main.js`. **Legend and About are an accordion**: opening one closes the
-  other (only one open at a time), and while either is open every control above
+  The panel / legend / receptors / about collapse headers share one
+  `wireCollapse` helper in
+  `js/main.js`. **Legend, Receptors and About are an accordion**: opening one
+  closes the others (only one open at a time), and while any is open every control
+  above
   it (the `#lang-switch`, the `.toolbar-row`, the two sliders and the Auto-rotate
   / See inside checkboxes, all tagged
   `.collapsible-control`) is hidden via the
   `#controls.section-open` class so the open section's content doesn't push the
-  panel tall; only the two section headers stay visible. `wireCollapse` takes an
+  panel tall; only the section headers stay visible. The accordion is wired as a
+  list of `{toggle, body}` sections in `wireControls`, so adding a fourth section
+  is one array entry. `wireCollapse` takes an
   `onToggle(open)` callback
   and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
   toggles `section-open`. A section can only be opened while the controls are
@@ -741,6 +792,22 @@ as the WIP banner (`js/error-banner.js`):
   below). Each structure row is clickable to isolate/focus that region, and each
   **neurotransmitter row** is clickable to isolate that transmitter's pathways
   (see Selection above).
+- **Receptors** (`#receptors`, collapsed by default, the accordion peer between
+  Legend and About): the neurotransmitter receptors from `data/receptors.jsonl`,
+  built by `buildReceptorLegend` in `js/main.js` and grouped by **family** (one
+  `<h2>` per family, in the `receptor_family_labels` key order) with one row per
+  receptor, its swatch coloured by the receptor's excit/inhib/modulatory **sign**.
+  Clicking a row **focuses** that receptor: it dims the whole brain to just the
+  regions expressing it and scatters glowing **dots** over those regions'
+  surfaces (`createReceptorMarkers`, see "Receptors" below), and opens the
+  receptor **info-panel view** (`createInfoPanel.showReceptor`: the system, a
+  Wikipedia link, the description, the classification facts and the region list,
+  or "Throughout the brain" for a ubiquitous receptor). Clicking the active row
+  again clears it; switching to any other focus drops the dots. A **stub**
+  receptor (no CNS role: empty locations) renders muted and is not clickable. The
+  dimming reuses `selection.setCircuit(regionMeshes, [])` (no arrow pin, so the
+  pathways fade and the dots are the only bright thing); the markers are stopped
+  off the selection state, the same way the circuit pulse is.
 - **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
   scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
   **Shift + wheel** drives the **Separate** slider instead of zooming: a
@@ -764,7 +831,8 @@ as the WIP banner (`js/error-banner.js`):
   body) and opens search focused on its input; pressing it again while open just
   refocuses + selects the text. **Escape** closes search.
 - **Info panel** (bottom-right, `createInfoPanel` in `js/main.js`): one panel
-  that shows either a *connection* or a *structure*.
+  that shows a *connection*, a *structure*, or a *receptor* (the last via
+  `showReceptor`, opened from a Receptors legend row, see "Receptors" above).
   - **Clicking/tapping an arrow** (or picking a connection in search) shows the
     **connection** view: the pathway label, its route (`from → to`, `↔` for a
     bidirectional/commissural link), kind + neurotransmitter, a one-line
@@ -862,6 +930,45 @@ stop it, while merely highlighting a structure (which leaves the circuit pinned)
 keeps it running. The animation is **circuit-only**: a projection-group focus also
 goes through `setCircuit` but never calls `play`. No new user-visible string (the
 trigger is the existing circuit row), so no i18n change.
+
+## Receptors
+
+A dataset of neurotransmitter **receptors** (`data/receptors.jsonl`, authored as
+the `RECEPTORS` list in `tools/generate_data.py`), surfaced as a focusable
+**Receptors** legend section. The point is anatomical: see, per receptor, which
+modeled regions express it, plus its functional classification, sourced from each
+receptor's Wikipedia article. Split, like the rest, into data and rendering:
+
+- **Data (`tools/generate_data.py` -> `data/receptors.jsonl`).** Each receptor
+  carries its `neurotransmitter`, mechanism `receptor_class` (ionotropic /
+  metabotropic / chaperone), excit/inhib/modulatory `sign` (reusing the projection
+  `SIGN_COLORS` / `SIGN_LABELS`, so the swatch matches the arrow colour mode),
+  `synaptic` site (pre / post / both), and `locations` (structure **base** ids,
+  like a circuit; the viewer expands each to both hemispheres). The sentinel
+  `locations="ALL"` is emitted as `ubiquitous:true` for a brain-wide receptor
+  (NMDA, AMPA, GABA-A/B, mGluR7), which lights every structure. A receptor with no
+  meaningful CNS role is a deliberate **stub**: empty `locations`, no
+  `description`, rendered muted + inert. `_receptor_record` validates every
+  family / class / sign / synaptic key against its map and every location base
+  against the known structures. The receptor location set drove three new
+  structures (`brainstem_nuclei` group: raphe, locus coeruleus, VTA), the
+  neuromodulatory source nuclei the pathways already needed.
+- **Rendering (`js/receptor-markers.js` + `js/main.js`).** Clicking a receptor row
+  (`buildReceptorLegend`) dims the brain to just its regions via
+  `selection.setCircuit(regionMeshes, [])` (no arrow pin, so all pathways fade and
+  the dots are the only bright thing) and calls
+  `createReceptorMarkers.show(regionMeshes, signColour)`, which scatters small
+  additive glowing **dots** over each region's surface (a `THREE.Points` cloud
+  sampled from the structure mesh's own geometry and parented to it, so the dots
+  track the explode/mirror transform and vanish when the mesh is hidden, exactly
+  like the selection halo + circuit node-flash shells). The info panel switches to
+  the receptor view (`showReceptor`). The markers are stopped off the selection
+  state, the same pattern as the circuit pulse: a `selection.onIsolate` watcher
+  hides them the moment the isolate set is no longer exactly the receptor's region
+  set (`createReceptorMarkers.matches`), so a clear, a circuit, a legend isolate or
+  another receptor all drop them.
+
+To add or edit a receptor, see "Changing the data" below.
 
 ## Changing the data
 
@@ -1018,6 +1125,23 @@ trigger is the existing circuit row), so no i18n change.
      and raises on a typo; the circuit's arrows are *not* listed (the viewer takes
      every projection whose endpoints are both in the set), so a circuit never
      duplicates the pathway list. It shows up in the legend's Circuits section.
+   - To add a **receptor**, append to the `RECEPTORS` list: `id`, `name` (the
+     technical, language-neutral label, e.g. `"5-HT2A"`), `family` (a key of
+     `RECEPTOR_FAMILY_LABELS`), `neurotransmitter`, `receptor_class`
+     (`ionotropic` / `metabotropic` / `chaperone`), `sign`
+     (`excitatory` / `inhibitory` / `modulatory`), `synaptic`
+     (`presynaptic` / `postsynaptic` / `both`), and `locations` as structure
+     **base** ids (no `_R`/`_L`; the viewer expands each to both hemispheres), or
+     the sentinel `"ALL"` for a brain-wide receptor (emitted as `ubiquitous`). Add
+     an `{en}` `description` + its `description_fr` (authored inline, unique per
+     receptor, so it bypasses the shared `FR` table) and a `wikipedia` url. A
+     receptor with no meaningful CNS role is a **stub**: give it empty `locations`
+     and no `description`. `_receptor_record` validates every family / class / sign
+     / synaptic key against its map and every location base against the known
+     structures, and rejects duplicate ids. A new `family` / `receptor_class` /
+     `synaptic` value needs an entry in the matching label map (and its `FR`
+     translation) or the build raises. It shows up in the legend's Receptors
+     section; the `neurotransmitter` (and any new label) still needs an `FR` entry.
    - **Translations.** Every display string (a region `name`, a projection
      `label`/`description`/`neurotransmitter`, a circuit `name`, a group/kind
      label) is wrapped with `_t()` at build time, which looks the English text up
@@ -1029,7 +1153,7 @@ trigger is the existing circuit row), so no i18n change.
      suffix agrees. See "Internationalization".
 2. Run `python tools/generate_data.py` to regenerate `public/data/`
    (`meta.json` + `structures.jsonl` + `projections.jsonl` + `circuits.jsonl` +
-   `shapes/`).
+   `receptors.jsonl` + `shapes/`).
 3. Commit the generator change and the regenerated artifacts together.
 
 The legend (region colors and the projection rows, per-neurotransmitter or

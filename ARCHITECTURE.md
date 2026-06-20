@@ -74,10 +74,11 @@ record lives in encodes its type, so there is no `type` field on the lines.
 
 | file | role |
 | --- | --- |
-| `meta.json` | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading), and the colour-mode `kind_signs`/`sign_colors`/`sign_labels`. Makes the dataset self-describing. |
+| `meta.json` | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading), the colour-mode `kind_signs`/`sign_colors`/`sign_labels`, and the receptor `receptor_family_labels`/`receptor_class_labels`/`synaptic_labels`. Makes the dataset self-describing. |
 | `structures.jsonl` | one region per line: `id`, `name`, `group`, `position`, `color`, `shape_file`, optional `wikipedia`, optional `mirror`. |
 | `projections.jsonl` | one directed pathway per line: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
 | `circuits.jsonl` | one named functional loop per line: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
+| `receptors.jsonl` | one neurotransmitter receptor per line: `id`, `name`, `family`, `neurotransmitter`, `receptor_class`, `sign`, `synaptic`, `locations[]` (structure base ids the viewer expands to both hemispheres), optional `ubiquitous`, optional `description`, `wikipedia`. Empty `locations` + no `description` = a "stub" (no CNS role). |
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape
@@ -105,7 +106,7 @@ the `main.js` entry point.
  app-init.js                                                     ▼
  (injects umami)             data.js ──fetch──► data/*.{json,jsonl} + data/shapes/*.json
                               (no three.js; returns normalized {structures,
-                               projections, circuits, byId, meta})
+                               projections, circuits, receptors, byId, meta})
                                   ▲
                                   │ loadBrainData()
                                   │
@@ -114,6 +115,9 @@ the `main.js` entry point.
             ── imports ──►  arrows.js   (buildArrows: curved tube+cone per
                                         projection, colour from projection.color)
             ── imports ──►  labels.js   (createLabels: CSS2D floating names)
+            ── imports ──►  circuit-anim.js / circuit-schedule.js (traveling pulse)
+            ── imports ──►  receptor-markers.js (createReceptorMarkers: glowing
+                                        surface dots for a focused receptor)
             ── imports ──►  three + OrbitControls (vendored)
 ```
 
@@ -134,8 +138,9 @@ could be reused headless.
 4. `js/main.js` (module) runs: sets up scene/camera/renderer/lights/OrbitControls,
    then `await loadBrainData()`.
 5. `loadBrainData()` fetches the per-type data files (`meta.json` +
-   `structures`/`projections`/`circuits.jsonl`) in parallel, reads the `meta`
-   maps, resolves each projection's `color` from its kind, and fetches every
+   `structures`/`projections`/`circuits`/`receptors.jsonl`) in parallel, reads the
+   `meta` maps, resolves each projection's `color` from its kind, expands each
+   receptor's location bases to concrete structure ids, and fetches every
    referenced shape file in parallel.
 6. `main.js` builds the meshes (`buildStructureMesh`), the arrows (`buildArrows`),
    and the labels (`createLabels`), wires the controllers (below), and starts the
@@ -153,9 +158,13 @@ concern:
   isolated, and the resulting per-mesh opacity (so the Transparency slider and the
   isolate-dimming compose into one value). Handles structure halos, arrow halos,
   legend isolate, circuits, and per-neurotransmitter focus.
-- **Info panel** (`createInfoPanel`): one bottom-right panel showing either a
-  *connection* view (a clicked arrow) or a *structure* view (a clicked region:
-  name, group, Wikipedia link, and a clickable list of its pathways).
+- **Info panel** (`createInfoPanel`): one bottom-right panel showing a
+  *connection* view (a clicked arrow), a *structure* view (a clicked region: name,
+  group, Wikipedia link, and a clickable list of its pathways), or a *receptor*
+  view (a clicked Receptors legend row: its classification + where it is expressed).
+- **Receptor markers** (`receptor-markers.js`): glowing surface dots over the
+  regions expressing a focused receptor; dropped when the focus changes, watched
+  off the selection state like the circuit pulse.
 - **Camera focus** (`createCameraFocus`): smooth tweens for reset / double-click /
   search framing, advanced once per frame and cancelled the moment the user grabs
   the controls.
@@ -177,6 +186,9 @@ The detailed recipes (with the exact fields and gotchas) are in CLAUDE.md under
   raises if a projection uses an unmapped kind); it flows into the data's `meta`
   record and the legend automatically.
 - **A new circuit**: append to `CIRCUITS` with base structure ids.
+- **A new receptor**: append to `RECEPTORS` (neurotransmitter, class, sign,
+  synaptic site, location base ids or `"ALL"`); it shows up in the Receptors
+  legend section automatically.
 - **A Wikipedia link**: add the region's base id + URL to the `WIKIPEDIA` registry.
 
 The legend, colours, and headings are all derived from the data at runtime, so
