@@ -897,11 +897,12 @@
             </div>
           </div>
 
-          <!-- Receptors: collapsed by default, an accordion peer of Legend /
-               About (only one open at a time). The body is generated from the
-               dataset by js/main.js (buildReceptorLegend): the neurotransmitter
-               receptors grouped by family, each row focusable to scatter glowing
-               dots over the regions it is expressed in and dim the rest. -->
+          <!-- Receptors & targets: collapsed by default, an accordion peer of
+               Legend / About (only one open at a time). The body is generated from
+               the dataset by js/main.js (buildTargetLegend): every receptor plus
+               every non-receptor drug target (transporters, enzymes, channels),
+               grouped by neurotransmitter system, each row focusable to scatter
+               glowing dots over the regions it sits in and dim the rest. -->
           <div id="receptors">
             <button type="button" id="receptors-toggle" class="collapse-header" aria-expanded="false">
               <span data-i18n="panel.receptors"></span>
