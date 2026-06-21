@@ -18,7 +18,12 @@ and draws arrows for neuron projections between them. It also carries a dataset 
 neurotransmitter **receptors** (which transmitter, mechanism class, excit/inhib
 sign, pre/post-synaptic site, and the regions each is expressed in); focusing one
 dims the brain and scatters glowing dots over the regions carrying it (see
-"Receptors" below). Region `group` values
+"Receptors" below). It also carries a dataset of psychiatric **drugs** (from
+Stahl's Prescriber's Guide): each drug's coarse class, its molecular-target
+**bindings** (what target, what action) and a one-line mechanism; focusing one
+dims the brain and animates effect-coloured gem dots (boost / block / modulate)
+over the regions each target sits in, so you can see what the drug does to the
+brain (see "Drugs" below). Region `group` values
 (`lobe`, `basal_ganglia`, `diencephalon`, `limbic`, `hindbrain`,
 `brainstem_nuclei` for the neuromodulatory source nuclei raphe / locus coeruleus /
 VTA) drive the legend
@@ -51,13 +56,16 @@ geometry files), and that
 directory is the *only* thing exposed to the web: Caddy's
 `/srv` and `tools/serve.py` both root at it, so `docker/`, `tools/`, `.git` and
 the uncommitted `.env` / `deploy.sh` / `CLAUDE.local.md` are never web-reachable.
-Authoring + dev tooling live in `tools/` (`generate_data.py`, `serve.py`,
+Authoring + dev tooling live in `tools/` (`generate_data.py`, `drugs_data.json`,
+`serve.py`,
 `shot.py`, `git-hooks/`); deployment config in `docker/`; the README hero shot in
 `docs/`. The map below names files by role; their directories are as just listed.
 
 ```
 tools/generate_data.py  Single source of truth for the anatomy. Defines every
-                      region + projection once and emits the artifacts below.
+                      region + projection (+ receptor) once and emits the artifacts
+                      below; the drugs are the exception, authored in the sibling
+                      tools/drugs_data.json and read by _load_drugs (see "Drugs").
                       Every translatable display string below is an {en, fr}
                       object (see "Internationalization"); js/data.js localizes
                       them at load. The dataset is split by record type for
@@ -73,7 +81,17 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           receptor_family_labels (family -> {en,fr} heading, its
                           key order = the receptor legend's family order),
                           receptor_class_labels (mechanism class -> {en,fr}) and
-                          synaptic_labels (pre/post -> {en,fr}); so the dataset is
+                          synaptic_labels (pre/post -> {en,fr}), plus the drug maps
+                          drug_category_labels (coarse class -> {en,fr} legend
+                          heading, its key order = the Drugs legend's category
+                          order), drug_actions (action key -> {label:{en,fr},
+                          effect}), drug_effect_colors (boost/block/modulate ->
+                          colour) and drug_effect_labels (effect -> {en,fr}), and
+                          drug_targets (the merged binding-target map: every
+                          non-receptor target like sert/mao_a/nav with its
+                          {name:{en,fr}, system, regions[bases]} plus every
+                          receptor id as a target linked back to its receptor);
+                          so the dataset is
                           self-describing and a port needs no hardcoded palette
                         - data/structures.jsonl: one region per line: id, name
                           ({en,fr}, with the hemisphere prefix/suffix), base_name
@@ -104,6 +122,19 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           structure), optional description ({en,fr}) and wikipedia.
                           A receptor with empty locations and no description is a
                           deliberate "stub" (no CNS role: listed but not focusable)
+                        - data/drugs.jsonl: one drug per line: id, name (technical,
+                          language-neutral, e.g. "Citalopram"), categories[keys of
+                          drug_category_labels], optional nbn ({en,fr} Neuroscience-
+                          based Nomenclature), optional description ({en,fr} one-line
+                          mechanism), bindings[] (each: target = a drug_targets key,
+                          action = a drug_actions key, optional effect override,
+                          optional note ({en,fr} or "TODO"), optional tentative),
+                          sources[{citation,url}] (always the Stahl citation, url
+                          "TODO" for now), optional wikipedia, and focusable (false
+                          for a drug with no bindings -> listed but not clickable).
+                          The data is authored in tools/drugs_data.json (sourced
+                          from Stahl's Prescriber's Guide 8th ed.), not inline in
+                          the generator, see "Drugs" below
 data/shapes/<name>.json  One geometry file per distinct *form* (independent of
                       where it sits / what it connects to). Symmetric left/right
                       pairs share a single right-side file; the left member
@@ -136,29 +167,44 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       sliders, auto-rotate, the
                       nested JS-populated legend whose first rows are "show all
                       names" / "hide projections", a nested JS-populated Receptors
-                      section, and a nested About section; Legend / Receptors /
-                      About are a single-open accordion). The panel body is split
+                      section, a nested JS-populated Drugs section (with its own
+                      filter box), and a nested About section; Legend / Receptors /
+                      Drugs / About are a single-open accordion). The panel body is
+                      split
                       into a #settings-pane (all the above) and a #details-pane
                       (#info-body) switched by a #panel-tabs bar (Settings /
                       Details) that only appears once a detail is picked, so a
-                      structure / connection / receptor detail shows in the panel
+                      structure / connection / receptor / drug detail shows in the
+                      panel
                       instead of a separate window (createPanelTabs in js/main.js).
                       Also the in-place search box, the centered
                       #shortcuts-modal keyboard-shortcuts popup (filled by
                       wireShortcutsHelp), and
                       the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches the per-type data files (meta.json + structures/
-                      projections/circuits/receptors.jsonl) + all shape files,
+                      projections/circuits/receptors/drugs.jsonl) + all shape
+                      files,
                       returns a normalized {structures, projections, circuits,
-                      receptors, byId, meta} object. It reads the meta maps and
+                      receptors, drugs, byId, meta} object. It reads the meta maps
+                      and
                       resolves each projection's arrow `color` from its kind (so
                       the viewer reads `projection.color`, never a hardcoded
                       palette), and resolves each receptor's family/class/sign/
                       synaptic labels + sign colour and expands its `locations`
                       bases to concrete `structureIds` (both hemispheres, or every
-                      structure when `ubiquitous`); `meta` carries
+                      structure when `ubiquitous`). It also resolves each drug:
+                      localized description/nbn, the coarse `categoryLabels` (+
+                      primary `category`), and per-binding `targetName` +
+                      `actionLabel` + net `effect`/`effectColor`/`effectLabel` +
+                      the concrete `structureIds` each binding lights (a receptor-
+                      linked target reuses that receptor's structureIds, a
+                      ubiquitous one lights all, others expand the target's region
+                      bases to both hemispheres); the union is the drug's
+                      `structureIds` (what the focus dims to), plus `focusable` +
+                      search `keywords`. `meta` carries
                       {projectionColors, groupLabels, ..., receptorFamilyLabels,
-                      receptorClassLabels, synapticLabels}.
+                      receptorClassLabels, synapticLabels, drugCategoryLabels,
+                      drugEffectColors, drugEffectLabels}.
 js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       dispatches on shape.type to buildBlobGeometry (deformed
                       ellipsoid), buildCurveGeometry (round-capped tapered tube
@@ -216,19 +262,37 @@ js/receptor-markers.js  Receptor "expression dots" (createReceptorMarkers): when
                       track its explode/mirror transform and vanish when it is
                       hidden, like the selection halo + circuit node-flash shells);
                       colour = the receptor's sign colour, gently pulsed. One
-                      controller per scene; ticked in the render loop. See
-                      "Receptors" below.
+                      controller per scene; ticked in the render loop. The single-
+                      cloud builder is factored out as an exported `buildGemCloud`
+                      (+ `GEM_DOT_SIZE`) so the per-drug animation reuses the exact
+                      gem look without duplication. See "Receptors" below.
+js/drug-anim.js       Per-drug "what it does to the brain" animation
+                      (createDrugAnimation): when a drug is focused (its Drugs
+                      legend/list row or a drug search result), scatters a gem
+                      cloud (via buildGemCloud) over the regions each of the drug's
+                      bindings lights, coloured by that binding's net effect
+                      (boost emerald / block rose / modulate violet), and pulses
+                      each cloud per effect (boost fast/bright/swelling, block
+                      slow/dim, modulate in between). It owns only the dots (the
+                      dimming of the rest of the brain is the selection
+                      controller's setCircuit, like a receptor focus). One
+                      controller per scene; ticked in the render loop; stopped off
+                      the selection state via `matches`. See "Drugs" below.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
                       for labels, arrow + structure picking and the detail panel
                       (createInfoPanel: a connection view, a structure view with
-                      its connection list, or a receptor view, rendered into the
+                      its connection list, a receptor view, or a drug view
+                      (showDrug), rendered into the
                       main panel's Details tab via createPanelTabs), the
-                      structure+connection search, the legend builder
-                      (buildLegend) and the Receptors legend builder
+                      structure+connection+receptor+drug search, the legend builder
+                      (buildLegend), the Receptors legend builder
                       (buildReceptorLegend, wiring each receptor row to dim the
-                      brain + light its dots), and the render loop.
+                      brain + light its dots), and the Drugs legend builder
+                      (buildDrugLegend, grouped by category with its own filter
+                      box, wiring each drug row to dim the brain + play the
+                      per-drug animation), and the render loop.
 app-config.js         Tiny config file (window.__APP_CONFIG__). This committed
                       copy is the LOCAL-DEV fallback: the feature fields are empty,
                       so dev servers keep umami + the DEV banner off. In the
@@ -296,6 +360,12 @@ tools/shot.py         Screenshot helper (Playwright): serves public/ with
 tools/serve.py        Stdlib static dev server that sends Cache-Control:no-store
                       so the browser never serves a stale ES module (use instead
                       of `python -m http.server` while developing; see Running).
+tools/drugs_data.json  The drug dataset's authored source (a JSON list, sourced
+                      from Stahl's Prescriber's Guide 8th ed.), read by
+                      generate_data.py's _load_drugs and validated + emitted to
+                      data/drugs.jsonl. Kept out of generate_data.py because it is
+                      large; this is the file to edit to add/change a drug. See
+                      "Drugs" and "Changing the data".
 tools/git-hooks/      Repo-tracked git hooks (single source of truth). Currently
                       pre-push, which refuses to push any branch other than
                       main. Activated per-clone with
@@ -643,12 +713,15 @@ as the WIP banner (`js/error-banner.js`):
   names** and **Hide projections** buttons followed by the **arrow colour-mode
   switch** (Neurotransmitter / Potential, `#color-mode`), then the nested
   collapsed **Receptors** (`#receptors`) section, then the nested
+  collapsed **Drugs** (`#drugs`) section (with its own `#drugs-filter` box), then
+  the nested
   collapsed **About** (`#about`) section. Searching swaps the search box in place of the panel's
   normal contents (`#controls-main` hidden, `#search` shown) rather than opening
   a popup; the reset/search buttons stay visible so the magnifier toggles back.
-  The panel / legend / receptors / about collapse headers share one
+  The panel / legend / receptors / drugs / about collapse headers share one
   `wireCollapse` helper in
-  `js/main.js`. **Legend, Receptors and About are an accordion**: opening one
+  `js/main.js`. **Legend, Receptors, Drugs and About are an accordion**: opening
+  one
   closes the others (only one open at a time), and while any is open every control
   above
   it (the `#lang-switch`, the `.toolbar-row`, the two sliders and the Auto-rotate
@@ -656,7 +729,7 @@ as the WIP banner (`js/error-banner.js`):
   `.collapsible-control`) is hidden via the
   `#controls.section-open` class so the open section's content doesn't push the
   panel tall; only the section headers stay visible. The accordion is wired as a
-  list of `{toggle, body}` sections in `wireControls`, so adding a fourth section
+  list of `{toggle, body}` sections in `wireControls`, so adding another section
   is one array entry. `wireCollapse` takes an
   `onToggle(open)` callback
   and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
@@ -842,6 +915,22 @@ as the WIP banner (`js/error-banner.js`):
   dimming reuses `selection.setCircuit(regionMeshes, [])` (no arrow pin, so the
   pathways fade and the dots are the only bright thing); the markers are stopped
   off the selection state, the same way the circuit pulse is.
+- **Drugs** (`#drugs`, collapsed by default, the accordion peer between Receptors
+  and About): the psychiatric drugs from `data/drugs.jsonl`, built by
+  `buildDrugLegend` in `js/main.js` and grouped by **primary category** (one
+  `<h2>` per category, in the `drug_category_labels` key order) with one row per
+  drug. A **`#drugs-filter`** text box at the top of the section live-filters the
+  rows by name (hiding empty category headings; an empty result shows a "no
+  matches" line). Clicking a row **focuses** that drug: it dims the whole brain to
+  the regions its targets sit in and plays the **per-drug animation** (effect-
+  coloured gem dots pulsing boost/block/modulate over those regions,
+  `createDrugAnimation`, see "Drugs" below), and opens the drug **info-panel
+  view** (`createInfoPanel.showDrug`: the class, the NbN nomenclature, a Wikipedia
+  link, the description, the **Acts on** binding list and the Stahl source).
+  Clicking the active row again clears it; switching to any other focus drops the
+  dots. A drug with no mapped bindings renders muted and is not clickable. The
+  dimming reuses `selection.setCircuit(regionMeshes, [])` and the animation is
+  stopped off the selection state, exactly like the receptor markers.
 - **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
   scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
   **Shift + wheel** drives the **Separate** slider instead of zooming: a
@@ -855,7 +944,8 @@ as the WIP banner (`js/error-banner.js`):
   or back to assembled (toggling the **Separate** slider), **l** collapses /
   expands the **Legend** section, **c** toggles **See inside**, **r** resets the
   camera, **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Esc** closes
-  search and collapses any open Legend / Receptors / About section. Each maps to
+  search and collapses any open Legend / Receptors / Drugs / About section. Each
+  maps to
   an existing control by **clicking the same DOM element** a mouse user would (or
   dispatching the slider's `input`), so there is no duplicated behaviour; a
   handled key calls `preventDefault` so `f` never types into the search box it
@@ -869,15 +959,21 @@ as the WIP banner (`js/error-banner.js`):
   place of the panel body (not a popup), and a **keyboard-shortcuts** button
   (keyboard icon) opens the shortcuts help popup (below). The search box filters
   **structures (by name),
-  connections (by pathway label) and receptors (by name / neurotransmitter /
-  system)**. Picking a structure centers on it,
+  connections (by pathway label), receptors (by name / neurotransmitter /
+  system) and drugs (by name / category / target)**. Picking a structure centers
+  on it,
   shows its label, and opens its structure panel (below);
   picking a connection frames its two endpoints and opens the connection panel;
   picking a receptor frames the regions expressing it and focuses it (dim + dots +
-  receptor panel), exactly like clicking its Receptors legend row. Receptor rows
-  show their neurotransmitter as a `· tag`; only **focusable** receptors are
-  searchable (stubs are legend-only). The match runs over each item's display
-  label plus hidden `keywords` (a receptor's family / mechanism / sign).
+  receptor panel), exactly like clicking its Receptors legend row; picking a drug
+  frames its regions and focuses it (dim + animation + drug panel), exactly like
+  clicking its Drugs legend row. Receptor rows
+  show their neurotransmitter as a `· tag` and drug rows their primary category;
+  only **focusable** receptors / drugs are
+  searchable (stubs + binding-less drugs are legend-only). The match runs over
+  each item's display
+  label plus hidden `keywords` (a receptor's family / mechanism / sign, a drug's
+  category / target names).
   Connection results carry a hemisphere tag (`R` / `L` / `L↔R`) so the mirrored
   twins stay distinct (`connectionSideTag` in `js/main.js`). **Ctrl/Cmd+F** is a
   shortcut for the same search: a `window` keydown listener intercepts it (so the
@@ -899,8 +995,12 @@ as the WIP banner (`js/error-banner.js`):
   `display:grid`.
 - **Info panel** (the **Details tab** of the main panel, `createInfoPanel` in
   `js/main.js`, rendered into `#info-body` and surfaced by `createPanelTabs`, see
-  "Panel layout"): shows a *connection*, a *structure*, or a *receptor* (the last
-  via `showReceptor`, opened from a Receptors legend row, see "Receptors" above).
+  "Panel layout"): shows a *connection*, a *structure*, a *receptor* (via
+  `showReceptor`, opened from a Receptors legend row, see "Receptors" above), or a
+  *drug* (via `showDrug`, opened from a Drugs legend row / drug search, see
+  "Drugs" above: its class, NbN nomenclature, Wikipedia link, description, the
+  **Acts on** list of bindings (each an effect-coloured swatch + the target name +
+  the action·note, dimmed when tentative) and the Stahl source).
   Opening any of these reveals the Settings/Details tab bar and selects Details;
   `hide()` (the × or an empty-space click) returns to the Settings view.
   - **Clicking/tapping an arrow** (or picking a connection in search) shows the
@@ -1042,6 +1142,70 @@ receptor's Wikipedia article. Split, like the rest, into data and rendering:
   another receptor all drop them.
 
 To add or edit a receptor, see "Changing the data" below.
+
+## Drugs
+
+A dataset of psychiatric **drugs** (`data/drugs.jsonl`), surfaced as a focusable
+**Drugs** legend section with a per-drug brain animation. The point is to show, for
+each drug, *what it does to the brain*: which molecular targets it acts on, how, and
+where those targets sit. The data is sourced from **Stahl's Prescriber's Guide
+(8th ed.)** under fair-use sourcing, extracted **strictly from the dump** (only
+interactions literally stated in the source text; nothing supplemented from outside
+pharmacology, gaps left as TODO / no binding). Split, like the rest, into data and
+rendering:
+
+- **Data (`tools/drugs_data.json` -> `data/drugs.jsonl`).** Unlike the receptors,
+  the 158 drugs are **not** authored inline in `generate_data.py` (too large); they
+  live in a sibling `tools/drugs_data.json` read by `_load_drugs()` (a missing file
+  is a warning, not an error, so the generator still runs without it). Each drug has
+  `id`, `name` (technical, language-neutral), `categories` (coarse classes), an
+  optional `nbn` (Neuroscience-based Nomenclature) and `description` (both authored
+  inline as `{en,fr}`, bypassing the shared FR table), a Wikipedia url, and
+  `bindings`. A **binding** is a `target` + `action` (+ optional `effect` override,
+  `note`, `tentative`). The drug **vocabularies** are defined once in
+  `generate_data.py`: `DRUG_CATEGORY_LABELS` (coarse class -> {en,fr}),
+  `DRUG_ACTIONS` (action -> {label:{en,fr}, net `effect`}), `DRUG_EFFECT_COLORS` /
+  `DRUG_EFFECT_LABELS` (boost emerald / block rose / modulate violet) and
+  `DRUG_TARGETS` (the non-receptor targets: transporters / enzymes / channels /
+  generic receptor families, each with `{name:{en,fr}, system, regions[bases]}`).
+  `_build_drug_targets()` **merges** `DRUG_TARGETS` with every receptor id (so a
+  binding can target either a coarse target like `sert` or a specific receptor like
+  `5ht2a`, the latter linked back to its receptor record for its regions), and that
+  merged map is emitted into `meta.json` as `drug_targets`. `_drug_record()`
+  validates every category / target / action / effect against the vocabularies (and
+  rejects duplicate ids) and attaches the constant `STAHL_SOURCE` citation. A drug
+  with no bindings is emitted `focusable: false` (listed, not clickable), like a
+  receptor stub. The net `effect` of a binding (which colours the animation) comes
+  from its action: agonist / reuptake-inhibitor / releaser / enzyme-inhibitor / PAM
+  -> **boost**; antagonist / inverse-agonist / NAM / blocker -> **block**; partial
+  agonist / modulator -> **modulate**.
+- **Rendering (`js/drug-anim.js` + `js/main.js`).** Clicking a drug row
+  (`buildDrugLegend`, grouped by primary category in the meta order, with a live
+  `#drugs-filter` box) **focuses** that drug: it dims the brain to the union of the
+  drug's targets' regions via `selection.setCircuit(regionMeshes, [])` (no arrow
+  pin, so the pathways fade and the dots are the only bright thing) and calls
+  `createDrugAnimation.show(drug, meshById)`, which scatters a gem cloud
+  (`buildGemCloud`, reused from `js/receptor-markers.js`) over each binding's
+  regions coloured by that binding's net-effect colour, pulsing per effect (boost
+  fast/bright/swelling, block slow/dim, modulate in between). The info panel
+  switches to the drug view (`createInfoPanel.showDrug`: the class, the NbN
+  nomenclature, a Wikipedia link, the description, the **Acts on** list (one row per
+  binding: an effect-coloured swatch + the target name + the action·note, dimmed +
+  italic when tentative), and the Stahl source). Drugs are also searchable (name /
+  category / target keywords). The animation is stopped off the selection state, the
+  same pattern as the receptor markers + circuit pulse: a `selection.onIsolate`
+  watcher hides it the moment the isolate set is no longer exactly the drug's region
+  set (`createDrugAnimation.matches`).
+
+The drug data was extracted by **parallel agents** from per-drug source text. 44
+drugs lacked a structured "How the Drug Works" entry in the dump's Q/A and were
+recovered from the dump's full-page OCR (`PageImages`); 5 drugs remain unbound
+because they are genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
+triiodothyronine, caprylidene). The source `url` on the Stahl citation is currently
+the literal **"TODO"** (rendered as an orange TODO pill in the panel) pending a real
+reference link.
+
+To add or edit a drug, see "Changing the data" below.
 
 ## Changing the data
 
@@ -1215,6 +1379,25 @@ To add or edit a receptor, see "Changing the data" below.
      `synaptic` value needs an entry in the matching label map (and its `FR`
      translation) or the build raises. It shows up in the legend's Receptors
      section; the `neurotransmitter` (and any new label) still needs an `FR` entry.
+   - To add or edit a **drug**, edit `tools/drugs_data.json` (a JSON list, **not**
+     inline in `generate_data.py`). Each entry: `id` (unique, kebab/lowercase),
+     `name`, `categories` (one or more keys of `DRUG_CATEGORY_LABELS`), optional
+     `nbn` + `description` (authored inline as `{en,fr}` objects, so they bypass the
+     shared `FR` table), `wikipedia` url, and `bindings`. Each binding is
+     `{"target": ..., "action": ...}` where `target` is a key of the **merged**
+     target map (a `DRUG_TARGETS` key like `sert`/`mao_a`/`nav`, **or** a receptor
+     id like `5ht2a`/`d2`/`h1`) and `action` is a key of `DRUG_ACTIONS`
+     (`agonist` / `partial_agonist` / `antagonist` / `inverse_agonist` /
+     `reuptake_inhibitor` / `releaser` / `enzyme_inhibitor` / `pam` / `nam` /
+     `blocker` / `modulator`); optional per-binding `effect` (overrides the action's
+     net effect), `note` (`{en,fr}` or `"TODO"`) and `tentative: true`. A drug with
+     `"bindings": []` is emitted `focusable: false` (listed, not clickable).
+     `_drug_record` validates every category / target / action / effect against the
+     vocabularies and rejects duplicate ids; a new coarse target / category / action
+     needs an entry in `DRUG_TARGETS` / `DRUG_CATEGORY_LABELS` / `DRUG_ACTIONS` (with
+     `{en,fr}` labels) or the build raises. Keep extraction **strictly dump-sourced**
+     (only what the source text states; leave gaps as TODO / no binding). It shows up
+     in the legend's Drugs section automatically.
    - **Translations.** Every display string (a region `name`, a projection
      `label`/`description`/`neurotransmitter`, a circuit `name`, a group/kind
      label) is wrapped with `_t()` at build time, which looks the English text up
@@ -1226,7 +1409,7 @@ To add or edit a receptor, see "Changing the data" below.
      suffix agrees. See "Internationalization".
 2. Run `python tools/generate_data.py` to regenerate `public/data/`
    (`meta.json` + `structures.jsonl` + `projections.jsonl` + `circuits.jsonl` +
-   `receptors.jsonl` + `shapes/`).
+   `receptors.jsonl` + `drugs.jsonl` + `shapes/`).
 3. Commit the generator change and the regenerated artifacts together.
 
 The legend (region colors and the projection rows, per-neurotransmitter or

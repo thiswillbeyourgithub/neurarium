@@ -74,11 +74,12 @@ record lives in encodes its type, so there is no `type` field on the lines.
 
 | file | role |
 | --- | --- |
-| `meta.json` | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading), the colour-mode `kind_signs`/`sign_colors`/`sign_labels`, and the receptor `receptor_family_labels`/`receptor_class_labels`/`synaptic_labels`. Makes the dataset self-describing. |
+| `meta.json` | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading), the colour-mode `kind_signs`/`sign_colors`/`sign_labels`, the receptor `receptor_family_labels`/`receptor_class_labels`/`synaptic_labels`, and the drug `drug_category_labels`/`drug_actions`/`drug_effect_colors`/`drug_effect_labels`/`drug_targets` (the merged binding-target map). Makes the dataset self-describing. |
 | `structures.jsonl` | one region per line: `id`, `name`, `group`, `position`, `color`, `shape_file`, optional `wikipedia`, optional `mirror`. |
 | `projections.jsonl` | one directed pathway per line: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
 | `circuits.jsonl` | one named functional loop per line: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
 | `receptors.jsonl` | one neurotransmitter receptor per line: `id`, `name`, `family`, `neurotransmitter`, `receptor_class`, `sign`, `synaptic`, `locations[]` (structure base ids the viewer expands to both hemispheres), optional `ubiquitous`, optional `description`, `wikipedia`. Empty `locations` + no `description` = a "stub" (no CNS role). |
+| `drugs.jsonl` | one psychiatric drug per line (from Stahl's Prescriber's Guide): `id`, `name`, `categories[]`, optional `nbn`/`description`, `bindings[]` (each `target` + `action` + optional `effect`/`note`/`tentative`), `sources[]`, optional `wikipedia`, `focusable`. Authored in `tools/drugs_data.json` (not inline in the generator). No bindings = listed but not clickable. |
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape
@@ -106,7 +107,7 @@ the `main.js` entry point.
  app-init.js                                                     ▼
  (injects umami)             data.js ──fetch──► data/*.{json,jsonl} + data/shapes/*.json
                               (no three.js; returns normalized {structures,
-                               projections, circuits, receptors, byId, meta})
+                               projections, circuits, receptors, drugs, byId, meta})
                                   ▲
                                   │ loadBrainData()
                                   │
@@ -117,7 +118,10 @@ the `main.js` entry point.
             ── imports ──►  labels.js   (createLabels: CSS2D floating names)
             ── imports ──►  circuit-anim.js / circuit-schedule.js (traveling pulse)
             ── imports ──►  receptor-markers.js (createReceptorMarkers: glowing
-                                        surface dots for a focused receptor)
+                                        surface dots for a focused receptor;
+                                        exports buildGemCloud, reused by drug-anim)
+            ── imports ──►  drug-anim.js (createDrugAnimation: effect-coloured
+                                        pulsing gem dots for a focused drug)
             ── imports ──►  three + OrbitControls (vendored)
 ```
 
@@ -138,9 +142,12 @@ could be reused headless.
 4. `js/main.js` (module) runs: sets up scene/camera/renderer/lights/OrbitControls,
    then `await loadBrainData()`.
 5. `loadBrainData()` fetches the per-type data files (`meta.json` +
-   `structures`/`projections`/`circuits`/`receptors.jsonl`) in parallel, reads the
+   `structures`/`projections`/`circuits`/`receptors`/`drugs.jsonl`) in parallel,
+   reads the
    `meta` maps, resolves each projection's `color` from its kind, expands each
-   receptor's location bases to concrete structure ids, and fetches every
+   receptor's location bases to concrete structure ids, resolves each drug's
+   bindings (target name, net effect colour, the regions each binding lights), and
+   fetches every
    referenced shape file in parallel.
 6. `main.js` builds the meshes (`buildStructureMesh`), the arrows (`buildArrows`),
    and the labels (`createLabels`), wires the controllers (below), and starts the
@@ -158,13 +165,18 @@ concern:
   isolated, and the resulting per-mesh opacity (so the Transparency slider and the
   isolate-dimming compose into one value). Handles structure halos, arrow halos,
   legend isolate, circuits, and per-neurotransmitter focus.
-- **Info panel** (`createInfoPanel`): one bottom-right panel showing a
+- **Info panel** (`createInfoPanel`): the main panel's Details tab showing a
   *connection* view (a clicked arrow), a *structure* view (a clicked region: name,
-  group, Wikipedia link, and a clickable list of its pathways), or a *receptor*
-  view (a clicked Receptors legend row: its classification + where it is expressed).
+  group, Wikipedia link, and a clickable list of its pathways), a *receptor*
+  view (a clicked Receptors legend row: its classification + where it is
+  expressed), or a *drug* view (a clicked Drugs legend row: its class, NbN
+  nomenclature, the bindings it acts on, and the Stahl source).
 - **Receptor markers** (`receptor-markers.js`): glowing surface dots over the
   regions expressing a focused receptor; dropped when the focus changes, watched
   off the selection state like the circuit pulse.
+- **Drug animation** (`drug-anim.js`): effect-coloured gem dots (boost/block/
+  modulate) pulsing over the regions a focused drug's targets sit in, reusing the
+  receptor `buildGemCloud`; watched off the selection state the same way.
 - **Camera focus** (`createCameraFocus`): smooth tweens for reset / double-click /
   search framing, advanced once per frame and cancelled the moment the user grabs
   the controls.
@@ -189,6 +201,9 @@ The detailed recipes (with the exact fields and gotchas) are in CLAUDE.md under
 - **A new receptor**: append to `RECEPTORS` (neurotransmitter, class, sign,
   synaptic site, location base ids or `"ALL"`); it shows up in the Receptors
   legend section automatically.
+- **A new drug**: add an entry to `tools/drugs_data.json` (categories + bindings,
+  each binding a `target` + `action` from the drug vocabularies in
+  `generate_data.py`); it shows up in the Drugs legend section automatically.
 - **A Wikipedia link**: add the region's base id + URL to the `WIKIPEDIA` registry.
 
 The legend, colours, and headings are all derived from the data at runtime, so

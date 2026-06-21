@@ -9,8 +9,8 @@
 neurarium is an interactive 3D brain visualizer that runs in the browser. It
 shows brain regions (cortical lobes, basal ganglia / deep nuclei, hindbrain) as
 3D shapes and draws arrows for neuron projections between them. It also carries a
-dataset of neurotransmitter **receptors** and shows, per receptor, which regions
-express it.
+dataset of neurotransmitter **receptors** (which regions express each) and a
+dataset of psychiatric **drugs** (what each does to the brain, animated).
 
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
@@ -37,7 +37,8 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 - **Click an arrow** to see that pathway's details: route, type, neurotransmitter,
   a one-line description, and its **sources**.
 - **Search** (the magnifier) filters regions (by name), connections (by pathway
-  label) and receptors (by name / neurotransmitter / system), and frames whatever
+  label), receptors (by name / neurotransmitter / system) and drugs (by name /
+  category / target), and frames whatever
   you pick.
 - **Legend** isolates what you click: a region (both hemispheres), a whole
   category, a named **functional circuit** (its pathways light up and a pulse
@@ -49,6 +50,11 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
   to dim the brain to just the regions expressing it and scatter glowing dots over
   them, with an info panel showing its system, mechanism class, excitatory /
   inhibitory sign, synaptic site, and where it is found.
+- **Drugs** section: a filterable list of psychiatric drugs (from Stahl's
+  Prescriber's Guide). Click one to dim the brain to the regions it acts on and
+  animate effect-coloured dots (boost / block / modulate) over them, with an info
+  panel showing its class, nomenclature, the molecular targets it binds and how,
+  and the source.
 - **Hover / tap** a region to show its floating name; a **Show all names** button
   labels everything at once, and a **Hide projections** button clears the arrows.
 
@@ -65,17 +71,24 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 - The anatomy is plain **structured data** under `public/data/`, split by record
   type: `structures.jsonl`, `projections.jsonl`, `circuits.jsonl`,
-  `receptors.jsonl` (one JSON object per line) plus a self-describing `meta.json`
+  `receptors.jsonl`, `drugs.jsonl` (one JSON object per line) plus a
+  self-describing `meta.json`
   carrying the colour and legend-heading maps, and one geometry file per shape
   under `public/data/shapes/`. It is generated from a single source
-  (`tools/generate_data.py`) and easy to consume from another engine.
+  (`tools/generate_data.py`, with the drug list in `tools/drugs_data.json`) and
+  easy to consume from another engine.
 - Every projection carries a **neurotransmitter** and a list of **sources**
   (citations; a verified link renders as a hyperlink, an unfilled one shows an
-  orange **TODO** pill). Every region, and every receptor, links to its
+  orange **TODO** pill). Every region, every receptor, and every drug links to its
   **Wikipedia** article.
 - Each receptor records its **neurotransmitter**, mechanism class (ionotropic /
   metabotropic / chaperone), excitatory / inhibitory / modulatory **sign**,
   synaptic site, and the regions expressing it.
+- Each drug records its coarse **class** and Neuroscience-based Nomenclature, plus
+  the **bindings** it has (the molecular target and the action: agonist,
+  antagonist, reuptake inhibitor, ...), sourced from **Stahl's Prescriber's Guide
+  (8th ed.)** under fair-use sourcing and extracted strictly from that text (gaps
+  left as **TODO**).
 
 ### Deep links & screenshots
 
@@ -116,8 +129,9 @@ Then open <http://localhost:8000/>.
 | --- | --- |
 | `public/` | The served site (and the only web-exposed directory). |
 | `tools/generate_data.py` | Single source of truth for the anatomy; generates the data below. |
+| `tools/drugs_data.json` | The drug dataset's authored source (read by the generator). |
 | `public/data/meta.json` | Presentation maps (colours, legend headings); makes the dataset self-describing. |
-| `public/data/{structures,projections,circuits,receptors}.jsonl` | The anatomy, split by record type, one JSON object per line. |
+| `public/data/{structures,projections,circuits,receptors,drugs}.jsonl` | The anatomy + drugs, split by record type, one JSON object per line. |
 | `public/data/shapes/<id>.json` | One geometry file per region. |
 | `public/index.html`, `public/js/` | The three.js viewer and UI. |
 | `tools/` | Dev tooling (data generator, dev server, screenshot helper). |
