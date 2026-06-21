@@ -4,7 +4,10 @@
 > **Work in progress, and very probably wrong.** neurarium is under active
 > development and far from complete. None of the anatomy has been reviewed or
 > sourced yet, so the regions, shapes, projections, and descriptions very likely
-> contain hallucinations and outright errors. Do not rely on any of it.
+> contain hallucinations and outright errors. The drug data is machine-extracted
+> from a single source (Stahl's Prescriber's Guide) and likewise unreviewed, so
+> the classes, targets, and bindings may be wrong or incomplete. Do not rely on
+> any of it, and never use it for medical decisions.
 
 neurarium is an interactive 3D brain visualizer that runs in the browser. It
 shows brain regions (cortical lobes, basal ganglia / deep nuclei, hindbrain) as
