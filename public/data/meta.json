@@ -251,7 +251,8 @@
         "thalamus",
         "hypothalamus",
         "accumbens"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter"
     },
     "net": {
       "name": {
@@ -269,7 +270,8 @@
         "hypothalamus",
         "amygdala",
         "cerebellum"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Norepinephrine_transporter"
     },
     "dat": {
       "name": {
@@ -286,7 +288,8 @@
         "putamen",
         "accumbens",
         "frontal"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter"
     },
     "gat": {
       "name": {
@@ -302,7 +305,8 @@
         "thalamus",
         "hippocampus",
         "cerebellum"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter"
     },
     "vmat2": {
       "name": {
@@ -319,7 +323,8 @@
         "locus_coeruleus",
         "caudate",
         "putamen"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2"
     },
     "mao_a": {
       "name": {
@@ -335,7 +340,8 @@
         "vta",
         "substantia_nigra",
         "brainstem"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A"
     },
     "mao_b": {
       "name": {
@@ -350,7 +356,8 @@
         "vta",
         "raphe",
         "brainstem"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B"
     },
     "ache": {
       "name": {
@@ -366,7 +373,8 @@
         "hippocampus",
         "thalamus",
         "septal_nuclei"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase"
     },
     "bche": {
       "name": {
@@ -380,7 +388,8 @@
         "frontal",
         "temporal",
         "hippocampus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Butyrylcholinesterase"
     },
     "carbonic_anhydrase": {
       "name": {
@@ -417,7 +426,8 @@
         "occipital",
         "hippocampus",
         "thalamus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel"
     },
     "cav": {
       "name": {
@@ -432,7 +442,8 @@
         "temporal",
         "thalamus",
         "hippocampus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel"
     },
     "cav_a2d": {
       "name": {
@@ -461,7 +472,8 @@
         "thalamus",
         "frontal",
         "temporal"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel"
     },
     "sv2a": {
       "name": {
@@ -476,7 +488,8 @@
         "temporal",
         "hippocampus",
         "thalamus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/SV2A"
     },
     "muscarinic": {
       "name": {
@@ -494,7 +507,8 @@
         "putamen",
         "thalamus",
         "hypothalamus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor"
     },
     "nicotinic": {
       "name": {
@@ -510,7 +524,8 @@
         "hippocampus",
         "thalamus",
         "vta"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor"
     },
     "alpha1": {
       "name": {
@@ -528,7 +543,8 @@
         "hippocampus",
         "thalamus",
         "brainstem"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"
     },
     "alpha2": {
       "name": {
@@ -545,7 +561,8 @@
         "thalamus",
         "hypothalamus",
         "brainstem"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor"
     },
     "beta": {
       "name": {
@@ -561,7 +578,8 @@
         "cingulate",
         "accumbens",
         "cerebellum"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor"
     },
     "glutamate": {
       "name": {
@@ -579,7 +597,8 @@
         "cerebellum",
         "caudate",
         "putamen"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor"
     },
     "melatonin": {
       "name": {
@@ -592,7 +611,8 @@
       "regions": [
         "hypothalamus",
         "thalamus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor"
     },
     "orexin": {
       "name": {
@@ -608,7 +628,8 @@
         "raphe",
         "vta",
         "thalamus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Orexin_receptor"
     },
     "melanocortin": {
       "name": {
@@ -620,7 +641,8 @@
       "receptor": null,
       "regions": [
         "hypothalamus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/Melanocortin_receptor"
     },
     "alpha1a": {
       "name": {
