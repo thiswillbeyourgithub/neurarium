@@ -67,7 +67,7 @@
 
       "toolbar.reset": "Reset view",
       "toolbar.search": "Search",
-      "toolbar.searchAria": "Search structures, connections and receptors",
+      "toolbar.searchAria": "Search structures, connections, receptors and drugs",
       "search.placeholder": "Search structure, connection, receptor or drug...",
       "search.noMatch": "No match",
 
@@ -181,7 +181,7 @@
 
       "toolbar.reset": "Recentrer la vue",
       "toolbar.search": "Rechercher",
-      "toolbar.searchAria": "Rechercher structures, connexions et récepteurs",
+      "toolbar.searchAria": "Rechercher structures, connexions, récepteurs et médicaments",
       "search.placeholder": "Rechercher une structure, une connexion, un récepteur ou un médicament…",
       "search.noMatch": "Aucun résultat",
 
