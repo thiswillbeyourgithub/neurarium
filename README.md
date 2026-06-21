@@ -10,7 +10,8 @@
 > any of it, and never use it for medical decisions.
 
 neurarium is an interactive 3D brain visualizer that runs in the browser. It
-shows brain regions (cortical lobes, basal ganglia / deep nuclei, hindbrain) as
+shows brain regions (cortical lobes, basal ganglia / deep nuclei, diencephalon,
+limbic, hindbrain) as
 3D shapes and draws arrows for neuron projections between them. It also carries a
 dataset of neurotransmitter **receptors** (which regions express each) and a
 dataset of psychiatric **drugs** (what each does to the brain, animated).
