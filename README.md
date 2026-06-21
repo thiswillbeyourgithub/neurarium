@@ -106,10 +106,9 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 Planned directions, none implemented yet and the order is not fixed:
 
-- **More animation**: build on the assemble intro and the circuit traveling-pulse
-  to show wider activity and signal flow across the brain.
-- **Drugs**: how common psychoactive and therapeutic compounds act on the
-  receptors and pathways.
+- **More animation**: build on the assemble intro, the circuit traveling-pulse,
+  and the per-drug effect dots to show wider activity and signal flow across the
+  brain.
 - **Pathologies**: how disorders map onto the regions, circuits, and
   neurotransmitter systems.
 
