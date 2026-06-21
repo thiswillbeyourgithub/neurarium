@@ -522,6 +522,9 @@
          lit and bold, the rest grey out, mirroring the dimmed structures. */
       .legend-item.selected { font-weight: 600; color: #fff; }
       .legend-item.dimmed { opacity: 0.35; }
+      /* A muted kind tag after a non-receptor target's name (e.g. "transporter")
+         in the merged Receptors & targets section. */
+      .legend-tag { color: var(--muted); font-size: 11px; margin-left: auto; }
       .swatch {
         width: 14px;
         height: 14px;
@@ -604,8 +607,10 @@
         margin-bottom: 8px;
       }
       .info-sources a { color: #8fb6e6; text-decoration: underline; }
-      /* No verified link yet: a small orange pill badge instead of a bare link. */
-      .info-sources .src-todo {
+      /* No verified link yet: a small orange pill badge instead of a bare link.
+         Used in the connection/drug source list and the target Reference row. */
+      .info-sources .src-todo,
+      .info-wiki .src-todo {
         display: inline-block;
         vertical-align: middle;
         margin-left: 6px;

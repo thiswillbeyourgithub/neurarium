@@ -1144,44 +1144,77 @@ function createInfoPanel(data, tabs) {
 }
 
 /**
- * Build the Receptors legend section from the live dataset (#receptors-body). The
- * neurotransmitter receptors are grouped by family (in the meta family-label
- * order), each row coloured by the receptor's excit/inhib/modulatory sign swatch
- * and clickable to focus it (dim the brain to the regions expressing it + scatter
- * glowing dots over them, handled by the caller's `onPick`). A "stub" receptor
- * with no CNS role renders muted + inert. Returns a `reflect(activeId)` callback
- * that lights the active receptor's row and greys the rest, called by the caller
- * whenever the focus changes.
+ * Build the merged "Receptors & targets" legend section from the live dataset
+ * (#receptors-body): the unified `data.targets` list (every modeled receptor plus
+ * every non-receptor drug target: transporters, enzymes, channels, receptor
+ * groups), grouped by neurotransmitter `system` (in the meta family-label order,
+ * then any leftover systems, then an "Other" heading for the system-less ones), so
+ * a transporter like SERT sits under "Serotonergic" beside the 5-HT receptors.
+ * Each row is coloured by its swatch (a receptor's sign colour, a target's type
+ * colour) and, for a non-receptor target, tagged with its type ("transporter",
+ * ...). A focusable row is clickable (dim the brain to the regions it sits in +
+ * scatter glowing dots, handled by the caller's `onPick`); a footprint-less one
+ * (a receptor stub, an unlocated enzyme) renders muted + inert. Returns a
+ * `reflect(activeId)` callback that lights the active row and greys the rest.
  * @param {import("./data.js").BrainData} data
- * @param {(receptor: object) => void} onPick
+ * @param {(target: object) => void} onPick
  * @returns {(activeId: string|null) => void}
  */
-function buildReceptorLegend(data, onPick) {
+function buildTargetLegend(data, onPick) {
   const container = document.getElementById("receptors-body");
   if (!container) return () => {};
   container.replaceChildren();
-  const rows = []; // { row, id } for the focusable receptors
+  const rows = []; // { row, id } for the focusable entries
 
   const families = data.meta.receptorFamilyLabels || {};
-  for (const [family, heading] of Object.entries(families)) {
-    const inFamily = data.receptors.filter((r) => r.family === family);
-    if (inFamily.length === 0) continue;
+  // Group by system; a null system goes under the "_other" bucket. Receptors come
+  // before non-receptor targets within a system because data.targets lists every
+  // receptor first (so the array order already gives "5-HT receptors, then SERT").
+  const bySystem = new Map();
+  for (const tgt of data.targets || []) {
+    const key = tgt.system || "_other";
+    if (!bySystem.has(key)) bySystem.set(key, []);
+    bySystem.get(key).push(tgt);
+  }
+  // Heading order: the meta family order first, then any leftover real systems,
+  // then the "Other" bucket last.
+  const order = [
+    ...Object.keys(families),
+    ...[...bySystem.keys()].filter((k) => k !== "_other" && !(k in families)),
+    ...(bySystem.has("_other") ? ["_other"] : []),
+  ];
+  const done = new Set();
+  for (const key of order) {
+    if (done.has(key)) continue;
+    done.add(key);
+    const list = bySystem.get(key);
+    if (!list || !list.length) continue;
     const h = document.createElement("h2");
-    h.textContent = heading;
+    h.textContent = key === "_other" ? t("targets.otherSystem") : (families[key] || key);
     container.appendChild(h);
-    for (const receptor of inFamily) {
-      const row = addLegendItem(container, receptor.signColor, receptor.name);
-      if (receptor.focusable) {
-        // Tooltip: the full classification at a glance.
-        row.title = [
-          receptor.neurotransmitter, receptor.classLabel,
-          receptor.signLabel, receptor.synapticLabel,
-        ].filter(Boolean).join(" · ");
+    for (const tgt of list) {
+      const row = addLegendItem(container, tgt.swatchColor, tgt.name);
+      // Non-receptor targets carry a muted kind tag ("transporter", "enzyme", ...)
+      // so the merged list still reads at a glance (receptors need none).
+      if (tgt.kind !== "receptor" && tgt.typeLabel) {
+        const tag = document.createElement("span");
+        tag.className = "legend-tag";
+        tag.textContent = tgt.typeLabel;
+        row.appendChild(tag);
+      }
+      if (tgt.focusable) {
+        // Tooltip: a receptor's full classification, or a target's type · system.
+        const r = tgt.receptor;
+        row.title = r
+          ? [r.neurotransmitter, r.classLabel, r.signLabel, r.synapticLabel]
+              .filter(Boolean).join(" · ")
+          : [tgt.typeLabel, tgt.systemLabel].filter(Boolean).join(" · ");
         row.classList.add("clickable");
-        row.addEventListener("click", () => onPick(receptor));
-        rows.push({ row, id: receptor.id });
+        row.addEventListener("click", () => onPick(tgt));
+        rows.push({ row, id: tgt.id });
       } else {
-        // No meaningful CNS role: listed for completeness but not focusable.
+        // No modeled footprint (a receptor stub, an unlocated enzyme): listed for
+        // completeness but not focusable.
         row.classList.add("muted");
         row.title = t("receptor.stubHint");
       }
@@ -1850,16 +1883,16 @@ function connectionSideTag(proj) {
  * label) and receptors (by name / neurotransmitter / system); clicking a result
  * (or pressing Enter to take the first one) frames the camera on it. A structure
  * result opens its structure panel, a connection result the connection panel, a
- * receptor result focuses the receptor (dim + dots + panel). All go through the
- * shared selectStructure / selectConnection / selectReceptor helpers.
+ * receptor/target result focuses it (dim + dots + panel). All go through the
+ * shared selectStructure / selectConnection / selectTarget helpers.
  * @param {{focus:ReturnType<typeof createCameraFocus>, meshes:THREE.Mesh[],
  *   arrows:import("./arrows.js").ProjectionArrow[],
  *   data:import("./data.js").BrainData,
  *   selection:ReturnType<typeof createSelection>,
  *   selectStructure:Function, selectConnection:Function,
- *   selectReceptor:Function}} deps
+ *   selectTarget:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor, selectDrug }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -1894,13 +1927,20 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
         select: () => selectConnection(arrow, { frame: true }),
       };
     }),
-    // Focusable receptors only (a stub has no anatomy to show, so it stays a
-    // legend-only listing). Search by name, neurotransmitter, family or mechanism.
-    ...(data.receptors || []).filter((r) => r.focusable).map((receptor) => ({
-      label: receptor.name + (receptor.neurotransmitter ? ` · ${receptor.neurotransmitter}` : ""),
-      keywords: [receptor.familyLabel, receptor.classLabel, receptor.signLabel].filter(Boolean).join(" "),
-      select: () => selectReceptor(receptor),
-    })),
+    // Focusable receptors + non-receptor targets (a stub / unlocated target has no
+    // anatomy to show, so it stays a legend-only listing). A receptor shows its
+    // neurotransmitter as the tag, a target its type; keywords carry the system /
+    // mechanism so they match too without cluttering the row.
+    ...(data.targets || []).filter((tgt) => tgt.focusable).map((tgt) => {
+      const tag = tgt.kind === "receptor"
+        ? (tgt.receptor && tgt.receptor.neurotransmitter)
+        : tgt.typeLabel;
+      return {
+        label: tgt.name + (tag ? ` · ${tag}` : ""),
+        keywords: tgt.keywords || "",
+        select: () => selectTarget(tgt),
+      };
+    }),
     // Focusable drugs (those with a binding profile). The row shows the primary
     // class as a tag; keywords carry the full class list + nomenclature + targets.
     ...(data.drugs || []).filter((d) => d.focusable).map((drug) => ({
@@ -2209,46 +2249,49 @@ async function main() {
     if (!circuitAnim.matches(focusedArrows)) circuitAnim.stop();
   });
 
-  // Receptor expression markers + focus (js/receptor-markers.js). Clicking a
-  // receptor row in the Receptors legend section dims the brain to just the
-  // regions expressing it (via setCircuit, no arrow pin, so the pathways fade too
-  // and the dots are the only bright thing) and scatters glowing dots over those
-  // regions' surfaces; a ubiquitous receptor lights every region. Clicking the
-  // active one clears it. The dots are dropped the moment the focus stops being
-  // exactly that receptor's structure set (a clear, a circuit, a legend isolate,
-  // another receptor), watched off the selection state like the circuit pulse.
+  // Receptor/target expression markers + focus (js/receptor-markers.js). Clicking a
+  // row in the merged "Receptors & targets" section dims the brain to just the
+  // regions the receptor/target sits in (via setCircuit, no arrow pin, so the
+  // pathways fade too and the dots are the only bright thing) and scatters glowing
+  // dots over those regions' surfaces; a ubiquitous receptor lights every region.
+  // Clicking the active one clears it. The dots are dropped the moment the focus
+  // stops being exactly that structure set (a clear, a circuit, a legend isolate,
+  // another receptor/target), watched off the selection state like the circuit
+  // pulse. The same path serves receptors and non-receptor targets; only the info
+  // view differs (showReceptor vs the lighter showTarget).
   const receptorMarkers = createReceptorMarkers({ scene });
-  let activeReceptorId = null;
-  let reflectReceptors = () => {};
-  const refreshReceptorRows = () => reflectReceptors(activeReceptorId);
-  const receptorMeshesOf = (receptor) =>
-    receptor.structureIds.map((id) => meshById.get(id)).filter(Boolean);
-  const focusReceptor = (receptor, { frame = false } = {}) => {
-    const meshSet = receptorMeshesOf(receptor);
+  let activeTargetId = null;
+  let reflectTargets = () => {};
+  const refreshTargetRows = () => reflectTargets(activeTargetId);
+  const targetMeshesOf = (tgt) =>
+    tgt.structureIds.map((id) => meshById.get(id)).filter(Boolean);
+  const focusTarget = (tgt, { frame = false } = {}) => {
+    const meshSet = targetMeshesOf(tgt);
     selection.setCircuit(meshSet, []);
-    receptorMarkers.show(meshSet, receptor.signColor);
-    info.showReceptor(receptor);
-    // From the search box, frame the expressing regions (the whole brain for a
-    // ubiquitous receptor); from the legend row, leave the view where it is.
+    receptorMarkers.show(meshSet, tgt.swatchColor);
+    if (tgt.kind === "receptor") info.showReceptor(tgt.receptor);
+    else info.showTarget(tgt);
+    // From the search box, frame the regions (the whole brain for a ubiquitous
+    // receptor); from the legend row, leave the view where it is.
     if (frame) focus.focusMeshes(meshSet);
-    activeReceptorId = receptor.id;
-    refreshReceptorRows();
+    activeTargetId = tgt.id;
+    refreshTargetRows();
   };
-  const toggleReceptor = (receptor) => {
-    if (activeReceptorId === receptor.id) selection.clear(); // watcher hides dots
-    else focusReceptor(receptor);
+  const toggleTarget = (tgt) => {
+    if (activeTargetId === tgt.id) selection.clear(); // watcher hides dots
+    else focusTarget(tgt);
   };
-  // Picking a receptor in the search box always focuses it (and frames it), never
+  // Picking a target in the search box always focuses it (and frames it), never
   // toggles it off, the same way a structure/connection search result behaves.
-  const selectReceptor = (receptor) => focusReceptor(receptor, { frame: true });
+  const selectTarget = (tgt) => focusTarget(tgt, { frame: true });
   selection.onIsolate((isolated) => {
     if (receptorMarkers.active && !receptorMarkers.matches(isolated)) {
       receptorMarkers.hide();
-      activeReceptorId = null;
-      refreshReceptorRows();
+      activeTargetId = null;
+      refreshTargetRows();
     }
   });
-  reflectReceptors = buildReceptorLegend(data, toggleReceptor);
+  reflectTargets = buildTargetLegend(data, toggleTarget);
 
   // Per-drug animation + focus (js/drug-anim.js), the same shape as the receptor
   // focus above. Clicking a drug row dims the brain to the union of regions its
@@ -2557,7 +2600,7 @@ async function main() {
   }
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
-  wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectReceptor, selectDrug });
+  wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug });
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
   wireShortcuts(shortcutsHelp); // single-key shortcuts (n/s/l/c/r/f/?/Esc)
   projVis.apply(); // established arrows visible, tentative ones start hidden
