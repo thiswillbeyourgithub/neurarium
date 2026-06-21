@@ -83,6 +83,13 @@ function localize(field) {
  *   `synapticLabel` and `signColor`, the concrete `structureIds` its `locations`
  *   bases expand to (every structure when `ubiquitous`), the side-stripped
  *   `locationNames`, and a `focusable` flag (false for the inert "stub" receptors).
+ * @property {object[]} targets  The merged "Receptors & targets" browse list: one
+ *   normalized, focusable entry per thing a drug acts on. Each carries `id`,
+ *   `kind` ("receptor" or a non-receptor type: transporter / enzyme / ion_channel /
+ *   vesicle_protein / receptor_group), `name`, `system` (grouping family, or null),
+ *   `swatchColor`, `structureIds`, `focusable` + `keywords`. A "receptor" entry
+ *   points back at its receptor record (`receptor`); a non-receptor one adds
+ *   `typeLabel` / `systemLabel` / `wikipedia` / `locationNames` for its panel.
  * @property {object[]} drugs  Drug records (from drugs.jsonl, sourced from Stahl's
  *   Prescriber's Guide). Each is augmented with localized `description` / `nbn`,
  *   `categoryLabels` (+ primary `category`), and resolved `bindings` (each binding
@@ -137,6 +144,11 @@ export async function loadBrainData(dataDir = "data") {
   const receptorFamilyLabels = localizeMap(metaRecord.receptor_family_labels);
   const receptorClassLabels = localizeMap(metaRecord.receptor_class_labels);
   const synapticLabels = localizeMap(metaRecord.synaptic_labels);
+  // Non-receptor drug-target presentation: type -> {en,fr} tag (localized) and
+  // type -> swatch/dot colour (neutral), for the merged "Receptors & targets"
+  // section where transporters/enzymes/channels sit beside the receptors.
+  const targetTypeLabels = localizeMap(metaRecord.target_type_labels);
+  const targetTypeColors = metaRecord.target_type_colors || {};
   // Drug legend + animation maps (category headings, binding targets, actions,
   // and the net-effect swatch colours/labels). drugTargets / drugActions are kept
   // as raw maps (their `name`/`label` are localized per binding below); the colour
@@ -266,11 +278,65 @@ export async function loadBrainData(dataDir = "data") {
       .join(" ");
   }
 
+  // Build the merged "Receptors & targets" browse list: one normalized entry per
+  // focusable *thing a drug can act on*, so a transporter (SERT), enzyme (MAO-A) or
+  // channel (Nav) can be explored on its own, not only as a line in a drug's "Acts
+  // on" list. Two sources, one shape: every modeled receptor (kind "receptor",
+  // keeping its sign swatch + full classification for the panel), then every
+  // *non-receptor* drug_targets entry (the receptor-linked ones are already covered
+  // by the receptors above). Both carry `system` (the neurotransmitter family the
+  // legend groups by; null -> the "Other" heading), a swatch colour, the expanded
+  // `structureIds` to light, a `focusable` flag (false when there is no modeled
+  // region, like a receptor stub) and search `keywords`. A receptor entry points
+  // back at its record (panel reuses showReceptor); a non-receptor one carries the
+  // display fields showTarget needs.
+  const targets = [];
+  for (const r of receptors) {
+    targets.push({
+      id: r.id,
+      kind: "receptor",
+      name: r.name,
+      system: r.family,
+      swatchColor: r.signColor,
+      structureIds: r.structureIds,
+      ubiquitous: !!r.ubiquitous,
+      focusable: r.focusable,
+      receptor: r,
+      keywords: [r.familyLabel, r.classLabel, r.signLabel, r.neurotransmitter]
+        .filter(Boolean).join(" "),
+    });
+  }
+  for (const [id, tgt] of Object.entries(drugTargets)) {
+    if (tgt.receptor) continue; // already listed as a receptor above
+    const structureIds = (tgt.regions || []).flatMap((b) =>
+      [b, `${b}_R`, `${b}_L`].filter((sid) => byId.has(sid)),
+    );
+    const typeLabel = targetTypeLabels[tgt.type] || tgt.type || "";
+    const systemLabel = tgt.system ? receptorFamilyLabels[tgt.system] || tgt.system : "";
+    targets.push({
+      id,
+      kind: tgt.type || "target",
+      name: localize(tgt.name),
+      system: tgt.system || null,
+      swatchColor: targetTypeColors[tgt.type] || "#9aa0a6",
+      structureIds,
+      ubiquitous: false,
+      focusable: structureIds.length > 0,
+      receptor: null,
+      typeLabel,
+      systemLabel,
+      wikipedia: tgt.wikipedia || "",
+      locationNames: (tgt.regions || []).map((b) => baseName.get(b) || b),
+      keywords: [typeLabel, systemLabel].filter(Boolean).join(" "),
+    });
+  }
+
   return {
     structures,
     projections,
     circuits,
     receptors,
+    targets,
     drugs,
     byId,
     meta: {
@@ -282,6 +348,8 @@ export async function loadBrainData(dataDir = "data") {
       receptorFamilyLabels,
       receptorClassLabels,
       synapticLabels,
+      targetTypeLabels,
+      targetTypeColors,
       drugCategoryLabels,
       drugEffectColors,
       drugEffectLabels,
