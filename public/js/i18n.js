@@ -98,6 +98,8 @@
       "info.linkTodo": "TODO",
       "info.wikipedia": "Wikipedia ↗",
       "info.reference": "Reference",
+      "info.sourceCaveat": "These sources have not yet been checked by a human. They were inferred by an LLM with internet and PDF access.",
+      "info.sourceCaveatLabel": "About these sources",
       "info.noConnections": "No mapped connections yet.",
       "info.connections": "Connections",
 
@@ -215,6 +217,8 @@
       "info.linkTodo": "TODO",
       "info.wikipedia": "Wikipédia ↗",
       "info.reference": "Référence",
+      "info.sourceCaveat": "Ces sources n’ont pas encore été vérifiées par un humain. Elles ont été déduites par un LLM ayant accès à internet et à des PDF.",
+      "info.sourceCaveatLabel": "À propos de ces sources",
       "info.noConnections": "Aucune connexion répertoriée pour l’instant.",
       "info.connections": "Connexions",
 

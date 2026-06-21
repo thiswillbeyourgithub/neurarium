@@ -849,6 +849,25 @@ function createInfoPanel(data, tabs) {
     return node;
   };
 
+  // A small "?" caveat badge shown wherever a data source / reference appears: the
+  // sources are LLM-inferred (web + the Stahl PDF) and not yet human-checked, so
+  // every source gets this note. The tooltip shows on hover (CSS) and is pinned on
+  // click/tap via a `.show` class, so touch devices (no :hover) can read it too.
+  const makeHelpIcon = () => {
+    const wrap = el("span", "help-icon");
+    const btn = el("button", "help-dot", "?");
+    btn.type = "button";
+    btn.setAttribute("aria-label", t("info.sourceCaveatLabel"));
+    const tip = el("span", "help-tip", t("info.sourceCaveat"));
+    tip.setAttribute("role", "tooltip");
+    wrap.append(btn, tip);
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      wrap.classList.toggle("show");
+    });
+    return wrap;
+  };
+
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
   // matches the dots + legend. Empty values are skipped.
@@ -885,6 +904,7 @@ function createInfoPanel(data, tabs) {
       wrap.appendChild(el("span", null, t("info.reference")));
       wrap.appendChild(el("span", "src-todo", t("info.linkTodo")));
     }
+    wrap.appendChild(makeHelpIcon()); // the reference is LLM-inferred, not vetted
     body.appendChild(wrap);
   };
 
@@ -893,8 +913,10 @@ function createInfoPanel(data, tabs) {
   const appendSources = (sources) => {
     if (!sources || !sources.length) return;
     const wrap = el("div", "info-sources");
-    wrap.appendChild(el(
-      "h3", null, sources.length > 1 ? t("info.sources") : t("info.source")));
+    const h3 = el(
+      "h3", null, sources.length > 1 ? t("info.sources") : t("info.source"));
+    h3.appendChild(makeHelpIcon()); // the citations are LLM-inferred, not vetted
+    wrap.appendChild(h3);
     const ul = el("ul");
     for (const s of sources) {
       const li = el("li");

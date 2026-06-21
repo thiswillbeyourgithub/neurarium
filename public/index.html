@@ -628,6 +628,53 @@
       .info-group { font-size: 12px; color: var(--muted); margin: -4px 0 12px; }
       .info-wiki { font-size: 12px; margin: -6px 0 12px; }
       .info-wiki a { color: #8fb6e6; text-decoration: underline; }
+      /* "?" caveat badge next to every Source / Reference: the citations + links
+         are LLM-inferred and not yet human-checked. The tooltip shows on hover
+         (desktop) and is pinned on click/tap via .show (touch, where :hover never
+         fires). The bubble is positioned relative to the full-width source/wiki
+         container (which is position:relative), not the tiny icon, so its
+         left:0/right:0 span can never overflow + be clipped by the narrow panel. */
+      .info-sources, .info-wiki { position: relative; }
+      .help-icon {
+        display: inline-flex;
+        vertical-align: middle;
+        margin-left: 6px;
+      }
+      .help-dot {
+        width: 15px;
+        height: 15px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--muted);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--muted);
+        font: 600 10px/1 inherit;
+        cursor: pointer;
+      }
+      .help-dot:hover { color: var(--text); border-color: var(--text); }
+      .help-tip {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(100% + 4px);
+        padding: 8px 10px;
+        background: rgba(18, 18, 22, 0.98);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 6px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+        color: var(--text);
+        font: 400 11px/1.45 inherit;
+        letter-spacing: normal;
+        text-transform: none;
+        z-index: 60;
+      }
+      .help-icon:hover .help-tip,
+      .help-icon:focus-within .help-tip,
+      .help-icon.show .help-tip { display: block; }
       .info-connections li {
         display: flex;
         align-items: center;

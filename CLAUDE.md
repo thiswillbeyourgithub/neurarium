@@ -1029,6 +1029,16 @@ as the WIP banner (`js/error-banner.js`):
   the action·note, dimmed when tentative) and the Stahl source).
   Opening any of these reveals the Settings/Details tab bar and selects Details;
   `hide()` (the × or an empty-space click) returns to the Settings view.
+  Everywhere a data **source / reference** is shown (the connection + drug
+  **Source(s)** list and every **Wikipedia / Reference** row), a small **"?"
+  caveat badge** sits next to it (`makeHelpIcon` in `createInfoPanel`): its
+  tooltip warns that the sources are **LLM-inferred (web + the Stahl PDF) and not
+  yet human-checked**. The tooltip shows on hover and is pinned on click/tap (a
+  `.show` class), so touch devices (no `:hover`) can read it too; it is anchored
+  to the full-width `.info-sources` / `.info-wiki` container (not the tiny icon)
+  so its `left:0/right:0` bubble can't overflow + be clipped by the narrow panel.
+  The message is the `info.sourceCaveat` i18n key (NOT the About / dev-banner
+  "Source code" link, which points at the code repo, not a data source).
   - **Clicking/tapping an arrow** (or picking a connection in search) shows the
     **connection** view: the pathway label, its route (`from → to`, `↔` for a
     bidirectional/commissural link), kind + neurotransmitter, a one-line
