@@ -112,6 +112,8 @@ Planned directions, none implemented yet and the order is not fixed:
   brain.
 - **Pathologies**: how disorders map onto the regions, circuits, and
   neurotransmitter systems.
+- **Verify the sources**: every citation currently carries a placeholder
+  **TODO** url; replace each one with a verified DOI/link.
 
 ## Running
 
