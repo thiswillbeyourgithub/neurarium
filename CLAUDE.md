@@ -89,9 +89,13 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           colour) and drug_effect_labels (effect -> {en,fr}), and
                           drug_targets (the merged binding-target map: every
                           non-receptor target like sert/mao_a/nav with its
-                          {name:{en,fr}, system, regions[bases]} plus every
-                          receptor id as a target linked back to its receptor);
-                          so the dataset is
+                          {name:{en,fr}, type, system, regions[bases], optional
+                          wikipedia} plus every receptor id as a target linked back
+                          to its receptor), and the non-receptor-target presentation
+                          maps target_type_labels (type -> {en,fr} tag, e.g.
+                          transporter/enzyme/ion_channel) and target_type_colors
+                          (type -> swatch/dot colour, since a transporter has no
+                          excit/inhib sign to reuse); so the dataset is
                           self-describing and a port needs no hardcoded palette
                         - data/structures.jsonl: one region per line: id, name
                           ({en,fr}, with the hemisphere prefix/suffix), base_name
@@ -185,8 +189,8 @@ js/data.js            Fetches the per-type data files (meta.json + structures/
                       projections/circuits/receptors/drugs.jsonl) + all shape
                       files,
                       returns a normalized {structures, projections, circuits,
-                      receptors, drugs, byId, meta} object. It reads the meta maps
-                      and
+                      receptors, targets, drugs, byId, meta} object. It reads the
+                      meta maps and
                       resolves each projection's arrow `color` from its kind (so
                       the viewer reads `projection.color`, never a hardcoded
                       palette), and resolves each receptor's family/class/sign/
@@ -201,9 +205,18 @@ js/data.js            Fetches the per-type data files (meta.json + structures/
                       ubiquitous one lights all, others expand the target's region
                       bases to both hemispheres); the union is the drug's
                       `structureIds` (what the focus dims to), plus `focusable` +
-                      search `keywords`. `meta` carries
+                      search `keywords`. It also builds the merged **`targets`**
+                      browse list (every receptor + every non-receptor drug target),
+                      one normalized focusable entry each: `kind` (receptor or a
+                      target type), `system` (grouping family), `swatchColor` (a
+                      receptor's sign colour, a target's type colour), expanded
+                      `structureIds`, `focusable` + `keywords`; a receptor entry
+                      points back at its record, a non-receptor one adds
+                      typeLabel/systemLabel/wikipedia/locationNames for showTarget.
+                      `meta` carries
                       {projectionColors, groupLabels, ..., receptorFamilyLabels,
-                      receptorClassLabels, synapticLabels, drugCategoryLabels,
+                      receptorClassLabels, synapticLabels, targetTypeLabels,
+                      targetTypeColors, drugCategoryLabels,
                       drugEffectColors, drugEffectLabels}.
 js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       dispatches on shape.type to buildBlobGeometry (deformed
@@ -250,8 +263,10 @@ js/circuit-anim.js    Rendering half of that animation (createCircuitAnimation):
                       js/arrows.js) from source to target, looping so a curated
                       loop reads as signal flowing around it. Runs only while a
                       circuit is isolated; ticked in the render loop.
-js/receptor-markers.js  Receptor "expression dots" (createReceptorMarkers): when a
-                      receptor is focused (its legend row), scatters dense additive
+js/receptor-markers.js  Receptor / target "expression dots"
+                      (createReceptorMarkers): when a receptor *or* a non-receptor
+                      drug target is focused (its row in the merged Receptors &
+                      targets section), scatters dense additive
                       glowing "gem" dots over the surface of every structure
                       expressing it (a crisp bright core + a 4-point sparkle-star
                       sprite, so they read as shiny gems not stains; per-dot
@@ -261,7 +276,8 @@ js/receptor-markers.js  Receptor "expression dots" (createReceptorMarkers): when
                       structure mesh's own geometry and parented to it (so the dots
                       track its explode/mirror transform and vanish when it is
                       hidden, like the selection halo + circuit node-flash shells);
-                      colour = the receptor's sign colour, gently pulsed. One
+                      colour = the receptor's sign colour (a target's type colour),
+                      gently pulsed. One
                       controller per scene; ticked in the render loop. The single-
                       cloud builder is factored out as an exported `buildGemCloud`
                       (+ `GEM_DOT_SIZE`) so the per-drug animation reuses the exact
@@ -283,12 +299,14 @@ js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       intro (createIntroAnimation), auto-rotate, hover raycasting
                       for labels, arrow + structure picking and the detail panel
                       (createInfoPanel: a connection view, a structure view with
-                      its connection list, a receptor view, or a drug view
+                      its connection list, a receptor view, a non-receptor target
+                      view (showTarget), or a drug view
                       (showDrug), rendered into the
                       main panel's Details tab via createPanelTabs), the
-                      structure+connection+receptor+drug search, the legend builder
-                      (buildLegend), the Receptors legend builder
-                      (buildReceptorLegend, wiring each receptor row to dim the
+                      structure+connection+receptor/target+drug search, the legend
+                      builder (buildLegend), the merged Receptors & targets legend
+                      builder (buildTargetLegend, grouped by neurotransmitter
+                      system, wiring each receptor/target row to dim the
                       brain + light its dots), and the Drugs legend builder
                       (buildDrugLegend, grouped by category with its own filter
                       box, wiring each drug row to dim the brain + play the
@@ -712,7 +730,7 @@ as the WIP banner (`js/error-banner.js`):
   nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
   names** and **Hide projections** buttons followed by the **arrow colour-mode
   switch** (Neurotransmitter / Potential, `#color-mode`), then the nested
-  collapsed **Receptors** (`#receptors`) section, then the nested
+  collapsed **Receptors & targets** (`#receptors`) section, then the nested
   collapsed **Drugs** (`#drugs`) section (with its own `#drugs-filter` box), then
   the nested
   collapsed **About** (`#about`) section. Searching swaps the search box in place of the panel's
@@ -899,24 +917,32 @@ as the WIP banner (`js/error-banner.js`):
   below). Each structure row is clickable to isolate/focus that region, and each
   **neurotransmitter row** is clickable to isolate that transmitter's pathways
   (see Selection above).
-- **Receptors** (`#receptors`, collapsed by default, the accordion peer between
-  Legend and About): the neurotransmitter receptors from `data/receptors.jsonl`,
-  built by `buildReceptorLegend` in `js/main.js` and grouped by **family** (one
-  `<h2>` per family, in the `receptor_family_labels` key order) with one row per
-  receptor, its swatch coloured by the receptor's excit/inhib/modulatory **sign**.
-  Clicking a row **focuses** that receptor: it dims the whole brain to just the
-  regions expressing it and scatters glowing **dots** over those regions'
-  surfaces (`createReceptorMarkers`, see "Receptors" below), and opens the
-  receptor **info-panel view** (`createInfoPanel.showReceptor`: the system, a
-  Wikipedia link, the description, the classification facts and the region list,
-  or "Throughout the brain" for a ubiquitous receptor). Clicking the active row
-  again clears it; switching to any other focus drops the dots. A **stub**
-  receptor (no CNS role: empty locations) renders muted and is not clickable. The
-  dimming reuses `selection.setCircuit(regionMeshes, [])` (no arrow pin, so the
-  pathways fade and the dots are the only bright thing); the markers are stopped
-  off the selection state, the same way the circuit pulse is.
-- **Drugs** (`#drugs`, collapsed by default, the accordion peer between Receptors
-  and About): the psychiatric drugs from `data/drugs.jsonl`, built by
+- **Receptors & targets** (`#receptors`, collapsed by default, the accordion peer
+  between Legend and About): the merged `data.targets` browse list (every receptor
+  from `data/receptors.jsonl` **plus** every non-receptor drug target from the
+  meta `drug_targets` map: transporters, enzymes, ion channels, receptor groups),
+  built by `buildTargetLegend` in `js/main.js` and grouped by **neurotransmitter
+  system** (one `<h2>` per system, in the `receptor_family_labels` key order, then
+  an **"Other / non-aminergic"** heading for the system-less ones), so a
+  transporter like SERT sits under Serotonergic beside the 5-HT receptors. Each
+  row's swatch is coloured by a receptor's excit/inhib/modulatory **sign** (a
+  non-receptor target's **type** colour, `target_type_colors`), and a non-receptor
+  row carries a muted **type tag** ("transporter", "enzyme", ...). Clicking a row
+  **focuses** it: it dims the whole brain to just the regions it sits in and
+  scatters glowing **dots** over those regions' surfaces (`createReceptorMarkers`,
+  see "Receptors" below), and opens the **info-panel view**: a receptor opens
+  `showReceptor` (the system, a Wikipedia link, the description, the classification
+  facts and the region list, or "Throughout the brain" for a ubiquitous receptor);
+  a non-receptor target opens the lighter `showTarget` (its system, a Wikipedia
+  link or a TODO pill until one is gathered, the type + system facts, and the
+  region list). Clicking the active row again clears it; switching to any other
+  focus drops the dots. A **stub** receptor (no CNS role: empty locations) or an
+  unlocated target renders muted and is not clickable. The dimming reuses
+  `selection.setCircuit(regionMeshes, [])` (no arrow pin, so the pathways fade and
+  the dots are the only bright thing); the markers are stopped off the selection
+  state, the same way the circuit pulse is.
+- **Drugs** (`#drugs`, collapsed by default, the accordion peer between Receptors &
+  targets and About): the psychiatric drugs from `data/drugs.jsonl`, built by
   `buildDrugLegend` in `js/main.js` and grouped by **primary category** (one
   `<h2>` per category, in the `drug_category_labels` key order) with one row per
   drug. A **`#drugs-filter`** text box at the top of the section live-filters the
@@ -1105,10 +1131,11 @@ trigger is the existing circuit row), so no i18n change.
 ## Receptors
 
 A dataset of neurotransmitter **receptors** (`data/receptors.jsonl`, authored as
-the `RECEPTORS` list in `tools/generate_data.py`), surfaced as a focusable
-**Receptors** legend section. The point is anatomical: see, per receptor, which
-modeled regions express it, plus its functional classification, sourced from each
-receptor's Wikipedia article. Split, like the rest, into data and rendering:
+the `RECEPTORS` list in `tools/generate_data.py`), surfaced (together with the
+non-receptor drug targets, see "Receptors & targets" just below) as a focusable
+**Receptors & targets** legend section. The point is anatomical: see, per receptor,
+which modeled regions express it, plus its functional classification, sourced from
+each receptor's Wikipedia article. Split, like the rest, into data and rendering:
 
 - **Data (`tools/generate_data.py` -> `data/receptors.jsonl`).** Each receptor
   carries its `neurotransmitter`, mechanism `receptor_class` (ionotropic /
@@ -1125,7 +1152,8 @@ receptor's Wikipedia article. Split, like the rest, into data and rendering:
   structures (`brainstem_nuclei` group: raphe, locus coeruleus, VTA), the
   neuromodulatory source nuclei the pathways already needed.
 - **Rendering (`js/receptor-markers.js` + `js/main.js`).** Clicking a receptor row
-  (`buildReceptorLegend`) dims the brain to just its regions via
+  (`buildTargetLegend`, which builds the merged Receptors & targets list) dims the
+  brain to just its regions via
   `selection.setCircuit(regionMeshes, [])` (no arrow pin, so all pathways fade and
   the dots are the only bright thing) and calls
   `createReceptorMarkers.show(regionMeshes, signColour)`, which scatters dense
@@ -1140,6 +1168,26 @@ receptor's Wikipedia article. Split, like the rest, into data and rendering:
   hides them the moment the isolate set is no longer exactly the receptor's region
   set (`createReceptorMarkers.matches`), so a clear, a circuit, a legend isolate or
   another receptor all drop them.
+
+**Receptors & targets (the merged browse list).** The legend section is *not*
+receptors-only: it lists the unified `data.targets`, every receptor **plus** every
+non-receptor drug target (transporters, enzymes, ion channels, receptor groups)
+from the meta `drug_targets` map, so a target a drug acts on (SERT, MAO-A, Nav, ...)
+is explorable on its own, not only as a line in a drug's "Acts on" list. The two
+sources are normalized to one shape in `js/data.js` and grouped by neurotransmitter
+`system` (then an "Other / non-aminergic" heading), so SERT sits under Serotonergic
+beside the 5-HT receptors. A receptor isn't a transporter, so the distinction is
+kept: a receptor keeps its sign swatch + full `showReceptor` panel, a non-receptor
+target gets its `type`-colour swatch, a muted type tag, and the lighter
+`showTarget` panel (its system, a Wikipedia link or a TODO pill until one is
+gathered, the type + system facts, the region list). The *focus* machinery is
+shared (the same `focusTarget` path, `createReceptorMarkers` dots and
+`setCircuit` dimming serve both); only the panel view + swatch colour differ by
+`kind`. A non-receptor target's `type` (transporter / enzyme / ion_channel /
+vesicle_protein / receptor_group), `system`, region footprint and optional
+`wikipedia` are authored in the `DRUG_TARGETS` map in `tools/generate_data.py` (see
+"Drugs" and "Changing the data"); the regions currently carry no per-target source,
+hence the TODO pill.
 
 To add or edit a receptor, see "Changing the data" below.
 
@@ -1167,11 +1215,14 @@ rendering:
   `DRUG_ACTIONS` (action -> {label:{en,fr}, net `effect`}), `DRUG_EFFECT_COLORS` /
   `DRUG_EFFECT_LABELS` (boost emerald / block rose / modulate violet) and
   `DRUG_TARGETS` (the non-receptor targets: transporters / enzymes / channels /
-  generic receptor families, each with `{name:{en,fr}, system, regions[bases]}`).
+  generic receptor families, each with `{name:{en,fr}, type, system, regions[bases],
+  optional wikipedia}`, where `type` is a `TARGET_TYPE_LABELS` key driving the
+  merged Receptors & targets legend's swatch colour + tag).
   `_build_drug_targets()` **merges** `DRUG_TARGETS` with every receptor id (so a
   binding can target either a coarse target like `sert` or a specific receptor like
   `5ht2a`, the latter linked back to its receptor record for its regions), and that
-  merged map is emitted into `meta.json` as `drug_targets`. `_drug_record()`
+  merged map is emitted into `meta.json` as `drug_targets` (also the source of the
+  browsable Receptors & targets list, see "Receptors"). `_drug_record()`
   validates every category / target / action / effect against the vocabularies (and
   rejects duplicate ids) and attaches the constant `STAHL_SOURCE` citation. A drug
   with no bindings is emitted `focusable: false` (listed, not clickable), like a
@@ -1395,7 +1446,12 @@ To add or edit a drug, see "Changing the data" below.
      `_drug_record` validates every category / target / action / effect against the
      vocabularies and rejects duplicate ids; a new coarse target / category / action
      needs an entry in `DRUG_TARGETS` / `DRUG_CATEGORY_LABELS` / `DRUG_ACTIONS` (with
-     `{en,fr}` labels) or the build raises. Keep extraction **strictly dump-sourced**
+     `{en,fr}` labels) or the build raises. A new `DRUG_TARGETS` entry must declare a
+     `type` (a `TARGET_TYPE_LABELS` key: transporter / enzyme / ion_channel /
+     vesicle_protein / receptor_group; it drives the merged Receptors & targets
+     legend's swatch + tag) and may carry an optional `wikipedia` url (left absent
+     -> a TODO pill); the build raises on an unknown type or a non-http(s) wikipedia.
+     Keep extraction **strictly dump-sourced**
      (only what the source text states; leave gaps as TODO / no binding). It shows up
      in the legend's Drugs section automatically.
    - **Translations.** Every display string (a region `name`, a projection
