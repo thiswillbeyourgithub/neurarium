@@ -849,16 +849,42 @@ function createInfoPanel(data, tabs) {
     return node;
   };
 
-  // Shared by the structure / receptor / drug views: an external reference link,
-  // rendered only for an http(s) url so a stray field can never inject markup.
-  const appendWiki = (url) => {
-    if (typeof url !== "string" || !/^https?:\/\//i.test(url)) return;
+  // Shared label / value row for the classification "facts" block (receptor,
+  // target and drug views), optionally led by a coloured swatch so a row's colour
+  // matches the dots + legend. Empty values are skipped.
+  const addFactRow = (facts, label, value, color) => {
+    if (!value) return;
+    const r = el("div", "info-fact");
+    r.appendChild(el("span", "fact-label", label));
+    const v = el("span", "fact-value");
+    if (color) {
+      const sw = el("span", "swatch line");
+      sw.style.background = color;
+      v.appendChild(sw);
+    }
+    v.appendChild(document.createTextNode(value));
+    r.appendChild(v);
+    facts.appendChild(r);
+  };
+
+  // Shared by the structure / receptor / drug / target views: an external reference
+  // link, rendered only for an http(s) url so a stray field can never inject markup.
+  // With `todo:true` (the targets, whose references aren't gathered yet) a missing
+  // url renders the label + an orange TODO pill instead of nothing, like a source.
+  const appendWiki = (url, { todo = false } = {}) => {
+    const ok = typeof url === "string" && /^https?:\/\//i.test(url);
+    if (!ok && !todo) return;
     const wrap = el("div", "info-wiki");
-    const a = el("a", null, t("info.wikipedia"));
-    a.href = url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    wrap.appendChild(a);
+    if (ok) {
+      const a = el("a", null, t("info.wikipedia"));
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      wrap.appendChild(a);
+    } else {
+      wrap.appendChild(el("span", null, t("info.reference")));
+      wrap.appendChild(el("span", "src-todo", t("info.linkTodo")));
+    }
     body.appendChild(wrap);
   };
 
@@ -993,24 +1019,10 @@ function createInfoPanel(data, tabs) {
       // Classification facts as label / value rows; the "effect" value carries the
       // sign swatch so the colour matches the dots + legend row.
       const facts = el("div", "info-facts");
-      const addFact = (label, value, color) => {
-        if (!value) return;
-        const r = el("div", "info-fact");
-        r.appendChild(el("span", "fact-label", label));
-        const v = el("span", "fact-value");
-        if (color) {
-          const sw = el("span", "swatch line");
-          sw.style.background = color;
-          v.appendChild(sw);
-        }
-        v.appendChild(document.createTextNode(value));
-        r.appendChild(v);
-        facts.appendChild(r);
-      };
-      addFact(t("receptor.neurotransmitter"), receptor.neurotransmitter);
-      addFact(t("receptor.type"), receptor.classLabel);
-      addFact(t("receptor.effect"), receptor.signLabel, receptor.signColor);
-      addFact(t("receptor.synaptic"), receptor.synapticLabel);
+      addFactRow(facts, t("receptor.neurotransmitter"), receptor.neurotransmitter);
+      addFactRow(facts, t("receptor.type"), receptor.classLabel);
+      addFactRow(facts, t("receptor.effect"), receptor.signLabel, receptor.signColor);
+      addFactRow(facts, t("receptor.synaptic"), receptor.synapticLabel);
       body.appendChild(facts);
 
       // Where it is expressed.
@@ -1023,6 +1035,41 @@ function createInfoPanel(data, tabs) {
       } else {
         const ul = el("ul");
         for (const name of receptor.locationNames) ul.appendChild(el("li", null, name));
+        where.appendChild(ul);
+      }
+      body.appendChild(where);
+      tabs.openDetails();
+    },
+
+    /**
+     * Populate the panel for a non-receptor *target* (a transporter / enzyme / ion
+     * channel / receptor group, clicked in the merged "Receptors & targets" section
+     * or a target search result): its name, its neurotransmitter system (or
+     * "Other"), a Wikipedia link (or a TODO pill until one is gathered), the type +
+     * system facts, and the regions it sits in. Receptors keep the richer
+     * showReceptor view; this is the lighter sibling for the non-receptor targets.
+     */
+    showTarget(target) {
+      body.innerHTML = "";
+      body.appendChild(el("h2", "info-title", target.name));
+      body.appendChild(el(
+        "div", "info-group", target.systemLabel || t("targets.otherSystem")));
+
+      appendWiki(target.wikipedia, { todo: true });
+
+      const facts = el("div", "info-facts");
+      addFactRow(facts, t("receptor.type"), target.typeLabel, target.swatchColor);
+      addFactRow(facts, t("receptor.system"), target.systemLabel);
+      if (facts.childElementCount) body.appendChild(facts);
+
+      // Where it sits (same "Found in" list as a receptor; empty -> no footprint).
+      const where = el("div", "info-locations");
+      where.appendChild(el("h3", null, t("receptor.foundIn")));
+      if (!target.locationNames.length) {
+        where.appendChild(el("p", "info-desc", t("receptor.noRole")));
+      } else {
+        const ul = el("ul");
+        for (const name of target.locationNames) ul.appendChild(el("li", null, name));
         where.appendChild(ul);
       }
       body.appendChild(where);
@@ -1049,15 +1096,8 @@ function createInfoPanel(data, tabs) {
 
       // Classification facts: the coarse class(es) and the NbN nomenclature line.
       const facts = el("div", "info-facts");
-      const addFact = (label, value) => {
-        if (!value) return;
-        const r = el("div", "info-fact");
-        r.appendChild(el("span", "fact-label", label));
-        r.appendChild(el("span", "fact-value", value));
-        facts.appendChild(r);
-      };
-      addFact(t("drug.class"), drug.categoryLabels.join(", "));
-      addFact(t("drug.nomenclature"), drug.nbn);
+      addFactRow(facts, t("drug.class"), drug.categoryLabels.join(", "));
+      addFactRow(facts, t("drug.nomenclature"), drug.nbn);
       if (facts.childElementCount) body.appendChild(facts);
 
       // What it binds: one row per target, coloured by the action's net effect.

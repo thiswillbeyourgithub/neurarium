@@ -97,6 +97,7 @@
       "info.source": "Source",
       "info.linkTodo": "TODO",
       "info.wikipedia": "Wikipedia ↗",
+      "info.reference": "Reference",
       "info.noConnections": "No mapped connections yet.",
       "info.connections": "Connections",
 
@@ -109,6 +110,7 @@
       "receptor.ubiquitous": "Throughout the brain",
       "receptor.noRole": "No significant role in the central nervous system.",
       "receptor.stubHint": "No significant role in the central nervous system",
+      "targets.otherSystem": "Other / non-aminergic",
 
       "panel.drugs": "Drugs",
       "drugs.filter": "Filter drugs…",
@@ -212,6 +214,7 @@
       "info.source": "Source",
       "info.linkTodo": "TODO",
       "info.wikipedia": "Wikipédia ↗",
+      "info.reference": "Référence",
       "info.noConnections": "Aucune connexion répertoriée pour l’instant.",
       "info.connections": "Connexions",
 
@@ -224,6 +227,7 @@
       "receptor.ubiquitous": "Dans tout le cerveau",
       "receptor.noRole": "Pas de rôle significatif dans le système nerveux central.",
       "receptor.stubHint": "Pas de rôle significatif dans le système nerveux central",
+      "targets.otherSystem": "Autre / non-aminergique",
 
       "panel.drugs": "Médicaments",
       "drugs.filter": "Filtrer les médicaments…",
