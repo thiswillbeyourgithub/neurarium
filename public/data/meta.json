@@ -238,6 +238,7 @@
         "en": "Serotonin transporter (SERT)",
         "fr": "Transporteur de la sérotonine (SERT)"
       },
+      "type": "transporter",
       "system": "serotonergic",
       "receptor": null,
       "regions": [
@@ -257,6 +258,7 @@
         "en": "Norepinephrine transporter (NET)",
         "fr": "Transporteur de la noradrénaline (NET)"
       },
+      "type": "transporter",
       "system": "adrenergic",
       "receptor": null,
       "regions": [
@@ -274,6 +276,7 @@
         "en": "Dopamine transporter (DAT)",
         "fr": "Transporteur de la dopamine (DAT)"
       },
+      "type": "transporter",
       "system": "dopaminergic",
       "receptor": null,
       "regions": [
@@ -290,6 +293,7 @@
         "en": "GABA transporter (GAT)",
         "fr": "Transporteur du GABA (GAT)"
       },
+      "type": "transporter",
       "system": "gabaergic",
       "receptor": null,
       "regions": [
@@ -305,6 +309,7 @@
         "en": "Vesicular monoamine transporter (VMAT2)",
         "fr": "Transporteur vésiculaire des monoamines (VMAT2)"
       },
+      "type": "transporter",
       "system": "dopaminergic",
       "receptor": null,
       "regions": [
@@ -321,6 +326,7 @@
         "en": "Monoamine oxidase A (MAO-A)",
         "fr": "Monoamine oxydase A (MAO-A)"
       },
+      "type": "enzyme",
       "system": "serotonergic",
       "receptor": null,
       "regions": [
@@ -336,6 +342,7 @@
         "en": "Monoamine oxidase B (MAO-B)",
         "fr": "Monoamine oxydase B (MAO-B)"
       },
+      "type": "enzyme",
       "system": "dopaminergic",
       "receptor": null,
       "regions": [
@@ -350,6 +357,7 @@
         "en": "Acetylcholinesterase",
         "fr": "Acétylcholinestérase"
       },
+      "type": "enzyme",
       "system": "cholinergic",
       "receptor": null,
       "regions": [
@@ -365,6 +373,7 @@
         "en": "Butyrylcholinesterase",
         "fr": "Butyrylcholinestérase"
       },
+      "type": "enzyme",
       "system": "cholinergic",
       "receptor": null,
       "regions": [
@@ -378,6 +387,7 @@
         "en": "Carbonic anhydrase",
         "fr": "Anhydrase carbonique"
       },
+      "type": "enzyme",
       "system": null,
       "receptor": null,
       "regions": []
@@ -387,6 +397,7 @@
         "en": "Phosphodiesterase 5 (PDE5)",
         "fr": "Phosphodiestérase 5 (PDE5)"
       },
+      "type": "enzyme",
       "system": null,
       "receptor": null,
       "regions": []
@@ -396,6 +407,7 @@
         "en": "Voltage-gated sodium channel",
         "fr": "Canal sodique voltage-dépendant"
       },
+      "type": "ion_channel",
       "system": null,
       "receptor": null,
       "regions": [
@@ -412,6 +424,7 @@
         "en": "Voltage-gated calcium channel",
         "fr": "Canal calcique voltage-dépendant"
       },
+      "type": "ion_channel",
       "system": null,
       "receptor": null,
       "regions": [
@@ -426,6 +439,7 @@
         "en": "Calcium channel α2δ subunit",
         "fr": "Sous-unité α2δ du canal calcique"
       },
+      "type": "ion_channel",
       "system": null,
       "receptor": null,
       "regions": [
@@ -440,6 +454,7 @@
         "en": "T-type calcium channel",
         "fr": "Canal calcique de type T"
       },
+      "type": "ion_channel",
       "system": null,
       "receptor": null,
       "regions": [
@@ -453,6 +468,7 @@
         "en": "Synaptic vesicle protein 2A (SV2A)",
         "fr": "Protéine 2A des vésicules synaptiques (SV2A)"
       },
+      "type": "vesicle_protein",
       "system": null,
       "receptor": null,
       "regions": [
@@ -467,6 +483,7 @@
         "en": "Muscarinic receptors (M1–M5)",
         "fr": "Récepteurs muscariniques (M1–M5)"
       },
+      "type": "receptor_group",
       "system": "cholinergic",
       "receptor": null,
       "regions": [
@@ -484,6 +501,7 @@
         "en": "Nicotinic receptors",
         "fr": "Récepteurs nicotiniques"
       },
+      "type": "receptor_group",
       "system": "cholinergic",
       "receptor": null,
       "regions": [
@@ -499,6 +517,7 @@
         "en": "α1 adrenergic receptors",
         "fr": "Récepteurs α1 adrénergiques"
       },
+      "type": "receptor_group",
       "system": "adrenergic",
       "receptor": null,
       "regions": [
@@ -516,6 +535,7 @@
         "en": "α2 adrenergic receptors",
         "fr": "Récepteurs α2 adrénergiques"
       },
+      "type": "receptor_group",
       "system": "adrenergic",
       "receptor": null,
       "regions": [
@@ -532,6 +552,7 @@
         "en": "β adrenergic receptors",
         "fr": "Récepteurs β adrénergiques"
       },
+      "type": "receptor_group",
       "system": "adrenergic",
       "receptor": null,
       "regions": [
@@ -547,6 +568,7 @@
         "en": "Glutamate receptors",
         "fr": "Récepteurs du glutamate"
       },
+      "type": "receptor_group",
       "system": "glutamatergic",
       "receptor": null,
       "regions": [
@@ -564,6 +586,7 @@
         "en": "Melatonin receptors (MT1/MT2)",
         "fr": "Récepteurs de la mélatonine (MT1/MT2)"
       },
+      "type": "receptor_group",
       "system": "melatonergic",
       "receptor": null,
       "regions": [
@@ -576,6 +599,7 @@
         "en": "Orexin receptors (OX1R/OX2R)",
         "fr": "Récepteurs de l'orexine (OX1R/OX2R)"
       },
+      "type": "receptor_group",
       "system": null,
       "receptor": null,
       "regions": [
@@ -591,6 +615,7 @@
         "en": "Melanocortin receptors",
         "fr": "Récepteurs de la mélanocortine"
       },
+      "type": "receptor_group",
       "system": null,
       "receptor": null,
       "regions": [
@@ -602,6 +627,7 @@
         "en": "α1A",
         "fr": "α1A"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1a",
       "regions": [
@@ -622,6 +648,7 @@
         "en": "α1B",
         "fr": "α1B"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1b",
       "regions": [
@@ -641,6 +668,7 @@
         "en": "α1C",
         "fr": "α1C"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1c",
       "regions": [],
@@ -651,6 +679,7 @@
         "en": "α1D",
         "fr": "α1D"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1d",
       "regions": [
@@ -670,6 +699,7 @@
         "en": "α2A",
         "fr": "α2A"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2a",
       "regions": [
@@ -690,6 +720,7 @@
         "en": "α2B",
         "fr": "α2B"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2b",
       "regions": [
@@ -704,6 +735,7 @@
         "en": "α2C",
         "fr": "α2C"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2c",
       "regions": [
@@ -728,6 +760,7 @@
         "en": "α2D",
         "fr": "α2D"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2d",
       "regions": [],
@@ -738,6 +771,7 @@
         "en": "β1",
         "fr": "β1"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "beta1",
       "regions": [
@@ -753,6 +787,7 @@
         "en": "β2",
         "fr": "β2"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "beta2",
       "regions": [
@@ -770,6 +805,7 @@
         "en": "β3",
         "fr": "β3"
       },
+      "type": "receptor",
       "system": "adrenergic",
       "receptor": "beta3",
       "regions": [],
@@ -780,6 +816,7 @@
         "en": "M1",
         "fr": "M1"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "m1",
       "regions": [
@@ -798,6 +835,7 @@
         "en": "M2",
         "fr": "M2"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "m2",
       "regions": [
@@ -816,6 +854,7 @@
         "en": "M3",
         "fr": "M3"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "m3",
       "regions": [
@@ -833,6 +872,7 @@
         "en": "M4",
         "fr": "M4"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "m4",
       "regions": [
@@ -849,6 +889,7 @@
         "en": "M5",
         "fr": "M5"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "m5",
       "regions": [
@@ -867,6 +908,7 @@
         "en": "Muscle nAChR",
         "fr": "Muscle nAChR"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "nachr_muscle",
       "regions": [],
@@ -877,6 +919,7 @@
         "en": "Neuronal α4β2 nAChR",
         "fr": "Neuronal α4β2 nAChR"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "nachr_a4b2",
       "regions": [
@@ -898,6 +941,7 @@
         "en": "Neuronal α7 nAChR",
         "fr": "Neuronal α7 nAChR"
       },
+      "type": "receptor",
       "system": "cholinergic",
       "receptor": "nachr_a7",
       "regions": [
@@ -916,6 +960,7 @@
         "en": "D1",
         "fr": "D1"
       },
+      "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d1",
       "regions": [
@@ -940,6 +985,7 @@
         "en": "D2",
         "fr": "D2"
       },
+      "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d2",
       "regions": [
@@ -959,6 +1005,7 @@
         "en": "D3",
         "fr": "D3"
       },
+      "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d3",
       "regions": [
@@ -977,6 +1024,7 @@
         "en": "D4",
         "fr": "D4"
       },
+      "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d4",
       "regions": [
@@ -994,6 +1042,7 @@
         "en": "D5",
         "fr": "D5"
       },
+      "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d5",
       "regions": [
@@ -1018,6 +1067,7 @@
         "en": "GABA-A",
         "fr": "GABA-A"
       },
+      "type": "receptor",
       "system": "gabaergic",
       "receptor": "gaba_a",
       "regions": [],
@@ -1028,6 +1078,7 @@
         "en": "GABA-B",
         "fr": "GABA-B"
       },
+      "type": "receptor",
       "system": "gabaergic",
       "receptor": "gaba_b",
       "regions": [],
@@ -1038,6 +1089,7 @@
         "en": "GABA-A-ρ",
         "fr": "GABA-A-ρ"
       },
+      "type": "receptor",
       "system": "gabaergic",
       "receptor": "gaba_a_rho",
       "regions": [],
@@ -1048,6 +1100,7 @@
         "en": "NMDA",
         "fr": "NMDA"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "nmda",
       "regions": [],
@@ -1058,6 +1111,7 @@
         "en": "AMPA",
         "fr": "AMPA"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "ampa",
       "regions": [],
@@ -1068,6 +1122,7 @@
         "en": "Kainate",
         "fr": "Kainate"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "kainate",
       "regions": [
@@ -1086,6 +1141,7 @@
         "en": "mGluR1",
         "fr": "mGluR1"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur1",
       "regions": [
@@ -1104,6 +1160,7 @@
         "en": "mGluR2",
         "fr": "mGluR2"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur2",
       "regions": [
@@ -1121,6 +1178,7 @@
         "en": "mGluR3",
         "fr": "mGluR3"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur3",
       "regions": [
@@ -1138,6 +1196,7 @@
         "en": "mGluR4",
         "fr": "mGluR4"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur4",
       "regions": [
@@ -1154,6 +1213,7 @@
         "en": "mGluR5",
         "fr": "mGluR5"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur5",
       "regions": [
@@ -1174,6 +1234,7 @@
         "en": "mGluR6",
         "fr": "mGluR6"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur6",
       "regions": [],
@@ -1184,6 +1245,7 @@
         "en": "mGluR7",
         "fr": "mGluR7"
       },
+      "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur7",
       "regions": [],
@@ -1194,6 +1256,7 @@
         "en": "Glycine",
         "fr": "Glycine"
       },
+      "type": "receptor",
       "system": "glycinergic",
       "receptor": "glycine",
       "regions": [
@@ -1208,6 +1271,7 @@
         "en": "H1",
         "fr": "H1"
       },
+      "type": "receptor",
       "system": "histaminergic",
       "receptor": "h1",
       "regions": [
@@ -1229,6 +1293,7 @@
         "en": "H2",
         "fr": "H2"
       },
+      "type": "receptor",
       "system": "histaminergic",
       "receptor": "h2",
       "regions": [
@@ -1248,6 +1313,7 @@
         "en": "H3",
         "fr": "H3"
       },
+      "type": "receptor",
       "system": "histaminergic",
       "receptor": "h3",
       "regions": [
@@ -1270,6 +1336,7 @@
         "en": "H4",
         "fr": "H4"
       },
+      "type": "receptor",
       "system": "histaminergic",
       "receptor": "h4",
       "regions": [],
@@ -1280,6 +1347,7 @@
         "en": "μ (MOR)",
         "fr": "μ (MOR)"
       },
+      "type": "receptor",
       "system": "opioidergic",
       "receptor": "mu",
       "regions": [
@@ -1304,6 +1372,7 @@
         "en": "δ (DOR)",
         "fr": "δ (DOR)"
       },
+      "type": "receptor",
       "system": "opioidergic",
       "receptor": "delta",
       "regions": [
@@ -1325,6 +1394,7 @@
         "en": "κ (KOR)",
         "fr": "κ (KOR)"
       },
+      "type": "receptor",
       "system": "opioidergic",
       "receptor": "kappa",
       "regions": [
@@ -1343,6 +1413,7 @@
         "en": "5-HT1A",
         "fr": "5-HT1A"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1a",
       "regions": [
@@ -1362,6 +1433,7 @@
         "en": "5-HT1B",
         "fr": "5-HT1B"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1b",
       "regions": [
@@ -1379,6 +1451,7 @@
         "en": "5-HT1D",
         "fr": "5-HT1D"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1d",
       "regions": [
@@ -1397,6 +1470,7 @@
         "en": "5-HT1E",
         "fr": "5-HT1E"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1e",
       "regions": [
@@ -1413,6 +1487,7 @@
         "en": "5-HT1F",
         "fr": "5-HT1F"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1f",
       "regions": [
@@ -1428,6 +1503,7 @@
         "en": "5-HT2A",
         "fr": "5-HT2A"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht2a",
       "regions": [
@@ -1444,6 +1520,7 @@
         "en": "5-HT2B",
         "fr": "5-HT2B"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht2b",
       "regions": [
@@ -1458,6 +1535,7 @@
         "en": "5-HT2C",
         "fr": "5-HT2C"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht2c",
       "regions": [
@@ -1475,6 +1553,7 @@
         "en": "5-HT3",
         "fr": "5-HT3"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht3",
       "regions": [
@@ -1489,6 +1568,7 @@
         "en": "5-HT4",
         "fr": "5-HT4"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht4",
       "regions": [
@@ -1505,6 +1585,7 @@
         "en": "5-HT5A",
         "fr": "5-HT5A"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht5a",
       "regions": [
@@ -1522,6 +1603,7 @@
         "en": "5-HT6",
         "fr": "5-HT6"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht6",
       "regions": [
@@ -1538,6 +1620,7 @@
         "en": "5-HT7",
         "fr": "5-HT7"
       },
+      "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht7",
       "regions": [
@@ -1554,6 +1637,7 @@
         "en": "CB1",
         "fr": "CB1"
       },
+      "type": "receptor",
       "system": "cannabinoid",
       "receptor": "cb1",
       "regions": [
@@ -1576,6 +1660,7 @@
         "en": "A2A",
         "fr": "A2A"
       },
+      "type": "receptor",
       "system": "purinergic",
       "receptor": "a2a",
       "regions": [
@@ -1590,6 +1675,7 @@
         "en": "σ1",
         "fr": "σ1"
       },
+      "type": "receptor",
       "system": "sigma",
       "receptor": "sigma1",
       "regions": [
@@ -1608,6 +1694,7 @@
         "en": "MT1",
         "fr": "MT1"
       },
+      "type": "receptor",
       "system": "melatonergic",
       "receptor": "mt1",
       "regions": [
@@ -1621,6 +1708,7 @@
         "en": "MT2",
         "fr": "MT2"
       },
+      "type": "receptor",
       "system": "melatonergic",
       "receptor": "mt2",
       "regions": [
@@ -1628,6 +1716,39 @@
       ],
       "ubiquitous": false
     }
+  },
+  "target_type_labels": {
+    "receptor": {
+      "en": "Receptor",
+      "fr": "Récepteur"
+    },
+    "transporter": {
+      "en": "Transporter",
+      "fr": "Transporteur"
+    },
+    "enzyme": {
+      "en": "Enzyme",
+      "fr": "Enzyme"
+    },
+    "ion_channel": {
+      "en": "Ion channel",
+      "fr": "Canal ionique"
+    },
+    "vesicle_protein": {
+      "en": "Vesicle protein",
+      "fr": "Protéine vésiculaire"
+    },
+    "receptor_group": {
+      "en": "Receptor group",
+      "fr": "Groupe de récepteurs"
+    }
+  },
+  "target_type_colors": {
+    "transporter": "#3fb6a8",
+    "enzyme": "#d8a23a",
+    "ion_channel": "#7c83ff",
+    "vesicle_protein": "#5fb56a",
+    "receptor_group": "#9aa0a6"
   },
   "drug_actions": {
     "agonist": {

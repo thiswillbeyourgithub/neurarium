@@ -256,133 +256,165 @@ DRUG_EFFECT_LABELS: dict[str, dict[str, str]] = {
     "modulate": {"en": "Modulates", "fr": "Module"},
 }
 
-# Non-receptor binding targets (a key) -> {name {en,fr}, system, regions}.
-# Receptors already modeled in RECEPTORS are ALSO valid targets (a binding may use
-# any receptor id directly); the generator merges them into the emitted target map
-# automatically (linking the receptor so its lit regions come from its locations),
-# so this table holds only the targets the receptor dataset lacks: the reuptake
-# pumps (the core of the SSRIs/SNRIs/TCAs/stimulants), metabolic enzymes, ion
-# channels, and a few receptor groups not modeled individually. ``system`` is a
-# RECEPTOR_FAMILY_LABELS key (or None) used only for grouping/tooltip. ``regions``
-# are structure *base* ids the viewer lights for this target (it expands each to
-# both hemispheres), the editorial anatomical footprint of the target, mirroring
-# how RECEPTORS map a transmitter system onto the modeled structures; an empty
-# list means "no modeled footprint" (the binding still lists, but lights nothing).
+# Non-receptor binding targets (a key) -> {name {en,fr}, type, system, regions,
+# optional wikipedia}. Receptors already modeled in RECEPTORS are ALSO valid targets
+# (a binding may use any receptor id directly); the generator merges them into the
+# emitted target map automatically (linking the receptor so its lit regions come
+# from its locations), so this table holds only the targets the receptor dataset
+# lacks: the reuptake pumps (the core of the SSRIs/SNRIs/TCAs/stimulants), metabolic
+# enzymes, ion channels, and a few receptor groups not modeled individually.
+# ``type`` is a TARGET_TYPE_LABELS key (transporter / enzyme / ion_channel /
+# vesicle_protein / receptor_group), which drives the merged "Receptors & targets"
+# legend's swatch colour + tag. ``system`` is a RECEPTOR_FAMILY_LABELS key (or None,
+# grouped under "Other") used to slot the target under its neurotransmitter heading
+# next to the matching receptors. ``regions`` are structure *base* ids the viewer
+# lights for this target (it expands each to both hemispheres), the editorial
+# anatomical footprint, mirroring how RECEPTORS map a transmitter system onto the
+# modeled structures; an empty list means "no modeled footprint" (listed but
+# unfocusable, like a receptor stub). ``wikipedia`` is an optional reference URL
+# (left absent -> the panel shows a TODO pill until a real link is verified).
 DRUG_TARGETS: dict[str, dict[str, Any]] = {
     # --- Monoamine / GABA transporters (reuptake pumps) ----------------------
     "sert": {"name": {"en": "Serotonin transporter (SERT)",
                       "fr": "Transporteur de la sérotonine (SERT)"},
-             "system": "serotonergic",
+             "type": "transporter", "system": "serotonergic",
              "regions": ["raphe", "frontal", "temporal", "cingulate", "hippocampus",
                          "amygdala", "thalamus", "hypothalamus", "accumbens"]},
     "net": {"name": {"en": "Norepinephrine transporter (NET)",
                      "fr": "Transporteur de la noradrénaline (NET)"},
-            "system": "adrenergic",
+            "type": "transporter", "system": "adrenergic",
             "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
                         "hypothalamus", "amygdala", "cerebellum"]},
     "dat": {"name": {"en": "Dopamine transporter (DAT)",
                      "fr": "Transporteur de la dopamine (DAT)"},
-            "system": "dopaminergic",
+            "type": "transporter", "system": "dopaminergic",
             "regions": ["vta", "substantia_nigra", "caudate", "putamen",
                         "accumbens", "frontal"]},
     "gat": {"name": {"en": "GABA transporter (GAT)",
                      "fr": "Transporteur du GABA (GAT)"},
-            "system": "gabaergic",
+            "type": "transporter", "system": "gabaergic",
             "regions": ["frontal", "temporal", "thalamus", "hippocampus",
                         "cerebellum"]},
     "vmat2": {"name": {"en": "Vesicular monoamine transporter (VMAT2)",
                        "fr": "Transporteur vésiculaire des monoamines (VMAT2)"},
-              "system": "dopaminergic",
+              "type": "transporter", "system": "dopaminergic",
               "regions": ["vta", "substantia_nigra", "raphe", "locus_coeruleus",
                           "caudate", "putamen"]},
     # --- Metabolic enzymes ---------------------------------------------------
     "mao_a": {"name": {"en": "Monoamine oxidase A (MAO-A)",
                        "fr": "Monoamine oxydase A (MAO-A)"},
-              "system": "serotonergic",
+              "type": "enzyme", "system": "serotonergic",
               "regions": ["raphe", "locus_coeruleus", "vta", "substantia_nigra",
                           "brainstem"]},
     "mao_b": {"name": {"en": "Monoamine oxidase B (MAO-B)",
                        "fr": "Monoamine oxydase B (MAO-B)"},
-              "system": "dopaminergic",
+              "type": "enzyme", "system": "dopaminergic",
               "regions": ["substantia_nigra", "vta", "raphe", "brainstem"]},
     "ache": {"name": {"en": "Acetylcholinesterase",
                       "fr": "Acétylcholinestérase"},
-             "system": "cholinergic",
+             "type": "enzyme", "system": "cholinergic",
              "regions": ["frontal", "temporal", "hippocampus", "thalamus",
                          "septal_nuclei"]},
     "bche": {"name": {"en": "Butyrylcholinesterase",
                       "fr": "Butyrylcholinestérase"},
-             "system": "cholinergic",
+             "type": "enzyme", "system": "cholinergic",
              "regions": ["frontal", "temporal", "hippocampus"]},
     "carbonic_anhydrase": {"name": {"en": "Carbonic anhydrase",
                                     "fr": "Anhydrase carbonique"},
-                           "system": None, "regions": []},
+                           "type": "enzyme", "system": None, "regions": []},
     "pde5": {"name": {"en": "Phosphodiesterase 5 (PDE5)",
                       "fr": "Phosphodiestérase 5 (PDE5)"},
-             "system": None, "regions": []},
+             "type": "enzyme", "system": None, "regions": []},
     # --- Ion channels / vesicle proteins -------------------------------------
     "nav": {"name": {"en": "Voltage-gated sodium channel",
                      "fr": "Canal sodique voltage-dépendant"},
-            "system": None,
+            "type": "ion_channel", "system": None,
             "regions": ["frontal", "parietal", "temporal", "occipital",
                         "hippocampus", "thalamus"]},
     "cav": {"name": {"en": "Voltage-gated calcium channel",
                      "fr": "Canal calcique voltage-dépendant"},
-            "system": None,
+            "type": "ion_channel", "system": None,
             "regions": ["frontal", "temporal", "thalamus", "hippocampus"]},
     "cav_a2d": {"name": {"en": "Calcium channel α2δ subunit",
                          "fr": "Sous-unité α2δ du canal calcique"},
-                "system": None,
+                "type": "ion_channel", "system": None,
                 "regions": ["frontal", "temporal", "thalamus", "hippocampus"]},
     "cav_t": {"name": {"en": "T-type calcium channel",
                        "fr": "Canal calcique de type T"},
-              "system": None, "regions": ["thalamus", "frontal", "temporal"]},
+              "type": "ion_channel", "system": None,
+              "regions": ["thalamus", "frontal", "temporal"]},
     "sv2a": {"name": {"en": "Synaptic vesicle protein 2A (SV2A)",
                       "fr": "Protéine 2A des vésicules synaptiques (SV2A)"},
-             "system": None,
+             "type": "vesicle_protein", "system": None,
              "regions": ["frontal", "temporal", "hippocampus", "thalamus"]},
     # --- Receptor groups not modeled individually in RECEPTORS ----------------
     "muscarinic": {"name": {"en": "Muscarinic receptors (M1–M5)",
                             "fr": "Récepteurs muscariniques (M1–M5)"},
-                   "system": "cholinergic",
+                   "type": "receptor_group", "system": "cholinergic",
                    "regions": ["frontal", "temporal", "hippocampus", "caudate",
                                "putamen", "thalamus", "hypothalamus"]},
     "nicotinic": {"name": {"en": "Nicotinic receptors",
                            "fr": "Récepteurs nicotiniques"},
-                  "system": "cholinergic",
+                  "type": "receptor_group", "system": "cholinergic",
                   "regions": ["frontal", "temporal", "hippocampus", "thalamus",
                               "vta"]},
     "alpha1": {"name": {"en": "α1 adrenergic receptors",
                         "fr": "Récepteurs α1 adrénergiques"},
-               "system": "adrenergic",
+               "type": "receptor_group", "system": "adrenergic",
                "regions": ["frontal", "parietal", "temporal", "occipital",
                            "hippocampus", "thalamus", "brainstem"]},
     "alpha2": {"name": {"en": "α2 adrenergic receptors",
                         "fr": "Récepteurs α2 adrénergiques"},
-               "system": "adrenergic",
+               "type": "receptor_group", "system": "adrenergic",
                "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
                            "hypothalamus", "brainstem"]},
     "beta": {"name": {"en": "β adrenergic receptors",
                       "fr": "Récepteurs β adrénergiques"},
-             "system": "adrenergic",
+             "type": "receptor_group", "system": "adrenergic",
              "regions": ["frontal", "parietal", "cingulate", "accumbens",
                          "cerebellum"]},
     "glutamate": {"name": {"en": "Glutamate receptors",
                            "fr": "Récepteurs du glutamate"},
-                  "system": "glutamatergic",
+                  "type": "receptor_group", "system": "glutamatergic",
                   "regions": ["frontal", "temporal", "hippocampus", "thalamus",
                               "cerebellum", "caudate", "putamen"]},
     "melatonin": {"name": {"en": "Melatonin receptors (MT1/MT2)",
                            "fr": "Récepteurs de la mélatonine (MT1/MT2)"},
-                  "system": "melatonergic", "regions": ["hypothalamus", "thalamus"]},
+                  "type": "receptor_group", "system": "melatonergic",
+                  "regions": ["hypothalamus", "thalamus"]},
     "orexin": {"name": {"en": "Orexin receptors (OX1R/OX2R)",
                         "fr": "Récepteurs de l'orexine (OX1R/OX2R)"},
-               "system": None,
+               "type": "receptor_group", "system": None,
                "regions": ["hypothalamus", "locus_coeruleus", "raphe", "vta",
                            "thalamus"]},
     "melanocortin": {"name": {"en": "Melanocortin receptors",
                               "fr": "Récepteurs de la mélanocortine"},
-                     "system": None, "regions": ["hypothalamus"]},
+                     "type": "receptor_group", "system": None,
+                     "regions": ["hypothalamus"]},
+}
+
+# Coarse kind of a non-receptor drug target -> {en,fr} legend tag. Receptors merged
+# in by _build_drug_targets get the implicit "receptor" type (they keep their own
+# sign swatch/classification, so they never need this tag). Object key order is the
+# within-system row order's secondary sort (receptors first, then these in order).
+TARGET_TYPE_LABELS: dict[str, str] = {
+    "receptor": "Receptor",
+    "transporter": "Transporter",
+    "enzyme": "Enzyme",
+    "ion_channel": "Ion channel",
+    "vesicle_protein": "Vesicle protein",
+    "receptor_group": "Receptor group",
+}
+# Swatch + expression-dot colour per non-receptor target type (a transporter/enzyme/
+# channel has no excit/inhib sign, so it can't reuse SIGN_COLORS like a receptor;
+# colour by kind instead). Receptor-linked targets use their sign colour, never
+# these. Emitted into meta.json (language-neutral), so the viewer hardcodes nothing.
+TARGET_TYPE_COLORS: dict[str, str] = {
+    "transporter": "#3fb6a8",      # teal
+    "enzyme": "#d8a23a",           # amber
+    "ion_channel": "#7c83ff",      # periwinkle
+    "vesicle_protein": "#5fb56a",  # green
+    "receptor_group": "#9aa0a6",   # grey (coarse, like a stand-in)
 }
 
 # The constant source backing every drug record (the user-verified fair-use
@@ -692,6 +724,13 @@ FR: dict[str, str] = {
     "Presynaptic": "Présynaptique",
     "Postsynaptic": "Postsynaptique",
     "Pre- and postsynaptic": "Pré- et postsynaptique",
+    # Drug-target type tags (the merged "Receptors & targets" legend).
+    "Receptor": "Récepteur",
+    "Transporter": "Transporteur",
+    "Enzyme": "Enzyme",
+    "Ion channel": "Canal ionique",
+    "Vesicle protein": "Protéine vésiculaire",
+    "Receptor group": "Groupe de récepteurs",
     "Noradrenaline": "Noradrénaline",
     "Serotonin": "Sérotonine",
     "Histamine": "Histamine",
@@ -2657,10 +2696,13 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
     for tid, spec in DRUG_TARGETS.items():
         targets[tid] = {
             "name": spec["name"],
+            "type": spec["type"],
             "system": spec["system"],
             "receptor": None,
             "regions": list(spec["regions"]),
         }
+        if spec.get("wikipedia"):
+            targets[tid]["wikipedia"] = spec["wikipedia"]
     for rec in receptors:
         # A receptor id is also a valid target; link it so the viewer reuses the
         # receptor's lit regions. Receptor ids and DRUG_TARGETS keys never collide
@@ -2669,6 +2711,7 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
             raise KeyError(f"Drug target id {rec['id']!r} collides with a receptor")
         targets[rec["id"]] = {
             "name": {"en": rec["name"], "fr": rec["name"]},
+            "type": "receptor",
             "system": rec["family"],
             "receptor": rec["id"],
             "regions": list(rec.get("locations", [])),
@@ -2889,6 +2932,14 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # DRUG_TARGETS region must be a known structure base (typo guard), like a
     # receptor location. Duplicate drug ids fail the build.
     for tid, spec in DRUG_TARGETS.items():
+        if spec["type"] not in TARGET_TYPE_LABELS or spec["type"] == "receptor":
+            raise KeyError(
+                f"DRUG_TARGETS[{tid!r}] type {spec['type']!r} is not a "
+                f"non-receptor TARGET_TYPE_LABELS key")
+        wiki = spec.get("wikipedia")
+        if wiki is not None and not str(wiki).startswith(("http://", "https://")):
+            raise ValueError(
+                f"DRUG_TARGETS[{tid!r}] wikipedia must be an http(s) URL or absent")
         for base in spec["regions"]:
             if base not in receptor_bases:
                 raise KeyError(
@@ -2959,7 +3010,14 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # block near the top). drug_targets merges DRUG_TARGETS with every
         # receptor id so a binding can target either.
         "drug_category_labels": DRUG_CATEGORY_LABELS,
+        # Merged binding-target map (DRUG_TARGETS + every receptor id), plus the
+        # non-receptor target type -> {en,fr} tag and type -> swatch colour the
+        # merged "Receptors & targets" legend reads (receptors keep their sign
+        # swatch, so target_type_colors omits "receptor").
         "drug_targets": drug_targets,
+        "target_type_labels": {
+            ty: _t(label) for ty, label in TARGET_TYPE_LABELS.items()},
+        "target_type_colors": TARGET_TYPE_COLORS,
         "drug_actions": DRUG_ACTIONS,
         "drug_effect_colors": DRUG_EFFECT_COLORS,
         "drug_effect_labels": DRUG_EFFECT_LABELS,
