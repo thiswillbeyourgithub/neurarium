@@ -23,15 +23,18 @@
 // dependency: three.js only.
 
 import { buildGemCloud, GEM_DOT_SIZE } from "./receptor-markers.js";
+import { buildWashShell, washStrength } from "./surface-wash.js";
 
 // Per-effect pulse character. `period` ms is the breathing cycle; opacity swings
 // between [opMin, opMax] and the dot size between [sizeMin, sizeMax] * GEM_DOT_SIZE
 // over that cycle. Boost is fast/bright/swelling, block slow/dim/shrunk, modulate
-// in between, so the three effects read distinctly even in one drug's view.
+// in between, so the three effects read distinctly even in one drug's view. The
+// same `period` clocks the surface wash under the dots (see buildWashShell), and
+// `washGain` scales that wash's brightness so a boost glows stronger than a block.
 const PULSE = {
-  boost: { period: 1050, opMin: 0.55, opMax: 1.0, sizeMin: 0.95, sizeMax: 1.55 },
-  block: { period: 2100, opMin: 0.22, opMax: 0.66, sizeMin: 0.7, sizeMax: 1.0 },
-  modulate: { period: 1550, opMin: 0.5, opMax: 0.9, sizeMin: 0.85, sizeMax: 1.2 },
+  boost: { period: 1050, opMin: 0.55, opMax: 1.0, sizeMin: 0.95, sizeMax: 1.55, washGain: 0.9 },
+  block: { period: 2100, opMin: 0.22, opMax: 0.66, sizeMin: 0.7, sizeMax: 1.0, washGain: 0.5 },
+  modulate: { period: 1550, opMin: 0.5, opMax: 0.9, sizeMin: 0.85, sizeMax: 1.2, washGain: 0.7 },
 };
 const FALLBACK = PULSE.modulate;
 
@@ -51,6 +54,7 @@ export function createDrugAnimation(_deps = {}) {
       c.points.parent?.remove(c.points);
       c.points.geometry.dispose();
       c.material.dispose();
+      c.wash?.dispose();
     }
     clouds = [];
     litMeshes = new Set();
@@ -75,10 +79,15 @@ export function createDrugAnimation(_deps = {}) {
           if (!mesh) continue;
           const cloud = buildGemCloud(mesh, binding.effectColor);
           if (!cloud) continue;
+          // A surface wash under the dots, looping in the same effect colour: a
+          // ripple of light spreading from the region's centre out across its face,
+          // so the region itself feels lit, not just peppered (see surface-wash.js).
+          const wash = buildWashShell(mesh, binding.effectColor);
           // Spread the starting phases so the regions don't all pulse in lockstep
           // (a wave of activity reads better than a single global blink).
           clouds.push({
             ...cloud,
+            wash,
             baseSize: cloud.material.size,
             pulse,
             phase: (phaseSeed % 8) / 8,
@@ -124,6 +133,12 @@ export function createDrugAnimation(_deps = {}) {
         const k = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2); // 0..1..0
         c.material.opacity = p.opMin + (p.opMax - p.opMin) * k;
         c.material.size = c.baseSize * (p.sizeMin + (p.sizeMax - p.sizeMin) * k);
+        // The wash rides the same looping phase: the wavefront expands from the
+        // region's centre (0 -> maxRadius) over one cycle and the half-sine
+        // envelope fades it in then out, scaled by the effect's washGain.
+        if (c.wash) {
+          c.wash.setWave(phase * c.wash.maxRadius, washStrength(phase) * p.washGain);
+        }
       }
     },
   };
