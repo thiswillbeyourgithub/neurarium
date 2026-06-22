@@ -1051,8 +1051,9 @@ as the WIP banner (`js/error-banner.js`):
   modifier, ignored while typing in a field (and Ctrl/Cmd/Alt combos are left
   alone so Ctrl/Cmd+F still works). **n** toggles all names, **s** spreads fully
   or back to assembled (toggling the **Separate** slider), **l** collapses /
-  expands the **Legend** section, **c** toggles **See inside**, **r** resets the
-  camera, **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Tab** /
+  expands the **Legend** section, **c** toggles **See inside**, **r** toggles the
+  **Receptors & targets** section, **m** toggles the **Drugs** (meds) section,
+  **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Tab** /
   **Shift+Tab** cycle the open **detail tabs** (the pinned Settings tab + each
   opened detail, wrapping; `tabs.cycle` re-applies a detail's 3D focus on landing,
   and the key keeps its default focus move when no detail is open), **Esc** closes

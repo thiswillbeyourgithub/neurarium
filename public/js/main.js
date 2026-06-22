@@ -2369,9 +2369,12 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  * would (or nudging the Separate slider), so there is no duplicated behaviour:
  *   n  toggle all names            l  collapse / expand the Legend section
  *   s  spread fully / collapse     c  toggle "See inside"
- *   r  reset the camera            f  open search (bare-key Ctrl/Cmd+F)
- *   Tab  cycle the detail tabs      ?  open the shortcuts popup
+ *   r  open Receptors & targets    m  open the Drugs (meds) section
+ *   f  open search (bare-key Ctrl/Cmd+F)   Tab  cycle the detail tabs
+ *   ?  open the shortcuts popup
  *   Esc  close popup, else close search + collapse any open Legend/Receptors/About
+ * (Reset has no key: it is the centered toolbar button, so r is free for the
+ * Receptors section, matching m for the Drugs section.)
  * Ctrl/Cmd+F (search) stays handled in wireToolbar; here `f` is its bare-key
  * twin. preventDefault on a handled key stops `f` typing into the search box it
  * just focused (and any other stray default). `help` is the shortcuts-popup
@@ -2433,7 +2436,8 @@ function wireShortcuts(help, tabs) {
       case "s": case "S": toggleSpread(); break;
       case "l": case "L": click("legend-toggle"); break;
       case "c": case "C": click("see-inside"); break;
-      case "r": case "R": click("reset-view"); break;
+      case "r": case "R": click("receptors-toggle"); break;
+      case "m": case "M": click("drugs-toggle"); break;
       case "f": case "F": openSearch(); break;
       case "Escape": collapseOpen(); break;
       default: return; // unhandled key: leave its default intact
@@ -2462,7 +2466,8 @@ function wireShortcutsHelp() {
     { keys: ["S"], desc: "shortcuts.spread" },
     { keys: ["L"], desc: "shortcuts.legend" },
     { keys: ["C"], desc: "shortcuts.seeInside" },
-    { keys: ["R"], desc: "shortcuts.reset" },
+    { keys: ["R"], desc: "shortcuts.receptors" },
+    { keys: ["M"], desc: "shortcuts.drugs" },
     { keys: ["F"], desc: "shortcuts.search" },
     { keys: ["Tab"], desc: "shortcuts.tabs" },
     { keys: ["Esc"], desc: "shortcuts.close" },
