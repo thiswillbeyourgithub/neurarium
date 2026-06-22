@@ -176,11 +176,13 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       Drugs / About are a single-open accordion). The panel body is
                       split
                       into a #settings-pane (all the above) and a #details-pane
-                      (#info-body) switched by a #panel-tabs bar (Settings /
-                      Details) that only appears once a detail is picked, so a
-                      structure / connection / receptor / drug detail shows in the
-                      panel
-                      instead of a separate window (createPanelTabs in js/main.js).
+                      (#info-body) switched by a #panel-tabs bar of
+                      browser-style tabs: a pinned Settings tab (always first,
+                      never scrolled away) plus one closable tab per opened detail
+                      in a scrollable #detail-tabs strip, so a structure /
+                      connection / receptor / target / drug detail shows in the
+                      panel instead of a separate window, and several stay open at
+                      once like browser tabs (createPanelTabs in js/main.js).
                       Also the in-place search box, the centered
                       #shortcuts-modal keyboard-shortcuts popup (filled by
                       wireShortcutsHelp), and
@@ -302,7 +304,8 @@ js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       its connection list, a receptor view, a non-receptor target
                       view (showTarget), or a drug view
                       (showDrug), rendered into the
-                      main panel's Details tab via createPanelTabs), the
+                      main panel's Details pane; the select* layer opens one
+                      browser-style tab per detail via createPanelTabs), the
                       structure+connection+receptor/target+drug search, the legend
                       builder (buildLegend), the merged Receptors & targets legend
                       builder (buildTargetLegend, grouped by neurotransmitter
@@ -715,14 +718,20 @@ as the WIP banner (`js/error-banner.js`):
   the bottom-left** (`#controls`
   in `index.html`, its header `#controls-toggle` collapses the whole body). Its
   body is split into a **`#settings-pane`** (the controls listed below) and a
-  **`#details-pane`** (`#info-body`, the structure/connection/receptor detail),
-  switched by a **`#panel-tabs`** bar (**Settings** / **Details**). The tab bar is
-  hidden until a detail is picked; picking one reveals it, selects **Details** and
-  expands the panel if collapsed, so a detail shows *in the panel* rather than a
-  separate bottom-right window (`createPanelTabs` in `js/main.js`; see "Info
-  panel" below). Switching back to **Settings** keeps the detail (the bar stays);
-  the **×** at the right of the bar (or a clear) dismisses it and hides the bar.
-  From
+  **`#details-pane`** (`#info-body`, the structure/connection/receptor/target/drug
+  detail), switched by a **`#panel-tabs`** bar of **browser-style tabs**. The first
+  tab, **Settings** (`#tab-settings`), is **pinned** (always first, never scrolled
+  away) and shows the controls pane; every other tab is one **opened detail** in
+  the scrollable **`#detail-tabs`** strip, each carrying a **×** to close it. The
+  bar is hidden until the first detail is picked; picking one opens its tab,
+  activates it (shows the Details pane) and expands the panel if collapsed, so a
+  detail shows *in the panel* rather than a separate bottom-right window, and
+  several details stay open at once like browser tabs (`createPanelTabs` in
+  `js/main.js`; see "Detail tabs" + "Info panel" below). Clicking a tab
+  re-activates that detail (re-rendering it *and* re-applying its 3D focus);
+  clicking the **Settings** tab returns to the controls without closing any detail
+  tabs (they stay as history); closing the last detail tab clears the 3D
+  selection and falls back to Settings. From
   the top the Settings pane holds: the **reset + search + keyboard-shortcuts**
   icon buttons (a `.toolbar-row`), then
   the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
@@ -1031,16 +1040,38 @@ as the WIP banner (`js/error-banner.js`):
   search/section collapse). Like `.panel-tabs`, the overlay needs a
   `.modal-overlay[hidden]` rule so the `hidden` attribute wins over its
   `display:grid`.
-- **Info panel** (the **Details tab** of the main panel, `createInfoPanel` in
-  `js/main.js`, rendered into `#info-body` and surfaced by `createPanelTabs`, see
-  "Panel layout"): shows a *connection*, a *structure*, a *receptor* (via
+- **Detail tabs** (`createPanelTabs` in `js/main.js`, the `#panel-tabs` bar; see
+  "Panel layout"): the browser-style tab strip. It owns *only* the tab strip + which
+  pane shows; it does **not** know how to render a detail or apply its 3D focus.
+  The `select*` layer in `main()` (selectStructure / selectConnection / focusTarget
+  / focusDrug) renders the detail + focuses the scene, then calls
+  `openDetailTab(key, title, reopen)` to register/activate the tab. The `reopen`
+  thunk re-runs that same `select*`, so clicking a tab restores both the panel
+  content and the scene with no duplicated render logic. Tab **key** dedupes one
+  tab per thing (`structure:<id>`, `connection:<from>-><to>`, `target:<id>`,
+  `drug:<id>`); `MAX_TABS` bounds the strip (oldest inactive drops). Closing the
+  active tab falls back to a neighbour (re-applying its focus) or, if it was the
+  last, to Settings + an `onEmpty()` that clears the selection
+  (`tabs.setOnEmpty(() => selection.clear())`). Interactions: click a tab to
+  activate, click its **×** to close, **long-press then drag** a tab to reorder
+  (pointer-based, ~450 ms hold; a move before the hold fires is a scroll instead;
+  the DOM is reordered live and `openTabs` synced on drop), and **wheel / touch-
+  drag** scrolls the overflowing strip (`touch-action: pan-x`). A real drag sets a
+  one-shot `suppressClick` so the drag's synthetic click doesn't also re-activate
+  the tab. The `panel.closeTab` i18n key labels the × for a11y.
+- **Info panel** (the **Details pane** of the main panel, `createInfoPanel` in
+  `js/main.js`, rendered into `#info-body`; the active **detail tab** drives which
+  one shows, see "Detail tabs" + "Panel layout"): shows a *connection*, a
+  *structure*, a *receptor* (via
   `showReceptor`, opened from a Receptors legend row, see "Receptors" above), or a
   *drug* (via `showDrug`, opened from a Drugs legend row / drug search, see
   "Drugs" above: its class, NbN nomenclature, Wikipedia link, description, the
   **Acts on** list of bindings (each an effect-coloured swatch + the target name +
   the action·note, dimmed when tentative) and the Stahl source).
-  Opening any of these reveals the Settings/Details tab bar and selects Details;
-  `hide()` (the × or an empty-space click) returns to the Settings view.
+  `createInfoPanel` is pure rendering: opening the matching tab + applying the 3D
+  focus is the caller's (`select*`) job, so each show*() is reused unchanged
+  whether the detail is first picked or re-shown by clicking its tab. An empty-
+  space click returns to Settings via `tabs.showSettings()` (the detail tabs stay).
   Everywhere a data **source / reference** is shown (the connection + drug
   **Source(s)** list and every **Wikipedia / Reference** row), a small **"?"
   caveat badge** sits next to it (`makeHelpIcon` in `createInfoPanel`): its

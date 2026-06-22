@@ -240,6 +240,70 @@
       }
       .panel-tab:hover { color: var(--text); }
       .panel-tab.active { color: var(--text); border-bottom-color: #4e79a7; }
+      /* The Settings tab is pinned: it never shrinks and never scrolls away, so
+         it is always reachable as the first tab. */
+      .panel-tab.pinned { flex: 0 0 auto; }
+      /* The scrollable strip of opened detail tabs, to the right of the pinned
+         Settings tab. It takes the remaining width and scrolls horizontally when
+         the tabs overflow the narrow panel (wheel on desktop, touch-drag via
+         touch-action: pan-x on mobile). */
+      .detail-tabs {
+        display: flex;
+        align-items: stretch;
+        gap: 2px;
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        touch-action: pan-x;
+      }
+      .detail-tabs::-webkit-scrollbar { height: 4px; }
+      .detail-tabs::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 2px;
+      }
+      /* One opened detail. Label (ellipsized) + a × close affordance; reorderable
+         by long-press drag (.dragging while lifted). */
+      .detail-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        flex: 0 0 auto;
+        max-width: 130px;
+        padding: 6px 4px 6px 9px;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        background: none;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .detail-tab:hover { color: var(--text); }
+      .detail-tab.active { color: var(--text); border-bottom-color: #4e79a7; }
+      .detail-tab.dragging { opacity: 0.55; }
+      .detail-tab-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .detail-tab-close {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        font-size: 15px;
+        line-height: 1;
+        color: var(--muted);
+      }
+      .detail-tab-close:hover { color: var(--text); background: rgba(255, 255, 255, 0.14); }
       #details-pane { user-select: text; }
       .tool-btn {
         display: grid;
@@ -533,23 +597,10 @@
       }
       .swatch.line { height: 4px; border-radius: 2px; }
 
-      /* Detail info (structure / connection / receptor) lives in the Details tab
-         of the main panel (see .panel-tabs above); the .info-* content styles
-         below are reused there. The close (×) sits at the right end of the tab
-         bar and dismisses the detail. */
-      .panel-tabs .info-close {
-        margin-left: auto;
-        width: 24px;
-        height: 24px;
-        padding: 0;
-        font-size: 18px;
-        line-height: 1;
-        color: var(--muted);
-        background: none;
-        border: 0;
-        cursor: pointer;
-      }
-      .panel-tabs .info-close:hover { color: var(--text); }
+      /* Detail info (structure / connection / receptor / target / drug) lives in
+         the Details pane of the main panel, shown by the active detail tab (see
+         .panel-tabs / .detail-tabs above); the .info-* content styles below are
+         reused there. Each detail tab carries its own × close affordance. */
       .info-title { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
       .info-route { font-size: 13px; color: var(--text); margin-bottom: 10px; }
       .info-meta {
@@ -817,15 +868,14 @@
       </button>
 
       <div id="controls-body">
-        <!-- Settings / Details tabs. Shipped hidden; revealed (and the Details
-             tab selected) when a structure / connection / receptor is picked, so
-             the detail shows here instead of in a separate bottom-right panel.
-             The × dismisses the detail and hides the bar again. Wired in
-             js/main.js (createPanelTabs). -->
+        <!-- Browser-style detail tabs. Shipped hidden; revealed once the first
+             detail (structure / connection / receptor / target / drug) is picked.
+             The pinned Settings tab is always first; each detail opens its own
+             tab (with a × to close it) in the scrollable #detail-tabs strip,
+             JS-populated. Wired in js/main.js (createPanelTabs). -->
         <div id="panel-tabs" class="panel-tabs" role="tablist" hidden>
-          <button type="button" id="tab-settings" class="panel-tab active" role="tab" aria-selected="true" data-i18n="panel.tabSettings"></button>
-          <button type="button" id="tab-details" class="panel-tab" role="tab" aria-selected="false" data-i18n="panel.tabDetails"></button>
-          <button type="button" id="info-close" class="info-close" aria-label="Close">&times;</button>
+          <button type="button" id="tab-settings" class="panel-tab pinned active" role="tab" aria-selected="true" data-i18n="panel.tabSettings"></button>
+          <div id="detail-tabs" class="detail-tabs"></div>
         </div>
 
         <!-- Settings pane: the normal controls. Hidden while the Details tab is

@@ -64,6 +64,7 @@
       "panel.about": "About",
       "panel.tabSettings": "Settings",
       "panel.tabDetails": "Details",
+      "panel.closeTab": "Close tab",
 
       "toolbar.reset": "Reset view",
       "toolbar.search": "Search",
@@ -183,6 +184,7 @@
       "panel.about": "À propos",
       "panel.tabSettings": "Réglages",
       "panel.tabDetails": "Détails",
+      "panel.closeTab": "Fermer l’onglet",
 
       "toolbar.reset": "Recentrer la vue",
       "toolbar.search": "Rechercher",

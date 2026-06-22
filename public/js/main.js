@@ -804,93 +804,260 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
 }
 
 /**
- * Build the connection info panel controller. The panel is populated from a
- * projection record on demand (clicking an arrow, or picking a connection in the
- * search), showing the pathway name, its route, kind + neurotransmitter, a one-
- * line description, and its sources (a real http(s) url renders as a link, the
- * placeholder "TODO" url as a small orange TODO pill badge). DOM is built fresh on each show so the
- * panel never leaks a previous connection's fields.
- * @param {import("./data.js").BrainData} data  Used to resolve endpoint ids to names.
- * @returns {{show: (proj: object) => void, hide: () => void}}
- */
-/**
- * Settings / Details tabs at the top of the bottom-left panel. The tab bar ships
- * hidden; opening a detail (structure / connection / receptor) reveals it,
- * switches to the Details tab and (if the panel was collapsed) expands the body
- * so the detail is visible. Switching to the Settings tab keeps the detail
- * around (the bar stays); the × / a clear dismisses it, hiding the bar and
- * falling back to the plain Settings view. This replaces the old separate
- * bottom-right info panel: the detail content (createInfoPanel) renders into the
- * Details pane.
- * @returns {{openDetails:()=>void, closeDetails:()=>void}}
+ * Browser-style detail tabs at the top of the bottom-left panel. The first tab,
+ * **Settings**, is pinned (always first, never scrolled away) and shows the
+ * controls pane; every other tab is one opened detail (a structure / connection /
+ * receptor / target / drug), shown in the Details pane. The bar ships hidden and
+ * appears once the first detail is opened.
+ *
+ * This controller only owns the *tab strip + which pane shows*; it does NOT know
+ * how to render a detail or apply its 3D focus. `openDetail({key,title,reopen})`
+ * registers/activates a tab (called by the select* layer after it has rendered +
+ * focused), and clicking a tab calls its `reopen()` (which re-renders #info-body
+ * and re-applies the focus, then calls openDetail again to mark it active). So a
+ * detail's content + scene state always match the active tab, with no duplicated
+ * render logic.
+ *
+ * Interactions: click a tab to activate it, click its × to close it, long-press a
+ * tab then drag to reorder it; the strip scrolls (wheel on desktop, touch-drag on
+ * mobile) when the tabs overflow the narrow panel. Closing the active tab falls
+ * back to its neighbour (re-applying that one's focus) or, if it was the last
+ * detail, to Settings + `onEmpty()` (which clears the 3D selection).
+ * @returns {{openDetail:Function, showSettings:()=>void, setOnEmpty:Function}}
  */
 function createPanelTabs() {
   const bar = document.getElementById("panel-tabs");
   const tabSettings = document.getElementById("tab-settings");
-  const tabDetails = document.getElementById("tab-details");
+  const strip = document.getElementById("detail-tabs");
   const settingsPane = document.getElementById("settings-pane");
   const detailsPane = document.getElementById("details-pane");
   const controlsToggle = document.getElementById("controls-toggle");
   const controlsBody = document.getElementById("controls-body");
-  let hasDetail = false;
 
-  // Show one pane and mark its tab active, without touching whether a detail
-  // exists, so the user can flip between Settings and Details while one is open.
-  const activate = (details) => {
+  const MAX_TABS = 12; // bound the strip; the oldest inactive tab drops past this
+  const LONG_PRESS_MS = 450; // hold this long (roughly still) to start a reorder
+  const MOVE_CANCEL = 8; // px of movement before the long-press fires => a scroll
+
+  let openTabs = []; // [{ key, title, reopen }], left-to-right order
+  let activeKey = null; // active detail key, or null when Settings is shown
+  let onEmpty = () => {}; // run when the last detail tab is closed (clears the 3D)
+  let press = null; // in-flight pointer press (long-press / reorder bookkeeping)
+  let suppressClick = false; // a reorder drag must not also activate the tab
+
+  // Show the Settings or Details pane and keep the bar's visibility + the pinned
+  // Settings tab's active state in sync. The bar hides entirely with no detail
+  // tabs open (back to the plain Settings view).
+  const showPane = (details) => {
     settingsPane.hidden = details;
     detailsPane.hidden = !details;
-    tabDetails.classList.toggle("active", details);
+    bar.hidden = openTabs.length === 0;
     tabSettings.classList.toggle("active", !details);
-    tabDetails.setAttribute("aria-selected", String(details));
     tabSettings.setAttribute("aria-selected", String(!details));
   };
 
-  tabSettings.addEventListener("click", () => activate(false));
-  tabDetails.addEventListener("click", () => { if (hasDetail) activate(true); });
+  const expandPanel = () => {
+    // The detail must be visible, so make sure the panel body is expanded (the
+    // ResizeObserver in wireControls then re-runs the small-screen pan-aside).
+    if (controlsToggle.getAttribute("aria-expanded") !== "true") {
+      controlsToggle.setAttribute("aria-expanded", "true");
+      controlsBody.hidden = false;
+    }
+  };
+
+  // Rebuild the detail-tab buttons from openTabs (the array is the source of
+  // truth). Cheap: a handful of tabs at most.
+  const render = () => {
+    strip.textContent = "";
+    for (const tab of openTabs) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "detail-tab" + (tab.key === activeKey ? " active" : "");
+      btn.dataset.key = tab.key;
+      btn.setAttribute("role", "tab");
+      btn.setAttribute("aria-selected", String(tab.key === activeKey));
+      const label = document.createElement("span");
+      label.className = "detail-tab-label";
+      label.textContent = tab.title;
+      label.title = tab.title; // full name on hover (the label is ellipsized)
+      const close = document.createElement("span");
+      close.className = "detail-tab-close";
+      close.textContent = "×";
+      close.setAttribute("aria-label", t("panel.closeTab"));
+      btn.append(label, close);
+      strip.appendChild(btn);
+    }
+    bar.hidden = openTabs.length === 0;
+    tabSettings.classList.toggle("active", activeKey === null);
+  };
+
+  const scrollActiveIntoView = () => {
+    const el = strip.querySelector(".detail-tab.active");
+    if (el) el.scrollIntoView({ inline: "nearest", block: "nearest" });
+  };
+
+  // Re-show a tab's detail: its reopen() re-renders + re-applies the 3D focus and
+  // calls openDetail(key), which marks it active and shows the Details pane.
+  const activate = (key) => {
+    const tab = openTabs.find((tb) => tb.key === key);
+    if (tab) tab.reopen();
+  };
+
+  const closeTab = (key) => {
+    const idx = openTabs.findIndex((tb) => tb.key === key);
+    if (idx === -1) return;
+    openTabs.splice(idx, 1);
+    if (key !== activeKey) { render(); return; } // 3D unchanged; just drop the chip
+    if (openTabs.length) {
+      // Fall back to the neighbour that slid into this slot (or the new last one),
+      // re-applying its focus so the scene matches the now-active tab.
+      activate(openTabs[Math.min(idx, openTabs.length - 1)].key);
+    } else {
+      activeKey = null;
+      showPane(false);
+      onEmpty(); // nothing left selected: clear the 3D focus
+      render();
+    }
+  };
+
+  // ----- strip interactions (event-delegated on the scroll container) -----
+  // Click: the × closes, anywhere else activates (unless a reorder just ran).
+  strip.addEventListener("click", (e) => {
+    if (suppressClick) { suppressClick = false; return; }
+    const btn = e.target.closest(".detail-tab");
+    if (!btn) return;
+    if (e.target.closest(".detail-tab-close")) closeTab(btn.dataset.key);
+    else activate(btn.dataset.key);
+  });
+
+  // Long-press a tab to lift it into a reorder drag; a move before the press
+  // fires is a scroll instead, so we bow out and let the strip scroll natively.
+  strip.addEventListener("pointerdown", (e) => {
+    const btn = e.target.closest(".detail-tab");
+    if (!btn || e.target.closest(".detail-tab-close")) return;
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    press = { key: btn.dataset.key, btn, x: e.clientX, y: e.clientY,
+      pointerId: e.pointerId, dragging: false, moved: false };
+    press.timer = setTimeout(() => {
+      if (!press) return;
+      press.dragging = true;
+      press.btn.classList.add("dragging");
+      // Take the pointer + stop the browser scrolling so the drag is ours.
+      strip.style.touchAction = "none";
+      try { press.btn.setPointerCapture(press.pointerId); } catch (_) {}
+    }, LONG_PRESS_MS);
+  });
+  strip.addEventListener("pointermove", (e) => {
+    if (!press) return;
+    if (!press.dragging) {
+      if (Math.hypot(e.clientX - press.x, e.clientY - press.y) > MOVE_CANCEL) {
+        clearTimeout(press.timer); // moved first: it's a scroll, not a reorder
+        press = null;
+      }
+      return;
+    }
+    e.preventDefault();
+    press.moved = true;
+    // Insert the dragged chip before the first sibling whose midpoint is right of
+    // the pointer (the canonical drag-to-reorder move); the element keeps its
+    // identity + capture, so we reorder the DOM live and sync the array on drop.
+    const after = [...strip.querySelectorAll(".detail-tab:not(.dragging)")].find(
+      (s) => {
+        const r = s.getBoundingClientRect();
+        return e.clientX < r.left + r.width / 2;
+      });
+    if (after) strip.insertBefore(press.btn, after);
+    else strip.appendChild(press.btn);
+  });
+  const endPress = () => {
+    if (!press) return;
+    clearTimeout(press.timer);
+    if (press.dragging) {
+      press.btn.classList.remove("dragging");
+      strip.style.touchAction = "";
+      try { press.btn.releasePointerCapture(press.pointerId); } catch (_) {}
+      // Reorder openTabs to match the live DOM order, then rebuild cleanly.
+      const order = [...strip.querySelectorAll(".detail-tab")].map((b) => b.dataset.key);
+      openTabs.sort((a, b) => order.indexOf(a.key) - order.indexOf(b.key));
+      if (press.moved) {
+        // The browser fires a synthetic click on the dragged tab right after this
+        // pointerup; swallow only THAT click, then clear the flag on the next tick
+        // so a later, unrelated tab click is never eaten.
+        suppressClick = true;
+        setTimeout(() => { suppressClick = false; }, 0);
+      }
+      render();
+    }
+    press = null;
+  };
+  strip.addEventListener("pointerup", endPress);
+  strip.addEventListener("pointercancel", endPress);
+
+  // Wheel over the strip scrolls it horizontally (the desktop "scroll through
+  // tabs"); touch gets native horizontal scroll via touch-action: pan-x (CSS).
+  strip.addEventListener("wheel", (e) => {
+    if (!e.deltaY) return;
+    strip.scrollLeft += e.deltaY;
+    e.preventDefault();
+  }, { passive: false });
+
+  tabSettings.addEventListener("click", () => {
+    activeKey = null;
+    showPane(false);
+    render();
+  });
 
   return {
-    /** A detail was picked: reveal the bar, show Details, expand if collapsed. */
-    openDetails() {
-      hasDetail = true;
-      bar.hidden = false;
-      // The detail must be visible, so make sure the panel body is expanded (the
-      // ResizeObserver in wireControls then re-runs the small-screen pan-aside).
-      if (controlsToggle.getAttribute("aria-expanded") !== "true") {
-        controlsToggle.setAttribute("aria-expanded", "true");
-        controlsBody.hidden = false;
+    /**
+     * Register (or re-activate) the tab for a detail. Called by the select* layer
+     * after it has rendered #info-body + applied the 3D focus. `key` dedupes (one
+     * tab per thing), `title` is the chip label, `reopen` re-runs that select* so
+     * clicking the tab restores both the panel and the scene.
+     */
+    openDetail({ key, title, reopen }) {
+      let tab = openTabs.find((tb) => tb.key === key);
+      if (tab) {
+        tab.title = title;
+        tab.reopen = reopen;
+      } else {
+        tab = { key, title, reopen };
+        openTabs.push(tab);
+        if (openTabs.length > MAX_TABS) {
+          const drop = openTabs.findIndex((tb) => tb.key !== key && tb.key !== activeKey);
+          if (drop !== -1) openTabs.splice(drop, 1);
+        }
       }
-      activate(true);
-    },
-    /** Dismiss the detail: hide the bar and fall back to the Settings view. */
-    closeDetails() {
-      hasDetail = false;
-      bar.hidden = true;
-      activate(false);
+      activeKey = key;
+      expandPanel();
+      showPane(true);
+      render();
+      scrollActiveIntoView();
     },
     /**
-     * Switch to the Settings pane without dismissing any open detail (the Details
-     * tab stays available). Used when opening search, whose box lives in the
-     * Settings pane, so Ctrl/Cmd+F while the Details tab is active still reveals
-     * it.
+     * Switch to the pinned Settings tab without closing any detail tabs (they stay
+     * in the strip as history). Used by search (its box lives in the Settings
+     * pane) and by an empty-space click / deselect.
      */
     showSettings() {
-      activate(false);
+      activeKey = null;
+      showPane(false);
+      render();
     },
+    /** Set the callback run when the last detail tab is closed (clears the 3D). */
+    setOnEmpty(fn) { onEmpty = fn; },
   };
 }
 
 /**
- * Build the detail panel controller. Renders a connection / structure / receptor
- * into the Details pane's #info-body and drives the Settings/Details tabs
- * (`tabs`) to reveal + select that pane; `hide()` / the × dismiss it.
+ * Build the detail panel renderer. Each show*() method renders a connection /
+ * structure / receptor / target / drug into the Details pane's #info-body. It is
+ * pure rendering: opening the matching tab + applying the 3D focus is the caller's
+ * job (the select* layer in main(), which calls openDetailTab), so this is reused
+ * unchanged whether a detail is first picked or re-shown by clicking its tab.
  * @param {import("./data.js").BrainData} data
- * @param {ReturnType<typeof createPanelTabs>} tabs
  */
-function createInfoPanel(data, tabs) {
+function createInfoPanel(data) {
   const body = document.getElementById("info-body");
-  const closeBtn = document.getElementById("info-close");
   const nameOf = (id) => data.byId.get(id)?.name || id;
-  closeBtn.addEventListener("click", () => tabs.closeDetails());
 
   // Set by the caller (onConnection): what to do when a connection row in a
   // structure panel is clicked. The panel only knows projections, so the caller
@@ -1027,7 +1194,6 @@ function createInfoPanel(data, tabs) {
       if (proj.description) body.appendChild(el("p", "info-desc", proj.description));
 
       appendSources(proj.sources);
-      tabs.openDetails();
     },
 
     /**
@@ -1052,7 +1218,6 @@ function createInfoPanel(data, tabs) {
         (p) => p.from === structure.id || p.to === structure.id);
       if (conns.length === 0) {
         body.appendChild(el("p", "info-desc", t("info.noConnections")));
-        tabs.openDetails();
         return;
       }
 
@@ -1079,7 +1244,6 @@ function createInfoPanel(data, tabs) {
       }
       wrap.appendChild(ul);
       body.appendChild(wrap);
-      tabs.openDetails();
     },
 
     /**
@@ -1123,7 +1287,6 @@ function createInfoPanel(data, tabs) {
         where.appendChild(ul);
       }
       body.appendChild(where);
-      tabs.openDetails();
     },
 
     /**
@@ -1158,7 +1321,6 @@ function createInfoPanel(data, tabs) {
         where.appendChild(ul);
       }
       body.appendChild(where);
-      tabs.openDetails();
     },
 
     /**
@@ -1221,7 +1383,6 @@ function createInfoPanel(data, tabs) {
       body.appendChild(acts);
 
       appendSources(drug.sources);
-      tabs.openDetails();
     },
 
     /** Register the handler run when a structure-panel connection row is clicked. */
@@ -1232,10 +1393,6 @@ function createInfoPanel(data, tabs) {
     /** Register the handler run when a drug-panel binding (target) row is clicked. */
     onTarget(fn) {
       onTargetPick = fn;
-    },
-
-    hide() {
-      tabs.closeDetails();
     },
   };
 }
@@ -2327,12 +2484,20 @@ async function main() {
   // Connection info panel (populated when an arrow is clicked or a connection is
   // picked in the search). Created here so the click/tap handlers below can use it.
   const tabs = createPanelTabs();
-  const info = createInfoPanel(data, tabs);
+  const info = createInfoPanel(data);
+  // Open (or re-activate) a detail tab for the thing a select* just rendered +
+  // focused; the reopen thunk re-runs that select* so clicking the tab restores
+  // the panel + the 3D focus. Kept here (not in createInfoPanel) so the tab's key
+  // and how to re-focus the scene live with the select* layer.
+  const openDetailTab = (key, title, reopen) => tabs.openDetail({ key, title, reopen });
 
   // Selection + isolation controller: glowing halo on the structure picked by
   // click / double-click / search, plus the legend-driven isolate/dim mode. Owns
   // the structure + arrow opacity so it composes with the transparency slider.
   const selection = createSelection({ meshes, arrows });
+  // When the last detail tab is closed, nothing is selected any more: clear the
+  // 3D focus (halo / isolate / dim / dots) so the scene matches the empty strip.
+  tabs.setOnEmpty(() => selection.clear());
 
   // Circuit "traveling pulse" animation: glowing beads sweeping each isolated
   // circuit's arrows from source to target (js/circuit-anim.js). Started from the
@@ -2373,6 +2538,7 @@ async function main() {
     if (frame) focus.focusMeshes(meshSet);
     activeTargetId = tgt.id;
     refreshTargetRows();
+    openDetailTab(`target:${tgt.id}`, tgt.name, () => focusTarget(tgt));
   };
   const toggleTarget = (tgt) => {
     if (activeTargetId === tgt.id) selection.clear(); // watcher hides dots
@@ -2413,6 +2579,7 @@ async function main() {
     if (frame && meshSet.length) focus.focusMeshes(meshSet);
     activeDrugId = drug.id;
     refreshDrugRows();
+    openDetailTab(`drug:${drug.id}`, drug.name, () => focusDrug(drug));
   };
   const toggleDrug = (drug) => {
     if (activeDrugId === drug.id) selection.clear(); // watcher hides the animation
@@ -2496,10 +2663,11 @@ async function main() {
       // A structure opens its own panel (name, group, connections).
       selectStructure(mesh);
     } else {
-      // A true miss on empty space clears the halo, label, and panel.
+      // A true miss on empty space clears the halo + label and deselects to the
+      // Settings tab (the opened detail tabs stay in the strip as history).
       selection.select(null);
       labels.setHovered(null);
-      info.hide();
+      tabs.showSettings();
     }
     return true;
   };
@@ -2616,12 +2784,22 @@ async function main() {
     if (frame) focus.focusStructure(mesh);
     selection.select(mesh);
     labels.setHovered(mesh);
-    info.showStructure(mesh.userData.structure);
+    const structure = mesh.userData.structure;
+    info.showStructure(structure);
+    openDetailTab(`structure:${structure.id}`, structure.base_name || structure.name,
+      () => selectStructure(mesh));
   };
+  // A projection has no id field, but a from->to pair is unique per pathway (the
+  // hemispheres differ), so it keys the tab. The reopen re-halos the arrow when
+  // one was built; a pathway with no drawn arrow just re-renders the panel.
+  const connectionKey = (proj) => `connection:${proj.from}->${proj.to}`;
   const selectConnection = (arrow, { frame = false } = {}) => {
     if (frame) focus.focusConnection(arrow);
     selection.selectArrow(arrow);
-    info.show(arrow.projection);
+    const proj = arrow.projection;
+    info.show(proj);
+    openDetailTab(connectionKey(proj), proj.label || t("info.connection"),
+      () => selectConnection(arrow));
   };
 
   // Clicking a connection row inside a structure panel jumps to that pathway
@@ -2629,8 +2807,10 @@ async function main() {
   // picking the connection in search.
   info.onConnection((proj) => {
     const arrow = arrows.find((a) => a.projection === proj);
-    if (arrow) selectConnection(arrow, { frame: true });
-    else info.show(proj); // no arrow built for this pathway: details only
+    if (arrow) { selectConnection(arrow, { frame: true }); return; }
+    info.show(proj); // no arrow built for this pathway: details only
+    openDetailTab(connectionKey(proj), proj.label || t("info.connection"),
+      () => info.show(proj));
   });
 
   // Clicking a target (binding) row inside a drug panel focuses that target,
