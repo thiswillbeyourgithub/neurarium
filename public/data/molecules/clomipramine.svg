@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="564pt" version="1.1" xmlns="http://www.w3.org/2000/svg" height="515.04pt" viewBox="0 0 564 515.04" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <clipPath id="Clip0">
+   <path d="M0 0 L535.953 0 L535.953 513.119 L0 513.119 L0 0 Z" transform="translate(22.6896, 0.840433)"/>
+  </clipPath>
+ </defs>
+ <g id="Background">
+  <g id="Group1" clip-path="url(#Clip0)">
+   <path style="fill:#000000; fill-rule:evenodd;stroke:none;" d="M0 40.3911 L0 0 L5.48261 0 L26.6967 31.7122 L26.6967 0 L31.8212 0 L31.8212 40.3911 L26.3386 40.3911 L5.12445 8.6513 L5.12445 40.3911 L0 40.3911 Z" transform="translate(383.449, 407.658)"/>
+   <path style="fill:#000000; fill-rule:evenodd;stroke:none;" d="M0 40.3911 L0 0 L5.48261 0 L26.6967 31.7122 L26.6967 0 L31.8212 0 L31.8212 40.3911 L26.3386 40.3911 L5.12445 8.6513 L5.12445 40.3911 L0 40.3911 Z" transform="translate(241.069, 161.063)"/>
+   <path style="fill:#000000; fill-rule:evenodd;stroke:none;" d="M30.361 26.9182 L35.7058 28.2683 C34.5854 32.6582 32.5696 36.0057 29.6584 38.3109 C26.7472 40.6161 23.1886 41.7687 18.9825 41.7687 C14.6295 41.7687 11.0892 40.8824 8.36166 39.1099 C5.63414 37.3374 3.55864 34.7705 2.13519 31.4092 C0.711729 28.0478 0 24.4385 0 20.5813 C0 16.375 0.803565 12.706 2.41069 9.57429 C4.01782 6.44255 6.30454 4.06391 9.27084 2.43834 C12.2371 0.812781 15.5019 0 19.0651 0 C23.1059 0 26.5039 1.0286 29.2589 3.08581 C32.014 5.14302 33.9334 8.03597 35.017 11.7647 L29.7548 13.0045 C28.8181 10.0656 27.459 7.92576 25.6773 6.5849 C23.8957 5.24405 21.6549 4.57362 18.9549 4.57362 C15.8509 4.57362 13.2565 5.31752 11.1718 6.80532 C9.08717 8.29312 7.62238 10.2906 6.77749 12.7979 C5.9326 15.3051 5.51016 17.8904 5.51016 20.5537 C5.51016 23.9885 6.01066 26.9871 7.01168 29.5494 C8.01269 32.1117 9.56931 34.0266 11.6815 35.294 C13.7938 36.5614 16.0805 37.1951 18.5417 37.1951 C21.5355 37.1951 24.0702 36.3318 26.1457 34.6052 C28.2212 32.8786 29.6263 30.3163 30.361 26.9182 Z" transform="translate(512.817, 212.238)"/>
+   <path style="fill:#000000; fill-rule:evenodd;stroke:none;" d="M0 40.3911 L0 0 L4.95914 0 L4.95914 40.3911 L0 40.3911 Z" transform="translate(553.683, 212.927)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 53.0647 L0 0 " transform="translate(398.57, 458.854)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 25.4519 L44.4189 0 " transform="translate(425.461, 388.741)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M44.4189 25.692 L0 0 " transform="translate(327.499, 388.741)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 82.3584 L0 0 " transform="translate(327.499, 306.383)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M71.3103 41.0591 L0 0 " transform="translate(256.189, 265.324)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 53.0647 L0 0 " transform="translate(256.189, 212.259)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M47.5402 23.0507 L0 0 " transform="translate(181.997, 147.189)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M60.2656 0 L0 55.9461 " transform="translate(121.732, 147.189)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M50.9017 0 L0 47.0619 " transform="translate(116.209, 140.706)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M78.5134 24.2513 L0 0 " transform="translate(43.2184, 178.883)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M18.4879 80.1974 L0 0 " transform="translate(24.7305, 98.686)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M15.3665 67.4714 L0 0 " transform="translate(41.0575, 101.807)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 55.9461 L60.2656 0 " transform="translate(24.9706, 42.7399)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 0 L78.5134 24.2513 " transform="translate(85.2363, 42.7399)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 0 L66.2682 20.4095 " transform="translate(86.917, 59.3076)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M18.2478 80.1974 L0 0 " transform="translate(163.75, 66.9912)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 64.1099 L51.3819 0 " transform="translate(163.75, 2.88134)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 0 L82.1149 0 " transform="translate(215.132, 2.88134)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 0 L51.3819 64.1099 " transform="translate(297.246, 2.88134)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 24.2513 L78.5134 0 " transform="translate(348.628, 42.7399)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 20.4095 L66.2682 0 " transform="translate(359.193, 59.3076)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 0 L60.2656 55.9461 " transform="translate(427.142, 42.7399)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M18.4879 0 L0 80.1974 " transform="translate(469.16, 98.686)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M15.3665 0 L0 67.4714 " transform="translate(455.954, 101.807)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 0 L33.6143 31.2145 " transform="translate(469.16, 178.883)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M78.5134 0 L0 24.2513 " transform="translate(390.646, 178.883)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M60.2656 55.9461 L0 0 " transform="translate(330.381, 147.189)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M50.9017 47.0619 L0 0 " transform="translate(345.267, 140.706)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M0 22.8106 L47.3001 0 " transform="translate(283.08, 147.189)"/>
+   <path style="fill:none;stroke:#000000; stroke-width:4.08182; stroke-linecap:round; stroke-linejoin:bevel; stroke-dasharray:none;" d="M18.2478 0 L0 80.1974 " transform="translate(330.381, 66.9912)"/>
+  </g>
+ </g>
+</svg>
