@@ -1058,7 +1058,8 @@ as the WIP banner (`js/error-banner.js`):
   every drug touching it), **grouped by primary drug category** (antipsychotic,
   MAOI, ...) in the meta order, each row carrying the binding's net-effect **glyph**
   (green **+** boost / red **−** block / purple **≈** modulate) so the kind of
-  interaction is visible, and **clicking a
+  interaction is visible (a tentative interaction is dimmed + italic with a
+  "· speculative" tag, like the drug panel's Acts-on rows), and **clicking a
   drug row focuses that drug** (dim + animation + drug panel + tab) via the
   `info.onDrug` hook, exactly like a Drugs legend / search pick. The list is built
   from the `data.drugsByTarget` reverse index (see js/data.js) and the section is
@@ -1229,7 +1230,8 @@ as the WIP banner (`js/error-banner.js`):
   *drug* (via `showDrug`, opened from a Drugs legend row / drug search, see
   "Drugs" above: its class, NbN nomenclature, Wikipedia link, description, the
   **Acts on** list of bindings (each a coloured effect glyph + the target name +
-  the action·note, dimmed when tentative) and the Stahl source. The **Class** and
+  the action·note, dimmed + italic with a "· speculative" tag when tentative) and the
+  Stahl source. The **Class** and
   **Nomenclature** values are clickable, each opening search with a
   `class:"..."` / `nbn:"..."` filter, see "Controls -> search").
   `createInfoPanel` is pure rendering: opening the matching tab + applying the 3D
@@ -1464,7 +1466,8 @@ rendering:
   nomenclature, a Wikipedia link, the description, the **Acts on** list (one row per
   binding: a coloured effect glyph (green **+** boost / red **−** block / purple
   **≈** modulate) + the target name + the action·note, dimmed +
-  italic when tentative), and the Stahl source). Drugs are also searchable (name /
+  italic with a "· speculative" tag (`drug.speculative`) when tentative), and the
+  Stahl source). Drugs are also searchable (name /
   category / target keywords). The animation is stopped off the selection state, the
   same pattern as the receptor markers + circuit pulse: a `selection.onIsolate`
   watcher hides it the moment the isolate set is no longer exactly the drug's region
