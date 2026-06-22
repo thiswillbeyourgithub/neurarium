@@ -6,8 +6,12 @@
 // BURST): excitatory pathways fire a bigger, faster, dramatic burst; inhibitory a
 // smaller, slower, dimmer one.
 //
-// As each bead lands, the target region briefly brightens (a "node flash"), so
-// the hand-off from arrow to arrow around the loop is legible, not just the beads.
+// As each bead lands, a "wash of light" spreads across the target region's surface
+// from the exact point it hit (a surface echo, in the pathway's own colour), so the
+// hand-off from arrow to arrow around the loop is legible, not just the beads, and
+// the region reads as lighting up *from where the signal arrived* rather than
+// blinking inert. The wash itself is the shared surface-wash primitive (see
+// js/surface-wash.js, also used by the per-drug glow).
 //
 // It sits entirely on top of the existing selection.setCircuit() focus: it only
 // ever runs while a circuit is isolated, adds nothing to picking, and owns its
@@ -24,6 +28,7 @@
 
 import * as THREE from "three";
 import { scheduleCircuit } from "./circuit-schedule.js";
+import { buildWashShell, washStrength } from "./surface-wash.js";
 
 // Bead size (the arrow tube is TUBE_RADIUS 0.1, the cone 0.22): big enough to
 // read as a packet riding the shaft, small enough not to swallow the arrowhead.
@@ -35,17 +40,15 @@ const STEP_MS = 650;
 const PULSE_GEOMETRY = new THREE.SphereGeometry(PULSE_RADIUS, 12, 12);
 const WHITE = new THREE.Color(0xffffff);
 
-// Node flash: as a bead lands on its target, that region's rim brightens, then
-// fades. A dedicated back-side additive shell reusing the structure geometry (the
-// same trick as the selection halo, see js/main.js), but owned here and sized a
-// touch larger so it reads as an extra pulse on top of any steady isolate halo.
-const FLASH_SCALE = 1.12;
-const FLASH_MAX_OPACITY = 0.7;
-// Time for a full flash (level 1) to fade back to nothing; a bit under STEP_MS so
-// a node dims again before the next ring lights it.
-const FLASH_DECAY_MS = 520;
-// The bead is "landing" once it is this far along its arc: past here it tops up
-// the target node's flash, ramping to full as it reaches the surface (t = 1).
+// Node echo: as a bead lands on its target, a wash of light spreads from the point
+// it hit across that region's surface, then dissolves (see js/surface-wash.js). One
+// wash shell per distinct target node, reusing the structure geometry (parented to
+// it, so it tracks the explode/mirror transform for free, like the selection halo).
+// WASH_MS is one ripple's lifetime, a bit under STEP_MS so a node settles again
+// before the next ring lights it.
+const WASH_MS = 620;
+// The bead is "landing" once it is this far along its arc: crossing here while the
+// node's previous ripple has finished triggers a fresh wash from the impact point.
 const ARRIVAL_ZONE = 0.8;
 
 // Burst character per projection sign: an excitatory arrow fires a bigger, faster,
@@ -71,13 +74,16 @@ const burstFor = (sign) => BURST[sign] || BURST.modulatory;
  */
 export function createCircuitAnimation({ scene }) {
   let pulses = []; // { arrow, phase, mesh, material, offset, speed, bright }
-  // Target region -> its flash shell + current brightness. One per distinct node
-  // that receives an arrow, so a node hit by several arrows shares one flash.
-  let nodeFlashes = new Map(); // toMesh -> { mesh, shell, material, level }
+  // Target region -> its wash echo. One per distinct node that receives an arrow,
+  // so a node hit by several arrows shares one wash (retriggered by whichever bead
+  // last landed, in that arrow's colour). `age` >= WASH_MS means idle (no ripple).
+  let nodeWashes = new Map(); // toMesh -> { mesh, wash, age, bright }
   let playing = null; // the circuitArrows array currently animating (identity key)
   let numSteps = 1;
   let elapsed = 0;
   let lastTime = null;
+  // Reused scratch so triggering a wash allocates nothing per landing.
+  const tmpPoint = new THREE.Vector3();
 
   function clearVisuals() {
     for (const p of pulses) {
@@ -85,11 +91,8 @@ export function createCircuitAnimation({ scene }) {
       p.material.dispose();
     }
     pulses = [];
-    for (const f of nodeFlashes.values()) {
-      f.mesh.remove(f.shell);
-      f.material.dispose();
-    }
-    nodeFlashes.clear();
+    for (const f of nodeWashes.values()) f.wash.dispose();
+    nodeWashes.clear();
   }
 
   return {
@@ -130,25 +133,15 @@ export function createCircuitAnimation({ scene }) {
           });
         }
       }
-      // One flash shell per distinct target region (parented to it, so it tracks
-      // the structure's explode/mirror transform for free, like the halo).
+      // One wash shell per distinct target region (parented to it, so it tracks
+      // the structure's explode/mirror transform for free, like the halo). Starts
+      // idle (age past WASH_MS); a landing bead seeds + retriggers it.
       for (const arrow of circuitArrows) {
         const target = arrow.toMesh;
-        if (nodeFlashes.has(target)) continue;
-        const material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(target.userData.structure.color).lerp(WHITE, 0.6),
-          side: THREE.BackSide, // only the rim poking past the real mesh shows
-          transparent: true,
-          opacity: 0,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false,
-        });
-        const shell = new THREE.Mesh(target.geometry, material); // reuse geometry
-        shell.scale.setScalar(FLASH_SCALE);
-        shell.visible = false;
-        shell.raycast = () => {};
-        target.add(shell);
-        nodeFlashes.set(target, { mesh: target, shell, material, level: 0 });
+        if (nodeWashes.has(target)) continue;
+        const wash = buildWashShell(target, target.userData.structure.color);
+        if (!wash) continue;
+        nodeWashes.set(target, { mesh: target, wash, age: WASH_MS, bright: 0 });
       }
       playing = circuitArrows;
     },
@@ -181,9 +174,10 @@ export function createCircuitAnimation({ scene }) {
       lastTime = now;
       elapsed = (elapsed + dt) % (numSteps * STEP_MS);
 
-      // Fade every node flash toward nothing; an arriving bead tops it back up.
-      for (const f of nodeFlashes.values()) {
-        f.level = Math.max(0, f.level - dt / FLASH_DECAY_MS);
+      // Age every node wash; once it passes WASH_MS it is idle (ripple finished)
+      // and the next landing bead may retrigger it. Capped so it can't drift huge.
+      for (const f of nodeWashes.values()) {
+        if (f.age < WASH_MS) f.age = Math.min(WASH_MS, f.age + dt);
       }
 
       const clock = elapsed / STEP_MS; // position in "steps", [0, numSteps)
@@ -207,22 +201,33 @@ export function createCircuitAnimation({ scene }) {
         const edge = 0.12;
         const k = Math.min(t / edge, (1 - t) / edge, 1);
         p.material.opacity = (0.2 + 0.8 * Math.max(0, k)) * p.bright;
-        // As the bead lands, brighten its target region, ramping to full at t = 1
-        // (scaled by the sign's brightness, so excitatory volleys hit harder).
+        // As the bead lands, seed a fresh wash from the impact point in this
+        // arrow's colour, but only if the node's previous ripple has finished, so
+        // a volley's first bead fires the echo and the rest don't restart it
+        // (the next loop's bead retriggers once this one has dissolved). Scaled by
+        // the sign's brightness, so excitatory volleys echo harder.
         if (t >= ARRIVAL_ZONE) {
-          const f = nodeFlashes.get(p.arrow.toMesh);
-          if (f) {
-            const intensity = ((t - ARRIVAL_ZONE) / (1 - ARRIVAL_ZONE)) * p.bright;
-            if (intensity > f.level) f.level = intensity;
+          const f = nodeWashes.get(p.arrow.toMesh);
+          if (f && f.age >= WASH_MS) {
+            p.arrow.curve.getPoint(1, tmpPoint); // arc head, in world space
+            p.arrow.toMesh.worldToLocal(tmpPoint); // -> the target's local frame
+            f.wash.setOrigin(tmpPoint);
+            f.wash.setColor(p.arrow.material.color);
+            f.bright = p.bright;
+            f.age = 0;
           }
         }
       }
 
-      // Push the decayed / topped-up levels onto the flash shells.
-      for (const f of nodeFlashes.values()) {
-        const opacity = f.level * FLASH_MAX_OPACITY;
-        f.material.opacity = opacity;
-        f.shell.visible = f.mesh.visible && opacity > 0.01;
+      // Drive each wash from its age: the wavefront expands across the surface and
+      // the half-sine envelope fades it in then out over WASH_MS.
+      for (const f of nodeWashes.values()) {
+        if (f.age >= WASH_MS) {
+          f.wash.setWave(0, 0);
+          continue;
+        }
+        const progress = f.age / WASH_MS;
+        f.wash.setWave(progress * f.wash.maxRadius, washStrength(progress) * f.bright);
       }
     },
   };
