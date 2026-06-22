@@ -1684,11 +1684,35 @@ function createCameraFocus({ camera, controls, meshes }) {
   // The explode amount last applied, so zoomForExplode() only ever applies the
   // *incremental* distance change and thus preserves whatever zoom the user has
   // dialed in. The layout scales linearly with this (applyExplode pushes each
-  // region to base * (1 + amount * EXPLODE_STRENGTH)), so matching the camera
-  // distance to the same factor keeps the spreading brain the same apparent size
-  // instead of letting it overflow the frame.
+  // region to base * (1 + amount * EXPLODE_STRENGTH)).
   let lastExplode = 0;
   const spreadScale = (a) => 1 + a * EXPLODE_STRENGTH;
+  // A structure's own (fixed) radius in world units: its geometry bounding sphere
+  // scaled by the mesh scale. Cached on first use (geometry never changes).
+  const meshReach = (mesh) => {
+    const g = mesh.geometry;
+    if (!g.boundingSphere) g.computeBoundingSphere();
+    const s = Math.max(mesh.scale.x, mesh.scale.y, mesh.scale.z);
+    return g.boundingSphere.radius * s;
+  };
+  // The whole assembly's outer radius from the brain centre at a given explode
+  // amount: the farthest structure surface = max over regions of
+  // (|base| * spreadScale(amount)) + that region's own radius. zoomForExplode
+  // scales the camera distance by the *ratio* of this (not spreadScale alone),
+  // which keeps the WHOLE brain a constant apparent size as it spreads. Matching
+  // spreadScale alone over-pulls the camera back (it ignores the fixed structure
+  // radii), so the brain visibly shrinks while exploding; matching the true outer
+  // radius holds the brain steady, so only the individual structures look like
+  // they shrink apart, which is the intent.
+  const boundingRadiusAt = (amount) => {
+    const k = spreadScale(amount);
+    let maxR = 0;
+    for (const mesh of meshes) {
+      const r = mesh.userData.base.length() * k + meshReach(mesh);
+      if (r > maxR) maxR = r;
+    }
+    return maxR || 1;
+  };
   // Render-time screen offset (fractions of the viewport: +x slides the rendered
   // brain right, +y up), eased toward `offsetTarget` each tick and baked into the
   // camera as a view offset. It is a projection shift, not a move of the orbit
@@ -1805,16 +1829,18 @@ function createCameraFocus({ camera, controls, meshes }) {
       if (anim) anim.toTarget.copy(tmpVec);
     },
     /**
-     * Pull the camera back (or in) as the brain spreads, so an exploded layout
-     * stays framed instead of overflowing the frame. The layout scales linearly
-     * with the explode amount (see applyExplode), so we scale the camera->target
-     * distance by the same factor; doing it as a ratio against the last amount
-     * applies only the incremental change, preserving any manual zoom the user has
-     * set. OrbitControls' min/maxDistance clamp the result on the next update.
-     * Call from the explode handler with the slider's value.
+     * Pull the camera back (or in) as the brain spreads, so the whole brain keeps
+     * a *constant apparent size* (and the individual structures appear to shrink
+     * as they separate) instead of overflowing or visibly shrinking. We scale the
+     * camera->target distance by the ratio of the assembly's true outer radius
+     * (boundingRadiusAt, which folds in the fixed structure radii) at the new vs
+     * the last amount, so only the incremental change is applied and any manual
+     * zoom the user has dialed in is preserved. OrbitControls' min/maxDistance
+     * clamp the result on the next update. Call from the explode handler with the
+     * slider's value.
      */
     zoomForExplode(amount) {
-      const ratio = spreadScale(amount) / spreadScale(lastExplode);
+      const ratio = boundingRadiusAt(amount) / boundingRadiusAt(lastExplode);
       lastExplode = amount;
       if (Math.abs(ratio - 1) < 1e-6) return;
       tmpVec.copy(camera.position).sub(controls.target).multiplyScalar(ratio);

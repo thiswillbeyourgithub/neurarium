@@ -887,11 +887,17 @@ as the WIP banner (`js/error-banner.js`):
   terminology lives on internally): pushes each region radially outward from
   the brain center to reveal deep structures. Tuning constant:
   `EXPLODE_STRENGTH` in `js/main.js`. As the regions spread the camera
-  **auto-zooms out** (and back in as they reassemble) so the exploded layout stays
-  framed instead of overflowing: the explode handler calls
-  `focus.zoomForExplode(amount)` (`createCameraFocus`), which scales the
-  camera->target distance by the same `1 + amount * EXPLODE_STRENGTH` factor the
-  layout uses, applied as an incremental ratio so any manual zoom is preserved.
+  **auto-zooms out** (and back in as they reassemble) so the **whole brain keeps a
+  constant apparent size** and only the individual structures appear to shrink as
+  they separate: the explode handler calls `focus.zoomForExplode(amount)`
+  (`createCameraFocus`), which scales the camera->target distance by the ratio of
+  the assembly's true **outer radius** (`boundingRadiusAt`: `max` over regions of
+  `|base| * (1 + amount * EXPLODE_STRENGTH) + that region's own radius`) at the new
+  vs the last amount, applied as an incremental ratio so any manual zoom is
+  preserved. (Scaling by the bare `1 + amount * EXPLODE_STRENGTH` spread factor
+  instead would ignore the fixed structure radii and over-pull the camera back, so
+  the brain would visibly shrink while exploding; folding the radii in holds it
+  steady.)
 - **Intro animation**: on a plain page load the regions start fully blown out
   and glide back together into the assembled whole, *exactly like dragging the
   Separate slider from 1 to 0*: the camera follows the spread (`zoomForExplode`,
