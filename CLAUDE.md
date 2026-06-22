@@ -843,12 +843,17 @@ as the WIP banner (`js/error-banner.js`):
   in/out in `focus.tick`, not a move of the orbit target, so the pan survives
   rotation/zoom/framing and reverts cleanly (and rescales itself on resize).
 - **About** (`#about`, collapsed by default): a short blurb (what neurarium is,
-  that it's a WIP, made by Olivier Cornelis + Claude) plus a **Source code** link
+  that it's a WIP, made by Olivier Cornelis + Claude), then an **"open an issue"**
+  line (`about.issues`, inviting bug / inaccuracy / feature-request reports) whose
+  embedded link `js/main.js` points at `cfg.sourceUrl + "/issues"` (so no repo
+  URL is hardcoded; the row is dropped unless `sourceUrl` is a repo-like URL with a
+  path, since `bare-domain/issues` would 404), then a **Source code** link
   whose href is set from `cfg.sourceUrl` by `js/main.js` (the row is removed if
   that isn't a valid `http(s)` URL), then a **licence line** (`about.license`,
   linking the canonical AGPL-3.0 text) which is a separate paragraph so it shows
   even when the source-code row is dropped. See "Dev / WIP banner" for
-  `sourceUrl`.
+  `sourceUrl`. (The README carries the same "open an issue" invitation in a
+  **Feedback** section.)
 - **Auto-rotate** checkbox: spins the camera around the brain (OrbitControls
   `autoRotate`). **On by default** (a slow turn on load); it switches itself off
   (and unticks the box) the moment the user picks content, i.e. any pick routed

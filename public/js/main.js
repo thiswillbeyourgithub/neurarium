@@ -2092,9 +2092,32 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // http(s) url, so a broken/empty config never shows a dead link.
   const aboutSource = document.getElementById("about-source");
   const sourceUrl = String((window.__APP_CONFIG__ || {}).sourceUrl || "").trim();
+  const sourceIsUrl = /^https?:\/\//i.test(sourceUrl);
   if (aboutSource) {
-    if (/^https?:\/\//i.test(sourceUrl)) aboutSource.href = sourceUrl;
+    if (sourceIsUrl) aboutSource.href = sourceUrl;
     else document.getElementById("about-source-row")?.remove();
+  }
+
+  // "open an issue" link (embedded in the about.issues paragraph by i18n): point
+  // it at the source repo's issues page (sourceUrl + "/issues"), deriving it from
+  // the same env-configured sourceUrl so no repo/username is hardcoded. Only do
+  // this when sourceUrl points *into* a repository (has a path beyond the host):
+  // the committed default is the bare public-site domain, where "/issues" would
+  // 404, so there we drop the whole row instead of shipping a dead link. The repo
+  // URL is set via the SOURCE_URL env var in the container (see app-config.js).
+  const aboutIssues = document.getElementById("about-issues");
+  if (aboutIssues) {
+    let issuesUrl = "";
+    if (sourceIsUrl) {
+      try {
+        const u = new URL(sourceUrl);
+        if (u.pathname.replace(/\/+$/, "") !== "") { // a repo path, not a bare domain
+          issuesUrl = `${sourceUrl.replace(/\/+$/, "")}/issues`;
+        }
+      } catch { /* malformed url: leave the row removed below */ }
+    }
+    if (issuesUrl) aboutIssues.href = issuesUrl;
+    else document.getElementById("about-issues-row")?.remove();
   }
 
   controls.autoRotate = autorotate.checked;

@@ -115,6 +115,13 @@ Planned directions, none implemented yet and the order is not fixed:
 - **Verify the sources**: every citation currently carries a placeholder
   **TODO** url; replace each one with a verified DOI/link.
 
+## Feedback
+
+Found a bug, an anatomical or pharmacological **inaccuracy**, or have a **feature
+request**? Please **open an issue** on this repository. Given the work-in-progress
+warning above, corrections to the regions, projections, receptor, and drug data
+are especially welcome.
+
 ## Running
 
 The page loads its data with `fetch()`, so it must be served over HTTP (not

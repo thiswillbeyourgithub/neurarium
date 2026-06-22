@@ -1062,6 +1062,10 @@
               <p class="about-text" data-i18n-html="about.p1"></p>
               <p class="about-text" data-i18n-html="about.p2"></p>
               <p class="about-text" data-i18n-html="about.p3"></p>
+              <!-- Feedback: the embedded #about-issues link's href is set from the
+                   configured sourceUrl (+ "/issues") by js/main.js; the whole row
+                   is removed when no valid sourceUrl is set, like the source row. -->
+              <p class="about-text" id="about-issues-row" data-i18n-html="about.issues"></p>
               <p class="about-text" id="about-source-row">
                 <a id="about-source" href="#" target="_blank" rel="noopener noreferrer" data-i18n="about.sourceCode"></a>
               </p>

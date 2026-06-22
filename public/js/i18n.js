@@ -147,6 +147,10 @@
         'and <a href="https://threejs.org/" target="_blank" ' +
         'rel="noopener noreferrer">three.js</a> (vendored, no build step), the ' +
         "anatomy stored as generated data files, served by Caddy.",
+      "about.issues":
+        "Found a bug, an inaccuracy, or have a feature request? Please " +
+        '<a id="about-issues" target="_blank" rel="noopener noreferrer">open an ' +
+        "issue</a>.",
       "about.sourceCode": "Source code",
       "about.license":
         'Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +
@@ -272,6 +276,10 @@
         'rel="noopener noreferrer">three.js</a> (embarqué, sans étape de ' +
         "build), l’anatomie stockée dans des fichiers de données " +
         "générés, servis par Caddy.",
+      "about.issues":
+        "Vous avez repéré un bug, une inexactitude ou une idée de fonctionnalité ? " +
+        'Merci d’<a id="about-issues" target="_blank" rel="noopener noreferrer">ouvrir ' +
+        "un ticket</a>.",
       "about.sourceCode": "Code source",
       "about.license":
         'Sous licence <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +
