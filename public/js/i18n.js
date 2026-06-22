@@ -116,6 +116,7 @@
       "receptor.noRole": "No significant role in the central nervous system.",
       "receptor.stubHint": "No significant role in the central nervous system",
       "targets.otherSystem": "Other / non-aminergic",
+      "targets.interactingDrugs": "Interacting drugs",
 
       "panel.drugs": "Drugs",
       "drugs.filter": "Filter drugs…",
@@ -242,6 +243,7 @@
       "receptor.noRole": "Pas de rôle significatif dans le système nerveux central.",
       "receptor.stubHint": "Pas de rôle significatif dans le système nerveux central",
       "targets.otherSystem": "Autre / non-aminergique",
+      "targets.interactingDrugs": "Médicaments en interaction",
 
       "panel.drugs": "Médicaments",
       "drugs.filter": "Filtrer les médicaments…",

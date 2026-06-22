@@ -97,6 +97,11 @@ function localize(field) {
  *   carrying `targetName`, `actionLabel`, net `effect` + `effectColor`/`effectLabel`,
  *   localized `note`, and the concrete `structureIds` it lights), the union
  *   `structureIds` the focus dims to, a `focusable` flag and search `keywords`.
+ * @property {Map<string, {drug: object, binding: object}[]>} drugsByTarget
+ *   Reverse index: a target id (a receptor id or a drug_targets key, matching each
+ *   `targets` entry's id) -> the drugs that act on it, each paired with its resolved
+ *   binding (its net-effect colour + action), deduped to one row per (drug, target).
+ *   Lets a receptor / target panel list its interacting drugs grouped by category.
  * @property {Map<string, object>} byId  structure id -> structure record.
  * @property {{projectionColors: Object<string,string>,
  *   groupLabels: Object<string,string>,
@@ -279,6 +284,24 @@ export async function loadBrainData(dataDir = "data") {
       .join(" ");
   }
 
+  // Reverse index from the bindings: a target id -> the drugs that act on it, each
+  // paired with its resolved binding (so the binding's net-effect colour + action
+  // is available). The key is the binding's `target` (a receptor id or a
+  // drug_targets key), which is exactly each "Receptors & targets" entry's id, so a
+  // receptor / target panel can list "interacting drugs" by looking itself up here.
+  // Deduped to one row per (drug, target) in case a drug binds the same target
+  // twice (the first binding wins).
+  const drugsByTarget = new Map();
+  for (const d of drugs) {
+    const seen = new Set();
+    for (const b of d.bindings) {
+      if (seen.has(b.target)) continue;
+      seen.add(b.target);
+      if (!drugsByTarget.has(b.target)) drugsByTarget.set(b.target, []);
+      drugsByTarget.get(b.target).push({ drug: d, binding: b });
+    }
+  }
+
   // Build the merged "Receptors & targets" browse list: one normalized entry per
   // focusable *thing a drug can act on*, so a transporter (SERT), enzyme (MAO-A) or
   // channel (Nav) can be explored on its own, not only as a line in a drug's "Acts
@@ -343,6 +366,7 @@ export async function loadBrainData(dataDir = "data") {
     receptors,
     targets,
     drugs,
+    drugsByTarget,
     byId,
     meta: {
       projectionColors,

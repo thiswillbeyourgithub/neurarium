@@ -1110,6 +1110,10 @@ function createInfoPanel(data) {
   // target panel's "Found in" list is clicked. The panel hands back the structure
   // *base* id; the caller resolves it to a mesh and jumps to that structure.
   let onStructurePick = () => {};
+  // Set by the caller (onDrug): what to do when a drug row in a receptor / target
+  // panel's "Interacting drugs" list is clicked. The panel hands back the drug
+  // record; the caller focuses it exactly like its Drugs legend row / search pick.
+  let onDrugPick = () => {};
   // Resolve a drug binding's `target` key to its merged-list entry, so a binding
   // row can focus that target (a receptor entry shares its id; a non-receptor one
   // its drug_targets key). Only focusable entries become clickable.
@@ -1235,6 +1239,58 @@ function createInfoPanel(data) {
     body.appendChild(wrap);
   };
 
+  // Shared by the receptor + target views: the drugs that act on this target, so
+  // you can go from a target to every drug touching it. Grouped by primary drug
+  // category (antipsychotic, MAOI, ...) in the meta order, alphabetical within each;
+  // every row carries the binding's net-effect swatch (boost / block / modulate) so
+  // the kind of interaction is visible, and clicking it opens that drug (focus +
+  // panel) via onDrugPick. Omitted entirely when no drug in the dataset acts on it.
+  const appendInteractingDrugs = (targetId) => {
+    const list = (data.drugsByTarget && data.drugsByTarget.get(targetId)) || [];
+    if (!list.length) return;
+    const wrap = el("div", "info-bindings info-interactors");
+    wrap.appendChild(el(
+      "h3", null, `${t("targets.interactingDrugs")} (${list.length})`));
+
+    const cats = data.meta.drugCategoryLabels || {};
+    const byCat = new Map();
+    for (const item of list) {
+      const cat = (item.drug.categories && item.drug.categories[0]) || "other";
+      if (!byCat.has(cat)) byCat.set(cat, []);
+      byCat.get(cat).push(item);
+    }
+    // Category order = the meta order first, then any leftover keys (same as the
+    // Drugs legend), so the grouping is consistent across the app.
+    const order = [...Object.keys(cats),
+                   ...[...byCat.keys()].filter((c) => !(c in cats))];
+    const done = new Set();
+    for (const cat of order) {
+      if (done.has(cat) || !byCat.has(cat)) continue;
+      done.add(cat);
+      const items = byCat.get(cat);
+      items.sort((a, b) => a.drug.name.localeCompare(b.drug.name));
+      wrap.appendChild(el("h4", "drug-cat", cats[cat] || cat));
+      const ul = el("ul");
+      for (const { drug, binding } of items) {
+        const li = el("li", "clickable");
+        if (binding.tentative) li.classList.add("tentative");
+        const sw = el("span", "swatch line");
+        sw.style.background = binding.effectColor;
+        li.appendChild(sw);
+        const txt = el("div", "bind-text");
+        txt.appendChild(el("span", "bind-target", drug.name));
+        const detail = [binding.actionLabel, binding.note].filter(Boolean).join(" · ");
+        if (detail) txt.appendChild(el("span", "bind-action", detail));
+        li.appendChild(txt);
+        li.title = `${binding.effectLabel} · ${drug.name}`;
+        li.addEventListener("click", () => onDrugPick(drug));
+        ul.appendChild(li);
+      }
+      wrap.appendChild(ul);
+    }
+    body.appendChild(wrap);
+  };
+
   return {
     show(proj) {
       body.innerHTML = "";
@@ -1354,6 +1410,9 @@ function createInfoPanel(data) {
         where.appendChild(locationList(receptor.locationNames, receptor.locations));
       }
       body.appendChild(where);
+
+      // Drugs that act on this receptor, grouped by category.
+      appendInteractingDrugs(receptor.id);
     },
 
     /**
@@ -1386,6 +1445,9 @@ function createInfoPanel(data) {
         where.appendChild(locationList(target.locationNames, target.locationBases));
       }
       body.appendChild(where);
+
+      // Drugs that act on this target, grouped by category.
+      appendInteractingDrugs(target.id);
     },
 
     /**
@@ -1467,6 +1529,15 @@ function createInfoPanel(data) {
      */
     onStructure(fn) {
       onStructurePick = fn;
+    },
+
+    /**
+     * Register the handler run when a drug row in a receptor / target panel's
+     * "Interacting drugs" list is clicked. Called with the drug record; the caller
+     * focuses it exactly like its Drugs legend row / search pick.
+     */
+    onDrug(fn) {
+      onDrugPick = fn;
     },
   };
 }
@@ -3073,6 +3144,11 @@ async function main() {
     const mesh = id && meshById.get(id);
     if (mesh) selectStructure(mesh, { frame: true });
   });
+
+  // Clicking a drug in a receptor / target panel's "Interacting drugs" list focuses
+  // that drug (dim + animation + drug panel + tab), exactly like a Drugs legend row
+  // / drug search pick, so you can go from a target to every drug acting on it.
+  info.onDrug(selectDrug);
 
   // Both hemispheres (plus midline singletons) sharing a clicked mesh's base, so
   // a double-click isolates the same pair a legend row click does. The id base is

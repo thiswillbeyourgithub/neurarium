@@ -850,6 +850,17 @@
          name reads as a link on hover. */
       .info-bindings li.clickable { cursor: pointer; }
       .info-bindings li.clickable:hover .bind-target { color: #8fb6e6; }
+      /* "Interacting drugs" list on a receptor / target panel: the drugs that act
+         on it, grouped by drug category. The .drug-cat sub-heading is a small muted
+         label between groups (the section's own h3 keeps the uppercase header look). */
+      .info-interactors { margin-top: 4px; }
+      .info-interactors .drug-cat {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--muted);
+        margin: 10px 0 2px;
+      }
+      .info-interactors .drug-cat:first-of-type { margin-top: 2px; }
 
       #status {
         position: fixed;
