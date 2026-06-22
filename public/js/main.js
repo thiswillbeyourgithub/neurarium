@@ -1043,6 +1043,17 @@ function createPanelTabs() {
       selectSettings();
     },
     /**
+     * Close the currently active detail tab (falling back to a neighbour or
+     * Settings, like its × button). Returns true when a detail was active and got
+     * closed, false when Settings was active (nothing to close) so the caller (Esc)
+     * can fall through to other behaviour.
+     */
+    closeActive() {
+      if (activeKey === null) return false;
+      closeTab(activeKey);
+      return true;
+    },
+    /**
      * Cycle the active tab one step (`+1` next, `-1` previous) through the pinned
      * Settings tab plus the open detail tabs, wrapping around. Landing on a detail
      * re-applies its 3D focus (same as clicking it); landing on Settings returns
@@ -2581,7 +2592,9 @@ function wireShortcuts(help, tabs) {
       case "r": case "R": sectionNav.reset(); click("receptors-toggle"); break;
       case "m": case "M": sectionNav.reset(); click("drugs-toggle"); break;
       case "f": case "F": openSearch(); break;
-      case "Escape": collapseOpen(); break;
+      // Esc closes the active detail tab first (a detail is showing -> close it);
+      // with only Settings active it falls through to closing search / sections.
+      case "Escape": if (!(tabs && tabs.closeActive())) collapseOpen(); break;
       default: return; // unhandled key: leave its default intact
     }
     event.preventDefault();
