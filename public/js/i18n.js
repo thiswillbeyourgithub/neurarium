@@ -129,6 +129,7 @@
       "drug.noTargets": "No mapped molecular targets yet.",
       "drug.source": "Source",
       "drug.stubHint": "No binding profile recorded yet",
+      "drug.speculative": "speculative",
 
       "status.loading": "Loading brain data…",
       "status.loadError":
@@ -258,6 +259,7 @@
       "drug.noTargets": "Aucune cible moléculaire répertoriée pour l'instant.",
       "drug.source": "Source",
       "drug.stubHint": "Aucun profil de liaison enregistré pour l'instant",
+      "drug.speculative": "spéculative",
 
       "status.loading": "Chargement des données du cerveau…",
       "status.loadError":

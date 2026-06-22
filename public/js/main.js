@@ -1340,7 +1340,11 @@ function createInfoPanel(data) {
           effectGlyph(binding.effect, binding.effectColor, binding.effectLabel));
         const txt = el("div", "bind-text");
         txt.appendChild(el("span", "bind-target", drug.name));
-        const detail = [binding.actionLabel, binding.note].filter(Boolean).join(" · ");
+        // A tentative binding gets a "· speculative" tag so the dim+italic row is
+        // self-explaining (it rides the dimmed action line, so it reads as muted).
+        const parts = [binding.actionLabel, binding.note];
+        if (binding.tentative) parts.push(t("drug.speculative"));
+        const detail = parts.filter(Boolean).join(" · ");
         if (detail) txt.appendChild(el("span", "bind-action", detail));
         li.appendChild(txt);
         li.title = `${binding.effectLabel} · ${drug.name}`;
@@ -1563,7 +1567,11 @@ function createInfoPanel(data) {
           // narrow panel instead of pushing the action off the edge.
           const txt = el("div", "bind-text");
           txt.appendChild(el("span", "bind-target", b.targetName));
-          const detail = [b.actionLabel, b.note].filter(Boolean).join(" · ");
+          // A tentative binding gets a "· speculative" tag so the dim+italic row is
+          // self-explaining (it rides the dimmed action line, so it reads as muted).
+          const parts = [b.actionLabel, b.note];
+          if (b.tentative) parts.push(t("drug.speculative"));
+          const detail = parts.filter(Boolean).join(" · ");
           if (detail) txt.appendChild(el("span", "bind-action", detail));
           li.appendChild(txt);
           li.title = `${b.effectLabel} · ${b.targetName}`;
