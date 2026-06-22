@@ -57,8 +57,8 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 - **Drugs** section: a filterable list of psychiatric drugs (from Stahl's
   Prescriber's Guide). Click one to dim the brain to the regions it acts on and
   animate effect-coloured dots (boost / block / modulate) over them, with an info
-  panel showing its class, nomenclature, the molecular targets it binds and how,
-  and the source.
+  panel showing its molecular-structure diagram, class, nomenclature, the
+  molecular targets it binds and how, and the source.
 - **Hover / tap** a region to show its floating name; a **Show all names** button
   labels everything at once, and a **Hide projections** button clears the arrows.
 
@@ -142,9 +142,11 @@ Then open <http://localhost:8000/>.
 | `public/` | The served site (and the only web-exposed directory). |
 | `tools/generate_data.py` | Single source of truth for the anatomy; generates the data below. |
 | `tools/drugs_data.json` | The drug dataset's authored source (read by the generator). |
+| `tools/fetch_molecules.py` | Downloads each drug's molecular-structure SVG from Wikipedia (vendored same-origin). |
 | `public/data/meta.json` | Presentation maps (colours, legend headings); makes the dataset self-describing. |
 | `public/data/{structures,projections,circuits,receptors,drugs}.jsonl` | The anatomy + drugs, split by record type, one JSON object per line. |
 | `public/data/shapes/<id>.json` | One geometry file per region. |
+| `public/data/molecules/<id>.svg` | One molecular-structure diagram per drug, shown in its panel. |
 | `public/index.html`, `public/js/` | The three.js viewer and UI. |
 | `tools/` | Dev tooling (data generator, dev server, screenshot helper). |
 | `docker/` | Deployment (hardened Caddy container). |

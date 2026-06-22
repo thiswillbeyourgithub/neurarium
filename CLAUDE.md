@@ -51,13 +51,13 @@ project can grow without touching the viewer:
 **Project layout.** Everything the browser loads lives under `public/` (the
 served site: `index.html`, `app-config.js`, `version.js`, `js/`, `data/` which
 holds the per-type dataset files (`meta.json`, `structures.jsonl`,
-`projections.jsonl`, `circuits.jsonl`, `receptors.jsonl`) + the `shapes/`
-geometry files), and that
+`projections.jsonl`, `circuits.jsonl`, `receptors.jsonl`, `drugs.jsonl`) + the
+`shapes/` geometry files + the `molecules/` per-drug structure SVGs), and that
 directory is the *only* thing exposed to the web: Caddy's
 `/srv` and `tools/serve.py` both root at it, so `docker/`, `tools/`, `.git` and
 the uncommitted `.env` / `deploy.sh` / `CLAUDE.local.md` are never web-reachable.
 Authoring + dev tooling live in `tools/` (`generate_data.py`, `drugs_data.json`,
-`serve.py`,
+`fetch_molecules.py`, `serve.py`,
 `shot.py`, `git-hooks/`); deployment config in `docker/`; the README hero shot in
 `docs/`. The map below names files by role; their directories are as just listed.
 
@@ -134,11 +134,19 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           action = a drug_actions key, optional effect override,
                           optional note ({en,fr} or "TODO"), optional tentative),
                           sources[{citation,url}] (always the Stahl citation, url
-                          "TODO" for now), optional wikipedia, and focusable (false
+                          "TODO" for now), optional wikipedia, optional
+                          structure_image (a vendored molecular-structure SVG path
+                          data/molecules/<id>.svg, set by the generator only when
+                          that file exists, see "Molecule images" below), and
+                          focusable (false
                           for a drug with no bindings -> listed but not clickable).
                           The data is authored in tools/drugs_data.json (sourced
                           from Stahl's Prescriber's Guide 8th ed.), not inline in
                           the generator, see "Drugs" below
+                        - data/molecules/<id>.svg: per-drug molecular-structure
+                          diagrams, vendored from Wikipedia by tools/fetch_molecules.py
+                          (not authored); the drug panel embeds the matching one.
+                          See "Molecule images"
 data/shapes/<name>.json  One geometry file per distinct *form* (independent of
                       where it sits / what it connects to). Symmetric left/right
                       pairs share a single right-side file; the left member
@@ -402,6 +410,17 @@ tools/drugs_data.json  The drug dataset's authored source (a JSON list, sourced
                       data/drugs.jsonl. Kept out of generate_data.py because it is
                       large; this is the file to edit to add/change a drug. See
                       "Drugs" and "Changing the data".
+tools/fetch_molecules.py  Authoring tool (stdlib, needs network) that downloads
+                      each drug's molecular-structure SVG from Wikipedia into
+                      public/data/molecules/<id>.svg, so the panel can embed them
+                      same-origin (the CSP blocks hot-linking Wikimedia). Idempotent
+                      (skips files already present), polite (descriptive UA + delay +
+                      429 backoff), and writes provenance to
+                      tools/molecules_sources.json. generate_data.py only checks for
+                      the files' presence (it stays offline). See "Molecule images".
+tools/molecules_sources.json  Provenance for the fetched molecule SVGs (per drug:
+                      the Commons File + source URL), written by fetch_molecules.py
+                      for attribution; not served, not read by the viewer.
 tools/git-hooks/      Repo-tracked git hooks (single source of truth). Currently
                       pre-push, which refuses to push any branch other than
                       main and then offers (y/N on the terminal) to run
@@ -1087,7 +1106,8 @@ as the WIP banner (`js/error-banner.js`):
   the regions its targets sit in and plays the **per-drug animation** (effect-
   coloured gem dots pulsing boost/block/modulate over those regions,
   `createDrugAnimation`, see "Drugs" below), and opens the drug **info-panel
-  view** (`createInfoPanel.showDrug`: the class, the NbN nomenclature, a Wikipedia
+  view** (`createInfoPanel.showDrug`: the molecular-structure image (when one was
+  fetched, see "Molecule images"), the class, the NbN nomenclature, a Wikipedia
   link, the description, the **Acts on** binding list and the Stahl source).
   Clicking the active row again clears it; switching to any other focus drops the
   dots. A drug with no mapped bindings renders muted and is not clickable. The
@@ -1462,7 +1482,8 @@ rendering:
   (`buildGemCloud`, reused from `js/receptor-markers.js`) over each binding's
   regions coloured by that binding's net-effect colour, pulsing per effect (boost
   fast/bright/swelling, block slow/dim, modulate in between). The info panel
-  switches to the drug view (`createInfoPanel.showDrug`: the class, the NbN
+  switches to the drug view (`createInfoPanel.showDrug`: the molecular-structure
+  image (see "Molecule images"), the class, the NbN
   nomenclature, a Wikipedia link, the description, the **Acts on** list (one row per
   binding: a coloured effect glyph (green **+** boost / red **−** block / purple
   **≈** modulate) + the target name + the action·note, dimmed +
@@ -1482,6 +1503,46 @@ the literal **"TODO"** (rendered as an orange TODO pill in the panel) pending a 
 reference link.
 
 To add or edit a drug, see "Changing the data" below.
+
+## Molecule images
+
+Each drug panel shows the drug's **molecular-structure diagram** (the skeletal
+formula) at the top, under the title/class. Like everything else third-party, the
+images are **vendored same-origin** rather than hot-linked: the site's CSP is
+`img-src 'self' data:`, so a runtime `<img src="https://upload.wikimedia.org/...">`
+would be blocked (and the project deliberately pulls no third-party asset). Split,
+as usual, into an authoring step and the rendering:
+
+- **Fetch (`tools/fetch_molecules.py` -> `public/data/molecules/<id>.svg`).** For
+  every drug with a `wikipedia` link, the article's lead infobox image (the
+  skeletal formula on a chemical article) is resolved via the MediaWiki
+  `pageimages` API; only `.svg` lead images are kept (a non-SVG lead falls back to
+  scanning the page's images for a structure-looking SVG). Each fetched file is
+  lightly sanitized (`<script>` stripped, and a `width`/`height` derived from the
+  `viewBox` when absent so an `<img>` can size it). The tool is **network-bound and
+  kept separate** from the offline, stdlib-only `generate_data.py`; it is
+  idempotent (skips files already present, so a rate-limited run resumes), polite
+  (descriptive User-Agent, inter-request delay, HTTP-429 backoff respecting
+  `Retry-After`), and records provenance (Commons File + source URL per drug) to
+  `tools/molecules_sources.json` for attribution. Run it after adding a drug:
+  `python tools/fetch_molecules.py` (only the new ones download).
+- **Generator (`generate_data.py`).** `_available_molecule_ids()` scans
+  `public/data/molecules/` and `_drug_record` emits a `structure_image`
+  (`data/molecules/<id>.svg`) **only when that file exists** (the file's presence
+  is the single source of truth, so the generator stays offline and a drug with no
+  fetched SVG simply gets no field).
+- **Rendering (`js/data.js` + `showDrug` in `js/main.js`).** `js/data.js` passes
+  the path through as `drug.structureImage` (null when absent); `showDrug` renders
+  it as an `<img class="mol-structure">` near the top (alt text from the
+  `drug.structureAlt` i18n key). The art is **black/grey line work on a transparent
+  background**, so the `.mol-structure img` CSS **inverts** it (`filter: invert(1)`)
+  to read as light strokes on the dark panel; the few SVGs carrying coloured atom
+  labels shift hue, an accepted tradeoff (chosen over a light "datasheet" card). A
+  drug without a fetched SVG shows **no image** (no broken-image icon, no layout
+  hole). The images are not translated.
+
+A drug missing an SVG is the **anticipated gap**: the fetcher logs which drugs it
+could not resolve, and the panel degrades to no image for them.
 
 ## Changing the data
 
@@ -1678,7 +1739,11 @@ To add or edit a drug, see "Changing the data" below.
      -> a TODO pill); the build raises on an unknown type or a non-http(s) wikipedia.
      Keep extraction **strictly dump-sourced**
      (only what the source text states; leave gaps as TODO / no binding). It shows up
-     in the legend's Drugs section automatically.
+     in the legend's Drugs section automatically. To also show its **molecule
+     image**, run `python tools/fetch_molecules.py` after regenerating (it
+     downloads only the new drug's structure SVG into `public/data/molecules/`,
+     which the next `generate_data.py` run then picks up as its `structure_image`);
+     see "Molecule images".
    - **Translations.** Every display string (a region `name`, a projection
      `label`/`description`/`neurotransmitter`, a circuit `name`, a group/kind
      label) is wrapped with `_t()` at build time, which looks the English text up

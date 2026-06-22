@@ -79,7 +79,8 @@ record lives in encodes its type, so there is no `type` field on the lines.
 | `projections.jsonl` | one directed pathway per line: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
 | `circuits.jsonl` | one named functional loop per line: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
 | `receptors.jsonl` | one neurotransmitter receptor per line: `id`, `name`, `family`, `neurotransmitter`, `receptor_class`, `sign`, `synaptic`, `locations[]` (structure base ids the viewer expands to both hemispheres), optional `ubiquitous`, optional `description`, `wikipedia`. Empty `locations` + no `description` = a "stub" (no CNS role). |
-| `drugs.jsonl` | one psychiatric drug per line (from Stahl's Prescriber's Guide): `id`, `name`, `categories[]`, optional `nbn`/`description`, `bindings[]` (each `target` + `action` + optional `effect`/`note`/`tentative`), `sources[]`, optional `wikipedia`, `focusable`. Authored in `tools/drugs_data.json` (not inline in the generator). No bindings = listed but not clickable. |
+| `drugs.jsonl` | one psychiatric drug per line (from Stahl's Prescriber's Guide): `id`, `name`, `categories[]`, optional `nbn`/`description`, `bindings[]` (each `target` + `action` + optional `effect`/`note`/`tentative`), `sources[]`, optional `wikipedia`, optional `structure_image` (the `data/molecules/<id>.svg` path, set when that SVG exists), `focusable`. Authored in `tools/drugs_data.json` (not inline in the generator). No bindings = listed but not clickable. |
+| `molecules/<id>.svg` | one molecular-structure diagram per drug, vendored from Wikipedia by `tools/fetch_molecules.py` (a network-bound authoring tool, separate from the offline generator); the drug panel embeds it as an inverted `<img>`. Not authored, not translated. |
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape
@@ -203,7 +204,8 @@ The detailed recipes (with the exact fields and gotchas) are in CLAUDE.md under
   legend section automatically.
 - **A new drug**: add an entry to `tools/drugs_data.json` (categories + bindings,
   each binding a `target` + `action` from the drug vocabularies in
-  `generate_data.py`); it shows up in the Drugs legend section automatically.
+  `generate_data.py`); it shows up in the Drugs legend section automatically. Run
+  `python tools/fetch_molecules.py` to also pull its molecular-structure SVG.
 - **A Wikipedia link**: add the region's base id + URL to the `WIKIPEDIA` registry.
 
 The legend, colours, and headings are all derived from the data at runtime, so
