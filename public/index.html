@@ -712,6 +712,12 @@
       .info-bindings .bind-target { font-weight: 600; }
       .info-bindings .bind-action { color: var(--muted); font-size: 11px; }
       .info-bindings li.tentative { opacity: 0.6; font-style: italic; }
+      /* A binding whose target is itself focusable (a transporter / enzyme /
+         receptor in the merged "Receptors & targets" list): clicking the row
+         focuses that target, exactly like its legend row, so the bold target
+         name reads as a link on hover. */
+      .info-bindings li.clickable { cursor: pointer; }
+      .info-bindings li.clickable:hover .bind-target { color: #8fb6e6; }
 
       #status {
         position: fixed;

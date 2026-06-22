@@ -841,6 +841,14 @@ function createInfoPanel(data, tabs) {
   // structure panel is clicked. The panel only knows projections, so the caller
   // maps the projection to its arrow and does the framing/halo/connection-panel.
   let onConnectionPick = () => {};
+  // Set by the caller (onTarget): what to do when a binding row in a drug panel is
+  // clicked. The panel hands back the resolved target entry; the caller focuses it
+  // exactly like its "Receptors & targets" legend row.
+  let onTargetPick = () => {};
+  // Resolve a drug binding's `target` key to its merged-list entry, so a binding
+  // row can focus that target (a receptor entry shares its id; a non-receptor one
+  // its drug_targets key). Only focusable entries become clickable.
+  const targetById = new Map(data.targets.map((tg) => [tg.id, tg]));
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -1144,6 +1152,13 @@ function createInfoPanel(data, tabs) {
           if (detail) txt.appendChild(el("span", "bind-action", detail));
           li.appendChild(txt);
           li.title = `${b.effectLabel} · ${b.targetName}`;
+          // If this binding's target is browsable on its own (in the merged
+          // "Receptors & targets" list and focusable), make the row jump to it.
+          const tgt = targetById.get(b.target);
+          if (tgt && tgt.focusable) {
+            li.classList.add("clickable");
+            li.addEventListener("click", () => onTargetPick(tgt));
+          }
           ul.appendChild(li);
         }
         acts.appendChild(ul);
@@ -1157,6 +1172,11 @@ function createInfoPanel(data, tabs) {
     /** Register the handler run when a structure-panel connection row is clicked. */
     onConnection(fn) {
       onConnectionPick = fn;
+    },
+
+    /** Register the handler run when a drug-panel binding (target) row is clicked. */
+    onTarget(fn) {
+      onTargetPick = fn;
     },
 
     hide() {
@@ -2557,6 +2577,11 @@ async function main() {
     if (arrow) selectConnection(arrow, { frame: true });
     else info.show(proj); // no arrow built for this pathway: details only
   });
+
+  // Clicking a target (binding) row inside a drug panel focuses that target,
+  // framing its regions + lighting its dots + opening its panel, just like
+  // picking the target in the "Receptors & targets" legend or in search.
+  info.onTarget(selectTarget);
 
   // Both hemispheres (plus midline singletons) sharing a clicked mesh's base, so
   // a double-click isolates the same pair a legend row click does. The id base is
