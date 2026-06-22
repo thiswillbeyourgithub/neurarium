@@ -50,6 +50,12 @@ const INTRO_ROTATION_TURNS = 0.75;
 const DEV_BANNER_UNZOOM = 1.15;
 const DEV_BANNER_DROP = 1.6;
 
+// Drug-effect glyphs: a coloured symbol that stands in for the plain colour bar in
+// a binding row, so the action's direction reads at a glance: + boost (increase),
+// − block (decrease), ≈ modulate (roughly), each drawn in the effect's own colour
+// (emerald / rose / violet).
+const EFFECT_GLYPHS = { boost: "+", block: "−", modulate: "≈" };
+
 // Fold a string for accent- + case-insensitive matching: lowercase, then strip
 // combining diacritical marks (NFD decomposes e.g. "é" -> "e" + U+0301, "ç" ->
 // "c" + U+0327, which we then drop). So the search/filter find "sérotonine" when
@@ -1234,6 +1240,17 @@ function createInfoPanel(data) {
     facts.appendChild(r);
   };
 
+  // A coloured effect glyph (+ boost / − block / ≈ modulate, in the effect's colour)
+  // that replaces the plain colour bar at the head of a drug binding row, so the
+  // action's direction reads at a glance. `label` (the localized effect name) is the
+  // accessible name; the glyph is otherwise decorative.
+  const effectGlyph = (effect, color, label) => {
+    const g = el("span", "effect-glyph", EFFECT_GLYPHS[effect] || "·");
+    g.style.color = color;
+    if (label) g.setAttribute("aria-label", label);
+    return g;
+  };
+
   // Shared by the structure / receptor / drug / target views: an external reference
   // link, rendered only for an http(s) url so a stray field can never inject markup.
   // With `todo:true` (the targets, whose references aren't gathered yet) a missing
@@ -1319,9 +1336,8 @@ function createInfoPanel(data) {
       for (const { drug, binding } of items) {
         const li = el("li", "clickable");
         if (binding.tentative) li.classList.add("tentative");
-        const sw = el("span", "swatch line");
-        sw.style.background = binding.effectColor;
-        li.appendChild(sw);
+        li.appendChild(
+          effectGlyph(binding.effect, binding.effectColor, binding.effectLabel));
         const txt = el("div", "bind-text");
         txt.appendChild(el("span", "bind-target", drug.name));
         const detail = [binding.actionLabel, binding.note].filter(Boolean).join(" · ");
@@ -1541,9 +1557,7 @@ function createInfoPanel(data) {
         for (const b of drug.bindings) {
           const li = el("li");
           if (b.tentative) li.classList.add("tentative");
-          const sw = el("span", "swatch line");
-          sw.style.background = b.effectColor;
-          li.appendChild(sw);
+          li.appendChild(effectGlyph(b.effect, b.effectColor, b.effectLabel));
           // Target name (bold) over the action line, stacked so a long target
           // name (e.g. "Serotonin transporter (SERT)") wraps cleanly inside the
           // narrow panel instead of pushing the action off the edge.

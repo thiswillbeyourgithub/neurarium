@@ -871,7 +871,18 @@
         color: var(--text);
         padding: 4px 0;
       }
-      .info-bindings .swatch.line { margin-top: 5px; }
+      /* The effect glyph at the head of a binding row (+ boost / − block /
+         ≈ modulate, coloured by the effect). Fixed width so the rows align like
+         the old colour bar did; nudged down to sit on the target name's baseline. */
+      .effect-glyph {
+        flex: 0 0 auto;
+        width: 14px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 1;
+        margin-top: 1px;
+      }
       .info-bindings .bind-text {
         display: flex;
         flex-direction: column;
