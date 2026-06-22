@@ -1000,11 +1000,13 @@ function createPanelTabs() {
     e.preventDefault();
   }, { passive: false });
 
-  tabSettings.addEventListener("click", () => {
+  // Return to the pinned Settings tab (active = none), keeping every detail tab.
+  const selectSettings = () => {
     activeKey = null;
     showPane(false);
     render();
-  });
+  };
+  tabSettings.addEventListener("click", selectSettings);
 
   return {
     /**
@@ -1038,9 +1040,23 @@ function createPanelTabs() {
      * pane) and by an empty-space click / deselect.
      */
     showSettings() {
-      activeKey = null;
-      showPane(false);
-      render();
+      selectSettings();
+    },
+    /**
+     * Cycle the active tab one step (`+1` next, `-1` previous) through the pinned
+     * Settings tab plus the open detail tabs, wrapping around. Landing on a detail
+     * re-applies its 3D focus (same as clicking it); landing on Settings returns
+     * to the controls. Returns false (nothing to cycle) when only Settings exists,
+     * so the caller can leave the Tab key's default focus move intact.
+     */
+    cycle(dir) {
+      if (openTabs.length === 0) return false;
+      const keys = [null, ...openTabs.map((tb) => tb.key)]; // Settings first, then details
+      const at = keys.indexOf(activeKey);
+      const target = keys[(at + dir + keys.length) % keys.length];
+      if (target === null) selectSettings();
+      else activate(target);
+      return true;
     },
     /** Set the callback run when the last detail tab is closed (clears the 3D). */
     setOnEmpty(fn) { onEmpty = fn; },
@@ -2204,6 +2220,19 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     })),
   ];
 
+  // Index (among the non-empty rows) of the keyboard-highlighted result, or -1
+  // when there is none. Arrow keys move it; Enter activates it (the first by
+  // default, since renderResults pre-highlights row 0).
+  let activeIndex = -1;
+  const resultRows = () => [...searchResults.querySelectorAll("li:not(.empty)")];
+  function highlight(index) {
+    const rows = resultRows();
+    if (rows.length === 0) { activeIndex = -1; return; }
+    activeIndex = (index + rows.length) % rows.length; // wrap past either end
+    rows.forEach((li, i) => li.classList.toggle("active", i === activeIndex));
+    rows[activeIndex].scrollIntoView({ block: "nearest" });
+  }
+
   // Rebuild the (capped) result list from the current query. An empty query
   // lists everything so the box doubles as a browsable index.
   function renderResults() {
@@ -2217,17 +2246,21 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       li.className = "empty";
       li.textContent = t("search.noMatch");
       searchResults.appendChild(li);
+      activeIndex = -1;
       return;
     }
-    for (const item of matches) {
+    matches.forEach((item, i) => {
       const li = document.createElement("li");
       li.textContent = item.label;
       li.addEventListener("click", () => {
         item.select();
         closeSearch();
       });
+      // Hovering syncs the highlight, so mouse + keyboard agree on the active row.
+      li.addEventListener("mouseenter", () => highlight(i));
       searchResults.appendChild(li);
-    }
+    });
+    highlight(0); // pre-highlight the first match: Enter selects it straight away
   }
 
   // The search box lives inside the (collapsible) panel body, so opening search
@@ -2268,9 +2301,16 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   });
   searchInput.addEventListener("input", renderResults);
   searchInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      const first = searchResults.querySelector("li:not(.empty)");
-      if (first) first.click();
+    if (event.key === "ArrowDown") {
+      highlight(activeIndex + 1);
+      event.preventDefault(); // don't move the text caret
+    } else if (event.key === "ArrowUp") {
+      highlight(activeIndex - 1);
+      event.preventDefault();
+    } else if (event.key === "Enter") {
+      const rows = resultRows();
+      const pick = rows[activeIndex] || rows[0]; // highlighted, else the first
+      if (pick) pick.click();
     } else if (event.key === "Escape") {
       closeSearch();
     }
@@ -2304,14 +2344,14 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  *   n  toggle all names            l  collapse / expand the Legend section
  *   s  spread fully / collapse     c  toggle "See inside"
  *   r  reset the camera            f  open search (bare-key Ctrl/Cmd+F)
- *   ?  open the shortcuts popup    Esc  close popup, else close search +
- *                                       collapse any open Legend/Receptors/About
+ *   Tab  cycle the detail tabs      ?  open the shortcuts popup
+ *   Esc  close popup, else close search + collapse any open Legend/Receptors/About
  * Ctrl/Cmd+F (search) stays handled in wireToolbar; here `f` is its bare-key
  * twin. preventDefault on a handled key stops `f` typing into the search box it
  * just focused (and any other stray default). `help` is the shortcuts-popup
  * controller (wireShortcutsHelp): when its dialog is open Esc closes that first.
  */
-function wireShortcuts(help) {
+function wireShortcuts(help, tabs) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -2354,6 +2394,13 @@ function wireShortcuts(help) {
       event.preventDefault();
       return;
     }
+    // Tab / Shift+Tab cycle the detail tabs (incl. the pinned Settings tab). Only
+    // swallow the key when there is something to cycle, so with no detail open
+    // Tab keeps its default focus-move behaviour.
+    if (event.key === "Tab") {
+      if (tabs && tabs.cycle(event.shiftKey ? -1 : 1)) event.preventDefault();
+      return;
+    }
     switch (event.key) {
       case "?": help?.open(); break;
       case "n": case "N": click("toggle-names"); break;
@@ -2391,6 +2438,7 @@ function wireShortcutsHelp() {
     { keys: ["C"], desc: "shortcuts.seeInside" },
     { keys: ["R"], desc: "shortcuts.reset" },
     { keys: ["F"], desc: "shortcuts.search" },
+    { keys: ["Tab"], desc: "shortcuts.tabs" },
     { keys: ["Esc"], desc: "shortcuts.close" },
   ];
   for (const r of ROWS) {
@@ -2884,7 +2932,7 @@ async function main() {
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
   wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug });
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
-  wireShortcuts(shortcutsHelp); // single-key shortcuts (n/s/l/c/r/f/?/Esc)
+  wireShortcuts(shortcutsHelp, tabs); // single-key shortcuts (n/s/l/c/r/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });

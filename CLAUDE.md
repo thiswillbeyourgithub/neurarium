@@ -1046,7 +1046,10 @@ as the WIP banner (`js/error-banner.js`):
   alone so Ctrl/Cmd+F still works). **n** toggles all names, **s** spreads fully
   or back to assembled (toggling the **Separate** slider), **l** collapses /
   expands the **Legend** section, **c** toggles **See inside**, **r** resets the
-  camera, **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Esc** closes
+  camera, **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Tab** /
+  **Shift+Tab** cycle the open **detail tabs** (the pinned Settings tab + each
+  opened detail, wrapping; `tabs.cycle` re-applies a detail's 3D focus on landing,
+  and the key keeps its default focus move when no detail is open), **Esc** closes
   search and collapses any open Legend / Receptors / Drugs / About section. Each
   maps to
   an existing control by **clicking the same DOM element** a mouse user would (or
@@ -1054,13 +1057,16 @@ as the WIP banner (`js/error-banner.js`):
   handled key calls `preventDefault` so `f` never types into the search box it
   just focused. The same shortcuts are listed in the **shortcuts help popup**
   (see below).
-- **Reset + search + shortcuts** (the icon-button row at the top of the panel,
+- **Keyboard + reset + search** (the icon-button row at the top of the panel,
   just above the
-  sliders): a **reset** button (crosshair icon) recenters the camera on the
+  sliders, spread across the row via `justify-content: space-between`): a
+  **keyboard-shortcuts** button (keyboard icon, **left**) opens the shortcuts help
+  popup (below), a **reset** button (crosshair icon, **center**) recenters the
+  camera on the
   middle of the brain and re-frames the whole thing (useful after panning slides
-  it off-center), a **search** button (magnifier icon) swaps a search box in
-  place of the panel body (not a popup), and a **keyboard-shortcuts** button
-  (keyboard icon) opens the shortcuts help popup (below). The search box filters
+  it off-center), and a **search** button (magnifier icon, **right**) swaps a
+  search box in
+  place of the panel body (not a popup). The search box filters
   **structures (by name),
   connections (by pathway label), receptors (by name / neurotransmitter /
   system) and drugs (by name / category / target)**. Picking a structure centers
@@ -1083,7 +1089,11 @@ as the WIP banner (`js/error-banner.js`):
   browser's native page-find, useless on a canvas + data app, never opens),
   expands the panel if it was collapsed (the search box lives inside the panel
   body) and opens search focused on its input; pressing it again while open just
-  refocuses + selects the text. **Escape** closes search.
+  refocuses + selects the text. **Escape** closes search. The results are
+  **keyboard-navigable**: rendering pre-highlights the first row (a `.active`
+  class), **ArrowDown** / **ArrowUp** move the highlight (wrapping; hovering a row
+  syncs it), and **Enter** activates the highlighted row (so a bare Enter after
+  typing picks the first result). `activeIndex` + `highlight()` in `wireToolbar`.
 - **Keyboard-shortcuts help popup** (`#shortcuts-modal`, built by
   `wireShortcutsHelp` in `js/main.js`): a centered dialog over a dimmed full-
   screen backdrop (a `.modal-overlay`, reusing `.panel` for the glass look)
@@ -1114,7 +1124,9 @@ as the WIP banner (`js/error-banner.js`):
   the DOM is reordered live and `openTabs` synced on drop), and **wheel / touch-
   drag** scrolls the overflowing strip (`touch-action: pan-x`). A real drag sets a
   one-shot `suppressClick` so the drag's synthetic click doesn't also re-activate
-  the tab. The `panel.closeTab` i18n key labels the × for a11y.
+  the tab. The `panel.closeTab` i18n key labels the × for a11y. **Tab** /
+  **Shift+Tab** (wired in `wireShortcuts`) cycle the active tab via `tabs.cycle`,
+  through Settings + the open details in strip order, wrapping.
 - **Info panel** (the **Details pane** of the main panel, `createInfoPanel` in
   `js/main.js`, rendered into `#info-body`; the active **detail tab** drives which
   one shows, see "Detail tabs" + "Panel layout"): shows a *connection*, a

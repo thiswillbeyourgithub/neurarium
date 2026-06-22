@@ -79,6 +79,7 @@
       "shortcuts.seeInside": "Toggle see inside",
       "shortcuts.reset": "Reset the view",
       "shortcuts.search": "Open search",
+      "shortcuts.tabs": "Switch between tabs",
       "shortcuts.close": "Close search / collapse sections",
 
       "legend.showNames": "Show all names",
@@ -199,6 +200,7 @@
       "shortcuts.seeInside": "Voir l'intérieur",
       "shortcuts.reset": "Recentrer la vue",
       "shortcuts.search": "Ouvrir la recherche",
+      "shortcuts.tabs": "Naviguer entre les onglets",
       "shortcuts.close": "Fermer la recherche / replier les sections",
 
       "legend.showNames": "Afficher tous les noms",
