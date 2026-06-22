@@ -1056,8 +1056,9 @@ as the WIP banner (`js/error-banner.js`):
   region list). Both panels then carry an **"Interacting drugs"** section under
   "Found in": the drugs that act on this target (so you can go from a target to
   every drug touching it), **grouped by primary drug category** (antipsychotic,
-  MAOI, ...) in the meta order, each row carrying the binding's net-effect swatch
-  (boost / block / modulate) so the kind of interaction is visible, and **clicking a
+  MAOI, ...) in the meta order, each row carrying the binding's net-effect **glyph**
+  (green **+** boost / red **−** block / purple **≈** modulate) so the kind of
+  interaction is visible, and **clicking a
   drug row focuses that drug** (dim + animation + drug panel + tab) via the
   `info.onDrug` hook, exactly like a Drugs legend / search pick. The list is built
   from the `data.drugsByTarget` reverse index (see js/data.js) and the section is
@@ -1227,7 +1228,7 @@ as the WIP banner (`js/error-banner.js`):
   `showReceptor`, opened from a Receptors legend row, see "Receptors" above), or a
   *drug* (via `showDrug`, opened from a Drugs legend row / drug search, see
   "Drugs" above: its class, NbN nomenclature, Wikipedia link, description, the
-  **Acts on** list of bindings (each an effect-coloured swatch + the target name +
+  **Acts on** list of bindings (each a coloured effect glyph + the target name +
   the action·note, dimmed when tentative) and the Stahl source. The **Class** and
   **Nomenclature** values are clickable, each opening search with a
   `class:"..."` / `nbn:"..."` filter, see "Controls -> search").
@@ -1461,7 +1462,8 @@ rendering:
   fast/bright/swelling, block slow/dim, modulate in between). The info panel
   switches to the drug view (`createInfoPanel.showDrug`: the class, the NbN
   nomenclature, a Wikipedia link, the description, the **Acts on** list (one row per
-  binding: an effect-coloured swatch + the target name + the action·note, dimmed +
+  binding: a coloured effect glyph (green **+** boost / red **−** block / purple
+  **≈** modulate) + the target name + the action·note, dimmed +
   italic when tentative), and the Stahl source). Drugs are also searchable (name /
   category / target keywords). The animation is stopped off the selection state, the
   same pattern as the receptor markers + circuit pulse: a `selection.onIsolate`
