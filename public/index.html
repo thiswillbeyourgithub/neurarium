@@ -178,6 +178,20 @@
           max-height: none; /* override the default 42vh cap so the body fills the tall sidebar */
         }
       }
+      /* Uncollapsing a section slides its body in (a soft downward slide + fade),
+         so opening Legend / Receptors / Drugs / About reads as a motion rather than
+         a snap. The bodies ship `hidden` (display:none), so showing one (re)runs the
+         animation each time. Disabled under prefers-reduced-motion. */
+      @keyframes section-slide-in {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      #legend-body, #receptors-body, #drugs-body, #about-body {
+        animation: section-slide-in 200ms ease-out;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #legend-body, #receptors-body, #drugs-body, #about-body { animation: none; }
+      }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
          dark glass UI. scrollbar-width covers Firefox, ::-webkit-scrollbar
