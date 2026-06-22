@@ -92,6 +92,12 @@
       "fr": "Modulateur"
     }
   },
+  "system_flow_kinds": {
+    "serotonergic": "serotonergic",
+    "adrenergic": "noradrenergic",
+    "dopaminergic": "dopaminergic",
+    "cholinergic": "cholinergic"
+  },
   "receptor_family_labels": {
     "adrenergic": {
       "en": "Adrenergic",

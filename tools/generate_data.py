@@ -113,6 +113,24 @@ SIGN_LABELS: dict[str, str] = {
     "modulatory": "Modulatory",
 }
 
+# Per-drug "by-mechanism flow" overlay (js/drug-anim.js): focusing a drug also
+# lights flowing beads along the projections of its target transmitter *system*.
+# This maps a drug target's ``system`` (the neurotransmitter family: a DRUG_TARGETS
+# ``system`` or a receptor ``family``) to the projection ``kind`` that carries it,
+# but *only* for the diffuse ascending modulatory systems with a brainstem source
+# nucleus modeled (serotonin / raphe, noradrenaline / locus coeruleus, dopamine /
+# VTA + substantia nigra, acetylcholine / septum). Fast point-to-point systems
+# (glutamatergic / gabaergic) and unmodeled ones (histaminergic, ...) are absent on
+# purpose: mapping them would flood the view with every excitatory/inhibitory arrow
+# instead of a drug-specific fan. A drug whose systems aren't here gets no flow,
+# just its dots + wash. Emitted into meta.json so the viewer hardcodes no table.
+SYSTEM_FLOW_KINDS: dict[str, str] = {
+    "serotonergic": "serotonergic",
+    "adrenergic": "noradrenergic",
+    "dopaminergic": "dopaminergic",
+    "cholinergic": "cholinergic",
+}
+
 # Structure ``group`` -> legend heading, in legend display order (object key
 # order is preserved through JSON, so the viewer's legend follows this order).
 GROUP_LABELS: dict[str, str] = {
@@ -3216,6 +3234,9 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         "kind_signs": KIND_TO_SIGN,
         "sign_colors": SIGN_COLORS,
         "sign_labels": {sign: _t(label) for sign, label in SIGN_LABELS.items()},
+        # Drug target system -> projection kind, for the per-drug flow overlay (see
+        # SYSTEM_FLOW_KINDS). Language-neutral keys both sides.
+        "system_flow_kinds": SYSTEM_FLOW_KINDS,
         # Receptor legend maps: family -> heading, mechanism class -> label, and
         # pre/post-synaptic -> label (all bilingual). The per-receptor sign reuses
         # sign_colors / sign_labels above, so the receptor legend needs no extra

@@ -3023,21 +3023,37 @@ async function main() {
 
   // Per-drug animation + focus (js/drug-anim.js), the same shape as the receptor
   // focus above. Clicking a drug row dims the brain to the union of regions its
-  // targets sit in (setCircuit, no arrow pin) and animates each target's regions
-  // coloured by the binding's net effect (boost/block/modulate). The animation is
-  // dropped the moment the focus stops being exactly that drug's region set
-  // (a clear, a circuit, a receptor, another drug), watched off the selection
-  // state like the receptor markers + circuit pulse.
+  // targets sit in and animates each target's regions coloured by the binding's
+  // net effect (boost/block/modulate, the dots + wash). On top of that, the drug's
+  // transmitter-system pathways (its `flowKinds`, resolved in js/data.js) are
+  // pinned opaque and ride flowing beads via the shared circuit pulse, the
+  // "by-mechanism flow" overlay: focusing an SSRI lights the serotonergic fan, an
+  // SNRI the noradrenergic + serotonergic ones, etc. A drug whose systems have no
+  // modeled ascending pathway pins no arrows, so it falls back to dots + wash only
+  // (setCircuit with an empty arrow set, exactly as before). Both the dots and the
+  // flow are dropped the moment the focus stops being exactly that drug's region
+  // set (a clear, a circuit, a receptor, another drug): the dots via the drugAnim
+  // watcher below, the flow via the shared circuitAnim watcher (its pinned-arrow
+  // set stops matching).
   const drugAnim = createDrugAnimation({ scene });
   let activeDrugId = null;
   let reflectDrugs = () => {};
   const refreshDrugRows = () => reflectDrugs(activeDrugId);
   const drugMeshesOf = (drug) =>
     drug.structureIds.map((id) => meshById.get(id)).filter(Boolean);
+  // The arrows carrying this drug's target transmitter systems (its mapped
+  // projection kinds), the set the flow overlay rides. Empty when the drug has no
+  // mapped system, so the overlay is simply absent for it.
+  const flowArrowsOf = (drug) => {
+    const kinds = new Set(drug.flowKinds || []);
+    return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
+  };
   const focusDrug = (drug, { frame = false } = {}) => {
     const meshSet = drugMeshesOf(drug);
-    selection.setCircuit(meshSet, []);
+    const flowArrows = flowArrowsOf(drug);
+    selection.setCircuit(meshSet, flowArrows);
     drugAnim.show(drug, meshById);
+    circuitAnim.play(flowArrows); // no-op for a drug with no mapped pathways
     info.showDrug(drug);
     // From the search box, frame the affected regions; from the list row, leave
     // the view where it is.

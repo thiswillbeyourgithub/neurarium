@@ -165,6 +165,10 @@ export async function loadBrainData(dataDir = "data") {
   const drugActions = metaRecord.drug_actions || {};
   const drugEffectColors = metaRecord.drug_effect_colors || {};
   const drugEffectLabels = localizeMap(metaRecord.drug_effect_labels);
+  // Drug target system -> projection kind, for the per-drug "by-mechanism flow"
+  // overlay (only the diffuse ascending modulatory systems are mapped; see
+  // generate_data.py SYSTEM_FLOW_KINDS). Language-neutral, applied per drug below.
+  const systemFlowKinds = metaRecord.system_flow_kinds || {};
 
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
@@ -280,6 +284,14 @@ export async function loadBrainData(dataDir = "data") {
       };
     });
     d.structureIds = [...affected];
+    // By-mechanism flow: the projection kinds this drug's target systems map to
+    // (meta.system_flow_kinds). Drives the optional flowing-beads overlay (main.js
+    // filters arrows by these kinds, js/drug-anim.js animates them); empty for a
+    // drug whose systems have no modeled ascending pathway (it gets just dots +
+    // wash). A Set-deduped list since several bindings can share a system.
+    d.flowKinds = [...new Set(
+      d.bindings.map((b) => systemFlowKinds[b.system]).filter(Boolean),
+    )];
     // Focusable if it carries any binding (the info panel + search work even when
     // a target has no modeled region to light); the generator already cleared it
     // for a drug with no bindings at all.
