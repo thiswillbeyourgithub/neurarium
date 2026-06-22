@@ -191,7 +191,11 @@ js/data.js            Fetches the per-type data files (meta.json + structures/
                       projections/circuits/receptors/drugs.jsonl) + all shape
                       files,
                       returns a normalized {structures, projections, circuits,
-                      receptors, targets, drugs, byId, meta} object. It reads the
+                      receptors, targets, drugs, drugsByTarget, byId, meta} object
+                      (`drugsByTarget` = a reverse index from a target id, a receptor
+                      id or a drug_targets key, to the drugs that bind it + their
+                      resolved binding, so a receptor/target panel can list its
+                      interacting drugs). It reads the
                       meta maps and
                       resolves each projection's arrow `color` from its kind (so
                       the viewer reads `projection.color`, never a hardcoded
@@ -1049,7 +1053,16 @@ as the WIP banner (`js/error-banner.js`):
   facts and the region list, or "Throughout the brain" for a ubiquitous receptor);
   a non-receptor target opens the lighter `showTarget` (its system, a Wikipedia
   link or a TODO pill until one is gathered, the type + system facts, and the
-  region list). In both, each **"Found in" region row is clickable** and **jumps to
+  region list). Both panels then carry an **"Interacting drugs"** section under
+  "Found in": the drugs that act on this target (so you can go from a target to
+  every drug touching it), **grouped by primary drug category** (antipsychotic,
+  MAOI, ...) in the meta order, each row carrying the binding's net-effect swatch
+  (boost / block / modulate) so the kind of interaction is visible, and **clicking a
+  drug row focuses that drug** (dim + animation + drug panel + tab) via the
+  `info.onDrug` hook, exactly like a Drugs legend / search pick. The list is built
+  from the `data.drugsByTarget` reverse index (see js/data.js) and the section is
+  omitted when no drug in the dataset acts on the target. In both, each **"Found in"
+  region row is clickable** and **jumps to
   that structure** (frames + halos it + opens its detail tab, like a structure
   search pick): the panel's `locationList` helper makes a row clickable when its
   base id resolves to a modeled structure and hands the base back via the
@@ -1369,7 +1382,11 @@ beside the 5-HT receptors. A receptor isn't a transporter, so the distinction is
 kept: a receptor keeps its sign swatch + full `showReceptor` panel, a non-receptor
 target gets its `type`-colour swatch, a muted type tag, and the lighter
 `showTarget` panel (its system, a Wikipedia link or a TODO pill until one is
-gathered, the type + system facts, the region list). The *focus* machinery is
+gathered, the type + system facts, the region list). Both panels also list the
+**drugs that act on the target** (the `data.drugsByTarget` reverse index), grouped
+by drug category and coloured by each binding's effect, with a click jumping to the
+drug, so you can browse from a target to every interacting drug (see "Controls ->
+Receptors & targets"). The *focus* machinery is
 shared (the same `focusTarget` path, `createReceptorMarkers` dots and
 `setCircuit` dimming serve both); only the panel view + swatch colour differ by
 `kind`. A non-receptor target's `type` (transporter / enzyme / ion_channel /
