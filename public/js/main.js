@@ -2015,20 +2015,19 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
       onToggle?.(open);
     });
   };
-  // The bottom panel covers the centered brain on small screens, so while it is
-  // expanded there we push the rendered brain clear of it (a render-time camera
-  // view offset, see createCameraFocus.setScreenOffset; collapsing it or a wide
-  // screen restores the centered view, eased in focus.tick):
+  // The panel covers the centered brain, so while it is expanded we push the
+  // rendered brain clear of it (a render-time camera view offset, see
+  // createCameraFocus.setScreenOffset; collapsing it restores the centered view,
+  // eased in focus.tick):
   //   - portrait: the panel spans the full width but only the bottom half (see
   //     the @media rule in index.html), so push the brain straight UP into the
   //     clear top section. The shove is half the panel's height fraction, so the
   //     brain ends up centered in the space above the panel whatever its height.
-  //   - narrow landscape: the panel is a bottom-left box, so push the brain to
-  //     the top-RIGHT, clear of it.
+  //   - landscape: the panel is a full-height left sidebar (up to 25% wide), so
+  //     push the brain RIGHT by half the panel's width fraction, so it centres in
+  //     the clear space beside the sidebar whatever the sidebar's width.
   const controlsPanel = document.getElementById("controls");
-  const LANDSCAPE_PAN = { x: 0.38, y: 0.22 }; // viewport fractions (right, up)
   const portrait = window.matchMedia("(orientation: portrait)");
-  const narrow = window.matchMedia("(max-width: 700px)");
   const updatePanelPan = () => {
     const open = controlsToggle.getAttribute("aria-expanded") === "true";
     // `offsetHeight` is 0 only when the panel is display:none (the ?ui=0 shots);
@@ -2041,20 +2040,18 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
       const frac =
         controlsPanel.getBoundingClientRect().height / window.innerHeight;
       focus.setScreenOffset(0, Math.min(0.4, frac / 2));
-    } else if (narrow.matches) {
-      focus.setScreenOffset(LANDSCAPE_PAN.x, LANDSCAPE_PAN.y);
     } else {
-      focus.setScreenOffset(0, 0);
+      const frac =
+        controlsPanel.getBoundingClientRect().width / window.innerWidth;
+      focus.setScreenOffset(Math.min(0.3, frac / 2), 0);
     }
   };
   wireCollapse(controlsToggle, controlsBody, updatePanelPan);
-  // Recompute when the breakpoint/orientation flips, and whenever the panel's
-  // own size changes (collapsing/expanding, or opening the Legend/About
-  // accordion, which changes how far up the brain must move in portrait). The
-  // ResizeObserver also fires once on observe, so the initial expanded panel is
-  // handled on load.
+  // Recompute when the orientation flips, and whenever the panel's own size
+  // changes (collapsing/expanding, or opening the Legend/About accordion, which
+  // changes how far the brain must move). The ResizeObserver also fires once on
+  // observe, so the initial expanded panel is handled on load.
   portrait.addEventListener("change", updatePanelPan);
-  narrow.addEventListener("change", updatePanelPan);
   new ResizeObserver(updatePanelPan).observe(controlsPanel);
 
   // Legend, Receptors and About behave as an accordion: only one open at a time,

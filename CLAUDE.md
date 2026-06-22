@@ -822,26 +822,32 @@ as the WIP banner (`js/error-banner.js`):
   and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
   toggles `section-open`. A section can only be opened while the controls are
   visible (i.e. not searching), so this never hides the toolbar mid-search.
-  **Small-screen pan-aside**: on a small screen the panel covers much of the
-  centered brain, so while the panel body is **expanded** the rendered brain is
-  pushed clear of it (and recentred when it collapses or on a wide screen). The
-  layout differs by orientation:
+  **Pan-aside**: the panel covers part of the centered brain, so while the panel
+  body is **expanded** the rendered brain is pushed clear of it (and recentred when
+  it collapses). The layout differs by orientation:
   - **portrait**: an `@media (orientation: portrait)` rule (index.html) makes
     `#controls` span the **full width** but only the **bottom half** (`max-height:
     50vh`), and the brain is pushed straight **up** into the clear top section by
     half the panel's height fraction, so it sits centred in the space above the
     panel whatever the panel's actual height (which the `ResizeObserver` tracks as
     the Legend/About accordion grows it).
-  - **narrow landscape** (`max-width: 700px`, not portrait): the panel stays a
-    bottom-left box, so the brain is pushed to the **top-right** (`LANDSCAPE_PAN`).
+  - **landscape**: an `@media (orientation: landscape)` rule makes `#controls` a
+    left **sidebar** up to **25% of the viewport** wide (`width: min(25vw, 240px)`),
+    and **when expanded** it takes the **full vertical height** (`top`/`bottom: 12px`,
+    so a long Legend has room); the brain is pushed **right** by half the panel's
+    width fraction, so it sits centred in the clear area beside the sidebar. The
+    full-height stretch is gated on the body being shown
+    (`#controls:has(#controls-body:not([hidden]))`) so a **collapsed** panel stays a
+    small bottom-left header instead of a tall empty glass box (a browser without
+    `:has` just keeps the bottom-left box: graceful fallback).
 
   Wired in `wireControls` (`updatePanelPan`, gated on the panel actually being
-  visible so `?ui=0` shots are unaffected; recomputed on the `orientation` /
-  `max-width:700px` media-query flips and on a `ResizeObserver` over the panel)
-  and applied via `focus.setScreenOffset` (see `createCameraFocus` below): a
-  render-time **camera view offset** (`PerspectiveCamera.setViewOffset`), eased
-  in/out in `focus.tick`, not a move of the orbit target, so the pan survives
-  rotation/zoom/framing and reverts cleanly (and rescales itself on resize).
+  visible so `?ui=0` shots are unaffected; recomputed on the `orientation`
+  media-query flip and on a `ResizeObserver` over the panel) and applied via
+  `focus.setScreenOffset` (see `createCameraFocus` below): a render-time **camera
+  view offset** (`PerspectiveCamera.setViewOffset`), eased in/out in `focus.tick`,
+  not a move of the orbit target, so the pan survives rotation/zoom/framing and
+  reverts cleanly (and rescales itself on resize).
 - **About** (`#about`, collapsed by default): a short blurb (what neurarium is,
   that it's a WIP, made by Olivier Cornelis + Claude), then an **"open an issue"**
   line (`about.issues`, inviting bug / inaccuracy / feature-request reports) whose

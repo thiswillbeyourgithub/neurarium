@@ -126,6 +126,24 @@
           max-height: 50vh;
         }
       }
+      /* Landscape / horizontal screens: make the panel a left sidebar up to 25% of
+         the viewport wide (capped at its natural 240px), and when it is EXPANDED
+         let it take the FULL vertical height so a long legend has room. js/main.js
+         (updatePanelPan) then pushes the rendered brain RIGHT, into the clear space
+         beside the sidebar, so the panel never hides it. The full-height stretch is
+         gated on the body being shown (`:has`) so a collapsed panel stays a small
+         header at the bottom-left rather than a tall empty glass box; a browser
+         without `:has` just keeps the bottom-left box (graceful fallback). */
+      @media (orientation: landscape) {
+        #controls {
+          width: min(25vw, 240px);
+        }
+        #controls:has(#controls-body:not([hidden])) {
+          top: 12px;
+          bottom: 12px;
+          max-height: none;
+        }
+      }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
          dark glass UI. scrollbar-width covers Firefox, ::-webkit-scrollbar
