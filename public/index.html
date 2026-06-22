@@ -474,8 +474,11 @@
 
       /* Search shown in place of #controls-main while the magnifier is on. */
       #search { margin-top: 12px; }
+      /* The input + a "?" syntax-help button sharing one row. */
+      #search-bar { display: flex; align-items: center; gap: 8px; }
       #search-input {
-        width: 100%;
+        flex: 1 1 auto;
+        min-width: 0;
         padding: 8px 10px;
         font: inherit;
         color: var(--text);
@@ -485,6 +488,26 @@
         outline: none;
       }
       #search-input:focus { border-color: #4e79a7; }
+      #search-help { flex: 0 0 auto; width: 20px; height: 20px; font-size: 12px; }
+      /* The toggled search-syntax help block (the "?" button shows/hides it). */
+      #search-syntax {
+        margin: 8px 0 0;
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        font-size: 11px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      #search-syntax code {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0 4px;
+        border-radius: 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      #search-syntax b { color: var(--text); font-weight: 600; }
       #search-results {
         list-style: none;
         margin: 6px 0 0;
@@ -723,9 +746,23 @@
         color: var(--text);
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         gap: 6px;
         text-transform: capitalize;
       }
+      /* A clickable fact value (a drug's Class / Nomenclature): runs a search. */
+      .fact-link {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        color: #8fb6e6;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-align: left;
+      }
+      .fact-link:hover { color: #b9d4f3; }
       /* Receptor "found in" region list. */
       .info-locations { margin-top: 4px; }
       .info-locations li { font-size: 12px; line-height: 1.5; color: var(--text); }
@@ -1157,7 +1194,11 @@
         <!-- Search shown in lieu of #controls-main while active. Matches both
              structures (by name) and connections (by pathway label). -->
         <div id="search" hidden>
-          <input type="text" id="search-input" data-i18n-attr="placeholder:search.placeholder" autocomplete="off" />
+          <div id="search-bar">
+            <input type="text" id="search-input" data-i18n-attr="placeholder:search.placeholder" autocomplete="off" />
+            <button type="button" id="search-help" class="help-dot" aria-expanded="false" data-i18n-attr="aria-label:search.syntaxLabel, title:search.syntaxLabel">?</button>
+          </div>
+          <div id="search-syntax" hidden data-i18n-html="search.syntax"></div>
           <ul id="search-results"></ul>
         </div>
         </div><!-- #settings-pane -->

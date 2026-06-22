@@ -62,6 +62,31 @@ function foldText(s) {
     .toLowerCase();
 }
 
+// Structured search filters: a leading `field:value` (value optionally quoted)
+// narrows results to a kind of item by one of its fields. The field name is matched
+// accent/case-folded so the English + French names both work. Only drug fields for
+// now (class / nomenclature); a drug panel's clickable Class / Nomenclature builds
+// such a query. The map's values are the canonical field keys the items carry.
+const SEARCH_FIELDS = {
+  class: "class", classe: "class",
+  nbn: "nbn", nomenclature: "nbn",
+};
+
+// Split a raw query into { field, value, rest }: a recognized `field:"value"`
+// prefix (else field=null), plus any trailing free text. value + rest come back
+// already folded; an unrecognized field is left as plain free text.
+function parseSearchQuery(raw) {
+  const m = String(raw).match(/^\s*([\p{L}]+)\s*:\s*(?:"([^"]*)"|(\S*))\s*([\s\S]*)$/u);
+  if (m) {
+    const field = SEARCH_FIELDS[foldText(m[1])];
+    if (field) {
+      const value = foldText(m[2] !== undefined ? m[2] : (m[3] || ""));
+      return { field, value, rest: foldText((m[4] || "").trim()) };
+    }
+  }
+  return { field: null, value: "", rest: foldText(String(raw).trim()) };
+}
+
 // Small status pill, used only for the brief "Loading brain data..." message;
 // failures surface as red error banners (js/error-banner.js), not here.
 function setStatus(message) {
@@ -1114,6 +1139,10 @@ function createInfoPanel(data) {
   // panel's "Interacting drugs" list is clicked. The panel hands back the drug
   // record; the caller focuses it exactly like its Drugs legend row / search pick.
   let onDrugPick = () => {};
+  // Set by the caller (onSearch): run a search query. A drug panel's clickable
+  // Class / Nomenclature values hand back a `field:"value"` query string; the caller
+  // opens the search box pre-filled with it (see wireToolbar.openSearchWithQuery).
+  let onSearchPick = () => {};
   // Resolve a drug binding's `target` key to its merged-list entry, so a binding
   // row can focus that target (a receptor entry shares its id; a non-receptor one
   // its drug_targets key). Only focusable entries become clickable.
@@ -1174,8 +1203,9 @@ function createInfoPanel(data) {
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
   // matches the dots + legend. Empty values are skipped.
-  const addFactRow = (facts, label, value, color) => {
-    if (!value) return;
+  const addFactRow = (facts, label, value, color, opts = {}) => {
+    const links = opts.links && opts.links.filter((lk) => lk && lk.text);
+    if (!value && !(links && links.length)) return;
     const r = el("div", "info-fact");
     r.appendChild(el("span", "fact-label", label));
     const v = el("span", "fact-value");
@@ -1184,7 +1214,22 @@ function createInfoPanel(data) {
       sw.style.background = color;
       v.appendChild(sw);
     }
-    v.appendChild(document.createTextNode(value));
+    if (links && links.length) {
+      // Clickable parts (a drug's Class / Nomenclature) that each run a search,
+      // joined by ", " inside one inline wrapper so the commas flow naturally
+      // (the row itself is a flex container).
+      const wrap = el("span", "fact-links");
+      links.forEach((lk, i) => {
+        if (i) wrap.appendChild(document.createTextNode(", "));
+        const btn = el("button", "fact-link", lk.text);
+        btn.type = "button";
+        btn.addEventListener("click", () => onSearchPick(lk.query));
+        wrap.appendChild(btn);
+      });
+      v.appendChild(wrap);
+    } else {
+      v.appendChild(document.createTextNode(value));
+    }
     r.appendChild(v);
     facts.appendChild(r);
   };
@@ -1469,9 +1514,21 @@ function createInfoPanel(data) {
       }
 
       // Classification facts: the coarse class(es) and the NbN nomenclature line.
+      // Both are clickable: each runs a search (class:"..." / nbn:"...") that filters
+      // to the matching drugs, so you can pivot from one drug to its whole class. The
+      // class list shows one clickable chip per category.
       const facts = el("div", "info-facts");
-      addFactRow(facts, t("drug.class"), drug.categoryLabels.join(", "));
-      addFactRow(facts, t("drug.nomenclature"), drug.nbn);
+      addFactRow(facts, t("drug.class"), null, null, {
+        links: drug.categoryLabels.map((label) => ({
+          text: label,
+          query: `class:"${label}"`,
+        })),
+      });
+      if (drug.nbn) {
+        addFactRow(facts, t("drug.nomenclature"), null, null, {
+          links: [{ text: drug.nbn, query: `nbn:"${drug.nbn}"` }],
+        });
+      }
       if (facts.childElementCount) body.appendChild(facts);
 
       // What it binds: one row per target, coloured by the action's net effect.
@@ -1538,6 +1595,15 @@ function createInfoPanel(data) {
      */
     onDrug(fn) {
       onDrugPick = fn;
+    },
+
+    /**
+     * Register the handler run when a clickable Class / Nomenclature value in a drug
+     * panel is clicked. Called with a `field:"value"` search query string; the caller
+     * opens the search box pre-filled with it.
+     */
+    onSearch(fn) {
+      onSearchPick = fn;
     },
   };
 }
@@ -2388,9 +2454,15 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     }),
     // Focusable drugs (those with a binding profile). The row shows the primary
     // class as a tag; keywords carry the full class list + nomenclature + targets.
+    // `fields` feeds the structured `class:"..."` / `nbn:"..."` filters (the panel's
+    // clickable Class / Nomenclature values), pre-folded for matching.
     ...(data.drugs || []).filter((d) => d.focusable).map((drug) => ({
       label: drug.name + (drug.category ? ` · ${drug.category}` : ""),
       keywords: drug.keywords || "",
+      fields: {
+        class: foldText(drug.categoryLabels.join(" ")),
+        nbn: foldText(drug.nbn || ""),
+      },
       select: () => selectDrug(drug),
     })),
   ];
@@ -2411,11 +2483,28 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   // Rebuild the (capped) result list from the current query. An empty query
   // lists everything so the box doubles as a browsable index.
   function renderResults() {
-    const q = foldText(searchInput.value.trim());
+    // Parse a leading `field:"value"` filter (else plain free text). A field filter
+    // keeps only items carrying that field whose value matches; the trailing free
+    // text still matches the label + keywords.
+    const { field, value, rest } = parseSearchQuery(searchInput.value);
     searchResults.innerHTML = "";
+    // A structured filter (class:"..." / nbn:"...") is a deliberate "list the whole
+    // class" query, so show more rows than the compact name-search list (the results
+    // box scrolls). Plain name search stays capped short.
+    const cap = field ? 40 : 8;
     const matches = items
-      .filter((it) => foldText(`${it.label} ${it.keywords || ""}`).includes(q))
-      .slice(0, 8);
+      .filter((it) => {
+        if (field) {
+          const fv = it.fields && it.fields[field];
+          if (fv === undefined) return false; // only items with this field
+          if (value && !fv.includes(value)) return false;
+        }
+        if (rest && !foldText(`${it.label} ${it.keywords || ""}`).includes(rest)) {
+          return false;
+        }
+        return true;
+      })
+      .slice(0, cap);
     if (matches.length === 0) {
       const li = document.createElement("li");
       li.className = "empty";
@@ -2470,6 +2559,28 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     searchToggle.classList.remove("active");
   }
 
+  // Open search pre-filled with a query (a drug panel's clickable Class /
+  // Nomenclature hands back e.g. `class:"SNRI"`), so the structured filter runs
+  // immediately. Works whether search was open or closed.
+  function openSearchWithQuery(query) {
+    if (searchBox.hidden) openSearch();
+    else tabs.showSettings(); // ensure the Settings pane (which holds the box) shows
+    searchInput.value = query;
+    renderResults();
+    searchInput.focus();
+  }
+
+  // The "?" button toggles the search-syntax help block beneath the bar.
+  const searchHelp = document.getElementById("search-help");
+  const searchSyntax = document.getElementById("search-syntax");
+  if (searchHelp && searchSyntax) {
+    searchHelp.addEventListener("click", () => {
+      const show = searchSyntax.hidden;
+      searchSyntax.hidden = !show;
+      searchHelp.setAttribute("aria-expanded", String(show));
+    });
+  }
+
   searchToggle.addEventListener("click", () => {
     if (searchBox.hidden) openSearch();
     else closeSearch();
@@ -2510,6 +2621,8 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       }
     }
   });
+
+  return { openSearchWithQuery };
 }
 
 /**
@@ -3214,7 +3327,10 @@ async function main() {
   }
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
-  wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug });
+  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug });
+  // A drug panel's clickable Class / Nomenclature opens search with a structured
+  // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
+  info.onSearch(toolbar.openSearchWithQuery);
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
   wireShortcuts(shortcutsHelp, tabs); // single-key shortcuts (n/s/l/c/r/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden

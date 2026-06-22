@@ -71,6 +71,8 @@
       "toolbar.searchAria": "Search structures, connections, receptors and drugs",
       "search.placeholder": "Search structure, connection, receptor/target or drug...",
       "search.noMatch": "No match",
+      "search.syntaxLabel": "Search syntax",
+      "search.syntax": "Type to search by name. Filters: <code>class:&quot;SSRI&quot;</code> drugs of a class, <code>nbn:&quot;…&quot;</code> by nomenclature. Tip: click a drug's <b>Class</b> or <b>Nomenclature</b> to fill one in.",
 
       "shortcuts.title": "Keyboard shortcuts",
       "shortcuts.names": "Toggle all names",
@@ -198,6 +200,8 @@
       "toolbar.searchAria": "Rechercher structures, connexions, récepteurs et médicaments",
       "search.placeholder": "Rechercher une structure, une connexion, un récepteur/cible ou un médicament…",
       "search.noMatch": "Aucun résultat",
+      "search.syntaxLabel": "Syntaxe de recherche",
+      "search.syntax": "Tapez pour rechercher par nom. Filtres : <code>classe:&quot;IRSN&quot;</code> les médicaments d'une classe, <code>nbn:&quot;…&quot;</code> par nomenclature. Astuce : cliquez la <b>Classe</b> ou la <b>Nomenclature</b> d'un médicament pour en remplir un.",
 
       "shortcuts.title": "Raccourcis clavier",
       "shortcuts.names": "Afficher / masquer les noms",
