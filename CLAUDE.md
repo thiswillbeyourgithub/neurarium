@@ -1161,6 +1161,18 @@ as the WIP banner (`js/error-banner.js`):
   and the haystack are passed through `foldText` (lowercase + NFD-decompose then
   strip combining diacritical marks), so e.g. "seroto" finds "Sérotonine" /
   "Serotonin". The Drugs section's filter box uses the same `foldText`.
+  The box also accepts a **structured `field:"value"` filter** (`parseSearchQuery`
+  + the `SEARCH_FIELDS` map in `js/main.js`): a leading `class:"SNRI"` /
+  `nbn:"..."` keeps only the drugs whose class / nomenclature matches (the field
+  name is itself folded, so the French `classe:` / `nomenclature:` work too); a
+  field filter shows more rows than the compact name list (it is a deliberate
+  "list the whole class" query). A drug panel's **Class** and **Nomenclature**
+  values are **clickable** and build exactly such a query (each `data.drugs`
+  search item carries a pre-folded `fields` map; the panel's `info.onSearch` hook,
+  wired to `wireToolbar`'s `openSearchWithQuery`, opens the box pre-filled), so you
+  can pivot from a drug to its whole class. A **"?" button** at the right of the
+  search bar toggles a small **syntax-help block** (`#search-syntax`,
+  `search.syntax` / `search.syntaxLabel` i18n) documenting the filters.
   Connection results carry a hemisphere tag (`R` / `L` / `L↔R`) so the mirrored
   twins stay distinct (`connectionSideTag` in `js/main.js`). **Ctrl/Cmd+F** is a
   shortcut for the same search: a `window` keydown listener intercepts it (so the
@@ -1216,7 +1228,9 @@ as the WIP banner (`js/error-banner.js`):
   *drug* (via `showDrug`, opened from a Drugs legend row / drug search, see
   "Drugs" above: its class, NbN nomenclature, Wikipedia link, description, the
   **Acts on** list of bindings (each an effect-coloured swatch + the target name +
-  the action·note, dimmed when tentative) and the Stahl source).
+  the action·note, dimmed when tentative) and the Stahl source. The **Class** and
+  **Nomenclature** values are clickable, each opening search with a
+  `class:"..."` / `nbn:"..."` filter, see "Controls -> search").
   `createInfoPanel` is pure rendering: opening the matching tab + applying the 3D
   focus is the caller's (`select*`) job, so each show*() is reused unchanged
   whether the detail is first picked or re-shown by clicking its tab. An empty-
