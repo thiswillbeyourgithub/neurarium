@@ -126,9 +126,10 @@
           max-height: 50vh;
         }
       }
-      /* Landscape / horizontal screens: make the panel a left sidebar up to 25% of
-         the viewport wide (capped at its natural 240px), and when it is EXPANDED
-         let it take the FULL vertical height so a long legend has room. js/main.js
+      /* Landscape / horizontal screens: make the panel a left sidebar that grows
+         toward 25% of the viewport (a 240px floor so it is never too thin, a 420px
+         cap so it is never absurd on a wide desktop), and when it is EXPANDED let it
+         take the FULL vertical height so a long legend has room. js/main.js
          (updatePanelPan) then pushes the rendered brain RIGHT, into the clear space
          beside the sidebar, so the panel never hides it. The full-height stretch is
          gated on the body being shown (`:has`) so a collapsed panel stays a small
@@ -136,12 +137,45 @@
          without `:has` just keeps the bottom-left box (graceful fallback). */
       @media (orientation: landscape) {
         #controls {
-          width: min(25vw, 240px);
+          width: clamp(240px, 25vw, 420px);
         }
+        /* The expanded panel is a flex column so an open accordion section can grow
+           to fill the height and push the still-collapsed sections (Drugs, About)
+           down to the bottom, making use of the tall sidebar instead of leaving a
+           gap. The flex chain runs panel -> body -> settings/details pane ->
+           controls-main, each min-height:0 so inner scroll works. */
         #controls:has(#controls-body:not([hidden])) {
           top: 12px;
           bottom: 12px;
           max-height: none;
+          display: flex;
+          flex-direction: column;
+        }
+        #controls:has(#controls-body:not([hidden])) > #controls-body,
+        #controls:has(#controls-body:not([hidden])) #settings-pane:not([hidden]),
+        #controls:has(#controls-body:not([hidden])) #controls-main:not([hidden]),
+        #controls:has(#controls-body:not([hidden])) #details-pane:not([hidden]) {
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+          min-height: 0;
+        }
+        /* The open section (its header carries aria-expanded="true") grows; its body
+           becomes the scroll area, so the sections after it sit at the bottom. */
+        #controls-main > div:has(> .collapse-header[aria-expanded="true"]) {
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+          min-height: 0;
+        }
+        #controls-main > div:has(> .collapse-header[aria-expanded="true"]) > .collapse-header {
+          flex: 0 0 auto;
+        }
+        #controls-main > div:has(> .collapse-header[aria-expanded="true"]) > :not(.collapse-header) {
+          flex: 1 1 auto;
+          min-height: 0;
+          overflow-y: auto;
+          max-height: none; /* override the default 42vh cap so the body fills the tall sidebar */
         }
       }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
