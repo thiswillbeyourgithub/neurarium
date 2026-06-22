@@ -65,14 +65,21 @@ log = logging.getLogger("generate_data")
 # Arrow colour per projection ``kind`` (the functional class): glutamate ->
 # excitatory (red), GABA -> inhibitory (blue), dopamine -> dopaminergic (green),
 # acetylcholine -> cholinergic (gold), neurosecretory/hormonal -> neuroendocrine
-# (purple). The kind selects the arrow colour; the finer transmitter molecule is
-# the projection's ``neurotransmitter`` field.
+# (purple), serotonin -> serotonergic (teal), noradrenaline -> noradrenergic
+# (pink). The kind selects the arrow colour; the finer transmitter molecule is
+# the projection's ``neurotransmitter`` field. The monoamine ascending kinds
+# (dopaminergic / serotonergic / noradrenergic / cholinergic) are what the
+# per-drug "by-mechanism flow" overlay rides: a focused drug lights flow along
+# the projections whose kind matches its target transmitter system (see
+# js/drug-anim.js).
 PROJECTION_COLORS: dict[str, str] = {
     "excitatory": "#e15759",
     "inhibitory": "#4e79a7",
     "dopaminergic": "#59a14f",
     "cholinergic": "#edc948",
     "neuroendocrine": "#b07aa1",
+    "serotonergic": "#76b7b2",
+    "noradrenergic": "#ff9da7",
 }
 
 # The viewer offers two arrow colour modes (a toggle in the panel):
@@ -80,8 +87,9 @@ PROJECTION_COLORS: dict[str, str] = {
 #     COLORS above (today each kind carries exactly one transmitter, so per-kind ==
 #     per-transmitter);
 #   - "sign": a coarse red/blue excitatory-vs-inhibitory view, with the
-#     neuromodulatory kinds (dopaminergic / cholinergic / neuroendocrine) collapsed
-#     to a neutral "modulatory" grey since they have no single excit/inhib sign.
+#     neuromodulatory kinds (dopaminergic / cholinergic / neuroendocrine /
+#     serotonergic / noradrenergic) collapsed to a neutral "modulatory" grey since
+#     they have no single excit/inhib sign.
 # KIND_TO_SIGN folds each functional kind onto its sign; SIGN_COLORS / SIGN_LABELS
 # give the sign its swatch + legend heading. All three are emitted into the meta
 # record so the viewer can recolour + relabel the legend with no hardcoded palette.
@@ -91,6 +99,8 @@ KIND_TO_SIGN: dict[str, str] = {
     "dopaminergic": "modulatory",
     "cholinergic": "modulatory",
     "neuroendocrine": "modulatory",
+    "serotonergic": "modulatory",
+    "noradrenergic": "modulatory",
 }
 SIGN_COLORS: dict[str, str] = {
     "excitatory": "#e15759",  # red, same as the excitatory kind
@@ -494,6 +504,8 @@ FR: dict[str, str] = {
     "dopaminergic": "dopaminergique",
     "cholinergic": "cholinergique",
     "neuroendocrine": "neuroendocrine",
+    "serotonergic": "sérotoninergique",
+    "noradrenergic": "noradrénergique",
     # Sign-mode legend headings (capitalized; distinct from the lowercase kind
     # labels above, which read inline as "Glutamate (excitatory)").
     "Excitatory": "Excitateur",
@@ -585,7 +597,66 @@ FR: dict[str, str] = {
     "Basolateral amygdala to accumbens": "Amygdale basolatérale vers accumbens",
     "Mammillary-hypothalamic link": "Lien mammillo-hypothalamique",
     "Septohypothalamic projection": "Projection septo-hypothalamique",
+    # Ascending monoamine system labels (the brainstem source nuclei)
+    "Ascending serotonergic (prefrontal)":
+        "Sérotoninergique ascendante (préfrontale)",
+    "Ascending serotonergic (hippocampal)":
+        "Sérotoninergique ascendante (hippocampique)",
+    "Ascending serotonergic (amygdala)":
+        "Sérotoninergique ascendante (amygdale)",
+    "Ascending serotonergic (hypothalamic)":
+        "Sérotoninergique ascendante (hypothalamique)",
+    "Ascending noradrenergic (prefrontal)":
+        "Noradrénergique ascendante (préfrontale)",
+    "Ascending noradrenergic (hippocampal)":
+        "Noradrénergique ascendante (hippocampique)",
+    "Ascending noradrenergic (amygdala)":
+        "Noradrénergique ascendante (amygdale)",
+    "Ascending noradrenergic (thalamic)":
+        "Noradrénergique ascendante (thalamique)",
+    "Mesolimbic (VTA)": "Mésolimbique (ATV)",
+    "Mesocortical": "Mésocorticale",
+    "Mesolimbic (amygdala)": "Mésolimbique (amygdale)",
+    "Mesolimbic (hippocampal)": "Mésolimbique (hippocampique)",
     # Projection descriptions
+    "Dorsal raphe serotonin neurons project diffusely to the prefrontal cortex, "
+    "shaping mood and cognition.":
+        "Les neurones sérotoninergiques du raphé dorsal projettent de façon "
+        "diffuse vers le cortex préfrontal, modulant l'humeur et la cognition.",
+    "Median raphe serotonin projects to the hippocampus.":
+        "La sérotonine du raphé médian projette vers l'hippocampe.",
+    "Raphe serotonin modulates the amygdala, tuning emotional reactivity.":
+        "La sérotonine du raphé module l'amygdale, ajustant la réactivité "
+        "émotionnelle.",
+    "Raphe serotonin projects to the hypothalamus, influencing sleep, appetite "
+    "and neuroendocrine rhythms.":
+        "La sérotonine du raphé projette vers l'hypothalamus, influençant le "
+        "sommeil, l'appétit et les rythmes neuroendocriniens.",
+    "Locus coeruleus noradrenaline projects diffusely to the cortex, driving "
+    "arousal and attention.":
+        "La noradrénaline du locus cœruleus projette de façon diffuse vers le "
+        "cortex, soutenant l'éveil et l'attention.",
+    "Locus coeruleus noradrenaline projects to the hippocampus.":
+        "La noradrénaline du locus cœruleus projette vers l'hippocampe.",
+    "Locus coeruleus noradrenaline sharpens amygdala-dependent emotional "
+    "memory.":
+        "La noradrénaline du locus cœruleus renforce la mémoire émotionnelle "
+        "dépendante de l'amygdale.",
+    "Locus coeruleus noradrenaline projects to the thalamus.":
+        "La noradrénaline du locus cœruleus projette vers le thalamus.",
+    "VTA dopamine projects to the nucleus accumbens, the core of the reward "
+    "pathway.":
+        "La dopamine de l'ATV projette vers le noyau accumbens, cœur du circuit "
+        "de la récompense.",
+    "VTA dopamine projects to the prefrontal cortex, supporting motivation and "
+    "executive control.":
+        "La dopamine de l'ATV projette vers le cortex préfrontal, soutenant la "
+        "motivation et le contrôle exécutif.",
+    "VTA dopamine innervates the amygdala.":
+        "La dopamine de l'ATV innerve l'amygdale.",
+    "VTA dopamine projects to the hippocampus, gating reward-related memory.":
+        "La dopamine de l'ATV projette vers l'hippocampe, contrôlant la mémoire "
+        "liée à la récompense.",
     "Sensorimotor frontal cortex drives the putamen, the motor input nucleus "
     "of the basal ganglia.":
         "Le cortex frontal sensorimoteur active le putamen, le noyau d'entrée "
@@ -1278,6 +1349,23 @@ SOURCES: dict[str, dict[str, str]] = {
                     "Struct Funct 214(5-6):655-667.",
         "url": "TODO",
     },
+    "azmitia_segal1978": {
+        "citation": "Azmitia EC, Segal M (1978). An autoradiographic analysis of "
+                    "the differential ascending projections of the dorsal and "
+                    "median raphe nuclei in the rat. J Comp Neurol 179(3):641-668.",
+        "url": "TODO",
+    },
+    "foote1983": {
+        "citation": "Foote SL, Bloom FE, Aston-Jones G (1983). Nucleus locus "
+                    "coeruleus: new evidence of anatomical and physiological "
+                    "specificity. Physiol Rev 63(3):844-914.",
+        "url": "TODO",
+    },
+    "bjorklund_dunnett2007": {
+        "citation": "Bjorklund A, Dunnett SB (2007). Dopamine neuron systems in "
+                    "the brain: an update. Trends Neurosci 30(5):194-202.",
+        "url": "TODO",
+    },
 }
 
 # Directed neuron projections drawn as arrows. Each entry is a connection with
@@ -1508,6 +1596,80 @@ PROJECTIONS: list[dict[str, Any]] = [
                      "eminence / portal system and the posterior hypophyseal "
                      "tract.",
          sources=["swanson_sawchenko1983"]),
+    # --- Ascending monoamine systems: the diffuse projections from the brainstem
+    #     source nuclei (raphe = serotonin, locus coeruleus = noradrenaline, VTA =
+    #     dopamine). These anchor the per-drug "by-mechanism flow" overlay: focusing
+    #     an SSRI lights the serotonergic fan, an SNRI the noradrenergic one, etc.
+    #     (see js/drug-anim.js). raphe is midline, so its arrows mirror only on the
+    #     target side; locus coeruleus / VTA are paired and mirror fully. ---
+    dict(**{"from": "raphe", "to": "frontal_R"},
+         kind="serotonergic", neurotransmitter="Serotonin",
+         label="Ascending serotonergic (prefrontal)",
+         description="Dorsal raphe serotonin neurons project diffusely to the "
+                     "prefrontal cortex, shaping mood and cognition.",
+         sources=["azmitia_segal1978"]),
+    dict(**{"from": "raphe", "to": "hippocampus_R"},
+         kind="serotonergic", neurotransmitter="Serotonin",
+         label="Ascending serotonergic (hippocampal)",
+         description="Median raphe serotonin projects to the hippocampus.",
+         sources=["azmitia_segal1978"]),
+    dict(**{"from": "raphe", "to": "amygdala_R"},
+         kind="serotonergic", neurotransmitter="Serotonin",
+         label="Ascending serotonergic (amygdala)",
+         description="Raphe serotonin modulates the amygdala, tuning emotional "
+                     "reactivity.",
+         sources=["azmitia_segal1978"]),
+    dict(**{"from": "raphe", "to": "hypothalamus_R"},
+         kind="serotonergic", neurotransmitter="Serotonin",
+         label="Ascending serotonergic (hypothalamic)",
+         description="Raphe serotonin projects to the hypothalamus, influencing "
+                     "sleep, appetite and neuroendocrine rhythms.",
+         sources=["azmitia_segal1978"]),
+    dict(**{"from": "locus_coeruleus_R", "to": "frontal_R"},
+         kind="noradrenergic", neurotransmitter="Noradrenaline",
+         label="Ascending noradrenergic (prefrontal)",
+         description="Locus coeruleus noradrenaline projects diffusely to the "
+                     "cortex, driving arousal and attention.",
+         sources=["foote1983"]),
+    dict(**{"from": "locus_coeruleus_R", "to": "hippocampus_R"},
+         kind="noradrenergic", neurotransmitter="Noradrenaline",
+         label="Ascending noradrenergic (hippocampal)",
+         description="Locus coeruleus noradrenaline projects to the hippocampus.",
+         sources=["foote1983"]),
+    dict(**{"from": "locus_coeruleus_R", "to": "amygdala_R"},
+         kind="noradrenergic", neurotransmitter="Noradrenaline",
+         label="Ascending noradrenergic (amygdala)",
+         description="Locus coeruleus noradrenaline sharpens amygdala-dependent "
+                     "emotional memory.",
+         sources=["foote1983"]),
+    dict(**{"from": "locus_coeruleus_R", "to": "thalamus_R"},
+         kind="noradrenergic", neurotransmitter="Noradrenaline",
+         label="Ascending noradrenergic (thalamic)",
+         description="Locus coeruleus noradrenaline projects to the thalamus.",
+         sources=["foote1983"]),
+    dict(**{"from": "vta_R", "to": "accumbens_R"},
+         kind="dopaminergic", neurotransmitter="Dopamine",
+         label="Mesolimbic (VTA)",
+         description="VTA dopamine projects to the nucleus accumbens, the core "
+                     "of the reward pathway.",
+         sources=["bjorklund_dunnett2007", "haber2010"]),
+    dict(**{"from": "vta_R", "to": "frontal_R"},
+         kind="dopaminergic", neurotransmitter="Dopamine",
+         label="Mesocortical",
+         description="VTA dopamine projects to the prefrontal cortex, supporting "
+                     "motivation and executive control.",
+         sources=["bjorklund_dunnett2007"]),
+    dict(**{"from": "vta_R", "to": "amygdala_R"},
+         kind="dopaminergic", neurotransmitter="Dopamine",
+         label="Mesolimbic (amygdala)",
+         description="VTA dopamine innervates the amygdala.",
+         sources=["bjorklund_dunnett2007"]),
+    dict(**{"from": "vta_R", "to": "hippocampus_R"},
+         kind="dopaminergic", neurotransmitter="Dopamine",
+         label="Mesolimbic (hippocampal)",
+         description="VTA dopamine projects to the hippocampus, gating "
+                     "reward-related memory.",
+         sources=["bjorklund_dunnett2007"]),
     # --- Interhemispheric commissures (bidirectional, defined once across the
     #     midline so symmetric=False keeps them from mirroring into duplicates) ---
     dict(**{"from": "frontal_L", "to": "frontal_R"},

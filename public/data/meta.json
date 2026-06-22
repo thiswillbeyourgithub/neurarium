@@ -4,7 +4,9 @@
     "inhibitory": "#4e79a7",
     "dopaminergic": "#59a14f",
     "cholinergic": "#edc948",
-    "neuroendocrine": "#b07aa1"
+    "neuroendocrine": "#b07aa1",
+    "serotonergic": "#76b7b2",
+    "noradrenergic": "#ff9da7"
   },
   "kind_labels": {
     "excitatory": {
@@ -26,6 +28,14 @@
     "neuroendocrine": {
       "en": "neuroendocrine",
       "fr": "neuroendocrine"
+    },
+    "serotonergic": {
+      "en": "serotonergic",
+      "fr": "sérotoninergique"
+    },
+    "noradrenergic": {
+      "en": "noradrenergic",
+      "fr": "noradrénergique"
     }
   },
   "group_labels": {
@@ -59,7 +69,9 @@
     "inhibitory": "inhibitory",
     "dopaminergic": "modulatory",
     "cholinergic": "modulatory",
-    "neuroendocrine": "modulatory"
+    "neuroendocrine": "modulatory",
+    "serotonergic": "modulatory",
+    "noradrenergic": "modulatory"
   },
   "sign_colors": {
     "excitatory": "#e15759",
