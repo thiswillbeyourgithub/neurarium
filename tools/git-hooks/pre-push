@@ -29,4 +29,40 @@ while read -r local_ref local_sha remote_ref remote_sha; do
   fi
 done
 
+# The branch is fine: offer to run the dataset integrity check
+# (tools/check_data.py) before letting the push through. Prompt + answer go
+# to the controlling terminal, because stdin here is git's ref list (consumed
+# by the loop above), not the keyboard. A non-interactive push (no controlling
+# terminal, e.g. a script) silently skips the prompt so it never hangs.
+# Answering "y" runs the check and a *failed* check (data errors) aborts the
+# push; warnings (e.g. the known TODO source urls) pass.
+#
+# The guard actually *opens* /dev/tty for writing rather than testing `-r`: the
+# device node is readable-bit-set even with no controlling terminal, but opening
+# it then fails with ENXIO. The probe runs in a *subshell* `( : >/dev/tty )`
+# because `:` is a POSIX special built-in, so in dash a failed redirection on it
+# would exit the whole shell (killing the hook); the subshell contains that, and
+# its exit status is non-zero exactly when /dev/tty can't be opened, which is the
+# real "are we interactive?" question.
+if [ "$status" -eq 0 ] && ( : >/dev/tty ) 2>/dev/null; then
+  printf 'pre-push: run the data integrity check (tools/check_data.py) first? [y/N] ' >/dev/tty
+  read -r answer </dev/tty
+  case "$answer" in
+    [Yy]*)
+      py=$(command -v python || command -v python3)
+      if [ -z "$py" ]; then
+        echo "pre-push: no python interpreter found; skipping the data check." >/dev/tty
+      elif "$py" tools/check_data.py >/dev/tty 2>&1; then
+        echo "pre-push: data check passed." >/dev/tty
+      else
+        echo "pre-push: data check reported errors; aborting push." >/dev/tty
+        status=1
+      fi
+      ;;
+    *)
+      echo "pre-push: skipping the data check." >/dev/tty
+      ;;
+  esac
+fi
+
 exit "$status"

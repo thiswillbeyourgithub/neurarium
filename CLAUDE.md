@@ -381,6 +381,15 @@ tools/shot.py         Screenshot helper (Playwright): serves public/ with
 tools/serve.py        Stdlib static dev server that sends Cache-Control:no-store
                       so the browser never serves a stale ES module (use instead
                       of `python -m http.server` while developing; see Running).
+tools/check_data.py   Stdlib integrity checker over the emitted public/data/
+                      files (independent of generate_data.py): flags duplicate
+                      ids/names (exact + normalized), unreachable cross-references
+                      (e.g. a drug binding whose target is not a known target),
+                      and TODO placeholders (stray TODOs warned separately from
+                      the known source-url TODO backlog). Exit 0 = no errors
+                      (warnings allowed), 1 = errors. Run `python
+                      tools/check_data.py`; the pre-push hook offers to run it.
+                      See "Data checks".
 tools/drugs_data.json  The drug dataset's authored source (a JSON list, sourced
                       from Stahl's Prescriber's Guide 8th ed.), read by
                       generate_data.py's _load_drugs and validated + emitted to
@@ -389,7 +398,9 @@ tools/drugs_data.json  The drug dataset's authored source (a JSON list, sourced
                       "Drugs" and "Changing the data".
 tools/git-hooks/      Repo-tracked git hooks (single source of truth). Currently
                       pre-push, which refuses to push any branch other than
-                      main. Activated per-clone with
+                      main and then offers (y/N on the terminal) to run
+                      tools/check_data.py before letting the push through.
+                      Activated per-clone with
                       `git config core.hooksPath tools/git-hooks` (see Git hooks).
 ```
 
@@ -523,7 +534,52 @@ must run it once (there is no build/install step otherwise). Current hooks:
 
 - `pre-push`: refuses to push any ref other than `main` (other branches, tags,
   and deletes all crash the push). Deployment here does not go through git, so
-  `main` is the only ref that should ever leave this machine.
+  `main` is the only ref that should ever leave this machine. When the branch is
+  `main`, it then **prompts on the terminal** (`y/N`, default no) to run
+  `tools/check_data.py` (see "Data checks") before completing the push; a `y`
+  runs it and a check that reports **errors** aborts the push (warnings, like the
+  known TODO source urls, pass). The prompt + answer use `/dev/tty` (stdin is
+  git's ref list), and a non-interactive push (no controlling terminal) skips the
+  prompt so automation never hangs.
+
+## Data checks
+
+`tools/check_data.py` is a stdlib-only integrity checker that runs over the
+**emitted** dataset (`public/data/`: `meta.json` + the `.jsonl` files), the
+artifacts the static site actually serves, independently of `generate_data.py`.
+It is a cheap regression guard (the generator already raises on most of these at
+build time, but this also catches generator/data drift and the duplicate/TODO
+classes the generator does not look for). Run it directly:
+
+```
+python tools/check_data.py     # exit 0 = no errors (warnings allowed), 1 = errors
+```
+
+Three families of checks:
+
+- **Duplicates** (per collection: structures / receptors / drugs / circuits /
+  targets, plus projections). An exact duplicate id/key, or two ids that collide
+  once **normalized** (lowercased, every non-alphanumeric stripped, so `mao_a`
+  and `mao-a` both become `maoa`), is an **error**. Two entries whose **display
+  names** collide once normalized is a **warning** (a likely accidental re-entry
+  to eyeball). Projections have no id, so they are checked for duplicate
+  `from -> to` endpoints instead.
+- **Reachability** (referential integrity): every cross-reference must resolve or
+  the detail is **unreachable** in the viewer. The canonical case (the reason
+  this exists): a drug binding whose `target` is not a key of `meta.drug_targets`
+  can never be focused from its panel. Also checks projection endpoints/kind,
+  circuit/receptor/target structure refs, receptor classification keys, target
+  type + region bases, and that every receptor is also a `drug_targets` key. All
+  dangling references are **errors**.
+- **TODOs**: a literal `"TODO"` outside a source url (e.g. a binding `note` left
+  as TODO), plus any focusable target with no `wikipedia` (shown as a TODO pill),
+  is a **warning**; source urls left as `"TODO"` are counted and warned about
+  **separately** (the known, tracked backlog, currently every source). TODOs
+  never fail the run, they only print, so the pre-push gate passes on the current
+  data.
+
+The check functions take the loaded data as plain arguments (not the files), so
+they are unit-testable by feeding crafted records.
 
 ## Internationalization (i18n)
 
@@ -1519,7 +1575,10 @@ To add or edit a drug, see "Changing the data" below.
 2. Run `python tools/generate_data.py` to regenerate `public/data/`
    (`meta.json` + `structures.jsonl` + `projections.jsonl` + `circuits.jsonl` +
    `receptors.jsonl` + `drugs.jsonl` + `shapes/`).
-3. Commit the generator change and the regenerated artifacts together.
+3. Optionally run `python tools/check_data.py` to sanity-check the regenerated
+   files (duplicate ids/names, unreachable references, stray TODOs); see "Data
+   checks". The pre-push hook also offers to run it.
+4. Commit the generator change and the regenerated artifacts together.
 
 The legend (region colors and the projection rows, per-neurotransmitter or
 per-sign depending on the colour-mode toggle) is generated at runtime from the
