@@ -828,12 +828,24 @@ as the WIP banner (`js/error-banner.js`):
   camera->target distance by the same `1 + amount * EXPLODE_STRENGTH` factor the
   layout uses, applied as an incremental ratio so any manual zoom is preserved.
 - **Intro animation**: on a plain page load the regions start fully blown out
-  and glide back together into the assembled whole over a swift, eased motion
-  (`createIntroAnimation` in `js/main.js`, advanced once per frame in the render
-  loop; duration `INTRO_DURATION_MS`, easeInOutCubic). It moves the explode
-  slider in sync, is cancelled the moment the user grabs that slider, and is
-  skipped when `?explode=` is pinned (deep links / headless screenshots) so the
-  requested static amount is honored.
+  and glide back together into the assembled whole, *exactly like dragging the
+  Separate slider from 1 to 0*: the camera follows the spread (`zoomForExplode`,
+  so the brain holds a steady apparent size) and at the same time sweeps
+  `INTRO_ROTATION_TURNS` of a revolution (0.75), both finishing together on the
+  resting view (`createIntroAnimation` in `js/main.js`, advanced once per frame
+  in the render loop; duration `INTRO_DURATION_MS`, easeInOutCubic). It drives
+  the explode slider in sync, owns the rotation itself (so OrbitControls'
+  auto-rotate is suspended for the duration and restored at the end), is
+  cancelled the moment the user grabs that slider, and is skipped when
+  `?explode=` is pinned (deep links / headless screenshots) so the requested
+  static amount is honored. The resting framing is deliberately a touch pulled
+  back (the default `camera.position` and a `maxDistance` comfortably beyond the
+  full spread so the intro's zoom-out isn't clamped). When the **dev / WIP
+  banner** is up (`window.__APP_CONFIG__.dev === "1"`, the same flag
+  `js/dev-banner.js` reads), the brain is presented a little lower and further
+  back (`DEV_BANNER_DROP` lifts the look-point so it renders below the banner,
+  `DEV_BANNER_UNZOOM` pulls the camera out), applied before the intro captures
+  the pose so it settles there.
 - **Transparency** slider: the value is the material opacity (left = more
   transparent); depth-writing is disabled while translucent so overlapping
   regions blend. Opacity is owned by the selection controller

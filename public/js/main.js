@@ -35,9 +35,20 @@ const { t } = window.__I18N__;
 const EXPLODE_STRENGTH = 2.5;
 
 // Intro animation: on a plain page load the brain starts fully blown out and
-// settles together into the assembled whole over this many milliseconds. Tuned
-// to feel swift but legible; eased so it departs and arrives smoothly.
-const INTRO_DURATION_MS = 1700;
+// settles together into the assembled whole over this many milliseconds, the
+// camera pulling in from the spread (like dragging the Separate slider 1 -> 0)
+// while it sweeps INTRO_ROTATION_TURNS of a turn and lands on the resting view.
+// Tuned to feel swift but legible; eased so it departs and arrives smoothly.
+const INTRO_DURATION_MS = 2200;
+// How much of a full turn the camera sweeps during the intro before settling on
+// the resting orientation (0.75 = three-quarters of a revolution).
+const INTRO_ROTATION_TURNS = 0.75;
+// When the dev / WIP banner is shown (DEV=1 container), the brain is presented a
+// touch lower and further back so it sits clear below the banner: the resting
+// camera is pulled out by this factor and the look-point lifted by this many
+// world units (so the brain renders lower in the frame).
+const DEV_BANNER_UNZOOM = 1.15;
+const DEV_BANNER_DROP = 1.6;
 
 // Small status pill, used only for the brief "Loading brain data..." message;
 // failures surface as red error banners (js/error-banner.js), not here.
@@ -60,7 +71,9 @@ function initThree() {
     0.1,
     1000,
   );
-  camera.position.set(9, 4.5, 13);
+  // Pulled back from the old (9, 4.5, 13): the default view was a touch too
+  // zoomed in, so the resting framing leaves a little more room around the brain.
+  camera.position.set(11, 5.5, 16);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -80,7 +93,9 @@ function initThree() {
   controls.dampingFactor = 0.08;
   controls.rotateSpeed = 0.9;
   controls.minDistance = 4;
-  controls.maxDistance = 60;
+  // Comfortably beyond the fully-separated spread so the intro's zoom-out (the
+  // resting distance times the explode spread factor) isn't clamped mid-greeting.
+  controls.maxDistance = 75;
   // Pan in screen space so a two-finger drag slides the brain across the view
   // (rather than along world axes), which feels natural on touch.
   controls.enablePan = true;
@@ -177,44 +192,84 @@ function createNearCull({ meshes, camera, controls }) {
 
 /**
  * Auto-play intro: start the regions fully blown out and let them glide back
- * together into the assembled brain. Drives the explode amount (and the slider,
- * so the UI stays in sync) each frame; advanced once per frame by `tick()` from
- * the render loop. `cancel()` stops it so a manual grab of the explode slider
- * always wins. Uses easeInOutCubic for a smooth departure + gentle settle.
- * @param {{meshes:THREE.Mesh[], arrows:object[], slider:HTMLInputElement}} deps
+ * together into the assembled brain, exactly like dragging the Separate slider
+ * from 1 to 0. The camera follows the spread (zoomForExplode, so the brain keeps
+ * a steady apparent size) and at the same time sweeps INTRO_ROTATION_TURNS of a
+ * revolution, both finishing together on the resting view. Advanced once per
+ * frame by `tick()` from the render loop. `cancel()` stops it (and restores
+ * auto-rotate) so a manual grab of the explode slider always wins. Uses
+ * easeInOutCubic for a smooth departure + gentle settle.
+ * @param {{meshes:THREE.Mesh[], arrows:object[], slider:HTMLInputElement,
+ *   camera:THREE.PerspectiveCamera, controls:OrbitControls,
+ *   focus:ReturnType<typeof createCameraFocus>}} deps
  */
-function createIntroAnimation({ meshes, arrows, slider }) {
+function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus }) {
   const FROM = 1; // fully blown out (slider max)
   const TO = 0; // assembled whole
+  const SWEEP = INTRO_ROTATION_TURNS * Math.PI * 2; // radians to sweep in
   let startTime = null; // set on the first tick so load jank isn't counted
   let running = false;
+  let restAzimuth = 0; // azimuth/polar of the resting pose to land on at t=1
+  let restPolar = 0;
+  let wasAutoRotate = false; // restored when the intro ends / is cancelled
+  const tmpOffset = new THREE.Vector3();
+  const sph = new THREE.Spherical();
 
   // easeInOutCubic: starts and ends at rest, fastest through the middle.
   const ease = (t) =>
     t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  const apply = (amount) => {
+  const applyAmount = (amount) => {
     // Set the slider directly (no input event) so this doesn't trip the
     // user-input cancel listener wired alongside it.
     slider.value = String(amount);
     applyExplode(meshes, amount, arrows);
   };
 
+  // We drive the rotation ourselves during the intro, so OrbitControls' own
+  // auto-rotate must be off until we hand back at the end (or on cancel).
+  const finish = () => {
+    running = false;
+    controls.autoRotate = wasAutoRotate;
+  };
+
   return {
     start() {
       running = true;
       startTime = null;
-      apply(FROM);
+      wasAutoRotate = controls.autoRotate;
+      controls.autoRotate = false;
+      // Capture the resting camera azimuth/polar so the sweep lands exactly on
+      // the default view; only azimuth + distance animate (polar held fixed).
+      tmpOffset.copy(camera.position).sub(controls.target);
+      sph.setFromVector3(tmpOffset);
+      restAzimuth = sph.theta;
+      restPolar = sph.phi;
+      applyAmount(FROM);
     },
     cancel() {
-      running = false;
+      if (running) finish();
     },
     tick() {
       if (!running) return;
       if (startTime === null) startTime = performance.now();
       const t = Math.min(1, (performance.now() - startTime) / INTRO_DURATION_MS);
-      apply(FROM + (TO - FROM) * ease(t));
-      if (t >= 1) running = false;
+      const e = ease(t);
+      const amount = FROM + (TO - FROM) * e;
+      applyAmount(amount);
+      // Camera distance tracks the spread (telescoping back to the resting
+      // distance at amount 0), exactly like the Separate slider does.
+      focus.zoomForExplode(amount);
+      // Sweep the azimuth in toward the resting angle; hold the polar + the
+      // distance zoomForExplode just set.
+      tmpOffset.copy(camera.position).sub(controls.target);
+      sph.setFromVector3(tmpOffset);
+      sph.theta = restAzimuth - (1 - e) * SWEEP;
+      sph.phi = restPolar;
+      sph.makeSafe();
+      tmpOffset.setFromSpherical(sph);
+      camera.position.copy(controls.target).add(tmpOffset);
+      if (t >= 1) finish();
     },
   };
 }
@@ -2662,9 +2717,19 @@ async function main() {
   // cancels it so a manual drag wins. Skipped when ?explode= is pinned (deep
   // links / headless screenshots) so the requested static amount is honored.
   const explodeSlider = document.getElementById("explode");
-  const intro = createIntroAnimation({ meshes, arrows, slider: explodeSlider });
+  const intro = createIntroAnimation(
+    { meshes, arrows, slider: explodeSlider, camera, controls, focus });
   explodeSlider.addEventListener("input", () => intro.cancel());
   if (!new URLSearchParams(window.location.search).has("explode")) {
+    // When the dev / WIP banner is up (DEV=1 container; same flag dev-banner.js
+    // reads), present the brain a little lower + further back so it sits clear
+    // below the banner. Done before intro.start() so the captured resting pose
+    // (what the intro settles on) already includes it.
+    if ((window.__APP_CONFIG__ || {}).dev === "1") {
+      camera.position.multiplyScalar(DEV_BANNER_UNZOOM);
+      controls.target.y += DEV_BANNER_DROP;
+      controls.update();
+    }
     intro.start();
   }
 
