@@ -80,9 +80,17 @@ export function createDrugAnimation(_deps = {}) {
           const cloud = buildGemCloud(mesh, binding.effectColor);
           if (!cloud) continue;
           // A surface wash under the dots, looping in the same effect colour: a
-          // ripple of light spreading from the region's centre out across its face,
-          // so the region itself feels lit, not just peppered (see surface-wash.js).
+          // ripple of light sweeping across the region's face, so the region itself
+          // feels lit, not just peppered (see surface-wash.js). Seed the origin at
+          // the region's top pole (centre + radius up) rather than its centre: from
+          // the centre every surface point is ~equidistant, so the wavefront would
+          // bloom the whole surface at once instead of sweeping across it.
           const wash = buildWashShell(mesh, binding.effectColor);
+          if (wash) {
+            const origin = wash.center.clone();
+            origin.y += wash.maxRadius / 2; // maxRadius == 2 * bounding radius
+            wash.setOrigin(origin);
+          }
           // Spread the starting phases so the regions don't all pulse in lockstep
           // (a wave of activity reads better than a single global blink).
           clouds.push({
