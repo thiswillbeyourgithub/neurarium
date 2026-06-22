@@ -96,7 +96,8 @@ function localize(field) {
  *   `categoryLabels` (+ primary `category`), and resolved `bindings` (each binding
  *   carrying `targetName`, `actionLabel`, net `effect` + `effectColor`/`effectLabel`,
  *   localized `note`, and the concrete `structureIds` it lights), the union
- *   `structureIds` the focus dims to, a `focusable` flag and search `keywords`.
+ *   `structureIds` the focus dims to, a `focusable` flag and search `keywords`,
+ *   plus a `structureImage` (the vendored molecular-structure SVG path, or null).
  * @property {Map<string, {drug: object, binding: object}[]>} drugsByTarget
  *   Reverse index: a target id (a receptor id or a drug_targets key, matching each
  *   `targets` entry's id) -> the drugs that act on it, each paired with its resolved
@@ -243,6 +244,10 @@ export async function loadBrainData(dataDir = "data") {
     d.nbn = d.nbn ? localize(d.nbn) : "";
     d.categoryLabels = (d.categories || []).map((c) => drugCategoryLabels[c] || c);
     d.category = d.categoryLabels[0] || "";
+    // Vendored molecular-structure SVG path (data/molecules/<id>.svg), set by the
+    // generator only when the file was fetched; the drug panel embeds it as an
+    // <img>. Null when no SVG is available (no image shown).
+    d.structureImage = d.structure_image || null;
     const affected = new Set();
     d.bindings = (d.bindings || []).map((b) => {
       const tgt = drugTargets[b.target] || {};

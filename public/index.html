@@ -858,6 +858,21 @@
       .info-connections .conn-label { flex: 1; }
       .info-connections .conn-dir { color: var(--muted); }
 
+      /* Drug panel: the molecular-structure SVG (vendored from Wikipedia). The
+         art is black/grey line work on a transparent background, so it is
+         inverted to read as light strokes on the dark panel (the chosen
+         treatment); any colored atom labels shift hue, an accepted tradeoff.
+         Bounded so a wide molecule (long chain) still fits the narrow panel. */
+      .mol-structure {
+        margin: 6px 0 12px;
+        text-align: center;
+      }
+      .mol-structure img {
+        max-width: 100%;
+        max-height: 160px;
+        filter: invert(1);
+      }
+
       /* Drug panel: the "Acts on" molecular-target list. Each row is the
          effect swatch + the target name + (action · note); a speculative
          binding is dimmed + italic. */

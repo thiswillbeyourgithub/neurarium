@@ -1527,6 +1527,19 @@ function createInfoPanel(data) {
       body.appendChild(el("h2", "info-title", drug.name));
       if (drug.category) body.appendChild(el("div", "info-group", drug.category));
 
+      // Vendored molecular-structure SVG (from Wikipedia, see tools/fetch_molecules.py).
+      // It is black/grey line art on transparent; the .mol-structure CSS inverts it
+      // to read as light strokes on the dark panel. Absent when no SVG was fetched.
+      if (drug.structureImage) {
+        const fig = el("figure", "mol-structure");
+        const img = document.createElement("img");
+        img.src = drug.structureImage;
+        img.alt = t("drug.structureAlt", { name: drug.name });
+        img.decoding = "async";
+        fig.appendChild(img);
+        body.appendChild(fig);
+      }
+
       appendWiki(drug.wikipedia);
 
       if (drug.description) {
