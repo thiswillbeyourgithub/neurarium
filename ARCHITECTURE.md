@@ -117,13 +117,17 @@ the `main.js` entry point.
             ── imports ──►  arrows.js   (buildArrows: curved tube+cone per
                                         projection, colour from projection.color)
             ── imports ──►  labels.js   (createLabels: CSS2D floating names)
-            ── imports ──►  circuit-anim.js / circuit-schedule.js (traveling pulse)
+            ── imports ──►  circuit-anim.js / circuit-schedule.js (traveling pulse
+                                        + a wash-of-light echo on each target node)
             ── imports ──►  receptor-markers.js (createReceptorMarkers: glowing
                                         surface dots for a focused receptor;
                                         exports buildGemCloud, reused by drug-anim)
             ── imports ──►  drug-anim.js (createDrugAnimation: effect-coloured
-                                        pulsing gem dots for a focused drug)
+                                        pulsing gem dots + a surface wash per region)
             ── imports ──►  three + OrbitControls (vendored)
+
+   circuit-anim.js, drug-anim.js ── import ──►  surface-wash.js (buildWashShell: the
+                                        shared shader "wash of light" over a surface)
 ```
 
 `data.js`, `shapes.js`, and `arrows.js` have **no dependency on each other**; they
@@ -177,7 +181,12 @@ concern:
   off the selection state like the circuit pulse.
 - **Drug animation** (`drug-anim.js`): effect-coloured gem dots (boost/block/
   modulate) pulsing over the regions a focused drug's targets sit in, reusing the
-  receptor `buildGemCloud`; watched off the selection state the same way.
+  receptor `buildGemCloud`, with a looping **surface wash** under them in the same
+  effect colour; watched off the selection state the same way.
+- **Surface wash** (`surface-wash.js`): the shared shader "wash of light" that
+  spreads a ripple across a structure's surface from an origin point (a thin shell
+  reusing the mesh geometry, additive, no added triangles). Drives the circuit node
+  echo (seeded at the bead's impact point) and the per-drug region glow.
 - **Camera focus** (`createCameraFocus`): smooth tweens for reset / double-click /
   search framing, advanced once per frame and cancelled the moment the user grabs
   the controls.

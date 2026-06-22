@@ -277,7 +277,10 @@ js/circuit-anim.js    Rendering half of that animation (createCircuitAnimation):
                       turns each arrow's scheduled slot into a glowing additive
                       bead riding the arrow's live curve (arrow.curve, exposed by
                       js/arrows.js) from source to target, looping so a curated
-                      loop reads as signal flowing around it. Runs only while a
+                      loop reads as signal flowing around it. As each bead lands it
+                      fires a "wash echo" over the target region (a wash of light
+                      spreading from the impact point across its surface, in the
+                      pathway's colour, via js/surface-wash.js). Runs only while a
                       circuit is isolated; ticked in the render loop.
 js/receptor-markers.js  Receptor / target "expression dots"
                       (createReceptorMarkers): when a receptor *or* a non-receptor
@@ -291,7 +294,7 @@ js/receptor-markers.js  Receptor / target "expression dots"
                       peppered). Each cloud is a THREE.Points sampled from the
                       structure mesh's own geometry and parented to it (so the dots
                       track its explode/mirror transform and vanish when it is
-                      hidden, like the selection halo + circuit node-flash shells);
+                      hidden, like the selection halo + circuit wash-echo shells);
                       colour = the receptor's sign colour (a target's type colour),
                       gently pulsed. One
                       controller per scene; ticked in the render loop. The single-
@@ -305,11 +308,27 @@ js/drug-anim.js       Per-drug "what it does to the brain" animation
                       bindings lights, coloured by that binding's net effect
                       (boost emerald / block rose / modulate violet), and pulses
                       each cloud per effect (boost fast/bright/swelling, block
-                      slow/dim, modulate in between). It owns only the dots (the
-                      dimming of the rest of the brain is the selection
+                      slow/dim, modulate in between). Under the dots each region
+                      also breathes a "surface wash" in the same effect colour (a
+                      looping ripple of light, via js/surface-wash.js) so the region
+                      itself feels lit, not just peppered. It owns only the dots +
+                      washes (the dimming of the rest of the brain is the selection
                       controller's setCircuit, like a receptor focus). One
                       controller per scene; ticked in the render loop; stopped off
                       the selection state via `matches`. See "Drugs" below.
+js/surface-wash.js    Shared "wash of light" primitive (buildWashShell +
+                      washStrength): a thin shell reusing a structure mesh's own
+                      geometry (the same trick as the selection halo / receptor
+                      dots), parented to it so it tracks the explode/mirror
+                      transform and hides with it, rendered additive + FrontSide. A
+                      small fragment shader lights a soft wavefront ring expanding
+                      from a local-space origin with a glowing trail behind it;
+                      driving the radius out and fading the strength plays one
+                      ripple. Pure colour, no added geometry (like the cortex
+                      swirl). Used by js/circuit-anim.js (the node echo, seeded at
+                      the bead's impact point in the pathway's colour) and
+                      js/drug-anim.js (the per-region effect-coloured glow). No dep
+                      beyond three.js.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
@@ -1348,12 +1367,19 @@ static set of arrows. It is split in two on purpose:
   arc and advance at `speed` x the slot rate (> 1, so the volley lands early and
   reads as a burst then a pause); `scale`/`bright` size + brighten them. A bead
   hides while its arrow is hidden (so the global "Hide projections" toggle clears
-  the beads too). As a bead **lands**, its target region briefly brightens (a
-  *node flash*): a back-side additive shell per target node (the same geometry-
-  reuse trick as the selection halo, but owned here and sized a touch larger, so
-  it reads on top of any steady isolate halo) whose opacity is topped up as the
-  bead reaches the surface and then decays (`FLASH_DECAY_MS`), so the hand-off
-  from arrow to arrow around the loop is legible, not just the moving beads.
+  the beads too). As a bead **lands**, it fires a **wash echo** over its target
+  region: a wash of light spreads from the exact impact point across that region's
+  surface, in the pathway's own colour, then dissolves (`WASH_MS`), so the region
+  reads as lighting up *from where the signal arrived* rather than blinking inert.
+  It is the shared **surface-wash** primitive (`buildWashShell` /
+  `js/surface-wash.js`, also used by the per-drug glow): one wash shell per target
+  node (parented to it, reusing its geometry, like the selection halo), seeded with
+  the bead's impact point (`arrow.curve.getPoint(1)`, mapped into the target's
+  local frame) and recoloured per landing. It is retriggered by whichever bead last
+  landed once the previous ripple has finished (so a volley's first bead fires the
+  echo and the next loop's bead re-fires it), and its brightness keys off the sign's
+  burst brightness, so excitatory volleys echo harder. The hand-off from arrow to
+  arrow around the loop is legible, not just the moving beads.
 
 **Lifecycle (in `js/main.js`).** The circuit legend row calls
 `selection.setCircuit(...)` then `circuitAnim.play(circuitArrows)`. Stopping is
@@ -1401,7 +1427,7 @@ each receptor's Wikipedia article. Split, like the rest, into data and rendering
   rather than stains/spots; count scaled per region by surface area), each cloud
   sampled from the structure mesh's own geometry and parented to it, so the dots
   track the explode/mirror transform and vanish when the mesh is hidden, exactly
-  like the selection halo + circuit node-flash shells). The info panel switches to
+  like the selection halo + circuit wash-echo shells). The info panel switches to
   the receptor view (`showReceptor`). The markers are stopped off the selection
   state, the same pattern as the circuit pulse: a `selection.onIsolate` watcher
   hides them the moment the isolate set is no longer exactly the receptor's region
@@ -1481,7 +1507,11 @@ rendering:
   `createDrugAnimation.show(drug, meshById)`, which scatters a gem cloud
   (`buildGemCloud`, reused from `js/receptor-markers.js`) over each binding's
   regions coloured by that binding's net-effect colour, pulsing per effect (boost
-  fast/bright/swelling, block slow/dim, modulate in between). The info panel
+  fast/bright/swelling, block slow/dim, modulate in between), and under the dots
+  breathes a looping **surface wash** in the same effect colour (`buildWashShell` /
+  `js/surface-wash.js`: a ripple of light spreading from each region's centre, on
+  the same per-effect period, scaled by a per-effect `washGain`) so the region
+  itself feels lit, not just peppered. The info panel
   switches to the drug view (`createInfoPanel.showDrug`: the molecular-structure
   image (see "Molecule images"), the class, the NbN
   nomenclature, a Wikipedia link, the description, the **Acts on** list (one row per
