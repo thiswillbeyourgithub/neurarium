@@ -50,6 +50,18 @@ const INTRO_ROTATION_TURNS = 0.75;
 const DEV_BANNER_UNZOOM = 1.15;
 const DEV_BANNER_DROP = 1.6;
 
+// Fold a string for accent- + case-insensitive matching: lowercase, then strip
+// combining diacritical marks (NFD decomposes e.g. "é" -> "e" + U+0301, "ç" ->
+// "c" + U+0327, which we then drop). So the search/filter find "sérotonine" when
+// the user types "seroto", and ignore case. Used by the toolbar search + the drug
+// filter so both behave the same.
+function foldText(s) {
+  return String(s)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 // Small status pill, used only for the brief "Loading brain data..." message;
 // failures surface as red error banners (js/error-banner.js), not here.
 function setStatus(message) {
@@ -1610,7 +1622,7 @@ function buildDrugLegend(data, onPick) {
       const row = addLegendItem(
         container, drugSwatchColor(drug, effectColors), drug.name, true);
       row.classList.add("drug-item");
-      row._haystack = `${drug.name} ${drug.keywords}`.toLowerCase();
+      row._haystack = foldText(`${drug.name} ${drug.keywords}`);
       if (drug.focusable) {
         row.classList.add("clickable");
         row.title = drug.categoryLabels.join(" · ");
@@ -1633,7 +1645,7 @@ function buildDrugLegend(data, onPick) {
   container.appendChild(empty);
 
   const applyFilter = () => {
-    const q = (filterInput?.value || "").trim().toLowerCase();
+    const q = foldText((filterInput?.value || "").trim());
     let anyVisible = false;
     for (const g of groups) {
       let groupVisible = false;
@@ -2328,10 +2340,10 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   // Rebuild the (capped) result list from the current query. An empty query
   // lists everything so the box doubles as a browsable index.
   function renderResults() {
-    const q = searchInput.value.trim().toLowerCase();
+    const q = foldText(searchInput.value.trim());
     searchResults.innerHTML = "";
     const matches = items
-      .filter((it) => `${it.label} ${it.keywords || ""}`.toLowerCase().includes(q))
+      .filter((it) => foldText(`${it.label} ${it.keywords || ""}`).includes(q))
       .slice(0, 8);
     if (matches.length === 0) {
       const li = document.createElement("li");
