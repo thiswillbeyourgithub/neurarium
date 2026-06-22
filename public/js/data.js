@@ -89,7 +89,8 @@ function localize(field) {
  *   vesicle_protein / receptor_group), `name`, `system` (grouping family, or null),
  *   `swatchColor`, `structureIds`, `focusable` + `keywords`. A "receptor" entry
  *   points back at its receptor record (`receptor`); a non-receptor one adds
- *   `typeLabel` / `systemLabel` / `wikipedia` / `locationNames` for its panel.
+ *   `typeLabel` / `systemLabel` / `wikipedia` / `locationNames` (+ the parallel
+ *   `locationBases` base ids, so each panel region row can jump to its structure).
  * @property {object[]} drugs  Drug records (from drugs.jsonl, sourced from Stahl's
  *   Prescriber's Guide). Each is augmented with localized `description` / `nbn`,
  *   `categoryLabels` (+ primary `category`), and resolved `bindings` (each binding
@@ -327,6 +328,10 @@ export async function loadBrainData(dataDir = "data") {
       systemLabel,
       wikipedia: tgt.wikipedia || "",
       locationNames: (tgt.regions || []).map((b) => baseName.get(b) || b),
+      // The raw base ids parallel to locationNames, so the panel can make each
+      // "Found in" row jump to that structure (the receptor records keep their own
+      // `locations` for the same purpose).
+      locationBases: (tgt.regions || []).slice(),
       keywords: [typeLabel, systemLabel].filter(Boolean).join(" "),
     });
   }

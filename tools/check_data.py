@@ -28,7 +28,10 @@ Three families of checks:
 2. **Reachability** (referential integrity). Every cross-reference must resolve
    or the detail is **unreachable** in the viewer. The canonical case: a drug
    binding whose ``target`` is not a key of ``meta.drug_targets`` can never be
-   focused from its panel. All dangling references are **errors**.
+   focused from its panel. This also covers every receptor ``location`` / target
+   ``region``: it must name a structure **base** present in the atlas, otherwise
+   its "Found in" row in the panel would point at nothing and so be **unclickable**.
+   All dangling references are **errors**.
 
 3. **TODOs**. A literal ``"TODO"`` placeholder anywhere **outside** a source url
    (e.g. a binding ``note`` left as TODO), plus any focusable target with no
@@ -233,7 +236,9 @@ def check_reachability(report, meta, structures, projections, circuits, receptor
                     f"receptor {rid}: {field} {receptor.get(field)!r} is not in {pool}")
         for loc in receptor.get("locations", []):
             if loc not in base_ids:
-                report.error(f"receptor {rid}: location {loc!r} is not a structure base")
+                report.error(f"receptor {rid}: location {loc!r} is not a structure "
+                             f"base (not in the atlas, so its panel 'Found in' row "
+                             f"would not be clickable)")
         # The merged Receptors & targets browse list expects every receptor to
         # also be a drug_targets key (a binding can target it directly).
         if rid not in targets:
@@ -244,7 +249,9 @@ def check_reachability(report, meta, structures, projections, circuits, receptor
                 f"target {key}: type {target.get('type')!r} is not in target_type_labels")
         for region in target.get("regions", []):
             if region not in base_ids:
-                report.error(f"target {key}: region {region!r} is not a structure base")
+                report.error(f"target {key}: region {region!r} is not a structure "
+                             f"base (not in the atlas, so its panel 'Found in' row "
+                             f"would not be clickable)")
         linked = target.get("receptor")
         if linked is not None and linked not in receptor_ids:
             report.error(f"target {key}: linked receptor {linked!r} is not a receptor id")
@@ -269,7 +276,9 @@ def check_reachability(report, meta, structures, projections, circuits, receptor
 
     if report.errors == before:
         report.ok("every cross-reference (drug -> target/action/category, projection "
-                  "-> structure/kind, circuit/receptor/target -> structure) resolves")
+                  "-> structure/kind, circuit/receptor/target -> structure) resolves; "
+                  "every receptor/target region is in the atlas (its panel 'Found in' "
+                  "row is clickable)")
 
 
 # --------------------------------------------------------------------------- #

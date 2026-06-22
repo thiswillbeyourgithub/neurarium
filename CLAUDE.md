@@ -214,7 +214,9 @@ js/data.js            Fetches the per-type data files (meta.json + structures/
                       receptor's sign colour, a target's type colour), expanded
                       `structureIds`, `focusable` + `keywords`; a receptor entry
                       points back at its record, a non-receptor one adds
-                      typeLabel/systemLabel/wikipedia/locationNames for showTarget.
+                      typeLabel/systemLabel/wikipedia/locationNames (+ the parallel
+                      locationBases ids, so each panel region row jumps to its
+                      structure) for showTarget.
                       `meta` carries
                       {projectionColors, groupLabels, ..., receptorFamilyLabels,
                       receptorClassLabels, synapticLabels, targetTypeLabels,
@@ -569,8 +571,10 @@ Three families of checks:
   this exists): a drug binding whose `target` is not a key of `meta.drug_targets`
   can never be focused from its panel. Also checks projection endpoints/kind,
   circuit/receptor/target structure refs, receptor classification keys, target
-  type + region bases, and that every receptor is also a `drug_targets` key. All
-  dangling references are **errors**.
+  type + region bases, and that every receptor is also a `drug_targets` key. This
+  region-base check is also what guarantees the receptor/target panels' **"Found
+  in" rows are clickable**: a `location` / `region` that names no atlas structure
+  base is flagged as unclickable. All dangling references are **errors**.
 - **TODOs**: a literal `"TODO"` outside a source url (e.g. a binding `note` left
   as TODO), plus any focusable target with no `wikipedia` (shown as a TODO pill),
   is a **warning**; source urls left as `"TODO"` are counted and warned about
@@ -1018,7 +1022,14 @@ as the WIP banner (`js/error-banner.js`):
   facts and the region list, or "Throughout the brain" for a ubiquitous receptor);
   a non-receptor target opens the lighter `showTarget` (its system, a Wikipedia
   link or a TODO pill until one is gathered, the type + system facts, and the
-  region list). Clicking the active row again clears it; switching to any other
+  region list). In both, each **"Found in" region row is clickable** and **jumps to
+  that structure** (frames + halos it + opens its detail tab, like a structure
+  search pick): the panel's `locationList` helper makes a row clickable when its
+  base id resolves to a modeled structure and hands the base back via the
+  `info.onStructure` hook, which `js/main.js` resolves to the midline / `_R` / `_L`
+  mesh and runs `selectStructure`. (`tools/check_data.py` enforces that every
+  receptor `location` / target `region` resolves, so rows are clickable in shipped
+  data.) Clicking the active row again clears it; switching to any other
   focus drops the dots. A **stub** receptor (no CNS role: empty locations) or an
   unlocated target renders muted and is not clickable. The dimming reuses
   `selection.setCircuit(regionMeshes, [])` (no arrow pin, so the pathways fade and

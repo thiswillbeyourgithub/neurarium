@@ -1083,6 +1083,10 @@ function createInfoPanel(data) {
   // clicked. The panel hands back the resolved target entry; the caller focuses it
   // exactly like its "Receptors & targets" legend row.
   let onTargetPick = () => {};
+  // Set by the caller (onStructure): what to do when a region row in a receptor /
+  // target panel's "Found in" list is clicked. The panel hands back the structure
+  // *base* id; the caller resolves it to a mesh and jumps to that structure.
+  let onStructurePick = () => {};
   // Resolve a drug binding's `target` key to its merged-list entry, so a binding
   // row can focus that target (a receptor entry shares its id; a non-receptor one
   // its drug_targets key). Only focusable entries become clickable.
@@ -1093,6 +1097,32 @@ function createInfoPanel(data) {
     if (className) node.className = className;
     if (text !== undefined) node.textContent = text;
     return node;
+  };
+
+  // True when a structure *base* id maps to a modeled structure (the base itself
+  // for a midline form, or its _R / _L hemispheres), i.e. it is reachable in the
+  // atlas and so can be jumped to. tools/check_data.py enforces that every
+  // receptor / target location resolves, so an unresolved base should not occur in
+  // shipped data; the panel still degrades to plain (non-clickable) text if one does.
+  const baseResolves = (base) =>
+    data.byId.has(base) || data.byId.has(`${base}_R`) || data.byId.has(`${base}_L`);
+
+  // The "Found in" region list shared by showReceptor / showTarget: one <li> per
+  // location, parallel arrays of display names + their base ids. A row whose base
+  // resolves to a structure becomes clickable and jumps there via onStructurePick;
+  // an unresolved one stays plain text.
+  const locationList = (names, bases) => {
+    const ul = el("ul");
+    names.forEach((name, i) => {
+      const base = bases && bases[i];
+      const li = el("li", null, name);
+      if (base && baseResolves(base)) {
+        li.classList.add("clickable");
+        li.addEventListener("click", () => onStructurePick(base));
+      }
+      ul.appendChild(li);
+    });
+    return ul;
   };
 
   // A small "?" caveat badge shown wherever a data source / reference appears: the
@@ -1298,9 +1328,7 @@ function createInfoPanel(data) {
       } else if (receptor.locationNames.length === 0) {
         where.appendChild(el("p", "info-desc", t("receptor.noRole")));
       } else {
-        const ul = el("ul");
-        for (const name of receptor.locationNames) ul.appendChild(el("li", null, name));
-        where.appendChild(ul);
+        where.appendChild(locationList(receptor.locationNames, receptor.locations));
       }
       body.appendChild(where);
     },
@@ -1332,9 +1360,7 @@ function createInfoPanel(data) {
       if (!target.locationNames.length) {
         where.appendChild(el("p", "info-desc", t("receptor.noRole")));
       } else {
-        const ul = el("ul");
-        for (const name of target.locationNames) ul.appendChild(el("li", null, name));
-        where.appendChild(ul);
+        where.appendChild(locationList(target.locationNames, target.locationBases));
       }
       body.appendChild(where);
     },
@@ -1409,6 +1435,15 @@ function createInfoPanel(data) {
     /** Register the handler run when a drug-panel binding (target) row is clicked. */
     onTarget(fn) {
       onTargetPick = fn;
+    },
+
+    /**
+     * Register the handler run when a region row in a receptor / target panel's
+     * "Found in" list is clicked. Called with the structure base id; the caller
+     * resolves it to a mesh and jumps to that structure.
+     */
+    onStructure(fn) {
+      onStructurePick = fn;
     },
   };
 }
@@ -2983,6 +3018,16 @@ async function main() {
   // framing its regions + lighting its dots + opening its panel, just like
   // picking the target in the "Receptors & targets" legend or in search.
   info.onTarget(selectTarget);
+
+  // Clicking a region in a receptor / target panel's "Found in" list jumps to
+  // that structure (frames it + halos it + opens its tab), like a structure
+  // search pick. A base resolves to its midline mesh, else its _R then _L
+  // hemisphere (the receptor footprint spans both; we centre one).
+  info.onStructure((base) => {
+    const id = [base, `${base}_R`, `${base}_L`].find((sid) => meshById.has(sid));
+    const mesh = id && meshById.get(id);
+    if (mesh) selectStructure(mesh, { frame: true });
+  });
 
   // Both hemispheres (plus midline singletons) sharing a clicked mesh's base, so
   // a double-click isolates the same pair a legend row click does. The id base is
