@@ -351,6 +351,7 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     "cav_a2d": {"name": {"en": "Calcium channel α2δ subunit",
                          "fr": "Sous-unité α2δ du canal calcique"},
                 "type": "ion_channel", "system": None,
+                "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel",
                 "regions": ["frontal", "temporal", "thalamus", "hippocampus"]},
     "cav_t": {"name": {"en": "T-type calcium channel",
                        "fr": "Canal calcique de type T"},

@@ -458,7 +458,8 @@
         "temporal",
         "thalamus",
         "hippocampus"
-      ]
+      ],
+      "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel"
     },
     "cav_t": {
       "name": {
