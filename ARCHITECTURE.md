@@ -182,7 +182,13 @@ concern:
 - **Drug animation** (`drug-anim.js`): effect-coloured gem dots (boost/block/
   modulate) pulsing over the regions a focused drug's targets sit in, reusing the
   receptor `buildGemCloud`, with a looping **surface wash** under them in the same
-  effect colour; watched off the selection state the same way.
+  effect colour; watched off the selection state the same way. On top of this, a
+  drug focus also rides **flowing beads** along the projections of its target
+  transmitter system(s) (the **by-mechanism flow** overlay): `main.js` resolves the
+  drug's `flowKinds` (via the `meta.system_flow_kinds` map), pins those arrows and
+  replays the **shared circuit pulse** (`circuit-anim.js`) over them, so the drug
+  and circuit animations merge instead of duplicating. A drug with no mapped
+  pathway pins nothing and just shows the dots + wash.
 - **Surface wash** (`surface-wash.js`): the shared shader "wash of light" that
   spreads a ripple across a structure's surface from an origin point (a thin shell
   reusing the mesh geometry, additive, no added triangles). Drives the circuit node

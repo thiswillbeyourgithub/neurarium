@@ -77,7 +77,10 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           (group -> {en,fr} legend heading), and the colour-mode
                           maps kind_signs (kind -> excit/inhib/modulatory sign),
                           sign_colors (sign -> colour) and sign_labels
-                          (sign -> {en,fr} heading), plus the receptor legend maps
+                          (sign -> {en,fr} heading), plus system_flow_kinds (drug
+                          target system -> projection kind, driving the per-drug
+                          by-mechanism flow overlay, see "Drugs"), plus the receptor
+                          legend maps
                           receptor_family_labels (family -> {en,fr} heading, its
                           key order = the receptor legend's family order),
                           receptor_class_labels (mechanism class -> {en,fr}) and
@@ -218,7 +221,10 @@ js/data.js            Fetches the per-type data files (meta.json + structures/
                       linked target reuses that receptor's structureIds, a
                       ubiquitous one lights all, others expand the target's region
                       bases to both hemispheres); the union is the drug's
-                      `structureIds` (what the focus dims to), plus `focusable` +
+                      `structureIds` (what the focus dims to), plus the drug's
+                      `flowKinds` (the projection kinds its target systems map to via
+                      meta `system_flow_kinds`, driving the by-mechanism flow
+                      overlay), plus `focusable` +
                       search `keywords`. It also builds the merged **`targets`**
                       browse list (every receptor + every non-receptor drug target),
                       one normalized focusable entry each: `kind` (receptor or a
@@ -315,7 +321,12 @@ js/drug-anim.js       Per-drug "what it does to the brain" animation
                       washes (the dimming of the rest of the brain is the selection
                       controller's setCircuit, like a receptor focus). One
                       controller per scene; ticked in the render loop; stopped off
-                      the selection state via `matches`. See "Drugs" below.
+                      the selection state via `matches`. On top of this, the focus
+                      also rides flowing beads along the drug's transmitter-system
+                      pathways (the "by-mechanism flow" overlay), but that reuses
+                      the shared circuit pulse (js/circuit-anim.js) rather than
+                      living here: main.js's focusDrug pins the matching arrows +
+                      circuitAnim.play()s them, see "Drugs" below. See "Drugs".
 js/surface-wash.js    Shared "wash of light" primitive (buildWashShell +
                       washStrength): a thin shell reusing a structure mesh's own
                       geometry (the same trick as the selection halo / receptor
@@ -1124,14 +1135,22 @@ as the WIP banner (`js/error-banner.js`):
   matches" line). Clicking a row **focuses** that drug: it dims the whole brain to
   the regions its targets sit in and plays the **per-drug animation** (effect-
   coloured gem dots pulsing boost/block/modulate over those regions,
-  `createDrugAnimation`, see "Drugs" below), and opens the drug **info-panel
-  view** (`createInfoPanel.showDrug`: the molecular-structure image (when one was
-  fetched, see "Molecule images"), the class, the NbN nomenclature, a Wikipedia
-  link, the description, the **Acts on** binding list and the Stahl source).
-  Clicking the active row again clears it; switching to any other focus drops the
-  dots. A drug with no mapped bindings renders muted and is not clickable. The
-  dimming reuses `selection.setCircuit(regionMeshes, [])` and the animation is
-  stopped off the selection state, exactly like the receptor markers.
+  `createDrugAnimation`, see "Drugs" below) **plus the by-mechanism flow overlay**:
+  flowing beads ride the projections of the drug's target transmitter system(s) (an
+  SSRI lights the serotonergic ascending fan, an SNRI the noradrenergic +
+  serotonergic ones, a D2 antipsychotic the dopaminergic paths), reusing the shared
+  circuit pulse, so a drug with a mapped system shows its mechanism *flowing* across
+  the brain, not just static dots (a drug whose systems have no modeled pathway, a
+  benzodiazepine say, just shows the dots + wash). It also opens the drug
+  **info-panel view** (`createInfoPanel.showDrug`: the molecular-structure image
+  (when one was fetched, see "Molecule images"), the class, the NbN nomenclature, a
+  Wikipedia link, the description, the **Acts on** binding list and the Stahl
+  source). Clicking the active row again clears it; switching to any other focus
+  drops the dots + flow. A drug with no mapped bindings renders muted and is not
+  clickable. The dimming reuses `selection.setCircuit(regionMeshes, flowArrows)`
+  (pinning the flow pathways, or none when unmapped) and both the dots and the flow
+  are stopped off the selection state, exactly like the receptor markers + circuit
+  pulse.
 - **Touch / mouse**: one finger or left-drag rotates; two-finger pinch (or
   scroll wheel) zooms; two-finger drag pans. Handled by OrbitControls.
   **Shift + wheel** drives the **Separate** slider instead of zooming: a
@@ -1502,8 +1521,10 @@ rendering:
 - **Rendering (`js/drug-anim.js` + `js/main.js`).** Clicking a drug row
   (`buildDrugLegend`, grouped by primary category in the meta order, with a live
   `#drugs-filter` box) **focuses** that drug: it dims the brain to the union of the
-  drug's targets' regions via `selection.setCircuit(regionMeshes, [])` (no arrow
-  pin, so the pathways fade and the dots are the only bright thing) and calls
+  drug's targets' regions via `selection.setCircuit(regionMeshes, flowArrows)`
+  (pinning the **by-mechanism flow** arrows, see below; for a drug with no mapped
+  pathway `flowArrows` is empty, exactly the old behaviour, so the pathways fade
+  and the dots are the only bright thing) and calls
   `createDrugAnimation.show(drug, meshById)`, which scatters a gem cloud
   (`buildGemCloud`, reused from `js/receptor-markers.js`) over each binding's
   regions coloured by that binding's net-effect colour, pulsing per effect (boost
@@ -1523,6 +1544,29 @@ rendering:
   same pattern as the receptor markers + circuit pulse: a `selection.onIsolate`
   watcher hides it the moment the isolate set is no longer exactly the drug's region
   set (`createDrugAnimation.matches`).
+- **By-mechanism flow overlay (`js/circuit-anim.js` reuse).** On top of the dots +
+  wash, a drug focus also rides **flowing beads** along the projections of its
+  target **transmitter system(s)**, so an SSRI lights the serotonergic ascending
+  fan, an SNRI the noradrenergic + serotonergic ones, a D2 antipsychotic the
+  dopaminergic paths, etc. This *merges* the drug and circuit animations instead of
+  duplicating them: a drug's flow is just a pinned arrow set played through the
+  **shared circuit pulse**. The mapping is data, not code: `generate_data.py` emits
+  a `system_flow_kinds` map (drug target `system` -> projection `kind`) into
+  `meta.json`, restricted to the diffuse ascending modulatory systems that have a
+  source nucleus modeled (`serotonergic`, `adrenergic`->`noradrenergic`,
+  `dopaminergic`, `cholinergic`); the fast point-to-point systems (glutamate / GABA)
+  are deliberately left out so the overlay is a drug-specific fan, not the whole
+  projectome. `js/data.js` resolves each drug's **`flowKinds`** from its bindings'
+  systems; `focusDrug` in `js/main.js` filters the arrows to those kinds
+  (`flowArrowsOf`), pins them via `setCircuit` (so they stay lit while the rest
+  dims) and `circuitAnim.play()`s them. The flow is stopped off the selection state
+  by the **same** `circuitAnim` `onIsolate` watcher that stops a circuit's pulse
+  (the pinned-arrow set stops matching), so no drug-specific teardown is needed. A
+  drug whose systems are unmapped pins no arrows -> the overlay is simply absent (it
+  falls back to dots + wash). This is why the dataset carries the **ascending
+  monoamine pathways** (raphe serotonergic, locus coeruleus noradrenergic, VTA
+  dopaminergic; see "Changing the data"): without them most antidepressants would
+  have no flow to show.
 
 The drug data was extracted by **parallel agents** from per-drug source text. 44
 drugs lacked a structured "How the Drug Works" entry in the dump's Q/A and were
@@ -1712,7 +1756,7 @@ could not resolve, and the panel degrades to no image for them.
      being mirrored. The flag is a generator hint and is stripped from the data.
    - Projection `kind` must be a key of `PROJECTION_COLORS` in
      `tools/generate_data.py` (`excitatory`, `inhibitory`, `dopaminergic`,
-     `cholinergic`, `neuroendocrine`); add
+     `cholinergic`, `neuroendocrine`, `serotonergic`, `noradrenergic`); add
      new kinds there (the generator raises if a projection uses an unmapped kind)
      + in this doc if needed. The map is emitted into the data's `meta.json` and
      each projection gets a resolved `color` at load, so the viewer never
