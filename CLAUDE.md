@@ -832,14 +832,30 @@ as the WIP banner (`js/error-banner.js`):
     panel whatever the panel's actual height (which the `ResizeObserver` tracks as
     the Legend/About accordion grows it).
   - **landscape**: an `@media (orientation: landscape)` rule makes `#controls` a
-    left **sidebar** up to **25% of the viewport** wide (`width: min(25vw, 240px)`),
+    left **sidebar** that grows toward **25% of the viewport**
+    (`width: clamp(240px, 25vw, 420px)`: a 240px floor so it is never too thin, a
+    420px cap so it is never absurd on a wide desktop),
     and **when expanded** it takes the **full vertical height** (`top`/`bottom: 12px`,
     so a long Legend has room); the brain is pushed **right** by half the panel's
     width fraction, so it sits centred in the clear area beside the sidebar. The
     full-height stretch is gated on the body being shown
     (`#controls:has(#controls-body:not([hidden]))`) so a **collapsed** panel stays a
     small bottom-left header instead of a tall empty glass box (a browser without
-    `:has` just keeps the bottom-left box: graceful fallback).
+    `:has` just keeps the bottom-left box: graceful fallback). On the full-height
+    sidebar an **open accordion section fills the height**: a flex column chain
+    (panel -> body -> the shown pane -> `#controls-main` -> the open section -> its
+    body, each `min-height:0`, the section keyed by its
+    `.collapse-header[aria-expanded="true"]`) makes the open section grow and its
+    body the scroll area (overriding the default `42vh` body cap), so the
+    still-collapsed sections (Drugs, About) are pushed to the **bottom** instead of
+    a gap. The flex rules are scoped to `:not([hidden])` so a hidden pane keeps
+    `display:none` (an unscoped rule on the `[hidden]` details pane would otherwise
+    keep it in flow and steal the free space).
+  - **Uncollapse animation**: opening any accordion section (Legend / Receptors /
+    Drugs / About) **slides its body in** (a soft downward `translateY` + fade,
+    `@keyframes section-slide-in`, 200ms); the bodies ship `hidden`
+    (`display:none`), so showing one re-runs the keyframe each time. Disabled under
+    `prefers-reduced-motion`.
 
   Wired in `wireControls` (`updatePanelPan`, gated on the panel actually being
   visible so `?ui=0` shots are unaffected; recomputed on the `orientation`
@@ -1079,7 +1095,8 @@ as the WIP banner (`js/error-banner.js`):
   **Shift+Tab** cycle the open **detail tabs** (the pinned Settings tab + each
   opened detail, wrapping; `tabs.cycle` re-applies a detail's 3D focus on landing,
   and the key keeps its default focus move when no detail is open), **Esc** closes
-  search and collapses any open Legend / Receptors / Drugs / About section. While
+  the **active detail tab** first if one is showing (`tabs.closeActive`), otherwise
+  closes search and collapses any open Legend / Receptors / Drugs / About section. While
   a section is open the **arrow keys** browse its rows and **Enter** activates the
   highlighted one (see "Section row navigation" below). Each
   maps to
@@ -1127,7 +1144,10 @@ as the WIP banner (`js/error-banner.js`):
   searchable (stubs + binding-less drugs are legend-only). The match runs over
   each item's display
   label plus hidden `keywords` (a receptor's family / mechanism / sign, a drug's
-  category / target names).
+  category / target names), and is **case- and accent-insensitive**: both the query
+  and the haystack are passed through `foldText` (lowercase + NFD-decompose then
+  strip combining diacritical marks), so e.g. "seroto" finds "Sérotonine" /
+  "Serotonin". The Drugs section's filter box uses the same `foldText`.
   Connection results carry a hemisphere tag (`R` / `L` / `L↔R`) so the mirrored
   twins stay distinct (`connectionSideTag` in `js/main.js`). **Ctrl/Cmd+F** is a
   shortcut for the same search: a `window` keydown listener intercepts it (so the
@@ -1171,7 +1191,10 @@ as the WIP banner (`js/error-banner.js`):
   one-shot `suppressClick` so the drag's synthetic click doesn't also re-activate
   the tab. The `panel.closeTab` i18n key labels the × for a11y. **Tab** /
   **Shift+Tab** (wired in `wireShortcuts`) cycle the active tab via `tabs.cycle`,
-  through Settings + the open details in strip order, wrapping.
+  through Settings + the open details in strip order, wrapping. **Esc** closes the
+  active detail tab via `tabs.closeActive` (falling back to a neighbour or Settings
+  like its × button; returns false when only Settings is active, so Esc then falls
+  through to its other duties, see "Keyboard shortcuts").
 - **Info panel** (the **Details pane** of the main panel, `createInfoPanel` in
   `js/main.js`, rendered into `#info-body`; the active **detail tab** drives which
   one shows, see "Detail tabs" + "Panel layout"): shows a *connection*, a
