@@ -2751,7 +2751,8 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
 
 
 def _drug_record(drug: dict[str, Any], valid_targets: set[str],
-                 known_bases: set[str]) -> dict[str, Any]:
+                 known_bases: set[str],
+                 molecule_ids: set[str]) -> dict[str, Any]:
     """Validate + normalize one authored drug into its ``drugs.jsonl`` record.
 
     The authored drug (from ``tools/drugs_data.json``) is mostly passed through;
@@ -2772,6 +2773,11 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     known_bases
         Known structure base ids (unused targets validation is by id, kept for
         symmetry with the receptor builder).
+    molecule_ids
+        Drug ids that have a vendored structure SVG under
+        ``public/data/molecules/`` (see :func:`_available_molecule_ids` /
+        ``tools/fetch_molecules.py``); a match adds a ``structure_image`` path the
+        viewer embeds, a non-match simply omits it.
 
     Returns
     -------
@@ -2819,7 +2825,27 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         out["description"] = drug["description"]
     if drug.get("wikipedia"):
         out["wikipedia"] = drug["wikipedia"]
+    if drug["id"] in molecule_ids:
+        # Path from the site root (like a structure's shape_file); the viewer
+        # embeds it as an <img>. Only set when the SVG was actually fetched, so a
+        # drug without one renders no image (no broken-image placeholder).
+        out["structure_image"] = f"data/molecules/{drug['id']}.svg"
     return out
+
+
+def _available_molecule_ids() -> set[str]:
+    """Drug ids that have a vendored structure SVG under ``public/data/molecules/``.
+
+    Those files are produced by the authoring tool ``tools/fetch_molecules.py``
+    (which hits the network); this offline generator only *checks for their
+    presence*. The presence of ``<id>.svg`` is the single source of truth for
+    whether a drug gets a ``structure_image`` (see :func:`_drug_record`), so the
+    set of embedded molecules stays in lock-step with what was actually fetched.
+    """
+    mol_dir = Path(__file__).resolve().parent.parent / "public" / "data" / "molecules"
+    if not mol_dir.exists():
+        return set()
+    return {p.stem for p in mol_dir.glob("*.svg")}
 
 
 def _load_drugs() -> list[dict[str, Any]]:
@@ -2977,12 +3003,14 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                     f"structure base")
     drug_targets = _build_drug_targets(receptors)
     valid_targets = set(drug_targets.keys())
+    molecule_ids = _available_molecule_ids()
     seen_drug_ids: set[str] = set()
     for drug in _load_drugs():
         if drug["id"] in seen_drug_ids:
             raise KeyError(f"Duplicate drug id {drug['id']!r}")
         seen_drug_ids.add(drug["id"])
-        drugs.append(_drug_record(drug, valid_targets, receptor_bases))
+        drugs.append(
+            _drug_record(drug, valid_targets, receptor_bases, molecule_ids))
 
     # Fail loudly if the data uses a kind or group with no entry in the maps above.
     kinds = {r["kind"] for r in projections}
