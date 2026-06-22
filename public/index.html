@@ -436,6 +436,14 @@
       #search-results li.active { background: rgba(255, 255, 255, 0.12); }
       #search-results li.empty { color: var(--muted); cursor: default; }
       #search-results li.empty:hover { background: none; }
+      /* Keyboard roving highlight for arrow-key navigation inside an open
+         accordion section (Legend / Receptors / Drugs). A clear outline reads on
+         any row or button regardless of its own background. */
+      .kbd-active {
+        outline: 2px solid rgba(255, 255, 255, 0.55);
+        outline-offset: -2px;
+        border-radius: 4px;
+      }
 
       /* Floating HTML labels (CSS2DRenderer) naming each structure. Centered on
          the structure by the renderer; must not eat pointer events. No box: the

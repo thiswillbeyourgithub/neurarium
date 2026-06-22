@@ -2406,6 +2406,7 @@ function wireShortcuts(help, tabs) {
       const tg = document.getElementById(id);
       if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
     }
+    sectionNav.reset(); // a closed section keeps no stale keyboard highlight
   };
 
   // Open search only (never toggle it back off), matching Ctrl/Cmd+F.
@@ -2413,6 +2414,85 @@ function wireShortcuts(help, tabs) {
     const search = document.getElementById("search");
     if (search && search.hidden) click("search-toggle");
   };
+
+  // Roving keyboard navigation inside the currently-open accordion section: once
+  // a section is open (e.g. after `l` opens the Legend), ArrowDown / ArrowUp move
+  // a highlight (`.kbd-active`) through that section's interactive rows (its
+  // action buttons + every `.clickable` row/heading) and Enter activates the
+  // highlighted one (a plain click, so it isolates / focuses / opens its detail
+  // tab exactly as a mouse click would). Rows are recomputed on each key (the
+  // legend rebuilds, the drug filter hides rows), and the highlight is dropped
+  // when the open section changes or closes. No-op when no section is open, so
+  // the arrow/Enter keys keep their default behaviour elsewhere.
+  const sectionNav = (() => {
+    const BODIES = [
+      ["legend-toggle", "legend-body"],
+      ["receptors-toggle", "receptors-body"],
+      ["drugs-toggle", "drugs-body"],
+      ["about-toggle", "about-body"],
+    ];
+    let activeEl = null;
+    let lastBody = null;
+    const openBody = () => {
+      for (const [tid, bid] of BODIES) {
+        const tg = document.getElementById(tid);
+        if (tg && tg.getAttribute("aria-expanded") === "true") {
+          return document.getElementById(bid);
+        }
+      }
+      return null;
+    };
+    const rows = (body) =>
+      [...body.querySelectorAll("button, .clickable")]
+        .filter((el) => el.offsetParent !== null && !el.disabled);
+    const setActive = (el, list) => {
+      for (const r of list) r.classList.toggle("kbd-active", r === el);
+      activeEl = el || null;
+      if (el) el.scrollIntoView({ block: "nearest" });
+    };
+    return {
+      handle(key) {
+        const body = openBody();
+        if (body !== lastBody) {
+          // Section changed or closed: drop the stale highlight on the old body.
+          if (lastBody) {
+            for (const r of lastBody.querySelectorAll(".kbd-active")) {
+              r.classList.remove("kbd-active");
+            }
+          }
+          activeEl = null;
+          lastBody = body;
+        }
+        if (!body) return false;
+        const list = rows(body);
+        if (list.length === 0) return false;
+        if (key === "Enter") {
+          if (activeEl && list.includes(activeEl)) { activeEl.click(); return true; }
+          return false; // nothing highlighted yet: leave Enter alone
+        }
+        let idx = list.indexOf(activeEl);
+        if (key === "ArrowDown") idx = idx < 0 ? 0 : (idx + 1) % list.length;
+        else idx = idx <= 0 ? list.length - 1 : idx - 1; // ArrowUp, wraps
+        setActive(list[idx], list);
+        return true;
+      },
+      // Drop any highlight everywhere (called when a section is toggled via the
+      // keyboard, so opening/closing/switching a section never leaves a stale
+      // outline behind on a now-hidden body).
+      reset() {
+        for (const [, bid] of BODIES) {
+          const body = document.getElementById(bid);
+          if (body) {
+            for (const r of body.querySelectorAll(".kbd-active")) {
+              r.classList.remove("kbd-active");
+            }
+          }
+        }
+        activeEl = null;
+        lastBody = null;
+      },
+    };
+  })();
 
   window.addEventListener("keydown", (event) => {
     if (event.ctrlKey || event.metaKey || event.altKey) return; // leave combos alone
@@ -2430,14 +2510,21 @@ function wireShortcuts(help, tabs) {
       if (tabs && tabs.cycle(event.shiftKey ? -1 : 1)) event.preventDefault();
       return;
     }
+    // Arrow keys / Enter browse + activate the rows of the open accordion section
+    // (Legend / Receptors / Drugs); only swallowed when a section actually handled
+    // them, so they keep their default behaviour with no section open.
+    if (event.key === "ArrowDown" || event.key === "ArrowUp" || event.key === "Enter") {
+      if (sectionNav.handle(event.key)) event.preventDefault();
+      return;
+    }
     switch (event.key) {
       case "?": help?.open(); break;
       case "n": case "N": click("toggle-names"); break;
       case "s": case "S": toggleSpread(); break;
-      case "l": case "L": click("legend-toggle"); break;
+      case "l": case "L": sectionNav.reset(); click("legend-toggle"); break;
       case "c": case "C": click("see-inside"); break;
-      case "r": case "R": click("receptors-toggle"); break;
-      case "m": case "M": click("drugs-toggle"); break;
+      case "r": case "R": sectionNav.reset(); click("receptors-toggle"); break;
+      case "m": case "M": sectionNav.reset(); click("drugs-toggle"); break;
       case "f": case "F": openSearch(); break;
       case "Escape": collapseOpen(); break;
       default: return; // unhandled key: leave its default intact

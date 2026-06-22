@@ -1057,13 +1057,29 @@ as the WIP banner (`js/error-banner.js`):
   **Shift+Tab** cycle the open **detail tabs** (the pinned Settings tab + each
   opened detail, wrapping; `tabs.cycle` re-applies a detail's 3D focus on landing,
   and the key keeps its default focus move when no detail is open), **Esc** closes
-  search and collapses any open Legend / Receptors / Drugs / About section. Each
+  search and collapses any open Legend / Receptors / Drugs / About section. While
+  a section is open the **arrow keys** browse its rows and **Enter** activates the
+  highlighted one (see "Section row navigation" below). Each
   maps to
   an existing control by **clicking the same DOM element** a mouse user would (or
   dispatching the slider's `input`), so there is no duplicated behaviour; a
   handled key calls `preventDefault` so `f` never types into the search box it
   just focused. The same shortcuts are listed in the **shortcuts help popup**
   (see below).
+- **Section row navigation** (`sectionNav` in `wireShortcuts`): once an accordion
+  section is open (e.g. after **l** / **r** / **m**), **ArrowDown** / **ArrowUp**
+  move a roving highlight (a `.kbd-active` outline) through that section's
+  interactive elements (its action buttons + every `.clickable` row/heading) and
+  **Enter** activates the highlighted one (a plain `.click()`, so it isolates a
+  structure / focuses a receptor/target/drug + opens its detail tab, exactly like
+  a mouse click). Rows are recomputed on each key (the legend rebuilds, the drug
+  filter hides rows; hidden/disabled ones are skipped), the highlight wraps at the
+  ends, and it is cleared whenever the open section changes or closes
+  (`sectionNav.reset()` on the section-toggle keys + on Esc), so no stale outline
+  is left on a hidden body. The keys are only swallowed when a section actually
+  handled them (no section open -> their default behaviour stands), and typing in
+  the drug filter keeps the arrows (caret movement) since `isTyping` short-circuits
+  first.
 - **Keyboard + reset + search** (the icon-button row at the top of the panel,
   just above the
   sliders, spread across the row via `justify-content: space-between`): a
