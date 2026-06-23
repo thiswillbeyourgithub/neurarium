@@ -1187,23 +1187,56 @@ function createInfoPanel(data) {
     return ul;
   };
 
-  // A small "?" caveat badge shown wherever a data source / reference appears: the
-  // sources are LLM-inferred (web + the Stahl PDF) and not yet human-checked, so
-  // every source gets this note. The tooltip shows on hover (CSS) and is pinned on
-  // click/tap via a `.show` class, so touch devices (no :hover) can read it too.
-  const makeHelpIcon = () => {
+  // Wrap a trigger element with a hover/tap tooltip. The bubble is absolutely
+  // positioned against the enclosing `.info-sources` / `.info-wiki` (which are
+  // position:relative), so it spans that full-width container and can never
+  // overflow + be clipped by the narrow panel. Clicking the trigger pins it
+  // (`.show`) for touch devices, where `:hover` never fires. Shared by the "?"
+  // caveat icon and the per-source provenance pills.
+  const withTip = (trigger, tipText) => {
     const wrap = el("span", "help-icon");
-    const btn = el("button", "help-dot", "?");
-    btn.type = "button";
-    btn.setAttribute("aria-label", t("info.sourceCaveatLabel"));
-    const tip = el("span", "help-tip", t("info.sourceCaveat"));
+    const tip = el("span", "help-tip", tipText);
     tip.setAttribute("role", "tooltip");
-    wrap.append(btn, tip);
-    btn.addEventListener("click", (e) => {
+    wrap.append(trigger, tip);
+    trigger.addEventListener("click", (e) => {
       e.stopPropagation();
       wrap.classList.toggle("show");
     });
     return wrap;
+  };
+
+  // The "?" caveat badge shown next to every Source / Reference heading: the
+  // sources are LLM-inferred (web + the Stahl PDF) and not yet human-checked, so
+  // the block as a whole carries this note (it sits alongside the per-source
+  // provenance pills, which grade each one individually, see makeProvenancePill).
+  const makeHelpIcon = () => {
+    const btn = el("button", "help-dot", "?");
+    btn.type = "button";
+    btn.setAttribute("aria-label", t("info.sourceCaveatLabel"));
+    return withTip(btn, t("info.sourceCaveat"));
+  };
+
+  // Per-source provenance pill (how trustworthy the source's attribution is):
+  // grey "?" = LLM-only (may be hallucinated), yellow "~" = the LLM had the source
+  // document, green "✓" = quote-checked + agreed by a second LLM. The colour is a
+  // `.src-prov-<level>` CSS class. A falsy / unknown level is the "no source yet"
+  // case and renders the orange TODO pill (`.src-todo`) instead. The pill is a
+  // <button> so a tap pins its explanatory tooltip on touch (via withTip), the
+  // same mechanism as the "?" caveat icon. The grade itself comes from the data
+  // (generate_data.py PROVENANCE_LEVELS); only the glyph + tooltip live here.
+  const PROVENANCE_PILLS = {
+    llm: { glyph: "?", tip: "info.provLlm" },
+    sourced: { glyph: "~", tip: "info.provSourced" },
+    verified: { glyph: "✓", tip: "info.provVerified" },
+  };
+  const makeProvenancePill = (level) => {
+    const spec = PROVENANCE_PILLS[level];
+    const tip = spec ? t(spec.tip) : t("info.provNone");
+    const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
+    const pill = el("button", cls, spec ? spec.glyph : t("info.linkTodo"));
+    pill.type = "button";
+    pill.setAttribute("aria-label", tip);
+    return withTip(pill, tip);
   };
 
   // Shared label / value row for the classification "facts" block (receptor,
@@ -1253,11 +1286,11 @@ function createInfoPanel(data) {
 
   // Shared by the structure / receptor / drug / target views: an external reference
   // link, rendered only for an http(s) url so a stray field can never inject markup.
-  // With `todo:true` (the targets, whose references aren't gathered yet) a missing
-  // url renders the label + an orange TODO pill instead of nothing, like a source.
-  const appendWiki = (url, { todo = false } = {}) => {
+  // A present link gets its provenance pill (how it was sourced, `provenance` from
+  // the data); a missing reference renders the label + the orange TODO pill (the
+  // "no source yet" case), so the gap is always visible like a source.
+  const appendWiki = (url, provenance) => {
     const ok = typeof url === "string" && /^https?:\/\//i.test(url);
-    if (!ok && !todo) return;
     const wrap = el("div", "info-wiki");
     if (ok) {
       const a = el("a", null, t("info.wikipedia"));
@@ -1265,16 +1298,20 @@ function createInfoPanel(data) {
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       wrap.appendChild(a);
+      wrap.appendChild(makeProvenancePill(provenance));
     } else {
       wrap.appendChild(el("span", null, t("info.reference")));
-      wrap.appendChild(el("span", "src-todo", t("info.linkTodo")));
+      wrap.appendChild(makeProvenancePill(null)); // no reference -> TODO pill
     }
     wrap.appendChild(makeHelpIcon()); // the reference is LLM-inferred, not vetted
     body.appendChild(wrap);
   };
 
-  // Shared by the connection + drug views: the source list, each a link for a
-  // verified http(s) url or the citation plus an orange TODO pill otherwise.
+  // Shared by the connection + drug views: the source list. Each citation is a
+  // link for a verified http(s) url (plain text otherwise) followed by its
+  // provenance pill (grey/yellow/green, grading how it was sourced; see
+  // makeProvenancePill), so a missing url no longer reads as "TODO" (the pill
+  // carries the real status). The heading keeps the "?" caveat for the block.
   const appendSources = (sources) => {
     if (!sources || !sources.length) return;
     const wrap = el("div", "info-sources");
@@ -1293,8 +1330,8 @@ function createInfoPanel(data) {
         li.appendChild(a);
       } else {
         li.appendChild(document.createTextNode(s.citation));
-        li.appendChild(el("span", "src-todo", t("info.linkTodo")));
       }
+      li.appendChild(makeProvenancePill(s.provenance));
       ul.appendChild(li);
     }
     wrap.appendChild(ul);
@@ -1401,7 +1438,7 @@ function createInfoPanel(data) {
       ));
 
       // External reference link (Wikipedia), when the data carries one.
-      appendWiki(structure.wikipedia);
+      appendWiki(structure.wikipedia, structure.wikipedia_provenance);
 
       // Pathways with this structure at either end, in the data's order.
       const conns = data.projections.filter(
@@ -1449,7 +1486,7 @@ function createInfoPanel(data) {
       body.appendChild(el("h2", "info-title", receptor.name));
       body.appendChild(el("div", "info-group", receptor.familyLabel));
 
-      appendWiki(receptor.wikipedia);
+      appendWiki(receptor.wikipedia, receptor.wikipedia_provenance);
 
       if (receptor.description) {
         body.appendChild(el("p", "info-desc", receptor.description));
@@ -1494,7 +1531,7 @@ function createInfoPanel(data) {
       body.appendChild(el(
         "div", "info-group", target.systemLabel || t("targets.otherSystem")));
 
-      appendWiki(target.wikipedia, { todo: true });
+      appendWiki(target.wikipedia, target.wikipediaProvenance);
 
       const facts = el("div", "info-facts");
       addFactRow(facts, t("receptor.type"), target.typeLabel, target.swatchColor);
@@ -1540,7 +1577,7 @@ function createInfoPanel(data) {
         body.appendChild(fig);
       }
 
-      appendWiki(drug.wikipedia);
+      appendWiki(drug.wikipedia, drug.wikipedia_provenance);
 
       if (drug.description) {
         body.appendChild(el("p", "info-desc", drug.description));

@@ -39,6 +39,12 @@ Three families of checks:
    left as ``"TODO"`` are counted and warned about **separately** (they are a
    known, tracked backlog rather than a stray placeholder).
 
+4. **Provenance grades**. Every emitted source (a ``sources[].provenance``) and
+   every wikipedia reference (a ``wikipedia_provenance`` beside a ``wikipedia``)
+   must carry a known grade (``llm`` / ``sourced`` / ``verified``), the value the
+   viewer renders as a grey/yellow/green pill. An unknown or missing grade is an
+   **error** (the pill would fall back to "no source" and mislead).
+
 Built with the help of Claude Code.
 """
 
@@ -55,6 +61,9 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "public" / "data"
 _SOURCE_URL_RE = re.compile(r"\.sources\[\d+\]\.url$")
 # Trailing hemisphere suffix on a structure id ("frontal_R" -> "frontal").
 _HEMISPHERE_RE = re.compile(r"_(R|L)$")
+# Valid source provenance grades (mirrors generate_data.py PROVENANCE_LEVELS), the
+# value the viewer renders as the grey/yellow/green source pill.
+_PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 
 
 class Report:
@@ -337,6 +346,53 @@ def check_todos(report, meta, structures, projections, circuits, receptors, drug
         report.ok("every source url is a real link (no TODO urls)")
 
 
+# --------------------------------------------------------------------------- #
+# 4. Provenance grades
+# --------------------------------------------------------------------------- #
+
+def check_provenance(report, meta, structures, projections, circuits, receptors, drugs):
+    report.header("4. Source provenance grades")
+    before = report.errors
+    counts = Counter()
+
+    def grade(value, ctx):
+        if value not in _PROVENANCE_LEVELS:
+            report.error(f"{ctx}: provenance {value!r} is not one of "
+                         f"{sorted(_PROVENANCE_LEVELS)}")
+        else:
+            counts[value] += 1
+
+    def rec_id(label, record):
+        if label == "projection":
+            return f"{record.get('from')}->{record.get('to')}"
+        return record.get("id")
+
+    # Citation sources (projections + drugs) each carry a per-source grade.
+    for label, items in (("projection", projections), ("drug", drugs)):
+        for record in items:
+            for i, src in enumerate(record.get("sources", []) or []):
+                grade(src.get("provenance"),
+                      f"{label} {rec_id(label, record)} sources[{i}]")
+
+    # Wikipedia references (structures / receptors / drugs, + the meta targets)
+    # carry a sibling `wikipedia_provenance` whenever the link is present.
+    for label, items in (("structure", structures), ("receptor", receptors),
+                         ("drug", drugs)):
+        for record in items:
+            if record.get("wikipedia"):
+                grade(record.get("wikipedia_provenance"),
+                      f"{label} {record.get('id')} wikipedia")
+    for key, target in meta.get("drug_targets", {}).items():
+        if target.get("wikipedia"):
+            grade(target.get("wikipedia_provenance"), f"target {key} wikipedia")
+
+    if report.errors == before:
+        summary = ", ".join(f"{counts[lvl]} {lvl}"
+                            for lvl in sorted(_PROVENANCE_LEVELS) if counts[lvl])
+        report.ok(f"every source/reference carries a valid provenance grade "
+                  f"({summary})")
+
+
 def main():
     report = Report()
     print(f"neurarium data integrity check\nreading {DATA_DIR}")
@@ -352,6 +408,7 @@ def main():
     check_duplicates(*args)
     check_reachability(*args)
     check_todos(*args)
+    check_provenance(*args)
 
     print(f"\nSummary: {report.errors} error(s), {report.warnings} warning(s)")
     if report.errors:

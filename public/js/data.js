@@ -367,6 +367,7 @@ export async function loadBrainData(dataDir = "data") {
       typeLabel,
       systemLabel,
       wikipedia: tgt.wikipedia || "",
+      wikipediaProvenance: tgt.wikipedia_provenance || "",
       locationNames: (tgt.regions || []).map((b) => baseName.get(b) || b),
       // The raw base ids parallel to locationNames, so the panel can make each
       // "Found in" row jump to that structure (the receptor records keep their own

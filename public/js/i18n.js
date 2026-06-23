@@ -105,6 +105,10 @@
       "info.reference": "Reference",
       "info.sourceCaveat": "These sources have not yet been checked by a human. They were inferred by an LLM with internet and PDF access.",
       "info.sourceCaveatLabel": "About these sources",
+      "info.provNone": "No source for this claim yet.",
+      "info.provLlm": "Source grade: LLM-only. Produced by an LLM from memory and not checked against any document, so it may be a hallucination.",
+      "info.provSourced": "Source grade: sourced. Written by an LLM that was given the source document (e.g. Stahl's guide), but this specific claim was not quote-verified.",
+      "info.provVerified": "Source grade: verified. An LLM extracted a quote, it was programmatically confirmed to appear in the source, and a separate LLM agreed the quote supports the claim. This is still the highest grade available here and remains LLM-driven, so it can still be wrong: going further would take considerable human effort and is itself error-prone, so it is out of scope for this project.",
       "info.noConnections": "No mapped connections yet.",
       "info.connections": "Connections",
 
@@ -236,6 +240,10 @@
       "info.reference": "Référence",
       "info.sourceCaveat": "Ces sources n’ont pas encore été vérifiées par un humain. Elles ont été déduites par un LLM ayant accès à internet et à des PDF.",
       "info.sourceCaveatLabel": "À propos de ces sources",
+      "info.provNone": "Aucune source pour cette affirmation pour l’instant.",
+      "info.provLlm": "Niveau de source : LLM seul. Produite de mémoire par un LLM, sans vérification dans aucun document : il peut donc s’agir d’une hallucination.",
+      "info.provSourced": "Niveau de source : documentée. Rédigée par un LLM ayant eu accès au document source (par ex. le guide de Stahl), mais cette affirmation précise n’a pas été vérifiée par citation.",
+      "info.provVerified": "Niveau de source : vérifiée. Un LLM a extrait une citation, sa présence dans la source a été confirmée par programme, et un second LLM a confirmé qu’elle étaye l’affirmation. C’est le niveau le plus élevé disponible ici et il reste piloté par un LLM : il peut donc encore se tromper. Aller plus loin demanderait un effort humain considérable, lui-même sujet à erreur, et sort donc du cadre de ce projet.",
       "info.noConnections": "Aucune connexion répertoriée pour l’instant.",
       "info.connections": "Connexions",
 

@@ -82,9 +82,27 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
   (`tools/generate_data.py`, with the drug list in `tools/drugs_data.json`) and
   easy to consume from another engine.
 - Every projection carries a **neurotransmitter** and a list of **sources**
-  (citations; a verified link renders as a hyperlink, an unfilled one shows an
-  orange **TODO** pill). Every region, every receptor, and every drug links to its
-  **Wikipedia** article.
+  (citations; a verified link renders as a hyperlink). Every region, every
+  receptor, and every drug links to its **Wikipedia** article.
+- **Source provenance pills.** Every source and reference shown in a detail panel
+  carries a small coloured pill grading *how trustworthy its attribution is*,
+  because the data is LLM-assisted and not yet human-checked. Hover (or tap, on
+  touch) any pill for the full explanation. The grades:
+  - **grey `?` (LLM-only)**: produced by an LLM from memory, not checked against
+    any document, so it may be a hallucination.
+  - **yellow `~` (sourced)**: written by an LLM that was given the source document
+    (e.g. Stahl's guide), but the specific claim was not quote-verified.
+  - **green `✓` (verified)**: an LLM extracted a quote, the quote was
+    *programmatically* confirmed to appear in the source, and a separate LLM
+    agreed it supports the claim. This is the **highest** grade available and is
+    **still LLM-driven**, so it can still be wrong: going further would take
+    considerable human effort, itself error-prone, and is out of scope here.
+  - **orange `TODO`**: there is no source/reference for that claim yet.
+
+  Everything currently grades as **grey** (LLM-only) pending individual review;
+  the grade lives in the data (`generate_data.py`), so a source can be upgraded as
+  it is checked. A standing **"?"** caveat next to each Sources / Reference
+  heading repeats that none of it is human-verified.
 - Each receptor records its **neurotransmitter**, mechanism class (ionotropic /
   metabotropic / chaperone), excitatory / inhibitory / modulatory **sign**,
   synaptic site, and the regions expressing it.
@@ -113,7 +131,9 @@ Planned directions, none implemented yet and the order is not fixed:
 - **Pathologies**: how disorders map onto the regions, circuits, and
   neurotransmitter systems.
 - **Verify the sources**: every citation currently carries a placeholder
-  **TODO** url; replace each one with a verified DOI/link.
+  **TODO** url; replace each one with a verified DOI/link. Relatedly, lift each
+  source's **provenance grade** (see "Data & sourcing") from the default grey
+  (LLM-only) toward yellow/green as it is checked.
 
 ## Feedback
 

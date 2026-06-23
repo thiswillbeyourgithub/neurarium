@@ -93,7 +93,8 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           drug_targets (the merged binding-target map: every
                           non-receptor target like sert/mao_a/nav with its
                           {name:{en,fr}, type, system, regions[bases], optional
-                          wikipedia} plus every receptor id as a target linked back
+                          wikipedia (+ wikipedia_provenance, the source-grade pill,
+                          see "Source provenance" below)} plus every receptor id as a target linked back
                           to its receptor), and the non-receptor-target presentation
                           maps target_type_labels (type -> {en,fr} tag, e.g.
                           transporter/enzyme/ion_channel) and target_type_colors
@@ -105,13 +106,15 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           ({en,fr}, hemisphere-stripped, used for the legend row),
                           group, position, color, shape_file, and an optional
                           wikipedia (article URL, shown as a link in the structure
-                          info panel)
+                          info panel) + its wikipedia_provenance (the source-grade
+                          pill on that link, see "Source provenance" below)
                         - data/projections.jsonl: one pathway per line: from, to,
                           kind, label ({en,fr}), neurotransmitter ({en,fr}),
-                          description ({en,fr}), sources[{citation,url}] (not
-                          translated), optional bidirectional, and optional
-                          tentative (a speculative pathway: drawn as a dotted arrow
-                          in a separate, off-by-default legend section)
+                          description ({en,fr}), sources[{citation,url,provenance}]
+                          (not translated; provenance is the source-grade pill, see
+                          "Source provenance" below), optional bidirectional, and
+                          optional tentative (a speculative pathway: drawn as a
+                          dotted arrow in a separate, off-by-default legend section)
                         - data/circuits.jsonl: one named functional loop per line:
                           id, name ({en,fr}), structures[ids] (its arrows are
                           derived in the viewer as the projections whose endpoints
@@ -126,7 +129,9 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           *base* ids where it is expressed; the viewer expands each
                           to both hemispheres), an optional ubiquitous:true (a
                           brain-wide receptor, empty locations -> lights every
-                          structure), optional description ({en,fr}) and wikipedia.
+                          structure), optional description ({en,fr}) and wikipedia
+                          (+ wikipedia_provenance, the source-grade pill on the
+                          link, see "Source provenance" below).
                           A receptor with empty locations and no description is a
                           deliberate "stub" (no CNS role: listed but not focusable)
                         - data/drugs.jsonl: one drug per line: id, name (technical,
@@ -136,8 +141,10 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           mechanism), bindings[] (each: target = a drug_targets key,
                           action = a drug_actions key, optional effect override,
                           optional note ({en,fr} or "TODO"), optional tentative),
-                          sources[{citation,url}] (always the Stahl citation, url
-                          "TODO" for now), optional wikipedia, optional
+                          sources[{citation,url,provenance}] (always the Stahl
+                          citation, url "TODO" for now; provenance is the
+                          source-grade pill, see "Source provenance" below),
+                          optional wikipedia (+ wikipedia_provenance), optional
                           structure_image (a vendored molecular-structure SVG path
                           data/molecules/<id>.svg, set by the generator only when
                           that file exists, see "Molecule images" below), and
@@ -610,7 +617,7 @@ classes the generator does not look for). Run it directly:
 python tools/check_data.py     # exit 0 = no errors (warnings allowed), 1 = errors
 ```
 
-Three families of checks:
+Four families of checks:
 
 - **Duplicates** (per collection: structures / receptors / drugs / circuits /
   targets, plus projections). An exact duplicate id/key, or two ids that collide
@@ -634,6 +641,12 @@ Three families of checks:
   **separately** (the known, tracked backlog, currently every source). TODOs
   never fail the run, they only print, so the pre-push gate passes on the current
   data.
+- **Provenance grades** (see "Source provenance" below): every emitted source
+  (`sources[].provenance`) and every wikipedia reference (the
+  `wikipedia_provenance` beside a `wikipedia`) must carry a known grade
+  (`llm` / `sourced` / `verified`), the value the viewer renders as the
+  grey/yellow/green pill. An unknown or missing grade is an **error** (the pill
+  would silently fall back to the "no source" TODO and mislead).
 
 The check functions take the loaded data as plain arguments (not the files), so
 they are unit-testable by feeding crafted records.
@@ -1297,27 +1310,33 @@ as the WIP banner (`js/error-banner.js`):
   whether the detail is first picked or re-shown by clicking its tab. An empty-
   space click returns to Settings via `tabs.showSettings()` (the detail tabs stay).
   Everywhere a data **source / reference** is shown (the connection + drug
-  **Source(s)** list and every **Wikipedia / Reference** row), a small **"?"
-  caveat badge** sits next to it (`makeHelpIcon` in `createInfoPanel`): its
-  tooltip warns that the sources are **LLM-inferred (web + the Stahl PDF) and not
-  yet human-checked**. The tooltip shows on hover and is pinned on click/tap (a
-  `.show` class), so touch devices (no `:hover`) can read it too; it is anchored
-  to the full-width `.info-sources` / `.info-wiki` container (not the tiny icon)
-  so its `left:0/right:0` bubble can't overflow + be clipped by the narrow panel.
-  The message is the `info.sourceCaveat` i18n key (NOT the About / dev-banner
-  "Source code" link, which points at the code repo, not a data source).
+  **Source(s)** list and every **Wikipedia / Reference** row), two things sit next
+  to it (see "Source provenance" below for the full model): a per-source
+  **provenance pill** (`makeProvenancePill`) grading how trustworthy that one
+  source is, **plus** a standing **"?" caveat badge** (`makeHelpIcon`) on the
+  block heading warning that none of it is human-checked. Both reuse one
+  `withTip(trigger, text)` helper for the hover/tap tooltip: it shows on hover and
+  is pinned on click/tap (a `.show` class) so touch devices (no `:hover`) can read
+  it, and it is anchored to the full-width `.info-sources` / `.info-wiki` container
+  (not the tiny trigger) so its `left:0/right:0` bubble can't overflow + be clipped
+  by the narrow panel. The caveat message is `info.sourceCaveat`, the pill
+  tooltips are the `info.provNone/provLlm/provSourced/provVerified` keys (NOT the
+  About / dev-banner "Source code" link, which points at the code repo, not a data
+  source).
   - **Clicking/tapping an arrow** (or picking a connection in search) shows the
     **connection** view: the pathway label, its route (`from → to`, `↔` for a
     bidirectional/commissural link), kind + neurotransmitter, a one-line
-    description, and its sources (a verified http(s) url renders as a link, a
-    `"TODO"` url as a small orange "TODO" pill badge next to the citation). Built
+    description, and its sources (a verified http(s) url renders as a link, an
+    unfilled one as plain text; each citation then carries its provenance pill,
+    see "Source provenance"). Built
     from the projection's metadata. Arrow
     picking (`pickArrowAt`) takes priority over the region behind it.
   - **Clicking/tapping a structure** (or a structure search
     result) shows the **structure** view (`showStructure`): its name, its group
-    heading (from `data.meta.groupLabels`), a **Wikipedia link** when the
-    structure record carries a `wikipedia` url (rendered only for an http(s)
-    value), and the list of pathways touching it. Each connection row
+    heading (from `data.meta.groupLabels`), a **Reference row** (a Wikipedia link
+    for an http(s) `wikipedia` url, with its provenance pill, else the orange
+    `TODO` pill, see "Source provenance"), and the list of pathways touching it.
+    Each connection row
     shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
     receives, `↔` reciprocal) and the other endpoint; **clicking a row jumps to
     that pathway** (frames the endpoints, halos the arrow, swaps in the
@@ -1579,8 +1598,9 @@ stated in the source narrative on 10 drugs. Two plainly wrong ones were dropped
 (deutetrabenazine's spurious D2 / 5-HT7, naltrexone-bupropion's dopamine releaser);
 the rest are real-but-unstated affinities (antipsychotic alpha-1 / H1 / muscarinic)
 kept and flagged `tentative` so they read as speculative. The source `url` on the
-Stahl citation is currently the literal **"TODO"** (rendered as an orange TODO pill
-in the panel) pending a real reference link.
+Stahl citation is currently the literal **"TODO"** pending a real reference link;
+the citation still renders (as plain text, no link) and carries its provenance
+pill (grey "llm" for now, see "Source provenance").
 
 To add or edit a drug, see "Changing the data" below.
 
@@ -1623,6 +1643,51 @@ as usual, into an authoring step and the rendering:
 
 A drug missing an SVG is the **anticipated gap**: the fetcher logs which drugs it
 could not resolve, and the panel degrades to no image for them.
+
+## Source provenance
+
+Every source and reference the viewer shows carries a **provenance grade** saying
+*how trustworthy its attribution is*, because the dataset is LLM-assisted and not
+yet human-checked. The viewer renders the grade as a small coloured **pill** next
+to the source, with a hover/tap tooltip; the grade itself is **data** (the colour,
+glyph and tooltip are the only viewer-side parts). The grades (weakest to
+strongest), defined once in `generate_data.py` as `PROVENANCE_LEVELS`:
+
+- **`llm`** (grey **?**): produced by an LLM from memory, unchecked against any
+  document, so it may be a hallucination.
+- **`sourced`** (yellow **~**): written by an LLM that was given the source
+  document (e.g. the Stahl dump), but the specific claim was not quote-verified.
+- **`verified`** (green **✓**): an LLM extracted a quote, the quote was
+  *programmatically* confirmed to be present in the source, and a separate LLM
+  agreed it supports the claim. This is the **highest grade available** and is
+  **still LLM-driven**, so it can still be wrong; going further would need
+  substantial, error-prone human review and is out of scope for this project (the
+  `info.provVerified` tooltip says so).
+- The **absence** of any source/reference is rendered as the long-standing orange
+  **`TODO`** pill (tooltip `info.provNone`, "no source yet"); it is not one of the
+  stored grades.
+
+**Where the grade lives in the data.** Each citation source object is
+`{citation, url, provenance}` (projection `sources`, the drug `STAHL_SOURCE`); a
+`SOURCES` entry may set its own `provenance`, else `_expand_sources` defaults it to
+`DEFAULT_PROVENANCE` (`"llm"`). Each `wikipedia` reference (structures, receptors,
+drugs, and the `drug_targets` map) emits a sibling `wikipedia_provenance`, looked
+up per owner id in the `WIKIPEDIA_PROVENANCE` override registry (empty for now, so
+everything defaults to `"llm"`). Upgrading a source as it is checked is therefore a
+**data** edit (raise its `provenance` / add a `WIKIPEDIA_PROVENANCE` entry), not a
+code change; `_provenance` validates every grade so a typo fails the build, and
+`tools/check_data.py` re-checks the emitted grades (see "Data checks").
+
+**Where the presentation lives.** `js/main.js` `makeProvenancePill(level)` maps the
+grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the
+glyph + the `info.prov*` tooltip via the shared `withTip` helper; the pill colours
+are CSS (`.src-prov-llm/sourced/verified` in `index.html`, beside the orange
+`.src-todo`). The per-source pill sits **alongside** the existing block-level "?"
+caveat (`makeHelpIcon`), which still warns that none of the data is human-verified
+(see "Info panel"). `appendSources` adds a pill per citation; `appendWiki(url,
+provenance)` adds one per reference row (or the `TODO` pill when the link is
+absent). New user-visible strings are the `info.provNone/provLlm/provSourced/
+provVerified` i18n keys (both languages).
 
 ## Changing the data
 

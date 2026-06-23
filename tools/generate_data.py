@@ -475,13 +475,68 @@ TARGET_TYPE_COLORS: dict[str, str] = {
     "receptor_group": "#9aa0a6",   # grey (coarse, like a stand-in)
 }
 
+# ---------------------------------------------------------------------------
+# Source provenance grades. Every source / reference the viewer shows carries a
+# ``provenance`` level saying *how trustworthy its attribution is*, rendered as a
+# small coloured pill (the palette + tooltips live in the viewer; the grade here
+# is the data). Weakest to strongest:
+#   "llm"      grey   - produced by an LLM from memory, unchecked against any
+#                       document, so it may be a hallucination.
+#   "sourced"  yellow - written by an LLM that was given the source document
+#                       (e.g. the Stahl dump), but the specific claim was not
+#                       quote-verified.
+#   "verified" green  - an LLM extracted a quote, the quote was programmatically
+#                       confirmed to be present in the source, and a separate LLM
+#                       agreed it supports the claim. (Still LLM-driven, so not
+#                       infallible: see the viewer tooltip; going further would
+#                       need substantial, error-prone human review, out of scope.)
+# The *absence* of any source/reference is rendered as the orange "TODO" pill
+# instead; it is not one of these stored grades. Everything currently grades as
+# "llm" (the default) until individually upgraded.
+PROVENANCE_LEVELS: tuple[str, ...] = ("llm", "sourced", "verified")
+DEFAULT_PROVENANCE = "llm"
+
+# Per-link provenance overrides for the *wikipedia* references (which are bare URL
+# strings, not ``{citation, url}`` objects, so they have nowhere inline to carry a
+# grade). Keyed by the owner's id: a structure *base* id, a receptor id, a
+# DRUG_TARGETS key, or a drug id. Anything absent defaults to DEFAULT_PROVENANCE.
+# Empty for now (every reference grades as "llm"); upgrade individual links here
+# as they are checked, keeping the grading in the data rather than in code.
+WIKIPEDIA_PROVENANCE: dict[str, str] = {}
+
+
+def _provenance(level: str, what: str) -> str:
+    """Validate a provenance grade against :data:`PROVENANCE_LEVELS` (typo guard)."""
+    if level not in PROVENANCE_LEVELS:
+        raise ValueError(
+            f"{what} has unknown provenance {level!r}; "
+            f"expected one of {PROVENANCE_LEVELS}")
+    return level
+
+
+def _wiki_provenance(owner_id: str) -> str:
+    """Provenance grade for an owner's wikipedia reference.
+
+    Looks ``owner_id`` (a structure base / receptor id / DRUG_TARGETS key / drug
+    id) up in :data:`WIKIPEDIA_PROVENANCE`, falling back to
+    :data:`DEFAULT_PROVENANCE`. Validated so an upgraded grade can't be a typo.
+    """
+    return _provenance(
+        WIKIPEDIA_PROVENANCE.get(owner_id, DEFAULT_PROVENANCE),
+        f"wikipedia reference for {owner_id!r}")
+
+
 # The constant source backing every drug record (the user-verified fair-use
 # citation). Per-drug specifics (the binding profile) come from this single book;
 # each drug additionally carries its own ``wikipedia`` link for quick reference.
+# ``provenance`` grades the citation (see PROVENANCE_LEVELS): the drug bindings
+# were extracted by an LLM given the Stahl dump but were not quote-verified, so
+# they would warrant "sourced"; kept at the conservative "llm" default for now.
 STAHL_SOURCE: dict[str, str] = {
     "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential "
                 "Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
     "url": "TODO",
+    "provenance": DEFAULT_PROVENANCE,
 }
 
 
@@ -1263,9 +1318,11 @@ WIKIPEDIA: dict[str, str] = {
 
 # Reference registry. A pathway cites one or more of these by short key (see the
 # ``sources`` field on PROJECTIONS); the generator expands each key into the full
-# ``{citation, url}`` object inside every projection record, so a reference shared
-# by several pathways is written exactly once here (no duplication) yet the
-# emitted data stays self-contained (the viewer never resolves keys).
+# ``{citation, url, provenance}`` object inside every projection record, so a
+# reference shared by several pathways is written exactly once here (no
+# duplication) yet the emitted data stays self-contained (the viewer never
+# resolves keys). An entry may set its own ``provenance`` grade (see
+# :data:`PROVENANCE_LEVELS`); omitting it defaults to :data:`DEFAULT_PROVENANCE`.
 #
 # These are landmark/textbook references for the classic circuitry. The ``url``
 # is left as the literal "TODO" rather than a guessed DOI: fill in a verified
@@ -2523,10 +2580,12 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
         "color": entry["color"],
         "shape_file": f"data/shapes/{shape_id}.json",
     }
-    # External reference link (same article for both hemispheres of a pair).
+    # External reference link (same article for both hemispheres of a pair),
+    # tagged with its provenance grade for the source pill (see _wiki_provenance).
     wiki = WIKIPEDIA.get(entry["base"])
     if wiki:
         record["wikipedia"] = wiki
+        record["wikipedia_provenance"] = _wiki_provenance(entry["base"])
     if mirror:
         record["mirror"] = True
     return record
@@ -2782,13 +2841,18 @@ def _expand_sources(keys: list[str]) -> list[dict[str, str]]:
     Returns
     -------
     list of dict
-        One ``{citation, url}`` dict per key, in order.
+        One ``{citation, url, provenance}`` dict per key, in order. ``provenance``
+        is the entry's own grade if it set one, else :data:`DEFAULT_PROVENANCE`
+        (see :data:`PROVENANCE_LEVELS`), validated so a typo fails the build.
     """
     expanded: list[dict[str, str]] = []
     for key in keys:
         if key not in SOURCES:
             raise KeyError(f"projection references unknown source '{key}'")
-        expanded.append(dict(SOURCES[key]))
+        src = dict(SOURCES[key])
+        src["provenance"] = _provenance(
+            src.get("provenance", DEFAULT_PROVENANCE), f"source {key!r}")
+        expanded.append(src)
     return expanded
 
 
@@ -2876,6 +2940,7 @@ def _receptor_record(rec: dict[str, Any],
         out["description"] = {"en": rec["description"], "fr": rec["description_fr"]}
     if "wikipedia" in rec:
         out["wikipedia"] = rec["wikipedia"]
+        out["wikipedia_provenance"] = _wiki_provenance(rec["id"])
     return out
 
 
@@ -2913,6 +2978,7 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
         }
         if spec.get("wikipedia"):
             targets[tid]["wikipedia"] = spec["wikipedia"]
+            targets[tid]["wikipedia_provenance"] = _wiki_provenance(tid)
     for rec in receptors:
         # A receptor id is also a valid target; link it so the viewer reuses the
         # receptor's lit regions. Receptor ids and DRUG_TARGETS keys never collide
@@ -3005,6 +3071,7 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         out["description"] = drug["description"]
     if drug.get("wikipedia"):
         out["wikipedia"] = drug["wikipedia"]
+        out["wikipedia_provenance"] = _wiki_provenance(drug["id"])
     if drug["id"] in molecule_ids:
         # Path from the site root (like a structure's shape_file); the viewer
         # embeds it as an <img>. Only set when the SVG was actually fetched, so a

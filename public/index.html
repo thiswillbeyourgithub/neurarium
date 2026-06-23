@@ -776,22 +776,49 @@
         margin-bottom: 8px;
       }
       .info-sources a { color: #8fb6e6; text-decoration: underline; }
-      /* No verified link yet: a small orange pill badge instead of a bare link.
-         Used in the connection/drug source list and the target Reference row. */
-      .info-sources .src-todo,
-      .info-wiki .src-todo {
+      /* Source / reference provenance pills: one small pill per source saying how
+         trustworthy its attribution is (grey ? = LLM-only, yellow ~ = the LLM had
+         the source, green ✓ = quote-checked), plus the orange TODO pill for the
+         "no source yet" case. Shared shape (.src-pill); colour says the grade.
+         They are <button>s (so a tap pins the tooltip on touch), reset to look
+         like a pill, sitting in the connection/drug source list and the
+         structure/receptor/target/drug Reference row. The left margin comes from
+         the wrapping .help-icon, so it isn't repeated here. */
+      .src-pill {
+        -webkit-appearance: none;
+        appearance: none;
         display: inline-block;
         vertical-align: middle;
-        margin-left: 6px;
         padding: 1px 8px;
         border-radius: 999px;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
+        font: 600 10px/1.45 inherit;
+        cursor: pointer;
+      }
+      /* No verified source/link yet (the long-standing TODO pill): orange, a word. */
+      .src-todo {
         color: #f0a23c;
         background: rgba(240, 162, 60, 0.15);
         border: 1px solid rgba(240, 162, 60, 0.5);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      /* LLM-only (grey ?): produced from memory, may be a hallucination. */
+      .src-prov-llm {
+        color: #b6bcc4;
+        background: rgba(160, 168, 178, 0.16);
+        border: 1px solid rgba(160, 168, 178, 0.5);
+      }
+      /* LLM had the source (yellow ~): written with the document, not quote-checked. */
+      .src-prov-sourced {
+        color: #e3c14a;
+        background: rgba(227, 193, 74, 0.15);
+        border: 1px solid rgba(227, 193, 74, 0.5);
+      }
+      /* Quote-checked (green ✓): confirmed in-source + agreed by a second LLM. */
+      .src-prov-verified {
+        color: #66cf85;
+        background: rgba(102, 207, 133, 0.18);
+        border: 1px solid rgba(102, 207, 133, 0.5);
       }
       /* Structure panel: a clickable list of the structure's connections. */
       .info-group { font-size: 12px; color: var(--muted); margin: -4px 0 12px; }

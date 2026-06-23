@@ -270,7 +270,8 @@
         "hypothalamus",
         "accumbens"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter"
+      "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter",
+      "wikipedia_provenance": "llm"
     },
     "net": {
       "name": {
@@ -289,7 +290,8 @@
         "amygdala",
         "cerebellum"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Norepinephrine_transporter"
+      "wikipedia": "https://en.wikipedia.org/wiki/Norepinephrine_transporter",
+      "wikipedia_provenance": "llm"
     },
     "dat": {
       "name": {
@@ -307,7 +309,8 @@
         "accumbens",
         "frontal"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter"
+      "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter",
+      "wikipedia_provenance": "llm"
     },
     "gat": {
       "name": {
@@ -324,7 +327,8 @@
         "hippocampus",
         "cerebellum"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter"
+      "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter",
+      "wikipedia_provenance": "llm"
     },
     "vmat2": {
       "name": {
@@ -342,7 +346,8 @@
         "caudate",
         "putamen"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2"
+      "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",
+      "wikipedia_provenance": "llm"
     },
     "mao_a": {
       "name": {
@@ -359,7 +364,8 @@
         "substantia_nigra",
         "brainstem"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A"
+      "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
+      "wikipedia_provenance": "llm"
     },
     "mao_b": {
       "name": {
@@ -375,7 +381,8 @@
         "raphe",
         "brainstem"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B"
+      "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
+      "wikipedia_provenance": "llm"
     },
     "ache": {
       "name": {
@@ -392,7 +399,8 @@
         "thalamus",
         "septal_nuclei"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase"
+      "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase",
+      "wikipedia_provenance": "llm"
     },
     "bche": {
       "name": {
@@ -407,7 +415,8 @@
         "temporal",
         "hippocampus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Butyrylcholinesterase"
+      "wikipedia": "https://en.wikipedia.org/wiki/Butyrylcholinesterase",
+      "wikipedia_provenance": "llm"
     },
     "carbonic_anhydrase": {
       "name": {
@@ -445,7 +454,8 @@
         "hippocampus",
         "thalamus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel"
+      "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel",
+      "wikipedia_provenance": "llm"
     },
     "cav": {
       "name": {
@@ -461,7 +471,8 @@
         "thalamus",
         "hippocampus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel"
+      "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel",
+      "wikipedia_provenance": "llm"
     },
     "cav_a2d": {
       "name": {
@@ -477,7 +488,8 @@
         "thalamus",
         "hippocampus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel"
+      "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel",
+      "wikipedia_provenance": "llm"
     },
     "cav_t": {
       "name": {
@@ -492,7 +504,8 @@
         "frontal",
         "temporal"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel"
+      "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel",
+      "wikipedia_provenance": "llm"
     },
     "sv2a": {
       "name": {
@@ -508,7 +521,8 @@
         "hippocampus",
         "thalamus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/SV2A"
+      "wikipedia": "https://en.wikipedia.org/wiki/SV2A",
+      "wikipedia_provenance": "llm"
     },
     "muscarinic": {
       "name": {
@@ -527,7 +541,8 @@
         "thalamus",
         "hypothalamus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
+      "wikipedia_provenance": "llm"
     },
     "nicotinic": {
       "name": {
@@ -544,7 +559,8 @@
         "thalamus",
         "vta"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor",
+      "wikipedia_provenance": "llm"
     },
     "alpha1": {
       "name": {
@@ -563,7 +579,8 @@
         "thalamus",
         "brainstem"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
+      "wikipedia_provenance": "llm"
     },
     "alpha2": {
       "name": {
@@ -581,7 +598,8 @@
         "hypothalamus",
         "brainstem"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
+      "wikipedia_provenance": "llm"
     },
     "beta": {
       "name": {
@@ -598,7 +616,8 @@
         "accumbens",
         "cerebellum"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor",
+      "wikipedia_provenance": "llm"
     },
     "glutamate": {
       "name": {
@@ -617,7 +636,8 @@
         "caudate",
         "putamen"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
+      "wikipedia_provenance": "llm"
     },
     "melatonin": {
       "name": {
@@ -631,7 +651,8 @@
         "hypothalamus",
         "thalamus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor",
+      "wikipedia_provenance": "llm"
     },
     "orexin": {
       "name": {
@@ -648,7 +669,8 @@
         "vta",
         "thalamus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Orexin_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Orexin_receptor",
+      "wikipedia_provenance": "llm"
     },
     "melanocortin": {
       "name": {
@@ -661,7 +683,8 @@
       "regions": [
         "hypothalamus"
       ],
-      "wikipedia": "https://en.wikipedia.org/wiki/Melanocortin_receptor"
+      "wikipedia": "https://en.wikipedia.org/wiki/Melanocortin_receptor",
+      "wikipedia_provenance": "llm"
     },
     "alpha1a": {
       "name": {
