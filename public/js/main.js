@@ -1627,6 +1627,7 @@ function createInfoPanel(data) {
           if (b.tentative) parts.push(t("drug.speculative"));
           const detail = parts.filter(Boolean).join(" · ");
           if (detail) txt.appendChild(el("span", "bind-action", detail));
+          li.appendChild(txt);
           // Per-claim source pill: when this binding carries a source, show its
           // provenance grade with the verbatim supporting quote + page ref in the
           // tooltip (after a newline). Strongest grade colours the pill. A binding
