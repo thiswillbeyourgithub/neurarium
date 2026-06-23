@@ -1569,12 +1569,18 @@ rendering:
   have no flow to show.
 
 The drug data was extracted by **parallel agents** from per-drug source text. 44
-drugs lacked a structured "How the Drug Works" entry in the dump's Q/A and were
-recovered from the dump's full-page OCR (`PageImages`); 5 drugs remain unbound
-because they are genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
-triiodothyronine, caprylidene). The source `url` on the Stahl citation is currently
-the literal **"TODO"** (rendered as an orange TODO pill in the panel) pending a real
-reference link.
+drugs lacked a structured "How the Drug Works" entry in the first dump's Q/A and
+were recovered from that dump's full-page OCR (`PageImages`); 5 drugs remain
+unbound because they are genuinely non-receptor agents (lithium, disulfiram,
+l-methylfolate, triiodothyronine, caprylidene). A later **corrected dump**
+(carrying a clean "How the Drug Works" entry for all 158 drugs) was diffed against
+those OCR-recovered bindings: the OCR had over-extracted receptor interactions not
+stated in the source narrative on 10 drugs. Two plainly wrong ones were dropped
+(deutetrabenazine's spurious D2 / 5-HT7, naltrexone-bupropion's dopamine releaser);
+the rest are real-but-unstated affinities (antipsychotic alpha-1 / H1 / muscarinic)
+kept and flagged `tentative` so they read as speculative. The source `url` on the
+Stahl citation is currently the literal **"TODO"** (rendered as an orange TODO pill
+in the panel) pending a real reference link.
 
 To add or edit a drug, see "Changing the data" below.
 
