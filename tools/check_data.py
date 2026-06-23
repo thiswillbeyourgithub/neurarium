@@ -39,11 +39,24 @@ Three families of checks:
    left as ``"TODO"`` are counted and warned about **separately** (they are a
    known, tracked backlog rather than a stray placeholder).
 
-4. **Provenance grades**. Every emitted source (a ``sources[].provenance``) and
-   every wikipedia reference (a ``wikipedia_provenance`` beside a ``wikipedia``)
-   must carry a known grade (``llm`` / ``sourced`` / ``verified``), the value the
-   viewer renders as a grey/yellow/green pill. An unknown or missing grade is an
-   **error** (the pill would fall back to "no source" and mislead).
+4. **Provenance grades**. Every emitted source (a ``sources[].provenance``,
+   including the per-binding drug sources) and every wikipedia reference (a
+   ``wikipedia_provenance`` beside a ``wikipedia``) must carry a known grade
+   (``llm`` / ``sourced`` / ``verified``), the value the viewer renders as a
+   grey/yellow/green pill. An unknown or missing grade is an **error** (the pill
+   would fall back to "no source" and mislead).
+
+5. **Source quotes**. Each per-binding drug source is
+   ``{corpus, page, quote, provenance}``; a ``"verified"`` grade is the one that
+   claims the quote was confirmed present in the source. This re-confirms it: the
+   ``corpus`` must resolve to ``meta.source_corpora``, a verified source must
+   carry a page + quote, and the **normalized** quote must be an exact substring
+   of the **normalized** cited page text (``<pages_dir>/<page>.md``). The page
+   material is author-side and may be absent on a clone (see ``stahl/`` in
+   CLAUDE.local.md); the quote-in-page check is then **skipped with a warning**
+   while the structural checks still run. A quote that is genuinely not on its
+   page (an invented or mistyped extraction) is an **error**, so this is the gate
+   that keeps the LLM extraction honest.
 
 Built with the help of Claude Code.
 """
@@ -51,14 +64,19 @@ Built with the help of Claude Code.
 import json
 import re
 import sys
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "public" / "data"
+# Repo root, used to resolve a source corpus's author-side ``pages_dir`` (e.g.
+# ``stahl/pages``) for the quote-in-page check (see check_sources).
+REPO_ROOT = DATA_DIR.parent.parent
 
-# A path like "...sources[3].url" is a source citation url (its TODO is the known
-# backlog, reported on its own); anything else is a stray TODO.
-_SOURCE_URL_RE = re.compile(r"\.sources\[\d+\]\.url$")
+# A path like "...sources[3].url" (a citation) or "...source_corpora.<id>.url" (a
+# corpus reference) is a source url: its TODO is the known backlog, reported on
+# its own. Anything else is a stray TODO.
+_SOURCE_URL_RE = re.compile(r"(\.sources\[\d+\]\.url|\.source_corpora\.[^.]+\.url)$")
 # Trailing hemisphere suffix on a structure id ("frontal_R" -> "frontal").
 _HEMISPHERE_RE = re.compile(r"_(R|L)$")
 # Valid source provenance grades (mirrors generate_data.py PROVENANCE_LEVELS), the
@@ -93,6 +111,25 @@ def normalize(value):
     Greek receptor name like ``α1A`` collapses to ``α1a`` rather than vanishing).
     Two strings that normalize equal are "the same entry" for the dup check."""
     return "".join(ch for ch in str(value).lower() if ch.isalnum())
+
+
+def normalize_for_match(text):
+    """Canonicalize prose for the quote-in-page substring check (see check_sources).
+
+    The PDF->Markdown extraction of the source pages introduces artifacts the raw
+    quote will not match verbatim: hard-wrapped lines (a word hyphenated across a
+    line break), markdown emphasis/bullets, curly quotes, en/em dashes, accents.
+    This folds all of that away deterministically: join hyphenated line breaks,
+    NFKD-decompose (so an accent becomes a strippable combining mark), lowercase,
+    then collapse every run of non-alphanumerics to a single space. The result is
+    still compared with an **exact** substring test, only on a canonical form: no
+    fuzzy / similarity matching, which would manufacture false confidence. A miss
+    is therefore a real miss to investigate, not a threshold to tune."""
+    text = re.sub(r"-\s*\n\s*", "", text)            # join hyphenated line breaks
+    text = unicodedata.normalize("NFKD", text)
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]+", " ", text)          # drops combining marks too
+    return " ".join(text.split())
 
 
 def display_name(name):
@@ -374,6 +411,14 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
                 grade(src.get("provenance"),
                       f"{label} {rec_id(label, record)} sources[{i}]")
 
+    # Per-binding drug sources (the quote-level provenance) each carry a grade too.
+    for drug in drugs:
+        for binding in drug.get("bindings", []):
+            for i, src in enumerate(binding.get("sources", []) or []):
+                grade(src.get("provenance"),
+                      f"drug {drug.get('id')} binding {binding.get('target')} "
+                      f"sources[{i}]")
+
     # Wikipedia references (structures / receptors / drugs, + the meta targets)
     # carry a sibling `wikipedia_provenance` whenever the link is present.
     for label, items in (("structure", structures), ("receptor", receptors),
@@ -393,6 +438,99 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
                   f"({summary})")
 
 
+# --------------------------------------------------------------------------- #
+# 5. Source quotes (verbatim in the cited corpus page)
+# --------------------------------------------------------------------------- #
+
+# A normalized quote shorter than this risks an incidental substring match (a few
+# common words appearing on the page by chance), so a too-short quote is warned
+# about even when it "matches".
+_MIN_QUOTE_CHARS = 16
+
+
+def check_sources(report, meta, drugs):
+    """The core of the sourcing system: confirm every per-binding source quote is
+    actually present in the page it cites.
+
+    Each binding source is ``{corpus, page, quote, provenance}``. This:
+
+    * checks ``corpus`` resolves to ``meta.source_corpora`` (else the citation is
+      unrenderable) and that a ``"verified"`` grade carries a page + quote;
+    * for any source that carries a quote + page, locates the corpus's page file
+      (``<pages_dir>/<page>.md``) and asserts the **normalized** quote is a
+      substring of the **normalized** page text (see :func:`normalize_for_match`).
+
+    The page material is author-side and may be absent on a plain checkout (it is
+    large + uncommitted, see ``stahl/`` in CLAUDE.local.md); when a corpus has no
+    ``pages_dir`` on disk the quote-in-page check is **skipped with a warning**
+    while the structural checks above still run. So this hard-fails an invented or
+    mistyped quote on the author's machine (and the pre-push gate) without
+    breaking on a clone that lacks the sources."""
+    report.header("5. Source quotes (verbatim in cited page)")
+    corpora = meta.get("source_corpora", {})
+    before = report.errors
+
+    page_cache = {}            # (corpus, page) -> normalized page text or None
+    skipped_corpora = set()
+    n_checked = 0
+
+    def page_text(corpus, page):
+        key = (corpus, page)
+        if key not in page_cache:
+            entry = corpora.get(corpus) or {}
+            pages_dir = entry.get("pages_dir")
+            text = None
+            if pages_dir:
+                md = REPO_ROOT / pages_dir / f"{page}.md"
+                if md.exists():
+                    text = normalize_for_match(md.read_text(encoding="utf-8"))
+            page_cache[key] = text
+        return page_cache[key]
+
+    for drug in drugs:
+        did = drug.get("id")
+        for binding in drug.get("bindings", []):
+            for i, src in enumerate(binding.get("sources", []) or []):
+                ctx = f"drug {did} binding {binding.get('target')} sources[{i}]"
+                corpus = src.get("corpus")
+                if corpus not in corpora:
+                    report.error(f"{ctx}: corpus {corpus!r} is not in "
+                                 f"meta.source_corpora (citation unrenderable)")
+                    continue
+                quote, page = src.get("quote"), src.get("page")
+                if src.get("provenance") == "verified" and not (quote and page is not None):
+                    report.error(f"{ctx}: 'verified' source missing a page or quote "
+                                 f"(verified is the quote-checked grade)")
+                    continue
+                if not quote or page is None:
+                    continue  # weaker grade with no quote to check
+                entry = corpora.get(corpus) or {}
+                if not entry.get("pages_dir"):
+                    skipped_corpora.add(corpus)
+                    continue
+                text = page_text(corpus, page)
+                if text is None:
+                    skipped_corpora.add(corpus)
+                    continue
+                needle = normalize_for_match(quote)
+                if needle not in text:
+                    report.error(f"{ctx}: quote NOT found verbatim on {corpus} "
+                                 f"p.{page}: {quote!r}")
+                    continue
+                n_checked += 1
+                if len(needle.replace(" ", "")) < _MIN_QUOTE_CHARS:
+                    report.warn(f"{ctx}: quote is very short ({quote!r}); it matched "
+                                f"but may be an incidental substring")
+
+    if skipped_corpora:
+        report.warn(f"source pages absent for {sorted(skipped_corpora)} "
+                    f"(author-only material); skipped the quote-in-page check there")
+    if report.errors == before:
+        report.ok(f"every checkable source quote ({n_checked}) is present verbatim "
+                  f"in its cited page" if n_checked
+                  else "no source quotes to verify yet")
+
+
 def main():
     report = Report()
     print(f"neurarium data integrity check\nreading {DATA_DIR}")
@@ -409,6 +547,7 @@ def main():
     check_reachability(*args)
     check_todos(*args)
     check_provenance(*args)
+    check_sources(report, meta, drugs)
 
     print(f"\nSummary: {report.errors} error(s), {report.warnings} warning(s)")
     if report.errors:

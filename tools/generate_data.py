@@ -540,6 +540,64 @@ STAHL_SOURCE: dict[str, str] = {
 }
 
 
+# Source corpora that the *per-claim* drug sources cite, keyed by a short id. A
+# claim's source is ``{corpus, page, quote, provenance}``: ``quote`` is the
+# verbatim snippet supporting the claim, ``page`` locates it inside the corpus,
+# and ``tools/check_data.py`` confirms (when the corpus's pages are present) that
+# the quote really appears on that page, which is what makes a ``"verified"``
+# grade trustworthy. The design is source-agnostic: Stahl is the first corpus,
+# more can be added here without touching the schema. ``pages_dir`` is an
+# author-side path (relative to the repo root) holding one ``<page>.md`` per page
+# (see ``stahl/`` in CLAUDE.local.md); it is emitted into ``meta.json`` so the
+# checker is data-driven, and is simply absent on a checkout without that
+# (uncommitted, large) source material, in which case the quote-in-page check is
+# skipped while the structural checks still run.
+SOURCE_CORPORA: dict[str, dict[str, str]] = {
+    "stahl": {
+        "citation": STAHL_SOURCE["citation"],
+        "url": STAHL_SOURCE["url"],
+        "pages_dir": "stahl/pages",
+    },
+}
+
+
+def _binding_sources(drug_id: str, binding: dict[str, Any]) -> list[dict[str, Any]]:
+    """Validate + normalize one binding's optional ``sources`` list.
+
+    Each authored source is ``{corpus, page, quote, provenance}``: ``corpus`` must
+    be a :data:`SOURCE_CORPORA` key and ``provenance`` a :data:`PROVENANCE_LEVELS`
+    grade. ``"verified"`` is the quote-checked grade, so a verified source *must*
+    carry a ``page`` and a non-empty ``quote`` (``check_data.py`` then confirms the
+    quote is on that page); weaker grades may omit them. The full citation/url is
+    *not* denormalized onto every binding (429 of them): the viewer resolves it
+    from ``meta.source_corpora`` by ``corpus``, keeping ``drugs.jsonl`` lean.
+
+    Returns the emitted source dicts (empty list when none are authored).
+    """
+    out: list[dict[str, Any]] = []
+    for s in binding.get("sources", []) or []:
+        corpus = s.get("corpus")
+        if corpus not in SOURCE_CORPORA:
+            raise KeyError(
+                f"Drug {drug_id!r} binding {binding.get('target')!r} cites unknown "
+                f"source corpus {corpus!r} (not a SOURCE_CORPORA key)")
+        prov = _provenance(
+            s.get("provenance", DEFAULT_PROVENANCE),
+            f"drug {drug_id!r} binding {binding.get('target')!r} source")
+        rec: dict[str, Any] = {"corpus": corpus, "provenance": prov}
+        if s.get("page") is not None:
+            rec["page"] = s["page"]
+        if s.get("quote"):
+            rec["quote"] = s["quote"]
+        if prov == "verified" and not (rec.get("page") is not None and rec.get("quote")):
+            raise ValueError(
+                f"Drug {drug_id!r} binding {binding.get('target')!r} has a "
+                f"'verified' source without a page + quote (verified is the "
+                f"quote-checked grade; use 'sourced'/'llm' for an unquoted claim)")
+        out.append(rec)
+    return out
+
+
 # ---------------------------------------------------------------------------
 # Internationalization (en / fr): the data file is bilingual. The anatomy below
 # is authored in English; every translatable *display* string (region names,
@@ -3056,6 +3114,12 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
             out_b["note"] = b["note"]
         if b.get("tentative"):
             out_b["tentative"] = True
+        # Per-claim sources ({corpus, page, quote, provenance}); the verbatim quote
+        # is what check_data.py confirms is present in the cited corpus page. See
+        # _binding_sources / SOURCE_CORPORA.
+        binding_sources = _binding_sources(drug["id"], b)
+        if binding_sources:
+            out_b["sources"] = binding_sources
         bindings.append(out_b)
     out: dict[str, Any] = {
         "id": drug["id"],
@@ -3329,6 +3393,11 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         "drug_actions": DRUG_ACTIONS,
         "drug_effect_colors": DRUG_EFFECT_COLORS,
         "drug_effect_labels": DRUG_EFFECT_LABELS,
+        # Source corpora the per-binding (and later per-field) drug sources cite,
+        # keyed by id (see SOURCE_CORPORA). The viewer reads citation/url to render
+        # each binding's source; check_data.py reads pages_dir to confirm quotes.
+        # Self-describing so a port needs no hardcoded citation.
+        "source_corpora": SOURCE_CORPORA,
     }
 
     return ({"meta": meta, "structures": structures,

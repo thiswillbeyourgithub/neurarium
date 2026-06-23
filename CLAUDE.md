@@ -140,8 +140,12 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           based Nomenclature), optional description ({en,fr} one-line
                           mechanism), bindings[] (each: target = a drug_targets key,
                           action = a drug_actions key, optional effect override,
-                          optional note ({en,fr} or "TODO"), optional tentative),
-                          sources[{citation,url,provenance}] (always the Stahl
+                          optional note ({en,fr} or "TODO"), optional tentative,
+                          and optional per-claim sources[{corpus,page,quote,
+                          provenance}] = the quote-level provenance backing this
+                          binding, the quote being verbatim from the cited corpus
+                          page; see "Source provenance" below),
+                          sources[{citation,url,provenance}] (the drug-level Stahl
                           citation, url "TODO" for now; provenance is the
                           source-grade pill, see "Source provenance" below),
                           optional wikipedia (+ wikipedia_provenance), optional
@@ -617,7 +621,7 @@ classes the generator does not look for). Run it directly:
 python tools/check_data.py     # exit 0 = no errors (warnings allowed), 1 = errors
 ```
 
-Four families of checks:
+Five families of checks:
 
 - **Duplicates** (per collection: structures / receptors / drugs / circuits /
   targets, plus projections). An exact duplicate id/key, or two ids that collide
@@ -642,11 +646,29 @@ Four families of checks:
   never fail the run, they only print, so the pre-push gate passes on the current
   data.
 - **Provenance grades** (see "Source provenance" below): every emitted source
-  (`sources[].provenance`) and every wikipedia reference (the
-  `wikipedia_provenance` beside a `wikipedia`) must carry a known grade
-  (`llm` / `sourced` / `verified`), the value the viewer renders as the
-  grey/yellow/green pill. An unknown or missing grade is an **error** (the pill
-  would silently fall back to the "no source" TODO and mislead).
+  (`sources[].provenance`, **including the per-binding drug sources**) and every
+  wikipedia reference (the `wikipedia_provenance` beside a `wikipedia`) must carry
+  a known grade (`llm` / `sourced` / `verified`), the value the viewer renders as
+  the grey/yellow/green pill. An unknown or missing grade is an **error** (the
+  pill would silently fall back to the "no source" TODO and mislead).
+- **Source quotes** (the heart of the sourcing system, see "Source provenance"):
+  each per-binding drug source is `{corpus, page, quote, provenance}`, and a
+  `verified` grade is the one claiming the quote was confirmed present in the
+  source. This re-confirms it: `corpus` must resolve to `meta.source_corpora`, a
+  `verified` source must carry a page + quote, and the **normalized** quote must
+  be an exact substring of the **normalized** cited page text
+  (`<pages_dir>/<page>.md`). Normalization (`normalize_for_match`) folds away the
+  PDF->Markdown artifacts (hyphenated line breaks, markdown emphasis, curly
+  quotes, en/em dashes, accents) but stays an **exact** substring test, no fuzzy
+  matching (that would manufacture false confidence). The page material is
+  author-side and may be absent on a clone (`stahl/`, see CLAUDE.local.md); the
+  quote-in-page check is then **skipped with a warning** while the structural
+  checks still run. A quote genuinely not on its page (an invented or mistyped
+  extraction) is an **error**: this is the gate that keeps the LLM extraction
+  honest. The leeway "`[fluoxetine] does X`" should match "`It works`" lives in
+  the *semantic* judge at extraction time (does the quote support the claim), not
+  here: the checker only ever confirms the stored verbatim quote is really on the
+  page.
 
 The check functions take the loaded data as plain arguments (not the files), so
 they are unit-testable by feeding crafted records.
@@ -1677,6 +1699,26 @@ everything defaults to `"llm"`). Upgrading a source as it is checked is therefor
 **data** edit (raise its `provenance` / add a `WIKIPEDIA_PROVENANCE` entry), not a
 code change; `_provenance` validates every grade so a typo fails the build, and
 `tools/check_data.py` re-checks the emitted grades (see "Data checks").
+
+**Per-claim sources + the verify gate (drugs).** Beyond the drug-level bibliographic
+`STAHL_SOURCE`, each drug **binding** may carry its own `sources[]`, the quote-level
+provenance that earns a `verified` grade. Each is `{corpus, page, quote, provenance}`:
+`corpus` is a key of the **`SOURCE_CORPORA`** registry (`generate_data.py`,
+source-agnostic: Stahl is corpus #1, each entry has `{citation, url, pages_dir}`,
+emitted into `meta.source_corpora`), `page` locates the claim, and `quote` is the
+**verbatim** snippet from that page. `_binding_sources` validates each (corpus +
+grade) and enforces that a `verified` source carries a page + quote; the full
+citation is *not* denormalized onto all ~429 bindings (the viewer resolves it from
+`meta.source_corpora` by `corpus`). The two-step that makes `verified` trustworthy:
+an LLM extracts the quote (copied out of the page, never paraphrased) and a second
+LLM judges that the quote supports the claim (this semantic step is where any
+"leeway" lives), then **`tools/check_data.py`'s source-quote check confirms the
+stored quote is really on the cited page** (exact substring after normalization,
+author-gated on the corpus's `pages_dir`). That programmatic check is the backstop
+against a hallucinated quote: a claim cannot reach `verified` and survive the gate
+unless its quote is genuinely in the source. The page files live under `stahl/`
+(uncommitted, see CLAUDE.local.md), so the quote check runs on the author's machine
+/ the pre-push hook and is skipped (with a warning) on a clone without them.
 
 **Where the presentation lives.** `js/main.js` `makeProvenancePill(level)` maps the
 grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the
