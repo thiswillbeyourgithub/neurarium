@@ -1229,13 +1229,17 @@ function createInfoPanel(data) {
     sourced: { glyph: "~", tip: "info.provSourced" },
     verified: { glyph: "✓", tip: "info.provVerified" },
   };
-  const makeProvenancePill = (level) => {
+  // `extra` (optional) is appended to the tooltip after a blank line: the per-claim
+  // drug source pill uses it to show the verbatim supporting quote + page ref under
+  // the grade explanation (.help-tip is white-space:pre-line so the newlines show).
+  const makeProvenancePill = (level, extra) => {
     const spec = PROVENANCE_PILLS[level];
-    const tip = spec ? t(spec.tip) : t("info.provNone");
+    const base = spec ? t(spec.tip) : t("info.provNone");
+    const tip = extra ? `${base}\n\n${extra}` : base;
     const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
     const pill = el("button", cls, spec ? spec.glyph : t("info.linkTodo"));
     pill.type = "button";
-    pill.setAttribute("aria-label", tip);
+    pill.setAttribute("aria-label", base);
     return withTip(pill, tip);
   };
 
@@ -1623,7 +1627,23 @@ function createInfoPanel(data) {
           if (b.tentative) parts.push(t("drug.speculative"));
           const detail = parts.filter(Boolean).join(" · ");
           if (detail) txt.appendChild(el("span", "bind-action", detail));
-          li.appendChild(txt);
+          // Per-claim source pill: when this binding carries a source, show its
+          // provenance grade with the verbatim supporting quote + page ref in the
+          // tooltip (after a newline). Strongest grade colours the pill. A binding
+          // with no source yet shows none (it falls under the drug-level source).
+          if (b.sources && b.sources.length) {
+            const corpora = (data.meta && data.meta.sourceCorpora) || {};
+            const extra = b.sources
+              .map((s) => {
+                const c = corpora[s.corpus] || {};
+                const ref = s.page != null
+                  ? t("info.sourceRef", { corpus: c.short || s.corpus, page: s.page })
+                  : (c.short || s.corpus);
+                return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
+              })
+              .join("\n\n");
+            li.appendChild(makeProvenancePill(b.provenance, extra));
+          }
           li.title = `${b.effectLabel} · ${b.targetName}`;
           // If this binding's target is browsable on its own (in the merged
           // "Receptors & targets" list and focusable), make the row jump to it.

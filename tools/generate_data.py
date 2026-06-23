@@ -554,6 +554,7 @@ STAHL_SOURCE: dict[str, str] = {
 # skipped while the structural checks still run.
 SOURCE_CORPORA: dict[str, dict[str, str]] = {
     "stahl": {
+        "short": "Stahl",          # compact label for the per-claim tooltip ref
         "citation": STAHL_SOURCE["citation"],
         "url": STAHL_SOURCE["url"],
         "pages_dir": "stahl/pages",

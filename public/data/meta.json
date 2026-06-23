@@ -1914,6 +1914,7 @@
   },
   "source_corpora": {
     "stahl": {
+      "short": "Stahl",
       "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
       "url": "TODO",
       "pages_dir": "stahl/pages"

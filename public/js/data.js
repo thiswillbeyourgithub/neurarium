@@ -169,6 +169,11 @@ export async function loadBrainData(dataDir = "data") {
   // overlay (only the diffuse ascending modulatory systems are mapped; see
   // generate_data.py SYSTEM_FLOW_KINDS). Language-neutral, applied per drug below.
   const systemFlowKinds = metaRecord.system_flow_kinds || {};
+  // Source corpora (id -> {short, citation, url, pages_dir}) the per-claim binding
+  // sources cite; the drug panel resolves a binding source's `corpus` to this for
+  // its tooltip ref (see SOURCE_CORPORA in generate_data.py). Raw map (citation is
+  // language-neutral); pages_dir is author-side and ignored by the viewer.
+  const sourceCorpora = metaRecord.source_corpora || {};
 
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
@@ -243,6 +248,28 @@ export async function loadBrainData(dataDir = "data") {
   // receptor's locations). The union over all bindings is the drug's affected set
   // (what the focus dims the brain down to). `keywords` feeds the search box.
   const receptorStructureIds = new Map(receptors.map((r) => [r.id, r.structureIds]));
+  // Provenance grade ordering (weakest -> strongest); the strongest grade among a
+  // binding's sources colours its source pill. Null when the binding has no source.
+  const GRADE_RANK = { llm: 1, sourced: 2, verified: 3 };
+  const strongestGrade = (sources) => {
+    let best = null;
+    let rank = 0;
+    for (const s of sources || []) {
+      const r = GRADE_RANK[s.provenance] || 0;
+      if (r > rank) {
+        rank = r;
+        best = s.provenance;
+      }
+    }
+    return best;
+  };
+  const bindingSources = (b) =>
+    (b.sources || []).map((s) => ({
+      corpus: s.corpus,
+      page: s.page != null ? s.page : null,
+      quote: s.quote || "",
+      provenance: s.provenance || "llm",
+    }));
   for (const d of drugs) {
     d.description = d.description ? localize(d.description) : "";
     d.nbn = d.nbn ? localize(d.nbn) : "";
@@ -281,6 +308,13 @@ export async function loadBrainData(dataDir = "data") {
         note: b.note ? localize(b.note) : "",
         tentative: !!b.tentative,
         structureIds,
+        // Per-claim sources ({corpus, page, quote, provenance}); the verbatim
+        // quote is what tools/check_data.py confirms is in the cited page. The
+        // full citation is resolved client-side from meta.sourceCorpora by
+        // `corpus`, not denormalized here. `provenance` is the strongest grade
+        // among them, which colours the binding's source pill (null = no source).
+        sources: bindingSources(b),
+        provenance: strongestGrade(b.sources),
       };
     });
     d.structureIds = [...affected];
@@ -400,6 +434,7 @@ export async function loadBrainData(dataDir = "data") {
       drugCategoryLabels,
       drugEffectColors,
       drugEffectLabels,
+      sourceCorpora,
     },
   };
 }
