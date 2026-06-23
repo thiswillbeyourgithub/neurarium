@@ -314,7 +314,8 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Aripiprazole"
@@ -383,7 +384,8 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Asenapine"
@@ -1107,22 +1109,6 @@
       {
         "target": "vmat2",
         "action": "reuptake_inhibitor"
-      },
-      {
-        "target": "d2",
-        "action": "antagonist",
-        "note": {
-          "en": "low",
-          "fr": "faible"
-        }
-      },
-      {
-        "target": "5ht7",
-        "action": "antagonist",
-        "note": {
-          "en": "moderate",
-          "fr": "modéré"
-        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Deutetrabenazine"
@@ -2298,7 +2284,8 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Lumateperone"
@@ -2784,10 +2771,6 @@
         "action": "reuptake_inhibitor"
       },
       {
-        "target": "dat",
-        "action": "releaser"
-      },
-      {
         "target": "net",
         "action": "reuptake_inhibitor"
       },
@@ -2916,15 +2899,18 @@
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Olanzapine"
@@ -2954,15 +2940,18 @@
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Olanzapine/samidorphan"
@@ -3041,7 +3030,8 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Paliperidone"
@@ -3529,15 +3519,18 @@
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Quetiapine"
@@ -3620,7 +3613,8 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "tentative": true
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Risperidone"
