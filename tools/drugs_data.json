@@ -17,7 +17,15 @@
       {
         "target": "glutamate",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 15,
+            "quote": "Binds to and blocks certain glutamate receptors, including metabotropic glutamate receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "mglur1",
@@ -348,19 +356,51 @@
     "bindings": [
       {
         "target": "dat",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 53,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 53,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "dat",
-        "action": "releaser"
+        "action": "releaser",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 53,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "releaser"
+        "action": "releaser",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 53,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Dextroamphetamine"
@@ -382,19 +422,51 @@
     "bindings": [
       {
         "target": "dat",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 61,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 61,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "dat",
-        "action": "releaser"
+        "action": "releaser",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 61,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "releaser"
+        "action": "releaser",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 61,
+            "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Amphetamine"
@@ -416,7 +488,15 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "partial_agonist"
+        "action": "partial_agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 69,
+            "quote": "Partial agonism at dopamine 2 receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "d3",
@@ -426,19 +506,51 @@
       {
         "target": "5ht1a",
         "action": "partial_agonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 69,
+            "quote": "Partial agonism at serotonin 1A receptors may be relevant at clinical doses",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 69,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 69,
+            "quote": "Blockade of serotonin type 2C and 7 receptors as well as partial agonist actions at serotonin 1A receptors may contribute to antidepressant actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht7",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 69,
+            "quote": "Blockade of serotonin type 2C and 7 receptors as well as partial agonist actions at serotonin 1A receptors may contribute to antidepressant actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
@@ -466,7 +578,15 @@
       {
         "target": "dat",
         "action": "reuptake_inhibitor",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 81,
+            "quote": "Hypothetically acts as an inhibitor of the dopamine transporter",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Armodafinil"
@@ -488,32 +608,88 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 87,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 87,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 87,
+            "quote": "Serotonin 2C, serotonin 7, and alpha 2 antagonist properties may contribute to antidepressant actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht7",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 87,
+            "quote": "Serotonin 2C, serotonin 7, and alpha 2 antagonist properties may contribute to antidepressant actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 87,
+            "quote": "Serotonin 2C, serotonin 7, and alpha 2 antagonist properties may contribute to antidepressant actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1a",
-        "action": "partial_agonist"
+        "action": "partial_agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 87,
+            "quote": "Partial agonist at serotonin 1A receptors, which may be beneficial for mood, anxiety, and cognition in a number of disorders",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 88,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Asenapine"
@@ -535,7 +711,15 @@
     "bindings": [
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 95,
+            "quote": "Blocks norepinephrine reuptake pumps, also known as norepinephrine transporters",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Atomoxetine"
