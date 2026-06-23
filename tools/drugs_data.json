@@ -779,7 +779,15 @@
     "bindings": [
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 173,
+            "quote": "Blocks serotonin reuptake pump (serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
@@ -1398,7 +1406,15 @@
     "bindings": [
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 297,
+            "quote": "Blocks serotonin reuptake pump (serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Escitalopram"
@@ -1575,11 +1591,27 @@
     "bindings": [
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 329,
+            "quote": "Blocks serotonin reuptake pump (serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 329,
+            "quote": "Fluoxetine also has antagonist properties at serotonin 2C receptors, which could increase norepinephrine and dopamine neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Fluoxetine"
@@ -3757,7 +3789,15 @@
     "bindings": [
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 767,
+            "quote": "Blocks serotonin reuptake pump (serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "dat",
