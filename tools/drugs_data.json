@@ -44,15 +44,39 @@
     "bindings": [
       {
         "target": "mt1",
-        "action": "agonist"
+        "action": "agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 22,
+            "quote": "agonist at melatonergic MT1/MT2 receptors and antagonist at serotonin 2C receptors acting synergistically",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "mt2",
-        "action": "agonist"
+        "action": "agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 22,
+            "quote": "agonist at melatonergic MT1/MT2 receptors and antagonist at serotonin 2C receptors acting synergistically",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 19,
+            "quote": "Antagonist at serotonin 2C receptors",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Agomelatine"
@@ -102,24 +126,64 @@
       {
         "target": "d2",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 31,
+            "quote": "Theoretically blocks postsynaptic dopamine 2 receptors at higher doses",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "d2",
         "action": "partial_agonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 31,
+            "quote": "May be a partial agonist at dopamine 2 receptors, which would theoretically reduce dopamine output when dopamine concentrations are high and increase dopamine output when dopamine concentrations are low",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "d3",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 31,
+            "quote": "Blocks dopamine 3 receptors, which may contribute to its clinical actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht7",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 31,
+            "quote": "Does have antagonist actions at serotonin 7 receptors and serotonin 2B receptors, which may contribute to antidepressant effects",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2b",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 31,
+            "quote": "Does have antagonist actions at serotonin 7 receptors and serotonin 2B receptors, which may contribute to antidepressant effects",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Amisulpride"
@@ -142,15 +206,39 @@
     "bindings": [
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 39,
+            "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 39,
+            "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 40,
+            "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1a",
@@ -182,23 +270,63 @@
     "bindings": [
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 47,
+            "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 47,
+            "quote": "A more potent inhibitor of norepinephrine reuptake pump than serotonin reuptake pump (serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 47,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 47,
+            "quote": "Serotonin 2A antagonist",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 48,
+            "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Amoxapine"
