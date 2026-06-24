@@ -274,6 +274,9 @@ export async function loadBrainData(dataDir = "data") {
     }));
   for (const d of drugs) {
     d.description = d.description ? localize(d.description) : "";
+    // Provenance grade of the description (llm synthesis vs a sourced Wikipedia
+    // lead); the panel shows a pill beside it.
+    d.descriptionProvenance = d.description_provenance || null;
     d.nbn = d.nbn ? localize(d.nbn) : "";
     // The NbN is quote-sourced like a binding (verbatim Stahl line); the panel
     // shows a provenance pill next to it. Null grade when unsourced.

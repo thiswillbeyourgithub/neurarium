@@ -1603,7 +1603,17 @@ function createInfoPanel(data) {
       appendWiki(drug.wikipedia, drug.wikipedia_provenance);
 
       if (drug.description) {
-        body.appendChild(el("p", "info-desc", drug.description));
+        const p = el("p", "info-desc", drug.description);
+        // Provenance pill beside the description: "sourced" means it is the lead
+        // section of the drug's Wikipedia article (CC BY-SA), "llm" an LLM-written
+        // mechanism synthesis.
+        if (drug.descriptionProvenance) {
+          const extra = drug.descriptionProvenance === "sourced"
+            ? t("info.descFromWikipedia") : "";
+          p.appendChild(document.createTextNode(" "));
+          p.appendChild(makeProvenancePill(drug.descriptionProvenance, extra));
+        }
+        body.appendChild(p);
       }
 
       // Classification facts: the coarse class(es) and the NbN nomenclature line.

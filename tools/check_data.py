@@ -421,6 +421,10 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
                       f"sources[{i}]")
         for i, src in enumerate(drug.get("nbn_sources", []) or []):
             grade(src.get("provenance"), f"drug {drug.get('id')} nbn_sources[{i}]")
+        # A drug's description carries its own grade (llm synthesis vs sourced WP lead).
+        if drug.get("description"):
+            grade(drug.get("description_provenance"),
+                  f"drug {drug.get('id')} description_provenance")
 
     # Wikipedia references (structures / receptors / drugs, + the meta targets)
     # carry a sibling `wikipedia_provenance` whenever the link is present.

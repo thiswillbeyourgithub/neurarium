@@ -3146,6 +3146,12 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
             out["nbn_sources"] = nbn_sources
     if drug.get("description"):
         out["description"] = drug["description"]
+        # Every description carries a provenance grade so the panel can show a pill.
+        # Default "llm" (an LLM-synthesized mechanism line); set "sourced" when the
+        # description was replaced by a drug's Wikipedia lead (see fetch_descriptions).
+        out["description_provenance"] = _provenance(
+            drug.get("description_provenance", DEFAULT_PROVENANCE),
+            f"drug {drug['id']!r} description")
     if drug.get("wikipedia"):
         out["wikipedia"] = drug["wikipedia"]
         out["wikipedia_provenance"] = _wiki_provenance(drug["id"])
