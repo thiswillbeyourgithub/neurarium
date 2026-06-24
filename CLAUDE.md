@@ -100,7 +100,13 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           transporter/enzyme/ion_channel) and target_type_colors
                           (type -> swatch/dot colour, since a transporter has no
                           excit/inhib sign to reuse); so the dataset is
-                          self-describing and a port needs no hardcoded palette
+                          self-describing and a port needs no hardcoded palette.
+                          Also provenance_stats, the programmatic sourcing tally
+                          (per-kind verified/sourced/unverified counts + a headline
+                          pct_backed over the factual claims), computed by
+                          generate_data.py's _provenance_stats and read by the About
+                          panel + README so the "% sourced" figure is a real count,
+                          see "Source provenance"
                         - data/structures.jsonl: one region per line: id, name
                           ({en,fr}, with the hemisphere prefix/suffix), base_name
                           ({en,fr}, hemisphere-stripped, used for the legend row),
@@ -480,6 +486,14 @@ tools/apply_nbn_sources.py  Authoring helper (stdlib, author-side): sources each
                       captures it verbatim, confirms the dataset's nbn value is a
                       substring of it (programmatic claim-support), and writes a
                       verified nbn_sources entry. Idempotent. See "Source provenance".
+tools/update_readme_stats.py  Authoring helper (stdlib, author-side): rewrites the
+                      sourcing-coverage block between the SOURCING_STATS markers in
+                      README.md from the emitted meta.provenance_stats (the headline
+                      "% of claims sourced or verified" + the per-kind table), so the
+                      README figure is a real count of the shipped data, never
+                      hand-typed. Idempotent; `--check` exits 1 if out of date (CI).
+                      Run after generate_data.py when the sourcing changes. See
+                      "Source provenance".
 tools/fetch_molecules.py  Authoring tool (stdlib, needs network) that downloads
                       each drug's molecular-structure SVG from Wikipedia into
                       public/data/molecules/<id>.svg, so the panel can embed them
@@ -683,8 +697,8 @@ Five families of checks:
   in" rows are clickable**: a `location` / `region` that names no atlas structure
   base is flagged as unclickable. All dangling references are **errors**.
 - **TODOs**: a literal `"TODO"` outside a source url (e.g. a binding `note` left
-  as TODO), plus any focusable target with no `wikipedia` (shown as a TODO pill),
-  is a **warning**; source urls left as `"TODO"` are counted and warned about
+  as TODO), plus any focusable target with no `wikipedia` (shown as the orange
+  NOSOURCE pill), is a **warning**; source urls left as `"TODO"` are counted and warned about
   **separately** (the known, tracked backlog, currently every source). TODOs
   never fail the run, they only print, so the pre-push gate passes on the current
   data.
@@ -694,7 +708,12 @@ Five families of checks:
   wikipedia reference (the `wikipedia_provenance` beside a `wikipedia`) must carry
   a known grade (`llm` / `sourced` / `verified`), the value the viewer renders as
   the grey/yellow/green pill. An unknown or missing grade is an **error** (the
-  pill would silently fall back to the "no source" TODO and mislead).
+  pill would silently fall back to the "no source" NOSOURCE pill and mislead).
+  This family also re-confirms the emitted **`meta.provenance_stats`** tally is
+  **self-consistent** (each kind's verified+sourced+unverified == total, the
+  assertion totals == the sum over the claim kinds, and `pct_backed` == the
+  recomputed percentage), so a malformed emit or a hand-edited stat can never ship
+  a wrong "% sourced" headline; a mismatch is an **error**.
 - **Source quotes** (the heart of the sourcing system, see "Source provenance"):
   each quote-level drug source (a binding's `sources` **and a drug's
   `nbn_sources`**) is `{corpus, page, quote, provenance}`, and a
@@ -1006,9 +1025,18 @@ as the WIP banner (`js/error-banner.js`):
   whose href is set from `cfg.sourceUrl` by `js/main.js` (the row is removed if
   that isn't a valid `http(s)` URL), then a **licence line** (`about.license`,
   linking the canonical AGPL-3.0 text) which is a separate paragraph so it shows
-  even when the source-code row is dropped. See "Dev / WIP banner" for
+  even when the source-code row is dropped, then a **CC BY-SA attribution** line
+  (`about.attribution`, for the Wikipedia-sourced drug descriptions + molecule
+  images), and finally the **"Sources & provenance"** block (`#about-sourcing`,
+  built by `buildAboutSourcing` from `data.meta.provenanceStats`): the grade key
+  (the `✓` / `~` / `?` / `NOSOURCE` pill swatches, each with its meaning) and the
+  programmatic **coverage tally** (a headline "% of factual claims sourced or
+  verified" + a per-kind bar). This is the single place that explains the whole
+  sourcing system, so the per-panel "?" caveat doesn't have to (see "Source
+  provenance"). See "Dev / WIP banner" for
   `sourceUrl`. (The README carries the same "open an issue" invitation in a
-  **Feedback** section.)
+  **Feedback** section, and the same coverage table via
+  `tools/update_readme_stats.py`.)
 - **Auto-rotate** checkbox: spins the camera around the brain (OrbitControls
   `autoRotate`). **On by default** (a slow turn on load); it switches itself off
   (and unticks the box) the moment the user picks content, i.e. any pick routed
@@ -1181,7 +1209,7 @@ as the WIP banner (`js/error-banner.js`):
   `showReceptor` (the system, a Wikipedia link, the description, the classification
   facts and the region list, or "Throughout the brain" for a ubiquitous receptor);
   a non-receptor target opens the lighter `showTarget` (its system, a Wikipedia
-  link or a TODO pill until one is gathered, the type + system facts, and the
+  link or a NOSOURCE pill until one is gathered, the type + system facts, and the
   region list). Both panels then carry an **"Interacting drugs"** section under
   "Found in": the drugs that act on this target (so you can go from a target to
   every drug touching it), **grouped by primary drug category** (antipsychotic,
@@ -1377,11 +1405,16 @@ as the WIP banner (`js/error-banner.js`):
   whether the detail is first picked or re-shown by clicking its tab. An empty-
   space click returns to Settings via `tabs.showSettings()` (the detail tabs stay).
   Everywhere a data **source / reference** is shown (the connection + drug
-  **Source(s)** list and every **Wikipedia / Reference** row), two things sit next
-  to it (see "Source provenance" below for the full model): a per-source
-  **provenance pill** (`makeProvenancePill`) grading how trustworthy that one
-  source is, **plus** a standing **"?" caveat badge** (`makeHelpIcon`) on the
-  block heading warning that none of it is human-checked. Both reuse one
+  **Source(s)** list and every **Wikipedia / Reference** row), a per-source
+  **provenance pill** (`makeProvenancePill`) grades how trustworthy that one
+  source is (see "Source provenance" below for the full model). On top of the
+  pills, **one** **"?" caveat badge** (`makeHelpIcon`) appears **per panel**,
+  warning that none of it is human-checked: `addCaveatOnce` drops it on the first
+  source/reference block to render (guarded on the unique `.help-dot` class, the
+  body being cleared each render), so it no longer repeats on every block + blur
+  with the grey `llm` pill's own "?" glyph; the full grade key lives once in the
+  About panel ("Sources & provenance", see "Controls -> About"). Both the pill and
+  the caveat reuse one
   `withTip(trigger, text)` helper for the hover/tap tooltip: it shows on hover and
   is pinned on click/tap (a `.show` class) so touch devices (no `:hover`) can read
   it, and it is anchored to the full-width `.info-sources` / `.info-wiki` container
@@ -1402,7 +1435,7 @@ as the WIP banner (`js/error-banner.js`):
     result) shows the **structure** view (`showStructure`): its name, its group
     heading (from `data.meta.groupLabels`), a **Reference row** (a Wikipedia link
     for an http(s) `wikipedia` url, with its provenance pill, else the orange
-    `TODO` pill, see "Source provenance"), and the list of pathways touching it.
+    `NOSOURCE` pill, see "Source provenance"), and the list of pathways touching it.
     Each connection row
     shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
     receives, `↔` reciprocal) and the other endpoint; **clicking a row jumps to
@@ -1549,7 +1582,7 @@ sources are normalized to one shape in `js/data.js` and grouped by neurotransmit
 beside the 5-HT receptors. A receptor isn't a transporter, so the distinction is
 kept: a receptor keeps its sign swatch + full `showReceptor` panel, a non-receptor
 target gets its `type`-colour swatch, a muted type tag, and the lighter
-`showTarget` panel (its system, a Wikipedia link or a TODO pill until one is
+`showTarget` panel (its system, a Wikipedia link or a NOSOURCE pill until one is
 gathered, the type + system facts, the region list). Both panels also list the
 **drugs that act on the target** (the `data.drugsByTarget` reverse index), grouped
 by drug category and coloured by each binding's effect, with a click jumping to the
@@ -1561,7 +1594,7 @@ shared (the same `focusTarget` path, `createReceptorMarkers` dots and
 vesicle_protein / receptor_group), `system`, region footprint and optional
 `wikipedia` are authored in the `DRUG_TARGETS` map in `tools/generate_data.py` (see
 "Drugs" and "Changing the data"); the regions currently carry no per-target source,
-hence the TODO pill.
+hence the NOSOURCE pill.
 
 To add or edit a receptor, see "Changing the data" below.
 
@@ -1730,9 +1763,10 @@ strongest), defined once in `generate_data.py` as `PROVENANCE_LEVELS`:
   **still LLM-driven**, so it can still be wrong; going further would need
   substantial, error-prone human review and is out of scope for this project (the
   `info.provVerified` tooltip says so).
-- The **absence** of any source/reference is rendered as the long-standing orange
-  **`TODO`** pill (tooltip `info.provNone`, "no source yet"); it is not one of the
-  stored grades.
+- The **absence** of any source/reference is rendered as the orange
+  **`NOSOURCE`** pill (en "NOSOURCE", fr "SANS SOURCE", from `info.noSource`;
+  tooltip `info.provNone`, "no source yet"); it is not one of the stored grades.
+  (Its CSS class is still `.src-todo` internally.)
 
 **Where the grade lives in the data.** Each citation source object is
 `{citation, url, provenance}` (projection `sources`, the drug `STAHL_SOURCE`); a
@@ -1790,12 +1824,26 @@ revisions are recorded in `tools/descriptions_sources.json`.
 grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the
 glyph + the `info.prov*` tooltip via the shared `withTip` helper; the pill colours
 are CSS (`.src-prov-llm/sourced/verified` in `index.html`, beside the orange
-`.src-todo`). The per-source pill sits **alongside** the existing block-level "?"
-caveat (`makeHelpIcon`), which still warns that none of the data is human-verified
-(see "Info panel"). `appendSources` adds a pill per citation; `appendWiki(url,
-provenance)` adds one per reference row (or the `TODO` pill when the link is
-absent). New user-visible strings are the `info.provNone/provLlm/provSourced/
-provVerified` i18n keys (both languages).
+`.src-todo`). The per-source pill sits **alongside** the **one-per-panel** "?"
+caveat (`makeHelpIcon` via `addCaveatOnce`), which warns that none of the data is
+human-verified (see "Info panel"). `appendSources` adds a pill per citation;
+`appendWiki(url, provenance)` adds one per reference row (or the `NOSOURCE` pill
+when the link is absent). New user-visible strings are the
+`info.provNone/provLlm/provSourced/provVerified` i18n keys (both languages).
+
+**The "% sourced" figure.** `generate_data.py` `_provenance_stats` reduces every
+claim + reference to its strongest grade and tallies them per kind (drug bindings
+/ NbN / descriptions / projections / wikipedia references) plus a headline over
+the **factual claims** (`pct_backed` = sourced-or-verified / total), emitting it as
+`meta.provenance_stats` (see the meta.json map). The viewer's About panel shows it
+(`buildAboutSourcing` in `js/main.js`, reading `data.meta.provenanceStats`: the
+grade key reusing the `.src-pill` swatches, the headline + a per-kind coverage bar,
+new `about.sourcing*`/`about.grade*`/`about.kind*` i18n keys), and
+`tools/update_readme_stats.py` writes the same numbers into the README's
+SOURCING_STATS block. So both surfaces show a real count of the shipped data,
+never hand-typed; `tools/check_data.py` re-confirms the emitted tally is
+self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
+94%, NbN 97%, descriptions 89%; projections + references the gap).
 
 ## Changing the data
 
@@ -1989,7 +2037,7 @@ provVerified` i18n keys (both languages).
      `type` (a `TARGET_TYPE_LABELS` key: transporter / enzyme / ion_channel /
      vesicle_protein / receptor_group; it drives the merged Receptors & targets
      legend's swatch + tag) and may carry an optional `wikipedia` url (left absent
-     -> a TODO pill); the build raises on an unknown type or a non-http(s) wikipedia.
+     -> a NOSOURCE pill); the build raises on an unknown type or a non-http(s) wikipedia.
      Keep extraction **strictly dump-sourced**
      (only what the source text states; leave gaps as TODO / no binding). It shows up
      in the legend's Drugs section automatically. To also show its **molecule
