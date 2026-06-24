@@ -1220,7 +1220,7 @@ function createInfoPanel(data) {
   // grey "?" = LLM-only (may be hallucinated), yellow "~" = the LLM had the source
   // document, green "✓" = quote-checked + agreed by a second LLM. The colour is a
   // `.src-prov-<level>` CSS class. A falsy / unknown level is the "no source yet"
-  // case and renders the orange TODO pill (`.src-todo`) instead. The pill is a
+  // case and renders the orange NOSOURCE pill (`.src-todo`) instead. The pill is a
   // <button> so a tap pins its explanatory tooltip on touch (via withTip), the
   // same mechanism as the "?" caveat icon. The grade itself comes from the data
   // (generate_data.py PROVENANCE_LEVELS); only the glyph + tooltip live here.
@@ -1237,7 +1237,7 @@ function createInfoPanel(data) {
     const base = spec ? t(spec.tip) : t("info.provNone");
     const tip = extra ? `${base}\n\n${extra}` : base;
     const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
-    const pill = el("button", cls, spec ? spec.glyph : t("info.linkTodo"));
+    const pill = el("button", cls, spec ? spec.glyph : t("info.noSource"));
     pill.type = "button";
     pill.setAttribute("aria-label", base);
     return withTip(pill, tip);
