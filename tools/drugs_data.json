@@ -1663,11 +1663,27 @@
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 216,
+            "quote": "Anticholinergic actions, especially at high doses, may cause sedation, blurred vision, constipation, dry mouth",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 216,
+            "quote": "Antihistamine actions may contribute to anxiolytic actions at low doses and to sedation and weight gain at high doses",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Cyamemazine"
@@ -2092,7 +2108,15 @@
         "note": {
           "en": "selective, central",
           "fr": "sélectif, central"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 271,
+            "quote": "Reversibly but noncompetitively inhibits centrally active acetylcholinesterase, making more acetylcholine available",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Donepezil"
@@ -2386,7 +2410,15 @@
           "en": "alpha-1 selective",
           "fr": "sélectif alpha-1"
         },
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 313,
+            "quote": "Boosts chloride conductance through GABA-regulated channels",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Eszopiclone"
@@ -2921,15 +2953,39 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 387,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 387,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 387,
+            "quote": "Blockade of central alpha 1 adrenergic receptors may contribute to low potential for drug-induced parkinsonism",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Iloperidone"
@@ -3493,15 +3549,39 @@
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 472,
+            "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 472,
+            "quote": "Antihistaminic actions may cause sedation, weight gain",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 472,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Loxapine"
@@ -3568,7 +3648,15 @@
       },
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 479,
+            "quote": "Also has affinity for the serotonin reuptake pump (SERT, serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
@@ -3697,7 +3785,15 @@
     "bindings": [
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 495,
+            "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "sert",
@@ -3705,7 +3801,15 @@
         "note": {
           "en": "weaker, high dose",
           "fr": "plus faible, forte dose"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 495,
+            "quote": "A more potent inhibitor of norepinephrine reuptake pump than serotonin reuptake pump (serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "muscarinic",
@@ -3717,7 +3821,15 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 496,
+            "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Maprotiline"
@@ -3886,27 +3998,75 @@
         "note": {
           "en": "presynaptic",
           "fr": "présynaptique"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 525,
+            "quote": "Blocks alpha 2 adrenergic presynaptic receptor, thereby increasing norepinephrine neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 525,
+            "quote": "Blocks alpha 2 adrenergic presynaptic receptors but also alpha 1 adrenergic receptors on serotonin neurons, thereby causing little increase in serotonin neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 525,
+            "quote": "Blocks serotonin 2A, 2C, and 3 receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 525,
+            "quote": "Blocks serotonin 2A, 2C, and 3 receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht3",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 525,
+            "quote": "Blocks serotonin 2A, 2C, and 3 receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 525,
+            "quote": "Blocks H1 histamine receptors",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Mianserin"
@@ -4118,7 +4278,15 @@
       {
         "target": "dat",
         "action": "reuptake_inhibitor",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 551,
+            "quote": "Hypothetically acts as an inhibitor of the dopamine transporter",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Modafinil"
@@ -4425,11 +4593,27 @@
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 584,
+            "quote": "Anticholinergic activity may explain sedative effects, dry mouth, constipation, and blurred vision",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 584,
+            "quote": "Sedative effects and weight gain may be due to antihistamine properties",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
@@ -4463,30 +4647,78 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 591,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 591,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 591,
+            "quote": "Specifically, antagonist actions at serotonin 2C receptors may contribute to efficacy for cognitive and affective symptoms in some patients",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 593,
+            "quote": "By blocking histamine 1 receptors in the brain, it can cause sedation and possibly weight gain",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 593,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "muscarinic",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 593,
+            "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Olanzapine"
@@ -4642,20 +4874,52 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 621,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 621,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht7",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 621,
+            "quote": "Serotonin 7 antagonist properties may contribute to antidepressant actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 622,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Paliperidone"
@@ -4715,11 +4979,27 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 641,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 641,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1a",
@@ -4913,11 +5193,27 @@
     "bindings": [
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 665,
+            "quote": "Antagonism/inverse agonism at serotonin 2A receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "inverse_agonist"
+        "action": "inverse_agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 665,
+            "quote": "Antagonism/inverse agonism at serotonin 2A receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
@@ -4925,7 +5221,15 @@
         "note": {
           "en": "very low activity",
           "fr": "activité très faible"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 665,
+            "quote": "Pimavanserin is also an antagonist/inverse agonist at serotonin 2C receptors (activity is very low compared to that at serotonin 2A receptors)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
@@ -4933,7 +5237,15 @@
         "note": {
           "en": "very low activity",
           "fr": "activité très faible"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 665,
+            "quote": "Pimavanserin is also an antagonist/inverse agonist at serotonin 2C receptors (activity is very low compared to that at serotonin 2A receptors)",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Pimavanserin"
@@ -5019,11 +5331,27 @@
     "bindings": [
       {
         "target": "h3",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 681,
+            "quote": "Antagonism/inverse agonism of histamine 3 receptors by pitolisant therefore disinhibits histamine release, boosting histamine levels in the brain and enhancing wakefulness",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h3",
-        "action": "inverse_agonist"
+        "action": "inverse_agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 681,
+            "quote": "Antagonism/inverse agonism of histamine 3 receptors by pitolisant therefore disinhibits histamine release, boosting histamine levels in the brain and enhancing wakefulness",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Pitolisant"
@@ -5064,7 +5392,15 @@
     "bindings": [
       {
         "target": "cav_a2d",
-        "action": "blocker"
+        "action": "blocker",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 689,
+            "quote": "Binds to the alpha 2 delta subunit of voltage-sensitive calcium channels",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "cav",
@@ -5072,7 +5408,15 @@
         "note": {
           "en": "N and P/Q types",
           "fr": "types N et P/Q"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 689,
+            "quote": "This closes N and P/Q presynaptic calcium channels, diminishing excessive neuronal activity and neurotransmitter release",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Pregabalin"
@@ -5207,42 +5551,114 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 709,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 709,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 709,
+            "quote": "Interactions at a myriad of other neurotransmitter receptors may contribute to quetiapine's efficacy in treatmentresistant depression or bipolar depression, especially serotonin 1A partial agonist action, norepinephrine reuptake blockade and serotonin 2C antagonist and serotonin 7 antagonist properties",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1a",
-        "action": "partial_agonist"
+        "action": "partial_agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 709,
+            "quote": "Interactions at a myriad of other neurotransmitter receptors may contribute to quetiapine's efficacy in treatmentresistant depression or bipolar depression, especially serotonin 1A partial agonist action, norepinephrine reuptake blockade and serotonin 2C antagonist and serotonin 7 antagonist properties",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht7",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 709,
+            "quote": "Interactions at a myriad of other neurotransmitter receptors may contribute to quetiapine's efficacy in treatmentresistant depression or bipolar depression, especially serotonin 1A partial agonist action, norepinephrine reuptake blockade and serotonin 2C antagonist and serotonin 7 antagonist properties",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 709,
+            "quote": "Interactions at a myriad of other neurotransmitter receptors may contribute to quetiapine's efficacy in treatmentresistant depression or bipolar depression, especially serotonin 1A partial agonist action, norepinephrine reuptake blockade and serotonin 2C antagonist and serotonin 7 antagonist properties",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 711,
+            "quote": "By blocking histamine 1 receptors in the brain, it can cause sedation and possibly weight gain",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 711,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "muscarinic",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 711,
+            "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Quetiapine"
@@ -5404,11 +5820,27 @@
     "bindings": [
       {
         "target": "dat",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 755,
+            "quote": "d-methylphenidate increases norepinephrine and especially dopamine actions by blocking their reuptake",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 755,
+            "quote": "d-methylphenidate increases norepinephrine and especially dopamine actions by blocking their reuptake",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Serdexmethylphenidate"
@@ -5430,11 +5862,27 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 761,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2a",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 761,
+            "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht2c",
@@ -5447,7 +5895,15 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 762,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Sertindole"
@@ -5485,7 +5941,15 @@
         "note": {
           "en": "mild",
           "fr": "léger"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 767,
+            "quote": "Sertraline also has some ability to block dopamine reuptake pump (dopamine transporter), which could increase dopamine neurotransmission and contribute to its therapeutic actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "sigma1",
@@ -5574,7 +6038,15 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 787,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "d3",
@@ -5583,7 +6055,15 @@
         "note": {
           "en": "may contribute",
           "fr": "pourrait contribuer"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 787,
+            "quote": "Blocks dopamine 3 and 4 receptors, which may contribute to sulpiride's actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "d4",
@@ -5592,7 +6072,15 @@
         "note": {
           "en": "may contribute",
           "fr": "pourrait contribuer"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 787,
+            "quote": "Blocks dopamine 3 and 4 receptors, which may contribute to sulpiride's actions",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "muscarinic",
@@ -5780,11 +6268,27 @@
       {
         "target": "ampa",
         "action": "pam",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 823,
+            "quote": "Modulates glutamatergic neurotransmission, perhaps through potentiation of AMPA receptor function",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "mu",
-        "action": "agonist"
+        "action": "agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 823,
+            "quote": "Full agonist at mu opioid receptors; animal studies suggest that this may contribute to its antidepressant effects",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Tianeptine"
@@ -5803,16 +6307,40 @@
     "bindings": [
       {
         "target": "nav",
-        "action": "blocker"
+        "action": "blocker",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 827,
+            "quote": "Blocks voltage-sensitive sodium channels by an unknown mechanism",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "carbonic_anhydrase",
-        "action": "enzyme_inhibitor"
+        "action": "enzyme_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 827,
+            "quote": "Carbonic anhydrase inhibitor",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "gaba_a",
         "action": "pam",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 827,
+            "quote": "Potentiates activity of GABA",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Topiramate"
@@ -5930,19 +6458,51 @@
     "bindings": [
       {
         "target": "d2",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 849,
+            "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 850,
+            "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 850,
+            "quote": "Antihistaminic actions may cause sedation, weight gain",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 850,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Trifluoperazine"
@@ -5996,11 +6556,27 @@
     "bindings": [
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 863,
+            "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "net",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 863,
+            "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1a",
@@ -6010,19 +6586,51 @@
       {
         "target": "beta",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 863,
+            "quote": "Presumably desensitizes both serotonin 1A receptors and beta adrenergic receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 863,
+            "quote": "Presumably desensitizes both serotonin 1A receptors and beta adrenergic receptors",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 864,
+            "quote": "Sedative effects and weight gain may be due to antihistamine properties",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 864,
+            "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "nav",
@@ -6204,27 +6812,75 @@
     "bindings": [
       {
         "target": "sert",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 905,
+            "quote": "Mode 1: blocks serotonin reuptake pump (serotonin transporter)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1a",
-        "action": "agonist"
+        "action": "agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 905,
+            "quote": "Mode 2: binds to G-protein-linked receptors (full agonist at serotonin 1A receptors; partial agonist at serotonin 1B receptors, antagonist at serotonin 1D and serotonin 7 receptors)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1b",
-        "action": "partial_agonist"
+        "action": "partial_agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 905,
+            "quote": "Mode 2: binds to G-protein-linked receptors (full agonist at serotonin 1A receptors; partial agonist at serotonin 1B receptors, antagonist at serotonin 1D and serotonin 7 receptors)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht1d",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 905,
+            "quote": "Mode 2: binds to G-protein-linked receptors (full agonist at serotonin 1A receptors; partial agonist at serotonin 1B receptors, antagonist at serotonin 1D and serotonin 7 receptors)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht7",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 905,
+            "quote": "Mode 2: binds to G-protein-linked receptors (full agonist at serotonin 1A receptors; partial agonist at serotonin 1B receptors, antagonist at serotonin 1D and serotonin 7 receptors)",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "5ht3",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 905,
+            "quote": "Mode 3: binds to ion-channel-linked receptors (antagonist at serotonin 3 receptors)",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Vortioxetine"
