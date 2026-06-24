@@ -1243,6 +1243,22 @@ function createInfoPanel(data) {
     return withTip(pill, tip);
   };
 
+  // Build the tooltip tail (each source's verbatim quote + its corpus/page ref)
+  // shown under a per-claim provenance pill. Shared by the binding rows and the
+  // NbN row (both carry quote-level `sources` of the same shape).
+  const sourcesTip = (sources) => {
+    const corpora = (data.meta && data.meta.sourceCorpora) || {};
+    return (sources || [])
+      .map((s) => {
+        const c = corpora[s.corpus] || {};
+        const ref = s.page != null
+          ? t("info.sourceRef", { corpus: c.short || s.corpus, page: s.page })
+          : (c.short || s.corpus);
+        return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
+      })
+      .join("\n\n");
+  };
+
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
   // matches the dots + legend. Empty values are skipped.
@@ -1273,6 +1289,9 @@ function createInfoPanel(data) {
     } else {
       v.appendChild(document.createTextNode(value));
     }
+    // Optional trailing provenance pill (e.g. the NbN's quote source), so a
+    // sourced fact carries the same grade pill as a binding row.
+    if (opts.pill) v.appendChild(opts.pill);
     r.appendChild(v);
     facts.appendChild(r);
   };
@@ -1599,8 +1618,14 @@ function createInfoPanel(data) {
         })),
       });
       if (drug.nbn) {
+        // The NbN line is quote-sourced from Stahl; show its provenance pill
+        // (with the verbatim quote in the tooltip) beside the clickable value.
+        const nbnPill = drug.nbnSources && drug.nbnSources.length
+          ? makeProvenancePill(drug.nbnProvenance, sourcesTip(drug.nbnSources))
+          : null;
         addFactRow(facts, t("drug.nomenclature"), null, null, {
           links: [{ text: drug.nbn, query: `nbn:"${drug.nbn}"` }],
+          pill: nbnPill,
         });
       }
       if (facts.childElementCount) body.appendChild(facts);
@@ -1633,17 +1658,7 @@ function createInfoPanel(data) {
           // tooltip (after a newline). Strongest grade colours the pill. A binding
           // with no source yet shows none (it falls under the drug-level source).
           if (b.sources && b.sources.length) {
-            const corpora = (data.meta && data.meta.sourceCorpora) || {};
-            const extra = b.sources
-              .map((s) => {
-                const c = corpora[s.corpus] || {};
-                const ref = s.page != null
-                  ? t("info.sourceRef", { corpus: c.short || s.corpus, page: s.page })
-                  : (c.short || s.corpus);
-                return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
-              })
-              .join("\n\n");
-            li.appendChild(makeProvenancePill(b.provenance, extra));
+            li.appendChild(makeProvenancePill(b.provenance, sourcesTip(b.sources)));
           }
           li.title = `${b.effectLabel} · ${b.targetName}`;
           // If this binding's target is browsable on its own (in the merged

@@ -562,29 +562,29 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
 }
 
 
-def _binding_sources(drug_id: str, binding: dict[str, Any]) -> list[dict[str, Any]]:
-    """Validate + normalize one binding's optional ``sources`` list.
+def _quote_sources(sources: Any, what: str) -> list[dict[str, Any]]:
+    """Validate + normalize a list of quote-level ``sources`` for any sourced claim.
 
     Each authored source is ``{corpus, page, quote, provenance}``: ``corpus`` must
     be a :data:`SOURCE_CORPORA` key and ``provenance`` a :data:`PROVENANCE_LEVELS`
     grade. ``"verified"`` is the quote-checked grade, so a verified source *must*
     carry a ``page`` and a non-empty ``quote`` (``check_data.py`` then confirms the
     quote is on that page); weaker grades may omit them. The full citation/url is
-    *not* denormalized onto every binding (429 of them): the viewer resolves it
-    from ``meta.source_corpora`` by ``corpus``, keeping ``drugs.jsonl`` lean.
+    *not* denormalized onto every claim: the viewer resolves it from
+    ``meta.source_corpora`` by ``corpus``, keeping ``drugs.jsonl`` lean. ``what`` is
+    a human label used in error messages (e.g. ``"Drug 'x' binding 'sert'"``).
 
-    Returns the emitted source dicts (empty list when none are authored).
+    Returns the emitted source dicts (empty list when none are authored). Used for
+    a drug's per-binding ``sources`` and its ``nbn_sources`` alike.
     """
     out: list[dict[str, Any]] = []
-    for s in binding.get("sources", []) or []:
+    for s in sources or []:
         corpus = s.get("corpus")
         if corpus not in SOURCE_CORPORA:
             raise KeyError(
-                f"Drug {drug_id!r} binding {binding.get('target')!r} cites unknown "
-                f"source corpus {corpus!r} (not a SOURCE_CORPORA key)")
-        prov = _provenance(
-            s.get("provenance", DEFAULT_PROVENANCE),
-            f"drug {drug_id!r} binding {binding.get('target')!r} source")
+                f"{what} cites unknown source corpus {corpus!r} "
+                f"(not a SOURCE_CORPORA key)")
+        prov = _provenance(s.get("provenance", DEFAULT_PROVENANCE), f"{what} source")
         rec: dict[str, Any] = {"corpus": corpus, "provenance": prov}
         if s.get("page") is not None:
             rec["page"] = s["page"]
@@ -592,11 +592,18 @@ def _binding_sources(drug_id: str, binding: dict[str, Any]) -> list[dict[str, An
             rec["quote"] = s["quote"]
         if prov == "verified" and not (rec.get("page") is not None and rec.get("quote")):
             raise ValueError(
-                f"Drug {drug_id!r} binding {binding.get('target')!r} has a "
-                f"'verified' source without a page + quote (verified is the "
-                f"quote-checked grade; use 'sourced'/'llm' for an unquoted claim)")
+                f"{what} has a 'verified' source without a page + quote (verified "
+                f"is the quote-checked grade; use 'sourced'/'llm' for an unquoted "
+                f"claim)")
         out.append(rec)
     return out
+
+
+def _binding_sources(drug_id: str, binding: dict[str, Any]) -> list[dict[str, Any]]:
+    """Per-binding ``sources`` (thin wrapper over :func:`_quote_sources`)."""
+    return _quote_sources(
+        binding.get("sources"),
+        f"Drug {drug_id!r} binding {binding.get('target')!r}")
 
 
 # ---------------------------------------------------------------------------
@@ -3132,6 +3139,11 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     }
     if drug.get("nbn"):
         out["nbn"] = drug["nbn"]
+        # The NbN is quote-sourced like a binding: Stahl prints a verbatim
+        # "Neuroscience-based Nomenclature: ..." line on each drug's first page.
+        nbn_sources = _quote_sources(drug.get("nbn_sources"), f"Drug {drug['id']!r} nbn")
+        if nbn_sources:
+            out["nbn_sources"] = nbn_sources
     if drug.get("description"):
         out["description"] = drug["description"]
     if drug.get("wikipedia"):

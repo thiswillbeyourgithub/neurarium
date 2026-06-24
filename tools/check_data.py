@@ -411,13 +411,16 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
                 grade(src.get("provenance"),
                       f"{label} {rec_id(label, record)} sources[{i}]")
 
-    # Per-binding drug sources (the quote-level provenance) each carry a grade too.
+    # Per-binding drug sources (the quote-level provenance) each carry a grade too,
+    # as does a drug's nbn_sources (the NbN is quote-sourced the same way).
     for drug in drugs:
         for binding in drug.get("bindings", []):
             for i, src in enumerate(binding.get("sources", []) or []):
                 grade(src.get("provenance"),
                       f"drug {drug.get('id')} binding {binding.get('target')} "
                       f"sources[{i}]")
+        for i, src in enumerate(drug.get("nbn_sources", []) or []):
+            grade(src.get("provenance"), f"drug {drug.get('id')} nbn_sources[{i}]")
 
     # Wikipedia references (structures / receptors / drugs, + the meta targets)
     # carry a sibling `wikipedia_provenance` whenever the link is present.
@@ -449,10 +452,11 @@ _MIN_QUOTE_CHARS = 16
 
 
 def check_sources(report, meta, drugs):
-    """The core of the sourcing system: confirm every per-binding source quote is
-    actually present in the page it cites.
+    """The core of the sourcing system: confirm every quote-level source (a
+    binding's ``sources`` and a drug's ``nbn_sources``) is actually present in the
+    page it cites.
 
-    Each binding source is ``{corpus, page, quote, provenance}``. This:
+    Each source is ``{corpus, page, quote, provenance}``. This:
 
     * checks ``corpus`` resolves to ``meta.source_corpora`` (else the citation is
       unrenderable) and that a ``"verified"`` grade carries a page + quote;
@@ -487,40 +491,45 @@ def check_sources(report, meta, drugs):
             page_cache[key] = text
         return page_cache[key]
 
+    def check_one(ctx, src):
+        nonlocal n_checked
+        corpus = src.get("corpus")
+        if corpus not in corpora:
+            report.error(f"{ctx}: corpus {corpus!r} is not in "
+                         f"meta.source_corpora (citation unrenderable)")
+            return
+        quote, page = src.get("quote"), src.get("page")
+        if src.get("provenance") == "verified" and not (quote and page is not None):
+            report.error(f"{ctx}: 'verified' source missing a page or quote "
+                         f"(verified is the quote-checked grade)")
+            return
+        if not quote or page is None:
+            return  # weaker grade with no quote to check
+        entry = corpora.get(corpus) or {}
+        if not entry.get("pages_dir"):
+            skipped_corpora.add(corpus)
+            return
+        text = page_text(corpus, page)
+        if text is None:
+            skipped_corpora.add(corpus)
+            return
+        needle = normalize_for_match(quote)
+        if needle not in text:
+            report.error(f"{ctx}: quote NOT found verbatim on {corpus} "
+                         f"p.{page}: {quote!r}")
+            return
+        n_checked += 1
+        if len(needle.replace(" ", "")) < _MIN_QUOTE_CHARS:
+            report.warn(f"{ctx}: quote is very short ({quote!r}); it matched "
+                        f"but may be an incidental substring")
+
     for drug in drugs:
         did = drug.get("id")
         for binding in drug.get("bindings", []):
             for i, src in enumerate(binding.get("sources", []) or []):
-                ctx = f"drug {did} binding {binding.get('target')} sources[{i}]"
-                corpus = src.get("corpus")
-                if corpus not in corpora:
-                    report.error(f"{ctx}: corpus {corpus!r} is not in "
-                                 f"meta.source_corpora (citation unrenderable)")
-                    continue
-                quote, page = src.get("quote"), src.get("page")
-                if src.get("provenance") == "verified" and not (quote and page is not None):
-                    report.error(f"{ctx}: 'verified' source missing a page or quote "
-                                 f"(verified is the quote-checked grade)")
-                    continue
-                if not quote or page is None:
-                    continue  # weaker grade with no quote to check
-                entry = corpora.get(corpus) or {}
-                if not entry.get("pages_dir"):
-                    skipped_corpora.add(corpus)
-                    continue
-                text = page_text(corpus, page)
-                if text is None:
-                    skipped_corpora.add(corpus)
-                    continue
-                needle = normalize_for_match(quote)
-                if needle not in text:
-                    report.error(f"{ctx}: quote NOT found verbatim on {corpus} "
-                                 f"p.{page}: {quote!r}")
-                    continue
-                n_checked += 1
-                if len(needle.replace(" ", "")) < _MIN_QUOTE_CHARS:
-                    report.warn(f"{ctx}: quote is very short ({quote!r}); it matched "
-                                f"but may be an incidental substring")
+                check_one(f"drug {did} binding {binding.get('target')} sources[{i}]", src)
+        for i, src in enumerate(drug.get("nbn_sources", []) or []):
+            check_one(f"drug {did} nbn_sources[{i}]", src)
 
     if skipped_corpora:
         report.warn(f"source pages absent for {sorted(skipped_corpora)} "

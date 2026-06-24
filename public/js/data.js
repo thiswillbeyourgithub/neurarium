@@ -263,8 +263,10 @@ export async function loadBrainData(dataDir = "data") {
     }
     return best;
   };
-  const bindingSources = (b) =>
-    (b.sources || []).map((s) => ({
+  // Normalize a quote-level sources list (a binding's `sources` or a drug's
+  // `nbn_sources`) into the shape the panel renders.
+  const mapSources = (sources) =>
+    (sources || []).map((s) => ({
       corpus: s.corpus,
       page: s.page != null ? s.page : null,
       quote: s.quote || "",
@@ -273,6 +275,10 @@ export async function loadBrainData(dataDir = "data") {
   for (const d of drugs) {
     d.description = d.description ? localize(d.description) : "";
     d.nbn = d.nbn ? localize(d.nbn) : "";
+    // The NbN is quote-sourced like a binding (verbatim Stahl line); the panel
+    // shows a provenance pill next to it. Null grade when unsourced.
+    d.nbnSources = mapSources(d.nbn_sources);
+    d.nbnProvenance = strongestGrade(d.nbn_sources);
     d.categoryLabels = (d.categories || []).map((c) => drugCategoryLabels[c] || c);
     d.category = d.categoryLabels[0] || "";
     // Vendored molecular-structure SVG path (data/molecules/<id>.svg), set by the
@@ -313,7 +319,7 @@ export async function loadBrainData(dataDir = "data") {
         // full citation is resolved client-side from meta.sourceCorpora by
         // `corpus`, not denormalized here. `provenance` is the strongest grade
         // among them, which colours the binding's source pill (null = no source).
-        sources: bindingSources(b),
+        sources: mapSources(b.sources),
         provenance: strongestGrade(b.sources),
       };
     });
