@@ -166,6 +166,11 @@
       "about.license":
         'Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +
         'target="_blank" rel="noopener noreferrer">GNU AGPL-3.0</a>.',
+      "about.attribution":
+        "Drug descriptions and molecular-structure images come from Wikipedia, " +
+        'used under <a href="https://creativecommons.org/licenses/by-sa/4.0/" ' +
+        'target="_blank" rel="noopener noreferrer">CC BY-SA</a>; each drug panel ' +
+        "links to its source article.",
 
       "dev.wip": "Work in progress",
       "dev.restarted":
@@ -306,6 +311,12 @@
       "about.license":
         'Sous licence <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +
         'target="_blank" rel="noopener noreferrer">GNU AGPL-3.0</a>.',
+      "about.attribution":
+        "Les descriptions des médicaments et les schémas de structure moléculaire " +
+        'proviennent de Wikipédia, sous licence <a ' +
+        'href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" ' +
+        'rel="noopener noreferrer">CC BY-SA</a> ; chaque fiche de médicament ' +
+        "renvoie à son article source.",
 
       "dev.wip": "En cours de développement",
       "dev.restarted":
