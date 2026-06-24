@@ -174,6 +174,10 @@ export async function loadBrainData(dataDir = "data") {
   // its tooltip ref (see SOURCE_CORPORA in generate_data.py). Raw map (citation is
   // language-neutral); pages_dir is author-side and ignored by the viewer.
   const sourceCorpora = metaRecord.source_corpora || {};
+  // Programmatic sourcing tally (per kind + headline) for the About panel; passed
+  // through as-is (the numbers are computed in generate_data.py, see
+  // _provenance_stats). Null on a dataset that predates it.
+  const provenanceStats = metaRecord.provenance_stats || null;
 
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
@@ -444,6 +448,7 @@ export async function loadBrainData(dataDir = "data") {
       drugEffectColors,
       drugEffectLabels,
       sourceCorpora,
+      provenanceStats,
     },
   };
 }

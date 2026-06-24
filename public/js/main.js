@@ -2268,6 +2268,78 @@ function applyViewParams(bundle) {
   }
 }
 
+/**
+ * Fill the About panel's "Sources & provenance" block from meta.provenanceStats:
+ * the grade key (reusing the .src-pill swatches the info panel shows beside each
+ * source) and the programmatic coverage tally. The numbers come straight from the
+ * data (generate_data.py _provenance_stats), so the headline % is a real count.
+ */
+function buildAboutSourcing(meta) {
+  const host = document.getElementById("about-sourcing");
+  if (!host) return;
+  host.replaceChildren();
+  const stats = meta.provenanceStats;
+  if (!stats) return; // dataset predates the tally: leave the block empty
+
+  const h = (tag, cls, text) => {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = text;
+    return node;
+  };
+
+  host.appendChild(h("h3", null, t("about.sourcingTitle")));
+  host.appendChild(h("p", "about-text", t("about.sourcingIntro")));
+
+  // Grade key: a pill swatch + its meaning, in strongest-to-weakest order, then
+  // the NOSOURCE case. The pills reuse the info-panel CSS classes so the legend
+  // matches the pills shown next to each source.
+  const key = h("ul", "src-key");
+  const keyRows = [
+    ["src-prov-verified", "✓", "about.gradeVerified"],
+    ["src-prov-sourced", "~", "about.gradeSourced"],
+    ["src-prov-llm", "?", "about.gradeLlm"],
+    ["src-todo", t("info.noSource"), "about.gradeNone"],
+  ];
+  for (const [cls, glyph, tip] of keyRows) {
+    const li = document.createElement("li");
+    li.appendChild(h("span", `src-pill ${cls}`, glyph));
+    li.appendChild(h("span", null, t(tip)));
+    key.appendChild(li);
+  }
+  host.appendChild(key);
+
+  // Coverage tally: a headline over the factual claims, then a per-kind bar.
+  const a = stats.assertions || {};
+  const wrap = h("div", "src-stats");
+  wrap.appendChild(h("p", "src-stat-headline",
+    t("about.sourcingHeadline", { pct: a.pct_backed, total: a.total })));
+  const KIND_LABELS = {
+    drug_bindings: "about.kindBindings",
+    drug_nbn: "about.kindNbn",
+    drug_descriptions: "about.kindDescriptions",
+    projections: "about.kindProjections",
+    references: "about.kindReferences",
+  };
+  for (const [kind, labelKey] of Object.entries(KIND_LABELS)) {
+    const c = (stats.by_kind || {})[kind];
+    if (!c || !c.total) continue;
+    const backed = (c.verified || 0) + (c.sourced || 0);
+    const pct = Math.round((100 * backed) / c.total);
+    const row = h("div", "src-stat-row");
+    row.appendChild(h("span", "src-stat-label", t(labelKey)));
+    row.appendChild(h("span", "src-stat-count", `${backed} / ${c.total} (${pct}%)`));
+    const bar = h("div", "src-stat-bar");
+    const fill = h("span");
+    fill.style.width = `${pct}%`;
+    bar.appendChild(fill);
+    row.appendChild(bar);
+    wrap.appendChild(row);
+  }
+  wrap.appendChild(h("p", "about-text", t("about.coverageNote")));
+  host.appendChild(wrap);
+}
+
 /** Wire the DOM controls to the scene behaviors. */
 function wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull }) {
   const autorotate = document.getElementById("autorotate");
@@ -3448,6 +3520,9 @@ async function main() {
     selection.refresh(); // re-grey the fresh rows for the current isolate state
   };
   rebuildLegend();
+  // Fill the About panel's "Sources & provenance" block (grade key + the
+  // programmatic coverage tally) from the dataset's meta.
+  buildAboutSourcing(data.meta);
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
   // segmented control under "Hide projections". Picking an option recolours the
   // arrows and rebuilds the Projections legend rows to match. The switch lives

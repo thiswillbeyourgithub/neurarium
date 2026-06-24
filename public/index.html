@@ -587,6 +587,58 @@
         color: var(--muted);
       }
       .about-text a { color: #8fb6e6; text-decoration: underline; }
+      /* "Sources & provenance" block in About (built by buildAboutSourcing). The
+         grade key reuses the .src-pill / .src-prov-* swatches from the info panel
+         so the legend matches the pills shown beside each source. */
+      #about-sourcing { margin-top: 12px; }
+      #about-sourcing h3 {
+        margin: 0 0 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      #about-sourcing .about-text { margin: 6px 0; }
+      .src-key { list-style: none; margin: 6px 0; padding: 0; }
+      .src-key li {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin: 4px 0;
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--muted);
+      }
+      .src-key .src-pill { cursor: default; flex: 0 0 auto; }
+      /* The coverage tally: a label, a thin bar, and the count. */
+      .src-stats { margin: 8px 0 2px; font-size: 12px; }
+      .src-stat-headline {
+        color: var(--text);
+        font-weight: 600;
+        margin: 0 0 8px;
+        line-height: 1.4;
+      }
+      .src-stat-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2px 8px;
+        align-items: center;
+        margin: 5px 0;
+        color: var(--muted);
+      }
+      .src-stat-row .src-stat-count { white-space: nowrap; font-variant-numeric: tabular-nums; }
+      .src-stat-bar {
+        grid-column: 1 / -1;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(160, 168, 178, 0.18);
+        overflow: hidden;
+      }
+      .src-stat-bar > span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: #66cf85;
+      }
       #legend-body,
       #receptors-body,
       #drugs-body {
@@ -1246,6 +1298,11 @@
               <!-- CC BY-SA attribution for the Wikipedia-sourced drug descriptions
                    + molecule images (vendored verbatim, see "Drugs"). -->
               <p class="about-text" data-i18n-html="about.attribution"></p>
+              <!-- "Sources & provenance": the grade key + the programmatic
+                   coverage tally, filled by buildAboutSourcing in js/main.js from
+                   data.meta.provenanceStats (the numbers are computed in
+                   generate_data.py, so the % is a real count). -->
+              <div id="about-sourcing"></div>
             </div>
           </div>
         </div>

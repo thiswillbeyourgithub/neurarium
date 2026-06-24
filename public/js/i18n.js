@@ -171,6 +171,27 @@
         'used under <a href="https://creativecommons.org/licenses/by-sa/4.0/" ' +
         'target="_blank" rel="noopener noreferrer">CC BY-SA</a>; each drug panel ' +
         "links to its source article.",
+      "about.sourcingTitle": "Sources & provenance",
+      "about.sourcingIntro":
+        "Every fact in this dataset carries a source grade. None of it has been " +
+        "checked by a human yet, so even a verified fact can be wrong. The grades:",
+      "about.gradeVerified":
+        "Verified: the supporting quote was confirmed present in the cited source.",
+      "about.gradeSourced":
+        "Sourced: drawn from a document (e.g. Wikipedia), but the quote was not checked.",
+      "about.gradeLlm":
+        "LLM-only: produced by the model from memory; may be a hallucination.",
+      "about.gradeNone": "No source: none gathered yet.",
+      "about.coverageTitle": "Coverage",
+      "about.sourcingHeadline":
+        "{pct}% of the {total} factual claims here are sourced or verified.",
+      "about.kindBindings": "Drug target bindings",
+      "about.kindNbn": "Drug nomenclature (NbN)",
+      "about.kindDescriptions": "Drug descriptions",
+      "about.kindProjections": "Neuron pathways",
+      "about.kindReferences": "Reference links",
+      "about.coverageNote":
+        "Neuron pathways and reference links are the remaining gap.",
 
       "dev.wip": "Work in progress",
       "dev.restarted":
@@ -317,6 +338,28 @@
         'href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" ' +
         'rel="noopener noreferrer">CC BY-SA</a> ; chaque fiche de médicament ' +
         "renvoie à son article source.",
+      "about.sourcingTitle": "Sources et provenance",
+      "about.sourcingIntro":
+        "Chaque fait de ce jeu de données porte un niveau de source. Rien n’a " +
+        "encore été vérifié par un humain : même un fait « vérifié » peut être " +
+        "faux. Les niveaux :",
+      "about.gradeVerified":
+        "Vérifié : la citation à l’appui a été confirmée présente dans la source citée.",
+      "about.gradeSourced":
+        "Sourcé : tiré d’un document (p. ex. Wikipédia), mais la citation n’a pas été vérifiée.",
+      "about.gradeLlm":
+        "IA seule : produit par le modèle de mémoire ; peut être une hallucination.",
+      "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
+      "about.coverageTitle": "Couverture",
+      "about.sourcingHeadline":
+        "{pct} % des {total} affirmations factuelles ici sont sourcées ou vérifiées.",
+      "about.kindBindings": "Liaisons cibles des médicaments",
+      "about.kindNbn": "Nomenclature des médicaments (NbN)",
+      "about.kindDescriptions": "Descriptions des médicaments",
+      "about.kindProjections": "Voies neuronales",
+      "about.kindReferences": "Liens de référence",
+      "about.coverageNote":
+        "Les voies neuronales et les liens de référence constituent le manque restant.",
 
       "dev.wip": "En cours de développement",
       "dev.restarted":
