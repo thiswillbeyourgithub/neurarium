@@ -111,7 +111,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 25,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Alprazolam"
@@ -555,7 +563,15 @@
       {
         "target": "alpha1",
         "action": "antagonist",
-        "tentative": true
+        "tentative": true,
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 71,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Aripiprazole"
@@ -1047,7 +1063,15 @@
     "bindings": [
       {
         "target": "5ht1a",
-        "action": "partial_agonist"
+        "action": "partial_agonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 139,
+            "quote": "serotonin 1A partial agonist",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Buspirone"
@@ -1203,7 +1227,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 161,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Chlordiazepoxide"
@@ -1493,7 +1525,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 199,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Clorazepate"
@@ -2039,7 +2079,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site des benzodiazépines"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 257,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Diazepam"
@@ -2383,7 +2431,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 309,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Estazolam"
@@ -2529,7 +2585,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 325,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Flunitrazepam"
@@ -2718,7 +2782,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 349,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Flurazepam"
@@ -2782,7 +2854,15 @@
     "bindings": [
       {
         "target": "cav_a2d",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 359,
+            "quote": "Binds to the alpha 2 delta subunit of voltage-sensitive calcium channels",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "cav",
@@ -2900,7 +2980,15 @@
       },
       {
         "target": "alpha1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 376,
+            "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Haloperidol"
@@ -3206,7 +3294,15 @@
     "bindings": [
       {
         "target": "sv2a",
-        "action": "modulator"
+        "action": "modulator",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 427,
+            "quote": "Binds to synaptic vesicle protein SV2A, which is involved in synaptic vesicle exocytosis",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "cav",
@@ -3480,7 +3576,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 459,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Loflazepate"
@@ -3507,7 +3611,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 465,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Lorazepam"
@@ -4109,7 +4221,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépinique"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 529,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Midazolam"
@@ -4882,7 +5002,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépinique"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 609,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Oxazepam"
@@ -4900,7 +5028,15 @@
     "bindings": [
       {
         "target": "nav",
-        "action": "blocker"
+        "action": "blocker",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 615,
+            "quote": "Acts as a use-dependent blocker of voltagesensitive sodium channels",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Oxcarbazepine"
@@ -6515,7 +6651,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 801,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Temazepam"
@@ -6853,7 +6997,15 @@
       },
       {
         "target": "h1",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 840,
+            "quote": "Sedative effects may be due to antihistamine properties",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "alpha1",
@@ -6892,7 +7044,15 @@
         "note": {
           "en": "benzodiazepine site",
           "fr": "site benzodiazépine"
-        }
+        },
+        "sources": [
+          {
+            "corpus": "stahl",
+            "page": 845,
+            "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Triazolam"
