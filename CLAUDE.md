@@ -140,8 +140,12 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           based Nomenclature) + its optional nbn_sources[{corpus,
                           page,quote,provenance}] (the NbN is quote-sourced like a
                           binding: Stahl prints a verbatim "Neuroscience-based
-                          Nomenclature: ..." line, see "Source provenance"), optional description ({en,fr} one-line
-                          mechanism), bindings[] (each: target = a drug_targets key,
+                          Nomenclature: ..." line, see "Source provenance"), optional description ({en,fr};
+                          the verbatim lead of the drug's Wikipedia article where
+                          available, else an LLM mechanism one-liner) + its
+                          description_provenance grade ("sourced" for the WP lead,
+                          "llm" otherwise; drives the pill beside the description),
+                          bindings[] (each: target = a drug_targets key,
                           action = a drug_actions key, optional effect override,
                           optional note ({en,fr} or "TODO"), optional tentative,
                           and optional per-claim sources[{corpus,page,quote,
@@ -487,6 +491,20 @@ tools/fetch_molecules.py  Authoring tool (stdlib, needs network) that downloads
 tools/molecules_sources.json  Provenance for the fetched molecule SVGs (per drug:
                       the Commons File + source URL), written by fetch_molecules.py
                       for attribution; not served, not read by the viewer.
+tools/fetch_descriptions.py  Authoring tool (stdlib, needs network) that replaces
+                      each drug's description with the lead summary of its Wikipedia
+                      article (bilingual: en from en.wikipedia.org, fr found via
+                      langlinks from fr.wikipedia.org, both via the MediaWiki REST
+                      page/summary endpoint). Writes the verbatim leads into
+                      tools/drugs_data.json + sets description_provenance "sourced",
+                      only when BOTH languages resolve (else the drug keeps its llm
+                      description). Idempotent, polite (UA + delay + 429 backoff);
+                      records per-language source (title/url/revision/timestamp) to
+                      tools/descriptions_sources.json. See "Drugs".
+tools/descriptions_sources.json  Provenance for the fetched Wikipedia descriptions
+                      (per drug, per language: article title, url, revision id,
+                      timestamp), written by fetch_descriptions.py for attribution +
+                      reproducibility; not served, not read by the viewer.
 tools/git-hooks/      Repo-tracked git hooks (single source of truth). Currently
                       pre-push, which refuses to push any branch other than
                       main and then offers (y/N on the terminal) to run
@@ -1757,6 +1775,17 @@ is a substring of the captured line, a programmatic claim-support check that is
 strictly stronger than an LLM judge for this field. A drug whose monograph has no
 such line (a few do not) stays at the honest `llm` grade.
 
+The drug **`description`** is sourced from a different corpus: each drug's
+description is the **verbatim lead summary of its Wikipedia article** (CC BY-SA),
+fetched bilingually by `tools/fetch_descriptions.py` (en + the fr article found via
+langlinks) and graded `sourced` (it came from a real document but is not run
+through the per-claim quote gate). The replacement only happens when **both**
+languages resolve, so a drug's `description_provenance` is truthful for whatever
+language the viewer shows; the ~18 drugs with no French Wikipedia article keep
+their LLM mechanism one-liner at `llm`. Attribution is the panel's Wikipedia
+reference link + the About note (see "Drugs" / "Molecule images"); the exact
+revisions are recorded in `tools/descriptions_sources.json`.
+
 **Where the presentation lives.** `js/main.js` `makeProvenancePill(level)` maps the
 grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the
 glyph + the `info.prov*` tooltip via the shared `withTip` helper; the pill colours
@@ -1967,7 +1996,11 @@ provVerified` i18n keys (both languages).
      image**, run `python tools/fetch_molecules.py` after regenerating (it
      downloads only the new drug's structure SVG into `public/data/molecules/`,
      which the next `generate_data.py` run then picks up as its `structure_image`);
-     see "Molecule images".
+     see "Molecule images". To **source its description from Wikipedia**, run
+     `python tools/fetch_descriptions.py` (it replaces the new drug's description
+     with the verbatim bilingual Wikipedia lead and grades it `sourced`, only when
+     both languages resolve); see "Source provenance". Both fetch tools need
+     network and are idempotent (they touch only the new drug).
    - **Translations.** Every display string (a region `name`, a projection
      `label`/`description`/`neurotransmitter`, a circuit `name`, a group/kind
      label) is wrapped with `_t()` at build time, which looks the English text up
