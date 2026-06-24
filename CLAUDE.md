@@ -137,7 +137,10 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                         - data/drugs.jsonl: one drug per line: id, name (technical,
                           language-neutral, e.g. "Citalopram"), categories[keys of
                           drug_category_labels], optional nbn ({en,fr} Neuroscience-
-                          based Nomenclature), optional description ({en,fr} one-line
+                          based Nomenclature) + its optional nbn_sources[{corpus,
+                          page,quote,provenance}] (the NbN is quote-sourced like a
+                          binding: Stahl prints a verbatim "Neuroscience-based
+                          Nomenclature: ..." line, see "Source provenance"), optional description ({en,fr} one-line
                           mechanism), bindings[] (each: target = a drug_targets key,
                           action = a drug_actions key, optional effect override,
                           optional note ({en,fr} or "TODO"), optional tentative,
@@ -451,6 +454,28 @@ tools/drugs_data.json  The drug dataset's authored source (a JSON list, sourced
                       data/drugs.jsonl. Kept out of generate_data.py because it is
                       large; this is the file to edit to add/change a drug. See
                       "Drugs" and "Changing the data".
+tools/build_source_worklist.py  Authoring helper (stdlib, author-side): lists
+                      every drug binding that is not yet sourced (drug name, its
+                      Stahl page range from stahl/INDEX.md, and per binding the
+                      target/action + a one-line claim), as the input to the
+                      source-extraction workflow. Skips already-sourced bindings, so
+                      a re-run only lists the remainder (the workflow is resumable).
+                      See "Drugs" / "Source provenance".
+tools/apply_source_quotes.py  Authoring helper (stdlib, author-side): takes the
+                      extraction workflow's accepted {id, accepted:[{idx,page,quote}]}
+                      results and, for each, re-finds the (normalized) quote in the
+                      drug's Stahl page range before writing
+                      {corpus,page,quote,provenance:verified} onto the binding. The
+                      local twin of check_data.py's quote gate (it reuses its
+                      normalize_for_match), so a paraphrased/hallucinated quote
+                      simply fails to match and is left un-sourced. Idempotent.
+tools/apply_nbn_sources.py  Authoring helper (stdlib, author-side): sources each
+                      drug's NbN line, which Stahl prints verbatim
+                      ("Neuroscience-based Nomenclature: <value>"), so it needs no
+                      agent/judge. Greps each drug's page range for the line,
+                      captures it verbatim, confirms the dataset's nbn value is a
+                      substring of it (programmatic claim-support), and writes a
+                      verified nbn_sources entry. Idempotent. See "Source provenance".
 tools/fetch_molecules.py  Authoring tool (stdlib, needs network) that downloads
                       each drug's molecular-structure SVG from Wikipedia into
                       public/data/molecules/<id>.svg, so the panel can embed them
@@ -646,13 +671,15 @@ Five families of checks:
   never fail the run, they only print, so the pre-push gate passes on the current
   data.
 - **Provenance grades** (see "Source provenance" below): every emitted source
-  (`sources[].provenance`, **including the per-binding drug sources**) and every
+  (`sources[].provenance`, **including the per-binding drug sources and a drug's
+  `nbn_sources`**) and every
   wikipedia reference (the `wikipedia_provenance` beside a `wikipedia`) must carry
   a known grade (`llm` / `sourced` / `verified`), the value the viewer renders as
   the grey/yellow/green pill. An unknown or missing grade is an **error** (the
   pill would silently fall back to the "no source" TODO and mislead).
 - **Source quotes** (the heart of the sourcing system, see "Source provenance"):
-  each per-binding drug source is `{corpus, page, quote, provenance}`, and a
+  each quote-level drug source (a binding's `sources` **and a drug's
+  `nbn_sources`**) is `{corpus, page, quote, provenance}`, and a
   `verified` grade is the one claiming the quote was confirmed present in the
   source. This re-confirms it: `corpus` must resolve to `meta.source_corpora`, a
   `verified` source must carry a page + quote, and the **normalized** quote must
@@ -1701,13 +1728,15 @@ code change; `_provenance` validates every grade so a typo fails the build, and
 `tools/check_data.py` re-checks the emitted grades (see "Data checks").
 
 **Per-claim sources + the verify gate (drugs).** Beyond the drug-level bibliographic
-`STAHL_SOURCE`, each drug **binding** may carry its own `sources[]`, the quote-level
+`STAHL_SOURCE`, each drug **binding** may carry its own `sources[]`, and each drug
+its own **`nbn_sources[]`**, the quote-level
 provenance that earns a `verified` grade. Each is `{corpus, page, quote, provenance}`:
 `corpus` is a key of the **`SOURCE_CORPORA`** registry (`generate_data.py`,
 source-agnostic: Stahl is corpus #1, each entry has `{citation, url, pages_dir}`,
 emitted into `meta.source_corpora`), `page` locates the claim, and `quote` is the
-**verbatim** snippet from that page. `_binding_sources` validates each (corpus +
-grade) and enforces that a `verified` source carries a page + quote; the full
+**verbatim** snippet from that page. The shared `_quote_sources` validates each
+(corpus + grade) and enforces that a `verified` source carries a page + quote
+(`_binding_sources` is its per-binding wrapper); the full
 citation is *not* denormalized onto all ~429 bindings (the viewer resolves it from
 `meta.source_corpora` by `corpus`). The two-step that makes `verified` trustworthy:
 an LLM extracts the quote (copied out of the page, never paraphrased) and a second
@@ -1719,6 +1748,14 @@ against a hallucinated quote: a claim cannot reach `verified` and survive the ga
 unless its quote is genuinely in the source. The page files live under `stahl/`
 (uncommitted, see CLAUDE.local.md), so the quote check runs on the author's machine
 / the pre-push hook and is skipped (with a warning) on a clone without them.
+
+The bindings were extracted by LLM agents (extract + judge); the **NbN** is
+simpler because it is a structured field: Stahl prints a verbatim
+`Neuroscience-based Nomenclature: <value>` line, so `tools/apply_nbn_sources.py`
+greps it directly (no agent, no judge) and confirms the dataset's own `nbn` value
+is a substring of the captured line, a programmatic claim-support check that is
+strictly stronger than an LLM judge for this field. A drug whose monograph has no
+such line (a few do not) stays at the honest `llm` grade.
 
 **Where the presentation lives.** `js/main.js` `makeProvenancePill(level)` maps the
 grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the
