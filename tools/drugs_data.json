@@ -33,7 +33,15 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Acamprosate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Acamprosate",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 15,
+        "quote": "Neuroscience-based Nomenclature: glutamate multimodal (Glu-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "agomelatine",
@@ -87,7 +95,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Agomelatine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Agomelatine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 19,
+        "quote": "Neuroscience-based Nomenclature: melatonin multimodal (Mel-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "alprazolam",
@@ -122,7 +138,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Alprazolam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Alprazolam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 25,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "amisulpride",
@@ -202,7 +226,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Amisulpride"
+    "wikipedia": "https://en.wikipedia.org/wiki/Amisulpride",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 31,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "amitriptyline",
@@ -267,7 +299,15 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Amitriptyline"
+    "wikipedia": "https://en.wikipedia.org/wiki/Amitriptyline",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 39,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "amoxapine",
@@ -345,7 +385,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Amoxapine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Amoxapine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 47,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine, serotonin reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "amphetamine_d",
@@ -411,7 +459,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dextroamphetamine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dextroamphetamine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 53,
+        "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "amphetamine_dl",
@@ -477,7 +533,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Amphetamine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Amphetamine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 61,
+        "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "aripiprazole",
@@ -574,7 +638,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Aripiprazole"
+    "wikipedia": "https://en.wikipedia.org/wiki/Aripiprazole",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 69,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist (DS-RPA)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "armodafinil",
@@ -605,7 +677,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Armodafinil"
+    "wikipedia": "https://en.wikipedia.org/wiki/Armodafinil",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 81,
+        "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "asenapine",
@@ -708,7 +788,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Asenapine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Asenapine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 87,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "atomoxetine",
@@ -738,7 +826,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Atomoxetine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Atomoxetine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 95,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "benztropine",
@@ -1044,7 +1140,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Bupropion"
+    "wikipedia": "https://en.wikipedia.org/wiki/Bupropion",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 133,
+        "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor and releaser (D-RIRe)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "buspirone",
@@ -1074,7 +1178,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Buspirone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Buspirone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 139,
+        "quote": "Neuroscience-based Nomenclature: serotonin receptor partial agonist (S-RPA)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "caprylidene",
@@ -1125,7 +1237,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Carbamazepine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Carbamazepine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 147,
+        "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium and calcium channel blocker (Glu-CB)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "cariprazine",
@@ -1203,7 +1323,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Cariprazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Cariprazine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 153,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist and antagonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "chlordiazepoxide",
@@ -1238,7 +1366,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Chlordiazepoxide"
+    "wikipedia": "https://en.wikipedia.org/wiki/Chlordiazepoxide",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 161,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "chlorpromazine",
@@ -1304,7 +1440,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Chlorpromazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Chlorpromazine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 167,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "citalopram",
@@ -1350,7 +1494,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Citalopram"
+    "wikipedia": "https://en.wikipedia.org/wiki/Citalopram",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 173,
+        "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "clomipramine",
@@ -1436,7 +1588,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Clomipramine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Clomipramine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 179,
+        "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "clonazepam",
@@ -1471,7 +1631,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Clonazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Clonazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 187,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "clonidine",
@@ -1501,7 +1669,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Clonidine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Clonidine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 193,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "clorazepate",
@@ -1536,7 +1712,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Clorazepate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Clorazepate",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 199,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "clozapine",
@@ -1636,7 +1820,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Clozapine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Clozapine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 205,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "cyamemazine",
@@ -1835,7 +2027,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Desipramine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Desipramine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 225,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "desvenlafaxine",
@@ -1877,7 +2077,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Desvenlafaxine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Desvenlafaxine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 233,
+        "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "deutetrabenazine",
@@ -2090,7 +2298,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Diazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Diazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 257,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "diphenhydramine",
@@ -2167,7 +2383,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Donepezil"
+    "wikipedia": "https://en.wikipedia.org/wiki/Donepezil",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 271,
+        "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "dothiepin",
@@ -2222,7 +2446,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dosulepin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dosulepin",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 277,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "doxepin",
@@ -2289,7 +2521,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Doxepin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Doxepin",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 283,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "duloxetine",
@@ -2347,7 +2587,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Duloxetine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Duloxetine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 291,
+        "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "escitalopram",
@@ -2377,7 +2625,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Escitalopram"
+    "wikipedia": "https://en.wikipedia.org/wiki/Escitalopram",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 297,
+        "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "esketamine",
@@ -2442,7 +2698,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Estazolam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Estazolam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 309,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "eszopiclone",
@@ -2477,7 +2741,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Eszopiclone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Eszopiclone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 313,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "flibanserin",
@@ -2596,7 +2868,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Flunitrazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Flunitrazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 325,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "fluoxetine",
@@ -2638,7 +2918,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Fluoxetine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Fluoxetine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 329,
+        "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "flupenthixol",
@@ -2704,7 +2992,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Flupenthixol"
+    "wikipedia": "https://en.wikipedia.org/wiki/Flupenthixol",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 335,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "fluphenazine",
@@ -2793,7 +3089,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Flurazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Flurazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 349,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "fluvoxamine",
@@ -2835,7 +3139,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Fluvoxamine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Fluvoxamine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 353,
+        "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "gabapentin",
@@ -2877,7 +3189,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Gabapentin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Gabapentin",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 359,
+        "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated calcium channel blocker (Glu-CB)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "galantamine",
@@ -2919,7 +3239,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Galantamine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Galantamine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 365,
+        "quote": "Neuroscience-based Nomenclature: acetylcholine multimodal; enzyme inhibitor; receptor PAM (ACh-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "guanfacine",
@@ -2949,7 +3277,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Guanfacine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Guanfacine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 371,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "haloperidol",
@@ -2991,7 +3327,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Haloperidol"
+    "wikipedia": "https://en.wikipedia.org/wiki/Haloperidol",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 375,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "hydroxyzine",
@@ -3022,7 +3366,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Hydroxyzine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Hydroxyzine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 383,
+        "quote": "Neuroscience-based Nomenclature: histamine receptor antagonist (H-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "iloperidone",
@@ -3076,7 +3428,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Iloperidone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Iloperidone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 387,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "imipramine",
@@ -3155,7 +3515,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Imipramine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Imipramine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 395,
+        "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "isocarboxazid",
@@ -3189,7 +3557,15 @@
         "action": "enzyme_inhibitor"
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Isocarboxazid"
+    "wikipedia": "https://en.wikipedia.org/wiki/Isocarboxazid",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 403,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "ketamine",
@@ -3253,7 +3629,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lamotrigine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lamotrigine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 415,
+        "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium channel blocker (Glu-CB)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lemborexant",
@@ -3364,7 +3748,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Levomilnacipran"
+    "wikipedia": "https://en.wikipedia.org/wiki/Levomilnacipran",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 431,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lisdexamfetamine",
@@ -3430,7 +3822,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lisdexamfetamine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lisdexamfetamine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 437,
+        "quote": "Neuroscience-based Nomenclature: dopamine and norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lithium",
@@ -3447,7 +3847,15 @@
       "fr": "Stabilise l'humeur par des mécanismes complexes et partiellement inconnus, notamment l'inhibition de l'inositol monophosphatase et la réduction de l'activité de la protéine kinase C."
     },
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lithium_(medication)"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lithium_(medication)",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 443,
+        "quote": "Neuroscience-based Nomenclature: lithium enzyme interactions (Li-Eint)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lofepramine",
@@ -3530,7 +3938,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lofepramine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lofepramine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 449,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lofexidine",
@@ -3622,7 +4038,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lorazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lorazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 465,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "loxapine",
@@ -3704,7 +4128,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Loxapine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Loxapine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 471,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lumateperone",
@@ -3886,7 +4318,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lurasidone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lurasidone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 487,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "maprotiline",
@@ -3960,7 +4400,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Maprotiline"
+    "wikipedia": "https://en.wikipedia.org/wiki/Maprotiline",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 495,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "memantine",
@@ -4006,7 +4454,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Memantine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Memantine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 503,
+        "quote": "Neuroscience-based Nomenclature: glutamate receptor antagonist (Glu-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "methylfolate_l",
@@ -4061,7 +4517,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dexmethylphenidate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dexmethylphenidate",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 511,
+        "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal (DN-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "methylphenidate_dl",
@@ -4103,7 +4567,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Methylphenidate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Methylphenidate",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 517,
+        "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal (DN-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "mianserin",
@@ -4197,7 +4669,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Mianserin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Mianserin",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 525,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine multimodal (N-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "midazolam",
@@ -4232,7 +4712,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Midazolam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Midazolam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 529,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "milnacipran",
@@ -4290,7 +4778,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Milnacipran"
+    "wikipedia": "https://en.wikipedia.org/wiki/Milnacipran",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 533,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "mirtazapine",
@@ -4368,7 +4864,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Mirtazapine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Mirtazapine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 539,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine receptor antagonist (SN-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "moclobemide",
@@ -4402,7 +4906,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Moclobemide"
+    "wikipedia": "https://en.wikipedia.org/wiki/Moclobemide",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 545,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine reversible enzyme inhibitor (SN-RevEI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "modafinil",
@@ -4433,7 +4945,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Modafinil"
+    "wikipedia": "https://en.wikipedia.org/wiki/Modafinil",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 551,
+        "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "molindone",
@@ -4550,7 +5070,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Nalmefene"
+    "wikipedia": "https://en.wikipedia.org/wiki/Nalmefene",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 563,
+        "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (O-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "naltrexone",
@@ -4581,7 +5109,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Naltrexone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Naltrexone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 567,
+        "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (O-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "naltrexonebupropion",
@@ -4635,7 +5171,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Naltrexone/bupropion"
+    "wikipedia": "https://en.wikipedia.org/wiki/Naltrexone/bupropion",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 571,
+        "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (naltrexone, O-RAn) and dopamine reuptake inhibitor and releaser (bupropion, D-RIRe)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "nefazodone",
@@ -4713,7 +5257,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Nefazodone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Nefazodone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 577,
+        "quote": "Neuroscience-based Nomenclature: serotonin receptor antagonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "nortriptyline",
@@ -4796,7 +5348,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Nortriptyline"
+    "wikipedia": "https://en.wikipedia.org/wiki/Nortriptyline",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 583,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "olanzapine",
@@ -4889,7 +5449,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Olanzapine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Olanzapine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 591,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "olanzapinesamidorphan",
@@ -5013,7 +5581,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Oxazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Oxazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 609,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "oxcarbazepine",
@@ -5106,7 +5682,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Paliperidone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Paliperidone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 621,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "paroxetine",
@@ -5168,7 +5752,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Paroxetine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Paroxetine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 633,
+        "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "perospirone",
@@ -5215,7 +5807,15 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Perospirone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Perospirone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 641,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "perphenazine",
@@ -5293,7 +5893,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Perphenazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Perphenazine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 647,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "phenelzine",
@@ -5319,7 +5927,15 @@
         "action": "enzyme_inhibitor"
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Phenelzine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Phenelzine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 653,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "phenterminetopiramate",
@@ -5522,7 +6138,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Pimozide"
+    "wikipedia": "https://en.wikipedia.org/wiki/Pimozide",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 669,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "pipothiazine",
@@ -5588,7 +6212,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Pipotiazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Pipotiazine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 675,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "pitolisant",
@@ -5699,7 +6331,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Pregabalin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Pregabalin",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 689,
+        "quote": "Neuroscience-based Nomenclature: glutamate voltage-gated calcium channel blocker (Glu-CB)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "propranolol",
@@ -5825,7 +6465,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Protriptyline"
+    "wikipedia": "https://en.wikipedia.org/wiki/Protriptyline",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 699,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "quazepam",
@@ -5860,7 +6508,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Quazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Quazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 705,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "quetiapine",
@@ -5989,7 +6645,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Quetiapine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Quetiapine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 709,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin multimodal (DS-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "ramelteon",
@@ -6031,7 +6695,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Ramelteon"
+    "wikipedia": "https://en.wikipedia.org/wiki/Ramelteon",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 717,
+        "quote": "Neuroscience-based Nomenclature: melatonin receptor agonist (Mel-RA)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "reboxetine",
@@ -6062,7 +6734,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Reboxetine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Reboxetine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 721,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "risperidone",
@@ -6129,7 +6809,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Risperidone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Risperidone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 727,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "rivastigmine",
@@ -6171,7 +6859,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Rivastigmine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Rivastigmine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 739,
+        "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "selegiline",
@@ -6217,7 +6913,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Selegiline"
+    "wikipedia": "https://en.wikipedia.org/wiki/Selegiline",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 745,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine enzyme inhibitor",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "serdexmethylphenidate",
@@ -6259,7 +6963,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Serdexmethylphenidate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Serdexmethylphenidate",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 755,
+        "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal stimulant (DN-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "sertindole",
@@ -6322,7 +7034,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Sertindole"
+    "wikipedia": "https://en.wikipedia.org/wiki/Sertindole",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 761,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "sertraline",
@@ -6372,7 +7092,15 @@
         "action": "antagonist"
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Sertraline"
+    "wikipedia": "https://en.wikipedia.org/wiki/Sertraline",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 767,
+        "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "sildenafil",
@@ -6429,7 +7157,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Sodium_oxybate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Sodium_oxybate",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 779,
+        "quote": "Neuroscience-based Nomenclature: GABA receptor agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "solriamfetol",
@@ -6559,7 +7295,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Sulpiride"
+    "wikipedia": "https://en.wikipedia.org/wiki/Sulpiride",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 787,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "suvorexant",
@@ -6662,7 +7406,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Temazepam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Temazepam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 801,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "thioridazine",
@@ -6728,7 +7480,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Thioridazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Thioridazine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 805,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "thiothixene",
@@ -6859,7 +7619,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Tianeptine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Tianeptine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 823,
+        "quote": "Neuroscience-based Nomenclature: glutamate; yet to be determined (Glu)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "topiramate",
@@ -6945,7 +7713,15 @@
         "action": "enzyme_inhibitor"
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Tranylcypromine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Tranylcypromine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 833,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine multimodal enzyme inhibitor (SN-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "trazodone",
@@ -7020,7 +7796,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Trazodone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Trazodone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 839,
+        "quote": "Neuroscience-based Nomenclature: serotonin receptor antagonist (S-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "triazolam",
@@ -7055,7 +7839,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Triazolam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Triazolam",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 845,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "trifluoperazine",
@@ -7121,7 +7913,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Trifluoperazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Trifluoperazine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 849,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "trihexyphenidyl",
@@ -7262,7 +8062,15 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Trimipramine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Trimipramine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 863,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "valbenazine",
@@ -7289,8 +8097,8 @@
       "mood_stabilizer"
     ],
     "nbn": {
-      "en": "glutamate; yet to be determined (Glu-?)",
-      "fr": "glutamate ; à déterminer (Glu-?)"
+      "en": "glutamate (Glu); yet to be determined",
+      "fr": "glutamate (Glu) ; à déterminer"
     },
     "description": {
       "en": "Blocks voltage-sensitive sodium channels and increases brain GABA concentrations by unknown mechanisms, providing anticonvulsant and mood-stabilizing effects.",
@@ -7311,7 +8119,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Valproate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Valproate",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 875,
+        "quote": "Neuroscience-based Nomenclature: glutamate (Glu); yet to be determined",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "varenicline",
@@ -7341,7 +8157,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Varenicline"
+    "wikipedia": "https://en.wikipedia.org/wiki/Varenicline",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 883,
+        "quote": "Neuroscience-based Nomenclature: acetylcholine receptor partial agonist (ACh-RPA)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "venlafaxine",
@@ -7399,7 +8223,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Venlafaxine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Venlafaxine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 887,
+        "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "vilazodone",
@@ -7442,7 +8274,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Vilazodone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Vilazodone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 893,
+        "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "viloxazine",
@@ -7496,7 +8336,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Viloxazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Viloxazine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 899,
+        "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "vortioxetine",
@@ -7587,7 +8435,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Vortioxetine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Vortioxetine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 905,
+        "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "zaleplon",
@@ -7621,7 +8477,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Zaleplon"
+    "wikipedia": "https://en.wikipedia.org/wiki/Zaleplon",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 911,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "ziprasidone",
@@ -7675,7 +8539,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Ziprasidone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Ziprasidone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 915,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "zolpidem",
@@ -7709,7 +8581,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Zolpidem"
+    "wikipedia": "https://en.wikipedia.org/wiki/Zolpidem",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 923,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "zonisamide",
@@ -7795,7 +8675,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Zopiclone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Zopiclone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 931,
+        "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "zotepine",
@@ -7873,7 +8761,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Zotepine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Zotepine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 935,
+        "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "zuclopenthixol",
@@ -7944,6 +8840,14 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Zuclopenthixol"
+    "wikipedia": "https://en.wikipedia.org/wiki/Zuclopenthixol",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 941,
+        "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ]
   }
 ]
