@@ -1919,5 +1919,47 @@
       "url": "TODO",
       "pages_dir": "stahl/pages"
     }
+  },
+  "provenance_stats": {
+    "by_kind": {
+      "drug_bindings": {
+        "total": 429,
+        "verified": 403,
+        "sourced": 0,
+        "unverified": 26
+      },
+      "drug_nbn": {
+        "total": 116,
+        "verified": 113,
+        "sourced": 0,
+        "unverified": 3
+      },
+      "drug_descriptions": {
+        "total": 158,
+        "verified": 0,
+        "sourced": 140,
+        "unverified": 18
+      },
+      "projections": {
+        "total": 107,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 107
+      },
+      "references": {
+        "total": 296,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 296
+      }
+    },
+    "assertions": {
+      "total": 810,
+      "verified": 516,
+      "sourced": 140,
+      "unverified": 154,
+      "backed": 656,
+      "pct_backed": 81
+    }
   }
 }

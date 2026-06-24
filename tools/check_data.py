@@ -444,6 +444,41 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
         report.ok(f"every source/reference carries a valid provenance grade "
                   f"({summary})")
 
+    # Internal consistency of the emitted provenance_stats tally (the figure the
+    # About panel + README headline read). Re-deriving the counts would duplicate
+    # the generator; this just confirms the emitted buckets are self-consistent, so
+    # a malformed emit or a hand-edited stat can never ship a wrong "% sourced".
+    stats = meta.get("provenance_stats")
+    if not stats:
+        report.warn("meta.provenance_stats is missing (the % sourced figure)")
+    else:
+        before_stats = report.errors
+        for kind, c in stats.get("by_kind", {}).items():
+            parts = c.get("verified", 0) + c.get("sourced", 0) + c.get("unverified", 0)
+            if parts != c.get("total", 0):
+                report.error(f"provenance_stats by_kind[{kind}] buckets "
+                             f"({parts}) do not sum to total ({c.get('total')})")
+        a = stats.get("assertions", {})
+        kinds = ("drug_bindings", "drug_nbn", "drug_descriptions", "projections")
+        by = stats.get("by_kind", {})
+        for key in ("total", "verified", "sourced", "unverified"):
+            want = sum(by.get(k, {}).get(key, 0) for k in kinds)
+            if a.get(key) != want:
+                report.error(f"provenance_stats assertions[{key}]={a.get(key)} "
+                             f"!= sum over claim kinds ({want})")
+        backed = a.get("verified", 0) + a.get("sourced", 0)
+        if a.get("backed") != backed:
+            report.error(f"provenance_stats assertions.backed={a.get('backed')} "
+                         f"!= verified+sourced ({backed})")
+        want_pct = round(100 * backed / a["total"]) if a.get("total") else 0
+        if a.get("pct_backed") != want_pct:
+            report.error(f"provenance_stats assertions.pct_backed="
+                         f"{a.get('pct_backed')} != {want_pct}")
+        if report.errors == before_stats:
+            report.ok(f"provenance_stats is self-consistent "
+                      f"({a.get('pct_backed')}% of {a.get('total')} assertions "
+                      f"sourced or verified)")
+
 
 # --------------------------------------------------------------------------- #
 # 5. Source quotes (verbatim in the cited corpus page)

@@ -3197,6 +3197,91 @@ def _load_drugs() -> list[dict[str, Any]]:
     return data
 
 
+# Provenance ranks for the dataset-wide sourcing tally (meta.provenance_stats):
+# a higher rank is a stronger grade, 0 = no source/grade at all. Mirrors
+# PROVENANCE_LEVELS but as an order so a list of sources can be reduced to its best.
+_GRADE_RANK = {"llm": 1, "sourced": 2, "verified": 3}
+
+
+def _strongest_grade(sources: list[dict[str, Any]] | None) -> int:
+    """The strongest provenance rank among a list of source objects (0 if none)."""
+    best = 0
+    for src in sources or []:
+        best = max(best, _GRADE_RANK.get(src.get("provenance"), 0))
+    return best
+
+
+def _provenance_stats(structures: list[dict[str, Any]],
+                      projections: list[dict[str, Any]],
+                      receptors: list[dict[str, Any]],
+                      drugs: list[dict[str, Any]],
+                      drug_targets: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """Programmatic sourcing tally emitted into ``meta.provenance_stats``.
+
+    Every factual claim and every reference link in the dataset is bucketed by the
+    strength of its source: ``verified`` (quote-checked), ``sourced`` (from a
+    document, not quote-checked) or ``unverified`` (LLM-only, or no source yet). The
+    viewer's About panel and the README headline read these numbers, so the
+    "% sourced" figure is always a real count of the shipped data, never hand-typed
+    (the whole point of the request: a programmatic count of source type vs all).
+
+    "Assertions" are the factual claims (drug bindings, drug NbN labels, drug
+    descriptions, neuron projections) and drive the headline ``pct_backed``;
+    Wikipedia "references" are tallied separately (read-more links, not claims).
+    """
+    def bucket(rank_or_grade: Any) -> str:
+        rank = (rank_or_grade if isinstance(rank_or_grade, int)
+                else _GRADE_RANK.get(rank_or_grade, 0))
+        return ("verified" if rank == 3 else
+                "sourced" if rank == 2 else "unverified")
+
+    def tally(grades: list[Any]) -> dict[str, int]:
+        counts = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
+        for g in grades:
+            counts["total"] += 1
+            counts[bucket(g)] += 1
+        return counts
+
+    binding_grades = [_strongest_grade(b.get("sources"))
+                      for d in drugs for b in d.get("bindings", [])]
+    nbn_grades = [_strongest_grade(d.get("nbn_sources"))
+                  for d in drugs if d.get("nbn")]
+    desc_grades = [d.get("description_provenance", DEFAULT_PROVENANCE)
+                   for d in drugs if d.get("description")]
+    projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
+    # Wikipedia reference links across every owner kind. Non-receptor targets only
+    # (a receptor is already counted via the receptor records, not twice); a missing
+    # link is a rank-0 "unverified" so the gap shows in the coverage.
+    ref_grades: list[int] = []
+    for rec in (*structures, *receptors, *drugs):
+        ref_grades.append(_GRADE_RANK.get(rec.get("wikipedia_provenance"), 0)
+                          if rec.get("wikipedia") else 0)
+    for tgt in drug_targets.values():
+        if tgt.get("type") == "receptor":
+            continue
+        ref_grades.append(_GRADE_RANK.get(tgt.get("wikipedia_provenance"), 0)
+                          if tgt.get("wikipedia") else 0)
+
+    by_kind = {
+        "drug_bindings": tally(binding_grades),
+        "drug_nbn": tally(nbn_grades),
+        "drug_descriptions": tally(desc_grades),
+        "projections": tally(projection_grades),
+        "references": tally(ref_grades),
+    }
+    assertion_kinds = ("drug_bindings", "drug_nbn", "drug_descriptions",
+                       "projections")
+    assertions = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
+    for kind in assertion_kinds:
+        for key in assertions:
+            assertions[key] += by_kind[kind][key]
+    backed = assertions["verified"] + assertions["sourced"]
+    assertions["backed"] = backed
+    assertions["pct_backed"] = (
+        round(100 * backed / assertions["total"]) if assertions["total"] else 0)
+    return {"by_kind": by_kind, "assertions": assertions}
+
+
 def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     """Expand the anatomy definition into the per-type record sets + shapes.
 
@@ -3417,6 +3502,11 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # each binding's source; check_data.py reads pages_dir to confirm quotes.
         # Self-describing so a port needs no hardcoded citation.
         "source_corpora": SOURCE_CORPORA,
+        # Programmatic sourcing tally over the shipped data (per-kind + headline);
+        # the About panel + README read it so the "% sourced" figure is a real
+        # count, never hand-typed. See _provenance_stats.
+        "provenance_stats": _provenance_stats(
+            structures, projections, receptors, drugs, drug_targets),
     }
 
     return ({"meta": meta, "structures": structures,
