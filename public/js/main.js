@@ -1205,15 +1205,25 @@ function createInfoPanel(data) {
     return wrap;
   };
 
-  // The "?" caveat badge shown next to every Source / Reference heading: the
-  // sources are LLM-inferred (web + the Stahl PDF) and not yet human-checked, so
-  // the block as a whole carries this note (it sits alongside the per-source
-  // provenance pills, which grade each one individually, see makeProvenancePill).
+  // The "?" caveat badge: the sources are LLM-inferred (web + the Stahl PDF) and
+  // not yet human-checked. It sits alongside the per-source provenance pills (which
+  // grade each one individually, see makeProvenancePill) and the full grade key in
+  // the About panel ("Sources & provenance"). The tooltip carries the warning.
   const makeHelpIcon = () => {
     const btn = el("button", "help-dot", "?");
     btn.type = "button";
     btn.setAttribute("aria-label", t("info.sourceCaveatLabel"));
     return withTip(btn, t("info.sourceCaveat"));
+  };
+
+  // Show the block caveat at most ONCE per panel. A detail panel mixes a Reference
+  // row, inline grade pills (description / NbN / bindings) and a Source list; a
+  // caveat on each block stacked into several near-identical "?"s that blurred with
+  // the grey "llm" grade pill's own "?". addCaveatOnce drops it on the first
+  // source/reference block to render (guarding on the unique .help-dot class; body
+  // is cleared each render), so one caveat covers the whole panel.
+  const addCaveatOnce = (target) => {
+    if (!body.querySelector(".help-dot")) target.appendChild(makeHelpIcon());
   };
 
   // Per-source provenance pill (how trustworthy the source's attribution is):
@@ -1326,7 +1336,7 @@ function createInfoPanel(data) {
       wrap.appendChild(el("span", null, t("info.reference")));
       wrap.appendChild(makeProvenancePill(null)); // no reference -> TODO pill
     }
-    wrap.appendChild(makeHelpIcon()); // the reference is LLM-inferred, not vetted
+    addCaveatOnce(wrap); // one block caveat per panel (the reference is LLM-inferred)
     body.appendChild(wrap);
   };
 
@@ -1340,7 +1350,7 @@ function createInfoPanel(data) {
     const wrap = el("div", "info-sources");
     const h3 = el(
       "h3", null, sources.length > 1 ? t("info.sources") : t("info.source"));
-    h3.appendChild(makeHelpIcon()); // the citations are LLM-inferred, not vetted
+    addCaveatOnce(h3); // one block caveat per panel (the citations are LLM-inferred)
     wrap.appendChild(h3);
     const ul = el("ul");
     for (const s of sources) {
