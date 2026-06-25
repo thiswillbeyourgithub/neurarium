@@ -362,7 +362,9 @@
         "locus_coeruleus",
         "vta",
         "substantia_nigra",
-        "brainstem"
+        "midbrain",
+        "pons",
+        "medulla"
       ],
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
       "wikipedia_provenance": "llm"
@@ -379,7 +381,9 @@
         "substantia_nigra",
         "vta",
         "raphe",
-        "brainstem"
+        "midbrain",
+        "pons",
+        "medulla"
       ],
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
       "wikipedia_provenance": "llm"
@@ -577,7 +581,9 @@
         "occipital",
         "hippocampus",
         "thalamus",
-        "brainstem"
+        "midbrain",
+        "pons",
+        "medulla"
       ],
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
       "wikipedia_provenance": "llm"
@@ -596,7 +602,9 @@
         "hippocampus",
         "thalamus",
         "hypothalamus",
-        "brainstem"
+        "midbrain",
+        "pons",
+        "medulla"
       ],
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
       "wikipedia_provenance": "llm"
@@ -701,7 +709,9 @@
         "occipital",
         "hippocampus",
         "cerebellum",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "thalamus",
         "hypothalamus"
       ],
@@ -722,7 +732,9 @@
         "occipital",
         "hippocampus",
         "cerebellum",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "thalamus"
       ],
       "ubiquitous": false
@@ -753,7 +765,9 @@
         "occipital",
         "hippocampus",
         "cerebellum",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "thalamus"
       ],
       "ubiquitous": false
@@ -768,7 +782,9 @@
       "receptor": "alpha2a",
       "regions": [
         "locus_coeruleus",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "hypothalamus",
         "hippocampus",
         "frontal",
@@ -815,7 +831,9 @@
         "globus_pallidus",
         "substantia_nigra",
         "vta",
-        "brainstem"
+        "midbrain",
+        "pons",
+        "medulla"
       ],
       "ubiquitous": false
     },
@@ -904,7 +922,9 @@
       "receptor": "m2",
       "regions": [
         "olfactory_bulb",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "frontal",
         "parietal",
         "temporal",
@@ -923,7 +943,9 @@
       "receptor": "m3",
       "regions": [
         "hypothalamus",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "thalamus",
         "frontal",
         "temporal",
@@ -1122,7 +1144,9 @@
         "hypothalamus",
         "septal_nuclei",
         "cerebellum",
-        "brainstem"
+        "midbrain",
+        "pons",
+        "medulla"
       ],
       "ubiquitous": false
     },
@@ -1324,7 +1348,9 @@
       "system": "glycinergic",
       "receptor": "glycine",
       "regions": [
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "cerebellum",
         "hippocampus"
       ],
@@ -1348,7 +1374,9 @@
         "hippocampus",
         "thalamus",
         "hypothalamus",
-        "brainstem"
+        "midbrain",
+        "pons",
+        "medulla"
       ],
       "ubiquitous": false
     },
@@ -1415,7 +1443,9 @@
       "system": "opioidergic",
       "receptor": "mu",
       "regions": [
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "thalamus",
         "caudate",
         "putamen",
@@ -1467,7 +1497,9 @@
         "accumbens",
         "claustrum",
         "hypothalamus",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "amygdala"
       ],
       "ubiquitous": false
@@ -1621,7 +1653,9 @@
       "system": "serotonergic",
       "receptor": "5ht3",
       "regions": [
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "hippocampus",
         "amygdala"
       ],
@@ -1748,7 +1782,9 @@
         "temporal",
         "occipital",
         "hippocampus",
-        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla",
         "cerebellum"
       ],
       "ubiquitous": false
@@ -1947,10 +1983,10 @@
         "unverified": 107
       },
       "references": {
-        "total": 296,
+        "total": 298,
         "verified": 0,
         "sourced": 0,
-        "unverified": 296
+        "unverified": 298
       }
     },
     "assertions": {

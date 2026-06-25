@@ -13,7 +13,7 @@ A browser-based 3D brain visualizer built on [three.js](https://threejs.org/).
 It shows brain regions (cortical lobes, basal ganglia / deep nuclei,
 diencephalon, limbic, hindbrain) as procedurally shaped meshes (cel-shaded
 cortical lobes carrying a swirl motif, smooth deep nuclei, foliated cerebellum,
-swept-tube caudate/brainstem/hippocampus/cingulate/fornix)
+swept-tube caudate/brainstem levels (midbrain/pons/medulla)/hippocampus/cingulate/fornix)
 and draws arrows for neuron projections between them. It also carries a dataset of
 neurotransmitter **receptors** (which transmitter, mechanism class, excit/inhib
 sign, pre/post-synaptic site, and the regions each is expressed in); focusing one
@@ -194,7 +194,8 @@ data/shapes/<name>.json  One geometry file per distinct *form* (independent of
                       it seats into a notch instead of poking through;
                       "curve" {points, profile, seed, noise, radial/tubular_
                       segments} = a round-capped tapered tube swept along a spline
-                      (the C-shaped caudate, the tapering brainstem); "composite"
+                      (the C-shaped caudate, the tapering brainstem levels
+                      midbrain/pons/medulla); "composite"
                       {parts:[...]} = several sub-shapes (each with optional
                       offset/scale/rotate) merged into one mesh, for regions that
                       aren't a single lump (the cerebellum = 2 hemispheres +
@@ -1572,7 +1573,7 @@ static set of arrows. It is split in two on purpose:
   `mirrorId`) and the BFS is *multi-source*, so over a mirror-symmetric circuit the
   mirror-paired nodes get equal depth and the two hemispheres pulse in step,
   whether the circuit is two disjoint L/R loops (the direct pathway) or a single
-  component whose halves join through a shared **midline hub** (cortex -> brainstem
+  component whose halves join through a shared **midline hub** (cortex -> pons
   -> cerebellum -> thalamus), which a one-sided seed would otherwise sweep
   asymmetrically. An off-cycle **feeder branch** (e.g. the nigrostriatal dopamine
   input into the direct pathway) just fires when activation reaches its tail, or at
@@ -2012,12 +2013,14 @@ self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
        `enabled:false` drops the lobes back to the plain smooth material. It lives
        in JS, not the data.
    - Give a region a `shape=dict(type="curve", ...)` for a round-capped tapered
-     tube instead of an ellipsoid (the caudate, the brainstem): `points` is the
+     tube instead of an ellipsoid (the caudate, the brainstem levels
+     midbrain/pons/medulla): `points` is the
      spine head->tail, `profile` the radius sampled along it (caps close each
      end). A paired `curve` may now be asymmetric across x (e.g. an off-midline
      spine): the `_L` member is a true reflection of the right-side geometry, so
-     it flips correctly. Midline curves like the brainstem are emitted once and
-     never mirrored. A curve may also carry `carves=True` to make it hollow a
+     it flips correctly. Midline curves like the three brainstem levels are
+     emitted once and never mirrored (they share their boundary spine points so
+     the round-capped tubes overlap a hair and read as one continuous column). A curve may also carry `carves=True` to make it hollow a
      notch in the lobes it threads (see `carve_tubes` above; only the caudate uses
      it).
    - Give a region a `shape=dict(type="composite", parts=[...])` to merge several
@@ -2189,3 +2192,19 @@ Lightweight, no-build versioning suited to this static site:
   `group`->legend-heading map all live only in `generate_data.py`; the latter two
   are emitted into the data's `meta.json` and read by the viewer, so there is
   no second copy in JS.
+- **Structure granularity is demand-driven.** The modeled brain sits at a
+  deliberately *uneven* granularity: fine where the data forces it (the diffuse
+  monoamine source nuclei raphe / locus coeruleus / VTA are split out because the
+  ascending pathways + drug flow needed them; the brainstem is cut into
+  midbrain / pons / medulla because the corticopontine + pontocerebellar pathways
+  name the pons specifically), coarse where nothing yet forces it (each cortical
+  lobe is one whole piece, the thalamus one nucleus). Cut a region into finer
+  sub-structures *only* when the receptor / projection / drug data actually
+  distinguishes its sub-parts **and** can source that distinction: granularity
+  should never exceed what the data can back, or the LLM-assisted dataset is
+  pushed to invent sub-region anatomy it cannot source (against the
+  strictly-dump-sourced discipline). When a broad reference genuinely means "the
+  whole region" (e.g. a receptor expressed throughout the brainstem), expand it to
+  the region's sub-parts rather than inventing a single level. The
+  frontal-lobe -> prefrontal-cortex split is the next cut this rule would justify,
+  when the receptor / drug data calls for it.

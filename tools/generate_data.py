@@ -340,12 +340,12 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
               "type": "enzyme", "system": "serotonergic",
               "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
               "regions": ["raphe", "locus_coeruleus", "vta", "substantia_nigra",
-                          "brainstem"]},
+                          "midbrain", "pons", "medulla"]},
     "mao_b": {"name": {"en": "Monoamine oxidase B (MAO-B)",
                        "fr": "Monoamine oxydase B (MAO-B)"},
               "type": "enzyme", "system": "dopaminergic",
               "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
-              "regions": ["substantia_nigra", "vta", "raphe", "brainstem"]},
+              "regions": ["substantia_nigra", "vta", "raphe", "midbrain", "pons", "medulla"]},
     "ache": {"name": {"en": "Acetylcholinesterase",
                       "fr": "Acétylcholinestérase"},
              "type": "enzyme", "system": "cholinergic",
@@ -412,14 +412,14 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
                "wikipedia":
                    "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
                "regions": ["frontal", "parietal", "temporal", "occipital",
-                           "hippocampus", "thalamus", "brainstem"]},
+                           "hippocampus", "thalamus", "midbrain", "pons", "medulla"]},
     "alpha2": {"name": {"en": "α2 adrenergic receptors",
                         "fr": "Récepteurs α2 adrénergiques"},
                "type": "receptor_group", "system": "adrenergic",
                "wikipedia":
                    "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
                "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
-                           "hypothalamus", "brainstem"]},
+                           "hypothalamus", "midbrain", "pons", "medulla"]},
     "beta": {"name": {"en": "β adrenergic receptors",
                       "fr": "Récepteurs β adrénergiques"},
              "type": "receptor_group", "system": "adrenergic",
@@ -680,7 +680,9 @@ FR: dict[str, str] = {
     "Mammillary bodies": "Corps mammillaires",
     "Pituitary gland": "Hypophyse",
     "Cerebellum": "Cervelet",
-    "Brainstem": "Tronc cérébral",
+    "Midbrain": "Mésencéphale",
+    "Pons": "Pont",
+    "Medulla": "Bulbe rachidien",
     # Monoamine source nuclei + their group heading
     "Brainstem nuclei": "Noyaux du tronc cérébral",
     "Raphe nuclei": "Noyaux du raphé",
@@ -849,9 +851,9 @@ FR: dict[str, str] = {
     "(pulvinar / lateral geniculate).":
         "Le cortex occipital (visuel) est réciproquement connecté au thalamus "
         "(pulvinar / corps genouillé latéral).",
-    "Cortex projects to the pontine nuclei (brainstem), the first leg of the "
+    "Cortex projects to the pontine nuclei (pons), the first leg of the "
     "cortico-ponto-cerebellar route.":
-        "Le cortex projette vers les noyaux du pont (tronc cérébral), première "
+        "Le cortex projette vers les noyaux du pont, première "
         "étape de la voie cortico-ponto-cérébelleuse.",
     "Pontine nuclei send mossy fibers to the cerebellar cortex.":
         "Les noyaux du pont envoient des fibres moussues au cortex cérébelleux.",
@@ -1314,24 +1316,55 @@ MIDLINE: list[dict[str, Any]] = [
                       aniso=[0.25, 5.0, 0.5], offset=[0.0, 0.0, 0.05]),
              ],
          )),
-    dict(base="brainstem", name="Brainstem", group="hindbrain",
-         pos=(0.0, -2.4, -0.8), color="#9c755f",
-         # Tall vertical stalk modeled as a curve so it tapers like the real
-         # midbrain -> pons -> medulla column instead of a symmetric egg. The
-         # spine runs top -> bottom; the profile bulges at the pons (anterior,
-         # +z) and narrows down the medulla. Midline structure, so the curve's
-         # parasagittal-spine caveat doesn't apply (it is never mirrored).
+    # The brainstem, cut into its three anatomical levels (midbrain -> pons ->
+    # medulla) as separate midline structures instead of one swept tube, so each
+    # is selectable and they come apart on explode. The three curve segments share
+    # their boundary spine points (round-capped tubes that overlap a hair at the
+    # joints), so at explode 0 they still read as one continuous tapering column
+    # where the old single brainstem sat. Each carries its own pos at its centre so
+    # it explodes radially on its own. Midline structures, never mirrored. (The pons
+    # is the level the modeled corticopontine + pontocerebellar pathways actually
+    # name, which is what justified splitting the column out, see "Drugs"/CLAUDE.md
+    # granularity note.)
+    dict(base="midbrain", name="Midbrain", group="hindbrain",
+         pos=(0.0, -0.95, -0.66), color="#9c755f",
+         # Top segment, continuous with the diencephalon/thalamus above it.
          shape=dict(
              type="curve",
              points=[
-                 (0.0, 2.3, 0.05),    # midbrain (top), continuous with thalamus
-                 (0.0, 1.2, 0.18),    # rising bulge toward the pons
-                 (0.0, 0.15, 0.32),   # pons: fullest, bulging anteriorly
-                 (0.0, -0.95, 0.1),   # upper medulla, drawing back in
-                 (0.0, -2.15, -0.05), # medulla (bottom), toward the cord
+                 (0.0, 0.85, -0.09),  # top, under the thalamus
+                 (0.0, 0.0, 0.0),     # mid
+                 (0.0, -0.75, 0.11),  # tail, meeting the pons
              ],
-             profile=[0.46, 0.58, 0.8, 0.52, 0.34],
-             seed=32, noise=0.05, radial_segments=16, tubular_segments=90,
+             profile=[0.46, 0.55, 0.62],
+             seed=32, noise=0.05, radial_segments=16, tubular_segments=44,
+         )),
+    dict(base="pons", name="Pons", group="hindbrain",
+         pos=(0.0, -2.35, -0.45), color="#8c6a58",
+         # Middle segment: the fullest, bulging anteriorly (+z); the pontine nuclei
+         # relay cortex -> cerebellum (the corticopontine / pontocerebellar legs).
+         shape=dict(
+             type="curve",
+             points=[
+                 (0.0, 0.65, -0.10),  # head, meeting the midbrain
+                 (0.0, 0.0, 0.0),     # belly, fullest + most anterior
+                 (0.0, -0.65, -0.15), # tail, meeting the medulla
+             ],
+             profile=[0.62, 0.8, 0.55],
+             seed=33, noise=0.05, radial_segments=16, tubular_segments=44,
+         )),
+    dict(base="medulla", name="Medulla", group="hindbrain",
+         pos=(0.0, -3.8, -0.75), color="#7d5f4e",
+         # Bottom segment, narrowing toward the spinal cord and drawing back (-z).
+         shape=dict(
+             type="curve",
+             points=[
+                 (0.0, 0.8, 0.15),    # head, meeting the pons
+                 (0.0, 0.0, 0.0),     # mid
+                 (0.0, -0.75, -0.10), # tail, toward the cord
+             ],
+             profile=[0.55, 0.44, 0.34],
+             seed=34, noise=0.05, radial_segments=16, tubular_segments=44,
          )),
     dict(base="raphe", name="Raphe nuclei", group="brainstem_nuclei", fr_gender="mp",
          pos=(0.0, -1.9, -0.95), color="#b98ac9",
@@ -1376,7 +1409,9 @@ WIKIPEDIA: dict[str, str] = {
     "mammillary": "https://en.wikipedia.org/wiki/Mammillary_body",
     "pituitary": "https://en.wikipedia.org/wiki/Pituitary_gland",
     "cerebellum": "https://en.wikipedia.org/wiki/Cerebellum",
-    "brainstem": "https://en.wikipedia.org/wiki/Brainstem",
+    "midbrain": "https://en.wikipedia.org/wiki/Midbrain",
+    "pons": "https://en.wikipedia.org/wiki/Pons",
+    "medulla": "https://en.wikipedia.org/wiki/Medulla_oblongata",
     "raphe": "https://en.wikipedia.org/wiki/Raphe_nuclei",
     "locus_coeruleus": "https://en.wikipedia.org/wiki/Locus_coeruleus",
     "vta": "https://en.wikipedia.org/wiki/Ventral_tegmental_area",
@@ -1632,13 +1667,13 @@ PROJECTIONS: list[dict[str, Any]] = [
                      "thalamus (pulvinar / lateral geniculate).",
          sources=["schmahmann2006"]),
     # --- Cortico-ponto-cerebellar and cerebellar output ---
-    dict(**{"from": "frontal_R", "to": "brainstem"},
+    dict(**{"from": "frontal_R", "to": "pons"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corticopontine",
-         description="Cortex projects to the pontine nuclei (brainstem), the "
+         description="Cortex projects to the pontine nuclei (pons), the "
                      "first leg of the cortico-ponto-cerebellar route.",
          sources=["middleton2000", "schmahmann2006"]),
-    dict(**{"from": "brainstem", "to": "cerebellum"},
+    dict(**{"from": "pons", "to": "cerebellum"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Pontocerebellar (mossy fibers)",
          description="Pontine nuclei send mossy fibers to the cerebellar cortex.",
@@ -1909,8 +1944,8 @@ CIRCUITS: list[dict[str, Any]] = [
          structures=["substantia_nigra", "putamen", "caudate"]),
     dict(id="cerebellar_motor", name="Cortico-cerebellar (motor)",
          # Cortex -> pons -> cerebellum -> thalamus -> cortex: the coordination
-         # loop running through the brainstem and cerebellum.
-         structures=["frontal", "brainstem", "cerebellum", "thalamus"]),
+         # loop running through the pons and cerebellum.
+         structures=["frontal", "pons", "cerebellum", "thalamus"]),
     dict(id="limbic_memory", name="Hippocampal / limbic (Papez)",
          # The medial-temporal memory loop, now wired through the real fornix,
          # mammillary and cingulate nodes: temporal -> hippocampus -> fornix ->
@@ -1964,7 +1999,7 @@ RECEPTORS: list[dict[str, Any]] = [
          neurotransmitter="Noradrenaline", receptor_class="metabotropic",
          sign="excitatory", synaptic="postsynaptic",
          locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
-                    "cerebellum", "brainstem", "thalamus", "hypothalamus"],
+                    "cerebellum", "midbrain", "pons", "medulla", "thalamus", "hypothalamus"],
          description="Gq-coupled excitatory NA receptor; modulates cortical, "
                      "hippocampal and brainstem excitability.",
          description_fr="Récepteur excitateur de la noradrénaline couplé à Gq ; "
@@ -1975,7 +2010,7 @@ RECEPTORS: list[dict[str, Any]] = [
          neurotransmitter="Noradrenaline", receptor_class="metabotropic",
          sign="excitatory", synaptic="postsynaptic",
          locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
-                    "cerebellum", "brainstem", "thalamus"],
+                    "cerebellum", "midbrain", "pons", "medulla", "thalamus"],
          description="Gq-coupled excitatory NA receptor; postsynaptic, widely "
                      "expressed across cortex and subcortex.",
          description_fr="Récepteur excitateur de la noradrénaline couplé à Gq ; "
@@ -1991,7 +2026,7 @@ RECEPTORS: list[dict[str, Any]] = [
          neurotransmitter="Noradrenaline", receptor_class="metabotropic",
          sign="excitatory", synaptic="postsynaptic",
          locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
-                    "cerebellum", "brainstem", "thalamus"],
+                    "cerebellum", "midbrain", "pons", "medulla", "thalamus"],
          description="Gq-coupled excitatory NA receptor; postsynaptic, in cortex, "
                      "hippocampus and brainstem.",
          description_fr="Récepteur excitateur de la noradrénaline couplé à Gq ; "
@@ -2001,7 +2036,7 @@ RECEPTORS: list[dict[str, Any]] = [
     dict(id="alpha2a", name="α2A", family="adrenergic",
          neurotransmitter="Noradrenaline", receptor_class="metabotropic",
          sign="inhibitory", synaptic="both",
-         locations=["locus_coeruleus", "brainstem", "hypothalamus", "hippocampus",
+         locations=["locus_coeruleus", "midbrain", "pons", "medulla", "hypothalamus", "hippocampus",
                     "frontal", "parietal", "temporal", "occipital", "cerebellum"],
          description="Gi-coupled inhibitory NA receptor; presynaptic autoreceptor "
                      "in locus coeruleus, postsynaptic in prefrontal cortex.",
@@ -2024,7 +2059,7 @@ RECEPTORS: list[dict[str, Any]] = [
          sign="inhibitory", synaptic="both",
          locations=["thalamus", "amygdala", "hippocampus", "frontal", "parietal",
                     "temporal", "occipital", "caudate", "putamen",
-                    "globus_pallidus", "substantia_nigra", "vta", "brainstem"],
+                    "globus_pallidus", "substantia_nigra", "vta", "midbrain", "pons", "medulla"],
          description="Gi-coupled inhibitory NA receptor; widespread in basal "
                      "ganglia, amygdala, hippocampus, cortex and midbrain.",
          description_fr="Récepteur inhibiteur de la noradrénaline couplé à Gi ; "
@@ -2077,7 +2112,7 @@ RECEPTORS: list[dict[str, Any]] = [
     dict(id="m2", name="M2", family="cholinergic",
          neurotransmitter="Acetylcholine", receptor_class="metabotropic",
          sign="inhibitory", synaptic="presynaptic",
-         locations=["olfactory_bulb", "brainstem", "frontal", "parietal",
+         locations=["olfactory_bulb", "midbrain", "pons", "medulla", "frontal", "parietal",
                     "temporal", "occipital", "hippocampus"],
          description="Gi-coupled presynaptic autoreceptor; restrains acetylcholine "
                      "release (also slows the heart).",
@@ -2087,7 +2122,7 @@ RECEPTORS: list[dict[str, Any]] = [
     dict(id="m3", name="M3", family="cholinergic",
          neurotransmitter="Acetylcholine", receptor_class="metabotropic",
          sign="excitatory", synaptic="postsynaptic",
-         locations=["hypothalamus", "brainstem", "thalamus", "frontal", "temporal",
+         locations=["hypothalamus", "midbrain", "pons", "medulla", "thalamus", "frontal", "temporal",
                     "occipital"],
          description="Gq postsynaptic muscarinic receptor; acts in hypothalamus "
                      "and brainstem autonomic centres.",
@@ -2192,7 +2227,7 @@ RECEPTORS: list[dict[str, Any]] = [
          sign="excitatory", synaptic="postsynaptic",
          locations=["amygdala", "frontal", "parietal", "temporal", "occipital",
                     "hippocampus", "caudate", "putamen", "thalamus", "hypothalamus",
-                    "septal_nuclei", "cerebellum", "brainstem"],
+                    "septal_nuclei", "cerebellum", "midbrain", "pons", "medulla"],
          description="D1-like, Gs-coupled, excitatory; low-abundance but "
                      "widespread; high constitutive activity, prominent in "
                      "hippocampus.",
@@ -2328,7 +2363,7 @@ RECEPTORS: list[dict[str, Any]] = [
     dict(id="glycine", name="Glycine", family="glycinergic",
          neurotransmitter="Glycine", receptor_class="ionotropic",
          sign="inhibitory", synaptic="postsynaptic",
-         locations=["brainstem", "cerebellum", "hippocampus"],
+         locations=["midbrain", "pons", "medulla", "cerebellum", "hippocampus"],
          description="Ionotropic Cl- channel; major inhibitory receptor of the "
                      "brainstem (its dominant spinal-cord site is out of frame).",
          description_fr="Canal Cl- ionotrope ; principal récepteur inhibiteur du "
@@ -2342,7 +2377,7 @@ RECEPTORS: list[dict[str, Any]] = [
          sign="excitatory", synaptic="postsynaptic",
          locations=["frontal", "parietal", "temporal", "occipital", "cingulate",
                     "amygdala", "hippocampus", "thalamus", "hypothalamus",
-                    "brainstem"],
+                    "midbrain", "pons", "medulla"],
          description="Gq excitatory; drives wakefulness and arousal; its blockade "
                      "by antihistamines causes sedation.",
          description_fr="Gq excitateur ; favorise l'éveil et la vigilance ; son "
@@ -2380,7 +2415,7 @@ RECEPTORS: list[dict[str, Any]] = [
     dict(id="mu", name="μ (MOR)", family="opioidergic",
          neurotransmitter="Opioid peptides", receptor_class="metabotropic",
          sign="inhibitory", synaptic="both",
-         locations=["brainstem", "thalamus", "caudate", "putamen", "accumbens",
+         locations=["midbrain", "pons", "medulla", "thalamus", "caudate", "putamen", "accumbens",
                     "amygdala", "frontal", "parietal", "temporal", "occipital",
                     "vta", "hypothalamus", "hippocampus"],
          description="Main analgesia/euphoria/dependence opioid receptor; dense in "
@@ -2404,7 +2439,7 @@ RECEPTORS: list[dict[str, Any]] = [
          neurotransmitter="Opioid peptides", receptor_class="metabotropic",
          sign="inhibitory", synaptic="both",
          locations=["caudate", "putamen", "accumbens", "claustrum", "hypothalamus",
-                    "brainstem", "amygdala"],
+                    "midbrain", "pons", "medulla", "amygdala"],
          description="Opioid receptor driving dysphoria and stress; striatum, "
                      "claustrum, hypothalamus, PAG.",
          description_fr="Récepteur opioïde induisant dysphorie et réponses au "
@@ -2498,7 +2533,7 @@ RECEPTORS: list[dict[str, Any]] = [
     dict(id="5ht3", name="5-HT3", family="serotonergic",
          neurotransmitter="Serotonin", receptor_class="ionotropic",
          sign="excitatory", synaptic="postsynaptic",
-         locations=["brainstem", "hippocampus", "amygdala"],
+         locations=["midbrain", "pons", "medulla", "hippocampus", "amygdala"],
          description="Ionotropic cation channel; area postrema drives "
                      "nausea/vomiting; antiemetic target (ondansetron).",
          description_fr="Canal cationique ionotrope ; l'area postrema déclenche "
@@ -2573,7 +2608,7 @@ RECEPTORS: list[dict[str, Any]] = [
          neurotransmitter="Sigma ligands", receptor_class="chaperone",
          sign="modulatory", synaptic="both",
          locations=["frontal", "parietal", "temporal", "occipital", "hippocampus",
-                    "brainstem", "cerebellum"],
+                    "midbrain", "pons", "medulla", "cerebellum"],
          description="Intracellular ER chaperone (not a classic channel/GPCR); "
                      "fluvoxamine acts partly via it.",
          description_fr="Chaperon intracellulaire du RE (ni canal ni RCPG "

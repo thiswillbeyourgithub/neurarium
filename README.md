@@ -42,8 +42,8 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 - Brain regions (cortical lobes, basal ganglia / deep nuclei, diencephalon,
   limbic, hindbrain) as procedurally shaped 3D meshes: gyrified cortex, smooth
-  deep nuclei, foliated cerebellum, and swept tubes for the caudate, brainstem,
-  hippocampus, cingulate, and fornix.
+  deep nuclei, foliated cerebellum, and swept tubes for the caudate, the brainstem
+  levels (midbrain, pons, medulla), hippocampus, cingulate, and fornix.
 - At rest the regions lock together into a whole brain; an intro animation
   assembles them from an exploded state on load.
 - Curved arrows for directed neuron projections, colored by type (excitatory,
