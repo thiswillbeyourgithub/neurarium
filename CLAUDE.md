@@ -190,8 +190,11 @@ data/shapes/<name>.json  One geometry file per distinct *form* (independent of
                       bisecting cuts between overlapping neighbours so adjacent
                       regions tile flush like jigsaw pieces instead of inter-
                       penetrating, and `carve_tubes` are swept-tube channels
-                      subtracted from a lobe by a `carves` curve (the caudate) so
-                      it seats into a notch instead of poking through;
+                      subtracted from a lobe by a `carves` curve so it seats into a
+                      notch instead of poking through (a dormant capability: the
+                      caudate that used it is now retracted below the surface, so no
+                      structure currently sets `carves` and the machinery is unused,
+                      see below);
                       "curve" {points, profile, seed, noise, radial/tubular_
                       segments} = a round-capped tapered tube swept along a spline
                       (the C-shaped caudate, the tapering brainstem levels
@@ -286,8 +289,10 @@ js/shapes.js          Builds a mesh from a shape payload: buildGeometry()
                       buildBlobGeometry also
                       honours `clip_planes` (the generated inter-region jigsaw
                       cuts) when the `JIGSAW_CLIP.enabled` flag is on, and
-                      `carve_tubes` (the caudate hollowing a notch in the lobes it
-                      threads) when `CARVE_TUBES.enabled` is on. No JS deps
+                      `carve_tubes` (a curve hollowing a notch in the lobes it
+                      threads) when `CARVE_TUBES.enabled` is on (no structure emits
+                      carve_tubes at present, the caudate that did is now retracted,
+                      so this path is currently dormant). No JS deps
                       beyond three.js.
 js/arrows.js          Builds curved tube+cone arrows for projections; each
                       arrow's colour comes from its `projection.color` (resolved
@@ -1983,8 +1988,8 @@ self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
        `JIGSAW_CLIP.enabled` flag in `js/shapes.js` is the A/B switch: turn it off
        to ignore the planes (regions overlap as before) without regenerating; the
        medial wall is independent and always applied.
-     - `carve_tubes` (auto, never authored): a curve flagged `carves=True` (the
-       caudate) hollows a swept-tube *channel* out of every lobe its spine threads,
+     - `carve_tubes` (auto, never authored): a curve flagged `carves=True`
+       hollows a swept-tube *channel* out of every lobe its spine threads,
        so it sits in a clean notch ("partly exposed", a jigsaw piece set into the
        seam) instead of the cortex poking through it. The generator
        (`_tube_carve` in `generate_data.py`) emits, on each threaded lobe, the
@@ -1995,9 +2000,13 @@ self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
        the lobe), only `group=="lobe"` blobs are carved (a nucleus never carves a
        lobe), and like the planes it is computed once on the right side and
        mirrored. The `CARVE_TUBES.enabled` flag in `js/shapes.js` is the A/B
-       switch. (The caudate is also nudged up so its head emerges through the
-       fronto-parietal seam; per-explode it pulls back out of the notch, which is
-       expected.)
+       switch. **Currently dormant**: this existed for the caudate, whose head was
+       raised to *emerge* through the fronto-parietal seam (carved so it read as
+       partly exposed rather than poking through). That look was dropped, the
+       caudate is now retracted below the surface so it stays hidden inside the
+       assembled brain at explode 0 and only surfaces as the lobes blow apart, so
+       no structure sets `carves` and nothing emits `carve_tubes`. The machinery is
+       kept for a future structure that wants the set-into-a-notch look.
      - The cortical surface pattern is *not* geometry: every `group=="lobe"`
        structure is a smooth dome rendered **cel-shaded** (a `MeshToonMaterial`
        with a shared N-step grey `gradientMap`, so its lighting falls into flat
@@ -2021,8 +2030,9 @@ self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
      it flips correctly. Midline curves like the three brainstem levels are
      emitted once and never mirrored (they share their boundary spine points so
      the round-capped tubes overlap a hair and read as one continuous column). A curve may also carry `carves=True` to make it hollow a
-     notch in the lobes it threads (see `carve_tubes` above; only the caudate uses
-     it).
+     notch in the lobes it threads (see `carve_tubes` above; the caudate used it
+     but no longer does, it is now retracted/buried, so no curve currently sets the
+     flag, though the machinery remains available).
    - Give a region a `shape=dict(type="composite", parts=[...])` to merge several
      sub-shapes into one mesh; each part is a shape payload (usually a blob) with
      optional `offset`/`scale`/`rotate`. Used for the cerebellum (two foliated
