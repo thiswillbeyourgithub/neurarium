@@ -191,30 +191,34 @@
         }
       }
       /* Uncollapsing a section slides its body in (a soft downward slide + fade),
-         so opening Legend / Receptors / Drugs / About reads as a motion rather than
+         so opening any accordion section reads as a motion rather than
          a snap. The bodies ship `hidden` (display:none), so showing one (re)runs the
          animation each time. Disabled under prefers-reduced-motion. */
       @keyframes section-slide-in {
         from { opacity: 0; transform: translateY(-10px); }
         to   { opacity: 1; transform: translateY(0); }
       }
-      #legend-body, #receptors-body, #drugs-body, #about-body {
+      #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body {
         animation: section-slide-in 200ms ease-out;
       }
       @media (prefers-reduced-motion: reduce) {
-        #legend-body, #receptors-body, #drugs-body, #about-body { animation: none; }
+        #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body { animation: none; }
       }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
          dark glass UI. scrollbar-width covers Firefox, ::-webkit-scrollbar
          covers Chromium/WebKit. */
       #controls,
+      #structures-body,
+      #projections-body,
       #legend-body,
       #receptors-body,
       #search-results {
         scrollbar-width: none;
       }
       #controls::-webkit-scrollbar,
+      #structures-body::-webkit-scrollbar,
+      #projections-body::-webkit-scrollbar,
       #legend-body::-webkit-scrollbar,
       #receptors-body::-webkit-scrollbar,
       #search-results::-webkit-scrollbar {
@@ -538,7 +542,8 @@
       #search-results li.empty { color: var(--muted); cursor: default; }
       #search-results li.empty:hover { background: none; }
       /* Keyboard roving highlight for arrow-key navigation inside an open
-         accordion section (Legend / Receptors / Drugs). A clear outline reads on
+         accordion section (Structures / Projections / Receptors / Drugs / Legend).
+         A clear outline reads on
          any row or button regardless of its own background. */
       .kbd-active {
         outline: 2px solid rgba(255, 255, 255, 0.55);
@@ -579,6 +584,8 @@
 
       /* Legend nested inside the control panel, set off by a hairline. Its
          header has no side padding (the panel body already provides it). */
+      #structures,
+      #projections,
       #legend,
       #receptors,
       #drugs,
@@ -586,6 +593,8 @@
         margin-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
+      #structures .collapse-header,
+      #projections .collapse-header,
       #legend .collapse-header,
       #receptors .collapse-header,
       #drugs .collapse-header,
@@ -651,6 +660,8 @@
         border-radius: 999px;
         background: #66cf85;
       }
+      #structures-body,
+      #projections-body,
       #legend-body,
       #receptors-body,
       #drugs-body {
@@ -685,18 +696,29 @@
       .drugs-filter:focus { border-color: #4e79a7; }
       .drug-item[hidden] { display: none; }
       .drugs-empty { margin: 6px 2px; font-size: 12px; }
-      /* Legend action buttons (show-all-names, hide-projections) stack at the
-         top, spaced off the generated category rows below them. */
-      #legend-actions {
+      /* Section action buttons (show-all-names in Structures; hide-projections +
+         colour-mode in Projections) stack at the top, spaced off the generated
+         rows below them. */
+      #structures-actions,
+      #projections-actions {
         display: flex;
         flex-direction: column;
         gap: 8px;
         margin: 4px 0 12px;
       }
-      #legend-actions .btn { margin: 0; }
+      #structures-actions .btn,
+      #projections-actions .btn { margin: 0; }
+      /* Static Legend "key" captions: a muted one-liner under a heading saying
+         what the swatches below it mean (built by buildLegendKey). */
+      .legend-caption {
+        margin: 0 0 8px;
+        font-size: 11px;
+        line-height: 1.4;
+        color: var(--muted);
+      }
       /* Arrow colour-mode switch (Neurotransmitter | Potential): a small heading
          over a two-button segmented control, the active option highlighted blue
-         like the language switch / .tool-btn.active. Sits in #legend-actions. */
+         like the language switch / .tool-btn.active. Sits in #projections-actions. */
       .mode-switch { display: flex; flex-direction: column; gap: 6px; }
       .mode-label { color: var(--muted); font-size: 12px; }
       .mode-options { display: flex; gap: 4px; }
@@ -713,10 +735,16 @@
       }
       .mode-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
       .mode-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
+      #structures-body h2:first-child,
+      #projections-body h2:first-child,
       #legend-body h2:first-child,
       #receptors-body h2:first-child,
       #drugs-list h2:first-child { margin-top: 0; }
+      #structures h2:first-child,
+      #projections h2:first-child,
       #legend h2:first-child { margin-top: 0; }
+      #structures h2,
+      #projections h2,
       #legend h2,
       #receptors h2,
       #drugs h2 {
@@ -731,10 +759,19 @@
       #receptors-body h2,
       #drugs-list h2 { margin: 14px 0 8px; }
       /* Clickable category headings toggle the whole group; same selected/dimmed
-         states as the rows. */
+         states as the rows. The clickable group headings live in #structures
+         (the region rows); #projections/#legend headings are plain labels. */
+      #structures h2.clickable,
+      #projections h2.clickable,
       #legend h2.clickable { cursor: pointer; }
+      #structures h2.clickable:hover,
+      #projections h2.clickable:hover,
       #legend h2.clickable:hover { color: #fff; }
+      #structures h2.selected,
+      #projections h2.selected,
       #legend h2.selected { color: #fff; }
+      #structures h2.dimmed,
+      #projections h2.dimmed,
       #legend h2.dimmed { opacity: 0.4; }
       .legend-item {
         display: flex;
@@ -1217,18 +1254,36 @@
                rebuilds by buildLegend in js/main.js); the category rows below
                are generated from the dataset so colors never drift from what is
                actually rendered. -->
-          <div id="legend">
-            <button type="button" id="legend-toggle" class="collapse-header" aria-expanded="false">
-              <span data-i18n="panel.legend"></span>
+          <!-- Structures: the region rows by group, each clickable to isolate.
+               Generated by js/main.js (buildLegend) into #structures-body; the
+               #structures-actions container (the "Show all names" button) is kept
+               across rebuilds, like the old #legend-actions. -->
+          <div id="structures">
+            <button type="button" id="structures-toggle" class="collapse-header" aria-expanded="false">
+              <span data-i18n="panel.structures"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
-            <div id="legend-body" hidden>
-              <!-- Action buttons kept across buildLegend's rebuilds (it preserves
-                   this whole container, then appends the generated rows after). -->
-              <div id="legend-actions">
+            <div id="structures-body" hidden>
+              <div id="structures-actions">
                 <!-- Forces every structure name on/off (vs. hover, one at a time). -->
                 <button type="button" id="toggle-names" class="btn" aria-pressed="false" data-i18n="legend.showNames">
                 </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projections: the per-neurotransmitter / per-sign pathway rows, the
+               Circuits loops and the off-by-default Hypothetical pathways toggle.
+               Generated by js/main.js (buildLegend) into #projections-body; the
+               #projections-actions container (Hide projections + the colour-mode
+               switch) is kept across rebuilds. -->
+          <div id="projections">
+            <button type="button" id="projections-toggle" class="collapse-header" aria-expanded="false">
+              <span data-i18n="panel.projections"></span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+            <div id="projections-body" hidden>
+              <div id="projections-actions">
                 <!-- Hides every projection arrow (off by default: arrows shown). -->
                 <button type="button" id="toggle-projections" class="btn" aria-pressed="false" data-i18n="legend.hideProjections">
                 </button>
@@ -1236,7 +1291,7 @@
                      (default) colours arrows per molecule; "Potential" switches
                      to the coarse excitatory (red) / inhibitory (blue) sign view.
                      js/main.js marks the active button, recolours arrows and
-                     rebuilds the Projections rows. Lives inside #legend-actions
+                     rebuilds the Projections rows. Lives inside #projections-actions
                      so it sits right above the projection colour rows it drives
                      (and is preserved across legend rebuilds with them). -->
                 <div id="color-mode" class="mode-switch" role="group" aria-labelledby="color-mode-label">
@@ -1251,7 +1306,7 @@
           </div>
 
           <!-- Receptors & targets: collapsed by default, an accordion peer of
-               Legend / About (only one open at a time). The body is generated from
+               the other sections (only one open at a time). The body is generated from
                the dataset by js/main.js (buildTargetLegend): every receptor plus
                every non-receptor drug target (transporters, enzymes, channels),
                grouped by neurotransmitter system, each row focusable to scatter
@@ -1264,8 +1319,8 @@
             <div id="receptors-body" hidden></div>
           </div>
 
-          <!-- Drugs: collapsed by default, an accordion peer of Legend /
-               Receptors / About. A small filter box at the top narrows the list
+          <!-- Drugs: collapsed by default, an accordion peer of the other
+               sections. A small filter box at the top narrows the list
                (by name, class or target); the list is generated from the dataset
                by js/main.js (buildDrugLegend) grouped by category. Clicking a row
                focuses that drug: it dims the brain to the regions it acts on and
@@ -1279,6 +1334,20 @@
               <input type="text" id="drugs-filter" class="drugs-filter" data-i18n-attr="placeholder:drugs.filter" autocomplete="off" />
               <div id="drugs-list"></div>
             </div>
+          </div>
+
+          <!-- Legend (key): a static colour/symbol key for the 3D scene's
+               encodings that have no label in the interactive sections above
+               (expression gem dots by sign, drug effect dots by boost/block/
+               modulate, speculative dotted pathways). Built by js/main.js
+               (buildLegendKey) into #legend-body from the dataset's meta, so the
+               colours never drift. -->
+          <div id="legend">
+            <button type="button" id="legend-toggle" class="collapse-header" aria-expanded="false">
+              <span data-i18n="panel.legend"></span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+            <div id="legend-body" hidden></div>
           </div>
 
           <!-- About: collapsed by default (body ships `hidden`), mirroring the

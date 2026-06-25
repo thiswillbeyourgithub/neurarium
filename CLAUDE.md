@@ -203,13 +203,17 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       on ?debug=1 only, the vendored eruda console; holds
                       the single bottom-left collapsible "neurarium" panel
                       (reset / search / keyboard-shortcuts buttons, the two
-                      sliders, auto-rotate, the
-                      nested JS-populated legend whose first rows are "show all
-                      names" / "hide projections", a nested JS-populated Receptors
-                      section, a nested JS-populated Drugs section (with its own
-                      filter box), and a nested About section; Legend / Receptors /
-                      Drugs / About are a single-open accordion). The panel body is
-                      split
+                      sliders, auto-rotate, then six nested collapsible sections:
+                      a JS-populated Structures section (region rows by group, its
+                      first row the "show all names" button), a JS-populated
+                      Projections section (pathway rows + the "hide projections"
+                      button + the arrow colour-mode switch, then Circuits +
+                      Hypothetical pathways), a JS-populated Receptors & targets
+                      section, a JS-populated Drugs section (with its own filter
+                      box), a JS-populated Legend section (a static colour/symbol
+                      key for the scene's encodings, see buildLegendKey), and an
+                      About section; all six are a single-open accordion). The
+                      panel body is split
                       into a #settings-pane (all the above) and a #details-pane
                       (#info-body) switched by a #panel-tabs bar of
                       browser-style tabs: a pinned Settings tab (always first,
@@ -374,8 +378,13 @@ js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       (showDrug), rendered into the
                       main panel's Details pane; the select* layer opens one
                       browser-style tab per detail via createPanelTabs), the
-                      structure+connection+receptor/target+drug search, the legend
-                      builder (buildLegend), the merged Receptors & targets legend
+                      structure+connection+receptor/target+drug search, the
+                      Structures + Projections legend builder (buildLegend, which
+                      fills the Structures section's region rows and the Projections
+                      section's pathway / circuit / hypothetical rows and returns
+                      one shared focus-greying callback), the static Legend "key"
+                      builder (buildLegendKey, the scene's colour/symbol
+                      encodings), the merged Receptors & targets legend
                       builder (buildTargetLegend, grouped by neurotransmitter
                       system, wiring each receptor/target row to dim the
                       brain + light its dots), and the Drugs legend builder
@@ -957,19 +966,20 @@ as the WIP banner (`js/error-banner.js`):
   the top the Settings pane holds: the **reset + search + keyboard-shortcuts**
   icon buttons (a `.toolbar-row`), then
   the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
-  inside**, then the
-  nested collapsed **Legend** (`#legend`) whose first rows are the **Show all
-  names** and **Hide projections** buttons followed by the **arrow colour-mode
-  switch** (Neurotransmitter / Potential, `#color-mode`), then the nested
-  collapsed **Receptors & targets** (`#receptors`) section, then the nested
-  collapsed **Drugs** (`#drugs`) section (with its own `#drugs-filter` box), then
-  the nested
-  collapsed **About** (`#about`) section. Searching swaps the search box in place of the panel's
+  inside**, then six nested collapsed sections in order: **Structures**
+  (`#structures`, the region rows by group, its first row the **Show all names**
+  button), **Projections** (`#projections`, the pathway rows, its first rows the
+  **Hide projections** button and the **arrow colour-mode switch**
+  (Neurotransmitter / Potential, `#color-mode`), then Circuits + Hypothetical
+  pathways), **Receptors & targets** (`#receptors`), **Drugs** (`#drugs`, with its
+  own `#drugs-filter` box), **Legend** (`#legend`, a *static* colour/symbol key
+  for the scene's encodings, see "Legend (the key)" below), and **About**
+  (`#about`). Searching swaps the search box in place of the panel's
   normal contents (`#controls-main` hidden, `#search` shown) rather than opening
   a popup; the reset/search buttons stay visible so the magnifier toggles back.
-  The panel / legend / receptors / drugs / about collapse headers share one
+  The panel / section collapse headers share one
   `wireCollapse` helper in
-  `js/main.js`. **Legend, Receptors, Drugs and About are an accordion**: opening
+  `js/main.js`. **The six sections are an accordion**: opening
   one
   closes the others (only one open at a time), and while any is open every control
   above
@@ -1013,8 +1023,9 @@ as the WIP banner (`js/error-banner.js`):
     a gap. The flex rules are scoped to `:not([hidden])` so a hidden pane keeps
     `display:none` (an unscoped rule on the `[hidden]` details pane would otherwise
     keep it in flow and steal the free space).
-  - **Uncollapse animation**: opening any accordion section (Legend / Receptors /
-    Drugs / About) **slides its body in** (a soft downward `translateY` + fade,
+  - **Uncollapse animation**: opening any accordion section (Structures /
+    Projections / Receptors / Drugs / Legend / About) **slides its body in** (a soft
+    downward `translateY` + fade,
     `@keyframes section-slide-in`, 200ms); the bodies ship `hidden`
     (`display:none`), so showing one re-runs the keyframe each time. Disabled under
     `prefers-reduced-motion`.
@@ -1068,7 +1079,7 @@ as the WIP banner (`js/error-banner.js`):
   left visible (so the revealed connections still show). `cull.tick()` runs in
   the render loop after `controls.update()`.
 - **Arrow colour-mode switch** (`#color-mode`, a two-state segmented control that
-  lives in `#legend-actions` right under **Hide projections**, defaulting to
+  lives in `#projections-actions` right under **Hide projections**, defaulting to
   **Neurotransmitter**): picks how every arrow is coloured. **Neurotransmitter**
   (the default) colours each arrow per molecule (`projection.color`, the
   `PROJECTION_COLORS` palette). **Potential** recolours every arrow by its coarse
@@ -1078,11 +1089,11 @@ as the WIP banner (`js/error-banner.js`):
   record (`signColors` / `signLabels`, with the per-projection `sign` resolved in
   `js/data.js` from the meta `kind_signs` fold), not hardcoded. Picking an option
   marks the active button, recolours arrows in place (`ProjectionArrow.setColor`)
-  **and rebuilds the legend** so its Projections section shows one row per sign
-  (in Potential mode) instead of one per neurotransmitter; the legend's
+  **and rebuilds the Projections section** so it shows one row per sign
+  (in Potential mode) instead of one per neurotransmitter; the
   focus-greying callback is registered once and re-pointed on each rebuild (so the
   switch never stacks `onIsolate` listeners). The switch sits inside
-  `#legend-actions`, which `buildLegend` preserves as a node across rebuilds, so
+  `#projections-actions`, which `buildLegend` preserves as a node across rebuilds, so
   its click listeners survive. See `projectionGroups` + the colour-mode wiring
   (`setColorMode`) in `js/main.js`.
 - **Separate** slider (0..1, labelled "Separate" in the UI; the explode/`?explode`
@@ -1142,7 +1153,8 @@ as the WIP banner (`js/error-banner.js`):
     setOpacity`), the isolated structures keep full (slider) opacity + halo, and
     the legend greys its non-isolated rows/headings (`.dimmed`, isolated ones get
     `.selected`). Legend selection is additive (click more rows to add).
-  - The **Circuits** legend section lists curated functional loops (from the
+  - The **Circuits** section (a subsection of Projections) lists curated
+    functional loops (from the
     `circuit` records). Clicking one isolates *exactly* that circuit: its
     structures + the projections between them stay opaque, everything else fades
     (`selection.setCircuit`, which pins an explicit arrow set instead of the
@@ -1151,7 +1163,8 @@ as the WIP banner (`js/error-banner.js`):
     animation" below): glowing beads sweep its arrows in sequence and loop, so the
     loop reads as signal flowing around it. The animation stops the instant the
     focus stops being that circuit.
-  - The **Projections** legend section lists one row per projection group, the
+  - The **Projections** rows (the per-pathway colour rows at the top of the
+    Projections section) list one row per projection group, the
     grouping following the active **colour mode** (the arrow colour-mode switch,
     Neurotransmitter / Potential, just above) so the legend always matches the
     arrows on screen:
@@ -1169,7 +1182,8 @@ as the WIP banner (`js/error-banner.js`):
     only the group row lights. Clicking the active one again clears it. The rows
     are built from the **non-tentative** projections only (the speculative ones
     live in their own section below).
-  - The **Hypothetical pathways** legend section is separate and **off by
+  - The **Hypothetical pathways** section (the last subsection of Projections) is
+    separate and **off by
     default**: a single "Show speculative (N)" toggle reveals/hides every
     `tentative` projection's (dotted) arrow at once. They are deliberately kept
     out of the per-neurotransmitter rows so a speculative link never reads as an
@@ -1189,21 +1203,39 @@ as the WIP banner (`js/error-banner.js`):
   wins over a nearer non-focused one, so hovering the thing you focused names
   *it* even when a dimmed region (e.g. the near cortex over an isolated deep
   nucleus) sits in front of it. The **Show all names** button
-  (the legend's first row) forces every label on at once. Labels are boxless:
+  (the Structures section's first row) forces every label on at once. Labels are boxless:
   white glyphs outlined in the structure's own color (`--label-color`) plus a
   black halo, so they stay legible over any region and overlapping names don't
   hide behind opaque boxes.
-- **Legend**: nested inside the bottom-left panel, collapsed by default; click
-  its header to expand. It starts with the **action buttons** (a `#legend-actions`
-  container kept first across rebuilds by `buildLegend`, which preserves that
-  node): **Show all names** and **Hide projections** (off by default; toggles
-  every arrow's visibility at once via `arrow.setVisible`, and refreshes labels
-  so the connection labels follow). The rest is generated from the data (see
-  below). Each structure row is clickable to isolate/focus that region, and each
-  **neurotransmitter row** is clickable to isolate that transmitter's pathways
-  (see Selection above).
-- **Receptors & targets** (`#receptors`, collapsed by default, the accordion peer
-  between Legend and About): the merged `data.targets` browse list (every receptor
+- **Structures** (`#structures`, collapsed by default): the region rows, grouped
+  by `group` (one `<h2>` per group heading). Generated by `buildLegend` into
+  `#structures-body`, which preserves the `#structures-actions` container (its one
+  action button, **Show all names**) first across rebuilds. Each structure row is
+  clickable to isolate/focus that region (both hemispheres); clicking a category
+  heading isolates the whole group (see Selection above).
+- **Projections** (`#projections`, collapsed by default): the pathway rows.
+  Generated by the *same* `buildLegend` into `#projections-body`, which preserves
+  the `#projections-actions` container (**Hide projections** off by default;
+  toggles every arrow's visibility at once via `arrow.setVisible`, and refreshes
+  labels so the connection labels follow; plus the **arrow colour-mode switch**)
+  first across rebuilds. Below the actions: one **Projections** section (a row per
+  neurotransmitter, or per sign in Potential mode), the **Circuits** section, and
+  the off-by-default **Hypothetical pathways** toggle. Each projection/circuit row
+  is clickable to isolate that group / loop (see Selection above). `buildLegend`
+  fills both this section and Structures and returns one shared focus-greying
+  callback, so the focus-state logic is not duplicated.
+- **Legend (the key)** (`#legend`, collapsed by default): a *static*, non-
+  interactive colour/symbol key for the 3D scene's encodings that have no label in
+  the interactive sections, so a first-time viewer can decode them. Built once by
+  `buildLegendKey` from the dataset's meta (so the colours never drift): the
+  **expression "gem" dots** over a focused receptor/target (a swatch per excit/
+  inhib/modulatory sign), the **per-drug effect dots + wash** (boost / block /
+  modulate swatches), and a **speculative pathway** (a dotted swatch). Deliberately
+  *not* a copy of the Projections rows (the arrow colours live there) nor the About
+  provenance key (which has its own grade swatches). Each heading carries a muted
+  one-line caption (`.legend-caption`).
+- **Receptors & targets** (`#receptors`, collapsed by default, an accordion peer):
+  the merged `data.targets` browse list (every receptor
   from `data/receptors.jsonl` **plus** every non-receptor drug target from the
   meta `drug_targets` map: transporters, enzymes, ion channels, receptor groups),
   built by `buildTargetLegend` in `js/main.js` and grouped by **neurotransmitter
@@ -1244,8 +1276,8 @@ as the WIP banner (`js/error-banner.js`):
   `selection.setCircuit(regionMeshes, [])` (no arrow pin, so the pathways fade and
   the dots are the only bright thing); the markers are stopped off the selection
   state, the same way the circuit pulse is.
-- **Drugs** (`#drugs`, collapsed by default, the accordion peer between Receptors &
-  targets and About): the psychiatric drugs from `data/drugs.jsonl`, built by
+- **Drugs** (`#drugs`, collapsed by default, an accordion peer): the psychiatric
+  drugs from `data/drugs.jsonl`, built by
   `buildDrugLegend` in `js/main.js` and grouped by **primary category** (one
   `<h2>` per category, in the `drug_category_labels` key order) with one row per
   drug. A **`#drugs-filter`** text box at the top of the section live-filters the
@@ -1279,15 +1311,17 @@ as the WIP banner (`js/error-banner.js`):
 - **Keyboard shortcuts** (`wireShortcuts` in `js/main.js`): single-key, no
   modifier, ignored while typing in a field (and Ctrl/Cmd/Alt combos are left
   alone so Ctrl/Cmd+F still works). **n** toggles all names, **s** spreads fully
-  or back to assembled (toggling the **Separate** slider), **l** collapses /
-  expands the **Legend** section, **c** toggles **See inside**, **r** toggles the
+  or back to assembled (toggling the **Separate** slider), **l** toggles the
+  **Structures** section, **p** toggles the **Projections** section, **k** toggles
+  the **Legend** (key) section, **c** toggles **See inside**, **r** toggles the
   **Receptors & targets** section, **m** toggles the **Drugs** (meds) section,
   **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Tab** /
   **Shift+Tab** cycle the open **detail tabs** (the pinned Settings tab + each
   opened detail, wrapping; `tabs.cycle` re-applies a detail's 3D focus on landing,
   and the key keeps its default focus move when no detail is open), **Esc** closes
   the **active detail tab** first if one is showing (`tabs.closeActive`), otherwise
-  closes search and collapses any open Legend / Receptors / Drugs / About section. While
+  closes search and collapses any open accordion section (Structures / Projections /
+  Receptors / Drugs / Legend / About). While
   a section is open the **arrow keys** browse its rows and **Enter** activates the
   highlighted one (see "Section row navigation" below). Each
   maps to
@@ -1297,7 +1331,7 @@ as the WIP banner (`js/error-banner.js`):
   just focused. The same shortcuts are listed in the **shortcuts help popup**
   (see below).
 - **Section row navigation** (`sectionNav` in `wireShortcuts`): once an accordion
-  section is open (e.g. after **l** / **r** / **m**), **ArrowDown** / **ArrowUp**
+  section is open (e.g. after **l** / **p** / **r** / **m**), **ArrowDown** / **ArrowUp**
   move a roving highlight (a `.kbd-active` outline) through that section's
   interactive elements (its action buttons + every `.clickable` row/heading) and
   **Enter** activates the highlighted one (a plain `.click()`, so it isolates a
@@ -1518,7 +1552,7 @@ whether it animated, like the others, or it will run but never trigger a repaint
 
 ## Circuit animation
 
-Isolating a circuit (clicking a row in the legend's **Circuits** section) plays a
+Isolating a circuit (clicking a row in the Projections section's **Circuits** subsection) plays a
 **traveling-pulse animation** over that loop: a short **volley** of glowing beads
 rides each of the circuit's arrows from its source region to its target, the
 volleys firing in sequence and looping, so a curated loop (the direct pathway, the
@@ -2057,7 +2091,7 @@ self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
      to whatever was emitted (both hemispheres, or the bare id for a midline form)
      and raises on a typo; the circuit's arrows are *not* listed (the viewer takes
      every projection whose endpoints are both in the set), so a circuit never
-     duplicates the pathway list. It shows up in the legend's Circuits section.
+     duplicates the pathway list. It shows up in the Projections section's Circuits subsection.
    - To add a **receptor**, append to the `RECEPTORS` list: `id`, `name` (the
      technical, language-neutral label, e.g. `"5-HT2A"`), `family` (a key of
      `RECEPTOR_FAMILY_LABELS`), `neurotransmitter`, `receptor_class`

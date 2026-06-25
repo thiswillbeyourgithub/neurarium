@@ -642,24 +642,37 @@ function projectionGroups(established, meta, signMode) {
 }
 
 /**
- * Build the legend body from the live dataset. Returns the focus-change `reflect`
- * callback (greys non-isolated rows); the caller registers it once and re-invokes
- * buildLegend (reassigning reflect) when the colour mode toggles, so the
- * Projections rows follow the arrow colours without stacking onIsolate listeners.
+ * Build the two interactive browser sections from the live dataset: the region
+ * rows (into #structures-body) and the projection / circuit / hypothetical rows
+ * (into #projections-body). The static colour key is a separate section, built
+ * once by buildLegendKey (it doesn't depend on the colour mode). Returns the
+ * focus-change `reflect` callback (greys non-isolated rows across *both* sections,
+ * so the focus-state logic isn't duplicated); the caller registers it once and
+ * re-invokes buildLegend (reassigning reflect) when the colour mode toggles, so
+ * the Projections rows follow the arrow colours without stacking onIsolate
+ * listeners.
  * @param {boolean} signColorMode  Colour arrows/legend by excit/inhib sign.
  * @returns {(isolated: Set<THREE.Mesh>|null, focusedArrows: Set<object>) => void}
  */
 function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode) {
-  // Populate the collapsible body, not the panel itself, so the always-visible
-  // "Legend" toggle header (in index.html) is left untouched. The action buttons
-  // ("Show all names" / "Hide projections") live in a #legend-actions container
-  // authored in the HTML; keep that exact node (it carries the wireControls click
-  // handlers) as the sole survivor and append the generated category rows after
-  // it, so the buttons stay first.
-  const legend = document.getElementById("legend-body");
-  const actions = document.getElementById("legend-actions");
-  if (actions) legend.replaceChildren(actions);
-  else legend.replaceChildren();
+  // Populate the two collapsible bodies, not the panels themselves, so the
+  // always-visible toggle headers (in index.html) are left untouched. The action
+  // buttons live in an actions container authored in the HTML per section (the
+  // "Show all names" button in #structures-actions; "Hide projections" + the
+  // colour-mode switch in #projections-actions); keep that exact node (it carries
+  // the wireControls click handlers) as the sole survivor and append the generated
+  // rows after it, so the buttons stay first. The structure rows go to the
+  // Structures section; the projection / circuit / hypothetical rows to the
+  // Projections section. One shared `reflect` (returned below) greys rows across
+  // both, so the focus-state logic is not duplicated.
+  const structuresBody = document.getElementById("structures-body");
+  const structuresActions = document.getElementById("structures-actions");
+  if (structuresActions) structuresBody.replaceChildren(structuresActions);
+  else structuresBody.replaceChildren();
+  const projectionsBody = document.getElementById("projections-body");
+  const projectionsActions = document.getElementById("projections-actions");
+  if (projectionsActions) projectionsBody.replaceChildren(projectionsActions);
+  else projectionsBody.replaceChildren();
 
   // Remember each structure row + the meshes it stands for, so the isolate state
   // can grey the ones that aren't selected. Headings are tracked too: clicking a
@@ -672,7 +685,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
     if (inGroup.length === 0) continue;
     const h = document.createElement("h2");
     h.textContent = heading;
-    legend.appendChild(h);
+    structuresBody.appendChild(h);
 
     // Collapse left/right twins by their base name (the hemisphere-stripped
     // label the generator emits, so this works in any language without parsing a
@@ -691,7 +704,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
     }
     const groupMeshes = [];
     for (const [label, entry] of byLabel) {
-      const row = addLegendItem(legend, entry.color, label);
+      const row = addLegendItem(structuresBody, entry.color, label);
       // Clicking the row toggles its structure(s) in the isolate/focus set.
       row.classList.add("clickable");
       row.addEventListener("click", () => selection.toggleIsolate(entry.meshes));
@@ -723,9 +736,9 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
   if (projGroups.length > 0) {
     const h = document.createElement("h2");
     h.textContent = t("legend.projections");
-    legend.appendChild(h);
+    projectionsBody.appendChild(h);
     for (const g of projGroups) {
-      const row = addLegendItem(legend, g.color, g.label, true);
+      const row = addLegendItem(projectionsBody, g.color, g.label, true);
       // Endpoints of those arrows, kept opaque so an isolated group still reads as
       // connecting real regions rather than floating in a dimmed brain.
       const groupMeshes = [...new Set(g.arrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
@@ -747,14 +760,14 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
   if (data.circuits && data.circuits.length > 0) {
     const h = document.createElement("h2");
     h.textContent = t("legend.circuits");
-    legend.appendChild(h);
+    projectionsBody.appendChild(h);
     for (const circuit of data.circuits) {
       const meshes = circuit.structures.map((id) => meshById.get(id)).filter(Boolean);
       const meshSet = new Set(meshes);
       const circuitArrows = arrows.filter(
         (a) => meshSet.has(a.fromMesh) && meshSet.has(a.toMesh));
       // Neutral swatch (a circuit has no single colour) drawn as a thin bar.
-      const row = addLegendItem(legend, "#b0b0b0", circuit.name, true);
+      const row = addLegendItem(projectionsBody, "#b0b0b0", circuit.name, true);
       row.classList.add("clickable");
       const entry = { row, id: circuit.id, meshes, meshSet, arrows: circuitArrows };
       row.addEventListener("click", () => {
@@ -781,14 +794,14 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
   if (tentativeArrows.length > 0 && projVis) {
     const h = document.createElement("h2");
     h.textContent = t("legend.hypothetical");
-    legend.appendChild(h);
+    projectionsBody.appendChild(h);
     const count = new Set(tentativeArrows.map((a) => a.projection.label)).size;
     // A dotted swatch (a repeating gradient, so no extra CSS), echoing the dotted
     // arrows; neutral grey since these span several transmitter colours.
     const dotted =
       "repeating-linear-gradient(90deg, #b0b0b0 0 5px, transparent 5px 9px)";
     const row = addLegendItem(
-      legend, dotted, `${t("legend.showSpeculative")} (${count})`, true);
+      projectionsBody, dotted, `${t("legend.showSpeculative")} (${count})`, true);
     row.classList.add("clickable");
     row.title = t("legend.hypotheticalHint");
     row.addEventListener("click", () => {
@@ -845,6 +858,65 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
       row.classList.toggle("dimmed", Boolean(isolated) && !selected);
     }
   };
+}
+
+/**
+ * Build the static Legend "key" (#legend-body): a small, non-interactive colour /
+ * symbol legend for the 3D scene's encodings that have no label in the interactive
+ * sections, so a first-time viewer can decode what a glowing gem dot or a dotted
+ * arrow means. Deliberately *not* a copy of the Projections rows (the arrow
+ * colours live there) nor the About provenance key; only the otherwise-unlabeled
+ * encodings:
+ *   - expression "gem" dots over a focused receptor / target, coloured by its
+ *     excit / inhib / modulatory sign;
+ *   - the per-drug effect dots + surface wash, coloured boost / block / modulate;
+ *   - a speculative pathway, drawn as a dotted arrow.
+ * Colours come from the dataset's meta (signColors/signLabels, drugEffectColors/
+ * drugEffectLabels), so the key can never drift from what the scene draws.
+ * @param {import("./data.js").BrainData} data
+ */
+function buildLegendKey(data) {
+  const body = document.getElementById("legend-body");
+  if (!body) return;
+  body.replaceChildren();
+  const meta = data.meta || {};
+
+  // A heading + a muted one-line caption + its swatches.
+  const section = (headingKey, captionKey, entries) => {
+    if (entries.length === 0) return;
+    const h = document.createElement("h2");
+    h.textContent = t(headingKey);
+    body.appendChild(h);
+    const cap = document.createElement("p");
+    cap.className = "legend-caption";
+    cap.textContent = t(captionKey);
+    body.appendChild(cap);
+    for (const { color, label, line } of entries) {
+      addLegendItem(body, color, label, Boolean(line));
+    }
+  };
+
+  // Expression dots (receptors & targets): one swatch per excit/inhib/modulatory
+  // sign, the same colours the dots are drawn in.
+  section("legendKey.dots", "legendKey.dotsDesc",
+    Object.entries(meta.signLabels || {}).map(([sign, label]) => ({
+      color: (meta.signColors || {})[sign] || "#fff", label,
+    })));
+
+  // Drug effect dots + wash: boost / block / modulate, in their effect colours.
+  section("legendKey.effects", "legendKey.effectsDesc",
+    Object.entries(meta.drugEffectColors || {}).map(([effect, color]) => ({
+      color, label: (meta.drugEffectLabels || {})[effect] || effect,
+    })));
+
+  // Speculative pathway: a dotted swatch echoing the dotted arrows (drawn as a
+  // thin line, like the projection rows). The caption is the heading itself, so
+  // pass the heading text and an empty caption row is avoided by reusing it.
+  const dotted = "repeating-linear-gradient(90deg, #b0b0b0 0 5px, transparent 5px 9px)";
+  const hP = document.createElement("h2");
+  hP.textContent = t("legendKey.pathways");
+  body.appendChild(hP);
+  addLegendItem(body, dotted, t("legendKey.speculative"), true);
 }
 
 /**
@@ -2428,6 +2500,10 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const toggleProjections = document.getElementById("toggle-projections");
   const controlsToggle = document.getElementById("controls-toggle");
   const controlsBody = document.getElementById("controls-body");
+  const structuresToggle = document.getElementById("structures-toggle");
+  const structuresBody = document.getElementById("structures-body");
+  const projectionsToggle = document.getElementById("projections-toggle");
+  const projectionsBody = document.getElementById("projections-body");
   const legendToggle = document.getElementById("legend-toggle");
   const legendBody = document.getElementById("legend-body");
   const receptorsToggle = document.getElementById("receptors-toggle");
@@ -2492,14 +2568,17 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   portrait.addEventListener("change", updatePanelPan);
   new ResizeObserver(updatePanelPan).observe(controlsPanel);
 
-  // Legend, Receptors and About behave as an accordion: only one open at a time,
-  // and while any is open the controls between the title and Auto-rotate (the
-  // .collapsible-control rows) are hidden via the #controls.section-open class
-  // (see index.html) so the open section's content doesn't push the panel tall.
+  // Structures, Projections, Receptors, Drugs, Legend and About behave as an
+  // accordion: only one open at a time, and while any is open the controls between
+  // the title and Auto-rotate (the .collapsible-control rows) are hidden via the
+  // #controls.section-open class (see index.html) so the open section's content
+  // doesn't push the panel tall.
   const sections = [
-    { toggle: legendToggle, body: legendBody },
+    { toggle: structuresToggle, body: structuresBody },
+    { toggle: projectionsToggle, body: projectionsBody },
     { toggle: receptorsToggle, body: receptorsBody },
     { toggle: drugsToggle, body: drugsBody },
+    { toggle: legendToggle, body: legendBody },
     { toggle: aboutToggle, body: aboutBody },
   ];
   const syncSectionLayout = () => {
@@ -2941,8 +3020,8 @@ function wireShortcuts(help, tabs) {
   const collapseOpen = () => {
     const search = document.getElementById("search");
     if (search && !search.hidden) click("search-toggle");
-    for (const id of ["legend-toggle", "receptors-toggle", "drugs-toggle",
-                      "about-toggle"]) {
+    for (const id of ["structures-toggle", "projections-toggle", "receptors-toggle",
+                      "drugs-toggle", "legend-toggle", "about-toggle"]) {
       const tg = document.getElementById(id);
       if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
     }
@@ -2966,9 +3045,11 @@ function wireShortcuts(help, tabs) {
   // the arrow/Enter keys keep their default behaviour elsewhere.
   const sectionNav = (() => {
     const BODIES = [
-      ["legend-toggle", "legend-body"],
+      ["structures-toggle", "structures-body"],
+      ["projections-toggle", "projections-body"],
       ["receptors-toggle", "receptors-body"],
       ["drugs-toggle", "drugs-body"],
+      ["legend-toggle", "legend-body"],
       ["about-toggle", "about-body"],
     ];
     let activeEl = null;
@@ -3061,7 +3142,9 @@ function wireShortcuts(help, tabs) {
       case "?": help?.open(); break;
       case "n": case "N": click("toggle-names"); break;
       case "s": case "S": toggleSpread(); break;
-      case "l": case "L": sectionNav.reset(); click("legend-toggle"); break;
+      case "l": case "L": sectionNav.reset(); click("structures-toggle"); break;
+      case "p": case "P": sectionNav.reset(); click("projections-toggle"); break;
+      case "k": case "K": sectionNav.reset(); click("legend-toggle"); break;
       case "c": case "C": click("see-inside"); break;
       case "r": case "R": sectionNav.reset(); click("receptors-toggle"); break;
       case "m": case "M": sectionNav.reset(); click("drugs-toggle"); break;
@@ -3093,7 +3176,9 @@ function wireShortcutsHelp() {
   const ROWS = [
     { keys: ["N"], desc: "shortcuts.names" },
     { keys: ["S"], desc: "shortcuts.spread" },
-    { keys: ["L"], desc: "shortcuts.legend" },
+    { keys: ["L"], desc: "shortcuts.structures" },
+    { keys: ["P"], desc: "shortcuts.projections" },
+    { keys: ["K"], desc: "shortcuts.legend" },
     { keys: ["C"], desc: "shortcuts.seeInside" },
     { keys: ["R"], desc: "shortcuts.receptors" },
     { keys: ["M"], desc: "shortcuts.drugs" },
@@ -3598,13 +3683,17 @@ async function main() {
     selection.refresh(); // re-grey the fresh rows for the current isolate state
   };
   rebuildLegend();
+  // The static colour key (Legend section) is built once: it shows the scene's
+  // encodings (gem-dot signs, drug effect colours, dotted = speculative) from the
+  // meta maps and doesn't depend on the arrow colour mode.
+  buildLegendKey(data);
   // Fill the About panel's "Sources & provenance" block (grade key + the
   // programmatic coverage tally) from the dataset's meta.
   buildAboutSourcing(data.meta);
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
   // segmented control under "Hide projections". Picking an option recolours the
   // arrows and rebuilds the Projections legend rows to match. The switch lives
-  // inside #legend-actions, which buildLegend preserves as a node across
+  // inside #projections-actions, which buildLegend preserves as a node across
   // rebuilds, so these listeners survive a rebuild.
   const colorModeSwitch = document.getElementById("color-mode");
   const modeButtons = colorModeSwitch.querySelectorAll(".mode-btn");
@@ -3629,7 +3718,7 @@ async function main() {
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
-  wireShortcuts(shortcutsHelp, tabs); // single-key shortcuts (n/s/l/c/r/f/?/Esc) + Tab cycles detail tabs
+  wireShortcuts(shortcutsHelp, tabs); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
