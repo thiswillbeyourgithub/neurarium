@@ -1746,7 +1746,13 @@ as usual, into an authoring step and the rendering:
   to read as light strokes on the dark panel; the few SVGs carrying coloured atom
   labels shift hue, an accepted tradeoff (chosen over a light "datasheet" card). A
   drug without a fetched SVG shows **no image** (no broken-image icon, no layout
-  hole). The images are not translated.
+  hole). The images are not translated. Because that inversion is defeated by a
+  browser's automatic **"force dark" / night mode** (Chrome/Brave/Android WebView,
+  which would re-darken the inverted strokes back to black-on-grey), the page
+  declares its own dark scheme up front: `<meta name="color-scheme" content="dark">`
+  + `color-scheme: dark` on `:root` (index.html). That opts the whole site out of
+  force-dark (the browser leaves an already-dark page alone), so the molecule (and
+  the rest of the UI) renders as authored.
 
 A drug missing an SVG is the **anticipated gap**: the fetcher logs which drugs it
 could not resolve, and the panel degrades to no image for them.

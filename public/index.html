@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- The whole UI is already a dark theme (and the molecule SVGs are black line
+         art the CSS inverts to light strokes). Declaring the page's own colour
+         scheme opts it out of the browser's automatic "force dark" / night mode
+         (Chrome/Brave/Android WebView), which would otherwise double-invert the
+         page and render the molecule black-on-grey. Paired with `color-scheme: dark`
+         in the CSS below. -->
+    <meta name="color-scheme" content="dark" />
     <title>neurarium</title>
 
     <!-- Optional privacy-friendly umami metrics. app-config.js is rendered from
@@ -70,6 +77,11 @@
 
     <style>
       :root {
+        /* Declare the page's own (dark) colour scheme so the browser's automatic
+           "force dark" / night mode leaves it alone instead of double-inverting it
+           (which turned the inverted molecule SVGs back to black-on-grey). Mirrors
+           the <meta name="color-scheme" content="dark"> in <head>. */
+        color-scheme: dark;
         --panel-bg: rgba(20, 24, 31, 0.82);
         --text: #e7ecf2;
         --muted: #9aa6b3;
