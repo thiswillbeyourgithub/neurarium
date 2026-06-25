@@ -1187,21 +1187,91 @@ function createInfoPanel(data) {
     return ul;
   };
 
-  // Wrap a trigger element with a hover/tap tooltip. The bubble is absolutely
-  // positioned against the enclosing `.info-sources` / `.info-wiki` (which are
-  // position:relative), so it spans that full-width container and can never
-  // overflow + be clipped by the narrow panel. Clicking the trigger pins it
-  // (`.show`) for touch devices, where `:hover` never fires. Shared by the "?"
-  // caveat icon and the per-source provenance pills.
+  // The nearest ancestor that establishes a containing block for a position:fixed
+  // descendant (a transform / filter / backdrop-filter / perspective / will-change
+  // / paint-contain), or null if none (then fixed is viewport-relative). The panel
+  // #controls carries a backdrop-filter, so our fixed tooltip is offset by it; we
+  // walk this generically rather than hardcoding #controls.
+  const fixedContainingBlock = (node) => {
+    for (let n = node.parentElement; n && n !== document.documentElement; n = n.parentElement) {
+      const s = getComputedStyle(n);
+      const bf = s.backdropFilter || s.webkitBackdropFilter;
+      if ((s.transform && s.transform !== "none") ||
+          (s.filter && s.filter !== "none") ||
+          (bf && bf !== "none") ||
+          (s.perspective && s.perspective !== "none") ||
+          (s.willChange && /transform|filter|perspective/.test(s.willChange)) ||
+          (s.contain && /paint|layout|strict|content/.test(s.contain))) {
+        return n;
+      }
+    }
+    return null;
+  };
+
+  // Wrap a trigger element with a hover/tap tooltip. The bubble is positioned in
+  // viewport coordinates (position: fixed) just above the trigger and clamped to
+  // the viewport, so an inline pill (a binding / NbN / description pill) anchors to
+  // its own pill exactly like a source-list pill, instead of to a tall positioned
+  // ancestor (the whole panel) far from the pill, which left the tooltip stranded
+  // near the panel top on touch (it then read as "no tooltip"). Shows on
+  // hover/focus (desktop) and is pinned on click/tap (touch, where `:hover` never
+  // fires) via the `.show` class. Shared by the "?" caveat icon and the per-source
+  // provenance pills.
   const withTip = (trigger, tipText) => {
     const wrap = el("span", "help-icon");
     const tip = el("span", "help-tip", tipText);
     tip.setAttribute("role", "tooltip");
     wrap.append(trigger, tip);
+    const place = () => {
+      const r = trigger.getBoundingClientRect();
+      const tw = tip.offsetWidth, th = tip.offsetHeight, m = 6;
+      let left = r.left + r.width / 2 - tw / 2;
+      left = Math.max(m, Math.min(left, window.innerWidth - tw - m));
+      let top = r.top - th - 4;
+      if (top < m) top = r.bottom + 4; // flip below the trigger if no room above
+      // `left`/`top` are viewport coordinates, but the panel's backdrop-filter
+      // makes #controls a containing block for our position:fixed bubble, so the
+      // values resolve relative to that ancestor's scrolled content origin, not the
+      // viewport. #controls is also the scroll container, so subtract both its
+      // viewport offset AND its own scroll (zero when there is no such ancestor),
+      // keeping the maths viewport-based regardless of which element forms the block.
+      const cb = fixedContainingBlock(tip);
+      const cbRect = cb ? cb.getBoundingClientRect() : null;
+      const ox = cb ? cbRect.left - cb.scrollLeft : 0;
+      const oy = cb ? cbRect.top - cb.scrollTop : 0;
+      tip.style.left = `${Math.round(left - ox)}px`;
+      tip.style.top = `${Math.round(top - oy)}px`;
+    };
+    // Keep the fixed bubble glued to its trigger while shown: tapping a pill can
+    // scroll it into view *after* placement (a real touch hazard), and the user
+    // may scroll the panel while a tip is pinned. Self-cleans if the panel
+    // re-renders the trigger out from under us.
+    const reposition = () => {
+      if (!trigger.isConnected) { hide(); return; }
+      if (wrap.classList.contains("show")) place();
+    };
+    const show = () => {
+      wrap.classList.add("show");
+      place();
+      // Re-place after this frame: tapping a button can focus-scroll it into view
+      // *after* the click handler runs, which would otherwise strand the bubble.
+      requestAnimationFrame(place);
+      window.addEventListener("scroll", reposition, true);
+      window.addEventListener("resize", reposition);
+    };
+    const hide = () => {
+      wrap.classList.remove("show");
+      window.removeEventListener("scroll", reposition, true);
+      window.removeEventListener("resize", reposition);
+    };
     trigger.addEventListener("click", (e) => {
       e.stopPropagation();
-      wrap.classList.toggle("show");
+      if (wrap.classList.contains("show")) hide(); else show();
     });
+    trigger.addEventListener("mouseenter", show);
+    trigger.addEventListener("mouseleave", hide);
+    trigger.addEventListener("focus", show);
+    trigger.addEventListener("blur", hide);
     return wrap;
   };
 

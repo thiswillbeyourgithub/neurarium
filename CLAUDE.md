@@ -1415,11 +1415,18 @@ as the WIP banner (`js/error-banner.js`):
   with the grey `llm` pill's own "?" glyph; the full grade key lives once in the
   About panel ("Sources & provenance", see "Controls -> About"). Both the pill and
   the caveat reuse one
-  `withTip(trigger, text)` helper for the hover/tap tooltip: it shows on hover and
-  is pinned on click/tap (a `.show` class) so touch devices (no `:hover`) can read
-  it, and it is anchored to the full-width `.info-sources` / `.info-wiki` container
-  (not the tiny trigger) so its `left:0/right:0` bubble can't overflow + be clipped
-  by the narrow panel. The caveat message is `info.sourceCaveat`, the pill
+  `withTip(trigger, text)` helper for the hover/tap tooltip: it shows on
+  hover/focus (desktop) and is pinned on click/tap (a `.show` class) so touch
+  devices (no `:hover`) can read it. The bubble is `position: fixed` and placed in
+  **viewport coordinates** at the trigger (centred above it, flipped below if there
+  is no room, clamped to the viewport), so an inline pill (a binding / NbN /
+  description pill) anchors to its own pill exactly like a source-list pill instead
+  of stranding far away near the panel top. Because the panel's `backdrop-filter`
+  makes `#controls` a containing block for the fixed bubble *and* the panel is the
+  scroll container, `place()` subtracts that ancestor's viewport offset **and its
+  `scrollTop`/`scrollLeft`** (found generically via `fixedContainingBlock`); it
+  re-places on scroll/resize while shown (and self-cleans if the panel re-renders
+  the trigger away). The caveat message is `info.sourceCaveat`, the pill
   tooltips are the `info.provNone/provLlm/provSourced/provVerified` keys (NOT the
   About / dev-banner "Source code" link, which points at the code repo, not a data
   source).

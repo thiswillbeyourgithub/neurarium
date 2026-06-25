@@ -877,12 +877,12 @@
       .info-wiki { font-size: 12px; margin: -6px 0 12px; }
       .info-wiki a { color: #8fb6e6; text-decoration: underline; }
       /* "?" caveat badge next to every Source / Reference: the citations + links
-         are LLM-inferred and not yet human-checked. The tooltip shows on hover
-         (desktop) and is pinned on click/tap via .show (touch, where :hover never
-         fires). The bubble is positioned relative to the full-width source/wiki
-         container (which is position:relative), not the tiny icon, so its
-         left:0/right:0 span can never overflow + be clipped by the narrow panel. */
-      .info-sources, .info-wiki { position: relative; }
+         are LLM-inferred and not yet human-checked. The tooltip shows on
+         hover/focus (desktop) and is pinned on click/tap via .show (touch, where
+         :hover never fires). The bubble is placed in viewport coordinates by
+         withTip() in js/main.js (position: fixed, just above the trigger, clamped
+         to the viewport), so an inline pill (a binding / NbN / description pill)
+         anchors to its own pill rather than to a tall ancestor far away. */
       .help-icon {
         display: inline-flex;
         vertical-align: middle;
@@ -905,10 +905,11 @@
       .help-dot:hover { color: var(--text); border-color: var(--text); }
       .help-tip {
         display: none;
-        position: absolute;
+        position: fixed;
         left: 0;
-        right: 0;
-        bottom: calc(100% + 4px);
+        top: 0;
+        width: max-content;
+        max-width: min(260px, 78vw);
         padding: 8px 10px;
         background: rgba(18, 18, 22, 0.98);
         border: 1px solid rgba(255, 255, 255, 0.16);
@@ -923,8 +924,6 @@
         white-space: pre-line;
         z-index: 60;
       }
-      .help-icon:hover .help-tip,
-      .help-icon:focus-within .help-tip,
       .help-icon.show .help-tip { display: block; }
       .info-connections li {
         display: flex;
