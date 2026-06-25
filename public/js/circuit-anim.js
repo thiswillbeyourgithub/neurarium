@@ -194,7 +194,8 @@ export function createCircuitAnimation({ scene }) {
           p.mesh.visible = false;
           continue;
         }
-        p.mesh.position.copy(p.arrow.curve.getPoint(t));
+        p.arrow.curve.getPoint(t, tmpPoint); // reuse the scratch vec (no per-bead alloc)
+        p.mesh.position.copy(tmpPoint);
         p.mesh.visible = true;
         // Fade in/out at the ends of the run so beads don't pop, but stay bright
         // across the middle so the hand-off at each node reads clearly.
