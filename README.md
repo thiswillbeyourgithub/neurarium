@@ -20,6 +20,22 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 ![neurarium screenshot](docs/screenshot.png)
 
+## Contents
+
+- [Features](#features)
+  - [Visualization](#visualization)
+  - [Exploring the anatomy](#exploring-the-anatomy)
+  - [Controls](#controls)
+  - [Data & sourcing](#data--sourcing)
+  - [Deep links & screenshots](#deep-links--screenshots)
+- [Roadmap](#roadmap)
+- [Feedback](#feedback)
+- [Running](#running)
+- [Project layout](#project-layout)
+- [Stack](#stack)
+- [Credits](#credits)
+- [License](#license)
+
 ## Features
 
 ### Visualization
