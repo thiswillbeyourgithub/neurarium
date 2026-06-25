@@ -678,7 +678,7 @@ classes the generator does not look for). Run it directly:
 python tools/check_data.py     # exit 0 = no errors (warnings allowed), 1 = errors
 ```
 
-Five families of checks:
+Six families of checks:
 
 - **Duplicates** (per collection: structures / receptors / drugs / circuits /
   targets, plus projections). An exact duplicate id/key, or two ids that collide
@@ -733,6 +733,15 @@ Five families of checks:
   the *semantic* judge at extraction time (does the quote support the claim), not
   here: the checker only ever confirms the stored verbatim quote is really on the
   page.
+- **Structure connectivity**: warns (never errors) about a structure the
+  connectome leaves stranded or one-sided, derived from the projection `from`/`to`
+  endpoints (a `bidirectional` pathway counts both ways): **isolated** (no
+  projection touches it), **inward-only** (receives but never projects out), or
+  **outward-only** (projects out but never receives). Each can be legitimate, so it
+  is an eyeball list, not a gate: the modeled ascending source nuclei (raphe /
+  locus coeruleus / VTA) and the olfactory bulb are expected outward-only, and the
+  pituitary inward-only. The point is to flag a structure wired in one direction
+  only (e.g. a freshly-added region missing its return pathway) for a look.
 
 The check functions take the loaded data as plain arguments (not the files), so
 they are unit-testable by feeding crafted records.
