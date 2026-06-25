@@ -381,7 +381,8 @@ js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       brain + light its dots), and the Drugs legend builder
                       (buildDrugLegend, grouped by category with its own filter
                       box, wiring each drug row to dim the brain + play the
-                      per-drug animation), and the render loop.
+                      per-drug animation), and the render loop (on-demand, see
+                      "Rendering" below).
 app-config.js         Tiny config file (window.__APP_CONFIG__). This committed
                       copy is the LOCAL-DEV fallback: the feature fields are empty,
                       so dev servers keep umami + the DEV banner off. In the
@@ -1479,6 +1480,41 @@ as the WIP banner (`js/error-banner.js`):
   so the camera *rotates in place* to track it (a reorientation, not a
   translation), preserving the distance + angle you set. Framing a connection or
   the whole brain clears the tracked structure.
+
+## Rendering
+
+The render loop (`renderer.setAnimationLoop` at the end of `main()`) is
+**on-demand**: a mostly-static brain has no reason to repaint at 60fps (which only
+burns battery, spins fans and thermally throttles phones), so a frame is drawn
+**only when something actually changed**. Each frame the loop still runs the cheap
+per-frame checks, advancing the tweens/animations and `controls.update()`, but the
+expensive part (`cull.tick()` + `renderer.render()` + the CSS2D `labels.render()`
+pass) is **skipped** unless a render is needed; when idle the canvas just holds its
+last drawn frame. A render is triggered when:
+
+- **an animation is running**: every per-frame controller's `tick()` now **returns
+  a boolean** "did I animate this frame" (`intro`, `focus` for a framing tween or
+  the screen-offset ease, `circuitAnim`, `receptorMarkers`, `drugAnim`), and any
+  true keeps drawing. So the intro, a focus/recenter tween, the panel pan-aside
+  ease, a circuit pulse, the receptor dot pulse and the per-drug animation all
+  render continuously while active and stop the frame they finish;
+- **the camera moved**: `controls.update()` returns true while OrbitControls'
+  **damping** settles or **auto-rotate** spins (so auto-rotate renders continuously,
+  and a drag/zoom/pinch renders through its gentle damped coast to a stop, ~0.75s at
+  60fps);
+- **`invalidate()` was called**: wired to OrbitControls' own `change` event (covers
+  every camera move, user or programmatic), to window `resize`, and as a
+  belt-and-suspenders catch-all to every user input (`pointerdown/move/up`, `wheel`,
+  `keydown`, `input`, `change`, `click`, capture-phase + passive so it only observes
+  and never `preventDefault`s the real handlers). The catch-all means adding a new
+  control never has to remember to request a repaint.
+
+This is purely a *when-to-draw* change, not a *what-to-draw* one: every visual is
+identical, and `tools/shot.py` screenshots are unaffected (the loop renders the
+settled frame, then idles holding it, which the capture reads). The win is on a
+laptop/phone where a parked, assembled brain now costs ~0 GPU instead of a constant
+60fps. (Adding a new per-frame animation controller? Make its `tick()` return
+whether it animated, like the others, or it will run but never trigger a repaint.)
 
 ## Circuit animation
 

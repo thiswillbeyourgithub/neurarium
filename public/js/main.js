@@ -294,7 +294,7 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus 
       if (running) finish();
     },
     tick() {
-      if (!running) return;
+      if (!running) return false;
       if (startTime === null) startTime = performance.now();
       const t = Math.min(1, (performance.now() - startTime) / INTRO_DURATION_MS);
       const e = ease(t);
@@ -313,6 +313,7 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus 
       tmpOffset.setFromSpherical(sph);
       camera.position.copy(controls.target).add(tmpOffset);
       if (t >= 1) finish();
+      return true; // animating (incl. the finishing frame), so keep rendering
     },
   };
 }
@@ -2252,14 +2253,18 @@ function createCameraFocus({ camera, controls, meshes }) {
     cancel() {
       anim = null;
     },
-    /** Advance the active tween; call once per frame before controls.update(). */
+    /** Advance the active tween; call once per frame before controls.update().
+     *  Returns true while a framing tween or the screen-offset ease is moving, so
+     *  the on-demand render loop keeps drawing until both settle. */
     tick() {
+      let active = false;
       if (anim) {
         const t = Math.min(1, (performance.now() - anim.start) / anim.duration);
         const e = t * t * (3 - 2 * t); // smoothstep ease in/out
         controls.target.lerpVectors(anim.fromTarget, anim.toTarget, e);
         camera.position.lerpVectors(anim.fromPos, anim.toPos, e);
         if (t >= 1) anim = null;
+        active = true;
       }
       // Ease the screen offset toward its target and (re)apply it. Runs every
       // frame independent of the framing tween, so the panel pan animates on its
@@ -2270,11 +2275,14 @@ function createCameraFocus({ camera, controls, meshes }) {
       ) {
         offset.x += (offsetTarget.x - offset.x) * 0.18;
         offset.y += (offsetTarget.y - offset.y) * 0.18;
-      } else {
+        active = true;
+      } else if (offset.x !== offsetTarget.x || offset.y !== offsetTarget.y) {
         offset.x = offsetTarget.x;
         offset.y = offsetTarget.y;
+        active = true; // one last frame to apply the snap to target
       }
       applyOffset();
+      return active;
     },
   };
 }
@@ -3650,15 +3658,43 @@ async function main() {
     intro.start();
   }
 
+  // On-demand rendering: a mostly-static brain has no reason to repaint at 60fps,
+  // which only burns battery / spins fans / throttles phones. We render a frame
+  // only when something actually changed: an animation is running (each tick()
+  // below reports whether it is active), the controls moved (OrbitControls.update
+  // returns true while damping settles or auto-rotate spins), or `invalidate()`
+  // was called. `invalidate` is wired to every user input below as a catch-all so
+  // no interaction is ever missed, and the controls' own `change` event covers
+  // every camera move (drag / wheel / pinch / programmatic). When truly idle (no
+  // input, no animation) the loop calls only the cheap tick/update checks and
+  // skips the render + CSS2D passes entirely, holding the last drawn frame.
+  let needsRender = true;
+  const invalidate = () => { needsRender = true; };
+  controls.addEventListener("change", invalidate);
+  window.addEventListener("resize", invalidate);
+  // Belt-and-suspenders: any user input repaints, so adding a new control never
+  // needs to remember to call invalidate. Capture phase + passive so this only
+  // observes (it never preventDefaults, leaving the real handlers untouched).
+  for (const ev of ["pointerdown", "pointermove", "pointerup", "wheel",
+                    "keydown", "input", "change", "click"]) {
+    window.addEventListener(ev, invalidate, { capture: true, passive: true });
+  }
+
   renderer.setAnimationLoop(() => {
     // Advance the intro + any focus/recenter tween before controls.update()
-    // reads the target + camera position for this frame.
-    intro.tick();
-    focus.tick();
-    circuitAnim.tick();
-    receptorMarkers.tick();
-    drugAnim.tick();
-    controls.update();
+    // reads the target + camera position for this frame. Each tick() returns
+    // whether it animated this frame; controls.update() returns whether the
+    // camera moved (damping / auto-rotate). Any true keeps us rendering.
+    let active = false;
+    if (intro.tick()) active = true;
+    if (focus.tick()) active = true;
+    if (circuitAnim.tick()) active = true;
+    if (receptorMarkers.tick()) active = true;
+    if (drugAnim.tick()) active = true;
+    if (controls.update()) active = true;
+    if (active) needsRender = true;
+    if (!needsRender) return; // idle: skip the render + label passes this frame
+    needsRender = false;
     // After controls.update() so the cull reads this frame's camera + target.
     cull.tick();
     renderer.render(scene, camera);

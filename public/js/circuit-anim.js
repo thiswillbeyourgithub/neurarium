@@ -165,9 +165,10 @@ export function createCircuitAnimation({ scene }) {
       return playing.every((a) => arrowSet.has(a));
     },
 
-    /** Advance the beads + node flashes. Call once per frame in the render loop. */
+    /** Advance the beads + node flashes. Call once per frame in the render loop.
+     *  Returns true while playing, so the on-demand render loop keeps drawing. */
     tick() {
-      if (!playing) return;
+      if (!playing) return false;
       const now = performance.now();
       if (lastTime === null) lastTime = now;
       const dt = now - lastTime;
@@ -230,6 +231,7 @@ export function createCircuitAnimation({ scene }) {
         const progress = f.age / WASH_MS;
         f.wash.setWave(progress * f.wash.maxRadius, washStrength(progress) * f.bright);
       }
+      return true;
     },
   };
 }

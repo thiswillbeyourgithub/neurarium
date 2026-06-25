@@ -131,9 +131,11 @@ export function createDrugAnimation(_deps = {}) {
       return clouds.length > 0;
     },
 
-    /** Advance the per-effect pulses. Call once per frame in the render loop. */
+    /** Advance the per-effect pulses. Call once per frame in the render loop.
+     *  Returns true while a cloud is shown, so the on-demand render loop keeps
+     *  drawing the pulse. */
     tick() {
-      if (clouds.length === 0) return;
+      if (clouds.length === 0) return false;
       const now = performance.now();
       for (const c of clouds) {
         const p = c.pulse;
@@ -148,6 +150,7 @@ export function createDrugAnimation(_deps = {}) {
           c.wash.setWave(phase * c.wash.maxRadius, washStrength(phase) * p.washGain);
         }
       }
+      return true;
     },
   };
 }

@@ -262,13 +262,16 @@ export function createReceptorMarkers({ scene }) {
       return clouds.length > 0;
     },
 
-    /** Pulse the dot field's brightness. Call once per frame in the render loop. */
+    /** Pulse the dot field's brightness. Call once per frame in the render loop.
+     *  Returns true while a cloud is shown, so the on-demand render loop keeps
+     *  drawing the pulse. */
     tick() {
-      if (clouds.length === 0) return;
+      if (clouds.length === 0) return false;
       const phase = (performance.now() % PULSE_PERIOD_MS) / PULSE_PERIOD_MS;
       const k = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2); // 0..1..0
       const opacity = PULSE_MIN + (PULSE_MAX - PULSE_MIN) * k;
       for (const c of clouds) c.material.opacity = opacity;
+      return true;
     },
   };
 }
