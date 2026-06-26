@@ -330,8 +330,12 @@
       .panel-tab.pinned { flex: 0 0 auto; }
       /* The scrollable strip of opened detail tabs, to the right of the pinned
          Settings tab. It takes the remaining width and scrolls horizontally when
-         the tabs overflow the narrow panel (wheel on desktop, touch-drag via
-         touch-action: pan-x on mobile). */
+         the tabs overflow the narrow panel (wheel on desktop, touch-drag handled
+         in JS on mobile). touch-action is `none`, NOT `pan-x`: a long-press on a
+         tab reorders it, and native pan-x would let the browser claim the gesture
+         and fire pointercancel mid-hold, killing the long-press on touch. With the
+         browser out of the way, createPanelTabs drives the drag-to-scroll itself
+         (a swipe before the long-press fires) and the long-press reorder. */
       .detail-tabs {
         display: flex;
         align-items: stretch;
@@ -341,7 +345,7 @@
         overflow-x: auto;
         overflow-y: hidden;
         scrollbar-width: thin;
-        touch-action: pan-x;
+        touch-action: none;
       }
       .detail-tabs::-webkit-scrollbar { height: 4px; }
       .detail-tabs::-webkit-scrollbar-thumb {

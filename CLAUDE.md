@@ -1434,8 +1434,13 @@ as the WIP banner (`js/error-banner.js`):
   activate, click its **×** to close, **long-press then drag** a tab to reorder
   (pointer-based, ~450 ms hold; a move before the hold fires is a scroll instead;
   the DOM is reordered live and `openTabs` synced on drop), and **wheel / touch-
-  drag** scrolls the overflowing strip (`touch-action: pan-x`). A real drag sets a
-  one-shot `suppressClick` so the drag's synthetic click doesn't also re-activate
+  drag** scrolls the overflowing strip. The strip is **`touch-action: none`** (not
+  `pan-x`): native pan would let the browser claim a touch and fire `pointercancel`
+  mid-hold, which silently killed the long-press reorder on touch, so the
+  swipe-before-hold **drag-scroll is driven in JS** instead (the `pointermove`
+  handler scrolls `strip.scrollLeft` by the pointer delta once movement passes
+  `MOVE_CANCEL`). A real drag (reorder *or* scroll) sets a
+  one-shot `suppressClick` so the trailing synthetic click doesn't also re-activate
   the tab. The `panel.closeTab` i18n key labels the × for a11y. **Tab** /
   **Shift+Tab** (wired in `wireShortcuts`) cycle the active tab via `tabs.cycle`,
   through Settings + the open details in strip order, wrapping. **Esc** closes the

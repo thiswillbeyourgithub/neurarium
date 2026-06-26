@@ -936,7 +936,10 @@ function buildLegendKey(data) {
  *
  * Interactions: click a tab to activate it, click its × to close it, long-press a
  * tab then drag to reorder it; the strip scrolls (wheel on desktop, touch-drag on
- * mobile) when the tabs overflow the narrow panel. Closing the active tab falls
+ * mobile) when the tabs overflow the narrow panel. The strip is touch-action:none
+ * so a tab's long-press can't be hijacked by the browser's native pan (which would
+ * fire pointercancel mid-hold and kill the reorder on touch); the drag-scroll for a
+ * swipe-before-hold is therefore driven here in JS. Closing the active tab falls
  * back to its neighbour (re-applying that one's focus) or, if it was the last
  * detail, to Settings + `onEmpty()` (which clears the 3D selection).
  * @returns {{openDetail:Function, showSettings:()=>void, setOnEmpty:Function}}
@@ -1065,9 +1068,22 @@ function createPanelTabs() {
   strip.addEventListener("pointermove", (e) => {
     if (!press) return;
     if (!press.dragging) {
-      if (Math.hypot(e.clientX - press.x, e.clientY - press.y) > MOVE_CANCEL) {
-        clearTimeout(press.timer); // moved first: it's a scroll, not a reorder
-        press = null;
+      // Moved before the long-press fired: a swipe, so scroll the strip ourselves
+      // (it is touch-action:none, so the browser no longer pans it natively, which
+      // is exactly what used to fire pointercancel mid-hold and kill the reorder on
+      // touch). Capture the pointer so the moves keep coming as tabs slide under it.
+      if (!press.scrolling &&
+          Math.hypot(e.clientX - press.x, e.clientY - press.y) > MOVE_CANCEL) {
+        clearTimeout(press.timer);
+        press.scrolling = true;
+        press.lastX = e.clientX;
+        try { press.btn.setPointerCapture(press.pointerId); } catch (_) {}
+      }
+      if (press.scrolling) {
+        strip.scrollLeft -= e.clientX - press.lastX;
+        press.lastX = e.clientX;
+        press.moved = true;
+        e.preventDefault();
       }
       return;
     }
@@ -1102,6 +1118,11 @@ function createPanelTabs() {
         setTimeout(() => { suppressClick = false; }, 0);
       }
       render();
+    } else if (press.scrolling) {
+      try { press.btn.releasePointerCapture(press.pointerId); } catch (_) {}
+      // A drag-scroll on a tab must not also activate it on the trailing click.
+      suppressClick = true;
+      setTimeout(() => { suppressClick = false; }, 0);
     }
     press = null;
   };
