@@ -554,7 +554,11 @@ STAHL_SOURCE: dict[str, str] = {
 # skipped while the structural checks still run.
 SOURCE_CORPORA: dict[str, dict[str, str]] = {
     "stahl": {
-        "short": "Stahl",          # compact label for the per-claim tooltip ref
+        # Label for the per-claim tooltip ref ("<ref>, p. N"). The full book title
+        # + edition, not a bare "Stahl", so a page citation is unambiguous on its
+        # own (which Stahl, which edition) without needing the full bibliographic
+        # citation below.
+        "ref": "Prescriber's Guide: Stahl's Essential Psychopharmacology, 8th ed.",
         "citation": STAHL_SOURCE["citation"],
         "url": STAHL_SOURCE["url"],
         "pages_dir": "stahl/pages",

@@ -1888,13 +1888,17 @@ code change; `_provenance` validates every grade so a typo fails the build, and
 its own **`nbn_sources[]`**, the quote-level
 provenance that earns a `verified` grade. Each is `{corpus, page, quote, provenance}`:
 `corpus` is a key of the **`SOURCE_CORPORA`** registry (`generate_data.py`,
-source-agnostic: Stahl is corpus #1, each entry has `{citation, url, pages_dir}`,
+source-agnostic: Stahl is corpus #1, each entry has `{ref, citation, url,
+pages_dir}`,
 emitted into `meta.source_corpora`), `page` locates the claim, and `quote` is the
 **verbatim** snippet from that page. The shared `_quote_sources` validates each
 (corpus + grade) and enforces that a `verified` source carries a page + quote
 (`_binding_sources` is its per-binding wrapper); the full
 citation is *not* denormalized onto all ~429 bindings (the viewer resolves it from
-`meta.source_corpora` by `corpus`). The two-step that makes `verified` trustworthy:
+`meta.source_corpora` by `corpus`). A pill tooltip's per-claim page ref reads
+`<ref>, p. N` where `ref` is the **full book title + edition** (not a bare
+"Stahl"), so a page citation is unambiguous on its own; the longer bibliographic
+`citation` backs the drug-level Source(s) line. The two-step that makes `verified` trustworthy:
 an LLM extracts the quote (copied out of the page, never paraphrased) and a second
 LLM judges that the quote supports the claim (this semantic step is where any
 "leeway" lives), then **`tools/check_data.py`'s source-quote check confirms the

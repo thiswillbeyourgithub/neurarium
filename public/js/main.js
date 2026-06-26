@@ -1414,9 +1414,10 @@ function createInfoPanel(data) {
     return (sources || [])
       .map((s) => {
         const c = corpora[s.corpus] || {};
+        const label = c.ref || c.short || s.corpus;
         const ref = s.page != null
-          ? t("info.sourceRef", { corpus: c.short || s.corpus, page: s.page })
-          : (c.short || s.corpus);
+          ? t("info.sourceRef", { corpus: label, page: s.page })
+          : label;
         return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
       })
       .join("\n\n");
