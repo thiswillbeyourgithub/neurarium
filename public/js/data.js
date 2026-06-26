@@ -179,11 +179,32 @@ export async function loadBrainData(dataDir = "data") {
   // _provenance_stats). Null on a dataset that predates it.
   const provenanceStats = metaRecord.provenance_stats || null;
 
+  // Provenance grade ordering (weakest -> strongest); the strongest grade among a
+  // record's sources colours its summary source pill. Null when there are none.
+  // Shared by projections (below) and drug bindings / NbN (further down), so the
+  // "strongest grade wins" rule lives in one place.
+  const GRADE_RANK = { llm: 1, sourced: 2, verified: 3 };
+  const strongestGrade = (sources) => {
+    let best = null;
+    let rank = 0;
+    for (const s of sources || []) {
+      const r = GRADE_RANK[s.provenance] || 0;
+      if (r > rank) {
+        rank = r;
+        best = s.provenance;
+      }
+    }
+    return best;
+  };
+
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
   // mode), `sign`/`signColor` the coarse excitatory/inhibitory view the colour
   // toggle switches to. Localize the display fields so the viewer reads plain
-  // strings.
+  // strings. `provenance` is the strongest grade among its `sources`, which colours
+  // the summary source pill shown on a structure panel's connection row (the same
+  // pill the binding rows use), so a pathway's source shows on both endpoints'
+  // panels (null when it has no source).
   for (const p of projections) {
     p.color = projectionColors[p.kind] || "#ffffff";
     p.sign = kindSigns[p.kind] || "modulatory";
@@ -191,6 +212,7 @@ export async function loadBrainData(dataDir = "data") {
     p.label = localize(p.label);
     p.description = localize(p.description);
     p.neurotransmitter = localize(p.neurotransmitter);
+    p.provenance = strongestGrade(p.sources);
   }
 
   // Localize the structure + circuit display strings (the geometry/ids stay as
@@ -252,21 +274,6 @@ export async function loadBrainData(dataDir = "data") {
   // receptor's locations). The union over all bindings is the drug's affected set
   // (what the focus dims the brain down to). `keywords` feeds the search box.
   const receptorStructureIds = new Map(receptors.map((r) => [r.id, r.structureIds]));
-  // Provenance grade ordering (weakest -> strongest); the strongest grade among a
-  // binding's sources colours its source pill. Null when the binding has no source.
-  const GRADE_RANK = { llm: 1, sourced: 2, verified: 3 };
-  const strongestGrade = (sources) => {
-    let best = null;
-    let rank = 0;
-    for (const s of sources || []) {
-      const r = GRADE_RANK[s.provenance] || 0;
-      if (r > rank) {
-        rank = r;
-        best = s.provenance;
-      }
-    }
-    return best;
-  };
   // Normalize a quote-level sources list (a binding's `sources` or a drug's
   // `nbn_sources`) into the shape the panel renders.
   const mapSources = (sources) =>

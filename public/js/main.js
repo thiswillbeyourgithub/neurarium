@@ -1423,6 +1423,14 @@ function createInfoPanel(data) {
       .join("\n\n");
   };
 
+  // Tooltip for a projection's summary source pill: its bibliographic citations
+  // (projection sources are {citation, url, provenance}, no quotes, unlike the
+  // drug bindings' quote-level sources). Shown on a structure panel's connection
+  // row so the pathway's source is visible from both endpoints, the same role
+  // sourcesTip plays for the binding rows.
+  const citationsTip = (sources) =>
+    (sources || []).map((s) => s.citation).filter(Boolean).join("\n\n");
+
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
   // matches the dots + legend. Empty values are skipped.
@@ -1661,6 +1669,14 @@ function createInfoPanel(data) {
         li.appendChild(swatch);
         li.appendChild(el("span", "conn-dir", glyph));
         li.appendChild(el("span", "conn-label", nameOf(otherId)));
+        // Summary source pill for this pathway (strongest grade among its sources,
+        // citations in the tooltip): the same source the connection panel lists,
+        // surfaced here so a pathway's source shows on *both* endpoints' structure
+        // panels with no data duplication, like the binding pill on a drug/target.
+        if (proj.sources && proj.sources.length) {
+          li.appendChild(
+            makeProvenancePill(proj.provenance, citationsTip(proj.sources)));
+        }
         li.addEventListener("click", () => onConnectionPick(proj));
         ul.appendChild(li);
       }

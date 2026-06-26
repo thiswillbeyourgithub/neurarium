@@ -1505,7 +1505,14 @@ as the WIP banner (`js/error-banner.js`):
     `NOSOURCE` pill, see "Source provenance"), and the list of pathways touching it.
     Each connection row
     shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
-    receives, `↔` reciprocal) and the other endpoint; **clicking a row jumps to
+    receives, `↔` reciprocal), the other endpoint **and the pathway's summary
+    provenance pill** (`makeProvenancePill(proj.provenance, citationsTip(proj.sources))`:
+    the strongest grade among the pathway's sources, the citations in its tooltip),
+    so a pathway's source shows on *both* its endpoints' panels (and the connection
+    view) from the one `proj.sources` list, no duplication, the same way a drug
+    binding's source shows on both the drug and target panels. `proj.provenance` is
+    resolved once in `js/data.js` (the shared `strongestGrade` over `proj.sources`).
+    **Clicking a row jumps to
     that pathway** (frames the endpoints, halos the arrow, swaps in the
     connection view) via the panel's `onConnection` hook, wired in `js/main.js`
     to the same action as a connection search result. A structure with no mapped
