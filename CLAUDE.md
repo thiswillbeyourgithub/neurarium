@@ -1465,9 +1465,15 @@ as the WIP banner (`js/error-banner.js`):
   with the grey `llm` pill's own "?" glyph; the full grade key lives once in the
   About panel ("Sources & provenance", see "Controls -> About"). Both the pill and
   the caveat reuse one
-  `withTip(trigger, text)` helper for the hover/tap tooltip: it shows on
-  hover/focus (desktop) and is pinned on click/tap (a `.show` class) so touch
-  devices (no `:hover`) can read it. The bubble is `position: fixed` and placed in
+  `withTip(trigger, text)` helper for the hover/tap tooltip: it is pinned on
+  click/tap (a `.show` class toggle) on every device, and *additionally* reveals
+  on hover/focus only where `(hover: hover)` matches (pointer + keyboard). The
+  hover/focus listeners are gated behind that media query on purpose: a touch tap
+  synthesizes mouseenter + focus (both show) and *then* click (which toggles), so
+  attaching them on a phone would show-then-hide on the first tap and force a
+  second tap; gating leaves the click-toggle as the sole touch path, so one tap
+  reveals it (tap again, or tap another pill, to dismiss). The bubble is
+  `position: fixed` and placed in
   **viewport coordinates** at the trigger (centred above it, flipped below if there
   is no room, clamped to the viewport), so an inline pill (a binding / NbN /
   description pill) anchors to its own pill exactly like a source-list pill instead

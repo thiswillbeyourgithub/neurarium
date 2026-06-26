@@ -1341,10 +1341,20 @@ function createInfoPanel(data) {
       e.stopPropagation();
       if (wrap.classList.contains("show")) hide(); else show();
     });
-    trigger.addEventListener("mouseenter", show);
-    trigger.addEventListener("mouseleave", hide);
-    trigger.addEventListener("focus", show);
-    trigger.addEventListener("blur", hide);
+    // Hover/focus reveal is for pointer + keyboard devices only. On a touch
+    // screen a single tap synthesizes mouseenter + focus (both show()) and *then*
+    // click (which toggles), so attaching those here would show-then-hide on the
+    // first tap and force a second tap to reveal the tooltip. Gating them behind
+    // `(hover: hover)` leaves the click-toggle as the sole path on touch, so one
+    // tap shows it (tap again, or tap another pill, to dismiss).
+    const canHover = !window.matchMedia ||
+      window.matchMedia("(hover: hover)").matches;
+    if (canHover) {
+      trigger.addEventListener("mouseenter", show);
+      trigger.addEventListener("mouseleave", hide);
+      trigger.addEventListener("focus", show);
+      trigger.addEventListener("blur", hide);
+    }
     return wrap;
   };
 
