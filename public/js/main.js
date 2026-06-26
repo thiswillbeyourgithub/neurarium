@@ -2745,36 +2745,29 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // halo'd structure/arrow), it names only the selection rather than every
   // structure, so the focus isn't drowned in labels; with nothing selected it
   // names everything. aria-pressed + an .active class reflect the state.
-  let allNames = false;
+  // "Show all names" checkbox (next to Auto-rotate): force every structure label
+  // on at once (vs. hover, one at a time). When something is selected it names only
+  // the selection rather than every structure, so the focus isn't drowned in
+  // labels; with nothing selected it names everything. The checkbox's own `checked`
+  // is the state (no separate flag).
   const showAllScoped = () => {
-    const sel = allNames ? selection.getSelected() : null;
-    labels.setShowAll(allNames, sel?.meshes ?? null, sel?.arrows ?? null);
+    const on = toggleNames.checked;
+    const sel = on ? selection.getSelected() : null;
+    labels.setShowAll(on, sel?.meshes ?? null, sel?.arrows ?? null);
   };
-  toggleNames.addEventListener("click", () => {
-    allNames = !allNames;
-    showAllScoped();
-    toggleNames.setAttribute("aria-pressed", String(allNames));
-    toggleNames.classList.toggle("active", allNames);
-    toggleNames.textContent = allNames ? t("legend.hideNames") : t("legend.showNames");
-  });
+  toggleNames.addEventListener("change", showAllScoped);
   // Keep the named set tracking the selection while show-all is on, so adding /
   // removing an isolated region (or clearing it) updates which names show.
   selection.onIsolate(showAllScoped);
 
-  // Hide/show every projection arrow at once (off by default: arrows shown).
-  // Toggles each arrow group's visibility and refreshes labels so the connection
-  // labels (which key off group.visible) follow; hidden arrows also stop being
-  // pickable since the pick helpers skip group.visible=false.
-  // Global show/hide of every arrow. Composes with the legend's "Hypothetical
+  // "Show projections" checkbox (next to Auto-rotate): show/hide every projection
+  // arrow at once (checked by default = arrows shown; unchecking hides them all).
+  // projVis refreshes the connection labels (which key off group.visible) and the
+  // pick helpers skip hidden groups. Composes with the legend's "Hypothetical
   // pathways" toggle through projVis: hiding wins, and re-showing restores the
   // tentative arrows only if that section is toggled on.
-  toggleProjections.addEventListener("click", () => {
-    const hidden = !projVis.allHidden;
-    projVis.setAllHidden(hidden);
-    toggleProjections.setAttribute("aria-pressed", String(hidden));
-    toggleProjections.classList.toggle("active", hidden);
-    toggleProjections.textContent =
-      hidden ? t("legend.showProjections") : t("legend.hideProjections");
+  toggleProjections.addEventListener("change", () => {
+    projVis.setAllHidden(!toggleProjections.checked);
   });
 
   // Apply initial slider values so the scene matches the UI on load.

@@ -90,8 +90,6 @@
       "shortcuts.close": "Close search / collapse sections",
 
       "legend.showNames": "Show all names",
-      "legend.hideNames": "Hide all names",
-      "legend.hideProjections": "Hide projections",
       "legend.showProjections": "Show projections",
       "legend.projections": "Projections",
       "legend.circuits": "Circuits",
@@ -262,8 +260,6 @@
       "shortcuts.close": "Fermer la recherche / replier les sections",
 
       "legend.showNames": "Afficher tous les noms",
-      "legend.hideNames": "Masquer les noms",
-      "legend.hideProjections": "Masquer les projections",
       "legend.showProjections": "Afficher les projections",
       "legend.projections": "Projections",
       "legend.circuits": "Circuits",
