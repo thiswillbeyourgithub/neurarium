@@ -1302,6 +1302,12 @@ function createInfoPanel(data) {
     return null;
   };
 
+  // Only one tooltip is pinned at a time: opening one closes whichever was open,
+  // so tapping a second source pill dismisses the first instead of stacking popups.
+  // Holds the open tip's `hide` (so its scroll/resize listeners are torn down too,
+  // not just its `.show` class). Shared across every withTip instance in the panel.
+  let openTip = null;
+
   // Wrap a trigger element with a hover/tap tooltip. The bubble is positioned in
   // viewport coordinates (position: fixed) just above the trigger and clamped to
   // the viewport, so an inline pill (a binding / NbN / description pill) anchors to
@@ -1345,6 +1351,8 @@ function createInfoPanel(data) {
       if (wrap.classList.contains("show")) place();
     };
     const show = () => {
+      if (openTip && openTip !== hide) openTip(); // close any other pinned tip
+      openTip = hide;
       wrap.classList.add("show");
       place();
       // Re-place after this frame: tapping a button can focus-scroll it into view
@@ -1354,6 +1362,7 @@ function createInfoPanel(data) {
       window.addEventListener("resize", reposition);
     };
     const hide = () => {
+      if (openTip === hide) openTip = null;
       wrap.classList.remove("show");
       window.removeEventListener("scroll", reposition, true);
       window.removeEventListener("resize", reposition);

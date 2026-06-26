@@ -1481,8 +1481,12 @@ as the WIP banner (`js/error-banner.js`):
   synthesizes mouseenter + focus (both show) and *then* click (which toggles), so
   attaching them on a phone would show-then-hide on the first tap and force a
   second tap; gating leaves the click-toggle as the sole touch path, so one tap
-  reveals it (tap again, or tap another pill, to dismiss). The bubble is
-  `position: fixed` and placed in
+  reveals it (tap again, or tap another pill, to dismiss). **Only one tooltip is
+  open at a time**: a shared `openTip` reference (one per info panel) holds the
+  currently-shown tip's `hide`, and `show()` calls it before opening, so tapping a
+  second source pill dismisses the first instead of stacking popups (the previous
+  one's scroll/resize listeners are torn down too, not just its `.show` class). The
+  bubble is `position: fixed` and placed in
   **viewport coordinates** at the trigger (centred above it, flipped below if there
   is no room, clamped to the viewport), so an inline pill (a binding / NbN /
   description pill) anchors to its own pill exactly like a source-list pill instead
