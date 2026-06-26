@@ -1265,10 +1265,12 @@ as the WIP banner (`js/error-banner.js`):
   (green **+** boost / red **−** block / purple **≈** modulate) so the kind of
   interaction is visible (a tentative interaction is dimmed + italic with a
   "· speculative" tag, like the drug panel's Acts-on rows) **and the binding's
-  per-claim provenance pill** (the *same* `makeProvenancePill(b.provenance,
-  sourcesTip(b.sources))` shown on the drug panel's Acts-on row, the same resolved
-  binding object, so a drug A <-> target B link carries its source on *both* A's
-  drug panel and B's target panel with no data duplication), and **clicking a
+  source provenance pill** (the *same* `bindingProvenancePill(binding, drug)` shown
+  on the drug panel's Acts-on row, the same resolved binding object, so a drug
+  A <-> target B link carries its source on *both* A's drug panel and B's target
+  panel with no data duplication: its own quote-level source when it has one, else
+  the drug-level Stahl citation as a fallback so the grade is never blank), and
+  **clicking a
   drug row focuses that drug** (dim + animation + drug panel + tab) via the
   `info.onDrug` hook, exactly like a Drugs legend / search pick. The list is built
   from the `data.drugsByTarget` reverse index (see js/data.js) and the section is
@@ -1304,8 +1306,10 @@ as the WIP banner (`js/error-banner.js`):
   benzodiazepine say, just shows the dots + wash). It also opens the drug
   **info-panel view** (`createInfoPanel.showDrug`: the molecular-structure image
   (when one was fetched, see "Molecule images"), the class, the NbN nomenclature, a
-  Wikipedia link, the description, the **Acts on** binding list and the Stahl
-  source). Clicking the active row again clears it; switching to any other focus
+  Wikipedia link, the description, and the **Acts on** binding list (each binding
+  row carries a source pill: its own quote-level source, or the drug-level Stahl
+  citation as a fallback, so the grade is never blank, see "Source provenance").
+  Clicking the active row again clears it; switching to any other focus
   drops the dots + flow. A drug with no mapped bindings renders muted and is not
   clickable. The dimming reuses `selection.setCircuit(regionMeshes, flowArrows)`
   (pinning the flow pathways, or none when unmapped) and both the dots and the flow
@@ -1453,10 +1457,15 @@ as the WIP banner (`js/error-banner.js`):
   *structure*, a *receptor* (via
   `showReceptor`, opened from a Receptors legend row, see "Receptors" above), or a
   *drug* (via `showDrug`, opened from a Drugs legend row / drug search, see
-  "Drugs" above: its class, NbN nomenclature, Wikipedia link, description, the
+  "Drugs" above: its class, NbN nomenclature, Wikipedia link, description, and the
   **Acts on** list of bindings (each a coloured effect glyph + the target name +
-  the action·note, dimmed + italic with a "· speculative" tag when tentative) and the
-  Stahl source. The **Class** and
+  the action·note, dimmed + italic with a "· speculative" tag when tentative, plus a
+  source pill via `bindingProvenancePill`: the binding's own quote-level source, or
+  the drug-level Stahl citation as a fallback so the grade is never blank). There is
+  no longer a standalone drug-level "Source(s)" block on a drug panel: the Stahl
+  citation is shown on the specific bindings it backs instead of sourcing "the whole
+  drug" (the connection panel keeps its Source(s) list, since a pathway *is* one
+  datum). The **Class** and
   **Nomenclature** values are clickable, each opening search with a
   `class:"..."` / `nbn:"..."` filter, see "Controls -> search").
   `createInfoPanel` is pure rendering: opening the matching tab + applying the 3D
@@ -1775,8 +1784,10 @@ rendering:
   nomenclature, a Wikipedia link, the description, the **Acts on** list (one row per
   binding: a coloured effect glyph (green **+** boost / red **−** block / purple
   **≈** modulate) + the target name + the action·note, dimmed +
-  italic with a "· speculative" tag (`drug.speculative`) when tentative), and the
-  Stahl source). Drugs are also searchable (name /
+  italic with a "· speculative" tag (`drug.speculative`) when tentative, plus a
+  source pill (its own quote-level source or the drug-level Stahl citation as a
+  fallback, so the grade is never blank, `bindingProvenancePill`; no standalone
+  drug-level Source(s) block)). Drugs are also searchable (name /
   category / target keywords). The animation is stopped off the selection state, the
   same pattern as the receptor markers + circuit pulse: a `selection.onIsolate`
   watcher hides it the moment the isolate set is no longer exactly the drug's region
@@ -1918,7 +1929,10 @@ citation is *not* denormalized onto all ~429 bindings (the viewer resolves it fr
 `meta.source_corpora` by `corpus`). A pill tooltip's per-claim page ref reads
 `<ref>, p. N` where `ref` is the **full book title + edition** (not a bare
 "Stahl"), so a page citation is unambiguous on its own; the longer bibliographic
-`citation` backs the drug-level Source(s) line. The two-step that makes `verified` trustworthy:
+`citation` is the **fallback** shown (via `bindingProvenancePill`) on a binding
+that has no quote-level source of its own, at the drug-level grade (`llm`), so
+every binding row carries a source pill and the drug panel needs no separate
+drug-level Source(s) block. The two-step that makes `verified` trustworthy:
 an LLM extracts the quote (copied out of the page, never paraphrased) and a second
 LLM judges that the quote supports the claim (this semantic step is where any
 "leeway" lives), then **`tools/check_data.py`'s source-quote check confirms the

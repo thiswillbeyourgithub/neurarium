@@ -1461,6 +1461,19 @@ function createInfoPanel(data) {
   const citationsTip = (sources) =>
     (sources || []).map((s) => s.citation).filter(Boolean).join("\n\n");
 
+  // The provenance pill for a drug binding row (shared by the drug panel's "Acts
+  // on" list and a target panel's "Interacting drugs" list, the same resolved
+  // binding object). A binding with its own quote-level sources shows that grade
+  // with the verbatim quote + page in the tooltip; one without falls back to the
+  // drug-level Stahl citation at its grade (`llm`: backed by the book at the drug
+  // level, just not quote-verified), so every binding carries a grade pill and
+  // none ever renders blank. No drug-level "Source(s)" block is shown separately,
+  // because the citation now appears here, on the specific binding it backs.
+  const bindingProvenancePill = (binding, drug) =>
+    binding.sources && binding.sources.length
+      ? makeProvenancePill(binding.provenance, sourcesTip(binding.sources))
+      : makeProvenancePill(drug.sourceProvenance, citationsTip(drug.sources));
+
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
   // matches the dots + legend. Empty values are skipped.
@@ -1609,14 +1622,12 @@ function createInfoPanel(data) {
         const detail = parts.filter(Boolean).join(" · ");
         if (detail) txt.appendChild(el("span", "bind-action", detail));
         li.appendChild(txt);
-        // Per-claim source pill, the *same* binding source shown on the drug
-        // panel's "Acts on" row (this is the same resolved binding object, so the
-        // source is shared, not duplicated): a link between drug A and target B
-        // carries its provenance + quote on both A's and B's panel.
-        if (binding.sources && binding.sources.length) {
-          li.appendChild(
-            makeProvenancePill(binding.provenance, sourcesTip(binding.sources)));
-        }
+        // Source pill, the *same* one shown on the drug panel's "Acts on" row (the
+        // same resolved binding + its drug, so the source is shared, not
+        // duplicated): a link between drug A and target B carries its provenance on
+        // both panels, and falls back to the drug-level Stahl citation when the
+        // binding has no quote of its own (see bindingProvenancePill).
+        li.appendChild(bindingProvenancePill(binding, drug));
         li.title = `${binding.effectLabel} · ${drug.name}`;
         li.addEventListener("click", () => onDrugPick(drug));
         ul.appendChild(li);
@@ -1798,7 +1809,8 @@ function createInfoPanel(data) {
      * search result): its name, primary category, a Wikipedia link, a one-line
      * description, its class(es) + nomenclature, then the "Acts on" list of
      * molecular targets (each binding's effect swatch + target name + action,
-     * with a note / "speculative" marker when present), and the Stahl source.
+     * with a note / "speculative" marker when present, and a source pill: its own
+     * quote-level source or the drug-level Stahl citation as a fallback).
      */
     showDrug(drug) {
       body.innerHTML = "";
@@ -1881,13 +1893,10 @@ function createInfoPanel(data) {
           const detail = parts.filter(Boolean).join(" · ");
           if (detail) txt.appendChild(el("span", "bind-action", detail));
           li.appendChild(txt);
-          // Per-claim source pill: when this binding carries a source, show its
-          // provenance grade with the verbatim supporting quote + page ref in the
-          // tooltip (after a newline). Strongest grade colours the pill. A binding
-          // with no source yet shows none (it falls under the drug-level source).
-          if (b.sources && b.sources.length) {
-            li.appendChild(makeProvenancePill(b.provenance, sourcesTip(b.sources)));
-          }
+          // Source pill: this binding's own quote-level source when it has one,
+          // else the drug-level Stahl citation (grade llm). Always shown, so the
+          // grade is never blank (see bindingProvenancePill).
+          li.appendChild(bindingProvenancePill(b, drug));
           li.title = `${b.effectLabel} · ${b.targetName}`;
           // If this binding's target is browsable on its own (in the merged
           // "Receptors & targets" list and focusable), make the row jump to it.
@@ -1901,8 +1910,10 @@ function createInfoPanel(data) {
         acts.appendChild(ul);
       }
       body.appendChild(acts);
-
-      appendSources(drug.sources);
+      // No standalone drug-level "Source(s)" block: the Stahl citation that backs
+      // the drug is shown per-binding (each binding's pill above), so a source
+      // always refers to a specific datum rather than "the whole drug". The
+      // per-panel "?" caveat is still added by appendWiki above.
     },
 
     /** Register the handler run when a structure-panel connection row is clicked. */

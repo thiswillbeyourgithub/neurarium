@@ -293,6 +293,10 @@ export async function loadBrainData(dataDir = "data") {
     // shows a provenance pill next to it. Null grade when unsourced.
     d.nbnSources = mapSources(d.nbn_sources);
     d.nbnProvenance = strongestGrade(d.nbn_sources);
+    // Grade of the drug-level (bibliographic) source, the Stahl citation. A binding
+    // with no quote-level source of its own is still backed by this at the drug
+    // level, so the panel falls back to this grade for its pill (never blank).
+    d.sourceProvenance = strongestGrade(d.sources);
     d.categoryLabels = (d.categories || []).map((c) => drugCategoryLabels[c] || c);
     d.category = d.categoryLabels[0] || "";
     // Vendored molecular-structure SVG path (data/molecules/<id>.svg), set by the
