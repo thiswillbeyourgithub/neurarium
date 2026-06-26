@@ -1315,8 +1315,7 @@ function createInfoPanel(data) {
   // ancestor (the whole panel) far from the pill, which left the tooltip stranded
   // near the panel top on touch (it then read as "no tooltip"). Shows on
   // hover/focus (desktop) and is pinned on click/tap (touch, where `:hover` never
-  // fires) via the `.show` class. Shared by the "?" caveat icon and the per-source
-  // provenance pills.
+  // fires) via the `.show` class. Wraps the per-source provenance pills.
   const withTip = (trigger, tipText) => {
     const wrap = el("span", "help-icon");
     const tip = el("span", "help-tip", tipText);
@@ -1388,35 +1387,16 @@ function createInfoPanel(data) {
     return wrap;
   };
 
-  // The "?" caveat badge: the sources are LLM-inferred (web + the Stahl PDF) and
-  // not yet human-checked. It sits alongside the per-source provenance pills (which
-  // grade each one individually, see makeProvenancePill) and the full grade key in
-  // the About panel ("Sources & provenance"). The tooltip carries the warning.
-  const makeHelpIcon = () => {
-    const btn = el("button", "help-dot", "?");
-    btn.type = "button";
-    btn.setAttribute("aria-label", t("info.sourceCaveatLabel"));
-    return withTip(btn, t("info.sourceCaveat"));
-  };
-
-  // Show the block caveat at most ONCE per panel. A detail panel mixes a Reference
-  // row, inline grade pills (description / NbN / bindings) and a Source list; a
-  // caveat on each block stacked into several near-identical "?"s that blurred with
-  // the grey "llm" grade pill's own "?". addCaveatOnce drops it on the first
-  // source/reference block to render (guarding on the unique .help-dot class; body
-  // is cleared each render), so one caveat covers the whole panel.
-  const addCaveatOnce = (target) => {
-    if (!body.querySelector(".help-dot")) target.appendChild(makeHelpIcon());
-  };
-
   // Per-source provenance pill (how trustworthy the source's attribution is):
   // grey "?" = LLM-only (may be hallucinated), yellow "~" = the LLM had the source
   // document, green "✓" = quote-checked + agreed by a second LLM. The colour is a
   // `.src-prov-<level>` CSS class. A falsy / unknown level is the "no source yet"
   // case and renders the orange NOSOURCE pill (`.src-todo`) instead. The pill is a
-  // <button> so a tap pins its explanatory tooltip on touch (via withTip), the
-  // same mechanism as the "?" caveat icon. The grade itself comes from the data
-  // (generate_data.py PROVENANCE_LEVELS); only the glyph + tooltip live here.
+  // <button> so a tap pins its explanatory tooltip on touch (via withTip). Each
+  // pill's tooltip explains its own grade, and the About panel ("Sources &
+  // provenance") carries the full grade key, so there is no separate blanket "?"
+  // caveat. The grade itself comes from the data (generate_data.py
+  // PROVENANCE_LEVELS); only the glyph + tooltip live here.
   const PROVENANCE_PILLS = {
     llm: { glyph: "?", tip: "info.provLlm" },
     sourced: { glyph: "~", tip: "info.provSourced" },
@@ -1539,9 +1519,8 @@ function createInfoPanel(data) {
       wrap.appendChild(makeProvenancePill(provenance));
     } else {
       wrap.appendChild(el("span", null, t("info.reference")));
-      wrap.appendChild(makeProvenancePill(null)); // no reference -> TODO pill
+      wrap.appendChild(makeProvenancePill(null)); // no reference -> NOSOURCE pill
     }
-    addCaveatOnce(wrap); // one block caveat per panel (the reference is LLM-inferred)
     body.appendChild(wrap);
   };
 
@@ -1549,13 +1528,12 @@ function createInfoPanel(data) {
   // link for a verified http(s) url (plain text otherwise) followed by its
   // provenance pill (grey/yellow/green, grading how it was sourced; see
   // makeProvenancePill), so a missing url no longer reads as "TODO" (the pill
-  // carries the real status). The heading keeps the "?" caveat for the block.
+  // carries the real status).
   const appendSources = (sources) => {
     if (!sources || !sources.length) return;
     const wrap = el("div", "info-sources");
     const h3 = el(
       "h3", null, sources.length > 1 ? t("info.sources") : t("info.source"));
-    addCaveatOnce(h3); // one block caveat per panel (the citations are LLM-inferred)
     wrap.appendChild(h3);
     const ul = el("ul");
     for (const s of sources) {
@@ -1914,8 +1892,7 @@ function createInfoPanel(data) {
       body.appendChild(acts);
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
-      // always refers to a specific datum rather than "the whole drug". The
-      // per-panel "?" caveat is still added by appendWiki above.
+      // always refers to a specific datum rather than "the whole drug".
     },
 
     /** Register the handler run when a structure-panel connection row is clicked. */
