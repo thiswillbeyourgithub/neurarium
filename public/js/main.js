@@ -1571,6 +1571,14 @@ function createInfoPanel(data) {
         const detail = parts.filter(Boolean).join(" · ");
         if (detail) txt.appendChild(el("span", "bind-action", detail));
         li.appendChild(txt);
+        // Per-claim source pill, the *same* binding source shown on the drug
+        // panel's "Acts on" row (this is the same resolved binding object, so the
+        // source is shared, not duplicated): a link between drug A and target B
+        // carries its provenance + quote on both A's and B's panel.
+        if (binding.sources && binding.sources.length) {
+          li.appendChild(
+            makeProvenancePill(binding.provenance, sourcesTip(binding.sources)));
+        }
         li.title = `${binding.effectLabel} · ${drug.name}`;
         li.addEventListener("click", () => onDrugPick(drug));
         ul.appendChild(li);

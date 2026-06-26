@@ -1264,7 +1264,11 @@ as the WIP banner (`js/error-banner.js`):
   MAOI, ...) in the meta order, each row carrying the binding's net-effect **glyph**
   (green **+** boost / red **−** block / purple **≈** modulate) so the kind of
   interaction is visible (a tentative interaction is dimmed + italic with a
-  "· speculative" tag, like the drug panel's Acts-on rows), and **clicking a
+  "· speculative" tag, like the drug panel's Acts-on rows) **and the binding's
+  per-claim provenance pill** (the *same* `makeProvenancePill(b.provenance,
+  sourcesTip(b.sources))` shown on the drug panel's Acts-on row, the same resolved
+  binding object, so a drug A <-> target B link carries its source on *both* A's
+  drug panel and B's target panel with no data duplication), and **clicking a
   drug row focuses that drug** (dim + animation + drug panel + tab) via the
   `info.onDrug` hook, exactly like a Drugs legend / search pick. The list is built
   from the `data.drugsByTarget` reverse index (see js/data.js) and the section is
