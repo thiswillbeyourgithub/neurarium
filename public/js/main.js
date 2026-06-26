@@ -1830,8 +1830,6 @@ function createInfoPanel(data) {
         body.appendChild(fig);
       }
 
-      appendWiki(drug.wikipedia, drug.wikipedia_provenance);
-
       if (drug.description) {
         const p = el("p", "info-desc", drug.description);
         // Provenance pill beside the description: "sourced" means it is the lead
@@ -1845,6 +1843,10 @@ function createInfoPanel(data) {
         }
         body.appendChild(p);
       }
+
+      // Wikipedia link after the description (the lead "intro"), not before it, so
+      // the reference sits below the text it backs.
+      appendWiki(drug.wikipedia, drug.wikipedia_provenance);
 
       // Classification facts: the coarse class(es) and the NbN nomenclature line.
       // Both are clickable: each runs a search (class:"..." / nbn:"...") that filters
