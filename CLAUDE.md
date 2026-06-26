@@ -207,11 +207,13 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       on ?debug=1 only, the vendored eruda console; holds
                       the single bottom-left collapsible "neurarium" panel
                       (reset / search / keyboard-shortcuts buttons, the two
-                      sliders, auto-rotate, then six nested collapsible sections:
-                      a JS-populated Structures section (region rows by group, its
-                      first row the "show all names" button), a JS-populated
-                      Projections section (pathway rows + the "hide projections"
-                      button + the arrow colour-mode switch, then Circuits +
+                      sliders, then the auto-rotate / show-all-names /
+                      show-projections / see-inside checkboxes, then six nested
+                      collapsible sections:
+                      a JS-populated Structures section (region rows by group), a
+                      JS-populated
+                      Projections section (pathway rows + the arrow colour-mode
+                      switch, then Circuits +
                       Hypothetical pathways), a JS-populated Receptors & targets
                       section, a JS-populated Drugs section (with its own filter
                       box), a JS-populated Legend section (a static colour/symbol
@@ -971,11 +973,12 @@ as the WIP banner (`js/error-banner.js`):
   selection and falls back to Settings. From
   the top the Settings pane holds: the **reset + search + keyboard-shortcuts**
   icon buttons (a `.toolbar-row`), then
-  the **Separate** and **Transparency** sliders, then **Auto-rotate** and **See
-  inside**, then six nested collapsed sections in order: **Structures**
-  (`#structures`, the region rows by group, its first row the **Show all names**
-  button), **Projections** (`#projections`, the pathway rows, its first rows the
-  **Hide projections** button and the **arrow colour-mode switch**
+  the **Separate** and **Transparency** sliders, then the **Auto-rotate**, **Show
+  all names**, **Show projections** and **See inside** checkboxes (the last three
+  are global scene toggles, so they sit here with auto-rotate rather than inside
+  their sections), then six nested collapsed sections in order: **Structures**
+  (`#structures`, the region rows by group), **Projections** (`#projections`, the
+  pathway rows, its first row the **arrow colour-mode switch**
   (Neurotransmitter / Potential, `#color-mode`), then Circuits + Hypothetical
   pathways), **Receptors & targets** (`#receptors`), **Drugs** (`#drugs`, with its
   own `#drugs-filter` box), **Legend** (`#legend`, a *static* colour/symbol key
@@ -1059,8 +1062,9 @@ as the WIP banner (`js/error-banner.js`):
   (the `✓` / `~` / `?` / `NOSOURCE` pill swatches, each with its meaning) and the
   programmatic **coverage tally** (a headline "% of factual claims sourced or
   verified" + a per-kind bar). This is the single place that explains the whole
-  sourcing system, so the per-panel "?" caveat doesn't have to (see "Source
-  provenance"). See "Dev / WIP banner" for
+  sourcing system (it is why no separate inline "?" caveat is needed: each
+  provenance pill explains its own grade, and this block carries the full key, see
+  "Source provenance"). See "Dev / WIP banner" for
   `sourceUrl`. (The README carries the same "open an issue" invitation in a
   **Feedback** section, and the same coverage table via
   `tools/update_readme_stats.py`.)
@@ -1072,6 +1076,15 @@ as the WIP banner (`js/error-banner.js`):
   selection does not re-enable it. Wired via `selection.onPick(stopAutoRotate)`
   in `js/main.js`. Deep links / screenshots get it forced **off** by
   `applyViewParams` unless `?autorotate=1` is passed, so a framed view holds.
+- **Show all names** checkbox (`#toggle-names`, off by default): forces every
+  structure label on at once (see "Structure names" below). A global toggle, so it
+  sits in the checkbox row with Auto-rotate rather than inside the Structures
+  section. The keyboard **n** and the `?names=all` deep link drive it via `.click()`.
+- **Show projections** checkbox (`#toggle-projections`, **checked by default** =
+  arrows shown): unchecking hides every projection arrow at once (`projVis`, see
+  "Projections" below; composes with the Hypothetical-pathways toggle). A global
+  toggle, so it sits in the checkbox row with Auto-rotate; the colour-mode switch
+  stays in the Projections body.
 - **See inside** checkbox (`#see-inside`, off by default): hides the structures
   on the camera-facing side of the brain so the deep nuclei aren't blocked by the
   near cortex (a "cutaway" without clipping geometry). `createNearCull` in
@@ -1085,7 +1098,7 @@ as the WIP banner (`js/error-banner.js`):
   left visible (so the revealed connections still show). `cull.tick()` runs in
   the render loop after `controls.update()`.
 - **Arrow colour-mode switch** (`#color-mode`, a two-state segmented control that
-  lives in `#projections-actions` right under **Hide projections**, defaulting to
+  lives in `#projections-actions` at the top of the Projections body, defaulting to
   **Neurotransmitter**): picks how every arrow is coloured. **Neurotransmitter**
   (the default) colours each arrow per molecule (`projection.color`, the
   `PROJECTION_COLORS` palette). **Potential** recolours every arrow by its coarse
@@ -1193,8 +1206,8 @@ as the WIP banner (`js/error-banner.js`):
     default**: a single "Show speculative (N)" toggle reveals/hides every
     `tentative` projection's (dotted) arrow at once. They are deliberately kept
     out of the per-neurotransmitter rows so a speculative link never reads as an
-    established one. Visibility composes with the global **Hide projections**
-    button via `createProjectionVisibility` in `js/main.js`: an arrow shows only
+    established one. Visibility composes with the global **Show projections**
+    checkbox via `createProjectionVisibility` in `js/main.js`: an arrow shows only
     when projections aren't globally hidden *and* it is established or (when
     tentative) its section is toggled on (global-hide wins; re-showing restores
     the tentative arrows only if their section is on).
@@ -1208,23 +1221,23 @@ as the WIP banner (`js/error-banner.js`):
   set, a circuit, a receptor's regions), a focused region the ray passes through
   wins over a nearer non-focused one, so hovering the thing you focused names
   *it* even when a dimmed region (e.g. the near cortex over an isolated deep
-  nucleus) sits in front of it. The **Show all names** button
-  (the Structures section's first row) forces every label on at once. Labels are boxless:
+  nucleus) sits in front of it. The **Show all names** checkbox
+  (in the controls row, next to Auto-rotate) forces every label on at once. Labels are boxless:
   white glyphs outlined in the structure's own color (`--label-color`) plus a
   black halo, so they stay legible over any region and overlapping names don't
   hide behind opaque boxes.
 - **Structures** (`#structures`, collapsed by default): the region rows, grouped
   by `group` (one `<h2>` per group heading). Generated by `buildLegend` into
-  `#structures-body`, which preserves the `#structures-actions` container (its one
-  action button, **Show all names**) first across rebuilds. Each structure row is
+  `#structures-body` (the body is purely the generated rows now; the Show-all-names
+  toggle moved up to the controls row, so `#structures-actions` was removed and
+  `buildLegend` just clears + fills the body). Each structure row is
   clickable to isolate/focus that region (both hemispheres); clicking a category
   heading isolates the whole group (see Selection above).
 - **Projections** (`#projections`, collapsed by default): the pathway rows.
   Generated by the *same* `buildLegend` into `#projections-body`, which preserves
-  the `#projections-actions` container (**Hide projections** off by default;
-  toggles every arrow's visibility at once via `arrow.setVisible`, and refreshes
-  labels so the connection labels follow; plus the **arrow colour-mode switch**)
-  first across rebuilds. Below the actions: one **Projections** section (a row per
+  the `#projections-actions` container (the **arrow colour-mode switch**)
+  first across rebuilds (the global show/hide-projections toggle moved up to the
+  controls row, see **Show projections** above). Below the actions: one **Projections** section (a row per
   neurotransmitter, or per sign in Potential mode), the **Circuits** section, and
   the off-by-default **Hypothetical pathways** toggle. Each projection/circuit row
   is clickable to isolate that group / loop (see Selection above). `buildLegend`
@@ -1305,8 +1318,9 @@ as the WIP banner (`js/error-banner.js`):
   the brain, not just static dots (a drug whose systems have no modeled pathway, a
   benzodiazepine say, just shows the dots + wash). It also opens the drug
   **info-panel view** (`createInfoPanel.showDrug`: the molecular-structure image
-  (when one was fetched, see "Molecule images"), the class, the NbN nomenclature, a
-  Wikipedia link, the description, and the **Acts on** binding list (each binding
+  (when one was fetched, see "Molecule images"), the class, the NbN nomenclature,
+  the description, then a Wikipedia link (after the description it backs), and the
+  **Acts on** binding list (each binding
   row carries a source pill: its own quote-level source, or the drug-level Stahl
   citation as a fallback, so the grade is never blank, see "Source provenance").
   Clicking the active row again clears it; switching to any other focus
@@ -1475,14 +1489,11 @@ as the WIP banner (`js/error-banner.js`):
   Everywhere a data **source / reference** is shown (the connection + drug
   **Source(s)** list and every **Wikipedia / Reference** row), a per-source
   **provenance pill** (`makeProvenancePill`) grades how trustworthy that one
-  source is (see "Source provenance" below for the full model). On top of the
-  pills, **one** **"?" caveat badge** (`makeHelpIcon`) appears **per panel**,
-  warning that none of it is human-checked: `addCaveatOnce` drops it on the first
-  source/reference block to render (guarded on the unique `.help-dot` class, the
-  body being cleared each render), so it no longer repeats on every block + blur
-  with the grey `llm` pill's own "?" glyph; the full grade key lives once in the
-  About panel ("Sources & provenance", see "Controls -> About"). Both the pill and
-  the caveat reuse one
+  source is (see "Source provenance" below for the full model). There is **no
+  separate blanket "?" caveat badge**: each pill's tooltip explains its own grade,
+  and the full grade key lives once in the About panel ("Sources & provenance", see
+  "Controls -> About"), so a standalone caveat would only have duplicated the grey
+  `llm` pill's own "?" glyph beside it. The pill reuses one
   `withTip(trigger, text)` helper for the hover/tap tooltip: it is pinned on
   click/tap (a `.show` class toggle) on every device, and *additionally* reveals
   on hover/focus only where `(hover: hover)` matches (pointer + keyboard). The
@@ -1504,7 +1515,7 @@ as the WIP banner (`js/error-banner.js`):
   scroll container, `place()` subtracts that ancestor's viewport offset **and its
   `scrollTop`/`scrollLeft`** (found generically via `fixedContainingBlock`); it
   re-places on scroll/resize while shown (and self-cleans if the panel re-renders
-  the trigger away). The caveat message is `info.sourceCaveat`, the pill
+  the trigger away). The pill
   tooltips are the `info.provNone/provLlm/provSourced/provVerified` keys (NOT the
   About / dev-banner "Source code" link, which points at the code repo, not a data
   source).
@@ -1631,8 +1642,8 @@ static set of arrows. It is split in two on purpose:
   modulatory sits between. The beads in a volley are spaced `gap` apart along the
   arc and advance at `speed` x the slot rate (> 1, so the volley lands early and
   reads as a burst then a pause); `scale`/`bright` size + brighten them. A bead
-  hides while its arrow is hidden (so the global "Hide projections" toggle clears
-  the beads too). As a bead **lands**, it fires a **wash echo** over its target
+  hides while its arrow is hidden (so the global "Show projections" toggle, when
+  unchecked, clears the beads too). As a bead **lands**, it fires a **wash echo** over its target
   region: a wash of light spreads from the exact impact point across that region's
   surface, in the pathway's own colour, then dissolves (`WASH_MS`), so the region
   reads as lighting up *from where the signal arrived* rather than blinking inert.
@@ -1781,7 +1792,7 @@ rendering:
   itself feels lit, not just peppered. The info panel
   switches to the drug view (`createInfoPanel.showDrug`: the molecular-structure
   image (see "Molecule images"), the class, the NbN
-  nomenclature, a Wikipedia link, the description, the **Acts on** list (one row per
+  nomenclature, the description, then a Wikipedia link, the **Acts on** list (one row per
   binding: a coloured effect glyph (green **+** boost / red **−** block / purple
   **≈** modulate) + the target name + the action·note, dimmed +
   italic with a "· speculative" tag (`drug.speculative`) when tentative, plus a
@@ -1966,9 +1977,10 @@ revisions are recorded in `tools/descriptions_sources.json`.
 grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the
 glyph + the `info.prov*` tooltip via the shared `withTip` helper; the pill colours
 are CSS (`.src-prov-llm/sourced/verified` in `index.html`, beside the orange
-`.src-todo`). The per-source pill sits **alongside** the **one-per-panel** "?"
-caveat (`makeHelpIcon` via `addCaveatOnce`), which warns that none of the data is
-human-verified (see "Info panel"). `appendSources` adds a pill per citation;
+`.src-todo`). Each pill's own tooltip explains its grade, and the About panel's
+"Sources & provenance" block carries the full grade key, so there is **no separate
+blanket "?" caveat** on the panels (it would only have duplicated the grey `llm`
+pill's "?"). `appendSources` adds a pill per citation;
 `appendWiki(url, provenance)` adds one per reference row (or the `NOSOURCE` pill
 when the link is absent). New user-visible strings are the
 `info.provNone/provLlm/provSourced/provVerified` i18n keys (both languages).
