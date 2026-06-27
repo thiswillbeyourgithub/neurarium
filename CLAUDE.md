@@ -1509,31 +1509,42 @@ as the WIP banner (`js/error-banner.js`):
   and the full grade key lives once in the About panel ("Sources & provenance", see
   "Controls -> About"), so a standalone caveat would only have duplicated the grey
   `llm` pill's own "?" glyph beside it. The pill reuses one
-  `withTip(trigger, text)` helper for the hover/tap tooltip: it is pinned on
-  click/tap (a `.show` class toggle) on every device, and *additionally* reveals
-  on hover/focus only where `(hover: hover)` matches (pointer + keyboard). The
-  hover/focus listeners are gated behind that media query on purpose: a touch tap
-  synthesizes mouseenter + focus (both show) and *then* click (which toggles), so
-  attaching them on a phone would show-then-hide on the first tap and force a
-  second tap; gating leaves the click-toggle as the sole touch path, so one tap
-  reveals it (tap again, or tap another pill, to dismiss). **Only one tooltip is
-  open at a time**: a shared `openTip` reference (one per info panel) holds the
-  currently-shown tip's `hide`, and `show()` calls it before opening, so tapping a
-  second source pill dismisses the first instead of stacking popups (the previous
-  one's scroll/resize listeners are torn down too, not just its `.show` class). The
-  bubble is `position: fixed` and placed in
-  **viewport coordinates** at the trigger (centred above it, flipped below if there
-  is no room, clamped to the viewport), so an inline pill (a binding / NbN /
-  description pill) anchors to its own pill exactly like a source-list pill instead
-  of stranding far away near the panel top. Because the panel's `backdrop-filter`
-  makes `#controls` a containing block for the fixed bubble *and* the panel is the
-  scroll container, `place()` subtracts that ancestor's viewport offset **and its
-  `scrollTop`/`scrollLeft`** (found generically via `fixedContainingBlock`); it
-  re-places on scroll/resize while shown (and self-cleans if the panel re-renders
-  the trigger away). The pill
-  tooltips are the `info.provNone/provLlm/provSourced/provVerified` keys (NOT the
-  About / dev-banner "Source code" link, which points at the code repo, not a data
-  source).
+  `withTip(trigger, text)` helper for the hover/tap tooltip. The bubble is **not
+  nested under the trigger**: while shown it is appended to **`document.body`** (and
+  removed again on hide), so it escapes the panel's overflow clipping (it is never
+  cropped, even when wider than the narrow settings panel) **and** any dimmed
+  ancestor row's reduced `opacity` (a speculative binding row sits at `opacity:0.6`,
+  which would otherwise bleed into a nested tooltip and make it see-through): the row
+  stays greyed, the tooltip renders fully opaque. Behaviour: on a **pointer device**
+  hover/focus reveals it, and **clicking the badge *pins* it open** (it stays put
+  after the pointer leaves, so its text is selectable); **hovering the bubble itself
+  keeps it open** (a short grace timer covers the small gap between badge and bubble,
+  and `mouseleave` only hides when neither badge nor bubble is `:hover` and it isn't
+  pinned). A pinned tip closes on clicking the badge again, clicking anywhere outside
+  it (a `pointerdown` capture watcher), or opening another. On a **touch screen**
+  (no `(hover: hover)`) the hover/focus listeners are skipped, so the click-toggle is
+  the sole path: one tap pins it, tap again (or another pill) dismisses it (a tap
+  synthesizes mouseenter + focus + click, so attaching hover on a phone would
+  show-then-hide on the first tap). **Only one tooltip is open at a time**: a shared
+  `openTip` reference (one per info panel) holds the currently-shown tip's `close`,
+  and `open()` calls it first, so a second source pill dismisses the first instead of
+  stacking popups (the previous one's scroll/resize/pointerdown listeners are torn
+  down too, not just its `.show` class, which now lives on the tip itself, not the
+  wrapper). The bubble is `position: fixed` and placed in **viewport coordinates** at
+  the trigger (centred above it, flipped below if there is no room, clamped to the
+  viewport), so an inline pill (a binding / NbN / description pill) anchors to its own
+  pill exactly like a source-list pill instead of stranding far away near the panel
+  top. With the bubble in `<body>` there is normally no fixed-positioning containing
+  block, so the offsets are zero; `place()` still subtracts a transformed/filtered
+  ancestor's viewport offset **and its `scrollTop`/`scrollLeft`** generically (via
+  `fixedContainingBlock`) as a fallback, and re-places on scroll/resize while shown
+  (self-cleaning if the panel re-renders the trigger away). The tooltip text shows
+  the **concrete source first** (a per-claim quote + page ref, or the citation) and
+  the **tier-grade explainer underneath** it (`makeProvenancePill` builds
+  `extra\n\nbase`), since the source is what the reader wants up top and the grade is
+  the footnote. The pill tooltips are the
+  `info.provNone/provLlm/provSourced/provVerified` keys (NOT the About / dev-banner
+  "Source code" link, which points at the code repo, not a data source).
   - **Clicking/tapping an arrow** (or picking a connection in search) shows the
     **connection** view: the pathway label, its route (`from → to`, `↔` for a
     bidirectional/commissural link), kind + neurotransmitter, a one-line
