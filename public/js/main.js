@@ -643,6 +643,9 @@ function projectionGroups(established, meta, signMode) {
     return Object.keys(meta.signLabels || {})
       .map((sign) => ({
         key: `sign:${sign}`,
+        // The projection_groups.jsonl record id for this row's sourced data
+        // panel (mode:key), so a row click can open its detail tab.
+        dataKey: `sign:${sign}`,
         label: meta.signLabels[sign] || sign,
         color: meta.signColors[sign] || "#fff",
         arrows: established.filter((a) => a.projection.sign === sign),
@@ -656,6 +659,11 @@ function projectionGroups(established, meta, signMode) {
     const kindLabel = kind ? (meta.kindLabels[kind] || kind) : "";
     return {
       key: `nt:${nt}`,
+      // The data panel is per-*kind* (the record key is `kind:<kind>`), so a row
+      // resolves its sourced record by kind even though the row itself is split
+      // per-neurotransmitter (kind <-> transmitter is 1:1 today; were a kind to
+      // carry two transmitters, both rows would open the same kind panel).
+      dataKey: kind ? `kind:${kind}` : null,
       label: kindLabel ? `${nt} (${kindLabel})` : nt,
       color: (group[0] && group[0].projection.color) || "#fff",
       arrows: group,
@@ -676,7 +684,7 @@ function projectionGroups(established, meta, signMode) {
  * @param {boolean} signColorMode  Colour arrows/legend by excit/inhib sign.
  * @returns {(isolated: Set<THREE.Mesh>|null, focusedArrows: Set<object>) => void}
  */
-function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode, onPickStructure) {
+function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode, onPickStructure, onFocusCircuit, onFocusProjectionGroup) {
   // Populate the two collapsible bodies, not the panels themselves, so the
   // always-visible toggle headers (in index.html) are left untouched. The action
   // buttons live in an actions container authored in the HTML per section (the
@@ -774,8 +782,14 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
       // connecting real regions rather than floating in a dimmed brain.
       const groupMeshes = [...new Set(g.arrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
       row.classList.add("clickable");
+      // The sourced data record for this row's grouping (kind / sign), so the
+      // click can open its detail panel + tab. Resolved by the row's dataKey.
+      const groupRecord = data.projectionGroupsByKey
+        && data.projectionGroupsByKey.get(g.dataKey);
       row.addEventListener("click", () => {
         if (activeProj === g.key) selection.clear();
+        else if (onFocusProjectionGroup && groupRecord) onFocusProjectionGroup(groupRecord);
+        // Fallback (no panel record): the old focus-only behaviour.
         else selection.setCircuit(groupMeshes, g.arrows);
       });
       projRows.push({ row, key: g.key, arrowSet: new Set(g.arrows) });
@@ -803,11 +817,12 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
       const entry = { row, id: circuit.id, meshes, meshSet, arrows: circuitArrows };
       row.addEventListener("click", () => {
         if (activeCircuitId === circuit.id) selection.clear();
+        else if (onFocusCircuit) onFocusCircuit(circuit);
         else {
-          // Isolate the circuit, then start the traveling pulses on it. Order
-          // matters: setCircuit fires the focus-change watcher (which stops any
-          // prior animation) before play() begins this one. The watcher stops
-          // these pulses again on the next focus change.
+          // Fallback (no panel callback): isolate the circuit + start its pulse,
+          // the old focus-only behaviour. Order matters: setCircuit fires the
+          // focus-change watcher (which stops any prior animation) before play()
+          // begins this one. The watcher stops these pulses on the next change.
           selection.setCircuit(meshes, circuitArrows);
           if (circuitAnim) circuitAnim.play(circuitArrows);
         }
@@ -1747,6 +1762,43 @@ function createInfoPanel(data) {
     body.appendChild(wrap);
   };
 
+  // One clickable <li> for a pathway that is a member of some grouping (a
+  // structure's connections, a circuit's loop, a projection group): a kind swatch,
+  // an optional direction glyph, the label text, the pathway's summary source pill,
+  // and a click that jumps to the connection via onConnectionPick. Shared so the
+  // row markup lives in one place (showStructure rows are relative to the
+  // structure; circuit / group rows show the full route).
+  const pathwayRow = (proj, glyph, labelText) => {
+    const li = el("li");
+    li.title = proj.label || "";
+    const swatch = el("span", "swatch line");
+    swatch.style.background = proj.color || "#fff";
+    li.appendChild(swatch);
+    if (glyph) li.appendChild(el("span", "conn-dir", glyph));
+    li.appendChild(el("span", "conn-label", labelText));
+    if (proj.sources && proj.sources.length) {
+      li.appendChild(makeProvenancePill(proj.provenance, citationsTip(proj.sources)));
+    }
+    li.addEventListener("click", () => onConnectionPick(proj));
+    return li;
+  };
+
+  // A titled "member pathways" list (the circuit + projection-group panels): one
+  // pathwayRow per projection, each showing its full from -> to route.
+  const appendPathwayList = (titleText, projs) => {
+    if (!projs.length) return;
+    const wrap = el("div", "info-connections");
+    wrap.appendChild(el("h3", null, `${titleText} (${projs.length})`));
+    const ul = el("ul");
+    for (const proj of projs) {
+      const glyph = proj.bidirectional ? "↔" : "→";
+      ul.appendChild(pathwayRow(
+        proj, null, `${nameOf(proj.from)} ${glyph} ${nameOf(proj.to)}`));
+    }
+    wrap.appendChild(ul);
+    body.appendChild(wrap);
+  };
+
   return {
     show(proj) {
       body.innerHTML = "";
@@ -1843,28 +1895,13 @@ function createInfoPanel(data) {
       const ul = el("ul");
       for (const proj of conns) {
         // Direction relative to *this* structure: → it projects out, ← it
-        // receives, ↔ reciprocal/commissural.
+        // receives, ↔ reciprocal/commissural. The row markup (swatch, label,
+        // summary source pill, click) is the shared pathwayRow; only the
+        // structure-relative glyph + other-endpoint label are computed here.
         const outgoing = proj.from === structure.id;
         const otherId = outgoing ? proj.to : proj.from;
         const glyph = proj.bidirectional ? "↔" : outgoing ? "→" : "←";
-
-        const li = el("li");
-        li.title = proj.label || "";
-        const swatch = el("span", "swatch line");
-        swatch.style.background = proj.color || "#fff";
-        li.appendChild(swatch);
-        li.appendChild(el("span", "conn-dir", glyph));
-        li.appendChild(el("span", "conn-label", nameOf(otherId)));
-        // Summary source pill for this pathway (strongest grade among its sources,
-        // citations in the tooltip): the same source the connection panel lists,
-        // surfaced here so a pathway's source shows on *both* endpoints' structure
-        // panels with no data duplication, like the binding pill on a drug/target.
-        if (proj.sources && proj.sources.length) {
-          li.appendChild(
-            makeProvenancePill(proj.provenance, citationsTip(proj.sources)));
-        }
-        li.addEventListener("click", () => onConnectionPick(proj));
-        ul.appendChild(li);
+        ul.appendChild(pathwayRow(proj, glyph, nameOf(otherId)));
       }
       wrap.appendChild(ul);
       body.appendChild(wrap);
@@ -2111,6 +2148,87 @@ function createInfoPanel(data) {
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
       // always refers to a specific datum rather than "the whole drug".
+    },
+
+    /**
+     * Populate the panel for a *circuit* (clicking a Circuits legend row / search):
+     * its name, a sourced description, the structures it loops through (deduped to
+     * bases, each clickable to jump to that region) and its member pathways (the
+     * projections with both endpoints in the loop, derived not stored), then its
+     * sources. Mirrors the structure panel's shape; the member-pathway + region
+     * rows reuse the shared pathwayRow / locationList so nothing is duplicated.
+     */
+    showCircuit(circuit) {
+      body.innerHTML = "";
+      body.appendChild(el("h2", "info-title", circuit.name));
+      body.appendChild(el("div", "info-group", t("circuit.heading")));
+      if (circuit.description) {
+        body.appendChild(el("p", "info-desc", circuit.description));
+      }
+
+      // Structures in the loop, deduped to bases (so the two hemispheres collapse
+      // to one row), each clickable to jump to the region via onStructurePick.
+      const seen = new Set();
+      const names = [];
+      const bases = [];
+      for (const id of circuit.structures) {
+        const base = id.replace(/_[RL]$/, "");
+        if (seen.has(base)) continue;
+        seen.add(base);
+        const s = data.byId.get(id);
+        names.push(s ? s.base_name : base);
+        bases.push(base);
+      }
+      if (bases.length) {
+        const where = el("div", "info-where");
+        where.appendChild(el("h3", null, t("circuit.structures")));
+        where.appendChild(locationList(names, bases));
+        body.appendChild(where);
+      }
+
+      // Member pathways: every projection with both endpoints inside the loop (the
+      // same rule the viewer uses to light a circuit's arrows), so the panel never
+      // duplicates the circuit -> arrows mapping.
+      const idSet = new Set(circuit.structures);
+      const members = data.projections.filter(
+        (p) => idSet.has(p.from) && idSet.has(p.to));
+      appendPathwayList(t("circuit.pathways"), members);
+
+      appendSources(circuit.sources);
+    },
+
+    /**
+     * Populate the panel for a *projection group* (clicking a Projections legend
+     * row, in either colour mode): its name, a heading saying whether it groups by
+     * transmitter or by sign, a sourced description (baked + live-refreshed from
+     * Wikipedia) with the reference link, then its member pathways (the projections
+     * whose kind / sign matches the group, derived not stored) and its sources.
+     */
+    showProjectionGroup(group) {
+      body.innerHTML = "";
+      body.appendChild(el("h2", "info-title", group.name));
+      body.appendChild(el(
+        "div", "info-group",
+        group.mode === "sign" ? t("group.signHeading") : t("group.kindHeading")));
+
+      // Description (LLM-authored) + the Wikipedia reference below it, then the live
+      // lead refresh (upgrades the paragraph to the current WP lead when reachable),
+      // via the same shared appendReference every panel uses.
+      appendReference({
+        url: group.wikipedia, provenance: group.wikipedia_provenance,
+        description: group.description,
+        descriptionProvenance: group.classification_provenance,
+      });
+
+      // Member pathways: the projections this group stands for. In "kind" mode that
+      // is every projection of the kind; in "sign" mode every projection folding to
+      // the sign. Same derivation the legend uses to colour the arrows, so the panel
+      // list always matches what is lit on screen.
+      const members = data.projections.filter((p) =>
+        group.mode === "sign" ? p.sign === group.key : p.kind === group.key);
+      appendPathwayList(t("group.pathways"), members);
+
+      appendSources(group.sources);
     },
 
     /** Register the handler run when a structure-panel connection row is clicked. */
@@ -3971,13 +4089,52 @@ async function main() {
       a.setColor(signColorMode ? a.projection.signColor : a.projection.color);
     }
   };
+  // Circuit + projection-group focus, the same shape as focusDrug/focusTarget: a
+  // legend row click (toggle handled in buildLegend off its reflect-derived active
+  // state) delegates the *isolate + panel + tab* to these, and the tab's reopen
+  // thunk re-runs the same function. A circuit plays the traveling pulse (the
+  // circuitAnim watcher stops it on the next focus change); a projection group is
+  // a static pinned-arrow focus (no pulse), matching the prior behaviour. Both
+  // recompute their meshes/arrows from the data so the reopen thunk is durable.
+  const circuitMeshesOf = (circuit) =>
+    circuit.structures.map((id) => meshById.get(id)).filter(Boolean);
+  const arrowsAmong = (meshSet) =>
+    arrows.filter((a) => meshSet.has(a.fromMesh) && meshSet.has(a.toMesh));
+  const focusCircuit = (circuit, { frame = false } = {}) => {
+    const cMeshes = circuitMeshesOf(circuit);
+    const cArrows = arrowsAmong(new Set(cMeshes));
+    selection.setCircuit(cMeshes, cArrows);
+    circuitAnim.play(cArrows);
+    info.showCircuit(circuit);
+    if (frame && cMeshes.length) focus.focusMeshes(cMeshes);
+    openDetailTab(`circuit:${circuit.id}`, circuit.name, () => focusCircuit(circuit));
+  };
+  // The (established) arrows this projection group stands for: by sign in sign
+  // mode, by kind otherwise (the data record is per kind/sign). Tentative arrows
+  // are excluded, matching the established-only legend rows.
+  const groupArrowsOf = (group) => arrows.filter((a) =>
+    !a.tentative
+    && (group.mode === "sign" ? a.projection.sign === group.key
+                              : a.projection.kind === group.key));
+  const focusProjectionGroup = (group, { frame = false } = {}) => {
+    const gArrows = groupArrowsOf(group);
+    const gMeshes = [...new Set(gArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
+    selection.setCircuit(gMeshes, gArrows); // pin the arrows, no pulse
+    info.showProjectionGroup(group);
+    if (frame && gMeshes.length) focus.focusMeshes(gMeshes);
+    openDetailTab(`group:${group.id}`, group.name, () => focusProjectionGroup(group));
+  };
+
   const rebuildLegend = () => {
     reflectLegend = buildLegend(
       data, meshById, arrows, selection, projVis, circuitAnim, signColorMode,
       // Opening the picked structure's tab (no reframe: keep the legend pick's
       // current camera, just add the detail tab + halo, like the isolate already
       // does in the viewer).
-      (mesh) => selectStructure(mesh));
+      (mesh) => selectStructure(mesh),
+      // Circuit / projection-group row picks: isolate + open the sourced detail
+      // panel + tab, exactly like a drug / target row.
+      focusCircuit, focusProjectionGroup);
     selection.refresh(); // re-grey the fresh rows for the current isolate state
   };
   rebuildLegend();

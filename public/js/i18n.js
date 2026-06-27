@@ -132,6 +132,13 @@
       "info.noConnections": "No mapped connections yet.",
       "info.connections": "Connections",
 
+      "circuit.heading": "Functional circuit",
+      "circuit.structures": "Structures in this loop",
+      "circuit.pathways": "Pathways in this loop",
+      "group.kindHeading": "Pathways by neurotransmitter",
+      "group.signHeading": "Pathways by effect",
+      "group.pathways": "Pathways",
+
       "receptor.system": "System",
       "receptor.neurotransmitter": "Neurotransmitter",
       "receptor.type": "Type",
@@ -321,6 +328,13 @@
       "info.sourceRef": "{corpus}, p. {page}",
       "info.noConnections": "Aucune connexion répertoriée pour l’instant.",
       "info.connections": "Connexions",
+
+      "circuit.heading": "Circuit fonctionnel",
+      "circuit.structures": "Structures de cette boucle",
+      "circuit.pathways": "Voies de cette boucle",
+      "group.kindHeading": "Voies par neurotransmetteur",
+      "group.signHeading": "Voies par effet",
+      "group.pathways": "Voies",
 
       "receptor.system": "Système",
       "receptor.neurotransmitter": "Neurotransmetteur",

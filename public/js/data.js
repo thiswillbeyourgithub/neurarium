@@ -74,9 +74,16 @@ function localize(field) {
  *   colour mode; its `label`/`description`/`neurotransmitter` are localized to
  *   plain strings.
  * @property {object[]} circuits    Named circuit records (from circuits.jsonl):
- *   `{id, name, structures:[structure ids]}` (localized `name`). The arrows
- *   belonging to a circuit are derived in the viewer (both endpoints among
- *   `structures`).
+ *   `{id, name, structures:[structure ids]}` (localized `name`), plus an optional
+ *   localized `description` + `sources`/`provenance`. The arrows belonging to a
+ *   circuit are derived in the viewer (both endpoints among `structures`).
+ * @property {object[]} projectionGroups  Projection-group records (from
+ *   projection_groups.jsonl): one per legend pathway row, in both colour modes
+ *   (`mode:"kind"|"sign"`, `key` the kind/sign). Each has a localized `name` +
+ *   `description`, `sources`/`provenance`, optional `wikipedia`. Member pathways
+ *   are derived in the viewer (the projections whose kind/sign matches `key`).
+ * @property {Map<string,object>} projectionGroupsByKey  `${mode}:${key}` -> the
+ *   projection-group record, so a legend row resolves its data by its grouping.
  * @property {object[]} receptors  Neurotransmitter receptor records (from
  *   receptors.jsonl). Each is augmented with localized `neurotransmitter` /
  *   `description`, a resolved `familyLabel` / `classLabel` / `signLabel` /
@@ -126,12 +133,14 @@ function localize(field) {
  * @returns {Promise<BrainData>}
  */
 export async function loadBrainData(dataDir = "data") {
-  const [metaRecord, structures, projections, circuits, receptors, drugs] =
+  const [metaRecord, structures, projections, circuits, projectionGroups,
+         receptors, drugs] =
     await Promise.all([
       fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
       fetchJsonl(`${dataDir}/structures.jsonl`),
       fetchJsonl(`${dataDir}/projections.jsonl`),
       fetchJsonl(`${dataDir}/circuits.jsonl`),
+      fetchJsonl(`${dataDir}/projection_groups.jsonl`),
       fetchJsonl(`${dataDir}/receptors.jsonl`),
       fetchJsonl(`${dataDir}/drugs.jsonl`),
     ]);
@@ -229,6 +238,24 @@ export async function loadBrainData(dataDir = "data") {
   }
   for (const c of circuits) {
     c.name = localize(c.name);
+    // A circuit now carries an optional sourced description (its detail panel).
+    c.description = c.description ? localize(c.description) : "";
+    c.provenance = strongestGrade(c.sources);
+  }
+
+  // Projection groups: the legend's per-pathway rows promoted to a sourced data
+  // structure (one record per group, in both colour modes; see
+  // generate_data.py PROJECTION_GROUPS). Localize the display strings and resolve
+  // the source grade, exactly like a projection / circuit. The member pathways are
+  // derived in the viewer (the projections whose kind/sign matches), so they are
+  // not stored here. Indexed by `${mode}:${key}` so a legend row can find its
+  // record by the grouping it stands for.
+  const projectionGroupsByKey = new Map();
+  for (const g of projectionGroups) {
+    g.name = localize(g.name);
+    g.description = g.description ? localize(g.description) : "";
+    g.provenance = strongestGrade(g.sources);
+    projectionGroupsByKey.set(`${g.mode}:${g.key}`, g);
   }
 
   // Fetch all shape files in parallel and attach them to their structure.
@@ -448,6 +475,8 @@ export async function loadBrainData(dataDir = "data") {
     structures,
     projections,
     circuits,
+    projectionGroups,
+    projectionGroupsByKey,
     receptors,
     targets,
     drugs,
