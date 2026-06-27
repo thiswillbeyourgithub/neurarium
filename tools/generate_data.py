@@ -1250,22 +1250,31 @@ PAIRED: list[dict[str, Any]] = [
     # --- Limbic / diencephalon ---
     dict(base="hippocampus", name="Hippocampus", group="limbic",
          pos=(1.3, -0.7, -0.2), color="#b3823e",
-         # Curved allocortical structure in the floor of the temporal lobe; runs
-         # antero-posteriorly with the tail curling up toward the splenium, so a
-         # tapered tube (curve) reads as the seahorse it is, not a blob. Spine is
-         # parasagittal (local x~0) so the _L member mirrors correctly. Sits
-         # medially inside the temporal lobe at explode 0.
+         # SDF (self-authored atlas, see geometry_refinements/). Curved
+         # allocortical "seahorse" in the floor of the temporal lobe: a tapered
+         # tube swept antero-posteriorly with the tail curling up toward the
+         # splenium, plus a bulbous, slightly hooked head (the pes hippocampi)
+         # smooth-unioned at the anterior tip (the curve builder cannot do that
+         # merge). Spine is parasagittal (local x~0) so the _L member mirrors
+         # correctly. Authored in local space; `pos` seats it. Provenance: llm.
          shape=dict(
-             type="curve",
-             points=[
-                 (0.0, -0.15, 1.10),   # head: anterior + inferior (pes)
-                 (0.0, -0.05, 0.50),
-                 (0.0, 0.05, -0.10),   # body
-                 (0.0, 0.20, -0.70),
-                 (0.0, 0.45, -1.15),   # tail: posterior, curling up
-             ],
-             profile=[0.34, 0.32, 0.28, 0.22, 0.13],
-             seed=51, noise=0.08, radial_segments=12, tubular_segments=80,
+             type="sdf", resolution=96,
+             root=dict(op="displace", amp=0.012, freq=4.5, seed=51, nodes=[
+                 dict(op="smoothUnion", k=0.14, nodes=[
+                     dict(prim="tube",
+                          points=[
+                              [0.0, -0.15, 1.05],   # head: anterior + inferior (pes)
+                              [0.0, -0.05, 0.50],
+                              [0.0, 0.05, -0.10],   # body
+                              [0.0, 0.22, -0.70],
+                              [0.0, 0.48, -1.15],   # tail: posterior, curling up
+                          ],
+                          profile=[0.26, 0.27, 0.25, 0.19, 0.10]),
+                     # Bulbous hooked head: rounds out the pes and hooks it down +
+                     # anterior past the tube tip.
+                     dict(prim="sphere", center=[0.0, -0.22, 1.02], radius=0.28),
+                 ]),
+             ]),
          )),
     dict(base="amygdala", name="Amygdala", group="limbic", fr_gender="f",
          pos=(1.45, -0.35, 0.95), color="#9b7bb0",

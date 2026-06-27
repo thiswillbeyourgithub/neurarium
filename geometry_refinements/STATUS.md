@@ -88,7 +88,10 @@ tube), **claustrum** (thin sheet).
 
 ### limbic
 
-- pending - hippocampus (paired)  [starter trio]
+- done - hippocampus (paired)  [starter trio] - SDF: tapered swept tube along the
+  seahorse spine + a smooth-unioned bulbous hooked head (pes) + faint displace.
+  Demonstrates the SDF curve/smoothUnion path. Could take a touch more body arch
+  later. Provenance llm.
 - pending - amygdala (paired)
 - pending - cingulate (paired)
 - pending - fornix (paired)
