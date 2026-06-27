@@ -20,7 +20,7 @@ import { createLabels } from "./labels.js";
 import { createCircuitAnimation } from "./circuit-anim.js";
 import { createReceptorMarkers } from "./receptor-markers.js";
 import { createDrugAnimation } from "./drug-anim.js";
-import { fetchDrugLead } from "./wiki.js";
+import { fetchWikiLead } from "./wiki.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -1555,6 +1555,37 @@ function createInfoPanel(data) {
       wrap.appendChild(makeProvenancePill(null)); // no reference -> NOSOURCE pill
     }
     body.appendChild(wrap);
+    return wrap; // returned so it can anchor a live Wikipedia description below it
+  };
+
+  // Live Wikipedia description, shared by every panel carrying a `wikipedia` link
+  // (drug / receptor / structure / target). Best-effort: it fetches the current
+  // lead for the viewer's locale (js/wiki.js, English fallback) and shows it as a
+  // "sourced" info-desc paragraph. `paragraph` is a baked description <p> to swap
+  // in place (drug/receptor); when there is none a fresh <p> is inserted after
+  // `anchor` (the wiki link wrap) only once the live text arrives, so a structure /
+  // target with no baked description gains one only on success. A failed / blocked /
+  // absent fetch is a no-op, so the panel is unchanged offline. `bakedText` +
+  // `bakedSourced` let an already-sourced identical description skip the rewrite.
+  const liveWikiDescription = (url, {
+    paragraph = null, bakedText = "", bakedSourced = false, anchor = null,
+  } = {}) => {
+    if (typeof url !== "string" || !/^https?:\/\//i.test(url)) return;
+    fetchWikiLead(url, window.__I18N__.lang).then((live) => {
+      if (!live || !live.text) return;
+      let p = paragraph;
+      if (p) {
+        if (!p.isConnected) return; // panel re-rendered to something else
+        if (live.text === bakedText && bakedSourced) return; // nothing would change
+      } else {
+        if (!anchor || !anchor.isConnected) return; // panel gone / replaced
+        p = el("p", "info-desc");
+        anchor.after(p);
+      }
+      p.textContent = live.text;
+      p.appendChild(document.createTextNode(" "));
+      p.appendChild(makeProvenancePill("sourced", t("info.descFromWikipediaLive")));
+    });
   };
 
   // Shared by the connection + drug views: the source list. Each citation is a
@@ -1692,8 +1723,11 @@ function createInfoPanel(data) {
         data.meta.groupLabels[structure.group] || structure.group,
       ));
 
-      // External reference link (Wikipedia), when the data carries one.
-      appendWiki(structure.wikipedia, structure.wikipedia_provenance);
+      // External reference link (Wikipedia), when the data carries one. A live
+      // lead summary from that article is shown below it when the fetch succeeds
+      // (structures carry no baked description, so this is the only one).
+      const stWiki = appendWiki(structure.wikipedia, structure.wikipedia_provenance);
+      liveWikiDescription(structure.wikipedia, { anchor: stWiki });
 
       // Source grade backing this region's anatomy (existence / group / position),
       // so even a structure shows a graded source, not "no source". Added before the
@@ -1759,10 +1793,14 @@ function createInfoPanel(data) {
       body.appendChild(el("h2", "info-title", receptor.name));
       body.appendChild(el("div", "info-group", receptor.familyLabel));
 
-      appendWiki(receptor.wikipedia, receptor.wikipedia_provenance);
+      const recWiki = appendWiki(receptor.wikipedia, receptor.wikipedia_provenance);
 
       if (receptor.description) {
-        body.appendChild(el("p", "info-desc", receptor.description));
+        const p = el("p", "info-desc", receptor.description);
+        body.appendChild(p);
+        liveWikiDescription(receptor.wikipedia, { paragraph: p, bakedText: receptor.description });
+      } else {
+        liveWikiDescription(receptor.wikipedia, { anchor: recWiki });
       }
 
       // Classification facts as label / value rows; the "effect" value carries the
@@ -1809,7 +1847,9 @@ function createInfoPanel(data) {
       body.appendChild(el(
         "div", "info-group", target.systemLabel || t("targets.otherSystem")));
 
-      appendWiki(target.wikipedia, target.wikipediaProvenance);
+      const tgtWiki = appendWiki(target.wikipedia, target.wikipediaProvenance);
+      // Live lead from that article when present (targets carry no baked description).
+      liveWikiDescription(target.wikipedia, { anchor: tgtWiki });
 
       const facts = el("div", "info-facts");
       addFactRow(facts, t("receptor.type"), target.typeLabel, target.swatchColor);
@@ -1867,27 +1907,20 @@ function createInfoPanel(data) {
         // Provenance pill beside the description: "sourced" means it is the lead
         // section of the drug's Wikipedia article (CC BY-SA), "llm" an LLM-written
         // mechanism synthesis.
-        const descPill = (level, extra) => {
-          p.appendChild(document.createTextNode(" "));
-          p.appendChild(makeProvenancePill(level, extra));
-        };
         if (drug.descriptionProvenance) {
           const extra = drug.descriptionProvenance === "sourced"
             ? t("info.descFromWikipedia") : "";
-          descPill(drug.descriptionProvenance, extra);
+          p.appendChild(document.createTextNode(" "));
+          p.appendChild(makeProvenancePill(drug.descriptionProvenance, extra));
         }
         body.appendChild(p);
-
-        // Live-refresh from Wikipedia (js/wiki.js): the baked description above is
-        // the immediate paint + offline fallback; when the current article's lead
-        // arrives (and this panel still shows this drug) swap it in and mark it
-        // sourced. A failed/absent fetch resolves to null and the baked text stands.
-        fetchDrugLead(drug, window.__I18N__.lang).then((live) => {
-          if (!live || !live.text || !p.isConnected) return;
-          // Nothing would visibly change (same text, already a sourced pill): skip.
-          if (live.text === drug.description && drug.descriptionProvenance === "sourced") return;
-          p.textContent = live.text;
-          descPill("sourced", t("info.descFromWikipediaLive"));
+        // The baked text above is the immediate paint + offline fallback; live-
+        // refresh it from the current Wikipedia lead when it arrives (see
+        // liveWikiDescription / js/wiki.js).
+        liveWikiDescription(drug.wikipedia, {
+          paragraph: p,
+          bakedText: drug.description,
+          bakedSourced: drug.descriptionProvenance === "sourced",
         });
       }
 

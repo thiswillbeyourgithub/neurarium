@@ -387,22 +387,27 @@ js/surface-wash.js    Shared "wash of light" primitive (buildWashShell +
                       the bead's impact point in the pathway's colour) and
                       js/drug-anim.js (the per-region effect-coloured glow). No dep
                       beyond three.js.
-js/wiki.js            Runtime fetch of a drug's Wikipedia lead summary
-                      (fetchDrugLead), so the drug panel's description reflects the
-                      *current* article instead of only the baked-in copy. The
-                      viewer's locale wins; when the drug's stored (English)
-                      `wikipedia` article is in another language the locale article
-                      is resolved via the source wiki's langlinks, falling back to
-                      the English lead when the locale has no article. Anonymous
-                      cross-origin GETs to the Wikimedia REST (page/summary, the same
-                      endpoint tools/fetch_descriptions.py uses) + action (langlinks)
-                      APIs; results cached per drug+language (in-memory + session).
-                      Best-effort: any failure (offline / rate-limited / CSP-blocked /
-                      missing) resolves to null and the baked description stands, so
-                      the panel never breaks. showDrug renders the baked text first
-                      then swaps the live lead in (and marks it `sourced`) when it
-                      arrives. Needs the connect-src https://*.wikipedia.org CSP
-                      allowance (docker/Caddyfile). See "Drugs". No dep beyond fetch.
+js/wiki.js            Runtime fetch of a Wikipedia article's lead summary
+                      (fetchWikiLead(url, lang)), so an info panel's description
+                      reflects the *current* article instead of only a baked-in copy.
+                      Used by every panel carrying a `wikipedia` link (drug, receptor,
+                      structure, non-receptor target) via the shared
+                      liveWikiDescription helper in js/main.js. The viewer's locale
+                      wins; when the stored (English) article is in another language
+                      the locale article is resolved via the source wiki's langlinks,
+                      falling back to the English lead when the locale has no article.
+                      Anonymous cross-origin GETs to the Wikimedia REST (page/summary,
+                      the same endpoint tools/fetch_descriptions.py uses) + action
+                      (langlinks) APIs; results cached per url+language (in-memory +
+                      session). Best-effort: any failure (offline / rate-limited /
+                      CSP-blocked / missing) resolves to null and the baked
+                      description (or, for a structure/target, no description) stands,
+                      so the panel never breaks. A panel with a baked description
+                      paints it first then swaps the live lead in (marking it
+                      `sourced`); a panel with none gains one only when the fetch
+                      succeeds. Needs the connect-src https://*.wikipedia.org CSP
+                      allowance (docker/Caddyfile). See "Source provenance". No dep
+                      beyond fetch.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
@@ -910,11 +915,12 @@ the gated eruda debug console are vendored same-origin (`public/vendor/three`,
   configured. `docker/entrypoint.sh` derives `ANALYTICS_ORIGIN`
   (`scheme://host[:port]`) from `ANALYTICS_URL` and the Caddyfile interpolates it
   as `{$ANALYTICS_ORIGIN:}`; empty (analytics off) adds no extra origin.
-- `https://*.wikipedia.org` in **`connect-src`**: the drug panel fetches the
-  current Wikipedia lead at runtime to refresh a drug's description (`js/wiki.js`,
+- `https://*.wikipedia.org` in **`connect-src`**: an info panel fetches the
+  current Wikipedia lead at runtime to refresh its description (`js/wiki.js`,
+  for any drug / receptor / structure / target carrying a `wikipedia` link;
   anonymous CORS `fetch` to the Wikimedia REST + action APIs). This is the one
-  third-party *data* origin (no third-party *script* is loaded); a baked copy in
-  `drugs.jsonl` is the offline fallback, so a CSP-blocked or failed fetch degrades
+  third-party *data* origin (no third-party *script* is loaded); a baked copy (or
+  no description) is the offline fallback, so a CSP-blocked or failed fetch degrades
   silently. (`tools/serve.py` sends no CSP, so dev is unaffected.)
 
 `script-src`/`style-src` include `'unsafe-inline'` because this is a no-build
@@ -1301,14 +1307,16 @@ as the WIP banner (`js/error-banner.js`):
   **focuses** it: it dims the whole brain to just the regions it sits in and
   scatters glowing **dots** over those regions' surfaces (`createReceptorMarkers`,
   see "Receptors" below), and opens the **info-panel view**: a receptor opens
-  `showReceptor` (the system, a Wikipedia link, the description, the classification
-  facts ending in a **"Source" row** whose provenance pill grades those claims, see
-  "Source provenance", and the region list, or "Throughout the brain" for a
-  ubiquitous receptor);
+  `showReceptor` (the system, a Wikipedia link, the description (the baked one is
+  live-refreshed from the current Wikipedia lead, see "Source provenance"), the
+  classification facts ending in a **"Source" row** whose provenance pill grades
+  those claims, see "Source provenance", and the region list, or "Throughout the
+  brain" for a ubiquitous receptor);
   a non-receptor target opens the lighter `showTarget` (its system, a Wikipedia
-  link or a NOSOURCE pill until one is gathered, the type + system facts ending in
-  the same **"Source" row** grading its type/system/region claims, and the
-  region list). Both panels then carry an **"Interacting drugs"** section under
+  link or a NOSOURCE pill until one is gathered (when the link resolves, the live
+  Wikipedia lead is shown as a description, see "Source provenance"), the type +
+  system facts ending in the same **"Source" row** grading its type/system/region
+  claims, and the region list). Both panels then carry an **"Interacting drugs"** section under
   "Found in": the drugs that act on this target (so you can go from a target to
   every drug touching it), **grouped by primary drug category** (antipsychotic,
   MAOI, ...) in the meta order, each row carrying the binding's net-effect **glyph**
@@ -1579,9 +1587,11 @@ as the WIP banner (`js/error-banner.js`):
     result) shows the **structure** view (`showStructure`): its name, its group
     heading (from `data.meta.groupLabels`), a **Reference row** (a Wikipedia link
     for an http(s) `wikipedia` url, with its provenance pill, else the orange
-    `NOSOURCE` pill, see "Source provenance"), a **"Source" row** grading the
-    region's anatomy (`classification_provenance`, so even a structure shows a graded
-    source), and the list of pathways touching it.
+    `NOSOURCE` pill, see "Source provenance"), then (when that link resolves) the
+    **live Wikipedia lead** as a `sourced` description paragraph (structures carry no
+    baked description, so this is fetch-only; see "Source provenance"), a **"Source"
+    row** grading the region's anatomy (`classification_provenance`, so even a
+    structure shows a graded source), and the list of pathways touching it.
     Each connection row
     shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
     receives, `↔` reciprocal), the other endpoint **and the pathway's summary
@@ -2033,16 +2043,21 @@ their LLM mechanism one-liner at `llm`. Attribution is the panel's Wikipedia
 reference link + the About note (see "Drugs" / "Molecule images"); the exact
 revisions are recorded in `tools/descriptions_sources.json`.
 
-The description is **also refreshed live at runtime**: when the drug panel opens,
-`js/wiki.js` `fetchDrugLead` fetches the *current* Wikipedia lead for the viewer's
-locale (falling back to the English lead when the locale has no article) and, when
-it arrives, swaps it into the panel and marks it `sourced` (the live grade is the
-same tier as the baked WP lead, since it is the same source unverified against a
-quote gate). The baked `drugs.jsonl` description is the immediate first paint +
-offline fallback, so the panel works the same when the fetch is blocked or fails.
-This is why an `llm`-graded drug (no fr article, so `fetch_descriptions.py` left it
-LLM) can still show a `sourced` Wikipedia lead at runtime in either language. See
-"Drugs" and the `connect-src https://*.wikipedia.org` CSP allowance.
+The description is **also refreshed live at runtime**, and not only for drugs:
+**every info panel carrying a `wikipedia` link** (a drug, a receptor, a structure,
+a non-receptor target) does it, through the shared `liveWikiDescription` helper in
+`js/main.js` over `js/wiki.js` `fetchWikiLead(url, lang)`. When the panel opens it
+fetches the *current* Wikipedia lead for the viewer's locale (falling back to the
+English lead when the locale has no article) and, when it arrives, shows it as a
+`sourced` description paragraph (the live grade is the same tier as the baked WP
+lead, since it is the same source unverified against a quote gate). A panel with a
+baked description (drug / receptor) paints it first as the immediate + offline
+fallback then swaps the live lead in; a panel with **no** baked description
+(structure / target) simply *gains* one when the fetch succeeds (and shows none
+when it fails). So the panel works the same when the fetch is blocked or fails, and
+an `llm`-graded drug (no fr article, so `fetch_descriptions.py` left it LLM) can
+still show a `sourced` Wikipedia lead at runtime in either language. See the
+`connect-src https://*.wikipedia.org` CSP allowance.
 
 **Where the presentation lives.** `js/main.js` `makeProvenancePill(level)` maps the
 grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the

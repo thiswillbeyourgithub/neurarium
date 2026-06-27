@@ -1,17 +1,20 @@
-// Runtime fetch of a drug's Wikipedia lead summary, so the description shown in
-// the drug panel reflects the *current* article instead of only a baked-in copy.
+// Runtime fetch of a Wikipedia article's lead summary, so the description shown in
+// an info panel (a drug, a receptor, a structure, a non-receptor target: anything
+// carrying a `wikipedia` link) reflects the *current* article instead of only a
+// baked-in copy.
 //
 // Why runtime (vs the author-side tools/fetch_descriptions.py, which still exists):
-// the panel text stays up to date with Wikipedia with no re-run/commit. The baked
-// `description` in drugs.jsonl is kept as the immediate first paint + offline
-// fallback; this just overrides it best-effort when the live lead arrives. Any
-// failure (offline, rate-limited, CSP-blocked, missing article) resolves to null
-// and the baked text stands, so the panel never breaks.
+// the panel text stays up to date with Wikipedia with no re-run/commit. A baked
+// `description` (drugs.jsonl / receptors) is kept as the immediate first paint +
+// offline fallback; this just overrides it best-effort when the live lead arrives
+// (and a structure/target with no baked description gains one only when the fetch
+// succeeds). Any failure (offline, rate-limited, CSP-blocked, missing article)
+// resolves to null and nothing changes, so the panel never breaks.
 //
-// Language: the viewer's locale wins. When the drug's stored `wikipedia` article
-// is in another language (it is authored as the English one), the locale article
-// is resolved via the source wiki's langlinks; if the locale has no article the
-// drug's own-language (English) lead is used as the fallback.
+// Language: the viewer's locale wins. When the stored `wikipedia` article is in
+// another language (links are authored as the English one), the locale article is
+// resolved via the source wiki's langlinks; if the locale has no article the
+// article's own-language (English) lead is used as the fallback.
 //
 // Requests are anonymous cross-origin GETs to the Wikimedia REST + action APIs
 // (CORS-enabled, `credentials: omit`, no custom headers, so no preflight). The
@@ -19,7 +22,7 @@
 // docker/Caddyfile). Results are cached per drug+language (in-memory + a session
 // store) so re-opening a drug never refetches.
 
-// `${id}:${lang}` -> { text, lang } | null. A null (negative) result is cached
+// `${url}::${lang}` -> { text, lang } | null. A null (negative) result is cached
 // in-memory only, so a page reload retries a transient failure; positives are also
 // persisted to sessionStorage so a session never refetches the same lead.
 const memCache = new Map();
@@ -93,12 +96,13 @@ async function langTitle(srcLang, title, target) {
   return null;
 }
 
-// Fetch the lead summary for `drug` in `lang`, falling back to the article's own
-// language (English) when the locale article is missing. Resolves to { text, lang }
-// or null; never rejects (the caller keeps the baked description on null).
-export async function fetchDrugLead(drug, lang) {
-  if (!drug || !drug.wikipedia) return null;
-  const key = `${drug.id}:${lang}`;
+// Fetch the lead summary for the Wikipedia article at `wikipediaUrl` in `lang`,
+// falling back to the article's own language (English) when the locale article is
+// missing. Resolves to { text, lang } or null; never rejects (the caller keeps the
+// baked description / no description on null).
+export async function fetchWikiLead(wikipediaUrl, lang) {
+  if (!wikipediaUrl) return null;
+  const key = `${wikipediaUrl}::${lang}`;
   if (memCache.has(key)) return memCache.get(key);
   const cached = ssGet(key);
   if (cached !== undefined) {
@@ -108,7 +112,7 @@ export async function fetchDrugLead(drug, lang) {
 
   let result = null;
   try {
-    const art = parseArticle(drug.wikipedia);
+    const art = parseArticle(wikipediaUrl);
     if (art) {
       if (lang === art.lang) {
         const text = await summaryExtract(art.lang, art.title);
