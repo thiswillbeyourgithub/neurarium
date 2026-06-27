@@ -1,124 +1,100 @@
 # neurarium
 
-> [!WARNING]
-> **Work in progress. It probably contains many mistakes for now.** neurarium is under active
-> development and far from complete. None of the anatomy has been reviewed or
-> sourced yet, so the regions, shapes, projections, and descriptions very likely
-> contain hallucinations and outright errors. The drug data is machine-extracted
-> from a single source (Stahl's Prescriber's Guide) and likewise unreviewed, so
-> the classes, targets, and bindings may be wrong or incomplete. Do not rely on
-> any of it, and never use it for medical decisions.
+**An interactive 3D atlas that gathers what we know about the human brain (its
+regions, the pathways between them, the receptors they carry, and the drugs that
+act on them) and reorganizes it into one explorable map, where every fact is
+graded by how trustworthy it is.**
 
-neurarium is an interactive 3D brain visualizer that runs in the browser. It
-shows brain regions (cortical lobes, basal ganglia / deep nuclei, diencephalon,
-limbic, hindbrain) as
-3D shapes and draws arrows for neuron projections between them. It also carries a
-dataset of neurotransmitter **receptors** (which regions express each) and a
-dataset of psychiatric **drugs** (what each does to the brain, animated).
+> [!WARNING]
+> **Work in progress. It probably contains many mistakes for now.** neurarium is
+> under active development and far from complete. None of the anatomy has been
+> reviewed or sourced yet, so the regions, shapes, projections, and descriptions
+> very likely contain hallucinations and outright errors. The drug data is
+> machine-extracted from a single source (Stahl's Prescriber's Guide) and likewise
+> unreviewed, so the classes, targets, and bindings may be wrong or incomplete. Do
+> not rely on any of it, and never use it for medical decisions.
 
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 ![neurarium screenshot](docs/screenshot.png)
 
+neurarium is not a textbook and not a raw database. It takes facts about the brain
+that normally live scattered across atlases, pathway diagrams, receptor tables, and
+drug monographs, and lays them onto a single 3D model you can rotate, pull apart,
+search, and click through. The point is to make the *relationships* between those
+facts (which region projects where, which receptor sits in which structure, what a
+given drug does and to what) something you can see at a glance rather than
+reconstruct in your head. And because the dataset is machine-assembled, every claim
+it shows carries a [source grade](#every-fact-is-graded) so you always know how much
+to trust it.
+
 ## Contents
 
-- [Features](#features)
-  - [Visualization](#visualization)
-  - [Exploring the anatomy](#exploring-the-anatomy)
-  - [Controls](#controls)
-  - [Data & sourcing](#data--sourcing)
-  - [Deep links & screenshots](#deep-links--screenshots)
+- [What you can explore](#what-you-can-explore)
+- [Every fact is graded](#every-fact-is-graded)
+- [Built to be reused](#built-to-be-reused)
 - [Roadmap](#roadmap)
 - [Feedback](#feedback)
 - [Running](#running)
-- [Project layout](#project-layout)
 - [Stack](#stack)
 - [Credits](#credits)
 - [License](#license)
 
-## Features
+## What you can explore
 
-### Visualization
+**The brain, as one model.** Cortical lobes, basal ganglia and deep nuclei,
+diencephalon, limbic structures, and the hindbrain, all as procedurally shaped 3D
+meshes that lock together into a whole brain and blow apart on a slider to reveal
+what is hidden inside. Rotate it, make it transparent, peel away the near side to
+see the deep nuclei, or isolate any one structure to study it alone.
 
-- Brain regions (cortical lobes, basal ganglia / deep nuclei, diencephalon,
-  limbic, hindbrain) as procedurally shaped 3D meshes: gyrified cortex, smooth
-  deep nuclei, foliated cerebellum, and swept tubes for the caudate, the brainstem
-  levels (midbrain, pons, medulla), hippocampus, cingulate, and fornix.
-- At rest the regions lock together into a whole brain; an intro animation
-  assembles them from an exploded state on load.
-- Curved arrows for directed neuron projections, colored by type (excitatory,
-  inhibitory, dopaminergic, cholinergic, neuroendocrine), with a cone at the
-  target end (both ends for reciprocal / commissural pathways).
+**The wiring between regions.** Directed neuron projections are drawn as curved
+arrows, colored by type (excitatory, inhibitory, dopaminergic, and so on) or
+recolored by their excitatory / inhibitory potential. Click any pathway for its
+route, neurotransmitter, and sources. Named **functional circuits** (the direct
+pathway, the Papez memory loop, ...) light up on demand and play a traveling pulse
+so you can watch a signal flow around the loop.
 
-### Exploring the anatomy
+**The receptors each region carries.** A browsable list of neurotransmitter
+receptors and other molecular targets (transporters, enzymes, ion channels). Focus
+one and the brain dims to just the structures that express it, scattered with
+glowing dots, alongside its mechanism class, its excitatory / inhibitory sign, and
+where it is found, plus every drug that acts on it.
 
-- **Click a region** to open an info panel with its name, group, a **Wikipedia
-  link**, and the list of pathways touching it; click a pathway row to jump to it.
-- **Click an arrow** to see that pathway's details: route, type, neurotransmitter,
-  a one-line description, and its **sources**.
-- **Search** (the magnifier) filters regions (by name), connections (by pathway
-  label), receptors (by name / neurotransmitter / system) and drugs (by name /
-  category / target), and frames whatever
-  you pick.
-- **Legend** isolates what you click: a region (both hemispheres), a whole
-  category, a named **functional circuit** (its pathways light up and a pulse
-  travels around the loop), or a single **neurotransmitter** (only those pathways
-  and their endpoints stay lit, everything else fades). A separate,
-  off-by-default **Hypothetical pathways** section reveals speculative / less-
-  certain connections, drawn as dotted arrows.
-- **Receptors** section: a focusable list of neurotransmitter receptors. Click one
-  to dim the brain to just the regions expressing it and scatter glowing dots over
-  them, with an info panel showing its system, mechanism class, excitatory /
-  inhibitory sign, synaptic site, and where it is found.
-- **Drugs** section: a filterable list of psychiatric drugs (from Stahl's
-  Prescriber's Guide). Click one to dim the brain to the regions it acts on and
-  animate effect-coloured dots (boost / block / modulate) over them, with an info
-  panel showing its molecular-structure diagram, class, nomenclature, the
-  molecular targets it binds and how, and the source.
-- **Hover / tap** a region to show its floating name; a **Show all names** button
-  labels everything at once, and a **Hide projections** button clears the arrows.
+**What drugs do to the brain.** A filterable list of psychiatric drugs (from
+Stahl's Prescriber's Guide). Focus one and the brain animates what it does:
+effect-colored dots (boost / block / modulate) pulse over the regions it touches,
+and beads flow along the transmitter systems it works through. The panel shows its
+molecular structure, class, nomenclature, the targets it binds and how, and the
+source behind each binding.
 
-### Controls
+**All of it is searchable and linkable.** Search across regions, pathways,
+receptors, and drugs at once; pivot from a drug to its whole class; jump from a
+target to every drug that hits it. The whole view is URL-addressable, so any state
+(a framed structure, an exploded view, a specific angle) is a shareable deep link.
 
-- **Auto-rotate** the view (on by default; stops as soon as you pick something).
-- **Separate** slider spreads the regions apart to reveal the deep structures
-  (**Shift + scroll** drives it too; plain scroll zooms).
-- **Transparency** slider to see through the outer regions.
-- Rotate with one finger / left-drag, pinch to zoom, two-finger drag to pan;
-  double-click a region to frame it, or empty space to recenter.
+## Every fact is graded
 
-### Data & sourcing
+The dataset is large and machine-assembled, so the honest question for any single
+claim is *how do we know this?* neurarium answers it inline: every source and
+reference shown in a detail panel carries a small colored **provenance pill**
+grading how trustworthy that attribution is. Hover (or tap) any pill for the full
+explanation. The grades, from weakest to strongest:
 
-- The anatomy is plain **structured data** under `public/data/`, split by record
-  type: `structures.jsonl`, `projections.jsonl`, `circuits.jsonl`,
-  `receptors.jsonl`, `drugs.jsonl` (one JSON object per line) plus a
-  self-describing `meta.json`
-  carrying the colour and legend-heading maps, and one geometry file per shape
-  under `public/data/shapes/`. It is generated from a single source
-  (`tools/generate_data.py`, with the drug list in `tools/drugs_data.json`) and
-  easy to consume from another engine.
-- Every projection carries a **neurotransmitter** and a list of **sources**
-  (citations; a verified link renders as a hyperlink). Every region, every
-  receptor, and every drug links to its **Wikipedia** article.
-- **Source provenance pills.** Every source and reference shown in a detail panel
-  carries a small coloured pill grading *how trustworthy its attribution is*,
-  because the data is LLM-assisted and not yet human-checked. Hover (or tap, on
-  touch) any pill for the full explanation. The grades:
-  - **grey `?` (LLM-only)**: produced by an LLM from memory, not checked against
-    any document, so it may be a hallucination.
-  - **yellow `~` (sourced)**: written by an LLM that was given the source document
-    (e.g. Stahl's guide), but the specific claim was not quote-verified.
-  - **green `✓` (verified)**: an LLM extracted a quote, the quote was
-    *programmatically* confirmed to appear in the source, and a separate LLM
-    agreed it supports the claim. This is the **highest** grade available and is
-    **still LLM-driven**, so it can still be wrong: going further would take
-    considerable human effort, itself error-prone, and is out of scope here.
-  - **orange `NOSOURCE`**: there is no source/reference for that claim yet.
+- **grey `?` (LLM-only)**: produced by a language model from memory, not checked
+  against any document, so it may be a hallucination.
+- **yellow `~` (sourced)**: written by a model that was given the source document
+  (e.g. Stahl's guide), but the specific claim was not quote-verified.
+- **green `✓` (verified)**: a model extracted a quote, the quote was
+  *programmatically* confirmed to appear in the cited source, and a second model
+  agreed it supports the claim. This is the **highest** grade available and is
+  **still model-driven**, so it can still be wrong: going further would take
+  considerable human effort, itself error-prone, and is out of scope here.
+- **orange `NOSOURCE`**: there is no source or reference for that claim yet.
 
-  The grade lives in the data (`generate_data.py`), so a source is upgraded as it
-  is checked. A single **"?"** caveat per detail panel (and the **Sources &
-  provenance** section in the About panel, which carries the same grade key and
-  the coverage figures below) repeats that none of it is human-verified.
+The grade is part of the data, not a label bolted on after, so a source is upgraded
+as it is checked. This is why the coverage below is a real, programmatic count and
+not a slogan:
 
 <!-- SOURCING_STATS:START (generated by tools/update_readme_stats.py; do not edit by hand) -->
 
@@ -137,53 +113,50 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 <!-- SOURCING_STATS:END -->
 
-  (Regenerate this table with `python tools/update_readme_stats.py` after the
-  sourcing changes; it reads the programmatic tally from `meta.json`. Neuron
-  pathways and Wikipedia reference links are the remaining gap.)
-- Each receptor records its **neurotransmitter**, mechanism class (ionotropic /
-  metabotropic / chaperone), excitatory / inhibitory / modulatory **sign**,
-  synaptic site, and the regions expressing it.
-- Each drug records its coarse **class** and Neuroscience-based Nomenclature, plus
-  the **bindings** it has (the molecular target and the action: agonist,
-  antagonist, reuptake inhibitor, ...), sourced from **Stahl's Prescriber's Guide
-  (8th ed.)** under fair-use sourcing and extracted strictly from that text (gaps
-  left as **TODO**).
+The drug bindings lead because they go through the full quote-verification gate; the
+anatomy, pathways, and references are the current frontier (all still LLM-only). The
+same grade key and coverage bar live in the app's About panel.
 
-### Deep links & screenshots
+## Built to be reused
 
-- The view is URL-addressable: `?only=`, `?view=`, `?explode=`, `?transparency=`,
-  `?names=all`, `?autorotate=1`, `?ui=0` (see the table in
-  [`CLAUDE.md`](CLAUDE.md)). `tools/shot.py` uses the same params to render PNGs.
-- On-screen debug console via [eruda](https://github.com/liriliri/eruda), loaded
-  only in dev or with `?debug`; runtime errors otherwise surface as dismissible
-  on-screen banners.
+The anatomy is plain **structured data**, kept deliberately separate from the
+rendering code. Under `public/data/` it is split by record type (`structures`,
+`projections`, `circuits`, `receptors`, `drugs`, one JSON object per line) next to a
+self-describing `meta.json` carrying the colour and legend maps, with one geometry
+file per shape. It is generated from a single source of truth
+(`tools/generate_data.py`, with the drug list in `tools/drugs_data.json`), so the
+plain JSONL/JSON is easy to consume from another engine. Each projection carries a
+neurotransmitter and its sources; each region, receptor, and drug links to its
+Wikipedia article; each drug records its class, nomenclature, and the molecular
+targets it binds, extracted strictly from the cited text.
+
+For the full picture of how it fits together (data flow, module graph, boot
+sequence) see [`ARCHITECTURE.md`](ARCHITECTURE.md), and for the exhaustive
+file-by-file map and how to extend the dataset see [`CLAUDE.md`](CLAUDE.md).
 
 ## Roadmap
 
 Planned directions, none implemented yet and the order is not fixed:
 
-- **More animation**: build on the assemble intro, the circuit traveling-pulse,
-  and the per-drug effect dots to show wider activity and signal flow across the
-  brain.
+- **More animation**: build on the assemble intro, the circuit traveling-pulse, and
+  the per-drug effect dots to show wider activity and signal flow across the brain.
 - **Pathologies**: how disorders map onto the regions, circuits, and
   neurotransmitter systems.
-- **Verify the sources**: every citation currently carries a placeholder
-  **TODO** url; replace each one with a verified DOI/link. Relatedly, lift each
-  source's **provenance grade** (see "Data & sourcing") from the default grey
-  (LLM-only) toward yellow/green as it is checked.
+- **Verify the sources**: every citation currently carries a placeholder **TODO**
+  url; replace each with a verified DOI/link, and lift each fact's provenance grade
+  from grey toward green as it is checked (the anatomy and pathways are the gap).
 
 ## Feedback
 
 Found a bug, an anatomical or pharmacological **inaccuracy**, or have a **feature
 request**? Please **open an issue** on this repository. Given the work-in-progress
-warning above, corrections to the regions, projections, receptor, and drug data
-are especially welcome.
+warning above, corrections to the regions, projections, receptor, and drug data are
+especially welcome.
 
 ## Running
 
-The page loads its data with `fetch()`, so it must be served over HTTP (not
-opened directly from disk). The served site is `public/`. From the repository
-root:
+The page loads its data with `fetch()`, so it must be served over HTTP (not opened
+directly from disk). The served site is `public/`. From the repository root:
 
 ```sh
 python tools/serve.py            # serves public/ with caching disabled
@@ -192,41 +165,18 @@ python tools/serve.py            # serves public/ with caching disabled
 
 Then open <http://localhost:8000/>.
 
-## Project layout
-
-| Path | Purpose |
-| --- | --- |
-| `public/` | The served site (and the only web-exposed directory). |
-| `tools/generate_data.py` | Single source of truth for the anatomy; generates the data below. |
-| `tools/drugs_data.json` | The drug dataset's authored source (read by the generator). |
-| `tools/fetch_molecules.py` | Downloads each drug's molecular-structure SVG from Wikipedia (vendored same-origin). |
-| `public/data/meta.json` | Presentation maps (colours, legend headings); makes the dataset self-describing. |
-| `public/data/{structures,projections,circuits,receptors,drugs}.jsonl` | The anatomy + drugs, split by record type, one JSON object per line. |
-| `public/data/shapes/<id>.json` | One geometry file per region. |
-| `public/data/molecules/<id>.svg` | One molecular-structure diagram per drug, shown in its panel. |
-| `public/index.html`, `public/js/` | The three.js viewer and UI. |
-| `tools/` | Dev tooling (data generator, dev server, screenshot helper). |
-| `docker/` | Deployment (hardened Caddy container). |
-| `ARCHITECTURE.md` | High-level architecture: data flow, module graph, boot sequence. |
-| `CLAUDE.md` | The exhaustive file-by-file map and how to extend the anatomy. |
-
-To change which regions or projections are shown, edit `tools/generate_data.py`
-and run `python tools/generate_data.py` to regenerate `public/data/`
-(`meta.json` + the `*.jsonl` files + `shapes/`). See [`CLAUDE.md`](CLAUDE.md) for
-details.
-
 ## Stack
 
 Deliberately lightweight, with a small attack surface and no build step:
 
-- **Frontend**: vanilla ES modules + [three.js](https://threejs.org/) loaded via
-  an import map. three.js is vendored under `public/vendor/three`, so the page
-  executes no third-party script at runtime and works offline. No framework, no
-  bundler, no `node_modules`.
+- **Frontend**: vanilla ES modules + [three.js](https://threejs.org/) loaded via an
+  import map. three.js is vendored under `public/vendor/three`, so the page executes
+  no third-party script at runtime and works offline. No framework, no bundler, no
+  `node_modules`.
 - **Data**: `tools/generate_data.py` (Python standard library only) emits the
   anatomy as the `public/data/` files (`meta.json` + `*.jsonl`) +
-  `public/data/shapes/*.json`, fetched at
-  runtime. The plain JSONL/JSON format is easy to consume from another engine.
+  `public/data/shapes/*.json`, fetched at runtime. The plain JSONL/JSON format is
+  easy to consume from another engine.
 - **Serving**: a hardened [Caddy](https://caddyserver.com/) container (non-root,
   read-only rootfs, dropped capabilities, resource limits) that sends a strict
   Content-Security-Policy; a reverse proxy terminates TLS in front of it.
@@ -235,7 +185,10 @@ Deliberately lightweight, with a small attack surface and no build step:
 
 ## Credits
 
-Built with the help of [Claude Code](https://claude.com/claude-code).
+Built by [Olivier Cornelis](https://olicorne.org/) (developer and psychiatrist) with
+the help of [Claude Code](https://claude.com/claude-code). Drug descriptions and
+molecular-structure images come from Wikipedia, used under
+[CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## License
 
