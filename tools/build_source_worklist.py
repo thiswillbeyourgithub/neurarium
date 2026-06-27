@@ -3,12 +3,12 @@
 
 For every drug binding that does NOT yet carry a source, emit one work item with
 everything an extraction agent needs: the drug name, its Stahl page range (from
-``stahl/INDEX.md``) and, per un-sourced binding, the target's human name, the
+``sources/books/stahl/INDEX.md``) and, per un-sourced binding, the target's human name, the
 action label and a one-line claim to find supporting text for. Bindings that are
 already sourced are skipped, so the workflow is resumable: re-run after a partial
 pass and only the remainder is listed.
 
-This is an *authoring* helper (it reads the author-side ``stahl/INDEX.md``); it is
+This is an *authoring* helper (it reads the author-side ``sources/books/stahl/INDEX.md``); it is
 not part of the served site. Stdlib only.
 
 Usage:
@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "public" / "data"
-INDEX = ROOT / "stahl" / "INDEX.md"
+INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
 
 # "| 54 | Fluoxetine | [329-334](pages/329.md) |"
 _ROW = re.compile(r"^\|\s*\d+\s*\|\s*(.+?)\s*\|\s*\[(\d+)-(\d+)\]")

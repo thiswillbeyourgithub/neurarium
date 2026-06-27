@@ -554,7 +554,7 @@ tools/drugs_data.json  The drug dataset's authored source (a JSON list, sourced
                       "Drugs" and "Changing the data".
 tools/build_source_worklist.py  Authoring helper (stdlib, author-side): lists
                       every drug binding that is not yet sourced (drug name, its
-                      Stahl page range from stahl/INDEX.md, and per binding the
+                      Stahl page range from sources/books/stahl/INDEX.md, and per binding the
                       target/action + a one-line claim), as the input to the
                       source-extraction workflow. Skips already-sourced bindings, so
                       a re-run only lists the remainder (the workflow is resumable).
@@ -839,7 +839,7 @@ Six families of checks:
   PDF->Markdown artifacts (hyphenated line breaks, markdown emphasis, curly
   quotes, en/em dashes, accents) but stays an **exact** substring test, no fuzzy
   matching (that would manufacture false confidence). The page material is
-  author-side and may be absent on a clone (`stahl/`, see CLAUDE.local.md); the
+  author-side and may be absent on a clone (`sources/books/stahl/`, see CLAUDE.local.md); the
   quote-in-page check is then **skipped with a warning** while the structural
   checks still run. A quote genuinely not on its page (an invented or mistyped
   extraction) is an **error**: this is the gate that keeps the LLM extraction
@@ -2243,7 +2243,7 @@ LLM judges that the quote supports the claim (this semantic step is where any
 stored quote is really on the cited page** (exact substring after normalization,
 author-gated on the corpus's `pages_dir`). That programmatic check is the backstop
 against a hallucinated quote: a claim cannot reach `verified` and survive the gate
-unless its quote is genuinely in the source. The page files live under `stahl/`
+unless its quote is genuinely in the source. The page files live under `sources/books/stahl/`
 (uncommitted, see CLAUDE.local.md), so the quote check runs on the author's machine
 / the pre-push hook and is skipped (with a warning) on a clone without them.
 

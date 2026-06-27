@@ -601,7 +601,7 @@ STAHL_SOURCE: dict[str, str] = {
 # grade trustworthy. The design is source-agnostic: Stahl is the first corpus,
 # more can be added here without touching the schema. ``pages_dir`` is an
 # author-side path (relative to the repo root) holding one ``<page>.md`` per page
-# (see ``stahl/`` in CLAUDE.local.md); it is emitted into ``meta.json`` so the
+# (see ``sources/books/stahl/`` in CLAUDE.local.md); it is emitted into ``meta.json`` so the
 # checker is data-driven, and is simply absent on a checkout without that
 # (uncommitted, large) source material, in which case the quote-in-page check is
 # skipped while the structural checks still run.
@@ -614,7 +614,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "ref": "Prescriber's Guide: Stahl's Essential Psychopharmacology, 8th ed.",
         "citation": STAHL_SOURCE["citation"],
         "url": STAHL_SOURCE["url"],
-        "pages_dir": "stahl/pages",
+        "pages_dir": "sources/books/stahl/pages",
     },
 }
 

@@ -27,8 +27,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DRUGS_JSON = ROOT / "tools" / "drugs_data.json"
-PAGES = ROOT / "stahl" / "pages"
-INDEX = ROOT / "stahl" / "INDEX.md"
+PAGES = ROOT / "sources" / "books" / "stahl" / "pages"
+INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
 
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes
 # check_data" by construction (no second, drifting implementation).
