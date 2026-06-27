@@ -1267,33 +1267,59 @@ PAIRED: list[dict[str, Any]] = [
     dict(base="hippocampus", name="Hippocampus", group="limbic",
          pos=(1.3, -0.7, -0.2), color="#b3823e",
          # SDF (self-authored atlas, see geometry_refinements/). Curved
-         # allocortical "seahorse" in the floor of the temporal lobe. The spline is
-         # a strong C / comma in the sagittal (y-z) plane: the head hooks down and
-         # under at the anterior-inferior tip (pes hippocampi), the body sweeps up
-         # and posteriorly, and the tail hooks up + forward toward the splenium (the
-         # seahorse coil). A deliberately small bulb rounds the pes (not the big
-         # sphere that made the old version read as a teardrop). Spine is
-         # parasagittal (local x~0) so the _L member mirrors correctly. Authored in
-         # local space; `pos` seats it. Provenance: llm.
+         # allocortical "seahorse" in the floor of the temporal lobe, swept on a
+         # genuinely 3D spline so no orthogonal view collapses to a bulb-on-a-shaft:
+         #   - sagittal (y-z): a strong comma. Head hooks down + under at the
+         #     antero-inferior tip; body sweeps up + posterior; tail hooks up +
+         #     forward toward the splenium.
+         #   - transverse (x): head sits LATERAL, the body/tail curve MEDIALLY as
+         #     they run back (the paired tails converge toward the splenium). This
+         #     is what makes the front/top silhouettes read as a curved form, and it
+         #     is anatomically right. Mirroring negates x, so the _L member curves
+         #     the other way (correct: its head is lateral on the left).
+         # Slender (length >> caliber, the head only modestly wider than the body).
+         # Anatomical detail: a beaded dentate-gyrus ridge along the inferomedial
+         # edge (the "teeth" the dentate is named for), three pes digitations, all
+         # under a light displace so the detail survives. Authored in local space;
+         # `pos` seats it. Provenance: llm.
          shape=dict(
-             type="sdf", resolution=96,
-             root=dict(op="displace", amp=0.010, freq=4.5, seed=51, nodes=[
-                 dict(op="smoothUnion", k=0.12, nodes=[
-                     dict(prim="tube",
-                          points=[
-                              [0.0, -0.38, 1.08],   # head tip: anterior + inferior
-                              [0.0, -0.55, 0.74],   # pes underside, hooked down (lowest)
-                              [0.0, -0.40, 0.32],   # body starts rising
-                              [0.0, -0.12, -0.16],
-                              [0.0, 0.22, -0.55],   # body sweeping up + posterior
-                              [0.0, 0.52, -0.85],   # tail
-                              [0.0, 0.74, -0.68],   # tail tip hooks up + forward
-                          ],
-                          profile=[0.18, 0.21, 0.23, 0.21, 0.18, 0.13, 0.08]),
-                     # Pes hippocampi: a flattened, AP-wider paw (not a round ball),
-                     # so the head reads anatomically rather than as a bulb on a shaft.
-                     dict(prim="ellipsoid", center=[0.0, -0.52, 0.80],
-                          radii=[0.20, 0.16, 0.24]),
+             type="sdf", resolution=112,
+             root=dict(op="displace", amp=0.006, freq=5.5, seed=51, nodes=[
+                 # Outer join: hang the dentate beads off the body as distinct teeth.
+                 dict(op="smoothUnion", k=0.045, nodes=[
+                     dict(op="smoothUnion", k=0.10, nodes=[
+                         # Slim tapered body on the 3D comma spline.
+                         dict(prim="tube",
+                              points=[
+                                  [0.20, -0.50, 1.02],   # head: lateral + anterior + inferior
+                                  [0.16, -0.60, 0.64],   # head curls under (lowest)
+                                  [0.08, -0.46, 0.24],   # body rising + going medial
+                                  [-0.02, -0.16, -0.18],
+                                  [-0.10, 0.20, -0.54],  # sweeping medial + up + posterior
+                                  [-0.13, 0.52, -0.82],  # tail
+                                  [-0.10, 0.82, -0.66],  # tail tip hooks up + forward
+                              ],
+                              profile=[0.13, 0.15, 0.16, 0.145, 0.125, 0.095, 0.055]),
+                         # Pes hippocampi: small flattened base paw + three finger-like
+                         # digitations fanned around the lateral head tip (tight k ->
+                         # distinct bumps).
+                         dict(op="smoothUnion", k=0.05, nodes=[
+                             dict(prim="ellipsoid", center=[0.16, -0.52, 0.78],
+                                  radii=[0.15, 0.12, 0.18]),
+                             dict(prim="sphere", center=[0.06, -0.57, 0.97], radius=0.09),
+                             dict(prim="sphere", center=[0.17, -0.61, 1.03], radius=0.095),
+                             dict(prim="sphere", center=[0.28, -0.57, 0.96], radius=0.09),
+                         ]),
+                     ]),
+                     # Dentate-gyrus beading: a row of small spheres along the
+                     # inferomedial (-x, -y) edge of the body, from anterior body to
+                     # tail; the tight outer k=0.045 keeps them as a scalloped ridge.
+                     dict(prim="sphere", center=[0.02, -0.54, 0.30], radius=0.075),
+                     dict(prim="sphere", center=[-0.06, -0.34, 0.06], radius=0.075),
+                     dict(prim="sphere", center=[-0.14, -0.10, -0.22], radius=0.07),
+                     dict(prim="sphere", center=[-0.19, 0.16, -0.48], radius=0.07),
+                     dict(prim="sphere", center=[-0.22, 0.38, -0.68], radius=0.065),
+                     dict(prim="sphere", center=[-0.20, 0.56, -0.82], radius=0.055),
                  ]),
              ]),
          )),
