@@ -2176,7 +2176,7 @@
   },
   {
     "id": "dextromethorphanbupropion",
-    "name": "Dextromethorphan-Bupropion",
+    "name": "Dextromethorphan + Bupropion",
     "categories": [
       "antidepressant_other"
     ],
@@ -2252,7 +2252,7 @@
   },
   {
     "id": "dextromethorphanquinidine",
-    "name": "Dextromethorphan-Quinidine",
+    "name": "Dextromethorphan + Quinidine",
     "categories": [
       "other"
     ],
@@ -5209,7 +5209,7 @@
   },
   {
     "id": "naltrexonebupropion",
-    "name": "Naltrexonebupropion",
+    "name": "Naltrexone + Bupropion",
     "categories": [
       "substance_use"
     ],
@@ -5551,7 +5551,7 @@
   },
   {
     "id": "olanzapinesamidorphan",
-    "name": "Olanzapinesamidorphan",
+    "name": "Olanzapine + Samidorphan",
     "categories": [
       "antipsychotic_atypical"
     ],
