@@ -218,7 +218,7 @@
       "dev.restarted":
         "This container was last restarted {ago}, so it is actively being developed. ",
       "dev.activelyDeveloped": "This site is actively being developed. ",
-      "dev.stayTuned": "Stay tuned, or come back later.",
+      "dev.stayTuned": "If anything looks broken, come back later.",
       "dev.source": "Source",
       "dev.clickHide": "Click to hide (shows again on reload)",
       "time.lessThanMinute": "less than a minute ago",
@@ -407,7 +407,7 @@
       "dev.restarted":
         "Ce conteneur a été redémarré {ago} ; il est donc activement développé. ",
       "dev.activelyDeveloped": "Ce site est activement développé. ",
-      "dev.stayTuned": "Revenez plus tard.",
+      "dev.stayTuned": "En cas de problème, revenez plus tard.",
       "dev.source": "Source",
       "dev.clickHide": "Cliquer pour masquer (réapparaît au rechargement)",
       "time.lessThanMinute": "il y a moins d’une minute",
