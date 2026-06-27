@@ -58,7 +58,13 @@
 		# current Wikipedia lead at runtime to refresh a drug's description (js/wiki.js,
 		# anonymous CORS GETs to the Wikimedia REST + action APIs); a baked copy is the
 		# offline fallback, so a blocked/failed fetch degrades silently.
-		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' {$ANALYTICS_ORIGIN:}; connect-src 'self' https://*.wikipedia.org {$ANALYTICS_ORIGIN:}"
+		# img-src also allows https://upload.wikimedia.org: the structure panel
+		# embeds each region's Wikipedia illustration GIF by hot-linking it from
+		# Wikimedia Commons at runtime (only the URL is stored, not the multi-MB
+		# binary), with a spinner while it loads and a silent hide on failure. Unlike
+		# the small drug molecule SVGs (vendored same-origin), these animations are
+		# too large to commit, so they are loaded live like the descriptions above.
+		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://upload.wikimedia.org; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' {$ANALYTICS_ORIGIN:}; connect-src 'self' https://*.wikipedia.org {$ANALYTICS_ORIGIN:}"
 
 		# Never let the browser serve a cached asset. This is a no-build site
 		# whose ES modules / data are deployed by rsync (no content-hashed

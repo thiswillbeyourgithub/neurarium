@@ -223,6 +223,9 @@ export async function loadBrainData(dataDir = "data") {
   for (const s of structures) {
     s.name = localize(s.name);
     s.base_name = localize(s.base_name);
+    // Vendored Wikipedia GIF for the structure panel (null when none was
+    // fetched), mirroring a drug's molecule image. Not localized (raster art).
+    s.structureImage = s.structure_image || null;
   }
   for (const c of circuits) {
     c.name = localize(c.name);

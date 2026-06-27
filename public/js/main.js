@@ -1723,6 +1723,27 @@ function createInfoPanel(data) {
         data.meta.groupLabels[structure.group] || structure.group,
       ));
 
+      // Wikipedia illustration GIF (the lead rotating-brain / coronal-sections
+      // animation, see tools/fetch_structure_images.py). These are multi-MB, so
+      // rather than vendor them the viewer HOT-LINKS the Wikimedia url at runtime
+      // (CSP img-src allows upload.wikimedia.org), like the live descriptions. A
+      // spinner shows while it loads; the whole figure is removed if the load fails
+      // (offline / blocked / moved), so a failure degrades to no image. Unlike the
+      // drug molecule SVGs this is colour raster, so the CSS does NOT invert it.
+      if (structure.structureImage) {
+        const fig = el("figure", "structure-image loading");
+        fig.appendChild(el("div", "img-spinner"));
+        const img = document.createElement("img");
+        img.alt = t("structure.imageAlt", { name: structure.name });
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("load", () => fig.classList.remove("loading"));
+        img.addEventListener("error", () => fig.remove());
+        img.src = structure.structureImage;
+        fig.appendChild(img);
+        body.appendChild(fig);
+      }
+
       // External reference link (Wikipedia), when the data carries one. A live
       // lead summary from that article is shown below it when the fetch succeeds
       // (structures carry no baked description, so this is the only one).

@@ -1,0 +1,87 @@
+{
+  "accumbens": {
+    "file": "File:Nucleus_accumbens_coronal_sections.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Nucleus_accumbens_coronal_sections.gif",
+    "title": "Nucleus accumbens"
+  },
+  "amygdala": {
+    "file": "File:Amygdala_coronal_sections.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Amygdala_coronal_sections.gif",
+    "title": "Amygdala"
+  },
+  "caudate": {
+    "file": "File:Caudate_nucleus_coronal_sections.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Caudate_nucleus_coronal_sections.gif",
+    "title": "Caudate nucleus"
+  },
+  "cerebellum": {
+    "file": "File:Cerebellum.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Cerebellum.gif",
+    "title": "Cerebellum"
+  },
+  "cingulate": {
+    "file": "File:Cingulate_cortex.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Cingulate_cortex.gif",
+    "title": "Cingulate cortex"
+  },
+  "fornix": {
+    "file": "File:Fornix.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/Fornix.gif",
+    "title": "Fornix (neuroanatomy)"
+  },
+  "frontal": {
+    "file": "File:Frontal_lobe_animation.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Frontal_lobe_animation.gif",
+    "title": "Frontal lobe"
+  },
+  "hippocampus": {
+    "file": "File:Hippocampus_coronal_sections.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Hippocampus_coronal_sections.gif",
+    "title": "Hippocampus"
+  },
+  "insula": {
+    "file": "File:Insular_cortex_coronal_sections.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Insular_cortex_coronal_sections.gif",
+    "title": "Insular cortex"
+  },
+  "locus_coeruleus": {
+    "file": "File:Locus-coeruleus.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Locus-coeruleus.gif",
+    "title": "Locus coeruleus"
+  },
+  "medulla": {
+    "file": "File:Medulla_oblongata_and_foramen_magnum_animation_small.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Medulla_oblongata_and_foramen_magnum_animation_small.gif",
+    "title": "Medulla oblongata"
+  },
+  "parietal": {
+    "file": "File:Parietal_lobe_animation_small.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Parietal_lobe_animation_small.gif",
+    "title": "Parietal lobe"
+  },
+  "pons": {
+    "file": "File:Pons.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Pons.gif",
+    "title": "Pons"
+  },
+  "putamen": {
+    "file": "File:Putamen_coronal_sections.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Putamen_coronal_sections.gif",
+    "title": "Putamen"
+  },
+  "substantia_nigra": {
+    "file": "File:Substantia_nigra.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Substantia_nigra.gif",
+    "title": "Substantia nigra"
+  },
+  "temporal": {
+    "file": "File:Temporal_lobe_animation.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Temporal_lobe_animation.gif",
+    "title": "Temporal lobe"
+  },
+  "thalamus": {
+    "file": "File:Thalamus_small.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Thalamus_small.gif",
+    "title": "Thalamus"
+  }
+}

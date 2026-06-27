@@ -146,6 +146,7 @@
       "drug.stubHint": "No binding profile recorded yet",
       "drug.speculative": "speculative",
       "drug.structureAlt": "Chemical structure of {name}",
+      "structure.imageAlt": "Illustration of the {name}",
 
       "status.loading": "Loading brain data…",
       "status.loadError":
@@ -326,6 +327,7 @@
       "drug.stubHint": "Aucun profil de liaison enregistré pour l'instant",
       "drug.speculative": "spéculative",
       "drug.structureAlt": "Structure chimique de {name}",
+      "structure.imageAlt": "Illustration de {name}",
 
       "status.loading": "Chargement des données du cerveau…",
       "status.loadError":
