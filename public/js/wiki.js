@@ -1,4 +1,4 @@
-// Runtime fetch of a Wikipedia article's lead summary, so the description shown in
+// Runtime fetch of a Wikipedia article's full lead section (the whole intro), so the description shown in
 // an info panel (a drug, a receptor, a structure, a non-receptor target: anything
 // carrying a `wikipedia` link) reflects the *current* article.
 //
@@ -15,8 +15,9 @@
 // resolved via the source wiki's langlinks; if the locale has no article the
 // article's own-language (English) lead is used as the fallback.
 //
-// Requests are anonymous cross-origin GETs to the Wikimedia REST + action APIs
-// (CORS-enabled, `credentials: omit`, no custom headers, so no preflight). The
+// Requests are anonymous cross-origin GETs to the Wikimedia action API
+// (CORS-enabled via `origin=*`, `credentials: omit`, no custom headers, so no
+// preflight). The
 // container CSP must allow these hosts (connect-src https://*.wikipedia.org, see
 // docker/Caddyfile). Results are cached per drug+language (in-memory + a session
 // store) so re-opening a drug never refetches.
@@ -66,14 +67,24 @@ async function fetchJson(url) {
   return res.json();
 }
 
-// REST page/summary -> the plain-text lead extract (the article's lead paragraph).
-async function summaryExtract(lang, title) {
+// The full plain-text lead section (every introduction paragraph, i.e. everything
+// before the first section heading), via the action API's TextExtracts
+// (`exintro` + `explaintext`). The REST page/summary endpoint returns only a
+// one-paragraph summary, so this is used instead to show the whole introduction;
+// paragraphs are separated by newlines (the caller splits them for display).
+async function leadExtract(lang, title) {
   const url =
-    `https://${lang}.wikipedia.org/api/rest_v1/page/summary/` +
-    encodeURIComponent(title.replace(/ /g, "_"));
+    `https://${lang}.wikipedia.org/w/api.php?action=query&prop=extracts` +
+    `&exintro=1&explaintext=1&redirects=1&exlimit=1` +
+    `&titles=${encodeURIComponent(title)}&format=json&origin=*`;
   const data = await fetchJson(url);
-  const text = data && typeof data.extract === "string" ? data.extract.trim() : "";
-  return text || null;
+  const pages = data && data.query && data.query.pages;
+  if (!pages) return null;
+  for (const k of Object.keys(pages)) {
+    const ex = pages[k] && pages[k].extract;
+    if (typeof ex === "string" && ex.trim()) return ex.trim();
+  }
+  return null;
 }
 
 // Resolve `title`'s equivalent in `target` language via langlinks on the source
@@ -113,19 +124,19 @@ export async function fetchWikiLead(wikipediaUrl, lang) {
     const art = parseArticle(wikipediaUrl);
     if (art) {
       if (lang === art.lang) {
-        const text = await summaryExtract(art.lang, art.title);
+        const text = await leadExtract(art.lang, art.title);
         if (text) result = { text, lang: art.lang };
       } else {
         // Locale differs from the article's wiki: try the locale article first,
         // else fall back to the article's own (English) lead.
         const localTitle_ = await langTitle(art.lang, art.title, lang).catch(() => null);
         const localized = localTitle_
-          ? await summaryExtract(lang, localTitle_).catch(() => null)
+          ? await leadExtract(lang, localTitle_).catch(() => null)
           : null;
         if (localized) {
           result = { text: localized, lang };
         } else {
-          const text = await summaryExtract(art.lang, art.title);
+          const text = await leadExtract(art.lang, art.title);
           if (text) result = { text, lang: art.lang };
         }
       }

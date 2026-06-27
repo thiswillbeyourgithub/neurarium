@@ -1608,8 +1608,9 @@ function createInfoPanel(data) {
 
   // Live Wikipedia description, shared by every panel carrying a `wikipedia` link
   // (drug / receptor / structure / target). Best-effort: it fetches the current
-  // lead for the viewer's locale (js/wiki.js, English fallback) and shows it as a
-  // "sourced" info-desc paragraph. `paragraph` is a baked description <p> to swap
+  // lead for the viewer's locale (js/wiki.js, English fallback) and shows it as one
+  // or more "sourced" info-desc paragraphs. `paragraph` is a baked description <p>
+  // to swap
   // in place (drug/receptor); when there is none a fresh <p> is inserted relative to
   // `anchor` (the wiki link wrap) only once the live text arrives, so a structure /
   // target with no baked description gains one only on success. `before` puts that
@@ -1633,9 +1634,19 @@ function createInfoPanel(data) {
         p = el("p", "info-desc");
         anchor[before ? "before" : "after"](p);
       }
-      p.textContent = live.text;
-      p.appendChild(document.createTextNode(" "));
-      p.appendChild(makeProvenancePill("sourced", t("info.descFromWikipediaLive")));
+      // The live lead is now the full intro (several newline-separated
+      // paragraphs): the first reuses `p`, the rest become sibling <p>s, and the
+      // provenance pill trails the last so it all reads as one sourced block.
+      const paras = live.text.split(/\n+/).map((s) => s.trim()).filter(Boolean);
+      p.textContent = paras.length ? paras[0] : live.text;
+      let last = p;
+      for (let i = 1; i < paras.length; i += 1) {
+        const extra = el("p", "info-desc", paras[i]);
+        last.after(extra);
+        last = extra;
+      }
+      last.appendChild(document.createTextNode(" "));
+      last.appendChild(makeProvenancePill("sourced", t("info.descFromWikipediaLive")));
     });
   };
 
