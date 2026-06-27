@@ -404,6 +404,13 @@ function createSelection({ meshes, arrows }) {
   // state. Multiple because both the legend (greying) and the circuit pulse
   // animation (stop when the focus is no longer its circuit) need to react.
   const onIsolateSubs = [];
+  // Highlight-change subscribers, each called with the single haloed structure
+  // mesh (or null) on every apply(). The label overlay uses this to pin the
+  // selected structure's name (a structure pick sets `highlighted`; an arrow /
+  // target / drug focus or a clear nulls it), so the pinned name follows exactly
+  // the active single-structure selection. Idempotent downstream (setPinned
+  // early-returns on no change), so re-firing every apply() is cheap.
+  const onHighlightSubs = [];
   // Fired whenever the user actively picks content (a structure, an arrow, a
   // legend isolate, or a circuit), but not on a clear. Used to stop auto-rotate
   // once the user reaches in to inspect something. Set via onPick().
@@ -439,6 +446,7 @@ function createSelection({ meshes, arrows }) {
     // Pass the pinned-arrow set too (empty unless a circuit/kind is focused) so
     // the legend can tell *which* projection-kind/circuit row is the active one.
     for (const fn of onIsolateSubs) fn(active ? isolated : null, isolatedArrows);
+    for (const fn of onHighlightSubs) fn(highlighted);
   }
 
   return {
@@ -536,6 +544,15 @@ function createSelection({ meshes, arrows }) {
     onIsolate(fn) {
       onIsolateSubs.push(fn);
       apply();
+    },
+    /**
+     * Register a callback fired with the single haloed structure mesh (or null)
+     * whenever it changes. Used to pin the selected structure's floating name.
+     * Applied once now so the subscriber reflects the current highlight.
+     */
+    onHighlight(fn) {
+      onHighlightSubs.push(fn);
+      fn(highlighted);
     },
     /**
      * Register a callback fired whenever the user actively picks content (a
@@ -3514,6 +3531,13 @@ async function main() {
   // click / double-click / search, plus the legend-driven isolate/dim mode. Owns
   // the structure + arrow opacity so it composes with the transparency slider.
   const selection = createSelection({ meshes, arrows });
+  // Pin the selected structure's floating name: while a structure is the active
+  // single selection its label stays on regardless of hover, and hovering another
+  // region adds its label rather than replacing the pinned one. Driven off the
+  // selection highlight so every path that selects a structure (3D click, search,
+  // a related-structure panel row) behaves identically, and any non-structure
+  // focus (arrow / target / drug) or a clear drops the pin automatically.
+  selection.onHighlight((mesh) => labels.setPinned(mesh));
   // When the last detail tab is closed, nothing is selected any more: clear the
   // 3D focus (halo / isolate / dim / dots) so the scene matches the empty strip.
   tabs.setOnEmpty(() => selection.clear());
@@ -3817,8 +3841,10 @@ async function main() {
   // camera (search / double-click); a plain click leaves the view where it is.
   const selectStructure = (mesh, { frame = false } = {}) => {
     if (frame) focus.focusStructure(mesh);
+    // select() drives selection.onHighlight, which pins this structure's label on
+    // (so the name stays put after the pointer leaves, and survives hovering other
+    // regions), so no explicit setHovered is needed here.
     selection.select(mesh);
-    labels.setHovered(mesh);
     const structure = mesh.userData.structure;
     info.showStructure(structure);
     openDetailTab(`structure:${structure.id}`, structure.base_name || structure.name,

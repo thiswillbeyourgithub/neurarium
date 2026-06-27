@@ -31,6 +31,7 @@ import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer
  *   setShowAll: (on: boolean, restrictMeshes?: Set<THREE.Mesh>|null,
  *                restrictArrows?: Set<object>|null) => void,
  *   setHovered: (mesh: THREE.Mesh|null) => void,
+ *   setPinned: (mesh: THREE.Mesh|null) => void,
  *   render: (scene: THREE.Scene, camera: THREE.Camera) => void,
  *   resize: () => void,
  *   refresh: () => void,
@@ -85,6 +86,12 @@ export function createLabels(meshes, arrows, parentEl) {
   // change so the two triggers (hover, show-all) can never get out of sync.
   let showAll = false;
   let hovered = null;
+  // The selected structure's label, kept visible regardless of hover for as long
+  // as that structure stays the active selection (set via setPinned from the
+  // selection controller's highlight). So picking a structure (3D click, search,
+  // or a related-structure panel row) keeps its name on screen, and hovering
+  // another region *adds* its label on top instead of replacing the pinned one.
+  let pinned = null;
   // Optional sets that scope "show all" to just the current selection: when
   // non-null, only these meshes / arrows get a label while show-all is on (so
   // naming a focused circuit or isolated region doesn't flood the screen with
@@ -100,7 +107,8 @@ export function createLabels(meshes, arrows, parentEl) {
       const label = mesh.userData.label;
       // A hidden structure (e.g. isolated-view screenshots) never shows its
       // label, even when "show all" is on.
-      if (label) label.visible = mesh.visible && (meshInScope(mesh) || mesh === hovered);
+      if (label) label.visible = mesh.visible
+        && (meshInScope(mesh) || mesh === hovered || mesh === pinned);
     }
     // Connection labels: only with "show all" (arrows have no hover), and never
     // for an arrow hidden in an isolated view (group.visible=false).
@@ -124,6 +132,16 @@ export function createLabels(meshes, arrows, parentEl) {
     setHovered(mesh) {
       if (mesh === hovered) return;
       hovered = mesh;
+      refresh();
+    },
+    /**
+     * Pin the selected structure's label on (null clears the pin). It stays visible
+     * independent of hover until the selection changes, so a picked structure keeps
+     * its name and hovering another region adds, not replaces.
+     */
+    setPinned(mesh) {
+      if (mesh === pinned) return;
+      pinned = mesh;
       refresh();
     },
     // Recompute visibility against the current mesh.visible flags. Call after
