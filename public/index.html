@@ -121,6 +121,45 @@
         width: 240px;
         padding: 0;
         max-height: calc(100vh - 24px);
+        /* The panel is a flex column so its top chrome (header, language switch,
+           toolbar, detail tabs) stays PINNED and only the section list
+           (#controls-main, or the details pane / search when those are shown) is the
+           scroll area. The panel itself does not scroll (overflow:hidden); its inner
+           list does. So an open accordion section shows at its NATURAL height and you
+           scroll the whole list (the lower collapsed headers sitting below the fold),
+           instead of each open section being squeezed into its own tiny inner-scroll
+           box when another section (e.g. Controls) is open above it. */
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      /* Flex chain making #controls-main / #details-pane / #search the scroll area
+         while the top chrome stays put. Scoped to the shown pane (:not([hidden])) so
+         a hidden pane keeps display:none and doesn't steal the free height. */
+      #controls-body:not([hidden]) {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      #controls-body > #panel-tabs:not([hidden]) { flex: 0 0 auto; }
+      #settings-pane:not([hidden]) {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      #settings-pane > #lang-switch,
+      #settings-pane > .toolbar-row { flex: 0 0 auto; }
+      #controls-main,
+      #settings-pane > #search:not([hidden]) {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+      }
+      #details-pane:not([hidden]) {
+        flex: 1 1 auto;
+        min-height: 0;
         overflow-y: auto;
       }
       /* Portrait / vertical screens: a bottom-left box would cover the centered
@@ -151,46 +190,17 @@
         #controls {
           width: clamp(240px, 25vw, 420px);
         }
-        /* The expanded panel is a flex column so an open accordion section can grow
-           to fill the height and push the still-collapsed sections (Drugs, About)
-           down to the bottom, making use of the tall sidebar instead of leaving a
-           gap. The flex chain runs panel -> body -> settings/details pane ->
-           controls-main, each min-height:0 so inner scroll works. */
+        /* When EXPANDED, take the full vertical height so the section list has room
+           to scroll through (each open section at natural height, the lower headers
+           below the fold). A collapsed panel (body hidden, so the `:has` does not
+           match) stays a small bottom-left header; a browser without `:has` just
+           keeps the bottom-left box (graceful fallback). The flex chain that makes
+           #controls-main the scroll area lives in the shared rules above, so it is
+           not repeated here. */
         #controls:has(#controls-body:not([hidden])) {
           top: 12px;
           bottom: 12px;
           max-height: none;
-          display: flex;
-          flex-direction: column;
-        }
-        #controls:has(#controls-body:not([hidden])) > #controls-body,
-        #controls:has(#controls-body:not([hidden])) #settings-pane:not([hidden]),
-        #controls:has(#controls-body:not([hidden])) #controls-main:not([hidden]),
-        #controls:has(#controls-body:not([hidden])) #details-pane:not([hidden]) {
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 auto;
-          min-height: 0;
-        }
-        /* The open section (its header carries aria-expanded="true") grows; its body
-           becomes the scroll area, so the sections after it sit at the bottom.
-           The Controls section is excluded: it is short and toggles independently
-           (it can be open alongside a content section), so it must not also grab
-           the free height. */
-        #controls-main > div:not(#controls-settings):has(> .collapse-header[aria-expanded="true"]) {
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 auto;
-          min-height: 0;
-        }
-        #controls-main > div:not(#controls-settings):has(> .collapse-header[aria-expanded="true"]) > .collapse-header {
-          flex: 0 0 auto;
-        }
-        #controls-main > div:not(#controls-settings):has(> .collapse-header[aria-expanded="true"]) > :not(.collapse-header) {
-          flex: 1 1 auto;
-          min-height: 0;
-          overflow-y: auto;
-          max-height: none; /* override the default 42vh cap so the body fills the tall sidebar */
         }
       }
       /* Uncollapsing a section slides its body in (a soft downward slide + fade),
@@ -674,14 +684,10 @@
         border-radius: 999px;
         background: #66cf85;
       }
-      #structures-body,
-      #projections-body,
-      #legend-body,
-      #receptors-body,
-      #drugs-body {
-        max-height: 42vh;
-        overflow-y: auto;
-      }
+      /* The section bodies are NOT individually capped/scrolled: the whole panel
+         list (#controls-main) is the single scroll area now, so an open section
+         shows at its natural height and you scroll through it before reaching the
+         lower collapsed headers (see #controls above). */
       /* Receptor rows reuse the .legend-item styling; the family headings reuse
          the legend h2 look (added to those rules below). A "stub" receptor (no
          CNS role) renders muted + non-clickable. */
