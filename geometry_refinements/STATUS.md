@@ -53,7 +53,11 @@ Build order (details + done-criteria in CLAUDE.md):
   Reuses `tools/shot.py`'s `dev_server`/`capture` (no duplication). Run with the
   sandbox disabled in this env (headless WebGL needs the SwiftShader GL device).
 - done - perf check + decision: RUNTIME (numbers + verdict in Decisions log above).
-- in progress - prove the loop on the starter trio (putamen, hippocampus, claustrum).
+- done - prove the loop on the starter trio (putamen, hippocampus, claustrum): all
+  three converged in a sane number of iterations (putamen 1 refine, hippocampus 0,
+  claustrum 1) to clearly-better-than-procedural shapes. **Phase 0 complete; the
+  grind is green-lit.** The refine loop (author SDF -> regenerate -> sculpt_shot
+  combined render+reference sheet -> critique -> refine) works end to end.
 
 ## Phase 1: per-structure grind
 
@@ -80,7 +84,11 @@ tube), **claustrum** (thin sheet).
   displace. Phase 0 proof structure. Provenance llm.
 - pending - caudate (paired)
 - pending - globus_pallidus (paired)
-- pending - claustrum (paired)  [starter trio]
+- done - claustrum (paired)  [starter trio] - SDF: a thin (~0.09) curved spherical
+  SHELL clipped by an ellipsoid to the claustrum's tall narrow patch (so it is a
+  curved lamina concave toward the putamen, not a flat slab); smoothIntersect
+  rounds the rim; explicit tight bounds resolve the thin sheet cheaply.
+  Demonstrates the SDF shell/intersect (thin-sheet) path. Provenance llm.
 - pending - accumbens (paired)
 - pending - thalamus (paired)
 - pending - substantia_nigra (paired)

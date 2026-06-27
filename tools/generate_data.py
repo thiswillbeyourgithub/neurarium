@@ -1241,12 +1241,28 @@ PAIRED: list[dict[str, Any]] = [
          radii=(0.4, 0.34, 0.44), seed=27, detail=5, noise=0.06),
     dict(base="claustrum", name="Claustrum", group="basal_ganglia",
          pos=(2.5, 0.1, 0.5), color="#8d97ab",
-         # Thin vertical sheet of grey matter between the insula (lateral) and the
-         # putamen (medial), separated from each by a white-matter capsule. Modeled
-         # as an ellipsoid squashed mediolaterally (very thin x) so it reads as a
-         # lamina, not a lump. NOTE: thin + same-group as the putamen, so the
-         # jigsaw clip may pare it; tune position/size in a browser.
-         radii=(0.07, 0.7, 0.95), seed=28, detail=5, noise=0.05),
+         # SDF (self-authored atlas, see geometry_refinements/). A thin, gently
+         # curved vertical lamina of grey matter between the insula (lateral) and
+         # the putamen (medial): a thin spherical SHELL (so it is curved, concave
+         # toward the medial putamen it drapes over, not a flat slab) clipped by an
+         # ellipsoid to the claustrum's tall, narrow y/z patch. Explicit tight
+         # bounds keep the ~0.09-thick sheet well-resolved cheaply. Authored in
+         # local space; `pos` seats it. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=96,
+             bounds=[[-0.25, -0.95, -1.2], [0.25, 0.95, 1.2]],
+             # smoothIntersect rounds the thin shell-meets-clip rim (a hard
+             # intersect leaves a shallow-angle edge that marching cubes steps).
+             root=dict(op="smoothIntersect", k=0.06, nodes=[
+                 # ~0.09-thick curved shell (outer ~x=0.06, inner ~x=-0.03).
+                 dict(op="subtract", nodes=[
+                     dict(prim="sphere", center=[-2.3, 0, 0], radius=2.36),
+                     dict(prim="sphere", center=[-2.3, 0, 0], radius=2.27),
+                 ]),
+                 # Clip the shell to the claustrum's tall, narrow patch.
+                 dict(prim="ellipsoid", center=[0, 0, 0], radii=[1.0, 0.72, 0.95]),
+             ]),
+         )),
     # --- Limbic / diencephalon ---
     dict(base="hippocampus", name="Hippocampus", group="limbic",
          pos=(1.3, -0.7, -0.2), color="#b3823e",
