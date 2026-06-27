@@ -165,6 +165,13 @@ structure record and the viewer reflects it across x. Three types:
 - `composite` `{parts:[...]}` — sub-shapes (each optional offset/scale/rotate)
   merged into one mesh (cerebellum = 2 hemispheres + vermis).
 
+> [!NOTE]
+> An ongoing effort under `geometry_refinements/` (its own `CLAUDE.md` +
+> `STATUS.md`, auto-loaded only when working there) is replacing these procedural
+> shapes with a self-authored SDF atlas, one structure at a time. It adds an `sdf`
+> shape type alongside the above. Before editing `data/shapes/*` or `shapes.js`
+> geometry, check its `STATUS.md` so two sessions don't collide.
+
 Viewer (`public/`):
 
 - `index.html` — page shell: loads three.js (vendored, import map) and, on
