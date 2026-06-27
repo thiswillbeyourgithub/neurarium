@@ -403,7 +403,7 @@
   },
   {
     "id": "amphetamine_d",
-    "name": "Amphetamine D",
+    "name": "Amphetamine (D)",
     "categories": [
       "stimulant"
     ],
@@ -478,7 +478,7 @@
   },
   {
     "id": "amphetamine_dl",
-    "name": "Amphetamine Dl",
+    "name": "Amphetamine (D,L)",
     "categories": [
       "stimulant"
     ],
@@ -4557,7 +4557,7 @@
   },
   {
     "id": "methylphenidate_d",
-    "name": "Methylphenidate D",
+    "name": "Methylphenidate (D)",
     "categories": [
       "stimulant"
     ],
@@ -4608,7 +4608,7 @@
   },
   {
     "id": "methylphenidate_dl",
-    "name": "Methylphenidate Dl",
+    "name": "Methylphenidate (D,L)",
     "categories": [
       "stimulant"
     ],
