@@ -1258,8 +1258,12 @@ as the WIP banner (`js/error-banner.js`):
     it too (a fatter additive tube along its arc, `ProjectionArrow.setHalo`); the
     structure halo and arrow halo are mutually exclusive.
   - Clicking a **structure row in the legend** toggles that structure (both
-    hemispheres) into the **isolate** set; clicking a **category heading** toggles
-    every structure under it at once. While the set is non-empty the scene focuses
+    hemispheres) into the **isolate** set **and opens its detail tab** (when the
+    click isolates it, via `selectStructure`, so a legend pick reads about the
+    region like a 3D / search pick; a toggle-off opens nothing); clicking a
+    **category heading** toggles
+    every structure under it at once (isolate only, no per-structure tabs). While
+    the set is non-empty the scene focuses
     on it: every other structure drops to a faint opacity (`DIM`), arrows that
     don't touch an isolated structure fade with them (`ProjectionArrow.
     setOpacity`), the isolated structures keep full (slider) opacity + halo, and
@@ -1332,8 +1336,12 @@ as the WIP banner (`js/error-banner.js`):
   `#structures-body` (the body is purely the generated rows now; the Show-all-names
   toggle moved up to the controls row, so `#structures-actions` was removed and
   `buildLegend` just clears + fills the body). Each structure row is
-  clickable to isolate/focus that region (both hemispheres); clicking a category
-  heading isolates the whole group (see Selection above).
+  clickable to isolate/focus that region (both hemispheres) **and open its detail
+  tab**: a click that isolates the structure also opens its structure panel via
+  `selectStructure` (no reframe), so a legend pick reads about the region like a
+  3D / search pick; a toggle-*off* click opens nothing (`buildLegend`'s
+  `onPickStructure` callback, gated on `selection.isIsolated`). Clicking a category
+  heading isolates the whole group (no per-structure tabs, see Selection above).
 - **Projections** (`#projections`, collapsed by default; its header reads
   "Projections & Circuits" since it also holds the Circuits subsection): the pathway
   rows.
