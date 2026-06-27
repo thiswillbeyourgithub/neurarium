@@ -1092,10 +1092,12 @@ as the WIP banner (`js/error-banner.js`):
   list of `{toggle, body}` sections in `wireControls`, so adding another section
   is one array entry. `wireCollapse` takes an
   `onToggle(open)` callback
-  and `setSection()` sets a section's state programmatically. The open content
-  section grows to fill the tall landscape sidebar via a pure-CSS
-  `:has(...aria-expanded="true")` rule (the Controls section is excluded from it
-  with `:not(#controls-settings)` so its short body never grabs the free height).
+  and `setSection()` sets a section's state programmatically. An open section
+  renders at its **natural height** and the panel has **one scroll area** (the
+  section list), so opening more than one section (e.g. Controls + a content
+  section) never squeezes either: you scroll the whole list, the lower collapsed
+  headers sitting below the fold (see the scroll-model note under landscape below;
+  it applies to portrait too).
   **Pan-aside**: the panel covers part of the centered brain, so while the panel
   body is **expanded** the rendered brain is pushed clear of it (and recentred when
   it collapses). The layout differs by orientation:
@@ -1115,16 +1117,23 @@ as the WIP banner (`js/error-banner.js`):
     full-height stretch is gated on the body being shown
     (`#controls:has(#controls-body:not([hidden]))`) so a **collapsed** panel stays a
     small bottom-left header instead of a tall empty glass box (a browser without
-    `:has` just keeps the bottom-left box: graceful fallback). On the full-height
-    sidebar an **open accordion section fills the height**: a flex column chain
-    (panel -> body -> the shown pane -> `#controls-main` -> the open section -> its
-    body, each `min-height:0`, the section keyed by its
-    `.collapse-header[aria-expanded="true"]`) makes the open section grow and its
-    body the scroll area (overriding the default `42vh` body cap), so the
-    still-collapsed sections (Drugs, About) are pushed to the **bottom** instead of
-    a gap. The flex rules are scoped to `:not([hidden])` so a hidden pane keeps
-    `display:none` (an unscoped rule on the `[hidden]` details pane would otherwise
-    keep it in flow and steal the free space).
+    `:has` just keeps the bottom-left box: graceful fallback).
+  - **Scroll model (both orientations)**: the panel is a flex column with
+    `overflow:hidden`, so the **panel itself never scrolls**; its top chrome
+    (header, lang switch, toolbar, detail tabs) is **pinned** and exactly one inner
+    region is the scroll area: `#controls-main` (the section list), or
+    `#details-pane` / `#search` when one of those is shown instead. A
+    `min-height:0` flex chain (`#controls` -> `#controls-body` -> the shown pane ->
+    the scroller) makes that region the scroller, so an **open accordion section
+    shows at its natural height** and the whole list scrolls (the lower collapsed
+    headers below the fold) rather than each section being capped/inner-scrolled.
+    Earlier each section body was capped at `42vh` and the single open section grew
+    to fill + inner-scrolled, which squeezed it to one line when another section
+    was open above it; those rules are gone. The flex-display rules are scoped
+    `:not([hidden])` so a hidden pane (the collapsed body, the inactive
+    settings/details pane, the hidden search) keeps `display:none` instead of being
+    forced back into flow (an unscoped `display:flex` on `#controls-body` otherwise
+    re-shows the collapsed body and stretches the panel to full height).
   - **Uncollapse animation**: opening any section (Controls / Structures /
     Projections / Receptors / Drugs / Legend / About) **slides its body in** (a soft
     downward `translateY` + fade,

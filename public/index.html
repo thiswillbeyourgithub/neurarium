@@ -695,10 +695,11 @@
       .legend-item.muted { opacity: 0.4; cursor: default; }
       .legend-item.muted:hover { color: inherit; }
 
-      /* Drugs section: a small filter box pinned at the top of the (scrolling)
-         body, then category headings + drug rows (reusing .legend-item; rows are
-         coloured by the drug's dominant net-effect swatch). The filter reuses the
-         search-input look. */
+      /* Drugs section: a small filter box at the top of the section body, then
+         category headings + drug rows (reusing .legend-item; rows are coloured by
+         the drug's dominant net-effect swatch). The filter reuses the search-input
+         look. (The body is not its own scroll area now; the whole panel list
+         scrolls, so the filter scrolls with the rows.) */
       #drugs-body { padding: 4px 0 8px; }
       .drugs-filter {
         width: 100%;
