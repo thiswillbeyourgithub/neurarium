@@ -40,7 +40,7 @@ import subprocess
 import sys
 import time
 import urllib.request
-from contextlib import closing
+from contextlib import closing, contextmanager
 from pathlib import Path
 
 # Repo root = parent of this tools/ directory. The web root is public/ (served
@@ -106,6 +106,56 @@ def _autocrop(path: Path, margin: int) -> None:
     image.crop(crop).save(path)
 
 
+@contextmanager
+def dev_server():
+    """Serve the repo with tools/serve.py on a free port; yield its base URL.
+
+    A context manager so the throwaway server is always torn down. Shared by
+    this module's ``main()`` and ``tools/sculpt_shot.py`` (which captures many
+    angles of one structure), so the serve/teardown lives in one place.
+    """
+    port = _free_port()
+    server = subprocess.Popen(
+        [sys.executable, str(REPO_ROOT / "tools" / "serve.py"), "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    try:
+        base = f"http://localhost:{port}/"
+        if not _wait_until_up(base):
+            raise RuntimeError("dev server did not come up")
+        yield base
+    finally:
+        server.terminate()
+        try:
+            server.wait(timeout=5)
+        except Exception:
+            server.kill()
+
+
+def capture(page, url: str, out: Path, wait: int, crop: bool = True,
+            margin: int = 40) -> Path:
+    """Load ``url`` in ``page``, let it render ``wait`` ms, screenshot to ``out``.
+
+    Hides eruda's debug button (irrelevant to a shot) and optionally auto-crops
+    to the rendered subject. Returns ``out``. Shared capture step so the viewer
+    quirks (load wait, eruda hide, crop) are handled identically everywhere.
+    """
+    out = Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    page.goto(url, wait_until="load")
+    page.wait_for_timeout(wait)
+    page.evaluate(
+        "document.querySelector('#eruda')"
+        "?.style.setProperty('display', 'none', 'important')"
+    )
+    page.screenshot(path=str(out))
+    if crop:
+        _autocrop(out, margin)
+    return out
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Screenshot the neurarium viewer.")
     parser.add_argument(
@@ -153,64 +203,38 @@ def main() -> int:
         )
         return 2
 
-    port = _free_port()
-    server = subprocess.Popen(
-        [sys.executable, str(REPO_ROOT / "tools" / "serve.py"), "--port", str(port)],
-        cwd=str(REPO_ROOT),
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
     try:
-        base = f"http://localhost:{port}/"
-        if not _wait_until_up(base):
-            print("dev server did not come up", file=sys.stderr)
-            return 1
+        with dev_server() as base:
+            url = base + (f"?{args.params}" if args.params else "")
+            out = Path(args.out)
 
-        url = base + (f"?{args.params}" if args.params else "")
-        out = Path(args.out)
-        out.parent.mkdir(parents=True, exist_ok=True)
-
-        with sync_playwright() as playwright:
-            # Headless needs the SwiftShader flags or WebGL is blank; a real
-            # headed window has a GPU and should not be forced onto software GL.
-            launch_args = [] if args.headed else GL_ARGS
-            try:
-                browser = playwright.chromium.launch(
-                    headless=not args.headed, args=launch_args,
+            with sync_playwright() as playwright:
+                # Headless needs the SwiftShader flags or WebGL is blank; a real
+                # headed window has a GPU and should not be forced onto software GL.
+                launch_args = [] if args.headed else GL_ARGS
+                try:
+                    browser = playwright.chromium.launch(
+                        headless=not args.headed, args=launch_args,
+                    )
+                except Exception as exc:  # missing browser binary, etc.
+                    print(
+                        f"Could not launch Chromium ({exc}).\n"
+                        "Run `playwright install chromium` once to fetch it.",
+                        file=sys.stderr,
+                    )
+                    return 2
+                page = browser.new_page(
+                    viewport={"width": args.width, "height": args.height},
+                    device_scale_factor=args.scale,
                 )
-            except Exception as exc:  # missing browser binary, etc.
-                print(
-                    f"Could not launch Chromium ({exc}).\n"
-                    "Run `playwright install chromium` once to fetch it.",
-                    file=sys.stderr,
-                )
-                return 2
-            page = browser.new_page(
-                viewport={"width": args.width, "height": args.height},
-                device_scale_factor=args.scale,
-            )
-            page.goto(url, wait_until="load")
-            page.wait_for_timeout(args.wait)
-            # eruda's on-screen debug button is irrelevant to a screenshot; hide
-            # its host element so it never lands in the frame.
-            page.evaluate(
-                "document.querySelector('#eruda')"
-                "?.style.setProperty('display', 'none', 'important')"
-            )
-            page.screenshot(path=str(out))
-            browser.close()
+                capture(page, url, out, args.wait, crop=args.crop, margin=args.margin)
+                browser.close()
 
-        if args.crop:
-            _autocrop(out, args.margin)
-
-        print(f"wrote {out} ({args.params or 'default view'})")
-        return 0
-    finally:
-        server.terminate()
-        try:
-            server.wait(timeout=5)
-        except Exception:
-            server.kill()
+            print(f"wrote {out} ({args.params or 'default view'})")
+            return 0
+    except RuntimeError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":

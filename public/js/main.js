@@ -2502,11 +2502,15 @@ const VIEW_DIRS = {
  * @param {{camera:THREE.PerspectiveCamera, controls:OrbitControls, meshes:THREE.Mesh[]}} bundle
  * @param {string} viewName  Key of VIEW_DIRS (defaults to "iso").
  */
-function frameVisible({ camera, controls, meshes }, viewName) {
+function frameVisible({ camera, controls, meshes }, viewName, onlyIds = null) {
+  // `onlyIds` (a comma-joined id string) restricts the framing box to those
+  // meshes, used by the solo review view so the camera frames the studied
+  // structure while its ghosted neighbours stay in shot as context.
+  const keep = onlyIds ? new Set(onlyIds.split(",").map((s) => s.trim()).filter(Boolean)) : null;
   const box = new THREE.Box3();
   let any = false;
   for (const mesh of meshes) {
-    if (mesh.visible) {
+    if (mesh.visible && (!keep || keep.has(mesh.userData.id))) {
       box.expandByObject(mesh);
       any = true;
     }
@@ -2814,9 +2818,28 @@ function applyViewParams(bundle) {
     bundle.labels.refresh();
   }
 
-  // Frame whenever a view angle is requested, or a subset is isolated.
-  if (q.has("view") || q.has("only")) {
-    frameVisible(bundle, q.get("view") || "iso");
+  // `solo=id[,id2]`: the in-context shape-review view. Keep the whole brain
+  // visible but render only the solo set solidly while the rest is ghosted to a
+  // faint translucency (override the amount with `ghost=0..1`), so a structure's
+  // fit against its neighbours can be judged. Used by tools/sculpt_shot.py; the
+  // framing below targets the solo set. Arrows hidden (form, not relationships).
+  if (q.has("solo")) {
+    const solo = new Set(q.get("solo").split(",").map((s) => s.trim()).filter(Boolean));
+    const ghost = q.has("ghost") ? Number(q.get("ghost")) : 0.06;
+    for (const mesh of meshes) {
+      const isSolo = solo.has(mesh.userData.id);
+      mesh.material.transparent = !isSolo;
+      mesh.material.opacity = isSolo ? 1 : ghost;
+      mesh.material.depthWrite = isSolo;
+    }
+    for (const arrow of arrows) arrow.setVisible(false);
+    bundle.labels.refresh();
+  }
+
+  // Frame whenever a view angle is requested, or a subset is isolated. With a
+  // solo set, frame on it (the rest is only ghosted context, not framed).
+  if (q.has("view") || q.has("only") || q.has("solo")) {
+    frameVisible(bundle, q.get("view") || "iso", q.has("solo") ? q.get("solo") : null);
   }
 }
 

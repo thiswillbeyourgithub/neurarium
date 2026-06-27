@@ -8,6 +8,7 @@
 // regenerating anything.
 
 import * as THREE from "three";
+import { buildSdfGeometry } from "./sdf.js";
 
 // Cheap deterministic integer hash -> uint32, seeded so each structure's
 // surface is unique but stable. Shared by the gradient picker below.
@@ -176,6 +177,11 @@ function fractalNoise(nx, ny, nz, seed, octaves, ridged, frequency, aniso) {
 export function buildGeometry(shape) {
   if (shape.type === "curve") return buildCurveGeometry(shape);
   if (shape.type === "composite") return buildCompositeGeometry(shape);
+  // The SDF path gets shapes.js's noise injected (no import cycle, no
+  // duplicated Perlin); see js/sdf.js.
+  if (shape.type === "sdf") {
+    return buildSdfGeometry(shape, { noise3d: gradientNoise, fractalNoise });
+  }
   return buildBlobGeometry(shape);
 }
 
