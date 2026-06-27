@@ -137,6 +137,12 @@
     "title": "Raphe nuclei",
     "kind": "svg"
   },
+  "septal_nuclei": {
+    "file": "File:Mouse_Septal_Nuclei.pdf",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Mouse_Septal_Nuclei.pdf/page1-330px-Mouse_Septal_Nuclei.pdf.jpg",
+    "title": "Septal area",
+    "kind": "infobox"
+  },
   "substantia_nigra": {
     "file": "File:Substantia_nigra.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Substantia_nigra.gif",

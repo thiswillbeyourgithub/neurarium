@@ -2027,9 +2027,10 @@ are fetched. Only the *url* is stored in the data, never the binary.
   picked via a **fallback chain** (via the MediaWiki `parse` API, which lists a page's
   images in appearance order, then `pageimages`): the **first `.gif`** (the lead
   rotating-brain / coronal-sections animation), else the **first `.svg`** (a vector
-  diagram, often a labelled section), else the **infobox/lead image** of any
-  renderable type (png/jpg, so a structure with no animation still gets a picture; a
-  non-image lead like a `.pdf` is rejected). Its Wikimedia url + the resolved `kind`
+  diagram, often a labelled section), else the **infobox/lead image** (png/jpg, so a
+  structure with no animation still gets a picture; a document lead like a `.pdf` /
+  `.djvu` is salvaged via its Wikimedia-rendered first-page JPG thumbnail, since an
+  `<img>` cannot embed the document itself). Its Wikimedia url + the resolved `kind`
   (gif/svg/infobox, for provenance) is recorded, keyed by **base** id so both
   hemispheres of a pair share one url (like the `WIKIPEDIA` registry). It downloads
   **no image bytes**, only the JSON metadata. It **reuses the polite-fetch helpers
@@ -2038,9 +2039,9 @@ are fetched. Only the *url* is stored in the data, never the binary.
   rather than duplicating the boilerplate. Network-bound, idempotent (skips bases
   already recorded unless `--force`, which also clears a now-unresolvable stale
   entry), polite. Run it after adding a structure with a Wikipedia link: `python
-  tools/fetch_structure_images.py`. With the fallback chain only the odd article
-  (e.g. septal nuclei, whose only lead image is a `.pdf`) ends up with no image; the
-  resolver logs it and the panel degrades to none.
+  tools/fetch_structure_images.py`. With the fallback chain every modeled structure
+  carrying a Wikipedia link currently resolves to an image; an article with no usable
+  image at all is logged and the panel degrades to none.
 - **Generator (`generate_data.py`).** `_load_structure_image_urls()` reads that
   sources JSON (an offline file read, like `drugs_data.json`) into a base->url map,
   and `_structure_record` emits a `structure_image` (the **url**) only for a base in

@@ -64,10 +64,17 @@ REPO = Path(__file__).resolve().parent.parent
 STRUCTURES_JSONL = REPO / "public" / "data" / "structures.jsonl"
 SOURCES_JSON = Path(__file__).resolve().parent / "structure_images_sources.json"
 
-# Extensions an <img> can actually render. The pageimages "page image" is sometimes
-# a non-image file (e.g. a microscopy figure exported as a .pdf), which would load
-# as a broken image, so the infobox fallback only accepts these.
+# Extensions an <img> can actually render directly. The pageimages "page image" is
+# sometimes a non-image file (e.g. a microscopy figure uploaded as a .pdf), so the
+# infobox fallback only embeds these as-is.
 RENDERABLE_IMG_EXT = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp")
+
+# Document formats Wikimedia renders page-by-page to JPG: an <img> can't show the
+# original .pdf/.djvu/.tif but CAN show its rendered first-page thumbnail (e.g.
+# .../<file>.pdf/page1-330px-<file>.pdf.jpg), so a document lead is salvaged that way
+# instead of being dropped. The width below is the rendered thumbnail's pixel width.
+THUMBNAILABLE_DOC_EXT = (".pdf", ".djvu", ".tif", ".tiff")
+DOC_THUMB_WIDTH = 330
 
 
 def base_id(structure_id: str) -> str:
@@ -92,12 +99,33 @@ def _file_url(file_title: str) -> str | None:
     return None
 
 
+def _doc_thumb(file_title: str, width: int = DOC_THUMB_WIDTH) -> str | None:
+    """Rendered JPG thumbnail of a multi-page document file (PDF / DjVu / TIFF).
+
+    Wikimedia renders such a file's first page to a thumbnail an ``<img>`` can show
+    (the original cannot be embedded). ``imageinfo`` with ``iiurlwidth`` returns that
+    rendered ``thumburl`` (e.g. ``.../<file>.pdf/page1-330px-<file>.pdf.jpg``).
+    """
+    info = http_json({
+        "action": "query", "titles": file_title,
+        "prop": "imageinfo", "iiprop": "url", "iiurlwidth": width,
+    })
+    for page in info.get("query", {}).get("pages", {}).values():
+        for ii in page.get("imageinfo", []):
+            thumb = ii.get("thumburl", "")
+            if thumb:
+                return thumb
+    return None
+
+
 def _lead_image(title: str) -> tuple[str, str] | None:
-    """The article's infobox / lead image (any type) via the ``pageimages`` API.
+    """The article's infobox / lead image via the ``pageimages`` API.
 
     ``piprop=original`` gives the full-resolution source of the page's primary
     image, which on an anatomy article is the photo / plate / diagram at the top of
     the infobox. ``redirects=1`` follows a title redirect; chrome names are skipped.
+    A directly renderable image is embedded as-is; a document lead (PDF / DjVu /
+    TIFF) is salvaged via its rendered first-page thumbnail (see ``_doc_thumb``).
     """
     data = http_json({
         "action": "query", "prop": "pageimages",
@@ -106,9 +134,15 @@ def _lead_image(title: str) -> tuple[str, str] | None:
     for page in data.get("query", {}).get("pages", {}).values():
         name = page.get("pageimage") or ""
         src = (page.get("original") or {}).get("source") or ""
-        if src and not _is_chrome(name) \
-                and src.lower().endswith(RENDERABLE_IMG_EXT):
+        if not src or _is_chrome(name):
+            continue
+        low = src.lower()
+        if low.endswith(RENDERABLE_IMG_EXT):
             return (f"File:{name}", src)
+        if low.endswith(THUMBNAILABLE_DOC_EXT):
+            thumb = _doc_thumb(f"File:{name}")
+            if thumb:
+                return (f"File:{name}", thumb)
     return None
 
 
