@@ -455,6 +455,10 @@ function createSelection({ meshes, arrows }) {
       baseOpacity = o;
       apply();
     },
+    /** Is this mesh currently in the isolate/focus set? */
+    isIsolated(mesh) {
+      return isolated.has(mesh);
+    },
     /** Lightweight single structure highlight from a 3D pick (null clears it). */
     select(mesh) {
       const next = mesh && mesh.userData.halo ? mesh : null;
@@ -672,7 +676,7 @@ function projectionGroups(established, meta, signMode) {
  * @param {boolean} signColorMode  Colour arrows/legend by excit/inhib sign.
  * @returns {(isolated: Set<THREE.Mesh>|null, focusedArrows: Set<object>) => void}
  */
-function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode) {
+function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode, onPickStructure) {
   // Populate the two collapsible bodies, not the panels themselves, so the
   // always-visible toggle headers (in index.html) are left untouched. The action
   // buttons live in an actions container authored in the HTML per section (the
@@ -723,9 +727,18 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
     const groupMeshes = [];
     for (const [label, entry] of byLabel) {
       const row = addLegendItem(structuresBody, entry.color, label);
-      // Clicking the row toggles its structure(s) in the isolate/focus set.
+      // Clicking the row toggles its structure(s) in the isolate/focus set AND,
+      // when that click isolated it (not when it toggled it off), opens the
+      // structure's detail tab, so a legend pick reads about the region like a 3D
+      // click / search pick (which the user expects to "do both"). A toggle-off
+      // opens nothing. The first hemisphere mesh stands for the pair's tab.
       row.classList.add("clickable");
-      row.addEventListener("click", () => selection.toggleIsolate(entry.meshes));
+      row.addEventListener("click", () => {
+        selection.toggleIsolate(entry.meshes);
+        if (onPickStructure && entry.meshes.some((m) => selection.isIsolated(m))) {
+          onPickStructure(entry.meshes[0]);
+        }
+      });
       structureRows.push({ row, meshes: entry.meshes });
       groupMeshes.push(...entry.meshes);
     }
@@ -3931,7 +3944,11 @@ async function main() {
   };
   const rebuildLegend = () => {
     reflectLegend = buildLegend(
-      data, meshById, arrows, selection, projVis, circuitAnim, signColorMode);
+      data, meshById, arrows, selection, projVis, circuitAnim, signColorMode,
+      // Opening the picked structure's tab (no reframe: keep the legend pick's
+      // current camera, just add the detail tab + halo, like the isolate already
+      // does in the viewer).
+      (mesh) => selectStructure(mesh));
     selection.refresh(); // re-grey the fresh rows for the current isolate state
   };
   rebuildLegend();
