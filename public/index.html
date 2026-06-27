@@ -969,12 +969,15 @@
         font: 400 11px/1.45 inherit;
         letter-spacing: normal;
         text-transform: none;
-        /* the per-claim source pill builds a multi-line tooltip (grade text, then
-           the verbatim quote + page ref); honour the \n it inserts. */
+        /* the per-claim source pill builds a multi-line tooltip (the source / quote
+           + page ref, then the grade explainer); honour the \n it inserts. */
         white-space: pre-line;
         z-index: 60;
       }
-      .help-icon.show .help-tip { display: block; }
+      /* The bubble is appended to <body> while shown (see withTip in js/main.js), so
+         it is toggled by a class on itself, not on the wrapping .help-icon, and it
+         escapes the panel's clipping + any dimmed row's opacity. */
+      .help-tip.show { display: block; }
       .info-connections li {
         display: flex;
         align-items: center;

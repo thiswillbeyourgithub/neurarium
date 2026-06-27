@@ -1320,7 +1320,14 @@ function createInfoPanel(data) {
     const wrap = el("span", "help-icon");
     const tip = el("span", "help-tip", tipText);
     tip.setAttribute("role", "tooltip");
-    wrap.append(trigger, tip);
+    // The bubble is NOT nested under the trigger: while shown it is appended to
+    // <body>, so (a) a dimmed/greyed ancestor row (a speculative binding sits at
+    // reduced opacity) can't bleed that opacity into the bubble, which would make it
+    // unreadable, and the panel's overflow can't clip it, and (b) you can move the
+    // pointer onto the bubble itself to read or select its text without it hiding.
+    wrap.append(trigger);
+    let pinned = false; // a click pins it open (stays put so its text is selectable)
+    let hideTimer = 0;
     const place = () => {
       const r = trigger.getBoundingClientRect();
       const tw = tip.offsetWidth, th = tip.offsetHeight, m = 6;
@@ -1328,12 +1335,9 @@ function createInfoPanel(data) {
       left = Math.max(m, Math.min(left, window.innerWidth - tw - m));
       let top = r.top - th - 4;
       if (top < m) top = r.bottom + 4; // flip below the trigger if no room above
-      // `left`/`top` are viewport coordinates, but the panel's backdrop-filter
-      // makes #controls a containing block for our position:fixed bubble, so the
-      // values resolve relative to that ancestor's scrolled content origin, not the
-      // viewport. #controls is also the scroll container, so subtract both its
-      // viewport offset AND its own scroll (zero when there is no such ancestor),
-      // keeping the maths viewport-based regardless of which element forms the block.
+      // `left`/`top` are viewport coordinates. With the bubble in <body> there is
+      // normally no fixed-positioning containing block (offsets zero), but keep the
+      // generic subtraction in case a transformed/filtered ancestor ever forms one.
       const cb = fixedContainingBlock(tip);
       const cbRect = cb ? cb.getBoundingClientRect() : null;
       const ox = cb ? cbRect.left - cb.scrollLeft : 0;
@@ -1341,48 +1345,72 @@ function createInfoPanel(data) {
       tip.style.left = `${Math.round(left - ox)}px`;
       tip.style.top = `${Math.round(top - oy)}px`;
     };
-    // Keep the fixed bubble glued to its trigger while shown: tapping a pill can
-    // scroll it into view *after* placement (a real touch hazard), and the user
-    // may scroll the panel while a tip is pinned. Self-cleans if the panel
-    // re-renders the trigger out from under us.
+    // Keep the fixed bubble glued to its trigger while shown; tear it down if the
+    // panel re-renders the trigger out from under us.
     const reposition = () => {
-      if (!trigger.isConnected) { hide(); return; }
-      if (wrap.classList.contains("show")) place();
+      if (!trigger.isConnected) { close(); return; }
+      if (tip.classList.contains("show")) place();
     };
-    const show = () => {
-      if (openTip && openTip !== hide) openTip(); // close any other pinned tip
-      openTip = hide;
-      wrap.classList.add("show");
+    // A pointer press anywhere outside the badge and the bubble closes a pinned tip
+    // (so clicking away dismisses it); presses on either are ignored, so a click into
+    // the bubble to select text never closes it.
+    const onDocPointer = (e) => {
+      if (wrap.contains(e.target) || tip.contains(e.target)) return;
+      close();
+    };
+    const open = () => {
+      clearTimeout(hideTimer);
+      if (openTip && openTip !== close) openTip(); // close any other open tip
+      openTip = close;
+      if (!tip.isConnected) document.body.appendChild(tip);
+      tip.classList.add("show");
       place();
       // Re-place after this frame: tapping a button can focus-scroll it into view
       // *after* the click handler runs, which would otherwise strand the bubble.
       requestAnimationFrame(place);
       window.addEventListener("scroll", reposition, true);
       window.addEventListener("resize", reposition);
+      document.addEventListener("pointerdown", onDocPointer, true);
     };
-    const hide = () => {
-      if (openTip === hide) openTip = null;
-      wrap.classList.remove("show");
+    const close = () => {
+      clearTimeout(hideTimer);
+      pinned = false;
+      if (openTip === close) openTip = null;
+      tip.classList.remove("show");
+      tip.remove();
       window.removeEventListener("scroll", reposition, true);
       window.removeEventListener("resize", reposition);
+      document.removeEventListener("pointerdown", onDocPointer, true);
+    };
+    // Hover-out closes shortly, unless it was pinned by a click or the pointer is now
+    // over the badge or the bubble (so you can cross the small gap between them, and
+    // rest on the bubble to read / select it without it vanishing).
+    const scheduleHide = () => {
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
+        if (pinned || trigger.matches(":hover") || tip.matches(":hover")) return;
+        close();
+      }, 160);
     };
     trigger.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (wrap.classList.contains("show")) hide(); else show();
+      if (pinned) close(); else { pinned = true; open(); }
     });
-    // Hover/focus reveal is for pointer + keyboard devices only. On a touch
-    // screen a single tap synthesizes mouseenter + focus (both show()) and *then*
-    // click (which toggles), so attaching those here would show-then-hide on the
-    // first tap and force a second tap to reveal the tooltip. Gating them behind
-    // `(hover: hover)` leaves the click-toggle as the sole path on touch, so one
-    // tap shows it (tap again, or tap another pill, to dismiss).
+    // Hover/focus reveal is for pointer + keyboard devices only. On a touch screen a
+    // single tap synthesizes mouseenter + focus (both open()) and *then* click (which
+    // toggles), so attaching those here would show-then-hide on the first tap and
+    // force a second tap. Gating them behind `(hover: hover)` leaves the click-toggle
+    // as the sole path on touch, so one tap shows it (tap again to dismiss). On a
+    // pointer device a click instead *pins* it (so it stays put to select its text).
     const canHover = !window.matchMedia ||
       window.matchMedia("(hover: hover)").matches;
     if (canHover) {
-      trigger.addEventListener("mouseenter", show);
-      trigger.addEventListener("mouseleave", hide);
-      trigger.addEventListener("focus", show);
-      trigger.addEventListener("blur", hide);
+      trigger.addEventListener("mouseenter", open);
+      trigger.addEventListener("mouseleave", scheduleHide);
+      trigger.addEventListener("focus", open);
+      trigger.addEventListener("blur", scheduleHide);
+      tip.addEventListener("mouseenter", () => clearTimeout(hideTimer));
+      tip.addEventListener("mouseleave", scheduleHide);
     }
     return wrap;
   };
@@ -1402,13 +1430,15 @@ function createInfoPanel(data) {
     sourced: { glyph: "~", tip: "info.provSourced" },
     verified: { glyph: "✓", tip: "info.provVerified" },
   };
-  // `extra` (optional) is appended to the tooltip after a blank line: the per-claim
-  // drug source pill uses it to show the verbatim supporting quote + page ref under
-  // the grade explanation (.help-tip is white-space:pre-line so the newlines show).
+  // `extra` (optional) is the concrete source shown *first* in the tooltip (the
+  // per-claim drug pill's verbatim quote + page ref, or a bibliographic citation),
+  // followed after a blank line by the grade explainer (`base`): the actual source
+  // is what the reader wants up top, the tier explanation is the footnote under it
+  // (.help-tip is white-space:pre-line so the newlines show).
   const makeProvenancePill = (level, extra) => {
     const spec = PROVENANCE_PILLS[level];
     const base = spec ? t(spec.tip) : t("info.provNone");
-    const tip = extra ? `${base}\n\n${extra}` : base;
+    const tip = extra ? `${extra}\n\n${base}` : base;
     const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
     const pill = el("button", cls, spec ? spec.glyph : t("info.noSource"));
     pill.type = "button";
