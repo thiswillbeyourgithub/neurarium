@@ -6,4 +6,4 @@
 // it with no build step. Loaded early in index.html's <head>.
 //
 // Bump this on a release. Semantic versioning: MAJOR.MINOR.PATCH.
-window.__APP_VERSION__ = "0.13.0";
+window.__APP_VERSION__ = "0.14.0";
