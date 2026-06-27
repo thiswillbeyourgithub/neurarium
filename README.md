@@ -119,12 +119,18 @@ same grade key and coverage bar live in the app's About panel.
 
 **A note on the sources.** The reference works the dataset is checked against
 (Stahl's *Prescriber's Guide* and the other psychopharmacology / neuroscience
-books) are copyrighted, so they are **not** committed to this repository. The
-tooling that uses them is, though: the per-page text extraction, the page index,
-and `tools/check_data.py`'s quote gate all run locally against a copy you supply.
-So anyone holding the books can reproduce the extraction and confirm every
-`✓`-graded quote for themselves; nothing about the sourcing is hidden, only the
-copyrighted text is left out.
+books) are copyrighted, so they are **not** committed to this repository, only the
+tooling that uses them is. So anyone holding a copy can reproduce the extraction
+and confirm every `✓`-graded quote for themselves; nothing about the sourcing is
+hidden, only the copyrighted text is left out. Drop the Stahl PDF into
+`sources/books/stahl/` and three committed scripts rebuild exactly what the quote
+gate checks against:
+
+```sh
+uv run tools/pdf_to_pages.py    # the PDF -> one Markdown file per page
+uv run tools/build_index.py     # the per-drug page index
+python tools/check_data.py      # re-verifies every quote is on its cited page
+```
 
 ## Built to be reused
 

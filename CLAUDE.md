@@ -85,6 +85,13 @@ Data + authoring (`tools/`):
 - `tools/apply_nbn_sources.py` — sources each drug's NbN line (Stahl prints it
   verbatim), no agent/judge: greps the line, confirms the dataset `nbn` is a
   substring, writes a `verified` `nbn_sources` entry. Idempotent.
+- `tools/pdf_to_pages.py`: splits a PDF into one `<page>.md` per page (the per-page
+  text the quote gate checks against); `uv run`, defaults to the Stahl corpus so
+  anyone with the book can rebuild it. `--layout` for the heavier OCR engine.
+- `tools/build_toc_index.py`: builds `INDEX.md` from a PDF's embedded TOC (generic;
+  used for the textbooks + Carlat). `uv run`.
+- `tools/build_index.py`: Stahl-specific page index (detects each monograph by its
+  `THERAPEUTICS` heading). `uv run`.
 - `tools/update_readme_stats.py` — rewrites the README `SOURCING_STATS` block from
   `meta.provenance_stats`; `--check` exits 1 if out of date (CI). Idempotent.
 - `tools/fetch_molecules.py` — downloads each drug's molecular-structure SVG into
