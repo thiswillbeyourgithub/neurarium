@@ -117,6 +117,15 @@ The drug bindings lead because they go through the full quote-verification gate;
 anatomy, pathways, and references are the current frontier (all still LLM-only). The
 same grade key and coverage bar live in the app's About panel.
 
+**A note on the sources.** The reference works the dataset is checked against
+(Stahl's *Prescriber's Guide* and the other psychopharmacology / neuroscience
+books) are copyrighted, so they are **not** committed to this repository. The
+tooling that uses them is, though: the per-page text extraction, the page index,
+and `tools/check_data.py`'s quote gate all run locally against a copy you supply.
+So anyone holding the books can reproduce the extraction and confirm every
+`✓`-graded quote for themselves; nothing about the sourcing is hidden, only the
+copyrighted text is left out.
+
 ## Built to be reused
 
 The anatomy is plain **structured data**, kept deliberately separate from the
