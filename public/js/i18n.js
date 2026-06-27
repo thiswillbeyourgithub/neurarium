@@ -151,11 +151,16 @@
         "Could not load brain data: {msg}. Are you serving over HTTP? (see CLAUDE.md)",
 
       "about.p1":
-        "neurarium is a work-in-progress, interactive 3D map of brain regions " +
-        "and the neuron projections between them. The shapes are schematic, " +
-        "meant to help you find and relate structures, not to be anatomically " +
-        "exact. The receptor and drug data are machine-generated and unreviewed, " +
-        "so treat everything here as illustrative, not as medical advice.",
+        "neurarium is a work-in-progress, interactive 3D map of the brain. It " +
+        "shows brain regions and the neuron projections between them, named " +
+        "functional circuits you can watch a pulse travel around, the " +
+        "neurotransmitter receptors each region expresses, and psychiatric " +
+        "drugs animated to show what each one does to the brain. Everything is " +
+        "searchable and clickable, and every fact carries a source grade (see " +
+        "Sources & provenance below). The shapes are schematic, meant to help " +
+        "you find and relate structures rather than to be anatomically exact, " +
+        "and the receptor and drug data are machine-generated and unreviewed, " +
+        "so treat all of it as illustrative, not as medical advice.",
       "about.p2":
         'Made by <a href="https://olicorne.org/" target="_blank" ' +
         'rel="noopener noreferrer">Olivier Cornelis</a> (developer and ' +
@@ -325,13 +330,18 @@
         "Impossible de charger les données : {msg}. Le site est-il servi via HTTP ? (voir CLAUDE.md)",
 
       "about.p1":
-        "neurarium est une carte 3D interactive, en cours de développement, " +
-        "des régions cérébrales et des projections neuronales qui les " +
-        "relient. Les formes sont schématiques : elles aident à situer et " +
-        "relier les structures, sans prétendre à l’exactitude anatomique. Les " +
-        "données sur les récepteurs et les médicaments sont générées " +
-        "automatiquement et non vérifiées : considérez tout ceci comme " +
-        "illustratif, et non comme un avis médical.",
+        "neurarium est une carte 3D interactive du cerveau, en cours de " +
+        "développement. Elle montre les régions cérébrales et les projections " +
+        "neuronales qui les relient, des circuits fonctionnels nommés autour " +
+        "desquels on peut voir une impulsion circuler, les récepteurs de " +
+        "neurotransmetteurs exprimés par chaque région, et des médicaments " +
+        "psychiatriques animés pour montrer ce que chacun fait au cerveau. " +
+        "Tout est consultable et cliquable, et chaque fait porte une note de " +
+        "source (voir Sources et provenance ci-dessous). Les formes sont " +
+        "schématiques : elles aident à situer et relier les structures, sans " +
+        "prétendre à l’exactitude anatomique ; les données sur les récepteurs " +
+        "et les médicaments sont générées automatiquement et non vérifiées : " +
+        "considérez tout ceci comme illustratif, et non comme un avis médical.",
       "about.p2":
         'Réalisé par <a href="https://olicorne.org/" target="_blank" ' +
         'rel="noopener noreferrer">Olivier Cornelis</a> (développeur et ' +
