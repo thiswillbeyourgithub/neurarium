@@ -1962,13 +1962,28 @@ function createInfoPanel(data) {
       // Description (the drug's Wikipedia lead, baked + live-refreshed) then the
       // Wikipedia link below it, via the shared appendReference. A "sourced"
       // description is the WP lead (CC BY-SA); an "llm" one a mechanism synthesis.
-      appendReference({
+      const { wiki } = appendReference({
         url: drug.wikipedia, provenance: drug.wikipedia_provenance,
         description: drug.description,
         descriptionProvenance: drug.descriptionProvenance,
         descriptionExtra: drug.descriptionProvenance === "sourced"
           ? t("info.descFromWikipedia") : "",
       });
+      // French locale only: a Vidal lookup link beside the reference (Vidal is the
+      // standard French drug database). It is a search-by-substance-name link, so it
+      // works for every drug regardless of a Wikipedia link, and is a convenience
+      // lookup, not a source for a specific claim, so it carries no provenance pill.
+      // Vidal is only linked (navigated to), never fetched, so the CSP is unaffected.
+      if (window.__I18N__.lang === "fr" && wiki) {
+        wiki.appendChild(el("span", "ref-sep", "·"));
+        const vidal = el("a", null, t("info.vidal"));
+        vidal.href = "https://www.vidal.fr/recherche/substances.html?query="
+          + encodeURIComponent(drug.name.toLowerCase());
+        vidal.target = "_blank";
+        vidal.rel = "noopener noreferrer";
+        vidal.title = t("info.vidalTitle");
+        wiki.appendChild(vidal);
+      }
 
       // Classification facts: the coarse class(es) and the NbN nomenclature line.
       // Both are clickable: each runs a search (class:"..." / nbn:"...") that filters
