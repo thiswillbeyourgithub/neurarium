@@ -60,10 +60,10 @@
     "kind": "gif"
   },
   "hypothalamus": {
-    "file": "File:Endocrine_central_nervous_en.svg",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Endocrine_central_nervous_en.svg",
-    "title": "Hypothalamus",
-    "kind": "svg"
+    "file": "File:Hypothalamus.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Hypothalamus.gif/330px-Hypothalamus.gif",
+    "title": "(manual override)",
+    "kind": "gif"
   },
   "insula": {
     "file": "File:Insular_cortex_coronal_sections.gif",
@@ -96,9 +96,9 @@
     "kind": "svg"
   },
   "occipital": {
-    "file": "File:Brain_animated_color_nevit.gif",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Brain_animated_color_nevit.gif",
-    "title": "Occipital lobe",
+    "file": "File:Occipital_lobe_animation_small.gif",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Occipital_lobe_animation_small.gif",
+    "title": "(manual override)",
     "kind": "gif"
   },
   "olfactory_bulb": {

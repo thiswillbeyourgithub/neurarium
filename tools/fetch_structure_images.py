@@ -76,6 +76,41 @@ RENDERABLE_IMG_EXT = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp")
 THUMBNAILABLE_DOC_EXT = (".pdf", ".djvu", ".tif", ".tiff")
 DOC_THUMB_WIDTH = 330
 
+# Manual per-base image overrides: when the auto-resolver's fallback chain picks the
+# wrong illustration (a generic animation that does not single out this structure, an
+# unhelpful diagram), pin the exact Wikimedia file URL here. An override wins over the
+# chain and survives ``--force``, so the choice is durable and re-running the fetcher
+# never reverts it. Keyed by structure base id, like the rest of this file.
+IMAGE_OVERRIDES = {
+    # The chain picked a generic spinning-brain GIF that does not highlight the
+    # occipital lobe; pin the dedicated occipital-lobe animation instead.
+    "occipital": (
+        "https://upload.wikimedia.org/wikipedia/commons/8/8f/"
+        "Occipital_lobe_animation_small.gif"
+    ),
+    # A clearer hypothalamus animation than the chain's pick.
+    "hypothalamus": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/"
+        "Hypothalamus.gif/330px-Hypothalamus.gif"
+    ),
+}
+
+
+def _override_entry(url: str) -> dict:
+    """A sources-JSON entry for a manual override URL: derive the File: name + kind.
+
+    The ``kind`` (gif/svg/infobox, provenance only) comes from the URL extension; the
+    ``title`` marks it as hand-pinned so the provenance is honest. A Wikimedia *thumb*
+    URL (``.../thumb/a/ab/<File>/<width>px-<File>``) carries the real file name as the
+    path segment *before* the rendered thumbnail, so use that, not the trailing
+    ``330px-...`` rendition name.
+    """
+    parts = url.rstrip("/").split("/")
+    name = parts[-2] if "/thumb/" in url and len(parts) >= 2 else parts[-1]
+    low = name.lower()
+    kind = "gif" if low.endswith(".gif") else "svg" if low.endswith(".svg") else "infobox"
+    return {"file": f"File:{name}", "url": url, "title": "(manual override)", "kind": kind}
+
 
 def base_id(structure_id: str) -> str:
     """Strip a trailing ``_R`` / ``_L`` hemisphere suffix to get the base id.
@@ -216,6 +251,18 @@ def main() -> None:
 
     resolved, skipped, missing, errors = [], [], [], []
     for i, (base, wiki) in enumerate(bases, 1):
+        # A manual override wins over the auto-resolver and the recorded value, and
+        # needs no network, so it is applied first and even without --force (so adding
+        # an override and re-running fixes a wrong pick immediately).
+        if base in IMAGE_OVERRIDES:
+            entry = _override_entry(IMAGE_OVERRIDES[base])
+            if sources.get(base) == entry:
+                skipped.append(base)
+            else:
+                sources[base] = entry
+                resolved.append(base)
+                print(f"[{i}/{len(bases)}] {base}: [override] {entry['file']}")
+            continue
         if base in sources and not args.force:
             skipped.append(base)
             continue
