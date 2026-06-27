@@ -9,10 +9,6 @@
       "en": "glutamate multimodal (Glu-MM)",
       "fr": "glutamate multimodal (Glu-MM)"
     },
-    "description": {
-      "en": "Acamprosate, sold under the brand name Campral, is a medication which reduces cravings in alcoholism. It is thought to stabilize chemical signaling in the brain that would otherwise be disrupted by alcohol withdrawal. When used alone, acamprosate is not an effective therapy for alcohol use disorder in most individuals, as it only addresses withdrawal symptoms and not psychological dependence. It facilitates a reduction in alcohol consumption as well as full abstinence when used in combination with psychosocial support or other drugs that address the addictive behavior.",
-      "fr": "L’acamprosate est un médicament utilisé pour le traitement de la dépendance à l'alcool dont la formule est N-acétyle homotaurine (en), un composé organique synthétique analogue à la taurine, mais possédant un carbone supplémentaire dans sa chaine."
-    },
     "bindings": [
       {
         "target": "glutamate",
@@ -41,8 +37,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate multimodal (Glu-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "agomelatine",
@@ -53,10 +48,6 @@
     "nbn": {
       "en": "melatonin multimodal (Mel-MM)",
       "fr": "mélatonine multimodal (Mel-MM)"
-    },
-    "description": {
-      "en": "Agomelatine, sold under the brand name Thymanax among others, is an atypical antidepressant most commonly used to treat major depressive disorder and generalized anxiety disorder. One review found that it is as effective as other antidepressants with similar discontinuation rates overall but fewer discontinuations due to side effects. Another review also found it was similarly effective to many other antidepressants.",
-      "fr": "L’agomélatine est un antidépresseur mélatoninergique. \nElle est utilisée dans le traitement des états dépressifs chez l'adulte."
     },
     "bindings": [
       {
@@ -104,8 +95,7 @@
         "quote": "Neuroscience-based Nomenclature: melatonin multimodal (Mel-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "alprazolam",
@@ -117,10 +107,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Alprazolam, sold under the brand name Xanax among others, is a fast-acting, potent tranquilizer of moderate duration within the triazolobenzodiazepine group of chemicals called benzodiazepines. Alprazolam is most commonly prescribed in the management of anxiety disorders, especially panic disorder and generalized anxiety disorder (GAD). Other uses include the treatment of chemotherapy-induced nausea, together with other treatments.Alprazolam is generally taken orally.",
-      "fr": "L'alprazolam est une benzodiazépine de la famille des triazolobenzodiazépines utilisée comme un anxiolytique d'action rapide. En France, l'alprazolam est la benzodiazépine la plus prescrite et est connue sous son nom commercial Xanax."
     },
     "bindings": [
       {
@@ -148,8 +134,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "amisulpride",
@@ -160,10 +145,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Amisulpride, sold under the brand names Socian and Barhemsys, is a medication used in the treatment of schizophrenia, acute psychotic episodes, depression, and nausea and vomiting. It is specifically used at lower doses intravenously to prevent and treat postoperative nausea and vomiting, at low doses by mouth to treat depression, and at higher doses by mouth to treat psychosis.",
-      "fr": "L'amisulpride est un antipsychotique de seconde génération. Il possède, en outre, des « propriétés antidépressives » lorsqu'il est employé à faible dose."
     },
     "bindings": [
       {
@@ -237,8 +218,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "amitriptyline",
@@ -250,10 +230,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine multimodal (SN-MM)",
       "fr": "sérotonine, noradrénaline multimodal (SN-MM)"
-    },
-    "description": {
-      "en": "Amitriptyline, formerly sold under the brand name Elavil among others, is a tricyclic antidepressant primarily used to treat major depressive disorder, and a variety of pain syndromes such as neuropathic pain, fibromyalgia, migraine and tension headaches. Due to the frequency and prominence of side effects, amitriptyline is generally considered a second-line therapy for these indications.",
-      "fr": "L'amitriptyline est un antidépresseur tricyclique. Il est blanc, inodore et a un goût de réglisse. C'est un composé cristallin très peu soluble dans l'eau ; il est généralement vendu sous forme de comprimés, en solution injectable ou buvable. En termes d'action, l'amitriptyline inhibe la recapture de la sérotonine et de la noradrénaline de façon à peu près égale."
     },
     "bindings": [
       {
@@ -311,8 +287,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "amoxapine",
@@ -323,10 +298,6 @@
     "nbn": {
       "en": "norepinephrine, serotonin reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la noradrénaline et de la sérotonine (SN-RI)"
-    },
-    "description": {
-      "en": "Amoxapine, sold under the brand name Asendin among others, is a tricyclic antidepressant (TCA). It is the N-demethylated metabolite of loxapine. Amoxapine first received marketing approval in the United States in 1980, approximately 10 to 20 years after most of the other TCAs were introduced in the United States.",
-      "fr": "L'amoxapine (Defanyl) est un antidépresseur tétracyclique de la classe des dibenzoazépines."
     },
     "bindings": [
       {
@@ -398,8 +369,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine, serotonin reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "amphetamine_d",
@@ -410,10 +380,6 @@
     "nbn": {
       "en": "dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
       "fr": "inhibiteur de la recapture et libérateur de la dopamine et de la noradrénaline (DN-RIRe)"
-    },
-    "description": {
-      "en": "Dextroamphetamine is a central nervous system (CNS) stimulant and enantiomer of amphetamine that is used in the treatment of attention deficit hyperactivity disorder (ADHD) and narcolepsy. It is also used illicitly to enhance cognitive and athletic performance, and recreationally as an aphrodisiac and euphoriant. Dextroamphetamine is generally regarded as the prototypical stimulant.",
-      "fr": "La dextroamphétamine, est un médicament servant à traiter l'hyperactivité ou la narcolepsie, le TDAH, ainsi que l'hypersomnie. C'est l'énantiomère S dextrogyre de l'amphétamine. La dextroamphétamine a des propriétés neurostimulantes."
     },
     "bindings": [
       {
@@ -473,8 +439,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "amphetamine_dl",
@@ -485,10 +450,6 @@
     "nbn": {
       "en": "dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
       "fr": "inhibiteur de la recapture et libérateur de la dopamine et de la noradrénaline (DN-RIRe)"
-    },
-    "description": {
-      "en": "Amphetamine is a central nervous system (CNS) stimulant that is used in the treatment of attention deficit hyperactivity disorder (ADHD) and narcolepsy; it is also used to treat binge eating disorder in the form of lisdexamfetamine. Historically, it has been used to treat nasal congestion and depression. Amphetamine is also used as an athletic performance enhancer and cognitive enhancer, and recreationally as an aphrodisiac and euphoriant. It is a prescription drug in many countries, and unauthorized possession and distribution of amphetamine are often tightly controlled due to the significant health risks associated with recreational use.",
-      "fr": "L’amphétamine (DCI) est une substance sympathicomimétique aux effets anorexigènes et psychoanaleptiques."
     },
     "bindings": [
       {
@@ -548,8 +509,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "aripiprazole",
@@ -560,10 +520,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor partial agonist (DS-RPA)",
       "fr": "agoniste partiel des récepteurs dopaminergiques et sérotoninergiques (DS-RPA)"
-    },
-    "description": {
-      "en": "Aripiprazole, sold under the brand name Abilify, among others, is a unique atypical antipsychotic primarily used in the treatment of schizophrenia, mania in bipolar disorder, and irritability associated with autism spectrum disorder; other uses include as an add-on treatment for major depressive disorder, obsessive–compulsive disorder, and tic disorders. Aripiprazole is taken by mouth or via injection into a muscle.",
-      "fr": "L'aripiprazole (DCI) est un médicament antipsychotique de troisième génération. Il est indiqué dans le traitement de la schizophrénie ainsi que dans les épisodes maniaques et les états mixtes des troubles du spectre bipolaire, notamment le trouble bipolaire de type I.\nIl est également utilisé dans le traitement prophylactique des épisodes maniaques; il est commercialisé en France depuis 2004 par les laboratoires Otsuka Pharmaceutical sous le nom d'Abilify."
     },
     "bindings": [
       {
@@ -654,8 +610,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist (DS-RPA)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "armodafinil",
@@ -666,10 +621,6 @@
     "nbn": {
       "en": "dopamine reuptake inhibitor (D-RI)",
       "fr": "inhibiteur de la recapture de la dopamine (D-RI)"
-    },
-    "description": {
-      "en": "Armodafinil, sold under the brand name Nuvigil, is a wakefulness-promoting medication that is used to treat excessive daytime sleepiness associated with obstructive sleep apnea, narcolepsy, and shift work disorder. It is also used off-label for certain other indications. The drug is taken by mouth.",
-      "fr": "L'armodafinil, vendu sous le nom de marque Nuvigil, est un médicament favorisant l'éveil qui est utilisé pour traiter la somnolence diurne excessive associée à l'apnée obstructive du sommeil, à la narcolepsie et au troubles du sommeil dus au travail posté. Il est également utilisé hors indication pour d'autres applications. Le médicament est pris par voie orale."
     },
     "bindings": [
       {
@@ -694,8 +645,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "asenapine",
@@ -706,10 +656,6 @@
     "nbn": {
       "en": "dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques, sérotoninergiques et noradrénergiques (DSN-RAn)"
-    },
-    "description": {
-      "en": "Asenapine, sold under the brand name Saphris among others, is an atypical antipsychotic medication used to treat schizophrenia and acute mania associated with bipolar disorder as well as the medium to long-term management of bipolar disorder.",
-      "fr": "L' asénapine est un antipsychotique de seconde génération, utilisé dans le traitement de la manie aiguë."
     },
     "bindings": [
       {
@@ -806,8 +752,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "atomoxetine",
@@ -818,10 +763,6 @@
     "nbn": {
       "en": "norepinephrine reuptake inhibitor (N-RI)",
       "fr": "inhibiteur de la recapture de la noradrénaline (N-RI)"
-    },
-    "description": {
-      "en": "Atomoxetine, sold under the brand name Strattera, is a selective norepinephrine reuptake inhibitor (NRI) medication used to treat attention deficit hyperactivity disorder (ADHD) and, to a lesser extent, cognitive disengagement syndrome (CDS). It may be used alone or along with psychostimulant medication. It enhances the executive functions of self-motivation, sustained attention, inhibition, working memory, reaction time, and emotional self-regulation. Use of atomoxetine is only recommended for those who are at least six years old. It is taken orally. The effectiveness of atomoxetine is comparable to the commonly prescribed stimulant medication methylphenidate.",
-      "fr": "L'atomoxétine est un médicament utilisé pour traiter le trouble du déficit de l'attention avec ou sans hyperactivité (TDAH)."
     },
     "bindings": [
       {
@@ -845,8 +786,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "benztropine",
@@ -854,10 +794,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Benzatropine, known as benztropine in the United States and Japan, is a medication used to treat movement disorders like parkinsonism and dystonia, as well as extrapyramidal side effects of antipsychotics, including akathisia. It is not useful for tardive dyskinesia. It is a centrally acting anticholinergic and antihistamine, taken by mouth or by injection into a vein or muscle. Benefits are seen within two hours and last for up to ten hours.",
-      "fr": "La benzatropine ou le mésilate de benzatropine, mésylate de benztropine ou benztropine (USAN), commercialisée sous le nom de Cogentin, est un médicament anticholinergique principalement utilisé pour le traitement des :parkinsonisme médicamenteux, akathisie et dystonie aigüe ;\nmaladie de Parkinson ;\ndystonie secondaire ou idiopathique."
-    },
     "bindings": [
       {
         "target": "muscarinic",
@@ -872,8 +808,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Benztropine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Benztropine"
   },
   {
     "id": "blonanserin",
@@ -881,10 +816,6 @@
     "categories": [
       "antipsychotic_atypical"
     ],
-    "description": {
-      "en": "Blonanserin, sold under the brand name Lonasen, is a relatively new atypical antipsychotic commercialized by Dainippon Sumitomo Pharma in Japan and Korea for the treatment of schizophrenia. Relative to many other antipsychotics, blonanserin has an improved tolerability profile, lacking side effects such as extrapyramidal symptoms, excessive sedation, or hypotension. As with many second-generation (atypical) antipsychotics it is significantly more efficacious in the treatment of the negative symptoms of schizophrenia compared to first-generation (typical) antipsychotics such as haloperidol.",
-      "fr": "Le blonanserin, vendu sous le nom de Lonasen, est un antipsychotique atypique relativement nouveau, commercialisé par Dainippon Sumitomo Pharma au Japon et en Corée pour le traitement de la schizophrénie. Par rapport à de nombreux autres antipsychotiques, la blonansérine a un profil de tolérance amélioré, sans effets secondaires tels que des symptômes extrapyramidaux, une sédation excessive ou une hypotension. Comme de nombreux antipsychotiques de deuxième génération (atypiques), il est significativement plus efficace dans le traitement des symptômes négatifs de la schizophrénie que les antipsychotiques de première génération (typiques) tels que l'halopéridol."
-    },
     "bindings": [
       {
         "target": "d2",
@@ -916,8 +847,7 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Blonanserin",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Blonanserin"
   },
   {
     "id": "bremelanotide",
@@ -925,10 +855,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Bremelanotide, sold under the brand name Vyleesi, is a medication used to treat low sexual desire in women. Specifically it is used for low sexual desire which occurs before menopause and is not due to medical problems, psychiatric problems, or problems within the relationship. It is given by an injection just under the skin of the thigh or abdomen.",
-      "fr": "Le brémélanotide, vendu sous la marque Vyleesi, est un médicament utilisé pour traiter le faible désir sexuel chez les femmes. Plus précisément, il est utilisé dans les cas qui présentent avant la ménopause et qui ne sont pas dus à des problèmes médicaux, de santé mentale ou à des problèmes au sein de la relation. Il est administré par injection sous la peau."
-    },
     "bindings": [
       {
         "target": "melanocortin",
@@ -943,8 +869,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Bremelanotide",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Bremelanotide"
   },
   {
     "id": "brexanolone",
@@ -952,10 +877,6 @@
     "categories": [
       "antidepressant_other"
     ],
-    "description": {
-      "en": "Allopregnanolone is a naturally occurring neurosteroid which is made in the body from the hormone progesterone. As a medication, allopregnanolone was referred to as brexanolone, sold under the brand name Zulresso, and was used to treat postpartum depression. It was given by injection into a vein.",
-      "fr": "L'alloprégnanolone, 3α-hydroxy-5α-prégnane-20-one, 3α,5α-tétrahydroprogestérone ou THP, est une hormone présente dans le sang et le cerveau. Elle provient du métabolisme de la progestérone."
-    },
     "bindings": [
       {
         "target": "gaba_a",
@@ -974,8 +895,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Brexanolone",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Brexanolone"
   },
   {
     "id": "brexpiprazole",
@@ -986,10 +906,6 @@
     "nbn": {
       "en": "dopamine partial agonist, serotonin-dopamine partial agonist (DS-RPA)",
       "fr": "agoniste partiel dopaminergique, agoniste partiel sérotonino-dopaminergique (DS-RPA)"
-    },
-    "description": {
-      "en": "Brexpiprazole, sold under the brand name Rexulti among others, is an atypical antipsychotic medication used for the treatment of major depressive disorder, schizophrenia, and agitation associated with dementia due to Alzheimer's disease.",
-      "fr": "Le brexpiprazole (code produit : OPC-34712) est un médicament antipsychotique de troisième génération, agoniste partiel des récepteurs de dopamine D2 développé par Otsuka et Lundbeck[réf. non conforme]. Son nom commercial est Rexulti. Il est actuellement en phase d'étude clinique pour le traitement de la dépression majeure, de la schizophrénie et du trouble du déficit de l'attention[réf. non conforme]. Le produit est initialement conçu pour offrir une alternative à l'aripiprazole, offrant une plus grande efficacité et moins d'effets secondaires (notamment akathisie, agitation psychomotrice et insomnies). Une étude le compare avec l'aripiprazole et ne démontre aucune différence d'efficacité entre les deux."
     },
     "bindings": [
       {
@@ -1070,8 +986,7 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Brexpiprazole",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Brexpiprazole"
   },
   {
     "id": "buprenorphine",
@@ -1083,10 +998,6 @@
     "nbn": {
       "en": "mu opioid receptor partial agonist",
       "fr": "agoniste partiel des récepteurs opioïdes mu"
-    },
-    "description": {
-      "en": "Buprenorphine is an opioid used to treat opioid use disorder, acute pain, and chronic pain. It can be used under the tongue (sublingual), in the cheek (buccal), by injection, as a skin patch (transdermal), or as an implant.",
-      "fr": "La buprénorphine (DCI) est une molécule opioïde semi-synthétique dérivée de la thébaïne utilisée comme médicament analgésique et dans le cadre du traitement des dépendances aux opioïdes en tant que traitement de substitution aux opioïdes (TSO). On parle alors de BHD pour Buprénorphine Haut Dosage."
     },
     "bindings": [
       {
@@ -1114,8 +1025,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Buprenorphine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Buprenorphine"
   },
   {
     "id": "bupropion",
@@ -1127,10 +1037,6 @@
     "nbn": {
       "en": "dopamine reuptake inhibitor and releaser (D-RIRe)",
       "fr": "inhibiteur de la recapture et libérateur de la dopamine (D-RIRe)"
-    },
-    "description": {
-      "en": "Bupropion, formerly called amfebutamone, and sold under the brand name Wellbutrin among others, is an atypical antidepressant that is indicated in the treatment of major depressive disorder and seasonal affective disorder and to support smoking cessation. It is a norepinephrine–dopamine reuptake inhibitor (NDRI). Some evidence-based guidelines support first-line use. It is also popular as an add-on medication in the cases of \"incomplete response\" to the first-line selective serotonin reuptake inhibitor (SSRI) antidepressant. Bupropion has several features that distinguish it from other antidepressants: It does not usually cause sexual dysfunction, it is not associated with weight gain or sleepiness, and it is more effective than SSRIs at improving symptoms of hypersomnia and fatigue. Bupropion, particularly the immediate-release formulation, carries a higher risk of seizure than many other antidepressants; hence, caution is recommended in patients with a history of seizure disorder. The medication is taken by mouth.",
-      "fr": "Le bupropion, commercialisé sous les marques Zyban, Wellbutrin, Voxra, Budeprion et Aplenzin par le laboratoire GlaxoSmithKline, est un psychotrope psychorégulateur prescrit en tant qu'aide au sevrage tabagique et antidépresseur. Accompagné d'un soutien et d'un suivi psychologique, il a obtenu en France une autorisation de mise sur le marché (AMM) en tant qu'aide au sevrage tabagique en août 2001."
     },
     "bindings": [
       {
@@ -1166,8 +1072,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor and releaser (D-RIRe)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "buspirone",
@@ -1178,10 +1083,6 @@
     "nbn": {
       "en": "serotonin receptor partial agonist (S-RPA)",
       "fr": "agoniste partiel des récepteurs sérotoninergiques (S-RPA)"
-    },
-    "description": {
-      "en": "Serotonin 1A partial agonist with postsynaptic anxiolytic and presynaptic antidepressant actions via serotonergic modulation.",
-      "fr": "Agoniste partiel des récepteurs 5-HT1A avec des actions anxiolytiques postsynaptiques et antidépressives présynaptiques par modulation sérotoninergique."
     },
     "bindings": [
       {
@@ -1213,10 +1114,6 @@
     "categories": [
       "cognitive_enhancer"
     ],
-    "description": {
-      "en": "Medical food that induces hyperketonemia, providing ketone bodies as an alternative brain energy substrate to glucose, increasing mitochondrial efficiency in neurons.",
-      "fr": "Aliment médical qui induit une hypercétonémie, fournissant des corps cétoniques comme substrat énergétique cérébral alternatif au glucose, améliorant l'efficacité mitochondriale des neurones."
-    },
     "bindings": [],
     "wikipedia": "https://en.wikipedia.org/wiki/Caprylidene"
   },
@@ -1229,10 +1126,6 @@
     "nbn": {
       "en": "glutamate, voltage-gated sodium and calcium channel blocker (Glu-CB)",
       "fr": "bloqueur des canaux sodiques et calciques voltage-dépendants, glutamate (Glu-CB)"
-    },
-    "description": {
-      "en": "Carbamazepine, sold under the brand name Tegretol among others, is an anticonvulsant medication used in the treatment of epilepsy and neuropathic pain. It is used as an adjunctive treatment in schizophrenia along with other medications and as a second-line agent in bipolar disorder. Carbamazepine appears to work as well as phenytoin and valproate for focal and generalized seizures. It is not effective for absence or myoclonic seizures.",
-      "fr": "La carbamazépine est un médicament anticonvulsivant, thymorégulateur et antimaniaque. Elle est également indiquée dans le traitement des douleurs neuropathiques."
     },
     "bindings": [
       {
@@ -1264,8 +1157,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium and calcium channel blocker (Glu-CB)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "cariprazine",
@@ -1276,10 +1168,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor partial agonist and antagonist",
       "fr": "agoniste partiel et antagoniste des récepteurs dopaminergiques et sérotoninergiques"
-    },
-    "description": {
-      "en": "Cariprazine, sold under the brand name Vraylar among others, is an atypical antipsychotic developed by Gedeon Richter, which is used in the treatment of schizophrenia and bipolar disorder. It is also prescribed as an add-on treatment for bipolar depression and major depressive disorder. Cariprazine acts primarily as a D3 and D2 receptor partial agonist, with a preference for the D3 receptor. It is a partial agonist at the serotonin 5-HT1A receptor and acts as an antagonist at 5-HT2B and 5-HT2A receptors. It is taken by mouth. The most prevalent side effects include nausea, mild sedation, fatigue, diabetes regardless of weight changes, and dizziness. At higher dosages, there is an increased risk for restlessness, insomnia, and tremors.",
-      "fr": "La cariprazine (RGH-188) est un médicament antipsychotique de troisième génération\ndécouvert[Quand ?] par Gedeon Richter[réf. souhaitée]. Il fonctionne comme un agoniste partiel des récepteurs de dopamine 2 et 3, avec une forte préférence pour les récepteurs 3. Des essais de phase III sont en cours[Quand ?] pour le traitement de la schizophrénie et la manie dans les troubles bipolaires de type I, et des essais de phase II pour le traitement de la dépression bipolaire[Passage à actualiser]. L'action sur le système dopaminergique en fait également un candidat comme traitement d'appoint de la dépression majeure."
     },
     "bindings": [
       {
@@ -1351,8 +1239,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist and antagonist",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "chlordiazepoxide",
@@ -1364,10 +1251,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Chlordiazepoxide hydrochloride, sold under the brand name Librium, is a sedative and hypnotic medication of the benzodiazepine class. It is used to treat anxiety, insomnia, and symptoms of withdrawal from alcohol, benzodiazepines, and other drugs. It is also used to discontinue long-term use of other, shorter-acting benzodiazepines due to its long half-life.",
-      "fr": "Le chlordiazépoxide est une molécule appartenant à la famille des benzodiazépines, une classe de médicaments utilisés pour traiter l'anxiété. C'est la première benzodiazépine découverte, en 1957. À partir de ce moment, une nouvelle classe d'anxiolytiques et d'hypnotiques était née. Aujourd'hui, les benzodiazépines restent les médicaments les plus utilisés pour traiter l'anxiété, que ce soit en France ou dans le monde."
     },
     "bindings": [
       {
@@ -1395,8 +1278,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "chlorpromazine",
@@ -1407,10 +1289,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Chlorpromazine (CPZ), marketed under the brand names Thorazine and Largactil among others, is an antipsychotic medication. It is primarily used to treat psychotic disorders such as schizophrenia. Other uses include the treatment of bipolar disorder, severe behavioral problems in children including those with attention deficit hyperactivity disorder, nausea and vomiting, anxiety before surgery, and hiccups that do not improve following other measures. It can be given orally, by intramuscular injection, or intravenously.",
-      "fr": "La chlorpromazine est historiquement le premier médicament antipsychotique de première génération. Nommé à l'origine \"4560 RP\" par son développeur la société pharmaceutique Rhône-Poulenc, elle fut vendue sous forme de chlorhydrate de chlorpromazine, dénommée Largactil en Europe et Thorazine aux États-Unis. Initialement surnommée la « lobotomie chimique » par le Dr Heinz Lehmann en raison des effets similaires avec cette pratique neurochirurgicale maintenant controversée, le surnom de « camisole chimique » fut par la suite généralisé en raison de son effet sédatif. Elle possède un effet anxiolytique, hypnotique, antihypertenseur, antiémétique et anticholinergique. Elle est aujourd'hui considérée comme un antipsychotique typique."
     },
     "bindings": [
       {
@@ -1470,8 +1348,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "citalopram",
@@ -1482,10 +1359,6 @@
     "nbn": {
       "en": "serotonin reuptake inhibitor (S-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine (S-RI)"
-    },
-    "description": {
-      "en": "Citalopram, sold under the brand name Celexa among others, is an antidepressant of the selective serotonin reuptake inhibitor (SSRI) class. It is used to treat major depressive disorder, obsessive compulsive disorder, panic disorder, and social anxiety disorder. The antidepressant effects may take one to four weeks to occur. It is typically taken orally. In some European countries, it is sometimes given intravenously to initiate treatment, before switching to the oral route of administration for continuation of treatment. It has also been used intravenously in other parts of the world in some other circumstances.",
-      "fr": "Le citalopram, ou plus exactement le bromhydrate de citalopram, est un antidépresseur inhibiteur sélectif de la recapture de la sérotonine (ISRS), il est utilisé pour le traitement de la dépression, associé ou non à des troubles de l'humeur, et dans l'ensemble des troubles de l'anxiété."
     },
     "bindings": [
       {
@@ -1525,8 +1398,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "clomipramine",
@@ -1537,10 +1409,6 @@
     "nbn": {
       "en": "serotonin reuptake inhibitor (S-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine (S-RI)"
-    },
-    "description": {
-      "en": "Clomipramine, sold under the brand name Anafranil among others, is a tricyclic antidepressant (TCA). It is used in the treatment of various conditions, most notably obsessive–compulsive disorder but also many other disorders, including hyperacusis, panic disorder, major depressive disorder, trichotillomania, body dysmorphic disorder and chronic pain. It has also been notably used to treat premature ejaculation and the cataplexy associated with narcolepsy.",
-      "fr": "La clomipramine (Anafranil) est un médicament psychotrope utilisé comme antidépresseur et anxiolytique. Il fait partie de la classe des antidépresseurs tricycliques. Il a été développé dans les années 1960 par le fabricant suisse Geigy et est resté en usage dans le monde entier depuis lors. Il agit comme inhibiteur de la recapture de certains neurotransmetteurs, la sérotonine et la noradrénaline, dans le système nerveux central."
     },
     "bindings": [
       {
@@ -1620,8 +1488,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "clonazepam",
@@ -1633,10 +1500,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Clonazepam, sold under the brand name Klonopin among others, is a benzodiazepine medication used to prevent and treat anxiety disorders, seizures, bipolar mania, agitation associated with psychosis, obsessive–compulsive disorder (OCD), and akathisia. It is a long-acting benzodiazepine. It possesses anxiolytic, anticonvulsant, sedative, hypnotic, and skeletal muscle relaxant properties. It is typically taken orally but is also used intravenously. Effects begin within one hour and last between eight and twelve hours in adults.",
-      "fr": "Le clonazépam, commercialisé sous la marque Rivotril, est une molécule médicamenteuse de la classe des benzodiazépines, qui, comme l'ensemble de celles-ci, a une action myorelaxante, anxiolytique, sédative, hypnotique, anticonvulsivante et amnésiante."
     },
     "bindings": [
       {
@@ -1664,8 +1527,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "clonidine",
@@ -1676,10 +1538,6 @@
     "nbn": {
       "en": "norepinephrine receptor agonist (N-RA)",
       "fr": "agoniste du récepteur de la noradrénaline (N-RA)"
-    },
-    "description": {
-      "en": "Clonidine, sold under the brand names Catapres and Kapvay, among others, is an α2-adrenergic receptor agonist, hypotensive, sedative and anxiolytic drug used to treat high blood pressure, attention deficit hyperactivity disorder, perioperative pain, drug withdrawal, and menopausal flushing. Clonidine is sometimes prescribed off-label for tics. It is used orally, by injection, or as a transdermal skin patch. Onset of action is typically within an hour with the effects on blood pressure lasting for up to eight hours. Xylazine is a structural analog of clonidine.",
-      "fr": "La clonidine est un médicament agoniste des récepteurs adrénergiques de type α2."
     },
     "bindings": [
       {
@@ -1703,8 +1561,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "clorazepate",
@@ -1716,10 +1573,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Clorazepate, sold under the brand name Tranxene among others, is a benzodiazepine medication. It possesses anxiolytic, anticonvulsant, sedative, hypnotic, and skeletal muscle relaxant properties. Clorazepate is an unusually long-lasting benzodiazepine and serves as a prodrug for the equally long-lasting desmethyldiazepam, which is rapidly produced as an active metabolite. Desmethyldiazepam is responsible for most of the therapeutic effects of clorazepate.",
-      "fr": "Le clorazépate est un médicament de la famille des benzodiazépines. Il est utilisé pour ses propriétés anxiolytiques, anticonvulsives, myorelaxantes et sédatives."
     },
     "bindings": [
       {
@@ -1747,8 +1600,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "clozapine",
@@ -1759,10 +1611,6 @@
     "nbn": {
       "en": "dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
       "fr": "antagoniste des récepteurs dopamine, sérotonine, noradrénaline (DSN-RAn)"
-    },
-    "description": {
-      "en": "Clozapine, sold under the brand name Clozaril among others, is a psychiatric medication and was the first atypical antipsychotic to be discovered. It is used primarily to treat people with schizophrenia and schizoaffective disorder who have had an inadequate response to two other antipsychotics, or who have been unable to tolerate other drugs due to extrapyramidal side effects. In the US, clozapine is also approved for use in people with recurrent suicidal behavior in people with schizophrenia or schizoaffective disorder. It is also used for the treatment of psychosis in Parkinson's disease.",
-      "fr": "La clozapine est un médicament faisant partie de la famille clinique des antipsychotiques de seconde génération, dérivé de la dibenzodiazepine (en). Elle lutte ainsi contre les symptômes des psychoses, un trouble psychiatrique sévère affectant la perception de la réalité, notamment par la survenue d'hallucinations, et pouvant causer des délires. Elle est utilisée principalement dans le traitement de la schizophrénie pharmacorésistante, mais également dans le traitement des troubles bipolaires et les troubles psychotiques liés à la maladie de Parkinson. Elle a aussi été testée pour plusieurs autres pathologies neuropsychiatriques, comme le trouble borderline, le trouble schizo-affectif ou encore le trouble de stress post-traumatique, avec plus ou moins de succès."
     },
     "bindings": [
       {
@@ -1856,8 +1704,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "cyamemazine",
@@ -1865,10 +1712,6 @@
     "categories": [
       "antipsychotic_conventional"
     ],
-    "description": {
-      "en": "Cyamemazine (Tercian), also known as cyamepromazine, is a typical antipsychotic drug of the phenothiazine class which was introduced by Theraplix in France in 1972 and later in Portugal as well.",
-      "fr": "La cyamémazine (DCI) est un médicament antipsychotique. Cet antipsychotique de première génération, ou neuroleptique est surtout utilisé pour ses effets sédatifs et anxiolytiques puissants, pouvant induire de la somnolence et le sommeil en fonction de la dose prise. Cette sédation est cependant souvent recherchée dans le traitement de l'anxiété, des états aigus d'agitation, d'agressivité et des troubles du comportement. Elle est commercialisée en France depuis 1972 sous le nom de Tercian."
-    },
     "bindings": [
       {
         "target": "d2",
@@ -1947,8 +1790,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Cyamemazine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Cyamemazine"
   },
   {
     "id": "daridorexant",
@@ -1957,10 +1799,6 @@
       "hypnotic",
       "other"
     ],
-    "description": {
-      "en": "Daridorexant, sold under the brand name Quviviq, is an orexin antagonist medication which is used for the treatment of insomnia. Daridorexant is taken by mouth.",
-      "fr": "Le daridorexant, vendu sous le nom de marque Quviviq, est un médicament antagoniste de l'orexine utilisé pour le traitement de l'insomnie. Le daridorexant est pris par voie orale."
-    },
     "bindings": [
       {
         "target": "orexin",
@@ -1975,8 +1813,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Daridorexant",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Daridorexant"
   },
   {
     "id": "desipramine",
@@ -1987,10 +1824,6 @@
     "nbn": {
       "en": "norepinephrine reuptake inhibitor (N-RI)",
       "fr": "inhibiteur de la recapture de la noradrénaline (N-RI)"
-    },
-    "description": {
-      "en": "Desipramine, sold under the brand name Norpramin among others, is a tricyclic antidepressant (TCA) used in the treatment of depression. It acts as a relatively selective norepinephrine reuptake inhibitor, though it does also have other activities such as weak serotonin reuptake inhibitory, α1-blocking, antihistamine, and anticholinergic effects. The drug has not been considered a first-line treatment for depression since the introduction of selective serotonin reuptake inhibitor (SSRI) antidepressants, which have fewer side effects and are safer in overdose.",
-      "fr": "La désipramine, ou déméthylimipramine, est un antidépresseur tricyclique (TCA). Elle inhibe la réabsorption de la noradrénaline et, dans une moindre mesure, de la sérotonine. Elle est utilisée en médication contre la dépression, mais n'est pas considérée comme un traitement de première ligne depuis l'introduction des antidépresseurs ISRS."
     },
     "bindings": [
       {
@@ -2066,8 +1899,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "desvenlafaxine",
@@ -2078,10 +1910,6 @@
     "nbn": {
       "en": "serotonin and norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
-    },
-    "description": {
-      "en": "Desvenlafaxine, sold under the brand name Pristiq among others, is a medication used to treat major depressive disorder. It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class and is taken by mouth. It is recommended that the need for further treatment be occasionally reassessed. Studies have shown similar effectiveness compared to its parent compound venlafaxine.",
-      "fr": "La desvenlafaxine est un antidépresseur inhibiteur de la recapture de la sérotonine-noradrénaline (IRSNa). Il a été développé par le laboratoire Wyeth, et est commercialisé sous le nom de Pristiq. La desvenlafaxine correspond à l'un des métabolites de la venlafaxine."
     },
     "bindings": [
       {
@@ -2117,8 +1945,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "deutetrabenazine",
@@ -2126,10 +1953,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Deutetrabenazine, sold under the brand names Austedo and Austedo XR, is a vesicular monoamine transporter 2 inhibitor which is used for the treatment of chorea associated with Huntington's disease and tardive dyskinesia.",
-      "fr": "La deutétrabénazine, vendue sous le nom commercial Austedo, est un médicament utilisé pour traiter la chorée associée à la maladie de Huntington, la dyskinésie tardive et le syndrome de Gilles de la Tourette. Il s’agit d’un inhibiteur du transporteur vésiculaire de monoamines 2 (VMAT2). Forme deutérée de la tétrabénazine, elle offre une action prolongée. Elle se prend par voie orale deux fois par jour."
-    },
     "bindings": [
       {
         "target": "vmat2",
@@ -2144,8 +1967,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Deutetrabenazine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Deutetrabenazine"
   },
   {
     "id": "dexmedetomidine",
@@ -2153,10 +1975,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Dexmedetomidine, sold under the brand name Precedex among others, is a medication used for sedation. Veterinarians use dexmedetomidine for similar purposes in treating cats, dogs, and horses. It is also used in humans to treat acute agitation associated with schizophrenia or bipolar disorder. It is administered as an intravenous solution or as a buccal or sublingual film.",
-      "fr": "La dexmédétomidine, ou D-médétomidine, est un médicament sédatif α2-agoniste utilisé en anesthésiologie humaine et vétérinaire. Il s'agit de l'énantiomère dextrogyre de la médétomidine. Son énantiomère lévogyre, appelé L-médétomidine ou lévomédétomidine, ne semble avoir aucune propriété pharmacologique, c'est pourquoi la dexmédétomidine est environ deux fois plus puissante que le racémique que constitue la médétomidine."
-    },
     "bindings": [
       {
         "target": "alpha2",
@@ -2171,8 +1989,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dexmedetomidine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dexmedetomidine"
   },
   {
     "id": "dextromethorphanbupropion",
@@ -2180,10 +1997,6 @@
     "categories": [
       "antidepressant_other"
     ],
-    "description": {
-      "en": "Dextromethorphan/bupropion, sold under the brand name Auvelity, is a combination medication for the treatment of major depressive disorder (MDD) and agitation associated with dementia due to Alzheimer's disease. Its active components are dextromethorphan (DXM) and bupropion. Patients who stayed on the medication had an average of 11% greater reduction in depressive symptoms than placebo in an FDA approval trial. It is taken as a tablet by mouth.",
-      "fr": "Le dextrométhorphane/bupropion, vendu sous le nom de marque Auvelity, est une association médicamenteuse pour le traitement de la dépression."
-    },
     "bindings": [
       {
         "target": "nmda",
@@ -2247,8 +2060,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dextromethorphan/bupropion",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dextromethorphan/bupropion"
   },
   {
     "id": "dextromethorphanquinidine",
@@ -2256,10 +2068,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Dextromethorphan reduces glutamate neurotransmission by blocking NMDA receptors and acts as a sigma 1 agonist; quinidine boosts dextromethorphan availability by inhibiting CYP2D6 metabolism.",
-      "fr": "La dextrométhorphane réduit la neurotransmission glutamatergique en bloquant les récepteurs NMDA et agit comme agoniste sigma 1 ; la quinidine augmente la disponibilité de la dextrométhorphane en inhibant son métabolisme par le CYP2D6."
-    },
     "bindings": [
       {
         "target": "nmda",
@@ -2312,10 +2120,6 @@
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "Modulateur allostérique positif du GABA (GABA-PAM)"
     },
-    "description": {
-      "en": "Diazepam, sold under the brand name Valium among others, is a medication of the benzodiazepine family that acts as an anxiolytic. It is used to treat a range of conditions, including anxiety, seizures, alcohol withdrawal syndrome, muscle spasms, insomnia, and restless legs syndrome. It may also be used to cause memory loss during certain medical procedures. It can be taken orally, as a suppository, intramuscularly, intravenously or used as a nasal spray. When injected intravenously, effects begin in one to five minutes and last up to an hour. When taken by mouth, effects begin after 15 to 60 minutes.",
-      "fr": "Le diazépam est un médicament de la famille des benzodiazépines. Il possède des propriétés anxiolytiques, sédatives, amnésiantes et hypnotiques. Néanmoins, en raison de ses effets importants de somnolence résiduelle le lendemain matin, il est de moins en moins utilisé comme hypnotique en clinique. Comme toutes les molécules appartenant à la famille des benzodiazépines, le diazépam possède également des propriétés anticonvulsivantes et myorelaxantes. Le diazépam est notamment utile dans le cadre du traitement des crises comitiales et épileptiques. C’est un médicament de choix pour son métabolisme rapide ainsi que pour ses vertus myorelaxantes, à l’instar d'autres benzodiazépines comme le tétrazépam .\nCommercialisé en 1963 sous la marque Valium par les laboratoires Hoffmann-La Roche, c'est la seconde benzodiazépine qui est apparue sur le marché des produits pharmaceutiques, après le chlordiazépoxide (Librium) en 1960."
-    },
     "bindings": [
       {
         "target": "gaba_a",
@@ -2342,8 +2146,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "diphenhydramine",
@@ -2351,10 +2154,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Diphenhydramine, sold under the brand name Benadryl among others, is an antihistamine and sedative. Although generally considered sedating, diphenhydramine can cause paradoxical central nervous system stimulation in some individuals, particularly at higher doses. This may manifest as agitation, anxiety, or restlessness rather than sedation. It is a first-generation H1-antihistamine (i.e. it blocks histamine) with sedative effects. Diphenhydramine is also a potent anticholinergic. It is mainly used to treat allergies, insomnia, and symptoms of the common cold. It is also less commonly used for tremors in parkinsonism, and nausea. It is taken by mouth, injected into a vein, injected into a muscle, or applied to the skin. Maximal effect is typically around two hours after an oral dose, and effects can last for up to seven hours.",
-      "fr": "La diphénhydramine (DHM) est une substance chimique utilisée comme antihistaminique H1 de première génération, de la famille pharmacologique des aminoalkyl-éthers (comme la doxylamine) qui n'est plus guère utilisée contre les allergies à proprement parler (à cause de la somnolence qu'elle génère) mais surtout :sous forme de spécialité pour application locale contre les piqûres d'insectes (Butix, R Calm, Diphamine, Azaron…) ;\npréventivement contre le mal des transports (Nautamine, R Calm, Bénadryl) ;\npour lutter contre le rhume (Actifed jour / nuit) ;\npour le soulagement de l'insomnie occasionnelle (Nustasium, Sleep-Eze) ;\npour le sevrage des opiacés (Azicalm)."
-    },
     "bindings": [
       {
         "target": "h1",
@@ -2373,8 +2172,7 @@
         "action": "antagonist"
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Diphenhydramine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Diphenhydramine"
   },
   {
     "id": "disulfiram",
@@ -2382,13 +2180,8 @@
     "categories": [
       "substance_use"
     ],
-    "description": {
-      "en": "Disulfiram is a medication used to support the treatment of chronic alcoholism by producing an acute sensitivity to ethanol. Disulfiram works by inhibiting the enzyme aldehyde dehydrogenase, causing many of the effects of a hangover to be felt immediately following alcohol consumption. Disulfiram plus alcohol, even small amounts, produces flushing, throbbing in the head and neck, a throbbing headache, respiratory difficulty, nausea, copious vomiting, sweating, thirst, chest pain, palpitation, shortness of breath, hyperventilation, fast heart rate, low blood pressure, fainting, marked uneasiness, weakness, vertigo, blurred vision, and confusion. In severe reactions there may be respiratory depression, cardiovascular collapse, abnormal heart rhythms, heart attack, acute congestive heart failure, unconsciousness, convulsions, and death.",
-      "fr": "Le disulfirame (nom de marque Espéral) ou bis(diéthylthiocarbamyl)disulfure ou disulfure de tétraéthyl-thiocarbamoyle a pour formule brute C10H20N2S4. C'est une poudre blanche, inodore et de saveur légèrement amère, fondant vers 71 °C. Le disulfirame est très soluble dans l'alcool et dans le chloroforme."
-    },
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Disulfiram",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Disulfiram"
   },
   {
     "id": "donepezil",
@@ -2399,10 +2192,6 @@
     "nbn": {
       "en": "acetylcholine enzyme inhibitor (ACh-EI)",
       "fr": "inhibiteur enzymatique de l'acétylcholine (ACh-EI)"
-    },
-    "description": {
-      "en": "Donepezil, sold under the brand name Aricept among others, is a medication used to treat dementia of the Alzheimer's type. It appears to result in a small benefit in mental function and ability to function. Use, however, has not been shown to change the progression of the disease. Treatment should be stopped if no benefit is seen. It is taken by mouth or via a transdermal patch.",
-      "fr": "Le donépézil, présent sous la forme de chlorhydrate de donépézil a une action parasympathomimétique indirecte par son effet inhibiteur réversible de l'acétylcholinestérase."
     },
     "bindings": [
       {
@@ -2430,8 +2219,7 @@
         "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "dothiepin",
@@ -2443,10 +2231,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine multimodal (SN-MM)",
       "fr": "sérotonine, norépinéphrine multimodal (SN-MM)"
-    },
-    "description": {
-      "en": "Blocks both the serotonin and norepinephrine reuptake pumps, boosting serotonergic and noradrenergic neurotransmission; also has anticholinergic and alpha-1-blocking properties.",
-      "fr": "Bloque les transporteurs de recapture de la sérotonine et de la norépinéphrine, renforçant les neurotransmissions sérotoninergique et noradrénergique ; possède également des propriétés anticholinergiques et alpha-1-bloquantes."
     },
     "bindings": [
       {
@@ -2507,10 +2291,6 @@
       "en": "serotonin, norepinephrine multimodal (SN-MM)",
       "fr": "sérotonine, norépinéphrine multimodal (SN-MM)"
     },
-    "description": {
-      "en": "Doxepin is a medication belonging to the tricyclic antidepressant (TCA) class of drugs used to treat major depressive disorder, anxiety disorders, difficult-to-treat chronic urticaria, and insomnia. For hives it is a less preferred alternative to antihistamines. It has a mild to moderate benefit for sleeping problems. It is used as a cream for itchiness due to atopic dermatitis or lichen simplex chronicus.",
-      "fr": "La doxépine est un médicament utilisé pour les troubles dépressifs majeurs, les troubles anxieux, l'urticaire chronique et les troubles du sommeil. Pour l'urticaire, c'est une alternative moins préférée aux antihistaminiques. Il a un bénéfice léger à modéré pour les problèmes de sommeil. Il est utilisé comme crème pour les démangeaisons dues à la dermatite atopique ou au lichen simplex chronicus."
-    },
     "bindings": [
       {
         "target": "sert",
@@ -2569,8 +2349,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "duloxetine",
@@ -2581,10 +2360,6 @@
     "nbn": {
       "en": "serotonin and norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la norépinéphrine (SN-RI)"
-    },
-    "description": {
-      "en": "Duloxetine, sold under the brand name Cymbalta among others, is a medication used to treat major depressive disorder, generalized anxiety disorder, obsessive–compulsive disorder, fibromyalgia, neuropathic pain, and other types of chronic pain. It is taken by mouth.",
-      "fr": "La duloxétine, commercialisée dans divers pays sous les noms de Cymbalta, Yentreve, Xeristar ou AriClaim est un antidépresseur inhibiteur de la recapture de la sérotonine et de la noradrénaline. Il est utilisé pour le traitement de l’épisode dépressif majeur, du trouble de l'anxiété généralisée, de la douleur liée à la neuropathie diabétique."
     },
     "bindings": [
       {
@@ -2636,8 +2411,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "escitalopram",
@@ -2648,10 +2422,6 @@
     "nbn": {
       "en": "serotonin reuptake inhibitor (S-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine (S-RI)"
-    },
-    "description": {
-      "en": "Escitalopram, sold under the brand names Lexapro and Cipralex, among others, is an antidepressant medication of the selective serotonin reuptake inhibitor (SSRI) class. It is mainly used to treat major depressive disorder, generalized anxiety disorder, panic disorder, obsessive–compulsive disorder (OCD), and social anxiety disorder. Escitalopram is taken by mouth. For commercial use, it is formulated as an oxalate salt exclusively.",
-      "fr": "L'escitalopram, commercialisé dans divers pays sous les noms de Lexapro, Cipralex, Sipralexa et Seroplex, est un antidépresseur inhibiteur sélectif de la recapture de la sérotonine. L'escitalopram est utilisé dans le traitement de la dépression et de l'anxiété."
     },
     "bindings": [
       {
@@ -2675,8 +2445,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "esketamine",
@@ -2684,10 +2453,6 @@
     "categories": [
       "antidepressant_other"
     ],
-    "description": {
-      "en": "Esketamine, sold under the brand names Spravato and Ketanest among others, is the S(+) enantiomer of ketamine. It is a dissociative medication used as a general anesthetic and as an antidepressant. Esketamine is the active enantiomer of ketamine in terms of NMDA receptor antagonism and is more potent than racemic ketamine. However, racemic ketamine may produce larger and more sustained antidepressant effects than esketamine.",
-      "fr": "L'eskétamine, commercialisée en France sous les marques Eskesia et Spravato entre autres, est un médicament utilisé comme anesthésique général et pour la dépression réfractaire au traitement. L'eskétamine est utilisée en spray nasal ou par injection intraveineuse."
-    },
     "bindings": [
       {
         "target": "nmda",
@@ -2706,8 +2471,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Esketamine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Esketamine"
   },
   {
     "id": "estazolam",
@@ -2719,10 +2483,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Estazolam, sold under the brand name Prosom among others, is a tranquilizer medication of the triazolobenzodiazepine (TBZD) class, which are benzodiazepines (BZDs) fused with a triazole ring. It possesses anxiolytic, anticonvulsant, hypnotic, sedative and skeletal muscle relaxant properties. Estazolam is an intermediate-acting oral benzodiazepine. It is used for short-term treatment of insomnia.",
-      "fr": "L'estazolam est une substance chimique de la famille des benzodiazépines notamment commercialisée sous le nom de Nuctalon ou Prosom. Comme toutes les molécules de cette famille, elle possède des propriétés anxiolytiques, hypnotiques ou sédatives, anticonvulsantes, et myorelaxantes.\nL'estazolam est uniquement utilisé comme hypnotique en France."
     },
     "bindings": [
       {
@@ -2750,8 +2510,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "eszopiclone",
@@ -2762,10 +2521,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Eszopiclone, sold under the brand name Lunesta among others, is a nonbenzodiazepine medication used in the treatment of short-term and long-term insomnia. It is one of the few FDA-approved hypnotic medications with a controlled substance designation that does not have restrictions on its length of use. Evidence supports benefits up to six months, with some studies suggesting similar efficacy after 12 months. It is taken by mouth.",
-      "fr": "L'eszopiclone est un médicament utilisé pour le traitement de l'insomnie. Son nom commercial en France était Noxiben et il est également connu à l'international sous son nom commercial Lunesta."
     },
     "bindings": [
       {
@@ -2794,8 +2549,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "flibanserin",
@@ -2803,10 +2557,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Flibanserin, sold under the brand name Addyi, is a medication approved for the treatment of pre-menopausal women with hypoactive sexual desire disorder (HSDD). The medication attempts to improve sexual desire, increase the number of satisfying sexual events, and decrease the distress associated with low sexual desire. The most common side effects are dizziness, sleepiness, nausea, difficulty falling asleep or staying asleep and dry mouth.",
-      "fr": "La flibansérine, vendue sous la marque commerciale Addyi, est un médicament approuvé aux États-Unis comme traitement du trouble du désir sexuel hypo-actif chez les femmes qui n'ont pas encore vécu la ménopause. Il est surnommé le « Viagra pour femmes » ou « Viagra rose »."
-    },
     "bindings": [
       {
         "target": "5ht1a",
@@ -2849,8 +2599,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Flibanserin",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Flibanserin"
   },
   {
     "id": "flumazenil",
@@ -2858,10 +2607,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Flumazenil, also known as flumazepil, is a selective GABAA receptor antagonist administered via injection, or intranasally. Therapeutically, it acts as both an antagonist and antidote to benzodiazepines, through competitive inhibition.",
-      "fr": "Le flumazénil est un composé polycyclique qui est antagoniste compétitif des récepteurs des benzodiazépines. Il est utilisé comme antidote pour annuler les effets thérapeutiques ou toxiques (surdosage) des benzodiazépines, ainsi que pour le diagnostic différentiel des comas toxiques. Il a été commercialisé pour la première fois par le laboratoire Hoffmann-La Roche, en 1987, sous le nom de marque Anexate."
-    },
     "bindings": [
       {
         "target": "gaba_a",
@@ -2880,8 +2625,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Flumazenil",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Flumazenil"
   },
   {
     "id": "flunitrazepam",
@@ -2893,10 +2637,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Flunitrazepam, sold under the brand name Rohypnol among others, is a benzodiazepine used to treat severe insomnia and assist with anesthesia. As with other hypnotics, flunitrazepam has been advised to be prescribed only for short-term use or by those with chronic insomnia on an occasional basis.",
-      "fr": "Le flunitrazépam est un médicament de la famille des benzodiazépines découvert dans les années 1970 par le laboratoire Hoffmann-La Roche et commercialisé sous le nom de Rohypnol. Dans les pays où il est prescrit, ses puissantes propriétés hypnotiques et le risque de dépendance auquel il expose le font réserver aux cas d'insomnies sévères, et sa prescription est limitée."
     },
     "bindings": [
       {
@@ -2924,8 +2664,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "fluoxetine",
@@ -2936,10 +2675,6 @@
     "nbn": {
       "en": "serotonin reuptake inhibitor (S-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine (S-RI)"
-    },
-    "description": {
-      "en": "Fluoxetine, sold under the brand name Prozac, among others, is an antidepressant medication of the selective serotonin reuptake inhibitor (SSRI) class used for the treatment of major depressive disorder, anxiety, obsessive–compulsive disorder (OCD), panic disorder, premenstrual dysphoric disorder, and bulimia nervosa. It is also approved for treatment of major depressive disorder in adolescents and children eight years of age and over. It has also been used to treat premature ejaculation. Fluoxetine is taken by mouth.",
-      "fr": "Le chlorhydrate de fluoxétine est un psychotrope de type inhibiteur sélectif de la recapture de la sérotonine (ISRS) utilisé comme antidépresseur dans le traitement de la dépression, mais aussi des troubles obsessionnels compulsifs, de la boulimie nerveuse, des troubles dysphoriques prémenstruels, et de nombreux autres états."
     },
     "bindings": [
       {
@@ -2975,8 +2710,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "flupenthixol",
@@ -2987,10 +2721,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Flupentixol (INN), also known as flupenthixol, marketed under brand names such as Depixol and Fluanxol is a typical antipsychotic drug of the thioxanthene class. It was introduced in 1965 by Lundbeck. In addition to single drug preparations, it is also available as flupentixol/melitracen—a combination product containing both melitracen and flupentixol .\nFlupentixol is not approved for use in the United States. It is, however, approved for use in the UK, Australia, Canada, Russian Federation, South Africa, New Zealand, Philippines, Iran, Germany, and various other countries.",
-      "fr": "C'est un dérivé du thioxanthène. Il est utilisé dans le traitement des états psychotiques et des états d'agitation et d'agressivité pouvant en découler."
     },
     "bindings": [
       {
@@ -3050,8 +2780,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "fluphenazine",
@@ -3059,10 +2788,6 @@
     "categories": [
       "antipsychotic_conventional"
     ],
-    "description": {
-      "en": "Fluphenazine, sold under the brand name Prolixin among others, is a high-potency typical antipsychotic medication of the phenothiazine class. It is used in the treatment of chronic psychoses such as schizophrenia, and is about equal in effectiveness to low-potency antipsychotics like chlorpromazine. It is also used to treat depression in combination with nortriptyline. In addition to the oral form, fluphenazine comes in decanoate and enanthate depot injection versions for increased adherence. Fluphenazine is given by mouth, intramuscularly, or just under the skin.",
-      "fr": "La fluphénazine est un antipsychotique de première génération."
-    },
     "bindings": [
       {
         "target": "d2",
@@ -3105,8 +2830,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Fluphenazine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Fluphenazine"
   },
   {
     "id": "flurazepam",
@@ -3118,10 +2842,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Flurazepam is a drug which is a benzodiazepine derivative. It possesses anxiolytic, anticonvulsant, hypnotic, sedative and skeletal muscle relaxant properties. It produces a metabolite with a long half-life, which may stay in the bloodstream for days. \n\nFlurazepam was patented in 1968 and came into medical use the same year. Flurazepam, developed by Roche Pharmaceuticals, was one of the first benzodiazepine hypnotic medications to be marketed.",
-      "fr": "Le flurazépam est une benzodiazépine utilisée pour ses propriétés hypnotiques. Cependant comme toutes les benzodiazépines, il a également des propriétés anxiolytiques, anticonvulsivantes, myorelaxantes et amnésiantes."
     },
     "bindings": [
       {
@@ -3149,8 +2869,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "fluvoxamine",
@@ -3161,10 +2880,6 @@
     "nbn": {
       "en": "serotonin reuptake inhibitor (S-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine (S-RI)"
-    },
-    "description": {
-      "en": "Fluvoxamine, sold under the brand name Luvox among others, is an antidepressant of the selective serotonin reuptake inhibitor (SSRI) class. It is primarily used to treat major depressive disorder and, perhaps more especially, obsessive–compulsive disorder (OCD), but is also used to treat anxiety disorders such as panic disorder, social anxiety disorder, and post-traumatic stress disorder.",
-      "fr": "La fluvoxamine (Floxyfral) est un médicament antidépresseur qui traite les épisodes dépressifs majeurs chez l'adulte de plus de 18 ans et les troubles obsessionnels compulsifs (TOC) chez l’enfant de plus de 8 ans et l’adolescent. C'est un inhibiteur sélectif de la recapture de la sérotonine."
     },
     "bindings": [
       {
@@ -3200,8 +2915,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "gabapentin",
@@ -3212,10 +2926,6 @@
     "nbn": {
       "en": "glutamate, voltage-gated calcium channel blocker (Glu-CB)",
       "fr": "bloqueur des canaux calciques voltages-dépendants, glutamate (Glu-CB)"
-    },
-    "description": {
-      "en": "Gabapentin, sold under the brand name Neurontin among others, is an anticonvulsant medication used to treat neuropathic pain and partial seizures of epilepsy. Gabapentin is a\ncentral nervous system (CNS) depressant and derivative of the inhibitory neurotransmitter, GABA. It is used for the treatment of neuropathic pain caused by diabetic neuropathy, postherpetic neuralgia, and central pain. It is moderately effective: about 30–40% of those given gabapentin for diabetic neuropathy or postherpetic neuralgia have a meaningful benefit.",
-      "fr": "La gabapentine, molécule dérivé de l'acide γ-aminobutyrique, est un médicament commercialisé sous le nom commercial de Neurontin ou génériques."
     },
     "bindings": [
       {
@@ -3251,8 +2961,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated calcium channel blocker (Glu-CB)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "galantamine",
@@ -3263,10 +2972,6 @@
     "nbn": {
       "en": "acetylcholine multimodal; enzyme inhibitor; receptor PAM (ACh-MM)",
       "fr": "acétylcholine multimodal ; inhibiteur enzymatique ; PAM récepteur (ACh-MM)"
-    },
-    "description": {
-      "en": "Galantamine is a type of acetylcholinesterase inhibitor. It is an alkaloid extracted from the bulbs and flowers of Galanthus nivalis, Galanthus caucasicus, Galanthus woronowii, and other members of the family Amaryllidaceae, such as Narcissus (daffodil), Leucojum aestivum (snowflake), and Lycoris including Lycoris radiata. It can also be produced synthetically.",
-      "fr": "La galantamine est un parasympathomimétique indirect appartenant à la classe thérapeutique des inhibiteurs de la cholinestérase. Elle n'appartient pas à la famille des stigmines."
     },
     "bindings": [
       {
@@ -3302,8 +3007,7 @@
         "quote": "Neuroscience-based Nomenclature: acetylcholine multimodal; enzyme inhibitor; receptor PAM (ACh-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "guanfacine",
@@ -3314,10 +3018,6 @@
     "nbn": {
       "en": "norepinephrine receptor agonist (N-RA)",
       "fr": "agoniste des récepteurs noradrénergiques (N-RA)"
-    },
-    "description": {
-      "en": "Guanfacine, sold under the brand name Tenex (immediate-release) and Intuniv (extended-release) among others, is an oral alpha-2a agonist medication used to treat attention deficit hyperactivity disorder (ADHD) and high blood pressure.",
-      "fr": "La guanfacine est un médicament employé pour traiter l'hypertension artérielle. Il est aussi utilisé dans le trouble du déficit de l'attention (TDAH) et l'anxiété."
     },
     "bindings": [
       {
@@ -3341,8 +3041,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "haloperidol",
@@ -3353,10 +3052,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Haloperidol, sold under the brand name Haldol among others, is a typical antipsychotic medication. Haloperidol is used in the treatment of schizophrenia, tics in Tourette syndrome, mania in bipolar disorder, delirium, agitation, acute psychosis, and hallucinations from alcohol withdrawal. It may be used by mouth or injection into a muscle or a vein. Haloperidol typically works within 30 to 60 minutes. A long-acting formulation may be used as an injection every four weeks for people with schizophrenia or related illnesses, who either forget or refuse to take the medication by mouth.",
-      "fr": "L'halopéridol (R1625) est une butyrophénone et un médicament antipsychotique de première génération."
     },
     "bindings": [
       {
@@ -3392,8 +3087,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "hydroxyzine",
@@ -3405,10 +3099,6 @@
     "nbn": {
       "en": "histamine receptor antagonist (H-RAn)",
       "fr": "antagoniste des récepteurs histaminiques (H-RAn)"
-    },
-    "description": {
-      "en": "Hydroxyzine, sold under the brand names Atarax and Vistaril among others, is an antihistamine medication. It is used in the treatment of itchiness, anxiety, insomnia, and nausea. It is used either by mouth or injection into a muscle.",
-      "fr": "L'hydroxyzine est une substance chimique dérivée de la pipérazine (et de la même famille). Sa principale propriété est d'être un antagoniste des récepteurs H1 de l'histamine."
     },
     "bindings": [
       {
@@ -3432,8 +3122,7 @@
         "quote": "Neuroscience-based Nomenclature: histamine receptor antagonist (H-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "iloperidone",
@@ -3444,10 +3133,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Iloperidone, sold under the brand name Fanapt among others, is an atypical antipsychotic for the treatment of schizophrenia and bipolar I disorder.",
-      "fr": "ilopéridone, vendue sous les noms commerciaux Fanapt et Zomaril, est un antipsychotique atypique utilisé pour traiter la schizophrénie. Elle est administrée par voie orale. Les effets peuvent mettre deux à trois semaines à se manifester."
     },
     "bindings": [
       {
@@ -3495,8 +3180,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "imipramine",
@@ -3508,10 +3192,6 @@
     "nbn": {
       "en": "serotonin and norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
-    },
-    "description": {
-      "en": "Imipramine, sold under the brand name Tofranil, among others, is a tricyclic antidepressant (TCA) mainly used in the treatment of depression. It is also effective in treating anxiety and panic disorder. Imipramine is taken by mouth.",
-      "fr": "L'imipramine est un produit chimique agissant en inhibant la recapture neuronale de monoamines. Ses effets biochimiques, vraisemblablement à l'origine de l'effet thérapeutique, reposent sur une diminution du recaptage présynaptique de la noradrénaline et de la sérotonine, facilitant la transmission synaptique."
     },
     "bindings": [
       {
@@ -3583,8 +3263,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "isocarboxazid",
@@ -3595,10 +3274,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)",
       "fr": "inhibiteur enzymatique de la sérotonine, noradrénaline et dopamine (SN-EI)"
-    },
-    "description": {
-      "en": "Isocarboxazid, sold under the brand name Marplan among others, is a non-selective irreversible monoamine oxidase inhibitor (MAOI) of the hydrazine class. Along with phenelzine and tranylcypromine, it is one of the three classic irreversible, non-selective MAOIs used as antidepressants in modern psychiatric practice. Availability varies by country; in the United States, all three remain available for clinical use, though isocarboxazid is prescribed less often than phenelzine or tranylcypromine. Its lower use has been attributed in part to practical issues of affordability and availability, a smaller literature base, and the absence of an FDA-approved generic equivalent.",
-      "fr": "L'isocarboxazide est un inhibiteur non-sélectif et irréversible de la monoamine oxydase (IMAO). De la classe des hydrazines, il est utilisé comme antidépresseur."
     },
     "bindings": [
       {
@@ -3626,8 +3301,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "ketamine",
@@ -3635,10 +3309,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Ketamine is a cyclohexanone-derived general anesthetic and NMDA receptor antagonist with analgesic and hallucinogenic properties, used medically for anesthesia, depression, and pain management. Ketamine exists as its two enantiomers, S- (esketamine) and R- (arketamine), and has antidepressant action likely involving NMDA antagonism as well as other mechanisms.",
-      "fr": "La kétamine est un psychotrope utilisé comme anesthésique injectable. Elle est aussi employée comme analgésique, sédatif, et en médecine vétérinaire."
-    },
     "bindings": [
       {
         "target": "nmda",
@@ -3657,8 +3327,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Ketamine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Ketamine"
   },
   {
     "id": "lamotrigine",
@@ -3669,10 +3338,6 @@
     "nbn": {
       "en": "glutamate, voltage-gated sodium channel blocker (Glu-CB)",
       "fr": "bloqueur des canaux sodiques voltage-dépendants et du glutamate (Glu-CB)"
-    },
-    "description": {
-      "en": "Lamotrigine, sold under the brand name Lamictal among others, is a medication used to treat epilepsy and stabilize mood in bipolar disorder. For epilepsy, this includes focal seizures, tonic-clonic seizures, and seizures in Lennox-Gastaut syndrome. In bipolar disorder, lamotrigine has not been shown to reliably treat acute depression in any groups except for the severely depressed; but for patients with bipolar disorder who are not currently symptomatic, it appears to reduce the risk of future episodes of depression. Lamotrigine is also used off label for unipolar depression and depersonalization-derealization disorder.",
-      "fr": "La lamotrigine est un antiépileptique utilisé en médecine humaine pour deux indications principales : la prévention des crises épileptiques, et la prévention des épisodes dépressifs dans la bipolarité et le trouble de la personnalité borderline."
     },
     "bindings": [
       {
@@ -3700,8 +3365,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium channel blocker (Glu-CB)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "lemborexant",
@@ -3709,10 +3373,6 @@
     "categories": [
       "hypnotic"
     ],
-    "description": {
-      "en": "Lemborexant, sold under the brand name Dayvigo, is an orexin antagonist medication which is used in the treatment of insomnia. It is indicated specifically for the treatment of insomnia characterized by difficulties with sleep onset and/or maintenance in adults. The medication is taken by mouth.",
-      "fr": "Le lemborexant, commercialisé sous la marque Dayvigo, est un médicament antagoniste de l'orexine utilisé dans le traitement de l'insomnie. Il est indiqué spécifiquement dans le traitement de l'insomnie caractérisée par des difficultés de début du sommeil ou de maintien du sommeil chez l'adulte. Le médicament est pris par voie orale."
-    },
     "bindings": [
       {
         "target": "orexin",
@@ -3727,8 +3387,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lemborexant",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lemborexant"
   },
   {
     "id": "levetiracetam",
@@ -3736,10 +3395,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Levetiracetam, sold under the brand name Keppra among others, is an anti-seizure medication (medication) used to treat epilepsy. It is used for partial-onset, myoclonic, or tonic–clonic seizures, and is taken either by mouth as an immediate or extended release formulation or by injection into a vein.",
-      "fr": "Le lévétiracétam est un médicament nootrope et anticonvulsivant de la famille des pyrrolidines."
-    },
     "bindings": [
       {
         "target": "sv2a",
@@ -3771,8 +3426,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Levetiracetam",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Levetiracetam"
   },
   {
     "id": "levomilnacipran",
@@ -3783,10 +3437,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
-    },
-    "description": {
-      "en": "Levomilnacipran ( -milnacipran), sold under the brand name Fetzima, is an antidepressant, used for the treatment of major depressive disorder in adults. It is the levorotatory enantiomer of milnacipran, and has similar effects and pharmacology, acting as a serotonin–norepinephrine reuptake inhibitor.",
-      "fr": "Le lévomilnacipran, produit[Par qui ?] sous le nom de marque Fetzima, est un antidépresseur utilisé pour traiter les troubles dépressifs majeurs. Bien qu’il ne soit pas approuvé[Par qui ?] pour la fibromyalgie, le milnacipran, un médicament similaire, l’est. Il est administré par voie orale."
     },
     "bindings": [
       {
@@ -3822,8 +3472,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "lisdexamfetamine",
@@ -3834,10 +3483,6 @@
     "nbn": {
       "en": "dopamine and norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
       "fr": "inhibiteur et libérateur de la recapture de la dopamine et de la noradrénaline (DN-RIRe)"
-    },
-    "description": {
-      "en": "Lisdexamfetamine, sold under the brand names Vyvanse and Elvanse among others, is a stimulant medication that is used as a treatment for attention deficit hyperactivity disorder (ADHD) in both children and adults, and for moderate-to-severe binge eating disorder in adults. A prodrug of dextroamphetamine, lisdexamfetamine is taken by mouth. Its effects generally begin within 90 minutes and last for up to 14 hours.",
-      "fr": "La lisdexamfétamine est un produit chimique. Le dimésylate de lisdexamfétamine (LDX) est la prodrogue de la dextroamphétamine.\nSon utilisation pharmaceutique est autorisée dans le traitement d'un trouble déficitaire de l'attention/hyperactivité (TDAH).\nLa Food and Drug Administration autorise également son emploi chez l'adulte pour remédier au syndrome d'hyperphagie incontrôlée."
     },
     "bindings": [
       {
@@ -3897,8 +3542,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine and norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "lithium",
@@ -3910,10 +3554,6 @@
       "en": "lithium enzyme interactions (Li-Eint)",
       "fr": "interactions enzymatiques du lithium (Li-Eint)"
     },
-    "description": {
-      "en": "Certain lithium compounds, also known as lithium salts, are used as psychiatric medication, primarily for bipolar disorder and for major depressive disorder. Lithium is taken orally.",
-      "fr": "Les sels de lithium constituent la base chimique d'un traitement stabilisateur de l'humeur, utilisé notamment dans le trouble bipolaire. Depuis leur introduction dans la pharmacopée psychiatrique, les sels de lithium ont été parmi les structures ioniques les plus étudiées dans la littérature médicale, les publications sur leur efficacité dans les troubles de l’humeur atteignant parfois une cinquantaine d’articles par an. En se basant sur ces données, les sels de lithium peuvent être considérés comme le seul traitement stabilisateur de l'humeur de référence actuellement disponible, si les critères stricts de définition d’un thymorégulateur sont respectés, à savoir une action anti-maniaque et anti-dépressive en aigu et en prophylaxie. C'est le traitement de première intention dans les troubles bipolaires."
-    },
     "bindings": [],
     "wikipedia": "https://en.wikipedia.org/wiki/Lithium_(medication)",
     "nbn_sources": [
@@ -3923,8 +3563,7 @@
         "quote": "Neuroscience-based Nomenclature: lithium enzyme interactions (Li-Eint)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "lofepramine",
@@ -3936,10 +3575,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
-    },
-    "description": {
-      "en": "Predominantly blocks norepinephrine reuptake; also blocks serotonin reuptake at high doses, with additional anticholinergic, antihistaminic, and alpha1-blocking properties.",
-      "fr": "Bloque principalement la recapture de la noradrénaline ; inhibe également la recapture de la sérotonine à fortes doses, avec des propriétés anticholinergiques, antihistaminiques et bloquantes alpha1 supplémentaires."
     },
     "bindings": [
       {
@@ -4023,10 +3658,6 @@
     "categories": [
       "substance_use"
     ],
-    "description": {
-      "en": "Lofexidine, sold under the brand name Lucemyra among others, is a medication historically used to treat high blood pressure; today, it is more commonly used to help with the physical symptoms of opioid withdrawal. It is taken by mouth. It is an α2A-adrenergic receptor agonist. It was approved for use by the Food and Drug Administration in the United States in 2018, considering it to be a first-in-class medication.",
-      "fr": "La loféxidine, vendue notamment sous le nom de marque Lucemyra, est un médicament utilisé pour traiter le sevrage aux opioïdes. Elle n'est pas aussi efficace que la buprénorphine. Elle se prend par voie orale. Elle peut être utilisé pendant deux semaines maximum et doit être arrêtée progressivement."
-    },
     "bindings": [
       {
         "target": "alpha2",
@@ -4041,8 +3672,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lofexidine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lofexidine"
   },
   {
     "id": "loflazepate",
@@ -4051,10 +3681,6 @@
       "benzodiazepine",
       "anxiolytic"
     ],
-    "description": {
-      "en": "Ethyl loflazepate is a drug which is a benzodiazepine derivative. It possesses anxiolytic, anticonvulsant, sedative and skeletal muscle relaxant properties. In animal studies it was found to have low toxicity, although in rats evidence of pulmonary phospholipidosis occurred with pulmonary foam cells developing with long-term use of very high doses. Its elimination half-life is 51–103 hours. Its mechanism of action is similar to other benzodiazepines. Ethyl loflazepate also produces an active metabolite which is stronger than the parent compound. Ethyl loflazepate was designed to be a prodrug for descarboxyloflazepate, its active metabolite. It is the active metabolite which is responsible for most of the pharmacological effects rather than ethyl loflazepate. The main metabolites of ethyl loflazepate are descarbethoxyloflazepate, loflazepate and 3-hydroxydescarbethoxyloflazepate. Accumulation of the active metabolites of ethyl loflazepate are not affected by those with kidney failure or impairment. The symptoms of an overdose of ethyl loflazepate include sleepiness, agitation and ataxia. Hypotonia may also occur in severe cases. These symptoms occur much more frequently and severely in children. Death from therapeutic maintenance doses of ethyl loflazepate taken for 2 – 3 weeks has been reported in 3 elderly patients. The cause of death was asphyxia due to benzodiazepine toxicity. High doses of the antidepressant fluvoxamine may potentiate the adverse effects of ethyl loflazepate.",
-      "fr": "Le loflazépate d'éthyle est un médicament de la famille des benzodiazépines commercialisé sous le nom de Victan."
-    },
     "bindings": [
       {
         "target": "gaba_a",
@@ -4073,8 +3699,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Loflazepate",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Loflazepate"
   },
   {
     "id": "lorazepam",
@@ -4086,10 +3711,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Lorazepam, sold under the brand name Ativan among others, is a benzodiazepine medication. It is used to treat anxiety, insomnia, severe agitation, active seizures including status epilepticus, alcohol withdrawal, and chemotherapy-induced nausea and vomiting. It is also used during surgery to interfere with memory formation, to sedate those who are being mechanically ventilated, and, along with other treatments, for acute coronary syndrome due to cocaine use. It can be given orally, transdermally, intravenously, or intramuscularly. When given by injection, onset of effects is between one and thirty minutes and effects last for up to a day.",
-      "fr": "Le lorazépam (DCI) est une benzodiazépine à action intermédiaire, réputée pour ses puissantes propriétés anxiolytiques, sédatives et anticonvulsivantes. Agissant principalement par la modulation des récepteurs GABAA du système nerveux central, il induit une diminution rapide de l’anxiété et facilite la relaxation, tout en assurant un contrôle efficace des crises convulsives dans certaines situations cliniques. Commercialisé notamment sous les noms de Témesta en Europe et Ativan aux États-Unis, le lorazépam a été introduit par la société Wyeth en 1977."
     },
     "bindings": [
       {
@@ -4117,8 +3738,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "loxapine",
@@ -4129,10 +3749,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Loxapine, sold under the brand names Loxitane and Adasuve among others, is a tricyclic antipsychotic medication used primarily in the treatment of schizophrenia and bipolar disorder. It is a member of the dibenzoxazepine class and structurally very similar to clozapine. Several researchers have argued that loxapine, initially classified as a typical antipsychotic, behaves as an atypical antipsychotic.",
-      "fr": "La loxapine (DCI) est un médicament antipsychotique de première génération.\nAujourd'hui, cet antipsychotique, anciennement appelé neuroleptique, ou « tranquillisant majeur », est principalement utilisé comme tranquillisant en raison de ses puissantes actions sédatives, anxiolytiques et antipsychotiques."
     },
     "bindings": [
       {
@@ -4208,8 +3824,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "lumateperone",
@@ -4220,10 +3835,6 @@
     "nbn": {
       "en": "serotonin, dopamine receptor antagonist / partial agonist (SD-RAn/PA)",
       "fr": "antagoniste / agoniste partiel des récepteurs sérotoninergiques et dopaminergiques (SD-RAn/PA)"
-    },
-    "description": {
-      "en": "Lumateperone, sold under the brand name Caplyta, is an atypical antipsychotic medication of the pyridopyrroloquinoxaline and butyrophenone families. It is approved for the treatment of schizophrenia as well as bipolar depression, as either monotherapy or adjunctive therapy, and for major depressive disorder as an adjunctive therapy only. It is developed by Intra-Cellular Therapies, licensed from Bristol-Myers Squibb. Lumateperone was approved for medical use in the US in December 2019 with an initial indication for schizophrenia. It became available in February 2020.",
-      "fr": "La lumatépérone, également connue sous le nom commercial « Caplyta », est un antipsychotique de seconde génération de la classe des butyrophénones. Elle a été développée par Intra-Cellular Therapies, et elle est utilisée dans le traitement la schizophrénie et de la dépression dans le trouble bipolaire."
     },
     "bindings": [
       {
@@ -4297,8 +3908,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lumateperone",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lumateperone"
   },
   {
     "id": "lurasidone",
@@ -4309,10 +3919,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopamine, sérotonine (DS-RAn)"
-    },
-    "description": {
-      "en": "Lurasidone, sold under the brand name Latuda among others, is an atypical antipsychotic medication used to treat schizophrenia and bipolar depression. It is taken by mouth.",
-      "fr": "La lurasidone est un antipsychotique de seconde génération développé par Dainippon Sumitomo Pharma. Il est administré par voie orale pour le traitement de la schizophrénie et des troubles bipolaires avec dépression."
     },
     "bindings": [
       {
@@ -4400,8 +4006,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "maprotiline",
@@ -4412,10 +4017,6 @@
     "nbn": {
       "en": "norepinephrine reuptake inhibitor (N-RI)",
       "fr": "inhibiteur de la recapture de la noradrénaline (N-RI)"
-    },
-    "description": {
-      "en": "Maprotiline, sold under the brand name Ludiomil among others, is a tetracyclic antidepressant (TeCA) that is used in the treatment of depression. It may alternatively be classified as a tricyclic antidepressant (TCA), specifically a secondary amine. In terms of its chemistry and pharmacology, maprotiline is closely related to such-other secondary-amine TCAs as nortriptyline and protriptyline and has similar effects to them, albeit with more distinct anxiolytic effects. Additionally, whereas protriptyline tends to be somewhat more stimulating and in any case is distinctly more-or-less non-sedating, mild degrees of sedation may be experienced with maprotiline.",
-      "fr": "La maprotiline est un antidépresseur, utilisé en cas d’épisodes dépressifs majeurs."
     },
     "bindings": [
       {
@@ -4483,8 +4084,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "memantine",
@@ -4495,10 +4095,6 @@
     "nbn": {
       "en": "glutamate receptor antagonist (Glu-RAn)",
       "fr": "antagoniste des récepteurs glutamate (Glu-RAn)"
-    },
-    "description": {
-      "en": "Memantine, sold under the brand name Namenda among others, is a medication used to slow the progression of moderate-to-severe Alzheimer's disease. It is taken by mouth.",
-      "fr": "La mémantine est une substance active médicamenteuse proposée dans le traitement de la maladie d'Alzheimer qui agit par blocage des récepteurs NMDA."
     },
     "bindings": [
       {
@@ -4538,8 +4134,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate receptor antagonist (Glu-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "methylfolate_l",
@@ -4547,13 +4142,8 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Levomefolic acid (INN, also known as L-5-MTHF, L-methylfolate and L-5-methyltetrahydrofolate and (6S)-5-methyltetrahydrofolate, and (6S)-5-MTHF) is the primary biologically active form of folate used at the cellular level for DNA reproduction, the cysteine cycle and the regulation of homocysteine. It is also the form found in circulation and transported across membranes into tissues and across the blood–brain barrier. In the cell, L-methylfolate is used in the methylation of homocysteine to form methionine and tetrahydrofolate (THF). THF is the immediate acceptor of one carbon unit for the synthesis of thymidine-DNA, purines (RNA and DNA) and methionine. The un-methylated form, folic acid (vitamin B9), is a synthetic form of folate, and must undergo enzymatic reduction by dihydrofolate reductase (DHFR) to become biologically active. Systematic reviews suggest that adjunctive L-methylfolate modestly improves symptoms in major depressive disorder.",
-      "fr": "L’acide 5-méthyltétrahydrofolique, également appelé acide lévoméfolique, est le dérivé biologiquement actif de l'acide folique, ou vitamine B9, qui intervient notamment dans le métabolisme des bases nucléiques (et donc du matériel génétique), de celui de la cystéine et de la régulation de l'homocystéine. Sa forme ionisée en solution aqueuse est le 5-méthyltétrahydrofolate, généralement abrégé en 5-CH3-THF. La vitamine B9, absorbée au niveau de l'intestin grêle, doit être convertie en 5-CH3-THF pour être utilisée par l'organisme."
-    },
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Levomefolic_acid",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Levomefolic_acid"
   },
   {
     "id": "methylphenidate_d",
@@ -4564,10 +4154,6 @@
     "nbn": {
       "en": "dopamine, norepinephrine multimodal (DN-MM)",
       "fr": "dopamine, noradrénaline multimodal (DN-MM)"
-    },
-    "description": {
-      "en": "Dexmethylphenidate, sold under the brand name Focalin among others, is a central nervous system (CNS) stimulant used in the treatment of attention deficit hyperactivity disorder (ADHD) in those over the age of five years. It is taken by mouth. The immediate-release formulation lasts up to five hours while the extended-release formulation lasts up to twelve hours. It is the more active enantiomer of methylphenidate. Methylphenidate has been shown to be more effective than atomoxetine and superior in treating ADHD symptoms when compared.",
-      "fr": "Le dexméthylphénidate, commercialisé notamment sous les noms de Focalin et Attenade et aussi appelé d-thréo-méthylphénidate (D-TMP), est un stimulant du système nerveux central de la classe des phényléthylamines et pipéridines qui est utilisé pour traiter le trouble du déficit de l'attention avec ou sans hyperactivité (TDAH) et la narcolepsie."
     },
     "bindings": [
       {
@@ -4603,8 +4189,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal (DN-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "methylphenidate_dl",
@@ -4615,10 +4200,6 @@
     "nbn": {
       "en": "dopamine, norepinephrine multimodal (DN-MM)",
       "fr": "dopamine, noradrénaline multimodal (DN-MM)"
-    },
-    "description": {
-      "en": "Methylphenidate, sold under the brand name Ritalin and Concerta, among others, is a central nervous system (CNS) stimulant used in the treatment of attention deficit hyperactivity disorder (ADHD) and narcolepsy. It may be taken by mouth or applied to the skin, and different formulations have varying durations of effect. For ADHD, the effectiveness of methylphenidate is comparable to atomoxetine but modestly lower than amphetamine. However, methylphenidate is preferred as a first-line treatment in children, while amphetamine is preferred in adults. Methylphenidate reduces core ADHD symptoms and may do so in part by enhancing executive functions, such as working memory, sustained attention, and inhibitory control.",
-      "fr": "Le méthylphénidate, abrévié en MPH, est une amine sympathicomimétique et un puissant psychostimulant de la famille des benzylpipéridines."
     },
     "bindings": [
       {
@@ -4654,8 +4235,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal (DN-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "mianserin",
@@ -4666,10 +4246,6 @@
     "nbn": {
       "en": "norepinephrine multimodal (N-MM)",
       "fr": "noradrénaline multimodal (N-MM)"
-    },
-    "description": {
-      "en": "Mianserin, sold as Tolvon and other brand names, is an atypical antidepressant used primarily for treating depression in Europe and other countries. It is a tetracyclic antidepressant (TeCA) and is closely related to mirtazapine in terms of chemical structure, actions, and effects, although mianserin has greater noradrenergic activity and less 5-HT3 receptor antagonism.",
-      "fr": "La miansérine est une molécule de la famille clinique des antidépresseurs tétracycliques, proche de la mirtazapine, dont l’action diffère des ISRS par un antagonisme sérotoninergique sur 5-HT2, antagonisme retrouvé également dans les antipsychotiques atypiques et les antidépresseurs tricycliques. La miansérine est également un puissant antagoniste des récepteurs histaminiques H1, expliquant son effet sédatif. Elle possède également des effets anxiolytique, hypnotique, antiémétique et orexigène."
     },
     "bindings": [
       {
@@ -4757,8 +4333,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine multimodal (N-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "midazolam",
@@ -4770,10 +4345,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Midazolam, sold under the brand name Versed among others, is a benzodiazepine medication used for anesthesia, premedication before surgical anesthesia, and procedural sedation, and to treat severe agitation. It induces sleepiness, decreases anxiety, and causes anterograde amnesia.",
-      "fr": "Le midazolam est une molécule de la famille des benzodiazépines. Ses puissantes propriétés anxiolytiques, amnésiantes, hypnotiques, anticonvulsivantes, sédatives et myorelaxantes, associées à un délai et une durée d'action courts, en font un adjuvant particulièrement utile en anesthésie et en réanimation. Sous forme orale ou intranasale, le midazolam est indiqué dans le traitement des crises d'épilepsie et de convulsion chez l'enfant et le nourrisson."
     },
     "bindings": [
       {
@@ -4801,8 +4372,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "milnacipran",
@@ -4813,10 +4383,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
-    },
-    "description": {
-      "en": "Milnacipran, sold under the brand name Savella among others, is a serotonin–norepinephrine reuptake inhibitor (SNRI) used in the clinical treatment of fibromyalgia, major depressive disorder, and neuropathic pain. In the US, it is solely approved for the treatment of fibromyalgia, even though it is also approved for the treatment of major depressive disorder in other countries.",
-      "fr": "Le milnacipran est un antidépresseur inhibiteur de la recapture de la sérotonine-noradrénaline. Il a été développé par les laboratoires Pierre Fabre et est commercialisé sous le nom d'Ixel. Il est utilisé dans le traitement de la dépression."
     },
     "bindings": [
       {
@@ -4868,8 +4434,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "mirtazapine",
@@ -4880,10 +4445,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine receptor antagonist (SN-RAn)",
       "fr": "antagoniste des récepteurs sérotoninergiques et noradrénergiques (SN-RAn)"
-    },
-    "description": {
-      "en": "Mirtazapine, sold under the brand name Remeron among others, is an atypical tetracyclic antidepressant, and as such is used primarily to treat depression. Its effects may take up to four weeks but can also manifest as early as one to two weeks. It is often used in cases of depression complicated by anxiety or insomnia. The effectiveness of mirtazapine is comparable to other commonly prescribed antidepressants. It is taken by mouth.",
-      "fr": "La mirtazapine est un antidépresseur noradrénergique et sérotoninergique spécifique (NaSSA)."
     },
     "bindings": [
       {
@@ -4955,8 +4516,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine receptor antagonist (SN-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "moclobemide",
@@ -4967,10 +4527,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine, dopamine reversible enzyme inhibitor (SN-RevEI)",
       "fr": "inhibiteur enzymatique réversible de la sérotonine, noradrénaline, dopamine (SN-RevEI)"
-    },
-    "description": {
-      "en": "Moclobemide, sold under the brand names Amira, Aurorix, Clobemix, Depnil and Manerix among others, is a reversible inhibitor of monoamine oxidase A (RIMA) drug primarily used to treat depression and social anxiety. It is not approved for use in the United States, but is approved in other Western countries such as Canada, the United Kingdom and Australia. It is produced by affiliates of the Hoffmann–La Roche pharmaceutical company. Initially, Aurorix was also marketed by Roche in South Africa, but was withdrawn after its patent rights expired and Cipla Medpro's Depnil and Pharma Dynamic's Clorix became available at half the cost.",
-      "fr": "Le moclobémide est un inhibiteur réversible de la monoamine oxydase-A utilisé principalement dans le traitement de la dépression."
     },
     "bindings": [
       {
@@ -4998,8 +4554,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine reversible enzyme inhibitor (SN-RevEI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "modafinil",
@@ -5010,10 +4565,6 @@
     "nbn": {
       "en": "dopamine reuptake inhibitor (D-RI)",
       "fr": "inhibiteur de la recapture de la dopamine (D-RI)"
-    },
-    "description": {
-      "en": "Modafinil is a central nervous system (CNS) stimulant medication used to treat narcolepsy, sleep apnea, and shift work sleep disorder. It is taken by mouth. Modafinil is a first-line treatment for narcolepsy in the United States and Europe.",
-      "fr": "Le modafinil est un psychostimulant utilisé dans le traitement de la narcolepsie et de l'hypersomnie idiopathique. Il fut testé sur un millier de soldats français lors de la guerre du Golfe en 1991, sans même que le médicament ait été autorisé. Il permet aux personnes qui souffrent d'une fatigue inhabituelle de rester éveillées sans effets secondaires ou presque. La prescription habituelle est d'une pilule dès l'éveil ; ses effets durent presque toute la journée, mais n'empêchent pas la personne de dormir aux horaires normaux. Il est prescrit sous les noms de marques Provigil aux États-Unis et en Belgique, Modiodal en France, Alertec au Canada, et Modasomil. Sa prescription en France doit se faire sur une ordonnance spéciale, « médicaments d'exception » en raison de son caractère puissant, de son usage parfois détourné et de son prix élevé."
     },
     "bindings": [
       {
@@ -5038,8 +4589,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "molindone",
@@ -5047,10 +4597,6 @@
     "categories": [
       "antipsychotic_conventional"
     ],
-    "description": {
-      "en": "Blocks dopamine D2 receptors to reduce positive symptoms of psychosis; also has muscarinic, antihistaminic, and alpha-1 adrenergic blocking properties.",
-      "fr": "Bloque les récepteurs dopaminergiques D2 pour réduire les symptômes positifs de la psychose ; possède également des propriétés antimuscariniques, antihistaminiques et alpha-1 adrénolytiques."
-    },
     "bindings": [
       {
         "target": "d2",
@@ -5114,10 +4660,6 @@
       "en": "opioid receptor antagonist (O-RAn)",
       "fr": "antagoniste des récepteurs opioïdes (O-RAn)"
     },
-    "description": {
-      "en": "Nalmefene, sold under the brand name Revex among others, is a medication that is used in the treatment of opioid overdose and alcohol dependence. Nalmefene belongs to the class of opioid antagonists and can be taken by mouth, administered by injection, or delivered through nasal administration.",
-      "fr": "Le nalméfène, connu à l'origine sous le nom de nalmétrène et commercialisé sous les noms de Revex aux États-Unis et Selincro en Europe, est un antagoniste des récepteurs opioïdes développé dans les années 1970 et utilisé principalement dans la gestion de la dépendance à l'alcool et également étudié pour le traitement des autres dépendances comme le jeu pathologique."
-    },
     "bindings": [
       {
         "target": "mu",
@@ -5164,8 +4706,7 @@
         "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (O-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "naltrexone",
@@ -5177,10 +4718,6 @@
     "nbn": {
       "en": "opioid receptor antagonist (O-RAn)",
       "fr": "antagoniste des récepteurs opioïdes (O-RAn)"
-    },
-    "description": {
-      "en": "Naltrexone, sold under the brand name Revia among others, is a medication primarily used to manage alcohol use and opioid use disorders by reducing cravings and feelings of euphoria associated with substance use disorder. It has also been found to be effective for the treatment of other addictions and may be used for them off-label. The combination naltrexone/bupropion is used to treat obesity.",
-      "fr": "La naltrexone est un inhibiteur des opiacés utilisé à l'origine dans le traitement des toxicomanies aux opiacés puis dans celui de l'alcoolisme chronique."
     },
     "bindings": [
       {
@@ -5204,8 +4741,7 @@
         "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (O-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "naltrexonebupropion",
@@ -5216,10 +4752,6 @@
     "nbn": {
       "en": "opioid receptor antagonist (naltrexone, O-RAn) and dopamine reuptake inhibitor and releaser (bupropion, D-RIRe)",
       "fr": "antagoniste des récepteurs opioïdes (naltrexone, O-RAn) et inhibiteur-libérateur de la recapture de la dopamine (bupropion, D-RIRe)"
-    },
-    "description": {
-      "en": "Bupropion blocks dopamine and norepinephrine transporters to activate POMC neurons suppressing appetite; naltrexone blocks mu opioid receptors to prevent feedback inhibition, synergistically enhancing appetite suppression.",
-      "fr": "La bupropion bloque les transporteurs de la dopamine et de la noradrénaline pour activer les neurones POMC et supprimer l'appétit ; la naltrexone bloque les récepteurs opioïdes mu pour empêcher l'inhibition rétroactive, amplifiant ainsi la suppression de l'appétit."
     },
     "bindings": [
       {
@@ -5278,10 +4810,6 @@
     "nbn": {
       "en": "serotonin receptor antagonist",
       "fr": "antagoniste des récepteurs sérotoninergiques"
-    },
-    "description": {
-      "en": "Potently blocks 5-HT2A receptors and less potently inhibits serotonin and norepinephrine reuptake; also blocks alpha-1 adrenergic receptors.",
-      "fr": "Bloque puissamment les récepteurs 5-HT2A et inhibe moins puissamment la recapture de la sérotonine et de la noradrénaline ; bloque également les récepteurs alpha-1 adrénergiques."
     },
     "bindings": [
       {
@@ -5366,10 +4894,6 @@
       "en": "serotonin, norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
     },
-    "description": {
-      "en": "Nortriptyline, sold under the brand name Aventyl, among others, is a tricyclic antidepressant. This medicine is also sometimes used for neuropathic pain, attention deficit hyperactivity disorder (ADHD), smoking cessation and anxiety. Its use for young people with depression and other psychiatric disorders may be limited due to increased suicidality in the 18–24 population initiating treatment. Nortriptyline is not a preferred treatment for attention deficit hyperactivity disorder or smoking cessation. It is taken by mouth.",
-      "fr": "La nortriptyline est un antidépresseur tricyclique également labellisé sous les noms de Sensoval, Pamelor, Norpress, Allegron, Noritren, Nortrilen et « Aventyl ». Il est utilisé comme traitement pour soigner la dépression majeure et l'énurésie nocturne chez l'enfant. Il est souvent utilisé comme traitement pour le syndrome de fatigue chronique, la douleur chronique et les maux de tête."
-    },
     "bindings": [
       {
         "target": "net",
@@ -5444,8 +4968,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "olanzapine",
@@ -5456,10 +4979,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopamine, sérotonine (DS-RAn)"
-    },
-    "description": {
-      "en": "Olanzapine, sold under the brand name Zyprexa among others, is an atypical antipsychotic primarily used to treat schizophrenia and bipolar disorder. It is also sometimes used off-label in cancer patients for treatment of chemotherapy-induced nausea and vomiting and as an appetite stimulant. For schizophrenia, it can be used for both new-onset disease and long-term maintenance. It is taken by mouth or by injection into a muscle.",
-      "fr": "L'olanzapine (DCI) est un antipsychotique de seconde génération appartenant à la classe des thiénobenzodiazépines employé principalement pour traiter la schizophrénie et le trouble bipolaire. Il peut également être utilisé dans les troubles psychotiques en général, dans certaines formes d'épisode dépressif majeur en association avec un antidépresseur, dans les troubles du comportement, dans le trouble de contrôle des impulsions et dans le trouble de la personnalité borderline, en dehors de son autorisation de mise sur le marché. On le retrouve commercialisé sous les noms Zyprexa, Zyprexa Velotab, Zyprexa Zydis, Zyprexa Relprevv et Zypadhera, et sous forme de médicament générique."
     },
     "bindings": [
       {
@@ -5546,8 +5065,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "olanzapinesamidorphan",
@@ -5555,10 +5073,6 @@
     "categories": [
       "antipsychotic_atypical"
     ],
-    "description": {
-      "en": "Olanzapine blocks D2 and 5-HT2A receptors (plus H1, alpha 1, and muscarinic receptors); samidorphan blocks mu opioid receptors to mitigate antipsychotic-induced weight gain.",
-      "fr": "L'olanzapine bloque les récepteurs D2 et 5-HT2A (ainsi que H1, alpha 1 et muscariniques) ; le samidorphan bloque les récepteurs opioïdes mu pour atténuer la prise de poids induite par l'antipsychotique."
-    },
     "bindings": [
       {
         "target": "d2",
@@ -5649,10 +5163,6 @@
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
     },
-    "description": {
-      "en": "Oxazepam is a short-to-intermediate-acting benzodiazepine. Oxazepam is used for the treatment of anxiety, insomnia, and to control symptoms of alcohol withdrawal syndrome.",
-      "fr": "L'oxazépam est un composé organique de la famille des benzodiazépines, commercialisé comme médicament. Comme toutes les molécules de cette famille, il possède des propriétés anxiolytiques, hypnotiques et sédatives, anticonvulsivantes, et myorelaxantes, mais il est surtout utilisé comme anxiolytique pour limiter les effets gênants de l'anxiété, et parfois comme hypnotique dans le traitement à court terme de l'insomnie lorsque d'autres traitements, notamment les règles hygiéno-diététiques, ont échoué."
-    },
     "bindings": [
       {
         "target": "gaba_a",
@@ -5679,8 +5189,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "oxcarbazepine",
@@ -5688,10 +5197,6 @@
     "categories": [
       "mood_stabilizer"
     ],
-    "description": {
-      "en": "Oxcarbazepine, sold under the brand name Trileptal among others, is a medication used to treat epilepsy. For epilepsy it is used for both focal seizures and generalized seizures. It has been used both alone and as add-on therapy in people with bipolar disorder who have had no success with other treatments. It is taken by mouth.",
-      "fr": "L'oxcarbazépine est un antiépileptique (anticonvulsivant) ainsi qu'un thymorégulateur ; il est principalement utilisé dans le traitement de l'épilepsie partielle avec ou sans généralisation secondaire."
-    },
     "bindings": [
       {
         "target": "nav",
@@ -5706,8 +5211,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Oxcarbazepine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Oxcarbazepine"
   },
   {
     "id": "paliperidone",
@@ -5718,10 +5222,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopamine, sérotonine (DS-RAn)"
-    },
-    "description": {
-      "en": "Paliperidone, sold under the brand name Invega among others, is an atypical antipsychotic. It is used for the treatment of schizophrenia and schizoaffective disorder. It is marketed by Janssen Pharmaceuticals.",
-      "fr": "La palipéridone est un antipsychotique de seconde génération dérivé de la pipéridine, synthétisé pour la première fois dans les années 1990 par la société Janssen Pharmaceutica."
     },
     "bindings": [
       {
@@ -5782,8 +5282,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "paroxetine",
@@ -5794,10 +5293,6 @@
     "nbn": {
       "en": "serotonin reuptake inhibitor (S-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine (S-RI)"
-    },
-    "description": {
-      "en": "Paroxetine, sold under the brand name Paxil among others, is an antidepressant medication of the selective serotonin reuptake inhibitor (SSRI) class used to treat major depressive disorder, obsessive–compulsive disorder (OCD), panic disorder, social anxiety disorder, post-traumatic stress disorder (PTSD), generalized anxiety disorder, and premenstrual dysphoric disorder. It has also been used in the treatment of premature ejaculation, and hot flashes due to menopause. It is taken orally.",
-      "fr": "La paroxétine, commercialisée dans certains pays sous les noms de Paxil, Deroxat ou Seroxat, est un antidépresseur inhibiteur sélectif de la recapture de la sérotonine mis sur le marché en 1992 par la firme GlaxoSmithKline. Il en existe aujourd'hui plusieurs génériques. Elle est généralement commercialisée sous forme de chlorhydrate hémihydrate de paroxétine, parfois sous forme de chlorhydrate anhydre de paroxétine ou de mésilate de paroxétine."
     },
     "bindings": [
       {
@@ -5853,8 +5348,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "perospirone",
@@ -5865,10 +5359,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Blocks dopamine D2 and serotonin 2A receptors to reduce positive psychotic symptoms and motor side effects; interactions at 5-HT1A may also contribute to cognitive and affective benefits.",
-      "fr": "Bloque les récepteurs dopaminergiques D2 et sérotoninergiques 2A pour réduire les symptômes positifs et les effets moteurs ; les interactions aux récepteurs 5-HT1A pourraient contribuer aux bénéfices cognitifs et affectifs."
     },
     "bindings": [
       {
@@ -5920,10 +5410,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Perphenazine is a typical antipsychotic drug. Chemically, it is classified as a piperazinyl phenothiazine. Originally marketed in the United States as Trilafon, it has been in clinical use for decades.",
-      "fr": "La perphénazine (Trilafon) est un antipsychotique de première génération, utilisé depuis des décennies."
     },
     "bindings": [
       {
@@ -5995,8 +5481,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "phenelzine",
@@ -6007,10 +5492,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)",
       "fr": "inhibiteur enzymatique de la sérotonine, de la noradrénaline et de la dopamine (SN-EI)"
-    },
-    "description": {
-      "en": "Irreversibly inhibits monoamine oxidase (MAO), preventing breakdown of norepinephrine, serotonin, and dopamine and boosting all three neurotransmitters.",
-      "fr": "Inhibe de manière irréversible la monoamine oxydase (MAO), empêchant la dégradation de la noradrénaline, de la sérotonine et de la dopamine."
     },
     "bindings": [
       {
@@ -6038,10 +5519,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Phentermine/topiramate, sold under the brand name Qsymia, is a combination drug of phentermine and topiramate used to treat obesity. It is used together with dietary changes and exercise. If less than 3% weight loss is seen after 3 months, it is recommended that the medication be stopped. The weight loss is modest. Effects on heart-related health problems or death are unclear.",
-      "fr": "L'association phentermine / topiramate est un couple de deux principes actifs commercialisé aux États-Unis en vue du traitement préventif de l'obésité. Il a été autorisé par l'agence fédérale des médicaments des États-Unis (FDA) en février 2012 sous le nom de spécialité Qsymia.La phentermine 15 mg est un anorexigène de la famille des phénylbutylamines tertiaires.\nLe topiramate 92 mg est un anti-convulsif de structure hétérocyclique, indiqué dans le traitement de l'épilepsie chez l'enfant. Cette molécule présente également des propriétés d'antidépresseur et a été proposée dans les états limites et pour traiter les troubles bipolaires. Le topiramate a été étudié en traitement adjuvant du sevrage alcoolique."
-    },
     "bindings": [
       {
         "target": "dat",
@@ -6097,8 +5574,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Phentermine/topiramate",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Phentermine/topiramate"
   },
   {
     "id": "pimavanserin",
@@ -6106,10 +5582,6 @@
     "categories": [
       "antipsychotic_atypical"
     ],
-    "description": {
-      "en": "Pimavanserin, sold under the brand name Nuplazid, is an atypical antipsychotic which is approved for the treatment of Parkinson's disease psychosis. It is taken by mouth.",
-      "fr": "La pimavansérine est une molécule en cours de développement comme médicament antipsychotique par voie orale."
-    },
     "bindings": [
       {
         "target": "5ht2a",
@@ -6168,8 +5640,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Pimavanserin",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Pimavanserin"
   },
   {
     "id": "pimozide",
@@ -6180,10 +5651,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Blocks dopamine 2 receptors, reducing tics in Tourette's syndrome and positive symptoms of psychosis; also blocks muscarinic, histamine, and alpha-1 adrenergic receptors causing side effects.",
-      "fr": "Bloque les récepteurs dopaminergiques D2, réduisant les tics dans le syndrome de Tourette et les symptômes positifs de la psychose ; bloque également les récepteurs muscariniques, histaminergiques et alpha-1 adrénergiques."
     },
     "bindings": [
       {
@@ -6255,10 +5722,6 @@
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
     },
-    "description": {
-      "en": "Pipotiazine (Piportil), also known as pipothiazine, is a typical antipsychotic of the phenothiazine class used in the United Kingdom and other countries for the treatment of schizophrenia. Its properties are similar to those of chlorpromazine. A 2004 systematic review investigated its efficacy for people with schizophrenia:",
-      "fr": "La pipotiazine est un antipsychotique de première génération commercialisé par le laboratoire Sanofi sous le nom de Piportil. Elle agit contre des états psychotiques notamment la schizophrénie."
-    },
     "bindings": [
       {
         "target": "d2",
@@ -6317,8 +5780,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "pitolisant",
@@ -6326,10 +5788,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Pitolisant, sold under the brand name Wakix among others, is a medication used for the treatment of excessive daytime sleepiness in adults with narcolepsy. It is an inverse agonist of the histamine H3 receptor. It represents the first commercially available medication in its class, so that the U.S. Food and Drug Administration (FDA) declares it a first-in-class medication. Pitolisant enhances the activity of histaminergic neurons in the brain that function to improve a person's wakefulness.\nIt was approved by the European Medicines Agency (EMA) in March 2016 for narcolepsy with or without cataplexy, and for excessive daytime sleepiness by the FDA in August 2019. The most common side effects include difficulty sleeping, nausea, and feeling worried.",
-      "fr": "Le pitolisant est un médicament éveillant utilisé dans la prise en charge médicamenteuse de la narcolepsie et de l'hypersomnie idiopathique. Il possède un mode d'action spécial : contrairement à la plupart des stimulants et eugéroïques, le pitolisant agit en bloquant le récepteur H3 pour inhiber le rétrocontrôle négatif au niveau présynaptique de l'histamine et provoque la libération d'histamine, et, indirectement, d'acétylcholine, de dopamine et de noradrénaline."
-    },
     "bindings": [
       {
         "target": "h3",
@@ -6356,8 +5814,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Pitolisant",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Pitolisant"
   },
   {
     "id": "prazosin",
@@ -6365,10 +5822,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Prazosin, sold under the brand name Minipress among others, is a medication used to treat high blood pressure, symptoms of an enlarged prostate, and nightmares related to post-traumatic stress disorder (PTSD). It is an α1 blocker. It is a less preferred treatment of high blood pressure. Other uses may include heart failure and Raynaud syndrome. It is taken by mouth.",
-      "fr": "La prazosine est un médicament antihypertenseur. C'est un sympatholytique qui appartient à la classe des alpha-bloquants. Il abaisse la pression artérielle grâce au relâchement des vaisseaux sanguins. La prazosine est sélective des récepteurs α1 sur les muscles lisses vasculaires. Ces récepteurs sont responsables de l'action vasoconstrictive de la noradrénaline, qui à son tour élève la tension sanguine. En bloquant ces récepteurs, la prazosine abaisse la pression artérielle. On retrouve aussi des récepteurs α1 dans tout le système nerveux central.\nEn plus de son activité alpha-bloquant, la prazosine est un antagoniste des récepteurs à la mélatonine MT3 avec une plus grande sélectivité qu'avec les récepteurs MT1 et MT2.\nIl est utilisé dans le traitement de l'hypertension artérielle, de l'anxiété, du syndrome de stress post-traumatique et du trouble panique."
-    },
     "bindings": [
       {
         "target": "alpha1",
@@ -6383,8 +5836,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Prazosin",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Prazosin"
   },
   {
     "id": "pregabalin",
@@ -6396,10 +5848,6 @@
     "nbn": {
       "en": "glutamate voltage-gated calcium channel blocker (Glu-CB)",
       "fr": "bloqueur des canaux calciques voltages-dépendants du glutamate (Glu-CB)"
-    },
-    "description": {
-      "en": "Pregabalin, sold under the brand names Axalid and Lyrica among others, is an anticonvulsant, analgesic, and anxiolytic amino acid medication used to treat epilepsy, neuropathic pain, fibromyalgia, restless legs syndrome, opioid withdrawal, generalized anxiety disorder (GAD), and postherpetic neuralgia. Pregabalin also has antiallodynic properties. Its use in epilepsy is as an add-on therapy for partial seizures. When used before surgery, it reduces pain but results in greater sedation and visual disturbances. It is taken by mouth.",
-      "fr": "La prégabaline est un médicament utilisé, de manière principale, dans le traitement des douleurs neuropathiques et des crises d'épilepsie partielles. Elle est également utilisée de manière secondaire pour traiter des troubles du stress post-traumatique comme l'anxiété généralisée avec une efficacité égale voire supérieure à celles des benzodiazépines. Elle peut aussi être détournée pour un usage fortement addictif car, à forte dose, elle agit aussi comme un puissant euphorisant."
     },
     "bindings": [
       {
@@ -6439,8 +5887,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate voltage-gated calcium channel blocker (Glu-CB)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "propranolol",
@@ -6448,10 +5895,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Propranolol is a medication of the beta blocker class. It is used to treat high blood pressure, some types of irregular heart rate, thyrotoxicosis, capillary hemangiomas, akathisia, performance anxiety, and essential tremors, as well as to prevent migraine headaches, and to prevent further heart problems in those with angina or previous heart attacks. It can be taken orally, rectally, or by intravenous injection. The formulation that is taken orally comes in short-acting and long-acting versions. Propranolol appears in the blood after 30 minutes and has a maximum effect between 60 and 90 minutes when taken orally.",
-      "fr": "Le propranolol (DCI) est un médicament faisant partie de la classe des bêta-bloquants non sélectifs. C'est un médicament sympatholytique, c'est-à-dire qu'il inhibe le système sympathique. Les sympatholytiques sont utilisés dans le traitement de l'hypertension, l'anxiété et les attaques de panique. Découvert par James W. Black en 1960, c'est le premier bêta-bloquant découvert. James W. Black a obtenu le prix Nobel de physiologie ou médecine en 1988 pour cette découverte. Comme d'autres bêta-bloquants, le propranolol est une substance considérée comme dopante."
-    },
     "bindings": [
       {
         "target": "beta1",
@@ -6483,8 +5926,7 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Propranolol",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Propranolol"
   },
   {
     "id": "protriptyline",
@@ -6496,10 +5938,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
-    },
-    "description": {
-      "en": "Predominantly blocks the norepinephrine transporter (NET) and, to a lesser extent, the serotonin transporter (SERT); also blocks muscarinic, histamine H1, and alpha-1 adrenergic receptors.",
-      "fr": "Bloque principalement le transporteur de la noradrénaline (NET) et, dans une moindre mesure, le transporteur de la sérotonine (SERT) ; bloque également les récepteurs muscariniques, H1 et alpha-1 adrénergiques."
     },
     "bindings": [
       {
@@ -6588,10 +6026,6 @@
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
     },
-    "description": {
-      "en": "Quazepam, sold under the brand name Doral among others, is a relatively long-acting benzodiazepine derivative drug developed by the Schering Corporation in the 1970s. Quazepam is used for the treatment of insomnia, including sleep induction and sleep maintenance. Quazepam induces impairment of motor function and has relatively selective hypnotic and anticonvulsant properties with considerably less overdose potential than other benzodiazepines. Quazepam is an effective hypnotic which induces and maintains sleep without disruption of the sleep architecture.",
-      "fr": "Le quazépam est un produit chimique, une benzodiazépine développée par la Schering Corporation dans les années 1970. Celle-ci est commercialisée en Espagne, aux États-Unis, en Italie et au Japon notamment, mais pas en Belgique, ni en France ou en Suisse."
-    },
     "bindings": [
       {
         "target": "gaba_a",
@@ -6618,8 +6052,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "quetiapine",
@@ -6630,10 +6063,6 @@
     "nbn": {
       "en": "dopamine, serotonin multimodal (DS-MM)",
       "fr": "multimodal dopamine, sérotonine (DS-MM)"
-    },
-    "description": {
-      "en": "Quetiapine, sold under the brand name Seroquel among others, is an atypical antipsychotic medication used in the treatment of schizophrenia, bipolar disorder, and major depressive disorder. Despite being widely prescribed as a sleep aid due to its tranquillizing effects, the benefits of such use may not outweigh the risk of undesirable side effects. It is taken orally.",
-      "fr": "La quétiapine, commercialisée sous les noms Xeroquel, Seroquel, Sequase, Ketipinor est un antipsychotique de seconde génération utilisé pour traiter divers types de troubles ou maladies psychiatriques, comme la schizophrénie, les troubles bipolaires ou unipolaires, ou le trouble borderline, ciblant notamment les symptômes positifs. À faible dose, il est prescrit comme sédatif majeur, dans le traitement des troubles bipolaires, des troubles anxieux et du syndrome de stress post-traumatique. La quétiapine peut être également utilisée pour les troubles du sommeil. Elle agit notamment sur la dopamine, la sérotonine, la noradrénaline, l'histamine ainsi que sur d'autres neurotransmetteurs."
     },
     "bindings": [
       {
@@ -6756,8 +6185,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin multimodal (DS-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "ramelteon",
@@ -6768,10 +6196,6 @@
     "nbn": {
       "en": "melatonin receptor agonist (Mel-RA)",
       "fr": "agoniste des récepteurs mélatoninergiques (Mel-RA)"
-    },
-    "description": {
-      "en": "Ramelteon, sold under the brand name Rozerem among others, is a melatonin agonist medication which is used in the treatment of insomnia. It is indicated specifically for the treatment of insomnia characterized by difficulties with sleep onset. It reduces the time taken to fall asleep, but the degree of clinical benefit is small. The medication is approved for long-term use. Ramelteon is taken by mouth.",
-      "fr": "Ramelteon, vendu entre autres sous le nom Rozerem, est un médicament agoniste de la mélatonine qui est utilisé dans le traitement de l'insomnie. Il est indiqué spécifiquement pour le traitement de l'insomnie caractérisée par des difficultés d'endormissement. Il réduit le temps nécessaire pour s'endormir, mais le degré de bénéfice clinique est faible. Le médicament est approuvé pour une utilisation à long terme. Ramelteon est pris par voie orale."
     },
     "bindings": [
       {
@@ -6807,8 +6231,7 @@
         "quote": "Neuroscience-based Nomenclature: melatonin receptor agonist (Mel-RA)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "reboxetine",
@@ -6820,10 +6243,6 @@
     "nbn": {
       "en": "norepinephrine reuptake inhibitor (N-RI)",
       "fr": "inhibiteur de la recapture de la noradrénaline (N-RI)"
-    },
-    "description": {
-      "en": "Reboxetine, sold under the brand name Edronax among others, is a selective norepinephrine reuptake inhibitor (sNRI) medication marketed as an antidepressant by Pfizer for use in the treatment of major depressive disorder, although it has also been used off-label for panic disorder and attention deficit hyperactivity disorder (ADHD). It is approved for use in many countries worldwide, but is not approved for use in the United States.",
-      "fr": "La réboxétine est une molécule inhibitrice de la recapture de la noradrénaline prescrite comme antidépresseur et utilisée hors AMM dans le traitement du TDAH dans certains pays européens. Son efficacité en tant qu'antidépresseur a été contestée et en 2018, une étude comparative de 21 antidépresseurs la classait en dernière position."
     },
     "bindings": [
       {
@@ -6847,8 +6266,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "risperidone",
@@ -6859,10 +6277,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopamine, sérotonine (DS-RAn)"
-    },
-    "description": {
-      "en": "Risperidone, sold under the brand name Risperdal among others, is an atypical antipsychotic used to treat schizophrenia and bipolar disorder, as well as aggressive and self-injurious behaviors associated with autism spectrum disorder. It is taken either by mouth or by injection. The injectable versions are long-acting and last for 2–4 weeks.",
-      "fr": "La rispéridone est un antipsychotique de seconde génération, appartenant à la classe des benzisoxazoles, commercialisé principalement sous le nom Risperdal.\nCe médicament est utilisé pour traiter la schizophrénie, les phases maniaques dans le cadre d’un trouble bipolaire, certains troubles de la personnalité, certains troubles anxieux et le trouble de stress post-traumatique.\nCe médicament peut aussi être utilisé pour traiter l’agressivité, la dysrégulation émotionnelle et l’impulsivité."
     },
     "bindings": [
       {
@@ -6923,8 +6337,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "rivastigmine",
@@ -6935,10 +6348,6 @@
     "nbn": {
       "en": "acetylcholine enzyme inhibitor (ACh-EI)",
       "fr": "inhibiteur enzymatique de l'acétylcholine (ACh-EI)"
-    },
-    "description": {
-      "en": "Rivastigmine, sold under the brand name Exelon among others, is an acetylcholinesterase inhibitor used for the treatment of dementia associated with Alzheimer's disease and with Parkinson's disease. Rivastigmine can be administered orally or via a transdermal patch; the latter form reduces the prevalence of side effects, which typically include nausea and vomiting.",
-      "fr": "La rivastigmine appartient à la famille des stigmines. Elle a une action parasympathomimétique indirecte par son effet inhibiteur pseudo-irréversible de l'acétylcholinestérase. Elle se présente sous la forme d'une poudre cristalline blanche qui possède un caractère hydrophile et lipophile."
     },
     "bindings": [
       {
@@ -6974,8 +6383,7 @@
         "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "selegiline",
@@ -6986,10 +6394,6 @@
     "nbn": {
       "en": "dopamine, serotonin, norepinephrine enzyme inhibitor",
       "fr": "inhibiteur enzymatique de la dopamine, de la sérotonine et de la noradrénaline"
-    },
-    "description": {
-      "en": "Selegiline, also known as L-deprenyl and sold under the brand names Eldepryl, Zelapar, and Emsam among others, is a medication which is used in the treatment of Parkinson's disease and major depressive disorder. It has also been studied and used off-label for a variety of other indications, but has not been formally approved for any other use. The medication, in the form licensed for depression, has modest effectiveness for this condition that is similar to that of other antidepressants. Selegiline is provided as a swallowed tablet or capsule or an orally disintegrating tablet (ODT) for Parkinson's disease and as a patch applied to skin for depression.",
-      "fr": "La sélégiline est une molécule de la classe des amphétamines, plus précisément dérivée de la méthamphétamine. C'est un inhibiteur irréversible de la monoamine oxydase B (IMAO-B), permettant l'inhibition de la dégradation des catécholamines et de la sérotonine."
     },
     "bindings": [
       {
@@ -7029,8 +6433,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine enzyme inhibitor",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "serdexmethylphenidate",
@@ -7041,10 +6444,6 @@
     "nbn": {
       "en": "dopamine, norepinephrine multimodal stimulant (DN-MM)",
       "fr": "stimulant multimodal dopamine, noradrénaline (DN-MM)"
-    },
-    "description": {
-      "en": "Prodrug converted to d-methylphenidate, which blocks dopamine and norepinephrine reuptake to improve attention and reduce hyperactivity.",
-      "fr": "Prodrogue convertie en d-méthylphénidate, qui bloque la recapture de la dopamine et de la noradrénaline pour améliorer l'attention et réduire l'hyperactivité."
     },
     "bindings": [
       {
@@ -7091,10 +6490,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Sertindole, sold under the brand name Serdolect among others, is an antipsychotic medication. Sertindole was developed by the Danish pharmaceutical company Lundbeck and marketed under license by Abbott Labs. Like other atypical antipsychotics, it has activity at dopamine and serotonin receptors in the brain. It is used in the treatment of schizophrenia.",
-      "fr": "Le sertindole est un médicament antipsychotique de seconde génération. Il a été mis au point par le laboratoire pharmaceutique danois H. Lundbeck A/S et commercialisé sous licence par les Laboratoires Abbott sous les noms de Serdolect et Serlect. Comme d'autres antipsychotiques atypiques, il a une activité antagoniste des récepteurs dopaminergiques D2 et sérotoninergiques 5-HT2. Il est utilisé dans le traitement de la schizophrénie. Chimiquement, il est classé comme un dérivé de phénylindole."
     },
     "bindings": [
       {
@@ -7151,8 +6546,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "sertraline",
@@ -7163,10 +6557,6 @@
     "nbn": {
       "en": "serotonin reuptake inhibitor (S-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine (S-RI)"
-    },
-    "description": {
-      "en": "Sertraline, sold under the brand name Zoloft among others, is an antidepressant medication of the selective serotonin reuptake inhibitor (SSRI) class used to treat major depressive disorder, generalized anxiety disorder, social anxiety disorder, obsessive–compulsive disorder (OCD), panic disorder, and premenstrual dysphoric disorder. Although also having approval for post-traumatic stress disorder (PTSD), findings indicate it leads to only modest improvements in symptoms associated with this condition.",
-      "fr": "La sertraline est un psychotrope de type inhibiteur sélectif de la recapture de la sérotonine, prescrit comme antidépresseur, principalement contre les épisodes dépressifs sévères, mais aussi contre le trouble obsessionnel compulsif, la phobie d'impulsion, le trouble panique, la phobie sociale, le trouble anxieux généralisé et le trouble de stress post-traumatique. \nComme la plupart des antidépresseurs de cette classe, son action ne se manifeste qu'après quelques semaines. La différence avec d'autres antidépresseurs est subtile. Il agirait mieux que la fluoxétine dans certains sous-types de dépression. Elle aurait également une action anxiolytique et peu sédative."
     },
     "bindings": [
       {
@@ -7210,8 +6600,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "sildenafil",
@@ -7219,10 +6608,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Sildenafil, sold under the brand name Viagra among others, is a medication used to treat erectile dysfunction and pulmonary arterial hypertension. It is also sometimes used off-label for the treatment of certain symptoms in secondary Raynaud's phenomenon. It is unclear if it is effective for treating sexual dysfunction in females. It can be taken orally, intravenously, or through the sublingual route. Onset when taken orally is typically within twenty minutes and lasts for about two hours.",
-      "fr": "Le citrate de sildénafil est un médicament de la classe des inhibiteurs de la phosphodiestérase de type 5 (PDE5) développé par la firme pharmaceutique Pfizer. Ce médicament est indiqué dans les troubles de l’érection et l’hypertension artérielle pulmonaire. Il est commercialisé par la firme sous le nom de Viagra en comprimés de 25 mg, 50 mg et 100 mg, et sous le nom de Revatio en comprimés de 20 mg."
-    },
     "bindings": [
       {
         "target": "pde5",
@@ -7237,8 +6622,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Sildenafil",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Sildenafil"
   },
   {
     "id": "sodium_oxybate",
@@ -7250,10 +6634,6 @@
     "nbn": {
       "en": "GABA receptor agonist",
       "fr": "agoniste des récepteurs GABA"
-    },
-    "description": {
-      "en": "Sodium oxybate, sold under the brand name Xyrem among others, is a medication used to treat symptoms of narcolepsy: sudden muscle weakness and excessive daytime sleepiness. It is used sometimes in France and Italy as an anesthetic given intravenously. It is also approved and used in Italy and in Austria to treat alcohol dependence and alcohol withdrawal syndrome.",
-      "fr": "L'acide 4-hydroxybutanoïque ou γ-hydroxybutyrate (GHB), anciennement et uniquement dans le monde francophone, connu sous le nom abrégé de Gamma-OH, est un psychotrope et un puissant dépresseur du système nerveux central, utilisé à des fins médicales ou à des fins détournées. Le GHB est aussi une substance endogène, produite physiologiquement et naturellement dans le cerveau des mammifères. Sa structure chimique est très proche du neurotransmetteur GABA."
     },
     "bindings": [
       {
@@ -7277,8 +6657,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA receptor agonist",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "solriamfetol",
@@ -7286,10 +6665,6 @@
     "categories": [
       "stimulant"
     ],
-    "description": {
-      "en": "Solriamfetol, sold under the brand name Sunosi, is a wakefulness-promoting medication used in the treatment of excessive sleepiness related to narcolepsy and sleep apnea. It is taken by mouth.",
-      "fr": "Le solriamfétol, vendu sous le nom de marque Sunosi, est un médicament favorisant l'éveil utilisé dans le traitement de la somnolence excessive liée à la narcolepsie et à l'apnée du sommeil. Il est pris par voie orale."
-    },
     "bindings": [
       {
         "target": "dat",
@@ -7316,8 +6691,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Solriamfetol",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Solriamfetol"
   },
   {
     "id": "sulpiride",
@@ -7328,10 +6702,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Sulpiride, sold under the brand name Dogmatil among others, is an atypical antipsychotic medication of the benzamide class which is used mainly in the treatment of psychosis associated with schizophrenia and major depressive disorder, and is sometimes used in low dosage to treat anxiety and dysthymia.",
-      "fr": "Le sulpiride est un antipsychotique de première génération désinhibiteur de la famille chimique des benzamides. Il est commercialisé sous les noms d'Aiglonyl, de Dogmatil et de Synedil."
     },
     "bindings": [
       {
@@ -7417,8 +6787,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "suvorexant",
@@ -7426,10 +6795,6 @@
     "categories": [
       "hypnotic"
     ],
-    "description": {
-      "en": "Suvorexant, sold under the brand name Belsomra, is an orexin antagonist medication used in the treatment of insomnia. It is indicated specifically for the treatment of insomnia characterized by difficulties with sleep onset and/or maintenance in adults. Suvorexant helps with falling asleep faster, sleeping longer, being awake less in the middle of the night, and having better quality of sleep. Its effectiveness is modest, similar to that other orexin antagonists, but it is lower than that of benzodiazepines and Z-drugs. Suvorexant is taken orally.",
-      "fr": "Le suvorexant est un médicament de type hypnotique utilisé dans les troubles du sommeil et vendu sous le nom commercial Belsomra."
-    },
     "bindings": [
       {
         "target": "orexin",
@@ -7444,8 +6809,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Suvorexant",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Suvorexant"
   },
   {
     "id": "tasimelteon",
@@ -7453,10 +6817,6 @@
     "categories": [
       "hypnotic"
     ],
-    "description": {
-      "en": "Tasimelteon, sold under the brand name Hetlioz, is a medication approved by the U.S. Food and Drug Administration (FDA) in January 2014, for the treatment of non-24-hour sleep–wake disorder. In June 2014, the European Medicines Agency (EMA) accepted an EU filing application for tasimelteon and in July 2015, the drug was approved in the European Union for the treatment of non-24-hour sleep-wake rhythm disorder in totally blind adults, but not in the case of non-24 in sighted people.",
-      "fr": "Tasimelteon, vendu sous le nom Hetlioz, est un médicament approuvé par la Food and Drug Administration (FDA) des États-Unis en janvier 2014, pour le traitement du syndrome hypernycthéméral. En juin 2014, l'Agence européenne des médicaments (EMA) a accepté une demande d'autorisation dans l'UE pour le tasimeltéon et en juillet 2015, le médicament a été approuvé pour le traitement du syndrome hypernycthéméral chez les adultes aveugles, mais pas dans le cas plus rare du syndrome hypernycthéméral chez les personnes voyantes."
-    },
     "bindings": [
       {
         "target": "mt1",
@@ -7487,8 +6847,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Tasimelteon",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Tasimelteon"
   },
   {
     "id": "temazepam",
@@ -7500,10 +6859,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "Modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Temazepam, sold under the brand name Restoril among others, is a medication of the benzodiazepine class which is generally used to treat severe or debilitating insomnia. It is taken by mouth. Temazepam is rapidly absorbed, and significant hypnotic and anxiolytic effects begin in less than 30 minutes and can last for up to eight hours. Prescriptions for hypnotics, such as temazepam, have seen a dramatic decrease since 2010, while anxiolytics, such as alprazolam, clonazepam, and lorazepam, have increased or remained stable. Temazepam and similar hypnotics, such as triazolam (Halcion), are generally reserved for severe and debilitating insomnia. They have largely been replaced by z-drugs and atypical antidepressants as first line treatment for insomnia.",
-      "fr": "Le témazépam est une substance chimique de la famille des benzodiazépines commercialisée notamment sous le nom de Normison en France. Comme toutes les substances de cette famille, elle possède des propriétés anxiolytiques, hypnotiques ou sédatives, anticonvulsantes, et myorelaxantes, mais elle est surtout prescrite comme hypnotique dans le traitement à court terme d'insomnie sévère lorsque d'autres traitements, notamment des règles hygiéno-diététiques, ont échoué."
     },
     "bindings": [
       {
@@ -7531,8 +6886,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "thioridazine",
@@ -7543,10 +6897,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "Antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Thioridazine is a first-generation antipsychotic drug belonging to the phenothiazine drug group. It was previously widely used in the treatment of schizophrenia and psychosis. The branded product was withdrawn worldwide in 2005 because it caused severe cardiac arrhythmias. However, generic versions are still available in the United States.",
-      "fr": "La thioridazine est un antipsychotique de première génération.\nSelon une étude publiée en 2012, cette molécule pourrait être utile contre certains cancers en ciblant les cellules souches cancéreuses."
     },
     "bindings": [
       {
@@ -7606,8 +6956,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "thiothixene",
@@ -7615,10 +6964,6 @@
     "categories": [
       "antipsychotic_conventional"
     ],
-    "description": {
-      "en": "Blocks dopamine 2 receptors to reduce positive symptoms of psychosis; also blocks muscarinic, histamine H1, and alpha-1 adrenergic receptors.",
-      "fr": "Bloque les récepteurs dopaminergiques D2 pour réduire les symptômes positifs de la psychose ; bloque également les récepteurs muscariniques, histaminiques H1 et adrénergiques alpha-1."
-    },
     "bindings": [
       {
         "target": "d2",
@@ -7677,10 +7022,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Tiagabine, sold under the brand name Gabitril, is an anticonvulsant medication which is used in the treatment of epilepsy. It is also used off-label in the treatment of insomnia and anxiety disorders. However, off-label use is discouraged as the drug has been associated with new-onset seizures in people without epilepsy. Tiagabine is taken orally.",
-      "fr": "La tiagabine est un antiépileptique, inhibiteur de la recapture du GABA en agissant sur le transporteur GAT-1 (GABA transporter 1). Il est utilisé pour traiter les crises d'épilepsies. Il est commercialisé par Cephalon sous le nom Gabitril. Sa formule chimique est C20H25NO2S2. Il est utilisé hors AMM dans les troubles anxieux comme le trouble panique."
-    },
     "bindings": [
       {
         "target": "gat",
@@ -7695,8 +7036,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Tiagabine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Tiagabine"
   },
   {
     "id": "tianeptine",
@@ -7707,10 +7047,6 @@
     "nbn": {
       "en": "glutamate; yet to be determined (Glu)",
       "fr": "Glutamate ; à déterminer (Glu)"
-    },
-    "description": {
-      "en": "Tianeptine, sold under the brand names Stablon, Tatinol, and Coaxil among others, is an atypical tricyclic antidepressant which is used mainly in the treatment of major depressive disorder, although it may also be used to treat anxiety, asthma, and irritable bowel syndrome.",
-      "fr": "La tianeptine (Stablon) est une substance chimique qui possède des propriétés antidépressives, analgésiques et sédatives, et qui est utilisée comme antidépresseur."
     },
     "bindings": [
       {
@@ -7747,8 +7083,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate; yet to be determined (Glu)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "topiramate",
@@ -7757,10 +7092,6 @@
       "mood_stabilizer",
       "other"
     ],
-    "description": {
-      "en": "Topiramate, marketed as Topamax among other names, is an oral medication primarily prescribed for the treatment of epilepsy and the prophylaxis of migraines. For epilepsy, this includes treatment for generalized or focal seizures. It has also been used off-label for alcohol dependence and essential tremor.",
-      "fr": "Le topiramate est un médicament antiépileptique utilisé pour les épilepsies de type généralisée ou partielle. On le trouve, en France, sous le nom d'Epitomax et aux États-Unis, au Canada, au Royaume-Uni, en Australie et dans certains autres pays sous le nom de Topamax.\nIl peut aussi être utilisé comme traitement préventif des crises de migraine."
-    },
     "bindings": [
       {
         "target": "nav",
@@ -7800,8 +7131,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Topiramate",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Topiramate"
   },
   {
     "id": "tranylcypromine",
@@ -7812,10 +7142,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine, dopamine multimodal enzyme inhibitor (SN-MM)",
       "fr": "Inhibiteur enzymatique multimodal sérotonine, norépinéphrine, dopamine (SN-MM)"
-    },
-    "description": {
-      "en": "Irreversibly blocks monoamine oxidase (MAO), preventing breakdown of norepinephrine, serotonin, and dopamine, thereby boosting all three monoaminergic systems.",
-      "fr": "Bloque de façon irréversible la monoamine oxydase (MAO), empêchant la dégradation de la norépinéphrine, de la sérotonine et de la dopamine, stimulant ainsi les trois systèmes monoaminergiques."
     },
     "bindings": [
       {
@@ -7855,10 +7181,6 @@
     "nbn": {
       "en": "serotonin receptor antagonist (S-MM)",
       "fr": "Antagoniste des récepteurs sérotoninergiques (S-MM)"
-    },
-    "description": {
-      "en": "Trazodone is an antidepressant medication used to treat major depressive disorder, anxiety disorders, and insomnia. It is a phenylpiperazine compound of the serotonin antagonist and reuptake inhibitor (SARI) class. The medication is taken orally.",
-      "fr": "La trazodone est un composé psychoactif sédatif, anxiolytique et antidépresseur. L'effet antidépresseur se manifeste à partir de deux ou trois semaines de traitement alors que l'effet sédatif est sensible après seulement quelques jours. La trazodone a moins d'effets secondaires anticholinergiques et adrénolytiques que la plupart des antidépresseurs tricycliques. L'incidence des nausées et vomissements observés avec la trazodone est relativement basse comparée aux ISRS. La trazodone peut induire des nausées et vomissements pour certaines personnes. Cela est temporaire."
     },
     "bindings": [
       {
@@ -7926,8 +7248,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin receptor antagonist (S-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "triazolam",
@@ -7939,10 +7260,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "Modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Triazolam, sold under the brand name Halcion among others, is a central nervous system (CNS) depressant tranquilizer of the triazolobenzodiazepine (TBZD) class, which are benzodiazepine (BZD) derivatives. It possesses pharmacological properties similar to those of other benzodiazepines, but it is generally only used as a sedative to treat severe insomnia. In addition to the hypnotic properties, triazolam's amnesic, anxiolytic, sedative, anticonvulsant, and muscle relaxant properties are pronounced as well.",
-      "fr": "Le triazolam est un médicament hypnotique de la famille des benzodiazépines, à durée d'action courte. Cette triazolobenzodiazépine peut être utilisée comme prémédication avant une anesthésie, même si le midazolam lui est souvent préféré pour son administration plus aisée. Comme toutes les molécules de sa famille, le triazolam possède également des propriétés anxiolytiques, anticonvulsantes, et myorelaxantes."
     },
     "bindings": [
       {
@@ -7970,8 +7287,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "trifluoperazine",
@@ -7982,10 +7298,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "Antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Trifluoperazine, marketed under the brand name Stelazine among others, is a typical antipsychotic primarily used to treat schizophrenia. It may also be used short term in those with generalized anxiety disorder but is less preferred to benzodiazepines. It is of the phenothiazine chemical class. It was approved for medical use in the United States in 1959.",
-      "fr": "La trifluopérazine (Terfluzine) est un antipsychotique de première génération de la classe des phénothiazines."
     },
     "bindings": [
       {
@@ -8045,8 +7357,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "trihexyphenidyl",
@@ -8054,10 +7365,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Trihexyphenidyl is an antispasmodic drug used to treat stiffness, tremors, spasms, and poor muscle control. It is an agent of the antimuscarinic class and is often used in management of Parkinson's disease. It was approved by the FDA for the treatment of Parkinson's in the US in 1949.",
-      "fr": "Le trihexyphénidyle est un médicament anticholinergique appartenant à la classe des antimuscariniques. On l'utilise depuis des décennies contre les symptômes de la maladie de Parkinson ainsi que contre certains effets indésirables des traitements neuroleptiques."
-    },
     "bindings": [
       {
         "target": "muscarinic",
@@ -8072,8 +7379,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Trihexyphenidyl",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Trihexyphenidyl"
   },
   {
     "id": "triiodothyronine",
@@ -8081,13 +7387,8 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Triiodothyronine, also known as T3, is a thyroid hormone. It affects almost every physiological process in the body, including growth and development, metabolism, body temperature, and heart rate.",
-      "fr": "La triiodothyronine ou T3 est une hormone thyroïdienne issue de la désiodation de la thyroxine. Cette hormone affecte pratiquement tous les processus physiologiques de l'organisme, y compris la croissance biologique, le développement du corps, le métabolisme, la température corporelle et le rythme cardiaque."
-    },
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Triiodothyronine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Triiodothyronine"
   },
   {
     "id": "trimipramine",
@@ -8099,10 +7400,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "Antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Trimipramine, sold under the brand name Surmontil among others, is a tricyclic antidepressant (TCA) which is used to treat depression. It has also been used for its sedative, anxiolytic, and weak antipsychotic effects in the treatment of insomnia, anxiety disorders, and psychosis, respectively. The drug is described as an atypical or \"second-generation\" TCA because, unlike other TCAs, it seems to be a fairly weak monoamine reuptake inhibitor. Similarly to other TCAs, however, trimipramine does have antihistamine, antiserotonergic, antiadrenergic, antidopaminergic, and anticholinergic activities.",
-      "fr": "La trimipramine  est une substance chimique de la famille des dibenzoazépines et des méthanesulfonates. Elle agit en inhibant la recapture de la noradrénaline et de la sérotonine, comme anticholinergique central et périphérique et bloque les récepteurs dopaminergiques. Elle possède également des propriétés antihistaminiques, anxiolytiques, antipsychotiques, sédative, et analgésiques. C'est un antidépresseur tricyclique utilisé dans le traitement de certaines dépressions."
     },
     "bindings": [
       {
@@ -8197,8 +7494,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "valbenazine",
@@ -8206,18 +7502,13 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Valbenazine, sold under the brand name Ingrezza, is a medication used to treat tardive dyskinesia. It acts as a vesicular monoamine transporter 2 (VMAT2) inhibitor.",
-      "fr": "La valbénazine est un médicament produit[Par qui ?] sous le nom commercial Ingrezza."
-    },
     "bindings": [
       {
         "target": "vmat2",
         "action": "reuptake_inhibitor"
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Valbenazine",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Valbenazine"
   },
   {
     "id": "valproate",
@@ -8228,10 +7519,6 @@
     "nbn": {
       "en": "glutamate (Glu); yet to be determined",
       "fr": "glutamate (Glu) ; à déterminer"
-    },
-    "description": {
-      "en": "Valproate are medications primarily used to treat epilepsy and as a mood stabilizer in the treatment of bipolar disorder. They are useful for the prevention of seizures in those with absence seizures, partial seizures, and generalized seizures. They can be given intravenously or by mouth, and the tablet forms exist in both long- and short-acting formulations.",
-      "fr": "L’acide valproïque ou acide 2-propylpentanoïque (C8H16O2 ) ainsi que ses sels, les \nvalproates (principalement le valproate de sodium, le sel de sodium) sont des médicaments antiépileptiques (anticonvulsivant) ayant aussi des propriétés thymorégulatrices, antidépressives et anxiolytiques."
     },
     "bindings": [
       {
@@ -8256,8 +7543,7 @@
         "quote": "Neuroscience-based Nomenclature: glutamate (Glu); yet to be determined",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "varenicline",
@@ -8268,10 +7554,6 @@
     "nbn": {
       "en": "acetylcholine receptor partial agonist (ACh-RPA)",
       "fr": "agoniste partiel des récepteurs acétylcholinergiques (ACh-RPA)"
-    },
-    "description": {
-      "en": "Varenicline, sold under the brand names Chantix and Champix among others, is a medication used for smoking cessation and for the treatment of dry eye syndrome. It is a nicotinic acetylcholine receptor partial agonist. When activated, this receptor leads to the release of dopamine in the nucleus accumbens, the brain's reward center, thereby reducing cravings and withdrawal symptoms with smoking cessation, although less pronounced than a full agonist.",
-      "fr": "La varénicline, développée par les laboratoires Pfizer, est un agoniste partiel des récepteurs nicotiniques du système nerveux central. La spécialité qui contient ce principe actif est proposée à la vente dans le monde sous le nom de Champix,. Son indication est l'aide à l'arrêt du tabac fumé. Cette spécialité disponible uniquement sur ordonnance, est surveillée de près par les autorités sanitaires en raison de la possibilité de survenue de certains effets indésirables : attitudes suicidaires, pertes de connaissance, crises d'épilepsie, qui peuvent avoir de graves conséquences, entre autres chez les conducteurs d'engins. Une cure de 12 semaines revient à environ 100 €."
     },
     "bindings": [
       {
@@ -8295,8 +7577,7 @@
         "quote": "Neuroscience-based Nomenclature: acetylcholine receptor partial agonist (ACh-RPA)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "venlafaxine",
@@ -8307,10 +7588,6 @@
     "nbn": {
       "en": "serotonin, norepinephrine reuptake inhibitor (SN-RI)",
       "fr": "inhibiteur de la recapture de la sérotonine et de la noradrénaline (SN-RI)"
-    },
-    "description": {
-      "en": "Venlafaxine, sold under the brand name Effexor among others, is an antidepressant medication of the serotonin–norepinephrine reuptake inhibitor (SNRI) class. It is used to treat major depressive disorder, generalized anxiety disorder, panic disorder, and social anxiety disorder. Studies have shown that venlafaxine improves post-traumatic stress disorder (PTSD) as a recommended first-line treatment. It may also be used for chronic neuropathic pain. It is taken orally. It is also available as the salt venlafaxine besylate in an extended-release formulation.",
-      "fr": "La venlafaxine est un antidépresseur utilisé pour le traitement de la dépression et les troubles anxieux. C'est un inhibiteur de la recapture de la sérotonine et de la noradrénaline (IRSNa). À doses élevées, il inhibe également la recapture de la dopamine, mais dans une moindre mesure. Son nom commercial est Effexor."
     },
     "bindings": [
       {
@@ -8362,8 +7639,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "vilazodone",
@@ -8375,10 +7651,6 @@
     "nbn": {
       "en": "serotonin multimodal (S-MM)",
       "fr": "sérotonine multimodale (S-MM)"
-    },
-    "description": {
-      "en": "Vilazodone, sold under the brand name Viibryd among others, is a medication used to treat major depressive disorder. It is classified as a serotonin modulator and is taken by mouth.",
-      "fr": "La vilazodone est un antidépresseur développé par Clinical Data pour le traitement de la dépression majeure, commercialisée sous le nom de ViiBryd. En 2009, le produit a donné de bons résultats dans deux essais cliniques de phase III."
     },
     "bindings": [
       {
@@ -8414,8 +7686,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "viloxazine",
@@ -8426,10 +7697,6 @@
     "nbn": {
       "en": "norepinephrine reuptake inhibitor (N-RI)",
       "fr": "inhibiteur de la recapture de la norépinéphrine (N-RI)"
-    },
-    "description": {
-      "en": "Viloxazine, sold under the brand name Qelbree among others, is a selective norepinephrine reuptake inhibitor medication that is indicated in the treatment of attention deficit hyperactivity disorder (ADHD) in children and adults. It was marketed for almost 30 years as an antidepressant for the treatment of depression before being discontinued and subsequently repurposed as a treatment for ADHD. Viloxazine is taken orally. It was used as an antidepressant in an immediate-release form and is used in ADHD in an extended-release form, although current evidence indicates that it is significantly less effective at reducing ADHD symptoms compared to stimulant medications like methylphenidate.",
-      "fr": "La viloxazine est un inhibiteur sélectif du recaptage de la noradrénaline. Elle est vendue entre autres sous le nom de marque Qelbree."
     },
     "bindings": [
       {
@@ -8477,8 +7744,7 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "vortioxetine",
@@ -8490,10 +7756,6 @@
     "nbn": {
       "en": "serotonin multimodal (S-MM)",
       "fr": "sérotonine multimodale (S-MM)"
-    },
-    "description": {
-      "en": "Vortioxetine, sold under the brand names Trintellix and Brintellix among others, is an antidepressant medication of the serotonin modulator and stimulator (SMS) class used in the treatment of major depressive disorder. Its effectiveness is viewed as similar to that of other antidepressants. It is taken orally.",
-      "fr": "La vortioxétine est un médicament développé par Lundbeck et Takeda pour le traitement de la dépression majeure et de l'anxiété généralisée."
     },
     "bindings": [
       {
@@ -8577,8 +7839,7 @@
         "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "zaleplon",
@@ -8589,10 +7850,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Zaleplon, sold under the brand name Sonata among others, is a sedative and hypnotic which is used to treat insomnia. It is a nonbenzodiazepine or Z-drug of the pyrazolopyrimidine class. It was developed by King Pharmaceuticals and approved for medical use in the United States in 1999.",
-      "fr": "Le zaleplon (Sonata) aussi appelé zaléplone est un hypnotique de la classe des pyrazolopyrimidines. Il n'est pas commercialisé en France."
     },
     "bindings": [
       {
@@ -8620,8 +7877,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "ziprasidone",
@@ -8632,10 +7888,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Ziprasidone, sold under the brand name Geodon among others, is an atypical antipsychotic used to treat schizophrenia and bipolar disorder. It may be used by mouth and by injection into a muscle (IM). The intramuscular form may be used for acute agitation in people with schizophrenia.",
-      "fr": "La ziprasidone, commercialisée notamment sous le nom de Geodon, est un antipsychotique atypique utilisé pour traiter la schizophrénie ainsi que les troubles bipolaires. Elle peut être administrée par voie orale ou par injection intramusculaire. La voie intramusculaire peut être utilisée en cas d'agitation aiguë chez les personnes atteintes de schizophrénie."
     },
     "bindings": [
       {
@@ -8683,8 +7935,7 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "zolpidem",
@@ -8695,10 +7946,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif des récepteurs GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Zolpidem, sold under the brand name Ambien among others, is a medication primarily used for the short-term treatment of sleeping problems. Guidelines recommend that it be used only after cognitive behavioral therapy for insomnia and after behavioral changes, such as sleep hygiene, have been tried. It decreases the time to sleep onset by about fifteen minutes and at larger doses helps people stay asleep longer. It is taken by mouth and is available as conventional tablets, extended-release tablets, or sublingual tablets.",
-      "fr": "Le zolpidem est un hypnotique de la classe des imidazopyridines. C'est un somnifère puissant, prescrit uniquement en cas d'insomnies sévères transitoires. C'est une molécule apparentée aux benzodiazépines (BZD), avec une demi-vie courte et une biodisponibilité élevée. Son élimination rapide et son absence d'effets perturbateurs des phases du sommeil comparé aux BZD en ont fait le somnifère de référence en France. Cependant, le fait qu'il augmente la durée du sommeil de stade 3 augmente le risque de parasomnies chez les personnes concernées. Selon certaines sources il peut provoquer des effets secondaires tels que des hallucinations visuelles et auditives, même à des doses thérapeutiques. Il est de ce fait classé parmi les psychotropes à risque d'abus, et est considéré comme un stupéfiant dans certains pays. Il est assimilé stupéfiant en France."
     },
     "bindings": [
       {
@@ -8726,8 +7973,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "zonisamide",
@@ -8735,10 +7981,6 @@
     "categories": [
       "other"
     ],
-    "description": {
-      "en": "Zonisamide, sold under the brand name Zonegran among others, is a medication used to treat the symptoms of epilepsy and Parkinson's disease. Chemically it is a sulfonamide. It serves as an anticonvulsant used primarily as an adjunctive therapy in adults with Parkinson's disease, partial-onset seizures; infantile spasm, mixed seizure types of Lennox–Gastaut syndrome, myoclonic and generalized tonic clonic seizure. Despite this it is also sometimes used as a monotherapy for partial-onset seizures.",
-      "fr": "Le zonisamide est un médicament antiépileptique vendu sous le nom de marque Zonegran."
-    },
     "bindings": [
       {
         "target": "nav",
@@ -8778,8 +8020,7 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Zonisamide",
-    "description_provenance": "sourced"
+    "wikipedia": "https://en.wikipedia.org/wiki/Zonisamide"
   },
   {
     "id": "zopiclone",
@@ -8790,10 +8031,6 @@
     "nbn": {
       "en": "GABA positive allosteric modulator (GABA-PAM)",
       "fr": "modulateur allostérique positif du GABA (GABA-PAM)"
-    },
-    "description": {
-      "en": "Zopiclone, sold under the brand name Imovane among others, is a nonbenzodiazepine, specifically a cyclopyrrolone, used to treat insomnia. While molecularly distinct from benzodiazepine drugs, Zopiclone's mechanism of action is similar; it increases the normal transmission of the neurotransmitter gamma-aminobutyric acid (GABA) in the central nervous system, via positive allosteric modulation at GABAA neurons.",
-      "fr": "La zopiclone est un hypnotique de la famille chimique des cyclopyrrolones, un non-benzodiazépine apparenté aux benzodiazépines. Elle est commercialisée notamment sous le nom d'Imovane. La zopiclone possède des propriétés hypnotiques, sédatives, anxiolytiques et myorelaxantes."
     },
     "bindings": [
       {
@@ -8822,8 +8059,7 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
-    ],
-    "description_provenance": "sourced"
+    ]
   },
   {
     "id": "zotepine",
@@ -8834,10 +8070,6 @@
     "nbn": {
       "en": "dopamine, serotonin receptor antagonist (DS-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques et sérotoninergiques (DS-RAn)"
-    },
-    "description": {
-      "en": "Blocks dopamine D2 and serotonin 2A receptors, inhibits norepinephrine reuptake, and blocks alpha 1 adrenergic and histamine H1 receptors.",
-      "fr": "Bloque les récepteurs dopaminergiques D2 et sérotoninergiques 2A, inhibe la recapture de la noradrénaline, et bloque les récepteurs adrénergiques alpha 1 et histaminergiques H1."
     },
     "bindings": [
       {
@@ -8920,10 +8152,6 @@
     "nbn": {
       "en": "dopamine receptor antagonist (D-RAn)",
       "fr": "antagoniste des récepteurs dopaminergiques (D-RAn)"
-    },
-    "description": {
-      "en": "Blocks dopamine D2 receptors to reduce positive symptoms of psychosis, and also blocks muscarinic, alpha 1 adrenergic, and histamine receptors causing associated side effects.",
-      "fr": "Bloque les récepteurs dopaminergiques D2 pour réduire les symptômes positifs de la psychose, et bloque également les récepteurs muscariniques, adrénergiques alpha 1 et histaminergiques, entraînant des effets indésirables associés."
     },
     "bindings": [
       {

@@ -3416,14 +3416,10 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         nbn_sources = _quote_sources(drug.get("nbn_sources"), f"Drug {drug['id']!r} nbn")
         if nbn_sources:
             out["nbn_sources"] = nbn_sources
-    if drug.get("description"):
-        out["description"] = drug["description"]
-        # Every description carries a provenance grade so the panel can show a pill.
-        # Default "llm" (an LLM-synthesized mechanism line); set "sourced" when the
-        # description was replaced by a drug's Wikipedia lead (see fetch_descriptions).
-        out["description_provenance"] = _provenance(
-            drug.get("description_provenance", DEFAULT_PROVENANCE),
-            f"drug {drug['id']!r} description")
+    # Drug descriptions are intentionally NOT baked: the panel fetches the current
+    # Wikipedia lead at runtime (js/wiki.js), exactly like a structure/target, so the
+    # text stays up to date and the dataset ships no copyrighted prose. A drug whose
+    # live lead fails to load simply shows no description.
     if drug.get("wikipedia"):
         out["wikipedia"] = drug["wikipedia"]
         out["wikipedia_provenance"] = _wiki_provenance(drug["id"])
@@ -3516,9 +3512,9 @@ def _provenance_stats(structures: list[dict[str, Any]],
     "% sourced" figure is always a real count of the shipped data, never hand-typed
     (the whole point of the request: a programmatic count of source type vs all).
 
-    "Assertions" are the factual claims (drug bindings, drug NbN labels, drug
-    descriptions, neuron projections, receptor classifications, non-receptor target
-    classifications, brain-region anatomy) and drive the headline ``pct_backed``;
+    "Assertions" are the factual claims (drug bindings, drug NbN labels, neuron
+    projections, receptor classifications, non-receptor target classifications,
+    brain-region anatomy) and drive the headline ``pct_backed``;
     Wikipedia "references" are tallied separately (read-more links, not claims).
     """
     def bucket(rank_or_grade: Any) -> str:
@@ -3538,8 +3534,6 @@ def _provenance_stats(structures: list[dict[str, Any]],
                       for d in drugs for b in d.get("bindings", [])]
     nbn_grades = [_strongest_grade(d.get("nbn_sources"))
                   for d in drugs if d.get("nbn")]
-    desc_grades = [d.get("description_provenance", DEFAULT_PROVENANCE)
-                   for d in drugs if d.get("description")]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
     # Receptor classification claims (neurotransmitter / mechanism class / sign /
     # synaptic site / locations), graded per receptor (classification_provenance). A
@@ -3574,14 +3568,13 @@ def _provenance_stats(structures: list[dict[str, Any]],
     by_kind = {
         "drug_bindings": tally(binding_grades),
         "drug_nbn": tally(nbn_grades),
-        "drug_descriptions": tally(desc_grades),
         "projections": tally(projection_grades),
         "receptors": tally(receptor_grades),
         "targets": tally(target_grades),
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }
-    assertion_kinds = ("drug_bindings", "drug_nbn", "drug_descriptions",
+    assertion_kinds = ("drug_bindings", "drug_nbn",
                        "projections", "receptors", "targets", "structures")
     assertions = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
     for kind in assertion_kinds:

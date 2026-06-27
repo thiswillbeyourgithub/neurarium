@@ -544,7 +544,7 @@ def check_provenance(report, meta, structures, projections, circuits,
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("assertions", {})
-        kinds = ("drug_bindings", "drug_nbn", "drug_descriptions", "projections",
+        kinds = ("drug_bindings", "drug_nbn", "projections",
                  "receptors", "targets", "structures")
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "unverified"):

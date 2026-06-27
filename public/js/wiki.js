@@ -1,15 +1,14 @@
 // Runtime fetch of a Wikipedia article's lead summary, so the description shown in
 // an info panel (a drug, a receptor, a structure, a non-receptor target: anything
-// carrying a `wikipedia` link) reflects the *current* article instead of only a
-// baked-in copy.
+// carrying a `wikipedia` link) reflects the *current* article.
 //
-// Why runtime (vs the author-side tools/fetch_descriptions.py, which still exists):
-// the panel text stays up to date with Wikipedia with no re-run/commit. A baked
-// `description` (drugs.jsonl / receptors) is kept as the immediate first paint +
-// offline fallback; this just overrides it best-effort when the live lead arrives
-// (and a structure/target with no baked description gains one only when the fetch
-// succeeds). Any failure (offline, rate-limited, CSP-blocked, missing article)
-// resolves to null and nothing changes, so the panel never breaks.
+// Why runtime: the panel text stays up to date with Wikipedia with no re-run/commit,
+// and the dataset ships no copyrighted prose. Drugs, structures and non-receptor
+// targets carry NO baked description: a fresh paragraph is inserted only once the
+// live lead arrives. Receptors carry a short authored `description` painted first as
+// the offline fallback, which this overrides best-effort when the live lead arrives.
+// Any failure (offline, rate-limited, CSP-blocked, missing article) resolves to null
+// and nothing changes, so the panel never breaks.
 //
 // Language: the viewer's locale wins. When the stored `wikipedia` article is in
 // another language (links are authored as the English one), the locale article is
@@ -67,8 +66,7 @@ async function fetchJson(url) {
   return res.json();
 }
 
-// REST page/summary -> the plain-text lead extract (the same endpoint the
-// author-side tools/fetch_descriptions.py uses, so the runtime text matches it).
+// REST page/summary -> the plain-text lead extract (the article's lead paragraph).
 async function summaryExtract(lang, title) {
   const url =
     `https://${lang}.wikipedia.org/api/rest_v1/page/summary/` +

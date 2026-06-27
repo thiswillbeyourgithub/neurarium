@@ -100,12 +100,9 @@ Data + authoring (`tools/`):
 - `tools/fetch_structure_images.py` — resolves the *url* of each structure's best
   Wikipedia illustration into `tools/structure_images_sources.json` (network,
   idempotent, polite; reuses `fetch_molecules.py` helpers). Downloads no bytes. See Images.
-- `tools/fetch_descriptions.py` — replaces each drug's description with the
-  bilingual Wikipedia lead (network, idempotent, polite); writes
-  `tools/descriptions_sources.json`. See Source provenance.
-- `tools/molecules_sources.json` / `tools/structure_images_sources.json` /
-  `tools/descriptions_sources.json` — provenance/attribution for the three fetch
-  tools (the last two are read by `generate_data.py` offline; not served).
+- `tools/molecules_sources.json` / `tools/structure_images_sources.json`:
+  provenance/attribution for the two fetch tools (`structure_images_sources.json` is
+  read by `generate_data.py` offline; not served).
 - `tools/git-hooks/` — repo-tracked git hooks (see Git hooks).
 
 Emitted data (`public/data/`):
@@ -147,8 +144,7 @@ Emitted data (`public/data/`):
   `classification_provenance`, optional `description{en,fr}` + `wikipedia` (+
   provenance). Empty locations + no description = a deliberate stub (listed, not focusable).
 - `drugs.jsonl` — one drug/line: `id`, `name` (technical), `categories`, optional
-  `nbn{en,fr}` (+ `nbn_sources[{corpus,page,quote,provenance}]`), optional
-  `description{en,fr}` (+ `description_provenance`), `bindings[]` (each: `target`,
+  `nbn{en,fr}` (+ `nbn_sources[{corpus,page,quote,provenance}]`), `bindings[]` (each: `target`,
   `action`, optional `effect` override, optional `note{en,fr}` or "TODO", optional
   `tentative`, optional `sources[{corpus,page,quote,provenance}]`),
   `sources[{citation,url,provenance}]` (the drug-level Stahl citation), optional
@@ -942,15 +938,14 @@ judge for this field). Page files live under the author-side source tree (see
 `CLAUDE.local.md`), so the quote check is author-/hook-side and skipped (warned) on a clone
 without them.
 
-**Descriptions.** Each drug's `description` is the **verbatim Wikipedia lead** (CC BY-SA),
-fetched bilingually by `tools/fetch_descriptions.py` (en + the fr article via langlinks) and
-graded `sourced`, only when **both** languages resolve (so `description_provenance` is
-truthful per language; the ~18 with no fr article keep their `llm` one-liner). The
-description is **also refreshed live at runtime** for **every** wiki-linked panel (drug /
-receptor / structure / target) via the shared `liveWikiDescription` helper over `js/wiki.js`
-`fetchWikiLead(url, lang)`: the current lead for the viewer's locale (English fallback),
-shown as a `sourced` paragraph when it arrives; a baked description is painted first as the
-offline fallback, a panel with none gains one on success. Needs the `connect-src
+**Descriptions.** Drugs, structures and non-receptor targets carry **no baked
+description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
+the shared `liveWikiDescription` helper over `js/wiki.js` `fetchWikiLead(url, lang)` (the
+lead for the viewer's locale, English fallback), shown as a `sourced` paragraph when it
+arrives, so the text stays current and the dataset ships no copyrighted prose; a wiki-linked
+panel whose live lead fails to load shows no description. Receptors (and projection groups)
+carry a short **authored** `description` painted first as the offline fallback, which the
+live lead overrides best-effort when it arrives. Needs the `connect-src
 https://*.wikipedia.org` CSP allowance.
 
 **Presentation.** `makeProvenancePill(level)` -> a `.src-prov-<level>` pill (`.src-todo` for
@@ -960,7 +955,7 @@ the none case) with the glyph + `info.prov*` tooltip via `withTip`; colours are 
 full key, so there is no separate blanket "?" caveat.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every claim + reference to its
-strongest grade and tallies per kind (drug bindings / NbN / descriptions / projections /
+strongest grade and tallies per kind (drug bindings / NbN / projections /
 receptor classifications / target classifications / region anatomy / wikipedia references)
 plus a headline `pct_backed` over the **factual claims** (sourced-or-verified / total),
 emitted as `meta.provenance_stats`. The About panel shows it (`buildAboutSourcing`) and
@@ -968,8 +963,10 @@ emitted as `meta.provenance_stats`. The About panel shows it (`buildAboutSourcin
 `check_data.py` re-confirms the tally is self-consistent. References (wikipedia links) are
 their own kind, not folded into the headline (a reference is a pointer, not a claim). The
 circuit + projection-group descriptions are validated for a known grade but not yet folded
-into the headline (all `llm` for now). Current: ~70% of 943 factual claims backed (bindings
-94%, NbN 97%, descriptions 89%; projections + classifications + region anatomy the gap).
+into the headline (all `llm` for now). Current: ~66% of 785 factual claims backed (bindings
+94%, NbN 97%; projections + classifications + region anatomy the gap). Descriptions are no
+longer a claim kind: every wiki-linked panel fetches the live Wikipedia lead instead of
+baking it.
 
 ## Changing the data
 
@@ -1034,8 +1031,7 @@ into the headline (all `llm` for now). Current: ~70% of 943 factual claims backe
 2. Run `python tools/generate_data.py` to regenerate `public/data/`.
 3. Optionally run `python tools/check_data.py`.
 4. For new drugs/structures with links, run the fetch tools (network, idempotent, touch
-   only the new ones): `fetch_molecules.py`, `fetch_structure_images.py`,
-   `fetch_descriptions.py`.
+   only the new ones): `fetch_molecules.py`, `fetch_structure_images.py`.
 5. Commit the generator change + the regenerated artifacts together.
 
 The legend is generated at runtime from the data, so it updates automatically.

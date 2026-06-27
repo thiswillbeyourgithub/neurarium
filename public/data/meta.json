@@ -1995,12 +1995,6 @@
         "sourced": 0,
         "unverified": 3
       },
-      "drug_descriptions": {
-        "total": 158,
-        "verified": 0,
-        "sourced": 140,
-        "unverified": 18
-      },
       "projections": {
         "total": 107,
         "verified": 0,
@@ -2033,12 +2027,12 @@
       }
     },
     "assertions": {
-      "total": 943,
+      "total": 785,
       "verified": 516,
-      "sourced": 140,
-      "unverified": 287,
-      "backed": 656,
-      "pct_backed": 70
+      "sourced": 0,
+      "unverified": 269,
+      "backed": 516,
+      "pct_backed": 66
     }
   }
 }
