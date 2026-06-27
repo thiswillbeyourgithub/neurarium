@@ -45,9 +45,13 @@ from pathlib import Path
 import shot
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-# Renders are scratch: geometry_refinements/renders/ is gitignored.
-DEFAULT_RENDER_DIR = REPO_ROOT / "geometry_refinements" / "renders"
+# Renders are scratch; reference images are third-party. Both trees are gitignored.
+GEO_DIR = REPO_ROOT / "geometry_refinements"
+DEFAULT_RENDER_DIR = GEO_DIR / "renders"
+DEFAULT_REFS_DIR = GEO_DIR / "refs"
 ANGLES = ("front", "right", "top", "iso")
+REF_EXTS = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp")
+MAX_GIF_FRAMES = 4  # a coronal-sections GIF -> a few evenly-spaced reference cells
 
 
 def _params(structure_id: str, angle: str, mode: str, explode: float,
@@ -67,13 +71,23 @@ def _load_font(size: int):
         return ImageFont.load_default()
 
 
-def _compose(frames: list[tuple[str, Path]], out: Path, title: str,
-             cell: int) -> None:
-    """Lay the captured frames out as a labeled grid and save to ``out``.
+def _as_image(spec):
+    """Return a RGB PIL image from a path or pass a PIL image through."""
+    from PIL import Image
+    if isinstance(spec, (str, Path)):
+        return Image.open(spec).convert("RGB")
+    return spec.convert("RGB")
 
-    ``frames`` is a list of ``(label, png_path)``; each is fitted (preserving
-    aspect) into a ``cell``-sized square, captioned with its angle, and tiled into
-    the smallest square-ish grid. A title bar runs across the top.
+
+def _compose(items: list, out: Path, title: str, cell: int,
+             cols: int | None = None) -> None:
+    """Lay labeled images out as a grid and save to ``out``.
+
+    ``items`` is a list of ``(label, image)`` where ``image`` is a path or a
+    loaded PIL image; each is fitted (preserving aspect) into a ``cell``-sized
+    square, captioned, and tiled. ``cols`` defaults to 2 (square-ish). A title bar
+    runs across the top. Used for the render sheet, the reference sheet, and the
+    combined sheet, so the three share one layout.
     """
     from PIL import Image, ImageDraw
 
@@ -82,8 +96,9 @@ def _compose(frames: list[tuple[str, Path]], out: Path, title: str,
     title_h = 44
     bg = (17, 19, 24)
     fg = (228, 230, 236)
-    cols = 2 if len(frames) > 1 else 1
-    rows = (len(frames) + cols - 1) // cols
+    if not cols:
+        cols = 2 if len(items) > 1 else 1
+    rows = (len(items) + cols - 1) // cols
 
     sheet_w = pad + cols * (cell + pad)
     sheet_h = title_h + pad + rows * (cell + cap_h + pad)
@@ -91,17 +106,18 @@ def _compose(frames: list[tuple[str, Path]], out: Path, title: str,
     draw = ImageDraw.Draw(sheet)
     draw.text((pad, title_h // 2), title, fill=fg, font=_load_font(26), anchor="lm")
 
-    for i, (label, path) in enumerate(frames):
+    for i, (label, spec) in enumerate(items):
         r, c = divmod(i, cols)
         cx = pad + c * (cell + pad)
         cy = title_h + pad + r * (cell + cap_h + pad)
         try:
-            img = Image.open(path).convert("RGB")
+            img = _as_image(spec)
         except Exception:
             draw.rectangle([cx, cy, cx + cell, cy + cell], outline=(90, 40, 40))
-            draw.text((cx + cell // 2, cy + cell // 2), "(no frame)",
+            draw.text((cx + cell // 2, cy + cell // 2), "(missing)",
                       fill=(200, 120, 120), font=_load_font(22), anchor="mm")
             continue
+        img = img.copy()
         img.thumbnail((cell, cell), Image.LANCZOS)
         ox = cx + (cell - img.width) // 2
         oy = cy + (cell - img.height) // 2
@@ -111,6 +127,52 @@ def _compose(frames: list[tuple[str, Path]], out: Path, title: str,
 
     out.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out)
+
+
+def _gather_refs(base: str, refs_dir: Path = DEFAULT_REFS_DIR) -> list:
+    """Load reference images for a structure base into ``(label, image)`` items.
+
+    Reads ``<refs_dir>/<base>/`` (default ``geometry_refinements/refs/``,
+    gitignored). A multi-frame GIF
+    (e.g. an animated coronal-sections plate) is expanded into a few evenly-spaced
+    frames so it contributes several reference cells rather than one. Returns [] if
+    the folder is absent/empty, so the caller simply skips the reference sheets.
+    """
+    from PIL import Image, ImageSequence
+    folder = refs_dir / base
+    if not folder.is_dir():
+        return []
+    items = []
+    for path in sorted(folder.iterdir()):
+        if path.suffix.lower() not in REF_EXTS:
+            continue
+        try:
+            img = Image.open(path)
+        except Exception:
+            continue
+        n = getattr(img, "n_frames", 1)
+        if n > 1:  # animated GIF (e.g. section series) -> a few content frames
+            # Composite cumulatively so delta/disposal frames render fully (a raw
+            # seek to a delta frame comes back mostly black), then keep only
+            # frames with real content and sample a few evenly across those.
+            from PIL import ImageStat
+            canvas = Image.new("RGBA", img.size, (255, 255, 255, 255))
+            kept = []
+            for frame in ImageSequence.Iterator(img):
+                canvas.alpha_composite(frame.convert("RGBA"))
+                rgb = canvas.convert("RGB")
+                lo, hi = ImageStat.Stat(rgb).extrema[0]  # near-empty -> tiny spread
+                if hi - lo > 24:
+                    kept.append(rgb.copy())
+            if not kept:
+                continue
+            pick = MAX_GIF_FRAMES if len(kept) >= MAX_GIF_FRAMES else len(kept)
+            idx = [round(k * (len(kept) - 1) / max(1, pick - 1)) for k in range(pick)]
+            for j in idx:
+                items.append((f"{path.stem} {j + 1}/{len(kept)}", kept[j]))
+        else:
+            items.append((path.stem, img.convert("RGB")))
+    return items
 
 
 def main() -> int:
@@ -133,6 +195,11 @@ def main() -> int:
     parser.add_argument("--wait", type=int, default=4500,
                         help="ms to let the scene mesh + render per angle (default 4500)")
     parser.add_argument("--headed", action="store_true", help="real window (uses the GPU)")
+    parser.add_argument("--no-refs", dest="refs", action="store_false",
+                        help="skip the reference + combined sheets even if refs exist")
+    parser.add_argument("--refs-dir", default=str(DEFAULT_REFS_DIR),
+                        help="reference-image root (per-base subfolders); default "
+                             "geometry_refinements/refs/")
     args = parser.parse_args()
 
     try:
@@ -173,9 +240,30 @@ def main() -> int:
         print(str(exc), file=sys.stderr)
         return 1
 
+    # (1) the render sheet
     title = f"{sid}   [{args.mode}]   explode={args.explode}"
-    _compose(frames, out, title, args.cell)
-    print(f"wrote {out}  ({len(frames)} angles: {', '.join(angles)})")
+    _compose(frames, out, title, args.cell, cols=2)
+    written = [out]
+
+    # (2) the reference sheet and (3) the combined sheet, when references exist.
+    # References are keyed by the hemisphere-stripped base (refs/<base>/).
+    base = sid[:-2] if sid.endswith(("_R", "_L")) else sid
+    refs = _gather_refs(base, Path(args.refs_dir)) if args.refs else []
+    if refs:
+        refs_out = out.parent / "refs.png"
+        _compose(refs, refs_out, f"{base}  references ({len(refs)})", args.cell)
+        written.append(refs_out)
+
+        combined = [(f"render {lbl}", path) for lbl, path in frames]
+        combined += [(f"ref {lbl}", img) for lbl, img in refs]
+        comb_out = out.parent / "combined.png"
+        # Wider grid + smaller cells so renders (top) and refs read side by side.
+        _compose(combined, comb_out, f"{sid}  renders + references", 460, cols=4)
+        written.append(comb_out)
+
+    print("wrote:\n  " + "\n  ".join(str(p) for p in written))
+    if not refs and args.refs:
+        print(f"(no reference images found in {DEFAULT_REFS_DIR / base}/)")
     return 0
 
 
