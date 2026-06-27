@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-"""Resolve the first illustration ``.gif`` on each brain structure's Wikipedia
-article and record its **URL** so the viewer can hot-link it at runtime.
+"""Resolve the best illustration on each brain structure's Wikipedia article and
+record its **URL** so the viewer can hot-link it at runtime.
 
 Anatomy articles very often open with a rotating-brain GIF that highlights the
 structure in colour (the Life Science Databases / Anatomography set), which is far
@@ -12,14 +12,22 @@ by hot-linking the Wikimedia URL directly (the site's CSP allows
 hide on failure (see ``showStructure``). Only the URL lives in the data.
 
 For every structure in ``public/data/structures.jsonl`` that has a ``wikipedia``
-link, this resolves the **first** ``.gif`` used on the article (in page order, via
-the ``parse`` API), keyed by the structure's **base** id so both hemispheres of a
-pair share the one URL (like the WIKIPEDIA registry in ``generate_data.py``). The
-resolved ``{file, url, title}`` per base is written to
-``tools/structure_images_sources.json``, which the offline ``generate_data.py`` then
-reads to emit each structure's ``structure_image`` (see
-``_load_structure_image_urls``). A structure whose article uses no GIF is simply left
-without one; the run prints which ones were missed.
+link, this resolves the best illustration via a **fallback chain** (so a structure
+whose article carries no animation still gets a useful picture):
+
+  1. the **first ``.gif``** used on the article (in page order, via the ``parse``
+     API) -- the lead rotating-brain / coronal-sections animation;
+  2. else the **first ``.svg``** (a vector diagram, often a labelled section);
+  3. else the **infobox / lead image** of any type (gif/svg/png/jpg, via the
+     ``pageimages`` API) -- the photo or plate at the top of the article.
+
+The hit is keyed by the structure's **base** id so both hemispheres of a pair share
+the one URL (like the WIKIPEDIA registry in ``generate_data.py``). The resolved
+``{file, url, title, kind}`` per base (``kind`` = gif/svg/infobox, for provenance) is
+written to ``tools/structure_images_sources.json``, which the offline
+``generate_data.py`` then reads to emit each structure's ``structure_image`` (see
+``_load_structure_image_urls``). A structure whose article has no usable image at all
+is left without one; the run prints which ones were missed.
 
 This is an *authoring* tool (it hits the network), kept separate from the offline,
 stdlib-only ``generate_data.py``. It reuses the polite-fetch helpers from the sibling
@@ -56,6 +64,11 @@ REPO = Path(__file__).resolve().parent.parent
 STRUCTURES_JSONL = REPO / "public" / "data" / "structures.jsonl"
 SOURCES_JSON = Path(__file__).resolve().parent / "structure_images_sources.json"
 
+# Extensions an <img> can actually render. The pageimages "page image" is sometimes
+# a non-image file (e.g. a microscopy figure exported as a .pdf), which would load
+# as a broken image, so the infobox fallback only accepts these.
+RENDERABLE_IMG_EXT = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp")
+
 
 def base_id(structure_id: str) -> str:
     """Strip a trailing ``_R`` / ``_L`` hemisphere suffix to get the base id.
@@ -65,30 +78,62 @@ def base_id(structure_id: str) -> str:
     return re.sub(r"_(R|L)$", "", structure_id)
 
 
-def first_gif(title: str) -> tuple[str, str] | None:
-    """Resolve an article to its first ``.gif`` ``(file_title, url)`` in page order.
+def _file_url(file_title: str) -> str | None:
+    """Resolve a ``File:<name>`` title to its full-resolution Wikimedia url."""
+    info = http_json({
+        "action": "query", "titles": file_title,
+        "prop": "imageinfo", "iiprop": "url",
+    })
+    for page in info.get("query", {}).get("pages", {}).values():
+        for ii in page.get("imageinfo", []):
+            url = ii.get("url", "")
+            if url:
+                return url
+    return None
 
-    ``action=parse&prop=images`` returns the files used on the page in order of
-    appearance, so the first ``.gif`` is the lead/infobox animation on a typical
-    anatomy article. Chrome (UI/maintenance) names are skipped. Returns ``None`` if
-    the article uses no GIF.
+
+def _lead_image(title: str) -> tuple[str, str] | None:
+    """The article's infobox / lead image (any type) via the ``pageimages`` API.
+
+    ``piprop=original`` gives the full-resolution source of the page's primary
+    image, which on an anatomy article is the photo / plate / diagram at the top of
+    the infobox. ``redirects=1`` follows a title redirect; chrome names are skipped.
+    """
+    data = http_json({
+        "action": "query", "prop": "pageimages",
+        "piprop": "original|name", "titles": title, "redirects": 1,
+    })
+    for page in data.get("query", {}).get("pages", {}).values():
+        name = page.get("pageimage") or ""
+        src = (page.get("original") or {}).get("source") or ""
+        if src and not _is_chrome(name) \
+                and src.lower().endswith(RENDERABLE_IMG_EXT):
+            return (f"File:{name}", src)
+    return None
+
+
+def resolve_image(title: str) -> tuple[str, str, str] | None:
+    """Best illustration for an article: ``(file_title, url, kind)`` or ``None``.
+
+    Fallback chain (see the module docstring): first ``.gif`` in page order, else
+    first ``.svg`` in page order, else the infobox/lead image of any type.
+    ``action=parse&prop=images`` lists the files in order of appearance, so "first"
+    is the lead one on a typical article. Chrome (UI/maintenance) names are skipped.
     """
     data = http_json({
         "action": "parse", "page": title, "prop": "images", "redirects": 1,
     })
     images = data.get("parse", {}).get("images", [])  # filenames, page order
-    for fname in images:
-        if not fname.lower().endswith(".gif") or _is_chrome(fname):
-            continue
-        info = http_json({
-            "action": "query", "titles": f"File:{fname}",
-            "prop": "imageinfo", "iiprop": "url",
-        })
-        for page in info.get("query", {}).get("pages", {}).values():
-            for ii in page.get("imageinfo", []):
-                url = ii.get("url", "")
-                if url.lower().endswith(".gif"):
-                    return (f"File:{fname}", url)
+    for ext, kind in ((".gif", "gif"), (".svg", "svg")):
+        for fname in images:
+            if not fname.lower().endswith(ext) or _is_chrome(fname):
+                continue
+            url = _file_url(f"File:{fname}")
+            if url and url.lower().endswith(ext):
+                return (f"File:{fname}", url, kind)
+    lead = _lead_image(title)
+    if lead:
+        return (lead[0], lead[1], "infobox")
     return None
 
 
@@ -145,16 +190,20 @@ def main() -> None:
             missing.append((base, "no wikipedia title"))
             continue
         try:
-            hit = first_gif(title)
+            hit = resolve_image(title)
             if not hit:
-                missing.append((base, f"no GIF on '{title}'"))
-                print(f"[{i}/{len(bases)}] {base}: MISSING (no GIF)")
+                # Clear any stale entry (e.g. a --force re-resolve that now rejects
+                # what it once accepted) so the sources JSON never keeps a dead url.
+                sources.pop(base, None)
+                missing.append((base, f"no image on '{title}'"))
+                print(f"[{i}/{len(bases)}] {base}: MISSING (no image)")
                 time.sleep(args.delay)
                 continue
-            file_title, url = hit
-            sources[base] = {"file": file_title, "url": url, "title": title}
+            file_title, url, kind = hit
+            sources[base] = {"file": file_title, "url": url,
+                             "title": title, "kind": kind}
             resolved.append(base)
-            print(f"[{i}/{len(bases)}] {base}: {file_title}")
+            print(f"[{i}/{len(bases)}] {base}: [{kind}] {file_title}")
         except Exception as exc:  # noqa: BLE001 - report and keep going
             errors.append((base, str(exc)))
             print(f"[{i}/{len(bases)}] {base}: ERROR {exc}")

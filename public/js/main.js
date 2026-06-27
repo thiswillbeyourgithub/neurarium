@@ -1723,13 +1723,13 @@ function createInfoPanel(data) {
         data.meta.groupLabels[structure.group] || structure.group,
       ));
 
-      // Wikipedia illustration GIF (the lead rotating-brain / coronal-sections
-      // animation, see tools/fetch_structure_images.py). These are multi-MB, so
-      // rather than vendor them the viewer HOT-LINKS the Wikimedia url at runtime
-      // (CSP img-src allows upload.wikimedia.org), like the live descriptions. A
-      // spinner shows while it loads; the whole figure is removed if the load fails
-      // (offline / blocked / moved), so a failure degrades to no image. Unlike the
-      // drug molecule SVGs this is colour raster, so the CSS does NOT invert it.
+      // Wikipedia illustration (the lead rotating-brain GIF, else an SVG diagram or
+      // an infobox image; resolved by tools/fetch_structure_images.py). These can be
+      // multi-MB, so rather than vendor them the viewer HOT-LINKS the Wikimedia url
+      // at runtime (CSP img-src allows upload.wikimedia.org), like the live
+      // descriptions. A spinner shows while it loads; the whole figure is removed if
+      // the load fails (offline / blocked / moved), so a failure degrades to no
+      // image. Unlike the drug molecule line-art these are colour, so NOT inverted.
       if (structure.structureImage) {
         const fig = el("figure", "structure-image loading");
         fig.appendChild(el("div", "img-spinner"));

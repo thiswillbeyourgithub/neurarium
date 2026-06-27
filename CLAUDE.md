@@ -53,7 +53,7 @@ served site: `index.html`, `app-config.js`, `version.js`, `js/`, `data/` which
 holds the per-type dataset files (`meta.json`, `structures.jsonl`,
 `projections.jsonl`, `circuits.jsonl`, `receptors.jsonl`, `drugs.jsonl`) + the
 `shapes/` geometry files + the `molecules/` per-drug structure SVGs; the
-per-structure Wikipedia illustration GIFs are *not* vendored here, the viewer
+per-structure Wikipedia illustration images are *not* vendored here, the viewer
 hot-links them, see "Structure images"), and that
 directory is the *only* thing exposed to the web: Caddy's
 `/srv` and `tools/serve.py` both root at it, so `docker/`, `tools/`, `.git` and
@@ -123,8 +123,9 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           wikipedia (article URL, shown as a link in the structure
                           info panel) + its wikipedia_provenance (the source-grade
                           pill on that link, see "Source provenance" below), and an
-                          optional structure_image (a Wikimedia GIF *url* the viewer
-                          hot-links in the panel, set by the generator from the
+                          optional structure_image (a Wikimedia image *url* the viewer
+                          hot-links in the panel: the article's first gif, else first
+                          svg, else infobox image; set by the generator from the
                           resolved-url map, both hemispheres of a pair sharing it,
                           see "Structure images" below)
                         - data/projections.jsonl: one pathway per line: from, to,
@@ -568,19 +569,22 @@ tools/molecules_sources.json  Provenance for the fetched molecule SVGs (per drug
                       the Commons File + source URL), written by fetch_molecules.py
                       for attribution; not served, not read by the viewer.
 tools/fetch_structure_images.py  Authoring tool (stdlib, needs network) that
-                      *resolves the url* of the first .gif on each structure's
-                      Wikipedia article (in page order, the lead animation), keyed by
-                      base id so both hemispheres share one url, and records it to
-                      tools/structure_images_sources.json. Downloads no image bytes:
-                      the GIFs are multi-MB so they are hot-linked at runtime, not
-                      vendored (see "Structure images"). Reuses fetch_molecules.py's
-                      polite-fetch helpers (UA, retry/backoff, the MediaWiki call)
-                      rather than duplicating them. Idempotent (skips bases already
-                      recorded). See "Structure images".
-tools/structure_images_sources.json  The resolved Wikimedia GIF url + Commons File
-                      per structure base, written by fetch_structure_images.py and
-                      *read by generate_data.py* (offline) to emit each structure's
-                      structure_image url; also the attribution record. Not served.
+                      *resolves the url* of the best illustration on each structure's
+                      Wikipedia article via a fallback chain (first .gif, else first
+                      .svg, else the infobox/lead image of a renderable type), keyed
+                      by base id so both hemispheres share one url, and records it
+                      (+ the kind) to tools/structure_images_sources.json. Downloads
+                      no image bytes: the images (esp. GIFs) are large so they are
+                      hot-linked at runtime, not vendored (see "Structure images").
+                      Reuses fetch_molecules.py's polite-fetch helpers (UA,
+                      retry/backoff, the MediaWiki call) rather than duplicating them.
+                      Idempotent (skips bases already recorded). See "Structure
+                      images".
+tools/structure_images_sources.json  The resolved Wikimedia image url + Commons File
+                      + kind (gif/svg/infobox) per structure base, written by
+                      fetch_structure_images.py and *read by generate_data.py*
+                      (offline) to emit each structure's structure_image url; also the
+                      attribution record. Not served.
 tools/fetch_descriptions.py  Authoring tool (stdlib, needs network) that replaces
                       each drug's description with the lead summary of its Wikipedia
                       article (bilingual: en from en.wikipedia.org, fr found via
@@ -950,11 +954,12 @@ the gated eruda debug console are vendored same-origin (`public/vendor/three`,
   no description) is the offline fallback, so a CSP-blocked or failed fetch degrades
   silently. (`tools/serve.py` sends no CSP, so dev is unaffected.)
 - `https://upload.wikimedia.org` in **`img-src`**: the structure panel hot-links
-  each region's Wikipedia illustration GIF from Wikimedia at runtime (only the url
-  is stored, the multi-MB animations are not vendored, see "Structure images"); the
-  `<img>` shows a spinner while loading and removes itself on error, so a blocked /
-  failed load degrades to no image. The drug molecule SVGs stay vendored same-origin
-  (tiny), so this is the one third-party *image* origin.
+  each region's Wikipedia illustration (a GIF, else an SVG diagram or infobox image)
+  from Wikimedia at runtime (only the url is stored, the often-multi-MB images are
+  not vendored, see "Structure images"); the `<img>` shows a spinner while loading
+  and removes itself on error, so a blocked / failed load degrades to no image. The
+  drug molecule SVGs stay vendored same-origin (tiny), so this is the one third-party
+  *image* origin.
 
 `script-src`/`style-src` include `'unsafe-inline'` because this is a no-build
 site with an inline `<script type="importmap">`, the inline eruda gate, and an
@@ -2009,46 +2014,50 @@ could not resolve, and the panel degrades to no image for them.
 ## Structure images
 
 Each **structure** panel shows an illustration of the region at the top, under the
-title/group: the **first GIF on its Wikipedia article** (in page order), which on a
-typical anatomy article is the lead rotating-brain or coronal-sections animation
-that highlights the structure. It follows the *resolve-then-embed* shape of the
-molecule images, but with one deliberate difference: these animations are **multi-MB
-each** (the full set was ~37 MB), far too large to vendor in git, so unlike the small
-molecule SVGs (committed same-origin) the structure GIFs are **hot-linked from
-Wikimedia at runtime**, the same way the live Wikipedia descriptions are fetched.
-Only the *url* is stored in the data, never the binary.
+title/group: an illustration resolved from its Wikipedia article. Preferring an
+animation but falling back to a still, it follows the *resolve-then-embed* shape of
+the molecule images, but with one deliberate difference: these images (especially the
+GIFs) can be **multi-MB each** (the GIF set alone was ~37 MB), far too large to vendor
+in git, so unlike the small molecule SVGs (committed same-origin) they are
+**hot-linked from Wikimedia at runtime**, the same way the live Wikipedia descriptions
+are fetched. Only the *url* is stored in the data, never the binary.
 
 - **Resolve (`tools/fetch_structure_images.py` -> `tools/structure_images_sources.json`).**
-  For every structure in `structures.jsonl` with a `wikipedia` link, the article's
-  first `.gif` (resolved via the MediaWiki `parse` API, which lists a page's images
-  in appearance order) is found and its Wikimedia url recorded, keyed by **base** id
-  so both hemispheres of a pair share one url (like the `WIKIPEDIA` registry). It
-  downloads **no image bytes**, only the JSON metadata. It **reuses the polite-fetch
-  helpers from `tools/fetch_molecules.py`** (the shared User-Agent, retry/backoff,
-  the MediaWiki JSON call and the article-title / chrome-name helpers) by importing
-  them rather than duplicating the boilerplate. Network-bound, idempotent (skips
-  bases already recorded unless `--force`), polite. Run it after adding a structure
-  with a Wikipedia link: `python tools/fetch_structure_images.py`. A few articles
-  carry no GIF at all (e.g. globus pallidus, hypothalamus, the brainstem nuclei);
-  the resolver logs them and the panel degrades to no image. A first GIF that is a
-  generic decorative animation rather than a region-specific one (occipital lobe's
-  was) is dropped from the sources JSON by hand.
+  For every structure in `structures.jsonl` with a `wikipedia` link, the best image is
+  picked via a **fallback chain** (via the MediaWiki `parse` API, which lists a page's
+  images in appearance order, then `pageimages`): the **first `.gif`** (the lead
+  rotating-brain / coronal-sections animation), else the **first `.svg`** (a vector
+  diagram, often a labelled section), else the **infobox/lead image** of any
+  renderable type (png/jpg, so a structure with no animation still gets a picture; a
+  non-image lead like a `.pdf` is rejected). Its Wikimedia url + the resolved `kind`
+  (gif/svg/infobox, for provenance) is recorded, keyed by **base** id so both
+  hemispheres of a pair share one url (like the `WIKIPEDIA` registry). It downloads
+  **no image bytes**, only the JSON metadata. It **reuses the polite-fetch helpers
+  from `tools/fetch_molecules.py`** (the shared User-Agent, retry/backoff, the
+  MediaWiki JSON call and the article-title / chrome-name helpers) by importing them
+  rather than duplicating the boilerplate. Network-bound, idempotent (skips bases
+  already recorded unless `--force`, which also clears a now-unresolvable stale
+  entry), polite. Run it after adding a structure with a Wikipedia link: `python
+  tools/fetch_structure_images.py`. With the fallback chain only the odd article
+  (e.g. septal nuclei, whose only lead image is a `.pdf`) ends up with no image; the
+  resolver logs it and the panel degrades to none.
 - **Generator (`generate_data.py`).** `_load_structure_image_urls()` reads that
   sources JSON (an offline file read, like `drugs_data.json`) into a base->url map,
   and `_structure_record` emits a `structure_image` (the **url**) only for a base in
-  it. So the generator stays offline and a structure with no resolved GIF simply gets
-  no field. Mirrors the role of `_available_molecule_ids` / `_drug_record`, but keyed
-  on the recorded url, not a vendored file's presence.
+  it. So the generator stays offline and a structure with no resolved image simply
+  gets no field. Mirrors the role of `_available_molecule_ids` / `_drug_record`, but
+  keyed on the recorded url, not a vendored file's presence.
 - **Rendering (`js/data.js` + `showStructure` in `js/main.js`).** `js/data.js`
   passes the url through as `structure.structureImage` (null when absent);
   `showStructure` renders it as an `<img class="structure-image">` near the top (alt
-  from the `structure.imageAlt` i18n key, `loading="lazy"`). Because the GIF is
+  from the `structure.imageAlt` i18n key, `loading="lazy"`). Because the image is
   **remote**, the figure ships a **spinner** (`.img-spinner`, shown while the figure
   has the `loading` class); the `<img>`'s `load` listener drops `loading` (clearing
   the spinner) and its `error` listener removes the whole figure, so a failed /
-  blocked / offline load degrades to **no image**, never a broken-image icon. Unlike
-  the molecule line-art SVGs these are **colour raster**, so the `.structure-image`
-  CSS does **not** invert them; it only bounds the size and adds a rounded frame.
+  blocked / offline load degrades to **no image**, never a broken-image icon. These
+  are colour art (animations, anatomical diagrams, plates), so unlike the molecule
+  line-art SVGs the `.structure-image` CSS does **not** invert them; it only bounds
+  the size and adds a rounded frame.
 
 This is the one place the viewer pulls a third-party **image** at runtime (the live
 descriptions already pull third-party **text**), so the CSP `img-src` allows
