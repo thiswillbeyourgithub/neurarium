@@ -2017,6 +2017,15 @@ function createInfoPanel(data) {
           wiki.appendChild(a);
         };
         const q = encodeURIComponent(drug.name);
+        // Drugs.com search by name. A search link (always lands on the drug),
+        // chosen over a direct /monograph/<name>.html so it never 404s for a drug
+        // whose monograph slug differs (combos especially); shown regardless of
+        // locale.
+        addLookup(
+          "info.drugscom",
+          "https://www.drugs.com/search.php?searchterm="
+            + encodeURIComponent(drug.name.toLowerCase()),
+          "info.drugscomTitle");
         if (window.__I18N__.lang === "fr") {
           addLookup(
             "info.vidal",
