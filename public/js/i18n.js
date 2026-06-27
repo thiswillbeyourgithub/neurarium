@@ -126,6 +126,7 @@
       "receptor.type": "Type",
       "receptor.effect": "Effect",
       "receptor.synaptic": "Synaptic site",
+      "receptor.source": "Source",
       "receptor.foundIn": "Found in",
       "receptor.ubiquitous": "Throughout the brain",
       "receptor.noRole": "No significant role in the central nervous system.",
@@ -196,6 +197,7 @@
       "about.kindNbn": "Drug nomenclature (NbN)",
       "about.kindDescriptions": "Drug descriptions",
       "about.kindProjections": "Neuron pathways",
+      "about.kindReceptors": "Receptor classifications",
       "about.kindReferences": "Reference links",
       "about.coverageNote":
         "Neuron pathways and reference links are the remaining gap.",
@@ -296,6 +298,7 @@
       "receptor.type": "Type",
       "receptor.effect": "Effet",
       "receptor.synaptic": "Site synaptique",
+      "receptor.source": "Source",
       "receptor.foundIn": "Présent dans",
       "receptor.ubiquitous": "Dans tout le cerveau",
       "receptor.noRole": "Pas de rôle significatif dans le système nerveux central.",
@@ -371,6 +374,7 @@
       "about.kindNbn": "Nomenclature des médicaments (NbN)",
       "about.kindDescriptions": "Descriptions des médicaments",
       "about.kindProjections": "Voies neuronales",
+      "about.kindReceptors": "Classifications des récepteurs",
       "about.kindReferences": "Liens de référence",
       "about.coverageNote":
         "Les voies neuronales et les liens de référence constituent le manque restant.",

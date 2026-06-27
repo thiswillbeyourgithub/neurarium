@@ -135,7 +135,11 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           *base* ids where it is expressed; the viewer expands each
                           to both hemispheres), an optional ubiquitous:true (a
                           brain-wide receptor, empty locations -> lights every
-                          structure), optional description ({en,fr}) and wikipedia
+                          structure), classification_provenance (the source grade
+                          backing those classification claims, shown as the panel's
+                          "Source" pill and counted in the coverage tally; "llm" by
+                          default, see "Source provenance" below), optional
+                          description ({en,fr}) and wikipedia
                           (+ wikipedia_provenance, the source-grade pill on the
                           link, see "Source provenance" below).
                           A receptor with empty locations and no description is a
@@ -722,7 +726,7 @@ Six families of checks:
   data.
 - **Provenance grades** (see "Source provenance" below): every emitted source
   (`sources[].provenance`, **including the per-binding drug sources and a drug's
-  `nbn_sources`**) and every
+  `nbn_sources`**), every receptor's **`classification_provenance`**, and every
   wikipedia reference (the `wikipedia_provenance` beside a `wikipedia`) must carry
   a known grade (`llm` / `sourced` / `verified`), the value the viewer renders as
   the grey/yellow/green pill. An unknown or missing grade is an **error** (the
@@ -1268,7 +1272,9 @@ as the WIP banner (`js/error-banner.js`):
   scatters glowing **dots** over those regions' surfaces (`createReceptorMarkers`,
   see "Receptors" below), and opens the **info-panel view**: a receptor opens
   `showReceptor` (the system, a Wikipedia link, the description, the classification
-  facts and the region list, or "Throughout the brain" for a ubiquitous receptor);
+  facts ending in a **"Source" row** whose provenance pill grades those claims, see
+  "Source provenance", and the region list, or "Throughout the brain" for a
+  ubiquitous receptor);
   a non-receptor target opens the lighter `showTarget` (its system, a Wikipedia
   link or a NOSOURCE pill until one is gathered, the type + system facts, and the
   region list). Both panels then carry an **"Interacting drugs"** section under
@@ -1685,7 +1691,13 @@ each receptor's Wikipedia article. Split, like the rest, into data and rendering
   `synaptic` site (pre / post / both), and `locations` (structure **base** ids,
   like a circuit; the viewer expands each to both hemispheres). The sentinel
   `locations="ALL"` is emitted as `ubiquitous:true` for a brain-wide receptor
-  (NMDA, AMPA, GABA-A/B, mGluR7), which lights every structure. A receptor with no
+  (NMDA, AMPA, GABA-A/B, mGluR7), which lights every structure. Each receptor also
+  carries a **`classification_provenance`** grade (the source backing those
+  classification claims: neurotransmitter / class / sign / synaptic / locations),
+  defaulting to `llm` (the data is LLM-authored) and overridable per receptor in the
+  `RECEPTOR_PROVENANCE` map; the panel shows it as a "Source" pill and the coverage
+  tally counts it, so a receptor classification is a sourced datum like a binding or
+  projection (see "Source provenance"). A receptor with no
   meaningful CNS role is a deliberate **stub**: empty `locations`, no
   `description`, rendered muted + inert. `_receptor_record` validates every
   family / class / sign / synaptic key against its map and every location base
@@ -1987,7 +1999,8 @@ when the link is absent). New user-visible strings are the
 
 **The "% sourced" figure.** `generate_data.py` `_provenance_stats` reduces every
 claim + reference to its strongest grade and tallies them per kind (drug bindings
-/ NbN / descriptions / projections / wikipedia references) plus a headline over
+/ NbN / descriptions / projections / receptor classifications / wikipedia
+references) plus a headline over
 the **factual claims** (`pct_backed` = sourced-or-verified / total), emitting it as
 `meta.provenance_stats` (see the meta.json map). The viewer's About panel shows it
 (`buildAboutSourcing` in `js/main.js`, reading `data.meta.provenanceStats`: the
@@ -1996,8 +2009,9 @@ new `about.sourcing*`/`about.grade*`/`about.kind*` i18n keys), and
 `tools/update_readme_stats.py` writes the same numbers into the README's
 SOURCING_STATS block. So both surfaces show a real count of the shipped data,
 never hand-typed; `tools/check_data.py` re-confirms the emitted tally is
-self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
-94%, NbN 97%, descriptions 89%; projections + references the gap).
+self-consistent (see "Data checks"). Today: 76% of 866 claims backed (bindings
+94%, NbN 97%, descriptions 89%; projections + receptor classifications +
+references the gap, all `llm` for now).
 
 ## Changing the data
 
@@ -2178,6 +2192,12 @@ self-consistent (see "Data checks"). Today: 81% of 810 claims backed (bindings
      `synaptic` value needs an entry in the matching label map (and its `FR`
      translation) or the build raises. It shows up in the legend's Receptors
      section; the `neurotransmitter` (and any new label) still needs an `FR` entry.
+     The receptor's **classification source grade** defaults to `llm` (honest: the
+     classification is LLM-authored); when you check it against a document, upgrade
+     it by adding `id -> "sourced"`/`"verified"` to the `RECEPTOR_PROVENANCE`
+     override map near the top of `generate_data.py` (mirrors `WIKIPEDIA_PROVENANCE`;
+     the grade is validated, surfaced as the panel's "Source" pill, and counted in
+     the coverage tally, see "Source provenance").
    - To add or edit a **drug**, edit `tools/drugs_data.json` (a JSON list, **not**
      inline in `generate_data.py`). Each entry: `id` (unique, kebab/lowercase),
      `name`, `categories` (one or more keys of `DRUG_CATEGORY_LABELS`), optional

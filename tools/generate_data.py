@@ -526,6 +526,23 @@ def _wiki_provenance(owner_id: str) -> str:
         f"wikipedia reference for {owner_id!r}")
 
 
+# Per-receptor provenance for the *classification* claims (a receptor's
+# neurotransmitter / mechanism class / excit-inhib sign / synaptic site / expression
+# locations), authored in :data:`RECEPTORS` from general / Wikipedia knowledge, so
+# they default to the honest ``"llm"`` grade (LLM-only, unchecked). Keyed by receptor
+# id; upgrade a receptor here as its classification is checked against a document
+# (raise to ``"sourced"`` / ``"verified"``), keeping the grading in the data rather
+# than in code. Empty for now (every receptor grades as ``"llm"``).
+RECEPTOR_PROVENANCE: dict[str, str] = {}
+
+
+def _receptor_provenance(receptor_id: str) -> str:
+    """Provenance grade for a receptor's classification claims (default ``llm``)."""
+    return _provenance(
+        RECEPTOR_PROVENANCE.get(receptor_id, DEFAULT_PROVENANCE),
+        f"receptor classification for {receptor_id!r}")
+
+
 # The constant source backing every drug record (the user-verified fair-use
 # citation). Per-drug specifics (the binding profile) come from this single book;
 # each drug additionally carries its own ``wikipedia`` link for quick reference.
@@ -3029,6 +3046,12 @@ def _receptor_record(rec: dict[str, Any],
         "receptor_class": rec["receptor_class"],
         "sign": rec["sign"],
         "synaptic": rec["synaptic"],
+        # Source grade of this receptor's classification claims (its
+        # neurotransmitter / mechanism class / sign / synaptic site / locations), so
+        # the panel can show a provenance pill for "why is it excitatory" and the
+        # coverage tally can count it. Authored from general/Wikipedia knowledge, so
+        # "llm" by default; upgrade per-receptor in RECEPTOR_PROVENANCE as checked.
+        "classification_provenance": _receptor_provenance(rec["id"]),
     }
     locations = rec["locations"]
     if locations == "ALL":
@@ -3265,8 +3288,9 @@ def _provenance_stats(structures: list[dict[str, Any]],
     (the whole point of the request: a programmatic count of source type vs all).
 
     "Assertions" are the factual claims (drug bindings, drug NbN labels, drug
-    descriptions, neuron projections) and drive the headline ``pct_backed``;
-    Wikipedia "references" are tallied separately (read-more links, not claims).
+    descriptions, neuron projections, receptor classifications) and drive the
+    headline ``pct_backed``; Wikipedia "references" are tallied separately (read-more
+    links, not claims).
     """
     def bucket(rank_or_grade: Any) -> str:
         rank = (rank_or_grade if isinstance(rank_or_grade, int)
@@ -3288,6 +3312,14 @@ def _provenance_stats(structures: list[dict[str, Any]],
     desc_grades = [d.get("description_provenance", DEFAULT_PROVENANCE)
                    for d in drugs if d.get("description")]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
+    # Receptor classification claims (neurotransmitter / mechanism class / sign /
+    # synaptic site / locations), graded per receptor (classification_provenance). A
+    # pure stub (no CNS role: no locations, not ubiquitous, no description) asserts
+    # nothing real, so it is skipped.
+    receptor_grades = [
+        r.get("classification_provenance", DEFAULT_PROVENANCE)
+        for r in receptors
+        if r.get("ubiquitous") or r.get("locations") or r.get("description")]
     # Wikipedia reference links across every owner kind. Non-receptor targets only
     # (a receptor is already counted via the receptor records, not twice); a missing
     # link is a rank-0 "unverified" so the gap shows in the coverage.
@@ -3306,10 +3338,11 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_nbn": tally(nbn_grades),
         "drug_descriptions": tally(desc_grades),
         "projections": tally(projection_grades),
+        "receptors": tally(receptor_grades),
         "references": tally(ref_grades),
     }
     assertion_kinds = ("drug_bindings", "drug_nbn", "drug_descriptions",
-                       "projections")
+                       "projections", "receptors")
     assertions = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
     for kind in assertion_kinds:
         for key in assertions:

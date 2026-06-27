@@ -42,6 +42,7 @@ KIND_LABELS = {
     "drug_nbn": "Drug nomenclature (NbN)",
     "drug_descriptions": "Drug descriptions",
     "projections": "Neuron pathways",
+    "receptors": "Receptor classifications",
     "references": "Wikipedia reference links",
 }
 

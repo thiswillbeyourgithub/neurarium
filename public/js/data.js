@@ -83,6 +83,9 @@ function localize(field) {
  *   `synapticLabel` and `signColor`, the concrete `structureIds` its `locations`
  *   bases expand to (every structure when `ubiquitous`), the side-stripped
  *   `locationNames`, and a `focusable` flag (false for the inert "stub" receptors).
+ *   Its raw `classification_provenance` grade (the source backing the
+ *   neurotransmitter / class / sign / synaptic / locations claims) passes through,
+ *   shown as the panel's "Source" pill (snake_case, like `wikipedia_provenance`).
  * @property {object[]} targets  The merged "Receptors & targets" browse list: one
  *   normalized, focusable entry per thing a drug acts on. Each carries `id`,
  *   `kind` ("receptor" or a non-receptor type: transporter / enzyme / ion_channel /

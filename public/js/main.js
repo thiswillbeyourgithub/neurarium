@@ -1459,7 +1459,9 @@ function createInfoPanel(data) {
   // matches the dots + legend. Empty values are skipped.
   const addFactRow = (facts, label, value, color, opts = {}) => {
     const links = opts.links && opts.links.filter((lk) => lk && lk.text);
-    if (!value && !(links && links.length)) return;
+    // Render if there is a value, clickable links, or just a trailing pill (a
+    // "Source: [pill]" row carries only the grade pill, no text value).
+    if (!value && !(links && links.length) && !opts.pill) return;
     const r = el("div", "info-fact");
     r.appendChild(el("span", "fact-label", label));
     const v = el("span", "fact-value");
@@ -1729,6 +1731,11 @@ function createInfoPanel(data) {
       addFactRow(facts, t("receptor.type"), receptor.classLabel);
       addFactRow(facts, t("receptor.effect"), receptor.signLabel, receptor.signColor);
       addFactRow(facts, t("receptor.synaptic"), receptor.synapticLabel);
+      // Source grade backing the classification facts above (so "why is it
+      // excitatory" carries a provenance pill like every other datum). The grade is
+      // data (classification_provenance); the read-more Wikipedia link is separate.
+      addFactRow(facts, t("receptor.source"), "", null,
+        { pill: makeProvenancePill(receptor.classification_provenance) });
       body.appendChild(facts);
 
       // Where it is expressed.
@@ -2524,6 +2531,7 @@ function buildAboutSourcing(meta) {
     drug_nbn: "about.kindNbn",
     drug_descriptions: "about.kindDescriptions",
     projections: "about.kindProjections",
+    receptors: "about.kindReceptors",
     references: "about.kindReferences",
   };
   for (const [kind, labelKey] of Object.entries(KIND_LABELS)) {

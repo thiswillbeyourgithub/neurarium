@@ -1982,6 +1982,12 @@
         "sourced": 0,
         "unverified": 107
       },
+      "receptors": {
+        "total": 56,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 56
+      },
       "references": {
         "total": 298,
         "verified": 0,
@@ -1990,12 +1996,12 @@
       }
     },
     "assertions": {
-      "total": 810,
+      "total": 866,
       "verified": 516,
       "sourced": 140,
-      "unverified": 154,
+      "unverified": 210,
       "backed": 656,
-      "pct_backed": 81
+      "pct_backed": 76
     }
   }
 }

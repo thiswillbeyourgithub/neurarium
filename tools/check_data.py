@@ -432,6 +432,14 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
             grade(drug.get("description_provenance"),
                   f"drug {drug.get('id')} description_provenance")
 
+    # Each receptor's classification claims (sign / class / synaptic / locations)
+    # carry a source grade (the panel's "Source" pill), counted in the coverage tally
+    # like a binding / projection.
+    for receptor in receptors:
+        if "classification_provenance" in receptor:
+            grade(receptor.get("classification_provenance"),
+                  f"receptor {receptor.get('id')} classification_provenance")
+
     # Wikipedia references (structures / receptors / drugs, + the meta targets)
     # carry a sibling `wikipedia_provenance` whenever the link is present.
     for label, items in (("structure", structures), ("receptor", receptors),
@@ -465,7 +473,8 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("assertions", {})
-        kinds = ("drug_bindings", "drug_nbn", "drug_descriptions", "projections")
+        kinds = ("drug_bindings", "drug_nbn", "drug_descriptions", "projections",
+                 "receptors")
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "unverified"):
             want = sum(by.get(k, {}).get(key, 0) for k in kinds)
