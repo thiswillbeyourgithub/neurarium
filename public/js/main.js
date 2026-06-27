@@ -1999,20 +1999,40 @@ function createInfoPanel(data) {
         descriptionExtra: drug.descriptionProvenance === "sourced"
           ? t("info.descFromWikipedia") : "",
       });
-      // French locale only: a Vidal lookup link beside the reference (Vidal is the
-      // standard French drug database). It is a search-by-substance-name link, so it
-      // works for every drug regardless of a Wikipedia link, and is a convenience
-      // lookup, not a source for a specific claim, so it carries no provenance pill.
-      // Vidal is only linked (navigated to), never fetched, so the CSP is unaffected.
-      if (window.__I18N__.lang === "fr" && wiki) {
-        wiki.appendChild(el("span", "ref-sep", "·"));
-        const vidal = el("a", null, t("info.vidal"));
-        vidal.href = "https://www.vidal.fr/recherche/substances.html?query="
-          + encodeURIComponent(drug.name.toLowerCase());
-        vidal.target = "_blank";
-        vidal.rel = "noopener noreferrer";
-        vidal.title = t("info.vidalTitle");
-        wiki.appendChild(vidal);
+      // External drug-database lookup links beside the reference. Each is a
+      // search-by-name link (it always lands on a results page), a convenience
+      // lookup rather than a source for a specific claim, so none carries a
+      // provenance pill; all are only linked (navigated to), never fetched, so the
+      // CSP is unaffected. Vidal (the French database) shows only in French; the
+      // EMA (Europe) and the US FDA show regardless of locale. ANSM is intentionally
+      // absent: its ecodex search has no URL-addressable form to deep-link.
+      if (wiki) {
+        const addLookup = (labelKey, href, titleKey) => {
+          wiki.appendChild(el("span", "ref-sep", "·"));
+          const a = el("a", null, t(labelKey));
+          a.href = href;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.title = t(titleKey);
+          wiki.appendChild(a);
+        };
+        const q = encodeURIComponent(drug.name);
+        if (window.__I18N__.lang === "fr") {
+          addLookup(
+            "info.vidal",
+            "https://www.vidal.fr/recherche/substances.html?query="
+              + encodeURIComponent(drug.name.toLowerCase()),
+            "info.vidalTitle");
+        }
+        addLookup(
+          "info.ema",
+          "https://www.ema.europa.eu/en/search?search_api_fulltext=" + q,
+          "info.emaTitle");
+        addLookup(
+          "info.fda",
+          "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm"
+            + "?event=BasicSearch.process&searchTerm=" + q,
+          "info.fdaTitle");
       }
 
       // Classification facts: the coarse class(es) and the NbN nomenclature line.
