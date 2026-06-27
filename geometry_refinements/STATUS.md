@@ -75,7 +75,9 @@ tube), **claustrum** (thin sheet).
 
 ### basal_ganglia
 
-- pending - putamen (paired)  [starter trio]
+- done - putamen (paired)  [starter trio] - SDF: mediolaterally-flattened lens
+  (ellipsoid) with a medial scoop (cradles the globus pallidus) + faint surface
+  displace. Phase 0 proof structure. Provenance llm.
 - pending - caudate (paired)
 - pending - globus_pallidus (paired)
 - pending - claustrum (paired)  [starter trio]

@@ -1193,10 +1193,25 @@ PAIRED: list[dict[str, Any]] = [
          )),
     dict(base="putamen", name="Putamen", group="basal_ganglia",
          pos=(2.0, 0.2, 0.6), color="#f28e2b",
-         # Rounded shell, the most lateral nucleus: flattened mediolaterally
-         # (thin x), taller/deeper. Smooth surface (higher detail, low noise so
-         # it reads as a clean lens, not a faceted potato).
-         radii=(0.45, 1.05, 1.2), seed=22, detail=5, noise=0.06),
+         # SDF (self-authored atlas, see geometry_refinements/). The putamen is
+         # the most lateral basal nucleus: a rounded lens/shell flattened
+         # mediolaterally (thin x), taller (y) and deep (z), gently scalloped on
+         # its medial face where the globus pallidus nests. Authored in local
+         # space (centered on origin); `pos` seats it. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=72,
+             root=dict(op="displace", amp=0.018, freq=3.2, seed=22, nodes=[
+                 dict(op="subtract", k=0.18, nodes=[
+                     # Lens body, nudged a touch lateral so the medial scoop bites
+                     # the inner face, not the centre.
+                     dict(prim="ellipsoid", center=[0.06, 0, 0],
+                          radii=[0.45, 1.05, 1.2]),
+                     # Scoop the medial (-x) face concave, cradling the globus
+                     # pallidus that nests against it.
+                     dict(prim="sphere", center=[-1.18, 0.0, -0.1], radius=0.95),
+                 ]),
+             ]),
+         )),
     dict(base="globus_pallidus", name="Globus pallidus", group="basal_ganglia",
          pos=(1.5, 0.0, 0.2), color="#76b7b2",
          # Smaller wedge sitting medial to the putamen; smooth. Together with the
