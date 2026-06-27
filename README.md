@@ -1,7 +1,7 @@
 # neurarium
 
 > [!WARNING]
-> **Work in progress, and very probably wrong.** neurarium is under active
+> **Work in progress. It probably contains many mistakes for now.** neurarium is under active
 > development and far from complete. None of the anatomy has been reviewed or
 > sourced yet, so the regions, shapes, projections, and descriptions very likely
 > contain hallucinations and outright errors. The drug data is machine-extracted
