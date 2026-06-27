@@ -109,7 +109,7 @@ not a slogan:
 | Receptor classifications | 0 / 56 (0%) |
 | Target classifications | 0 / 25 (0%) |
 | Brain-region anatomy | 0 / 52 (0%) |
-| Wikipedia reference links | 0 / 298 (0%) |
+| Wikipedia reference links | 296 / 298 (99%) |
 
 <!-- SOURCING_STATS:END -->
 

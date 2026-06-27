@@ -778,8 +778,13 @@ Six families of checks:
   base is flagged as unclickable. All dangling references are **errors**.
 - **TODOs**: a literal `"TODO"` outside a source url (e.g. a binding `note` left
   as TODO), plus any focusable target with no `wikipedia` (shown as the orange
-  NOSOURCE pill), is a **warning**; source urls left as `"TODO"` are counted and warned about
-  **separately** (the known, tracked backlog, currently every source). TODOs
+  NOSOURCE pill), is a **warning**. A source *url* left as `"TODO"` is handled
+  **provenance-aware**: the viewer surfaces a source's tiered grade (the pill),
+  never its url, so a missing link on an `llm` citation is the expected "no free
+  link yet" state, reported as an `[ok]` count rather than a warning (it would
+  otherwise be standing noise on every Stahl / projection citation). Only a source
+  that *claims* a higher grade (`sourced` / `verified`) yet still has a `TODO` url
+  is **warned** (an inconsistency: it asserts more than its link backs). TODOs
   never fail the run, they only print, so the pre-push gate passes on the current
   data.
 - **Provenance grades** (see "Source provenance" below): every emitted source
@@ -2097,11 +2102,17 @@ strongest), defined once in `generate_data.py` as `PROVENANCE_LEVELS`:
 `SOURCES` entry may set its own `provenance`, else `_expand_sources` defaults it to
 `DEFAULT_PROVENANCE` (`"llm"`). Each `wikipedia` reference (structures, receptors,
 drugs, and the `drug_targets` map) emits a sibling `wikipedia_provenance`, looked
-up per owner id in the `WIKIPEDIA_PROVENANCE` override registry (empty for now, so
-everything defaults to `"llm"`). Upgrading a source as it is checked is therefore a
-**data** edit (raise its `provenance` / add a `WIKIPEDIA_PROVENANCE` entry), not a
-code change; `_provenance` validates every grade so a typo fails the build, and
-`tools/check_data.py` re-checks the emitted grades (see "Data checks").
+up per owner id in the `WIKIPEDIA_PROVENANCE` override registry; a **present** link
+defaults to `"sourced"` (`WIKIPEDIA_DEFAULT_PROVENANCE`), not `"llm"`: a Wikipedia
+article is a real reference document (the viewer even live-fetches its lead and
+grades that description `sourced`), so the bare `llm` "?" pill, whose tooltip says
+"may be a hallucination", was both wrong and confusing sitting next to a working
+link. The override registry is empty (so every link grades `sourced`); add an entry
+to bump a confirmed-canonical link to `"verified"`. Upgrading a source as it is
+checked is therefore a **data** edit (raise its `provenance` / add a
+`WIKIPEDIA_PROVENANCE` entry), not a code change; `_provenance` validates every
+grade so a typo fails the build, and `tools/check_data.py` re-checks the emitted
+grades (see "Data checks").
 
 **Per-claim sources + the verify gate (drugs).** Beyond the drug-level bibliographic
 `STAHL_SOURCE`, each drug **binding** may carry its own `sources[]`, and each drug
@@ -2193,9 +2204,12 @@ new `about.sourcing*`/`about.grade*`/`about.kind*` i18n keys), and
 SOURCING_STATS block. So both surfaces show a real count of the shipped data,
 never hand-typed; `tools/check_data.py` re-confirms the emitted tally is
 self-consistent (see "Data checks"). Every datum kind now carries a tiered source,
-so the coverage is fully computable. Today: 70% of 943 claims backed (bindings 94%,
-NbN 97%, descriptions 89%; projections + receptor / target classifications +
-brain-region anatomy + references the gap, all `llm` for now).
+so the coverage is fully computable. Today: 70% of 943 factual claims backed
+(bindings 94%, NbN 97%, descriptions 89%; projections + receptor / target
+classifications + brain-region anatomy the gap, all `llm` for now). References
+(wikipedia links) are tallied as their own kind, **not** folded into that headline
+(a reference is a pointer, not a factual claim); a present link grades `sourced`
+(see `WIKIPEDIA_DEFAULT_PROVENANCE` above), so that kind sits near 100%.
 
 ## Changing the data
 

@@ -272,7 +272,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "net": {
       "name": {
@@ -293,7 +293,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Norepinephrine_transporter",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "dat": {
       "name": {
@@ -313,7 +313,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "gat": {
       "name": {
@@ -332,7 +332,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "vmat2": {
       "name": {
@@ -352,7 +352,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "mao_a": {
       "name": {
@@ -373,7 +373,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "mao_b": {
       "name": {
@@ -393,7 +393,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "ache": {
       "name": {
@@ -412,7 +412,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "bche": {
       "name": {
@@ -429,7 +429,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Butyrylcholinesterase",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "carbonic_anhydrase": {
       "name": {
@@ -471,7 +471,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "cav": {
       "name": {
@@ -489,7 +489,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "cav_a2d": {
       "name": {
@@ -507,7 +507,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "cav_t": {
       "name": {
@@ -524,7 +524,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "sv2a": {
       "name": {
@@ -542,7 +542,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/SV2A",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "muscarinic": {
       "name": {
@@ -563,7 +563,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "nicotinic": {
       "name": {
@@ -582,7 +582,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "alpha1": {
       "name": {
@@ -605,7 +605,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "alpha2": {
       "name": {
@@ -627,7 +627,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "beta": {
       "name": {
@@ -646,7 +646,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "glutamate": {
       "name": {
@@ -667,7 +667,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "melatonin": {
       "name": {
@@ -683,7 +683,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "orexin": {
       "name": {
@@ -702,7 +702,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Orexin_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "melanocortin": {
       "name": {
@@ -717,7 +717,7 @@
       ],
       "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Melanocortin_receptor",
-      "wikipedia_provenance": "llm"
+      "wikipedia_provenance": "sourced"
     },
     "alpha1a": {
       "name": {
@@ -2028,8 +2028,8 @@
       "references": {
         "total": 298,
         "verified": 0,
-        "sourced": 0,
-        "unverified": 298
+        "sourced": 296,
+        "unverified": 2
       }
     },
     "assertions": {

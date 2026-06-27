@@ -1549,7 +1549,10 @@ function createInfoPanel(data) {
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       wrap.appendChild(a);
-      wrap.appendChild(makeProvenancePill(provenance));
+      // Name what this pill grades (the link to its left), so it doesn't read as
+      // grading the description or the drug. A present link defaults to "sourced"
+      // (a real reference), see generate_data.py WIKIPEDIA_DEFAULT_PROVENANCE.
+      wrap.appendChild(makeProvenancePill(provenance, t("info.wikiRefGrades")));
     } else {
       wrap.appendChild(el("span", null, t("info.reference")));
       wrap.appendChild(makeProvenancePill(null)); // no reference -> NOSOURCE pill

@@ -499,10 +499,21 @@ DEFAULT_PROVENANCE = "llm"
 # Per-link provenance overrides for the *wikipedia* references (which are bare URL
 # strings, not ``{citation, url}`` objects, so they have nowhere inline to carry a
 # grade). Keyed by the owner's id: a structure *base* id, a receptor id, a
-# DRUG_TARGETS key, or a drug id. Anything absent defaults to DEFAULT_PROVENANCE.
-# Empty for now (every reference grades as "llm"); upgrade individual links here
-# as they are checked, keeping the grading in the data rather than in code.
+# DRUG_TARGETS key, or a drug id. Anything absent defaults to
+# :data:`WIKIPEDIA_DEFAULT_PROVENANCE` below; upgrade an individual link to
+# ``verified`` here once it is confirmed to be the canonical article, keeping the
+# grading in the data rather than in code.
 WIKIPEDIA_PROVENANCE: dict[str, str] = {}
+
+# A *present* wikipedia link is itself a real reference: a CC BY-SA article the
+# viewer can open (and live-fetches the lead from, grading that description
+# "sourced"). So a reference link defaults to "sourced", NOT the bare "llm": an LLM
+# chose which article, but the link points at a genuine source document, not a
+# from-memory claim that could be a hallucination (the "llm"/"?" pill, whose tooltip
+# says "may be a hallucination", was both wrong and confusing next to a working
+# link). The absence of a link is still rendered as the orange NOSOURCE pill by the
+# viewer, not as a grade here.
+WIKIPEDIA_DEFAULT_PROVENANCE = "sourced"
 
 
 def _provenance(level: str, what: str) -> str:
@@ -514,21 +525,25 @@ def _provenance(level: str, what: str) -> str:
     return level
 
 
-def _lookup_provenance(table: dict[str, str], owner_id: str, what: str) -> str:
-    """Grade for ``owner_id`` from an override ``table``, default ``llm``, validated.
+def _lookup_provenance(table: dict[str, str], owner_id: str, what: str,
+                       default: str = DEFAULT_PROVENANCE) -> str:
+    """Grade for ``owner_id`` from an override ``table``, validated.
 
     The single core behind every per-id provenance map (wikipedia references,
     receptor / target / structure classifications): look the id up, fall back to
-    :data:`DEFAULT_PROVENANCE`, and validate so an upgraded grade can't be a typo.
+    ``default`` (``llm`` unless overridden, e.g. wikipedia links default
+    ``sourced``), and validate so an upgraded grade can't be a typo.
     """
-    return _provenance(table.get(owner_id, DEFAULT_PROVENANCE), what)
+    return _provenance(table.get(owner_id, default), what)
 
 
 def _wiki_provenance(owner_id: str) -> str:
     """Provenance grade for an owner's wikipedia reference (a structure base /
-    receptor id / DRUG_TARGETS key / drug id), default ``llm``."""
+    receptor id / DRUG_TARGETS key / drug id); a present link defaults to
+    ``sourced`` (see :data:`WIKIPEDIA_DEFAULT_PROVENANCE`)."""
     return _lookup_provenance(
-        WIKIPEDIA_PROVENANCE, owner_id, f"wikipedia reference for {owner_id!r}")
+        WIKIPEDIA_PROVENANCE, owner_id, f"wikipedia reference for {owner_id!r}",
+        default=WIKIPEDIA_DEFAULT_PROVENANCE)
 
 
 # Per-id provenance overrides for the *classification* claims of a receptor (its
