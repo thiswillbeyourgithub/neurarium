@@ -387,6 +387,22 @@ js/surface-wash.js    Shared "wash of light" primitive (buildWashShell +
                       the bead's impact point in the pathway's colour) and
                       js/drug-anim.js (the per-region effect-coloured glow). No dep
                       beyond three.js.
+js/wiki.js            Runtime fetch of a drug's Wikipedia lead summary
+                      (fetchDrugLead), so the drug panel's description reflects the
+                      *current* article instead of only the baked-in copy. The
+                      viewer's locale wins; when the drug's stored (English)
+                      `wikipedia` article is in another language the locale article
+                      is resolved via the source wiki's langlinks, falling back to
+                      the English lead when the locale has no article. Anonymous
+                      cross-origin GETs to the Wikimedia REST (page/summary, the same
+                      endpoint tools/fetch_descriptions.py uses) + action (langlinks)
+                      APIs; results cached per drug+language (in-memory + session).
+                      Best-effort: any failure (offline / rate-limited / CSP-blocked /
+                      missing) resolves to null and the baked description stands, so
+                      the panel never breaks. showDrug renders the baked text first
+                      then swaps the live lead in (and marks it `sourced`) when it
+                      arrives. Needs the connect-src https://*.wikipedia.org CSP
+                      allowance (docker/Caddyfile). See "Drugs". No dep beyond fetch.
 js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       explode + transparency logic, the auto-play "assemble"
                       intro (createIntroAnimation), auto-rotate, hover raycasting
@@ -894,6 +910,12 @@ the gated eruda debug console are vendored same-origin (`public/vendor/three`,
   configured. `docker/entrypoint.sh` derives `ANALYTICS_ORIGIN`
   (`scheme://host[:port]`) from `ANALYTICS_URL` and the Caddyfile interpolates it
   as `{$ANALYTICS_ORIGIN:}`; empty (analytics off) adds no extra origin.
+- `https://*.wikipedia.org` in **`connect-src`**: the drug panel fetches the
+  current Wikipedia lead at runtime to refresh a drug's description (`js/wiki.js`,
+  anonymous CORS `fetch` to the Wikimedia REST + action APIs). This is the one
+  third-party *data* origin (no third-party *script* is loaded); a baked copy in
+  `drugs.jsonl` is the offline fallback, so a CSP-blocked or failed fetch degrades
+  silently. (`tools/serve.py` sends no CSP, so dev is unaffected.)
 
 `script-src`/`style-src` include `'unsafe-inline'` because this is a no-build
 site with an inline `<script type="importmap">`, the inline eruda gate, and an
@@ -1827,7 +1849,10 @@ rendering:
   itself feels lit, not just peppered. The info panel
   switches to the drug view (`createInfoPanel.showDrug`: the molecular-structure
   image (see "Molecule images"), the class, the NbN
-  nomenclature, the description, then a Wikipedia link, the **Acts on** list (one row per
+  nomenclature, the description (the baked copy is painted first, then **live-
+  refreshed** from the current Wikipedia lead via `js/wiki.js` `fetchDrugLead` and
+  re-graded `sourced` when it arrives, falling back silently to the baked text when
+  the fetch is blocked/offline; see "Source provenance"), then a Wikipedia link, the **Acts on** list (one row per
   binding: a coloured effect glyph (green **+** boost / red **−** block / purple
   **≈** modulate) + the target name + the action·note, dimmed +
   italic with a "· speculative" tag (`drug.speculative`) when tentative, plus a
@@ -2007,6 +2032,17 @@ language the viewer shows; the ~18 drugs with no French Wikipedia article keep
 their LLM mechanism one-liner at `llm`. Attribution is the panel's Wikipedia
 reference link + the About note (see "Drugs" / "Molecule images"); the exact
 revisions are recorded in `tools/descriptions_sources.json`.
+
+The description is **also refreshed live at runtime**: when the drug panel opens,
+`js/wiki.js` `fetchDrugLead` fetches the *current* Wikipedia lead for the viewer's
+locale (falling back to the English lead when the locale has no article) and, when
+it arrives, swaps it into the panel and marks it `sourced` (the live grade is the
+same tier as the baked WP lead, since it is the same source unverified against a
+quote gate). The baked `drugs.jsonl` description is the immediate first paint +
+offline fallback, so the panel works the same when the fetch is blocked or fails.
+This is why an `llm`-graded drug (no fr article, so `fetch_descriptions.py` left it
+LLM) can still show a `sourced` Wikipedia lead at runtime in either language. See
+"Drugs" and the `connect-src https://*.wikipedia.org` CSP allowance.
 
 **Where the presentation lives.** `js/main.js` `makeProvenancePill(level)` maps the
 grade to a `.src-prov-<level>` pill (`.src-todo` for the `none` case) carrying the

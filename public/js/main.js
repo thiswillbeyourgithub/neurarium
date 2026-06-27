@@ -20,6 +20,7 @@ import { createLabels } from "./labels.js";
 import { createCircuitAnimation } from "./circuit-anim.js";
 import { createReceptorMarkers } from "./receptor-markers.js";
 import { createDrugAnimation } from "./drug-anim.js";
+import { fetchDrugLead } from "./wiki.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -1866,13 +1867,28 @@ function createInfoPanel(data) {
         // Provenance pill beside the description: "sourced" means it is the lead
         // section of the drug's Wikipedia article (CC BY-SA), "llm" an LLM-written
         // mechanism synthesis.
+        const descPill = (level, extra) => {
+          p.appendChild(document.createTextNode(" "));
+          p.appendChild(makeProvenancePill(level, extra));
+        };
         if (drug.descriptionProvenance) {
           const extra = drug.descriptionProvenance === "sourced"
             ? t("info.descFromWikipedia") : "";
-          p.appendChild(document.createTextNode(" "));
-          p.appendChild(makeProvenancePill(drug.descriptionProvenance, extra));
+          descPill(drug.descriptionProvenance, extra);
         }
         body.appendChild(p);
+
+        // Live-refresh from Wikipedia (js/wiki.js): the baked description above is
+        // the immediate paint + offline fallback; when the current article's lead
+        // arrives (and this panel still shows this drug) swap it in and mark it
+        // sourced. A failed/absent fetch resolves to null and the baked text stands.
+        fetchDrugLead(drug, window.__I18N__.lang).then((live) => {
+          if (!live || !live.text || !p.isConnected) return;
+          // Nothing would visibly change (same text, already a sourced pill): skip.
+          if (live.text === drug.description && drug.descriptionProvenance === "sourced") return;
+          p.textContent = live.text;
+          descPill("sourced", t("info.descFromWikipediaLive"));
+        });
       }
 
       // Wikipedia link after the description (the lead "intro"), not before it, so
