@@ -429,6 +429,9 @@ export async function loadBrainData(dataDir = "data") {
       systemLabel,
       wikipedia: tgt.wikipedia || "",
       wikipediaProvenance: tgt.wikipedia_provenance || "",
+      // Source grade backing this target's classification (type / system / regions),
+      // shown as the panel's "Source" pill (default "llm").
+      classificationProvenance: tgt.classification_provenance || "llm",
       locationNames: (tgt.regions || []).map((b) => baseName.get(b) || b),
       // The raw base ids parallel to locationNames, so the panel can make each
       // "Found in" row jump to that structure (the receptor records keep their own

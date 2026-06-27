@@ -270,6 +270,7 @@
         "hypothalamus",
         "accumbens"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter",
       "wikipedia_provenance": "llm"
     },
@@ -290,6 +291,7 @@
         "amygdala",
         "cerebellum"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Norepinephrine_transporter",
       "wikipedia_provenance": "llm"
     },
@@ -309,6 +311,7 @@
         "accumbens",
         "frontal"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter",
       "wikipedia_provenance": "llm"
     },
@@ -327,6 +330,7 @@
         "hippocampus",
         "cerebellum"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter",
       "wikipedia_provenance": "llm"
     },
@@ -346,6 +350,7 @@
         "caudate",
         "putamen"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",
       "wikipedia_provenance": "llm"
     },
@@ -366,6 +371,7 @@
         "pons",
         "medulla"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
       "wikipedia_provenance": "llm"
     },
@@ -385,6 +391,7 @@
         "pons",
         "medulla"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
       "wikipedia_provenance": "llm"
     },
@@ -403,6 +410,7 @@
         "thalamus",
         "septal_nuclei"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase",
       "wikipedia_provenance": "llm"
     },
@@ -419,6 +427,7 @@
         "temporal",
         "hippocampus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Butyrylcholinesterase",
       "wikipedia_provenance": "llm"
     },
@@ -430,7 +439,8 @@
       "type": "enzyme",
       "system": null,
       "receptor": null,
-      "regions": []
+      "regions": [],
+      "classification_provenance": "llm"
     },
     "pde5": {
       "name": {
@@ -440,7 +450,8 @@
       "type": "enzyme",
       "system": null,
       "receptor": null,
-      "regions": []
+      "regions": [],
+      "classification_provenance": "llm"
     },
     "nav": {
       "name": {
@@ -458,6 +469,7 @@
         "hippocampus",
         "thalamus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel",
       "wikipedia_provenance": "llm"
     },
@@ -475,6 +487,7 @@
         "thalamus",
         "hippocampus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel",
       "wikipedia_provenance": "llm"
     },
@@ -492,6 +505,7 @@
         "thalamus",
         "hippocampus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel",
       "wikipedia_provenance": "llm"
     },
@@ -508,6 +522,7 @@
         "frontal",
         "temporal"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel",
       "wikipedia_provenance": "llm"
     },
@@ -525,6 +540,7 @@
         "hippocampus",
         "thalamus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/SV2A",
       "wikipedia_provenance": "llm"
     },
@@ -545,6 +561,7 @@
         "thalamus",
         "hypothalamus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -563,6 +580,7 @@
         "thalamus",
         "vta"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -585,6 +603,7 @@
         "pons",
         "medulla"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -606,6 +625,7 @@
         "pons",
         "medulla"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -624,6 +644,7 @@
         "accumbens",
         "cerebellum"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -644,6 +665,7 @@
         "caudate",
         "putamen"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -659,6 +681,7 @@
         "hypothalamus",
         "thalamus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -677,6 +700,7 @@
         "vta",
         "thalamus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Orexin_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -691,6 +715,7 @@
       "regions": [
         "hypothalamus"
       ],
+      "classification_provenance": "llm",
       "wikipedia": "https://en.wikipedia.org/wiki/Melanocortin_receptor",
       "wikipedia_provenance": "llm"
     },
@@ -1988,6 +2013,18 @@
         "sourced": 0,
         "unverified": 56
       },
+      "targets": {
+        "total": 25,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 25
+      },
+      "structures": {
+        "total": 52,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 52
+      },
       "references": {
         "total": 298,
         "verified": 0,
@@ -1996,12 +2033,12 @@
       }
     },
     "assertions": {
-      "total": 866,
+      "total": 943,
       "verified": 516,
       "sourced": 140,
-      "unverified": 210,
+      "unverified": 287,
       "backed": 656,
-      "pct_backed": 76
+      "pct_backed": 70
     }
   }
 }

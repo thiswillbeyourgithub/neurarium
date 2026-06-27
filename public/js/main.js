@@ -1664,6 +1664,16 @@ function createInfoPanel(data) {
       // External reference link (Wikipedia), when the data carries one.
       appendWiki(structure.wikipedia, structure.wikipedia_provenance);
 
+      // Source grade backing this region's anatomy (existence / group / position),
+      // so even a structure shows a graded source, not "no source". Added before the
+      // no-connections early return so it shows for an unconnected region too.
+      if (structure.classification_provenance) {
+        const facts = el("div", "info-facts");
+        addFactRow(facts, t("info.source"), "", null,
+          { pill: makeProvenancePill(structure.classification_provenance) });
+        body.appendChild(facts);
+      }
+
       // Pathways with this structure at either end, in the data's order.
       const conns = data.projections.filter(
         (p) => p.from === structure.id || p.to === structure.id);
@@ -1734,7 +1744,7 @@ function createInfoPanel(data) {
       // Source grade backing the classification facts above (so "why is it
       // excitatory" carries a provenance pill like every other datum). The grade is
       // data (classification_provenance); the read-more Wikipedia link is separate.
-      addFactRow(facts, t("receptor.source"), "", null,
+      addFactRow(facts, t("info.source"), "", null,
         { pill: makeProvenancePill(receptor.classification_provenance) });
       body.appendChild(facts);
 
@@ -1773,6 +1783,12 @@ function createInfoPanel(data) {
       const facts = el("div", "info-facts");
       addFactRow(facts, t("receptor.type"), target.typeLabel, target.swatchColor);
       addFactRow(facts, t("receptor.system"), target.systemLabel);
+      // Source grade backing the type / system / region claims above (so the panel
+      // never shows "no source": even an llm grade is a graded source).
+      if (target.classificationProvenance) {
+        addFactRow(facts, t("info.source"), "", null,
+          { pill: makeProvenancePill(target.classificationProvenance) });
+      }
       if (facts.childElementCount) body.appendChild(facts);
 
       // Where it sits (same "Found in" list as a receptor; empty -> no footprint).
@@ -2532,6 +2548,8 @@ function buildAboutSourcing(meta) {
     drug_descriptions: "about.kindDescriptions",
     projections: "about.kindProjections",
     receptors: "about.kindReceptors",
+    targets: "about.kindTargets",
+    structures: "about.kindStructures",
     references: "about.kindReferences",
   };
   for (const [kind, labelKey] of Object.entries(KIND_LABELS)) {

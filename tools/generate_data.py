@@ -514,33 +514,54 @@ def _provenance(level: str, what: str) -> str:
     return level
 
 
-def _wiki_provenance(owner_id: str) -> str:
-    """Provenance grade for an owner's wikipedia reference.
+def _lookup_provenance(table: dict[str, str], owner_id: str, what: str) -> str:
+    """Grade for ``owner_id`` from an override ``table``, default ``llm``, validated.
 
-    Looks ``owner_id`` (a structure base / receptor id / DRUG_TARGETS key / drug
-    id) up in :data:`WIKIPEDIA_PROVENANCE`, falling back to
-    :data:`DEFAULT_PROVENANCE`. Validated so an upgraded grade can't be a typo.
+    The single core behind every per-id provenance map (wikipedia references,
+    receptor / target / structure classifications): look the id up, fall back to
+    :data:`DEFAULT_PROVENANCE`, and validate so an upgraded grade can't be a typo.
     """
-    return _provenance(
-        WIKIPEDIA_PROVENANCE.get(owner_id, DEFAULT_PROVENANCE),
-        f"wikipedia reference for {owner_id!r}")
+    return _provenance(table.get(owner_id, DEFAULT_PROVENANCE), what)
 
 
-# Per-receptor provenance for the *classification* claims (a receptor's
-# neurotransmitter / mechanism class / excit-inhib sign / synaptic site / expression
-# locations), authored in :data:`RECEPTORS` from general / Wikipedia knowledge, so
-# they default to the honest ``"llm"`` grade (LLM-only, unchecked). Keyed by receptor
-# id; upgrade a receptor here as its classification is checked against a document
-# (raise to ``"sourced"`` / ``"verified"``), keeping the grading in the data rather
-# than in code. Empty for now (every receptor grades as ``"llm"``).
+def _wiki_provenance(owner_id: str) -> str:
+    """Provenance grade for an owner's wikipedia reference (a structure base /
+    receptor id / DRUG_TARGETS key / drug id), default ``llm``."""
+    return _lookup_provenance(
+        WIKIPEDIA_PROVENANCE, owner_id, f"wikipedia reference for {owner_id!r}")
+
+
+# Per-id provenance overrides for the *classification* claims of a receptor (its
+# neurotransmitter / mechanism class / sign / synaptic site / locations), a
+# non-receptor drug target (its type / system / region footprint) and a brain
+# structure (its existence / group / position), all authored from general /
+# Wikipedia / textbook knowledge, so they default to the honest ``"llm"`` grade
+# (LLM-only, unchecked). Keyed by receptor id / DRUG_TARGETS key / structure *base*
+# id; upgrade an entry here as its claim is checked against a document (raise to
+# ``"sourced"`` / ``"verified"``), keeping the grading in the data, not in code.
+# Empty for now (everything grades as ``"llm"``).
 RECEPTOR_PROVENANCE: dict[str, str] = {}
+TARGET_PROVENANCE: dict[str, str] = {}
+STRUCTURE_PROVENANCE: dict[str, str] = {}
 
 
 def _receptor_provenance(receptor_id: str) -> str:
     """Provenance grade for a receptor's classification claims (default ``llm``)."""
-    return _provenance(
-        RECEPTOR_PROVENANCE.get(receptor_id, DEFAULT_PROVENANCE),
+    return _lookup_provenance(
+        RECEPTOR_PROVENANCE, receptor_id,
         f"receptor classification for {receptor_id!r}")
+
+
+def _target_provenance(target_id: str) -> str:
+    """Provenance grade for a non-receptor target's classification (default ``llm``)."""
+    return _lookup_provenance(
+        TARGET_PROVENANCE, target_id, f"target classification for {target_id!r}")
+
+
+def _structure_provenance(base_id: str) -> str:
+    """Provenance grade for a structure's anatomy claim (default ``llm``)."""
+    return _lookup_provenance(
+        STRUCTURE_PROVENANCE, base_id, f"structure anatomy for {base_id!r}")
 
 
 # The constant source backing every drug record (the user-verified fair-use
@@ -2701,6 +2722,11 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
         "position": [round(c, 3) for c in position],
         "color": entry["color"],
         "shape_file": f"data/shapes/{shape_id}.json",
+        # Source grade backing this region's anatomy (its existence / group /
+        # position), keyed by base so both hemispheres share one grade. Textbook
+        # anatomy, so "llm" by default; override in STRUCTURE_PROVENANCE. Shown as
+        # the panel's "Source" pill and counted in the coverage tally.
+        "classification_provenance": _structure_provenance(entry["base"]),
     }
     # External reference link (same article for both hemispheres of a pair),
     # tagged with its provenance grade for the source pill (see _wiki_provenance).
@@ -3103,6 +3129,10 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
             "system": spec["system"],
             "receptor": None,
             "regions": list(spec["regions"]),
+            # Source grade backing this target's classification (its type / system /
+            # region footprint), shown as the panel's "Source" pill and counted in
+            # the coverage tally. "llm" by default; override in TARGET_PROVENANCE.
+            "classification_provenance": _target_provenance(tid),
         }
         if spec.get("wikipedia"):
             targets[tid]["wikipedia"] = spec["wikipedia"]
@@ -3288,9 +3318,9 @@ def _provenance_stats(structures: list[dict[str, Any]],
     (the whole point of the request: a programmatic count of source type vs all).
 
     "Assertions" are the factual claims (drug bindings, drug NbN labels, drug
-    descriptions, neuron projections, receptor classifications) and drive the
-    headline ``pct_backed``; Wikipedia "references" are tallied separately (read-more
-    links, not claims).
+    descriptions, neuron projections, receptor classifications, non-receptor target
+    classifications, brain-region anatomy) and drive the headline ``pct_backed``;
+    Wikipedia "references" are tallied separately (read-more links, not claims).
     """
     def bucket(rank_or_grade: Any) -> str:
         rank = (rank_or_grade if isinstance(rank_or_grade, int)
@@ -3320,6 +3350,15 @@ def _provenance_stats(structures: list[dict[str, Any]],
         r.get("classification_provenance", DEFAULT_PROVENANCE)
         for r in receptors
         if r.get("ubiquitous") or r.get("locations") or r.get("description")]
+    # Non-receptor drug target classifications (type / system / region footprint),
+    # graded per target. Receptor-linked targets are skipped (already counted as
+    # receptors, not twice).
+    target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
+                     for t in drug_targets.values() if t.get("type") != "receptor"]
+    # Brain-region anatomy (existence / group / position), graded per emitted
+    # structure record (both hemispheres of a pair count, one line each).
+    structure_grades = [s.get("classification_provenance", DEFAULT_PROVENANCE)
+                        for s in structures]
     # Wikipedia reference links across every owner kind. Non-receptor targets only
     # (a receptor is already counted via the receptor records, not twice); a missing
     # link is a rank-0 "unverified" so the gap shows in the coverage.
@@ -3339,10 +3378,12 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_descriptions": tally(desc_grades),
         "projections": tally(projection_grades),
         "receptors": tally(receptor_grades),
+        "targets": tally(target_grades),
+        "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }
     assertion_kinds = ("drug_bindings", "drug_nbn", "drug_descriptions",
-                       "projections", "receptors")
+                       "projections", "receptors", "targets", "structures")
     assertions = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
     for kind in assertion_kinds:
         for key in assertions:

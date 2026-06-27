@@ -92,7 +92,10 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                           colour) and drug_effect_labels (effect -> {en,fr}), and
                           drug_targets (the merged binding-target map: every
                           non-receptor target like sert/mao_a/nav with its
-                          {name:{en,fr}, type, system, regions[bases], optional
+                          {name:{en,fr}, type, system, regions[bases],
+                          classification_provenance (the source grade backing its
+                          type/system/regions, "llm" by default, the panel's "Source"
+                          pill, counted in coverage), optional
                           wikipedia (+ wikipedia_provenance, the source-grade pill,
                           see "Source provenance" below)} plus every receptor id as a target linked back
                           to its receptor), and the non-receptor-target presentation
@@ -110,7 +113,11 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                         - data/structures.jsonl: one region per line: id, name
                           ({en,fr}, with the hemisphere prefix/suffix), base_name
                           ({en,fr}, hemisphere-stripped, used for the legend row),
-                          group, position, color, shape_file, and an optional
+                          group, position, color, shape_file, classification_provenance
+                          (the source grade backing the region's anatomy: existence /
+                          group / position, shown as the panel's "Source" pill and
+                          counted in the coverage tally; "llm" by default), and an
+                          optional
                           wikipedia (article URL, shown as a link in the structure
                           info panel) + its wikipedia_provenance (the source-grade
                           pill on that link, see "Source provenance" below)
@@ -726,7 +733,8 @@ Six families of checks:
   data.
 - **Provenance grades** (see "Source provenance" below): every emitted source
   (`sources[].provenance`, **including the per-binding drug sources and a drug's
-  `nbn_sources`**), every receptor's **`classification_provenance`**, and every
+  `nbn_sources`**), every receptor / structure / non-receptor-target
+  **`classification_provenance`**, and every
   wikipedia reference (the `wikipedia_provenance` beside a `wikipedia`) must carry
   a known grade (`llm` / `sourced` / `verified`), the value the viewer renders as
   the grey/yellow/green pill. An unknown or missing grade is an **error** (the
@@ -1276,7 +1284,8 @@ as the WIP banner (`js/error-banner.js`):
   "Source provenance", and the region list, or "Throughout the brain" for a
   ubiquitous receptor);
   a non-receptor target opens the lighter `showTarget` (its system, a Wikipedia
-  link or a NOSOURCE pill until one is gathered, the type + system facts, and the
+  link or a NOSOURCE pill until one is gathered, the type + system facts ending in
+  the same **"Source" row** grading its type/system/region claims, and the
   region list). Both panels then carry an **"Interacting drugs"** section under
   "Found in": the drugs that act on this target (so you can go from a target to
   every drug touching it), **grouped by primary drug category** (antipsychotic,
@@ -1537,7 +1546,9 @@ as the WIP banner (`js/error-banner.js`):
     result) shows the **structure** view (`showStructure`): its name, its group
     heading (from `data.meta.groupLabels`), a **Reference row** (a Wikipedia link
     for an http(s) `wikipedia` url, with its provenance pill, else the orange
-    `NOSOURCE` pill, see "Source provenance"), and the list of pathways touching it.
+    `NOSOURCE` pill, see "Source provenance"), a **"Source" row** grading the
+    region's anatomy (`classification_provenance`, so even a structure shows a graded
+    source), and the list of pathways touching it.
     Each connection row
     shows a kind-coloured swatch, a direction glyph (`→` it projects out, `←` it
     receives, `↔` reciprocal), the other endpoint **and the pathway's summary
@@ -1733,7 +1744,8 @@ beside the 5-HT receptors. A receptor isn't a transporter, so the distinction is
 kept: a receptor keeps its sign swatch + full `showReceptor` panel, a non-receptor
 target gets its `type`-colour swatch, a muted type tag, and the lighter
 `showTarget` panel (its system, a Wikipedia link or a NOSOURCE pill until one is
-gathered, the type + system facts, the region list). Both panels also list the
+gathered, the type + system facts ending in a "Source" row grading those claims
+(`classification_provenance`), the region list). Both panels also list the
 **drugs that act on the target** (the `data.drugsByTarget` reverse index), grouped
 by drug category and coloured by each binding's effect, with a click jumping to the
 drug, so you can browse from a target to every interacting drug (see "Controls ->
@@ -1999,7 +2011,8 @@ when the link is absent). New user-visible strings are the
 
 **The "% sourced" figure.** `generate_data.py` `_provenance_stats` reduces every
 claim + reference to its strongest grade and tallies them per kind (drug bindings
-/ NbN / descriptions / projections / receptor classifications / wikipedia
+/ NbN / descriptions / projections / receptor classifications / non-receptor target
+classifications / brain-region anatomy / wikipedia
 references) plus a headline over
 the **factual claims** (`pct_backed` = sourced-or-verified / total), emitting it as
 `meta.provenance_stats` (see the meta.json map). The viewer's About panel shows it
@@ -2009,9 +2022,10 @@ new `about.sourcing*`/`about.grade*`/`about.kind*` i18n keys), and
 `tools/update_readme_stats.py` writes the same numbers into the README's
 SOURCING_STATS block. So both surfaces show a real count of the shipped data,
 never hand-typed; `tools/check_data.py` re-confirms the emitted tally is
-self-consistent (see "Data checks"). Today: 76% of 866 claims backed (bindings
-94%, NbN 97%, descriptions 89%; projections + receptor classifications +
-references the gap, all `llm` for now).
+self-consistent (see "Data checks"). Every datum kind now carries a tiered source,
+so the coverage is fully computable. Today: 70% of 943 claims backed (bindings 94%,
+NbN 97%, descriptions 89%; projections + receptor / target classifications +
+brain-region anatomy + references the gap, all `llm` for now).
 
 ## Changing the data
 
@@ -2126,6 +2140,12 @@ references the gap, all `llm` for now).
      (`_structure_record`) and the viewer shows it as a link in the structure info
      panel; a base absent from the map just gets no link, and a key that is not a
      known structure base raises in `build_records` (typo guard).
+   - A structure's **anatomy source grade** (its existence / group / position) is
+     emitted as `classification_provenance`, defaulting to `llm` and overridable per
+     base id in the `STRUCTURE_PROVENANCE` map near the top of `generate_data.py`
+     (one of the `RECEPTOR_PROVENANCE` / `TARGET_PROVENANCE` / `STRUCTURE_PROVENANCE`
+     trio, all fed by the shared `_lookup_provenance`); it shows as the panel's
+     "Source" pill and is counted in the coverage tally (see "Source provenance").
    - Projection `from`/`to` reference structure ids (e.g. `putamen_R`). The arrow
      points `from` -> `to` (a cone at the target end).
    - A projection carries metadata so the viewer can explain it: `label` (short
@@ -2218,7 +2238,10 @@ references the gap, all `llm` for now).
      `type` (a `TARGET_TYPE_LABELS` key: transporter / enzyme / ion_channel /
      vesicle_protein / receptor_group; it drives the merged Receptors & targets
      legend's swatch + tag) and may carry an optional `wikipedia` url (left absent
-     -> a NOSOURCE pill); the build raises on an unknown type or a non-http(s) wikipedia.
+     -> a NOSOURCE pill); the build raises on an unknown type or a non-http(s)
+     wikipedia. The target's **classification source grade** (its type/system/regions)
+     defaults to `llm` and is overridable per target id in `TARGET_PROVENANCE` (the
+     panel's "Source" pill, counted in coverage, see "Source provenance").
      Keep extraction **strictly dump-sourced**
      (only what the source text states; leave gaps as TODO / no binding). It shows up
      in the legend's Drugs section automatically. To also show its **molecule

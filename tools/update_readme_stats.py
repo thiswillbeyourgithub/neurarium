@@ -43,6 +43,8 @@ KIND_LABELS = {
     "drug_descriptions": "Drug descriptions",
     "projections": "Neuron pathways",
     "receptors": "Receptor classifications",
+    "targets": "Target classifications",
+    "structures": "Brain-region anatomy",
     "references": "Wikipedia reference links",
 }
 
