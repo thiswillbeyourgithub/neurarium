@@ -158,7 +158,7 @@ Geometry (`data/shapes/<name>.json`): one file per distinct *form*. L/R pairs
 share a single right-side file; the left member sets `mirror:true` on its
 structure record and the viewer reflects it across x. Three types:
 - `blob` `{radii, seed, detail, noise, + optional octaves/ridged/frequency/aniso/
-  clip/clip_planes/carve_tubes}` — a gradient-noise-deformed ellipsoid.
+  clip/clip_planes}` — a gradient-noise-deformed ellipsoid.
 - `curve` `{points, profile, seed, noise, radial/tubular_segments}` — a
   round-capped tapered tube swept along a spline (caudate; brainstem levels
   midbrain/pons/medulla).
@@ -187,8 +187,7 @@ Viewer (`public/`):
   Cortical lobes are smooth domes rendered cel-shaded (`MeshToonMaterial`) carrying
   a painted-on swirl motif (`injectCortexSwirl` / `CORTEX_SWIRL`: domain-warped
   noise contour "ink" lines, pure colour, no relief). `buildBlobGeometry` honours
-  `clip_planes` when `JIGSAW_CLIP.enabled` and `carve_tubes` when
-  `CARVE_TUBES.enabled` (carve is currently dormant; see TODO.md). No deps beyond three.js.
+  `clip_planes` when `JIGSAW_CLIP.enabled`. No deps beyond three.js.
 - `js/arrows.js` — curved tube+cone arrows; colour from `projection.color`,
   recolourable via `setColor` (colour-mode switch); `tentative` -> dotted tube via
   a small local `mergeIndexedGeometries`. Exposes `arrow.curve`.
@@ -979,9 +978,7 @@ baking it.
      `frequency`, `aniso` ([ax,ay,az] per-axis skew), `clip` (axis-aligned flat faces;
      `medial=True` derives the right medial clip). Auto, never authored: `clip_planes`
      (`_bisecting_clip_planes`, the jigsaw cuts between overlapping same-group neighbours;
-     `JIGSAW_CLIP.enabled` toggles), `carve_tubes` (`_tube_carve`, a `carves=True` curve
-     hollowing a notch in threaded lobes; `CARVE_TUBES.enabled` toggles; currently dormant,
-     see TODO.md). Cortex pattern is shader-drawn, not geometry (`injectCortexSwirl` /
+     `JIGSAW_CLIP.enabled` toggles). Cortex pattern is shader-drawn, not geometry (`injectCortexSwirl` /
      `CORTEX_SWIRL` knobs `freq`/`warp`/`rings`/`width`/`ink`/`octaves`/`steps`, or
      `enabled:false`). Use `shape=dict(type="curve", ...)` for a tapered tube (midline
      curves are emitted once, not mirrored) or `type="composite"` for merged sub-shapes.

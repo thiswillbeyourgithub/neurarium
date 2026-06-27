@@ -193,25 +193,10 @@ export function buildGeometry(shape) {
 // applied, so toggling this never reopens the longitudinal fissure.
 const JIGSAW_CLIP = { enabled: true };
 
-// Tube "carve": a swept-tube structure (the C-shaped caudate) subtracts a
-// channel from the lobes it passes through, so it seats into a clean notch and
-// reads as "partly exposed", a jigsaw piece set into the seam, instead of just
-// interpenetrating the cortex. generate_data.py (_tube_carve) emits a
-// `carve_tubes` list on each carved lobe blob: the carver's spine points + the
-// per-station channel radius, expressed in that lobe's *local* frame. Any lobe
-// vertex falling inside such a tube is pushed out onto the tube surface,
-// hollowing a groove the caudate sits in. Like the jigsaw planes it is computed
-// once on the right side and mirrored with the rest of the geometry. This flag
-// is the A/B switch (set false to ignore the carve data without regenerating).
-const CARVE_TUBES = { enabled: true };
-// Stations the carve samples the carver's spline at. The channel is a coarse
-// groove, so a modest count resolves it while keeping the per-vertex search cheap.
-const CARVE_SAMPLES = 64;
-
 /**
  * Sampler for a curve's radius `profile` (head -> tail), linearly interpolated at
- * spine fraction t in [0,1]. Shared by {@link buildCurveGeometry} (the tube
- * surface) and the lobe carve (the channel radius) so both read it the same way.
+ * spine fraction t in [0,1]. Used by {@link buildCurveGeometry} to taper the tube
+ * surface head -> tail.
  */
 function makeRadiusAt(profile) {
   return (t) => {
@@ -220,96 +205,6 @@ function makeRadiusAt(profile) {
     const i1 = Math.min(profile.length - 1, i0 + 1);
     return profile[i0] + (profile[i1] - profile[i0]) * (f - i0);
   };
-}
-
-/**
- * Pre-sample each `carve_tubes` payload into spine stations for a fast per-vertex
- * distance test. Returns one entry per tube: flat station centres (cx,cy,cz),
- * the radius at each station, and a padded bounding box so the (vast majority of)
- * far vertices reject with a cheap box test before the polyline search.
- *
- * @param {{points:number[][], radius:number[]}[]} carveTubes
- * @returns {{centers:Float32Array, radii:Float32Array, box:THREE.Box3}[]}
- */
-function prepareCarveTubes(carveTubes) {
-  const tubes = [];
-  for (const tube of carveTubes) {
-    const curve = new THREE.CatmullRomCurve3(
-      tube.points.map((p) => new THREE.Vector3(p[0], p[1], p[2])),
-      false,
-      "centripetal",
-    );
-    const radiusAt = makeRadiusAt(tube.radius);
-    const centers = new Float32Array((CARVE_SAMPLES + 1) * 3);
-    const radii = new Float32Array(CARVE_SAMPLES + 1);
-    const c = new THREE.Vector3();
-    const box = new THREE.Box3();
-    let maxR = 0;
-    for (let i = 0; i <= CARVE_SAMPLES; i++) {
-      const t = i / CARVE_SAMPLES;
-      curve.getPointAt(t, c);
-      centers[i * 3] = c.x;
-      centers[i * 3 + 1] = c.y;
-      centers[i * 3 + 2] = c.z;
-      const r = radiusAt(t);
-      radii[i] = r;
-      maxR = Math.max(maxR, r);
-      box.expandByPoint(c);
-    }
-    box.expandByScalar(maxR);
-    tubes.push({ centers, radii, box });
-  }
-  return tubes;
-}
-
-// Reused output triple so the per-vertex carve allocates nothing in the hot loop.
-const _carveOut = [0, 0, 0];
-
-/**
- * Push a vertex out of every carve tube it falls inside, onto the nearest tube
- * surface (the channel wall). For each tube the nearest point on the sampled
- * spine polyline is found; if the vertex is within the interpolated channel
- * radius there, it is moved radially outward to sit on the channel. Writes the
- * result into the shared {@link _carveOut} triple and returns it.
- */
-function carveAgainstTubes(tubes, px, py, pz) {
-  for (const { centers, radii, box } of tubes) {
-    if (px < box.min.x || px > box.max.x || py < box.min.y ||
-        py > box.max.y || pz < box.min.z || pz > box.max.z) continue;
-    let bestD2 = Infinity, bcx = 0, bcy = 0, bcz = 0, bR = 0;
-    const segs = radii.length - 1;
-    for (let i = 0; i < segs; i++) {
-      const ax = centers[i * 3], ay = centers[i * 3 + 1], az = centers[i * 3 + 2];
-      const abx = centers[(i + 1) * 3] - ax;
-      const aby = centers[(i + 1) * 3 + 1] - ay;
-      const abz = centers[(i + 1) * 3 + 2] - az;
-      const apx = px - ax, apy = py - ay, apz = pz - az;
-      const abLen2 = abx * abx + aby * aby + abz * abz;
-      let t = abLen2 > 1e-12 ? (apx * abx + apy * aby + apz * abz) / abLen2 : 0;
-      if (t < 0) t = 0; else if (t > 1) t = 1;
-      const cx = ax + abx * t, cy = ay + aby * t, cz = az + abz * t;
-      const dx = px - cx, dy = py - cy, dz = pz - cz;
-      const d2 = dx * dx + dy * dy + dz * dz;
-      if (d2 < bestD2) {
-        bestD2 = d2;
-        bcx = cx; bcy = cy; bcz = cz;
-        bR = radii[i] + (radii[i + 1] - radii[i]) * t;
-      }
-    }
-    if (bestD2 < bR * bR) {
-      const d = Math.sqrt(bestD2);
-      if (d > 1e-4) {
-        const k = bR / d;
-        px = bcx + (px - bcx) * k;
-        py = bcy + (py - bcy) * k;
-        pz = bcz + (pz - bcz) * k;
-      }
-    }
-  }
-  _carveOut[0] = px;
-  _carveOut[1] = py;
-  _carveOut[2] = pz;
-  return _carveOut;
 }
 
 /**
@@ -343,12 +238,6 @@ function carveAgainstTubes(tubes, px, py, pz) {
  *   mating face. generate_data.py fills these with the bisecting planes between a
  *   region and its overlapping same-group neighbours so adjacent regions tile
  *   flush (the jigsaw look); honoured only when {@link JIGSAW_CLIP}.enabled.
- * @param {{points:number[][], radius:number[]}[]} [shape.carve_tubes]  Swept-tube
- *   channels to subtract from this blob (the caudate carving the lobes): each a
- *   spine `points` polyline + per-station `radius` in *local* space. A vertex
- *   inside a tube is pushed onto the tube surface, hollowing a notch the carver
- *   seats into; honoured only when {@link CARVE_TUBES}.enabled. See _tube_carve
- *   in generate_data.py.
  * @returns {THREE.BufferGeometry}
  */
 function buildBlobGeometry(shape) {
@@ -363,16 +252,11 @@ function buildBlobGeometry(shape) {
     aniso = [1, 1, 1],
     clip = null,
     clip_planes: clipPlanes = null,
-    carve_tubes: carveTubes = null,
   } = shape;
   // Start from a unit icosphere so vertices are evenly distributed.
   const geometry = new THREE.IcosahedronGeometry(1, detail);
   const pos = geometry.attributes.position;
   const v = new THREE.Vector3();
-  // Pre-sample the carve tubes once (not per vertex). Null when none / disabled.
-  const tubes = carveTubes && CARVE_TUBES.enabled
-    ? prepareCarveTubes(carveTubes)
-    : null;
 
   for (let i = 0; i < pos.count; i++) {
     v.fromBufferAttribute(pos, i).normalize();
@@ -418,14 +302,6 @@ function buildBlobGeometry(shape) {
           pz -= signed * nz;
         }
       }
-    }
-    if (tubes) {
-      // Hollow a channel where a carver tube (the caudate) passes through, so it
-      // seats into a notch instead of the cortex poking through it.
-      const out = carveAgainstTubes(tubes, px, py, pz);
-      px = out[0];
-      py = out[1];
-      pz = out[2];
     }
     pos.setXYZ(i, px, py, pz);
   }
@@ -523,7 +399,7 @@ function buildCurveGeometry(shape) {
   const frames = curve.computeFrenetFrames(tubularSegments, false);
 
   // Radius at spine fraction t in [0,1], linearly interpolated from `profile`
-  // (shared with the lobe carve via makeRadiusAt).
+  // via makeRadiusAt.
   const radiusAt = makeRadiusAt(profile);
 
   const positions = [];

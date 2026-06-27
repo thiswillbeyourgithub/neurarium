@@ -1168,10 +1168,8 @@ PAIRED: list[dict[str, Any]] = [
          # Retracted (y was 1.9, an earlier "emerge through the fronto-parietal
          # seam" experiment) so the bulbous head now sits below the cortical
          # surface and stays hidden inside the assembled brain at explode 0,
-         # surfacing only as the lobes blow apart. The lobe-carve that used to
-         # notch a channel around the exposed head is dropped with it (it would
-         # otherwise cut a visible trench in the dome once the caudate sinks);
-         # anatomically deeper and no longer poking out between the lobes.
+         # surfacing only as the lobes blow apart: anatomically deeper and no
+         # longer poking out between the lobes.
          pos=(1.2, 1.1, 0.8), color="#ff9da7",
          # Genuinely C-shaped: a bulbous head (anterior-superior) arching over
          # and back, then a thin tail curling down and forward. Modeled as a
@@ -2924,12 +2922,6 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
 # thin midline gap instead of overlapping into one ball. Small = tight fissure.
 MIDLINE_GAP = 0.06
 
-# Clearance between a carved lobe channel and the carver's surface (see
-# _tube_carve): the channel radius is the carver's profile inflated by its noise
-# plus this gap, so the lobe never z-fights the carver and the carver shows
-# cleanly through the notch.
-LOBE_CARVE_GAP = 0.12
-
 
 def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
     """Build the geometric ``data/shapes/<id>.json`` payload for a structure.
@@ -3076,67 +3068,6 @@ def _bisecting_clip_planes(entry: dict[str, Any],
             "normal": [round(n[0], 3), round(n[1], 3), round(n[2], 3)],
         })
     return planes
-
-
-def _tube_carve(carver: dict[str, Any],
-                blob: dict[str, Any]) -> dict[str, Any] | None:
-    """Channel a swept-tube ``carver`` subtracts from ``blob`` if it threads it.
-
-    A ``carves=True`` curve (the C-shaped caudate) hollows a groove in the lobes
-    it passes through so it seats into a clean notch ("partly exposed", a jigsaw
-    piece set into the seam) rather than the cortex poking through it. This returns
-    the carver's spine points + per-station channel radius expressed in ``blob``'s
-    *local* frame (its geometry is centred at the origin and positioned later),
-    which ``buildBlobGeometry`` consumes (see ``CARVE_TUBES`` in js/shapes.js):
-    any lobe vertex inside the tube is pushed out onto the tube surface.
-
-    The channel radius pads the carver's ``profile`` by its noise inflation plus
-    :data:`LOBE_CARVE_GAP`, so the lobe clears the carver's wobbling surface and
-    the carver shows through the notch instead of z-fighting it.
-
-    Like the medial wall and the jigsaw planes this is computed once on the right
-    side; the left lobe reuses the same shape file mirrored across x, which flips
-    the notch to align with the mirrored (left) carver for free.
-
-    Adjacency is geometry-derived (a spine control point reaching inside the
-    blob's noise-inflated surface), not hand-listed, exactly like the jigsaw
-    clipping; returns ``None`` when the tube never enters ``blob`` so non-threaded
-    lobes emit no carve field and stay untouched.
-
-    Parameters
-    ----------
-    carver
-        A ``carves=True`` entry whose ``shape`` is a ``type="curve"`` payload.
-    blob
-        A default-blob entry (``radii``/``noise``/``pos``) to test and carve.
-    """
-    shape = carver["shape"]
-    if shape.get("type") != "curve":
-        return None
-    cx, cy, cz = carver["pos"]
-    bx, by, bz = blob["pos"]
-    noise = shape.get("noise", 0.0)
-    radii = tuple(blob["radii"])
-    points: list[list[float]] = []
-    radius: list[float] = []
-    penetrates = False
-    for (lx, ly, lz), pr in zip(shape["points"], shape["profile"]):
-        # Spine control point in the blob's local frame (blob is centred at pos).
-        px, py, pz = (cx + lx) - bx, (cy + ly) - by, (cz + lz) - bz
-        points.append([round(px, 3), round(py, 3), round(pz, 3)])
-        r = pr * (1 + noise) + LOBE_CARVE_GAP
-        radius.append(round(r, 3))
-        d = math.sqrt(px * px + py * py + pz * pz)
-        if d < 1e-6:
-            penetrates = True
-            continue
-        reach = _directional_extent(radii, blob["noise"], (px / d, py / d, pz / d))
-        # Tube near-edge (d - r) reaching inside the blob surface => it threads it.
-        if d - r < reach:
-            penetrates = True
-    if not penetrates:
-        return None
-    return {"points": points, "radius": radius}
 
 
 def _mirror_id(structure_id: str) -> str:
@@ -3617,19 +3548,12 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # Same-group blob neighbours for the inter-region jigsaw clipping. Only
     # default blobs take part: curve/composite forms have no clip support and the
     # C-shaped caudate / cerebellum sit apart anyway. Pairs are kept within a
-    # group so the small deep nuclei still nest inside the cortex (a lobe is never
-    # carved by a nucleus); within a group, overlap is detected per pair.
+    # group so the small deep nuclei still nest inside the cortex; within a group,
+    # overlap is detected per pair.
     blob_groups: dict[str, list[dict[str, Any]]] = {}
     for entry in PAIRED:
         if "shape" not in entry:
             blob_groups.setdefault(entry["group"], []).append(entry)
-
-    # Swept-tube carvers (the caudate) that hollow a notch in the lobes they pass
-    # through, so they read as "partly exposed" instead of buried/interpenetrating.
-    # Geometry-derived like the jigsaw clipping: a carver only carves the lobes its
-    # spine actually threads (see _tube_carve). Defined on the right side; the left
-    # lobes mirror their shape file, flipping the notch to the mirrored carver.
-    carvers = [e for e in PAIRED if e.get("carves")]
 
     # Wikimedia GIF urls resolved author-side (offline read of the sources JSON);
     # a structure whose base has one gets a hot-linked structure_image (the GIFs
@@ -3647,12 +3571,6 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             planes = _bisecting_clip_planes(entry, blob_groups[entry["group"]])
             if planes:
                 shape["clip_planes"] = planes
-            # Only the cortical lobes are carved (a nucleus never carves a lobe,
-            # mirroring the same-group jigsaw rule that keeps nuclei nested).
-            if entry["group"] == "lobe":
-                carves = [c for c in (_tube_carve(cv, entry) for cv in carvers) if c]
-                if carves:
-                    shape["carve_tubes"] = carves
         shapes[base] = shape
         # Bilingual base name (e.g. {"en": "Putamen", "fr": "Putamen"}); the
         # per-hemisphere display names are composed from it (English prefix,

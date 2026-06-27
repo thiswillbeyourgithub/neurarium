@@ -113,7 +113,7 @@ the `main.js` entry point.
                                   │ loadBrainData()
                                   │
    main.js ── imports ──►  shapes.js   (buildStructureMesh: blob/curve/composite,
-                                        cel-shaded cortex swirl, jigsaw clip, tube carve)
+                                        cel-shaded cortex swirl, jigsaw clip)
             ── imports ──►  arrows.js   (buildArrows: curved tube+cone per
                                         projection, colour from projection.color)
             ── imports ──►  labels.js   (createLabels: CSS2D floating names)
