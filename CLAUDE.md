@@ -138,7 +138,23 @@ tools/generate_data.py  Single source of truth for the anatomy. Defines every
                         - data/circuits.jsonl: one named functional loop per line:
                           id, name ({en,fr}), structures[ids] (its arrows are
                           derived in the viewer as the projections whose endpoints
-                          are both in the set)
+                          are both in the set), and an optional description ({en,fr})
+                          + sources[{citation,url,provenance}] (the loop's detail
+                          panel, see "Circuit + projection-group panels")
+                        - data/projection_groups.jsonl: one legend pathway row per
+                          line, promoted to a sourced data structure so a row can
+                          open a detail panel: id (`<mode>_<key>`), mode
+                          ("kind" | "sign"), key (a projection_colors kind, e.g.
+                          excitatory, OR a sign, e.g. excitatory/inhibitory/
+                          modulatory), name ({en,fr}: the transmitter or sign
+                          label), description ({en,fr}), classification_provenance,
+                          optional wikipedia (+ wikipedia_provenance) and
+                          sources[{citation,url,provenance}]. One record per group in
+                          BOTH colour modes (the seven per-neurotransmitter rows +
+                          the three per-sign rows); the member pathways are derived
+                          in the viewer (the projections whose kind/sign matches
+                          key), not stored, so a group never duplicates the
+                          projection list. See "Circuit + projection-group panels"
                         - data/receptors.jsonl: one neurotransmitter receptor per
                           line: id, name (technical, language-neutral, e.g.
                           "5-HT2A"), family (a key of receptor_family_labels),
@@ -257,10 +273,14 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       wireShortcutsHelp), and
                       the top #banners stack (the WIP banner + error banners).
 js/data.js            Fetches the per-type data files (meta.json + structures/
-                      projections/circuits/receptors/drugs.jsonl) + all shape
-                      files,
+                      projections/circuits/projection_groups/receptors/drugs.jsonl)
+                      + all shape files,
                       returns a normalized {structures, projections, circuits,
-                      receptors, targets, drugs, drugsByTarget, byId, meta} object
+                      projectionGroups, projectionGroupsByKey, receptors, targets,
+                      drugs, drugsByTarget, byId, meta} object
+                      (`projectionGroupsByKey` = the projection-group records indexed
+                      by `${mode}:${key}`, so a legend row resolves its sourced data
+                      record by the grouping it stands for)
                       (`drugsByTarget` = a reverse index from a target id, a receptor
                       id or a drug_targets key, to the drugs that bind it + their
                       resolved binding, so a receptor/target panel can list its
@@ -431,8 +451,9 @@ js/main.js            Scene/camera/renderer/lights/OrbitControls setup, the
                       for labels, arrow + structure picking and the detail panel
                       (createInfoPanel: a connection view, a structure view with
                       its connection list, a receptor view, a non-receptor target
-                      view (showTarget), or a drug view
-                      (showDrug), rendered into the
+                      view (showTarget), a drug view (showDrug), a circuit view
+                      (showCircuit) or a projection-group view (showProjectionGroup),
+                      rendered into the
                       main panel's Details pane; the select* layer opens one
                       browser-style tab per detail via createPanelTabs), the
                       structure+connection+receptor/target+drug search, the
@@ -765,7 +786,7 @@ python tools/check_data.py     # exit 0 = no errors (warnings allowed), 1 = erro
 Six families of checks:
 
 - **Duplicates** (per collection: structures / receptors / drugs / circuits /
-  targets, plus projections). An exact duplicate id/key, or two ids that collide
+  projection groups / targets, plus projections). An exact duplicate id/key, or two ids that collide
   once **normalized** (lowercased, every non-alphanumeric stripped, so `mao_a`
   and `mao-a` both become `maoa`), is an **error**. Two entries whose **display
   names** collide once normalized is a **warning** (a likely accidental re-entry
@@ -775,7 +796,9 @@ Six families of checks:
   the detail is **unreachable** in the viewer. The canonical case (the reason
   this exists): a drug binding whose `target` is not a key of `meta.drug_targets`
   can never be focused from its panel. Also checks projection endpoints/kind,
-  circuit/receptor/target structure refs, receptor classification keys, target
+  circuit/receptor/target structure refs, **each projection group's `kind`/`sign`
+  key** (an unknown key would make its derived member-pathway list empty, so its
+  panel would be unreachable), receptor classification keys, target
   type + region bases, and that every receptor is also a `drug_targets` key. This
   region-base check is also what guarantees the receptor/target panels' **"Found
   in" rows are clickable**: a `location` / `region` that names no atlas structure
@@ -792,8 +815,9 @@ Six families of checks:
   never fail the run, they only print, so the pre-push gate passes on the current
   data.
 - **Provenance grades** (see "Source provenance" below): every emitted source
-  (`sources[].provenance`, **including the per-binding drug sources and a drug's
-  `nbn_sources`**), every receptor / structure / non-receptor-target
+  (`sources[].provenance`, **including the per-binding drug sources, a drug's
+  `nbn_sources`, and the circuit + projection-group `sources`**), every receptor /
+  structure / non-receptor-target / projection-group
   **`classification_provenance`**, and every
   wikipedia reference (the `wikipedia_provenance` beside a `wikipedia`) must carry
   a known grade (`llm` / `sourced` / `verified`), the value the viewer renders as
@@ -1287,7 +1311,11 @@ as the WIP banner (`js/error-banner.js`):
     circuit also starts its **traveling-pulse animation** (see "Circuit
     animation" below): glowing beads sweep its arrows in sequence and loop, so the
     loop reads as signal flowing around it. The animation stops the instant the
-    focus stops being that circuit.
+    focus stops being that circuit. A circuit row click also **opens its detail
+    tab** (`info.showCircuit` via `focusCircuit`): a panel with the loop's
+    description, its structures (clickable to jump to a region), its member pathways
+    (clickable to open the connection) and its sources, the same way a structure /
+    drug pick opens a panel (see "Circuit + projection-group panels" below).
   - The **Projections** rows (the per-pathway colour rows at the top of the
     Projections section) list one row per projection group, the
     grouping following the active **colour mode** (the arrow colour-mode switch,
@@ -1306,7 +1334,11 @@ as the WIP banner (`js/error-banner.js`):
     structure, so its structure/heading rows grey out rather than lighting up;
     only the group row lights. Clicking the active one again clears it. The rows
     are built from the **non-tentative** projections only (the speculative ones
-    live in their own section below).
+    live in their own section below). A group row click also **opens its detail
+    tab** (`info.showProjectionGroup` via `focusProjectionGroup`): a panel with the
+    group's sourced description + Wikipedia reference and its member pathways, from
+    the matching `projection_groups.jsonl` record (resolved by the row's `dataKey`,
+    `kind:<kind>` or `sign:<sign>`; see "Circuit + projection-group panels").
   - The **Hypothetical pathways** section (the last subsection of Projections) is
     separate and **off by
     default**: a single "Show speculative (N)" toggle reveals/hides every
@@ -1814,6 +1846,49 @@ keeps it running. The animation is **circuit-only**: a projection-group focus al
 goes through `setCircuit` but never calls `play`. No new user-visible string (the
 trigger is the existing circuit row), so no i18n change.
 
+## Circuit + projection-group panels
+
+A **Circuits** row and a **Projections** (per-pathway) row each open a **sourced
+detail tab** on click, the same way a structure / receptor / drug row does, so a
+functional loop or a transmitter/sign grouping reads as its own browsable datum
+(name, description, member pathways, sources) rather than only a focus toggle.
+This is why projection groups were promoted to a real data structure
+(`data/projection_groups.jsonl`) and circuits gained a `description` + `sources`
+(see "Changing the data"): a panel needs something to source.
+
+- **Data.** Each circuit may carry a `description` ({en,fr}) + `sources`; each
+  **projection group** is one `projection_groups.jsonl` record per legend row in
+  **both** colour modes (`mode:"kind"` for the seven per-neurotransmitter rows,
+  `mode:"sign"` for the three Excitatory / Inhibitory / Modulatory rows), with a
+  name, description, `classification_provenance`, optional wikipedia (+ provenance)
+  and sources. The **member pathways are never stored**: a circuit's are the
+  projections with both endpoints in its structure set (the same rule the viewer
+  uses to light its arrows), a group's are the projections whose `kind` / `sign`
+  matches `key`, so neither duplicates the projection list. `js/data.js` localizes
+  both and indexes the groups by `${mode}:${key}` (`projectionGroupsByKey`).
+
+- **Panels (`createInfoPanel` in `js/main.js`).** `showCircuit` renders the loop's
+  description, its structures (deduped to bases, each clickable to jump to the
+  region via the existing `onStructure` hook), its member pathways and its sources;
+  `showProjectionGroup` renders a by-transmitter / by-effect heading, the
+  description (live-refreshed from Wikipedia like every panel, see "Source
+  provenance"), the reference link, the member pathways and the sources. Both reuse
+  a shared **`pathwayRow` / `appendPathwayList`** helper (the pathway row markup,
+  also used by `showStructure`, so the swatch + label + summary source pill + jump
+  to the connection live in one place, not duplicated per panel).
+
+- **Wiring (`js/main.js`).** `focusCircuit` / `focusProjectionGroup` mirror
+  `focusDrug`: isolate (a circuit also `circuitAnim.play()`s its pulse; a group is
+  a static pinned-arrow focus, no pulse), show the panel, open the detail tab with
+  a reopen thunk that re-applies all of it (recomputing the meshes/arrows from the
+  data so the thunk is durable). `buildLegend` keeps the **toggle** (off its
+  reflect-derived active state) and delegates the isolate+panel+tab to these via two
+  callbacks; a `projectionGroups()` row carries a `dataKey` (`kind:<kind>` /
+  `sign:<sign>`) so it finds its sourced record. The tab keys are `circuit:<id>` and
+  `group:<id>`; closing the last one clears the focus (`tabs.setOnEmpty`). New
+  i18n keys: `circuit.heading/structures/pathways`, `group.kindHeading/signHeading/
+  pathways` (both languages).
+
 ## Receptors
 
 A dataset of neurotransmitter **receptors** (`data/receptors.jsonl`, authored as
@@ -2238,7 +2313,11 @@ so the coverage is fully computable. Today: 70% of 943 factual claims backed
 classifications + brain-region anatomy the gap, all `llm` for now). References
 (wikipedia links) are tallied as their own kind, **not** folded into that headline
 (a reference is a pointer, not a factual claim); a present link grades `sourced`
-(see `WIKIPEDIA_DEFAULT_PROVENANCE` above), so that kind sits near 100%.
+(see `WIKIPEDIA_DEFAULT_PROVENANCE` above), so that kind sits near 100%. The
+**circuit + projection-group descriptions/sources** (added for their detail panels)
+are validated for a known grade but are **not yet folded into the headline tally**
+(they are all `llm` for now, so they would only lower the percentage without
+representing newly-sourced facts); fold them in when they get real sources.
 
 ## Changing the data
 
@@ -2411,7 +2490,21 @@ classifications + brain-region anatomy the gap, all `llm` for now). References
      to whatever was emitted (both hemispheres, or the bare id for a midline form)
      and raises on a typo; the circuit's arrows are *not* listed (the viewer takes
      every projection whose endpoints are both in the set), so a circuit never
-     duplicates the pathway list. It shows up in the Projections section's Circuits subsection.
+     duplicates the pathway list. It shows up in the Projections section's Circuits
+     subsection. Optionally add a `description` (English) + `description_fr` and
+     `sources` (a list of `SOURCES` keys), which the viewer shows in the circuit's
+     detail panel (see "Circuit + projection-group panels").
+   - To add or edit a **projection group** (a Projections legend row's sourced
+     detail panel), edit the `PROJECTION_GROUPS` list: one entry per group, in both
+     colour modes, `{mode, key, name, description, description_fr, wikipedia,
+     sources}` where `mode` is `"kind"` (a `PROJECTION_COLORS` kind) or `"sign"` (an
+     excitatory/inhibitory/modulatory sign) and `key` is that kind/sign; the
+     generator validates `key` against the matching vocabulary and rejects a
+     duplicate `<mode>_<key>` id. The seven kinds + three signs are all present, so
+     normally you only *edit* a group's description/sources, not add one (a new
+     entry is needed only when you add a new projection `kind`, alongside its
+     `PROJECTION_COLORS` / `KIND_TO_SIGN` entries). The member pathways are derived
+     in the viewer, not listed here. See "Circuit + projection-group panels".
    - To add a **receptor**, append to the `RECEPTORS` list: `id`, `name` (the
      technical, language-neutral label, e.g. `"5-HT2A"`), `family` (a key of
      `RECEPTOR_FAMILY_LABELS`), `neurotransmitter`, `receptor_class`
@@ -2481,7 +2574,7 @@ classifications + brain-region anatomy the gap, all `llm` for now). References
      suffix agrees. See "Internationalization".
 2. Run `python tools/generate_data.py` to regenerate `public/data/`
    (`meta.json` + `structures.jsonl` + `projections.jsonl` + `circuits.jsonl` +
-   `receptors.jsonl` + `drugs.jsonl` + `shapes/`).
+   `projection_groups.jsonl` + `receptors.jsonl` + `drugs.jsonl` + `shapes/`).
 3. Optionally run `python tools/check_data.py` to sanity-check the regenerated
    files (duplicate ids/names, unreachable references, stray TODOs); see "Data
    checks". The pre-push hook also offers to run it.
