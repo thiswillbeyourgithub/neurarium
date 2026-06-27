@@ -3151,8 +3151,10 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  * twin. preventDefault on a handled key stops `f` typing into the search box it
  * just focused (and any other stray default). `help` is the shortcuts-popup
  * controller (wireShortcutsHelp): when its dialog is open Esc closes that first.
+ * `selection` lets Esc clear an active focus (isolate / circuit / drug-or-receptor
+ * dim) so the brain returns to its plain state, see the Escape case.
  */
-function wireShortcuts(help, tabs) {
+function wireShortcuts(help, tabs, selection) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -3302,9 +3304,18 @@ function wireShortcuts(help, tabs) {
       case "r": case "R": sectionNav.reset(); click("receptors-toggle"); break;
       case "m": case "M": sectionNav.reset(); click("drugs-toggle"); break;
       case "f": case "F": openSearch(); break;
-      // Esc closes the active detail tab first (a detail is showing -> close it);
-      // with only Settings active it falls through to closing search / sections.
-      case "Escape": if (!(tabs && tabs.closeActive())) collapseOpen(); break;
+      // Esc peels one layer at a time, prioritizing a return to the plain brain:
+      // (1) close the active detail tab (which clears its dim when it is the last
+      // tab), else (2) clear any active focus/isolate/circuit so the brain is
+      // un-dimmed with nothing hidden, else (3) close search / collapse an open
+      // section. So a focus made from a legend row (a circuit / projection-group /
+      // structure isolate that opens no tab) is also cleared by Esc, not just a
+      // drug/receptor detail tab.
+      case "Escape":
+        if (tabs && tabs.closeActive()) break;
+        if (selection && selection.getSelected()) { selection.clear(); break; }
+        collapseOpen();
+        break;
       default: return; // unhandled key: leave its default intact
     }
     event.preventDefault();
@@ -3871,7 +3882,7 @@ async function main() {
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
-  wireShortcuts(shortcutsHelp, tabs); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
+  wireShortcuts(shortcutsHelp, tabs, selection); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });

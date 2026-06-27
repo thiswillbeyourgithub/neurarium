@@ -1393,10 +1393,15 @@ as the WIP banner (`js/error-banner.js`):
   **f** opens search (the bare-key twin of **Ctrl/Cmd+F**), **Tab** /
   **Shift+Tab** cycle the open **detail tabs** (the pinned Settings tab + each
   opened detail, wrapping; `tabs.cycle` re-applies a detail's 3D focus on landing,
-  and the key keeps its default focus move when no detail is open), **Esc** closes
-  the **active detail tab** first if one is showing (`tabs.closeActive`), otherwise
-  closes search and collapses any open accordion section (Structures / Projections /
-  Receptors / Drugs / Legend / About). While
+  and the key keeps its default focus move when no detail is open), **Esc** peels
+  one layer at a time, prioritizing a return to the plain brain: it closes the
+  **active detail tab** first if one is showing (`tabs.closeActive`, which clears
+  that detail's dim when it is the last tab), else **clears any active focus /
+  isolate / circuit** so the brain is un-dimmed with nothing hidden
+  (`selection.getSelected()` -> `selection.clear()`, so a focus made from a legend
+  row that opens no detail tab, a circuit / projection-group / structure isolate, is
+  cleared too), else closes search and collapses any open accordion section
+  (Structures / Projections / Receptors / Drugs / Legend / About). While
   a section is open the **arrow keys** browse its rows and **Enter** activates the
   highlighted one (see "Section row navigation" below). Each
   maps to
