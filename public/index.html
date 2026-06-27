@@ -344,10 +344,18 @@
         min-width: 0;
         overflow-x: auto;
         overflow-y: hidden;
+        /* Show only the scrollbar thumb (the "cabin"), not the track (the "shaft"):
+           the full bar reads as heavy chrome over the dark glass UI. A transparent
+           track on both engines (scrollbar-color's 2nd value in Firefox, the
+           ::-webkit-scrollbar-track below in Chromium) leaves just a faint thumb as a
+           subtle "there's more to scroll" hint; the strip still scrolls via wheel /
+           touch / long-press drag (driven in JS). */
         scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
         touch-action: none;
       }
       .detail-tabs::-webkit-scrollbar { height: 4px; }
+      .detail-tabs::-webkit-scrollbar-track { background: transparent; }
       .detail-tabs::-webkit-scrollbar-thumb {
         background: rgba(255, 255, 255, 0.18);
         border-radius: 2px;
