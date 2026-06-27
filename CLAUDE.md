@@ -217,10 +217,13 @@ data/shapes/<name>.json  One geometry file per distinct *form* (independent of
 index.html            Page shell: loads three.js (vendored, via import map) and,
                       on ?debug=1 only, the vendored eruda console; holds
                       the single bottom-left collapsible "neurarium" panel
-                      (reset / search / keyboard-shortcuts buttons, the two
-                      sliders, then the auto-rotate / show-all-names /
-                      show-projections / see-inside checkboxes, then six nested
-                      collapsible sections:
+                      (reset / search / keyboard-shortcuts buttons, then seven
+                      nested collapsible sections: first a Controls section (the
+                      two sliders + the auto-rotate / show-all-names /
+                      show-projections / see-inside checkboxes) that toggles
+                      independently (NOT part of the accordion, so it can stay open
+                      while a section is open, letting you tweak a slider without
+                      losing your place), then six single-open-accordion sections:
                       a JS-populated Structures section (region rows by group), a
                       JS-populated
                       Projections section (pathway rows + the arrow colour-mode
@@ -229,7 +232,7 @@ index.html            Page shell: loads three.js (vendored, via import map) and,
                       section, a JS-populated Drugs section (with its own filter
                       box), a JS-populated Legend section (a static colour/symbol
                       key for the scene's encodings, see buildLegendKey), and an
-                      About section; all six are a single-open accordion). The
+                      About section). The
                       panel body is split
                       into a #settings-pane (all the above) and a #details-pane
                       (#info-body) switched by a #panel-tabs bar of
@@ -845,9 +848,10 @@ script, loaded early in `index.html`) is the whole mechanism:
   Dynamically-built UI (legend, info panel, banners) calls `t()` directly; the
   classic banner scripts read `window.__I18N__` with a key-fallback so an error is
   still surfaced if i18n somehow failed to load.
-- **Switching** is a small `EN/FR` control (`#lang-switch`) at the top of the
-  panel body (tagged `.collapsible-control`, so it hides with the sliders +
-  auto-rotate while a section is open). Clicking the inactive language calls
+- **Switching** is a small `EN/FR` control (`#lang-switch`) pinned at the top of
+  the panel body (always visible, alongside the reset/search toolbar; the sliders
+  it used to hide with now live in the collapsible Controls section instead).
+  Clicking the inactive language calls
   `setLang`, which **saves the choice
   and reloads**: `js/data.js` resolves the data language at load, so a reload is
   simpler and more robust than re-rendering the whole scene live. The chosen
@@ -1011,12 +1015,17 @@ as the WIP banner (`js/error-banner.js`):
   clicking the **Settings** tab returns to the controls without closing any detail
   tabs (they stay as history); closing the last detail tab clears the 3D
   selection and falls back to Settings. From
-  the top the Settings pane holds: the **reset + search + keyboard-shortcuts**
-  icon buttons (a `.toolbar-row`), then
-  the **Separate** and **Transparency** sliders, then the **Auto-rotate**, **Show
-  all names**, **Show projections** and **See inside** checkboxes (the last three
-  are global scene toggles, so they sit here with auto-rotate rather than inside
-  their sections), then six nested collapsed sections in order: **Structures**
+  the top the Settings pane holds, all **always visible**: the `#lang-switch`
+  (EN/FR) and the **reset + search + keyboard-shortcuts** icon buttons (a
+  `.toolbar-row`). Then come **seven** nested collapsible sections. The first is
+  **Controls** (`#controls-settings`): the **Separate** and **Transparency**
+  sliders, then the **Auto-rotate**, **Show all names**, **Show projections** and
+  **See inside** checkboxes (the last three are global scene toggles, so they sit
+  here with auto-rotate rather than inside their sections). It ships **open** (so
+  the sliders show on load) and toggles **independently** of the accordion (see
+  below), so you can tweak a slider without collapsing the section you were
+  browsing. After it, **six single-open-accordion** sections in order:
+  **Structures**
   (`#structures`, the region rows by group), **Projections** (`#projections`, the
   pathway rows, its first row the **arrow colour-mode switch**
   (Neurotransmitter / Potential, `#color-mode`), then Circuits + Hypothetical
@@ -1028,21 +1037,22 @@ as the WIP banner (`js/error-banner.js`):
   a popup; the reset/search buttons stay visible so the magnifier toggles back.
   The panel / section collapse headers share one
   `wireCollapse` helper in
-  `js/main.js`. **The six sections are an accordion**: opening
+  `js/main.js`. **The six (not the Controls) sections are an accordion**: opening
   one
-  closes the others (only one open at a time), and while any is open every control
-  above
-  it (the `#lang-switch`, the `.toolbar-row`, the two sliders and the Auto-rotate
-  / See inside checkboxes, all tagged
-  `.collapsible-control`) is hidden via the
-  `#controls.section-open` class so the open section's content doesn't push the
-  panel tall; only the section headers stay visible. The accordion is wired as a
+  closes the others (only one open at a time). The **Controls** section is wired
+  separately (its own `wireCollapse`, not in the `sections` array), so it is
+  exempt: opening it leaves an open content section open and vice versa. The panel
+  top (lang-switch + toolbar) no longer hides while a section is open (the old
+  `.collapsible-control` / `#controls.section-open` hide mechanism is gone, since
+  the sliders it hid now live in the collapsible Controls section). The accordion
+  is wired as a
   list of `{toggle, body}` sections in `wireControls`, so adding another section
   is one array entry. `wireCollapse` takes an
   `onToggle(open)` callback
-  and `setSection()` sets a section's state programmatically; `syncSectionLayout()`
-  toggles `section-open`. A section can only be opened while the controls are
-  visible (i.e. not searching), so this never hides the toolbar mid-search.
+  and `setSection()` sets a section's state programmatically. The open content
+  section grows to fill the tall landscape sidebar via a pure-CSS
+  `:has(...aria-expanded="true")` rule (the Controls section is excluded from it
+  with `:not(#controls-settings)` so its short body never grabs the free height).
   **Pan-aside**: the panel covers part of the centered brain, so while the panel
   body is **expanded** the rendered brain is pushed clear of it (and recentred when
   it collapses). The layout differs by orientation:
@@ -1072,7 +1082,7 @@ as the WIP banner (`js/error-banner.js`):
     a gap. The flex rules are scoped to `:not([hidden])` so a hidden pane keeps
     `display:none` (an unscoped rule on the `[hidden]` details pane would otherwise
     keep it in flow and steal the free space).
-  - **Uncollapse animation**: opening any accordion section (Structures /
+  - **Uncollapse animation**: opening any section (Controls / Structures /
     Projections / Receptors / Drugs / Legend / About) **slides its body in** (a soft
     downward `translateY` + fade,
     `@keyframes section-slide-in`, 200ms); the bodies ship `hidden`

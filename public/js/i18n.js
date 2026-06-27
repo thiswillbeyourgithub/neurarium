@@ -52,6 +52,7 @@
       "lang.fr": "FR",
       "lang.switchTo": "Switch language",
 
+      "panel.controls": "Controls",
       "panel.separate": "Separate",
       "panel.transparency": "Transparency",
       "panel.autorotate": "Auto-rotate",
@@ -231,6 +232,7 @@
       "lang.fr": "FR",
       "lang.switchTo": "Changer de langue",
 
+      "panel.controls": "Contrôles",
       "panel.separate": "Séparer",
       "panel.transparency": "Transparence",
       "panel.autorotate": "Rotation auto",

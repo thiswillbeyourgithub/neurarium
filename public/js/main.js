@@ -2660,6 +2660,8 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const toggleProjections = document.getElementById("toggle-projections");
   const controlsToggle = document.getElementById("controls-toggle");
   const controlsBody = document.getElementById("controls-body");
+  const controlsSettingsToggle = document.getElementById("controls-settings-toggle");
+  const controlsSettingsBody = document.getElementById("controls-settings-body");
   const structuresToggle = document.getElementById("structures-toggle");
   const structuresBody = document.getElementById("structures-body");
   const projectionsToggle = document.getElementById("projections-toggle");
@@ -2728,11 +2730,20 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   portrait.addEventListener("change", updatePanelPan);
   new ResizeObserver(updatePanelPan).observe(controlsPanel);
 
+  // Controls (the sliders + global scene toggles) is a collapsible section like
+  // the others but deliberately NOT part of the accordion below: it toggles
+  // independently, so opening it leaves an open content section open (and vice
+  // versa) and you can tweak a slider without losing your place. The
+  // ResizeObserver above re-runs the pan-aside when its height changes.
+  if (controlsSettingsToggle && controlsSettingsBody) {
+    wireCollapse(controlsSettingsToggle, controlsSettingsBody);
+  }
+
   // Structures, Projections, Receptors, Drugs, Legend and About behave as an
-  // accordion: only one open at a time, and while any is open the controls between
-  // the title and Auto-rotate (the .collapsible-control rows) are hidden via the
-  // #controls.section-open class (see index.html) so the open section's content
-  // doesn't push the panel tall.
+  // accordion among themselves: only one open at a time (Controls, above, is
+  // exempt). The panel top (language switch + reset/search row) stays visible
+  // throughout; the open section grows to fill the tall sidebar via the
+  // :has(...) CSS in index.html, so no JS layout class is needed here anymore.
   const sections = [
     { toggle: structuresToggle, body: structuresBody },
     { toggle: projectionsToggle, body: projectionsBody },
@@ -2741,11 +2752,6 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     { toggle: legendToggle, body: legendBody },
     { toggle: aboutToggle, body: aboutBody },
   ];
-  const syncSectionLayout = () => {
-    const anyOpen = sections.some(
-      (s) => s.toggle && s.toggle.getAttribute("aria-expanded") === "true");
-    controlsPanel.classList.toggle("section-open", anyOpen);
-  };
   for (const s of sections) {
     if (!s.toggle || !s.body) continue;
     wireCollapse(s.toggle, s.body, (open) => {
@@ -2757,7 +2763,6 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
           }
         }
       }
-      syncSectionLayout();
     });
   }
 

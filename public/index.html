@@ -173,17 +173,20 @@
           min-height: 0;
         }
         /* The open section (its header carries aria-expanded="true") grows; its body
-           becomes the scroll area, so the sections after it sit at the bottom. */
-        #controls-main > div:has(> .collapse-header[aria-expanded="true"]) {
+           becomes the scroll area, so the sections after it sit at the bottom.
+           The Controls section is excluded: it is short and toggles independently
+           (it can be open alongside a content section), so it must not also grab
+           the free height. */
+        #controls-main > div:not(#controls-settings):has(> .collapse-header[aria-expanded="true"]) {
           display: flex;
           flex-direction: column;
           flex: 1 1 auto;
           min-height: 0;
         }
-        #controls-main > div:has(> .collapse-header[aria-expanded="true"]) > .collapse-header {
+        #controls-main > div:not(#controls-settings):has(> .collapse-header[aria-expanded="true"]) > .collapse-header {
           flex: 0 0 auto;
         }
-        #controls-main > div:has(> .collapse-header[aria-expanded="true"]) > :not(.collapse-header) {
+        #controls-main > div:not(#controls-settings):has(> .collapse-header[aria-expanded="true"]) > :not(.collapse-header) {
           flex: 1 1 auto;
           min-height: 0;
           overflow-y: auto;
@@ -198,11 +201,11 @@
         from { opacity: 0; transform: translateY(-10px); }
         to   { opacity: 1; transform: translateY(0); }
       }
-      #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body {
+      #controls-settings-body, #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body {
         animation: section-slide-in 200ms ease-out;
       }
       @media (prefers-reduced-motion: reduce) {
-        #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body { animation: none; }
+        #controls-settings-body, #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body { animation: none; }
       }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
@@ -286,14 +289,12 @@
          last hard right and the middle one centered. */
       .toolbar-row { display: flex; justify-content: space-between; gap: 8px; margin: 2px 0 4px; }
 
-      /* Accordion: opening the Legend or About section hides every control above
-         it (the language switch, the reset/search row, the two sliders and the
-         Auto-rotate checkbox, all tagged .collapsible-control) so the open
-         section's content does not push the panel tall. Only the Legend and About
-         headers stay. Only one of Legend/About is open at a time (enforced in
-         js/main.js). A section can only be opened when the controls are visible
-         (no search), so this never hides the toolbar mid-search. */
-      #controls.section-open .collapsible-control { display: none; }
+      /* The sliders + global scene toggles now live in their own collapsible
+         Controls section (#controls-settings), so the panel top (language switch,
+         reset/search row) no longer needs to hide when a content section opens:
+         it stays put and the Controls section is just collapsed when not wanted.
+         (Earlier these were tagged .collapsible-control and hidden via a
+         #controls.section-open rule; that mechanism is gone.) */
 
       /* Settings / Details tabs at the top of the panel body. The bar ships
          hidden and is revealed (js/main.js, createPanelTabs) only while a detail
@@ -605,6 +606,7 @@
         margin-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
+      #controls-settings .collapse-header,
       #structures .collapse-header,
       #projections .collapse-header,
       #legend .collapse-header,
@@ -1178,20 +1180,22 @@
         <!-- Settings pane: the normal controls. Hidden while the Details tab is
              active. -->
         <div id="settings-pane">
-        <!-- Language switch (en / fr). Tagged .collapsible-control so it hides
-             (with the sliders + auto-rotate) while a section is open. Buttons
-             carry data-lang; js/i18n.js marks the active one and reloads on
-             switch. -->
-        <div id="lang-switch" class="lang-switch collapsible-control" role="group" aria-label="Language">
+        <!-- Language switch (en / fr). Always visible (the sliders now live in
+             their own collapsible Controls section, so the panel top no longer
+             hides when a section opens). Buttons carry data-lang; js/i18n.js
+             marks the active one and reloads on switch. -->
+        <div id="lang-switch" class="lang-switch" role="group" aria-label="Language">
           <button type="button" class="lang-btn" data-lang="en">EN</button>
           <button type="button" class="lang-btn" data-lang="fr">FR</button>
         </div>
 
         <!-- Reset the view (handy after panning) + toggle search. Sit just
-             before the sliders, and stay visible while searching so the
-             magnifier doubles as the way back. SVG icons use currentColor so
-             they follow the button text color (incl. the active blue state). -->
-        <div class="toolbar-row collapsible-control">
+             before the Controls section, and stay visible always (while
+             searching, so the magnifier doubles as the way back, and while a
+             section is open, so search/reset stay reachable). SVG icons use
+             currentColor so they follow the button text color (incl. the active
+             blue state). -->
+        <div class="toolbar-row">
           <!-- Keyboard-shortcuts help (left): opens the #shortcuts-modal popup
                (also opened with the ? key). Keyboard icon: a rounded panel with
                key dots + a space bar (zero-length round-capped lines = dots). -->
@@ -1226,60 +1230,75 @@
 
         <!-- Normal controls; hidden (replaced by #search) while searching. -->
         <div id="controls-main">
-          <div class="row collapsible-control">
-            <label for="explode" data-i18n="panel.separate"></label>
-            <!-- Default 0 so the page loads with the regions locked together as
-                 a whole brain; dragging right blows it apart to reveal deep
-                 nuclei. -->
-            <input type="range" id="explode" min="0" max="1" step="0.01" value="0" />
-          </div>
+          <!-- Controls: the sliders + global scene toggles, in their own
+               collapsible section so they can be tweaked without losing your
+               place. Unlike the six sections below it is NOT part of the
+               single-open accordion (wired independently in js/main.js): opening
+               it leaves an open section open, and opening a section leaves it
+               open. Ships expanded so the sliders show on load. -->
+          <div id="controls-settings">
+            <button type="button" id="controls-settings-toggle" class="collapse-header" aria-expanded="true">
+              <span data-i18n="panel.controls"></span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+            <div id="controls-settings-body">
+              <div class="row">
+                <label for="explode" data-i18n="panel.separate"></label>
+                <!-- Default 0 so the page loads with the regions locked together
+                     as a whole brain; dragging right blows it apart to reveal
+                     deep nuclei. -->
+                <input type="range" id="explode" min="0" max="1" step="0.01" value="0" />
+              </div>
 
-          <div class="row collapsible-control">
-            <label for="transparency" data-i18n="panel.transparency"></label>
-            <!-- The slider value is the material opacity; left = more transparent. -->
-            <input type="range" id="transparency" min="0.1" max="1" step="0.01" value="1" />
-          </div>
+              <div class="row">
+                <label for="transparency" data-i18n="panel.transparency"></label>
+                <!-- The slider value is the material opacity; left = more transparent. -->
+                <input type="range" id="transparency" min="0.1" max="1" step="0.01" value="1" />
+              </div>
 
-          <div class="row inline collapsible-control">
-            <!-- On by default so the brain slowly turns on load; picking a
-                 structure or projection turns it off (see js/main.js) so the
-                 thing you clicked holds still. Tagged .collapsible-control so it
-                 hides with the sliders while a section is open. -->
-            <label>
-              <input type="checkbox" id="autorotate" checked />
-              <span data-i18n="panel.autorotate"></span>
-            </label>
-          </div>
+              <div class="row inline">
+                <!-- On by default so the brain slowly turns on load; picking a
+                     structure or projection turns it off (see js/main.js) so the
+                     thing you clicked holds still. -->
+                <label>
+                  <input type="checkbox" id="autorotate" checked />
+                  <span data-i18n="panel.autorotate"></span>
+                </label>
+              </div>
 
-          <div class="row inline collapsible-control">
-            <!-- "Show all names": force every structure label on at once (vs.
-                 hover, one at a time). A global toggle, so it sits with auto-rotate
-                 here rather than inside the Structures section. Wired in js/main.js. -->
-            <label>
-              <input type="checkbox" id="toggle-names" />
-              <span data-i18n="legend.showNames"></span>
-            </label>
-          </div>
+              <div class="row inline">
+                <!-- "Show all names": force every structure label on at once (vs.
+                     hover, one at a time). A global toggle, so it sits with
+                     auto-rotate here rather than inside the Structures section.
+                     Wired in js/main.js. -->
+                <label>
+                  <input type="checkbox" id="toggle-names" />
+                  <span data-i18n="legend.showNames"></span>
+                </label>
+              </div>
 
-          <div class="row inline collapsible-control">
-            <!-- "Show projections": show/hide every projection arrow at once
-                 (checked by default = arrows shown; unchecking hides them all). A
-                 global toggle, so it sits here with auto-rotate rather than inside
-                 the Projections section. Wired in js/main.js. -->
-            <label>
-              <input type="checkbox" id="toggle-projections" checked />
-              <span data-i18n="legend.showProjections"></span>
-            </label>
-          </div>
+              <div class="row inline">
+                <!-- "Show projections": show/hide every projection arrow at once
+                     (checked by default = arrows shown; unchecking hides them
+                     all). A global toggle, so it sits here with auto-rotate
+                     rather than inside the Projections section. Wired in
+                     js/main.js. -->
+                <label>
+                  <input type="checkbox" id="toggle-projections" checked />
+                  <span data-i18n="legend.showProjections"></span>
+                </label>
+              </div>
 
-          <div class="row inline collapsible-control">
-            <!-- "See inside": hide the camera-facing structures each frame so the
-                 deep nuclei aren't blocked by the near cortex (createNearCull in
-                 js/main.js). Off by default. Collapsible like auto-rotate. -->
-            <label>
-              <input type="checkbox" id="see-inside" />
-              <span data-i18n="panel.seeInside"></span>
-            </label>
+              <div class="row inline">
+                <!-- "See inside": hide the camera-facing structures each frame so
+                     the deep nuclei aren't blocked by the near cortex
+                     (createNearCull in js/main.js). Off by default. -->
+                <label>
+                  <input type="checkbox" id="see-inside" />
+                  <span data-i18n="panel.seeInside"></span>
+                </label>
+              </div>
+            </div>
           </div>
 
           <!-- Structures: the region rows by group, each clickable to isolate.
