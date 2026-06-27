@@ -234,12 +234,14 @@ def check_projection_dups(report, projections):
         report.ok(f"projections: {len(projections)} pathways, no duplicate from->to")
 
 
-def check_duplicates(report, meta, structures, projections, circuits, receptors, drugs):
+def check_duplicates(report, meta, structures, projections, circuits,
+                     projection_groups, receptors, drugs):
     report.header("1. Duplicates (exact + normalized)")
     check_id_collection(report, "structures", structures)
     check_id_collection(report, "receptors", receptors)
     check_id_collection(report, "drugs", drugs)
     check_id_collection(report, "circuits", circuits)
+    check_id_collection(report, "projection groups", projection_groups)
     # drug_targets is a dict in meta; reshape to id-bearing records to reuse the
     # same machinery (the key is the id, the value carries the {en,fr} name).
     targets = [dict(value, id=key) for key, value in meta.get("drug_targets", {}).items()]
@@ -251,7 +253,8 @@ def check_duplicates(report, meta, structures, projections, circuits, receptors,
 # 2. Reachability (referential integrity)
 # --------------------------------------------------------------------------- #
 
-def check_reachability(report, meta, structures, projections, circuits, receptors, drugs):
+def check_reachability(report, meta, structures, projections, circuits,
+                       projection_groups, receptors, drugs):
     report.header("2. Reachability (dangling references)")
     structure_ids = {s.get("id") for s in structures}
     base_ids = {_HEMISPHERE_RE.sub("", sid) for sid in structure_ids}
@@ -281,6 +284,21 @@ def check_reachability(report, meta, structures, projections, circuits, receptor
             if sid not in structure_ids:
                 report.error(f"circuit {circuit.get('id')}: structure {sid!r} "
                              f"is not a structure id")
+
+    # Projection groups: each names a colour-mode + a kind/sign key the viewer
+    # groups arrows by; an unknown key would make the group's member-pathway list
+    # (derived in the viewer) empty, so its detail panel would be unreachable.
+    for group in projection_groups:
+        gid, mode, key = group.get("id"), group.get("mode"), group.get("key")
+        if mode == "kind":
+            require(key, meta.get("projection_colors", {}),
+                    f"projection group {gid}: kind {key!r} is not in projection_colors")
+        elif mode == "sign":
+            require(key, meta.get("sign_colors", {}),
+                    f"projection group {gid}: sign {key!r} is not in sign_colors")
+        else:
+            report.error(f"projection group {gid}: unknown mode {mode!r} "
+                         f"(expected 'kind' or 'sign')")
 
     for receptor in receptors:
         rid = receptor.get("id")
@@ -341,7 +359,8 @@ def check_reachability(report, meta, structures, projections, circuits, receptor
 # 3. TODOs
 # --------------------------------------------------------------------------- #
 
-def check_todos(report, meta, structures, projections, circuits, receptors, drugs):
+def check_todos(report, meta, structures, projections, circuits,
+                projection_groups, receptors, drugs):
     report.header("3. TODOs")
 
     def record_id(label, record):
@@ -351,7 +370,8 @@ def check_todos(report, meta, structures, projections, circuits, receptors, drug
 
     scan = []
     for label, items in (("structure", structures), ("projection", projections),
-                         ("circuit", circuits), ("receptor", receptors),
+                         ("circuit", circuits), ("projection group", projection_groups),
+                         ("receptor", receptors),
                          ("drug", drugs)):
         for record in items:
             scan.append((f"{label}:{record_id(label, record)}", record))
@@ -422,7 +442,8 @@ def check_todos(report, meta, structures, projections, circuits, receptors, drug
 # 4. Provenance grades
 # --------------------------------------------------------------------------- #
 
-def check_provenance(report, meta, structures, projections, circuits, receptors, drugs):
+def check_provenance(report, meta, structures, projections, circuits,
+                     projection_groups, receptors, drugs):
     report.header("4. Source provenance grades")
     before = report.errors
     counts = Counter()
@@ -439,12 +460,25 @@ def check_provenance(report, meta, structures, projections, circuits, receptors,
             return f"{record.get('from')}->{record.get('to')}"
         return record.get("id")
 
-    # Citation sources (projections + drugs) each carry a per-source grade.
-    for label, items in (("projection", projections), ("drug", drugs)):
+    # Citation sources (projections + drugs + circuits + projection groups) each
+    # carry a per-source grade.
+    for label, items in (("projection", projections), ("drug", drugs),
+                         ("circuit", circuits),
+                         ("projection group", projection_groups)):
         for record in items:
             for i, src in enumerate(record.get("sources", []) or []):
                 grade(src.get("provenance"),
                       f"{label} {rec_id(label, record)} sources[{i}]")
+
+    # Projection-group classification (the grouping/description grade) + its
+    # wikipedia reference each carry a grade, like a receptor / target.
+    for group in projection_groups:
+        if "classification_provenance" in group:
+            grade(group.get("classification_provenance"),
+                  f"projection group {group.get('id')} classification_provenance")
+        if group.get("wikipedia"):
+            grade(group.get("wikipedia_provenance"),
+                  f"projection group {group.get('id')} wikipedia")
 
     # Per-binding drug sources (the quote-level provenance) each carry a grade too,
     # as does a drug's nbn_sources (the NbN is quote-sourced the same way).
@@ -705,10 +739,12 @@ def main():
     structures = load_jsonl(report, "structures")
     projections = load_jsonl(report, "projections")
     circuits = load_jsonl(report, "circuits")
+    projection_groups = load_jsonl(report, "projection_groups")
     receptors = load_jsonl(report, "receptors")
     drugs = load_jsonl(report, "drugs")
 
-    args = (report, meta, structures, projections, circuits, receptors, drugs)
+    args = (report, meta, structures, projections, circuits, projection_groups,
+            receptors, drugs)
     check_duplicates(*args)
     check_reachability(*args)
     check_todos(*args)

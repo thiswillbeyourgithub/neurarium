@@ -1607,6 +1607,11 @@ SOURCES: dict[str, dict[str, str]] = {
                     "the brain: an update. Trends Neurosci 30(5):194-202.",
         "url": "TODO",
     },
+    "kandel_principles": {
+        "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA (eds) (2021). "
+                    "Principles of Neural Science, 6th ed. McGraw-Hill.",
+        "url": "TODO",
+    },
 }
 
 # Directed neuron projections drawn as arrows. Each entry is a connection with
@@ -1994,33 +1999,172 @@ PROJECTIONS: list[dict[str, Any]] = [
 # raises on a typo).
 CIRCUITS: list[dict[str, Any]] = [
     dict(id="bg_direct", name="Direct pathway (motor)",
+         description="The movement-promoting basal-ganglia loop: cortex excites "
+                     "the striatum, which inhibits the GPi/SNr output, releasing "
+                     "the thalamus to drive cortex.",
+         description_fr="La boucle des noyaux gris centraux favorisant le "
+                        "mouvement : le cortex active le striatum, qui inhibe la "
+                        "sortie GPi/SNr, libérant le thalamus pour activer le "
+                        "cortex.",
+         sources=["alexander1986", "smith1998", "delong1990"],
          # Cortex -> striatum -> GPi/SNr -> thalamus -> cortex: the movement-
          # promoting basal-ganglia loop (plus the nigrostriatal dopamine input).
          structures=["frontal", "putamen", "globus_pallidus",
                      "substantia_nigra", "thalamus"]),
     dict(id="bg_indirect", name="Indirect pathway",
+         description="The movement-suppressing loop, routed through the subthalamic "
+                     "nucleus, which drives the GPi/SNr to clamp the thalamus.",
+         description_fr="La boucle supprimant le mouvement, passant par le noyau "
+                        "sous-thalamique, qui active le GPi/SNr pour brider le "
+                        "thalamus.",
+         sources=["albin1989", "smith1998", "nambu2002"],
          # The movement-suppressing loop, routing through the subthalamic nucleus
          # (and the cortico-subthalamic "hyperdirect" shortcut).
          structures=["frontal", "putamen", "globus_pallidus",
                      "subthalamic_nucleus", "thalamus"]),
     dict(id="nigrostriatal", name="Nigrostriatal (dopamine)",
+         description="The dopaminergic projection from the substantia nigra to the "
+                     "striatum whose loss causes Parkinson's disease.",
+         description_fr="La projection dopaminergique de la substance noire vers le "
+                        "striatum dont la perte cause la maladie de Parkinson.",
+         sources=["bjorklund_dunnett2007", "alexander1986"],
          # The dopaminergic projection whose loss causes Parkinson's, with the
          # reciprocal striatonigral return.
          structures=["substantia_nigra", "putamen", "caudate"]),
     dict(id="cerebellar_motor", name="Cortico-cerebellar (motor)",
+         description="The coordination loop: cortex to pons to cerebellum to "
+                     "thalamus and back, tuning the timing of movement.",
+         description_fr="La boucle de coordination : cortex vers pont vers cervelet "
+                        "vers thalamus et retour, ajustant le timing du mouvement.",
+         sources=["middleton2000"],
          # Cortex -> pons -> cerebellum -> thalamus -> cortex: the coordination
          # loop running through the pons and cerebellum.
          structures=["frontal", "pons", "cerebellum", "thalamus"]),
     dict(id="limbic_memory", name="Hippocampal / limbic (Papez)",
+         description="The Papez circuit: the medial-temporal memory loop through "
+                     "hippocampus, fornix, mammillary bodies, anterior thalamus "
+                     "and cingulate.",
+         description_fr="Le circuit de Papez : la boucle mnésique médio-temporale "
+                        "par l'hippocampe, le fornix, les corps mammillaires, le "
+                        "thalamus antérieur et le cingulum.",
+         sources=["papez1937"],
          # The medial-temporal memory loop, now wired through the real fornix,
          # mammillary and cingulate nodes: temporal -> hippocampus -> fornix ->
          # mammillary -> (anterior) thalamus -> cingulate -> hippocampus.
          structures=["temporal", "hippocampus", "fornix", "mammillary",
                      "thalamus", "cingulate"]),
     dict(id="commissures", name="Commissures (interhemispheric)",
+         description="The interhemispheric bridges (corpus callosum + anterior "
+                     "commissure) linking matching cortical areas across the "
+                     "midline.",
+         description_fr="Les ponts interhémisphériques (corps calleux + commissure "
+                        "antérieure) reliant les aires corticales homologues à "
+                        "travers la ligne médiane.",
+         sources=["aboitiz1992", "schmahmann2006"],
          # The left-right cortical bridges: corpus callosum + anterior commissure.
          # Only same-lobe cross-midline arrows fall *between* these structures.
          structures=["frontal", "parietal", "temporal", "occipital"]),
+]
+
+# Projection groups: the legend's per-pathway rows promoted to a sourced data
+# structure (so a group row opens a detail panel like a structure / receptor /
+# drug, not just a focus toggle). The viewer groups the projection arrows two
+# ways depending on the arrow colour mode, so there is one record per group in
+# BOTH modes:
+#   mode="kind" : one per neurotransmitter kind (the default per-transmitter rows,
+#                 e.g. "Serotonin (serotonergic)"); ``key`` is a PROJECTION_COLORS
+#                 kind.
+#   mode="sign" : one per coarse excit/inhib/modulatory sign (the "Potential"
+#                 colour mode rows); ``key`` is a SIGN_LABELS sign.
+# Each record carries a ``name`` + ``description`` (inline {en,fr}, so they bypass
+# the shared FR table like the receptor descriptions), a ``wikipedia`` reference
+# and ``sources`` (SOURCES keys). The member pathways are NOT listed here: the
+# viewer derives them (the projections whose kind / sign matches ``key``), exactly
+# as a circuit derives its arrows, so a group never duplicates the projection list.
+# ``classification_provenance`` grades the grouping/description (LLM-authored).
+PROJECTION_GROUPS: list[dict[str, Any]] = [
+    # --- per-neurotransmitter (mode="kind"); name = the transmitter molecule -----
+    dict(mode="kind", key="excitatory", name="Glutamate",
+         description="The brain's main excitatory transmitter: glutamatergic "
+                     "projections drive their targets, including the "
+                     "corticostriatal and thalamocortical pathways.",
+         description_fr="Le principal neurotransmetteur excitateur du cerveau : les "
+                        "projections glutamatergiques activent leurs cibles, dont "
+                        "les voies cortico-striées et thalamo-corticales.",
+         wikipedia="https://en.wikipedia.org/wiki/Glutamate_(neurotransmitter)",
+         sources=["kandel_principles"]),
+    dict(mode="kind", key="inhibitory", name="GABA",
+         description="The brain's main inhibitory transmitter: GABAergic "
+                     "projections suppress their targets, including the striatal "
+                     "output of the basal ganglia.",
+         description_fr="Le principal neurotransmetteur inhibiteur du cerveau : les "
+                        "projections GABAergiques freinent leurs cibles, dont la "
+                        "sortie striatale des noyaux gris centraux.",
+         wikipedia="https://en.wikipedia.org/wiki/Gamma-Aminobutyric_acid",
+         sources=["kandel_principles"]),
+    dict(mode="kind", key="dopaminergic", name="Dopamine",
+         description="Dopaminergic projections from the midbrain (substantia "
+                     "nigra, VTA) modulate movement, motivation and reward.",
+         description_fr="Les projections dopaminergiques du mésencéphale (substance "
+                        "noire, ATV) modulent le mouvement, la motivation et la "
+                        "récompense.",
+         wikipedia="https://en.wikipedia.org/wiki/Dopaminergic_pathways",
+         sources=["bjorklund_dunnett2007", "kandel_principles"]),
+    dict(mode="kind", key="cholinergic", name="Acetylcholine",
+         description="Cholinergic projections modulate arousal, attention and "
+                     "memory across the cortex and hippocampus.",
+         description_fr="Les projections cholinergiques modulent l'éveil, "
+                        "l'attention et la mémoire dans le cortex et l'hippocampe.",
+         wikipedia="https://en.wikipedia.org/wiki/Cholinergic",
+         sources=["dutar1995", "kandel_principles"]),
+    dict(mode="kind", key="neuroendocrine", name="Releasing hormones",
+         description="Hypothalamic neuroendocrine projections release hormones "
+                     "that control the pituitary and the body's endocrine axes.",
+         description_fr="Les projections neuroendocrines de l'hypothalamus libèrent "
+                        "des hormones qui contrôlent l'hypophyse et les axes "
+                        "endocriniens.",
+         wikipedia="https://en.wikipedia.org/wiki/Releasing_hormone",
+         sources=["swanson_sawchenko1983", "kandel_principles"]),
+    dict(mode="kind", key="serotonergic", name="Serotonin",
+         description="Serotonergic projections from the raphe nuclei diffusely "
+                     "modulate mood, sleep and appetite throughout the brain.",
+         description_fr="Les projections sérotoninergiques des noyaux du raphé "
+                        "modulent diffusément l'humeur, le sommeil et l'appétit "
+                        "dans tout le cerveau.",
+         wikipedia="https://en.wikipedia.org/wiki/Serotonergic",
+         sources=["azmitia_segal1978", "kandel_principles"]),
+    dict(mode="kind", key="noradrenergic", name="Noradrenaline",
+         description="Noradrenergic projections from the locus coeruleus modulate "
+                     "arousal, vigilance and the stress response.",
+         description_fr="Les projections noradrénergiques du locus coeruleus "
+                        "modulent l'éveil, la vigilance et la réponse au stress.",
+         wikipedia="https://en.wikipedia.org/wiki/Norepinephrine",
+         sources=["foote1983", "kandel_principles"]),
+    # --- per-sign (mode="sign"); name = the SIGN_LABELS heading ------------------
+    dict(mode="sign", key="excitatory", name="Excitatory",
+         description="Excitatory pathways depolarize their target, making it more "
+                     "likely to fire (mainly glutamatergic).",
+         description_fr="Les voies excitatrices dépolarisent leur cible, la rendant "
+                        "plus susceptible de décharger (surtout glutamatergiques).",
+         wikipedia="https://en.wikipedia.org/wiki/Excitatory_postsynaptic_potential",
+         sources=["kandel_principles"]),
+    dict(mode="sign", key="inhibitory", name="Inhibitory",
+         description="Inhibitory pathways hyperpolarize their target, making it "
+                     "less likely to fire (mainly GABAergic).",
+         description_fr="Les voies inhibitrices hyperpolarisent leur cible, la "
+                        "rendant moins susceptible de décharger (surtout "
+                        "GABAergiques).",
+         wikipedia="https://en.wikipedia.org/wiki/Inhibitory_postsynaptic_potential",
+         sources=["kandel_principles"]),
+    dict(mode="sign", key="modulatory", name="Modulatory",
+         description="Modulatory pathways (the monoamines and acetylcholine) tune "
+                     "the gain and excitability of their targets rather than "
+                     "directly exciting or inhibiting them.",
+         description_fr="Les voies modulatrices (monoamines et acétylcholine) "
+                        "ajustent le gain et l'excitabilité de leurs cibles plutôt "
+                        "que de les exciter ou inhiber directement.",
+         wikipedia="https://en.wikipedia.org/wiki/Neuromodulation",
+         sources=["kandel_principles"]),
 ]
 
 
@@ -3472,6 +3616,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     structures: list[dict[str, Any]] = []
     projections: list[dict[str, Any]] = []
     circuits: list[dict[str, Any]] = []
+    projection_groups: list[dict[str, Any]] = []
     receptors: list[dict[str, Any]] = []
     drugs: list[dict[str, Any]] = []
     shapes: dict[str, dict[str, Any]] = {}
@@ -3557,11 +3702,59 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                     f"Circuit {circuit['id']!r} references unknown structure "
                     f"{base!r} (no {base}, {base}_R or {base}_L emitted).")
             ids.extend(members)
-        circuits.append({
+        record = {
             "id": circuit["id"],
             "name": _t(circuit["name"]),
             "structures": ids,
-        })
+        }
+        if circuit.get("description"):
+            record["description"] = {"en": circuit["description"],
+                                     "fr": circuit["description_fr"]}
+        if circuit.get("sources"):
+            record["sources"] = _expand_sources(circuit["sources"])
+        circuits.append(record)
+
+    # Projection groups: the legend's per-pathway rows as a sourced data structure
+    # (see PROJECTION_GROUPS). One record per group, in BOTH colour modes; the
+    # member pathways are derived in the viewer (the projections whose kind / sign
+    # matches), so a group never duplicates the projection list. ``key`` is
+    # validated against the kind / sign vocabularies (typo guard).
+    seen_group_ids: set[str] = set()
+    for group in PROJECTION_GROUPS:
+        mode, key = group["mode"], group["key"]
+        if mode == "kind":
+            if key not in PROJECTION_COLORS:
+                raise KeyError(
+                    f"Projection group references unknown kind {key!r}")
+        elif mode == "sign":
+            if key not in SIGN_LABELS:
+                raise KeyError(
+                    f"Projection group references unknown sign {key!r}")
+        else:
+            raise KeyError(f"Projection group {key!r} has unknown mode {mode!r}")
+        gid = f"{mode}_{key}"
+        if gid in seen_group_ids:
+            raise KeyError(f"Duplicate projection-group id {gid!r}")
+        seen_group_ids.add(gid)
+        record = {
+            "id": gid,
+            "mode": mode,
+            "key": key,
+            "name": _t(group["name"]),
+            "description": {"en": group["description"],
+                            "fr": group["description_fr"]},
+            "classification_provenance": _provenance(
+                group.get("classification_provenance", DEFAULT_PROVENANCE),
+                f"projection group {gid!r}"),
+        }
+        if group.get("wikipedia"):
+            record["wikipedia"] = group["wikipedia"]
+            record["wikipedia_provenance"] = _lookup_provenance(
+                WIKIPEDIA_PROVENANCE, gid, f"wikipedia reference for {gid!r}",
+                default=WIKIPEDIA_DEFAULT_PROVENANCE)
+        if group.get("sources"):
+            record["sources"] = _expand_sources(group["sources"])
+        projection_groups.append(record)
 
     # Receptors: validate + normalize each against the known structure bases
     # (locations reference bases like circuits do; the viewer expands them to
@@ -3687,6 +3880,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
 
     return ({"meta": meta, "structures": structures,
              "projections": projections, "circuits": circuits,
+             "projection_groups": projection_groups,
              "receptors": receptors, "drugs": drugs}, shapes)
 
 
@@ -3717,7 +3911,8 @@ def write_artifacts(root: Path) -> None:
         encoding="utf-8")
     log.info("wrote %s", meta_path)
 
-    for name in ("structures", "projections", "circuits", "receptors", "drugs"):
+    for name in ("structures", "projections", "circuits", "projection_groups",
+                 "receptors", "drugs"):
         path = data_dir / f"{name}.jsonl"
         with path.open("w", encoding="utf-8") as fh:
             for record in data[name]:
