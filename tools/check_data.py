@@ -35,9 +35,13 @@ Six families of checks:
 
 3. **TODOs**. A literal ``"TODO"`` placeholder anywhere **outside** a source url
    (e.g. a binding ``note`` left as TODO), plus any focusable target with no
-   ``wikipedia`` (the viewer shows a TODO pill), is a **warning**. Source urls
-   left as ``"TODO"`` are counted and warned about **separately** (they are a
-   known, tracked backlog rather than a stray placeholder).
+   ``wikipedia`` (the viewer shows a NOSOURCE pill), is a **warning**. A source
+   *url* left as ``"TODO"`` is handled **provenance-aware**: the viewer surfaces a
+   source's tiered grade (the pill), never its url, so a missing link on an ``llm``
+   citation is the expected "no free link yet" state (reported as an ``[ok]``
+   count, not a warning); only a source that *claims* a higher grade
+   (``sourced`` / ``verified``) yet still has a ``TODO`` url is **warned** (an
+   inconsistency: it asserts more than its link backs).
 
 4. **Provenance grades**. Every emitted source (a ``sources[].provenance``,
    including the per-binding drug sources) and every wikipedia reference (a
@@ -379,13 +383,38 @@ def check_todos(report, meta, structures, projections, circuits, receptors, drug
         for key in missing_wiki:
             report.warn(f"target {key}: no wikipedia url (shows a TODO pill)")
 
-    # --- source-url TODOs (warned, summarized; this is the known backlog) ---
-    if source_todos:
-        by_kind = Counter(path.split(":", 1)[0].split(".", 1)[0] for path in source_todos)
-        breakdown = ", ".join(f"{count} on {kind}s" for kind, count in sorted(by_kind.items()))
-        report.warn(f"{len(source_todos)} source url(s) still set to \"TODO\" ({breakdown}); "
-                    f"pending real reference links")
-    else:
+    # --- source-url TODOs: provenance-aware (the grade, not the url, is the signal) ---
+    # A url-bearing source carries a provenance grade, and the viewer surfaces that
+    # grade (the grey/yellow/green pill), never the url itself. So a "TODO" url on an
+    # `llm` source (every Stahl / projection citation today) is just the expected "no
+    # free link yet" state, already conveyed by the "?" pill, and is NOT a warning (it
+    # would be standing noise on hundreds of citations). It is only an inconsistency
+    # when a source *claims* a higher grade (sourced / verified) yet offers no link to
+    # back it. `source_todos` (collected by the walk above) is what keeps these out of
+    # the stray-TODO bucket; the real reporting iterates the source objects so it can
+    # read each one's sibling provenance.
+    expected_no_link = 0
+    inconsistent = []
+    for base, record in scan:
+        for i, source in enumerate(record.get("sources", []) or []):
+            if isinstance(source, dict) and source.get("url") == "TODO":
+                if source.get("provenance", "llm") in ("sourced", "verified"):
+                    inconsistent.append(f"{base}.sources[{i}] ({source.get('provenance')})")
+                else:
+                    expected_no_link += 1
+    for cid, corpus in (meta.get("source_corpora", {}) or {}).items():
+        # A book corpus (Stahl) may legitimately have no free url; treat it like an
+        # llm citation (expected, not flagged).
+        if isinstance(corpus, dict) and corpus.get("url") == "TODO":
+            expected_no_link += 1
+
+    for path in inconsistent:
+        report.warn(f"source at {path} is graded sourced/verified but its url is still "
+                    f"\"TODO\" (no link to back that grade)")
+    if expected_no_link:
+        report.ok(f"{expected_no_link} source url(s) have no link yet, all on llm-grade "
+                  f"citations (expected: the provenance pill conveys this, not the url)")
+    elif not inconsistent:
         report.ok("every source url is a real link (no TODO urls)")
 
 
