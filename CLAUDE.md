@@ -332,7 +332,11 @@ js/arrows.js          Builds curved tube+cone arrows for projections; each
                       mergeIndexedGeometries; no addon) so speculative pathways
                       read as "maybe".
 js/labels.js          Floating structure-name labels (three.js CSS2DRenderer):
-                      one hidden label per region, shown on hover or all at once.
+                      one hidden label per region, shown on hover, when "show all"
+                      is on, or when *pinned* (setPinned keeps the selected
+                      structure's label lit regardless of hover, driven off the
+                      selection highlight in js/main.js, so a picked region keeps
+                      its name and hovering another region adds, not replaces).
 js/circuit-schedule.js  Automatic sequencing for the circuit "traveling pulse"
                       animation: scheduleCircuit() turns a circuit's arrow set into
                       a per-arrow firing slot via a BFS over the directed graph
@@ -1305,7 +1309,15 @@ as the WIP banner (`js/error-banner.js`):
     or arrow just swaps the halo, leaving any isolate set intact.
 - **Structure names**: hovering a region with the mouse (or tapping it on a
   touch screen) shows its name as a floating label; tapping empty space clears
-  it. Raycast in `js/main.js` -> `js/labels.js`. The hover pick (`pickHover`) is
+  it. Raycast in `js/main.js` -> `js/labels.js`. **Selecting** a structure (a 3D
+  click, a structure search result, or a related-structure row in another panel)
+  also **pins** its name on: the label stays lit independent of hover for as long
+  as that structure is the active selection, and hovering another region *adds*
+  its label on top instead of replacing the pinned one. The pin is driven off the
+  selection highlight (`selection.onHighlight` -> `labels.setPinned`), so every
+  structure-selecting path behaves identically and any non-structure focus (an
+  arrow / target / drug) or a clear drops it automatically. Raycast in
+  `js/main.js`. The hover pick (`pickHover`) is
   **focus-aware**: while something is focused (a halo'd structure, an isolated
   set, a circuit, a receptor's regions), a focused region the ray passes through
   wins over a nearer non-focused one, so hovering the thing you focused names
