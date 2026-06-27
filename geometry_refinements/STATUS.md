@@ -32,6 +32,14 @@ not touch from another session) | `done` (accepted, committed) | `holdout`
   meshing into a **Web Worker** (keeps the no-build identity; preferred over a
   committed bake). Resolution budget: nuclei 56-72, cortex 96-112.
 - **Provenance of these shapes:** `llm` (Claude-authored, reference-guided).
+- **Imaging:** `sculpt_shot.py` emits all three sheets per structure
+  (`contact.png` renders-only, `refs.png` references-only, `combined.png` both),
+  kept for the human's double-check; the loop critiques mainly off `combined.png`.
+- **Reference images + Syncthing:** this checkout is inside a Syncthing folder that
+  deletes local-only (gitignored) files like `refs/` between commands. So cache
+  reference images in the **session scratchpad** and point `sculpt_shot.py
+  --refs-dir <scratchpad>/refs` at them (re-fetch per session; refs are never
+  committed anyway). Renders are regenerated on demand, so their deletion is moot.
 
 ## Phase 0: infrastructure (do first, once)
 
@@ -135,4 +143,8 @@ tube), **claustrum** (thin sheet).
 (Human leaves correction notes here after each milestone contact-sheet review; the
 loop reads and applies them.)
 
-- (none yet)
+- 2026-06-28 - **Trio milestone reviewed + approved.** Phase 0 + the starter trio
+  (putamen, hippocampus, claustrum) accepted by the human; grind paused here at
+  their request. Next session: resume the per-structure grind from the first
+  `pending` structure (suggested next: the rest of `basal_ganglia`, or do the
+  cortex lobes together as a smooth-union set per Phase 1 / Phase 2).
