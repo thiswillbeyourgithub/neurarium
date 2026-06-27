@@ -1129,16 +1129,24 @@ PAIRED: list[dict[str, Any]] = [
          radii=(1.7, 1.5, 1.6), seed=14, detail=6, noise=0.10,
          octaves=2, medial=True),
     dict(base="insula", name="Insula", group="lobe", fr_gender="f",
-         pos=(2.5, 0.05, 0.55), color="#ae7aa3",
+         pos=(2.2, 0.3, 0.55), color="#ae7aa3",
          # The hidden 5th lobe: cortex buried deep to the lateral (Sylvian)
          # sulcus, overlying the putamen, walled off by the fronto-parietal +
          # temporal opercula. Small lateral patch (flattened mediolaterally), NOT
          # medial. Gyrified like the other lobes (so it gets the gyrus bump). It
          # is mostly tucked inside at explode 0 and revealed by blowing out.
+         # It sits IN the lateral (Sylvian) gap between the opercula, plugging it
+         # so the deep nuclei (putamen) don't show through, but its lateral surface
+         # MUST stay just medial to (inside) those opercula or it pokes out of the
+         # brain: with x-radius 0.46 the lateral edge sits at x=2.66, inside the
+         # frontal (~2.8) and temporal (~2.81 at this y,z) surfaces. It earlier sat
+         # at x=2.5 (radius 0.5, surface reaching x=3.0), so it bulged out in front
+         # of the lobes; pulled too far in (x=2.0) it instead exposed the putamen
+         # through the gap, so it is parked flush in between.
          # NOTE: as a `lobe` blob it takes part in the same-group jigsaw clip
          # against the big lobes; its small size means the seams cut a fair bit
          # off it. Position/size are an anatomical guess: tune in a browser.
-         radii=(0.5, 1.0, 1.25), seed=15, detail=6, noise=0.10,
+         radii=(0.46, 1.05, 1.2), seed=15, detail=6, noise=0.10,
          octaves=2),
     # --- Basal ganglia & deep nuclei (small, inner) ---
     dict(base="caudate", name="Caudate nucleus", group="basal_ganglia",
