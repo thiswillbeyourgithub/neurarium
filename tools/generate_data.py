@@ -1267,28 +1267,33 @@ PAIRED: list[dict[str, Any]] = [
     dict(base="hippocampus", name="Hippocampus", group="limbic",
          pos=(1.3, -0.7, -0.2), color="#b3823e",
          # SDF (self-authored atlas, see geometry_refinements/). Curved
-         # allocortical "seahorse" in the floor of the temporal lobe: a tapered
-         # tube swept antero-posteriorly with the tail curling up toward the
-         # splenium, plus a bulbous, slightly hooked head (the pes hippocampi)
-         # smooth-unioned at the anterior tip (the curve builder cannot do that
-         # merge). Spine is parasagittal (local x~0) so the _L member mirrors
-         # correctly. Authored in local space; `pos` seats it. Provenance: llm.
+         # allocortical "seahorse" in the floor of the temporal lobe. The spline is
+         # a strong C / comma in the sagittal (y-z) plane: the head hooks down and
+         # under at the anterior-inferior tip (pes hippocampi), the body sweeps up
+         # and posteriorly, and the tail hooks up + forward toward the splenium (the
+         # seahorse coil). A deliberately small bulb rounds the pes (not the big
+         # sphere that made the old version read as a teardrop). Spine is
+         # parasagittal (local x~0) so the _L member mirrors correctly. Authored in
+         # local space; `pos` seats it. Provenance: llm.
          shape=dict(
              type="sdf", resolution=96,
-             root=dict(op="displace", amp=0.012, freq=4.5, seed=51, nodes=[
-                 dict(op="smoothUnion", k=0.14, nodes=[
+             root=dict(op="displace", amp=0.010, freq=4.5, seed=51, nodes=[
+                 dict(op="smoothUnion", k=0.12, nodes=[
                      dict(prim="tube",
                           points=[
-                              [0.0, -0.15, 1.05],   # head: anterior + inferior (pes)
-                              [0.0, -0.05, 0.50],
-                              [0.0, 0.05, -0.10],   # body
-                              [0.0, 0.22, -0.70],
-                              [0.0, 0.48, -1.15],   # tail: posterior, curling up
+                              [0.0, -0.38, 1.08],   # head tip: anterior + inferior
+                              [0.0, -0.55, 0.74],   # pes underside, hooked down (lowest)
+                              [0.0, -0.40, 0.32],   # body starts rising
+                              [0.0, -0.12, -0.16],
+                              [0.0, 0.22, -0.55],   # body sweeping up + posterior
+                              [0.0, 0.52, -0.85],   # tail
+                              [0.0, 0.74, -0.68],   # tail tip hooks up + forward
                           ],
-                          profile=[0.26, 0.27, 0.25, 0.19, 0.10]),
-                     # Bulbous hooked head: rounds out the pes and hooks it down +
-                     # anterior past the tube tip.
-                     dict(prim="sphere", center=[0.0, -0.22, 1.02], radius=0.28),
+                          profile=[0.18, 0.21, 0.23, 0.21, 0.18, 0.13, 0.08]),
+                     # Pes hippocampi: a flattened, AP-wider paw (not a round ball),
+                     # so the head reads anatomically rather than as a bulb on a shaft.
+                     dict(prim="ellipsoid", center=[0.0, -0.52, 0.80],
+                          radii=[0.20, 0.16, 0.24]),
                  ]),
              ]),
          )),

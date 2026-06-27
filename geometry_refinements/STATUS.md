@@ -104,10 +104,13 @@ tube), **claustrum** (thin sheet).
 
 ### limbic
 
-- done - hippocampus (paired)  [starter trio] - SDF: tapered swept tube along the
-  seahorse spine + a smooth-unioned bulbous hooked head (pes) + faint displace.
-  Demonstrates the SDF curve/smoothUnion path. Could take a touch more body arch
-  later. Provenance llm.
+- done - hippocampus (paired)  [starter trio] - SDF: tapered tube on a strong
+  sagittal C/comma spline (head hooks down-and-under at the antero-inferior tip,
+  body sweeps up-and-posterior, tail hooks up-and-forward toward the splenium) +
+  a flattened ellipsoidal pes (paw, not a ball) smooth-unioned at the head + faint
+  displace. Reshaped after the first cut read as a near-straight carrot with a
+  teardrop head; now matches the in-situ seahorse curve from the right/iso views.
+  Demonstrates the SDF curve/smoothUnion path. Provenance llm.
 - pending - amygdala (paired)
 - pending - cingulate (paired)
 - pending - fornix (paired)
