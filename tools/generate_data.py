@@ -1400,8 +1400,25 @@ PAIRED: list[dict[str, Any]] = [
     dict(base="subthalamic_nucleus", name="Subthalamic nucleus",
          group="basal_ganglia",
          pos=(1.3, -0.9, -0.6), color="#d37295",
-         # Tiny biconvex lens; flattened in y, smooth.
-         radii=(0.34, 0.26, 0.52), seed=25, detail=5, noise=0.05),
+         # SDF (self-authored atlas, see geometry_refinements/). The tiny biconvex
+         # LENS (lentil) of the subthalamus: two large spheres offset along the
+         # thin (DV) axis, intersected so their overlap is a lens with a crisp
+         # equatorial edge (the lens character a rounded ellipsoid lacks), then
+         # clipped by an AP-elongated ellipsoid so it is longer front-to-back than
+         # wide, under a faint displace; res 60. Authored in local space (y thin);
+         # `pos` seats it. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=60,
+             root=dict(op="displace", amp=0.008, freq=4.5, seed=25, nodes=[
+                 dict(op="smoothIntersect", k=0.05, nodes=[
+                     dict(prim="sphere", center=[0.0, 0.55, 0.0], radius=0.78),
+                     dict(prim="sphere", center=[0.0, -0.55, 0.0], radius=0.78),
+                     # AP-elongated, ML-narrow clip (the lens outline).
+                     dict(prim="ellipsoid", center=[0.0, 0.0, 0.0],
+                          radii=[0.34, 0.5, 0.54]),
+                 ]),
+             ])),
+         ),
     dict(base="substantia_nigra", name="Substantia nigra",
          group="basal_ganglia", fr_gender="f",
          pos=(1.0, -1.4, -1.2), color="#3d3d3d",

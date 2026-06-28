@@ -161,7 +161,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   (thin-DV) ellipsoids smooth-unioned (k=0.30) along an AP arc bowed laterally at
   the middle, under a light displace; res 64. Flat in front view, concave-medial in
   the L+R pair. Replaces the flat ellipsoid. llm.
-- pending - subthalamic_nucleus (paired)
+- done - subthalamic_nucleus (paired) - SDF: a biconvex lens (lentil). Two large
+  spheres offset along the thin DV axis, smooth-intersected so their overlap is a
+  lens with a crisp equatorial edge, clipped by an AP-elongated ellipsoid (longer
+  front-to-back than wide), faint displace; res 60. Replaces the rounded ellipsoid.
+  llm.
 
 ### limbic
 
