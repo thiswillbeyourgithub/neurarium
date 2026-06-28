@@ -194,7 +194,15 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   mediolaterally (~0.22) and tall radially, gentle displace; res 100, explicit
   bounds. Reads as the cingulate gyrus over the corpus callosum. Replaces the round
   curve tube. llm.
-- pending - fornix (paired)
+- holdout - fornix (paired) - kept as the `curve` tapered tube. The fornix is a
+  thin white-matter TRACT, and a round swept tube is the anatomically correct
+  primitive for a fiber bundle, so SDF offers no clear shape win over the existing
+  curve. Possible future refinement (not an SDF win, a topology change): the fornix
+  is really a LYRE (the two crura from the hippocampi fuse into a midline body under
+  the callosum, then split into the two descending columns to the mammillary
+  bodies); modeling that would mean making it a midline structure with a fused body
+  + splaying crura/columns + the hippocampal commissure, instead of the current two
+  mirrored parasagittal arches. Defer unless the human wants it. llm.
 - done - septal_nuclei (paired) - SDF: a small vertical ellipsoid flattened
   mediolaterally (thin in x, set in the thin septal wall), light displace; res 56.
   No distinctive standalone shape, so this is a near-equivalent atlas-medium
