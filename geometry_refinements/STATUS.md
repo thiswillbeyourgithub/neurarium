@@ -181,7 +181,10 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   no view collapses to a bulb-on-a-shaft), slimmer proportions, and the dentate
   beading that finally makes it read as a hippocampus, not a generic tube. Scale
   checked in-context. Provenance llm.
-- pending - amygdala (paired)
+- done - amygdala (paired) - SDF: the almond. A roundcone (tapered capsule) along
+  the antero-superior -> postero-inferior axis: fat rounded AS pole tapering to a
+  blunt PI tip where it caps the head of the hippocampus, light displace; res 64.
+  Verified anterosuperior to the hippocampus head. Replaces the near-sphere blob. llm.
 - pending - cingulate (paired)
 - pending - fornix (paired)
 - pending - septal_nuclei (paired)

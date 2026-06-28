@@ -1547,11 +1547,22 @@ PAIRED: list[dict[str, Any]] = [
          )),
     dict(base="amygdala", name="Amygdala", group="limbic", fr_gender="f",
          pos=(1.45, -0.35, 0.95), color="#9b7bb0",
-         # Almond-shaped nucleus in the medial temporal lobe, just anterior and
-         # superior to the head of the hippocampus (emotion/fear hub). Small
-         # smooth blob. Sits inside the temporal lobe at explode 0. Position is an
-         # anatomical guess: tune in a browser.
-         radii=(0.42, 0.4, 0.42), seed=54, detail=5, noise=0.06),
+         # SDF (self-authored atlas, see geometry_refinements/). The ALMOND
+         # (amygdala = "almond"): an elongated nut, rounded and fat at its
+         # antero-superior pole, tapering postero-inferiorly to a blunter point
+         # where it caps the head of the hippocampus, in the medial temporal lobe
+         # (emotion/fear hub). Modeled as a roundcone (tapered capsule) along that
+         # AS -> PI axis, under a light displace; res 64. Sits inside the temporal
+         # lobe at explode 0. Position is an anatomical guess: tune in a browser.
+         # Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=64,
+             root=dict(op="displace", amp=0.012, freq=3.4, seed=54, nodes=[
+                 dict(prim="roundcone",
+                      a=[0.0, 0.14, 0.30], r1=0.40,    # fat antero-superior pole
+                      b=[0.06, -0.26, -0.34], r2=0.22),  # blunt postero-inferior tip
+             ])),
+         ),
     dict(base="cingulate", name="Cingulate gyrus", group="limbic",
          pos=(0.5, 0.6, 0.0), color="#6fa39c",
          # The limbic-lobe arch: a C-shaped band of cortex on the medial wall,

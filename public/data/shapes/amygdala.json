@@ -1,11 +1,27 @@
 {
-  "type": "blob",
-  "radii": [
-    0.42,
-    0.4,
-    0.42
-  ],
-  "seed": 54,
-  "detail": 5,
-  "noise": 0.06
+  "type": "sdf",
+  "resolution": 64,
+  "root": {
+    "op": "displace",
+    "amp": 0.012,
+    "freq": 3.4,
+    "seed": 54,
+    "nodes": [
+      {
+        "prim": "roundcone",
+        "a": [
+          0.0,
+          0.14,
+          0.3
+        ],
+        "r1": 0.4,
+        "b": [
+          0.06,
+          -0.26,
+          -0.34
+        ],
+        "r2": 0.22
+      }
+    ]
+  }
 }
