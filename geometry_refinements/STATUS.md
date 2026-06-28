@@ -131,7 +131,13 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 - done - putamen (paired)  [starter trio] - SDF: mediolaterally-flattened lens
   (ellipsoid) with a medial scoop (cradles the globus pallidus) + faint surface
   displace. Phase 0 proof structure. Provenance llm.
-- pending - caudate (paired)
+- done - caudate (paired) - SDF: the comma/tadpole. A slim tapered `tube` on a 3D
+  comma spline (head -> body arching over the thalamus -> wispy tail hooking down +
+  forward into the temporal lobe; the tail swings gently lateral so no view
+  collapses flat) smooth-unioned with a distinct bulbous head ovoid, under a light
+  displace; res 112. Ref: BodyParts3D model (head bulges into the frontal horn,
+  tail follows the lateral ventricle). Reads as a clear comma, hidden at explode 0,
+  reveals on explode. Replaces the uniform procedural `curve` tube. llm.
 - pending - globus_pallidus (paired)
 - done - claustrum (paired)  [starter trio] - SDF: a thin (~0.09) curved spherical
   SHELL clipped by an ellipsoid to the claustrum's tall narrow patch (so it is a

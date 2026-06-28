@@ -1288,29 +1288,48 @@ PAIRED: list[dict[str, Any]] = [
          # surfacing only as the lobes blow apart: anatomically deeper and no
          # longer poking out between the lobes.
          pos=(1.2, 1.1, 0.8), color="#ff9da7",
-         # Genuinely C-shaped: a bulbous head (anterior-superior) arching over
-         # and back, then a thin tail curling down and forward. Modeled as a
-         # tapered tube along a parasagittal (x~0) spline so it reads as the
-         # comma it is rather than a convex blob. Spine runs head -> tail; z is
-         # anterior(+), y is superior(+).
+         # SDF (self-authored atlas, see geometry_refinements/). The caudate is
+         # the comma/tadpole of the basal ganglia, wrapping over + behind the
+         # thalamus along the lateral ventricle: a large BULBOUS HEAD (anterior +
+         # superior, bulging into the frontal horn), the body arching up + back
+         # over the thalamus, then a long WISPY TAIL descending at the back and
+         # hooking down + forward into the temporal lobe (toward the amygdala).
+         # Modeled as a slim tapered `tube` on a 3D comma spline (the tail swings
+         # gently LATERAL as it dives into the temporal horn, so no orthogonal
+         # view collapses to a flat C) smooth-unioned with a distinct head bulb,
+         # under a light displace. Mirroring negates x, so the _L tail swings
+         # lateral on the left too. Authored in local space (z anterior+, y
+         # superior+); `pos` seats it. Provenance: llm.
          shape=dict(
-             type="curve",
-             points=[
-                 (0.0, 0.55, 1.05),   # head: anterior + superior, bulbous
-                 (0.0, 0.90, 0.45),   # rising
-                 (0.0, 0.92, -0.35),  # top of the arch, heading posterior
-                 (0.0, 0.55, -1.00),  # descending at the back
-                 (0.0, -0.20, -1.00), # down the posterior wall
-                 (0.0, -0.80, -0.50), # bottom, curling forward
-                 (0.0, -0.98, 0.25),  # tail moving anteriorly
-                 (0.0, -0.85, 0.90),  # tail tip (toward the temporal lobe)
-             ],
-             # Slimmed ~30% from an earlier chunkier tube that read as a fat
-             # "handle"; the real caudate is slender (a bulbous head tapering to a
-             # thin body + wispy tail), so only the head keeps any heft.
-             profile=[0.33, 0.27, 0.23, 0.20, 0.17, 0.13, 0.09, 0.04],
-             seed=21, noise=0.1, radial_segments=14, tubular_segments=110,
-         )),
+             type="sdf", resolution=112,
+             bounds=[[-0.42, -1.25, -1.35], [0.52, 1.2, 1.6]],
+             root=dict(op="displace", amp=0.006, freq=5.0, seed=21, nodes=[
+                 dict(op="smoothUnion", k=0.12, nodes=[
+                     # Body + tail: slim tube tapering head -> wispy tail along the
+                     # comma; the head end is modest (the bulb below adds the heft).
+                     dict(prim="tube",
+                          points=[
+                              [0.0, 0.45, 0.92],    # head/body junction (anterior)
+                              [0.02, 0.72, 0.58],   # body rising
+                              [0.05, 0.88, 0.15],
+                              [0.07, 0.93, -0.30],  # arch peak (superior)
+                              [0.10, 0.82, -0.70],  # starting to descend
+                              [0.15, 0.50, -0.98],  # descending posterior, swinging lateral
+                              [0.19, 0.0, -1.08],   # down the posterior wall (most posterior)
+                              [0.21, -0.50, -0.92], # rounding the back-bottom corner
+                              [0.20, -0.85, -0.50], # bottom, curling forward + lateral
+                              [0.15, -0.97, 0.05],  # tail running anterior under the thalamus
+                              [0.10, -0.90, 0.58],  # tail tip toward the temporal lobe
+                          ],
+                          profile=[0.18, 0.165, 0.155, 0.15, 0.14, 0.125,
+                                   0.105, 0.085, 0.065, 0.05, 0.035]),
+                     # Bulbous head: a tall ovoid (taller than wide, per the front
+                     # view) bulging anterosuperiorly into the frontal horn.
+                     dict(prim="ellipsoid", center=[0.0, 0.42, 1.06],
+                          radii=[0.30, 0.44, 0.40]),
+                 ]),
+             ])),
+         ),
     dict(base="putamen", name="Putamen", group="basal_ganglia",
          pos=(2.0, 0.2, 0.6), color="#f28e2b",
          # SDF (self-authored atlas, see geometry_refinements/). The putamen is
