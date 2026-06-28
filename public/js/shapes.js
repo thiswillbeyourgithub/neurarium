@@ -688,6 +688,10 @@ export function buildStructureMesh(structure) {
   // (see CORTEX_SWIRL); everything else keeps the smooth standard material. A
   // shared onBeforeCompile + cache key means all lobes compile to one program.
   const isLobe = structure.group === "lobe" && CORTEX_SWIRL.enabled;
+  // A lobe can opt out of the painted-on swirl ink with `shape.swirl: false`
+  // (e.g. an SDF lobe whose folds are entirely geometric). Default: swirl on, so
+  // SDF lobes get gentle geometric gyrification PLUS the brainy sulcus ink.
+  const noSwirl = isLobe && structure.shape && structure.shape.swirl === false;
   const material = isLobe
     ? new THREE.MeshToonMaterial({
         color: new THREE.Color(structure.color),
@@ -705,7 +709,7 @@ export function buildStructureMesh(structure) {
         metalness: 0.05,
         side: THREE.DoubleSide,
       });
-  if (isLobe) {
+  if (isLobe && !noSwirl) {
     material.onBeforeCompile = injectCortexSwirl;
     material.customProgramCacheKey = () => "cortex-swirl";
   }

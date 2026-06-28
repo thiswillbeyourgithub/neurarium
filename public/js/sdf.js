@@ -166,11 +166,28 @@ function evalNode(node, x, y, z, deps) {
       return d;
     }
     case "displace": {
-      // Surface bumps: push the surface out/in by amp * noise(p * freq).
+      // Surface relief: push the surface out/in by amp * noise(p).
       const base = evalNode(kids[0], x, y, z, deps);
-      if (!deps.noise3d || !node.amp) return base;
+      if (!node.amp) return base;
       const f = node.freq || 1;
-      const n = deps.noise3d(x * f, y * f, z * f, node.seed || 0);
+      // `ridged`/`octaves` -> fractal (fBm / ridged-multifractal w/ domain warp,
+      // the gyrus/sulcus + folia generator, shared with the blob path). Sampled in
+      // ~unit space (coords / `unit`, default 1) plus an optional `origin` offset
+      // so several structures can share ONE world-space fold field (continuous
+      // folds across abutting lobes). Otherwise: cheap single-octave Perlin.
+      let n;
+      if (node.ridged || node.octaves) {
+        if (!deps.fractalNoise) return base;
+        const u = node.unit || 1;
+        const o = node.origin || [0, 0, 0];
+        n = deps.fractalNoise(
+          (x + o[0]) / u, (y + o[1]) / u, (z + o[2]) / u,
+          node.seed || 0, node.octaves || 4, !!node.ridged, f, node.aniso || [1, 1, 1],
+        );
+      } else {
+        if (!deps.noise3d) return base;
+        n = deps.noise3d(x * f, y * f, z * f, node.seed || 0);
+      }
       return base - node.amp * n;
     }
   }
@@ -274,7 +291,14 @@ export function buildSdfGeometry(spec, deps = {}) {
       const yo = zo + y * N;
       for (let x = 0; x < N; x++) {
         const wx = min[0] + (x / N) * span[0];
-        field[yo + x] = -evalNode(spec.root, wx, wy, wz, deps);
+        let d = -evalNode(spec.root, wx, wy, wz, deps);
+        // A flat (axis-aligned) cut plane makes the sdf exactly 0 at grid points
+        // that land on it; two adjacent zeros make MarchingCubes interpolate
+        // 0/0 -> a NaN vertex, which then poisons the geometry's bounding box and
+        // blanks the viewer's auto-framing. Nudge exact zeros just off the
+        // isosurface so every crossing edge has distinct endpoints.
+        if (d === 0) d = 1e-5;
+        field[yo + x] = d;
       }
     }
   }
@@ -294,22 +318,40 @@ export function buildSdfGeometry(spec, deps = {}) {
   const eps = Math.max(hx, hy, hz) / (N * 8); // sub-voxel weld tolerance
   const inv = 1 / eps;
 
+  // Weld per-triangle (the addon emits a triangle soup, 3 verts per face). A
+  // triangle with any non-finite vertex is dropped whole: MarchingCubes can emit
+  // a rare NaN vertex on a degenerate cell (e.g. a flat cut-plane face), and a
+  // single NaN position poisons the geometry's bounding box/sphere, which blanks
+  // the viewer's auto-framing. Dropping the stray face leaves at most a 1-triangle
+  // pinhole (invisible on the double-sided material) and keeps the mesh finite.
   const lookup = new Map();
   const positions = [];
-  const indices = new Array(vcount);
-  for (let v = 0; v < vcount; v++) {
-    const wx = cx + src[v * 3] * hx;
-    const wy = cy + src[v * 3 + 1] * hy;
-    const wz = cz + src[v * 3 + 2] * hz;
-    const key = `${Math.round(wx * inv)},${Math.round(wy * inv)},${Math.round(wz * inv)}`;
-    let idx = lookup.get(key);
-    if (idx === undefined) {
-      idx = positions.length / 3;
-      lookup.set(key, idx);
-      positions.push(wx, wy, wz);
+  const indices = [];
+  let dropped = 0;
+  for (let t = 0; t + 2 < vcount; t += 3) {
+    const tri = [];
+    for (let k = 0; k < 3; k++) {
+      const v = t + k;
+      const wx = cx + src[v * 3] * hx;
+      const wy = cy + src[v * 3 + 1] * hy;
+      const wz = cz + src[v * 3 + 2] * hz;
+      if (!Number.isFinite(wx) || !Number.isFinite(wy) || !Number.isFinite(wz)) break;
+      tri.push(wx, wy, wz);
     }
-    indices[v] = idx;
+    if (tri.length < 9) { dropped++; continue; }
+    for (let k = 0; k < 9; k += 3) {
+      const wx = tri[k], wy = tri[k + 1], wz = tri[k + 2];
+      const key = `${Math.round(wx * inv)},${Math.round(wy * inv)},${Math.round(wz * inv)}`;
+      let idx = lookup.get(key);
+      if (idx === undefined) {
+        idx = positions.length / 3;
+        lookup.set(key, idx);
+        positions.push(wx, wy, wz);
+      }
+      indices.push(idx);
+    }
   }
+  if (dropped) console.warn(`sdf: dropped ${dropped} degenerate (non-finite) triangle(s)`);
 
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
