@@ -628,7 +628,11 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   groups (the Projections legend rows; tagged `· circuit` / `· pathways`). A row of
   **type-filter chips** (`#search-filters`: All + one per present type, labels reused from
   the section headings) scopes results to one kind; the choice (`activeType`) persists for
-  the session. Picking centers/frames
+  the session. **Hovering** a result transiently applies its full focus (dims the brain to
+  it + dots/flow) so you can compare without committing: each item carries a `preview` thunk
+  (the `select*`/`focus*` helpers' `preview:true` mode = scene focus only, no panel / tab /
+  camera-frame / auto-spread), and leaving the list (`#search-results` mouseleave) restores
+  neutral while a click commits (clears the `previewing` flag). Picking centers/frames
   + **focuses** the matching thing (dims the rest of the brain) + opens its panel,
   uniformly: a structure / connection pick isolates exactly like its legend row (via
   `selectStructure` / `selectConnection`'s `isolate` option), a receptor/drug pick

@@ -3308,7 +3308,7 @@ function connectionSideTag(proj) {
  *   selectStructure:Function, selectConnection:Function,
  *   selectTarget:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug, focusCircuit, focusProjectionGroup }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -3336,8 +3336,10 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       type: "structure",
       label: mesh.userData.structure.name,
       // Frame + isolate, so a search pick dims the rest of the brain exactly like
-      // the structure's legend row (not just a halo in the full brain).
+      // the structure's legend row (not just a halo in the full brain). `preview`
+      // applies the same dim transiently on hover (no frame / panel / spread).
       select: () => selectStructure(mesh, { frame: true, isolate: true }),
+      preview: () => selectStructure(mesh, { isolate: true, preview: true }),
     })),
     ...arrows.map((arrow) => {
       const tag = connectionSideTag(arrow.projection);
@@ -3347,6 +3349,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
         // Frame + isolate, so a connection search pick dims the rest of the brain
         // like the structure / drug / target picks, not just a halo.
         select: () => selectConnection(arrow, { frame: true, isolate: true }),
+        preview: () => selectConnection(arrow, { isolate: true, preview: true }),
       };
     }),
     // Focusable receptors + non-receptor targets (a stub / unlocated target has no
@@ -3361,7 +3364,8 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
         type: "target",
         label: tgt.name + (tag ? ` · ${tag}` : ""),
         keywords: tgt.keywords || "",
-        select: () => selectTarget(tgt),
+        select: () => focusTarget(tgt, { frame: true }),
+        preview: () => focusTarget(tgt, { preview: true }),
       };
     }),
     // Focusable drugs (those with a binding profile). The row shows the primary
@@ -3376,7 +3380,8 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
         class: foldText(drug.categoryLabels.join(" ")),
         nbn: foldText(drug.nbn || ""),
       },
-      select: () => selectDrug(drug),
+      select: () => focusDrug(drug, { frame: true }),
+      preview: () => focusDrug(drug, { preview: true }),
     })),
     // Named circuits (the loops in the Projections section): a pick isolates the
     // loop, plays its traveling pulse and opens its panel, exactly like its legend
@@ -3386,6 +3391,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       label: `${circuit.name} · ${t("search.tagCircuit")}`,
       keywords: circuit.description || "",
       select: () => focusCircuit(circuit, { frame: true }),
+      preview: () => focusCircuit(circuit, { preview: true }),
     })),
     // Projection groups (the per-transmitter / per-sign rows of the Projections
     // legend): a pick pins that whole pathway group + dims the rest + opens its
@@ -3396,6 +3402,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       label: `${group.name} · ${t("search.tagPathways")}`,
       keywords: group.description || "",
       select: () => focusProjectionGroup(group, { frame: true }),
+      preview: () => focusProjectionGroup(group, { preview: true }),
     })),
   ];
 
@@ -3437,6 +3444,13 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   // when there is none. Arrow keys move it; Enter activates it (the first by
   // default, since renderResults pre-highlights row 0).
   let activeIndex = -1;
+  // True while a hover preview (a transient focus, see the row mouseenter) is
+  // applied but not yet committed by a click. Leaving the result list restores the
+  // brain to neutral; a click clears the flag so the committed focus survives.
+  let previewing = false;
+  searchResults.addEventListener("mouseleave", () => {
+    if (previewing) { previewing = false; selection.clear(); }
+  });
   const resultRows = () => [...searchResults.querySelectorAll("li:not(.empty)")];
   function highlight(index) {
     const rows = resultRows();
@@ -3497,11 +3511,18 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       const li = document.createElement("li");
       li.textContent = item.label;
       li.addEventListener("click", () => {
+        previewing = false; // the pick is now the committed focus, not a preview
         item.select();
         closeSearch();
       });
-      // Hovering syncs the highlight, so mouse + keyboard agree on the active row.
-      li.addEventListener("mouseenter", () => highlight(i));
+      // Hovering syncs the highlight (so mouse + keyboard agree on the active row)
+      // AND transiently applies the row's full focus, so you can dim the brain down
+      // to each result in turn to compare them without committing. Restored when the
+      // pointer leaves the list (the #search-results mouseleave below).
+      li.addEventListener("mouseenter", () => {
+        highlight(i);
+        if (item.preview) { item.preview(); previewing = true; }
+      });
       searchResults.appendChild(li);
     });
     highlight(0); // pre-highlight the first match: Enter selects it straight away
@@ -3966,11 +3987,12 @@ async function main() {
   const refreshTargetRows = () => reflectTargets(activeTargetId);
   const targetMeshesOf = (tgt) =>
     tgt.structureIds.map((id) => meshById.get(id)).filter(Boolean);
-  const focusTarget = (tgt, { frame = false } = {}) => {
+  const focusTarget = (tgt, { frame = false, preview = false } = {}) => {
     const meshSet = targetMeshesOf(tgt);
     selection.setCircuit(meshSet, []);
-    autoSpreadIfDeep(meshSet);
     receptorMarkers.show(meshSet, tgt.swatchColor);
+    if (preview) return; // hover preview: dim + dots only, no panel/tab/spread
+    autoSpreadIfDeep(meshSet);
     if (tgt.kind === "receptor") info.showReceptor(tgt.receptor);
     else info.showTarget(tgt);
     // From the search box, frame the regions (the whole brain for a ubiquitous
@@ -4023,13 +4045,14 @@ async function main() {
     const kinds = new Set(drug.flowKinds || []);
     return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
   };
-  const focusDrug = (drug, { frame = false } = {}) => {
+  const focusDrug = (drug, { frame = false, preview = false } = {}) => {
     const meshSet = drugMeshesOf(drug);
     const flowArrows = flowArrowsOf(drug);
     selection.setCircuit(meshSet, flowArrows);
-    autoSpreadIfDeep(meshSet);
     drugAnim.show(drug, meshById);
     circuitAnim.play(flowArrows); // no-op for a drug with no mapped pathways
+    if (preview) return; // hover preview: dim + dots + flow only, no panel/tab/spread
+    autoSpreadIfDeep(meshSet);
     info.showDrug(drug);
     // From the search box, frame the affected regions; from the list row, leave
     // the view where it is.
@@ -4243,8 +4266,8 @@ async function main() {
   // behave the same (target/drug focus is the equivalent setCircuit in focusTarget
   // / focusDrug). Only a plain 3D click stays halo-only (isolate:false), with
   // double-click to isolate.
-  const selectStructure = (mesh, { frame = false, isolate = false } = {}) => {
-    if (frame) focus.focusStructure(mesh);
+  const selectStructure = (mesh, { frame = false, isolate = false, preview = false } = {}) => {
+    if (frame && !preview) focus.focusStructure(mesh);
     // A search result or a detail-panel jump (e.g. a "Found in" region row) picks a
     // structure the way a legend row does: isolate its hemisphere pair so the rest
     // of the brain dims (setCircuit with no pinned arrows is exactly the dimming a
@@ -4256,12 +4279,13 @@ async function main() {
     if (isolate) {
       const group = isolateGroupFor(mesh);
       selection.setCircuit(group, []);
-      autoSpreadIfDeep(group); // a deep nucleus: blow the brain apart so it shows
+      if (!preview) autoSpreadIfDeep(group); // a deep nucleus: blow the brain apart
     }
     // select() drives selection.onHighlight, which pins this structure's label on
     // (so the name stays put after the pointer leaves, and survives hovering other
     // regions), so no explicit setHovered is needed here.
     selection.select(mesh);
+    if (preview) return; // hover preview: apply the scene focus only, no panel/tab
     const structure = mesh.userData.structure;
     info.showStructure(structure);
     openDetailTab(`structure:${structure.id}`, structure.base_name || structure.name,
@@ -4271,8 +4295,8 @@ async function main() {
   // hemispheres differ), so it keys the tab. The reopen re-halos the arrow when
   // one was built; a pathway with no drawn arrow just re-renders the panel.
   const connectionKey = (proj) => `connection:${proj.from}->${proj.to}`;
-  const selectConnection = (arrow, { frame = false, isolate = false } = {}) => {
-    if (frame) focus.focusConnection(arrow);
+  const selectConnection = (arrow, { frame = false, isolate = false, preview = false } = {}) => {
+    if (frame && !preview) focus.focusConnection(arrow);
     // A search result or a detail-panel connection row puts the pathway "fully in
     // focus" like every other search pick: pin the arrow + its two endpoints opaque
     // and dim the rest of the brain (setCircuit), the same focus a projection-group
@@ -4282,9 +4306,10 @@ async function main() {
     if (isolate && arrow.fromMesh && arrow.toMesh) {
       const ends = [arrow.fromMesh, arrow.toMesh];
       selection.setCircuit(ends, [arrow]);
-      autoSpreadIfDeep(ends);
+      if (!preview) autoSpreadIfDeep(ends);
     }
     selection.selectArrow(arrow); // halo the arrow on top of the focus
+    if (preview) return; // hover preview: scene focus only, no panel/tab
     const proj = arrow.projection;
     info.show(proj);
     openDetailTab(connectionKey(proj), proj.label || t("info.connection"),
@@ -4368,12 +4393,13 @@ async function main() {
     circuit.structures.map((id) => meshById.get(id)).filter(Boolean);
   const arrowsAmong = (meshSet) =>
     arrows.filter((a) => meshSet.has(a.fromMesh) && meshSet.has(a.toMesh));
-  const focusCircuit = (circuit, { frame = false } = {}) => {
+  const focusCircuit = (circuit, { frame = false, preview = false } = {}) => {
     const cMeshes = circuitMeshesOf(circuit);
     const cArrows = arrowsAmong(new Set(cMeshes));
     selection.setCircuit(cMeshes, cArrows);
-    autoSpreadIfDeep(cMeshes);
     circuitAnim.play(cArrows);
+    if (preview) return; // hover preview: dim + pulse only, no panel/tab/spread
+    autoSpreadIfDeep(cMeshes);
     info.showCircuit(circuit);
     if (frame && cMeshes.length) focus.focusMeshes(cMeshes);
     openDetailTab(`circuit:${circuit.id}`, circuit.name, () => focusCircuit(circuit));
@@ -4385,10 +4411,11 @@ async function main() {
     !a.tentative
     && (group.mode === "sign" ? a.projection.sign === group.key
                               : a.projection.kind === group.key));
-  const focusProjectionGroup = (group, { frame = false } = {}) => {
+  const focusProjectionGroup = (group, { frame = false, preview = false } = {}) => {
     const gArrows = groupArrowsOf(group);
     const gMeshes = [...new Set(gArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
     selection.setCircuit(gMeshes, gArrows); // pin the arrows, no pulse
+    if (preview) return; // hover preview: dim only, no panel/tab/spread
     autoSpreadIfDeep(gMeshes);
     info.showProjectionGroup(group);
     if (frame && gMeshes.length) focus.focusMeshes(gMeshes);
@@ -4439,7 +4466,7 @@ async function main() {
 
   const { autoSpread, autoSpreadIfDeep } = wireControls(
     { controls, meshes, arrows, labels, focus, selection, projVis, cull });
-  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug, focusCircuit, focusProjectionGroup });
+  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
