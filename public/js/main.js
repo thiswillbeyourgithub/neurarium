@@ -3212,7 +3212,9 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   const items = [
     ...meshes.map((mesh) => ({
       label: mesh.userData.structure.name,
-      select: () => selectStructure(mesh, { frame: true }),
+      // Frame + isolate, so a search pick dims the rest of the brain exactly like
+      // the structure's legend row (not just a halo in the full brain).
+      select: () => selectStructure(mesh, { frame: true, isolate: true }),
     })),
     ...arrows.map((arrow) => {
       const tag = connectionSideTag(arrow.projection);
@@ -4033,8 +4035,17 @@ async function main() {
   // "halo it + label/panel it + maybe frame the camera" sequence lives in one
   // place instead of being copy-pasted at each entry point. `frame` moves the
   // camera (search / double-click); a plain click leaves the view where it is.
-  const selectStructure = (mesh, { frame = false } = {}) => {
+  const selectStructure = (mesh, { frame = false, isolate = false } = {}) => {
     if (frame) focus.focusStructure(mesh);
+    // A search result or a detail-panel jump (e.g. a "Found in" region row) picks a
+    // structure the way a legend row does: isolate its hemisphere pair so the rest
+    // of the brain dims (setCircuit with no pinned arrows is exactly the dimming a
+    // legend-row toggleIsolate produces). A plain 3D click and the legend's own
+    // onPickStructure pass isolate:false: the 3D click stays halo-only (double-click
+    // isolates), and the legend has already toggled the isolate set itself (kept
+    // additive there). The tab's reopen thunk preserves `isolate` so re-activating a
+    // search/detail tab restores the dim, not just the halo.
+    if (isolate) selection.setCircuit(isolateGroupFor(mesh), []);
     // select() drives selection.onHighlight, which pins this structure's label on
     // (so the name stays put after the pointer leaves, and survives hovering other
     // regions), so no explicit setHovered is needed here.
@@ -4042,7 +4053,7 @@ async function main() {
     const structure = mesh.userData.structure;
     info.showStructure(structure);
     openDetailTab(`structure:${structure.id}`, structure.base_name || structure.name,
-      () => selectStructure(mesh));
+      () => selectStructure(mesh, { isolate }));
   };
   // A projection has no id field, but a from->to pair is unique per pathway (the
   // hemispheres differ), so it keys the tab. The reopen re-halos the arrow when
@@ -4080,7 +4091,7 @@ async function main() {
   info.onStructure((base) => {
     const id = [base, `${base}_R`, `${base}_L`].find((sid) => meshById.has(sid));
     const mesh = id && meshById.get(id);
-    if (mesh) selectStructure(mesh, { frame: true });
+    if (mesh) selectStructure(mesh, { frame: true, isolate: true });
   });
 
   // Clicking a drug in a receptor / target panel's "Interacting drugs" list focuses
