@@ -90,16 +90,29 @@ smooth-union set (see CLAUDE.md Phase 1 / Phase 2), not in isolation.
 Starter trio (Phase 0 step 6): **putamen** (convex blob), **hippocampus** (curved
 tube), **claustrum** (thin sheet).
 
-### lobe (cortex; convert as a coordinated set, review on a whole-hemisphere render)
+### lobe (cortex; converted as a coordinated set, reviewed on a whole-hemisphere render)
 
-- drafting - frontal (paired) - SDF staged (gyrated ellipsoid via ridged-fractal
-  displace + flat medial wall plane), but UNVERIFIED: the viewer is currently
-  crashed by another session's uncommitted main.js (see Milestone log), so it has
-  not been render-checked or committed yet. Resume + verify once main.js loads.
-- pending - parietal (paired)
-- pending - temporal (paired)
-- pending - occipital (paired)
-- pending - insula (paired)
+The four main lobes are sectors of ONE shared cortical-mantle ellipsoid
+(`_cortex_lobe` in generate_data.py), carved by shared axis-aligned cut planes
+(sylvian y=-0.05, central z=0.4, parieto-occipital z=-1.9) + a flat medial wall,
+so at explode 0 they reassemble into a single continuous hemisphere instead of a
+cluster of balls. Gentle GEOMETRIC gyri (shared world-space fold field, origin=pos
+-> continuous across seams) + the swirl-ink shader on top. Validated: one dome at
+explode 0, both hemispheres meet at the midline, wedges separate cleanly on
+explode, no NaN/blank, check_data clean.
+
+- done - frontal (paired) - anterior-superior sector (z>0.4, y>-0.05). llm.
+- done - parietal (paired) - superior-middle sector (-1.9<z<0.4, y>-0.05). llm.
+- done - temporal (paired) - inferolateral sector (y<-0.05, z>-1.9); NOTE now
+  reaches the midline (was deliberately lateral as a blob), pending human OK. llm.
+- done - occipital (paired) - posterior cap (z<-1.9). llm.
+- pending - insula (paired) - still a blob; lost its jigsaw clips when its lobe
+  neighbours became SDF, so it now pokes out of the lateral surface. Convert to a
+  small SDF patch tucked under the opercula (inside the sylvian sector).
+
+Known refinements (post-milestone): cut seams are straight/axis-aligned (tilt the
+planes -> oblique fissures like the real central/sylvian); tuck the insula; the
+temporal-reaches-midline change; overall dome scale/position fine-tune.
 
 ### basal_ganglia
 
@@ -164,6 +177,14 @@ tube), **claustrum** (thin sheet).
 (Human leaves correction notes here after each milestone contact-sheet review; the
 loop reads and applies them.)
 
+- 2026-06-28 - **Cortex carved into one dome (milestone, awaiting human review).**
+  Settled the fold treatment (gentle geometric gyrification + the swirl ink reads
+  as cortex; ridged-only read as eroded rock, swirl-only as a smooth ball). Then
+  the real fix for the ball-cluster: the four lobes are now sectors of one shared
+  cortical-mantle ellipsoid, carved by shared planes, reassembling into a single
+  continuous hemisphere. Fixed a mesher NaN (flat cut-plane faces -> MarchingCubes
+  0/0 -> NaN vertex -> blank framing). Committed (infra 69a0ef6 + the carve).
+  Remaining: insula tuck, oblique seams, temporal-midline OK, dome fine-tune.
 - 2026-06-28 - **Cortex grind started, then BLOCKED.** Began the cortex (frontal
   lobe SDF + the ridged-fractal `displace` extension), but the viewer is crashed by
   an unrelated, uncommitted in-flight feature in `public/js/main.js` from another

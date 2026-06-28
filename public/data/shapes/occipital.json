@@ -1,29 +1,72 @@
 {
-  "type": "blob",
-  "radii": [
-    1.7,
-    1.5,
-    1.6
+  "type": "sdf",
+  "resolution": 84,
+  "bounds": [
+    [
+      -0.84,
+      -2.38,
+      -0.83
+    ],
+    [
+      2.16,
+      1.98,
+      1.18
+    ]
   ],
-  "seed": 14,
-  "detail": 6,
-  "noise": 0.1,
-  "octaves": 2,
-  "clip": {
-    "xmin": -0.66
-  },
-  "clip_planes": [
-    {
-      "point": [
-        0.061,
-        0.494,
-        1.27
-      ],
-      "normal": [
-        0.045,
-        0.362,
-        0.931
-      ]
-    }
-  ]
+  "root": {
+    "op": "subtract",
+    "nodes": [
+      {
+        "op": "intersect",
+        "nodes": [
+          {
+            "op": "displace",
+            "octaves": 2,
+            "freq": 2.2,
+            "amp": 0.13,
+            "unit": 1.9,
+            "seed": 14,
+            "origin": [
+              0.72,
+              0.75,
+              -2.9
+            ],
+            "nodes": [
+              {
+                "prim": "ellipsoid",
+                "center": [
+                  0.43,
+                  -0.2,
+                  2.75
+                ],
+                "radii": [
+                  1.55,
+                  2.0,
+                  3.4
+                ]
+              }
+            ]
+          },
+          {
+            "prim": "plane",
+            "normal": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "offset": 1.0
+          }
+        ]
+      },
+      {
+        "prim": "plane",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "offset": -0.66
+      }
+    ]
+  }
 }

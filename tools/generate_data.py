@@ -1104,45 +1104,101 @@ def _side_name(base: dict[str, str], gender: str, side: str) -> dict[str, str]:
 #   profile : tube radius sampled head -> tail (interpolated along the spine)
 #   seed/noise/radial_segments/tubular_segments : surface wobble + tessellation
 
+# Half-width of the longitudinal fissure: each cortical lobe's medial face is
+# cut flat at world x = +/- this, so the left and right hemispheres meet along a
+# thin midline gap instead of overlapping into one ball. Small = tight fissure.
+MIDLINE_GAP = 0.06
+
+# --- Cortical dome (SDF) -----------------------------------------------------
+# The cerebral cortex is authored as ONE shared right-hemisphere ellipsoid (the
+# "cortical mantle"); each lobe is a sector of it carved by shared cut planes, so
+# at explode 0 the lobes reassemble into a single continuous dome instead of
+# reading as a cluster of separate balls. The gyral relief is a gentle GEOMETRIC
+# displace (lumpy silhouette) sampled from one shared WORLD-space fold field, so
+# the folds line up across seams; the brainy sulcus ink is still the swirl
+# shader on top. (See geometry_refinements/.)
+CORTEX_DOME_CENTER = (1.15, 0.55, -0.15)  # world coords, right hemisphere
+CORTEX_DOME_RADII = (1.55, 2.0, 3.4)      # M-L, S-I, A-P (anteroposterior longest)
+_AXIS_INDEX = {"x": 0, "y": 1, "z": 2}
+
+
+def _cortex_lobe(pos, cuts, *, seed, resolution=84):
+    """SDF spec for one cortical lobe: a sector of the shared cortical dome.
+
+    ``cuts`` selects this lobe's territory of the dome as half-space cuts given
+    in WORLD coords, e.g. ``("z", ">", 0.4)`` keeps the dome where ``z > 0.4``.
+    Adjacent lobes share the same value on a face, so their flat cut faces are
+    coincident and they abut seamlessly. The dome ellipsoid, its gyral
+    ``displace`` and every cut plane are translated into the lobe's local frame
+    (local = world - ``pos``); the displace samples a shared WORLD-space fold
+    field (``origin = pos``) so the gyri are continuous across the seams. A flat
+    medial wall (``plane`` at world ``x = MIDLINE_GAP``) is subtracted last.
+    Tight per-lobe ``bounds`` (the wedge AABB) keep the meshing cheap + crisp.
+    """
+    cx, cy, cz = CORTEX_DOME_CENTER
+    lo = [cx - CORTEX_DOME_RADII[0], cy - CORTEX_DOME_RADII[1], cz - CORTEX_DOME_RADII[2]]
+    hi = [cx + CORTEX_DOME_RADII[0], cy + CORTEX_DOME_RADII[1], cz + CORTEX_DOME_RADII[2]]
+    lo[0] = max(lo[0], MIDLINE_GAP)  # the medial wall trims the AABB
+    # Cut planes -> SDF half-spaces (sdPlane inside = dot(p,n) < offset): ">"
+    # keeps axis>value (normal -axis); "<" keeps axis<value (normal +axis).
+    plane_nodes = []
+    for axis, side, value in cuts:
+        i = _AXIS_INDEX[axis]
+        normal = [0.0, 0.0, 0.0]
+        normal[i] = -1.0 if side == ">" else 1.0
+        local_value = value - pos[i]
+        offset = -local_value if side == ">" else local_value
+        plane_nodes.append(dict(prim="plane", normal=normal, offset=round(offset, 4)))
+        if side == ">":
+            lo[i] = max(lo[i], value)
+        else:
+            hi[i] = min(hi[i], value)
+    dome = dict(prim="ellipsoid",
+                center=[round(cx - pos[0], 4), round(cy - pos[1], 4), round(cz - pos[2], 4)],
+                radii=list(CORTEX_DOME_RADII))
+    folded = dict(op="displace", octaves=2, freq=2.2, amp=0.13, unit=1.9, seed=seed,
+                  origin=[round(pos[0], 4), round(pos[1], 4), round(pos[2], 4)],
+                  nodes=[dome])
+    wedge = dict(op="intersect", nodes=[folded, *plane_nodes])
+    medial = dict(prim="plane", normal=[1.0, 0.0, 0.0],
+                  offset=round(MIDLINE_GAP - pos[0], 4))
+    margin = 0.18  # cover the gyral displace (amp 0.13) pushing past the AABB
+    bounds = [[round(lo[i] - pos[i] - margin, 3) for i in range(3)],
+              [round(hi[i] - pos[i] + margin, 3) for i in range(3)]]
+    return dict(type="sdf", resolution=resolution, bounds=bounds,
+                root=dict(op="subtract", nodes=[wedge, medial]))
+
+
+def _cortex_lobe_entry(base, name, color, pos, cuts, seed):
+    """A PAIRED cortical-lobe entry whose shape is a sector of the shared dome.
+
+    ``pos`` is written once and threaded into both the entry and the SDF
+    local-frame translation, so the two can never drift apart.
+    """
+    return dict(base=base, name=name, group="lobe", pos=pos, color=color,
+                shape=_cortex_lobe(pos, cuts, seed=seed))
+
+
 # name, group, right-side position, color, radii, seed, detail, noise
 PAIRED: list[dict[str, Any]] = [
     # --- Cortical lobes (large, outer shell) ---
-    dict(base="frontal", name="Frontal lobe", group="lobe",
-         # Cortical lobes share a muted pink palette (low saturation so they read
-         # as one cortex, not "pop" colors), each a slightly different hue so the
-         # four stay tellable apart: frontal=rose, parietal=pink, temporal=salmon,
-         # occipital=mauve-pink.
-         pos=(0.85, 1.0, 2.2), color="#c58c9a",
-         # Largest lobe; a smooth gyrified dome whose surface "curls" are a
-         # shading normal-map (GYRUS_BUMP in shapes.js), not geometry, so the mesh
-         # stays smooth (no faceting) and the curls are lighting only.
-         # Anterior-superior quadrant of the hemisphere; `medial` gives it a flat
-         # wall at the midline so left+right meet at the longitudinal fissure.
-         # Lobes are sized to overlap their neighbors so the union reads as one
-         # continuous cortical surface (no gaps) when assembled at explode 0.
-         radii=(1.95, 1.8, 2.1), seed=11, detail=6, noise=0.10,
-         octaves=2, medial=True),
-    dict(base="parietal", name="Parietal lobe", group="lobe",
-         pos=(0.85, 1.8, -0.2), color="#c69597",
-         # Superior-posterior quadrant, behind the frontal and above the
-         # occipital; smooth dome with a flat medial wall at the fissure (the
-         # surface "curls" are a shading normal-map, see GYRUS_BUMP in shapes.js).
-         radii=(1.9, 1.7, 1.8), seed=12, detail=6, noise=0.10,
-         octaves=2, medial=True),
-    dict(base="temporal", name="Temporal lobe", group="lobe",
-         pos=(1.95, -0.75, 0.6), color="#c79a8e",
-         # Inferior-lateral, elongated antero-posteriorly (a finger-shaped lobe).
-         # It sits below the Sylvian fissure so it is NOT medial (stays lateral,
-         # not at the midline); its top is clipped flat (ymax) to seat under the
-         # fronto-parietal mass.
-         radii=(1.25, 1.1, 2.15), seed=13, detail=6, noise=0.10,
-         octaves=2, clip=dict(ymax=0.95)),
-    dict(base="occipital", name="Occipital lobe", group="lobe",
-         pos=(0.72, 0.75, -2.9), color="#bf8da6",
-         # Smallest lobe, the posterior pole; compact, behind the parietal and
-         # above the cerebellum, with a flat medial wall.
-         radii=(1.7, 1.5, 1.6), seed=14, detail=6, noise=0.10,
-         octaves=2, medial=True),
+    # The four main lobes are sectors of ONE shared cortical dome (see
+    # _cortex_lobe), carved by planes they share so they reassemble seamlessly at
+    # explode 0. Territories (world coords; the cuts tile the dome with no gaps):
+    #   sylvian  y = -0.05  (temporal below it, fronto-parietal above)
+    #   central  z =  0.40  (frontal anterior of it, parietal behind)
+    #   par-occ  z = -1.90  (occipital is the whole posterior cap)
+    # Muted pink palette, low saturation so they read as one cortex; each a
+    # slightly different hue (frontal=rose, parietal=pink, temporal=salmon,
+    # occipital=mauve-pink) so the four stay tellable apart. Provenance: llm.
+    _cortex_lobe_entry("frontal", "Frontal lobe", "#c58c9a", (0.85, 1.0, 2.2),
+                       [("z", ">", 0.4), ("y", ">", -0.05)], 11),
+    _cortex_lobe_entry("parietal", "Parietal lobe", "#c69597", (0.85, 1.8, -0.2),
+                       [("z", "<", 0.4), ("z", ">", -1.9), ("y", ">", -0.05)], 12),
+    _cortex_lobe_entry("temporal", "Temporal lobe", "#c79a8e", (1.95, -0.75, 0.6),
+                       [("y", "<", -0.05), ("z", ">", -1.9)], 13),
+    _cortex_lobe_entry("occipital", "Occipital lobe", "#bf8da6", (0.72, 0.75, -2.9),
+                       [("z", "<", -1.9)], 14),
     dict(base="insula", name="Insula", group="lobe", fr_gender="f",
          pos=(2.2, 0.3, 0.55), color="#ae7aa3",
          # The hidden 5th lobe: cortex buried deep to the lateral (Sylvian)
@@ -2989,12 +3045,6 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
     if mirror:
         record["mirror"] = True
     return record
-
-
-# Half-width of the longitudinal fissure: each cortical lobe's medial face is
-# cut flat at world x = +/- this, so the left and right hemispheres meet along a
-# thin midline gap instead of overlapping into one ball. Small = tight fissure.
-MIDLINE_GAP = 0.06
 
 
 def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
