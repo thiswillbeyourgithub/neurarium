@@ -150,7 +150,12 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   rounds the rim; explicit tight bounds resolve the thin sheet cheaply.
   Demonstrates the SDF shell/intersect (thin-sheet) path. Provenance llm.
 - pending - accumbens (paired)
-- pending - thalamus (paired)
+- done - thalamus (paired) - SDF: the egg. A single tapered roundcone (narrow
+  rounded anterior pole -> bulbous posterior pulvinar) gives a clean teardrop with
+  no fused-balls waist; axis tilted anteromedial -> posterolateral, under a light
+  displace; res 80. Ref: BodyParts3D model + dorsal nuclei schematic (pulvinar
+  overhang, AM->PL long axis). L+R pair flanks the midline correctly. Replaces the
+  symmetric blob. llm.
 - pending - substantia_nigra (paired)
 - pending - subthalamic_nucleus (paired)
 

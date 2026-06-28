@@ -1377,9 +1377,26 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="thalamus", name="Thalamus", group="basal_ganglia",
          pos=(0.9, 0.4, -0.6), color="#bab0ac",
-         # Large ovoid "egg", the biggest deep nucleus; smooth, slightly
-         # elongated antero-posteriorly.
-         radii=(0.82, 0.78, 1.1), seed=24, detail=5, noise=0.05),
+         # SDF (self-authored atlas, see geometry_refinements/). The biggest deep
+         # nucleus: an elongated EGG with a narrower anterior pole (the anterior
+         # tubercle) and a bulbous posterior PULVINAR overhanging the geniculate
+         # bodies, the long axis running anteromedial -> posterolateral. Modeled as
+         # a main ovoid smooth-unioned with a posterolateral pulvinar sphere
+         # (asymmetry = the egg taper + the tilt), under a light displace; the
+         # anterior ellipsoid is nudged medial, the pulvinar lateral. Mirroring
+         # negates x, so the _L tilt is correct on the left. Authored in local
+         # space (z anterior+, x lateral+); `pos` seats it. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=80,
+             # A single tapered roundcone = a clean teardrop egg (narrow rounded
+             # anterior pole -> bulbous posterior pulvinar), no fused-balls waist.
+             # The axis is tilted anteromedial(up) -> posterolateral(down).
+             root=dict(op="displace", amp=0.012, freq=3.0, seed=24, nodes=[
+                 dict(prim="roundcone",
+                      a=[-0.08, 0.05, 0.78], r1=0.46,   # anterior pole (narrow)
+                      b=[0.12, -0.05, -0.62], r2=0.70),  # posterior pulvinar (bulbous)
+             ])),
+         ),
     dict(base="subthalamic_nucleus", name="Subthalamic nucleus",
          group="basal_ganglia",
          pos=(1.3, -0.9, -0.6), color="#d37295",
