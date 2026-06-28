@@ -1121,62 +1121,115 @@ CORTEX_DOME_CENTER = (1.15, 0.55, -0.15)  # world coords, right hemisphere
 CORTEX_DOME_RADII = (1.55, 2.0, 3.4)      # M-L, S-I, A-P (anteroposterior longest)
 _AXIS_INDEX = {"x": 0, "y": 1, "z": 2}
 
+# Shared lobe-boundary planes (world coords; the listed normal points INTO the
+# kept side). Reused across lobes so their cut faces are coincident and the lobes
+# abut exactly. The fissures are tilted (oblique) so the seams read like the real
+# central / Sylvian fissures, not axis-aligned slabs.
+_CENTRAL_PT = (1.15, 0.55, 0.4)      # central sulcus: frontal (anterior) | parietal
+_CENTRAL_N_FRONT = (0.0, 0.32, 1.0)  # -> into the frontal side; tilt = slopes forward going down
+_SYLVIAN_PT = (1.15, -0.1, 0.2)      # lateral (Sylvian) fissure: fronto-parietal | temporal
+_SYLVIAN_N_UP = (0.0, 1.0, 0.18)     # -> into the upper side; tilt = rises posteriorly
+_PAR_OCC_Z = -1.9                    # parieto-occipital: occipital is the posterior cap
+_TEMPORAL_MEDIAL_X = 0.95            # temporal stays lateral of this parasagittal plane
 
-def _cortex_lobe(pos, cuts, *, seed, resolution=84):
-    """SDF spec for one cortical lobe: a sector of the shared cortical dome.
 
-    ``cuts`` selects this lobe's territory of the dome as half-space cuts given
-    in WORLD coords, e.g. ``("z", ">", 0.4)`` keeps the dome where ``z > 0.4``.
-    Adjacent lobes share the same value on a face, so their flat cut faces are
-    coincident and they abut seamlessly. The dome ellipsoid, its gyral
-    ``displace`` and every cut plane are translated into the lobe's local frame
-    (local = world - ``pos``); the displace samples a shared WORLD-space fold
-    field (``origin = pos``) so the gyri are continuous across the seams. A flat
-    medial wall (``plane`` at world ``x = MIDLINE_GAP``) is subtracted last.
-    Tight per-lobe ``bounds`` (the wedge AABB) keep the meshing cheap + crisp.
+def _neg(v):
+    return (-v[0], -v[1], -v[2])
+
+
+# The temporal "bite": the region below the Sylvian fissure AND lateral of the
+# temporal parasagittal plane. Subtracted from the frontal + parietal lobes so
+# they keep their inferomedial / orbital surface (which reaches the base medially)
+# while the temporal owns just this lateral inferior wedge (so it no longer slabs
+# across the midline). The same plane definitions feed the temporal's own
+# intersect, so the shared faces are coincident and the lobes abut.
+_TEMPORAL_BITE = [("plane", _neg(_SYLVIAN_N_UP), _SYLVIAN_PT),
+                  ("x", ">", _TEMPORAL_MEDIAL_X)]
+
+
+def _cut_to_plane(cut, pos):
+    """One territory cut -> an SDF half-space ``plane`` node (in local coords).
+
+    Two forms (both in WORLD coords; ``local = world - pos``):
+      * axis-aligned ``("z", ">", 0.4)`` keeps ``axis > value`` (or ``"<"``);
+      * oblique ``("plane", inward_normal, point)`` keeps the half-space the
+        inward normal points into.
+    Returns ``(plane_node, axis_clamp)`` where ``axis_clamp`` is
+    ``(index, side, value)`` for AABB tightening, or ``None`` (oblique: the dome
+    AABB already bounds it).
     """
-    cx, cy, cz = CORTEX_DOME_CENTER
-    lo = [cx - CORTEX_DOME_RADII[0], cy - CORTEX_DOME_RADII[1], cz - CORTEX_DOME_RADII[2]]
-    hi = [cx + CORTEX_DOME_RADII[0], cy + CORTEX_DOME_RADII[1], cz + CORTEX_DOME_RADII[2]]
-    lo[0] = max(lo[0], MIDLINE_GAP)  # the medial wall trims the AABB
-    # Cut planes -> SDF half-spaces (sdPlane inside = dot(p,n) < offset): ">"
-    # keeps axis>value (normal -axis); "<" keeps axis<value (normal +axis).
-    plane_nodes = []
-    for axis, side, value in cuts:
+    if cut[0] in _AXIS_INDEX:
+        axis, side, value = cut
         i = _AXIS_INDEX[axis]
         normal = [0.0, 0.0, 0.0]
         normal[i] = -1.0 if side == ">" else 1.0
         local_value = value - pos[i]
         offset = -local_value if side == ">" else local_value
-        plane_nodes.append(dict(prim="plane", normal=normal, offset=round(offset, 4)))
-        if side == ">":
-            lo[i] = max(lo[i], value)
-        else:
-            hi[i] = min(hi[i], value)
+        return dict(prim="plane", normal=normal, offset=round(offset, 4)), (i, side, value)
+    _, n_in, p = cut
+    normal = [-n_in[0], -n_in[1], -n_in[2]]  # sdPlane inside = dot(local, n) < offset
+    offset = -sum(n_in[k] * (p[k] - pos[k]) for k in range(3))
+    return dict(prim="plane", normal=[round(v, 4) for v in normal], offset=round(offset, 4)), None
+
+
+def _region_node(region, pos):
+    """A set of cuts -> one SDF node that is solid inside their intersection."""
+    planes = [_cut_to_plane(c, pos)[0] for c in region]
+    return planes[0] if len(planes) == 1 else dict(op="intersect", nodes=planes)
+
+
+def _cortex_lobe(pos, cuts, *, seed, subtract_regions=None, resolution=92):
+    """SDF spec for one cortical lobe: a sector of the shared cortical dome.
+
+    ``cuts`` selects this lobe's territory as the intersection of the dome with a
+    set of half-space cuts (see ``_cut_to_plane``). ``subtract_regions`` removes
+    further regions (each a list of cuts intersected together) AFTER the
+    intersection: this is how the temporal "bite" (below Sylvian AND lateral) is
+    carved out of the frontal/parietal lobes so they keep their inferomedial /
+    orbital surface while the temporal stays a lateral wedge. The dome ellipsoid,
+    its gyral ``displace`` and every plane are translated into the lobe's local
+    frame; the displace samples a shared WORLD-space fold field (``origin = pos``)
+    so the gyri are continuous across seams. A flat medial wall (world
+    ``x = MIDLINE_GAP``) is subtracted last. ``bounds`` is the wedge AABB tightened
+    by the axis-aligned cuts (oblique cuts fall back to the dome extent).
+    """
+    c, r = CORTEX_DOME_CENTER, CORTEX_DOME_RADII
+    lo = [c[i] - r[i] for i in range(3)]
+    hi = [c[i] + r[i] for i in range(3)]
+    lo[0] = max(lo[0], MIDLINE_GAP)  # the medial wall trims the AABB
+    plane_nodes = []
+    for cut in cuts:
+        node, clamp = _cut_to_plane(cut, pos)
+        plane_nodes.append(node)
+        if clamp:
+            i, side, value = clamp
+            if side == ">":
+                lo[i] = max(lo[i], value)
+            else:
+                hi[i] = min(hi[i], value)
     dome = dict(prim="ellipsoid",
-                center=[round(cx - pos[0], 4), round(cy - pos[1], 4), round(cz - pos[2], 4)],
-                radii=list(CORTEX_DOME_RADII))
+                center=[round(c[i] - pos[i], 4) for i in range(3)], radii=list(r))
     folded = dict(op="displace", octaves=2, freq=2.2, amp=0.13, unit=1.9, seed=seed,
-                  origin=[round(pos[0], 4), round(pos[1], 4), round(pos[2], 4)],
-                  nodes=[dome])
+                  origin=[round(pos[i], 4) for i in range(3)], nodes=[dome])
     wedge = dict(op="intersect", nodes=[folded, *plane_nodes])
     medial = dict(prim="plane", normal=[1.0, 0.0, 0.0],
                   offset=round(MIDLINE_GAP - pos[0], 4))
-    margin = 0.18  # cover the gyral displace (amp 0.13) pushing past the AABB
+    cut_nodes = [medial] + [_region_node(rg, pos) for rg in (subtract_regions or [])]
+    margin = 0.2  # cover the gyral displace (amp 0.13) pushing past the AABB
     bounds = [[round(lo[i] - pos[i] - margin, 3) for i in range(3)],
               [round(hi[i] - pos[i] + margin, 3) for i in range(3)]]
     return dict(type="sdf", resolution=resolution, bounds=bounds,
-                root=dict(op="subtract", nodes=[wedge, medial]))
+                root=dict(op="subtract", nodes=[wedge, *cut_nodes]))
 
 
-def _cortex_lobe_entry(base, name, color, pos, cuts, seed):
+def _cortex_lobe_entry(base, name, color, pos, cuts, seed, subtract_regions=None):
     """A PAIRED cortical-lobe entry whose shape is a sector of the shared dome.
 
     ``pos`` is written once and threaded into both the entry and the SDF
     local-frame translation, so the two can never drift apart.
     """
     return dict(base=base, name=name, group="lobe", pos=pos, color=color,
-                shape=_cortex_lobe(pos, cuts, seed=seed))
+                shape=_cortex_lobe(pos, cuts, seed=seed, subtract_regions=subtract_regions))
 
 
 # name, group, right-side position, color, radii, seed, detail, noise
@@ -1184,41 +1237,49 @@ PAIRED: list[dict[str, Any]] = [
     # --- Cortical lobes (large, outer shell) ---
     # The four main lobes are sectors of ONE shared cortical dome (see
     # _cortex_lobe), carved by planes they share so they reassemble seamlessly at
-    # explode 0. Territories (world coords; the cuts tile the dome with no gaps):
-    #   sylvian  y = -0.05  (temporal below it, fronto-parietal above)
-    #   central  z =  0.40  (frontal anterior of it, parietal behind)
-    #   par-occ  z = -1.90  (occipital is the whole posterior cap)
+    # explode 0. The fissures are OBLIQUE (tilted) so the seams read like the real
+    # central / Sylvian fissures, not axis-aligned slabs (world coords):
+    #   central  through (1.15,0.55,0.4), tilted forward going down -> frontal
+    #            (anterior) | parietal (posterior)
+    #   Sylvian  through (1.15,-0.1,0.2), rising posteriorly -> fronto-parietal
+    #            (above) | temporal (below), but ONLY lateral of x=0.95: the
+    #            temporal is a LATERAL inferior wedge (the _TEMPORAL_BITE), so the
+    #            frontal+parietal keep their inferomedial / orbital surface and the
+    #            temporal no longer slabs across the midline.
+    #   par-occ  z = -1.90 -> occipital is the whole posterior cap.
     # Muted pink palette, low saturation so they read as one cortex; each a
     # slightly different hue (frontal=rose, parietal=pink, temporal=salmon,
     # occipital=mauve-pink) so the four stay tellable apart. Provenance: llm.
     _cortex_lobe_entry("frontal", "Frontal lobe", "#c58c9a", (0.85, 1.0, 2.2),
-                       [("z", ">", 0.4), ("y", ">", -0.05)], 11),
+                       [("plane", _CENTRAL_N_FRONT, _CENTRAL_PT), ("z", ">", -0.7)], 11,
+                       subtract_regions=[_TEMPORAL_BITE]),
     _cortex_lobe_entry("parietal", "Parietal lobe", "#c69597", (0.85, 1.8, -0.2),
-                       [("z", "<", 0.4), ("z", ">", -1.9), ("y", ">", -0.05)], 12),
-    _cortex_lobe_entry("temporal", "Temporal lobe", "#c79a8e", (1.95, -0.75, 0.6),
-                       [("y", "<", -0.05), ("z", ">", -1.9)], 13),
+                       [("plane", _neg(_CENTRAL_N_FRONT), _CENTRAL_PT),
+                        ("z", ">", -1.9), ("z", "<", 1.3)], 12,
+                       subtract_regions=[_TEMPORAL_BITE]),
+    _cortex_lobe_entry("temporal", "Temporal lobe", "#c79a8e", (2.1, -0.75, 0.6),
+                       [("plane", _neg(_SYLVIAN_N_UP), _SYLVIAN_PT),
+                        ("z", ">", -1.9), ("x", ">", _TEMPORAL_MEDIAL_X),
+                        ("y", "<", 0.5)], 13),
     _cortex_lobe_entry("occipital", "Occipital lobe", "#bf8da6", (0.72, 0.75, -2.9),
                        [("z", "<", -1.9)], 14),
     dict(base="insula", name="Insula", group="lobe", fr_gender="f",
-         pos=(2.2, 0.3, 0.55), color="#ae7aa3",
-         # The hidden 5th lobe: cortex buried deep to the lateral (Sylvian)
-         # sulcus, overlying the putamen, walled off by the fronto-parietal +
-         # temporal opercula. Small lateral patch (flattened mediolaterally), NOT
-         # medial. Gyrified like the other lobes (so it gets the gyrus bump). It
-         # is mostly tucked inside at explode 0 and revealed by blowing out.
-         # It sits IN the lateral (Sylvian) gap between the opercula, plugging it
-         # so the deep nuclei (putamen) don't show through, but its lateral surface
-         # MUST stay just medial to (inside) those opercula or it pokes out of the
-         # brain: with x-radius 0.46 the lateral edge sits at x=2.66, inside the
-         # frontal (~2.8) and temporal (~2.81 at this y,z) surfaces. It earlier sat
-         # at x=2.5 (radius 0.5, surface reaching x=3.0), so it bulged out in front
-         # of the lobes; pulled too far in (x=2.0) it instead exposed the putamen
-         # through the gap, so it is parked flush in between.
-         # NOTE: as a `lobe` blob it takes part in the same-group jigsaw clip
-         # against the big lobes; its small size means the seams cut a fair bit
-         # off it. Position/size are an anatomical guess: tune in a browser.
-         radii=(0.46, 1.05, 1.2), seed=15, detail=6, noise=0.10,
-         octaves=2),
+         pos=(1.95, 0.3, 0.5), color="#ae7aa3",
+         # The hidden 5th lobe: insular cortex buried deep to the lateral
+         # (Sylvian) sulcus, overlying the putamen. Now that the four big lobes
+         # are SOLID dome sectors abutting at the Sylvian plane (no lateral gap),
+         # the deep nuclei are already covered, so the insula only has to (a) stay
+         # buried INSIDE the cortical surface at explode 0 and (b) read as a small
+         # gyrified patch when the lobes blow apart. A mediolaterally-thin SDF
+         # ellipsoid with gentle gyri: its lateral edge sits at x ~ 2.35, inside
+         # the cortex (whose gyral troughs here reach ~2.5), so it no longer pokes
+         # out. It reveals laterally on explode (pos is the radial anchor).
+         shape=dict(type="sdf", resolution=64,
+                    bounds=[[-0.6, -1.2, -1.35], [0.6, 1.2, 1.35]],
+                    root=dict(op="displace", octaves=2, freq=2.6, amp=0.1,
+                              unit=1.1, seed=15,
+                              nodes=[dict(prim="ellipsoid", center=[0.0, 0.0, 0.0],
+                                          radii=[0.4, 0.95, 1.1])]))),
     # --- Basal ganglia & deep nuclei (small, inner) ---
     dict(base="caudate", name="Caudate nucleus", group="basal_ganglia",
          # Retracted (y was 1.9, an earlier "emerge through the fronto-parietal

@@ -93,26 +93,38 @@ tube), **claustrum** (thin sheet).
 ### lobe (cortex; converted as a coordinated set, reviewed on a whole-hemisphere render)
 
 The four main lobes are sectors of ONE shared cortical-mantle ellipsoid
-(`_cortex_lobe` in generate_data.py), carved by shared axis-aligned cut planes
-(sylvian y=-0.05, central z=0.4, parieto-occipital z=-1.9) + a flat medial wall,
-so at explode 0 they reassemble into a single continuous hemisphere instead of a
-cluster of balls. Gentle GEOMETRIC gyri (shared world-space fold field, origin=pos
--> continuous across seams) + the swirl-ink shader on top. Validated: one dome at
-explode 0, both hemispheres meet at the midline, wedges separate cleanly on
+(`_cortex_lobe` in generate_data.py), carved by shared cut planes + a flat medial
+wall, so at explode 0 they reassemble into a single continuous hemisphere instead
+of a cluster of balls. The fissures are now OBLIQUE (tilted), so the seams read
+like the real central / Sylvian fissures, not axis-aligned slabs:
+  - central: through (1.15,0.55,0.4), tilted forward going down (frontal | parietal)
+  - Sylvian: through (1.15,-0.1,0.2), rising posteriorly (fronto-parietal | temporal)
+  - par-occ: z=-1.9 (occipital is the posterior cap)
+The temporal is a LATERAL inferior wedge (the `_TEMPORAL_BITE`: below Sylvian AND
+x>0.95), subtracted from frontal+parietal so they keep their inferomedial / orbital
+surface and the temporal no longer slabs across the midline. Gentle GEOMETRIC gyri
+(shared world-space fold field, origin=pos -> continuous across seams) + the
+swirl-ink shader on top. Validated: one continuous dome at explode 0, oblique
+central/Sylvian seams, both hemispheres meet at the midline, temporal stays lateral
+(probe: x>=0.95, none medial of it), orbital surface preserved, base reads as a
+proper brain base (hemispheres + olfactory bulbs + brainstem + cerebellum, deep
+nuclei only in the central interpeduncular region), wedges separate cleanly on
 explode, no NaN/blank, check_data clean.
 
-- done - frontal (paired) - anterior-superior sector (z>0.4, y>-0.05). llm.
-- done - parietal (paired) - superior-middle sector (-1.9<z<0.4, y>-0.05). llm.
-- done - temporal (paired) - inferolateral sector (y<-0.05, z>-1.9); NOTE now
-  reaches the midline (was deliberately lateral as a blob), pending human OK. llm.
+- done - frontal (paired) - anterior sector, oblique central seam; keeps orbital
+  surface (temporal bite subtracted). llm.
+- done - parietal (paired) - middle sector (oblique central .. par-occ); keeps
+  medial-inferior surface (temporal bite subtracted). llm.
+- done - temporal (paired) - LATERAL inferior wedge (below oblique Sylvian, x>0.95,
+  z>-1.9); pulled back lateral per human (no longer reaches the midline). llm.
 - done - occipital (paired) - posterior cap (z<-1.9). llm.
-- pending - insula (paired) - still a blob; lost its jigsaw clips when its lobe
-  neighbours became SDF, so it now pokes out of the lateral surface. Convert to a
-  small SDF patch tucked under the opercula (inside the sylvian sector).
+- done - insula (paired) - now a buried thin SDF ellipsoid (mediolaterally flat,
+  gentle gyri) tucked inside the cortical surface (lateral edge ~x=2.35, inside the
+  ~2.5 cortex), so it no longer pokes out; reveals laterally on explode. llm.
 
-Known refinements (post-milestone): cut seams are straight/axis-aligned (tilt the
-planes -> oblique fissures like the real central/sylvian); tuck the insula; the
-temporal-reaches-midline change; overall dome scale/position fine-tune.
+Cortex polish complete (oblique fissures + temporal pulled lateral + insula tucked,
+all agreed w/ human). Possible later: the temporal-orbital parasagittal seam (x=0.95)
+is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 
 ### basal_ganglia
 
@@ -177,6 +189,16 @@ temporal-reaches-midline change; overall dome scale/position fine-tune.
 (Human leaves correction notes here after each milestone contact-sheet review; the
 loop reads and applies them.)
 
+- 2026-06-28 - **Cortex polish landed (oblique fissures + temporal lateral + insula).**
+  Human review of the one-dome milestone chose: full polish + pull temporal back
+  lateral. Done: the central + Sylvian cuts are now OBLIQUE planes (tilted) so the
+  seams read like real fissures; the temporal is a lateral inferior wedge (the
+  `_TEMPORAL_BITE`, subtracted from frontal/parietal so they keep their orbital /
+  inferomedial surface) and no longer reaches the midline; the insula is a buried
+  thin SDF ellipsoid that no longer pokes out. `_cortex_lobe` gained oblique-cut +
+  `subtract_regions` support (`_cut_to_plane` / `_region_node`). Validated across
+  right/left/iso/top/front/bottom + full-brain renders (see scratchpad ob_*/fob_*/
+  ins_*). All 5 lobes `done`. check_data clean.
 - 2026-06-28 - **Cortex carved into one dome (milestone, awaiting human review).**
   Settled the fold treatment (gentle geometric gyrification + the swirl ink reads
   as cortex; ridged-only read as eroded rock, swirl-only as a smooth ball). Then

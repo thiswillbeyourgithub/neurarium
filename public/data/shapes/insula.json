@@ -1,12 +1,39 @@
 {
-  "type": "blob",
-  "radii": [
-    0.46,
-    1.05,
-    1.2
+  "type": "sdf",
+  "resolution": 64,
+  "bounds": [
+    [
+      -0.6,
+      -1.2,
+      -1.35
+    ],
+    [
+      0.6,
+      1.2,
+      1.35
+    ]
   ],
-  "seed": 15,
-  "detail": 6,
-  "noise": 0.1,
-  "octaves": 2
+  "root": {
+    "op": "displace",
+    "octaves": 2,
+    "freq": 2.6,
+    "amp": 0.1,
+    "unit": 1.1,
+    "seed": 15,
+    "nodes": [
+      {
+        "prim": "ellipsoid",
+        "center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "radii": [
+          0.4,
+          0.95,
+          1.1
+        ]
+      }
+    ]
+  }
 }
