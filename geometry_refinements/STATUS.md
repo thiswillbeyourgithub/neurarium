@@ -32,6 +32,19 @@ not touch from another session) | `done` (accepted, committed) | `holdout`
   meshing into a **Web Worker** (keeps the no-build identity; preferred over a
   committed bake). Resolution budget: nuclei 56-72, cortex 96-112.
 - **Provenance of these shapes:** `llm` (Claude-authored, reference-guided).
+- **Grind order (agreed w/ human):** cortex hemisphere first (it's the worst-looking
+  AND the make-or-break test of smooth-union/abut), then rest of basal_ganglia,
+  limbic, diencephalon, brainstem_nuclei, hindbrain (cerebellum last).
+- **Cortex approach (agreed):** each lobe stays its OWN independent SDF "shaped to
+  abut" its neighbours at explode 0 (keeps the per-structure model: each lobe still
+  explodes/highlights alone). Not a single merged hemisphere mesh. Continuity comes
+  from: (a) GEOMETRIC gyral folds via the new ridged-fractal `displace` (real
+  sulci/gyri, so inter-lobe seams read as just another sulcus, not a ball-ball
+  crease); (b) a flat medial wall via a half-space `plane` subtract applied AFTER
+  the folds; (c) for adjoining lobes, share ONE world-space fold field by setting
+  each lobe's `displace.origin = pos` so the gyri line up across the seam. The
+  `displace` op now takes `ridged`/`octaves`/`unit`/`origin`/`aniso` (reuses
+  shapes.js `fractalNoise` via the dep; backward-compatible with old Perlin specs).
 - **Imaging:** `sculpt_shot.py` emits all three sheets per structure
   (`contact.png` renders-only, `refs.png` references-only, `combined.png` both),
   kept for the human's double-check; the loop critiques mainly off `combined.png`.
@@ -77,9 +90,12 @@ smooth-union set (see CLAUDE.md Phase 1 / Phase 2), not in isolation.
 Starter trio (Phase 0 step 6): **putamen** (convex blob), **hippocampus** (curved
 tube), **claustrum** (thin sheet).
 
-### lobe (cortex; do as a coherent smooth-union set)
+### lobe (cortex; convert as a coordinated set, review on a whole-hemisphere render)
 
-- pending - frontal (paired)
+- drafting - frontal (paired) - SDF staged (gyrated ellipsoid via ridged-fractal
+  displace + flat medial wall plane), but UNVERIFIED: the viewer is currently
+  crashed by another session's uncommitted main.js (see Milestone log), so it has
+  not been render-checked or committed yet. Resume + verify once main.js loads.
 - pending - parietal (paired)
 - pending - temporal (paired)
 - pending - occipital (paired)
@@ -148,6 +164,15 @@ tube), **claustrum** (thin sheet).
 (Human leaves correction notes here after each milestone contact-sheet review; the
 loop reads and applies them.)
 
+- 2026-06-28 - **Cortex grind started, then BLOCKED.** Began the cortex (frontal
+  lobe SDF + the ridged-fractal `displace` extension), but the viewer is crashed by
+  an unrelated, uncommitted in-flight feature in `public/js/main.js` from another
+  session (an `autoSpread` deep-nucleus auto-explode: `createAutoSpread` at line 352,
+  `autoSpread` referenced out of scope in the render loop at ~line 4500 ->
+  `ReferenceError: autoSpread is not defined` every frame; plus a leftover
+  `DBG autoSpreadIfDeep` console.log). Not in this effort's scope, left untouched.
+  Human is handling that session. RESUME when main.js loads: render-verify the
+  frontal lobe, then continue the lobes.
 - 2026-06-28 - **Trio milestone reviewed + approved.** Phase 0 + the starter trio
   (putamen, hippocampus, claustrum) accepted by the human; grind paused here at
   their request. Next session: resume the per-structure grind from the first
