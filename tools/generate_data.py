@@ -1606,11 +1606,26 @@ PAIRED: list[dict[str, Any]] = [
          )),
     dict(base="olfactory_bulb", name="Olfactory bulb", group="limbic",
          pos=(0.45, -1.05, 2.7), color="#9aa86f",
-         # Small elongated bulb on the orbital underside of the frontal lobe,
-         # running antero-posteriorly along the cribriform plate (the front end of
-         # the olfactory tract). Stretched in z, near the midline. Position is a
-         # guess: tune in a browser.
-         radii=(0.18, 0.16, 0.45), seed=57, detail=5, noise=0.05),
+         # SDF (self-authored atlas, see geometry_refinements/). A match-stick on
+         # the orbital underside of the frontal lobe: a swollen anterior BULB (on
+         # the cribriform plate) tapering into a thin posterior olfactory TRACT that
+         # rises gently as it runs back toward the brain. Modeled as an ovoid bulb
+         # smooth-unioned with a slender tapered roundcone tract, under a faint
+         # displace; res 80, tight bounds to resolve the thin tract. Near the
+         # midline. Position is a guess: tune in a browser. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=80,
+             bounds=[[-0.26, -0.26, -0.62], [0.26, 0.30, 0.56]],
+             root=dict(op="displace", amp=0.008, freq=5.0, seed=57, nodes=[
+                 dict(op="smoothUnion", k=0.10, nodes=[
+                     dict(prim="ellipsoid", center=[0.0, 0.0, 0.22],
+                          radii=[0.19, 0.18, 0.24]),     # the bulb (anterior)
+                     dict(prim="roundcone",
+                          a=[0.0, 0.0, 0.10], r1=0.11,
+                          b=[0.0, 0.06, -0.50], r2=0.05),  # the tract (posterior)
+                 ]),
+             ])),
+         ),
     dict(base="septal_nuclei", name="Septal nuclei", group="limbic", fr_gender="mp",
          pos=(0.3, 0.1, 0.85), color="#7f9cc0",
          # Small paramedian grey matter below the rostrum of the corpus callosum,

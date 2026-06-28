@@ -188,7 +188,10 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 - pending - cingulate (paired)
 - pending - fornix (paired)
 - pending - septal_nuclei (paired)
-- pending - olfactory_bulb (paired)
+- done - olfactory_bulb (paired) - SDF: a match-stick. A swollen anterior bulb
+  ellipsoid smooth-unioned with a slender tapered roundcone tract running back (and
+  rising gently) toward the brain, faint displace; res 80 with tight bounds for the
+  thin tract. Reads as bulb + tract. Replaces the plain elongated blob. llm.
 
 ### diencephalon
 
