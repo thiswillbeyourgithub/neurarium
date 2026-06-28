@@ -1353,9 +1353,28 @@ PAIRED: list[dict[str, Any]] = [
          )),
     dict(base="globus_pallidus", name="Globus pallidus", group="basal_ganglia",
          pos=(1.5, 0.0, 0.2), color="#76b7b2",
-         # Smaller wedge sitting medial to the putamen; smooth. Together with the
-         # putamen it forms the lens-shaped lentiform nucleus.
-         radii=(0.4, 0.72, 0.82), seed=23, detail=5, noise=0.06),
+         # SDF (self-authored atlas, see geometry_refinements/). The inner, medial
+         # part of the lentiform nucleus: a WEDGE/cone tapering to a medial apex
+         # (pointing toward the internal capsule / thalamus) with a convex lateral
+         # face nesting into the putamen's medial scoop. Modeled as a
+         # medially-tapering roundcone (the wedge taper) intersected with a tall,
+         # AP-extended ellipsoid (the envelope + convex lateral face), the join
+         # rounded by smoothIntersect, under a light displace. Together with the
+         # putamen it reads as the lens-shaped lentiform nucleus. Authored in local
+         # space (x lateral+); `pos` seats it. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=72,
+             root=dict(op="displace", amp=0.012, freq=3.4, seed=23, nodes=[
+                 dict(op="smoothIntersect", k=0.1, nodes=[
+                     # Mediolateral taper: fat lateral end -> pointed medial apex.
+                     dict(prim="roundcone", a=[0.3, 0.0, 0.0], r1=0.55,
+                          b=[-0.5, 0.0, 0.0], r2=0.1),
+                     # Tall, AP-extended envelope (convex lateral face for the scoop).
+                     dict(prim="ellipsoid", center=[0.0, 0.0, 0.0],
+                          radii=[0.42, 0.72, 0.82]),
+                 ]),
+             ])),
+         ),
     dict(base="thalamus", name="Thalamus", group="basal_ganglia",
          pos=(0.9, 0.4, -0.6), color="#bab0ac",
          # Large ovoid "egg", the biggest deep nucleus; smooth, slightly

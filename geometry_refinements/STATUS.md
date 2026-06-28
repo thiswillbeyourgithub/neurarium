@@ -138,7 +138,12 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   displace; res 112. Ref: BodyParts3D model (head bulges into the frontal horn,
   tail follows the lateral ventricle). Reads as a clear comma, hidden at explode 0,
   reveals on explode. Replaces the uniform procedural `curve` tube. llm.
-- pending - globus_pallidus (paired)
+- done - globus_pallidus (paired) - SDF: the medial wedge of the lentiform
+  nucleus. A medially-tapering roundcone intersected with a tall/AP ellipsoid ->
+  a wedge with a convex lateral face (nests in the putamen's medial scoop) tapering
+  to a medial apex (toward the thalamus / internal capsule), under a light displace;
+  res 72. Verified w/ thalamus+putamen anchors: correct orientation, forms the lens
+  with the putamen, hidden behind it from iso. Replaces the smooth blob. llm.
 - done - claustrum (paired)  [starter trio] - SDF: a thin (~0.09) curved spherical
   SHELL clipped by an ellipsoid to the claustrum's tall narrow patch (so it is a
   curved lamina concave toward the putamen, not a flat slab); smoothIntersect
