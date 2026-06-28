@@ -1188,7 +1188,10 @@ PAIRED: list[dict[str, Any]] = [
                  (0.0, -0.98, 0.25),  # tail moving anteriorly
                  (0.0, -0.85, 0.90),  # tail tip (toward the temporal lobe)
              ],
-             profile=[0.48, 0.40, 0.33, 0.29, 0.25, 0.20, 0.13, 0.06],
+             # Slimmed ~30% from an earlier chunkier tube that read as a fat
+             # "handle"; the real caudate is slender (a bulbous head tapering to a
+             # thin body + wispy tail), so only the head keeps any heft.
+             profile=[0.33, 0.27, 0.23, 0.20, 0.17, 0.13, 0.09, 0.04],
              seed=21, noise=0.1, radial_segments=14, tubular_segments=110,
          )),
     dict(base="putamen", name="Putamen", group="basal_ganglia",
