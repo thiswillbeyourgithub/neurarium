@@ -48,6 +48,10 @@ not touch from another session) | `done` (accepted, committed) | `holdout`
 - **Imaging:** `sculpt_shot.py` emits all three sheets per structure
   (`contact.png` renders-only, `refs.png` references-only, `combined.png` both),
   kept for the human's double-check; the loop critiques mainly off `combined.png`.
+- **Tiny lone structures render blank:** `shot.py`'s camera auto-fit (`only=<id>`)
+  produces a BLANK frame for a very small isolated structure (e.g. septal_nuclei,
+  max dim ~0.7). The mesh is fine; only the framing fails. Render such tiny nuclei
+  alongside a larger anchor neighbour (e.g. `only=<tiny>,thalamus_R`) to judge them.
 - **Reference images + Syncthing:** this checkout is inside a Syncthing folder that
   deletes local-only (gitignored) files like `refs/` between commands. So cache
   reference images in the **session scratchpad** and point `sculpt_shot.py
@@ -187,7 +191,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   Verified anterosuperior to the hippocampus head. Replaces the near-sphere blob. llm.
 - pending - cingulate (paired)
 - pending - fornix (paired)
-- pending - septal_nuclei (paired)
+- done - septal_nuclei (paired) - SDF: a small vertical ellipsoid flattened
+  mediolaterally (thin in x, set in the thin septal wall), light displace; res 56.
+  No distinctive standalone shape, so this is a near-equivalent atlas-medium
+  conversion of the blob. Confirmed good via a thalamus-anchored render (renders
+  blank alone, a shot.py tiny-lone-structure framing quirk, see imaging note). llm.
 - done - olfactory_bulb (paired) - SDF: a match-stick. A swollen anterior bulb
   ellipsoid smooth-unioned with a slender tapered roundcone tract running back (and
   rising gently) toward the brain, faint displace; res 80 with tight bounds for the

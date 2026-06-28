@@ -1628,10 +1628,20 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="septal_nuclei", name="Septal nuclei", group="limbic", fr_gender="mp",
          pos=(0.3, 0.1, 0.85), color="#7f9cc0",
-         # Small paramedian grey matter below the rostrum of the corpus callosum,
-         # anterior to the thalamus and above the hypothalamus (a Papez/limbic
-         # relay). Near the midline. Position is a guess: tune in a browser.
-         radii=(0.2, 0.32, 0.22), seed=58, detail=5, noise=0.05),
+         # SDF (self-authored atlas, see geometry_refinements/). Small paramedian
+         # grey matter below the rostrum of the corpus callosum, anterior to the
+         # thalamus and above the hypothalamus (a Papez/limbic relay). It has no
+         # distinctive silhouette: a small ovoid set in the thin septal wall, so it
+         # is a vertical ellipsoid flattened mediolaterally (thin in x), under a
+         # faint displace; res 56. Near the midline. Position is a guess: tune in a
+         # browser. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=56,
+             root=dict(op="displace", amp=0.01, freq=4.0, seed=58, nodes=[
+                 dict(prim="ellipsoid", center=[0.0, 0.0, 0.0],
+                      radii=[0.20, 0.34, 0.22]),
+             ])),
+         ),
     dict(base="hypothalamus", name="Hypothalamus", group="diencephalon",
          pos=(0.45, -0.45, 0.3), color="#c98ac9",
          # Small nucleus cluster below and anterior to the thalamus, hugging the
