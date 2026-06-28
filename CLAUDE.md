@@ -518,6 +518,13 @@ list scroll (lower collapsed headers below the fold). Flex-display rules are sco
   apparent size**: the handler calls `focus.zoomForExplode(amount)`, scaling the
   camera->target distance by the ratio of the assembly's outer radius
   (`boundingRadiusAt`, folding each region's own radius in) at the new vs last amount.
+- **Auto-spread** (`createAutoSpread`, returned by `wireControls`): focusing a **deep**
+  (non-lobe) structure / connection / target / drug / circuit / group from search or a
+  detail panel animates the Separate slider up to full (`autoSpreadIfDeep` -> `spreadTo(1)`)
+  so the structure isn't left buried under the cortex. Reuses the shared
+  `applyExplodeAmount` (layout + re-aim + zoom), advanced by its `tick()` in the render
+  loop; a manual slider grab cancels it. Only ever raises the spread (composes with the
+  current value); a plain 3D click does not trigger it.
 - **Intro** (`createIntroAnimation`): on a plain load the regions start blown out and
   glide together (like dragging Separate 1->0), the camera following
   (`zoomForExplode`) and sweeping `INTRO_ROTATION_TURNS` (0.75), finishing together

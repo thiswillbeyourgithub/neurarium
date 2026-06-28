@@ -339,6 +339,51 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus 
 }
 
 /**
+ * Auto-spread controller: smoothly drives the explode slider UP to a target
+ * amount, the same thing the user would do by dragging the Separate slider, so a
+ * deep (inside) structure isn't left hidden under the cortex when it is focused
+ * from search / a detail panel. `apply(amount)` is the shared explode applier
+ * (layout + camera re-aim + zoom), so a spread tracks the focused structure and
+ * keeps the apparent size exactly like a manual drag. Advanced by `tick()` in the
+ * render loop. Only ever raises the spread (never collapses it), and never lowers
+ * below the current value, so it composes with whatever the user already set.
+ * @param {{slider:HTMLInputElement, apply:(amount:number)=>void}} deps
+ */
+function createAutoSpread({ slider, apply }) {
+  const DURATION_MS = 600;
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  let running = false;
+  let startTime = null;
+  let from = 0;
+  let to = 0;
+  return {
+    /** Animate the spread up to `target` (0..1). No-op if already at/above it. */
+    spreadTo(target) {
+      const current = parseFloat(slider.value);
+      if (current >= target - 1e-3) return; // already spread enough
+      from = current;
+      to = target;
+      startTime = null;
+      running = true;
+    },
+    /** Stop the auto-spread (a manual slider grab wins). */
+    cancel() {
+      running = false;
+    },
+    tick() {
+      if (!running) return false;
+      if (startTime === null) startTime = performance.now();
+      const t = Math.min(1, (performance.now() - startTime) / DURATION_MS);
+      const amount = from + (to - from) * ease(t);
+      slider.value = String(amount);
+      apply(amount);
+      if (t >= 1) running = false;
+      return true;
+    },
+  };
+}
+
+/**
  * Selection + isolation controller. Owns the per-structure highlight halos, the
  * structure/arrow opacity, and the legend-greying hook, so all three stay in one
  * consistent state.
@@ -3133,8 +3178,10 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   cull.setEnabled(seeInside.checked);
   seeInside.addEventListener("change", () => cull.setEnabled(seeInside.checked));
 
-  const onExplode = () => {
-    const amount = parseFloat(explode.value);
+  // Apply an explode `amount`: spread the regions, keep a focused structure
+  // centered (re-aim), and pull the camera to hold the apparent size. Shared by the
+  // slider handler and the auto-spread tween so both behave identically.
+  const applyExplodeAmount = (amount) => {
     applyExplode(meshes, amount, arrows);
     // Keep a double-clicked / searched structure centered as it blows outward,
     // by re-aiming (rotating) the camera rather than translating it.
@@ -3143,7 +3190,21 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     // reassemble) so the exploded layout stays framed.
     focus.zoomForExplode(amount);
   };
+  const onExplode = () => applyExplodeAmount(parseFloat(explode.value));
   explode.addEventListener("input", onExplode);
+
+  // Auto-spread: focusing a deep (non-lobe) structure from search / a detail panel
+  // blows the brain fully apart so the structure isn't buried under the cortex.
+  // A manual slider grab cancels it (so the user always wins).
+  const autoSpread = createAutoSpread({ slider: explode, apply: applyExplodeAmount });
+  explode.addEventListener("input", () => autoSpread.cancel());
+  // True when a focused set contains anything that isn't an outer lobe, i.e. a
+  // structure that would otherwise sit hidden inside the assembled brain.
+  const hasDeep = (meshList) =>
+    meshList.some((m) => m && m.userData.structure && m.userData.structure.group !== "lobe");
+  const autoSpreadIfDeep = (meshList) => {
+    if (hasDeep(meshList)) autoSpread.spreadTo(1);
+  };
 
   // Shift + wheel drives the Separate slider instead of zooming the camera. The
   // capture-phase window listener runs *before* OrbitControls' own wheel handler
@@ -3207,6 +3268,11 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // Apply initial slider values so the scene matches the UI on load.
   onExplode();
   onTransparency();
+
+  // Hand the auto-spread back to the caller: the focus helpers (selectStructure,
+  // focusDrug, ...) live in the main scope and call autoSpreadIfDeep, and the
+  // render loop advances autoSpread.tick().
+  return { autoSpread, autoSpreadIfDeep };
 }
 
 /**
@@ -3903,6 +3969,7 @@ async function main() {
   const focusTarget = (tgt, { frame = false } = {}) => {
     const meshSet = targetMeshesOf(tgt);
     selection.setCircuit(meshSet, []);
+    autoSpreadIfDeep(meshSet);
     receptorMarkers.show(meshSet, tgt.swatchColor);
     if (tgt.kind === "receptor") info.showReceptor(tgt.receptor);
     else info.showTarget(tgt);
@@ -3960,6 +4027,7 @@ async function main() {
     const meshSet = drugMeshesOf(drug);
     const flowArrows = flowArrowsOf(drug);
     selection.setCircuit(meshSet, flowArrows);
+    autoSpreadIfDeep(meshSet);
     drugAnim.show(drug, meshById);
     circuitAnim.play(flowArrows); // no-op for a drug with no mapped pathways
     info.showDrug(drug);
@@ -4185,7 +4253,11 @@ async function main() {
     // isolates), and the legend has already toggled the isolate set itself (kept
     // additive there). The tab's reopen thunk preserves `isolate` so re-activating a
     // search/detail tab restores the dim, not just the halo.
-    if (isolate) selection.setCircuit(isolateGroupFor(mesh), []);
+    if (isolate) {
+      const group = isolateGroupFor(mesh);
+      selection.setCircuit(group, []);
+      autoSpreadIfDeep(group); // a deep nucleus: blow the brain apart so it shows
+    }
     // select() drives selection.onHighlight, which pins this structure's label on
     // (so the name stays put after the pointer leaves, and survives hovering other
     // regions), so no explicit setHovered is needed here.
@@ -4208,7 +4280,9 @@ async function main() {
     // halo-only (consistent with the plain structure click). The reopen thunk keeps
     // `isolate` so re-activating the tab restores the dim.
     if (isolate && arrow.fromMesh && arrow.toMesh) {
-      selection.setCircuit([arrow.fromMesh, arrow.toMesh], [arrow]);
+      const ends = [arrow.fromMesh, arrow.toMesh];
+      selection.setCircuit(ends, [arrow]);
+      autoSpreadIfDeep(ends);
     }
     selection.selectArrow(arrow); // halo the arrow on top of the focus
     const proj = arrow.projection;
@@ -4298,6 +4372,7 @@ async function main() {
     const cMeshes = circuitMeshesOf(circuit);
     const cArrows = arrowsAmong(new Set(cMeshes));
     selection.setCircuit(cMeshes, cArrows);
+    autoSpreadIfDeep(cMeshes);
     circuitAnim.play(cArrows);
     info.showCircuit(circuit);
     if (frame && cMeshes.length) focus.focusMeshes(cMeshes);
@@ -4314,6 +4389,7 @@ async function main() {
     const gArrows = groupArrowsOf(group);
     const gMeshes = [...new Set(gArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
     selection.setCircuit(gMeshes, gArrows); // pin the arrows, no pulse
+    autoSpreadIfDeep(gMeshes);
     info.showProjectionGroup(group);
     if (frame && gMeshes.length) focus.focusMeshes(gMeshes);
     openDetailTab(`group:${group.id}`, group.name, () => focusProjectionGroup(group));
@@ -4361,7 +4437,8 @@ async function main() {
     b.addEventListener("click", () => setColorMode(b.dataset.mode === "sign"));
   }
 
-  wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
+  const { autoSpread, autoSpreadIfDeep } = wireControls(
+    { controls, meshes, arrows, labels, focus, selection, projVis, cull });
   const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
@@ -4425,6 +4502,7 @@ async function main() {
     // camera moved (damping / auto-rotate). Any true keeps us rendering.
     let active = false;
     if (intro.tick()) active = true;
+    if (autoSpread.tick()) active = true;
     if (focus.tick()) active = true;
     if (circuitAnim.tick()) active = true;
     if (receptorMarkers.tick()) active = true;
