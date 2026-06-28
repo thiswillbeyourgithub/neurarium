@@ -149,7 +149,10 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   curved lamina concave toward the putamen, not a flat slab); smoothIntersect
   rounds the rim; explicit tight bounds resolve the thin sheet cheaply.
   Demonstrates the SDF shell/intersect (thin-sheet) path. Provenance llm.
-- pending - accumbens (paired)
+- done - accumbens (paired) - SDF: a gentle teardrop (the ventral striatum has no
+  distinctive standalone silhouette). A roundcone fat at the free ventral pole
+  tapering dorsally (and slightly posterolateral) into the striatum, light displace;
+  res 64. Replaces the smooth blob. Position still an anatomical guess. llm.
 - done - thalamus (paired) - SDF: the egg. A single tapered roundcone (narrow
   rounded anterior pole -> bulbous posterior pulvinar) gives a clean teardrop with
   no fused-balls waist; axis tilted anteromedial -> posterolateral, under a light

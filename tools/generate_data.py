@@ -1445,11 +1445,22 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="accumbens", name="Nucleus accumbens", group="basal_ganglia",
          pos=(0.95, -0.5, 1.0), color="#e0997e",
-         # Ventral striatum, where the head of the caudate meets the putamen
-         # ventrally and anteriorly (the reward hub, target of the mesolimbic
-         # dopamine pathway). Small smooth nucleus, anterior + low + fairly
-         # medial. Position is an anatomical guess: tune in a browser.
-         radii=(0.4, 0.34, 0.44), seed=27, detail=5, noise=0.06),
+         # SDF (self-authored atlas, see geometry_refinements/). Ventral striatum,
+         # where the head of the caudate meets the putamen ventrally and anteriorly
+         # (the reward hub, target of the mesolimbic dopamine pathway). It has no
+         # distinctive standalone silhouette: a rounded mass that is the inferior
+         # corner of the striatum, so it is modeled as a gentle TEARDROP, a
+         # roundcone fat at the free ventral pole tapering dorsally (and slightly
+         # posterolateral) into the striatum, under a light displace; res 64.
+         # Position is an anatomical guess: tune in a browser. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=64,
+             root=dict(op="displace", amp=0.012, freq=3.6, seed=27, nodes=[
+                 dict(prim="roundcone",
+                      a=[0.0, -0.28, 0.10], r1=0.42,   # fat ventral pole
+                      b=[0.06, 0.40, -0.16], r2=0.16),  # taper up into the striatum
+             ])),
+         ),
     dict(base="claustrum", name="Claustrum", group="basal_ganglia",
          pos=(2.5, 0.1, 0.5), color="#8d97ab",
          # SDF (self-authored atlas, see geometry_refinements/). A thin, gently
