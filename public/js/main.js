@@ -60,13 +60,32 @@ const EFFECT_GLYPHS = { boost: "+", block: "−", modulate: "≈" };
 // Fold a string for accent- + case-insensitive matching: lowercase, then strip
 // combining diacritical marks (NFD decomposes e.g. "é" -> "e" + U+0301, "ç" ->
 // "c" + U+0327, which we then drop). So the search/filter find "sérotonine" when
-// the user types "seroto", and ignore case. Used by the toolbar search + the drug
-// filter so both behave the same.
+// the user types "seroto", and ignore case (see foldText below). Used by the
+// toolbar search + the drug filter so both behave the same.
+//
+// Greek letter -> its spelled-out Latin name, so a folded string matches whether
+// the data uses the glyph (the receptor names: "\u03b12A", "\u03bc (MOR)", "\u03c31") or the user
+// types the name they CAN reach on a keyboard ("alpha2a", "mu", "sigma1"). Folding
+// both sides through this means "beta" finds "\u03b21" and "alpha" finds "\u03b12A".
+const GREEK_NAMES = {
+  "\u03b1": "alpha", "\u03b2": "beta", "\u03b3": "gamma", "\u03b4": "delta",
+  "\u03b5": "epsilon", "\u03b6": "zeta", "\u03b7": "eta", "\u03b8": "theta",
+  "\u03b9": "iota", "\u03ba": "kappa", "\u03bb": "lambda", "\u03bc": "mu",
+  "\u03bd": "nu", "\u03be": "xi", "\u03bf": "omicron", "\u03c0": "pi",
+  "\u03c1": "rho", "\u03c3": "sigma", "\u03c2": "sigma", "\u03c4": "tau",
+  "\u03c5": "upsilon", "\u03c6": "phi", "\u03c7": "chi", "\u03c8": "psi",
+  "\u03c9": "omega",
+};
+
 function foldText(s) {
   return String(s)
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
+    .toLowerCase()
+    // Spell out Greek letters (after lowercasing, so uppercase \u0391 already became \u03b1),
+    // then drop hyphens / Unicode dashes so "5ht" finds "5-HT".
+    .replace(/[\u0370-\u03ff]/g, (ch) => GREEK_NAMES[ch] || ch)
+    .replace(/[-\u2010-\u2015]/g, "");
 }
 
 // Structured search filters: a leading `field:value` (value optionally quoted)
@@ -1327,6 +1346,21 @@ function createInfoPanel(data) {
     return ul;
   };
 
+  // One route endpoint (a structure id) for the connection panel's route line: its
+  // name, made clickable to jump to (and isolate) that structure when the id
+  // resolves to a modeled mesh, exactly like a "Found in" region row. A non-
+  // resolving id degrades to plain text.
+  const endpointEl = (id) => {
+    const name = nameOf(id);
+    if (id && baseResolves(id)) {
+      const b = el("button", "conn-endpoint", name);
+      b.type = "button";
+      b.addEventListener("click", () => onStructurePick(id));
+      return b;
+    }
+    return el("span", null, name);
+  };
+
   // The nearest ancestor that establishes a containing block for a position:fixed
   // descendant (a transform / filter / backdrop-filter / perspective / will-change
   // / paint-contain), or null if none (then fixed is viewport-relative). The panel
@@ -1814,14 +1848,28 @@ function createInfoPanel(data) {
     show(proj) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", proj.label || t("info.connection")));
+      // Type line: the connection's analogue of a structure's group line ("Lobe"
+      // etc.), stating plainly what this datum is (a projection / neuron pathway).
+      body.appendChild(el("div", "info-group", t("info.projectionType")));
 
-      // Route line: from -> to (or <-> for a bidirectional/commissural link).
-      body.appendChild(el(
-        "div", "info-route",
-        `${nameOf(proj.from)} ${proj.bidirectional ? "↔" : "→"} ${nameOf(proj.to)}`,
-      ));
+      // The pathway's one source grade (strongest over its citations), shown again
+      // on each data row below so every claim (route, transmitter, description)
+      // carries its own badge, rather than a single block that leaves it unclear
+      // which node it backs. The tooltip lists the citation(s); the readable
+      // bibliography still follows at the bottom (appendSources).
+      const provPill = () =>
+        makeProvenancePill(proj.provenance, citationsTip(proj.sources));
 
-      // Kind swatch + kind/transmitter text.
+      // Route line: from -> to (or <-> for a bidirectional/commissural link), each
+      // endpoint clickable to jump to (and isolate) that structure.
+      const route = el("div", "info-route");
+      route.appendChild(endpointEl(proj.from));
+      route.appendChild(el("span", "conn-dir", proj.bidirectional ? "↔" : "→"));
+      route.appendChild(endpointEl(proj.to));
+      route.appendChild(provPill());
+      body.appendChild(route);
+
+      // Kind swatch + kind/transmitter text + its source badge.
       const meta = el("div", "info-meta");
       const swatch = el("span", "swatch line");
       swatch.style.background = proj.color || "#fff";
@@ -1833,9 +1881,17 @@ function createInfoPanel(data) {
         "span", null,
         [kindLabel, proj.neurotransmitter].filter(Boolean).join(" · "),
       ));
+      meta.appendChild(provPill());
       body.appendChild(meta);
 
-      if (proj.description) body.appendChild(el("p", "info-desc", proj.description));
+      // Short description + its source badge (inline at the end, like the receptor
+      // baked-description pill).
+      if (proj.description) {
+        const p = el("p", "info-desc", proj.description);
+        p.appendChild(document.createTextNode(" "));
+        p.appendChild(provPill());
+        body.appendChild(p);
+      }
 
       appendSources(proj.sources);
     },
@@ -3186,7 +3242,7 @@ function connectionSideTag(proj) {
  *   selectStructure:Function, selectConnection:Function,
  *   selectTarget:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug, focusCircuit, focusProjectionGroup }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -3220,7 +3276,9 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       const tag = connectionSideTag(arrow.projection);
       return {
         label: arrow.projection.label + (tag ? ` · ${tag}` : ""),
-        select: () => selectConnection(arrow, { frame: true }),
+        // Frame + isolate, so a connection search pick dims the rest of the brain
+        // like the structure / drug / target picks, not just a halo.
+        select: () => selectConnection(arrow, { frame: true, isolate: true }),
       };
     }),
     // Focusable receptors + non-receptor targets (a stub / unlocated target has no
@@ -3250,6 +3308,23 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       },
       select: () => selectDrug(drug),
     })),
+    // Named circuits (the loops in the Projections section): a pick isolates the
+    // loop, plays its traveling pulse and opens its panel, exactly like its legend
+    // row, so search reaches them too (part of "anything from search == the panel").
+    ...(data.circuits || []).map((circuit) => ({
+      label: `${circuit.name} · ${t("search.tagCircuit")}`,
+      keywords: circuit.description || "",
+      select: () => focusCircuit(circuit, { frame: true }),
+    })),
+    // Projection groups (the per-transmitter / per-sign rows of the Projections
+    // legend): a pick pins that whole pathway group + dims the rest + opens its
+    // panel, like its legend row. Both colour modes' records are listed; their
+    // names don't collide (transmitters vs excitatory/inhibitory/modulatory).
+    ...(data.projectionGroups || []).map((group) => ({
+      label: `${group.name} · ${t("search.tagPathways")}`,
+      keywords: group.description || "",
+      select: () => focusProjectionGroup(group, { frame: true }),
+    })),
   ];
 
   // Index (among the non-empty rows) of the keyboard-highlighted result, or -1
@@ -3277,19 +3352,32 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // class" query, so show more rows than the compact name-search list (the results
     // box scrolls). Plain name search stays capped short.
     const cap = field ? 40 : 8;
-    const matches = items
-      .filter((it) => {
-        if (field) {
-          const fv = it.fields && it.fields[field];
-          if (fv === undefined) return false; // only items with this field
-          if (value && !fv.includes(value)) return false;
-        }
-        if (rest && !foldText(`${it.label} ${it.keywords || ""}`).includes(rest)) {
-          return false;
-        }
-        return true;
-      })
-      .slice(0, cap);
+    // Score each surviving item so the most relevant rise to the top of the capped
+    // list: a label that *starts with* the query beats one that merely contains it,
+    // which beats a keyword-only match. Without this, array order alone buried the
+    // late entries (circuits, projection groups) under a common query like
+    // "dopamine". An empty query (browse-all) and field-only filters leave `rest`
+    // empty -> every item scores 0 -> the stable `idx` tiebreak keeps the original
+    // order (structures first).
+    const scored = [];
+    items.forEach((it, idx) => {
+      if (field) {
+        const fv = it.fields && it.fields[field];
+        if (fv === undefined) return; // only items carrying this field
+        if (value && !fv.includes(value)) return;
+      }
+      let score = 0;
+      if (rest) {
+        const label = foldText(it.label);
+        if (label.startsWith(rest)) score = 0;
+        else if (label.includes(rest)) score = 1;
+        else if (foldText(it.keywords || "").includes(rest)) score = 2;
+        else return; // no match in label or keywords
+      }
+      scored.push({ it, score, idx });
+    });
+    scored.sort((a, b) => a.score - b.score || a.idx - b.idx);
+    const matches = scored.slice(0, cap).map((s) => s.it);
     if (matches.length === 0) {
       const li = document.createElement("li");
       li.className = "empty";
@@ -3334,9 +3422,14 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     controlsMain.hidden = true; // swap the sliders/legend out...
     searchBox.hidden = false; // ...and the search in, in their place
     searchToggle.classList.add("active");
-    searchInput.value = "";
+    // Keep whatever was last typed this session: the input retains its value while
+    // hidden, and a page reload (a new session) starts it empty, so this is
+    // session-scoped memory with no persistence. Re-render the matching results for
+    // the remembered query and select all of it, so the next keystroke replaces it
+    // while Enter / arrow-browsing the existing results still works straight away.
     renderResults();
     searchInput.focus();
+    searchInput.select();
   }
   function closeSearch() {
     searchBox.hidden = true;
@@ -4035,6 +4128,12 @@ async function main() {
   // "halo it + label/panel it + maybe frame the camera" sequence lives in one
   // place instead of being copy-pasted at each entry point. `frame` moves the
   // camera (search / double-click); a plain click leaves the view where it is.
+  // `isolate` dims the rest of the brain down to the picked thing. The uniform
+  // rule across the app: a pick from SEARCH or a DETAIL PANEL row always focuses
+  // (frame:true, isolate:true), so structures, connections, targets and drugs all
+  // behave the same (target/drug focus is the equivalent setCircuit in focusTarget
+  // / focusDrug). Only a plain 3D click stays halo-only (isolate:false), with
+  // double-click to isolate.
   const selectStructure = (mesh, { frame = false, isolate = false } = {}) => {
     if (frame) focus.focusStructure(mesh);
     // A search result or a detail-panel jump (e.g. a "Found in" region row) picks a
@@ -4059,21 +4158,30 @@ async function main() {
   // hemispheres differ), so it keys the tab. The reopen re-halos the arrow when
   // one was built; a pathway with no drawn arrow just re-renders the panel.
   const connectionKey = (proj) => `connection:${proj.from}->${proj.to}`;
-  const selectConnection = (arrow, { frame = false } = {}) => {
+  const selectConnection = (arrow, { frame = false, isolate = false } = {}) => {
     if (frame) focus.focusConnection(arrow);
-    selection.selectArrow(arrow);
+    // A search result or a detail-panel connection row puts the pathway "fully in
+    // focus" like every other search pick: pin the arrow + its two endpoints opaque
+    // and dim the rest of the brain (setCircuit), the same focus a projection-group
+    // / circuit row gives. A plain 3D arrow click passes isolate:false and stays
+    // halo-only (consistent with the plain structure click). The reopen thunk keeps
+    // `isolate` so re-activating the tab restores the dim.
+    if (isolate && arrow.fromMesh && arrow.toMesh) {
+      selection.setCircuit([arrow.fromMesh, arrow.toMesh], [arrow]);
+    }
+    selection.selectArrow(arrow); // halo the arrow on top of the focus
     const proj = arrow.projection;
     info.show(proj);
     openDetailTab(connectionKey(proj), proj.label || t("info.connection"),
-      () => selectConnection(arrow));
+      () => selectConnection(arrow, { isolate }));
   };
 
   // Clicking a connection row inside a structure panel jumps to that pathway
-  // (frames it, halos the arrow, swaps in the connection panel) just like
-  // picking the connection in search.
+  // (frames + isolates it, halos the arrow, swaps in the connection panel) just
+  // like picking the connection in search.
   info.onConnection((proj) => {
     const arrow = arrows.find((a) => a.projection === proj);
-    if (arrow) { selectConnection(arrow, { frame: true }); return; }
+    if (arrow) { selectConnection(arrow, { frame: true, isolate: true }); return; }
     info.show(proj); // no arrow built for this pathway: details only
     openDetailTab(connectionKey(proj), proj.label || t("info.connection"),
       () => info.show(proj));
@@ -4213,7 +4321,7 @@ async function main() {
   }
 
   wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull });
-  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug });
+  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, selectTarget, selectDrug, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);

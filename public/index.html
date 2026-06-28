@@ -824,7 +824,16 @@
          .panel-tabs / .detail-tabs above); the .info-* content styles below are
          reused there. Each detail tab carries its own × close affordance. */
       .info-title { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
-      .info-route { font-size: 13px; color: var(--text); margin-bottom: 10px; }
+      .info-route {
+        font-size: 13px;
+        color: var(--text);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .info-route .conn-dir { color: var(--muted); }
       .info-meta {
         display: flex;
         align-items: center;
@@ -871,8 +880,10 @@
         gap: 6px;
         text-transform: capitalize;
       }
-      /* A clickable fact value (a drug's Class / Nomenclature): runs a search. */
-      .fact-link {
+      /* A clickable fact value (a drug's Class / Nomenclature): runs a search.
+         The connection panel's route endpoints share the same link styling. */
+      .fact-link,
+      .conn-endpoint {
         background: none;
         border: none;
         padding: 0;
@@ -883,7 +894,8 @@
         text-underline-offset: 2px;
         text-align: left;
       }
-      .fact-link:hover { color: #b9d4f3; }
+      .fact-link:hover,
+      .conn-endpoint:hover { color: #b9d4f3; }
       /* Receptor "found in" region list. */
       .info-locations { margin-top: 4px; }
       .info-locations li { font-size: 12px; line-height: 1.5; color: var(--text); }

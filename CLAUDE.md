@@ -531,9 +531,13 @@ list scroll (lower collapsed headers below the fold). Flex-display rules are sco
 ### Selection / halo + isolate (`createSelection`)
 
 Single source of truth for what is highlighted/focused.
-- Picking a structure (click/tap or structure search result) gives it a soft halo
-  (`mesh.userData.halo`); double-click isolates it instead. Picking an arrow halos it
-  (`ProjectionArrow.setHalo`); structure + arrow halos are mutually exclusive.
+- Picking a structure by a plain 3D click/tap gives it a soft halo
+  (`mesh.userData.halo`); double-click isolates it instead. A structure picked from
+  **search or a detail panel** isolates its hemisphere pair (dims the rest), not just a
+  halo (`selectStructure({isolate:true})`). Picking an arrow halos it
+  (`ProjectionArrow.setHalo`) on a plain 3D click; from search / a detail-panel row it
+  isolates the pathway (pins the arrow + its endpoints, dims the rest,
+  `selectConnection({isolate:true})`). Structure + arrow halos are mutually exclusive.
 - A **Structures legend row** toggles that structure (both hemispheres) into the
   **isolate** set and opens its detail tab (`selectStructure`, on isolate-on only;
   toggle-off opens nothing); a **category heading** toggles the whole group (isolate
@@ -613,12 +617,21 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   keyboard-shortcuts (left, opens the help popup), reset (center, recenters + reframes
   the brain), search (right, swaps `#search` in place, not a popup).
 - **Search**: filters structures (by name), connections (by label), receptors (name /
-  neurotransmitter / system), drugs (name / category / target). Picking centers/frames
-  + opens the matching panel (a receptor/drug pick focuses it exactly like its legend
-  row). Only **focusable** receptors/drugs are searchable; receptor rows show a `· tag`
-  (neurotransmitter), drug rows their category. Matching is case- + accent-insensitive
-  (`foldText`: lowercase + NFD strip diacritics, also used by `#drugs-filter`) over the
-  label + hidden `keywords`. A structured `field:"value"` filter (`parseSearchQuery` +
+  neurotransmitter / system), drugs (name / category / target), circuits and projection
+  groups (the Projections legend rows; tagged `· circuit` / `· pathways`). Picking centers/frames
+  + **focuses** the matching thing (dims the rest of the brain) + opens its panel,
+  uniformly: a structure / connection pick isolates exactly like its legend row (via
+  `selectStructure` / `selectConnection`'s `isolate` option), a receptor/drug pick
+  focuses it exactly like its legend row. The same focus-on-pick rule holds for
+  detail-panel rows (a "Found in" region, a connection row, a route endpoint, an
+  interacting drug). Only **focusable** receptors/drugs are searchable; receptor rows
+  show a `· tag` (neurotransmitter), drug rows their category. The box **remembers the
+  last query for the session** (the input keeps its value while hidden; a reload starts
+  empty) and selects it all on reopen, so retyping or re-browsing is immediate. Matching
+  is case- + accent-insensitive and normalizes Greek + dashes (`foldText`: lowercase +
+  NFD strip diacritics, spell out Greek via `GREEK_NAMES` so "beta" finds "β1", drop
+  hyphens/dashes so "5ht" finds "5-HT"; also used by `#drugs-filter`) over the label +
+  hidden `keywords`. A structured `field:"value"` filter (`parseSearchQuery` +
   `SEARCH_FIELDS`): `class:"SNRI"` / `nbn:"..."` keeps drugs whose class/nomenclature
   matches (the field name is folded, so French `classe:` / `nomenclature:` work); a
   field filter lists the whole class. A drug panel's **Class** + **Nomenclature** are
@@ -626,7 +639,9 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   map; `info.onSearch` -> `openSearchWithQuery`). A **"?"** button toggles
   `#search-syntax`. Connection results carry a hemisphere tag (`connectionSideTag`
   R/L/L↔R). **Ctrl/Cmd+F** intercepts the native page-find, expands the panel + opens
-  search. **Esc** closes. Results are keyboard-navigable (`activeIndex`/`highlight`:
+  search. **Esc** closes. Results are relevance-ranked (label-prefix match > label
+  substring > keyword-only; stable within a tier, so an empty/field query keeps the
+  original order) then capped, and keyboard-navigable (`activeIndex`/`highlight`:
   first row pre-highlighted, ArrowUp/Down wrap, hover syncs, Enter activates).
 - **Keyboard-shortcuts help popup** (`#shortcuts-modal`, `wireShortcutsHelp`): a
   centered dialog over a `.modal-overlay` backdrop, rows generated from a list
@@ -676,9 +691,14 @@ shows the concrete source first, the tier-grade explainer underneath. Pill toolt
 are `info.provNone/provLlm/provSourced/provVerified`.
 
 Views:
-- **connection**: label, route (`from → to`, `↔` bidirectional), kind +
-  neurotransmitter, description, sources (http(s) url as link else plain text; a
-  provenance pill per citation). Arrow picking (`pickArrowAt`) beats the region behind.
+- **connection**: label, a `Projection` type line (the analogue of a structure's
+  group heading), route (`from → to`, `↔` bidirectional; each endpoint clickable,
+  jumping to + isolating that structure via `endpointEl` -> `onStructurePick`), kind +
+  neurotransmitter, description. The route, the kind/transmitter line and the
+  description each carry the pathway's own provenance badge (`proj.provenance`, the
+  citations in its tooltip) so every node shows its grade, then the readable
+  bibliography (`sources`: http(s) url as link else plain text; a provenance pill per
+  citation). Arrow picking (`pickArrowAt`) beats the region behind.
 - **structure** (`showStructure`): name, group heading, a Reference row (Wikipedia
   link + pill, else `NOSOURCE`), then (when the link resolves) the live Wikipedia lead
   as a `sourced` description (structures carry no baked description; fetch-only), a
