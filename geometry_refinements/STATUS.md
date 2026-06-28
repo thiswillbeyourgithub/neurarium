@@ -156,7 +156,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   displace; res 80. Ref: BodyParts3D model + dorsal nuclei schematic (pulvinar
   overhang, AM->PL long axis). L+R pair flanks the midline correctly. Replaces the
   symmetric blob. llm.
-- pending - substantia_nigra (paired)
+- done - substantia_nigra (paired) - SDF: a thin, gently curved lamina (concave
+  anteromedially, hugging the cerebral peduncle), not a flat lens. Three flattened
+  (thin-DV) ellipsoids smooth-unioned (k=0.30) along an AP arc bowed laterally at
+  the middle, under a light displace; res 64. Flat in front view, concave-medial in
+  the L+R pair. Replaces the flat ellipsoid. llm.
 - pending - subthalamic_nucleus (paired)
 
 ### limbic

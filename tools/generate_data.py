@@ -1405,8 +1405,27 @@ PAIRED: list[dict[str, Any]] = [
     dict(base="substantia_nigra", name="Substantia nigra",
          group="basal_ganglia", fr_gender="f",
          pos=(1.0, -1.4, -1.2), color="#3d3d3d",
-         # A thin lamina/band in the midbrain: flat in y, elongated in z.
-         radii=(0.5, 0.18, 0.68), seed=26, detail=5, noise=0.05),
+         # SDF (self-authored atlas, see geometry_refinements/). A thin, gently
+         # CURVED lamina in the midbrain hugging the back of the cerebral peduncle
+         # (concave anteromedially), not a flat lens. Modeled as three flattened
+         # (thin-DV) ellipsoids smooth-unioned along an antero-posterior arc whose
+         # middle is bowed laterally, so the band is concave toward the midline,
+         # under a light displace; res 64. Mirroring negates x, so the _L band is
+         # concave-medial too. Authored in local space (z anterior+, x lateral+,
+         # y thin); `pos` seats it. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=64,
+             root=dict(op="displace", amp=0.01, freq=4.0, seed=26, nodes=[
+                 dict(op="smoothUnion", k=0.30, nodes=[
+                     dict(prim="ellipsoid", center=[0.06, 0.03, -0.44],
+                          radii=[0.34, 0.16, 0.34]),   # posterior end
+                     dict(prim="ellipsoid", center=[0.22, 0.0, 0.0],
+                          radii=[0.36, 0.16, 0.34]),   # middle, bowed lateral
+                     dict(prim="ellipsoid", center=[0.06, -0.03, 0.44],
+                          radii=[0.32, 0.16, 0.32]),   # anterior end
+                 ]),
+             ])),
+         ),
     dict(base="accumbens", name="Nucleus accumbens", group="basal_ganglia",
          pos=(0.95, -0.5, 1.0), color="#e0997e",
          # Ventral striatum, where the head of the caudate meets the putamen
