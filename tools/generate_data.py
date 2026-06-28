@@ -1565,26 +1565,39 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="cingulate", name="Cingulate gyrus", group="limbic",
          pos=(0.5, 0.6, 0.0), color="#6fa39c",
-         # The limbic-lobe arch: a C-shaped band of cortex on the medial wall,
-         # curving over the corpus callosum from the subgenual front, up and over,
-         # to the splenial back. Modeled as a tapered tube along a parasagittal
-         # (local x~0) arch so it reads as the gyrus it is; the _L member mirrors
-         # it. Hugs the midline (small pos.x). Position is a guess: tune in a
-         # browser, especially against the (commissural) corpus-callosum arrow.
+         # SDF (self-authored atlas, see geometry_refinements/). The limbic-lobe
+         # arch: a C-shaped band of cortex on the medial wall, curving over the
+         # corpus callosum from the subgenual front, up and over, to the splenial
+         # back. A GYRUS is a ribbon, not a worm, so it is modeled as a swept tube
+         # along the parasagittal (local x~0) arch INTERSECTED with a thin-x slab:
+         # the result is a flattened band, thin mediolaterally (~0.22) and tall
+         # radially (the tube diameter), reading as the gyrus it is. Under a gentle
+         # displace; res 100 to resolve the thin ribbon over the long arch. Hugs the
+         # midline (small pos.x); the _L member mirrors it. Position is a guess:
+         # tune in a browser, especially against the (commissural) corpus-callosum
+         # arrow. Provenance: llm.
          shape=dict(
-             type="curve",
-             points=[
-                 (0.0, -0.5, 1.3),    # subgenual, anterior + low
-                 (0.0, 0.4, 1.5),     # rising in front of the genu
-                 (0.0, 1.0, 0.95),    # anterior arch
-                 (0.0, 1.2, 0.0),     # top of the arch
-                 (0.0, 1.0, -0.95),   # posterior arch
-                 (0.0, 0.3, -1.5),    # descending toward the splenium
-                 (0.0, -0.45, -1.25), # isthmus, posterior + low
-             ],
-             profile=[0.18, 0.3, 0.34, 0.34, 0.32, 0.28, 0.18],
-             seed=55, noise=0.07, radial_segments=12, tubular_segments=96,
-         )),
+             type="sdf", resolution=100,
+             bounds=[[-0.26, -0.95, -1.72], [0.26, 1.62, 1.72]],
+             root=dict(op="displace", amp=0.02, freq=2.6, seed=55, nodes=[
+                 dict(op="intersect", nodes=[
+                     dict(prim="tube",
+                          points=[
+                              [0.0, -0.5, 1.3],    # subgenual, anterior + low
+                              [0.0, 0.4, 1.5],     # rising in front of the genu
+                              [0.0, 1.0, 0.95],    # anterior arch
+                              [0.0, 1.2, 0.0],     # top of the arch
+                              [0.0, 1.0, -0.95],   # posterior arch
+                              [0.0, 0.3, -1.5],    # descending toward the splenium
+                              [0.0, -0.45, -1.25],  # isthmus, posterior + low
+                          ],
+                          profile=[0.18, 0.3, 0.34, 0.34, 0.32, 0.28, 0.18]),
+                     # thin-x slab: flattens the round tube into a gyrus ribbon.
+                     dict(prim="box", center=[0.0, 0.35, 0.0],
+                          half=[0.11, 1.25, 1.65], round=0.02),
+                 ]),
+             ])),
+         ),
     dict(base="fornix", name="Fornix", group="limbic",
          pos=(0.4, 0.2, -0.3), color="#d9d2c4",
          # The hippocampal output tract: a thin white-matter arch sweeping from

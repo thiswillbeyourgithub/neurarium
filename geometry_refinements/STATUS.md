@@ -189,7 +189,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   the antero-superior -> postero-inferior axis: fat rounded AS pole tapering to a
   blunt PI tip where it caps the head of the hippocampus, light displace; res 64.
   Verified anterosuperior to the hippocampus head. Replaces the near-sphere blob. llm.
-- pending - cingulate (paired)
+- done - cingulate (paired) - SDF: a flattened C-ribbon (a gyrus is a ribbon, not a
+  worm). The parasagittal arch tube intersected with a thin-x slab -> a band thin
+  mediolaterally (~0.22) and tall radially, gentle displace; res 100, explicit
+  bounds. Reads as the cingulate gyrus over the corpus callosum. Replaces the round
+  curve tube. llm.
 - pending - fornix (paired)
 - done - septal_nuclei (paired) - SDF: a small vertical ellipsoid flattened
   mediolaterally (thin in x, set in the thin septal wall), light displace; res 56.
