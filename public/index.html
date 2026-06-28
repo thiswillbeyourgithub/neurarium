@@ -549,6 +549,34 @@
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       }
       #search-syntax b { color: var(--text); font-weight: 600; }
+      /* Type-filter chips above the results: scope search to one kind of thing. */
+      .search-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 8px 0 0;
+      }
+      .search-filters:empty { display: none; }
+      .search-filter {
+        font: inherit;
+        font-size: 11px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .search-filter:hover {
+        color: var(--text);
+        border-color: rgba(255, 255, 255, 0.28);
+      }
+      .search-filter.active {
+        color: #fff;
+        background: rgba(78, 121, 167, 0.35);
+        border-color: #4e79a7;
+      }
       #search-results {
         list-style: none;
         margin: 6px 0 0;
@@ -1503,6 +1531,7 @@
             <button type="button" id="search-help" class="help-dot" aria-expanded="false" data-i18n-attr="aria-label:search.syntaxLabel, title:search.syntaxLabel">?</button>
           </div>
           <div id="search-syntax" hidden data-i18n-html="search.syntax"></div>
+          <div id="search-filters" class="search-filters"></div>
           <ul id="search-results"></ul>
         </div>
         </div><!-- #settings-pane -->

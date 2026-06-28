@@ -3267,6 +3267,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   // The match runs over `label` + `keywords`; only `label` is shown.
   const items = [
     ...meshes.map((mesh) => ({
+      type: "structure",
       label: mesh.userData.structure.name,
       // Frame + isolate, so a search pick dims the rest of the brain exactly like
       // the structure's legend row (not just a halo in the full brain).
@@ -3275,6 +3276,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     ...arrows.map((arrow) => {
       const tag = connectionSideTag(arrow.projection);
       return {
+        type: "connection",
         label: arrow.projection.label + (tag ? ` · ${tag}` : ""),
         // Frame + isolate, so a connection search pick dims the rest of the brain
         // like the structure / drug / target picks, not just a halo.
@@ -3290,6 +3292,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
         ? (tgt.receptor && tgt.receptor.neurotransmitter)
         : tgt.typeLabel;
       return {
+        type: "target",
         label: tgt.name + (tag ? ` · ${tag}` : ""),
         keywords: tgt.keywords || "",
         select: () => selectTarget(tgt),
@@ -3300,6 +3303,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // `fields` feeds the structured `class:"..."` / `nbn:"..."` filters (the panel's
     // clickable Class / Nomenclature values), pre-folded for matching.
     ...(data.drugs || []).filter((d) => d.focusable).map((drug) => ({
+      type: "drug",
       label: drug.name + (drug.category ? ` · ${drug.category}` : ""),
       keywords: drug.keywords || "",
       fields: {
@@ -3312,6 +3316,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // loop, plays its traveling pulse and opens its panel, exactly like its legend
     // row, so search reaches them too (part of "anything from search == the panel").
     ...(data.circuits || []).map((circuit) => ({
+      type: "circuit",
       label: `${circuit.name} · ${t("search.tagCircuit")}`,
       keywords: circuit.description || "",
       select: () => focusCircuit(circuit, { frame: true }),
@@ -3321,11 +3326,46 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // panel, like its legend row. Both colour modes' records are listed; their
     // names don't collide (transmitters vs excitatory/inhibitory/modulatory).
     ...(data.projectionGroups || []).map((group) => ({
+      type: "group",
       label: `${group.name} · ${t("search.tagPathways")}`,
       keywords: group.description || "",
       select: () => focusProjectionGroup(group, { frame: true }),
     })),
   ];
+
+  // Type-filter chips above the results: scope the search to one kind of thing
+  // (a structure, a drug, ...). The label reuses each section's own heading so the
+  // chip can't drift from the panel. Only types actually present become chips, plus
+  // an "All" reset; `activeType` (null = all) persists for the session like the
+  // query text does. Built once (the item set is static).
+  const searchFilters = document.getElementById("search-filters");
+  const FILTER_LABELS = {
+    structure: "panel.structures", connection: "info.connections",
+    target: "panel.receptors", drug: "panel.drugs",
+    circuit: "legend.circuits", group: "legendKey.pathways",
+  };
+  let activeType = null;
+  const filterChips = [];
+  const presentTypes = [...new Set(items.map((it) => it.type))]
+    .filter((ty) => ty in FILTER_LABELS);
+  if (searchFilters && presentTypes.length > 1) {
+    const addChip = (type, labelKey) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "search-filter" + (type === activeType ? " active" : "");
+      b.textContent = t(labelKey);
+      b.addEventListener("click", () => {
+        activeType = type;
+        for (const c of filterChips) c.el.classList.toggle("active", c.type === activeType);
+        renderResults();
+        searchInput.focus();
+      });
+      searchFilters.appendChild(b);
+      filterChips.push({ type, el: b });
+    };
+    addChip(null, "search.filterAll");
+    for (const ty of presentTypes) addChip(ty, FILTER_LABELS[ty]);
+  }
 
   // Index (among the non-empty rows) of the keyboard-highlighted result, or -1
   // when there is none. Arrow keys move it; Enter activates it (the first by
@@ -3361,6 +3401,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // order (structures first).
     const scored = [];
     items.forEach((it, idx) => {
+      if (activeType && it.type !== activeType) return; // type chip scopes the list
       if (field) {
         const fv = it.fields && it.fields[field];
         if (fv === undefined) return; // only items carrying this field

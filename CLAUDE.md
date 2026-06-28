@@ -618,7 +618,10 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   the brain), search (right, swaps `#search` in place, not a popup).
 - **Search**: filters structures (by name), connections (by label), receptors (name /
   neurotransmitter / system), drugs (name / category / target), circuits and projection
-  groups (the Projections legend rows; tagged `· circuit` / `· pathways`). Picking centers/frames
+  groups (the Projections legend rows; tagged `· circuit` / `· pathways`). A row of
+  **type-filter chips** (`#search-filters`: All + one per present type, labels reused from
+  the section headings) scopes results to one kind; the choice (`activeType`) persists for
+  the session. Picking centers/frames
   + **focuses** the matching thing (dims the rest of the brain) + opens its panel,
   uniformly: a structure / connection pick isolates exactly like its legend row (via
   `selectStructure` / `selectConnection`'s `isolate` option), a receptor/drug pick
