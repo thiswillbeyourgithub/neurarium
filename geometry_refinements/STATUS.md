@@ -256,7 +256,10 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   tapering up/down to meet midbrain + medulla) smooth-unioned with an anterior belly
   ellipsoid, so it bulges ventrally (+z) as the pons does, which a radial curve tube
   cannot; light displace; res 80. Replaces the curve segment. llm.
-- pending - medulla (midline)
+- done - medulla (midline) - SDF: a vertical roundcone body tapering down to the
+  cord, smooth-unioned with two ventral PYRAMID ridges (the anterior median fissure
+  groove reads between them) + two OLIVE ellipsoids ventrolaterally, light displace;
+  res 84. Replaces the plain curve segment. llm.
 - pending - cerebellum (midline)
 
 ## Phase 2: whole-brain fit

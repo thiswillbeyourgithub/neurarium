@@ -1822,17 +1822,34 @@ MIDLINE: list[dict[str, Any]] = [
          ),
     dict(base="medulla", name="Medulla", group="hindbrain",
          pos=(0.0, -3.8, -0.75), color="#7d5f4e",
-         # Bottom segment, narrowing toward the spinal cord and drawing back (-z).
+         # SDF (self-authored atlas, see geometry_refinements/). Bottom brainstem
+         # segment, narrowing toward the spinal cord. Its ventral surface carries the
+         # two PYRAMIDS (longitudinal ridges flanking the anterior median fissure)
+         # and, ventrolaterally on the upper medulla, the OLIVES (the inferior
+         # olivary bumps). Modeled as a vertical roundcone body (tapering down to the
+         # cord) smooth-unioned with two ventral pyramid ridges (slim roundcones) +
+         # two olive ellipsoids, under a light displace; res 84. Midline.
+         # Provenance: llm.
          shape=dict(
-             type="curve",
-             points=[
-                 (0.0, 0.8, 0.15),    # head, meeting the pons
-                 (0.0, 0.0, 0.0),     # mid
-                 (0.0, -0.75, -0.10), # tail, toward the cord
-             ],
-             profile=[0.55, 0.44, 0.34],
-             seed=34, noise=0.05, radial_segments=16, tubular_segments=44,
-         )),
+             type="sdf", resolution=84,
+             root=dict(op="displace", amp=0.012, freq=3.4, seed=34, nodes=[
+                 dict(op="smoothUnion", k=0.10, nodes=[
+                     dict(prim="roundcone",
+                          a=[0.0, 0.72, 0.14], r1=0.52,     # head, meeting the pons
+                          b=[0.0, -0.72, -0.08], r2=0.32),  # tail, toward the cord
+                     # ventral pyramids (paramedian longitudinal ridges).
+                     dict(prim="roundcone", a=[0.16, 0.55, 0.36], r1=0.13,
+                          b=[0.14, -0.60, 0.24], r2=0.10),
+                     dict(prim="roundcone", a=[-0.16, 0.55, 0.36], r1=0.13,
+                          b=[-0.14, -0.60, 0.24], r2=0.10),
+                     # olives (ventrolateral, upper medulla).
+                     dict(prim="ellipsoid", center=[0.40, 0.22, 0.14],
+                          radii=[0.16, 0.26, 0.18]),
+                     dict(prim="ellipsoid", center=[-0.40, 0.22, 0.14],
+                          radii=[0.16, 0.26, 0.18]),
+                 ]),
+             ])),
+         ),
     dict(base="raphe", name="Raphe nuclei", group="brainstem_nuclei", fr_gender="mp",
          pos=(0.0, -1.9, -0.95), color="#b98ac9",
          # SDF (self-authored atlas, see geometry_refinements/). The brain's
