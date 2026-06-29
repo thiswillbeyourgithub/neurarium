@@ -204,6 +204,9 @@ Viewer (`public/`):
   re-fits the arrow; `fast` skips the per-end surface-trim raycasts (reusing each
   end's cached offset) + defers the pick-hull/halo rebuild, for a cheap spread (see
   Spread performance); `ensurePickGeometry()` rebuilds a deferred pick hull on demand.
+  `setWidthScale(s)` re-fits just the shaft radius + cone cross-section (from the
+  cached arc, no raycast) so arrows hold a constant apparent width across zooms
+  (see Arrow width).
 - `js/labels.js` — floating structure-name labels (CSS2DRenderer): one hidden
   label per region, shown on hover / show-all / when pinned (`setPinned`).
 - `js/circuit-schedule.js` — `scheduleCircuit()` BFS firing order for the circuit
@@ -789,6 +792,22 @@ instead of raycasting, and the pick-hull/halo rebuilds are deferred. `createArro
 has been still for ~120ms, a chunk per frame so the catch-up never hitches; a click
 mid-spread calls `arrow.ensurePickGeometry()` so the deferred hull is current. The
 settled result is identical to the old per-frame-precise layout.
+
+### Arrow width
+
+Arrows hold a roughly constant *apparent* width as the camera zooms (a zoomed-in
+arrow would otherwise balloon and clutter the view). `createArrowWidth` (a render-
+loop `tick()` controller) scales each arrow's shaft radius + cone cross-section by
+the camera<->target distance via `ProjectionArrow.setWidthScale`, which rebuilds
+only the visible width from the cached arc (no trim raycast). The reference
+distance (scale 1) is captured on the first tick, so the resting framing keeps the
+authored radius; a width-step threshold avoids rebuilding on damping jitter; the
+fat pick hull stays a constant world size so a thin arrow is still easy to click.
+The explode auto-zoom (`focus.zoomForExplode` pulls the camera back as the brain
+spreads) is divided out via `focus.explodeZoom()`, so a **spread** does not rescale
+arrows (only a genuine user zoom does), which keeps it off the spread's hot path.
+The width persists across every explode rebuild (`update()` honours the stored
+scale). Clamped to [0.4, 2.4]x.
 
 ## Circuit animation
 

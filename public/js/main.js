@@ -235,6 +235,53 @@ function createArrowRetrim(arrows) {
   };
 }
 
+/**
+ * Keep projection arrows a constant *apparent* width as the camera zooms. A
+ * zoomed-in arrow would otherwise balloon and clutter the view (and a zoomed-out
+ * one thin away to nothing); scaling the shaft radius + cone cross-section by the
+ * camera<->target distance holds the on-screen width roughly put.
+ *
+ * The reference distance (width scale 1) is captured on the first tick, so the
+ * resting framing keeps the authored arrow width. The explode auto-zoom
+ * (zoomForExplode pulls the camera back as the brain spreads) is divided out via
+ * focus.explodeZoom(), so a spread does NOT rescale arrows: it would fight the
+ * per-frame explode rebuild for no visual gain (the brain holds a constant
+ * apparent size while spreading anyway). Only a genuine user zoom changes width.
+ *
+ * Plugs into the render loop like the other controllers: tick() runs each frame
+ * and returns whether it changed any arrow, so the on-demand loop repaints. A
+ * width-step threshold avoids rebuilding on sub-pixel damping jitter.
+ * @param {{arrows:import("./arrows.js").ProjectionArrow[], camera:THREE.PerspectiveCamera,
+ *   controls:import("three/addons/controls/OrbitControls.js").OrbitControls,
+ *   focus:ReturnType<typeof createCameraFocus>}} deps
+ */
+function createArrowWidth({ arrows, camera, controls, focus }) {
+  const MIN = 0.4;   // never thinner than 40% (stays visible zoomed all the way in)
+  const MAX = 2.4;   // never fatter than 240% (zoomed all the way out)
+  const STEP = 0.02; // re-fit only when the scale moves at least this much
+  let refDist = null; // resting (explode-zoom-divided-out) distance = scale 1
+  let applied = 1;
+  const tmp = new THREE.Vector3();
+  // The camera<->target distance with the explode auto-pull removed, i.e. the
+  // distance the user's own zoom implies.
+  const userDist = () =>
+    tmp.copy(camera.position).sub(controls.target).length() / focus.explodeZoom();
+  return {
+    /** Per-frame: rescale every arrow to hold a constant apparent width.
+     *  Returns true only when a width step was actually applied. */
+    tick() {
+      const dist = userDist();
+      if (refDist === null) { refDist = dist; return false; }
+      const scale = Math.max(MIN, Math.min(MAX, dist / refDist));
+      if (Math.abs(scale - applied) < STEP) return false;
+      applied = scale;
+      let changed = false;
+      for (const a of arrows) if (a.setWidthScale(scale)) changed = true;
+      return changed;
+    },
+  };
+}
+
 // "See inside" cull: how far past the orbit-centre plane (toward the camera) a
 // structure's centre must sit before it is hidden. A positive bias keeps the
 // central core (the deep nuclei) visible while the near outer hemisphere drops
@@ -2889,6 +2936,17 @@ function createCameraFocus({ camera, controls, meshes }) {
       camera.position.copy(controls.target).add(tmpVec);
     },
     /**
+     * The factor by which the explode auto-zoom (zoomForExplode) has currently
+     * pulled the camera back, relative to the assembled (amount 0) framing. So
+     * `currentDistance / explodeZoom()` recovers the distance the user's own zoom
+     * implies, with the spread's auto-pull divided out. The constant-width arrow
+     * controller uses this so a spread (which auto-zooms) does not change arrow
+     * width, only a genuine user zoom does.
+     */
+    explodeZoom() {
+      return boundingRadiusAt(lastExplode) / boundingRadiusAt(0);
+    },
+    /**
      * Set the desired render-time screen offset (fractions of the viewport:
      * +x slides the brain right, +y up). Eased in/out by tick(). Pass 0,0 to
      * recenter. Survives rotation / zoom / framing (it's a projection shift).
@@ -4574,6 +4632,9 @@ async function main() {
 
   const { autoSpread, autoSpreadIfDeep, arrowRetrim } = wireControls(
     { controls, meshes, arrows, labels, focus, selection, projVis, cull });
+  // Hold arrows a constant apparent width as the camera zooms (advanced by its
+  // tick() in the render loop, like arrowRetrim).
+  const arrowWidth = createArrowWidth({ arrows, camera, controls, focus });
   const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
@@ -4647,6 +4708,8 @@ async function main() {
     if (receptorMarkers.tick()) active = true;
     if (drugAnim.tick()) active = true;
     if (controls.update()) active = true;
+    // After controls.update() so it reads this frame's settled camera distance.
+    if (arrowWidth.tick()) active = true;
     if (active) needsRender = true;
     if (!needsRender) return; // idle: skip the render + label passes this frame
     needsRender = false;

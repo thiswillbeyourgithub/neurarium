@@ -236,6 +236,15 @@ export class ProjectionArrow {
     this.labelAnchor = new THREE.Object3D();
     this.group.add(this.labelAnchor);
 
+    // Width multiplier applied to the shaft radius + the cone cross-section, so
+    // arrows can be kept a constant *apparent* width as the camera zooms (a
+    // zoomed-in arrow would otherwise balloon and clutter the view). 1 = the
+    // authored TUBE_RADIUS. Driven by setWidthScale(); update() honours it so the
+    // width survives every explode rebuild. The live shaft curve is cached so a
+    // pure width change can rebuild the tube without recomputing the arc.
+    this._widthScale = 1;
+    this._shaftCurve = null;
+
     this.update();
   }
 
@@ -316,11 +325,21 @@ export class ProjectionArrow {
       ? start.clone().addScaledVector(tangentStart, CONE_LENGTH)
       : start.clone();
     const shaftCurve = new THREE.QuadraticBezierCurve3(shaftStart, mid, coneBaseEnd);
+    // Cache the arc so a pure width change (setWidthScale) can rebuild the shaft
+    // tube at a new radius without redoing the trim/bow math (the endpoints don't
+    // move on a zoom).
+    this._shaftCurve = shaftCurve;
 
+    const tubeRadius = TUBE_RADIUS * this._widthScale;
     this.tube.geometry.dispose();
     this.tube.geometry = this.tentative
-      ? dashedTubeGeometry(shaftCurve, TUBE_RADIUS)
-      : new THREE.TubeGeometry(shaftCurve, 24, TUBE_RADIUS, 8, false);
+      ? dashedTubeGeometry(shaftCurve, tubeRadius)
+      : new THREE.TubeGeometry(shaftCurve, 24, tubeRadius, 8, false);
+    // The cones share a fixed ConeGeometry; their cross-section (x/z, not the
+    // axial y) scales with the width so the heads track the shaft. The apex sits
+    // on the y axis (x = z = 0), so scaling x/z leaves it exactly on the surface.
+    this.cone.scale.set(this._widthScale, 1, this._widthScale);
+    if (this.coneStart) this.coneStart.scale.set(this._widthScale, 1, this._widthScale);
 
     // Pick hull (invisible, fat) + halo tube. Both ride the full start->end arc
     // (`this.curve`) and are only consulted on a click (pick) or while selected
@@ -360,11 +379,42 @@ export class ProjectionArrow {
     this._pickDirty = false;
   }
 
-  /** (Re)build the halo glow tube from the current arc. */
+  /** (Re)build the halo glow tube from the current arc (tracking the width). */
   _rebuildHalo() {
     this.halo.geometry.dispose();
-    this.halo.geometry = new THREE.TubeGeometry(this.curve, 24, HALO_RADIUS, 8, false);
+    this.halo.geometry = new THREE.TubeGeometry(
+      this.curve, 24, HALO_RADIUS * this._widthScale, 8, false);
     this._haloDirty = false;
+  }
+
+  /**
+   * Set the width multiplier (1 = the authored radius) and rebuild just the
+   * visible width: the shaft tube (from the cached arc) and the cone(s)'
+   * cross-section. The endpoints/curve are unchanged (a zoom doesn't move the
+   * regions), so this skips the trim raycasts and the bow math entirely, which is
+   * what makes a per-zoom-step width refresh cheap. The fat pick hull is left at
+   * its constant world radius on purpose, so a thin (zoomed-in) arrow stays an
+   * easy click target.
+   * @param {number} scale
+   * @returns {boolean} whether the width actually changed.
+   */
+  setWidthScale(scale) {
+    if (scale === this._widthScale) return false;
+    this._widthScale = scale;
+    if (this._shaftCurve) {
+      const tubeRadius = TUBE_RADIUS * scale;
+      this.tube.geometry.dispose();
+      this.tube.geometry = this.tentative
+        ? dashedTubeGeometry(this._shaftCurve, tubeRadius)
+        : new THREE.TubeGeometry(this._shaftCurve, 24, tubeRadius, 8, false);
+    }
+    this.cone.scale.set(scale, 1, scale);
+    if (this.coneStart) this.coneStart.scale.set(scale, 1, scale);
+    // The halo hugs the (now thinner/fatter) tube while visible; a hidden halo is
+    // marked stale and rebuilt on demand by setHalo().
+    if (this.halo.visible) this._rebuildHalo();
+    else this._haloDirty = true;
+    return true;
   }
 
   /**
