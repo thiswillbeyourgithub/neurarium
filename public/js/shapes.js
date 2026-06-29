@@ -533,10 +533,15 @@ float swFbm(vec3 p){
  * explode logic and the projection arrows can read them back.
  * @param {object} structure  A structure record with `position`, `color`,
  *   `shape`, and an optional `mirror` flag (left member of a symmetric pair).
+ * @param {THREE.BufferGeometry} [prebuiltGeometry]  A geometry already meshed for
+ *   this structure's shape (e.g. an `sdf` shape meshed off-thread by the worker
+ *   pool, see js/sdf-pool.js). When absent the geometry is built synchronously
+ *   here, so the call works with or without the pool. The `_L` mirror is applied
+ *   either way, so each member must get its OWN geometry (never a shared one).
  * @returns {THREE.Mesh}
  */
-export function buildStructureMesh(structure) {
-  const geometry = buildGeometry(structure.shape);
+export function buildStructureMesh(structure, prebuiltGeometry) {
+  const geometry = prebuiltGeometry || buildGeometry(structure.shape);
   // Symmetric pairs share one right-side shape file; the left member reflects
   // it so the two hemispheres are true mirror images. (Midline forms never set
   // this flag, so they are emitted once and never reflected.)

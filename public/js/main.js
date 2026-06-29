@@ -15,6 +15,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { loadBrainData } from "./data.js";
 import { buildStructureMesh } from "./shapes.js";
+import { createSdfPool } from "./sdf-pool.js";
 import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
 import { createCircuitAnimation } from "./circuit-anim.js";
@@ -3891,11 +3892,30 @@ async function main() {
     return;
   }
 
-  // Build region meshes and index them for the arrows.
+  // Mesh the SDF shapes off the main thread (a small Web Worker pool), so
+  // assembling the brain's ~40 SDF meshes at load never freezes the page. The
+  // cheap shapes (blob/curve/composite) stay synchronous. The pool falls back to
+  // synchronous meshing per-spec if workers are unavailable (see js/sdf-pool.js),
+  // so the brain always renders; this is a pure performance path.
+  const sdfItems = data.structures
+    .filter((s) => s.shape && s.shape.type === "sdf")
+    .map((s) => ({ id: s.id, spec: s.shape }));
+  const pool = createSdfPool();
+  let sdfGeoms = new Map();
+  try {
+    sdfGeoms = await pool.meshAll(sdfItems);
+  } catch (err) {
+    console.warn("sdf pool meshing failed; falling back to synchronous", err);
+  } finally {
+    pool.dispose(); // geometry is built once at load; free the workers after
+  }
+
+  // Build region meshes and index them for the arrows. SDF structures get their
+  // pre-meshed geometry; everything else is meshed synchronously inside the call.
   const meshes = [];
   const meshById = new Map();
   for (const structure of data.structures) {
-    const mesh = buildStructureMesh(structure);
+    const mesh = buildStructureMesh(structure, sdfGeoms.get(structure.id));
     meshes.push(mesh);
     meshById.set(structure.id, mesh);
     scene.add(mesh);
