@@ -320,6 +320,23 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 (Human leaves correction notes here after each milestone contact-sheet review; the
 loop reads and applies them.)
 
+- 2026-06-29 - **Deep-structure scale audit (awaiting review).** Human flagged the
+  putamen / claustrum / hippocampus poking out of the cortex: a scale problem.
+  Measured every structure's meshed AABB (scratchpad `measure.mjs`), anchored a
+  scale from the cortex hemisphere (~165mm AP / 6.81 units ~= 24 mm/unit), and
+  rescaled 13 deep structures to their real longest dimension (putamen ~14x24x32mm,
+  thalamus ~25x22x32, STN ~6mm, claustrum a thin ~4x21x28 sheet, hippocampus
+  ~15x24x40, etc.). Added a reusable per-structure `scale` (scalar or [sx,sy,sz])
+  to the shape pipeline: `_scale_sdf` recursively scales an SDF node tree about the
+  local origin; blob radii scale too. Gotcha: the claustrum is a spherical-SHELL
+  build (surface at center+radius), so anisotropic scaling (center per-axis vs
+  scalar radius by the mean) slides the shell off its bounds -> empty mesh; it takes
+  a UNIFORM scale. Nudged putamen + claustrum medial so putamen -> claustrum ->
+  insula stack in order. Verified with opaque structures-only whole-brain renders:
+  no deep nucleus pokes through; what shows at the base (olfactory bulbs, brainstem,
+  hypothalamus/mammillary from directly below) is correctly inferior-surface. NOTE:
+  a parallel session is editing `tools/fetch_*structure_images*` (the wiki gif/svg
+  TODO); left untouched, committed only my generator + shape artifacts.
 - 2026-06-29 - **Web Worker perf move landed (awaiting human review).** Moved SDF
   meshing off the main thread. The naive "worker that imports three" was a trap
   (each worker re-parses the 1.3MB three.js; load regressed to ~12.8s), so the real
