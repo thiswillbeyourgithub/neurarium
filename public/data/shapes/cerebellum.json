@@ -1,74 +1,77 @@
 {
-  "type": "composite",
-  "parts": [
-    {
-      "radii": [
-        1.4,
-        1.05,
-        1.55
-      ],
-      "seed": 31,
-      "detail": 6,
-      "noise": 0.13,
-      "octaves": 3,
-      "ridged": true,
-      "frequency": 4.6,
-      "aniso": [
-        0.3,
-        4.4,
-        0.6
-      ],
-      "offset": [
-        -1.05,
-        0.0,
-        0.0
-      ]
-    },
-    {
-      "radii": [
-        1.4,
-        1.05,
-        1.55
-      ],
-      "seed": 41,
-      "detail": 6,
-      "noise": 0.13,
-      "octaves": 3,
-      "ridged": true,
-      "frequency": 4.6,
-      "aniso": [
-        0.3,
-        4.4,
-        0.6
-      ],
-      "offset": [
-        1.05,
-        0.0,
-        0.0
-      ]
-    },
-    {
-      "radii": [
-        0.55,
-        1.12,
-        1.5
-      ],
-      "seed": 37,
-      "detail": 5,
-      "noise": 0.1,
-      "octaves": 3,
-      "ridged": true,
-      "frequency": 5.4,
-      "aniso": [
-        0.25,
-        5.0,
-        0.5
-      ],
-      "offset": [
-        0.0,
-        0.0,
-        0.05
-      ]
-    }
-  ]
+  "type": "sdf",
+  "resolution": 104,
+  "bounds": [
+    [
+      -2.65,
+      -1.4,
+      -1.78
+    ],
+    [
+      2.65,
+      1.4,
+      1.78
+    ]
+  ],
+  "root": {
+    "op": "displace",
+    "amp": 0.13,
+    "freq": 4.2,
+    "octaves": 2,
+    "ridged": true,
+    "unit": 1.0,
+    "aniso": [
+      0.3,
+      3.0,
+      0.55
+    ],
+    "seed": 31,
+    "nodes": [
+      {
+        "op": "smoothUnion",
+        "k": 0.35,
+        "nodes": [
+          {
+            "prim": "ellipsoid",
+            "center": [
+              -1.12,
+              0.0,
+              0.0
+            ],
+            "radii": [
+              1.33,
+              1.0,
+              1.5
+            ]
+          },
+          {
+            "prim": "ellipsoid",
+            "center": [
+              1.12,
+              0.0,
+              0.0
+            ],
+            "radii": [
+              1.33,
+              1.0,
+              1.5
+            ]
+          },
+          {
+            "prim": "ellipsoid",
+            "center": [
+              0.0,
+              0.0,
+              -0.08
+            ],
+            "radii": [
+              0.46,
+              1.2,
+              1.5
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -260,7 +260,12 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   cord, smooth-unioned with two ventral PYRAMID ridges (the anterior median fissure
   groove reads between them) + two OLIVE ellipsoids ventrolaterally, light displace;
   res 84. Replaces the plain curve segment. llm.
-- pending - cerebellum (midline)
+- done - cerebellum (midline) - SDF "butterfly": two hemisphere ellipsoids + a
+  narrower, taller central VERMIS ridge smooth-unioned (k=0.35, so the paravermian
+  valleys read) into one continuous mass, with the signature transverse FOLIA from a
+  ridged fractal displace (octaves=2, strong y-aniso so the folds stack vertically);
+  explicit non-cubed bounds give the tight-y-span fine y-voxels the folds need; res
+  104. Replaces the composite (which read as separate merged balls). llm. THE FINALE.
 
 ## Phase 2: whole-brain fit
 

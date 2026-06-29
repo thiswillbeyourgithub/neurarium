@@ -1744,28 +1744,30 @@ MIDLINE: list[dict[str, Any]] = [
          ),
     dict(base="cerebellum", name="Cerebellum", group="hindbrain",
          pos=(0.0, -1.95, -3.3), color="#b07aa1",
-         # Composite: two foliated hemispheres flanking a narrower central
-         # vermis, the cerebellum's real "butterfly" form, instead of a single
-         # wide ellipsoid. Each part stacks fine near-horizontal folia via a
-         # strong y-frequency skew (aniso). Sits below/behind the occipital
-         # lobes (under the tentorium) with the brainstem in front of it.
+         # SDF (self-authored atlas, see geometry_refinements/). The cerebellum's
+         # "butterfly": two hemispheres flanking a narrower, slightly taller central
+         # VERMIS, smooth-unioned into ONE continuous mass (soft paravermian valleys,
+         # not three separate balls). Its signature is the fine transverse FOLIA:
+         # near-horizontal parallel folds, made by a RIDGED fractal displace with a
+         # strong y-frequency skew (aniso) so the ridges stack vertically. The folia
+         # are deliberately bold + not-too-fine so they resolve at this resolution;
+         # an explicit (non-cubed) bounds gives the tight-y-span fine y-voxels the
+         # folds need. Res 104. Sits below/behind the occipital lobes (under the
+         # tentorium) with the brainstem in front of it. Provenance: llm.
          shape=dict(
-             type="composite",
-             parts=[
-                 # Left hemisphere.
-                 dict(radii=[1.4, 1.05, 1.55], seed=31, detail=6, noise=0.13,
-                      octaves=3, ridged=True, frequency=4.6,
-                      aniso=[0.3, 4.4, 0.6], offset=[-1.05, 0.0, 0.0]),
-                 # Right hemisphere.
-                 dict(radii=[1.4, 1.05, 1.55], seed=41, detail=6, noise=0.13,
-                      octaves=3, ridged=True, frequency=4.6,
-                      aniso=[0.3, 4.4, 0.6], offset=[1.05, 0.0, 0.0]),
-                 # Vermis: narrow, slightly taller central ridge joining them.
-                 dict(radii=[0.55, 1.12, 1.5], seed=37, detail=5, noise=0.1,
-                      octaves=3, ridged=True, frequency=5.4,
-                      aniso=[0.25, 5.0, 0.5], offset=[0.0, 0.0, 0.05]),
-             ],
-         )),
+             type="sdf", resolution=104,
+             bounds=[[-2.65, -1.40, -1.78], [2.65, 1.40, 1.78]],
+             root=dict(op="displace", amp=0.13, freq=4.2, octaves=2, ridged=True,
+                       unit=1.0, aniso=[0.3, 3.0, 0.55], seed=31, nodes=[
+                 dict(op="smoothUnion", k=0.35, nodes=[
+                     dict(prim="ellipsoid", center=[-1.12, 0.0, 0.0],
+                          radii=[1.33, 1.0, 1.5]),     # left hemisphere
+                     dict(prim="ellipsoid", center=[1.12, 0.0, 0.0],
+                          radii=[1.33, 1.0, 1.5]),     # right hemisphere
+                     dict(prim="ellipsoid", center=[0.0, 0.0, -0.08],
+                          radii=[0.46, 1.2, 1.5]),     # vermis (narrow, taller ridge)
+                 ]),
+             ]))),
     # The brainstem, cut into its three anatomical levels (midbrain -> pons ->
     # medulla) as separate midline structures instead of one swept tube, so each
     # is selectable and they come apart on explode. The three curve segments share
