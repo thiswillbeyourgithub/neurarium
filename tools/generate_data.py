@@ -1693,10 +1693,21 @@ PAIRED: list[dict[str, Any]] = [
     # in a browser.
     dict(base="locus_coeruleus", name="Locus coeruleus", group="brainstem_nuclei",
          pos=(0.3, -2.05, -1.15), color="#4a7fae",
-         # "The blue spot": the brain's main noradrenaline source, in the dorsal
-         # rostral pons. Tiny; coloured blue as a nod to its name. Carries the
-         # alpha-2 autoreceptors. Sits inside/behind the brainstem at explode 0.
-         radii=(0.12, 0.22, 0.14), seed=82, detail=4, noise=0.04),
+         # SDF (self-authored atlas, see geometry_refinements/). "The blue spot":
+         # the brain's main noradrenaline source, a thin ROD of cells in the dorsal
+         # rostral pons (floor of the 4th ventricle). Modeled as a slim vertical
+         # capsule (a roundcone with equal end radii) so it reads as the pencil-line
+         # column it is, faint displace; res 56. Coloured blue as a nod to its name.
+         # Carries the alpha-2 autoreceptors. Sits inside/behind the brainstem at
+         # explode 0. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=56,
+             root=dict(op="displace", amp=0.006, freq=5.0, seed=82, nodes=[
+                 dict(prim="roundcone",
+                      a=[0.0, -0.17, 0.0], r1=0.10,
+                      b=[0.0, 0.17, 0.0], r2=0.085),  # slim near-vertical rod
+             ])),
+         ),
     dict(base="vta", name="Ventral tegmental area", group="brainstem_nuclei",
          fr_gender="f",
          pos=(0.45, -1.35, -1.25), color="#6cab5d",
@@ -1807,12 +1818,21 @@ MIDLINE: list[dict[str, Any]] = [
          )),
     dict(base="raphe", name="Raphe nuclei", group="brainstem_nuclei", fr_gender="mp",
          pos=(0.0, -1.9, -0.95), color="#b98ac9",
-         # The brain's serotonin source: a midline column of nuclei running the
-         # length of the brainstem. Modeled as a slim vertical blob hugging the
-         # midline (emitted once, never mirrored). Carries the 5-HT1A
-         # somatodendritic autoreceptors. Position/size are a guess: tune in a
-         # browser.
-         radii=(0.12, 0.55, 0.2), seed=81, detail=5, noise=0.05),
+         # SDF (self-authored atlas, see geometry_refinements/). The brain's
+         # serotonin source: a midline COLUMN of nuclei running the length of the
+         # brainstem (the seam, "raphe"). Modeled as a slim vertical capsule (a
+         # roundcone with near-equal end radii) hugging the midline so it reads as
+         # the continuous column it is, faint displace; res 64. Emitted once, never
+         # mirrored. Carries the 5-HT1A somatodendritic autoreceptors. Position/size
+         # are a guess: tune in a browser. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=64,
+             root=dict(op="displace", amp=0.008, freq=4.5, seed=81, nodes=[
+                 dict(prim="roundcone",
+                      a=[0.0, -0.48, 0.0], r1=0.13,
+                      b=[0.0, 0.48, 0.0], r2=0.11),  # tall slim midline column
+             ])),
+         ),
 ]
 
 # Wikipedia article per structure, keyed by ``base`` id (so both hemispheres of a

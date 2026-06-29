@@ -234,9 +234,16 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 
 ### brainstem_nuclei (monoamine source nuclei)
 
-- pending - vta (paired)
-- pending - locus_coeruleus (paired)
-- pending - raphe (midline)
+- holdout - vta (paired) - kept as the small `blob`. The VTA is a diffuse midbrain
+  cell group with no distinctive silhouette (a plain small ovoid, medial to the
+  SN); a blob-ovoid vs an SDF-ovoid is visually identical, nothing to add. Trivial
+  to convert for a uniform-SDF atlas if the human wants it (mammillary precedent). llm.
+- done - locus_coeruleus (paired) - SDF: a slim near-vertical CAPSULE (a roundcone
+  with near-equal end radii), so the "blue spot" reads as the pencil-line rod of
+  cells it is rather than a lens; faint displace; res 56. Replaces the blob. llm.
+- done - raphe (midline) - SDF: a slim vertical CAPSULE column hugging the midline
+  (the "seam"), faint displace; res 64. Reads as the continuous serotonin column.
+  Replaces the vertical blob. llm.
 
 ### hindbrain
 
