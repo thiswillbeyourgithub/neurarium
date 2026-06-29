@@ -415,6 +415,22 @@ const CORTEX_SWIRL = {
   steps: 4, // toon lighting bands (cel-shading quantization)
 };
 
+// The cerebellum's folia, painted on instead of carved: parallel near-horizontal
+// lines stacked along the local y axis, gently wavied so they wrap the surface
+// like real folia. Same contour-ink technique as the swirl (see CORTEX_SWIRL),
+// only the phase field differs (y-dominated, not isotropic warped noise), so the
+// geometry can stay a cheap smooth mass (no ridged displace, no high resolution).
+const CEREBELLUM_FOLIA = {
+  freq: 6.2, // folia bands per local unit along the stack (y) axis (denser = more folds)
+  warp: 0.95, // how wavy the bands are (domain-warp on the phase; also breaks the
+  // top-cap iso-y contours out of concentric rings into organic folds)
+  warpFreq: 1.9, // scale of that waviness
+  octaves: 2, // noise layers feeding the warp
+  width: 0.26, // ink line thickness, as a fraction of the band spacing (0..0.5)
+  ink: 0.58, // line darkness on a fold
+  steps: 4, // toon lighting bands, matching the cortex
+};
+
 // Format a JS number as a GLSL float literal (always with a decimal point so it
 // is typed as a float, never an int).
 const glslFloat = (x) => {
@@ -441,34 +457,42 @@ function cortexGradientMap() {
 }
 
 /**
- * `onBeforeCompile` hook that draws the swirl motif onto a (toon) lobe material.
- * It samples a domain-warped value-noise field in *object* space (so the motif
- * stays locked to the surface as it rotates / explodes, and mirrors with the
- * left hemisphere), then darkens `diffuseColor` along the field's evenly-spaced
- * contour lines. The darkening happens *before* lighting, so the toon ramp then
- * shades the inked lines along with the rest, keeping them part of the surface.
+ * Build an `onBeforeCompile` hook that inks a contour-line motif onto a (toon)
+ * surface material. It samples object-space position (so the motif stays locked
+ * to the surface as it rotates / explodes, and mirrors with the left hemisphere),
+ * derives a scalar `phase` field from `cfg.phaseGlsl`, then darkens
+ * `diffuseColor` along that field's evenly-spaced contour lines. The darkening
+ * happens *before* lighting, so the toon ramp shades the inked lines along with
+ * the rest, keeping them part of the surface.
  *
- * Used as a shared function reference for every lobe material so three.js
- * compiles a single program for them (their colours differ via the `diffuse`
+ * Both the cortex swirl and the cerebellar folia are this same technique; only
+ * the phase field differs (isotropic warped noise -> spirals; y-dominated ->
+ * stacked transverse folds), so the noise + contour code lives here once.
+ *
+ * Returns ONE function reference per pattern (built at module load), so three.js
+ * compiles a single program per pattern (colours differ via the `diffuse`
  * uniform, not the shader source).
- * @param {object} shader  The shader descriptor three.js passes in.
+ * @param {object} cfg  `{octaves, width, ink, phaseGlsl}`. `phaseGlsl` is a GLSL
+ *   snippet, run inside the ink block, that must set `float phase` from
+ *   `vSwirlPos` using the `swFbm` helper.
  */
-function injectCortexSwirl(shader) {
-  // Vertex: hand the object-space position to the fragment stage.
-  shader.vertexShader = shader.vertexShader
-    .replace(
-      "#include <common>",
-      "#include <common>\nvarying vec3 vSwirlPos;",
-    )
-    .replace(
-      "#include <begin_vertex>",
-      "#include <begin_vertex>\n  vSwirlPos = position;",
-    );
+function makePatternInjector(cfg) {
+  return function (shader) {
+    // Vertex: hand the object-space position to the fragment stage.
+    shader.vertexShader = shader.vertexShader
+      .replace(
+        "#include <common>",
+        "#include <common>\nvarying vec3 vSwirlPos;",
+      )
+      .replace(
+        "#include <begin_vertex>",
+        "#include <begin_vertex>\n  vSwirlPos = position;",
+      );
 
-  // Fragment prelude: a compact value-noise + fBm the contour field is built on.
-  const prelude = `
+    // Fragment prelude: a compact value-noise + fBm the contour field is built on.
+    const prelude = `
 varying vec3 vSwirlPos;
-#define SWIRL_OCTAVES ${CORTEX_SWIRL.octaves}
+#define SWIRL_OCTAVES ${cfg.octaves}
 float swHash(vec3 p){
   p = fract(p * 0.3183099 + vec3(0.71, 0.113, 0.419));
   p *= 17.0;
@@ -498,9 +522,33 @@ float swFbm(vec3 p){
 }
 `;
 
-  // Darken the diffuse along the warped field's contour lines (the swirl motif).
-  const ink = `#include <color_fragment>
+    // Darken the diffuse along the phase field's contour lines.
+    const ink = `#include <color_fragment>
 {
+  float phase;
+  ${cfg.phaseGlsl}
+  // Triangle wave: 1 at a contour centre, 0 midway between contours.
+  float tri = abs(fract(phase) - 0.5) * 2.0;
+  float aa = fwidth(phase) * 1.5;
+  float line = smoothstep(
+    1.0 - ${glslFloat(cfg.width)} - aa,
+    1.0 - ${glslFloat(cfg.width)} + aa,
+    tri);
+  diffuseColor.rgb *= mix(1.0, ${glslFloat(cfg.ink)}, line);
+}`;
+
+    shader.fragmentShader =
+      prelude +
+      shader.fragmentShader.replace("#include <color_fragment>", ink);
+  };
+}
+
+// The cortex swirl: a domain-warped isotropic field whose contours curl into spirals.
+const injectCortexSwirl = makePatternInjector({
+  octaves: CORTEX_SWIRL.octaves,
+  width: CORTEX_SWIRL.width,
+  ink: CORTEX_SWIRL.ink,
+  phaseGlsl: `
   vec3 q = vSwirlPos * ${glslFloat(CORTEX_SWIRL.freq)};
   vec3 wOff = ${glslFloat(CORTEX_SWIRL.warp)} * vec3(
     swFbm(q),
@@ -508,21 +556,20 @@ float swFbm(vec3 p){
     swFbm(q + vec3(2.1, 7.4, 3.5))
   );
   float field = swFbm(vSwirlPos * ${glslFloat(CORTEX_SWIRL.freq)} + wOff);
-  float phase = field * ${glslFloat(CORTEX_SWIRL.rings)};
-  // Triangle wave: 1 at a contour centre, 0 midway between contours.
-  float tri = abs(fract(phase) - 0.5) * 2.0;
-  float aa = fwidth(phase) * 1.5;
-  float line = smoothstep(
-    1.0 - ${glslFloat(CORTEX_SWIRL.width)} - aa,
-    1.0 - ${glslFloat(CORTEX_SWIRL.width)} + aa,
-    tri);
-  diffuseColor.rgb *= mix(1.0, ${glslFloat(CORTEX_SWIRL.ink)}, line);
-}`;
+  phase = field * ${glslFloat(CORTEX_SWIRL.rings)};`,
+});
 
-  shader.fragmentShader =
-    prelude +
-    shader.fragmentShader.replace("#include <color_fragment>", ink);
-}
+// The cerebellar folia: phase dominated by the local y so contours are stacked
+// near-horizontal bands, gently warped so they wave across the surface.
+const injectCerebellumFolia = makePatternInjector({
+  octaves: CEREBELLUM_FOLIA.octaves,
+  width: CEREBELLUM_FOLIA.width,
+  ink: CEREBELLUM_FOLIA.ink,
+  phaseGlsl: `
+  float warpv = swFbm(vSwirlPos * ${glslFloat(CEREBELLUM_FOLIA.warpFreq)});
+  phase = vSwirlPos.y * ${glslFloat(CEREBELLUM_FOLIA.freq)}
+        + ${glslFloat(CEREBELLUM_FOLIA.warp)} * warpv;`,
+});
 
 /**
  * Build a ready-to-add mesh for one structure record.
@@ -547,14 +594,19 @@ export function buildStructureMesh(structure, prebuiltGeometry) {
   // this flag, so they are emitted once and never reflected.)
   if (structure.mirror) mirrorGeometryX(geometry);
   // Cortical lobes are cel-shaded (flat toon bands) and carry the swirl motif
-  // (see CORTEX_SWIRL); everything else keeps the smooth standard material. A
-  // shared onBeforeCompile + cache key means all lobes compile to one program.
+  // (see CORTEX_SWIRL); the cerebellum is likewise cel-shaded but inked with
+  // stacked folia bands (shape.pattern === "folia", see CEREBELLUM_FOLIA), which
+  // lets its geometry stay a cheap smooth mass instead of carved ridges.
+  // Everything else keeps the smooth standard material. A shared onBeforeCompile +
+  // cache key per pattern means each compiles to one program.
   const isLobe = structure.group === "lobe" && CORTEX_SWIRL.enabled;
   // A lobe can opt out of the painted-on swirl ink with `shape.swirl: false`
   // (e.g. an SDF lobe whose folds are entirely geometric). Default: swirl on, so
   // SDF lobes get gentle geometric gyrification PLUS the brainy sulcus ink.
   const noSwirl = isLobe && structure.shape && structure.shape.swirl === false;
-  const material = isLobe
+  const isFolia = structure.shape && structure.shape.pattern === "folia";
+  const toonShaded = isLobe || isFolia;
+  const material = toonShaded
     ? new THREE.MeshToonMaterial({
         color: new THREE.Color(structure.color),
         gradientMap: cortexGradientMap(),
@@ -574,6 +626,9 @@ export function buildStructureMesh(structure, prebuiltGeometry) {
   if (isLobe && !noSwirl) {
     material.onBeforeCompile = injectCortexSwirl;
     material.customProgramCacheKey = () => "cortex-swirl";
+  } else if (isFolia) {
+    material.onBeforeCompile = injectCerebellumFolia;
+    material.customProgramCacheKey = () => "cerebellum-folia";
   }
   const mesh = new THREE.Mesh(geometry, material);
 

@@ -1747,20 +1747,19 @@ MIDLINE: list[dict[str, Any]] = [
          # SDF (self-authored atlas, see geometry_refinements/). The cerebellum's
          # "butterfly": two hemispheres flanking a narrower, slightly taller central
          # VERMIS, smooth-unioned into ONE continuous mass (soft paravermian valleys,
-         # not three separate balls). Its signature is the fine transverse FOLIA:
-         # near-horizontal parallel folds, made by a RIDGED fractal displace with a
-         # strong y-frequency skew (aniso) so the ridges stack vertically. The folia
-         # live on the y axis (aniso 3.0), so y needs the finest sampling; x runs
-         # ALONG the folds (aniso 0.3, coarsest) and z is moderate. An EXPLICIT
-         # per-axis resolution [Nx, Ny, Nz] pins that anisotropy (the default
-         # isotropic voxel sizing would blur the folds into granular noise). Sits
-         # below/behind the occipital lobes (under the tentorium) with the brainstem
-         # in front of it. Provenance: llm.
+         # not three separate balls). The signature transverse FOLIA are PAINTED ON,
+         # not carved: `pattern="folia"` tells the viewer to cel-shade it like the
+         # cortex and ink stacked near-horizontal fold lines (CEREBELLUM_FOLIA in
+         # shapes.js). So the geometry stays a cheap SMOOTH mass (only a faint
+         # displace for an organic surface) at a modest ISOTROPIC resolution, instead
+         # of the costly ridged displace + anisotropic [Nx,Ny,Nz] grid the carved
+         # folia needed. Sits below/behind the occipital lobes (under the tentorium)
+         # with the brainstem in front of it. Provenance: llm.
          shape=dict(
-             type="sdf", resolution=[72, 104, 84],
+             type="sdf", resolution=56, pattern="folia",
              bounds=[[-2.65, -1.40, -1.78], [2.65, 1.40, 1.78]],
-             root=dict(op="displace", amp=0.13, freq=4.2, octaves=2, ridged=True,
-                       unit=1.0, aniso=[0.3, 3.0, 0.55], seed=31, nodes=[
+             root=dict(op="displace", amp=0.03, freq=2.6, octaves=1,
+                       unit=1.0, seed=31, nodes=[
                  dict(op="smoothUnion", k=0.35, nodes=[
                      dict(prim="ellipsoid", center=[-1.12, 0.0, 0.0],
                           radii=[1.33, 1.0, 1.5]),     # left hemisphere

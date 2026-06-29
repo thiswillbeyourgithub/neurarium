@@ -1,10 +1,7 @@
 {
   "type": "sdf",
-  "resolution": [
-    72,
-    104,
-    84
-  ],
+  "resolution": 56,
+  "pattern": "folia",
   "bounds": [
     [
       -2.65,
@@ -19,16 +16,10 @@
   ],
   "root": {
     "op": "displace",
-    "amp": 0.13,
-    "freq": 4.2,
-    "octaves": 2,
-    "ridged": true,
+    "amp": 0.03,
+    "freq": 2.6,
+    "octaves": 1,
     "unit": 1.0,
-    "aniso": [
-      0.3,
-      3.0,
-      0.55
-    ],
     "seed": 31,
     "nodes": [
       {
