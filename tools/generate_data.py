@@ -1791,18 +1791,23 @@ MIDLINE: list[dict[str, Any]] = [
          )),
     dict(base="pons", name="Pons", group="hindbrain",
          pos=(0.0, -2.35, -0.45), color="#8c6a58",
-         # Middle segment: the fullest, bulging anteriorly (+z); the pontine nuclei
-         # relay cortex -> cerebellum (the corticopontine / pontocerebellar legs).
+         # SDF (self-authored atlas, see geometry_refinements/). Middle brainstem
+         # segment, the fullest. Its defining feature is the BASIS PONTIS: a rounded
+         # belly bulging ANTERIORLY (+z) that a radially-symmetric curve tube cannot
+         # make. Modeled as a body ellipsoid (wider mediolaterally, tapering up/down
+         # to meet the midbrain + medulla) smooth-unioned with an anterior belly
+         # ellipsoid, under a light displace; res 80. Midline. Provenance: llm.
          shape=dict(
-             type="curve",
-             points=[
-                 (0.0, 0.65, -0.10),  # head, meeting the midbrain
-                 (0.0, 0.0, 0.0),     # belly, fullest + most anterior
-                 (0.0, -0.65, -0.15), # tail, meeting the medulla
-             ],
-             profile=[0.62, 0.8, 0.55],
-             seed=33, noise=0.05, radial_segments=16, tubular_segments=44,
-         )),
+             type="sdf", resolution=80,
+             root=dict(op="displace", amp=0.014, freq=3.0, seed=33, nodes=[
+                 dict(op="smoothUnion", k=0.30, nodes=[
+                     dict(prim="ellipsoid", center=[0.0, 0.0, -0.05],
+                          radii=[0.72, 0.64, 0.46]),       # body
+                     dict(prim="ellipsoid", center=[0.0, -0.05, 0.30],
+                          radii=[0.60, 0.50, 0.36]),       # anterior belly
+                 ]),
+             ])),
+         ),
     dict(base="medulla", name="Medulla", group="hindbrain",
          pos=(0.0, -3.8, -0.75), color="#7d5f4e",
          # Bottom segment, narrowing toward the spinal cord and drawing back (-z).

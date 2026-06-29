@@ -1,29 +1,44 @@
 {
-  "type": "curve",
-  "points": [
-    [
-      0.0,
-      0.65,
-      -0.1
-    ],
-    [
-      0.0,
-      0.0,
-      0.0
-    ],
-    [
-      0.0,
-      -0.65,
-      -0.15
+  "type": "sdf",
+  "resolution": 80,
+  "root": {
+    "op": "displace",
+    "amp": 0.014,
+    "freq": 3.0,
+    "seed": 33,
+    "nodes": [
+      {
+        "op": "smoothUnion",
+        "k": 0.3,
+        "nodes": [
+          {
+            "prim": "ellipsoid",
+            "center": [
+              0.0,
+              0.0,
+              -0.05
+            ],
+            "radii": [
+              0.72,
+              0.64,
+              0.46
+            ]
+          },
+          {
+            "prim": "ellipsoid",
+            "center": [
+              0.0,
+              -0.05,
+              0.3
+            ],
+            "radii": [
+              0.6,
+              0.5,
+              0.36
+            ]
+          }
+        ]
+      }
     ]
-  ],
-  "profile": [
-    0.62,
-    0.8,
-    0.55
-  ],
-  "seed": 33,
-  "noise": 0.05,
-  "radial_segments": 16,
-  "tubular_segments": 44
+  }
 }

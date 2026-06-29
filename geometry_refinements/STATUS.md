@@ -248,7 +248,10 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 ### hindbrain
 
 - pending - midbrain (midline)
-- pending - pons (midline)
+- done - pons (midline) - SDF: the BASIS PONTIS. A body ellipsoid (wider ML,
+  tapering up/down to meet midbrain + medulla) smooth-unioned with an anterior belly
+  ellipsoid, so it bulges ventrally (+z) as the pons does, which a radial curve tube
+  cannot; light displace; res 80. Replaces the curve segment. llm.
 - pending - medulla (midline)
 - pending - cerebellum (midline)
 
