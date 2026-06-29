@@ -1406,7 +1406,7 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="subthalamic_nucleus", name="Subthalamic nucleus",
          group="basal_ganglia",
-         pos=(1.3, -0.9, -0.6), color="#d37295",
+         pos=(0.75, -0.35, -0.55), color="#d37295",
          scale=0.3,  # anatomical: a tiny ~5-7mm lens (was ~4x too big)
          # SDF (self-authored atlas, see geometry_refinements/). The tiny biconvex
          # LENS (lentil) of the subthalamus: two large spheres offset along the
@@ -1429,7 +1429,7 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="substantia_nigra", name="Substantia nigra",
          group="basal_ganglia", fr_gender="f",
-         pos=(1.0, -1.4, -1.2), color="#3d3d3d",
+         pos=(0.55, -0.6, -0.6), color="#3d3d3d",
          scale=(0.6, 0.45, 0.45),  # anatomical: a thin ~9x5x17mm band
          # SDF (self-authored atlas, see geometry_refinements/). A thin, gently
          # CURVED lamina in the midbrain hugging the back of the cerebral peduncle
@@ -1636,6 +1636,7 @@ PAIRED: list[dict[str, Any]] = [
          )),
     dict(base="olfactory_bulb", name="Olfactory bulb", group="limbic",
          pos=(0.45, -1.05, 2.7), color="#9aa86f",
+         scale=(0.6, 0.6, 1.0),  # anatomical: thin bulb+tract, ~5mm wide (was too fat)
          # SDF (self-authored atlas, see geometry_refinements/). A match-stick on
          # the orbital underside of the frontal lobe: a swollen anterior BULB (on
          # the cribriform plate) tapering into a thin posterior olfactory TRACT that
@@ -1658,6 +1659,7 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="septal_nuclei", name="Septal nuclei", group="limbic", fr_gender="mp",
          pos=(0.3, 0.1, 0.85), color="#7f9cc0",
+         scale=(0.9, 0.6, 0.9),  # anatomical: small paramedian nuclei, ~10mm (was tall)
          # SDF (self-authored atlas, see geometry_refinements/). Small paramedian
          # grey matter below the rostrum of the corpus callosum, anterior to the
          # thalamus and above the hypothalamus (a Papez/limbic relay). It has no
@@ -1711,7 +1713,8 @@ PAIRED: list[dict[str, Any]] = [
     # cortex/deep-nuclei jigsaw clipping. Positions are anatomical guesses: tune
     # in a browser.
     dict(base="locus_coeruleus", name="Locus coeruleus", group="brainstem_nuclei",
-         pos=(0.3, -2.05, -1.15), color="#4a7fae",
+         pos=(0.3, -1.0, -0.95), color="#4a7fae",
+         scale=(0.4, 1.0, 0.4),  # anatomical: thin ~2mm column; moved into the upper pons
          # SDF (self-authored atlas, see geometry_refinements/). "The blue spot":
          # the brain's main noradrenaline source, a thin ROD of cells in the dorsal
          # rostral pons (floor of the 4th ventricle). Modeled as a slim vertical
@@ -1729,7 +1732,8 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="vta", name="Ventral tegmental area", group="brainstem_nuclei",
          fr_gender="f",
-         pos=(0.45, -1.35, -1.25), color="#6cab5d",
+         pos=(0.3, -0.6, -0.5), color="#6cab5d",
+         scale=0.4,  # anatomical: ~5mm midbrain nucleus; moved into the rescaled midbrain
          # The midbrain dopamine source medial to the substantia nigra; origin of
          # the mesolimbic / mesocortical pathways (reward, D2 autoreceptors).
          # Small smooth blob, dopamine-green to echo the dopaminergic arrows.
@@ -1764,6 +1768,7 @@ MIDLINE: list[dict[str, Any]] = [
          ),
     dict(base="cerebellum", name="Cerebellum", group="hindbrain",
          pos=(0.0, -1.55, -3.3), color="#b07aa1",
+         scale=(0.88, 0.85, 0.74),  # anatomical: ~103x48x55mm (was a bit large/deep)
          # SDF (self-authored atlas, see geometry_refinements/). The cerebellum's
          # "butterfly": two hemispheres flanking a narrower, slightly taller central
          # VERMIS, smooth-unioned into ONE continuous mass (soft paravermian valleys,
@@ -1800,7 +1805,8 @@ MIDLINE: list[dict[str, Any]] = [
     # name, which is what justified splitting the column out, see "Drugs"/CLAUDE.md
     # granularity note.)
     dict(base="midbrain", name="Midbrain", group="hindbrain",
-         pos=(0.0, -0.95, -0.66), color="#9c755f",
+         pos=(0.0, -0.51, -0.66), color="#9c755f",
+         scale=(0.74, 0.4, 0.7),  # anatomical: short ~18-20mm segment (was ~55mm tall)
          # SDF (self-authored atlas, see geometry_refinements/). Top brainstem
          # segment, continuous with the diencephalon/thalamus above. Its signature
          # is the dorsal TECTAL (quadrigeminal) PLATE: four colliculi, the superior +
@@ -1825,7 +1831,8 @@ MIDLINE: list[dict[str, Any]] = [
              ])),
          ),
     dict(base="pons", name="Pons", group="hindbrain",
-         pos=(0.0, -2.35, -0.45), color="#8c6a58",
+         pos=(0.0, -1.43, -0.45), color="#8c6a58",
+         scale=0.87,  # anatomical: ~27mm tall (already close); raised to meet midbrain
          # SDF (self-authored atlas, see geometry_refinements/). Middle brainstem
          # segment, the fullest. Its defining feature is the BASIS PONTIS: a rounded
          # belly bulging ANTERIORLY (+z) that a radially-symmetric curve tube cannot
@@ -1844,7 +1851,8 @@ MIDLINE: list[dict[str, Any]] = [
              ])),
          ),
     dict(base="medulla", name="Medulla", group="hindbrain",
-         pos=(0.0, -3.8, -0.75), color="#7d5f4e",
+         pos=(0.0, -2.61, -0.75), color="#7d5f4e",
+         scale=(0.74, 0.55, 0.8),  # anatomical: ~30mm tall (was ~55mm); raised to meet pons
          # SDF (self-authored atlas, see geometry_refinements/). Bottom brainstem
          # segment, narrowing toward the spinal cord. Its ventral surface carries the
          # two PYRAMIDS (longitudinal ridges flanking the anterior median fissure)
@@ -1874,7 +1882,8 @@ MIDLINE: list[dict[str, Any]] = [
              ])),
          ),
     dict(base="raphe", name="Raphe nuclei", group="brainstem_nuclei", fr_gender="mp",
-         pos=(0.0, -1.9, -0.95), color="#b98ac9",
+         pos=(0.0, -1.5, -0.6), color="#b98ac9",
+         scale=(0.5, 1.2, 0.5),  # anatomical: thin midline column spanning the brainstem
          # SDF (self-authored atlas, see geometry_refinements/). The brain's
          # serotonin source: a midline COLUMN of nuclei running the length of the
          # brainstem (the seam, "raphe"). Modeled as a slim vertical capsule (a
