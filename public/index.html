@@ -1189,6 +1189,57 @@
       }
       .info-interactors .drug-cat:first-of-type { margin-top: 2px; }
 
+      /* Startup loading overlay (js/loading.js). Covers the canvas (its own opaque
+         page-coloured background) above every panel/banner so the brain assembles
+         unseen until ready, then fades out. */
+      #loading {
+        position: fixed;
+        inset: 0;
+        z-index: 70; /* above panels (5), banners/status (50), modal (60) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0e1116; /* the page bg, so the canvas is hidden until ready */
+        transition: opacity 0.45s ease;
+      }
+      #loading.loaded {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .loading-card { width: min(320px, 72vw); text-align: center; }
+      .loading-title {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--text);
+        margin-bottom: 14px;
+      }
+      .loading-track {
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(160, 168, 178, 0.18);
+        overflow: hidden;
+      }
+      .loading-fill {
+        width: 0;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #4e79a7, #8fb6e6);
+        transition: width 0.25s ease;
+      }
+      .loading-caption {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        min-height: 1.2em; /* reserve a line so the card doesn't jump as text changes */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #loading, .loading-fill { transition: none; }
+      }
+
       #status {
         position: fixed;
         /* Sit clear of however many banners are stacked at the top: the stack
@@ -1263,6 +1314,18 @@
 
   <body>
     <canvas id="scene"></canvas>
+
+    <!-- Startup loading overlay (driven by js/loading.js): shown over the canvas
+         while the dataset is fetched and the brain is meshed, so a slow first load
+         shows a progress bar instead of a blank screen. Visible by default so it
+         paints immediately; main() fades it out once the scene is built. -->
+    <div id="loading">
+      <div class="loading-card">
+        <div class="loading-title">neurarium</div>
+        <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
+        <div id="loading-caption" class="loading-caption" data-i18n="loading.start">Loading…</div>
+      </div>
+    </div>
 
     <!-- Top banner stack: the optional WIP banner (js/dev-banner.js, hidden
          unless DEV=1) plus any error banners (js/error-banner.js) pile up here

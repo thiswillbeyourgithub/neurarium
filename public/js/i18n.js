@@ -168,9 +168,14 @@
       "drug.structureAlt": "Chemical structure of {name}",
       "structure.imageAlt": "Illustration of the {name}",
 
-      "status.loading": "Loading brain data…",
       "status.loadError":
         "Could not load brain data: {msg}. Are you serving over HTTP? (see CLAUDE.md)",
+
+      "loading.start": "Loading…",
+      "loading.data": "Loading data…",
+      "loading.shapes": "Loading shapes…",
+      "loading.meshing": "Building {name}…",
+      "loading.building": "Assembling the brain…",
 
       "about.p1":
         "neurarium is a work-in-progress, interactive 3D map of the brain. It " +
@@ -369,9 +374,14 @@
       "drug.structureAlt": "Structure chimique de {name}",
       "structure.imageAlt": "Illustration de {name}",
 
-      "status.loading": "Chargement des données du cerveau…",
       "status.loadError":
         "Impossible de charger les données : {msg}. Le site est-il servi via HTTP ? (voir CLAUDE.md)",
+
+      "loading.start": "Chargement…",
+      "loading.data": "Chargement des données…",
+      "loading.shapes": "Chargement des formes…",
+      "loading.meshing": "Construction : {name}…",
+      "loading.building": "Assemblage du cerveau…",
 
       "about.p1":
         "neurarium est une carte 3D interactive du cerveau, en cours de " +

@@ -15,7 +15,7 @@ const SYNC_DEPS = { noise3d: gradientNoise, fractalNoise };
 /**
  * @param {object} [opts]
  * @param {number} [opts.size]  worker count (default: cores - 1, clamped 2..6).
- * @returns {{ meshAll(items:Array<{id:string, spec:object}>): Promise<Map<string, THREE.BufferGeometry>>, dispose():void }}
+ * @returns {{ meshAll(items:Array<{id:string, spec:object}>, onItem?:(id:string,done:number,total:number)=>void): Promise<Map<string, THREE.BufferGeometry>>, dispose():void }}
  */
 export function createSdfPool(opts = {}) {
   /** @type {Array<{w:Worker, busy:boolean, jobId:number}>|false|null} */
@@ -92,9 +92,11 @@ export function createSdfPool(opts = {}) {
     });
   }
 
-  async function meshAll(items) {
+  async function meshAll(items, onItem = null) {
     const out = new Map();
     if (!items.length) return out;
+    let done = 0;
+    const total = items.length;
     await Promise.all(items.map(async ({ id, spec }) => {
       try {
         out.set(id, await meshOne(spec));
@@ -102,6 +104,7 @@ export function createSdfPool(opts = {}) {
         // Worker path failed for this spec: mesh it here so the brain is whole.
         out.set(id, buildSdfGeometry(spec, SYNC_DEPS));
       }
+      onItem?.(id, (done += 1), total); // drive the startup loading bar
     }));
     return out;
   }

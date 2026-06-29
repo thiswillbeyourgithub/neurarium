@@ -176,7 +176,8 @@ Viewer (`public/`):
 
 - `index.html` — page shell: loads three.js (vendored, import map) and, on
   `?debug=1` only, vendored eruda. Holds the bottom-left collapsible `#controls`
-  ("neurarium") panel and the `#banners` stack (see Controls).
+  ("neurarium") panel, the `#banners` stack (see Controls), and the startup
+  `#loading` overlay (see Loading overlay).
 - `js/data.js` — fetches `meta.json` + the `.jsonl` files + all shape files;
   returns a normalized `{structures, projections, circuits, projectionGroups,
   projectionGroupsByKey, receptors, targets, drugs, drugsByTarget, byId, meta}`.
@@ -227,6 +228,8 @@ Viewer (`public/`):
 - `js/i18n.js` — internationalization (classic script, loaded early). See I18n.
 - `js/dev-banner.js` — when `DEV=1`, shows the WIP banner. See Dev banner.
 - `js/error-banner.js` — surfaces failures as red dismissible banners. See Error banners.
+- `js/loading.js` — `createLoadingScreen()` drives the startup `#loading` progress
+  overlay. See Loading overlay.
 - `version.js` — `window.__APP_VERSION__`, the single app-version source. See Versioning.
 
 Deployment (`docker/`): `docker-compose.yml` (hardened Caddy), `Dockerfile`
@@ -442,6 +445,19 @@ handlers (with `file:line` for script errors); exposes `window.showErrorBanner(m
 (used by `js/main.js` for the data-load failure). Banners stack; each has a ×;
 identical messages dedupe into one `(×N)`; a `MAX_BANNERS` cap. A `ResizeObserver`
 republishes the stack height to `--banners-height`, which `#status` offsets against.
+
+## Loading overlay
+
+A startup progress overlay so a slow first load shows feedback instead of a blank
+canvas. `#loading` (static markup in `index.html`, **visible by default** so it paints
+before any ES module parses) covers the canvas above every panel/banner; `js/loading.js`
+`createLoadingScreen()` exposes `setProgress(frac, label)` (monotone: the bar only ever
+moves forward), `done()` (fill to 100%, fade out via the `.loaded` opacity transition,
+then detach) and `fail()` (detach at once so an error banner takes over). `js/main.js`
+drives it: the data fetch fills the first half (`loadBrainData`'s `onProgress` fires per
+shape file), SDF meshing the back half (`sdf-pool` `meshAll`'s per-item `onItem`,
+captioned with each region's name), then `done()` fades it out as the assemble intro
+begins. i18n keys `loading.*`.
 
 ## Controls
 

@@ -16,6 +16,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { loadBrainData } from "./data.js";
 import { buildStructureMesh } from "./shapes.js";
 import { createSdfPool } from "./sdf-pool.js";
+import { createLoadingScreen } from "./loading.js";
 import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
 import { createCircuitAnimation } from "./circuit-anim.js";
@@ -112,15 +113,6 @@ function parseSearchQuery(raw) {
     }
   }
   return { field: null, value: "", rest: foldText(String(raw).trim()) };
-}
-
-// Small status pill, used only for the brief "Loading brain data..." message;
-// failures surface as red error banners (js/error-banner.js), not here.
-function setStatus(message) {
-  const el = document.getElementById("status");
-  if (!el) return;
-  el.textContent = message;
-  el.style.display = message ? "block" : "none";
 }
 
 /** Build scene, camera, renderer and controls. @returns {object} the bundle. */
@@ -3881,13 +3873,21 @@ async function main() {
     versionEl.textContent = `v${window.__APP_VERSION__}`;
   }
 
-  setStatus(t("status.loading"));
+  // Startup loading overlay (the #loading element, visible by default): a progress
+  // bar over the canvas so a slow first load shows feedback. Fetch fills the first
+  // ~half of the bar, SDF meshing the rest (see below); done() fades it out.
+  const loading = createLoadingScreen();
+  loading.setProgress(0.02, t("loading.data"));
   let data;
   try {
-    data = await loadBrainData();
+    data = await loadBrainData("data", (p) => {
+      if (p.stage === "shapes" && p.total) {
+        loading.setProgress(0.05 + 0.45 * (p.loaded / p.total), t("loading.shapes"));
+      }
+    });
   } catch (err) {
     console.error(err);
-    setStatus(""); // clear the loading pill; the error shows as a banner
+    loading.fail(); // drop the overlay; the error shows as a banner
     window.showErrorBanner?.(t("status.loadError", { msg: err.message }));
     return;
   }
@@ -3903,7 +3903,11 @@ async function main() {
   const pool = createSdfPool();
   let sdfGeoms = new Map();
   try {
-    sdfGeoms = await pool.meshAll(sdfItems);
+    sdfGeoms = await pool.meshAll(sdfItems, (id, done, total) => {
+      // Meshing fills the back half of the bar; name the region as it lands.
+      const name = data.byId.get(id)?.base_name || id;
+      loading.setProgress(0.5 + 0.45 * (done / total), t("loading.meshing", { name }));
+    });
   } catch (err) {
     console.warn("sdf pool meshing failed; falling back to synchronous", err);
   } finally {
@@ -4495,7 +4499,10 @@ async function main() {
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
-  setStatus("");
+  // Scene is built: fill + fade out the loading overlay, revealing the brain just
+  // as the assemble intro (created below) begins.
+  loading.setProgress(1, t("loading.building"));
+  loading.done();
   console.log(
     `Loaded ${meshes.length} structures and ${arrows.length} projections.`,
   );

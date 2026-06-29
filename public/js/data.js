@@ -132,7 +132,8 @@ function localize(field) {
  * @param {string} [dataDir="data"] Directory the data files live under.
  * @returns {Promise<BrainData>}
  */
-export async function loadBrainData(dataDir = "data") {
+export async function loadBrainData(dataDir = "data", onProgress = null) {
+  onProgress?.({ stage: "meta" });
   const [metaRecord, structures, projections, circuits, projectionGroups,
          receptors, drugs] =
     await Promise.all([
@@ -258,12 +259,20 @@ export async function loadBrainData(dataDir = "data") {
     projectionGroupsByKey.set(`${g.mode}:${g.key}`, g);
   }
 
-  // Fetch all shape files in parallel and attach them to their structure.
-  await Promise.all(
-    structures.map(async (s) => {
-      s.shape = await (await fetchOrThrow(s.shape_file)).json();
-    }),
-  );
+  // Fetch all shape files in parallel and attach them to their structure. Report
+  // progress per file (these are the bulk of the load, especially on a slow link)
+  // so the startup loading bar can advance.
+  {
+    let loaded = 0;
+    const total = structures.length;
+    onProgress?.({ stage: "shapes", loaded, total });
+    await Promise.all(
+      structures.map(async (s) => {
+        s.shape = await (await fetchOrThrow(s.shape_file)).json();
+        onProgress?.({ stage: "shapes", loaded: (loaded += 1), total });
+      }),
+    );
+  }
 
   const byId = new Map(structures.map((s) => [s.id, s]));
 
