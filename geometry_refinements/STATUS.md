@@ -12,25 +12,36 @@ not touch from another session) | `done` (accepted, committed) | `holdout`
 
 - **Geometry medium:** SDF (signed-distance fields) meshed to geometry, authored
   in JS / three.js. (See CLAUDE.md "The approach".)
-- **Mesher:** a self-authored SDF evaluator (`public/js/sdf.js`) fills the
-  vendored `THREE.MarchingCubes` scalar field (`field[i] = -sdf`, `isolation=0`),
-  then welds + re-normals the output into a smooth, watertight, indexed geometry
-  that mirrors cleanly for the `_L` member. Noise is injected from `shapes.js`
-  (no duplicated Perlin, no import cycle). Primitives: sphere, ellipsoid, box,
-  capsule/round-cone, swept tube, half-space plane. Ops: union, intersect,
-  subtract, their smooth variants, and `displace` (surface noise).
+- **Mesher:** a self-authored SDF evaluator + bounds + meshing pass, all
+  THREE-free, split so it runs identically on the main thread and in a Web Worker:
+  `public/js/sdf-core.js` (evaluator + per-axis field fill + weld) and
+  `public/js/marching-cubes.js` (our own marcher: three's standard edge/tri tables,
+  but interpolating edge vertices straight in world coords; `field[i] = -sdf`,
+  isolevel 0). The vendored `THREE.MarchingCubes` addon is GONE (removed); nothing
+  needs three to mesh. `public/js/sdf.js` is the thin three-side wrapper that wraps
+  the raw `{positions, indices}` into a smooth, watertight, indexed BufferGeometry
+  that mirrors cleanly for the `_L` member. Noise is `public/js/noise.js`
+  (THREE-free, shared with `shapes.js`; no duplicated Perlin). Primitives: sphere,
+  ellipsoid, box, capsule/round-cone, swept tube, half-space plane. Ops: union,
+  intersect, subtract, their smooth variants, and `displace` (surface noise).
+  Grid resolution is voxel-size-driven over the TIGHT (non-cubic) AABB, per axis
+  (a thin/elongated structure no longer fills a cube of empty cells); `resolution`
+  may be an `[Nx, Ny, Nz]` triple to pin anisotropic sampling (cerebellum folia).
 - **`three-bvh-csg`:** NOT vendored (deferred). Booleans incl. the flat medial
   wall are done as half-space ops in the SDF field, so exact mesh-mesh CSG is not
   needed yet. Add it only if a structure genuinely needs an exact mesh cut.
-- **Runtime vs build-time bake:** RUNTIME (in-browser), for now. Phase 0 perf
-  (this machine, SwiftShader headless; meshing is pure-CPU JS so the GL backend
-  does not affect it): single nucleus res 72 ~130ms / 17.8k tris; 5-lobe cortex
-  smooth-union res 96 ~817ms / 27.7k tris, res 112 ~1.19s / 37.7k tris. Cost is
-  the O(N^3) field fill. Per-structure runtime meshing (~100ms at res 64-72) is
-  fine for the grind. The fully-converted 29-shape brain would add ~2s at load
-  (over the ~1s bar), so the fallback if that proves painful at Phase 2 is to move
-  meshing into a **Web Worker** (keeps the no-build identity; preferred over a
-  committed bake). Resolution budget: nuclei 56-72, cortex 96-112.
+- **Runtime vs build-time bake:** RUNTIME (in-browser), in a **Web Worker pool**
+  (`public/js/sdf-pool.js` + `public/js/sdf-worker.js`). Done in Phase 2: the
+  full SDF brain meshes off the main thread, falling back to synchronous per-spec
+  meshing if workers are unavailable (so the brain always renders). No committed
+  bake; the no-build identity stays. The cost is the O(N^3) SDF field fill, NOT the
+  marching (split-bench: 22.8s fill vs 2.1s march, summed over the 26 specs before
+  the voxel fix). Two findings worth keeping: (a) a worker that imports three is a
+  TRAP, each worker re-parses the 1.3MB three.js (worker realms can't share modules)
+  and load *regressed* to ~12.8s; the THREE-free marcher is what makes the worker
+  pay off. (b) voxel-driven per-axis sampling cut the fill ~3x (24s -> 8s summed).
+  Net: time-to-loaded 12.8s -> 6.0s on a 12-core machine, off the main thread.
+  Resolution budget: nuclei 56-72, cortex 96-112.
 - **Provenance of these shapes:** `llm` (Claude-authored, reference-guided).
 - **Grind order (agreed w/ human):** cortex hemisphere first (it's the worst-looking
   AND the make-or-break test of smooth-union/abut), then rest of basal_ganglia,
@@ -264,18 +275,41 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   narrower, taller central VERMIS ridge smooth-unioned (k=0.35, so the paravermian
   valleys read) into one continuous mass, with the signature transverse FOLIA from a
   ridged fractal displace (octaves=2, strong y-aniso so the folds stack vertically);
-  explicit non-cubed bounds give the tight-y-span fine y-voxels the folds need; res
-  104. Replaces the composite (which read as separate merged balls). llm. THE FINALE.
+  explicit non-cubed bounds + an explicit `resolution=[72,104,84]` triple keep the
+  fine y-voxels the folia need under voxel-driven sampling. Replaces the composite
+  (which read as separate merged balls). llm. THE FINALE.
 
 ## Phase 2: whole-brain fit
 
-- pending - assemble all `done` shapes, smooth-union the cortex, fix scale / seams /
-  positions / residual interpenetration.
+- done - **Web Worker perf move.** SDF meshing is now off the main thread (worker
+  pool) on a self-authored THREE-free marcher, with voxel-driven per-axis sampling.
+  time-to-loaded 12.8s -> 6.0s (see Decisions log for the trap + the numbers).
+  Commits: 8b56a44 (marcher + voxel sampling), b005a80 (worker pool).
+- pending - whole-brain visual fit: assemble all `done` shapes, smooth-union the
+  cortex, fix scale / seams / positions / residual interpenetration. The assembled
+  brain currently renders coherent (scratchpad wb_iso); remaining is fine seam /
+  interpenetration tuning + re-checking the procedural holdouts (fornix, mammillary,
+  vta) sit correctly inside the real shapes.
 
 ## Milestone review log
 
 (Human leaves correction notes here after each milestone contact-sheet review; the
 loop reads and applies them.)
+
+- 2026-06-29 - **Web Worker perf move landed (awaiting human review).** Moved SDF
+  meshing off the main thread. The naive "worker that imports three" was a trap
+  (each worker re-parses the 1.3MB three.js; load regressed to ~12.8s), so the real
+  fix was a self-authored THREE-free marcher (`public/js/marching-cubes.js`, three's
+  edge/tri tables, world-coord interpolation) plus voxel-driven per-axis grid sizing
+  (cut the O(N^3) field fill ~3x). Net time-to-loaded 12.8s -> 6.0s, off-thread.
+  Cerebellum folia needed an explicit `[72,104,84]` resolution triple (isotropic
+  voxels blurred them). Verified: unit sphere meshes to exactly r=1; all 26 specs
+  finite; whole brain + cerebellum + a lobe render unchanged. Two commits; the
+  vendored MarchingCubes addon was removed. NOTE for the human: regenerating
+  `generate_data.py` also rewrites `temporal`/`insula`/`mammillary` jigsaw
+  `clip_planes` (procedural holdouts I did not touch) differently from the committed
+  artifacts: pre-existing drift, likely a non-deterministic `_bisecting_clip_planes`.
+  I reverted those files so they stayed out of these commits; worth a look separately.
 
 - 2026-06-28 - **Cortex polish landed (oblique fissures + temporal lateral + insula).**
   Human review of the one-dome milestone chose: full polish + pull temporal back
