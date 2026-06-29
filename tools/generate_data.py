@@ -1302,11 +1302,14 @@ PAIRED: list[dict[str, Any]] = [
          # superior+); `pos` seats it. Provenance: llm.
          shape=dict(
              type="sdf", resolution=112,
-             bounds=[[-0.42, -1.25, -1.35], [0.52, 1.2, 1.6]],
+             bounds=[[-0.42, -1.45, -1.35], [0.52, 1.2, 1.6]],
              root=dict(op="displace", amp=0.006, freq=5.0, seed=21, nodes=[
                  dict(op="smoothUnion", k=0.12, nodes=[
                      # Body + tail: slim tube tapering head -> wispy tail along the
                      # comma; the head end is modest (the bulb below adds the heft).
+                     # The tail descends the posterior wall then HOOKS DOWNWARD into
+                     # the temporal horn (it does NOT run forward under the head), so
+                     # the comma's opening faces INFERIOR, not anterior.
                      dict(prim="tube",
                           points=[
                               [0.0, 0.45, 0.92],    # head/body junction (anterior)
@@ -1314,12 +1317,12 @@ PAIRED: list[dict[str, Any]] = [
                               [0.05, 0.88, 0.15],
                               [0.07, 0.93, -0.30],  # arch peak (superior)
                               [0.10, 0.82, -0.70],  # starting to descend
-                              [0.15, 0.50, -0.98],  # descending posterior, swinging lateral
-                              [0.19, 0.0, -1.08],   # down the posterior wall (most posterior)
-                              [0.21, -0.50, -0.92], # rounding the back-bottom corner
-                              [0.20, -0.85, -0.50], # bottom, curling forward + lateral
-                              [0.15, -0.97, 0.05],  # tail running anterior under the thalamus
-                              [0.10, -0.90, 0.58],  # tail tip toward the temporal lobe
+                              [0.15, 0.45, -1.00],  # descending posterior, swinging lateral
+                              [0.20, -0.12, -1.08], # down the posterior wall (most posterior)
+                              [0.23, -0.66, -0.90], # rounding the back-bottom corner
+                              [0.22, -1.00, -0.45], # into the temporal horn, well below the body
+                              [0.18, -1.10, 0.08],  # tail running forward along the horn floor
+                              [0.14, -1.28, 0.34],  # tail tip hooking DOWN (caudal extremity)
                           ],
                           profile=[0.18, 0.165, 0.155, 0.15, 0.14, 0.125,
                                    0.105, 0.085, 0.065, 0.05, 0.035]),
