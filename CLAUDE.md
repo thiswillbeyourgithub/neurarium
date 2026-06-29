@@ -98,8 +98,9 @@ Data + authoring (`tools/`):
   `public/data/molecules/<id>.svg` (network, idempotent, polite); writes
   `tools/molecules_sources.json`. See Images.
 - `tools/fetch_structure_images.py` — resolves the *url* of each structure's best
-  Wikipedia illustration into `tools/structure_images_sources.json` (network,
-  idempotent, polite; reuses `fetch_molecules.py` helpers). Downloads no bytes. See Images.
+  Wikipedia illustration (hero) **plus a gallery** of the other gif/svg on its EN+FR
+  articles into `tools/structure_images_sources.json` (network, idempotent, polite;
+  reuses `fetch_molecules.py` helpers). Downloads no bytes. See Images.
 - `tools/molecules_sources.json` / `tools/structure_images_sources.json`:
   provenance/attribution for the two fetch tools (`structure_images_sources.json` is
   read by `generate_data.py` offline; not served).
@@ -122,7 +123,8 @@ Emitted data (`public/data/`):
   (hemisphere-stripped, for the legend row), `group`, `position`, `color`,
   `shape_file`, `classification_provenance`, optional `wikipedia` (+
   `wikipedia_provenance`), optional `structure_image` (a hot-linked Wikimedia url;
-  both hemispheres share it).
+  both hemispheres share it) + optional `structure_image_gallery` (more hot-linked
+  gif/svg urls for the panel's "show more").
 - `projections.jsonl` — one pathway/line: `from`, `to`, `kind`, `label{en,fr}`,
   `neurotransmitter{en,fr}`, `description{en,fr}`,
   `sources[{citation,url,provenance}]` (not translated), optional `bidirectional`,
@@ -957,17 +959,21 @@ Two third-party image sources, handled differently on purpose.
   Because force-dark would defeat the inversion, the page declares `<meta
   name="color-scheme" content="dark">` + `color-scheme: dark`.
 - **Structure images** (hot-linked from Wikimedia; the GIFs are multi-MB so they are NOT
-  vendored, only the url is stored). `tools/fetch_structure_images.py` resolves the best
-  image per **base** via a fallback chain (first `.gif`, else first `.svg`, else the
-  infobox/lead image; a pdf/djvu lead salvaged as its rendered first-page JPG) into
-  `tools/structure_images_sources.json` (with the resolved kind, for provenance), reusing
-  `fetch_molecules.py`'s polite-fetch helpers, downloading no bytes; an `IMAGE_OVERRIDES`
-  map wins over the resolver. `generate_data.py` (`_load_structure_image_urls` +
-  `_structure_record`) emits the `structure_image` url. `showStructure` renders it as
-  `<img class="structure-image" loading="lazy">` with a spinner (`.img-spinner`); the
-  `load` listener clears the spinner, `error` removes the figure (failed/blocked -> no
-  image, never a broken icon). Not inverted (colour art). Needs the `img-src
-  https://upload.wikimedia.org` CSP allowance.
+  vendored, only the url is stored). `tools/fetch_structure_images.py` resolves a **hero**
+  per **base** via a fallback chain (first `.gif`, else first `.svg`, else the
+  infobox/lead image; a pdf/djvu lead salvaged as its rendered first-page JPG) **and** a
+  **gallery** (`gather_gallery`): every other gif/svg used on the base's EN + FR articles
+  (deduped, hero + chrome excluded via `_is_gallery_chrome`, batch-resolved, capped at
+  `MAX_GALLERY`) into `tools/structure_images_sources.json` (each with kind + source lang),
+  reusing `fetch_molecules.py`'s polite-fetch helpers (its `http_json` gained an `api_url`
+  arg so the FR wiki is reachable), downloading no bytes; an `IMAGE_OVERRIDES` map wins for
+  the hero. `generate_data.py` (`_load_structure_images` + `_structure_record`) emits the
+  `structure_image` (hero) url + the `structure_image_gallery` list. `showStructure`
+  renders the hero as `<img class="structure-image" loading="lazy">` with a spinner
+  (`.img-spinner`; `load` clears it, `error` removes the figure -> no broken icon), then a
+  "show more" toggle (`.gallery-toggle`) that builds the gallery figures **lazily on first
+  expand** (so the extra multi-MB images never load unless asked). Not inverted (colour
+  art). Needs the `img-src https://upload.wikimedia.org` CSP allowance.
 
 ## Source provenance
 

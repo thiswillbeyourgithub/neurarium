@@ -3,174 +3,499 @@
     "file": "File:Nucleus_accumbens_coronal_sections.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Nucleus_accumbens_coronal_sections.gif",
     "title": "Nucleus accumbens",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Nucleus_accumbens_sagittal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Nucleus_accumbens_sagittal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Nucleus_accumbens_transversal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Nucleus_accumbens_transversal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Nucleus_accumbens.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Nucleus_accumbens.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "amygdala": {
     "file": "File:Amygdala_coronal_sections.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Amygdala_coronal_sections.gif",
     "title": "Amygdala",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Amygdala_sagittal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Amygdala_sagittal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Amygdala_transversal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Amygdala_transversal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      }
+    ]
   },
   "caudate": {
     "file": "File:Caudate_nucleus_coronal_sections.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Caudate_nucleus_coronal_sections.gif",
     "title": "Caudate nucleus",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Caudate_nucleus_sagittal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Caudate_nucleus_sagittal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Caudate_nucleus_transversal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Caudate_nucleus_transversal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Caudate_nucleus.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Caudate_nucleus.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Caudate_nucleus.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Caudate_nucleus.gif",
+        "kind": "gif",
+        "lang": "en"
+      }
+    ]
   },
   "cerebellum": {
     "file": "File:Cerebellum.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Cerebellum.gif",
     "title": "Cerebellum",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Gehirn,_lateral_-_Lobi_+_Stammhirn_+_Cerebellum_eng.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Gehirn%2C_lateral_-_Lobi_%2B_Stammhirn_%2B_Cerebellum_eng.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Diagram_of_the_Microanatomy_of_Human_Cerebellar_Cortex.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Diagram_of_the_Microanatomy_of_Human_Cerebellar_Cortex.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Microzone.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Microzone.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "cingulate": {
     "file": "File:Cingulate_cortex.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Cingulate_cortex.gif",
     "title": "Cingulate cortex",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Gray727_cingulate_sulcus.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Gray727_cingulate_sulcus.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "claustrum": {
     "file": "File:Gray_718-emphasizing-claustrum.png",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Gray_718-emphasizing-claustrum.png",
     "title": "Claustrum",
-    "kind": "infobox"
+    "kind": "infobox",
+    "gallery": []
   },
   "fornix": {
     "file": "File:Fornix.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/Fornix.gif",
     "title": "Fornix (neuroanatomy)",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": []
   },
   "frontal": {
     "file": "File:Frontal_lobe_animation.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Frontal_lobe_animation.gif",
     "title": "Frontal lobe",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Lobes_of_the_brain_NL.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Lobes_of_the_brain_NL.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "globus_pallidus": {
     "file": "File:Globus_pallidus.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Globus_pallidus.svg",
     "title": "Globus pallidus",
-    "kind": "svg"
+    "kind": "svg",
+    "gallery": [
+      {
+        "file": "File:DA-loops_in_PD.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/DA-loops_in_PD.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Basal_ganglia_circuits.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Basal_ganglia_circuits.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "hippocampus": {
     "file": "File:Hippocampus_coronal_sections.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Hippocampus_coronal_sections.gif",
     "title": "Hippocampus",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Hippocampus_sagittal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Hippocampus_sagittal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Hippocampus_transversal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Hippocampus_transversal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:1511_The_Limbic_Lobe.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/08/1511_The_Limbic_Lobe.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Eeg_theta.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Eeg_theta.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "hypothalamus": {
     "file": "File:Hypothalamus.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Hypothalamus.gif/330px-Hypothalamus.gif",
     "title": "(manual override)",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Endocrine_central_nervous_en.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Endocrine_central_nervous_en.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "insula": {
     "file": "File:Insular_cortex_coronal_sections.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Insular_cortex_coronal_sections.gif",
     "title": "Insular cortex",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Insular_cortex_sagittal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Insular_cortex_sagittal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Insular_cortex_transversal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Insular_cortex_transversal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Insular_cortex.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Insular_cortex.gif",
+        "kind": "gif",
+        "lang": "en"
+      }
+    ]
   },
   "locus_coeruleus": {
     "file": "File:Locus-coeruleus.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Locus-coeruleus.gif",
     "title": "Locus coeruleus",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": []
   },
   "mammillary": {
     "file": "File:Gray1180_Corpus_Mamillare_highlighted.png",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Gray1180_Corpus_Mamillare_highlighted.png",
     "title": "Mammillary body",
-    "kind": "infobox"
+    "kind": "infobox",
+    "gallery": []
   },
   "medulla": {
     "file": "File:Medulla_oblongata_and_foramen_magnum_animation_small.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Medulla_oblongata_and_foramen_magnum_animation_small.gif",
     "title": "Medulla oblongata",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Cerebrum_lobes.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Cerebrum_lobes.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Medulla_Oblongata_and_Cerebellum.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Medulla_Oblongata_and_Cerebellum.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "midbrain": {
     "file": "File:Midbrain_of_the_Human_Brainstem.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Midbrain_of_the_Human_Brainstem.svg",
     "title": "Midbrain",
-    "kind": "svg"
+    "kind": "svg",
+    "gallery": [
+      {
+        "file": "File:Cn3nucleus-en.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Cn3nucleus-en.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Midbrain_-_inferior_colliculus.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Midbrain_-_inferior_colliculus.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "occipital": {
     "file": "File:Occipital_lobe_animation_small.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Occipital_lobe_animation_small.gif",
     "title": "(manual override)",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Brain_animated_color_nevit.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Brain_animated_color_nevit.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Lobes_of_the_brain_NL.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Lobes_of_the_brain_NL.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "olfactory_bulb": {
     "file": "File:Early_Olfactory_System.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Early_Olfactory_System.svg",
     "title": "Olfactory bulb",
-    "kind": "svg"
+    "kind": "svg",
+    "gallery": []
   },
   "parietal": {
     "file": "File:Parietal_lobe_animation_small.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Parietal_lobe_animation_small.gif",
     "title": "Parietal lobe",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Lobes_of_the_brain_NL.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Lobes_of_the_brain_NL.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "pituitary": {
     "file": "File:Diagram_showing_the_position_of_the_pituitary_gland_in_the_brain_CRUK_413.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Diagram_showing_the_position_of_the_pituitary_gland_in_the_brain_CRUK_413.svg",
     "title": "Pituitary gland",
-    "kind": "svg"
+    "kind": "svg",
+    "gallery": []
   },
   "pons": {
     "file": "File:Pons.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Pons.gif",
     "title": "Pons",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Brain_stem_sagittal_section.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Brain_stem_sagittal_section.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Brain_bulbar_region.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Brain_bulbar_region.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Lower_pons_horizontal_KB.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Lower_pons_horizontal_KB.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "putamen": {
     "file": "File:Putamen_coronal_sections.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Putamen_coronal_sections.gif",
     "title": "Putamen",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Putamen_sagittal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Putamen_sagittal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Putamen_transversal_sections.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Putamen_transversal_sections.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:Putamen.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Putamen.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "raphe": {
     "file": "File:Lower_pons_horizontal_KB.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Lower_pons_horizontal_KB.svg",
     "title": "Raphe nuclei",
-    "kind": "svg"
+    "kind": "svg",
+    "gallery": []
   },
   "septal_nuclei": {
     "file": "File:Mouse_Septal_Nuclei.pdf",
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Mouse_Septal_Nuclei.pdf/page1-330px-Mouse_Septal_Nuclei.pdf.jpg",
     "title": "Septal area",
-    "kind": "infobox"
+    "kind": "infobox",
+    "gallery": []
   },
   "substantia_nigra": {
     "file": "File:Substantia_nigra.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Substantia_nigra.gif",
     "title": "Substantia nigra",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Midbrainsection.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Midbrainsection.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Basal_ganglia_diagram.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Basal_ganglia_diagram.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Basal_ganglia_circuits.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Basal_ganglia_circuits.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Substantia_nigra_with_Lewy_body_pathology.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Substantia_nigra_with_Lewy_body_pathology.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "subthalamic_nucleus": {
     "file": "File:DA-loops_in_PD.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/DA-loops_in_PD.svg",
     "title": "Subthalamic nucleus",
-    "kind": "svg"
+    "kind": "svg",
+    "gallery": [
+      {
+        "file": "File:Basal_ganglia_circuits.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Basal_ganglia_circuits.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "temporal": {
     "file": "File:Temporal_lobe_animation.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Temporal_lobe_animation.gif",
     "title": "Temporal lobe",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Lobes_of_the_brain_NL.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Lobes_of_the_brain_NL.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "thalamus": {
     "file": "File:Thalamus_small.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Thalamus_small.gif",
     "title": "Thalamus",
-    "kind": "gif"
+    "kind": "gif",
+    "gallery": [
+      {
+        "file": "File:Constudthal.gif",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Constudthal.gif",
+        "kind": "gif",
+        "lang": "en"
+      },
+      {
+        "file": "File:ThalamicNuclei.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/ThalamicNuclei.svg",
+        "kind": "svg",
+        "lang": "en"
+      },
+      {
+        "file": "File:Spinal_cord_tracts_-_English.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Spinal_cord_tracts_-_English.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
   },
   "vta": {
     "file": "File:3D_Medical_Animation_Mid-Brain_Different_Parts.jpg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/3D_Medical_Animation_Mid-Brain_Different_Parts.jpg",
     "title": "Ventral tegmental area",
-    "kind": "infobox"
+    "kind": "infobox",
+    "gallery": []
   }
 }

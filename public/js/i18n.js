@@ -167,6 +167,8 @@
       "drug.speculative": "speculative",
       "drug.structureAlt": "Chemical structure of {name}",
       "structure.imageAlt": "Illustration of the {name}",
+      "structure.galleryShow": "Show {n} more image(s)",
+      "structure.galleryHide": "Show fewer images",
 
       "status.loadError":
         "Could not load brain data: {msg}. Are you serving over HTTP? (see CLAUDE.md)",
@@ -373,6 +375,8 @@
       "drug.speculative": "spéculative",
       "drug.structureAlt": "Structure chimique de {name}",
       "structure.imageAlt": "Illustration de {name}",
+      "structure.galleryShow": "Voir {n} image(s) de plus",
+      "structure.galleryHide": "Voir moins d'images",
 
       "status.loadError":
         "Impossible de charger les données : {msg}. Le site est-il servi via HTTP ? (voir CLAUDE.md)",

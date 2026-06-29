@@ -2001,7 +2001,7 @@ function createInfoPanel(data) {
       // descriptions. A spinner shows while it loads; the whole figure is removed if
       // the load fails (offline / blocked / moved), so a failure degrades to no
       // image. Unlike the drug molecule line-art these are colour, so NOT inverted.
-      if (structure.structureImage) {
+      const structureFigure = (src) => {
         const fig = el("figure", "structure-image loading");
         fig.appendChild(el("div", "img-spinner"));
         const img = document.createElement("img");
@@ -2010,9 +2010,39 @@ function createInfoPanel(data) {
         img.decoding = "async";
         img.addEventListener("load", () => fig.classList.remove("loading"));
         img.addEventListener("error", () => fig.remove());
-        img.src = structure.structureImage;
+        img.src = src;
         fig.appendChild(img);
-        body.appendChild(fig);
+        return fig;
+      };
+      if (structure.structureImage) {
+        body.appendChild(structureFigure(structure.structureImage));
+        // "Show more" gallery: the other gif/svg from the EN + FR articles. Built
+        // lazily on first expand so they never load (multi-MB each) unless asked, so
+        // the panel stays light and the extra fetches never take priority.
+        const gallery = structure.structureImageGallery || [];
+        if (gallery.length) {
+          const wrap = el("div", "structure-gallery");
+          wrap.hidden = true;
+          const toggle = el("button", "btn gallery-toggle");
+          toggle.type = "button";
+          let built = false;
+          const sync = () => {
+            toggle.textContent = wrap.hidden
+              ? t("structure.galleryShow", { n: gallery.length })
+              : t("structure.galleryHide");
+          };
+          toggle.addEventListener("click", () => {
+            if (!built) {
+              for (const url of gallery) wrap.appendChild(structureFigure(url));
+              built = true;
+            }
+            wrap.hidden = !wrap.hidden;
+            sync();
+          });
+          sync();
+          body.appendChild(toggle);
+          body.appendChild(wrap);
+        }
       }
 
       // External reference (Wikipedia) + its live lead summary, via the shared

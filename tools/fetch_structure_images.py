@@ -21,12 +21,17 @@ whose article carries no animation still gets a useful picture):
   3. else the **infobox / lead image** of any type (gif/svg/png/jpg, via the
      ``pageimages`` API) -- the photo or plate at the top of the article.
 
+Beyond that single hero it also gathers a **gallery** (``gather_gallery``): every
+*other* gif/svg used on the base's **English and French** articles (deduped, hero +
+chrome excluded, capped at ``MAX_GALLERY``), so the structure panel can offer a "show
+more" of the region's labelled diagrams / extra animations.
+
 The hit is keyed by the structure's **base** id so both hemispheres of a pair share
-the one URL (like the WIKIPEDIA registry in ``generate_data.py``). The resolved
-``{file, url, title, kind}`` per base (``kind`` = gif/svg/infobox, for provenance) is
-written to ``tools/structure_images_sources.json``, which the offline
-``generate_data.py`` then reads to emit each structure's ``structure_image`` (see
-``_load_structure_image_urls``). A structure whose article has no usable image at all
+the one record (like the WIKIPEDIA registry in ``generate_data.py``). Each base's
+``{file, url, title, kind, gallery:[{file,url,kind,lang}]}`` is written to
+``tools/structure_images_sources.json``, which the offline ``generate_data.py`` then
+reads to emit each structure's ``structure_image`` (hero) + ``structure_image_gallery``
+(see ``_load_structure_images``). A structure whose article has no usable image at all
 is left without one; the run prints which ones were missed.
 
 This is an *authoring* tool (it hits the network), kept separate from the offline,
@@ -58,11 +63,46 @@ from pathlib import Path
 # Reuse the polite-fetch plumbing from the molecule fetcher instead of copying it
 # (same Wikimedia endpoint, User-Agent, retry/backoff and helpers). Both scripts
 # live in tools/, so a plain import resolves when run as `python tools/<name>.py`.
-from fetch_molecules import _is_chrome, article_title, http_json
+from fetch_molecules import API as EN_API, _is_chrome, article_title, http_json
 
 REPO = Path(__file__).resolve().parent.parent
 STRUCTURES_JSONL = REPO / "public" / "data" / "structures.jsonl"
 SOURCES_JSON = Path(__file__).resolve().parent / "structure_images_sources.json"
+
+# The French Wikipedia MediaWiki endpoint (the gallery also scans the FR article,
+# which often carries labelled diagrams the EN one does not). Same /w/api.php shape.
+FR_API = "https://fr.wikipedia.org/w/api.php"
+
+# The gallery collects only the renderable, illustration-grade vector/animation
+# files (gif + svg); the hero already covers the infobox/lead photo case.
+GALLERY_EXT = (".gif", ".svg")
+
+# Article chrome/licence/UI icons that ride along on ``prop=images`` but are never
+# illustrations. The molecule fetcher's ``_is_chrome`` (tuned for molecule pages)
+# misses many that appear on anatomy articles: featured-article stars, edit pencils,
+# journal / open-access / licence logos, info / sound / portal icons, decorative
+# clip-art. These extra lowercase substrings filter them out of the gallery.
+GALLERY_CHROME = (
+    "cscr", "featured", "good_article", "journal", "open_access", "openaccess",
+    "blue_pencil", "info_simple", "info-simple", "creative-tail", "halloween",
+    "pencil", "barnstar", "spoken", "loudspeaker", "_logo", "logo_", "logo.",
+    "_icon", "icon_", "icon.", "_button", "padlock", "pd-icon", "licen",
+    "public_domain", "cc-by", "by-sa", "by_sa", "rss", "feed-icon", "crystal_clear",
+    "nuvola", "translation", "merge", "wiktionary", "wikisource", "wikidata",
+)
+
+
+def _is_gallery_chrome(name: str) -> bool:
+    """True for a file that is Wikipedia/Commons chrome, not an illustration
+    (the molecule fetcher's ``_is_chrome`` plus the anatomy-article extras above)."""
+    if _is_chrome(name):
+        return True
+    low = name.lower()
+    return any(tok in low for tok in GALLERY_CHROME)
+
+# Cap the per-structure gallery so a busy article (and the API calls to resolve it)
+# stays bounded; the hero plus this many extras is plenty for the panel.
+MAX_GALLERY = 10
 
 # Extensions an <img> can actually render directly. The pageimages "page image" is
 # sometimes a non-image file (e.g. a microscopy figure uploaded as a .pdf), so the
@@ -120,12 +160,16 @@ def base_id(structure_id: str) -> str:
     return re.sub(r"_(R|L)$", "", structure_id)
 
 
-def _file_url(file_title: str) -> str | None:
-    """Resolve a ``File:<name>`` title to its full-resolution Wikimedia url."""
+def _file_url(file_title: str, api_url: str = EN_API) -> str | None:
+    """Resolve a ``File:<name>`` title to its full-resolution Wikimedia url.
+
+    Commons files resolve via any wiki; ``api_url`` lets a wiki-local file (rare,
+    e.g. an image only on fr.wikipedia) resolve against that wiki.
+    """
     info = http_json({
         "action": "query", "titles": file_title,
         "prop": "imageinfo", "iiprop": "url",
-    })
+    }, api_url)
     for page in info.get("query", {}).get("pages", {}).values():
         for ii in page.get("imageinfo", []):
             url = ii.get("url", "")
@@ -206,6 +250,100 @@ def resolve_image(title: str) -> tuple[str, str, str] | None:
     return None
 
 
+def _article_image_files(title: str, api_url: str) -> list[str]:
+    """File names used on an article, in page order (``parse&prop=images``)."""
+    data = http_json({
+        "action": "parse", "page": title, "prop": "images", "redirects": 1,
+    }, api_url)
+    return data.get("parse", {}).get("images", [])
+
+
+def _fr_title(en_title: str) -> str | None:
+    """The French article title for an English one via ``langlinks``, or None."""
+    data = http_json({
+        "action": "query", "prop": "langlinks", "titles": en_title,
+        "lllang": "fr", "redirects": 1,
+    })
+    for page in data.get("query", {}).get("pages", {}).values():
+        for ll in page.get("langlinks", []):
+            fr = ll.get("*")
+            if fr:
+                return fr
+    return None
+
+
+def _norm_title(file_title: str) -> str:
+    """Normalize a ``File:`` title for matching (the API returns spaces; the image
+    list gives underscores)."""
+    return file_title.lower().replace("_", " ")
+
+
+def _file_urls(file_titles: list[str], api_url: str = EN_API) -> dict[str, str]:
+    """Resolve many ``File:`` titles to urls in one ``imageinfo`` query (<=50 per
+    call, so a whole gallery costs ~1 request, not one per image). Returns a map
+    keyed by normalized title (see ``_norm_title``)."""
+    out: dict[str, str] = {}
+    for i in range(0, len(file_titles), 50):
+        chunk = file_titles[i:i + 50]
+        info = http_json({
+            "action": "query", "titles": "|".join(chunk),
+            "prop": "imageinfo", "iiprop": "url",
+        }, api_url)
+        for page in info.get("query", {}).get("pages", {}).values():
+            title = page.get("title", "")
+            for ii in page.get("imageinfo", []):
+                url = ii.get("url", "")
+                if url:
+                    out[_norm_title(title)] = url
+    return out
+
+
+def gather_gallery(en_title: str, hero_file: str | None) -> list[dict]:
+    """Every distinct gif/svg illustration on the EN + FR articles, hero excluded.
+
+    Scans both articles' file lists (page order), skips chrome + the hero file, and
+    batch-resolves the rest to Wikimedia urls, returning ``[{file,url,kind,lang}]``
+    capped at ``MAX_GALLERY``. Used to build the structure panel's "show more" gallery
+    (the hero stays the single resolved lead image). Best-effort: a failure on the FR
+    side just yields fewer images.
+    """
+    out: list[dict] = []
+    seen: set[str] = set()
+    if hero_file:
+        seen.add(_norm_title(hero_file))
+
+    plan = [("en", en_title, EN_API)]
+    try:
+        fr = _fr_title(en_title)
+    except Exception:  # noqa: BLE001 - FR is a bonus; never fail the base over it
+        fr = None
+    if fr:
+        plan.append(("fr", fr, FR_API))
+
+    for lang, title, api in plan:
+        names: list[str] = []  # candidate File: titles, in page order, deduped
+        for fname in _article_image_files(title, api):
+            low = fname.lower()
+            if not low.endswith(GALLERY_EXT) or _is_gallery_chrome(fname):
+                continue
+            ft = f"File:{fname}"
+            nk = _norm_title(ft)
+            if nk in seen:
+                continue
+            seen.add(nk)
+            names.append(ft)
+        urls = _file_urls(names, api) if names else {}
+        for ft in names:
+            url = urls.get(_norm_title(ft))
+            if not url or not url.lower().endswith(GALLERY_EXT):
+                continue
+            kind = "gif" if ft.lower().endswith(".gif") else "svg"
+            out.append({"file": ft, "url": url, "kind": kind, "lang": lang})
+            if len(out) >= MAX_GALLERY:
+                return out
+    return out
+
+
 def load_structure_bases() -> list[tuple[str, str]]:
     """``(base_id, wikipedia_url)`` pairs, one per base, in first-seen order.
 
@@ -249,14 +387,37 @@ def main() -> None:
     if args.limit:
         bases = bases[:args.limit]
 
+    def add_gallery(entry: dict, wiki: str) -> None:
+        """Populate ``entry['gallery']`` from the base's EN + FR articles (hero
+        excluded). Best-effort: always leaves a list (empty on any failure)."""
+        title = article_title(wiki)
+        if not title:
+            entry.setdefault("gallery", [])
+            return
+        try:
+            entry["gallery"] = gather_gallery(title, entry.get("file"))
+            if entry["gallery"]:
+                print(f"        + gallery: {len(entry['gallery'])} image(s)")
+        except Exception as exc:  # noqa: BLE001 - the hero already stands on its own
+            entry.setdefault("gallery", [])
+            print(f"        gallery error: {exc}")
+
     resolved, skipped, missing, errors = [], [], [], []
     for i, (base, wiki) in enumerate(bases, 1):
         # A manual override wins over the auto-resolver and the recorded value, and
-        # needs no network, so it is applied first and even without --force (so adding
-        # an override and re-running fixes a wrong pick immediately).
+        # the hero needs no network, so it is applied first and even without --force
+        # (so adding an override and re-running fixes a wrong pick immediately). The
+        # gallery still comes from the article: reuse an already-gathered one unless
+        # --force, else fetch it.
         if base in IMAGE_OVERRIDES:
             entry = _override_entry(IMAGE_OVERRIDES[base])
-            if sources.get(base) == entry:
+            prev = sources.get(base) or {}
+            if "gallery" in prev and not args.force:
+                entry["gallery"] = prev["gallery"]
+            else:
+                add_gallery(entry, wiki)
+                time.sleep(args.delay)
+            if prev == entry:
                 skipped.append(base)
             else:
                 sources[base] = entry
@@ -264,7 +425,13 @@ def main() -> None:
                 print(f"[{i}/{len(bases)}] {base}: [override] {entry['file']}")
             continue
         if base in sources and not args.force:
-            skipped.append(base)
+            # Already have the hero; backfill the gallery if this entry predates it.
+            if "gallery" not in sources[base]:
+                add_gallery(sources[base], wiki)
+                time.sleep(args.delay)
+                resolved.append(base)
+            else:
+                skipped.append(base)
             continue
         title = article_title(wiki)
         if not title:
@@ -281,10 +448,11 @@ def main() -> None:
                 time.sleep(args.delay)
                 continue
             file_title, url, kind = hit
-            sources[base] = {"file": file_title, "url": url,
-                             "title": title, "kind": kind}
-            resolved.append(base)
+            entry = {"file": file_title, "url": url, "title": title, "kind": kind}
             print(f"[{i}/{len(bases)}] {base}: [{kind}] {file_title}")
+            add_gallery(entry, wiki)
+            sources[base] = entry
+            resolved.append(base)
         except Exception as exc:  # noqa: BLE001 - report and keep going
             errors.append((base, str(exc)))
             print(f"[{i}/{len(bases)}] {base}: ERROR {exc}")

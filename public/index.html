@@ -1108,6 +1108,21 @@
         border-radius: 8px;
         background: rgba(255, 255, 255, 0.04);
       }
+      /* "Show more" gallery of the structure's other gif/svg (built lazily on first
+         expand). A centered pill toggle, then the figures stacked under it. */
+      .gallery-toggle {
+        display: block;
+        margin: 2px auto 10px;
+        font-size: 12px;
+        padding: 5px 12px;
+      }
+      .structure-gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .structure-gallery .structure-image { margin: 0; }
       /* While the remote GIF loads, reserve a little height and show a spinner;
          both vanish once the <img> fires `load` (the `loading` class is dropped)
          or the figure is removed on error. */

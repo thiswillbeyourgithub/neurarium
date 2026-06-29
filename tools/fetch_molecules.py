@@ -92,10 +92,15 @@ def _open_with_retry(req: urllib.request.Request, timeout: int) -> bytes:
     raise RuntimeError("unreachable")
 
 
-def http_json(params: dict) -> dict:
-    """GET the MediaWiki API with our User-Agent and return the parsed JSON."""
+def http_json(params: dict, api_url: str = API) -> dict:
+    """GET a MediaWiki API with our User-Agent and return the parsed JSON.
+
+    Defaults to the English Wikipedia endpoint; pass ``api_url`` (e.g. the French
+    Wikipedia ``w/api.php``) to query another wiki without duplicating the polite
+    retry/backoff plumbing.
+    """
     query = urllib.parse.urlencode({**params, "format": "json"})
-    req = urllib.request.Request(f"{API}?{query}", headers={"User-Agent": UA})
+    req = urllib.request.Request(f"{api_url}?{query}", headers={"User-Agent": UA})
     return json.loads(_open_with_retry(req, timeout=30))
 
 

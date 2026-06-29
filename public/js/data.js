@@ -233,9 +233,12 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   for (const s of structures) {
     s.name = localize(s.name);
     s.base_name = localize(s.base_name);
-    // Vendored Wikipedia GIF for the structure panel (null when none was
+    // Hot-linked Wikipedia hero image for the structure panel (null when none was
     // fetched), mirroring a drug's molecule image. Not localized (raster art).
     s.structureImage = s.structure_image || null;
+    // Further gif/svg from the structure's EN+FR articles, revealed by the panel's
+    // "show more" (always an array, so the viewer can test .length).
+    s.structureImageGallery = s.structure_image_gallery || [];
   }
   for (const c of circuits) {
     c.name = localize(c.name);

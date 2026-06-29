@@ -3301,7 +3301,7 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
                       name: dict[str, str], base_name: dict[str, str],
                       position: tuple[float, float, float], shape_id: str,
                       mirror: bool = False,
-                      image_urls: dict[str, str] | None = None) -> dict[str, Any]:
+                      images: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
     """Build one ``structure`` JSONL record (the non-geometric metadata).
 
     Parameters
@@ -3327,11 +3327,11 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
         When True, emit ``"mirror": true`` so ``js/shapes.js`` reflects the
         geometry across the sagittal plane (used only for the left member of a
         symmetric pair, never for midline structures).
-    image_urls
-        Map of base id -> Wikimedia GIF url (see
-        :func:`_load_structure_image_urls` / ``tools/fetch_structure_images.py``); a
-        match adds a ``structure_image`` url the viewer hot-links in the structure
-        panel, a non-match omits it.
+    images
+        Map of base id -> image record (see :func:`_load_structure_images` /
+        ``tools/fetch_structure_images.py``); a match adds a ``structure_image`` url
+        (the hero) and, when present, a ``structure_image_gallery`` list of further
+        gif/svg urls the panel reveals on "show more". A non-match omits both.
 
     Returns
     -------
@@ -3358,13 +3358,18 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
     if wiki:
         record["wikipedia"] = wiki
         record["wikipedia_provenance"] = _wiki_provenance(entry["base"])
-    if image_urls and entry["base"] in image_urls:
+    rec = images.get(entry["base"]) if images else None
+    if rec and rec.get("url"):
         # Wikimedia url (not a local path): the GIFs are too large to vendor, so
         # the viewer hot-links them at runtime (spinner / silent-fail, see
         # showStructure). Keyed by base so both hemispheres share the one URL, and
         # only set when its base was resolved (so a structure without one renders no
-        # image, no broken placeholder).
-        record["structure_image"] = image_urls[entry["base"]]
+        # image, no broken placeholder). The gallery (other gif/svg from the EN+FR
+        # articles) rides alongside for the panel's "show more".
+        record["structure_image"] = rec["url"]
+        gallery = [g["url"] for g in rec.get("gallery", []) if g.get("url")]
+        if gallery:
+            record["structure_image_gallery"] = gallery
     if mirror:
         record["mirror"] = True
     return record
@@ -3920,8 +3925,8 @@ def _available_molecule_ids() -> set[str]:
     return {p.stem for p in mol_dir.glob("*.svg")}
 
 
-def _load_structure_image_urls() -> dict[str, str]:
-    """Map ``base id -> Wikimedia GIF url`` from ``tools/structure_images_sources.json``.
+def _load_structure_images() -> dict[str, dict[str, Any]]:
+    """Map ``base id -> record`` from ``tools/structure_images_sources.json``.
 
     Unlike the drug molecule SVGs (vendored same-origin), the structure
     illustration GIFs are too large to commit, so the viewer **hot-links** them
@@ -3929,14 +3934,16 @@ def _load_structure_image_urls() -> dict[str, str]:
     only the URL is stored in the data, not the binary. The URLs are resolved
     author-side by ``tools/fetch_structure_images.py`` (which hits the network) and
     recorded in that small JSON; this offline generator just reads it, so a structure
-    gets a ``structure_image`` iff its base has an entry. A missing file is fine (no
-    images). Keyed by base id, so both hemispheres of a pair share the one URL.
+    gets a ``structure_image`` (the lead hero) plus a ``structure_image_gallery`` (the
+    other gif/svg from its EN+FR articles, for the panel's "show more") iff its base has
+    an entry. A missing file is fine (no images). Keyed by base id, so both hemispheres
+    of a pair share the one record.
     """
     src = Path(__file__).resolve().parent / "structure_images_sources.json"
     if not src.exists():
         return {}
     data = json.loads(src.read_text(encoding="utf-8"))
-    return {base: rec["url"] for base, rec in data.items() if rec.get("url")}
+    return {base: rec for base, rec in data.items() if rec.get("url")}
 
 
 def _load_drugs() -> list[dict[str, Any]]:
@@ -4098,10 +4105,11 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         if "shape" not in entry:
             blob_groups.setdefault(entry["group"], []).append(entry)
 
-    # Wikimedia GIF urls resolved author-side (offline read of the sources JSON);
-    # a structure whose base has one gets a hot-linked structure_image (the GIFs
-    # are too large to vendor, unlike the drug molecule SVGs).
-    structure_image_urls = _load_structure_image_urls()
+    # Wikimedia image records resolved author-side (offline read of the sources
+    # JSON); a structure whose base has one gets a hot-linked structure_image (the
+    # hero) + structure_image_gallery (the GIFs are too large to vendor, unlike the
+    # drug molecule SVGs).
+    structure_images = _load_structure_images()
 
     for entry in PAIRED:
         x, y, z = entry["pos"]
@@ -4123,11 +4131,11 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         structures.append(
             _structure_record(entry, f"{base}_R", _side_name(base_name, gender, "R"),
                               base_name, (x, y, z), base,
-                              image_urls=structure_image_urls))
+                              images=structure_images))
         structures.append(
             _structure_record(entry, f"{base}_L", _side_name(base_name, gender, "L"),
                               base_name, (-x, y, z), base, mirror=True,
-                              image_urls=structure_image_urls))
+                              images=structure_images))
 
     for entry in MIDLINE:
         sid = entry["base"]
@@ -4135,7 +4143,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         name = _t(entry["name"])
         structures.append(
             _structure_record(entry, sid, name, name, entry["pos"], sid,
-                              image_urls=structure_image_urls))
+                              images=structure_images))
         shapes[sid] = _shape_record(entry, entry["pos"][0])
 
     for proj in PROJECTIONS:
