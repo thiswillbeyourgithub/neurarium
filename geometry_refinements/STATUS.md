@@ -26,7 +26,15 @@ not touch from another session) | `done` (accepted, committed) | `holdout`
   intersect, subtract, their smooth variants, and `displace` (surface noise).
   Grid resolution is voxel-size-driven over the TIGHT (non-cubic) AABB, per axis
   (a thin/elongated structure no longer fills a cube of empty cells); `resolution`
-  may be an `[Nx, Ny, Nz]` triple to pin anisotropic sampling (cerebellum folia).
+  may be an `[Nx, Ny, Nz]` triple to pin anisotropic sampling when a structure
+  genuinely needs it (no current user; the cerebellum's folia are now painted, not
+  carved, so it dropped back to a single isotropic resolution).
+- **Surface patterns (painted, not carved):** fine fold detail can be a viewer
+  shader instead of geometry. `shapes.js` `makePatternInjector(cfg)` inks contour
+  lines onto a cel-shaded material; the cortex swirl and the cerebellar folia
+  (`shape.pattern="folia"`) are both this one injector, differing only in the phase
+  field. This is the cheap alternative to a costly anisotropic ridged displace:
+  keep the SDF a smooth low-res mass and paint the folds.
 - **`three-bvh-csg`:** NOT vendored (deferred). Booleans incl. the flat medial
   wall are done as half-space ops in the SDF field, so exact mesh-mesh CSG is not
   needed yet. Add it only if a structure genuinely needs an exact mesh cut.
@@ -274,10 +282,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 - done - cerebellum (midline) - SDF "butterfly": two hemisphere ellipsoids + a
   narrower, taller central VERMIS ridge smooth-unioned (k=0.35, so the paravermian
   valleys read) into one continuous mass, with the signature transverse FOLIA from a
-  ridged fractal displace (octaves=2, strong y-aniso so the folds stack vertically);
-  explicit non-cubed bounds + an explicit `resolution=[72,104,84]` triple keep the
-  fine y-voxels the folia need under voxel-driven sampling. Replaces the composite
-  (which read as separate merged balls). llm. THE FINALE.
+  smooth 3-ellipsoid mass (faint displace, isotropic res 56) with the transverse
+  FOLIA PAINTED ON (`shape.pattern="folia"` -> cel-shaded + inked stacked fold lines,
+  CEREBELLUM_FOLIA in shapes.js), not carved. Replaces the composite (which read as
+  separate merged balls); the earlier carved-folia version was the single heaviest
+  SDF spec, so painting them cut it to ~80 ms. llm.
 
 ## Phase 2: whole-brain fit
 
@@ -296,6 +305,10 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
     - regenerated the stale procedural-holdout artifacts (temporal/insula were
       ~0.15-0.25 mis-placed vs their cortex cuts; mammillary jigsaw clip dropped);
       `public/data/` now round-trips cleanly from the generator (commit 8dda7d3).
+    - thalamus read oversized -> scaled the roundcone ~0.85 about its origin so it
+      no longer dominates the diencephalon, pulvinar kept (commit 1fbbe32).
+    - cerebellum folia repainted instead of carved (commit 7b85f20): cheaper AND
+      a cleaner, cortex-consistent texture.
   Remaining candidate: longitudinal-fissure width (thin, likely fine). The big-mass
   fit is good; finer deep-nuclei spacing would be a per-pair grind, not a fit pass.
 
@@ -314,6 +327,14 @@ loop reads and applies them.)
   voxels blurred them). Verified: unit sphere meshes to exactly r=1; all 26 specs
   finite; whole brain + cerebellum + a lobe render unchanged. Two commits; the
   vendored MarchingCubes addon was removed.
+- 2026-06-29 - **Fit pass round 2: thalamus + cerebellum (awaiting review).** Per
+  human notes. Thalamus was oversized (filled the central diencephalon) -> scaled
+  ~0.85 (commit 1fbbe32). Cerebellum's carved folia were the heaviest SDF spec AND
+  the user found them needlessly intensive -> repainted as a viewer shader pattern
+  on a smooth low-res mass (`shape.pattern="folia"`, shared with the cortex swirl via
+  `makePatternInjector`), dropping it to ~80 ms and reading as cortex-consistent
+  folds (commit 7b85f20). The painted folia's only weak view is the top cap (organic
+  contours rather than parallel lines), hidden under the occipital in situ.
 - 2026-06-29 - **Whole-brain fit: cerebellum tucked (milestone, awaiting review).**
   See the Phase 2 list. NOTE for the human (refined diagnosis): regenerating
   `generate_data.py` rewrites `temporal`/`insula`/`mammillary` jigsaw `clip_planes`
