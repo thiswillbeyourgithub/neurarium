@@ -320,6 +320,25 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 (Human leaves correction notes here after each milestone contact-sheet review; the
 loop reads and applies them.)
 
+- 2026-06-29 - **Scale audit, second pass: brainstem + remaining nuclei.** Human:
+  "make the structures scale accurate, including small structures as I can find
+  them via the search feature" (i.e. do not keep small structures oversized for
+  findability; search reaches them at any size). Finished the pass on what the
+  deep-nuclei audit skipped. The brainstem was the worst offender (~1.65x too long
+  at 124mm): shrank midbrain/pons/medulla to real proportions (~18/27/30mm tall)
+  and re-spaced them to stay connected, anchoring the midbrain top to the
+  diencephalon -> brainstem now ~78mm. The four source nuclei that ride inside the
+  brainstem had to move up with their host (their `pos` was set for the old long
+  brainstem): VTA + substantia nigra -> ventral midbrain, locus coeruleus -> upper
+  pons, raphe -> a thin midline column; also nudged the subthalamic nucleus up to
+  sit just below the thalamus. Cerebellum trimmed (~103x48x55mm), olfactory bulb
+  thinned, septal nuclei shrunk. Verified numerically (ycheck.mjs: every segment
+  overlaps its neighbour, every nucleus' world-Y sits inside its host) and visually
+  (opaque whole-brain left/back/bottom/iso: brainstem reads as a compact stub with
+  the cerebellum tucked, the midbrain/peduncle + SN/VTA cluster shows correctly at
+  the base, nothing pokes through the cortex). Left as-is, anatomically reasonable:
+  the cingulate (a genuinely long gyral arc) and the fornix (a thin curve; the
+  `curve` shape type has no `scale` support yet, unlike sdf/blob).
 - 2026-06-29 - **Deep-structure scale audit (awaiting review).** Human flagged the
   putamen / claustrum / hippocampus poking out of the cortex: a scale problem.
   Measured every structure's meshed AABB (scratchpad `measure.mjs`), anchored a
