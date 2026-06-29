@@ -155,12 +155,15 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   (ellipsoid) with a medial scoop (cradles the globus pallidus) + faint surface
   displace. Phase 0 proof structure. Provenance llm.
 - done - caudate (paired) - SDF: the comma/tadpole. A slim tapered `tube` on a 3D
-  comma spline (head -> body arching over the thalamus -> wispy tail hooking down +
-  forward into the temporal lobe; the tail swings gently lateral so no view
-  collapses flat) smooth-unioned with a distinct bulbous head ovoid, under a light
-  displace; res 112. Ref: BodyParts3D model (head bulges into the frontal horn,
-  tail follows the lateral ventricle). Reads as a clear comma, hidden at explode 0,
-  reveals on explode. Replaces the uniform procedural `curve` tube. llm.
+  comma spline (head -> body arching over the thalamus -> wispy tail descending the
+  posterior wall then hooking DOWN into the temporal horn; the tail swings gently
+  lateral so no view collapses flat) smooth-unioned with a distinct bulbous head
+  ovoid, under a light displace; res 112. Ref: BodyParts3D model / Wikipedia caudate
+  gif (head bulges into the frontal horn, tail follows the lateral ventricle).
+  The tail hooks down rather than running forward under the head, so the comma
+  opens INFERIORLY (not anteriorly) per the reference. Reads as a clear comma,
+  hidden at explode 0, reveals on explode. Replaces the uniform procedural `curve`
+  tube. llm.
 - done - globus_pallidus (paired) - SDF: the medial wedge of the lentiform
   nucleus. A medially-tapering roundcone intersected with a tall/AP ellipsoid ->
   a wedge with a convex lateral face (nests in the putamen's medial scoop) tapering
