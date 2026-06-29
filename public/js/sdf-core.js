@@ -1,18 +1,20 @@
 // SDF core: the signed-distance evaluator + bounds + the marching-cubes meshing
 // pass, all reduced to PLAIN ARRAYS.
 //
-// ZERO three.js imports. The one piece that needs three (the `MarchingCubes`
-// polygonizer) is passed IN as a parameter to `meshSdfToArrays`, and the output is
-// raw `{positions, indices}` typed arrays, not a `THREE.BufferGeometry`. That is
-// what lets this exact code run in BOTH places:
+// ZERO three.js imports. The polygonizer is our own THREE-free `marchField`
+// (js/marching-cubes.js), and the output is raw `{positions, indices}` typed
+// arrays, not a `THREE.BufferGeometry`. That is what lets this exact code run in
+// BOTH places with no three at all:
 //   - the main thread, via js/sdf.js (which wraps the arrays into a BufferGeometry);
-//   - the SDF Web Worker (js/sdf-worker.js), which has no import map and therefore
-//     cannot resolve a bare "three" specifier, so it imports MarchingCubes by a
-//     relative URL and hands it to us.
+//   - the SDF Web Worker (js/sdf-worker.js), which has no import map (so it cannot
+//     resolve a bare "three" specifier) and now pulls in no three whatsoever, so it
+//     starts instantly instead of loading + parsing the 1.3MB three.js per worker.
 // Noise is injected via `deps` (from the THREE-free js/noise.js), same as before.
 //
 // Coordinate convention is neurarium's: x left(-)/right(+), y down(-)/up(+),
 // z posterior(-)/anterior(+); brain centered on the origin; arbitrary units.
+
+import { marchField } from "./marching-cubes.js";
 
 // ----------------------------------------------------------------------------
 // SDF evaluation. Every primitive returns a signed distance: negative inside,
@@ -188,8 +190,10 @@ export function evalNode(node, x, y, z, deps) {
 // ----------------------------------------------------------------------------
 // Bounds. The marching grid must enclose the surface with a margin so the field
 // is "outside" at the border (else the mesh is left open). We take the AABB of
-// every *bounded* primitive (planes are skipped, they only cut), make it a cube
-// (so grid voxels stay near-isotropic) and pad it.
+// every *bounded* primitive (planes are skipped, they only cut) and pad it per
+// axis. The box is left at its TIGHT (non-cubic) extent: the meshing pass keeps
+// voxels near-isotropic by choosing a per-axis sample count from one target voxel
+// size, so a thin/elongated structure no longer pays for a cube of empty cells.
 // ----------------------------------------------------------------------------
 
 function accumulateBounds(node, box) {
@@ -228,66 +232,82 @@ function accumulateBounds(node, box) {
   for (const c of kids) accumulateBounds(c, box);
 }
 
-export function cubeBounds(spec) {
+export function fieldBounds(spec) {
   if (spec.bounds) {
     return { min: spec.bounds[0].slice(), max: spec.bounds[1].slice() };
   }
   const box = { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] };
   accumulateBounds(spec.root, box);
   if (!isFinite(box.min[0])) throw new Error("sdf: spec has no bounded primitive; give explicit `bounds`");
-  const cx = (box.min[0] + box.max[0]) / 2;
-  const cy = (box.min[1] + box.max[1]) / 2;
-  const cz = (box.min[2] + box.max[2]) / 2;
-  const half = Math.max(
-    box.max[0] - box.min[0], box.max[1] - box.min[1], box.max[2] - box.min[2],
-  ) / 2;
-  const pad = (half * (spec.margin || 0.2)) + 1e-3; // breathing room so the border is outside
-  const h = half + pad;
-  return { min: [cx - h, cy - h, cz - h], max: [cx + h, cy + h, cz + h] };
+  const margin = spec.margin ?? 0.2;
+  const min = [0, 0, 0], max = [0, 0, 0];
+  for (let a = 0; a < 3; a++) {
+    const c = (box.min[a] + box.max[a]) / 2;
+    const half = (box.max[a] - box.min[a]) / 2;
+    const pad = half * margin + 1e-3; // breathing room so the border is outside
+    min[a] = c - half - pad;
+    max[a] = c + half + pad;
+  }
+  return { min, max };
 }
 
 // ----------------------------------------------------------------------------
-// Meshing. Marches the field to a welded, indexed triangle list expressed as
-// PLAIN typed arrays (`{positions, indices}`), so the caller (main thread or
-// worker) decides how to wrap it. `MarchingCubes` is injected (the vendored three
-// addon class) so this module imports no three.
+// Meshing. Samples the field on a regular grid, marches it (our own THREE-free
+// `marchField`, which returns a world-space triangle soup), then welds coincident
+// vertices into an indexed triangle list expressed as PLAIN typed arrays
+// (`{positions, indices}`), so the caller (main thread or worker) decides how to
+// wrap it. No three at all.
 // ----------------------------------------------------------------------------
 
 /**
- * @param {object} spec  `{ root, resolution?, bounds?, margin? }`.
+ * @param {object} spec  `{ root, resolution?, bounds?, margin? }`. `resolution` is
+ *   the sample count along the LONGEST axis (the other axes scale down with their
+ *   extent so voxels stay ~isotropic); pass an explicit `[Nx, Ny, Nz]` triple to
+ *   pin per-axis sampling (e.g. a structure whose finest relief is on a short
+ *   axis, like the cerebellum's folia).
  * @param {object} deps  `{ noise3d?, fractalNoise? }` (from js/noise.js).
- * @param {Function} MarchingCubes  the vendored `THREE.MarchingCubes` class.
  * @returns {{positions: Float32Array, indices: Uint32Array}}
  */
-export function meshSdfToArrays(spec, deps, MarchingCubes) {
-  const N = Math.max(16, Math.min(160, spec.resolution || 64));
-  const { min, max } = cubeBounds(spec);
+export function meshSdfToArrays(spec, deps) {
+  const { min, max } = fieldBounds(spec);
   const span = [max[0] - min[0], max[1] - min[1], max[2] - min[2]];
 
-  // Generously sized triangle buffer (the addon clips + warns if it overflows).
-  const maxPoly = Math.max(20000, N * N * 8);
-  // Pass `undefined` for the material: MarchingCubes extends Mesh, whose default
-  // parameter creates a MeshBasicMaterial internally (three is available inside
-  // the addon), so we need no three reference here. We only read positionArray.
-  const mc = new MarchingCubes(N, undefined, false, false, maxPoly);
-  mc.isolation = 0; // surface at sdf == 0
-  const field = mc.field;
+  // Per-axis sample counts. A target voxel size (from `resolution` over the
+  // longest span) sets the density, then each axis gets as many samples as it
+  // needs to hold that density: equant shapes stay ~cubic, but a thin/elongated
+  // structure samples its short axes sparsely instead of padding them out to a
+  // cube of mostly-empty cells (the dominant load-time cost). An explicit
+  // `resolution` triple overrides this where the relief is anisotropic.
+  let Nx, Ny, Nz;
+  if (Array.isArray(spec.resolution)) {
+    const clampN = (n) => Math.max(8, Math.min(160, Math.round(n)));
+    Nx = clampN(spec.resolution[0]); Ny = clampN(spec.resolution[1]); Nz = clampN(spec.resolution[2]);
+  } else {
+    const res = Math.max(16, Math.min(160, spec.resolution || 64));
+    const voxel = Math.max(span[0], span[1], span[2]) / (res - 1);
+    const dimOf = (s) => Math.max(8, Math.min(160, Math.round(s / voxel) + 1));
+    Nx = dimOf(span[0]); Ny = dimOf(span[1]); Nz = dimOf(span[2]);
+  }
 
-  // Fill the field: high (positive) inside so it matches the addon's metaball
-  // convention (so the gradient-based normals and triangle winding come out
-  // facing outward). worldOf(i) = min + (i / N) * span, the affine inverse of the
-  // addon's vertex output fx = (i - N/2) / (N/2).
-  for (let z = 0; z < N; z++) {
-    const wz = min[2] + (z / N) * span[2];
-    const zo = z * N * N;
-    for (let y = 0; y < N; y++) {
-      const wy = min[1] + (y / N) * span[1];
-      const yo = zo + y * N;
-      for (let x = 0; x < N; x++) {
-        const wx = min[0] + (x / N) * span[0];
+  // Sample the field on the Nx*Ny*Nz grid, inclusive of both bounds: worldOf(i,a)
+  // = min[a] + (i / (Na - 1)) * span[a]. Store -sdf (positive inside) so the
+  // surface is where the field crosses 0; `marchField` marks corners with
+  // field < 0 as inside, matching three's table convention (so winding/normals
+  // come out facing outward exactly as before).
+  const field = new Float32Array(Nx * Ny * Nz);
+  const sx = span[0] / (Nx - 1), sy = span[1] / (Ny - 1), sz = span[2] / (Nz - 1);
+  const planeXY = Nx * Ny;
+  for (let z = 0; z < Nz; z++) {
+    const wz = min[2] + z * sz;
+    const zo = z * planeXY;
+    for (let y = 0; y < Ny; y++) {
+      const wy = min[1] + y * sy;
+      const yo = zo + y * Nx;
+      for (let x = 0; x < Nx; x++) {
+        const wx = min[0] + x * sx;
         let d = -evalNode(spec.root, wx, wy, wz, deps);
         // A flat (axis-aligned) cut plane makes the sdf exactly 0 at grid points
-        // that land on it; two adjacent zeros make MarchingCubes interpolate
+        // that land on it; two adjacent zeros make a crossing edge interpolate
         // 0/0 -> a NaN vertex, which then poisons the geometry's bounding box and
         // blanks the viewer's auto-framing. Nudge exact zeros just off the
         // isosurface so every crossing edge has distinct endpoints.
@@ -297,44 +317,31 @@ export function meshSdfToArrays(spec, deps, MarchingCubes) {
     }
   }
 
-  mc.update(); // polygonize into mc.positionArray, mc.count = vertex count
-  const vcount = mc.count;
-  const src = mc.positionArray;
-  if (vcount >= maxPoly * 3) {
-    console.warn(`sdf: marching buffer full at resolution ${N}; raise maxPoly or lower resolution`);
-  }
+  const src = marchField(field, [Nx, Ny, Nz], min, span); // flat world-space triangle soup
 
-  // Map the addon's [-1,1] output back to world (world = center + pos*halfspan),
-  // welding coincident vertices into an index so vertex normals come out smooth
-  // (and stay smooth after the _L mirror, which re-runs computeVertexNormals).
-  const cx = (min[0] + max[0]) / 2, cy = (min[1] + max[1]) / 2, cz = (min[2] + max[2]) / 2;
-  const hx = span[0] / 2, hy = span[1] / 2, hz = span[2] / 2;
-  const eps = Math.max(hx, hy, hz) / (N * 8); // sub-voxel weld tolerance
+  // Weld coincident vertices into an index so vertex normals come out smooth (and
+  // stay smooth after the _L mirror, which re-runs computeVertexNormals). Shared
+  // edges between neighbouring cells produce bit-identical vertices, so a small
+  // rounding tolerance merges them cleanly. A triangle with any non-finite vertex
+  // is dropped whole (a degenerate cell on a flat cut plane can emit a NaN, and a
+  // single NaN position poisons the geometry's bounding box/sphere, blanking the
+  // viewer's auto-framing); the stray face leaves at most a 1-triangle pinhole,
+  // invisible on the double-sided material.
+  const eps = Math.max(sx, sy, sz) / 8; // sub-voxel weld tolerance
   const inv = 1 / eps;
-
-  // Weld per-triangle (the addon emits a triangle soup, 3 verts per face). A
-  // triangle with any non-finite vertex is dropped whole: MarchingCubes can emit
-  // a rare NaN vertex on a degenerate cell (e.g. a flat cut-plane face), and a
-  // single NaN position poisons the geometry's bounding box/sphere, which blanks
-  // the viewer's auto-framing. Dropping the stray face leaves at most a 1-triangle
-  // pinhole (invisible on the double-sided material) and keeps the mesh finite.
   const lookup = new Map();
   const positions = [];
   const indices = [];
   let dropped = 0;
-  for (let t = 0; t + 2 < vcount; t += 3) {
-    const tri = [];
-    for (let k = 0; k < 3; k++) {
-      const v = t + k;
-      const wx = cx + src[v * 3] * hx;
-      const wy = cy + src[v * 3 + 1] * hy;
-      const wz = cz + src[v * 3 + 2] * hz;
-      if (!Number.isFinite(wx) || !Number.isFinite(wy) || !Number.isFinite(wz)) break;
-      tri.push(wx, wy, wz);
+  for (let t = 0; t + 8 < src.length; t += 9) {
+    if (!Number.isFinite(src[t]) || !Number.isFinite(src[t + 1]) || !Number.isFinite(src[t + 2]) ||
+        !Number.isFinite(src[t + 3]) || !Number.isFinite(src[t + 4]) || !Number.isFinite(src[t + 5]) ||
+        !Number.isFinite(src[t + 6]) || !Number.isFinite(src[t + 7]) || !Number.isFinite(src[t + 8])) {
+      dropped++;
+      continue;
     }
-    if (tri.length < 9) { dropped++; continue; }
     for (let k = 0; k < 9; k += 3) {
-      const wx = tri[k], wy = tri[k + 1], wz = tri[k + 2];
+      const wx = src[t + k], wy = src[t + k + 1], wz = src[t + k + 2];
       const key = `${Math.round(wx * inv)},${Math.round(wy * inv)},${Math.round(wz * inv)}`;
       let idx = lookup.get(key);
       if (idx === undefined) {

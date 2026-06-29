@@ -61,13 +61,12 @@
 
     <!-- three.js via import map so the ES modules in js/ can `import "three"`
          and "three/addons/...". Vendored locally under public/vendor/three (three
-         r170: the core module + only the OrbitControls / CSS2DRenderer /
-         MarchingCubes addons we use; MarchingCubes is the scalar-field marcher the
-         SDF geometry path fills, see js/sdf.js), so the site pulls no third-party
-         script at runtime: nothing to
-         execute from a CDN that could be tampered with, and it works offline. To
-         upgrade, refetch those files from the matching three.js tag and bump the
-         path. -->
+         r170: the core module + only the OrbitControls / CSS2DRenderer addons we
+         use), so the site pulls no third-party script at runtime: nothing to
+         execute from a CDN that could be tampered with, and it works offline. The
+         SDF geometry path marches with our own THREE-free js/marching-cubes.js
+         (also reused by the SDF worker), not a three addon. To upgrade, refetch
+         those files from the matching three.js tag and bump the path. -->
     <script type="importmap">
       {
         "imports": {

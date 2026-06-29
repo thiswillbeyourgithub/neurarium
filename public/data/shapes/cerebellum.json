@@ -1,6 +1,10 @@
 {
   "type": "sdf",
-  "resolution": 104,
+  "resolution": [
+    72,
+    104,
+    84
+  ],
   "bounds": [
     [
       -2.65,

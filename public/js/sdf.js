@@ -5,15 +5,15 @@
 // (sphere, ellipsoid, box, capsule/round-cone, swept tube, half-space plane)
 // combined by ops (union, intersect, subtract, and their smooth variants) with
 // optional surface-noise displacement. `buildSdfGeometry()` samples that field
-// onto a uniform grid, marches it to a triangle mesh with the vendored
-// `THREE.MarchingCubes` addon, then welds + re-normals the result so the mesh is
-// smooth and watertight (and mirrors cleanly for the `_L` member).
+// onto a uniform grid, marches it to a triangle mesh with our own THREE-free
+// marcher, then welds + re-normals the result so the mesh is smooth and watertight
+// (and mirrors cleanly for the `_L` member).
 //
 // The heavy, three-free part (the evaluator + bounds + the marching pass that
-// returns raw `{positions, indices}` arrays) lives in js/sdf-core.js, so the
-// SAME code runs inside the SDF Web Worker (js/sdf-worker.js). This module is the
-// thin three-side wrapper: it injects the vendored MarchingCubes class and wraps
-// the returned arrays into a `THREE.BufferGeometry` with vertex normals.
+// returns raw `{positions, indices}` arrays) lives in js/sdf-core.js +
+// js/marching-cubes.js, so the SAME code runs inside the SDF Web Worker
+// (js/sdf-worker.js) with no three at all. This module is the thin three-side
+// wrapper: it wraps the returned arrays into a `THREE.BufferGeometry` with normals.
 //
 // Why SDF: it is the only medium that does *smooth-union* (melting the cortical
 // lobes of a hemisphere into one continuous surface with soft valleys, instead of
@@ -24,7 +24,6 @@
 // z posterior(-)/anterior(+); brain centered on the origin; arbitrary units.
 
 import * as THREE from "three";
-import { MarchingCubes } from "three/addons/objects/MarchingCubes.js";
 import { meshSdfToArrays, evalNode } from "./sdf-core.js";
 
 /**
@@ -36,7 +35,7 @@ import { meshSdfToArrays, evalNode } from "./sdf-core.js";
  * @returns {THREE.BufferGeometry}
  */
 export function buildSdfGeometry(spec, deps = {}) {
-  const { positions, indices } = meshSdfToArrays(spec, deps, MarchingCubes);
+  const { positions, indices } = meshSdfToArrays(spec, deps);
   return geometryFromArrays(positions, indices);
 }
 

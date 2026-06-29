@@ -1750,12 +1750,14 @@ MIDLINE: list[dict[str, Any]] = [
          # not three separate balls). Its signature is the fine transverse FOLIA:
          # near-horizontal parallel folds, made by a RIDGED fractal displace with a
          # strong y-frequency skew (aniso) so the ridges stack vertically. The folia
-         # are deliberately bold + not-too-fine so they resolve at this resolution;
-         # an explicit (non-cubed) bounds gives the tight-y-span fine y-voxels the
-         # folds need. Res 104. Sits below/behind the occipital lobes (under the
-         # tentorium) with the brainstem in front of it. Provenance: llm.
+         # live on the y axis (aniso 3.0), so y needs the finest sampling; x runs
+         # ALONG the folds (aniso 0.3, coarsest) and z is moderate. An EXPLICIT
+         # per-axis resolution [Nx, Ny, Nz] pins that anisotropy (the default
+         # isotropic voxel sizing would blur the folds into granular noise). Sits
+         # below/behind the occipital lobes (under the tentorium) with the brainstem
+         # in front of it. Provenance: llm.
          shape=dict(
-             type="sdf", resolution=104,
+             type="sdf", resolution=[72, 104, 84],
              bounds=[[-2.65, -1.40, -1.78], [2.65, 1.40, 1.78]],
              root=dict(op="displace", amp=0.13, freq=4.2, octaves=2, ridged=True,
                        unit=1.0, aniso=[0.3, 3.0, 0.55], seed=31, nodes=[
