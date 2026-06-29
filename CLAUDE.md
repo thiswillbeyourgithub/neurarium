@@ -198,7 +198,10 @@ Viewer (`public/`):
   `clip_planes` when `JIGSAW_CLIP.enabled`. No deps beyond three.js.
 - `js/arrows.js` — curved tube+cone arrows; colour from `projection.color`,
   recolourable via `setColor` (colour-mode switch); `tentative` -> dotted tube via
-  a small local `mergeIndexedGeometries`. Exposes `arrow.curve`.
+  a small local `mergeIndexedGeometries`. Exposes `arrow.curve`. `update(fast)`
+  re-fits the arrow; `fast` skips the per-end surface-trim raycasts (reusing each
+  end's cached offset) + defers the pick-hull/halo rebuild, for a cheap spread (see
+  Spread performance); `ensurePickGeometry()` rebuilds a deferred pick hull on demand.
 - `js/labels.js` — floating structure-name labels (CSS2DRenderer): one hidden
   label per region, shown on hover / show-all / when pinned (`setPinned`).
 - `js/circuit-schedule.js` — `scheduleCircuit()` BFS firing order for the circuit
@@ -771,6 +774,19 @@ render is needed; when idle the canvas holds its last frame. A render is trigger
 Adding a new per-frame controller? Make its `tick()` return whether it animated, or it
 runs but never triggers a repaint. Screenshots are unaffected (the loop renders the
 settled frame then idles).
+
+### Spread performance
+
+Re-fitting the ~100 arrows each explode frame was dominated (~90%) by the per-end
+surface-trim raycasts against the high-poly region meshes, making the Separate slider
+janky. So during a continuous spread the arrows update in `fast` mode
+(`applyExplode(..., true)` -> `ProjectionArrow.update(true)`): each end reuses its cached
+surface-trim offset (valid because regions only translate, never rotate, as they spread)
+instead of raycasting, and the pick-hull/halo rebuilds are deferred. `createArrowRetrim`
+(a render-loop `tick()` controller) then re-trims every arrow precisely once the spread
+has been still for ~120ms, a chunk per frame so the catch-up never hitches; a click
+mid-spread calls `arrow.ensurePickGeometry()` so the deferred hull is current. The
+settled result is identical to the old per-frame-precise layout.
 
 ## Circuit animation
 

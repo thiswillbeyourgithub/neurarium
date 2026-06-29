@@ -244,15 +244,36 @@ export class ProjectionArrow {
    * Call this after the structures have been (re)positioned for a new explode
    * amount. Cheap enough to also call every frame if needed.
    */
-  update() {
+  /**
+   * Re-fit the arrow to its (possibly just-moved) endpoints.
+   * @param {boolean} [fast]  Skip the per-end surface-trim raycasts and the
+   *   pick/halo rebuilds, reusing the cached trim offsets. Used during a
+   *   continuous spread (the raycasts are ~90% of this call's cost); a deferred
+   *   precise re-trim corrects the small facing drift once the spread settles.
+   */
+  update(fast = false) {
     const srcCenter = this.fromMesh.position;
     const tgtCenter = this.toMesh.position;
 
     // Trim each end from the (hidden) center to the structure surface that faces
     // the other end, so the arrow spans the gap between regions and the cone tip
     // lands on the target surface. Fall back to the center if a ray misses.
-    const start = surfaceToward(this.fromMesh, tgtCenter) || srcCenter.clone();
-    const end = surfaceToward(this.toMesh, srcCenter) || tgtCenter.clone();
+    //
+    // The trim point is cached as a world OFFSET from the region's center
+    // (`_trimFrom`/`_trimTo`). Regions only translate as they spread (never rotate
+    // or scale), so that offset stays a valid surface point as the region moves;
+    // a `fast` update reuses it and skips the raycasts. The offset still reflects
+    // the OLD facing direction, so a precise pass (default) refreshes it.
+    let start, end;
+    if (fast && this._trimFrom && this._trimTo) {
+      start = srcCenter.clone().add(this._trimFrom);
+      end = tgtCenter.clone().add(this._trimTo);
+    } else {
+      start = surfaceToward(this.fromMesh, tgtCenter) || srcCenter.clone();
+      end = surfaceToward(this.toMesh, srcCenter) || tgtCenter.clone();
+      this._trimFrom = start.clone().sub(srcCenter);
+      this._trimTo = end.clone().sub(tgtCenter);
+    }
 
     const mid = start.clone().add(end).multiplyScalar(0.5);
     const dist = start.distanceTo(end);
@@ -301,15 +322,19 @@ export class ProjectionArrow {
       ? dashedTubeGeometry(shaftCurve, TUBE_RADIUS)
       : new THREE.TubeGeometry(shaftCurve, 24, TUBE_RADIUS, 8, false);
 
-    // Pick proxy spans the whole arc (start -> end) at the fat PICK_RADIUS so the
-    // entire arrow, heads included, is comfortably clickable.
-    this.pick.geometry.dispose();
-    this.pick.geometry = new THREE.TubeGeometry(curve, 24, PICK_RADIUS, 6, false);
-
-    // Halo tube tracks the same arc one notch fatter than the visible tube, so
-    // the glow hugs the whole arrow as it explodes.
-    this.halo.geometry.dispose();
-    this.halo.geometry = new THREE.TubeGeometry(curve, 24, HALO_RADIUS, 8, false);
+    // Pick hull (invisible, fat) + halo tube. Both ride the full start->end arc
+    // (`this.curve`) and are only consulted on a click (pick) or while selected
+    // (halo), so a `fast` update defers them: it marks the pick stale
+    // (ensurePickGeometry rebuilds it before the next raycast) and rebuilds the
+    // halo only while it is visible. A precise update rebuilds both now.
+    if (fast) {
+      this._pickDirty = true;
+      if (this.halo.visible) this._rebuildHalo();
+      else this._haloDirty = true;
+    } else {
+      this._rebuildPick();
+      this._rebuildHalo();
+    }
 
     // Target cone center is half a length behind the apex so the apex lands on
     // `end`, pointing in the direction of travel.
@@ -326,6 +351,29 @@ export class ProjectionArrow {
     // Keep the label anchor on the (live) arc midpoint so the connection label
     // sits on the arrow wherever it is after an explode.
     this.labelAnchor.position.copy(curve.getPoint(0.5));
+  }
+
+  /** (Re)build the fat invisible pick hull from the current arc. */
+  _rebuildPick() {
+    this.pick.geometry.dispose();
+    this.pick.geometry = new THREE.TubeGeometry(this.curve, 24, PICK_RADIUS, 6, false);
+    this._pickDirty = false;
+  }
+
+  /** (Re)build the halo glow tube from the current arc. */
+  _rebuildHalo() {
+    this.halo.geometry.dispose();
+    this.halo.geometry = new THREE.TubeGeometry(this.curve, 24, HALO_RADIUS, 8, false);
+    this._haloDirty = false;
+  }
+
+  /**
+   * Rebuild the pick hull if a `fast` update left it stale. Call before any
+   * raycast that includes the pick mesh (the deferred rebuild is what keeps the
+   * spread cheap), so a click still hits the up-to-date hull.
+   */
+  ensurePickGeometry() {
+    if (this._pickDirty) this._rebuildPick();
   }
 
   /** Toggle the whole arrow's visibility. */
@@ -350,6 +398,10 @@ export class ProjectionArrow {
   /** Show/hide the selection glow around this arrow (picked via click/search). */
   setHalo(on) {
     this.halo.visible = on;
+    // A fast spread defers the halo rebuild while it is hidden; refresh it now if
+    // it is being shown stale, so a selection made right after a spread glows on
+    // the current arc.
+    if (on && this._haloDirty) this._rebuildHalo();
   }
 
   /**

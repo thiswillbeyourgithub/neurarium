@@ -178,15 +178,61 @@ function initThree() {
  * @param {THREE.Mesh[]} meshes
  * @param {number} amount  Slider value in [0, 1].
  * @param {import("./arrows.js").ProjectionArrow[]} arrows
+ * @param {boolean} [fast]  Re-fit arrows cheaply (skip the surface-trim raycasts,
+ *   ~90% of the cost) for a smooth continuous spread; a deferred precise re-trim
+ *   (createArrowRetrim) cleans up once the spread settles.
  */
-function applyExplode(meshes, amount, arrows) {
+function applyExplode(meshes, amount, arrows, fast = false) {
   for (const mesh of meshes) {
     const { base, dir } = mesh.userData;
     const distance = base.length() * amount * EXPLODE_STRENGTH;
     mesh.position.copy(base).addScaledVector(dir, distance);
   }
   // Arrows follow the moved centers.
-  for (const arrow of arrows) arrow.update();
+  for (const arrow of arrows) arrow.update(fast);
+}
+
+/**
+ * Deferred precise arrow re-trim for the explode path. During a continuous spread
+ * the arrows are re-fit cheaply (applyExplode `fast`), which skips the surface-trim
+ * raycasts and so leaves each end slightly facing the pre-spread direction. Once
+ * the spread has been still for SETTLE_MS this re-trims every arrow precisely, a
+ * CHUNK at a time per frame so the catch-up never lands as one hitch.
+ *
+ * It plugs into the render loop like the other per-frame controllers: `tick()`
+ * runs every frame (the loop callback is continuous; only the render is on-demand)
+ * and returns whether it changed anything, so the loop repaints the corrected
+ * arrows. `markDirty()` is called after each fast spread update to (re)arm it.
+ * @param {import("./arrows.js").ProjectionArrow[]} arrows
+ */
+function createArrowRetrim(arrows) {
+  const SETTLE_MS = 120; // re-trim this long after the last spread change
+  const CHUNK = 24;      // arrows re-trimmed per frame while catching up
+  let lastChange = -Infinity;
+  let cursor = arrows.length; // < length while a precise pass is in flight
+
+  return {
+    /** Note a fast (imprecise) spread update; (re)start the settle timer and
+     *  abandon any in-flight catch-up (it would fight the active spread). */
+    markDirty() {
+      lastChange = performance.now();
+      cursor = arrows.length;
+    },
+    /** Per-frame: drive the deferred re-trim. Returns true while it has work. */
+    tick() {
+      if (cursor < arrows.length) {
+        const end = Math.min(cursor + CHUNK, arrows.length);
+        for (; cursor < end; cursor++) arrows[cursor].update(); // precise + re-caches
+        return true; // arrows changed: keep rendering
+      }
+      if (lastChange !== -Infinity && performance.now() - lastChange >= SETTLE_MS) {
+        lastChange = -Infinity;
+        cursor = 0; // begin a precise pass over the next frames
+        return true;
+      }
+      return false;
+    },
+  };
 }
 
 // "See inside" cull: how far past the orbit-centre plane (toward the camera) a
@@ -3174,14 +3220,19 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // Apply an explode `amount`: spread the regions, keep a focused structure
   // centered (re-aim), and pull the camera to hold the apparent size. Shared by the
   // slider handler and the auto-spread tween so both behave identically.
+  // Re-trim arrows precisely once the spread settles (the per-frame updates below
+  // are cheap/approximate; see createArrowRetrim). Advanced by its tick() in the
+  // render loop.
+  const arrowRetrim = createArrowRetrim(arrows);
   const applyExplodeAmount = (amount) => {
-    applyExplode(meshes, amount, arrows);
+    applyExplode(meshes, amount, arrows, true); // fast: reuse cached surface trims
     // Keep a double-clicked / searched structure centered as it blows outward,
     // by re-aiming (rotating) the camera rather than translating it.
     focus.reaimFocused();
     // Pull the camera back as the regions spread (and zoom back in as they
     // reassemble) so the exploded layout stays framed.
     focus.zoomForExplode(amount);
+    arrowRetrim.markDirty(); // schedule the precise re-trim for when the spread stops
   };
   const onExplode = () => applyExplodeAmount(parseFloat(explode.value));
   explode.addEventListener("input", onExplode);
@@ -3264,8 +3315,8 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
 
   // Hand the auto-spread back to the caller: the focus helpers (selectStructure,
   // focusDrug, ...) live in the main scope and call autoSpreadIfDeep, and the
-  // render loop advances autoSpread.tick().
-  return { autoSpread, autoSpreadIfDeep };
+  // render loop advances autoSpread.tick() + arrowRetrim.tick().
+  return { autoSpread, autoSpreadIfDeep, arrowRetrim };
 }
 
 /**
@@ -4132,6 +4183,9 @@ async function main() {
   // Arrow under a point via the generous pick hull (or null).
   const pickArrowAt = (clientX, clientY) => {
     setPointer(clientX, clientY);
+    // The fat pick hulls are rebuilt lazily (deferred during a spread), so make
+    // sure any stale ones are current before raycasting them.
+    for (const a of arrows) a.ensurePickGeometry();
     return firstVisibleArrowHit(arrowPickables)?.arrow || null;
   };
   // Nearest *visible* arrow part under a point ({arrow, distance}) or null.
@@ -4488,7 +4542,7 @@ async function main() {
     b.addEventListener("click", () => setColorMode(b.dataset.mode === "sign"));
   }
 
-  const { autoSpread, autoSpreadIfDeep } = wireControls(
+  const { autoSpread, autoSpreadIfDeep, arrowRetrim } = wireControls(
     { controls, meshes, arrows, labels, focus, selection, projVis, cull });
   const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
@@ -4557,6 +4611,7 @@ async function main() {
     let active = false;
     if (intro.tick()) active = true;
     if (autoSpread.tick()) active = true;
+    if (arrowRetrim.tick()) active = true;
     if (focus.tick()) active = true;
     if (circuitAnim.tick()) active = true;
     if (receptorMarkers.tick()) active = true;
