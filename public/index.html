@@ -152,16 +152,23 @@
       }
       #settings-pane > #lang-switch,
       #settings-pane > .toolbar-row { flex: 0 0 auto; }
+      /* overflow-x: hidden (not the default `visible`) is deliberate: an
+         overflow-y:auto box with overflow-x left visible has its x coerced to `auto`
+         by the spec, so any child a few px too wide (a slider's UA side-margin, a long
+         unbreakable name) makes the pane scroll sideways, which on touch reads as the
+         panel content sliding under the finger. Clipping x keeps it strictly vertical. */
       #controls-main,
       #settings-pane > #search:not([hidden]) {
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
+        overflow-x: hidden;
       }
       #details-pane:not([hidden]) {
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
+        overflow-x: hidden;
       }
       /* Portrait / vertical screens: a bottom-left box would cover the centered
          brain, so make the controls span the FULL WIDTH but only the bottom HALF
@@ -257,7 +264,21 @@
         cursor: pointer;
         user-select: none;
       }
-      .collapse-header .chevron { transition: transform 0.15s ease; color: var(--muted); }
+      /* Fixed-square box so the expanded-state 90deg rotate keeps the SAME bounding
+         box. A bare glyph is ~half-em wide but a full line-box tall, so rotating it
+         swells its rect sideways to the line height and (with the section headers'
+         zero right padding) pushed the header a few px past the panel content edge,
+         which made the section list horizontally scrollable on touch. */
+      .collapse-header .chevron {
+        transition: transform 0.15s ease;
+        color: var(--muted);
+        flex: 0 0 auto;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        line-height: 1em;
+        text-align: center;
+      }
       .collapse-header[aria-expanded="true"] .chevron { transform: rotate(90deg); }
       /* Version tag next to the panel title (set from version.js by js/main.js). */
       .collapse-header .version { font-weight: 400; font-size: 11px; color: var(--muted); }
@@ -271,7 +292,9 @@
         margin: 0;
         cursor: pointer;
       }
-      input[type="range"] { width: 100%; accent-color: #4e79a7; }
+      /* margin-inline:0 drops the UA's ~2px horizontal margin: with width:100% it
+         otherwise sums to 100%+4px and overflows the (now x-clipped) section list. */
+      input[type="range"] { width: 100%; margin-inline: 0; accent-color: #4e79a7; }
       input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4e79a7; }
 
       /* Shared pill button (the "show all names" toggle). The .active state is
@@ -582,6 +605,7 @@
         padding: 0;
         max-height: 240px;
         overflow-y: auto;
+        overflow-x: hidden;
       }
       #search-results li {
         padding: 7px 9px;
