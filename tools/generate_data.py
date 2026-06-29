@@ -1710,11 +1710,27 @@ PAIRED: list[dict[str, Any]] = [
 MIDLINE: list[dict[str, Any]] = [
     dict(base="pituitary", name="Pituitary gland", group="diencephalon",
          pos=(0.0, -1.0, 0.35), color="#d2a06e",
-         # Midline gland hanging below the hypothalamus on the infundibular stalk,
-         # seated in the sella turcica. Tiny smooth blob; hides centrally at
-         # explode 0 and is revealed by blowing out. Position is a guess: tune in
-         # a browser.
-         radii=(0.2, 0.22, 0.2), seed=72, detail=4, noise=0.04),
+         # SDF (self-authored atlas, see geometry_refinements/). The defining shape
+         # is GLAND-ON-A-STALK: a small bean-shaped gland (wider mediolaterally than
+         # tall) seated in the sella turcica, with a thin INFUNDIBULAR STALK rising
+         # from its top toward the hypothalamus above. Modeled as a bean ellipsoid
+         # smooth-unioned with a slender tapered roundcone stalk, under a faint
+         # displace; res 72, tight bounds for the thin stalk. Midline (no mirror).
+         # Hides centrally at explode 0, revealed on blow-out. Position is a guess:
+         # tune in a browser. Provenance: llm.
+         shape=dict(
+             type="sdf", resolution=72,
+             bounds=[[-0.28, -0.28, -0.28], [0.28, 0.62, 0.30]],
+             root=dict(op="displace", amp=0.008, freq=5.0, seed=72, nodes=[
+                 dict(op="smoothUnion", k=0.08, nodes=[
+                     dict(prim="ellipsoid", center=[0.0, 0.0, 0.0],
+                          radii=[0.22, 0.18, 0.20]),       # the bean gland
+                     dict(prim="roundcone",
+                          a=[0.0, 0.10, 0.04], r1=0.07,
+                          b=[0.0, 0.50, 0.0], r2=0.05),     # infundibular stalk
+                 ]),
+             ])),
+         ),
     dict(base="cerebellum", name="Cerebellum", group="hindbrain",
          pos=(0.0, -1.95, -3.3), color="#b07aa1",
          # Composite: two foliated hemispheres flanking a narrower central

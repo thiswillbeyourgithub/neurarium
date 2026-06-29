@@ -221,7 +221,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   medially-angled roundcone funnel, light displace; res 72. The L+R pair converges
   on the midline (median eminence). Replaces the plain sphere blob. llm.
 - pending - mammillary (paired)
-- pending - pituitary (midline)
+- done - pituitary (midline) - SDF: gland-on-a-stalk. A bean ellipsoid (wider ML
+  than tall) smooth-unioned with a slender tapered roundcone infundibular stalk
+  rising toward the hypothalamus, faint displace; res 72, tight bounds for the thin
+  stalk. In context the stalk reaches up between the two hypothalami whose funnels
+  angle down to meet it. Replaces the plain blob. llm.
 
 ### brainstem_nuclei (monoamine source nuclei)
 
