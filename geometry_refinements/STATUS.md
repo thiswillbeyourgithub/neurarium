@@ -293,9 +293,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   below the frontal poles, intended). Done so far:
     - cerebellum was floating ~0.2 to 0.75 below the cerebrum -> raised its centre
       y to -1.55 so it tucks under the occipital underside (commit 247d5c8).
-  Remaining candidates: longitudinal-fissure width (thin, likely fine), and the
-  stale procedural-holdout clip_planes (see milestone note) if the human wants them
-  regenerated.
+    - regenerated the stale procedural-holdout artifacts (temporal/insula were
+      ~0.15-0.25 mis-placed vs their cortex cuts; mammillary jigsaw clip dropped);
+      `public/data/` now round-trips cleanly from the generator (commit 8dda7d3).
+  Remaining candidate: longitudinal-fissure width (thin, likely fine). The big-mass
+  fit is good; finer deep-nuclei spacing would be a per-pair grind, not a fit pass.
 
 ## Milestone review log
 
@@ -322,7 +324,9 @@ loop reads and applies them.)
   own record back in). It is a real latent inconsistency: the documented "regenerate
   then commit" workflow would sweep it in. Worth a one-line `generate_data.py` regen +
   commit of just those holdouts, but that is outside this SDF effort's scope, so left
-  for the human to greenlight.
+  for the human to greenlight. (RESOLVED 2026-06-29, commit 8dda7d3: human
+  greenlit, regenerated; the drift was actually stale temporal/insula POSITIONS
+  plus the mammillary clip drop; `public/data/` now round-trips clean.)
 
 - 2026-06-28 - **Cortex polish landed (oblique fissures + temporal lateral + insula).**
   Human review of the one-dome milestone chose: full polish + pull temporal back
