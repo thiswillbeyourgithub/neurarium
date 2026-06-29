@@ -1778,17 +1778,29 @@ MIDLINE: list[dict[str, Any]] = [
     # granularity note.)
     dict(base="midbrain", name="Midbrain", group="hindbrain",
          pos=(0.0, -0.95, -0.66), color="#9c755f",
-         # Top segment, continuous with the diencephalon/thalamus above it.
+         # SDF (self-authored atlas, see geometry_refinements/). Top brainstem
+         # segment, continuous with the diencephalon/thalamus above. Its signature
+         # is the dorsal TECTAL (quadrigeminal) PLATE: four colliculi, the superior +
+         # inferior pair each side, bulging posteriorly (toward the cerebellum).
+         # Modeled as a vertical roundcone body (narrower at the top, widening down
+         # to meet the pons) smooth-unioned with four small colliculus spheres on the
+         # posterior (-z) dorsal surface, under a light displace; res 80. Midline.
+         # Provenance: llm.
          shape=dict(
-             type="curve",
-             points=[
-                 (0.0, 0.85, -0.09),  # top, under the thalamus
-                 (0.0, 0.0, 0.0),     # mid
-                 (0.0, -0.75, 0.11),  # tail, meeting the pons
-             ],
-             profile=[0.46, 0.55, 0.62],
-             seed=32, noise=0.05, radial_segments=16, tubular_segments=44,
-         )),
+             type="sdf", resolution=80,
+             root=dict(op="displace", amp=0.012, freq=3.2, seed=32, nodes=[
+                 dict(op="smoothUnion", k=0.12, nodes=[
+                     dict(prim="roundcone",
+                          a=[0.0, 0.70, -0.08], r1=0.44,    # top, under the thalamus
+                          b=[0.0, -0.60, 0.10], r2=0.56),   # tail, meeting the pons
+                     # tectal plate: superior + inferior colliculi, both sides.
+                     dict(prim="sphere", center=[0.20, 0.18, -0.40], radius=0.17),
+                     dict(prim="sphere", center=[-0.20, 0.18, -0.40], radius=0.17),
+                     dict(prim="sphere", center=[0.18, -0.16, -0.46], radius=0.15),
+                     dict(prim="sphere", center=[-0.18, -0.16, -0.46], radius=0.15),
+                 ]),
+             ])),
+         ),
     dict(base="pons", name="Pons", group="hindbrain",
          pos=(0.0, -2.35, -0.45), color="#8c6a58",
          # SDF (self-authored atlas, see geometry_refinements/). Middle brainstem
