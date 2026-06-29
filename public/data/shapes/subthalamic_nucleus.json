@@ -3,31 +3,31 @@
   "resolution": 60,
   "root": {
     "op": "displace",
-    "amp": 0.008,
-    "freq": 4.5,
+    "amp": 0.0024,
+    "freq": 15.0,
     "seed": 25,
     "nodes": [
       {
         "op": "smoothIntersect",
-        "k": 0.05,
+        "k": 0.015,
         "nodes": [
           {
             "prim": "sphere",
             "center": [
               0.0,
-              0.55,
+              0.165,
               0.0
             ],
-            "radius": 0.78
+            "radius": 0.234
           },
           {
             "prim": "sphere",
             "center": [
               0.0,
-              -0.55,
+              -0.165,
               0.0
             ],
-            "radius": 0.78
+            "radius": 0.234
           },
           {
             "prim": "ellipsoid",
@@ -37,9 +37,9 @@
               0.0
             ],
             "radii": [
-              0.34,
-              0.5,
-              0.54
+              0.102,
+              0.15,
+              0.162
             ]
           }
         ]

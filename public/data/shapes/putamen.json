@@ -3,35 +3,35 @@
   "resolution": 72,
   "root": {
     "op": "displace",
-    "amp": 0.018,
-    "freq": 3.2,
+    "amp": 0.0103,
+    "freq": 5.5814,
     "seed": 22,
     "nodes": [
       {
         "op": "subtract",
-        "k": 0.18,
+        "k": 0.1032,
         "nodes": [
           {
             "prim": "ellipsoid",
             "center": [
-              0.06,
-              0,
-              0
+              0.0414,
+              0.0,
+              0.0
             ],
             "radii": [
-              0.45,
-              1.05,
-              1.2
+              0.3105,
+              0.504,
+              0.66
             ]
           },
           {
             "prim": "sphere",
             "center": [
-              -1.18,
+              -0.8142,
               0.0,
-              -0.1
+              -0.055
             ],
-            "radius": 0.95
+            "radius": 0.5447
           }
         ]
       }

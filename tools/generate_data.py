@@ -1288,6 +1288,7 @@ PAIRED: list[dict[str, Any]] = [
          # surfacing only as the lobes blow apart: anatomically deeper and no
          # longer poking out between the lobes.
          pos=(1.2, 1.1, 0.8), color="#ff9da7",
+         scale=(0.95, 0.67, 0.66),  # anatomical: ~14x38x42mm (was too tall/long)
          # SDF (self-authored atlas, see geometry_refinements/). The caudate is
          # the comma/tadpole of the basal ganglia, wrapping over + behind the
          # thalamus along the lateral ventricle: a large BULBOUS HEAD (anterior +
@@ -1334,7 +1335,8 @@ PAIRED: list[dict[str, Any]] = [
              ])),
          ),
     dict(base="putamen", name="Putamen", group="basal_ganglia",
-         pos=(2.0, 0.2, 0.6), color="#f28e2b",
+         pos=(1.9, 0.2, 0.6), color="#f28e2b",
+         scale=(0.69, 0.48, 0.55),  # anatomical: ~14x24x32mm (was ~2x too tall)
          # SDF (self-authored atlas, see geometry_refinements/). The putamen is
          # the most lateral basal nucleus: a rounded lens/shell flattened
          # mediolaterally (thin x), taller (y) and deep (z), gently scalloped on
@@ -1356,6 +1358,7 @@ PAIRED: list[dict[str, Any]] = [
          )),
     dict(base="globus_pallidus", name="Globus pallidus", group="basal_ganglia",
          pos=(1.5, 0.0, 0.2), color="#76b7b2",
+         scale=(0.5, 0.65, 0.8),  # anatomical: ~10x16x20mm
          # SDF (self-authored atlas, see geometry_refinements/). The inner, medial
          # part of the lentiform nucleus: a WEDGE/cone tapering to a medial apex
          # (pointing toward the internal capsule / thalamus) with a convex lateral
@@ -1380,6 +1383,7 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="thalamus", name="Thalamus", group="basal_ganglia",
          pos=(0.9, 0.4, -0.6), color="#bab0ac",
+         scale=(0.87, 0.77, 0.62),  # anatomical: ~25x22x32mm (AP was too long)
          # SDF (self-authored atlas, see geometry_refinements/). The biggest deep
          # nucleus: an elongated EGG with a narrower anterior pole (the anterior
          # tubercle) and a bulbous posterior PULVINAR overhanging the geniculate
@@ -1403,6 +1407,7 @@ PAIRED: list[dict[str, Any]] = [
     dict(base="subthalamic_nucleus", name="Subthalamic nucleus",
          group="basal_ganglia",
          pos=(1.3, -0.9, -0.6), color="#d37295",
+         scale=0.3,  # anatomical: a tiny ~5-7mm lens (was ~4x too big)
          # SDF (self-authored atlas, see geometry_refinements/). The tiny biconvex
          # LENS (lentil) of the subthalamus: two large spheres offset along the
          # thin (DV) axis, intersected so their overlap is a lens with a crisp
@@ -1425,6 +1430,7 @@ PAIRED: list[dict[str, Any]] = [
     dict(base="substantia_nigra", name="Substantia nigra",
          group="basal_ganglia", fr_gender="f",
          pos=(1.0, -1.4, -1.2), color="#3d3d3d",
+         scale=(0.6, 0.45, 0.45),  # anatomical: a thin ~9x5x17mm band
          # SDF (self-authored atlas, see geometry_refinements/). A thin, gently
          # CURVED lamina in the midbrain hugging the back of the cerebral peduncle
          # (concave anteromedially), not a flat lens. Modeled as three flattened
@@ -1448,6 +1454,7 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="accumbens", name="Nucleus accumbens", group="basal_ganglia",
          pos=(0.95, -0.5, 1.0), color="#e0997e",
+         scale=(0.5, 0.32, 0.42),  # anatomical: ~10x9x8mm (was ~3x too tall)
          # SDF (self-authored atlas, see geometry_refinements/). Ventral striatum,
          # where the head of the caudate meets the putamen ventrally and anteriorly
          # (the reward hub, target of the mesolimbic dopamine pathway). It has no
@@ -1465,7 +1472,12 @@ PAIRED: list[dict[str, Any]] = [
              ])),
          ),
     dict(base="claustrum", name="Claustrum", group="basal_ganglia",
-         pos=(2.5, 0.1, 0.5), color="#8d97ab",
+         pos=(2.3, 0.1, 0.5), color="#8d97ab",
+         scale=0.62,  # anatomical: a thin curved ~4x21x28mm sheet, seated medial
+         # to the insula (was poking out lateral to it). Uniform on purpose: this is
+         # a spherical-shell construction whose surface sits at (center + radius), so
+         # anisotropic scaling (center per-axis, scalar radius by the mean) would
+         # slide the shell off its bounds and mesh to nothing.
          # SDF (self-authored atlas, see geometry_refinements/). A thin, gently
          # curved vertical lamina of grey matter between the insula (lateral) and
          # the putamen (medial): a thin spherical SHELL (so it is curved, concave
@@ -1491,6 +1503,7 @@ PAIRED: list[dict[str, Any]] = [
     # --- Limbic / diencephalon ---
     dict(base="hippocampus", name="Hippocampus", group="limbic",
          pos=(1.3, -0.7, -0.2), color="#b3823e",
+         scale=(0.95, 0.6, 0.8),  # anatomical: ~15x24x40mm (was too tall)
          # SDF (self-authored atlas, see geometry_refinements/). Curved
          # allocortical "seahorse" in the floor of the temporal lobe, swept on a
          # genuinely 3D spline so no orthogonal view collapses to a bulb-on-a-shaft:
@@ -1550,6 +1563,7 @@ PAIRED: list[dict[str, Any]] = [
          )),
     dict(base="amygdala", name="Amygdala", group="limbic", fr_gender="f",
          pos=(1.45, -0.35, 0.95), color="#9b7bb0",
+         scale=(0.75, 0.5, 0.6),  # anatomical: an ~14x12x18mm almond
          # SDF (self-authored atlas, see geometry_refinements/). The ALMOND
          # (amygdala = "almond"): an elongated nut, rounded and fat at its
          # antero-superior pole, tapering postero-inferiorly to a blunter point
@@ -1660,6 +1674,7 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="hypothalamus", name="Hypothalamus", group="diencephalon",
          pos=(0.45, -0.45, 0.3), color="#c98ac9",
+         scale=(0.6, 0.45, 0.5),  # anatomical: a small ~11x10x12mm region
          # SDF (self-authored atlas, see geometry_refinements/). Small nucleus
          # cluster below and anterior to the thalamus, forming the floor + lower
          # walls of the third ventricle (hugs the midline, small pos.x). Its
@@ -1683,6 +1698,7 @@ PAIRED: list[dict[str, Any]] = [
          ),
     dict(base="mammillary", name="Mammillary bodies", group="diencephalon", fr_gender="mp",
          pos=(0.35, -0.8, -0.2), color="#c6b06a",
+         scale=0.55,  # anatomical: pea-sized ~5mm bodies
          # Tiny paired bumps at the posterior base of the hypothalamus (the
          # Papez node between the fornix and the anterior thalamus). Small smooth
          # blob, kept just clear of the hypothalamus so they don't fuse. Position
@@ -1724,6 +1740,7 @@ PAIRED: list[dict[str, Any]] = [
 MIDLINE: list[dict[str, Any]] = [
     dict(base="pituitary", name="Pituitary gland", group="diencephalon",
          pos=(0.0, -1.0, 0.35), color="#d2a06e",
+         scale=(0.9, 0.5, 0.7),  # anatomical: ~10x9x6mm (bean-sized)
          # SDF (self-authored atlas, see geometry_refinements/). The defining shape
          # is GLAND-ON-A-STALK: a small bean-shaped gland (wider mediolaterally than
          # tall) seated in the sella turcica, with a thin INFUNDIBULAR STALK rising
@@ -3353,6 +3370,81 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
     return record
 
 
+def _scale_sdf(node: dict[str, Any], s: list[float]) -> dict[str, Any]:
+    """Recursively scale an SDF node tree about the local origin by ``s`` =
+    ``[sx, sy, sz]`` (lengths along each axis scale by the matching factor).
+
+    Used by :func:`_shape_record` to seat a structure at an anatomically-correct
+    size without re-authoring every primitive. Scalar-radius primitives (sphere,
+    round-cone/capsule, tube) and the isotropic blend/relief knobs (``k``,
+    displace ``amp``/``unit``) can only take ONE factor, so they use the mean of
+    ``s`` (an anisotropic swept tube would need an elliptic cross-section the SDF
+    cannot express); displace ``freq`` scales inversely so the surface texture
+    scales WITH the shape. Returns a NEW node, does not mutate the input. Every
+    value is rounded to 4 decimals to keep the emitted JSON clean.
+    """
+    sm = sum(s) / 3.0
+    r = lambda v: round(v, 4)
+
+    def sc(v):  # scale a 3-vector coordinate / extent
+        return [r(v[0] * s[0]), r(v[1] * s[1]), r(v[2] * s[2])]
+
+    n = dict(node)
+    prim = n.get("prim")
+    if prim == "sphere":
+        n["center"] = sc(n["center"]); n["radius"] = r(n["radius"] * sm)
+    elif prim == "ellipsoid":
+        n["center"] = sc(n["center"]); n["radii"] = sc(n["radii"])
+    elif prim == "box":
+        n["center"] = sc(n["center"]); n["half"] = sc(n["half"])
+        if n.get("round") is not None:
+            n["round"] = r(n["round"] * sm)
+    elif prim in ("capsule", "roundcone"):
+        n["a"] = sc(n["a"]); n["b"] = sc(n["b"])
+        for key in ("r1", "r2", "radius"):
+            if n.get(key) is not None:
+                n[key] = r(n[key] * sm)
+    elif prim == "tube":
+        n["points"] = [sc(p) for p in n["points"]]
+        if n.get("profile") is not None:
+            n["profile"] = [r(p * sm) for p in n["profile"]]
+        if n.get("radius") is not None:
+            n["radius"] = r(n["radius"] * sm)
+    elif prim == "plane":
+        # Half-space cut moves with the geometry: the offset is along the
+        # (un-normalized) normal, so scale it by the factor along that direction.
+        nm = n["normal"]
+        ln = math.sqrt(nm[0] ** 2 + nm[1] ** 2 + nm[2] ** 2) or 1.0
+        f = (abs(nm[0]) * s[0] + abs(nm[1]) * s[1] + abs(nm[2]) * s[2]) / ln
+        if n.get("offset") is not None:
+            n["offset"] = r(n["offset"] * f)
+    else:
+        # Op node: scale the blend radius + any displacement, recurse into kids.
+        if n.get("k") is not None:
+            n["k"] = r(n["k"] * sm)
+        if n.get("op") == "displace":
+            if n.get("amp") is not None:
+                n["amp"] = r(n["amp"] * sm)
+            if n.get("freq"):
+                n["freq"] = r(n["freq"] / sm)
+            if n.get("unit"):
+                n["unit"] = r(n["unit"] * sm)
+            if n.get("origin"):
+                n["origin"] = sc(n["origin"])
+        if n.get("nodes") is not None:
+            n["nodes"] = [_scale_sdf(c, s) for c in n["nodes"]]
+        if n.get("node") is not None:
+            n["node"] = _scale_sdf(n["node"], s)
+    return n
+
+
+def _scale_triple(scale: Any) -> list[float]:
+    """Normalize a ``scale`` (scalar or ``[sx, sy, sz]``) to a 3-list."""
+    if isinstance(scale, (int, float)):
+        return [float(scale)] * 3
+    return [float(c) for c in scale]
+
+
 def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
     """Build the geometric ``data/shapes/<id>.json`` payload for a structure.
 
@@ -3372,7 +3464,19 @@ def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
         mirrored across x, which flips the plane to the correct side.
     """
     if "shape" in entry:
-        return dict(entry["shape"])
+        shape = dict(entry["shape"])
+        # Optional anatomical rescale (scalar or [sx, sy, sz]): shrink/grow a
+        # structure to its correct relative size without re-authoring primitives.
+        # Applied here (once, on the shared right-side shape) so the mirrored left
+        # member inherits it. SDF only; the lone `curve` (fornix) is left as-is.
+        if entry.get("scale") is not None and shape.get("type") == "sdf":
+            s = _scale_triple(entry["scale"])
+            shape["root"] = _scale_sdf(shape["root"], s)
+            if "bounds" in shape:
+                lo, hi = shape["bounds"]
+                shape["bounds"] = [[round(lo[i] * s[i], 4) for i in range(3)],
+                                   [round(hi[i] * s[i], 4) for i in range(3)]]
+        return shape
     blob: dict[str, Any] = {
         "type": "blob",
         "radii": list(entry["radii"]),
@@ -3399,6 +3503,15 @@ def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
     # automatically, so we never need to author the left clip separately.
     if entry.get("medial"):
         blob.setdefault("clip", {})["xmin"] = round(MIDLINE_GAP - px, 3)
+    # Optional anatomical rescale for a blob: scale the ellipsoid half-extents
+    # (and any flat clip offsets, which live in local space) per axis.
+    if entry.get("scale") is not None:
+        s = _scale_triple(entry["scale"])
+        blob["radii"] = [round(blob["radii"][i] * s[i], 4) for i in range(3)]
+        if "clip" in blob:
+            axis = {"x": 0, "y": 1, "z": 2}
+            blob["clip"] = {k: round(v * s[axis[k[0]]], 4)
+                            for k, v in blob["clip"].items()}
     return blob
 
 
