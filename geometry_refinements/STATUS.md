@@ -215,7 +215,11 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
 
 ### diencephalon
 
-- pending - hypothalamus (paired)
+- done - hypothalamus (paired) - SDF: a rounded mass with the characteristic
+  inferior INFUNDIBULAR FUNNEL (the floor / tuber cinereum tapering down + medially
+  toward the midline pituitary stalk). Ellipsoid smooth-unioned with a short
+  medially-angled roundcone funnel, light displace; res 72. The L+R pair converges
+  on the midline (median eminence). Replaces the plain sphere blob. llm.
 - pending - mammillary (paired)
 - pending - pituitary (midline)
 
