@@ -1,3 +1,9 @@
+// NOTE (neurarium): this import was rewritten from the bare specifier `'three'`
+// to the relative path below so this addon also loads inside the SDF Web Worker
+// (js/sdf-worker.js), which has no import map and cannot resolve `'three'`. The
+// relative URL resolves to the SAME file the main-thread import map points at
+// (./vendor/three/three.module.js), so THREE stays a singleton on the main
+// thread. Re-apply this one-line change when bumping the vendored three.js.
 import {
 	BufferAttribute,
 	BufferGeometry,
@@ -6,7 +12,7 @@ import {
 	Mesh,
 	Sphere,
 	Vector3
-} from 'three';
+} from '../../three.module.js';
 
 /**
  * Port of http://webglsamples.org/blob/blob.html
