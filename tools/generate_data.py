@@ -1743,7 +1743,7 @@ MIDLINE: list[dict[str, Any]] = [
              ])),
          ),
     dict(base="cerebellum", name="Cerebellum", group="hindbrain",
-         pos=(0.0, -1.95, -3.3), color="#b07aa1",
+         pos=(0.0, -1.55, -3.3), color="#b07aa1",
          # SDF (self-authored atlas, see geometry_refinements/). The cerebellum's
          # "butterfly": two hemispheres flanking a narrower, slightly taller central
          # VERMIS, smooth-unioned into ONE continuous mass (soft paravermian valleys,
