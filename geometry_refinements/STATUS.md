@@ -285,11 +285,17 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   pool) on a self-authored THREE-free marcher, with voxel-driven per-axis sampling.
   time-to-loaded 12.8s -> 6.0s (see Decisions log for the trap + the numbers).
   Commits: 8b56a44 (marcher + voxel sampling), b005a80 (worker pool).
-- pending - whole-brain visual fit: assemble all `done` shapes, smooth-union the
-  cortex, fix scale / seams / positions / residual interpenetration. The assembled
-  brain currently renders coherent (scratchpad wb_iso); remaining is fine seam /
-  interpenetration tuning + re-checking the procedural holdouts (fornix, mammillary,
-  vta) sit correctly inside the real shapes.
+- in progress - whole-brain visual fit: assemble all `done` shapes, fix scale /
+  seams / positions / residual interpenetration. Assessed from 7 angles + a
+  translucent deep-nuclei pass (scratchpad wb/ wb2/ wb_xray/). Findings: cortex
+  seams read as fissures (central / Sylvian / parieto-occipital); brainstem column
+  continuous; deep nuclei well-contained + symmetric (only the olfactory bulbs hang
+  below the frontal poles, intended). Done so far:
+    - cerebellum was floating ~0.2 to 0.75 below the cerebrum -> raised its centre
+      y to -1.55 so it tucks under the occipital underside (commit 247d5c8).
+  Remaining candidates: longitudinal-fissure width (thin, likely fine), and the
+  stale procedural-holdout clip_planes (see milestone note) if the human wants them
+  regenerated.
 
 ## Milestone review log
 
@@ -305,11 +311,18 @@ loop reads and applies them.)
   Cerebellum folia needed an explicit `[72,104,84]` resolution triple (isotropic
   voxels blurred them). Verified: unit sphere meshes to exactly r=1; all 26 specs
   finite; whole brain + cerebellum + a lobe render unchanged. Two commits; the
-  vendored MarchingCubes addon was removed. NOTE for the human: regenerating
-  `generate_data.py` also rewrites `temporal`/`insula`/`mammillary` jigsaw
-  `clip_planes` (procedural holdouts I did not touch) differently from the committed
-  artifacts: pre-existing drift, likely a non-deterministic `_bisecting_clip_planes`.
-  I reverted those files so they stayed out of these commits; worth a look separately.
+  vendored MarchingCubes addon was removed.
+- 2026-06-29 - **Whole-brain fit: cerebellum tucked (milestone, awaiting review).**
+  See the Phase 2 list. NOTE for the human (refined diagnosis): regenerating
+  `generate_data.py` rewrites `temporal`/`insula`/`mammillary` jigsaw `clip_planes`
+  (procedural holdouts I did not touch) vs the committed artifacts. It is
+  DETERMINISTIC (md5 stable across repeated regens), so it is STALE committed output
+  (the generator changed and these holdouts were never re-emitted), NOT a random
+  `_bisecting_clip_planes`. I keep it out of my commits (revert to HEAD, swap only my
+  own record back in). It is a real latent inconsistency: the documented "regenerate
+  then commit" workflow would sweep it in. Worth a one-line `generate_data.py` regen +
+  commit of just those holdouts, but that is outside this SDF effort's scope, so left
+  for the human to greenlight.
 
 - 2026-06-28 - **Cortex polish landed (oblique fissures + temporal lateral + insula).**
   Human review of the one-dome milestone chose: full polish + pull temporal back
