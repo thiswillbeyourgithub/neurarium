@@ -220,7 +220,12 @@ is dead-straight on the base; overall dome scale/position fine-tune in Phase 2.
   toward the midline pituitary stalk). Ellipsoid smooth-unioned with a short
   medially-angled roundcone funnel, light displace; res 72. The L+R pair converges
   on the midline (median eminence). Replaces the plain sphere blob. llm.
-- pending - mammillary (paired)
+- holdout - mammillary (paired) - kept as the small `blob`. Each mammillary body is
+  genuinely a small round HEMISPHERICAL BUMP, so a sphere is already the correct
+  shape and a blob-sphere vs an SDF-sphere is visually identical (no refinement to
+  be had). If the human wants a uniformly-SDF atlas, this is a trivial 5-line
+  convert (a small ellipsoid + faint displace, like septal_nuclei); flagged, not
+  done, because it changes nothing on screen. llm.
 - done - pituitary (midline) - SDF: gland-on-a-stalk. A bean ellipsoid (wider ML
   than tall) smooth-unioned with a slender tapered roundcone infundibular stalk
   rising toward the hypothalamus, faint displace; res 72, tight bounds for the thin
