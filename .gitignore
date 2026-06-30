@@ -17,7 +17,6 @@ TODO.md
 __pycache__
 .serena
 
-# Geometry-refinement working files: fetched reference images (third-party /
-# copyrighted) + scratch renders. Only the self-authored geometry is committed.
-/geometry_refinements/refs/
-/geometry_refinements/renders/
+# Archived / obsolete working folders (e.g. the completed geometry-refinement
+# runbook plus its scratch refs/renders); kept on disk but out of version control.
+/obsolete/
