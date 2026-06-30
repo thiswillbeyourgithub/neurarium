@@ -2152,6 +2152,10 @@ _KQ_CORPUS_CALLOSUM = _kandel(549,
 _KQ_CORTICOPONTINE = _kandel(958,
     "The cerebral cortex projects to the lateral cerebellum through relays in the "
     "pontine nuclei.")
+_KQ_PAPEZ = _kandel(1096,
+    "The outputs of the hypothalamus reach the cingulate via the anterior "
+    "thalamus, and the outputs of the cingulate reach the hypothalamus via the "
+    "hippocampus.")
 
 KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
@@ -2229,6 +2233,31 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "The output is transmitted through the dentate nucleus, which projects via "
         "the thalamus to contralateral motor, premotor, parietal, and prefrontal "
         "cortices."),
+    # Limbic / Papez circuit. One Papez sentence backs cingulate->hippocampus and
+    # anterior-thalamus->cingulate; the fornix tract (hippocampus->fornix->
+    # mammillary) and mammillary->hypothalamus + septal links stay unsourced
+    # (Kandel describes the fornix only as a figure label, and treats the
+    # mammillary bodies as part of the hypothalamus).
+    ("cingulate_R", "hippocampus_R"): _KQ_PAPEZ,
+    ("thalamus_R", "cingulate_R"): _KQ_PAPEZ,
+    ("mammillary_R", "thalamus_R"): _kandel(130,
+        "The _anterior group_ receives its major input from the mammillary nuclei "
+        "of the hypothalamus and from the presubiculum of the hippocampal "
+        "formation."),
+    ("temporal_R", "hippocampus_R"): _kandel(1387,
+        "In the indirect pathway, the axons of neurons in layer II of the "
+        "entorhinal cortex project through the _perforant pathway_ to excite the "
+        "granule cells of the dentate gyrus (an area considered part of the "
+        "hippocampus)."),
+    ("amygdala_R", "hypothalamus_R"): _kandel(1380,
+        "These nuclei project to the central nucleus, which projects to the "
+        "hypothalamus and brain stem."),
+    ("amygdala_R", "accumbens_R"): _kandel(1124,
+        "This work is beginning to define the distinct roles that various "
+        "glutamatergic projections to the nucleus accumbens— from the prefrontal "
+        "cortex, hippocampus, amygdala, and thalamus—play in controlling different "
+        "cell types in the nucleus accumbens and the broader reward circuitry and "
+        "in producing distinct addiction-related behavioral abnormalities."),
 }
 
 PROJECTIONS: list[dict[str, Any]] = [
