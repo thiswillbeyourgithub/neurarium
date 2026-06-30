@@ -76,6 +76,12 @@ Data + authoring (`tools/`):
 - `tools/serve.py` — stdlib dev server sending `Cache-Control: no-store` (roots at
   `public/`; use instead of `python -m http.server`).
 - `tools/shot.py` — Playwright screenshot helper (see Screenshots).
+- `tools/demos/` — Playwright demo *video* recorder (site-agnostic). `recorder.py`
+  exposes a `Demo` Python API (headed capture at an exact 720p + an injected glowing
+  cursor with click ripples) and emits an AV1 master (`libsvtav1`) + a gifski GIF
+  (configurable framerate). `neurarium.py` is the showcase tour (serves the site via
+  `serve.py`, drives search/focus, writes `neurarium_demo.av1.mp4`/`.gif`). See
+  `tools/demos/README.md`; needs `ffmpeg` (`libsvtav1`) + `gifski` + a display.
 - `tools/build_source_worklist.py` — lists drug bindings not yet sourced (each with
   its Stahl page range from the index; input to the source-extraction workflow;
   skips already-sourced, so resumable).
