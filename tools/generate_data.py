@@ -2258,6 +2258,22 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "cortex, hippocampus, amygdala, and thalamus—play in controlling different "
         "cell types in the nucleus accumbens and the broader reward circuitry and "
         "in producing distinct addiction-related behavioral abnormalities."),
+    # Sensory corticothalamic feedback, olfactory output, neuroendocrine axis.
+    # (olfactory bulb -> amygdala stays unsourced: Kandel states it only across two
+    # separate sentences, never one.)
+    ("occipital_R", "thalamus_R"): _kandel(149,
+        "In most cases, two areas that have feedforward connections also have "
+        "feedback connections; for example, there are numerous connections from "
+        "primary visual cortex back to the thalamus."),
+    ("olfactory_bulb_R", "insula_R"): _kandel(735,
+        "The axons of the mitral and tufted relay neurons of the olfactory bulb "
+        "project through the lateral olfactory tract to the olfactory cortex "
+        "(Figure 29–8 and see Figure 29–1)."),
+    ("hypothalamus_R", "pituitary"): _kandel(1074,
+        "Hormone secretion from these cells is controlled by stimulatory and "
+        "inhibitory factors released by hypothalamic neurons into a specialized "
+        "circulatory system that carries blood from the base of the brain (median "
+        "eminence) to the anterior pituitary."),
 }
 
 PROJECTIONS: list[dict[str, Any]] = [
