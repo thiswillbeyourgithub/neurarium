@@ -1942,18 +1942,41 @@ function createInfoPanel(data) {
   };
 
   // One clickable <li> for a pathway that is a member of some grouping (a
-  // structure's connections, a circuit's loop, a projection group): a kind swatch,
-  // an optional direction glyph, the label text, the pathway's summary source pill,
-  // and a click that jumps to the connection via onConnectionPick. Shared so the
-  // row markup lives in one place (showStructure rows are relative to the
-  // structure; circuit / group rows show the full route).
-  const pathwayRow = (proj, glyph, labelText) => {
+  // A bold, colour-filled direction arrow (short shaft + a wide pointy head) for a
+  // connection row: far more legible than the old thin colour bar + tiny glyph,
+  // and it carries the pathway colour itself. `dir` is "out" (this structure
+  // projects to the other endpoint), "in" (receives from it), or "both"
+  // (reciprocal / commissural). Drawn as inline SVG so the head is genuinely wide
+  // and it stays crisp at any size (a Unicode arrowhead's shape varies by font).
+  const SVG_NS = "http://www.w3.org/2000/svg";
+  const directionArrow = (color, dir) => {
+    const svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("class", "conn-arrow");
+    svg.setAttribute("viewBox", "0 0 26 16");
+    svg.setAttribute("aria-hidden", "true");
+    const path = document.createElementNS(SVG_NS, "path");
+    path.setAttribute("d",
+      dir === "in"
+        ? "M24,6 L12,6 L12,2 L2,8 L12,14 L12,10 L24,10 Z"
+        : dir === "both"
+        ? "M2,8 L9,2 L9,6 L17,6 L17,2 L24,8 L17,14 L17,10 L9,10 L9,14 Z"
+        : "M2,6 L14,6 L14,2 L24,8 L14,14 L14,10 L2,10 Z"); // "out" (default)
+    path.setAttribute("fill", color || "#fff");
+    svg.appendChild(path);
+    return svg;
+  };
+
+  // One pathway row, shared by every "connections" list (a structure's
+  // connections, a circuit's loop, a projection group): the bold direction arrow
+  // in the pathway colour, the label text, the pathway's summary source pill, and
+  // a click that jumps to the connection via onConnectionPick. `dir` is passed by
+  // the caller (showStructure rows are relative to the structure; circuit / group
+  // rows show the full route, so they pass "both" for a reciprocal pathway else
+  // "out", matching their "from -> to" label text).
+  const pathwayRow = (proj, dir, labelText) => {
     const li = el("li");
     li.title = proj.label || "";
-    const swatch = el("span", "swatch line");
-    swatch.style.background = proj.color || "#fff";
-    li.appendChild(swatch);
-    if (glyph) li.appendChild(el("span", "conn-dir", glyph));
+    li.appendChild(directionArrow(proj.color, dir));
     li.appendChild(el("span", "conn-label", labelText));
     if (proj.sources && proj.sources.length) {
       li.appendChild(makeProvenancePill(proj.provenance, citationsTip(proj.sources)));
@@ -1972,7 +1995,8 @@ function createInfoPanel(data) {
     for (const proj of projs) {
       const glyph = proj.bidirectional ? "↔" : "→";
       ul.appendChild(pathwayRow(
-        proj, null, `${nameOf(proj.from)} ${glyph} ${nameOf(proj.to)}`));
+        proj, proj.bidirectional ? "both" : "out",
+        `${nameOf(proj.from)} ${glyph} ${nameOf(proj.to)}`));
     }
     wrap.appendChild(ul);
     body.appendChild(wrap);
@@ -2129,14 +2153,14 @@ function createInfoPanel(data) {
         "h3", null, `${t("info.connections")} (${conns.length})`));
       const ul = el("ul");
       for (const proj of conns) {
-        // Direction relative to *this* structure: → it projects out, ← it
-        // receives, ↔ reciprocal/commissural. The row markup (swatch, label,
-        // summary source pill, click) is the shared pathwayRow; only the
-        // structure-relative glyph + other-endpoint label are computed here.
+        // Direction relative to *this* structure: out it projects, in it
+        // receives, both reciprocal/commissural. The row markup (the bold colour
+        // arrow, label, summary source pill, click) is the shared pathwayRow; only
+        // the structure-relative direction + other-endpoint label are computed here.
         const outgoing = proj.from === structure.id;
         const otherId = outgoing ? proj.to : proj.from;
-        const glyph = proj.bidirectional ? "↔" : outgoing ? "→" : "←";
-        ul.appendChild(pathwayRow(proj, glyph, nameOf(otherId)));
+        const dir = proj.bidirectional ? "both" : outgoing ? "out" : "in";
+        ul.appendChild(pathwayRow(proj, dir, nameOf(otherId)));
       }
       wrap.appendChild(ul);
       body.appendChild(wrap);

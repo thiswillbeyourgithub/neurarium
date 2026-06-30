@@ -1107,7 +1107,14 @@
       }
       .info-connections li:hover { color: #8fb6e6; }
       .info-connections .conn-label { flex: 1; }
-      .info-connections .conn-dir { color: var(--muted); }
+      /* Bold colour direction arrow for a connection row (see directionArrow):
+         large + filled in the pathway colour so it is easy to read at a glance. */
+      .info-connections .conn-arrow {
+        width: 26px;
+        height: 16px;
+        flex: 0 0 auto;
+        display: block;
+      }
 
       /* Drug panel: the molecular-structure SVG (vendored from Wikipedia). The
          art is black/grey line work on a transparent background, so it is

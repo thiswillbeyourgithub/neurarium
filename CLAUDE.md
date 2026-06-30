@@ -750,7 +750,9 @@ Views:
   link + pill, else `NOSOURCE`), then (when the link resolves) the live Wikipedia lead
   as a `sourced` description (structures carry no baked description; fetch-only), a
   **Source** row grading the region's anatomy (`classification_provenance`), and the
-  pathway list. Each connection row: kind swatch, direction glyph (`→`/`←`/`↔`), the
+  pathway list. Each connection row: a bold colour-filled direction arrow
+  (`directionArrow`, an inline SVG with a wide pointy head, in the pathway colour;
+  out / in / both relative to this structure, drawn big for legibility), the
   other endpoint, and the pathway's summary pill
   (`makeProvenancePill(proj.provenance, citationsTip(proj.sources))`, `proj.provenance`
   = the strongest grade over `proj.sources`, resolved once in `js/data.js`). Clicking a
@@ -866,7 +868,8 @@ the groups by `${mode}:${key}` (`projectionGroupsByKey`).
 - `showProjectionGroup`: a by-transmitter / by-effect heading, the description (live-
   refreshed from Wikipedia), the reference link, the member pathways, the sources.
 - Both reuse a shared `pathwayRow` / `appendPathwayList` helper (also used by
-  `showStructure`), so the row markup (swatch + label + summary pill + jump) lives once.
+  `showStructure`), so the row markup (the bold `directionArrow` + label + summary
+  pill + jump) lives once.
 - `focusCircuit` / `focusProjectionGroup` mirror `focusDrug`: isolate (a circuit also
   `circuitAnim.play()`s its pulse; a group is a static pinned-arrow focus), show the
   panel, open the tab (`circuit:` / `group:`) with a reopen thunk that recomputes
