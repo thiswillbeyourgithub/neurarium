@@ -16,7 +16,7 @@ graded by how trustworthy it is.**
 
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
-![neurarium screenshot](docs/screenshot.png)
+[![neurarium demo](docs/demo.gif)](https://neurarium.olicorne.org)
 
 neurarium is not a textbook and not a raw database. It takes facts about the brain
 that normally live scattered across atlases, pathway diagrams, receptor tables, and
