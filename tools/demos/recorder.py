@@ -403,6 +403,22 @@ class Demo:
         self.cx, self.cy = box["x"] + to * box["width"], cy
         return self
 
+    def zoom(self, steps: int = 4, *, at=None, delta: int = -240, pause: int = 150) -> "Demo":
+        """Dolly the camera by wheel-scrolling over the scene.
+
+        Negative `delta` zooms in (OrbitControls dolly). `at` is the (x, y) point to
+        scroll over (defaults to right-of-panel centre, so it lands on the canvas).
+        """
+        ax, ay = at if at else (self.width * 0.62, self.height * 0.5)
+        self.page.mouse.move(ax, ay)
+        if self.cursor:
+            self.page.evaluate("([x, y]) => window.__demo.setPos(x, y)", [ax, ay])
+            self.cx, self.cy = ax, ay
+        for _ in range(max(1, steps)):
+            self.page.mouse.wheel(0, delta)
+            self.wait(pause)
+        return self
+
     # -- internals ----------------------------------------------------------
 
     def _center(self, locator):

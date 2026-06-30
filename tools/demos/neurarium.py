@@ -62,8 +62,8 @@ def run_tour(out: str, gif_fps: int, headless: bool) -> None:
         out=out,
         headless=headless,
         gif_fps=gif_fps,
-        gif_width=600,        # keep the GIF small enough for GitHub to render inline
-        gif_quality=70,
+        gif_width=560,        # keep the GIF small (~1.7MB) so GitHub renders it inline
+        gif_quality=60,
         av1_crf=30,
         cursor_speed=2000,
         max_glide_ms=820,
@@ -73,9 +73,11 @@ def run_tour(out: str, gif_fps: int, headless: bool) -> None:
         # inside done() (500ms after meshing hits 100%); `hidden` can fire on a
         # transient mid-mesh. After this the scene is ready and the intro is playing.
         d.page.wait_for_selector("#loading", state="detached", timeout=60000)
-        d.wait(400)                           # let the overlay's fade fully finish
-        d.begin()                             # clean start: the startup load is all before this
-        d.wait(1500)                          # the assemble intro (2.2s) finishes; regions settle
+        d.wait(1900)                          # let the assemble intro (2.2s) finish first
+        d.zoom(6)                             # dolly in so the brain fills the frame (less black space)
+        d.wait(300)
+        d.begin()                             # clip starts on the framed, whole brain
+        d.wait(600)                           # a beat before pulling it apart
 
         d.slider("#explode", 1.0, dur=2200)   # blow the brain apart -> deep nuclei revealed
         d.wait(1100)
@@ -91,7 +93,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", default=str(REPO_ROOT / "docs" / "preview"),
                     help="output basename (default: docs/preview, the README asset)")
-    ap.add_argument("--gif-fps", type=int, default=20, help="GIF framerate (smoothness)")
+    ap.add_argument("--gif-fps", type=int, default=18, help="GIF framerate (smoothness)")
     # Record headless by default: it renders on the real GPU (via the recorder's
     # ANGLE flags) AND avoids Chromium's headed-mode video letterboxing (grey bar).
     # --headed shows a window but the headed video capture is unreliable here.
