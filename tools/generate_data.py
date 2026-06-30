@@ -616,6 +616,16 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": STAHL_SOURCE["url"],
         "pages_dir": "sources/books/stahl/pages",
     },
+    "kandel": {
+        # Anatomy/pathway corpus (the projection claims, currently LLM-only, are
+        # quote-verified against this). Full title + edition so a page citation is
+        # unambiguous on its own.
+        "ref": "Kandel, Principles of Neural Science, 6th ed.",
+        "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA, eds. "
+                    "Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
+        "url": "TODO",
+        "pages_dir": "sources/books/eric_kandel/pages",
+    },
 }
 
 
