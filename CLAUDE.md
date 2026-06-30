@@ -200,13 +200,16 @@ Viewer (`public/`):
   `clip_planes` when `JIGSAW_CLIP.enabled`. No deps beyond three.js.
 - `js/arrows.js` — curved tube+cone arrows; colour from `projection.color`,
   recolourable via `setColor` (colour-mode switch); `tentative` -> dotted tube via
-  a small local `mergeIndexedGeometries`. Exposes `arrow.curve`. `update(fast)`
-  re-fits the arrow; `fast` skips the per-end surface-trim raycasts (reusing each
-  end's cached offset) + defers the pick-hull/halo rebuild, for a cheap spread (see
-  Spread performance); `ensurePickGeometry()` rebuilds a deferred pick hull on demand.
-  `setWidthScale(s)` re-fits just the shaft radius + cone cross-section (from the
-  cached arc, no raycast) so arrows hold a constant apparent width across zooms
-  (see Arrow width).
+  a small local `mergeIndexedGeometries`. Exposes `arrow.curve`. Each end attaches
+  to the structure-surface point *nearest the other end* (`surfaceToward`, a
+  nearest-vertex scan), so the tip lands on real mass even for a concave region
+  (the C-shaped caudate, whose volume centre is in the loop's hollow), not in empty
+  space. `update(fast)` re-fits the arrow; `fast` skips the per-end nearest-surface
+  scans (reusing each end's cached offset) + defers the pick-hull/halo rebuild, for
+  a cheap spread (see Spread performance); `ensurePickGeometry()` rebuilds a
+  deferred pick hull on demand. `setWidthScale(s)` re-fits just the shaft radius +
+  cone cross-section (from the cached arc, no surface scan) so arrows hold a
+  constant apparent width across zooms (see Arrow width).
 - `js/labels.js` — floating structure-name labels (CSS2DRenderer): one hidden
   label per region, shown on hover / show-all / when pinned (`setPinned`).
 - `js/circuit-schedule.js` — `scheduleCircuit()` BFS firing order for the circuit
@@ -783,11 +786,11 @@ settled frame then idles).
 ### Spread performance
 
 Re-fitting the ~100 arrows each explode frame was dominated (~90%) by the per-end
-surface-trim raycasts against the high-poly region meshes, making the Separate slider
+nearest-surface scans over the high-poly region meshes, making the Separate slider
 janky. So during a continuous spread the arrows update in `fast` mode
 (`applyExplode(..., true)` -> `ProjectionArrow.update(true)`): each end reuses its cached
-surface-trim offset (valid because regions only translate, never rotate, as they spread)
-instead of raycasting, and the pick-hull/halo rebuilds are deferred. `createArrowRetrim`
+surface-attach offset (valid because regions only translate, never rotate, as they spread)
+instead of re-scanning, and the pick-hull/halo rebuilds are deferred. `createArrowRetrim`
 (a render-loop `tick()` controller) then re-trims every arrow precisely once the spread
 has been still for ~120ms, a chunk per frame so the catch-up never hitches; a click
 mid-spread calls `arrow.ensurePickGeometry()` so the deferred hull is current. The
@@ -799,7 +802,7 @@ Arrows hold a roughly constant *apparent* width as the camera zooms (a zoomed-in
 arrow would otherwise balloon and clutter the view). `createArrowWidth` (a render-
 loop `tick()` controller) scales each arrow's shaft radius + cone cross-section by
 the camera<->target distance via `ProjectionArrow.setWidthScale`, which rebuilds
-only the visible width from the cached arc (no trim raycast). The reference
+only the visible width from the cached arc (no surface scan). The reference
 distance (scale 1) is captured on the first tick, so the resting framing keeps the
 authored radius; a width-step threshold avoids rebuilding on damping jitter; the
 fat pick hull stays a constant world size so a thin arrow is still easy to click.

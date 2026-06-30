@@ -2,58 +2,62 @@
 //
 // Each arrow is a thin curved tube (a quadratic Bezier bowing outward from the
 // brain center, so arrows don't hide inside the blobs) capped with a cone head
-// at the target end. The two ends are trimmed to the structure *surfaces* (not
-// their centers) by raycasting from one center toward the other, so the shaft
-// spans the gap between regions and the cone tip lands on the target surface
-// where it stays visible instead of buried inside the blob. Because structures
-// move when the explode slider changes, arrows expose an update() that re-fits
-// their geometry to the *current* mesh positions each time the layout changes.
+// at the target end. Each end is attached to the point on the structure's
+// *surface* nearest the other end (not its hidden center), so the shaft spans the
+// gap between regions and the cone tip lands on a real arm of mass that stays
+// visible instead of buried inside the blob. Because structures move when the
+// explode slider changes, arrows expose an update() that re-fits their geometry
+// to the *current* mesh positions each time the layout changes.
 
 import * as THREE from "three";
 
-// Reused for the per-end surface trimming (see surfaceToward). One instance is
-// plenty since arrows are updated sequentially.
-const _ray = new THREE.Raycaster();
-
-const _sphere = new THREE.Sphere();
+// Module-level scratch for the per-end surface attach (see surfaceToward), so the
+// per-frame re-fit allocates nothing; arrows are trimmed sequentially.
+const _inv = new THREE.Matrix4();
+const _localPt = new THREE.Vector3();
 
 /**
- * Point on `mesh`'s surface that faces `fromPoint` (the other arrow end): the
- * first face hit when shooting from just outside the mesh, on the side toward
- * `fromPoint`, back toward its center. Used to trim an arrow end to the visible
- * surface instead of its hidden center.
+ * Point on `mesh`'s surface nearest to `fromPoint` (the other arrow end), so the
+ * arrow attaches to real surface mass instead of the structure's hidden
+ * volumetric center.
  *
- * The ray starts *outside* the mesh's bounding sphere on purpose: at low explode
- * the deep nuclei overlap, so the other structure's center is often inside this
- * mesh. A ray cast from there would stay inside and never cross a face, leaving
- * the tip stuck at the center. Starting outside the bounding sphere and shooting
- * inward always crosses the near face first. Returns null only for a degenerate
- * (coincident) pair so the caller can fall back to the center.
+ * Why nearest-point and not a ray through the center: a concave region (most
+ * egregiously the C-shaped caudate) has its volume centre sitting in a HOLLOW, so
+ * a ray aimed through it threads the *opening* of the loop and the arrow lands on
+ * empty space. The nearest surface point is on the mesh by construction, so it
+ * always sits on a real arm of mass facing the other end. For the common convex
+ * blob it coincides with the old centre-line hit, so those arrows don't move.
+ *
+ * Computed as the nearest geometry vertex, in the mesh's LOCAL space (transform
+ * `fromPoint` once by the inverse world matrix, scan the raw vertices, map the
+ * winner back to world). Working in local space (a single inverse-transform vs.
+ * transforming every vertex) also makes it robust to the mirrored left-hemisphere
+ * meshes, with none of a FrontSide raycast's winding sensitivity. Cheaper than the
+ * old ray-vs-every-triangle intersection it replaces.
  * @param {THREE.Mesh} mesh
- * @param {THREE.Vector3} fromPoint  World point to look from (the other end).
- * @returns {THREE.Vector3|null}
+ * @param {THREE.Vector3} fromPoint  World point to attach toward (the other end).
+ * @returns {THREE.Vector3|null}  Null only for an empty geometry.
  */
 function surfaceToward(mesh, fromPoint) {
   // Positions may have just been changed by the explode logic; make sure the
-  // world matrix the raycaster uses is current before intersecting.
+  // world matrix is current before using it.
   mesh.updateMatrixWorld();
-  const geo = mesh.geometry;
-  if (!geo.boundingSphere) geo.computeBoundingSphere();
-  _sphere.copy(geo.boundingSphere).applyMatrix4(mesh.matrixWorld);
-
-  const dir = fromPoint.clone().sub(_sphere.center); // center -> other end
-  const len = dir.length();
-  if (len < 1e-6) return null;
-  dir.divideScalar(len);
-  const reach = _sphere.radius + 0.05; // just clear of the surface
-  // Start outside on the far-facing side, shoot back through the center; the
-  // first hit is the surface looking at `fromPoint`.
-  const origin = _sphere.center.clone().addScaledVector(dir, reach);
-  _ray.set(origin, dir.clone().negate());
-  _ray.far = 2 * reach;
-  const hits = _ray.intersectObject(mesh, false);
-  _ray.far = Infinity;
-  return hits.length ? hits[0].point.clone() : null;
+  const pos = mesh.geometry.attributes.position;
+  if (!pos || pos.count === 0) return null;
+  // Compare in local space: one inverse-transform of fromPoint beats transforming
+  // every vertex out to world. (position is a plain stride-3 buffer for every
+  // shape type we build, so the raw array is safe to walk directly.)
+  _localPt.copy(fromPoint).applyMatrix4(_inv.copy(mesh.matrixWorld).invert());
+  const arr = pos.array;
+  const lx = _localPt.x, ly = _localPt.y, lz = _localPt.z;
+  let bestI = 0, bestD = Infinity;
+  for (let i = 0; i < arr.length; i += 3) {
+    const dx = arr[i] - lx, dy = arr[i + 1] - ly, dz = arr[i + 2] - lz;
+    const d = dx * dx + dy * dy + dz * dz;
+    if (d < bestD) { bestD = d; bestI = i; }
+  }
+  return new THREE.Vector3(arr[bestI], arr[bestI + 1], arr[bestI + 2])
+    .applyMatrix4(mesh.matrixWorld);
 }
 
 // Arrow colour per projection comes from the data: each projection record
@@ -249,30 +253,26 @@ export class ProjectionArrow {
   }
 
   /**
-   * Re-fit the tube and cone to the current source/target mesh positions.
-   * Call this after the structures have been (re)positioned for a new explode
-   * amount. Cheap enough to also call every frame if needed.
-   */
-  /**
-   * Re-fit the arrow to its (possibly just-moved) endpoints.
-   * @param {boolean} [fast]  Skip the per-end surface-trim raycasts and the
+   * Re-fit the arrow (tube + cone) to its (possibly just-moved) endpoints. Call
+   * after the structures have been (re)positioned for a new explode amount.
+   * @param {boolean} [fast]  Skip the per-end nearest-surface scans and the
    *   pick/halo rebuilds, reusing the cached trim offsets. Used during a
-   *   continuous spread (the raycasts are ~90% of this call's cost); a deferred
-   *   precise re-trim corrects the small facing drift once the spread settles.
+   *   continuous spread (the scans are ~90% of this call's cost); a deferred
+   *   precise re-trim corrects the small attach drift once the spread settles.
    */
   update(fast = false) {
     const srcCenter = this.fromMesh.position;
     const tgtCenter = this.toMesh.position;
 
-    // Trim each end from the (hidden) center to the structure surface that faces
-    // the other end, so the arrow spans the gap between regions and the cone tip
-    // lands on the target surface. Fall back to the center if a ray misses.
+    // Attach each end to the structure-surface point nearest the other end, so the
+    // arrow spans the gap between regions and the cone tip lands on real surface
+    // mass. Fall back to the center only for an empty geometry.
     //
-    // The trim point is cached as a world OFFSET from the region's center
+    // The attach point is cached as a world OFFSET from the region's center
     // (`_trimFrom`/`_trimTo`). Regions only translate as they spread (never rotate
     // or scale), so that offset stays a valid surface point as the region moves;
-    // a `fast` update reuses it and skips the raycasts. The offset still reflects
-    // the OLD facing direction, so a precise pass (default) refreshes it.
+    // a `fast` update reuses it and skips the scans. The offset still reflects the
+    // OLD attach direction, so a precise pass (default) refreshes it.
     let start, end;
     if (fast && this._trimFrom && this._trimTo) {
       start = srcCenter.clone().add(this._trimFrom);
