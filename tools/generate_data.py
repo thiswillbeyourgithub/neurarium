@@ -2303,6 +2303,13 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "pons, which project widely from the cerebral cortex to the medulla, and "
         "the basal forebrain (Ch1–Ch4) groups, which project to the cerebral "
         "cortex, hippocampus, and amygdala."),
+    # Ventral striatopallidal: accumbens -> ventral pallidum (the indirect-pathway
+    # relay of the reward circuit).
+    ("accumbens_R", "globus_pallidus_R"): _kandel(1117,
+        "There are also GABAergic projections from the NAc to the VTA, with some in "
+        "a direct pathway innervating the VTA and some in an indirect pathway "
+        "innervating the VTA via intervening GABAergic neurons in the ventral "
+        "pallidum"),
 }
 
 PROJECTIONS: list[dict[str, Any]] = [
