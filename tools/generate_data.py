@@ -2156,6 +2156,15 @@ _KQ_PAPEZ = _kandel(1096,
     "The outputs of the hypothalamus reach the cingulate via the anterior "
     "thalamus, and the outputs of the cingulate reach the hypothalamus via the "
     "hippocampus.")
+_KQ_MONOAMINE_INNERV = _kandel(1052,
+    "The noradrenergic locus ceruleus, serotonergic dorsal and median raphe "
+    "nuclei, dopaminergic A10 neurons, and histaminergic tuberomammillary neurons "
+    "innervate the thalamus, hypothalamus, basal forebrain, and cerebral cortex.")
+_KQ_MONOAMINE_LIMBIC = _kandel(1560,
+    "Serotonergic and noradrenergic neurons in the pons and medulla project widely "
+    "to highly diverse terminal fields in brain regions that include the "
+    "hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex "
+    "(Figures 61–5 and 61–6).")
 
 KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
@@ -2274,6 +2283,26 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "inhibitory factors released by hypothalamic neurons into a specialized "
         "circulatory system that carries blood from the base of the brain (median "
         "eminence) to the anterior pituitary."),
+    # Ascending monoamine + cholinergic systems (diffuse). Two innervation
+    # sentences back most LC/raphe targets; LC->amygdala and septum->hippocampus
+    # get their own sentences.
+    ("locus_coeruleus_R", "amygdala_R"): _kandel(1379,
+        "This form of learning requires postsynaptic NMDA receptors and "
+        "voltagegated calcium channels in the lateral amygdala, and it is enhanced "
+        "by norepinephrine released in lateral amygdala from the locus ceruleus."),
+    ("locus_coeruleus_R", "frontal_R"): _KQ_MONOAMINE_INNERV,
+    ("locus_coeruleus_R", "thalamus_R"): _KQ_MONOAMINE_INNERV,
+    ("locus_coeruleus_R", "hippocampus_R"): _KQ_MONOAMINE_LIMBIC,
+    ("raphe", "frontal_R"): _KQ_MONOAMINE_INNERV,
+    ("raphe", "hypothalamus_R"): _KQ_MONOAMINE_INNERV,
+    ("raphe", "amygdala_R"): _KQ_MONOAMINE_LIMBIC,
+    ("raphe", "hippocampus_R"): _KQ_MONOAMINE_LIMBIC,
+    ("septal_nuclei_R", "hippocampus_R"): _kandel(1048,
+        "Rather, scientists refer to the cholinergic neurons by their location, eg, "
+        "the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the "
+        "pons, which project widely from the cerebral cortex to the medulla, and "
+        "the basal forebrain (Ch1–Ch4) groups, which project to the cerebral "
+        "cortex, hippocampus, and amygdala."),
 }
 
 PROJECTIONS: list[dict[str, Any]] = [
