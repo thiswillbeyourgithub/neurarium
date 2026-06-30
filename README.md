@@ -104,7 +104,7 @@ not a slogan:
 | --- | --- |
 | Drug target bindings | 403 / 429 (94%) |
 | Drug nomenclature (NbN) | 113 / 116 (97%) |
-| Neuron pathways | 40 / 107 (37%) |
+| Neuron pathways | 43 / 107 (40%) |
 | Receptor classifications | 0 / 56 (0%) |
 | Target classifications | 0 / 25 (0%) |
 | Brain-region anatomy | 0 / 52 (0%) |

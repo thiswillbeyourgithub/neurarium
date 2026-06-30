@@ -2146,6 +2146,9 @@ _KQ_VTA_REWARD = _kandel(1558,
     "tegmental area of the midbrain to forebrain targets, including the nucleus "
     "accumbens, habenula, prefrontal cortex, hippocampus, and amygdala "
     "(Chapter 43).")
+_KQ_CORPUS_CALLOSUM = _kandel(549,
+    "A major fiber bundle called the corpus callosum connects the two hemispheres, "
+    "transmitting information across the midline.")
 
 KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
@@ -2207,6 +2210,14 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("vta_R", "amygdala_R"): _KQ_VTA_REWARD,
     ("vta_R", "frontal_R"): _KQ_VTA_REWARD,
     ("vta_R", "hippocampus_R"): _KQ_VTA_REWARD,
+    # Interhemispheric corpus callosum (homologous cortical areas across midline);
+    # the anterior commissure (temporal) + claustro-cortical pathways stay
+    # unsourced (Kandel has no temporal-commissure sentence and never mentions the
+    # claustrum), and the insula->cingulate "salience" link is only stated as a
+    # symmetric connection, so it is not a directional source.
+    ("frontal_L", "frontal_R"): _KQ_CORPUS_CALLOSUM,
+    ("parietal_L", "parietal_R"): _KQ_CORPUS_CALLOSUM,
+    ("occipital_L", "occipital_R"): _KQ_CORPUS_CALLOSUM,
 }
 
 PROJECTIONS: list[dict[str, Any]] = [
