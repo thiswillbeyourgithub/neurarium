@@ -2141,6 +2141,11 @@ _KQ_CORTICOSTRIATAL = _kandel(981,
     "The striatum is the largest nucleus of the basal ganglia. It receives direct "
     "input from most regions of the cerebral cortex and limbic structures, "
     "including the amygdala and hippocampus.")
+_KQ_VTA_REWARD = _kandel(1558,
+    "The reward circuitry comprises the dopaminergic projections from the ventral "
+    "tegmental area of the midbrain to forebrain targets, including the nucleus "
+    "accumbens, habenula, prefrontal cortex, hippocampus, and amygdala "
+    "(Chapter 43).")
 
 KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
@@ -2194,6 +2199,14 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "The ventral anterior and ventral lateral nuclei are important for motor "
         "control and carry information from the basal ganglia and cerebellum to "
         "the motor cortex."),
+    # Mesolimbic / mesocortical dopamine: one VTA reward-projection sentence backs
+    # all four VTA targets (the substantia-nigra->accumbens entry is left
+    # unsourced: Kandel assigns the accumbens to the VTA, the nigra to the dorsal
+    # striatum, so that pathway is suspect, see STATUS note).
+    ("vta_R", "accumbens_R"): _KQ_VTA_REWARD,
+    ("vta_R", "amygdala_R"): _KQ_VTA_REWARD,
+    ("vta_R", "frontal_R"): _KQ_VTA_REWARD,
+    ("vta_R", "hippocampus_R"): _KQ_VTA_REWARD,
 }
 
 PROJECTIONS: list[dict[str, Any]] = [
