@@ -1439,6 +1439,9 @@ function createInfoPanel(data) {
   // Class / Nomenclature values hand back a `field:"value"` query string; the caller
   // opens the search box pre-filled with it (see wireToolbar.openSearchWithQuery).
   let onSearchPick = () => {};
+  // Set by the caller (onImage): pop a panel illustration up large. The panel hands
+  // back (src, alt, {invert}); the caller shows it in the image lightbox.
+  let onImagePick = () => {};
   // Resolve a drug binding's `target` key to its merged-list entry, so a binding
   // row can focus that target (a receptor entry shares its id; a non-receptor one
   // its drug_targets key). Only focusable entries become clickable.
@@ -2055,8 +2058,12 @@ function createInfoPanel(data) {
         img.alt = t("structure.imageAlt", { name: structure.name });
         img.loading = "lazy";
         img.decoding = "async";
+        img.title = t("image.zoomHint");
         img.addEventListener("load", () => fig.classList.remove("loading"));
         img.addEventListener("error", () => fig.remove());
+        // Click to enlarge in the lightbox (colour art, so not inverted).
+        img.addEventListener("click", () =>
+          onImagePick(img.currentSrc || img.src, img.alt, { invert: false }));
         img.src = src;
         fig.appendChild(img);
         return fig;
@@ -2250,6 +2257,11 @@ function createInfoPanel(data) {
         img.src = drug.structureImage;
         img.alt = t("drug.structureAlt", { name: drug.name });
         img.decoding = "async";
+        img.title = t("image.zoomHint");
+        // Click to enlarge; the lightbox inverts it too so the line-art reads on
+        // the dark backdrop, matching the panel's .mol-structure treatment.
+        img.addEventListener("click", () =>
+          onImagePick(img.currentSrc || img.src, img.alt, { invert: true }));
         fig.appendChild(img);
         body.appendChild(fig);
       }
@@ -2494,6 +2506,10 @@ function createInfoPanel(data) {
      */
     onSearch(fn) {
       onSearchPick = fn;
+    },
+    /** Set the handler that enlarges a clicked panel image (the lightbox). */
+    onImage(fn) {
+      onImagePick = fn;
     },
   };
 }
@@ -3780,9 +3796,10 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  * just focused (and any other stray default). `help` is the shortcuts-popup
  * controller (wireShortcutsHelp): when its dialog is open Esc closes that first.
  * `selection` lets Esc clear an active focus (isolate / circuit / drug-or-receptor
- * dim) so the brain returns to its plain state, see the Escape case.
+ * dim) so the brain returns to its plain state, see the Escape case. `lightbox` is
+ * the image popup: when it is open Esc closes it before anything else.
  */
-function wireShortcuts(help, tabs, selection) {
+function wireShortcuts(help, tabs, selection, lightbox) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -3901,6 +3918,12 @@ function wireShortcuts(help, tabs, selection) {
   window.addEventListener("keydown", (event) => {
     if (event.ctrlKey || event.metaKey || event.altKey) return; // leave combos alone
     if (isTyping(event.target)) return; // let the field keep the key (Esc self-handles)
+    // With the image lightbox open, Esc just closes it (and nothing else fires).
+    if (lightbox?.isOpen && event.key === "Escape") {
+      lightbox.close();
+      event.preventDefault();
+      return;
+    }
     // With the shortcuts popup open, Esc just closes it (and nothing else fires).
     if (help?.isOpen && event.key === "Escape") {
       help.close();
@@ -4000,6 +4023,55 @@ function wireShortcutsHelp() {
   });
 
   return { open, close, get isOpen() { return !modal.hidden; } };
+}
+
+/**
+ * Image lightbox (#image-lightbox): pops a clicked structure illustration or
+ * molecule diagram up large over a dimmed backdrop. `open(src, alt, {invert})`
+ * shows an image (`invert` mirrors the molecule line-art inversion so it reads on
+ * the dark backdrop); the ×, a backdrop click, or Esc (routed by wireShortcuts)
+ * close it. Reuses the shared .modal-overlay styling.
+ * @returns {{open:(src:string, alt?:string, opts?:{invert?:boolean})=>void,
+ *   close:()=>void, isOpen:boolean}}
+ */
+function wireImageLightbox() {
+  const overlay = document.getElementById("image-lightbox");
+  const img = document.getElementById("image-lightbox-img");
+  const closeBtn = document.getElementById("image-lightbox-close");
+  const noop = { open() {}, close() {}, get isOpen() { return false; } };
+  if (!overlay || !img) return noop;
+  const MAX_UPSCALE = 4; // how far a small source may be blown up (readability > crispness)
+  // Size the image to fill most of the viewport: enlarge a small thumbnail (the
+  // point of the lightbox) but never past the viewport, and cap the upscale so a
+  // tiny raster doesn't turn into a wall of blur. Vector SVGs scale crisply.
+  const sizeToViewport = () => {
+    const nw = img.naturalWidth, nh = img.naturalHeight;
+    if (!nw || !nh) { img.style.width = img.style.height = ""; return; }
+    const scale = Math.min(
+      (window.innerWidth * 0.92) / nw, (window.innerHeight * 0.92) / nh, MAX_UPSCALE);
+    img.style.width = Math.round(nw * scale) + "px";
+    img.style.height = Math.round(nh * scale) + "px";
+  };
+  const close = () => {
+    overlay.hidden = true;
+    img.removeAttribute("src"); // drop the (possibly multi-MB) decode while closed
+    img.style.width = img.style.height = "";
+  };
+  const open = (src, alt, { invert = false } = {}) => {
+    if (!src) return;
+    img.onload = sizeToViewport;
+    img.src = src;
+    img.alt = alt || "";
+    img.classList.toggle("inverted", invert);
+    overlay.hidden = false;
+    if (img.complete && img.naturalWidth) sizeToViewport(); // cached: load won't refire
+  };
+  closeBtn?.addEventListener("click", close);
+  // A click anywhere but the image itself (the dimmed backdrop / the ×) closes it.
+  overlay.addEventListener("click", (event) => {
+    if (event.target !== img) close();
+  });
+  return { open, close, get isOpen() { return !overlay.hidden; } };
 }
 
 async function main() {
@@ -4639,8 +4711,11 @@ async function main() {
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
+  // Clicking a structure illustration / molecule diagram in a panel enlarges it.
+  const lightbox = wireImageLightbox();
+  info.onImage((src, alt, opts) => lightbox.open(src, alt, opts));
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
-  wireShortcuts(shortcutsHelp, tabs, selection); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
+  wireShortcuts(shortcutsHelp, tabs, selection, lightbox); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });

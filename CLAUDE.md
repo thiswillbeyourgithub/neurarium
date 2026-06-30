@@ -997,6 +997,15 @@ Two third-party image sources, handled differently on purpose.
   expand** (so the extra multi-MB images never load unless asked). Not inverted (colour
   art). Needs the `img-src https://upload.wikimedia.org` CSP allowance.
 
+**Lightbox.** Clicking any panel image (a structure illustration, hero or gallery, or a
+drug molecule diagram) pops it up large in the `#image-lightbox` overlay (`wireImageLightbox`,
+reuses the `.modal-overlay` backdrop): `open(src, alt, {invert})` sizes the image to fill the
+viewport (capped `MAX_UPSCALE` so a small raster enlarges without becoming a wall of blur; SVGs
+stay crisp), `invert` mirrors the molecule line-art inversion. Closed by the ×, a backdrop
+click, or **Esc** (routed first in `wireShortcuts`, ahead of the help popup + the peel chain).
+The lightbox uses a darker backdrop than the shortcuts modal so a transparent molecule SVG
+doesn't show the brain through it. i18n: `image.close` / `image.zoomHint`.
+
 ## Source provenance
 
 Every source/reference carries a **provenance grade** saying how trustworthy its

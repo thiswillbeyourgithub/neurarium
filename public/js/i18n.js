@@ -169,6 +169,8 @@
       "structure.imageAlt": "Illustration of the {name}",
       "structure.galleryShow": "Show {n} more image(s)",
       "structure.galleryHide": "Show fewer images",
+      "image.close": "Close",
+      "image.zoomHint": "Click to enlarge",
 
       "status.loadError":
         "Could not load brain data: {msg}. Are you serving over HTTP? (see CLAUDE.md)",
@@ -377,6 +379,8 @@
       "structure.imageAlt": "Illustration de {name}",
       "structure.galleryShow": "Voir {n} image(s) de plus",
       "structure.galleryHide": "Voir moins d'images",
+      "image.close": "Fermer",
+      "image.zoomHint": "Cliquer pour agrandir",
 
       "status.loadError":
         "Impossible de charger les données : {msg}. Le site est-il servi via HTTP ? (voir CLAUDE.md)",

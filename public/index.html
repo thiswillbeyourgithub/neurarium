@@ -476,6 +476,38 @@
         overflow-y: auto;
       }
       .modal h2 { margin: 2px 0 14px; font-size: 15px; padding-right: 20px; }
+      /* Image lightbox (#image-lightbox): the clicked illustration shown large,
+         centered by the shared .modal-overlay. A darker backdrop than the shortcuts
+         modal so a transparent (molecule SVG) image doesn't show the brain through
+         it and the picture is the clear focus. The image keeps its aspect ratio
+         within the viewport; molecule line-art is inverted to read on the dark
+         backdrop (same as the panel's .mol-structure). */
+      #image-lightbox { background: rgba(0, 0, 0, 0.82); }
+      #image-lightbox-img {
+        max-width: 92vw;
+        max-height: 92vh;
+        object-fit: contain;
+        border-radius: 8px;
+        cursor: default;
+      }
+      #image-lightbox-img.inverted { filter: invert(1); }
+      .lightbox-close {
+        position: fixed;
+        top: 14px;
+        right: 18px;
+        width: 34px;
+        height: 34px;
+        font-size: 22px;
+        line-height: 1;
+        border-radius: 50%;
+        color: var(--text);
+        background: rgba(14, 17, 22, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        cursor: pointer;
+      }
+      .lightbox-close:hover { background: rgba(40, 46, 54, 0.95); }
+      /* A panel image the user can click to enlarge gets the zoom cursor. */
+      .structure-image img, .mol-structure img { cursor: zoom-in; }
       .modal .info-close {
         position: absolute;
         top: 12px;
@@ -1658,6 +1690,16 @@
         <h2 id="shortcuts-title" data-i18n="shortcuts.title"></h2>
         <dl id="shortcuts-list"></dl>
       </div>
+    </div>
+
+    <!-- Image lightbox: clicking a structure illustration or molecule diagram in a
+         detail panel pops it up large here. Closed by the ×, a click on the
+         backdrop, or Esc (wired in js/main.js wireImageLightbox). Reuses the
+         .modal-overlay backdrop + centering. -->
+    <div id="image-lightbox" class="modal-overlay" hidden>
+      <button type="button" id="image-lightbox-close" class="info-close lightbox-close"
+              aria-label="Close" data-i18n-attr="aria-label:image.close">&times;</button>
+      <img id="image-lightbox-img" alt="">
     </div>
 
     <!-- Banner scripts: plain (need document.body + #banners to exist), so
