@@ -77,13 +77,15 @@ Data + authoring (`tools/`):
   `public/`; use instead of `python -m http.server`).
 - `tools/shot.py` — Playwright screenshot helper (see Screenshots).
 - `tools/demos/` — Playwright demo *video* recorder (site-agnostic). `recorder.py`
-  exposes a `Demo` Python API (headed capture at an exact 720p + an injected glowing
-  cursor with click ripples + a `slider` range-drag + `begin()` front-trim) and emits an
-  AV1 master (`libsvtav1`) + a gifski GIF (configurable framerate). `neurarium.py` is the
-  showcase tour (serves the site via `serve.py`, gates on the loading overlay, then
-  assemble -> explode -> reassemble -> drug focus), writing the README hero
-  `docs/demo.gif` (+ `docs/demo.av1.mp4`) by default. See `tools/demos/README.md`; needs
-  `ffmpeg` (`libsvtav1`) + `gifski` + a display.
+  exposes a `Demo` Python API (capture at an exact 720p + an injected glowing cursor
+  with click ripples + a `slider` range-drag + `begin()` front-trim) and emits an AV1
+  master (`libsvtav1`) + a gifski GIF (configurable framerate). Launches Chromium with
+  ANGLE/desktop-GL flags so it renders on the real GPU; records **headless** by default
+  (headless avoids Chromium's headed-mode video letterboxing while still GPU-rendering).
+  `neurarium.py` is the showcase tour (serves the site via `serve.py`, gates on the
+  loading overlay, then assemble -> explode -> reassemble -> drug focus), writing the
+  README hero `docs/demo.gif` (+ `docs/demo.av1.mp4`) by default. See
+  `tools/demos/README.md`; needs `ffmpeg` (`libsvtav1`) + `gifski` + a GPU/display.
 - `tools/build_source_worklist.py` — lists drug bindings not yet sourced (each with
   its Stahl page range from the index; input to the source-extraction workflow;
   skips already-sourced, so resumable).

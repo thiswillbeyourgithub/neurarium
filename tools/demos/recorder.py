@@ -141,13 +141,23 @@ CURSOR_JS = r"""
 })();
 """
 
-# Launch args: keep timers/animation running even if the window loses focus, so
-# requestAnimationFrame-driven sites (e.g. WebGL) record at full rate.
+# Launch args. Two groups:
+# - keep timers/animation running even if the window loses focus, so
+#   requestAnimationFrame-driven sites (e.g. WebGL) record at full rate;
+# - force real-GPU rendering via ANGLE-over-desktop-GL. Without this, *headless*
+#   Chromium falls back to the SwiftShader software renderer, which is slow (a
+#   choppy WebGL capture); these flags make it use the actual GPU. Harmless when
+#   headed (which already gets the GPU). Headless avoids the headed-mode video
+#   letterboxing bug while still rendering on the GPU.
 _LAUNCH_ARGS = [
     "--autoplay-policy=no-user-gesture-required",
     "--disable-background-timer-throttling",
     "--disable-renderer-backgrounding",
     "--disable-backgrounding-occluded-windows",
+    "--use-gl=angle",
+    "--use-angle=gl",
+    "--ignore-gpu-blocklist",
+    "--enable-gpu",
 ]
 
 
@@ -175,7 +185,7 @@ class Demo:
         *,
         width: int = 1280,
         height: int = 720,
-        headless: bool = False,
+        headless: bool = True,   # headless renders on the GPU + captures cleanly here
         cursor: bool = True,
         # Cursor glide tuning.
         cursor_speed: float = 1600.0,   # px/s; glide duration derives from distance

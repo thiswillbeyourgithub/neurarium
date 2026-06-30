@@ -62,8 +62,8 @@ def run_tour(out: str, gif_fps: int, headless: bool) -> None:
         out=out,
         headless=headless,
         gif_fps=gif_fps,
-        gif_width=760,
-        gif_quality=92,
+        gif_width=720,
+        gif_quality=80,
         av1_crf=30,
         cursor_speed=2000,
         max_glide_ms=820,
@@ -91,8 +91,11 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", default=str(REPO_ROOT / "docs" / "demo"),
                     help="output basename (default: docs/demo, the README asset)")
-    ap.add_argument("--gif-fps", type=int, default=30, help="GIF framerate (smoothness)")
-    ap.add_argument("--headless", action="store_true", help="record without a visible window")
+    ap.add_argument("--gif-fps", type=int, default=25, help="GIF framerate (smoothness)")
+    # Record headless by default: it renders on the real GPU (via the recorder's
+    # ANGLE flags) AND avoids Chromium's headed-mode video letterboxing (grey bar).
+    # --headed shows a window but the headed video capture is unreliable here.
+    ap.add_argument("--headed", action="store_true", help="show a visible window (headed video may letterbox)")
     args = ap.parse_args()
 
     server = subprocess.Popen(
@@ -103,7 +106,7 @@ def main() -> None:
     )
     try:
         _wait_for_port(PORT)
-        run_tour(args.out, args.gif_fps, args.headless)
+        run_tour(args.out, args.gif_fps, headless=not args.headed)
     finally:
         server.terminate()
         try:
