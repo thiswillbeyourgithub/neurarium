@@ -1660,30 +1660,30 @@ function createInfoPanel(data) {
     return withTip(pill, tip);
   };
 
-  // Build the tooltip tail (each source's verbatim quote + its corpus/page ref)
-  // shown under a per-claim provenance pill. Shared by the binding rows and the
-  // NbN row (both carry quote-level `sources` of the same shape).
-  const sourcesTip = (sources) => {
-    const corpora = (data.meta && data.meta.sourceCorpora) || {};
-    return (sources || [])
-      .map((s) => {
-        const c = corpora[s.corpus] || {};
-        const label = c.ref || c.short || s.corpus;
-        const ref = s.page != null
-          ? t("info.sourceRef", { corpus: label, page: s.page })
-          : label;
-        return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
-      })
-      .join("\n\n");
+  // One tooltip line for a single source, whichever shape it carries: a
+  // quote-level {corpus,page,quote} source renders the verbatim quote + "<ref>,
+  // p.N" (the drug-binding shape); a bibliographic {citation} renders its citation.
+  // A projection's `sources` list mixes both (its citations plus, once sourced, a
+  // verified corpus quote), so each line is resolved by shape.
+  const sourceTipLine = (s) => {
+    if (s.corpus) {
+      const corpora = (data.meta && data.meta.sourceCorpora) || {};
+      const c = corpora[s.corpus] || {};
+      const label = c.ref || c.short || s.corpus;
+      const ref = s.page != null
+        ? t("info.sourceRef", { corpus: label, page: s.page })
+        : label;
+      return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
+    }
+    return s.citation || "";
   };
 
-  // Tooltip for a projection's summary source pill: its bibliographic citations
-  // (projection sources are {citation, url, provenance}, no quotes, unlike the
-  // drug bindings' quote-level sources). Shown on a structure panel's connection
-  // row so the pathway's source is visible from both endpoints, the same role
-  // sourcesTip plays for the binding rows.
-  const citationsTip = (sources) =>
-    (sources || []).map((s) => s.citation).filter(Boolean).join("\n\n");
+  // The tooltip tail under a per-claim provenance pill: every source rendered by
+  // shape. Shared by the binding + NbN rows (quote-level sources) and the pathway
+  // rows / connection panel (mixed citation + quote sources), so a pathway's source
+  // shows on both endpoints' panels.
+  const sourcesTip = (sources) =>
+    (sources || []).map(sourceTipLine).filter(Boolean).join("\n\n");
 
   // The provenance pill for a drug binding row (shared by the drug panel's "Acts
   // on" list and a target panel's "Interacting drugs" list, the same resolved
@@ -1696,7 +1696,7 @@ function createInfoPanel(data) {
   const bindingProvenancePill = (binding, drug) =>
     binding.sources && binding.sources.length
       ? makeProvenancePill(binding.provenance, sourcesTip(binding.sources))
-      : makeProvenancePill(drug.sourceProvenance, citationsTip(drug.sources));
+      : makeProvenancePill(drug.sourceProvenance, sourcesTip(drug.sources));
 
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
@@ -1861,19 +1861,30 @@ function createInfoPanel(data) {
     const h3 = el(
       "h3", null, sources.length > 1 ? t("info.sources") : t("info.source"));
     wrap.appendChild(h3);
+    const corpora = (data.meta && data.meta.sourceCorpora) || {};
     const ul = el("ul");
     for (const s of sources) {
       const li = el("li");
+      // A quote-level source (corpus/page) carries no citation/url of its own;
+      // build a readable bibliography line from the corpus citation + page, and put
+      // its verbatim quote in the provenance pill's tooltip.
+      const corpus = s.corpus ? corpora[s.corpus] : null;
+      const citationText = s.citation
+        || (corpus ? (s.page != null
+            ? `${corpus.citation} p. ${s.page}`
+            : corpus.citation)
+          : "");
       if (typeof s.url === "string" && /^https?:\/\//i.test(s.url)) {
-        const a = el("a", null, s.citation);
+        const a = el("a", null, citationText);
         a.href = s.url;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         li.appendChild(a);
       } else {
-        li.appendChild(document.createTextNode(s.citation));
+        li.appendChild(document.createTextNode(citationText));
       }
-      li.appendChild(makeProvenancePill(s.provenance));
+      li.appendChild(makeProvenancePill(
+        s.provenance, s.quote ? sourceTipLine(s) : undefined));
       ul.appendChild(li);
     }
     wrap.appendChild(ul);
@@ -1979,7 +1990,7 @@ function createInfoPanel(data) {
     li.appendChild(directionArrow(proj.color, dir));
     li.appendChild(el("span", "conn-label", labelText));
     if (proj.sources && proj.sources.length) {
-      li.appendChild(makeProvenancePill(proj.provenance, citationsTip(proj.sources)));
+      li.appendChild(makeProvenancePill(proj.provenance, sourcesTip(proj.sources)));
     }
     li.addEventListener("click", () => onConnectionPick(proj));
     return li;
@@ -2016,7 +2027,7 @@ function createInfoPanel(data) {
       // which node it backs. The tooltip lists the citation(s); the readable
       // bibliography still follows at the bottom (appendSources).
       const provPill = () =>
-        makeProvenancePill(proj.provenance, citationsTip(proj.sources));
+        makeProvenancePill(proj.provenance, sourcesTip(proj.sources));
 
       // Route line: from -> to (or <-> for a bidirectional/commissural link), each
       // endpoint clickable to jump to (and isolate) that structure.

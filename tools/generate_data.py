@@ -2092,8 +2092,12 @@ SOURCES: dict[str, dict[str, str]] = {
 #   neurotransmitter: the specific transmitter molecule (Glutamate/GABA/Dopamine)
 #   label           : short pathway name
 #   description     : one-line plain-language summary (shown in the info panel)
-#   sources         : list of SOURCES keys backing the connection (expanded to
-#                     full citations in the emitted data)
+#   sources         : list backing the connection; each item is either a SOURCES
+#                     key (a shared bibliographic citation) or an inline
+#                     {corpus, page, quote, provenance} dict (a quote-level source
+#                     against a SOURCE_CORPORA corpus, the drug-binding shape). A
+#                     "verified" quote, checked present on its page by check_data.py,
+#                     promotes the pathway's grade. Both shapes coexist in one list.
 #   bidirectional   : optional; True draws a cone at BOTH ends (reciprocal /
 #                     commissural pathways like the corpus callosum)
 #   symmetric       : optional generator hint (default True); see below
@@ -2103,6 +2107,17 @@ SOURCES: dict[str, dict[str, str]] = {
 # defined once on the right. Set ``"symmetric": False`` for a pathway that already
 # spans both sides (e.g. a commissure with explicit _L and _R endpoints) so it is
 # not mirrored into a duplicate. ``symmetric`` is stripped from the emitted data.
+
+# A quote-level source (the drug-binding shape) shared by the two nigrostriatal
+# entries (substantia nigra -> putamen + caudate); defined once so the verbatim
+# Kandel quote is not duplicated across the pair.
+_NIGROSTRIATAL_KANDEL = dict(
+    corpus="kandel", page=982, provenance="verified",
+    quote="The substantia nigra pars compacta/ventral tegmental area contain an "
+          "important population of dopaminergic neurons. These neurons represent "
+          "the third major input station of the basal ganglia and give rise to "
+          "the nigrostriatal and mesolimbic/mesocortical dopamine projections.")
+
 PROJECTIONS: list[dict[str, Any]] = [
     # --- Corticostriatal input (glutamate): cortex drives the striatum ---
     dict(**{"from": "frontal_R", "to": "putamen_R"},
@@ -2174,12 +2189,12 @@ PROJECTIONS: list[dict[str, Any]] = [
          label="Nigrostriatal",
          description="Substantia nigra pars compacta dopamine sets the balance "
                      "between the direct and indirect striatal pathways.",
-         sources=["delong1990", "parent1995"]),
+         sources=["delong1990", "parent1995", _NIGROSTRIATAL_KANDEL]),
     dict(**{"from": "substantia_nigra_R", "to": "caudate_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Nigrostriatal",
          description="Dopaminergic modulation of the caudate.",
-         sources=["delong1990", "parent1995"]),
+         sources=["delong1990", "parent1995", _NIGROSTRIATAL_KANDEL]),
     # --- Basal-ganglia output to the thalamus (GABA) ---
     dict(**{"from": "globus_pallidus_R", "to": "thalamus_R"},
          kind="inhibitory", neurotransmitter="GABA",
@@ -3650,31 +3665,42 @@ def _mirror_id(structure_id: str) -> str:
     return structure_id
 
 
-def _expand_sources(keys: list[str]) -> list[dict[str, str]]:
-    """Resolve a list of :data:`SOURCES` keys to full citation objects.
+def _expand_sources(keys: list[Any], what: str = "projection") -> list[dict[str, Any]]:
+    """Resolve a projection/circuit/group ``sources`` list to full source objects.
 
-    Pathways cite shared references by short key so a citation lives once in
-    :data:`SOURCES`; this expands each key into the ``{citation, url}`` object the
-    viewer renders, keeping ``data/projections.jsonl`` self-contained (the client never
-    resolves keys). Raising on an unknown key makes a typo fail the build instead
-    of silently dropping a reference.
+    Each item is one of two shapes, freely mixed in the same list:
+
+    * a **string** key into :data:`SOURCES`: a shared bibliographic citation lives
+      once there and is expanded into the ``{citation, url, provenance}`` object the
+      viewer renders, keeping ``data/projections.jsonl`` self-contained (the client
+      never resolves keys). An unknown key raises so a typo fails the build.
+    * an inline **dict** ``{corpus, page, quote, provenance}``: a quote-level source
+      against a :data:`SOURCE_CORPORA` corpus, the *same* shape a drug binding uses,
+      validated by :func:`_quote_sources` (a ``verified`` grade then needs a page +
+      quote, which ``check_data.py`` confirms is on that page). This is how a pathway
+      earns a ``verified`` grade: a Kandel quote sits alongside its citations and
+      ``_strongest_grade`` promotes the record to the best grade present.
 
     Parameters
     ----------
     keys
-        Source keys listed on a projection's ``sources`` field.
+        The record's ``sources`` field (strings and/or quote-source dicts).
+    what
+        Human label used in the dict-source validation error messages.
 
     Returns
     -------
     list of dict
-        One ``{citation, url, provenance}`` dict per key, in order. ``provenance``
-        is the entry's own grade if it set one, else :data:`DEFAULT_PROVENANCE`
-        (see :data:`PROVENANCE_LEVELS`), validated so a typo fails the build.
+        One source object per item, in order; ``provenance`` defaults to
+        :data:`DEFAULT_PROVENANCE` and is validated against :data:`PROVENANCE_LEVELS`.
     """
-    expanded: list[dict[str, str]] = []
+    expanded: list[dict[str, Any]] = []
     for key in keys:
+        if isinstance(key, dict):
+            expanded.extend(_quote_sources([key], what))
+            continue
         if key not in SOURCES:
-            raise KeyError(f"projection references unknown source '{key}'")
+            raise KeyError(f"{what} references unknown source '{key}'")
         src = dict(SOURCES[key])
         src["provenance"] = _provenance(
             src.get("provenance", DEFAULT_PROVENANCE), f"source {key!r}")
@@ -3702,7 +3728,9 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     symmetric = proj.get("symmetric", True)
     fields = {k: v for k, v in proj.items() if k != "symmetric"}
     if "sources" in fields:
-        fields["sources"] = _expand_sources(fields["sources"])
+        fields["sources"] = _expand_sources(
+            fields["sources"],
+            f"projection {fields.get('from')}->{fields.get('to')}")
     for key in ("label", "description", "neurotransmitter"):
         if key in fields:
             fields[key] = _t(fields[key])
@@ -4192,7 +4220,8 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             record["description"] = {"en": circuit["description"],
                                      "fr": circuit["description_fr"]}
         if circuit.get("sources"):
-            record["sources"] = _expand_sources(circuit["sources"])
+            record["sources"] = _expand_sources(
+                circuit["sources"], f"circuit {circuit['id']!r}")
         circuits.append(record)
 
     # Projection groups: the legend's per-pathway rows as a sourced data structure
@@ -4234,7 +4263,8 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                 WIKIPEDIA_PROVENANCE, gid, f"wikipedia reference for {gid!r}",
                 default=WIKIPEDIA_DEFAULT_PROVENANCE)
         if group.get("sources"):
-            record["sources"] = _expand_sources(group["sources"])
+            record["sources"] = _expand_sources(
+                group["sources"], f"projection group {gid!r}")
         projection_groups.append(record)
 
     # Receptors: validate + normalize each against the known structure bases

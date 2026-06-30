@@ -576,12 +576,16 @@ def check_provenance(report, meta, structures, projections, circuits,
 _MIN_QUOTE_CHARS = 16
 
 
-def check_sources(report, meta, drugs):
+def check_sources(report, meta, drugs, projections):
     """The core of the sourcing system: confirm every quote-level source (a
-    binding's ``sources`` and a drug's ``nbn_sources``) is actually present in the
-    page it cites.
+    binding's ``sources``, a drug's ``nbn_sources``, and a projection's quote-level
+    ``sources``) is actually present in the page it cites.
 
-    Each source is ``{corpus, page, quote, provenance}``. This:
+    A quote-level source is ``{corpus, page, quote, provenance}``. A projection's
+    ``sources`` list mixes these with bibliographic citations (``{citation, url,
+    provenance}``, no ``corpus``); only the quote-level ones are gated here (the
+    bibliographic ones carry no page to check and are grade-checked in
+    :func:`check_provenance`), so a source with no ``corpus`` field is skipped. This:
 
     * checks ``corpus`` resolves to ``meta.source_corpora`` (else the citation is
       unrenderable) and that a ``"verified"`` grade carries a page + quote;
@@ -618,6 +622,8 @@ def check_sources(report, meta, drugs):
 
     def check_one(ctx, src):
         nonlocal n_checked
+        if "corpus" not in src:
+            return  # a bibliographic citation, not a quote-level source
         corpus = src.get("corpus")
         if corpus not in corpora:
             report.error(f"{ctx}: corpus {corpus!r} is not in "
@@ -655,6 +661,11 @@ def check_sources(report, meta, drugs):
                 check_one(f"drug {did} binding {binding.get('target')} sources[{i}]", src)
         for i, src in enumerate(drug.get("nbn_sources", []) or []):
             check_one(f"drug {did} nbn_sources[{i}]", src)
+
+    for proj in projections:
+        pid = f"{proj.get('from')}->{proj.get('to')}"
+        for i, src in enumerate(proj.get("sources", []) or []):
+            check_one(f"projection {pid} sources[{i}]", src)
 
     if skipped_corpora:
         report.warn(f"source pages absent for {sorted(skipped_corpora)} "
@@ -749,7 +760,7 @@ def main():
     check_reachability(*args)
     check_todos(*args)
     check_provenance(*args)
-    check_sources(report, meta, drugs)
+    check_sources(report, meta, drugs, projections)
     check_connectivity(report, structures, projections)
 
     print(f"\nSummary: {report.errors} error(s), {report.warnings} warning(s)")
