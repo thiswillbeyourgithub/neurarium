@@ -2149,6 +2149,9 @@ _KQ_VTA_REWARD = _kandel(1558,
 _KQ_CORPUS_CALLOSUM = _kandel(549,
     "A major fiber bundle called the corpus callosum connects the two hemispheres, "
     "transmitting information across the midline.")
+_KQ_CORTICOPONTINE = _kandel(958,
+    "The cerebral cortex projects to the lateral cerebellum through relays in the "
+    "pontine nuclei.")
 
 KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
@@ -2218,6 +2221,14 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("frontal_L", "frontal_R"): _KQ_CORPUS_CALLOSUM,
     ("parietal_L", "parietal_R"): _KQ_CORPUS_CALLOSUM,
     ("occipital_L", "occipital_R"): _KQ_CORPUS_CALLOSUM,
+    # Cerebellar loop: one relay sentence backs cortex -> pons and pons ->
+    # cerebellum; the dentate -> thalamus output is its own sentence.
+    ("frontal_R", "pons"): _KQ_CORTICOPONTINE,
+    ("pons", "cerebellum"): _KQ_CORTICOPONTINE,
+    ("cerebellum", "thalamus_R"): _kandel(964,
+        "The output is transmitted through the dentate nucleus, which projects via "
+        "the thalamus to contralateral motor, premotor, parietal, and prefrontal "
+        "cortices."),
 }
 
 PROJECTIONS: list[dict[str, Any]] = [
