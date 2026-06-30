@@ -84,7 +84,7 @@ Data + authoring (`tools/`):
   (headless avoids Chromium's headed-mode video letterboxing while still GPU-rendering).
   `neurarium.py` is the showcase tour (serves the site via `serve.py`, gates on the
   loading overlay, then assemble -> explode -> reassemble -> drug focus), writing the
-  README hero `docs/demo.gif` (+ `docs/demo.av1.mp4`) by default. See
+  README hero `docs/preview.gif` (+ `docs/preview.av1.mp4`) by default. See
   `tools/demos/README.md`; needs `ffmpeg` (`libsvtav1`) + `gifski` + a GPU/display.
 - `tools/build_source_worklist.py` — lists drug bindings not yet sourced (each with
   its Stahl page range from the index; input to the source-extraction workflow;
@@ -289,7 +289,7 @@ via the red error banners.
 `tools/shot.py` (Playwright) renders the page to a PNG: serves `public/` with
 `tools/serve.py`, drives headless Chromium (SwiftShader GL flags baked in, so
 WebGL renders without a display), captures the canvas. Bare run writes
-`docs/screenshot.png` (a static still). The README's animated hero is `docs/demo.gif`,
+`docs/screenshot.png` (a static still). The README's animated hero is `docs/preview.gif`,
 recorded by `tools/demos/neurarium.py` (see the `tools/demos/` entry above).
 
 ```

@@ -45,7 +45,7 @@ clean capture, `--headed` only if you want to watch it run.
 ## Run the neurarium demo
 
 ```sh
-uv run tools/demos/neurarium.py                 # -> docs/demo.gif + docs/demo.av1.mp4 (README hero)
+uv run tools/demos/neurarium.py                 # -> docs/preview.gif + docs/preview.av1.mp4 (README hero)
 uv run tools/demos/neurarium.py --gif-fps 24    # smaller GIF
 uv run tools/demos/neurarium.py --out /tmp/nd   # choose output basename
 uv run tools/demos/neurarium.py --headed        # show a window (see Rendering below)

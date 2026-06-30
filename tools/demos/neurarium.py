@@ -5,7 +5,7 @@
 """Record a showcase demo of neurarium (built with the help of Claude Code).
 
 Serves the local site with `tools/serve.py`, drives a short scripted tour with a
-visible cursor, and writes `neurarium_demo.av1.mp4` + `neurarium_demo.gif`.
+visible cursor, and writes `docs/preview.gif` + `docs/preview.av1.mp4`.
 
     uv run tools/demos/neurarium.py
     # or, if playwright is on your PATH already:
@@ -62,8 +62,8 @@ def run_tour(out: str, gif_fps: int, headless: bool) -> None:
         out=out,
         headless=headless,
         gif_fps=gif_fps,
-        gif_width=720,
-        gif_quality=80,
+        gif_width=600,        # keep the GIF small enough for GitHub to render inline
+        gif_quality=70,
         av1_crf=30,
         cursor_speed=2000,
         max_glide_ms=820,
@@ -89,9 +89,9 @@ def run_tour(out: str, gif_fps: int, headless: bool) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--out", default=str(REPO_ROOT / "docs" / "demo"),
-                    help="output basename (default: docs/demo, the README asset)")
-    ap.add_argument("--gif-fps", type=int, default=25, help="GIF framerate (smoothness)")
+    ap.add_argument("--out", default=str(REPO_ROOT / "docs" / "preview"),
+                    help="output basename (default: docs/preview, the README asset)")
+    ap.add_argument("--gif-fps", type=int, default=20, help="GIF framerate (smoothness)")
     # Record headless by default: it renders on the real GPU (via the recorder's
     # ANGLE flags) AND avoids Chromium's headed-mode video letterboxing (grey bar).
     # --headed shows a window but the headed video capture is unreliable here.
