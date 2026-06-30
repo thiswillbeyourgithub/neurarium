@@ -2003,9 +2003,9 @@
       },
       "projections": {
         "total": 107,
-        "verified": 4,
+        "verified": 32,
         "sourced": 0,
-        "unverified": 103
+        "unverified": 75
       },
       "receptors": {
         "total": 56,
@@ -2034,11 +2034,11 @@
     },
     "assertions": {
       "total": 785,
-      "verified": 520,
+      "verified": 548,
       "sourced": 0,
-      "unverified": 265,
-      "backed": 520,
-      "pct_backed": 66
+      "unverified": 237,
+      "backed": 548,
+      "pct_backed": 70
     }
   }
 }

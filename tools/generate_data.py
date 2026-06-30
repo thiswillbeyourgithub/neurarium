@@ -2108,15 +2108,93 @@ SOURCES: dict[str, dict[str, str]] = {
 # spans both sides (e.g. a commissure with explicit _L and _R endpoints) so it is
 # not mirrored into a duplicate. ``symmetric`` is stripped from the emitted data.
 
-# A quote-level source (the drug-binding shape) shared by the two nigrostriatal
-# entries (substantia nigra -> putamen + caudate); defined once so the verbatim
-# Kandel quote is not duplicated across the pair.
-_NIGROSTRIATAL_KANDEL = dict(
-    corpus="kandel", page=982, provenance="verified",
-    quote="The substantia nigra pars compacta/ventral tegmental area contain an "
-          "important population of dopaminergic neurons. These neurons represent "
-          "the third major input station of the basal ganglia and give rise to "
-          "the nigrostriatal and mesolimbic/mesocortical dopamine projections.")
+def _kandel(page: int, quote: str) -> dict[str, Any]:
+    """A verified Kandel quote-source (the drug-binding ``{corpus,page,quote}`` shape)."""
+    return dict(corpus="kandel", page=page, provenance="verified", quote=quote)
+
+
+# Verified Kandel (Principles of Neural Science, 6th ed.) quote-sources for the
+# pathways, keyed by the RIGHT-side ``(from, to)`` endpoint pair (matching how
+# PROJECTIONS defines each pathway once on the right). ``_projection_records``
+# merges the matching quote into that entry's ``sources`` before mirroring, so both
+# hemispheres inherit it; a single sentence that backs several pathways (e.g. one
+# naming the whole striatal output) is written once here, not duplicated per entry.
+# Every key must match a PROJECTIONS entry or ``build_records`` raises (typo guard).
+# This is the projection analogue of the per-binding drug sources; ``check_data.py``
+# confirms each quote is verbatim on its cited Kandel page (the verify gate).
+_KQ_NIGROSTRIATAL = _kandel(982,
+    "The substantia nigra pars compacta/ventral tegmental area contain an "
+    "important population of dopaminergic neurons. These neurons represent the "
+    "third major input station of the basal ganglia and give rise to the "
+    "nigrostriatal and mesolimbic/mesocortical dopamine projections.")
+_KQ_STRIATOPALLIDAL = _kandel(982,
+    "Most connections of the globus pallidus are with other basal ganglia nuclei, "
+    "including inhibitory (GABAergic) input from the striatum and excitatory "
+    "(glutamatergic) input from the subthalamus.")
+_KQ_STRIATONIGRAL = _kandel(982,
+    "The substantia nigra pars reticulata is the second principal output nucleus. "
+    "It also receives afferents from other basal ganglia nuclei and provides "
+    "efferent connections to the thalamus and brain stem. Inhibitory (GABAergic) "
+    "inputs come from the striatum and globus pallidus (external) and excitatory "
+    "input from the subthalamus.")
+_KQ_CORTICOSTRIATAL = _kandel(981,
+    "The striatum is the largest nucleus of the basal ganglia. It receives direct "
+    "input from most regions of the cerebral cortex and limbic structures, "
+    "including the amygdala and hippocampus.")
+
+KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
+    # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
+    ("substantia_nigra_R", "putamen_R"): _KQ_NIGROSTRIATAL,
+    ("substantia_nigra_R", "caudate_R"): _KQ_NIGROSTRIATAL,
+    # Direct pathway: striatum -> output nuclei (GABA).
+    ("putamen_R", "globus_pallidus_R"): _KQ_STRIATOPALLIDAL,
+    ("caudate_R", "globus_pallidus_R"): _KQ_STRIATOPALLIDAL,
+    ("putamen_R", "substantia_nigra_R"): _KQ_STRIATONIGRAL,
+    ("caudate_R", "substantia_nigra_R"): _KQ_STRIATONIGRAL,
+    # Corticostriatal: parietal + temporal covered by the general striatum-input
+    # sentence; frontal targets get their own more specific sentences.
+    ("parietal_R", "caudate_R"): _KQ_CORTICOSTRIATAL,
+    ("temporal_R", "caudate_R"): _KQ_CORTICOSTRIATAL,
+    ("frontal_R", "caudate_R"): _kandel(918,
+        "The substantia nigra is suppressed by the caudate nucleus, which in turn "
+        "is excited by the frontal eye fields."),
+    ("frontal_R", "putamen_R"): _kandel(986,
+        "the sensorimotor territories of the dorsolateral striatum receive "
+        "collateral fibers from motor cortex axons that send signals to the "
+        "spinal cord."),
+    # Hyperdirect: cortex -> STN (glutamate).
+    ("frontal_R", "subthalamic_nucleus_R"): _kandel(986,
+        "The subthalamus therefore receives phasic excitatory (glutamatergic) "
+        "signals from the cerebral cortex, thalamus, and brain stem."),
+    # Indirect pathway: external pallidum -> STN (GABA).
+    ("globus_pallidus_R", "subthalamic_nucleus_R"): _kandel(986,
+        "Following cortical activation, short-latency excitatory effects in the "
+        "subthalamus are thought to be mediated via these \"hyperdirect\" "
+        "connections, whereas longer-latency suppressive effects are more likely "
+        "to come from indirect inhibitory inputs from other basal ganglia nuclei, "
+        "principally the external globus pallidus."),
+    # STN -> pallidum (glutamate).
+    ("subthalamic_nucleus_R", "globus_pallidus_R"): _kandel(982,
+        "The subthalamic nucleus is the only component of the basal ganglia that "
+        "has excitatory (glutamatergic) output connections. These project to both "
+        "output nuclei and to the intrinsic external globus pallidus."),
+    # Basal-ganglia output -> thalamus (GABA).
+    ("globus_pallidus_R", "thalamus_R"): _kandel(982,
+        "Neurons of the internal globus pallidus are themselves GABAergic and "
+        "have high levels of tonic activity. Under normal circumstances, this "
+        "imposes powerful inhibitory effects on targets in the thalamus, lateral "
+        "habenula, and brain stem."),
+    ("substantia_nigra_R", "thalamus_R"): _kandel(982,
+        "Pars reticulata neurons are also GABAergic and impose strong inhibitory "
+        "control over parts of the thalamus and brain stem, including the superior "
+        "colliculus, pedunculopontine nucleus, and parts of the midbrain and "
+        "medullary reticular formation."),
+    # Thalamus -> cortex closure (glutamate).
+    ("thalamus_R", "frontal_R"): _kandel(130,
+        "The ventral anterior and ventral lateral nuclei are important for motor "
+        "control and carry information from the basal ganglia and cerebellum to "
+        "the motor cortex."),
+}
 
 PROJECTIONS: list[dict[str, Any]] = [
     # --- Corticostriatal input (glutamate): cortex drives the striatum ---
@@ -2189,12 +2267,12 @@ PROJECTIONS: list[dict[str, Any]] = [
          label="Nigrostriatal",
          description="Substantia nigra pars compacta dopamine sets the balance "
                      "between the direct and indirect striatal pathways.",
-         sources=["delong1990", "parent1995", _NIGROSTRIATAL_KANDEL]),
+         sources=["delong1990", "parent1995"]),
     dict(**{"from": "substantia_nigra_R", "to": "caudate_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Nigrostriatal",
          description="Dopaminergic modulation of the caudate.",
-         sources=["delong1990", "parent1995", _NIGROSTRIATAL_KANDEL]),
+         sources=["delong1990", "parent1995"]),
     # --- Basal-ganglia output to the thalamus (GABA) ---
     dict(**{"from": "globus_pallidus_R", "to": "thalamus_R"},
          kind="inhibitory", neurotransmitter="GABA",
@@ -3727,10 +3805,16 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     """
     symmetric = proj.get("symmetric", True)
     fields = {k: v for k, v in proj.items() if k != "symmetric"}
-    if "sources" in fields:
+    # Merge this pathway's verified Kandel quote-source (keyed by the right-side
+    # endpoints in KANDEL_QUOTES) into its source list, so it is expanded + carried
+    # onto the mirrored twin like any other source.
+    src_keys = list(fields.get("sources", []))
+    kandel_quote = KANDEL_QUOTES.get((fields["from"], fields["to"]))
+    if kandel_quote is not None:
+        src_keys.append(kandel_quote)
+    if src_keys:
         fields["sources"] = _expand_sources(
-            fields["sources"],
-            f"projection {fields.get('from')}->{fields.get('to')}")
+            src_keys, f"projection {fields.get('from')}->{fields.get('to')}")
     for key in ("label", "description", "neurotransmitter"):
         if key in fields:
             fields[key] = _t(fields[key])
@@ -4195,6 +4279,12 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
 
     for proj in PROJECTIONS:
         projections.extend(_projection_records(proj))
+    # Typo guard: every KANDEL_QUOTES key must address a real PROJECTIONS entry,
+    # else its quote silently sources nothing.
+    unmatched = set(KANDEL_QUOTES) - {(p["from"], p["to"]) for p in PROJECTIONS}
+    if unmatched:
+        raise KeyError(
+            f"KANDEL_QUOTES keys match no PROJECTIONS entry: {sorted(unmatched)}")
 
     # Circuits: expand each base structure id to whatever was emitted (both
     # hemispheres for a paired form, the bare id for a midline one). Built from
