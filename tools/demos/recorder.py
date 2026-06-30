@@ -32,6 +32,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -46,6 +47,7 @@ CURSOR_JS = r"""
   const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
   function ensure() {
+    if (window.__DEMO_NO_CURSOR) return;
     if (state.el && document.body && document.body.contains(state.el)) return;
     const wrap = document.createElement('div');
     wrap.setAttribute('data-demo-cursor', '');
@@ -94,6 +96,7 @@ CURSOR_JS = r"""
     });
   }
   function press() {
+    if (window.__DEMO_NO_CURSOR) return;
     ensure();
     if (state.halo) {
       state.halo.style.transform = 'scale(0.6)';
@@ -122,9 +125,17 @@ CURSOR_JS = r"""
     window.scrollTo({ top: y, behavior: 'smooth' });
     return new Promise((res) => setTimeout(res, dur || 600));
   }
+  function setRange(sel, frac, x, y) {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    const min = parseFloat(el.min || '0'), max = parseFloat(el.max || '1');
+    el.value = min + (max - min) * frac;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    setPos(x, y);
+  }
 
   window.__demo = { ensure, setPos, moveTo, press, smoothScrollIntoView, smoothScrollTo,
-                    pos: () => ({ x: state.x, y: state.y }) };
+                    setRange, pos: () => ({ x: state.x, y: state.y }) };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensure);
   else ensure();
 })();
@@ -142,6 +153,11 @@ _LAUNCH_ARGS = [
 
 def _clamp(v: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, v))
+
+
+def _ease(t: float) -> float:
+    """easeInOutCubic."""
+    return 4 * t * t * t if t < 0.5 else 1 - ((-2 * t + 2) ** 3) / 2
 
 
 class Demo:
@@ -210,6 +226,8 @@ class Demo:
         self.page = None
         self._video = None
         self._video_dir = None
+        self._t0 = 0.0          # monotonic time the recording started
+        self._clip_start = 0.0  # seconds to trim off the front of the output
 
     # -- lifecycle ----------------------------------------------------------
 
@@ -224,8 +242,12 @@ class Demo:
             record_video_size={"width": self.width, "height": self.height},
             device_scale_factor=1,
         )
-        if self.cursor:
-            self.context.add_init_script(CURSOR_JS)
+        self._t0 = time.monotonic()  # the video begins ~here
+        # The helper is always injected (slider/glide use it); the visible cursor
+        # element is suppressed when cursor=False.
+        if not self.cursor:
+            self.context.add_init_script("window.__DEMO_NO_CURSOR = true;")
+        self.context.add_init_script(CURSOR_JS)
         self.page = self.context.new_page()
         self.page.set_default_timeout(self.action_timeout)
         self._video = self.page.video
@@ -263,6 +285,26 @@ class Demo:
         return self
 
     pause = wait
+
+    def wait_for(self, selector: str, *, timeout: int = 60000) -> "Demo":
+        """Block until `selector` is visible (e.g. the app is ready)."""
+        self.page.wait_for_selector(selector, state="visible", timeout=timeout)
+        return self
+
+    def wait_gone(self, selector: str, *, timeout: int = 60000) -> "Demo":
+        """Block until `selector` is hidden or detached (e.g. a loading overlay)."""
+        self.page.wait_for_selector(selector, state="hidden", timeout=timeout)
+        return self
+
+    def begin(self) -> "Demo":
+        """Mark *now* as the start of the clip; everything before is trimmed off.
+
+        Call once the app is ready (after a loading overlay clears) so the output
+        does not show the boring startup. A small lead-in is kept.
+        """
+        self._clip_start = max(0.0, time.monotonic() - self._t0 - 0.2)
+        self._log(f"clip start marked at {self._clip_start:.1f}s (front trimmed)")
+        return self
 
     def move(self, target, duration: int | None = None) -> "Demo":
         """Glide the cursor to a selector or an (x, y) viewport point."""
@@ -319,6 +361,38 @@ class Demo:
         self.wait(dur)
         return self
 
+    def slider(self, selector: str, to: float, *, dur: int = 2000, steps: int = 22) -> "Demo":
+        """Drag a range <input> to fraction `to` in [0, 1], cursor riding the handle.
+
+        Stepped from Python on the wall clock (each step sets the value, fires
+        'input', and moves the cursor), so the pacing is deterministic even when
+        the page throttles requestAnimationFrame under a heavy per-input handler.
+        """
+        to = _clamp(float(to), 0.0, 1.0)
+        box = self.page.locator(selector).first.bounding_box()
+        if box is None:
+            raise RuntimeError(f"slider {selector!r} is not visible")
+        info = self.page.evaluate(
+            "(s) => { const e = document.querySelector(s);"
+            " return { mn: parseFloat(e.min || '0'), mx: parseFloat(e.max || '1'),"
+            " v: parseFloat(e.value) }; }",
+            selector,
+        )
+        span = (info["mx"] - info["mn"]) or 1.0
+        frm = (info["v"] - info["mn"]) / span
+        cy = box["y"] + box["height"] / 2.0
+        per = max(8, int(dur / steps))
+        for i in range(1, steps + 1):
+            frac = frm + (to - frm) * _ease(i / steps)
+            cx = box["x"] + frac * box["width"]
+            self.page.evaluate(
+                "([s, f, x, y]) => window.__demo.setRange(s, f, x, y)",
+                [selector, frac, cx, cy],
+            )
+            self.page.wait_for_timeout(per)
+        self.cx, self.cy = box["x"] + to * box["width"], cy
+        return self
+
     # -- internals ----------------------------------------------------------
 
     def _center(self, locator):
@@ -339,12 +413,9 @@ class Demo:
             dist = math.hypot(x - self.cx, y - self.cy)
             duration = int(_clamp(dist / self.cursor_speed * 1000.0,
                                   self.min_glide_ms, self.max_glide_ms))
-        if self.cursor:
-            self.page.evaluate(
-                "([x, y, d]) => window.__demo.moveTo(x, y, d)", [x, y, duration]
-            )
-        else:
-            self.page.wait_for_timeout(duration)
+        self.page.evaluate(
+            "([x, y, d]) => window.__demo.moveTo(x, y, d)", [x, y, duration]
+        )
         self.cx, self.cy = x, y
 
     # -- post-processing ----------------------------------------------------
@@ -370,9 +441,12 @@ class Demo:
         if not success:
             self._log("note: finalized despite a scripting error (partial demo)")
 
+    def _seek_args(self) -> list[str]:
+        return ["-ss", f"{self._clip_start:.3f}"] if self._clip_start > 0 else []
+
     def _encode_av1(self, raw: Path) -> None:
         dst = self.out.with_suffix(".av1.mp4")
-        cmd = ["ffmpeg", "-y", "-i", str(raw), "-an",
+        cmd = ["ffmpeg", "-y", *self._seek_args(), "-i", str(raw), "-an",
                "-c:v", self.av1_encoder, "-pix_fmt", "yuv420p",
                "-movflags", "+faststart"]
         if self.av1_encoder == "libsvtav1":
@@ -393,7 +467,7 @@ class Demo:
             if self.gif_width:
                 vf += f",scale={self.gif_width}:-2:flags=lanczos"
             self._run(
-                ["ffmpeg", "-y", "-i", str(raw), "-vf", vf,
+                ["ffmpeg", "-y", *self._seek_args(), "-i", str(raw), "-vf", vf,
                  str(frames_dir / "f%05d.png")],
                 "GIF frame extraction",
             )
@@ -426,8 +500,9 @@ def _size(p: Path) -> str:
         n = p.stat().st_size
     except OSError:
         return "missing"
+    size = float(n)
     for unit in ("B", "KB", "MB", "GB"):
-        if n < 1024 or unit == "GB":
-            return f"{n:.0f}{unit}" if unit == "B" else f"{n / 1024:.1f}{unit}"
-        n /= 1024
-    return f"{n:.0f}B"
+        if size < 1024 or unit == "GB":
+            return f"{size:.0f}{unit}" if unit == "B" else f"{size:.1f}{unit}"
+        size /= 1024
+    return f"{size:.0f}B"

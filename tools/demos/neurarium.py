@@ -44,16 +44,6 @@ def _wait_for_port(port: int, timeout: float = 10.0) -> None:
     raise RuntimeError(f"server did not come up on :{port}")
 
 
-def back_to_settings(d: Demo) -> None:
-    """Esc closes the active detail tab, re-showing the Settings pane + its toolbar.
-
-    Opening a detail hides the Settings pane (where the search/reset buttons live).
-    Esc is global, so it works whether or not a detail tab is currently open.
-    """
-    d.key("Escape")
-    d.wait(500)
-
-
 def search(d: Demo, term: str, *, watch: int) -> None:
     """Open search, replace any remembered query, run `term`, take the top hit."""
     d.click("#search-toggle")
@@ -72,30 +62,35 @@ def run_tour(out: str, gif_fps: int, headless: bool) -> None:
         out=out,
         headless=headless,
         gif_fps=gif_fps,
-        gif_width=720,
+        gif_width=760,
         gif_quality=92,
         av1_crf=30,
+        cursor_speed=2000,
+        max_glide_ms=820,
     ) as d:
-        d.wait(3800)                    # the regions assemble (intro animation)
+        d.wait_for("#explode")                # controls are in the page
+        # Gate on the loading overlay being REMOVED from the DOM. That only happens
+        # inside done() (500ms after meshing hits 100%); `hidden` can fire on a
+        # transient mid-mesh. After this the scene is ready and the intro is playing.
+        d.page.wait_for_selector("#loading", state="detached", timeout=60000)
+        d.wait(400)                           # let the overlay's fade fully finish
+        d.begin()                             # clean start: the startup load is all before this
+        d.wait(1500)                          # the assemble intro (2.2s) finishes; regions settle
 
-        search(d, "fluoxetine", watch=5200)   # SSRI: serotonergic dots + flow fan
-        back_to_settings(d)
+        d.slider("#explode", 1.0, dur=2200)   # blow the brain apart -> deep nuclei revealed
+        d.wait(1100)
+        d.slider("#explode", 0.0, dur=2000)   # the regions glide back into a whole brain
+        d.wait(900)
 
-        d.key("c")                      # See inside: reveal the deep nuclei
-        d.wait(2200)
-        d.key("c")
-        d.wait(700)
-
-        search(d, "D2", watch=4200)     # a dopamine receptor: expression cloud
-        back_to_settings(d)
-
-        d.click("#reset-view")          # recenter / reframe
-        d.wait(1600)
+        # Searching a drug auto-spreads the brain and plays its effect; end on it
+        # (the auto-spread fights a manual reassemble, so this is the finale).
+        search(d, "fluoxetine", watch=5000)   # SSRI: serotonergic gem dots + flow fan + sourced molecule panel
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--out", default="neurarium_demo", help="output basename")
+    ap.add_argument("--out", default=str(REPO_ROOT / "docs" / "demo"),
+                    help="output basename (default: docs/demo, the README asset)")
     ap.add_argument("--gif-fps", type=int, default=30, help="GIF framerate (smoothness)")
     ap.add_argument("--headless", action="store_true", help="record without a visible window")
     args = ap.parse_args()

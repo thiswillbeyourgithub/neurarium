@@ -14,10 +14,13 @@ so it is part of the recording. Built with the help of Claude Code.
 ## Files
 
 - `recorder.py` — the engine. Import `Demo` and script a page with the Python
-  API (`goto` / `wait` / `move` / `click` / `hover` / `type` / `key` / `scroll`).
-  Generic: point it at any URL. Copy this one file to use it in another project.
+  API (`goto` / `wait` / `wait_for` / `wait_gone` / `begin` / `move` / `click` /
+  `hover` / `type` / `key` / `scroll` / `slider`). Generic: point it at any URL.
+  Copy this one file to use it in another project. `begin()` marks the clip start
+  (trims a slow startup off the front); `slider()` drags a range input smoothly.
 - `neurarium.py` — the neurarium showcase tour (an example scenario). It serves
-  the local site with `tools/serve.py`, runs the tour, and writes the outputs.
+  the local site with `tools/serve.py`, waits out the loading overlay, runs the
+  tour (assemble -> explode -> reassemble -> drug focus), and writes the outputs.
 
 ## Requirements
 
@@ -33,7 +36,7 @@ All already present in this environment; for a fresh machine:
 ## Run the neurarium demo
 
 ```sh
-uv run tools/demos/neurarium.py                 # -> neurarium_demo.av1.mp4 + .gif
+uv run tools/demos/neurarium.py                 # -> docs/demo.gif + docs/demo.av1.mp4 (README hero)
 uv run tools/demos/neurarium.py --gif-fps 24    # smaller GIF
 uv run tools/demos/neurarium.py --out /tmp/nd   # choose output basename
 uv run tools/demos/neurarium.py --headless      # no visible window
