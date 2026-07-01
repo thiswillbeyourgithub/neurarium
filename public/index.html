@@ -979,6 +979,13 @@
       }
       .fact-link:hover,
       .conn-endpoint:hover { color: #b9d4f3; }
+      /* A muted trailing note on a fact row (e.g. flagging a non-standard
+         nomenclature). `text-transform: none` overrides the row's capitalize. */
+      .info-fact .fact-note {
+        color: var(--muted);
+        font-style: italic;
+        text-transform: none;
+      }
       /* Receptor "found in" region list. */
       .info-locations { margin-top: 4px; }
       .info-locations li { font-size: 12px; line-height: 1.5; color: var(--text); }

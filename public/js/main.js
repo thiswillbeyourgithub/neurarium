@@ -1733,6 +1733,8 @@ function createInfoPanel(data) {
     // Optional trailing provenance pill (e.g. the NbN's quote source), so a
     // sourced fact carries the same grade pill as a binding row.
     if (opts.pill) v.appendChild(opts.pill);
+    // Optional muted trailing note (e.g. flagging a non-standard nomenclature).
+    if (opts.note) v.appendChild(el("span", "fact-note", opts.note));
     r.appendChild(v);
     facts.appendChild(r);
   };
@@ -2385,6 +2387,9 @@ function createInfoPanel(data) {
         addFactRow(facts, t("drug.nomenclature"), null, null, {
           links: [{ text: drug.nbn, query: `nbn:"${drug.nbn}"` }],
           pill: nbnPill,
+          // A newer drug with no formal NbN carries Stahl's drug-class descriptor
+          // instead; flag it so the value isn't misread as an official NbN.
+          note: drug.nbnNonstandard ? t("drug.nbnNonstandard") : null,
         });
       }
       if (facts.childElementCount) body.appendChild(facts);
