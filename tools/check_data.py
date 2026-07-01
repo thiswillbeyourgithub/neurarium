@@ -458,6 +458,43 @@ def check_todos(report, meta, structures, projections, circuits,
 # 4. Provenance grades
 # --------------------------------------------------------------------------- #
 
+def print_coverage(stats):
+    """Print the per-kind, per-tier sourcing tally (the same numbers the About
+    panel + README headline read from ``meta.provenance_stats``), so the pre-push
+    output shows at a glance exactly how many claims sit at each provenance grade.
+
+    Each *claim* is reduced to its single strongest grade first, so the columns
+    partition the claim count (they sum to ``total``); the grades map to the
+    viewer's pills: verified = green check, sourced = yellow ``~``, unverified =
+    grey ``?`` / no source. ``references`` (wikipedia pointers) are a kind of their
+    own, tallied but not folded into the headline (a reference is a pointer, not a
+    claim), so they are printed below the claim total."""
+    by = stats.get("by_kind", {})
+    a = stats.get("assertions", {})
+    # The claim kinds folded into the headline, in the generator's order.
+    claim_kinds = ("drug_bindings", "drug_nbn", "projections",
+                   "receptors", "targets", "structures")
+
+    def backed_pct(c):
+        total = c.get("total", 0)
+        return round(100 * (c.get("verified", 0) + c.get("sourced", 0)) / total) if total else 0
+
+    def row(label, c, pct=None, suffix=""):
+        pct = backed_pct(c) if pct is None else pct
+        print(f"    {label:<15}{c.get('verified', 0):>9}{c.get('sourced', 0):>9}"
+              f"{c.get('unverified', 0):>11}{c.get('total', 0):>7}{pct:>7}%{suffix}")
+
+    print("\n  coverage by kind (each claim reduced to its strongest grade):")
+    print(f"    {'kind':<15}{'verified':>9}{'sourced':>9}{'unverified':>11}"
+          f"{'total':>7}{'backed':>8}")
+    for kind in claim_kinds:
+        row(kind, by.get(kind, {}))
+    print(f"    {'-' * 55}")
+    row("all claims", a, pct=a.get("pct_backed", 0))
+    if by.get("references"):
+        row("references", by["references"], suffix="   (pointers, not in headline)")
+
+
 def check_provenance(report, meta, structures, projections, circuits,
                      projection_groups, receptors, drugs):
     report.header("4. Source provenance grades")
@@ -580,6 +617,7 @@ def check_provenance(report, meta, structures, projections, circuits,
             report.ok(f"provenance_stats is self-consistent "
                       f"({a.get('pct_backed')}% of {a.get('total')} assertions "
                       f"sourced or verified)")
+        print_coverage(stats)
 
 
 # --------------------------------------------------------------------------- #
