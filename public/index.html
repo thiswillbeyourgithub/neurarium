@@ -1086,6 +1086,10 @@
         vertical-align: middle;
         margin-left: 6px;
       }
+      /* When a help-icon wraps a *leading* glyph (a row's direction arrow or effect
+         glyph, made tap-to-explain), it is the first child, so drop the left margin
+         the trailing-pill case wants. */
+      .help-icon:first-child { margin-left: 0; }
       .help-dot {
         width: 15px;
         height: 15px;

@@ -826,7 +826,9 @@ Views:
   baked description; fetch-only), and the pathway list. Each connection row: a bold
   colour-filled direction arrow
   (`directionArrow`, an inline SVG with a wide pointy head, in the pathway colour;
-  out / in / both relative to this structure, drawn big for legibility), the
+  out / in / both relative to this structure, drawn big for legibility; wrapped in
+  `withTip` so a tap explains the direction and, crucially, does **not** bubble to
+  the row's click, so on a phone tapping the arrow no longer navigates), the
   other endpoint, and the pathway's summary pill
   (`makeProvenancePill(proj.provenance, citationsTip(proj.sources))`, `proj.provenance`
   = the strongest grade over `proj.sources`, resolved once in `js/data.js`). Clicking a
@@ -997,7 +999,8 @@ sources are normalized to one shape in `js/data.js`.
   has no per-target search; the drug panel's EMA/FDA links use the same helper). Both then carry an
   **Interacting drugs** section (the drugs acting on this target, from `drugsByTarget`,
   grouped by primary drug category, each row a net-effect glyph (green **+** / red **−** /
-  purple **≈**), dimmed + italic "· speculative" when tentative, and the binding's source
+  purple **≈**; `effectGlyph`, wrapped in `withTip` so a tap explains the effect without
+  navigating the row), dimmed + italic "· speculative" when tentative, and the binding's source
   pill (`bindingProvenancePill`, the *same* resolved binding shown on the drug panel, so a
   drug<->target link carries its source on both with no duplication); clicking a drug row
   focuses it via `info.onDrug`). Both make each **"Found in" region row clickable** (jumps

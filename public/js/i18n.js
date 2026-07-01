@@ -112,6 +112,9 @@
 
       "info.connection": "Connection",
       "info.projectionType": "Projection",
+      "info.dirOut": "Outgoing projection",
+      "info.dirIn": "Incoming projection",
+      "info.dirBoth": "Reciprocal projection (both directions)",
       "info.noSource": "NOSOURCE",
       "info.wikipedia": "Wikipedia ↗",
       "info.vidal": "Vidal ↗",
@@ -341,6 +344,9 @@
 
       "info.connection": "Connexion",
       "info.projectionType": "Projection",
+      "info.dirOut": "Projection sortante",
+      "info.dirIn": "Projection entrante",
+      "info.dirBoth": "Projection réciproque (deux sens)",
       "info.noSource": "SANS SOURCE",
       "info.wikipedia": "Wikipédia ↗",
       "info.vidal": "Vidal ↗",

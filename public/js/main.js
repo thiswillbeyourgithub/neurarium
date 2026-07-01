@@ -1761,12 +1761,15 @@ function createInfoPanel(data) {
   // A coloured effect glyph (+ boost / − block / ≈ modulate, in the effect's colour)
   // that replaces the plain colour bar at the head of a drug binding row, so the
   // action's direction reads at a glance. `label` (the localized effect name) is the
-  // accessible name; the glyph is otherwise decorative.
+  // accessible name. When there is a label the glyph is wrapped in a tap-to-explain
+  // tooltip (withTip): a tap on it shows the effect name and, crucially, stops the
+  // tap from bubbling to the clickable binding row (so on a phone tapping the "+/−"
+  // no longer navigates away, per the request); on desktop it also shows on hover.
   const effectGlyph = (effect, color, label) => {
     const g = el("span", "effect-glyph", EFFECT_GLYPHS[effect] || "·");
     g.style.color = color;
     if (label) g.setAttribute("aria-label", label);
-    return g;
+    return label ? withTip(g, label) : g;
   };
 
   // Format a Ki (nM) to ~3 significant figures without trailing noise (0.29, 2.7,
@@ -2036,6 +2039,7 @@ function createInfoPanel(data) {
   // (reciprocal / commissural). Drawn as inline SVG so the head is genuinely wide
   // and it stays crisp at any size (a Unicode arrowhead's shape varies by font).
   const SVG_NS = "http://www.w3.org/2000/svg";
+  const DIR_TIP = { out: "info.dirOut", in: "info.dirIn", both: "info.dirBoth" };
   const directionArrow = (color, dir) => {
     const svg = document.createElementNS(SVG_NS, "svg");
     svg.setAttribute("class", "conn-arrow");
@@ -2050,7 +2054,11 @@ function createInfoPanel(data) {
         : "M2,6 L14,6 L14,2 L24,8 L14,14 L14,10 L2,10 Z"); // "out" (default)
     path.setAttribute("fill", color || "#fff");
     svg.appendChild(path);
-    return svg;
+    // Tap-to-explain: a tap shows what the arrow's direction means and stops the tap
+    // bubbling to the clickable row it sits over, so on a phone tapping the arrow no
+    // longer navigates into the pathway/region (per the request); hover shows it on
+    // desktop too.
+    return withTip(svg, t(DIR_TIP[dir] || DIR_TIP.out));
   };
 
   // One pathway row, shared by every "connections" list (a structure's
@@ -2564,11 +2572,12 @@ function createInfoPanel(data) {
 
     /**
      * Populate the panel for a *circuit* (clicking a Circuits legend row / search):
-     * its name, a sourced description, the structures it loops through (deduped to
-     * bases, each clickable to jump to that region) and its member pathways (the
-     * projections with both endpoints in the loop, derived not stored), then its
-     * sources. Mirrors the structure panel's shape; the member-pathway + region
-     * rows reuse the shared pathwayRow / locationList so nothing is duplicated.
+     * its name (with the loop's source grade on the heading line), a sourced
+     * description, the structures it loops through (deduped to bases, each clickable
+     * to jump to that region) and its member pathways (the projections with both
+     * endpoints in the loop, derived not stored). Mirrors the structure panel's
+     * shape; the member-pathway + region rows reuse the shared pathwayRow /
+     * locationList so nothing is duplicated.
      */
     showCircuit(circuit) {
       body.innerHTML = "";
@@ -2619,9 +2628,10 @@ function createInfoPanel(data) {
     /**
      * Populate the panel for a *projection group* (clicking a Projections legend
      * row, in either colour mode): its name, a heading saying whether it groups by
-     * transmitter or by sign, a sourced description (baked + live-refreshed from
-     * Wikipedia) with the reference link, then its member pathways (the projections
-     * whose kind / sign matches the group, derived not stored) and its sources.
+     * transmitter or by sign (carrying the group's source grade), a sourced
+     * description (baked + live-refreshed from Wikipedia) with the reference link,
+     * then its member pathways (the projections whose kind / sign matches the group,
+     * derived not stored).
      */
     showProjectionGroup(group) {
       body.innerHTML = "";
