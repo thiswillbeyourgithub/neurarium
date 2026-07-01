@@ -97,6 +97,14 @@ Data + authoring (`tools/`):
   substring, writes a `verified` `nbn_sources` entry. Falls back to Stahl's drug
   **Class** line for a drug with no NbN line (newer drugs), marking it
   `nbn_nonstandard`. Idempotent.
+- `tools/fetch_ki.py` — parses the PDSP Ki Database CSV
+  (`sources/books/pdsp_ki/`, author-side) into per-drug binding affinities. Joins on
+  PDSP's HGNC gene symbol (name fallback), prefers human assays, cites one
+  representative CSV row per target (verified). `--drug X` previews; `--apply` writes
+  a `ki` onto every resolvable drug's existing bindings + adds the median-stronger
+  omitted targets as `affinity_only` bindings (idempotent). A curated `ALIAS` map
+  recovers drugs PDSP lists under a related compound (flagged so the viewer warns);
+  combos are skipped. See Drugs.
 - `tools/pdf_to_pages.py`: splits a PDF into one `<page>.md` per page (the per-page
   text the quote gate checks against); `uv run`, defaults to the Stahl corpus so
   anyone with the book can rebuild it. `--layout` for the heavier OCR engine.
@@ -162,7 +170,11 @@ Emitted data (`public/data/`):
   `nbn_nonstandard:true` when the value is Stahl's drug-class descriptor, not a formal NbN),
   `bindings[]` (each: `target`,
   `action`, optional `effect` override, optional `note{en,fr}` or "TODO", optional
-  `tentative`, optional `sources[{corpus,page,quote,provenance}]`),
+  `tentative`, optional `sources[{corpus,page,quote,provenance}]`, optional `ki`
+  (measured PDSP affinity: `{median,min,max,n_human,n_nonhuman, source:{corpus:pdsp_ki,
+  ki_id,value_nm,species,preparation,radioligand,reference,provenance, + mapped/
+  measured_as/relation when alias-borrowed}}`), optional `affinity_only:true` (a
+  PDSP target with a Ki but no known direction: no action/effect, panel-only)),
   `sources[{citation,url,provenance}]` (the drug-level Stahl citation), optional
   `wikipedia` (+ provenance), optional `structure_image` (vendored
   `data/molecules/<id>.svg`, set only when the file exists), `focusable` (false if
@@ -372,6 +384,9 @@ errors. Functions take loaded data as args (unit-testable). Six families:
   exact substring of the normalized cited page text. Page material is author-side
   (see CLAUDE.local.md); the quote check is skipped + warned on a clone without it.
   A quote not on its page = error (the gate that keeps the LLM extraction honest).
+  Also checks each binding's `ki`: its source corpus resolves, an `affinity_only`
+  binding carries a `ki`, and (author-side, skipped on a clone) the cited `ki_id` row
+  is really in the corpus CSV with that value (the PDSP analogue of the quote gate).
 - **Structure connectivity** (warns, never errors): isolated / inward-only /
   outward-only structures from the projection endpoints (`bidirectional` counts
   both ways). Source nuclei + olfactory bulb are expected outward-only, pituitary
@@ -911,7 +926,9 @@ key order, then "Other / non-aminergic"). The two sources are normalized to one 
   live-refreshed from Wikipedia, the classification facts ending in a **Source** row
   grading them, the region list or "Throughout the brain" for ubiquitous); a non-receptor
   target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the
-  type + system facts ending in a Source row, the region list). Both then carry an
+  type + system facts ending in a Source row, the region list). Both add a **PDSP Ki**
+  lookup link beside the reference (`appendLookupLink`, the fixed browse URL since PDSP
+  has no per-target search; the drug panel's EMA/FDA links use the same helper). Both then carry an
   **Interacting drugs** section (the drugs acting on this target, from `drugsByTarget`,
   grouped by primary drug category, each row a net-effect glyph (green **+** / red **−** /
   purple **≈**), dimmed + italic "· speculative" when tentative, and the binding's source
@@ -975,6 +992,18 @@ interactions literally stated; gaps left as TODO / no binding).
   grade is never blank). There is no standalone drug-level Source(s) block. Class +
   Nomenclature values are clickable (open search with a `class:` / `nbn:` filter). Drugs
   are searchable (name / category / target keywords).
+- **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`, see file map)
+  renders as a `kiChip` to the right of the source badge: the median value + `[min-max]`
+  range + human/non-human assay counts, then its own **verified** truth badge (tooltip =
+  the one representative assay). A non-human-only value is amber-tinted; an alias-borrowed
+  value (`ki.mapped`) carries a "⚠ measured as `<compound>`" warning naming what PDSP
+  actually measured (relation localized). `affinity_only` bindings (PDSP targets with a Ki
+  but no known direction) list as "affinity only, direction not established" with a neutral
+  glyph, no action/source pill, and never animate (excluded from `structureIds`/`flowKinds`
+  in `js/data.js`). A **combo** drug (name "A + B") leads with a warning box linking each
+  constituent we model as a standalone drug (`drug.combo`, derived from the name in
+  `js/data.js`); combos carry no Ki of their own. Ki backs the binding's provenance grade
+  (`_binding_grade`), so a measured Ki lifts a binding to `verified`.
 
 Extraction history: parallel agents from per-drug text; 44 drugs recovered from full-page
 OCR (`PageImages`); 5 stay unbound as genuinely non-receptor agents (lithium, disulfiram,
@@ -1067,6 +1096,14 @@ viewer then labels the value a class descriptor, not a formal NbN). Page files l
 `CLAUDE.local.md`), so the quote check is author-/hook-side and skipped (warned) on a clone
 without them.
 
+**Binding affinity (PDSP Ki, corpus #5).** `pdsp_ki` in `SOURCE_CORPORA` has no `pages_dir`
+(it is a single CSV of measured Ki values, not paged text) but a `csv` path instead. A
+binding's `ki.source` is `{corpus:pdsp_ki, ki_id, value_nm, ...}`: the analogue of a quote's
+page is the **Ki id** (a CSV row id). `_ki_annotation` validates it; `check_data.py`'s
+ki-row check confirms the cited `ki_id` really exists in the CSV with that value (author-side,
+skipped on a clone like the quote gate). A verified Ki backs the binding's grade
+(`_binding_grade`). Refresh with `fetch_ki.py --apply` after a fresh CSV download.
+
 **Descriptions.** Drugs, structures and non-receptor targets carry **no baked
 description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
 the shared `liveWikiDescription` helper over `js/wiki.js` `fetchWikiLead(url, lang)` (the
@@ -1092,8 +1129,10 @@ emitted as `meta.provenance_stats`. The About panel shows it (`buildAboutSourcin
 `check_data.py` re-confirms the tally is self-consistent. References (wikipedia links) are
 their own kind, not folded into the headline (a reference is a pointer, not a claim). The
 circuit + projection-group descriptions are validated for a known grade but not yet folded
-into the headline (all `llm` for now). Current: ~66% of 785 factual claims backed (bindings
-94%, NbN 97%; projections + classifications + region anatomy the gap). Descriptions are no
+into the headline (all `llm` for now). Current: ~93% of 988 factual claims backed (drug
+bindings ~98%, NbN 100%; projections + classifications + region anatomy the gap). Drug
+bindings dominate the count because a measured PDSP Ki both verifies a binding and adds the
+median-stronger omitted targets (`affinity_only`) as new verified claims. Descriptions are no
 longer a claim kind: every wiki-linked panel fetches the live Wikipedia lead instead of
 baking it.
 
@@ -1158,7 +1197,9 @@ baking it.
 2. Run `python tools/generate_data.py` to regenerate `public/data/`.
 3. Optionally run `python tools/check_data.py`.
 4. For new drugs/structures with links, run the fetch tools (network, idempotent, touch
-   only the new ones): `fetch_molecules.py`, `fetch_structure_images.py`.
+   only the new ones): `fetch_molecules.py`, `fetch_structure_images.py`. To refresh
+   binding affinities, run `fetch_ki.py --apply` (reads the local PDSP CSV; idempotent),
+   which rewrites `drugs_data.json`'s `ki` annotations + `affinity_only` bindings.
 5. Commit the generator change + the regenerated artifacts together.
 
 The legend is generated at runtime from the data, so it updates automatically.
