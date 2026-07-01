@@ -1863,10 +1863,11 @@ function createInfoPanel(data) {
 
   // Shared by the structure / receptor / drug / target views: an external reference
   // link, rendered only for an http(s) url so a stray field can never inject markup.
-  // A present link gets its provenance pill (how it was sourced, `provenance` from
-  // the data); a missing reference renders the label + the orange TODO pill (the
-  // "no source yet" case), so the gap is always visible like a source.
-  const appendWiki = (url, provenance) => {
+  // A present link carries no provenance pill: the description just above it already
+  // shows a "sourced" grade for the same Wikipedia source, so a second pill grading
+  // the link only repeated it. A missing reference still renders the label + the
+  // orange NOSOURCE pill, so the gap stays visible like a source.
+  const appendWiki = (url) => {
     const ok = typeof url === "string" && /^https?:\/\//i.test(url);
     const wrap = el("div", "info-wiki");
     if (ok) {
@@ -1875,10 +1876,6 @@ function createInfoPanel(data) {
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       wrap.appendChild(a);
-      // Name what this pill grades (the link to its left), so it doesn't read as
-      // grading the description or the drug. A present link defaults to "sourced"
-      // (a real reference), see generate_data.py WIKIPEDIA_DEFAULT_PROVENANCE.
-      wrap.appendChild(makeProvenancePill(provenance, t("info.wikiRefGrades")));
     } else {
       wrap.appendChild(el("span", null, t("info.reference")));
       wrap.appendChild(makeProvenancePill(null)); // no reference -> NOSOURCE pill
@@ -1952,15 +1949,15 @@ function createInfoPanel(data) {
 
   // The canonical "intro" block shared by EVERY node panel (structure / receptor
   // / target / drug): the baked description paragraph (when the node has one) with
-  // its provenance pill, then the Wikipedia reference link + pill *below* the text
-  // it backs, then the live-lead refresh. Centralizing it guarantees the same
+  // its provenance pill, then the Wikipedia reference link *below* the text it
+  // backs, then the live-lead refresh. Centralizing it guarantees the same
   // element order and the same sourcing treatment on every panel, instead of each
   // show*() re-composing the two and drifting (which is how the link came to sit
   // above the description on some panels and below it on the drug one). `description`
   // is the baked text (omit for a structure/target, which carry none); a present
   // wiki link with no baked description still gains the live lead *above* it.
   const appendReference = ({
-    url, provenance, description = "", descriptionProvenance = "",
+    url, description = "", descriptionProvenance = "",
     descriptionExtra = "",
   } = {}) => {
     let paragraph = null;
@@ -1974,7 +1971,7 @@ function createInfoPanel(data) {
       body.appendChild(paragraph);
     }
     // Link goes after the description so the reference sits below the text it backs.
-    const wiki = appendWiki(url, provenance);
+    const wiki = appendWiki(url);
     liveWikiDescription(url, paragraph
       ? { paragraph, bakedText: description,
           bakedSourced: descriptionProvenance === "sourced" }
@@ -2252,9 +2249,7 @@ function createInfoPanel(data) {
       // External reference (Wikipedia) + its live lead summary, via the shared
       // appendReference (structures carry no baked description, so the live lead,
       // when it arrives, appears above the link).
-      appendReference({
-        url: structure.wikipedia, provenance: structure.wikipedia_provenance,
-      });
+      appendReference({ url: structure.wikipedia });
 
       // Source grade backing this region's anatomy (existence / group / position),
       // so even a structure shows a graded source, not "no source". Added before the
@@ -2309,8 +2304,7 @@ function createInfoPanel(data) {
       body.appendChild(el("div", "info-group", receptor.familyLabel));
 
       const { wiki: recWiki } = appendReference({
-        url: receptor.wikipedia, provenance: receptor.wikipedia_provenance,
-        description: receptor.description,
+        url: receptor.wikipedia, description: receptor.description,
       });
       // PDSP Ki database lookup, beside the reference (binding-affinity data for
       // this receptor; a browse link, since PDSP has no per-target search URL).
@@ -2373,9 +2367,7 @@ function createInfoPanel(data) {
 
       // Reference + live lead (targets carry no baked description), via the shared
       // appendReference, so the link sits under any live lead like every panel.
-      const { wiki: tgtWiki } = appendReference({
-        url: target.wikipedia, provenance: target.wikipediaProvenance,
-      });
+      const { wiki: tgtWiki } = appendReference({ url: target.wikipedia });
       // PDSP covers transporters / enzymes / ion channels too, so the same lookup.
       appendLookupLink(tgtWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
 
@@ -2466,8 +2458,7 @@ function createInfoPanel(data) {
       // Wikipedia link below it, via the shared appendReference. A "sourced"
       // description is the WP lead (CC BY-SA); an "llm" one a mechanism synthesis.
       const { wiki } = appendReference({
-        url: drug.wikipedia, provenance: drug.wikipedia_provenance,
-        description: drug.description,
+        url: drug.wikipedia, description: drug.description,
         descriptionProvenance: drug.descriptionProvenance,
         descriptionExtra: drug.descriptionProvenance === "sourced"
           ? t("info.descFromWikipedia") : "",
@@ -2625,8 +2616,7 @@ function createInfoPanel(data) {
       // lead refresh (upgrades the paragraph to the current WP lead when reachable),
       // via the same shared appendReference every panel uses.
       appendReference({
-        url: group.wikipedia, provenance: group.wikipedia_provenance,
-        description: group.description,
+        url: group.wikipedia, description: group.description,
         descriptionProvenance: group.classification_provenance,
       });
 
