@@ -952,7 +952,6 @@
         color: var(--text);
         margin: 0 0 12px;
       }
-      .info-sources h3,
       .info-connections h3,
       .info-bindings h3,
       .info-locations h3 {
@@ -962,7 +961,6 @@
         color: var(--muted);
         margin: 0 0 6px;
       }
-      .info-sources ul,
       .info-connections ul,
       .info-bindings ul,
       .info-locations ul { list-style: none; margin: 0; padding: 0; }
@@ -1025,13 +1023,6 @@
       /* The "Throughout the brain" line for a ubiquitous receptor carries its own
          grade pill (one expression claim), so lay it out like a location row. */
       .info-desc-pilled { display: flex; align-items: center; gap: 6px; }
-      .info-sources li {
-        font-size: 12px;
-        line-height: 1.4;
-        color: var(--text);
-        margin-bottom: 8px;
-      }
-      .info-sources a { color: var(--accent-bright); text-decoration: underline; }
       /* Source / reference provenance pills: one small pill per source saying how
          trustworthy its attribution is (grey ? = LLM-only, yellow ~ = the LLM had
          the source, green ✓ = quote-checked), plus the orange TODO pill for the

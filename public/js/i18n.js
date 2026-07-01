@@ -112,8 +112,6 @@
 
       "info.connection": "Connection",
       "info.projectionType": "Projection",
-      "info.sources": "Sources",
-      "info.source": "Source",
       "info.noSource": "NOSOURCE",
       "info.wikipedia": "Wikipedia ↗",
       "info.vidal": "Vidal ↗",
@@ -343,8 +341,6 @@
 
       "info.connection": "Connexion",
       "info.projectionType": "Projection",
-      "info.sources": "Sources",
-      "info.source": "Source",
       "info.noSource": "SANS SOURCE",
       "info.wikipedia": "Wikipédia ↗",
       "info.vidal": "Vidal ↗",

@@ -1983,46 +1983,6 @@ function createInfoPanel(data) {
     return { paragraph, wiki };
   };
 
-  // Shared by the connection + drug views: the source list. Each citation is a
-  // link for a verified http(s) url (plain text otherwise) followed by its
-  // provenance pill (grey/yellow/green, grading how it was sourced; see
-  // makeProvenancePill), so a missing url no longer reads as "TODO" (the pill
-  // carries the real status).
-  const appendSources = (sources) => {
-    if (!sources || !sources.length) return;
-    const wrap = el("div", "info-sources");
-    const h3 = el(
-      "h3", null, sources.length > 1 ? t("info.sources") : t("info.source"));
-    wrap.appendChild(h3);
-    const corpora = (data.meta && data.meta.sourceCorpora) || {};
-    const ul = el("ul");
-    for (const s of sources) {
-      const li = el("li");
-      // A quote-level source (corpus/page) carries no citation/url of its own;
-      // build a readable bibliography line from the corpus citation + page, and put
-      // its verbatim quote in the provenance pill's tooltip.
-      const corpus = s.corpus ? corpora[s.corpus] : null;
-      const citationText = s.citation
-        || (corpus ? (s.page != null
-            ? `${corpus.citation} p. ${s.page}`
-            : corpus.citation)
-          : "");
-      if (typeof s.url === "string" && /^https?:\/\//i.test(s.url)) {
-        const a = el("a", null, citationText);
-        a.href = s.url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        li.appendChild(a);
-      } else {
-        li.appendChild(document.createTextNode(citationText));
-      }
-      li.appendChild(makeProvenancePill(
-        s.provenance, s.quote ? sourceTipLine(s) : undefined));
-      ul.appendChild(li);
-    }
-    wrap.appendChild(ul);
-    body.appendChild(wrap);
-  };
 
   // Shared by the receptor + target views: the drugs that act on this target, so
   // you can go from a target to every drug touching it. Grouped by primary drug
@@ -2137,11 +2097,10 @@ function createInfoPanel(data) {
       // etc.), stating plainly what this node is (a projection / neuron pathway).
       body.appendChild(el("div", "info-group", t("info.projectionType")));
 
-      // The pathway's one source grade (strongest over its citations), shown again
-      // on each data row below so every claim (route, transmitter, description)
-      // carries its own badge, rather than a single block that leaves it unclear
-      // which node it backs. The tooltip lists the citation(s); the readable
-      // bibliography still follows at the bottom (appendSources).
+      // The pathway's one source grade (strongest over its citations), shown on
+      // each data row below so every claim (route, transmitter, description) carries
+      // its own badge, rather than a single block at the bottom that leaves it
+      // unclear which node it backs. The tooltip lists the citation(s).
       const provPill = () =>
         makeProvenancePill(proj.provenance, sourcesTip(proj.sources));
 
@@ -2177,8 +2136,6 @@ function createInfoPanel(data) {
         p.appendChild(provPill());
         body.appendChild(p);
       }
-
-      appendSources(proj.sources);
     },
 
     /**
@@ -2190,10 +2147,20 @@ function createInfoPanel(data) {
     showStructure(structure) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", structure.name));
-      body.appendChild(el(
+      // The anatomy classification grade (existence / group / position) rides the
+      // group line it actually grades, not a broad "Source" row at the bottom (a
+      // source always sits on the specific node it backs).
+      const structGroup = el(
         "div", "info-group",
-        data.meta.groupLabels[structure.group] || structure.group,
-      ));
+        data.meta.groupLabels[structure.group] || structure.group);
+      if (structure.classification_provenance) {
+        structGroup.appendChild(document.createTextNode(" "));
+        structGroup.appendChild(makeProvenancePill(
+          structure.classification_provenance,
+          structure.sources && structure.sources.length
+            ? sourcesTip(structure.sources) : undefined));
+      }
+      body.appendChild(structGroup);
 
       // Wikipedia illustration (the lead rotating-brain GIF, else an SVG diagram or
       // an infobox image; resolved by tools/fetch_structure_images.py). These can be
@@ -2255,19 +2222,6 @@ function createInfoPanel(data) {
       // when it arrives, appears above the link).
       appendReference({ url: structure.wikipedia });
 
-      // Source grade backing this region's anatomy (existence / group / position),
-      // so even a structure shows a graded source, not "no source". Added before the
-      // no-connections early return so it shows for an unconnected region too.
-      if (structure.classification_provenance) {
-        const facts = el("div", "info-facts");
-        addFactRow(facts, t("info.source"), "", null,
-          { pill: makeProvenancePill(
-              structure.classification_provenance,
-              structure.sources && structure.sources.length
-                ? sourcesTip(structure.sources) : undefined) });
-        body.appendChild(facts);
-      }
-
       // Pathways with this structure at either end, in the data's order.
       const conns = data.projections.filter(
         (p) => p.from === structure.id || p.to === structure.id);
@@ -2315,20 +2269,24 @@ function createInfoPanel(data) {
       appendLookupLink(recWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
 
       // Classification facts as label / value rows; the "effect" value carries the
-      // sign swatch so the colour matches the dots + legend row.
+      // sign swatch so the colour matches the dots + legend row. The mechanism grade
+      // (classification_provenance) backs every one of these claims, so each row
+      // carries its OWN badge on the right rather than a single broad "Source" row
+      // below (a source should always sit on the specific node it grades). A fresh
+      // pill per row (a DOM node lives in one place); same grade + tooltip on each.
+      const classPill = () => makeProvenancePill(
+        receptor.classification_provenance,
+        receptor.sources && receptor.sources.length
+          ? sourcesTip(receptor.sources) : undefined);
       const facts = el("div", "info-facts");
-      addFactRow(facts, t("receptor.neurotransmitter"), receptor.neurotransmitter);
-      addFactRow(facts, t("receptor.type"), receptor.classLabel);
-      addFactRow(facts, t("receptor.effect"), receptor.signLabel, receptor.signColor);
-      addFactRow(facts, t("receptor.synaptic"), receptor.synapticLabel);
-      // Source grade backing the classification facts above (so "why is it
-      // excitatory" carries a provenance pill like every other node). The grade is
-      // data (classification_provenance); the read-more Wikipedia link is separate.
-      addFactRow(facts, t("info.source"), "", null,
-        { pill: makeProvenancePill(
-            receptor.classification_provenance,
-            receptor.sources && receptor.sources.length
-              ? sourcesTip(receptor.sources) : undefined) });
+      addFactRow(facts, t("receptor.neurotransmitter"), receptor.neurotransmitter,
+        null, { pill: classPill() });
+      addFactRow(facts, t("receptor.type"), receptor.classLabel,
+        null, { pill: classPill() });
+      addFactRow(facts, t("receptor.effect"), receptor.signLabel, receptor.signColor,
+        { pill: classPill() });
+      addFactRow(facts, t("receptor.synaptic"), receptor.synapticLabel,
+        null, { pill: classPill() });
       body.appendChild(facts);
 
       // Where it is expressed.
@@ -2375,18 +2333,20 @@ function createInfoPanel(data) {
       // PDSP covers transporters / enzymes / ion channels too, so the same lookup.
       appendLookupLink(tgtWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
 
+      // The classification grade (type / system claims) sits on each fact's OWN row
+      // rather than a single broad "Source" row below, so a source always grades the
+      // specific node beside it. A fresh pill per row; only when the row has a value
+      // (so an empty System row still drops instead of showing a bare pill).
+      const tgtPill = () => makeProvenancePill(
+        target.classificationProvenance,
+        target.sources && target.sources.length
+          ? sourcesTip(target.sources) : undefined);
+      const withPill = (v) => (v && target.classificationProvenance ? { pill: tgtPill() } : {});
       const facts = el("div", "info-facts");
-      addFactRow(facts, t("receptor.type"), target.typeLabel, target.swatchColor);
-      addFactRow(facts, t("receptor.system"), target.systemLabel);
-      // Source grade backing the type / system / region claims above (so the panel
-      // never shows "no source": even an llm grade is a graded source).
-      if (target.classificationProvenance) {
-        addFactRow(facts, t("info.source"), "", null,
-          { pill: makeProvenancePill(
-              target.classificationProvenance,
-              target.sources && target.sources.length
-                ? sourcesTip(target.sources) : undefined) });
-      }
+      addFactRow(facts, t("receptor.type"), target.typeLabel, target.swatchColor,
+        withPill(target.typeLabel));
+      addFactRow(facts, t("receptor.system"), target.systemLabel, null,
+        withPill(target.systemLabel));
       if (facts.childElementCount) body.appendChild(facts);
 
       // Where it sits (same "Found in" list as a receptor; empty -> no footprint).
@@ -2613,7 +2573,16 @@ function createInfoPanel(data) {
     showCircuit(circuit) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", circuit.name));
-      body.appendChild(el("div", "info-group", t("circuit.heading")));
+      // The circuit's source grade sits on its identity line, not a "Sources" block
+      // below the member lists (which would read as grading the members, not the
+      // circuit). Tooltip lists the citation(s).
+      const circuitGroup = el("div", "info-group", t("circuit.heading"));
+      if (circuit.provenance) {
+        circuitGroup.appendChild(document.createTextNode(" "));
+        circuitGroup.appendChild(makeProvenancePill(
+          circuit.provenance, sourcesTip(circuit.sources)));
+      }
+      body.appendChild(circuitGroup);
       if (circuit.description) {
         body.appendChild(el("p", "info-desc", circuit.description));
       }
@@ -2645,8 +2614,6 @@ function createInfoPanel(data) {
       const members = data.projections.filter(
         (p) => idSet.has(p.from) && idSet.has(p.to));
       appendPathwayList(t("circuit.pathways"), members);
-
-      appendSources(circuit.sources);
     },
 
     /**
@@ -2659,9 +2626,18 @@ function createInfoPanel(data) {
     showProjectionGroup(group) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", group.name));
-      body.appendChild(el(
+      // The group's source grade rides its identity line, not a "Sources" block at
+      // the bottom (which after the member lists would read as grading the members).
+      // Tooltip lists the citation(s); the description keeps its own grade below.
+      const groupGroup = el(
         "div", "info-group",
-        group.mode === "sign" ? t("group.signHeading") : t("group.kindHeading")));
+        group.mode === "sign" ? t("group.signHeading") : t("group.kindHeading"));
+      if (group.provenance) {
+        groupGroup.appendChild(document.createTextNode(" "));
+        groupGroup.appendChild(makeProvenancePill(
+          group.provenance, sourcesTip(group.sources)));
+      }
+      body.appendChild(groupGroup);
 
       // Description (LLM-authored) + the Wikipedia reference below it, then the live
       // lead refresh (upgrades the paragraph to the current WP lead when reachable),
@@ -2707,8 +2683,6 @@ function createInfoPanel(data) {
           body.appendChild(wrap);
         }
       }
-
-      appendSources(group.sources);
     },
 
     /** Register the handler run when a structure-panel connection row is clicked. */

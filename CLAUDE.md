@@ -813,14 +813,16 @@ Views:
   jumping to + isolating that structure via `endpointEl` -> `onStructurePick`), kind +
   neurotransmitter, description. The route, the kind/transmitter line and the
   description each carry the pathway's own provenance badge (`proj.provenance`, the
-  citations in its tooltip) so every node shows its grade, then the readable
-  bibliography (`sources`: http(s) url as link else plain text; a provenance pill per
-  citation). Arrow picking (`pickArrowAt`) beats the region behind.
-- **structure** (`showStructure`): name, group heading, a Reference row (a Wikipedia
-  link, or `NOSOURCE` when absent), then (when the link resolves) the live Wikipedia lead
-  as a `sourced` description (structures carry no baked description; fetch-only), a
-  **Source** row grading the region's anatomy (`classification_provenance`), and the
-  pathway list. Each connection row: a bold colour-filled direction arrow
+  citations in its tooltip) so every node shows its grade beside the claim it backs;
+  there is no separate "Sources" block at the bottom (a source only ever grades a
+  single node, so it rides that node's row). Arrow picking (`pickArrowAt`) beats the
+  region behind.
+- **structure** (`showStructure`): name, a group heading that carries the region's
+  anatomy grade pill (`classification_provenance`, the claim that line names), a
+  Reference row (a Wikipedia link, or `NOSOURCE` when absent), then (when the link
+  resolves) the live Wikipedia lead as a `sourced` description (structures carry no
+  baked description; fetch-only), and the pathway list. Each connection row: a bold
+  colour-filled direction arrow
   (`directionArrow`, an inline SVG with a wide pointy head, in the pathway colour;
   out / in / both relative to this structure, drawn big for legibility), the
   other endpoint, and the pathway's summary pill
@@ -933,13 +935,18 @@ a circuit's are the projections with both endpoints in its set, a group's are th
 projections whose `kind`/`sign` matches `key`. `js/data.js` localizes both and indexes
 the groups by `${mode}:${key}` (`projectionGroupsByKey`).
 
-- `showCircuit`: the loop's description, its structures (deduped to bases, each clickable
-  to jump via `onStructure`), its member pathways, its sources.
-- `showProjectionGroup`: a by-transmitter / by-effect heading, the description (live-
-  refreshed from Wikipedia), the reference link, the member pathways, then (kind-mode
-  only) a **Drugs acting on this system** list = the focusable drugs whose `flowKinds`
-  include this kind (the mirror of the drug panel's Projections affected; each row jumps
-  to that drug via `onDrug`), and the sources.
+- `showCircuit`: a "Functional circuit" heading carrying the loop's own source pill
+  (`circuit.provenance`, citations in its tooltip), the loop's description, its structures
+  (deduped to bases, each clickable to jump via `onStructure`), and its member pathways.
+- `showProjectionGroup`: a by-transmitter / by-effect heading carrying the group's own
+  source pill (`group.provenance`, citations in its tooltip), the description (live-
+  refreshed from Wikipedia, its own grade pill), the reference link, the member pathways,
+  then (kind-mode only) a **Drugs acting on this system** list = the focusable drugs whose
+  `flowKinds` include this kind (the mirror of the drug panel's Projections affected; each
+  row jumps to that drug via `onDrug`).
+- No panel carries a broad "Sources" block at the bottom: a source only ever grades a
+  single node, so each grade rides the specific row/heading it backs (`appendSources`
+  was retired).
 - Both reuse a shared `pathwayRow` / `appendPathwayList` helper (also used by
   `showStructure`), so the row markup (the bold `directionArrow` + label + summary
   pill + jump) lives once.
@@ -976,13 +983,14 @@ sources are normalized to one shape in `js/data.js`.
   `GEM_DOT_SIZE`), reused by the drug animation. Stopped off the selection state via an
   `onIsolate` watcher (`createReceptorMarkers.matches`).
 - Panels: a receptor opens `showReceptor` (system, Wikipedia link, the description
-  live-refreshed from Wikipedia, the classification facts ending in a **Source** row
-  grading *the mechanism*, then the "Found in" region list, each region carrying its
-  **own** expression-provenance pill (default `llm`: which regions express a receptor
-  is graded per region, separate from the mechanism, see Source provenance), or a
-  single pilled "Throughout the brain" for ubiquitous); a non-receptor
-  target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the
-  type + system facts ending in a Source row, the region list). Both add a **PDSP Ki**
+  live-refreshed from Wikipedia, then the classification facts where **each** fact row
+  (neurotransmitter / type / effect / synaptic site) carries the *mechanism* grade pill
+  on its right, not a single "Source" row below; then the "Found in" region list, each
+  region carrying its **own** expression-provenance pill (default `llm`: which regions
+  express a receptor is graded per region, separate from the mechanism, see Source
+  provenance), or a single pilled "Throughout the brain" for ubiquitous); a non-receptor
+  target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the type +
+  system facts each carrying their classification grade pill, the region list). Both add a **PDSP Ki**
   lookup link beside the reference (`appendLookupLink`, the fixed browse URL since PDSP
   has no per-target search; the drug panel's EMA/FDA links use the same helper). Both then carry an
   **Interacting drugs** section (the drugs acting on this target, from `drugsByTarget`,
@@ -1181,9 +1189,10 @@ https://*.wikipedia.org` CSP allowance.
 
 **Presentation.** `makeProvenancePill(level)` -> a `.src-prov-<level>` pill (`.src-todo` for
 the none case) with the glyph + `info.prov*` tooltip via `withTip`; colours are CSS.
-`appendSources` adds a pill per citation; `appendWiki(url)` renders the reference-link row
-(a present link carries no pill, since the description above it already grades the same
-Wikipedia source; a missing link shows the `NOSOURCE` pill). Each pill's tooltip explains its
+Each node's grade pill rides that node's own row/heading (a fact row, a route/kind line,
+a group/subtitle line), never a separate bottom "Sources" block. `appendWiki(url)` renders
+the reference-link row (a present link carries no pill, since the description above it
+already grades the same Wikipedia source; a missing link shows the `NOSOURCE` pill). Each pill's tooltip explains its
 own grade and the About block carries the full key, so there is no separate blanket "?" caveat.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every **node** + reference to its
