@@ -94,7 +94,9 @@ Data + authoring (`tools/`):
   first; reuses `check_data.py`'s `normalize_for_match`; idempotent).
 - `tools/apply_nbn_sources.py` — sources each drug's NbN line (Stahl prints it
   verbatim), no agent/judge: greps the line, confirms the dataset `nbn` is a
-  substring, writes a `verified` `nbn_sources` entry. Idempotent.
+  substring, writes a `verified` `nbn_sources` entry. Falls back to Stahl's drug
+  **Class** line for a drug with no NbN line (newer drugs), marking it
+  `nbn_nonstandard`. Idempotent.
 - `tools/pdf_to_pages.py`: splits a PDF into one `<page>.md` per page (the per-page
   text the quote gate checks against); `uv run`, defaults to the Stahl corpus so
   anyone with the book can rebuild it. `--layout` for the heavier OCR engine.
@@ -156,7 +158,9 @@ Emitted data (`public/data/`):
   `classification_provenance`, optional `description{en,fr}` + `wikipedia` (+
   provenance). Empty locations + no description = a deliberate stub (listed, not focusable).
 - `drugs.jsonl` — one drug/line: `id`, `name` (technical), `categories`, optional
-  `nbn{en,fr}` (+ `nbn_sources[{corpus,page,quote,provenance}]`), `bindings[]` (each: `target`,
+  `nbn{en,fr}` (+ `nbn_sources[{corpus,page,quote,provenance}]`, + optional
+  `nbn_nonstandard:true` when the value is Stahl's drug-class descriptor, not a formal NbN),
+  `bindings[]` (each: `target`,
   `action`, optional `effect` override, optional `note{en,fr}` or "TODO", optional
   `tentative`, optional `sources[{corpus,page,quote,provenance}]`),
   `sources[{citation,url,provenance}]` (the drug-level Stahl citation), optional
@@ -1057,7 +1061,9 @@ LLM judge supports), then `check_data.py`'s source-quote check confirms the quot
 on the page (the backstop against a hallucinated quote). The **NbN** is simpler:
 `apply_nbn_sources.py` greps Stahl's verbatim "Neuroscience-based Nomenclature: <value>"
 line and confirms the dataset `nbn` is a substring (a programmatic check, stronger than a
-judge for this field). Page files live under the author-side source tree (see
+judge for this field); for a newer drug Stahl gives no NbN line, it falls back to the drug
+**Class** line under the same substring gate and marks the entry `nbn_nonstandard` (the
+viewer then labels the value a class descriptor, not a formal NbN). Page files live under the author-side source tree (see
 `CLAUDE.local.md`), so the quote check is author-/hook-side and skipped (warned) on a clone
 without them.
 

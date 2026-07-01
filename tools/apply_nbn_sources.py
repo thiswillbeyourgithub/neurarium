@@ -14,6 +14,15 @@ an ``nbn`` but no ``nbn_sources`` yet, it:
   LLM judge for this field;
 * writes ``{corpus: stahl, page, quote, provenance: verified}`` onto ``nbn_sources``.
 
+**Class-line fallback.** A few newer drugs (e.g. brexpiprazole, buprenorphine,
+lumateperone) have no ``Neuroscience-based Nomenclature:`` line in Stahl at all; the
+book gives only a drug-**Class** descriptor. For those the same verbatim-substring
+gate is applied to the **Class** line instead, and the drug is marked
+``nbn_nonstandard: true`` so the viewer can show the value honestly as a class
+descriptor rather than a formal NbN. The fallback fires only when the formal NbN
+line is truly absent, so a real drift on a drug that *does* have an NbN line still
+reports as a mismatch rather than being papered over by its Class line.
+
 This is the local twin of ``check_data.py``'s source-quote gate (which then
 re-confirms the stored quote is on the page). Idempotent: a drug already carrying
 ``nbn_sources`` is left untouched. Stdlib only; authoring helper, not served.
@@ -47,6 +56,10 @@ _ROW = re.compile(r"^\|\s*\d+\s*\|\s*(.+?)\s*\|\s*\[(\d+)-(\d+)\]")
 # onward) is stored verbatim, so whatever raw characters it holds still pass the
 # verbatim check (which reads the same page file).
 _NBN = re.compile(r"(Neuroscience-based Nomenclature:.*?)\s*$", re.IGNORECASE)
+# The drug-Class heading (Stahl's PDF->Markdown emits it as a bold heading), used as
+# the fallback source for a drug that has no NbN line. The value is the first
+# non-empty content line under the heading (a "- <descriptor>" bullet).
+_CLASS_HEAD = re.compile(r"^#+\s*\*\*Class\*\*", re.IGNORECASE)
 
 
 def _norm(name):
@@ -79,6 +92,26 @@ def find_nbn_line(start, end):
     return None, None
 
 
+def find_class_line(start, end):
+    """Return (page, verbatim_class_descriptor) for the first drug-Class line in
+    [start, end], or (None, None). Used only as the fallback for a drug with no NbN
+    line. The descriptor is the first non-empty content line under the "Class"
+    heading, stripped of its list bullet + emphasis markers but still a contiguous
+    span of the page text (so the verbatim check passes)."""
+    for p in range(start, end + 1):
+        f = PAGES / f"{p}.md"
+        if not f.exists():
+            continue
+        lines = f.read_text(encoding="utf-8").splitlines()
+        for i, ln in enumerate(lines):
+            if _CLASS_HEAD.match(ln):
+                for nxt in lines[i + 1:i + 8]:
+                    body = nxt.strip().lstrip("-").strip().strip("*").strip()
+                    if body:
+                        return p, body
+    return None, None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -102,19 +135,28 @@ def main():
             misses.append(f"{d['id']}: no page range")
             continue
         page, quote = find_nbn_line(rng[0], rng[1])
+        nonstandard = False
+        if page is None:
+            # No formal NbN line: fall back to Stahl's drug-Class descriptor and
+            # flag the entry non-standard (see module docstring).
+            page, quote = find_class_line(rng[0], rng[1])
+            nonstandard = True
         if page is None:
             no_line += 1
-            misses.append(f"{d['id']}: no 'Neuroscience-based Nomenclature' line in pp.{rng[0]}-{rng[1]}")
+            misses.append(f"{d['id']}: no NbN or Class line in pp.{rng[0]}-{rng[1]}")
             continue
         # The dataset's NbN value must appear in the captured line, else the line
         # does not actually back this drug's stored NbN (author drift / wrong line).
         nbn_en = nbn.get("en") if isinstance(nbn, dict) else nbn
         if normalize_for_match(nbn_en) not in normalize_for_match(quote):
             mismatch += 1
-            misses.append(f"{d['id']}: nbn {nbn_en!r} not in line {quote!r}")
+            src = "Class" if nonstandard else "NbN"
+            misses.append(f"{d['id']}: nbn {nbn_en!r} not in {src} line {quote!r}")
             continue
         d["nbn_sources"] = [{"corpus": "stahl", "page": page,
                              "quote": quote, "provenance": "verified"}]
+        if nonstandard:
+            d["nbn_nonstandard"] = True
         applied += 1
 
     print(f"applied {applied}, skipped {skipped} (already sourced), "

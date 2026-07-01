@@ -4454,8 +4454,16 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     }
     if drug.get("nbn"):
         out["nbn"] = drug["nbn"]
+        # Newer drugs Stahl has not assigned a formal Neuroscience-based
+        # Nomenclature to carry `nbn_nonstandard`: their nomenclature value is
+        # Stahl's drug-*class* descriptor (sourced from the "Class" line, not an
+        # "Neuroscience-based Nomenclature:" line), so the viewer can flag it as
+        # non-standard. Set programmatically by apply_nbn_sources.py's fallback.
+        if drug.get("nbn_nonstandard"):
+            out["nbn_nonstandard"] = True
         # The NbN is quote-sourced like a binding: Stahl prints a verbatim
-        # "Neuroscience-based Nomenclature: ..." line on each drug's first page.
+        # "Neuroscience-based Nomenclature: ..." line on each drug's first page
+        # (the Class line for a non-standard entry).
         nbn_sources = _quote_sources(drug.get("nbn_sources"), f"Drug {drug['id']!r} nbn")
         if nbn_sources:
             out["nbn_sources"] = nbn_sources
