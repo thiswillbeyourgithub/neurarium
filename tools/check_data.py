@@ -491,15 +491,21 @@ def print_coverage(stats):
 
     def row(label, c, pct=None, suffix=""):
         pct = backed_pct(c) if pct is None else pct
-        print(f"    {label:<19}{c.get('verified', 0):>9}{c.get('sourced', 0):>9}"
-              f"{c.get('unverified', 0):>11}{c.get('total', 0):>7}{pct:>7}%{suffix}")
+        u = c.get("unverified", 0)
+        s = c.get("sourced", 0)
+        sv = s + c.get("verified", 0)  # sourced-or-verified = the backed count (S ⊆ S+V)
+        print(f"    {label:<19}{u:>6}{s:>6}{sv:>6}{c.get('total', 0):>8}{pct:>7}%{suffix}")
 
-    print("\n  coverage by kind (each claim reduced to its strongest grade):")
-    print(f"    {'kind':<19}{'verified':>9}{'sourced':>9}{'unverified':>11}"
-          f"{'total':>7}{'backed':>8}")
+    # Grade columns: U = unverified (llm, or no source), S = sourced (document-backed
+    # but not quote-checked), S+V = sourced-or-verified (the backed count; S is a
+    # subset of it). S is ~always 0 on the claim kinds because the sourcing pipeline
+    # goes straight from llm to quote-verified; it shows up only on Wikipedia refs.
+    print("\n  coverage by kind (each claim reduced to its strongest grade;")
+    print("  U=unverified  S=sourced  S+V=sourced-or-verified [=backed]):")
+    print(f"    {'kind':<19}{'U':>6}{'S':>6}{'S+V':>6}{'total':>8}{'backed':>8}")
     for kind in claim_kinds:
         row(kind, by.get(kind, {}))
-    print(f"    {'-' * 59}")
+    print(f"    {'-' * 53}")
     row("all claims", a, pct=a.get("pct_backed", 0))
     if by.get("references"):
         row("references", by["references"], suffix="   (pointers, not in headline)")
