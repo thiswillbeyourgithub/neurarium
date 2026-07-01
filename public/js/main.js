@@ -2535,7 +2535,15 @@ function createInfoPanel(data) {
         acts.appendChild(el("p", "info-desc", t("drug.noTargets")));
       } else {
         const ul = el("ul");
-        for (const b of drug.bindings) {
+        // Strongest-affinity first: order by the binding's representative Ki
+        // (median, the headline number on the chip) ascending, so the target a
+        // drug grips hardest tops the list; bindings with no measured Ki sink to
+        // the bottom. Sort a copy (leave the authored array untouched); a stable
+        // sort keeps the authored order within each tier and among the no-Ki rows.
+        const kiOf = (b) =>
+          b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
+        const bindings = [...drug.bindings].sort((a, b) => kiOf(a) - kiOf(b));
+        for (const b of bindings) {
           // If this binding's target is browsable on its own (in the merged
           // "Receptors & targets" list and focusable), make the row jump to it.
           const tgt = targetById.get(b.target);
