@@ -133,14 +133,76 @@ def parse_ki(val):
         return None
 
 
-def load_rows(drug):
-    want = norm(drug)
-    out = []
-    with open(CSV_PATH, newline="", encoding="utf-8", errors="replace") as f:
-        for row in csv.DictReader(f):
-            if norm(row.get(COL_LIGAND)) == want:
-                out.append(row)
-    return out
+# --- resolving our drug -> PDSP rows ----------------------------------------
+# Curated alias map for drugs PDSP lists under a chemically-related name (an
+# enantiomer, salt, prodrug or active metabolite). Each maps our drug id -> the
+# EXACT PDSP ligand name(s) to borrow, plus the chemical relation and a human note.
+# EVERY aliased match is flagged so the viewer warns which compound the Ki was
+# actually measured on. Deutetrabenazine / valbenazine are deliberately NOT here:
+# PDSP has only a single distant `tetrabenazine` assay, too weak to map honestly.
+ALIAS = {
+    "paliperidone": (["9-OH-risperidone"], "identity",
+                     "paliperidone is 9-hydroxyrisperidone"),
+    "esketamine": (["(S)-(+)-ketamine"], "enantiomer",
+                   "the S-enantiomer of ketamine"),
+    "amphetamine_d": (["Amphetamine,(+)", "(+)-Amphetamine"], "identity",
+                      "(+)-amphetamine (dextroamphetamine)"),
+    "amphetamine_dl": (["Amphetamine"], "identity", "amphetamine"),
+    "methylphenidate_dl": (["METHYLPHENIDATE"], "identity",
+                           "racemic methylphenidate"),
+    "moclobemide": (["moclobemide, MCL"], "identity", "moclobemide"),
+    "selegiline": (["selegiline, SEL"], "identity", "selegiline"),
+    "levomilnacipran": (["Milnacipran"], "racemate",
+                        "racemic milnacipran (levomilnacipran is one enantiomer)"),
+    "zopiclone": (["eszopiclone"], "enantiomer", "eszopiclone (the S-enantiomer)"),
+    "quazepam": (["2-Oxoquazepam"], "metabolite",
+                 "2-oxoquazepam, a quazepam metabolite"),
+    "lofexidine": (["Levlofexidine"], "enantiomer", "levlofexidine"),
+    "lisdexamfetamine": (["Amphetamine,(+)", "(+)-Amphetamine"], "prodrug",
+                         "dextroamphetamine, its active moiety"),
+    "serdexmethylphenidate": (["METHYLPHENIDATE"], "prodrug",
+                              "methylphenidate, its active moiety"),
+}
+
+_ALL_ROWS = None
+
+
+def all_rows():
+    global _ALL_ROWS
+    if _ALL_ROWS is None:
+        with open(CSV_PATH, newline="", encoding="utf-8", errors="replace") as f:
+            _ALL_ROWS = list(csv.DictReader(f))
+    return _ALL_ROWS
+
+
+def combo_constituents(name):
+    """Combos ("A + B", "A-B" with an en/em dash) split into their parts, else None.
+    Only + and en/em dashes count, never a plain hyphen (which appears in real names)."""
+    if not name:
+        return None
+    if "+" in name or "–" in name or "—" in name:
+        parts = re.split(r"\s*[+–—]\s*", name)
+        return [p.strip() for p in parts if p.strip()]
+    return None
+
+
+def resolve_rows(name, drug_id):
+    """Return (rows, mapping) for a drug. mapping is None for a direct name match,
+    else {pdsp_names, relation, note} when recovered through the alias map."""
+    rows = all_rows()
+    want = {norm(name), norm(drug_id)}
+    direct = [r for r in rows if norm(r.get(COL_LIGAND)) in want]
+    if direct:
+        return direct, None
+    if drug_id in ALIAS:
+        pdsp_names, relation, note = ALIAS[drug_id]
+        target = {n.strip().lower() for n in pdsp_names}
+        aliased = [r for r in rows
+                   if (r.get(COL_LIGAND) or "").strip().lower() in target]
+        if aliased:
+            return aliased, {"pdsp_names": pdsp_names, "relation": relation,
+                             "note": note}
+    return [], None
 
 
 # PDSP records a Ki of 10000 nM (10 uM) as a ceiling meaning "tested, essentially
@@ -226,12 +288,23 @@ def summarize_target(rows, our_target):
     }
 
 
-def our_drug_targets(drug):
+def find_drug(query):
+    """Return (record, all_drugs) for the drug whose id or name matches `query`."""
     data = json.load(open(DATASET, encoding="utf-8"))
     for d in data:
-        if d["id"] == drug:
-            return [b["target"] for b in d.get("bindings", [])]
-    return []
+        if d["id"] == query or norm(d["name"]) == norm(query):
+            return d, data
+    return None, data
+
+
+def _stamp_mapping(summary, mapping):
+    """Mark a summary's source as recovered through the alias map, so the viewer can
+    warn which compound the Ki was actually measured on."""
+    if summary and mapping and summary.get("source"):
+        summary["source"]["mapped"] = True
+        summary["source"]["measured_as"] = mapping["note"]
+        summary["source"]["relation"] = mapping["relation"]
+        summary["source"]["pdsp_names"] = mapping["pdsp_names"]
 
 
 def main():
@@ -239,23 +312,37 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--drug", required=True, help="drug id / ligand name (e.g. risperidone)")
     ap.add_argument("--all", action="store_true",
-                    help="also list PDSP targets NOT in our dataset (candidate additions)")
+                    help="also list omitted PDSP targets weaker than our weakest binding")
     ap.add_argument("--json", metavar="OUT", help="write the preview JSON here")
     args = ap.parse_args()
 
     if not os.path.exists(CSV_PATH):
         sys.exit("PDSP CSV not found at %s (author-side; see its README)" % CSV_PATH)
 
-    rows = load_rows(args.drug)
+    rec, data = find_drug(args.drug)
+
+    # A combo drug is not in PDSP as a mixture: report its constituents (linked to our
+    # standalone drugs where they exist) so the viewer can warn + link out.
+    combo = combo_constituents(rec["name"]) if rec else None
+    if combo:
+        ids = {d["id"] for d in data}
+        by_name = {norm(d["name"]): d["id"] for d in data}
+        constituents = [{"name": p,
+                         "drug_id": p.lower() if p.lower() in ids else by_name.get(norm(p))}
+                        for p in combo]
+        print(json.dumps({"drug": args.drug, "combo": True,
+                          "constituents": constituents}, ensure_ascii=False, indent=2))
+        return
+
+    name = rec["name"] if rec else args.drug
+    did = rec["id"] if rec else args.drug
+    rows, mapping = resolve_rows(name, did)
     if not rows:
-        sys.exit("no PDSP rows for ligand %r" % args.drug)
+        sys.exit("no PDSP rows for %r (no direct match or alias)" % args.drug)
 
-    bound = our_drug_targets(args.drug)
+    bound = [b["target"] for b in rec["bindings"]] if rec else []
 
-    # Policy: annotate the drug's EXISTING bindings with Ki. We do not auto-add new
-    # targets. But we DO surface any target PDSP measured that we omitted whose best
-    # (min) affinity beats our weakest annotated binding, since omitting a stronger
-    # target than one we kept is a modeling gap the author should see.
+    # Annotate the drug's EXISTING bindings with Ki.
     annotated = {tgt: summarize_target(rows, tgt) for tgt in bound}
     ann_meds = [s["ki_nm"]["median"] for s in annotated.values()
                 if s and s.get("ki_nm")]
@@ -271,29 +358,39 @@ def main():
     present = {resolve_target(r) for r in rows} - {None}
     sub_to_coarse = {sub: c for c, subs in COARSE_MEMBERS.items()
                      for sub in subs if sub != c}
-    candidates = {c for c in (present - covered)
-                  if sub_to_coarse.get(c) not in (present - covered)}
+    rest = present - covered
+    candidates = {c for c in rest if sub_to_coarse.get(c) not in rest}
 
-    flagged, weaker = {}, {}
+    # Policy: auto-add an omitted target only when it beats the weakest annotated
+    # binding by MEDIAN (the strict, defensible set). Ones that beat it only at their
+    # best assay (min) are reported but NOT added; the rest are weaker/informational.
+    auto_add, flagged_min_only, weaker = {}, {}, {}
     for tgt in sorted(candidates):
         s = summarize_target(rows, tgt)
         if not s or not s.get("ki_nm"):
             continue
-        stronger = threshold is not None and s["ki_nm"]["min"] < threshold
-        (flagged if stronger else weaker)[tgt] = s
+        med, mn = s["ki_nm"]["median"], s["ki_nm"]["min"]
+        if threshold is None or med >= threshold:
+            (flagged_min_only if (threshold is not None and mn < threshold)
+             else weaker)[tgt] = s
+        else:
+            auto_add[tgt] = s
+
+    for grp in (annotated, auto_add, flagged_min_only, weaker):
+        for s in grp.values():
+            _stamp_mapping(s, mapping)
 
     result = {
         "drug": args.drug,
         "pdsp_rows": len(rows),
-        # Ki for our existing bindings (this is what would be written to the dataset).
-        "annotated": annotated,
-        # The weakest annotated median: the bar an omitted target must beat to flag.
+        "mapping": mapping,               # None for a direct name match
+        "annotated": annotated,           # Ki for our existing bindings
         "annotated_threshold_nm": threshold,
-        # Omitted targets that bind STRONGER than that bar (report these to the user).
-        "pdsp_only_flagged": flagged,
+        "auto_add": auto_add,             # median-stronger omitted -> would be added
+        "flagged_min_only": flagged_min_only,  # best-case-only -> reported, not added
     }
     if args.all:
-        result["pdsp_only_weaker"] = weaker  # omitted + weaker (informational)
+        result["weaker"] = weaker
 
     text = json.dumps(result, ensure_ascii=False, indent=2)
     if args.json:
