@@ -4619,6 +4619,18 @@ def _strongest_grade(sources: list[dict[str, Any]] | None) -> int:
     return best
 
 
+def _binding_grade(binding: dict[str, Any]) -> int:
+    """A binding's grade = the strongest of its quote ``sources`` and its ``ki``
+    source. A measured Ki (its own verified source) confirms the drug binds the
+    target, so it backs the binding claim; an affinity_only binding is graded solely
+    by its Ki."""
+    best = _strongest_grade(binding.get("sources"))
+    ki_src = (binding.get("ki") or {}).get("source")
+    if ki_src:
+        best = max(best, _GRADE_RANK.get(ki_src.get("provenance"), 0))
+    return best
+
+
 def _provenance_stats(structures: list[dict[str, Any]],
                       projections: list[dict[str, Any]],
                       receptors: list[dict[str, Any]],
@@ -4651,7 +4663,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
             counts[bucket(g)] += 1
         return counts
 
-    binding_grades = [_strongest_grade(b.get("sources"))
+    binding_grades = [_binding_grade(b)
                       for d in drugs for b in d.get("bindings", [])]
     nbn_grades = [_strongest_grade(d.get("nbn_sources"))
                   for d in drugs if d.get("nbn")]

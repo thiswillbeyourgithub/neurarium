@@ -71,6 +71,7 @@ Six families of checks:
 Built with the help of Claude Code.
 """
 
+import csv
 import json
 import re
 import sys
@@ -340,13 +341,28 @@ def check_reachability(report, meta, structures, projections, circuits,
             if target not in targets:
                 report.error(f"drug {did}: binding target {target!r} is not a known "
                              f"target (the binding can never be focused)")
-            require(binding.get("action"), meta.get("drug_actions", {}),
-                    f"drug {did}: binding action {binding.get('action')!r} is not in "
-                    f"drug_actions")
-            if "effect" in binding:
-                require(binding["effect"], meta.get("drug_effect_colors", {}),
-                        f"drug {did}: binding effect {binding['effect']!r} is not in "
-                        f"drug_effect_colors")
+            # An affinity_only binding (PDSP Ki with no known direction) carries no
+            # action/effect; every other binding must name a known action.
+            if binding.get("affinity_only"):
+                if not binding.get("ki"):
+                    report.error(f"drug {did}: affinity_only binding {target!r} has "
+                                 f"no ki (it would show nothing)")
+            else:
+                require(binding.get("action"), meta.get("drug_actions", {}),
+                        f"drug {did}: binding action {binding.get('action')!r} is not "
+                        f"in drug_actions")
+                if "effect" in binding:
+                    require(binding["effect"], meta.get("drug_effect_colors", {}),
+                            f"drug {did}: binding effect {binding['effect']!r} is not "
+                            f"in drug_effect_colors")
+            # The Ki annotation's source corpus must resolve (its verbatim-presence
+            # in the CSV is confirmed in check_sources).
+            ki = binding.get("ki")
+            if ki:
+                corpus = (ki.get("source") or {}).get("corpus")
+                if corpus not in (meta.get("source_corpora", {}) or {}):
+                    report.error(f"drug {did}: binding {target!r} ki source corpus "
+                                 f"{corpus!r} is not in source_corpora")
 
     if report.errors == before:
         report.ok("every cross-reference (drug -> target/action/category, projection "
@@ -687,6 +703,69 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         report.ok(f"every checkable source quote ({n_checked}) is present verbatim "
                   f"in its cited page" if n_checked
                   else "no source quotes to verify yet")
+
+    # A binding's `ki` cites one CSV row by ki_id (the analogue of a quote's page):
+    # confirm that row really exists in the corpus CSV with the cited value. Like the
+    # quote gate this is author-side (the CSV is large + uncommitted, see
+    # sources/books/pdsp_ki/), skipped with a warning on a clone that lacks it.
+    ki_before = report.errors
+    ki_index_cache = {}          # corpus -> {ki_id: ki_val_str} or None if csv absent
+
+    def ki_index(corpus):
+        if corpus not in ki_index_cache:
+            entry = corpora.get(corpus) or {}
+            path = entry.get("csv")
+            idx = None
+            if path and (REPO_ROOT / path).exists():
+                idx = {}
+                with open(REPO_ROOT / path, newline="", encoding="utf-8",
+                          errors="replace") as f:
+                    for row in csv.DictReader(f):
+                        try:
+                            idx[int(row["Number"])] = (row.get("ki Val") or "").strip()
+                        except (TypeError, ValueError, KeyError):
+                            pass
+            ki_index_cache[corpus] = idx
+        return ki_index_cache[corpus]
+
+    n_ki = 0
+    ki_skipped = set()
+    for drug in drugs:
+        did = drug.get("id")
+        for binding in drug.get("bindings", []):
+            ki = binding.get("ki")
+            if not ki:
+                continue
+            ctx = f"drug {did} binding {binding.get('target')} ki"
+            src = ki.get("source") or {}
+            corpus, ki_id = src.get("corpus"), src.get("ki_id")
+            if src.get("provenance") == "verified" and ki_id is None:
+                report.error(f"{ctx}: 'verified' source needs a ki_id")
+                continue
+            if ki_id is None:
+                continue
+            idx = ki_index(corpus)
+            if idx is None:
+                ki_skipped.add(corpus)
+                continue
+            if ki_id not in idx:
+                report.error(f"{ctx}: ki_id {ki_id} not found in {corpus} CSV")
+                continue
+            # The stored value must be the row's own value (we took it from there).
+            try:
+                if abs(float(idx[ki_id]) - float(src.get("value_nm"))) > 0.01:
+                    report.error(f"{ctx}: value_nm {src.get('value_nm')} != CSV row "
+                                 f"{ki_id} value {idx[ki_id]!r}")
+                    continue
+            except (TypeError, ValueError):
+                pass
+            n_ki += 1
+    if ki_skipped:
+        report.warn(f"Ki CSV absent for {sorted(ki_skipped)} (author-only material); "
+                    f"skipped the ki-row-in-CSV check there")
+    if report.errors == ki_before:
+        report.ok(f"every checkable Ki annotation ({n_ki}) cites a real CSV row"
+                  if n_ki else "no Ki annotations to verify yet")
 
 
 # --------------------------------------------------------------------------- #
