@@ -472,8 +472,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       wikipedia: tgt.wikipedia || "",
       wikipediaProvenance: tgt.wikipedia_provenance || "",
       // Source grade backing this target's classification (type / system / regions),
-      // shown as the panel's "Source" pill (default "llm").
+      // shown as the panel's "Source" pill (default "llm"); `sources` carries the
+      // quote-level source(s) so the pill tooltip can show the verbatim quote.
       classificationProvenance: tgt.classification_provenance || "llm",
+      sources: tgt.sources || [],
       locationNames: (tgt.regions || []).map((b) => baseName.get(b) || b),
       // The raw base ids parallel to locationNames, so the panel can make each
       // "Found in" row jump to that structure (the receptor records keep their own

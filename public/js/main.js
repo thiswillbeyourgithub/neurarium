@@ -2209,7 +2209,10 @@ function createInfoPanel(data) {
       // excitatory" carries a provenance pill like every other datum). The grade is
       // data (classification_provenance); the read-more Wikipedia link is separate.
       addFactRow(facts, t("info.source"), "", null,
-        { pill: makeProvenancePill(receptor.classification_provenance) });
+        { pill: makeProvenancePill(
+            receptor.classification_provenance,
+            receptor.sources && receptor.sources.length
+              ? sourcesTip(receptor.sources) : undefined) });
       body.appendChild(facts);
 
       // Where it is expressed.
@@ -2255,7 +2258,10 @@ function createInfoPanel(data) {
       // never shows "no source": even an llm grade is a graded source).
       if (target.classificationProvenance) {
         addFactRow(facts, t("info.source"), "", null,
-          { pill: makeProvenancePill(target.classificationProvenance) });
+          { pill: makeProvenancePill(
+              target.classificationProvenance,
+              target.sources && target.sources.length
+                ? sourcesTip(target.sources) : undefined) });
       }
       if (facts.childElementCount) body.appendChild(facts);
 

@@ -1985,6 +1985,12 @@
       "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA, eds. Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
       "url": "TODO",
       "pages_dir": "sources/books/eric_kandel/pages"
+    },
+    "stahl_essential": {
+      "ref": "Stahl's Essential Psychopharmacology: Neuroscientific Basis, 5th ed.",
+      "citation": "Stahl SM. Stahl's Essential Psychopharmacology: Neuroscientific Basis and Practical Applications. 5th ed. Cambridge University Press; 2021.",
+      "url": "TODO",
+      "pages_dir": "sources/books/stahl_essential_pharmacology/pages"
     }
   },
   "provenance_stats": {

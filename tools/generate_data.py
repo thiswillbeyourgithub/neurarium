@@ -626,6 +626,17 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "TODO",
         "pages_dir": "sources/books/eric_kandel/pages",
     },
+    "stahl_essential": {
+        # Mechanism/receptor corpus: the receptor + non-receptor-target
+        # classification claims are quote-verified against this.
+        "ref": "Stahl's Essential Psychopharmacology: Neuroscientific Basis, "
+               "5th ed.",
+        "citation": "Stahl SM. Stahl's Essential Psychopharmacology: "
+                    "Neuroscientific Basis and Practical Applications. 5th ed. "
+                    "Cambridge University Press; 2021.",
+        "url": "TODO",
+        "pages_dir": "sources/books/stahl_essential_pharmacology/pages",
+    },
 }
 
 
@@ -2433,6 +2444,21 @@ KANDEL_STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
         "the nucleus basalis of Meynert."),
 }
 
+
+def _stahl_ess(page: int, quote: str) -> dict[str, Any]:
+    """A verified Stahl Essential Psychopharmacology quote-source."""
+    return dict(corpus="stahl_essential", page=page,
+                provenance="verified", quote=quote)
+
+
+# Verified Stahl Essential quote-sources for the receptor + non-receptor-target
+# classification claims, keyed by receptor id / DRUG_TARGETS id. _receptor_record
+# and _build_drug_targets attach the quote as `sources` and upgrade
+# classification_provenance; a key that is not a real id fails the build. One
+# mechanism sentence often backs a whole receptor family, so it is written once.
+STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {}
+STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {}
+
 PROJECTIONS: list[dict[str, Any]] = [
     # --- Corticostriatal input (glutamate): cortex drives the striatum ---
     dict(**{"from": "frontal_R", "to": "putamen_R"},
@@ -4115,6 +4141,13 @@ def _receptor_record(rec: dict[str, Any],
         # "llm" by default; upgrade per-receptor in RECEPTOR_PROVENANCE as checked.
         "classification_provenance": _receptor_provenance(rec["id"]),
     }
+    # Attach a verified Stahl Essential quote-source for this receptor's
+    # classification and upgrade the grade to match (see STAHL_ESSENTIAL_RECEPTOR_QUOTES).
+    rq = STAHL_ESSENTIAL_RECEPTOR_QUOTES.get(rec["id"])
+    if rq is not None:
+        out["sources"] = [dict(rq)]
+        if _GRADE_RANK[rq["provenance"]] > _GRADE_RANK[out["classification_provenance"]]:
+            out["classification_provenance"] = rq["provenance"]
     locations = rec["locations"]
     if locations == "ALL":
         out["ubiquitous"] = True
@@ -4173,6 +4206,13 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
         if spec.get("wikipedia"):
             targets[tid]["wikipedia"] = spec["wikipedia"]
             targets[tid]["wikipedia_provenance"] = _wiki_provenance(tid)
+        # Verified Stahl Essential quote-source for this target's classification.
+        tq = STAHL_ESSENTIAL_TARGET_QUOTES.get(tid)
+        if tq is not None:
+            targets[tid]["sources"] = [dict(tq)]
+            if _GRADE_RANK[tq["provenance"]] > _GRADE_RANK[
+                    targets[tid]["classification_provenance"]]:
+                targets[tid]["classification_provenance"] = tq["provenance"]
     for rec in receptors:
         # A receptor id is also a valid target; link it so the viewer reuses the
         # receptor's lit regions. Receptor ids and DRUG_TARGETS keys never collide
@@ -4537,6 +4577,16 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         raise KeyError(
             f"KANDEL_STRUCTURE_QUOTES keys are not structure bases: "
             f"{sorted(unmatched_bases)}")
+    unmatched_rq = set(STAHL_ESSENTIAL_RECEPTOR_QUOTES) - {r["id"] for r in RECEPTORS}
+    if unmatched_rq:
+        raise KeyError(
+            f"STAHL_ESSENTIAL_RECEPTOR_QUOTES keys are not receptor ids: "
+            f"{sorted(unmatched_rq)}")
+    unmatched_tq = set(STAHL_ESSENTIAL_TARGET_QUOTES) - set(DRUG_TARGETS)
+    if unmatched_tq:
+        raise KeyError(
+            f"STAHL_ESSENTIAL_TARGET_QUOTES keys are not DRUG_TARGETS ids: "
+            f"{sorted(unmatched_tq)}")
 
     # Circuits: expand each base structure id to whatever was emitted (both
     # hemispheres for a paired form, the bare id for a midline one). Built from
