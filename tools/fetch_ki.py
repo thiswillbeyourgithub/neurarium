@@ -143,53 +143,75 @@ def load_rows(drug):
     return out
 
 
+# PDSP records a Ki of 10000 nM (10 uM) as a ceiling meaning "tested, essentially
+# inactive" rather than a real measured affinity, so values >= this are excluded
+# from the affinity stats and counted as inactive instead.
+SENTINEL_NM = 10000.0
+
+
+def _is_human(r):
+    return (r.get(COL_SPECIES) or "").strip().upper() == "HUMAN"
+
+
+def _defined(r):
+    """A row whose preparation + radioligand are both concrete (not UNDEFINED)."""
+    prep = (r.get(COL_PREP) or "").strip().upper()
+    radio = (r.get(COL_RADIO) or "").strip().upper()
+    return prep not in ("", "UNDEFINED") and radio not in ("", "UNDEFINED")
+
+
 def summarize_target(rows, our_target):
-    """Aggregate the rows matching `our_target`, preferring human assays, and pick
-    a specific representative CSV row as the citation."""
+    """Aggregate the rows matching `our_target`. Splits assays into active vs the
+    inactive (>=10 uM) ceiling, counts human vs non-human, prefers human for the
+    reported stats, and cites one representative CSV row (verified-grade source)."""
     hits = [r for r in rows if matches_our_target(resolve_target(r) or "", our_target)]
     if not hits:
         return None
 
-    # Attach parsed Ki; split exact numeric from qualified (>/<) and unusable.
-    numeric, qualified = [], 0
+    active, inactive, qualified = [], 0, 0
     for r in hits:
         p = parse_ki(r.get(COL_KI))
         if p is None:
             continue
         val, q = p
-        if q:
+        if val >= SENTINEL_NM:      # ceiling sentinel -> "inactive", not an affinity
+            inactive += 1
+        elif q:                     # a < / > qualified value below the ceiling
             qualified += 1
         else:
-            numeric.append((val, r))
+            active.append((val, r))
 
-    # Species tier: use human if any human numeric rows, else best available.
-    def is_human(r):
-        return (r.get(COL_SPECIES) or "").strip().upper() == "HUMAN"
+    n_human = sum(1 for v, r in active if _is_human(r))
+    n_nonhuman = len(active) - n_human
+    if not active:
+        return {"target": our_target, "matched_rows": len(hits), "n_human": 0,
+                "n_nonhuman": 0, "inactive": inactive, "qualified": qualified,
+                "inactive_only": inactive > 0}
 
-    human = [(v, r) for v, r in numeric if is_human(r)]
-    tier = human if human else numeric
-    if not tier:
-        return {"target": our_target, "matched": len(hits), "usable": 0,
-                "note": "no numeric Ki (all qualified/blank)", "qualified": qualified}
-
+    # Report the human tier when there is one, else fall back to non-human (flagged).
+    human_rows = [(v, r) for v, r in active if _is_human(r)]
+    tier = human_rows if human_rows else active
     values = sorted(v for v, _ in tier)
     med = statistics.median(values)
-    # Representative = the row whose value is closest to the median (ties -> lowest
-    # Ki id), so the citation is a real assay line, not a synthetic median.
+    # Representative = closest to the median; ties prefer a row with concrete
+    # preparation/radioligand, then the lowest Ki id. So the citation is a real,
+    # fully-attributed assay line rather than a synthetic median.
     rep_val, rep = min(
-        tier, key=lambda vr: (abs(vr[0] - med), int(vr[1].get(COL_ID) or 0)))
-    species_seen = sorted({(r.get(COL_SPECIES) or "").strip() for _, r in tier})
+        tier,
+        key=lambda vr: (abs(vr[0] - med), 0 if _defined(vr[1]) else 1,
+                        int(vr[1].get(COL_ID) or 0)))
 
     return {
         "target": our_target,
         "matched_rows": len(hits),
-        "n_assays_used": len(tier),
-        "human": bool(human),
-        "species_used": "HUMAN" if human else "/".join(species_seen),
+        "human": bool(human_rows),
+        "n_human": n_human,
+        "n_nonhuman": n_nonhuman,
+        "inactive": inactive,
+        "qualified_excluded": qualified,
         "ki_nm": {"median": round(med, 3),
                   "min": round(values[0], 3), "max": round(values[-1], 3)},
-        "qualified_excluded": qualified,
-        # The precise source: one CSV row, fully attributed.
+        # The precise source: one CSV row, fully attributed (grade: verified).
         "source": {
             "corpus": "pdsp_ki",
             "ki_id": int(rep.get(COL_ID) or 0),
@@ -199,6 +221,7 @@ def summarize_target(rows, our_target):
             "radioligand": (rep.get(COL_RADIO) or "").strip(),
             "reference": (rep.get(COL_REF) or "").strip(),
             "note": (rep.get(COL_NOTE) or "").strip(),
+            "provenance": "verified",
         },
     }
 
@@ -228,23 +251,49 @@ def main():
         sys.exit("no PDSP rows for ligand %r" % args.drug)
 
     bound = our_drug_targets(args.drug)
-    result = {"drug": args.drug, "pdsp_rows": len(rows), "our_targets": {}}
-    for tgt in bound:
-        result["our_targets"][tgt] = summarize_target(rows, tgt)
 
+    # Policy: annotate the drug's EXISTING bindings with Ki. We do not auto-add new
+    # targets. But we DO surface any target PDSP measured that we omitted whose best
+    # (min) affinity beats our weakest annotated binding, since omitting a stronger
+    # target than one we kept is a modeling gap the author should see.
+    annotated = {tgt: summarize_target(rows, tgt) for tgt in bound}
+    ann_meds = [s["ki_nm"]["median"] for s in annotated.values()
+                if s and s.get("ki_nm")]
+    # Threshold = the weakest annotated affinity (largest median among our bindings).
+    threshold = max(ann_meds) if ann_meds else None
+
+    # Candidate omitted targets = every target id PDSP has for this drug that we did
+    # not bind, minus subtypes already covered by an annotated coarse target, and
+    # collapsing a coarse's subtypes when the coarse itself is a candidate.
+    covered = set(bound)
+    for b in bound:
+        covered |= COARSE_MEMBERS.get(b, set())
+    present = {resolve_target(r) for r in rows} - {None}
+    sub_to_coarse = {sub: c for c, subs in COARSE_MEMBERS.items()
+                     for sub in subs if sub != c}
+    candidates = {c for c in (present - covered)
+                  if sub_to_coarse.get(c) not in (present - covered)}
+
+    flagged, weaker = {}, {}
+    for tgt in sorted(candidates):
+        s = summarize_target(rows, tgt)
+        if not s or not s.get("ki_nm"):
+            continue
+        stronger = threshold is not None and s["ki_nm"]["min"] < threshold
+        (flagged if stronger else weaker)[tgt] = s
+
+    result = {
+        "drug": args.drug,
+        "pdsp_rows": len(rows),
+        # Ki for our existing bindings (this is what would be written to the dataset).
+        "annotated": annotated,
+        # The weakest annotated median: the bar an omitted target must beat to flag.
+        "annotated_threshold_nm": threshold,
+        # Omitted targets that bind STRONGER than that bar (report these to the user).
+        "pdsp_only_flagged": flagged,
+    }
     if args.all:
-        # Which of our target ids does PDSP have data for that we did NOT bind?
-        seen = set()
-        for r in rows:
-            sid = resolve_target(r)
-            if sid:
-                seen.add(sid)
-        extras = sorted(seen - set(bound))
-        result["candidate_targets"] = {}
-        for tgt in extras:
-            s = summarize_target(rows, tgt)
-            if s and s.get("source"):
-                result["candidate_targets"][tgt] = s
+        result["pdsp_only_weaker"] = weaker  # omitted + weaker (informational)
 
     text = json.dumps(result, ensure_ascii=False, indent=2)
     if args.json:
