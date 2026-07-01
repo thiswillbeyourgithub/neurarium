@@ -301,6 +301,17 @@
         margin: 0;
         cursor: pointer;
       }
+      /* The four global on/off toggles laid out 2-up rather than as a tall
+         single column: two rows read more compactly, especially on a phone.
+         minmax(0,1fr) lets a long label wrap inside its cell instead of
+         widening the column. */
+      .toggle-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 14px;
+        margin: 12px 0;
+      }
+      .toggle-grid .row { margin: 0; }
       /* margin-inline:0 drops the UA's ~2px horizontal margin: with width:100% it
          otherwise sums to 100%+4px and overflows the (now x-clipped) section list. */
       input[type="range"] { width: 100%; margin-inline: 0; accent-color: var(--accent); }
@@ -1570,47 +1581,51 @@
                 <input type="range" id="transparency" min="0.1" max="1" step="0.01" value="1" />
               </div>
 
-              <div class="row inline">
-                <!-- On by default so the brain slowly turns on load; picking a
-                     structure or projection turns it off (see js/main.js) so the
-                     thing you clicked holds still. -->
-                <label>
-                  <input type="checkbox" id="autorotate" checked />
-                  <span data-i18n="panel.autorotate"></span>
-                </label>
-              </div>
+              <!-- The four global toggles as a 2x2 grid (.toggle-grid): two
+                   columns are shorter than a four-row stack, tidier on a phone. -->
+              <div class="toggle-grid">
+                <div class="row inline">
+                  <!-- On by default so the brain slowly turns on load; picking a
+                       structure or projection turns it off (see js/main.js) so the
+                       thing you clicked holds still. -->
+                  <label>
+                    <input type="checkbox" id="autorotate" checked />
+                    <span data-i18n="panel.autorotate"></span>
+                  </label>
+                </div>
 
-              <div class="row inline">
-                <!-- "Show all names": force every structure label on at once (vs.
-                     hover, one at a time). A global toggle, so it sits with
-                     auto-rotate here rather than inside the Structures section.
-                     Wired in js/main.js. -->
-                <label>
-                  <input type="checkbox" id="toggle-names" />
-                  <span data-i18n="legend.showNames"></span>
-                </label>
-              </div>
+                <div class="row inline">
+                  <!-- "Show all names": force every structure label on at once (vs.
+                       hover, one at a time). A global toggle, so it sits with
+                       auto-rotate here rather than inside the Structures section.
+                       Wired in js/main.js. -->
+                  <label>
+                    <input type="checkbox" id="toggle-names" />
+                    <span data-i18n="legend.showNames"></span>
+                  </label>
+                </div>
 
-              <div class="row inline">
-                <!-- "Show projections": show/hide every projection arrow at once
-                     (checked by default = arrows shown; unchecking hides them
-                     all). A global toggle, so it sits here with auto-rotate
-                     rather than inside the Projections section. Wired in
-                     js/main.js. -->
-                <label>
-                  <input type="checkbox" id="toggle-projections" checked />
-                  <span data-i18n="legend.showProjections"></span>
-                </label>
-              </div>
+                <div class="row inline">
+                  <!-- "Show projections": show/hide every projection arrow at once
+                       (checked by default = arrows shown; unchecking hides them
+                       all). A global toggle, so it sits here with auto-rotate
+                       rather than inside the Projections section. Wired in
+                       js/main.js. -->
+                  <label>
+                    <input type="checkbox" id="toggle-projections" checked />
+                    <span data-i18n="legend.showProjections"></span>
+                  </label>
+                </div>
 
-              <div class="row inline">
-                <!-- "See inside": hide the camera-facing structures each frame so
-                     the deep nuclei aren't blocked by the near cortex
-                     (createNearCull in js/main.js). Off by default. -->
-                <label>
-                  <input type="checkbox" id="see-inside" />
-                  <span data-i18n="panel.seeInside"></span>
-                </label>
+                <div class="row inline">
+                  <!-- "See inside": hide the camera-facing structures each frame so
+                       the deep nuclei aren't blocked by the near cortex
+                       (createNearCull in js/main.js). Off by default. -->
+                  <label>
+                    <input type="checkbox" id="see-inside" />
+                    <span data-i18n="panel.seeInside"></span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
