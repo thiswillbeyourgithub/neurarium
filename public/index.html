@@ -1238,23 +1238,25 @@
          name reads as a link on hover. */
       .info-bindings li.clickable { cursor: pointer; }
       .info-bindings li.clickable:hover .bind-target { color: #8fb6e6; }
-      /* Binding rows wrap so the trailing source pill + Ki chip fall to a second
-         line in the narrow panel instead of overflowing; the text column grows to
-         push them right when there is room. */
-      .info-bindings li { flex-wrap: wrap; }
+      /* The text column grows to push the trailing source pill to the right edge,
+         aligned with the target name (align-items: flex-start on the row); it wraps
+         only if the name leaves it no room. */
       .info-bindings .bind-text { flex: 1 1 auto; }
-      /* Measured PDSP Ki chip, right of the source badge: the median value (bright)
-         + the [min-max] range and human/non-human counts (muted). Its own verified
-         "truth badge" (an .src-pill) follows. */
+      /* Measured PDSP Ki, stacked under the name + action inside the text column
+         (so on a narrow / mobile panel it wraps below the name rather than pushing
+         the source pill off the row), its own verified "truth badge" beside it. */
+      .info-bindings .bind-ki { margin-top: 2px; }
+      /* The Ki chip itself: the median value (bright) + the [min-max] range and
+         human/non-human counts (muted). Wraps its own parts on a very narrow panel;
+         each part stays intact. */
       .ki-chip {
         display: inline-flex;
         align-items: baseline;
-        gap: 5px;
+        flex-wrap: wrap;
+        gap: 2px 5px;
         font-size: 11px;
-        white-space: nowrap;
-        margin-left: auto;   /* hug the right edge of the row */
       }
-      .ki-chip .ki-val { font-weight: 600; color: #cfe3ff; }
+      .ki-chip .ki-val { font-weight: 600; color: #cfe3ff; white-space: nowrap; }
       .ki-chip .ki-detail { color: var(--muted); font-size: 10px; }
       /* A Ki with no human assay: tint the value amber so a non-human number is
          visible at a glance, not only in the tooltip. */

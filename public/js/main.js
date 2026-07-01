@@ -1802,6 +1802,51 @@ function createInfoPanel(data) {
     return frag;
   };
 
+  // One binding row, shared by the drug panel's "Acts on" list and a
+  // receptor/target panel's "Interacting drugs" list: the two render the *same*
+  // resolved binding from opposite ends (a drug's target vs a target's drug), so
+  // the markup lives once. Layout: the effect glyph, then a text column holding
+  // the leading name, the action line, and (stacked under them) the measured Ki
+  // chip with its own verified badge; the binding's source pill sits to the right
+  // of that whole block. `nameText` leads the row (the target name on a drug
+  // panel, the drug name on a target panel); `onActivate`, when given, makes the
+  // row a clickable link. An affinity_only binding (PDSP Ki, no known direction)
+  // gets a muted neutral glyph + an "affinity only" line and no source pill (Stahl
+  // never stated it; the Ki's verified badge is its only source).
+  const bindingRow = (binding, drug, nameText, onActivate) => {
+    const li = el("li");
+    const affinity = binding.affinityOnly;
+    if (binding.tentative) li.classList.add("tentative");
+    if (affinity) li.classList.add("affinity-only");
+    li.appendChild(effectGlyph(
+      binding.effect, affinity ? "#8a8f98" : binding.effectColor,
+      affinity ? t("drug.affinityOnly") : binding.effectLabel));
+    const txt = el("div", "bind-text");
+    txt.appendChild(el("span", "bind-target", nameText));
+    const parts = [affinity ? t("drug.affinityOnly") : binding.actionLabel,
+                   binding.note];
+    if (binding.tentative) parts.push(t("drug.speculative"));
+    const detail = parts.filter(Boolean).join(" · ");
+    if (detail) txt.appendChild(el("span", "bind-action", detail));
+    // Ki stacked under the name so on a narrow (mobile) panel it wraps below the
+    // name instead of pushing the source pill off the row.
+    if (binding.ki) {
+      const kiLine = el("div", "bind-ki");
+      kiLine.appendChild(kiChip(binding.ki));
+      txt.appendChild(kiLine);
+    }
+    li.appendChild(txt);
+    if (!affinity) li.appendChild(bindingProvenancePill(binding, drug));
+    li.title = affinity
+      ? `${t("drug.affinityOnly")} · ${nameText}`
+      : `${binding.effectLabel} · ${nameText}`;
+    if (onActivate) {
+      li.classList.add("clickable");
+      li.addEventListener("click", onActivate);
+    }
+    return li;
+  };
+
   // Shared by the structure / receptor / drug / target views: an external reference
   // link, rendered only for an http(s) url so a stray field can never inject markup.
   // A present link gets its provenance pill (how it was sourced, `provenance` from
@@ -1996,29 +2041,12 @@ function createInfoPanel(data) {
       items.sort((a, b) => a.drug.name.localeCompare(b.drug.name));
       wrap.appendChild(el("h4", "drug-cat", cats[cat] || cat));
       const ul = el("ul");
+      // Same shared row builder as the drug panel's "Acts on" list (same resolved
+      // binding, seen from the target's side), so the effect glyph, action, the
+      // measured Ki chip and the shared source pill all render identically here;
+      // clicking a row opens that drug.
       for (const { drug, binding } of items) {
-        const li = el("li", "clickable");
-        if (binding.tentative) li.classList.add("tentative");
-        li.appendChild(
-          effectGlyph(binding.effect, binding.effectColor, binding.effectLabel));
-        const txt = el("div", "bind-text");
-        txt.appendChild(el("span", "bind-target", drug.name));
-        // A tentative binding gets a "· speculative" tag so the dim+italic row is
-        // self-explaining (it rides the dimmed action line, so it reads as muted).
-        const parts = [binding.actionLabel, binding.note];
-        if (binding.tentative) parts.push(t("drug.speculative"));
-        const detail = parts.filter(Boolean).join(" · ");
-        if (detail) txt.appendChild(el("span", "bind-action", detail));
-        li.appendChild(txt);
-        // Source pill, the *same* one shown on the drug panel's "Acts on" row (the
-        // same resolved binding + its drug, so the source is shared, not
-        // duplicated): a link between drug A and target B carries its provenance on
-        // both panels, and falls back to the drug-level Stahl citation when the
-        // binding has no quote of its own (see bindingProvenancePill).
-        li.appendChild(bindingProvenancePill(binding, drug));
-        li.title = `${binding.effectLabel} · ${drug.name}`;
-        li.addEventListener("click", () => onDrugPick(drug));
-        ul.appendChild(li);
+        ul.appendChild(bindingRow(binding, drug, drug.name, () => onDrugPick(drug)));
       }
       wrap.appendChild(ul);
     }
@@ -2495,46 +2523,12 @@ function createInfoPanel(data) {
       } else {
         const ul = el("ul");
         for (const b of drug.bindings) {
-          const li = el("li");
-          if (b.tentative) li.classList.add("tentative");
-          // An affinity_only binding (PDSP Ki, no known direction) gets a muted
-          // neutral glyph + an "affinity only" action line, and no binding source
-          // pill (its only source is the Ki's own verified badge).
-          if (b.affinityOnly) li.classList.add("affinity-only");
-          li.appendChild(effectGlyph(
-            b.effect, b.affinityOnly ? "#8a8f98" : b.effectColor,
-            b.affinityOnly ? t("drug.affinityOnly") : b.effectLabel));
-          // Target name (bold) over the action line, stacked so a long target
-          // name (e.g. "Serotonin transporter (SERT)") wraps cleanly inside the
-          // narrow panel instead of pushing the action off the edge.
-          const txt = el("div", "bind-text");
-          txt.appendChild(el("span", "bind-target", b.targetName));
-          // A tentative binding gets a "· speculative" tag so the dim+italic row is
-          // self-explaining (it rides the dimmed action line, so it reads as muted).
-          const parts = [b.affinityOnly ? t("drug.affinityOnly") : b.actionLabel,
-                         b.note];
-          if (b.tentative) parts.push(t("drug.speculative"));
-          const detail = parts.filter(Boolean).join(" · ");
-          if (detail) txt.appendChild(el("span", "bind-action", detail));
-          li.appendChild(txt);
-          // Source pill: this binding's own quote-level source when it has one,
-          // else the drug-level Stahl citation (grade llm). Always shown, so the
-          // grade is never blank (see bindingProvenancePill). Skipped for an
-          // affinity_only binding (Stahl never stated it; the Ki badge is its source).
-          if (!b.affinityOnly) li.appendChild(bindingProvenancePill(b, drug));
-          // Measured PDSP Ki (value + range + counts + its verified truth badge).
-          if (b.ki) li.appendChild(kiChip(b.ki));
-          li.title = b.affinityOnly
-            ? `${t("drug.affinityOnly")} · ${b.targetName}`
-            : `${b.effectLabel} · ${b.targetName}`;
           // If this binding's target is browsable on its own (in the merged
           // "Receptors & targets" list and focusable), make the row jump to it.
           const tgt = targetById.get(b.target);
-          if (tgt && tgt.focusable) {
-            li.classList.add("clickable");
-            li.addEventListener("click", () => onTargetPick(tgt));
-          }
-          ul.appendChild(li);
+          const onActivate = tgt && tgt.focusable
+            ? () => onTargetPick(tgt) : null;
+          ul.appendChild(bindingRow(b, drug, b.targetName, onActivate));
         }
         acts.appendChild(ul);
       }
