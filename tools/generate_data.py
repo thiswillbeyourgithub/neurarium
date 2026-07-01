@@ -2312,6 +2312,127 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "pallidum"),
 }
 
+# Verified Kandel quote-sources for the region-anatomy claims (a structure's
+# existence / classification / location), keyed by base id. _structure_record
+# attaches the quote as the structure's `sources` and upgrades its
+# `classification_provenance` to the quote's grade; both hemispheres share it.
+# Every key must be a real structure base or build_records raises (typo guard).
+# Same verify gate as the pathways: check_data confirms the quote is on its page.
+_KSQ_STRIATUM = _kandel(981,
+    "The striatum (a collective term for the caudate nucleus and putamen; see "
+    "Figure 38–1), subthalamic nucleus, and substantia nigra pars compacta/ventral "
+    "tegmental area are the three major input nuclei of the basal ganglia, "
+    "receiving signals directly and indirectly from structures distributed "
+    "throughout the neuraxis (Figure 38–2).")
+_KSQ_LOBES = _kandel(63,
+    "The frontal lobe is largely concerned with short-term memory, planning future "
+    "actions, and control of movement; the parietal lobe mediates somatic "
+    "sensation, forming a body image and relating it to extrapersonal space; the "
+    "occipital lobe is concerned with vision; and the temporal lobe processes "
+    "hearing, the recognition of objects and faces, and—through its deep "
+    "structures, the hippocampus and amygdaloid nuclei—learning, memory, and "
+    "emotion.")
+
+KANDEL_STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
+    # Cortical lobes: one compound sentence names all four; the insula its own.
+    "frontal": _KSQ_LOBES,
+    "parietal": _KSQ_LOBES,
+    "occipital": _KSQ_LOBES,
+    "temporal": _KSQ_LOBES,
+    "insula": _kandel(59,
+        "The insular cortex, which lies buried within the overlying frontal, "
+        "parietal, and temporal lobes, plays an important role in emotion, "
+        "homeostasis, and taste perception."),
+    # Basal ganglia (caudate + putamen share the striatum sentence).
+    "caudate": _KSQ_STRIATUM,
+    "putamen": _KSQ_STRIATUM,
+    "globus_pallidus": _kandel(59,
+        "The basal ganglia, which include the caudate, putamen, and globus "
+        "pallidus, regulate movement execution and motor- and habit-learning, two "
+        "forms of memory that are referred to as implicit memory; the hippocampus "
+        "is critical for storage of memory of people, places, things, and events, "
+        "a form of memory that is referred to as explicit; and the amygdaloid "
+        "nuclei coordinate the autonomic and endocrine responses of emotional "
+        "states, including memory of threats, another form of implicit memory."),
+    "subthalamic_nucleus": _kandel(982,
+        "The subthalamic nucleus is the only component of the basal ganglia that "
+        "has excitatory (glutamatergic) output connections."),
+    "substantia_nigra": _kandel(59,
+        "The various brain regions described above are often divided into three "
+        "broader regions: the hindbrain (comprising the medulla oblongata, pons, "
+        "and cerebellum); midbrain (comprising the tectum, substantia nigra, "
+        "reticular formation, and periaqueductal gray matter); and forebrain "
+        "(comprising the diencephalon and cerebrum)."),
+    "accumbens": _kandel(1114,
+        "These neurons project to several areas of the brain, including the "
+        "nucleus accumbens (the major component of the ventral striatum), the "
+        "ventromedial portion of the head of the caudate nucleus (in the dorsal "
+        "striatum), the basal forebrain, and regions of the prefrontal cortex "
+        "(Figure 43–1B)."),
+    "thalamus": _kandel(129,
+        "The thalamus is an egg-shaped structure that constitutes the dorsal "
+        "portion of the diencephalon."),
+    # Brainstem source nuclei.
+    "locus_coeruleus": _kandel(1561,
+        "Norepinephrine is synthesized in several brain stem nuclei, the largest "
+        "of which is the nucleus locus ceruleus, a pigmented nucleus located just "
+        "beneath the floor of the fourth ventricle in the rostrolateral pons."),
+    "raphe": _kandel(1560,
+        "Serotonin is synthesized in a group of brain stem nuclei called the "
+        "raphe nuclei."),
+    "vta": _kandel(982,
+        "The substantia nigra pars compacta/ventral tegmental area contain an "
+        "important population of dopaminergic neurons."),
+    # Diencephalon.
+    "hypothalamus": _kandel(1025,
+        "Neurons controlling the internal environment are concentrated in the "
+        "hypothalamus, a small area of the diencephalon that comprises less than "
+        "1% of the total brain volume."),
+    "mammillary": _kandel(1096,
+        "The sensory cortex then projects to both the cingulate cortex and the "
+        "hippocampus, which in turn makes connections with the mammillary bodies "
+        "of the hypothalamus, thus completing the loop"),
+    "pituitary": _kandel(1058,
+        'The neuroendocrine system works differently, by secreting several '
+        'peptide hormones from the pituitary, the "master gland," located just '
+        'beneath the hypothalamus.'),
+    # Hindbrain (each a distinct sentence in Kandel's Box 1-2 on p59).
+    "cerebellum": _kandel(59,
+        "The cerebellum, behind the pons, modulates the force and range of "
+        "movement and is involved in the learning of motor skills."),
+    "medulla": _kandel(59,
+        "The medulla oblongata, directly rostral to the spinal cord, includes "
+        "several centers responsible for vital autonomic functions, such as "
+        "digestion, breathing, and the control of heart rate."),
+    "midbrain": _kandel(59,
+        "The midbrain, rostral to the pons, controls many sensory and motor "
+        "functions, including eye movement and the coordination of visual and "
+        "auditory reflexes."),
+    "pons": _kandel(59,
+        "The pons, rostral to the medulla, conveys information about movement "
+        "from the cerebral hemispheres to the cerebellum."),
+    # Limbic (claustrum + fornix are omitted: neither appears in Kandel's prose).
+    "amygdala": _kandel(531,
+        "Parabrachial neurons project to the amygdala, a critical nucleus of the "
+        "limbic system, which regulates emotional states (Chapter 42)."),
+    "cingulate": _kandel(59,
+        "The cingulate cortex lies dorsal to the corpus callosum and is important "
+        "for regulation of emotion, pain perception, and cognition."),
+    "hippocampus": _kandel(140,
+        "We know that a structure called the hippocampus (or more properly the "
+        "hippocampal formation, since it is several cortical regions) is a key "
+        "component of a medial temporal lobe memory system that encodes and "
+        "stores memories of our lives (Figure 4–17)."),
+    "olfactory_bulb": _kandel(734,
+        "The axons of olfactory sensory neurons project to the ipsilateral "
+        "olfactory bulb, whose rostral end lies just above the olfactory "
+        "epithelium."),
+    "septal_nuclei": _kandel(1047,
+        "Those in the basal forebrain are divided into the medial septum, the "
+        "nuclei of the vertical and horizontal limbs of the diagonal band, and "
+        "the nucleus basalis of Meynert."),
+}
+
 PROJECTIONS: list[dict[str, Any]] = [
     # --- Corticostriatal input (glutamate): cortex drives the striatum ---
     dict(**{"from": "frontal_R", "to": "putamen_R"},
@@ -3580,6 +3701,15 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
         # the panel's "Source" pill and counted in the coverage tally.
         "classification_provenance": _structure_provenance(entry["base"]),
     }
+    # Attach a verified Kandel quote-source for the region's anatomy (keyed by base,
+    # shared by both hemispheres) and upgrade the classification grade to match, so
+    # the panel's Source pill carries the verbatim quote and the tally counts it.
+    anatomy_quote = KANDEL_STRUCTURE_QUOTES.get(entry["base"])
+    if anatomy_quote is not None:
+        record["sources"] = [dict(anatomy_quote)]
+        if _GRADE_RANK[anatomy_quote["provenance"]] > _GRADE_RANK[
+                record["classification_provenance"]]:
+            record["classification_provenance"] = anatomy_quote["provenance"]
     # External reference link (same article for both hemispheres of a pair),
     # tagged with its provenance grade for the source pill (see _wiki_provenance).
     wiki = WIKIPEDIA.get(entry["base"])
@@ -4401,6 +4531,12 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     if unmatched:
         raise KeyError(
             f"KANDEL_QUOTES keys match no PROJECTIONS entry: {sorted(unmatched)}")
+    unmatched_bases = set(KANDEL_STRUCTURE_QUOTES) - {
+        e["base"] for e in (*PAIRED, *MIDLINE)}
+    if unmatched_bases:
+        raise KeyError(
+            f"KANDEL_STRUCTURE_QUOTES keys are not structure bases: "
+            f"{sorted(unmatched_bases)}")
 
     # Circuits: expand each base structure id to whatever was emitted (both
     # hemispheres for a paired form, the bare id for a midline one). Built from

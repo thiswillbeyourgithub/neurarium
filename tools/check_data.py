@@ -576,7 +576,7 @@ def check_provenance(report, meta, structures, projections, circuits,
 _MIN_QUOTE_CHARS = 16
 
 
-def check_sources(report, meta, drugs, projections):
+def check_sources(report, meta, drugs, projections, structures):
     """The core of the sourcing system: confirm every quote-level source (a
     binding's ``sources``, a drug's ``nbn_sources``, and a projection's quote-level
     ``sources``) is actually present in the page it cites.
@@ -666,6 +666,10 @@ def check_sources(report, meta, drugs, projections):
         pid = f"{proj.get('from')}->{proj.get('to')}"
         for i, src in enumerate(proj.get("sources", []) or []):
             check_one(f"projection {pid} sources[{i}]", src)
+
+    for s in structures:
+        for i, src in enumerate(s.get("sources", []) or []):
+            check_one(f"structure {s.get('id')} sources[{i}]", src)
 
     if skipped_corpora:
         report.warn(f"source pages absent for {sorted(skipped_corpora)} "
@@ -760,7 +764,7 @@ def main():
     check_reachability(*args)
     check_todos(*args)
     check_provenance(*args)
-    check_sources(report, meta, drugs, projections)
+    check_sources(report, meta, drugs, projections, structures)
     check_connectivity(report, structures, projections)
 
     print(f"\nSummary: {report.errors} error(s), {report.warnings} warning(s)")

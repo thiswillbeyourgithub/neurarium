@@ -2021,9 +2021,9 @@
       },
       "structures": {
         "total": 52,
-        "verified": 0,
+        "verified": 48,
         "sourced": 0,
-        "unverified": 52
+        "unverified": 4
       },
       "references": {
         "total": 298,
@@ -2034,11 +2034,11 @@
     },
     "assertions": {
       "total": 785,
-      "verified": 602,
+      "verified": 650,
       "sourced": 0,
-      "unverified": 183,
-      "backed": 602,
-      "pct_backed": 77
+      "unverified": 135,
+      "backed": 650,
+      "pct_backed": 83
     }
   }
 }

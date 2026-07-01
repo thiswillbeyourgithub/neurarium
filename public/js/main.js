@@ -2147,7 +2147,10 @@ function createInfoPanel(data) {
       if (structure.classification_provenance) {
         const facts = el("div", "info-facts");
         addFactRow(facts, t("info.source"), "", null,
-          { pill: makeProvenancePill(structure.classification_provenance) });
+          { pill: makeProvenancePill(
+              structure.classification_provenance,
+              structure.sources && structure.sources.length
+                ? sourcesTip(structure.sources) : undefined) });
         body.appendChild(facts);
       }
 
