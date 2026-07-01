@@ -140,28 +140,26 @@ def parse_ki(val):
 # EVERY aliased match is flagged so the viewer warns which compound the Ki was
 # actually measured on. Deutetrabenazine / valbenazine are deliberately NOT here:
 # PDSP has only a single distant `tetrabenazine` assay, too weak to map honestly.
+# Each value is (pdsp_names, relation, compound): `compound` is a short, language-
+# neutral chemical label of what PDSP actually measured (shown in the viewer's "⚠
+# measured as <compound>" badge); `relation` (identity | enantiomer | racemate |
+# prodrug | metabolite) is turned into a localized phrase by the viewer.
 ALIAS = {
-    "paliperidone": (["9-OH-risperidone"], "identity",
-                     "paliperidone is 9-hydroxyrisperidone"),
-    "esketamine": (["(S)-(+)-ketamine"], "enantiomer",
-                   "the S-enantiomer of ketamine"),
+    "paliperidone": (["9-OH-risperidone"], "identity", "9-OH-risperidone"),
+    "esketamine": (["(S)-(+)-ketamine"], "enantiomer", "(S)-ketamine"),
     "amphetamine_d": (["Amphetamine,(+)", "(+)-Amphetamine"], "identity",
-                      "(+)-amphetamine (dextroamphetamine)"),
+                      "(+)-amphetamine"),
     "amphetamine_dl": (["Amphetamine"], "identity", "amphetamine"),
-    "methylphenidate_dl": (["METHYLPHENIDATE"], "identity",
-                           "racemic methylphenidate"),
+    "methylphenidate_dl": (["METHYLPHENIDATE"], "identity", "methylphenidate"),
     "moclobemide": (["moclobemide, MCL"], "identity", "moclobemide"),
     "selegiline": (["selegiline, SEL"], "identity", "selegiline"),
-    "levomilnacipran": (["Milnacipran"], "racemate",
-                        "racemic milnacipran (levomilnacipran is one enantiomer)"),
-    "zopiclone": (["eszopiclone"], "enantiomer", "eszopiclone (the S-enantiomer)"),
-    "quazepam": (["2-Oxoquazepam"], "metabolite",
-                 "2-oxoquazepam, a quazepam metabolite"),
+    "levomilnacipran": (["Milnacipran"], "racemate", "milnacipran"),
+    "zopiclone": (["eszopiclone"], "enantiomer", "eszopiclone"),
+    "quazepam": (["2-Oxoquazepam"], "metabolite", "2-oxoquazepam"),
     "lofexidine": (["Levlofexidine"], "enantiomer", "levlofexidine"),
     "lisdexamfetamine": (["Amphetamine,(+)", "(+)-Amphetamine"], "prodrug",
-                         "dextroamphetamine, its active moiety"),
-    "serdexmethylphenidate": (["METHYLPHENIDATE"], "prodrug",
-                              "methylphenidate, its active moiety"),
+                         "(+)-amphetamine"),
+    "serdexmethylphenidate": (["METHYLPHENIDATE"], "prodrug", "methylphenidate"),
 }
 
 _ALL_ROWS = None

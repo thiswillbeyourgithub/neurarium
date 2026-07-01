@@ -1084,7 +1084,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "(+)-amphetamine (dextroamphetamine)",
+            "measured_as": "(+)-amphetamine",
             "relation": "identity",
             "pdsp_names": [
               "Amphetamine,(+)",
@@ -1133,7 +1133,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "(+)-amphetamine (dextroamphetamine)",
+            "measured_as": "(+)-amphetamine",
             "relation": "identity",
             "pdsp_names": [
               "Amphetamine,(+)",
@@ -6933,7 +6933,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "racemic milnacipran (levomilnacipran is one enantiomer)",
+            "measured_as": "milnacipran",
             "relation": "racemate",
             "pdsp_names": [
               "Milnacipran"
@@ -6991,7 +6991,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "dextroamphetamine, its active moiety",
+            "measured_as": "(+)-amphetamine",
             "relation": "prodrug",
             "pdsp_names": [
               "Amphetamine,(+)",
@@ -7040,7 +7040,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "dextroamphetamine, its active moiety",
+            "measured_as": "(+)-amphetamine",
             "relation": "prodrug",
             "pdsp_names": [
               "Amphetamine,(+)",
@@ -8547,7 +8547,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "racemic methylphenidate",
+            "measured_as": "methylphenidate",
             "relation": "identity",
             "pdsp_names": [
               "METHYLPHENIDATE"
@@ -8583,7 +8583,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "racemic methylphenidate",
+            "measured_as": "methylphenidate",
             "relation": "identity",
             "pdsp_names": [
               "METHYLPHENIDATE"
@@ -10557,7 +10557,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "paliperidone is 9-hydroxyrisperidone",
+            "measured_as": "9-OH-risperidone",
             "relation": "identity",
             "pdsp_names": [
               "9-OH-risperidone"
@@ -10593,7 +10593,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "paliperidone is 9-hydroxyrisperidone",
+            "measured_as": "9-OH-risperidone",
             "relation": "identity",
             "pdsp_names": [
               "9-OH-risperidone"
@@ -10629,7 +10629,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "paliperidone is 9-hydroxyrisperidone",
+            "measured_as": "9-OH-risperidone",
             "relation": "identity",
             "pdsp_names": [
               "9-OH-risperidone"
@@ -10666,7 +10666,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "paliperidone is 9-hydroxyrisperidone",
+            "measured_as": "9-OH-risperidone",
             "relation": "identity",
             "pdsp_names": [
               "9-OH-risperidone"
@@ -10694,7 +10694,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "paliperidone is 9-hydroxyrisperidone",
+            "measured_as": "9-OH-risperidone",
             "relation": "identity",
             "pdsp_names": [
               "9-OH-risperidone"
@@ -13261,7 +13261,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "methylphenidate, its active moiety",
+            "measured_as": "methylphenidate",
             "relation": "prodrug",
             "pdsp_names": [
               "METHYLPHENIDATE"
@@ -13297,7 +13297,7 @@
             "note": "",
             "provenance": "verified",
             "mapped": true,
-            "measured_as": "methylphenidate, its active moiety",
+            "measured_as": "methylphenidate",
             "relation": "prodrug",
             "pdsp_names": [
               "METHYLPHENIDATE"
