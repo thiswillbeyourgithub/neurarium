@@ -14,6 +14,15 @@ graded by how trustworthy it is.**
 > unreviewed, so the classes, targets, and bindings may be wrong or incomplete. Do
 > not rely on any of it, and never use it for medical decisions.
 
+> [!NOTE]
+> **This started as a small demo, put together in a few days for a
+> medical-residency presentation.** I would genuinely welcome your criticism and
+> feedback, and especially your ideas for what else belongs on a map like this:
+> more animations, disease-linked abnormalities, whatever you would want to see.
+> The visualization has kept absorbing new kinds of data more easily than I
+> expected, so I am curious how far the idea can go, and where it stops being
+> useful. Please [open an issue](#feedback) with any thought, however small.
+
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
 [![neurarium demo](docs/preview.gif)](https://neurarium.olicorne.org)
@@ -167,6 +176,12 @@ Found a bug, an anatomical or pharmacological **inaccuracy**, or have a **featur
 request**? Please **open an issue** on this repository. Given the work-in-progress
 warning above, corrections to the regions, projections, receptor, and drug data are
 especially welcome.
+
+Beyond corrections, **ideas for what else belongs on a map like this** are just as
+welcome: more or better animations, disease-linked abnormalities, new data layers,
+anything you would find useful. This began as a few-days demo and has kept taking on
+new kinds of data more easily than expected, so suggestions for where to take it next
+(or where it stops being useful) genuinely help.
 
 ## Running
 
