@@ -255,8 +255,9 @@ Viewer (`public/`):
   projectionGroupsByKey, receptors, targets, drugs, drugsByTarget, byId, meta}`.
   Resolves each projection's `color`/`sign`, each receptor's labels +
   `structureIds`, each drug's localized fields + per-binding `targetName`/
-  `actionLabel`/`effect`/`effectColor`/`structureIds` + the union `structureIds` +
-  `flowKinds` + `focusable` + search `keywords`. Builds the merged `targets` browse
+  `actionLabel`/`effect`/`effectColor`/`structureIds`/`flowKind` (the target
+  system's mapped projection kind) + the union `structureIds` + `flowKinds` +
+  `focusable` + search `keywords`. Builds the merged `targets` browse
   list (receptors + non-receptor drug targets, one normalized focusable entry each)
   and `drugsByTarget` (reverse index target -> drugs + resolved binding).
   `projectionGroupsByKey` indexes groups by `${mode}:${key}`. `meta` carries the
@@ -791,8 +792,9 @@ applying focus is the `select*` caller's job, so each `show*()` is reused unchan
 whether first picked or re-shown. An empty-space click returns to Settings
 (`tabs.showSettings()`; detail tabs stay).
 
-Every source/reference shows a **provenance pill** (`makeProvenancePill`, see Source
-provenance) with a hover/tap tooltip via the shared `withTip(trigger, text)` helper.
+Every source shows a **provenance pill** (`makeProvenancePill`, see Source provenance)
+with a hover/tap tooltip via the shared `withTip(trigger, text)` helper (a present
+Wikipedia reference *link* is the exception: no pill, see Presentation below).
 The bubble is appended to `document.body` (escaping the panel's overflow clipping +
 any dimmed row's opacity), `position: fixed` in viewport coords (centred above the
 trigger, flipped below / clamped if needed; `place()` subtracts a
@@ -814,8 +816,8 @@ Views:
   citations in its tooltip) so every node shows its grade, then the readable
   bibliography (`sources`: http(s) url as link else plain text; a provenance pill per
   citation). Arrow picking (`pickArrowAt`) beats the region behind.
-- **structure** (`showStructure`): name, group heading, a Reference row (Wikipedia
-  link + pill, else `NOSOURCE`), then (when the link resolves) the live Wikipedia lead
+- **structure** (`showStructure`): name, group heading, a Reference row (a Wikipedia
+  link, or `NOSOURCE` when absent), then (when the link resolves) the live Wikipedia lead
   as a `sourced` description (structures carry no baked description; fetch-only), a
   **Source** row grading the region's anatomy (`classification_provenance`), and the
   pathway list. Each connection row: a bold colour-filled direction arrow
@@ -934,7 +936,10 @@ the groups by `${mode}:${key}` (`projectionGroupsByKey`).
 - `showCircuit`: the loop's description, its structures (deduped to bases, each clickable
   to jump via `onStructure`), its member pathways, its sources.
 - `showProjectionGroup`: a by-transmitter / by-effect heading, the description (live-
-  refreshed from Wikipedia), the reference link, the member pathways, the sources.
+  refreshed from Wikipedia), the reference link, the member pathways, then (kind-mode
+  only) a **Drugs acting on this system** list = the focusable drugs whose `flowKinds`
+  include this kind (the mirror of the drug panel's Projections affected; each row jumps
+  to that drug via `onDrug`), and the sources.
 - Both reuse a shared `pathwayRow` / `appendPathwayList` helper (also used by
   `showStructure`), so the row markup (the bold `directionArrow` + label + summary
   pill + jump) lives once.
@@ -950,9 +955,13 @@ A focusable section listing the merged `data.targets` = every receptor (from
 `receptors.jsonl`, authored as `RECEPTORS` in `generate_data.py`) **plus** every
 non-receptor drug target from the meta `drug_targets` map (transporters, enzymes, ion
 channels, receptor groups), so a target like SERT is explorable on its own. Built by
-`buildTargetLegend`, grouped by neurotransmitter **system** (`receptor_family_labels`
-key order, then "Other / non-aminergic"). The two sources are normalized to one shape in
-`js/data.js`.
+`buildTargetLegend`, grouped by neurotransmitter **system**. Both the members inside a
+system and the system headings sort by **binding affinity**: each target's key is the
+strongest Ki any drug has on it (min over its `drugsByTarget` bindings), so the most
+druggable receptors and systems float up; a target/system no drug binds has no Ki and
+sinks (a stable sort keeps the curated `receptor_family_labels` order among the Ki-less
+systems, and receptors before non-receptor targets within an equal-Ki tier). The two
+sources are normalized to one shape in `js/data.js`.
 
 - A receptor row's swatch = its excit/inhib/modulatory **sign** colour; a non-receptor
   row's = its **type** colour (`target_type_colors`) + a muted type tag. Clicking a row
@@ -1039,9 +1048,14 @@ interactions literally stated; gaps left as TODO / no binding).
   (each row: a coloured effect glyph + target name + action·note, dimmed + italic "·
   speculative" when tentative, plus a source pill via `bindingProvenancePill` = the
   binding's own quote-level source, else the drug-level Stahl citation as a fallback so the
-  grade is never blank). There is no standalone drug-level Source(s) block. Class +
-  Nomenclature values are clickable (open search with a `class:` / `nbn:` filter). Drugs
-  are searchable (name / category / target keywords).
+  grade is never blank). The **Acts on** rows sort strongest-affinity first (by each
+  binding's representative Ki, no-Ki last). There is no standalone drug-level Source(s)
+  block. Below it, a **Projections affected** list (only when `flowKinds` is non-empty):
+  one row per ascending system the drug engages (its `flowKinds` -> the kind-mode
+  projection group), each jumping to that group and pilled with the strongest binding
+  on the system. A *derived, non-directional* inference (no increase/decrease claim; a
+  caption says so). Class + Nomenclature values are clickable (open search with a
+  `class:` / `nbn:` filter). Drugs are searchable (name / category / target keywords).
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`, see file map)
   renders as a `kiChip` to the right of the source badge: the median value + `[min-max]`
   range + human/non-human assay counts, then its own **verified** truth badge (tooltip =
@@ -1167,9 +1181,10 @@ https://*.wikipedia.org` CSP allowance.
 
 **Presentation.** `makeProvenancePill(level)` -> a `.src-prov-<level>` pill (`.src-todo` for
 the none case) with the glyph + `info.prov*` tooltip via `withTip`; colours are CSS.
-`appendSources` adds a pill per citation; `appendWiki(url, provenance)` one per reference row
-(or `NOSOURCE`). Each pill's tooltip explains its own grade and the About block carries the
-full key, so there is no separate blanket "?" caveat.
+`appendSources` adds a pill per citation; `appendWiki(url)` renders the reference-link row
+(a present link carries no pill, since the description above it already grades the same
+Wikipedia source; a missing link shows the `NOSOURCE` pill). Each pill's tooltip explains its
+own grade and the About block carries the full key, so there is no separate blanket "?" caveat.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every **node** + reference to its
 strongest grade and tallies per node kind (drug bindings / NbN / projections / receptor
