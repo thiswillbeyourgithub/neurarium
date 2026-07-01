@@ -280,7 +280,9 @@ Viewer (`public/`):
   a cheap spread (see Spread performance); `ensurePickGeometry()` rebuilds a
   deferred pick hull on demand. `setWidthScale(s)` re-fits just the shaft radius +
   cone cross-section (from the cached arc, no surface scan) so arrows hold a
-  constant apparent width across zooms (see Arrow width).
+  constant apparent width across zooms (see Arrow width). Arrows never render fully
+  opaque: `setOpacity` clamps to `ARROW_MAX_OPACITY` (0.8) so even the undimmed
+  "full" state (`setOpacity(1)`) is a translucent overlay the anatomy shows through.
 - `js/labels.js` — floating structure-name labels (CSS2DRenderer): one hidden
   label per region, shown on hover / show-all / when pinned (`setPinned`).
 - `js/circuit-schedule.js` — `scheduleCircuit()` BFS firing order for the circuit

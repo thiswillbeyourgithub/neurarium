@@ -68,6 +68,11 @@ function surfaceToward(mesh, fromPoint) {
 const TUBE_RADIUS = 0.1;
 const CONE_LENGTH = 0.4;
 const CONE_RADIUS = 0.22;
+// Arrows never render fully opaque: even undimmed they cap here, so a projection
+// always reads as a translucent overlay on the anatomy (the brain shows through)
+// rather than a hard solid tube. setOpacity() clamps to this, so the isolate/focus
+// "full" state (setOpacity(1)) lands at this cap and dimming still fades below it.
+const ARROW_MAX_OPACITY = 0.8;
 // Radius of the selection-halo tube: a fatter additive glow drawn around the
 // whole arc when the arrow is picked, mirroring the structures' halo shells.
 const HALO_RADIUS = 0.22;
@@ -179,14 +184,15 @@ export class ProjectionArrow {
 
     const color = new THREE.Color(colorHex);
     // Flat, lit-independent material so arrows stay readable. Created
-    // `transparent: true` from the start (like the structure material) even
-    // though it renders fully opaque by default: toggling `transparent` at
-    // runtime would need a material recompile (needsUpdate) to take visual
-    // effect, so setOpacity() below only ever changes `opacity`/`depthWrite` and
-    // the isolate-mode dimming actually shows. The global Transparency slider
-    // deliberately leaves arrows opaque (it never calls setOpacity); only the
-    // isolate/circuit focus fades them.
-    this.material = new THREE.MeshBasicMaterial({ color, transparent: true });
+    // `transparent: true` from the start (like the structure material): toggling
+    // `transparent` at runtime would need a material recompile (needsUpdate) to
+    // take visual effect, so setOpacity() below only ever changes
+    // `opacity`/`depthWrite` and the isolate-mode dimming actually shows. Its
+    // resting opacity is ARROW_MAX_OPACITY (never fully opaque, so the anatomy
+    // always shows through the arrows); the global Transparency slider leaves this
+    // alone (it never calls setOpacity), only the isolate/circuit focus fades them.
+    this.material = new THREE.MeshBasicMaterial({
+      color, transparent: true, opacity: ARROW_MAX_OPACITY, depthWrite: false });
 
     // Tube geometry is rebuilt on every update(); start with a placeholder.
     this.tube = new THREE.Mesh(new THREE.BufferGeometry(), this.material);
@@ -438,11 +444,15 @@ export class ProjectionArrow {
    * arrow stops writing depth so it doesn't occlude the structures behind it.
    * The material is already `transparent: true` (see the constructor), so we
    * never toggle that flag here, only the opacity + depth-write.
-   * @param {number} opacity  1 = fully opaque (the default), lower = dimmer.
+   * @param {number} opacity  the requested opacity; clamped to ARROW_MAX_OPACITY,
+   *   so the undimmed "full" state (1) lands at the cap and never fully opaque.
    */
   setOpacity(opacity) {
-    this.material.opacity = opacity;
-    this.material.depthWrite = opacity >= 1;
+    const o = Math.min(opacity, ARROW_MAX_OPACITY);
+    this.material.opacity = o;
+    // Arrows never reach full opacity now, so they never write depth (a
+    // translucent overlay blends rather than occluding the arrows behind it).
+    this.material.depthWrite = o >= 1;
   }
 
   /** Show/hide the selection glow around this arrow (picked via click/search). */
