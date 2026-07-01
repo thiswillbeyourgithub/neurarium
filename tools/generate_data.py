@@ -637,6 +637,14 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "TODO",
         "pages_dir": "sources/books/stahl_essential_pharmacology/pages",
     },
+    "carlat": {
+        # Second drug corpus: cross-sources drug bindings Stahl did not state.
+        "ref": "Carlat Medication Fact Book for Psychiatric Practice, 7th ed.",
+        "citation": "Carlat DJ. The Carlat Medication Fact Book for Psychiatric "
+                    "Practice. 7th ed. Carlat Publishing; 2024.",
+        "url": "TODO",
+        "pages_dir": "sources/books/carlat_medication/pages",
+    },
 }
 
 

@@ -2159,15 +2159,21 @@
       "citation": "Stahl SM. Stahl's Essential Psychopharmacology: Neuroscientific Basis and Practical Applications. 5th ed. Cambridge University Press; 2021.",
       "url": "TODO",
       "pages_dir": "sources/books/stahl_essential_pharmacology/pages"
+    },
+    "carlat": {
+      "ref": "Carlat Medication Fact Book for Psychiatric Practice, 7th ed.",
+      "citation": "Carlat DJ. The Carlat Medication Fact Book for Psychiatric Practice. 7th ed. Carlat Publishing; 2024.",
+      "url": "TODO",
+      "pages_dir": "sources/books/carlat_medication/pages"
     }
   },
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
         "total": 429,
-        "verified": 403,
+        "verified": 409,
         "sourced": 0,
-        "unverified": 26
+        "unverified": 20
       },
       "drug_nbn": {
         "total": 116,
@@ -2208,11 +2214,11 @@
     },
     "assertions": {
       "total": 785,
-      "verified": 701,
+      "verified": 707,
       "sourced": 0,
-      "unverified": 84,
-      "backed": 701,
-      "pct_backed": 89
+      "unverified": 78,
+      "backed": 707,
+      "pct_backed": 90
     }
   }
 }

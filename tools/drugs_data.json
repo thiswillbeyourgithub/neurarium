@@ -2169,7 +2169,15 @@
       },
       {
         "target": "muscarinic",
-        "action": "antagonist"
+        "action": "antagonist",
+        "sources": [
+          {
+            "corpus": "carlat",
+            "page": 121,
+            "quote": "They also have secondary anticholinergic effects, which can cause side effects including dry mouth, constipation, and urinary retention, as well as cognitive impairment in susceptible populations.",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Diphenhydramine"
@@ -3290,7 +3298,15 @@
       },
       {
         "target": "mao_b",
-        "action": "enzyme_inhibitor"
+        "action": "enzyme_inhibitor",
+        "sources": [
+          {
+            "corpus": "carlat",
+            "page": 60,
+            "quote": "Non-selective monoamine oxidase inhibitors.",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Isocarboxazid",
@@ -5496,11 +5512,27 @@
     "bindings": [
       {
         "target": "mao_a",
-        "action": "enzyme_inhibitor"
+        "action": "enzyme_inhibitor",
+        "sources": [
+          {
+            "corpus": "carlat",
+            "page": 60,
+            "quote": "Non-selective monoamine oxidase inhibitors.",
+            "provenance": "verified"
+          }
+        ]
       },
       {
         "target": "mao_b",
-        "action": "enzyme_inhibitor"
+        "action": "enzyme_inhibitor",
+        "sources": [
+          {
+            "corpus": "carlat",
+            "page": 60,
+            "quote": "Non-selective monoamine oxidase inhibitors.",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Phenelzine",
@@ -7158,7 +7190,15 @@
       },
       {
         "target": "mao_b",
-        "action": "enzyme_inhibitor"
+        "action": "enzyme_inhibitor",
+        "sources": [
+          {
+            "corpus": "carlat",
+            "page": 60,
+            "quote": "Non-selective monoamine oxidase inhibitors.",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Tranylcypromine",
@@ -7505,7 +7545,15 @@
     "bindings": [
       {
         "target": "vmat2",
-        "action": "reuptake_inhibitor"
+        "action": "reuptake_inhibitor",
+        "sources": [
+          {
+            "corpus": "carlat",
+            "page": 198,
+            "quote": "Reversible inhibitor of vesicular monoamine transporter 2 (VMAT2).",
+            "provenance": "verified"
+          }
+        ]
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Valbenazine"
