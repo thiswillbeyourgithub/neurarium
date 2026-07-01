@@ -307,10 +307,107 @@ def _stamp_mapping(summary, mapping):
         summary["source"]["pdsp_names"] = mapping["pdsp_names"]
 
 
+def analyze(rows, bound):
+    """Split a drug's PDSP rows into annotated (its existing bindings), auto_add
+    (omitted targets stronger by median than the weakest binding -> to be added),
+    flagged_min_only (stronger only at best assay -> reported, not added) and weaker.
+    Shared by the single-drug preview and --apply so the policy lives in one place."""
+    annotated = {tgt: summarize_target(rows, tgt) for tgt in bound}
+    ann_meds = [s["ki_nm"]["median"] for s in annotated.values()
+                if s and s.get("ki_nm")]
+    threshold = max(ann_meds) if ann_meds else None
+
+    # Candidate omitted targets = every target id PDSP has for this drug that we did
+    # not bind, minus subtypes already covered by an annotated coarse target, and
+    # collapsing a coarse's subtypes when the coarse itself is a candidate.
+    covered = set(bound)
+    for b in bound:
+        covered |= COARSE_MEMBERS.get(b, set())
+    present = {resolve_target(r) for r in rows} - {None}
+    sub_to_coarse = {sub: c for c, subs in COARSE_MEMBERS.items()
+                     for sub in subs if sub != c}
+    rest = present - covered
+    candidates = {c for c in rest if sub_to_coarse.get(c) not in rest}
+
+    auto_add, flagged_min_only, weaker = {}, {}, {}
+    for tgt in sorted(candidates):
+        s = summarize_target(rows, tgt)
+        if not s or not s.get("ki_nm"):
+            continue
+        med, mn = s["ki_nm"]["median"], s["ki_nm"]["min"]
+        if threshold is None or med >= threshold:
+            (flagged_min_only if (threshold is not None and mn < threshold)
+             else weaker)[tgt] = s
+        else:
+            auto_add[tgt] = s
+    return {"annotated": annotated, "threshold": threshold, "auto_add": auto_add,
+            "flagged_min_only": flagged_min_only, "weaker": weaker}
+
+
+def _ki_from_summary(s):
+    """The binding `ki` object written into drugs_data.json, from a target summary."""
+    return {
+        "median": s["ki_nm"]["median"], "min": s["ki_nm"]["min"],
+        "max": s["ki_nm"]["max"], "n_human": s["n_human"],
+        "n_nonhuman": s["n_nonhuman"], "source": s["source"],
+    }
+
+
+def _is_pdsp_ki(binding):
+    return binding.get("ki", {}).get("source", {}).get("corpus") == "pdsp_ki"
+
+
+def apply_all():
+    """Write PDSP Ki into tools/drugs_data.json for every resolvable drug: annotate
+    existing bindings with a `ki`, add the median-stronger omitted targets as new
+    `affinity_only` bindings. Idempotent: strips its own prior output first, so a
+    re-run after a fresh CSV download simply refreshes the values."""
+    data = json.load(open(DATASET, encoding="utf-8"))
+    n_ann = n_add = n_drugs = 0
+    for d in data:
+        # Idempotency: drop what a previous --apply added before recomputing.
+        d["bindings"] = [b for b in d.get("bindings", [])
+                         if not (b.get("affinity_only") and _is_pdsp_ki(b))]
+        for b in d["bindings"]:
+            if _is_pdsp_ki(b):
+                b.pop("ki", None)
+
+        if combo_constituents(d["name"]):     # combos handled in the viewer, not here
+            continue
+        rows, mapping = resolve_rows(d["name"], d["id"])
+        if not rows:
+            continue
+        bound = [b["target"] for b in d["bindings"]]
+        res = analyze(rows, bound)
+        for s in list(res["annotated"].values()) + list(res["auto_add"].values()):
+            _stamp_mapping(s, mapping)
+        touched = False
+        for b in d["bindings"]:
+            s = res["annotated"].get(b["target"])
+            if s and s.get("ki_nm"):
+                b["ki"] = _ki_from_summary(s)
+                n_ann += 1
+                touched = True
+        for tgt, s in res["auto_add"].items():
+            d["bindings"].append({"target": tgt, "affinity_only": True,
+                                  "ki": _ki_from_summary(s)})
+            n_add += 1
+            touched = True
+        if touched:
+            n_drugs += 1
+
+    with open(DATASET, "w", encoding="utf-8") as f:
+        f.write(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+    print("applied Ki to %d drugs: %d bindings annotated, %d affinity-only added"
+          % (n_drugs, n_ann, n_add))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--drug", required=True, help="drug id / ligand name (e.g. risperidone)")
+    ap.add_argument("--drug", help="drug id / ligand name to preview (e.g. risperidone)")
+    ap.add_argument("--apply", action="store_true",
+                    help="write Ki into tools/drugs_data.json for every drug (idempotent)")
     ap.add_argument("--all", action="store_true",
                     help="also list omitted PDSP targets weaker than our weakest binding")
     ap.add_argument("--json", metavar="OUT", help="write the preview JSON here")
@@ -318,6 +415,12 @@ def main():
 
     if not os.path.exists(CSV_PATH):
         sys.exit("PDSP CSV not found at %s (author-side; see its README)" % CSV_PATH)
+
+    if args.apply:
+        apply_all()
+        return
+    if not args.drug:
+        sys.exit("give --drug <id> to preview, or --apply to write the dataset")
 
     rec, data = find_drug(args.drug)
 
@@ -341,56 +444,22 @@ def main():
         sys.exit("no PDSP rows for %r (no direct match or alias)" % args.drug)
 
     bound = [b["target"] for b in rec["bindings"]] if rec else []
-
-    # Annotate the drug's EXISTING bindings with Ki.
-    annotated = {tgt: summarize_target(rows, tgt) for tgt in bound}
-    ann_meds = [s["ki_nm"]["median"] for s in annotated.values()
-                if s and s.get("ki_nm")]
-    # Threshold = the weakest annotated affinity (largest median among our bindings).
-    threshold = max(ann_meds) if ann_meds else None
-
-    # Candidate omitted targets = every target id PDSP has for this drug that we did
-    # not bind, minus subtypes already covered by an annotated coarse target, and
-    # collapsing a coarse's subtypes when the coarse itself is a candidate.
-    covered = set(bound)
-    for b in bound:
-        covered |= COARSE_MEMBERS.get(b, set())
-    present = {resolve_target(r) for r in rows} - {None}
-    sub_to_coarse = {sub: c for c, subs in COARSE_MEMBERS.items()
-                     for sub in subs if sub != c}
-    rest = present - covered
-    candidates = {c for c in rest if sub_to_coarse.get(c) not in rest}
-
-    # Policy: auto-add an omitted target only when it beats the weakest annotated
-    # binding by MEDIAN (the strict, defensible set). Ones that beat it only at their
-    # best assay (min) are reported but NOT added; the rest are weaker/informational.
-    auto_add, flagged_min_only, weaker = {}, {}, {}
-    for tgt in sorted(candidates):
-        s = summarize_target(rows, tgt)
-        if not s or not s.get("ki_nm"):
-            continue
-        med, mn = s["ki_nm"]["median"], s["ki_nm"]["min"]
-        if threshold is None or med >= threshold:
-            (flagged_min_only if (threshold is not None and mn < threshold)
-             else weaker)[tgt] = s
-        else:
-            auto_add[tgt] = s
-
-    for grp in (annotated, auto_add, flagged_min_only, weaker):
-        for s in grp.values():
+    res = analyze(rows, bound)
+    for grp in ("annotated", "auto_add", "flagged_min_only", "weaker"):
+        for s in res[grp].values():
             _stamp_mapping(s, mapping)
 
     result = {
         "drug": args.drug,
         "pdsp_rows": len(rows),
         "mapping": mapping,               # None for a direct name match
-        "annotated": annotated,           # Ki for our existing bindings
-        "annotated_threshold_nm": threshold,
-        "auto_add": auto_add,             # median-stronger omitted -> would be added
-        "flagged_min_only": flagged_min_only,  # best-case-only -> reported, not added
+        "annotated": res["annotated"],    # Ki for our existing bindings
+        "annotated_threshold_nm": res["threshold"],
+        "auto_add": res["auto_add"],      # median-stronger omitted -> would be added
+        "flagged_min_only": res["flagged_min_only"],  # best-case-only -> not added
     }
     if args.all:
-        result["weaker"] = weaker
+        result["weaker"] = res["weaker"]
 
     text = json.dumps(result, ensure_ascii=False, indent=2)
     if args.json:
