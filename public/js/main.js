@@ -1776,6 +1776,25 @@ function createInfoPanel(data) {
     return wrap; // returned so it can anchor a live Wikipedia description below it
   };
 
+  // Append an external "look this up" link (a search-by-name convenience that lands
+  // on a results page, e.g. EMA / FDA / Drugs.com for a drug, PDSP for a receptor)
+  // onto a reference row's wiki wrap, after a `·` separator. Not a source for any
+  // specific claim, so it carries no provenance pill; only linked (navigated to),
+  // never fetched, so the CSP is unaffected.
+  const appendLookupLink = (wrap, labelKey, href, titleKey) => {
+    wrap.appendChild(el("span", "ref-sep", "·"));
+    const a = el("a", null, t(labelKey));
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.title = t(titleKey);
+    wrap.appendChild(a);
+    return a;
+  };
+  // The PDSP Ki database has no URL-addressable per-target search, so every
+  // receptor/target links to the same browse page (a "go look it up" convenience).
+  const PDSP_KIDB_URL = "https://pdspdb.unc.edu/kidb2/kidb/web/kis-results/index";
+
   // Live Wikipedia description, shared by every panel carrying a `wikipedia` link
   // (drug / receptor / structure / target). Best-effort: it fetches the current
   // lead for the viewer's locale (js/wiki.js, English fallback) and shows it as one
@@ -2195,10 +2214,13 @@ function createInfoPanel(data) {
       body.appendChild(el("h2", "info-title", receptor.name));
       body.appendChild(el("div", "info-group", receptor.familyLabel));
 
-      appendReference({
+      const { wiki: recWiki } = appendReference({
         url: receptor.wikipedia, provenance: receptor.wikipedia_provenance,
         description: receptor.description,
       });
+      // PDSP Ki database lookup, beside the reference (binding-affinity data for
+      // this receptor; a browse link, since PDSP has no per-target search URL).
+      appendLookupLink(recWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
 
       // Classification facts as label / value rows; the "effect" value carries the
       // sign swatch so the colour matches the dots + legend row.
@@ -2249,9 +2271,11 @@ function createInfoPanel(data) {
 
       // Reference + live lead (targets carry no baked description), via the shared
       // appendReference, so the link sits under any live lead like every panel.
-      appendReference({
+      const { wiki: tgtWiki } = appendReference({
         url: target.wikipedia, provenance: target.wikipediaProvenance,
       });
+      // PDSP covers transporters / enzymes / ion channels too, so the same lookup.
+      appendLookupLink(tgtWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
 
       const facts = el("div", "info-facts");
       addFactRow(facts, t("receptor.type"), target.typeLabel, target.swatchColor);
@@ -2330,15 +2354,8 @@ function createInfoPanel(data) {
       // EMA (Europe) and the US FDA show regardless of locale. ANSM is intentionally
       // absent: its ecodex search has no URL-addressable form to deep-link.
       if (wiki) {
-        const addLookup = (labelKey, href, titleKey) => {
-          wiki.appendChild(el("span", "ref-sep", "·"));
-          const a = el("a", null, t(labelKey));
-          a.href = href;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          a.title = t(titleKey);
-          wiki.appendChild(a);
-        };
+        const addLookup = (labelKey, href, titleKey) =>
+          appendLookupLink(wiki, labelKey, href, titleKey);
         const q = encodeURIComponent(drug.name);
         // Drugs.com search by name. A search link (always lands on the drug),
         // chosen over a direct /monograph/<name>.html so it never 404s for a drug
