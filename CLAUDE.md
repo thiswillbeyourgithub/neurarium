@@ -1259,6 +1259,30 @@ Wikipedia lead instead of baking it.
 
 The legend is generated at runtime from the data, so it updates automatically.
 
+### Refreshing external data (author-side)
+
+To re-pull every third-party asset the dataset hot-links or vendors, run these (all
+network, idempotent, polite; each touches only what changed). Always finish with
+`generate_data.py` so the emitted `public/data/` picks up the new urls/files:
+
+1. `python tools/fetch_molecules.py` — new per-drug molecule SVGs into
+   `public/data/molecules/` (only drugs missing one); writes `tools/molecules_sources.json`.
+2. `python tools/fetch_structure_images.py` — re-resolve each structure's Wikipedia
+   hero + gallery image **urls** into `tools/structure_images_sources.json` (no bytes
+   downloaded; the gif/svg is hot-linked at runtime).
+3. **PDSP Ki** (the binding-affinity "pharmacokinetic" table): re-download the whole-DB
+   CSV from the PDSP export endpoint
+   `https://pdspdb.unc.edu/databases/kiDownload/download.php` over
+   `sources/books/pdsp_ki/KiDatabase.csv` (author-side, gitignored; fixed filename, live
+   export, so a re-download just picks up new rows; see that dir's `README.md`), then
+   `python tools/fetch_ki.py --apply` to rewrite `drugs_data.json`'s `ki` + `affinity_only`.
+4. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
+5. `python tools/update_readme_stats.py` — refresh the README sourcing table
+   (CI runs it `--check`).
+
+Panel **descriptions** need no refresh script: each fetches the current Wikipedia lead
+at runtime (`js/wiki.js`), so they stay current on their own.
+
 ## Versioning
 
 The version is a single string in `version.js` (`window.__APP_VERSION__`), shown in the
