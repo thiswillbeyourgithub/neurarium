@@ -645,6 +645,20 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "TODO",
         "pages_dir": "sources/books/carlat_medication/pages",
     },
+    "pdsp_ki": {
+        # Binding-affinity corpus: measured Ki (nM) values backing a drug binding's
+        # `ki` annotation. Unlike the book corpora this is a single CSV of assay
+        # rows, not paged text, so it has no `pages_dir`; check_data confirms a
+        # cited Ki id/value against the `csv` file instead (author-side, skipped on
+        # a clone without it, like the quote gate). See tools/fetch_ki.py +
+        # sources/books/pdsp_ki/README.md.
+        "ref": "PDSP Ki Database (NIMH PDSP)",
+        "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, "
+                    "directed by Bryan L. Roth, University of North Carolina at "
+                    "Chapel Hill.",
+        "url": "https://pdspdb.unc.edu/databases/kidb.php",
+        "csv": "sources/books/pdsp_ki/KiDatabase.csv",
+    },
 }
 
 
@@ -690,6 +704,47 @@ def _binding_sources(drug_id: str, binding: dict[str, Any]) -> list[dict[str, An
     return _quote_sources(
         binding.get("sources"),
         f"Drug {drug_id!r} binding {binding.get('target')!r}")
+
+
+def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | None:
+    """Validate + normalize a binding's PDSP ``ki`` annotation (measured binding
+    affinity), or ``None`` when absent.
+
+    Shape: ``{median, min, max, n_human, n_nonhuman, source}`` where ``source`` is
+    one specific PDSP CSV row: ``{corpus:"pdsp_ki", ki_id, value_nm, species,
+    preparation, radioligand, reference, provenance}`` plus, for a match recovered
+    through the alias map (:data:`tools.fetch_ki.ALIAS`), ``mapped``/``measured_as``/
+    ``relation``/``pdsp_names`` so the viewer warns *which* compound the Ki was
+    measured on. The Ki carries its **own** ``verified`` source (rendered as its own
+    badge beside the binding), separate from the binding's quote ``sources``, because
+    it is a distinct datum (an affinity), not a source for the mechanism claim.
+    ``check_data.py`` confirms the ``ki_id`` row is really in the corpus CSV.
+    """
+    ki = binding.get("ki")
+    if not ki:
+        return None
+    what = f"Drug {drug_id!r} binding {binding.get('target')!r} ki"
+    for k in ("median", "min", "max"):
+        if not isinstance(ki.get(k), (int, float)):
+            raise ValueError(f"{what} missing numeric {k!r}")
+    src = ki.get("source") or {}
+    corpus = src.get("corpus")
+    if corpus not in SOURCE_CORPORA:
+        raise KeyError(f"{what} source cites unknown corpus {corpus!r}")
+    prov = _provenance(src.get("provenance", DEFAULT_PROVENANCE), f"{what} source")
+    if prov == "verified" and src.get("ki_id") is None:
+        raise ValueError(f"{what} 'verified' source needs a ki_id (the PDSP row id)")
+    out_src: dict[str, Any] = {"corpus": corpus, "provenance": prov}
+    for f in ("ki_id", "value_nm", "species", "preparation", "radioligand",
+              "reference", "note", "mapped", "measured_as", "relation", "pdsp_names"):
+        if src.get(f) not in (None, ""):
+            out_src[f] = src[f]
+    return {
+        "median": ki["median"], "min": ki["min"], "max": ki["max"],
+        "n_human": int(ki.get("n_human", 0)),
+        "n_nonhuman": int(ki.get("n_nonhuman", 0)),
+        "source": out_src,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -4424,15 +4479,24 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         if b["target"] not in valid_targets:
             raise KeyError(f"Drug {drug['id']!r} binding target {b['target']!r} "
                            f"is not a known target (DRUG_TARGETS key or receptor id)")
-        if b["action"] not in DRUG_ACTIONS:
-            raise KeyError(f"Drug {drug['id']!r} binding action {b['action']!r} "
-                           f"has no DRUG_ACTIONS entry")
-        out_b: dict[str, Any] = {"target": b["target"], "action": b["action"]}
-        if "effect" in b:
-            if b["effect"] not in DRUG_EFFECT_COLORS:
-                raise KeyError(f"Drug {drug['id']!r} binding effect {b['effect']!r} "
-                               f"has no DRUG_EFFECT_COLORS entry")
-            out_b["effect"] = b["effect"]
+        # An `affinity_only` binding is PDSP-derived: we know the drug binds the
+        # target (with a measured Ki) but not the functional direction (agonist vs
+        # antagonist), so it carries no action/effect and is listed in the panel but
+        # excluded from the 3D animation (see js/data.js). Every other binding must
+        # name a known action.
+        affinity_only = bool(b.get("affinity_only"))
+        if affinity_only:
+            out_b: dict[str, Any] = {"target": b["target"], "affinity_only": True}
+        else:
+            if b["action"] not in DRUG_ACTIONS:
+                raise KeyError(f"Drug {drug['id']!r} binding action {b['action']!r} "
+                               f"has no DRUG_ACTIONS entry")
+            out_b = {"target": b["target"], "action": b["action"]}
+            if "effect" in b:
+                if b["effect"] not in DRUG_EFFECT_COLORS:
+                    raise KeyError(f"Drug {drug['id']!r} binding effect "
+                                   f"{b['effect']!r} has no DRUG_EFFECT_COLORS entry")
+                out_b["effect"] = b["effect"]
         if b.get("note"):
             out_b["note"] = b["note"]
         if b.get("tentative"):
@@ -4443,6 +4507,10 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         binding_sources = _binding_sources(drug["id"], b)
         if binding_sources:
             out_b["sources"] = binding_sources
+        # PDSP measured binding affinity (its own verified source; see _ki_annotation).
+        ki = _ki_annotation(drug["id"], b)
+        if ki:
+            out_b["ki"] = ki
         bindings.append(out_b)
     out: dict[str, Any] = {
         "id": drug["id"],

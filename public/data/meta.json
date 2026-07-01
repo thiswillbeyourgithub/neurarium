@@ -2165,6 +2165,12 @@
       "citation": "Carlat DJ. The Carlat Medication Fact Book for Psychiatric Practice. 7th ed. Carlat Publishing; 2024.",
       "url": "TODO",
       "pages_dir": "sources/books/carlat_medication/pages"
+    },
+    "pdsp_ki": {
+      "ref": "PDSP Ki Database (NIMH PDSP)",
+      "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, directed by Bryan L. Roth, University of North Carolina at Chapel Hill.",
+      "url": "https://pdspdb.unc.edu/databases/kidb.php",
+      "csv": "sources/books/pdsp_ki/KiDatabase.csv"
     }
   },
   "provenance_stats": {
