@@ -2176,10 +2176,10 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 429,
-        "verified": 409,
+        "total": 632,
+        "verified": 620,
         "sourced": 0,
-        "unverified": 20
+        "unverified": 12
       },
       "drug_nbn": {
         "total": 116,
@@ -2219,12 +2219,12 @@
       }
     },
     "assertions": {
-      "total": 785,
-      "verified": 710,
+      "total": 988,
+      "verified": 921,
       "sourced": 0,
-      "unverified": 75,
-      "backed": 710,
-      "pct_backed": 90
+      "unverified": 67,
+      "backed": 921,
+      "pct_backed": 93
     }
   }
 }
