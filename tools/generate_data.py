@@ -2456,8 +2456,147 @@ def _stahl_ess(page: int, quote: str) -> dict[str, Any]:
 # and _build_drug_targets attach the quote as `sources` and upgrade
 # classification_provenance; a key that is not a real id fails the build. One
 # mechanism sentence often backs a whole receptor family, so it is written once.
-STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {}
-STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {}
+# Shared mechanism sentences (one classifies a whole receptor family / target group).
+_SE_MUSCARINIC = _stahl_ess(522,
+    "Muscarinic acetylcholine receptors are G-protein-linked and can be either "
+    "excitatory or inhibitory.")
+_SE_NICOTINIC = _stahl_ess(79,
+    "The state of inactivation may be best characterized for nicotinic cholinergic "
+    "receptors, ligand-gated ion channels that are normally responsive to the "
+    "endogenous neurotransmitter acetylcholine.")
+_SE_IONO_GLU = _stahl_ess(117,
+    "NMDA ( _N_ -methyl-D-asparate), AMPA (α-amino3-hydroxy-5-methyl-4-isoxazole-"
+    "propionic acid), and kainate receptors for glutamate, named after the "
+    "agonists that selectively bind to them, are all members of the ligand-gated "
+    "ion-channel family of receptors (Figure 4-23 and Table 4-2).")
+_SE_META_GLU = _stahl_ess(116,
+    "Metabotropic glutamate receptors are those glutamate receptors that are "
+    "linked to G proteins.")
+_SE_PENTAMERIC = _stahl_ess(92,
+    "One subclass of ligand-gated ion channels has a pentameric structure, and "
+    "includes GABAA receptors, nicotinic cholinergic receptors, 5HT3 receptors, "
+    "and certain glycine receptors.")
+_SE_5HT1BD = _stahl_ess(406,
+    "Serotonin inhibits primary afferent terminals via postsynaptic 5HT1B/D "
+    "receptors (Figure 9-2). These inhibitory receptors are G-protein-coupled, and "
+    "indirectly influence ion channels to hyperpolarize the nerve terminal and "
+    "inhibit nociceptive neurotransmitter release.")
+_SE_D2LIKE = _stahl_ess(97,
+    "The second group is the D2-like receptors, including D2, D3, and D4 receptors. "
+    "D2-like receptors are inhibitory and negatively linked to adenylate cyclase "
+    "(Figure 4-4, right).")
+_SE_CHE = _stahl_ess(521,
+    'ACh\'s actions are terminated by one of two enzymes, either '
+    'acetylcholinesterase (AChE) or butyrylcholinesterase (BuChE), sometimes also '
+    'called "pseudocholinesterase" or "nonspecific cholinesterase" (Figure 12-25).')
+_SE_VSC = _stahl_ess(25,
+    "Electrical impulses open ion channels – both voltage-sensitive sodium "
+    "channels (VSSCs) and voltage-sensitive calcium channels (VSCCs) – by changing "
+    "the ionic charge across neuronal membranes.")
+_SE_NE_GROUPS = _stahl_ess(270,
+    "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 "
+    "(Figure 6-14).")
+
+STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {
+    "m1": _SE_MUSCARINIC, "m2": _SE_MUSCARINIC, "m3": _SE_MUSCARINIC,
+    "m4": _SE_MUSCARINIC, "m5": _SE_MUSCARINIC,
+    "nachr_a4b2": _SE_NICOTINIC, "nachr_a7": _SE_NICOTINIC,
+    "nmda": _SE_IONO_GLU, "ampa": _SE_IONO_GLU, "kainate": _SE_IONO_GLU,
+    "mglur1": _SE_META_GLU, "mglur2": _SE_META_GLU, "mglur3": _SE_META_GLU,
+    "mglur4": _SE_META_GLU, "mglur5": _SE_META_GLU, "mglur7": _SE_META_GLU,
+    "gaba_a": _stahl_ess(275,
+        "GABAA and GABAC receptors are ligand-gated ion channels; they are part of "
+        "a macromolecular complex that forms an inhibitory chloride channel."),
+    "gaba_b": _stahl_ess(275,
+        "GABAB receptors are G-protein-linked receptors that may be coupled with "
+        "calcium or potassium channels."),
+    "glycine": _SE_PENTAMERIC,
+    "5ht3": _SE_PENTAMERIC,
+    "h1": _stahl_ess(421,
+        "When histamine binds to postsynaptic histamine 1 (H1) receptors, it "
+        "activates a G-protein-linked second-messenger system that activates "
+        "phosphatidylinositol (PI) and the transcription factor cFOS."),
+    "h2": _stahl_ess(421,
+        "When histamine binds to postsynaptic H2 receptors it activates a "
+        "G-proteinlinked second-messenger system with cyclic adenosine "
+        "monophosphate (cAMP), phosphokinase A (PKA), and the gene product CREB."),
+    "5ht1b": _SE_5HT1BD, "5ht1d": _SE_5HT1BD,
+    "d1": _stahl_ess(473,
+        "D1 receptors, on the other hand, are linked to the cAMP signaling system "
+        "via the stimulatory G protein (Gs) (Figure 11-17)."),
+    "d2": _stahl_ess(208,
+        "With full agonists, the receptor conformation is such that there is "
+        "robust signal transduction through the G-protein-linked second-messenger "
+        "system of D2 receptors (left)."),
+    "d3": _SE_D2LIKE, "d4": _SE_D2LIKE,
+    "d5": _stahl_ess(97,
+        "The first group is the D1-like receptors, including both D1 and D5 "
+        "receptors. D1-like receptors are excitatory, and positively linked to "
+        "adenylate cyclase (Figure 4-4, left)."),
+    "alpha2a": _stahl_ess(473,
+        "Alpha-2A receptors are linked to the molecule cyclic adenosine "
+        "monophosphate (cAMP) via the inhibitory G protein (Gi) (Figure 11-17)."),
+}
+
+STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
+    "sert": _stahl_ess(131,
+        "There is also a presynaptic transport pump selective for serotonin, "
+        "called the serotonin transporter (SERT), which clears serotonin out of "
+        "the synapse and back into the presynaptic neuron."),
+    "net": _stahl_ess(271,
+        "The norepinephrine transporter (NET) exists presynaptically and is "
+        "responsible for clearing excess norepinephrine out of the synapse."),
+    "dat": _stahl_ess(96,
+        "Dopamine can be transported out of the synaptic cleft and back into the "
+        "presynaptic neuron via the dopamine transporter (DAT), where it may be "
+        "repackaged for future use."),
+    "gat": _stahl_ess(274,
+        "GABA's synaptic actions are terminated by the presynaptic GABA "
+        "transporter (GAT), also known as the GABA reuptake pump (Figure 6-18), "
+        "analogous to similar transporters for other neurotransmitters discussed "
+        "throughout this text."),
+    "vmat2": _stahl_ess(269,
+        "After synthesis, NE is packaged into synaptic vesicles via the vesicular "
+        "monoamine transporter 2 (VMAT2) and stored there until its release into "
+        "the synapse during neurotransmission."),
+    "mao_a": _stahl_ess(355,
+        "The enzyme MAO-A metabolizes serotonin (5HT) and norepinephrine (NE) as "
+        "well as dopamine (DA) (left panels)."),
+    "mao_b": _stahl_ess(96,
+        "Other enzymes that break down dopamine are monoamine oxidase A (MAO-A) "
+        "and monoamine oxidase B (MAO-B), which are present in mitochondria within "
+        "the presynaptic neuron and in other cells such as glia."),
+    "ache": _SE_CHE, "bche": _SE_CHE,
+    "nav": _SE_VSC, "cav": _SE_VSC,
+    "cav_a2d": _stahl_ess(413,
+        "Alpha-2-delta ligands such as gabapentin or pregabalin bind to the α2δ "
+        "subunit of voltage-sensitive calcium channels (VSCCs), changing their "
+        "conformation to reduce calcium influx and therefore reduce excessive "
+        "stimulation of postsynaptic receptors."),
+    "sv2a": _stahl_ess(51,
+        "A novel 12-transmembrane-region synaptic vesicle transporter of uncertain "
+        "mechanism and with unclear substrates, called the SV2A transporter and "
+        "localized within the synaptic vesicle membrane, binds the anticonvulsant "
+        "levetiracetam, perhaps interfering with neurotransmitter release and "
+        "thereby reducing seizures."),
+    "muscarinic": _SE_MUSCARINIC,
+    "nicotinic": _stahl_ess(524,
+        "Acetylcholine neurotransmission can be regulated by ligand-gated "
+        "excitatory ion channels known as nicotinic acetylcholine receptors, "
+        "shown here."),
+    "alpha1": _SE_NE_GROUPS, "alpha2": _SE_NE_GROUPS, "beta": _SE_NE_GROUPS,
+    "glutamate": _stahl_ess(92,
+        "The other subclass of ligand-gated ion channels has a tetrameric "
+        "structure, and includes many glutamate receptors, including the AMPA, "
+        "kainate, and NMDA subtypes."),
+    "melatonin": _stahl_ess(455,
+        "There are three types of receptors for melatonin: MT1 and MT2, which are "
+        "both involved in sleep, and MT3, which is actually the enzyme NRH–quinine "
+        "oxidoreductase 2 and not thought to be involved in sleep physiology."),
+    "orexin": _stahl_ess(425,
+        "Orexin neurotransmission is mediated by two types of postsynaptic "
+        "G-protein-coupled receptors, orexin 1 (OX1R) and orexin 2 (OX2R)."),
+}
 
 PROJECTIONS: list[dict[str, Any]] = [
     # --- Corticostriatal input (glutamate): cortex drives the striatum ---

@@ -270,9 +270,17 @@
         "hypothalamus",
         "accumbens"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 131,
+          "provenance": "verified",
+          "quote": "There is also a presynaptic transport pump selective for serotonin, called the serotonin transporter (SERT), which clears serotonin out of the synapse and back into the presynaptic neuron."
+        }
+      ]
     },
     "net": {
       "name": {
@@ -291,9 +299,17 @@
         "amygdala",
         "cerebellum"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Norepinephrine_transporter",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 271,
+          "provenance": "verified",
+          "quote": "The norepinephrine transporter (NET) exists presynaptically and is responsible for clearing excess norepinephrine out of the synapse."
+        }
+      ]
     },
     "dat": {
       "name": {
@@ -311,9 +327,17 @@
         "accumbens",
         "frontal"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 96,
+          "provenance": "verified",
+          "quote": "Dopamine can be transported out of the synaptic cleft and back into the presynaptic neuron via the dopamine transporter (DAT), where it may be repackaged for future use."
+        }
+      ]
     },
     "gat": {
       "name": {
@@ -330,9 +354,17 @@
         "hippocampus",
         "cerebellum"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 274,
+          "provenance": "verified",
+          "quote": "GABA's synaptic actions are terminated by the presynaptic GABA transporter (GAT), also known as the GABA reuptake pump (Figure 6-18), analogous to similar transporters for other neurotransmitters discussed throughout this text."
+        }
+      ]
     },
     "vmat2": {
       "name": {
@@ -350,9 +382,17 @@
         "caudate",
         "putamen"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 269,
+          "provenance": "verified",
+          "quote": "After synthesis, NE is packaged into synaptic vesicles via the vesicular monoamine transporter 2 (VMAT2) and stored there until its release into the synapse during neurotransmission."
+        }
+      ]
     },
     "mao_a": {
       "name": {
@@ -371,9 +411,17 @@
         "pons",
         "medulla"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 355,
+          "provenance": "verified",
+          "quote": "The enzyme MAO-A metabolizes serotonin (5HT) and norepinephrine (NE) as well as dopamine (DA) (left panels)."
+        }
+      ]
     },
     "mao_b": {
       "name": {
@@ -391,9 +439,17 @@
         "pons",
         "medulla"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 96,
+          "provenance": "verified",
+          "quote": "Other enzymes that break down dopamine are monoamine oxidase A (MAO-A) and monoamine oxidase B (MAO-B), which are present in mitochondria within the presynaptic neuron and in other cells such as glia."
+        }
+      ]
     },
     "ache": {
       "name": {
@@ -410,9 +466,17 @@
         "thalamus",
         "septal_nuclei"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 521,
+          "provenance": "verified",
+          "quote": "ACh's actions are terminated by one of two enzymes, either acetylcholinesterase (AChE) or butyrylcholinesterase (BuChE), sometimes also called \"pseudocholinesterase\" or \"nonspecific cholinesterase\" (Figure 12-25)."
+        }
+      ]
     },
     "bche": {
       "name": {
@@ -427,9 +491,17 @@
         "temporal",
         "hippocampus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Butyrylcholinesterase",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 521,
+          "provenance": "verified",
+          "quote": "ACh's actions are terminated by one of two enzymes, either acetylcholinesterase (AChE) or butyrylcholinesterase (BuChE), sometimes also called \"pseudocholinesterase\" or \"nonspecific cholinesterase\" (Figure 12-25)."
+        }
+      ]
     },
     "carbonic_anhydrase": {
       "name": {
@@ -469,9 +541,17 @@
         "hippocampus",
         "thalamus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 25,
+          "provenance": "verified",
+          "quote": "Electrical impulses open ion channels – both voltage-sensitive sodium channels (VSSCs) and voltage-sensitive calcium channels (VSCCs) – by changing the ionic charge across neuronal membranes."
+        }
+      ]
     },
     "cav": {
       "name": {
@@ -487,9 +567,17 @@
         "thalamus",
         "hippocampus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 25,
+          "provenance": "verified",
+          "quote": "Electrical impulses open ion channels – both voltage-sensitive sodium channels (VSSCs) and voltage-sensitive calcium channels (VSCCs) – by changing the ionic charge across neuronal membranes."
+        }
+      ]
     },
     "cav_a2d": {
       "name": {
@@ -505,9 +593,17 @@
         "thalamus",
         "hippocampus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 413,
+          "provenance": "verified",
+          "quote": "Alpha-2-delta ligands such as gabapentin or pregabalin bind to the α2δ subunit of voltage-sensitive calcium channels (VSCCs), changing their conformation to reduce calcium influx and therefore reduce excessive stimulation of postsynaptic receptors."
+        }
+      ]
     },
     "cav_t": {
       "name": {
@@ -540,9 +636,17 @@
         "hippocampus",
         "thalamus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/SV2A",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 51,
+          "provenance": "verified",
+          "quote": "A novel 12-transmembrane-region synaptic vesicle transporter of uncertain mechanism and with unclear substrates, called the SV2A transporter and localized within the synaptic vesicle membrane, binds the anticonvulsant levetiracetam, perhaps interfering with neurotransmitter release and thereby reducing seizures."
+        }
+      ]
     },
     "muscarinic": {
       "name": {
@@ -561,9 +665,17 @@
         "thalamus",
         "hypothalamus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 522,
+          "provenance": "verified",
+          "quote": "Muscarinic acetylcholine receptors are G-protein-linked and can be either excitatory or inhibitory."
+        }
+      ]
     },
     "nicotinic": {
       "name": {
@@ -580,9 +692,17 @@
         "thalamus",
         "vta"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 524,
+          "provenance": "verified",
+          "quote": "Acetylcholine neurotransmission can be regulated by ligand-gated excitatory ion channels known as nicotinic acetylcholine receptors, shown here."
+        }
+      ]
     },
     "alpha1": {
       "name": {
@@ -603,9 +723,17 @@
         "pons",
         "medulla"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 270,
+          "provenance": "verified",
+          "quote": "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 (Figure 6-14)."
+        }
+      ]
     },
     "alpha2": {
       "name": {
@@ -625,9 +753,17 @@
         "pons",
         "medulla"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 270,
+          "provenance": "verified",
+          "quote": "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 (Figure 6-14)."
+        }
+      ]
     },
     "beta": {
       "name": {
@@ -644,9 +780,17 @@
         "accumbens",
         "cerebellum"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 270,
+          "provenance": "verified",
+          "quote": "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 (Figure 6-14)."
+        }
+      ]
     },
     "glutamate": {
       "name": {
@@ -665,9 +809,17 @@
         "caudate",
         "putamen"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 92,
+          "provenance": "verified",
+          "quote": "The other subclass of ligand-gated ion channels has a tetrameric structure, and includes many glutamate receptors, including the AMPA, kainate, and NMDA subtypes."
+        }
+      ]
     },
     "melatonin": {
       "name": {
@@ -681,9 +833,17 @@
         "hypothalamus",
         "thalamus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 455,
+          "provenance": "verified",
+          "quote": "There are three types of receptors for melatonin: MT1 and MT2, which are both involved in sleep, and MT3, which is actually the enzyme NRH–quinine oxidoreductase 2 and not thought to be involved in sleep physiology."
+        }
+      ]
     },
     "orexin": {
       "name": {
@@ -700,9 +860,17 @@
         "vta",
         "thalamus"
       ],
-      "classification_provenance": "llm",
+      "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Orexin_receptor",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 425,
+          "provenance": "verified",
+          "quote": "Orexin neurotransmission is mediated by two types of postsynaptic G-protein-coupled receptors, orexin 1 (OX1R) and orexin 2 (OX2R)."
+        }
+      ]
     },
     "melanocortin": {
       "name": {
@@ -2015,15 +2183,15 @@
       },
       "receptors": {
         "total": 56,
-        "verified": 0,
+        "verified": 30,
         "sourced": 0,
-        "unverified": 56
+        "unverified": 26
       },
       "targets": {
         "total": 25,
-        "verified": 0,
+        "verified": 21,
         "sourced": 0,
-        "unverified": 25
+        "unverified": 4
       },
       "structures": {
         "total": 52,
@@ -2040,11 +2208,11 @@
     },
     "assertions": {
       "total": 785,
-      "verified": 650,
+      "verified": 701,
       "sourced": 0,
-      "unverified": 135,
-      "backed": 650,
-      "pct_backed": 83
+      "unverified": 84,
+      "backed": 701,
+      "pct_backed": 89
     }
   }
 }
