@@ -2224,7 +2224,7 @@
         "unverified": 2
       }
     },
-    "assertions": {
+    "nodes": {
       "total": 1371,
       "verified": 921,
       "sourced": 0,

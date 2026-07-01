@@ -128,10 +128,10 @@
       "info.pdsp": "PDSP Ki ↗",
       "info.pdspTitle": "Browse the PDSP Ki binding-affinity database (NIMH)",
       "info.reference": "Reference",
-      "info.provNone": "No source for this claim yet.",
+      "info.provNone": "No source for this node yet.",
       "info.provLlm": "Source grade: LLM-only. Produced by an LLM from memory and not checked against any document, so it may be a hallucination.",
-      "info.provSourced": "Source grade: sourced. Written by an LLM that was given the source document (e.g. Stahl's guide), but this specific claim was not quote-verified.",
-      "info.provVerified": "Source grade: verified. An LLM extracted a quote, it was programmatically confirmed to appear in the source, and a separate LLM agreed the quote supports the claim. This is still the highest grade available here and remains LLM-driven, so it can still be wrong: going further would take considerable human effort and is itself error-prone, so it is out of scope for this project.",
+      "info.provSourced": "Source grade: sourced. Written by an LLM that was given the source document (e.g. Stahl's guide), but this specific node was not quote-verified.",
+      "info.provVerified": "Source grade: verified. An LLM extracted a quote, it was programmatically confirmed to appear in the source, and a separate LLM agreed the quote supports this node. This is still the highest grade available here and remains LLM-driven, so it can still be wrong: going further would take considerable human effort and is itself error-prone, so it is out of scope for this project.",
       "info.descFromWikipedia": "This description is the lead section of the drug's Wikipedia article, used verbatim under CC BY-SA. See the Reference link above.",
       "info.descFromWikipediaLive": "This description was just fetched live from the drug's Wikipedia article (CC BY-SA), so it reflects the current article rather than a stored copy. See the Reference link above.",
       "info.sourceRef": "{corpus}, p. {page}",
@@ -234,8 +234,9 @@
         "links to its source article.",
       "about.sourcingTitle": "Sources & provenance",
       "about.sourcingIntro":
-        "Every fact in this dataset carries a source grade. None of it has been " +
-        "checked by a human yet, so even a verified fact can be wrong. The grades:",
+        "Every node in this dataset (any sourceable datum: a region, a pathway, a " +
+        "receptor, a drug binding, ...) carries a source grade. None of it has been " +
+        "checked by a human yet, so even a verified node can be wrong. The grades:",
       "about.gradeVerified":
         "Verified: the supporting quote was confirmed present in the cited source.",
       "about.gradeSourced":
@@ -245,7 +246,7 @@
       "about.gradeNone": "No source: none gathered yet.",
       "about.coverageTitle": "Coverage",
       "about.sourcingHeadline":
-        "{pct}% of the {total} factual claims here are sourced or verified.",
+        "{pct}% of the {total} knowledge nodes here are sourced or verified.",
       "about.kindBindings": "Drug target bindings",
       "about.kindNbn": "Drug nomenclature (NbN)",
       "about.kindDescriptions": "Drug descriptions",
@@ -356,10 +357,10 @@
       "info.pdsp": "PDSP Ki ↗",
       "info.pdspTitle": "Parcourir la base d’affinités de liaison PDSP Ki (NIMH)",
       "info.reference": "Référence",
-      "info.provNone": "Aucune source pour cette affirmation pour l’instant.",
+      "info.provNone": "Aucune source pour ce nœud pour l’instant.",
       "info.provLlm": "Niveau de source : LLM seul. Produite de mémoire par un LLM, sans vérification dans aucun document : il peut donc s’agir d’une hallucination.",
-      "info.provSourced": "Niveau de source : documentée. Rédigée par un LLM ayant eu accès au document source (par ex. le guide de Stahl), mais cette affirmation précise n’a pas été vérifiée par citation.",
-      "info.provVerified": "Niveau de source : vérifiée. Un LLM a extrait une citation, sa présence dans la source a été confirmée par programme, et un second LLM a confirmé qu’elle étaye l’affirmation. C’est le niveau le plus élevé disponible ici et il reste piloté par un LLM : il peut donc encore se tromper. Aller plus loin demanderait un effort humain considérable, lui-même sujet à erreur, et sort donc du cadre de ce projet.",
+      "info.provSourced": "Niveau de source : documentée. Rédigée par un LLM ayant eu accès au document source (par ex. le guide de Stahl), mais ce nœud précis n’a pas été vérifié par citation.",
+      "info.provVerified": "Niveau de source : vérifiée. Un LLM a extrait une citation, sa présence dans la source a été confirmée par programme, et un second LLM a confirmé qu’elle étaye ce nœud. C’est le niveau le plus élevé disponible ici et il reste piloté par un LLM : il peut donc encore se tromper. Aller plus loin demanderait un effort humain considérable, lui-même sujet à erreur, et sort donc du cadre de ce projet.",
       "info.descFromWikipedia": "Cette description est l’introduction de l’article Wikipédia du médicament, reprise telle quelle sous licence CC BY-SA. Voir le lien Référence ci-dessus.",
       "info.descFromWikipediaLive": "Cette description vient d’être récupérée en direct depuis l’article Wikipédia du médicament (CC BY-SA) : elle reflète donc l’article actuel plutôt qu’une copie enregistrée. Voir le lien Référence ci-dessus.",
       "info.sourceRef": "{corpus}, p. {page}",
@@ -466,9 +467,10 @@
         "renvoie à son article source.",
       "about.sourcingTitle": "Sources et provenance",
       "about.sourcingIntro":
-        "Chaque fait de ce jeu de données porte un niveau de source. Rien n’a " +
-        "encore été vérifié par un humain : même un fait « vérifié » peut être " +
-        "faux. Les niveaux :",
+        "Chaque nœud de ce jeu de données (toute donnée sourçable : une région, " +
+        "une voie, un récepteur, une liaison médicamenteuse, ...) porte un niveau " +
+        "de source. Rien n’a encore été vérifié par un humain : même un nœud " +
+        "« vérifié » peut être faux. Les niveaux :",
       "about.gradeVerified":
         "Vérifié : la citation à l’appui a été confirmée présente dans la source citée.",
       "about.gradeSourced":
@@ -478,7 +480,7 @@
       "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
       "about.coverageTitle": "Couverture",
       "about.sourcingHeadline":
-        "{pct} % des {total} affirmations factuelles ici sont sourcées ou vérifiées.",
+        "{pct} % des {total} nœuds de connaissance ici sont sourcés ou vérifiés.",
       "about.kindBindings": "Liaisons cibles des médicaments",
       "about.kindNbn": "Nomenclature des médicaments (NbN)",
       "about.kindDescriptions": "Descriptions des médicaments",

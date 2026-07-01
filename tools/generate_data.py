@@ -754,7 +754,7 @@ def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | No
     ``relation``/``pdsp_names`` so the viewer warns *which* compound the Ki was
     measured on. The Ki carries its **own** ``verified`` source (rendered as its own
     badge beside the binding), separate from the binding's quote ``sources``, because
-    it is a distinct datum (an affinity), not a source for the mechanism claim.
+    it is a distinct measurement (an affinity), not a source for the binding node.
     ``check_data.py`` confirms the ``ki_id`` row is really in the corpus CSV.
     """
     ki = binding.get("ki")
@@ -4679,19 +4679,21 @@ def _provenance_stats(structures: list[dict[str, Any]],
                       receptors: list[dict[str, Any]],
                       drugs: list[dict[str, Any]],
                       drug_targets: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    """Programmatic sourcing tally emitted into ``meta.provenance_stats``.
+    """Programmatic sourcing tally over the dataset's **nodes** (see the Nodes
+    section of CLAUDE.md), emitted into ``meta.provenance_stats``.
 
-    Every factual claim and every reference link in the dataset is bucketed by the
-    strength of its source: ``verified`` (quote-checked), ``sourced`` (from a
-    document, not quote-checked) or ``unverified`` (LLM-only, or no source yet). The
-    viewer's About panel and the README headline read these numbers, so the
+    A *node* is any sourceable datum: a drug binding, a drug NbN label, a neuron
+    projection, a receptor classification, a receptor expression region, a
+    non-receptor target classification, or a brain-region anatomy fact. Every node is
+    bucketed by the strength of its source: ``verified`` (quote-checked), ``sourced``
+    (from a document, not quote-checked) or ``unverified`` (LLM-only, or no source
+    yet). The viewer's About panel and the README headline read these numbers, so the
     "% sourced" figure is always a real count of the shipped data, never hand-typed
-    (the whole point of the request: a programmatic count of source type vs all).
+    (the whole point: a programmatic count of source strength across every node).
 
-    "Assertions" are the factual claims (drug bindings, drug NbN labels, neuron
-    projections, receptor classifications, non-receptor target classifications,
-    brain-region anatomy) and drive the headline ``pct_backed``;
-    Wikipedia "references" are tallied separately (read-more links, not claims).
+    The knowledge nodes drive the headline ``pct_backed`` (emitted under the
+    ``nodes`` key); Wikipedia ``references`` are tallied separately (read-more links,
+    which point *at* a node but are not themselves a knowledge node).
     """
     def bucket(rank_or_grade: Any) -> str:
         rank = (rank_or_grade if isinstance(rank_or_grade, int)
@@ -4711,20 +4713,20 @@ def _provenance_stats(structures: list[dict[str, Any]],
     nbn_grades = [_strongest_grade(d.get("nbn_sources"))
                   for d in drugs if d.get("nbn")]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
-    # Receptor classification claims (neurotransmitter / mechanism class / sign /
-    # synaptic site), graded per receptor (classification_provenance). A pure stub
-    # (no CNS role: no locations, not ubiquitous, no description) asserts nothing
-    # real, so it is skipped. The receptor's *expression regions* are a separate kind
-    # (receptor_locations), graded per region, not folded in here.
+    # Receptor classification nodes (neurotransmitter / mechanism class / sign /
+    # synaptic site), one node per receptor (classification_provenance). A pure stub
+    # (no CNS role: no locations, not ubiquitous, no description) is not a node, so it
+    # is skipped. The receptor's *expression regions* are a separate node kind
+    # (receptor_locations), one node per region, not folded in here.
     receptor_grades = [
         r.get("classification_provenance", DEFAULT_PROVENANCE)
         for r in receptors
         if r.get("ubiquitous") or r.get("locations") or r.get("description")]
-    # Receptor expression regions ("Found in"), graded PER (receptor, region): the
-    # claim "receptor R is expressed in region B" is distinct from R's mechanism
-    # classification. Each region's grade = the strongest of its location_sources
-    # (default llm when unsourced). A ubiquitous receptor asserts one "throughout the
-    # brain" expression claim (its location_sources under the "ALL" sentinel, else llm).
+    # Receptor expression-region nodes ("Found in"), one PER (receptor, region): the
+    # node "receptor R is expressed in region B" is distinct from R's mechanism
+    # classification node. Each region's grade = the strongest of its location_sources
+    # (default llm when unsourced). A ubiquitous receptor is one "throughout the
+    # brain" expression node (its location_sources under the "ALL" sentinel, else llm).
     receptor_location_grades: list[int] = []
     _llm_rank = _GRADE_RANK[DEFAULT_PROVENANCE]
     for r in receptors:
@@ -4768,17 +4770,19 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }
-    assertion_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                       "receptor_locations", "targets", "structures")
-    assertions = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
-    for kind in assertion_kinds:
-        for key in assertions:
-            assertions[key] += by_kind[kind][key]
-    backed = assertions["verified"] + assertions["sourced"]
-    assertions["backed"] = backed
-    assertions["pct_backed"] = (
-        round(100 * backed / assertions["total"]) if assertions["total"] else 0)
-    return {"by_kind": by_kind, "assertions": assertions}
+    # The knowledge-node kinds (every node that carries a claim + a grade); the
+    # references kind is a pointer, not a node, so it is excluded from the headline.
+    node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
+                  "receptor_locations", "targets", "structures")
+    nodes = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
+    for kind in node_kinds:
+        for key in nodes:
+            nodes[key] += by_kind[kind][key]
+    backed = nodes["verified"] + nodes["sourced"]
+    nodes["backed"] = backed
+    nodes["pct_backed"] = (
+        round(100 * backed / nodes["total"]) if nodes["total"] else 0)
+    return {"by_kind": by_kind, "nodes": nodes}
 
 
 def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:

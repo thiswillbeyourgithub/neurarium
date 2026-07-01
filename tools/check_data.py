@@ -469,21 +469,23 @@ def check_todos(report, meta, structures, projections, circuits,
 # --------------------------------------------------------------------------- #
 
 def print_coverage(stats):
-    """Print the per-kind, per-tier sourcing tally (the same numbers the About
-    panel + README headline read from ``meta.provenance_stats``), so the pre-push
-    output shows at a glance exactly how many claims sit at each provenance grade.
+    """Print the per-kind, per-tier sourcing tally over the dataset's **nodes** (the
+    same numbers the About panel + README headline read from
+    ``meta.provenance_stats``), so the pre-push output shows at a glance exactly how
+    many nodes sit at each provenance grade.
 
-    Each *claim* is reduced to its single strongest grade first, so the columns
-    partition the claim count (they sum to ``total``); the grades map to the
-    viewer's pills: verified = green check, sourced = yellow ``~``, unverified =
-    grey ``?`` / no source. ``references`` (wikipedia pointers) are a kind of their
-    own, tallied but not folded into the headline (a reference is a pointer, not a
-    claim), so they are printed below the claim total."""
+    A *node* is any sourceable datum (see the Nodes section of CLAUDE.md). Each node
+    is reduced to its single strongest grade first, so the columns partition the node
+    count (they sum to ``total``); the grades map to the viewer's pills: verified =
+    green check, sourced = yellow ``~``, unverified = grey ``?`` / no source.
+    ``references`` (wikipedia pointers) are a kind of their own, tallied but not
+    folded into the headline (a reference points *at* a node, it is not itself one),
+    so they are printed below the node total."""
     by = stats.get("by_kind", {})
-    a = stats.get("assertions", {})
-    # The claim kinds folded into the headline, in the generator's order.
-    claim_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                   "receptor_locations", "targets", "structures")
+    a = stats.get("nodes", {})
+    # The node kinds folded into the headline, in the generator's order.
+    node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
+                  "receptor_locations", "targets", "structures")
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -498,15 +500,15 @@ def print_coverage(stats):
 
     # Grade columns: U = unverified (llm, or no source), S = sourced (document-backed
     # but not quote-checked), S+V = sourced-or-verified (the backed count; S is a
-    # subset of it). S is ~always 0 on the claim kinds because the sourcing pipeline
+    # subset of it). S is ~always 0 on the node kinds because the sourcing pipeline
     # goes straight from llm to quote-verified; it shows up only on Wikipedia refs.
-    print("\n  coverage by kind (each claim reduced to its strongest grade;")
+    print("\n  node coverage by kind (each node reduced to its strongest grade;")
     print("  U=unverified  S=sourced  S+V=sourced-or-verified [=backed]):")
     print(f"    {'kind':<19}{'U':>6}{'S':>6}{'S+V':>6}{'total':>8}{'backed':>8}")
-    for kind in claim_kinds:
+    for kind in node_kinds:
         row(kind, by.get(kind, {}))
     print(f"    {'-' * 53}")
-    row("all claims", a, pct=a.get("pct_backed", 0))
+    row("all nodes", a, pct=a.get("pct_backed", 0))
     if by.get("references"):
         row("references", by["references"], suffix="   (pointers, not in headline)")
 
@@ -617,26 +619,26 @@ def check_provenance(report, meta, structures, projections, circuits,
             if parts != c.get("total", 0):
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
-        a = stats.get("assertions", {})
-        kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                 "receptor_locations", "targets", "structures")
+        a = stats.get("nodes", {})
+        node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
+                      "receptor_locations", "targets", "structures")
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "unverified"):
-            want = sum(by.get(k, {}).get(key, 0) for k in kinds)
+            want = sum(by.get(k, {}).get(key, 0) for k in node_kinds)
             if a.get(key) != want:
-                report.error(f"provenance_stats assertions[{key}]={a.get(key)} "
-                             f"!= sum over claim kinds ({want})")
+                report.error(f"provenance_stats nodes[{key}]={a.get(key)} "
+                             f"!= sum over node kinds ({want})")
         backed = a.get("verified", 0) + a.get("sourced", 0)
         if a.get("backed") != backed:
-            report.error(f"provenance_stats assertions.backed={a.get('backed')} "
+            report.error(f"provenance_stats nodes.backed={a.get('backed')} "
                          f"!= verified+sourced ({backed})")
         want_pct = round(100 * backed / a["total"]) if a.get("total") else 0
         if a.get("pct_backed") != want_pct:
-            report.error(f"provenance_stats assertions.pct_backed="
+            report.error(f"provenance_stats nodes.pct_backed="
                          f"{a.get('pct_backed')} != {want_pct}")
         if report.errors == before_stats:
             report.ok(f"provenance_stats is self-consistent "
-                      f"({a.get('pct_backed')}% of {a.get('total')} assertions "
+                      f"({a.get('pct_backed')}% of {a.get('total')} nodes "
                       f"sourced or verified)")
         print_coverage(stats)
 

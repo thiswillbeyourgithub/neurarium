@@ -1408,11 +1408,14 @@ function createPanelTabs() {
 }
 
 /**
- * Build the detail panel renderer. Each show*() method renders a connection /
- * structure / receptor / target / drug into the Details pane's #info-body. It is
- * pure rendering: opening the matching tab + applying the 3D focus is the caller's
- * job (the select* layer in main(), which calls openDetailTab), so this is reused
- * unchanged whether a detail is first picked or re-shown by clicking its tab.
+ * Build the detail panel renderer. The panel is a **node view**: each show*()
+ * method renders one node (a connection / structure / receptor / target / drug /
+ * circuit / projection group) plus the nodes linked to it (a receptor's "Found in"
+ * regions + interacting drugs, a drug's target bindings, a structure's pathways,
+ * ...), each linked node clickable to navigate to it. See the Nodes section of
+ * CLAUDE.md. It is pure rendering: opening the matching tab + applying the 3D focus
+ * is the caller's job (the select* layer in main(), which calls openDetailTab), so
+ * this is reused unchanged whether a node is first picked or re-shown via its tab.
  * @param {import("./data.js").BrainData} data
  */
 function createInfoPanel(data) {
@@ -1947,8 +1950,8 @@ function createInfoPanel(data) {
     });
   };
 
-  // The canonical "intro" block shared by EVERY entity panel (structure / receptor
-  // / target / drug): the baked description paragraph (when the datum has one) with
+  // The canonical "intro" block shared by EVERY node panel (structure / receptor
+  // / target / drug): the baked description paragraph (when the node has one) with
   // its provenance pill, then the Wikipedia reference link + pill *below* the text
   // it backs, then the live-lead refresh. Centralizing it guarantees the same
   // element order and the same sourcing treatment on every panel, instead of each
@@ -2130,7 +2133,7 @@ function createInfoPanel(data) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", proj.label || t("info.connection")));
       // Type line: the connection's analogue of a structure's group line ("Lobe"
-      // etc.), stating plainly what this datum is (a projection / neuron pathway).
+      // etc.), stating plainly what this node is (a projection / neuron pathway).
       body.appendChild(el("div", "info-group", t("info.projectionType")));
 
       // The pathway's one source grade (strongest over its citations), shown again
@@ -2321,7 +2324,7 @@ function createInfoPanel(data) {
       addFactRow(facts, t("receptor.effect"), receptor.signLabel, receptor.signColor);
       addFactRow(facts, t("receptor.synaptic"), receptor.synapticLabel);
       // Source grade backing the classification facts above (so "why is it
-      // excitatory" carries a provenance pill like every other datum). The grade is
+      // excitatory" carries a provenance pill like every other node). The grade is
       // data (classification_provenance); the read-more Wikipedia link is separate.
       addFactRow(facts, t("info.source"), "", null,
         { pill: makeProvenancePill(
@@ -2554,7 +2557,7 @@ function createInfoPanel(data) {
       body.appendChild(acts);
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
-      // always refers to a specific datum rather than "the whole drug".
+      // always refers to a specific binding node rather than "the whole drug".
     },
 
     /**
@@ -3295,8 +3298,8 @@ function buildAboutSourcing(meta) {
   }
   host.appendChild(key);
 
-  // Coverage tally: a headline over the factual claims, then a per-kind bar.
-  const a = stats.assertions || {};
+  // Coverage tally: a headline over the knowledge nodes, then a per-node-kind bar.
+  const a = stats.nodes || {};
   const wrap = h("div", "src-stats");
   wrap.appendChild(h("p", "src-stat-headline",
     t("about.sourcingHeadline", { pct: a.pct_backed, total: a.total })));
