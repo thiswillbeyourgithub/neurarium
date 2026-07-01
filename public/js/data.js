@@ -307,6 +307,24 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       );
     }
     r.locationNames = r.locations.map((b) => baseName.get(b) || b);
+    // Per-region expression provenance: the "Found in" claim "this receptor is
+    // expressed in region B" is graded per region (default llm when unsourced), so
+    // the panel shows a pill per row. Parallel to locations/locationNames.
+    const locSrc = r.location_sources || {};
+    r.locationInfo = r.locations.map((b, i) => ({
+      base: b,
+      name: r.locationNames[i],
+      sources: locSrc[b] || [],
+      provenance: strongestGrade(locSrc[b]) || "llm",
+    }));
+    // A ubiquitous receptor asserts one "throughout the brain" expression claim
+    // (its location_sources under the "ALL" sentinel), graded like a region.
+    if (r.ubiquitous) {
+      r.ubiquitousInfo = {
+        sources: locSrc.ALL || [],
+        provenance: strongestGrade(locSrc.ALL) || "llm",
+      };
+    }
     r.focusable = r.ubiquitous || r.structureIds.length > 0;
   }
 

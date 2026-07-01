@@ -547,17 +547,30 @@ def _wiki_provenance(owner_id: str) -> str:
 
 
 # Per-id provenance overrides for the *classification* claims of a receptor (its
-# neurotransmitter / mechanism class / sign / synaptic site / locations), a
-# non-receptor drug target (its type / system / region footprint) and a brain
-# structure (its existence / group / position), all authored from general /
-# Wikipedia / textbook knowledge, so they default to the honest ``"llm"`` grade
-# (LLM-only, unchecked). Keyed by receptor id / DRUG_TARGETS key / structure *base*
-# id; upgrade an entry here as its claim is checked against a document (raise to
-# ``"sourced"`` / ``"verified"``), keeping the grading in the data, not in code.
-# Empty for now (everything grades as ``"llm"``).
+# neurotransmitter / mechanism class / sign / synaptic site), a non-receptor drug
+# target (its type / system / region footprint) and a brain structure (its
+# existence / group / position), all authored from general / Wikipedia / textbook
+# knowledge, so they default to the honest ``"llm"`` grade (LLM-only, unchecked).
+# Keyed by receptor id / DRUG_TARGETS key / structure *base* id; upgrade an entry
+# here as its claim is checked against a document (raise to ``"sourced"`` /
+# ``"verified"``), keeping the grading in the data, not in code. Empty for now
+# (everything grades as ``"llm"``). A receptor's *expression regions* are graded
+# separately, per region (see RECEPTOR_LOCATION_SOURCES); this override covers only
+# the mechanism classification, not "which regions express it".
 RECEPTOR_PROVENANCE: dict[str, str] = {}
 TARGET_PROVENANCE: dict[str, str] = {}
 STRUCTURE_PROVENANCE: dict[str, str] = {}
+
+# Per-region provenance for a receptor's *expression locations* ("Found in"): the
+# claim "receptor R is expressed in region B" is distinct from R's mechanism
+# classification and is authored from general knowledge, so every location defaults
+# to ``"llm"`` (unsourced). This registry upgrades an individual (receptor, region)
+# to a quote-source: ``{receptor_id: {base: [ {corpus, page, quote, provenance} ]}}``.
+# ``_receptor_record`` validates each base is one of that receptor's own locations
+# and emits the sources; the viewer shows a per-region pill and the coverage tally
+# counts each region separately. Empty for now: no expression atlas is wired yet, so
+# every "Found in" region is honestly ``"llm"``. Add entries as regions are sourced.
+RECEPTOR_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 
 
 def _receptor_provenance(receptor_id: str) -> str:
@@ -577,6 +590,30 @@ def _structure_provenance(base_id: str) -> str:
     """Provenance grade for a structure's anatomy claim (default ``llm``)."""
     return _lookup_provenance(
         STRUCTURE_PROVENANCE, base_id, f"structure anatomy for {base_id!r}")
+
+
+def _receptor_location_sources(
+        receptor_id: str, locations: list[str]) -> dict[str, list[dict[str, Any]]]:
+    """Emitted ``location_sources`` for a receptor: ``{base: [quote-source, ...]}``.
+
+    Reads :data:`RECEPTOR_LOCATION_SOURCES`; every cited base must be one of this
+    receptor's own ``locations`` (a stray base is a typo that would grade a region
+    the receptor does not claim), and each source is validated like any other
+    quote-level source. Returns ``{}`` when nothing is sourced (the common case
+    today), so the field is simply omitted and every region grades as ``llm``."""
+    per_base = RECEPTOR_LOCATION_SOURCES.get(receptor_id)
+    if not per_base:
+        return {}
+    known = set(locations)
+    out: dict[str, list[dict[str, Any]]] = {}
+    for base, sources in per_base.items():
+        if base not in known:
+            raise KeyError(
+                f"Receptor {receptor_id!r} has location sources for {base!r}, "
+                f"which is not one of its locations {sorted(known)}")
+        out[base] = _quote_sources(
+            sources, f"Receptor {receptor_id!r} location {base!r}")
+    return out
 
 
 # The constant source backing every drug record (the user-verified fair-use
@@ -4361,6 +4398,12 @@ def _receptor_record(rec: dict[str, Any],
                     f"Receptor {rec['id']!r} location {base!r} is not a known "
                     f"structure base")
         out["locations"] = list(locations)
+        # Per-region expression sources (upgrade individual "Found in" regions above
+        # the default llm). Omitted when nothing is sourced, so a plain receptor's
+        # every region honestly grades as llm in the viewer + the coverage tally.
+        loc_sources = _receptor_location_sources(rec["id"], out["locations"])
+        if loc_sources:
+            out["location_sources"] = loc_sources
     if "description" in rec:
         out["description"] = {"en": rec["description"], "fr": rec["description_fr"]}
     if "wikipedia" in rec:
@@ -4669,13 +4712,30 @@ def _provenance_stats(structures: list[dict[str, Any]],
                   for d in drugs if d.get("nbn")]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
     # Receptor classification claims (neurotransmitter / mechanism class / sign /
-    # synaptic site / locations), graded per receptor (classification_provenance). A
-    # pure stub (no CNS role: no locations, not ubiquitous, no description) asserts
-    # nothing real, so it is skipped.
+    # synaptic site), graded per receptor (classification_provenance). A pure stub
+    # (no CNS role: no locations, not ubiquitous, no description) asserts nothing
+    # real, so it is skipped. The receptor's *expression regions* are a separate kind
+    # (receptor_locations), graded per region, not folded in here.
     receptor_grades = [
         r.get("classification_provenance", DEFAULT_PROVENANCE)
         for r in receptors
         if r.get("ubiquitous") or r.get("locations") or r.get("description")]
+    # Receptor expression regions ("Found in"), graded PER (receptor, region): the
+    # claim "receptor R is expressed in region B" is distinct from R's mechanism
+    # classification. Each region's grade = the strongest of its location_sources
+    # (default llm when unsourced). A ubiquitous receptor asserts one "throughout the
+    # brain" expression claim (its location_sources under the "ALL" sentinel, else llm).
+    receptor_location_grades: list[int] = []
+    _llm_rank = _GRADE_RANK[DEFAULT_PROVENANCE]
+    for r in receptors:
+        loc_sources = r.get("location_sources", {})
+        if r.get("ubiquitous"):
+            receptor_location_grades.append(
+                max(_strongest_grade(loc_sources.get("ALL")), _llm_rank))
+        else:
+            for base in r.get("locations", []):
+                receptor_location_grades.append(
+                    max(_strongest_grade(loc_sources.get(base)), _llm_rank))
     # Non-receptor drug target classifications (type / system / region footprint),
     # graded per target. Receptor-linked targets are skipped (already counted as
     # receptors, not twice).
@@ -4703,12 +4763,13 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_nbn": tally(nbn_grades),
         "projections": tally(projection_grades),
         "receptors": tally(receptor_grades),
+        "receptor_locations": tally(receptor_location_grades),
         "targets": tally(target_grades),
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }
-    assertion_kinds = ("drug_bindings", "drug_nbn",
-                       "projections", "receptors", "targets", "structures")
+    assertion_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
+                       "receptor_locations", "targets", "structures")
     assertions = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
     for kind in assertion_kinds:
         for key in assertions:

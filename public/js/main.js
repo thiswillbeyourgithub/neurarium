@@ -1466,15 +1466,26 @@ function createInfoPanel(data) {
   // The "Found in" region list shared by showReceptor / showTarget: one <li> per
   // location, parallel arrays of display names + their base ids. A row whose base
   // resolves to a structure becomes clickable and jumps there via onStructurePick;
-  // an unresolved one stays plain text.
-  const locationList = (names, bases) => {
+  // an unresolved one stays plain text. `info` (receptor panels only) is the
+  // parallel per-region provenance array (`{provenance, sources}`): when given, each
+  // row shows its own grade pill, since "this receptor is expressed in region B" is
+  // graded per region (llm unless the expression itself is sourced), separate from
+  // the mechanism classification pill above.
+  const locationList = (names, bases, info) => {
     const ul = el("ul");
     names.forEach((name, i) => {
       const base = bases && bases[i];
-      const li = el("li", null, name);
+      const li = el("li");
+      li.appendChild(el("span", "loc-name", name));
       if (base && baseResolves(base)) {
         li.classList.add("clickable");
         li.addEventListener("click", () => onStructurePick(base));
+      }
+      const meta = info && info[i];
+      if (meta) {
+        const tip = meta.sources && meta.sources.length
+          ? sourcesTip(meta.sources) : t("receptor.locUnsourced");
+        li.appendChild(makeProvenancePill(meta.provenance, tip));
       }
       ul.appendChild(li);
     });
@@ -2323,11 +2334,19 @@ function createInfoPanel(data) {
       const where = el("div", "info-locations");
       where.appendChild(el("h3", null, t("receptor.foundIn")));
       if (receptor.ubiquitous) {
-        where.appendChild(el("p", "info-desc", t("receptor.ubiquitous")));
+        const p = el("p", "info-desc info-desc-pilled", t("receptor.ubiquitous"));
+        const u = receptor.ubiquitousInfo;
+        if (u) {
+          const tip = u.sources && u.sources.length
+            ? sourcesTip(u.sources) : t("receptor.locUnsourced");
+          p.appendChild(makeProvenancePill(u.provenance, tip));
+        }
+        where.appendChild(p);
       } else if (receptor.locationNames.length === 0) {
         where.appendChild(el("p", "info-desc", t("receptor.noRole")));
       } else {
-        where.appendChild(locationList(receptor.locationNames, receptor.locations));
+        where.appendChild(locationList(receptor.locationNames, receptor.locations,
+          receptor.locationInfo));
       }
       body.appendChild(where);
 
@@ -3287,6 +3306,7 @@ function buildAboutSourcing(meta) {
     drug_descriptions: "about.kindDescriptions",
     projections: "about.kindProjections",
     receptors: "about.kindReceptors",
+    receptor_locations: "about.kindReceptorLocations",
     targets: "about.kindTargets",
     structures: "about.kindStructures",
     references: "about.kindReferences",

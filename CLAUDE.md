@@ -163,8 +163,11 @@ Emitted data (`public/data/`):
   (ionotropic/metabotropic/chaperone), `sign` (excit/inhib/modulatory), `synaptic`
   (pre/post/both), `locations` (structure *base* ids, expanded to both
   hemispheres), optional `ubiquitous:true` (brain-wide -> lights every structure),
-  `classification_provenance`, optional `description{en,fr}` + `wikipedia` (+
-  provenance). Empty locations + no description = a deliberate stub (listed, not focusable).
+  `classification_provenance` (the *mechanism* grade only), optional
+  `location_sources` (`{base:[{corpus,page,quote,provenance}]}`, sparse: upgrades an
+  individual "Found in" region above the default `llm`; `"ALL"` = a ubiquitous
+  receptor's one claim), optional `description{en,fr}` + `wikipedia` (+ provenance).
+  Empty locations + no description = a deliberate stub (listed, not focusable).
 - `drugs.jsonl` — one drug/line: `id`, `name` (technical), `categories`, optional
   `nbn{en,fr}` (+ `nbn_sources[{corpus,page,quote,provenance}]`, + optional
   `nbn_nonstandard:true` when the value is Stahl's drug-class descriptor, not a formal NbN),
@@ -926,7 +929,10 @@ key order, then "Other / non-aminergic"). The two sources are normalized to one 
   `onIsolate` watcher (`createReceptorMarkers.matches`).
 - Panels: a receptor opens `showReceptor` (system, Wikipedia link, the description
   live-refreshed from Wikipedia, the classification facts ending in a **Source** row
-  grading them, the region list or "Throughout the brain" for ubiquitous); a non-receptor
+  grading *the mechanism*, then the "Found in" region list, each region carrying its
+  **own** expression-provenance pill (default `llm`: which regions express a receptor
+  is graded per region, separate from the mechanism, see Source provenance), or a
+  single pilled "Throughout the brain" for ubiquitous); a non-receptor
   target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the
   type + system facts ending in a Source row, the region list). Both add a **PDSP Ki**
   lookup link beside the reference (`appendLookupLink`, the fixed browse URL since PDSP
@@ -941,8 +947,11 @@ key order, then "Other / non-aminergic"). The two sources are normalized to one 
   unlocated target renders muted, not clickable.
 
 Receptor data: `_receptor_record` validates every family/class/sign/synaptic key + every
-location base. `locations="ALL"` -> `ubiquitous`. `classification_provenance` defaults
-`llm`, overridable in `RECEPTOR_PROVENANCE`. The receptor locations drove the
+location base. `locations="ALL"` -> `ubiquitous`. `classification_provenance` (the
+*mechanism* grade) defaults `llm`, overridable in `RECEPTOR_PROVENANCE`. Each expression
+region is a **separate** graded claim (kind `receptor_locations`): default `llm`, upgraded
+per (receptor, region) by `RECEPTOR_LOCATION_SOURCES` -> emitted `location_sources`,
+quote-checked like a binding. The receptor locations drove the
 `brainstem_nuclei` group (raphe, locus coeruleus, VTA). A non-receptor target's
 `type`/`system`/regions/`wikipedia` are authored in `DRUG_TARGETS`.
 
@@ -1123,20 +1132,21 @@ the none case) with the glyph + `info.prov*` tooltip via `withTip`; colours are 
 full key, so there is no separate blanket "?" caveat.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every claim + reference to its
-strongest grade and tallies per kind (drug bindings / NbN / projections /
-receptor classifications / target classifications / region anatomy / wikipedia references)
-plus a headline `pct_backed` over the **factual claims** (sourced-or-verified / total),
-emitted as `meta.provenance_stats`. The About panel shows it (`buildAboutSourcing`) and
-`tools/update_readme_stats.py` writes the same into the README `SOURCING_STATS` block;
-`check_data.py` re-confirms the tally is self-consistent. References (wikipedia links) are
-their own kind, not folded into the headline (a reference is a pointer, not a claim). The
-circuit + projection-group descriptions are validated for a known grade but not yet folded
-into the headline (all `llm` for now). Current: ~93% of 988 factual claims backed (drug
-bindings ~98%, NbN 100%; projections + classifications + region anatomy the gap). Drug
-bindings dominate the count because a measured PDSP Ki both verifies a binding and adds the
-median-stronger omitted targets (`affinity_only`) as new verified claims. Descriptions are no
-longer a claim kind: every wiki-linked panel fetches the live Wikipedia lead instead of
-baking it.
+strongest grade and tallies per kind (drug bindings / NbN / projections / receptor
+classifications / **receptor expression regions** / target classifications / region anatomy /
+wikipedia references) plus a headline `pct_backed` over the **factual claims**
+(sourced-or-verified / total), emitted as `meta.provenance_stats`. The About panel shows it
+(`buildAboutSourcing`) and `tools/update_readme_stats.py` writes the same into the README
+`SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its coverage
+table prints the per-kind, per-tier breakdown). References (wikipedia links) are their own
+kind, not folded into the headline (a reference is a pointer, not a claim). The circuit +
+projection-group descriptions are validated for a known grade but not yet folded into the
+headline (all `llm` for now). Current: ~67% of 1371 factual claims backed (drug bindings ~98%,
+NbN 100%; the big gap is the 383 `receptor_locations`, all `llm` today because no expression
+atlas is wired yet, then projections + classifications + region anatomy). Each region is its
+own claim (per the request to grade each "Found in", not the list as a whole), individually
+upgradeable when sourced. Descriptions are no longer a claim kind: every wiki-linked panel
+fetches the live Wikipedia lead instead of baking it.
 
 ## Changing the data
 
@@ -1182,7 +1192,9 @@ baking it.
      `receptor_class`, `sign`, `synaptic`, `locations` (base ids or `"ALL"`). Optional
      `description` + `description_fr` (inline) + `wikipedia`. A stub = empty `locations` +
      no description. `_receptor_record` validates keys + bases. A new family/class/synaptic
-     value needs its label map entry (+ FR). Grade overridable in `RECEPTOR_PROVENANCE`.
+     value needs its label map entry (+ FR). Mechanism grade overridable in
+     `RECEPTOR_PROVENANCE`; an individual expression region is sourced (above `llm`) by
+     adding a `{receptor_id: {base: [quote-source]}}` entry to `RECEPTOR_LOCATION_SOURCES`.
    - **Drugs**: edit `tools/drugs_data.json`. Each: `id`, `name`, `categories`, optional
      `nbn` + `description` (inline `{en,fr}`), `wikipedia`, `bindings`. A binding is
      `{target, action}` (+ optional `effect` / `note` / `tentative`); `target` is a merged

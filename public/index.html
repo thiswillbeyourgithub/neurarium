@@ -995,12 +995,25 @@
         font-style: italic;
         text-transform: none;
       }
-      /* Receptor "found in" region list. */
+      /* Receptor "found in" region list. Each row is name + its own expression
+         provenance pill, pushed to the right (the claim "this receptor is expressed
+         here" is graded per region). */
       .info-locations { margin-top: 4px; }
-      .info-locations li { font-size: 12px; line-height: 1.5; color: var(--text); }
+      .info-locations li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--text);
+      }
+      .info-locations .loc-name { flex: 1 1 auto; min-width: 0; }
       /* A region row that resolves to a modeled structure jumps to it on click. */
       .info-locations li.clickable { cursor: pointer; }
       .info-locations li.clickable:hover { color: var(--accent-bright); }
+      /* The "Throughout the brain" line for a ubiquitous receptor carries its own
+         grade pill (one expression claim), so lay it out like a location row. */
+      .info-desc-pilled { display: flex; align-items: center; gap: 6px; }
       .info-sources li {
         font-size: 12px;
         line-height: 1.4;

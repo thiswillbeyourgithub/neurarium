@@ -314,6 +314,16 @@ def check_reachability(report, meta, structures, projections, circuits,
                 report.error(f"receptor {rid}: location {loc!r} is not a structure "
                              f"base (not in the atlas, so its panel 'Found in' row "
                              f"would not be clickable)")
+        # A per-region expression source must grade one of the receptor's own
+        # locations (the "ALL" sentinel is the ubiquitous receptor's one claim).
+        own = set(receptor.get("locations", []))
+        for base in (receptor.get("location_sources") or {}):
+            if base != "ALL" and base not in own:
+                report.error(f"receptor {rid}: location_sources key {base!r} is not "
+                             f"one of its locations (grades a region it doesn't claim)")
+            if base == "ALL" and not receptor.get("ubiquitous"):
+                report.error(f"receptor {rid}: location_sources 'ALL' but the "
+                             f"receptor is not ubiquitous")
         # The merged Receptors & targets browse list expects every receptor to
         # also be a drug_targets key (a binding can target it directly).
         if rid not in targets:
@@ -472,8 +482,8 @@ def print_coverage(stats):
     by = stats.get("by_kind", {})
     a = stats.get("assertions", {})
     # The claim kinds folded into the headline, in the generator's order.
-    claim_kinds = ("drug_bindings", "drug_nbn", "projections",
-                   "receptors", "targets", "structures")
+    claim_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
+                   "receptor_locations", "targets", "structures")
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -481,15 +491,15 @@ def print_coverage(stats):
 
     def row(label, c, pct=None, suffix=""):
         pct = backed_pct(c) if pct is None else pct
-        print(f"    {label:<15}{c.get('verified', 0):>9}{c.get('sourced', 0):>9}"
+        print(f"    {label:<19}{c.get('verified', 0):>9}{c.get('sourced', 0):>9}"
               f"{c.get('unverified', 0):>11}{c.get('total', 0):>7}{pct:>7}%{suffix}")
 
     print("\n  coverage by kind (each claim reduced to its strongest grade):")
-    print(f"    {'kind':<15}{'verified':>9}{'sourced':>9}{'unverified':>11}"
+    print(f"    {'kind':<19}{'verified':>9}{'sourced':>9}{'unverified':>11}"
           f"{'total':>7}{'backed':>8}")
     for kind in claim_kinds:
         row(kind, by.get(kind, {}))
-    print(f"    {'-' * 55}")
+    print(f"    {'-' * 59}")
     row("all claims", a, pct=a.get("pct_backed", 0))
     if by.get("references"):
         row("references", by["references"], suffix="   (pointers, not in headline)")
@@ -555,6 +565,11 @@ def check_provenance(report, meta, structures, projections, circuits,
         if "classification_provenance" in receptor:
             grade(receptor.get("classification_provenance"),
                   f"receptor {receptor.get('id')} classification_provenance")
+        # Per-region expression sources (the "Found in" grading): each carries a grade.
+        for base, srcs in (receptor.get("location_sources") or {}).items():
+            for i, src in enumerate(srcs or []):
+                grade(src.get("provenance"),
+                      f"receptor {receptor.get('id')} location_sources[{base}][{i}]")
     for structure in structures:
         if "classification_provenance" in structure:
             grade(structure.get("classification_provenance"),
@@ -597,8 +612,8 @@ def check_provenance(report, meta, structures, projections, circuits,
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("assertions", {})
-        kinds = ("drug_bindings", "drug_nbn", "projections",
-                 "receptors", "targets", "structures")
+        kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
+                 "receptor_locations", "targets", "structures")
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "unverified"):
             want = sum(by.get(k, {}).get(key, 0) for k in kinds)
@@ -728,6 +743,11 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
     for r in receptors:
         for i, src in enumerate(r.get("sources", []) or []):
             check_one(f"receptor {r.get('id')} sources[{i}]", src)
+        # Per-region expression sources are quote-checked like any other (the gate
+        # that keeps a future "5-HT2A is dense in the PFC" citation honest).
+        for base, srcs in (r.get("location_sources") or {}).items():
+            for i, src in enumerate(srcs or []):
+                check_one(f"receptor {r.get('id')} location_sources[{base}][{i}]", src)
 
     for tid, tinfo in (meta.get("drug_targets", {}) or {}).items():
         if isinstance(tinfo, dict):

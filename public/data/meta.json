@@ -2199,6 +2199,12 @@
         "sourced": 0,
         "unverified": 26
       },
+      "receptor_locations": {
+        "total": 383,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 383
+      },
       "targets": {
         "total": 25,
         "verified": 21,
@@ -2219,12 +2225,12 @@
       }
     },
     "assertions": {
-      "total": 988,
+      "total": 1371,
       "verified": 921,
       "sourced": 0,
-      "unverified": 67,
+      "unverified": 450,
       "backed": 921,
-      "pct_backed": 93
+      "pct_backed": 67
     }
   }
 }
