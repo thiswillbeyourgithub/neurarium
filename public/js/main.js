@@ -1438,6 +1438,10 @@ function createInfoPanel(data) {
   // panel's "Interacting drugs" list is clicked. The panel hands back the drug
   // record; the caller focuses it exactly like its Drugs legend row / search pick.
   let onDrugPick = () => {};
+  // Set by the caller (onProjectionGroup): what to do when a projection-group row in
+  // a drug panel's "Projections affected" list is clicked. The panel hands back the
+  // group record; the caller focuses it exactly like its Projections legend row.
+  let onProjectionGroupPick = () => {};
   // Set by the caller (onSearch): run a search query. A drug panel's clickable
   // Class / Nomenclature values hand back a `field:"value"` query string; the caller
   // opens the search box pre-filled with it (see wireToolbar.openSearchWithQuery).
@@ -2528,6 +2532,12 @@ function createInfoPanel(data) {
       }
       if (facts.childElementCount) body.appendChild(facts);
 
+      // A binding's representative Ki (median, the chip's headline number), or
+      // Infinity when unmeasured. Sorts the "Acts on" list and picks each system's
+      // strongest-affinity binding for "Projections affected" below.
+      const kiOf = (b) =>
+        b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
+
       // What it binds: one row per target, coloured by the action's net effect.
       const acts = el("div", "info-bindings");
       acts.appendChild(el("h3", null, t("drug.actsOn")));
@@ -2536,12 +2546,9 @@ function createInfoPanel(data) {
       } else {
         const ul = el("ul");
         // Strongest-affinity first: order by the binding's representative Ki
-        // (median, the headline number on the chip) ascending, so the target a
-        // drug grips hardest tops the list; bindings with no measured Ki sink to
-        // the bottom. Sort a copy (leave the authored array untouched); a stable
-        // sort keeps the authored order within each tier and among the no-Ki rows.
-        const kiOf = (b) =>
-          b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
+        // ascending, so the target a drug grips hardest tops the list; bindings with
+        // no measured Ki sink to the bottom. Sort a copy (leave the authored array
+        // untouched); a stable sort keeps the authored order within each tier.
         const bindings = [...drug.bindings].sort((a, b) => kiOf(a) - kiOf(b));
         for (const b of bindings) {
           // If this binding's target is browsable on its own (in the merged
@@ -2557,6 +2564,42 @@ function createInfoPanel(data) {
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
       // always refers to a specific binding node rather than "the whole drug".
+
+      // Projections affected: the ascending pathway systems this drug's flow overlay
+      // lights (drug.flowKinds, from meta.system_flow_kinds). A *derived,
+      // non-directional* inference: the drug binds receptors in system S, so S's
+      // ascending pathways are in play; we deliberately make no increase/decrease
+      // claim (the dataset can't source direction, see the hint line). Each row jumps
+      // to that projection group and carries the source of the strongest-affinity
+      // binding that puts the drug on the system (the same source that says "X is an
+      // agonist"), so the inference stays traceable. Only shows for the four modeled
+      // ascending systems; empty flowKinds -> section omitted.
+      const groupsByKey = data.projectionGroupsByKey;
+      const projColors = data.meta.projectionColors || {};
+      if ((drug.flowKinds || []).length && groupsByKey) {
+        const proj = el("div", "info-connections");
+        proj.appendChild(el("h3", null, t("drug.projectionsAffected")));
+        proj.appendChild(el("p", "legend-caption", t("drug.projectionsAffectedHint")));
+        const ul = el("ul");
+        for (const kind of drug.flowKinds) {
+          const group = groupsByKey.get(`kind:${kind}`);
+          if (!group) continue;
+          // Representative = the strongest-affinity binding feeding this system, so
+          // the row's source is the most concrete claim behind the inference.
+          const rep = drug.bindings
+            .filter((b) => b.flowKind === kind)
+            .sort((a, b) => kiOf(a) - kiOf(b))[0];
+          const li = el("li", "clickable");
+          li.title = group.name;
+          li.appendChild(directionArrow(projColors[kind] || "#fff", "out"));
+          li.appendChild(el("span", "conn-label", group.name));
+          if (rep) li.appendChild(bindingProvenancePill(rep, drug));
+          li.addEventListener("click", () => onProjectionGroupPick(group));
+          ul.appendChild(li);
+        }
+        proj.appendChild(ul);
+        body.appendChild(proj);
+      }
     },
 
     /**
@@ -2636,6 +2679,35 @@ function createInfoPanel(data) {
         group.mode === "sign" ? p.sign === group.key : p.kind === group.key);
       appendPathwayList(t("group.pathways"), members);
 
+      // Drugs acting on this system: the mirror of the drug panel's "Projections
+      // affected". Every focusable drug whose flow overlay lights this group (its
+      // flowKinds includes this kind, i.e. it binds a receptor in the transmitter
+      // system these pathways carry), so you can go from a pathway system to the
+      // drugs that engage it. Non-directional, like the drug side. Only meaningful in
+      // "kind" mode (a sign group has no transmitter system to map).
+      if (group.mode === "kind") {
+        const acting = (data.drugs || [])
+          .filter((d) => d.focusable && (d.flowKinds || []).includes(group.key))
+          .sort((a, b) => a.name.localeCompare(b.name));
+        if (acting.length) {
+          const wrap = el("div", "info-bindings info-interactors");
+          wrap.appendChild(el(
+            "h3", null, `${t("group.actingDrugs")} (${acting.length})`));
+          const ul = el("ul");
+          for (const d of acting) {
+            const li = el("li", "clickable");
+            li.title = d.name;
+            li.appendChild(el("span", "bind-target", d.name));
+            const cat = d.categoryLabels && d.categoryLabels[0];
+            if (cat) li.appendChild(el("span", "legend-tag", cat));
+            li.addEventListener("click", () => onDrugPick(d));
+            ul.appendChild(li);
+          }
+          wrap.appendChild(ul);
+          body.appendChild(wrap);
+        }
+      }
+
       appendSources(group.sources);
     },
 
@@ -2665,6 +2737,15 @@ function createInfoPanel(data) {
      */
     onDrug(fn) {
       onDrugPick = fn;
+    },
+
+    /**
+     * Register the handler run when a projection-group row in a drug panel's
+     * "Projections affected" list is clicked. Called with the group record; the
+     * caller focuses it exactly like its Projections legend row / search pick.
+     */
+    onProjectionGroup(fn) {
+      onProjectionGroupPick = fn;
     },
 
     /**
@@ -4781,6 +4862,11 @@ async function main() {
   // that drug (dim + animation + drug panel + tab), exactly like a Drugs legend row
   // / drug search pick, so you can go from a target to every drug acting on it.
   info.onDrug(selectDrug);
+
+  // Clicking a "Projections affected" row in a drug panel focuses that projection
+  // group (isolates its arrows + opens its tab), exactly like its Projections legend
+  // row, so you can go from a drug to the pathway system it engages.
+  info.onProjectionGroup((group) => focusProjectionGroup(group, { frame: true }));
 
   // Both hemispheres (plus midline singletons) sharing a clicked mesh's base, so
   // a double-click isolates the same pair a legend row click does. The id base is

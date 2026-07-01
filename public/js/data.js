@@ -418,6 +418,11 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         target: b.target,
         targetName: tgt.name ? localize(tgt.name) : b.target,
         system: tgt.system || null,
+        // The projection kind this binding's target system feeds (meta.system_flow_
+        // kinds), null when the system has no modeled ascending pathway or the
+        // binding is affinity-only. Lets a panel list the "projections affected" per
+        // binding and lets d.flowKinds below dedupe from a single field.
+        flowKind: affinityOnly ? null : systemFlowKinds[tgt.system] || null,
         receptor: tgt.receptor || null,
         affinityOnly,
         action: affinityOnly ? null : b.action,
@@ -445,10 +450,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // filters arrows by these kinds, js/drug-anim.js animates them); empty for a
     // drug whose systems have no modeled ascending pathway (it gets just dots +
     // wash). A Set-deduped list since several bindings can share a system.
-    d.flowKinds = [...new Set(
-      d.bindings.filter((b) => !b.affinityOnly)
-        .map((b) => systemFlowKinds[b.system]).filter(Boolean),
-    )];
+    d.flowKinds = [...new Set(d.bindings.map((b) => b.flowKind).filter(Boolean))];
     // Focusable if it carries any binding (the info panel + search work even when
     // a target has no modeled region to light); the generator already cleared it
     // for a drug with no bindings at all.
