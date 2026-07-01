@@ -205,7 +205,9 @@ Viewer (`public/`):
 - `index.html` — page shell: loads three.js (vendored, import map) and, on
   `?debug=1` only, vendored eruda. Holds the bottom-left collapsible `#controls`
   ("neurarium") panel, the `#banners` stack (see Controls), and the startup
-  `#loading` overlay (see Loading overlay).
+  `#loading` overlay (see Loading overlay). The UI-chrome accent is the `--accent*`
+  palette in `:root` (purple; sliders/tabs/focus/links/hover); data + semantic
+  colours (projection-kind blue etc.) live in `meta.json`, never here.
 - `js/data.js` — fetches `meta.json` + the `.jsonl` files + all shape files;
   returns a normalized `{structures, projections, circuits, projectionGroups,
   projectionGroupsByKey, receptors, targets, drugs, drugsByTarget, byId, meta}`.

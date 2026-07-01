@@ -86,6 +86,15 @@
         --panel-bg: rgba(20, 24, 31, 0.82);
         --text: #e7ecf2;
         --muted: #9aa6b3;
+        /* UI accent: the purple of the parakeet_web logo's wing, so the chrome
+           (sliders, active tabs/buttons, focus rings, links) is purple-themed.
+           These are chrome only; the data/semantic colours (projection kinds,
+           provenance-grade pills, effect dots) live in generate_data.py/meta and
+           are deliberately untouched. --accent-soft is --accent at 0.35 alpha. */
+        --accent: #8a5cf0;
+        --accent-bright: #b48bff;
+        --accent-light: #c8a8ff;
+        --accent-soft: rgba(138, 92, 240, 0.35);
       }
       * { box-sizing: border-box; }
       html, body {
@@ -294,8 +303,8 @@
       }
       /* margin-inline:0 drops the UA's ~2px horizontal margin: with width:100% it
          otherwise sums to 100%+4px and overflows the (now x-clipped) section list. */
-      input[type="range"] { width: 100%; margin-inline: 0; accent-color: #4e79a7; }
-      input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4e79a7; }
+      input[type="range"] { width: 100%; margin-inline: 0; accent-color: var(--accent); }
+      input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); }
 
       /* Shared pill button (the "show all names" toggle). The .active state is
          set from JS when names are forced on. */
@@ -311,8 +320,8 @@
       }
       .btn:hover { background: rgba(255, 255, 255, 0.12); }
       .btn.active {
-        background: #4e79a7;
-        border-color: #4e79a7;
+        background: var(--accent);
+        border-color: var(--accent);
         color: #fff;
       }
 
@@ -359,7 +368,7 @@
         cursor: pointer;
       }
       .panel-tab:hover { color: var(--text); }
-      .panel-tab.active { color: var(--text); border-bottom-color: #4e79a7; }
+      .panel-tab.active { color: var(--text); border-bottom-color: var(--accent); }
       /* The Settings tab is pinned: it never shrinks and never scrolls away, so
          it is always reachable as the first tab. */
       .panel-tab.pinned { flex: 0 0 auto; }
@@ -416,7 +425,7 @@
         white-space: nowrap;
       }
       .detail-tab:hover { color: var(--text); }
-      .detail-tab.active { color: var(--text); border-bottom-color: #4e79a7; }
+      .detail-tab.active { color: var(--text); border-bottom-color: var(--accent); }
       .detail-tab.dragging { opacity: 0.55; }
       .detail-tab-label {
         overflow: hidden;
@@ -450,7 +459,7 @@
         cursor: pointer;
       }
       .tool-btn:hover { background: rgba(255, 255, 255, 0.12); }
-      .tool-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
+      .tool-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
       /* currentColor on the SVG strokes makes the icons follow the button text
          color, including the blue .active state of the search toggle. */
       .tool-btn svg { width: 18px; height: 18px; display: block; }
@@ -565,7 +574,7 @@
         cursor: pointer;
       }
       .lang-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
-      .lang-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
+      .lang-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
       /* Search shown in place of #controls-main while the magnifier is on. */
       #search { margin-top: 12px; }
@@ -582,7 +591,7 @@
         border-radius: 8px;
         outline: none;
       }
-      #search-input:focus { border-color: #4e79a7; }
+      #search-input:focus { border-color: var(--accent); }
       #search-help { flex: 0 0 auto; width: 20px; height: 20px; font-size: 12px; }
       /* The toggled search-syntax help block (the "?" button shows/hides it). */
       #search-syntax {
@@ -628,8 +637,8 @@
       }
       .search-filter.active {
         color: #fff;
-        background: rgba(78, 121, 167, 0.35);
-        border-color: #4e79a7;
+        background: var(--accent-soft);
+        border-color: var(--accent);
       }
       #search-results {
         list-style: none;
@@ -716,7 +725,7 @@
         line-height: 1.5;
         color: var(--muted);
       }
-      .about-text a { color: #8fb6e6; text-decoration: underline; }
+      .about-text a { color: var(--accent-bright); text-decoration: underline; }
       /* "Sources & provenance" block in About (built by buildAboutSourcing). The
          grade key reuses the .src-pill / .src-prov-* swatches from the info panel
          so the legend matches the pills shown beside each source. */
@@ -799,7 +808,7 @@
         outline: none;
         box-sizing: border-box;
       }
-      .drugs-filter:focus { border-color: #4e79a7; }
+      .drugs-filter:focus { border-color: var(--accent); }
       .drug-item[hidden] { display: none; }
       .drugs-empty { margin: 6px 2px; font-size: 12px; }
       /* The Projections section's colour-mode switch sits at the top of the body,
@@ -837,7 +846,7 @@
         cursor: pointer;
       }
       .mode-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
-      .mode-btn.active { background: #4e79a7; border-color: #4e79a7; color: #fff; }
+      .mode-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
       #structures-body h2:first-child,
       #projections-body h2:first-child,
       #legend-body h2:first-child,
@@ -971,14 +980,14 @@
         border: none;
         padding: 0;
         font: inherit;
-        color: #8fb6e6;
+        color: var(--accent-bright);
         cursor: pointer;
         text-decoration: underline;
         text-underline-offset: 2px;
         text-align: left;
       }
       .fact-link:hover,
-      .conn-endpoint:hover { color: #b9d4f3; }
+      .conn-endpoint:hover { color: var(--accent-light); }
       /* A muted trailing note on a fact row (e.g. flagging a non-standard
          nomenclature). `text-transform: none` overrides the row's capitalize. */
       .info-fact .fact-note {
@@ -991,14 +1000,14 @@
       .info-locations li { font-size: 12px; line-height: 1.5; color: var(--text); }
       /* A region row that resolves to a modeled structure jumps to it on click. */
       .info-locations li.clickable { cursor: pointer; }
-      .info-locations li.clickable:hover { color: #8fb6e6; }
+      .info-locations li.clickable:hover { color: var(--accent-bright); }
       .info-sources li {
         font-size: 12px;
         line-height: 1.4;
         color: var(--text);
         margin-bottom: 8px;
       }
-      .info-sources a { color: #8fb6e6; text-decoration: underline; }
+      .info-sources a { color: var(--accent-bright); text-decoration: underline; }
       /* Source / reference provenance pills: one small pill per source saying how
          trustworthy its attribution is (grey ? = LLM-only, yellow ~ = the LLM had
          the source, green ✓ = quote-checked), plus the orange TODO pill for the
@@ -1046,7 +1055,7 @@
       /* Structure panel: a clickable list of the structure's connections. */
       .info-group { font-size: 12px; color: var(--muted); margin: -4px 0 12px; }
       .info-wiki { font-size: 12px; margin: -6px 0 12px; }
-      .info-wiki a { color: #8fb6e6; text-decoration: underline; }
+      .info-wiki a { color: var(--accent-bright); text-decoration: underline; }
       /* Separator between sibling reference links (e.g. Wikipedia · Vidal on a
          French drug panel). */
       .info-wiki .ref-sep { color: var(--muted); margin: 0 6px; }
@@ -1112,7 +1121,7 @@
         padding: 4px 0;
         cursor: pointer;
       }
-      .info-connections li:hover { color: #8fb6e6; }
+      .info-connections li:hover { color: var(--accent-bright); }
       .info-connections .conn-label { flex: 1; }
       /* Bold colour direction arrow for a connection row (see directionArrow):
          large + filled in the pathway colour so it is easy to read at a glance. */
@@ -1237,7 +1246,7 @@
          focuses that target, exactly like its legend row, so the bold target
          name reads as a link on hover. */
       .info-bindings li.clickable { cursor: pointer; }
-      .info-bindings li.clickable:hover .bind-target { color: #8fb6e6; }
+      .info-bindings li.clickable:hover .bind-target { color: var(--accent-bright); }
       /* The text column grows to push the trailing source pill to the right edge,
          aligned with the target name (align-items: flex-start on the row); it wraps
          only if the name leaves it no room. */
@@ -1256,7 +1265,7 @@
         gap: 2px 5px;
         font-size: 11px;
       }
-      .ki-chip .ki-val { font-weight: 600; color: #cfe3ff; white-space: nowrap; }
+      .ki-chip .ki-val { font-weight: 600; color: var(--accent-light); white-space: nowrap; }
       .ki-chip .ki-detail { color: var(--muted); font-size: 10px; }
       /* A Ki with no human assay: tint the value amber so a non-human number is
          visible at a glance, not only in the tooltip. */
@@ -1279,7 +1288,7 @@
       .combo-warning .combo-link {
         background: none;
         border: none;
-        color: #8fb6e6;
+        color: var(--accent-bright);
         cursor: pointer;
         padding: 0;
         font: inherit;
@@ -1333,7 +1342,7 @@
         width: 0;
         height: 100%;
         border-radius: 999px;
-        background: linear-gradient(90deg, #4e79a7, #8fb6e6);
+        background: linear-gradient(90deg, var(--accent), var(--accent-bright));
         transition: width 0.25s ease;
       }
       .loading-caption {
