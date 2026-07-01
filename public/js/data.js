@@ -328,6 +328,28 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       quote: s.quote || "",
       provenance: s.provenance || "llm",
     }));
+  // A binding's measured PDSP Ki -> the display object the drug panel renders beside
+  // the binding (value + range + human/non-human counts, its own verified badge, and
+  // the exact representative assay for the tooltip). `mapped` flags a value borrowed
+  // through the alias map (an enantiomer/prodrug/metabolite), so the panel warns
+  // which compound it was actually measured on. Null when the binding has no Ki.
+  const resolveKi = (ki) => {
+    if (!ki) return null;
+    const src = ki.source || {};
+    const corpus = sourceCorpora[src.corpus] || {};
+    return {
+      median: ki.median, min: ki.min, max: ki.max,
+      nHuman: ki.n_human || 0, nNonhuman: ki.n_nonhuman || 0,
+      provenance: src.provenance || null,
+      kiId: src.ki_id != null ? src.ki_id : null,
+      valueNm: src.value_nm != null ? src.value_nm : null,
+      species: src.species || "", preparation: src.preparation || "",
+      radioligand: src.radioligand || "", reference: src.reference || "",
+      corpusRef: corpus.ref || src.corpus, corpusUrl: corpus.url || "",
+      mapped: !!src.mapped, measuredAs: src.measured_as || "",
+      relation: src.relation || "", pdspNames: src.pdsp_names || [],
+    };
+  };
   for (const d of drugs) {
     d.description = d.description ? localize(d.description) : "";
     // Provenance grade of the description (llm synthesis vs a sourced Wikipedia
@@ -355,10 +377,16 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     const affected = new Set();
     d.bindings = (d.bindings || []).map((b) => {
       const tgt = drugTargets[b.target] || {};
-      const act = drugActions[b.action] || {};
-      const effect = b.effect || act.effect || "modulate";
-      let structureIds;
-      if (tgt.ubiquitous) {
+      // An affinity_only binding is PDSP-derived with no known direction: it is
+      // listed in the panel (with its Ki) but has no action/effect and never
+      // animates, so it contributes nothing to the lit-region union or flow.
+      const affinityOnly = !!b.affinity_only;
+      const act = affinityOnly ? {} : drugActions[b.action] || {};
+      const effect = affinityOnly ? null : b.effect || act.effect || "modulate";
+      let structureIds = [];
+      if (affinityOnly) {
+        structureIds = [];
+      } else if (tgt.ubiquitous) {
         structureIds = allIds.slice();
       } else if (tgt.receptor && receptorStructureIds.has(tgt.receptor)) {
         structureIds = receptorStructureIds.get(tgt.receptor).slice();
@@ -367,17 +395,18 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
           [bse, `${bse}_R`, `${bse}_L`].filter((id) => byId.has(id)),
         );
       }
-      for (const id of structureIds) affected.add(id);
+      if (!affinityOnly) for (const id of structureIds) affected.add(id);
       return {
         target: b.target,
         targetName: tgt.name ? localize(tgt.name) : b.target,
         system: tgt.system || null,
         receptor: tgt.receptor || null,
-        action: b.action,
-        actionLabel: act.label ? localize(act.label) : b.action,
+        affinityOnly,
+        action: affinityOnly ? null : b.action,
+        actionLabel: affinityOnly ? null : act.label ? localize(act.label) : b.action,
         effect,
-        effectColor: drugEffectColors[effect] || "#ffffff",
-        effectLabel: drugEffectLabels[effect] || effect,
+        effectColor: affinityOnly ? null : drugEffectColors[effect] || "#ffffff",
+        effectLabel: affinityOnly ? null : drugEffectLabels[effect] || effect,
         note: b.note ? localize(b.note) : "",
         tentative: !!b.tentative,
         structureIds,
@@ -388,6 +417,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // among them, which colours the binding's source pill (null = no source).
         sources: mapSources(b.sources),
         provenance: strongestGrade(b.sources),
+        // The measured PDSP Ki (own verified badge), null when absent.
+        ki: resolveKi(b.ki),
       };
     });
     d.structureIds = [...affected];
@@ -397,7 +428,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // drug whose systems have no modeled ascending pathway (it gets just dots +
     // wash). A Set-deduped list since several bindings can share a system.
     d.flowKinds = [...new Set(
-      d.bindings.map((b) => systemFlowKinds[b.system]).filter(Boolean),
+      d.bindings.filter((b) => !b.affinityOnly)
+        .map((b) => systemFlowKinds[b.system]).filter(Boolean),
     )];
     // Focusable if it carries any binding (the info panel + search work even when
     // a target has no modeled region to light); the generator already cleared it
@@ -406,6 +438,27 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     d.keywords = [...d.categoryLabels, d.nbn, ...d.bindings.map((b) => b.targetName)]
       .filter(Boolean)
       .join(" ");
+  }
+
+  // Combo drugs ("A + B", or "A-B" with an en/em dash): resolve the constituents to
+  // our standalone drug ids where they exist, so the panel warns it is a combination
+  // and links out to each part (interactions between them may exist). Derived from
+  // the name, not stored (matching the generator, which leaves combos untouched).
+  const normName = (s) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const drugIdSet = new Set(drugs.map((d) => d.id));
+  const drugByNorm = new Map(drugs.map((d) => [normName(d.name), d.id]));
+  for (const d of drugs) {
+    const parts = /[+–—]/.test(d.name || "")
+      ? d.name.split(/\s*[+–—]\s*/).map((p) => p.trim()).filter(Boolean)
+      : null;
+    d.combo = parts
+      ? parts.map((p) => ({
+          name: p,
+          drugId: drugIdSet.has(p.toLowerCase())
+            ? p.toLowerCase()
+            : drugByNorm.get(normName(p)) || null,
+        }))
+      : null;
   }
 
   // Reverse index from the bindings: a target id -> the drugs that act on it, each

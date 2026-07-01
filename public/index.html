@@ -1238,6 +1238,52 @@
          name reads as a link on hover. */
       .info-bindings li.clickable { cursor: pointer; }
       .info-bindings li.clickable:hover .bind-target { color: #8fb6e6; }
+      /* Binding rows wrap so the trailing source pill + Ki chip fall to a second
+         line in the narrow panel instead of overflowing; the text column grows to
+         push them right when there is room. */
+      .info-bindings li { flex-wrap: wrap; }
+      .info-bindings .bind-text { flex: 1 1 auto; }
+      /* Measured PDSP Ki chip, right of the source badge: the median value (bright)
+         + the [min-max] range and human/non-human counts (muted). Its own verified
+         "truth badge" (an .src-pill) follows. */
+      .ki-chip {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 5px;
+        font-size: 11px;
+        white-space: nowrap;
+        margin-left: auto;   /* hug the right edge of the row */
+      }
+      .ki-chip .ki-val { font-weight: 600; color: #cfe3ff; }
+      .ki-chip .ki-detail { color: var(--muted); font-size: 10px; }
+      /* A Ki with no human assay: tint the value amber so a non-human number is
+         visible at a glance, not only in the tooltip. */
+      .ki-chip.ki-nonhuman .ki-val { color: #e6b86a; }
+      /* Alias-borrowed value warning ("⚠ measured on <compound>"): amber, small. */
+      .ki-mapped { color: #e6b800; font-size: 10px; white-space: nowrap; }
+      /* Affinity-only (PDSP) binding: no known direction, panel-only, slightly muted. */
+      .info-bindings li.affinity-only .bind-action { font-style: italic; }
+      /* Combination-drug warning at the top of a combo's panel. */
+      .combo-warning {
+        background: rgba(230, 184, 0, 0.08);
+        border: 1px solid rgba(230, 184, 0, 0.3);
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin: 0 0 12px;
+        font-size: 12px;
+      }
+      .combo-warning strong { color: #e6c85a; }
+      .combo-warning p { margin: 4px 0 6px; color: var(--muted); }
+      .combo-warning .combo-link {
+        background: none;
+        border: none;
+        color: #8fb6e6;
+        cursor: pointer;
+        padding: 0;
+        font: inherit;
+        text-decoration: underline;
+      }
+      .combo-warning .combo-plain { color: var(--muted); }
       /* "Interacting drugs" list on a receptor / target panel: the drugs that act
          on it, grouped by drug category. The .drug-cat sub-heading is a small muted
          label between groups (the section's own h3 keeps the uppercase header look). */

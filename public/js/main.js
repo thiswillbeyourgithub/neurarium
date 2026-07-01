@@ -1446,6 +1446,7 @@ function createInfoPanel(data) {
   // row can focus that target (a receptor entry shares its id; a non-receptor one
   // its drug_targets key). Only focusable entries become clickable.
   const targetById = new Map(data.targets.map((tg) => [tg.id, tg]));
+  const drugById = new Map((data.drugs || []).map((d) => [d.id, d]));
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -1748,6 +1749,57 @@ function createInfoPanel(data) {
     g.style.color = color;
     if (label) g.setAttribute("aria-label", label);
     return g;
+  };
+
+  // Format a Ki (nM) to ~3 significant figures without trailing noise (0.29, 2.7,
+  // 1240), so 0.28999999... reads as 0.29.
+  const fmtKi = (n) => {
+    const p = Number(n);
+    return isFinite(p) ? String(parseFloat(p.toPrecision(3))) : "?";
+  };
+
+  // The measured PDSP Ki shown to the right of a binding's source badge: the median
+  // value + [min-max] range + human/non-human assay counts, then its own "truth
+  // badge" (a verified provenance pill whose tooltip cites the one representative
+  // assay: species, preparation, radioligand, reference). A value borrowed through
+  // the alias map (an enantiomer/prodrug/metabolite) also gets a visible ⚠ warning
+  // naming the compound it was actually measured on, so it is never read as this
+  // drug's own number. Returns a fragment appended to the binding row.
+  const kiChip = (ki) => {
+    const frag = document.createDocumentFragment();
+    const chip = el("span", "ki-chip");
+    chip.appendChild(el("span", "ki-val", `Ki ${fmtKi(ki.median)} nM`));
+    chip.appendChild(el("span", "ki-detail",
+      `${fmtKi(ki.min)}–${fmtKi(ki.max)} · `
+      + t("drug.kiCounts", { h: ki.nHuman, n: ki.nNonhuman })));
+    if (ki.nHuman === 0) chip.classList.add("ki-nonhuman");
+    frag.appendChild(chip);
+    // Truth badge: the assay behind the value.
+    const assay = [
+      ki.kiId != null ? `#${ki.kiId}` : "",
+      ki.valueNm != null ? `${fmtKi(ki.valueNm)} nM` : "",
+      ki.species, ki.preparation, ki.radioligand, ki.reference,
+    ].filter(Boolean).join(", ");
+    let tip = t("drug.kiTip", { h: ki.nHuman, n: ki.nNonhuman,
+      assay: `${ki.corpusRef}: ${assay}` });
+    if (ki.nHuman === 0) {
+      tip += "\n\n" + t("drug.kiTipNonHuman", { species: ki.species || "?" });
+    }
+    const relationLabel = ki.mapped
+      ? t(`drug.rel.${ki.relation}`) || ki.relation : "";
+    if (ki.mapped) {
+      tip += "\n\n" + t("drug.kiMappedTip",
+        { compound: ki.measuredAs, relation: relationLabel });
+    }
+    frag.appendChild(makeProvenancePill(ki.provenance, tip));
+    if (ki.mapped) {
+      const warn = el("span", "ki-mapped",
+        "⚠ " + t("drug.kiMapped", { compound: ki.measuredAs }));
+      warn.title = t("drug.kiMappedTip",
+        { compound: ki.measuredAs, relation: relationLabel });
+      frag.appendChild(warn);
+    }
+    return frag;
   };
 
   // Shared by the structure / receptor / drug / target views: an external reference
@@ -2318,6 +2370,30 @@ function createInfoPanel(data) {
       body.appendChild(el("h2", "info-title", drug.name));
       if (drug.category) body.appendChild(el("div", "info-group", drug.category));
 
+      // Combination drug: no PDSP Ki of its own (it is a mixture). Warn, and link to
+      // each constituent we model as a standalone drug so its binding profile is one
+      // click away; interactions between the constituents may exist.
+      if (drug.combo && drug.combo.length) {
+        const warn = el("div", "combo-warning");
+        warn.appendChild(el("strong", null, t("drug.combo")));
+        warn.appendChild(el("p", null, t("drug.comboNote")));
+        const links = el("div", "combo-parts");
+        drug.combo.forEach((c, i) => {
+          if (i) links.appendChild(document.createTextNode(" · "));
+          const linked = c.drugId && drugById.get(c.drugId);
+          if (linked && linked.focusable) {
+            const a = el("button", "combo-link", c.name);
+            a.type = "button";
+            a.addEventListener("click", () => onDrugPick(linked));
+            links.appendChild(a);
+          } else {
+            links.appendChild(el("span", "combo-plain", c.name));
+          }
+        });
+        warn.appendChild(links);
+        body.appendChild(warn);
+      }
+
       // Vendored molecular-structure SVG (from Wikipedia, see tools/fetch_molecules.py).
       // It is black/grey line art on transparent; the .mol-structure CSS inverts it
       // to read as light strokes on the dark panel. Absent when no SVG was fetched.
@@ -2421,7 +2497,13 @@ function createInfoPanel(data) {
         for (const b of drug.bindings) {
           const li = el("li");
           if (b.tentative) li.classList.add("tentative");
-          li.appendChild(effectGlyph(b.effect, b.effectColor, b.effectLabel));
+          // An affinity_only binding (PDSP Ki, no known direction) gets a muted
+          // neutral glyph + an "affinity only" action line, and no binding source
+          // pill (its only source is the Ki's own verified badge).
+          if (b.affinityOnly) li.classList.add("affinity-only");
+          li.appendChild(effectGlyph(
+            b.effect, b.affinityOnly ? "#8a8f98" : b.effectColor,
+            b.affinityOnly ? t("drug.affinityOnly") : b.effectLabel));
           // Target name (bold) over the action line, stacked so a long target
           // name (e.g. "Serotonin transporter (SERT)") wraps cleanly inside the
           // narrow panel instead of pushing the action off the edge.
@@ -2429,16 +2511,22 @@ function createInfoPanel(data) {
           txt.appendChild(el("span", "bind-target", b.targetName));
           // A tentative binding gets a "· speculative" tag so the dim+italic row is
           // self-explaining (it rides the dimmed action line, so it reads as muted).
-          const parts = [b.actionLabel, b.note];
+          const parts = [b.affinityOnly ? t("drug.affinityOnly") : b.actionLabel,
+                         b.note];
           if (b.tentative) parts.push(t("drug.speculative"));
           const detail = parts.filter(Boolean).join(" · ");
           if (detail) txt.appendChild(el("span", "bind-action", detail));
           li.appendChild(txt);
           // Source pill: this binding's own quote-level source when it has one,
           // else the drug-level Stahl citation (grade llm). Always shown, so the
-          // grade is never blank (see bindingProvenancePill).
-          li.appendChild(bindingProvenancePill(b, drug));
-          li.title = `${b.effectLabel} · ${b.targetName}`;
+          // grade is never blank (see bindingProvenancePill). Skipped for an
+          // affinity_only binding (Stahl never stated it; the Ki badge is its source).
+          if (!b.affinityOnly) li.appendChild(bindingProvenancePill(b, drug));
+          // Measured PDSP Ki (value + range + counts + its verified truth badge).
+          if (b.ki) li.appendChild(kiChip(b.ki));
+          li.title = b.affinityOnly
+            ? `${t("drug.affinityOnly")} · ${b.targetName}`
+            : `${b.effectLabel} · ${b.targetName}`;
           // If this binding's target is browsable on its own (in the merged
           // "Receptors & targets" list and focusable), make the row jump to it.
           const tgt = targetById.get(b.target);
