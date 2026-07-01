@@ -103,7 +103,7 @@ not a slogan:
 | Claim kind | Sourced or verified |
 | --- | --- |
 | Drug target bindings | 409 / 429 (95%) |
-| Drug nomenclature (NbN) | 113 / 116 (97%) |
+| Drug nomenclature (NbN) | 116 / 116 (100%) |
 | Neuron pathways | 86 / 107 (80%) |
 | Receptor classifications | 30 / 56 (54%) |
 | Target classifications | 21 / 25 (84%) |

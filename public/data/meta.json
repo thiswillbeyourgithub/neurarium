@@ -2177,9 +2177,9 @@
       },
       "drug_nbn": {
         "total": 116,
-        "verified": 113,
+        "verified": 116,
         "sourced": 0,
-        "unverified": 3
+        "unverified": 0
       },
       "projections": {
         "total": 107,
@@ -2214,10 +2214,10 @@
     },
     "assertions": {
       "total": 785,
-      "verified": 707,
+      "verified": 710,
       "sourced": 0,
-      "unverified": 78,
-      "backed": 707,
+      "unverified": 75,
+      "backed": 710,
       "pct_backed": 90
     }
   }

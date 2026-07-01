@@ -904,8 +904,8 @@
       "antipsychotic_atypical"
     ],
     "nbn": {
-      "en": "dopamine partial agonist, serotonin-dopamine partial agonist (DS-RPA)",
-      "fr": "agoniste partiel dopaminergique, agoniste partiel sérotonino-dopaminergique (DS-RPA)"
+      "en": "dopamine-serotonin partial agonist",
+      "fr": "agoniste partiel dopamino-sérotoninergique"
     },
     "bindings": [
       {
@@ -986,7 +986,16 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Brexpiprazole"
+    "wikipedia": "https://en.wikipedia.org/wiki/Brexpiprazole",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 119,
+        "quote": "Dopamine partial agonist (dopamine– serotonin partial agonist, dopamine stabilizer, atypical antipsychotic, thirdgeneration antipsychotic; sometimes included as a second-generation antipsychotic; also a potential mood stabilizer)",
+        "provenance": "verified"
+      }
+    ],
+    "nbn_nonstandard": true
   },
   {
     "id": "buprenorphine",
@@ -1025,7 +1034,16 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Buprenorphine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Buprenorphine",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 127,
+        "quote": "Mu opioid receptor partial agonist",
+        "provenance": "verified"
+      }
+    ],
+    "nbn_nonstandard": true
   },
   {
     "id": "bupropion",
@@ -3849,8 +3867,8 @@
       "antipsychotic_atypical"
     ],
     "nbn": {
-      "en": "serotonin, dopamine receptor antagonist / partial agonist (SD-RAn/PA)",
-      "fr": "antagoniste / agoniste partiel des récepteurs sérotoninergiques et dopaminergiques (SD-RAn/PA)"
+      "en": "serotonin-dopamine antagonist",
+      "fr": "antagoniste sérotonino-dopaminergique"
     },
     "bindings": [
       {
@@ -3924,7 +3942,16 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lumateperone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lumateperone",
+    "nbn_sources": [
+      {
+        "corpus": "stahl",
+        "page": 479,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
+    ],
+    "nbn_nonstandard": true
   },
   {
     "id": "lurasidone",
