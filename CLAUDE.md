@@ -45,6 +45,45 @@ group means adding it there or its structures drop from the legend.
 Coordinate convention (arbitrary units, brain centered on origin): `x` left(-)/
 right(+), `y` down(-)/up(+), `z` posterior(-)/anterior(+).
 
+## Nodes (the sourceable-datum model)
+
+The organizing concept of the whole project: **a *node* is any sourceable datum**,
+one atom of knowledge about the brain that could, in principle, be attributed to a
+source. The dataset is a **graph of nodes**; a detail panel is a view of one node
+plus every node linked to it (a receptor node links to the region nodes expressing
+it and the drug nodes acting on it, etc.). New features should think in nodes: if you
+add a datum, it is a node, and **every node must be sourceable** (see Source
+provenance) so the coverage tally stays honest.
+
+> [!IMPORTANT]
+> "Node" is the umbrella term. The per-kind names (structure, projection, circuit,
+> receptor, drug, binding, target, ...) are **node kinds**, and they keep their names
+> in the data files + code (a `structures.jsonl`, a `showReceptor`, ...): the kinds
+> are distinct and renaming the collections to "node" would erase the distinction the
+> graph needs. So: umbrella = node; specific = its kind.
+
+**Node kinds and where each lives** (the emitted collection -> the sourcing-tally kind
+in `meta.provenance_stats.by_kind`):
+- brain region -> `structures.jsonl` -> `structures`
+- projection (pathway) -> `projections.jsonl` -> `projections`
+- functional circuit -> `circuits.jsonl` (+ projection group) -> (not yet in the tally)
+- receptor classification -> `receptors.jsonl` -> `receptors`
+- receptor *expression region* -> a receptor's `location_sources` -> `receptor_locations`
+- non-receptor drug target -> `meta.drug_targets` -> `targets`
+- drug binding -> a drug's `bindings[]` -> `drug_bindings`
+- drug NbN label -> a drug's `nbn` -> `drug_nbn`
+- Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
+  tallied but excluded from the headline; a reference is not itself a knowledge node)
+
+**The node sourcing contract.** Every node carries a provenance **grade**
+(`PROVENANCE_LEVELS`: `llm` < `sourced` < `verified`) and, ideally, a **source**: a
+quote-level `{corpus, page, quote, provenance}` (drug bindings, NbN, receptor
+classifications, receptor locations, region anatomy) or a bibliographic
+`{citation, url, provenance}` (projections, circuits). `meta.provenance_stats`
+(emitted by `_provenance_stats`, key `nodes`) reduces every node to its strongest
+grade and counts them; the headline % is over the knowledge nodes (references
+excluded). Full mechanics in Source provenance.
+
 ## Architecture
 
 Anatomy is plain data, separate from rendering, so the project can grow without
@@ -1066,13 +1105,14 @@ doesn't show the brain through it. i18n: `image.close` / `image.zoomHint`.
 
 ## Source provenance
 
-Every source/reference carries a **provenance grade** saying how trustworthy its
-attribution is (the dataset is LLM-assisted, not yet human-checked). The viewer renders it
-as a coloured **pill** with a tooltip; the grade is **data**. Grades (`PROVENANCE_LEVELS`
-in `generate_data.py`, weakest to strongest):
+How every **node** (any sourceable datum, see Nodes) is graded + sourced. Every node's
+source/reference carries a **provenance grade** saying how trustworthy its attribution is
+(the dataset is LLM-assisted, not yet human-checked). The viewer renders it as a coloured
+**pill** with a tooltip; the grade is **data**. Grades (`PROVENANCE_LEVELS` in
+`generate_data.py`, weakest to strongest):
 
 - **`llm`** (grey **?**): LLM from memory, unchecked, may be a hallucination.
-- **`sourced`** (yellow **~**): LLM given the source document, but the claim was not
+- **`sourced`** (yellow **~**): LLM given the source document, but the node was not
   quote-verified.
 - **`verified`** (green **✓**): an LLM extracted a quote, it was *programmatically*
   confirmed present in the source, and a separate LLM agreed it supports the claim. Highest
@@ -1131,22 +1171,23 @@ the none case) with the glyph + `info.prov*` tooltip via `withTip`; colours are 
 (or `NOSOURCE`). Each pill's tooltip explains its own grade and the About block carries the
 full key, so there is no separate blanket "?" caveat.
 
-**The "% sourced" figure.** `_provenance_stats` reduces every claim + reference to its
-strongest grade and tallies per kind (drug bindings / NbN / projections / receptor
+**The "% sourced" figure.** `_provenance_stats` reduces every **node** + reference to its
+strongest grade and tallies per node kind (drug bindings / NbN / projections / receptor
 classifications / **receptor expression regions** / target classifications / region anatomy /
-wikipedia references) plus a headline `pct_backed` over the **factual claims**
-(sourced-or-verified / total), emitted as `meta.provenance_stats`. The About panel shows it
-(`buildAboutSourcing`) and `tools/update_readme_stats.py` writes the same into the README
-`SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its coverage
-table prints the per-kind, per-tier breakdown). References (wikipedia links) are their own
-kind, not folded into the headline (a reference is a pointer, not a claim). The circuit +
-projection-group descriptions are validated for a known grade but not yet folded into the
-headline (all `llm` for now). Current: ~67% of 1371 factual claims backed (drug bindings ~98%,
-NbN 100%; the big gap is the 383 `receptor_locations`, all `llm` today because no expression
-atlas is wired yet, then projections + classifications + region anatomy). Each region is its
-own claim (per the request to grade each "Found in", not the list as a whole), individually
-upgradeable when sourced. Descriptions are no longer a claim kind: every wiki-linked panel
-fetches the live Wikipedia lead instead of baking it.
+wikipedia references) plus a headline `pct_backed` over the **knowledge nodes**
+(sourced-or-verified / total), emitted as `meta.provenance_stats` (key `nodes`). The About
+panel shows it (`buildAboutSourcing`) and `tools/update_readme_stats.py` writes the same into
+the README `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent
+(its coverage table prints the per-node-kind, per-tier breakdown, columns U / S / S+V).
+References (wikipedia links) are their own kind, not folded into the headline (a reference
+points *at* a node, it is not itself one). The circuit + projection-group descriptions are
+validated for a known grade but not yet folded into the headline (all `llm` for now). Current:
+~67% of 1371 nodes backed (drug bindings ~98%, NbN 100%; the big gap is the 383
+`receptor_locations`, all `llm` today because no expression atlas is wired yet, then
+projections + classifications + region anatomy). Each expression region is its own node (per
+the request to grade each "Found in", not the list as a whole), individually upgradeable when
+sourced. Descriptions are no longer a node kind: every wiki-linked panel fetches the live
+Wikipedia lead instead of baking it.
 
 ## Changing the data
 
