@@ -2706,22 +2706,50 @@ function buildTargetLegend(data, onPick) {
   const rows = []; // { row, id } for the focusable entries
 
   const families = data.meta.receptorFamilyLabels || {};
-  // Group by system; a null system goes under the "_other" bucket. Receptors come
-  // before non-receptor targets within a system because data.targets lists every
-  // receptor first (so the array order already gives "5-HT receptors, then SERT").
+  // Each target's affinity key = the strongest measured grip any drug has on it:
+  // the minimum, over every drug binding on this target (data.drugsByTarget), of
+  // that binding's representative Ki (median, the value the drug panel sorts by). A
+  // target no drug binds gets Infinity, so it sorts last. This key orders both the
+  // members inside a system and the system headings, so the receptors a drug grips
+  // hardest surface first (a browse list ranked by druggability rather than taxonomy).
+  const drugsByTarget = data.drugsByTarget || new Map();
+  const kiByTarget = new Map();
+  for (const tgt of data.targets || []) {
+    let best = Infinity;
+    for (const { binding } of drugsByTarget.get(tgt.id) || []) {
+      const k = binding.ki && typeof binding.ki.median === "number"
+        ? binding.ki.median : Infinity;
+      if (k < best) best = k;
+    }
+    kiByTarget.set(tgt.id, best);
+  }
+  const targetKi = (tgt) => kiByTarget.get(tgt.id) ?? Infinity;
+
+  // Group by system; a null system goes under the "_other" bucket.
   const bySystem = new Map();
   for (const tgt of data.targets || []) {
     const key = tgt.system || "_other";
     if (!bySystem.has(key)) bySystem.set(key, []);
     bySystem.get(key).push(tgt);
   }
-  // Heading order: the meta family order first, then any leftover real systems,
-  // then the "Other" bucket last.
+  // Sort each system's members strongest-affinity first (no-Ki targets last); a
+  // stable sort keeps data.targets' order (every receptor before the non-receptor
+  // targets) within an equal-Ki tier. Each system's own key is its strongest member.
+  const groupKi = new Map();
+  for (const [key, list] of bySystem) {
+    list.sort((a, b) => targetKi(a) - targetKi(b));
+    groupKi.set(key, list.length ? targetKi(list[0]) : Infinity);
+  }
+  // Heading order: start from the curated order (meta family order, then leftover
+  // real systems, then "Other" last), then reorder by each system's strongest member
+  // Ki. A stable sort keeps the curated order among systems that no drug targets (all
+  // Infinity), so only the druggable systems float to the top.
   const order = [
     ...Object.keys(families),
     ...[...bySystem.keys()].filter((k) => k !== "_other" && !(k in families)),
     ...(bySystem.has("_other") ? ["_other"] : []),
-  ];
+  ].filter((k) => bySystem.has(k));
+  order.sort((a, b) => groupKi.get(a) - groupKi.get(b));
   const done = new Set();
   for (const key of order) {
     if (done.has(key)) continue;
