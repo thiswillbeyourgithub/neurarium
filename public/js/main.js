@@ -1476,33 +1476,64 @@ function createInfoPanel(data) {
   const baseResolves = (base) =>
     data.byId.has(base) || data.byId.has(`${base}_R`) || data.byId.has(`${base}_L`);
 
-  // The "Found in" region list shared by showReceptor / showTarget: one <li> per
-  // location, parallel arrays of display names + their base ids. A row whose base
-  // resolves to a structure becomes clickable and jumps there via onStructurePick;
-  // an unresolved one stays plain text. `info` (receptor + non-receptor-target
-  // panels) is the parallel per-region provenance array (`{provenance, sources}`):
-  // when given, each row shows its own grade pill, since "this receptor/target is
-  // found in region B" is graded per region (llm unless the expression itself is
-  // sourced), separate from the mechanism/type classification pill above.
+  // The anatomical group (lobe / basal_ganglia / ...) a structure *base* belongs to,
+  // read off the resolved structure record, or null if it doesn't resolve. Lets the
+  // "Found in" list group its regions the same way the Structures legend does.
+  const groupOfBase = (base) => {
+    const s = data.byId.get(base) || data.byId.get(`${base}_R`)
+      || data.byId.get(`${base}_L`);
+    return s ? s.group : null;
+  };
+
+  // One "Found in" region row: the name (clickable -> jump when the base resolves)
+  // plus, when `meta` is given, its own per-region provenance pill (since "found in
+  // region B" is graded per region, separate from the mechanism/type pill above).
+  const locationRow = (name, base, meta) => {
+    const li = el("li");
+    li.appendChild(el("span", "loc-name", name));
+    if (base && baseResolves(base)) {
+      li.classList.add("clickable");
+      li.addEventListener("click", () => onStructurePick(base));
+    }
+    if (meta) {
+      const tip = meta.sources && meta.sources.length
+        ? sourcesTip(meta.sources) : t("receptor.locUnsourced");
+      li.appendChild(makeProvenancePill(meta.provenance, tip));
+    }
+    return li;
+  };
+
+  // The "Found in" region list shared by showReceptor / showTarget: parallel arrays
+  // of display names + their base ids (+ optional per-region provenance `info`).
+  // Rows are grouped under anatomical-group headings in the SAME order as the
+  // Structures legend (data.meta.groupLabels key order), so the list reads like that
+  // panel and the extra vertical spacing keeps the provenance pills from crowding.
+  // Bases that don't resolve to a group fall into a trailing "other" bucket (with a
+  // heading only when there are also real groups; an all-unresolved list stays flat).
   const locationList = (names, bases, info) => {
-    const ul = el("ul");
+    const buckets = new Map(); // group key (or null) -> [{name, base, meta}]
     names.forEach((name, i) => {
       const base = bases && bases[i];
-      const li = el("li");
-      li.appendChild(el("span", "loc-name", name));
-      if (base && baseResolves(base)) {
-        li.classList.add("clickable");
-        li.addEventListener("click", () => onStructurePick(base));
-      }
-      const meta = info && info[i];
-      if (meta) {
-        const tip = meta.sources && meta.sources.length
-          ? sourcesTip(meta.sources) : t("receptor.locUnsourced");
-        li.appendChild(makeProvenancePill(meta.provenance, tip));
-      }
-      ul.appendChild(li);
+      const g = base ? groupOfBase(base) : null;
+      if (!buckets.has(g)) buckets.set(g, []);
+      buckets.get(g).push({ name, base, meta: info && info[i] });
     });
-    return ul;
+    const order = [...Object.keys(data.meta.groupLabels), null]
+      .filter((g) => buckets.has(g));
+    const container = el("div", "loc-groups");
+    for (const g of order) {
+      if (g !== null) {
+        container.appendChild(el("h4", "loc-group-label", data.meta.groupLabels[g]));
+      } else if (order.length > 1) {
+        container.appendChild(el("h4", "loc-group-label", t("receptor.foundOther")));
+      }
+      const ul = el("ul");
+      for (const { name, base, meta } of buckets.get(g)) {
+        ul.appendChild(locationRow(name, base, meta));
+      }
+      container.appendChild(ul);
+    }
+    return container;
   };
 
   // One route endpoint (a structure id) for the connection panel's route line: its
