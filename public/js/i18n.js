@@ -131,8 +131,8 @@
       "info.provLlm": "Source grade: LLM-only. Produced by an LLM from memory and not checked against any document, so it may be a hallucination.",
       "info.provSourced": "Source grade: sourced. Written by an LLM that was given the source document (e.g. Stahl's guide), but this specific node was not quote-verified.",
       "info.provVerified": "Source grade: verified. An LLM extracted a quote, it was programmatically confirmed to appear in the source, and a separate LLM agreed the quote supports this node. This is still the highest grade available here and remains LLM-driven, so it can still be wrong: going further would take considerable human effort and is itself error-prone, so it is out of scope for this project.",
+      "info.provWikipedia": "Loaded directly from Wikipedia. This text is fetched live and verbatim from the current Wikipedia article (CC BY-SA), with no LLM in the loop, so it cannot drift from the article. See the Reference link above to inspect the source.",
       "info.descFromWikipedia": "This description is the lead section of the drug's Wikipedia article, used verbatim under CC BY-SA. See the Reference link above.",
-      "info.descFromWikipediaLive": "This description was just fetched live from the drug's Wikipedia article (CC BY-SA), so it reflects the current article rather than a stored copy. See the Reference link above.",
       "info.sourceRef": "{corpus}, p. {page}",
       "info.noConnections": "No mapped connections yet.",
       "info.connections": "Connections",
@@ -240,6 +240,8 @@
         "checked by a human yet, so even a verified node can be wrong. The grades:",
       "about.gradeVerified":
         "Verified: the supporting quote was confirmed present in the cited source.",
+      "about.gradeWikipedia":
+        "Wikipedia: loaded live and verbatim from the article, with no LLM in the loop (a panel description, not a tallied node).",
       "about.gradeSourced":
         "Sourced: drawn from a document (e.g. Wikipedia), but the quote was not checked.",
       "about.gradeLlm":
@@ -365,8 +367,8 @@
       "info.provLlm": "Niveau de source : LLM seul. Produite de mémoire par un LLM, sans vérification dans aucun document : il peut donc s’agir d’une hallucination.",
       "info.provSourced": "Niveau de source : documentée. Rédigée par un LLM ayant eu accès au document source (par ex. le guide de Stahl), mais ce nœud précis n’a pas été vérifié par citation.",
       "info.provVerified": "Niveau de source : vérifiée. Un LLM a extrait une citation, sa présence dans la source a été confirmée par programme, et un second LLM a confirmé qu’elle étaye ce nœud. C’est le niveau le plus élevé disponible ici et il reste piloté par un LLM : il peut donc encore se tromper. Aller plus loin demanderait un effort humain considérable, lui-même sujet à erreur, et sort donc du cadre de ce projet.",
+      "info.provWikipedia": "Chargé directement depuis Wikipédia. Ce texte est récupéré en direct et tel quel depuis l’article Wikipédia actuel (CC BY-SA), sans aucun LLM : il ne peut donc pas s’écarter de l’article. Voir le lien Référence ci-dessus pour inspecter la source.",
       "info.descFromWikipedia": "Cette description est l’introduction de l’article Wikipédia du médicament, reprise telle quelle sous licence CC BY-SA. Voir le lien Référence ci-dessus.",
-      "info.descFromWikipediaLive": "Cette description vient d’être récupérée en direct depuis l’article Wikipédia du médicament (CC BY-SA) : elle reflète donc l’article actuel plutôt qu’une copie enregistrée. Voir le lien Référence ci-dessus.",
       "info.sourceRef": "{corpus}, p. {page}",
       "info.noConnections": "Aucune connexion répertoriée pour l’instant.",
       "info.connections": "Connexions",
@@ -479,6 +481,8 @@
         "« vérifié » peut être faux. Les niveaux :",
       "about.gradeVerified":
         "Vérifié : la citation à l’appui a été confirmée présente dans la source citée.",
+      "about.gradeWikipedia":
+        "Wikipédia : chargé en direct et tel quel depuis l’article, sans aucun LLM (une description de panneau, pas un nœud comptabilisé).",
       "about.gradeSourced":
         "Sourcé : tiré d’un document (p. ex. Wikipédia), mais la citation n’a pas été vérifiée.",
       "about.gradeLlm":

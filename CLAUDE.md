@@ -1239,12 +1239,23 @@ skipped on a clone like the quote gate). A verified Ki backs the binding's grade
 **Descriptions.** Drugs, structures and non-receptor targets carry **no baked
 description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
 the shared `liveWikiDescription` helper over `js/wiki.js` `fetchWikiLead(url, lang)` (the
-lead for the viewer's locale, English fallback), shown as a `sourced` paragraph when it
-arrives, so the text stays current and the dataset ships no copyrighted prose; a wiki-linked
-panel whose live lead fails to load shows no description. Receptors (and projection groups)
-carry a short **authored** `description` painted first as the offline fallback, which the
-live lead overrides best-effort when it arrives. Needs the `connect-src
-https://*.wikipedia.org` CSP allowance.
+lead for the viewer's locale, English fallback), shown as a green **`wikipedia`** paragraph
+when it arrives (see the pill note below), so the text stays current and the dataset ships
+no copyrighted prose; a wiki-linked panel whose live lead fails to load shows no
+description. Receptors (and projection groups) carry a short **authored** `description`
+painted first as the offline fallback, which the live lead overrides best-effort when it
+arrives. Needs the `connect-src https://*.wikipedia.org` CSP allowance.
+
+**The `wikipedia` pill (green, viewer-only).** A live-fetched Wikipedia lead renders a green
+**W** pill, NOT the stored `sourced`/`llm` grades: a live fetch is a verbatim programmatic
+read of an inspectable source with no LLM in the loop, so it cannot drift from the article,
+which is exactly the "green if true according to some inspectable source" bar. It is a
+**presentation** (an added `PROVENANCE_PILLS.wikipedia` glyph + `info.provWikipedia`
+tooltip, `.src-prov-wikipedia` shares the green with `.src-prov-verified`), **not** a stored
+node grade and **not** tallied (there is no `wikipedia` `PROVENANCE_LEVEL`, no such bucket in
+`_provenance_stats`). Note the asymmetry: a **baked** Wikipedia snapshot the dataset ships
+(e.g. a drug's stored lead) stays yellow `sourced` because a stored copy *can* drift; only
+the **live** read earns green.
 
 **Presentation.** `makeProvenancePill(level)` -> a `.src-prov-<level>` pill (`.src-todo` for
 the none case) with the glyph + `info.prov*` tooltip via `withTip`; colours are CSS.

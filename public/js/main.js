@@ -1658,16 +1658,20 @@ function createInfoPanel(data) {
   // grey "?" = LLM-only (may be hallucinated), yellow "~" = the LLM had the source
   // document, green "✓" = quote-checked + agreed by a second LLM. The colour is a
   // `.src-prov-<level>` CSS class. A falsy / unknown level is the "no source yet"
-  // case and renders the orange NOSOURCE pill (`.src-todo`) instead. The pill is a
+  // case and renders the red ✕ NOSOURCE pill (`.src-todo`) instead. The pill is a
   // <button> so a tap pins its explanatory tooltip on touch (via withTip). Each
   // pill's tooltip explains its own grade, and the About panel ("Sources &
   // provenance") carries the full grade key, so there is no separate blanket "?"
-  // caveat. The grade itself comes from the data (generate_data.py
-  // PROVENANCE_LEVELS); only the glyph + tooltip live here.
+  // caveat. The three stored grades come from the data (generate_data.py
+  // PROVENANCE_LEVELS); `wikipedia` is a viewer-only presentation for a live-fetched
+  // Wikipedia lead (a runtime read, not a stored node grade), green because it is a
+  // verbatim programmatic extract of an inspectable source, so it can't drift from
+  // Wikipedia. Only the glyph + tooltip live here.
   const PROVENANCE_PILLS = {
     llm: { glyph: "?", tip: "info.provLlm" },
     sourced: { glyph: "~", tip: "info.provSourced" },
     verified: { glyph: "✓", tip: "info.provVerified" },
+    wikipedia: { glyph: "W", tip: "info.provWikipedia" },
   };
   // `extra` (optional) is the concrete source shown *first* in the tooltip (the
   // per-claim drug pill's verbatim quote + page ref, or a bibliographic citation),
@@ -1935,11 +1939,12 @@ function createInfoPanel(data) {
   // target with no baked description gains one only on success. `before` puts that
   // fresh paragraph *above* the anchor (so the live description reads above the link
   // it backs, matching the baked-description panels); default is below. A failed /
-  // blocked / absent fetch is a no-op, so the panel is unchanged offline. `bakedText`
-  // + `bakedSourced` let an already-sourced identical description skip the rewrite.
+  // blocked / absent fetch is a no-op, so the panel is unchanged offline. When the
+  // live lead arrives it always rewrites the paragraph (text + green Wikipedia pill),
+  // replacing any baked fallback: a live fetch is a programmatic verbatim read of the
+  // article, so it grades higher than the baked snapshot it supersedes.
   const liveWikiDescription = (url, {
-    paragraph = null, bakedText = "", bakedSourced = false, anchor = null,
-    before = false,
+    paragraph = null, anchor = null, before = false,
   } = {}) => {
     if (typeof url !== "string" || !/^https?:\/\//i.test(url)) return;
     fetchWikiLead(url, window.__I18N__.lang).then((live) => {
@@ -1947,7 +1952,6 @@ function createInfoPanel(data) {
       let p = paragraph;
       if (p) {
         if (!p.isConnected) return; // panel re-rendered to something else
-        if (live.text === bakedText && bakedSourced) return; // nothing would change
       } else {
         if (!anchor || !anchor.isConnected) return; // panel gone / replaced
         p = el("p", "info-desc");
@@ -1965,7 +1969,7 @@ function createInfoPanel(data) {
         last = extra;
       }
       last.appendChild(document.createTextNode(" "));
-      last.appendChild(makeProvenancePill("sourced", t("info.descFromWikipediaLive")));
+      last.appendChild(makeProvenancePill("wikipedia"));
     });
   };
 
@@ -1995,8 +1999,7 @@ function createInfoPanel(data) {
     // Link goes after the description so the reference sits below the text it backs.
     const wiki = appendWiki(url);
     liveWikiDescription(url, paragraph
-      ? { paragraph, bakedText: description,
-          bakedSourced: descriptionProvenance === "sourced" }
+      ? { paragraph }
       : { anchor: wiki, before: true });
     return { paragraph, wiki };
   };
@@ -3439,6 +3442,7 @@ function buildAboutSourcing(meta) {
   const key = h("ul", "src-key");
   const keyRows = [
     ["src-prov-verified", "✓", "about.gradeVerified"],
+    ["src-prov-wikipedia", "W", "about.gradeWikipedia"],
     ["src-prov-sourced", "~", "about.gradeSourced"],
     ["src-prov-llm", "?", "about.gradeLlm"],
     ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
