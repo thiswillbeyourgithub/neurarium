@@ -1054,7 +1054,9 @@
         line-height: 1.5;
         color: var(--text);
       }
-      .info-locations .loc-name { flex: 1 1 auto; min-width: 0; }
+      /* The name only takes the width it needs so its provenance pill sits right
+         beside it (more legible than stranding the pill at the far panel edge). */
+      .info-locations .loc-name { flex: 0 1 auto; min-width: 0; }
       /* A region row that resolves to a modeled structure jumps to it on click. */
       .info-locations li.clickable { cursor: pointer; }
       .info-locations li.clickable:hover { color: var(--accent-bright); }
@@ -1306,10 +1308,11 @@
          name reads as a link on hover. */
       .info-bindings li.clickable { cursor: pointer; }
       .info-bindings li.clickable:hover .bind-target { color: var(--accent-bright); }
-      /* The text column grows to push the trailing source pill to the right edge,
-         aligned with the target name (align-items: flex-start on the row); it wraps
-         only if the name leaves it no room. */
-      .info-bindings .bind-text { flex: 1 1 auto; }
+      /* The text column (name / action / Ki stack) takes only the width it needs so
+         the binding's source pill sits right beside that stack, not stranded at the
+         far panel edge (more legible: the pill reads as belonging to this drug). It
+         still shrinks + wraps (min-width:0) when the name leaves it no room. */
+      .info-bindings .bind-text { flex: 0 1 auto; }
       /* Measured PDSP Ki, stacked under the name + action inside the text column
          (so on a narrow / mobile panel it wraps below the name rather than pushing
          the source pill off the row), its own verified "truth badge" beside it. */
