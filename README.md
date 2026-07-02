@@ -175,15 +175,25 @@ file-by-file map and how to extend the dataset see [`CLAUDE.md`](CLAUDE.md).
 
 ## Roadmap
 
-Planned directions, none implemented yet and the order is not fixed:
+This is a small, deliberately **ambitious teaser**, not the whole list: the backlog
+is long and keeps growing as the dataset takes on new kinds of knowledge. A sample of
+the planned directions, none of them fixed in order:
 
 - **More animation**: build on the assemble intro, the circuit traveling-pulse, and
   the per-drug effect dots to show wider activity and signal flow across the brain.
+- **More substances**: expand the drug set (e.g. LSD, MDMA, ketamine, nicotine,
+  cannabis) and surface each drug's commercial brand names.
 - **Pathologies**: how disorders map onto the regions, circuits, and
   neurotransmitter systems.
-- **Verify the sources**: every citation currently carries a placeholder **TODO**
-  url; replace each with a verified DOI/link, and lift each node's provenance grade
-  from grey toward green as it is checked (the anatomy and pathways are the gap).
+- **Deeper pharmacology**: enzymatic (CYP) interactions, and second-order effects
+  where activating one receptor changes another transmitter's release.
+- **Consistency checks**: flag data that disagrees with itself (e.g. a drug said to
+  drive a pathway while binding tightly to the receptors that would oppose it).
+- **Toward full sourcing**: lift every node's provenance grade from grey toward
+  green as it is checked; the drug data is already largely sourced, so the anatomy
+  and pathways are the current gap.
+
+...and a good deal more than fits here.
 
 ## Feedback
 
