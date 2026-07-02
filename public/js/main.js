@@ -2068,16 +2068,29 @@ function createInfoPanel(data) {
       if (!byCat.has(cat)) byCat.set(cat, []);
       byCat.get(cat).push(item);
     }
-    // Category order = the meta order first, then any leftover keys (same as the
-    // Drugs legend), so the grouping is consistent across the app.
-    const order = [...Object.keys(cats),
-                   ...[...byCat.keys()].filter((c) => !(c in cats))];
-    const done = new Set();
+    // Within a class, strongest-affinity drug first (by this target's binding Ki,
+    // Infinity when unmeasured; equal Ki tie-broken by name), matching the drug
+    // panel's "Acts on" order and the target legend's affinity sort.
+    for (const items of byCat.values()) {
+      items.sort((a, b) => {
+        const ka = bindingKi(a.binding), kb = bindingKi(b.binding);
+        return ka !== kb ? ka - kb : a.drug.name.localeCompare(b.drug.name);
+      });
+    }
+    // Class order: the class binding this target hardest first (its strongest drug's
+    // Ki = the min binding Ki over the class). Classes with no measured Ki keep the
+    // meta / Drugs-legend order among themselves, so an unmeasured target still reads
+    // in the familiar order.
+    const metaOrder = [...Object.keys(cats),
+                       ...[...byCat.keys()].filter((c) => !(c in cats))];
+    const classKi = (cat) =>
+      Math.min(...byCat.get(cat).map((it) => bindingKi(it.binding)));
+    const order = [...byCat.keys()].sort((a, b) => {
+      const ka = classKi(a), kb = classKi(b);
+      return ka !== kb ? ka - kb : metaOrder.indexOf(a) - metaOrder.indexOf(b);
+    });
     for (const cat of order) {
-      if (done.has(cat) || !byCat.has(cat)) continue;
-      done.add(cat);
       const items = byCat.get(cat);
-      items.sort((a, b) => a.drug.name.localeCompare(b.drug.name));
       wrap.appendChild(el("h4", "drug-cat", cats[cat] || cat));
       const ul = el("ul");
       // Same shared row builder as the drug panel's "Acts on" list (same resolved
