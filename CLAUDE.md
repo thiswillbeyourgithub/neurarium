@@ -544,7 +544,10 @@ So a visitor never opens eruda to learn why something broke, failures surface as
 red dismissible banners in `#banners` (`js/error-banner.js`): installs `window`
 `error` (capture phase, so failed resource loads count) + `unhandledrejection`
 handlers (with `file:line` for script errors); exposes `window.showErrorBanner(msg)`
-(used by `js/main.js` for the data-load failure). Banners stack; each has a ×;
+(used by `js/main.js` for the data-load failure). A failed resource whose element
+carries `data-optional` is skipped (no banner): a panel's molecule / Wikipedia
+illustration self-handles a failed load by dropping its own figure, and an absent
+optional image is not an app error to shout about. Banners stack; each has a ×;
 identical messages dedupe into one `(×N)`; a `MAX_BANNERS` cap. A `ResizeObserver`
 republishes the stack height to `--banners-height`, which `#status` offsets against.
 

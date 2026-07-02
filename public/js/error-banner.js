@@ -70,7 +70,11 @@
         : "";
       showErrorBanner(`${t("error.prefix", { msg: event.message || event.error })}${file}`);
     } else if (event.target && (event.target.src || event.target.href)) {
-      // A failed <script>/<img>/<link> etc.: name what didn't load.
+      // A failed <script>/<img>/<link> etc.: name what didn't load. But an element
+      // marked data-optional handles its own failure gracefully (a panel's molecule
+      // / Wikipedia illustration removes its figure, see js/main.js) and its absence
+      // is not an app error the visitor needs shouted at them, so skip the banner.
+      if (event.target.dataset && event.target.dataset.optional) return;
       showErrorBanner(t("error.failedLoad", { what: event.target.src || event.target.href }));
     }
   }, true);

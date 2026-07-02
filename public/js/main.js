@@ -2022,6 +2022,7 @@ function createInfoPanel(data) {
       img.loading = "lazy";
       img.decoding = "async";
       img.title = t("image.zoomHint");
+      img.dataset.optional = "1"; // self-handled failure: no global error banner
       img.addEventListener("load", () => fig.classList.remove("loading"));
       img.addEventListener("error", () => fig.remove());
       img.addEventListener("click", () =>
@@ -2460,14 +2461,19 @@ function createInfoPanel(data) {
       if (drug.structureImage) {
         const fig = el("figure", "mol-structure");
         const img = document.createElement("img");
-        img.src = drug.structureImage;
         img.alt = t("drug.structureAlt", { name: drug.name });
         img.decoding = "async";
         img.title = t("image.zoomHint");
+        // A failed molecule SVG degrades gracefully (drop the figure, no broken
+        // icon) and opts out of the global error banner, exactly like the Wikipedia
+        // illustrations: an absent diagram is not an app error to shout about.
+        img.dataset.optional = "1";
+        img.addEventListener("error", () => fig.remove());
         // Click to enlarge; the lightbox inverts it too so the line-art reads on
         // the dark backdrop, matching the panel's .mol-structure treatment.
         img.addEventListener("click", () =>
           onImagePick(img.currentSrc || img.src, img.alt, { invert: true }));
+        img.src = drug.structureImage; // set src last, after error handler is wired
         fig.appendChild(img);
         body.appendChild(fig);
       }
