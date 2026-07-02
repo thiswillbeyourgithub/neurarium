@@ -1023,10 +1023,13 @@ sources are normalized to one shape in `js/data.js`.
 - Panels: a receptor opens `showReceptor` (system, Wikipedia link, the description
   live-refreshed from Wikipedia, then the classification facts where **each** fact row
   (neurotransmitter / type / effect / synaptic site) carries the *mechanism* grade pill
-  on its right, not a single "Source" row below; then the "Found in" region list, each
-  region carrying its **own** expression-provenance pill (default `llm`: which regions
-  express a receptor is graded per region, separate from the mechanism, see Source
-  provenance), or a single pilled "Throughout the brain" for ubiquitous); a non-receptor
+  on its right, not a single "Source" row below; then the "Found in" region list
+  (`locationList`, grouped under anatomical-group sub-headings in the `groupLabels`
+  order, like the Structures legend; a trailing "Other regions" bucket for
+  group-less bases), each region carrying its **own** expression-provenance pill
+  (default `llm`: which regions express a receptor is graded per region, separate
+  from the mechanism, see Source provenance), or a single pilled "Throughout the
+  brain" for ubiquitous); a non-receptor
   target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the type +
   system facts each carrying their classification grade pill, then the "Found in" region
   list where each region likewise carries its **own** expression-provenance pill, kind
