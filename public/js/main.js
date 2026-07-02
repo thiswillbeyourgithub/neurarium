@@ -2486,10 +2486,12 @@ function createInfoPanel(data) {
       });
       if (drug.nbn) {
         // The NbN line is quote-sourced from Stahl; show its provenance pill
-        // (with the verbatim quote in the tooltip) beside the clickable value.
+        // (with the verbatim quote in the tooltip) beside the clickable value. If a
+        // drug ever carries an NbN value with no source, still show a pill (its
+        // grade, else the orange NOSOURCE pill) so the node is never left unbadged.
         const nbnPill = drug.nbnSources && drug.nbnSources.length
           ? makeProvenancePill(drug.nbnProvenance, sourcesTip(drug.nbnSources))
-          : null;
+          : makeProvenancePill(drug.nbnProvenance || null);
         addFactRow(facts, t("drug.nomenclature"), null, null, {
           links: [{ text: drug.nbn, query: `nbn:"${drug.nbn}"` }],
           pill: nbnPill,
