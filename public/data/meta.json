@@ -2179,70 +2179,82 @@
         "total": 632,
         "verified": 620,
         "sourced": 0,
-        "unverified": 12
+        "missing": 12
       },
       "drug_nbn": {
         "total": 116,
         "verified": 116,
         "sourced": 0,
-        "unverified": 0
+        "missing": 0
       },
       "drug_categories": {
         "total": 158,
         "verified": 0,
         "sourced": 0,
-        "unverified": 158
+        "missing": 158
       },
       "projections": {
         "total": 107,
         "verified": 86,
         "sourced": 0,
-        "unverified": 21
+        "missing": 21
+      },
+      "circuits": {
+        "total": 6,
+        "verified": 0,
+        "sourced": 0,
+        "missing": 6
+      },
+      "projection_groups": {
+        "total": 10,
+        "verified": 0,
+        "sourced": 0,
+        "missing": 10
       },
       "receptors": {
         "total": 56,
         "verified": 30,
         "sourced": 0,
-        "unverified": 26
+        "missing": 26
       },
       "receptor_locations": {
         "total": 383,
         "verified": 0,
         "sourced": 0,
-        "unverified": 383
+        "missing": 383
       },
       "targets": {
         "total": 25,
         "verified": 21,
         "sourced": 0,
-        "unverified": 4
+        "missing": 4
       },
       "target_locations": {
         "total": 124,
         "verified": 0,
         "sourced": 0,
-        "unverified": 124
+        "missing": 124
       },
       "structures": {
         "total": 52,
         "verified": 48,
         "sourced": 0,
-        "unverified": 4
+        "missing": 4
       },
       "references": {
         "total": 298,
         "verified": 0,
         "sourced": 296,
-        "unverified": 2
+        "missing": 2
       }
     },
     "nodes": {
-      "total": 1653,
+      "total": 1669,
       "verified": 921,
       "sourced": 0,
-      "unverified": 732,
+      "missing": 748,
       "backed": 921,
-      "pct_backed": 56
+      "pct_backed": 55
     }
   }
 }

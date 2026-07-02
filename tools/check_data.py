@@ -466,16 +466,17 @@ def print_coverage(stats):
     A *node* is any sourceable datum (see the Nodes section of CLAUDE.md). Each node
     is reduced to its single strongest grade first, so the columns partition the node
     count (they sum to ``total``); the grades map to the viewer's pills: verified =
-    green check, sourced = yellow ``~``, unverified = grey ``?`` / no source.
-    ``references`` (wikipedia pointers) are a kind of their own, tallied but not
-    folded into the headline (a reference points *at* a node, it is not itself one),
-    so they are printed below the node total."""
+    green check, sourced = yellow ``~``, missing = grey ``?`` (an unbacked ``llm``
+    assertion) / orange NOSOURCE (no source at all). ``references`` (wikipedia
+    pointers) are a kind of their own, tallied but not folded into the headline (a
+    reference points *at* a node, it is not itself one), so they are printed below the
+    node total."""
     by = stats.get("by_kind", {})
     a = stats.get("nodes", {})
     # The node kinds folded into the headline, in the generator's order.
     node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
-                  "receptors", "receptor_locations", "targets", "target_locations",
-                  "structures")
+                  "circuits", "projection_groups", "receptors", "receptor_locations",
+                  "targets", "target_locations", "structures")
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -483,18 +484,19 @@ def print_coverage(stats):
 
     def row(label, c, pct=None, suffix=""):
         pct = backed_pct(c) if pct is None else pct
-        u = c.get("unverified", 0)
+        m = c.get("missing", 0)
         s = c.get("sourced", 0)
         sv = s + c.get("verified", 0)  # sourced-or-verified = the backed count (S ⊆ S+V)
-        print(f"    {label:<19}{u:>6}{s:>6}{sv:>6}{c.get('total', 0):>8}{pct:>7}%{suffix}")
+        print(f"    {label:<19}{m:>6}{s:>6}{sv:>6}{c.get('total', 0):>8}{pct:>7}%{suffix}")
 
-    # Grade columns: U = unverified (llm, or no source), S = sourced (document-backed
-    # but not quote-checked), S+V = sourced-or-verified (the backed count; S is a
-    # subset of it). S is ~always 0 on the node kinds because the sourcing pipeline
-    # goes straight from llm to quote-verified; it shows up only on Wikipedia refs.
+    # Grade columns: M = missing (no source document: a bare llm assertion, or nothing
+    # at all), S = sourced (document-backed but not quote-checked), S+V =
+    # sourced-or-verified (the backed count; S is a subset of it). S is ~always 0 on
+    # the node kinds because the sourcing pipeline goes straight from llm to
+    # quote-verified; it shows up only on Wikipedia refs.
     print("\n  node coverage by kind (each node reduced to its strongest grade;")
-    print("  U=unverified  S=sourced  S+V=sourced-or-verified [=backed]):")
-    print(f"    {'kind':<19}{'U':>6}{'S':>6}{'S+V':>6}{'total':>8}{'backed':>8}")
+    print("  M=missing  S=sourced  S+V=sourced-or-verified [=backed]):")
+    print(f"    {'kind':<19}{'M':>6}{'S':>6}{'S+V':>6}{'total':>8}{'backed':>8}")
     for kind in node_kinds:
         row(kind, by.get(kind, {}))
     print(f"    {'-' * 53}")
@@ -623,16 +625,17 @@ def check_provenance(report, meta, structures, projections, circuits,
     else:
         before_stats = report.errors
         for kind, c in stats.get("by_kind", {}).items():
-            parts = c.get("verified", 0) + c.get("sourced", 0) + c.get("unverified", 0)
+            parts = c.get("verified", 0) + c.get("sourced", 0) + c.get("missing", 0)
             if parts != c.get("total", 0):
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
         node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
-                      "receptors", "receptor_locations", "targets",
-                      "target_locations", "structures")
+                      "circuits", "projection_groups", "receptors",
+                      "receptor_locations", "targets", "target_locations",
+                      "structures")
         by = stats.get("by_kind", {})
-        for key in ("total", "verified", "sourced", "unverified"):
+        for key in ("total", "verified", "sourced", "missing"):
             want = sum(by.get(k, {}).get(key, 0) for k in node_kinds)
             if a.get(key) != want:
                 report.error(f"provenance_stats nodes[{key}]={a.get(key)} "

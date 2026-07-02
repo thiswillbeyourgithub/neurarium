@@ -4512,6 +4512,8 @@ def _binding_grade(binding: dict[str, Any]) -> int:
 
 def _provenance_stats(structures: list[dict[str, Any]],
                       projections: list[dict[str, Any]],
+                      circuits: list[dict[str, Any]],
+                      projection_groups: list[dict[str, Any]],
                       receptors: list[dict[str, Any]],
                       drugs: list[dict[str, Any]],
                       drug_targets: dict[str, dict[str, Any]]) -> dict[str, Any]:
@@ -4519,14 +4521,17 @@ def _provenance_stats(structures: list[dict[str, Any]],
     section of CLAUDE.md), emitted into ``meta.provenance_stats``.
 
     A *node* is any sourceable datum: a drug binding, a drug NbN label, a drug class
-    classification, a neuron projection, a receptor classification, a receptor
-    expression region, a non-receptor target classification, a target expression
-    region, or a brain-region anatomy fact. Every node is
-    bucketed by the strength of its source: ``verified`` (quote-checked), ``sourced``
-    (from a document, not quote-checked) or ``unverified`` (LLM-only, or no source
-    yet). The viewer's About panel and the README headline read these numbers, so the
-    "% sourced" figure is always a real count of the shipped data, never hand-typed
-    (the whole point: a programmatic count of source strength across every node).
+    classification, a neuron projection, a functional circuit, a projection group, a
+    receptor classification, a receptor expression region, a non-receptor target
+    classification, a target expression region, or a brain-region anatomy fact. Every
+    node is bucketed by the strength of its source: ``verified`` (quote-checked),
+    ``sourced`` (from a document, not quote-checked) or ``missing`` (no source
+    document at all: an ``llm`` grade means "an LLM asserted this from memory", which
+    is precisely *no document*, so it is missing, exactly like a node with no source
+    object). The viewer's About panel and the README headline read these numbers, so
+    the "% sourced" figure is always a real count of the shipped data, never
+    hand-typed (the whole point: a programmatic count of source strength across every
+    node).
 
     The knowledge nodes drive the headline ``pct_backed`` (emitted under the
     ``nodes`` key); Wikipedia ``references`` are tallied separately (read-more links,
@@ -4535,11 +4540,12 @@ def _provenance_stats(structures: list[dict[str, Any]],
     def bucket(rank_or_grade: Any) -> str:
         rank = (rank_or_grade if isinstance(rank_or_grade, int)
                 else _GRADE_RANK.get(rank_or_grade, 0))
+        # rank <= 1 (no source object, or a bare ``llm`` grade) => no document => missing.
         return ("verified" if rank == 3 else
-                "sourced" if rank == 2 else "unverified")
+                "sourced" if rank == 2 else "missing")
 
     def tally(grades: list[Any]) -> dict[str, int]:
-        counts = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
+        counts = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
         for g in grades:
             counts["total"] += 1
             counts[bucket(g)] += 1
@@ -4554,6 +4560,13 @@ def _provenance_stats(structures: list[dict[str, Any]],
     category_grades = [d.get("category_provenance", DEFAULT_PROVENANCE)
                        for d in drugs if d.get("categories")]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
+    # Functional-circuit + projection-group nodes: each a "these structures / pathways
+    # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
+    # matching the viewer's NOSOURCE pill). All missing today (no circuit/group is
+    # document-backed yet).
+    circuit_grades = [_strongest_grade(c.get("sources")) for c in circuits]
+    projection_group_grades = [_strongest_grade(g.get("sources"))
+                               for g in projection_groups]
     # Receptor classification nodes (neurotransmitter / mechanism class / sign /
     # synaptic site), one node per receptor (classification_provenance). A pure stub
     # (no CNS role: no locations, not ubiquitous, no description) is not a node, so it
@@ -4601,7 +4614,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
                         for s in structures]
     # Wikipedia reference links across every owner kind. Non-receptor targets only
     # (a receptor is already counted via the receptor records, not twice); a missing
-    # link is a rank-0 "unverified" so the gap shows in the coverage.
+    # link is a rank-0 "missing" so the gap shows in the coverage.
     ref_grades: list[int] = []
     for rec in (*structures, *receptors, *drugs):
         ref_grades.append(_GRADE_RANK.get(rec.get("wikipedia_provenance"), 0)
@@ -4617,6 +4630,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_nbn": tally(nbn_grades),
         "drug_categories": tally(category_grades),
         "projections": tally(projection_grades),
+        "circuits": tally(circuit_grades),
+        "projection_groups": tally(projection_group_grades),
         "receptors": tally(receptor_grades),
         "receptor_locations": tally(receptor_location_grades),
         "targets": tally(target_grades),
@@ -4627,9 +4642,9 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # The knowledge-node kinds (every node that carries a claim + a grade); the
     # references kind is a pointer, not a node, so it is excluded from the headline.
     node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
-                  "receptors", "receptor_locations", "targets", "target_locations",
-                  "structures")
-    nodes = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
+                  "circuits", "projection_groups", "receptors", "receptor_locations",
+                  "targets", "target_locations", "structures")
+    nodes = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
     for kind in node_kinds:
         for key in nodes:
             nodes[key] += by_kind[kind][key]
@@ -4950,7 +4965,8 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # the About panel + README read it so the "% sourced" figure is a real
         # count, never hand-typed. See _provenance_stats.
         "provenance_stats": _provenance_stats(
-            structures, projections, receptors, drugs, drug_targets),
+            structures, projections, circuits, projection_groups,
+            receptors, drugs, drug_targets),
     }
 
     return ({"meta": meta, "structures": structures,
