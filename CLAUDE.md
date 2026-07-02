@@ -66,7 +66,8 @@ provenance) so the coverage tally stays honest.
 in `meta.provenance_stats.by_kind`):
 - brain region -> `structures.jsonl` -> `structures`
 - projection (pathway) -> `projections.jsonl` -> `projections`
-- functional circuit -> `circuits.jsonl` (+ projection group) -> (not yet in the tally)
+- functional circuit -> `circuits.jsonl` -> `circuits`
+- projection group -> `projection_groups.jsonl` -> `projection_groups`
 - receptor classification -> `receptors.jsonl` -> `receptors`
 - receptor *expression region* -> a receptor's `location_sources` -> `receptor_locations`
 - non-receptor drug target -> `meta.drug_targets` -> `targets`
@@ -1177,6 +1178,12 @@ source/reference carries a **provenance grade** saying how trustworthy its attri
 - absence -> orange **`NOSOURCE`** pill (`info.noSource`; tooltip `info.provNone`; CSS class
   `.src-todo`). Not a stored grade.
 
+The pill grade is per-node; the coverage **tally** collapses the two unbacked cases (`llm`
+and `NOSOURCE`) into one **missing** tier ("no document"), so the three tally tiers are
+verified / sourced / missing (see The "% sourced" figure). A node's grade is never simply
+absent from a panel: every source row / heading shows a pill, `NOSOURCE` when there is no
+source, never a blank.
+
 **Where the grade lives.** There is one source shape, a quote-level
 `{corpus, page, quote, provenance}` against a `SOURCE_CORPORA` corpus; `provenance` defaults
 `DEFAULT_PROVENANCE` (`"llm"`) and a node with no source is left ungraded (`NOSOURCE`).
@@ -1235,24 +1242,28 @@ already grades the same Wikipedia source; a missing link shows the `NOSOURCE` pi
 own grade and the About block carries the full key, so there is no separate blanket "?" caveat.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every **node** + reference to its
-strongest grade and tallies per node kind (drug bindings / NbN / **drug class** /
-projections / receptor classifications / **receptor expression regions** / target
-classifications / **target expression regions** / region anatomy / wikipedia references)
-plus a headline `pct_backed` over the **knowledge nodes** (sourced-or-verified / total),
-emitted as `meta.provenance_stats` (key `nodes`). The About
-panel shows it (`buildAboutSourcing`) and `tools/update_readme_stats.py` writes the same into
-the README `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent
-(its coverage table prints the per-node-kind, per-tier breakdown, columns U / S / S+V).
+strongest grade and buckets it into one of three tiers: **verified** (quote-checked),
+**sourced** (from a document, not quote-checked), or **missing** (no source document at
+all). A bare `llm` grade *is* missing: "an LLM asserted this from memory" means no
+document, so it buckets identically to a node with no source object (the viewer still
+distinguishes the two visually, grey `?` vs orange `NOSOURCE`, but both are unbacked).
+It tallies per node kind (drug bindings / NbN / **drug class** / projections / **circuits**
+/ **projection groups** / receptor classifications / **receptor expression regions** /
+target classifications / **target expression regions** / region anatomy / wikipedia
+references) plus a headline `pct_backed` over the **knowledge nodes** (sourced-or-verified
+/ total), emitted as `meta.provenance_stats` (key `nodes`). The About panel shows it
+(`buildAboutSourcing`) and `tools/update_readme_stats.py` writes the same into the README
+`SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
+coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). The circuit + projection-group descriptions are
-validated for a known grade but not yet folded into the headline (all `llm` for now). Current:
-~56% of 1653 nodes backed (drug bindings ~98%, NbN 100%; the big gap is the 383
-`receptor_locations` + 124 `target_locations` + 158 `drug_categories`, all `llm` today
-(no expression atlas / class-source wired yet), then projections + classifications +
-region anatomy). Each expression region is its
-own node (per the request to grade each "Found in", not the list as a whole), individually
-upgradeable when sourced. Descriptions are no longer a node kind: every wiki-linked panel
-fetches the live Wikipedia lead instead of baking it.
+points *at* a node, it is not itself one). Current: ~55% of 1669 nodes backed (drug
+bindings ~98%, NbN 100%; the big gap is the 383 `receptor_locations` + 158
+`drug_categories` + 124 `target_locations`, all `missing` today (no expression atlas /
+class-source wired yet), then the 26 `llm` receptor classifications, the 21 unsourced
+projections, and the 16 circuits + projection groups, all `missing`). Each expression
+region is its own node (per the request to grade each "Found in", not the list as a whole),
+individually upgradeable when sourced. Descriptions are no longer a node kind: every
+wiki-linked panel fetches the live Wikipedia lead instead of baking it.
 
 ## Changing the data
 

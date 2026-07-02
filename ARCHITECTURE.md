@@ -37,6 +37,50 @@ This project was built with the help of [Claude Code](https://claude.com/claude-
    projection kind, an unknown circuit structure, or a Wikipedia entry for a
    non-existent structure, so bad data never reaches the browser silently.
 
+## The node model
+
+The organizing concept of the whole dataset is the **node**: *a node is any
+sourceable datum*, one atom of knowledge about the brain that could, in principle,
+be attributed to a source. The dataset is a **graph of nodes**, and a detail panel
+is simply a view of one node plus every node linked to it (a receptor node links to
+the region nodes that express it and the drug nodes that act on it, and so on).
+
+**Umbrella vs. kind.** "Node" is the umbrella term; each node has a **kind** that
+keeps its own name in the data and code (a `structures.jsonl`, a `showReceptor`).
+The kinds, and the collection each lives in:
+
+| node kind | lives in | tally key |
+| --- | --- | --- |
+| brain-region anatomy | `structures.jsonl` | `structures` |
+| projection (pathway) | `projections.jsonl` | `projections` |
+| functional circuit | `circuits.jsonl` | `circuits` |
+| projection group | `projection_groups.jsonl` | `projection_groups` |
+| receptor classification | `receptors.jsonl` | `receptors` |
+| receptor expression region | a receptor's `location_sources` | `receptor_locations` |
+| non-receptor drug target | `meta.drug_targets` | `targets` |
+| target expression region | a target's `location_sources` | `target_locations` |
+| drug binding | a drug's `bindings[]` | `drug_bindings` |
+| drug NbN label | a drug's `nbn` | `drug_nbn` |
+| drug class classification | a drug's `categories` | `drug_categories` |
+| Wikipedia reference | any node's `wikipedia` | `references` (a pointer, not a node) |
+
+**Every node is sourceable.** Each carries a provenance **grade** (`llm` < `sourced`
+< `verified`) and, ideally, a **source**: one quote-level `{corpus, page, quote,
+provenance}` pointing at a page of a real corpus (`SOURCE_CORPORA`, e.g. Stahl,
+Kandel, the PDSP Ki database). The grade is *data*, and the viewer renders it as a
+coloured **pill** on the row/heading that carries the claim: green `✓` verified,
+yellow `~` sourced, grey `?` llm, orange `NOSOURCE` when there is no source. A node's
+grade is never simply absent from a panel.
+
+**The coverage tally.** `_provenance_stats` (generator) reduces every node to its
+single strongest grade and buckets it into **verified** / **sourced** / **missing**,
+where *missing* is "no source document at all" (a bare `llm` grade counts as missing:
+an LLM asserting something from memory is precisely *no document*). It emits
+`meta.provenance_stats`; the About panel and the README headline read it, so the
+"% sourced" figure is always a real programmatic count of the shipped data, never
+hand-typed. `check_data.py` re-derives the same numbers as a self-consistency gate.
+Full mechanics live in CLAUDE.md ("Nodes" + "Source provenance").
+
 ## The three layers
 
 ```
@@ -61,7 +105,7 @@ rewritten (or replaced) freely.
 Standard-library-only Python. It defines every region once (right-side only for
 symmetric pairs; the generator mirrors it to the left), every projection
 (bilateral by default, mirrored unless flagged one-sided), every named circuit,
-and the registries (`SOURCES`, `WIKIPEDIA`, `PROJECTION_COLORS`, `GROUP_LABELS`).
+and the registries (`WIKIPEDIA`, `KANDEL_QUOTES`, `PROJECTION_COLORS`, `GROUP_LABELS`).
 Running it regenerates `public/data/` (`meta.json` + the `*.jsonl` files +
 `shapes/`). The generated files are committed so the static site can fetch them
 directly.
@@ -79,7 +123,7 @@ record lives in encodes its type, so there is no `type` field on the lines.
 | `projections.jsonl` | one directed pathway per line: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
 | `circuits.jsonl` | one named functional loop per line: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
 | `receptors.jsonl` | one neurotransmitter receptor per line: `id`, `name`, `family`, `neurotransmitter`, `receptor_class`, `sign`, `synaptic`, `locations[]` (structure base ids the viewer expands to both hemispheres), optional `ubiquitous`, optional `description`, `wikipedia`. Empty `locations` + no `description` = a "stub" (no CNS role). |
-| `drugs.jsonl` | one psychiatric drug per line (from Stahl's Prescriber's Guide): `id`, `name`, `categories[]`, optional `nbn`/`description`, `bindings[]` (each `target` + `action` + optional `effect`/`note`/`tentative`), `sources[]`, optional `wikipedia`, optional `structure_image` (the `data/molecules/<id>.svg` path, set when that SVG exists), `focusable`. Authored in `tools/drugs_data.json` (not inline in the generator). No bindings = listed but not clickable. |
+| `drugs.jsonl` | one psychiatric drug per line (from Stahl's Prescriber's Guide): `id`, `name`, `categories[]`, optional `nbn`/`nbn_sources[]`, `bindings[]` (each `target` + `action` + optional `effect`/`note`/`tentative`/`sources[]`/`ki`), optional `wikipedia`, optional `structure_image` (the `data/molecules/<id>.svg` path, set when that SVG exists), `focusable`. Each claim carries its own quote-level source; there is no drug-level `sources` block. Authored in `tools/drugs_data.json` (not inline in the generator). No bindings = listed but not clickable. |
 | `molecules/<id>.svg` | one molecular-structure diagram per drug, vendored from Wikipedia by `tools/fetch_molecules.py` (a network-bound authoring tool, separate from the offline generator); the drug panel embeds it as an inverted `<img>`. Not authored, not translated. |
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
