@@ -15,13 +15,14 @@ graded by how trustworthy it is.**
 > not rely on any of it, and never use it for medical decisions.
 
 > [!NOTE]
-> **This started as a small demo, put together in a few days for a
-> medical-residency presentation.** I would genuinely welcome your criticism and
+> **This started as a small demo, put together in a few days during my medical-residency.**
+> I would genuinely welcome your criticism and
 > feedback, and especially your ideas for what else belongs on a map like this:
 > more animations, disease-linked abnormalities, whatever you would want to see.
 > The visualization has kept absorbing new kinds of data more easily than I
 > expected, so I am curious how far the idea can go, and where it stops being
 > useful. Please [open an issue](#feedback) with any thought, however small.
+> You can also find other ways of contacting me on [my website](https://olicorne.org/en/contact).
 
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
