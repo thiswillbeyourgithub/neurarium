@@ -808,6 +808,19 @@ applying focus is the `select*` caller's job, so each `show*()` is reused unchan
 whether first picked or re-shown. An empty-space click returns to Settings
 (`tabs.showSettings()`; detail tabs stay).
 
+> [!IMPORTANT]
+> **Panel changes are cross-cutting: think in node kinds, not one panel.** All info
+> is organized into nodes, and the seven `show*()` views (connection / structure /
+> receptor / target / drug / circuit / projection-group) share the same building
+> blocks (`makeProvenancePill`, `pathwayRow` / `appendPathwayList`, `locationList`,
+> `appendReference` / `appendWikiImages`, the "Interacting drugs" / "Found in" lists).
+> When you change what one panel shows or how it renders a row, **check whether the
+> other panel kinds carry the analogous node and would benefit from the same change,
+> and ask the user about any you find** before finishing. Prefer editing the shared
+> helper over one call site, so a fix lands on every panel that reuses it at once
+> (this is why the row markup lives in one place). Skipping this means a request made
+> for one panel silently misses the others.
+
 Every source shows a **provenance pill** (`makeProvenancePill`, see Source provenance)
 with a hover/tap tooltip via the shared `withTip(trigger, text)` helper (a present
 Wikipedia reference *link* is the exception: no pill, see Presentation below).
