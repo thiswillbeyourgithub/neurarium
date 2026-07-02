@@ -2211,6 +2211,12 @@
         "sourced": 0,
         "unverified": 4
       },
+      "target_locations": {
+        "total": 124,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 124
+      },
       "structures": {
         "total": 52,
         "verified": 48,
@@ -2225,12 +2231,12 @@
       }
     },
     "nodes": {
-      "total": 1371,
+      "total": 1495,
       "verified": 921,
       "sourced": 0,
-      "unverified": 450,
+      "unverified": 574,
       "backed": 921,
-      "pct_backed": 67
+      "pct_backed": 62
     }
   }
 }

@@ -572,6 +572,16 @@ STRUCTURE_PROVENANCE: dict[str, str] = {}
 # every "Found in" region is honestly ``"llm"``. Add entries as regions are sourced.
 RECEPTOR_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 
+# The same, for a non-receptor drug target's *expression regions* ("Found in"): the
+# claim "target T is found in region B" is a distinct node from T's type/system
+# classification, so each region grades separately (default ``"llm"``). Keyed by
+# DRUG_TARGETS id: ``{target_id: {base: [ {corpus, page, quote, provenance} ]}}``.
+# ``_build_drug_targets`` validates each base is one of that target's own regions and
+# emits ``location_sources``; the viewer shows a per-region pill and the coverage
+# tally counts each region (kind ``target_locations``). Empty for now. Add entries as
+# a target's regions are sourced.
+TARGET_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
+
 
 def _receptor_provenance(receptor_id: str) -> str:
     """Provenance grade for a receptor's classification claims (default ``llm``)."""
@@ -592,27 +602,31 @@ def _structure_provenance(base_id: str) -> str:
         STRUCTURE_PROVENANCE, base_id, f"structure anatomy for {base_id!r}")
 
 
-def _receptor_location_sources(
-        receptor_id: str, locations: list[str]) -> dict[str, list[dict[str, Any]]]:
-    """Emitted ``location_sources`` for a receptor: ``{base: [quote-source, ...]}``.
+def _location_sources(
+        registry: dict[str, dict[str, list[dict[str, Any]]]], owner_id: str,
+        regions: list[str], label: str) -> dict[str, list[dict[str, Any]]]:
+    """Emitted per-region ``location_sources`` (``{base: [quote-source, ...]}``) for
+    an owner whose "Found in" regions are each a separately-graded expression node: a
+    receptor (:data:`RECEPTOR_LOCATION_SOURCES`) or a non-receptor drug target
+    (:data:`TARGET_LOCATION_SOURCES`).
 
-    Reads :data:`RECEPTOR_LOCATION_SOURCES`; every cited base must be one of this
-    receptor's own ``locations`` (a stray base is a typo that would grade a region
-    the receptor does not claim), and each source is validated like any other
-    quote-level source. Returns ``{}`` when nothing is sourced (the common case
-    today), so the field is simply omitted and every region grades as ``llm``."""
-    per_base = RECEPTOR_LOCATION_SOURCES.get(receptor_id)
+    Every cited base must be one of the owner's own ``regions`` (a stray base is a
+    typo that would grade a region the owner does not claim), and each source is
+    validated like any other quote-level source. Returns ``{}`` when nothing is
+    sourced (the common case today), so the field is simply omitted and every region
+    grades as ``llm``. ``label`` names the owner kind for error messages."""
+    per_base = registry.get(owner_id)
     if not per_base:
         return {}
-    known = set(locations)
+    known = set(regions)
     out: dict[str, list[dict[str, Any]]] = {}
     for base, sources in per_base.items():
         if base not in known:
             raise KeyError(
-                f"Receptor {receptor_id!r} has location sources for {base!r}, "
-                f"which is not one of its locations {sorted(known)}")
+                f"{label} {owner_id!r} has location sources for {base!r}, "
+                f"which is not one of its regions {sorted(known)}")
         out[base] = _quote_sources(
-            sources, f"Receptor {receptor_id!r} location {base!r}")
+            sources, f"{label} {owner_id!r} location {base!r}")
     return out
 
 
@@ -4401,7 +4415,8 @@ def _receptor_record(rec: dict[str, Any],
         # Per-region expression sources (upgrade individual "Found in" regions above
         # the default llm). Omitted when nothing is sourced, so a plain receptor's
         # every region honestly grades as llm in the viewer + the coverage tally.
-        loc_sources = _receptor_location_sources(rec["id"], out["locations"])
+        loc_sources = _location_sources(
+            RECEPTOR_LOCATION_SOURCES, rec["id"], out["locations"], "Receptor")
         if loc_sources:
             out["location_sources"] = loc_sources
     if "description" in rec:
@@ -4448,6 +4463,12 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
             # the coverage tally. "llm" by default; override in TARGET_PROVENANCE.
             "classification_provenance": _target_provenance(tid),
         }
+        # Per-region expression sources ("Found in"): each region is its own graded
+        # node (kind target_locations), llm unless sourced here. Omitted when empty.
+        tloc = _location_sources(
+            TARGET_LOCATION_SOURCES, tid, spec["regions"], "Target")
+        if tloc:
+            targets[tid]["location_sources"] = tloc
         if spec.get("wikipedia"):
             targets[tid]["wikipedia"] = spec["wikipedia"]
             targets[tid]["wikipedia_provenance"] = _wiki_provenance(tid)
@@ -4684,7 +4705,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
 
     A *node* is any sourceable datum: a drug binding, a drug NbN label, a neuron
     projection, a receptor classification, a receptor expression region, a
-    non-receptor target classification, or a brain-region anatomy fact. Every node is
+    non-receptor target classification, a target expression region, or a brain-region
+    anatomy fact. Every node is
     bucketed by the strength of its source: ``verified`` (quote-checked), ``sourced``
     (from a document, not quote-checked) or ``unverified`` (LLM-only, or no source
     yet). The viewer's About panel and the README headline read these numbers, so the
@@ -4738,11 +4760,22 @@ def _provenance_stats(structures: list[dict[str, Any]],
             for base in r.get("locations", []):
                 receptor_location_grades.append(
                     max(_strongest_grade(loc_sources.get(base)), _llm_rank))
-    # Non-receptor drug target classifications (type / system / region footprint),
-    # graded per target. Receptor-linked targets are skipped (already counted as
-    # receptors, not twice).
+    # Non-receptor drug target classifications (type / system), graded per target.
+    # Receptor-linked targets are skipped (already counted as receptors, not twice).
     target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
                      for t in drug_targets.values() if t.get("type") != "receptor"]
+    # Non-receptor target expression-region nodes ("Found in"), one PER (target,
+    # region): the mirror of receptor_locations. Each region's grade = the strongest
+    # of its location_sources (default llm when unsourced). Receptor-linked targets
+    # are skipped (their regions are the receptor's, counted as receptor_locations).
+    target_location_grades: list[int] = []
+    for t in drug_targets.values():
+        if t.get("type") == "receptor":
+            continue
+        loc_sources = t.get("location_sources", {})
+        for base in t.get("regions", []):
+            target_location_grades.append(
+                max(_strongest_grade(loc_sources.get(base)), _llm_rank))
     # Brain-region anatomy (existence / group / position), graded per emitted
     # structure record (both hemispheres of a pair count, one line each).
     structure_grades = [s.get("classification_provenance", DEFAULT_PROVENANCE)
@@ -4767,13 +4800,14 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "receptors": tally(receptor_grades),
         "receptor_locations": tally(receptor_location_grades),
         "targets": tally(target_grades),
+        "target_locations": tally(target_location_grades),
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }
     # The knowledge-node kinds (every node that carries a claim + a grade); the
     # references kind is a pointer, not a node, so it is excluded from the headline.
     node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                  "receptor_locations", "targets", "structures")
+                  "receptor_locations", "targets", "target_locations", "structures")
     nodes = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
     for kind in node_kinds:
         for key in nodes:

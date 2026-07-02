@@ -557,6 +557,16 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // "Found in" row jump to that structure (the receptor records keep their own
       // `locations` for the same purpose).
       locationBases: (tgt.regions || []).slice(),
+      // Per-region expression provenance ("Found in"), parallel to locationBases:
+      // "target T is found in region B" is its own graded node (default llm when
+      // unsourced), so the panel shows a per-row pill, exactly like a receptor's
+      // locationInfo. From the emitted target.location_sources ({base: [source]}).
+      locationInfo: (tgt.regions || []).map((b) => ({
+        base: b,
+        name: baseName.get(b) || b,
+        sources: (tgt.location_sources || {})[b] || [],
+        provenance: strongestGrade((tgt.location_sources || {})[b]) || "llm",
+      })),
       keywords: [typeLabel, systemLabel].filter(Boolean).join(" "),
     });
   }

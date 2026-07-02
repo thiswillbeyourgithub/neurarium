@@ -1473,11 +1473,11 @@ function createInfoPanel(data) {
   // The "Found in" region list shared by showReceptor / showTarget: one <li> per
   // location, parallel arrays of display names + their base ids. A row whose base
   // resolves to a structure becomes clickable and jumps there via onStructurePick;
-  // an unresolved one stays plain text. `info` (receptor panels only) is the
-  // parallel per-region provenance array (`{provenance, sources}`): when given, each
-  // row shows its own grade pill, since "this receptor is expressed in region B" is
-  // graded per region (llm unless the expression itself is sourced), separate from
-  // the mechanism classification pill above.
+  // an unresolved one stays plain text. `info` (receptor + non-receptor-target
+  // panels) is the parallel per-region provenance array (`{provenance, sources}`):
+  // when given, each row shows its own grade pill, since "this receptor/target is
+  // found in region B" is graded per region (llm unless the expression itself is
+  // sourced), separate from the mechanism/type classification pill above.
   const locationList = (names, bases, info) => {
     const ul = el("ul");
     names.forEach((name, i) => {
@@ -2371,7 +2371,8 @@ function createInfoPanel(data) {
       if (!target.locationNames.length) {
         where.appendChild(el("p", "info-desc", t("receptor.noRole")));
       } else {
-        where.appendChild(locationList(target.locationNames, target.locationBases));
+        where.appendChild(locationList(target.locationNames, target.locationBases,
+          target.locationInfo));
       }
       body.appendChild(where);
 

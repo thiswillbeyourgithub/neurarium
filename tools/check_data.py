@@ -337,6 +337,13 @@ def check_reachability(report, meta, structures, projections, circuits,
                 report.error(f"target {key}: region {region!r} is not a structure "
                              f"base (not in the atlas, so its panel 'Found in' row "
                              f"would not be clickable)")
+        # A per-region expression source must grade one of the target's own regions
+        # (mirror of the receptor location_sources key check above).
+        own_regions = set(target.get("regions", []))
+        for base in (target.get("location_sources") or {}):
+            if base not in own_regions:
+                report.error(f"target {key}: location_sources key {base!r} is not "
+                             f"one of its regions (grades a region it doesn't claim)")
         linked = target.get("receptor")
         if linked is not None and linked not in receptor_ids:
             report.error(f"target {key}: linked receptor {linked!r} is not a receptor id")
@@ -485,7 +492,7 @@ def print_coverage(stats):
     a = stats.get("nodes", {})
     # The node kinds folded into the headline, in the generator's order.
     node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                  "receptor_locations", "targets", "structures")
+                  "receptor_locations", "targets", "target_locations", "structures")
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -586,6 +593,12 @@ def check_provenance(report, meta, structures, projections, circuits,
         if target.get("type") != "receptor" and "classification_provenance" in target:
             grade(target.get("classification_provenance"),
                   f"target {key} classification_provenance")
+        # Per-region expression sources (the target's "Found in" grading), mirror of
+        # the receptor location_sources above; each carries a grade.
+        for base, srcs in (target.get("location_sources") or {}).items():
+            for i, src in enumerate(srcs or []):
+                grade(src.get("provenance"),
+                      f"target {key} location_sources[{base}][{i}]")
 
     # Wikipedia references (structures / receptors / drugs, + the meta targets)
     # carry a sibling `wikipedia_provenance` whenever the link is present.
@@ -621,7 +634,8 @@ def check_provenance(report, meta, structures, projections, circuits,
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
         node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                      "receptor_locations", "targets", "structures")
+                      "receptor_locations", "targets", "target_locations",
+                      "structures")
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "unverified"):
             want = sum(by.get(k, {}).get(key, 0) for k in node_kinds)
@@ -761,6 +775,11 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         if isinstance(tinfo, dict):
             for i, src in enumerate(tinfo.get("sources", []) or []):
                 check_one(f"target {tid} sources[{i}]", src)
+            # A non-receptor target's per-region expression sources, quote-checked
+            # like the receptor ones (same honesty gate for a future citation).
+            for base, srcs in (tinfo.get("location_sources") or {}).items():
+                for i, src in enumerate(srcs or []):
+                    check_one(f"target {tid} location_sources[{base}][{i}]", src)
 
     if skipped_corpora:
         report.warn(f"source pages absent for {sorted(skipped_corpora)} "
