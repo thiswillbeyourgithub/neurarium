@@ -2597,7 +2597,13 @@ function createInfoPanel(data) {
       }
 
       // Structures in the loop, deduped to bases (so the two hemispheres collapse
-      // to one row), each clickable to jump to the region via onStructurePick.
+      // to one row), each rendered as a link that jumps to the region via
+      // onStructurePick (locationList wires the click; the `.info-locations` class
+      // gives it the clickable link styling). No per-structure source pill: a
+      // structure's membership in the loop is not a separate sourced claim, it is
+      // part of the circuit node itself, which is already graded on the heading
+      // above (`circuit.provenance`). Each linked structure carries its own anatomy
+      // grade on its own panel.
       const seen = new Set();
       const names = [];
       const bases = [];
@@ -2610,7 +2616,7 @@ function createInfoPanel(data) {
         bases.push(base);
       }
       if (bases.length) {
-        const where = el("div", "info-where");
+        const where = el("div", "info-locations");
         where.appendChild(el("h3", null, t("circuit.structures")));
         where.appendChild(locationList(names, bases));
         body.appendChild(where);
