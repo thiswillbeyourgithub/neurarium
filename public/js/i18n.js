@@ -251,15 +251,19 @@
         "{pct}% of the {total} knowledge nodes here are sourced or verified.",
       "about.kindBindings": "Drug target bindings",
       "about.kindNbn": "Drug nomenclature (NbN)",
-      "about.kindDescriptions": "Drug descriptions",
+      "about.kindDrugCategories": "Drug class",
       "about.kindProjections": "Neuron pathways",
+      "about.kindCircuits": "Functional circuits",
+      "about.kindProjectionGroups": "Projection groups",
       "about.kindReceptors": "Receptor classifications",
       "about.kindReceptorLocations": "Receptor expression regions",
       "about.kindTargets": "Target classifications",
+      "about.kindTargetLocations": "Target expression regions",
       "about.kindStructures": "Brain-region anatomy",
       "about.kindReferences": "Reference links",
       "about.coverageNote":
-        "Neuron pathways and reference links are the remaining gap.",
+        "Expression regions, drug classes, and circuits are the biggest " +
+        "unsourced gap.",
 
       "dev.wip": "Work in progress",
       "dev.restarted":
@@ -487,15 +491,19 @@
         "{pct} % des {total} nœuds de connaissance ici sont sourcés ou vérifiés.",
       "about.kindBindings": "Liaisons cibles des médicaments",
       "about.kindNbn": "Nomenclature des médicaments (NbN)",
-      "about.kindDescriptions": "Descriptions des médicaments",
+      "about.kindDrugCategories": "Classe du médicament",
       "about.kindProjections": "Voies neuronales",
+      "about.kindCircuits": "Circuits fonctionnels",
+      "about.kindProjectionGroups": "Groupes de projections",
       "about.kindReceptors": "Classifications des récepteurs",
       "about.kindReceptorLocations": "Régions d'expression des récepteurs",
       "about.kindTargets": "Classifications des cibles",
+      "about.kindTargetLocations": "Régions d'expression des cibles",
       "about.kindStructures": "Anatomie des régions",
       "about.kindReferences": "Liens de référence",
       "about.coverageNote":
-        "Les voies neuronales et les liens de référence constituent le manque restant.",
+        "Les régions d'expression, les classes de médicaments et les circuits " +
+        "constituent le principal manque de sources.",
 
       "dev.wip": "En cours de développement",
       "dev.restarted":

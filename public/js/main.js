@@ -2134,9 +2134,9 @@ function createInfoPanel(data) {
     li.title = proj.label || "";
     li.appendChild(directionArrow(proj.color, dir));
     li.appendChild(el("span", "conn-label", labelText));
-    if (proj.sources && proj.sources.length) {
-      li.appendChild(makeProvenancePill(proj.provenance, sourcesTip(proj.sources)));
-    }
+    // Always show the grade pill; an unsourced pathway shows NOSOURCE, never a blank
+    // (a node's provenance is never simply absent from the panel).
+    li.appendChild(makeProvenancePill(proj.provenance, sourcesTip(proj.sources)));
     li.addEventListener("click", () => onConnectionPick(proj));
     return li;
   };
@@ -2604,11 +2604,11 @@ function createInfoPanel(data) {
       // below the member lists (which would read as grading the members, not the
       // circuit). Tooltip lists the citation(s).
       const circuitGroup = el("div", "info-group", t("circuit.heading"));
-      if (circuit.provenance) {
-        circuitGroup.appendChild(document.createTextNode(" "));
-        circuitGroup.appendChild(makeProvenancePill(
-          circuit.provenance, sourcesTip(circuit.sources)));
-      }
+      // Always show the grade pill; an unsourced circuit shows NOSOURCE (its claim
+      // is llm-only today), never a blank.
+      circuitGroup.appendChild(document.createTextNode(" "));
+      circuitGroup.appendChild(makeProvenancePill(
+        circuit.provenance, sourcesTip(circuit.sources)));
       body.appendChild(circuitGroup);
 
       // Wikipedia illustration (hero + lazy gallery), the same hot-linked treatment a
@@ -2678,11 +2678,11 @@ function createInfoPanel(data) {
       const groupGroup = el(
         "div", "info-group",
         group.mode === "sign" ? t("group.signHeading") : t("group.kindHeading"));
-      if (group.provenance) {
-        groupGroup.appendChild(document.createTextNode(" "));
-        groupGroup.appendChild(makeProvenancePill(
-          group.provenance, sourcesTip(group.sources)));
-      }
+      // Always show the grade pill; an unsourced group shows NOSOURCE (its grouping
+      // claim is llm-only today), never a blank.
+      groupGroup.appendChild(document.createTextNode(" "));
+      groupGroup.appendChild(makeProvenancePill(
+        group.provenance, sourcesTip(group.sources)));
       body.appendChild(groupGroup);
 
       // Description (LLM-authored) + the Wikipedia reference below it, then the live
@@ -3440,11 +3440,14 @@ function buildAboutSourcing(meta) {
   const KIND_LABELS = {
     drug_bindings: "about.kindBindings",
     drug_nbn: "about.kindNbn",
-    drug_descriptions: "about.kindDescriptions",
+    drug_categories: "about.kindDrugCategories",
     projections: "about.kindProjections",
+    circuits: "about.kindCircuits",
+    projection_groups: "about.kindProjectionGroups",
     receptors: "about.kindReceptors",
     receptor_locations: "about.kindReceptorLocations",
     targets: "about.kindTargets",
+    target_locations: "about.kindTargetLocations",
     structures: "about.kindStructures",
     references: "about.kindReferences",
   };
