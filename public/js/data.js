@@ -242,7 +242,9 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   }
   for (const c of circuits) {
     c.name = localize(c.name);
-    // A circuit now carries an optional sourced description (its detail panel).
+    // A circuit carries a baked description (offline fallback) plus an optional
+    // Wikipedia link; its panel live-fetches the current lead like a structure. The
+    // raw `wikipedia` field passes through untouched for appendReference to consume.
     c.description = c.description ? localize(c.description) : "";
     c.provenance = strongestGrade(c.sources);
   }

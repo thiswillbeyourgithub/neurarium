@@ -558,6 +558,11 @@ def check_provenance(report, meta, structures, projections, circuits,
         if group.get("wikipedia"):
             grade(group.get("wikipedia_provenance"),
                   f"projection group {group.get('id')} wikipedia")
+    # A circuit's optional wikipedia reference likewise carries a grade.
+    for circuit in circuits:
+        if circuit.get("wikipedia"):
+            grade(circuit.get("wikipedia_provenance"),
+                  f"circuit {circuit.get('id')} wikipedia")
 
     # Per-binding drug sources (the quote-level provenance) each carry a grade too,
     # as does a drug's nbn_sources (the NbN is quote-sourced the same way).

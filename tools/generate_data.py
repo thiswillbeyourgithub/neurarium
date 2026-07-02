@@ -3085,6 +3085,7 @@ PROJECTIONS: list[dict[str, Any]] = [
 # raises on a typo).
 CIRCUITS: list[dict[str, Any]] = [
     dict(id="bg_direct", name="Direct pathway (motor)",
+         wikipedia="https://en.wikipedia.org/wiki/Direct_pathway",
          description="The movement-promoting basal-ganglia loop: cortex excites "
                      "the striatum, which inhibits the GPi/SNr output, releasing "
                      "the thalamus to drive cortex.",
@@ -3098,6 +3099,7 @@ CIRCUITS: list[dict[str, Any]] = [
          structures=["frontal", "putamen", "globus_pallidus",
                      "substantia_nigra", "thalamus"]),
     dict(id="bg_indirect", name="Indirect pathway",
+         wikipedia="https://en.wikipedia.org/wiki/Indirect_pathway",
          description="The movement-suppressing loop, routed through the subthalamic "
                      "nucleus, which drives the GPi/SNr to clamp the thalamus.",
          description_fr="La boucle supprimant le mouvement, passant par le noyau "
@@ -3109,6 +3111,7 @@ CIRCUITS: list[dict[str, Any]] = [
          structures=["frontal", "putamen", "globus_pallidus",
                      "subthalamic_nucleus", "thalamus"]),
     dict(id="nigrostriatal", name="Nigrostriatal (dopamine)",
+         wikipedia="https://en.wikipedia.org/wiki/Nigrostriatal_pathway",
          description="The dopaminergic projection from the substantia nigra to the "
                      "striatum whose loss causes Parkinson's disease.",
          description_fr="La projection dopaminergique de la substance noire vers le "
@@ -3127,6 +3130,7 @@ CIRCUITS: list[dict[str, Any]] = [
          # loop running through the pons and cerebellum.
          structures=["frontal", "pons", "cerebellum", "thalamus"]),
     dict(id="limbic_memory", name="Hippocampal / limbic (Papez)",
+         wikipedia="https://en.wikipedia.org/wiki/Papez_circuit",
          description="The Papez circuit: the medial-temporal memory loop through "
                      "hippocampus, fornix, mammillary bodies, anterior thalamus "
                      "and cingulate.",
@@ -3140,6 +3144,7 @@ CIRCUITS: list[dict[str, Any]] = [
          structures=["temporal", "hippocampus", "fornix", "mammillary",
                      "thalamus", "cingulate"]),
     dict(id="commissures", name="Commissures (interhemispheric)",
+         wikipedia="https://en.wikipedia.org/wiki/Commissural_fiber",
          description="The interhemispheric bridges (corpus callosum + anterior "
                      "commissure) linking matching cortical areas across the "
                      "midline.",
@@ -4976,6 +4981,13 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         if circuit.get("sources"):
             record["sources"] = _expand_sources(
                 circuit["sources"], f"circuit {circuit['id']!r}")
+        # Optional Wikipedia reference (+ its own grade), so the circuit panel shows
+        # a "read more" link and live-fetches the current lead as a sourced
+        # description, exactly like a structure/target. A present link defaults to
+        # WIKIPEDIA_DEFAULT_PROVENANCE (sourced); override in WIKIPEDIA_PROVENANCE.
+        if circuit.get("wikipedia"):
+            record["wikipedia"] = circuit["wikipedia"]
+            record["wikipedia_provenance"] = _wiki_provenance(circuit["id"])
         circuits.append(record)
 
     # Projection groups: the legend's per-pathway rows as a sourced data structure

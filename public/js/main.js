@@ -2606,9 +2606,16 @@ function createInfoPanel(data) {
           circuit.provenance, sourcesTip(circuit.sources)));
       }
       body.appendChild(circuitGroup);
-      if (circuit.description) {
-        body.appendChild(el("p", "info-desc", circuit.description));
-      }
+
+      // Description (baked fallback) + the Wikipedia reference below it, then the
+      // live-lead refresh (upgrades to the current WP lead when reachable), via the
+      // same shared appendReference every panel uses. Like a brain structure, the
+      // circuit reads its text from Wikipedia; the baked copy is the offline
+      // fallback and carries the loop's own citation grade until the live lead lands.
+      appendReference({
+        url: circuit.wikipedia, description: circuit.description,
+        descriptionProvenance: circuit.provenance,
+      });
 
       // Structures in the loop, deduped to bases (so the two hemispheres collapse
       // to one row), each rendered as a link that jumps to the region via

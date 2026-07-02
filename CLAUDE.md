@@ -192,7 +192,7 @@ Emitted data (`public/data/`):
   optional `tentative` (speculative; dotted arrow in an off-by-default section).
 - `circuits.jsonl` — one functional loop/line: `id`, `name{en,fr}`,
   `structures[ids]` (arrows derived in the viewer), optional `description{en,fr}`
-  + `sources`.
+  + `sources` + `wikipedia` (+ `wikipedia_provenance`; panel live-fetches the lead).
 - `projection_groups.jsonl` — one legend pathway row/line, promoted to a sourced
   structure so it can open a panel: `id` (`<mode>_<key>`), `mode` (kind|sign),
   `key` (a kind or a sign), `name{en,fr}`, `description{en,fr}`,
@@ -944,8 +944,11 @@ projections whose `kind`/`sign` matches `key`. `js/data.js` localizes both and i
 the groups by `${mode}:${key}` (`projectionGroupsByKey`).
 
 - `showCircuit`: a "Functional circuit" heading carrying the loop's own source pill
-  (`circuit.provenance`, citations in its tooltip), the loop's description, its structures
-  (deduped to bases, each clickable to jump via `onStructure`), and its member pathways.
+  (`circuit.provenance`, citations in its tooltip), then the description + Wikipedia
+  reference via the shared `appendReference` (baked copy as the offline fallback,
+  live-refreshed from the current Wikipedia lead like a brain structure; an optional
+  `circuit.wikipedia`, else the `NOSOURCE` reference row), its structures (deduped to
+  bases, each clickable to jump via `onStructure`), and its member pathways.
 - `showProjectionGroup`: a by-transmitter / by-effect heading carrying the group's own
   source pill (`group.provenance`, citations in its tooltip), the description (live-
   refreshed from Wikipedia, its own grade pill), the reference link, the member pathways,
