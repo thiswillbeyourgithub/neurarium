@@ -1994,6 +1994,58 @@ function createInfoPanel(data) {
     return { paragraph, wiki };
   };
 
+  // Wikipedia illustration block (hero + lazy "show more" gallery), shared by the
+  // structure and circuit panels: both hot-link a Wikimedia hero (resolved by
+  // tools/fetch_structure_images.py) plus an optional gallery of further gif/svg.
+  // Multi-MB, so hot-linked not vendored (CSP img-src allows upload.wikimedia.org),
+  // with a spinner while loading and a silent figure-removal on failure. Colour art,
+  // so never inverted. `altName` names the subject for the alt text; the gallery is
+  // built lazily on first expand so the extra images never load unless asked. No-op
+  // when there is no hero, so a panel can call it unconditionally.
+  const appendWikiImages = (heroUrl, gallery, altName) => {
+    if (!heroUrl) return;
+    const figure = (src) => {
+      const fig = el("figure", "structure-image loading");
+      fig.appendChild(el("div", "img-spinner"));
+      const img = document.createElement("img");
+      img.alt = t("structure.imageAlt", { name: altName });
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.title = t("image.zoomHint");
+      img.addEventListener("load", () => fig.classList.remove("loading"));
+      img.addEventListener("error", () => fig.remove());
+      img.addEventListener("click", () =>
+        onImagePick(img.currentSrc || img.src, img.alt, { invert: false }));
+      img.src = src;
+      fig.appendChild(img);
+      return fig;
+    };
+    body.appendChild(figure(heroUrl));
+    const gal = gallery || [];
+    if (!gal.length) return;
+    const wrap = el("div", "structure-gallery");
+    wrap.hidden = true;
+    const toggle = el("button", "btn gallery-toggle");
+    toggle.type = "button";
+    let built = false;
+    const sync = () => {
+      toggle.textContent = wrap.hidden
+        ? t("structure.galleryShow", { n: gal.length })
+        : t("structure.galleryHide");
+    };
+    toggle.addEventListener("click", () => {
+      if (!built) {
+        for (const url of gal) wrap.appendChild(figure(url));
+        built = true;
+      }
+      wrap.hidden = !wrap.hidden;
+      sync();
+    });
+    sync();
+    body.appendChild(toggle);
+    body.appendChild(wrap);
+  };
+
 
   // Shared by the receptor + target views: the drugs that act on this target, so
   // you can go from a target to every drug touching it. Grouped by primary drug
@@ -2179,59 +2231,10 @@ function createInfoPanel(data) {
       body.appendChild(structGroup);
 
       // Wikipedia illustration (the lead rotating-brain GIF, else an SVG diagram or
-      // an infobox image; resolved by tools/fetch_structure_images.py). These can be
-      // multi-MB, so rather than vendor them the viewer HOT-LINKS the Wikimedia url
-      // at runtime (CSP img-src allows upload.wikimedia.org), like the live
-      // descriptions. A spinner shows while it loads; the whole figure is removed if
-      // the load fails (offline / blocked / moved), so a failure degrades to no
-      // image. Unlike the drug molecule line-art these are colour, so NOT inverted.
-      const structureFigure = (src) => {
-        const fig = el("figure", "structure-image loading");
-        fig.appendChild(el("div", "img-spinner"));
-        const img = document.createElement("img");
-        img.alt = t("structure.imageAlt", { name: structure.name });
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.title = t("image.zoomHint");
-        img.addEventListener("load", () => fig.classList.remove("loading"));
-        img.addEventListener("error", () => fig.remove());
-        // Click to enlarge in the lightbox (colour art, so not inverted).
-        img.addEventListener("click", () =>
-          onImagePick(img.currentSrc || img.src, img.alt, { invert: false }));
-        img.src = src;
-        fig.appendChild(img);
-        return fig;
-      };
-      if (structure.structureImage) {
-        body.appendChild(structureFigure(structure.structureImage));
-        // "Show more" gallery: the other gif/svg from the EN + FR articles. Built
-        // lazily on first expand so they never load (multi-MB each) unless asked, so
-        // the panel stays light and the extra fetches never take priority.
-        const gallery = structure.structureImageGallery || [];
-        if (gallery.length) {
-          const wrap = el("div", "structure-gallery");
-          wrap.hidden = true;
-          const toggle = el("button", "btn gallery-toggle");
-          toggle.type = "button";
-          let built = false;
-          const sync = () => {
-            toggle.textContent = wrap.hidden
-              ? t("structure.galleryShow", { n: gallery.length })
-              : t("structure.galleryHide");
-          };
-          toggle.addEventListener("click", () => {
-            if (!built) {
-              for (const url of gallery) wrap.appendChild(structureFigure(url));
-              built = true;
-            }
-            wrap.hidden = !wrap.hidden;
-            sync();
-          });
-          sync();
-          body.appendChild(toggle);
-          body.appendChild(wrap);
-        }
-      }
+      // an infobox image) + its lazy "show more" gallery, via the shared helper (see
+      // appendWikiImages): hot-linked, spinner while loading, silent hide on failure.
+      appendWikiImages(structure.structureImage, structure.structureImageGallery,
+        structure.name);
 
       // External reference (Wikipedia) + its live lead summary, via the shared
       // appendReference (structures carry no baked description, so the live lead,
@@ -2606,6 +2609,11 @@ function createInfoPanel(data) {
           circuit.provenance, sourcesTip(circuit.sources)));
       }
       body.appendChild(circuitGroup);
+
+      // Wikipedia illustration (hero + lazy gallery), the same hot-linked treatment a
+      // brain structure gets (see appendWikiImages); no-op when unillustrated.
+      appendWikiImages(circuit.structureImage, circuit.structureImageGallery,
+        circuit.name);
 
       // Description (baked fallback) + the Wikipedia reference below it, then the
       // live-lead refresh (upgrades to the current WP lead when reachable), via the

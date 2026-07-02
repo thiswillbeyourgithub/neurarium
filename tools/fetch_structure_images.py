@@ -34,20 +34,29 @@ reads to emit each structure's ``structure_image`` (hero) + ``structure_image_ga
 (see ``_load_structure_images``). A structure whose article has no usable image at all
 is left without one; the run prints which ones were missed.
 
+The **same** resolver also runs over the **circuits** (``public/data/circuits.jsonl``,
+those with a ``wikipedia`` link): each circuit's hero + gallery is resolved exactly
+like a structure and written, keyed by circuit id, to ``tools/circuit_images_sources.json``
+(its own file so the two key namespaces never mix), read by ``generate_data.py``'s
+``_load_circuit_images`` to emit the circuit panel's ``structure_image`` /
+``structure_image_gallery``. ``--target structures|circuits|all`` (default ``all``)
+picks which pass to run.
+
 This is an *authoring* tool (it hits the network), kept separate from the offline,
 stdlib-only ``generate_data.py``. It reuses the polite-fetch helpers from the sibling
 ``fetch_molecules.py`` (shared User-Agent, retry/backoff, the MediaWiki JSON call and
 the article-title / chrome-name helpers) rather than duplicating them. It is
-idempotent (skips bases already recorded unless ``--force``) and polite (descriptive
+idempotent (skips items already recorded unless ``--force``) and polite (descriptive
 User-Agent + a small delay between requests). It downloads **no image bytes**, only
 the JSON metadata needed to resolve each URL.
 
 Usage::
 
-    python tools/fetch_structure_images.py                 # resolve all missing
+    python tools/fetch_structure_images.py                 # structures + circuits, missing
     python tools/fetch_structure_images.py --force          # re-resolve everything
     python tools/fetch_structure_images.py --only hippocampus,amygdala
-    python tools/fetch_structure_images.py --limit 5        # first 5 (a smoke test)
+    python tools/fetch_structure_images.py --target circuits # only the circuit heroes
+    python tools/fetch_structure_images.py --limit 5        # first 5 per target (smoke test)
 
 Needs network access (Wikipedia API).
 """
@@ -67,7 +76,11 @@ from fetch_molecules import API as EN_API, _is_chrome, article_title, http_json
 
 REPO = Path(__file__).resolve().parent.parent
 STRUCTURES_JSONL = REPO / "public" / "data" / "structures.jsonl"
+CIRCUITS_JSONL = REPO / "public" / "data" / "circuits.jsonl"
 SOURCES_JSON = Path(__file__).resolve().parent / "structure_images_sources.json"
+# Circuits get their own sources file (same schema), keyed by circuit id, so the two
+# concerns never share a key namespace. Read by generate_data.py's _load_circuit_images.
+CIRCUIT_SOURCES_JSON = Path(__file__).resolve().parent / "circuit_images_sources.json"
 
 # The French Wikipedia MediaWiki endpoint (the gallery also scans the FR article,
 # which often carries labelled diagrams the EN one does not). Same /w/api.php shape.
@@ -213,7 +226,7 @@ def _lead_image(title: str) -> tuple[str, str] | None:
     for page in data.get("query", {}).get("pages", {}).values():
         name = page.get("pageimage") or ""
         src = (page.get("original") or {}).get("source") or ""
-        if not src or _is_chrome(name):
+        if not src or _is_gallery_chrome(name):
             continue
         low = src.lower()
         if low.endswith(RENDERABLE_IMG_EXT):
@@ -239,7 +252,10 @@ def resolve_image(title: str) -> tuple[str, str, str] | None:
     images = data.get("parse", {}).get("images", [])  # filenames, page order
     for ext, kind in ((".gif", "gif"), (".svg", "svg")):
         for fname in images:
-            if not fname.lower().endswith(ext) or _is_chrome(fname):
+            # Reject article chrome with the *stronger* gallery filter (licence /
+            # logo / featured-star icons, e.g. PD-icon.svg, that the molecule-tuned
+            # _is_chrome misses), so the hero is a real illustration, not a UI badge.
+            if not fname.lower().endswith(ext) or _is_gallery_chrome(fname):
                 continue
             url = _file_url(f"File:{fname}")
             if url and url.lower().endswith(ext):
@@ -364,31 +380,32 @@ def load_structure_bases() -> list[tuple[str, str]]:
     return list(seen.items())
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--force", action="store_true",
-                    help="re-resolve even if the base is already recorded")
-    ap.add_argument("--only", default="",
-                    help="comma-separated structure base ids (default: all)")
-    ap.add_argument("--limit", type=int, default=0,
-                    help="only process the first N bases (smoke test)")
-    ap.add_argument("--delay", type=float, default=0.2,
-                    help="seconds to sleep between bases (politeness)")
-    args = ap.parse_args()
+def load_circuit_bases() -> list[tuple[str, str]]:
+    """``(circuit_id, wikipedia_url)`` pairs, one per circuit that has a wikipedia
+    link. Same shape as :func:`load_structure_bases` so the resolution loop is shared;
+    a circuit id has no hemisphere suffix, so it is used verbatim as the key."""
+    if not CIRCUITS_JSONL.exists():
+        return []
+    out: list[tuple[str, str]] = []
+    for line in CIRCUITS_JSONL.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        rec = json.loads(line)
+        wiki = rec.get("wikipedia")
+        if wiki:
+            out.append((rec["id"], wiki))
+    return out
 
-    sources: dict[str, dict] = {}
-    if SOURCES_JSON.exists():
-        sources = json.loads(SOURCES_JSON.read_text(encoding="utf-8"))
 
-    bases = load_structure_bases()
-    only = {s.strip() for s in args.only.split(",") if s.strip()}
-    if only:
-        bases = [b for b in bases if b[0] in only]
-    if args.limit:
-        bases = bases[:args.limit]
+def resolve_list(items: list[tuple[str, str]], sources: dict[str, dict],
+                 overrides: dict[str, str], args) -> None:
+    """Resolve the hero + gallery for each ``(key, wiki)`` in ``items`` into
+    ``sources`` (mutated in place). Shared by the structure and circuit passes: the
+    only per-pass difference is the input list, the sources dict and the override map
+    (circuits have none), so the loop below never diverges between the two."""
 
     def add_gallery(entry: dict, wiki: str) -> None:
-        """Populate ``entry['gallery']`` from the base's EN + FR articles (hero
+        """Populate ``entry['gallery']`` from the item's EN + FR articles (hero
         excluded). Best-effort: always leaves a list (empty on any failure)."""
         title = article_title(wiki)
         if not title:
@@ -403,14 +420,14 @@ def main() -> None:
             print(f"        gallery error: {exc}")
 
     resolved, skipped, missing, errors = [], [], [], []
-    for i, (base, wiki) in enumerate(bases, 1):
+    for i, (base, wiki) in enumerate(items, 1):
         # A manual override wins over the auto-resolver and the recorded value, and
         # the hero needs no network, so it is applied first and even without --force
         # (so adding an override and re-running fixes a wrong pick immediately). The
         # gallery still comes from the article: reuse an already-gathered one unless
         # --force, else fetch it.
-        if base in IMAGE_OVERRIDES:
-            entry = _override_entry(IMAGE_OVERRIDES[base])
+        if base in overrides:
+            entry = _override_entry(overrides[base])
             prev = sources.get(base) or {}
             if "gallery" in prev and not args.force:
                 entry["gallery"] = prev["gallery"]
@@ -422,7 +439,7 @@ def main() -> None:
             else:
                 sources[base] = entry
                 resolved.append(base)
-                print(f"[{i}/{len(bases)}] {base}: [override] {entry['file']}")
+                print(f"[{i}/{len(items)}] {base}: [override] {entry['file']}")
             continue
         if base in sources and not args.force:
             # Already have the hero; backfill the gallery if this entry predates it.
@@ -444,25 +461,19 @@ def main() -> None:
                 # what it once accepted) so the sources JSON never keeps a dead url.
                 sources.pop(base, None)
                 missing.append((base, f"no image on '{title}'"))
-                print(f"[{i}/{len(bases)}] {base}: MISSING (no image)")
+                print(f"[{i}/{len(items)}] {base}: MISSING (no image)")
                 time.sleep(args.delay)
                 continue
             file_title, url, kind = hit
             entry = {"file": file_title, "url": url, "title": title, "kind": kind}
-            print(f"[{i}/{len(bases)}] {base}: [{kind}] {file_title}")
+            print(f"[{i}/{len(items)}] {base}: [{kind}] {file_title}")
             add_gallery(entry, wiki)
             sources[base] = entry
             resolved.append(base)
         except Exception as exc:  # noqa: BLE001 - report and keep going
             errors.append((base, str(exc)))
-            print(f"[{i}/{len(bases)}] {base}: ERROR {exc}")
+            print(f"[{i}/{len(items)}] {base}: ERROR {exc}")
         time.sleep(args.delay)
-
-    # Persist the resolved urls + provenance (sorted for a stable diff). This file
-    # is read by generate_data.py to emit each structure's structure_image url.
-    SOURCES_JSON.write_text(
-        json.dumps(dict(sorted(sources.items())), ensure_ascii=False, indent=2)
-        + "\n", encoding="utf-8")
 
     print("\n=== summary ===")
     print(f"resolved : {len(resolved)}")
@@ -474,7 +485,54 @@ def main() -> None:
         print(f"errors   : {len(errors)}")
         for base, why in errors:
             print(f"           - {base}: {why}")
-    print(f"\nresolved urls -> {SOURCES_JSON}")
+
+
+def _persist(sources: dict[str, dict], path: Path) -> None:
+    """Write the resolved urls sorted (stable diff). Read by generate_data.py."""
+    path.write_text(
+        json.dumps(dict(sorted(sources.items())), ensure_ascii=False, indent=2)
+        + "\n", encoding="utf-8")
+    print(f"resolved urls -> {path}")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--force", action="store_true",
+                    help="re-resolve even if the base is already recorded")
+    ap.add_argument("--only", default="",
+                    help="comma-separated structure base / circuit ids (default: all)")
+    ap.add_argument("--limit", type=int, default=0,
+                    help="only process the first N items per target (smoke test)")
+    ap.add_argument("--delay", type=float, default=0.2,
+                    help="seconds to sleep between items (politeness)")
+    ap.add_argument("--target", choices=("structures", "circuits", "all"),
+                    default="all",
+                    help="which node kind's images to resolve (default: all)")
+    args = ap.parse_args()
+
+    only = {s.strip() for s in args.only.split(",") if s.strip()}
+
+    def filtered(items: list[tuple[str, str]]) -> list[tuple[str, str]]:
+        if only:
+            items = [b for b in items if b[0] in only]
+        return items[:args.limit] if args.limit else items
+
+    if args.target in ("structures", "all"):
+        sources: dict[str, dict] = {}
+        if SOURCES_JSON.exists():
+            sources = json.loads(SOURCES_JSON.read_text(encoding="utf-8"))
+        print("--- structures ---")
+        resolve_list(filtered(load_structure_bases()), sources, IMAGE_OVERRIDES, args)
+        _persist(sources, SOURCES_JSON)
+
+    if args.target in ("circuits", "all"):
+        csources: dict[str, dict] = {}
+        if CIRCUIT_SOURCES_JSON.exists():
+            csources = json.loads(CIRCUIT_SOURCES_JSON.read_text(encoding="utf-8"))
+        print("\n--- circuits ---")
+        # Circuits carry no manual overrides (empty map); everything else is identical.
+        resolve_list(filtered(load_circuit_bases()), csources, {}, args)
+        _persist(csources, CIRCUIT_SOURCES_JSON)
 
 
 if __name__ == "__main__":

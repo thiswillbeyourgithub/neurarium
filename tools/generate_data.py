@@ -4656,25 +4656,35 @@ def _available_molecule_ids() -> set[str]:
     return {p.stem for p in mol_dir.glob("*.svg")}
 
 
-def _load_structure_images() -> dict[str, dict[str, Any]]:
-    """Map ``base id -> record`` from ``tools/structure_images_sources.json``.
+def _load_image_sources(filename: str) -> dict[str, dict[str, Any]]:
+    """Map ``key -> image record`` from a ``tools/<filename>`` sources JSON.
 
-    Unlike the drug molecule SVGs (vendored same-origin), the structure
+    Unlike the drug molecule SVGs (vendored same-origin), the structure / circuit
     illustration GIFs are too large to commit, so the viewer **hot-links** them
-    from Wikimedia at runtime (with a spinner / silent-fail, see ``showStructure``):
-    only the URL is stored in the data, not the binary. The URLs are resolved
-    author-side by ``tools/fetch_structure_images.py`` (which hits the network) and
-    recorded in that small JSON; this offline generator just reads it, so a structure
-    gets a ``structure_image`` (the lead hero) plus a ``structure_image_gallery`` (the
-    other gif/svg from its EN+FR articles, for the panel's "show more") iff its base has
-    an entry. A missing file is fine (no images). Keyed by base id, so both hemispheres
-    of a pair share the one record.
+    from Wikimedia at runtime (with a spinner / silent-fail, see ``showStructure`` /
+    ``showCircuit``): only the URL is stored in the data, not the binary. The URLs are
+    resolved author-side by ``tools/fetch_structure_images.py`` (which hits the
+    network) and recorded in that small JSON; this offline generator just reads it, so
+    an owner gets a ``structure_image`` (the lead hero) plus a
+    ``structure_image_gallery`` (the other gif/svg from its EN+FR articles, for the
+    panel's "show more") iff its key has an entry with a url. A missing file is fine
+    (no images). Keyed by structure base id / circuit id respectively.
     """
-    src = Path(__file__).resolve().parent / "structure_images_sources.json"
+    src = Path(__file__).resolve().parent / filename
     if not src.exists():
         return {}
     data = json.loads(src.read_text(encoding="utf-8"))
-    return {base: rec for base, rec in data.items() if rec.get("url")}
+    return {key: rec for key, rec in data.items() if rec.get("url")}
+
+
+def _load_structure_images() -> dict[str, dict[str, Any]]:
+    """Structure image sources (see :func:`_load_image_sources`), keyed by base id."""
+    return _load_image_sources("structure_images_sources.json")
+
+
+def _load_circuit_images() -> dict[str, dict[str, Any]]:
+    """Circuit image sources (see :func:`_load_image_sources`), keyed by circuit id."""
+    return _load_image_sources("circuit_images_sources.json")
 
 
 def _load_drugs() -> list[dict[str, Any]]:
@@ -4892,8 +4902,9 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # Wikimedia image records resolved author-side (offline read of the sources
     # JSON); a structure whose base has one gets a hot-linked structure_image (the
     # hero) + structure_image_gallery (the GIFs are too large to vendor, unlike the
-    # drug molecule SVGs).
+    # drug molecule SVGs). Circuits get the same, keyed by circuit id.
     structure_images = _load_structure_images()
+    circuit_images = _load_circuit_images()
 
     for entry in PAIRED:
         x, y, z = entry["pos"]
@@ -4988,6 +4999,15 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         if circuit.get("wikipedia"):
             record["wikipedia"] = circuit["wikipedia"]
             record["wikipedia_provenance"] = _wiki_provenance(circuit["id"])
+        # Hot-linked Wikipedia illustration (hero + gallery), keyed by circuit id, the
+        # same treatment a structure gets (see _load_circuit_images). Only set when the
+        # circuit was resolved, so an unillustrated one renders no image.
+        cimg = circuit_images.get(circuit["id"])
+        if cimg and cimg.get("url"):
+            record["structure_image"] = cimg["url"]
+            cgallery = [g["url"] for g in cimg.get("gallery", []) if g.get("url")]
+            if cgallery:
+                record["structure_image_gallery"] = cgallery
         circuits.append(record)
 
     # Projection groups: the legend's per-pathway rows as a sourced data structure

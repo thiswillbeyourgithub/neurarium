@@ -161,10 +161,14 @@ Data + authoring (`tools/`):
 - `tools/fetch_structure_images.py` — resolves the *url* of each structure's best
   Wikipedia illustration (hero) **plus a gallery** of the other gif/svg on its EN+FR
   articles into `tools/structure_images_sources.json` (network, idempotent, polite;
-  reuses `fetch_molecules.py` helpers). Downloads no bytes. See Images.
-- `tools/molecules_sources.json` / `tools/structure_images_sources.json`:
-  provenance/attribution for the two fetch tools (`structure_images_sources.json` is
-  read by `generate_data.py` offline; not served).
+  reuses `fetch_molecules.py` helpers). Downloads no bytes. The **same** resolver runs
+  over the wiki-linked **circuits** (`--target structures|circuits|all`, default all),
+  writing their heroes/galleries keyed by circuit id to `tools/circuit_images_sources.json`.
+  See Images.
+- `tools/molecules_sources.json` / `tools/structure_images_sources.json` /
+  `tools/circuit_images_sources.json`: provenance/attribution for the fetch tools
+  (`structure_images_sources.json` + `circuit_images_sources.json` are read by
+  `generate_data.py` offline; not served).
 - `tools/git-hooks/` — repo-tracked git hooks (see Git hooks).
 
 Emitted data (`public/data/`):
@@ -192,7 +196,9 @@ Emitted data (`public/data/`):
   optional `tentative` (speculative; dotted arrow in an off-by-default section).
 - `circuits.jsonl` — one functional loop/line: `id`, `name{en,fr}`,
   `structures[ids]` (arrows derived in the viewer), optional `description{en,fr}`
-  + `sources` + `wikipedia` (+ `wikipedia_provenance`; panel live-fetches the lead).
+  + `sources` + `wikipedia` (+ `wikipedia_provenance`; panel live-fetches the lead) +
+  optional `structure_image` (hot-linked Wikimedia hero) + `structure_image_gallery`
+  (more hot-linked gif/svg urls), same shape + rendering as a structure's.
 - `projection_groups.jsonl` — one legend pathway row/line, promoted to a sourced
   structure so it can open a panel: `id` (`<mode>_<key>`), `mode` (kind|sign),
   `key` (a kind or a sign), `name{en,fr}`, `description{en,fr}`,
@@ -944,9 +950,10 @@ projections whose `kind`/`sign` matches `key`. `js/data.js` localizes both and i
 the groups by `${mode}:${key}` (`projectionGroupsByKey`).
 
 - `showCircuit`: a "Functional circuit" heading carrying the loop's own source pill
-  (`circuit.provenance`, citations in its tooltip), then the description + Wikipedia
-  reference via the shared `appendReference` (baked copy as the offline fallback,
-  live-refreshed from the current Wikipedia lead like a brain structure; an optional
+  (`circuit.provenance`, citations in its tooltip), then the Wikipedia illustration
+  (hero + lazy gallery via the shared `appendWikiImages`, like a brain structure), the
+  description + Wikipedia reference via the shared `appendReference` (baked copy as the
+  offline fallback, live-refreshed from the current Wikipedia lead; an optional
   `circuit.wikipedia`, else the `NOSOURCE` reference row), its structures (deduped to
   bases, each clickable to jump via `onStructure`), and its member pathways.
 - `showProjectionGroup`: a by-transmitter / by-effect heading carrying the group's own
@@ -1128,9 +1135,13 @@ Two third-party image sources, handled differently on purpose.
   `MAX_GALLERY`) into `tools/structure_images_sources.json` (each with kind + source lang),
   reusing `fetch_molecules.py`'s polite-fetch helpers (its `http_json` gained an `api_url`
   arg so the FR wiki is reachable), downloading no bytes; an `IMAGE_OVERRIDES` map wins for
-  the hero. `generate_data.py` (`_load_structure_images` + `_structure_record`) emits the
-  `structure_image` (hero) url + the `structure_image_gallery` list. `showStructure`
-  renders the hero as `<img class="structure-image" loading="lazy">` with a spinner
+  the hero. The **same resolver** runs over the wiki-linked **circuits** (`--target
+  circuits`) into `tools/circuit_images_sources.json` (keyed by circuit id). `generate_data.py`
+  emits the `structure_image` (hero) url + `structure_image_gallery` list for both structures
+  (`_load_structure_images` + `_structure_record`) and circuits (`_load_circuit_images` +
+  circuit emission), both loaded by the generic `_load_image_sources`. `showStructure` and
+  `showCircuit` both render them via the shared `appendWikiImages(heroUrl, gallery, altName)`:
+  the hero as `<img class="structure-image" loading="lazy">` with a spinner
   (`.img-spinner`; `load` clears it, `error` removes the figure -> no broken icon), then a
   "show more" toggle (`.gallery-toggle`) that builds the gallery figures **lazily on first
   expand** (so the extra multi-MB images never load unless asked). Not inverted (colour
@@ -1318,9 +1329,11 @@ network, idempotent, polite; each touches only what changed). Always finish with
 
 1. `python tools/fetch_molecules.py` — new per-drug molecule SVGs into
    `public/data/molecules/` (only drugs missing one); writes `tools/molecules_sources.json`.
-2. `python tools/fetch_structure_images.py` — re-resolve each structure's Wikipedia
-   hero + gallery image **urls** into `tools/structure_images_sources.json` (no bytes
-   downloaded; the gif/svg is hot-linked at runtime).
+2. `python tools/fetch_structure_images.py` — re-resolve each structure's **and**
+   wiki-linked circuit's Wikipedia hero + gallery image **urls** into
+   `tools/structure_images_sources.json` + `tools/circuit_images_sources.json` (no bytes
+   downloaded; the gif/svg is hot-linked at runtime). `--target structures|circuits`
+   scopes to one.
 3. **PDSP Ki** (the binding-affinity "pharmacokinetic" table): re-download the whole-DB
    CSV from the PDSP export endpoint
    `https://pdspdb.unc.edu/databases/kiDownload/download.php` over

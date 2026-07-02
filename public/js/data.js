@@ -247,6 +247,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // raw `wikipedia` field passes through untouched for appendReference to consume.
     c.description = c.description ? localize(c.description) : "";
     c.provenance = strongestGrade(c.sources);
+    // Hot-linked Wikipedia illustration (hero + gallery), same shape as a structure's,
+    // so the circuit panel reuses appendWikiImages.
+    c.structureImage = c.structure_image || null;
+    c.structureImageGallery = c.structure_image_gallery || [];
   }
 
   // Projection groups: the legend's per-pathway rows promoted to a sourced data

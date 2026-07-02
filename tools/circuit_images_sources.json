@@ -1,0 +1,44 @@
+{
+  "bg_direct": {
+    "file": "File:Motor_loop.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Motor_loop.png",
+    "title": "Direct pathway",
+    "kind": "infobox",
+    "gallery": []
+  },
+  "bg_indirect": {
+    "file": "File:Motor_loop.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Motor_loop.png",
+    "title": "Indirect pathway",
+    "kind": "infobox",
+    "gallery": []
+  },
+  "commissures": {
+    "file": "File:Gray744.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Gray744.png",
+    "title": "Commissural fiber",
+    "kind": "infobox",
+    "gallery": []
+  },
+  "limbic_memory": {
+    "file": "File:Brain_limbicsystem.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Brain_limbicsystem.svg",
+    "title": "Papez circuit",
+    "kind": "svg",
+    "gallery": []
+  },
+  "nigrostriatal": {
+    "file": "File:Nigrostriatal_pathway.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Nigrostriatal_pathway.svg",
+    "title": "Nigrostriatal pathway",
+    "kind": "svg",
+    "gallery": [
+      {
+        "file": "File:Basal_ganglia_diagram.svg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Basal_ganglia_diagram.svg",
+        "kind": "svg",
+        "lang": "en"
+      }
+    ]
+  }
+}
