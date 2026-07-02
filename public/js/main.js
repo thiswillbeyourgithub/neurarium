@@ -2123,7 +2123,16 @@ function createInfoPanel(data) {
   // and it stays crisp at any size (a Unicode arrowhead's shape varies by font).
   const SVG_NS = "http://www.w3.org/2000/svg";
   const DIR_TIP = { out: "info.dirOut", in: "info.dirIn", both: "info.dirBoth" };
-  const directionArrow = (color, dir) => {
+  // The localized "what this arrow's colour means" line for a pathway: the kind
+  // label (the colour IS the projection kind, meta.projectionColors[kind]) plus the
+  // neurotransmitter, matching the connection panel's type line. Empty for a pathway
+  // with no kind. Shared so the arrow tooltip and that line can't drift.
+  const colourMeaningOf = (proj) => {
+    const kindLabel = (data.meta.kindLabels && data.meta.kindLabels[proj.kind])
+      || proj.kind || "";
+    return [kindLabel, proj.neurotransmitter].filter(Boolean).join(" · ");
+  };
+  const directionArrow = (color, dir, colourMeaning = "") => {
     const svg = document.createElementNS(SVG_NS, "svg");
     svg.setAttribute("class", "conn-arrow");
     svg.setAttribute("viewBox", "0 0 26 16");
@@ -2137,11 +2146,13 @@ function createInfoPanel(data) {
         : "M2,6 L14,6 L14,2 L24,8 L14,14 L14,10 L2,10 Z"); // "out" (default)
     path.setAttribute("fill", color || "#fff");
     svg.appendChild(path);
-    // Tap-to-explain: a tap shows what the arrow's direction means and stops the tap
-    // bubbling to the clickable row it sits over, so on a phone tapping the arrow no
-    // longer navigates into the pathway/region (per the request); hover shows it on
-    // desktop too.
-    return withTip(svg, t(DIR_TIP[dir] || DIR_TIP.out));
+    // Tap-to-explain: a tap shows what the arrow means (its direction AND, when
+    // known, its colour = the pathway kind), and stops the tap bubbling to the
+    // clickable row it sits over, so on a phone tapping the arrow no longer navigates
+    // into the pathway/region (per the request); hover shows it on desktop too.
+    let tip = t(DIR_TIP[dir] || DIR_TIP.out);
+    if (colourMeaning) tip += `\n${t("info.arrowColour", { label: colourMeaning })}`;
+    return withTip(svg, tip);
   };
 
   // One pathway row, shared by every "connections" list (a structure's
@@ -2154,7 +2165,7 @@ function createInfoPanel(data) {
   const pathwayRow = (proj, dir, labelText) => {
     const li = el("li");
     li.title = proj.label || "";
-    li.appendChild(directionArrow(proj.color, dir));
+    li.appendChild(directionArrow(proj.color, dir, colourMeaningOf(proj)));
     li.appendChild(el("span", "conn-label", labelText));
     // Always show the grade pill; an unsourced pathway shows NOSOURCE, never a blank
     // (a node's provenance is never simply absent from the panel).
@@ -2599,7 +2610,8 @@ function createInfoPanel(data) {
             .sort((a, b) => bindingKi(a) - bindingKi(b))[0];
           const li = el("li", "clickable");
           li.title = group.name;
-          li.appendChild(directionArrow(projColors[kind] || "#fff", "out"));
+          li.appendChild(directionArrow(projColors[kind] || "#fff", "out",
+            (data.meta.kindLabels && data.meta.kindLabels[kind]) || kind));
           li.appendChild(el("span", "conn-label", group.name));
           if (rep) li.appendChild(bindingProvenancePill(rep));
           li.addEventListener("click", () => onProjectionGroupPick(group));
