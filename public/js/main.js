@@ -3804,7 +3804,11 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
   const searchInput = document.getElementById("search-input");
+  const searchClear = document.getElementById("search-clear");
   const searchResults = document.getElementById("search-results");
+  // Show the inline clear "×" only when the box holds text. Called from
+  // renderResults (which runs on every value change: input, open, prefilled query).
+  const syncClear = () => { if (searchClear) searchClear.hidden = !searchInput.value; };
   // The normal controls; the search box shows in their place (not as a popup),
   // while the reset/search buttons above stay put so the magnifier can toggle
   // back.
@@ -3958,6 +3962,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // keeps only items carrying that field whose value matches; the trailing free
     // text still matches the label + keywords.
     const { field, value, rest } = parseSearchQuery(searchInput.value);
+    syncClear();
     searchResults.innerHTML = "";
     // A structured filter (class:"..." / nbn:"...") is a deliberate "list the whole
     // class" query, so show more rows than the compact name-search list (the results
@@ -4083,6 +4088,16 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     else closeSearch();
   });
   searchInput.addEventListener("input", renderResults);
+  // The inline "×": wipe the query, re-render (now empty -> the neutral list) and
+  // keep focus so the user can retype immediately; syncClear (in renderResults)
+  // hides the button again.
+  if (searchClear) {
+    searchClear.addEventListener("click", () => {
+      searchInput.value = "";
+      renderResults();
+      searchInput.focus();
+    });
+  }
   searchInput.addEventListener("keydown", (event) => {
     if (event.key === "ArrowDown") {
       highlight(activeIndex + 1);

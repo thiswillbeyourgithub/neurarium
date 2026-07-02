@@ -589,12 +589,15 @@
 
       /* Search shown in place of #controls-main while the magnifier is on. */
       #search { margin-top: 12px; }
-      /* The input + a "?" syntax-help button sharing one row. */
+      /* The input (with an inline clear "×") + a "?" syntax-help button, one row. */
       #search-bar { display: flex; align-items: center; gap: 8px; }
+      /* Wraps just the input so the clear button can sit inside its right edge. */
+      .search-input-wrap { position: relative; flex: 1 1 auto; min-width: 0; display: flex; }
       #search-input {
         flex: 1 1 auto;
         min-width: 0;
-        padding: 8px 10px;
+        /* extra right padding leaves room for the clear × so text never runs under it */
+        padding: 8px 32px 8px 10px;
         font: inherit;
         color: var(--text);
         background: rgba(255, 255, 255, 0.06);
@@ -603,6 +606,29 @@
         outline: none;
       }
       #search-input:focus { border-color: var(--accent); }
+      /* Clear button pinned inside the input's right edge; shown only when non-empty
+         (js/main.js toggles [hidden] from the input value). */
+      #search-clear {
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      #search-clear[hidden] { display: none; }
+      #search-clear:hover { color: var(--text); background: rgba(255, 255, 255, 0.14); }
       #search-help { flex: 0 0 auto; width: 20px; height: 20px; font-size: 12px; }
       /* The toggled search-syntax help block (the "?" button shows/hides it). */
       #search-syntax {
@@ -1756,7 +1782,10 @@
              structures (by name) and connections (by pathway label). -->
         <div id="search" hidden>
           <div id="search-bar">
-            <input type="text" id="search-input" data-i18n-attr="placeholder:search.placeholder" autocomplete="off" />
+            <div class="search-input-wrap">
+              <input type="text" id="search-input" data-i18n-attr="placeholder:search.placeholder" autocomplete="off" />
+              <button type="button" id="search-clear" hidden data-i18n-attr="aria-label:search.clear, title:search.clear">×</button>
+            </div>
             <button type="button" id="search-help" class="help-dot" aria-expanded="false" data-i18n-attr="aria-label:search.syntaxLabel, title:search.syntaxLabel">?</button>
           </div>
           <div id="search-syntax" hidden data-i18n-html="search.syntax"></div>
