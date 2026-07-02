@@ -1413,6 +1413,13 @@ function createPanelTabs() {
   };
 }
 
+// A drug binding's representative Ki (its median), or Infinity when unmeasured. The
+// single "how hard does this drug grip this target" ranking key, shared by the info
+// panel (the drug's "Acts on" order, each system's strongest binding) and the target
+// legend's affinity sort, so every affinity ordering agrees.
+const bindingKi = (b) =>
+  b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
+
 /**
  * Build the detail panel renderer. The panel is a **node view**: each show*()
  * method renders one node (a connection / structure / receptor / target / drug /
@@ -1473,17 +1480,18 @@ function createInfoPanel(data) {
   // atlas and so can be jumped to. tools/check_data.py enforces that every
   // receptor / target location resolves, so an unresolved base should not occur in
   // shipped data; the panel still degrades to plain (non-clickable) text if one does.
-  const baseResolves = (base) =>
-    data.byId.has(base) || data.byId.has(`${base}_R`) || data.byId.has(`${base}_L`);
+  // Resolve a structure *base* id to its modeled record: the base itself (a midline
+  // form), else its _R / _L hemisphere, else null. The one place the hemisphere-suffix
+  // fallback lives, so baseResolves and groupOfBase can't drift.
+  const resolveBase = (base) =>
+    data.byId.get(base) || data.byId.get(`${base}_R`)
+      || data.byId.get(`${base}_L`) || null;
+  const baseResolves = (base) => !!resolveBase(base);
 
   // The anatomical group (lobe / basal_ganglia / ...) a structure *base* belongs to,
-  // read off the resolved structure record, or null if it doesn't resolve. Lets the
-  // "Found in" list group its regions the same way the Structures legend does.
-  const groupOfBase = (base) => {
-    const s = data.byId.get(base) || data.byId.get(`${base}_R`)
-      || data.byId.get(`${base}_L`);
-    return s ? s.group : null;
-  };
+  // or null if it doesn't resolve. Lets the "Found in" list group its regions the
+  // same way the Structures legend does.
+  const groupOfBase = (base) => resolveBase(base)?.group ?? null;
 
   // One "Found in" region row: the name (clickable -> jump when the base resolves)
   // plus, when `meta` is given, its own per-region provenance pill (since "found in
@@ -1759,13 +1767,14 @@ function createInfoPanel(data) {
     return makeProvenancePill(binding.provenance);
   };
 
-  // A binding's representative Ki (its median), or Infinity when unmeasured. Sorts
-  // the drug panel's "Acts on" list strongest-first and picks each transmitter
-  // system's strongest-affinity binding for the drug<->pathway rows (drug panel's
-  // "Projections affected" + the projection-group panel's "Drugs acting on this
-  // system"), so both ends rank + source those rows identically.
-  const bindingKi = (b) =>
-    b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
+  // The strongest-affinity binding a drug has feeding a transmitter system (the
+  // binding whose flowKind == kind, min representative Ki), or undefined. The one
+  // node behind the drug<->system link, so the drug panel's "Projections affected"
+  // row and the projection-group panel's "Drugs acting on this system" row rank +
+  // source it identically. (bindingKi, the shared Ki key, is module-scope above.)
+  const strongestBindingForKind = (bindings, kind) =>
+    bindings.filter((b) => b.flowKind === kind)
+      .sort((a, b) => bindingKi(a) - bindingKi(b))[0];
 
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
@@ -1923,7 +1932,7 @@ function createInfoPanel(data) {
   // A present link carries no provenance pill: the description just above it already
   // shows a "sourced" grade for the same Wikipedia source, so a second pill grading
   // the link only repeated it. A missing reference still renders the label + the
-  // orange NOSOURCE pill, so the gap stays visible like a source.
+  // red NOSOURCE pill, so the gap stays visible like a source.
   const appendWiki = (url) => {
     const ok = typeof url === "string" && /^https?:\/\//i.test(url);
     const wrap = el("div", "info-wiki");
@@ -2124,10 +2133,13 @@ function createInfoPanel(data) {
     // in the familiar order.
     const metaOrder = [...Object.keys(cats),
                        ...[...byCat.keys()].filter((c) => !(c in cats))];
-    const classKi = (cat) =>
-      Math.min(...byCat.get(cat).map((it) => bindingKi(it.binding)));
+    // Precompute each class's min binding Ki once (decorate-then-sort), rather than
+    // recomputing it inside the comparator on every comparison.
+    const classKi = new Map();
+    for (const [cat, its] of byCat)
+      classKi.set(cat, Math.min(...its.map((it) => bindingKi(it.binding))));
     const order = [...byCat.keys()].sort((a, b) => {
-      const ka = classKi(a), kb = classKi(b);
+      const ka = classKi.get(a), kb = classKi.get(b);
       return ka !== kb ? ka - kb : metaOrder.indexOf(a) - metaOrder.indexOf(b);
     });
     for (const cat of order) {
@@ -2223,6 +2235,22 @@ function createInfoPanel(data) {
     body.appendChild(wrap);
   };
 
+  // A node's identity line: its "what is this" group heading carrying the node's own
+  // source grade pill. Shared by the structure / circuit / group panels, which each
+  // state one identity claim (a receptor/target/drug instead pills each fact row). The
+  // grade rides this line, never a "Sources" block below the member lists (which would
+  // read as grading the members). `always` shows a NOSOURCE pill even when ungraded,
+  // for nodes whose badge is required (circuit / group are llm-only today); a structure
+  // omits the pill when its anatomy grade is absent.
+  const appendSourcedHeading = (labelText, provenance, sources, always = false) => {
+    const groupEl = el("div", "info-group", labelText);
+    if (always || provenance) {
+      groupEl.appendChild(document.createTextNode(" "));
+      groupEl.appendChild(makeProvenancePill(provenance || null, sourcesTip(sources)));
+    }
+    body.appendChild(groupEl);
+  };
+
   return {
     show(proj) {
       body.innerHTML = "";
@@ -2252,13 +2280,9 @@ function createInfoPanel(data) {
       const swatch = el("span", "swatch line");
       swatch.style.background = proj.color || "#fff";
       meta.appendChild(swatch);
-      // Localized functional kind (falls back to the raw key) + transmitter.
-      const kindLabel = (data.meta.kindLabels && data.meta.kindLabels[proj.kind])
-        || proj.kind;
-      meta.appendChild(el(
-        "span", null,
-        [kindLabel, proj.neurotransmitter].filter(Boolean).join(" · "),
-      ));
+      // Localized functional kind + transmitter, via the shared colourMeaningOf so
+      // this type line and the arrow's colour-meaning tooltip can't drift.
+      meta.appendChild(el("span", null, colourMeaningOf(proj)));
       meta.appendChild(provPill());
       body.appendChild(meta);
 
@@ -2283,18 +2307,11 @@ function createInfoPanel(data) {
       body.appendChild(el("h2", "info-title", structure.name));
       // The anatomy classification grade (existence / group / position) rides the
       // group line it actually grades, not a broad "Source" row at the bottom (a
-      // source always sits on the specific node it backs).
-      const structGroup = el(
-        "div", "info-group",
-        data.meta.groupLabels[structure.group] || structure.group);
-      if (structure.classification_provenance) {
-        structGroup.appendChild(document.createTextNode(" "));
-        structGroup.appendChild(makeProvenancePill(
-          structure.classification_provenance,
-          structure.sources && structure.sources.length
-            ? sourcesTip(structure.sources) : undefined));
-      }
-      body.appendChild(structGroup);
+      // source always sits on the specific node it backs). Omitted when the anatomy
+      // grade is absent (structures are the only node kind that may be ungraded).
+      appendSourcedHeading(
+        data.meta.groupLabels[structure.group] || structure.group,
+        structure.classification_provenance, structure.sources);
 
       // Wikipedia illustration (the lead rotating-brain GIF, else an SVG diagram or
       // an infobox image) + its lazy "show more" gallery, via the shared helper (see
@@ -2578,7 +2595,7 @@ function createInfoPanel(data) {
         // The NbN line is quote-sourced from Stahl; show its provenance pill
         // (with the verbatim quote in the tooltip) beside the clickable value. If a
         // drug ever carries an NbN value with no source, still show a pill (its
-        // grade, else the orange NOSOURCE pill) so the node is never left unbadged.
+        // grade, else the red NOSOURCE pill) so the node is never left unbadged.
         const nbnPill = drug.nbnSources && drug.nbnSources.length
           ? makeProvenancePill(drug.nbnProvenance, sourcesTip(drug.nbnSources))
           : makeProvenancePill(drug.nbnProvenance || null);
@@ -2642,9 +2659,7 @@ function createInfoPanel(data) {
           if (!group) continue;
           // Representative = the strongest-affinity binding feeding this system, so
           // the row's source is the most concrete claim behind the inference.
-          const rep = drug.bindings
-            .filter((b) => b.flowKind === kind)
-            .sort((a, b) => bindingKi(a) - bindingKi(b))[0];
+          const rep = strongestBindingForKind(drug.bindings, kind);
           const li = el("li", "clickable");
           li.title = group.name;
           li.appendChild(directionArrow(projColors[kind] || "#fff", "out",
@@ -2671,16 +2686,11 @@ function createInfoPanel(data) {
     showCircuit(circuit) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", circuit.name));
-      // The circuit's source grade sits on its identity line, not a "Sources" block
-      // below the member lists (which would read as grading the members, not the
-      // circuit). Tooltip lists the citation(s).
-      const circuitGroup = el("div", "info-group", t("circuit.heading"));
-      // Always show the grade pill; an unsourced circuit shows NOSOURCE (its claim
-      // is llm-only today), never a blank.
-      circuitGroup.appendChild(document.createTextNode(" "));
-      circuitGroup.appendChild(makeProvenancePill(
-        circuit.provenance, sourcesTip(circuit.sources)));
-      body.appendChild(circuitGroup);
+      // The circuit's source grade sits on its identity line (always shown, NOSOURCE
+      // when llm-only), not a "Sources" block below the member lists (which would read
+      // as grading the members, not the circuit).
+      appendSourcedHeading(
+        t("circuit.heading"), circuit.provenance, circuit.sources, true);
 
       // Wikipedia illustration (hero + lazy gallery), the same hot-linked treatment a
       // brain structure gets (see appendWikiImages); no-op when unillustrated.
@@ -2743,18 +2753,12 @@ function createInfoPanel(data) {
     showProjectionGroup(group) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", group.name));
-      // The group's source grade rides its identity line, not a "Sources" block at
-      // the bottom (which after the member lists would read as grading the members).
-      // Tooltip lists the citation(s); the description keeps its own grade below.
-      const groupGroup = el(
-        "div", "info-group",
-        group.mode === "sign" ? t("group.signHeading") : t("group.kindHeading"));
-      // Always show the grade pill; an unsourced group shows NOSOURCE (its grouping
-      // claim is llm-only today), never a blank.
-      groupGroup.appendChild(document.createTextNode(" "));
-      groupGroup.appendChild(makeProvenancePill(
-        group.provenance, sourcesTip(group.sources)));
-      body.appendChild(groupGroup);
+      // The group's source grade rides its identity line (always shown, NOSOURCE when
+      // llm-only), not a "Sources" block at the bottom. The description keeps its own
+      // grade below.
+      appendSourcedHeading(
+        group.mode === "sign" ? t("group.signHeading") : t("group.kindHeading"),
+        group.provenance, group.sources, true);
 
       // Description (LLM-authored) + the Wikipedia reference below it, then the live
       // lead refresh (upgrades the paragraph to the current WP lead when reachable),
@@ -2795,10 +2799,8 @@ function createInfoPanel(data) {
             if (cat) li.appendChild(el("span", "legend-tag", cat));
             // Symmetric sourcing with the drug panel's "Projections affected" row:
             // the drug<->system link is one node, so both ends carry the same source,
-            // the strongest-affinity binding feeding this system (see bindingKi).
-            const rep = d.bindings
-              .filter((b) => b.flowKind === group.key)
-              .sort((a, b) => bindingKi(a) - bindingKi(b))[0];
+            // the strongest-affinity binding feeding this system.
+            const rep = strongestBindingForKind(d.bindings, group.key);
             if (rep) li.appendChild(bindingProvenancePill(rep));
             li.addEventListener("click", () => onDrugPick(d));
             ul.appendChild(li);
@@ -2896,8 +2898,7 @@ function buildTargetLegend(data, onPick) {
   for (const tgt of data.targets || []) {
     let best = Infinity;
     for (const { binding } of drugsByTarget.get(tgt.id) || []) {
-      const k = binding.ki && typeof binding.ki.median === "number"
-        ? binding.ki.median : Infinity;
+      const k = bindingKi(binding);
       if (k < best) best = k;
     }
     kiByTarget.set(tgt.id, best);
