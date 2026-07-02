@@ -436,39 +436,21 @@ def check_todos(report, meta, structures, projections, circuits,
         for key in missing_wiki:
             report.warn(f"target {key}: no wikipedia url (shows a TODO pill)")
 
-    # --- source-url TODOs: provenance-aware (the grade, not the url, is the signal) ---
-    # A url-bearing source carries a provenance grade, and the viewer surfaces that
-    # grade (the grey/yellow/green pill), never the url itself. So a "TODO" url on an
-    # `llm` source (every Stahl / projection citation today) is just the expected "no
-    # free link yet" state, already conveyed by the "?" pill, and is NOT a warning (it
-    # would be standing noise on hundreds of citations). It is only an inconsistency
-    # when a source *claims* a higher grade (sourced / verified) yet offers no link to
-    # back it. `source_todos` (collected by the walk above) is what keeps these out of
-    # the stray-TODO bucket; the real reporting iterates the source objects so it can
-    # read each one's sibling provenance.
+    # --- corpus-url TODOs (expected, not flagged) ---
+    # Per-claim sources are quote-level ``{corpus, page, quote}`` and carry no url of
+    # their own (the viewer resolves the link from ``meta.source_corpora``). A book
+    # corpus may legitimately have no free url (Stahl's ``url`` is "TODO"); the
+    # provenance pill, not a link, is what conveys the grade, so this is expected and
+    # merely reported, never warned.
     expected_no_link = 0
-    inconsistent = []
-    for base, record in scan:
-        for i, source in enumerate(record.get("sources", []) or []):
-            if isinstance(source, dict) and source.get("url") == "TODO":
-                if source.get("provenance", "llm") in ("sourced", "verified"):
-                    inconsistent.append(f"{base}.sources[{i}] ({source.get('provenance')})")
-                else:
-                    expected_no_link += 1
     for cid, corpus in (meta.get("source_corpora", {}) or {}).items():
-        # A book corpus (Stahl) may legitimately have no free url; treat it like an
-        # llm citation (expected, not flagged).
         if isinstance(corpus, dict) and corpus.get("url") == "TODO":
             expected_no_link += 1
-
-    for path in inconsistent:
-        report.warn(f"source at {path} is graded sourced/verified but its url is still "
-                    f"\"TODO\" (no link to back that grade)")
     if expected_no_link:
-        report.ok(f"{expected_no_link} source url(s) have no link yet, all on llm-grade "
-                  f"citations (expected: the provenance pill conveys this, not the url)")
-    elif not inconsistent:
-        report.ok("every source url is a real link (no TODO urls)")
+        report.ok(f"{expected_no_link} source corpus/corpora have no free url yet "
+                  f"(expected: the provenance pill conveys the grade, not the url)")
+    else:
+        report.ok("every source corpus has a real url")
 
 
 # --------------------------------------------------------------------------- #
@@ -685,11 +667,10 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
     binding's ``sources``, a drug's ``nbn_sources``, and a projection's quote-level
     ``sources``) is actually present in the page it cites.
 
-    A quote-level source is ``{corpus, page, quote, provenance}``. A projection's
-    ``sources`` list mixes these with bibliographic citations (``{citation, url,
-    provenance}``, no ``corpus``); only the quote-level ones are gated here (the
-    bibliographic ones carry no page to check and are grade-checked in
-    :func:`check_provenance`), so a source with no ``corpus`` field is skipped. This:
+    A source is ``{corpus, page, quote, provenance}`` (the one shape used everywhere:
+    drug bindings, NbN, projection/circuit/group quotes, region anatomy). A source
+    with no ``corpus`` field is defensively skipped (there are none today; fabricated
+    bibliographic ``{citation, url}`` citations were removed). This:
 
     * checks ``corpus`` resolves to ``meta.source_corpora`` (else the citation is
       unrenderable) and that a ``"verified"`` grade carries a page + quote;

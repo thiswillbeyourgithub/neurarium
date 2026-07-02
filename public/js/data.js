@@ -388,10 +388,6 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // Neuroscience-based Nomenclature (a newer drug Stahl gives no NbN); the panel
     // flags it so the value isn't misread as an official NbN code.
     d.nbnNonstandard = !!d.nbn_nonstandard;
-    // Grade of the drug-level (bibliographic) source, the Stahl citation. A binding
-    // with no quote-level source of its own is still backed by this at the drug
-    // level, so the panel falls back to this grade for its pill (never blank).
-    d.sourceProvenance = strongestGrade(d.sources);
     d.categoryLabels = (d.categories || []).map((c) => drugCategoryLabels[c] || c);
     d.category = d.categoryLabels[0] || "";
     // The drug's class classification ("this drug is an SSRI/...") is its own graded
@@ -448,9 +444,14 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // quote is what tools/check_data.py confirms is in the cited page. The
         // full citation is resolved client-side from meta.sourceCorpora by
         // `corpus`, not denormalized here. `provenance` is the strongest grade
-        // among them, which colours the binding's source pill (null = no source).
+        // among the quote sources AND the measured Ki (a verified Ki confirms the
+        // drug binds the target, so it backs the binding); null = no source at all,
+        // which renders a NOSOURCE pill. Mirrors _binding_grade in generate_data.py.
         sources: mapSources(b.sources),
-        provenance: strongestGrade(b.sources),
+        provenance: strongestGrade([
+          ...(b.sources || []),
+          ...(b.ki && b.ki.source ? [b.ki.source] : []),
+        ]),
         // The measured PDSP Ki (own verified badge), null when absent.
         ki: resolveKi(b.ki),
       };

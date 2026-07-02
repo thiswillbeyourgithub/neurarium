@@ -643,12 +643,6 @@ def _location_sources(
 # ``provenance`` grades the citation (see PROVENANCE_LEVELS): the drug bindings
 # were extracted by an LLM given the Stahl dump but were not quote-verified, so
 # they would warrant "sourced"; kept at the conservative "llm" default for now.
-STAHL_SOURCE: dict[str, str] = {
-    "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential "
-                "Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
-    "url": "TODO",
-    "provenance": DEFAULT_PROVENANCE,
-}
 
 
 # Source corpora that the *per-claim* drug sources cite, keyed by a short id. A
@@ -670,8 +664,9 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         # own (which Stahl, which edition) without needing the full bibliographic
         # citation below.
         "ref": "Prescriber's Guide: Stahl's Essential Psychopharmacology, 8th ed.",
-        "citation": STAHL_SOURCE["citation"],
-        "url": STAHL_SOURCE["url"],
+        "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential "
+                    "Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
+        "url": "TODO",
         "pages_dir": "sources/books/stahl/pages",
     },
     "kandel": {
@@ -2096,125 +2091,6 @@ WIKIPEDIA: dict[str, str] = {
 # is left as the literal "TODO" rather than a guessed DOI: fill in a verified
 # link per entry. (The viewer renders a source with a real http(s) url as a
 # clickable link and a "TODO" url as plain text.)
-SOURCES: dict[str, dict[str, str]] = {
-    "kemp_powell1971": {
-        "citation": "Kemp JM, Powell TPS (1971). The cortico-striate projection "
-                    "in the monkey. Brain 94(3):525-546.",
-        "url": "TODO",
-    },
-    "alexander1986": {
-        "citation": "Alexander GE, DeLong MR, Strick PL (1986). Parallel "
-                    "organization of functionally segregated circuits linking "
-                    "basal ganglia and cortex. Annu Rev Neurosci 9:357-381.",
-        "url": "TODO",
-    },
-    "albin1989": {
-        "citation": "Albin RL, Young AB, Penney JB (1989). The functional anatomy "
-                    "of basal ganglia disorders. Trends Neurosci 12(10):366-375.",
-        "url": "TODO",
-    },
-    "delong1990": {
-        "citation": "DeLong MR (1990). Primate models of movement disorders of "
-                    "basal ganglia origin. Trends Neurosci 13(7):281-285.",
-        "url": "TODO",
-    },
-    "parent1995": {
-        "citation": "Parent A, Hazrati LN (1995). Functional anatomy of the basal "
-                    "ganglia. Brain Res Rev 20(1):91-154.",
-        "url": "TODO",
-    },
-    "smith1998": {
-        "citation": "Smith Y, Bevan MD, Shink E, Bolam JP (1998). Microcircuitry "
-                    "of the direct and indirect pathways of the basal ganglia. "
-                    "Neuroscience 86(2):353-387.",
-        "url": "TODO",
-    },
-    "nambu2002": {
-        "citation": "Nambu A, Tokuno H, Takada M (2002). Functional significance "
-                    "of the cortico-subthalamo-pallidal 'hyperdirect' pathway. "
-                    "Neurosci Res 43(2):111-117.",
-        "url": "TODO",
-    },
-    "middleton2000": {
-        "citation": "Middleton FA, Strick PL (2000). Basal ganglia and cerebellar "
-                    "loops: motor and cognitive circuits. Brain Res Rev "
-                    "31(2-3):236-250.",
-        "url": "TODO",
-    },
-    "aboitiz1992": {
-        "citation": "Aboitiz F, Scheibel AB, Fisher RS, Zaidel E (1992). Fiber "
-                    "composition of the human corpus callosum. Brain Res "
-                    "598(1-2):143-153.",
-        "url": "TODO",
-    },
-    "schmahmann2006": {
-        "citation": "Schmahmann JD, Pandya DN (2006). Fiber Pathways of the "
-                    "Brain. Oxford University Press.",
-        "url": "TODO",
-    },
-    "papez1937": {
-        "citation": "Papez JW (1937). A proposed mechanism of emotion. Arch "
-                    "Neurol Psychiatry 38(4):725-743.",
-        "url": "TODO",
-    },
-    "price1990": {
-        "citation": "Price JL (1990). Olfactory system. In: Paxinos G (ed), The "
-                    "Human Nervous System. Academic Press, pp. 979-1001.",
-        "url": "TODO",
-    },
-    "dutar1995": {
-        "citation": "Dutar P, Bassant MH, Senut MC, Lamour Y (1995). The "
-                    "septohippocampal pathway: structure and function. Physiol "
-                    "Rev 75(2):393-427.",
-        "url": "TODO",
-    },
-    "swanson_sawchenko1983": {
-        "citation": "Swanson LW, Sawchenko PE (1983). Hypothalamic integration: "
-                    "organization of the paraventricular and supraoptic nuclei. "
-                    "Annu Rev Neurosci 6:269-324.",
-        "url": "TODO",
-    },
-    "haber2010": {
-        "citation": "Haber SN, Knutson B (2010). The reward circuit: linking "
-                    "primate anatomy and human imaging. Neuropsychopharmacology "
-                    "35(1):4-26.",
-        "url": "TODO",
-    },
-    "crick_koch2005": {
-        "citation": "Crick FC, Koch C (2005). What is the function of the "
-                    "claustrum? Philos Trans R Soc Lond B Biol Sci "
-                    "360(1458):1271-1279.",
-        "url": "TODO",
-    },
-    "menon_uddin2010": {
-        "citation": "Menon V, Uddin LQ (2010). Saliency, switching, attention "
-                    "and control: a network model of insula function. Brain "
-                    "Struct Funct 214(5-6):655-667.",
-        "url": "TODO",
-    },
-    "azmitia_segal1978": {
-        "citation": "Azmitia EC, Segal M (1978). An autoradiographic analysis of "
-                    "the differential ascending projections of the dorsal and "
-                    "median raphe nuclei in the rat. J Comp Neurol 179(3):641-668.",
-        "url": "TODO",
-    },
-    "foote1983": {
-        "citation": "Foote SL, Bloom FE, Aston-Jones G (1983). Nucleus locus "
-                    "coeruleus: new evidence of anatomical and physiological "
-                    "specificity. Physiol Rev 63(3):844-914.",
-        "url": "TODO",
-    },
-    "bjorklund_dunnett2007": {
-        "citation": "Bjorklund A, Dunnett SB (2007). Dopamine neuron systems in "
-                    "the brain: an update. Trends Neurosci 30(5):194-202.",
-        "url": "TODO",
-    },
-    "kandel_principles": {
-        "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA (eds) (2021). "
-                    "Principles of Neural Science, 6th ed. McGraw-Hill.",
-        "url": "TODO",
-    },
-}
 
 # Directed neuron projections drawn as arrows. Each entry is a connection with
 # metadata so the viewer can show what the pathway is and what supports it:
@@ -2725,209 +2601,175 @@ PROJECTIONS: list[dict[str, Any]] = [
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corticostriatal (motor)",
          description="Sensorimotor frontal cortex drives the putamen, the motor "
-                     "input nucleus of the basal ganglia.",
-         sources=["alexander1986", "kemp_powell1971"]),
+                     "input nucleus of the basal ganglia."),
     dict(**{"from": "frontal_R", "to": "caudate_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corticostriatal (associative)",
-         description="Prefrontal cortex drives the caudate (associative striatum).",
-         sources=["alexander1986", "kemp_powell1971"]),
+         description="Prefrontal cortex drives the caudate (associative striatum)."),
     dict(**{"from": "parietal_R", "to": "caudate_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corticostriatal (parietal)",
-         description="Posterior parietal association cortex projects to the caudate.",
-         sources=["kemp_powell1971"]),
+         description="Posterior parietal association cortex projects to the caudate."),
     dict(**{"from": "temporal_R", "to": "caudate_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corticostriatal (temporal)",
-         description="Temporal association cortex projects to the striatum.",
-         sources=["kemp_powell1971"]),
+         description="Temporal association cortex projects to the striatum."),
     # --- Hyperdirect (glutamate): cortex excites the STN directly ---
     dict(**{"from": "frontal_R", "to": "subthalamic_nucleus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Hyperdirect (corticosubthalamic)",
          description="Cortex excites the subthalamic nucleus directly, the fast "
-                     "'hyperdirect' brake on movement.",
-         sources=["nambu2002"]),
+                     "'hyperdirect' brake on movement."),
     # --- Direct pathway (GABA): striatum inhibits the output nuclei ---
     dict(**{"from": "putamen_R", "to": "globus_pallidus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Striatopallidal (direct)",
          description="Direct-pathway striatal neurons inhibit the internal "
-                     "pallidum, releasing (disinhibiting) the thalamus.",
-         sources=["albin1989", "smith1998"]),
+                     "pallidum, releasing (disinhibiting) the thalamus."),
     dict(**{"from": "caudate_R", "to": "globus_pallidus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Striatopallidal (direct)",
-         description="Caudate direct-pathway output to the internal pallidum.",
-         sources=["albin1989", "smith1998"]),
+         description="Caudate direct-pathway output to the internal pallidum."),
     dict(**{"from": "putamen_R", "to": "substantia_nigra_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Striatonigral (direct)",
          description="Direct-pathway striatal output to the substantia nigra "
-                     "pars reticulata.",
-         sources=["albin1989", "parent1995"]),
+                     "pars reticulata."),
     dict(**{"from": "caudate_R", "to": "substantia_nigra_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Striatonigral (direct)",
-         description="Caudate direct-pathway output to the substantia nigra.",
-         sources=["albin1989", "parent1995"]),
+         description="Caudate direct-pathway output to the substantia nigra."),
     # --- Indirect pathway (GABA out, glutamate back via STN) ---
     dict(**{"from": "globus_pallidus_R", "to": "subthalamic_nucleus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Pallidosubthalamic (indirect)",
-         description="External pallidum inhibits the STN in the indirect pathway.",
-         sources=["albin1989", "parent1995"]),
+         description="External pallidum inhibits the STN in the indirect pathway."),
     dict(**{"from": "subthalamic_nucleus_R", "to": "globus_pallidus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Subthalamopallidal",
          description="The STN excites the pallidum, amplifying basal-ganglia "
-                     "output (indirect/hyperdirect pathways).",
-         sources=["albin1989", "parent1995"]),
+                     "output (indirect/hyperdirect pathways)."),
     # --- Dopaminergic modulation (nigrostriatal) ---
     dict(**{"from": "substantia_nigra_R", "to": "putamen_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Nigrostriatal",
          description="Substantia nigra pars compacta dopamine sets the balance "
-                     "between the direct and indirect striatal pathways.",
-         sources=["delong1990", "parent1995"]),
+                     "between the direct and indirect striatal pathways."),
     dict(**{"from": "substantia_nigra_R", "to": "caudate_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Nigrostriatal",
-         description="Dopaminergic modulation of the caudate.",
-         sources=["delong1990", "parent1995"]),
+         description="Dopaminergic modulation of the caudate."),
     # --- Basal-ganglia output to the thalamus (GABA) ---
     dict(**{"from": "globus_pallidus_R", "to": "thalamus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Pallidothalamic",
          description="The internal pallidum tonically inhibits the motor "
-                     "thalamus, the output gate of the loop.",
-         sources=["alexander1986", "parent1995"]),
+                     "thalamus, the output gate of the loop."),
     dict(**{"from": "substantia_nigra_R", "to": "thalamus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Nigrothalamic",
          description="Substantia nigra pars reticulata inhibitory output to the "
-                     "thalamus.",
-         sources=["parent1995"]),
+                     "thalamus."),
     # --- Thalamocortical closure + sensory corticothalamic (glutamate) ---
     dict(**{"from": "thalamus_R", "to": "frontal_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Thalamocortical",
          description="Motor thalamus excites frontal cortex, closing the "
-                     "cortico-basal-ganglia-thalamo-cortical loop.",
-         sources=["alexander1986"]),
+                     "cortico-basal-ganglia-thalamo-cortical loop."),
     dict(**{"from": "occipital_R", "to": "thalamus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corticothalamic (visual)",
          description="Occipital (visual) cortex reciprocally connects with the "
-                     "thalamus (pulvinar / lateral geniculate).",
-         sources=["schmahmann2006"]),
+                     "thalamus (pulvinar / lateral geniculate)."),
     # --- Cortico-ponto-cerebellar and cerebellar output ---
     dict(**{"from": "frontal_R", "to": "pons"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corticopontine",
          description="Cortex projects to the pontine nuclei (pons), the "
-                     "first leg of the cortico-ponto-cerebellar route.",
-         sources=["middleton2000", "schmahmann2006"]),
+                     "first leg of the cortico-ponto-cerebellar route."),
     dict(**{"from": "pons", "to": "cerebellum"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Pontocerebellar (mossy fibers)",
-         description="Pontine nuclei send mossy fibers to the cerebellar cortex.",
-         sources=["middleton2000"]),
+         description="Pontine nuclei send mossy fibers to the cerebellar cortex."),
     dict(**{"from": "cerebellum", "to": "thalamus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Cerebellothalamic (dentatothalamic)",
          description="Deep cerebellar nuclei drive the motor thalamus, feeding "
-                     "the cerebellar loop back to cortex.",
-         sources=["middleton2000", "schmahmann2006"]),
+                     "the cerebellar loop back to cortex."),
     # --- Limbic (Papez) circuit ---
     dict(**{"from": "temporal_R", "to": "hippocampus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Perforant path",
          description="Entorhinal (medial temporal) cortex drives the hippocampus "
-                     "via the perforant path.",
-         sources=["schmahmann2006"]),
+                     "via the perforant path."),
     dict(**{"from": "hippocampus_R", "to": "fornix_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Fornix (hippocampal output)",
          description="The major hippocampal output gathers into the fornix, the "
-                     "great arching tract of the Papez circuit.",
-         sources=["papez1937", "schmahmann2006"]),
+                     "great arching tract of the Papez circuit."),
     dict(**{"from": "fornix_R", "to": "mammillary_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Postcommissural fornix",
          description="The fornix carries hippocampal output forward to the "
-                     "mammillary bodies (Papez circuit).",
-         sources=["papez1937", "schmahmann2006"]),
+                     "mammillary bodies (Papez circuit)."),
     dict(**{"from": "mammillary_R", "to": "thalamus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Mammillothalamic tract",
          description="Mammillary bodies project to the anterior thalamic nuclei, "
-                     "continuing the Papez circuit.",
-         sources=["papez1937"]),
+                     "continuing the Papez circuit."),
     dict(**{"from": "thalamus_R", "to": "cingulate_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Anterior thalamocingulate",
          description="The anterior thalamic nuclei project to the cingulate "
-                     "gyrus, the next leg of the Papez circuit.",
-         sources=["papez1937"]),
+                     "gyrus, the next leg of the Papez circuit."),
     dict(**{"from": "cingulate_R", "to": "hippocampus_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Cingulum (to hippocampus)",
          description="The cingulate gyrus projects back to the hippocampus via "
-                     "the cingulum, closing the Papez loop.",
-         sources=["papez1937", "schmahmann2006"]),
+                     "the cingulum, closing the Papez loop."),
     # --- Olfactory, amygdalar and septal limbic links ---
     dict(**{"from": "olfactory_bulb_R", "to": "amygdala_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Olfactory projection (to amygdala)",
          description="Mitral cells of the olfactory bulb project to the "
-                     "corticomedial amygdala.",
-         sources=["price1990"]),
+                     "corticomedial amygdala."),
     dict(**{"from": "olfactory_bulb_R", "to": "insula_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Olfactory projection (to olfactory cortex)",
          description="Bulbar output reaches the piriform / insular olfactory "
-                     "cortex.",
-         sources=["price1990"]),
+                     "cortex."),
     dict(**{"from": "amygdala_R", "to": "hypothalamus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Stria terminalis",
          description="The amygdala projects to the hypothalamus via the stria "
-                     "terminalis, driving autonomic / endocrine responses.",
-         sources=["schmahmann2006"]),
+                     "terminalis, driving autonomic / endocrine responses."),
     dict(**{"from": "hippocampus_R", "to": "septal_nuclei_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Hippocamposeptal projection",
          description="Hippocampal fibers run in the precommissural fornix to the "
-                     "septal nuclei.",
-         sources=["dutar1995"]),
+                     "septal nuclei."),
     dict(**{"from": "septal_nuclei_R", "to": "hippocampus_R"},
          kind="cholinergic", neurotransmitter="Acetylcholine",
          label="Septohippocampal pathway",
          description="Medial septal cholinergic neurons project to the "
-                     "hippocampus, pacing the hippocampal theta rhythm.",
-         sources=["dutar1995"]),
+                     "hippocampus, pacing the hippocampal theta rhythm."),
     # --- Ventral striatum (reward) and the neuroendocrine outflow ---
     dict(**{"from": "substantia_nigra_R", "to": "accumbens_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Mesolimbic dopamine pathway",
          description="Midbrain dopaminergic neurons (VTA / substantia nigra) "
-                     "project to the nucleus accumbens, the reward hub.",
-         sources=["haber2010"]),
+                     "project to the nucleus accumbens, the reward hub."),
     dict(**{"from": "accumbens_R", "to": "globus_pallidus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Accumbens to ventral pallidum",
          description="Nucleus accumbens medium spiny neurons project to the "
-                     "(ventral) pallidum, the ventral-striatal output.",
-         sources=["haber2010"]),
+                     "(ventral) pallidum, the ventral-striatal output."),
     dict(**{"from": "hypothalamus_R", "to": "pituitary"},
          kind="neuroendocrine", neurotransmitter="Releasing hormones",
          label="Hypothalamo-hypophyseal axis",
          description="Hypothalamic neurons drive the pituitary via the median "
                      "eminence / portal system and the posterior hypophyseal "
-                     "tract.",
-         sources=["swanson_sawchenko1983"]),
+                     "tract."),
     # --- Ascending monoamine systems: the diffuse projections from the brainstem
     #     source nuclei (raphe = serotonin, locus coeruleus = noradrenaline, VTA =
     #     dopamine). These anchor the per-drug "by-mechanism flow" overlay: focusing
@@ -2938,94 +2780,78 @@ PROJECTIONS: list[dict[str, Any]] = [
          kind="serotonergic", neurotransmitter="Serotonin",
          label="Ascending serotonergic (prefrontal)",
          description="Dorsal raphe serotonin neurons project diffusely to the "
-                     "prefrontal cortex, shaping mood and cognition.",
-         sources=["azmitia_segal1978"]),
+                     "prefrontal cortex, shaping mood and cognition."),
     dict(**{"from": "raphe", "to": "hippocampus_R"},
          kind="serotonergic", neurotransmitter="Serotonin",
          label="Ascending serotonergic (hippocampal)",
-         description="Median raphe serotonin projects to the hippocampus.",
-         sources=["azmitia_segal1978"]),
+         description="Median raphe serotonin projects to the hippocampus."),
     dict(**{"from": "raphe", "to": "amygdala_R"},
          kind="serotonergic", neurotransmitter="Serotonin",
          label="Ascending serotonergic (amygdala)",
          description="Raphe serotonin modulates the amygdala, tuning emotional "
-                     "reactivity.",
-         sources=["azmitia_segal1978"]),
+                     "reactivity."),
     dict(**{"from": "raphe", "to": "hypothalamus_R"},
          kind="serotonergic", neurotransmitter="Serotonin",
          label="Ascending serotonergic (hypothalamic)",
          description="Raphe serotonin projects to the hypothalamus, influencing "
-                     "sleep, appetite and neuroendocrine rhythms.",
-         sources=["azmitia_segal1978"]),
+                     "sleep, appetite and neuroendocrine rhythms."),
     dict(**{"from": "locus_coeruleus_R", "to": "frontal_R"},
          kind="noradrenergic", neurotransmitter="Noradrenaline",
          label="Ascending noradrenergic (prefrontal)",
          description="Locus coeruleus noradrenaline projects diffusely to the "
-                     "cortex, driving arousal and attention.",
-         sources=["foote1983"]),
+                     "cortex, driving arousal and attention."),
     dict(**{"from": "locus_coeruleus_R", "to": "hippocampus_R"},
          kind="noradrenergic", neurotransmitter="Noradrenaline",
          label="Ascending noradrenergic (hippocampal)",
-         description="Locus coeruleus noradrenaline projects to the hippocampus.",
-         sources=["foote1983"]),
+         description="Locus coeruleus noradrenaline projects to the hippocampus."),
     dict(**{"from": "locus_coeruleus_R", "to": "amygdala_R"},
          kind="noradrenergic", neurotransmitter="Noradrenaline",
          label="Ascending noradrenergic (amygdala)",
          description="Locus coeruleus noradrenaline sharpens amygdala-dependent "
-                     "emotional memory.",
-         sources=["foote1983"]),
+                     "emotional memory."),
     dict(**{"from": "locus_coeruleus_R", "to": "thalamus_R"},
          kind="noradrenergic", neurotransmitter="Noradrenaline",
          label="Ascending noradrenergic (thalamic)",
-         description="Locus coeruleus noradrenaline projects to the thalamus.",
-         sources=["foote1983"]),
+         description="Locus coeruleus noradrenaline projects to the thalamus."),
     dict(**{"from": "vta_R", "to": "accumbens_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Mesolimbic (VTA)",
          description="VTA dopamine projects to the nucleus accumbens, the core "
-                     "of the reward pathway.",
-         sources=["bjorklund_dunnett2007", "haber2010"]),
+                     "of the reward pathway."),
     dict(**{"from": "vta_R", "to": "frontal_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Mesocortical",
          description="VTA dopamine projects to the prefrontal cortex, supporting "
-                     "motivation and executive control.",
-         sources=["bjorklund_dunnett2007"]),
+                     "motivation and executive control."),
     dict(**{"from": "vta_R", "to": "amygdala_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Mesolimbic (amygdala)",
-         description="VTA dopamine innervates the amygdala.",
-         sources=["bjorklund_dunnett2007"]),
+         description="VTA dopamine innervates the amygdala."),
     dict(**{"from": "vta_R", "to": "hippocampus_R"},
          kind="dopaminergic", neurotransmitter="Dopamine",
          label="Mesolimbic (hippocampal)",
          description="VTA dopamine projects to the hippocampus, gating "
-                     "reward-related memory.",
-         sources=["bjorklund_dunnett2007"]),
+                     "reward-related memory."),
     # --- Interhemispheric commissures (bidirectional, defined once across the
     #     midline so symmetric=False keeps them from mirroring into duplicates) ---
     dict(**{"from": "frontal_L", "to": "frontal_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corpus callosum (frontal)", bidirectional=True, symmetric=False,
-         description="Homotopic callosal fibers linking the two frontal lobes.",
-         sources=["aboitiz1992", "schmahmann2006"]),
+         description="Homotopic callosal fibers linking the two frontal lobes."),
     dict(**{"from": "parietal_L", "to": "parietal_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corpus callosum (parietal)", bidirectional=True, symmetric=False,
-         description="Homotopic callosal fibers linking the two parietal lobes.",
-         sources=["aboitiz1992", "schmahmann2006"]),
+         description="Homotopic callosal fibers linking the two parietal lobes."),
     dict(**{"from": "occipital_L", "to": "occipital_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Corpus callosum (splenium / occipital)", bidirectional=True,
          symmetric=False,
-         description="Splenial callosal fibers linking the two occipital lobes.",
-         sources=["aboitiz1992", "schmahmann2006"]),
+         description="Splenial callosal fibers linking the two occipital lobes."),
     dict(**{"from": "temporal_L", "to": "temporal_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Anterior commissure", bidirectional=True, symmetric=False,
          description="Older commissure linking the temporal lobes (and olfactory "
-                     "structures).",
-         sources=["schmahmann2006"]),
+                     "structures)."),
     # --- Plausible / speculative pathways (tentative=True) -------------------
     # Anatomically reasonable but less certain or more diffuse than the pathways
     # above. The viewer lists these in a separate, off-by-default legend section
@@ -3035,38 +2861,32 @@ PROJECTIONS: list[dict[str, Any]] = [
          kind="excitatory", neurotransmitter="Glutamate", tentative=True,
          label="Claustro-frontal projection", bidirectional=True,
          description="Reciprocal claustro-cortical link with prefrontal cortex "
-                     "(implicated in salience / attention).",
-         sources=["crick_koch2005"]),
+                     "(implicated in salience / attention)."),
     dict(**{"from": "claustrum_R", "to": "insula_R"},
          kind="excitatory", neurotransmitter="Glutamate", tentative=True,
          label="Claustro-insular projection", bidirectional=True,
          description="The claustrum tightly interconnects with the adjacent "
-                     "insular cortex.",
-         sources=["crick_koch2005"]),
+                     "insular cortex."),
     dict(**{"from": "insula_R", "to": "cingulate_R"},
          kind="excitatory", neurotransmitter="Glutamate", tentative=True,
          label="Salience network link", bidirectional=True,
          description="The anterior insula and the cingulate co-activate as the "
-                     "salience network.",
-         sources=["menon_uddin2010"]),
+                     "salience network."),
     dict(**{"from": "amygdala_R", "to": "accumbens_R"},
          kind="excitatory", neurotransmitter="Glutamate", tentative=True,
          label="Basolateral amygdala to accumbens",
          description="Basolateral amygdala glutamatergic input to the ventral "
-                     "striatum (motivational salience).",
-         sources=["haber2010"]),
+                     "striatum (motivational salience)."),
     dict(**{"from": "mammillary_R", "to": "hypothalamus_R"},
          kind="excitatory", neurotransmitter="Glutamate", tentative=True,
          label="Mammillary-hypothalamic link",
          description="The mammillary bodies sit within and connect to the "
-                     "posterior hypothalamus.",
-         sources=["schmahmann2006"]),
+                     "posterior hypothalamus."),
     dict(**{"from": "septal_nuclei_R", "to": "hypothalamus_R"},
          kind="inhibitory", neurotransmitter="GABA", tentative=True,
          label="Septohypothalamic projection",
          description="The septal nuclei project to the hypothalamus, a limbic-"
-                     "autonomic relay.",
-         sources=["swanson_sawchenko1983"]),
+                     "autonomic relay."),
 ]
 
 # Named circuits: curated bundles of structures that, together, form a classic
@@ -3093,7 +2913,6 @@ CIRCUITS: list[dict[str, Any]] = [
                         "mouvement : le cortex active le striatum, qui inhibe la "
                         "sortie GPi/SNr, libérant le thalamus pour activer le "
                         "cortex.",
-         sources=["alexander1986", "smith1998", "delong1990"],
          # Cortex -> striatum -> GPi/SNr -> thalamus -> cortex: the movement-
          # promoting basal-ganglia loop (plus the nigrostriatal dopamine input).
          structures=["frontal", "putamen", "globus_pallidus",
@@ -3105,7 +2924,6 @@ CIRCUITS: list[dict[str, Any]] = [
          description_fr="La boucle supprimant le mouvement, passant par le noyau "
                         "sous-thalamique, qui active le GPi/SNr pour brider le "
                         "thalamus.",
-         sources=["albin1989", "smith1998", "nambu2002"],
          # The movement-suppressing loop, routing through the subthalamic nucleus
          # (and the cortico-subthalamic "hyperdirect" shortcut).
          structures=["frontal", "putamen", "globus_pallidus",
@@ -3116,7 +2934,6 @@ CIRCUITS: list[dict[str, Any]] = [
                      "striatum whose loss causes Parkinson's disease.",
          description_fr="La projection dopaminergique de la substance noire vers le "
                         "striatum dont la perte cause la maladie de Parkinson.",
-         sources=["bjorklund_dunnett2007", "alexander1986"],
          # The dopaminergic projection whose loss causes Parkinson's, with the
          # reciprocal striatonigral return.
          structures=["substantia_nigra", "putamen", "caudate"]),
@@ -3125,7 +2942,6 @@ CIRCUITS: list[dict[str, Any]] = [
                      "thalamus and back, tuning the timing of movement.",
          description_fr="La boucle de coordination : cortex vers pont vers cervelet "
                         "vers thalamus et retour, ajustant le timing du mouvement.",
-         sources=["middleton2000"],
          # Cortex -> pons -> cerebellum -> thalamus -> cortex: the coordination
          # loop running through the pons and cerebellum.
          structures=["frontal", "pons", "cerebellum", "thalamus"]),
@@ -3137,7 +2953,6 @@ CIRCUITS: list[dict[str, Any]] = [
          description_fr="Le circuit de Papez : la boucle mnésique médio-temporale "
                         "par l'hippocampe, le fornix, les corps mammillaires, le "
                         "thalamus antérieur et le cingulum.",
-         sources=["papez1937"],
          # The medial-temporal memory loop, now wired through the real fornix,
          # mammillary and cingulate nodes: temporal -> hippocampus -> fornix ->
          # mammillary -> (anterior) thalamus -> cingulate -> hippocampus.
@@ -3151,7 +2966,6 @@ CIRCUITS: list[dict[str, Any]] = [
          description_fr="Les ponts interhémisphériques (corps calleux + commissure "
                         "antérieure) reliant les aires corticales homologues à "
                         "travers la ligne médiane.",
-         sources=["aboitiz1992", "schmahmann2006"],
          # The left-right cortical bridges: corpus callosum + anterior commissure.
          # Only same-lobe cross-midline arrows fall *between* these structures.
          structures=["frontal", "parietal", "temporal", "occipital"]),
@@ -3182,8 +2996,7 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
          description_fr="Le principal neurotransmetteur excitateur du cerveau : les "
                         "projections glutamatergiques activent leurs cibles, dont "
                         "les voies cortico-striées et thalamo-corticales.",
-         wikipedia="https://en.wikipedia.org/wiki/Glutamate_(neurotransmitter)",
-         sources=["kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Glutamate_(neurotransmitter)"),
     dict(mode="kind", key="inhibitory", name="GABA",
          description="The brain's main inhibitory transmitter: GABAergic "
                      "projections suppress their targets, including the striatal "
@@ -3191,62 +3004,54 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
          description_fr="Le principal neurotransmetteur inhibiteur du cerveau : les "
                         "projections GABAergiques freinent leurs cibles, dont la "
                         "sortie striatale des noyaux gris centraux.",
-         wikipedia="https://en.wikipedia.org/wiki/Gamma-Aminobutyric_acid",
-         sources=["kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Gamma-Aminobutyric_acid"),
     dict(mode="kind", key="dopaminergic", name="Dopamine",
          description="Dopaminergic projections from the midbrain (substantia "
                      "nigra, VTA) modulate movement, motivation and reward.",
          description_fr="Les projections dopaminergiques du mésencéphale (substance "
                         "noire, ATV) modulent le mouvement, la motivation et la "
                         "récompense.",
-         wikipedia="https://en.wikipedia.org/wiki/Dopaminergic_pathways",
-         sources=["bjorklund_dunnett2007", "kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Dopaminergic_pathways"),
     dict(mode="kind", key="cholinergic", name="Acetylcholine",
          description="Cholinergic projections modulate arousal, attention and "
                      "memory across the cortex and hippocampus.",
          description_fr="Les projections cholinergiques modulent l'éveil, "
                         "l'attention et la mémoire dans le cortex et l'hippocampe.",
-         wikipedia="https://en.wikipedia.org/wiki/Cholinergic",
-         sources=["dutar1995", "kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Cholinergic"),
     dict(mode="kind", key="neuroendocrine", name="Releasing hormones",
          description="Hypothalamic neuroendocrine projections release hormones "
                      "that control the pituitary and the body's endocrine axes.",
          description_fr="Les projections neuroendocrines de l'hypothalamus libèrent "
                         "des hormones qui contrôlent l'hypophyse et les axes "
                         "endocriniens.",
-         wikipedia="https://en.wikipedia.org/wiki/Releasing_hormone",
-         sources=["swanson_sawchenko1983", "kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Releasing_hormone"),
     dict(mode="kind", key="serotonergic", name="Serotonin",
          description="Serotonergic projections from the raphe nuclei diffusely "
                      "modulate mood, sleep and appetite throughout the brain.",
          description_fr="Les projections sérotoninergiques des noyaux du raphé "
                         "modulent diffusément l'humeur, le sommeil et l'appétit "
                         "dans tout le cerveau.",
-         wikipedia="https://en.wikipedia.org/wiki/Serotonergic",
-         sources=["azmitia_segal1978", "kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Serotonergic"),
     dict(mode="kind", key="noradrenergic", name="Noradrenaline",
          description="Noradrenergic projections from the locus coeruleus modulate "
                      "arousal, vigilance and the stress response.",
          description_fr="Les projections noradrénergiques du locus coeruleus "
                         "modulent l'éveil, la vigilance et la réponse au stress.",
-         wikipedia="https://en.wikipedia.org/wiki/Norepinephrine",
-         sources=["foote1983", "kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Norepinephrine"),
     # --- per-sign (mode="sign"); name = the SIGN_LABELS heading ------------------
     dict(mode="sign", key="excitatory", name="Excitatory",
          description="Excitatory pathways depolarize their target, making it more "
                      "likely to fire (mainly glutamatergic).",
          description_fr="Les voies excitatrices dépolarisent leur cible, la rendant "
                         "plus susceptible de décharger (surtout glutamatergiques).",
-         wikipedia="https://en.wikipedia.org/wiki/Excitatory_postsynaptic_potential",
-         sources=["kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Excitatory_postsynaptic_potential"),
     dict(mode="sign", key="inhibitory", name="Inhibitory",
          description="Inhibitory pathways hyperpolarize their target, making it "
                      "less likely to fire (mainly GABAergic).",
          description_fr="Les voies inhibitrices hyperpolarisent leur cible, la "
                         "rendant moins susceptible de décharger (surtout "
                         "GABAergiques).",
-         wikipedia="https://en.wikipedia.org/wiki/Inhibitory_postsynaptic_potential",
-         sources=["kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Inhibitory_postsynaptic_potential"),
     dict(mode="sign", key="modulatory", name="Modulatory",
          description="Modulatory pathways (the monoamines and acetylcholine) tune "
                      "the gain and excitability of their targets rather than "
@@ -3254,8 +3059,7 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
          description_fr="Les voies modulatrices (monoamines et acétylcholine) "
                         "ajustent le gain et l'excitabilité de leurs cibles plutôt "
                         "que de les exciter ou inhiber directement.",
-         wikipedia="https://en.wikipedia.org/wiki/Neuromodulation",
-         sources=["kandel_principles"]),
+         wikipedia="https://en.wikipedia.org/wiki/Neuromodulation"),
 ]
 
 
@@ -4281,46 +4085,19 @@ def _mirror_id(structure_id: str) -> str:
 
 
 def _expand_sources(keys: list[Any], what: str = "projection") -> list[dict[str, Any]]:
-    """Resolve a projection/circuit/group ``sources`` list to full source objects.
+    """Validate a projection/circuit/group ``sources`` list (quote-level dicts only).
 
-    Each item is one of two shapes, freely mixed in the same list:
+    Every source is an inline ``{corpus, page, quote, provenance}`` dict against a
+    :data:`SOURCE_CORPORA` corpus, the *same* shape a drug binding uses, validated by
+    :func:`_quote_sources` (a ``verified`` grade needs a page + quote, which
+    ``check_data.py`` confirms is really on that page). This is how a pathway earns a
+    ``verified`` grade, e.g. a Kandel quote from :data:`KANDEL_QUOTES`.
 
-    * a **string** key into :data:`SOURCES`: a shared bibliographic citation lives
-      once there and is expanded into the ``{citation, url, provenance}`` object the
-      viewer renders, keeping ``data/projections.jsonl`` self-contained (the client
-      never resolves keys). An unknown key raises so a typo fails the build.
-    * an inline **dict** ``{corpus, page, quote, provenance}``: a quote-level source
-      against a :data:`SOURCE_CORPORA` corpus, the *same* shape a drug binding uses,
-      validated by :func:`_quote_sources` (a ``verified`` grade then needs a page +
-      quote, which ``check_data.py`` confirms is on that page). This is how a pathway
-      earns a ``verified`` grade: a Kandel quote sits alongside its citations and
-      ``_strongest_grade`` promotes the record to the best grade present.
-
-    Parameters
-    ----------
-    keys
-        The record's ``sources`` field (strings and/or quote-source dicts).
-    what
-        Human label used in the dict-source validation error messages.
-
-    Returns
-    -------
-    list of dict
-        One source object per item, in order; ``provenance`` defaults to
-        :data:`DEFAULT_PROVENANCE` and is validated against :data:`PROVENANCE_LEVELS`.
+    Fabricated bibliographic citations are no longer carried: a pathway/circuit/group
+    with no quote source is left ungraded (its provenance pill reads NOSOURCE), rather
+    than cite an unverifiable paper an LLM produced from memory.
     """
-    expanded: list[dict[str, Any]] = []
-    for key in keys:
-        if isinstance(key, dict):
-            expanded.extend(_quote_sources([key], what))
-            continue
-        if key not in SOURCES:
-            raise KeyError(f"{what} references unknown source '{key}'")
-        src = dict(SOURCES[key])
-        src["provenance"] = _provenance(
-            src.get("provenance", DEFAULT_PROVENANCE), f"source {key!r}")
-        expanded.append(src)
-    return expanded
+    return _quote_sources(list(keys), what)
 
 
 def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
@@ -4515,7 +4292,9 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
 
     The authored drug (from ``tools/drugs_data.json``) is mostly passed through;
     this validates it against the drug vocabularies (categories / targets /
-    actions / effect overrides) and attaches the constant :data:`STAHL_SOURCE`.
+    actions / effect overrides). The drug's real provenance lives per-claim: each
+    binding's quote ``sources`` + ``ki`` and the ``nbn_sources``, all against the
+    Stahl corpus (:data:`SOURCE_CORPORA`); there is no drug-level citation node.
     Translatable free text (``description``, per-binding ``note``, ``nbn``) is
     authored inline as ``{en, fr}`` (or the literal ``"TODO"``), so it does not go
     through the shared FR table. A drug with no bindings at all is emitted
@@ -4593,7 +4372,6 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         "name": drug["name"],
         "categories": list(drug["categories"]),
         "bindings": bindings,
-        "sources": [dict(STAHL_SOURCE)],
         "focusable": len(bindings) > 0,
     }
     # The drug's class classification ("this drug is an SSRI/...") is its own graded

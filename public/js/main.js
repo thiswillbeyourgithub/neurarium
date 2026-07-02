@@ -1679,43 +1679,44 @@ function createInfoPanel(data) {
     return withTip(pill, tip);
   };
 
-  // One tooltip line for a single source, whichever shape it carries: a
-  // quote-level {corpus,page,quote} source renders the verbatim quote + "<ref>,
-  // p.N" (the drug-binding shape); a bibliographic {citation} renders its citation.
-  // A projection's `sources` list mixes both (its citations plus, once sourced, a
-  // verified corpus quote), so each line is resolved by shape.
+  // One tooltip line for a single source. Every source is quote-level
+  // {corpus,page,quote,provenance} (the one shape used everywhere): it renders the
+  // verbatim quote + "<ref>, p.N", resolving the ref from meta.sourceCorpora by
+  // `corpus`. A corpus source with no page (e.g. a PDSP Ki reference) shows just the
+  // ref line; a `quote` prefixes it.
   const sourceTipLine = (s) => {
-    if (s.corpus) {
-      const corpora = (data.meta && data.meta.sourceCorpora) || {};
-      const c = corpora[s.corpus] || {};
-      const label = c.ref || c.short || s.corpus;
-      const ref = s.page != null
-        ? t("info.sourceRef", { corpus: label, page: s.page })
-        : label;
-      return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
-    }
-    return s.citation || "";
+    if (!s || !s.corpus) return "";
+    const corpora = (data.meta && data.meta.sourceCorpora) || {};
+    const c = corpora[s.corpus] || {};
+    const label = c.ref || c.short || s.corpus;
+    const ref = s.page != null
+      ? t("info.sourceRef", { corpus: label, page: s.page })
+      : label;
+    return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
   };
 
-  // The tooltip tail under a per-claim provenance pill: every source rendered by
-  // shape. Shared by the binding + NbN rows (quote-level sources) and the pathway
-  // rows / connection panel (mixed citation + quote sources), so a pathway's source
-  // shows on both endpoints' panels.
+  // The tooltip tail under a per-claim provenance pill: every source (all
+  // quote-level now) rendered as a line. Shared by the binding + NbN rows and the
+  // pathway rows / connection panel, so a pathway's source shows on both endpoints'
+  // panels.
   const sourcesTip = (sources) =>
     (sources || []).map(sourceTipLine).filter(Boolean).join("\n\n");
 
   // The provenance pill for a drug binding row (shared by the drug panel's "Acts
   // on" list and a target panel's "Interacting drugs" list, the same resolved
-  // binding object). A binding with its own quote-level sources shows that grade
-  // with the verbatim quote + page in the tooltip; one without falls back to the
-  // drug-level Stahl citation at its grade (`llm`: backed by the book at the drug
-  // level, just not quote-verified), so every binding carries a grade pill and
-  // none ever renders blank. No drug-level "Source(s)" block is shown separately,
-  // because the citation now appears here, on the specific binding it backs.
-  const bindingProvenancePill = (binding, drug) =>
-    binding.sources && binding.sources.length
-      ? makeProvenancePill(binding.provenance, sourcesTip(binding.sources))
-      : makeProvenancePill(drug.sourceProvenance, sourcesTip(drug.sources));
+  // binding object). Its grade + tooltip come from whatever backs the binding: its
+  // own quote-level Stahl source if present, else its measured PDSP Ki (which lifts
+  // it to verified, mirroring _binding_grade), else nothing -> a NOSOURCE pill.
+  // There is no drug-level citation fallback: an unsourced binding honestly shows
+  // NOSOURCE rather than borrowing the book at large.
+  const bindingProvenancePill = (binding) => {
+    if (binding.sources && binding.sources.length)
+      return makeProvenancePill(binding.provenance, sourcesTip(binding.sources));
+    if (binding.ki)
+      return makeProvenancePill(binding.provenance,
+        "— " + (binding.ki.corpusRef || "PDSP Ki Database"));
+    return makeProvenancePill(binding.provenance);
+  };
 
   // A binding's representative Ki (its median), or Infinity when unmeasured. Sorts
   // the drug panel's "Acts on" list strongest-first and picks each transmitter
@@ -1865,7 +1866,7 @@ function createInfoPanel(data) {
       txt.appendChild(kiLine);
     }
     li.appendChild(txt);
-    if (!affinity) li.appendChild(bindingProvenancePill(binding, drug));
+    if (!affinity) li.appendChild(bindingProvenancePill(binding));
     li.title = affinity
       ? `${t("drug.affinityOnly")} · ${nameText}`
       : `${binding.effectLabel} · ${nameText}`;
@@ -2578,7 +2579,7 @@ function createInfoPanel(data) {
           li.title = group.name;
           li.appendChild(directionArrow(projColors[kind] || "#fff", "out"));
           li.appendChild(el("span", "conn-label", group.name));
-          if (rep) li.appendChild(bindingProvenancePill(rep, drug));
+          if (rep) li.appendChild(bindingProvenancePill(rep));
           li.addEventListener("click", () => onProjectionGroupPick(group));
           ul.appendChild(li);
         }
@@ -2727,7 +2728,7 @@ function createInfoPanel(data) {
             const rep = d.bindings
               .filter((b) => b.flowKind === group.key)
               .sort((a, b) => bindingKi(a) - bindingKi(b))[0];
-            if (rep) li.appendChild(bindingProvenancePill(rep, d));
+            if (rep) li.appendChild(bindingProvenancePill(rep));
             li.addEventListener("click", () => onDrugPick(d));
             ul.appendChild(li);
           }

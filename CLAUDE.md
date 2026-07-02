@@ -78,13 +78,14 @@ in `meta.provenance_stats.by_kind`):
   tallied but excluded from the headline; a reference is not itself a knowledge node)
 
 **The node sourcing contract.** Every node carries a provenance **grade**
-(`PROVENANCE_LEVELS`: `llm` < `sourced` < `verified`) and, ideally, a **source**: a
-quote-level `{corpus, page, quote, provenance}` (drug bindings, NbN, receptor
-classifications, receptor locations, region anatomy) or a bibliographic
-`{citation, url, provenance}` (projections, circuits). `meta.provenance_stats`
-(emitted by `_provenance_stats`, key `nodes`) reduces every node to its strongest
-grade and counts them; the headline % is over the knowledge nodes (references
-excluded). Full mechanics in Source provenance.
+(`PROVENANCE_LEVELS`: `llm` < `sourced` < `verified`) and, ideally, a **source**. There
+is one source shape everywhere: a quote-level `{corpus, page, quote, provenance}`
+against a `SOURCE_CORPORA` corpus (drug bindings, NbN, projection/circuit/group quotes,
+receptor/target classifications + locations, region anatomy). A node with no source is
+counted **missing** (its pill reads `NOSOURCE`; see The tally). `meta.provenance_stats`
+(emitted by `_provenance_stats`, key `nodes`) reduces every node to its strongest grade
+and counts them; the headline % is over the knowledge nodes (references excluded). Full
+mechanics in Source provenance.
 
 ## Architecture
 
@@ -191,8 +192,9 @@ Emitted data (`public/data/`):
   both hemispheres share it) + optional `structure_image_gallery` (more hot-linked
   gif/svg urls for the panel's "show more").
 - `projections.jsonl` — one pathway/line: `from`, `to`, `kind`, `label{en,fr}`,
-  `neurotransmitter{en,fr}`, `description{en,fr}`,
-  `sources[{citation,url,provenance}]` (not translated), optional `bidirectional`,
+  `neurotransmitter{en,fr}`, `description{en,fr}`, optional
+  `sources[{corpus,page,quote,provenance}]` (quote-level, from `KANDEL_QUOTES`;
+  absent -> NOSOURCE), optional `bidirectional`,
   optional `tentative` (speculative; dotted arrow in an off-by-default section).
 - `circuits.jsonl` — one functional loop/line: `id`, `name{en,fr}`,
   `structures[ids]` (arrows derived in the viewer), optional `description{en,fr}`
@@ -226,8 +228,9 @@ Emitted data (`public/data/`):
   (measured PDSP affinity: `{median,min,max,n_human,n_nonhuman, source:{corpus:pdsp_ki,
   ki_id,value_nm,species,preparation,radioligand,reference,provenance, + mapped/
   measured_as/relation when alias-borrowed}}`), optional `affinity_only:true` (a
-  PDSP target with a Ki but no known direction: no action/effect, panel-only)),
-  `sources[{citation,url,provenance}]` (the drug-level Stahl citation), optional
+  PDSP target with a Ki but no known direction: no action/effect, panel-only)).
+  No drug-level source: a drug's provenance lives per-claim (its bindings' quote
+  `sources`/`ki` + `nbn_sources`), so an unsourced binding shows NOSOURCE. Optional
   `wikipedia` (+ provenance), optional `structure_image` (vendored
   `data/molecules/<id>.svg`, set only when the file exists), `focusable` (false if
   no bindings).
@@ -1050,7 +1053,8 @@ interactions literally stated; gaps left as TODO / no binding).
   `_build_drug_targets` merges `DRUG_TARGETS` with every receptor id (so a binding can
   target a coarse target like `sert` or a specific receptor like `5ht2a`) and emits it as
   `meta.drug_targets`. `_drug_record` validates category/target/action/effect + rejects
-  duplicate ids and attaches the constant `STAHL_SOURCE`. A binding's net `effect`:
+  duplicate ids (a drug carries no drug-level source; provenance lives per-claim on the
+  bindings/NbN). A binding's net `effect`:
   agonist / reuptake-inhibitor / releaser / enzyme-inhibitor / PAM -> **boost**;
   antagonist / inverse-agonist / NAM / blocker -> **block**; partial-agonist / modulator
   -> **modulate**.
@@ -1079,8 +1083,8 @@ interactions literally stated; gaps left as TODO / no binding).
   Wikipedia, re-graded `sourced`), a Wikipedia link, then the **Acts on** binding list
   (each row: a coloured effect glyph + target name + action·note, dimmed + italic "·
   speculative" when tentative, plus a source pill via `bindingProvenancePill` = the
-  binding's own quote-level source, else the drug-level Stahl citation as a fallback so the
-  grade is never blank). The **Acts on** rows sort strongest-affinity first (by each
+  binding's own quote-level source, else its measured Ki (verified), else `NOSOURCE`
+  (no drug-level fallback). The **Acts on** rows sort strongest-affinity first (by each
   binding's representative Ki, no-Ki last). There is no standalone drug-level Source(s)
   block. Below it, a **Projections affected** list (only when `flowKinds` is non-empty):
   one row per ascending system the drug engages (its `flowKinds` -> the kind-mode
@@ -1108,8 +1112,8 @@ Extraction history: parallel agents from per-drug text; 44 drugs recovered from 
 OCR (`PageImages`); 5 stay unbound as genuinely non-receptor agents (lithium, disulfiram,
 l-methylfolate, triiodothyronine, caprylidene). A corrected dump was diffed against the
 OCR-recovered bindings: 2 plainly-wrong bindings dropped, the rest real-but-unstated
-affinities kept and flagged `tentative`. The Stahl `url` is `"TODO"` (the citation still
-renders, with its provenance pill).
+affinities kept and flagged `tentative`. The Stahl corpus `url` is `"TODO"` (the pill
+still renders its grade; the link is not what conveys provenance).
 
 ## Images
 
@@ -1173,23 +1177,27 @@ source/reference carries a **provenance grade** saying how trustworthy its attri
 - absence -> orange **`NOSOURCE`** pill (`info.noSource`; tooltip `info.provNone`; CSS class
   `.src-todo`). Not a stored grade.
 
-**Where the grade lives.** A citation source is `{citation, url, provenance}`; a `SOURCES`
-entry may set its own, else `_expand_sources` defaults `DEFAULT_PROVENANCE` (`"llm"`). Each
-`wikipedia` reference emits a sibling `wikipedia_provenance` from the `WIKIPEDIA_PROVENANCE`
-override registry; a **present** link defaults `"sourced"` (`WIKIPEDIA_DEFAULT_PROVENANCE`),
-not `llm` (a Wikipedia article is a real reference; the viewer even live-fetches its lead).
-Upgrading a source as it is checked is a **data** edit; `_provenance` validates every grade.
+**Where the grade lives.** There is one source shape, a quote-level
+`{corpus, page, quote, provenance}` against a `SOURCE_CORPORA` corpus; `provenance` defaults
+`DEFAULT_PROVENANCE` (`"llm"`) and a node with no source is left ungraded (`NOSOURCE`).
+Fabricated bibliographic `{citation, url}` citations were removed (an LLM invented them from
+memory; unverifiable). Each `wikipedia` reference emits a sibling `wikipedia_provenance` from
+the `WIKIPEDIA_PROVENANCE` override registry; a **present** link defaults `"sourced"`
+(`WIKIPEDIA_DEFAULT_PROVENANCE`), not `llm` (a Wikipedia article is a real reference; the
+viewer even live-fetches its lead). Upgrading a source as it is checked is a **data** edit;
+`_provenance` validates every grade.
 
-**Per-claim sources + the verify gate (drugs).** Beyond the drug-level `STAHL_SOURCE`, each
-binding may carry `sources[]` and each drug `nbn_sources[]`, each
-`{corpus, page, quote, provenance}`: `corpus` is a key of the source-agnostic
+**Per-claim sources + the verify gate.** Every source is
+`{corpus, page, quote, provenance}`: a binding's `sources[]`, a drug's `nbn_sources[]`, a
+projection/circuit/group quote (`KANDEL_QUOTES` for pathways), a receptor/target
+location/classification, region anatomy. `corpus` is a key of the source-agnostic
 `SOURCE_CORPORA` registry (Stahl is corpus #1, `{ref, citation, url, pages_dir}`, emitted as
 `meta.source_corpora`), `quote` is verbatim from that page. `_quote_sources` /
 `_binding_sources` validate (corpus + grade; a `verified` source needs page + quote); the
 full citation is not denormalized onto the ~429 bindings (the viewer resolves it from
 `meta.source_corpora`). A pill's per-claim ref reads `<ref>, p. N` (full title + edition, so
-it is unambiguous); the longer `citation` is the fallback shown by `bindingProvenancePill`
-on a binding with no quote-level source. `verified` is earned by a two-step (LLM extract +
+it is unambiguous). A binding with no quote source falls back to its **Ki** (verified), else
+shows `NOSOURCE`. `verified` is earned by a two-step (LLM extract +
 LLM judge supports), then `check_data.py`'s source-quote check confirms the quote is really
 on the page (the backstop against a hallucinated quote). The **NbN** is simpler:
 `apply_nbn_sources.py` greps Stahl's verbatim "Neuroscience-based Nomenclature: <value>"
@@ -1271,9 +1279,10 @@ fetches the live Wikipedia lead instead of baking it.
      `STRUCTURE_PROVENANCE` (the `RECEPTOR_PROVENANCE` / `TARGET_PROVENANCE` /
      `STRUCTURE_PROVENANCE` trio via `_lookup_provenance`).
    - **Projections**: edit `PROJECTIONS`. `from`/`to` are structure ids; the arrow points
-     `from -> to`. Carry `label` / `neurotransmitter` / `description` / `sources` (a list of
-     `SOURCES` registry keys, expanded by `_expand_sources`; new refs go in `SOURCES`, `url`
-     `"TODO"` until verified). `bidirectional: True` (both cones; use with
+     `from -> to`. Carry `label` / `neurotransmitter` / `description`. A pathway is graded
+     by a verified quote in `KANDEL_QUOTES` (keyed by the right-side `(from, to)` pair);
+     an unsourced pathway shows `NOSOURCE` (no fabricated citations).
+     `bidirectional: True` (both cones; use with
      `symmetric: False` + explicit `_L`/`_R` for commissures). `tentative: True` (dotted,
      Hypothetical section). Projections are bilateral by default (define once on the right);
      `symmetric: False` keeps a one-sided pathway. `kind` must be a `PROJECTION_COLORS` key
@@ -1281,11 +1290,13 @@ fetches the live Wikipedia lead instead of baking it.
      noradrenergic); a new kind also needs `KIND_TO_SIGN` (-> `SIGN_COLORS` / `SIGN_LABELS`)
      and `BURST` in `circuit-anim.js`.
    - **Circuits**: append to `CIRCUITS`: `id`, `name`, `structures` as base ids (arrows
-     derived). Optional `description` + `description_fr` + `sources` for the detail panel.
+     derived). Optional `description` + `description_fr` + `wikipedia` + `sources` (a list
+     of quote-level `{corpus,page,quote,provenance}` dicts, validated by `_expand_sources`).
    - **Projection groups**: edit `PROJECTION_GROUPS`: one entry per group in both modes,
      `{mode, key, name, description, description_fr, wikipedia, sources}` (`mode` kind|sign,
-     `key` validated). Normally you only edit descriptions/sources (all 7 kinds + 3 signs
-     exist); a new entry is needed only when adding a new projection `kind`.
+     `key` validated; `sources` quote-level dicts). Normally you only edit
+     descriptions/wikipedia (all 7 kinds + 3 signs exist); a new entry is needed only when
+     adding a new projection `kind`.
    - **Receptors**: append to `RECEPTORS`: `id`, `name`, `family`, `neurotransmitter`,
      `receptor_class`, `sign`, `synaptic`, `locations` (base ids or `"ALL"`). Optional
      `description` + `description_fr` (inline) + `wikipedia`. A stub = empty `locations` +
