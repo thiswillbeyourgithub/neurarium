@@ -2187,6 +2187,12 @@
         "sourced": 0,
         "unverified": 0
       },
+      "drug_categories": {
+        "total": 158,
+        "verified": 0,
+        "sourced": 0,
+        "unverified": 158
+      },
       "projections": {
         "total": 107,
         "verified": 86,
@@ -2231,12 +2237,12 @@
       }
     },
     "nodes": {
-      "total": 1495,
+      "total": 1653,
       "verified": 921,
       "sourced": 0,
-      "unverified": 574,
+      "unverified": 732,
       "backed": 921,
-      "pct_backed": 62
+      "pct_backed": 56
     }
   }
 }

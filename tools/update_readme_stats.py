@@ -40,6 +40,7 @@ END = "<!-- SOURCING_STATS:END -->"
 KIND_LABELS = {
     "drug_bindings": "Drug target bindings",
     "drug_nbn": "Drug nomenclature (NbN)",
+    "drug_categories": "Drug class",
     "drug_descriptions": "Drug descriptions",
     "projections": "Neuron pathways",
     "receptors": "Receptor classifications",

@@ -73,6 +73,7 @@ in `meta.provenance_stats.by_kind`):
 - target *expression region* -> a target's `location_sources` -> `target_locations`
 - drug binding -> a drug's `bindings[]` -> `drug_bindings`
 - drug NbN label -> a drug's `nbn` -> `drug_nbn`
+- drug class classification -> a drug's `categories` (+ `category_provenance`) -> `drug_categories`
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
   tallied but excluded from the headline; a reference is not itself a knowledge node)
 
@@ -208,7 +209,9 @@ Emitted data (`public/data/`):
   individual "Found in" region above the default `llm`; `"ALL"` = a ubiquitous
   receptor's one claim), optional `description{en,fr}` + `wikipedia` (+ provenance).
   Empty locations + no description = a deliberate stub (listed, not focusable).
-- `drugs.jsonl` — one drug/line: `id`, `name` (technical), `categories`, optional
+- `drugs.jsonl` — one drug/line: `id`, `name` (technical), `categories`,
+  `category_provenance` (the class-classification node's grade, + optional
+  `category_sources[{corpus,page,quote,provenance}]`), optional
   `nbn{en,fr}` (+ `nbn_sources[{corpus,page,quote,provenance}]`, + optional
   `nbn_nonstandard:true` when the value is Stahl's drug-class descriptor, not a formal NbN),
   `bindings[]` (each: `target`,
@@ -1074,7 +1077,10 @@ interactions literally stated; gaps left as TODO / no binding).
   projection group), each jumping to that group and pilled with the strongest binding
   on the system. A *derived, non-directional* inference (no increase/decrease claim; a
   caption says so). Class + Nomenclature values are clickable (open search with a
-  `class:` / `nbn:` filter). Drugs are searchable (name / category / target keywords).
+  `class:` / `nbn:` filter) and each carries its own grade pill: the NbN's quote source,
+  and the class classification's `category_provenance` (its own node, kind
+  `drug_categories`, default `llm`, upgradeable via `DRUG_CATEGORY_PROVENANCE` /
+  quote-level `category_sources`). Drugs are searchable (name / category / target keywords).
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`, see file map)
   renders as a `kiChip` to the right of the source badge: the median value + `[min-max]`
   range + human/non-human assay counts, then its own **verified** truth badge (tooltip =
@@ -1207,20 +1213,21 @@ already grades the same Wikipedia source; a missing link shows the `NOSOURCE` pi
 own grade and the About block carries the full key, so there is no separate blanket "?" caveat.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every **node** + reference to its
-strongest grade and tallies per node kind (drug bindings / NbN / projections / receptor
-classifications / **receptor expression regions** / target classifications / **target
-expression regions** / region anatomy / wikipedia references) plus a headline `pct_backed`
-over the **knowledge nodes** (sourced-or-verified / total), emitted as
-`meta.provenance_stats` (key `nodes`). The About
+strongest grade and tallies per node kind (drug bindings / NbN / **drug class** /
+projections / receptor classifications / **receptor expression regions** / target
+classifications / **target expression regions** / region anatomy / wikipedia references)
+plus a headline `pct_backed` over the **knowledge nodes** (sourced-or-verified / total),
+emitted as `meta.provenance_stats` (key `nodes`). The About
 panel shows it (`buildAboutSourcing`) and `tools/update_readme_stats.py` writes the same into
 the README `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent
 (its coverage table prints the per-node-kind, per-tier breakdown, columns U / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
 points *at* a node, it is not itself one). The circuit + projection-group descriptions are
 validated for a known grade but not yet folded into the headline (all `llm` for now). Current:
-~62% of 1495 nodes backed (drug bindings ~98%, NbN 100%; the big gap is the 383
-`receptor_locations` + 124 `target_locations`, all `llm` today because no expression atlas is
-wired yet, then projections + classifications + region anatomy). Each expression region is its
+~56% of 1653 nodes backed (drug bindings ~98%, NbN 100%; the big gap is the 383
+`receptor_locations` + 124 `target_locations` + 158 `drug_categories`, all `llm` today
+(no expression atlas / class-source wired yet), then projections + classifications +
+region anatomy). Each expression region is its
 own node (per the request to grade each "Found in", not the list as a whole), individually
 upgradeable when sourced. Descriptions are no longer a node kind: every wiki-linked panel
 fetches the live Wikipedia lead instead of baking it.
@@ -1283,8 +1290,10 @@ fetches the live Wikipedia lead instead of baking it.
      entry needs a `type` + optional `wikipedia`). Target classification grade
      overridable in `TARGET_PROVENANCE`; an individual "Found in" region is sourced
      (above `llm`) by adding a `{target_id: {base: [quote-source]}}` entry to
-     `TARGET_LOCATION_SOURCES` (mirror of `RECEPTOR_LOCATION_SOURCES`). Keep extraction
-     strictly dump-sourced.
+     `TARGET_LOCATION_SOURCES` (mirror of `RECEPTOR_LOCATION_SOURCES`). The drug's class
+     classification grade is overridable in `DRUG_CATEGORY_PROVENANCE` (or upgraded by a
+     quote-level `category_sources` on the authored drug). Keep extraction strictly
+     dump-sourced.
    - **Translations**: every display string is wrapped with `_t()`; add the French to the
      `FR` table or the build raises listing every miss. For a feminine/plural paired name set
      `fr_gender` (`f`/`mp`/`fp`).

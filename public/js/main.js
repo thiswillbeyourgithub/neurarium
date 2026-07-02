@@ -2487,11 +2487,18 @@ function createInfoPanel(data) {
       // to the matching drugs, so you can pivot from one drug to its whole class. The
       // class list shows one clickable chip per category.
       const facts = el("div", "info-facts");
+      // The class classification is its own node: pill it (its own grade, or the
+      // verbatim quote when category_sources exist), so the claim "this drug is an
+      // SSRI/..." carries its provenance beside the value like every other node.
+      const catPill = drug.categorySources && drug.categorySources.length
+        ? makeProvenancePill(drug.categoryProvenance, sourcesTip(drug.categorySources))
+        : makeProvenancePill(drug.categoryProvenance || null);
       addFactRow(facts, t("drug.class"), null, null, {
         links: drug.categoryLabels.map((label) => ({
           text: label,
           query: `class:"${label}"`,
         })),
+        pill: catPill,
       });
       if (drug.nbn) {
         // The NbN line is quote-sourced from Stahl; show its provenance pill

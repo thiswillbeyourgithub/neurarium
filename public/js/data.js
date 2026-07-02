@@ -388,6 +388,11 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     d.sourceProvenance = strongestGrade(d.sources);
     d.categoryLabels = (d.categories || []).map((c) => drugCategoryLabels[c] || c);
     d.category = d.categoryLabels[0] || "";
+    // The drug's class classification ("this drug is an SSRI/...") is its own graded
+    // node: the panel shows a provenance pill on the Class row. Default "llm" (LLM-
+    // authored); `category_sources` (quote-level, if any) upgrade the emitted grade.
+    d.categorySources = mapSources(d.category_sources);
+    d.categoryProvenance = d.category_provenance || "llm";
     // Vendored molecular-structure SVG path (data/molecules/<id>.svg), set by the
     // generator only when the file was fetched; the drug panel embeds it as an
     // <img>. Null when no SVG is available (no image shown).

@@ -491,8 +491,9 @@ def print_coverage(stats):
     by = stats.get("by_kind", {})
     a = stats.get("nodes", {})
     # The node kinds folded into the headline, in the generator's order.
-    node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                  "receptor_locations", "targets", "target_locations", "structures")
+    node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
+                  "receptors", "receptor_locations", "targets", "target_locations",
+                  "structures")
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -568,6 +569,13 @@ def check_provenance(report, meta, structures, projections, circuits,
                       f"sources[{i}]")
         for i, src in enumerate(drug.get("nbn_sources", []) or []):
             grade(src.get("provenance"), f"drug {drug.get('id')} nbn_sources[{i}]")
+        # The drug's class classification carries its own grade (default llm), plus
+        # any quote-level category_sources that upgrade it.
+        if drug.get("category_provenance"):
+            grade(drug.get("category_provenance"),
+                  f"drug {drug.get('id')} category_provenance")
+        for i, src in enumerate(drug.get("category_sources", []) or []):
+            grade(src.get("provenance"), f"drug {drug.get('id')} category_sources[{i}]")
         # A drug's description carries its own grade (llm synthesis vs sourced WP lead).
         if drug.get("description"):
             grade(drug.get("description_provenance"),
@@ -633,9 +641,9 @@ def check_provenance(report, meta, structures, projections, circuits,
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
-        node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                      "receptor_locations", "targets", "target_locations",
-                      "structures")
+        node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
+                      "receptors", "receptor_locations", "targets",
+                      "target_locations", "structures")
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "unverified"):
             want = sum(by.get(k, {}).get(key, 0) for k in node_kinds)
@@ -752,6 +760,8 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
                 check_one(f"drug {did} binding {binding.get('target')} sources[{i}]", src)
         for i, src in enumerate(drug.get("nbn_sources", []) or []):
             check_one(f"drug {did} nbn_sources[{i}]", src)
+        for i, src in enumerate(drug.get("category_sources", []) or []):
+            check_one(f"drug {did} category_sources[{i}]", src)
 
     for proj in projections:
         pid = f"{proj.get('from')}->{proj.get('to')}"

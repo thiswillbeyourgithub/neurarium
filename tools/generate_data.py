@@ -560,6 +560,13 @@ def _wiki_provenance(owner_id: str) -> str:
 RECEPTOR_PROVENANCE: dict[str, str] = {}
 TARGET_PROVENANCE: dict[str, str] = {}
 STRUCTURE_PROVENANCE: dict[str, str] = {}
+# The same, for a drug's *class* classification (its ``categories`` set, e.g. "SSRI"):
+# the claim "this drug belongs to class X" is a node in its own right (kind
+# ``drug_categories``), one per drug, graded like the receptor/target classification.
+# Authored from general knowledge, so default ``"llm"``; keyed by drug id. A drug may
+# additionally carry quote-level ``category_sources`` in tools/drugs_data.json, which
+# upgrade the emitted grade (mirror of the target classification's optional quotes).
+DRUG_CATEGORY_PROVENANCE: dict[str, str] = {}
 
 # Per-region provenance for a receptor's *expression locations* ("Found in"): the
 # claim "receptor R is expressed in region B" is distinct from R's mechanism
@@ -4584,6 +4591,21 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         "sources": [dict(STAHL_SOURCE)],
         "focusable": len(bindings) > 0,
     }
+    # The drug's class classification ("this drug is an SSRI/...") is its own graded
+    # node (kind drug_categories), one per drug: default llm, overridable in
+    # DRUG_CATEGORY_PROVENANCE, and upgraded by any quote-level `category_sources`
+    # authored on the drug (validated + quote-checked like a binding). The emitted
+    # grade is the stronger of the override and the sources.
+    cat_provenance = _lookup_provenance(
+        DRUG_CATEGORY_PROVENANCE, drug["id"], f"drug class for {drug['id']!r}")
+    cat_sources = _quote_sources(
+        drug.get("category_sources"), f"Drug {drug['id']!r} category")
+    if cat_sources:
+        out["category_sources"] = cat_sources
+        best = max(cat_sources, key=lambda s: _GRADE_RANK[s["provenance"]])
+        if _GRADE_RANK[best["provenance"]] > _GRADE_RANK[cat_provenance]:
+            cat_provenance = best["provenance"]
+    out["category_provenance"] = cat_provenance
     if drug.get("nbn"):
         out["nbn"] = drug["nbn"]
         # Newer drugs Stahl has not assigned a formal Neuroscience-based
@@ -4703,10 +4725,10 @@ def _provenance_stats(structures: list[dict[str, Any]],
     """Programmatic sourcing tally over the dataset's **nodes** (see the Nodes
     section of CLAUDE.md), emitted into ``meta.provenance_stats``.
 
-    A *node* is any sourceable datum: a drug binding, a drug NbN label, a neuron
-    projection, a receptor classification, a receptor expression region, a
-    non-receptor target classification, a target expression region, or a brain-region
-    anatomy fact. Every node is
+    A *node* is any sourceable datum: a drug binding, a drug NbN label, a drug class
+    classification, a neuron projection, a receptor classification, a receptor
+    expression region, a non-receptor target classification, a target expression
+    region, or a brain-region anatomy fact. Every node is
     bucketed by the strength of its source: ``verified`` (quote-checked), ``sourced``
     (from a document, not quote-checked) or ``unverified`` (LLM-only, or no source
     yet). The viewer's About panel and the README headline read these numbers, so the
@@ -4734,6 +4756,10 @@ def _provenance_stats(structures: list[dict[str, Any]],
                       for d in drugs for b in d.get("bindings", [])]
     nbn_grades = [_strongest_grade(d.get("nbn_sources"))
                   for d in drugs if d.get("nbn")]
+    # Drug class-classification nodes ("this drug is an SSRI/..."), one per drug that
+    # has categories: the emitted category_provenance (llm unless overridden/sourced).
+    category_grades = [d.get("category_provenance", DEFAULT_PROVENANCE)
+                       for d in drugs if d.get("categories")]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
     # Receptor classification nodes (neurotransmitter / mechanism class / sign /
     # synaptic site), one node per receptor (classification_provenance). A pure stub
@@ -4796,6 +4822,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
     by_kind = {
         "drug_bindings": tally(binding_grades),
         "drug_nbn": tally(nbn_grades),
+        "drug_categories": tally(category_grades),
         "projections": tally(projection_grades),
         "receptors": tally(receptor_grades),
         "receptor_locations": tally(receptor_location_grades),
@@ -4806,8 +4833,9 @@ def _provenance_stats(structures: list[dict[str, Any]],
     }
     # The knowledge-node kinds (every node that carries a claim + a grade); the
     # references kind is a pointer, not a node, so it is excluded from the headline.
-    node_kinds = ("drug_bindings", "drug_nbn", "projections", "receptors",
-                  "receptor_locations", "targets", "target_locations", "structures")
+    node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
+                  "receptors", "receptor_locations", "targets", "target_locations",
+                  "structures")
     nodes = {"total": 0, "verified": 0, "sourced": 0, "unverified": 0}
     for kind in node_kinds:
         for key in nodes:
