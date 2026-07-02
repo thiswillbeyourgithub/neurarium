@@ -1717,6 +1717,14 @@ function createInfoPanel(data) {
       ? makeProvenancePill(binding.provenance, sourcesTip(binding.sources))
       : makeProvenancePill(drug.sourceProvenance, sourcesTip(drug.sources));
 
+  // A binding's representative Ki (its median), or Infinity when unmeasured. Sorts
+  // the drug panel's "Acts on" list strongest-first and picks each transmitter
+  // system's strongest-affinity binding for the drug<->pathway rows (drug panel's
+  // "Projections affected" + the projection-group panel's "Drugs acting on this
+  // system"), so both ends rank + source those rows identically.
+  const bindingKi = (b) =>
+    b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
+
   // Shared label / value row for the classification "facts" block (receptor,
   // target and drug views), optionally led by a coloured swatch so a row's colour
   // matches the dots + legend. Empty values are skipped.
@@ -2502,11 +2510,7 @@ function createInfoPanel(data) {
       }
       if (facts.childElementCount) body.appendChild(facts);
 
-      // A binding's representative Ki (median, the chip's headline number), or
-      // Infinity when unmeasured. Sorts the "Acts on" list and picks each system's
-      // strongest-affinity binding for "Projections affected" below.
-      const kiOf = (b) =>
-        b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
+      // (Ki ranking uses the shared bindingKi helper.)
 
       // What it binds: one row per target, coloured by the action's net effect.
       const acts = el("div", "info-bindings");
@@ -2519,7 +2523,7 @@ function createInfoPanel(data) {
         // ascending, so the target a drug grips hardest tops the list; bindings with
         // no measured Ki sink to the bottom. Sort a copy (leave the authored array
         // untouched); a stable sort keeps the authored order within each tier.
-        const bindings = [...drug.bindings].sort((a, b) => kiOf(a) - kiOf(b));
+        const bindings = [...drug.bindings].sort((a, b) => bindingKi(a) - bindingKi(b));
         for (const b of bindings) {
           // If this binding's target is browsable on its own (in the merged
           // "Receptors & targets" list and focusable), make the row jump to it.
@@ -2558,7 +2562,7 @@ function createInfoPanel(data) {
           // the row's source is the most concrete claim behind the inference.
           const rep = drug.bindings
             .filter((b) => b.flowKind === kind)
-            .sort((a, b) => kiOf(a) - kiOf(b))[0];
+            .sort((a, b) => bindingKi(a) - bindingKi(b))[0];
           const li = el("li", "clickable");
           li.title = group.name;
           li.appendChild(directionArrow(projColors[kind] || "#fff", "out"));
@@ -2694,6 +2698,13 @@ function createInfoPanel(data) {
             li.appendChild(el("span", "bind-target", d.name));
             const cat = d.categoryLabels && d.categoryLabels[0];
             if (cat) li.appendChild(el("span", "legend-tag", cat));
+            // Symmetric sourcing with the drug panel's "Projections affected" row:
+            // the drug<->system link is one node, so both ends carry the same source,
+            // the strongest-affinity binding feeding this system (see bindingKi).
+            const rep = d.bindings
+              .filter((b) => b.flowKind === group.key)
+              .sort((a, b) => bindingKi(a) - bindingKi(b))[0];
+            if (rep) li.appendChild(bindingProvenancePill(rep, d));
             li.addEventListener("click", () => onDrugPick(d));
             ul.appendChild(li);
           }
