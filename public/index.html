@@ -1041,13 +1041,12 @@
         font: 600 10px/1.45 inherit;
         cursor: pointer;
       }
-      /* No verified source/link yet (the long-standing TODO pill): orange, a word. */
+      /* No source document for the claim yet: red, a ✕ glyph (see NOSOURCE_GLYPH),
+         so an unbacked node reads as a clear red cross, not a long word. */
       .src-todo {
-        color: #f0a23c;
-        background: rgba(240, 162, 60, 0.15);
-        border: 1px solid rgba(240, 162, 60, 0.5);
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
+        color: #ef5f6b;
+        background: rgba(239, 95, 107, 0.15);
+        border: 1px solid rgba(239, 95, 107, 0.5);
       }
       /* LLM-only (grey ?): produced from memory, may be a hallucination. */
       .src-prov-llm {

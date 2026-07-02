@@ -1188,7 +1188,7 @@ source/reference carries a **provenance grade** saying how trustworthy its attri
 - **`verified`** (green **✓**): an LLM extracted a quote, it was *programmatically*
   confirmed present in the source, and a separate LLM agreed it supports the claim. Highest
   grade available; still LLM-driven (the `info.provVerified` tooltip says so).
-- absence -> orange **`NOSOURCE`** pill (`info.noSource`; tooltip `info.provNone`; CSS class
+- absence -> a red **✕** pill (`NOSOURCE_GLYPH`; tooltip `info.provNone`; CSS class
   `.src-todo`). Not a stored grade.
 
 The pill grade is per-node; the coverage **tally** collapses the two unbacked cases (`llm`

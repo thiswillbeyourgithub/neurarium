@@ -59,6 +59,12 @@ const DEV_BANNER_DROP = 1.6;
 // (emerald / rose / violet).
 const EFFECT_GLYPHS = { boost: "+", block: "−", modulate: "≈" };
 
+// The glyph shown inside a NOSOURCE pill (no source document for the claim yet): a
+// cross, so an unbacked node reads as a red ✕ at a glance rather than a long word.
+// Shared by the info-panel pills (makeProvenancePill) and the About grade key, so
+// the two never drift.
+const NOSOURCE_GLYPH = "✕";
+
 // Fold a string for accent- + case-insensitive matching: lowercase, then strip
 // combining diacritical marks (NFD decomposes e.g. "é" -> "e" + U+0301, "ç" ->
 // "c" + U+0327, which we then drop). So the search/filter find "sérotonine" when
@@ -1673,7 +1679,7 @@ function createInfoPanel(data) {
     const base = spec ? t(spec.tip) : t("info.provNone");
     const tip = extra ? `${extra}\n\n${base}` : base;
     const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
-    const pill = el("button", cls, spec ? spec.glyph : t("info.noSource"));
+    const pill = el("button", cls, spec ? spec.glyph : NOSOURCE_GLYPH);
     pill.type = "button";
     pill.setAttribute("aria-label", base);
     return withTip(pill, tip);
@@ -3435,7 +3441,7 @@ function buildAboutSourcing(meta) {
     ["src-prov-verified", "✓", "about.gradeVerified"],
     ["src-prov-sourced", "~", "about.gradeSourced"],
     ["src-prov-llm", "?", "about.gradeLlm"],
-    ["src-todo", t("info.noSource"), "about.gradeNone"],
+    ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
   ];
   for (const [cls, glyph, tip] of keyRows) {
     const li = document.createElement("li");
