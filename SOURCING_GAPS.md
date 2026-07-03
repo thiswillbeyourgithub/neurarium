@@ -10,40 +10,44 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-03, after the drug-class win)
+## Snapshot (2026-07-04, after the drug-class + circuits/groups/refs wins)
 
-Headline: **1077 / 1665 knowledge nodes backed (65%)**. In the tally a bare `llm`
+Headline: **1093 / 1665 knowledge nodes backed (66%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
-"missing" below means `llm` or no source at all. 588 knowledge nodes are missing.
+"missing" below means `llm` or no source at all. 572 knowledge nodes are missing.
 
-> **Update: `drug_categories` is done.** 156 of 158 drug class classifications are now
-> `verified` against Stahl's "Class" section (Haiku extracted each verbatim class
-> descriptor, Sonnet judged it supports our category IDs, `apply_category_sources.py`
-> re-found and wrote the quotes, `check_data.py` re-verified). Headline 55% to 65%
-> (+156 verified nodes). Two stay unsourced: `naltrexonebupropion` (Stahl classes it a
-> "weight management medication", not our `substance_use`, so a flagged mismatch) and
-> `serdexmethylphenidate` (no standalone class-descriptor bullet in Stahl, only its NbN
-> line). The table below is the post-win state.
+> **Recently closed.** Four smaller kinds are now fully sourced:
+> - `drug_categories` 156/158 verified against Stahl's "Class" section (Haiku extract,
+>   Sonnet judge, `apply_category_sources.py` re-find + write, `check_data.py` re-verify;
+>   the 2 left are `naltrexonebupropion` (Stahl "weight management medication" vs our
+>   `substance_use`, a flagged mismatch) and `serdexmethylphenidate` (no class bullet)).
+> - `circuits` 6/6 verified: the two basal-ganglia loops from new Kandel p983 quotes, the
+>   other four reusing quotes already verified for their member projections.
+> - `projection_groups` 10/10 verified: glutamate/GABA from Stahl Essential, the monoamine
+>   + cholinergic + neuroendocrine + modulatory systems from Kandel (the sign groups reuse
+>   the transmitter quotes).
+> - `references` 2/2 closed: Wikipedia links added for the carbonic-anhydrase + PDE5 targets.
+>
+> Headline 55% (pre-drug-class) to 66%. The table below is the post-win state.
 
 | Node kind | Missing | Total | Share of the gap | Difficulty | Best lever |
 | --- | ---: | ---: | ---: | --- | --- |
-| `receptor_locations` | 383 | 383 | 65.1% | Hard | expression atlas |
-| `target_locations` | 124 | 124 | 21.1% | Hard | expression atlas |
-| `receptors` (mechanism) | 26 | 56 | 4.4% | Medium | IUPHAR Guide to Pharmacology |
-| `projections` | 17 | 103 | 2.9% | Hard | connectivity atlas |
-| `drug_bindings` | 12 | 632 | 2.0% | Medium | PDSP refresh + primary lit |
-| `projection_groups` | 10 | 10 | 1.7% | Medium | one defining quote per system |
-| `circuits` | 6 | 6 | 1.0% | **Easy-ish** | Kandel prose (loop exists) |
+| `receptor_locations` | 383 | 383 | 66.9% | Hard | expression atlas |
+| `target_locations` | 124 | 124 | 21.7% | Hard | expression atlas |
+| `receptors` (mechanism) | 26 | 56 | 4.5% | Medium | IUPHAR Guide to Pharmacology |
+| `projections` | 17 | 103 | 3.0% | Hard | connectivity atlas |
+| `drug_bindings` | 12 | 632 | 2.1% | Medium | PDSP refresh + primary lit |
 | `targets` (classification) | 4 | 25 | 0.7% | **Easy** | IUPHAR / textbook |
 | `structures` (anatomy) | 4 | 52 | 0.7% | Hard | non-Kandel neuroanatomy atlas |
-| `drug_categories` | 2 | 158 | 0.3% | **DONE** (156/158) | Stahl "Class" line |
-| `references` (Wikipedia links) | 2 | 298 | (not in headline) | **Trivial** | add two URLs |
+| `circuits` | 0 | 6 | **DONE** (6/6) | done | Kandel prose |
+| `projection_groups` | 0 | 10 | **DONE** (10/10) | done | Stahl Essential / Kandel |
+| `drug_categories` | 2 | 158 | **DONE** (156/158) | done | Stahl "Class" line |
+| `references` (Wikipedia links) | 0 | 298 | **DONE** (not in headline) | done | Wikipedia URLs |
 
-**The shape of the problem:** with the drug-class win banked, two kinds are now **86%**
-of the remaining gap, both per-region "expression" claims (`receptor_locations` +
-`target_locations` = 507 nodes) that need a brain expression atlas we do not yet have
-wired. Everything else combined is 14% of the gap and is mostly "the four books we hold
-do not state it in prose."
+**The shape of the problem:** two kinds are now **89%** of the remaining gap, both
+per-region "expression" claims (`receptor_locations` + `target_locations` = 507 nodes)
+that need a brain expression atlas we do not yet have wired. Everything else combined is
+11% of the gap and is mostly "the four books we hold do not state it in prose."
 
 Four corpora are wired into `SOURCE_CORPORA` today (`stahl`, `kandel`, `stahl_essential`,
 `carlat`) plus the `pdsp_ki` CSV. The book-prose wins those four allow are largely
@@ -151,26 +155,27 @@ H1, and Nav affinities in particular may now be in PDSP and would auto-verify. T
 `tentative` subtype ones need a specific pharmacology paper (NCBI/PubMed) or stay flagged
 tentative. Low node count; do it opportunistically alongside the next PDSP refresh.
 
-### 6. `projection_groups`, 10 / 10 missing
+### 6. `projection_groups`, DONE (10 / 10 verified)
 
 **What.** The 10 legend "system" nodes (7 per-transmitter groups + 3 per-sign groups):
-"the serotonergic ascending system", "excitatory projections", etc. All unsourced.
+"the serotonergic ascending system", "excitatory projections", etc.
 
-**How to tackle.** Each is a real, well-defined neuropharmacology concept. Add one
-defining quote per group from **Stahl Essential** (the transmitter systems) or **Kandel**
-(the sign groupings) via the existing `_expand_sources` quote-source mechanism; the
-`PROJECTION_GROUPS` entries already accept a `sources` list. 10 nodes, one quote each.
+**How it was closed.** One defining quote per group via the existing `_expand_sources`
+quote-source mechanism: glutamate/GABA from **Stahl Essential**, the dopamine (reusing the
+verified nigrostriatal quote), acetylcholine, neuroendocrine, serotonin, noradrenaline and
+modulatory systems from **Kandel**. The two sign groups excitatory/inhibitory reuse their
+dominant transmitter's quote, so no quote text is duplicated. A Sonnet judge confirmed each
+mapping; `check_data.py` re-confirms each quote on-page.
 
-### 7. `circuits`, 6 / 6 missing (**easy-ish**)
+### 7. `circuits`, DONE (6 / 6 verified)
 
-**What.** The 6 functional circuits (Papez, basal-ganglia direct/indirect loop, reward,
-...). All unsourced.
+**What.** The 6 functional circuits (Papez, basal-ganglia direct/indirect loop,
+nigrostriatal, cortico-cerebellar, commissures).
 
-**How to tackle.** **Kandel describes several of these in prose** (the Papez circuit and
-the basal-ganglia loops especially). Run the **existing `KANDEL_QUOTES`-style loop**
-(search Kandel pages, judge, programmatic quote-check, store) that already sourced 86
-projections; `CIRCUITS` entries already accept a `sources` list. 6 nodes; the tooling is
-built. A natural companion pass to #6.
+**How it was closed.** The two basal-ganglia loops got new **Kandel** p983 quotes naming
+the direct / indirect pathways (Albin scheme); the other four reuse quotes already verified
+for their member projections (nigrostriatal p982, corticopontine p958, Papez p1096, corpus
+callosum p549), so no quote text is duplicated. Same judge + on-page gate as #6.
 
 ### 8. `targets` (classification), 4 / 25 missing (**easy**)
 
@@ -217,14 +222,14 @@ re-mapping of Stahl's class line, which is exactly what the judge validates.
   NbN line "dopamine, norepinephrine multimodal stimulant" and prodrug-formulation
   notes), so there is no clean class sentence to quote.
 
-### 11. `references`, 2 Wikipedia links missing (**trivial, not in headline**)
+### 11. `references`, DONE (0 missing, not in headline)
 
-**What.** `carbonic_anhydrase` and `pde5` (both non-receptor targets) carry no `wikipedia`
-link. References are tallied separately and excluded from the headline %, but the panel
-shows them `NOSOURCE`.
+**What.** `carbonic_anhydrase` and `pde5` (both non-receptor targets) carried no
+`wikipedia` link, so their panel showed `NOSOURCE`.
 
-**How to tackle.** Add the two Wikipedia URLs to their `DRUG_TARGETS` entries in
-`generate_data.py`. Two-line fix.
+**How it was closed.** Added the two Wikipedia URLs to their `DRUG_TARGETS` entries in
+`generate_data.py` (the live panel fetch follows redirects, so `/wiki/PDE5` resolves to the
+enzyme article). `references` is now 100%.
 
 ---
 
@@ -234,11 +239,11 @@ Ordered by **value per unit effort**, not by raw node count:
 
 1. ~~`drug_categories`~~ **DONE** (156/158 verified via `apply_category_sources.py`;
    headline 55% to 65%).
-2. **`references` (2) + `targets` (4) + `structures` (4) claustrum/fornix (4)**, small
-   hand-fixable batches; the 2 refs are two URLs, the targets/structures are a handful of
-   IUPHAR/Nieuwenhuys quotes.
-3. **`circuits` (6) + `projection_groups` (10)**, one Kandel/Stahl quote each via the loop
-   and quote-source mechanisms that already exist. ~16 nodes, tooling built.
+2. ~~`references` (2)~~ **DONE** (Wikipedia URLs for carbonic anhydrase + PDE5). Its
+   sibling hand-fixable batches remain: `targets` (4) + `structures` (4) claustrum/fornix,
+   a handful of IUPHAR/Nieuwenhuys quotes, but no such corpus is wired yet (folded into #4).
+3. ~~`circuits` (6) + `projection_groups` (10)~~ **DONE** (16 nodes verified against Kandel
+   + Stahl Essential via the existing quote-source mechanism; headline to 66%).
 4. **`receptors` mechanism (26) + `targets` (4)**, wire **IUPHAR/BPS Guide to
    Pharmacology** as corpus #6; it closes both in one integration.
 5. **`target_locations` (124), then `receptor_locations` (383)**, the big prize (86% of
