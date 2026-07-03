@@ -2205,9 +2205,9 @@
       },
       "projections": {
         "total": 103,
-        "verified": 86,
+        "verified": 99,
         "sourced": 0,
-        "missing": 17
+        "missing": 4
       },
       "circuits": {
         "total": 6,
@@ -2247,9 +2247,9 @@
       },
       "structures": {
         "total": 52,
-        "verified": 48,
+        "verified": 52,
         "sourced": 0,
-        "missing": 4
+        "missing": 0
       },
       "references": {
         "total": 298,
@@ -2260,11 +2260,11 @@
     },
     "nodes": {
       "total": 1665,
-      "verified": 1093,
+      "verified": 1110,
       "sourced": 0,
-      "missing": 572,
-      "backed": 1093,
-      "pct_backed": 66
+      "missing": 555,
+      "backed": 1110,
+      "pct_backed": 67
     }
   }
 }

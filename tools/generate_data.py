@@ -2349,6 +2349,36 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "a direct pathway innervating the VTA and some in an indirect pathway "
         "innervating the VTA via intervening GABAergic neurons in the ventral "
         "pallidum"),
+    # Limbic / olfactory / commissural pathways Kandel does not state in prose,
+    # backed by the Nieuwenhuys atlas.
+    ("olfactory_bulb_R", "amygdala_R"): _nieuwenhuys(412,
+        "Secondary olfactory fibres originating from the olfactory bulb pass by "
+        "way of the lateral olfactory tract to the amygdala, where they terminate "
+        "mainly in the cortical nucleus"),
+    ("hippocampus_R", "fornix_R"): _nieuwenhuys(387,
+        "Contrary to what was believed for almost a century, the entire "
+        "postcommissural fornix and considerable part of the precommissural "
+        "fornix originate from the subiculum rather than from Ammon's horn."),
+    ("fornix_R", "mammillary_R"): _nieuwenhuys(383,
+        "The main bundle of the fornix or postcommissural fornix finally "
+        "traverses the hypothalamus, where most of its fibres terminate in the "
+        "mamillary body."),
+    ("hippocampus_R", "septal_nuclei_R"): _nieuwenhuys(389,
+        "The precommissural fornix fibres originating from Ammon's horn "
+        "terminate exclusively in the lateral septal nucleus."),
+    ("septal_nuclei_R", "hypothalamus_R"): _nieuwenhuys(939,
+        "Comparable functional specializations have been observed in the "
+        "organization of the projections from the lateral septal complex to the "
+        "medial preoptico-hypothalamic zone."),
+    ("temporal_L", "temporal_R"): _nieuwenhuys(617,
+        "Commissural fibres from the inferotemporal cortex cross in the posterior "
+        "part of the body of the corpus callosum and in the anterior commissure"),
+    ("insula_R", "cingulate_R"): _nieuwenhuys(655,
+        "a considerable number of limbic cortical areas, including the "
+        "entorhinal, perirhinal, temporopolar, posterior orbitofrontal and "
+        "cingulate cortices, as well as the amygdaloid complex, are reciprocally "
+        "connected with agranular and dysgranular sectors in the anterior and "
+        "anterobasal parts of the insula"),
 }
 
 # Verified quote-sources for the region-anatomy claims (a structure's existence /
@@ -2452,7 +2482,15 @@ STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
     "pons": _kandel(59,
         "The pons, rostral to the medulla, conveys information about movement "
         "from the cerebral hemispheres to the cerebellum."),
-    # Limbic (claustrum + fornix are omitted: neither appears in Kandel's prose).
+    # Limbic. Claustrum + fornix are not in Kandel's prose, so the Nieuwenhuys
+    # atlas backs them.
+    "claustrum": _nieuwenhuys(421,
+        "The claustrum is a thin sheet of grey matter, embedded in the white "
+        "matter of the cerebral hemispheres and largely situated between the "
+        "putamen and the insular cortex."),
+    "fornix": _nieuwenhuys(64,
+        "the fornix, a large fibre system that connects the hippocampal "
+        "formation with the septum and the hypothalamus."),
     "amygdala": _kandel(531,
         "Parabrachial neurons project to the amygdala, a critical nucleus of the "
         "limbic system, which regulates emotional states (Chapter 42)."),
