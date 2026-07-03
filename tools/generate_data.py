@@ -2175,6 +2175,16 @@ _KQ_MONOAMINE_LIMBIC = _kandel(1560,
     "to highly diverse terminal fields in brain regions that include the "
     "hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex "
     "(Figures 61–5 and 61–6).")
+# The two basal-ganglia loops named as such (Kandel's Albin-scheme passage); these
+# back the bg_direct / bg_indirect CIRCUITS nodes, so they live outside KANDEL_QUOTES
+# (which is keyed by projection endpoints, not circuit ids).
+_KQ_BG_DIRECT = _kandel(983,
+    "Output of the basal ganglia is determined by the balance between a direct "
+    "pathway from the striatum to the output nuclei.")
+_KQ_BG_INDIRECT = _kandel(983,
+    "Striatal neurons containing enkephalin and expressing mainly D2 dopamine "
+    "receptors make excitatory contact with the output nuclei via relays in the "
+    "globus pallidus and subthalamus: the indirect pathway.")
 
 KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
@@ -2904,6 +2914,7 @@ PROJECTIONS: list[dict[str, Any]] = [
 CIRCUITS: list[dict[str, Any]] = [
     dict(id="bg_direct", name="Direct pathway (motor)",
          wikipedia="https://en.wikipedia.org/wiki/Direct_pathway",
+         sources=[_KQ_BG_DIRECT],
          description="The movement-promoting basal-ganglia loop: cortex excites "
                      "the striatum, which inhibits the GPi/SNr output, releasing "
                      "the thalamus to drive cortex.",
@@ -2917,6 +2928,7 @@ CIRCUITS: list[dict[str, Any]] = [
                      "substantia_nigra", "thalamus"]),
     dict(id="bg_indirect", name="Indirect pathway",
          wikipedia="https://en.wikipedia.org/wiki/Indirect_pathway",
+         sources=[_KQ_BG_INDIRECT],
          description="The movement-suppressing loop, routed through the subthalamic "
                      "nucleus, which drives the GPi/SNr to clamp the thalamus.",
          description_fr="La boucle supprimant le mouvement, passant par le noyau "
@@ -2928,6 +2940,7 @@ CIRCUITS: list[dict[str, Any]] = [
                      "subthalamic_nucleus", "thalamus"]),
     dict(id="nigrostriatal", name="Nigrostriatal (dopamine)",
          wikipedia="https://en.wikipedia.org/wiki/Nigrostriatal_pathway",
+         sources=[_KQ_NIGROSTRIATAL],
          description="The dopaminergic projection from the substantia nigra to the "
                      "striatum whose loss causes Parkinson's disease.",
          description_fr="La projection dopaminergique de la substance noire vers le "
@@ -2936,6 +2949,7 @@ CIRCUITS: list[dict[str, Any]] = [
          # reciprocal striatonigral return.
          structures=["substantia_nigra", "putamen", "caudate"]),
     dict(id="cerebellar_motor", name="Cortico-cerebellar (motor)",
+         sources=[_KQ_CORTICOPONTINE],
          description="The coordination loop: cortex to pons to cerebellum to "
                      "thalamus and back, tuning the timing of movement.",
          description_fr="La boucle de coordination : cortex vers pont vers cervelet "
@@ -2945,6 +2959,7 @@ CIRCUITS: list[dict[str, Any]] = [
          structures=["frontal", "pons", "cerebellum", "thalamus"]),
     dict(id="limbic_memory", name="Hippocampal / limbic (Papez)",
          wikipedia="https://en.wikipedia.org/wiki/Papez_circuit",
+         sources=[_KQ_PAPEZ],
          description="The Papez circuit: the medial-temporal memory loop through "
                      "hippocampus, fornix, mammillary bodies, anterior thalamus "
                      "and cingulate.",
@@ -2958,6 +2973,7 @@ CIRCUITS: list[dict[str, Any]] = [
                      "thalamus", "cingulate"]),
     dict(id="commissures", name="Commissures (interhemispheric)",
          wikipedia="https://en.wikipedia.org/wiki/Commissural_fiber",
+         sources=[_KQ_CORPUS_CALLOSUM],
          description="The interhemispheric bridges (corpus callosum + anterior "
                      "commissure) linking matching cortical areas across the "
                      "midline.",
