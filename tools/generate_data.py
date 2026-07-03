@@ -919,7 +919,6 @@ FR: dict[str, str] = {
     "Stria terminalis": "Strie terminale",
     "Hippocamposeptal projection": "Projection hippocamposeptale",
     "Septohippocampal pathway": "Voie septohippocampique",
-    "Mesolimbic dopamine pathway": "Voie dopaminergique mésolimbique",
     "Accumbens to ventral pallidum": "Accumbens vers pallidum ventral",
     "Hypothalamo-hypophyseal axis": "Axe hypothalamo-hypophysaire",
     "Corpus callosum (frontal)": "Corps calleux (frontal)",
@@ -2754,11 +2753,9 @@ PROJECTIONS: list[dict[str, Any]] = [
          description="Medial septal cholinergic neurons project to the "
                      "hippocampus, pacing the hippocampal theta rhythm."),
     # --- Ventral striatum (reward) and the neuroendocrine outflow ---
-    dict(**{"from": "substantia_nigra_R", "to": "accumbens_R"},
-         kind="dopaminergic", neurotransmitter="Dopamine",
-         label="Mesolimbic dopamine pathway",
-         description="Midbrain dopaminergic neurons (VTA / substantia nigra) "
-                     "project to the nucleus accumbens, the reward hub."),
+    # (The mesolimbic dopamine pathway is vta -> accumbens, defined below; the
+    # substantia nigra projects to the dorsal striatum, i.e. the nigrostriatal
+    # caudate/putamen arrows above, not to the accumbens.)
     dict(**{"from": "accumbens_R", "to": "globus_pallidus_R"},
          kind="inhibitory", neurotransmitter="GABA",
          label="Accumbens to ventral pallidum",
