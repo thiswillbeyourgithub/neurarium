@@ -2039,8 +2039,8 @@ MIDLINE: list[dict[str, Any]] = [
 ]
 
 # Wikipedia article per structure, keyed by ``base`` id (so both hemispheres of a
-# paired region share the one article, written once here). A small registry like
-# SOURCES below: the generator attaches the URL to each structure record
+# paired region share the one article, written once here). The generator attaches
+# the URL to each structure record
 # (``_structure_record``) and the viewer renders it as a link in the structure
 # info panel. URLs were verified to resolve to the specific anatomical article
 # (e.g. the insula's article is "Insular_cortex", the fornix's is
@@ -2100,12 +2100,12 @@ WIKIPEDIA: dict[str, str] = {
 #   neurotransmitter: the specific transmitter molecule (Glutamate/GABA/Dopamine)
 #   label           : short pathway name
 #   description     : one-line plain-language summary (shown in the info panel)
-#   sources         : list backing the connection; each item is either a SOURCES
-#                     key (a shared bibliographic citation) or an inline
+#   sources         : list backing the connection; each item is an inline
 #                     {corpus, page, quote, provenance} dict (a quote-level source
 #                     against a SOURCE_CORPORA corpus, the drug-binding shape). A
 #                     "verified" quote, checked present on its page by check_data.py,
-#                     promotes the pathway's grade. Both shapes coexist in one list.
+#                     promotes the pathway's grade. (A pathway's verified Kandel quote
+#                     is supplied from KANDEL_QUOTES, not inline.)
 #   bidirectional   : optional; True draws a cone at BOTH ends (reciprocal /
 #                     commissural pathways like the corpus callosum)
 #   symmetric       : optional generator hint (default True); see below
@@ -2983,7 +2983,8 @@ CIRCUITS: list[dict[str, Any]] = [
 #                 colour mode rows); ``key`` is a SIGN_LABELS sign.
 # Each record carries a ``name`` + ``description`` (inline {en,fr}, so they bypass
 # the shared FR table like the receptor descriptions), a ``wikipedia`` reference
-# and ``sources`` (SOURCES keys). The member pathways are NOT listed here: the
+# and optional ``sources`` (quote-level {corpus, page, quote, provenance} dicts).
+# The member pathways are NOT listed here: the
 # viewer derives them (the projections whose kind / sign matches ``key``), exactly
 # as a circuit derives its arrows, so a group never duplicates the projection list.
 # ``classification_provenance`` grades the grouping/description (LLM-authored).
@@ -4109,8 +4110,8 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     (e.g. a purely midline pathway) so no duplicate is produced. ``symmetric`` is
     a generator hint and is stripped from the emitted records.
 
-    The ``sources`` key (a list of :data:`SOURCES` keys) is expanded in place to
-    full citation objects, and the expanded metadata (``neurotransmitter``,
+    The ``sources`` key (a list of quote-level ``{corpus, page, quote, provenance}``
+    dicts) is validated in place, and the metadata (``neurotransmitter``,
     ``label``, ``description``, ``bidirectional``, ...) is carried onto the
     mirrored twin unchanged so both hemispheres show the same details. The
     translatable display fields (``label``, ``description``, ``neurotransmitter``)
@@ -4576,38 +4577,32 @@ def _provenance_stats(structures: list[dict[str, Any]],
         r.get("classification_provenance", DEFAULT_PROVENANCE)
         for r in receptors
         if r.get("ubiquitous") or r.get("locations") or r.get("description")]
-    # Receptor expression-region nodes ("Found in"), one PER (receptor, region): the
-    # node "receptor R is expressed in region B" is distinct from R's mechanism
-    # classification node. Each region's grade = the strongest of its location_sources
-    # (default llm when unsourced). A ubiquitous receptor is one "throughout the
-    # brain" expression node (its location_sources under the "ALL" sentinel, else llm).
-    receptor_location_grades: list[int] = []
+    # Expression-region nodes ("Found in"), one node PER (owner, region): the claim
+    # "owner O is expressed in region B", distinct from O's classification node. Each
+    # region's grade = the strongest of that region's location_sources (default llm
+    # when unsourced). A ubiquitous receptor is one "throughout the brain" node (its
+    # "ALL"-keyed sources). Shared by receptors and their non-receptor-target mirror.
     _llm_rank = _GRADE_RANK[DEFAULT_PROVENANCE]
-    for r in receptors:
-        loc_sources = r.get("location_sources", {})
-        if r.get("ubiquitous"):
-            receptor_location_grades.append(
-                max(_strongest_grade(loc_sources.get("ALL")), _llm_rank))
-        else:
-            for base in r.get("locations", []):
-                receptor_location_grades.append(
-                    max(_strongest_grade(loc_sources.get(base)), _llm_rank))
+
+    def location_grades(owner: dict[str, Any], regions_key: str) -> list[int]:
+        loc_sources = owner.get("location_sources", {})
+        if owner.get("ubiquitous"):
+            return [max(_strongest_grade(loc_sources.get("ALL")), _llm_rank)]
+        return [max(_strongest_grade(loc_sources.get(base)), _llm_rank)
+                for base in owner.get(regions_key, [])]
+
+    receptor_location_grades = [g for r in receptors
+                                for g in location_grades(r, "locations")]
     # Non-receptor drug target classifications (type / system), graded per target.
     # Receptor-linked targets are skipped (already counted as receptors, not twice).
     target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
                      for t in drug_targets.values() if t.get("type") != "receptor"]
-    # Non-receptor target expression-region nodes ("Found in"), one PER (target,
-    # region): the mirror of receptor_locations. Each region's grade = the strongest
-    # of its location_sources (default llm when unsourced). Receptor-linked targets
-    # are skipped (their regions are the receptor's, counted as receptor_locations).
-    target_location_grades: list[int] = []
-    for t in drug_targets.values():
-        if t.get("type") == "receptor":
-            continue
-        loc_sources = t.get("location_sources", {})
-        for base in t.get("regions", []):
-            target_location_grades.append(
-                max(_strongest_grade(loc_sources.get(base)), _llm_rank))
+    # Target expression-region nodes: the mirror of receptor_locations (a target never
+    # sets ubiquitous, so only the per-region branch runs; receptor-linked targets are
+    # skipped, their regions counted as the receptor's).
+    target_location_grades = [g for t in drug_targets.values()
+                              if t.get("type") != "receptor"
+                              for g in location_grades(t, "regions")]
     # Brain-region anatomy (existence / group / position), graded per emitted
     # structure record (both hemispheres of a pair count, one line each).
     structure_grades = [s.get("classification_provenance", DEFAULT_PROVENANCE)
@@ -4639,11 +4634,12 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }
-    # The knowledge-node kinds (every node that carries a claim + a grade); the
-    # references kind is a pointer, not a node, so it is excluded from the headline.
-    node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
-                  "circuits", "projection_groups", "receptors", "receptor_locations",
-                  "targets", "target_locations", "structures")
+    # The knowledge-node kinds (every node that carries a claim + a grade) are every
+    # by_kind entry except "references" (a reference points *at* a node, so it is
+    # tallied but excluded from the headline). Derived from the one by_kind dict above,
+    # so adding a node kind is a single-line edit (add it to by_kind) with no second
+    # list to keep in sync.
+    node_kinds = tuple(k for k in by_kind if k != "references")
     nodes = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
     for kind in node_kinds:
         for key in nodes:
