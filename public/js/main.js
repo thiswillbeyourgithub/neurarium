@@ -3159,7 +3159,7 @@ function frameVisible({ camera, controls, meshes }, viewName, onlyIds = null) {
  * the instant the user grabs the controls (so a drag always wins).
  * @param {{camera:THREE.PerspectiveCamera, controls:OrbitControls, meshes:THREE.Mesh[]}} bundle
  */
-function createCameraFocus({ camera, controls, meshes }) {
+function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) {
   const sphere = new THREE.Sphere();
   const box = new THREE.Box3();
   const tmpVec = new THREE.Vector3();
@@ -3170,6 +3170,15 @@ function createCameraFocus({ camera, controls, meshes }) {
   // it moves; cleared whenever we frame something else (a connection or the
   // whole brain) so we don't chase a structure the user has navigated away from.
   let focused = null;
+  // Pivot-follow: while anything is focused, dragging the Separate slider keeps the
+  // focused thing centered by easing the orbit pivot onto its (moving) center, and
+  // recenters smoothly when the view didn't start on it. Enabled by reaimFocused()
+  // (called from the explode handler), advanced in tick(), and turned off once it
+  // settles (so an idle focus costs nothing per frame), when the user grabs the
+  // camera (cancel), or when the focus clears.
+  let trackPivot = false;
+  const PIVOT_EASE = 0.3;        // per-frame approach fraction while off-center
+  const PIVOT_SNAP_FRAC = 0.05;  // within this * brain radius, snap (exact tracking)
   // The explode amount last applied, so zoomForExplode() only ever applies the
   // *incremental* distance change and thus preserves whatever zoom the user has
   // dialed in. The layout scales linearly with this (applyExplode pushes each
@@ -3248,6 +3257,29 @@ function createCameraFocus({ camera, controls, meshes }) {
     };
   }
 
+  // The live center of whatever is currently focused (the dimmed-in set the viewer
+  // reports via getFocusMeshes), written into `out`; returns false when nothing is
+  // focused. Prefers the explicitly focused single structure while it is still part
+  // of that set, so a searched / double-clicked structure tracks precisely;
+  // otherwise the whole set's bounding-sphere center, so a receptor / drug / circuit
+  // focus (spanning many regions) stays framed as it explodes. Only visible meshes
+  // count, so it composes with "See inside".
+  function focusCenter(out) {
+    const sel = getFocusMeshes && getFocusMeshes();
+    if (!sel || !sel.length) return false;
+    if (focused && focused.visible && sel.indexOf(focused) !== -1) {
+      focused.getWorldPosition(out);
+      return true;
+    }
+    box.makeEmpty();
+    let any = false;
+    for (const m of sel) if (m && m.visible) { box.expandByObject(m); any = true; }
+    if (!any) return false;
+    box.getBoundingSphere(sphere);
+    out.copy(sphere.center);
+    return true;
+  }
+
   return {
     /** Center on and frame a single structure mesh (double-click / search). */
     focusStructure(mesh) {
@@ -3301,21 +3333,19 @@ function createCameraFocus({ camera, controls, meshes }) {
       focused = null;
     },
     /**
-     * Re-aim the camera at the currently focused structure after it has moved
-     * (the explode slider pushes each region radially outward). Only the orbit
-     * pivot (controls.target) is moved onto the structure's new center, so the
-     * camera rotates in place to keep tracking it: a reorientation, not a
-     * translation, which preserves the distance + angle the user last set. A
-     * running framing tween has its destination updated too so the two don't
-     * fight over the pivot. No-op when nothing is focused.
+     * Called from the explode handler as the brain spreads: keep whatever is
+     * focused (a single structure, or the multi-region set of a receptor / drug /
+     * circuit / group focus) centered as it moves radially outward. It enables the
+     * pivot-follow; tick() does the actual easing (gliding the orbit pivot in when
+     * the view didn't start on the focus, then snapping to track the moving center
+     * exactly). Only the pivot (controls.target) moves, so the camera rotates in
+     * place, preserving the distance + angle the user set. A running framing tween
+     * has its destination updated too so the two don't fight. Disabled when nothing
+     * is focused.
      */
     reaimFocused() {
-      if (!focused || !focused.visible) return;
-      // The mesh's local origin is the structure's center (geometry is built
-      // around it), so its world position is where the camera should look.
-      focused.getWorldPosition(tmpVec);
-      controls.target.copy(tmpVec);
-      if (anim) anim.toTarget.copy(tmpVec);
+      trackPivot = focusCenter(tmpVec);
+      if (trackPivot && anim) anim.toTarget.copy(tmpVec);
     },
     /**
      * Pull the camera back (or in) as the brain spreads, so the whole brain keeps
@@ -3358,6 +3388,7 @@ function createCameraFocus({ camera, controls, meshes }) {
     /** Abort any running tween (used when the user starts interacting). */
     cancel() {
       anim = null;
+      trackPivot = false; // a manual camera grab wins over the pivot-follow
     },
     /** Advance the active tween; call once per frame before controls.update().
      *  Returns true while a framing tween or the screen-offset ease is moving, so
@@ -3371,6 +3402,26 @@ function createCameraFocus({ camera, controls, meshes }) {
         camera.position.lerpVectors(anim.fromPos, anim.toPos, e);
         if (t >= 1) anim = null;
         active = true;
+      } else if (trackPivot) {
+        // No framing tween running: ease the orbit pivot toward the focused center.
+        // Glide in when the view didn't start centered on it, then snap once close
+        // so a slow spread tracks the (moving) center exactly with no lag. Turns
+        // itself off once settled so an idle focus costs nothing per frame.
+        if (focusCenter(tmpVec)) {
+          const d = tmpVec.sub(controls.target); // tmpVec now = center - target
+          const dist = d.length();
+          if (dist > boundingRadiusAt(lastExplode) * PIVOT_SNAP_FRAC) {
+            controls.target.addScaledVector(d, PIVOT_EASE);
+            active = true;
+          } else if (dist > 1e-4) {
+            controls.target.add(d); // close enough: snap onto the center
+            active = true;
+          } else {
+            trackPivot = false; // settled: stop following until the next spread
+          }
+        } else {
+          trackPivot = false; // focus cleared
+        }
       }
       // Ease the screen offset toward its target and (re)apply it. Runs every
       // frame independent of the framing tween, so the panel pan animates on its
@@ -4891,7 +4942,16 @@ async function main() {
   // like clicking its legend row; on empty space, recenter the whole brain (same
   // as the reset button). The move is a smooth tween advanced in the render loop;
   // grabbing the controls cancels it so a drag always wins.
-  const focus = createCameraFocus({ camera, controls, meshes });
+  const focus = createCameraFocus({
+    camera, controls, meshes,
+    // The live focused mesh set (a legend/search isolate, a circuit/group pin, a
+    // receptor/drug region set, or a single halo), so a spread keeps whatever is
+    // focused centered; null when nothing is focused (the pivot-follow stays off).
+    getFocusMeshes: () => {
+      const sel = selection.getSelected();
+      return sel ? [...sel.meshes] : null;
+    },
+  });
   controls.addEventListener("start", () => focus.cancel());
 
   // "See inside" mode: hide the near hemisphere so the deep nuclei show through.

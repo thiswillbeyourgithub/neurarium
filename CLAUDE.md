@@ -876,11 +876,19 @@ structure isolates it; on empty space recenters.
 All framing (reset, search, panel buttons) goes through one smooth tween: it moves the
 orbit pivot + camera distance but keeps the view direction, is advanced once per frame,
 and is cancelled the moment the user grabs the controls. It also owns the screen offset
-(`setScreenOffset(x,y)`, eased in `tick`) used for the pan-aside. After focusing a
-single structure, moving the Separate slider keeps it centered: `createCameraFocus`
-remembers it (`focused`) and `reaimFocused()` re-points the pivot at its exploded
-position (the camera rotates in place). Framing a connection or the whole brain clears
-the tracked structure.
+(`setScreenOffset(x,y)`, eased in `tick`) used for the pan-aside. While anything is
+focused (the rest dimmed), moving the Separate slider keeps that focus centered as it
+blows outward: the explode handler calls `reaimFocused()`, which enables a **pivot-
+follow** that `tick()` eases (glides the orbit pivot in when the view didn't start on
+the focus, then snaps to track the moving center exactly; only the pivot moves so the
+camera rotates in place, preserving the user's distance + angle). The tracked center
+comes from `getFocusMeshes` (the live `selection.getSelected()` set): a single focused
+structure (`focused`, set only by `focusStructure`) tracks precisely, while a multi-
+region focus (receptor / drug / circuit / group; `focused` cleared by
+`focusMeshes`/`focusConnection`/`recenter`) tracks the visible set's bounding-sphere
+center. Only visible meshes count (composes with "See inside"). The follow disables
+itself once settled (an idle focus costs nothing per frame), when the user grabs the
+camera (`cancel`), or when the focus clears.
 
 ## Rendering
 
