@@ -66,18 +66,18 @@ is a real count:
 
 | Node kind | Sourced or verified |
 | --- | --- |
-| Drug target bindings | 620 / 632 (98%) |
+| Wikipedia reference links | 298 / 298 (100%) |
 | Drug nomenclature (NbN) | 116 / 116 (100%) |
-| Drug class | 156 / 158 (99%) |
-| Neuron pathways | 99 / 103 (96%) |
-| Functional circuits | 6 / 6 (100%) |
+| Brain-region anatomy | 52 / 52 (100%) |
 | Projection groups | 10 / 10 (100%) |
+| Functional circuits | 6 / 6 (100%) |
+| Drug class | 156 / 158 (99%) |
+| Drug target bindings | 620 / 632 (98%) |
+| Neuron pathways | 99 / 103 (96%) |
+| Target classifications | 21 / 25 (84%) |
 | Receptor classifications | 30 / 56 (54%) |
 | Receptor expression regions | 0 / 383 (0%) |
-| Target classifications | 21 / 25 (84%) |
 | Target expression regions | 0 / 124 (0%) |
-| Brain-region anatomy | 52 / 52 (100%) |
-| Wikipedia reference links | 298 / 298 (100%) |
 
 <!-- SOURCING_STATS:END -->
 

@@ -99,13 +99,21 @@ def render_block(stats: dict) -> str:
         "| Node kind | Sourced or verified |",
         "| --- | --- |",
     ]
-    for kind, label in KIND_LABELS.items():
+    # Rows are sorted best-covered first (by the exact backed/total ratio, so the
+    # displayed % reads top-to-bottom monotonically even when two rows round to the
+    # same figure); ties break by the larger denominator, then the KIND_LABELS order
+    # for a stable, deterministic table.
+    rows = []
+    for order, (kind, label) in enumerate(KIND_LABELS.items()):
         c = stats["by_kind"].get(kind)
         if not c or not c["total"]:
             continue
         backed = c["verified"] + c["sourced"]
-        pct = round(100 * backed / c["total"])
-        lines.append(f"| {label} | {backed} / {c['total']} ({pct}%) |")
+        rows.append((backed, c["total"], order, label))
+    rows.sort(key=lambda r: (-(r[0] / r[1]), -r[1], r[2]))
+    for backed, total, _order, label in rows:
+        pct = round(100 * backed / total)
+        lines.append(f"| {label} | {backed} / {total} ({pct}%) |")
     lines += ["", END]
     return "\n".join(lines)
 
