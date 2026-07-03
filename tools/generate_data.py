@@ -702,6 +702,18 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "TODO",
         "pages_dir": "sources/books/carlat_medication/pages",
     },
+    "nieuwenhuys": {
+        # Systematic neuroanatomy/connectivity corpus: backs region-anatomy +
+        # projection claims Kandel does not state in prose (the claustrum, the
+        # fornix, commissures). Page numbers are the PDF's 1-based pages (the .md
+        # file names), which run a few ahead of the printed page numbers.
+        "ref": "Nieuwenhuys, Voogd & van Huijzen, The Human Central Nervous "
+               "System, 4th ed.",
+        "citation": "Nieuwenhuys R, Voogd J, van Huijzen C. The Human Central "
+                    "Nervous System. 4th ed. Springer; 2008.",
+        "url": "TODO",
+        "pages_dir": "sources/books/nieuwenhuys_atlas/pages",
+    },
     "pdsp_ki": {
         # Binding-affinity corpus: measured Ki (nM) values backing a drug binding's
         # `ki` annotation. Unlike the book corpora this is a single CSV of assay
@@ -2107,7 +2119,7 @@ WIKIPEDIA: dict[str, str] = {
 #                     against a SOURCE_CORPORA corpus, the drug-binding shape). A
 #                     "verified" quote, checked present on its page by check_data.py,
 #                     promotes the pathway's grade. (A pathway's verified Kandel quote
-#                     is supplied from KANDEL_QUOTES, not inline.)
+#                     is supplied from PROJECTION_QUOTES, not inline.)
 #   bidirectional   : optional; True draws a cone at BOTH ends (reciprocal /
 #                     commissural pathways like the corpus callosum)
 #   symmetric       : optional generator hint (default True); see below
@@ -2123,15 +2135,23 @@ def _kandel(page: int, quote: str) -> dict[str, Any]:
     return dict(corpus="kandel", page=page, provenance="verified", quote=quote)
 
 
-# Verified Kandel (Principles of Neural Science, 6th ed.) quote-sources for the
-# pathways, keyed by the RIGHT-side ``(from, to)`` endpoint pair (matching how
-# PROJECTIONS defines each pathway once on the right). ``_projection_records``
-# merges the matching quote into that entry's ``sources`` before mirroring, so both
-# hemispheres inherit it; a single sentence that backs several pathways (e.g. one
-# naming the whole striatal output) is written once here, not duplicated per entry.
-# Every key must match a PROJECTIONS entry or ``build_records`` raises (typo guard).
-# This is the projection analogue of the per-binding drug sources; ``check_data.py``
-# confirms each quote is verbatim on its cited Kandel page (the verify gate).
+def _nieuwenhuys(page: int, quote: str) -> dict[str, Any]:
+    """A verified Nieuwenhuys atlas quote-source (``page`` = the PDF/.md page number)."""
+    return dict(corpus="nieuwenhuys", page=page, provenance="verified", quote=quote)
+
+
+# Verified quote-sources for the pathways, keyed by the RIGHT-side ``(from, to)``
+# endpoint pair (matching how PROJECTIONS defines each pathway once on the right).
+# Most are Kandel (the ``_kandel`` helper); a few connectivity claims Kandel does
+# not state in prose are backed by the Nieuwenhuys atlas (``_nieuwenhuys``). Each
+# quote carries its own ``corpus``, so the table is corpus-agnostic.
+# ``_projection_records`` merges the matching quote into that entry's ``sources``
+# before mirroring, so both hemispheres inherit it; a single sentence that backs
+# several pathways (e.g. one naming the whole striatal output) is written once here,
+# not duplicated per entry. Every key must match a PROJECTIONS entry or
+# ``build_records`` raises (typo guard). This is the projection analogue of the
+# per-binding drug sources; ``check_data.py`` confirms each quote is verbatim on its
+# cited page (the verify gate).
 _KQ_NIGROSTRIATAL = _kandel(982,
     "The substantia nigra pars compacta/ventral tegmental area contain an "
     "important population of dopaminergic neurons. These neurons represent the "
@@ -2176,7 +2196,7 @@ _KQ_MONOAMINE_LIMBIC = _kandel(1560,
     "hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex "
     "(Figures 61–5 and 61–6).")
 # The two basal-ganglia loops named as such (Kandel's Albin-scheme passage); these
-# back the bg_direct / bg_indirect CIRCUITS nodes, so they live outside KANDEL_QUOTES
+# back the bg_direct / bg_indirect CIRCUITS nodes, so they live outside PROJECTION_QUOTES
 # (which is keyed by projection endpoints, not circuit ids).
 _KQ_BG_DIRECT = _kandel(983,
     "Output of the basal ganglia is determined by the balance between a direct "
@@ -2186,7 +2206,7 @@ _KQ_BG_INDIRECT = _kandel(983,
     "receptors make excitatory contact with the output nuclei via relays in the "
     "globus pallidus and subthalamus: the indirect pathway.")
 
-KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
+PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
     ("substantia_nigra_R", "putamen_R"): _KQ_NIGROSTRIATAL,
     ("substantia_nigra_R", "caudate_R"): _KQ_NIGROSTRIATAL,
@@ -2331,9 +2351,11 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "pallidum"),
 }
 
-# Verified Kandel quote-sources for the region-anatomy claims (a structure's
-# existence / classification / location), keyed by base id. _structure_record
-# attaches the quote as the structure's `sources` and upgrades its
+# Verified quote-sources for the region-anatomy claims (a structure's existence /
+# classification / location), keyed by base id. Most are Kandel (``_kandel``); the
+# claustrum + fornix, which Kandel does not describe in prose, are backed by the
+# Nieuwenhuys atlas (``_nieuwenhuys``). Each quote carries its own ``corpus``.
+# _structure_record attaches the quote as the structure's `sources` and upgrades its
 # `classification_provenance` to the quote's grade; both hemispheres share it.
 # Every key must be a real structure base or build_records raises (typo guard).
 # Same verify gate as the pathways: check_data confirms the quote is on its page.
@@ -2352,7 +2374,7 @@ _KSQ_LOBES = _kandel(63,
     "structures, the hippocampus and amygdaloid nuclei—learning, memory, and "
     "emotion.")
 
-KANDEL_STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
+STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
     # Cortical lobes: one compound sentence names all four; the insula its own.
     "frontal": _KSQ_LOBES,
     "parietal": _KSQ_LOBES,
@@ -3853,7 +3875,7 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
     # Attach a verified Kandel quote-source for the region's anatomy (keyed by base,
     # shared by both hemispheres) and upgrade the classification grade to match, so
     # the panel's Source pill carries the verbatim quote and the tally counts it.
-    anatomy_quote = KANDEL_STRUCTURE_QUOTES.get(entry["base"])
+    anatomy_quote = STRUCTURE_QUOTES.get(entry["base"])
     if anatomy_quote is not None:
         record["sources"] = [dict(anatomy_quote)]
         if _GRADE_RANK[anatomy_quote["provenance"]] > _GRADE_RANK[
@@ -4145,7 +4167,7 @@ def _expand_sources(keys: list[Any], what: str = "projection") -> list[dict[str,
     :data:`SOURCE_CORPORA` corpus, the *same* shape a drug binding uses, validated by
     :func:`_quote_sources` (a ``verified`` grade needs a page + quote, which
     ``check_data.py`` confirms is really on that page). This is how a pathway earns a
-    ``verified`` grade, e.g. a Kandel quote from :data:`KANDEL_QUOTES`.
+    ``verified`` grade, e.g. a Kandel quote from :data:`PROJECTION_QUOTES`.
 
     Fabricated bibliographic citations are no longer carried: a pathway/circuit/group
     with no quote source is left ungraded (its provenance pill reads NOSOURCE), rather
@@ -4174,10 +4196,10 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     symmetric = proj.get("symmetric", True)
     fields = {k: v for k, v in proj.items() if k != "symmetric"}
     # Merge this pathway's verified Kandel quote-source (keyed by the right-side
-    # endpoints in KANDEL_QUOTES) into its source list, so it is expanded + carried
+    # endpoints in PROJECTION_QUOTES) into its source list, so it is expanded + carried
     # onto the mirrored twin like any other source.
     src_keys = list(fields.get("sources", []))
-    kandel_quote = KANDEL_QUOTES.get((fields["from"], fields["to"]))
+    kandel_quote = PROJECTION_QUOTES.get((fields["from"], fields["to"]))
     if kandel_quote is not None:
         src_keys.append(kandel_quote)
     if src_keys:
@@ -4785,17 +4807,17 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
 
     for proj in PROJECTIONS:
         projections.extend(_projection_records(proj))
-    # Typo guard: every KANDEL_QUOTES key must address a real PROJECTIONS entry,
+    # Typo guard: every PROJECTION_QUOTES key must address a real PROJECTIONS entry,
     # else its quote silently sources nothing.
-    unmatched = set(KANDEL_QUOTES) - {(p["from"], p["to"]) for p in PROJECTIONS}
+    unmatched = set(PROJECTION_QUOTES) - {(p["from"], p["to"]) for p in PROJECTIONS}
     if unmatched:
         raise KeyError(
-            f"KANDEL_QUOTES keys match no PROJECTIONS entry: {sorted(unmatched)}")
-    unmatched_bases = set(KANDEL_STRUCTURE_QUOTES) - {
+            f"PROJECTION_QUOTES keys match no PROJECTIONS entry: {sorted(unmatched)}")
+    unmatched_bases = set(STRUCTURE_QUOTES) - {
         e["base"] for e in (*PAIRED, *MIDLINE)}
     if unmatched_bases:
         raise KeyError(
-            f"KANDEL_STRUCTURE_QUOTES keys are not structure bases: "
+            f"STRUCTURE_QUOTES keys are not structure bases: "
             f"{sorted(unmatched_bases)}")
     unmatched_rq = set(STAHL_ESSENTIAL_RECEPTOR_QUOTES) - {r["id"] for r in RECEPTORS}
     if unmatched_rq:

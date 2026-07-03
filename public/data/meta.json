@@ -2170,6 +2170,12 @@
       "url": "TODO",
       "pages_dir": "sources/books/carlat_medication/pages"
     },
+    "nieuwenhuys": {
+      "ref": "Nieuwenhuys, Voogd & van Huijzen, The Human Central Nervous System, 4th ed.",
+      "citation": "Nieuwenhuys R, Voogd J, van Huijzen C. The Human Central Nervous System. 4th ed. Springer; 2008.",
+      "url": "TODO",
+      "pages_dir": "sources/books/nieuwenhuys_atlas/pages"
+    },
     "pdsp_ki": {
       "ref": "PDSP Ki Database (NIMH PDSP)",
       "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, directed by Bryan L. Roth, University of North Carolina at Chapel Hill.",
