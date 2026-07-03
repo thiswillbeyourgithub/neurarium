@@ -2189,9 +2189,9 @@
       },
       "drug_categories": {
         "total": 158,
-        "verified": 0,
+        "verified": 156,
         "sourced": 0,
-        "missing": 158
+        "missing": 2
       },
       "projections": {
         "total": 103,
@@ -2250,11 +2250,11 @@
     },
     "nodes": {
       "total": 1665,
-      "verified": 921,
+      "verified": 1077,
       "sourced": 0,
-      "missing": 744,
-      "backed": 921,
-      "pct_backed": 55
+      "missing": 588,
+      "backed": 1077,
+      "pct_backed": 65
     }
   }
 }

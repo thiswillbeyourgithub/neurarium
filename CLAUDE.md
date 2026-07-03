@@ -140,6 +140,14 @@ Data + authoring (`tools/`):
   substring, writes a `verified` `nbn_sources` entry. Falls back to Stahl's drug
   **Class** line for a drug with no NbN line (newer drugs), marking it
   `nbn_nonstandard`. Idempotent.
+- `tools/apply_category_sources.py` — sources each drug's **class classification**
+  (the `drug_categories` node) from Stahl's "Class" section. Takes an extract/judge
+  results file `[{id, quotes:[...]}]` (Haiku extracts the verbatim class-descriptor
+  line, Sonnet judges it supports our `categories`, a mismatch is left unsourced),
+  re-finds each accepted quote in the drug's Stahl page range, writes a `verified`
+  `category_sources` entry. The category analogue of `apply_source_quotes.py` (a
+  judge is needed since our coarse `categories` re-map Stahl's free-text class line,
+  unlike the fixed NbN field). Idempotent.
 - `tools/fetch_ki.py` — parses the PDSP Ki Database CSV
   (`sources/books/pdsp_ki/`, author-side) into per-drug binding affinities. Joins on
   PDSP's HGNC gene symbol (name fallback), prefers human assays, cites one
@@ -1299,11 +1307,11 @@ references) plus a headline `pct_backed` over the **knowledge nodes** (sourced-o
 `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
 coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). Current: ~55% of 1665 nodes backed (drug
-bindings ~98%, NbN 100%; the big gap is the 383 `receptor_locations` + 158
-`drug_categories` + 124 `target_locations`, all `missing` today (no expression atlas /
-class-source wired yet), then the 26 `llm` receptor classifications, the 17 unsourced
-projections, and the 16 circuits + projection groups, all `missing`). Each expression
+points *at* a node, it is not itself one). Current: ~65% of 1665 nodes backed (drug
+bindings ~98%, NbN 100%, `drug_categories` 156/158; the big gap is now the 383
+`receptor_locations` + 124 `target_locations`, all `missing` today (no expression atlas
+wired yet), then the 26 `llm` receptor classifications, the 17 unsourced projections, and
+the 16 circuits + projection groups, all `missing`). Each expression
 region is its own node (per the request to grade each "Found in", not the list as a whole),
 individually upgradeable when sourced. Descriptions are no longer a node kind: every
 wiki-linked panel fetches the live Wikipedia lead instead of baking it.

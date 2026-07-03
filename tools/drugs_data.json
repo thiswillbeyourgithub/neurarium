@@ -37,6 +37,14 @@
         "quote": "Neuroscience-based Nomenclature: glutamate multimodal (Glu-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 15,
+        "quote": "Alcohol dependence treatment",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -135,6 +143,20 @@
         "quote": "Neuroscience-based Nomenclature: melatonin multimodal (Mel-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 19,
+        "quote": "Agonist at melatonergic 1 and melatonergic 2 receptors",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 19,
+        "quote": "Antagonist at serotonin 2C receptors",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -172,6 +194,14 @@
         "corpus": "stahl",
         "page": 25,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 25,
+        "quote": "Benzodiazepine (anxiolytic)",
         "provenance": "verified"
       }
     ]
@@ -346,6 +376,14 @@
         "corpus": "stahl",
         "page": 31,
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 31,
+        "quote": "Atypical antipsychotic (benzamide; possibly a dopamine stabilizer and dopamine partial agonist)",
         "provenance": "verified"
       }
     ]
@@ -779,6 +817,20 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 39,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 39,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -1043,6 +1095,14 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine, serotonin reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 47,
+        "quote": "Tricyclic antidepressant (TCA), sometimes classified as a tetracyclic antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -1163,6 +1223,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 53,
+        "quote": "Stimulant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -1231,6 +1299,14 @@
         "corpus": "stahl",
         "page": 61,
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 61,
+        "quote": "Stimulant",
         "provenance": "verified"
       }
     ]
@@ -1504,6 +1580,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist (DS-RPA)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 69,
+        "quote": "Dopamine partial agonist (dopamine– serotonin partial agonist, dopamine stabilizer, atypical antipsychotic, thirdgeneration antipsychotic; sometimes included as a second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -1537,6 +1621,14 @@
         "corpus": "stahl",
         "page": 81,
         "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 81,
+        "quote": "Wake-promoting",
         "provenance": "verified"
       }
     ]
@@ -1646,6 +1738,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 87,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotics; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -1678,6 +1778,14 @@
         "corpus": "stahl",
         "page": 95,
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 95,
+        "quote": "Selective norepinephrine reuptake inhibitor (NRI)",
         "provenance": "verified"
       }
     ]
@@ -1742,7 +1850,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Benztropine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Benztropine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 101,
+        "quote": "Antiparkinson agent; anticholinergic",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "blonanserin",
@@ -1781,7 +1897,15 @@
         "tentative": true
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Blonanserin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Blonanserin",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 105,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a potential mood stabilizer)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "bremelanotide",
@@ -1803,7 +1927,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Bremelanotide"
+    "wikipedia": "https://en.wikipedia.org/wiki/Bremelanotide",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 111,
+        "quote": "Nonselective melanocortin receptor agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "brexanolone",
@@ -1829,7 +1961,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Brexanolone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Brexanolone",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 115,
+        "quote": "Neuroactive steroid",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "brexpiprazole",
@@ -2037,7 +2177,15 @@
         "provenance": "verified"
       }
     ],
-    "nbn_nonstandard": true
+    "nbn_nonstandard": true,
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 119,
+        "quote": "Dopamine partial agonist (dopamine– serotonin partial agonist, dopamine stabilizer, atypical antipsychotic, thirdgeneration antipsychotic; sometimes included as a second-generation antipsychotic; also a potential mood stabilizer)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "buprenorphine",
@@ -2121,7 +2269,15 @@
         "provenance": "verified"
       }
     ],
-    "nbn_nonstandard": true
+    "nbn_nonstandard": true,
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 127,
+        "quote": "Mu opioid receptor partial agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "bupropion",
@@ -2248,6 +2404,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor and releaser (D-RIRe)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 133,
+        "quote": "Norepinephrine and dopamine reuptake inhibitor; antidepressant; smoking cessation treatment",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -2300,6 +2464,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin receptor partial agonist (S-RPA)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 139,
+        "quote": "Anxiolytic (azapirone; serotonin 1A partial agonist; serotonin stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -2309,7 +2481,15 @@
       "cognitive_enhancer"
     ],
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Caprylidene"
+    "wikipedia": "https://en.wikipedia.org/wiki/Caprylidene",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 143,
+        "quote": "Cognitive enhancer",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "carbamazepine",
@@ -2349,6 +2529,14 @@
         "corpus": "stahl",
         "page": 147,
         "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium and calcium channel blocker (Glu-CB)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 147,
+        "quote": "Anticonvulsant, antineuralgic for chronic pain, voltage-sensitive sodium channel antagonist",
         "provenance": "verified"
       }
     ]
@@ -2523,6 +2711,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist and antagonist",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 153,
+        "quote": "Dopamine partial agonist (dopamine– serotonin partial agonist, dopamine stabilizer, atypical antipsychotic, thirdgeneration antipsychotic; sometimes included as a second-generation antipsychotic; also a potential mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -2560,6 +2756,14 @@
         "corpus": "stahl",
         "page": 161,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 161,
+        "quote": "Benzodiazepine (anxiolytic)",
         "provenance": "verified"
       }
     ]
@@ -2858,6 +3062,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 167,
+        "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist, antiemetic)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -2942,6 +3154,14 @@
         "corpus": "stahl",
         "page": 173,
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 173,
+        "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
         "provenance": "verified"
       }
     ]
@@ -3088,6 +3308,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 179,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -3125,6 +3353,14 @@
         "corpus": "stahl",
         "page": 187,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 187,
+        "quote": "Benzodiazepine (anxiolytic, anticonvulsant)",
         "provenance": "verified"
       }
     ]
@@ -3179,6 +3415,14 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 193,
+        "quote": "Antihypertensive; centrally acting alpha 2 agonist hypotensive agent, nonstimulant for attention deficit hyperactivity disorder (ADHD)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -3216,6 +3460,14 @@
         "corpus": "stahl",
         "page": 199,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 199,
+        "quote": "Benzodiazepine (anxiolytic)",
         "provenance": "verified"
       }
     ]
@@ -3598,6 +3850,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 205,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -3858,7 +4118,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Cyamemazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Cyamemazine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 215,
+        "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist, serotonin–dopamine antagonist)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "daridorexant",
@@ -3881,7 +4149,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Daridorexant"
+    "wikipedia": "https://en.wikipedia.org/wiki/Daridorexant",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 221,
+        "quote": "Dual orexin receptor antagonist (DORA); hypnotic",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "desipramine",
@@ -4101,6 +4377,14 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 225,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -4165,6 +4449,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 233,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -4187,7 +4479,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Deutetrabenazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Deutetrabenazine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 239,
+        "quote": "Vesicular monoamine transporter 2 (VMAT2) inhibitor",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "dexmedetomidine",
@@ -4227,7 +4527,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dexmedetomidine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dexmedetomidine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 243,
+        "quote": "Highly selective agonist at alpha 2 receptors",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "dextromethorphanbupropion",
@@ -4298,7 +4606,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dextromethorphan/bupropion"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dextromethorphan/bupropion",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 247,
+        "quote": "Antidepressant",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "dextromethorphanquinidine",
@@ -4345,7 +4661,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Dextromethorphan/quinidine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Dextromethorphan/quinidine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 253,
+        "quote": "Noncompetitive NMDA receptor antagonist and sigma 1 agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "diazepam",
@@ -4382,6 +4706,14 @@
         "corpus": "stahl",
         "page": 257,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 257,
+        "quote": "Benzodiazepine (anxiolytic, muscle relaxant, anticonvulsant)",
         "provenance": "verified"
       }
     ]
@@ -4454,7 +4786,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Diphenhydramine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Diphenhydramine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 263,
+        "quote": "Antihistamine; anticholinergic agent",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "disulfiram",
@@ -4463,7 +4803,15 @@
       "substance_use"
     ],
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Disulfiram"
+    "wikipedia": "https://en.wikipedia.org/wiki/Disulfiram",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 267,
+        "quote": "Alcohol dependence treatment",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "donepezil",
@@ -4499,6 +4847,14 @@
         "corpus": "stahl",
         "page": 271,
         "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 271,
+        "quote": "Cholinesterase inhibitor (selective acetylcholinesterase inhibitor); cognitive enhancer",
         "provenance": "verified"
       }
     ]
@@ -4772,6 +5128,20 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 277,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 277,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -4985,6 +5355,20 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 283,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 283,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -5101,6 +5485,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 291,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); may be classified as an antidepressant, but it is not just an antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -5153,6 +5545,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 297,
+        "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -5179,7 +5579,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Esketamine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Esketamine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 303,
+        "quote": "Nonselective, noncompetitive open-channel inhibitor of the NMDA receptor",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "estazolam",
@@ -5216,6 +5624,14 @@
         "corpus": "stahl",
         "page": 309,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 309,
+        "quote": "Benzodiazepine (hypnotic)",
         "provenance": "verified"
       }
     ]
@@ -5255,6 +5671,14 @@
         "corpus": "stahl",
         "page": 313,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 313,
+        "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform selective agonist of GABA-A/ benzodiazepine receptors",
         "provenance": "verified"
       }
     ]
@@ -5307,7 +5731,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Flibanserin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Flibanserin",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 317,
+        "quote": "Serotonin 1A agonist and serotonin 2A antagonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "flumazenil",
@@ -5333,7 +5765,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Flumazenil"
+    "wikipedia": "https://en.wikipedia.org/wiki/Flumazenil",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 321,
+        "quote": "Benzodiazepine receptor antagonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "flunitrazepam",
@@ -5370,6 +5810,14 @@
         "corpus": "stahl",
         "page": 325,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 325,
+        "quote": "Benzodiazepine (hypnotic)",
         "provenance": "verified"
       }
     ]
@@ -5452,6 +5900,14 @@
         "corpus": "stahl",
         "page": 329,
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 329,
+        "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
         "provenance": "verified"
       }
     ]
@@ -5540,6 +5996,14 @@
         "corpus": "stahl",
         "page": 335,
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 335,
+        "quote": "Conventional antipsychotic (neuroleptic, thioxanthene, dopamine 2 antagonist)",
         "provenance": "verified"
       }
     ]
@@ -6016,7 +6480,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Fluphenazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Fluphenazine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 341,
+        "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "flurazepam",
@@ -6053,6 +6525,14 @@
         "corpus": "stahl",
         "page": 349,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 349,
+        "quote": "Benzodiazepine (hypnotic)",
         "provenance": "verified"
       }
     ]
@@ -6119,6 +6599,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 353,
+        "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -6165,6 +6653,14 @@
         "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated calcium channel blocker (Glu-CB)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 359,
+        "quote": "Anticonvulsant, antineuralgic for chronic pain, alpha 2 delta ligand at voltagesensitive calcium channels",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -6209,6 +6705,14 @@
         "corpus": "stahl",
         "page": 365,
         "quote": "Neuroscience-based Nomenclature: acetylcholine multimodal; enzyme inhibitor; receptor PAM (ACh-MM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 365,
+        "quote": "Cholinesterase inhibitor (acetylcholinesterase inhibitor); also an allosteric nicotinic cholinergic modulator; cognitive enhancer",
         "provenance": "verified"
       }
     ]
@@ -6261,6 +6765,14 @@
         "corpus": "stahl",
         "page": 371,
         "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 371,
+        "quote": "Centrally acting alpha 2A agonist; antihypertensive; nonstimulant for attention deficit hyperactivity disorder (ADHD)",
         "provenance": "verified"
       }
     ]
@@ -6389,6 +6901,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 375,
+        "quote": "Conventional antipsychotic (neuroleptic, butyrophenone, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -6440,6 +6960,14 @@
         "corpus": "stahl",
         "page": 383,
         "quote": "Neuroscience-based Nomenclature: histamine receptor antagonist (H-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 383,
+        "quote": "Antihistamine (anxiolytic, hypnotic, antiemetic)",
         "provenance": "verified"
       }
     ]
@@ -6552,6 +7080,14 @@
         "corpus": "stahl",
         "page": 387,
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 387,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
         "provenance": "verified"
       }
     ]
@@ -6709,6 +7245,20 @@
         "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 395,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 395,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -6755,6 +7305,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 403,
+        "quote": "Monoamine oxidase inhibitor (MAOI)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -6781,7 +7339,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Ketamine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Ketamine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 411,
+        "quote": "NMDA receptor antagonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lamotrigine",
@@ -6819,6 +7385,14 @@
         "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium channel blocker (Glu-CB)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 415,
+        "quote": "Anticonvulsant, mood stabilizer, voltagesensitive sodium channel antagonist",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -6841,7 +7415,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lemborexant"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lemborexant",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 423,
+        "quote": "Dual orexin receptor antagonist (DORA); hypnotic",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "levetiracetam",
@@ -6880,7 +7462,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Levetiracetam"
+    "wikipedia": "https://en.wikipedia.org/wiki/Levetiracetam",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 427,
+        "quote": "Anticonvulsant, synaptic vesicle protein SV2A modulator",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "levomilnacipran",
@@ -6948,6 +7538,14 @@
         "corpus": "stahl",
         "page": 431,
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 431,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); antidepressant",
         "provenance": "verified"
       }
     ]
@@ -7070,6 +7668,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine and norepinephrine reuptake inhibitor and releaser (DN-RIRe)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 437,
+        "quote": "Stimulant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -7089,6 +7695,14 @@
         "corpus": "stahl",
         "page": 443,
         "quote": "Neuroscience-based Nomenclature: lithium enzyme interactions (Li-Eint)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 443,
+        "quote": "Mood stabilizer",
         "provenance": "verified"
       }
     ]
@@ -7250,6 +7864,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 449,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -7296,7 +7918,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Lofexidine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Lofexidine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 455,
+        "quote": "Centrally acting alpha 2 agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "loflazepate",
@@ -7323,7 +7953,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Loflazepate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Loflazepate",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 459,
+        "quote": "Benzodiazepine (anxiolytic)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lorazepam",
@@ -7360,6 +7998,14 @@
         "corpus": "stahl",
         "page": 465,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 465,
+        "quote": "Benzodiazepine (anxiolytic, anticonvulsant)",
         "provenance": "verified"
       }
     ]
@@ -7758,6 +8404,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 471,
+        "quote": "Conventional antipsychotic (neuroleptic, dopamine 2 antagonist, serotonin– dopamine antagonist)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -7851,7 +8505,15 @@
         "provenance": "verified"
       }
     ],
-    "nbn_nonstandard": true
+    "nbn_nonstandard": true,
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 479,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "lurasidone",
@@ -8055,6 +8717,14 @@
         "corpus": "stahl",
         "page": 487,
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 487,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a potential mood stabilizer)",
         "provenance": "verified"
       }
     ]
@@ -8383,6 +9053,14 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 495,
+        "quote": "Tricyclic antidepressant (TCA), sometimes classified as a tetracyclic antidepressant (tetra)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -8433,6 +9111,14 @@
         "quote": "Neuroscience-based Nomenclature: glutamate receptor antagonist (Glu-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 503,
+        "quote": "NMDA receptor antagonist; NMDA subtype of glutamate receptor antagonist; cognitive enhancer",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -8442,7 +9128,15 @@
       "other"
     ],
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Levomefolic_acid"
+    "wikipedia": "https://en.wikipedia.org/wiki/Levomefolic_acid",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 507,
+        "quote": "Medical food (bioavailable form of folate)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "methylphenidate_d",
@@ -8504,6 +9198,14 @@
         "corpus": "stahl",
         "page": 511,
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal (DN-MM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 511,
+        "quote": "Stimulant",
         "provenance": "verified"
       }
     ]
@@ -8598,6 +9300,14 @@
         "corpus": "stahl",
         "page": 517,
         "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal (DN-MM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 517,
+        "quote": "Stimulant",
         "provenance": "verified"
       }
     ]
@@ -8894,6 +9604,14 @@
         "quote": "Neuroscience-based Nomenclature: norepinephrine multimodal (N-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 525,
+        "quote": "Tetracyclic antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -8931,6 +9649,14 @@
         "corpus": "stahl",
         "page": 529,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 529,
+        "quote": "Benzodiazepine (hypnotic)",
         "provenance": "verified"
       }
     ]
@@ -9011,6 +9737,14 @@
         "corpus": "stahl",
         "page": 533,
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 533,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); antidepressant; chronic pain treatment",
         "provenance": "verified"
       }
     ]
@@ -9185,6 +9919,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine receptor antagonist (SN-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 539,
+        "quote": "Alpha 2 antagonist; NaSSA (norepinephrine and specific serotonergic agent); dual serotonin and norepinephrine agent; antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -9223,6 +9965,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine reversible enzyme inhibitor (SN-RevEI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 545,
+        "quote": "Reversible inhibitor of monoamine oxidase A (MAO-A) (RIMA)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -9256,6 +10006,14 @@
         "corpus": "stahl",
         "page": 551,
         "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 551,
+        "quote": "Wake-promoting",
         "provenance": "verified"
       }
     ]
@@ -9458,7 +10216,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Molindone"
+    "wikipedia": "https://en.wikipedia.org/wiki/Molindone",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 557,
+        "quote": "Conventional antipsychotic (neuroleptic, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "nalmefene",
@@ -9571,6 +10337,14 @@
         "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (O-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 563,
+        "quote": "Alcohol dependence treatment; mu and delta opioid receptor antagonist and kappa opioid receptor partial agonist",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -9622,6 +10396,14 @@
         "corpus": "stahl",
         "page": 567,
         "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (O-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 567,
+        "quote": "Alcohol dependence treatment; mu opioid receptor antagonist",
         "provenance": "verified"
       }
     ]
@@ -9928,6 +10710,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin receptor antagonist",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 577,
+        "quote": "SARI (serotonin 2 antagonist/reuptake inhibitor); antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -10031,6 +10821,20 @@
         "corpus": "stahl",
         "page": 583,
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 583,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 583,
+        "quote": "Predominantly a norepinephrine reuptake inhibitor",
         "provenance": "verified"
       }
     ]
@@ -10370,6 +11174,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 591,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -10455,7 +11267,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Olanzapine/samidorphan"
+    "wikipedia": "https://en.wikipedia.org/wiki/Olanzapine/samidorphan",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 601,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer) and mu opioid receptor antagonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "oxazepam",
@@ -10494,6 +11314,14 @@
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 609,
+        "quote": "Benzodiazepine (anxiolytic)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -10516,7 +11344,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Oxcarbazepine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Oxcarbazepine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 615,
+        "quote": "Anticonvulsant, voltage-sensitive sodium channel antagonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "paliperidone",
@@ -10711,6 +11547,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 621,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -10811,6 +11655,14 @@
         "corpus": "stahl",
         "page": 633,
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 633,
+        "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
         "provenance": "verified"
       }
     ]
@@ -10920,6 +11772,14 @@
         "corpus": "stahl",
         "page": 641,
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 641,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist, second-generation antipsychotic)",
         "provenance": "verified"
       }
     ]
@@ -11336,6 +12196,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 647,
+        "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist, antiemetic)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -11380,6 +12248,14 @@
         "corpus": "stahl",
         "page": 653,
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 653,
+        "quote": "Monoamine oxidase inhibitor (MAOI)",
         "provenance": "verified"
       }
     ]
@@ -11445,7 +12321,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Phentermine/topiramate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Phentermine/topiramate",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 659,
+        "quote": "Norepinephrine and dopamine reuptake inhibitor (phentermine) combined with a voltage-sensitive sodium channel modulator (topiramate); weight management medication",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "pimavanserin",
@@ -11511,7 +12395,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Pimavanserin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Pimavanserin",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 665,
+        "quote": "Atypical antipsychotic; serotonin 2A/2C antagonist/inverse agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "pimozide",
@@ -11829,6 +12721,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 669,
+        "quote": "Tourette’s syndrome/tic suppressant; conventional antipsychotic (neuroleptic, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -11899,6 +12799,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 675,
+        "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -11933,7 +12841,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Pitolisant"
+    "wikipedia": "https://en.wikipedia.org/wiki/Pitolisant",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 681,
+        "quote": "Histamine 3 antagonist/inverse agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "prazosin",
@@ -11973,7 +12889,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Prazosin"
+    "wikipedia": "https://en.wikipedia.org/wiki/Prazosin",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 685,
+        "quote": "Alpha 1 adrenergic blocker",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "pregabalin",
@@ -12022,6 +12946,14 @@
         "corpus": "stahl",
         "page": 689,
         "quote": "Neuroscience-based Nomenclature: glutamate voltage-gated calcium channel blocker (Glu-CB)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 689,
+        "quote": "Anticonvulsant, antineuralgic for chronic pain, alpha 2 delta ligand at voltagesensitive calcium channels",
         "provenance": "verified"
       }
     ]
@@ -12249,7 +13181,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Propranolol"
+    "wikipedia": "https://en.wikipedia.org/wiki/Propranolol",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 695,
+        "quote": "Beta blocker, antihypertensive",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "protriptyline",
@@ -12390,6 +13330,20 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 699,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 699,
+        "quote": "Predominantly a norepinephrine reuptake inhibitor",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -12427,6 +13381,14 @@
         "corpus": "stahl",
         "page": 705,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 705,
+        "quote": "Benzodiazepine (hypnotic)",
         "provenance": "verified"
       }
     ]
@@ -12882,6 +13844,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin multimodal (DS-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 709,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -12926,6 +13896,14 @@
         "corpus": "stahl",
         "page": 717,
         "quote": "Neuroscience-based Nomenclature: melatonin receptor agonist (Mel-RA)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 717,
+        "quote": "Melatonin 1 and 2 receptor agonist",
         "provenance": "verified"
       }
     ]
@@ -12979,6 +13957,14 @@
         "corpus": "stahl",
         "page": 721,
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 721,
+        "quote": "Selective norepinephrine reuptake inhibitor (NRI); antidepressant",
         "provenance": "verified"
       }
     ]
@@ -13124,6 +14110,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 727,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -13168,6 +14162,14 @@
         "corpus": "stahl",
         "page": 739,
         "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 739,
+        "quote": "Cholinesterase inhibitor (acetylcholinesterase inhibitor and butyrylcholinesterase inhibitor); cognitive enhancer",
         "provenance": "verified"
       }
     ]
@@ -13218,6 +14220,14 @@
         "corpus": "stahl",
         "page": 745,
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine enzyme inhibitor",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 745,
+        "quote": "Oral: selective MAO-B inhibitor",
         "provenance": "verified"
       }
     ]
@@ -13475,6 +14485,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 761,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotics; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -13565,6 +14583,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 767,
+        "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -13587,7 +14613,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Sildenafil"
+    "wikipedia": "https://en.wikipedia.org/wiki/Sildenafil",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 775,
+        "quote": "Phosphodiesterase-5 inhibitor (PDE-5 inhibitor)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "sodium_oxybate",
@@ -13620,6 +14654,14 @@
         "corpus": "stahl",
         "page": 779,
         "quote": "Neuroscience-based Nomenclature: GABA receptor agonist",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 779,
+        "quote": "CNS depressant; GABA-B receptor partial agonist",
         "provenance": "verified"
       }
     ]
@@ -13656,7 +14698,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Solriamfetol"
+    "wikipedia": "https://en.wikipedia.org/wiki/Solriamfetol",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 783,
+        "quote": "Dopamine and norepinephrine reuptake inhibitor",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "sulpiride",
@@ -13806,6 +14856,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 787,
+        "quote": "Conventional antipsychotic (neuroleptic, benzamide, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -13828,7 +14886,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Suvorexant"
+    "wikipedia": "https://en.wikipedia.org/wiki/Suvorexant",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 793,
+        "quote": "Dual orexin receptor antagonist (DORA); hypnotic",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "tasimelteon",
@@ -13866,7 +14932,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Tasimelteon"
+    "wikipedia": "https://en.wikipedia.org/wiki/Tasimelteon",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 797,
+        "quote": "Melatonin 1 and 2 receptor agonist",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "temazepam",
@@ -13903,6 +14977,14 @@
         "corpus": "stahl",
         "page": 801,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 801,
+        "quote": "Benzodiazepine (hypnotic)",
         "provenance": "verified"
       }
     ]
@@ -14111,6 +15193,14 @@
         "corpus": "stahl",
         "page": 805,
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 805,
+        "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)",
         "provenance": "verified"
       }
     ]
@@ -14617,7 +15707,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Thiothixene"
+    "wikipedia": "https://en.wikipedia.org/wiki/Thiothixene",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 811,
+        "quote": "Conventional antipsychotic (neuroleptic, thioxanthene, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "tiagabine",
@@ -14639,7 +15737,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Tiagabine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Tiagabine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 817,
+        "quote": "Anticonvulsant; selective GABA reuptake inhibitor (SGRI)",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "tianeptine",
@@ -14704,6 +15810,14 @@
         "quote": "Neuroscience-based Nomenclature: glutamate; yet to be determined (Glu)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 823,
+        "quote": "Often classified as a tricyclic antidepressant, but pharmacologically distinct",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -14752,7 +15866,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Topiramate"
+    "wikipedia": "https://en.wikipedia.org/wiki/Topiramate",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 827,
+        "quote": "Anticonvulsant, voltage-sensitive sodium channel modulator",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "tranylcypromine",
@@ -14796,6 +15918,14 @@
         "corpus": "stahl",
         "page": 833,
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine multimodal enzyme inhibitor (SN-MM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 833,
+        "quote": "Monoamine oxidase inhibitor (MAOI)",
         "provenance": "verified"
       }
     ]
@@ -15059,6 +16189,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin receptor antagonist (S-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 839,
+        "quote": "SARI (serotonin 2 antagonist/reuptake inhibitor); antidepressant; hypnotic",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -15096,6 +16234,14 @@
         "corpus": "stahl",
         "page": 845,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 845,
+        "quote": "Benzodiazepine (hypnotic)",
         "provenance": "verified"
       }
     ]
@@ -15416,6 +16562,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 849,
+        "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -15456,7 +16610,15 @@
         }
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Trihexyphenidyl"
+    "wikipedia": "https://en.wikipedia.org/wiki/Trihexyphenidyl",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 855,
+        "quote": "Antiparkinson agent; anticholinergic",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "triiodothyronine",
@@ -15465,7 +16627,15 @@
       "other"
     ],
     "bindings": [],
-    "wikipedia": "https://en.wikipedia.org/wiki/Triiodothyronine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Triiodothyronine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 859,
+        "quote": "Synthetic hormone; antidepressant adjunct",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "trimipramine",
@@ -15625,6 +16795,20 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 863,
+        "quote": "Tricyclic antidepressant (TCA)",
+        "provenance": "verified"
+      },
+      {
+        "corpus": "stahl",
+        "page": 863,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -15647,7 +16831,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Valbenazine"
+    "wikipedia": "https://en.wikipedia.org/wiki/Valbenazine",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 871,
+        "quote": "Vesicular monoamine transporter 2 (VMAT2) inhibitor",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "valproate",
@@ -15682,6 +16874,14 @@
         "quote": "Neuroscience-based Nomenclature: glutamate (Glu); yet to be determined",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 875,
+        "quote": "Anticonvulsant, mood stabilizer, migraine prophylaxis, voltage-sensitive sodium channel modulator",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -15714,6 +16914,14 @@
         "corpus": "stahl",
         "page": 883,
         "quote": "Neuroscience-based Nomenclature: acetylcholine receptor partial agonist (ACh-RPA)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 883,
+        "quote": "Smoking cessation treatment; alpha 4 beta 2 partial agonist at nicotinic acetylcholine receptors",
         "provenance": "verified"
       }
     ]
@@ -16162,6 +17370,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 887,
+        "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -16227,6 +17443,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 893,
+        "quote": "SPARI (serotonin partial agonist reuptake inhibitor)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -16283,6 +17507,14 @@
         "corpus": "stahl",
         "page": 899,
         "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 899,
+        "quote": "Selective norepinephrine reuptake inhibitor (NRI)",
         "provenance": "verified"
       }
     ]
@@ -16380,6 +17612,14 @@
         "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 905,
+        "quote": "Multimodal antidepressant",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -16416,6 +17656,14 @@
         "corpus": "stahl",
         "page": 911,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 911,
+        "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform agonist of GABA-A/benzodiazepine receptors",
         "provenance": "verified"
       }
     ]
@@ -16662,6 +17910,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 915,
+        "quote": "Atypical antipsychotic (serotonin– dopamine, serotonin; second-generation antipsychotic; also a mood stabilizer)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -16698,6 +17954,14 @@
         "corpus": "stahl",
         "page": 923,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 923,
+        "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform selective agonist of GABA-A/ benzodiazepine receptors",
         "provenance": "verified"
       }
     ]
@@ -16747,7 +18011,15 @@
         ]
       }
     ],
-    "wikipedia": "https://en.wikipedia.org/wiki/Zonisamide"
+    "wikipedia": "https://en.wikipedia.org/wiki/Zonisamide",
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 927,
+        "quote": "Anticonvulsant, voltage-sensitive sodium channel modulator; T-type calcium channel modulator; structurally a sulfonamide",
+        "provenance": "verified"
+      }
+    ]
   },
   {
     "id": "zopiclone",
@@ -16784,6 +18056,14 @@
         "corpus": "stahl",
         "page": 931,
         "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 931,
+        "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform selective agonist of GABA-A/ benzodiazepine receptors",
         "provenance": "verified"
       }
     ]
@@ -17006,6 +18286,14 @@
         "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)",
         "provenance": "verified"
       }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 935,
+        "quote": "Atypical antipsychotic (serotonin– dopamine antagonist)",
+        "provenance": "verified"
+      }
     ]
   },
   {
@@ -17079,6 +18367,14 @@
         "corpus": "stahl",
         "page": 941,
         "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)",
+        "provenance": "verified"
+      }
+    ],
+    "category_sources": [
+      {
+        "corpus": "stahl",
+        "page": 941,
+        "quote": "Conventional antipsychotic (neuroleptic, thioxanthene, dopamine 2 antagonist)",
         "provenance": "verified"
       }
     ]
