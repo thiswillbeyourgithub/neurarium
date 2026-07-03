@@ -10,13 +10,19 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-04, after the drug-class + circuits/groups/refs wins)
+## Snapshot (2026-07-04, after the drug-class + circuits/groups/refs + Nieuwenhuys wins)
 
-Headline: **1093 / 1665 knowledge nodes backed (66%)**. In the tally a bare `llm`
+Headline: **1110 / 1665 knowledge nodes backed (67%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
-"missing" below means `llm` or no source at all. 572 knowledge nodes are missing.
+"missing" below means `llm` or no source at all. 555 knowledge nodes are missing.
 
-> **Recently closed.** Four smaller kinds are now fully sourced:
+> **Recently closed.** Several smaller kinds are now fully (or nearly) sourced:
+> - `structures` 52/52 verified: the last four (claustrum + fornix) closed against the
+>   newly-wired **Nieuwenhuys** atlas (corpus #6), which Kandel does not describe in prose.
+> - `projections` 99/103 verified: 7 limbic/olfactory/commissural families closed against
+>   Nieuwenhuys (fornix chain, hippocampo-septal, septo-hypothalamic, olfactory-bulb to
+>   amygdala, temporal anterior commissure, insula to cingulate). Only claustrum to frontal
+>   and claustrum to insula remain (no single Nieuwenhuys page states them; not forced).
 > - `drug_categories` 156/158 verified against Stahl's "Class" section (Haiku extract,
 >   Sonnet judge, `apply_category_sources.py` re-find + write, `check_data.py` re-verify;
 >   the 2 left are `naltrexonebupropion` (Stahl "weight management medication" vs our
@@ -28,32 +34,32 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 >   the transmitter quotes).
 > - `references` 2/2 closed: Wikipedia links added for the carbonic-anhydrase + PDE5 targets.
 >
-> Headline 55% (pre-drug-class) to 66%. The table below is the post-win state.
+> Headline 55% (pre-drug-class) to 67%. The table below is the post-win state.
 
 | Node kind | Missing | Total | Share of the gap | Difficulty | Best lever |
 | --- | ---: | ---: | ---: | --- | --- |
-| `receptor_locations` | 383 | 383 | 66.9% | Hard | expression atlas |
-| `target_locations` | 124 | 124 | 21.7% | Hard | expression atlas |
-| `receptors` (mechanism) | 26 | 56 | 4.5% | Medium | IUPHAR Guide to Pharmacology |
-| `projections` | 17 | 103 | 3.0% | Hard | connectivity atlas |
-| `drug_bindings` | 12 | 632 | 2.1% | Medium | PDSP refresh + primary lit |
+| `receptor_locations` | 383 | 383 | 69.0% | Hard | expression atlas |
+| `target_locations` | 124 | 124 | 22.3% | Hard | expression atlas |
+| `receptors` (mechanism) | 26 | 56 | 4.7% | Medium | IUPHAR Guide to Pharmacology |
+| `drug_bindings` | 12 | 632 | 2.2% | Medium | PDSP refresh + primary lit |
+| `projections` | 4 | 103 | 0.7% | Hard | claustrum primary lit |
 | `targets` (classification) | 4 | 25 | 0.7% | **Easy** | IUPHAR / textbook |
-| `structures` (anatomy) | 4 | 52 | 0.7% | Hard | non-Kandel neuroanatomy atlas |
+| `drug_categories` | 2 | 158 | 0.4% | flagged | Stahl "Class" line |
+| `structures` (anatomy) | 0 | 52 | **DONE** (52/52) | done | Kandel + Nieuwenhuys |
 | `circuits` | 0 | 6 | **DONE** (6/6) | done | Kandel prose |
 | `projection_groups` | 0 | 10 | **DONE** (10/10) | done | Stahl Essential / Kandel |
-| `drug_categories` | 2 | 158 | **DONE** (156/158) | done | Stahl "Class" line |
 | `references` (Wikipedia links) | 0 | 298 | **DONE** (not in headline) | done | Wikipedia URLs |
 
-**The shape of the problem:** two kinds are now **89%** of the remaining gap, both
+**The shape of the problem:** two kinds are now **91%** of the remaining gap, both
 per-region "expression" claims (`receptor_locations` + `target_locations` = 507 nodes)
 that need a brain expression atlas we do not yet have wired. Everything else combined is
-11% of the gap and is mostly "the four books we hold do not state it in prose."
+9% of the gap and is mostly "the books we hold do not state it in prose."
 
-Four corpora are wired into `SOURCE_CORPORA` today (`stahl`, `kandel`, `stahl_essential`,
-`carlat`) plus the `pdsp_ki` CSV. The book-prose wins those four allow are largely
-exhausted (see the sourcing memory); the remaining gaps mostly need a **new kind of
-source**: an expression atlas, a receptor-classification database, or a connectivity
-atlas.
+Five book corpora are wired into `SOURCE_CORPORA` today (`stahl`, `kandel`,
+`stahl_essential`, `carlat`, `nieuwenhuys`) plus the `pdsp_ki` CSV. The book-prose wins
+those allow are largely exhausted (see the sourcing memory); the remaining gaps mostly
+need a **new kind of source**: an expression atlas, a receptor-classification database,
+or (for the last two claustrum pathways) primary literature.
 
 ---
 
@@ -118,26 +124,25 @@ book discusses in running text).
   Stahl Essential's own tables become quotable.
 - Or a neuropharmacology textbook with prose subtype descriptions (Katzung, Rang & Dale).
 
-### 4. `projections`, 17 / 103 missing (11 claim-families)
+### 4. `projections`, 4 / 103 missing (2 claim-families, mostly closed)
 
-**What.** 17 pathway arrows (11 distinct L/R families) with no source: the fornix chain
-(hippocampus to fornix to mammillary), hippocampo-septal, septo-hypothalamic,
-olfactory-bulb to amygdala, the temporal anterior commissure, insula to cingulate
-("salience"), and the four claustrum pathways (claustro-frontal, claustro-insular).
+**What.** Just 4 pathway arrows (2 distinct L/R families) remain unsourced: claustrum to
+frontal and claustrum to insula. The fornix chain (hippocampus to fornix to mammillary),
+hippocampo-septal, septo-hypothalamic, olfactory-bulb to amygdala, the temporal anterior
+commissure, and insula to cingulate were **closed against the Nieuwenhuys atlas** (corpus
+#6): a Sonnet judge confirmed each verbatim single-page quote asserts the directed pathway.
 
-**Why not verified.** Kandel genuinely does not state these **directionally in prose**:
-the claustrum never appears in Kandel; the fornix is only a figure label; the salience
-link is stated only symmetrically; olfactory to amygdala is split across two sentences.
-They were not forced (correctly).
+**Why the last two are not verified.** The Nieuwenhuys atlas states claustrum-to-neocortex
+connectivity only **in aggregate**: the sentence naming the specific frontal areas (motor,
+premotor, prefrontal area 46, orbitofrontal area 12) sits on a different PDF page than the
+connecting verb, so no single quotable page asserts "claustrum to frontal", and no page
+asserts a claustrum-insula **fibre projection** at all (only that the claustrum is
+adjacent to and developmentally derived from the insular cortex). The judge rejected the
+generic "many neocortical areas" sentence for both, so they were not forced.
 
-**How to tackle.** Needs a **connectivity source** beyond Kandel:
-- **Nieuwenhuys, "The Human Central Nervous System"** (systematic tract-by-tract prose),
-  covers the fornix, commissures, claustrum connectivity.
-- A **white-matter tractography atlas** (e.g. the Catani/Thiebaut de Schotten atlas) for
-  the association/commissural pathways.
-- Claustrum connectivity is genuinely thin in the literature; those four may stay
-  `tentative`/`llm` honestly, or lean on a claustrum review (Crick & Koch 2005 and
-  successors) via primary lit / NCBI.
+**How to tackle.** These two need a **claustrum-specific** source: a claustrum connectivity
+review (Crick & Koch 2005 and successors) via primary lit / NCBI, or a tract-tracing paper.
+Given how thin claustrum connectivity is in the literature, they may honestly stay `llm`.
 
 ### 5. `drug_bindings`, 12 / 632 missing
 
@@ -187,16 +192,16 @@ Ca channel (`cav_t`), melanocortin receptor group.
 **How to tackle.** All four are textbook-standard targets, one **IUPHAR/BPS** page or a
 pharmacology-textbook sentence each (same corpus as #3, so do them together). 4 nodes.
 
-### 9. `structures` (anatomy), 4 / 52 missing
+### 9. `structures` (anatomy), DONE (52 / 52 verified)
 
-**What.** Claustrum (L/R) and fornix (L/R) region-anatomy nodes.
+**What.** Every region-anatomy node is now verified.
 
-**Why not verified.** The claustrum has **0 hits** in Kandel; the fornix appears only as
-a figure label. 48 of 52 structures are verified against Kandel; these 4 are the residue.
-
-**How to tackle.** A **non-Kandel neuroanatomy atlas** that describes them in prose:
-**Nieuwenhuys**, Gray's Anatomy, or Netter's atlas text. Pairs naturally with #4 (same
-claustrum/fornix sources). 4 nodes.
+**How it was closed.** 48 of 52 were already verified against Kandel; the last four
+(claustrum + fornix, which Kandel does not describe in prose) were closed against the
+newly-wired **Nieuwenhuys** atlas (corpus #6): the claustrum as "a thin sheet of grey
+matter ... between the putamen and the insular cortex" (p421) and the fornix as "a large
+fibre system that connects the hippocampal formation with the septum and the hypothalamus"
+(p64). Same Sonnet judge + verbatim on-page gate as the pathways.
 
 ### 10. `drug_categories`, DONE (156 / 158 verified)
 
@@ -239,27 +244,28 @@ Ordered by **value per unit effort**, not by raw node count:
 
 1. ~~`drug_categories`~~ **DONE** (156/158 verified via `apply_category_sources.py`;
    headline 55% to 65%).
-2. ~~`references` (2)~~ **DONE** (Wikipedia URLs for carbonic anhydrase + PDE5). Its
-   sibling hand-fixable batches remain: `targets` (4) + `structures` (4) claustrum/fornix,
-   a handful of IUPHAR/Nieuwenhuys quotes, but no such corpus is wired yet (folded into #4).
+2. ~~`references` (2)~~ **DONE** (Wikipedia URLs for carbonic anhydrase + PDE5).
 3. ~~`circuits` (6) + `projection_groups` (10)~~ **DONE** (16 nodes verified against Kandel
    + Stahl Essential via the existing quote-source mechanism; headline to 66%).
-4. **`receptors` mechanism (26) + `targets` (4)**, wire **IUPHAR/BPS Guide to
-   Pharmacology** as corpus #6; it closes both in one integration.
-5. **`target_locations` (124), then `receptor_locations` (383)**, the big prize (86% of
+4. ~~`structures` (4) + `projections` (13 of 17)~~ **DONE** (claustrum + fornix structures
+   and 7 limbic/olfactory/commissural pathway families verified against the newly-wired
+   **Nieuwenhuys** atlas, corpus #6; headline 66% to 67%). Only claustrum to frontal +
+   claustrum to insula remain (not stated on any single Nieuwenhuys page; folded into #7).
+5. **`receptors` mechanism (26) + `targets` (4)**, wire **IUPHAR/BPS Guide to
+   Pharmacology** as corpus #7; it closes both in one integration.
+6. **`target_locations` (124), then `receptor_locations` (383)**, the big prize (91% of
    the remaining gap) and the hardest. Build the expression-atlas fetch+join tool (model
    on `fetch_ki.py`), prove it on the coarser target expression, then extend to receptors.
    This is the one that needs real new infrastructure and the atlas-region to `base` map.
-6. **`projections` (17) + `drug_bindings` (12)**, opportunistic: a PDSP refresh for the
-   bindings, a connectivity atlas or primary lit for the pathways; some may honestly stay
-   `tentative`.
+7. **`drug_bindings` (12) + the last 2 `projections`**, opportunistic: a PDSP refresh for
+   the bindings, claustrum-specific primary lit for claustrum to frontal / insula; some may
+   honestly stay `tentative`/`llm`.
 
-**Books/sources we likely still need (beyond the four wired):**
+**Books/sources we likely still need (beyond the five wired):**
 - a **brain expression atlas** (Allen Brain Atlas / Human Protein Atlas), unlocks the 507
   location nodes, by far the largest lever;
 - **IUPHAR/BPS Guide to Pharmacology** (free, online, citable), receptor + target
   classifications (30 nodes) and per-target tissue-distribution citations;
-- a **systematic connectivity/neuroanatomy atlas** (Nieuwenhuys), the claustrum/fornix
-  structures + the association/commissural pathways;
 - **NCBI/PubMed primary literature** as the genuine last resort for the handful of claims
-  (claustrum connectivity, a few tentative subtype affinities) no reference book states.
+  (claustrum-to-frontal/insula connectivity, a few tentative subtype affinities) no
+  reference book states.
