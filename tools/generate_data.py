@@ -3001,10 +3001,40 @@ CIRCUITS: list[dict[str, Any]] = [
 # The member pathways are NOT listed here: the
 # viewer derives them (the projections whose kind / sign matches ``key``), exactly
 # as a circuit derives its arrows, so a group never duplicates the projection list.
-# ``classification_provenance`` grades the grouping/description (LLM-authored).
+# ``classification_provenance`` grades the grouping/description (LLM-authored); an
+# optional ``sources`` list carries a verified quote backing the group's identity.
+#
+# Verified quote-sources for the group nodes, defined once and referenced by the
+# entries below (no quote text duplicated). Transmitter groups get a defining
+# sentence from Stahl Essential / Kandel; the two sign groups excitatory/inhibitory
+# reuse their dominant transmitter's quote (glutamate = excitatory, GABA =
+# inhibitory) and the dopaminergic group reuses the nigrostriatal quote already
+# verified for its member projections.
+_SG_GLUTAMATE = _stahl_ess(112,
+    "Glutamate is the major excitatory neurotransmitter in the central nervous system")
+_SG_GABA = _stahl_ess(271,
+    "GABA is the principle inhibitory neurotransmitter in the brain, and normally "
+    "serves an important regulatory role in reducing the activity of many neurons.")
+_SG_ACH = _kandel(1047,
+    "These neurons project throughout the cerebral cortex, hippocampus, and amygdala. "
+    "Both groups play an important role in arousal, and the basal forebrain groups are "
+    "also involved in more selective attention.")
+_SG_NEUROENDOCRINE = _kandel(1075,
+    "A group of hypothalamic peptide hormones that control pituitary hormone secretion "
+    "from the five classic endocrine cell types in the anterior pituitary.")
+_SG_SEROTONIN = _kandel(1048,
+    "The B5-B7 neurons in the pons mainly provide serotonergic innervation of the "
+    "thalamus, hypothalamus, and cerebral cortex.")
+_SG_NORADRENALINE = _kandel(1561,
+    "The major noradrenergic projection of the forebrain arises in the locus ceruleus.")
+_SG_MODULATORY = _kandel(368,
+    "Neuromodulators are substances that bind to receptors, most of which are "
+    "metabotropic, to alter the excitability of neurons, the likelihood of transmitter "
+    "release, or the functional state of receptors on postsynaptic neurons.")
 PROJECTION_GROUPS: list[dict[str, Any]] = [
     # --- per-neurotransmitter (mode="kind"); name = the transmitter molecule -----
     dict(mode="kind", key="excitatory", name="Glutamate",
+         sources=[_SG_GLUTAMATE],
          description="The brain's main excitatory transmitter: glutamatergic "
                      "projections drive their targets, including the "
                      "corticostriatal and thalamocortical pathways.",
@@ -3013,6 +3043,7 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "les voies cortico-striées et thalamo-corticales.",
          wikipedia="https://en.wikipedia.org/wiki/Glutamate_(neurotransmitter)"),
     dict(mode="kind", key="inhibitory", name="GABA",
+         sources=[_SG_GABA],
          description="The brain's main inhibitory transmitter: GABAergic "
                      "projections suppress their targets, including the striatal "
                      "output of the basal ganglia.",
@@ -3021,6 +3052,7 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "sortie striatale des noyaux gris centraux.",
          wikipedia="https://en.wikipedia.org/wiki/Gamma-Aminobutyric_acid"),
     dict(mode="kind", key="dopaminergic", name="Dopamine",
+         sources=[_KQ_NIGROSTRIATAL],
          description="Dopaminergic projections from the midbrain (substantia "
                      "nigra, VTA) modulate movement, motivation and reward.",
          description_fr="Les projections dopaminergiques du mésencéphale (substance "
@@ -3028,12 +3060,14 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "récompense.",
          wikipedia="https://en.wikipedia.org/wiki/Dopaminergic_pathways"),
     dict(mode="kind", key="cholinergic", name="Acetylcholine",
+         sources=[_SG_ACH],
          description="Cholinergic projections modulate arousal, attention and "
                      "memory across the cortex and hippocampus.",
          description_fr="Les projections cholinergiques modulent l'éveil, "
                         "l'attention et la mémoire dans le cortex et l'hippocampe.",
          wikipedia="https://en.wikipedia.org/wiki/Cholinergic"),
     dict(mode="kind", key="neuroendocrine", name="Releasing hormones",
+         sources=[_SG_NEUROENDOCRINE],
          description="Hypothalamic neuroendocrine projections release hormones "
                      "that control the pituitary and the body's endocrine axes.",
          description_fr="Les projections neuroendocrines de l'hypothalamus libèrent "
@@ -3041,6 +3075,7 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "endocriniens.",
          wikipedia="https://en.wikipedia.org/wiki/Releasing_hormone"),
     dict(mode="kind", key="serotonergic", name="Serotonin",
+         sources=[_SG_SEROTONIN],
          description="Serotonergic projections from the raphe nuclei diffusely "
                      "modulate mood, sleep and appetite throughout the brain.",
          description_fr="Les projections sérotoninergiques des noyaux du raphé "
@@ -3048,6 +3083,7 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "dans tout le cerveau.",
          wikipedia="https://en.wikipedia.org/wiki/Serotonergic"),
     dict(mode="kind", key="noradrenergic", name="Noradrenaline",
+         sources=[_SG_NORADRENALINE],
          description="Noradrenergic projections from the locus coeruleus modulate "
                      "arousal, vigilance and the stress response.",
          description_fr="Les projections noradrénergiques du locus coeruleus "
@@ -3055,12 +3091,14 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
          wikipedia="https://en.wikipedia.org/wiki/Norepinephrine"),
     # --- per-sign (mode="sign"); name = the SIGN_LABELS heading ------------------
     dict(mode="sign", key="excitatory", name="Excitatory",
+         sources=[_SG_GLUTAMATE],
          description="Excitatory pathways depolarize their target, making it more "
                      "likely to fire (mainly glutamatergic).",
          description_fr="Les voies excitatrices dépolarisent leur cible, la rendant "
                         "plus susceptible de décharger (surtout glutamatergiques).",
          wikipedia="https://en.wikipedia.org/wiki/Excitatory_postsynaptic_potential"),
     dict(mode="sign", key="inhibitory", name="Inhibitory",
+         sources=[_SG_GABA],
          description="Inhibitory pathways hyperpolarize their target, making it "
                      "less likely to fire (mainly GABAergic).",
          description_fr="Les voies inhibitrices hyperpolarisent leur cible, la "
@@ -3068,6 +3106,7 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "GABAergiques).",
          wikipedia="https://en.wikipedia.org/wiki/Inhibitory_postsynaptic_potential"),
     dict(mode="sign", key="modulatory", name="Modulatory",
+         sources=[_SG_MODULATORY],
          description="Modulatory pathways (the monoamines and acetylcholine) tune "
                      "the gain and excitability of their targets rather than "
                      "directly exciting or inhibiting them.",
