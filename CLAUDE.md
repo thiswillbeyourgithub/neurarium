@@ -156,7 +156,9 @@ Data + authoring (`tools/`):
 - `tools/build_index.py`: Stahl-specific page index (detects each monograph by its
   `THERAPEUTICS` heading). `uv run`.
 - `tools/update_readme_stats.py` — rewrites the README `SOURCING_STATS` block from
-  `meta.provenance_stats`; `--check` exits 1 if out of date (CI). Idempotent.
+  `meta.provenance_stats` (and syncs the header's proof-first headline % in the
+  optional `SOURCED_HEADLINE` inline markers, so it can't drift from the block);
+  `--check` exits 1 if out of date (CI). Idempotent.
 - `tools/fetch_molecules.py` — downloads each drug's molecular-structure SVG into
   `public/data/molecules/<id>.svg` (network, idempotent, polite); writes
   `tools/molecules_sources.json`. See Images.
