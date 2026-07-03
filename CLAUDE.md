@@ -815,7 +815,8 @@ whether first picked or re-shown. An empty-space click returns to Settings
 > **Panel changes are cross-cutting: think in node kinds, not one panel.** All info
 > is organized into nodes, and the seven `show*()` views (connection / structure /
 > receptor / target / drug / circuit / projection-group) share the same building
-> blocks (`makeProvenancePill`, `pathwayRow` / `appendPathwayList`, `locationList`,
+> blocks (`makeProvenancePill`, `appendSourcedHeading` = a node's identity line +
+> its grade pill, `pathwayRow` / `appendPathwayList`, `locationList`,
 > `appendReference` / `appendWikiImages`, the "Interacting drugs" / "Found in" lists).
 > When you change what one panel shows or how it renders a row, **check whether the
 > other panel kinds carry the analogous node and would benefit from the same change,
