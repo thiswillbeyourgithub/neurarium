@@ -512,7 +512,9 @@
       "system": null,
       "receptor": null,
       "regions": [],
-      "classification_provenance": "llm"
+      "classification_provenance": "llm",
+      "wikipedia": "https://en.wikipedia.org/wiki/Carbonic_anhydrase",
+      "wikipedia_provenance": "sourced"
     },
     "pde5": {
       "name": {
@@ -523,7 +525,9 @@
       "system": null,
       "receptor": null,
       "regions": [],
-      "classification_provenance": "llm"
+      "classification_provenance": "llm",
+      "wikipedia": "https://en.wikipedia.org/wiki/PDE5",
+      "wikipedia_provenance": "sourced"
     },
     "nav": {
       "name": {
@@ -2244,8 +2248,8 @@
       "references": {
         "total": 298,
         "verified": 0,
-        "sourced": 296,
-        "missing": 2
+        "sourced": 298,
+        "missing": 0
       }
     },
     "nodes": {
