@@ -1254,7 +1254,9 @@ painted first as the offline fallback, which the live lead overrides best-effort
 arrives. Needs the `connect-src https://*.wikipedia.org` CSP allowance.
 
 **The `wikipedia` pill (green, viewer-only).** A live-fetched Wikipedia lead renders a green
-**W** pill, NOT the stored `sourced`/`llm` grades: a live fetch is a verbatim programmatic
+**✓** pill (the same glyph + colour as `verified`, since both are inspectable non-LLM
+extracts; a newcomer reads one "trustworthy" checkmark, the tooltip names which), NOT the
+stored `sourced`/`llm` grades: a live fetch is a verbatim programmatic
 read of an inspectable source with no LLM in the loop, so it cannot drift from the article,
 which is exactly the "green if true according to some inspectable source" bar. It is a
 **presentation** (an added `PROVENANCE_PILLS.wikipedia` glyph + `info.provWikipedia`

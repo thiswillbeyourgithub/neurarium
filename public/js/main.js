@@ -1710,7 +1710,10 @@ function createInfoPanel(data) {
     llm: { glyph: "?", tip: "info.provLlm" },
     sourced: { glyph: "~", tip: "info.provSourced" },
     verified: { glyph: "✓", tip: "info.provVerified" },
-    wikipedia: { glyph: "W", tip: "info.provWikipedia" },
+    // A live Wikipedia read shares the green *and* the ✓ of `verified`: both are an
+    // inspectable, non-LLM extract of a real source, so a newcomer reads one "this is
+    // trustworthy" checkmark rather than a cryptic "W" (the tooltip still names which).
+    wikipedia: { glyph: "✓", tip: "info.provWikipedia" },
   };
   // `extra` (optional) is the concrete source shown *first* in the tooltip (the
   // per-claim drug pill's verbatim quote + page ref, or a bibliographic citation),
@@ -3492,7 +3495,7 @@ function buildAboutSourcing(meta) {
   const key = h("ul", "src-key");
   const keyRows = [
     ["src-prov-verified", "✓", "about.gradeVerified"],
-    ["src-prov-wikipedia", "W", "about.gradeWikipedia"],
+    ["src-prov-wikipedia", "✓", "about.gradeWikipedia"],
     ["src-prov-sourced", "~", "about.gradeSourced"],
     ["src-prov-llm", "?", "about.gradeLlm"],
     ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
