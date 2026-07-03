@@ -929,7 +929,6 @@ FR: dict[str, str] = {
     "Claustro-insular projection": "Projection claustro-insulaire",
     "Salience network link": "Lien du réseau de saillance",
     "Basolateral amygdala to accumbens": "Amygdale basolatérale vers accumbens",
-    "Mammillary-hypothalamic link": "Lien mammillo-hypothalamique",
     "Septohypothalamic projection": "Projection septo-hypothalamique",
     # Ascending monoamine system labels (the brainstem source nuclei)
     "Ascending serotonergic (prefrontal)":
@@ -2251,9 +2250,8 @@ KANDEL_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "cortices."),
     # Limbic / Papez circuit. One Papez sentence backs cingulate->hippocampus and
     # anterior-thalamus->cingulate; the fornix tract (hippocampus->fornix->
-    # mammillary) and mammillary->hypothalamus + septal links stay unsourced
-    # (Kandel describes the fornix only as a figure label, and treats the
-    # mammillary bodies as part of the hypothalamus).
+    # mammillary) and the septal->hypothalamus link stay unsourced (Kandel
+    # describes the fornix only as a figure label).
     ("cingulate_R", "hippocampus_R"): _KQ_PAPEZ,
     ("thalamus_R", "cingulate_R"): _KQ_PAPEZ,
     ("mammillary_R", "thalamus_R"): _kandel(130,
@@ -2874,11 +2872,10 @@ PROJECTIONS: list[dict[str, Any]] = [
          label="Basolateral amygdala to accumbens",
          description="Basolateral amygdala glutamatergic input to the ventral "
                      "striatum (motivational salience)."),
-    dict(**{"from": "mammillary_R", "to": "hypothalamus_R"},
-         kind="excitatory", neurotransmitter="Glutamate", tentative=True,
-         label="Mammillary-hypothalamic link",
-         description="The mammillary bodies sit within and connect to the "
-                     "posterior hypothalamus."),
+    # (No mammillary -> hypothalamus arrow: Kandel treats the mammillary bodies
+    # as part of the posterior hypothalamus, so that is anatomical containment,
+    # not a projection. The bodies' real efferent is the mammillothalamic tract,
+    # mammillary -> thalamus, modeled above.)
     dict(**{"from": "septal_nuclei_R", "to": "hypothalamus_R"},
          kind="inhibitory", neurotransmitter="GABA", tentative=True,
          label="Septohypothalamic projection",

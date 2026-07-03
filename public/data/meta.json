@@ -2194,10 +2194,10 @@
         "missing": 158
       },
       "projections": {
-        "total": 105,
+        "total": 103,
         "verified": 86,
         "sourced": 0,
-        "missing": 19
+        "missing": 17
       },
       "circuits": {
         "total": 6,
@@ -2249,10 +2249,10 @@
       }
     },
     "nodes": {
-      "total": 1667,
+      "total": 1665,
       "verified": 921,
       "sourced": 0,
-      "missing": 746,
+      "missing": 744,
       "backed": 921,
       "pct_backed": 55
     }

@@ -1299,10 +1299,10 @@ references) plus a headline `pct_backed` over the **knowledge nodes** (sourced-o
 `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
 coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). Current: ~55% of 1667 nodes backed (drug
+points *at* a node, it is not itself one). Current: ~55% of 1665 nodes backed (drug
 bindings ~98%, NbN 100%; the big gap is the 383 `receptor_locations` + 158
 `drug_categories` + 124 `target_locations`, all `missing` today (no expression atlas /
-class-source wired yet), then the 26 `llm` receptor classifications, the 19 unsourced
+class-source wired yet), then the 26 `llm` receptor classifications, the 17 unsourced
 projections, and the 16 circuits + projection groups, all `missing`). Each expression
 region is its own node (per the request to grade each "Found in", not the list as a whole),
 individually upgradeable when sourced. Descriptions are no longer a node kind: every
