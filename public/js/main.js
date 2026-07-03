@@ -1905,21 +1905,26 @@ function createInfoPanel(data) {
       binding.effect, affinity ? "#8a8f98" : binding.effectColor,
       affinity ? t("drug.affinityOnly") : binding.effectLabel));
     const txt = el("div", "bind-text");
-    txt.appendChild(el("span", "bind-target", nameText));
+    // Name + the binding's own source pill share the first line, so the pill sits
+    // right of the target name rather than being stranded at the far panel edge
+    // past the (wide) Ki line below it. An affinity_only binding carries no source
+    // pill (its Ki's verified badge is the only source), so the name stands alone.
+    const nameRow = el("div", "bind-name");
+    nameRow.appendChild(el("span", "bind-target", nameText));
+    if (!affinity) nameRow.appendChild(bindingProvenancePill(binding));
+    txt.appendChild(nameRow);
     const parts = [affinity ? t("drug.affinityOnly") : binding.actionLabel,
                    binding.note];
     if (binding.tentative) parts.push(t("drug.speculative"));
     const detail = parts.filter(Boolean).join(" · ");
     if (detail) txt.appendChild(el("span", "bind-action", detail));
-    // Ki stacked under the name so on a narrow (mobile) panel it wraps below the
-    // name instead of pushing the source pill off the row.
+    // Ki stacked under the name+action, with its own verified badge beside it.
     if (binding.ki) {
       const kiLine = el("div", "bind-ki");
       kiLine.appendChild(kiChip(binding.ki));
       txt.appendChild(kiLine);
     }
     li.appendChild(txt);
-    if (!affinity) li.appendChild(bindingProvenancePill(binding));
     li.title = affinity
       ? `${t("drug.affinityOnly")} · ${nameText}`
       : `${binding.effectLabel} · ${nameText}`;

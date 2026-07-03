@@ -1195,7 +1195,12 @@
         cursor: pointer;
       }
       .info-connections li:hover { color: var(--accent-bright); }
-      .info-connections .conn-label { flex: 1; }
+      /* The label only takes the width it needs so its summary provenance pill sits
+         right beside it, not stranded at the far panel edge (same treatment as the
+         "Found in" .loc-name and the binding .bind-text). Applies to every pathway
+         list: a structure's connections, a circuit/group's members, and the drug
+         panel's "Projections affected". */
+      .info-connections .conn-label { flex: 0 1 auto; min-width: 0; }
       /* Bold colour direction arrow for a connection row (see directionArrow):
          large + filled in the pathway colour so it is easy to read at a glance. */
       .info-connections .conn-arrow {
@@ -1311,6 +1316,14 @@
         gap: 1px;
         min-width: 0;
       }
+      /* Name + the binding's source pill on one line, so the pill reads as
+         belonging to this target's name (it wraps below on a very narrow panel). */
+      .info-bindings .bind-name {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
       .info-bindings .bind-target { font-weight: 600; }
       .info-bindings .bind-action { color: var(--muted); font-size: 11px; }
       .info-bindings li.tentative { opacity: 0.6; font-style: italic; }
@@ -1320,10 +1333,10 @@
          name reads as a link on hover. */
       .info-bindings li.clickable { cursor: pointer; }
       .info-bindings li.clickable:hover .bind-target { color: var(--accent-bright); }
-      /* The text column (name / action / Ki stack) takes only the width it needs so
-         the binding's source pill sits right beside that stack, not stranded at the
-         far panel edge (more legible: the pill reads as belonging to this drug). It
-         still shrinks + wraps (min-width:0) when the name leaves it no room. */
+      /* The text column (name+pill / action / Ki stack) takes only the width it
+         needs; the source pill rides the name line (.bind-name) so it stays beside
+         the name rather than stranded past the wide Ki line. It still shrinks +
+         wraps (min-width:0) when the name leaves it no room. */
       .info-bindings .bind-text { flex: 0 1 auto; }
       /* Measured PDSP Ki, stacked under the name + action inside the text column
          (so on a narrow / mobile panel it wraps below the name rather than pushing
