@@ -3730,14 +3730,21 @@ function buildAboutSourcing(meta) {
     structures: "about.kindStructures",
     references: "about.kindReferences",
   };
+  // Rows are sorted best-coverage-first (highest % of backed nodes), ties broken by
+  // the larger node count, so the strongest-sourced kinds head the list.
+  const rows = [];
   for (const [kind, labelKey] of Object.entries(KIND_LABELS)) {
     const c = (stats.by_kind || {})[kind];
     if (!c || !c.total) continue;
     const backed = (c.verified || 0) + (c.sourced || 0);
     const pct = Math.round((100 * backed) / c.total);
+    rows.push({ labelKey, backed, total: c.total, pct });
+  }
+  rows.sort((x, y) => y.pct - x.pct || y.total - x.total);
+  for (const { labelKey, backed, total, pct } of rows) {
     const row = h("div", "src-stat-row");
     row.appendChild(h("span", "src-stat-label", t(labelKey)));
-    row.appendChild(h("span", "src-stat-count", `${backed} / ${c.total} (${pct}%)`));
+    row.appendChild(h("span", "src-stat-count", `${backed} / ${total} (${pct}%)`));
     const bar = h("div", "src-stat-bar");
     const fill = h("span");
     fill.style.width = `${pct}%`;
