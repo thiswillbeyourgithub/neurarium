@@ -1097,7 +1097,10 @@ the groups by `${mode}:${key}` (`projectionGroupsByKey`).
   was retired).
 - Both reuse a shared `pathwayRow` / `appendPathwayList` helper (also used by
   `showStructure`), so the row markup (the bold `directionArrow` + label + summary
-  pill + jump) lives once.
+  pill + jump) lives once. `appendPathwayList` (like `showStructure`) runs its rows
+  through `pathwayList`, which collapses left/right twin pathways to one row (keyed
+  on direction + base-name label + pathway) using hemisphere-stripped `base_name`s,
+  so a midline source's bilateral projections list once here too.
 - `focusCircuit` / `focusProjectionGroup` mirror `focusDrug`: isolate (a circuit also
   `circuitAnim.play()`s its pulse; a group is a static pinned-arrow focus), show the
   panel, open the tab (`circuit:` / `group:`) with a reopen thunk that recomputes

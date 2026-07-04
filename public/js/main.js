@@ -1514,6 +1514,9 @@ const bindingKi = (b) =>
 function createInfoPanel(data) {
   const body = document.getElementById("info-body");
   const nameOf = (id) => data.byId.get(id)?.name || id;
+  // Hemisphere-stripped name ("Frontal lobe", not "Right frontal lobe"): used by
+  // every pathway list so left/right twins collapse to one row (see pathwayList).
+  const baseNameOf = (id) => data.byId.get(id)?.base_name || nameOf(id);
 
   // Set by the caller (onConnection): what to do when a connection row in a
   // structure panel is clicked. The panel only knows projections, so the caller
@@ -2339,19 +2342,42 @@ function createInfoPanel(data) {
     return li;
   };
 
+  // Build a <ul> of pathway rows with left/right twins collapsed. `rowOf(proj)`
+  // returns `{dir, label}` (the direction glyph + the row text, both using
+  // hemisphere-stripped base names): mirrored twins then share direction + label,
+  // so keying on `dir|label|pathway` keeps the first and drops its L/R duplicate.
+  // Shared by the structure panel and the circuit/group member lists so a midline
+  // source (the raphe) that projects to both hemispheres lists each target once.
+  // Returns the list element + the surviving row count (for the "(N)" heading).
+  const pathwayList = (projs, rowOf) => {
+    const seen = new Set();
+    const ul = el("ul");
+    let count = 0;
+    for (const proj of projs) {
+      const { dir, label } = rowOf(proj);
+      const key = `${dir}|${label}|${proj.label || proj.kind}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      ul.appendChild(pathwayRow(proj, dir, label));
+      count++;
+    }
+    return { ul, count };
+  };
+
   // A titled "member pathways" list (the circuit + projection-group panels): one
-  // pathwayRow per projection, each showing its full from -> to route.
+  // pathwayRow per projection, each showing its full from -> to route (twins
+  // collapsed via pathwayList).
   const appendPathwayList = (titleText, projs) => {
     if (!projs.length) return;
-    const wrap = el("div", "info-connections");
-    wrap.appendChild(el("h3", null, `${titleText} (${projs.length})`));
-    const ul = el("ul");
-    for (const proj of projs) {
+    const { ul, count } = pathwayList(projs, (proj) => {
       const glyph = proj.bidirectional ? "↔" : "→";
-      ul.appendChild(pathwayRow(
-        proj, proj.bidirectional ? "both" : "out",
-        `${nameOf(proj.from)} ${glyph} ${nameOf(proj.to)}`));
-    }
+      return {
+        dir: proj.bidirectional ? "both" : "out",
+        label: `${baseNameOf(proj.from)} ${glyph} ${baseNameOf(proj.to)}`,
+      };
+    });
+    const wrap = el("div", "info-connections");
+    wrap.appendChild(el("h3", null, `${titleText} (${count})`));
     wrap.appendChild(ul);
     body.appendChild(wrap);
   };
@@ -2446,11 +2472,11 @@ function createInfoPanel(data) {
       appendReference({ url: structure.wikipedia });
 
       // Pathways with this structure at either end, in the data's order, with
-      // left/right twins collapsed: a midline source (e.g. the raphe) projects to
-      // both hemispheres of each target, which would otherwise list as two rows
-      // differing only by "Left"/"Right". Group by (direction, other-endpoint base
-      // name, pathway) and keep the first; each row shows the hemisphere-stripped
-      // base name, since the side is no longer meaningful once a pair is one row.
+      // left/right twins collapsed (via pathwayList): a midline source (e.g. the
+      // raphe) projects to both hemispheres of each target, which would otherwise
+      // list as two rows differing only by "Left"/"Right". Each row shows just the
+      // other endpoint's hemisphere-stripped base name, direction relative to this
+      // structure (out it projects, in it receives, both reciprocal/commissural).
       const conns = data.projections.filter(
         (p) => p.from === structure.id || p.to === structure.id);
       if (conns.length === 0) {
@@ -2458,28 +2484,17 @@ function createInfoPanel(data) {
         return;
       }
 
-      const rows = [];
-      const seen = new Set();
-      for (const proj of conns) {
-        // Direction relative to *this* structure: out it projects, in it
-        // receives, both reciprocal/commissural. The row markup (the bold colour
-        // arrow, label, summary source pill, click) is the shared pathwayRow; only
-        // the structure-relative direction + other-endpoint label are computed here.
+      const { ul, count } = pathwayList(conns, (proj) => {
         const outgoing = proj.from === structure.id;
         const otherId = outgoing ? proj.to : proj.from;
-        const dir = proj.bidirectional ? "both" : outgoing ? "out" : "in";
-        const otherName = data.byId.get(otherId)?.base_name || nameOf(otherId);
-        const key = `${dir}|${otherName}|${proj.label || proj.kind}`;
-        if (seen.has(key)) continue;
-        seen.add(key);
-        rows.push(pathwayRow(proj, dir, otherName));
-      }
-
+        return {
+          dir: proj.bidirectional ? "both" : outgoing ? "out" : "in",
+          label: baseNameOf(otherId),
+        };
+      });
       const wrap = el("div", "info-connections");
       wrap.appendChild(el(
-        "h3", null, `${t("info.connections")} (${rows.length})`));
-      const ul = el("ul");
-      for (const row of rows) ul.appendChild(row);
+        "h3", null, `${t("info.connections")} (${count})`));
       wrap.appendChild(ul);
       body.appendChild(wrap);
     },
