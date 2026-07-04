@@ -210,6 +210,23 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     return best;
   };
 
+  // Build one "Found in" region entry (its per-region expression provenance +
+  // the assay species). An expression source (e.g. a GtoPdb tissue-distribution
+  // quote) carries the species it was checked in; the panel flags a non-human
+  // claim amber, like the Ki chip, and shows the species in the pill tooltip.
+  // Shared by receptor + non-receptor-target location lists so the species logic
+  // lives once (both kinds carry the same location_sources node shape).
+  const locationEntry = (base, name, sources) => {
+    const srcs = sources || [];
+    const species = srcs.map((s) => s.species).find(Boolean) || "";
+    return {
+      base, name, sources: srcs,
+      provenance: strongestGrade(srcs) || "llm",
+      species,
+      nonHuman: !!species && species !== "Human",
+    };
+  };
+
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
   // mode), `sign`/`signColor` the coarse excitatory/inhibitory view the colour
@@ -317,12 +334,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // expressed in region B" is graded per region (default llm when unsourced), so
     // the panel shows a pill per row. Parallel to locations/locationNames.
     const locSrc = r.location_sources || {};
-    r.locationInfo = r.locations.map((b, i) => ({
-      base: b,
-      name: r.locationNames[i],
-      sources: locSrc[b] || [],
-      provenance: strongestGrade(locSrc[b]) || "llm",
-    }));
+    r.locationInfo = r.locations.map((b, i) =>
+      locationEntry(b, r.locationNames[i], locSrc[b]));
     // A ubiquitous receptor is one "throughout the brain" expression node
     // (its location_sources under the "ALL" sentinel), graded like a region.
     if (r.ubiquitous) {
@@ -573,12 +586,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // "target T is found in region B" is its own graded node (default llm when
       // unsourced), so the panel shows a per-row pill, exactly like a receptor's
       // locationInfo. From the emitted target.location_sources ({base: [source]}).
-      locationInfo: (tgt.regions || []).map((b) => ({
-        base: b,
-        name: baseName.get(b) || b,
-        sources: (tgt.location_sources || {})[b] || [],
-        provenance: strongestGrade((tgt.location_sources || {})[b]) || "llm",
-      })),
+      locationInfo: (tgt.regions || []).map((b) =>
+        locationEntry(b, baseName.get(b) || b, (tgt.location_sources || {})[b])),
       keywords: [typeLabel, systemLabel].filter(Boolean).join(" "),
     });
   }

@@ -1499,6 +1499,16 @@ function createInfoPanel(data) {
   const locationRow = (name, base, meta) => {
     const li = el("li");
     li.appendChild(el("span", "loc-name", name));
+    // A non-human expression claim (the source was checked in rat/mouse/monkey,
+    // not human) is flagged with a small amber tag, the same convention as the Ki
+    // chip; a human (or unsourced) row shows none. The full assay species is also
+    // in the provenance pill's tooltip below.
+    if (meta && meta.nonHuman) {
+      const tag = el("span", "loc-species",
+        t("receptor.speciesTag", { species: speciesLabel(meta.species) }));
+      tag.title = t("receptor.speciesTip", { species: speciesLabel(meta.species) });
+      li.appendChild(tag);
+    }
     if (base && baseResolves(base)) {
       li.classList.add("clickable");
       li.addEventListener("click", () => onStructurePick(base));
@@ -1744,7 +1754,20 @@ function createInfoPanel(data) {
     const ref = s.page != null
       ? t("info.sourceRef", { corpus: label, page: s.page })
       : label;
-    return s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
+    const line = s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
+    // An expression source (GtoPdb tissue distribution) names the assay species;
+    // show it so a non-human claim is explicit on the pill itself, not only the tag.
+    return s.species
+      ? `${line}\n${t("info.sourceSpecies", { species: speciesLabel(s.species) })}`
+      : line;
+  };
+
+  // Localized species name for an assay/expression source (Human/Rat/Mouse/Monkey,
+  // as stored in the data); an unknown value passes through unchanged.
+  const speciesLabel = (s) => {
+    const key = { Human: "species.human", Rat: "species.rat",
+      Mouse: "species.mouse", Monkey: "species.monkey" }[s];
+    return key ? t(key) : (s || "");
   };
 
   // The tooltip tail under a per-claim provenance pill: every source (all
