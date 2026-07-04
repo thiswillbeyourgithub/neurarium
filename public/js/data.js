@@ -218,7 +218,13 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // lives once (both kinds carry the same location_sources node shape).
   const locationEntry = (base, name, sources) => {
     const srcs = sources || [];
-    const species = srcs.map((s) => s.species).find(Boolean) || "";
+    const speciesList = srcs.map((s) => s.species).filter(Boolean);
+    // Prefer a Human assay when any source carries one: a region we have confirmed
+    // in human tissue is not a "non-human only" claim, so it must not keep the amber
+    // tag just because another source (e.g. a rat GtoPdb quote) also backs it.
+    const species = speciesList.includes("Human")
+      ? "Human"
+      : (speciesList[0] || "");
     return {
       base, name, sources: srcs,
       provenance: strongestGrade(srcs) || "llm",
