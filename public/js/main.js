@@ -842,15 +842,15 @@ function projectionGroups(established, meta, signMode) {
  */
 function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode, onPickStructure, onFocusCircuit, onFocusProjectionGroup) {
   // Populate the two collapsible bodies, not the panels themselves, so the
-  // always-visible toggle headers (in index.html) are left untouched. The action
-  // buttons live in an actions container authored in the HTML per section (the
-  // "Show all names" button in #structures-actions; "Hide projections" + the
-  // colour-mode switch in #projections-actions); keep that exact node (it carries
-  // the wireControls click handlers) as the sole survivor and append the generated
-  // rows after it, so the buttons stay first. The structure rows go to the
-  // Structures section; the projection / circuit / hypothetical rows to the
-  // Projections section. One shared `reflect` (returned below) greys rows across
-  // both, so the focus-state logic is not duplicated.
+  // always-visible toggle headers (in index.html) are left untouched. If a section
+  // authors a persistent actions container in the HTML (e.g. #structures-actions),
+  // keep that exact node (it carries wireControls click handlers) as the sole
+  // survivor and append the generated rows after it, so the buttons stay first;
+  // otherwise the body is fully replaced. The structure rows go to the Structures
+  // section; the projection / circuit / hypothetical rows to the Projections
+  // section. One shared `reflect` (returned below) greys rows across both, so the
+  // focus-state logic is not duplicated. (The arrow colour-mode switch lives up in
+  // the Controls section now, so it is untouched by these rebuilds.)
   const structuresBody = document.getElementById("structures-body");
   const structuresActions = document.getElementById("structures-actions");
   if (structuresActions) structuresBody.replaceChildren(structuresActions);
@@ -5173,10 +5173,10 @@ async function main() {
   // programmatic coverage tally) from the dataset's meta.
   buildAboutSourcing(data.meta);
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
-  // segmented control under "Hide projections". Picking an option recolours the
+  // segmented control in the Controls section. Picking an option recolours the
   // arrows and rebuilds the Projections legend rows to match. The switch lives
-  // inside #projections-actions, which buildLegend preserves as a node across
-  // rebuilds, so these listeners survive a rebuild.
+  // outside #projections-body, so buildLegend's rebuilds never touch it and these
+  // listeners persist for the life of the page.
   const colorModeSwitch = document.getElementById("color-mode");
   const modeButtons = colorModeSwitch.querySelectorAll(".mode-btn");
   const setColorMode = (sign) => {
