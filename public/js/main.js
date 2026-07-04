@@ -22,6 +22,7 @@ import { createLabels } from "./labels.js";
 import { createCircuitAnimation } from "./circuit-anim.js";
 import { createReceptorMarkers } from "./receptor-markers.js";
 import { createDrugAnimation } from "./drug-anim.js";
+import { animSettings } from "./anim-settings.js";
 import { fetchWikiLead } from "./wiki.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
@@ -138,7 +139,12 @@ function initThree() {
   camera.position.set(11, 5.5, 16);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Cap the device pixel ratio at 2 (a retina phone can report 3+, which quadruples
+  // the pixel work for no visible gain). This is the *base* ratio; the adaptive
+  // quality controller (see createAdaptiveQuality) scales it down transiently when
+  // it detects dropped frames, then this same base is the ceiling it recovers to.
+  const baseDpr = Math.min(window.devicePixelRatio, 2);
+  renderer.setPixelRatio(baseDpr);
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Soft, even lighting so colors read true and the blobs keep visible relief.
@@ -175,7 +181,7 @@ function initThree() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  return { scene, camera, renderer, controls };
+  return { scene, camera, renderer, controls, baseDpr };
 }
 
 /**
@@ -341,6 +347,80 @@ function createNearCull({ meshes, camera, controls }) {
         toMesh.copy(m.position).sub(center);
         m.visible = toMesh.dot(viewOut) <= NEAR_CULL_BIAS;
       }
+    },
+  };
+}
+
+/**
+ * Adaptive-quality controller: watches the frame time while the scene is animating
+ * and, if it stays slow, steps the shared `animSettings.quality` DOWN (and steps it
+ * back UP once frames recover). Quality's dominant effect is the renderer's
+ * devicePixelRatio (fewer pixels shaded per frame = the biggest cheap win against
+ * the additive-glow overdraw of the gem/wash animations); the gem-dot + circuit-bead
+ * builders also read it to scatter fewer primitives on the next focus.
+ *
+ * It only samples frames the loop actually *rendered* while animating (an idle frame
+ * costs nothing and would skew the timing), and uses hysteresis (needs several slow
+ * frames in a row to drop, many good ones to recover) plus a comfortable middle band
+ * so it settles instead of oscillating. `tick(rendered)` is called once per frame
+ * from the render loop with whether an animated render happened; it returns true when
+ * it changed the level (so the loop repaints at the new pixel ratio).
+ * @param {{renderer:THREE.WebGLRenderer, baseDpr:number}} deps
+ */
+function createAdaptiveQuality({ renderer, baseDpr }) {
+  const MIN_Q = 0.6;       // never below 60% detail / pixel ratio
+  const STEP = 0.1;
+  const SLOW_MS = 30;      // a frame slower than this (~<33fps) counts as "slow"
+  const FAST_MS = 20;      // a frame faster than this (~>50fps) counts as "fast"
+  const SLOW_FRAMES = 20;  // this many slow frames in a row -> step down
+  const FAST_FRAMES = 90;  // this many fast frames in a row -> step back up
+  let lastT = null;
+  let slow = 0;
+  let fast = 0;
+
+  // three's setPixelRatio re-applies the stored CSS size internally, and a later
+  // renderer.setSize (the resize handler) keeps this ratio, so setting it here is
+  // enough; no resize re-apply is needed.
+  const applyDpr = () => renderer.setPixelRatio(baseDpr * animSettings.quality);
+
+  return {
+    tick(rendered) {
+      // Only measure while continuously animating: an idle frame is an early-out
+      // (no render), so its huge delta must not be read as a slow render.
+      if (!rendered) {
+        lastT = null;
+        return false;
+      }
+      const now = performance.now();
+      if (lastT === null) {
+        lastT = now;
+        return false;
+      }
+      const dt = now - lastT;
+      lastT = now;
+      if (dt > SLOW_MS) {
+        slow += 1;
+        fast = 0;
+      } else if (dt < FAST_MS) {
+        fast += 1;
+        slow = 0;
+      } else {
+        slow = 0; // comfortable band: reset both, hold the current level
+        fast = 0;
+      }
+      if (slow >= SLOW_FRAMES && animSettings.quality > MIN_Q) {
+        animSettings.setQuality(Math.max(MIN_Q, animSettings.quality - STEP));
+        applyDpr();
+        slow = 0;
+        return true;
+      }
+      if (fast >= FAST_FRAMES && animSettings.quality < 1) {
+        animSettings.setQuality(Math.min(1, animSettings.quality + STEP));
+        applyDpr();
+        fast = 0;
+        return true;
+      }
+      return false;
     },
   };
 }
@@ -3646,6 +3726,7 @@ function buildAboutSourcing(meta) {
 function wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull }) {
   const autorotate = document.getElementById("autorotate");
   const seeInside = document.getElementById("see-inside");
+  const toggleAnimations = document.getElementById("toggle-animations");
   const explode = document.getElementById("explode");
   const transparency = document.getElementById("transparency");
   const toggleNames = document.getElementById("toggle-names");
@@ -3795,6 +3876,13 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // "See inside": hide the near hemisphere so the deep structures show through.
   cull.setEnabled(seeInside.checked);
   seeInside.addEventListener("change", () => cull.setEnabled(seeInside.checked));
+
+  // "Animations": the checkbox reflects the persisted animSettings state (default
+  // on for desktop, off for a phone / reduced-motion). Flipping it flows through
+  // animSettings, whose subscribers (in main()) stop/allow the decorative motion.
+  toggleAnimations.checked = animSettings.enabled;
+  toggleAnimations.addEventListener("change", () =>
+    animSettings.setEnabled(toggleAnimations.checked));
 
   // Apply an explode `amount`: spread the regions, keep a focused structure
   // centered (re-aim), and pull the camera to hold the apparent size. Shared by the
@@ -4628,7 +4716,7 @@ function wireImageLightbox() {
 }
 
 async function main() {
-  const { scene, camera, renderer, controls } = initThree();
+  const { scene, camera, renderer, controls, baseDpr } = initThree();
 
   // Stamp the version into the panel header (single source: window.__APP_VERSION__
   // from version.js). Done before the data load so it shows even if that fails.
@@ -5328,7 +5416,10 @@ async function main() {
       controls.target.y += DEV_BANNER_DROP;
       controls.update();
     }
-    intro.start();
+    // The assemble intro is a decorative animation, so honor the Animations toggle:
+    // when off, present the brain already whole (explode 0) instead of playing it in.
+    if (animSettings.enabled) intro.start();
+    else applyExplode(meshes, 0, arrows);
   }
 
   // On-demand rendering: a mostly-static brain has no reason to repaint at 60fps,
@@ -5345,6 +5436,21 @@ async function main() {
   const invalidate = () => { needsRender = true; };
   controls.addEventListener("change", invalidate);
   window.addEventListener("resize", invalidate);
+
+  // Adaptive rendering (Task): lower the pixel ratio + animation detail when frames
+  // drop, raise it back when they recover. Fed once per frame below with whether an
+  // animated render actually happened.
+  const adaptive = createAdaptiveQuality({ renderer, baseDpr });
+
+  // Toggling the Animations checkbox flips animSettings; react to it here (where the
+  // decorative controllers live): repaint once so a static frame draws, and when
+  // turning OFF, halt the circuit traveling pulse (its beads persist otherwise; the
+  // gem/wash controllers freeze themselves in their own tick()s). Turning back ON
+  // resumes motion on the next focus.
+  animSettings.subscribe(() => {
+    if (!animSettings.enabled) circuitAnim.stop();
+    invalidate();
+  });
   // Belt-and-suspenders: any user input repaints, so adding a new control never
   // needs to remember to call invalidate. Capture phase + passive so this only
   // observes (it never preventDefaults, leaving the real handlers untouched).
@@ -5370,6 +5476,10 @@ async function main() {
     // After controls.update() so it reads this frame's settled camera distance.
     if (arrowWidth.tick()) active = true;
     if (active) needsRender = true;
+    const rendered = needsRender;
+    // Adaptive quality watches the frame time of actually-rendered animated frames
+    // and may step the pixel ratio down/up; a level change forces one more repaint.
+    if (adaptive.tick(rendered && active)) needsRender = true;
     if (!needsRender) return; // idle: skip the render + label passes this frame
     needsRender = false;
     // After controls.update() so the cull reads this frame's camera + target.

@@ -1731,6 +1731,18 @@
                     <span data-i18n="panel.seeInside"></span>
                   </label>
                 </div>
+
+                <div class="row inline">
+                  <!-- "Animations": run the decorative motion (the assemble intro,
+                       the receptor/drug gem-dot twinkle, the drug surface wash, the
+                       circuit traveling pulse). The `checked` here is a placeholder;
+                       js/main.js sets the real initial state from animSettings (on
+                       for desktop, off for a phone / reduced-motion, persisted). -->
+                  <label>
+                    <input type="checkbox" id="toggle-animations" checked />
+                    <span data-i18n="panel.animations"></span>
+                  </label>
+                </div>
               </div>
 
               <!-- Arrow colour mode: a two-state switch. "Neurotransmitter"

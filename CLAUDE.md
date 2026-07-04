@@ -343,6 +343,11 @@ Viewer (`public/`):
   surface wash; `matches`. Flow overlay reuses `circuit-anim.js`. See Drugs.
 - `js/surface-wash.js` — shared `buildWashShell` + `washStrength` "wash of light"
   primitive (used by circuit echo + drug glow).
+- `js/anim-settings.js` — `animSettings`, the single source of truth for the
+  decorative-animation state, read by every animated module: `enabled` (the user's
+  **Animations** toggle; default on for a fine pointer, off for a coarse pointer /
+  reduced-motion; persisted to `localStorage`) + `quality` (0..1 adaptive level; not
+  persisted). See Settings & toggles (the toggle) + Rendering (adaptive quality).
 - `js/wiki.js` — `fetchWikiLead(url, lang)` runtime fetch of a Wikipedia lead;
   locale wins via langlinks, English fallback; cached; best-effort (failure -> null).
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode +
@@ -675,6 +680,16 @@ list scroll (lower collapsed headers below the fold). Flex-display rules are sco
   than `NEAR_CULL_BIAS` past the centre plane toward the camera); snapshots
   visibility on enable to restore exactly; composes with `?only=`; arrows stay
   visible. `cull.tick()` runs after `controls.update()`.
+- **Animations** (`#toggle-animations`, `js/anim-settings.js` `animSettings.enabled`):
+  runs the decorative motion (the assemble intro, the receptor/drug gem-dot twinkle,
+  the drug surface wash, the circuit traveling pulse). **Default on for a fine pointer
+  (desktop), off for a coarse pointer (phone) or reduced-motion**; the choice persists
+  to `localStorage` (an explicit pick beats the default). Off is *content-preserving*:
+  focusing a receptor/drug/circuit still lights its regions/arrows (via `setCircuit`)
+  and still shows a static gem field, just without motion (the intro is skipped to an
+  assembled brain, the gem/wash `tick()`s freeze to a still frame, `circuitAnim.play`
+  no-ops). `main.js` subscribes to `animSettings` to halt the circuit pulse + repaint
+  once on a change.
 - **Arrow colour-mode** (`#color-mode`, in the **Controls** section, default
   **Neurotransmitter**): **Neurotransmitter** colours each arrow per molecule
   (`projection.color`); **Potential** recolours by coarse **sign**
@@ -967,6 +982,21 @@ render is needed; when idle the canvas holds its last frame. A render is trigger
 Adding a new per-frame controller? Make its `tick()` return whether it animated, or it
 runs but never triggers a repaint. Screenshots are unaffected (the loop renders the
 settled frame then idles).
+
+### Adaptive quality
+
+`createAdaptiveQuality` (a render-loop controller) keeps animation smooth on a weak GPU
+by watching the frame time of *rendered, animating* frames (`adaptive.tick(rendered &&
+active)`, so idle early-outs never skew it) and, with hysteresis, stepping the shared
+`animSettings.quality` (0..1) **down** when frames stay slow (>30ms for ~20 in a row)
+and back **up** when they recover (<20ms for ~90), clamped to [0.6, 1]. The dominant
+lever is `renderer.setPixelRatio(baseDpr * quality)` (fewer shaded pixels = the biggest
+cheap win against the additive-glow overdraw of the gem/wash animations; `baseDpr =
+min(devicePixelRatio, 2)`, and a later `renderer.setSize` on resize keeps the ratio). As
+a secondary lever the gem-dot count (`dotCountFor`) + circuit bead count scale by
+`quality` too, picked up on the next focus. Quality is not persisted (a live per-session
+measurement). It composes under the **Animations** toggle: off means no motion to
+measure, so quality just idles.
 
 ### Spread performance
 

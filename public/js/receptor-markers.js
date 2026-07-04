@@ -25,6 +25,7 @@
 // No new dependency: three.js only.
 
 import * as THREE from "three";
+import { animSettings } from "./anim-settings.js";
 
 // Dot size in world units (sizeAttenuation on, so dots shrink with distance like
 // real gems set in the surface).
@@ -112,7 +113,15 @@ function dotCountFor(geometry) {
   if (!geometry.boundingSphere) geometry.computeBoundingSphere();
   const r = geometry.boundingSphere ? geometry.boundingSphere.radius : 1;
   const area = 4 * Math.PI * r * r;
-  return Math.max(MIN_DOTS, Math.min(MAX_DOTS, Math.round(area * DOT_DENSITY)));
+  // Scale the density by the adaptive quality level so a struggling GPU scatters
+  // fewer (cheaper) glowing dots; the floor scales too but stays well above zero,
+  // so even the smallest region keeps a visible cluster. At quality 1 this is the
+  // original count.
+  const q = animSettings.quality;
+  return Math.max(
+    Math.round(MIN_DOTS * q),
+    Math.min(MAX_DOTS, Math.round(area * DOT_DENSITY * q)),
+  );
 }
 
 /**
@@ -267,6 +276,12 @@ export function createReceptorMarkers({ scene }) {
      *  drawing the pulse. */
     tick() {
       if (clouds.length === 0) return false;
+      // Animations off: hold the dots at full brightness (still clearly marking the
+      // focused regions) and report "not animating" so the on-demand loop idles.
+      if (!animSettings.enabled) {
+        for (const c of clouds) c.material.opacity = PULSE_MAX;
+        return false;
+      }
       const phase = (performance.now() % PULSE_PERIOD_MS) / PULSE_PERIOD_MS;
       const k = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2); // 0..1..0
       const opacity = PULSE_MIN + (PULSE_MAX - PULSE_MIN) * k;

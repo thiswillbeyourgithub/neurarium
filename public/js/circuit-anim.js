@@ -29,6 +29,7 @@
 import * as THREE from "three";
 import { scheduleCircuit } from "./circuit-schedule.js";
 import { buildWashShell, washStrength } from "./surface-wash.js";
+import { animSettings } from "./anim-settings.js";
 
 // Bead size (the arrow tube is TUBE_RADIUS 0.1, the cone 0.22): big enough to
 // read as a packet riding the shaft, small enough not to swallow the arrowhead.
@@ -104,6 +105,10 @@ export function createCircuitAnimation({ scene }) {
     play(circuitArrows) {
       this.stop();
       if (!circuitArrows || circuitArrows.length === 0) return;
+      // Animations off: the traveling pulse is pure motion, so don't build any
+      // beads/washes. The circuit's arrows are still pinned + the rest dimmed by
+      // the selection controller, so the circuit still reads, just held still.
+      if (!animSettings.enabled) return;
       const { phased, numSteps: steps } = scheduleCircuit(circuitArrows);
       numSteps = steps;
       elapsed = 0;
@@ -114,7 +119,10 @@ export function createCircuitAnimation({ scene }) {
         // bright packet of *that* pathway. Additive + no depth write so it glows
         // over the (possibly dimmed) arrow rather than being occluded by it.
         const color = arrow.material.color.clone().lerp(WHITE, 0.55);
-        for (let i = 0; i < burst.count; i++) {
+        // Scale the volley size by the adaptive quality so a struggling GPU rides
+        // fewer beads per arrow (always at least one, so every arrow still fires).
+        const beadCount = Math.max(1, Math.round(burst.count * animSettings.quality));
+        for (let i = 0; i < beadCount; i++) {
           const material = new THREE.MeshBasicMaterial({
             color: color.clone(),
             transparent: true,

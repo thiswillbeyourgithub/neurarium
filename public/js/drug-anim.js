@@ -24,6 +24,7 @@
 
 import { buildGemCloud, GEM_DOT_SIZE } from "./receptor-markers.js";
 import { buildWashShell, washStrength } from "./surface-wash.js";
+import { animSettings } from "./anim-settings.js";
 
 // Per-effect pulse character. `period` ms is the breathing cycle; opacity swings
 // between [opMin, opMax] and the dot size between [sizeMin, sizeMax] * GEM_DOT_SIZE
@@ -84,8 +85,12 @@ export function createDrugAnimation(_deps = {}) {
           // feels lit, not just peppered (see surface-wash.js). Seed the origin at
           // the region's top pole (centre + radius up) rather than its centre: from
           // the centre every surface point is ~equidistant, so the wavefront would
-          // bloom the whole surface at once instead of sweeping across it.
-          const wash = buildWashShell(mesh, binding.effectColor);
+          // bloom the whole surface at once instead of sweeping across it. Skipped
+          // entirely when animations are off (the wash is pure motion, so a static
+          // focus doesn't need one).
+          const wash = animSettings.enabled
+            ? buildWashShell(mesh, binding.effectColor)
+            : null;
           if (wash) {
             const origin = wash.center.clone();
             origin.y += wash.maxRadius / 2; // maxRadius == 2 * bounding radius
@@ -136,6 +141,17 @@ export function createDrugAnimation(_deps = {}) {
      *  drawing the pulse. */
     tick() {
       if (clouds.length === 0) return false;
+      // Animations off: hold every cloud at its effect's peak (colour still reads
+      // the boost/block/modulate) at the base dot size, no wash, and report "not
+      // animating" so the on-demand loop idles on a static frame.
+      if (!animSettings.enabled) {
+        for (const c of clouds) {
+          c.material.opacity = c.pulse.opMax;
+          c.material.size = c.baseSize;
+          c.wash?.setWave(0, 0);
+        }
+        return false;
+      }
       const now = performance.now();
       for (const c of clouds) {
         const p = c.pulse;
