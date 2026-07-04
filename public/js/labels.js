@@ -31,7 +31,7 @@ import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer
  *   setShowAll: (on: boolean, restrictMeshes?: Set<THREE.Mesh>|null,
  *                restrictArrows?: Set<object>|null) => void,
  *   setHovered: (mesh: THREE.Mesh|null) => void,
- *   setPinned: (mesh: THREE.Mesh|null) => void,
+ *   setPinned: (meshOrList: THREE.Mesh|THREE.Mesh[]|null) => void,
  *   render: (scene: THREE.Scene, camera: THREE.Camera) => void,
  *   resize: () => void,
  *   refresh: () => void,
@@ -52,7 +52,11 @@ export function createLabels(meshes, arrows, parentEl) {
   for (const mesh of meshes) {
     const el = document.createElement("div");
     el.className = "structure-label";
-    el.textContent = mesh.userData.structure.name;
+    // The hemisphere-stripped base name ("Frontal lobe", not "Right frontal
+    // lobe"): the L/R prefix is what made "show all names" illegible, and a
+    // label sits on its own hemisphere's mesh so the side is already obvious
+    // from position. Midline structures have base_name === name.
+    el.textContent = mesh.userData.structure.base_name || mesh.userData.structure.name;
     // Outline each floating name in its structure's own color (consumed by the
     // .structure-label text-shadow in index.html) so the label ties back to the
     // region it points at.
@@ -86,12 +90,14 @@ export function createLabels(meshes, arrows, parentEl) {
   // change so the two triggers (hover, show-all) can never get out of sync.
   let showAll = false;
   let hovered = null;
-  // The selected structure's label, kept visible regardless of hover for as long
-  // as that structure stays the active selection (set via setPinned from the
+  // The selected structure's label(s), kept visible regardless of hover for as
+  // long as that structure stays the active selection (set via setPinned from the
   // selection controller's highlight). So picking a structure (3D click, search,
   // or a related-structure panel row) keeps its name on screen, and hovering
   // another region *adds* its label on top instead of replacing the pinned one.
-  let pinned = null;
+  // A set, not one mesh: selecting a structure isolates its whole L/R base pair,
+  // so BOTH hemispheres get their name pinned (not just the clicked side).
+  let pinned = new Set();
   // Optional sets that scope "show all" to just the current selection: when
   // non-null, only these meshes / arrows get a label while show-all is on (so
   // naming a focused circuit or isolated region doesn't flood the screen with
@@ -108,7 +114,7 @@ export function createLabels(meshes, arrows, parentEl) {
       // A hidden structure (e.g. isolated-view screenshots) never shows its
       // label, even when "show all" is on.
       if (label) label.visible = mesh.visible
-        && (meshInScope(mesh) || mesh === hovered || mesh === pinned);
+        && (meshInScope(mesh) || mesh === hovered || pinned.has(mesh));
     }
     // Connection labels: only with "show all" (arrows have no hover), and never
     // for an arrow hidden in an isolated view (group.visible=false).
@@ -135,13 +141,18 @@ export function createLabels(meshes, arrows, parentEl) {
       refresh();
     },
     /**
-     * Pin the selected structure's label on (null clears the pin). It stays visible
-     * independent of hover until the selection changes, so a picked structure keeps
-     * its name and hovering another region adds, not replaces.
+     * Pin the selected structure's label(s) on: pass a mesh, an array of meshes
+     * (a structure's whole L/R base pair, so both hemispheres are named), or null
+     * to clear. They stay visible independent of hover until the selection
+     * changes, so a picked structure keeps its name and hovering another region
+     * adds, not replaces.
      */
-    setPinned(mesh) {
-      if (mesh === pinned) return;
-      pinned = mesh;
+    setPinned(meshOrList) {
+      const next = meshOrList == null ? []
+        : Array.isArray(meshOrList) ? meshOrList : [meshOrList];
+      // Idempotent: onHighlight re-fires this every apply(), so bail on no change.
+      if (next.length === pinned.size && next.every((m) => pinned.has(m))) return;
+      pinned = new Set(next);
       refresh();
     },
     // Recompute visibility against the current mesh.visible flags. Call after

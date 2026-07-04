@@ -331,7 +331,10 @@ Viewer (`public/`):
   opaque: `setOpacity` clamps to `ARROW_MAX_OPACITY` (0.8) so even the undimmed
   "full" state (`setOpacity(1)`) is a translucent overlay the anatomy shows through.
 - `js/labels.js` — floating structure-name labels (CSS2DRenderer): one hidden
-  label per region, shown on hover / show-all / when pinned (`setPinned`).
+  label per region, shown on hover / show-all / when pinned (`setPinned`, which
+  takes a mesh or a list). Each label reads the hemisphere-stripped `base_name`
+  (never "Right/Left ..."; the side is obvious from the label's position, and the
+  prefix made show-all illegible).
 - `js/circuit-schedule.js` — `scheduleCircuit()` BFS firing order for the circuit
   pulse (no three.js, testable; see Circuit animation).
 - `js/circuit-anim.js` — `createCircuitAnimation` renders that schedule as beads
@@ -754,8 +757,11 @@ Single source of truth for what is highlighted/focused.
 ### Structure names
 
 Hover (or tap) shows a name label; tapping empty space clears. **Selecting** a
-structure also **pins** its name (`selection.onHighlight` -> `labels.setPinned`), and
-hovering another region *adds* its label. The hover pick (`pickHover`) is focus-aware:
+structure also **pins** its name (`selection.onHighlight` -> `labels.setPinned`
+with the highlight's whole L/R base pair, so **both** hemispheres show their name,
+not just the clicked side), and hovering another region *adds* its label. Labels
+carry no "Right/Left" (the `base_name`), so a pinned pair reads as the same name on
+each side. The hover pick (`pickHover`) is focus-aware:
 while something is focused, a focused region the ray passes through wins over a nearer
 non-focused one. Labels are boxless: white glyphs outlined in the region's own colour
 (`--label-color`) + a black halo.
@@ -941,6 +947,9 @@ Views:
   (`makeProvenancePill(proj.provenance, citationsTip(proj.sources))`, `proj.provenance`
   = the strongest grade over `proj.sources`, resolved once in `js/data.js`). Clicking a
   row jumps to that pathway (`onConnection`). "No mapped connections yet." otherwise.
+  Left/right twin pathways are collapsed to one row (a midline source like the raphe
+  projects to both hemispheres of each target; grouped by direction + other-endpoint
+  `base_name` + label, shown with the hemisphere-stripped name).
 - **receptor / target / drug / circuit / projection-group**: see their sections.
 
 A click that misses everything (empty space) closes the panel. **Double-click**: on a

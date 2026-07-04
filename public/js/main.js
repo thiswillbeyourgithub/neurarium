@@ -2445,7 +2445,12 @@ function createInfoPanel(data) {
       // when it arrives, appears above the link).
       appendReference({ url: structure.wikipedia });
 
-      // Pathways with this structure at either end, in the data's order.
+      // Pathways with this structure at either end, in the data's order, with
+      // left/right twins collapsed: a midline source (e.g. the raphe) projects to
+      // both hemispheres of each target, which would otherwise list as two rows
+      // differing only by "Left"/"Right". Group by (direction, other-endpoint base
+      // name, pathway) and keep the first; each row shows the hemisphere-stripped
+      // base name, since the side is no longer meaningful once a pair is one row.
       const conns = data.projections.filter(
         (p) => p.from === structure.id || p.to === structure.id);
       if (conns.length === 0) {
@@ -2453,10 +2458,8 @@ function createInfoPanel(data) {
         return;
       }
 
-      const wrap = el("div", "info-connections");
-      wrap.appendChild(el(
-        "h3", null, `${t("info.connections")} (${conns.length})`));
-      const ul = el("ul");
+      const rows = [];
+      const seen = new Set();
       for (const proj of conns) {
         // Direction relative to *this* structure: out it projects, in it
         // receives, both reciprocal/commissural. The row markup (the bold colour
@@ -2465,8 +2468,18 @@ function createInfoPanel(data) {
         const outgoing = proj.from === structure.id;
         const otherId = outgoing ? proj.to : proj.from;
         const dir = proj.bidirectional ? "both" : outgoing ? "out" : "in";
-        ul.appendChild(pathwayRow(proj, dir, nameOf(otherId)));
+        const otherName = data.byId.get(otherId)?.base_name || nameOf(otherId);
+        const key = `${dir}|${otherName}|${proj.label || proj.kind}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        rows.push(pathwayRow(proj, dir, otherName));
       }
+
+      const wrap = el("div", "info-connections");
+      wrap.appendChild(el(
+        "h3", null, `${t("info.connections")} (${rows.length})`));
+      const ul = el("ul");
+      for (const row of rows) ul.appendChild(row);
       wrap.appendChild(ul);
       body.appendChild(wrap);
     },
@@ -4798,6 +4811,15 @@ async function main() {
   const labels = createLabels(meshes, arrows, document.body);
   window.addEventListener("resize", () => labels.resize());
 
+  // Both hemispheres (plus a midline singleton) sharing a mesh's base: a legend
+  // row / double-click / search pick isolates this whole pair, and pinning it
+  // names both sides. The id base is the structure id minus its _R/_L suffix.
+  const baseOf = (id) => id.replace(/_[LR]$/, "");
+  const isolateGroupFor = (mesh) => {
+    const base = baseOf(mesh.userData.structure.id);
+    return meshes.filter((m) => baseOf(m.userData.structure.id) === base);
+  };
+
   // Picking helpers, shared by mouse hover, click, and touch tap so the raycast
   // logic isn't duplicated. `setPointer` maps screen coords to NDC and aims the
   // ray once; the pick functions then intersect different object sets.
@@ -4842,8 +4864,10 @@ async function main() {
   // region adds its label rather than replacing the pinned one. Driven off the
   // selection highlight so every path that selects a structure (3D click, search,
   // a related-structure panel row) behaves identically, and any non-structure
-  // focus (arrow / target / drug) or a clear drops the pin automatically.
-  selection.onHighlight((mesh) => labels.setPinned(mesh));
+  // focus (arrow / target / drug) or a clear drops the pin automatically. The
+  // whole L/R base pair is pinned (not just the clicked mesh), so both
+  // hemispheres show their name for a paired structure.
+  selection.onHighlight((mesh) => labels.setPinned(mesh ? isolateGroupFor(mesh) : null));
   // When the last detail tab is closed, nothing is selected any more: clear the
   // 3D focus (halo / isolate / dim / dots) so the scene matches the empty strip.
   tabs.setOnEmpty(() => selection.clear());
@@ -5252,15 +5276,6 @@ async function main() {
   // group (isolates its arrows + opens its tab), exactly like its Projections legend
   // row, so you can go from a drug to the pathway system it engages.
   info.onProjectionGroup((group) => focusProjectionGroup(group, { frame: true }));
-
-  // Both hemispheres (plus midline singletons) sharing a clicked mesh's base, so
-  // a double-click isolates the same pair a legend row click does. The id base is
-  // the structure id minus its _R/_L hemisphere suffix (midline ids have none).
-  const baseOf = (id) => id.replace(/_[LR]$/, "");
-  const isolateGroupFor = (mesh) => {
-    const base = baseOf(mesh.userData.structure.id);
-    return meshes.filter((m) => baseOf(m.userData.structure.id) === base);
-  };
 
   canvas.addEventListener("dblclick", (event) => {
     const mesh = pickAt(event.clientX, event.clientY);
