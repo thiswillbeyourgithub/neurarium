@@ -148,6 +148,25 @@ Data + authoring (`tools/`):
   `category_sources` entry. The category analogue of `apply_source_quotes.py` (a
   judge is needed since our coarse `categories` re-map Stahl's free-text class line,
   unlike the fixed NbN field). Idempotent.
+- `tools/fetch_gtopdb.py` — fetches each receptor's tissue-distribution comments from
+  the [Guide to Pharmacology](https://www.guidetopharmacology.org/) web API (corpus #7
+  `gtopdb`), the source for **receptor expression regions**. A `RECEPTOR_GENES` map
+  (receptor id -> HGNC gene) resolves each receptor to a GtoPdb target, caches the raw
+  JSON to `sources/gtopdb/raw/<rid>.json` and one cleaned tissue line per comment to
+  `sources/gtopdb/pages/<targetId>.md` (the quote-gate page; `page` = the GtoPdb
+  targetId), and emits `sources/gtopdb/worklist.json` (per receptor: its candidate tissue
+  quotes + species). Each quote carries the assay **species** (Human/Rat/Mouse/Monkey).
+  Stdlib urllib, polite, idempotent (`--refresh`, `--only`). See Expression locations.
+- `tools/apply_location_sources.py` — the location analogue of `apply_source_quotes.py`:
+  reads `sources/gtopdb/worklist.json` + a judged file (a confirm-only judge picks which
+  candidate quotes, by index, support each existing LLM-authored "Found in" region;
+  never adds/drops regions), re-confirms each accepted quote on its cached page
+  (`check_data.normalize_for_match`), and merges `verified` `location_sources` (with
+  `species`) into `tools/location_sources.json`. `--judged`, `--dry-run`. Idempotent.
+- `tools/location_sources.json` — machine-written bulk location sources, loaded by
+  `generate_data.py` at import (`_merge_external_location_sources`) into
+  `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`, mirroring how
+  `drugs_data.json` / `*_images_sources.json` keep the generator stdlib. Not served.
 - `tools/fetch_ki.py` — parses the PDSP Ki Database CSV
   (`sources/books/pdsp_ki/`, author-side) into per-drug binding affinities. Joins on
   PDSP's HGNC gene symbol (name fallback), prefers human assays, cites one
@@ -1047,7 +1066,9 @@ sources are normalized to one shape in `js/data.js`.
   order, like the Structures legend; a trailing "Other regions" bucket for
   group-less bases), each region carrying its **own** expression-provenance pill
   (default `llm`: which regions express a receptor is graded per region, separate
-  from the mechanism, see Source provenance), or a single pilled "Throughout the
+  from the mechanism, see Source provenance) plus, when its source was a non-human
+  assay, an amber "· <species>" tag (`loc-species`, from the source's `species`
+  field), or a single pilled "Throughout the
   brain" for ubiquitous); a non-receptor
   target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the type +
   system facts each carrying their classification grade pill, then the "Found in" region
@@ -1261,6 +1282,22 @@ ki-row check confirms the cited `ki_id` really exists in the CSV with that value
 skipped on a clone like the quote gate). A verified Ki backs the binding's grade
 (`_binding_grade`). Refresh with `fetch_ki.py --apply` after a fresh CSV download.
 
+**Expression locations (GtoPdb, corpus #7).** A receptor's / target's **"Found in"
+region** is a `receptor_locations` / `target_locations` node graded per region (default
+`llm`). `gtopdb` in `SOURCE_CORPORA` is a `pages_dir` corpus whose `page` is a
+[Guide to Pharmacology](https://www.guidetopharmacology.org/) targetId and whose page file
+(`sources/gtopdb/pages/<targetId>.md`, author-side) holds that target's cleaned
+tissue-distribution comment lines. `tools/fetch_gtopdb.py` fetches them; a **confirm-only**
+LLM judge maps which cached quote (by index, so no quote drift) supports each existing
+LLM-authored region, never adding or dropping a region; `tools/apply_location_sources.py`
+re-confirms the quote on its page and writes a `verified` source into
+`tools/location_sources.json`. Each quote carries the assay **`species`** (Human / Rat /
+Mouse / Monkey), a field on the quote-source shape validated in `_quote_sources`; the viewer
+surfaces a non-human species as an amber "· <species>" tag beside the region + an "Assay
+species" tooltip line (mirroring the Ki chip's non-human warning). Quote-gated exactly like
+Stahl (author-side pages; skipped + warned on a clone). Refresh: `fetch_gtopdb.py`, judge,
+`apply_location_sources.py`, then `generate_data.py`.
+
 **Descriptions.** Drugs, structures and non-receptor targets carry **no baked
 description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
 the shared `liveWikiDescription` helper over `js/wiki.js` `fetchWikiLead(url, lang)` (the
@@ -1307,13 +1344,14 @@ references) plus a headline `pct_backed` over the **knowledge nodes** (sourced-o
 `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
 coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). Current: ~67% of 1665 nodes backed (drug
+points *at* a node, it is not itself one). Current: ~78% of 1665 nodes backed (drug
 bindings ~98%, NbN 100%, `drug_categories` 156/158, `structures` 52/52, `circuits` 6/6,
-`projection_groups` 10/10, `references` 100%; the big gap is now the 383 `receptor_locations`
-+ 124 `target_locations`, all `missing` today (no expression atlas wired yet), then the 26
-`llm` receptor classifications, the 4 remaining projections (claustrum->frontal +
-claustrum->insula, which no single Nieuwenhuys page states), and the 4 `targets`, all
-`missing`). Each expression
+`projection_groups` 10/10, `references` 100%, `receptor_locations` 197/383 (GtoPdb, see
+Expression locations); the big gap is now the 124 `target_locations`, all `missing` today
+(no atlas wired for targets yet), the remaining 186 `receptor_locations` (no GtoPdb tissue
+data), then the 26 `llm` receptor classifications, the 4 remaining projections
+(claustrum->frontal + claustrum->insula, which no single Nieuwenhuys page states), and the 4
+`targets`, all `missing`). Each expression
 region is its own node (per the request to grade each "Found in", not the list as a whole),
 individually upgradeable when sourced. Descriptions are no longer a node kind: every
 wiki-linked panel fetches the live Wikipedia lead instead of baking it.
@@ -1415,8 +1453,13 @@ network, idempotent, polite; each touches only what changed). Always finish with
    `sources/books/pdsp_ki/KiDatabase.csv` (author-side, gitignored; fixed filename, live
    export, so a re-download just picks up new rows; see that dir's `README.md`), then
    `python tools/fetch_ki.py --apply` to rewrite `drugs_data.json`'s `ki` + `affinity_only`.
-4. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
-5. `python tools/update_readme_stats.py` — refresh the README sourcing table
+4. **GtoPdb receptor expression** (the `receptor_locations` sources): `python
+   tools/fetch_gtopdb.py` re-pulls each receptor's tissue comments (caches to
+   `sources/gtopdb/`, author-side), then run the confirm-only judge over
+   `sources/gtopdb/worklist.json` and `python tools/apply_location_sources.py --judged <f>`
+   to merge new `verified` sources into `tools/location_sources.json`. See Expression locations.
+5. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
+6. `python tools/update_readme_stats.py` — refresh the README sourcing table
    (CI runs it `--check`).
 
 Panel **descriptions** need no refresh script: each fetches the current Wikipedia lead
