@@ -10,13 +10,20 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-04, after the drug-class + circuits/groups/refs + Nieuwenhuys wins)
+## Snapshot (2026-07-04, after the GtoPdb receptor-expression Phase 1)
 
-Headline: **1110 / 1665 knowledge nodes backed (67%)**. In the tally a bare `llm`
+Headline: **1307 / 1665 knowledge nodes backed (78%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
-"missing" below means `llm` or no source at all. 555 knowledge nodes are missing.
+"missing" below means `llm` or no source at all. 358 knowledge nodes are missing.
 
 > **Recently closed.** Several smaller kinds are now fully (or nearly) sourced:
+> - `receptor_locations` 197/383 verified: **Phase 1** of the expression-sourcing work
+>   wired the **Guide to Pharmacology** tissue-distribution API (corpus #7 `gtopdb`). A
+>   confirm-only judge mapped 197 existing "Found in" regions across 49 receptors to a
+>   verified tissue quote (never adding/dropping a region), each carrying its assay
+>   **species** (the viewer flags a non-human assay with an amber tag). The remaining 186
+>   `receptor_locations` + all 124 `target_locations` are **Phase 2** (Allen AHBA, scoped
+>   below).
 > - `structures` 52/52 verified: the last four (claustrum + fornix) closed against the
 >   newly-wired **Nieuwenhuys** atlas (corpus #6), which Kandel does not describe in prose.
 > - `projections` 99/103 verified: 7 limbic/olfactory/commissural families closed against
@@ -34,75 +41,188 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 >   the transmitter quotes).
 > - `references` 2/2 closed: Wikipedia links added for the carbonic-anhydrase + PDE5 targets.
 >
-> Headline 55% (pre-drug-class) to 67%. The table below is the post-win state.
+> Headline 55% (pre-drug-class) to 67% (Nieuwenhuys) to 78% (GtoPdb Phase 1). The table
+> below is the post-Phase-1 state.
 
 | Node kind | Missing | Total | Share of the gap | Difficulty | Best lever |
 | --- | ---: | ---: | ---: | --- | --- |
-| `receptor_locations` | 383 | 383 | 69.0% | Hard | expression atlas |
-| `target_locations` | 124 | 124 | 22.3% | Hard | expression atlas |
-| `receptors` (mechanism) | 26 | 56 | 4.7% | Medium | IUPHAR Guide to Pharmacology |
-| `drug_bindings` | 12 | 632 | 2.2% | Medium | PDSP refresh + primary lit |
-| `projections` | 4 | 103 | 0.7% | Hard | claustrum primary lit |
-| `targets` (classification) | 4 | 25 | 0.7% | **Easy** | IUPHAR / textbook |
-| `drug_categories` | 2 | 158 | 0.4% | flagged | Stahl "Class" line |
+| `receptor_locations` | 186 | 383 | 52.0% | Hard | Allen AHBA (Phase 2); 197 done via GtoPdb |
+| `target_locations` | 124 | 124 | 34.6% | Hard | Allen AHBA (Phase 2) |
+| `receptors` (mechanism) | 26 | 56 | 7.3% | Medium | IUPHAR Guide to Pharmacology |
+| `drug_bindings` | 12 | 632 | 3.4% | Medium | PDSP refresh + primary lit |
+| `projections` | 4 | 103 | 1.1% | Hard | claustrum primary lit |
+| `targets` (classification) | 4 | 25 | 1.1% | **Easy** | IUPHAR / textbook |
+| `drug_categories` | 2 | 158 | 0.6% | flagged | Stahl "Class" line |
+| `receptor_locations` (done) | 0 | 197 | closed | done | GtoPdb (corpus #7) |
 | `structures` (anatomy) | 0 | 52 | **DONE** (52/52) | done | Kandel + Nieuwenhuys |
 | `circuits` | 0 | 6 | **DONE** (6/6) | done | Kandel prose |
 | `projection_groups` | 0 | 10 | **DONE** (10/10) | done | Stahl Essential / Kandel |
 | `references` (Wikipedia links) | 0 | 298 | **DONE** (not in headline) | done | Wikipedia URLs |
 
-**The shape of the problem:** two kinds are now **91%** of the remaining gap, both
-per-region "expression" claims (`receptor_locations` + `target_locations` = 507 nodes)
-that need a brain expression atlas we do not yet have wired. Everything else combined is
-9% of the gap and is mostly "the books we hold do not state it in prose."
+**The shape of the problem:** two kinds are still **~87%** of the remaining gap (310 of
+358), both per-region "expression" claims (the 186 residual `receptor_locations` +
+124 `target_locations`) that GtoPdb could not reach (it is receptor-only and coarse).
+Closing them is **Phase 2** below: the Allen Human Brain Atlas, the one source that resolves
+our deep nuclei AND covers non-receptor targets. Everything else combined is ~13% of the
+gap and is mostly "the books we hold do not state it in prose."
 
-Five book corpora are wired into `SOURCE_CORPORA` today (`stahl`, `kandel`,
-`stahl_essential`, `carlat`, `nieuwenhuys`) plus the `pdsp_ki` CSV. The book-prose wins
-those allow are largely exhausted (see the sourcing memory); the remaining gaps mostly
-need a **new kind of source**: an expression atlas, a receptor-classification database,
-or (for the last two claustrum pathways) primary literature.
+Five book corpora + two data corpora are wired into `SOURCE_CORPORA` today (`stahl`,
+`kandel`, `stahl_essential`, `carlat`, `nieuwenhuys`, plus the `pdsp_ki` CSV and the
+`gtopdb` tissue API). The book-prose wins those allow are largely exhausted (see the
+sourcing memory); the remaining gaps mostly need a **new kind of source**: an expression
+atlas (Phase 2 below), a receptor-classification database, or (for the last two claustrum
+pathways) primary literature.
+
+---
+
+## Phase 2 plan: Allen AHBA expression sourcing (the 310 remaining expression nodes)
+
+**Goal.** Source the **310** expression nodes GtoPdb (Phase 1) could not reach: the **186**
+residual `receptor_locations` (across 44 receptors GtoPdb had no tissue data for) + the
+**124** `target_locations` (all 25 non-receptor targets, none sourced yet), against the
+**Allen Human Brain Atlas (AHBA) microarray**. Same shape as Phase 1: **confirm-only**
+(upgrade the grade on an *existing* LLM-authored "Found in" region, never add or drop a
+region), one graded node per `(gene, region)` pair, quote-gated author-side.
+
+**Why Allen, and only Allen.** Four candidate sources were evaluated (see the
+`expression-source-options` sourcing memory); Allen is the only one that fits our anatomy:
+- **Resolves all 29 base regions, including the deep nuclei that are the dataset's
+  signature** (locus coeruleus, substantia nigra, VTA, subthalamic, raphe, mammillary,
+  septal, claustrum, fornix). The clean-licence alternatives are too coarse: HPA (CC BY 4.0)
+  and GTEx collapse our 6 cortical lobes into one "cerebral cortex" and our 5 basal-ganglia
+  nuclei into one "basal ganglia", and resolve none of the small nuclei. Allen is the only
+  path to the deep nuclei.
+- **Whole-transcriptome, so it covers non-receptor targets too** (SERT=`SLC6A4`, MAO-A/B,
+  VMAT2=`SLC18A2`, the ion channels), which GtoPdb (receptor-only; SERT/MAO-A returned
+  empty) cannot. One source closes both `receptor_locations` and `target_locations`.
+- **Human tissue (6 adult donors)**, so every Allen source is `species: "Human"` (no amber
+  non-human tag; strengthens coverage versus GtoPdb's rat-heavy quotes).
+- **Ships a PACall present/absent boolean** per (probe, sample): a non-interpretive
+  "expressed here / not" bit, the cleanest possible basis for a *verified* location. No
+  expression threshold to invent (HPA's nTPM would need binarizing).
+
+**Licence: the one go/no-go.** Allen data is **copyright-reserved, non-commercial research
+use with required citation** (Hawrylycz et al. 2012, Nature 489:391), **not** CC-BY. This
+project is AGPL, free, non-commercial and educational, which is within Allen's terms, and we
+do **not** redistribute the atlas: we vendor only a **minimal cited slice** (the handful of
+present/absent booleans we actually cite, per gene x region) plus a fetch script, exactly as
+`abagen` / `neuromaps` do under attribution. Add the Hawrylycz citation to `SOURCE_CORPORA`
+and the About panel's attribution line. **If the user rejects a non-commercial source**, the
+fallback is HPA (CC BY 4.0) + GTEx, accepting that the cortical lobes + basal-ganglia nuclei
+collapse and the deep nuclei stay `llm` (roughly half the 310 unreachable). This is the only
+decision that changes the plan; everything below assumes Allen.
+
+**Data model: `allen_ahba` = corpus #8, built exactly like `gtopdb` (a `pages_dir`
+corpus), NOT like PDSP.** Reusing the GtoPdb shape means zero new code in `check_data.py` and
+one source shape everywhere:
+- `fetch_allen.py` writes a cached page per gene, `sources/allen/pages/<gene>.md`, whose
+  lines are the regions Allen calls **present** for that gene (one line each, e.g.
+  `SLC6A4 present in raphe (probe A_23_P..., 11/12 samples, donors 9861/10021)`).
+- A location source is the usual `{corpus:"allen_ahba", page:<gene>, quote:<that line>,
+  provenance:"verified", species:"Human"}`. `check_data.py`'s existing verbatim-quote gate
+  (`normalize_for_match` substring against `pages/<page>.md`) then covers it unchanged,
+  author-side, skipped + warned on a clone (like the Stahl + GtoPdb pages).
+- **No LLM judge needed** (unlike GtoPdb prose): the confirm is deterministic. For each
+  existing `llm` `(gene, region)` node, if Allen has a present call for that gene in that
+  region -> write the verified source citing the line; else leave it `llm`. This is stricter
+  and cheaper than Phase 1 (no judge tokens, no drift).
+
+**The hand-authored artifacts (the real work).**
+1. **Allen `structure_id` -> our 29 `base` crosswalk.** Allen's ontology is hierarchical, so
+   each base maps to an ontology **subtree**; a tissue sample counts toward a base if its
+   structure sits in that subtree. ~half the ids are known from the Phase-2 research
+   (LC 9148, SN 9072, VTA 9002, STN 4517, mammillary 4671, septal 13002, raphe 9455,
+   claustrum 4321, fornix 9249); the cortical lobes, thalamus, hypothalamus, amygdala,
+   hippocampus, cerebellum, caudate, putamen, pallidum, accumbens, midbrain, pons, medulla,
+   olfactory bulb, insula and cingulate still need pinning from `Ontology.csv`. This is the
+   analogue of `fetch_ki.py`'s `ALIAS` map, and it is one-time.
+2. **Gene maps.** Receptors already have `RECEPTOR_GENES` (in `fetch_gtopdb.py`, reuse it).
+   Add a **`TARGET_GENES`** map for the 25 non-receptor targets (single genes: `sert`=SLC6A4,
+   `mao_a`=MAOA, `vmat2`=SLC18A2, ...). The nine **`receptor_group`** targets (muscarinic =
+   CHRM1-5, nicotinic, `alpha1`=ADRA1A/B/D, `alpha2`, `beta`, glutamate, melatonin =
+   MTNR1A/B, orexin = HCRTR1/2, melanocortin) map to **several** genes: a group is "present
+   in region B" if **any** member gene has a present call there.
+3. **Sampling sanity check.** Some small nuclei (raphe, LC, fornix white matter) are
+   under-sampled across the 6 donors, and the **pituitary is outside Allen's brain sampling**
+   entirely; a base with no samples in any donor simply cannot be confirmed and stays `llm`.
+   The fetch script must **`log()` every such un-confirmable (gene, base)** rather than
+   silently dropping it, so the residual `llm` set is honest.
+
+**Deliverables.**
+- `tools/fetch_allen.py` — resolve each gene's probe(s), download the per-donor microarray +
+  `PACall` + `SampleAnnot` + `Ontology` from the Allen API (`api.brain-map.org`) /
+  `human.brain-map.org` bulk, apply the crosswalk, aggregate PACall over each base's samples,
+  emit `sources/allen/pages/<gene>.md` + `sources/allen/worklist.json`. Stdlib urllib, polite,
+  idempotent, `--only`/`--refresh` (mirror `fetch_gtopdb.py`). Filters to our genes' probes
+  early so it caches only the slice, not the multi-hundred-MB full CSVs.
+- The Allen->base **crosswalk** + **`TARGET_GENES`** map (live in `fetch_allen.py`).
+- **Apply step** — extend `tools/apply_location_sources.py` with a deterministic
+  `--corpus allen` mode (no judged file: it reads the worklist + the *existing* location
+  lists straight from the emitted data and confirms) rather than a second tool, so the
+  merge-into-`location_sources.json` + dedup logic is not duplicated. Handles **both**
+  receptors and targets (the emitter is already shared).
+- `allen_ahba` **corpus #8** in `SOURCE_CORPORA` (`generate_data.py`) with the Hawrylycz
+  citation; emitted into `meta.source_corpora`; the README `SOURCES_TABLE` picks it up.
+- **Attribution**: Hawrylycz 2012 in the About panel's sources block.
+- **Author-side `sources/allen/` tree** (gitignored: `raw/` download cache, `pages/<gene>.md`,
+  `worklist.json`), documented in `CLAUDE.local.md` alongside the `sources/gtopdb/` tree.
+- **Docs**: `CLAUDE.md` (corpus #8 in File map + Source provenance), this file, the
+  `expression-source-options` memory (mark Phase 2 done), README stats refresh.
+
+**Sub-phasing (prove cheap, then scale).**
+- **2a - the 124 `target_locations`** (25 non-receptor targets). Coarser distribution,
+  mostly single dominant genes, currently 0/124 = the biggest untouched kind; best proof of
+  the pipeline. Includes authoring `TARGET_GENES` + the group-gene aggregation.
+- **2b - the 186 residual `receptor_locations`** (44 receptors). Reuse `RECEPTOR_GENES`;
+  same tool, `--only` the receptors GtoPdb missed.
+- **2c - the deep-nuclei rows** only Allen reaches (overlaps 2b: the monoamine source
+  nuclei), the payoff for choosing Allen over the CC-BY sources.
+
+**Coverage estimate.** Allen has every gene and every region, so the ceiling is high; realistic
+haircuts are (i) `(gene, base)` pairs Allen calls absent (correctly left `llm`), (ii)
+under-sampled small nuclei, (iii) the pituitary (unsampled). Rough expectation: **~210-270 of
+310** confirmable, lifting the headline from **78% to roughly 88-93%**. Treat as a target, not
+a promise; the sampling check in step 3 gives the real number before any grades are written.
+
+**Effort.** ~1 focused session: the crosswalk + `TARGET_GENES` authoring and the Allen
+download/probe-selection plumbing are the bulk; the apply/confirm/gate reuse Phase 1 wholesale.
+Probe selection is the one open design detail (a gene has several probes): recommend "present if
+the best-expressed probe has PACall present in >= half the base's samples", citing that probe +
+counts, mirroring `fetch_ki.py`'s representative-row choice.
 
 ---
 
 ## The gaps, biggest lever first
 
-### 1. `receptor_locations`, 383 / 383 missing (the single biggest gap)
+### 1. `receptor_locations`, 186 / 383 missing (197 closed by GtoPdb Phase 1)
 
 **What.** One node per `(receptor, region)` pair: the claim "receptor R is expressed in
-region B" (the panel's "Found in" rows). All 383 are `llm` (which regions express a
-receptor was asserted from memory), none quote-checked.
+region B" (the panel's "Found in" rows). **Phase 1 verified 197** of these against the
+Guide to Pharmacology tissue API (corpus #7 `gtopdb`, species-flagged); the remaining
+**186** (across 44 receptors GtoPdb had no tissue comment for) are still `llm`.
 
-**Why not verified.** None of the four wired book corpora is an expression atlas. Stahl
-Essential localizes a handful of receptors in figures, not a per-region table we can
-quote-gate. So there is no document to check these against.
+**Why the residual 186 are not verified.** GtoPdb is receptor-only and its tissue-comment
+coverage is patchy: many receptor subtypes have no comment, and several comments are too
+generic ("brain", "cerebrum") to confirm a specific base. So there is no GtoPdb quote to
+gate them against.
 
-**How to tackle.** Needs a structured **brain expression atlas**, then a fetch+join tool
-modeled on `fetch_ki.py` (which already solved the "join an external table onto our ids,
-cite one representative row, quote-gate it author-side" problem):
-- **Allen Human Brain Atlas** / Allen Mouse Brain Atlas (ISH + microarray expression by
-  region), the canonical regional-expression source, has an API.
-- **Human Protein Atlas** (brain section: regional protein/RNA expression, downloadable
-  TSV, permissive licence), probably the cleanest to vendor + cite.
-- **IUPHAR/BPS Guide to Pharmacology**, each receptor page has a "Tissue Distribution"
-  section with primary-lit citations.
-The hard part is **granularity mismatch**: atlases parcellate finely (dozens of nuclei)
-while we model coarse lobes/nuclei, so the join needs a hand-curated atlas-region to
-`base` map (like `fetch_ki.py`'s `ALIAS` map). Start with the transporters/enzymes and
-the well-mapped monoamine receptors where the atlas is unambiguous; leave the ambiguous
-ones `llm`. This is the biggest single lever on the headline %.
+**How to tackle.** **Phase 2 (Allen AHBA), scoped in full above.** Allen resolves the
+deep nuclei GtoPdb + the CC-BY atlases cannot, and its PACall boolean is a clean verified
+basis. The 186 are sub-phase **2b**.
 
 ### 2. `target_locations`, 124 / 124 missing
 
-**What.** The `target_locations` mirror of #1 for non-receptor targets (SERT, MAO-A/B,
-VMAT2, ion channels, ...): "target T is expressed in region B." All `llm`.
+**What.** The `target_locations` mirror of #1 for the 25 non-receptor targets (SERT,
+MAO-A/B, VMAT2, ion channels, the receptor groups): "target T is expressed in region B."
+All `llm`; GtoPdb (Phase 1) is receptor-only, so none were reachable there.
 
-**Why not verified.** Same as #1: no expression atlas wired.
+**Why not verified.** No whole-transcriptome expression atlas wired yet; GtoPdb does not
+cover transporters/enzymes/channels.
 
-**How to tackle.** Same atlas + join as #1, and **do it in the same tool** (the emitter
-`_location_sources` + validation is already shared between receptors and targets, so one
-fetch tool feeds both). Transporters and metabolic enzymes are better characterized and
-more coarsely distributed than fine receptor subtypes, so these 124 are likely the
-**easier half** of the expression problem, a good place to prove the atlas pipeline
-before tackling the 383.
+**How to tackle.** **Phase 2 (Allen AHBA), scoped in full above**, sub-phase **2a** (do
+these first: coarser distribution, single dominant genes, biggest untouched kind, best
+proof of the Allen pipeline before the 186 receptors). The emitter `_location_sources` +
+validation is already shared between receptors and targets, so one fetch tool feeds both.
 
 ### 3. `receptors` (mechanism classification), 26 / 56 missing
 
@@ -253,19 +373,23 @@ Ordered by **value per unit effort**, not by raw node count:
    claustrum to insula remain (not stated on any single Nieuwenhuys page; folded into #7).
 5. **`receptors` mechanism (26) + `targets` (4)**, wire **IUPHAR/BPS Guide to
    Pharmacology** as corpus #7; it closes both in one integration.
-6. **`target_locations` (124), then `receptor_locations` (383)**, the big prize (91% of
-   the remaining gap) and the hardest. Build the expression-atlas fetch+join tool (model
-   on `fetch_ki.py`), prove it on the coarser target expression, then extend to receptors.
-   This is the one that needs real new infrastructure and the atlas-region to `base` map.
+6. ~~`receptor_locations` Phase 1 (197)~~ **DONE** (GtoPdb corpus #7; species-flagged;
+   headline 67% to 78%). **Phase 2: `target_locations` (124) then the residual
+   `receptor_locations` (186)**, still ~87% of the remaining gap and the hardest. Build
+   `fetch_allen.py` against the **Allen Human Brain Atlas** (the one source that reaches the
+   deep nuclei AND covers non-receptor targets), prove on targets (2a) then receptors (2b).
+   Full scope in the "Phase 2 plan" section above.
 7. **`drug_bindings` (12) + the last 2 `projections`**, opportunistic: a PDSP refresh for
    the bindings, claustrum-specific primary lit for claustrum to frontal / insula; some may
    honestly stay `tentative`/`llm`.
 
-**Books/sources we likely still need (beyond the five wired):**
-- a **brain expression atlas** (Allen Brain Atlas / Human Protein Atlas), unlocks the 507
-  location nodes, by far the largest lever;
-- **IUPHAR/BPS Guide to Pharmacology** (free, online, citable), receptor + target
-  classifications (30 nodes) and per-target tissue-distribution citations;
+**Books/sources we likely still need (beyond the seven wired):**
+- the **Allen Human Brain Atlas** (microarray + PACall), the Phase 2 pick, unlocks the 310
+  remaining location nodes incl. the deep nuclei; by far the largest lever left (scoped above).
+- **IUPHAR/BPS Guide to Pharmacology** for the 30 remaining **classification** nodes (26
+  `receptors` mechanism + 4 `targets`): note its **tissue-distribution** API is already wired
+  as corpus #7 `gtopdb` (Phase 1), but its receptor *classification* pages are a separate,
+  still-open use.
 - **NCBI/PubMed primary literature** as the genuine last resort for the handful of claims
   (claustrum-to-frontal/insula connectivity, a few tentative subtype affinities) no
   reference book states.
