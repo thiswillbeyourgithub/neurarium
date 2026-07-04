@@ -228,11 +228,11 @@
         from { opacity: 0; transform: translateY(-10px); }
         to   { opacity: 1; transform: translateY(0); }
       }
-      #controls-settings-body, #structures-body, #projections-body, #legend-subpanel-body, #receptors-body, #drugs-body, #about-body {
+      #controls-settings-body, #structures-body, #projections-body, #receptors-body, #drugs-body, #about-body {
         animation: section-slide-in 200ms ease-out;
       }
       @media (prefers-reduced-motion: reduce) {
-        #controls-settings-body, #structures-body, #projections-body, #legend-subpanel-body, #receptors-body, #drugs-body, #about-body { animation: none; }
+        #controls-settings-body, #structures-body, #projections-body, #receptors-body, #drugs-body, #about-body { animation: none; }
       }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
@@ -353,7 +353,9 @@
       /* Three icon buttons spread across the row: keyboard (left), reset
          (center), search (right). space-between puts the first hard left, the
          last hard right and the middle one centered. */
-      .toolbar-row { display: flex; justify-content: space-between; gap: 8px; margin: 2px 0 4px; }
+      /* flex-wrap so the six icon buttons never clip in the narrow (min 240px)
+         landscape sidebar: they drop to a second row instead. */
+      .toolbar-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; row-gap: 6px; margin: 2px 0 4px; }
 
       /* The sliders + global scene toggles now live in their own collapsible
          Controls section (#controls-settings), so the panel top (language switch,
@@ -762,15 +764,17 @@
       #projections .collapse-header,
       #receptors .collapse-header,
       #drugs .collapse-header { padding: 10px 0 4px; }
-      /* Legend key + sourcing tally: a collapsible sub-panel of the Controls
-         section (not an accordion peer). Set off from the toggles above it with a
-         hairline; its header matches the section headers' zero side padding. */
-      .legend-subpanel {
-        margin-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      /* Sources & provenance popup: auto-shown over the loading overlay on startup,
+         so it needs a higher z-index than #loading (70) to sit on top of it (the
+         other modals live at 60, below the overlay). */
+      #sourcing-modal { z-index: 80; }
+      /* A "jump to another popup" link row (Legend / About -> Sources & provenance):
+         set off from the content above it with a hairline. */
+      .modal-jump-row {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
-      .legend-subpanel .subpanel-header { padding: 10px 0 4px; }
-      #legend-subpanel-body { padding-bottom: 4px; }
       /* About blurb (in the #about-modal popup): muted body text with readable
          links. */
       .about-text {
@@ -780,17 +784,10 @@
         color: var(--muted);
       }
       .about-text a { color: var(--accent-bright); text-decoration: underline; }
-      /* "Sources & provenance" block (built by buildAboutSourcing), the tail of the
-         Legend sub-panel. The grade key reuses the .src-pill / .src-prov-* swatches
-         from the info panel so the legend matches the pills shown beside each
-         source. */
-      #about-sourcing { margin-top: 12px; }
-      #about-sourcing h3 {
-        margin: 0 0 6px;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--text);
-      }
+      /* "Sources & provenance" block (built by buildAboutSourcing) inside the
+         #sourcing-modal popup. The grade key reuses the .src-pill / .src-prov-*
+         swatches from the info panel so the legend matches the pills shown beside
+         each source. */
       #about-sourcing .about-text { margin: 6px 0; }
       .src-key { list-style: none; margin: 6px 0; padding: 0; }
       .src-key li {
@@ -902,11 +899,10 @@
       #receptors-body h2:first-child,
       #drugs-list h2:first-child { margin-top: 0; }
       #structures h2:first-child,
-      #projections h2:first-child,
-      #legend h2:first-child { margin-top: 0; }
+      #projections h2:first-child { margin-top: 0; }
       #structures h2,
       #projections h2,
-      #legend h2,
+      #legend-body h2,
       #receptors h2,
       #drugs h2 {
         font-size: 12px;
@@ -921,19 +917,15 @@
       #drugs-list h2 { margin: 14px 0 8px; }
       /* Clickable category headings toggle the whole group; same selected/dimmed
          states as the rows. The clickable group headings live in #structures
-         (the region rows); #projections/#legend headings are plain labels. */
+         (the region rows); #projections headings are plain labels. */
       #structures h2.clickable,
-      #projections h2.clickable,
-      #legend h2.clickable { cursor: pointer; }
+      #projections h2.clickable { cursor: pointer; }
       #structures h2.clickable:hover,
-      #projections h2.clickable:hover,
-      #legend h2.clickable:hover { color: #fff; }
+      #projections h2.clickable:hover { color: #fff; }
       #structures h2.selected,
-      #projections h2.selected,
-      #legend h2.selected { color: #fff; }
+      #projections h2.selected { color: #fff; }
       #structures h2.dimmed,
-      #projections h2.dimmed,
-      #legend h2.dimmed { opacity: 0.4; }
+      #projections h2.dimmed { opacity: 0.4; }
       .legend-item {
         display: flex;
         align-items: center;
@@ -1552,9 +1544,11 @@
     <div id="status"></div>
 
     <!-- Single bottom-left "neurarium" panel: a collapsible window holding the
-         reset/search buttons, the two sliders, auto-rotate, and the nested
-         (collapsed) legend. Searching replaces the panel body in place rather
-         than opening a popup (see wireToolbar in js/main.js). When a detail
+         toolbar (shortcuts / reset / search / legend / sources / about), the two
+         sliders, auto-rotate, and the accordion sections. The legend, sources and
+         about open as popups (.modal-overlay, defined below). Searching replaces the
+         panel body in place rather than opening a popup (see wireToolbar in
+         js/main.js). When a detail
          (structure / connection / receptor) is picked, a Settings/Details tab bar
          appears at the top and the detail shows in the Details pane (see
          createPanelTabs / createInfoPanel in js/main.js). -->
@@ -1624,9 +1618,32 @@
               <line x1="16.5" y1="16.5" x2="21" y2="21" />
             </svg>
           </button>
+          <!-- Legend: opens the #legend-modal popup (the static colour/symbol key
+               for the scene's encodings). Also opened with the k key. Icon: a
+               bulleted-list / key (swatch rings + lines). -->
+          <button type="button" id="legend-toggle" class="tool-btn" data-i18n-attr="title:panel.legend, aria-label:panel.legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="5" cy="6" r="1.5" />
+              <circle cx="5" cy="12" r="1.5" />
+              <circle cx="5" cy="18" r="1.5" />
+              <line x1="10" y1="6" x2="20" y2="6" />
+              <line x1="10" y1="12" x2="20" y2="12" />
+              <line x1="10" y1="18" x2="20" y2="18" />
+            </svg>
+          </button>
+          <!-- Sources & provenance: opens the #sourcing-modal popup (the grade key
+               + coverage tally). Also auto-shown over the loading overlay on
+               startup, and linked from the Legend + About popups. Icon: a
+               shield with a check (provenance / verified). -->
+          <button type="button" id="sourcing-toggle" class="tool-btn" data-i18n-attr="title:about.sourcingTitle, aria-label:about.sourcingTitle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+          </button>
           <!-- About (right): opens the #about-modal popup (project blurb, source /
                issues / licence / attribution links). The sourcing tally is NOT
-               here; it lives with the Legend in the Controls section. -->
+               here; it has its own popup (linked from here). -->
           <button type="button" id="about-toggle" class="tool-btn" data-i18n-attr="title:panel.about, aria-label:panel.about">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="9" />
@@ -1728,31 +1745,6 @@
                 <div class="mode-options">
                   <button type="button" class="mode-btn active" data-mode="nt" aria-pressed="true" data-i18n="panel.colorNt"></button>
                   <button type="button" class="mode-btn" data-mode="sign" aria-pressed="false" data-i18n="panel.colorPotential"></button>
-                </div>
-              </div>
-
-              <!-- Legend (key) sub-panel: a static colour/symbol key for the 3D
-                   scene's encodings that have no label in the interactive sections
-                   (expression gem dots by sign, drug effect dots by boost/block/
-                   modulate, speculative dotted pathways), built by js/main.js
-                   (buildLegendKey) into #legend-body from the dataset's meta so the
-                   colours never drift. The "Sources & provenance" grade key +
-                   coverage tally (buildAboutSourcing, #about-sourcing) continue it.
-                   A collapsible sub-panel of Controls (wired independently in
-                   js/main.js, NOT part of the accordion), shipping open. -->
-              <div id="legend" class="legend-subpanel">
-                <button type="button" id="legend-toggle" class="collapse-header subpanel-header" aria-expanded="true">
-                  <span data-i18n="panel.legend"></span>
-                  <span class="chevron" aria-hidden="true">&#9656;</span>
-                </button>
-                <div id="legend-subpanel-body">
-                  <div id="legend-body"></div>
-                  <!-- "Sources & provenance": the grade key + the programmatic
-                       coverage tally, filled by buildAboutSourcing in js/main.js
-                       from data.meta.provenanceStats (the numbers are computed in
-                       generate_data.py, so the % is a real count). A continuation
-                       of the legend key above it. -->
-                  <div id="about-sourcing"></div>
                 </div>
               </div>
             </div>
@@ -1861,8 +1853,8 @@
          wireAboutModal). The prose + embedded links are filled from js/i18n.js
          (data-i18n-html); the "Source code" / "open an issue" hrefs are set from
          app-config.js sourceUrl by js/main.js (each row removed if no valid url).
-         The "Sources & provenance" tally is NOT here: it lives with the Legend in
-         the Controls section. -->
+         The "Sources & provenance" tally has its own #sourcing-modal popup, opened
+         from the #about-open-sourcing link at the bottom. -->
     <div id="about-modal" class="modal-overlay" hidden>
       <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="about-title">
         <button type="button" id="about-close" class="info-close" aria-label="Close">&times;</button>
@@ -1883,6 +1875,46 @@
         <!-- CC BY-SA attribution for the Wikipedia-sourced drug descriptions +
              molecule images (vendored verbatim, see "Drugs"). -->
         <p class="about-text" data-i18n-html="about.attribution"></p>
+        <!-- Jump to the Sources & provenance popup (js/main.js closes this and
+             opens #sourcing-modal). -->
+        <p class="about-text modal-jump-row">
+          <a href="#" id="about-open-sourcing" data-i18n="sourcing.openLink"></a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Legend popup: the static colour/symbol key for the 3D scene's encodings
+         that carry no label in the interactive sections (expression gem dots by
+         sign, drug effect dots by boost/block/modulate, speculative dotted
+         pathways), built by js/main.js (buildLegendKey) into #legend-body from the
+         dataset's meta so the colours never drift. Opened by the toolbar's legend
+         button or the k key; closed by the ×, a backdrop click, or Esc (wired in
+         js/main.js wireLegendModal). Ends with a link to the Sources & provenance
+         popup. -->
+    <div id="legend-modal" class="modal-overlay" hidden>
+      <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="legend-title">
+        <button type="button" id="legend-close" class="info-close" aria-label="Close">&times;</button>
+        <h2 id="legend-title" data-i18n="panel.legend"></h2>
+        <div id="legend-body"></div>
+        <p class="about-text modal-jump-row">
+          <a href="#" id="legend-open-sourcing" data-i18n="sourcing.openLink"></a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Sources & provenance popup: the grade key + the programmatic coverage
+         tally, filled by buildAboutSourcing in js/main.js from
+         data.meta.provenanceStats (the numbers are computed in generate_data.py, so
+         the % is a real count). Opened by its own toolbar button, from the Legend +
+         About popups, and auto-shown over the loading overlay on startup (a higher
+         z-index than #loading, see the CSS) so a visitor sees how the data is
+         sourced and closes it to reach the app (still loading or already up). Closed
+         by the ×, a backdrop click, or Esc (wired in js/main.js wireSourcingModal). -->
+    <div id="sourcing-modal" class="modal-overlay" hidden>
+      <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="sourcing-title">
+        <button type="button" id="sourcing-close" class="info-close" aria-label="Close">&times;</button>
+        <h2 id="sourcing-title" data-i18n="about.sourcingTitle"></h2>
+        <div id="about-sourcing"></div>
       </div>
     </div>
 

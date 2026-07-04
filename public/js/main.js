@@ -3552,8 +3552,6 @@ function buildAboutSourcing(meta) {
   const host = document.getElementById("about-sourcing");
   if (!host) return;
   host.replaceChildren();
-  const stats = meta.provenanceStats;
-  if (!stats) return; // dataset predates the tally: leave the block empty
 
   const h = (tag, cls, text) => {
     const node = document.createElement(tag);
@@ -3562,7 +3560,11 @@ function buildAboutSourcing(meta) {
     return node;
   };
 
-  host.appendChild(h("h3", null, t("about.sourcingTitle")));
+  // The "Sources & provenance" title is the #sourcing-modal's own <h2>; this block
+  // is the intro + grade key + coverage tally. The intro + grade key need no loaded
+  // data, so render them always: the popup is meaningful the instant it opens over
+  // the loading overlay (the startup gate), called first with no meta, then again
+  // with data.meta once loaded to fill the tally.
   host.appendChild(h("p", "about-text", t("about.sourcingIntro")));
 
   // Grade key: a pill swatch + its meaning, in strongest-to-weakest order, then
@@ -3584,7 +3586,12 @@ function buildAboutSourcing(meta) {
   }
   host.appendChild(key);
 
-  // Coverage tally: a headline over the knowledge nodes, then a per-node-kind bar.
+  // Coverage tally: needs the loaded dataset's provenance stats, so it is skipped
+  // on the first (pre-load, meta=null) call and filled in on the second.
+  const stats = meta && meta.provenanceStats;
+  if (!stats) return;
+
+  // A headline over the knowledge nodes, then a per-node-kind bar.
   const a = stats.nodes || {};
   const wrap = h("div", "src-stats");
   wrap.appendChild(h("p", "src-stat-headline",
@@ -3638,19 +3645,15 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const structuresBody = document.getElementById("structures-body");
   const projectionsToggle = document.getElementById("projections-toggle");
   const projectionsBody = document.getElementById("projections-body");
-  // The Legend is a collapsible sub-panel INSIDE the Controls section (not an
-  // accordion peer): its toggle collapses the key + sourcing tally, wired below.
-  const legendToggle = document.getElementById("legend-toggle");
-  const legendSubpanelBody = document.getElementById("legend-subpanel-body");
   const receptorsToggle = document.getElementById("receptors-toggle");
   const receptorsBody = document.getElementById("receptors-body");
   const drugsToggle = document.getElementById("drugs-toggle");
   const drugsBody = document.getElementById("drugs-body");
 
-  // One collapse-header behaviour shared by the panel, the Controls section, the
-  // Legend sub-panel and the accordion sections: toggle aria-expanded + the body's
-  // hidden flag. The panel + Controls + Legend ship expanded, the accordion
-  // sections collapsed (their markup sets the initial aria-expanded / hidden).
+  // One collapse-header behaviour shared by the panel, the Controls section and
+  // the accordion sections: toggle aria-expanded + the body's hidden flag. The
+  // panel + Controls ship expanded, the accordion sections collapsed (their markup
+  // sets the initial aria-expanded / hidden).
   // `onToggle(open)` runs after a click so callers can react (accordion below).
   const setSection = (toggle, body, open) => {
     toggle.setAttribute("aria-expanded", String(open));
@@ -3711,18 +3714,10 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     wireCollapse(controlsSettingsToggle, controlsSettingsBody);
   }
 
-  // The Legend (colour/symbol key + sourcing tally) sits INSIDE the Controls
-  // section as its own collapsible sub-panel, also exempt from the accordion: it
-  // ships open and toggles independently so collapsing it never disturbs an open
-  // content section (or the Controls toggles above it).
-  if (legendToggle && legendSubpanelBody) {
-    wireCollapse(legendToggle, legendSubpanelBody);
-  }
-
   // Structures, Projections, Receptors and Drugs behave as an accordion among
-  // themselves: only one open at a time (Controls + the Legend sub-panel, above,
-  // are exempt; About is now a popup, not a section). The panel top (language
-  // switch + reset/search row) stays visible throughout; the open section grows to
+  // themselves: only one open at a time (Controls, above, is exempt; the Legend,
+  // Sources & provenance and About are now popups, not sections). The panel top
+  // (language switch + reset/search row) stays visible throughout; the open section grows to
   // fill the tall sidebar via the :has(...) CSS in index.html, so no JS layout
   // class is needed here anymore.
   const sections = [
@@ -4281,7 +4276,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  * dim) so the brain returns to its plain state, see the Escape case. `lightbox` is
  * the image popup: when it is open Esc closes it before anything else.
  */
-function wireShortcuts(help, tabs, selection, lightbox, aboutModal) {
+function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -4317,22 +4312,12 @@ function wireShortcuts(help, tabs, selection, lightbox, aboutModal) {
     if (search && search.hidden) click("search-toggle");
   };
 
-  // "k": reveal the Legend (its colour key + sourcing tally). The Legend now
-  // lives as a collapsible sub-panel inside the Controls section, so make sure
-  // Controls is open and the Legend expanded, then scroll it into view; when both
-  // are already visible, a second press collapses the Legend (a toggle).
+  // "k": toggle the Legend popup (its colour/symbol key). It is now a modal, so a
+  // press opens it and a second press closes it.
   const toggleLegend = () => {
-    const ct = document.getElementById("controls-settings-toggle");
-    const lt = document.getElementById("legend-toggle");
-    const controlsOpen = ct?.getAttribute("aria-expanded") === "true";
-    const legendOpen = lt?.getAttribute("aria-expanded") === "true";
-    if (controlsOpen && legendOpen) {
-      lt?.click(); // both visible: collapse the Legend
-    } else {
-      if (!controlsOpen) ct?.click();
-      if (!legendOpen) lt?.click();
-      document.getElementById("legend")?.scrollIntoView({ block: "nearest" });
-    }
+    if (!legendModal) return;
+    if (legendModal.isOpen) legendModal.close();
+    else legendModal.open();
   };
 
   // Roving keyboard navigation inside the currently-open accordion section: once
@@ -4417,23 +4402,17 @@ function wireShortcuts(help, tabs, selection, lightbox, aboutModal) {
   window.addEventListener("keydown", (event) => {
     if (event.ctrlKey || event.metaKey || event.altKey) return; // leave combos alone
     if (isTyping(event.target)) return; // let the field keep the key (Esc self-handles)
-    // With the image lightbox open, Esc just closes it (and nothing else fires).
-    if (lightbox?.isOpen && event.key === "Escape") {
-      lightbox.close();
-      event.preventDefault();
-      return;
-    }
-    // With the shortcuts popup open, Esc just closes it (and nothing else fires).
-    if (help?.isOpen && event.key === "Escape") {
-      help.close();
-      event.preventDefault();
-      return;
-    }
-    // With the About popup open, Esc just closes it (and nothing else fires).
-    if (aboutModal?.isOpen && event.key === "Escape") {
-      aboutModal.close();
-      event.preventDefault();
-      return;
+    // With any popup open, Esc just closes it (and nothing else fires). The image
+    // lightbox is checked first so it wins when stacked over another (it can be
+    // opened from a panel behind a modal). Only one popup is open at a time.
+    if (event.key === "Escape") {
+      for (const modal of [lightbox, help, aboutModal, legendModal, sourcingModal]) {
+        if (modal?.isOpen) {
+          modal.close();
+          event.preventDefault();
+          return;
+        }
+      }
     }
     // Tab / Shift+Tab cycle the detail tabs (incl. the pinned Settings tab). Only
     // swallow the key when there is something to cycle, so with no detail open
@@ -4518,40 +4497,72 @@ function wireShortcutsHelp() {
     list.append(dt, dd);
   }
 
-  const open = () => { modal.hidden = false; };
-  const close = () => { modal.hidden = true; };
-  document.getElementById("shortcuts-toggle")?.addEventListener("click", open);
-  document.getElementById("shortcuts-close")?.addEventListener("click", close);
-  // A click on the dimmed backdrop (outside the dialog box) closes it.
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) close();
-  });
+  return wireModal({ modalId: "shortcuts-modal", toggleId: "shortcuts-toggle", closeId: "shortcuts-close" });
+}
 
+/**
+ * Shared wiring for a simple .modal-overlay popup (About / Legend / Sources &
+ * provenance / the shortcuts help): a toggle button opens it, the × and a click on
+ * the dimmed backdrop close it, and it exposes {open, close, isOpen} so
+ * wireShortcuts can route Esc. `onOpen` (optional) runs just before it shows.
+ * Returns a no-op controller when the modal element is absent.
+ * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
+ */
+function wireModal({ modalId, toggleId, closeId, onOpen }) {
+  const modal = document.getElementById(modalId);
+  const noop = { open() {}, close() {}, get isOpen() { return false; } };
+  if (!modal) return noop;
+  const close = () => { modal.hidden = true; };
+  const open = () => { onOpen?.(); modal.hidden = false; };
+  if (toggleId) document.getElementById(toggleId)?.addEventListener("click", open);
+  if (closeId) document.getElementById(closeId)?.addEventListener("click", close);
+  modal.addEventListener("click", (event) => { if (event.target === modal) close(); });
   return { open, close, get isOpen() { return !modal.hidden; } };
 }
 
 /**
  * About popup (#about-modal): the project blurb + source / issues / licence /
- * attribution links, over the shared .modal-overlay backdrop (same pattern as the
- * shortcuts popup). Opened by the toolbar's info button (#about-toggle); the ×, a
- * backdrop click, or Esc (routed by wireShortcuts) close it. The prose + the
- * source/issues href wiring live in the markup + wireControls; this only toggles
- * visibility. Returns a small controller so wireShortcuts can route Esc.
+ * attribution links. Opened by the toolbar's info button; the ×, a backdrop click,
+ * or Esc close it. Its bottom "Sources & provenance" link closes this and opens the
+ * #sourcing-modal (passed in). Prose + href wiring live in the markup + wireControls.
  * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
  */
-function wireAboutModal() {
-  const modal = document.getElementById("about-modal");
-  const noop = { open() {}, close() {}, get isOpen() { return false; } };
-  if (!modal) return noop;
-  const open = () => { modal.hidden = false; };
-  const close = () => { modal.hidden = true; };
-  document.getElementById("about-toggle")?.addEventListener("click", open);
-  document.getElementById("about-close")?.addEventListener("click", close);
-  // A click on the dimmed backdrop (outside the dialog box) closes it.
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) close();
+function wireAboutModal(sourcing) {
+  const ctrl = wireModal({ modalId: "about-modal", toggleId: "about-toggle", closeId: "about-close" });
+  document.getElementById("about-open-sourcing")?.addEventListener("click", (event) => {
+    event.preventDefault();
+    ctrl.close();
+    sourcing?.open();
   });
-  return { open, close, get isOpen() { return !modal.hidden; } };
+  return ctrl;
+}
+
+/**
+ * Legend popup (#legend-modal): the static colour/symbol key (built by
+ * buildLegendKey into #legend-body). Opened by the toolbar legend button or the k
+ * key; the ×, a backdrop click, or Esc close it. Its bottom "Sources & provenance"
+ * link closes this and opens the #sourcing-modal (passed in).
+ * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
+ */
+function wireLegendModal(sourcing) {
+  const ctrl = wireModal({ modalId: "legend-modal", toggleId: "legend-toggle", closeId: "legend-close" });
+  document.getElementById("legend-open-sourcing")?.addEventListener("click", (event) => {
+    event.preventDefault();
+    ctrl.close();
+    sourcing?.open();
+  });
+  return ctrl;
+}
+
+/**
+ * Sources & provenance popup (#sourcing-modal): the grade key + coverage tally
+ * (built by buildAboutSourcing into #about-sourcing). Opened by its own toolbar
+ * button, from the Legend + About popups, and auto-shown over the loading overlay
+ * on startup (see main()). The ×, a backdrop click, or Esc close it.
+ * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
+ */
+function wireSourcingModal() {
+  return wireModal({ modalId: "sourcing-modal", toggleId: "sourcing-toggle", closeId: "sourcing-close" });
 }
 
 /**
@@ -4618,6 +4629,19 @@ async function main() {
   // ~half of the bar, SDF meshing the rest (see below); done() fades it out.
   const loading = createLoadingScreen();
   loading.setProgress(0.02, t("loading.data"));
+
+  // Sources & provenance popup (the startup gate): wire it + fill its static parts
+  // (intro + grade key) now and show it over the still-visible loading overlay (it
+  // sits above it via a higher z-index, see the CSS). A visitor reads how the data
+  // is sourced while the app loads and closes it to continue (the app may still be
+  // loading behind it, or already up). Its coverage tally needs the loaded dataset,
+  // so it is filled in below once data arrives. Skipped for the clean-shot ?ui=0
+  // mode (screenshots / deep links). The Legend + About popups reference this
+  // controller (their "Sources & provenance" links open it), so it is created here.
+  const sourcingModal = wireSourcingModal();
+  buildAboutSourcing(null);
+  if (new URLSearchParams(window.location.search).get("ui") !== "0") sourcingModal.open();
+
   let data;
   try {
     data = await loadBrainData("data", (p) => {
@@ -5258,8 +5282,11 @@ async function main() {
   const lightbox = wireImageLightbox();
   info.onImage((src, alt, opts) => lightbox.open(src, alt, opts));
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
-  const aboutModal = wireAboutModal(); // the toolbar info-button popup
-  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
+  // sourcingModal was created early (the startup gate, above); the Legend + About
+  // popups link to it via their "Sources & provenance" rows.
+  const legendModal = wireLegendModal(sourcingModal); // toolbar legend button / k key
+  const aboutModal = wireAboutModal(sourcingModal); // the toolbar info-button popup
+  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });

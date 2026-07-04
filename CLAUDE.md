@@ -291,8 +291,10 @@ Viewer (`public/`):
 
 - `index.html` — page shell: loads three.js (vendored, import map) and, on
   `?debug=1` only, vendored eruda. Holds the bottom-left collapsible `#controls`
-  ("neurarium") panel, the `#banners` stack (see Controls), and the startup
-  `#loading` overlay (see Loading overlay). The UI-chrome accent is the `--accent*`
+  ("neurarium") panel, the popups (`#shortcuts-modal`, `#legend-modal`,
+  `#sourcing-modal`, `#about-modal`, `#image-lightbox`, all `.modal-overlay`), the
+  `#banners` stack (see Controls), and the startup `#loading` overlay (see Loading
+  overlay). The UI-chrome accent is the `--accent*`
   palette in `:root` (purple; sliders/tabs/focus/links/hover); data + semantic
   colours (projection-kind blue etc.) live in `meta.json`, never here.
 - `js/data.js` — fetches `meta.json` + the `.jsonl` files + all shape files;
@@ -595,6 +597,14 @@ shape file), SDF meshing the back half (`sdf-pool` `meshAll`'s per-item `onItem`
 captioned with each region's name), then `done()` fades it out as the assemble intro
 begins. i18n keys `loading.*`.
 
+**Startup sourcing gate.** Immediately (before the data load), `main()` shows the
+**Sources & provenance** popup (`#sourcing-modal`) over the still-visible `#loading`
+overlay (it sits above via a higher `z-index`, 80 > `#loading`'s 70), so a visitor reads
+how the data is sourced while it loads and closes it to reach the app (still loading
+behind it, or already up). Skipped for the `?ui=0` clean-shot mode. Its static intro +
+grade key render at once (`buildAboutSourcing(null)`); the coverage tally fills once the
+dataset loads.
+
 ## Controls
 
 Everything lives in one collapsible **"neurarium" panel bottom-left** (`#controls`;
@@ -604,24 +614,26 @@ bar of **browser-style tabs**: a pinned **Settings** tab (`#tab-settings`, alway
 first) showing the controls, plus one closable tab per opened detail in the
 scrollable `#detail-tabs` strip (see Detail tabs + Info panel). From the top the
 settings pane holds, always visible, the `#lang-switch` (EN/FR) + a keyboard-
-shortcuts / reset / search / **about** `.toolbar-row` (the about **ⓘ** icon opens
-the About popup, see below), then these nested collapsible sections:
+shortcuts / reset / search / **legend** / **sources** / **about** `.toolbar-row`
+(the last three icons open their respective popups, see below), then these nested
+collapsible sections:
 
 - **Controls** (`#controls-settings`): the **Separate** + **Transparency** sliders,
   then the **Auto-rotate**, **Show all names**, **Show projections**, **See inside**
-  checkboxes, the **arrow colour-mode** switch (`#color-mode`, Neurotransmitter |
-  Potential; see below), and the **Legend** sub-panel (`#legend`: the static colour/
-  symbol key `#legend-body` + the **Sources & provenance** tally `#about-sourcing`).
-  Ships **open**; both it and the nested Legend sub-panel toggle **independently** of
-  the accordion (their own `wireCollapse`), so a tweak never collapses the section you
-  were browsing.
+  checkboxes, and the **arrow colour-mode** switch (`#color-mode`, Neurotransmitter |
+  Potential; see below). Ships **open**; toggles **independently** of the accordion
+  (its own `wireCollapse`), so a tweak never collapses the section you were browsing.
 - Then four **single-open-accordion** sections (opening one closes the others):
   **Structures** (`#structures`, region rows by group), **Projections**
   (`#projections`, header "Projections & Circuits": pathway rows, Circuits,
   Hypothetical pathways), **Receptors & targets** (`#receptors`), **Drugs**
   (`#drugs`, with `#drugs-filter`).
-- **About** is not a section: an **ⓘ toolbar icon** opens the `#about-modal` popup
-  (`wireAboutModal`, same `.modal-overlay` pattern as the shortcuts popup).
+- Three **toolbar-icon popups**, not sections (all `.modal-overlay`, wired by the
+  shared `wireModal` helper): the **Legend** (`#legend-modal`, the static colour/
+  symbol key `#legend-body`; toolbar legend icon or **k**), the **Sources &
+  provenance** tally (`#sourcing-modal`, `#about-sourcing`; its own toolbar icon, +
+  linked from the Legend and About popups, + auto-shown over the loading overlay on
+  startup, see Loading overlay), and **About** (`#about-modal`, the ⓘ icon).
 
 The accordion is a list of `{toggle, body}` in `wireControls`; `wireCollapse` takes
 an `onToggle(open)` and `setSection()` sets state programmatically. Searching swaps
@@ -744,23 +756,30 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   mode), the Circuits section, and the off-by-default Hypothetical pathways toggle.
   `buildLegend` fills both Structures + Projections and returns one shared
   focus-greying callback.
-- **Legend (the key)** (`#legend`, a **sub-panel inside Controls**, not an accordion
-  peer): a *static* colour/symbol key built once by `buildLegendKey` into
-  `#legend-body` from meta (so colours never drift): the expression gem dots (a swatch
-  per sign), the per-drug effect dots + wash (boost/block/modulate), and a dotted
-  speculative pathway (each heading carries a `.legend-caption`), followed by the
-  **Sources & provenance** block (`#about-sourcing`, `buildAboutSourcing` from
-  `data.meta.provenanceStats`: the grade key + coverage tally) as its continuation.
-  This block is the single place explaining the whole sourcing system (see Source
-  provenance). Wired independently (`wireCollapse`), ships open.
+- **Legend (the key)** (`#legend-modal`, a **toolbar-icon popup**, not an accordion
+  peer; opened by the legend icon or **k**): a *static* colour/symbol key built once by
+  `buildLegendKey` into `#legend-body` from meta (so colours never drift): the
+  expression gem dots (a swatch per sign), the per-drug effect dots + wash
+  (boost/block/modulate), and a dotted speculative pathway (each heading carries a
+  `.legend-caption`); it ends with a **Sources & provenance** link (`#legend-open-sourcing`)
+  that opens the sourcing popup. Wired by `wireLegendModal` (over the shared `wireModal`).
+- **Sources & provenance** (`#sourcing-modal`, a **toolbar-icon popup**, `wireSourcingModal`):
+  the grade key + coverage tally (`#about-sourcing`, `buildAboutSourcing` from
+  `data.meta.provenanceStats`). The single place explaining the whole sourcing system
+  (see Source provenance). Opened by its own toolbar icon, from the Legend + About
+  popups (their `→` link), and auto-shown over the loading overlay on startup (the gate,
+  see Loading overlay). `buildAboutSourcing` renders the static intro + grade key with no
+  data (so it is meaningful the instant the gate opens) and fills the tally on a second
+  call once the dataset has loaded.
 - **Receptors & targets** (`#receptors`): see Receptors & targets.
 - **Drugs** (`#drugs`): see Drugs.
 - **About** (`#about-modal`, an **ⓘ-toolbar-triggered popup**, `wireAboutModal`, not a
   section): a blurb (made by Olivier Cornelis + Claude), an "open an issue" line (link
   to `cfg.sourceUrl + "/issues"`, dropped unless `sourceUrl` is a repo-like URL with a
   path), a **Source code** link (`cfg.sourceUrl`, http(s) only), a **licence** line
-  (AGPL-3.0), and a **CC BY-SA attribution** line (Wikipedia descriptions + molecule
-  images). The sourcing tally is **not** here (it rides the Legend, above). The README
+  (AGPL-3.0), a **CC BY-SA attribution** line (Wikipedia descriptions + molecule
+  images), and a **Sources & provenance** link (`#about-open-sourcing`) opening the
+  sourcing popup. The sourcing tally is **not** here (it has its own popup). The README
   mirrors the issue invitation + coverage table.
 
 ### Input
@@ -771,7 +790,7 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   the slider's `input`).
 - **Keyboard shortcuts** (`wireShortcuts`, single-key, ignored while typing and for
   Ctrl/Cmd/Alt combos): **n** names, **s** spread/assemble, **l** Structures, **p**
-  Projections, **k** Legend, **c** See inside, **r** Receptors, **m** Drugs, **f**
+  Projections, **k** Legend popup, **c** See inside, **r** Receptors, **m** Drugs, **f**
   search, **Tab**/**Shift+Tab** cycle detail tabs (`tabs.cycle`, re-applying a
   detail's focus), **Esc** peels one layer (active detail tab -> else clear any
   focus/isolate/circuit -> else close search / collapse the open section). Arrow keys
@@ -782,10 +801,11 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   **Enter** activates (a plain `.click()`). Rows recomputed each key (skips
   hidden/disabled), wraps, cleared on section change/close + Esc (`sectionNav.reset()`).
   Keys swallowed only when a section handled them; typing in the drug filter keeps the arrows.
-- **Toolbar icon-row** (top of the panel, `justify-content: space-between`):
-  keyboard-shortcuts (opens the help popup), reset (recenters + reframes the brain),
-  search (swaps `#search` in place, not a popup), and **about** (**ⓘ**, opens the
-  `#about-modal` popup, `wireAboutModal`).
+- **Toolbar icon-row** (top of the panel, `justify-content: space-between`, wraps to a
+  second row if the sidebar is too narrow for all six): keyboard-shortcuts (help popup),
+  reset (recenters + reframes the brain), search (swaps `#search` in place, not a popup),
+  **legend** (opens `#legend-modal`), **sources** (opens `#sourcing-modal`), and **about**
+  (**ⓘ**, opens `#about-modal`). The three popups share the `wireModal` helper.
 - **Search**: filters structures (by name), connections (by label), receptors (name /
   neurotransmitter / system), drugs (name / category / target), circuits and projection
   groups (the Projections legend rows; tagged `· circuit` / `· pathways`). A row of
@@ -1342,7 +1362,7 @@ Each node's grade pill rides that node's own row/heading (a fact row, a route/ki
 a group/subtitle line), never a separate bottom "Sources" block. `appendWiki(url)` renders
 the reference-link row (a present link carries no pill, since the description above it
 already grades the same Wikipedia source; a missing link shows the `NOSOURCE` pill). Each pill's tooltip explains its
-own grade and the Legend's Sources & provenance block carries the full key, so there is no separate blanket "?" caveat.
+own grade and the Sources & provenance popup carries the full key, so there is no separate blanket "?" caveat.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every **node** + reference to its
 strongest grade and buckets it into one of three tiers: **verified** (quote-checked),
@@ -1354,8 +1374,8 @@ It tallies per node kind (drug bindings / NbN / **drug class** / projections / *
 / **projection groups** / receptor classifications / **receptor expression regions** /
 target classifications / **target expression regions** / region anatomy / wikipedia
 references) plus a headline `pct_backed` over the **knowledge nodes** (sourced-or-verified
-/ total), emitted as `meta.provenance_stats` (key `nodes`). The Legend sub-panel's
-Sources & provenance block shows it (`buildAboutSourcing` into `#about-sourcing`) and
+/ total), emitted as `meta.provenance_stats` (key `nodes`). The Sources & provenance
+popup shows it (`buildAboutSourcing` into `#about-sourcing`) and
 `tools/update_readme_stats.py` writes the same into the README
 `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
 coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).

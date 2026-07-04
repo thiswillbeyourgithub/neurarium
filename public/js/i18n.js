@@ -244,6 +244,7 @@
         'target="_blank" rel="noopener noreferrer">CC BY-SA</a>; each drug panel ' +
         "links to its source article.",
       "about.sourcingTitle": "Sources & provenance",
+      "sourcing.openLink": "Sources & provenance →",
       "about.sourcingIntro":
         "Every node in this dataset (any sourceable datum: a region, a pathway, a " +
         "receptor, a drug binding, ...) carries a source grade. None of it has been " +
@@ -494,6 +495,7 @@
         'rel="noopener noreferrer">CC BY-SA</a> ; chaque fiche de médicament ' +
         "renvoie à son article source.",
       "about.sourcingTitle": "Sources et provenance",
+      "sourcing.openLink": "Sources et provenance →",
       "about.sourcingIntro":
         "Chaque nœud de ce jeu de données (toute donnée sourçable : une région, " +
         "une voie, un récepteur, une liaison médicamenteuse, ...) porte un niveau " +
