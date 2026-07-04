@@ -3694,7 +3694,6 @@ function buildAboutSourcing(meta) {
   const key = h("ul", "src-key");
   const keyRows = [
     ["src-prov-verified", "✓", "about.gradeVerified"],
-    ["src-prov-wikipedia", "✓", "about.gradeWikipedia"],
     ["src-prov-sourced", "~", "about.gradeSourced"],
     ["src-prov-llm", "?", "about.gradeLlm"],
     ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
@@ -3746,7 +3745,6 @@ function buildAboutSourcing(meta) {
     row.appendChild(bar);
     wrap.appendChild(row);
   }
-  wrap.appendChild(h("p", "about-text", t("about.coverageNote")));
   host.appendChild(wrap);
 }
 

@@ -256,8 +256,6 @@
         "checked by a human yet, so even a verified node can be wrong. The grades:",
       "about.gradeVerified":
         "Verified: the supporting quote was confirmed present in the cited source.",
-      "about.gradeWikipedia":
-        "Wikipedia: loaded live and verbatim from the article, with no LLM in the loop (a panel description, not a tallied node).",
       "about.gradeSourced":
         "Sourced: drawn from a document (e.g. Wikipedia), but the quote was not checked.",
       "about.gradeLlm":
@@ -278,9 +276,6 @@
       "about.kindTargetLocations": "Target expression regions",
       "about.kindStructures": "Brain-region anatomy",
       "about.kindReferences": "Reference links",
-      "about.coverageNote":
-        "Expression regions, drug classes, and circuits are the biggest " +
-        "unsourced gap.",
 
       "dev.wip": "Work in progress",
       "dev.restarted":
@@ -513,8 +508,6 @@
         "« vérifié » peut être faux. Les niveaux :",
       "about.gradeVerified":
         "Vérifié : la citation à l’appui a été confirmée présente dans la source citée.",
-      "about.gradeWikipedia":
-        "Wikipédia : chargé en direct et tel quel depuis l’article, sans aucun LLM (une description de panneau, pas un nœud comptabilisé).",
       "about.gradeSourced":
         "Sourcé : tiré d’un document (p. ex. Wikipédia), mais la citation n’a pas été vérifiée.",
       "about.gradeLlm":
@@ -535,9 +528,6 @@
       "about.kindTargetLocations": "Régions d'expression des cibles",
       "about.kindStructures": "Anatomie des régions",
       "about.kindReferences": "Liens de référence",
-      "about.coverageNote":
-        "Les régions d'expression, les classes de médicaments et les circuits " +
-        "constituent le principal manque de sources.",
 
       "dev.wip": "En cours de développement",
       "dev.restarted":
