@@ -64,20 +64,20 @@ is a real count:
 
 **95% of the 1665 knowledge nodes in the dataset are sourced or verified.** A node is any sourceable datum (a region, a pathway, a receptor, a drug binding, ...). This is a programmatic count (`tools/update_readme_stats.py`, from the emitted data), not hand-typed:
 
-| Node kind | Sourced or verified |
-| --- | --- |
-| Wikipedia reference links | 298 / 298 (100%) |
-| Drug nomenclature (NbN) | 116 / 116 (100%) |
-| Brain-region anatomy | 52 / 52 (100%) |
-| Projection groups | 10 / 10 (100%) |
-| Functional circuits | 6 / 6 (100%) |
-| Drug class | 156 / 158 (99%) |
-| Drug target bindings | 620 / 632 (98%) |
-| Neuron pathways | 99 / 103 (96%) |
-| Receptor expression regions | 360 / 383 (94%) |
-| Target expression regions | 108 / 124 (87%) |
-| Target classifications | 21 / 25 (84%) |
-| Receptor classifications | 30 / 56 (54%) |
+```
+Wikipedia reference links    ██████████████████████████  100%  298/298
+Drug nomenclature (NbN)      ██████████████████████████  100%  116/116
+Brain-region anatomy         ██████████████████████████  100%    52/52
+Projection groups            ██████████████████████████  100%    10/10
+Functional circuits          ██████████████████████████  100%      6/6
+Drug class                   ██████████████████████████   99%  156/158
+Drug target bindings         ██████████████████████████   98%  620/632
+Neuron pathways              █████████████████████████░   96%   99/103
+Receptor expression regions  ████████████████████████░░   94%  360/383
+Target expression regions    ███████████████████████░░░   87%  108/124
+Target classifications       ██████████████████████░░░░   84%    21/25
+Receptor classifications     ██████████████░░░░░░░░░░░░   54%    30/56
+```
 
 <!-- SOURCING_STATS:END -->
 

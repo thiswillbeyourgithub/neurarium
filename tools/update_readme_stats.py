@@ -143,24 +143,18 @@ def splice_inline(text: str, start: str, end: str, inner: str) -> str:
     return pre + start + inner + end + post
 
 
+BAR_WIDTH = 26  # cells in the README progress bars (monospace, so they align)
+
+
 def render_block(stats: dict) -> str:
-    """Build the markdown between the markers from meta.provenance_stats."""
+    """Build the markdown between the markers from meta.provenance_stats: a headline
+    sentence + a monospace progress-bar chart (one bar per node kind, best-covered
+    first), rendered in a fenced code block so the bars align when GitHub renders it."""
     a = stats["nodes"]
-    lines = [
-        START,
-        "",
-        f"**{a['pct_backed']}% of the {a['total']} knowledge nodes in the dataset "
-        f"are sourced or verified.** A node is any sourceable datum (a region, a "
-        f"pathway, a receptor, a drug binding, ...). This is a programmatic count "
-        f"(`tools/update_readme_stats.py`, from the emitted data), not hand-typed:",
-        "",
-        "| Node kind | Sourced or verified |",
-        "| --- | --- |",
-    ]
     # Rows are sorted best-covered first (by the exact backed/total ratio, so the
     # displayed % reads top-to-bottom monotonically even when two rows round to the
     # same figure); ties break by the larger denominator, then the KIND_LABELS order
-    # for a stable, deterministic table.
+    # for a stable, deterministic chart.
     rows = []
     for order, (kind, label) in enumerate(KIND_LABELS.items()):
         c = stats["by_kind"].get(kind)
@@ -169,10 +163,31 @@ def render_block(stats: dict) -> str:
         backed = c["verified"] + c["sourced"]
         rows.append((backed, c["total"], order, label))
     rows.sort(key=lambda r: (-(r[0] / r[1]), -r[1], r[2]))
+
+    label_w = max((len(label) for _b, _t, _o, label in rows), default=0)
+    count_w = max((len(f"{b}/{t}") for b, t, _o, _l in rows), default=0)
+    chart = []
     for backed, total, _order, label in rows:
         pct = round(100 * backed / total)
-        lines.append(f"| {label} | {backed} / {total} ({pct}%) |")
-    lines += ["", END]
+        filled = round(BAR_WIDTH * backed / total)
+        bar = "█" * filled + "░" * (BAR_WIDTH - filled)  # full block / light shade
+        count = f"{backed}/{total}"
+        chart.append(f"{label:<{label_w}}  {bar}  {pct:>3}%  {count:>{count_w}}")
+
+    lines = [
+        START,
+        "",
+        f"**{a['pct_backed']}% of the {a['total']} knowledge nodes in the dataset "
+        f"are sourced or verified.** A node is any sourceable datum (a region, a "
+        f"pathway, a receptor, a drug binding, ...). This is a programmatic count "
+        f"(`tools/update_readme_stats.py`, from the emitted data), not hand-typed:",
+        "",
+        "```",
+        *chart,
+        "```",
+        "",
+        END,
+    ]
     return "\n".join(lines)
 
 
