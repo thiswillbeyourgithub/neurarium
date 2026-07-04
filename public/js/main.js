@@ -1191,6 +1191,19 @@ function buildLegendKey(data) {
       color, label: (meta.drugEffectLabels || {})[effect] || effect,
     })));
 
+  // Drug flow overlay: beads ride the ascending pathways of the transmitter
+  // system(s) the drug engages. One line swatch per distinct flow-capable kind
+  // (the values of meta.systemFlowKinds), in that kind's projection colour, so
+  // the key names exactly the fans that can light up. Rendered as a line to echo
+  // that these are pathways, not regions.
+  const flowKinds = [...new Set(Object.values(meta.systemFlowKinds || {}))];
+  section("legendKey.flow", "legendKey.flowDesc",
+    flowKinds.map((kind) => ({
+      color: (meta.projectionColors || {})[kind] || "#fff",
+      label: (meta.kindLabels || {})[kind] || kind,
+      line: true,
+    })));
+
   // Speculative pathway: a dotted swatch echoing the dotted arrows (drawn as a
   // thin line, like the projection rows). The caption is the heading itself, so
   // pass the heading text and an empty caption row is avoided by reusing it.

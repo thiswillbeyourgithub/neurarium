@@ -117,12 +117,14 @@ function localize(field) {
  * @property {{projectionColors: Object<string,string>,
  *   groupLabels: Object<string,string>,
  *   kindLabels: Object<string,string>,
+ *   systemFlowKinds: Object<string,string>,
  *   signColors: Object<string,string>,
  *   signLabels: Object<string,string>}} meta  Presentation maps emitted by the
  *   generator (kind->arrow colour, group->legend heading, kind->display label,
- *   and the excit/inhib sign colour + heading for the colour-mode toggle), so the
- *   dataset is self-describing rather than relying on hardcoded values in the
- *   viewer. `groupLabels`/`kindLabels`/`signLabels` are localized to plain strings.
+ *   transmitter-system->flow-overlay projection kind, and the excit/inhib sign
+ *   colour + heading for the colour-mode toggle), so the dataset is self-describing
+ *   rather than relying on hardcoded values in the viewer.
+ *   `groupLabels`/`kindLabels`/`signLabels` are localized to plain strings.
  */
 
 /**
@@ -617,6 +619,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       projectionColors,
       groupLabels,
       kindLabels,
+      systemFlowKinds,
       signColors,
       signLabels,
       receptorFamilyLabels,

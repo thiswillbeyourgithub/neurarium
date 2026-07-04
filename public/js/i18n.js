@@ -109,6 +109,8 @@
       "legendKey.dotsDesc": "Focusing a receptor or target scatters glowing dots over every region it sits in, coloured by its action:",
       "legendKey.effects": "Drug effects",
       "legendKey.effectsDesc": "Focusing a drug pulses dots and a wash of light over each region it acts on, coloured by the effect:",
+      "legendKey.flow": "Flowing beads (drug focus)",
+      "legendKey.flowDesc": "A drug focus also sends beads travelling along the ascending pathways of the neurotransmitter system(s) it engages, so you see which broadcast “highways” it touches. The system is read from the drug's targets, not from which regions light up: an SSRI lights the whole serotonergic fan, an SNRI the noradrenergic and serotonergic ones. It marks engagement, not direction, so a serotonin blocker and an SSRI light the same fan (the direction lives in the dot colours). Only these diffuse ascending systems with a modelled source nucleus flow:",
       "legendKey.pathways": "Pathways",
       "legendKey.speculative": "Speculative pathway (dotted)",
 
@@ -356,6 +358,8 @@
       "legendKey.dotsDesc": "Sélectionner un récepteur ou une cible disperse des points lumineux sur chaque région où il se trouve, colorés selon son action :",
       "legendKey.effects": "Effets des médicaments",
       "legendKey.effectsDesc": "Sélectionner un médicament fait pulser des points et une onde de lumière sur chaque région où il agit, colorés selon l'effet :",
+      "legendKey.flow": "Billes en mouvement (médicament)",
+      "legendKey.flowDesc": "Sélectionner un médicament envoie aussi des billes le long des voies ascendantes du ou des systèmes de neurotransmetteurs qu'il engage, pour montrer quelles « autoroutes » de diffusion il touche. Le système est lu depuis les cibles du médicament, pas depuis les régions qui s'allument : un ISRS allume tout l'éventail sérotoninergique, un IRSN les éventails noradrénergique et sérotoninergique. Cela indique l'engagement, pas la direction : un antagoniste de la sérotonine et un ISRS allument le même éventail (la direction est portée par la couleur des points). Seuls ces systèmes ascendants diffus dotés d'un noyau source modélisé circulent :",
       "legendKey.pathways": "Voies",
       "legendKey.speculative": "Voie hypothétique (pointillés)",
 

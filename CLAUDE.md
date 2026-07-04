@@ -800,7 +800,10 @@ non-focused one. Labels are boxless: white glyphs outlined in the region's own c
   peer; opened by the legend icon or **k**): a *static* colour/symbol key built once by
   `buildLegendKey` into `#legend-body` from meta (so colours never drift): the
   expression gem dots (a swatch per sign), the per-drug effect dots + wash
-  (boost/block/modulate), and a dotted speculative pathway (each heading carries a
+  (boost/block/modulate), the drug **flow overlay** (one line swatch per
+  flow-capable transmitter system, from `meta.systemFlowKinds`, with a caption
+  explaining the beads mark which ascending system a drug engages, not direction),
+  and a dotted speculative pathway (each heading carries a
   `.legend-caption`); it ends with a **Sources & provenance** link (`#legend-open-sourcing`)
   that opens the sourcing popup. Wired by `wireLegendModal` (over the shared `wireModal`).
 - **Sources & provenance** (`#sourcing-modal`, a **toolbar-icon popup**, `wireSourcingModal`):
