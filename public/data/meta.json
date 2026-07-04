@@ -3214,8 +3214,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 632,
-        "verified": 620,
+        "total": 664,
+        "verified": 652,
         "sourced": 0,
         "missing": 12
       },
@@ -3287,11 +3287,11 @@
       }
     },
     "nodes": {
-      "total": 1665,
-      "verified": 1578,
+      "total": 1697,
+      "verified": 1610,
       "sourced": 0,
       "missing": 87,
-      "backed": 1578,
+      "backed": 1610,
       "pct_backed": 95
     }
   }

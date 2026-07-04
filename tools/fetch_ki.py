@@ -81,6 +81,19 @@ COARSE_MEMBERS = {
 # Name and match a pattern -> our subtype/coarse id. `norm` lowercases + drops
 # every non-alphanumeric, so "adrenergic Alpha1A" -> "adrenergicalpha1a".
 NAME_PATTERNS = [
+    # Nicotinic ACh receptors: PDSP lists these subtypes with a blank Unigene, so the
+    # gene join misses them. Route the high-affinity a4b2 to `nachr_a4b2` and every
+    # other neuronal subtype to `nachr_a7` as the "other nicotinic" bucket. These MUST
+    # precede the adrenergic alpha patterns below, else a name like "Nicotinic
+    # Alpha2Beta2" would be mis-read as adrenergic alpha2 (its substring "alpha2").
+    (re.compile(r"alpha4beta2|nicotinicalpha4beta2|^a4b2"), "nachr_a4b2"),
+    (re.compile(r"nicotinic|nachr|alpha\dbeta\d|alpha7|^a\db\d"), "nachr_a7"),
+    # Transporters / ion channels / sigma PDSP also frequently lists with a blank
+    # Unigene (the gene join covers the SLC*-labelled rows; these catch the rest).
+    (re.compile(r"norepinephrinetransporter|noradrenalinetransporter|^net$"), "net"),
+    (re.compile(r"nmda"), "nmda"),
+    (re.compile(r"cannabinoidcb1|^cb1$"), "cb1"),
+    (re.compile(r"opiatesigma|sigma1|^sigma$"), "sigma1"),
     (re.compile(r"5ht2a"), "5ht2a"), (re.compile(r"5ht2c"), "5ht2c"),
     (re.compile(r"5ht2b"), "5ht2b"), (re.compile(r"5ht7"), "5ht7"),
     (re.compile(r"5ht6"), "5ht6"), (re.compile(r"5ht1a"), "5ht1a"),

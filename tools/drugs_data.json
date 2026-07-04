@@ -440,7 +440,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 49.0,
+          "min": 13.3,
+          "max": 178.0,
+          "n_human": 6,
+          "n_nonhuman": 4,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45472,
+            "value_nm": 63.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-NE Uptake",
+            "reference": "Vaishnavi SN, et al., 2004",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "alpha1",
@@ -807,6 +825,28 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 300.0,
+          "min": 300.0,
+          "max": 300.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 32683,
+            "value_nm": 300.0,
+            "species": "GUINEA PIG",
+            "preparation": "BRAIN",
+            "radioligand": "3H-Tol2Gdn",
+            "reference": "Weber E, et al., 1986",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Amitriptyline",
@@ -854,7 +894,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 16.0,
+          "min": 16.0,
+          "max": 16.0,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45551,
+            "value_nm": 16.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "sert",
@@ -1163,7 +1221,32 @@
             "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 54.05,
+          "min": 7.1,
+          "max": 101.0,
+          "n_human": 2,
+          "n_nonhuman": 4,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 27571,
+            "value_nm": 7.1,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "Functional",
+            "reference": "Rothman RB, et al., 2003a",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "(+)-amphetamine",
+            "relation": "identity",
+            "pdsp_names": [
+              "Amphetamine,(+)",
+              "(+)-Amphetamine"
+            ]
+          }
+        }
       },
       {
         "target": "dat",
@@ -1212,7 +1295,32 @@
             "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 54.05,
+          "min": 7.1,
+          "max": 101.0,
+          "n_human": 2,
+          "n_nonhuman": 4,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 27571,
+            "value_nm": 7.1,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "Functional",
+            "reference": "Rothman RB, et al., 2003a",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "(+)-amphetamine",
+            "relation": "identity",
+            "pdsp_names": [
+              "Amphetamine,(+)",
+              "(+)-Amphetamine"
+            ]
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Dextroamphetamine",
@@ -1266,7 +1374,31 @@
             "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 83646,
+            "value_nm": 1000.0,
+            "species": "HUMAN",
+            "preparation": "HEK293 cells",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Simmler LD et al 2013",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "amphetamine",
+            "relation": "identity",
+            "pdsp_names": [
+              "Amphetamine"
+            ]
+          }
+        }
       },
       {
         "target": "dat",
@@ -1290,7 +1422,31 @@
             "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 83646,
+            "value_nm": 1000.0,
+            "species": "HUMAN",
+            "preparation": "HEK293 cells",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Simmler LD et al 2013",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "amphetamine",
+            "relation": "identity",
+            "pdsp_names": [
+              "Amphetamine"
+            ]
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Amphetamine",
@@ -1769,7 +1925,25 @@
             "quote": "Blocks norepinephrine reuptake pumps, also known as norepinephrine transporters",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 30628,
+            "value_nm": 5.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Bymaster F.P., et. al., 2002",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Atomoxetine",
@@ -2307,7 +2481,7 @@
           "min": 6970.0,
           "max": 6970.0,
           "n_human": 1,
-          "n_nonhuman": 0,
+          "n_nonhuman": 4,
           "source": {
             "corpus": "pdsp_ki",
             "ki_id": 56832,
@@ -3225,7 +3399,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 45.85,
+          "min": 38.0,
+          "max": 53.7,
+          "n_human": 2,
+          "n_nonhuman": 2,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 16783,
+            "value_nm": 53.7,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Millan MJ, et al., 2001",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "muscarinic",
@@ -3294,6 +3486,50 @@
             "preparation": "Brain Frontal Cortex",
             "radioligand": "3H-PRAZOSIN",
             "reference": "Richelson, Elliott et. al, 1984",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "5ht2a",
+        "affinity_only": true,
+        "ki": {
+          "median": 35.5,
+          "min": 35.5,
+          "max": 35.5,
+          "n_human": 1,
+          "n_nonhuman": 2,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 16815,
+            "value_nm": 35.5,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-KETANSERIN",
+            "reference": "Millan MJ, et al., 2001",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "d3",
+        "affinity_only": true,
+        "ki": {
+          "median": 40.05,
+          "min": 30.0,
+          "max": 50.1,
+          "n_human": 2,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 3307,
+            "value_nm": 30.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-YM 09151-2",
+            "reference": "TOLL L, et. al., 1998",
             "note": "",
             "provenance": "verified"
           }
@@ -4183,18 +4419,18 @@
         ],
         "ki": {
           "median": 2.1,
-          "min": 1.0,
-          "max": 3.4,
-          "n_human": 5,
-          "n_nonhuman": 2,
+          "min": 0.63,
+          "max": 8.54,
+          "n_human": 15,
+          "n_nonhuman": 16,
           "source": {
             "corpus": "pdsp_ki",
-            "ki_id": 53552,
-            "value_nm": 2.09999990463257,
+            "ki_id": 50338,
+            "value_nm": 2.1,
             "species": "HUMAN",
-            "preparation": "UNDEFINED",
-            "radioligand": "UNDEFINED",
-            "reference": "Mahaney PE et al., 2008",
+            "preparation": "CELLS",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Deecher, D., et. al. 2006",
             "note": "",
             "provenance": "verified"
           }
@@ -4438,7 +4674,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 558.4,
+          "min": 531.3,
+          "max": 3385.1,
+          "n_human": 3,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 50333,
+            "value_nm": 558.4,
+            "species": "HUMAN",
+            "preparation": "CELLS",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Deecher, D., et. al. 2006",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Desvenlafaxine",
@@ -4911,7 +5165,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 46.0,
+          "min": 46.0,
+          "max": 46.0,
+          "n_human": 1,
+          "n_nonhuman": 2,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45575,
+            "value_nm": 46.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "alpha1",
@@ -5196,7 +5468,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 29.5,
+          "min": 29.5,
+          "max": 29.5,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45578,
+            "value_nm": 29.5,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "h1",
@@ -5424,19 +5714,19 @@
           }
         ],
         "ki": {
-          "median": 45.0,
-          "min": 45.0,
+          "median": 13.75,
+          "min": 1.17,
           "max": 45.0,
-          "n_human": 3,
-          "n_nonhuman": 0,
+          "n_human": 8,
+          "n_nonhuman": 2,
           "source": {
             "corpus": "pdsp_ki",
-            "ki_id": 53433,
-            "value_nm": 45.0,
+            "ki_id": 17364,
+            "value_nm": 7.5,
             "species": "HUMAN",
-            "preparation": "UNDEFINED",
-            "radioligand": "UNDEFINED",
-            "reference": "Fish PV et al., 2008",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
           }
@@ -5576,7 +5866,31 @@
             "quote": "Esketamine is a nonselective, noncompetitive open-channel inhibitor of the NMDA receptor; specifically, it binds to the phencyclidine site of the NMDA receptor",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 419.0,
+          "min": 419.0,
+          "max": 419.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 93122,
+            "value_nm": 419.0,
+            "species": "PIG",
+            "preparation": "CORTICAL MEMBRANES",
+            "radioligand": "3H-MK-801",
+            "reference": "Bonifazi A et al 2015",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "(S)-ketamine",
+            "relation": "enantiomer",
+            "pdsp_names": [
+              "(S)-(+)-ketamine"
+            ]
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Esketamine",
@@ -6478,6 +6792,28 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 62.0,
+          "min": 62.0,
+          "max": 62.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 36022,
+            "value_nm": 62.0,
+            "species": "RAT",
+            "preparation": "BRAIN",
+            "radioligand": "3H-3-PPP,(+)",
+            "reference": "Largent BL, et al., 1984",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Fluphenazine",
@@ -6891,6 +7227,50 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "nmda",
+        "affinity_only": true,
+        "ki": {
+          "median": 8.0,
+          "min": 2.0,
+          "max": 700.0,
+          "n_human": 0,
+          "n_nonhuman": 5,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 13964,
+            "value_nm": 8.0,
+            "species": "RAT",
+            "preparation": "BRAIN",
+            "radioligand": "3H-SKF 10,047 (+)  + (2uM TCP)",
+            "reference": "Largent BL, et al., 1986",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 3.7,
+          "min": 3.7,
+          "max": 3.7,
+          "n_human": 1,
+          "n_nonhuman": 9,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 13748,
+            "value_nm": 3.7,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Haloperidol",
+            "reference": "Ganapathy ME, et al., 1998",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Haloperidol",
@@ -7144,7 +7524,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 98.0,
+          "min": 20.0,
+          "max": 142.0,
+          "n_human": 5,
+          "n_nonhuman": 8,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 23787,
+            "value_nm": 98.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Bymaster F.P., et. al., 2002",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "muscarinic",
@@ -7336,7 +7734,25 @@
             "quote": "Ketamine is a noncompetitive open-channel inhibitor of the NMDA receptor; specifically, it binds to the phencyclidine site of the NMDA receptor",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 659.0,
+          "min": 659.0,
+          "max": 659.0,
+          "n_human": 1,
+          "n_nonhuman": 8,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 58206,
+            "value_nm": 659.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-MK-801",
+            "reference": "Roth BL, et al., 2013",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Ketamine",
@@ -7493,7 +7909,31 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 68.0,
+          "min": 22.0,
+          "max": 200.0,
+          "n_human": 3,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45469,
+            "value_nm": 68.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-NE Uptake",
+            "reference": "Vaishnavi SN, et al., 2004",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "milnacipran",
+            "relation": "racemate",
+            "pdsp_names": [
+              "Milnacipran"
+            ]
+          }
+        }
       },
       {
         "target": "sert",
@@ -7608,7 +8048,32 @@
             "quote": "it increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 54.05,
+          "min": 7.1,
+          "max": 101.0,
+          "n_human": 2,
+          "n_nonhuman": 4,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 27571,
+            "value_nm": 7.1,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "Functional",
+            "reference": "Rothman RB, et al., 2003a",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "(+)-amphetamine",
+            "relation": "prodrug",
+            "pdsp_names": [
+              "Amphetamine,(+)",
+              "(+)-Amphetamine"
+            ]
+          }
+        }
       },
       {
         "target": "dat",
@@ -7657,7 +8122,32 @@
             "quote": "it increases norepinephrine and especially dopamine actions by blocking their reuptake and facilitating their release",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 54.05,
+          "min": 7.1,
+          "max": 101.0,
+          "n_human": 2,
+          "n_nonhuman": 4,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 27571,
+            "value_nm": 7.1,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "Functional",
+            "reference": "Rothman RB, et al., 2003a",
+            "note": "",
+            "provenance": "verified",
+            "mapped": true,
+            "measured_as": "(+)-amphetamine",
+            "relation": "prodrug",
+            "pdsp_names": [
+              "Amphetamine,(+)",
+              "(+)-Amphetamine"
+            ]
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Lisdexamfetamine",
@@ -7729,7 +8219,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 5.4,
+          "min": 5.4,
+          "max": 5.4,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45602,
+            "value_nm": 5.4,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "sert",
@@ -8752,19 +9260,19 @@
           }
         ],
         "ki": {
-          "median": 12.0,
-          "min": 12.0,
-          "max": 12.0,
-          "n_human": 0,
-          "n_nonhuman": 1,
+          "median": 11.1,
+          "min": 11.1,
+          "max": 11.1,
+          "n_human": 1,
+          "n_nonhuman": 2,
           "source": {
             "corpus": "pdsp_ki",
-            "ki_id": 56992,
-            "value_nm": 12.0,
-            "species": "UNDEFINED",
-            "preparation": "UNDEFINED",
-            "radioligand": "UNDEFINED",
-            "reference": "Heffernan GD et al., 2009",
+            "ki_id": 45605,
+            "value_nm": 11.1,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
             "note": "",
             "provenance": "verified"
           }
@@ -9088,7 +9596,25 @@
             "quote": "Is a low to moderate affinity noncompetitive (open-channel) NMDA receptor antagonist",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 695.0,
+          "min": 325.0,
+          "max": 2420.0,
+          "n_human": 0,
+          "n_nonhuman": 12,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 36322,
+            "value_nm": 690.0,
+            "species": "RAT",
+            "preparation": "CORTEX",
+            "radioligand": "3H-MK-801",
+            "reference": "Bresink I, et al., 1995",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "5ht3",
@@ -9189,7 +9715,25 @@
             "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 126.0,
+          "min": 126.0,
+          "max": 126.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 18151,
+            "value_nm": 126.0,
+            "species": "RAT",
+            "preparation": "FOREBRAIN",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Davids E et al., 2002",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Dexmethylphenidate",
@@ -9269,19 +9813,19 @@
           }
         ],
         "ki": {
-          "median": 660.0,
-          "min": 660.0,
-          "max": 660.0,
-          "n_human": 0,
-          "n_nonhuman": 1,
+          "median": 345.1,
+          "min": 339.0,
+          "max": 351.2,
+          "n_human": 2,
+          "n_nonhuman": 3,
           "source": {
             "corpus": "pdsp_ki",
-            "ki_id": 50877,
-            "value_nm": 660.0,
-            "species": "UNDEFINED",
-            "preparation": "UNDEFINED",
-            "radioligand": "UNDEFINED",
-            "reference": "Froimowitz M et al., 2007",
+            "ki_id": 17205,
+            "value_nm": 351.2,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "PDSP Certified Data",
             "note": "",
             "provenance": "verified",
             "mapped": true,
@@ -9712,7 +10256,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 68.0,
+          "min": 22.0,
+          "max": 200.0,
+          "n_human": 3,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45469,
+            "value_nm": 68.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-NE Uptake",
+            "reference": "Vaishnavi SN, et al., 2004",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "nmda",
@@ -10559,7 +11121,25 @@
             "quote": "norepinephrine reuptake pump (norepinephrine transporter) less potently",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 618.0,
+          "min": 360.0,
+          "max": 713.0,
+          "n_human": 3,
+          "n_nonhuman": 2,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 9613,
+            "value_nm": 618.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Owens MJ, et al, 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "alpha1",
@@ -10742,7 +11322,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 4.0,
+          "min": 4.0,
+          "max": 4.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 69395,
+            "value_nm": 4.0,
+            "species": "RAT",
+            "preparation": "occipital cortex synaptosomes",
+            "radioligand": "3H-Norepinephrine",
+            "reference": "Richelson, E. et, al. 1984",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "sert",
@@ -11646,7 +12244,25 @@
             "quote": "Paroxetine may have mild norepinephrine reuptake blocking actions",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 85.0,
+          "min": 40.0,
+          "max": 328.0,
+          "n_human": 5,
+          "n_nonhuman": 4,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 9620,
+            "value_nm": 85.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Owens MJ, et al, 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Paroxetine",
@@ -12186,6 +12802,50 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "net",
+        "affinity_only": true,
+        "ki": {
+          "median": 72.0,
+          "min": 72.0,
+          "max": 72.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 69418,
+            "value_nm": 72.0,
+            "species": "RAT",
+            "preparation": "occipital cortex synaptosomes",
+            "radioligand": "3H-Norepinephrine",
+            "reference": "Richelson, E. et, al. 1984",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 22.5,
+          "min": 13.0,
+          "max": 42.0,
+          "n_human": 0,
+          "n_nonhuman": 4,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 32692,
+            "value_nm": 21.0,
+            "species": "GUINEA PIG",
+            "preparation": "BRAIN",
+            "radioligand": "3H-3-PPP,(+)",
+            "reference": "Weber E, et al., 1986",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Perphenazine",
@@ -12711,6 +13371,28 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 508.0,
+          "min": 508.0,
+          "max": 508.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 36024,
+            "value_nm": 508.0,
+            "species": "RAT",
+            "preparation": "BRAIN",
+            "radioligand": "3H-3-PPP,(+)",
+            "reference": "Largent BL, et al., 1984",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Pimozide",
@@ -13217,7 +13899,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 1.41,
+          "min": 1.41,
+          "max": 1.41,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45641,
+            "value_nm": 1.41,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "sert",
@@ -13564,7 +14264,25 @@
             "quote": "Interactions at a myriad of other neurotransmitter receptors may contribute to quetiapine's efficacy in treatmentresistant depression or bipolar depression, especially serotonin 1A partial agonist action, norepinephrine reuptake blockade and serotonin 2C antagonist and serotonin 7 antagonist properties",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 36931,
+            "value_nm": 1000.0,
+            "species": "RAT",
+            "preparation": "CORTEX",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Schotte A, et al.,  1996",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "h1",
@@ -13834,6 +14552,28 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 220.0,
+          "min": 220.0,
+          "max": 220.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 11275,
+            "value_nm": 220.0,
+            "species": "GUINEA PIG",
+            "preparation": "Medulla oblongata",
+            "radioligand": "3H-Haloperidol",
+            "reference": "Schotte A, et al.,  1996",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Quetiapine",
@@ -13932,19 +14672,19 @@
           }
         ],
         "ki": {
-          "median": 5.0,
+          "median": 11.0,
           "min": 5.0,
-          "max": 5.0,
-          "n_human": 1,
-          "n_nonhuman": 1,
+          "max": 15.8,
+          "n_human": 3,
+          "n_nonhuman": 3,
           "source": {
             "corpus": "pdsp_ki",
-            "ki_id": 53434,
-            "value_nm": 5.0,
+            "ki_id": 23782,
+            "value_nm": 11.0,
             "species": "HUMAN",
-            "preparation": "UNDEFINED",
-            "radioligand": "UNDEFINED",
-            "reference": "Fish PV et al., 2008",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Bymaster F.P., et. al., 2002",
             "note": "",
             "provenance": "verified"
           }
@@ -14291,19 +15031,19 @@
           }
         ],
         "ki": {
-          "median": 660.0,
-          "min": 660.0,
-          "max": 660.0,
-          "n_human": 0,
-          "n_nonhuman": 1,
+          "median": 345.1,
+          "min": 339.0,
+          "max": 351.2,
+          "n_human": 2,
+          "n_nonhuman": 3,
           "source": {
             "corpus": "pdsp_ki",
-            "ki_id": 50877,
-            "value_nm": 660.0,
-            "species": "UNDEFINED",
-            "preparation": "UNDEFINED",
-            "radioligand": "UNDEFINED",
-            "reference": "Froimowitz M et al., 2007",
+            "ki_id": 17205,
+            "value_nm": 351.2,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "PDSP Certified Data",
             "note": "",
             "provenance": "verified",
             "mapped": true,
@@ -16552,6 +17292,28 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 345.0,
+          "min": 345.0,
+          "max": 345.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 32680,
+            "value_nm": 345.0,
+            "species": "GUINEA PIG",
+            "preparation": "BRAIN",
+            "radioligand": "3H-Tol2Gdn",
+            "reference": "Weber E, et al., 1986",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Trifluoperazine",
@@ -16689,7 +17451,25 @@
             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 2450.0,
+          "min": 2450.0,
+          "max": 2450.0,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45656,
+            "value_nm": 2450.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "5ht1a",
@@ -16785,6 +17565,50 @@
         "target": "nav",
         "action": "blocker",
         "tentative": true
+      },
+      {
+        "target": "alpha2a",
+        "affinity_only": true,
+        "ki": {
+          "median": 680.0,
+          "min": 680.0,
+          "max": 680.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 62831,
+            "value_nm": 680.0,
+            "species": "HUMAN",
+            "preparation": "Brain Frontal Cortex",
+            "radioligand": "3H-RAUWOLSCINE",
+            "reference": "Richelson, Elliott et. al, 1984",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "d2",
+        "affinity_only": true,
+        "ki": {
+          "median": 180.0,
+          "min": 180.0,
+          "max": 180.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 62857,
+            "value_nm": 180.0,
+            "species": "HUMAN",
+            "preparation": "Brain caudate nucleus",
+            "radioligand": "3H-SPIROPERIDOL",
+            "reference": "Richelson, Elliott et. al, 1984",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Trimipramine",
@@ -16979,19 +17803,19 @@
           }
         ],
         "ki": {
-          "median": 385.0,
+          "median": 1920.0,
           "min": 385.0,
-          "max": 385.0,
-          "n_human": 1,
-          "n_nonhuman": 0,
+          "max": 6310.0,
+          "n_human": 9,
+          "n_nonhuman": 6,
           "source": {
             "corpus": "pdsp_ki",
-            "ki_id": 53520,
-            "value_nm": 385.0,
+            "ki_id": 45453,
+            "value_nm": 1920.0,
             "species": "HUMAN",
-            "preparation": "UNDEFINED",
-            "radioligand": "UNDEFINED",
-            "reference": "Mahaney PE et al., 2008",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Vaishnavi SN, et al., 2004",
             "note": "",
             "provenance": "verified"
           }
@@ -17360,6 +18184,72 @@
             "provenance": "verified"
           }
         }
+      },
+      {
+        "target": "nachr_a7",
+        "affinity_only": true,
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 30240,
+            "value_nm": 1000.0,
+            "species": "RAT",
+            "preparation": "CLONED",
+            "radioligand": "UNDEFINED",
+            "reference": "Bymaster F.P., et. al., 2001",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "nmda",
+        "affinity_only": true,
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "n_human": 0,
+          "n_nonhuman": 2,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 30247,
+            "value_nm": 1000.0,
+            "species": "RAT",
+            "preparation": "CLONED",
+            "radioligand": "UNDEFINED",
+            "reference": "Bymaster F.P., et. al., 2001",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "sigma1",
+        "affinity_only": true,
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "n_human": 0,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 30260,
+            "value_nm": 1000.0,
+            "species": "GUINEA PIG",
+            "preparation": "CLONED",
+            "radioligand": "UNDEFINED",
+            "reference": "Bymaster F.P., et. al., 2001",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Venlafaxine",
@@ -17474,7 +18364,25 @@
             "quote": "Blocks norepinephrine reuptake pumps, also known as norepinephrine transporters",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 155.0,
+          "min": 155.0,
+          "max": 155.0,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 45662,
+            "value_nm": 155.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "Tatsumi M, et al., 1997",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "5ht2b",
@@ -18149,7 +19057,25 @@
             "quote": "Specifically inhibits norepinephrine uptake",
             "provenance": "verified"
           }
-        ]
+        ],
+        "ki": {
+          "median": 530.0,
+          "min": 530.0,
+          "max": 530.0,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 25324,
+            "value_nm": 530.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Nisoxetine",
+            "reference": "PDSP Certified Data",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
       },
       {
         "target": "alpha1",
@@ -18212,6 +19138,72 @@
         }
       },
       {
+        "target": "5ht1a",
+        "affinity_only": true,
+        "ki": {
+          "median": 323.114,
+          "min": 280.0,
+          "max": 611.0,
+          "n_human": 4,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 64244,
+            "value_nm": 316.22776601684,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-WAY100635",
+            "reference": "Silvestre, JS. et, al. 2005",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "5ht1b",
+        "affinity_only": true,
+        "ki": {
+          "median": 59.5,
+          "min": 52.0,
+          "max": 67.0,
+          "n_human": 2,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 11321,
+            "value_nm": 52.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-Alniditan",
+            "reference": "Schotte A, et al.,  1996",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "5ht1d",
+        "affinity_only": true,
+        "ki": {
+          "median": 80.0,
+          "min": 63.0,
+          "max": 175.0,
+          "n_human": 3,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 17147,
+            "value_nm": 80.0,
+            "species": "HUMAN",
+            "preparation": "BRAIN",
+            "radioligand": "3H-5CT",
+            "reference": "Richelson E, Souder T. 2000",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
         "target": "5ht2c",
         "affinity_only": true,
         "ki": {
@@ -18228,6 +19220,50 @@
             "preparation": "BRAIN",
             "radioligand": "3H-5HT",
             "reference": "Richelson E, Souder T. 2000",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "5ht3",
+        "affinity_only": true,
+        "ki": {
+          "median": 449.29,
+          "min": 426.58,
+          "max": 472.0,
+          "n_human": 2,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 25359,
+            "value_nm": 472.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-ZACOPRIDE",
+            "reference": "PDSP Certified Data",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "5ht5a",
+        "affinity_only": true,
+        "ki": {
+          "median": 29.0,
+          "min": 29.0,
+          "max": 29.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 25351,
+            "value_nm": 29.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-LSD",
+            "reference": "PDSP Certified Data",
             "note": "",
             "provenance": "verified"
           }
@@ -18256,6 +19292,72 @@
         }
       },
       {
+        "target": "5ht7",
+        "affinity_only": true,
+        "ki": {
+          "median": 8.944,
+          "min": 5.888,
+          "max": 12.0,
+          "n_human": 2,
+          "n_nonhuman": 2,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 64364,
+            "value_nm": 5.8884365535559,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-LSD",
+            "reference": "Silvestre, JS. et, al. 2005",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "alpha2",
+        "affinity_only": true,
+        "ki": {
+          "median": 139.412,
+          "min": 5.0,
+          "max": 236.0,
+          "n_human": 8,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 11448,
+            "value_nm": 150.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-RAUWOLSCINE",
+            "reference": "Schotte A, et al.,  1996",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "d1",
+        "affinity_only": true,
+        "ki": {
+          "median": 71.0,
+          "min": 71.0,
+          "max": 71.0,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 25332,
+            "value_nm": 71.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-SCH23390",
+            "reference": "PDSP Certified Data",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
         "target": "d3",
         "affinity_only": true,
         "ki": {
@@ -18272,6 +19374,182 @@
             "preparation": "CLONED",
             "radioligand": "125I-IODOSULPRIDE",
             "reference": "Schotte A, et al.,  1996",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "d4",
+        "affinity_only": true,
+        "ki": {
+          "median": 19.939,
+          "min": 18.0,
+          "max": 21.878,
+          "n_human": 2,
+          "n_nonhuman": 2,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 25368,
+            "value_nm": 18.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-NMSP",
+            "reference": "PDSP Certified Data",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "d5",
+        "affinity_only": true,
+        "ki": {
+          "median": 248.0,
+          "min": 248.0,
+          "max": 248.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 25331,
+            "value_nm": 248.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-SCH23390",
+            "reference": "PDSP Certified Data",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "h2",
+        "affinity_only": true,
+        "ki": {
+          "median": 500.0,
+          "min": 500.0,
+          "max": 500.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 25354,
+            "value_nm": 500.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-TIOTIDINE",
+            "reference": "PDSP Certified Data",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "m1",
+        "affinity_only": true,
+        "ki": {
+          "median": 18.099,
+          "min": 18.0,
+          "max": 18.197,
+          "n_human": 2,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 16741,
+            "value_nm": 18.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-QNB",
+            "reference": "Bolden C, et al., 1992",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "m2",
+        "affinity_only": true,
+        "ki": {
+          "median": 140.627,
+          "min": 140.0,
+          "max": 141.254,
+          "n_human": 2,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 16756,
+            "value_nm": 140.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-QNB",
+            "reference": "Bolden C, et al., 1992",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "m3",
+        "affinity_only": true,
+        "ki": {
+          "median": 73.0,
+          "min": 73.0,
+          "max": 73.0,
+          "n_human": 1,
+          "n_nonhuman": 1,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 16678,
+            "value_nm": 73.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-QNB",
+            "reference": "Bolden C, et al., 1992",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "m4",
+        "affinity_only": true,
+        "ki": {
+          "median": 77.0,
+          "min": 77.0,
+          "max": 77.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 16702,
+            "value_nm": 77.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-QNB",
+            "reference": "Bolden C, et al., 1992",
+            "note": "",
+            "provenance": "verified"
+          }
+        }
+      },
+      {
+        "target": "m5",
+        "affinity_only": true,
+        "ki": {
+          "median": 260.0,
+          "min": 260.0,
+          "max": 260.0,
+          "n_human": 1,
+          "n_nonhuman": 0,
+          "source": {
+            "corpus": "pdsp_ki",
+            "ki_id": 16726,
+            "value_nm": 260.0,
+            "species": "HUMAN",
+            "preparation": "CLONED",
+            "radioligand": "3H-QNB",
+            "reference": "Bolden C, et al., 1992",
             "note": "",
             "provenance": "verified"
           }
