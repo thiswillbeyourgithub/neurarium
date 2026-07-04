@@ -10,20 +10,27 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-04, after the GtoPdb receptor-expression Phase 1)
+## Snapshot (2026-07-04, after the Allen target-expression Phase 2a)
 
-Headline: **1307 / 1665 knowledge nodes backed (78%)**. In the tally a bare `llm`
+Headline: **1415 / 1665 knowledge nodes backed (85%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
-"missing" below means `llm` or no source at all. 358 knowledge nodes are missing.
+"missing" below means `llm` or no source at all. 250 knowledge nodes are missing.
 
 > **Recently closed.** Several smaller kinds are now fully (or nearly) sourced:
+> - `target_locations` 108/124 verified: **Phase 2a** wired the **Allen Human Brain
+>   Atlas** microarray (corpus #8 `allen_ahba`). `fetch_allen.py` aggregates Allen's
+>   `PACall` present/absent detection boolean across the 5 available human donors into a
+>   deterministic present/absent per (gene, region) (no judge), and the confirm-only merge
+>   upgraded 108 existing "Found in" regions across 22 non-receptor targets. The 16 that
+>   stay `llm` are honest microarray limits: SERT + NET **terminal** regions (their mRNA is
+>   in the raphe / locus-coeruleus cell bodies, which DO confirm, not the cortical/limbic
+>   terminals) + the melatonin receptor group. Every Allen source is `species: "Human"`.
 > - `receptor_locations` 197/383 verified: **Phase 1** of the expression-sourcing work
 >   wired the **Guide to Pharmacology** tissue-distribution API (corpus #7 `gtopdb`). A
 >   confirm-only judge mapped 197 existing "Found in" regions across 49 receptors to a
 >   verified tissue quote (never adding/dropping a region), each carrying its assay
 >   **species** (the viewer flags a non-human assay with an amber tag). The remaining 186
->   `receptor_locations` + all 124 `target_locations` are **Phase 2** (Allen AHBA, scoped
->   below).
+>   `receptor_locations` are **Phase 2b** (Allen AHBA, reusing the cached donor zips).
 > - `structures` 52/52 verified: the last four (claustrum + fornix) closed against the
 >   newly-wired **Nieuwenhuys** atlas (corpus #6), which Kandel does not describe in prose.
 > - `projections` 99/103 verified: 7 limbic/olfactory/commissural families closed against
@@ -41,48 +48,55 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 >   the transmitter quotes).
 > - `references` 2/2 closed: Wikipedia links added for the carbonic-anhydrase + PDE5 targets.
 >
-> Headline 55% (pre-drug-class) to 67% (Nieuwenhuys) to 78% (GtoPdb Phase 1). The table
-> below is the post-Phase-1 state.
+> Headline 55% (pre-drug-class) to 67% (Nieuwenhuys) to 78% (GtoPdb Phase 1) to 85%
+> (Allen Phase 2a). The table below is the post-Phase-2a state.
 
 | Node kind | Missing | Total | Share of the gap | Difficulty | Best lever |
 | --- | ---: | ---: | ---: | --- | --- |
-| `receptor_locations` | 186 | 383 | 52.0% | Hard | Allen AHBA (Phase 2); 197 done via GtoPdb |
-| `target_locations` | 124 | 124 | 34.6% | Hard | Allen AHBA (Phase 2) |
-| `receptors` (mechanism) | 26 | 56 | 7.3% | Medium | IUPHAR Guide to Pharmacology |
-| `drug_bindings` | 12 | 632 | 3.4% | Medium | PDSP refresh + primary lit |
-| `projections` | 4 | 103 | 1.1% | Hard | claustrum primary lit |
-| `targets` (classification) | 4 | 25 | 1.1% | **Easy** | IUPHAR / textbook |
-| `drug_categories` | 2 | 158 | 0.6% | flagged | Stahl "Class" line |
+| `receptor_locations` | 186 | 383 | 74.4% | Hard | Allen AHBA (Phase 2b); 197 done via GtoPdb |
+| `receptors` (mechanism) | 26 | 56 | 10.4% | Medium | IUPHAR Guide to Pharmacology |
+| `target_locations` | 16 | 124 | 6.4% | limit | 108 done via Allen; the 16 are mRNA-at-source honest `llm` |
+| `drug_bindings` | 12 | 632 | 4.8% | Medium | PDSP refresh + primary lit |
+| `projections` | 4 | 103 | 1.6% | Hard | claustrum primary lit |
+| `targets` (classification) | 4 | 25 | 1.6% | **Easy** | IUPHAR / textbook |
+| `drug_categories` | 2 | 158 | 0.8% | flagged | Stahl "Class" line |
+| `target_locations` (done) | 0 | 108 | closed | done | Allen AHBA (corpus #8) |
 | `receptor_locations` (done) | 0 | 197 | closed | done | GtoPdb (corpus #7) |
 | `structures` (anatomy) | 0 | 52 | **DONE** (52/52) | done | Kandel + Nieuwenhuys |
 | `circuits` | 0 | 6 | **DONE** (6/6) | done | Kandel prose |
 | `projection_groups` | 0 | 10 | **DONE** (10/10) | done | Stahl Essential / Kandel |
 | `references` (Wikipedia links) | 0 | 298 | **DONE** (not in headline) | done | Wikipedia URLs |
 
-**The shape of the problem:** two kinds are still **~87%** of the remaining gap (310 of
-358), both per-region "expression" claims (the 186 residual `receptor_locations` +
-124 `target_locations`) that GtoPdb could not reach (it is receptor-only and coarse).
-Closing them is **Phase 2** below: the Allen Human Brain Atlas, the one source that resolves
-our deep nuclei AND covers non-receptor targets. Everything else combined is ~13% of the
-gap and is mostly "the books we hold do not state it in prose."
+**The shape of the problem:** one kind is now **~74%** of the remaining gap (186 of 250):
+the residual `receptor_locations` GtoPdb had no tissue data for. Closing them is **Phase 2b**
+below: rerun `fetch_allen.py` over the receptor genes (the donor zips are already cached),
+exactly like the target run just did for Phase 2a. Next after that is the 26 `llm` receptor
+mechanism classifications. The 16 residual `target_locations` are a hard microarray limit,
+not a gap to chase (transporter mRNA is at the source nucleus, not the terminal).
 
-Five book corpora + two data corpora are wired into `SOURCE_CORPORA` today (`stahl`,
-`kandel`, `stahl_essential`, `carlat`, `nieuwenhuys`, plus the `pdsp_ki` CSV and the
-`gtopdb` tissue API). The book-prose wins those allow are largely exhausted (see the
-sourcing memory); the remaining gaps mostly need a **new kind of source**: an expression
-atlas (Phase 2 below), a receptor-classification database, or (for the last two claustrum
+Five book corpora + three data corpora are wired into `SOURCE_CORPORA` today (`stahl`,
+`kandel`, `stahl_essential`, `carlat`, `nieuwenhuys`, plus the `pdsp_ki` CSV, the `gtopdb`
+tissue API, and the `allen_ahba` microarray). The book-prose wins those allow are largely
+exhausted (see the sourcing memory); the remaining gaps mostly need the expression atlas
+(Phase 2b below), a receptor-classification database, or (for the last two claustrum
 pathways) primary literature.
 
 ---
 
 ## Phase 2 plan: Allen AHBA expression sourcing (the 310 remaining expression nodes)
 
+> **Status: Phase 2a DONE** (target_locations, corpus #8 `allen_ahba` wired, 108/124
+> verified; the tooling `fetch_allen.py` + `apply_location_sources.py --corpus allen` is
+> built and validated end-to-end). **Phase 2b is next**: rerun `fetch_allen.py` over the
+> receptor genes to source the 186 residual `receptor_locations`; the 5 donor zips are
+> already cached, so it is only compute. **Phase 2c** (deep-nuclei residuals) folds into 2b.
+
 **Goal.** Source the **310** expression nodes GtoPdb (Phase 1) could not reach: the **186**
 residual `receptor_locations` (across 44 receptors GtoPdb had no tissue data for) + the
-**124** `target_locations` (all 25 non-receptor targets, none sourced yet), against the
-**Allen Human Brain Atlas (AHBA) microarray**. Same shape as Phase 1: **confirm-only**
-(upgrade the grade on an *existing* LLM-authored "Found in" region, never add or drop a
-region), one graded node per `(gene, region)` pair, quote-gated author-side.
+**124** `target_locations` (Phase 2a, now 108 verified + 16 honest microarray-limit `llm`),
+against the **Allen Human Brain Atlas (AHBA) microarray**. Same shape as Phase 1:
+**confirm-only** (upgrade the grade on an *existing* LLM-authored "Found in" region, never
+add or drop a region), one graded node per `(gene, region)` pair, quote-gated author-side.
 
 **Why Allen, and only Allen.** Four candidate sources were evaluated (see the
 `expression-source-options` sourcing memory); Allen is the only one that fits our anatomy:
