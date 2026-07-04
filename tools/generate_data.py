@@ -240,6 +240,8 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
                       "fr": "Traitement des addictions"},
     "opioid": {"en": "Opioid / opioid modulator",
                "fr": "Opioïde / modulateur opioïde"},
+    "recreational": {"en": "Recreational / psychoactive",
+                     "fr": "Récréatif / psychoactif"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 

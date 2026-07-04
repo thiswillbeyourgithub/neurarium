@@ -245,6 +245,10 @@
       "en": "Opioid / opioid modulator",
       "fr": "Opioïde / modulateur opioïde"
     },
+    "recreational": {
+      "en": "Recreational / psychoactive",
+      "fr": "Récréatif / psychoactif"
+    },
     "other": {
       "en": "Other",
       "fr": "Autre"
@@ -3214,8 +3218,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 664,
-        "verified": 652,
+        "total": 703,
+        "verified": 691,
         "sourced": 0,
         "missing": 12
       },
@@ -3226,10 +3230,10 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 158,
+        "total": 165,
         "verified": 156,
         "sourced": 0,
-        "missing": 2
+        "missing": 9
       },
       "projections": {
         "total": 103,
@@ -3280,18 +3284,18 @@
         "missing": 0
       },
       "references": {
-        "total": 298,
+        "total": 305,
         "verified": 0,
-        "sourced": 298,
+        "sourced": 305,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 1697,
-      "verified": 1610,
+      "total": 1743,
+      "verified": 1649,
       "sourced": 0,
-      "missing": 87,
-      "backed": 1610,
+      "missing": 94,
+      "backed": 1649,
       "pct_backed": 95
     }
   }

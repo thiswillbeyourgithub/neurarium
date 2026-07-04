@@ -154,6 +154,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Clozapine.svg",
     "title": "Clozapine"
   },
+  "cocaine": {
+    "file": "File:Kokain_-_Cocaine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Kokain_-_Cocaine.svg",
+    "title": "Cocaine"
+  },
   "cyamemazine": {
     "file": "File:Cyamemazine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Cyamemazine.svg",
@@ -203,6 +208,11 @@
     "file": "File:Disulfiram.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Disulfiram.svg",
     "title": "Disulfiram"
+  },
+  "dmt": {
+    "file": "File:DMT.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/DMT.svg",
+    "title": "N,N-Dimethyltryptamine"
   },
   "donepezil": {
     "file": "File:(R)-Donepezil Structural Formula V1.svg",
@@ -384,6 +394,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Loxapine.svg",
     "title": "Loxapine"
   },
+  "lsd": {
+    "file": "File:LSD_skeletal_formula.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/LSD_skeletal_formula.svg",
+    "title": "Lysergic acid diethylamide"
+  },
   "lumateperone": {
     "file": "File:ITI-007.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/ITI-007.svg",
@@ -399,10 +414,20 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Maprotiline_structure.svg",
     "title": "Maprotiline"
   },
+  "mdma": {
+    "file": "File:MDMA structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/MDMA_structure.svg",
+    "title": "MDMA"
+  },
   "memantine": {
     "file": "File:Memantine_acsv.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Memantine_acsv.svg",
     "title": "Memantine"
+  },
+  "methamphetamine": {
+    "file": "File:Methamphetamine_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Methamphetamine_structure.svg",
+    "title": "Methamphetamine"
   },
   "methylfolate_l": {
     "file": "File:MTHFR metabolism.svg",
@@ -473,6 +498,11 @@
     "file": "File:Nefazodone.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Nefazodone.svg",
     "title": "Nefazodone"
+  },
+  "nicotine": {
+    "file": "File:Nicotine_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Nicotine_structure.svg",
+    "title": "Nicotine"
   },
   "nortriptyline": {
     "file": "File:Nortriptyline.svg",
