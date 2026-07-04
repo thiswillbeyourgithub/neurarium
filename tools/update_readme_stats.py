@@ -14,7 +14,7 @@ the block between the two marker comments in ``README.md``::
 It also keeps the header's proof-first one-liner in sync, if the README wraps that
 figure in a second pair of inline markers::
 
-    <!-- SOURCED_HEADLINE:START -->**NN% of the M knowledge nodes ...**<!-- SOURCED_HEADLINE:END -->
+    <!-- SOURCED_HEADLINE:START --><b>NN% of the M knowledge nodes ...</b><!-- SOURCED_HEADLINE:END -->
 
 so the headline and the block below can never drift (the header markers are optional;
 a README without them is left untouched).
@@ -71,8 +71,10 @@ def render_headline(stats: dict) -> str:
     """The proof-first one-liner in the README header (between the SOURCED_HEADLINE
     markers), kept identical to the block headline below so the two never diverge."""
     a = stats["nodes"]
-    return (f"**{a['pct_backed']}% of the {a['total']} knowledge nodes "
-            f"are sourced or verified**")
+    # <b> not ** : this line sits inside a GitHub [!IMPORTANT] admonition, where
+    # markdown bold (**) does not render but the inline HTML tag does.
+    return (f"<b>{a['pct_backed']}% of the {a['total']} knowledge nodes "
+            f"are sourced or verified</b>")
 
 
 def splice_inline(text: str, start: str, end: str, inner: str) -> str:

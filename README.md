@@ -5,7 +5,7 @@ receptor, and drug is a graded, inspectable node on one map you can rotate, pull
 apart, search, and click through.**
 
 > [!IMPORTANT]
-> <!-- SOURCED_HEADLINE:START -->**78% of the 1665 knowledge nodes are sourced or verified**<!-- SOURCED_HEADLINE:END -->
+> <!-- SOURCED_HEADLINE:START --><b>78% of the 1665 knowledge nodes are sourced or verified</b><!-- SOURCED_HEADLINE:END -->
 > in the shipped dataset, and every fact in the app carries a provenance grade you
 > can inspect. This is a real programmatic count of the data (see
 > [Every node is graded](#every-node-is-graded)).
