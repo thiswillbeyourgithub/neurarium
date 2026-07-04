@@ -157,12 +157,31 @@ Data + authoring (`tools/`):
   targetId), and emits `sources/gtopdb/worklist.json` (per receptor: its candidate tissue
   quotes + species). Each quote carries the assay **species** (Human/Rat/Mouse/Monkey).
   Stdlib urllib, polite, idempotent (`--refresh`, `--only`). See Expression locations.
-- `tools/apply_location_sources.py` — the location analogue of `apply_source_quotes.py`:
-  reads `sources/gtopdb/worklist.json` + a judged file (a confirm-only judge picks which
-  candidate quotes, by index, support each existing LLM-authored "Found in" region;
-  never adds/drops regions), re-confirms each accepted quote on its cached page
-  (`check_data.normalize_for_match`), and merges `verified` `location_sources` (with
-  `species`) into `tools/location_sources.json`. `--judged`, `--dry-run`. Idempotent.
+- `tools/fetch_allen.py` — fetches the [Allen Human Brain Atlas](https://human.brain-map.org/)
+  microarray (corpus #8 `allen_ahba`), the source for **non-receptor target expression
+  regions** (and the residual receptor regions GtoPdb misses; Phase 2). Downloads each
+  human donor's normalized-microarray zip into `sources/allen/raw/` (author-side,
+  gitignored; reads only PACall/SampleAnnot/Probes, never the ~400MB expression matrix),
+  crosswalks each tissue sample to our coarse `base` via the Allen ontology subtree
+  (`BASE_ALLEN`), and calls a `base` **present** for a gene when its representative probe's
+  **PACall** detection boolean fires in >= half that base's samples across donors (a
+  threshold-free "expressed here" call, no judge needed). A `TARGET_GENES` map (target id
+  -> HGNC gene) + reused `fetch_gtopdb.RECEPTOR_GENES` resolve owners to genes. Emits
+  `sources/allen/pages/<gene>.md` (the quote-gate page; `page` = HGNC gene) + a
+  deterministic `sources/allen/confirmed.json`. Confirm-only (only regions the dataset
+  already claims). Skips an unreachable donor with a warning (donor 15496's zip 404s on
+  Allen's server -> 5 donors). Stdlib (urllib/zipfile/csv), `--only`/`--donors`/`--refresh`.
+  See Expression locations. **Microarray measures mRNA (cell bodies), so a transporter
+  (SERT/NET/DAT/VMAT2) confirms at its SOURCE nucleus (raphe/LC/SN-VTA), not its projection
+  terminals; those terminal-region claims honestly stay `llm`.**
+- `tools/apply_location_sources.py` — the location analogue of `apply_source_quotes.py`,
+  `--corpus {gtopdb,allen}` (default gtopdb). **gtopdb**: reads `sources/gtopdb/worklist.json`
+  + a judged file (a confirm-only judge picks which candidate quotes, by index, support each
+  existing LLM-authored "Found in" region; never adds/drops regions). **allen**: reads
+  `sources/allen/confirmed.json` (deterministic, no judge). Both re-confirm each accepted
+  quote on its cached page (`check_data.normalize_for_match`) and merge `verified`
+  `location_sources` (with `species`) into `tools/location_sources.json` (each corpus/pass
+  merges rather than clobbers). `--judged`, `--dry-run`. Idempotent.
 - `tools/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` at import (`_merge_external_location_sources`) into
   `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`, mirroring how
@@ -1378,6 +1397,21 @@ species" tooltip line (mirroring the Ki chip's non-human warning). Quote-gated e
 Stahl (author-side pages; skipped + warned on a clone). Refresh: `fetch_gtopdb.py`, judge,
 `apply_location_sources.py`, then `generate_data.py`.
 
+**Expression locations (Allen AHBA, corpus #8).** The complement to GtoPdb for the same
+`receptor_locations` / `target_locations` nodes: the source for the **non-receptor targets**
+GtoPdb does not cover (transporters/enzymes/channels) and the deep nuclei. `allen_ahba` in
+`SOURCE_CORPORA` is a `pages_dir` corpus whose `page` is an **HGNC gene symbol** and whose
+page file (`sources/allen/pages/<gene>.md`, author-side) holds one presence line per
+confirmed region. `tools/fetch_allen.py` aggregates the [Allen Human Brain
+Atlas](https://human.brain-map.org/) microarray **PACall** detection boolean across the
+human donors into a deterministic present/absent per (gene, region) (**no judge**, unlike
+GtoPdb), emitting `sources/allen/confirmed.json`; `apply_location_sources.py --corpus allen`
+re-confirms each quote on its gene page and writes a `verified`, `species: Human` source.
+Confirm-only (never adds/drops a region), quote-gated exactly like Stahl. **Caveat:**
+microarray measures mRNA in cell bodies, so a transporter (SERT/NET) confirms at its source
+nucleus (raphe/LC), and its terminal-region claims honestly stay `llm`. Refresh:
+`fetch_allen.py`, `apply_location_sources.py --corpus allen`, then `generate_data.py`.
+
 **Descriptions.** Drugs, structures and non-receptor targets carry **no baked
 description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
 the shared `liveWikiDescription` helper over `js/wiki.js` `fetchWikiLead(url, lang)` (the
@@ -1425,12 +1459,13 @@ popup shows it (`buildAboutSourcing` into `#about-sourcing`) and
 `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
 coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). Current: ~78% of 1665 nodes backed (drug
+points *at* a node, it is not itself one). Current: ~85% of 1665 nodes backed (drug
 bindings ~98%, NbN 100%, `drug_categories` 156/158, `structures` 52/52, `circuits` 6/6,
-`projection_groups` 10/10, `references` 100%, `receptor_locations` 197/383 (GtoPdb, see
-Expression locations); the big gap is now the 124 `target_locations`, all `missing` today
-(no atlas wired for targets yet), the remaining 186 `receptor_locations` (no GtoPdb tissue
-data), then the 26 `llm` receptor classifications, the 4 remaining projections
+`projection_groups` 10/10, `references` 100%, `target_locations` 108/124 (Allen AHBA, see
+Expression locations), `receptor_locations` 197/383 (GtoPdb); the big gap is now the 186
+residual `receptor_locations` (no GtoPdb tissue data; Phase 2b will source them from Allen),
+the 26 `llm` receptor classifications, the 16 `target_locations` that stay `llm` (SERT/NET
+terminal regions + melatonin, honest microarray limits), the 4 remaining projections
 (claustrum->frontal + claustrum->insula, which no single Nieuwenhuys page states), and the 4
 `targets`, all `missing`). Each expression
 region is its own node (per the request to grade each "Found in", not the list as a whole),
@@ -1539,8 +1574,13 @@ network, idempotent, polite; each touches only what changed). Always finish with
    `sources/gtopdb/`, author-side), then run the confirm-only judge over
    `sources/gtopdb/worklist.json` and `python tools/apply_location_sources.py --judged <f>`
    to merge new `verified` sources into `tools/location_sources.json`. See Expression locations.
-5. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
-6. `python tools/update_readme_stats.py` — refresh the README sourcing table
+5. **Allen AHBA expression** (the `target_locations` + residual `receptor_locations`
+   sources): `python tools/fetch_allen.py` re-pulls each donor's microarray PACall (caches
+   to `sources/allen/`, author-side; ~2GB across donors), then `python
+   tools/apply_location_sources.py --corpus allen` merges the deterministic `verified`
+   sources (no judge) into `tools/location_sources.json`. See Expression locations.
+6. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
+7. `python tools/update_readme_stats.py` — refresh the README sourcing table
    (CI runs it `--check`).
 
 Panel **descriptions** need no refresh script: each fetches the current Wikipedia lead
