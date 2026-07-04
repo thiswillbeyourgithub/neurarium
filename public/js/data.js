@@ -145,6 +145,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       fetchJsonl(`${dataDir}/receptors.jsonl`),
       fetchJsonl(`${dataDir}/drugs.jsonl`),
     ]);
+  // Surface the loaded meta immediately (before the slower shape fetch + SDF
+  // meshing): the loading gate's sourcing popup fills its coverage bars from
+  // metaRecord.provenance_stats, so they show while the brain is still meshing.
+  onProgress?.({ stage: "meta-ready", meta: metaRecord });
 
   // Presentation maps emitted by the generator (kind->arrow colour,
   // group->legend heading, kind->display label), so the palette/headings live in

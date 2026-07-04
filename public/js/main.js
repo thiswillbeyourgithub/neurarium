@@ -4772,6 +4772,12 @@ async function main() {
   let data;
   try {
     data = await loadBrainData("data", (p) => {
+      // Fill the sourcing gate's coverage bars as soon as meta lands (before the
+      // slow shape/mesh phase), so a visitor watching the load sees the sourcing
+      // coverage, not just the intro text.
+      if (p.stage === "meta-ready" && p.meta?.provenance_stats) {
+        buildAboutSourcing({ provenanceStats: p.meta.provenance_stats });
+      }
       if (p.stage === "shapes" && p.total) {
         loading.setProgress(0.05 + 0.45 * (p.loaded / p.total), t("loading.shapes"));
       }
