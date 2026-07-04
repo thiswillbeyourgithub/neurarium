@@ -753,8 +753,7 @@
       #structures,
       #projections,
       #receptors,
-      #drugs,
-      #about {
+      #drugs {
         margin-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
@@ -762,8 +761,7 @@
       #structures .collapse-header,
       #projections .collapse-header,
       #receptors .collapse-header,
-      #drugs .collapse-header,
-      #about .collapse-header { padding: 10px 0 4px; }
+      #drugs .collapse-header { padding: 10px 0 4px; }
       /* Legend key + sourcing tally: a collapsible sub-panel of the Controls
          section (not an accordion peer). Set off from the toggles above it with a
          hairline; its header matches the section headers' zero side padding. */
@@ -773,8 +771,8 @@
       }
       .legend-subpanel .subpanel-header { padding: 10px 0 4px; }
       #legend-subpanel-body { padding-bottom: 4px; }
-      /* About blurb: muted body text with readable links. */
-      #about-body { padding: 2px 0 6px; }
+      /* About blurb (in the #about-modal popup): muted body text with readable
+         links. */
       .about-text {
         margin: 8px 0;
         font-size: 12px;
@@ -1619,11 +1617,21 @@
               <line x1="19" y1="12" x2="22.5" y2="12" />
             </svg>
           </button>
-          <!-- Search (right): swaps a search box in for the panel body. -->
+          <!-- Search: swaps a search box in for the panel body. -->
           <button type="button" id="search-toggle" class="tool-btn" data-i18n-attr="title:toolbar.search, aria-label:toolbar.searchAria">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <circle cx="11" cy="11" r="7" />
               <line x1="16.5" y1="16.5" x2="21" y2="21" />
+            </svg>
+          </button>
+          <!-- About (right): opens the #about-modal popup (project blurb, source /
+               issues / licence / attribution links). The sourcing tally is NOT
+               here; it lives with the Legend in the Controls section. -->
+          <button type="button" id="about-toggle" class="tool-btn" data-i18n-attr="title:panel.about, aria-label:panel.about">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <line x1="12" y1="11" x2="12" y2="16" />
+              <line x1="12" y1="8" x2="12" y2="8" />
             </svg>
           </button>
         </div>
@@ -1806,37 +1814,6 @@
               <div id="drugs-list"></div>
             </div>
           </div>
-
-          <!-- About: collapsed by default (body ships `hidden`). The "Source
-               code" link's href is set from app-config.js sourceUrl by js/main.js
-               (its row is removed if no valid url). -->
-          <div id="about">
-            <button type="button" id="about-toggle" class="collapse-header" aria-expanded="false">
-              <span data-i18n="panel.about"></span>
-              <span class="chevron" aria-hidden="true">&#9656;</span>
-            </button>
-            <div id="about-body" hidden>
-              <!-- Text + embedded links filled from js/i18n.js (data-i18n-html)
-                   so the prose lives in one place (the catalogue), translated. -->
-              <p class="about-text" data-i18n-html="about.p1"></p>
-              <p class="about-text" data-i18n-html="about.p2"></p>
-              <p class="about-text" data-i18n-html="about.p3"></p>
-              <!-- Feedback: the embedded #about-issues link's href is set from the
-                   configured sourceUrl (+ "/issues") by js/main.js; the whole row
-                   is removed when no valid sourceUrl is set, like the source row. -->
-              <p class="about-text" id="about-issues-row" data-i18n-html="about.issues"></p>
-              <p class="about-text" id="about-source-row">
-                <a id="about-source" href="#" target="_blank" rel="noopener noreferrer" data-i18n="about.sourceCode"></a>
-              </p>
-              <!-- License line: independent of the source-code row (which is
-                   removed when no sourceUrl is configured), so the licence always
-                   shows. The link points at the canonical AGPL-3.0 text. -->
-              <p class="about-text" data-i18n-html="about.license"></p>
-              <!-- CC BY-SA attribution for the Wikipedia-sourced drug descriptions
-                   + molecule images (vendored verbatim, see "Drugs"). -->
-              <p class="about-text" data-i18n-html="about.attribution"></p>
-            </div>
-          </div>
         </div>
 
         <!-- Search shown in lieu of #controls-main while active. Matches both
@@ -1875,6 +1852,37 @@
         <button type="button" id="shortcuts-close" class="info-close" aria-label="Close">&times;</button>
         <h2 id="shortcuts-title" data-i18n="shortcuts.title"></h2>
         <dl id="shortcuts-list"></dl>
+      </div>
+    </div>
+
+    <!-- About popup. A dialog over the shared .modal-overlay backdrop (same
+         pattern as the shortcuts popup), opened by the toolbar's info button,
+         closed by the ×, a backdrop click, or Esc (wired in js/main.js
+         wireAboutModal). The prose + embedded links are filled from js/i18n.js
+         (data-i18n-html); the "Source code" / "open an issue" hrefs are set from
+         app-config.js sourceUrl by js/main.js (each row removed if no valid url).
+         The "Sources & provenance" tally is NOT here: it lives with the Legend in
+         the Controls section. -->
+    <div id="about-modal" class="modal-overlay" hidden>
+      <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="about-title">
+        <button type="button" id="about-close" class="info-close" aria-label="Close">&times;</button>
+        <h2 id="about-title" data-i18n="panel.about"></h2>
+        <p class="about-text" data-i18n-html="about.p1"></p>
+        <p class="about-text" data-i18n-html="about.p2"></p>
+        <p class="about-text" data-i18n-html="about.p3"></p>
+        <!-- Feedback: the embedded #about-issues link's href is set from the
+             configured sourceUrl (+ "/issues") by js/main.js; the whole row is
+             removed when no valid sourceUrl is set, like the source row. -->
+        <p class="about-text" id="about-issues-row" data-i18n-html="about.issues"></p>
+        <p class="about-text" id="about-source-row">
+          <a id="about-source" href="#" target="_blank" rel="noopener noreferrer" data-i18n="about.sourceCode"></a>
+        </p>
+        <!-- License line: independent of the source-code row (which is removed
+             when no sourceUrl is configured), so the licence always shows. -->
+        <p class="about-text" data-i18n-html="about.license"></p>
+        <!-- CC BY-SA attribution for the Wikipedia-sourced drug descriptions +
+             molecule images (vendored verbatim, see "Drugs"). -->
+        <p class="about-text" data-i18n-html="about.attribution"></p>
       </div>
     </div>
 

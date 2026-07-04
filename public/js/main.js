@@ -3649,14 +3649,12 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const receptorsBody = document.getElementById("receptors-body");
   const drugsToggle = document.getElementById("drugs-toggle");
   const drugsBody = document.getElementById("drugs-body");
-  const aboutToggle = document.getElementById("about-toggle");
-  const aboutBody = document.getElementById("about-body");
 
-  // One collapse-header behaviour shared by the panel, the legend and the about
-  // section: toggle aria-expanded + the body's hidden flag. The panel ships
-  // expanded; the legend + about ship collapsed (their markup sets the initial
-  // aria-expanded / hidden). `onToggle(open)` runs after a click so callers can
-  // react (accordion below).
+  // One collapse-header behaviour shared by the panel, the Controls section, the
+  // Legend sub-panel and the accordion sections: toggle aria-expanded + the body's
+  // hidden flag. The panel + Controls + Legend ship expanded, the accordion
+  // sections collapsed (their markup sets the initial aria-expanded / hidden).
+  // `onToggle(open)` runs after a click so callers can react (accordion below).
   const setSection = (toggle, body, open) => {
     toggle.setAttribute("aria-expanded", String(open));
     body.hidden = !open;
@@ -3724,17 +3722,17 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     wireCollapse(legendToggle, legendSubpanelBody);
   }
 
-  // Structures, Projections, Receptors, Drugs and About behave as an accordion
-  // among themselves: only one open at a time (Controls + the Legend sub-panel,
-  // above, are exempt). The panel top (language switch + reset/search row) stays
-  // visible throughout; the open section grows to fill the tall sidebar via the
-  // :has(...) CSS in index.html, so no JS layout class is needed here anymore.
+  // Structures, Projections, Receptors and Drugs behave as an accordion among
+  // themselves: only one open at a time (Controls + the Legend sub-panel, above,
+  // are exempt; About is now a popup, not a section). The panel top (language
+  // switch + reset/search row) stays visible throughout; the open section grows to
+  // fill the tall sidebar via the :has(...) CSS in index.html, so no JS layout
+  // class is needed here anymore.
   const sections = [
     { toggle: structuresToggle, body: structuresBody },
     { toggle: projectionsToggle, body: projectionsBody },
     { toggle: receptorsToggle, body: receptorsBody },
     { toggle: drugsToggle, body: drugsBody },
-    { toggle: aboutToggle, body: aboutBody },
   ];
   for (const s of sections) {
     if (!s.toggle || !s.body) continue;
@@ -4286,7 +4284,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  * dim) so the brain returns to its plain state, see the Escape case. `lightbox` is
  * the image popup: when it is open Esc closes it before anything else.
  */
-function wireShortcuts(help, tabs, selection, lightbox) {
+function wireShortcuts(help, tabs, selection, lightbox, aboutModal) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -4355,7 +4353,6 @@ function wireShortcuts(help, tabs, selection, lightbox) {
       ["projections-toggle", "projections-body"],
       ["receptors-toggle", "receptors-body"],
       ["drugs-toggle", "drugs-body"],
-      ["about-toggle", "about-body"],
     ];
     let activeEl = null;
     let lastBody = null;
@@ -4432,6 +4429,12 @@ function wireShortcuts(help, tabs, selection, lightbox) {
     // With the shortcuts popup open, Esc just closes it (and nothing else fires).
     if (help?.isOpen && event.key === "Escape") {
       help.close();
+      event.preventDefault();
+      return;
+    }
+    // With the About popup open, Esc just closes it (and nothing else fires).
+    if (aboutModal?.isOpen && event.key === "Escape") {
+      aboutModal.close();
       event.preventDefault();
       return;
     }
@@ -4527,6 +4530,30 @@ function wireShortcutsHelp() {
     if (event.target === modal) close();
   });
 
+  return { open, close, get isOpen() { return !modal.hidden; } };
+}
+
+/**
+ * About popup (#about-modal): the project blurb + source / issues / licence /
+ * attribution links, over the shared .modal-overlay backdrop (same pattern as the
+ * shortcuts popup). Opened by the toolbar's info button (#about-toggle); the ×, a
+ * backdrop click, or Esc (routed by wireShortcuts) close it. The prose + the
+ * source/issues href wiring live in the markup + wireControls; this only toggles
+ * visibility. Returns a small controller so wireShortcuts can route Esc.
+ * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
+ */
+function wireAboutModal() {
+  const modal = document.getElementById("about-modal");
+  const noop = { open() {}, close() {}, get isOpen() { return false; } };
+  if (!modal) return noop;
+  const open = () => { modal.hidden = false; };
+  const close = () => { modal.hidden = true; };
+  document.getElementById("about-toggle")?.addEventListener("click", open);
+  document.getElementById("about-close")?.addEventListener("click", close);
+  // A click on the dimmed backdrop (outside the dialog box) closes it.
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) close();
+  });
   return { open, close, get isOpen() { return !modal.hidden; } };
 }
 
@@ -5234,7 +5261,8 @@ async function main() {
   const lightbox = wireImageLightbox();
   info.onImage((src, alt, opts) => lightbox.open(src, alt, opts));
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
-  wireShortcuts(shortcutsHelp, tabs, selection, lightbox); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
+  const aboutModal = wireAboutModal(); // the toolbar info-button popup
+  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
