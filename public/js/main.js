@@ -2898,15 +2898,18 @@ function createInfoPanel(data) {
  * Build the merged "Receptors & targets" legend section from the live dataset
  * (#receptors-body): the unified `data.targets` list (every modeled receptor plus
  * every non-receptor drug target: transporters, enzymes, channels, receptor
- * groups), grouped by neurotransmitter `system` (in the meta family-label order,
- * then any leftover systems, then an "Other" heading for the system-less ones), so
- * a transporter like SERT sits under "Serotonergic" beside the 5-HT receptors.
- * Each row is coloured by its swatch (a receptor's sign colour, a target's type
- * colour) and, for a non-receptor target, tagged with its type ("transporter",
- * ...). A focusable row is clickable (dim the brain to the regions it sits in +
- * scatter glowing dots, handled by the caller's `onPick`); a footprint-less one
- * (a receptor stub, an unlocated enzyme) renders muted + inert. Returns a
- * `reflect(activeId)` callback that lights the active row and greys the rest.
+ * groups), grouped by neurotransmitter `system`, so a transporter like SERT sits
+ * under "Serotonergic" beside the 5-HT receptors. System headings are ordered by
+ * **total knowledge nodes** (biggest first: the sum over the system's targets of
+ * each target's own node + its "Found in" regions + the drug bindings on it, so a
+ * heavily-expressed, heavily-drugged system like dopaminergic leads), with the
+ * system-less "Other" bucket pinned last; members within a system are ordered
+ * **lexicographically** by name. Each row is coloured by its swatch (a receptor's
+ * sign colour, a target's type colour) and, for a non-receptor target, tagged with
+ * its type ("transporter", ...). A focusable row is clickable (dim the brain to the
+ * regions it sits in + scatter glowing dots, handled by the caller's `onPick`); a
+ * footprint-less one (a receptor stub, an unlocated enzyme) renders muted + inert.
+ * Returns a `reflect(activeId)` callback that lights the active row and greys the rest.
  * @param {import("./data.js").BrainData} data
  * @param {(target: object) => void} onPick
  * @returns {(activeId: string|null) => void}
@@ -2918,23 +2921,7 @@ function buildTargetLegend(data, onPick) {
   const rows = []; // { row, id } for the focusable entries
 
   const families = data.meta.receptorFamilyLabels || {};
-  // Each target's affinity key = the strongest measured grip any drug has on it:
-  // the minimum, over every drug binding on this target (data.drugsByTarget), of
-  // that binding's representative Ki (median, the value the drug panel sorts by). A
-  // target no drug binds gets Infinity, so it sorts last. This key orders both the
-  // members inside a system and the system headings, so the receptors a drug grips
-  // hardest surface first (a browse list ranked by druggability rather than taxonomy).
   const drugsByTarget = data.drugsByTarget || new Map();
-  const kiByTarget = new Map();
-  for (const tgt of data.targets || []) {
-    let best = Infinity;
-    for (const { binding } of drugsByTarget.get(tgt.id) || []) {
-      const k = bindingKi(binding);
-      if (k < best) best = k;
-    }
-    kiByTarget.set(tgt.id, best);
-  }
-  const targetKi = (tgt) => kiByTarget.get(tgt.id) ?? Infinity;
 
   // Group by system; a null system goes under the "_other" bucket.
   const bySystem = new Map();
@@ -2943,24 +2930,34 @@ function buildTargetLegend(data, onPick) {
     if (!bySystem.has(key)) bySystem.set(key, []);
     bySystem.get(key).push(tgt);
   }
-  // Sort each system's members strongest-affinity first (no-Ki targets last); a
-  // stable sort keeps data.targets' order (every receptor before the non-receptor
-  // targets) within an equal-Ki tier. Each system's own key is its strongest member.
-  const groupKi = new Map();
-  for (const [key, list] of bySystem) {
-    list.sort((a, b) => targetKi(a) - targetKi(b));
-    groupKi.set(key, list.length ? targetKi(list[0]) : Infinity);
+  // Members within a system: plain lexicographic (natural) order by name, so the
+  // list reads predictably (5-HT1A, 5-HT2A, ..., D1, D2, ...). `numeric` keeps
+  // 5-HT2 before 5-HT10; `base` sensitivity folds case + accents.
+  for (const [, list] of bySystem) {
+    list.sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
   }
-  // Heading order: start from the curated order (meta family order, then leftover
-  // real systems, then "Other" last), then reorder by each system's strongest member
-  // Ki. A stable sort keeps the curated order among systems that no drug targets (all
-  // Infinity), so only the druggable systems float to the top.
-  const order = [
-    ...Object.keys(families),
-    ...[...bySystem.keys()].filter((k) => k !== "_other" && !(k in families)),
-    ...(bySystem.has("_other") ? ["_other"] : []),
-  ].filter((k) => bySystem.has(k));
-  order.sort((a, b) => groupKi.get(a) - groupKi.get(b));
+  // Each target's "size" is its knowledge nodes: the target itself, its expression
+  // "Found in" regions (a ubiquitous receptor is one "throughout the brain" node),
+  // and the drug bindings acting on it (data.drugsByTarget, deduped one per drug).
+  const nodeCount = (tgt) => {
+    const locs = tgt.receptor
+      ? (tgt.receptor.ubiquitous ? 1 : tgt.receptor.locations.length)
+      : (tgt.locationBases || []).length;
+    const drugs = (drugsByTarget.get(tgt.id) || []).length;
+    return 1 + locs + drugs;
+  };
+  // A system's node count is the sum over its targets, so a heavily-expressed,
+  // heavily-drugged system (dopaminergic) outweighs a sparse one (melatoninergic).
+  const groupNodes = new Map();
+  for (const [key, list] of bySystem) {
+    groupNodes.set(key, list.reduce((sum, tgt) => sum + nodeCount(tgt), 0));
+  }
+  // Heading order: most nodes first (the biggest systems lead), with the "_other"
+  // system-less bucket pinned last regardless of its count.
+  const order = [...bySystem.keys()].filter((k) => k !== "_other");
+  order.sort((a, b) => groupNodes.get(b) - groupNodes.get(a));
+  if (bySystem.has("_other")) order.push("_other");
   const done = new Set();
   for (const key of order) {
     if (done.has(key)) continue;

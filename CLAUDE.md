@@ -1051,13 +1051,15 @@ A focusable section listing the merged `data.targets` = every receptor (from
 `receptors.jsonl`, authored as `RECEPTORS` in `generate_data.py`) **plus** every
 non-receptor drug target from the meta `drug_targets` map (transporters, enzymes, ion
 channels, receptor groups), so a target like SERT is explorable on its own. Built by
-`buildTargetLegend`, grouped by neurotransmitter **system**. Both the members inside a
-system and the system headings sort by **binding affinity**: each target's key is the
-strongest Ki any drug has on it (min over its `drugsByTarget` bindings), so the most
-druggable receptors and systems float up; a target/system no drug binds has no Ki and
-sinks (a stable sort keeps the curated `receptor_family_labels` order among the Ki-less
-systems, and receptors before non-receptor targets within an equal-Ki tier). The two
-sources are normalized to one shape in `js/data.js`.
+`buildTargetLegend`, grouped by neurotransmitter **system**. **System headings** order
+by **total knowledge nodes** (biggest first): a system's count is the sum over its
+targets of each target's own node + its "Found in" expression regions + the drug
+bindings acting on it (`data.drugsByTarget`, deduped one per drug; a ubiquitous receptor
+counts as one "throughout the brain" region), so a heavily-expressed, heavily-drugged
+system (dopaminergic) leads a sparse one (melatoninergic); the system-less "Other" bucket
+is pinned last. **Members within a system** order **lexicographically** by name
+(`localeCompare`, `numeric` so 5-HT2 precedes 5-HT10). The two sources are normalized to
+one shape in `js/data.js`.
 
 - A receptor row's swatch = its excit/inhib/modulatory **sign** colour; a non-receptor
   row's = its **type** colour (`target_type_colors`) + a muted type tag. Clicking a row
