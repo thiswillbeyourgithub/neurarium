@@ -2187,6 +2187,12 @@
       "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, directed by Bryan L. Roth, University of North Carolina at Chapel Hill.",
       "url": "https://pdspdb.unc.edu/databases/kidb.php",
       "csv": "sources/books/pdsp_ki/KiDatabase.csv"
+    },
+    "allen_ahba": {
+      "ref": "Allen Human Brain Atlas, microarray (Hawrylycz et al. 2012)",
+      "citation": "Hawrylycz MJ, Lein ES, Guillozet-Bongaarts AL, et al. An anatomically comprehensive atlas of the adult human brain transcriptome. Nature. 2012;489(7416):391-399. human.brain-map.org.",
+      "url": "https://human.brain-map.org/",
+      "pages_dir": "sources/allen/pages"
     }
   },
   "provenance_stats": {

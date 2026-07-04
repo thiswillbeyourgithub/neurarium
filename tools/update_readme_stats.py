@@ -74,6 +74,7 @@ CORPUS_DESC = {
     "nieuwenhuys":     ("Neuroanatomy (CNS atlas)", "Region anatomy, connectivity"),
     "gtopdb":          ("Molecular pharmacology (IUPHAR/BPS database)", "Receptor & target expression regions"),
     "pdsp_ki":         ("Receptor binding pharmacology", "Drug binding affinities (Ki)"),
+    "allen_ahba":      ("Brain transcriptome atlas (microarray)", "Receptor & target expression regions"),
 }
 
 # Per-node-kind display labels for the README table (English; the README is English).

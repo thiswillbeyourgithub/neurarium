@@ -769,6 +769,25 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "https://pdspdb.unc.edu/databases/kidb.php",
         "csv": "sources/books/pdsp_ki/KiDatabase.csv",
     },
+    "allen_ahba": {
+        # Expression corpus: the Allen Human Brain Atlas microarray, backing a
+        # receptor/target expression-region claim ("X is found in region B") the
+        # GtoPdb tissue comments could not reach (esp. the non-receptor targets +
+        # the deep nuclei). tools/fetch_allen.py aggregates Allen's PACall
+        # present/absent boolean per (gene, region) across the 6 donors and writes one
+        # cached page per gene (`page` = the HGNC gene symbol): each `location_sources`
+        # quote is a verbatim presence line, so the normal verbatim-quote gate applies
+        # unchanged. All 6 donors are human, so every quote carries `species: Human`.
+        # Licence: copyright-reserved, non-commercial research use with required
+        # citation; we vendor only the cited slice, never the atlas.
+        "ref": "Allen Human Brain Atlas, microarray (Hawrylycz et al. 2012)",
+        "citation": "Hawrylycz MJ, Lein ES, Guillozet-Bongaarts AL, et al. An "
+                    "anatomically comprehensive atlas of the adult human brain "
+                    "transcriptome. Nature. 2012;489(7416):391-399. "
+                    "human.brain-map.org.",
+        "url": "https://human.brain-map.org/",
+        "pages_dir": "sources/allen/pages",
+    },
 }
 
 
