@@ -3641,8 +3641,10 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const structuresBody = document.getElementById("structures-body");
   const projectionsToggle = document.getElementById("projections-toggle");
   const projectionsBody = document.getElementById("projections-body");
+  // The Legend is a collapsible sub-panel INSIDE the Controls section (not an
+  // accordion peer): its toggle collapses the key + sourcing tally, wired below.
   const legendToggle = document.getElementById("legend-toggle");
-  const legendBody = document.getElementById("legend-body");
+  const legendSubpanelBody = document.getElementById("legend-subpanel-body");
   const receptorsToggle = document.getElementById("receptors-toggle");
   const receptorsBody = document.getElementById("receptors-body");
   const drugsToggle = document.getElementById("drugs-toggle");
@@ -3714,17 +3716,24 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     wireCollapse(controlsSettingsToggle, controlsSettingsBody);
   }
 
-  // Structures, Projections, Receptors, Drugs, Legend and About behave as an
-  // accordion among themselves: only one open at a time (Controls, above, is
-  // exempt). The panel top (language switch + reset/search row) stays visible
-  // throughout; the open section grows to fill the tall sidebar via the
+  // The Legend (colour/symbol key + sourcing tally) sits INSIDE the Controls
+  // section as its own collapsible sub-panel, also exempt from the accordion: it
+  // ships open and toggles independently so collapsing it never disturbs an open
+  // content section (or the Controls toggles above it).
+  if (legendToggle && legendSubpanelBody) {
+    wireCollapse(legendToggle, legendSubpanelBody);
+  }
+
+  // Structures, Projections, Receptors, Drugs and About behave as an accordion
+  // among themselves: only one open at a time (Controls + the Legend sub-panel,
+  // above, are exempt). The panel top (language switch + reset/search row) stays
+  // visible throughout; the open section grows to fill the tall sidebar via the
   // :has(...) CSS in index.html, so no JS layout class is needed here anymore.
   const sections = [
     { toggle: structuresToggle, body: structuresBody },
     { toggle: projectionsToggle, body: projectionsBody },
     { toggle: receptorsToggle, body: receptorsBody },
     { toggle: drugsToggle, body: drugsBody },
-    { toggle: legendToggle, body: legendBody },
     { toggle: aboutToggle, body: aboutBody },
   ];
   for (const s of sections) {
@@ -4294,12 +4303,13 @@ function wireShortcuts(help, tabs, selection, lightbox) {
   };
 
   // Esc closes the in-panel search and collapses any open accordion section, by
-  // clicking the same toggles a user would so the existing wiring runs.
+  // clicking the same toggles a user would so the existing wiring runs. (The
+  // Legend is a Controls sub-panel, not an accordion peer, so Esc leaves it be.)
   const collapseOpen = () => {
     const search = document.getElementById("search");
     if (search && !search.hidden) click("search-toggle");
     for (const id of ["structures-toggle", "projections-toggle", "receptors-toggle",
-                      "drugs-toggle", "legend-toggle", "about-toggle"]) {
+                      "drugs-toggle"]) {
       const tg = document.getElementById(id);
       if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
     }
@@ -4310,6 +4320,24 @@ function wireShortcuts(help, tabs, selection, lightbox) {
   const openSearch = () => {
     const search = document.getElementById("search");
     if (search && search.hidden) click("search-toggle");
+  };
+
+  // "k": reveal the Legend (its colour key + sourcing tally). The Legend now
+  // lives as a collapsible sub-panel inside the Controls section, so make sure
+  // Controls is open and the Legend expanded, then scroll it into view; when both
+  // are already visible, a second press collapses the Legend (a toggle).
+  const toggleLegend = () => {
+    const ct = document.getElementById("controls-settings-toggle");
+    const lt = document.getElementById("legend-toggle");
+    const controlsOpen = ct?.getAttribute("aria-expanded") === "true";
+    const legendOpen = lt?.getAttribute("aria-expanded") === "true";
+    if (controlsOpen && legendOpen) {
+      lt?.click(); // both visible: collapse the Legend
+    } else {
+      if (!controlsOpen) ct?.click();
+      if (!legendOpen) lt?.click();
+      document.getElementById("legend")?.scrollIntoView({ block: "nearest" });
+    }
   };
 
   // Roving keyboard navigation inside the currently-open accordion section: once
@@ -4327,7 +4355,6 @@ function wireShortcuts(help, tabs, selection, lightbox) {
       ["projections-toggle", "projections-body"],
       ["receptors-toggle", "receptors-body"],
       ["drugs-toggle", "drugs-body"],
-      ["legend-toggle", "legend-body"],
       ["about-toggle", "about-body"],
     ];
     let activeEl = null;
@@ -4428,7 +4455,7 @@ function wireShortcuts(help, tabs, selection, lightbox) {
       case "s": case "S": toggleSpread(); break;
       case "l": case "L": sectionNav.reset(); click("structures-toggle"); break;
       case "p": case "P": sectionNav.reset(); click("projections-toggle"); break;
-      case "k": case "K": sectionNav.reset(); click("legend-toggle"); break;
+      case "k": case "K": toggleLegend(); break;
       case "c": case "C": click("see-inside"); break;
       case "r": case "R": sectionNav.reset(); click("receptors-toggle"); break;
       case "m": case "M": sectionNav.reset(); click("drugs-toggle"); break;

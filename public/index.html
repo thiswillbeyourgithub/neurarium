@@ -228,11 +228,11 @@
         from { opacity: 0; transform: translateY(-10px); }
         to   { opacity: 1; transform: translateY(0); }
       }
-      #controls-settings-body, #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body {
+      #controls-settings-body, #structures-body, #projections-body, #legend-subpanel-body, #receptors-body, #drugs-body, #about-body {
         animation: section-slide-in 200ms ease-out;
       }
       @media (prefers-reduced-motion: reduce) {
-        #controls-settings-body, #structures-body, #projections-body, #legend-body, #receptors-body, #drugs-body, #about-body { animation: none; }
+        #controls-settings-body, #structures-body, #projections-body, #legend-subpanel-body, #receptors-body, #drugs-body, #about-body { animation: none; }
       }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
@@ -748,11 +748,10 @@
         font-style: italic;
       }
 
-      /* Legend nested inside the control panel, set off by a hairline. Its
-         header has no side padding (the panel body already provides it). */
+      /* Accordion sections nested inside the control panel, set off by a hairline.
+         Their headers have no side padding (the panel body already provides it). */
       #structures,
       #projections,
-      #legend,
       #receptors,
       #drugs,
       #about {
@@ -762,10 +761,18 @@
       #controls-settings .collapse-header,
       #structures .collapse-header,
       #projections .collapse-header,
-      #legend .collapse-header,
       #receptors .collapse-header,
       #drugs .collapse-header,
       #about .collapse-header { padding: 10px 0 4px; }
+      /* Legend key + sourcing tally: a collapsible sub-panel of the Controls
+         section (not an accordion peer). Set off from the toggles above it with a
+         hairline; its header matches the section headers' zero side padding. */
+      .legend-subpanel {
+        margin-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .legend-subpanel .subpanel-header { padding: 10px 0 4px; }
+      #legend-subpanel-body { padding-bottom: 4px; }
       /* About blurb: muted body text with readable links. */
       #about-body { padding: 2px 0 6px; }
       .about-text {
@@ -775,9 +782,10 @@
         color: var(--muted);
       }
       .about-text a { color: var(--accent-bright); text-decoration: underline; }
-      /* "Sources & provenance" block in About (built by buildAboutSourcing). The
-         grade key reuses the .src-pill / .src-prov-* swatches from the info panel
-         so the legend matches the pills shown beside each source. */
+      /* "Sources & provenance" block (built by buildAboutSourcing), the tail of the
+         Legend sub-panel. The grade key reuses the .src-pill / .src-prov-* swatches
+         from the info panel so the legend matches the pills shown beside each
+         source. */
       #about-sourcing { margin-top: 12px; }
       #about-sourcing h3 {
         margin: 0 0 6px;
@@ -1714,6 +1722,31 @@
                   <button type="button" class="mode-btn" data-mode="sign" aria-pressed="false" data-i18n="panel.colorPotential"></button>
                 </div>
               </div>
+
+              <!-- Legend (key) sub-panel: a static colour/symbol key for the 3D
+                   scene's encodings that have no label in the interactive sections
+                   (expression gem dots by sign, drug effect dots by boost/block/
+                   modulate, speculative dotted pathways), built by js/main.js
+                   (buildLegendKey) into #legend-body from the dataset's meta so the
+                   colours never drift. The "Sources & provenance" grade key +
+                   coverage tally (buildAboutSourcing, #about-sourcing) continue it.
+                   A collapsible sub-panel of Controls (wired independently in
+                   js/main.js, NOT part of the accordion), shipping open. -->
+              <div id="legend" class="legend-subpanel">
+                <button type="button" id="legend-toggle" class="collapse-header subpanel-header" aria-expanded="true">
+                  <span data-i18n="panel.legend"></span>
+                  <span class="chevron" aria-hidden="true">&#9656;</span>
+                </button>
+                <div id="legend-subpanel-body">
+                  <div id="legend-body"></div>
+                  <!-- "Sources & provenance": the grade key + the programmatic
+                       coverage tally, filled by buildAboutSourcing in js/main.js
+                       from data.meta.provenanceStats (the numbers are computed in
+                       generate_data.py, so the % is a real count). A continuation
+                       of the legend key above it. -->
+                  <div id="about-sourcing"></div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1774,23 +1807,9 @@
             </div>
           </div>
 
-          <!-- Legend (key): a static colour/symbol key for the 3D scene's
-               encodings that have no label in the interactive sections above
-               (expression gem dots by sign, drug effect dots by boost/block/
-               modulate, speculative dotted pathways). Built by js/main.js
-               (buildLegendKey) into #legend-body from the dataset's meta, so the
-               colours never drift. -->
-          <div id="legend">
-            <button type="button" id="legend-toggle" class="collapse-header" aria-expanded="false">
-              <span data-i18n="panel.legend"></span>
-              <span class="chevron" aria-hidden="true">&#9656;</span>
-            </button>
-            <div id="legend-body" hidden></div>
-          </div>
-
-          <!-- About: collapsed by default (body ships `hidden`), mirroring the
-               legend. The "Source code" link's href is set from app-config.js
-               sourceUrl by js/main.js (its row is removed if no valid url). -->
+          <!-- About: collapsed by default (body ships `hidden`). The "Source
+               code" link's href is set from app-config.js sourceUrl by js/main.js
+               (its row is removed if no valid url). -->
           <div id="about">
             <button type="button" id="about-toggle" class="collapse-header" aria-expanded="false">
               <span data-i18n="panel.about"></span>
@@ -1816,11 +1835,6 @@
               <!-- CC BY-SA attribution for the Wikipedia-sourced drug descriptions
                    + molecule images (vendored verbatim, see "Drugs"). -->
               <p class="about-text" data-i18n-html="about.attribution"></p>
-              <!-- "Sources & provenance": the grade key + the programmatic
-                   coverage tally, filled by buildAboutSourcing in js/main.js from
-                   data.meta.provenanceStats (the numbers are computed in
-                   generate_data.py, so the % is a real count). -->
-              <div id="about-sourcing"></div>
             </div>
           </div>
         </div>
