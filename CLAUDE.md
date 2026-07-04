@@ -1162,10 +1162,10 @@ one shape in `js/data.js`.
   order, like the Structures legend; a trailing "Other regions" bucket for
   group-less bases), each region carrying its **own** expression-provenance pill
   (default `llm`: which regions express a receptor is graded per region, separate
-  from the mechanism, see Source provenance) plus, when its source was a non-human
-  assay, an amber "· <species>" tag (`loc-species`, from the source's `species`
-  field), or a single pilled "Throughout the
-  brain" for ubiquitous); a non-receptor
+  from the mechanism, see Source provenance) plus, when it has **no** human assay
+  (every source non-human), an amber "· <species>" tag (`loc-species`; `locationEntry`
+  prefers a Human source so an Allen confirmation clears the tag), or a single pilled
+  "Throughout the brain" for ubiquitous); a non-receptor
   target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the type +
   system facts each carrying their classification grade pill, then the "Found in" region
   list where each region likewise carries its **own** expression-provenance pill, kind
@@ -1398,19 +1398,23 @@ Stahl (author-side pages; skipped + warned on a clone). Refresh: `fetch_gtopdb.p
 `apply_location_sources.py`, then `generate_data.py`.
 
 **Expression locations (Allen AHBA, corpus #8).** The complement to GtoPdb for the same
-`receptor_locations` / `target_locations` nodes: the source for the **non-receptor targets**
-GtoPdb does not cover (transporters/enzymes/channels) and the deep nuclei. `allen_ahba` in
-`SOURCE_CORPORA` is a `pages_dir` corpus whose `page` is an **HGNC gene symbol** and whose
-page file (`sources/allen/pages/<gene>.md`, author-side) holds one presence line per
-confirmed region. `tools/fetch_allen.py` aggregates the [Allen Human Brain
-Atlas](https://human.brain-map.org/) microarray **PACall** detection boolean across the
-human donors into a deterministic present/absent per (gene, region) (**no judge**, unlike
-GtoPdb), emitting `sources/allen/confirmed.json`; `apply_location_sources.py --corpus allen`
-re-confirms each quote on its gene page and writes a `verified`, `species: Human` source.
-Confirm-only (never adds/drops a region), quote-gated exactly like Stahl. **Caveat:**
-microarray measures mRNA in cell bodies, so a transporter (SERT/NET) confirms at its source
-nucleus (raphe/LC), and its terminal-region claims honestly stay `llm`. Refresh:
-`fetch_allen.py`, `apply_location_sources.py --corpus allen`, then `generate_data.py`.
+`receptor_locations` / `target_locations` nodes: it covers the **non-receptor targets**
+GtoPdb does not (transporters/enzymes/channels), the residual **receptors** GtoPdb had no
+tissue data for, and the deep nuclei. `allen_ahba` in `SOURCE_CORPORA` is a `pages_dir`
+corpus whose `page` is an **HGNC gene symbol** and whose page file
+(`sources/allen/pages/<gene>.md`, author-side) holds one presence line per confirmed region.
+`tools/fetch_allen.py` aggregates the [Allen Human Brain Atlas](https://human.brain-map.org/)
+microarray **PACall** detection boolean across the human donors into a deterministic
+present/absent per (gene, region) (**no judge**, unlike GtoPdb), emitting
+`sources/allen/confirmed.json`; `apply_location_sources.py --corpus allen` re-confirms each
+quote on its gene page and writes a `verified`, `species: Human` source. Confirm-only (never
+adds/drops a region), quote-gated exactly like Stahl. A region can end up with both a GtoPdb
+and an Allen source; the panel's species tag **prefers Human** (`locationEntry` in
+`js/data.js`), so an Allen human confirmation clears the amber tag on a region GtoPdb had
+only in rat/mouse. **Caveat:** microarray measures mRNA in cell bodies, so a transporter
+(SERT/NET) confirms at its source nucleus (raphe/LC), and its terminal-region claims honestly
+stay `llm`. Refresh: `fetch_allen.py`, `apply_location_sources.py --corpus allen`, then
+`generate_data.py`.
 
 **Descriptions.** Drugs, structures and non-receptor targets carry **no baked
 description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
@@ -1459,15 +1463,16 @@ popup shows it (`buildAboutSourcing` into `#about-sourcing`) and
 `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
 coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). Current: ~85% of 1665 nodes backed (drug
+points *at* a node, it is not itself one). Current: ~95% of 1665 nodes backed (drug
 bindings ~98%, NbN 100%, `drug_categories` 156/158, `structures` 52/52, `circuits` 6/6,
-`projection_groups` 10/10, `references` 100%, `target_locations` 108/124 (Allen AHBA, see
-Expression locations), `receptor_locations` 197/383 (GtoPdb); the big gap is now the 186
-residual `receptor_locations` (no GtoPdb tissue data; Phase 2b will source them from Allen),
-the 26 `llm` receptor classifications, the 16 `target_locations` that stay `llm` (SERT/NET
-terminal regions + melatonin, honest microarray limits), the 4 remaining projections
-(claustrum->frontal + claustrum->insula, which no single Nieuwenhuys page states), and the 4
-`targets`, all `missing`). Each expression
+`projection_groups` 10/10, `references` 100%, `receptor_locations` 360/383 (GtoPdb + Allen
+AHBA, see Expression locations), `target_locations` 108/124 (Allen AHBA); the residual ~87
+`missing` is spread thin now: the 26 `llm` receptor mechanism classifications, the 23
+`receptor_locations` Allen cannot reach (off-atlas bases + sampled-but-absent), the 16
+`target_locations` that stay `llm` (SERT/NET terminal regions + melatonin, honest microarray
+limits), the 12 unsourced `drug_bindings`, the 4 remaining projections (claustrum->frontal +
+claustrum->insula, which no single Nieuwenhuys page states), the 4 `targets`, and 2
+`drug_categories`). Each expression
 region is its own node (per the request to grade each "Found in", not the list as a whole),
 individually upgradeable when sourced. Descriptions are no longer a node kind: every
 wiki-linked panel fetches the live Wikipedia lead instead of baking it.
