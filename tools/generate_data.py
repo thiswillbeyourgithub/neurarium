@@ -594,6 +594,31 @@ RECEPTOR_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 TARGET_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 
 
+def _merge_external_location_sources() -> None:
+    """Merge author-side sourced expression locations from ``tools/location_sources.json``
+    into the two registries above.
+
+    That file is machine-written by the expression-sourcing pipeline (fetch ->
+    judge -> ``tools/apply_location_sources.py``, e.g. from GtoPdb tissue
+    distributions), so the bulk of per-region sources lives in a sibling JSON rather
+    than inline here (mirroring ``drugs_data.json`` / ``*_images_sources.json``); the
+    in-code dicts above stay the place for any hand-authored override. Shape:
+    ``{"receptors": {rid: {base: [source, ...]}}, "targets": {tid: {base: [...]}}}``.
+    An external entry wins per (owner, base). A missing file is fine (nothing sourced),
+    so the generator still runs on a checkout without it."""
+    src = Path(__file__).resolve().parent / "location_sources.json"
+    if not src.exists():
+        return
+    data = json.loads(src.read_text(encoding="utf-8"))
+    for owner, per_base in (data.get("receptors") or {}).items():
+        RECEPTOR_LOCATION_SOURCES.setdefault(owner, {}).update(per_base)
+    for owner, per_base in (data.get("targets") or {}).items():
+        TARGET_LOCATION_SOURCES.setdefault(owner, {}).update(per_base)
+
+
+_merge_external_location_sources()
+
+
 def _receptor_provenance(receptor_id: str) -> str:
     """Provenance grade for a receptor's classification claims (default ``llm``)."""
     return _lookup_provenance(
