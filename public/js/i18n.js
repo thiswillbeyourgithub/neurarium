@@ -259,7 +259,7 @@
       "about.gradeSourced":
         "Sourced: drawn from a document (e.g. Wikipedia), but the quote was not checked.",
       "about.gradeLlm":
-        "LLM-only: produced by the model from memory; may be a hallucination.",
+        "AI only: may be a hallucination.",
       "about.gradeNone": "No source: none gathered yet.",
       "about.coverageTitle": "Coverage",
       "about.sourcingHeadline":
@@ -511,7 +511,7 @@
       "about.gradeSourced":
         "Sourcé : tiré d’un document (p. ex. Wikipédia), mais la citation n’a pas été vérifiée.",
       "about.gradeLlm":
-        "IA seule : produit par le modèle de mémoire ; peut être une hallucination.",
+        "IA seule : peut être une hallucination.",
       "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
       "about.coverageTitle": "Couverture",
       "about.sourcingHeadline":
