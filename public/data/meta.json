@@ -2176,6 +2176,12 @@
       "url": "TODO",
       "pages_dir": "sources/books/nieuwenhuys_atlas/pages"
     },
+    "gtopdb": {
+      "ref": "IUPHAR/BPS Guide to Pharmacology (GtoPdb), tissue distribution",
+      "citation": "Harding SD, Armstrong JF, Faccenda E, et al. The IUPHAR/BPS Guide to Pharmacology. Nucleic Acids Res. guidetopharmacology.org.",
+      "url": "https://www.guidetopharmacology.org/",
+      "pages_dir": "sources/gtopdb/pages"
+    },
     "pdsp_ki": {
       "ref": "PDSP Ki Database (NIMH PDSP)",
       "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, directed by Bryan L. Roth, University of North Carolina at Chapel Hill.",

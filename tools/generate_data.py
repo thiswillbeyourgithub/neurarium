@@ -714,6 +714,22 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "TODO",
         "pages_dir": "sources/books/nieuwenhuys_atlas/pages",
     },
+    "gtopdb": {
+        # Expression/localization corpus: the IUPHAR/BPS Guide to Pharmacology
+        # per-target "Tissue Distribution" statements, backing a receptor/target
+        # expression-region claim ("R is found in region B"). Fetched from the GtoPdb
+        # web service (tools/fetch_gtopdb.py) and cached author-side as one page per
+        # target id: each `location_sources` quote is a verbatim `tissue` string and
+        # its `page` is the GtoPdb target id, so the normal verbatim-quote gate
+        # applies unchanged. Many entries are rat/mouse, so each source carries a
+        # `species` (the viewer flags a non-human claim; see _quote_sources).
+        "ref": "IUPHAR/BPS Guide to Pharmacology (GtoPdb), tissue distribution",
+        "citation": "Harding SD, Armstrong JF, Faccenda E, et al. The IUPHAR/BPS "
+                    "Guide to Pharmacology. Nucleic Acids Res. "
+                    "guidetopharmacology.org.",
+        "url": "https://www.guidetopharmacology.org/",
+        "pages_dir": "sources/gtopdb/pages",
+    },
     "pdsp_ki": {
         # Binding-affinity corpus: measured Ki (nM) values backing a drug binding's
         # `ki` annotation. Unlike the book corpora this is a single CSV of assay
@@ -759,6 +775,13 @@ def _quote_sources(sources: Any, what: str) -> list[dict[str, Any]]:
             rec["page"] = s["page"]
         if s.get("quote"):
             rec["quote"] = s["quote"]
+        # An expression/localization source (e.g. GtoPdb tissue distribution) may name
+        # the assay species: many are rat/mouse, not human. It is carried through so the
+        # viewer can flag a non-human claim (amber, like the non-human Ki chip); "Human"
+        # or absent = no flag. The grade is independent of species (a rat quote is still
+        # quote-verified), but the reader should see what was actually measured.
+        if s.get("species"):
+            rec["species"] = s["species"]
         if prov == "verified" and not (rec.get("page") is not None and rec.get("quote")):
             raise ValueError(
                 f"{what} has a 'verified' source without a page + quote (verified "
