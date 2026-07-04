@@ -10,13 +10,20 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-04, after the Allen receptor-expression Phase 2b)
+## Snapshot (2026-07-04, after the Stahl-Essential receptor-mechanism pass)
 
-Headline: **1578 / 1665 knowledge nodes backed (95%)**. In the tally a bare `llm`
+Headline: **1673 / 1743 knowledge nodes backed (96%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
-"missing" below means `llm` or no source at all. 87 knowledge nodes are missing.
+"missing" below means `llm` or no source at all. 70 knowledge nodes are missing.
 
 > **Recently closed.** Several smaller kinds are now fully (or nearly) sourced:
+> - `receptors` (mechanism) 54/56 verified: **30 more** subtypes closed against **Stahl
+>   Essential** by adding verbatim classification quotes to `STAHL_ESSENTIAL_RECEPTOR_QUOTES`
+>   (serotonin 2A/2C/4/6/7 + 1A/5A via one sign sentence, 2B + 7 individually; the adrenergic
+>   α1/α2B/α2C/β1-3 via the NE-receptor enumeration; the opioid μ/δ/κ, CB1, adenosine A2A,
+>   σ1, MT1/MT2, H3/H4; plus mGluR6, muscle nAChR, GABA-A-ρ reusing existing umbrella quotes).
+>   The 2 that stay `llm` are 5-HT1E and 5-HT1F, which never appear in the Essential corpus.
+>   (α2D is a stub, not a counted node.)
 > - `receptor_locations` 360/383 verified: **Phase 1** wired the **Guide to Pharmacology**
 >   tissue-distribution API (corpus #7 `gtopdb`, 197 regions with an assay species), then
 >   **Phase 2b** ran the Allen microarray (corpus #8) over the receptor genes to source the
@@ -50,39 +57,45 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 > - `references` 2/2 closed: Wikipedia links added for the carbonic-anhydrase + PDE5 targets.
 >
 > Headline 55% (pre-drug-class) to 67% (Nieuwenhuys) to 78% (GtoPdb Phase 1) to 85%
-> (Allen Phase 2a) to 95% (Allen Phase 2b). The table below is the post-Phase-2b state.
+> (Allen Phase 2a) to 95% (Allen Phase 2b) to 96% (Stahl-Essential receptor mechanisms).
+> The table below is the current state.
 
 | Node kind | Missing | Total | Share of the gap | Difficulty | Best lever |
 | --- | ---: | ---: | ---: | --- | --- |
-| `receptors` (mechanism) | 26 | 56 | 29.9% | Medium | IUPHAR Guide to Pharmacology |
-| `receptor_locations` | 23 | 383 | 26.4% | limit | 360 done (GtoPdb + Allen); the 23 are off-atlas / not-detected |
-| `target_locations` | 16 | 124 | 18.4% | limit | 108 done via Allen; the 16 are mRNA-at-source honest `llm` |
-| `drug_bindings` | 12 | 632 | 13.8% | Medium | PDSP refresh + primary lit |
-| `projections` | 4 | 103 | 4.6% | Hard | claustrum primary lit |
-| `targets` (classification) | 4 | 25 | 4.6% | **Easy** | IUPHAR / textbook |
-| `drug_categories` | 2 | 158 | 2.3% | flagged | Stahl "Class" line |
+| `receptor_locations` | 23 | 383 | 32.9% | limit | 360 done (GtoPdb + Allen); the 23 are off-atlas / not-detected |
+| `target_locations` | 16 | 124 | 22.9% | limit | 108 done via Allen; the 16 are mRNA-at-source honest `llm` |
+| `drug_bindings` | 12 | 703 | 17.1% | Medium | PDSP refresh + primary lit |
+| `drug_categories` | 9 | 165 | 12.9% | limit | 7 are the recreational drugs (no Stahl class) + 2 flagged |
+| `projections` | 4 | 103 | 5.7% | Hard | claustrum primary lit |
+| `targets` (classification) | 4 | 25 | 5.7% | limit | absent from Stahl Essential; needs IUPHAR/textbook |
+| `receptors` (mechanism) | 2 | 56 | 2.9% | limit | 54 done (Stahl Essential); 5-HT1E/1F absent from corpus |
 | `receptor_locations` (done) | 0 | 360 | closed | done | GtoPdb (corpus #7) + Allen (corpus #8) |
 | `target_locations` (done) | 0 | 108 | closed | done | Allen AHBA (corpus #8) |
+| `receptors` (done) | 0 | 54 | closed | done | Stahl Essential (corpus #3) |
 | `structures` (anatomy) | 0 | 52 | **DONE** (52/52) | done | Kandel + Nieuwenhuys |
 | `circuits` | 0 | 6 | **DONE** (6/6) | done | Kandel prose |
 | `projection_groups` | 0 | 10 | **DONE** (10/10) | done | Stahl Essential / Kandel |
 | `references` (Wikipedia links) | 0 | 298 | **DONE** (not in headline) | done | Wikipedia URLs |
 
-**The shape of the problem:** the expression-location gap (Phases 1, 2a, 2b) is essentially
-closed, so the 87 residual nodes are now spread thin and no single lever dominates. The
-largest is the **26 `llm` receptor mechanism classifications** (a receptor-classification
-database, e.g. IUPHAR, is the lever). The 23 residual `receptor_locations` + 16
-`target_locations` are hard limits, not gaps to chase (off-atlas / unsampled bases, or a
-transporter's mRNA sitting at the source nucleus rather than the terminal). The rest (12
-`drug_bindings`, 4 `projections`, 4 `targets`, 2 `drug_categories`) need primary literature
-or a fresh PDSP pull.
+**The shape of the problem:** both the expression-location gap (Phases 1, 2a, 2b) and the
+receptor-mechanism gap are now essentially closed, so the 70 residual nodes are spread thin
+and no single lever dominates, and most of what remains is a **hard limit rather than a gap to
+chase**: the 23 `receptor_locations` + 16 `target_locations` are off-atlas / unsampled bases or
+a transporter's mRNA sitting at the source nucleus not the terminal; the 9 `drug_categories`
+are the 7 recreational drugs (a category Stahl has no class line for) + the 2 long-flagged
+mismatches; the 4 `targets` + 2 `receptors` (5-HT1E/1F) are simply absent from Stahl Essential.
+Only the 12 `drug_bindings` and 4 `projections` are genuine gaps a fresh PDSP pull or primary
+literature could close.
 
 Five book corpora + three data corpora are wired into `SOURCE_CORPORA` today (`stahl`,
 `kandel`, `stahl_essential`, `carlat`, `nieuwenhuys`, plus the `pdsp_ki` CSV, the `gtopdb`
-tissue API, and the `allen_ahba` microarray). The book-prose wins those allow are largely
-exhausted (see the sourcing memory); the remaining gaps mostly need a
-receptor-classification database (for the 26 receptor mechanisms), a fresh PDSP pull, or
-(for the last two claustrum pathways) primary literature.
+tissue API, and the `allen_ahba` microarray). The book-prose wins those allow are now
+essentially exhausted (see the sourcing memory); the remaining gaps mostly need a
+receptor-classification database (for the last 6 classification nodes: 5-HT1E/1F + the 4
+non-receptor targets), a fresh PDSP pull (the 12 bindings), or primary literature (the last
+two claustrum pathways). The 7 recreational `drug_categories` have no Stahl class line by
+construction and the two expression-location residuals are hard atlas limits, so neither is a
+book-prose gap.
 
 ---
 
@@ -242,25 +255,27 @@ these first: coarser distribution, single dominant genes, biggest untouched kind
 proof of the Allen pipeline before the 186 receptors). The emitter `_location_sources` +
 validation is already shared between receptors and targets, so one fetch tool feeds both.
 
-### 3. `receptors` (mechanism classification), 26 / 56 missing
+### 3. `receptors` (mechanism classification), 2 / 56 missing (**mostly DONE**)
 
 **What.** The per-receptor mechanism node (neurotransmitter / ionotropic-vs-metabotropic
-/ excit-inhib-modulatory / pre-post). 30 are verified against Stahl Essential; 26 remain
-`llm`: the serotonin subtypes (5-HT1A/1E/1F/2A/2B/2C/4/5A/6/7), adrenergic subtypes
-(a1a/a1b/a1d, a2b/a2c, b1/b2), the opioids (mu/delta/kappa), CB1, A2A (adenosine), sigma1,
-and MT1/MT2.
+/ excit-inhib-modulatory / pre-post). **54 of 56 are now verified against Stahl Essential.**
 
-**Why not verified.** Stahl Essential classifies these subtypes in **tables**, not prose,
-so the sentence-level quote gate had nothing to grab (the 30 that passed are the ones the
-book discusses in running text).
+**How it was closed.** A second Stahl-Essential pass added verbatim classification quotes
+to `STAHL_ESSENTIAL_RECEPTOR_QUOTES` in `generate_data.py` for 30 more subtypes: one 5HT
+sign sentence (p136) covers 5-HT2A/2C/4/6/7 (excitatory) + 5-HT1A/5A (inhibitory), with 5-HT2B
+(p131) and 5-HT7 (p146) individually; the adrenergic α1/α2B/α2C/β1-3 reuse the NE-receptor
+enumeration sentence (p270); the opioid μ/δ/κ (p575), CB1 (p581), adenosine A2A (p457), σ1
+(p311), MT1/MT2 (p455), and H3/H4 (p421-2) each name their receptor; and mGluR6, muscle nAChR,
+and GABA-A-ρ reuse the existing metabotropic-glutamate / nicotinic / GABAA-C umbrella quotes.
+Each quote passes `check_data.py`'s verbatim on-page gate (the "table-cell gate" approach:
+the gate strips markdown, so a table cell already matches, though in practice all 30 came from
+running prose).
 
-**How to tackle.**
-- **IUPHAR/BPS Guide to Pharmacology** is the canonical, free, citable receptor-
-  classification database (G-protein coupling, ionotropic/metabotropic, endogenous
-  agonist). Wire it as corpus #6; every one of these 26 has a page there. Best fit.
-- Or extend the quote gate to accept a **table-cell** citation (page + the cell text) so
-  Stahl Essential's own tables become quotable.
-- Or a neuropharmacology textbook with prose subtype descriptions (Katzung, Rang & Dale).
+**The 2 that stay `llm`.** 5-HT1E and 5-HT1F: neither receptor is named anywhere in the
+Stahl Essential corpus (they appear only inside binding-affinity table cells for 5-HT1E, and
+not at all for 5-HT1F), so there is no classification sentence to quote. They would need
+**IUPHAR/BPS Guide to Pharmacology** (canonical receptor-classification database) or a
+neuropharmacology textbook (Katzung, Rang & Dale). 2 nodes; not forced.
 
 ### 4. `projections`, 4 / 103 missing (2 claim-families, mostly closed)
 
@@ -320,15 +335,20 @@ the direct / indirect pathways (Albin scheme); the other four reuse quotes alrea
 for their member projections (nigrostriatal p982, corticopontine p958, Papez p1096, corpus
 callosum p549), so no quote text is duplicated. Same judge + on-page gate as #6.
 
-### 8. `targets` (classification), 4 / 25 missing (**easy**)
+### 8. `targets` (classification), 4 / 25 missing
 
 **What.** Four non-receptor target classification nodes: carbonic anhydrase, PDE5, T-type
 Ca channel (`cav_t`), melanocortin receptor group.
 
-**Why not verified.** Absent from Stahl Essential.
+**Why not verified.** Confirmed absent from Stahl Essential during the receptor-mechanism
+pass: "anhydrase"/"carbonic" never appears, "T-type" calcium channel is never named (the
+book discusses only N, P/Q, and L-type VSCCs), and "melanocortin" appears only inside
+"pro-opiomelanocortin (POMC)" (a peptide precursor), never as the receptor class. The only
+"phosphodiesterase" mention is about PDE9/10 in a schizophrenia passage, not PDE5, so citing
+it for PDE5 would misattribute the isoform (rejected as dishonest to the gate).
 
 **How to tackle.** All four are textbook-standard targets, one **IUPHAR/BPS** page or a
-pharmacology-textbook sentence each (same corpus as #3, so do them together). 4 nodes.
+pharmacology-textbook sentence each (same lever as #3's residual 5-HT1E/1F). 4 nodes.
 
 ### 9. `structures` (anatomy), DONE (52 / 52 verified)
 
@@ -341,10 +361,16 @@ matter ... between the putamen and the insular cortex" (p421) and the fornix as 
 fibre system that connects the hippocampal formation with the septum and the hypothalamus"
 (p64). Same Sonnet judge + verbatim on-page gate as the pathways.
 
-### 10. `drug_categories`, DONE (156 / 158 verified)
+### 10. `drug_categories`, 9 / 165 missing (156 verified against Stahl)
 
 **What.** One node per drug: its class classification ("this drug is an SSRI / TCA /
 SGA / ..."), `category_provenance`.
+
+**The 7 recreational drugs stay `llm` by construction.** LSD, MDMA, cocaine, DMT,
+methamphetamine, nicotine, THC were added under a new **"Recreational / psychoactive"**
+category that Stahl's Prescriber's Guide has no class line for (the guide covers prescription
+psychiatric drugs), so there is no verbatim class descriptor to quote. Their *bindings* are
+fully PDSP-Ki-verified; only the category label is unsourced, and honestly so.
 
 **How it was closed.** Stahl's Prescriber's Guide prints the class verbatim in the
 bullet(s) under each drug's "## Class" heading. A Haiku pass extracted each drug's
@@ -389,8 +415,10 @@ Ordered by **value per unit effort**, not by raw node count:
    and 7 limbic/olfactory/commissural pathway families verified against the newly-wired
    **Nieuwenhuys** atlas, corpus #6; headline 66% to 67%). Only claustrum to frontal +
    claustrum to insula remain (not stated on any single Nieuwenhuys page; folded into #7).
-5. **`receptors` mechanism (26) + `targets` (4)**, wire **IUPHAR/BPS Guide to
-   Pharmacology** as corpus #7; it closes both in one integration.
+5. ~~`receptors` mechanism (30 of 32)~~ **DONE** (verbatim classification quotes added to
+   `STAHL_ESSENTIAL_RECEPTOR_QUOTES`; 54/56 verified; headline 95% to 96%). The residual
+   6 classification nodes (5-HT1E/1F + the 4 non-receptor `targets`) are absent from Stahl
+   Essential and would need **IUPHAR/BPS Guide to Pharmacology** or a pharmacology textbook.
 6. ~~`receptor_locations` Phase 1 (197)~~ **DONE** (GtoPdb corpus #7; species-flagged;
    headline 67% to 78%). **Phase 2: `target_locations` (124) then the residual
    `receptor_locations` (186)**, still ~87% of the remaining gap and the hardest. Build

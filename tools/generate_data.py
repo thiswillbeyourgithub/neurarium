@@ -2633,17 +2633,32 @@ _SE_VSC = _stahl_ess(25,
 _SE_NE_GROUPS = _stahl_ess(270,
     "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 "
     "(Figure 6-14).")
+# GABAA and its ρ-subunit variant (GABA-A-ρ, historically "GABAC") are both
+# ligand-gated inhibitory chloride channels; one sentence names both.
+_SE_GABAAC = _stahl_ess(275,
+    "GABAA and GABAC receptors are ligand-gated ion channels; they are part of "
+    "a macromolecular complex that forms an inhibitory chloride channel.")
+# One sign sentence classifies the postsynaptic 5HT subtypes: 5HT2A/2C/4/6/7 as
+# excitatory, 5HT1A/5A as inhibitory (shared across those receptors).
+_SE_5HT_SIGN = _stahl_ess(136,
+    "both excitatory (e.g., at 5HT2A, 5HT2C, 5HT4, 5HT6, and 5HT7 receptors) and "
+    "inhibitory (at 5HT1A, 5HT5, and possibly postsynaptic 5HT1B heteroreceptors)")
+# One sentence names both melatonin receptors (backs MT1 + MT2 + the melatonin target).
+_SE_MELATONIN = _stahl_ess(455,
+    "There are three types of receptors for melatonin: MT1 and MT2, which are "
+    "both involved in sleep, and MT3, which is actually the enzyme NRH–quinine "
+    "oxidoreductase 2 and not thought to be involved in sleep physiology.")
 
 STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {
     "m1": _SE_MUSCARINIC, "m2": _SE_MUSCARINIC, "m3": _SE_MUSCARINIC,
     "m4": _SE_MUSCARINIC, "m5": _SE_MUSCARINIC,
     "nachr_a4b2": _SE_NICOTINIC, "nachr_a7": _SE_NICOTINIC,
+    "nachr_muscle": _SE_NICOTINIC,
     "nmda": _SE_IONO_GLU, "ampa": _SE_IONO_GLU, "kainate": _SE_IONO_GLU,
     "mglur1": _SE_META_GLU, "mglur2": _SE_META_GLU, "mglur3": _SE_META_GLU,
-    "mglur4": _SE_META_GLU, "mglur5": _SE_META_GLU, "mglur7": _SE_META_GLU,
-    "gaba_a": _stahl_ess(275,
-        "GABAA and GABAC receptors are ligand-gated ion channels; they are part of "
-        "a macromolecular complex that forms an inhibitory chloride channel."),
+    "mglur4": _SE_META_GLU, "mglur5": _SE_META_GLU, "mglur6": _SE_META_GLU,
+    "mglur7": _SE_META_GLU,
+    "gaba_a": _SE_GABAAC, "gaba_a_rho": _SE_GABAAC,
     "gaba_b": _stahl_ess(275,
         "GABAB receptors are G-protein-linked receptors that may be coupled with "
         "calcium or potassium channels."),
@@ -2673,6 +2688,37 @@ STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {
     "alpha2a": _stahl_ess(473,
         "Alpha-2A receptors are linked to the molecule cyclic adenosine "
         "monophosphate (cAMP) via the inhibitory G protein (Gi) (Figure 11-17)."),
+    # Other adrenergic subtypes: the NE-receptor enumeration classifies them.
+    # (α2D is not named in the book, so it stays llm; α2A keeps its own quote above.)
+    "alpha1a": _SE_NE_GROUPS, "alpha1b": _SE_NE_GROUPS,
+    "alpha1c": _SE_NE_GROUPS, "alpha1d": _SE_NE_GROUPS,
+    "alpha2b": _SE_NE_GROUPS, "alpha2c": _SE_NE_GROUPS,
+    "beta1": _SE_NE_GROUPS, "beta2": _SE_NE_GROUPS, "beta3": _SE_NE_GROUPS,
+    # Serotonin subtypes (5HT1E/1F are absent from this corpus, so they stay llm).
+    "5ht1a": _SE_5HT_SIGN, "5ht2a": _SE_5HT_SIGN, "5ht2c": _SE_5HT_SIGN,
+    "5ht4": _SE_5HT_SIGN, "5ht5a": _SE_5HT_SIGN, "5ht6": _SE_5HT_SIGN,
+    "5ht2b": _stahl_ess(131,
+        "Presynaptic serotonin (5HT) receptors include 5HT1A, 5HT1B/D, and 5HT2B, "
+        "all of which act as autoreceptors"),
+    "5ht7": _stahl_ess(146, "5HT7 receptors are postsynaptic, excitatory, and"),
+    # Opioid receptors (endogenous-opioid passage; each names the receptor + postsynaptic).
+    "mu": _stahl_ess(575,
+        "synapse with postsynaptic sites containing μ-opioid receptors"),
+    "delta": _stahl_ess(575,
+        "neurons that release enkephalin synapse with postsynaptic δ-opioid receptors"),
+    "kappa": _stahl_ess(575,
+        "neurons that release dynorphin synapse with postsynaptic κ-opioid receptors"),
+    "cb1": _stahl_ess(581,
+        "The endocannabinoid then binds to a presynaptic cannabinoid receptor, "
+        "causing the inhibition of neurotransmitter release"),
+    "a2a": _stahl_ess(457,
+        "an antagonist at purine receptors, and in particular adenosine receptors"),
+    "sigma1": _stahl_ess(311,
+        "The physiological function of σ1 sites is still a mystery, and thus "
+        "sometimes called the “sigma enigma”"),
+    "mt1": _SE_MELATONIN, "mt2": _SE_MELATONIN,
+    "h3": _stahl_ess(421, "Histamine 3 (H3) receptors are presynaptic autoreceptors"),
+    "h4": _stahl_ess(422, "There is a fourth type of histamine receptor, H4"),
 }
 
 STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
@@ -2726,10 +2772,7 @@ STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
         "The other subclass of ligand-gated ion channels has a tetrameric "
         "structure, and includes many glutamate receptors, including the AMPA, "
         "kainate, and NMDA subtypes."),
-    "melatonin": _stahl_ess(455,
-        "There are three types of receptors for melatonin: MT1 and MT2, which are "
-        "both involved in sleep, and MT3, which is actually the enzyme NRH–quinine "
-        "oxidoreductase 2 and not thought to be involved in sleep physiology."),
+    "melatonin": _SE_MELATONIN,
     "orexin": _stahl_ess(425,
         "Orexin neurotransmission is mediated by two types of postsynaptic "
         "G-protein-coupled receptors, orexin 1 (OX1R) and orexin 2 (OX2R)."),

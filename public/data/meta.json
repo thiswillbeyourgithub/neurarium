@@ -3255,9 +3255,9 @@
       },
       "receptors": {
         "total": 56,
-        "verified": 30,
+        "verified": 54,
         "sourced": 0,
-        "missing": 26
+        "missing": 2
       },
       "receptor_locations": {
         "total": 383,
@@ -3292,11 +3292,11 @@
     },
     "nodes": {
       "total": 1743,
-      "verified": 1649,
+      "verified": 1673,
       "sourced": 0,
-      "missing": 94,
-      "backed": 1649,
-      "pct_backed": 95
+      "missing": 70,
+      "backed": 1673,
+      "pct_backed": 96
     }
   }
 }

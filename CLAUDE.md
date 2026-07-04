@@ -1463,16 +1463,17 @@ popup shows it (`buildAboutSourcing` into `#about-sourcing`) and
 `SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
 coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
 References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). Current: ~95% of 1665 nodes backed (drug
-bindings ~98%, NbN 100%, `drug_categories` 156/158, `structures` 52/52, `circuits` 6/6,
-`projection_groups` 10/10, `references` 100%, `receptor_locations` 360/383 (GtoPdb + Allen
-AHBA, see Expression locations), `target_locations` 108/124 (Allen AHBA); the residual ~87
-`missing` is spread thin now: the 26 `llm` receptor mechanism classifications, the 23
+points *at* a node, it is not itself one). Current: ~96% of 1743 nodes backed (drug
+bindings ~98%, NbN 100%, `receptors` mechanism 54/56 (Stahl Essential), `drug_categories`
+156/165, `structures` 52/52, `circuits` 6/6, `projection_groups` 10/10, `references` 100%,
+`receptor_locations` 360/383 (GtoPdb + Allen AHBA, see Expression locations),
+`target_locations` 108/124 (Allen AHBA); the residual 70 `missing` is spread thin now: the 23
 `receptor_locations` Allen cannot reach (off-atlas bases + sampled-but-absent), the 16
 `target_locations` that stay `llm` (SERT/NET terminal regions + melatonin, honest microarray
-limits), the 12 unsourced `drug_bindings`, the 4 remaining projections (claustrum->frontal +
-claustrum->insula, which no single Nieuwenhuys page states), the 4 `targets`, and 2
-`drug_categories`). Each expression
+limits), the 12 unsourced `drug_bindings`, the 9 `drug_categories` (7 recreational drugs with
+no Stahl class line + 2 flagged mismatches), the 4 remaining projections (claustrum->frontal +
+claustrum->insula, which no single Nieuwenhuys page states), the 4 `targets`, and 2 `receptors`
+(5-HT1E/1F, absent from Stahl Essential)). Each expression
 region is its own node (per the request to grade each "Found in", not the list as a whole),
 individually upgradeable when sourced. Descriptions are no longer a node kind: every
 wiki-linked panel fetches the live Wikipedia lead instead of baking it.
