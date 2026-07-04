@@ -1999,6 +1999,16 @@ function createInfoPanel(data) {
   // The PDSP Ki database has no URL-addressable per-target search, so every
   // receptor/target links to the same browse page (a "go look it up" convenience).
   const PDSP_KIDB_URL = "https://pdspdb.unc.edu/kidb2/kidb/web/kis-results/index";
+  // UniProt + Guide to Pharmacology (GtoPdb) name searches for a receptor: land on
+  // each site's results page for the receptor's name. UniProt is filtered to human
+  // (model_organism 9606). Convenience search links (navigated to, never fetched),
+  // so no CSP change + no provenance pill.
+  const uniprotSearchUrl = (name) =>
+    `https://www.uniprot.org/uniprotkb?query=${encodeURIComponent(name)}&facets=model_organism%3A9606`;
+  const gtopdbSearchUrl = (name) =>
+    "https://www.guidetopharmacology.org/GRAC/DatabaseSearchForward?searchString="
+    + encodeURIComponent(name)
+    + "&searchCategories=all&species=none&type=all&comments=includeComments&order=rank";
 
   // Live Wikipedia description, shared by every panel carrying a `wikipedia` link
   // (drug / receptor / structure / target). Best-effort: it fetches the current
@@ -2397,9 +2407,12 @@ function createInfoPanel(data) {
       const { wiki: recWiki } = appendReference({
         url: receptor.wikipedia, description: receptor.description,
       });
-      // PDSP Ki database lookup, beside the reference (binding-affinity data for
-      // this receptor; a browse link, since PDSP has no per-target search URL).
+      // External lookups beside the reference: PDSP Ki (binding affinity; a browse
+      // link, PDSP has no per-target search URL), UniProt (human-only) and the Guide
+      // to Pharmacology (GtoPdb), both name-searched on the receptor's name.
       appendLookupLink(recWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
+      appendLookupLink(recWiki, "info.uniprot", uniprotSearchUrl(receptor.name), "info.uniprotTitle");
+      appendLookupLink(recWiki, "info.gtopdb", gtopdbSearchUrl(receptor.name), "info.gtopdbTitle");
 
       // Classification facts as label / value rows; the "effect" value carries the
       // sign swatch so the colour matches the dots + legend row. The mechanism grade

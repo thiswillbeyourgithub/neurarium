@@ -1110,7 +1110,10 @@ one shape in `js/data.js`.
   list where each region likewise carries its **own** expression-provenance pill, kind
   `target_locations`, the mirror of `receptor_locations`). Both add a **PDSP Ki**
   lookup link beside the reference (`appendLookupLink`, the fixed browse URL since PDSP
-  has no per-target search; the drug panel's EMA/FDA links use the same helper). Both then carry an
+  has no per-target search; the drug panel's EMA/FDA links use the same helper); a
+  **receptor** also gets **UniProt** (human-only, `model_organism 9606`) + **GtoPdb**
+  (Guide to Pharmacology) name-search links (`uniprotSearchUrl` / `gtopdbSearchUrl` over
+  the receptor's `name`; convenience links, no CSP change, no pill). Both then carry an
   **Interacting drugs** section (the drugs acting on this target, from `drugsByTarget`,
   grouped by primary drug category, each row a net-effect glyph (green **+** / red **−** /
   purple **≈**; `effectGlyph`, wrapped in `withTip` so a tap explains the effect without
