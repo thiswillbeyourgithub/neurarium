@@ -3709,6 +3709,9 @@ function buildAboutSourcing(meta) {
   // the loading overlay (the startup gate), called first with no meta, then again
   // with data.meta once loaded to fill the tally.
   host.appendChild(h("p", "about-text", t("about.sourcingIntro")));
+  // A source is not proof: sources err, quote-to-claim mapping can slip, and the
+  // viewer has bugs. Keep this prominent so nobody reads a pill as "true".
+  host.appendChild(h("p", "about-caveat", t("about.sourcingCaveat")));
 
   // Grade key: a pill swatch + its meaning, in strongest-to-weakest order, then
   // the NOSOURCE case. The pills reuse the info-panel CSS classes so the legend

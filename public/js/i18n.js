@@ -258,6 +258,11 @@
         "Every node in this dataset (any sourceable datum: a region, a pathway, a " +
         "receptor, a drug binding, ...) carries a source grade. None of it has been " +
         "checked by a human yet, so even a verified node can be wrong. The grades:",
+      "about.sourcingCaveat":
+        "Being sourced does not make a claim true. A source can itself be wrong, the AI " +
+        "may have attached a correct quote to the wrong claim, and the viewer code has " +
+        "occasional bugs of its own. Please stay critical: if something looks off, it may " +
+        "well be an error. Corrections are very welcome via the issue link below.",
       "about.gradeVerified":
         "Verified: the supporting quote was confirmed present in the cited source.",
       "about.gradeSourced":
@@ -514,6 +519,12 @@
         "une voie, un récepteur, une liaison médicamenteuse, ...) porte un niveau " +
         "de source. Rien n’a encore été vérifié par un humain : même un nœud " +
         "« vérifié » peut être faux. Les niveaux :",
+      "about.sourcingCaveat":
+        "Une donnée sourcée n’est pas pour autant vraie. La source peut elle-même se " +
+        "tromper, l’IA peut avoir rattaché une citation correcte à la mauvaise affirmation, " +
+        "et le code d’affichage comporte parfois ses propres bugs. Restez critique : si " +
+        "quelque chose semble faux, c’est peut-être une erreur. Les corrections sont les " +
+        "bienvenues via le lien de signalement ci-dessous.",
       "about.gradeVerified":
         "Vérifié : la citation à l’appui a été confirmée présente dans la source citée.",
       "about.gradeSourced":
