@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Apply extracted source quotes to ``tools/drugs_data.jsonl``.
+"""Apply extracted source quotes to ``tools/data/drugs_data.jsonl``.
 
 Takes the JSON returned by the source-extraction workflow,
 ``[{id, accepted:[{idx, page, quote}]}]``, and for each accepted binding:

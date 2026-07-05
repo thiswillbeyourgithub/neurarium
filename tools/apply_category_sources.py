@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Apply drug-class (category) source quotes to ``tools/drugs_data.jsonl``.
+"""Apply drug-class (category) source quotes to ``tools/data/drugs_data.jsonl``.
 
 A drug's **class classification** ("this drug is an SSRI / TCA / atypical
 antipsychotic / ...") is its own graded node (kind ``drug_categories``), one per

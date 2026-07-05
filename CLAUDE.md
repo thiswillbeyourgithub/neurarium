@@ -104,7 +104,7 @@ README hero shot in `docs/`.
 `.jsonl` / `meta.json` / `shapes/*.json` fields) live in
 [`tools/README.md`](tools/README.md)** (Tool reference + Data contract), moved there to
 keep this file terse. In short: the anatomy is authored once in `generate_data.py` (drugs
-in `tools/drugs_data.jsonl`), which emits the committed `public/data/`. `generate_data.py` is
+in `tools/data/drugs_data.jsonl`), which emits the committed `public/data/`. `generate_data.py` is
 now a thin orchestrator: the data lives in the `tools/data_generators/` package (`i18n`,
 `provenance`, `drugs`, `geometry`, `presentation`, `connectivity`, `quotes/`, `receptors/`,
 `regions/`; per-module purpose in `tools/README.md`). Each geometry form
@@ -376,7 +376,7 @@ A focusable Drugs section showing, per drug, what it does to the brain. Data is 
 **Stahl's Prescriber's Guide (8th ed.)**, extracted **strictly from the dump** (only
 interactions literally stated; gaps left as TODO / no binding).
 
-- **Data.** The 158 drugs live in `tools/drugs_data.jsonl`, read by `_load_drugs`. Vocabularies are
+- **Data.** The 158 drugs live in `tools/data/drugs_data.jsonl`, read by `_load_drugs`. Vocabularies are
   defined once in `generate_data.py`: `DRUG_CATEGORY_LABELS`, `DRUG_ACTIONS` (action -> {label, net
   `effect`}), `DRUG_EFFECT_COLORS`/`DRUG_EFFECT_LABELS` (boost/block/modulate), `DRUG_TARGETS`
   (non-receptor targets, `type` a `TARGET_TYPE_LABELS` key). `_build_drug_targets` merges
@@ -440,16 +440,16 @@ Two third-party image sources, handled differently on purpose.
 - **Molecule images** (vendored same-origin; CSP `img-src 'self' data:`). `tools/fetch_molecules.py`
   downloads each drug's lead infobox SVG via the MediaWiki `pageimages` API into
   `public/data/molecules/<id>.svg` (`.svg` only, `<script>` stripped); writes
-  `tools/molecules_sources.json`. `generate_data.py` emits `structure_image` only when the file
+  `tools/generated_cache/molecules_sources.json`. `generate_data.py` emits `structure_image` only when the file
   exists. `showDrug` renders it as `<img class="mol-structure">` with CSS `filter: invert(1)` for the
   dark panel (so the page declares `color-scheme: dark`). No image if absent.
 - **Structure images** (hot-linked from Wikimedia; the multi-MB GIFs are NOT vendored, only the url).
   `tools/fetch_structure_images.py` resolves a **hero** per **base** (fallback: `.gif` -> `.svg` ->
   infobox/lead; pdf/djvu lead -> first-page JPG) + a **gallery** (`gather_gallery`: the other gif/svg
   on the base's EN+FR articles, chrome excluded via `_is_gallery_chrome`, capped `MAX_GALLERY`) into
-  `tools/structure_images_sources.json`, downloading no bytes (`IMAGE_OVERRIDES` wins for the hero).
+  `tools/generated_cache/structure_images_sources.json`, downloading no bytes (`IMAGE_OVERRIDES` wins for the hero).
   The **same resolver** runs over wiki-linked **circuits** (`--target circuits`) into
-  `tools/circuit_images_sources.json`. `generate_data.py` emits `structure_image` + `_gallery` for
+  `tools/generated_cache/circuit_images_sources.json`. `generate_data.py` emits `structure_image` + `_gallery` for
   both (loaded by `_load_image_sources`). `showStructure`/`showCircuit` render them via the shared
   `appendWikiImages(heroUrl, gallery, altName)`: the hero lazily with a spinner (`error` removes the
   figure), then a "show more" toggle that builds the gallery **lazily on first expand**. Needs the
@@ -508,7 +508,7 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
 - **#7 GtoPdb** (`gtopdb`, `page` = a GtoPdb targetId) is the source for **receptor** "Found in"
   regions. A confirm-only LLM judge maps a cached quote (by index) to each existing region (never
   adds/drops one); `apply_location_sources.py` writes the `verified` source into
-  `tools/location_sources.json`. Each quote carries the assay **`species`** (Human/Rat/Mouse/Monkey,
+  `tools/generated_cache/location_sources.json`. Each quote carries the assay **`species`** (Human/Rat/Mouse/Monkey,
   validated in `_quote_sources`); a non-human-only region shows an amber "· <species>" tag.
 - **#8 Allen AHBA** (`allen_ahba`, `page` = an HGNC gene) is the complement covering **non-receptor
   targets** + the receptors/regions GtoPdb misses. `fetch_allen.py` turns the microarray **PACall**
@@ -550,7 +550,7 @@ here, to avoid drift.** `check_data.py` re-confirms the tally is self-consistent
 The step-by-step runbook (per node-kind authoring fields, the regenerate/check/fetch
 sequence, and the author-side "refresh external data" recipe) lives in
 [`tools/README.md`](tools/README.md). The invariants that outlive any recipe: edit the
-source of truth (`generate_data.py`, or `tools/drugs_data.jsonl` for drugs), never the
+source of truth (`generate_data.py`, or `tools/data/drugs_data.jsonl` for drugs), never the
 emitted `public/data/`; every new display string needs its `FR`/`{en,fr}` translation or
 the build raises; commit the generator change + regenerated artifacts together; keep drug
 extraction strictly dump-sourced. The legend rebuilds from the data at runtime.

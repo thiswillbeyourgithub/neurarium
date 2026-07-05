@@ -666,7 +666,7 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
                  molecule_ids: set[str]) -> dict[str, Any]:
     """Validate + normalize one authored drug into its ``drugs.jsonl`` record.
 
-    The authored drug (from ``tools/drugs_data.jsonl``) is mostly passed through;
+    The authored drug (from ``tools/data/drugs_data.jsonl``) is mostly passed through;
     this validates it against the drug vocabularies (categories / targets /
     actions / effect overrides). The drug's real provenance lives per-claim: each
     binding's quote ``sources`` + ``ki`` and the ``nbn_sources``, all against the
@@ -824,7 +824,7 @@ def _load_image_sources(filename: str) -> dict[str, dict[str, Any]]:
     panel's "show more") iff its key has an entry with a url. A missing file is fine
     (no images). Keyed by structure base id / circuit id respectively.
     """
-    src = Path(__file__).resolve().parent / filename
+    src = Path(__file__).resolve().parent / "generated_cache" / filename
     if not src.exists():
         return {}
     data = json.loads(src.read_text(encoding="utf-8"))
@@ -842,7 +842,7 @@ def _load_circuit_images() -> dict[str, dict[str, Any]]:
 
 
 def _load_drugs() -> list[dict[str, Any]]:
-    """Read the authored drug list from ``tools/drugs_data.jsonl`` (if present).
+    """Read the authored drug list from ``tools/data/drugs_data.jsonl`` (if present).
 
     The drug data is kept in a sibling JSONL file rather than inline in this
     module because it is large and comes from extraction (Stahl's Prescriber's
@@ -1101,7 +1101,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         seen_receptor_ids.add(rec["id"])
         receptors.append(_receptor_record(rec, receptor_bases))
 
-    # Drugs: authored in tools/drugs_data.jsonl, validated against the drug
+    # Drugs: authored in tools/data/drugs_data.jsonl, validated against the drug
     # vocabularies + the merged target map (DRUG_TARGETS + receptor ids). Every
     # DRUG_TARGETS region must be a known structure base (typo guard), like a
     # receptor location. Duplicate drug ids fail the build.

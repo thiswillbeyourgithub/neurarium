@@ -121,7 +121,7 @@ STRUCTURE_PROVENANCE: dict[str, str] = {}
 # the claim "this drug belongs to class X" is a node in its own right (kind
 # ``drug_categories``), one per drug, graded like the receptor/target classification.
 # Authored from general knowledge, so default ``"llm"``; keyed by drug id. A drug may
-# additionally carry quote-level ``category_sources`` in tools/drugs_data.jsonl, which
+# additionally carry quote-level ``category_sources`` in tools/data/drugs_data.jsonl, which
 # upgrade the emitted grade (mirror of the target classification's optional quotes).
 DRUG_CATEGORY_PROVENANCE: dict[str, str] = {}
 # Manual per-target polarity-grade overrides (mirror TARGET_PROVENANCE). Empty:
@@ -151,7 +151,7 @@ TARGET_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 
 
 def _merge_external_location_sources() -> None:
-    """Merge author-side sourced expression locations from ``tools/location_sources.json``
+    """Merge author-side sourced expression locations from ``tools/generated_cache/location_sources.json``
     into the two registries above.
 
     That file is machine-written by the expression-sourcing pipeline (fetch ->
@@ -162,7 +162,7 @@ def _merge_external_location_sources() -> None:
     ``{"receptors": {rid: {base: [source, ...]}}, "targets": {tid: {base: [...]}}}``.
     An external entry wins per (owner, base). A missing file is fine (nothing sourced),
     so the generator still runs on a checkout without it."""
-    src = Path(__file__).resolve().parent.parent / "location_sources.json"
+    src = Path(__file__).resolve().parent.parent / "generated_cache" / "location_sources.json"
     if not src.exists():
         return
     data = json.loads(src.read_text(encoding="utf-8"))

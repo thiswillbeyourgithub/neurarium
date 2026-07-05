@@ -1,4 +1,4 @@
-"""Shared I/O for the authored drug dataset (``tools/drugs_data.jsonl``).
+"""Shared I/O for the authored drug dataset (``tools/data/drugs_data.jsonl``).
 
 The dataset is stored as JSONL (one compact JSON object per line) rather than a
 single pretty-printed JSON array: line-oriented diffs stay small and every
@@ -10,7 +10,7 @@ consumer reads/writes it the same way. Centralized here so the five consumers
 import json
 from pathlib import Path
 
-DRUGS_PATH = Path(__file__).resolve().parent / "drugs_data.jsonl"
+DRUGS_PATH = Path(__file__).resolve().parent / "data" / "drugs_data.jsonl"
 
 
 def load_drugs(path=None) -> list[dict]:

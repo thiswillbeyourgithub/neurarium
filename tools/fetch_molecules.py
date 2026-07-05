@@ -16,7 +16,7 @@ This is an *authoring* tool (it hits the network), kept separate from the offlin
 stdlib-only ``generate_data.py``. It is stdlib-only too (urllib), idempotent (skips
 files already present unless ``--force``) and polite (descriptive User-Agent + a
 small delay between requests). Provenance (the Commons file + source URL per drug)
-is written to ``tools/molecules_sources.json`` for attribution.
+is written to ``tools/generated_cache/molecules_sources.json`` for attribution.
 
 Usage::
 
@@ -40,10 +40,11 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+TOOLS = Path(__file__).resolve().parent      # tools/ (anchor; retarget on any relocation)
+REPO = TOOLS.parent
 DRUGS_JSONL = REPO / "public" / "data" / "drugs.jsonl"
 OUT_DIR = REPO / "public" / "data" / "molecules"
-SOURCES_JSON = Path(__file__).resolve().parent / "molecules_sources.json"
+SOURCES_JSON = TOOLS / "generated_cache" / "molecules_sources.json"
 API = "https://en.wikipedia.org/w/api.php"
 
 # A descriptive User-Agent is required by the Wikimedia API policy; it should carry

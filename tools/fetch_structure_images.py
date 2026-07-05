@@ -29,14 +29,14 @@ more" of the region's labelled diagrams / extra animations.
 The hit is keyed by the structure's **base** id so both hemispheres of a pair share
 the one record (like the WIKIPEDIA registry in ``generate_data.py``). Each base's
 ``{file, url, title, kind, gallery:[{file,url,kind,lang}]}`` is written to
-``tools/structure_images_sources.json``, which the offline ``generate_data.py`` then
+``tools/generated_cache/structure_images_sources.json``, which the offline ``generate_data.py`` then
 reads to emit each structure's ``structure_image`` (hero) + ``structure_image_gallery``
 (see ``_load_structure_images``). A structure whose article has no usable image at all
 is left without one; the run prints which ones were missed.
 
 The **same** resolver also runs over the **circuits** (``public/data/circuits.jsonl``,
 those with a ``wikipedia`` link): each circuit's hero + gallery is resolved exactly
-like a structure and written, keyed by circuit id, to ``tools/circuit_images_sources.json``
+like a structure and written, keyed by circuit id, to ``tools/generated_cache/circuit_images_sources.json``
 (its own file so the two key namespaces never mix), read by ``generate_data.py``'s
 ``_load_circuit_images`` to emit the circuit panel's ``structure_image`` /
 ``structure_image_gallery``. ``--target structures|circuits|all`` (default ``all``)
@@ -74,13 +74,14 @@ from pathlib import Path
 # live in tools/, so a plain import resolves when run as `python tools/<name>.py`.
 from fetch_molecules import API as EN_API, _is_chrome, article_title, http_json
 
-REPO = Path(__file__).resolve().parent.parent
+TOOLS = Path(__file__).resolve().parent      # tools/ (anchor; retarget on any relocation)
+REPO = TOOLS.parent
 STRUCTURES_JSONL = REPO / "public" / "data" / "structures.jsonl"
 CIRCUITS_JSONL = REPO / "public" / "data" / "circuits.jsonl"
-SOURCES_JSON = Path(__file__).resolve().parent / "structure_images_sources.json"
+SOURCES_JSON = TOOLS / "generated_cache" / "structure_images_sources.json"
 # Circuits get their own sources file (same schema), keyed by circuit id, so the two
 # concerns never share a key namespace. Read by generate_data.py's _load_circuit_images.
-CIRCUIT_SOURCES_JSON = Path(__file__).resolve().parent / "circuit_images_sources.json"
+CIRCUIT_SOURCES_JSON = TOOLS / "generated_cache" / "circuit_images_sources.json"
 
 # The French Wikipedia MediaWiki endpoint (the gallery also scans the FR article,
 # which often carries labelled diagrams the EN one does not). Same /w/api.php shape.

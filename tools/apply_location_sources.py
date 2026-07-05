@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-"""Apply confirmed expression-location sources into ``tools/location_sources.json``.
+"""Apply confirmed expression-location sources into ``tools/generated_cache/location_sources.json``.
 
 Merges the output of either expression-sourcing pipeline into the committed
-``tools/location_sources.json`` (loaded by ``generate_data.py``'s
+``tools/generated_cache/location_sources.json`` (loaded by ``generate_data.py``'s
 ``_merge_external_location_sources`` into ``RECEPTOR_LOCATION_SOURCES`` /
 ``TARGET_LOCATION_SOURCES``). Both pipelines are **confirm-only** (they upgrade the
 grade on regions the dataset already lists; they never add or drop a region), and both
@@ -35,15 +35,15 @@ import json
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-TOOLS = Path(__file__).resolve().parent
+TOOLS = Path(__file__).resolve().parent      # tools/ (anchor; retarget on any relocation)
+REPO = TOOLS.parent
 GTOPDB = REPO / "data_sources" / "gtopdb"
 WORKLIST = GTOPDB / "worklist.json"
 PAGES = GTOPDB / "pages"
 ALLEN = REPO / "data_sources" / "allen"
 ALLEN_PAGES = ALLEN / "pages"
 ALLEN_CONFIRMED = ALLEN / "confirmed.json"
-OUT = TOOLS / "location_sources.json"
+OUT = TOOLS / "generated_cache" / "location_sources.json"
 
 sys.path.insert(0, str(TOOLS))
 from check_data import normalize_for_match  # noqa: E402  (reuse the gate's normalizer)

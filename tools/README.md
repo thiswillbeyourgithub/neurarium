@@ -8,7 +8,7 @@ corpus locations are in `CLAUDE.local.md`.
 
 ## Changing the data
 
-1. Edit the relevant list in `generate_data.py` (or `tools/drugs_data.jsonl` for drugs).
+1. Edit the relevant list in `generate_data.py` (or `tools/data/drugs_data.jsonl` for drugs).
    - **Structures**: edit `PAIRED` / `MIDLINE`. Paired entries are auto-mirrored (define on the right,
      x > 0; the generator emits one right-side shape file and the `_L` member references it with
      `mirror:true`). A region is a noise-deformed ellipsoid by default; blob/curve/composite shape knobs
@@ -56,7 +56,7 @@ attribute a *different* quote than the main one, or several to back a compound v
 `synaptic="both"`). An individual expression region is
      sourced (above `llm`) by adding a `{receptor_id: {base: [quote-source]}}` entry to
      `RECEPTOR_LOCATION_SOURCES`.
-   - **Drugs**: edit `tools/drugs_data.jsonl`. Each: `id`, `name`, `categories`, optional
+   - **Drugs**: edit `tools/data/drugs_data.jsonl`. Each: `id`, `name`, `categories`, optional
      `nbn` + `description` (inline `{en,fr}`), `wikipedia`, `bindings`. A binding is
      `{target, action}` (+ optional `effect` / `note` / `tentative`); `target` is a merged
      map key (a `DRUG_TARGETS` key or a receptor id), `action` a `DRUG_ACTIONS` key
@@ -91,10 +91,10 @@ network, idempotent, polite; each touches only what changed). Always finish with
 `generate_data.py` so the emitted `public/data/` picks up the new urls/files:
 
 1. `python tools/fetch_molecules.py` — new per-drug molecule SVGs into
-   `public/data/molecules/` (only drugs missing one); writes `tools/molecules_sources.json`.
+   `public/data/molecules/` (only drugs missing one); writes `tools/generated_cache/molecules_sources.json`.
 2. `python tools/fetch_structure_images.py` — re-resolve each structure's **and**
    wiki-linked circuit's Wikipedia hero + gallery image **urls** into
-   `tools/structure_images_sources.json` + `tools/circuit_images_sources.json` (no bytes
+   `tools/generated_cache/structure_images_sources.json` + `tools/generated_cache/circuit_images_sources.json` (no bytes
    downloaded; the gif/svg is hot-linked at runtime). `--target structures|circuits`
    scopes to one.
 3. **PDSP Ki**: re-download the whole-DB CSV from
@@ -105,12 +105,12 @@ network, idempotent, polite; each touches only what changed). Always finish with
    tools/fetch_gtopdb.py` re-pulls each receptor's tissue comments (caches to
    `data_sources/gtopdb/`, author-side), then run the confirm-only judge over
    `data_sources/gtopdb/worklist.json` and `python tools/apply_location_sources.py --judged <f>`
-   to merge new `verified` sources into `tools/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
+   to merge new `verified` sources into `tools/generated_cache/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
 5. **Allen AHBA expression** (the `target_locations` + residual `receptor_locations`
    sources): `python tools/fetch_allen.py` re-pulls each donor's microarray PACall (caches
    to `data_sources/allen/`, author-side; ~2GB across donors), then `python
    tools/apply_location_sources.py --corpus allen` merges the deterministic `verified`
-   sources (no judge) into `tools/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
+   sources (no judge) into `tools/generated_cache/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
 6. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
 7. `python tools/update_readme_stats.py` — refresh the README sourcing table
    (CI runs it `--check`).
@@ -126,9 +126,9 @@ Screenshots).
 
 - `generate_data.py` — single source of truth for the anatomy (stdlib-only, offline):
   defines every region/projection/receptor once, emits the artifacts below. Drugs are the
-  exception (authored in `tools/drugs_data.jsonl`, read by `_load_drugs`). Display strings are
+  exception (authored in `tools/data/drugs_data.jsonl`, read by `_load_drugs`). Display strings are
   `{en,fr}` via `_t()` (see CLAUDE.md I18n).
-- `tools/drugs_data.jsonl` — the authored drug dataset (from Stahl 8th ed.), one compact
+- `tools/data/drugs_data.jsonl` — the authored drug dataset (from Stahl 8th ed.), one compact
   JSON object per line, read by `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
 - `tools/data_generators/` — pure-data modules imported by `generate_data.py`: `drugs.py`,
   `provenance.py` (also houses the sourcing-tally helpers `_GRADE_RANK`/`_strongest_grade`/
@@ -179,9 +179,9 @@ Screenshots).
   `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `data_sources/allen/` + `confirmed.json`.
   See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/apply_location_sources.py` — merges accepted expression quotes into
-  `tools/location_sources.json`, `--corpus {gtopdb,allen}` (gtopdb needs a judged file; allen is
+  `tools/generated_cache/location_sources.json`, `--corpus {gtopdb,allen}` (gtopdb needs a judged file; allen is
   deterministic). Idempotent. See CLAUDE.md Source provenance (corpora #7/#8).
-- `tools/location_sources.json` — machine-written bulk location sources, loaded by
+- `tools/generated_cache/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
 - `tools/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
@@ -193,7 +193,7 @@ Screenshots).
 - `tools/update_readme_stats.py` — rewrites the README `SOURCING_STATS` + `SOURCES_TABLE` blocks
   (and the headline %) from `meta`; `--check` exits 1 if stale (CI). Idempotent.
 - `tools/fetch_molecules.py` — downloads each drug's molecule SVG into `public/data/molecules/`;
-  writes `tools/molecules_sources.json`. See CLAUDE.md Images.
+  writes `tools/generated_cache/molecules_sources.json`. See CLAUDE.md Images.
 - `tools/fetch_structure_images.py` — resolves the *url* of each structure's (and wiki-linked
   circuit's) Wikipedia hero + gallery images into `tools/{structure,circuit}_images_sources.json`
   (`--target structures|circuits|all`); downloads no bytes. See CLAUDE.md Images.

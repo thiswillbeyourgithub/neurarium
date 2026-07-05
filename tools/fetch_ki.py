@@ -376,7 +376,7 @@ def _is_pdsp_ki(binding):
 
 
 def apply_all():
-    """Write PDSP Ki into tools/drugs_data.jsonl for every resolvable drug: annotate
+    """Write PDSP Ki into tools/data/drugs_data.jsonl for every resolvable drug: annotate
     existing bindings with a `ki`, add the median-stronger omitted targets as new
     `affinity_only` bindings. Idempotent: strips its own prior output first, so a
     re-run after a fresh CSV download simply refreshes the values."""
@@ -424,7 +424,7 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--drug", help="drug id / ligand name to preview (e.g. risperidone)")
     ap.add_argument("--apply", action="store_true",
-                    help="write Ki into tools/drugs_data.jsonl for every drug (idempotent)")
+                    help="write Ki into tools/data/drugs_data.jsonl for every drug (idempotent)")
     ap.add_argument("--all", action="store_true",
                     help="also list omitted PDSP targets weaker than our weakest binding")
     ap.add_argument("--json", metavar="OUT", help="write the preview JSON here")

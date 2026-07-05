@@ -126,7 +126,7 @@ rendering. Under `public/data/` it is split by node kind (`structures`, `project
 `circuits`, `receptors`, `drugs`; one JSON object per line) beside a self-describing
 `meta.json` (colour and legend maps plus the sourcing tally) and one geometry file per
 shape. It is generated from a single source of truth (`tools/generate_data.py`, with
-the drug list in `tools/drugs_data.jsonl`), so the plain JSONL/JSON is easy to consume
+the drug list in `tools/data/drugs_data.jsonl`), so the plain JSONL/JSON is easy to consume
 from another engine.
 
 For the full data flow and module graph see [`ARCHITECTURE.md`](docs/ARCHITECTURE.md); for how

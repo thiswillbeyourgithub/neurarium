@@ -28,7 +28,7 @@ Pipeline (mirrors ``fetch_gtopdb.py`` -> ``apply_location_sources.py``):
   4. Emit ``data_sources/allen/pages/<gene>.md`` (one presence line per present base; the
      quote-gate page) and ``data_sources/allen/confirmed.json`` (the deterministic confirm list
      ``[{owner_kind, owner, base, page, quote}]`` that ``apply_location_sources.py
-     --corpus allen`` merges into ``tools/location_sources.json``). Un-confirmable
+     --corpus allen`` merges into ``tools/generated_cache/location_sources.json``). Un-confirmable
      (owner, base) pairs (region has 0 Allen samples, e.g. pituitary) are logged, not
      dropped.
 

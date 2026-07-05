@@ -15,7 +15,7 @@ from typing import Any
 # ---------------------------------------------------------------------------
 # Drug presentation maps + binding vocabularies (emitted into meta.json).
 #
-# Drugs (the psychoactive medications authored in ``tools/drugs_data.jsonl``, see
+# Drugs (the psychoactive medications authored in ``tools/data/drugs_data.jsonl``, see
 # "Changing the data") are sourced from Stahl's Prescriber's Guide, 8th ed. Each
 # drug has one or more coarse ``categories`` (SSRI, tricyclic, ...) and a list of
 # ``bindings`` to molecular targets (receptors, transporters, enzymes, ion
