@@ -183,7 +183,9 @@ there is no node-level catch-all `sources` block.
   the receptor maps (`receptor_family_labels` key order = legend family order,
   `receptor_class_labels`, `synaptic_labels`), the drug maps (`drug_category_labels` key order =
   Drugs legend order, `drug_actions` action->{label,effect}, `drug_effect_colors`,
-  `drug_effect_labels`, `drug_targets` = every non-receptor target + every receptor id),
+  `drug_effect_labels`, `drug_targets` = every non-receptor target + every receptor id; a target
+  with a direction-flipping `vesicular`/`sign`/`synaptic` flag also carries `polarity_provenance`
+  (+ optional `polarity_sources`), its own graded node kind `target_polarity`),
   `target_type_labels`/`target_type_colors`, `source_corpora`, `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
 - `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend

@@ -657,6 +657,16 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // quote-level source(s) so the pill tooltip can show the verbatim quote.
       classificationProvenance: tgt.classification_provenance || "llm",
       sources: tgt.sources || [],
+      // Tone-polarity sub-claim ("engaging this target raises/lowers system tone"):
+      // its OWN graded node (kind target_polarity), distinct from the classification
+      // grade, because the vesicular/sign/synaptic flags flip the flow-overlay sign.
+      // Present only for a target that carries a polarity flag; the panel renders a
+      // dedicated pilled row so a wrong direction is not hidden behind the type pill.
+      vesicular: !!tgt.vesicular,
+      polaritySign: tgt.sign || null,
+      polaritySynaptic: tgt.synaptic || null,
+      polarityProvenance: tgt.polarity_provenance || null,
+      polaritySources: tgt.polarity_sources || [],
       locationNames: (tgt.regions || []).map((b) => baseName.get(b) || b),
       // The raw base ids parallel to locationNames, so the panel can make each
       // "Found in" row jump to that structure (the receptor records keep their own

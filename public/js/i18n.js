@@ -174,6 +174,9 @@
       "species.monkey": "monkey",
       "targets.otherSystem": "Other / non-aminergic",
       "targets.interactingDrugs": "Interacting drugs",
+      "target.polarity": "Tone polarity",
+      "target.polarityVesicular": "Vesicular transporter (blocking depletes stores, lowers tone)",
+      "target.polarityAutoreceptor": "Presynaptic inhibitory autoreceptor (blocking raises tone)",
 
       "panel.drugs": "Drugs",
       "drugs.filter": "Filter drugs…",
@@ -430,6 +433,9 @@
       "receptor.stubHint": "Pas de rôle significatif dans le système nerveux central",
       "targets.otherSystem": "Autre / non-aminergique",
       "targets.interactingDrugs": "Médicaments en interaction",
+      "target.polarity": "Polarité tonique",
+      "target.polarityVesicular": "Transporteur vésiculaire (le bloquer épuise les stocks, abaisse le tonus)",
+      "target.polarityAutoreceptor": "Autorécepteur inhibiteur présynaptique (le bloquer élève le tonus)",
 
       "panel.drugs": "Médicaments",
       "drugs.filter": "Filtrer les médicaments…",

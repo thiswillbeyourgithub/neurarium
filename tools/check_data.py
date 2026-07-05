@@ -516,7 +516,7 @@ def print_coverage(stats):
     # The node kinds folded into the headline, in the generator's order.
     node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
                   "circuits", "projection_groups", "receptors", "receptor_locations",
-                  "targets", "target_locations", "structures")
+                  "targets", "target_polarity", "target_locations", "structures")
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -630,6 +630,14 @@ def check_provenance(report, meta, structures, projections, circuits,
         if target.get("type") != "receptor" and "classification_provenance" in target:
             grade(target.get("classification_provenance"),
                   f"target {key} classification_provenance")
+        # Tone-polarity sub-claim (kind target_polarity): its own grade + optional
+        # quote source, distinct from the type/system classification above.
+        if "polarity_provenance" in target:
+            grade(target.get("polarity_provenance"),
+                  f"target {key} polarity_provenance")
+            for i, src in enumerate(target.get("polarity_sources") or []):
+                grade(src.get("provenance"),
+                      f"target {key} polarity_sources[{i}]")
         # Per-region expression sources (the target's "Found in" grading), mirror of
         # the receptor location_sources above; each carries a grade.
         for base, srcs in (target.get("location_sources") or {}).items():
@@ -672,8 +680,8 @@ def check_provenance(report, meta, structures, projections, circuits,
         a = stats.get("nodes", {})
         node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
                       "circuits", "projection_groups", "receptors",
-                      "receptor_locations", "targets", "target_locations",
-                      "structures")
+                      "receptor_locations", "targets", "target_polarity",
+                      "target_locations", "structures")
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "missing"):
             want = sum(by.get(k, {}).get(key, 0) for k in node_kinds)

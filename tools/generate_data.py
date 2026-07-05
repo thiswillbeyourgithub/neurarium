@@ -654,6 +654,13 @@ def _target_provenance(target_id: str) -> str:
         TARGET_PROVENANCE, target_id, f"target classification for {target_id!r}")
 
 
+def _target_polarity_provenance(target_id: str) -> str:
+    """Provenance grade for a target's tone-polarity claim (default ``llm``)."""
+    return _lookup_provenance(
+        TARGET_POLARITY_PROVENANCE, target_id,
+        f"target polarity for {target_id!r}")
+
+
 def _structure_provenance(base_id: str) -> str:
     """Provenance grade for a structure's anatomy claim (default ``llm``)."""
     return _lookup_provenance(
@@ -2804,6 +2811,31 @@ STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
         "G-protein-coupled receptors, orexin 1 (OX1R) and orexin 2 (OX2R)."),
 }
 
+# A non-receptor target's tone POLARITY (does engaging it raise or lower the
+# system's tone) is a *separate, direction-bearing* claim from its type/system
+# classification: the `vesicular` / `sign` / `synaptic` flags flip the drug-flow
+# overlay's sign (js/data.js toneSignOf), so a wrong flag inverts a drug's
+# apparent effect on tone (this is exactly the VMAT2 boost/block bug). It is
+# therefore its own graded node (kind `target_polarity`) instead of silently
+# inheriting the classification grade from a quote that never addressed direction.
+# Only targets carrying a polarity flag get one. Absent from this dict -> honestly
+# `llm` (unchecked), even if the flag is textbook-correct.
+TARGET_POLARITY_QUOTES: dict[str, dict[str, Any]] = {
+    # The same Stahl-Essential sentence that names VMAT2 also states it packages
+    # monoamines *into* vesicles, so inhibiting it depletes -> lowers tone. That
+    # genuinely backs the `vesicular` flag, so its polarity is verified.
+    "vmat2": STAHL_ESSENTIAL_TARGET_QUOTES["vmat2"],
+    # NOTE: `alpha2` is deliberately NOT here. Its classification quote
+    # (_SE_NE_GROUPS) only classifies α2 as an NE receptor family; it does NOT
+    # state the presynaptic *inhibitory autoreceptor* character its sign/synaptic
+    # flags encode. That claim is textbook-correct but not yet quote-verified, so
+    # its polarity honestly grades `llm`. TODO: add an α2-autoreceptor quote
+    # (author-side, quote-gated) to upgrade it.
+}
+# Manual per-target polarity-grade overrides (mirror TARGET_PROVENANCE). Empty:
+# grade defaults to `llm`, upgraded only by a TARGET_POLARITY_QUOTES quote.
+TARGET_POLARITY_PROVENANCE: dict[str, str] = {}
+
 PROJECTIONS: list[dict[str, Any]] = [
     # --- Corticostriatal input (glutamate): cortex drives the striatum ---
     dict(**{"from": "frontal_R", "to": "putamen_R"},
@@ -4509,9 +4541,25 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
         # depletes -> lowers tone), and `sign`/`synaptic` give a receptor_group the
         # presynaptic-autoreceptor character a specific receptor carries on its own
         # record (the α2 family). Absent for a target with no tone effect.
+        has_polarity = False
         for opt in ("vesicular", "sign", "synaptic"):
             if opt in spec:
                 targets[tid][opt] = spec[opt]
+                has_polarity = True
+        # The tone-polarity flags above flip the flow-overlay direction, so the
+        # claim "engaging this target raises/lowers tone" is its own graded node
+        # (kind target_polarity), NOT an inheritance of the classification grade
+        # from a quote that never spoke to direction. Emitted only when the target
+        # actually carries a polarity flag. Default llm; a TARGET_POLARITY_QUOTES
+        # quote (checked against the specific direction claim) upgrades it.
+        if has_polarity:
+            pol_grade = _target_polarity_provenance(tid)
+            pq = TARGET_POLARITY_QUOTES.get(tid)
+            if pq is not None:
+                targets[tid]["polarity_sources"] = [dict(pq)]
+                if _GRADE_RANK[pq["provenance"]] > _GRADE_RANK[pol_grade]:
+                    pol_grade = pq["provenance"]
+            targets[tid]["polarity_provenance"] = pol_grade
         # Per-region expression sources ("Found in"): each region is its own graded
         # node (kind target_locations), llm unless sourced here. Omitted when empty.
         tloc = _location_sources(
@@ -4862,6 +4910,13 @@ def _provenance_stats(structures: list[dict[str, Any]],
     target_location_grades = [g for t in drug_targets.values()
                               if t.get("type") != "receptor"
                               for g in location_grades(t, "regions")]
+    # Target tone-polarity sub-claims: one graded node per non-receptor target that
+    # carries a direction-flipping flag (vesicular / sign / synaptic). Kept distinct
+    # from the target's type/system classification so a wrong direction shows honestly.
+    target_polarity_grades = [t["polarity_provenance"]
+                              for t in drug_targets.values()
+                              if t.get("type") != "receptor"
+                              and "polarity_provenance" in t]
     # Brain-region anatomy (existence / group / position), graded per emitted
     # structure record (both hemispheres of a pair count, one line each).
     structure_grades = [s.get("classification_provenance", DEFAULT_PROVENANCE)
@@ -4889,6 +4944,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "receptors": tally(receptor_grades),
         "receptor_locations": tally(receptor_location_grades),
         "targets": tally(target_grades),
+        "target_polarity": tally(target_polarity_grades),
         "target_locations": tally(target_location_grades),
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
@@ -5013,6 +5069,20 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         raise KeyError(
             f"STAHL_ESSENTIAL_TARGET_QUOTES keys are not DRUG_TARGETS ids: "
             f"{sorted(unmatched_tq)}")
+    # A polarity quote must key a target that actually carries a polarity flag,
+    # else it grades a direction claim that is never emitted.
+    _polarity_ids = {tid for tid, spec in DRUG_TARGETS.items()
+                     if any(f in spec for f in ("vesicular", "sign", "synaptic"))}
+    unmatched_pq = set(TARGET_POLARITY_QUOTES) - _polarity_ids
+    if unmatched_pq:
+        raise KeyError(
+            f"TARGET_POLARITY_QUOTES keys have no polarity flag in DRUG_TARGETS: "
+            f"{sorted(unmatched_pq)}")
+    unmatched_pp = set(TARGET_POLARITY_PROVENANCE) - _polarity_ids
+    if unmatched_pp:
+        raise KeyError(
+            f"TARGET_POLARITY_PROVENANCE keys have no polarity flag in "
+            f"DRUG_TARGETS: {sorted(unmatched_pp)}")
 
     # Circuits: expand each base structure id to whatever was emitted (both
     # hemispheres for a paired form, the bare id for a midline one). Built from

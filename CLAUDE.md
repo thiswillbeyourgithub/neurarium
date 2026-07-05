@@ -65,6 +65,7 @@ in `meta.provenance_stats.by_kind`):
 - receptor classification -> `receptors.jsonl` -> `receptors`
 - receptor *expression region* -> a receptor's `location_sources` -> `receptor_locations`
 - non-receptor drug target -> `meta.drug_targets` -> `targets`
+- target *tone polarity* (a direction-flipping `vesicular`/`sign`/`synaptic` flag) -> a target's `polarity_provenance` -> `target_polarity`
 - target *expression region* -> a target's `location_sources` -> `target_locations`
 - drug binding -> a drug's `bindings[]` -> `drug_bindings`
 - drug NbN label -> a drug's `nbn` -> `drug_nbn`
@@ -334,7 +335,10 @@ in `js/data.js`.
   expression-provenance pill + an amber "· <species>" tag when it has no human assay (`locationEntry`
   prefers Human, so an Allen confirmation clears it), or one pilled "Throughout the brain" for
   ubiquitous). A non-receptor target opens the lighter `showTarget` (type + system facts with their
-  grade pills, then the same per-region "Found in" list, kind `target_locations`). Both add a **PDSP
+  grade pills, a **Tone polarity** row for a target carrying a direction-flipping `vesicular`/`sign`/
+  `synaptic` flag (its *own* graded node `target_polarity`, not the classification grade, since the flag
+  flips the drug-flow overlay's sign; `TARGET_POLARITY_QUOTES` upgrades it, else `llm`), then the same
+  per-region "Found in" list, kind `target_locations`). Both add a **PDSP
   Ki** lookup link (`appendLookupLink`); a receptor also gets **UniProt** (human-only) + **GtoPdb**
   name-search links (`uniprotSearchUrl`/`gtopdbSearchUrl`, no pill). Both carry an **Interacting
   drugs** section (from `drugsByTarget`, grouped by category, each row an `effectGlyph` + the

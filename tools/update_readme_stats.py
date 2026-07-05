@@ -89,6 +89,7 @@ KIND_LABELS = {
     "receptors": "Receptor classifications",
     "receptor_locations": "Receptor expression regions",
     "targets": "Target classifications",
+    "target_polarity": "Target tone polarity",
     "target_locations": "Target expression regions",
     "structures": "Brain-region anatomy",
     "references": "Wikipedia reference links",

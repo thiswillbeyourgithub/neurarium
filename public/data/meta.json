@@ -513,6 +513,15 @@
       ],
       "classification_provenance": "verified",
       "vesicular": true,
+      "polarity_sources": [
+        {
+          "corpus": "stahl_essential",
+          "page": 269,
+          "provenance": "verified",
+          "quote": "After synthesis, NE is packaged into synaptic vesicles via the vesicular monoamine transporter 2 (VMAT2) and stored there until its release into the synapse during neurotransmission."
+        }
+      ],
+      "polarity_provenance": "verified",
       "location_sources": {
         "caudate": [
           {
@@ -1537,6 +1546,7 @@
       "classification_provenance": "verified",
       "sign": "inhibitory",
       "synaptic": "presynaptic",
+      "polarity_provenance": "llm",
       "location_sources": {
         "frontal": [
           {
@@ -3281,6 +3291,12 @@
         "sourced": 0,
         "missing": 4
       },
+      "target_polarity": {
+        "total": 2,
+        "verified": 1,
+        "sourced": 0,
+        "missing": 1
+      },
       "target_locations": {
         "total": 124,
         "verified": 108,
@@ -3301,11 +3317,11 @@
       }
     },
     "nodes": {
-      "total": 1743,
-      "verified": 1673,
+      "total": 1745,
+      "verified": 1674,
       "sourced": 0,
-      "missing": 70,
-      "backed": 1673,
+      "missing": 71,
+      "backed": 1674,
       "pct_backed": 96
     }
   }

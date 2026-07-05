@@ -2618,6 +2618,24 @@ function createInfoPanel(data) {
         withPill(target.typeLabel));
       addFactRow(facts, t("receptor.system"), target.systemLabel, null,
         withPill(target.systemLabel));
+      // Tone-polarity row: its OWN sourced sub-claim, NOT the classification grade.
+      // The vesicular/sign flags flip the drug-flow overlay's direction, so a wrong
+      // one silently inverts a drug's apparent effect on tone; surfacing it with its
+      // own pill keeps that claim honestly graded (e.g. α2's autoreceptor character
+      // reads llm until quote-verified, VMAT2's vesicular claim reads verified).
+      if (target.polarityProvenance) {
+        const polText = target.vesicular
+          ? t("target.polarityVesicular")
+          : (target.polaritySign === "inhibitory"
+            ? t("target.polarityAutoreceptor") : null);
+        if (polText) {
+          const polPill = makeProvenancePill(
+            target.polarityProvenance,
+            target.polaritySources && target.polaritySources.length
+              ? sourcesTip(target.polaritySources) : undefined);
+          addFactRow(facts, t("target.polarity"), polText, null, { pill: polPill });
+        }
+      }
       if (facts.childElementCount) body.appendChild(facts);
 
       // Where it sits (same "Found in" list as a receptor; empty -> no footprint).
