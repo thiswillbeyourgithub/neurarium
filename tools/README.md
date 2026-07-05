@@ -130,6 +130,10 @@ Screenshots).
   `{en,fr}` via `_t()` (see CLAUDE.md I18n).
 - `tools/drugs_data.jsonl` — the authored drug dataset (from Stahl 8th ed.), one compact
   JSON object per line, read by `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
+- `tools/data_generators/` — pure-data modules imported by `generate_data.py`: `drugs.py`,
+  `provenance.py`, `i18n.py`, and the `receptors/` subpackage (one module per neurotransmitter
+  family, e.g. `serotonergic.py`, each exposing `ENTRIES`; `__init__.py` concatenates them into
+  `RECEPTORS` in the original order).
 - `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
