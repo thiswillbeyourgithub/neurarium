@@ -50,20 +50,18 @@ right(+), `y` down(-)/up(+), `z` posterior(-)/anterior(+).
 
 ## Nodes (the sourceable-datum model)
 
-The organizing concept of the whole project: **a *node* is any sourceable datum**,
-one atom of knowledge about the brain that could, in principle, be attributed to a
-source. The dataset is a **graph of nodes**; a detail panel is a view of one node
-plus every node linked to it (a receptor node links to the region nodes expressing
-it and the drug nodes acting on it, etc.). New features should think in nodes: if you
-add a datum, it is a node, and **every node must be sourceable** (see Source
-provenance) so the coverage tally stays honest.
+**A *node* is any sourceable datum**, one atom of brain knowledge attributable to a
+source; the dataset is a graph of nodes and a detail panel is a view of one node plus
+every node linked to it. The concept, the umbrella-vs-kind distinction, and the coverage
+tally are narrated in [`ARCHITECTURE.md`](ARCHITECTURE.md) ("The node model"); this file
+keeps only the kind map below and the grading rules under Source provenance. New data is a
+node, and **every node must be sourceable** so the coverage tally stays honest.
 
 > [!IMPORTANT]
-> "Node" is the umbrella term. The per-kind names (structure, projection, circuit,
-> receptor, drug, binding, target, ...) are **node kinds**, and they keep their names
-> in the data files + code (a `structures.jsonl`, a `showReceptor`, ...): the kinds
-> are distinct and renaming the collections to "node" would erase the distinction the
-> graph needs. So: umbrella = node; specific = its kind.
+> "Node" is the umbrella term; the per-kind names (structure, projection, circuit,
+> receptor, drug, binding, target, ...) are **node kinds** and keep their names in the data
+> files + code (a `structures.jsonl`, a `showReceptor`). Don't rename the collections to
+> "node": that erases the distinction the graph needs.
 
 **Node kinds and where each lives** (the emitted collection -> the sourcing-tally kind
 in `meta.provenance_stats.by_kind`):
@@ -81,17 +79,20 @@ in `meta.provenance_stats.by_kind`):
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
   tallied but excluded from the headline; a reference is not itself a knowledge node)
 
-**The node sourcing contract.** Every node carries a provenance **grade** and, ideally,
-a **source**, so the coverage tally stays honest. The grades, the single source shape,
-what a sourceless node counts as, and how the tally + headline % are computed are all
-defined once under Source provenance; don't restate them here.
+**The node sourcing contract.** Every node carries a provenance **grade** and, ideally, a
+**source**. The grades, the single source shape, the sourceless case, and the tally +
+headline % maths are all defined once under Source provenance; don't restate them here.
 
 ## Architecture
 
-Anatomy is plain data, separate from rendering, so the project can grow without
-touching the viewer. Most regions are symmetric L/R pairs: a region is defined
-once on the right in `generate_data.py` and mirrored, avoiding per-side
-duplication. Generated files are committed so the static site fetches them directly.
+The guiding principles (data separate from rendering, no build step, single source of
+truth, self-describing data, fail-loud generation), the three-layer data flow, the module
+graph, and the boot sequence are narrated in [`ARCHITECTURE.md`](ARCHITECTURE.md). The
+non-obvious rules a maintainer needs at the file level:
+
+Most regions are symmetric L/R pairs: a region is defined once on the right in
+`generate_data.py` and mirrored, avoiding per-side duplication. Generated files are
+committed so the static site fetches them directly.
 
 **Project layout.** Everything the browser loads is under `public/` (the served
 site). That directory is the *only* thing web-exposed: Caddy's `/srv` and
