@@ -5,9 +5,12 @@ Guidance for Claude Code (and humans) working in this repository. This file is a
 rules, so you can find the code, not re-read it in prose.
 
 > [!IMPORTANT]
-> **Keep this file current AND terse.** When you add a feature, control, data
-> field, or file, update the relevant line here in the same change. Format
-> contract, to stop it ballooning again:
+> **Keep this file current AND terse, and do not grow it by default.** Update a
+> line here only when a change adds or removes something a reader cannot quickly
+> recover from the code itself: a new file, a new user-facing control, a new
+> data-contract field, or a non-obvious rule. A pure refactor that keeps the same
+> concepts needs no edit here. Prefer editing an existing line to adding one.
+> Format contract, to stop it ballooning again:
 > - One line per feature/file/control. Name the symbol/file; don't narrate the code.
 > - State the *current* behavior only. Never write the history of a decision you
 >   reversed ("used to", "the old X", "earlier this was", "no longer"). Just
