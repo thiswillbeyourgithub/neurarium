@@ -348,6 +348,26 @@ def check_reachability(report, meta, structures, projections, circuits,
         if linked is not None and linked not in receptor_ids:
             report.error(f"target {key}: linked receptor {linked!r} is not a receptor id")
 
+    # Action <-> target-type compatibility. A pharmacological action only makes sense
+    # on certain target kinds; a mismatch means the direction (boost/block/tone) was
+    # almost certainly mis-assigned. This is the guard that catches a VMAT2 (vesicular)
+    # inhibitor mislabeled `reuptake_inhibitor` (which would read as a boost, not the
+    # depletion it is). `modulator` is deliberately unconstrained (context-dependent).
+    action_target_types = {
+        "reuptake_inhibitor": {"transporter"},
+        "releaser": {"transporter"},
+        "vesicular_inhibitor": {"transporter", "vesicle_protein"},
+        "enzyme_inhibitor": {"enzyme"},
+        "agonist": {"receptor", "receptor_group"},
+        "partial_agonist": {"receptor", "receptor_group"},
+        "antagonist": {"receptor", "receptor_group", "ion_channel"},
+        "inverse_agonist": {"receptor", "receptor_group"},
+        "pam": {"receptor", "receptor_group"},
+        "nam": {"receptor", "receptor_group"},
+        "blocker": {"ion_channel", "vesicle_protein"},
+    }
+    compat_errors = 0
+
     for drug in drugs:
         did = drug.get("id")
         for category in drug.get("categories", []):
@@ -372,6 +392,22 @@ def check_reachability(report, meta, structures, projections, circuits,
                     require(binding["effect"], meta.get("drug_effect_colors", {}),
                             f"drug {did}: binding effect {binding['effect']!r} is not "
                             f"in drug_effect_colors")
+                # The action must be pharmacologically compatible with the target's
+                # kind, else the derived direction (boost/block/tone) is mis-assigned.
+                tgt = targets.get(target) or {}
+                ttype = tgt.get("type")
+                action = binding.get("action")
+                allowed = action_target_types.get(action)
+                if allowed is not None and ttype is not None and ttype not in allowed:
+                    compat_errors += 1
+                    report.error(f"drug {did}: action {action!r} is not valid on a "
+                                 f"{ttype!r} target ({target!r}); its boost/block/tone "
+                                 f"direction is almost certainly mis-assigned")
+                elif tgt.get("vesicular") and action in ("reuptake_inhibitor", "releaser"):
+                    compat_errors += 1
+                    report.error(f"drug {did}: vesicular target {target!r} uses "
+                                 f"{action!r} (reads as a boost); blocking vesicular "
+                                 f"loading depletes -> use vesicular_inhibitor")
             # The Ki annotation's source corpus must resolve (its verbatim-presence
             # in the CSV is confirmed in check_sources).
             ki = binding.get("ki")
@@ -386,6 +422,10 @@ def check_reachability(report, meta, structures, projections, circuits,
                   "-> structure/kind, circuit/receptor/target -> structure) resolves; "
                   "every receptor/target region is in the atlas (its panel 'Found in' "
                   "row is clickable)")
+
+    if compat_errors == 0:
+        report.ok("every binding action is compatible with its target's kind "
+                  "(no mis-assigned boost/block/tone direction)")
 
 
 # --------------------------------------------------------------------------- #
