@@ -106,187 +106,102 @@ README hero shot in `docs/`.
 
 Data + authoring (`tools/`):
 
-- `generate_data.py` — single source of truth for the anatomy (stdlib-only,
-  offline). Defines every region + projection + receptor once and emits the
-  artifacts below; drugs are the exception (authored in `tools/drugs_data.json`,
-  read by `_load_drugs`). Every display string is an `{en,fr}` object wrapped by
-  `_t()` (see Internationalization).
-- `tools/drugs_data.json` — the drug dataset's authored source (JSON list, from
-  Stahl's Prescriber's Guide 8th ed.), read by `_load_drugs`, validated + emitted
-  to `data/drugs.jsonl`. Edit this to add/change a drug.
-- `tools/check_data.py` — stdlib integrity checker over the emitted `public/data/`
-  (see Data checks).
-- `tools/serve.py` — stdlib dev server sending `Cache-Control: no-store` (roots at
-  `public/`; use instead of `python -m http.server`).
+- `generate_data.py` — single source of truth for the anatomy (stdlib-only, offline):
+  defines every region/projection/receptor once, emits the artifacts below. Drugs are the
+  exception (authored in `tools/drugs_data.json`, read by `_load_drugs`). Display strings are
+  `{en,fr}` via `_t()` (see I18n).
+- `tools/drugs_data.json` — the authored drug dataset (from Stahl 8th ed.), read by
+  `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
+- `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see Data checks).
+- `tools/serve.py` — stdlib dev server, `Cache-Control: no-store`, roots at `public/` (see Running).
 - `tools/shot.py` — Playwright screenshot helper (see Screenshots).
-- `tools/demos/` — Playwright demo *video* recorder (site-agnostic). `recorder.py`
-  exposes a `Demo` Python API (capture at an exact 720p + an injected glowing cursor
-  with click ripples + a `slider` range-drag + `begin()` front-trim) and emits an AV1
-  master (`libsvtav1`) + a gifski GIF (configurable framerate). Launches Chromium with
-  ANGLE/desktop-GL flags so it renders on the real GPU; records **headless** by default
-  (headless avoids Chromium's headed-mode video letterboxing while still GPU-rendering).
-  `neurarium.py` is the showcase tour (serves the site via `serve.py`, gates on the
-  loading overlay, then assemble -> explode -> reassemble -> drug focus), writing the
-  README hero `docs/preview.gif` (+ `docs/preview.av1.mp4`) by default. See
-  `tools/demos/README.md`; needs `ffmpeg` (`libsvtav1`) + `gifski` + a GPU/display.
-- `tools/build_source_worklist.py` — lists drug bindings not yet sourced (each with
-  its Stahl page range from the index; input to the source-extraction workflow;
-  skips already-sourced, so resumable).
-- `tools/apply_source_quotes.py` — applies the extraction workflow's accepted
-  quotes onto bindings (re-finds the normalized quote in the drug's page range
-  first; reuses `check_data.py`'s `normalize_for_match`; idempotent).
-- `tools/apply_nbn_sources.py` — sources each drug's NbN line (Stahl prints it
-  verbatim), no agent/judge: greps the line, confirms the dataset `nbn` is a
-  substring, writes a `verified` `nbn_sources` entry. Falls back to Stahl's drug
-  **Class** line for a drug with no NbN line (newer drugs), marking it
-  `nbn_nonstandard`. Idempotent.
-- `tools/apply_category_sources.py` — sources each drug's **class classification**
-  (the `drug_categories` node) from Stahl's "Class" section. Takes an extract/judge
-  results file `[{id, quotes:[...]}]` (Haiku extracts the verbatim class-descriptor
-  line, Sonnet judges it supports our `categories`, a mismatch is left unsourced),
-  re-finds each accepted quote in the drug's Stahl page range, writes a `verified`
-  `category_sources` entry. The category analogue of `apply_source_quotes.py` (a
-  judge is needed since our coarse `categories` re-map Stahl's free-text class line,
-  unlike the fixed NbN field). Idempotent.
-- `tools/fetch_gtopdb.py` — fetches each receptor's tissue-distribution comments from
-  the [Guide to Pharmacology](https://www.guidetopharmacology.org/) web API (corpus #7
-  `gtopdb`), the source for **receptor expression regions**. A `RECEPTOR_GENES` map
-  (receptor id -> HGNC gene) resolves each receptor to a GtoPdb target, caches the raw
-  JSON to `sources/gtopdb/raw/<rid>.json` and one cleaned tissue line per comment to
-  `sources/gtopdb/pages/<targetId>.md` (the quote-gate page; `page` = the GtoPdb
-  targetId), and emits `sources/gtopdb/worklist.json` (per receptor: its candidate tissue
-  quotes + species). Each quote carries the assay **species** (Human/Rat/Mouse/Monkey).
-  Stdlib urllib, polite, idempotent (`--refresh`, `--only`). See Expression locations.
-- `tools/fetch_allen.py` — fetches the [Allen Human Brain Atlas](https://human.brain-map.org/)
-  microarray (corpus #8 `allen_ahba`), the source for **non-receptor target expression
-  regions** (and the residual receptor regions GtoPdb misses; Phase 2). Downloads each
-  human donor's normalized-microarray zip into `sources/allen/raw/` (author-side,
-  gitignored; reads only PACall/SampleAnnot/Probes, never the ~400MB expression matrix),
-  crosswalks each tissue sample to our coarse `base` via the Allen ontology subtree
-  (`BASE_ALLEN`), and calls a `base` **present** for a gene when its representative probe's
-  **PACall** detection boolean fires in >= half that base's samples across donors (a
-  threshold-free "expressed here" call, no judge needed). A `TARGET_GENES` map (target id
-  -> HGNC gene) + reused `fetch_gtopdb.RECEPTOR_GENES` resolve owners to genes. Emits
-  `sources/allen/pages/<gene>.md` (the quote-gate page; `page` = HGNC gene) + a
-  deterministic `sources/allen/confirmed.json`. Confirm-only (only regions the dataset
-  already claims). Skips an unreachable donor with a warning (donor 15496's zip 404s on
-  Allen's server -> 5 donors). Stdlib (urllib/zipfile/csv), `--only`/`--donors`/`--refresh`.
-  See Expression locations. **Microarray measures mRNA (cell bodies), so a transporter
-  (SERT/NET/DAT/VMAT2) confirms at its SOURCE nucleus (raphe/LC/SN-VTA), not its projection
-  terminals; those terminal-region claims honestly stay `llm`.**
-- `tools/apply_location_sources.py` — the location analogue of `apply_source_quotes.py`,
-  `--corpus {gtopdb,allen}` (default gtopdb). **gtopdb**: reads `sources/gtopdb/worklist.json`
-  + a judged file (a confirm-only judge picks which candidate quotes, by index, support each
-  existing LLM-authored "Found in" region; never adds/drops regions). **allen**: reads
-  `sources/allen/confirmed.json` (deterministic, no judge). Both re-confirm each accepted
-  quote on its cached page (`check_data.normalize_for_match`) and merge `verified`
-  `location_sources` (with `species`) into `tools/location_sources.json` (each corpus/pass
-  merges rather than clobbers). `--judged`, `--dry-run`. Idempotent.
+- `tools/demos/` — Playwright demo-video recorder: `recorder.py` (a `Demo` API) + `neurarium.py`
+  (the showcase tour, writes the README hero `docs/preview.gif`). Needs ffmpeg+gifski+GPU; see
+  `tools/demos/README.md`.
+- `tools/build_source_worklist.py` — lists not-yet-sourced drug bindings with Stahl page ranges
+  (input to the source-extraction workflow; resumable).
+- `tools/apply_source_quotes.py` — applies the extraction workflow's accepted quotes onto
+  bindings (re-finds the quote in the page range; idempotent).
+- `tools/apply_nbn_sources.py` — sources each drug's NbN line (greps Stahl's verbatim line,
+  substring-confirms, no judge); falls back to the drug **Class** line (`nbn_nonstandard`) for a
+  newer drug with no NbN line. Idempotent.
+- `tools/apply_category_sources.py` — sources each drug's class classification (`drug_categories`)
+  from an extract/judge results file (a judge is needed: our coarse `categories` re-map Stahl's
+  free-text class line, unlike the fixed NbN field). Idempotent.
+- `tools/fetch_gtopdb.py` — fetches receptor tissue-distribution comments from the Guide to
+  Pharmacology API (corpus #7 `gtopdb`), the source for **receptor expression regions**;
+  `RECEPTOR_GENES` maps receptor->gene->targetId. Caches `sources/gtopdb/` + `worklist.json`
+  (each quote carries assay species). See Expression locations.
+- `tools/fetch_allen.py` — fetches the Allen Human Brain Atlas microarray (corpus #8
+  `allen_ahba`), the source for **target expression regions** + the receptor regions GtoPdb
+  misses; a PACall detection-boolean vote per (gene, region), no judge. `TARGET_GENES` +
+  `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `sources/allen/` + `confirmed.json`.
+  See Expression locations.
+- `tools/apply_location_sources.py` — merges accepted expression quotes into
+  `tools/location_sources.json`, `--corpus {gtopdb,allen}` (gtopdb needs a judged file; allen is
+  deterministic). Idempotent. See Expression locations.
 - `tools/location_sources.json` — machine-written bulk location sources, loaded by
-  `generate_data.py` at import (`_merge_external_location_sources`) into
-  `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`, mirroring how
-  `drugs_data.json` / `*_images_sources.json` keep the generator stdlib. Not served.
-- `tools/fetch_ki.py` — parses the PDSP Ki Database CSV
-  (`sources/books/pdsp_ki/`, author-side) into per-drug binding affinities. Joins on
-  PDSP's HGNC gene symbol (name fallback), prefers human assays, cites one
-  representative CSV row per target (verified). `--drug X` previews; `--apply` writes
-  a `ki` onto every resolvable drug's existing bindings + adds the median-stronger
-  omitted targets as `affinity_only` bindings (idempotent). A curated `ALIAS` map
-  recovers drugs PDSP lists under a related compound (flagged so the viewer warns);
-  combos are skipped. See Drugs.
-- `tools/pdf_to_pages.py`: splits a PDF into one `<page>.md` per page (the per-page
-  text the quote gate checks against); `uv run`, defaults to the Stahl corpus so
-  anyone with the book can rebuild it. `--layout` for the heavier OCR engine.
-- `tools/build_toc_index.py`: builds `INDEX.md` from a PDF's embedded TOC (generic;
-  used for the textbooks + Carlat). `uv run`.
-- `tools/build_index.py`: Stahl-specific page index (detects each monograph by its
-  `THERAPEUTICS` heading). `uv run`.
-- `tools/update_readme_stats.py` — rewrites the README `SOURCING_STATS` block from
-  `meta.provenance_stats` (and syncs the header's proof-first headline % in the
-  optional `SOURCED_HEADLINE` inline markers, so it can't drift from the block), and
-  the `SOURCES_TABLE` block (the reference works grading is checked against) from
-  `meta.source_corpora` + a per-corpus field/role `CORPUS_DESC` map; `--check` exits 1
-  if out of date (CI). Idempotent.
-- `tools/fetch_molecules.py` — downloads each drug's molecular-structure SVG into
-  `public/data/molecules/<id>.svg` (network, idempotent, polite); writes
-  `tools/molecules_sources.json`. See Images.
-- `tools/fetch_structure_images.py` — resolves the *url* of each structure's best
-  Wikipedia illustration (hero) **plus a gallery** of the other gif/svg on its EN+FR
-  articles into `tools/structure_images_sources.json` (network, idempotent, polite;
-  reuses `fetch_molecules.py` helpers). Downloads no bytes. The **same** resolver runs
-  over the wiki-linked **circuits** (`--target structures|circuits|all`, default all),
-  writing their heroes/galleries keyed by circuit id to `tools/circuit_images_sources.json`.
-  See Images.
-- `tools/molecules_sources.json` / `tools/structure_images_sources.json` /
-  `tools/circuit_images_sources.json`: provenance/attribution for the fetch tools
-  (`structure_images_sources.json` + `circuit_images_sources.json` are read by
-  `generate_data.py` offline; not served).
+  `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
+- `tools/fetch_ki.py` — parses the PDSP Ki CSV (`sources/books/pdsp_ki/`, author-side) into
+  per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
+  bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See Drugs.
+- `tools/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
+  `uv run`, `--layout` for OCR.
+- `tools/build_toc_index.py` — `INDEX.md` from a PDF's embedded TOC (generic). `uv run`.
+- `tools/build_index.py` — Stahl-specific page index (by `THERAPEUTICS` heading). `uv run`.
+- `tools/update_readme_stats.py` — rewrites the README `SOURCING_STATS` + `SOURCES_TABLE` blocks
+  (and the headline %) from `meta`; `--check` exits 1 if stale (CI). Idempotent.
+- `tools/fetch_molecules.py` — downloads each drug's molecule SVG into `public/data/molecules/`;
+  writes `tools/molecules_sources.json`. See Images.
+- `tools/fetch_structure_images.py` — resolves the *url* of each structure's (and wiki-linked
+  circuit's) Wikipedia hero + gallery images into `tools/{structure,circuit}_images_sources.json`
+  (`--target structures|circuits|all`); downloads no bytes. See Images.
+- `tools/{molecules,structure_images,circuit_images}_sources.json` — provenance/attribution for
+  the fetch tools (the image ones are read by `generate_data.py` offline; not served).
 - `tools/git-hooks/` — repo-tracked git hooks (see Git hooks).
 
 Emitted data (`public/data/`):
 
-- `meta.json` — a single JSON object of presentation maps + tallies (so the
-  dataset is self-describing and a port needs no hardcoded palette):
-  `projection_colors`, `kind_labels`, `group_labels`, `kind_signs`, `sign_colors`,
-  `sign_labels`, `system_flow_kinds` (drug target system -> projection kind),
-  receptor maps (`receptor_family_labels` whose key order = legend family order,
-  `receptor_class_labels`, `synaptic_labels`), drug maps (`drug_category_labels`
-  whose key order = Drugs legend order, `drug_actions` action->{label,effect},
-  `drug_effect_colors`, `drug_effect_labels`, `drug_targets` = the merged
-  binding-target map: every non-receptor target + every receptor id),
-  `target_type_labels` / `target_type_colors`, `source_corpora`, and
-  `provenance_stats` (the programmatic sourcing tally; see Source provenance).
-- `structures.jsonl` — one region/line: `id`, `name{en,fr}`, `base_name{en,fr}`
-  (hemisphere-stripped, for the legend row), `group`, `position`, `color`,
-  `shape_file`, `classification_provenance`, optional `wikipedia` (+
-  `wikipedia_provenance`), optional `structure_image` (a hot-linked Wikimedia url;
-  both hemispheres share it) + optional `structure_image_gallery` (more hot-linked
-  gif/svg urls for the panel's "show more").
-- `projections.jsonl` — one pathway/line: `from`, `to`, `kind`, `label{en,fr}`,
-  `neurotransmitter{en,fr}`, `description{en,fr}`, optional
-  `sources[{corpus,page,quote,provenance}]` (quote-level, from `KANDEL_QUOTES`;
-  absent -> NOSOURCE), optional `bidirectional`,
-  optional `tentative` (speculative; dotted arrow in an off-by-default section).
-- `circuits.jsonl` — one functional loop/line: `id`, `name{en,fr}`,
-  `structures[ids]` (arrows derived in the viewer), optional `description{en,fr}`
-  + `sources` + `wikipedia` (+ `wikipedia_provenance`; panel live-fetches the lead) +
-  optional `structure_image` (hot-linked Wikimedia hero) + `structure_image_gallery`
-  (more hot-linked gif/svg urls), same shape + rendering as a structure's.
-- `projection_groups.jsonl` — one legend pathway row/line, promoted to a sourced
-  structure so it can open a panel: `id` (`<mode>_<key>`), `mode` (kind|sign),
-  `key` (a kind or a sign), `name{en,fr}`, `description{en,fr}`,
-  `classification_provenance`, optional `wikipedia` (+ provenance) + `sources`. One
-  record per group in BOTH colour modes (7 per-transmitter + 3 per-sign); member
-  pathways are derived in the viewer (kind/sign match), not stored.
-- `receptors.jsonl` — one receptor/line: `id`, `name` (technical, language-
-  neutral), `family`, `neurotransmitter{en,fr}`, `receptor_class`
+- `meta.json` — presentation maps + tallies, so the dataset is self-describing (a port needs
+  no hardcoded palette): `projection_colors`, `kind_labels`, `group_labels`, `kind_signs`,
+  `sign_colors`, `sign_labels`, `system_flow_kinds` (drug target system -> projection kind),
+  the receptor maps (`receptor_family_labels` key order = legend family order,
+  `receptor_class_labels`, `synaptic_labels`), the drug maps (`drug_category_labels` key order =
+  Drugs legend order, `drug_actions` action->{label,effect}, `drug_effect_colors`,
+  `drug_effect_labels`, `drug_targets` = every non-receptor target + every receptor id),
+  `target_type_labels`/`target_type_colors`, `source_corpora`, `provenance_stats` (the sourcing
+  tally; see Source provenance).
+- `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend
+  row), `group`, `position`, `color`, `shape_file`, `classification_provenance`, optional
+  `wikipedia`(+`_provenance`), optional `structure_image` (hot-linked Wikimedia url, shared by
+  both hemispheres) + `structure_image_gallery`.
+- `projections.jsonl` — `from`, `to`, `kind`, `label{en,fr}`, `neurotransmitter{en,fr}`,
+  `description{en,fr}`, optional `sources[{corpus,page,quote,provenance}]` (from `KANDEL_QUOTES`),
+  `bidirectional`, `tentative` (dotted, off-by-default section).
+- `circuits.jsonl` — `id`, `name{en,fr}`, `structures[ids]` (arrows derived in the viewer),
+  optional `description{en,fr}` + `sources` + `wikipedia`(+prov) + `structure_image` (+ gallery);
+  same shape + rendering as a structure's.
+- `projection_groups.jsonl` — a legend pathway row promoted to a sourced structure so it opens a
+  panel: `id` (`<mode>_<key>`), `mode` (kind|sign), `key`, `name{en,fr}`, `description{en,fr}`,
+  `classification_provenance`, optional `wikipedia`(+prov) + `sources`. One record per group in
+  BOTH colour modes (7 per-transmitter + 3 per-sign); member pathways derived in the viewer.
+- `receptors.jsonl` — `id`, `name`, `family`, `neurotransmitter{en,fr}`, `receptor_class`
   (ionotropic/metabotropic/chaperone), `sign` (excit/inhib/modulatory), `synaptic`
-  (pre/post/both), `locations` (structure *base* ids, expanded to both
-  hemispheres), optional `ubiquitous:true` (brain-wide -> lights every structure),
-  `classification_provenance` (the *mechanism* grade only), optional
-  `location_sources` (`{base:[{corpus,page,quote,provenance}]}`, sparse: upgrades an
-  individual "Found in" region above the default `llm`; `"ALL"` = a ubiquitous
-  receptor's one claim), optional `description{en,fr}` + `wikipedia` (+ provenance).
-  Empty locations + no description = a deliberate stub (listed, not focusable).
-- `drugs.jsonl` — one drug/line: `id`, `name` (technical), `categories`,
-  `category_provenance` (the class-classification node's grade, + optional
-  `category_sources[{corpus,page,quote,provenance}]`), optional
-  `nbn{en,fr}` (+ `nbn_sources[{corpus,page,quote,provenance}]`, + optional
-  `nbn_nonstandard:true` when the value is Stahl's drug-class descriptor, not a formal NbN),
-  `bindings[]` (each: `target`,
-  `action`, optional `effect` override, optional `note{en,fr}` or "TODO", optional
-  `tentative`, optional `sources[{corpus,page,quote,provenance}]`, optional `ki`
-  (measured PDSP affinity: `{median,min,max,n_human,n_nonhuman, source:{corpus:pdsp_ki,
-  ki_id,value_nm,species,preparation,radioligand,reference,provenance, + mapped/
-  measured_as/relation when alias-borrowed}}`), optional `affinity_only:true` (a
-  PDSP target with a Ki but no known direction: no action/effect, panel-only)).
-  No drug-level source: a drug's provenance lives per-claim (its bindings' quote
-  `sources`/`ki` + `nbn_sources`), so an unsourced binding shows NOSOURCE. Optional
-  `wikipedia` (+ provenance), optional `structure_image` (vendored
-  `data/molecules/<id>.svg`, set only when the file exists), `focusable` (false if
-  no bindings).
-- `molecules/<id>.svg` — vendored per-drug molecular-structure diagrams (from
-  `fetch_molecules.py`). Structure illustrations are NOT vendored (hot-linked, see Images).
+  (pre/post/both), `locations` (structure *base* ids, both hemispheres), optional
+  `ubiquitous:true`, `classification_provenance` (mechanism grade only), optional
+  `location_sources` (`{base:[quote-source]}`, sparse per-region upgrade above `llm`; `"ALL"` =
+  the ubiquitous claim), optional `description{en,fr}` + `wikipedia`(+prov). Empty locations + no
+  description = a deliberate stub (listed, not focusable).
+- `drugs.jsonl` — `id`, `name`, `categories`, `category_provenance` (+ optional
+  `category_sources`), optional `nbn{en,fr}` (+ `nbn_sources`, + `nbn_nonstandard:true` when the
+  value is Stahl's class descriptor not a formal NbN), `bindings[]` (each: `target`, `action`,
+  optional `effect`/`note{en,fr}`/`tentative`/`sources[{corpus,page,quote,provenance}]`/`ki`
+  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
+  optional `wikipedia`(+prov), optional `structure_image` (vendored `data/molecules/<id>.svg`,
+  only when the file exists), `focusable`. No drug-level source: provenance is per-claim (see
+  Source provenance).
+- `molecules/<id>.svg` — vendored per-drug structure diagrams (`fetch_molecules.py`). Structure
+  illustrations are NOT vendored (hot-linked, see Images).
 
 Geometry (`data/shapes/<name>.json`): one file per distinct *form*. L/R pairs
 share a single right-side file; the left member sets `mirror:true` on its
@@ -308,52 +223,34 @@ structure record and the viewer reflects it across x. Three types:
 
 Viewer (`public/`):
 
-- `index.html` — page shell: loads three.js (vendored, import map) and, on
-  `?debug=1` only, vendored eruda. Holds the bottom-left collapsible `#controls`
-  ("neurarium") panel, the popups (`#shortcuts-modal`, `#legend-modal`,
-  `#sourcing-modal`, `#about-modal`, `#image-lightbox`, all `.modal-overlay`), the
-  `#banners` stack (see Controls), and the startup `#loading` overlay (see Loading
-  overlay). The UI-chrome accent is the `--accent*`
-  palette in `:root` (purple; sliders/tabs/focus/links/hover); data + semantic
-  colours (projection-kind blue etc.) live in `meta.json`, never here.
-- `js/data.js` — fetches `meta.json` + the `.jsonl` files + all shape files;
-  returns a normalized `{structures, projections, circuits, projectionGroups,
-  projectionGroupsByKey, receptors, targets, drugs, drugsByTarget, byId, meta}`.
-  Resolves each projection's `color`/`sign`, each receptor's labels +
-  `structureIds`, each drug's localized fields + per-binding `targetName`/
-  `actionLabel`/`effect`/`effectColor`/`structureIds`/`flowKind` (the target
-  system's mapped projection kind) + the union `structureIds` + `flowKinds` +
-  `focusable` + search `keywords`. Builds the merged `targets` browse
-  list (receptors + non-receptor drug targets, one normalized focusable entry each)
-  and `drugsByTarget` (reverse index target -> drugs + resolved binding).
-  `projectionGroupsByKey` indexes groups by `${mode}:${key}`. `meta` carries the
-  localized presentation maps.
-- `js/shapes.js` — `buildGeometry()` dispatches on type to `buildBlobGeometry` /
-  `buildCurveGeometry` / `buildCompositeGeometry`; `mirrorGeometryX` for the left
-  member. Self-contained Perlin noise + `fractalNoise` (fBm/ridged/domain-warp).
-  Cortical lobes are smooth domes rendered cel-shaded (`MeshToonMaterial`) carrying
-  a painted-on swirl motif (`injectCortexSwirl` / `CORTEX_SWIRL`: domain-warped
-  noise contour "ink" lines, pure colour, no relief). `buildBlobGeometry` honours
-  `clip_planes` when `JIGSAW_CLIP.enabled`. No deps beyond three.js.
-- `js/arrows.js` — curved tube+cone arrows; colour from `projection.color`,
-  recolourable via `setColor` (colour-mode switch); `tentative` -> dotted tube via
-  a small local `mergeIndexedGeometries`. Exposes `arrow.curve`. Each end attaches
-  to the structure-surface point *nearest the other end* (`surfaceToward`, a
-  nearest-vertex scan), so the tip lands on real mass even for a concave region
-  (the C-shaped caudate, whose volume centre is in the loop's hollow), not in empty
-  space. `update(fast)` re-fits the arrow; `fast` skips the per-end nearest-surface
-  scans (reusing each end's cached offset) + defers the pick-hull/halo rebuild, for
-  a cheap spread (see Spread performance); `ensurePickGeometry()` rebuilds a
-  deferred pick hull on demand. `setWidthScale(s)` re-fits just the shaft radius +
-  cone cross-section (from the cached arc, no surface scan) so arrows hold a
-  constant apparent width across zooms (see Arrow width). Arrows never render fully
-  opaque: `setOpacity` clamps to `ARROW_MAX_OPACITY` (0.8) so even the undimmed
-  "full" state (`setOpacity(1)`) is a translucent overlay the anatomy shows through.
-- `js/labels.js` — floating structure-name labels (CSS2DRenderer): one hidden
-  label per region, shown on hover / show-all / when pinned (`setPinned`, which
-  takes a mesh or a list). Each label reads the hemisphere-stripped `base_name`
-  (never "Right/Left ..."; the side is obvious from the label's position, and the
-  prefix made show-all illegible).
+- `index.html` — page shell: loads three.js (vendored import map) and, on `?debug=1`, vendored
+  eruda. Holds the `#controls` panel, the popups (`#shortcuts-modal`, `#legend-modal`,
+  `#sourcing-modal`, `#about-modal`, `#image-lightbox`, all `.modal-overlay`), the `#banners`
+  stack, the startup `#loading` overlay. UI-chrome accent = the `--accent*` palette in `:root`;
+  data/semantic colours live in `meta.json`, never here.
+- `js/data.js` — fetches `meta.json` + the `.jsonl` + shape files; returns a normalized
+  `{structures, projections, circuits, projectionGroups, projectionGroupsByKey, receptors,
+  targets, drugs, drugsByTarget, byId, meta}`. Resolves each node's localized fields + derived
+  render props (projection `color`/`sign`, receptor labels + `structureIds`, per-binding
+  `targetName`/`actionLabel`/`effect`/`effectColor`/`structureIds`/`flowKind` + the drug's union
+  `structureIds`/`flowKinds`/`focusable`/search `keywords`); builds the merged `targets` browse
+  list, the `drugsByTarget` reverse index, and `projectionGroupsByKey` (`${mode}:${key}`).
+- `js/shapes.js` — `buildGeometry()` dispatches on type to `buildBlobGeometry`/
+  `buildCurveGeometry`/`buildCompositeGeometry`; `mirrorGeometryX` for the left member.
+  Self-contained Perlin `fractalNoise` (fBm/ridged/domain-warp). Cortical lobes are cel-shaded
+  (`MeshToonMaterial`) domes with a shader-drawn swirl (`injectCortexSwirl`/`CORTEX_SWIRL`, pure
+  colour, no relief). `buildBlobGeometry` honours `clip_planes` when `JIGSAW_CLIP.enabled`.
+- `js/arrows.js` — curved tube+cone arrows; colour from `projection.color`, recolourable via
+  `setColor`; `tentative` -> dotted. Exposes `arrow.curve`. Each end attaches to the surface point
+  *nearest the other end* (`surfaceToward`, a nearest-vertex scan) so the tip lands on real mass
+  even for a concave region (the C-shaped caudate). `update(fast)` re-fits; `fast` reuses the
+  cached offset + defers the pick-hull rebuild (see Spread performance), `ensurePickGeometry()`
+  rebuilds it on demand. `setWidthScale(s)` rebuilds only the shaft/cone width from the cached arc
+  (see Arrow width). `setOpacity` clamps to `ARROW_MAX_OPACITY` (0.8), so arrows are always a
+  translucent overlay.
+- `js/labels.js` — floating name labels (CSS2DRenderer): one hidden label per region, shown on
+  hover / show-all / when pinned (`setPinned`). Reads the hemisphere-stripped `base_name` (the
+  side is obvious from position).
 - `js/circuit-schedule.js` — `scheduleCircuit()` BFS firing order for the circuit
   pulse (no three.js, testable; see Circuit animation).
 - `js/circuit-anim.js` — `createCircuitAnimation` renders that schedule as beads
@@ -365,18 +262,14 @@ Viewer (`public/`):
   surface wash; `matches`. Flow overlay reuses `circuit-anim.js`. See Drugs.
 - `js/surface-wash.js` — shared `buildWashShell` + `washStrength` "wash of light"
   primitive (used by circuit echo + drug glow).
-- `js/anim-settings.js` — `animSettings`, the single source of truth for the
-  decorative-animation state, read by every animated module: `enabled` (the user's
-  **Animations** toggle; default on for a fine pointer, off for a coarse pointer /
-  reduced-motion; persisted to `localStorage`) + `quality` (0..1 adaptive level; not
-  persisted). See Settings & toggles (the toggle) + Rendering (adaptive quality).
-- `js/wiki.js` — `fetchWikiLead(url, lang)` runtime fetch of a Wikipedia lead;
-  locale wins via langlinks, English fallback; cached; best-effort (failure -> null).
-- `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode +
-  transparency; `createIntroAnimation`; auto-rotate; hover raycasting; arrow +
-  structure picking; `createInfoPanel`; the search; `buildLegend` (Structures +
-  Projections rows, returns the shared focus-greying callback), `buildLegendKey`
-  (static key), `buildTargetLegend`, `buildDrugLegend`; the on-demand render loop.
+- `js/anim-settings.js` — `animSettings`, the single source of truth for decorative-animation
+  state (read by every animated module): `enabled` (the **Animations** toggle) + `quality` (0..1
+  adaptive). See Settings & toggles + Rendering (adaptive quality).
+- `js/wiki.js` — `fetchWikiLead(url, lang)` runtime fetch of a Wikipedia lead; locale wins via
+  langlinks, English fallback; cached; best-effort (failure -> null).
+- `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,
+  auto-rotate, hover/pick raycasting; `createInfoPanel`; search; the legend builders
+  (`buildLegend`/`buildLegendKey`/`buildTargetLegend`/`buildDrugLegend`); the on-demand render loop.
 - `app-config.js` — `window.__APP_CONFIG__`. This committed copy is the local-dev
   fallback (feature fields empty). In the container `entrypoint.sh` renders an
   env-filled copy into `/gen` and Caddy serves that. Generic name (not
