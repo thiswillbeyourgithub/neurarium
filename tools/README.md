@@ -136,7 +136,10 @@ Screenshots).
   `RECEPTORS` in the original order), the `regions/` subpackage (one module per anatomical `group`,
   e.g. `cortex.py`/`basal_ganglia.py`, each exposing `PAIRED` + `MIDLINE`; `__init__.py` concatenates
   them into `PAIRED`/`MIDLINE` in the original order), and `geometry.py` (the shared cortical-dome SDF
-  helpers, e.g. `_cortex_lobe_entry` + `MIDLINE_GAP`, imported by `regions/cortex.py` and `generate_data.py`).
+  helpers, e.g. `_cortex_lobe_entry` + `MIDLINE_GAP`, imported by `regions/cortex.py` and `generate_data.py`),
+  and `connectivity.py` (the three connectivity node literals `PROJECTIONS`/`CIRCUITS`/`PROJECTION_GROUPS`
+  plus the `_KQ_*`/`_SG_*` pathway quote-source constants they cite; the shared `_kandel`/`_nieuwenhuys`/`_stahl_ess`
+  quote constructors live in `provenance.py`).
 - `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).

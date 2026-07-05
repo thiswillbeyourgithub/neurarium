@@ -54,6 +54,25 @@ WIKIPEDIA_PROVENANCE: dict[str, str] = {}
 WIKIPEDIA_DEFAULT_PROVENANCE = "sourced"
 
 
+# Verified quote-source constructors: build the ``{corpus, page, quote}`` source
+# shape for a book corpus, pre-graded ``verified`` (the quote is confirmed on the
+# cited page by ``check_data.py``). Shared by every data module that cites a book.
+def _kandel(page: int, quote: str) -> dict[str, Any]:
+    """A verified Kandel quote-source (the drug-binding ``{corpus,page,quote}`` shape)."""
+    return dict(corpus="kandel", page=page, provenance="verified", quote=quote)
+
+
+def _nieuwenhuys(page: int, quote: str) -> dict[str, Any]:
+    """A verified Nieuwenhuys atlas quote-source (``page`` = the PDF/.md page number)."""
+    return dict(corpus="nieuwenhuys", page=page, provenance="verified", quote=quote)
+
+
+def _stahl_ess(page: int, quote: str) -> dict[str, Any]:
+    """A verified Stahl Essential Psychopharmacology quote-source."""
+    return dict(corpus="stahl_essential", page=page,
+                provenance="verified", quote=quote)
+
+
 def _provenance(level: str, what: str) -> str:
     """Validate a provenance grade against :data:`PROVENANCE_LEVELS` (typo guard)."""
     if level not in PROVENANCE_LEVELS:
