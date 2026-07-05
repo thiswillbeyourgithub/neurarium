@@ -1157,6 +1157,24 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
  * drugEffectLabels), so the key can never drift from what the scene draws.
  * @param {import("./data.js").BrainData} data
  */
+/**
+ * Fill `el` with `str`, rendering `*emphasis*` spans as <em>. Builds real text +
+ * <em> DOM nodes (never innerHTML), so it is injection-safe for any string.
+ */
+function setInlineEmphasis(el, str) {
+  el.replaceChildren();
+  // Odd-indexed capture groups are the emphasized runs.
+  (str || "").split(/\*([^*]+)\*/g).forEach((part, i) => {
+    if (i % 2 === 1) {
+      const em = document.createElement("em");
+      em.textContent = part;
+      el.appendChild(em);
+    } else if (part) {
+      el.appendChild(document.createTextNode(part));
+    }
+  });
+}
+
 function buildLegendKey(data) {
   const body = document.getElementById("legend-body");
   if (!body) return;
@@ -1171,7 +1189,7 @@ function buildLegendKey(data) {
     body.appendChild(h);
     const cap = document.createElement("p");
     cap.className = "legend-caption";
-    cap.textContent = t(captionKey);
+    setInlineEmphasis(cap, t(captionKey));
     body.appendChild(cap);
     for (const { color, label, line } of entries) {
       addLegendItem(body, color, label, Boolean(line));

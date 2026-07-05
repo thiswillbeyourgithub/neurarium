@@ -505,9 +505,16 @@
       .modal-overlay[hidden] { display: none; }
       .modal {
         position: relative; /* .panel is fixed; the overlay does the centering */
-        width: min(340px, 100%);
+        /* Roomy on desktop, still safe on a phone (the -32px matches the overlay
+           padding). The .modal wins over .panel's narrow feel; each popup's own
+           content sets its natural width up to this cap. */
+        width: min(540px, calc(100vw - 32px));
         max-height: calc(100vh - 32px);
         overflow-y: auto;
+        /* .modal reuses the .panel class for chrome, but .panel sets
+           user-select:none (it is the 3D-control surface). Popups are reading
+           material, so re-enable text selection for their content. */
+        user-select: text;
       }
       .modal h2 { margin: 2px 0 14px; font-size: 15px; padding-right: 20px; }
       /* Image lightbox (#image-lightbox): the clicked illustration shown large,
