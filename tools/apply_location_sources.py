@@ -11,18 +11,18 @@ so a stale input can't smuggle an unsourced quote through. It is the location an
 of ``apply_source_quotes.py`` / ``apply_category_sources.py``. Idempotent (dedup by
 quote); each corpus/pass merges rather than clobbers, so both can write the same file.
 
-``--corpus gtopdb`` (default): reads ``sources/gtopdb/worklist.json`` + a ``--judged``
+``--corpus gtopdb`` (default): reads ``data_sources/gtopdb/worklist.json`` + a ``--judged``
 file; a confirm-only LLM judge maps each receptor region to a candidate tissue quote by
-**index** (no free text, no drift). Pages: ``sources/gtopdb/pages/<targetId>.md``.
+**index** (no free text, no drift). Pages: ``data_sources/gtopdb/pages/<targetId>.md``.
 
-``--corpus allen``: reads ``sources/allen/confirmed.json`` (written by
+``--corpus allen``: reads ``data_sources/allen/confirmed.json`` (written by
 ``tools/fetch_allen.py``, which aggregates the Allen microarray PACall boolean into a
 deterministic present/absent per (gene, region) -> no judge needed). Pages:
-``sources/allen/pages/<gene>.md``; every source is ``species: Human``.
+``data_sources/allen/pages/<gene>.md``; every source is ``species: Human``.
 
 Run from the repo root, then regenerate + check::
 
-    python tools/apply_location_sources.py --corpus gtopdb --judged sources/gtopdb/judged.json
+    python tools/apply_location_sources.py --corpus gtopdb --judged data_sources/gtopdb/judged.json
     python tools/apply_location_sources.py --corpus allen
     python tools/generate_data.py && python tools/check_data.py
 
@@ -37,10 +37,10 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 TOOLS = Path(__file__).resolve().parent
-GTOPDB = REPO / "sources" / "gtopdb"
+GTOPDB = REPO / "data_sources" / "gtopdb"
 WORKLIST = GTOPDB / "worklist.json"
 PAGES = GTOPDB / "pages"
-ALLEN = REPO / "sources" / "allen"
+ALLEN = REPO / "data_sources" / "allen"
 ALLEN_PAGES = ALLEN / "pages"
 ALLEN_CONFIRMED = ALLEN / "confirmed.json"
 OUT = TOOLS / "location_sources.json"

@@ -16,7 +16,7 @@ do under attribution.
 
 Pipeline (mirrors ``fetch_gtopdb.py`` -> ``apply_location_sources.py``):
   1. Download each donor's ``normalized_microarray_donor<id>.zip`` (~426 MB) into
-     ``sources/allen/raw/`` (author-side, gitignored; skipped if already present). We read
+     ``data_sources/allen/raw/`` (author-side, gitignored; skipped if already present). We read
      only PACall.csv + SampleAnnot.csv + Probes.csv from the zip, never the ~400 MB
      MicroarrayExpression.csv, so memory stays small.
   2. Map each tissue sample to our coarse ``base`` region via ``BASE_ALLEN`` (the Allen
@@ -25,8 +25,8 @@ Pipeline (mirrors ``fetch_gtopdb.py`` -> ``apply_location_sources.py``):
      representative probe (most PACall detections) and, per base, the fraction of that
      base's samples that detect it. A base is **present** if that fraction >= ``PRESENT_MIN``
      (majority) across the downloaded donors.
-  4. Emit ``sources/allen/pages/<gene>.md`` (one presence line per present base; the
-     quote-gate page) and ``sources/allen/confirmed.json`` (the deterministic confirm list
+  4. Emit ``data_sources/allen/pages/<gene>.md`` (one presence line per present base; the
+     quote-gate page) and ``data_sources/allen/confirmed.json`` (the deterministic confirm list
      ``[{owner_kind, owner, base, page, quote}]`` that ``apply_location_sources.py
      --corpus allen`` merges into ``tools/location_sources.json``). Un-confirmable
      (owner, base) pairs (region has 0 Allen samples, e.g. pituitary) are logged, not
@@ -54,7 +54,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 TOOLS = Path(__file__).resolve().parent
-ALLEN = REPO / "sources" / "allen"
+ALLEN = REPO / "data_sources" / "allen"
 RAW = ALLEN / "raw"
 PAGES = ALLEN / "pages"
 ONTOLOGY_CACHE = RAW / "ontology.json"
@@ -337,7 +337,7 @@ def main() -> int:
         log(f"  ... +{len(unconfirmable)-40} more un-confirmable (region unsampled/off-atlas)")
     log(f"\nowners with claims: {stats['owners']}; confirmed present: {stats['confirmed']}; "
         f"sampled-but-absent (stays llm): {stats['absent']}; unsampled (stays llm): {stats['nodata']}")
-    log(f"wrote {len(page_lines)} gene pages + sources/allen/confirmed.json")
+    log(f"wrote {len(page_lines)} gene pages + data_sources/allen/confirmed.json")
     return 0
 
 

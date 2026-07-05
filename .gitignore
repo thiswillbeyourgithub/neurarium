@@ -12,7 +12,7 @@ TODO.md
 
 # Source books (copyrighted reference PDFs + their extracted per-page Markdown
 # and indexes, used author-side for sourcing); large and not for distribution.
-/sources/
+/data_sources/
 
 __pycache__
 .serena

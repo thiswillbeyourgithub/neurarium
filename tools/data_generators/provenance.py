@@ -245,7 +245,7 @@ def _location_sources(
 # grade trustworthy. The design is source-agnostic: Stahl is the first corpus,
 # more can be added here without touching the schema. ``pages_dir`` is an
 # author-side path (relative to the repo root) holding one ``<page>.md`` per page
-# (see ``sources/books/stahl/`` in CLAUDE.local.md); it is emitted into ``meta.json`` so the
+# (see ``data_sources/books/stahl/`` in CLAUDE.local.md); it is emitted into ``meta.json`` so the
 # checker is data-driven, and is simply absent on a checkout without that
 # (uncommitted, large) source material, in which case the quote-in-page check is
 # skipped while the structural checks still run.
@@ -259,7 +259,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential "
                     "Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
         "url": "TODO",
-        "pages_dir": "sources/books/stahl/pages",
+        "pages_dir": "data_sources/books/stahl/pages",
     },
     "kandel": {
         # Anatomy/pathway corpus (the projection claims, currently LLM-only, are
@@ -269,7 +269,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA, eds. "
                     "Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
         "url": "TODO",
-        "pages_dir": "sources/books/eric_kandel/pages",
+        "pages_dir": "data_sources/books/eric_kandel/pages",
     },
     "stahl_essential": {
         # Mechanism/receptor corpus: the receptor + non-receptor-target
@@ -280,7 +280,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "Neuroscientific Basis and Practical Applications. 5th ed. "
                     "Cambridge University Press; 2021.",
         "url": "TODO",
-        "pages_dir": "sources/books/stahl_essential_pharmacology/pages",
+        "pages_dir": "data_sources/books/stahl_essential_pharmacology/pages",
     },
     "carlat": {
         # Second drug corpus: cross-sources drug bindings Stahl did not state.
@@ -288,7 +288,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "citation": "Carlat DJ. The Carlat Medication Fact Book for Psychiatric "
                     "Practice. 7th ed. Carlat Publishing; 2024.",
         "url": "TODO",
-        "pages_dir": "sources/books/carlat_medication/pages",
+        "pages_dir": "data_sources/books/carlat_medication/pages",
     },
     "nieuwenhuys": {
         # Systematic neuroanatomy/connectivity corpus: backs region-anatomy +
@@ -300,7 +300,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "citation": "Nieuwenhuys R, Voogd J, van Huijzen C. The Human Central "
                     "Nervous System. 4th ed. Springer; 2008.",
         "url": "TODO",
-        "pages_dir": "sources/books/nieuwenhuys_atlas/pages",
+        "pages_dir": "data_sources/books/nieuwenhuys_atlas/pages",
     },
     "gtopdb": {
         # Expression/localization corpus: the IUPHAR/BPS Guide to Pharmacology
@@ -316,7 +316,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "Guide to Pharmacology. Nucleic Acids Res. "
                     "guidetopharmacology.org.",
         "url": "https://www.guidetopharmacology.org/",
-        "pages_dir": "sources/gtopdb/pages",
+        "pages_dir": "data_sources/gtopdb/pages",
     },
     "pdsp_ki": {
         # Binding-affinity corpus: measured Ki (nM) values backing a drug binding's
@@ -324,13 +324,13 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         # rows, not paged text, so it has no `pages_dir`; check_data confirms a
         # cited Ki id/value against the `csv` file instead (author-side, skipped on
         # a clone without it, like the quote gate). See tools/fetch_ki.py +
-        # sources/books/pdsp_ki/README.md.
+        # data_sources/books/pdsp_ki/README.md.
         "ref": "PDSP Ki Database (NIMH PDSP)",
         "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, "
                     "directed by Bryan L. Roth, University of North Carolina at "
                     "Chapel Hill.",
         "url": "https://pdspdb.unc.edu/databases/kidb.php",
-        "csv": "sources/books/pdsp_ki/KiDatabase.csv",
+        "csv": "data_sources/books/pdsp_ki/KiDatabase.csv",
     },
     "allen_ahba": {
         # Expression corpus: the Allen Human Brain Atlas microarray, backing a
@@ -349,7 +349,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "transcriptome. Nature. 2012;489(7416):391-399. "
                     "human.brain-map.org.",
         "url": "https://human.brain-map.org/",
-        "pages_dir": "sources/allen/pages",
+        "pages_dir": "data_sources/allen/pages",
     },
 }
 

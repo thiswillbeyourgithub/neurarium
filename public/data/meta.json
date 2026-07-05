@@ -2704,49 +2704,49 @@
       "ref": "Prescriber's Guide: Stahl's Essential Psychopharmacology, 8th ed.",
       "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
       "url": "TODO",
-      "pages_dir": "sources/books/stahl/pages"
+      "pages_dir": "data_sources/books/stahl/pages"
     },
     "kandel": {
       "ref": "Kandel, Principles of Neural Science, 6th ed.",
       "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA, eds. Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
       "url": "TODO",
-      "pages_dir": "sources/books/eric_kandel/pages"
+      "pages_dir": "data_sources/books/eric_kandel/pages"
     },
     "stahl_essential": {
       "ref": "Stahl's Essential Psychopharmacology: Neuroscientific Basis, 5th ed.",
       "citation": "Stahl SM. Stahl's Essential Psychopharmacology: Neuroscientific Basis and Practical Applications. 5th ed. Cambridge University Press; 2021.",
       "url": "TODO",
-      "pages_dir": "sources/books/stahl_essential_pharmacology/pages"
+      "pages_dir": "data_sources/books/stahl_essential_pharmacology/pages"
     },
     "carlat": {
       "ref": "Carlat Medication Fact Book for Psychiatric Practice, 7th ed.",
       "citation": "Carlat DJ. The Carlat Medication Fact Book for Psychiatric Practice. 7th ed. Carlat Publishing; 2024.",
       "url": "TODO",
-      "pages_dir": "sources/books/carlat_medication/pages"
+      "pages_dir": "data_sources/books/carlat_medication/pages"
     },
     "nieuwenhuys": {
       "ref": "Nieuwenhuys, Voogd & van Huijzen, The Human Central Nervous System, 4th ed.",
       "citation": "Nieuwenhuys R, Voogd J, van Huijzen C. The Human Central Nervous System. 4th ed. Springer; 2008.",
       "url": "TODO",
-      "pages_dir": "sources/books/nieuwenhuys_atlas/pages"
+      "pages_dir": "data_sources/books/nieuwenhuys_atlas/pages"
     },
     "gtopdb": {
       "ref": "IUPHAR/BPS Guide to Pharmacology (GtoPdb), tissue distribution",
       "citation": "Harding SD, Armstrong JF, Faccenda E, et al. The IUPHAR/BPS Guide to Pharmacology. Nucleic Acids Res. guidetopharmacology.org.",
       "url": "https://www.guidetopharmacology.org/",
-      "pages_dir": "sources/gtopdb/pages"
+      "pages_dir": "data_sources/gtopdb/pages"
     },
     "pdsp_ki": {
       "ref": "PDSP Ki Database (NIMH PDSP)",
       "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, directed by Bryan L. Roth, University of North Carolina at Chapel Hill.",
       "url": "https://pdspdb.unc.edu/databases/kidb.php",
-      "csv": "sources/books/pdsp_ki/KiDatabase.csv"
+      "csv": "data_sources/books/pdsp_ki/KiDatabase.csv"
     },
     "allen_ahba": {
       "ref": "Allen Human Brain Atlas, microarray (Hawrylycz et al. 2012)",
       "citation": "Hawrylycz MJ, Lein ES, Guillozet-Bongaarts AL, et al. An anatomically comprehensive atlas of the adult human brain transcriptome. Nature. 2012;489(7416):391-399. human.brain-map.org.",
       "url": "https://human.brain-map.org/",
-      "pages_dir": "sources/allen/pages"
+      "pages_dir": "data_sources/allen/pages"
     }
   },
   "provenance_stats": {

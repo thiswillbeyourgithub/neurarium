@@ -29,8 +29,8 @@ import drugs_io
 
 ROOT = Path(__file__).resolve().parent.parent
 DRUGS_JSON = drugs_io.DRUGS_PATH
-PAGES = ROOT / "sources" / "books" / "stahl" / "pages"
-INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
+PAGES = ROOT / "data_sources" / "books" / "stahl" / "pages"
+INDEX = ROOT / "data_sources" / "books" / "stahl" / "INDEX.md"
 
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes
 # check_data" by construction (no second, drifting implementation).

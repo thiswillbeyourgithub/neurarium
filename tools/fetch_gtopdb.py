@@ -14,7 +14,7 @@ It is the GtoPdb analogue of ``build_source_worklist.py``: network, polite, idem
 ``generate_data.py``; a separate apply step turns judged matches into
 ``RECEPTOR_LOCATION_SOURCES`` entries.
 
-Outputs (author-side, under the gitignored ``sources/gtopdb/``):
+Outputs (author-side, under the gitignored ``data_sources/gtopdb/``):
 - ``raw/<receptor_id>.json`` : the raw GtoPdb tissueDistribution response (reference).
 - ``pages/<targetId>.md``    : the cleaned tissue strings, one per line. This is the
   corpus "page" the ``gtopdb`` SOURCE_CORPORA entry points at, so ``check_data.py``'s
@@ -46,7 +46,7 @@ import urllib.request
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-OUT = REPO / "sources" / "gtopdb"
+OUT = REPO / "data_sources" / "gtopdb"
 RAW = OUT / "raw"
 PAGES = OUT / "pages"
 WORKLIST = OUT / "worklist.json"

@@ -56,7 +56,7 @@ Six families of checks:
    ``corpus`` must resolve to ``meta.source_corpora``, a verified source must
    carry a page + quote, and the **normalized** quote must be an exact substring
    of the **normalized** cited page text (``<pages_dir>/<page>.md``). The page
-   material is author-side and may be absent on a clone (see ``sources/books/stahl/`` in
+   material is author-side and may be absent on a clone (see ``data_sources/books/stahl/`` in
    CLAUDE.local.md); the quote-in-page check is then **skipped with a warning**
    while the structural checks still run. A quote that is genuinely not on its
    page (an invented or mistyped extraction) is an **error**, so this is the gate
@@ -81,7 +81,7 @@ from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "public" / "data"
 # Repo root, used to resolve a source corpus's author-side ``pages_dir`` (e.g.
-# ``sources/books/stahl/pages``) for the quote-in-page check (see check_sources).
+# ``data_sources/books/stahl/pages``) for the quote-in-page check (see check_sources).
 REPO_ROOT = DATA_DIR.parent.parent
 
 # A path like "...sources[3].url" (a citation) or "...source_corpora.<id>.url" (a
@@ -739,7 +739,7 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
       substring of the **normalized** page text (see :func:`normalize_for_match`).
 
     The page material is author-side and may be absent on a plain checkout (it is
-    large + uncommitted, see ``sources/books/stahl/`` in CLAUDE.local.md); when a corpus has no
+    large + uncommitted, see ``data_sources/books/stahl/`` in CLAUDE.local.md); when a corpus has no
     ``pages_dir`` on disk the quote-in-page check is **skipped with a warning**
     while the structural checks above still run. So this hard-fails an invented or
     mistyped quote on the author's machine (and the pre-push gate) without
@@ -849,7 +849,7 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
     # A binding's `ki` cites one CSV row by ki_id (the analogue of a quote's page):
     # confirm that row really exists in the corpus CSV with the cited value. Like the
     # quote gate this is author-side (the CSV is large + uncommitted, see
-    # sources/books/pdsp_ki/), skipped with a warning on a clone that lacks it.
+    # data_sources/books/pdsp_ki/), skipped with a warning on a clone that lacks it.
     ki_before = report.errors
     ki_index_cache = {}          # corpus -> {ki_id: ki_val_str} or None if csv absent
 

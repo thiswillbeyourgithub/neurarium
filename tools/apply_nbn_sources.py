@@ -6,7 +6,7 @@ verbatim ``Neuroscience-based Nomenclature: <value>`` line on each drug's first
 page. So this needs no extraction agent and no LLM judge. For every drug that has
 an ``nbn`` but no ``nbn_sources`` yet, it:
 
-* searches the drug's Stahl page range (from ``sources/books/stahl/INDEX.md``) for that line;
+* searches the drug's Stahl page range (from ``data_sources/books/stahl/INDEX.md``) for that line;
 * captures the line **verbatim** from the page as the quote;
 * confirms the dataset's own ``nbn`` value is a substring of that line (after the
   same normalization ``check_data.py`` uses), so the quote provably states *this
@@ -42,8 +42,8 @@ import drugs_io
 
 ROOT = Path(__file__).resolve().parent.parent
 DRUGS_JSON = drugs_io.DRUGS_PATH
-PAGES = ROOT / "sources" / "books" / "stahl" / "pages"
-INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
+PAGES = ROOT / "data_sources" / "books" / "stahl" / "pages"
+INDEX = ROOT / "data_sources" / "books" / "stahl" / "INDEX.md"
 
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes
 # check_data" by construction (no second, drifting implementation).

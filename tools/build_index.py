@@ -12,7 +12,7 @@ page before the next monograph; the last drug stops at the back-matter
 ("Index by Drug Name").
 
 Usage (from the repo root):
-    uv run tools/build_index.py           # reads sources/books/stahl/pages -> its INDEX.md
+    uv run tools/build_index.py           # reads data_sources/books/stahl/pages -> its INDEX.md
     uv run tools/build_index.py --pages PAGES_DIR --out INDEX.md
 
 Built with the help of Claude Code.
@@ -58,11 +58,11 @@ def backmatter_page(pages_dir: Path, after: int) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--pages", default="sources/books/stahl/pages", type=Path,
+    parser.add_argument("--pages", default="data_sources/books/stahl/pages", type=Path,
                         help="directory of per-page .md files "
-                             "(default: sources/books/stahl/pages)")
-    parser.add_argument("--out", default="sources/books/stahl/INDEX.md", type=Path,
-                        help="output index file (default: sources/books/stahl/INDEX.md)")
+                             "(default: data_sources/books/stahl/pages)")
+    parser.add_argument("--out", default="data_sources/books/stahl/INDEX.md", type=Path,
+                        help="output index file (default: data_sources/books/stahl/INDEX.md)")
     args = parser.parse_args()
 
     starts = find_monographs(args.pages)

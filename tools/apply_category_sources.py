@@ -16,7 +16,7 @@ descriptor line; Sonnet judges whether it supports our category IDs and picks th
 line(s) to cite; a genuine contradiction is flagged, not sourced). That pass'
 output is a results file ``[{id, quotes:[...]}]``; this tool then, for each drug:
 
-* re-searches the drug's Stahl page range (from ``sources/books/stahl/INDEX.md``)
+* re-searches the drug's Stahl page range (from ``data_sources/books/stahl/INDEX.md``)
   for each accepted (normalized) quote, so the *page is found locally* rather than
   trusted from the agent;
 * only when a quote is genuinely present does it write
@@ -43,8 +43,8 @@ import drugs_io
 
 ROOT = Path(__file__).resolve().parent.parent
 DRUGS_JSON = drugs_io.DRUGS_PATH
-PAGES = ROOT / "sources" / "books" / "stahl" / "pages"
-INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
+PAGES = ROOT / "data_sources" / "books" / "stahl" / "pages"
+INDEX = ROOT / "data_sources" / "books" / "stahl" / "INDEX.md"
 
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes
 # check_data" by construction (no second, drifting implementation).

@@ -99,16 +99,16 @@ network, idempotent, polite; each touches only what changed). Always finish with
    scopes to one.
 3. **PDSP Ki**: re-download the whole-DB CSV from
    `https://pdspdb.unc.edu/databases/kiDownload/download.php` over
-   `sources/books/pdsp_ki/KiDatabase.csv` (author-side; see that dir's `README.md`), then
+   `data_sources/books/pdsp_ki/KiDatabase.csv` (author-side; see that dir's `README.md`), then
    `python tools/fetch_ki.py --apply` to rewrite `drugs_data.jsonl`'s `ki` + `affinity_only`.
 4. **GtoPdb receptor expression** (the `receptor_locations` sources): `python
    tools/fetch_gtopdb.py` re-pulls each receptor's tissue comments (caches to
-   `sources/gtopdb/`, author-side), then run the confirm-only judge over
-   `sources/gtopdb/worklist.json` and `python tools/apply_location_sources.py --judged <f>`
+   `data_sources/gtopdb/`, author-side), then run the confirm-only judge over
+   `data_sources/gtopdb/worklist.json` and `python tools/apply_location_sources.py --judged <f>`
    to merge new `verified` sources into `tools/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
 5. **Allen AHBA expression** (the `target_locations` + residual `receptor_locations`
    sources): `python tools/fetch_allen.py` re-pulls each donor's microarray PACall (caches
-   to `sources/allen/`, author-side; ~2GB across donors), then `python
+   to `data_sources/allen/`, author-side; ~2GB across donors), then `python
    tools/apply_location_sources.py --corpus allen` merges the deterministic `verified`
    sources (no judge) into `tools/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
 6. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
@@ -171,19 +171,19 @@ Screenshots).
   free-text class line, unlike the fixed NbN field). Idempotent.
 - `tools/fetch_gtopdb.py` — fetches receptor tissue-distribution comments from the Guide to
   Pharmacology API (corpus #7 `gtopdb`), the source for **receptor expression regions**;
-  `RECEPTOR_GENES` maps receptor->gene->targetId. Caches `sources/gtopdb/` + `worklist.json`
+  `RECEPTOR_GENES` maps receptor->gene->targetId. Caches `data_sources/gtopdb/` + `worklist.json`
   (each quote carries assay species). See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/fetch_allen.py` — fetches the Allen Human Brain Atlas microarray (corpus #8
   `allen_ahba`), the source for **target expression regions** + the receptor regions GtoPdb
   misses; a PACall detection-boolean vote per (gene, region), no judge. `TARGET_GENES` +
-  `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `sources/allen/` + `confirmed.json`.
+  `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `data_sources/allen/` + `confirmed.json`.
   See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/apply_location_sources.py` — merges accepted expression quotes into
   `tools/location_sources.json`, `--corpus {gtopdb,allen}` (gtopdb needs a judged file; allen is
   deterministic). Idempotent. See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
-- `tools/fetch_ki.py` — parses the PDSP Ki CSV (`sources/books/pdsp_ki/`, author-side) into
+- `tools/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.
 - `tools/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);

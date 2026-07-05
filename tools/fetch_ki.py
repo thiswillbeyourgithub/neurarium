@@ -7,7 +7,7 @@ NOT yet write into `generate_data.py` / `drugs_data.jsonl`.
 
 Source of the data: the PDSP Ki Database CSV, a public-domain NIMH resource of
 experimentally measured binding-affinity (Ki, in nM) values. The file lives at
-`sources/books/pdsp_ki/KiDatabase.csv` (gitignored, author-side; see that dir's
+`data_sources/books/pdsp_ki/KiDatabase.csv` (gitignored, author-side; see that dir's
 README for provenance + licensing). It is one row PER ASSAY, so a single
 drug/target pair appears many times across species, tissue and radioligand.
 
@@ -35,7 +35,7 @@ import drugs_io
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-CSV_PATH = os.path.join(REPO, "sources", "books", "pdsp_ki", "KiDatabase.csv")
+CSV_PATH = os.path.join(REPO, "data_sources", "books", "pdsp_ki", "KiDatabase.csv")
 
 # The CSV column names (note the leading space PDSP put on " Ligand Name").
 COL_ID = "Number"
