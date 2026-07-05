@@ -16,6 +16,7 @@ TODO.md
 
 __pycache__
 .serena
+.tokensave
 
 # Archived / obsolete working folders (e.g. the completed geometry-refinement
 # runbook plus its scratch refs/renders); kept on disk but out of version control.
