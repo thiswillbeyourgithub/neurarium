@@ -51,7 +51,9 @@ corpus locations are in `CLAUDE.local.md`.
      grade is `RECEPTOR_PROVENANCE` (default `llm`), lifted per-attribute only where
      `RECEPTOR_CLASSIFICATION_COVERAGE` says the receptor's Stahl-Essential quote
      (`STAHL_ESSENTIAL_RECEPTOR_QUOTES`) actually backs that attribute (conservative: never list
-     an attribute the quote or the record disagrees on). An individual expression region is
+     an attribute the quote or the record disagrees on; `RECEPTOR_ATTR_QUOTES` gives an
+attribute a *different* quote than the main one, or several to back a compound value like
+`synaptic="both"`). An individual expression region is
      sourced (above `llm`) by adding a `{receptor_id: {base: [quote-source]}}` entry to
      `RECEPTOR_LOCATION_SOURCES`.
    - **Drugs**: edit `tools/drugs_data.json`. Each: `id`, `name`, `categories`, optional

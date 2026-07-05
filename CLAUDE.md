@@ -356,7 +356,10 @@ Receptor data: `_receptor_record` validates every family/class/sign/synaptic key
 node: the base grade defaults `llm` (overridable in `RECEPTOR_PROVENANCE`) and a
 `STAHL_ESSENTIAL_RECEPTOR_QUOTES` quote upgrades **only** the attributes listed for that receptor in
 `RECEPTOR_CLASSIFICATION_COVERAGE` (assigned conservatively: never when the quote and the record
-disagree, e.g. 5-HT2B's presynaptic-autoreceptor quote vs its postsynaptic record value). Each
+disagree, e.g. 5-HT2B's presynaptic-autoreceptor quote vs its postsynaptic record value). A quote
+need not be the same across the four attributes: `RECEPTOR_ATTR_QUOTES` gives an attribute its own
+quote(s) instead of the main one, so a compound value earns `verified` only when every part is
+attested (5-HT1B/D `synaptic="both"` needs one presynaptic + one postsynaptic quote). Each
 expression region is a **separate** graded claim (kind
 `receptor_locations`, default `llm`, upgraded per (receptor, region) by `RECEPTOR_LOCATION_SOURCES`,
 quote-checked); these drove the `brainstem_nuclei` group. A non-receptor target's type/system/regions

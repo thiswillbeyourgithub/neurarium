@@ -2676,6 +2676,12 @@ _SE_GABAAC = _stahl_ess(275,
 _SE_5HT_SIGN = _stahl_ess(136,
     "both excitatory (e.g., at 5HT2A, 5HT2C, 5HT4, 5HT6, and 5HT7 receptors) and "
     "inhibitory (at 5HT1A, 5HT5, and possibly postsynaptic 5HT1B heteroreceptors)")
+# The presynaptic-autoreceptor list (p131): names 5HT1A, 5HT1B/D, 5HT2B as presynaptic
+# autoreceptors. Backs the presynaptic half of a "both" synaptic value (paired with the
+# postsynaptic 5HT1B/D quote for 1B/1D) and is 5HT2B's family quote.
+_SE_5HT_PRESYN_AUTO = _stahl_ess(131,
+    "Presynaptic serotonin (5HT) receptors include 5HT1A, 5HT1B/D, and 5HT2B, "
+    "all of which act as autoreceptors")
 # One sentence names both melatonin receptors (backs MT1 + MT2 + the melatonin target).
 _SE_MELATONIN = _stahl_ess(455,
     "There are three types of receptors for melatonin: MT1 and MT2, which are "
@@ -2730,9 +2736,7 @@ STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {
     # Serotonin subtypes (5HT1E/1F are absent from this corpus, so they stay llm).
     "5ht1a": _SE_5HT_SIGN, "5ht2a": _SE_5HT_SIGN, "5ht2c": _SE_5HT_SIGN,
     "5ht4": _SE_5HT_SIGN, "5ht5a": _SE_5HT_SIGN, "5ht6": _SE_5HT_SIGN,
-    "5ht2b": _stahl_ess(131,
-        "Presynaptic serotonin (5HT) receptors include 5HT1A, 5HT1B/D, and 5HT2B, "
-        "all of which act as autoreceptors"),
+    "5ht2b": _SE_5HT_PRESYN_AUTO,
     "5ht7": _stahl_ess(146, "5HT7 receptors are postsynaptic, excitatory, and"),
     # Opioid receptors (endogenous-opioid passage; each names the receptor + postsynaptic).
     "mu": _stahl_ess(575,
@@ -2791,8 +2795,10 @@ RECEPTOR_CLASSIFICATION_COVERAGE: dict[str, tuple[str, ...]] = {
     "d3": _FCG, "d4": _FCG, "d5": _FCG,
     # "postsynaptic ... G-protein-linked" histamine quotes: family + class + site.
     "h1": _FCY, "h2": _FCY,
-    # 5-HT1B/D: "inhibitory ... G-protein-coupled" (record synaptic="both", quote
-    # says only postsynaptic, so `synaptic` is left unsourced).
+    # 5-HT1B/D: "inhibitory ... G-protein-coupled" backs family + class + sign. Its
+    # record synaptic="both" is backed by TWO quotes via RECEPTOR_ATTR_QUOTES below (the
+    # main quote's "postsynaptic 5HT1B/D" + the p131 presynaptic-autoreceptor list), so
+    # `synaptic` is covered there, not here.
     "5ht1b": _FCG, "5ht1d": _FCG,
     # Pure NE enumeration: only names the family, nothing mechanistic.
     "alpha1a": _F, "alpha1b": _F, "alpha1c": _F, "alpha1d": _F,
@@ -2813,6 +2819,21 @@ RECEPTOR_CLASSIFICATION_COVERAGE: dict[str, tuple[str, ...]] = {
     "a2a": _F, "sigma1": _F, "mt1": _F, "mt2": _F, "h4": _F,
     # H3 "presynaptic autoreceptors": family + site.
     "h3": _FY,
+}
+
+# Per-attribute quote overrides. A quote need not be the same across the four
+# classification attributes: when an attribute needs a DIFFERENT sentence than the
+# receptor's main STAHL_ESSENTIAL_RECEPTOR_QUOTES quote, or several sentences to back a
+# compound value, list them here as {receptor_id: {attr: [quote, ...]}}. An attribute
+# listed here is graded from these quotes (and marked covered) instead of the main quote;
+# an unlisted attribute keeps the main-quote-via-COVERAGE behaviour. This is how a
+# `synaptic="both"` earns `verified`: it needs one quote per direction.
+RECEPTOR_ATTR_QUOTES: dict[str, dict[str, list[dict[str, Any]]]] = {
+    # 5-HT1B/D are both pre- and postsynaptic: the p406 quote states "postsynaptic
+    # 5HT1B/D", the p131 list states they are presynaptic autoreceptors. Together the two
+    # directions back the record's synaptic="both".
+    "5ht1b": {"synaptic": [_SE_5HT1BD, _SE_5HT_PRESYN_AUTO]},
+    "5ht1d": {"synaptic": [_SE_5HT1BD, _SE_5HT_PRESYN_AUTO]},
 }
 
 STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
@@ -4532,13 +4553,19 @@ def _receptor_record(rec: dict[str, Any],
     base_grade = _receptor_provenance(rec["id"])
     rq = STAHL_ESSENTIAL_RECEPTOR_QUOTES.get(rec["id"])
     covered = set(RECEPTOR_CLASSIFICATION_COVERAGE.get(rec["id"], ()))
+    attr_quotes = RECEPTOR_ATTR_QUOTES.get(rec["id"], {})
     classification: dict[str, dict[str, Any]] = {}
     for attr in CLASSIFICATION_ATTRS:
         entry: dict[str, Any] = {"grade": base_grade}
-        if rq is not None and attr in covered:
-            entry["sources"] = [dict(rq)]
-            if _GRADE_RANK[rq["provenance"]] > _GRADE_RANK[entry["grade"]]:
-                entry["grade"] = rq["provenance"]
+        # A per-attribute override wins; else the main quote if COVERAGE lists this attr.
+        srcs = attr_quotes.get(attr)
+        if srcs is None and rq is not None and attr in covered:
+            srcs = [rq]
+        if srcs:
+            entry["sources"] = [dict(s) for s in srcs]
+            best = max((s["provenance"] for s in srcs), key=lambda p: _GRADE_RANK[p])
+            if _GRADE_RANK[best] > _GRADE_RANK[entry["grade"]]:
+                entry["grade"] = best
         classification[attr] = entry
     out["classification"] = classification
     locations = rec["locations"]
@@ -5160,6 +5187,17 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         raise KeyError(
             f"RECEPTOR_CLASSIFICATION_COVERAGE has unknown attributes: "
             f"{sorted(bad_attrs)} (valid: {CLASSIFICATION_ATTRS})")
+    # Per-attribute quote overrides must key real receptors and real attributes.
+    aq_no_receptor = set(RECEPTOR_ATTR_QUOTES) - {r["id"] for r in RECEPTORS}
+    if aq_no_receptor:
+        raise KeyError(
+            f"RECEPTOR_ATTR_QUOTES keys are not receptor ids: {sorted(aq_no_receptor)}")
+    bad_aq_attrs = {a for m in RECEPTOR_ATTR_QUOTES.values()
+                    for a in m if a not in CLASSIFICATION_ATTRS}
+    if bad_aq_attrs:
+        raise KeyError(
+            f"RECEPTOR_ATTR_QUOTES has unknown attributes: {sorted(bad_aq_attrs)} "
+            f"(valid: {CLASSIFICATION_ATTRS})")
     unmatched_tq = set(STAHL_ESSENTIAL_TARGET_QUOTES) - set(DRUG_TARGETS)
     if unmatched_tq:
         raise KeyError(
