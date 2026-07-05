@@ -8,10 +8,10 @@ line-by-line file reference.
 > Three docs, three jobs, no overlap:
 > - **[README.md](README.md)**: what neurarium is, how to run it, the project layout table.
 > - **This file**: the architecture, the data flow, the module graph, the boot
->   sequence, the extension points (the "why" and the "shape").
-> - **[CLAUDE.md](CLAUDE.md)**: the exhaustive, always-current map: every file's
->   role, every control, every data field, and the step-by-step recipes for
->   changing the anatomy. When you need specifics, go there.
+>   sequence, the extension points (the "why" and the "shape"). Bird's-eye only, no
+>   field-level detail; when it would name a field or control it points at CLAUDE.md.
+> - **[CLAUDE.md](CLAUDE.md)**: a terse map (one line per file / control / field), not
+>   a manual: it names the symbol so you can find the code, it does not re-narrate it.
 
 This project was built with the help of [Claude Code](https://claude.com/claude-code).
 
@@ -46,23 +46,11 @@ is simply a view of one node plus every node linked to it (a receptor node links
 the region nodes that express it and the drug nodes that act on it, and so on).
 
 **Umbrella vs. kind.** "Node" is the umbrella term; each node has a **kind** that
-keeps its own name in the data and code (a `structures.jsonl`, a `showReceptor`).
-The kinds, and the collection each lives in:
-
-| node kind | lives in | tally key |
-| --- | --- | --- |
-| brain-region anatomy | `structures.jsonl` | `structures` |
-| projection (pathway) | `projections.jsonl` | `projections` |
-| functional circuit | `circuits.jsonl` | `circuits` |
-| projection group | `projection_groups.jsonl` | `projection_groups` |
-| receptor classification | `receptors.jsonl` | `receptors` |
-| receptor expression region | a receptor's `location_sources` | `receptor_locations` |
-| non-receptor drug target | `meta.drug_targets` | `targets` |
-| target expression region | a target's `location_sources` | `target_locations` |
-| drug binding | a drug's `bindings[]` | `drug_bindings` |
-| drug NbN label | a drug's `nbn` | `drug_nbn` |
-| drug class classification | a drug's `categories` | `drug_categories` |
-| Wikipedia reference | any node's `wikipedia` | `references` (a pointer, not a node) |
+keeps its own name in the data and code (a `structures.jsonl`, a `showReceptor`):
+region anatomy, projection, circuit, projection group, receptor + its expression
+regions, drug target + its expression regions, drug binding, drug NbN, drug class,
+Wikipedia reference. The full kind → collection → tally-key mapping is in CLAUDE.md
+("Nodes"); it is not repeated here.
 
 **Every node is sourceable.** Each carries a provenance **grade** (`llm` < `sourced`
 < `verified`) and, ideally, a **source**: one quote-level `{corpus, page, quote,
@@ -114,17 +102,14 @@ directly.
 
 The dataset under `public/data/` is split by record type for clarity: the file a
 record lives in encodes its type, so there is no `type` field on the lines.
-`meta.json` is a single JSON object; the rest are JSONL (one object per line):
-
-| file | role |
-| --- | --- |
-| `meta.json` | presentation maps: `projection_colors` (kind→arrow colour), `group_labels` (group→legend heading), the colour-mode `kind_signs`/`sign_colors`/`sign_labels`, the receptor `receptor_family_labels`/`receptor_class_labels`/`synaptic_labels`, and the drug `drug_category_labels`/`drug_actions`/`drug_effect_colors`/`drug_effect_labels`/`drug_targets` (the merged binding-target map). Makes the dataset self-describing. |
-| `structures.jsonl` | one region per line: `id`, `name`, `group`, `position`, `color`, `shape_file`, optional `wikipedia`, optional `mirror`. |
-| `projections.jsonl` | one directed pathway per line: `from`, `to`, `kind`, `label`, `neurotransmitter`, `description`, `sources[]`, optional `bidirectional`, optional `tentative` (speculative; drawn dotted in a separate, off-by-default legend section). |
-| `circuits.jsonl` | one named functional loop per line: `id`, `name`, `structures[]` (its arrows are derived in the viewer). |
-| `receptors.jsonl` | one neurotransmitter receptor per line: `id`, `name`, `family`, `neurotransmitter`, `receptor_class`, `sign`, `synaptic`, `locations[]` (structure base ids the viewer expands to both hemispheres), optional `ubiquitous`, optional `description`, `wikipedia`. Empty `locations` + no `description` = a "stub" (no CNS role). |
-| `drugs.jsonl` | one psychiatric drug per line (from Stahl's Prescriber's Guide): `id`, `name`, `categories[]`, optional `nbn`/`nbn_sources[]`, `bindings[]` (each `target` + `action` + optional `effect`/`note`/`tentative`/`sources[]`/`ki`), optional `wikipedia`, optional `structure_image` (the `data/molecules/<id>.svg` path, set when that SVG exists), `focusable`. Each claim carries its own quote-level source; there is no drug-level `sources` block. Authored in `tools/drugs_data.json` (not inline in the generator). No bindings = listed but not clickable. |
-| `molecules/<id>.svg` | one molecular-structure diagram per drug, vendored from Wikipedia by `tools/fetch_molecules.py` (a network-bound authoring tool, separate from the offline generator); the drug panel embeds it as an inverted `<img>`. Not authored, not translated. |
+`meta.json` is a single JSON object of presentation maps (colours, labels, the
+merged binding-target map) that makes the dataset self-describing; the rest are
+JSONL, one node per line, one file per kind: `structures.jsonl`, `projections.jsonl`,
+`circuits.jsonl`, `projection_groups.jsonl`, `receptors.jsonl`, `drugs.jsonl` (drugs
+authored in `tools/drugs_data.json`, not the generator), plus vendored
+`molecules/<id>.svg` diagrams. Every claim carries its own quote-level source; there
+is no node-level catch-all `sources` block. The exact field list of each file is in
+CLAUDE.md ("Emitted data"), not duplicated here.
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape
