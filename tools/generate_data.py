@@ -332,6 +332,12 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     "vmat2": {"name": {"en": "Vesicular monoamine transporter (VMAT2)",
                        "fr": "Transporteur vésiculaire des monoamines (VMAT2)"},
               "type": "transporter", "system": "dopaminergic",
+              # A *vesicular* transporter: it loads monoamines into synaptic
+              # vesicles, so inhibiting it DEPLETES releasable transmitter and
+              # *lowers* the system's tone, the opposite of a plasma-membrane
+              # reuptake transporter (SERT/DAT/NET). The viewer's flow overlay
+              # reads this flag to sign the tone correctly (js/data.js toneSignOf).
+              "vesicular": True,
               "wikipedia":
                   "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",
               "regions": ["vta", "substantia_nigra", "raphe", "locus_coeruleus",
@@ -422,6 +428,13 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     "alpha2": {"name": {"en": "α2 adrenergic receptors",
                         "fr": "Récepteurs α2 adrénergiques"},
                "type": "receptor_group", "system": "adrenergic",
+               # The α2 family's dominant pharmacology is the presynaptic
+               # *inhibitory autoreceptor* on noradrenergic neurons: an agonist
+               # (clonidine) damps NA tone, an antagonist (mirtazapine, yohimbine)
+               # disinhibits and raises it. Marked so the flow overlay signs the
+               # tone (the specific 5-HT1x / D2/D3 autoreceptors carry this on their
+               # own receptor records; a receptor_group has none, so it is set here).
+               "sign": "inhibitory", "synaptic": "presynaptic",
                "wikipedia":
                    "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
                "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
@@ -4478,6 +4491,14 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
             # the coverage tally. "llm" by default; override in TARGET_PROVENANCE.
             "classification_provenance": _target_provenance(tid),
         }
+        # Optional tone-polarity hints the viewer's flow overlay reads (js/data.js
+        # toneSignOf): `vesicular` marks a vesicular transporter (inhibiting it
+        # depletes -> lowers tone), and `sign`/`synaptic` give a receptor_group the
+        # presynaptic-autoreceptor character a specific receptor carries on its own
+        # record (the α2 family). Absent for a target with no tone effect.
+        for opt in ("vesicular", "sign", "synaptic"):
+            if opt in spec:
+                targets[tid][opt] = spec[opt]
         # Per-region expression sources ("Found in"): each region is its own graded
         # node (kind target_locations), llm unless sourced here. Omitted when empty.
         tloc = _location_sources(

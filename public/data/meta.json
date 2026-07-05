@@ -512,6 +512,7 @@
         "putamen"
       ],
       "classification_provenance": "verified",
+      "vesicular": true,
       "location_sources": {
         "caudate": [
           {
@@ -1534,6 +1535,8 @@
         "medulla"
       ],
       "classification_provenance": "verified",
+      "sign": "inhibitory",
+      "synaptic": "presynaptic",
       "location_sources": {
         "frontal": [
           {
