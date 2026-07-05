@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Fetch Allen Human Brain Atlas microarray expression -> per-region presence calls.
 
-Phase 2 of the expression-location sourcing (see ``SOURCING_GAPS.md`` "Phase 2 plan"):
+Phase 2 of the expression-location sourcing (see ``docs/SOURCING_GAPS.md`` "Phase 2 plan"):
 the source for the ``target_locations`` (and the residual ``receptor_locations`` GtoPdb
 could not reach). Allen is the only source that resolves our deep nuclei AND covers the
 non-receptor targets (transporters/enzymes/channels), and it ships a **PACall**
