@@ -599,11 +599,26 @@
     return s;
   }
 
-  // Resolve a translatable *data* field: a plain string passes through; an
-  // {en, fr} object collapses to the current language (then English, then any
-  // value). Used by js/data.js and the viewer.
+  // The data-translation side table (English string -> French), loaded from
+  // data/translations.fr.json by js/data.js, but ONLY in French (English users
+  // never fetch it). The emitted data is English-only, so an English data string
+  // is looked up here to get its French. Empty until setDataTranslations runs.
+  var DATA_FR = {};
+  function setDataTranslations(obj) {
+    DATA_FR = (obj && typeof obj === "object") ? obj : {};
+  }
+
+  // Resolve a translatable *data* field. The emitted data is English-only, so a
+  // plain string is the English datum: in French, return its side-table
+  // translation (falling back to the English string when the table lacks it, e.g.
+  // an identical en==fr pair we deliberately did not store). A legacy {en, fr}
+  // object still collapses to the current language, so an older dataset keeps
+  // working. Used by js/data.js and the viewer.
   function pick(field) {
-    if (field == null || typeof field === "string") return field;
+    if (field == null) return field;
+    if (typeof field === "string") {
+      return (lang === "fr" && DATA_FR[field] != null) ? DATA_FR[field] : field;
+    }
     if (typeof field === "object") {
       if (field[lang] != null) return field[lang];
       if (field.en != null) return field.en;
@@ -655,6 +670,7 @@
     lang: lang,
     t: t,
     pick: pick,
+    setDataTranslations: setDataTranslations,
     setLang: setLang,
     applyStatic: applyStatic,
   };

@@ -139,6 +139,19 @@ function localize(field) {
  */
 export async function loadBrainData(dataDir = "data", onProgress = null) {
   onProgress?.({ stage: "meta" });
+  // The emitted data is English-only; the French translations live in a single
+  // side table (data/translations.fr.json) that `window.__I18N__.pick` looks each
+  // English string up in. Fetch + install it BEFORE any localize() runs, and ONLY
+  // in French (English users never request it, and it stays an empty table). A
+  // failed fetch is non-fatal: pick() then falls back to the English strings.
+  if (window.__I18N__ && window.__I18N__.lang === "fr") {
+    try {
+      const tr = await (await fetchOrThrow(`${dataDir}/translations.fr.json`)).json();
+      window.__I18N__.setDataTranslations(tr);
+    } catch (e) {
+      console.error("Could not load French translations; showing English data.", e);
+    }
+  }
   const [metaRecord, structures, projections, circuits, projectionGroups,
          receptors, drugs] =
     await Promise.all([
