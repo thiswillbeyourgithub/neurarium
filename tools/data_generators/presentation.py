@@ -7,12 +7,76 @@ vocabularies live in one place; no i18n helpers are needed (the values are plain
 strings, localized downstream at emit time).
 """
 
+# Arrow colour per projection ``kind`` (the functional class): glutamate ->
+# excitatory (red), GABA -> inhibitory (blue), dopamine -> dopaminergic (green),
+# acetylcholine -> cholinergic (gold), neurosecretory/hormonal -> neuroendocrine
+# (purple), serotonin -> serotonergic (teal), noradrenaline -> noradrenergic
+# (pink). The kind selects the arrow colour; the finer transmitter molecule is
+# the projection's ``neurotransmitter`` field. The monoamine ascending kinds
+# (dopaminergic / serotonergic / noradrenergic / cholinergic) are what the
+# per-drug "by-mechanism flow" overlay rides: a focused drug lights flow along
+# the projections whose kind matches its target transmitter system (see
+# js/drug-anim.js).
+PROJECTION_COLORS: dict[str, str] = {
+    "excitatory": "#e15759",
+    "inhibitory": "#4e79a7",
+    "dopaminergic": "#59a14f",
+    "cholinergic": "#edc948",
+    "neuroendocrine": "#b07aa1",
+    "serotonergic": "#76b7b2",
+    "noradrenergic": "#ff9da7",
+}
+
+# The viewer offers two arrow colour modes (a toggle in the panel):
+#   - "transmitter" (default): one colour per neurotransmitter, i.e. PROJECTION_
+#     COLORS above (today each kind carries exactly one transmitter, so per-kind ==
+#     per-transmitter);
+#   - "sign": a coarse red/blue excitatory-vs-inhibitory view, with the
+#     neuromodulatory kinds (dopaminergic / cholinergic / neuroendocrine /
+#     serotonergic / noradrenergic) collapsed to a neutral "modulatory" grey since
+#     they have no single excit/inhib sign.
+# KIND_TO_SIGN folds each functional kind onto its sign; SIGN_COLORS / SIGN_LABELS
+# give the sign its swatch + legend heading. All three are emitted into the meta
+# record so the viewer can recolour + relabel the legend with no hardcoded palette.
+KIND_TO_SIGN: dict[str, str] = {
+    "excitatory": "excitatory",
+    "inhibitory": "inhibitory",
+    "dopaminergic": "modulatory",
+    "cholinergic": "modulatory",
+    "neuroendocrine": "modulatory",
+    "serotonergic": "modulatory",
+    "noradrenergic": "modulatory",
+}
+SIGN_COLORS: dict[str, str] = {
+    "excitatory": "#e15759",  # red, same as the excitatory kind
+    "inhibitory": "#4e79a7",  # blue, same as the inhibitory kind
+    "modulatory": "#9aa0a6",  # neutral grey: no single excit/inhib sign
+}
+
 # Sign legend heading (excitatory / inhibitory / modulatory); the swatch colours
-# live in SIGN_COLORS in generate_data.py.
+# live in SIGN_COLORS above.
 SIGN_LABELS: dict[str, str] = {
     "excitatory": "Excitatory",
     "inhibitory": "Inhibitory",
     "modulatory": "Modulatory",
+}
+
+# Per-drug "by-mechanism flow" overlay (js/drug-anim.js): focusing a drug also
+# lights flowing beads along the projections of its target transmitter *system*.
+# This maps a drug target's ``system`` (the neurotransmitter family: a DRUG_TARGETS
+# ``system`` or a receptor ``family``) to the projection ``kind`` that carries it,
+# but *only* for the diffuse ascending modulatory systems with a brainstem source
+# nucleus modeled (serotonin / raphe, noradrenaline / locus coeruleus, dopamine /
+# VTA + substantia nigra, acetylcholine / septum). Fast point-to-point systems
+# (glutamatergic / gabaergic) and unmodeled ones (histaminergic, ...) are absent on
+# purpose: mapping them would flood the view with every excitatory/inhibitory arrow
+# instead of a drug-specific fan. A drug whose systems aren't here gets no flow,
+# just its dots + wash. Emitted into meta.json so the viewer hardcodes no table.
+SYSTEM_FLOW_KINDS: dict[str, str] = {
+    "serotonergic": "serotonergic",
+    "adrenergic": "noradrenergic",
+    "dopaminergic": "dopaminergic",
+    "cholinergic": "cholinergic",
 }
 
 # Structure ``group`` -> legend heading, in legend display order (object key
