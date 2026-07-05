@@ -139,7 +139,11 @@ Screenshots).
   helpers, e.g. `_cortex_lobe_entry` + `MIDLINE_GAP`, imported by `regions/cortex.py` and `generate_data.py`),
   and `connectivity.py` (the three connectivity node literals `PROJECTIONS`/`CIRCUITS`/`PROJECTION_GROUPS`
   plus the `_KQ_*`/`_SG_*` pathway quote-source constants they cite; the shared `_kandel`/`_nieuwenhuys`/`_stahl_ess`
-  quote constructors live in `provenance.py`).
+  quote constructors live in `provenance.py`), and the `quotes/` subpackage (verified quote registries by
+  corpus: `kandel.py` = `PROJECTION_QUOTES` + `STRUCTURE_QUOTES` (Kandel/Nieuwenhuys anatomy, cites the
+  connectivity `_KQ_*`); `stahl_essential.py` = `STAHL_ESSENTIAL_RECEPTOR_QUOTES`/`STAHL_ESSENTIAL_TARGET_QUOTES`/
+  `RECEPTOR_ATTR_QUOTES`/`RECEPTOR_CLASSIFICATION_COVERAGE`/`CLASSIFICATION_ATTRS`/`TARGET_POLARITY_QUOTES`; chain
+  stays acyclic provenance <- connectivity <- quotes <- generate_data).
 - `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
