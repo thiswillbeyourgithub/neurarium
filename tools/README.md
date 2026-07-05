@@ -157,7 +157,7 @@ Screenshots).
 - `tools/serve.py` — stdlib dev server, `Cache-Control: no-store`, roots at `public/` (see CLAUDE.md Running).
 - `tools/shot.py` — Playwright screenshot helper (see CLAUDE.md Screenshots).
 - `tools/demos/` — Playwright demo-video recorder: `recorder.py` (a `Demo` API) + `neurarium.py`
-  (the showcase tour, writes the README hero `docs/preview.gif`). Needs ffmpeg+gifski+GPU; see
+  (the showcase tour, writes the README hero `docs/images/preview.gif`). Needs ffmpeg+gifski+GPU; see
   `tools/demos/README.md`.
 - `tools/build_source_worklist.py` — lists not-yet-sourced drug bindings with Stahl page ranges
   (input to the source-extraction workflow; resumable).

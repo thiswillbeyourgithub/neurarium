@@ -12,7 +12,7 @@ apart, search, and click through.**
 
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
-[![neurarium demo](docs/preview.gif)](https://neurarium.olicorne.org)
+[![neurarium demo](docs/images/preview.gif)](https://neurarium.olicorne.org)
 
 > [!WARNING]
 > **Work in progress: it very likely contains mistakes.** The anatomy (regions,
@@ -129,7 +129,7 @@ shape. It is generated from a single source of truth (`tools/generate_data.py`, 
 the drug list in `tools/drugs_data.jsonl`), so the plain JSONL/JSON is easy to consume
 from another engine.
 
-For the full data flow and module graph see [`ARCHITECTURE.md`](ARCHITECTURE.md); for how
+For the full data flow and module graph see [`ARCHITECTURE.md`](docs/ARCHITECTURE.md); for how
 to extend the dataset, the per-tool reference, and the emitted-data field contract see
 [`tools/README.md`](tools/README.md); for the viewer's file-by-file map and the non-obvious
 rules see [`CLAUDE.md`](CLAUDE.md).

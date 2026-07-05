@@ -19,7 +19,7 @@ viewport.
 
 Run it::
 
-    python tools/shot.py                       # -> docs/screenshot.png (hero shot)
+    python tools/shot.py                       # -> docs/images/screenshot.png (hero shot)
     python tools/shot.py --params "only=putamen_R&view=iso" --out /tmp/p.png
     uv run tools/shot.py                        # same, deps auto-installed by uv
 
@@ -44,10 +44,10 @@ from contextlib import closing, contextmanager
 from pathlib import Path
 
 # Repo root = parent of this tools/ directory. The web root is public/ (served
-# by tools/serve.py's default --root); docs/screenshot.png stays under the repo
-# root, so DEFAULT_OUT keeps using REPO_ROOT.
+# by tools/serve.py's default --root); docs/images/screenshot.png stays under the
+# repo root, so DEFAULT_OUT keeps using REPO_ROOT.
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_OUT = REPO_ROOT / "docs" / "screenshot.png"
+DEFAULT_OUT = REPO_ROOT / "docs" / "images" / "screenshot.png"
 
 # Hero-shot defaults: exploded enough to lift the cortex off the deep nuclei and
 # reveal the projection arrows, framed isometric, with the UI panels hidden.

@@ -27,7 +27,7 @@ via the red error banners.
 `tools/shot.py` (Playwright) renders the page to a PNG: serves `public/` with
 `tools/serve.py`, drives headless Chromium (SwiftShader GL flags baked in, so
 WebGL renders without a display), captures the canvas. Bare run writes
-`docs/screenshot.png` (a static still). The README's animated hero is `docs/preview.gif`,
+`docs/images/screenshot.png` (a static still). The README's animated hero is `docs/images/preview.gif`,
 recorded by `tools/demos/neurarium.py` (see the `tools/demos/` entry above).
 
 ```

@@ -195,6 +195,7 @@ class Demo:
         action_timeout: int = 8000,
         # AV1 master.
         av1: bool = True,
+        av1_out: str | None = None,      # basename for the .av1.mp4 (defaults to `out`)
         av1_encoder: str = "libsvtav1",  # or "av1_nvenc" for GPU
         av1_crf: int = 30,
         av1_preset: int = 6,             # libsvtav1: 0 (slow/best) .. 13 (fast)
@@ -218,6 +219,7 @@ class Demo:
         self.max_glide_ms = max_glide_ms
         self.action_timeout = action_timeout
         self.av1 = av1
+        self.av1_out = Path(av1_out) if av1_out else None
         self.av1_encoder = av1_encoder
         self.av1_crf = av1_crf
         self.av1_preset = av1_preset
@@ -471,7 +473,8 @@ class Demo:
         return ["-ss", f"{self._clip_start:.3f}"] if self._clip_start > 0 else []
 
     def _encode_av1(self, raw: Path) -> None:
-        dst = self.out.with_suffix(".av1.mp4")
+        dst = (self.av1_out or self.out).with_suffix(".av1.mp4")
+        dst.parent.mkdir(parents=True, exist_ok=True)
         cmd = ["ffmpeg", "-y", *self._seek_args(), "-i", str(raw), "-an",
                "-c:v", self.av1_encoder, "-pix_fmt", "yuv420p",
                "-movflags", "+faststart"]
@@ -487,6 +490,7 @@ class Demo:
 
     def _encode_gif(self, raw: Path) -> None:
         dst = self.out.with_suffix(".gif")
+        dst.parent.mkdir(parents=True, exist_ok=True)
         frames_dir = Path(tempfile.mkdtemp(prefix="demo-frames-"))
         try:
             vf = f"fps={self.gif_fps}"

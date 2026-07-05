@@ -5,7 +5,7 @@
 """Record a showcase demo of neurarium (built with the help of Claude Code).
 
 Serves the local site with `tools/serve.py`, drives a short scripted tour with a
-visible cursor, and writes `docs/preview.gif` + `docs/preview.av1.mp4`.
+visible cursor, and writes `docs/images/preview.gif` + `docs/videos/preview.av1.mp4`.
 
     uv run tools/demos/neurarium.py
     # or, if playwright is on your PATH already:
@@ -56,10 +56,11 @@ def search(d: Demo, term: str, *, watch: int) -> None:
     d.wait(watch)           # let the dots + flow overlay play
 
 
-def run_tour(out: str, gif_fps: int, headless: bool) -> None:
+def run_tour(out: str, av1_out: str, gif_fps: int, headless: bool) -> None:
     with Demo(
         f"http://localhost:{PORT}/",
         out=out,
+        av1_out=av1_out,
         headless=headless,
         gif_fps=gif_fps,
         gif_width=560,        # keep the GIF small (~1.7MB) so GitHub renders it inline
@@ -91,8 +92,10 @@ def run_tour(out: str, gif_fps: int, headless: bool) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--out", default=str(REPO_ROOT / "docs" / "preview"),
-                    help="output basename (default: docs/preview, the README asset)")
+    ap.add_argument("--out", default=str(REPO_ROOT / "docs" / "images" / "preview"),
+                    help="GIF output basename (default: docs/images/preview, the README asset)")
+    ap.add_argument("--video-out", default=str(REPO_ROOT / "docs" / "videos" / "preview"),
+                    help="AV1 output basename (default: docs/videos/preview)")
     ap.add_argument("--gif-fps", type=int, default=18, help="GIF framerate (smoothness)")
     # Record headless by default: it renders on the real GPU (via the recorder's
     # ANGLE flags) AND avoids Chromium's headed-mode video letterboxing (grey bar).
@@ -108,7 +111,7 @@ def main() -> None:
     )
     try:
         _wait_for_port(PORT)
-        run_tour(args.out, args.gif_fps, headless=not args.headed)
+        run_tour(args.out, args.video_out, args.gif_fps, headless=not args.headed)
     finally:
         server.terminate()
         try:
