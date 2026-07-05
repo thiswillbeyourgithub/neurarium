@@ -144,8 +144,9 @@ def normalize_for_match(text):
 
 
 def display_name(name):
-    """A display name is either a plain string (receptors, drugs) or an
-    ``{en, fr}`` object (structures, circuits, targets); use the English text."""
+    """A display name. The emitted data is English-only, so it is normally a
+    plain string; the legacy ``{en, fr}`` object is still handled defensively
+    (use the English text). French lives in data/translations.fr.json."""
     if isinstance(name, dict):
         return name.get("en")
     return name

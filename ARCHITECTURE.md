@@ -109,9 +109,12 @@ merged binding-target map) that makes the dataset self-describing; the rest are
 JSONL, one node per line, one file per kind: `structures.jsonl`, `projections.jsonl`,
 `circuits.jsonl`, `projection_groups.jsonl`, `receptors.jsonl`, `drugs.jsonl` (drugs
 authored in `tools/drugs_data.jsonl`, not the generator), plus vendored
-`molecules/<id>.svg` diagrams. Every claim carries its own quote-level source; there
-is no node-level catch-all `sources` block. The exact field list of each file is in
-tools/README.md ("Data contract"), not duplicated here.
+`molecules/<id>.svg` diagrams. The emitted data is **English-only**: every display
+string is serialized as its English text and the French is deduplicated into one side
+table, `translations.fr.json`, which the viewer fetches only in French (see
+docs/I18N.md). Every claim carries its own quote-level source; there is no node-level
+catch-all `sources` block. The exact field list of each file is in tools/README.md
+("Data contract"), not duplicated here.
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape

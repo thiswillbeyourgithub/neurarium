@@ -86,8 +86,14 @@ def main():
                 continue  # already sourced -> skip (resumable)
             tgt = targets.get(b["target"], {})
             act = actions.get(b["action"], {})
-            tname = (tgt.get("name") or {}).get("en", b["target"])
-            alabel = (act.get("label") or {}).get("en", b["action"])
+            # meta is English-only now (a plain string); tolerate the legacy
+            # {en,fr} shape defensively.
+            def _en(v, fallback):
+                if isinstance(v, dict):
+                    return v.get("en", fallback)
+                return v if v else fallback
+            tname = _en(tgt.get("name"), b["target"])
+            alabel = _en(act.get("label"), b["action"])
             items.append({
                 "idx": idx,
                 "target": b["target"],

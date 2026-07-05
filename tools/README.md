@@ -186,6 +186,12 @@ The field list of each emitted file. The viewer reads exactly these shapes; the 
 emits them. Every claim carries its own quote-level source (see CLAUDE.md Source provenance);
 there is no node-level catch-all `sources` block.
 
+> **Emitted data is English-only.** Display strings marked `{en,fr}` below are *authored*
+> bilingual but serialized as the plain English string; the French is deduplicated into one
+> side table, `translations.fr.json` (`{english: french}`, sorted keys), which the viewer
+> fetches only in French and looks each English string up in (see docs/I18N.md, the
+> externalize pass). So on disk every `name{en,fr}` etc. is just a string.
+
 - `meta.json` — presentation maps + tallies, so the dataset is self-describing (a port needs
   no hardcoded palette): `projection_colors`, `kind_labels`, `group_labels`, `kind_signs`,
   `sign_colors`, `sign_labels`, `system_flow_kinds` (drug target system -> projection kind),
@@ -197,6 +203,10 @@ there is no node-level catch-all `sources` block.
   (+ optional `polarity_sources`), its own graded node kind `target_polarity`),
   `target_type_labels`/`target_type_colors`, `source_corpora`, `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
+- `translations.fr.json` — the deduplicated French side table, `{english: french}` with sorted
+  keys, covering every emitted display string whose French differs from its English. Fetched by
+  the viewer only in French (English users skip it); a missing key falls back to the English
+  string. Written last by `write_artifacts` from the externalize pass (see docs/I18N.md).
 - `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend
   row), `group`, `position`, `color`, `shape_file`, `classification_provenance`, optional
   `wikipedia`(+`_provenance`), optional `structure_image` (hot-linked Wikimedia url, shared by
