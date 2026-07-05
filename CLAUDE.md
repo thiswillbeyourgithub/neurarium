@@ -953,162 +953,89 @@ in `wireShortcuts`). Darker backdrop than the shortcuts modal. i18n: `image.clos
 
 ## Source provenance
 
-How every **node** (any sourceable datum, see Nodes) is graded + sourced. Every node's
-source/reference carries a **provenance grade** saying how trustworthy its attribution is
-(the dataset is LLM-assisted, not yet human-checked). The viewer renders it as a coloured
-**pill** with a tooltip; the grade is **data**. Grades (`PROVENANCE_LEVELS` in
-`generate_data.py`, weakest to strongest):
+How every **node** (any sourceable datum, see Nodes) is graded + sourced. Every node's source/reference
+carries a **provenance grade** (the dataset is LLM-assisted, not yet human-checked), rendered as a
+coloured **pill**; the grade is **data**. Grades (`PROVENANCE_LEVELS`, weakest to strongest):
 
 - **`llm`** (grey **?**): LLM from memory, unchecked, may be a hallucination.
-- **`sourced`** (yellow **~**): LLM given the source document, but the node was not
-  quote-verified.
-- **`verified`** (green **✓**): an LLM extracted a quote, it was *programmatically*
-  confirmed present in the source, and a separate LLM agreed it supports the claim. Highest
-  grade available; still LLM-driven (the `info.provVerified` tooltip says so).
-- absence -> a red **✕** pill (`NOSOURCE_GLYPH`; tooltip `info.provNone`; CSS class
-  `.src-todo`). Not a stored grade.
+- **`sourced`** (yellow **~**): LLM given the source document, not quote-verified.
+- **`verified`** (green **✓**): an LLM extracted a quote, it was *programmatically* confirmed present in
+  the source, and a separate LLM agreed it supports the claim. Highest grade; still LLM-driven.
+- absence -> a red **✕** pill (`NOSOURCE_GLYPH`, `.src-todo`). Not a stored grade.
 
-The pill grade is per-node; the coverage **tally** collapses the two unbacked cases (`llm`
-and `NOSOURCE`) into one **missing** tier ("no document"), so the three tally tiers are
-verified / sourced / missing (see The "% sourced" figure). A node's grade is never simply
-absent from a panel: every source row / heading shows a pill, `NOSOURCE` when there is no
-source, never a blank.
+Every node's grade rides its own row/heading (`makeProvenancePill(level)`, `info.prov*` tooltip via
+`withTip`), never a separate bottom "Sources" block (a source only ever grades one node); a node with
+no source shows `NOSOURCE`, never a blank. The coverage **tally** collapses the two unbacked cases
+(`llm` and `NOSOURCE`) into one **missing** tier, so its tiers are verified / sourced / missing (see
+The "% sourced" figure).
 
-**Where the grade lives.** There is one source shape, a quote-level
-`{corpus, page, quote, provenance}` against a `SOURCE_CORPORA` corpus; `provenance` defaults
-`DEFAULT_PROVENANCE` (`"llm"`) and a node with no source is left ungraded (`NOSOURCE`).
-Fabricated bibliographic `{citation, url}` citations were removed (an LLM invented them from
-memory; unverifiable). Each `wikipedia` reference emits a sibling `wikipedia_provenance` from
-the `WIKIPEDIA_PROVENANCE` override registry; a **present** link defaults `"sourced"`
-(`WIKIPEDIA_DEFAULT_PROVENANCE`), not `llm` (a Wikipedia article is a real reference; the
-viewer even live-fetches its lead). Upgrading a source as it is checked is a **data** edit;
-`_provenance` validates every grade.
+**Where the grade lives.** One source shape, quote-level `{corpus, page, quote, provenance}` against a
+`SOURCE_CORPORA` corpus; `provenance` defaults `DEFAULT_PROVENANCE` (`"llm"`), a sourceless node is
+`NOSOURCE`. Each `wikipedia` reference emits a sibling `wikipedia_provenance` (`WIKIPEDIA_PROVENANCE`
+registry); a **present** link defaults `"sourced"` (`WIKIPEDIA_DEFAULT_PROVENANCE`), not `llm` (a real
+reference the viewer live-fetches). `_provenance` validates every grade; upgrading a source is a data edit.
 
-**Per-claim sources + the verify gate.** Every source is
-`{corpus, page, quote, provenance}`: a binding's `sources[]`, a drug's `nbn_sources[]`, a
-projection/circuit/group quote (`KANDEL_QUOTES` for pathways), a receptor/target
-location/classification, region anatomy. `corpus` is a key of the source-agnostic
-`SOURCE_CORPORA` registry (Stahl is corpus #1, `{ref, citation, url, pages_dir}`, emitted as
-`meta.source_corpora`), `quote` is verbatim from that page. `_quote_sources` /
-`_binding_sources` validate (corpus + grade; a `verified` source needs page + quote); the
-full citation is not denormalized onto the ~429 bindings (the viewer resolves it from
-`meta.source_corpora`). A pill's per-claim ref reads `<ref>, p. N` (full title + edition, so
-it is unambiguous). A binding with no quote source falls back to its **Ki** (verified), else
-shows `NOSOURCE`. `verified` is earned by a two-step (LLM extract +
-LLM judge supports), then `check_data.py`'s source-quote check confirms the quote is really
-on the page (the backstop against a hallucinated quote). The **NbN** is simpler:
-`apply_nbn_sources.py` greps Stahl's verbatim "Neuroscience-based Nomenclature: <value>"
-line and confirms the dataset `nbn` is a substring (a programmatic check, stronger than a
-judge for this field); for a newer drug Stahl gives no NbN line, it falls back to the drug
-**Class** line under the same substring gate and marks the entry `nbn_nonstandard` (the
-viewer then labels the value a class descriptor, not a formal NbN). Page files live under the author-side source tree (see
-`CLAUDE.local.md`), so the quote check is author-/hook-side and skipped (warned) on a clone
-without them.
+**Per-claim sources + the verify gate.** Every source is `{corpus, page, quote, provenance}`: a
+binding's `sources[]`, a drug's `nbn_sources[]`, a projection/circuit/group quote (`KANDEL_QUOTES`), a
+receptor/target location/classification, region anatomy. `corpus` keys the source-agnostic
+`SOURCE_CORPORA` registry (`{ref, citation, url, pages_dir}`, emitted as `meta.source_corpora`; the
+full citation is resolved from there, not denormalized onto the ~429 bindings). `_quote_sources` /
+`_binding_sources` validate corpus + grade (a `verified` source needs page + quote). `verified` is
+earned by a two-step (LLM extract + LLM judge supports), then `check_data.py`'s source-quote check
+confirms the quote is really on the page (the backstop against a hallucination). **Page files are
+author-side (see `CLAUDE.local.md`), so the quote gate is skipped + warned on a clone that lacks them**
+(true for every corpus below). A binding with no quote source falls back to its **Ki** (verified), else
+`NOSOURCE`. The **NbN** is simpler: `apply_nbn_sources.py` greps Stahl's verbatim
+"Neuroscience-based Nomenclature: <value>" line and confirms the dataset `nbn` is a substring (stronger
+than a judge for this fixed field); a newer drug with no NbN line falls back to Stahl's **Class** line
+under the same gate, marked `nbn_nonstandard`.
 
-**Binding affinity (PDSP Ki, corpus #5).** `pdsp_ki` in `SOURCE_CORPORA` has no `pages_dir`
-(it is a single CSV of measured Ki values, not paged text) but a `csv` path instead. A
-binding's `ki.source` is `{corpus:pdsp_ki, ki_id, value_nm, ...}`: the analogue of a quote's
-page is the **Ki id** (a CSV row id). `_ki_annotation` validates it; `check_data.py`'s
-ki-row check confirms the cited `ki_id` really exists in the CSV with that value (author-side,
-skipped on a clone like the quote gate). A verified Ki backs the binding's grade
-(`_binding_grade`). Refresh with `fetch_ki.py --apply` after a fresh CSV download.
+The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless noted:
+- **#1 Stahl / #2 Kandel / #3 Stahl Essential / #4 Carlat / #6 Nieuwenhuys** are `pages_dir` book
+  corpora (`page` = a page number): drug bindings/NbN/class (Stahl), pathways + region anatomy (Kandel,
+  Nieuwenhuys), receptor/target mechanism (Stahl Essential); see `CLAUDE.local.md` for the trees.
+- **#5 PDSP Ki** (`pdsp_ki`) has a `csv` path, not `pages_dir` (measured Ki values, not paged text). A
+  binding's `ki.source` cites a **Ki id** (a CSV row) instead of a page; `check_data.py` confirms the
+  row exists with that value. A verified Ki backs `_binding_grade`. Refresh `fetch_ki.py --apply`.
+- **#7 GtoPdb** (`gtopdb`, `page` = a GtoPdb targetId) is the source for **receptor** "Found in"
+  regions. A confirm-only LLM judge maps a cached quote (by index) to each existing region (never
+  adds/drops one); `apply_location_sources.py` writes the `verified` source into
+  `tools/location_sources.json`. Each quote carries the assay **`species`** (Human/Rat/Mouse/Monkey,
+  validated in `_quote_sources`); a non-human-only region shows an amber "· <species>" tag.
+- **#8 Allen AHBA** (`allen_ahba`, `page` = an HGNC gene) is the complement covering **non-receptor
+  targets** + the receptors/regions GtoPdb misses. `fetch_allen.py` turns the microarray **PACall**
+  boolean across human donors into a deterministic present/absent (**no judge**);
+  `apply_location_sources.py --corpus allen` writes the `verified`, `species: Human` source. The panel's
+  species tag prefers Human (`locationEntry`), so an Allen confirmation clears the amber tag. **Caveat:**
+  microarray = mRNA in cell bodies, so a transporter confirms at its source nucleus (SERT->raphe,
+  NET->LC) and its terminal-region claims honestly stay `llm`.
 
-**Expression locations (GtoPdb, corpus #7).** A receptor's / target's **"Found in"
-region** is a `receptor_locations` / `target_locations` node graded per region (default
-`llm`). `gtopdb` in `SOURCE_CORPORA` is a `pages_dir` corpus whose `page` is a
-[Guide to Pharmacology](https://www.guidetopharmacology.org/) targetId and whose page file
-(`sources/gtopdb/pages/<targetId>.md`, author-side) holds that target's cleaned
-tissue-distribution comment lines. `tools/fetch_gtopdb.py` fetches them; a **confirm-only**
-LLM judge maps which cached quote (by index, so no quote drift) supports each existing
-LLM-authored region, never adding or dropping a region; `tools/apply_location_sources.py`
-re-confirms the quote on its page and writes a `verified` source into
-`tools/location_sources.json`. Each quote carries the assay **`species`** (Human / Rat /
-Mouse / Monkey), a field on the quote-source shape validated in `_quote_sources`; the viewer
-surfaces a non-human species as an amber "· <species>" tag beside the region + an "Assay
-species" tooltip line (mirroring the Ki chip's non-human warning). Quote-gated exactly like
-Stahl (author-side pages; skipped + warned on a clone). Refresh: `fetch_gtopdb.py`, judge,
-`apply_location_sources.py`, then `generate_data.py`.
+**Descriptions** are not a node kind (not tallied). Drugs, structures and non-receptor targets carry
+**no baked description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
+`liveWikiDescription` over `js/wiki.js` `fetchWikiLead(url, lang)` (locale lead, English fallback), so
+the dataset ships no copyrighted prose (a panel whose live lead fails shows none). Receptors + projection
+groups carry a short **authored** `description` as the offline fallback, overridden best-effort by the
+live lead. Needs the `connect-src https://*.wikipedia.org` CSP allowance.
 
-**Expression locations (Allen AHBA, corpus #8).** The complement to GtoPdb for the same
-`receptor_locations` / `target_locations` nodes: it covers the **non-receptor targets**
-GtoPdb does not (transporters/enzymes/channels), the residual **receptors** GtoPdb had no
-tissue data for, and the deep nuclei. `allen_ahba` in `SOURCE_CORPORA` is a `pages_dir`
-corpus whose `page` is an **HGNC gene symbol** and whose page file
-(`sources/allen/pages/<gene>.md`, author-side) holds one presence line per confirmed region.
-`tools/fetch_allen.py` aggregates the [Allen Human Brain Atlas](https://human.brain-map.org/)
-microarray **PACall** detection boolean across the human donors into a deterministic
-present/absent per (gene, region) (**no judge**, unlike GtoPdb), emitting
-`sources/allen/confirmed.json`; `apply_location_sources.py --corpus allen` re-confirms each
-quote on its gene page and writes a `verified`, `species: Human` source. Confirm-only (never
-adds/drops a region), quote-gated exactly like Stahl. A region can end up with both a GtoPdb
-and an Allen source; the panel's species tag **prefers Human** (`locationEntry` in
-`js/data.js`), so an Allen human confirmation clears the amber tag on a region GtoPdb had
-only in rat/mouse. **Caveat:** microarray measures mRNA in cell bodies, so a transporter
-(SERT/NET) confirms at its source nucleus (raphe/LC), and its terminal-region claims honestly
-stay `llm`. Refresh: `fetch_allen.py`, `apply_location_sources.py --corpus allen`, then
-`generate_data.py`.
+**The `wikipedia` pill (green, viewer-only).** A live-fetched lead renders a green **✓** pill (same
+glyph as `verified`: both are inspectable non-LLM extracts), NOT the stored `sourced`/`llm` grade: a
+live fetch is a verbatim programmatic read that cannot drift from the article. It is a **presentation**
+(`PROVENANCE_PILLS.wikipedia` + `info.provWikipedia`, `.src-prov-wikipedia` shares the green), **not** a
+stored grade and **not** tallied. Asymmetry: a **baked** Wikipedia snapshot stays yellow `sourced` (a
+stored copy *can* drift); only the **live** read earns green. A present reference *link* carries no pill
+(the description above already grades the same source, `appendWiki(url)`); a missing link shows `NOSOURCE`.
 
-**Descriptions.** Drugs, structures and non-receptor targets carry **no baked
-description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
-the shared `liveWikiDescription` helper over `js/wiki.js` `fetchWikiLead(url, lang)` (the
-lead for the viewer's locale, English fallback), shown as a green **`wikipedia`** paragraph
-when it arrives (see the pill note below), so the text stays current and the dataset ships
-no copyrighted prose; a wiki-linked panel whose live lead fails to load shows no
-description. Receptors (and projection groups) carry a short **authored** `description`
-painted first as the offline fallback, which the live lead overrides best-effort when it
-arrives. Needs the `connect-src https://*.wikipedia.org` CSP allowance.
-
-**The `wikipedia` pill (green, viewer-only).** A live-fetched Wikipedia lead renders a green
-**✓** pill (the same glyph + colour as `verified`, since both are inspectable non-LLM
-extracts; a newcomer reads one "trustworthy" checkmark, the tooltip names which), NOT the
-stored `sourced`/`llm` grades: a live fetch is a verbatim programmatic
-read of an inspectable source with no LLM in the loop, so it cannot drift from the article,
-which is exactly the "green if true according to some inspectable source" bar. It is a
-**presentation** (an added `PROVENANCE_PILLS.wikipedia` glyph + `info.provWikipedia`
-tooltip, `.src-prov-wikipedia` shares the green with `.src-prov-verified`), **not** a stored
-node grade and **not** tallied (there is no `wikipedia` `PROVENANCE_LEVEL`, no such bucket in
-`_provenance_stats`). Note the asymmetry: a **baked** Wikipedia snapshot the dataset ships
-(e.g. a drug's stored lead) stays yellow `sourced` because a stored copy *can* drift; only
-the **live** read earns green.
-
-**Presentation.** `makeProvenancePill(level)` -> a `.src-prov-<level>` pill (`.src-todo` for
-the none case) with the glyph + `info.prov*` tooltip via `withTip`; colours are CSS.
-Each node's grade pill rides that node's own row/heading (a fact row, a route/kind line,
-a group/subtitle line), never a separate bottom "Sources" block. `appendWiki(url)` renders
-the reference-link row (a present link carries no pill, since the description above it
-already grades the same Wikipedia source; a missing link shows the `NOSOURCE` pill). Each pill's tooltip explains its
-own grade and the Sources & provenance popup carries the full key, so there is no separate blanket "?" caveat.
-
-**The "% sourced" figure.** `_provenance_stats` reduces every **node** + reference to its
-strongest grade and buckets it into one of three tiers: **verified** (quote-checked),
-**sourced** (from a document, not quote-checked), or **missing** (no source document at
-all). A bare `llm` grade *is* missing: "an LLM asserted this from memory" means no
-document, so it buckets identically to a node with no source object (the viewer still
-distinguishes the two visually, grey `?` vs orange `NOSOURCE`, but both are unbacked).
-It tallies per node kind (drug bindings / NbN / **drug class** / projections / **circuits**
-/ **projection groups** / receptor classifications / **receptor expression regions** /
-target classifications / **target expression regions** / region anatomy / wikipedia
-references) plus a headline `pct_backed` over the **knowledge nodes** (sourced-or-verified
-/ total), emitted as `meta.provenance_stats` (key `nodes`). The Sources & provenance
-popup shows it (`buildAboutSourcing` into `#about-sourcing`) and
-`tools/update_readme_stats.py` writes the same into the README
-`SOURCING_STATS` block; `check_data.py` re-confirms the tally is self-consistent (its
-coverage table prints the per-node-kind, per-tier breakdown, columns M / S / S+V).
-References (wikipedia links) are their own kind, not folded into the headline (a reference
-points *at* a node, it is not itself one). Current: ~96% of 1743 nodes backed (drug
-bindings ~98%, NbN 100%, `receptors` mechanism 54/56 (Stahl Essential), `drug_categories`
-156/165, `structures` 52/52, `circuits` 6/6, `projection_groups` 10/10, `references` 100%,
-`receptor_locations` 360/383 (GtoPdb + Allen AHBA, see Expression locations),
-`target_locations` 108/124 (Allen AHBA); the residual 70 `missing` is spread thin now: the 23
-`receptor_locations` Allen cannot reach (off-atlas bases + sampled-but-absent), the 16
-`target_locations` that stay `llm` (SERT/NET terminal regions + melatonin, honest microarray
-limits), the 12 unsourced `drug_bindings`, the 9 `drug_categories` (7 recreational drugs with
-no Stahl class line + 2 flagged mismatches), the 4 remaining projections (claustrum->frontal +
-claustrum->insula, which no single Nieuwenhuys page states), the 4 `targets`, and 2 `receptors`
-(5-HT1E/1F, absent from Stahl Essential)). Each expression
-region is its own node (per the request to grade each "Found in", not the list as a whole),
-individually upgradeable when sourced. Descriptions are no longer a node kind: every
-wiki-linked panel fetches the live Wikipedia lead instead of baking it.
+**The "% sourced" figure.** `_provenance_stats` reduces every node + reference to its strongest grade and
+buckets it into **verified** (quote-checked) / **sourced** (from a document) / **missing** (no document).
+A bare `llm` grade *is* missing (an LLM asserting from memory has no document), so it buckets with a
+sourceless node (the viewer still shows them differently, grey `?` vs orange `NOSOURCE`). It tallies per
+node kind (drug bindings, NbN, drug class, projections, circuits, projection groups, receptor/target
+classifications, receptor/target expression regions, region anatomy, wikipedia references), plus a
+headline `pct_backed` over the **knowledge nodes** (references excluded, a reference points *at* a node),
+emitted as `meta.provenance_stats` (key `nodes`). Each expression region is its own node, individually
+upgradeable. **The live per-kind figures live in the README `SOURCING_STATS` block (auto-written by
+`update_readme_stats.py`, CI runs it `--check`) and the Sources & provenance popup; they are not repeated
+here, to avoid drift.** `check_data.py` re-confirms the tally is self-consistent (coverage columns M/S/S+V).
 
 ## Changing the data
 
