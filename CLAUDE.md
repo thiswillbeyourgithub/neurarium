@@ -183,234 +183,43 @@ material location).
 
 ## Running
 
-The data is loaded with `fetch()`, so serve over HTTP (`file://` fails CORS). The
-served site is `public/`. From the repo root:
-
-```
-python tools/serve.py        # http://localhost:8000/ (recommended)
-# or: cd public && python -m http.server 8000
-```
-
-Prefer `tools/serve.py`: it sends `Cache-Control: no-store`, so the browser
-refetches every ES module each reload. Plain `http.server` lets browsers heuristic-
-cache JS modules, which can serve a stale `js/*.js` and cause baffling mismatch
-crashes; if you see one after editing JS, hard-reload (Ctrl/Cmd+Shift+R) or use `serve.py`.
-
-Debugging: [eruda](https://github.com/liriliri/eruda) on-screen console, **gated**
-on `?debug=1` exactly (normal visitors never download it), vendored same-origin at
-`public/vendor/eruda/eruda.js`, pinned top-right. Runtime errors otherwise surface
-via the red error banners.
-
-### Screenshots & deep-link view params
-
-`tools/shot.py` (Playwright) renders the page to a PNG: serves `public/` with
-`tools/serve.py`, drives headless Chromium (SwiftShader GL flags baked in, so
-WebGL renders without a display), captures the canvas. Bare run writes
-`docs/screenshot.png` (a static still). The README's animated hero is `docs/preview.gif`,
-recorded by `tools/demos/neurarium.py` (see the `tools/demos/` entry above).
-
-```
-python tools/shot.py
-python tools/shot.py --params "explode=0.5&view=iso" --out /tmp/brain.png
-python tools/shot.py --params "only=putamen_R&view=iso" --out /tmp/putamen.png
-```
-
-Needs `playwright` + `playwright install chromium` once (or `uv run tools/shot.py`,
-inline deps). `--headed` opens a real window; `--wait` ms before capture (default 6000).
-
-The `--params` string is the URL query parsed by `applyViewParams` in
-`js/main.js`, so the keys also work as deep links:
-
-| key | effect |
-| --- | --- |
-| `only=id[,id2]` | show only these structure ids (others + arrows hidden) |
-| `view=front\|back\|left\|right\|top\|bottom\|iso` | frame the visible meshes |
-| `explode=0..1` | blow-out amount (also moves the slider) |
-| `transparency=0..1` | material opacity |
-| `names=all` | show every label |
-| `autorotate=1` | spin (deep links default auto-rotate off; this forces it on) |
-| `ui=0` | hide the panels + legend (clean shape shots) |
-
-`only`/`view` auto-fit the camera to whatever is visible.
+> Moved to [`docs/RUNNING.md`](docs/RUNNING.md) to keep this file terse: serve `public/` over HTTP (`tools/serve.py`); `tools/shot.py` screenshots + the `?params` deep-link view keys.
 
 ## Deployment
 
-A hardened Caddy container (`docker/docker-compose.yml`): non-root UID 1000,
-`cap_drop: ALL`, `no-new-privileges`, read-only rootfs (writable paths via
-`size=`-capped tmpfs), CPU + memory + `pids` limits (all under
-`deploy.resources.limits` so `pids` isn't double-defined, which compose rejects),
-`mem_swappiness: 0`, rotated `json-file` logging. Listens `:8359`, published
-`127.0.0.1:8359` so a host reverse proxy terminates TLS in front. The image is a
-thin build on `caddy:2-alpine` (`docker/Dockerfile`) that strips the binary's
-`cap_net_bind_service` (else `exec` fails under `no-new-privileges`); `public/` is
-bind-mounted read-only at `/srv`. The actual deploy procedure is in `CLAUDE.local.md`.
+> Moved to [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to keep this file terse: the hardened Caddy container (non-root, read-only rootfs, dropped caps); actual deploy procedure in `CLAUDE.local.md`.
 
 ## Git hooks
 
-Shipped under `tools/git-hooks/` (tracked = single source of truth), activated
-per-clone once: `git config core.hooksPath tools/git-hooks` (not committed; every
-fresh clone runs it). Current:
-
-- `pre-push`: refuses any ref but `main`. On `main`, prompts on the terminal
-  (`y/N`, via `/dev/tty`) to run `tools/check_data.py`; a check that reports
-  **errors** aborts the push (warnings pass). A non-interactive push skips the prompt.
+> Moved to [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to keep this file terse: repo-tracked hooks under `tools/git-hooks/`, activated per-clone; `pre-push` guards `main` + offers the data check.
 
 ## Data checks
 
-`tools/check_data.py` (stdlib) runs over the **emitted** `public/data/`,
-independent of `generate_data.py`. Exit 0 = no errors (warnings allowed), 1 =
-errors. Functions take loaded data as args (unit-testable). Six families:
-
-- **Duplicates** (per collection + projections by `from -> to`): exact or
-  normalized id/key collision = error (`normalize_for_match` lowercases + strips
-  non-alphanumerics, so `mao_a`/`mao-a` collide); normalized display-name collision
-  = warning.
-- **Reachability**: every cross-reference must resolve (drug binding `target`,
-  projection endpoints/kind, circuit/receptor/target structure refs, projection-
-  group `kind`/`sign` key, receptor classification keys, target type + region bases,
-  every receptor also a `drug_targets` key). The region-base check is what
-  guarantees the panels' "Found in" rows are clickable. Dangling refs = error.
-- **TODOs** (provenance-aware): a literal `"TODO"` outside a source url, or a
-  focusable target with no `wikipedia`, = warning. A source *url* left `"TODO"` is
-  `[ok]` for an `llm` citation (expected) but **warned** if the source claims a
-  higher grade. TODOs never fail the run.
-- **Provenance grades**: every `provenance` (incl. per-binding sources, `nbn_sources`,
-  circuit + projection-group sources), every `classification_provenance`, every
-  `wikipedia_provenance` must be a known grade (`llm`/`sourced`/`verified`) or
-  error. Re-confirms `meta.provenance_stats` is self-consistent (per-kind sums,
-  totals, recomputed `pct_backed`) or error.
-- **Source quotes** (the heart of sourcing): each quote-level drug source
-  (`{corpus,page,quote,provenance}`): `corpus` must resolve to `meta.source_corpora`,
-  a `verified` source must carry page + quote, and the normalized quote must be an
-  exact substring of the normalized cited page text. Page material is author-side
-  (see CLAUDE.local.md); the quote check is skipped + warned on a clone without it.
-  A quote not on its page = error (the gate that keeps the LLM extraction honest).
-  Also checks each binding's `ki`: its source corpus resolves, an `affinity_only`
-  binding carries a `ki`, and (author-side, skipped on a clone) the cited `ki_id` row
-  is really in the corpus CSV with that value (the PDSP analogue of the quote gate).
-- **Structure connectivity** (warns, never errors): isolated / inward-only /
-  outward-only structures from the projection endpoints (`bidirectional` counts
-  both ways). Source nuclei + olfactory bulb are expected outward-only, pituitary
-  inward-only; the point is to flag a region wired one-way (e.g. a missing return pathway).
+> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: six families (duplicates, reachability, TODOs, provenance grades, source quotes, connectivity).
 
 ## Internationalization (i18n)
 
-English / French, no build step; `js/i18n.js` (classic script, loaded early) is the
-whole mechanism.
-
-- **Two string sources.** *UI* strings live in the message catalogue inside
-  `js/i18n.js` (one object per language). *Data* strings (region/pathway/circuit
-  names, descriptions, neurotransmitters, the group/kind/sign/receptor labels) are
-  `{en,fr}` objects authored in `generate_data.py` and resolved by `js/data.js`.
-- **Generator side.** Anatomy is authored in English; a single `FR` table
-  (English -> French) is the French source, and `_t("English")` wraps any display
-  string into `{en, fr}`. A string with no `FR` entry makes `build_records` raise
-  listing every missing one, so it can't ship half-translated. Per-hemisphere names
-  are composed by `_side_name` (Right/Left, and gender/number-agreed French tuned by
-  an optional `fr_gender` of `m`/`f`/`mp`/`fp`), not stored; each record also carries
-  a hemisphere-stripped `base_name`.
-- **Language pick.** `detectLang()`: `?lang=en|fr` (persisted to localStorage) >
-  saved choice > browser locale `fr*` > English. `window.__I18N__` exposes `lang`,
-  `t(key, vars)` (UI, `{token}` interpolation, falls back to English then the key),
-  `pick(field)` (collapse an `{en,fr}` field; plain string passes through), `setLang`.
-- **Static markup** in `index.html` carries `data-i18n` (textContent),
-  `data-i18n-html` (innerHTML), `data-i18n-attr="attr:key,..."`, filled at
-  `DOMContentLoaded`; dynamic UI calls `t()` directly. `setLang` saves the choice and
-  reloads (data is resolved at load), and writes `<html lang>`. The `#lang-switch`
-  (EN/FR) is pinned at the top of the panel body.
-
-> [!IMPORTANT]
-> Any new user-visible string goes in **both** language tables in `js/i18n.js` (UI)
-> or as an `{en, fr}` object in `generate_data.py` (data). Source citations + URLs
-> are intentionally not translated.
+> Moved to [`docs/I18N.md`](docs/I18N.md) to keep this file terse: EN/FR, no build step; UI strings in `js/i18n.js`, data strings as `{en,fr}` via `_t()`/`FR` in `generate_data.py`. Any new string needs both languages or the build raises.
 
 ## Analytics (umami)
 
-Optional, privacy-friendly. Because this is a no-build static site on a read-only
-rootfs, config is injected at runtime:
-
-1. Set `ANALYTICS_URL`, `ANALYTICS_WEBSITE_ID`, optional `ANALYTICS_SRI`,
-   `ANALYTICS_DNT` (umami `data-do-not-track`, default `"true"`) in `docker/.env`.
-2. `docker/entrypoint.sh` renders `/gen/app-config.js` from those vars at start;
-   Caddy serves it for `/app-config.js`.
-3. `js/app-init.js` reads `window.__APP_CONFIG__` and injects the umami `<script>`
-   (with SRI/crossorigin + explicit `data-do-not-track`).
-
-Client-facing names are generic (`app-config.js`, `js/app-init.js`,
-`__APP_CONFIG__`) because a path containing "analytics" is blocked by many content
-filters/proxies. Leave the URL/ID empty to fully disable. `ANALYTICS_URL` must be
-the tracker *script* URL (used as a `<script src>`); the container validates at
-startup that it is reachable and serves JavaScript, else it crashes (so a
-misconfiguration is loud, not silently tracking nothing).
+> Moved to [`docs/ANALYTICS.md`](docs/ANALYTICS.md) to keep this file terse: optional umami, runtime-injected via `entrypoint.sh` -> `/gen/app-config.js`; generic client-facing names dodge content filters.
 
 ## Content-Security-Policy
 
-Caddy sends a CSP + `X-Content-Type-Options`, `X-Frame-Options: DENY`,
-`Referrer-Policy: no-referrer` on every response (`docker/Caddyfile`).
-`default-src 'self'` with `object-src`/`base-uri`/`frame-ancestors`/`form-action`
-locked. three.js + eruda are vendored same-origin, so `script-src` needs no CDN.
-Relaxations:
-
-- `font-src 'self' data:` — eruda's embedded icon font.
-- the umami origin in `script-src` + `connect-src` when configured (entrypoint
-  derives `ANALYTICS_ORIGIN`, the Caddyfile interpolates `{$ANALYTICS_ORIGIN:}`).
-- `https://*.wikipedia.org` in `connect-src` — info panels fetch the current
-  Wikipedia lead (`js/wiki.js`).
-- `https://upload.wikimedia.org` in `img-src` — the structure panel hot-links each
-  region's illustration. (`img-src` also allows `data:`.)
-
-`script-src`/`style-src` include `'unsafe-inline'` (no-build site: inline importmap,
-eruda gate, inline `<style>`). CSP is emitted only by Caddy, not `serve.py`.
-
-> [!IMPORTANT]
-> A new external resource (CDN script, remote font, iframe, image host, cross-origin
-> fetch) needs the matching CSP directive extended in `docker/Caddyfile`.
+> Moved to [`docs/CSP.md`](docs/CSP.md) to keep this file terse: Caddy sends CSP + security headers on every response; a new external resource (CDN, font, image host, cross-origin fetch) needs its directive extended in `docker/Caddyfile`.
 
 ## Dev / WIP banner
 
-Optional "work in progress" top banner, same runtime-injection plumbing as
-analytics. `DEV` in `docker/.env` (default 0); `entrypoint.sh` stamps
-`STARTED_AT=$(date +%s)` and renders both into `/gen/app-config.js`.
-`js/dev-banner.js` reveals `#dev-banner` (amber, in `#banners`) when `dev === "1"`
-and computes "X ago" from `startedAt` (refreshed per minute). Clicking dismisses it
-for the current view only (not persisted, so a reload brings it back). It ends with
-a **Source** link to `cfg.sourceUrl` (`SOURCE_URL` env, default the public site;
-only `http(s)`; clicking the link navigates instead of dismissing). The repo URL is
-not hardcoded in committed source.
+> Moved to [`docs/ANALYTICS.md`](docs/ANALYTICS.md) to keep this file terse: optional amber WIP banner, `DEV`/`STARTED_AT` in `app-config.js`, `js/dev-banner.js`; same runtime-injection plumbing as analytics.
 
 ## Error banners
 
-So a visitor never opens eruda to learn why something broke, failures surface as
-red dismissible banners in `#banners` (`js/error-banner.js`): installs `window`
-`error` (capture phase, so failed resource loads count) + `unhandledrejection`
-handlers (with `file:line` for script errors); exposes `window.showErrorBanner(msg)`
-(used by `js/main.js` for the data-load failure). A failed resource whose element
-carries `data-optional` is skipped (no banner): a panel's molecule / Wikipedia
-illustration self-handles a failed load by dropping its own figure, and an absent
-optional image is not an app error to shout about. Banners stack; each has a ×;
-identical messages dedupe into one `(×N)`; a `MAX_BANNERS` cap. A `ResizeObserver`
-republishes the stack height to `--banners-height`, which `#status` offsets against.
+> Moved to [`docs/BANNERS.md`](docs/BANNERS.md) to keep this file terse: failures surface as red dismissible banners (`js/error-banner.js`) so a visitor never opens the console.
 
 ## Loading overlay
 
-A startup progress overlay so a slow first load shows feedback instead of a blank
-canvas. `#loading` (static markup in `index.html`, **visible by default** so it paints
-before any ES module parses) covers the canvas above every panel/banner; `js/loading.js`
-`createLoadingScreen()` exposes `setProgress(frac, label)` (monotone: the bar only ever
-moves forward), `done()` (fill to 100%, fade out via the `.loaded` opacity transition,
-then detach) and `fail()` (detach at once so an error banner takes over). `js/main.js`
-drives it: the data fetch fills the first half (`loadBrainData`'s `onProgress` fires per
-shape file), SDF meshing the back half (`sdf-pool` `meshAll`'s per-item `onItem`,
-captioned with each region's name), then `done()` fades it out as the assemble intro
-begins. i18n keys `loading.*`.
-
-**Startup sourcing gate.** Immediately (before the data load), `main()` shows the
-**Sources & provenance** popup (`#sourcing-modal`) over the still-visible `#loading`
-overlay (it sits above via a higher `z-index`, 80 > `#loading`'s 70), so a visitor reads
-how the data is sourced while it loads and closes it to reach the app (still loading
-behind it, or already up). Skipped for the `?ui=0` clean-shot mode. Its static intro +
-grade key render at once (`buildAboutSourcing(null)`); the coverage tally fills once the
-dataset loads.
+> Moved to [`docs/BANNERS.md`](docs/BANNERS.md) to keep this file terse: startup `#loading` progress overlay (`js/loading.js`) + the startup Sources-and-provenance gate.
 
 ## Controls
 
