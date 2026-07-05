@@ -2810,8 +2810,13 @@ RECEPTOR_CLASSIFICATION_COVERAGE: dict[str, tuple[str, ...]] = {
     "5ht2b": _FY,
     # "5HT7 receptors are postsynaptic, excitatory": family + sign + site.
     "5ht7": _FGY,
-    # Opioid "synapse with postsynaptic sites": family + site.
-    "mu": _FY, "delta": _FY, "kappa": _FY,
+    # Opioid quote says only "synapse with postsynaptic sites", but the record is
+    # synaptic="both" (opioid receptors are genuinely pre- AND postsynaptic
+    # autoreceptors/heteroreceptors). Stahl Essential never states the presynaptic
+    # half anywhere in the corpus, so the postsynaptic-only quote cannot back "both":
+    # family alone is covered and synaptic stays honestly llm (cf. 5-HT1B/D, which
+    # DID have a presynaptic p131 quote to complete its "both" via RECEPTOR_ATTR_QUOTES).
+    "mu": _F, "delta": _F, "kappa": _F,
     # CB1 "presynaptic ... inhibition of release" but record sign="modulatory", so
     # only the presynaptic site is backed, not the sign.
     "cb1": _FY,

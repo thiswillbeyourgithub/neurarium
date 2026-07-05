@@ -3293,9 +3293,9 @@
       },
       "receptor_synaptic": {
         "total": 56,
-        "verified": 11,
+        "verified": 8,
         "sourced": 0,
-        "missing": 45
+        "missing": 48
       },
       "receptor_locations": {
         "total": 383,
@@ -3336,10 +3336,10 @@
     },
     "nodes": {
       "total": 1913,
-      "verified": 1728,
+      "verified": 1725,
       "sourced": 0,
-      "missing": 185,
-      "backed": 1728,
+      "missing": 188,
+      "backed": 1725,
       "pct_backed": 90
     }
   }
