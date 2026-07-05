@@ -2540,24 +2540,27 @@ function createInfoPanel(data) {
       appendLookupLink(recWiki, "info.gtopdb", gtopdbSearchUrl(receptor.name), "info.gtopdbTitle");
 
       // Classification facts as label / value rows; the "effect" value carries the
-      // sign swatch so the colour matches the dots + legend row. The mechanism grade
-      // (classification_provenance) backs every one of these claims, so each row
-      // carries its OWN badge on the right rather than a single broad "Source" row
-      // below (a source should always sit on the specific node it grades). A fresh
-      // pill per row (a DOM node lives in one place); same grade + tooltip on each.
-      const classPill = () => makeProvenancePill(
-        receptor.classification_provenance,
-        receptor.sources && receptor.sources.length
-          ? sourcesTip(receptor.sources) : undefined);
+      // sign swatch so the colour matches the dots + legend row. Each attribute
+      // (family / class / sign / synaptic) is its OWN graded sub-claim, so each row
+      // shows its OWN pill from receptor.classification[attr]: a quote that only
+      // backs the sign no longer lends a verified badge to the GPCR or pre/post
+      // claim it never addressed. Unsourced attributes read honestly as llm.
+      const attrPill = (attr) => {
+        const entry = (receptor.classification || {})[attr] || {};
+        return makeProvenancePill(
+          entry.grade,
+          entry.sources && entry.sources.length
+            ? sourcesTip(entry.sources) : undefined);
+      };
       const facts = el("div", "info-facts");
       addFactRow(facts, t("receptor.neurotransmitter"), receptor.neurotransmitter,
-        null, { pill: classPill() });
+        null, { pill: attrPill("family") });
       addFactRow(facts, t("receptor.type"), receptor.classLabel,
-        null, { pill: classPill() });
+        null, { pill: attrPill("receptor_class") });
       addFactRow(facts, t("receptor.effect"), receptor.signLabel, receptor.signColor,
-        { pill: classPill() });
+        { pill: attrPill("sign") });
       addFactRow(facts, t("receptor.synaptic"), receptor.synapticLabel,
-        null, { pill: classPill() });
+        null, { pill: attrPill("synaptic") });
       body.appendChild(facts);
 
       // Where it is expressed.
@@ -3767,8 +3770,12 @@ function buildAboutSourcing(meta) {
     circuits: "about.kindCircuits",
     projection_groups: "about.kindProjectionGroups",
     receptors: "about.kindReceptors",
+    receptor_class: "about.kindReceptorClass",
+    receptor_sign: "about.kindReceptorSign",
+    receptor_synaptic: "about.kindReceptorSynaptic",
     receptor_locations: "about.kindReceptorLocations",
     targets: "about.kindTargets",
+    target_polarity: "about.kindTargetPolarity",
     target_locations: "about.kindTargetLocations",
     structures: "about.kindStructures",
     references: "about.kindReferences",

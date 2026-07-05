@@ -62,7 +62,10 @@ in `meta.provenance_stats.by_kind`):
 - projection (pathway) -> `projections.jsonl` -> `projections`
 - functional circuit -> `circuits.jsonl` -> `circuits`
 - projection group -> `projection_groups.jsonl` -> `projection_groups`
-- receptor classification -> `receptors.jsonl` -> `receptors`
+- receptor classification -> `receptors.jsonl`, split into four independent graded
+  sub-claims: neurotransmitter `family` -> `receptors`; mechanism `receptor_class` (GPCR/ionotropic)
+  -> `receptor_class`; `sign` (excit./inhib.) -> `receptor_sign`; `synaptic` site (pre/post) ->
+  `receptor_synaptic` (a receptor's `classification[attr]` each carry their own grade)
 - receptor *expression region* -> a receptor's `location_sources` -> `receptor_locations`
 - non-receptor drug target -> `meta.drug_targets` -> `targets`
 - target *tone polarity* (a direction-flipping `vesicular`/`sign`/`synaptic` flag) -> a target's `polarity_provenance` -> `target_polarity`
@@ -330,7 +333,9 @@ in `js/data.js`.
   and vanish when it hides; count scaled by surface area; pulsed). Builder `buildGemCloud` (+
   `GEM_DOT_SIZE`), reused by the drug animation. Stopped via an `onIsolate` watcher (`.matches`).
 - Panels: a receptor opens `showReceptor` (system, Wikipedia link, live-refreshed description, then
-  the classification facts each carrying the *mechanism* grade pill, then the "Found in" list via
+  the four classification facts (family / class / sign / synaptic) each carrying their *own*
+  per-attribute grade pill (a quote grades only the attributes it substantiates, so an unsourced
+  GPCR/sign/site reads honestly as `llm` instead of borrowing a neighbour's quote), then the "Found in" list via
   `locationList` grouped under `groupLabels` sub-headings, each region carrying its **own**
   expression-provenance pill + an amber "· <species>" tag when it has no human assay (`locationEntry`
   prefers Human, so an Allen confirmation clears it), or one pilled "Throughout the brain" for
@@ -347,8 +352,12 @@ in `js/data.js`.
   A stub receptor / unlocated target renders muted.
 
 Receptor data: `_receptor_record` validates every family/class/sign/synaptic key + location base;
-`locations="ALL"` -> `ubiquitous`. `classification_provenance` (the mechanism grade) defaults `llm`,
-overridable in `RECEPTOR_PROVENANCE`. Each expression region is a **separate** graded claim (kind
+`locations="ALL"` -> `ubiquitous`. Each of the four classification attributes is a **separate** graded
+node: the base grade defaults `llm` (overridable in `RECEPTOR_PROVENANCE`) and a
+`STAHL_ESSENTIAL_RECEPTOR_QUOTES` quote upgrades **only** the attributes listed for that receptor in
+`RECEPTOR_CLASSIFICATION_COVERAGE` (assigned conservatively: never when the quote and the record
+disagree, e.g. 5-HT2B's presynaptic-autoreceptor quote vs its postsynaptic record value). Each
+expression region is a **separate** graded claim (kind
 `receptor_locations`, default `llm`, upgraded per (receptor, region) by `RECEPTOR_LOCATION_SOURCES`,
 quote-checked); these drove the `brainstem_nuclei` group. A non-receptor target's type/system/regions
 are authored in `DRUG_TARGETS`; its regions grade identically (kind `target_locations`,

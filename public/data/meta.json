@@ -3279,6 +3279,24 @@
         "sourced": 0,
         "missing": 2
       },
+      "receptor_class": {
+        "total": 56,
+        "verified": 30,
+        "sourced": 0,
+        "missing": 26
+      },
+      "receptor_sign": {
+        "total": 56,
+        "verified": 13,
+        "sourced": 0,
+        "missing": 43
+      },
+      "receptor_synaptic": {
+        "total": 56,
+        "verified": 8,
+        "sourced": 0,
+        "missing": 48
+      },
       "receptor_locations": {
         "total": 383,
         "verified": 360,
@@ -3317,12 +3335,12 @@
       }
     },
     "nodes": {
-      "total": 1745,
-      "verified": 1674,
+      "total": 1913,
+      "verified": 1725,
       "sourced": 0,
-      "missing": 71,
-      "backed": 1674,
-      "pct_backed": 96
+      "missing": 188,
+      "backed": 1725,
+      "pct_backed": 90
     }
   }
 }

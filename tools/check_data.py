@@ -515,7 +515,8 @@ def print_coverage(stats):
     a = stats.get("nodes", {})
     # The node kinds folded into the headline, in the generator's order.
     node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
-                  "circuits", "projection_groups", "receptors", "receptor_locations",
+                  "circuits", "projection_groups", "receptors", "receptor_class",
+                  "receptor_sign", "receptor_synaptic", "receptor_locations",
                   "targets", "target_polarity", "target_locations", "structures")
 
     def backed_pct(c):
@@ -614,9 +615,15 @@ def check_provenance(report, meta, structures, projections, circuits,
     # classification carries a source grade (the panel's "Source" pill), counted in
     # the coverage tally like a binding / projection.
     for receptor in receptors:
-        if "classification_provenance" in receptor:
-            grade(receptor.get("classification_provenance"),
-                  f"receptor {receptor.get('id')} classification_provenance")
+        # Each classification attribute (family / receptor_class / sign / synaptic)
+        # is its own graded sub-claim, so a wrong/unsourced GPCR or sign shows
+        # honestly instead of borrowing a neighbour attribute's quote grade.
+        for attr, entry in (receptor.get("classification") or {}).items():
+            grade(entry.get("grade"),
+                  f"receptor {receptor.get('id')} classification[{attr}]")
+            for i, src in enumerate(entry.get("sources") or []):
+                grade(src.get("provenance"),
+                      f"receptor {receptor.get('id')} classification[{attr}] sources[{i}]")
         # Per-region expression sources (the "Found in" grading): each carries a grade.
         for base, srcs in (receptor.get("location_sources") or {}).items():
             for i, src in enumerate(srcs or []):
@@ -680,6 +687,7 @@ def check_provenance(report, meta, structures, projections, circuits,
         a = stats.get("nodes", {})
         node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
                       "circuits", "projection_groups", "receptors",
+                      "receptor_class", "receptor_sign", "receptor_synaptic",
                       "receptor_locations", "targets", "target_polarity",
                       "target_locations", "structures")
         by = stats.get("by_kind", {})
@@ -810,8 +818,9 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             check_one(f"structure {s.get('id')} sources[{i}]", src)
 
     for r in receptors:
-        for i, src in enumerate(r.get("sources", []) or []):
-            check_one(f"receptor {r.get('id')} sources[{i}]", src)
+        for attr, entry in (r.get("classification") or {}).items():
+            for i, src in enumerate(entry.get("sources") or []):
+                check_one(f"receptor {r.get('id')} classification[{attr}] sources[{i}]", src)
         # Per-region expression sources are quote-checked like any other (the gate
         # that keeps a future "5-HT2A is dense in the PFC" citation honest).
         for base, srcs in (r.get("location_sources") or {}).items():

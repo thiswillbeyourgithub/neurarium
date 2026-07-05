@@ -46,9 +46,14 @@ corpus locations are in `CLAUDE.local.md`.
      `receptor_class`, `sign`, `synaptic`, `locations` (base ids or `"ALL"`). Optional
      `description` + `description_fr` (inline) + `wikipedia`. A stub = empty `locations` +
      no description. `_receptor_record` validates keys + bases. A new family/class/synaptic
-     value needs its label map entry (+ FR). Mechanism grade overridable in
-     `RECEPTOR_PROVENANCE`; an individual expression region is sourced (above `llm`) by
-     adding a `{receptor_id: {base: [quote-source]}}` entry to `RECEPTOR_LOCATION_SOURCES`.
+     value needs its label map entry (+ FR). The four classification attributes
+     (`family`/`receptor_class`/`sign`/`synaptic`) are each **independently graded**: the base
+     grade is `RECEPTOR_PROVENANCE` (default `llm`), lifted per-attribute only where
+     `RECEPTOR_CLASSIFICATION_COVERAGE` says the receptor's Stahl-Essential quote
+     (`STAHL_ESSENTIAL_RECEPTOR_QUOTES`) actually backs that attribute (conservative: never list
+     an attribute the quote or the record disagrees on). An individual expression region is
+     sourced (above `llm`) by adding a `{receptor_id: {base: [quote-source]}}` entry to
+     `RECEPTOR_LOCATION_SOURCES`.
    - **Drugs**: edit `tools/drugs_data.json`. Each: `id`, `name`, `categories`, optional
      `nbn` + `description` (inline `{en,fr}`), `wikipedia`, `bindings`. A binding is
      `{target, action}` (+ optional `effect` / `note` / `tentative`); `target` is a merged
@@ -205,7 +210,8 @@ there is no node-level catch-all `sources` block.
 - `receptors.jsonl` — `id`, `name`, `family`, `neurotransmitter{en,fr}`, `receptor_class`
   (ionotropic/metabotropic/chaperone), `sign` (excit/inhib/modulatory), `synaptic`
   (pre/post/both), `locations` (structure *base* ids, both hemispheres), optional
-  `ubiquitous:true`, `classification_provenance` (mechanism grade only), optional
+  `ubiquitous:true`, `classification` (`{family,receptor_class,sign,synaptic}` -> each a
+  `{grade, sources?}` sub-claim, so a quote grades only the attributes it substantiates), optional
   `location_sources` (`{base:[quote-source]}`, sparse per-region upgrade above `llm`; `"ALL"` =
   the ubiquitous claim), optional `description{en,fr}` + `wikipedia`(+prov). Empty locations + no
   description = a deliberate stub (listed, not focusable).

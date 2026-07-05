@@ -2754,6 +2754,67 @@ STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {
     "h4": _stahl_ess(422, "There is a fourth type of histamine receptor, H4"),
 }
 
+# A receptor's classification is NOT one claim but four independent ones, each its
+# own graded node: neurotransmitter `family`, mechanism `receptor_class`
+# (GPCR/ionotropic), `sign` (excitatory/inhibitory), and `synaptic` site
+# (pre/postsynaptic). A single Stahl quote almost never substantiates all four, so
+# attaching it to the whole record over-grades the attributes it never addressed
+# (the reported bug: 5-HT2C's *sign* quote falsely lent a verified pill to its GPCR
+# and postsynaptic claims). This table records, per receptor, exactly which
+# attributes its STAHL_ESSENTIAL_RECEPTOR_QUOTES sentence actually backs; every
+# other attribute stays at the base grade (llm unless RECEPTOR_PROVENANCE lifts it).
+# Coverage is assigned conservatively: an attribute is listed ONLY when the quote
+# states that receptor's *specific* value, never when it merely could be inferred
+# or when the quote and the record disagree (e.g. 5-HT2B's quote calls it a
+# presynaptic autoreceptor while the record says postsynaptic, so only `family` is
+# backed and the record's synaptic value is left honestly unsourced).
+CLASSIFICATION_ATTRS = ("family", "receptor_class", "sign", "synaptic")
+_F = ("family",)
+_FG = ("family", "sign")
+_FY = ("family", "synaptic")
+_FGY = ("family", "sign", "synaptic")
+_FC = ("family", "receptor_class")
+_FCG = ("family", "receptor_class", "sign")
+_FCY = ("family", "receptor_class", "synaptic")
+RECEPTOR_CLASSIFICATION_COVERAGE: dict[str, tuple[str, ...]] = {
+    # G-protein / ion-channel quotes give family + class, but not a specific sign or site.
+    "m1": _FC, "m2": _FC, "m3": _FC, "m4": _FC, "m5": _FC,
+    "nachr_a4b2": _FC, "nachr_a7": _FC, "nachr_muscle": _FC,
+    "nmda": _FC, "ampa": _FC, "kainate": _FC,
+    "mglur1": _FC, "mglur2": _FC, "mglur3": _FC, "mglur4": _FC, "mglur5": _FC,
+    "mglur6": _FC, "mglur7": _FC,
+    "gaba_b": _FC, "glycine": _FC, "5ht3": _FC,
+    "d1": _FC, "d2": _FC, "alpha2a": _FC,
+    # Ion-channel + inhibitory chloride: family + class + sign.
+    "gaba_a": _FCG, "gaba_a_rho": _FCG,
+    # D-quotes that state the sign (excitatory / inhibitory) + G-protein coupling.
+    "d3": _FCG, "d4": _FCG, "d5": _FCG,
+    # "postsynaptic ... G-protein-linked" histamine quotes: family + class + site.
+    "h1": _FCY, "h2": _FCY,
+    # 5-HT1B/D: "inhibitory ... G-protein-coupled" (record synaptic="both", quote
+    # says only postsynaptic, so `synaptic` is left unsourced).
+    "5ht1b": _FCG, "5ht1d": _FCG,
+    # Pure NE enumeration: only names the family, nothing mechanistic.
+    "alpha1a": _F, "alpha1b": _F, "alpha1c": _F, "alpha1d": _F,
+    "alpha2b": _F, "alpha2c": _F, "beta1": _F, "beta2": _F, "beta3": _F,
+    # 5-HT sign sentence: family + the excitatory/inhibitory sign it lists.
+    "5ht1a": _FG, "5ht2a": _FG, "5ht2c": _FG, "5ht4": _FG, "5ht5a": _FG, "5ht6": _FG,
+    # 5-HT2B quote calls it a *presynaptic autoreceptor*, contradicting the record's
+    # postsynaptic value, so only family is backed (see the note above).
+    "5ht2b": _F,
+    # "5HT7 receptors are postsynaptic, excitatory": family + sign + site.
+    "5ht7": _FGY,
+    # Opioid "synapse with postsynaptic sites": family + site.
+    "mu": _FY, "delta": _FY, "kappa": _FY,
+    # CB1 "presynaptic ... inhibition of release" but record sign="modulatory", so
+    # only the presynaptic site is backed, not the sign.
+    "cb1": _FY,
+    # Existence-only / enumeration quotes: family alone.
+    "a2a": _F, "sigma1": _F, "mt1": _F, "mt2": _F, "h4": _F,
+    # H3 "presynaptic autoreceptors": family + site.
+    "h3": _FY,
+}
+
 STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
     "sert": _stahl_ess(131,
         "There is also a presynaptic transport pump selective for serotonin, "
@@ -4460,20 +4521,26 @@ def _receptor_record(rec: dict[str, Any],
         "receptor_class": rec["receptor_class"],
         "sign": rec["sign"],
         "synaptic": rec["synaptic"],
-        # Source grade of this receptor's classification claims (its
-        # neurotransmitter / mechanism class / sign / synaptic site / locations), so
-        # the panel can show a provenance pill for "why is it excitatory" and the
-        # coverage tally can count it. Authored from general/Wikipedia knowledge, so
-        # "llm" by default; upgrade per-receptor in RECEPTOR_PROVENANCE as checked.
-        "classification_provenance": _receptor_provenance(rec["id"]),
     }
-    # Attach a verified Stahl Essential quote-source for this receptor's
-    # classification and upgrade the grade to match (see STAHL_ESSENTIAL_RECEPTOR_QUOTES).
+    # A receptor's classification is FOUR independent graded sub-claims (family /
+    # receptor_class / sign / synaptic), NOT one: a single Stahl quote is attached
+    # only to the attributes it actually substantiates (RECEPTOR_CLASSIFICATION_
+    # COVERAGE), so e.g. a sign quote never lends its grade to the GPCR or
+    # pre/postsynaptic claim. Each attribute defaults to the base grade (llm unless
+    # RECEPTOR_PROVENANCE lifts it) and is upgraded only when a covering quote is
+    # present. The panel renders one pill per attribute row from this dict.
+    base_grade = _receptor_provenance(rec["id"])
     rq = STAHL_ESSENTIAL_RECEPTOR_QUOTES.get(rec["id"])
-    if rq is not None:
-        out["sources"] = [dict(rq)]
-        if _GRADE_RANK[rq["provenance"]] > _GRADE_RANK[out["classification_provenance"]]:
-            out["classification_provenance"] = rq["provenance"]
+    covered = set(RECEPTOR_CLASSIFICATION_COVERAGE.get(rec["id"], ()))
+    classification: dict[str, dict[str, Any]] = {}
+    for attr in CLASSIFICATION_ATTRS:
+        entry: dict[str, Any] = {"grade": base_grade}
+        if rq is not None and attr in covered:
+            entry["sources"] = [dict(rq)]
+            if _GRADE_RANK[rq["provenance"]] > _GRADE_RANK[entry["grade"]]:
+                entry["grade"] = rq["provenance"]
+        classification[attr] = entry
+    out["classification"] = classification
     locations = rec["locations"]
     if locations == "ALL":
         out["ubiquitous"] = True
@@ -4875,15 +4942,24 @@ def _provenance_stats(structures: list[dict[str, Any]],
     circuit_grades = [_strongest_grade(c.get("sources")) for c in circuits]
     projection_group_grades = [_strongest_grade(g.get("sources"))
                                for g in projection_groups]
-    # Receptor classification nodes (neurotransmitter / mechanism class / sign /
-    # synaptic site), one node per receptor (classification_provenance). A pure stub
-    # (no CNS role: no locations, not ubiquitous, no description) is not a node, so it
-    # is skipped. The receptor's *expression regions* are a separate node kind
-    # (receptor_locations), one node per region, not folded in here.
-    receptor_grades = [
-        r.get("classification_provenance", DEFAULT_PROVENANCE)
-        for r in receptors
-        if r.get("ubiquitous") or r.get("locations") or r.get("description")]
+    # Receptor classification is FOUR independent nodes per receptor, one per
+    # attribute (family / receptor_class / sign / synaptic), each graded on its own
+    # so an unsourced GPCR/sign/site claim shows honestly instead of borrowing a
+    # neighbouring quote's grade. A pure stub (no CNS role: no locations, not
+    # ubiquitous, no description) is not a node, so it is skipped. The receptor's
+    # *expression regions* are a separate node kind (receptor_locations), one node
+    # per region, not folded in here.
+    scored_receptors = [r for r in receptors
+                        if r.get("ubiquitous") or r.get("locations")
+                        or r.get("description")]
+
+    def _attr_grade(r: dict[str, Any], attr: str) -> str:
+        entry = (r.get("classification") or {}).get(attr)
+        return entry["grade"] if entry else DEFAULT_PROVENANCE
+    receptor_family_grades = [_attr_grade(r, "family") for r in scored_receptors]
+    receptor_class_grades = [_attr_grade(r, "receptor_class") for r in scored_receptors]
+    receptor_sign_grades = [_attr_grade(r, "sign") for r in scored_receptors]
+    receptor_synaptic_grades = [_attr_grade(r, "synaptic") for r in scored_receptors]
     # Expression-region nodes ("Found in"), one node PER (owner, region): the claim
     # "owner O is expressed in region B", distinct from O's classification node. Each
     # region's grade = the strongest of that region's location_sources (default llm
@@ -4941,7 +5017,10 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "projections": tally(projection_grades),
         "circuits": tally(circuit_grades),
         "projection_groups": tally(projection_group_grades),
-        "receptors": tally(receptor_grades),
+        "receptors": tally(receptor_family_grades),
+        "receptor_class": tally(receptor_class_grades),
+        "receptor_sign": tally(receptor_sign_grades),
+        "receptor_synaptic": tally(receptor_synaptic_grades),
         "receptor_locations": tally(receptor_location_grades),
         "targets": tally(target_grades),
         "target_polarity": tally(target_polarity_grades),
@@ -5064,6 +5143,23 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         raise KeyError(
             f"STAHL_ESSENTIAL_RECEPTOR_QUOTES keys are not receptor ids: "
             f"{sorted(unmatched_rq)}")
+    # Every quoted receptor needs a coverage entry (else its quote would grade
+    # nothing) and vice-versa (a coverage entry with no quote grades nothing), and
+    # each covered attribute must be a real classification attribute. This keeps the
+    # per-attribute grading honest: a quote can only lift the attributes it names.
+    cov_no_quote = set(RECEPTOR_CLASSIFICATION_COVERAGE) - set(STAHL_ESSENTIAL_RECEPTOR_QUOTES)
+    quote_no_cov = set(STAHL_ESSENTIAL_RECEPTOR_QUOTES) - set(RECEPTOR_CLASSIFICATION_COVERAGE)
+    if cov_no_quote or quote_no_cov:
+        raise KeyError(
+            "RECEPTOR_CLASSIFICATION_COVERAGE must match the receptor-quote keys "
+            f"(coverage without quote: {sorted(cov_no_quote)}; quote without "
+            f"coverage: {sorted(quote_no_cov)})")
+    bad_attrs = {a for attrs in RECEPTOR_CLASSIFICATION_COVERAGE.values()
+                 for a in attrs if a not in CLASSIFICATION_ATTRS}
+    if bad_attrs:
+        raise KeyError(
+            f"RECEPTOR_CLASSIFICATION_COVERAGE has unknown attributes: "
+            f"{sorted(bad_attrs)} (valid: {CLASSIFICATION_ATTRS})")
     unmatched_tq = set(STAHL_ESSENTIAL_TARGET_QUOTES) - set(DRUG_TARGETS)
     if unmatched_tq:
         raise KeyError(
