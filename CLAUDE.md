@@ -109,7 +109,9 @@ now a thin orchestrator: the data lives in the `tools/data_generators/` package 
 `provenance`, `drugs`, `geometry`, `presentation`, `connectivity`, `quotes/`, `receptors/`,
 `regions/`; per-module purpose in `tools/README.md`). Each geometry form
 is one `data/shapes/<name>.json` (`blob`/`curve`/`composite`, L/R pairs share one right-side
-file via `mirror:true`).
+file via `mirror:true`). The author-side scripts are grouped: external-data fetchers under
+`tools/fetch/`, provenance appliers under `tools/sourcing/`; their generated caches in
+`tools/generated_cache/`. Run them from the repo root (`python tools/fetch/<x>.py`).
 
 > [!NOTE]
 > An ongoing effort under `geometry_refinements/` (its own `CLAUDE.md` +

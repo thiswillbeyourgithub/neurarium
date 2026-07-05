@@ -197,7 +197,7 @@ Screenshots).
 - `tools/fetch/fetch_structure_images.py` — resolves the *url* of each structure's (and wiki-linked
   circuit's) Wikipedia hero + gallery images into `tools/{structure,circuit}_images_sources.json`
   (`--target structures|circuits|all`); downloads no bytes. See CLAUDE.md Images.
-- `tools/{molecules,structure_images,circuit_images}_sources.json` — provenance/attribution for
+- `tools/generated_cache/{molecules,structure_images,circuit_images}_sources.json` — provenance/attribution for
   the fetch tools (the image ones are read by `generate_data.py` offline; not served).
 - `tools/git-hooks/` — repo-tracked git hooks (see CLAUDE.md Git hooks).
 
