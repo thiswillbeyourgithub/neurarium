@@ -30,8 +30,9 @@ This project was built with the help of [Claude Code](https://claude.com/claude-
 3. **Single source of truth.** Each fact lives in exactly one place. The anatomy
    *and its presentation maps* (region colours, the projection-kind palette, the
    group→legend-heading map, the per-structure Wikipedia links) are all defined
-   once in `tools/generate_data.py`; the presentation maps are emitted into the
-   data so the viewer never hardcodes a second copy.
+   once in the generator (`tools/generate_data.py` + its `tools/data_generators/`
+   package); the presentation maps are emitted into the data so the viewer never
+   hardcodes a second copy.
 4. **Self-describing data.** `meta.json` carries the colour and heading maps, so
    a consumer (this viewer, or a port to another language) needs no out-of-band
    palette to render it correctly.
@@ -92,7 +93,11 @@ rewritten (or replaced) freely.
 
 ### Authoring: `tools/generate_data.py`
 
-Standard-library-only Python. It defines every region once (right-side only for
+Standard-library-only Python. Now a thin orchestrator: it defines the build/emit
+logic and imports the data from the `tools/data_generators/` package (`i18n.py`,
+`provenance.py`, `drugs.py`, `geometry.py`, `presentation.py`, `connectivity.py`,
+and the `quotes/`, `receptors/`, `regions/` subpackages; see tools/README.md for the
+per-module purpose). It defines every region once (right-side only for
 symmetric pairs; the generator mirrors it to the left), every projection
 (bilateral by default, mirrored unless flagged one-sided), every named circuit,
 and the registries (`WIKIPEDIA`, `KANDEL_QUOTES`, `PROJECTION_COLORS`, `GROUP_LABELS`).

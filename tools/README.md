@@ -143,9 +143,10 @@ Screenshots).
   `regions/cortex.py` and `generate_data.py`),
   and `connectivity.py` (the three connectivity node literals `PROJECTIONS`/`CIRCUITS`/`PROJECTION_GROUPS`
   plus the `_KQ_*`/`_SG_*` pathway quote-source constants they cite; the shared `_kandel`/`_nieuwenhuys`/`_stahl_ess`
-  quote constructors live in `provenance.py`), and `presentation.py` (the presentation label maps
-  `SIGN_LABELS`/`GROUP_LABELS`/`RECEPTOR_FAMILY_LABELS`/`RECEPTOR_CLASS_LABELS`/`SYNAPTIC_LABELS` emitted
-  into `meta.json`, plus the per-structure `WIKIPEDIA` link table; a dependency-free leaf), and the `quotes/` subpackage (verified quote registries by
+  quote constructors live in `provenance.py`), and `presentation.py` (the presentation maps emitted
+  into `meta.json`: the colour/flow maps `PROJECTION_COLORS`/`KIND_TO_SIGN`/`SIGN_COLORS`/`SYSTEM_FLOW_KINDS`,
+  the label maps `SIGN_LABELS`/`GROUP_LABELS`/`RECEPTOR_FAMILY_LABELS`/`RECEPTOR_CLASS_LABELS`/`SYNAPTIC_LABELS`,
+  plus the per-structure `WIKIPEDIA` link table; a dependency-free leaf), and the `quotes/` subpackage (verified quote registries by
   corpus: `kandel.py` = `PROJECTION_QUOTES` + `STRUCTURE_QUOTES` (Kandel/Nieuwenhuys anatomy, cites the
   connectivity `_KQ_*`); `stahl_essential.py` = `STAHL_ESSENTIAL_RECEPTOR_QUOTES`/`STAHL_ESSENTIAL_TARGET_QUOTES`/
   `RECEPTOR_ATTR_QUOTES`/`RECEPTOR_CLASSIFICATION_COVERAGE`/`CLASSIFICATION_ATTRS`/`TARGET_POLARITY_QUOTES`; chain

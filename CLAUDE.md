@@ -104,7 +104,10 @@ README hero shot in `docs/`.
 `.jsonl` / `meta.json` / `shapes/*.json` fields) live in
 [`tools/README.md`](tools/README.md)** (Tool reference + Data contract), moved there to
 keep this file terse. In short: the anatomy is authored once in `generate_data.py` (drugs
-in `tools/drugs_data.jsonl`), which emits the committed `public/data/`; each geometry form
+in `tools/drugs_data.jsonl`), which emits the committed `public/data/`. `generate_data.py` is
+now a thin orchestrator: the data lives in the `tools/data_generators/` package (`i18n`,
+`provenance`, `drugs`, `geometry`, `presentation`, `connectivity`, `quotes/`, `receptors/`,
+`regions/`; per-module purpose in `tools/README.md`). Each geometry form
 is one `data/shapes/<name>.json` (`blob`/`curve`/`composite`, L/R pairs share one right-side
 file via `mirror:true`).
 
