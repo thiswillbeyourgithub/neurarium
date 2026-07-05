@@ -751,136 +751,88 @@ follow disables itself once settled, on a camera grab (`cancel`), or when the fo
 
 ## Rendering
 
-The render loop (`renderer.setAnimationLoop`) is **on-demand**: each frame runs the
-cheap per-frame checks (advancing tweens + `controls.update()`), but the expensive part
-(`cull.tick()` + `renderer.render()` + `labels.render()`) is **skipped** unless a
-render is needed; when idle the canvas holds its last frame. A render is triggered when:
-- an animation is running: each per-frame controller's `tick()` returns a boolean "did I
-  animate" (`intro`, `focus`, `circuitAnim`, `receptorMarkers`, `drugAnim`); any true
-  keeps drawing;
-- the camera moved: `controls.update()` returns true while damping settles or
-  auto-rotate spins;
-- `invalidate()` was called: wired to OrbitControls' `change`, window `resize`, and a
-  catch-all over every user input (capture + passive, observe-only).
+The render loop (`renderer.setAnimationLoop`) is **on-demand**: each frame runs the cheap checks
+(tweens + `controls.update()`) but skips the expensive part (`cull.tick()` + `renderer.render()` +
+`labels.render()`) unless a render is needed; when idle the canvas holds its last frame. A render is
+triggered when a controller animated (each per-frame `tick()` returns a "did I animate" boolean:
+`intro`/`focus`/`circuitAnim`/`receptorMarkers`/`drugAnim`), the camera moved (`controls.update()`
+true), or `invalidate()` fired (wired to OrbitControls `change`, `resize`, a catch-all over user
+input).
 
-Adding a new per-frame controller? Make its `tick()` return whether it animated, or it
-runs but never triggers a repaint. Screenshots are unaffected (the loop renders the
-settled frame then idles).
+> Adding a per-frame controller? Make its `tick()` return whether it animated, or it runs but never
+> repaints. Screenshots are unaffected (renders the settled frame, then idles).
 
 ### Adaptive quality
 
-`createAdaptiveQuality` (a render-loop controller) keeps animation smooth on a weak GPU
-by watching the frame time of *rendered, animating* frames (`adaptive.tick(rendered &&
-active)`, so idle early-outs never skew it) and, with hysteresis, stepping the shared
-`animSettings.quality` (0..1) **down** when frames stay slow (>30ms for ~20 in a row)
-and back **up** when they recover (<20ms for ~90), clamped to [0.6, 1]. The dominant
-lever is `renderer.setPixelRatio(baseDpr * quality)` (fewer shaded pixels = the biggest
-cheap win against the additive-glow overdraw of the gem/wash animations; `baseDpr =
-min(devicePixelRatio, 2)`, and a later `renderer.setSize` on resize keeps the ratio). As
-a secondary lever the gem-dot count (`dotCountFor`) + circuit bead count scale by
-`quality` too, picked up on the next focus. Quality is not persisted (a live per-session
-measurement). It composes under the **Animations** toggle: off means no motion to
-measure, so quality just idles.
+`createAdaptiveQuality` keeps animation smooth on a weak GPU by watching the frame time of
+*rendered, animating* frames (`adaptive.tick(rendered && active)`) and, with hysteresis, stepping the
+shared `animSettings.quality` (0..1, clamped [0.6,1]) down when frames stay slow and up when they
+recover. The dominant lever is `renderer.setPixelRatio(baseDpr * quality)` (fewer shaded pixels beats
+the additive-glow overdraw of the gem/wash animations); secondarily the gem-dot (`dotCountFor`) +
+circuit bead counts scale too, picked up on the next focus. Not persisted (a live measurement).
+Composes under **Animations**: off means no motion to measure, so quality idles.
 
 ### Spread performance
 
-Re-fitting the ~100 arrows each explode frame was dominated (~90%) by the per-end
-nearest-surface scans over the high-poly region meshes, making the Separate slider
-janky. So during a continuous spread the arrows update in `fast` mode
-(`applyExplode(..., true)` -> `ProjectionArrow.update(true)`): each end reuses its cached
-surface-attach offset (valid because regions only translate, never rotate, as they spread)
-instead of re-scanning, and the pick-hull/halo rebuilds are deferred. `createArrowRetrim`
-(a render-loop `tick()` controller) then re-trims every arrow precisely once the spread
-has been still for ~120ms, a chunk per frame so the catch-up never hitches; a click
-mid-spread calls `arrow.ensurePickGeometry()` so the deferred hull is current. The
-settled result is identical to the old per-frame-precise layout.
+Re-fitting the ~100 arrows each explode frame was dominated (~90%) by the per-end nearest-surface
+scans, making Separate janky. During a continuous spread the arrows update in `fast` mode
+(`applyExplode(..., true)` -> `ProjectionArrow.update(true)`): each end reuses its cached offset
+(valid because regions only translate, never rotate) and pick-hull/halo rebuilds are deferred.
+`createArrowRetrim` then re-trims precisely once the spread has been still ~120ms, a chunk per frame;
+a click mid-spread calls `arrow.ensurePickGeometry()`. The settled result matches the per-frame-precise
+layout.
 
 ### Arrow width
 
-Arrows hold a roughly constant *apparent* width as the camera zooms (a zoomed-in
-arrow would otherwise balloon and clutter the view). `createArrowWidth` (a render-
-loop `tick()` controller) scales each arrow's shaft radius + cone cross-section by
-the camera<->target distance via `ProjectionArrow.setWidthScale`, which rebuilds
-only the visible width from the cached arc (no surface scan). The reference
-distance (scale 1) is captured on the first tick, so the resting framing keeps the
-authored radius; a width-step threshold avoids rebuilding on damping jitter; the
-fat pick hull stays a constant world size so a thin arrow is still easy to click.
-The explode auto-zoom (`focus.zoomForExplode` pulls the camera back as the brain
-spreads) is divided out via `focus.explodeZoom()`, so a **spread** does not rescale
-arrows (only a genuine user zoom does), which keeps it off the spread's hot path.
-The width persists across every explode rebuild (`update()` honours the stored
-scale). Clamped to [0.4, 2.4]x.
+Arrows hold a roughly constant *apparent* width as the camera zooms. `createArrowWidth` scales each
+arrow's shaft/cone by the camera<->target distance via `ProjectionArrow.setWidthScale` (rebuilds only
+the width from the cached arc, no surface scan; reference distance captured on the first tick). The
+explode auto-zoom is divided out via `focus.explodeZoom()`, so a **spread** doesn't rescale arrows
+(only a genuine user zoom does), keeping it off the spread's hot path. The fat pick hull stays a
+constant world size. Persists across explode rebuilds; clamped [0.4, 2.4]x.
 
 ## Circuit animation
 
-Isolating a circuit plays a traveling-pulse: a volley of glowing beads rides each arrow
-source -> target, firing in sequence and looping, so a curated loop reads as signal
-flowing around it. Split in two:
+Isolating a circuit plays a traveling-pulse: glowing beads ride each arrow source -> target, firing
+in sequence and looping. Split in two:
 
-- **`js/circuit-schedule.js`** (ordering, no three.js, testable). `scheduleCircuit`
-  treats the circuit's arrows as a directed graph (node = structure, edge = arrow,
-  `from -> to`); a BFS spreads activation from seeds and each arrow's firing slot
-  (`phase`) is the BFS depth of its tail. The seed per component is the `group=="lobe"`
-  node (cortex), else highest-out-degree, else any. L/R symmetry is enforced: the seed
-  set is mirror-completed (`mirrorId`) and the BFS is multi-source, so mirror-paired
-  nodes get equal depth (works whether the circuit is two disjoint L/R loops or one
-  component joined through a midline hub). An off-cycle feeder branch fires when
-  activation reaches its tail, else at the top of the cycle.
-- **`js/circuit-anim.js`** (rendering). `createCircuitAnimation` turns each slot into an
-  additive bead riding `arrow.curve` (rebuilt on every explode). `STEP_MS` is the
-  per-slot duration. Each arrow fires a burst keyed off the projection's `sign`
-  (`BURST`: excitatory = more/faster/brighter, inhibitory = fewer/slower/dimmer,
-  modulatory between); beads are spaced `gap` and advance at `speed`×, `scale`/`bright`
-  size them; a bead hides while its arrow is hidden. As a bead lands it fires a wash echo
-  over the target region (the shared `buildWashShell`, seeded at the impact point
-  `arrow.curve.getPoint(1)` in the target's local frame, in the pathway's colour,
-  `WASH_MS`, brightness keyed off the sign).
+- **`js/circuit-schedule.js`** (ordering, no three.js, testable). `scheduleCircuit` treats the
+  arrows as a directed graph and a multi-source BFS from seeds sets each arrow's firing slot
+  (`phase`) to its tail's BFS depth. Seed per component: the `group=="lobe"` node (cortex), else
+  highest out-degree, else any. The seed set is mirror-completed (`mirrorId`) so L/R-paired nodes
+  fire at equal depth. A feeder branch fires when activation reaches its tail, else at the cycle top.
+- **`js/circuit-anim.js`** (rendering). `createCircuitAnimation` turns each slot into an additive
+  bead riding `arrow.curve` (rebuilt on every explode), the burst keyed off the projection's `sign`
+  (`BURST`: excitatory more/faster/brighter, inhibitory dimmer). On landing a bead fires a wash echo
+  over the target (`buildWashShell` at `arrow.curve.getPoint(1)`, pathway colour, sign-keyed).
 
-Lifecycle (`js/main.js`): the row calls `selection.setCircuit(...)` then
-`circuitAnim.play(circuitArrows)`. Stopping is driven off the selection state:
-`createSelection`'s `onIsolate` is multi-subscriber and the animation subscribes a
-watcher that calls `stop()` whenever the live pinned-arrow set is no longer exactly the
-animating circuit (`circuitAnim.matches`). So a clear, a different circuit, a
-projection-group focus, or a legend isolate all stop it; merely highlighting a structure
-keeps it. The animation is circuit-only (a projection-group focus uses `setCircuit` but
-never `play`).
+Lifecycle (`js/main.js`): the row calls `selection.setCircuit(...)` then `circuitAnim.play(...)`.
+Stopping rides the selection state: an `onIsolate` watcher `stop()`s whenever the pinned-arrow set is
+no longer exactly the animating circuit (`circuitAnim.matches`), so a clear / different circuit /
+group focus / legend isolate all stop it; a mere structure highlight keeps it. Circuit-only (a group
+focus uses `setCircuit` but never `play`).
 
 ## Circuit + projection-group panels
 
-A Circuits row and a Projections (per-pathway) row each open a **sourced detail tab**,
-the same way a structure/drug row does (this is why projection groups are a real data
-structure and circuits gained a description + sources). Member pathways are never stored:
-a circuit's are the projections with both endpoints in its set, a group's are the
-projections whose `kind`/`sign` matches `key`. `js/data.js` localizes both and indexes
-the groups by `${mode}:${key}` (`projectionGroupsByKey`).
+A Circuits row and a Projections (per-pathway) row each open a **sourced detail tab**, like a
+structure/drug row. Member pathways are never stored: a circuit's are the projections with both
+endpoints in its set, a group's are those whose `kind`/`sign` matches `key`. `js/data.js` localizes
+both and indexes groups by `${mode}:${key}` (`projectionGroupsByKey`).
 
-- `showCircuit`: a "Functional circuit" heading carrying the loop's own source pill
-  (`circuit.provenance`, citations in its tooltip), then the Wikipedia illustration
-  (hero + lazy gallery via the shared `appendWikiImages`, like a brain structure), the
-  description + Wikipedia reference via the shared `appendReference` (baked copy as the
-  offline fallback, live-refreshed from the current Wikipedia lead; an optional
-  `circuit.wikipedia`, else the `NOSOURCE` reference row), its structures (deduped to
-  bases, each clickable to jump via `onStructure`), and its member pathways.
-- `showProjectionGroup`: a by-transmitter / by-effect heading carrying the group's own
-  source pill (`group.provenance`, citations in its tooltip), the description (live-
-  refreshed from Wikipedia, its own grade pill), the reference link, the member pathways,
-  then (kind-mode only) a **Drugs acting on this system** list = the focusable drugs whose
-  `flowKinds` include this kind (the mirror of the drug panel's Projections affected; each
-  row jumps to that drug via `onDrug`).
-- No panel carries a broad "Sources" block at the bottom: a source only ever grades a
-  single node, so each grade rides the specific row/heading it backs (`appendSources`
-  was retired).
-- Both reuse a shared `pathwayRow` / `appendPathwayList` helper (also used by
-  `showStructure`), so the row markup (the bold `directionArrow` + label + summary
-  pill + jump) lives once. `appendPathwayList` (like `showStructure`) runs its rows
-  through `pathwayList`, which collapses left/right twin pathways to one row (keyed
-  on direction + base-name label + pathway) using hemisphere-stripped `base_name`s,
-  so a midline source's bilateral projections list once here too.
+- `showCircuit`: a "Functional circuit" heading with the loop's source pill (`circuit.provenance`),
+  the Wikipedia illustration (`appendWikiImages`), the description + reference (`appendReference`,
+  live-refreshed with a baked fallback), its structures (deduped to bases, clickable via
+  `onStructure`), and its member pathways.
+- `showProjectionGroup`: a by-transmitter / by-effect heading with the group's source pill
+  (`group.provenance`), the description (live-refreshed, its own pill), the reference, the member
+  pathways, then (kind-mode only) a **Drugs acting on this system** list = focusable drugs whose
+  `flowKinds` include this kind (mirror of the drug panel's Projections affected; jumps via `onDrug`).
+- Both reuse the shared `pathwayRow`/`appendPathwayList` helper (also used by `showStructure`), which
+  runs rows through `pathwayList` to collapse left/right twin pathways to one row.
 - `focusCircuit` / `focusProjectionGroup` mirror `focusDrug`: isolate (a circuit also
-  `circuitAnim.play()`s its pulse; a group is a static pinned-arrow focus), show the
-  panel, open the tab (`circuit:` / `group:`) with a reopen thunk that recomputes
-  meshes/arrows. `tabs.setOnEmpty` clears the focus when the last closes. i18n:
-  `circuit.heading/structures/pathways`, `group.kindHeading/signHeading/pathways`.
+  `circuitAnim.play()`s; a group is a static pinned-arrow focus), show the panel, open the tab
+  (`circuit:` / `group:`) with a reopen thunk. `tabs.setOnEmpty` clears the focus when the last
+  closes. i18n: `circuit.heading/structures/pathways`, `group.kindHeading/signHeading/pathways`.
 
 ## Receptors & targets
 
