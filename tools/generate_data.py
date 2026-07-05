@@ -261,6 +261,13 @@ DRUG_ACTIONS: dict[str, dict[str, Any]] = {
                                      "fr": "Inhibiteur de la recapture"},
                            "effect": "boost"},
     "releaser": {"label": {"en": "Releaser", "fr": "Libérateur"}, "effect": "boost"},
+    # A *vesicular* transporter inhibitor (VMAT2): unlike a plasma-membrane reuptake
+    # pump, blocking vesicular loading DEPLETES the transmitter, so the net effect is
+    # a block (tone down), not a boost. Kept distinct from reuptake_inhibitor so the
+    # direction is never conflated. See toneSignOf in js/data.js.
+    "vesicular_inhibitor": {"label": {"en": "Vesicular transport inhibitor",
+                                      "fr": "Inhibiteur du transport vésiculaire"},
+                            "effect": "block"},
     "enzyme_inhibitor": {"label": {"en": "Enzyme inhibitor",
                                    "fr": "Inhibiteur enzymatique"}, "effect": "boost"},
     "pam": {"label": {"en": "Positive allosteric modulator",

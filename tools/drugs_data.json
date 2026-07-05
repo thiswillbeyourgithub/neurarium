@@ -4722,7 +4722,7 @@
     "bindings": [
       {
         "target": "vmat2",
-        "action": "reuptake_inhibitor",
+        "action": "vesicular_inhibitor",
         "sources": [
           {
             "corpus": "stahl",
@@ -17666,7 +17666,7 @@
     "bindings": [
       {
         "target": "vmat2",
-        "action": "reuptake_inhibitor",
+        "action": "vesicular_inhibitor",
         "sources": [
           {
             "corpus": "carlat",

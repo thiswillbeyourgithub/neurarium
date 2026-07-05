@@ -3113,6 +3113,13 @@
       },
       "effect": "boost"
     },
+    "vesicular_inhibitor": {
+      "label": {
+        "en": "Vesicular transport inhibitor",
+        "fr": "Inhibiteur du transport vésiculaire"
+      },
+      "effect": "block"
+    },
     "enzyme_inhibitor": {
       "label": {
         "en": "Enzyme inhibitor",

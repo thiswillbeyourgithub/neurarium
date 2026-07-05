@@ -396,7 +396,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // A vesicular transporter (VMAT2, flagged in meta.drug_targets) loads
       // vesicles, so inhibiting it *depletes* the transmitter and lowers tone, the
       // opposite of a plasma-membrane reuptake transporter (SERT/DAT/NET).
-      if (tgt.vesicular) return action === "reuptake_inhibitor" || action === "blocker" ? -1 : 0;
+      if (tgt.vesicular) return action === "vesicular_inhibitor" || action === "blocker" ? -1 : 0;
       return action === "reuptake_inhibitor" || action === "releaser" ? 1 : 0;
     }
     if (type === "enzyme") return action === "enzyme_inhibitor" ? 1 : 0;
