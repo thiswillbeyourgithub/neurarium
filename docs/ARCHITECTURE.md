@@ -122,9 +122,11 @@ catch-all `sources` block. The exact field list of each file is in tools/README.
 ("Data contract"), not duplicated here.
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
-pairs share a single right-side file; the left member reflects it). Three shape
-types: `blob` (a noise-deformed ellipsoid), `curve` (a tube swept along a spline),
-`composite` (several sub-shapes merged).
+pairs share a single right-side file; the left member reflects it). Shape types:
+`blob` (a noise-deformed ellipsoid), `curve` (a tube swept along a spline),
+`composite` (several sub-shapes merged), and `sdf` (an authored signed-distance
+atlas meshed via marching cubes, replacing the procedural forms one structure at a
+time; see the `geometry_refinements/` effort in CLAUDE.md).
 
 ### Viewer: `public/`
 
@@ -151,7 +153,7 @@ the `main.js` entry point.
                                   ▲
                                   │ loadBrainData()
                                   │
-   main.js ── imports ──►  shapes.js   (buildStructureMesh: blob/curve/composite,
+   main.js ── imports ──►  shapes.js   (buildStructureMesh: blob/curve/composite/sdf,
                                         cel-shaded cortex swirl, jigsaw clip)
             ── imports ──►  arrows.js   (buildArrows: curved tube+cone per
                                         projection, colour from projection.color)
