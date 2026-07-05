@@ -109,15 +109,16 @@ function dotSprite() {
  * @param {THREE.BufferGeometry} geometry
  * @returns {number}
  */
-function dotCountFor(geometry) {
+function dotCountFor(geometry, densityScale = 1) {
   if (!geometry.boundingSphere) geometry.computeBoundingSphere();
   const r = geometry.boundingSphere ? geometry.boundingSphere.radius : 1;
   const area = 4 * Math.PI * r * r;
   // Scale the density by the adaptive quality level so a struggling GPU scatters
   // fewer (cheaper) glowing dots; the floor scales too but stays well above zero,
   // so even the smallest region keeps a visible cluster. At quality 1 this is the
-  // original count.
-  const q = animSettings.quality;
+  // original count. `densityScale` (drug focus) thins the cloud for a weak-affinity
+  // binding, so a potent target reads denser than a marginal one.
+  const q = animSettings.quality * densityScale;
   return Math.max(
     Math.round(MIN_DOTS * q),
     Math.min(MAX_DOTS, Math.round(area * DOT_DENSITY * q)),
@@ -170,11 +171,12 @@ export const GEM_DOT_SIZE = DOT_SIZE;
  * has no usable geometry.
  * @param {THREE.Mesh} mesh
  * @param {string} color hex colour string
+ * @param {number} [densityScale] thin the cloud (drug focus, weak affinity)
  * @returns {{points: THREE.Points, material: THREE.PointsMaterial}|null}
  */
-export function buildGemCloud(mesh, color) {
+export function buildGemCloud(mesh, color, densityScale = 1) {
   if (!mesh.geometry) return null;
-  const positions = sampleSurface(mesh.geometry, dotCountFor(mesh.geometry));
+  const positions = sampleSurface(mesh.geometry, dotCountFor(mesh.geometry, densityScale));
   if (positions.length === 0) return null;
   const tint = new THREE.Color(color).lerp(WHITE, 0.35);
   const geom = new THREE.BufferGeometry();

@@ -75,10 +75,17 @@ export function createDrugAnimation(_deps = {}) {
       let phaseSeed = 0;
       for (const binding of drug.bindings || []) {
         const pulse = PULSE[binding.effect] || FALLBACK;
+        // Affinity (measured Ki) scales the cloud's density, size and brightness so
+        // a potent target reads denser/brighter than a marginal one: relative
+        // engagement, NOT effect magnitude. Neutral mid when a binding has no Ki.
+        const w = binding.affinityWeight || 0.55;
+        const densityScale = 0.5 + 0.5 * w; // 0.68..1 dots
+        const sizeAff = 0.8 + 0.35 * w; // 0.92..1.15 x base dot size
+        const opAff = 0.6 + 0.4 * w; // 0.74..1 x pulse opacity
         for (const id of binding.structureIds || []) {
           const mesh = meshById.get(id);
           if (!mesh) continue;
-          const cloud = buildGemCloud(mesh, binding.effectColor);
+          const cloud = buildGemCloud(mesh, binding.effectColor, densityScale);
           if (!cloud) continue;
           // A surface wash under the dots, looping in the same effect colour: a
           // ripple of light sweeping across the region's face, so the region itself
@@ -101,7 +108,8 @@ export function createDrugAnimation(_deps = {}) {
           clouds.push({
             ...cloud,
             wash,
-            baseSize: cloud.material.size,
+            baseSize: cloud.material.size * sizeAff,
+            opAff,
             pulse,
             phase: (phaseSeed % 8) / 8,
           });
@@ -146,7 +154,7 @@ export function createDrugAnimation(_deps = {}) {
       // animating" so the on-demand loop idles on a static frame.
       if (!animSettings.enabled) {
         for (const c of clouds) {
-          c.material.opacity = c.pulse.opMax;
+          c.material.opacity = c.pulse.opMax * (c.opAff ?? 1);
           c.material.size = c.baseSize;
           c.wash?.setWave(0, 0);
         }
@@ -157,7 +165,7 @@ export function createDrugAnimation(_deps = {}) {
         const p = c.pulse;
         const phase = ((now / p.period) + c.phase) % 1;
         const k = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2); // 0..1..0
-        c.material.opacity = p.opMin + (p.opMax - p.opMin) * k;
+        c.material.opacity = (p.opMin + (p.opMax - p.opMin) * k) * (c.opAff ?? 1);
         c.material.size = c.baseSize * (p.sizeMin + (p.sizeMax - p.sizeMin) * k);
         // The wash rides the same looping phase: the wavefront expands from the
         // region's centre (0 -> maxRadius) over one cycle and the half-sine

@@ -369,22 +369,35 @@ interactions literally stated; gaps left as TODO / no binding).
   with the live `#drugs-filter`) focuses it: dims to the union of its targets' regions
   (`selection.setCircuit(regionMeshes, flowArrows)`) + `createDrugAnimation.show(...)`, which
   scatters a `buildGemCloud` per binding coloured by net effect (pulsed per effect) under a
-  `buildWashShell` in the same colour. Stopped via an `onIsolate` watcher (`.matches`).
+  `buildWashShell` in the same colour; each binding's `affinityWeight` scales its dot density
+  (`buildGemCloud`'s `densityScale`), size and brightness (potent target reads denser/brighter).
+  Stopped via an `onIsolate` watcher (`.matches`).
 - **By-mechanism flow overlay** (reuses `js/circuit-anim.js`). The focus also rides beads along the
-  projections of the drug's target system(s) (an SSRI the serotonergic fan, an SNRI + noradrenergic,
-  a D2 antipsychotic the dopaminergic). The map is data: `generate_data.py` emits `system_flow_kinds`
-  (target `system` -> projection `kind`, restricted to the diffuse ascending systems with a modeled
-  source nucleus; glutamate/GABA left out so the overlay is a drug-specific fan). `js/data.js`
-  resolves `flowKinds`; `focusDrug` filters arrows (`flowArrowsOf`), pins + `circuitAnim.play()`s
-  them; a drug with unmapped systems pins none -> dots + wash only. (This is why the dataset carries
-  the ascending monoamine pathways.)
+  projections of the drug's target system(s). It is a **tone-setter + autoreceptor** model, split from
+  the dots: only *tone-setting* bindings drive flow (a reuptake/enzyme/vesicle target or a presynaptic
+  inhibitory autoreceptor), never a postsynaptic receptor (those stay dots). `js/data.js` gives each
+  binding a signed `toneSign` (`toneSignOf`: reuptake-inhibitor/releaser/MAO-inhibitor +, vesicular
+  (VMAT2)/vesicle-protein blocker −, autoreceptor agonist − / antagonist +; a `vesicular` flag + the α2
+  group's `sign`/`synaptic` come from `meta.drug_targets`) and an `affinityWeight` (0.35..1 pKi ramp
+  from the measured Ki, engagement not effect size). Per engaged kind it sums `toneSign*affinityWeight`
+  into `flowSystems` (`{direction, weight}`): the sign is the flow direction (an SSRI drives serotonergic
+  **up**, buspirone's 5-HT1A agonism **down**, a VMAT2 blocker **down**), the clamped magnitude its
+  intensity. `circuit-anim.js` `play(arrows, flowSystems)` recolours/scales the volley per arrow (boost =
+  warm/bright/fast/dense, damp = cool/dim/slow/sparse). The system map is data: `system_flow_kinds`
+  (target `system` -> projection `kind`, the diffuse ascending systems with a modeled source nucleus;
+  glutamate/GABA left out). `focusDrug` filters arrows (`flowArrowsOf`), pins + `circuitAnim.play()`s
+  them; a purely postsynaptic drug sets no tone -> dots + wash only. **Caveat:** a D2-antagonist
+  antipsychotic reads dopaminergic-**up** (blocking the D2 *autoreceptor* disinhibits release); its
+  postsynaptic blockade shows in the block-coloured dots. (This is why the dataset carries the ascending
+  monoamine pathways.)
 - **Panel** (`showDrug`): the molecule image (when fetched), the class, the NbN, the description
   (live-refreshed from Wikipedia, re-graded `sourced`), a Wikipedia link, then the **Acts on** binding
   list (each row: an effect glyph + target + action·note, "· speculative" when tentative, plus a
   `bindingProvenancePill` = the binding's quote source, else its Ki (verified), else `NOSOURCE`),
   sorted strongest-affinity first. Below it a **Projections affected** list (only when `flowKinds`
-  non-empty): one row per ascending system engaged (jumps to that kind-mode group, pilled with the
-  strongest binding on the system); a *derived, non-directional* inference (caption says so). Class +
+  non-empty): one row per ascending system whose tone the drug sets (jumps to that kind-mode group,
+  pilled with the strongest binding on the system), an out-/in-arrow per `flowSystems[kind].direction`
+  (raises / lowers tone); a *derived* inference from the tone-setter bindings (caption says so). Class +
   Nomenclature are clickable (open search with a `class:`/`nbn:` filter) and each carries its grade
   pill: the NbN quote source, and the class classification's `category_provenance` (its own node, kind
   `drug_categories`, default `llm`, upgradeable via `DRUG_CATEGORY_PROVENANCE` / `category_sources`).

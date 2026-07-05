@@ -105,8 +105,10 @@ function localize(field) {
  *   Prescriber's Guide). Each is augmented with localized `description` / `nbn`,
  *   `categoryLabels` (+ primary `category`), and resolved `bindings` (each binding
  *   carrying `targetName`, `actionLabel`, net `effect` + `effectColor`/`effectLabel`,
- *   localized `note`, and the concrete `structureIds` it lights), the union
- *   `structureIds` the focus dims to, a `focusable` flag and search `keywords`,
+ *   localized `note`, an `affinityWeight` (0.35..1, Ki-derived engagement) + signed
+ *   `toneSign`, and the concrete `structureIds` it lights), the union
+ *   `structureIds` the focus dims to, `flowSystems` (kind -> {direction, weight},
+ *   the signed affinity-weighted per-system flow tone), a `focusable` flag and search `keywords`,
  *   plus a `structureImage` (the vendored molecular-structure SVG path, or null).
  * @property {Map<string, {drug: object, binding: object}[]>} drugsByTarget
  *   Reverse index: a target id (a receptor id or a drug_targets key, matching each
@@ -368,6 +370,49 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // receptor's locations). The union over all bindings is the drug's affected set
   // (what the focus dims the brain down to). `keywords` feeds the search box.
   const receptorStructureIds = new Map(receptors.map((r) => [r.id, r.structureIds]));
+  // Receptor sign/synaptic, used to detect a presynaptic inhibitory autoreceptor
+  // (an alpha2 / D2/D3 / 5-HT1A-B-D): agonising it lowers its system's tone,
+  // blocking it raises it. Postsynaptic receptors are NOT tone-setters (dots only).
+  const receptorMeta = new Map(receptors.map((r) => [r.id, { sign: r.sign, synaptic: r.synaptic }]));
+  // Affinity -> a 0.35..1 engagement weight from the measured Ki (a pKi ramp:
+  // sub-nanomolar ~1, micromolar ~0.35), NOT an effect-magnitude claim. Drives dot
+  // density/size (drug-anim) and per-system flow intensity. A binding with no Ki
+  // gets a neutral mid weight so it still animates.
+  const AFFINITY_DEFAULT = 0.55;
+  const affinityWeightOf = (ki) => {
+    if (!ki || !(ki.median > 0)) return AFFINITY_DEFAULT;
+    const pKi = 9 - Math.log10(ki.median); // median is in nM
+    const t = Math.max(0, Math.min(1, (pKi - 6) / 4)); // 1 uM..0.1 nM -> 0..1
+    return 0.35 + 0.65 * t;
+  };
+  // Signed tone contribution of one binding to its system's ascending flow (the
+  // "Tone-setters + autoreceptors" model): +1 raises the transmitter's tone, -1
+  // lowers it, 0 = not a tone-setter (a postsynaptic receptor -> dots only). Direction
+  // comes from target type + action (+ autoreceptor sign for presynaptic receptors),
+  // NOT from receptor class (a postsynaptic gain claim we deliberately do not make).
+  const toneSignOf = (tgt, action) => {
+    const type = tgt.type || "";
+    if (type === "transporter") {
+      // A vesicular transporter (VMAT2, flagged in meta.drug_targets) loads
+      // vesicles, so inhibiting it *depletes* the transmitter and lowers tone, the
+      // opposite of a plasma-membrane reuptake transporter (SERT/DAT/NET).
+      if (tgt.vesicular) return action === "reuptake_inhibitor" || action === "blocker" ? -1 : 0;
+      return action === "reuptake_inhibitor" || action === "releaser" ? 1 : 0;
+    }
+    if (type === "enzyme") return action === "enzyme_inhibitor" ? 1 : 0;
+    if (type === "vesicle_protein") return action === "blocker" ? -1 : 0;
+    if (type === "receptor" || type === "receptor_group") {
+      // Sign/synaptic from the specific receptor record (a modeled 5-HT1x / D2/D3),
+      // else from the group's own flag (the α2 family, carried in meta.drug_targets).
+      const rm = tgt.receptor ? receptorMeta.get(tgt.receptor) : tgt;
+      const presyn = rm && (rm.synaptic === "presynaptic" || rm.synaptic === "both");
+      if (presyn && rm.sign === "inhibitory") {
+        if (action === "agonist" || action === "partial_agonist") return -1;
+        if (action === "antagonist" || action === "inverse_agonist") return 1;
+      }
+    }
+    return 0;
+  };
   // Normalize a quote-level sources list (a binding's `sources` or a drug's
   // `nbn_sources`) into the shape the panel renders.
   const mapSources = (sources) =>
@@ -465,6 +510,13 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         note: b.note ? localize(b.note) : "",
         tentative: !!b.tentative,
         structureIds,
+        // Relative engagement from the measured Ki (0.35..1), NOT effect size.
+        // Scales the dot cloud in drug-anim; also weights this binding's system
+        // tone below. Neutral mid-value when no Ki.
+        affinityWeight: affinityOnly ? 0 : affinityWeightOf(b.ki),
+        // Signed tone-setter contribution to its system's ascending flow (+1 raises
+        // the transmitter's tone, -1 lowers, 0 = not a tone-setter -> dots only).
+        toneSign: affinityOnly ? 0 : toneSignOf(tgt, b.action),
         // Per-claim sources ({corpus, page, quote, provenance}); the verbatim
         // quote is what tools/check_data.py confirms is in the cited page. The
         // full citation is resolved client-side from meta.sourceCorpora by
@@ -482,12 +534,27 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       };
     });
     d.structureIds = [...affected];
-    // By-mechanism flow: the projection kinds this drug's target systems map to
-    // (meta.system_flow_kinds). Drives the optional flowing-beads overlay (main.js
-    // filters arrows by these kinds, js/drug-anim.js animates them); empty for a
-    // drug whose systems have no modeled ascending pathway (it gets just dots +
-    // wash). A Set-deduped list since several bindings can share a system.
-    d.flowKinds = [...new Set(d.bindings.map((b) => b.flowKind).filter(Boolean))];
+    // By-mechanism flow, split from the dots (approach 3): a projection kind gets a
+    // flow overlay ONLY from *tone-setter* bindings (transporters, enzymes, vesicle
+    // proteins, presynaptic inhibitory autoreceptors), never from a postsynaptic
+    // receptor (those stay dots). Per engaged kind we sum toneSign*affinityWeight so
+    // combos and opposing autoreceptors resolve to a net signed tone; the sign is the
+    // flow direction (boost vs damp) and the clamped magnitude its intensity.
+    const flowAcc = new Map();
+    for (const b of d.bindings) {
+      if (!b.flowKind || !b.toneSign) continue;
+      flowAcc.set(b.flowKind, (flowAcc.get(b.flowKind) || 0) + b.toneSign * b.affinityWeight);
+    }
+    d.flowSystems = {};
+    for (const [kind, sum] of flowAcc) {
+      if (!sum) continue;
+      d.flowSystems[kind] = { direction: sum > 0 ? 1 : -1, weight: Math.min(1, Math.abs(sum)) };
+    }
+    // Drives the flowing-beads overlay (main.js filters arrows by these kinds, then
+    // js/circuit-anim.js animates them with the per-kind direction/weight above) and
+    // the panel's "Projections affected" list. Empty for a drug that sets no tone (a
+    // purely postsynaptic agent gets just dots + wash).
+    d.flowKinds = Object.keys(d.flowSystems);
     // Focusable if it carries any binding (the info panel + search work even when
     // a target has no modeled region to light); the generator already cleared it
     // for a drug with no bindings at all.

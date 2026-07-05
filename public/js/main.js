@@ -2804,14 +2804,15 @@ function createInfoPanel(data) {
       // always refers to a specific binding node rather than "the whole drug".
 
       // Projections affected: the ascending pathway systems this drug's flow overlay
-      // lights (drug.flowKinds, from meta.system_flow_kinds). A *derived,
-      // non-directional* inference: the drug binds receptors in system S, so S's
-      // ascending pathways are in play; we deliberately make no increase/decrease
-      // claim (the dataset can't source direction, see the hint line). Each row jumps
-      // to that projection group and carries the source of the strongest-affinity
-      // binding that puts the drug on the system (the same source that says "X is an
-      // agonist"), so the inference stays traceable. Only shows for the four modeled
-      // ascending systems; empty flowKinds -> section omitted.
+      // lights (drug.flowKinds, from meta.system_flow_kinds). A *derived* inference
+      // from the drug's *tone-setter* bindings only (a reuptake/enzyme/vesicle target
+      // or a presynaptic autoreceptor, see js/data.js flowSystems): the net signed
+      // tone gives each row a direction (an out-arrow = raises the system's tone, an
+      // in-arrow = lowers it) and the affinity its intensity. Each row jumps to that
+      // projection group and carries the source of the strongest-affinity binding on
+      // the system (the same source that says "X is an agonist"), so the inference
+      // stays traceable. Only shows for the four modeled ascending systems; a purely
+      // postsynaptic drug sets no tone -> empty flowKinds -> section omitted.
       const groupsByKey = data.projectionGroupsByKey;
       const projColors = data.meta.projectionColors || {};
       if ((drug.flowKinds || []).length && groupsByKey) {
@@ -2825,9 +2826,13 @@ function createInfoPanel(data) {
           // Representative = the strongest-affinity binding feeding this system, so
           // the row's source is the most concrete claim behind the inference.
           const rep = strongestBindingForKind(drug.bindings, kind);
+          // Net signed tone (js/data.js flowSystems): out-arrow raises the system's
+          // tone, in-arrow lowers it (an autoreceptor agonist, a VMAT2 blocker).
+          const flow = (drug.flowSystems || {})[kind];
           const li = el("li", "clickable");
           li.title = group.name;
-          li.appendChild(directionArrow(projColors[kind] || "#fff", "out",
+          li.appendChild(directionArrow(projColors[kind] || "#fff",
+            flow && flow.direction < 0 ? "in" : "out",
             (data.meta.kindLabels && data.meta.kindLabels[kind]) || kind));
           li.appendChild(el("span", "conn-label", group.name));
           if (rep) li.appendChild(bindingProvenancePill(rep));
@@ -5002,7 +5007,10 @@ async function main() {
     const flowArrows = flowArrowsOf(drug);
     selection.setCircuit(meshSet, flowArrows);
     drugAnim.show(drug, meshById);
-    circuitAnim.play(flowArrows); // no-op for a drug with no mapped pathways
+    // Per-kind flow direction/weight (js/data.js flowSystems): the pulse rides
+    // "up" the fan when the drug raises that system's tone, damped "down" when it
+    // lowers it, its intensity scaled by the drug's affinity on that system.
+    circuitAnim.play(flowArrows, drug.flowSystems || {}); // no-op for a drug with no mapped pathways
     if (preview) return; // hover preview: dim + dots + flow only, no panel/tab/spread
     autoSpreadIfDeep(meshSet);
     info.showDrug(drug);

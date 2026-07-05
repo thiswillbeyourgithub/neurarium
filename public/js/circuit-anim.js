@@ -100,9 +100,18 @@ export function createCircuitAnimation({ scene }) {
     /**
      * Start the traveling pulses for a circuit's arrow set. Replaces any running
      * animation. A no-op for an empty set.
+     *
+     * `flowSystems` (drug focus only) maps a projection kind to `{direction, weight}`
+     * (js/data.js): direction +1 = the drug raises that transmitter's tone, -1 =
+     * lowers it; weight (0..1) = the drug's affinity on that system. It recolours +
+     * scales the volley per arrow (a boost reads warm/bright/fast + dense, a damp
+     * cool/dim/slow + sparse), so an SSRI and a buspirone animate the serotonergic
+     * fan in opposite directions. Empty (a curated circuit) = the plain sign-keyed
+     * burst below.
      * @param {import("./arrows.js").ProjectionArrow[]} circuitArrows
+     * @param {Object<string,{direction:number,weight:number}>} [flowSystems]
      */
-    play(circuitArrows) {
+    play(circuitArrows, flowSystems) {
       this.stop();
       if (!circuitArrows || circuitArrows.length === 0) return;
       // Animations off: the traveling pulse is pure motion, so don't build any
@@ -115,13 +124,19 @@ export function createCircuitAnimation({ scene }) {
       lastTime = null;
       for (const { arrow, phase } of phased) {
         const burst = burstFor(arrow.projection.sign);
-        // Lighten the arrow's own colour toward white so the bead reads as a
-        // bright packet of *that* pathway. Additive + no depth write so it glows
-        // over the (possibly dimmed) arrow rather than being occluded by it.
-        const color = arrow.material.color.clone().lerp(WHITE, 0.55);
-        // Scale the volley size by the adaptive quality so a struggling GPU rides
-        // fewer beads per arrow (always at least one, so every arrow still fires).
-        const beadCount = Math.max(1, Math.round(burst.count * animSettings.quality));
+        // Per-system flow direction/weight (drug focus); null for a plain circuit.
+        const flow = flowSystems ? flowSystems[arrow.projection.kind] : null;
+        // Whiten less for a damping flow so the bead stays cool + saturated (reads
+        // as "pulling the system down") vs the bright near-white boost/circuit bead.
+        const whiten = flow ? (flow.direction > 0 ? 0.55 : 0.22) : 0.55;
+        const color = arrow.material.color.clone().lerp(WHITE, whiten);
+        // Weight (affinity) thins a weak volley; a damp also dims + slows it.
+        const countScale = flow ? 0.5 + 0.5 * flow.weight : 1;
+        const bright = burst.bright * (flow ? (flow.direction > 0 ? 1 : 0.6) * (0.55 + 0.45 * flow.weight) : 1);
+        const speed = burst.speed * (flow && flow.direction < 0 ? 0.8 : 1);
+        // Scale the volley size by the adaptive quality (and flow weight) so a
+        // struggling GPU or a weak affinity rides fewer beads (always at least one).
+        const beadCount = Math.max(1, Math.round(burst.count * countScale * animSettings.quality));
         for (let i = 0; i < beadCount; i++) {
           const material = new THREE.MeshBasicMaterial({
             color: color.clone(),
@@ -137,7 +152,7 @@ export function createCircuitAnimation({ scene }) {
           scene.add(mesh);
           pulses.push({
             arrow, phase, mesh, material,
-            offset: i * burst.gap, speed: burst.speed, bright: burst.bright,
+            offset: i * burst.gap, speed, bright,
           });
         }
       }
