@@ -2858,10 +2858,16 @@ STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
         "transporter (GAT), also known as the GABA reuptake pump (Figure 6-18), "
         "analogous to similar transporters for other neurotransmitters discussed "
         "throughout this text."),
-    "vmat2": _stahl_ess(269,
-        "After synthesis, NE is packaged into synaptic vesicles via the vesicular "
-        "monoamine transporter 2 (VMAT2) and stored there until its release into "
-        "the synapse during neurotransmission."),
+    # p191 names VMAT2 in the *dopamine* context (backs system=dopaminergic) and
+    # states it packages monoamines *into* vesicles for storage (backs the vesicular
+    # polarity: inhibiting it depletes -> lowers tone). Preferred over the p269 NE
+    # sentence, which named only norepinephrine and so did not source the dopaminergic
+    # system this target is filed under.
+    "vmat2": _stahl_ess(191,
+        "The VMAT2 is an intraneuronal transporter located on synaptic vesicles. "
+        "VMAT2 takes intraneuronal monoamines, including dopamine, up into the "
+        "synaptic vesicles so that they can be stored until they are needed for "
+        "release during neurotransmission."),
     "mao_a": _stahl_ess(355,
         "The enzyme MAO-A metabolizes serotonin (5HT) and norepinephrine (NE) as "
         "well as dopamine (DA) (left panels)."),
