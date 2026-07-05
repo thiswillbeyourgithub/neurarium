@@ -643,86 +643,52 @@ through beats a nearer non-focused one.
 
 ### Input
 
-- **Touch / mouse**: one finger / left-drag rotates; pinch / wheel zooms; two-finger
-  drag pans (OrbitControls). **Shift + wheel** drives the Separate slider instead of
-  zooming (a capture-phase `window` listener swallows it on `shiftKey` and dispatches
-  the slider's `input`).
-- **Keyboard shortcuts** (`wireShortcuts`, single-key, ignored while typing and for
-  Ctrl/Cmd/Alt combos): **n** names, **s** spread/assemble, **l** Structures, **p**
-  Projections, **k** Legend popup, **c** See inside, **r** Receptors, **m** Drugs, **f**
-  search, **Tab**/**Shift+Tab** cycle detail tabs (`tabs.cycle`, re-applying a
-  detail's focus), **Esc** peels one layer (active detail tab -> else clear any
-  focus/isolate/circuit -> else close search / collapse the open section). Arrow keys
-  browse the open section's rows + Enter activates (see below). Each maps by clicking
-  the same DOM element a mouse user would; a handled key calls `preventDefault`.
-- **Section row navigation** (`sectionNav`): with a section open, **ArrowDown/Up** move
-  a roving `.kbd-active` highlight through its action buttons + `.clickable` rows, and
-  **Enter** activates (a plain `.click()`). Rows recomputed each key (skips
-  hidden/disabled), wraps, cleared on section change/close + Esc (`sectionNav.reset()`).
-  Keys swallowed only when a section handled them; typing in the drug filter keeps the arrows.
-- **Toolbar icon-row** (top of the panel, `justify-content: space-between`, wraps to a
-  second row if the sidebar is too narrow for all six): keyboard-shortcuts (help popup),
-  reset (recenters + reframes the brain), search (swaps `#search` in place, not a popup),
-  **legend** (opens `#legend-modal`), **sources** (opens `#sourcing-modal`), and **about**
-  (**ⓘ**, opens `#about-modal`). The three popups share the `wireModal` helper.
-- **Search**: filters structures (by name), connections (by label), receptors (name /
-  neurotransmitter / system), drugs (name / category / target), circuits and projection
-  groups (the Projections legend rows; tagged `· circuit` / `· pathways`). A row of
-  **type-filter chips** (`#search-filters`: All + one per present type, labels reused from
-  the section headings) scopes results to one kind; the choice (`activeType`) persists for
-  the session. **Hovering** a result transiently applies its full focus (dims the brain to
-  it + dots/flow) so you can compare without committing: each item carries a `preview` thunk
-  (the `select*`/`focus*` helpers' `preview:true` mode = scene focus only, no panel / tab /
-  camera-frame / auto-spread), and leaving the list (`#search-results` mouseleave) restores
-  neutral while a click commits (clears the `previewing` flag). Picking centers/frames
-  + **focuses** the matching thing (dims the rest of the brain) + opens its panel,
-  uniformly: a structure / connection pick isolates exactly like its legend row (via
-  `selectStructure` / `selectConnection`'s `isolate` option), a receptor/drug pick
-  focuses it exactly like its legend row. The same focus-on-pick rule holds for
-  detail-panel rows (a "Found in" region, a connection row, a route endpoint, an
-  interacting drug). Only **focusable** receptors/drugs are searchable; receptor rows
-  show a `· tag` (neurotransmitter), drug rows their category. The box **remembers the
-  last query for the session** (the input keeps its value while hidden; a reload starts
-  empty) and selects it all on reopen, so retyping or re-browsing is immediate. Matching
-  is case- + accent-insensitive and normalizes Greek + dashes (`foldText`: lowercase +
-  NFD strip diacritics, spell out Greek via `GREEK_NAMES` so "beta" finds "β1", drop
-  hyphens/dashes so "5ht" finds "5-HT"; also used by `#drugs-filter`) over the label +
-  hidden `keywords`. A structured `field:"value"` filter (`parseSearchQuery` +
-  `SEARCH_FIELDS`): `class:"SNRI"` / `nbn:"..."` keeps drugs whose class/nomenclature
-  matches (the field name is folded, so French `classe:` / `nomenclature:` work); a
-  field filter lists the whole class. A drug panel's **Class** + **Nomenclature** are
-  clickable and build such a query (each `data.drugs` item carries a folded `fields`
-  map; `info.onSearch` -> `openSearchWithQuery`). A **"?"** button toggles
-  `#search-syntax`. Connection results carry a hemisphere tag (`connectionSideTag`
-  R/L/L↔R). **Ctrl/Cmd+F** intercepts the native page-find, expands the panel + opens
-  search. **Esc** closes. Results are relevance-ranked (label-prefix match > label
-  substring > keyword-only; stable within a tier, so an empty/field query keeps the
-  original order) then capped, and keyboard-navigable (`activeIndex`/`highlight`:
-  first row pre-highlighted, ArrowUp/Down wrap, hover syncs, Enter activates).
-- **Keyboard-shortcuts help popup** (`#shortcuts-modal`, `wireShortcutsHelp`): a
-  centered dialog over a `.modal-overlay` backdrop, rows generated from a list
-  mirroring `wireShortcuts` (so it can't drift), labels from `shortcuts.*` i18n.
-  Opened by the keyboard button or **?**; closed by ×, backdrop, or Esc (routed first
-  when open). Needs a `.modal-overlay[hidden]` rule.
+- **Touch / mouse**: one finger / left-drag rotates; pinch / wheel zooms; two-finger drag pans
+  (OrbitControls). **Shift + wheel** drives the Separate slider (a capture-phase `window` listener
+  swallows it on `shiftKey`).
+- **Keyboard shortcuts** (`wireShortcuts`, single-key, ignored while typing / for modifier combos):
+  **n** names, **s** spread, **l** Structures, **p** Projections, **k** Legend, **c** See inside,
+  **r** Receptors, **m** Drugs, **f** search, **Tab**/**Shift+Tab** cycle detail tabs, **Esc** peels
+  one layer (active tab -> clear focus/isolate/circuit -> close search / collapse section). Arrow
+  keys browse the open section (see below). Each maps by clicking the DOM element a mouse user would.
+- **Section row navigation** (`sectionNav`): with a section open, **ArrowDown/Up** rove a
+  `.kbd-active` highlight over its buttons + `.clickable` rows, **Enter** activates. Recomputed each
+  key, wraps, cleared on section change/close + Esc. Typing in the drug filter keeps the arrows.
+- **Toolbar icon-row** (wraps to a second row when narrow): keyboard-shortcuts, reset, search (swaps
+  `#search` in place), legend, sources, about. The three popups share `wireModal`.
+- **Search**: filters structures / connections / receptors / drugs / circuits / projection groups
+  (the last two tagged `· circuit` / `· pathways`). **Type-filter chips** (`#search-filters`) scope
+  to one kind (`activeType`, session-persisted). **Hovering** a result transiently applies its full
+  focus via a `preview` thunk (the `select*`/`focus*` helpers' `preview:true` = scene focus only, no
+  panel/tab/camera/auto-spread); leaving the list restores neutral, a click commits. Picking focuses
+  + frames + opens the panel, exactly like the item's legend row (structure/connection via
+  `selectStructure`/`selectConnection`'s `isolate`); the same focus-on-pick rule holds for
+  detail-panel rows. Only **focusable** receptors/drugs are searchable. The box remembers the last
+  query for the session. Matching is case/accent-insensitive and normalizes Greek + dashes
+  (`foldText` + `GREEK_NAMES`, so "beta" finds "β1" and "5ht" finds "5-HT"; also used by
+  `#drugs-filter`) over the label + hidden `keywords`. A `field:"value"` filter (`parseSearchQuery` +
+  `SEARCH_FIELDS`): `class:"SNRI"` / `nbn:"..."` (field name folded, so French `classe:` works); a
+  drug panel's clickable Class + Nomenclature build such a query (`info.onSearch` ->
+  `openSearchWithQuery`). A **"?"** toggles `#search-syntax`. Connection results carry a
+  `connectionSideTag`. **Ctrl/Cmd+F** intercepts page-find + opens search; **Esc** closes. Results
+  are relevance-ranked (label-prefix > substring > keyword-only), capped, and keyboard-navigable.
+- **Keyboard-shortcuts help popup** (`#shortcuts-modal`, `wireShortcutsHelp`): a centered dialog,
+  rows mirroring `wireShortcuts` (so it can't drift), labels from `shortcuts.*` i18n. Opened by the
+  keyboard button or **?**; closed by ×, backdrop, or Esc (routed first when open).
 
 ### Detail tabs (`createPanelTabs`)
 
-Owns the `#panel-tabs` strip + which pane shows; it does **not** render a detail or
-apply its 3D focus. The `select*` layer (`selectStructure` / `selectConnection` /
-`focusTarget` / `focusDrug` / `focusCircuit` / `focusProjectionGroup`) renders +
-focuses, then calls `openDetailTab(key, title, reopen)`; the `reopen` thunk re-runs
-that same `select*`, so clicking a tab restores both content and scene with no
-duplicated logic. Keys dedupe one tab per thing (`structure:` / `connection:` /
-`target:` / `drug:` / `circuit:` / `group:`); `MAX_TABS` bounds the strip. Closing the
-active tab falls back to a neighbour (re-applying its focus) or, if last, to Settings +
-`onEmpty()` (`tabs.setOnEmpty(() => selection.clear())`). Interactions: click to
-activate, × to close, **long-press (~450 ms) then drag** to reorder (a move before the
-hold = scroll), **wheel / touch-drag** to scroll the strip. The strip is
-`touch-action: none` and the drag-scroll is JS-driven (a native pan would fire
-`pointercancel` mid-hold and kill the long-press); a real drag sets a one-shot
-`suppressClick`. `panel.closeTab` labels the × for a11y. **Tab**/**Shift+Tab** cycle
-via `tabs.cycle`; **Esc** closes the active tab via `tabs.closeActive` (returns false
-when only Settings is active, so Esc falls through to its other duties).
+Owns the `#panel-tabs` strip + which pane shows; it does **not** render a detail or apply focus.
+The `select*` layer (`selectStructure`/`selectConnection`/`focusTarget`/`focusDrug`/`focusCircuit`/
+`focusProjectionGroup`) renders + focuses, then calls `openDetailTab(key, title, reopen)`; the
+`reopen` thunk re-runs that `select*`, so clicking a tab restores content + scene with no duplicated
+logic. Keys dedupe one tab per thing (`structure:`/`connection:`/`target:`/`drug:`/`circuit:`/
+`group:`); `MAX_TABS` bounds the strip. Closing the active tab falls back to a neighbour (re-applying
+its focus) or, if last, to Settings + `onEmpty()` (`tabs.setOnEmpty(() => selection.clear())`).
+Interactions: click, × to close, **long-press (~450ms) then drag** to reorder, wheel/touch-drag to
+scroll. The strip is `touch-action: none` with a JS-driven drag-scroll (a native pan would
+`pointercancel` mid-hold and kill the long-press). **Tab**/**Shift+Tab** cycle (`tabs.cycle`); **Esc**
+closes the active tab (`tabs.closeActive`, false when only Settings is active).
 
 ### Info panel (`createInfoPanel`, into `#info-body`)
 
@@ -746,71 +712,42 @@ whether first picked or re-shown. An empty-space click returns to Settings
 > (this is why the row markup lives in one place). Skipping this means a request made
 > for one panel silently misses the others.
 
-Every source shows a **provenance pill** (`makeProvenancePill`, see Source provenance)
-with a hover/tap tooltip via the shared `withTip(trigger, text)` helper (a present
-Wikipedia reference *link* is the exception: no pill, see Presentation below).
-The bubble is appended to `document.body` (escaping the panel's overflow clipping +
-any dimmed row's opacity), `position: fixed` in viewport coords (centred above the
-trigger, flipped below / clamped if needed; `place()` subtracts a
-transformed/filtered ancestor's offset via `fixedContainingBlock`; re-places on
-scroll/resize). On a pointer device hover/focus reveals it and clicking the badge pins
-it open (text selectable; hovering the bubble keeps it open via a grace timer); a
-pinned tip closes on re-click, an outside `pointerdown`, or opening another. On touch
-(no `(hover: hover)`) only the click-toggle path runs. Only one tip is open at a time
-(a shared `openTip` closes the previous, tearing down its listeners). Tooltip text
-shows the concrete source first, the tier-grade explainer underneath. Pill tooltips
-are `info.provNone/provLlm/provSourced/provVerified`.
+Every source shows a **provenance pill** (`makeProvenancePill`, see Source provenance) with a
+hover/tap tooltip via `withTip(trigger, text)` (a present Wikipedia reference *link* is the
+exception: no pill). The bubble is appended to `document.body` (escaping the panel's overflow +
+dimming), `position: fixed`, re-placed on scroll/resize (`place()` / `fixedContainingBlock`).
+Hover/focus reveals; clicking pins it (selectable); only one open at a time (`openTip`). Touch runs
+the click-toggle path only. Text shows the concrete source first, the grade explainer under. Pill
+tooltips are `info.provNone/provLlm/provSourced/provVerified`.
 
 Views:
-- **connection**: label, a `Projection` type line (the analogue of a structure's
-  group heading), route (`from → to`, `↔` bidirectional; each endpoint clickable,
-  jumping to + isolating that structure via `endpointEl` -> `onStructurePick`), kind +
-  neurotransmitter, description. The route, the kind/transmitter line and the
-  description each carry the pathway's own provenance badge (`proj.provenance`, the
-  citations in its tooltip) so every node shows its grade beside the claim it backs;
-  there is no separate "Sources" block at the bottom (a source only ever grades a
-  single node, so it rides that node's row). Arrow picking (`pickArrowAt`) beats the
-  region behind.
-- **structure** (`showStructure`): name, a group heading that carries the region's
-  anatomy grade pill (`classification_provenance`, the claim that line names), a
-  Reference row (a Wikipedia link, or `NOSOURCE` when absent), then (when the link
-  resolves) the live Wikipedia lead as a `sourced` description (structures carry no
-  baked description; fetch-only), and the pathway list. Each connection row: a bold
-  colour-filled direction arrow
-  (`directionArrow`, an inline SVG with a wide pointy head, in the pathway colour;
-  out / in / both relative to this structure, drawn big for legibility; wrapped in
-  `withTip` so a tap explains the direction and, crucially, does **not** bubble to
-  the row's click, so on a phone tapping the arrow no longer navigates), the
-  other endpoint, and the pathway's summary pill
-  (`makeProvenancePill(proj.provenance, citationsTip(proj.sources))`, `proj.provenance`
-  = the strongest grade over `proj.sources`, resolved once in `js/data.js`). Clicking a
-  row jumps to that pathway (`onConnection`). "No mapped connections yet." otherwise.
-  Left/right twin pathways are collapsed to one row (a midline source like the raphe
-  projects to both hemispheres of each target; grouped by direction + other-endpoint
-  `base_name` + label, shown with the hemisphere-stripped name).
+- **connection**: label, a `Projection` type line, route (`from → to`, `↔` bidirectional; each
+  endpoint clickable via `endpointEl` -> `onStructurePick`), kind + neurotransmitter, description.
+  Each of those rows carries the pathway's own `proj.provenance` badge (no bottom Sources block).
+  Arrow picking (`pickArrowAt`) beats the region behind.
+- **structure** (`showStructure`): name, a group heading with the anatomy grade pill
+  (`classification_provenance`), a Reference row (Wikipedia link or `NOSOURCE`), the live Wikipedia
+  lead as a `sourced` description (fetch-only, no baked copy), then the pathway list. Each connection
+  row: a bold `directionArrow` (inline SVG, pathway colour, out/in/both; wrapped in `withTip` so a
+  tap explains direction without bubbling to the row click), the other endpoint, and the pathway's
+  summary pill (`proj.provenance`, resolved in `js/data.js`). Left/right twin pathways collapse to
+  one row (by direction + other-endpoint `base_name` + label).
 - **receptor / target / drug / circuit / projection-group**: see their sections.
 
-A click that misses everything (empty space) closes the panel. **Double-click**: on a
-structure isolates it; on empty space recenters.
+A click on empty space closes the panel. **Double-click**: on a structure isolates it; on empty
+space recenters.
 
 ### Camera focus (`createCameraFocus`)
 
-All framing (reset, search, panel buttons) goes through one smooth tween: it moves the
-orbit pivot + camera distance but keeps the view direction, is advanced once per frame,
-and is cancelled the moment the user grabs the controls. It also owns the screen offset
-(`setScreenOffset(x,y)`, eased in `tick`) used for the pan-aside. While anything is
-focused (the rest dimmed), moving the Separate slider keeps that focus centered as it
-blows outward: the explode handler calls `reaimFocused()`, which enables a **pivot-
-follow** that `tick()` eases (glides the orbit pivot in when the view didn't start on
-the focus, then snaps to track the moving center exactly; only the pivot moves so the
-camera rotates in place, preserving the user's distance + angle). The tracked center
-comes from `getFocusMeshes` (the live `selection.getSelected()` set): a single focused
-structure (`focused`, set only by `focusStructure`) tracks precisely, while a multi-
-region focus (receptor / drug / circuit / group; `focused` cleared by
-`focusMeshes`/`focusConnection`/`recenter`) tracks the visible set's bounding-sphere
-center. Only visible meshes count (composes with "See inside"). The follow disables
-itself once settled (an idle focus costs nothing per frame), when the user grabs the
-camera (`cancel`), or when the focus clears.
+All framing (reset, search, panel buttons) goes through one smooth tween: moves the orbit pivot +
+camera distance, keeps the view direction, advanced once per frame, cancelled the moment the user
+grabs the controls. Also owns the screen offset (`setScreenOffset`, eased in `tick`) for the
+pan-aside. While a focus is held, moving Separate keeps it centered: the explode handler calls
+`reaimFocused()`, enabling a **pivot-follow** that `tick()` eases (only the pivot moves, so the
+camera holds the user's distance + angle). The tracked center is `getFocusMeshes` over the live
+`selection.getSelected()`: a single `focused` structure tracks precisely, a multi-region focus tracks
+the visible set's bounding-sphere center (only visible meshes, so it composes with "See inside"). The
+follow disables itself once settled, on a camera grab (`cancel`), or when the focus clears.
 
 ## Rendering
 
