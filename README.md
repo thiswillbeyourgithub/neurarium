@@ -80,7 +80,7 @@ Target classifications          ████████████████
 Receptor mechanism class        ██████████████░░░░░░░░░░░░   54%    30/56
 Target tone polarity            █████████████░░░░░░░░░░░░░   50%      1/2
 Receptor sign (excit./inhib.)   ██████░░░░░░░░░░░░░░░░░░░░   23%    13/56
-Receptor pre/postsynaptic site  █████░░░░░░░░░░░░░░░░░░░░░   18%    10/56
+Receptor pre/postsynaptic site  █████░░░░░░░░░░░░░░░░░░░░░   20%    11/56
 ```
 
 <!-- SOURCING_STATS:END -->

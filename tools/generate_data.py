@@ -2805,9 +2805,9 @@ RECEPTOR_CLASSIFICATION_COVERAGE: dict[str, tuple[str, ...]] = {
     "alpha2b": _F, "alpha2c": _F, "beta1": _F, "beta2": _F, "beta3": _F,
     # 5-HT sign sentence: family + the excitatory/inhibitory sign it lists.
     "5ht1a": _FG, "5ht2a": _FG, "5ht2c": _FG, "5ht4": _FG, "5ht5a": _FG, "5ht6": _FG,
-    # 5-HT2B quote calls it a *presynaptic autoreceptor*, contradicting the record's
-    # postsynaptic value, so only family is backed (see the note above).
-    "5ht2b": _F,
+    # 5-HT2B quote calls it a *presynaptic autoreceptor*; the record's synaptic was
+    # corrected to "presynaptic" to match, so family + site are backed (sign/class not).
+    "5ht2b": _FY,
     # "5HT7 receptors are postsynaptic, excitatory": family + sign + site.
     "5ht7": _FGY,
     # Opioid "synapse with postsynaptic sites": family + site.
@@ -3981,13 +3981,15 @@ RECEPTORS: list[dict[str, Any]] = [
          wikipedia="https://en.wikipedia.org/wiki/5-HT2A_receptor"),
     dict(id="5ht2b", name="5-HT2B", family="serotonergic",
          neurotransmitter="Serotonin", receptor_class="metabotropic",
-         sign="excitatory", synaptic="postsynaptic",
+         sign="excitatory", synaptic="presynaptic",
          locations=["hypothalamus", "frontal", "amygdala"],
-         description="Gq-coupled; mostly peripheral (cardiac valves); sparse CNS "
-                     "in hypothalamus, cortex, amygdala; valvulopathy risk.",
-         description_fr="Couplé à Gq ; surtout périphérique (valves cardiaques) ; "
-                        "rare dans le SNC : hypothalamus, cortex, amygdale ; "
-                        "risque de valvulopathie.",
+         description="Gq-coupled; presynaptic autoreceptor on raphe 5-HT neurons; "
+                     "also peripheral (cardiac valves, valvulopathy risk); sparse CNS "
+                     "in hypothalamus, cortex, amygdala.",
+         description_fr="Couplé à Gq ; autorécepteur présynaptique sur les neurones "
+                        "sérotoninergiques du raphé ; aussi périphérique (valves "
+                        "cardiaques, risque de valvulopathie) ; rare dans le SNC : "
+                        "hypothalamus, cortex, amygdale.",
          wikipedia="https://en.wikipedia.org/wiki/5-HT2B_receptor"),
     dict(id="5ht2c", name="5-HT2C", family="serotonergic",
          neurotransmitter="Serotonin", receptor_class="metabotropic",
