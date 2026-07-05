@@ -98,12 +98,12 @@ network, idempotent, polite; each touches only what changed). Always finish with
    tools/fetch_gtopdb.py` re-pulls each receptor's tissue comments (caches to
    `sources/gtopdb/`, author-side), then run the confirm-only judge over
    `sources/gtopdb/worklist.json` and `python tools/apply_location_sources.py --judged <f>`
-   to merge new `verified` sources into `tools/location_sources.json`. See Expression locations.
+   to merge new `verified` sources into `tools/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
 5. **Allen AHBA expression** (the `target_locations` + residual `receptor_locations`
    sources): `python tools/fetch_allen.py` re-pulls each donor's microarray PACall (caches
    to `sources/allen/`, author-side; ~2GB across donors), then `python
    tools/apply_location_sources.py --corpus allen` merges the deterministic `verified`
-   sources (no judge) into `tools/location_sources.json`. See Expression locations.
+   sources (no judge) into `tools/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
 6. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
 7. `python tools/update_readme_stats.py` — refresh the README sourcing table
    (CI runs it `--check`).
@@ -142,15 +142,15 @@ Screenshots).
 - `tools/fetch_gtopdb.py` — fetches receptor tissue-distribution comments from the Guide to
   Pharmacology API (corpus #7 `gtopdb`), the source for **receptor expression regions**;
   `RECEPTOR_GENES` maps receptor->gene->targetId. Caches `sources/gtopdb/` + `worklist.json`
-  (each quote carries assay species). See CLAUDE.md Expression locations.
+  (each quote carries assay species). See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/fetch_allen.py` — fetches the Allen Human Brain Atlas microarray (corpus #8
   `allen_ahba`), the source for **target expression regions** + the receptor regions GtoPdb
   misses; a PACall detection-boolean vote per (gene, region), no judge. `TARGET_GENES` +
   `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `sources/allen/` + `confirmed.json`.
-  See CLAUDE.md Expression locations.
+  See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/apply_location_sources.py` — merges accepted expression quotes into
   `tools/location_sources.json`, `--corpus {gtopdb,allen}` (gtopdb needs a judged file; allen is
-  deterministic). Idempotent. See CLAUDE.md Expression locations.
+  deterministic). Idempotent. See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
 - `tools/fetch_ki.py` — parses the PDSP Ki CSV (`sources/books/pdsp_ki/`, author-side) into

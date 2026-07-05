@@ -125,8 +125,10 @@ shape. It is generated from a single source of truth (`tools/generate_data.py`, 
 the drug list in `tools/drugs_data.json`), so the plain JSONL/JSON is easy to consume
 from another engine.
 
-For the full data flow and module graph see [`ARCHITECTURE.md`](ARCHITECTURE.md); for
-the file-by-file map and how to extend the dataset see [`CLAUDE.md`](CLAUDE.md).
+For the full data flow and module graph see [`ARCHITECTURE.md`](ARCHITECTURE.md); for how
+to extend the dataset, the per-tool reference, and the emitted-data field contract see
+[`tools/README.md`](tools/README.md); for the viewer's file-by-file map and the non-obvious
+rules see [`CLAUDE.md`](CLAUDE.md).
 
 ## Roadmap
 
