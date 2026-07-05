@@ -9,60 +9,21 @@
     "noradrenergic": "#ff9da7"
   },
   "kind_labels": {
-    "excitatory": {
-      "en": "excitatory",
-      "fr": "excitateur"
-    },
-    "inhibitory": {
-      "en": "inhibitory",
-      "fr": "inhibiteur"
-    },
-    "dopaminergic": {
-      "en": "dopaminergic",
-      "fr": "dopaminergique"
-    },
-    "cholinergic": {
-      "en": "cholinergic",
-      "fr": "cholinergique"
-    },
-    "neuroendocrine": {
-      "en": "neuroendocrine",
-      "fr": "neuroendocrine"
-    },
-    "serotonergic": {
-      "en": "serotonergic",
-      "fr": "sérotoninergique"
-    },
-    "noradrenergic": {
-      "en": "noradrenergic",
-      "fr": "noradrénergique"
-    }
+    "excitatory": "excitatory",
+    "inhibitory": "inhibitory",
+    "dopaminergic": "dopaminergic",
+    "cholinergic": "cholinergic",
+    "neuroendocrine": "neuroendocrine",
+    "serotonergic": "serotonergic",
+    "noradrenergic": "noradrenergic"
   },
   "group_labels": {
-    "lobe": {
-      "en": "Lobes",
-      "fr": "Lobes"
-    },
-    "basal_ganglia": {
-      "en": "Basal ganglia / deep nuclei",
-      "fr": "Ganglions de la base / noyaux profonds"
-    },
-    "diencephalon": {
-      "en": "Diencephalon",
-      "fr": "Diencéphale"
-    },
-    "limbic": {
-      "en": "Limbic",
-      "fr": "Système limbique"
-    },
-    "hindbrain": {
-      "en": "Hindbrain",
-      "fr": "Rhombencéphale"
-    },
-    "brainstem_nuclei": {
-      "en": "Brainstem nuclei",
-      "fr": "Noyaux du tronc cérébral"
-    }
+    "lobe": "Lobes",
+    "basal_ganglia": "Basal ganglia / deep nuclei",
+    "diencephalon": "Diencephalon",
+    "limbic": "Limbic",
+    "hindbrain": "Hindbrain",
+    "brainstem_nuclei": "Brainstem nuclei"
   },
   "kind_signs": {
     "excitatory": "excitatory",
@@ -79,18 +40,9 @@
     "modulatory": "#9aa0a6"
   },
   "sign_labels": {
-    "excitatory": {
-      "en": "Excitatory",
-      "fr": "Excitateur"
-    },
-    "inhibitory": {
-      "en": "Inhibitory",
-      "fr": "Inhibiteur"
-    },
-    "modulatory": {
-      "en": "Modulatory",
-      "fr": "Modulateur"
-    }
+    "excitatory": "Excitatory",
+    "inhibitory": "Inhibitory",
+    "modulatory": "Modulatory"
   },
   "system_flow_kinds": {
     "serotonergic": "serotonergic",
@@ -99,167 +51,53 @@
     "cholinergic": "cholinergic"
   },
   "receptor_family_labels": {
-    "adrenergic": {
-      "en": "Adrenergic",
-      "fr": "Adrénergique"
-    },
-    "cholinergic": {
-      "en": "Cholinergic",
-      "fr": "Cholinergique"
-    },
-    "dopaminergic": {
-      "en": "Dopaminergic",
-      "fr": "Dopaminergique"
-    },
-    "gabaergic": {
-      "en": "GABAergic",
-      "fr": "GABAergique"
-    },
-    "glutamatergic": {
-      "en": "Glutamatergic",
-      "fr": "Glutamatergique"
-    },
-    "glycinergic": {
-      "en": "Glycinergic",
-      "fr": "Glycinergique"
-    },
-    "histaminergic": {
-      "en": "Histaminergic",
-      "fr": "Histaminergique"
-    },
-    "opioidergic": {
-      "en": "Opioidergic",
-      "fr": "Opioïdergique"
-    },
-    "serotonergic": {
-      "en": "Serotonergic",
-      "fr": "Sérotoninergique"
-    },
-    "cannabinoid": {
-      "en": "Cannabinoid",
-      "fr": "Cannabinoïde"
-    },
-    "purinergic": {
-      "en": "Purinergic",
-      "fr": "Purinergique"
-    },
-    "sigma": {
-      "en": "Sigma",
-      "fr": "Sigma"
-    },
-    "melatonergic": {
-      "en": "Melatonergic",
-      "fr": "Mélatoninergique"
-    }
+    "adrenergic": "Adrenergic",
+    "cholinergic": "Cholinergic",
+    "dopaminergic": "Dopaminergic",
+    "gabaergic": "GABAergic",
+    "glutamatergic": "Glutamatergic",
+    "glycinergic": "Glycinergic",
+    "histaminergic": "Histaminergic",
+    "opioidergic": "Opioidergic",
+    "serotonergic": "Serotonergic",
+    "cannabinoid": "Cannabinoid",
+    "purinergic": "Purinergic",
+    "sigma": "Sigma",
+    "melatonergic": "Melatonergic"
   },
   "receptor_class_labels": {
-    "ionotropic": {
-      "en": "Ionotropic (ligand-gated ion channel)",
-      "fr": "Ionotrope (canal ionique ligand-dépendant)"
-    },
-    "metabotropic": {
-      "en": "Metabotropic (GPCR)",
-      "fr": "Métabotrope (RCPG)"
-    },
-    "chaperone": {
-      "en": "Intracellular chaperone",
-      "fr": "Chaperon intracellulaire"
-    }
+    "ionotropic": "Ionotropic (ligand-gated ion channel)",
+    "metabotropic": "Metabotropic (GPCR)",
+    "chaperone": "Intracellular chaperone"
   },
   "synaptic_labels": {
-    "presynaptic": {
-      "en": "Presynaptic",
-      "fr": "Présynaptique"
-    },
-    "postsynaptic": {
-      "en": "Postsynaptic",
-      "fr": "Postsynaptique"
-    },
-    "both": {
-      "en": "Pre- and postsynaptic",
-      "fr": "Pré- et postsynaptique"
-    }
+    "presynaptic": "Presynaptic",
+    "postsynaptic": "Postsynaptic",
+    "both": "Pre- and postsynaptic"
   },
   "drug_category_labels": {
-    "ssri": {
-      "en": "SSRI",
-      "fr": "ISRS"
-    },
-    "snri": {
-      "en": "SNRI",
-      "fr": "IRSN"
-    },
-    "tricyclic": {
-      "en": "Tricyclic / tetracyclic antidepressant",
-      "fr": "Antidépresseur tricyclique / tétracyclique"
-    },
-    "maoi": {
-      "en": "MAO inhibitor",
-      "fr": "Inhibiteur de la MAO"
-    },
-    "antidepressant_other": {
-      "en": "Other antidepressant",
-      "fr": "Autre antidépresseur"
-    },
-    "antipsychotic_atypical": {
-      "en": "Atypical antipsychotic",
-      "fr": "Antipsychotique atypique"
-    },
-    "antipsychotic_conventional": {
-      "en": "Conventional antipsychotic",
-      "fr": "Antipsychotique classique"
-    },
-    "anxiolytic": {
-      "en": "Anxiolytic",
-      "fr": "Anxiolytique"
-    },
-    "hypnotic": {
-      "en": "Hypnotic / sedative",
-      "fr": "Hypnotique / sédatif"
-    },
-    "benzodiazepine": {
-      "en": "Benzodiazepine",
-      "fr": "Benzodiazépine"
-    },
-    "mood_stabilizer": {
-      "en": "Mood stabilizer / anticonvulsant",
-      "fr": "Thymorégulateur / anticonvulsivant"
-    },
-    "stimulant": {
-      "en": "Stimulant / wake-promoting",
-      "fr": "Stimulant / éveillant"
-    },
-    "adhd_nonstimulant": {
-      "en": "ADHD non-stimulant",
-      "fr": "Non-stimulant (TDAH)"
-    },
-    "cognitive_enhancer": {
-      "en": "Cognitive enhancer",
-      "fr": "Activateur cognitif"
-    },
-    "substance_use": {
-      "en": "Substance-use treatment",
-      "fr": "Traitement des addictions"
-    },
-    "opioid": {
-      "en": "Opioid / opioid modulator",
-      "fr": "Opioïde / modulateur opioïde"
-    },
-    "recreational": {
-      "en": "Recreational / psychoactive",
-      "fr": "Récréatif / psychoactif"
-    },
-    "other": {
-      "en": "Other",
-      "fr": "Autre"
-    }
+    "ssri": "SSRI",
+    "snri": "SNRI",
+    "tricyclic": "Tricyclic / tetracyclic antidepressant",
+    "maoi": "MAO inhibitor",
+    "antidepressant_other": "Other antidepressant",
+    "antipsychotic_atypical": "Atypical antipsychotic",
+    "antipsychotic_conventional": "Conventional antipsychotic",
+    "anxiolytic": "Anxiolytic",
+    "hypnotic": "Hypnotic / sedative",
+    "benzodiazepine": "Benzodiazepine",
+    "mood_stabilizer": "Mood stabilizer / anticonvulsant",
+    "stimulant": "Stimulant / wake-promoting",
+    "adhd_nonstimulant": "ADHD non-stimulant",
+    "cognitive_enhancer": "Cognitive enhancer",
+    "substance_use": "Substance-use treatment",
+    "opioid": "Opioid / opioid modulator",
+    "recreational": "Recreational / psychoactive",
+    "other": "Other"
   },
   "drug_targets": {
     "sert": {
-      "name": {
-        "en": "Serotonin transporter (SERT)",
-        "fr": "Transporteur de la sérotonine (SERT)"
-      },
+      "name": "Serotonin transporter (SERT)",
       "type": "transporter",
       "system": "serotonergic",
       "receptor": null,
@@ -298,10 +136,7 @@
       ]
     },
     "net": {
-      "name": {
-        "en": "Norepinephrine transporter (NET)",
-        "fr": "Transporteur de la noradrénaline (NET)"
-      },
+      "name": "Norepinephrine transporter (NET)",
       "type": "transporter",
       "system": "adrenergic",
       "receptor": null,
@@ -338,10 +173,7 @@
       ]
     },
     "dat": {
-      "name": {
-        "en": "Dopamine transporter (DAT)",
-        "fr": "Transporteur de la dopamine (DAT)"
-      },
+      "name": "Dopamine transporter (DAT)",
       "type": "transporter",
       "system": "dopaminergic",
       "receptor": null,
@@ -422,10 +254,7 @@
       ]
     },
     "gat": {
-      "name": {
-        "en": "GABA transporter (GAT)",
-        "fr": "Transporteur du GABA (GAT)"
-      },
+      "name": "GABA transporter (GAT)",
       "type": "transporter",
       "system": "gabaergic",
       "receptor": null,
@@ -496,10 +325,7 @@
       ]
     },
     "vmat2": {
-      "name": {
-        "en": "Vesicular monoamine transporter (VMAT2)",
-        "fr": "Transporteur vésiculaire des monoamines (VMAT2)"
-      },
+      "name": "Vesicular monoamine transporter (VMAT2)",
       "type": "transporter",
       "system": "dopaminergic",
       "receptor": null,
@@ -590,10 +416,7 @@
       ]
     },
     "mao_a": {
-      "name": {
-        "en": "Monoamine oxidase A (MAO-A)",
-        "fr": "Monoamine oxydase A (MAO-A)"
-      },
+      "name": "Monoamine oxidase A (MAO-A)",
       "type": "enzyme",
       "system": "serotonergic",
       "receptor": null,
@@ -684,10 +507,7 @@
       ]
     },
     "mao_b": {
-      "name": {
-        "en": "Monoamine oxidase B (MAO-B)",
-        "fr": "Monoamine oxydase B (MAO-B)"
-      },
+      "name": "Monoamine oxidase B (MAO-B)",
       "type": "enzyme",
       "system": "dopaminergic",
       "receptor": null,
@@ -768,10 +588,7 @@
       ]
     },
     "ache": {
-      "name": {
-        "en": "Acetylcholinesterase",
-        "fr": "Acétylcholinestérase"
-      },
+      "name": "Acetylcholinesterase",
       "type": "enzyme",
       "system": "cholinergic",
       "receptor": null,
@@ -842,10 +659,7 @@
       ]
     },
     "bche": {
-      "name": {
-        "en": "Butyrylcholinesterase",
-        "fr": "Butyrylcholinestérase"
-      },
+      "name": "Butyrylcholinesterase",
       "type": "enzyme",
       "system": "cholinergic",
       "receptor": null,
@@ -896,10 +710,7 @@
       ]
     },
     "carbonic_anhydrase": {
-      "name": {
-        "en": "Carbonic anhydrase",
-        "fr": "Anhydrase carbonique"
-      },
+      "name": "Carbonic anhydrase",
       "type": "enzyme",
       "system": null,
       "receptor": null,
@@ -909,10 +720,7 @@
       "wikipedia_provenance": "sourced"
     },
     "pde5": {
-      "name": {
-        "en": "Phosphodiesterase 5 (PDE5)",
-        "fr": "Phosphodiestérase 5 (PDE5)"
-      },
+      "name": "Phosphodiesterase 5 (PDE5)",
       "type": "enzyme",
       "system": null,
       "receptor": null,
@@ -922,10 +730,7 @@
       "wikipedia_provenance": "sourced"
     },
     "nav": {
-      "name": {
-        "en": "Voltage-gated sodium channel",
-        "fr": "Canal sodique voltage-dépendant"
-      },
+      "name": "Voltage-gated sodium channel",
       "type": "ion_channel",
       "system": null,
       "receptor": null,
@@ -1006,10 +811,7 @@
       ]
     },
     "cav": {
-      "name": {
-        "en": "Voltage-gated calcium channel",
-        "fr": "Canal calcique voltage-dépendant"
-      },
+      "name": "Voltage-gated calcium channel",
       "type": "ion_channel",
       "system": null,
       "receptor": null,
@@ -1070,10 +872,7 @@
       ]
     },
     "cav_a2d": {
-      "name": {
-        "en": "Calcium channel α2δ subunit",
-        "fr": "Sous-unité α2δ du canal calcique"
-      },
+      "name": "Calcium channel α2δ subunit",
       "type": "ion_channel",
       "system": null,
       "receptor": null,
@@ -1134,10 +933,7 @@
       ]
     },
     "cav_t": {
-      "name": {
-        "en": "T-type calcium channel",
-        "fr": "Canal calcique de type T"
-      },
+      "name": "T-type calcium channel",
       "type": "ion_channel",
       "system": null,
       "receptor": null,
@@ -1180,10 +976,7 @@
       "wikipedia_provenance": "sourced"
     },
     "sv2a": {
-      "name": {
-        "en": "Synaptic vesicle protein 2A (SV2A)",
-        "fr": "Protéine 2A des vésicules synaptiques (SV2A)"
-      },
+      "name": "Synaptic vesicle protein 2A (SV2A)",
       "type": "vesicle_protein",
       "system": null,
       "receptor": null,
@@ -1244,10 +1037,7 @@
       ]
     },
     "muscarinic": {
-      "name": {
-        "en": "Muscarinic receptors (M1–M5)",
-        "fr": "Récepteurs muscariniques (M1–M5)"
-      },
+      "name": "Muscarinic receptors (M1–M5)",
       "type": "receptor_group",
       "system": "cholinergic",
       "receptor": null,
@@ -1338,10 +1128,7 @@
       ]
     },
     "nicotinic": {
-      "name": {
-        "en": "Nicotinic receptors",
-        "fr": "Récepteurs nicotiniques"
-      },
+      "name": "Nicotinic receptors",
       "type": "receptor_group",
       "system": "cholinergic",
       "receptor": null,
@@ -1412,10 +1199,7 @@
       ]
     },
     "alpha1": {
-      "name": {
-        "en": "α1 adrenergic receptors",
-        "fr": "Récepteurs α1 adrénergiques"
-      },
+      "name": "α1 adrenergic receptors",
       "type": "receptor_group",
       "system": "adrenergic",
       "receptor": null,
@@ -1526,10 +1310,7 @@
       ]
     },
     "alpha2": {
-      "name": {
-        "en": "α2 adrenergic receptors",
-        "fr": "Récepteurs α2 adrénergiques"
-      },
+      "name": "α2 adrenergic receptors",
       "type": "receptor_group",
       "system": "adrenergic",
       "receptor": null,
@@ -1633,10 +1414,7 @@
       ]
     },
     "beta": {
-      "name": {
-        "en": "β adrenergic receptors",
-        "fr": "Récepteurs β adrénergiques"
-      },
+      "name": "β adrenergic receptors",
       "type": "receptor_group",
       "system": "adrenergic",
       "receptor": null,
@@ -1707,10 +1485,7 @@
       ]
     },
     "glutamate": {
-      "name": {
-        "en": "Glutamate receptors",
-        "fr": "Récepteurs du glutamate"
-      },
+      "name": "Glutamate receptors",
       "type": "receptor_group",
       "system": "glutamatergic",
       "receptor": null,
@@ -1801,10 +1576,7 @@
       ]
     },
     "melatonin": {
-      "name": {
-        "en": "Melatonin receptors (MT1/MT2)",
-        "fr": "Récepteurs de la mélatonine (MT1/MT2)"
-      },
+      "name": "Melatonin receptors (MT1/MT2)",
       "type": "receptor_group",
       "system": "melatonergic",
       "receptor": null,
@@ -1825,10 +1597,7 @@
       ]
     },
     "orexin": {
-      "name": {
-        "en": "Orexin receptors (OX1R/OX2R)",
-        "fr": "Récepteurs de l'orexine (OX1R/OX2R)"
-      },
+      "name": "Orexin receptors (OX1R/OX2R)",
       "type": "receptor_group",
       "system": null,
       "receptor": null,
@@ -1899,10 +1668,7 @@
       ]
     },
     "melanocortin": {
-      "name": {
-        "en": "Melanocortin receptors",
-        "fr": "Récepteurs de la mélanocortine"
-      },
+      "name": "Melanocortin receptors",
       "type": "receptor_group",
       "system": null,
       "receptor": null,
@@ -1925,10 +1691,7 @@
       "wikipedia_provenance": "sourced"
     },
     "alpha1a": {
-      "name": {
-        "en": "α1A",
-        "fr": "α1A"
-      },
+      "name": "α1A",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1a",
@@ -1948,10 +1711,7 @@
       "ubiquitous": false
     },
     "alpha1b": {
-      "name": {
-        "en": "α1B",
-        "fr": "α1B"
-      },
+      "name": "α1B",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1b",
@@ -1970,10 +1730,7 @@
       "ubiquitous": false
     },
     "alpha1c": {
-      "name": {
-        "en": "α1C",
-        "fr": "α1C"
-      },
+      "name": "α1C",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1c",
@@ -1981,10 +1738,7 @@
       "ubiquitous": false
     },
     "alpha1d": {
-      "name": {
-        "en": "α1D",
-        "fr": "α1D"
-      },
+      "name": "α1D",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha1d",
@@ -2003,10 +1757,7 @@
       "ubiquitous": false
     },
     "alpha2a": {
-      "name": {
-        "en": "α2A",
-        "fr": "α2A"
-      },
+      "name": "α2A",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2a",
@@ -2026,10 +1777,7 @@
       "ubiquitous": false
     },
     "alpha2b": {
-      "name": {
-        "en": "α2B",
-        "fr": "α2B"
-      },
+      "name": "α2B",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2b",
@@ -2041,10 +1789,7 @@
       "ubiquitous": false
     },
     "alpha2c": {
-      "name": {
-        "en": "α2C",
-        "fr": "α2C"
-      },
+      "name": "α2C",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2c",
@@ -2068,10 +1813,7 @@
       "ubiquitous": false
     },
     "alpha2d": {
-      "name": {
-        "en": "α2D",
-        "fr": "α2D"
-      },
+      "name": "α2D",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "alpha2d",
@@ -2079,10 +1821,7 @@
       "ubiquitous": false
     },
     "beta1": {
-      "name": {
-        "en": "β1",
-        "fr": "β1"
-      },
+      "name": "β1",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "beta1",
@@ -2095,10 +1834,7 @@
       "ubiquitous": false
     },
     "beta2": {
-      "name": {
-        "en": "β2",
-        "fr": "β2"
-      },
+      "name": "β2",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "beta2",
@@ -2113,10 +1849,7 @@
       "ubiquitous": false
     },
     "beta3": {
-      "name": {
-        "en": "β3",
-        "fr": "β3"
-      },
+      "name": "β3",
       "type": "receptor",
       "system": "adrenergic",
       "receptor": "beta3",
@@ -2124,10 +1857,7 @@
       "ubiquitous": false
     },
     "m1": {
-      "name": {
-        "en": "M1",
-        "fr": "M1"
-      },
+      "name": "M1",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "m1",
@@ -2143,10 +1873,7 @@
       "ubiquitous": false
     },
     "m2": {
-      "name": {
-        "en": "M2",
-        "fr": "M2"
-      },
+      "name": "M2",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "m2",
@@ -2164,10 +1891,7 @@
       "ubiquitous": false
     },
     "m3": {
-      "name": {
-        "en": "M3",
-        "fr": "M3"
-      },
+      "name": "M3",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "m3",
@@ -2184,10 +1908,7 @@
       "ubiquitous": false
     },
     "m4": {
-      "name": {
-        "en": "M4",
-        "fr": "M4"
-      },
+      "name": "M4",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "m4",
@@ -2201,10 +1922,7 @@
       "ubiquitous": false
     },
     "m5": {
-      "name": {
-        "en": "M5",
-        "fr": "M5"
-      },
+      "name": "M5",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "m5",
@@ -2220,10 +1938,7 @@
       "ubiquitous": false
     },
     "nachr_muscle": {
-      "name": {
-        "en": "Muscle nAChR",
-        "fr": "Muscle nAChR"
-      },
+      "name": "Muscle nAChR",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "nachr_muscle",
@@ -2231,10 +1946,7 @@
       "ubiquitous": false
     },
     "nachr_a4b2": {
-      "name": {
-        "en": "Neuronal α4β2 nAChR",
-        "fr": "Neuronal α4β2 nAChR"
-      },
+      "name": "Neuronal α4β2 nAChR",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "nachr_a4b2",
@@ -2253,10 +1965,7 @@
       "ubiquitous": false
     },
     "nachr_a7": {
-      "name": {
-        "en": "Neuronal α7 nAChR",
-        "fr": "Neuronal α7 nAChR"
-      },
+      "name": "Neuronal α7 nAChR",
       "type": "receptor",
       "system": "cholinergic",
       "receptor": "nachr_a7",
@@ -2272,10 +1981,7 @@
       "ubiquitous": false
     },
     "d1": {
-      "name": {
-        "en": "D1",
-        "fr": "D1"
-      },
+      "name": "D1",
       "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d1",
@@ -2297,10 +2003,7 @@
       "ubiquitous": false
     },
     "d2": {
-      "name": {
-        "en": "D2",
-        "fr": "D2"
-      },
+      "name": "D2",
       "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d2",
@@ -2317,10 +2020,7 @@
       "ubiquitous": false
     },
     "d3": {
-      "name": {
-        "en": "D3",
-        "fr": "D3"
-      },
+      "name": "D3",
       "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d3",
@@ -2336,10 +2036,7 @@
       "ubiquitous": false
     },
     "d4": {
-      "name": {
-        "en": "D4",
-        "fr": "D4"
-      },
+      "name": "D4",
       "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d4",
@@ -2354,10 +2051,7 @@
       "ubiquitous": false
     },
     "d5": {
-      "name": {
-        "en": "D5",
-        "fr": "D5"
-      },
+      "name": "D5",
       "type": "receptor",
       "system": "dopaminergic",
       "receptor": "d5",
@@ -2381,10 +2075,7 @@
       "ubiquitous": false
     },
     "gaba_a": {
-      "name": {
-        "en": "GABA-A",
-        "fr": "GABA-A"
-      },
+      "name": "GABA-A",
       "type": "receptor",
       "system": "gabaergic",
       "receptor": "gaba_a",
@@ -2392,10 +2083,7 @@
       "ubiquitous": true
     },
     "gaba_b": {
-      "name": {
-        "en": "GABA-B",
-        "fr": "GABA-B"
-      },
+      "name": "GABA-B",
       "type": "receptor",
       "system": "gabaergic",
       "receptor": "gaba_b",
@@ -2403,10 +2091,7 @@
       "ubiquitous": true
     },
     "gaba_a_rho": {
-      "name": {
-        "en": "GABA-A-ρ",
-        "fr": "GABA-A-ρ"
-      },
+      "name": "GABA-A-ρ",
       "type": "receptor",
       "system": "gabaergic",
       "receptor": "gaba_a_rho",
@@ -2414,10 +2099,7 @@
       "ubiquitous": false
     },
     "nmda": {
-      "name": {
-        "en": "NMDA",
-        "fr": "NMDA"
-      },
+      "name": "NMDA",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "nmda",
@@ -2425,10 +2107,7 @@
       "ubiquitous": true
     },
     "ampa": {
-      "name": {
-        "en": "AMPA",
-        "fr": "AMPA"
-      },
+      "name": "AMPA",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "ampa",
@@ -2436,10 +2115,7 @@
       "ubiquitous": true
     },
     "kainate": {
-      "name": {
-        "en": "Kainate",
-        "fr": "Kainate"
-      },
+      "name": "Kainate",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "kainate",
@@ -2455,10 +2131,7 @@
       "ubiquitous": false
     },
     "mglur1": {
-      "name": {
-        "en": "mGluR1",
-        "fr": "mGluR1"
-      },
+      "name": "mGluR1",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur1",
@@ -2474,10 +2147,7 @@
       "ubiquitous": false
     },
     "mglur2": {
-      "name": {
-        "en": "mGluR2",
-        "fr": "mGluR2"
-      },
+      "name": "mGluR2",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur2",
@@ -2492,10 +2162,7 @@
       "ubiquitous": false
     },
     "mglur3": {
-      "name": {
-        "en": "mGluR3",
-        "fr": "mGluR3"
-      },
+      "name": "mGluR3",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur3",
@@ -2510,10 +2177,7 @@
       "ubiquitous": false
     },
     "mglur4": {
-      "name": {
-        "en": "mGluR4",
-        "fr": "mGluR4"
-      },
+      "name": "mGluR4",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur4",
@@ -2527,10 +2191,7 @@
       "ubiquitous": false
     },
     "mglur5": {
-      "name": {
-        "en": "mGluR5",
-        "fr": "mGluR5"
-      },
+      "name": "mGluR5",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur5",
@@ -2548,10 +2209,7 @@
       "ubiquitous": false
     },
     "mglur6": {
-      "name": {
-        "en": "mGluR6",
-        "fr": "mGluR6"
-      },
+      "name": "mGluR6",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur6",
@@ -2559,10 +2217,7 @@
       "ubiquitous": false
     },
     "mglur7": {
-      "name": {
-        "en": "mGluR7",
-        "fr": "mGluR7"
-      },
+      "name": "mGluR7",
       "type": "receptor",
       "system": "glutamatergic",
       "receptor": "mglur7",
@@ -2570,10 +2225,7 @@
       "ubiquitous": true
     },
     "glycine": {
-      "name": {
-        "en": "Glycine",
-        "fr": "Glycine"
-      },
+      "name": "Glycine",
       "type": "receptor",
       "system": "glycinergic",
       "receptor": "glycine",
@@ -2587,10 +2239,7 @@
       "ubiquitous": false
     },
     "h1": {
-      "name": {
-        "en": "H1",
-        "fr": "H1"
-      },
+      "name": "H1",
       "type": "receptor",
       "system": "histaminergic",
       "receptor": "h1",
@@ -2611,10 +2260,7 @@
       "ubiquitous": false
     },
     "h2": {
-      "name": {
-        "en": "H2",
-        "fr": "H2"
-      },
+      "name": "H2",
       "type": "receptor",
       "system": "histaminergic",
       "receptor": "h2",
@@ -2631,10 +2277,7 @@
       "ubiquitous": false
     },
     "h3": {
-      "name": {
-        "en": "H3",
-        "fr": "H3"
-      },
+      "name": "H3",
       "type": "receptor",
       "system": "histaminergic",
       "receptor": "h3",
@@ -2654,10 +2297,7 @@
       "ubiquitous": false
     },
     "h4": {
-      "name": {
-        "en": "H4",
-        "fr": "H4"
-      },
+      "name": "H4",
       "type": "receptor",
       "system": "histaminergic",
       "receptor": "h4",
@@ -2665,10 +2305,7 @@
       "ubiquitous": false
     },
     "mu": {
-      "name": {
-        "en": "μ (MOR)",
-        "fr": "μ (MOR)"
-      },
+      "name": "μ (MOR)",
       "type": "receptor",
       "system": "opioidergic",
       "receptor": "mu",
@@ -2692,10 +2329,7 @@
       "ubiquitous": false
     },
     "delta": {
-      "name": {
-        "en": "δ (DOR)",
-        "fr": "δ (DOR)"
-      },
+      "name": "δ (DOR)",
       "type": "receptor",
       "system": "opioidergic",
       "receptor": "delta",
@@ -2714,10 +2348,7 @@
       "ubiquitous": false
     },
     "kappa": {
-      "name": {
-        "en": "κ (KOR)",
-        "fr": "κ (KOR)"
-      },
+      "name": "κ (KOR)",
       "type": "receptor",
       "system": "opioidergic",
       "receptor": "kappa",
@@ -2735,10 +2366,7 @@
       "ubiquitous": false
     },
     "5ht1a": {
-      "name": {
-        "en": "5-HT1A",
-        "fr": "5-HT1A"
-      },
+      "name": "5-HT1A",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1a",
@@ -2755,10 +2383,7 @@
       "ubiquitous": false
     },
     "5ht1b": {
-      "name": {
-        "en": "5-HT1B",
-        "fr": "5-HT1B"
-      },
+      "name": "5-HT1B",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1b",
@@ -2773,10 +2398,7 @@
       "ubiquitous": false
     },
     "5ht1d": {
-      "name": {
-        "en": "5-HT1D",
-        "fr": "5-HT1D"
-      },
+      "name": "5-HT1D",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1d",
@@ -2792,10 +2414,7 @@
       "ubiquitous": false
     },
     "5ht1e": {
-      "name": {
-        "en": "5-HT1E",
-        "fr": "5-HT1E"
-      },
+      "name": "5-HT1E",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1e",
@@ -2809,10 +2428,7 @@
       "ubiquitous": false
     },
     "5ht1f": {
-      "name": {
-        "en": "5-HT1F",
-        "fr": "5-HT1F"
-      },
+      "name": "5-HT1F",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht1f",
@@ -2825,10 +2441,7 @@
       "ubiquitous": false
     },
     "5ht2a": {
-      "name": {
-        "en": "5-HT2A",
-        "fr": "5-HT2A"
-      },
+      "name": "5-HT2A",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht2a",
@@ -2842,10 +2455,7 @@
       "ubiquitous": false
     },
     "5ht2b": {
-      "name": {
-        "en": "5-HT2B",
-        "fr": "5-HT2B"
-      },
+      "name": "5-HT2B",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht2b",
@@ -2857,10 +2467,7 @@
       "ubiquitous": false
     },
     "5ht2c": {
-      "name": {
-        "en": "5-HT2C",
-        "fr": "5-HT2C"
-      },
+      "name": "5-HT2C",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht2c",
@@ -2875,10 +2482,7 @@
       "ubiquitous": false
     },
     "5ht3": {
-      "name": {
-        "en": "5-HT3",
-        "fr": "5-HT3"
-      },
+      "name": "5-HT3",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht3",
@@ -2892,10 +2496,7 @@
       "ubiquitous": false
     },
     "5ht4": {
-      "name": {
-        "en": "5-HT4",
-        "fr": "5-HT4"
-      },
+      "name": "5-HT4",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht4",
@@ -2909,10 +2510,7 @@
       "ubiquitous": false
     },
     "5ht5a": {
-      "name": {
-        "en": "5-HT5A",
-        "fr": "5-HT5A"
-      },
+      "name": "5-HT5A",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht5a",
@@ -2927,10 +2525,7 @@
       "ubiquitous": false
     },
     "5ht6": {
-      "name": {
-        "en": "5-HT6",
-        "fr": "5-HT6"
-      },
+      "name": "5-HT6",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht6",
@@ -2944,10 +2539,7 @@
       "ubiquitous": false
     },
     "5ht7": {
-      "name": {
-        "en": "5-HT7",
-        "fr": "5-HT7"
-      },
+      "name": "5-HT7",
       "type": "receptor",
       "system": "serotonergic",
       "receptor": "5ht7",
@@ -2961,10 +2553,7 @@
       "ubiquitous": false
     },
     "cb1": {
-      "name": {
-        "en": "CB1",
-        "fr": "CB1"
-      },
+      "name": "CB1",
       "type": "receptor",
       "system": "cannabinoid",
       "receptor": "cb1",
@@ -2984,10 +2573,7 @@
       "ubiquitous": false
     },
     "a2a": {
-      "name": {
-        "en": "A2A",
-        "fr": "A2A"
-      },
+      "name": "A2A",
       "type": "receptor",
       "system": "purinergic",
       "receptor": "a2a",
@@ -2999,10 +2585,7 @@
       "ubiquitous": false
     },
     "sigma1": {
-      "name": {
-        "en": "σ1",
-        "fr": "σ1"
-      },
+      "name": "σ1",
       "type": "receptor",
       "system": "sigma",
       "receptor": "sigma1",
@@ -3020,10 +2603,7 @@
       "ubiquitous": false
     },
     "mt1": {
-      "name": {
-        "en": "MT1",
-        "fr": "MT1"
-      },
+      "name": "MT1",
       "type": "receptor",
       "system": "melatonergic",
       "receptor": "mt1",
@@ -3034,10 +2614,7 @@
       "ubiquitous": false
     },
     "mt2": {
-      "name": {
-        "en": "MT2",
-        "fr": "MT2"
-      },
+      "name": "MT2",
       "type": "receptor",
       "system": "melatonergic",
       "receptor": "mt2",
@@ -3048,30 +2625,12 @@
     }
   },
   "target_type_labels": {
-    "receptor": {
-      "en": "Receptor",
-      "fr": "Récepteur"
-    },
-    "transporter": {
-      "en": "Transporter",
-      "fr": "Transporteur"
-    },
-    "enzyme": {
-      "en": "Enzyme",
-      "fr": "Enzyme"
-    },
-    "ion_channel": {
-      "en": "Ion channel",
-      "fr": "Canal ionique"
-    },
-    "vesicle_protein": {
-      "en": "Vesicle protein",
-      "fr": "Protéine vésiculaire"
-    },
-    "receptor_group": {
-      "en": "Receptor group",
-      "fr": "Groupe de récepteurs"
-    }
+    "receptor": "Receptor",
+    "transporter": "Transporter",
+    "enzyme": "Enzyme",
+    "ion_channel": "Ion channel",
+    "vesicle_protein": "Vesicle protein",
+    "receptor_group": "Receptor group"
   },
   "target_type_colors": {
     "transporter": "#3fb6a8",
@@ -3082,87 +2641,51 @@
   },
   "drug_actions": {
     "agonist": {
-      "label": {
-        "en": "Agonist",
-        "fr": "Agoniste"
-      },
+      "label": "Agonist",
       "effect": "boost"
     },
     "partial_agonist": {
-      "label": {
-        "en": "Partial agonist",
-        "fr": "Agoniste partiel"
-      },
+      "label": "Partial agonist",
       "effect": "modulate"
     },
     "antagonist": {
-      "label": {
-        "en": "Antagonist",
-        "fr": "Antagoniste"
-      },
+      "label": "Antagonist",
       "effect": "block"
     },
     "inverse_agonist": {
-      "label": {
-        "en": "Inverse agonist",
-        "fr": "Agoniste inverse"
-      },
+      "label": "Inverse agonist",
       "effect": "block"
     },
     "reuptake_inhibitor": {
-      "label": {
-        "en": "Reuptake inhibitor",
-        "fr": "Inhibiteur de la recapture"
-      },
+      "label": "Reuptake inhibitor",
       "effect": "boost"
     },
     "releaser": {
-      "label": {
-        "en": "Releaser",
-        "fr": "Libérateur"
-      },
+      "label": "Releaser",
       "effect": "boost"
     },
     "vesicular_inhibitor": {
-      "label": {
-        "en": "Vesicular transport inhibitor",
-        "fr": "Inhibiteur du transport vésiculaire"
-      },
+      "label": "Vesicular transport inhibitor",
       "effect": "block"
     },
     "enzyme_inhibitor": {
-      "label": {
-        "en": "Enzyme inhibitor",
-        "fr": "Inhibiteur enzymatique"
-      },
+      "label": "Enzyme inhibitor",
       "effect": "boost"
     },
     "pam": {
-      "label": {
-        "en": "Positive allosteric modulator",
-        "fr": "Modulateur allostérique positif"
-      },
+      "label": "Positive allosteric modulator",
       "effect": "boost"
     },
     "nam": {
-      "label": {
-        "en": "Negative allosteric modulator",
-        "fr": "Modulateur allostérique négatif"
-      },
+      "label": "Negative allosteric modulator",
       "effect": "block"
     },
     "blocker": {
-      "label": {
-        "en": "Channel blocker",
-        "fr": "Bloqueur de canal"
-      },
+      "label": "Channel blocker",
       "effect": "block"
     },
     "modulator": {
-      "label": {
-        "en": "Modulator",
-        "fr": "Modulateur"
-      },
+      "label": "Modulator",
       "effect": "modulate"
     }
   },
@@ -3172,18 +2695,9 @@
     "modulate": "#c084fc"
   },
   "drug_effect_labels": {
-    "boost": {
-      "en": "Enhances",
-      "fr": "Renforce"
-    },
-    "block": {
-      "en": "Blocks",
-      "fr": "Bloque"
-    },
-    "modulate": {
-      "en": "Modulates",
-      "fr": "Module"
-    }
+    "boost": "Enhances",
+    "block": "Blocks",
+    "modulate": "Modulates"
   },
   "source_corpora": {
     "stahl": {

@@ -397,6 +397,64 @@ def _t(text: str) -> dict[str, str]:
     return {"en": text, "fr": fr}
 
 
+# -------------------------------------------------------------------------
+# Externalize pass (English-only emitted data + one deduplicated side table).
+#
+# Records are still *built* as bilingual ``{"en", "fr"}`` dicts (via ``_t`` etc.);
+# at SERIALIZATION time every such dict is collapsed to its plain English string
+# and the English->French mapping is collected once into :data:`TRANSLATIONS`,
+# written out as ``public/data/translations.fr.json``. The viewer loads that side
+# table only in French and looks each English string up (see js/i18n.js ``pick``).
+#
+# This keeps the emitted jsonl/meta English-only (French is fully recoverable via
+# the side table) without touching how any record is constructed. Made with the
+# help of Claude Code.
+TRANSLATIONS: dict[str, str] = {}
+
+
+def reset_translations() -> None:
+    """Clear the accumulated English->French pairs (call once per generation)."""
+    TRANSLATIONS.clear()
+
+
+def _is_bilingual(obj: object) -> bool:
+    """True for a dict whose keys are exactly ``{"en", "fr"}`` with string values."""
+    return (
+        isinstance(obj, dict)
+        and set(obj.keys()) == {"en", "fr"}
+        and isinstance(obj.get("en"), str)
+        and isinstance(obj.get("fr"), str)
+    )
+
+
+def externalize(obj):
+    """Recursively replace every ``{"en", "fr"}`` dict with its English string.
+
+    Records the ``en -> fr`` pair into :data:`TRANSLATIONS`. A single English
+    string mapping to two different French values is a hard error (the global FR
+    model assumes en->fr is a function). Identical ``en == fr`` pairs are skipped
+    (the viewer falls back to the English string, so they would only bloat the
+    side table). Recurses through plain dicts and lists; other values pass through.
+    """
+    if _is_bilingual(obj):
+        en = obj["en"]
+        fr = obj["fr"]
+        if en != fr:
+            existing = TRANSLATIONS.get(en)
+            if existing is not None and existing != fr:
+                raise ValueError(
+                    "translation conflict: English string "
+                    f"{en!r} maps to both {existing!r} and {fr!r}"
+                )
+            TRANSLATIONS[en] = fr
+        return en
+    if isinstance(obj, dict):
+        return {k: externalize(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [externalize(v) for v in obj]
+    return obj
+
+
 def _side_name(base: dict[str, str], gender: str, side: str) -> dict[str, str]:
     """Compose a per-hemisphere display name in both languages from a base name.
 

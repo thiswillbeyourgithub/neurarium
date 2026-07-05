@@ -239,11 +239,14 @@ from data_generators.provenance import (  # noqa: E402
 # ---------------------------------------------------------------------------
 from data_generators.i18n import (  # noqa: E402
     FR,
+    TRANSLATIONS,
     _FR_LEFT,
     _FR_RIGHT,
     _MISSING_TRANSLATIONS,
     _side_name,
     _t,
+    externalize,
+    reset_translations,
 )
 
 
@@ -4379,11 +4382,18 @@ def write_artifacts(root: Path) -> None:
     for stale in shapes_dir.glob("*.json"):
         stale.unlink()
 
+    # Externalize every bilingual {en,fr} dict to its English string at write time,
+    # collecting the en->fr pairs into a single deduplicated side table
+    # (translations.fr.json). The emitted data is English-only; French is recovered
+    # by the viewer from the side table (see externalize() + js/i18n.js). Reset the
+    # accumulator first so a second run in the same process starts clean.
+    reset_translations()
+
     # meta is a single object -> pretty-printed meta.json; the collections are one
     # JSON object per line -> one *.jsonl each.
     meta_path = data_dir / "meta.json"
     meta_path.write_text(
-        json.dumps(data["meta"], ensure_ascii=False, indent=2) + "\n",
+        json.dumps(externalize(data["meta"]), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8")
     log.info("wrote %s", meta_path)
 
@@ -4392,8 +4402,16 @@ def write_artifacts(root: Path) -> None:
         path = data_dir / f"{name}.jsonl"
         with path.open("w", encoding="utf-8") as fh:
             for record in data[name]:
-                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+                fh.write(json.dumps(externalize(record), ensure_ascii=False) + "\n")
         log.info("wrote %s (%d lines)", path, len(data[name]))
+
+    # The deduplicated French side table, keys sorted for stable diffs. Fetched by
+    # the viewer only when the active language is French (see js/data.js).
+    tr_path = data_dir / "translations.fr.json"
+    tr_path.write_text(
+        json.dumps(TRANSLATIONS, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8")
+    log.info("wrote %s (%d pairs)", tr_path, len(TRANSLATIONS))
 
     for sid, payload in shapes.items():
         path = shapes_dir / f"{sid}.json"
