@@ -1040,21 +1040,14 @@ here, to avoid drift.** `check_data.py` re-confirms the tally is self-consistent
 ## Changing the data
 
 1. Edit the relevant list in `generate_data.py` (or `tools/drugs_data.json` for drugs).
-   - **Structures**: edit `PAIRED` / `MIDLINE`. Paired entries are auto-mirrored (define
-     on the right, x > 0; the generator emits one right-side shape file and the `_L` member
-     references it with `mirror:true`). A region is a noise-deformed ellipsoid by default;
-     blob surface knobs (consumed by `buildBlobGeometry`): `octaves` (fBm layers),
-     `ridged` (creases -> folia; needs higher `detail`, lower `noise`, a `frequency`),
-     `frequency`, `aniso` ([ax,ay,az] per-axis skew), `clip` (axis-aligned flat faces;
-     `medial=True` derives the right medial clip). Auto, never authored: `clip_planes`
-     (`_bisecting_clip_planes`, the jigsaw cuts between overlapping same-group neighbours;
-     `JIGSAW_CLIP.enabled` toggles). Cortex pattern is shader-drawn, not geometry (`injectCortexSwirl` /
-     `CORTEX_SWIRL` knobs `freq`/`warp`/`rings`/`width`/`ink`/`octaves`/`steps`, or
-     `enabled:false`). Use `shape=dict(type="curve", ...)` for a tapered tube (midline
-     curves are emitted once, not mirrored) or `type="composite"` for merged sub-shapes.
-     Layout: the `pos` field positions regions to assemble at explode 0; lobes overlap +
-     `medial` so the hemispheres meet at `MIDLINE_GAP` (temporal is the lateral exception);
-     deep nuclei sit small + central. Re-render to check
+   - **Structures**: edit `PAIRED` / `MIDLINE`. Paired entries are auto-mirrored (define on the right,
+     x > 0; the generator emits one right-side shape file and the `_L` member references it with
+     `mirror:true`). A region is a noise-deformed ellipsoid by default; blob/curve/composite shape knobs
+     are in the Geometry section (`medial=True` derives the right medial clip; `clip_planes` is auto via
+     `_bisecting_clip_planes`, `JIGSAW_CLIP.enabled`; cortex pattern is shader-drawn via
+     `injectCortexSwirl`/`CORTEX_SWIRL`). Layout: the `pos` field positions regions to assemble at
+     explode 0; lobes overlap + `medial` so the hemispheres meet at `MIDLINE_GAP` (temporal is the
+     lateral exception); deep nuclei sit small + central. Re-render to check
      (`only=frontal_R,parietal_R,temporal_R,occipital_R&explode=0&view=right`).
    - **Structure links + grades**: add a `base -> URL` entry to the `WIKIPEDIA` registry
      for a Wikipedia link (both hemispheres share it; a non-base key raises). Anatomy source
@@ -1128,11 +1121,9 @@ network, idempotent, polite; each touches only what changed). Always finish with
    `tools/structure_images_sources.json` + `tools/circuit_images_sources.json` (no bytes
    downloaded; the gif/svg is hot-linked at runtime). `--target structures|circuits`
    scopes to one.
-3. **PDSP Ki** (the binding-affinity "pharmacokinetic" table): re-download the whole-DB
-   CSV from the PDSP export endpoint
+3. **PDSP Ki**: re-download the whole-DB CSV from
    `https://pdspdb.unc.edu/databases/kiDownload/download.php` over
-   `sources/books/pdsp_ki/KiDatabase.csv` (author-side, gitignored; fixed filename, live
-   export, so a re-download just picks up new rows; see that dir's `README.md`), then
+   `sources/books/pdsp_ki/KiDatabase.csv` (author-side; see that dir's `README.md`), then
    `python tools/fetch_ki.py --apply` to rewrite `drugs_data.json`'s `ki` + `affinity_only`.
 4. **GtoPdb receptor expression** (the `receptor_locations` sources): `python
    tools/fetch_gtopdb.py` re-pulls each receptor's tissue comments (caches to
