@@ -81,15 +81,10 @@ in `meta.provenance_stats.by_kind`):
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
   tallied but excluded from the headline; a reference is not itself a knowledge node)
 
-**The node sourcing contract.** Every node carries a provenance **grade**
-(`PROVENANCE_LEVELS`: `llm` < `sourced` < `verified`) and, ideally, a **source**. There
-is one source shape everywhere: a quote-level `{corpus, page, quote, provenance}`
-against a `SOURCE_CORPORA` corpus (drug bindings, NbN, projection/circuit/group quotes,
-receptor/target classifications + locations, region anatomy). A node with no source is
-counted **missing** (its pill reads `NOSOURCE`; see The tally). `meta.provenance_stats`
-(emitted by `_provenance_stats`, key `nodes`) reduces every node to its strongest grade
-and counts them; the headline % is over the knowledge nodes (references excluded). Full
-mechanics in Source provenance.
+**The node sourcing contract.** Every node carries a provenance **grade** and, ideally,
+a **source**, so the coverage tally stays honest. The grades, the single source shape,
+what a sourceless node counts as, and how the tally + headline % are computed are all
+defined once under Source provenance; don't restate them here.
 
 ## Architecture
 
@@ -968,9 +963,8 @@ coloured **pill**; the grade is **data**. Grades (`PROVENANCE_LEVELS`, weakest t
 
 Every node's grade rides its own row/heading (`makeProvenancePill(level)`, `info.prov*` tooltip via
 `withTip`), never a separate bottom "Sources" block (a source only ever grades one node); a node with
-no source shows `NOSOURCE`, never a blank. The coverage **tally** collapses the two unbacked cases
-(`llm` and `NOSOURCE`) into one **missing** tier, so its tiers are verified / sourced / missing (see
-The "% sourced" figure).
+no source shows `NOSOURCE`, never a blank. How the tally buckets these grades (and why `llm` counts as
+unbacked): see The "% sourced" figure.
 
 **Where the grade lives.** One source shape, quote-level `{corpus, page, quote, provenance}` against a
 `SOURCE_CORPORA` corpus; `provenance` defaults `DEFAULT_PROVENANCE` (`"llm"`), a sourceless node is
@@ -978,7 +972,7 @@ The "% sourced" figure).
 registry); a **present** link defaults `"sourced"` (`WIKIPEDIA_DEFAULT_PROVENANCE`), not `llm` (a real
 reference the viewer live-fetches). `_provenance` validates every grade; upgrading a source is a data edit.
 
-**Per-claim sources + the verify gate.** Every source is `{corpus, page, quote, provenance}`: a
+**Per-claim sources + the verify gate.** The nodes carrying such a source: a
 binding's `sources[]`, a drug's `nbn_sources[]`, a projection/circuit/group quote (`KANDEL_QUOTES`), a
 receptor/target location/classification, region anatomy. `corpus` keys the source-agnostic
 `SOURCE_CORPORA` registry (`{ref, citation, url, pages_dir}`, emitted as `meta.source_corpora`; the
