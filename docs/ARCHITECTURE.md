@@ -6,13 +6,13 @@ line-by-line file reference.
 
 > [!NOTE]
 > Four docs, four jobs, no overlap:
-> - **[README.md](README.md)**: what neurarium is, how to run it, the project layout table.
+> - **[README.md](../README.md)**: what neurarium is, how to run it, the project layout table.
 > - **This file**: the architecture, the data flow, the module graph, the boot
 >   sequence, the extension points (the "why" and the "shape"). Bird's-eye only, no
 >   field-level detail; when it would name a field or control it points at CLAUDE.md.
-> - **[CLAUDE.md](CLAUDE.md)**: a terse map of the viewer/runtime (one line per module /
+> - **[CLAUDE.md](../CLAUDE.md)**: a terse map of the viewer/runtime (one line per module /
 >   control / rule), not a manual: it names the symbol so you can find the code.
-> - **[tools/README.md](tools/README.md)**: the authoring how-to (Changing the data), the
+> - **[tools/README.md](../tools/README.md)**: the authoring how-to (Changing the data), the
 >   per-tool reference, and the emitted-data field contract.
 
 This project was built with the help of [Claude Code](https://claude.com/claude-code).

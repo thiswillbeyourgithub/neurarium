@@ -19,7 +19,7 @@ rules, so you can find the code, not re-read it in prose.
 >   otherwise get wrong). Skip the obvious why.
 > - State each behavior once; cross-reference with "(see X)" instead of repeating.
 > - Deeper narrative (diagrams, module graph, boot sequence) lives in
->   [`ARCHITECTURE.md`](ARCHITECTURE.md).
+>   [`ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## What this is
 
@@ -46,7 +46,7 @@ right(+), `y` down(-)/up(+), `z` posterior(-)/anterior(+).
 **A *node* is any sourceable datum**, one atom of brain knowledge attributable to a
 source; the dataset is a graph of nodes and a detail panel is a view of one node plus
 every node linked to it. The concept, the umbrella-vs-kind distinction, and the coverage
-tally are narrated in [`ARCHITECTURE.md`](ARCHITECTURE.md) ("The node model"); this file
+tally are narrated in [`ARCHITECTURE.md`](docs/ARCHITECTURE.md) ("The node model"); this file
 keeps only the kind map below and the grading rules under Source provenance. New data is a
 node, and **every node must be sourceable** so the coverage tally stays honest.
 
@@ -84,7 +84,7 @@ headline % maths are all defined once under Source provenance; don't restate the
 
 The guiding principles (data separate from rendering, no build step, single source of
 truth, self-describing data, fail-loud generation), the three-layer data flow, the module
-graph, and the boot sequence are narrated in [`ARCHITECTURE.md`](ARCHITECTURE.md). The
+graph, and the boot sequence are narrated in [`ARCHITECTURE.md`](docs/ARCHITECTURE.md). The
 non-obvious rules a maintainer needs at the file level:
 
 Most regions are symmetric L/R pairs: a region is defined once on the right in
