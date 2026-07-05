@@ -191,7 +191,7 @@ SYNAPTIC_LABELS: dict[str, str] = {
 # ---------------------------------------------------------------------------
 # Drug presentation maps + binding vocabularies (emitted into meta.json).
 #
-# Drugs (the psychoactive medications authored in ``tools/drugs_data.json``, see
+# Drugs (the psychoactive medications authored in ``tools/drugs_data.jsonl``, see
 # "Changing the data") are sourced from Stahl's Prescriber's Guide, 8th ed. Each
 # drug has one or more coarse ``categories`` (SSRI, tricyclic, ...) and a list of
 # ``bindings`` to molecular targets (receptors, transporters, enzymes, ion
@@ -590,7 +590,7 @@ STRUCTURE_PROVENANCE: dict[str, str] = {}
 # the claim "this drug belongs to class X" is a node in its own right (kind
 # ``drug_categories``), one per drug, graded like the receptor/target classification.
 # Authored from general knowledge, so default ``"llm"``; keyed by drug id. A drug may
-# additionally carry quote-level ``category_sources`` in tools/drugs_data.json, which
+# additionally carry quote-level ``category_sources`` in tools/drugs_data.jsonl, which
 # upgrade the emitted grade (mirror of the target classification's optional quotes).
 DRUG_CATEGORY_PROVENANCE: dict[str, str] = {}
 
@@ -623,7 +623,7 @@ def _merge_external_location_sources() -> None:
     That file is machine-written by the expression-sourcing pipeline (fetch ->
     judge -> ``tools/apply_location_sources.py``, e.g. from GtoPdb tissue
     distributions), so the bulk of per-region sources lives in a sibling JSON rather
-    than inline here (mirroring ``drugs_data.json`` / ``*_images_sources.json``); the
+    than inline here (mirroring ``drugs_data.jsonl`` / ``*_images_sources.json``); the
     in-code dicts above stay the place for any hand-authored override. Shape:
     ``{"receptors": {rid: {base: [source, ...]}}, "targets": {tid: {base: [...]}}}``.
     An external entry wins per (owner, base). A missing file is fine (nothing sourced),
@@ -4705,7 +4705,7 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
                  molecule_ids: set[str]) -> dict[str, Any]:
     """Validate + normalize one authored drug into its ``drugs.jsonl`` record.
 
-    The authored drug (from ``tools/drugs_data.json``) is mostly passed through;
+    The authored drug (from ``tools/drugs_data.jsonl``) is mostly passed through;
     this validates it against the drug vocabularies (categories / targets /
     actions / effect overrides). The drug's real provenance lives per-claim: each
     binding's quote ``sources`` + ``ki`` and the ``nbn_sources``, all against the
@@ -4881,22 +4881,19 @@ def _load_circuit_images() -> dict[str, dict[str, Any]]:
 
 
 def _load_drugs() -> list[dict[str, Any]]:
-    """Read the authored drug list from ``tools/drugs_data.json`` (if present).
+    """Read the authored drug list from ``tools/drugs_data.jsonl`` (if present).
 
-    The drug data is kept in a sibling JSON rather than inline in this module
-    because it is large and comes from extraction (Stahl's Prescriber's Guide);
-    keeping it separate keeps this generator readable. A missing file is not an
-    error (the drugs feature is simply empty), so the generator still runs on a
-    checkout without it.
+    The drug data is kept in a sibling JSONL file rather than inline in this
+    module because it is large and comes from extraction (Stahl's Prescriber's
+    Guide); keeping it separate keeps this generator readable. A missing file is
+    not an error (the drugs feature is simply empty), so the generator still runs
+    on a checkout without it.
     """
-    path = Path(__file__).resolve().parent / "drugs_data.json"
-    if not path.exists():
-        log.warning("no %s; drugs.jsonl will be empty", path.name)
+    import drugs_io
+    if not drugs_io.DRUGS_PATH.exists():
+        log.warning("no %s; drugs.jsonl will be empty", drugs_io.DRUGS_PATH.name)
         return []
-    data = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(data, list):
-        raise ValueError(f"{path.name} must be a JSON list of drug objects")
-    return data
+    return drugs_io.load_drugs()
 
 
 # Provenance ranks for the dataset-wide sourcing tally (meta.provenance_stats):
@@ -5329,7 +5326,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         seen_receptor_ids.add(rec["id"])
         receptors.append(_receptor_record(rec, receptor_bases))
 
-    # Drugs: authored in tools/drugs_data.json, validated against the drug
+    # Drugs: authored in tools/drugs_data.jsonl, validated against the drug
     # vocabularies + the merged target map (DRUG_TARGETS + receptor ids). Every
     # DRUG_TARGETS region must be a known structure base (typo guard), like a
     # receptor location. Duplicate drug ids fail the build.

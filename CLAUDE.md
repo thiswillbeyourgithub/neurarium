@@ -104,7 +104,7 @@ README hero shot in `docs/`.
 `.jsonl` / `meta.json` / `shapes/*.json` fields) live in
 [`tools/README.md`](tools/README.md)** (Tool reference + Data contract), moved there to
 keep this file terse. In short: the anatomy is authored once in `generate_data.py` (drugs
-in `tools/drugs_data.json`), which emits the committed `public/data/`; each geometry form
+in `tools/drugs_data.jsonl`), which emits the committed `public/data/`; each geometry form
 is one `data/shapes/<name>.json` (`blob`/`curve`/`composite`, L/R pairs share one right-side
 file via `mirror:true`).
 
@@ -373,7 +373,7 @@ A focusable Drugs section showing, per drug, what it does to the brain. Data is 
 **Stahl's Prescriber's Guide (8th ed.)**, extracted **strictly from the dump** (only
 interactions literally stated; gaps left as TODO / no binding).
 
-- **Data.** The 158 drugs live in `tools/drugs_data.json`, read by `_load_drugs`. Vocabularies are
+- **Data.** The 158 drugs live in `tools/drugs_data.jsonl`, read by `_load_drugs`. Vocabularies are
   defined once in `generate_data.py`: `DRUG_CATEGORY_LABELS`, `DRUG_ACTIONS` (action -> {label, net
   `effect`}), `DRUG_EFFECT_COLORS`/`DRUG_EFFECT_LABELS` (boost/block/modulate), `DRUG_TARGETS`
   (non-receptor targets, `type` a `TARGET_TYPE_LABELS` key). `_build_drug_targets` merges
@@ -547,7 +547,7 @@ here, to avoid drift.** `check_data.py` re-confirms the tally is self-consistent
 The step-by-step runbook (per node-kind authoring fields, the regenerate/check/fetch
 sequence, and the author-side "refresh external data" recipe) lives in
 [`tools/README.md`](tools/README.md). The invariants that outlive any recipe: edit the
-source of truth (`generate_data.py`, or `tools/drugs_data.json` for drugs), never the
+source of truth (`generate_data.py`, or `tools/drugs_data.jsonl` for drugs), never the
 emitted `public/data/`; every new display string needs its `FR`/`{en,fr}` translation or
 the build raises; commit the generator change + regenerated artifacts together; keep drug
 extraction strictly dump-sourced. The legend rebuilds from the data at runtime.

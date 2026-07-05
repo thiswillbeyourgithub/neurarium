@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Apply drug-class (category) source quotes to ``tools/drugs_data.json``.
+"""Apply drug-class (category) source quotes to ``tools/drugs_data.jsonl``.
 
 A drug's **class classification** ("this drug is an SSRI / TCA / atypical
 antipsychotic / ...") is its own graded node (kind ``drug_categories``), one per
@@ -39,8 +39,10 @@ import json
 import re
 from pathlib import Path
 
+import drugs_io
+
 ROOT = Path(__file__).resolve().parent.parent
-DRUGS_JSON = ROOT / "tools" / "drugs_data.json"
+DRUGS_JSON = drugs_io.DRUGS_PATH
 PAGES = ROOT / "sources" / "books" / "stahl" / "pages"
 INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
 
@@ -91,7 +93,7 @@ def main():
     args = ap.parse_args()
 
     results = json.loads(Path(args.results).read_text(encoding="utf-8"))
-    drugs = json.loads(DRUGS_JSON.read_text(encoding="utf-8"))
+    drugs = drugs_io.load_drugs()
     by_id = {d["id"]: d for d in drugs}
     ranges = page_ranges()
 
@@ -101,7 +103,7 @@ def main():
         did = r["id"]
         d = by_id.get(did)
         if d is None:
-            misses.append(f"{did}: no such drug in drugs_data.json")
+            misses.append(f"{did}: no such drug in drugs_data.jsonl")
             continue
         if d.get("category_sources"):
             skipped += 1
@@ -131,11 +133,10 @@ def main():
         print(f"  ... and {len(misses) - 60} more")
 
     if args.dry_run:
-        print("dry-run: drugs_data.json not written")
+        print("dry-run: drugs_data.jsonl not written")
         return
     if applied:
-        DRUGS_JSON.write_text(
-            json.dumps(drugs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        drugs_io.save_drugs(drugs)
         print(f"wrote {DRUGS_JSON}")
 
 

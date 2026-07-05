@@ -3,7 +3,7 @@
 
 PROTOTYPE (2026-07): run against one drug (`--drug risperidone`) to eyeball the
 shape before wiring anything into the dataset. It only reads + summarizes; it does
-NOT yet write into `generate_data.py` / `drugs_data.json`.
+NOT yet write into `generate_data.py` / `drugs_data.jsonl`.
 
 Source of the data: the PDSP Ki Database CSV, a public-domain NIMH resource of
 experimentally measured binding-affinity (Ki, in nM) values. The file lives at
@@ -31,10 +31,11 @@ import re
 import statistics
 import sys
 
+import drugs_io
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 CSV_PATH = os.path.join(REPO, "sources", "books", "pdsp_ki", "KiDatabase.csv")
-DATASET = os.path.join(REPO, "tools", "drugs_data.json")
 
 # The CSV column names (note the leading space PDSP put on " Ligand Name").
 COL_ID = "Number"
@@ -301,7 +302,7 @@ def summarize_target(rows, our_target):
 
 def find_drug(query):
     """Return (record, all_drugs) for the drug whose id or name matches `query`."""
-    data = json.load(open(DATASET, encoding="utf-8"))
+    data = drugs_io.load_drugs()
     for d in data:
         if d["id"] == query or norm(d["name"]) == norm(query):
             return d, data
@@ -356,7 +357,7 @@ def analyze(rows, bound):
 
 
 def _ki_from_summary(s):
-    """The binding `ki` object written into drugs_data.json, from a target summary."""
+    """The binding `ki` object written into drugs_data.jsonl, from a target summary."""
     ki = {
         "median": s["ki_nm"]["median"], "min": s["ki_nm"]["min"],
         "max": s["ki_nm"]["max"], "n_human": s["n_human"],
@@ -375,11 +376,11 @@ def _is_pdsp_ki(binding):
 
 
 def apply_all():
-    """Write PDSP Ki into tools/drugs_data.json for every resolvable drug: annotate
+    """Write PDSP Ki into tools/drugs_data.jsonl for every resolvable drug: annotate
     existing bindings with a `ki`, add the median-stronger omitted targets as new
     `affinity_only` bindings. Idempotent: strips its own prior output first, so a
     re-run after a fresh CSV download simply refreshes the values."""
-    data = json.load(open(DATASET, encoding="utf-8"))
+    data = drugs_io.load_drugs()
     n_ann = n_add = n_drugs = 0
     for d in data:
         # Idempotency: drop what a previous --apply added before recomputing.
@@ -413,8 +414,7 @@ def apply_all():
         if touched:
             n_drugs += 1
 
-    with open(DATASET, "w", encoding="utf-8") as f:
-        f.write(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+    drugs_io.save_drugs(data)
     print("applied Ki to %d drugs: %d bindings annotated, %d affinity-only added"
           % (n_drugs, n_ann, n_add))
 
@@ -424,7 +424,7 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--drug", help="drug id / ligand name to preview (e.g. risperidone)")
     ap.add_argument("--apply", action="store_true",
-                    help="write Ki into tools/drugs_data.json for every drug (idempotent)")
+                    help="write Ki into tools/drugs_data.jsonl for every drug (idempotent)")
     ap.add_argument("--all", action="store_true",
                     help="also list omitted PDSP targets weaker than our weakest binding")
     ap.add_argument("--json", metavar="OUT", help="write the preview JSON here")

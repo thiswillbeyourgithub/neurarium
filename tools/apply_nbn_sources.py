@@ -38,8 +38,10 @@ import json
 import re
 from pathlib import Path
 
+import drugs_io
+
 ROOT = Path(__file__).resolve().parent.parent
-DRUGS_JSON = ROOT / "tools" / "drugs_data.json"
+DRUGS_JSON = drugs_io.DRUGS_PATH
 PAGES = ROOT / "sources" / "books" / "stahl" / "pages"
 INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
 
@@ -117,7 +119,7 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
-    drugs = json.loads(DRUGS_JSON.read_text(encoding="utf-8"))
+    drugs = drugs_io.load_drugs()
     ranges = page_ranges()
 
     applied = skipped = no_line = mismatch = no_range = 0
@@ -167,11 +169,10 @@ def main():
         print(f"  ... and {len(misses) - 60} more")
 
     if args.dry_run:
-        print("dry-run: drugs_data.json not written")
+        print("dry-run: drugs_data.jsonl not written")
         return
     if applied:
-        DRUGS_JSON.write_text(
-            json.dumps(drugs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        drugs_io.save_drugs(drugs)
         print(f"wrote {DRUGS_JSON}")
 
 

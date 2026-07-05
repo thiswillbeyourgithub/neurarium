@@ -108,7 +108,7 @@ record lives in encodes its type, so there is no `type` field on the lines.
 merged binding-target map) that makes the dataset self-describing; the rest are
 JSONL, one node per line, one file per kind: `structures.jsonl`, `projections.jsonl`,
 `circuits.jsonl`, `projection_groups.jsonl`, `receptors.jsonl`, `drugs.jsonl` (drugs
-authored in `tools/drugs_data.json`, not the generator), plus vendored
+authored in `tools/drugs_data.jsonl`, not the generator), plus vendored
 `molecules/<id>.svg` diagrams. Every claim carries its own quote-level source; there
 is no node-level catch-all `sources` block. The exact field list of each file is in
 tools/README.md ("Data contract"), not duplicated here.
@@ -248,7 +248,7 @@ The detailed recipes (with the exact fields and gotchas) are in CLAUDE.md under
 - **A new receptor**: append to `RECEPTORS` (neurotransmitter, class, sign,
   synaptic site, location base ids or `"ALL"`); it shows up in the Receptors
   legend section automatically.
-- **A new drug**: add an entry to `tools/drugs_data.json` (categories + bindings,
+- **A new drug**: add an entry to `tools/drugs_data.jsonl` (categories + bindings,
   each binding a `target` + `action` from the drug vocabularies in
   `generate_data.py`); it shows up in the Drugs legend section automatically. Run
   `python tools/fetch_molecules.py` to also pull its molecular-structure SVG.

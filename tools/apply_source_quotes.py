@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Apply extracted source quotes to ``tools/drugs_data.json``.
+"""Apply extracted source quotes to ``tools/drugs_data.jsonl``.
 
 Takes the JSON returned by the source-extraction workflow,
 ``[{id, accepted:[{idx, page, quote}]}]``, and for each accepted binding:
@@ -25,8 +25,10 @@ import json
 import re
 from pathlib import Path
 
+import drugs_io
+
 ROOT = Path(__file__).resolve().parent.parent
-DRUGS_JSON = ROOT / "tools" / "drugs_data.json"
+DRUGS_JSON = drugs_io.DRUGS_PATH
 PAGES = ROOT / "sources" / "books" / "stahl" / "pages"
 INDEX = ROOT / "sources" / "books" / "stahl" / "INDEX.md"
 
@@ -75,7 +77,7 @@ def main():
     args = ap.parse_args()
 
     results = json.loads(Path(args.results).read_text(encoding="utf-8"))
-    drugs = json.loads(DRUGS_JSON.read_text(encoding="utf-8"))
+    drugs = drugs_io.load_drugs()
     by_id = {d["id"]: d for d in drugs}
     ranges = page_ranges()
 
@@ -111,11 +113,10 @@ def main():
         print(f"  ... and {len(rejects) - 40} more")
 
     if args.dry_run:
-        print("dry-run: drugs_data.json not written")
+        print("dry-run: drugs_data.jsonl not written")
         return
     if applied:
-        DRUGS_JSON.write_text(
-            json.dumps(drugs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        drugs_io.save_drugs(drugs)
         print(f"wrote {DRUGS_JSON}")
 
 

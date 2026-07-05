@@ -8,7 +8,7 @@ corpus locations are in `CLAUDE.local.md`.
 
 ## Changing the data
 
-1. Edit the relevant list in `generate_data.py` (or `tools/drugs_data.json` for drugs).
+1. Edit the relevant list in `generate_data.py` (or `tools/drugs_data.jsonl` for drugs).
    - **Structures**: edit `PAIRED` / `MIDLINE`. Paired entries are auto-mirrored (define on the right,
      x > 0; the generator emits one right-side shape file and the `_L` member references it with
      `mirror:true`). A region is a noise-deformed ellipsoid by default; blob/curve/composite shape knobs
@@ -56,7 +56,7 @@ attribute a *different* quote than the main one, or several to back a compound v
 `synaptic="both"`). An individual expression region is
      sourced (above `llm`) by adding a `{receptor_id: {base: [quote-source]}}` entry to
      `RECEPTOR_LOCATION_SOURCES`.
-   - **Drugs**: edit `tools/drugs_data.json`. Each: `id`, `name`, `categories`, optional
+   - **Drugs**: edit `tools/drugs_data.jsonl`. Each: `id`, `name`, `categories`, optional
      `nbn` + `description` (inline `{en,fr}`), `wikipedia`, `bindings`. A binding is
      `{target, action}` (+ optional `effect` / `note` / `tentative`); `target` is a merged
      map key (a `DRUG_TARGETS` key or a receptor id), `action` a `DRUG_ACTIONS` key
@@ -79,7 +79,7 @@ attribute a *different* quote than the main one, or several to back a compound v
 4. For new drugs/structures with links, run the fetch tools (network, idempotent, touch
    only the new ones): `fetch_molecules.py`, `fetch_structure_images.py`. To refresh
    binding affinities, run `fetch_ki.py --apply` (reads the local PDSP CSV; idempotent),
-   which rewrites `drugs_data.json`'s `ki` annotations + `affinity_only` bindings.
+   which rewrites `drugs_data.jsonl`'s `ki` annotations + `affinity_only` bindings.
 5. Commit the generator change + the regenerated artifacts together.
 
 The legend is generated at runtime from the data, so it updates automatically.
@@ -100,7 +100,7 @@ network, idempotent, polite; each touches only what changed). Always finish with
 3. **PDSP Ki**: re-download the whole-DB CSV from
    `https://pdspdb.unc.edu/databases/kiDownload/download.php` over
    `sources/books/pdsp_ki/KiDatabase.csv` (author-side; see that dir's `README.md`), then
-   `python tools/fetch_ki.py --apply` to rewrite `drugs_data.json`'s `ki` + `affinity_only`.
+   `python tools/fetch_ki.py --apply` to rewrite `drugs_data.jsonl`'s `ki` + `affinity_only`.
 4. **GtoPdb receptor expression** (the `receptor_locations` sources): `python
    tools/fetch_gtopdb.py` re-pulls each receptor's tissue comments (caches to
    `sources/gtopdb/`, author-side), then run the confirm-only judge over
@@ -126,10 +126,12 @@ Screenshots).
 
 - `generate_data.py` — single source of truth for the anatomy (stdlib-only, offline):
   defines every region/projection/receptor once, emits the artifacts below. Drugs are the
-  exception (authored in `tools/drugs_data.json`, read by `_load_drugs`). Display strings are
+  exception (authored in `tools/drugs_data.jsonl`, read by `_load_drugs`). Display strings are
   `{en,fr}` via `_t()` (see CLAUDE.md I18n).
-- `tools/drugs_data.json` — the authored drug dataset (from Stahl 8th ed.), read by
-  `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
+- `tools/drugs_data.jsonl` — the authored drug dataset (from Stahl 8th ed.), one compact
+  JSON object per line, read by `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
+- `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
+  used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
 - `tools/serve.py` — stdlib dev server, `Cache-Control: no-store`, roots at `public/` (see CLAUDE.md Running).
 - `tools/shot.py` — Playwright screenshot helper (see CLAUDE.md Screenshots).
