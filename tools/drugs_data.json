@@ -510,7 +510,8 @@
             "reference": "Cusack, B et al., 1993",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -1208,7 +1209,8 @@
               "Amphetamine,(+)",
               "(+)-Amphetamine"
             ]
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -1282,7 +1284,8 @@
               "Amphetamine,(+)",
               "(+)-Amphetamine"
             ]
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -2492,7 +2495,8 @@
             "reference": "Carroll FI et al., 2009",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 3
         }
       },
       {
@@ -2544,7 +2548,8 @@
             "reference": "Cusack, B et al., 1993",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 4
         }
       },
       {
@@ -2566,7 +2571,8 @@
             "reference": "Richelson, Elliott et. al, 1984",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 2
         }
       }
     ],
@@ -4030,7 +4036,8 @@
             "reference": "JASPER JR,ET AL.,",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -4527,7 +4534,8 @@
             "reference": "Cusack, B et al., 1993",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -5006,7 +5014,8 @@
             "reference": "Booth RG et al., 2002",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -6790,7 +6799,8 @@
             "reference": "von Coburg Y et al., 2009",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -7247,7 +7257,8 @@
             "reference": "Largent BL, et al., 1986",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 6
         }
       },
       {
@@ -7269,7 +7280,8 @@
             "reference": "Ganapathy ME, et al., 1998",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 2
         }
       }
     ],
@@ -7330,7 +7342,8 @@
             "reference": "Gillard M, et al., 2002",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ],
@@ -7601,7 +7614,8 @@
             "reference": "Kanba S, et al., 1984",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -7773,7 +7787,8 @@
             "reference": "Mendelsohn LG, et al., 1985",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ],
@@ -8057,7 +8072,8 @@
               "Amphetamine,(+)",
               "(+)-Amphetamine"
             ]
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -8131,7 +8147,8 @@
               "Amphetamine,(+)",
               "(+)-Amphetamine"
             ]
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -9549,7 +9566,8 @@
             "reference": "Tatsumi M, et al., 1997",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -10070,7 +10088,8 @@
             "reference": "Roth B. et al., 2006",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -10158,7 +10177,8 @@
             "reference": "Eglen RM et al., 1997",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ],
@@ -10678,7 +10698,8 @@
             "reference": "Kroeze WK, et.al., 2003",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 4
         }
       },
       {
@@ -11300,7 +11321,8 @@
             "reference": "Roth B. et al., 2006",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ],
@@ -13281,7 +13303,8 @@
             "reference": "Herrick-Davis K, et al., 2000",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 2
         }
       },
       {
@@ -13589,7 +13612,8 @@
             "reference": "Cusack, B et al., 1993",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ],
@@ -13726,7 +13750,8 @@
             "reference": "Fraundorfer PF, et al., 1994",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -13837,7 +13862,8 @@
             "reference": "Song, Gang et., al.  2017",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 5
         }
       },
       {
@@ -14303,7 +14329,8 @@
             "reference": "Schotte A, et al.,  1996",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -14396,7 +14423,8 @@
             "reference": "Silvestre, JS. et, al. 2005",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -14484,7 +14512,8 @@
             "reference": "Schotte A, et al.,  1996",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -14572,7 +14601,8 @@
             "reference": "Schotte A, et al.,  1996",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 2
         }
       },
       {
@@ -15508,7 +15538,8 @@
             "reference": "Seeman P, et al., 1993",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -15578,7 +15609,8 @@
             "reference": "Seeman P, et al., 1993",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -16031,7 +16063,8 @@
             "reference": "PDSP Certified Data",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 5
         }
       },
       {
@@ -16769,7 +16802,8 @@
             "reference": "Owens MJ, et al, 1997",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -17246,7 +17280,8 @@
             "reference": "Kroeze WK, et.al., 2003",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -17874,7 +17909,8 @@
             "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 2
         }
       },
       {
@@ -17896,7 +17932,8 @@
             "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 3
         }
       },
       {
@@ -17918,7 +17955,8 @@
             "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 3
         }
       },
       {
@@ -17984,7 +18022,8 @@
             "reference": "Roth B. et al., 2006",
             "note": ">",
             "provenance": "verified"
-          }
+          },
+          "inactive": 6
         }
       },
       {
@@ -18006,7 +18045,8 @@
             "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 6
         }
       },
       {
@@ -18072,7 +18112,8 @@
             "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -18160,7 +18201,8 @@
             "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -18182,7 +18224,8 @@
             "reference": "Bymaster F.P., et. al., 2001",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -19486,7 +19529,8 @@
             "reference": "Bolden C, et al., 1992",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -19508,7 +19552,8 @@
             "reference": "Bolden C, et al., 1992",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -19530,7 +19575,8 @@
             "reference": "Bolden C, et al., 1992",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -19552,7 +19598,8 @@
             "reference": "Bolden C, et al., 1992",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -19574,7 +19621,8 @@
             "reference": "Bolden C, et al., 1992",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ],
@@ -19936,7 +19984,8 @@
             "reference": "Ben-Daniel R et al., 2008",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 3
         }
       },
       {
@@ -19958,7 +20007,8 @@
             "reference": "Setola V, et al., 2003",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 3
         }
       },
       {
@@ -19980,7 +20030,8 @@
             "reference": "Setola V, et al., 2003",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 2
         }
       },
       {
@@ -20034,7 +20085,8 @@
             "reference": "Iversen l., et al., 2012",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -20078,7 +20130,8 @@
             "reference": "Miller DK et al., 2004",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ]
@@ -20132,7 +20185,8 @@
             "reference": "PIERCE & PEROUTKA, 1989",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -20198,7 +20252,8 @@
             "reference": "OFFORD ET AL., 1988",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -20472,7 +20527,8 @@
             "reference": "Rothman RB, et al., 2003a",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       },
       {
@@ -20548,7 +20604,8 @@
             "reference": "Harris A, et al., 2015",
             "note": "",
             "provenance": "verified"
-          }
+          },
+          "inactive": 1
         }
       }
     ]

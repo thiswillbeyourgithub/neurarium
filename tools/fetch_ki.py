@@ -357,11 +357,17 @@ def analyze(rows, bound):
 
 def _ki_from_summary(s):
     """The binding `ki` object written into drugs_data.json, from a target summary."""
-    return {
+    ki = {
         "median": s["ki_nm"]["median"], "min": s["ki_nm"]["min"],
         "max": s["ki_nm"]["max"], "n_human": s["n_human"],
         "n_nonhuman": s["n_nonhuman"], "source": s["source"],
     }
+    # Assays that hit the >=10 uM "tested, essentially inactive" ceiling are excluded
+    # from the affinity stats; keep their count so the viewer can say the target was
+    # tested and found not to bind, rather than silently showing only the active tier.
+    if s.get("inactive"):
+        ki["inactive"] = s["inactive"]
+    return ki
 
 
 def _is_pdsp_ki(binding):

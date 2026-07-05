@@ -434,6 +434,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     return {
       median: ki.median, min: ki.min, max: ki.max,
       nHuman: ki.n_human || 0, nNonhuman: ki.n_nonhuman || 0,
+      inactive: ki.inactive || 0,
       provenance: src.provenance || null,
       kiId: src.ki_id != null ? src.ki_id : null,
       valueNm: src.value_nm != null ? src.value_nm : null,

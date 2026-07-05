@@ -1973,7 +1973,8 @@ function createInfoPanel(data) {
     chip.appendChild(el("span", "ki-val", `Ki ${fmtKi(ki.median)} nM`));
     chip.appendChild(el("span", "ki-detail",
       `${fmtKi(ki.min)}–${fmtKi(ki.max)} · `
-      + t("drug.kiCounts", { h: ki.nHuman, n: ki.nNonhuman })));
+      + t("drug.kiCounts", { h: ki.nHuman, n: ki.nNonhuman })
+      + (ki.inactive ? " · " + t("drug.kiInactive", { n: ki.inactive }) : "")));
     if (ki.nHuman === 0) chip.classList.add("ki-nonhuman");
     frag.appendChild(chip);
     // Truth badge: the assay behind the value.
@@ -1986,6 +1987,9 @@ function createInfoPanel(data) {
       assay: `${ki.corpusRef}: ${assay}` });
     if (ki.nHuman === 0) {
       tip += "\n\n" + t("drug.kiTipNonHuman", { species: ki.species || "?" });
+    }
+    if (ki.inactive) {
+      tip += "\n\n" + t("drug.kiInactiveTip", { n: ki.inactive });
     }
     const relationLabel = ki.mapped
       ? t(`drug.rel.${ki.relation}`) || ki.relation : "";

@@ -897,12 +897,18 @@ def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | No
               "reference", "note", "mapped", "measured_as", "relation", "pdsp_names"):
         if src.get(f) not in (None, ""):
             out_src[f] = src[f]
-    return {
+    out = {
         "median": ki["median"], "min": ki["min"], "max": ki["max"],
         "n_human": int(ki.get("n_human", 0)),
         "n_nonhuman": int(ki.get("n_nonhuman", 0)),
         "source": out_src,
     }
+    # Count of assays excluded as "tested, essentially inactive" (>=10 uM ceiling),
+    # so the panel can note the target was probed and found not to bind. Only present
+    # when nonzero (fetch_ki writes it that way), so the field stays sparse.
+    if ki.get("inactive"):
+        out["inactive"] = int(ki["inactive"])
+    return out
 
 
 # ---------------------------------------------------------------------------
