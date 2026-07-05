@@ -527,196 +527,119 @@ dataset loads.
 
 ## Controls
 
-Everything lives in one collapsible **"neurarium" panel bottom-left** (`#controls`;
-header `#controls-toggle` collapses the whole body). The body splits into a
-`#settings-pane` and a `#details-pane` (`#info-body`), switched by a `#panel-tabs`
-bar of **browser-style tabs**: a pinned **Settings** tab (`#tab-settings`, always
-first) showing the controls, plus one closable tab per opened detail in the
-scrollable `#detail-tabs` strip (see Detail tabs + Info panel). From the top the
-settings pane holds, always visible, the `#lang-switch` (EN/FR) + a keyboard-
-shortcuts / reset / search / **legend** / **sources** / **about** `.toolbar-row`
-(the last three icons open their respective popups, see below), then these nested
-collapsible sections:
+One collapsible **"neurarium" panel bottom-left** (`#controls`; `#controls-toggle` collapses the
+body). The body splits into `#settings-pane` and `#details-pane` (`#info-body`), switched by the
+`#panel-tabs` bar: a pinned **Settings** tab (`#tab-settings`) + one closable tab per opened
+detail in `#detail-tabs` (see Detail tabs + Info panel). The settings pane holds, pinned at top,
+the `#lang-switch` (EN/FR) + a keyboard-shortcuts / reset / search / legend / sources / about
+`.toolbar-row`, then:
 
-- **Controls** (`#controls-settings`): the **Separate** + **Transparency** sliders,
-  then the **Auto-rotate**, **Show all names**, **Show projections**, **See inside**
-  checkboxes, and the **arrow colour-mode** switch (`#color-mode`, Neurotransmitter |
-  Potential; see below). Ships **open**; toggles **independently** of the accordion
-  (its own `wireCollapse`), so a tweak never collapses the section you were browsing.
-- Then four **single-open-accordion** sections (opening one closes the others):
-  **Structures** (`#structures`, region rows by group), **Projections**
-  (`#projections`, header "Projections & Circuits": pathway rows, Circuits,
-  Hypothetical pathways), **Receptors & targets** (`#receptors`), **Drugs**
-  (`#drugs`, with `#drugs-filter`).
-- Three **toolbar-icon popups**, not sections (all `.modal-overlay`, wired by the
-  shared `wireModal` helper): the **Legend** (`#legend-modal`, the static colour/
-  symbol key `#legend-body`; toolbar legend icon or **k**), the **Sources &
-  provenance** tally (`#sourcing-modal`, `#about-sourcing`; its own toolbar icon, +
-  linked from the Legend and About popups, + auto-shown over the loading overlay on
-  startup, see Loading overlay), and **About** (`#about-modal`, the ⓘ icon).
+- **Controls** (`#controls-settings`): the **Separate** + **Transparency** sliders, the
+  **Auto-rotate** / **Show all names** / **Show projections** / **See inside** checkboxes, and the
+  **arrow colour-mode** switch (`#color-mode`). Ships open; toggles independently of the accordion.
+- Four **single-open-accordion** sections (opening one closes the others): **Structures**
+  (`#structures`), **Projections** (`#projections`, "Projections & Circuits"), **Receptors &
+  targets** (`#receptors`), **Drugs** (`#drugs`, with `#drugs-filter`).
+- Three **toolbar-icon popups** (all `.modal-overlay`, via `wireModal`): **Legend**
+  (`#legend-modal`), **Sources & provenance** (`#sourcing-modal`), **About** (`#about-modal`).
 
-The accordion is a list of `{toggle, body}` in `wireControls`; `wireCollapse` takes
-an `onToggle(open)` and `setSection()` sets state programmatically. Searching swaps
-`#search` in place of `#controls-main`. Section bodies ship `hidden`; opening one
-slides it in (`section-slide-in` 200ms, disabled under `prefers-reduced-motion`).
+The accordion is a list of `{toggle, body}` in `wireControls`; `wireCollapse(onToggle)` +
+`setSection()` drive it. Searching swaps `#search` in for `#controls-main`.
 
-**Pan-aside.** While the body is expanded the brain is pushed clear of the panel
-(`updatePanelPan`, gated on the panel being visible so `?ui=0` is unaffected;
-recomputed on the orientation media-query flip + a `ResizeObserver`), applied via
-`focus.setScreenOffset` -> `PerspectiveCamera.setViewOffset` (a render-time offset
-eased in `focus.tick`, so it survives rotation/zoom and rescales on resize):
-- **portrait**: `#controls` is full-width, bottom-half (`max-height: 50vh`); brain
-  pushed up.
-- **landscape**: `#controls` is a left sidebar (`width: clamp(240px, 25vw, 420px)`),
-  full vertical height when expanded (gated `:has(#controls-body:not([hidden]))` so
-  a collapsed panel stays a small header); brain pushed right.
+**Pan-aside.** While expanded, the brain is pushed clear of the panel (`updatePanelPan` ->
+`focus.setScreenOffset` -> `PerspectiveCamera.setViewOffset`, eased in `focus.tick`; gated on the
+panel being visible so `?ui=0` is unaffected). Portrait: full-width bottom-half panel, brain up.
+Landscape: left sidebar, brain right.
 
-**Scroll model (both orientations).** The panel is a flex column with
-`overflow:hidden`, so the panel never scrolls; its top chrome (header, lang switch,
-toolbar, detail tabs) is pinned and exactly one inner region scrolls
-(`#controls-main`, or `#details-pane` / `#search` when shown). A `min-height:0` flex
-chain makes an open accordion section show at its **natural height** and the whole
-list scroll (lower collapsed headers below the fold). Flex-display rules are scoped
-`:not([hidden])` so a hidden pane stays `display:none`.
+**Scroll model.** The panel is an `overflow:hidden` flex column that never scrolls; its top chrome
+is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-pane`/`#search`). A
+`min-height:0` flex chain gives an open section its natural height with the list scrolling.
 
 ### Settings & toggles
 
-- **Auto-rotate**: spins the camera (OrbitControls `autoRotate`). **On by default**;
-  switches off the moment the user picks content (any pick routed through the
-  selection controller, via `selection.onPick(stopAutoRotate)`). Deep links force it
-  off unless `?autorotate=1`.
-- **Show all names** (`#toggle-names`, off): forces every label on. Key **n**;
-  `?names=all`.
-- **Show projections** (`#toggle-projections`, checked): unchecking hides every
-  arrow (`projVis`; composes with the Hypothetical toggle).
-- **See inside** (`#see-inside`, off): hides structures on the camera-facing side so
-  deep nuclei aren't blocked. `createNearCull` recomputes the hidden set every frame
-  from the live camera/`controls.target` (a structure hides once its centre is more
-  than `NEAR_CULL_BIAS` past the centre plane toward the camera); snapshots
-  visibility on enable to restore exactly; composes with `?only=`; arrows stay
-  visible. `cull.tick()` runs after `controls.update()`.
-- **Animations** (`#toggle-animations`, `js/anim-settings.js` `animSettings.enabled`):
-  runs the decorative motion (the assemble intro, the receptor/drug gem-dot twinkle,
-  the drug surface wash, the circuit traveling pulse). **Default on for a fine pointer
-  (desktop), off for a coarse pointer (phone) or reduced-motion**; the choice persists
-  to `localStorage` (an explicit pick beats the default). Off is *content-preserving*:
-  focusing a receptor/drug/circuit still lights its regions/arrows (via `setCircuit`)
-  and still shows a static gem field, just without motion (the intro is skipped to an
-  assembled brain, the gem/wash `tick()`s freeze to a still frame, `circuitAnim.play`
-  no-ops). `main.js` subscribes to `animSettings` to halt the circuit pulse + repaint
-  once on a change.
-- **Arrow colour-mode** (`#color-mode`, in the **Controls** section, default
-  **Neurotransmitter**): **Neurotransmitter** colours each arrow per molecule
-  (`projection.color`); **Potential** recolours by coarse **sign**
-  (`projection.signColor`: excit red, inhib blue, modulatory grey). Maps from meta
-  `signColors`/`signLabels`. `setColorMode` recolours in place
-  (`ProjectionArrow.setColor`) and rebuilds the Projections section (one row per sign
-  vs per transmitter); the focus-greying callback is re-pointed each rebuild. The
-  switch lives outside `#projections-body`, so `buildLegend`'s rebuilds never touch it.
-- **Separate** slider (0..1; explode internally): pushes each region radially out
-  (`EXPLODE_STRENGTH`). The camera auto-zooms so the **whole brain keeps a constant
-  apparent size**: the handler calls `focus.zoomForExplode(amount)`, scaling the
-  camera->target distance by the ratio of the assembly's outer radius
-  (`boundingRadiusAt`, folding each region's own radius in) at the new vs last amount.
-- **Auto-spread** (`createAutoSpread`, returned by `wireControls`): focusing a **deep**
-  (non-lobe) structure / connection / target / drug / circuit / group from search or a
-  detail panel animates the Separate slider up to full (`autoSpreadIfDeep` -> `spreadTo(1)`)
-  so the structure isn't left buried under the cortex. Reuses the shared
-  `applyExplodeAmount` (layout + re-aim + zoom), advanced by its `tick()` in the render
-  loop; a manual slider grab cancels it. Only ever raises the spread (composes with the
-  current value); a plain 3D click does not trigger it.
-- **Intro** (`createIntroAnimation`): on a plain load the regions start blown out and
-  glide together (like dragging Separate 1->0), the camera following
-  (`zoomForExplode`) and sweeping `INTRO_ROTATION_TURNS` (0.75), finishing together
-  (`INTRO_DURATION_MS`, easeInOutCubic). Drives the slider; suspends + restores
-  auto-rotate; cancelled when the user grabs the slider; skipped when `?explode=` is
-  pinned. When the dev banner is up (`__APP_CONFIG__.dev === "1"`), the brain settles
-  lower + further back (`DEV_BANNER_DROP`, `DEV_BANNER_UNZOOM`).
-- **Transparency** slider: value = material opacity (depth-write disabled while
-  translucent). Owned by the selection controller, so it composes with isolate dimming.
+- **Auto-rotate** (OrbitControls `autoRotate`, on by default): off the moment the user picks
+  content (`selection.onPick(stopAutoRotate)`); `?autorotate=1` forces on.
+- **Show all names** (`#toggle-names`, off): every label on. Key **n**; `?names=all`.
+- **Show projections** (`#toggle-projections`, on): unchecking hides every arrow (`projVis`;
+  composes with the Hypothetical toggle).
+- **See inside** (`#see-inside`, off): `createNearCull` recomputes each frame the structures on
+  the camera-facing side (centre > `NEAR_CULL_BIAS` past the centre plane) and hides them so deep
+  nuclei show; snapshots visibility to restore; composes with `?only=`; arrows stay. `cull.tick()`
+  runs after `controls.update()`.
+- **Animations** (`#toggle-animations`, `animSettings.enabled`): the decorative motion (intro,
+  gem-dot twinkle, drug wash, circuit pulse). Default on for a fine pointer, off for coarse /
+  reduced-motion; persisted. Off is *content-preserving*: focus still lights regions/arrows + shows
+  a static gem field, just frozen (intro skipped, `tick()`s to a still frame, `play` no-ops).
+- **Arrow colour-mode** (`#color-mode`, default Neurotransmitter): Neurotransmitter =
+  `projection.color` per molecule; Potential = `projection.signColor` by coarse sign (from meta
+  `signColors`/`signLabels`). `setColorMode` recolours in place + rebuilds the Projections section
+  (per sign vs per transmitter). The switch lives outside `#projections-body` so rebuilds never
+  touch it.
+- **Separate** slider (0..1 explode): pushes regions radially out (`EXPLODE_STRENGTH`); the camera
+  auto-zooms to keep a constant apparent size (`focus.zoomForExplode` off `boundingRadiusAt`).
+- **Auto-spread** (`createAutoSpread`): focusing a **deep** (non-lobe) node from search / a panel
+  animates Separate to full (`autoSpreadIfDeep` -> `spreadTo(1)`) so it isn't buried; only ever
+  raises the spread; a manual slider grab cancels; a plain 3D click doesn't trigger it.
+- **Intro** (`createIntroAnimation`): on load the regions assemble from blown-out (Separate 1->0)
+  while the camera follows + sweeps `INTRO_ROTATION_TURNS`. Drives the slider; suspends/restores
+  auto-rotate; cancelled on a slider grab; skipped when `?explode=` is pinned. Under the dev banner
+  the brain settles lower/further back (`DEV_BANNER_DROP`/`_UNZOOM`).
+- **Transparency** slider = material opacity (depth-write off while translucent). Owned by the
+  selection controller, so it composes with isolate dimming.
 
 ### Selection / halo + isolate (`createSelection`)
 
 Single source of truth for what is highlighted/focused.
-- Picking a structure by a plain 3D click/tap gives it a soft halo
-  (`mesh.userData.halo`); double-click isolates it instead. A structure picked from
-  **search or a detail panel** isolates its hemisphere pair (dims the rest), not just a
-  halo (`selectStructure({isolate:true})`). Picking an arrow halos it
-  (`ProjectionArrow.setHalo`) on a plain 3D click; from search / a detail-panel row it
-  isolates the pathway (pins the arrow + its endpoints, dims the rest,
-  `selectConnection({isolate:true})`). Structure + arrow halos are mutually exclusive.
-- A **Structures legend row** toggles that structure (both hemispheres) into the
-  **isolate** set and opens its detail tab (`selectStructure`, on isolate-on only;
-  toggle-off opens nothing); a **category heading** toggles the whole group (isolate
-  only). While the set is non-empty, others drop to `DIM`, arrows not touching an
-  isolated structure fade (`ProjectionArrow.setOpacity`), the legend greys non-
-  isolated rows (`.dimmed`/`.selected`). Additive.
-- **Circuits** subsection rows isolate exactly that circuit (`selection.setCircuit`
-  pins an explicit arrow set), start the traveling-pulse (see Circuit animation), and
-  open its detail tab (`showCircuit` via `focusCircuit`). Re-click clears.
-- **Projections** rows (one per group, following the colour mode) isolate only that
-  group via `setCircuit` (pins the group's arrows + their endpoints; dims every
-  structure, so its structure rows grey and only the group row lights), and open a
-  detail tab (`showProjectionGroup` via `focusProjectionGroup`; the row's `dataKey`
-  is `kind:<kind>` / `sign:<sign>`). Built from non-tentative projections.
-- **Hypothetical pathways** subsection (off by default): a "Show speculative (N)"
-  toggle reveals every `tentative` arrow (dotted). Visibility composes with **Show
-  projections** via `createProjectionVisibility` (an arrow shows only when
-  projections aren't globally hidden AND it is established or its section is on).
-- The **reset** button + a **double-click on empty space** fully clear (halos +
-  isolate + circuit). Framing a connection/arrow just swaps the halo.
+- Plain 3D click/tap halos a structure (`mesh.userData.halo`) or arrow (`ProjectionArrow.setHalo`);
+  double-click isolates. From **search or a detail panel** a pick isolates instead
+  (`selectStructure({isolate:true})` dims the rest + pins the L/R pair;
+  `selectConnection({isolate:true})` pins the arrow + endpoints). Structure + arrow halos are
+  mutually exclusive.
+- A **Structures legend row** toggles that structure (both hemispheres) into the isolate set +
+  opens its tab (on isolate-on only); a **category heading** toggles the group. While the set is
+  non-empty others drop to `DIM`, untouched arrows fade (`setOpacity`), the legend greys non-
+  isolated rows. Additive.
+- A **Circuits** row isolates that circuit (`selection.setCircuit` pins an arrow set) + plays the
+  pulse (see Circuit animation) + opens its tab (`focusCircuit`). A **Projections** row isolates a
+  group via `setCircuit` (pins the group's arrows + endpoints; dims every structure) + opens its
+  tab (`focusProjectionGroup`; `dataKey` = `kind:<kind>`/`sign:<sign>`). Built from non-tentative
+  projections.
+- **Hypothetical pathways** (off by default): a "Show speculative (N)" toggle reveals every
+  `tentative` (dotted) arrow, composed with **Show projections** via `createProjectionVisibility`.
+- **reset** + **double-click empty space** fully clear (halos + isolate + circuit).
 
 ### Structure names
 
-Hover (or tap) shows a name label; tapping empty space clears. **Selecting** a
-structure also **pins** its name (`selection.onHighlight` -> `labels.setPinned`
-with the highlight's whole L/R base pair, so **both** hemispheres show their name,
-not just the clicked side), and hovering another region *adds* its label. Labels
-carry no "Right/Left" (the `base_name`), so a pinned pair reads as the same name on
-each side. The hover pick (`pickHover`) is focus-aware:
-while something is focused, a focused region the ray passes through wins over a nearer
-non-focused one. Labels are boxless: white glyphs outlined in the region's own colour
-(`--label-color`) + a black halo.
+Hover/tap shows a boxless name label (white glyphs outlined in the region's `--label-color` + a
+black halo); tapping empty space clears. Selecting a structure **pins** its name for the whole L/R
+pair (`selection.onHighlight` -> `labels.setPinned`); hovering another *adds* its label. Labels
+carry no "Right/Left" (`base_name`). `pickHover` is focus-aware: a focused region the ray passes
+through beats a nearer non-focused one.
 
 ### Legend sections
 
-- **Structures** (`#structures`): rows by group, generated by `buildLegend` into
-  `#structures-body`. Row click isolates + opens the detail tab (`onPickStructure`,
-  gated on `selection.isIsolated`); heading isolates the group.
-- **Projections** (`#projections`): same `buildLegend` into `#projections-body` (just
-  the generated rows now; the colour-mode switch that drives them lives up in
-  Controls). Below: the Projections rows (per transmitter, or per sign in Potential
-  mode), the Circuits section, and the off-by-default Hypothetical pathways toggle.
-  `buildLegend` fills both Structures + Projections and returns one shared
-  focus-greying callback.
-- **Legend (the key)** (`#legend-modal`, a **toolbar-icon popup**, not an accordion
-  peer; opened by the legend icon or **k**): a *static* colour/symbol key built once by
-  `buildLegendKey` into `#legend-body` from meta (so colours never drift): the
-  expression gem dots (a swatch per sign), the per-drug effect dots + wash
-  (boost/block/modulate), the drug **flow overlay** (one line swatch per
-  flow-capable transmitter system, from `meta.systemFlowKinds`, with a caption
-  explaining the beads mark which ascending system a drug engages, not direction),
-  and a dotted speculative pathway (each heading carries a
-  `.legend-caption`); it ends with a **Sources & provenance** link (`#legend-open-sourcing`)
-  that opens the sourcing popup. Wired by `wireLegendModal` (over the shared `wireModal`).
-- **Sources & provenance** (`#sourcing-modal`, a **toolbar-icon popup**, `wireSourcingModal`):
-  the grade key + coverage tally (`#about-sourcing`, `buildAboutSourcing` from
-  `data.meta.provenanceStats`). The single place explaining the whole sourcing system
-  (see Source provenance). Opened by its own toolbar icon, from the Legend + About
-  popups (their `→` link), and auto-shown over the loading overlay on startup (the gate,
-  see Loading overlay). `buildAboutSourcing` renders the static intro + grade key with no
-  data (so it is meaningful the instant the gate opens) and fills the tally on a second
-  call once the dataset has loaded.
-- **Receptors & targets** (`#receptors`): see Receptors & targets.
-- **Drugs** (`#drugs`): see Drugs.
-- **About** (`#about-modal`, an **ⓘ-toolbar-triggered popup**, `wireAboutModal`, not a
-  section): a blurb (made by Olivier Cornelis + Claude), an "open an issue" line (link
-  to `cfg.sourceUrl + "/issues"`, dropped unless `sourceUrl` is a repo-like URL with a
-  path), a **Source code** link (`cfg.sourceUrl`, http(s) only), a **licence** line
-  (AGPL-3.0), a **CC BY-SA attribution** line (Wikipedia descriptions + molecule
-  images), and a **Sources & provenance** link (`#about-open-sourcing`) opening the
-  sourcing popup. The sourcing tally is **not** here (it has its own popup). The README
-  mirrors the issue invitation + coverage table.
+- **Structures** (`#structures`): rows by group via `buildLegend` into `#structures-body`. Row
+  click isolates + opens the tab (`onPickStructure`, gated on `selection.isIsolated`); heading
+  isolates the group.
+- **Projections** (`#projections`): same `buildLegend` into `#projections-body` (the colour-mode
+  switch that drives them lives up in Controls); below it the per-group rows, the Circuits section,
+  and the Hypothetical pathways toggle. `buildLegend` fills both Structures + Projections and
+  returns one shared focus-greying callback.
+- **Legend (the key)** (`#legend-modal`, toolbar popup or **k**): a *static* colour/symbol key
+  built once by `buildLegendKey` into `#legend-body` from meta (so colours never drift): the
+  expression gem dots, the per-drug effect dots + wash, the drug flow overlay (from
+  `meta.systemFlowKinds`), a dotted speculative pathway; ends with a Sources & provenance link
+  (`#legend-open-sourcing`). Wired by `wireLegendModal`.
+- **Sources & provenance** (`#sourcing-modal`, `wireSourcingModal`): the grade key + coverage
+  tally (`#about-sourcing`, `buildAboutSourcing` from `data.meta.provenanceStats`). The single
+  place explaining the sourcing system (see Source provenance); auto-shown over the loading overlay
+  on startup (the gate). `buildAboutSourcing(null)` renders the static intro + key immediately, a
+  second call fills the tally once loaded.
+- **Receptors & targets** (`#receptors`) / **Drugs** (`#drugs`): see their sections.
+- **About** (`#about-modal`, ⓘ, `wireAboutModal`): a blurb (Olivier Cornelis + Claude), an "open
+  an issue" link (`cfg.sourceUrl + "/issues"`, dropped unless `sourceUrl` is repo-like), a Source
+  code link, a licence line (AGPL-3.0), a CC BY-SA attribution line, and a Sources & provenance
+  link (`#about-open-sourcing`). The tally is not here (own popup).
 
 ### Input
 
