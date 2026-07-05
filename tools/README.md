@@ -131,12 +131,16 @@ Screenshots).
 - `tools/drugs_data.jsonl` — the authored drug dataset (from Stahl 8th ed.), one compact
   JSON object per line, read by `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
 - `tools/data_generators/` — pure-data modules imported by `generate_data.py`: `drugs.py`,
-  `provenance.py`, `i18n.py`, and the `receptors/` subpackage (one module per neurotransmitter
+  `provenance.py` (also houses the sourcing-tally helpers `_GRADE_RANK`/`_strongest_grade`/
+  `_binding_grade` + `_provenance_stats`, which reduce the emitted nodes to `meta.provenance_stats`),
+  `i18n.py`, and the `receptors/` subpackage (one module per neurotransmitter
   family, e.g. `serotonergic.py`, each exposing `ENTRIES`; `__init__.py` concatenates them into
   `RECEPTORS` in the original order), the `regions/` subpackage (one module per anatomical `group`,
   e.g. `cortex.py`/`basal_ganglia.py`, each exposing `PAIRED` + `MIDLINE`; `__init__.py` concatenates
   them into `PAIRED`/`MIDLINE` in the original order), and `geometry.py` (the shared cortical-dome SDF
-  helpers, e.g. `_cortex_lobe_entry` + `MIDLINE_GAP`, imported by `regions/cortex.py` and `generate_data.py`),
+  helpers, e.g. `_cortex_lobe_entry` + `MIDLINE_GAP`, plus the pure geometry math helpers
+  `_scale_sdf`/`_scale_triple`/`_directional_extent`/`_bisecting_clip_planes`, imported by
+  `regions/cortex.py` and `generate_data.py`),
   and `connectivity.py` (the three connectivity node literals `PROJECTIONS`/`CIRCUITS`/`PROJECTION_GROUPS`
   plus the `_KQ_*`/`_SG_*` pathway quote-source constants they cite; the shared `_kandel`/`_nieuwenhuys`/`_stahl_ess`
   quote constructors live in `provenance.py`), and `presentation.py` (the presentation label maps

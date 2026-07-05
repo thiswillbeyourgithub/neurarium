@@ -450,3 +450,189 @@ def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | No
     if ki.get("inactive"):
         out["inactive"] = int(ki["inactive"])
     return out
+
+
+# Provenance ranks for the dataset-wide sourcing tally (meta.provenance_stats):
+# a higher rank is a stronger grade, 0 = no source/grade at all. Mirrors
+# PROVENANCE_LEVELS but as an order so a list of sources can be reduced to its best.
+_GRADE_RANK = {"llm": 1, "sourced": 2, "verified": 3}
+
+
+def _strongest_grade(sources: list[dict[str, Any]] | None) -> int:
+    """The strongest provenance rank among a list of source objects (0 if none)."""
+    best = 0
+    for src in sources or []:
+        best = max(best, _GRADE_RANK.get(src.get("provenance"), 0))
+    return best
+
+
+def _binding_grade(binding: dict[str, Any]) -> int:
+    """A binding's grade = the strongest of its quote ``sources`` and its ``ki``
+    source. A measured Ki (its own verified source) confirms the drug binds the
+    target, so it backs the binding claim; an affinity_only binding is graded solely
+    by its Ki."""
+    best = _strongest_grade(binding.get("sources"))
+    ki_src = (binding.get("ki") or {}).get("source")
+    if ki_src:
+        best = max(best, _GRADE_RANK.get(ki_src.get("provenance"), 0))
+    return best
+
+
+def _provenance_stats(structures: list[dict[str, Any]],
+                      projections: list[dict[str, Any]],
+                      circuits: list[dict[str, Any]],
+                      projection_groups: list[dict[str, Any]],
+                      receptors: list[dict[str, Any]],
+                      drugs: list[dict[str, Any]],
+                      drug_targets: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """Programmatic sourcing tally over the dataset's **nodes** (see the Nodes
+    section of CLAUDE.md), emitted into ``meta.provenance_stats``.
+
+    A *node* is any sourceable datum: a drug binding, a drug NbN label, a drug class
+    classification, a neuron projection, a functional circuit, a projection group, a
+    receptor classification, a receptor expression region, a non-receptor target
+    classification, a target expression region, or a brain-region anatomy fact. Every
+    node is bucketed by the strength of its source: ``verified`` (quote-checked),
+    ``sourced`` (from a document, not quote-checked) or ``missing`` (no source
+    document at all: an ``llm`` grade means "an LLM asserted this from memory", which
+    is precisely *no document*, so it is missing, exactly like a node with no source
+    object). The viewer's About panel and the README headline read these numbers, so
+    the "% sourced" figure is always a real count of the shipped data, never
+    hand-typed (the whole point: a programmatic count of source strength across every
+    node).
+
+    The knowledge nodes drive the headline ``pct_backed`` (emitted under the
+    ``nodes`` key); Wikipedia ``references`` are tallied separately (read-more links,
+    which point *at* a node but are not themselves a knowledge node).
+    """
+    def bucket(rank_or_grade: Any) -> str:
+        rank = (rank_or_grade if isinstance(rank_or_grade, int)
+                else _GRADE_RANK.get(rank_or_grade, 0))
+        # rank <= 1 (no source object, or a bare ``llm`` grade) => no document => missing.
+        return ("verified" if rank == 3 else
+                "sourced" if rank == 2 else "missing")
+
+    def tally(grades: list[Any]) -> dict[str, int]:
+        counts = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
+        for g in grades:
+            counts["total"] += 1
+            counts[bucket(g)] += 1
+        return counts
+
+    binding_grades = [_binding_grade(b)
+                      for d in drugs for b in d.get("bindings", [])]
+    nbn_grades = [_strongest_grade(d.get("nbn_sources"))
+                  for d in drugs if d.get("nbn")]
+    # Drug class-classification nodes ("this drug is an SSRI/..."), one per drug that
+    # has categories: the emitted category_provenance (llm unless overridden/sourced).
+    category_grades = [d.get("category_provenance", DEFAULT_PROVENANCE)
+                       for d in drugs if d.get("categories")]
+    projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
+    # Functional-circuit + projection-group nodes: each a "these structures / pathways
+    # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
+    # matching the viewer's NOSOURCE pill). All missing today (no circuit/group is
+    # document-backed yet).
+    circuit_grades = [_strongest_grade(c.get("sources")) for c in circuits]
+    projection_group_grades = [_strongest_grade(g.get("sources"))
+                               for g in projection_groups]
+    # Receptor classification is FOUR independent nodes per receptor, one per
+    # attribute (family / receptor_class / sign / synaptic), each graded on its own
+    # so an unsourced GPCR/sign/site claim shows honestly instead of borrowing a
+    # neighbouring quote's grade. A pure stub (no CNS role: no locations, not
+    # ubiquitous, no description) is not a node, so it is skipped. The receptor's
+    # *expression regions* are a separate node kind (receptor_locations), one node
+    # per region, not folded in here.
+    scored_receptors = [r for r in receptors
+                        if r.get("ubiquitous") or r.get("locations")
+                        or r.get("description")]
+
+    def _attr_grade(r: dict[str, Any], attr: str) -> str:
+        entry = (r.get("classification") or {}).get(attr)
+        return entry["grade"] if entry else DEFAULT_PROVENANCE
+    receptor_family_grades = [_attr_grade(r, "family") for r in scored_receptors]
+    receptor_class_grades = [_attr_grade(r, "receptor_class") for r in scored_receptors]
+    receptor_sign_grades = [_attr_grade(r, "sign") for r in scored_receptors]
+    receptor_synaptic_grades = [_attr_grade(r, "synaptic") for r in scored_receptors]
+    # Expression-region nodes ("Found in"), one node PER (owner, region): the claim
+    # "owner O is expressed in region B", distinct from O's classification node. Each
+    # region's grade = the strongest of that region's location_sources (default llm
+    # when unsourced). A ubiquitous receptor is one "throughout the brain" node (its
+    # "ALL"-keyed sources). Shared by receptors and their non-receptor-target mirror.
+    _llm_rank = _GRADE_RANK[DEFAULT_PROVENANCE]
+
+    def location_grades(owner: dict[str, Any], regions_key: str) -> list[int]:
+        loc_sources = owner.get("location_sources", {})
+        if owner.get("ubiquitous"):
+            return [max(_strongest_grade(loc_sources.get("ALL")), _llm_rank)]
+        return [max(_strongest_grade(loc_sources.get(base)), _llm_rank)
+                for base in owner.get(regions_key, [])]
+
+    receptor_location_grades = [g for r in receptors
+                                for g in location_grades(r, "locations")]
+    # Non-receptor drug target classifications (type / system), graded per target.
+    # Receptor-linked targets are skipped (already counted as receptors, not twice).
+    target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
+                     for t in drug_targets.values() if t.get("type") != "receptor"]
+    # Target expression-region nodes: the mirror of receptor_locations (a target never
+    # sets ubiquitous, so only the per-region branch runs; receptor-linked targets are
+    # skipped, their regions counted as the receptor's).
+    target_location_grades = [g for t in drug_targets.values()
+                              if t.get("type") != "receptor"
+                              for g in location_grades(t, "regions")]
+    # Target tone-polarity sub-claims: one graded node per non-receptor target that
+    # carries a direction-flipping flag (vesicular / sign / synaptic). Kept distinct
+    # from the target's type/system classification so a wrong direction shows honestly.
+    target_polarity_grades = [t["polarity_provenance"]
+                              for t in drug_targets.values()
+                              if t.get("type") != "receptor"
+                              and "polarity_provenance" in t]
+    # Brain-region anatomy (existence / group / position), graded per emitted
+    # structure record (both hemispheres of a pair count, one line each).
+    structure_grades = [s.get("classification_provenance", DEFAULT_PROVENANCE)
+                        for s in structures]
+    # Wikipedia reference links across every owner kind. Non-receptor targets only
+    # (a receptor is already counted via the receptor records, not twice); a missing
+    # link is a rank-0 "missing" so the gap shows in the coverage.
+    ref_grades: list[int] = []
+    for rec in (*structures, *receptors, *drugs):
+        ref_grades.append(_GRADE_RANK.get(rec.get("wikipedia_provenance"), 0)
+                          if rec.get("wikipedia") else 0)
+    for tgt in drug_targets.values():
+        if tgt.get("type") == "receptor":
+            continue
+        ref_grades.append(_GRADE_RANK.get(tgt.get("wikipedia_provenance"), 0)
+                          if tgt.get("wikipedia") else 0)
+
+    by_kind = {
+        "drug_bindings": tally(binding_grades),
+        "drug_nbn": tally(nbn_grades),
+        "drug_categories": tally(category_grades),
+        "projections": tally(projection_grades),
+        "circuits": tally(circuit_grades),
+        "projection_groups": tally(projection_group_grades),
+        "receptors": tally(receptor_family_grades),
+        "receptor_class": tally(receptor_class_grades),
+        "receptor_sign": tally(receptor_sign_grades),
+        "receptor_synaptic": tally(receptor_synaptic_grades),
+        "receptor_locations": tally(receptor_location_grades),
+        "targets": tally(target_grades),
+        "target_polarity": tally(target_polarity_grades),
+        "target_locations": tally(target_location_grades),
+        "structures": tally(structure_grades),
+        "references": tally(ref_grades),
+    }
+    # The knowledge-node kinds (every node that carries a claim + a grade) are every
+    # by_kind entry except "references" (a reference points *at* a node, so it is
+    # tallied but excluded from the headline). Derived from the one by_kind dict above,
+    # so adding a node kind is a single-line edit (add it to by_kind) with no second
+    # list to keep in sync.
+    node_kinds = tuple(k for k in by_kind if k != "references")
+    nodes = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
+    for kind in node_kinds:
+        for key in nodes:
+            nodes[key] += by_kind[kind][key]
+    backed = nodes["verified"] + nodes["sourced"]
+    nodes["backed"] = backed
+    nodes["pct_backed"] = (
+        round(100 * backed / nodes["total"]) if nodes["total"] else 0)
+    return {"by_kind": by_kind, "nodes": nodes}

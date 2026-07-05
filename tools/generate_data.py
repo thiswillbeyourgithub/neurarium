@@ -173,11 +173,13 @@ from data_generators.provenance import (  # noqa: E402
     _nieuwenhuys,
     _stahl_ess,
     WIKIPEDIA_PROVENANCE,
+    _GRADE_RANK,
     _binding_sources,
     _ki_annotation,
     _location_sources,
     _lookup_provenance,
     _provenance,
+    _provenance_stats,
     _quote_sources,
     _receptor_provenance,
     _structure_provenance,
@@ -264,7 +266,12 @@ from data_generators.quotes import (  # noqa: E402
 # Cortical-dome geometry helpers and the brain-region anatomy records were split
 # out verbatim into data_generators.geometry and data_generators.regions.
 # MIDLINE_GAP is reused by the blob clip logic further below.
-from data_generators.geometry import MIDLINE_GAP  # noqa: E402
+from data_generators.geometry import (  # noqa: E402
+    MIDLINE_GAP,
+    _bisecting_clip_planes,
+    _scale_sdf,
+    _scale_triple,
+)
 from data_generators.regions import MIDLINE, PAIRED  # noqa: E402
 
 # Neurotransmitter receptors. Each entry is one receptor (the clinically relevant
@@ -392,81 +399,6 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
     return record
 
 
-def _scale_sdf(node: dict[str, Any], s: list[float]) -> dict[str, Any]:
-    """Recursively scale an SDF node tree about the local origin by ``s`` =
-    ``[sx, sy, sz]`` (lengths along each axis scale by the matching factor).
-
-    Used by :func:`_shape_record` to seat a structure at an anatomically-correct
-    size without re-authoring every primitive. Scalar-radius primitives (sphere,
-    round-cone/capsule, tube) and the isotropic blend/relief knobs (``k``,
-    displace ``amp``/``unit``) can only take ONE factor, so they use the mean of
-    ``s`` (an anisotropic swept tube would need an elliptic cross-section the SDF
-    cannot express); displace ``freq`` scales inversely so the surface texture
-    scales WITH the shape. Returns a NEW node, does not mutate the input. Every
-    value is rounded to 4 decimals to keep the emitted JSON clean.
-    """
-    sm = sum(s) / 3.0
-    r = lambda v: round(v, 4)
-
-    def sc(v):  # scale a 3-vector coordinate / extent
-        return [r(v[0] * s[0]), r(v[1] * s[1]), r(v[2] * s[2])]
-
-    n = dict(node)
-    prim = n.get("prim")
-    if prim == "sphere":
-        n["center"] = sc(n["center"]); n["radius"] = r(n["radius"] * sm)
-    elif prim == "ellipsoid":
-        n["center"] = sc(n["center"]); n["radii"] = sc(n["radii"])
-    elif prim == "box":
-        n["center"] = sc(n["center"]); n["half"] = sc(n["half"])
-        if n.get("round") is not None:
-            n["round"] = r(n["round"] * sm)
-    elif prim in ("capsule", "roundcone"):
-        n["a"] = sc(n["a"]); n["b"] = sc(n["b"])
-        for key in ("r1", "r2", "radius"):
-            if n.get(key) is not None:
-                n[key] = r(n[key] * sm)
-    elif prim == "tube":
-        n["points"] = [sc(p) for p in n["points"]]
-        if n.get("profile") is not None:
-            n["profile"] = [r(p * sm) for p in n["profile"]]
-        if n.get("radius") is not None:
-            n["radius"] = r(n["radius"] * sm)
-    elif prim == "plane":
-        # Half-space cut moves with the geometry: the offset is along the
-        # (un-normalized) normal, so scale it by the factor along that direction.
-        nm = n["normal"]
-        ln = math.sqrt(nm[0] ** 2 + nm[1] ** 2 + nm[2] ** 2) or 1.0
-        f = (abs(nm[0]) * s[0] + abs(nm[1]) * s[1] + abs(nm[2]) * s[2]) / ln
-        if n.get("offset") is not None:
-            n["offset"] = r(n["offset"] * f)
-    else:
-        # Op node: scale the blend radius + any displacement, recurse into kids.
-        if n.get("k") is not None:
-            n["k"] = r(n["k"] * sm)
-        if n.get("op") == "displace":
-            if n.get("amp") is not None:
-                n["amp"] = r(n["amp"] * sm)
-            if n.get("freq"):
-                n["freq"] = r(n["freq"] / sm)
-            if n.get("unit"):
-                n["unit"] = r(n["unit"] * sm)
-            if n.get("origin"):
-                n["origin"] = sc(n["origin"])
-        if n.get("nodes") is not None:
-            n["nodes"] = [_scale_sdf(c, s) for c in n["nodes"]]
-        if n.get("node") is not None:
-            n["node"] = _scale_sdf(n["node"], s)
-    return n
-
-
-def _scale_triple(scale: Any) -> list[float]:
-    """Normalize a ``scale`` (scalar or ``[sx, sy, sz]``) to a 3-list."""
-    if isinstance(scale, (int, float)):
-        return [float(scale)] * 3
-    return [float(c) for c in scale]
-
-
 def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
     """Build the geometric ``data/shapes/<id>.json`` payload for a structure.
 
@@ -535,104 +467,6 @@ def _shape_record(entry: dict[str, Any], px: float) -> dict[str, Any]:
             blob["clip"] = {k: round(v * s[axis[k[0]]], 4)
                             for k, v in blob["clip"].items()}
     return blob
-
-
-def _directional_extent(radii: tuple[float, float, float], noise: float,
-                        direction: tuple[float, float, float]) -> float:
-    """How far a noise-inflated ellipsoid reaches along a unit ``direction``.
-
-    The support of an axis-aligned ellipsoid with half-extents ``radii`` in a unit
-    direction ``n`` is ``sqrt(sum (r_i * n_i)^2)``; the surface noise can push a
-    vertex out by up to ``noise`` of the radius, so the reach is scaled by
-    ``(1 + noise)``. Used to decide whether two regions overlap and where to seat
-    the seam between them.
-
-    Parameters
-    ----------
-    radii
-        Ellipsoid half-extents ``(rx, ry, rz)`` before deformation.
-    noise
-        Deformation amplitude as a fraction of radius.
-    direction
-        Unit vector along which to measure the reach.
-
-    Returns
-    -------
-    float
-        Maximum distance from the centre to the surface along ``direction``.
-    """
-    rx, ry, rz = radii
-    dx, dy, dz = direction
-    return math.sqrt((rx * dx) ** 2 + (ry * dy) ** 2 + (rz * dz) ** 2) * (1 + noise)
-
-
-def _bisecting_clip_planes(entry: dict[str, Any],
-                           neighbours: list[dict[str, Any]]
-                           ) -> list[dict[str, Any]]:
-    """Local-space cut planes keeping ``entry`` from crossing its neighbours.
-
-    For each same-group blob ``neighbour`` whose body would overlap ``entry``'s,
-    place a flat cut plane at the radius-weighted boundary between the two centres
-    with its normal pointing toward the neighbour. ``buildBlobGeometry`` clamps
-    any vertex past such a plane onto it, so the two regions grow flat mating
-    faces and tile flush instead of interpenetrating (the "jigsaw" look that sells
-    the regions locking together at explode 0 and separating as they explode).
-
-    Adjacency is derived from the geometry, not hand-listed: a pair gets a plane
-    only when the centres are closer than the two bodies' combined reach toward
-    each other, so non-touching pairs (e.g. frontal vs occipital) are skipped. The
-    seam is split in proportion to each body's reach, so a large lobe keeps more
-    of the shared volume than a small neighbour, and because the pair overlaps the
-    seam always lies inside the overlap zone (never cutting past either surface,
-    so no region is reduced to a sliver).
-
-    Planes are authored in ``entry``'s *local* frame (its geometry is centred at
-    the origin and positioned later), exactly like the medial wall. Paired entries
-    are defined on the right hemisphere and the left member mirrors the whole
-    geometry across x, which flips these planes to the correct side for free, so
-    they are computed once from the right-side positions.
-
-    Parameters
-    ----------
-    entry
-        The blob whose planes are computed (must carry ``radii``/``noise``).
-    neighbours
-        Same-group blob entries to test for overlap (``entry`` itself is skipped).
-
-    Returns
-    -------
-    list of dict
-        ``{"point": [x, y, z], "normal": [x, y, z]}`` planes in local coords; the
-        normal is a unit vector pointing toward the neighbour (the removed side).
-    """
-    planes: list[dict[str, Any]] = []
-    cx, cy, cz = entry["pos"]
-    for other in neighbours:
-        if other is entry:
-            continue
-        ox, oy, oz = other["pos"]
-        dx, dy, dz = ox - cx, oy - cy, oz - cz
-        dist = math.sqrt(dx * dx + dy * dy + dz * dz)
-        if dist < 1e-6:
-            continue
-        n = (dx / dist, dy / dist, dz / dist)
-        reach_self = _directional_extent(entry["radii"], entry["noise"], n)
-        reach_other = _directional_extent(
-            other["radii"], other["noise"], (-n[0], -n[1], -n[2]))
-        # No overlap along this axis: the surfaces never meet, nothing to cut.
-        if dist >= reach_self + reach_other:
-            continue
-        # Seam distance from this centre toward the neighbour, split in proportion
-        # to each body's reach. Since dist < reach_self + reach_other, this stays
-        # < reach_self (and the complement < reach_other), so the cut sits inside
-        # the overlap and never reaches past either surface.
-        seam = dist * reach_self / (reach_self + reach_other)
-        planes.append({
-            "point": [round(n[0] * seam, 3), round(n[1] * seam, 3),
-                      round(n[2] * seam, 3)],
-            "normal": [round(n[0], 3), round(n[1], 3), round(n[2], 3)],
-        })
-    return planes
 
 
 def _mirror_id(structure_id: str) -> str:
@@ -1079,192 +913,6 @@ def _load_drugs() -> list[dict[str, Any]]:
         log.warning("no %s; drugs.jsonl will be empty", drugs_io.DRUGS_PATH.name)
         return []
     return drugs_io.load_drugs()
-
-
-# Provenance ranks for the dataset-wide sourcing tally (meta.provenance_stats):
-# a higher rank is a stronger grade, 0 = no source/grade at all. Mirrors
-# PROVENANCE_LEVELS but as an order so a list of sources can be reduced to its best.
-_GRADE_RANK = {"llm": 1, "sourced": 2, "verified": 3}
-
-
-def _strongest_grade(sources: list[dict[str, Any]] | None) -> int:
-    """The strongest provenance rank among a list of source objects (0 if none)."""
-    best = 0
-    for src in sources or []:
-        best = max(best, _GRADE_RANK.get(src.get("provenance"), 0))
-    return best
-
-
-def _binding_grade(binding: dict[str, Any]) -> int:
-    """A binding's grade = the strongest of its quote ``sources`` and its ``ki``
-    source. A measured Ki (its own verified source) confirms the drug binds the
-    target, so it backs the binding claim; an affinity_only binding is graded solely
-    by its Ki."""
-    best = _strongest_grade(binding.get("sources"))
-    ki_src = (binding.get("ki") or {}).get("source")
-    if ki_src:
-        best = max(best, _GRADE_RANK.get(ki_src.get("provenance"), 0))
-    return best
-
-
-def _provenance_stats(structures: list[dict[str, Any]],
-                      projections: list[dict[str, Any]],
-                      circuits: list[dict[str, Any]],
-                      projection_groups: list[dict[str, Any]],
-                      receptors: list[dict[str, Any]],
-                      drugs: list[dict[str, Any]],
-                      drug_targets: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    """Programmatic sourcing tally over the dataset's **nodes** (see the Nodes
-    section of CLAUDE.md), emitted into ``meta.provenance_stats``.
-
-    A *node* is any sourceable datum: a drug binding, a drug NbN label, a drug class
-    classification, a neuron projection, a functional circuit, a projection group, a
-    receptor classification, a receptor expression region, a non-receptor target
-    classification, a target expression region, or a brain-region anatomy fact. Every
-    node is bucketed by the strength of its source: ``verified`` (quote-checked),
-    ``sourced`` (from a document, not quote-checked) or ``missing`` (no source
-    document at all: an ``llm`` grade means "an LLM asserted this from memory", which
-    is precisely *no document*, so it is missing, exactly like a node with no source
-    object). The viewer's About panel and the README headline read these numbers, so
-    the "% sourced" figure is always a real count of the shipped data, never
-    hand-typed (the whole point: a programmatic count of source strength across every
-    node).
-
-    The knowledge nodes drive the headline ``pct_backed`` (emitted under the
-    ``nodes`` key); Wikipedia ``references`` are tallied separately (read-more links,
-    which point *at* a node but are not themselves a knowledge node).
-    """
-    def bucket(rank_or_grade: Any) -> str:
-        rank = (rank_or_grade if isinstance(rank_or_grade, int)
-                else _GRADE_RANK.get(rank_or_grade, 0))
-        # rank <= 1 (no source object, or a bare ``llm`` grade) => no document => missing.
-        return ("verified" if rank == 3 else
-                "sourced" if rank == 2 else "missing")
-
-    def tally(grades: list[Any]) -> dict[str, int]:
-        counts = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
-        for g in grades:
-            counts["total"] += 1
-            counts[bucket(g)] += 1
-        return counts
-
-    binding_grades = [_binding_grade(b)
-                      for d in drugs for b in d.get("bindings", [])]
-    nbn_grades = [_strongest_grade(d.get("nbn_sources"))
-                  for d in drugs if d.get("nbn")]
-    # Drug class-classification nodes ("this drug is an SSRI/..."), one per drug that
-    # has categories: the emitted category_provenance (llm unless overridden/sourced).
-    category_grades = [d.get("category_provenance", DEFAULT_PROVENANCE)
-                       for d in drugs if d.get("categories")]
-    projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
-    # Functional-circuit + projection-group nodes: each a "these structures / pathways
-    # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
-    # matching the viewer's NOSOURCE pill). All missing today (no circuit/group is
-    # document-backed yet).
-    circuit_grades = [_strongest_grade(c.get("sources")) for c in circuits]
-    projection_group_grades = [_strongest_grade(g.get("sources"))
-                               for g in projection_groups]
-    # Receptor classification is FOUR independent nodes per receptor, one per
-    # attribute (family / receptor_class / sign / synaptic), each graded on its own
-    # so an unsourced GPCR/sign/site claim shows honestly instead of borrowing a
-    # neighbouring quote's grade. A pure stub (no CNS role: no locations, not
-    # ubiquitous, no description) is not a node, so it is skipped. The receptor's
-    # *expression regions* are a separate node kind (receptor_locations), one node
-    # per region, not folded in here.
-    scored_receptors = [r for r in receptors
-                        if r.get("ubiquitous") or r.get("locations")
-                        or r.get("description")]
-
-    def _attr_grade(r: dict[str, Any], attr: str) -> str:
-        entry = (r.get("classification") or {}).get(attr)
-        return entry["grade"] if entry else DEFAULT_PROVENANCE
-    receptor_family_grades = [_attr_grade(r, "family") for r in scored_receptors]
-    receptor_class_grades = [_attr_grade(r, "receptor_class") for r in scored_receptors]
-    receptor_sign_grades = [_attr_grade(r, "sign") for r in scored_receptors]
-    receptor_synaptic_grades = [_attr_grade(r, "synaptic") for r in scored_receptors]
-    # Expression-region nodes ("Found in"), one node PER (owner, region): the claim
-    # "owner O is expressed in region B", distinct from O's classification node. Each
-    # region's grade = the strongest of that region's location_sources (default llm
-    # when unsourced). A ubiquitous receptor is one "throughout the brain" node (its
-    # "ALL"-keyed sources). Shared by receptors and their non-receptor-target mirror.
-    _llm_rank = _GRADE_RANK[DEFAULT_PROVENANCE]
-
-    def location_grades(owner: dict[str, Any], regions_key: str) -> list[int]:
-        loc_sources = owner.get("location_sources", {})
-        if owner.get("ubiquitous"):
-            return [max(_strongest_grade(loc_sources.get("ALL")), _llm_rank)]
-        return [max(_strongest_grade(loc_sources.get(base)), _llm_rank)
-                for base in owner.get(regions_key, [])]
-
-    receptor_location_grades = [g for r in receptors
-                                for g in location_grades(r, "locations")]
-    # Non-receptor drug target classifications (type / system), graded per target.
-    # Receptor-linked targets are skipped (already counted as receptors, not twice).
-    target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
-                     for t in drug_targets.values() if t.get("type") != "receptor"]
-    # Target expression-region nodes: the mirror of receptor_locations (a target never
-    # sets ubiquitous, so only the per-region branch runs; receptor-linked targets are
-    # skipped, their regions counted as the receptor's).
-    target_location_grades = [g for t in drug_targets.values()
-                              if t.get("type") != "receptor"
-                              for g in location_grades(t, "regions")]
-    # Target tone-polarity sub-claims: one graded node per non-receptor target that
-    # carries a direction-flipping flag (vesicular / sign / synaptic). Kept distinct
-    # from the target's type/system classification so a wrong direction shows honestly.
-    target_polarity_grades = [t["polarity_provenance"]
-                              for t in drug_targets.values()
-                              if t.get("type") != "receptor"
-                              and "polarity_provenance" in t]
-    # Brain-region anatomy (existence / group / position), graded per emitted
-    # structure record (both hemispheres of a pair count, one line each).
-    structure_grades = [s.get("classification_provenance", DEFAULT_PROVENANCE)
-                        for s in structures]
-    # Wikipedia reference links across every owner kind. Non-receptor targets only
-    # (a receptor is already counted via the receptor records, not twice); a missing
-    # link is a rank-0 "missing" so the gap shows in the coverage.
-    ref_grades: list[int] = []
-    for rec in (*structures, *receptors, *drugs):
-        ref_grades.append(_GRADE_RANK.get(rec.get("wikipedia_provenance"), 0)
-                          if rec.get("wikipedia") else 0)
-    for tgt in drug_targets.values():
-        if tgt.get("type") == "receptor":
-            continue
-        ref_grades.append(_GRADE_RANK.get(tgt.get("wikipedia_provenance"), 0)
-                          if tgt.get("wikipedia") else 0)
-
-    by_kind = {
-        "drug_bindings": tally(binding_grades),
-        "drug_nbn": tally(nbn_grades),
-        "drug_categories": tally(category_grades),
-        "projections": tally(projection_grades),
-        "circuits": tally(circuit_grades),
-        "projection_groups": tally(projection_group_grades),
-        "receptors": tally(receptor_family_grades),
-        "receptor_class": tally(receptor_class_grades),
-        "receptor_sign": tally(receptor_sign_grades),
-        "receptor_synaptic": tally(receptor_synaptic_grades),
-        "receptor_locations": tally(receptor_location_grades),
-        "targets": tally(target_grades),
-        "target_polarity": tally(target_polarity_grades),
-        "target_locations": tally(target_location_grades),
-        "structures": tally(structure_grades),
-        "references": tally(ref_grades),
-    }
-    # The knowledge-node kinds (every node that carries a claim + a grade) are every
-    # by_kind entry except "references" (a reference points *at* a node, so it is
-    # tallied but excluded from the headline). Derived from the one by_kind dict above,
-    # so adding a node kind is a single-line edit (add it to by_kind) with no second
-    # list to keep in sync.
-    node_kinds = tuple(k for k in by_kind if k != "references")
-    nodes = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
-    for kind in node_kinds:
-        for key in nodes:
-            nodes[key] += by_kind[kind][key]
-    backed = nodes["verified"] + nodes["sourced"]
-    nodes["backed"] = backed
-    nodes["pct_backed"] = (
-        round(100 * backed / nodes["total"]) if nodes["total"] else 0)
-    return {"by_kind": by_kind, "nodes": nodes}
 
 
 def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:

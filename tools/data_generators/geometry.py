@@ -4,6 +4,9 @@ Extracted from generate_data.py so data_generators.regions can build the
 cortical-lobe SDF sectors without importing the CLI module (a cycle).
 """
 
+import math
+from typing import Any
+
 # Half-width of the longitudinal fissure: each cortical lobe's medial face is
 # cut flat at world x = +/- this, so the left and right hemispheres meet along a
 # thin midline gap instead of overlapping into one ball. Small = tight fissure.
@@ -130,3 +133,176 @@ def _cortex_lobe_entry(base, name, color, pos, cuts, seed, subtract_regions=None
     """
     return dict(base=base, name=name, group="lobe", pos=pos, color=color,
                 shape=_cortex_lobe(pos, cuts, seed=seed, subtract_regions=subtract_regions))
+
+
+def _scale_sdf(node: dict[str, Any], s: list[float]) -> dict[str, Any]:
+    """Recursively scale an SDF node tree about the local origin by ``s`` =
+    ``[sx, sy, sz]`` (lengths along each axis scale by the matching factor).
+
+    Used by :func:`_shape_record` to seat a structure at an anatomically-correct
+    size without re-authoring every primitive. Scalar-radius primitives (sphere,
+    round-cone/capsule, tube) and the isotropic blend/relief knobs (``k``,
+    displace ``amp``/``unit``) can only take ONE factor, so they use the mean of
+    ``s`` (an anisotropic swept tube would need an elliptic cross-section the SDF
+    cannot express); displace ``freq`` scales inversely so the surface texture
+    scales WITH the shape. Returns a NEW node, does not mutate the input. Every
+    value is rounded to 4 decimals to keep the emitted JSON clean.
+    """
+    sm = sum(s) / 3.0
+    r = lambda v: round(v, 4)
+
+    def sc(v):  # scale a 3-vector coordinate / extent
+        return [r(v[0] * s[0]), r(v[1] * s[1]), r(v[2] * s[2])]
+
+    n = dict(node)
+    prim = n.get("prim")
+    if prim == "sphere":
+        n["center"] = sc(n["center"]); n["radius"] = r(n["radius"] * sm)
+    elif prim == "ellipsoid":
+        n["center"] = sc(n["center"]); n["radii"] = sc(n["radii"])
+    elif prim == "box":
+        n["center"] = sc(n["center"]); n["half"] = sc(n["half"])
+        if n.get("round") is not None:
+            n["round"] = r(n["round"] * sm)
+    elif prim in ("capsule", "roundcone"):
+        n["a"] = sc(n["a"]); n["b"] = sc(n["b"])
+        for key in ("r1", "r2", "radius"):
+            if n.get(key) is not None:
+                n[key] = r(n[key] * sm)
+    elif prim == "tube":
+        n["points"] = [sc(p) for p in n["points"]]
+        if n.get("profile") is not None:
+            n["profile"] = [r(p * sm) for p in n["profile"]]
+        if n.get("radius") is not None:
+            n["radius"] = r(n["radius"] * sm)
+    elif prim == "plane":
+        # Half-space cut moves with the geometry: the offset is along the
+        # (un-normalized) normal, so scale it by the factor along that direction.
+        nm = n["normal"]
+        ln = math.sqrt(nm[0] ** 2 + nm[1] ** 2 + nm[2] ** 2) or 1.0
+        f = (abs(nm[0]) * s[0] + abs(nm[1]) * s[1] + abs(nm[2]) * s[2]) / ln
+        if n.get("offset") is not None:
+            n["offset"] = r(n["offset"] * f)
+    else:
+        # Op node: scale the blend radius + any displacement, recurse into kids.
+        if n.get("k") is not None:
+            n["k"] = r(n["k"] * sm)
+        if n.get("op") == "displace":
+            if n.get("amp") is not None:
+                n["amp"] = r(n["amp"] * sm)
+            if n.get("freq"):
+                n["freq"] = r(n["freq"] / sm)
+            if n.get("unit"):
+                n["unit"] = r(n["unit"] * sm)
+            if n.get("origin"):
+                n["origin"] = sc(n["origin"])
+        if n.get("nodes") is not None:
+            n["nodes"] = [_scale_sdf(c, s) for c in n["nodes"]]
+        if n.get("node") is not None:
+            n["node"] = _scale_sdf(n["node"], s)
+    return n
+
+
+def _scale_triple(scale: Any) -> list[float]:
+    """Normalize a ``scale`` (scalar or ``[sx, sy, sz]``) to a 3-list."""
+    if isinstance(scale, (int, float)):
+        return [float(scale)] * 3
+    return [float(c) for c in scale]
+
+
+def _directional_extent(radii: tuple[float, float, float], noise: float,
+                        direction: tuple[float, float, float]) -> float:
+    """How far a noise-inflated ellipsoid reaches along a unit ``direction``.
+
+    The support of an axis-aligned ellipsoid with half-extents ``radii`` in a unit
+    direction ``n`` is ``sqrt(sum (r_i * n_i)^2)``; the surface noise can push a
+    vertex out by up to ``noise`` of the radius, so the reach is scaled by
+    ``(1 + noise)``. Used to decide whether two regions overlap and where to seat
+    the seam between them.
+
+    Parameters
+    ----------
+    radii
+        Ellipsoid half-extents ``(rx, ry, rz)`` before deformation.
+    noise
+        Deformation amplitude as a fraction of radius.
+    direction
+        Unit vector along which to measure the reach.
+
+    Returns
+    -------
+    float
+        Maximum distance from the centre to the surface along ``direction``.
+    """
+    rx, ry, rz = radii
+    dx, dy, dz = direction
+    return math.sqrt((rx * dx) ** 2 + (ry * dy) ** 2 + (rz * dz) ** 2) * (1 + noise)
+
+
+def _bisecting_clip_planes(entry: dict[str, Any],
+                           neighbours: list[dict[str, Any]]
+                           ) -> list[dict[str, Any]]:
+    """Local-space cut planes keeping ``entry`` from crossing its neighbours.
+
+    For each same-group blob ``neighbour`` whose body would overlap ``entry``'s,
+    place a flat cut plane at the radius-weighted boundary between the two centres
+    with its normal pointing toward the neighbour. ``buildBlobGeometry`` clamps
+    any vertex past such a plane onto it, so the two regions grow flat mating
+    faces and tile flush instead of interpenetrating (the "jigsaw" look that sells
+    the regions locking together at explode 0 and separating as they explode).
+
+    Adjacency is derived from the geometry, not hand-listed: a pair gets a plane
+    only when the centres are closer than the two bodies' combined reach toward
+    each other, so non-touching pairs (e.g. frontal vs occipital) are skipped. The
+    seam is split in proportion to each body's reach, so a large lobe keeps more
+    of the shared volume than a small neighbour, and because the pair overlaps the
+    seam always lies inside the overlap zone (never cutting past either surface,
+    so no region is reduced to a sliver).
+
+    Planes are authored in ``entry``'s *local* frame (its geometry is centred at
+    the origin and positioned later), exactly like the medial wall. Paired entries
+    are defined on the right hemisphere and the left member mirrors the whole
+    geometry across x, which flips these planes to the correct side for free, so
+    they are computed once from the right-side positions.
+
+    Parameters
+    ----------
+    entry
+        The blob whose planes are computed (must carry ``radii``/``noise``).
+    neighbours
+        Same-group blob entries to test for overlap (``entry`` itself is skipped).
+
+    Returns
+    -------
+    list of dict
+        ``{"point": [x, y, z], "normal": [x, y, z]}`` planes in local coords; the
+        normal is a unit vector pointing toward the neighbour (the removed side).
+    """
+    planes: list[dict[str, Any]] = []
+    cx, cy, cz = entry["pos"]
+    for other in neighbours:
+        if other is entry:
+            continue
+        ox, oy, oz = other["pos"]
+        dx, dy, dz = ox - cx, oy - cy, oz - cz
+        dist = math.sqrt(dx * dx + dy * dy + dz * dz)
+        if dist < 1e-6:
+            continue
+        n = (dx / dist, dy / dist, dz / dist)
+        reach_self = _directional_extent(entry["radii"], entry["noise"], n)
+        reach_other = _directional_extent(
+            other["radii"], other["noise"], (-n[0], -n[1], -n[2]))
+        # No overlap along this axis: the surfaces never meet, nothing to cut.
+        if dist >= reach_self + reach_other:
+            continue
+        # Seam distance from this centre toward the neighbour, split in proportion
+        # to each body's reach. Since dist < reach_self + reach_other, this stays
+        # < reach_self (and the complement < reach_other), so the cut sits inside
+        # the overlap and never reaches past either surface.
+        seam = dist * reach_self / (reach_self + reach_other)
+        planes.append({
+            "point": [round(n[0] * seam, 3), round(n[1] * seam, 3),
+                      round(n[2] * seam, 3)],
+            "normal": [round(n[0], 3), round(n[1], 3), round(n[2], 3)],
+        })
+    return planes
