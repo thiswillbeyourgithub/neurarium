@@ -114,8 +114,8 @@ not the text. Anyone holding a copy can reproduce the extraction and confirm eve
 scripts rebuild exactly what the gate checks against:
 
 ```sh
-uv run tools/pdf_to_pages.py    # the PDF -> one Markdown file per page
-uv run tools/build_index.py     # the per-drug page index
+uv run tools/fetch/pdf_to_pages.py    # the PDF -> one Markdown file per page
+uv run tools/fetch/build_index.py     # the per-drug page index
 python tools/check_data.py      # re-verifies every quote is on its cited page
 ```
 

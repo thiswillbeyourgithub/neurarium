@@ -437,14 +437,14 @@ provenance).
 
 Two third-party image sources, handled differently on purpose.
 
-- **Molecule images** (vendored same-origin; CSP `img-src 'self' data:`). `tools/fetch_molecules.py`
+- **Molecule images** (vendored same-origin; CSP `img-src 'self' data:`). `tools/fetch/fetch_molecules.py`
   downloads each drug's lead infobox SVG via the MediaWiki `pageimages` API into
   `public/data/molecules/<id>.svg` (`.svg` only, `<script>` stripped); writes
   `tools/generated_cache/molecules_sources.json`. `generate_data.py` emits `structure_image` only when the file
   exists. `showDrug` renders it as `<img class="mol-structure">` with CSS `filter: invert(1)` for the
   dark panel (so the page declares `color-scheme: dark`). No image if absent.
 - **Structure images** (hot-linked from Wikimedia; the multi-MB GIFs are NOT vendored, only the url).
-  `tools/fetch_structure_images.py` resolves a **hero** per **base** (fallback: `.gif` -> `.svg` ->
+  `tools/fetch/fetch_structure_images.py` resolves a **hero** per **base** (fallback: `.gif` -> `.svg` ->
   infobox/lead; pdf/djvu lead -> first-page JPG) + a **gallery** (`gather_gallery`: the other gif/svg
   on the base's EN+FR articles, chrome excluded via `_is_gallery_chrome`, capped `MAX_GALLERY`) into
   `tools/generated_cache/structure_images_sources.json`, downloading no bytes (`IMAGE_OVERRIDES` wins for the hero).

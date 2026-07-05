@@ -180,14 +180,14 @@ one source shape everywhere:
    silently dropping it, so the residual `llm` set is honest.
 
 **Deliverables.**
-- `tools/fetch_allen.py` — resolve each gene's probe(s), download the per-donor microarray +
+- `tools/fetch/fetch_allen.py` — resolve each gene's probe(s), download the per-donor microarray +
   `PACall` + `SampleAnnot` + `Ontology` from the Allen API (`api.brain-map.org`) /
   `human.brain-map.org` bulk, apply the crosswalk, aggregate PACall over each base's samples,
   emit `sources/allen/pages/<gene>.md` + `sources/allen/worklist.json`. Stdlib urllib, polite,
   idempotent, `--only`/`--refresh` (mirror `fetch_gtopdb.py`). Filters to our genes' probes
   early so it caches only the slice, not the multi-hundred-MB full CSVs.
 - The Allen->base **crosswalk** + **`TARGET_GENES`** map (live in `fetch_allen.py`).
-- **Apply step** — extend `tools/apply_location_sources.py` with a deterministic
+- **Apply step** — extend `tools/sourcing/apply_location_sources.py` with a deterministic
   `--corpus allen` mode (no judged file: it reads the worklist + the *existing* location
   lists straight from the emitted data and confirms) rather than a second tool, so the
   merge-into-`location_sources.json` + dedup logic is not duplicated. Handles **both**
@@ -377,7 +377,7 @@ bullet(s) under each drug's "## Class" heading. A Haiku pass extracted each drug
 verbatim class descriptor (with a fallback for 9 drugs whose descriptor was displaced by
 the PDF-to-Markdown layout scramble), a Sonnet pass judged whether that descriptor
 supports our category IDs (catching mis-mappings, the way the NbN gate does), and the new
-`tools/apply_category_sources.py` re-found each accepted quote in the drug's Stahl page
+`tools/sourcing/apply_category_sources.py` re-found each accepted quote in the drug's Stahl page
 range and wrote it as a `verified` `category_sources` entry. `check_data.py`'s quote gate
 re-confirms all of them on-page. This mirrors the drug-binding extract/judge/quote-check
 pipeline; a programmatic-only pass was not enough because our `categories` are a coarse

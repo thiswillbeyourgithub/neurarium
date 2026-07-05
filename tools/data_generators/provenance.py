@@ -155,7 +155,7 @@ def _merge_external_location_sources() -> None:
     into the two registries above.
 
     That file is machine-written by the expression-sourcing pipeline (fetch ->
-    judge -> ``tools/apply_location_sources.py``, e.g. from GtoPdb tissue
+    judge -> ``tools/sourcing/apply_location_sources.py``, e.g. from GtoPdb tissue
     distributions), so the bulk of per-region sources lives in a sibling JSON rather
     than inline here (mirroring ``drugs_data.jsonl`` / ``*_images_sources.json``); the
     in-code dicts above stay the place for any hand-authored override. Shape:
@@ -306,7 +306,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         # Expression/localization corpus: the IUPHAR/BPS Guide to Pharmacology
         # per-target "Tissue Distribution" statements, backing a receptor/target
         # expression-region claim ("R is found in region B"). Fetched from the GtoPdb
-        # web service (tools/fetch_gtopdb.py) and cached author-side as one page per
+        # web service (tools/fetch/fetch_gtopdb.py) and cached author-side as one page per
         # target id: each `location_sources` quote is a verbatim `tissue` string and
         # its `page` is the GtoPdb target id, so the normal verbatim-quote gate
         # applies unchanged. Many entries are rat/mouse, so each source carries a
@@ -323,7 +323,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         # `ki` annotation. Unlike the book corpora this is a single CSV of assay
         # rows, not paged text, so it has no `pages_dir`; check_data confirms a
         # cited Ki id/value against the `csv` file instead (author-side, skipped on
-        # a clone without it, like the quote gate). See tools/fetch_ki.py +
+        # a clone without it, like the quote gate). See tools/fetch/fetch_ki.py +
         # data_sources/books/pdsp_ki/README.md.
         "ref": "PDSP Ki Database (NIMH PDSP)",
         "citation": "NIMH Psychoactive Drug Screening Program (PDSP) Ki Database, "
@@ -336,7 +336,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         # Expression corpus: the Allen Human Brain Atlas microarray, backing a
         # receptor/target expression-region claim ("X is found in region B") the
         # GtoPdb tissue comments could not reach (esp. the non-receptor targets +
-        # the deep nuclei). tools/fetch_allen.py aggregates Allen's PACall
+        # the deep nuclei). tools/fetch/fetch_allen.py aggregates Allen's PACall
         # present/absent boolean per (gene, region) across the 6 donors and writes one
         # cached page per gene (`page` = the HGNC gene symbol): each `location_sources`
         # quote is a verbatim presence line, so the normal verbatim-quote gate applies

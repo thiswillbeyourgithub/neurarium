@@ -12,7 +12,7 @@ This is an *authoring* helper (it reads the author-side ``data_sources/books/sta
 not part of the served site. Stdlib only.
 
 Usage:
-    python tools/build_source_worklist.py [--limit N] [--out PATH]
+    python tools/sourcing/build_source_worklist.py [--limit N] [--out PATH]
 
 ``--limit`` keeps only the first N drugs (a cheap validation slice before the full
 run). Output is JSON: a list of {id, name, pages:[start,end], bindings:[...]}.
@@ -24,7 +24,7 @@ import json
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent   # repo root (script in tools/sourcing/)
 DATA = ROOT / "public" / "data"
 INDEX = ROOT / "data_sources" / "books" / "stahl" / "INDEX.md"
 

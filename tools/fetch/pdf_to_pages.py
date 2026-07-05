@@ -15,9 +15,9 @@ appears on its cited page. The defaults target the Stahl corpus so anyone with
 that book can reproduce it in one command; pass --pdf/--out for another book.
 
 Usage (from the repo root):
-    uv run tools/pdf_to_pages.py                 # regenerate the Stahl pages (defaults)
-    uv run tools/pdf_to_pages.py --pdf foo.pdf --out data_sources/books/foo/pages
-    uv run tools/pdf_to_pages.py --zero-pad      # 0001.md, 0002.md, ... (sortable)
+    uv run tools/fetch/pdf_to_pages.py                 # regenerate the Stahl pages (defaults)
+    uv run tools/fetch/pdf_to_pages.py --pdf foo.pdf --out data_sources/books/foo/pages
+    uv run tools/fetch/pdf_to_pages.py --zero-pad      # 0001.md, 0002.md, ... (sortable)
 
 Built with the help of Claude Code.
 """
@@ -30,7 +30,7 @@ from pathlib import Path
 import pymupdf4llm
 
 # Defaults target the Stahl corpus from the repo root, so a bare
-# `uv run tools/pdf_to_pages.py` regenerates the pages the quote-verification gate
+# `uv run tools/fetch/pdf_to_pages.py` regenerates the pages the quote-verification gate
 # (tools/check_data.py) checks against. Point --pdf/--out elsewhere for another book.
 DEFAULT_PDF = "data_sources/books/stahl/Prescriber's Guide_ Stahl's Essential Psychopharmacology.pdf"
 DEFAULT_OUT = "data_sources/books/stahl/pages"

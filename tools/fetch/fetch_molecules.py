@@ -20,10 +20,10 @@ is written to ``tools/generated_cache/molecules_sources.json`` for attribution.
 
 Usage::
 
-    python tools/fetch_molecules.py                 # fetch all missing
-    python tools/fetch_molecules.py --force          # re-fetch everything
-    python tools/fetch_molecules.py --only citalopram,fluoxetine
-    python tools/fetch_molecules.py --limit 5        # first 5 (a smoke test)
+    python tools/fetch/fetch_molecules.py                 # fetch all missing
+    python tools/fetch/fetch_molecules.py --force          # re-fetch everything
+    python tools/fetch/fetch_molecules.py --only citalopram,fluoxetine
+    python tools/fetch/fetch_molecules.py --limit 5        # first 5 (a smoke test)
 
 Needs network access (Wikipedia + upload.wikimedia.org).
 """
@@ -40,7 +40,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-TOOLS = Path(__file__).resolve().parent      # tools/ (anchor; retarget on any relocation)
+TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
 REPO = TOOLS.parent
 DRUGS_JSONL = REPO / "public" / "data" / "drugs.jsonl"
 OUT_DIR = REPO / "public" / "data" / "molecules"

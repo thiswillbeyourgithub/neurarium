@@ -12,8 +12,8 @@ page before the next monograph; the last drug stops at the back-matter
 ("Index by Drug Name").
 
 Usage (from the repo root):
-    uv run tools/build_index.py           # reads data_sources/books/stahl/pages -> its INDEX.md
-    uv run tools/build_index.py --pages PAGES_DIR --out INDEX.md
+    uv run tools/fetch/build_index.py           # reads data_sources/books/stahl/pages -> its INDEX.md
+    uv run tools/fetch/build_index.py --pages PAGES_DIR --out INDEX.md
 
 Built with the help of Claude Code.
 """

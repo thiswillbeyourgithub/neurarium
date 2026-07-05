@@ -286,7 +286,7 @@ def _structure_record(entry: dict[str, Any], structure_id: str,
         symmetric pair, never for midline structures).
     images
         Map of base id -> image record (see :func:`_load_structure_images` /
-        ``tools/fetch_structure_images.py``); a match adds a ``structure_image`` url
+        ``tools/fetch/fetch_structure_images.py``); a match adds a ``structure_image`` url
         (the hero) and, when present, a ``structure_image_gallery`` list of further
         gif/svg urls the panel reveals on "show more". A non-match omits both.
 
@@ -689,7 +689,7 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     molecule_ids
         Drug ids that have a vendored structure SVG under
         ``public/data/molecules/`` (see :func:`_available_molecule_ids` /
-        ``tools/fetch_molecules.py``); a match adds a ``structure_image`` path the
+        ``tools/fetch/fetch_molecules.py``); a match adds a ``structure_image`` path the
         viewer embeds, a non-match simply omits it.
 
     Returns
@@ -798,7 +798,7 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
 def _available_molecule_ids() -> set[str]:
     """Drug ids that have a vendored structure SVG under ``public/data/molecules/``.
 
-    Those files are produced by the authoring tool ``tools/fetch_molecules.py``
+    Those files are produced by the authoring tool ``tools/fetch/fetch_molecules.py``
     (which hits the network); this offline generator only *checks for their
     presence*. The presence of ``<id>.svg`` is the single source of truth for
     whether a drug gets a ``structure_image`` (see :func:`_drug_record`), so the
@@ -817,7 +817,7 @@ def _load_image_sources(filename: str) -> dict[str, dict[str, Any]]:
     illustration GIFs are too large to commit, so the viewer **hot-links** them
     from Wikimedia at runtime (with a spinner / silent-fail, see ``showStructure`` /
     ``showCircuit``): only the URL is stored in the data, not the binary. The URLs are
-    resolved author-side by ``tools/fetch_structure_images.py`` (which hits the
+    resolved author-side by ``tools/fetch/fetch_structure_images.py`` (which hits the
     network) and recorded in that small JSON; this offline generator just reads it, so
     an owner gets a ``structure_image`` (the lead hero) plus a
     ``structure_image_gallery`` (the other gif/svg from its EN+FR articles, for the

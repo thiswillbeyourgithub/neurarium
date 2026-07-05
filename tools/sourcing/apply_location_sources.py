@@ -16,14 +16,14 @@ file; a confirm-only LLM judge maps each receptor region to a candidate tissue q
 **index** (no free text, no drift). Pages: ``data_sources/gtopdb/pages/<targetId>.md``.
 
 ``--corpus allen``: reads ``data_sources/allen/confirmed.json`` (written by
-``tools/fetch_allen.py``, which aggregates the Allen microarray PACall boolean into a
+``tools/fetch/fetch_allen.py``, which aggregates the Allen microarray PACall boolean into a
 deterministic present/absent per (gene, region) -> no judge needed). Pages:
 ``data_sources/allen/pages/<gene>.md``; every source is ``species: Human``.
 
 Run from the repo root, then regenerate + check::
 
-    python tools/apply_location_sources.py --corpus gtopdb --judged data_sources/gtopdb/judged.json
-    python tools/apply_location_sources.py --corpus allen
+    python tools/sourcing/apply_location_sources.py --corpus gtopdb --judged data_sources/gtopdb/judged.json
+    python tools/sourcing/apply_location_sources.py --corpus allen
     python tools/generate_data.py && python tools/check_data.py
 
 Built with the help of Claude Code.
@@ -35,7 +35,7 @@ import json
 import sys
 from pathlib import Path
 
-TOOLS = Path(__file__).resolve().parent      # tools/ (anchor; retarget on any relocation)
+TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/sourcing/)
 REPO = TOOLS.parent
 GTOPDB = REPO / "data_sources" / "gtopdb"
 WORKLIST = GTOPDB / "worklist.json"
@@ -52,7 +52,7 @@ from check_data import normalize_for_match  # noqa: E402  (reuse the gate's norm
 def load_worklist() -> dict[str, dict]:
     """Index the GtoPdb worklist by owner id (receptor_id)."""
     if not WORKLIST.exists():
-        raise SystemExit(f"error: {WORKLIST} missing; run tools/fetch_gtopdb.py first")
+        raise SystemExit(f"error: {WORKLIST} missing; run tools/fetch/fetch_gtopdb.py first")
     return {w["receptor_id"]: w for w in json.loads(WORKLIST.read_text("utf-8"))}
 
 
@@ -109,7 +109,7 @@ def collect_allen() -> tuple[list[tuple], list[str], int]:
     no judge: fetch_allen already computed present regions). Re-confirm the quote on the
     cached gene page and guard base against the owner's current regions (confirm-only)."""
     if not ALLEN_CONFIRMED.exists():
-        raise SystemExit(f"error: {ALLEN_CONFIRMED} missing; run tools/fetch_allen.py first")
+        raise SystemExit(f"error: {ALLEN_CONFIRMED} missing; run tools/fetch/fetch_allen.py first")
     confirmed = json.loads(ALLEN_CONFIRMED.read_text("utf-8"))
     rec_regions, tgt_regions = owner_regions()
     page_cache: dict[str, str] = {}

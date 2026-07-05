@@ -26,9 +26,9 @@ Outputs (author-side, under the gitignored ``data_sources/gtopdb/``):
 The GtoPdb contents are CC BY-SA 4.0 (the licence the project already attributes for
 Wikipedia text/molecule images). Run from the repo root::
 
-    python tools/fetch_gtopdb.py            # fetch all mapped receptors, write worklist
-    python tools/fetch_gtopdb.py --only 5ht2a,d2
-    python tools/fetch_gtopdb.py --refresh  # refetch even cached targets
+    python tools/fetch/fetch_gtopdb.py            # fetch all mapped receptors, write worklist
+    python tools/fetch/fetch_gtopdb.py --only 5ht2a,d2
+    python tools/fetch/fetch_gtopdb.py --refresh  # refetch even cached targets
 
 Built with the help of Claude Code.
 """
@@ -45,7 +45,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent   # script lives in tools/fetch/
 OUT = REPO / "data_sources" / "gtopdb"
 RAW = OUT / "raw"
 PAGES = OUT / "pages"

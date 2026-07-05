@@ -259,7 +259,7 @@ The detailed recipes (with the exact fields and gotchas) are in CLAUDE.md under
 - **A new drug**: add an entry to `tools/data/drugs_data.jsonl` (categories + bindings,
   each binding a `target` + `action` from the drug vocabularies in
   `generate_data.py`); it shows up in the Drugs legend section automatically. Run
-  `python tools/fetch_molecules.py` to also pull its molecular-structure SVG.
+  `python tools/fetch/fetch_molecules.py` to also pull its molecular-structure SVG.
 - **A Wikipedia link**: add the region's base id + URL to the `WIKIPEDIA` registry.
 
 The legend, colours, and headings are all derived from the data at runtime, so

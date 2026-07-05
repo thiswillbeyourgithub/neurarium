@@ -35,8 +35,8 @@ Pipeline (mirrors ``fetch_gtopdb.py`` -> ``apply_location_sources.py``):
 Stdlib only (urllib + zipfile + csv). Idempotent; ``--only``/``--donors``/``--refresh``.
 Run from the repo root::
 
-    python tools/fetch_allen.py                      # all targets + receptors, all donors
-    python tools/fetch_allen.py --only sert,dat,mao_a --donors 9861   # prove on one donor
+    python tools/fetch/fetch_allen.py                      # all targets + receptors, all donors
+    python tools/fetch/fetch_allen.py --only sert,dat,mao_a --donors 9861   # prove on one donor
 
 Built with the help of Claude Code.
 """
@@ -52,8 +52,8 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-TOOLS = Path(__file__).resolve().parent
+TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
+REPO = TOOLS.parent
 ALLEN = REPO / "data_sources" / "allen"
 RAW = ALLEN / "raw"
 PAGES = ALLEN / "pages"

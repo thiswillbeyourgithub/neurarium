@@ -18,10 +18,10 @@ reference). The page links point at the per-page Markdown files written by
 so the two scripts compose: split with `pdf_to_pages.py`, index with this.
 
 Usage (from the repo root):
-    uv run tools/build_toc_index.py --pdf book.pdf                 # -> INDEX.md
-    uv run tools/build_toc_index.py --pdf book.pdf --pages DIR --out INDEX.md
-    uv run tools/build_toc_index.py --pdf book.pdf --max-level 3   # cap outline depth
-    uv run tools/build_toc_index.py --pdf book.pdf --title "Kandel 6e"  # override heading
+    uv run tools/fetch/build_toc_index.py --pdf book.pdf                 # -> INDEX.md
+    uv run tools/fetch/build_toc_index.py --pdf book.pdf --pages DIR --out INDEX.md
+    uv run tools/fetch/build_toc_index.py --pdf book.pdf --max-level 3   # cap outline depth
+    uv run tools/fetch/build_toc_index.py --pdf book.pdf --title "Kandel 6e"  # override heading
 
 Built with the help of Claude Code.
 """

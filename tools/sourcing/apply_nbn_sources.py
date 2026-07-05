@@ -28,7 +28,7 @@ re-confirms the stored quote is on the page). Idempotent: a drug already carryin
 ``nbn_sources`` is left untouched. Stdlib only; authoring helper, not served.
 
 Usage:
-    python tools/apply_nbn_sources.py [--dry-run]
+    python tools/sourcing/apply_nbn_sources.py [--dry-run]
 
 Built with the help of Claude Code.
 """
@@ -36,11 +36,12 @@ import argparse
 import importlib.util
 import json
 import re
+import sys
 from pathlib import Path
 
-import drugs_io
-
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent   # repo root (script in tools/sourcing/)
+sys.path.insert(0, str(ROOT / "tools"))                # reach the shared drugs_io module
+import drugs_io  # noqa: E402
 DRUGS_JSON = drugs_io.DRUGS_PATH
 PAGES = ROOT / "data_sources" / "books" / "stahl" / "pages"
 INDEX = ROOT / "data_sources" / "books" / "stahl" / "INDEX.md"

@@ -5,7 +5,7 @@ record its **URL** so the viewer can hot-link it at runtime.
 Anatomy articles very often open with a rotating-brain GIF that highlights the
 structure in colour (the Life Science Databases / Anatomography set), which is far
 more legible than a static line drawing. Unlike the drug molecule SVGs (small, so
-vendored same-origin by ``tools/fetch_molecules.py``), these animations are large
+vendored same-origin by ``tools/fetch/fetch_molecules.py``), these animations are large
 (several MB each), so they are **not** committed to the repo: the viewer embeds them
 by hot-linking the Wikimedia URL directly (the site's CSP allows
 ``img-src https://upload.wikimedia.org``), with a spinner while it loads and a silent
@@ -52,11 +52,11 @@ the JSON metadata needed to resolve each URL.
 
 Usage::
 
-    python tools/fetch_structure_images.py                 # structures + circuits, missing
-    python tools/fetch_structure_images.py --force          # re-resolve everything
-    python tools/fetch_structure_images.py --only hippocampus,amygdala
-    python tools/fetch_structure_images.py --target circuits # only the circuit heroes
-    python tools/fetch_structure_images.py --limit 5        # first 5 per target (smoke test)
+    python tools/fetch/fetch_structure_images.py                 # structures + circuits, missing
+    python tools/fetch/fetch_structure_images.py --force          # re-resolve everything
+    python tools/fetch/fetch_structure_images.py --only hippocampus,amygdala
+    python tools/fetch/fetch_structure_images.py --target circuits # only the circuit heroes
+    python tools/fetch/fetch_structure_images.py --limit 5        # first 5 per target (smoke test)
 
 Needs network access (Wikipedia API).
 """
@@ -74,7 +74,7 @@ from pathlib import Path
 # live in tools/, so a plain import resolves when run as `python tools/<name>.py`.
 from fetch_molecules import API as EN_API, _is_chrome, article_title, http_json
 
-TOOLS = Path(__file__).resolve().parent      # tools/ (anchor; retarget on any relocation)
+TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
 REPO = TOOLS.parent
 STRUCTURES_JSONL = REPO / "public" / "data" / "structures.jsonl"
 CIRCUITS_JSONL = REPO / "public" / "data" / "circuits.jsonl"

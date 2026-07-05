@@ -18,9 +18,9 @@ specific representative row for each target so a value measured in rat (not huma
 is never silently presented as if it were human.
 
 Usage:
-    python tools/fetch_ki.py --drug risperidone            # preview our bound targets
-    python tools/fetch_ki.py --drug risperidone --all      # + candidate extra targets
-    python tools/fetch_ki.py --drug risperidone --json OUT  # write the preview JSON
+    python tools/fetch/fetch_ki.py --drug risperidone            # preview our bound targets
+    python tools/fetch/fetch_ki.py --drug risperidone --all      # + candidate extra targets
+    python tools/fetch/fetch_ki.py --drug risperidone --json OUT  # write the preview JSON
 """
 
 import argparse
@@ -31,10 +31,10 @@ import re
 import statistics
 import sys
 
-import drugs_io
-
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(HERE)
+REPO = os.path.dirname(os.path.dirname(HERE))   # repo root (script in tools/fetch/)
+sys.path.insert(0, os.path.dirname(HERE))        # tools/ for the shared drugs_io module
+import drugs_io  # noqa: E402
 CSV_PATH = os.path.join(REPO, "data_sources", "books", "pdsp_ki", "KiDatabase.csv")
 
 # The CSV column names (note the leading space PDSP put on " Ligand Name").
