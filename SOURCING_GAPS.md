@@ -197,7 +197,7 @@ one source shape everywhere:
 - **Attribution**: Hawrylycz 2012 in the About panel's sources block.
 - **Author-side `sources/allen/` tree** (gitignored: `raw/` download cache, `pages/<gene>.md`,
   `worklist.json`), documented in `CLAUDE.local.md` alongside the `sources/gtopdb/` tree.
-- **Docs**: `CLAUDE.md` (corpus #8 in File map + Source provenance), this file, the
+- **Docs**: `CLAUDE.md` (corpus #8 in Source provenance) + `tools/README.md` (Tool reference), this file, the
   `expression-source-options` memory (mark Phase 2 done), README stats refresh.
 
 **Sub-phasing (prove cheap, then scale).**

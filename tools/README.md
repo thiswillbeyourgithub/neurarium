@@ -1,8 +1,10 @@
 # Authoring & data tooling
 
-Runbooks for editing the dataset and refreshing external assets. The map of what
-each script is lives in [`../CLAUDE.md`](../CLAUDE.md) (File map); this file is the
-step-by-step *how*. Author-side corpus locations are in `CLAUDE.local.md`.
+Runbooks for editing the dataset and refreshing external assets, plus the reference
+for **what each tool is** (Tool reference, below) and the **emitted data contract**
+(Data contract, below). Both moved here from [`../CLAUDE.md`](../CLAUDE.md) to keep that
+file terse; CLAUDE.md keeps the viewer/runtime map and the non-obvious rules. Author-side
+corpus locations are in `CLAUDE.local.md`.
 
 ## Changing the data
 
@@ -108,3 +110,122 @@ network, idempotent, polite; each touches only what changed). Always finish with
 
 Panel **descriptions** need no refresh script: each fetches the current Wikipedia lead
 at runtime (`js/wiki.js`), so they stay current on their own.
+
+## Tool reference
+
+What each authoring / fetch / check script in `tools/` is (one line each). The dev/runtime
+tooling (`serve.py`, `shot.py`, `demos/`) is also summarized in `../CLAUDE.md` (Running,
+Screenshots).
+
+- `generate_data.py` — single source of truth for the anatomy (stdlib-only, offline):
+  defines every region/projection/receptor once, emits the artifacts below. Drugs are the
+  exception (authored in `tools/drugs_data.json`, read by `_load_drugs`). Display strings are
+  `{en,fr}` via `_t()` (see CLAUDE.md I18n).
+- `tools/drugs_data.json` — the authored drug dataset (from Stahl 8th ed.), read by
+  `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
+- `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
+- `tools/serve.py` — stdlib dev server, `Cache-Control: no-store`, roots at `public/` (see CLAUDE.md Running).
+- `tools/shot.py` — Playwright screenshot helper (see CLAUDE.md Screenshots).
+- `tools/demos/` — Playwright demo-video recorder: `recorder.py` (a `Demo` API) + `neurarium.py`
+  (the showcase tour, writes the README hero `docs/preview.gif`). Needs ffmpeg+gifski+GPU; see
+  `tools/demos/README.md`.
+- `tools/build_source_worklist.py` — lists not-yet-sourced drug bindings with Stahl page ranges
+  (input to the source-extraction workflow; resumable).
+- `tools/apply_source_quotes.py` — applies the extraction workflow's accepted quotes onto
+  bindings (re-finds the quote in the page range; idempotent).
+- `tools/apply_nbn_sources.py` — sources each drug's NbN line (greps Stahl's verbatim line,
+  substring-confirms, no judge); falls back to the drug **Class** line (`nbn_nonstandard`) for a
+  newer drug with no NbN line. Idempotent.
+- `tools/apply_category_sources.py` — sources each drug's class classification (`drug_categories`)
+  from an extract/judge results file (a judge is needed: our coarse `categories` re-map Stahl's
+  free-text class line, unlike the fixed NbN field). Idempotent.
+- `tools/fetch_gtopdb.py` — fetches receptor tissue-distribution comments from the Guide to
+  Pharmacology API (corpus #7 `gtopdb`), the source for **receptor expression regions**;
+  `RECEPTOR_GENES` maps receptor->gene->targetId. Caches `sources/gtopdb/` + `worklist.json`
+  (each quote carries assay species). See CLAUDE.md Expression locations.
+- `tools/fetch_allen.py` — fetches the Allen Human Brain Atlas microarray (corpus #8
+  `allen_ahba`), the source for **target expression regions** + the receptor regions GtoPdb
+  misses; a PACall detection-boolean vote per (gene, region), no judge. `TARGET_GENES` +
+  `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `sources/allen/` + `confirmed.json`.
+  See CLAUDE.md Expression locations.
+- `tools/apply_location_sources.py` — merges accepted expression quotes into
+  `tools/location_sources.json`, `--corpus {gtopdb,allen}` (gtopdb needs a judged file; allen is
+  deterministic). Idempotent. See CLAUDE.md Expression locations.
+- `tools/location_sources.json` — machine-written bulk location sources, loaded by
+  `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
+- `tools/fetch_ki.py` — parses the PDSP Ki CSV (`sources/books/pdsp_ki/`, author-side) into
+  per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
+  bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.
+- `tools/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
+  `uv run`, `--layout` for OCR.
+- `tools/build_toc_index.py` — `INDEX.md` from a PDF's embedded TOC (generic). `uv run`.
+- `tools/build_index.py` — Stahl-specific page index (by `THERAPEUTICS` heading). `uv run`.
+- `tools/update_readme_stats.py` — rewrites the README `SOURCING_STATS` + `SOURCES_TABLE` blocks
+  (and the headline %) from `meta`; `--check` exits 1 if stale (CI). Idempotent.
+- `tools/fetch_molecules.py` — downloads each drug's molecule SVG into `public/data/molecules/`;
+  writes `tools/molecules_sources.json`. See CLAUDE.md Images.
+- `tools/fetch_structure_images.py` — resolves the *url* of each structure's (and wiki-linked
+  circuit's) Wikipedia hero + gallery images into `tools/{structure,circuit}_images_sources.json`
+  (`--target structures|circuits|all`); downloads no bytes. See CLAUDE.md Images.
+- `tools/{molecules,structure_images,circuit_images}_sources.json` — provenance/attribution for
+  the fetch tools (the image ones are read by `generate_data.py` offline; not served).
+- `tools/git-hooks/` — repo-tracked git hooks (see CLAUDE.md Git hooks).
+
+## Data contract (emitted `public/data/`)
+
+The field list of each emitted file. The viewer reads exactly these shapes; the generator
+emits them. Every claim carries its own quote-level source (see CLAUDE.md Source provenance);
+there is no node-level catch-all `sources` block.
+
+- `meta.json` — presentation maps + tallies, so the dataset is self-describing (a port needs
+  no hardcoded palette): `projection_colors`, `kind_labels`, `group_labels`, `kind_signs`,
+  `sign_colors`, `sign_labels`, `system_flow_kinds` (drug target system -> projection kind),
+  the receptor maps (`receptor_family_labels` key order = legend family order,
+  `receptor_class_labels`, `synaptic_labels`), the drug maps (`drug_category_labels` key order =
+  Drugs legend order, `drug_actions` action->{label,effect}, `drug_effect_colors`,
+  `drug_effect_labels`, `drug_targets` = every non-receptor target + every receptor id),
+  `target_type_labels`/`target_type_colors`, `source_corpora`, `provenance_stats` (the sourcing
+  tally; see CLAUDE.md Source provenance).
+- `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend
+  row), `group`, `position`, `color`, `shape_file`, `classification_provenance`, optional
+  `wikipedia`(+`_provenance`), optional `structure_image` (hot-linked Wikimedia url, shared by
+  both hemispheres) + `structure_image_gallery`.
+- `projections.jsonl` — `from`, `to`, `kind`, `label{en,fr}`, `neurotransmitter{en,fr}`,
+  `description{en,fr}`, optional `sources[{corpus,page,quote,provenance}]` (from `KANDEL_QUOTES`),
+  `bidirectional`, `tentative` (dotted, off-by-default section).
+- `circuits.jsonl` — `id`, `name{en,fr}`, `structures[ids]` (arrows derived in the viewer),
+  optional `description{en,fr}` + `sources` + `wikipedia`(+prov) + `structure_image` (+ gallery);
+  same shape + rendering as a structure's.
+- `projection_groups.jsonl` — a legend pathway row promoted to a sourced structure so it opens a
+  panel: `id` (`<mode>_<key>`), `mode` (kind|sign), `key`, `name{en,fr}`, `description{en,fr}`,
+  `classification_provenance`, optional `wikipedia`(+prov) + `sources`. One record per group in
+  BOTH colour modes (7 per-transmitter + 3 per-sign); member pathways derived in the viewer.
+- `receptors.jsonl` — `id`, `name`, `family`, `neurotransmitter{en,fr}`, `receptor_class`
+  (ionotropic/metabotropic/chaperone), `sign` (excit/inhib/modulatory), `synaptic`
+  (pre/post/both), `locations` (structure *base* ids, both hemispheres), optional
+  `ubiquitous:true`, `classification_provenance` (mechanism grade only), optional
+  `location_sources` (`{base:[quote-source]}`, sparse per-region upgrade above `llm`; `"ALL"` =
+  the ubiquitous claim), optional `description{en,fr}` + `wikipedia`(+prov). Empty locations + no
+  description = a deliberate stub (listed, not focusable).
+- `drugs.jsonl` — `id`, `name`, `categories`, `category_provenance` (+ optional
+  `category_sources`), optional `nbn{en,fr}` (+ `nbn_sources`, + `nbn_nonstandard:true` when the
+  value is Stahl's class descriptor not a formal NbN), `bindings[]` (each: `target`, `action`,
+  optional `effect`/`note{en,fr}`/`tentative`/`sources[{corpus,page,quote,provenance}]`/`ki`
+  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
+  optional `wikipedia`(+prov), optional `structure_image` (vendored `data/molecules/<id>.svg`,
+  only when the file exists), `focusable`. No drug-level source: provenance is per-claim (see
+  CLAUDE.md Source provenance).
+- `molecules/<id>.svg` — vendored per-drug structure diagrams (`fetch_molecules.py`). Structure
+  illustrations are NOT vendored (hot-linked, see CLAUDE.md Images).
+
+Geometry (`data/shapes/<name>.json`): one file per distinct *form*. L/R pairs share a single
+right-side file; the left member sets `mirror:true` on its structure record and the viewer
+reflects it across x. Three types:
+- `blob` `{radii, seed, detail, noise, + optional octaves/ridged/frequency/aniso/
+  clip/clip_planes}` — a gradient-noise-deformed ellipsoid.
+- `curve` `{points, profile, seed, noise, radial/tubular_segments}` — a
+  round-capped tapered tube swept along a spline (caudate; brainstem levels
+  midbrain/pons/medulla).
+- `composite` `{parts:[...]}` — sub-shapes (each optional offset/scale/rotate)
+  merged into one mesh (cerebellum = 2 hemispheres + vermis). The `sdf` type (SDF atlas,
+  under `geometry_refinements/`) is documented there; see CLAUDE.md's geometry note.

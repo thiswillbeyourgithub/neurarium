@@ -109,7 +109,7 @@ JSONL, one node per line, one file per kind: `structures.jsonl`, `projections.js
 authored in `tools/drugs_data.json`, not the generator), plus vendored
 `molecules/<id>.svg` diagrams. Every claim carries its own quote-level source; there
 is no node-level catch-all `sources` block. The exact field list of each file is in
-CLAUDE.md ("Emitted data"), not duplicated here.
+tools/README.md ("Data contract"), not duplicated here.
 
 `public/data/shapes/<name>.json` is one geometry payload per distinct *form* (symmetric
 pairs share a single right-side file; the left member reflects it). Three shape
