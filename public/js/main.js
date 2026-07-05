@@ -3768,12 +3768,13 @@ function buildAboutSourcing(meta) {
     li.appendChild(h("span", null, t(tip)));
     key.appendChild(li);
   }
-  host.appendChild(key);
 
   // Coverage tally: needs the loaded dataset's provenance stats, so it is skipped
-  // on the first (pre-load, meta=null) call and filled in on the second.
+  // on the first (pre-load, meta=null) call and filled in on the second. The grade
+  // key reads better *after* the bars it explains, so append it last (below the
+  // tally when there is one, otherwise it is all we have to show).
   const stats = meta && meta.provenanceStats;
-  if (!stats) return;
+  if (!stats) { host.appendChild(key); return; }
 
   // A headline over the knowledge nodes, then a per-node-kind bar.
   const a = stats.nodes || {};
@@ -3804,23 +3805,47 @@ function buildAboutSourcing(meta) {
   for (const [kind, labelKey] of Object.entries(KIND_LABELS)) {
     const c = (stats.by_kind || {})[kind];
     if (!c || !c.total) continue;
-    const backed = (c.verified || 0) + (c.sourced || 0);
+    const verified = c.verified || 0;
+    const sourced = c.sourced || 0;
+    // Older meta lacked the llm/nosource split; fall back to lumping them as llm
+    // (grey) so an out-of-date dataset still renders a sensible bar.
+    const nosource = c.nosource != null ? c.nosource : 0;
+    const llm = c.llm != null ? c.llm : (c.missing || 0) - nosource;
+    const backed = verified + sourced;
     const pct = Math.round((100 * backed) / c.total);
-    rows.push({ labelKey, backed, total: c.total, pct });
+    rows.push({ labelKey, verified, sourced, llm, nosource, backed, total: c.total, pct });
   }
   rows.sort((x, y) => y.pct - x.pct || y.total - x.total);
-  for (const { labelKey, backed, total, pct } of rows) {
+  // The four grade segments, strongest to weakest: (count, CSS class, tooltip label).
+  const SEGMENTS = [
+    ["verified", "src-seg-verified", "about.segVerified"],
+    ["sourced", "src-seg-sourced", "about.segSourced"],
+    ["llm", "src-seg-llm", "about.segLlm"],
+    ["nosource", "src-seg-nosource", "about.segNone"],
+  ];
+  for (const r of rows) {
     const row = h("div", "src-stat-row");
-    row.appendChild(h("span", "src-stat-label", t(labelKey)));
-    row.appendChild(h("span", "src-stat-count", `${backed} / ${total} (${pct}%)`));
+    row.appendChild(h("span", "src-stat-label", t(r.labelKey)));
+    row.appendChild(h("span", "src-stat-count", `${r.backed} / ${r.total} (${r.pct}%)`));
     const bar = h("div", "src-stat-bar");
-    const fill = h("span");
-    fill.style.width = `${pct}%`;
-    bar.appendChild(fill);
+    // One flush segment per non-empty grade, width proportional to its share, so a
+    // partly-sourced kind reads as green+yellow+grey+red instead of green-on-empty.
+    for (const [field, cls, labelKey] of SEGMENTS) {
+      const n = r[field];
+      if (!n) continue;
+      const seg = h("span", cls);
+      seg.style.width = `${(100 * n) / r.total}%`;
+      bar.appendChild(seg);
+    }
+    // Native (floating) hover tooltip with the per-grade counts.
+    bar.title = SEGMENTS
+      .map(([field, , labelKey]) => `${t(labelKey)}: ${r[field]}`)
+      .join("  ·  ");
     row.appendChild(bar);
     wrap.appendChild(row);
   }
   host.appendChild(wrap);
+  host.appendChild(key);
 }
 
 /** Wire the DOM controls to the scene behaviors. */

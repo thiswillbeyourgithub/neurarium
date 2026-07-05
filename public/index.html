@@ -839,13 +839,17 @@
         border-radius: 999px;
         background: rgba(160, 168, 178, 0.18);
         overflow: hidden;
+        display: flex;           /* the four grade segments sit side by side */
+        cursor: help;            /* signals the hover tooltip with per-grade counts */
       }
-      .src-stat-bar > span {
-        display: block;
-        height: 100%;
-        border-radius: 999px;
-        background: #66cf85;
-      }
+      /* Grade segments, strongest to weakest, sharing the pill palette so the bar
+         reads like the grade key above it: green verified, yellow sourced, grey llm,
+         red no-source. Widths are set inline (proportional to each grade's count). */
+      .src-stat-bar > span { display: block; height: 100%; }
+      .src-seg-verified { background: #66cf85; }
+      .src-seg-sourced  { background: #e3c14a; }
+      .src-seg-llm      { background: #b6bcc4; }
+      .src-seg-nosource { background: #ef5f6b; }
       /* The section bodies are NOT individually capped/scrolled: the whole panel
          list (#controls-main) is the single scroll area now, so an open section
          shows at its natural height and you scroll through it before reaching the

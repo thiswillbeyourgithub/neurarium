@@ -508,15 +508,25 @@ def _provenance_stats(structures: list[dict[str, Any]],
     def bucket(rank_or_grade: Any) -> str:
         rank = (rank_or_grade if isinstance(rank_or_grade, int)
                 else _GRADE_RANK.get(rank_or_grade, 0))
-        # rank <= 1 (no source object, or a bare ``llm`` grade) => no document => missing.
+        # rank 1 = a bare ``llm`` grade (asserted from memory), rank 0 = no source
+        # object at all. Both are "missing" (no document), but the viewer renders them
+        # differently (grey ``?`` vs orange NOSOURCE), so split them out here too.
         return ("verified" if rank == 3 else
-                "sourced" if rank == 2 else "missing")
+                "sourced" if rank == 2 else
+                "llm" if rank == 1 else "nosource")
 
     def tally(grades: list[Any]) -> dict[str, int]:
-        counts = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
+        # ``missing`` is kept as the llm+nosource sum (the headline / README / check_data
+        # read it); ``llm`` and ``nosource`` are the finer split the sourcing bar renders
+        # as distinct grey and red segments.
+        counts = {"total": 0, "verified": 0, "sourced": 0,
+                  "llm": 0, "nosource": 0, "missing": 0}
         for g in grades:
             counts["total"] += 1
-            counts[bucket(g)] += 1
+            b = bucket(g)
+            counts[b] += 1
+            if b in ("llm", "nosource"):
+                counts["missing"] += 1
         return counts
 
     binding_grades = [_binding_grade(b)
@@ -627,7 +637,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # so adding a node kind is a single-line edit (add it to by_kind) with no second
     # list to keep in sync.
     node_kinds = tuple(k for k in by_kind if k != "references")
-    nodes = {"total": 0, "verified": 0, "sourced": 0, "missing": 0}
+    nodes = {"total": 0, "verified": 0, "sourced": 0,
+             "llm": 0, "nosource": 0, "missing": 0}
     for kind in node_kinds:
         for key in nodes:
             nodes[key] += by_kind[kind][key]

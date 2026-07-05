@@ -273,6 +273,10 @@
       "about.gradeLlm":
         "AI only: may be a hallucination.",
       "about.gradeNone": "No source: none gathered yet.",
+      "about.segVerified": "Verified",
+      "about.segSourced": "Sourced",
+      "about.segLlm": "AI only",
+      "about.segNone": "No source",
       "about.coverageTitle": "Coverage",
       "about.sourcingHeadline":
         "{pct}% of the {total} knowledge nodes here are sourced or verified.",
@@ -542,6 +546,10 @@
       "about.gradeLlm":
         "IA seule : peut être une hallucination.",
       "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
+      "about.segVerified": "Vérifié",
+      "about.segSourced": "Sourcé",
+      "about.segLlm": "IA seule",
+      "about.segNone": "Sans source",
       "about.coverageTitle": "Couverture",
       "about.sourcingHeadline":
         "{pct} % des {total} nœuds de connaissance ici sont sourcés ou vérifiés.",

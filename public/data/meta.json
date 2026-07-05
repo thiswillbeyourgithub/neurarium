@@ -2755,96 +2755,128 @@
         "total": 703,
         "verified": 691,
         "sourced": 0,
+        "llm": 0,
+        "nosource": 12,
         "missing": 12
       },
       "drug_nbn": {
         "total": 116,
         "verified": 116,
         "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
         "missing": 0
       },
       "drug_categories": {
         "total": 165,
         "verified": 156,
         "sourced": 0,
+        "llm": 9,
+        "nosource": 0,
         "missing": 9
       },
       "projections": {
         "total": 103,
         "verified": 99,
         "sourced": 0,
+        "llm": 0,
+        "nosource": 4,
         "missing": 4
       },
       "circuits": {
         "total": 6,
         "verified": 6,
         "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
         "missing": 0
       },
       "projection_groups": {
         "total": 10,
         "verified": 10,
         "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
         "missing": 0
       },
       "receptors": {
         "total": 56,
         "verified": 54,
         "sourced": 0,
+        "llm": 2,
+        "nosource": 0,
         "missing": 2
       },
       "receptor_class": {
         "total": 56,
         "verified": 30,
         "sourced": 0,
+        "llm": 26,
+        "nosource": 0,
         "missing": 26
       },
       "receptor_sign": {
         "total": 56,
         "verified": 13,
         "sourced": 0,
+        "llm": 43,
+        "nosource": 0,
         "missing": 43
       },
       "receptor_synaptic": {
         "total": 56,
         "verified": 8,
         "sourced": 0,
+        "llm": 48,
+        "nosource": 0,
         "missing": 48
       },
       "receptor_locations": {
         "total": 383,
         "verified": 360,
         "sourced": 0,
+        "llm": 23,
+        "nosource": 0,
         "missing": 23
       },
       "targets": {
         "total": 25,
         "verified": 21,
         "sourced": 0,
+        "llm": 4,
+        "nosource": 0,
         "missing": 4
       },
       "target_polarity": {
         "total": 2,
         "verified": 1,
         "sourced": 0,
+        "llm": 1,
+        "nosource": 0,
         "missing": 1
       },
       "target_locations": {
         "total": 124,
         "verified": 108,
         "sourced": 0,
+        "llm": 16,
+        "nosource": 0,
         "missing": 16
       },
       "structures": {
         "total": 52,
         "verified": 52,
         "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
         "missing": 0
       },
       "references": {
         "total": 305,
         "verified": 0,
         "sourced": 305,
+        "llm": 0,
+        "nosource": 0,
         "missing": 0
       }
     },
@@ -2852,6 +2884,8 @@
       "total": 1913,
       "verified": 1725,
       "sourced": 0,
+      "llm": 172,
+      "nosource": 16,
       "missing": 188,
       "backed": 1725,
       "pct_backed": 90
