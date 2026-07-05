@@ -836,74 +836,43 @@ both and indexes groups by `${mode}:${key}` (`projectionGroupsByKey`).
 
 ## Receptors & targets
 
-A focusable section listing the merged `data.targets` = every receptor (from
-`receptors.jsonl`, authored as `RECEPTORS` in `generate_data.py`) **plus** every
-non-receptor drug target from the meta `drug_targets` map (transporters, enzymes, ion
-channels, receptor groups), so a target like SERT is explorable on its own. Built by
-`buildTargetLegend`, grouped by neurotransmitter **system**. **System headings** order
-by **total knowledge nodes** (biggest first): a system's count is the sum over its
-targets of each target's own node + its "Found in" expression regions + the drug
-bindings acting on it (`data.drugsByTarget`, deduped one per drug; a ubiquitous receptor
-counts as one "throughout the brain" region), so a heavily-expressed, heavily-drugged
-system (dopaminergic) leads a sparse one (melatoninergic); the system-less "Other" bucket
-is pinned last. **Members within a system** order **lexicographically** by name
-(`localeCompare`, `numeric` so 5-HT2 precedes 5-HT10). The two sources are normalized to
-one shape in `js/data.js`.
+A focusable section listing the merged `data.targets` = every receptor (`receptors.jsonl`, authored
+as `RECEPTORS`) **plus** every non-receptor drug target from `meta.drug_targets` (transporters,
+enzymes, ion channels, receptor groups), so a target like SERT is explorable on its own. Built by
+`buildTargetLegend`, grouped by neurotransmitter **system**. **System headings** order by total
+knowledge nodes (each target's own node + its "Found in" regions + the bindings on it via
+`data.drugsByTarget`), so a heavily-drugged system leads; "Other" is pinned last. **Members** order
+lexicographically (`localeCompare` `numeric`, so 5-HT2 precedes 5-HT10). Both sources are normalized
+in `js/data.js`.
 
-- A receptor row's swatch = its excit/inhib/modulatory **sign** colour; a non-receptor
-  row's = its **type** colour (`target_type_colors`) + a muted type tag. Clicking a row
-  **focuses** it: dims the brain to its regions via `selection.setCircuit(regionMeshes,
-  [])` (no arrow pin, so pathways fade and the dots are the only bright thing) and calls
-  `createReceptorMarkers.show(regionMeshes, colour)`.
-- **Markers** (`js/receptor-markers.js`): dense additive glowing **gem dots** over each
-  region's surface (a `THREE.Points` cloud sampled from the structure mesh's own
-  geometry and parented to it, so they track explode/mirror and vanish when the mesh
-  hides; a bright core + a 4-point sparkle-star sprite; count scaled per region by
-  surface area; gently pulsed). The single-cloud builder is `buildGemCloud` (+
-  `GEM_DOT_SIZE`), reused by the drug animation. Stopped off the selection state via an
-  `onIsolate` watcher (`createReceptorMarkers.matches`).
-- Panels: a receptor opens `showReceptor` (system, Wikipedia link, the description
-  live-refreshed from Wikipedia, then the classification facts where **each** fact row
-  (neurotransmitter / type / effect / synaptic site) carries the *mechanism* grade pill
-  on its right, not a single "Source" row below; then the "Found in" region list
-  (`locationList`, grouped under anatomical-group sub-headings in the `groupLabels`
-  order, like the Structures legend; a trailing "Other regions" bucket for
-  group-less bases), each region carrying its **own** expression-provenance pill
-  (default `llm`: which regions express a receptor is graded per region, separate
-  from the mechanism, see Source provenance) plus, when it has **no** human assay
-  (every source non-human), an amber "· <species>" tag (`loc-species`; `locationEntry`
-  prefers a Human source so an Allen confirmation clears the tag), or a single pilled
-  "Throughout the brain" for ubiquitous); a non-receptor
-  target opens the lighter `showTarget` (system, Wikipedia link or `NOSOURCE`, the type +
-  system facts each carrying their classification grade pill, then the "Found in" region
-  list where each region likewise carries its **own** expression-provenance pill, kind
-  `target_locations`, the mirror of `receptor_locations`). Both add a **PDSP Ki**
-  lookup link beside the reference (`appendLookupLink`, the fixed browse URL since PDSP
-  has no per-target search; the drug panel's EMA/FDA links use the same helper); a
-  **receptor** also gets **UniProt** (human-only, `model_organism 9606`) + **GtoPdb**
-  (Guide to Pharmacology) name-search links (`uniprotSearchUrl` / `gtopdbSearchUrl` over
-  the receptor's `name`; convenience links, no CSP change, no pill). Both then carry an
-  **Interacting drugs** section (the drugs acting on this target, from `drugsByTarget`,
-  grouped by primary drug category, each row a net-effect glyph (green **+** / red **−** /
-  purple **≈**; `effectGlyph`, wrapped in `withTip` so a tap explains the effect without
-  navigating the row), dimmed + italic "· speculative" when tentative, and the binding's source
-  pill (`bindingProvenancePill`, the *same* resolved binding shown on the drug panel, so a
-  drug<->target link carries its source on both with no duplication); clicking a drug row
-  focuses it via `info.onDrug`). Both make each **"Found in" region row clickable** (jumps
-  to that structure via `info.onStructure` -> `selectStructure`). A stub receptor / an
-  unlocated target renders muted, not clickable.
+- A receptor row's swatch = its **sign** colour; a non-receptor row's = its **type** colour
+  (`target_type_colors`) + a muted tag. Clicking focuses it: dims to its regions
+  (`selection.setCircuit(regionMeshes, [])`, no arrow pin) + `createReceptorMarkers.show(...)`.
+- **Markers** (`js/receptor-markers.js`): dense additive **gem dots** over each region's surface (a
+  `THREE.Points` cloud sampled from the mesh geometry + parented to it, so they track explode/mirror
+  and vanish when it hides; count scaled by surface area; pulsed). Builder `buildGemCloud` (+
+  `GEM_DOT_SIZE`), reused by the drug animation. Stopped via an `onIsolate` watcher (`.matches`).
+- Panels: a receptor opens `showReceptor` (system, Wikipedia link, live-refreshed description, then
+  the classification facts each carrying the *mechanism* grade pill, then the "Found in" list via
+  `locationList` grouped under `groupLabels` sub-headings, each region carrying its **own**
+  expression-provenance pill + an amber "· <species>" tag when it has no human assay (`locationEntry`
+  prefers Human, so an Allen confirmation clears it), or one pilled "Throughout the brain" for
+  ubiquitous). A non-receptor target opens the lighter `showTarget` (type + system facts with their
+  grade pills, then the same per-region "Found in" list, kind `target_locations`). Both add a **PDSP
+  Ki** lookup link (`appendLookupLink`); a receptor also gets **UniProt** (human-only) + **GtoPdb**
+  name-search links (`uniprotSearchUrl`/`gtopdbSearchUrl`, no pill). Both carry an **Interacting
+  drugs** section (from `drugsByTarget`, grouped by category, each row an `effectGlyph` + the
+  binding's `bindingProvenancePill` = the *same* resolved binding the drug panel shows; jumps via
+  `info.onDrug`). Both make each "Found in" region clickable (`info.onStructure` -> `selectStructure`).
+  A stub receptor / unlocated target renders muted.
 
-Receptor data: `_receptor_record` validates every family/class/sign/synaptic key + every
-location base. `locations="ALL"` -> `ubiquitous`. `classification_provenance` (the
-*mechanism* grade) defaults `llm`, overridable in `RECEPTOR_PROVENANCE`. Each expression
-region is a **separate** graded claim (kind `receptor_locations`): default `llm`, upgraded
-per (receptor, region) by `RECEPTOR_LOCATION_SOURCES` -> emitted `location_sources`,
-quote-checked like a binding. The receptor locations drove the
-`brainstem_nuclei` group (raphe, locus coeruleus, VTA). A non-receptor target's
-`type`/`system`/regions/`wikipedia` are authored in `DRUG_TARGETS`; its "Found in"
-regions are graded per region exactly like a receptor's (kind `target_locations`,
-default `llm`, upgraded per (target, region) by `TARGET_LOCATION_SOURCES`; both share
-the generic `_location_sources` emitter + validation).
+Receptor data: `_receptor_record` validates every family/class/sign/synaptic key + location base;
+`locations="ALL"` -> `ubiquitous`. `classification_provenance` (the mechanism grade) defaults `llm`,
+overridable in `RECEPTOR_PROVENANCE`. Each expression region is a **separate** graded claim (kind
+`receptor_locations`, default `llm`, upgraded per (receptor, region) by `RECEPTOR_LOCATION_SOURCES`,
+quote-checked); these drove the `brainstem_nuclei` group. A non-receptor target's type/system/regions
+are authored in `DRUG_TARGETS`; its regions grade identically (kind `target_locations`,
+`TARGET_LOCATION_SOURCES`; both share the `_location_sources` emitter).
 
 ## Drugs
 
@@ -911,121 +880,76 @@ A focusable Drugs section showing, per drug, what it does to the brain. Data is 
 **Stahl's Prescriber's Guide (8th ed.)**, extracted **strictly from the dump** (only
 interactions literally stated; gaps left as TODO / no binding).
 
-- **Data.** The 158 drugs live in `tools/drugs_data.json` (too large to inline), read by
-  `_load_drugs` (a missing file is a warning). Vocabularies are defined once in
-  `generate_data.py`: `DRUG_CATEGORY_LABELS`, `DRUG_ACTIONS` (action -> {label, net
-  `effect`}), `DRUG_EFFECT_COLORS`/`DRUG_EFFECT_LABELS` (boost emerald / block rose /
-  modulate violet), `DRUG_TARGETS` (non-receptor targets, each `{name{en,fr}, type,
-  system, regions[bases], optional wikipedia}`, `type` a `TARGET_TYPE_LABELS` key).
-  `_build_drug_targets` merges `DRUG_TARGETS` with every receptor id (so a binding can
-  target a coarse target like `sert` or a specific receptor like `5ht2a`) and emits it as
-  `meta.drug_targets`. `_drug_record` validates category/target/action/effect + rejects
-  duplicate ids (a drug carries no drug-level source; provenance lives per-claim on the
-  bindings/NbN). A binding's net `effect`:
-  agonist / reuptake-inhibitor / releaser / enzyme-inhibitor / PAM -> **boost**;
-  antagonist / inverse-agonist / NAM / blocker -> **block**; partial-agonist / modulator
+- **Data.** The 158 drugs live in `tools/drugs_data.json`, read by `_load_drugs`. Vocabularies are
+  defined once in `generate_data.py`: `DRUG_CATEGORY_LABELS`, `DRUG_ACTIONS` (action -> {label, net
+  `effect`}), `DRUG_EFFECT_COLORS`/`DRUG_EFFECT_LABELS` (boost/block/modulate), `DRUG_TARGETS`
+  (non-receptor targets, `type` a `TARGET_TYPE_LABELS` key). `_build_drug_targets` merges
+  `DRUG_TARGETS` with every receptor id (so a binding can target `sert` or `5ht2a`) ->
+  `meta.drug_targets`. `_drug_record` validates category/target/action/effect + rejects duplicate
+  ids. A binding's net `effect`: agonist / reuptake-inhibitor / releaser / enzyme-inhibitor / PAM ->
+  **boost**; antagonist / inverse-agonist / NAM / blocker -> **block**; partial-agonist / modulator
   -> **modulate**.
-- **Animation** (`js/drug-anim.js`). Clicking a drug row (`buildDrugLegend`, grouped by
-  category, with the live `#drugs-filter`) focuses it: dims to the union of its targets'
-  regions via `selection.setCircuit(regionMeshes, flowArrows)` and calls
-  `createDrugAnimation.show(drug, meshById)`, which scatters a gem cloud (`buildGemCloud`)
-  per binding coloured by that binding's net effect, pulsing per effect (boost
-  fast/bright/swelling, block slow/dim, modulate between), and under the dots breathes a
-  surface wash in the same colour (`buildWashShell`, per-effect period + `washGain`).
-  Stopped off the selection state via an `onIsolate` watcher (`createDrugAnimation.matches`).
-- **By-mechanism flow overlay** (reuses `js/circuit-anim.js`). The focus also rides
-  flowing beads along the projections of the drug's target transmitter system(s) (an SSRI
-  lights the serotonergic ascending fan, an SNRI the noradrenergic + serotonergic, a D2
-  antipsychotic the dopaminergic). The mapping is data: `generate_data.py` emits
-  `system_flow_kinds` (target `system` -> projection `kind`, restricted to the diffuse
-  ascending systems with a modeled source nucleus: serotonergic, adrenergic ->
-  noradrenergic, dopaminergic, cholinergic; glutamate/GABA left out so the overlay is a
-  drug-specific fan). `js/data.js` resolves each drug's `flowKinds`; `focusDrug` filters
-  arrows (`flowArrowsOf`), pins them via `setCircuit` and `circuitAnim.play()`s them.
-  Stopped by the same `circuitAnim` `onIsolate` watcher. A drug with unmapped systems pins
-  no arrows -> dots + wash only. (This is why the dataset carries the ascending monoamine
-  pathways; without them most antidepressants would have no flow.)
-- **Panel** (`showDrug`): the molecular-structure image (when fetched), the class, the
-  NbN nomenclature, the description (baked copy painted first then live-refreshed from
-  Wikipedia, re-graded `sourced`), a Wikipedia link, then the **Acts on** binding list
-  (each row: a coloured effect glyph + target name + action·note, dimmed + italic "·
-  speculative" when tentative, plus a source pill via `bindingProvenancePill` = the
-  binding's own quote-level source, else its measured Ki (verified), else `NOSOURCE`
-  (no drug-level fallback). The **Acts on** rows sort strongest-affinity first (by each
-  binding's representative Ki, no-Ki last). There is no standalone drug-level Source(s)
-  block. Below it, a **Projections affected** list (only when `flowKinds` is non-empty):
-  one row per ascending system the drug engages (its `flowKinds` -> the kind-mode
-  projection group), each jumping to that group and pilled with the strongest binding
-  on the system. A *derived, non-directional* inference (no increase/decrease claim; a
-  caption says so). Class + Nomenclature values are clickable (open search with a
-  `class:` / `nbn:` filter) and each carries its own grade pill: the NbN's quote source,
-  and the class classification's `category_provenance` (its own node, kind
-  `drug_categories`, default `llm`, upgradeable via `DRUG_CATEGORY_PROVENANCE` /
-  quote-level `category_sources`). Drugs are searchable (name / category / target keywords).
-- **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`, see file map)
-  renders as a `kiChip` to the right of the source badge: the median value + `[min-max]`
-  range + human/non-human assay counts, then its own **verified** truth badge (tooltip =
-  the one representative assay). A non-human-only value is amber-tinted; an alias-borrowed
-  value (`ki.mapped`) carries a "⚠ measured as `<compound>`" warning naming what PDSP
-  actually measured (relation localized). `affinity_only` bindings (PDSP targets with a Ki
-  but no known direction) list as "affinity only, direction not established" with a neutral
-  glyph, no action/source pill, and never animate (excluded from `structureIds`/`flowKinds`
-  in `js/data.js`). A **combo** drug (name "A + B") leads with a warning box linking each
-  constituent we model as a standalone drug (`drug.combo`, derived from the name in
-  `js/data.js`); combos carry no Ki of their own. Ki backs the binding's provenance grade
-  (`_binding_grade`), so a measured Ki lifts a binding to `verified`.
+- **Animation** (`js/drug-anim.js`). Clicking a drug row (`buildDrugLegend`, grouped by category,
+  with the live `#drugs-filter`) focuses it: dims to the union of its targets' regions
+  (`selection.setCircuit(regionMeshes, flowArrows)`) + `createDrugAnimation.show(...)`, which
+  scatters a `buildGemCloud` per binding coloured by net effect (pulsed per effect) under a
+  `buildWashShell` in the same colour. Stopped via an `onIsolate` watcher (`.matches`).
+- **By-mechanism flow overlay** (reuses `js/circuit-anim.js`). The focus also rides beads along the
+  projections of the drug's target system(s) (an SSRI the serotonergic fan, an SNRI + noradrenergic,
+  a D2 antipsychotic the dopaminergic). The map is data: `generate_data.py` emits `system_flow_kinds`
+  (target `system` -> projection `kind`, restricted to the diffuse ascending systems with a modeled
+  source nucleus; glutamate/GABA left out so the overlay is a drug-specific fan). `js/data.js`
+  resolves `flowKinds`; `focusDrug` filters arrows (`flowArrowsOf`), pins + `circuitAnim.play()`s
+  them; a drug with unmapped systems pins none -> dots + wash only. (This is why the dataset carries
+  the ascending monoamine pathways.)
+- **Panel** (`showDrug`): the molecule image (when fetched), the class, the NbN, the description
+  (live-refreshed from Wikipedia, re-graded `sourced`), a Wikipedia link, then the **Acts on** binding
+  list (each row: an effect glyph + target + action·note, "· speculative" when tentative, plus a
+  `bindingProvenancePill` = the binding's quote source, else its Ki (verified), else `NOSOURCE`),
+  sorted strongest-affinity first. Below it a **Projections affected** list (only when `flowKinds`
+  non-empty): one row per ascending system engaged (jumps to that kind-mode group, pilled with the
+  strongest binding on the system); a *derived, non-directional* inference (caption says so). Class +
+  Nomenclature are clickable (open search with a `class:`/`nbn:` filter) and each carries its grade
+  pill: the NbN quote source, and the class classification's `category_provenance` (its own node, kind
+  `drug_categories`, default `llm`, upgradeable via `DRUG_CATEGORY_PROVENANCE` / `category_sources`).
+- **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
+  median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
+  assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as
+  `<compound>`" warning. `affinity_only` bindings (a Ki, no known direction) list as "affinity only"
+  with a neutral glyph, no source pill, and never animate (excluded from `structureIds`/`flowKinds`).
+  A **combo** drug (name "A + B") leads with a warning box linking each constituent (`drug.combo`);
+  combos carry no Ki. A measured Ki backs `_binding_grade`, lifting the binding to `verified`.
 
-Extraction history: parallel agents from per-drug text; 44 drugs recovered from full-page
-OCR (`PageImages`); 5 stay unbound as genuinely non-receptor agents (lithium, disulfiram,
-l-methylfolate, triiodothyronine, caprylidene). A corrected dump was diffed against the
-OCR-recovered bindings: 2 plainly-wrong bindings dropped, the rest real-but-unstated
-affinities kept and flagged `tentative`. The Stahl corpus `url` is `"TODO"` (the pill
-still renders its grade; the link is not what conveys provenance).
+5 drugs stay unbound as genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
+triiodothyronine, caprylidene). The Stahl corpus `url` is `"TODO"` (the grade, not the link, conveys
+provenance).
 
 ## Images
 
 Two third-party image sources, handled differently on purpose.
 
-- **Molecule images** (vendored same-origin; the CSP is `img-src 'self' data:`).
-  `tools/fetch_molecules.py` downloads each drug's lead infobox SVG (skeletal formula) via
-  the MediaWiki `pageimages` API into `public/data/molecules/<id>.svg`, keeping `.svg`
-  leads only, lightly sanitized (`<script>` stripped, `width`/`height` from `viewBox`).
-  Network-separate from the offline generator; idempotent + polite; writes
-  `tools/molecules_sources.json`. `generate_data.py` (`_available_molecule_ids` +
-  `_drug_record`) emits `structure_image` only when the file exists. `showDrug` renders it
-  as `<img class="mol-structure">`; CSS `filter: invert(1)` makes the black line-art read
-  light on the dark panel (coloured atom labels shift hue, accepted). No image if absent.
-  Because force-dark would defeat the inversion, the page declares `<meta
-  name="color-scheme" content="dark">` + `color-scheme: dark`.
-- **Structure images** (hot-linked from Wikimedia; the GIFs are multi-MB so they are NOT
-  vendored, only the url is stored). `tools/fetch_structure_images.py` resolves a **hero**
-  per **base** via a fallback chain (first `.gif`, else first `.svg`, else the
-  infobox/lead image; a pdf/djvu lead salvaged as its rendered first-page JPG) **and** a
-  **gallery** (`gather_gallery`): every other gif/svg used on the base's EN + FR articles
-  (deduped, hero + chrome excluded via `_is_gallery_chrome`, batch-resolved, capped at
-  `MAX_GALLERY`) into `tools/structure_images_sources.json` (each with kind + source lang),
-  reusing `fetch_molecules.py`'s polite-fetch helpers (its `http_json` gained an `api_url`
-  arg so the FR wiki is reachable), downloading no bytes; an `IMAGE_OVERRIDES` map wins for
-  the hero. The **same resolver** runs over the wiki-linked **circuits** (`--target
-  circuits`) into `tools/circuit_images_sources.json` (keyed by circuit id). `generate_data.py`
-  emits the `structure_image` (hero) url + `structure_image_gallery` list for both structures
-  (`_load_structure_images` + `_structure_record`) and circuits (`_load_circuit_images` +
-  circuit emission), both loaded by the generic `_load_image_sources`. `showStructure` and
-  `showCircuit` both render them via the shared `appendWikiImages(heroUrl, gallery, altName)`:
-  the hero as `<img class="structure-image" loading="lazy">` with a spinner
-  (`.img-spinner`; `load` clears it, `error` removes the figure -> no broken icon), then a
-  "show more" toggle (`.gallery-toggle`) that builds the gallery figures **lazily on first
-  expand** (so the extra multi-MB images never load unless asked). Not inverted (colour
-  art). Needs the `img-src https://upload.wikimedia.org` CSP allowance.
+- **Molecule images** (vendored same-origin; CSP `img-src 'self' data:`). `tools/fetch_molecules.py`
+  downloads each drug's lead infobox SVG via the MediaWiki `pageimages` API into
+  `public/data/molecules/<id>.svg` (`.svg` only, `<script>` stripped); writes
+  `tools/molecules_sources.json`. `generate_data.py` emits `structure_image` only when the file
+  exists. `showDrug` renders it as `<img class="mol-structure">` with CSS `filter: invert(1)` for the
+  dark panel (so the page declares `color-scheme: dark`). No image if absent.
+- **Structure images** (hot-linked from Wikimedia; the multi-MB GIFs are NOT vendored, only the url).
+  `tools/fetch_structure_images.py` resolves a **hero** per **base** (fallback: `.gif` -> `.svg` ->
+  infobox/lead; pdf/djvu lead -> first-page JPG) + a **gallery** (`gather_gallery`: the other gif/svg
+  on the base's EN+FR articles, chrome excluded via `_is_gallery_chrome`, capped `MAX_GALLERY`) into
+  `tools/structure_images_sources.json`, downloading no bytes (`IMAGE_OVERRIDES` wins for the hero).
+  The **same resolver** runs over wiki-linked **circuits** (`--target circuits`) into
+  `tools/circuit_images_sources.json`. `generate_data.py` emits `structure_image` + `_gallery` for
+  both (loaded by `_load_image_sources`). `showStructure`/`showCircuit` render them via the shared
+  `appendWikiImages(heroUrl, gallery, altName)`: the hero lazily with a spinner (`error` removes the
+  figure), then a "show more" toggle that builds the gallery **lazily on first expand**. Needs the
+  `img-src https://upload.wikimedia.org` CSP allowance.
 
-**Lightbox.** Clicking any panel image (a structure illustration, hero or gallery, or a
-drug molecule diagram) pops it up large in the `#image-lightbox` overlay (`wireImageLightbox`,
-reuses the `.modal-overlay` backdrop): `open(src, alt, {invert})` sizes the image to fill the
-viewport (capped `MAX_UPSCALE` so a small raster enlarges without becoming a wall of blur; SVGs
-stay crisp), `invert` mirrors the molecule line-art inversion. Closed by the ×, a backdrop
-click, or **Esc** (routed first in `wireShortcuts`, ahead of the help popup + the peel chain).
-The lightbox uses a darker backdrop than the shortcuts modal so a transparent molecule SVG
-doesn't show the brain through it. i18n: `image.close` / `image.zoomHint`.
+**Lightbox.** Clicking any panel image pops it up large in `#image-lightbox` (`wireImageLightbox`,
+reuses `.modal-overlay`): `open(src, alt, {invert})` fills the viewport (capped `MAX_UPSCALE`; SVGs
+stay crisp), `invert` mirrors the molecule inversion. Closed by ×, backdrop, or **Esc** (routed first
+in `wireShortcuts`). Darker backdrop than the shortcuts modal. i18n: `image.close`/`image.zoomHint`.
 
 ## Source provenance
 
