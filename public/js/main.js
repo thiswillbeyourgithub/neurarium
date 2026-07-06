@@ -1545,6 +1545,132 @@ const bindingKi = (b) =>
  * this is reused unchanged whether a node is first picked or re-shown via its tab.
  * @param {import("./data.js").BrainData} data
  */
+
+// Only one tooltip is pinned at a time across the whole UI: opening one closes
+// whichever was open, so tapping a second pill / bar dismisses the first instead of
+// stacking popups. Holds the open tip's `close` (so its scroll/resize listeners are
+// torn down too, not just its `.show` class).
+let _openTip = null;
+
+// The nearest ancestor that establishes a containing block for a position:fixed
+// descendant (a transform / filter / backdrop-filter / perspective / will-change /
+// paint-contain), or null if none (then fixed is viewport-relative). The panel
+// #controls carries a backdrop-filter, so a fixed tooltip is offset by it; we walk
+// this generically rather than hardcoding #controls.
+function fixedContainingBlock(node) {
+  for (let n = node.parentElement; n && n !== document.documentElement; n = n.parentElement) {
+    const s = getComputedStyle(n);
+    const bf = s.backdropFilter || s.webkitBackdropFilter;
+    if ((s.transform && s.transform !== "none") ||
+        (s.filter && s.filter !== "none") ||
+        (bf && bf !== "none") ||
+        (s.perspective && s.perspective !== "none") ||
+        (s.willChange && /transform|filter|perspective/.test(s.willChange)) ||
+        (s.contain && /paint|layout|strict|content/.test(s.contain))) {
+      return n;
+    }
+  }
+  return null;
+}
+
+/**
+ * Attach a hover/tap tooltip to `trigger`. The bubble is position:fixed just above
+ * the trigger, clamped to the viewport, and lives on <body> while shown (so a dimmed
+ * ancestor row can't bleed opacity into it, an overflow can't clip it, and you can
+ * move onto the bubble to read/select its text). Shows on hover/focus (pointer +
+ * keyboard) and is pinned on click/tap: on a touch screen `:hover` never fires, so
+ * the click-toggle is the sole path (one tap shows, tap again or tap elsewhere
+ * dismisses); on a pointer device a click pins it so its text stays selectable.
+ *
+ * Shared by the info panel's provenance pills (`opts.wrap` wraps the trigger in a
+ * `.help-icon` span and returns that wrapper, so an inline pill anchors to itself)
+ * and the sourcing coverage bars (block elements, attached in place with a raised
+ * `opts.zIndex` so the bubble clears the #sourcing-modal backdrop).
+ * @returns {HTMLElement} the wrapper when `opts.wrap`, else `trigger` itself.
+ */
+function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
+  const host = wrap ? document.createElement("span") : trigger;
+  if (wrap) { host.className = "help-icon"; host.append(trigger); }
+  const tip = document.createElement("span");
+  tip.className = "help-tip";
+  tip.setAttribute("role", "tooltip");
+  tip.textContent = tipText;
+  if (zIndex != null) tip.style.zIndex = String(zIndex);
+  if (!wrap) trigger.style.cursor = "help";
+  let pinned = false, hideTimer = 0;
+  const place = () => {
+    const r = trigger.getBoundingClientRect();
+    const tw = tip.offsetWidth, th = tip.offsetHeight, m = 6;
+    let left = r.left + r.width / 2 - tw / 2;
+    left = Math.max(m, Math.min(left, window.innerWidth - tw - m));
+    let top = r.top - th - 4;
+    if (top < m) top = r.bottom + 4; // flip below the trigger if no room above
+    // With the bubble in <body> there is normally no fixed-positioning containing
+    // block (offsets zero), but keep the generic subtraction in case a transformed /
+    // filtered ancestor ever forms one.
+    const cb = fixedContainingBlock(tip);
+    const cbRect = cb ? cb.getBoundingClientRect() : null;
+    const ox = cb ? cbRect.left - cb.scrollLeft : 0;
+    const oy = cb ? cbRect.top - cb.scrollTop : 0;
+    tip.style.left = `${Math.round(left - ox)}px`;
+    tip.style.top = `${Math.round(top - oy)}px`;
+  };
+  const reposition = () => {
+    if (!trigger.isConnected) { close(); return; }
+    if (tip.classList.contains("show")) place();
+  };
+  const onDocPointer = (e) => {
+    if (host.contains(e.target) || tip.contains(e.target)) return;
+    close();
+  };
+  const open = () => {
+    clearTimeout(hideTimer);
+    if (_openTip && _openTip !== close) _openTip(); // close any other open tip
+    _openTip = close;
+    if (!tip.isConnected) document.body.appendChild(tip);
+    tip.classList.add("show");
+    place();
+    // Re-place after this frame: tapping a button can focus-scroll it into view
+    // *after* the click handler runs, which would otherwise strand the bubble.
+    requestAnimationFrame(place);
+    window.addEventListener("scroll", reposition, true);
+    window.addEventListener("resize", reposition);
+    document.addEventListener("pointerdown", onDocPointer, true);
+  };
+  const close = () => {
+    clearTimeout(hideTimer);
+    pinned = false;
+    if (_openTip === close) _openTip = null;
+    tip.classList.remove("show");
+    tip.remove();
+    window.removeEventListener("scroll", reposition, true);
+    window.removeEventListener("resize", reposition);
+    document.removeEventListener("pointerdown", onDocPointer, true);
+  };
+  const scheduleHide = () => {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      if (pinned || trigger.matches(":hover") || tip.matches(":hover")) return;
+      close();
+    }, 160);
+  };
+  trigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (pinned) close(); else { pinned = true; open(); }
+  });
+  const canHover = !window.matchMedia ||
+    window.matchMedia("(hover: hover)").matches;
+  if (canHover) {
+    trigger.addEventListener("mouseenter", open);
+    trigger.addEventListener("mouseleave", scheduleHide);
+    trigger.addEventListener("focus", open);
+    trigger.addEventListener("blur", scheduleHide);
+    tip.addEventListener("mouseenter", () => clearTimeout(hideTimer));
+    tip.addEventListener("mouseleave", scheduleHide);
+  }
+  return host;
+}
+
 function createInfoPanel(data) {
   const body = document.getElementById("info-body");
   const nameOf = (id) => data.byId.get(id)?.name || id;
@@ -1686,139 +1812,10 @@ function createInfoPanel(data) {
     return el("span", null, name);
   };
 
-  // The nearest ancestor that establishes a containing block for a position:fixed
-  // descendant (a transform / filter / backdrop-filter / perspective / will-change
-  // / paint-contain), or null if none (then fixed is viewport-relative). The panel
-  // #controls carries a backdrop-filter, so our fixed tooltip is offset by it; we
-  // walk this generically rather than hardcoding #controls.
-  const fixedContainingBlock = (node) => {
-    for (let n = node.parentElement; n && n !== document.documentElement; n = n.parentElement) {
-      const s = getComputedStyle(n);
-      const bf = s.backdropFilter || s.webkitBackdropFilter;
-      if ((s.transform && s.transform !== "none") ||
-          (s.filter && s.filter !== "none") ||
-          (bf && bf !== "none") ||
-          (s.perspective && s.perspective !== "none") ||
-          (s.willChange && /transform|filter|perspective/.test(s.willChange)) ||
-          (s.contain && /paint|layout|strict|content/.test(s.contain))) {
-        return n;
-      }
-    }
-    return null;
-  };
-
-  // Only one tooltip is pinned at a time: opening one closes whichever was open,
-  // so tapping a second source pill dismisses the first instead of stacking popups.
-  // Holds the open tip's `hide` (so its scroll/resize listeners are torn down too,
-  // not just its `.show` class). Shared across every withTip instance in the panel.
-  let openTip = null;
-
-  // Wrap a trigger element with a hover/tap tooltip. The bubble is positioned in
-  // viewport coordinates (position: fixed) just above the trigger and clamped to
-  // the viewport, so an inline pill (a binding / NbN / description pill) anchors to
-  // its own pill exactly like a source-list pill, instead of to a tall positioned
-  // ancestor (the whole panel) far from the pill, which left the tooltip stranded
-  // near the panel top on touch (it then read as "no tooltip"). Shows on
-  // hover/focus (desktop) and is pinned on click/tap (touch, where `:hover` never
-  // fires) via the `.show` class. Wraps the per-source provenance pills.
-  const withTip = (trigger, tipText) => {
-    const wrap = el("span", "help-icon");
-    const tip = el("span", "help-tip", tipText);
-    tip.setAttribute("role", "tooltip");
-    // The bubble is NOT nested under the trigger: while shown it is appended to
-    // <body>, so (a) a dimmed/greyed ancestor row (a speculative binding sits at
-    // reduced opacity) can't bleed that opacity into the bubble, which would make it
-    // unreadable, and the panel's overflow can't clip it, and (b) you can move the
-    // pointer onto the bubble itself to read or select its text without it hiding.
-    wrap.append(trigger);
-    let pinned = false; // a click pins it open (stays put so its text is selectable)
-    let hideTimer = 0;
-    const place = () => {
-      const r = trigger.getBoundingClientRect();
-      const tw = tip.offsetWidth, th = tip.offsetHeight, m = 6;
-      let left = r.left + r.width / 2 - tw / 2;
-      left = Math.max(m, Math.min(left, window.innerWidth - tw - m));
-      let top = r.top - th - 4;
-      if (top < m) top = r.bottom + 4; // flip below the trigger if no room above
-      // `left`/`top` are viewport coordinates. With the bubble in <body> there is
-      // normally no fixed-positioning containing block (offsets zero), but keep the
-      // generic subtraction in case a transformed/filtered ancestor ever forms one.
-      const cb = fixedContainingBlock(tip);
-      const cbRect = cb ? cb.getBoundingClientRect() : null;
-      const ox = cb ? cbRect.left - cb.scrollLeft : 0;
-      const oy = cb ? cbRect.top - cb.scrollTop : 0;
-      tip.style.left = `${Math.round(left - ox)}px`;
-      tip.style.top = `${Math.round(top - oy)}px`;
-    };
-    // Keep the fixed bubble glued to its trigger while shown; tear it down if the
-    // panel re-renders the trigger out from under us.
-    const reposition = () => {
-      if (!trigger.isConnected) { close(); return; }
-      if (tip.classList.contains("show")) place();
-    };
-    // A pointer press anywhere outside the badge and the bubble closes a pinned tip
-    // (so clicking away dismisses it); presses on either are ignored, so a click into
-    // the bubble to select text never closes it.
-    const onDocPointer = (e) => {
-      if (wrap.contains(e.target) || tip.contains(e.target)) return;
-      close();
-    };
-    const open = () => {
-      clearTimeout(hideTimer);
-      if (openTip && openTip !== close) openTip(); // close any other open tip
-      openTip = close;
-      if (!tip.isConnected) document.body.appendChild(tip);
-      tip.classList.add("show");
-      place();
-      // Re-place after this frame: tapping a button can focus-scroll it into view
-      // *after* the click handler runs, which would otherwise strand the bubble.
-      requestAnimationFrame(place);
-      window.addEventListener("scroll", reposition, true);
-      window.addEventListener("resize", reposition);
-      document.addEventListener("pointerdown", onDocPointer, true);
-    };
-    const close = () => {
-      clearTimeout(hideTimer);
-      pinned = false;
-      if (openTip === close) openTip = null;
-      tip.classList.remove("show");
-      tip.remove();
-      window.removeEventListener("scroll", reposition, true);
-      window.removeEventListener("resize", reposition);
-      document.removeEventListener("pointerdown", onDocPointer, true);
-    };
-    // Hover-out closes shortly, unless it was pinned by a click or the pointer is now
-    // over the badge or the bubble (so you can cross the small gap between them, and
-    // rest on the bubble to read / select it without it vanishing).
-    const scheduleHide = () => {
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(() => {
-        if (pinned || trigger.matches(":hover") || tip.matches(":hover")) return;
-        close();
-      }, 160);
-    };
-    trigger.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (pinned) close(); else { pinned = true; open(); }
-    });
-    // Hover/focus reveal is for pointer + keyboard devices only. On a touch screen a
-    // single tap synthesizes mouseenter + focus (both open()) and *then* click (which
-    // toggles), so attaching those here would show-then-hide on the first tap and
-    // force a second tap. Gating them behind `(hover: hover)` leaves the click-toggle
-    // as the sole path on touch, so one tap shows it (tap again to dismiss). On a
-    // pointer device a click instead *pins* it (so it stays put to select its text).
-    const canHover = !window.matchMedia ||
-      window.matchMedia("(hover: hover)").matches;
-    if (canHover) {
-      trigger.addEventListener("mouseenter", open);
-      trigger.addEventListener("mouseleave", scheduleHide);
-      trigger.addEventListener("focus", open);
-      trigger.addEventListener("blur", scheduleHide);
-      tip.addEventListener("mouseenter", () => clearTimeout(hideTimer));
-      tip.addEventListener("mouseleave", scheduleHide);
-    }
-    return wrap;
-  };
+  // withTip wraps an inline provenance pill in a .help-icon span and returns that
+  // wrapper (so the pill anchors to itself). The whole hover/tap tooltip mechanism
+  // lives in the module-level attachTip (shared with the sourcing coverage bars).
+  const withTip = (trigger, tipText) => attachTip(trigger, tipText, { wrap: true });
 
   // Per-source provenance pill (how trustworthy the source's attribution is):
   // grey "?" = LLM-only (may be hallucinated), yellow "~" = the LLM had the source
@@ -3747,92 +3744,6 @@ function applyViewParams(bundle) {
   }
 }
 
-// Single open bar-tooltip (only one pinned at a time across all the sourcing bars).
-let _openBarTip = null;
-
-/**
- * Attach a tap/hover tooltip to a *block* trigger (the sourcing coverage bars),
- * mirroring the info panel's withTip touch behavior: on a touch screen one tap pins
- * the bubble and a tap elsewhere dismisses it; on a pointer device hover shows it.
- * Kept separate from createInfoPanel.withTip (that one wraps inline pills in a
- * .help-icon span and shares state within the panel) because a bar is a block whose
- * layout must not be wrapped; here the listeners attach to the element directly and
- * the bubble is a lone `.help-tip` on <body>. Its z-index is lifted above the
- * #sourcing-modal (80) so it is not hidden behind the modal backdrop.
- */
-function attachTapTip(trigger, text) {
-  const tip = document.createElement("span");
-  tip.className = "help-tip";
-  tip.setAttribute("role", "tooltip");
-  tip.textContent = text;
-  tip.style.zIndex = "90"; // above the #sourcing-modal (z-index 80)
-  trigger.style.cursor = "help";
-  let pinned = false, hideTimer = 0;
-  const place = () => {
-    const r = trigger.getBoundingClientRect();
-    const tw = tip.offsetWidth, th = tip.offsetHeight, m = 6;
-    const left = Math.max(m, Math.min(r.left + r.width / 2 - tw / 2,
-      window.innerWidth - tw - m));
-    let top = r.top - th - 4;
-    if (top < m) top = r.bottom + 4; // flip below if no room above
-    tip.style.left = `${Math.round(left)}px`;
-    tip.style.top = `${Math.round(top)}px`;
-  };
-  const reposition = () => {
-    if (!trigger.isConnected) close();
-    else if (tip.classList.contains("show")) place();
-  };
-  const onDocPointer = (e) => {
-    if (trigger.contains(e.target) || tip.contains(e.target)) return;
-    close();
-  };
-  const open = () => {
-    clearTimeout(hideTimer);
-    if (_openBarTip && _openBarTip !== close) _openBarTip();
-    _openBarTip = close;
-    if (!tip.isConnected) document.body.appendChild(tip);
-    tip.classList.add("show");
-    place();
-    requestAnimationFrame(place);
-    window.addEventListener("scroll", reposition, true);
-    window.addEventListener("resize", reposition);
-    document.addEventListener("pointerdown", onDocPointer, true);
-  };
-  const close = () => {
-    clearTimeout(hideTimer);
-    pinned = false;
-    if (_openBarTip === close) _openBarTip = null;
-    tip.classList.remove("show");
-    tip.remove();
-    window.removeEventListener("scroll", reposition, true);
-    window.removeEventListener("resize", reposition);
-    document.removeEventListener("pointerdown", onDocPointer, true);
-  };
-  const scheduleHide = () => {
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-      if (pinned || trigger.matches(":hover") || tip.matches(":hover")) return;
-      close();
-    }, 160);
-  };
-  // A tap pins on touch (where :hover never fires) / a click pins on a pointer
-  // device so the text stays put; tapping the bar again toggles it closed.
-  trigger.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (pinned) close(); else { pinned = true; open(); }
-  });
-  // Hover/focus reveal is pointer-only: on touch a tap synthesizes mouseenter then
-  // click, which would show-then-toggle-hide on the first tap (see withTip).
-  const canHover = !window.matchMedia ||
-    window.matchMedia("(hover: hover)").matches;
-  if (canHover) {
-    trigger.addEventListener("mouseenter", open);
-    trigger.addEventListener("mouseleave", scheduleHide);
-    tip.addEventListener("mouseenter", () => clearTimeout(hideTimer));
-    tip.addEventListener("mouseleave", scheduleHide);
-  }
-}
-
 /**
  * Fill the About panel's "Sources & provenance" block from meta.provenanceStats:
  * the grade key (reusing the .src-pill swatches the info panel shows beside each
@@ -3946,11 +3857,12 @@ function buildAboutSourcing(meta) {
       seg.style.width = `${(100 * n) / r.total}%`;
       bar.appendChild(seg);
     }
-    // Per-grade counts tooltip. Uses attachTapTip (not a native `title`) so it also
-    // works on touch: one tap pins it, a tap elsewhere dismisses it.
-    attachTapTip(bar, SEGMENTS
+    // Per-grade counts tooltip via the shared attachTip (not a native `title`) so it
+    // also works on touch: one tap pins it, a tap elsewhere dismisses it. zIndex 90
+    // lifts the bubble above the #sourcing-modal (80) it lives in.
+    attachTip(bar, SEGMENTS
       .map(([field, , labelKey]) => `${t(labelKey)}: ${r[field]}`)
-      .join("  ·  "));
+      .join("  ·  "), { zIndex: 90 });
     row.appendChild(bar);
     wrap.appendChild(row);
   }
