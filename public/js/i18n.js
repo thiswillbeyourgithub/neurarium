@@ -245,6 +245,20 @@
         'and <a href="https://threejs.org/" target="_blank" ' +
         'rel="noopener noreferrer">three.js</a> (vendored, no build step), the ' +
         "anatomy stored as generated data files, served by Caddy.",
+      "about.animationModel":
+        "About the drug animation: it is a <em>tone-setter</em> model, not a literal " +
+        "picture of drug molecules. A drug's binding data drives it: postsynaptic " +
+        "receptors it hits show as coloured gem dots over the regions that express them " +
+        "(boost / block / modulate), while its <em>tone-setting</em> bindings (reuptake " +
+        "blockers, enzyme inhibitors, vesicle blockers, presynaptic autoreceptors) send " +
+        "beads streaming along the ascending pathways of the neurotransmitter systems " +
+        "they raise or lower. Density and speed are normalized per drug, so what you read " +
+        "is the <em>relative</em> activity across systems, not an absolute dose.",
+      "about.outreach":
+        "I think this kind of interactive viewer could be genuinely useful to the field, " +
+        "and I would happily build similar animations for other medical topics. If you " +
+        "have an idea for one, or feedback on this one, please get in touch (the issue " +
+        "tracker below is the easiest channel) and tell me what would help you.",
       "about.issues":
         "Found a bug, an inaccuracy, or have a feature request? Please " +
         '<a id="about-issues" target="_blank" rel="noopener noreferrer">open an ' +
@@ -518,6 +532,23 @@
         'rel="noopener noreferrer">three.js</a> (embarqué, sans étape de ' +
         "build), l’anatomie stockée dans des fichiers de données " +
         "générés, servis par Caddy.",
+      "about.animationModel":
+        "À propos de l’animation des médicaments : c’est un modèle de <em>réglage du " +
+        "tonus</em>, pas une image littérale des molécules. Ce sont les données de liaison " +
+        "du médicament qui la pilotent : les récepteurs postsynaptiques qu’il touche " +
+        "apparaissent en billes-gemmes colorées sur les régions qui les expriment " +
+        "(renforce / bloque / module), tandis que ses liaisons qui <em>règlent le tonus</em> " +
+        "(inhibiteurs de recapture, inhibiteurs d’enzyme, bloqueurs vésiculaires, " +
+        "autorécepteurs présynaptiques) envoient des billes le long des voies ascendantes " +
+        "des systèmes de neurotransmetteurs qu’il augmente ou diminue. La densité et la " +
+        "vitesse sont normalisées par médicament : ce que vous lisez est l’activité " +
+        "<em>relative</em> entre systèmes, pas une dose absolue.",
+      "about.outreach":
+        "Je pense que ce genre de visualiseur interactif pourrait être vraiment utile au " +
+        "domaine médical, et je réaliserais volontiers des animations similaires pour " +
+        "d’autres sujets. Si vous avez une idée, ou un retour sur celui-ci, n’hésitez pas à " +
+        "me contacter (le plus simple est le suivi des tickets ci-dessous) et à me dire ce " +
+        "qui vous serait utile.",
       "about.issues":
         "Vous avez repéré un bug, une inexactitude ou une idée de fonctionnalité ? " +
         'Merci d’<a id="about-issues" target="_blank" rel="noopener noreferrer">ouvrir ' +

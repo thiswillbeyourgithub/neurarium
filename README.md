@@ -1,5 +1,7 @@
 # neurarium
 
+*Read this in [French / en français](README.fr.md).*
+
 **A free, source-graded 3D atlas of the human brain: every region, pathway,
 receptor, and drug is a graded, inspectable node on one map you can rotate, pull
 apart, search, and click through.**
@@ -110,7 +112,7 @@ Every `~` and `✓` grade is checked against one of the sources below. Each is a
 
 The book references are copyrighted, so only the tooling that uses them is committed,
 not the text. Anyone holding a copy can reproduce the extraction and confirm every
-`✓`-graded quote: drop the Stahl PDF into `sources/books/stahl/` and three committed
+`✓`-graded quote: drop the Stahl PDF into `data_sources/books/stahl/` and three committed
 scripts rebuild exactly what the gate checks against:
 
 ```sh
@@ -151,8 +153,14 @@ request**? Please **open an issue** on this repository. Corrections to the regio
 projections, receptor, and drug data are especially welcome, as are **ideas for what
 else belongs on a map like this**. This began as a few-days demo during my medical
 residency and has kept absorbing new kinds of data more easily than expected, so
-suggestions for where to take it next genuinely help. You can also find other ways to
-reach me on [my website](https://olicorne.org/en/contact).
+suggestions for where to take it next genuinely help.
+
+I also believe this kind of interactive, source-graded viewer could be genuinely
+useful to the field beyond psychopharmacology, and I would happily build similar
+animations for **other medical topics**. If you have an idea for one, or think a map
+like this would help your teaching or research, please **get in touch** and tell me
+what would be useful. You can reach me on
+[my website](https://olicorne.org/en/contact).
 
 ## Running
 
