@@ -194,7 +194,6 @@
   "Melanocortin receptors": "Récepteurs de la mélanocortine",
   "Melatonergic": "Mélatoninergique",
   "Melatonin": "Mélatonine",
-  "Melatonin receptors (MT1/MT2)": "Récepteurs de la mélatonine (MT1/MT2)",
   "Mesocortical": "Mésocorticale",
   "Mesolimbic (VTA)": "Mésolimbique (ATV)",
   "Mesolimbic (amygdala)": "Mésolimbique (amygdale)",
@@ -211,11 +210,9 @@
   "Mood stabilizer / anticonvulsant": "Thymorégulateur / anticonvulsivant",
   "Most abundant dopamine receptor; Gs-coupled, excitatory; drives the striatal direct pathway.": "Récepteur dopaminergique le plus abondant ; couplé à Gs, excitateur ; active la voie directe striatale.",
   "Motor thalamus excites frontal cortex, closing the cortico-basal-ganglia-thalamo-cortical loop.": "Le thalamus moteur excite le cortex frontal, fermant la boucle cortico-ganglions de la base-thalamo-corticale.",
-  "Muscarinic receptors (M1–M5)": "Récepteurs muscariniques (M1–M5)",
   "N and P/Q types": "types N et P/Q",
   "N-type, partial": "type N, partiel",
   "Negative allosteric modulator": "Modulateur allostérique négatif",
-  "Nicotinic receptors": "Récepteurs nicotiniques",
   "Nigrostriatal": "Nigrostriée",
   "Nigrostriatal (dopamine)": "Voie nigrostriée (dopamine)",
   "Nigrothalamic": "Nigrothalamique",
@@ -426,7 +423,5 @@
   "weak": "faible",
   "weak, high dose": "faible, forte dose",
   "weaker, high dose": "plus faible, forte dose",
-  "α1 adrenergic receptors": "Récepteurs α1 adrénergiques",
-  "α2 adrenergic receptors": "Récepteurs α2 adrénergiques",
-  "β adrenergic receptors": "Récepteurs β adrénergiques"
+  "α2 adrenergic receptors": "Récepteurs α2 adrénergiques"
 }

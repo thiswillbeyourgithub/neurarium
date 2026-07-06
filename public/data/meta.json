@@ -1036,279 +1036,6 @@
         }
       ]
     },
-    "muscarinic": {
-      "name": "Muscarinic receptors (M1–M5)",
-      "type": "receptor_group",
-      "system": "cholinergic",
-      "receptor": null,
-      "regions": [
-        "frontal",
-        "temporal",
-        "hippocampus",
-        "caudate",
-        "putamen",
-        "thalamus",
-        "hypothalamus"
-      ],
-      "classification_provenance": "verified",
-      "location_sources": {
-        "caudate": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRM1",
-            "quote": "CHRM1 detected in caudate: probe 1058221 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "frontal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRM1",
-            "quote": "CHRM1 detected in frontal: probe 1058221 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "hippocampus": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRM1",
-            "quote": "CHRM1 detected in hippocampus: probe 1058221 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "hypothalamus": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRM3",
-            "quote": "CHRM3 detected in hypothalamus: probe 1023697 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "putamen": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRM1",
-            "quote": "CHRM1 detected in putamen: probe 1058221 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "temporal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRM1",
-            "quote": "CHRM1 detected in temporal: probe 1058221 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "thalamus": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRM3",
-            "quote": "CHRM3 detected in thalamus: probe 1023697 PACall present in 187/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ]
-      },
-      "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
-      "wikipedia_provenance": "sourced",
-      "sources": [
-        {
-          "corpus": "stahl_essential",
-          "page": 522,
-          "provenance": "verified",
-          "quote": "Muscarinic acetylcholine receptors are G-protein-linked and can be either excitatory or inhibitory."
-        }
-      ]
-    },
-    "nicotinic": {
-      "name": "Nicotinic receptors",
-      "type": "receptor_group",
-      "system": "cholinergic",
-      "receptor": null,
-      "regions": [
-        "frontal",
-        "temporal",
-        "hippocampus",
-        "thalamus",
-        "vta"
-      ],
-      "classification_provenance": "verified",
-      "location_sources": {
-        "frontal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRNA4",
-            "quote": "CHRNA4 detected in frontal: probe 1059691 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "hippocampus": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRNA4",
-            "quote": "CHRNA4 detected in hippocampus: probe 1059691 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "temporal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRNA4",
-            "quote": "CHRNA4 detected in temporal: probe 1059691 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "thalamus": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRNA4",
-            "quote": "CHRNA4 detected in thalamus: probe 1059691 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "vta": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CHRNA4",
-            "quote": "CHRNA4 detected in vta: probe 1059691 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ]
-      },
-      "wikipedia": "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor",
-      "wikipedia_provenance": "sourced",
-      "sources": [
-        {
-          "corpus": "stahl_essential",
-          "page": 524,
-          "provenance": "verified",
-          "quote": "Acetylcholine neurotransmission can be regulated by ligand-gated excitatory ion channels known as nicotinic acetylcholine receptors, shown here."
-        }
-      ]
-    },
-    "alpha1": {
-      "name": "α1 adrenergic receptors",
-      "type": "receptor_group",
-      "system": "adrenergic",
-      "receptor": null,
-      "regions": [
-        "frontal",
-        "parietal",
-        "temporal",
-        "occipital",
-        "hippocampus",
-        "thalamus",
-        "midbrain",
-        "pons",
-        "medulla"
-      ],
-      "classification_provenance": "verified",
-      "location_sources": {
-        "frontal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in frontal: probe 1027138 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "hippocampus": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in hippocampus: probe 1027138 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "medulla": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in medulla: probe 1027138 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "midbrain": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in midbrain: probe 1027138 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "occipital": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in occipital: probe 1027138 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "parietal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in parietal: probe 1027138 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "pons": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in pons: probe 1027138 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "temporal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in temporal: probe 1027138 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "thalamus": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA1A",
-            "quote": "ADRA1A detected in thalamus: probe 1027138 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ]
-      },
-      "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
-      "wikipedia_provenance": "sourced",
-      "sources": [
-        {
-          "corpus": "stahl_essential",
-          "page": 270,
-          "provenance": "verified",
-          "quote": "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 (Figure 6-14)."
-        }
-      ]
-    },
     "alpha2": {
       "name": "α2 adrenergic receptors",
       "type": "receptor_group",
@@ -1413,77 +1140,6 @@
         }
       ]
     },
-    "beta": {
-      "name": "β adrenergic receptors",
-      "type": "receptor_group",
-      "system": "adrenergic",
-      "receptor": null,
-      "regions": [
-        "frontal",
-        "parietal",
-        "cingulate",
-        "accumbens",
-        "cerebellum"
-      ],
-      "classification_provenance": "verified",
-      "location_sources": {
-        "accumbens": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRB2",
-            "quote": "ADRB2 detected in accumbens: probe 1059348 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "cerebellum": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRB2",
-            "quote": "ADRB2 detected in cerebellum: probe 1059348 PACall present in 292/306 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "cingulate": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRB2",
-            "quote": "ADRB2 detected in cingulate: probe 1059348 PACall present in 123/123 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "frontal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRB2",
-            "quote": "ADRB2 detected in frontal: probe 1059348 PACall present in 472/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ],
-        "parietal": [
-          {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRB2",
-            "quote": "ADRB2 detected in parietal: probe 1059348 PACall present in 257/258 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
-          }
-        ]
-      },
-      "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor",
-      "wikipedia_provenance": "sourced",
-      "sources": [
-        {
-          "corpus": "stahl_essential",
-          "page": 270,
-          "provenance": "verified",
-          "quote": "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 (Figure 6-14)."
-        }
-      ]
-    },
     "glutamate": {
       "name": "Glutamate receptors",
       "type": "receptor_group",
@@ -1572,27 +1228,6 @@
           "page": 92,
           "provenance": "verified",
           "quote": "The other subclass of ligand-gated ion channels has a tetrameric structure, and includes many glutamate receptors, including the AMPA, kainate, and NMDA subtypes."
-        }
-      ]
-    },
-    "melatonin": {
-      "name": "Melatonin receptors (MT1/MT2)",
-      "type": "receptor_group",
-      "system": "melatonergic",
-      "receptor": null,
-      "regions": [
-        "hypothalamus",
-        "thalamus"
-      ],
-      "classification_provenance": "verified",
-      "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor",
-      "wikipedia_provenance": "sourced",
-      "sources": [
-        {
-          "corpus": "stahl_essential",
-          "page": 455,
-          "provenance": "verified",
-          "quote": "There are three types of receptors for melatonin: MT1 and MT2, which are both involved in sleep, and MT3, which is actually the enzyme NRH–quinine oxidoreductase 2 and not thought to be involved in sleep physiology."
         }
       ]
     },
@@ -2752,12 +2387,12 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 703,
-        "verified": 691,
+        "total": 955,
+        "verified": 932,
         "sourced": 0,
         "llm": 0,
-        "nosource": 12,
-        "missing": 12
+        "nosource": 23,
+        "missing": 23
       },
       "drug_nbn": {
         "total": 116,
@@ -2840,8 +2475,8 @@
         "missing": 23
       },
       "targets": {
-        "total": 25,
-        "verified": 21,
+        "total": 20,
+        "verified": 16,
         "sourced": 0,
         "llm": 4,
         "nosource": 0,
@@ -2856,12 +2491,12 @@
         "missing": 1
       },
       "target_locations": {
-        "total": 124,
-        "verified": 108,
+        "total": 96,
+        "verified": 82,
         "sourced": 0,
-        "llm": 16,
+        "llm": 14,
         "nosource": 0,
-        "missing": 16
+        "missing": 14
       },
       "structures": {
         "total": 52,
@@ -2872,23 +2507,23 @@
         "missing": 0
       },
       "references": {
-        "total": 305,
+        "total": 300,
         "verified": 0,
-        "sourced": 305,
+        "sourced": 300,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 1913,
-      "verified": 1725,
+      "total": 2132,
+      "verified": 1935,
       "sourced": 0,
-      "llm": 172,
-      "nosource": 16,
-      "missing": 188,
-      "backed": 1725,
-      "pct_backed": 90
+      "llm": 170,
+      "nosource": 27,
+      "missing": 197,
+      "backed": 1935,
+      "pct_backed": 91
     }
   }
 }

@@ -234,10 +234,20 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
              "type": "vesicle_protein", "system": None,
              "wikipedia": "https://en.wikipedia.org/wiki/SV2A",
              "regions": ["frontal", "temporal", "hippocampus", "thalamus"]},
-    # --- Receptor groups not modeled individually in RECEPTORS ----------------
+    # --- Receptor groups -----------------------------------------------------
+    # A `receptor_group` whose subtypes are all modeled individually in RECEPTORS
+    # carries a `members` list: at build time every binding against the group is
+    # expanded into one binding per member receptor (so browsing M1 shows the drug
+    # that "blocks muscarinic receptors"), and the group itself is NOT emitted as a
+    # browsable target (see _expand_group_bindings / _build_drug_targets). A group
+    # with no clean 1:1 member set (glutamate: expanding to all 10 iono/metabotropic
+    # subtypes would over-claim; orexin/melanocortin: no subtype modeled) keeps no
+    # `members` and stays a coarse browsable group. The α2 family is a special case
+    # (see alpha2 below).
     "muscarinic": {"name": {"en": "Muscarinic receptors (M1–M5)",
                             "fr": "Récepteurs muscariniques (M1–M5)"},
                    "type": "receptor_group", "system": "cholinergic",
+                   "members": ["m1", "m2", "m3", "m4", "m5"],
                    "wikipedia":
                        "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
                    "regions": ["frontal", "temporal", "hippocampus", "caudate",
@@ -245,6 +255,10 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     "nicotinic": {"name": {"en": "Nicotinic receptors",
                            "fr": "Récepteurs nicotiniques"},
                   "type": "receptor_group", "system": "cholinergic",
+                  # The neuronal CNS nicotinic receptors; the muscle-type
+                  # (nachr_muscle) is peripheral and never what a CNS "nicotinic"
+                  # binding means, so it is excluded from the expansion.
+                  "members": ["nachr_a4b2", "nachr_a7"],
                   "wikipedia":
                       "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor",
                   "regions": ["frontal", "temporal", "hippocampus", "thalamus",
@@ -252,6 +266,7 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     "alpha1": {"name": {"en": "α1 adrenergic receptors",
                         "fr": "Récepteurs α1 adrénergiques"},
                "type": "receptor_group", "system": "adrenergic",
+               "members": ["alpha1a", "alpha1b", "alpha1c", "alpha1d"],
                "wikipedia":
                    "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
                "regions": ["frontal", "parietal", "temporal", "occipital",
@@ -265,6 +280,11 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
                # disinhibits and raises it. Marked so the flow overlay signs the
                # tone (the specific 5-HT1x / D2/D3 autoreceptors carry this on their
                # own receptor records; a receptor_group has none, so it is set here).
+               # Kept as a coarse group (no `members` expansion): the tone-setting
+               # autoreceptor character lives on THIS group node's sign/synaptic
+               # flags, which the individual alpha2a..d receptor records do not
+               # carry, so expanding would silently drop the drug-flow overlay for
+               # clonidine / mirtazapine / yohimbine.
                "sign": "inhibitory", "synaptic": "presynaptic",
                "wikipedia":
                    "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
@@ -273,6 +293,7 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     "beta": {"name": {"en": "β adrenergic receptors",
                       "fr": "Récepteurs β adrénergiques"},
              "type": "receptor_group", "system": "adrenergic",
+             "members": ["beta1", "beta2", "beta3"],
              "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor",
              "regions": ["frontal", "parietal", "cingulate", "accumbens",
                          "cerebellum"]},
@@ -282,11 +303,6 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
                   "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
                   "regions": ["frontal", "temporal", "hippocampus", "thalamus",
                               "cerebellum", "caudate", "putamen"]},
-    "melatonin": {"name": {"en": "Melatonin receptors (MT1/MT2)",
-                           "fr": "Récepteurs de la mélatonine (MT1/MT2)"},
-                  "type": "receptor_group", "system": "melatonergic",
-                  "wikipedia": "https://en.wikipedia.org/wiki/Melatonin_receptor",
-                  "regions": ["hypothalamus", "thalamus"]},
     "orexin": {"name": {"en": "Orexin receptors (OX1R/OX2R)",
                         "fr": "Récepteurs de l'orexine (OX1R/OX2R)"},
                "type": "receptor_group", "system": None,

@@ -593,6 +593,11 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
     """
     targets: dict[str, dict[str, Any]] = {}
     for tid, spec in DRUG_TARGETS.items():
+        # A receptor_group carrying `members` is fully expanded into its individual
+        # member receptors at binding-build time (see _expand_group_bindings), so it
+        # is not itself a browsable node: the drugs show up on each member receptor.
+        if spec.get("members"):
+            continue
         targets[tid] = {
             "name": spec["name"],
             "type": spec["type"],
@@ -661,6 +666,44 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
     return targets
 
 
+def _expand_group_bindings(
+        bindings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Expand every binding against a ``members`` receptor_group into one binding
+    per member receptor.
+
+    A drug authored as binding the coarse group (``"muscarinic"``) is rewritten to
+    bind each modeled subtype (``m1``..``m5``), so the drug appears when browsing the
+    individual receptor. The functional claim (``action``/``effect``/``note``/
+    ``tentative``) and the quote ``sources`` are inherited unchanged (a "blocks
+    muscarinic receptors" quote substantiates each subtype and still passes the
+    quote gate). The group-level PDSP ``ki`` is **dropped**, not copied: an aggregate
+    pan-receptor affinity measured on one (often unstated) subtype must not be
+    re-asserted as the same value on all five, which would fabricate subtype
+    selectivity we do not have. A hand-authored explicit member binding on the same
+    drug wins: the group never overwrites or duplicates it. A group with no
+    ``members`` (α2, glutamate, orexin, melanocortin) passes through untouched.
+    """
+    explicit = {b["target"] for b in bindings}
+    out: list[dict[str, Any]] = []
+    for b in bindings:
+        members = DRUG_TARGETS.get(b["target"], {}).get("members")
+        if not members:
+            out.append(b)
+            continue
+        for mid in members:
+            if mid in explicit:
+                continue  # a hand-authored subtype binding takes precedence
+            nb = dict(b)
+            nb["target"] = mid
+            nb.pop("ki", None)
+            # An affinity_only group binding carried only the (now-dropped) Ki, so
+            # the expanded member would assert nothing; skip it.
+            if nb.get("affinity_only") and not nb.get("sources"):
+                continue
+            out.append(nb)
+    return out
+
+
 def _drug_record(drug: dict[str, Any], valid_targets: set[str],
                  known_bases: set[str],
                  molecule_ids: set[str]) -> dict[str, Any]:
@@ -706,7 +749,7 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
             raise KeyError(f"Drug {drug['id']!r} category {cat!r} has no "
                            f"DRUG_CATEGORY_LABELS entry")
     bindings: list[dict[str, Any]] = []
-    for b in drug["bindings"]:
+    for b in _expand_group_bindings(drug["bindings"]):
         if b["target"] not in valid_targets:
             raise KeyError(f"Drug {drug['id']!r} binding target {b['target']!r} "
                            f"is not a known target (DRUG_TARGETS key or receptor id)")

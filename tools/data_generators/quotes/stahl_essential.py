@@ -278,17 +278,15 @@ STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
         "localized within the synaptic vesicle membrane, binds the anticonvulsant "
         "levetiracetam, perhaps interfering with neurotransmitter release and "
         "thereby reducing seizures."),
-    "muscarinic": _SE_MUSCARINIC,
-    "nicotinic": _stahl_ess(524,
-        "Acetylcholine neurotransmission can be regulated by ligand-gated "
-        "excitatory ion channels known as nicotinic acetylcholine receptors, "
-        "shown here."),
-    "alpha1": _SE_NE_GROUPS, "alpha2": _SE_NE_GROUPS, "beta": _SE_NE_GROUPS,
+    # muscarinic / nicotinic / alpha1 / beta are `members` groups: expanded to their
+    # individual receptors (which carry their own classification quotes via
+    # STAHL_ESSENTIAL_RECEPTOR_QUOTES) and not emitted as browsable target nodes, so
+    # they need no group-level target quote here. Only the un-expanded α2 group does.
+    "alpha2": _SE_NE_GROUPS,
     "glutamate": _stahl_ess(92,
         "The other subclass of ligand-gated ion channels has a tetrameric "
         "structure, and includes many glutamate receptors, including the AMPA, "
         "kainate, and NMDA subtypes."),
-    "melatonin": _SE_MELATONIN,
     "orexin": _stahl_ess(425,
         "Orexin neurotransmission is mediated by two types of postsynaptic "
         "G-protein-coupled receptors, orexin 1 (OX1R) and orexin 2 (OX2R)."),
