@@ -4,6 +4,19 @@ Guidance for Claude Code (and humans) working in this repository. This file is a
 **map**, not a manual: it says what exists, where it lives, and the non-obvious
 rules, so you can find the code, not re-read it in prose.
 
+> [!CAUTION]
+> **This is a large, wide-ranging codebase: manage your context deliberately.** The
+> data model, generator, viewer, sourcing pipeline and deploy stack are each sizeable, so
+> you cannot hold it all at once. Read only what a task needs (this map -> the one file ->
+> the one symbol), lean on the doc split (`ARCHITECTURE.md`, `tools/README.md`, `docs/*`)
+> instead of re-reading prose, and prefer targeted search over whole-file reads.
+> **Keep files small and hierarchically organized so no single file balloons and dilutes
+> context.** When adding code, anticipate its growth and place it so it stays cohesive:
+> split a module *before* it gets unwieldy, reuse existing helpers rather than duplicating
+> (see the no-duplication rule under Conventions), and design the seams up front so a later
+> costly refactor / dedup pass is not needed. A file that has grown too big to load
+> comfortably is itself a bug to fix.
+
 > [!IMPORTANT]
 > **Keep this file current AND terse, and do not grow it by default.** Update a
 > line here only when a change adds or removes something a reader cannot quickly
