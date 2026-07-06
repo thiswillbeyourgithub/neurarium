@@ -402,10 +402,13 @@ interactions literally stated; gaps left as TODO / no binding).
   (VMAT2)/vesicle-protein blocker −, autoreceptor agonist − / antagonist +; a `vesicular` flag + the α2
   group's `sign`/`synaptic` come from `meta.drug_targets`) and an `affinityWeight` (0.35..1 pKi ramp
   from the measured Ki, engagement not effect size). Per engaged kind it sums `toneSign*affinityWeight`
-  into `flowSystems` (`{direction, weight}`): the sign is the flow direction (an SSRI drives serotonergic
-  **up**, buspirone's 5-HT1A agonism **down**, a VMAT2 blocker **down**), the clamped magnitude its
-  intensity. `circuit-anim.js` `play(arrows, flowSystems)` recolours/scales the volley per arrow (boost =
-  warm/bright/fast/dense, damp = cool/dim/slow/sparse). The system map is data: `system_flow_kinds`
+  into `flowSystems` (`{direction, weight, rel}`): the sign is the flow direction (an SSRI drives serotonergic
+  **up**, buspirone's 5-HT1A agonism **down**, a VMAT2 blocker **down**), the clamped magnitude its absolute
+  `weight`, and `rel` the same normalized **per-drug** so the strongest engaged system = 1 (dosage varies, so
+  the overlay shows *relative* intensity across systems). `circuit-anim.js` `play(arrows, flowSystems)` streams
+  beads **continuously** end-to-end along each arc (a curated circuit keeps its sequential BFS volley; a drug
+  focus, signalled by a passed `flowSystems`, streams so the relative density + speed read), recolouring/scaling
+  per arrow off `rel` (boost = warm/bright/fast/dense, damp = cool/dim/slow/sparse). The system map is data: `system_flow_kinds`
   (target `system` -> projection `kind`, the diffuse ascending systems with a modeled source nucleus;
   glutamate/GABA left out). `focusDrug` filters arrows (`flowArrowsOf`), pins + `circuitAnim.play()`s
   them; a purely postsynaptic drug sets no tone -> dots + wash only. **Caveat:** a D2-antagonist

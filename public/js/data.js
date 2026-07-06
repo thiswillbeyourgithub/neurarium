@@ -565,6 +565,15 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       if (!sum) continue;
       d.flowSystems[kind] = { direction: sum > 0 ? 1 : -1, weight: Math.min(1, Math.abs(sum)) };
     }
+    // Normalize to a per-drug *relative* intensity (`rel`, 0..1): the drug's strongest
+    // engaged system streams at 1, the rest in proportion. Dosage is highly variable,
+    // so what the flow overlay should show is the relative "dirtiness" across systems,
+    // not an absolute magnitude. `weight` (absolute affinity) is kept for the panel's
+    // strongest-binding pill; `rel` drives the animation's density/speed.
+    const maxFlowWeight = Math.max(0, ...Object.values(d.flowSystems).map((f) => f.weight));
+    for (const f of Object.values(d.flowSystems)) {
+      f.rel = maxFlowWeight ? f.weight / maxFlowWeight : 1;
+    }
     // Drives the flowing-beads overlay (main.js filters arrows by these kinds, then
     // js/circuit-anim.js animates them with the per-kind direction/weight above) and
     // the panel's "Projections affected" list. Empty for a drug that sets no tone (a

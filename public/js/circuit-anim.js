@@ -66,6 +66,19 @@ const BURST = {
 };
 const burstFor = (sign) => BURST[sign] || BURST.modulatory;
 
+// Continuous drug-flow stream (drug focus only, when `flowSystems` is passed):
+// instead of the sequential BFS volley a curated circuit uses, every engaged pathway
+// streams beads end-to-end without stopping, so the *relative* density and speed
+// across systems read at a glance. Both are normalized per drug (js/data.js `rel`,
+// the strongest engaged system = 1): dosage is variable, so what matters is the
+// relative "dirtiness" of activity across systems, not an absolute magnitude. A
+// stronger system rides more beads, faster; a weaker one fewer, slower.
+const STREAM_MIN_BEADS = 2;
+const STREAM_MAX_BEADS = 7;
+const STREAM_MIN_SPEED = 0.30; // arcs travelled per second (weakest system)
+const STREAM_MAX_SPEED = 0.62; // arcs travelled per second (strongest system)
+const lerp = (a, b, t) => a + (b - a) * t;
+
 /**
  * Build the circuit traveling-pulse controller. One per scene; ticked once per
  * frame in the render loop. Driven by js/main.js: `play(circuitArrows)` from the
@@ -83,6 +96,8 @@ export function createCircuitAnimation({ scene }) {
   let numSteps = 1;
   let elapsed = 0;
   let lastTime = null;
+  let continuous = false; // drug flow: beads stream end-to-end instead of BFS volleys
+  let streamSec = 0; // continuous-mode clock, in seconds (unbounded; per-bead mod 1)
   // Reused scratch so triggering a wash allocates nothing per landing.
   const tmpPoint = new THREE.Vector3();
 
@@ -118,9 +133,13 @@ export function createCircuitAnimation({ scene }) {
       // beads/washes. The circuit's arrows are still pinned + the rest dimmed by
       // the selection controller, so the circuit still reads, just held still.
       if (!animSettings.enabled) return;
+      // Drug focus (flowSystems passed) streams continuously so relative density +
+      // speed read; a curated circuit keeps its sequential BFS volley.
+      continuous = !!flowSystems;
       const { phased, numSteps: steps } = scheduleCircuit(circuitArrows);
       numSteps = steps;
       elapsed = 0;
+      streamSec = 0;
       lastTime = null;
       for (const { arrow, phase } of phased) {
         const burst = burstFor(arrow.projection.sign);
@@ -130,6 +149,33 @@ export function createCircuitAnimation({ scene }) {
         // as "pulling the system down") vs the bright near-white boost/circuit bead.
         const whiten = flow ? (flow.direction > 0 ? 0.55 : 0.22) : 0.55;
         const color = arrow.material.color.clone().lerp(WHITE, whiten);
+
+        if (continuous) {
+          // Relative intensity (0..1), normalized across the drug's systems so the
+          // strongest streams fullest (js/data.js `rel`); both bead count (density)
+          // and travel speed track it, a damp reads a touch slower/dimmer.
+          const rel = flow ? (flow.rel != null ? flow.rel : flow.weight) : 1;
+          const dir = flow ? flow.direction : 1;
+          const beadCount = Math.max(1, Math.round(
+            lerp(STREAM_MIN_BEADS, STREAM_MAX_BEADS, rel) * animSettings.quality));
+          const streamSpeed = lerp(STREAM_MIN_SPEED, STREAM_MAX_SPEED, rel) * (dir < 0 ? 0.82 : 1);
+          const bright = burst.bright * (dir > 0 ? 1 : 0.62);
+          for (let i = 0; i < beadCount; i++) {
+            const material = new THREE.MeshBasicMaterial({
+              color: color.clone(), transparent: true, opacity: 0,
+              blending: THREE.AdditiveBlending, depthWrite: false,
+            });
+            const mesh = new THREE.Mesh(PULSE_GEOMETRY, material);
+            mesh.scale.setScalar(burst.scale);
+            mesh.visible = false;
+            mesh.raycast = () => {};
+            scene.add(mesh);
+            // Even spacing along the arc so the stream looks steady, not clumped.
+            pulses.push({ arrow, mesh, material, streamOffset: i / beadCount, streamSpeed, bright });
+          }
+          continue;
+        }
+
         // Weight (affinity) thins a weak volley; a damp also dims + slows it.
         const countScale = flow ? 0.5 + 0.5 * flow.weight : 1;
         const bright = burst.bright * (flow ? (flow.direction > 0 ? 1 : 0.6) * (0.55 + 0.45 * flow.weight) : 1);
@@ -204,19 +250,29 @@ export function createCircuitAnimation({ scene }) {
         if (f.age < WASH_MS) f.age = Math.min(WASH_MS, f.age + dt);
       }
 
+      if (continuous) streamSec += dt / 1000;
       const clock = elapsed / STEP_MS; // position in "steps", [0, numSteps)
       for (const p of pulses) {
-        // This arrow's slot is active for local in [phase, phase+1); each bead in
-        // the volley rides the arc offset behind the lead and a touch faster.
-        const local = clock - p.phase;
-        if (local < 0 || local >= 1 || !p.arrow.group.visible) {
-          p.mesh.visible = false;
-          continue;
-        }
-        const t = local * p.speed - p.offset; // this bead's position along the arc
-        if (t < 0 || t > 1) {
-          p.mesh.visible = false;
-          continue;
+        let t;
+        if (continuous) {
+          // Continuous stream: every bead is always on the arc, wrapping tail->head,
+          // so the steady density + speed read (no start/stop volley).
+          if (!p.arrow.group.visible) { p.mesh.visible = false; continue; }
+          t = (streamSec * p.streamSpeed + p.streamOffset) % 1;
+          if (t < 0) t += 1;
+        } else {
+          // This arrow's slot is active for local in [phase, phase+1); each bead in
+          // the volley rides the arc offset behind the lead and a touch faster.
+          const local = clock - p.phase;
+          if (local < 0 || local >= 1 || !p.arrow.group.visible) {
+            p.mesh.visible = false;
+            continue;
+          }
+          t = local * p.speed - p.offset; // this bead's position along the arc
+          if (t < 0 || t > 1) {
+            p.mesh.visible = false;
+            continue;
+          }
         }
         p.arrow.curve.getPoint(t, tmpPoint); // reuse the scratch vec (no per-bead alloc)
         p.mesh.position.copy(tmpPoint);
