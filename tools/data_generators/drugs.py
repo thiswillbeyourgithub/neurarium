@@ -235,42 +235,15 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
              "wikipedia": "https://en.wikipedia.org/wiki/SV2A",
              "regions": ["frontal", "temporal", "hippocampus", "thalamus"]},
     # --- Receptor groups -----------------------------------------------------
-    # A `receptor_group` whose subtypes are all modeled individually in RECEPTORS
-    # carries a `members` list: at build time every binding against the group is
-    # expanded into one binding per member receptor (so browsing M1 shows the drug
-    # that "blocks muscarinic receptors"), and the group itself is NOT emitted as a
-    # browsable target (see _expand_group_bindings / _build_drug_targets). A group
-    # with no clean 1:1 member set (glutamate: expanding to all 10 iono/metabotropic
-    # subtypes would over-claim; orexin/melanocortin: no subtype modeled) keeps no
-    # `members` and stays a coarse browsable group. The α2 family is a special case
-    # (see alpha2 below).
-    "muscarinic": {"name": {"en": "Muscarinic receptors (M1–M5)",
-                            "fr": "Récepteurs muscariniques (M1–M5)"},
-                   "type": "receptor_group", "system": "cholinergic",
-                   "members": ["m1", "m2", "m3", "m4", "m5"],
-                   "wikipedia":
-                       "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
-                   "regions": ["frontal", "temporal", "hippocampus", "caudate",
-                               "putamen", "thalamus", "hypothalamus"]},
-    "nicotinic": {"name": {"en": "Nicotinic receptors",
-                           "fr": "Récepteurs nicotiniques"},
-                  "type": "receptor_group", "system": "cholinergic",
-                  # The neuronal CNS nicotinic receptors; the muscle-type
-                  # (nachr_muscle) is peripheral and never what a CNS "nicotinic"
-                  # binding means, so it is excluded from the expansion.
-                  "members": ["nachr_a4b2", "nachr_a7"],
-                  "wikipedia":
-                      "https://en.wikipedia.org/wiki/Nicotinic_acetylcholine_receptor",
-                  "regions": ["frontal", "temporal", "hippocampus", "thalamus",
-                              "vta"]},
-    "alpha1": {"name": {"en": "α1 adrenergic receptors",
-                        "fr": "Récepteurs α1 adrénergiques"},
-               "type": "receptor_group", "system": "adrenergic",
-               "members": ["alpha1a", "alpha1b", "alpha1c", "alpha1d"],
-               "wikipedia":
-                   "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
-               "regions": ["frontal", "parietal", "temporal", "occipital",
-                           "hippocampus", "thalamus", "midbrain", "pons", "medulla"]},
+    # A `receptor_group` is a coarse target kept ONLY where its subtypes cannot be
+    # split honestly: glutamate (expanding to all 10 iono/metabotropic subtypes would
+    # over-claim), orexin/melanocortin (no subtype modeled), and α2 (its tone-setting
+    # autoreceptor character lives on this group node, see alpha2 below). The
+    # muscarinic / α1 / β / nicotinic families ARE split: their drug bindings are
+    # authored directly against the individual subtype receptors (m1..m5, alpha1a..d,
+    # beta1..3, nachr_a4b2/a7) in drugs_data.jsonl, so each subtype carries its own
+    # measured per-subtype Ki (fetch_ki, CHRM1..5 / ADRA1A.. etc.) instead of an
+    # aggregate, and the drug shows up when browsing that receptor.
     "alpha2": {"name": {"en": "α2 adrenergic receptors",
                         "fr": "Récepteurs α2 adrénergiques"},
                "type": "receptor_group", "system": "adrenergic",
@@ -280,23 +253,16 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
                # disinhibits and raises it. Marked so the flow overlay signs the
                # tone (the specific 5-HT1x / D2/D3 autoreceptors carry this on their
                # own receptor records; a receptor_group has none, so it is set here).
-               # Kept as a coarse group (no `members` expansion): the tone-setting
-               # autoreceptor character lives on THIS group node's sign/synaptic
-               # flags, which the individual alpha2a..d receptor records do not
-               # carry, so expanding would silently drop the drug-flow overlay for
-               # clonidine / mirtazapine / yohimbine.
+               # Kept coarse (not split into alpha2a..d): the tone-setting autoreceptor
+               # character lives on THIS group node's sign/synaptic flags, which the
+               # individual alpha2a..d receptor records do not carry, so splitting
+               # would silently drop the drug-flow overlay for clonidine / mirtazapine
+               # / yohimbine.
                "sign": "inhibitory", "synaptic": "presynaptic",
                "wikipedia":
                    "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
                "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
                            "hypothalamus", "midbrain", "pons", "medulla"]},
-    "beta": {"name": {"en": "β adrenergic receptors",
-                      "fr": "Récepteurs β adrénergiques"},
-             "type": "receptor_group", "system": "adrenergic",
-             "members": ["beta1", "beta2", "beta3"],
-             "wikipedia": "https://en.wikipedia.org/wiki/Adrenergic_receptor",
-             "regions": ["frontal", "parietal", "cingulate", "accumbens",
-                         "cerebellum"]},
     "glutamate": {"name": {"en": "Glutamate receptors",
                            "fr": "Récepteurs du glutamate"},
                   "type": "receptor_group", "system": "glutamatergic",

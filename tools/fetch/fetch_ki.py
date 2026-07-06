@@ -69,13 +69,13 @@ GENE_TO_ID = {
     "CHRNA7": "nachr_a7", "MAOA": "mao_a", "MAOB": "mao_b",
 }
 
-# A coarse target in our dataset (e.g. `alpha1`) has no single gene; it collects
-# its subtypes. Maps our coarse id -> the set of subtype ids that count as it.
+# A coarse target in our dataset (e.g. `alpha2`) has no single gene; it collects
+# its subtypes. Maps our coarse id -> the set of subtype ids that count as it. Only
+# α2 remains coarse (its autoreceptor tone lives on the group node); the muscarinic /
+# α1 / β / nicotinic families are split into per-subtype targets, so they resolve
+# straight to their subtype ids and must NOT collapse back to a coarse bucket here.
 COARSE_MEMBERS = {
-    "alpha1": {"alpha1", "alpha1a", "alpha1b", "alpha1c", "alpha1d"},
     "alpha2": {"alpha2", "alpha2a", "alpha2b", "alpha2c", "alpha2d"},
-    "beta": {"beta", "beta1", "beta2", "beta3"},
-    "muscarinic": {"muscarinic", "m1", "m2", "m3", "m4", "m5"},
 }
 
 # Fallback for the ~25% of rows with a blank Unigene: normalize the free-text
@@ -101,8 +101,11 @@ NAME_PATTERNS = [
     (re.compile(r"d2long|d2short|d2a\b|(^|[^0-9])d2($|[^0-9])"), "d2"),
     (re.compile(r"(^|[^0-9])d3($|[^0-9])"), "d3"),
     (re.compile(r"(^|[^0-9])d4($|[^0-9])"), "d4"),
+    # α1 is split into subtypes: match the lettered subtypes, but a subtype-less
+    # "Alpha1" assay resolves to None (dropped) rather than a coarse bucket we no
+    # longer carry. α2 keeps its coarse fallback (still a coarse target).
     (re.compile(r"alpha1b"), "alpha1b"), (re.compile(r"alpha1a"), "alpha1a"),
-    (re.compile(r"alpha1"), "alpha1"),
+    (re.compile(r"alpha1d"), "alpha1d"),
     (re.compile(r"alpha2c"), "alpha2c"), (re.compile(r"alpha2a"), "alpha2a"),
     (re.compile(r"alpha2"), "alpha2"),
     (re.compile(r"(^|[^0-9])h1($|[^0-9])|histamineh1"), "h1"),
