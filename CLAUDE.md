@@ -561,8 +561,10 @@ A bare `llm` grade *is* missing (an LLM asserting from memory has no document), 
 sourceless node (the viewer still shows them differently, grey `?` vs orange `NOSOURCE`). It tallies per
 node kind (drug bindings, NbN, drug class, projections, circuits, projection groups, receptor/target
 classifications, receptor/target expression regions, region anatomy, wikipedia references), plus a
-headline `pct_backed` over the **knowledge nodes** (references excluded, a reference points *at* a node),
-emitted as `meta.provenance_stats` (key `nodes`). Each expression region is its own node, individually
+headline `pct_backed` over the **knowledge nodes** (references excluded, a reference points *at* a node).
+The `references` kind stays in `by_kind` but the viewer does **not** render it as a coverage bar (a
+reference is not a knowledge node, and every present link defaults to `sourced`, so the bar was uniformly
+yellow noise); it is emitted as `meta.provenance_stats` (key `nodes`). Each expression region is its own node, individually
 upgradeable. **The live per-kind figures live in the README `SOURCING_STATS` block (auto-written by
 `update_readme_stats.py`, CI runs it `--check`) and the Sources & provenance popup; they are not repeated
 here, to avoid drift.** `check_data.py` re-confirms the tally is self-consistent (coverage columns M/S/S+V).

@@ -315,7 +315,6 @@
       "about.kindTargetPolarity": "Target tone polarity",
       "about.kindTargetLocations": "Target expression regions",
       "about.kindStructures": "Brain-region anatomy",
-      "about.kindReferences": "Reference links",
 
       "dev.wip": "Work in progress",
       "dev.restarted":
@@ -611,7 +610,6 @@
       "about.kindTargetPolarity": "Polarité tonique de la cible",
       "about.kindTargetLocations": "Régions d'expression des cibles",
       "about.kindStructures": "Anatomie des régions",
-      "about.kindReferences": "Liens de référence",
 
       "dev.wip": "En cours de développement",
       "dev.restarted":

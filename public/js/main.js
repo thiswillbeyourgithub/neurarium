@@ -3829,7 +3829,10 @@ function buildAboutSourcing(meta) {
     target_polarity: "about.kindTargetPolarity",
     target_locations: "about.kindTargetLocations",
     structures: "about.kindStructures",
-    references: "about.kindReferences",
+    // Wikipedia `references` are deliberately NOT a coverage bar: a reference is a
+    // pointer *at* a knowledge node, not itself a node, and every present link
+    // defaults to `sourced` (so the bar was uniformly yellow and read as noise). It
+    // stays in meta.provenance_stats.by_kind (data), just not rendered here.
   };
   // Rows are sorted best-coverage-first (highest % of backed nodes), ties broken by
   // the larger node count, so the strongest-sourced kinds head the list.
