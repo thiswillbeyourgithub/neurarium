@@ -1519,6 +1519,18 @@ function createPanelTabs() {
       else activate(target);
       return true;
     },
+    /** Close every open detail tab, returning to Settings (fires onEmpty once the
+     *  last one goes, clearing the 3D focus + the URL hash). No-op when none open. */
+    closeAll() {
+      if (!openTabs.length) return false;
+      // Drop them all, then let the shared close path settle the empty state.
+      openTabs.length = 0;
+      activeKey = null;
+      showPane(false);
+      onEmpty();
+      render();
+      return true;
+    },
     /** Set the callback run when the last detail tab is closed (clears the 3D). */
     setOnEmpty(fn) { onEmpty = fn; },
     /** The active detail tab's key (`<kind>:<id>`), or null when Settings is shown.
@@ -4184,7 +4196,10 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
 
   resetBtn.addEventListener("click", () => {
     focus.recenter();
-    // Full reset: drop the halo *and* the isolate set, restoring default opacity.
+    // Full reset: close any open detail tabs (which clears the 3D focus and strips
+    // the deep-link hash via setOnEmpty), then drop any remaining halo / isolate set,
+    // restoring default opacity.
+    tabs.closeAll();
     selection.clear();
   });
 
