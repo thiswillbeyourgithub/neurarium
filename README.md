@@ -10,7 +10,7 @@ apart, search, and click through.**
 > <!-- SOURCED_HEADLINE:START --><b>91% of the 2132 knowledge nodes are sourced or verified</b><!-- SOURCED_HEADLINE:END -->
 > in the shipped dataset, and every fact in the app carries a provenance grade you
 > can inspect. This is a real programmatic count of the data (see
-> [Every node is graded](#every-node-is-graded)).
+> [Every node is sourced](#every-node-is-sourced)).
 
 Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
@@ -41,7 +41,7 @@ always know how much to trust it.
 | **Drugs** | Psychiatric drugs from Stahl's *Prescriber's Guide* | Focus one: effect-colored dots (boost / block / modulate) animate over the regions it touches, beads flow along the transmitter systems it works through, and the panel shows its structure, class, bindings, and each binding's source |
 | **Everything** | One search box; fully URL-addressable state | Search regions, pathways, receptors, and drugs at once; pivot from a drug to its class or from a target to every drug that hits it; share any view as a deep link |
 
-## Every node is graded
+## Every node is sourced
 
 A *node* is any sourceable datum: a brain region, a projection between two regions, a
 functional circuit, a receptor, a receptor's expression in a given region, a drug, a

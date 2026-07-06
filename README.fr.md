@@ -10,7 +10,7 @@ tourner, écarter, rechercher et explorer au clic.**
 > <!-- SOURCED_HEADLINE:START --><b>91% of the 2132 knowledge nodes are sourced or verified</b><!-- SOURCED_HEADLINE:END -->
 > dans le jeu de données livré, et chaque fait de l'application porte une note de
 > provenance que vous pouvez inspecter. C'est un vrai comptage programmatique des
-> données (voir [Chaque nœud est gradué](#chaque-nœud-est-gradué)).
+> données (voir [Chaque nœud est sourcé](#chaque-nœud-est-sourcé)).
 
 En ligne sur [neurarium.olicorne.org](https://neurarium.olicorne.org).
 
@@ -43,7 +43,7 @@ confiance.
 | **Médicaments** | Des médicaments psychiatriques tirés du *Prescriber's Guide* de Stahl | En focaliser un : des points colorés par effet (renforce / bloque / module) s'animent sur les régions qu'il touche, des billes circulent le long des systèmes de transmetteurs par lesquels il agit, et le panneau montre sa structure, sa classe, ses liaisons et la source de chacune |
 | **Tout** | Une seule barre de recherche ; un état entièrement adressable par URL | Chercher régions, voies, récepteurs et médicaments à la fois ; pivoter d'un médicament vers sa classe ou d'une cible vers tous les médicaments qui l'atteignent ; partager n'importe quelle vue par un lien direct |
 
-## Chaque nœud est gradué
+## Chaque nœud est sourcé
 
 Un *nœud* est toute donnée sourçable : une région cérébrale, une projection entre deux
 régions, un circuit fonctionnel, un récepteur, l'expression d'un récepteur dans une
