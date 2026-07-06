@@ -3747,6 +3747,92 @@ function applyViewParams(bundle) {
   }
 }
 
+// Single open bar-tooltip (only one pinned at a time across all the sourcing bars).
+let _openBarTip = null;
+
+/**
+ * Attach a tap/hover tooltip to a *block* trigger (the sourcing coverage bars),
+ * mirroring the info panel's withTip touch behavior: on a touch screen one tap pins
+ * the bubble and a tap elsewhere dismisses it; on a pointer device hover shows it.
+ * Kept separate from createInfoPanel.withTip (that one wraps inline pills in a
+ * .help-icon span and shares state within the panel) because a bar is a block whose
+ * layout must not be wrapped; here the listeners attach to the element directly and
+ * the bubble is a lone `.help-tip` on <body>. Its z-index is lifted above the
+ * #sourcing-modal (80) so it is not hidden behind the modal backdrop.
+ */
+function attachTapTip(trigger, text) {
+  const tip = document.createElement("span");
+  tip.className = "help-tip";
+  tip.setAttribute("role", "tooltip");
+  tip.textContent = text;
+  tip.style.zIndex = "90"; // above the #sourcing-modal (z-index 80)
+  trigger.style.cursor = "help";
+  let pinned = false, hideTimer = 0;
+  const place = () => {
+    const r = trigger.getBoundingClientRect();
+    const tw = tip.offsetWidth, th = tip.offsetHeight, m = 6;
+    const left = Math.max(m, Math.min(r.left + r.width / 2 - tw / 2,
+      window.innerWidth - tw - m));
+    let top = r.top - th - 4;
+    if (top < m) top = r.bottom + 4; // flip below if no room above
+    tip.style.left = `${Math.round(left)}px`;
+    tip.style.top = `${Math.round(top)}px`;
+  };
+  const reposition = () => {
+    if (!trigger.isConnected) close();
+    else if (tip.classList.contains("show")) place();
+  };
+  const onDocPointer = (e) => {
+    if (trigger.contains(e.target) || tip.contains(e.target)) return;
+    close();
+  };
+  const open = () => {
+    clearTimeout(hideTimer);
+    if (_openBarTip && _openBarTip !== close) _openBarTip();
+    _openBarTip = close;
+    if (!tip.isConnected) document.body.appendChild(tip);
+    tip.classList.add("show");
+    place();
+    requestAnimationFrame(place);
+    window.addEventListener("scroll", reposition, true);
+    window.addEventListener("resize", reposition);
+    document.addEventListener("pointerdown", onDocPointer, true);
+  };
+  const close = () => {
+    clearTimeout(hideTimer);
+    pinned = false;
+    if (_openBarTip === close) _openBarTip = null;
+    tip.classList.remove("show");
+    tip.remove();
+    window.removeEventListener("scroll", reposition, true);
+    window.removeEventListener("resize", reposition);
+    document.removeEventListener("pointerdown", onDocPointer, true);
+  };
+  const scheduleHide = () => {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      if (pinned || trigger.matches(":hover") || tip.matches(":hover")) return;
+      close();
+    }, 160);
+  };
+  // A tap pins on touch (where :hover never fires) / a click pins on a pointer
+  // device so the text stays put; tapping the bar again toggles it closed.
+  trigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (pinned) close(); else { pinned = true; open(); }
+  });
+  // Hover/focus reveal is pointer-only: on touch a tap synthesizes mouseenter then
+  // click, which would show-then-toggle-hide on the first tap (see withTip).
+  const canHover = !window.matchMedia ||
+    window.matchMedia("(hover: hover)").matches;
+  if (canHover) {
+    trigger.addEventListener("mouseenter", open);
+    trigger.addEventListener("mouseleave", scheduleHide);
+    tip.addEventListener("mouseenter", () => clearTimeout(hideTimer));
+    tip.addEventListener("mouseleave", scheduleHide);
+  }
+}
+
 /**
  * Fill the About panel's "Sources & provenance" block from meta.provenanceStats:
  * the grade key (reusing the .src-pill swatches the info panel shows beside each
@@ -3860,10 +3946,11 @@ function buildAboutSourcing(meta) {
       seg.style.width = `${(100 * n) / r.total}%`;
       bar.appendChild(seg);
     }
-    // Native (floating) hover tooltip with the per-grade counts.
-    bar.title = SEGMENTS
+    // Per-grade counts tooltip. Uses attachTapTip (not a native `title`) so it also
+    // works on touch: one tap pins it, a tap elsewhere dismisses it.
+    attachTapTip(bar, SEGMENTS
       .map(([field, , labelKey]) => `${t(labelKey)}: ${r[field]}`)
-      .join("  ·  ");
+      .join("  ·  "));
     row.appendChild(bar);
     wrap.appendChild(row);
   }
