@@ -68,5 +68,7 @@ in `js/main.js`; the value matches the node's id or (folded, case-insensitive) n
 | `#focusConnection=cortex->thalamus` | a projection (both sides) |
 | `#focusCircuit=<id>` / `#focusGroup=<id>` | a circuit / projection group |
 
-The toolbar **copy-link** button (chain icon, shown only while a node is focused)
-writes the inverse link for the current node to the clipboard (`currentDeepLink`).
+The inverse also holds automatically: focusing any node rewrites the URL hash to its
+deep link via `history.replaceState` (`syncHashToFocus`, built from `currentDeepLink`),
+so the address bar is always the shareable link for what is on screen (no copy button;
+`replaceState` avoids both a `hashchange` loop and back/forward history spam).

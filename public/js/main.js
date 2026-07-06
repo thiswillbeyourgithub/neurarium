@@ -1522,7 +1522,7 @@ function createPanelTabs() {
     /** Set the callback run when the last detail tab is closed (clears the 3D). */
     setOnEmpty(fn) { onEmpty = fn; },
     /** The active detail tab's key (`<kind>:<id>`), or null when Settings is shown.
-     *  Used to build the shareable deep link for the copy-link button. */
+     *  Used to build the shareable deep link that mirrors the focus into the URL. */
     activeKey() { return activeKey; },
   };
 }
@@ -4998,8 +4998,8 @@ async function main() {
   // focused; the reopen thunk re-runs that select* so clicking the tab restores
   // the panel + the 3D focus. Kept here (not in createInfoPanel) so the tab's key
   // and how to re-focus the scene live with the select* layer.
-  // Run after any detail tab opens / the last one closes, so the copy-link button
-  // can reflect whether a node is focused. Assigned once the button is wired below.
+  // Run after any detail tab opens / the last one closes, so the URL hash can be
+  // rewritten to mirror the current focus. Assigned once the deep-link layer is set up.
   let afterTabChange = () => {};
   const openDetailTab = (key, title, reopen) => {
     // The single choke point every node focus (drug / receptor / target / structure /
@@ -5605,11 +5605,11 @@ async function main() {
     else applyExplode(meshes, 0, arrows);
   }
 
-  // ---- Deep links + copy-link button --------------------------------------------
+  // ---- Deep links (URL hash <-> focus) ------------------------------------------
   // A URL hash like `#focusDrug=vortioxetine` / `#focusReceptor=5-HT2A` opens the
   // node's detail tab and focuses it on load (and on hashchange), exactly as picking
-  // it from search would. The copy-link toolbar button writes the inverse link for
-  // the currently focused node to the clipboard, so any view is shareable.
+  // it from search would. The inverse also holds: focusing any node rewrites the hash
+  // to its deep link (see syncHashToFocus), so the address bar is always shareable.
   const linkFold = (s) => foldText(String(s == null ? "" : s));
   const stripSideId = (id) => String(id).replace(/_[LR]$/, "");
   const findByIdOrName = (list, v) => {
@@ -5680,32 +5680,28 @@ async function main() {
     return url.toString();
   };
 
-  const copyBtn = document.getElementById("copy-link");
-  // Show the copy button only while a node is focused (a detail tab is open).
-  const reflectCopyBtn = () => { if (copyBtn) copyBtn.hidden = !tabs.activeKey(); };
-  afterTabChange = reflectCopyBtn;
-  reflectCopyBtn();
-  if (copyBtn) {
-    copyBtn.addEventListener("click", async () => {
-      const link = currentDeepLink();
-      if (!link) return;
-      try {
-        await navigator.clipboard.writeText(link);
-        copyBtn.classList.add("copied");
-        copyBtn.title = t("toolbar.copiedLink");
-      } catch (_) {
-        copyBtn.title = t("toolbar.copyLinkFailed");
-      }
-      setTimeout(() => {
-        copyBtn.classList.remove("copied");
-        copyBtn.title = t("toolbar.copyLink");
-      }, 1500);
-    });
-  }
+  // Keep the address bar in sync with the focus, so the URL is always the shareable
+  // deep link for whatever is on screen: copying it is just selecting the URL bar, no
+  // dedicated button. `history.replaceState` updates the URL WITHOUT firing
+  // `hashchange` (so it never loops back into applyDeepLink) and without spamming
+  // back/forward history with every focus. Clearing the focus strips the hash.
+  const focusHash = () => {
+    const link = currentDeepLink();
+    return link ? new URL(link).hash : "";
+  };
+  const syncHashToFocus = () => {
+    const want = focusHash();
+    if (want !== window.location.hash) {
+      history.replaceState(null, "",
+        want || window.location.pathname + window.location.search);
+    }
+  };
+  afterTabChange = syncHashToFocus;
 
   // Apply an initial deep link (after the intro exists, so a focused node cancels the
   // assemble intro rather than fighting its explode tween), then react to later
-  // hash changes (in-app copy-link navigation / manual edits / back-forward).
+  // hash changes (manual edits / pasted links / back-forward). Our own focus-driven
+  // updates use replaceState above, which does not fire this event.
   if (applyDeepLink()) intro.cancel();
   window.addEventListener("hashchange", applyDeepLink);
 

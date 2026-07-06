@@ -485,8 +485,6 @@
       }
       .tool-btn:hover { background: rgba(255, 255, 255, 0.12); }
       .tool-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-      /* Brief green confirmation flash after the copy-link button copies a URL. */
-      .tool-btn.copied { background: rgba(102, 207, 133, 0.22); border-color: #66cf85; color: #66cf85; }
       /* currentColor on the SVG strokes makes the icons follow the button text
          color, including the blue .active state of the search toggle. */
       .tool-btn svg { width: 18px; height: 18px; display: block; }
@@ -1645,15 +1643,6 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <circle cx="11" cy="11" r="7" />
               <line x1="16.5" y1="16.5" x2="21" y2="21" />
-            </svg>
-          </button>
-          <!-- Copy direct link: copies a shareable URL that reopens the current
-               focused node (a #focusDrug= / #focusReceptor= ... deep link). Hidden
-               until something is focused (a detail tab is open). Icon: a chain link. -->
-          <button type="button" id="copy-link" class="tool-btn" hidden data-i18n-attr="title:toolbar.copyLink, aria-label:toolbar.copyLink">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9.5 12.5a3.5 3.5 0 0 0 5 0l3-3a3.5 3.5 0 0 0-5-5l-1.5 1.5" />
-              <path d="M14.5 11.5a3.5 3.5 0 0 0-5 0l-3 3a3.5 3.5 0 0 0 5 5l1.5-1.5" />
             </svg>
           </button>
           <!-- Legend: opens the #legend-modal popup (the static colour/symbol key
