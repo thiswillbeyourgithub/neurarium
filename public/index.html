@@ -1628,14 +1628,12 @@
               <line x1="8" y1="14" x2="16" y2="14" />
             </svg>
           </button>
-          <!-- Reset (center): recenter + re-frame the whole brain. -->
+          <!-- Reset view: recenter + re-frame the whole brain. Icon: a circular
+               reset arrow (a "restore the view" rotate), clearer than a crosshair. -->
           <button type="button" id="reset-view" class="tool-btn" data-i18n-attr="title:toolbar.reset, aria-label:toolbar.reset">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <circle cx="12" cy="12" r="6" />
-              <line x1="12" y1="1.5" x2="12" y2="5" />
-              <line x1="12" y1="19" x2="12" y2="22.5" />
-              <line x1="1.5" y1="12" x2="5" y2="12" />
-              <line x1="19" y1="12" x2="22.5" y2="12" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10" />
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
             </svg>
           </button>
           <!-- Search: swaps a search box in for the panel body. -->

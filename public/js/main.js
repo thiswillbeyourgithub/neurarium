@@ -3538,6 +3538,26 @@ function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) {
       focused = null;
     },
     /**
+     * Instantly frame the whole visible brain (no tween), preserving the current
+     * view direction. Used to seat the initial resting pose so a fresh load already
+     * sits exactly where the reset button (recenter, same 1.4 margin) would put it,
+     * instead of a hardcoded camera distance that only roughly matched.
+     */
+    frameAllNow() {
+      box.makeEmpty();
+      for (const mesh of meshes) if (mesh.visible) box.expandByObject(mesh);
+      if (box.isEmpty()) return;
+      box.getBoundingSphere(sphere);
+      const dir = camera.position.clone().sub(controls.target);
+      if (dir.lengthSq() < 1e-6) dir.set(...VIEW_DIRS.iso);
+      dir.normalize();
+      const dist = Math.max(controls.minDistance, fitDistance(sphere.radius, 1.4));
+      controls.target.copy(sphere.center);
+      camera.position.copy(sphere.center).addScaledVector(dir, dist);
+      controls.update();
+      focused = null;
+    },
+    /**
      * Called from the explode handler as the brain spreads: keep whatever is
      * focused (a single structure, or the multi-region set of a receptor / drug /
      * circuit / group focus) centered as it moves radially outward. It enables the
@@ -5590,6 +5610,11 @@ async function main() {
     { meshes, arrows, slider: explodeSlider, camera, controls, focus });
   explodeSlider.addEventListener("input", () => intro.cancel());
   if (!new URLSearchParams(window.location.search).has("explode")) {
+    // Seat the resting pose on the exact framing the reset button produces, so a
+    // fresh load already appears centered (not a hardcoded distance that only
+    // roughly matched). Done first, so the DEV-banner nudge + intro capture build
+    // on the centered pose.
+    focus.frameAllNow();
     // When the dev / WIP banner is up (DEV=1 container; same flag dev-banner.js
     // reads), present the brain a little lower + further back so it sits clear
     // below the banner. Done before intro.start() so the captured resting pose
