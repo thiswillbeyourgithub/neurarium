@@ -374,11 +374,15 @@ are authored in `DRUG_TARGETS`; its regions grade identically (kind `target_loca
 
 ## Drugs
 
-A focusable Drugs section showing, per drug, what it does to the brain. Data is from
-**Stahl's Prescriber's Guide (8th ed.)**, extracted **strictly from the dump** (only
-interactions literally stated; gaps left as TODO / no binding).
+A focusable Drugs section showing, per drug, what it does to the brain. The psychiatric
+drugs come from **Stahl's Prescriber's Guide (8th ed.)**, extracted **strictly from the dump**
+(only interactions literally stated; gaps left as TODO / no binding); the `recreational`
+category (LSD, MDMA, ketamine, cocaine, nicotine, ...) and any future substance are **not**
+Stahl-bound, their bindings sourced from measured **PDSP Ki** instead. Adding a drug is just a
+new row in `drugs_data.jsonl` (see Changing the data), so the corpus is open-ended, not a
+fixed Stahl list.
 
-- **Data.** The 158 drugs live in `tools/data/drugs_data.jsonl`, read by `_load_drugs`. Vocabularies are
+- **Data.** The drugs live in `tools/data/drugs_data.jsonl`, read by `_load_drugs`. Vocabularies are
   defined once in `generate_data.py`: `DRUG_CATEGORY_LABELS`, `DRUG_ACTIONS` (action -> {label, net
   `effect`}), `DRUG_EFFECT_COLORS`/`DRUG_EFFECT_LABELS` (boost/block/modulate), `DRUG_TARGETS`
   (non-receptor targets, `type` a `TARGET_TYPE_LABELS` key). `_build_drug_targets` merges
