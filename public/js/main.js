@@ -4167,30 +4167,53 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   });
 
   // One searchable index over structures + connections + receptors, each carrying
-  // the action to run when it is picked. Built once; structures keep their full
-  // name, connections get a hemisphere tag appended so mirrored twins stay
-  // distinct, and receptors show their neurotransmitter as a tag (and carry extra
-  // `keywords` so the system / mechanism also match, without cluttering the row).
-  // The match runs over `label` + `keywords`; only `label` is shown.
+  // the action to run when it is picked. Built once. Mirrored L/R twins are
+  // collapsed to a single row (a brain is symmetric, so "frontal lobe" and
+  // "corticothalamic" each list once and a pick focuses *both* hemispheres, not one);
+  // receptors show their neurotransmitter as a tag (and carry extra `keywords` so the
+  // system / mechanism also match). The match runs over `label` + `keywords`; only
+  // `label` is shown.
+  const stripSide = (id) => id.replace(/_[LR]$/, "");
+  // Group meshes / arrows by their side-stripped base so each pair yields one row.
+  const meshesByBase = new Map();
+  for (const mesh of meshes) {
+    const base = stripSide(mesh.userData.structure.id);
+    (meshesByBase.get(base) || meshesByBase.set(base, []).get(base)).push(mesh);
+  }
+  const arrowsByBase = new Map();
+  for (const arrow of arrows) {
+    const p = arrow.projection;
+    const key = `${stripSide(p.from)}->${stripSide(p.to)}`;
+    (arrowsByBase.get(key) || arrowsByBase.set(key, []).get(key)).push(arrow);
+  }
   const items = [
-    ...meshes.map((mesh) => ({
-      type: "structure",
-      label: mesh.userData.structure.name,
-      // Frame + isolate, so a search pick dims the rest of the brain exactly like
-      // the structure's legend row (not just a halo in the full brain). `preview`
-      // applies the same dim transiently on hover (no frame / panel / spread).
-      select: () => selectStructure(mesh, { frame: true, isolate: true }),
-      preview: () => selectStructure(mesh, { isolate: true, preview: true }),
-    })),
-    ...arrows.map((arrow) => {
-      const tag = connectionSideTag(arrow.projection);
+    ...[...meshesByBase.values()].map((group) => {
+      // Frame a representative (prefer the midline / right member); the isolate
+      // already spans both sides via isolateGroupFor, so both hemispheres dim in.
+      const rep = group.find((m) => !/_[LR]$/.test(m.userData.structure.id)) || group[0];
+      const s = rep.userData.structure;
+      return {
+        type: "structure",
+        // base_name is the hemisphere-stripped name ("frontal lobe"); fall back to
+        // the full name for a genuine singleton.
+        label: s.base_name || s.name,
+        select: () => selectStructure(rep, { frame: true, isolate: true }),
+        preview: () => selectStructure(rep, { isolate: true, preview: true }),
+      };
+    }),
+    ...[...arrowsByBase.values()].map((group) => {
+      const rep = group[0];
+      const proj = rep.projection;
+      const siblings = group.slice(1);
+      // A clean L/R pair needs no side tag; a lone / crossing pathway keeps its tag.
+      const tag = siblings.length ? "" : connectionSideTag(proj);
       return {
         type: "connection",
-        label: arrow.projection.label + (tag ? ` · ${tag}` : ""),
-        // Frame + isolate, so a connection search pick dims the rest of the brain
-        // like the structure / drug / target picks, not just a halo.
-        select: () => selectConnection(arrow, { frame: true, isolate: true }),
-        preview: () => selectConnection(arrow, { isolate: true, preview: true }),
+        label: proj.label + (tag ? ` · ${tag}` : ""),
+        // Frame + isolate both twins, so a connection search pick dims the rest of the
+        // brain and lights both hemispheres, not just the picked side.
+        select: () => selectConnection(rep, { frame: true, isolate: true, siblings }),
+        preview: () => selectConnection(rep, { isolate: true, preview: true, siblings }),
       };
     }),
     // Focusable receptors + non-receptor targets (a stub / unlocated target has no
@@ -5342,17 +5365,25 @@ async function main() {
   // hemispheres differ), so it keys the tab. The reopen re-halos the arrow when
   // one was built; a pathway with no drawn arrow just re-renders the panel.
   const connectionKey = (proj) => `connection:${proj.from}->${proj.to}`;
-  const selectConnection = (arrow, { frame = false, isolate = false, preview = false } = {}) => {
+  const selectConnection = (arrow, { frame = false, isolate = false, preview = false, siblings = [] } = {}) => {
     if (frame && !preview) focus.focusConnection(arrow);
     // A search result or a detail-panel connection row puts the pathway "fully in
     // focus" like every other search pick: pin the arrow + its two endpoints opaque
     // and dim the rest of the brain (setCircuit), the same focus a projection-group
     // / circuit row gives. A plain 3D arrow click passes isolate:false and stays
     // halo-only (consistent with the plain structure click). The reopen thunk keeps
-    // `isolate` so re-activating the tab restores the dim.
+    // `isolate` so re-activating the tab restores the dim. `siblings` are the
+    // opposite-hemisphere twin arrow(s): a search pick collapses L/R twins into one
+    // row and pins both sides, so "corticothalamic" lights both, not just the right.
     if (isolate && arrow.fromMesh && arrow.toMesh) {
       const ends = [arrow.fromMesh, arrow.toMesh];
-      selection.setCircuit(ends, [arrow]);
+      const pins = [arrow];
+      for (const sib of siblings) {
+        if (sib.fromMesh) ends.push(sib.fromMesh);
+        if (sib.toMesh) ends.push(sib.toMesh);
+        pins.push(sib);
+      }
+      selection.setCircuit(ends, pins);
       if (!preview) autoSpreadIfDeep(ends);
     }
     selection.selectArrow(arrow); // halo the arrow on top of the focus
@@ -5360,7 +5391,7 @@ async function main() {
     const proj = arrow.projection;
     info.show(proj);
     openDetailTab(connectionKey(proj), proj.label || t("info.connection"),
-      () => selectConnection(arrow, { isolate }));
+      () => selectConnection(arrow, { isolate, siblings }));
   };
 
   // Clicking a connection row inside a structure panel jumps to that pathway
