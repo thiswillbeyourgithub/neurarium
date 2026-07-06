@@ -518,6 +518,13 @@
            material, so re-enable text selection for their content. */
         user-select: text;
       }
+      /* On a phone, tighten the overlay gutter and let the dialog take almost the
+         full width (a centered 540px cap reads as a thin column on a ~390px screen).
+         It still scrolls its own overflow (max-height + overflow-y above). */
+      @media (max-width: 560px) {
+        .modal-overlay { padding: 10px; }
+        .modal { width: calc(100vw - 20px); max-height: calc(100vh - 20px); }
+      }
       .modal h2 { margin: 2px 0 14px; font-size: 15px; padding-right: 20px; }
       /* Image lightbox (#image-lightbox): the clicked illustration shown large,
          centered by the shared .modal-overlay. A darker backdrop than the shortcuts
