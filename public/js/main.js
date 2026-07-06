@@ -1521,6 +1521,9 @@ function createPanelTabs() {
     },
     /** Set the callback run when the last detail tab is closed (clears the 3D). */
     setOnEmpty(fn) { onEmpty = fn; },
+    /** The active detail tab's key (`<kind>:<id>`), or null when Settings is shown.
+     *  Used to build the shareable deep link for the copy-link button. */
+    activeKey() { return activeKey; },
   };
 }
 
@@ -4995,13 +4998,18 @@ async function main() {
   // focused; the reopen thunk re-runs that select* so clicking the tab restores
   // the panel + the 3D focus. Kept here (not in createInfoPanel) so the tab's key
   // and how to re-focus the scene live with the select* layer.
+  // Run after any detail tab opens / the last one closes, so the copy-link button
+  // can reflect whether a node is focused. Assigned once the button is wired below.
+  let afterTabChange = () => {};
   const openDetailTab = (key, title, reopen) => {
     // The single choke point every node focus (drug / receptor / target / structure /
     // connection / circuit / group) passes through, so emit one semantic analytics
     // event here (the `key` is already `<kind>:<id>`) instead of at each call site.
     // No-op unless umami is loaded (see js/app-init.js window.trackEvent).
     window.trackEvent?.("focus", { node: key });
-    return tabs.openDetail({ key, title, reopen });
+    const r = tabs.openDetail({ key, title, reopen });
+    afterTabChange();
+    return r;
   };
 
   // Selection + isolation controller: glowing halo on the structure picked by
@@ -5019,7 +5027,7 @@ async function main() {
   selection.onHighlight((mesh) => labels.setPinned(mesh ? isolateGroupFor(mesh) : null));
   // When the last detail tab is closed, nothing is selected any more: clear the
   // 3D focus (halo / isolate / dim / dots) so the scene matches the empty strip.
-  tabs.setOnEmpty(() => selection.clear());
+  tabs.setOnEmpty(() => { selection.clear(); afterTabChange(); });
 
   // Circuit "traveling pulse" animation: glowing beads sweeping each isolated
   // circuit's arrows from source to target (js/circuit-anim.js). Started from the
@@ -5596,6 +5604,110 @@ async function main() {
     if (animSettings.enabled) intro.start();
     else applyExplode(meshes, 0, arrows);
   }
+
+  // ---- Deep links + copy-link button --------------------------------------------
+  // A URL hash like `#focusDrug=vortioxetine` / `#focusReceptor=5-HT2A` opens the
+  // node's detail tab and focuses it on load (and on hashchange), exactly as picking
+  // it from search would. The copy-link toolbar button writes the inverse link for
+  // the currently focused node to the clipboard, so any view is shareable.
+  const linkFold = (s) => foldText(String(s == null ? "" : s));
+  const stripSideId = (id) => String(id).replace(/_[LR]$/, "");
+  const findByIdOrName = (list, v) => {
+    const q = linkFold(v);
+    return list.find((o) => linkFold(o.id) === q)
+        || list.find((o) => linkFold(o.name) === q);
+  };
+  // param (lowercased) -> resolver(value) -> true iff it matched & focused a node.
+  const deepLinkResolvers = {
+    focusdrug: (v) => { const d = findByIdOrName(data.drugs, v); if (d) focusDrug(d, { frame: true }); return !!d; },
+    focustarget: (v) => { const tg = findByIdOrName(data.targets, v); if (tg) focusTarget(tg, { frame: true }); return !!tg; },
+    focusreceptor: (v) => deepLinkResolvers.focustarget(v), // receptors live in data.targets
+    focuscircuit: (v) => { const c = findByIdOrName(data.circuits, v); if (c) focusCircuit(c, { frame: true }); return !!c; },
+    focusgroup: (v) => { const g = findByIdOrName(data.projectionGroups, v); if (g) focusProjectionGroup(g, { frame: true }); return !!g; },
+    focusstructure: (v) => {
+      const q = linkFold(stripSideId(v));
+      const group = meshes.filter((m) => {
+        const s = m.userData.structure;
+        return linkFold(stripSideId(s.id)) === q || linkFold(s.base_name) === q || linkFold(s.name) === q;
+      });
+      if (!group.length) return false;
+      const rep = group.find((m) => !/_[LR]$/.test(m.userData.structure.id)) || group[0];
+      selectStructure(rep, { frame: true, isolate: true });
+      return true;
+    },
+    focusconnection: (v) => {
+      const q = linkFold(v);
+      const byBase = new Map();
+      for (const a of arrows) {
+        const p = a.projection;
+        const key = `${stripSideId(p.from)}->${stripSideId(p.to)}`;
+        (byBase.get(key) || byBase.set(key, []).get(key)).push(a);
+      }
+      for (const [key, arr] of byBase) {
+        if (linkFold(key) === q || linkFold(arr[0].projection.label) === q) {
+          selectConnection(arr[0], { frame: true, isolate: true, siblings: arr.slice(1) });
+          return true;
+        }
+      }
+      return false;
+    },
+  };
+  const applyDeepLink = () => {
+    const raw = window.location.hash.replace(/^#/, "");
+    if (!raw) return false;
+    for (const [k, val] of new URLSearchParams(raw)) {
+      const fn = deepLinkResolvers[k.toLowerCase()];
+      if (fn && val && fn(val)) return true;
+    }
+    return false;
+  };
+
+  // The inverse: build the shareable link for the active detail tab (`<kind>:<id>`).
+  const KIND_TO_PARAM = {
+    drug: "focusDrug", target: "focusTarget", structure: "focusStructure",
+    connection: "focusConnection", circuit: "focusCircuit", group: "focusGroup",
+  };
+  const currentDeepLink = () => {
+    const key = tabs.activeKey();
+    const idx = key ? key.indexOf(":") : -1;
+    if (idx < 0) return null;
+    const param = KIND_TO_PARAM[key.slice(0, idx)];
+    if (!param) return null;
+    const id = key.slice(idx + 1);
+    const value = param === "focusStructure" ? stripSideId(id) : id;
+    const url = new URL(window.location.href);
+    url.hash = `${param}=${encodeURIComponent(value)}`;
+    return url.toString();
+  };
+
+  const copyBtn = document.getElementById("copy-link");
+  // Show the copy button only while a node is focused (a detail tab is open).
+  const reflectCopyBtn = () => { if (copyBtn) copyBtn.hidden = !tabs.activeKey(); };
+  afterTabChange = reflectCopyBtn;
+  reflectCopyBtn();
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const link = currentDeepLink();
+      if (!link) return;
+      try {
+        await navigator.clipboard.writeText(link);
+        copyBtn.classList.add("copied");
+        copyBtn.title = t("toolbar.copiedLink");
+      } catch (_) {
+        copyBtn.title = t("toolbar.copyLinkFailed");
+      }
+      setTimeout(() => {
+        copyBtn.classList.remove("copied");
+        copyBtn.title = t("toolbar.copyLink");
+      }, 1500);
+    });
+  }
+
+  // Apply an initial deep link (after the intro exists, so a focused node cancels the
+  // assemble intro rather than fighting its explode tween), then react to later
+  // hash changes (in-app copy-link navigation / manual edits / back-forward).
+  if (applyDeepLink()) intro.cancel();
+  window.addEventListener("hashchange", applyDeepLink);
 
   // On-demand rendering: a mostly-static brain has no reason to repaint at 60fps,
   // which only burns battery / spins fans / throttles phones. We render a frame

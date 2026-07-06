@@ -53,3 +53,20 @@ The `--params` string is the URL query parsed by `applyViewParams` in
 | `ui=0` | hide the panels + legend (clean shape shots) |
 
 `only`/`view` auto-fit the camera to whatever is visible.
+
+### Node deep links (URL hash)
+
+A URL **hash** focuses one node on load (and on `hashchange`), exactly as picking it
+from search would (opens its detail tab + focuses the 3D). Parsed by `applyDeepLink`
+in `js/main.js`; the value matches the node's id or (folded, case-insensitive) name:
+
+| hash | focuses |
+| --- | --- |
+| `#focusDrug=vortioxetine` | a drug |
+| `#focusReceptor=5ht2a` / `#focusTarget=sert` | a receptor / non-receptor target |
+| `#focusStructure=frontal` | a structure (both hemispheres; use the side-stripped base id/name) |
+| `#focusConnection=cortex->thalamus` | a projection (both sides) |
+| `#focusCircuit=<id>` / `#focusGroup=<id>` | a circuit / projection group |
+
+The toolbar **copy-link** button (chain icon, shown only while a node is focused)
+writes the inverse link for the current node to the clipboard (`currentDeepLink`).
