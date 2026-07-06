@@ -95,6 +95,34 @@ _HEMISPHERE_RE = re.compile(r"_(R|L)$")
 _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 
 
+def _flip_hemisphere(structure_id):
+    """Flip a structure id to the other hemisphere; midline ids unchanged."""
+    if structure_id.endswith("_R"):
+        return structure_id[:-2] + "_L"
+    if structure_id.endswith("_L"):
+        return structure_id[:-2] + "_R"
+    return structure_id
+
+
+def _expand_mirrored(projections):
+    """Reflect ``mirror: true`` projections into the full bilateral connectome.
+
+    A symmetric pathway is emitted once carrying ``mirror: true`` (the file stores
+    only the right-hemisphere record; see generate_data.py ``_projection_records``).
+    The reachability + connectivity checks reason over the logical connectome, so
+    expand each flagged record into its hemisphere-flipped twin here, exactly as
+    ``js/data.js`` does at load, before any check runs."""
+    out = []
+    for proj in projections:
+        record = {k: v for k, v in proj.items() if k != "mirror"}
+        out.append(record)
+        if proj.get("mirror"):
+            out.append({**record,
+                        "from": _flip_hemisphere(record.get("from")),
+                        "to": _flip_hemisphere(record.get("to"))})
+    return out
+
+
 class Report:
     """Collects errors/warnings while printing each section as it runs."""
 
@@ -982,7 +1010,7 @@ def main():
 
     meta = load_meta(report)
     structures = load_jsonl(report, "structures")
-    projections = load_jsonl(report, "projections")
+    projections = _expand_mirrored(load_jsonl(report, "projections"))
     circuits = load_jsonl(report, "circuits")
     projection_groups = load_jsonl(report, "projection_groups")
     receptors = load_jsonl(report, "receptors")

@@ -29,8 +29,10 @@ corpus locations are in `CLAUDE.local.md`.
      an unsourced pathway shows `NOSOURCE` (no fabricated citations).
      `bidirectional: True` (both cones; use with
      `symmetric: False` + explicit `_L`/`_R` for commissures). `tentative: True` (dotted,
-     Hypothetical section). Projections are bilateral by default (define once on the right);
-     `symmetric: False` keeps a one-sided pathway. `kind` must be a `PROJECTION_COLORS` key
+     Hypothetical section). Projections are bilateral by default (define once on the right):
+     such a pathway is emitted **once** with `mirror: true` and the consumer reflects it to the
+     other hemisphere (no duplicate row per pathway; see `mirror` under the data contract below).
+     `symmetric: False` keeps a one-sided pathway (emits no flag). `kind` must be a `PROJECTION_COLORS` key
      (excitatory / inhibitory / dopaminergic / cholinergic / neuroendocrine / serotonergic /
      noradrenergic); a new kind also needs `KIND_TO_SIGN` (-> `SIGN_COLORS` / `SIGN_LABELS`)
      and `BURST` in `circuit-anim.js`.
@@ -234,7 +236,10 @@ there is no node-level catch-all `sources` block.
   both hemispheres) + `structure_image_gallery`.
 - `projections.jsonl` — `from`, `to`, `kind`, `label{en,fr}`, `neurotransmitter{en,fr}`,
   `description{en,fr}`, optional `sources[{corpus,page,quote,provenance}]` (from `KANDEL_QUOTES`),
-  `bidirectional`, `tentative` (dotted, off-by-default section).
+  `bidirectional`, `tentative` (dotted, off-by-default section). `mirror: true` marks a symmetric
+  pathway stored **once** (the right-hemisphere record): the consumer reflects it by flipping
+  `_R` <-> `_L` on both endpoints (`js/data.js` at load, `check_data.py` before its checks), so the
+  file carries no per-side duplicate. Set from the `symmetric` authoring hint (see Projections above).
 - `circuits.jsonl` — `id`, `name{en,fr}`, `structures[ids]` (arrows derived in the viewer),
   optional `description{en,fr}` + `sources` + `wikipedia`(+prov) + `structure_image` (+ gallery);
   same shape + rendering as a structure's.

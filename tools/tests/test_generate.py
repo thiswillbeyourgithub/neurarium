@@ -156,6 +156,34 @@ class ReferentialIntegrityTest(unittest.TestCase):
             self.assertIn(src, self.struct_ids, f"projection source {src!r} unknown")
             self.assertIn(tgt, self.struct_ids, f"projection target {tgt!r} unknown")
 
+    def test_mirror_expansion_is_bilateral(self):
+        """A symmetric pathway is emitted once with ``mirror: true`` (not as two
+        rows); flipping ``_R`` <-> ``_L`` on both endpoints must land on real
+        structures, and the flip must actually differ from the stored record (else
+        the flag would be dead). Mirrors the viewer/check_data expansion."""
+        def flip(sid):
+            if sid.endswith("_R"):
+                return sid[:-2] + "_L"
+            if sid.endswith("_L"):
+                return sid[:-2] + "_R"
+            return sid
+
+        mirrored = [p for p in self.projections if p.get("mirror")]
+        self.assertTrue(mirrored, "expected some mirrored (bilateral) projections")
+        stored = {(p.get("from"), p.get("to")) for p in self.projections}
+        for p in mirrored:
+            twin = (flip(p["from"]), flip(p["to"]))
+            self.assertNotEqual(
+                twin, (p["from"], p["to"]),
+                f"mirror:true on a pathway whose flip is a no-op: {p['from']}->{p['to']}",
+            )
+            self.assertIn(twin[0], self.struct_ids, f"mirrored source {twin[0]!r} unknown")
+            self.assertIn(twin[1], self.struct_ids, f"mirrored target {twin[1]!r} unknown")
+            self.assertNotIn(
+                twin, stored,
+                f"pathway {twin} is both stored and produced by a mirror twin (duplicate)",
+            )
+
 
 class MetaAndTranslationsTest(unittest.TestCase):
     def test_meta_loads_with_provenance_stats(self):

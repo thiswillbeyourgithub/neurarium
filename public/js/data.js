@@ -163,6 +163,23 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       fetchJsonl(`${dataDir}/receptors.jsonl`),
       fetchJsonl(`${dataDir}/drugs.jsonl`),
     ]);
+  // A symmetric pathway is stored once carrying `mirror: true` (the emitted file
+  // authors only the right-hemisphere record, avoiding a duplicate row per
+  // pathway; see generate_data.py _projection_records). Reflect each such record
+  // to the other hemisphere here (flip `_R` <-> `_L` on both endpoints) so the
+  // rest of the viewer sees the full bilateral connectome as if both rows had
+  // been emitted. A midline endpoint is left unchanged, so a half-midline pathway
+  // mirrors only its lateralized end. Done before any downstream use (colours,
+  // circuit membership, legends), so every consumer sees both hemispheres.
+  const mirrorHemisphere = (id) =>
+    id.endsWith("_R") ? id.slice(0, -2) + "_L"
+      : id.endsWith("_L") ? id.slice(0, -2) + "_R"
+        : id;
+  for (const p of projections.slice()) {
+    if (!p.mirror) continue;
+    delete p.mirror;
+    projections.push({ ...p, from: mirrorHemisphere(p.from), to: mirrorHemisphere(p.to) });
+  }
   // Surface the loaded meta immediately (before the slower shape fetch + SDF
   // meshing): the loading gate's sourcing popup fills its coverage bars from
   // metaRecord.provenance_stats, so they show while the brain is still meshing.

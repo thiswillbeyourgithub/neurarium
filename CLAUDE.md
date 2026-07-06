@@ -101,8 +101,12 @@ graph, and the boot sequence are narrated in [`ARCHITECTURE.md`](docs/ARCHITECTU
 non-obvious rules a maintainer needs at the file level:
 
 Most regions are symmetric L/R pairs: a region is defined once on the right in
-`generate_data.py` and mirrored, avoiding per-side duplication. Generated files are
-committed so the static site fetches them directly.
+`generate_data.py` and mirrored, avoiding per-side duplication. The same holds for
+projections: a symmetric pathway is emitted **once** in `projections.jsonl` carrying
+`mirror: true` (not as two `_R`/`_L` rows), and the consumer reflects it by flipping
+`_R` <-> `_L` on both endpoints (`js/data.js` at load, `check_data.py` before its
+checks); `symmetric: False` opts out. So each pathway is one node in the tally, not two.
+Generated files are committed so the static site fetches them directly.
 
 **Project layout.** Everything the browser loads is under `public/` (the served
 site). That directory is the *only* thing web-exposed: Caddy's `/srv` and

@@ -443,11 +443,16 @@ def _expand_sources(keys: list[Any], what: str = "projection") -> list[dict[str,
 def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     """Expand one projection definition into its JSONL record(s).
 
-    Projections are bilateral by default: each is emitted as given and, unless
-    it sets ``"symmetric": False``, also as a hemisphere-flipped twin (``_R`` <->
-    ``_L`` on both endpoints). The twin is skipped when flipping changes nothing
-    (e.g. a purely midline pathway) so no duplicate is produced. ``symmetric`` is
-    a generator hint and is stripped from the emitted records.
+    Projections are bilateral by default: rather than emit each pathway twice
+    (the ``_R`` record plus a hand-mirrored ``_L`` twin, which bloated the file
+    with pure duplicates), a symmetric pathway is emitted **once** carrying
+    ``"mirror": true``, and the consumer (``js/data.js``, ``check_data.py``)
+    reflects it to the other hemisphere by flipping ``_R`` <-> ``_L`` on both
+    endpoints. The flag is set only when flipping would actually change the
+    endpoints (a purely midline pathway keeps no flag, since its twin would be
+    identical). ``symmetric: False`` (a commissure, an explicitly one-sided
+    pathway) emits no flag. ``symmetric`` is a generator-side authoring hint and
+    is not itself emitted.
 
     The ``sources`` key (a list of quote-level ``{corpus, page, quote, provenance}``
     dicts) is validated in place, and the metadata (``neurotransmitter``,
@@ -472,14 +477,11 @@ def _projection_records(proj: dict[str, Any]) -> list[dict[str, Any]]:
     for key in ("label", "description", "neurotransmitter"):
         if key in fields:
             fields[key] = _t(fields[key])
-    records = [fields]
     if symmetric:
-        mirrored = {**fields,
-                    "from": _mirror_id(fields["from"]),
-                    "to": _mirror_id(fields["to"])}
-        if (mirrored["from"], mirrored["to"]) != (fields["from"], fields["to"]):
-            records.append(mirrored)
-    return records
+        mfrom, mto = _mirror_id(fields["from"]), _mirror_id(fields["to"])
+        if (mfrom, mto) != (fields["from"], fields["to"]):
+            fields["mirror"] = True
+    return [fields]
 
 
 def _receptor_record(rec: dict[str, Any],
