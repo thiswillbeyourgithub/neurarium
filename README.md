@@ -142,7 +142,6 @@ from another engine.
 | [`projection_groups.jsonl`](public/data/projection_groups.jsonl) | By-transmitter / by-effect pathway groups |
 | [`receptors.jsonl`](public/data/receptors.jsonl) | Receptors: classification + expression regions, each graded |
 | [`drugs.jsonl`](public/data/drugs.jsonl) | Drugs: bindings (target, action, Ki), class, nomenclature |
-| [`meta.json`](public/data/meta.json) | Colour / legend maps, drug targets, and the sourcing tally |
 
 Each row of every file carries its own provenance grade and source, so the graph stays self-describing.
 
