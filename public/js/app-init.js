@@ -39,3 +39,32 @@ if (isSet(cfg.url) && isSet(cfg.websiteId)) {
   }
   document.head.appendChild(script);
 }
+
+// A guarded event tracker: forwards to umami when it loaded (and only then, so a
+// dev / metrics-disabled build sends nothing and stays offline), swallowing any
+// error. Exposed as window.trackEvent so any module can emit a semantic event
+// (e.g. main.js records which node the user focused, the thing we most want to
+// learn: "what are users interested about"). Umami respects the DNT signal above,
+// so this stays privacy-friendly.
+window.trackEvent = function trackEvent(name, data) {
+  try {
+    if (window.umami && typeof window.umami.track === "function") {
+      window.umami.track(name, data);
+    }
+  } catch (_) { /* metrics are best-effort, never break the app */ }
+};
+
+// Delegated click analytics: one capture-phase listener records every button /
+// toolbar / detail-tab / legend-row / link click, labelled by (in priority) an
+// explicit data-track, its aria-label, its id, or its trimmed text. No per-call-site
+// wiring, and a no-op when umami is absent.
+document.addEventListener("click", (ev) => {
+  const el = ev.target.closest(
+    "[data-track], button, .legend-item, .detail-tab, .panel-tab, #search-results li, a[href]");
+  if (!el) return;
+  const label = (el.getAttribute("data-track")
+    || el.getAttribute("aria-label")
+    || el.id
+    || (el.textContent || "").trim()).slice(0, 60);
+  if (label) window.trackEvent("click", { target: label });
+}, { capture: true });

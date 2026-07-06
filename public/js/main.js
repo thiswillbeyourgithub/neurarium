@@ -4995,7 +4995,14 @@ async function main() {
   // focused; the reopen thunk re-runs that select* so clicking the tab restores
   // the panel + the 3D focus. Kept here (not in createInfoPanel) so the tab's key
   // and how to re-focus the scene live with the select* layer.
-  const openDetailTab = (key, title, reopen) => tabs.openDetail({ key, title, reopen });
+  const openDetailTab = (key, title, reopen) => {
+    // The single choke point every node focus (drug / receptor / target / structure /
+    // connection / circuit / group) passes through, so emit one semantic analytics
+    // event here (the `key` is already `<kind>:<id>`) instead of at each call site.
+    // No-op unless umami is loaded (see js/app-init.js window.trackEvent).
+    window.trackEvent?.("focus", { node: key });
+    return tabs.openDetail({ key, title, reopen });
+  };
 
   // Selection + isolation controller: glowing halo on the structure picked by
   // click / double-click / search, plus the legend-driven isolate/dim mode. Owns
