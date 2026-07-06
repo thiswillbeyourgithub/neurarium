@@ -4005,6 +4005,16 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     else document.getElementById("about-source-row")?.remove();
   }
 
+  // The same source-repo link inside the About "data files" dropdown: point it at
+  // sourceUrl too, dropping its row when the config isn't a valid http(s) url (no
+  // repo/username hardcoded; the data-file links beside it are same-origin so they
+  // always work regardless of this).
+  const aboutSource2 = document.getElementById("about-source2");
+  if (aboutSource2) {
+    if (sourceIsUrl) aboutSource2.href = sourceUrl;
+    else document.getElementById("about-source2-row")?.remove();
+  }
+
   // "open an issue" link (embedded in the about.issues paragraph by i18n): point
   // it at the source repo's issues page (sourceUrl + "/issues"), deriving it from
   // the same env-configured sourceUrl so no repo/username is hardcoded. Only do

@@ -251,6 +251,12 @@
         "beads streaming along the ascending pathways of the neurotransmitter systems " +
         "they raise or lower. Density and speed are normalized per drug, so what you read " +
         "is the <em>relative</em> activity across systems, not an absolute dose.",
+      "about.dataSummary": "The data is yours to reuse",
+      "about.dataIntro":
+        "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +
+        "free to reuse. Each file below is served directly from this site (one JSON " +
+        "object per line, self-describing, every row graded and sourced):",
+      "about.dataRepo": "Or browse it in the source repository →",
       "about.outreach":
         "I think this kind of interactive viewer could be genuinely useful to the field, " +
         "and I would happily build similar animations for other medical topics. If you " +
@@ -537,6 +543,12 @@
         "des systèmes de neurotransmetteurs qu’il augmente ou diminue. La densité et la " +
         "vitesse sont normalisées par médicament : ce que vous lisez est l’activité " +
         "<em>relative</em> entre systèmes, pas une dose absolue.",
+      "about.dataSummary": "Les données sont libres de réutilisation",
+      "about.dataIntro":
+        "L’ensemble des données est du simple JSONL / JSON, séparé du rendu et libre de " +
+        "réutilisation. Chaque fichier ci-dessous est servi directement depuis ce site " +
+        "(un objet JSON par ligne, auto-descriptif, chaque ligne graduée et sourcée) :",
+      "about.dataRepo": "Ou parcourez-les dans le dépôt du code source →",
       "about.outreach":
         "Je pense que ce genre de visualiseur interactif pourrait être vraiment utile au " +
         "domaine médical, et je réaliserais volontiers des animations similaires pour " +

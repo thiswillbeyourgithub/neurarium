@@ -798,6 +798,22 @@
         color: var(--muted);
       }
       .about-text a { color: var(--accent-bright); text-decoration: underline; }
+      /* "The data is yours to reuse" dropdown in #about-modal: a plain <details>
+         whose summary reads like a link, with the data-file list beneath it. */
+      .about-data { margin: 8px 0; }
+      .about-data > summary {
+        cursor: pointer;
+        font-size: 12px;
+        color: var(--accent-bright);
+        list-style-position: inside;
+      }
+      .about-data-list {
+        margin: 4px 0 4px 4px;
+        padding-left: 16px;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .about-data-list a { color: var(--accent-bright); text-decoration: underline; }
       /* "Sources & provenance" block (built by buildAboutSourcing) inside the
          #sourcing-modal popup. The grade key reuses the .src-pill / .src-prov-*
          swatches from the info panel so the legend matches the pills shown beside
@@ -1902,6 +1918,28 @@
         <!-- What the drug animation shows (the tone-setter flow model), so a
              visitor isn't left guessing what the beads mean. -->
         <p class="about-text" data-i18n-html="about.animationModel"></p>
+        <!-- Data access: the whole dataset is plain JSONL/JSON served same-origin
+             under /data/, free to reuse. A collapsed dropdown links each file
+             directly (relative to this site, so it always resolves and downloads
+             the raw graph) plus the source repository via the shared #about-source2
+             link (href set from sourceUrl by js/main.js, like the Source code row);
+             the intro + summary come from i18n. -->
+        <details class="about-data">
+          <summary data-i18n="about.dataSummary"></summary>
+          <p class="about-text" data-i18n-html="about.dataIntro"></p>
+          <ul class="about-data-list">
+            <li><a href="data/structures.jsonl" target="_blank" rel="noopener noreferrer">structures.jsonl</a></li>
+            <li><a href="data/projections.jsonl" target="_blank" rel="noopener noreferrer">projections.jsonl</a></li>
+            <li><a href="data/circuits.jsonl" target="_blank" rel="noopener noreferrer">circuits.jsonl</a></li>
+            <li><a href="data/projection_groups.jsonl" target="_blank" rel="noopener noreferrer">projection_groups.jsonl</a></li>
+            <li><a href="data/receptors.jsonl" target="_blank" rel="noopener noreferrer">receptors.jsonl</a></li>
+            <li><a href="data/drugs.jsonl" target="_blank" rel="noopener noreferrer">drugs.jsonl</a></li>
+            <li><a href="data/meta.json" target="_blank" rel="noopener noreferrer">meta.json</a></li>
+          </ul>
+          <p class="about-text" id="about-source2-row">
+            <a id="about-source2" href="#" target="_blank" rel="noopener noreferrer" data-i18n="about.dataRepo"></a>
+          </p>
+        </details>
         <!-- Outreach: this kind of viewer could help other medical topics; invite
              contact. Kept link-free here (the issue tracker row below is the
              concrete channel when a sourceUrl is configured). -->

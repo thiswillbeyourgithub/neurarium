@@ -131,6 +131,23 @@ shape. It is generated from a single source of truth (`tools/generate_data.py`, 
 the drug list in `tools/data/drugs_data.jsonl`), so the plain JSONL/JSON is easy to consume
 from another engine.
 
+<details>
+<summary><strong>The data files, one link each</strong> (plain JSONL / JSON, free to reuse)</summary>
+
+| File | What it holds |
+| --- | --- |
+| [`structures.jsonl`](public/data/structures.jsonl) | Brain regions (position, group, geometry ref, sources) |
+| [`projections.jsonl`](public/data/projections.jsonl) | Neuron pathways (from -> to, transmitter, sign, sources) |
+| [`circuits.jsonl`](public/data/circuits.jsonl) | Named functional circuits |
+| [`projection_groups.jsonl`](public/data/projection_groups.jsonl) | By-transmitter / by-effect pathway groups |
+| [`receptors.jsonl`](public/data/receptors.jsonl) | Receptors: classification + expression regions, each graded |
+| [`drugs.jsonl`](public/data/drugs.jsonl) | Drugs: bindings (target, action, Ki), class, nomenclature |
+| [`meta.json`](public/data/meta.json) | Colour / legend maps, drug targets, and the sourcing tally |
+
+Each row of every file carries its own provenance grade and source, so the graph stays self-describing.
+
+</details>
+
 For the full data flow and module graph see [`ARCHITECTURE.md`](docs/ARCHITECTURE.md); for how
 to extend the dataset, the per-tool reference, and the emitted-data field contract see
 [`tools/README.md`](tools/README.md); for the viewer's file-by-file map and the non-obvious
