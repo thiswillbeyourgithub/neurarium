@@ -63,6 +63,7 @@
   "D1-like, Gs-coupled, excitatory; low-abundance but widespread; high constitutive activity, prominent in hippocampus.": "De type D1, couplé à Gs, excitateur ; peu abondant mais répandu ; forte activité constitutive, marqué dans l'hippocampe.",
   "D2-like, Gi-coupled, inhibitory; concentrated in limbic ventral striatum, highest dopamine affinity.": "De type D2, couplé à Gi, inhibiteur ; concentré dans le striatum ventral limbique, plus forte affinité pour la dopamine.",
   "D2-like, Gi-coupled, inhibitory; enriched in frontal cortex; linked to attention and ADHD.": "De type D2, couplé à Gi, inhibiteur ; enrichi dans le cortex frontal ; lié à l'attention et au TDAH.",
+  "D3-preferring": "préférentiel D3",
   "Deep cerebellar nuclei drive the motor thalamus, feeding the cerebellar loop back to cortex.": "Les noyaux cérébelleux profonds activent le thalamus moteur, renvoyant la boucle cérébelleuse vers le cortex.",
   "Diencephalon": "Diencéphale",
   "Direct pathway (motor)": "Voie directe (motrice)",
@@ -349,6 +350,7 @@
   "acetylcholine enzyme inhibitor (ACh-EI)": "inhibiteur enzymatique de l'acétylcholine (ACh-EI)",
   "acetylcholine multimodal; enzyme inhibitor; receptor PAM (ACh-MM)": "acétylcholine multimodal ; inhibiteur enzymatique ; PAM récepteur (ACh-MM)",
   "acetylcholine receptor partial agonist (ACh-RPA)": "agoniste partiel des récepteurs acétylcholinergiques (ACh-RPA)",
+  "adenosine antagonist": "antagoniste de l'adénosine",
   "alpha 1 selective": "sélectif alpha 1",
   "alpha-1 selective": "sélectif alpha-1",
   "benzodiazepine site": "site des benzodiazépines",
@@ -384,6 +386,7 @@
   "inhibits release": "inhibe la libération",
   "less potent": "moins puissant",
   "lithium enzyme interactions (Li-Eint)": "interactions enzymatiques du lithium (Li-Eint)",
+  "low-affinity, uncompetitive (open-channel)": "faible affinité, non compétitif (canal ouvert)",
   "low-moderate affinity": "affinité faible à modérée",
   "may contribute": "pourrait contribuer",
   "melatonin multimodal (Mel-MM)": "mélatonine multimodal (Mel-MM)",
@@ -422,6 +425,7 @@
   "very low activity": "activité très faible",
   "weak": "faible",
   "weak, high dose": "faible, forte dose",
+  "weak; also promotes dopamine release": "faible ; favorise aussi la libération de dopamine",
   "weaker, high dose": "plus faible, forte dose",
   "α2 adrenergic receptors": "Récepteurs α2 adrénergiques"
 }
