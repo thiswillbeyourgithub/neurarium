@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- PLACEHOLDER app/PWA icon: a node-and-projection cluster echoing the data model
+       (nodes linked by pathways). To be replaced by the hand-designed favicon (see TODO). -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="44%" r="60%">
+      <stop offset="0%" stop-color="#241a44"/>
+      <stop offset="100%" stop-color="#0e1116"/>
+    </radialGradient>
+    <radialGradient id="node" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#c8a8ff"/>
+      <stop offset="60%" stop-color="#8a5cf0"/>
+      <stop offset="100%" stop-color="#5b3bb0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#glow)"/>
+  <g stroke="#8a5cf0" stroke-opacity="0.5" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M182 176 L302 150"/>
+    <path d="M302 150 L356 246"/>
+    <path d="M356 246 L262 274"/>
+    <path d="M262 274 L182 176"/>
+    <path d="M262 274 L300 352"/>
+    <path d="M182 176 L168 296"/>
+    <path d="M168 296 L226 372"/>
+    <path d="M226 372 L300 352"/>
+  </g>
+  <g fill="url(#node)">
+    <circle cx="182" cy="176" r="26"/>
+    <circle cx="302" cy="150" r="21"/>
+    <circle cx="356" cy="246" r="24"/>
+    <circle cx="262" cy="274" r="30"/>
+    <circle cx="168" cy="296" r="20"/>
+    <circle cx="300" cy="352" r="23"/>
+    <circle cx="226" cy="372" r="18"/>
+  </g>
+</svg>

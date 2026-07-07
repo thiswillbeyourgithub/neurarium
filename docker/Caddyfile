@@ -76,6 +76,12 @@
 		Cache-Control "no-store"
 	}
 
+	# Go's mime table (what file_server uses) has no `.webmanifest` entry, so the
+	# PWA manifest would ship as octet-stream and some browsers reject it. Pin the
+	# correct type. (Python's dev server, tools/serve.py, already knows it.)
+	@webmanifest path *.webmanifest
+	header @webmanifest Content-Type "application/manifest+json"
+
 	log {
 		output stdout
 		format console

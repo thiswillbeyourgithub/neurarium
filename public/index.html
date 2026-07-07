@@ -12,6 +12,27 @@
     <meta name="color-scheme" content="dark" />
     <title>neurarium</title>
 
+    <!-- PWA: installable + offline. The manifest, icons and service worker are all
+         vendored same-origin (covered by CSP default-src 'self'). theme-color tints
+         the mobile UI chrome with the --accent purple. Icons are a PLACEHOLDER
+         node-cluster glyph, to be replaced by the hand-designed favicon (see TODO). -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#8a5cf0" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script>
+      // Register the network-first service worker (js/sw.js at root scope) so the
+      // app is installable and works offline. Best-effort: a failure never blocks
+      // the page. Secure-context only (browsers gate SW to https / localhost).
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("sw.js").catch(function () {});
+        });
+      }
+    </script>
+
     <!-- Optional privacy-friendly umami metrics. app-config.js is rendered from
          docker/.env by the container; in local dev it stays unconfigured and
          js/app-init.js is a no-op. Both are named generically so content filters

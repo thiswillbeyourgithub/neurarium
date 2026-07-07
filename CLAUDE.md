@@ -143,7 +143,13 @@ Viewer (`public/`):
   eruda. Holds the `#controls` panel, the popups (`#shortcuts-modal`, `#legend-modal`,
   `#sourcing-modal`, `#about-modal`, `#image-lightbox`, all `.modal-overlay`), the `#banners`
   stack, the startup `#loading` overlay. UI-chrome accent = the `--accent*` palette in `:root`;
-  data/semantic colours live in `meta.json`, never here.
+  data/semantic colours live in `meta.json`, never here. Also wires the PWA: links
+  `manifest.webmanifest` + registers `sw.js`.
+- PWA (installable + offline): `manifest.webmanifest` (name/icons/`theme_color`), `sw.js`
+  (**network-first** service worker: fresh when online, cached shell when offline, matching the
+  deploy's `no-store` freshness intent), and `favicon.svg` + `icon-192/512.png` +
+  `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
+  favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
 - `js/data.js` — fetches `meta.json` + the `.jsonl` + shape files; returns a normalized
   `{structures, projections, circuits, projectionGroups, projectionGroupsByKey, receptors,
   targets, drugs, drugsByTarget, byId, meta}`. Resolves each node's localized fields + derived
