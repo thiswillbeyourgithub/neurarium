@@ -146,17 +146,15 @@ Viewer (`public/`):
   data/semantic colours live in `meta.json`, never here. Also wires the PWA: links
   `manifest.webmanifest` + registers `sw.js`.
 - PWA (installable + offline): `manifest.webmanifest` (name/icons/`theme_color`), `sw.js`
-  (**network-first** service worker: fresh when online, cached shell when offline, matching the
-  deploy's `no-store` freshness intent), and `favicon.svg` + `icon-192/512.png` +
+  (service worker split by asset kind: **network-first** for code + shell (fresh when online,
+  never mixing a stale ES module with a fresh one, matching the deploy's `no-store` intent);
+  **stale-while-revalidate** for `/data/*` (data + shapes) so a repeat visit serves the cached
+  data instantly and refreshes it in the background: fast + reliable on a slow/flaky link, no
+  version key to forget, pure data so a one-load-stale set is harmless), and `favicon.svg` +
+  `icon-192/512.png` +
   `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
   favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
-- `js/data-cache.js` — version-keyed client cache of the fetched core data (localStorage + gzip via
-  `CompressionStream`): a matching `__APP_VERSION__` is a guaranteed-fresh hit so no core data is
-  re-downloaded (the deploy is `no-store` + network-first SW, so otherwise every visit re-fetches
-  ~600 KB). Bypassed on dev hosts (localhost) so local edits stay fresh; shape files are not cached
-  here (they stay on the SW path). `readDataCache`/`writeDataCache`, keyed by version + language.
-- `js/data.js` — fetches `meta.json` + the `.jsonl` (incl. `quotes.jsonl`) + shape files (core data
-  via the `js/data-cache.js` version-keyed cache), rehydrates
+- `js/data.js` — fetches `meta.json` + the `.jsonl` (incl. `quotes.jsonl`) + shape files, rehydrates
   each `{quote_id, provenance}` source from the deduplicated `quotes.jsonl` excerpt table
   (`rehydrateQuotes`, mirror of the generator's externalize; see Source provenance); returns a normalized
   `{structures, projections, circuits, projectionGroups, projectionGroupsByKey, receptors,

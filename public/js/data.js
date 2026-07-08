@@ -10,10 +10,8 @@
 // NOTE: because these are fetch()ed, the site must be served over http(s); see
 // CLAUDE.md ("Running"). Opening index.html via file:// will fail CORS.
 //
-// The core files are cached client-side, keyed by app version, to avoid
-// re-downloading unchanged data on every visit (see js/data-cache.js).
-
-import { readDataCache, writeDataCache } from "./data-cache.js";
+// Repeat-visit speed/offline resilience for these files is handled by the service
+// worker (stale-while-revalidate for /data/*, see public/sw.js), not here.
 
 /**
  * Parse JSONL text (one JSON object per line) into an array, skipping blank
@@ -175,51 +173,26 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // English string up in. Fetch + install it BEFORE any localize() runs, and ONLY
   // in French (English users never request it, and it stays an empty table). A
   // failed fetch is non-fatal: pick() then falls back to the English strings.
-  const lang = (window.__I18N__ && window.__I18N__.lang) || "en";
-
-  // Try the version-keyed client cache first (see js/data-cache.js): a hit means
-  // the app version is unchanged, so the cached docs are guaranteed fresh and no
-  // core data is re-downloaded. The French payload carries its translations table.
-  let metaRecord, structures, projections, circuits, projectionGroups,
-      receptors, drugs, quotes;
-  const cached = await readDataCache(lang);
-  if (cached) {
-    ({ meta: metaRecord, structures, projections, circuits, projectionGroups,
-       receptors, drugs, quotes } = cached);
-    if (cached.fr && window.__I18N__ && window.__I18N__.lang === "fr") {
-      window.__I18N__.setDataTranslations(cached.fr);
+  if (window.__I18N__ && window.__I18N__.lang === "fr") {
+    try {
+      const tr = await (await fetchOrThrow(`${dataDir}/translations.fr.json`)).json();
+      window.__I18N__.setDataTranslations(tr);
+    } catch (e) {
+      console.error("Could not load French translations; showing English data.", e);
     }
-  } else {
-    // Cache miss: fetch the French side table (in French only) + install it BEFORE
-    // any localize() runs, then fetch the core files, then repopulate the cache.
-    let frTranslations = null;
-    if (window.__I18N__ && window.__I18N__.lang === "fr") {
-      try {
-        frTranslations = await (await fetchOrThrow(`${dataDir}/translations.fr.json`)).json();
-        window.__I18N__.setDataTranslations(frTranslations);
-      } catch (e) {
-        console.error("Could not load French translations; showing English data.", e);
-      }
-    }
-    [metaRecord, structures, projections, circuits, projectionGroups,
-     receptors, drugs, quotes] =
-      await Promise.all([
-        fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
-        fetchJsonl(`${dataDir}/structures.jsonl`),
-        fetchJsonl(`${dataDir}/projections.jsonl`),
-        fetchJsonl(`${dataDir}/circuits.jsonl`),
-        fetchJsonl(`${dataDir}/projection_groups.jsonl`),
-        fetchJsonl(`${dataDir}/receptors.jsonl`),
-        fetchJsonl(`${dataDir}/drugs.jsonl`),
-        fetchJsonl(`${dataDir}/quotes.jsonl`),
-      ]);
-    // Best-effort; stores the raw (pre-rehydration) docs so the load path is
-    // identical whether the data came from the cache or the network.
-    writeDataCache(lang, {
-      meta: metaRecord, structures, projections, circuits, projectionGroups,
-      receptors, drugs, quotes, fr: frTranslations,
-    });
   }
+  const [metaRecord, structures, projections, circuits, projectionGroups,
+         receptors, drugs, quotes] =
+    await Promise.all([
+      fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
+      fetchJsonl(`${dataDir}/structures.jsonl`),
+      fetchJsonl(`${dataDir}/projections.jsonl`),
+      fetchJsonl(`${dataDir}/circuits.jsonl`),
+      fetchJsonl(`${dataDir}/projection_groups.jsonl`),
+      fetchJsonl(`${dataDir}/receptors.jsonl`),
+      fetchJsonl(`${dataDir}/drugs.jsonl`),
+      fetchJsonl(`${dataDir}/quotes.jsonl`),
+    ]);
   // Source quotes are emitted once into quotes.jsonl (deduplicated), each node
   // carrying only a `{quote_id, provenance}` reference (see quote_table.py).
   // Rehydrate every reference in place BEFORE any downstream use, so the rest of
