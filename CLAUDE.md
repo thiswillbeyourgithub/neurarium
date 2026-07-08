@@ -146,12 +146,17 @@ Viewer (`public/`):
   data/semantic colours live in `meta.json`, never here. Also wires the PWA: links
   `manifest.webmanifest` + registers `sw.js`.
 - PWA (installable + offline): `manifest.webmanifest` (name/icons/`theme_color`), `sw.js`
-  (service worker split by asset kind: **network-first** for code + shell (fresh when online,
-  never mixing a stale ES module with a fresh one, matching the deploy's `no-store` intent);
-  **stale-while-revalidate** for `/data/*` (data + shapes) so a repeat visit serves the cached
-  data instantly and refreshes it in the background: fast + reliable on a slow/flaky link, no
-  version key to forget, pure data so a one-load-stale set is harmless), and `favicon.svg` +
-  `icon-192/512.png` +
+  (service worker that ALWAYS contacts the server when online, so a visitor never renders
+  outdated data or a stale ES module; the Cache-API copy is an offline-only fallback, NOT
+  stale-while-revalidate. Split by asset kind: `/data/*` (data + shapes) uses **explicit
+  conditional revalidation** (`revalidate()` forwards the cached copy's `ETag`/`Last-Modified`
+  as `If-None-Match`/`If-Modified-Since` so an unchanged file returns a bodyless `304` served
+  from cache, a changed one a fresh `200`: always fresh, cheap when unchanged, no version key to
+  forget; `cache:"no-store"` on the fetch so OUR validator is the only one in play, since a plain
+  SW fetch re-downloads the full body); code + shell use plain **network-first** (always refetch
+  the full file, never mixing a stale ES module with a fresh one, matching the deploy's `no-store`
+  intent). Bump `CACHE` when the caching logic changes; `activate()` prunes older caches), and
+  `favicon.svg` + `icon-192/512.png` +
   `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
   favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
 - `js/data.js` — fetches `meta.json` + the `.jsonl` (incl. `quotes.jsonl`) + shape files, rehydrates
@@ -211,7 +216,8 @@ Viewer (`public/`):
 Deployment (`docker/`): `docker-compose.yml` (hardened Caddy), `Dockerfile`
 (strips caddy's `cap_net_bind_service` so `exec` works under `no-new-privileges`),
 `Caddyfile` (serves `/srv` on `:8359`, serves `/gen/app-config.js` for
-`/app-config.js`, `Cache-Control: no-store`, security headers incl. CSP),
+`/app-config.js`, split `Cache-Control`: `no-cache` on `/data/*` (revalidate -> cheap `304`s,
+never stale), `no-store` on code + shell; security headers incl. CSP),
 `env.example`, `entrypoint.sh` (stamps `STARTED_AT`, validates `ANALYTICS_URL`,
 derives `ANALYTICS_ORIGIN`, renders `/gen/app-config.js`).
 

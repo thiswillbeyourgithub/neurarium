@@ -35,19 +35,33 @@ from pathlib import Path
 
 
 class NoCacheHandler(SimpleHTTPRequestHandler):
-    """A static file handler that disables all client-side caching.
+    """A static file handler whose caching mirrors the prod Caddyfile.
 
     ``end_headers`` is the single choke point every response passes through, so
-    adding the no-cache headers there covers static files, directory listings and
+    setting the caching headers there covers static files, directory listings and
     error pages alike, without having to override each ``do_*`` method.
+
+    Cache-Control is split by path, exactly like docker/Caddyfile:
+
+    - **/data/\\*** (the dataset + shapes): ``no-cache`` -> the browser stores it
+      but MUST revalidate before every use, so a stale dataset is never served;
+      ``SimpleHTTPRequestHandler`` sends ``Last-Modified`` and answers a matching
+      ``If-Modified-Since`` with ``304 Not Modified``, so an unchanged file is not
+      re-downloaded. Keeps dev honest about freshness while staying cheap.
+    - **everything else** (the ES modules etc.): ``no-store`` -> always refetched,
+      so a plain reload never runs a stale module next to a fresh one (see the
+      module docstring above).
     """
 
     def end_headers(self) -> None:
-        # no-store: never write to the cache; the belt-and-suspenders Pragma /
-        # Expires cover older heuristics so no proxy or browser holds a copy.
-        self.send_header("Cache-Control", "no-store, max-age=0")
-        self.send_header("Pragma", "no-cache")
-        self.send_header("Expires", "0")
+        if self.path.startswith("/data/"):
+            # no-cache: cache but revalidate (304 when unchanged, see class doc).
+            self.send_header("Cache-Control", "no-cache")
+        else:
+            # no-store: never cache; Pragma / Expires cover older heuristics.
+            self.send_header("Cache-Control", "no-store, max-age=0")
+            self.send_header("Pragma", "no-cache")
+            self.send_header("Expires", "0")
         super().end_headers()
 
 

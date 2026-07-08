@@ -1,22 +1,28 @@
 /* Service worker: makes neurarium installable (PWA) and usable offline.
  *
+ * When online we ALWAYS contact the network, so a user never renders unchecked,
+ * outdated data (or a stale ES module). The Cache-API copy is only a fallback for
+ * when the network is unavailable (offline). It is deliberately NOT
+ * stale-while-revalidate: SWR would answer from cache before confirming freshness,
+ * which is unacceptable here.
+ *
  * Two strategies, split by what the asset IS:
  *
- * - CODE + shell (html, js, vendor, icons, ...): NETWORK-FIRST. The site is
- *   rsync-deployed with no content-hashed filenames and Caddy sends
- *   `Cache-Control: no-store` (see docker/Caddyfile) precisely so a stale ES
- *   module is never mixed with a fresh one. A cache-first worker would reintroduce
- *   that hazard, so when online we always fetch live code (refreshing the cache
- *   copy); the cache is only an offline fallback.
+ * - DATA (/data/*, incl. shapes): EXPLICIT CONDITIONAL REVALIDATION. We can't lean
+ *   on the browser HTTP cache for cheap 304s, because a plain `fetch()` inside a
+ *   service worker does not reliably emit a conditional request (it re-downloads
+ *   the full 200). So we do it by hand: keep each cached response's validator
+ *   (`ETag` / `Last-Modified`) and send it back as `If-None-Match` /
+ *   `If-Modified-Since`. The server answers `304 Not Modified` when unchanged (we
+ *   serve the cached copy, zero body transferred) or a fresh `200` when it actually
+ *   changed (we cache + serve that). Always fresh, cheap when unchanged.
+ * - CODE + shell (js/*, index.html, vendor, ...): plain NETWORK-FIRST (always
+ *   refetch the full file). No conditional revalidation: `no-store` + a full
+ *   refetch keeps the "never mix a stale module with a fresh one" guarantee the
+ *   no-build rsync deploy relies on. Cache-API copy is the offline fallback only.
  *
- * - DATA + shapes (everything under `/data/`): STALE-WHILE-REVALIDATE. This is the
- *   heavy payload (~600 KB of jsonl/meta + the shape files) and it is pure DATA,
- *   not executable code, so a momentarily one-load-stale set is harmless (the app
- *   tolerates a mismatch: e.g. an unresolved quote just renders no tooltip). So on
- *   a repeat visit we serve the cached copy INSTANTLY (fast + reliable on a slow or
- *   flaky link, which network-first is not) and refresh the cache from the network
- *   in the BACKGROUND for next time. No version key is involved: the cache
- *   self-updates whenever the network has new bytes, so nothing can be forgotten.
+ * Because every online visit revalidates the whole set together, the offline
+ * fallback stays internally consistent (all-old, never old+new).
  *
  * Bump CACHE when the caching logic itself changes; activate() prunes older caches.
  */
@@ -55,11 +61,41 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch the request and cache a copy of any good response (for offline + SWR).
+// Fetch the request fresh and cache a copy of any good response (offline copy).
 // Returns the live response; rejects if the network is unavailable.
 async function fetchAndCache(req) {
   const res = await fetch(req);
   if (res && res.ok) {
+    const cache = await caches.open(CACHE);
+    await cache.put(req, res.clone());
+  }
+  return res;
+}
+
+// Explicit conditional revalidation for the dataset: always contact the server,
+// but cheaply. We forward the cached copy's validator so the server can answer a
+// bodyless `304 Not Modified` when nothing changed (we then serve the cached copy)
+// and a full `200` only when it did. `cache: "no-store"` bypasses the browser HTTP
+// cache so OUR conditional headers are the only ones in play (a plain fetch would
+// otherwise just re-download the full body). Falls back to the cached copy offline.
+async function revalidate(req) {
+  const cached = await caches.match(req);
+  const headers = new Headers();
+  if (cached) {
+    const etag = cached.headers.get("ETag");
+    const lastMod = cached.headers.get("Last-Modified");
+    if (etag) headers.set("If-None-Match", etag);
+    else if (lastMod) headers.set("If-Modified-Since", lastMod);
+  }
+  let res;
+  try {
+    res = await fetch(new Request(req.url, { headers, cache: "no-store" }));
+  } catch (err) {
+    if (cached) return cached; // offline: last-known copy
+    throw err;
+  }
+  if (res.status === 304 && cached) return cached; // unchanged: cheap hit
+  if (res.ok) {
     const cache = await caches.open(CACHE);
     await cache.put(req, res.clone());
   }
@@ -73,29 +109,14 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   if (new URL(req.url).origin !== self.location.origin) return;
 
-  const isData = new URL(req.url).pathname.includes("/data/");
-
-  if (isData) {
-    // STALE-WHILE-REVALIDATE for data + shapes: kick off the network refresh (and
-    // keep the worker alive for it via waitUntil), but answer from cache the
-    // instant a cached copy exists so a repeat visit is fast even on a slow link.
-    // A cold cache falls through to the same in-flight network promise.
-    const network = fetchAndCache(req).catch(() => null);
-    event.waitUntil(network);
-    event.respondWith(
-      caches.match(req).then((cached) => {
-        if (cached) return cached;
-        return network.then((res) => {
-          if (res) return res;
-          throw new Error("offline and not cached");
-        });
-      })
-    );
+  // Dataset (+ shapes): explicit conditional revalidation (fresh, cheap 304s).
+  if (new URL(req.url).pathname.startsWith("/data/")) {
+    event.respondWith(revalidate(req));
     return;
   }
 
-  // NETWORK-FIRST for code + shell: always fetch live when online (refreshing the
-  // cache copy); fall back to cache only when the network is unavailable.
+  // Code + shell: network-first (always refetch the full file); the Cache-API copy
+  // is the offline fallback only.
   event.respondWith(
     fetchAndCache(req).catch(async () => {
       const cached = await caches.match(req);

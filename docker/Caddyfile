@@ -66,15 +66,25 @@
 		# too large to commit, so they are loaded live like the descriptions above.
 		Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://upload.wikimedia.org; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' {$ANALYTICS_ORIGIN:}; connect-src 'self' https://*.wikipedia.org {$ANALYTICS_ORIGIN:}"
 
-		# Never let the browser serve a cached asset. This is a no-build site
-		# whose ES modules / data are deployed by rsync (no content-hashed
-		# filenames), so a heuristically-cached old js/*.js next to a fresh one
-		# would crash with a baffling signature mismatch (see CLAUDE.md "Running").
-		# Mirrors tools/serve.py's dev behaviour so dev and prod cache the same
-		# way: always fetch the deployed version. (Swap to "no-cache" if you want
-		# ETag revalidation / 304s back; "no-store" is the strongest guarantee.)
-		Cache-Control "no-store"
+		# Cache-Control is set per-path just below (data vs code), not here, so
+		# these hardening headers still apply to every response.
 	}
+
+	# Cache policy, split by what the asset IS (mirrors tools/serve.py):
+	#
+	# - CODE + shell (js/*, index.html, vendor, ...): `no-store`. This is a no-build
+	#   site whose ES modules deploy by rsync with no content-hashed filenames, so a
+	#   heuristically-cached old js/*.js next to a fresh one would crash with a
+	#   baffling signature mismatch (see CLAUDE.md "Running"). Never cache it.
+	# - DATA (/data/*, incl. shapes): `no-cache`. The browser MAY store it but MUST
+	#   revalidate before every use, so a visitor never renders outdated data; because
+	#   file_server sends an ETag, an unchanged file revalidates to a tiny `304 Not
+	#   Modified` (no re-download), so repeat visits stay fresh AND cheap. `no-store`
+	#   would forbid that and force a full re-download of ~600 KB every load.
+	@data path /data/*
+	@notdata not path /data/*
+	header @data Cache-Control "no-cache"
+	header @notdata Cache-Control "no-store"
 
 	# Go's mime table (what file_server uses) has no `.webmanifest` entry, so the
 	# PWA manifest would ship as octet-stream and some browsers reject it. Pin the
