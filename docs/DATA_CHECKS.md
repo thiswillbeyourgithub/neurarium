@@ -6,8 +6,12 @@
 
 `tools/check_data.py` (stdlib) runs over the **emitted** `public/data/`,
 independent of `generate_data.py`. Exit 0 = no errors (warnings allowed), 1 =
-errors. Functions take loaded data as args (unit-testable). Six families:
+errors. Functions take loaded data as args (unit-testable). Seven families:
 
+- **Quote table** (referential integrity of the externalized `quotes.jsonl`): every node's
+  `{quote_id, provenance}` source must resolve to a quote node, and every quote node must be
+  referenced by at least one node (no orphans) = error either way. The loader rehydrates each
+  reference in place first (mirror of the viewer), so the families below see inline sources.
 - **Duplicates** (per collection + projections by `from -> to`): exact or
   normalized id/key collision = error (`normalize_for_match` lowercases + strips
   non-alphanumerics, so `mao_a`/`mao-a` collide); normalized display-name collision

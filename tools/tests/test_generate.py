@@ -16,6 +16,7 @@ Also pytest-discoverable. Two families of test:
   import generator internals) so these assertions survive the refactor.
 """
 
+import hashlib
 import json
 import re
 import subprocess
@@ -201,6 +202,64 @@ class MetaAndTranslationsTest(unittest.TestCase):
         self.assertFalse(
             selfmapped, f"translation keys mapping to themselves: {selfmapped}"
         )
+
+
+def _walk(node):
+    """Yield every dict nested anywhere within ``node``."""
+    if isinstance(node, dict):
+        yield node
+        for v in node.values():
+            yield from _walk(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from _walk(v)
+
+
+class QuoteTableTest(unittest.TestCase):
+    """Guards the externalized source-quote side table (quotes.jsonl).
+
+    Sources are emitted as ``{quote_id, provenance}`` references; the excerpts
+    live once in quotes.jsonl keyed by a content hash (see quote_table.py).
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.quotes = {q["id"]: q for q in _load_jsonl(DATA_DIR / "quotes.jsonl")}
+        cls.docs = [json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))]
+        for name in ("structures", "projections", "circuits",
+                     "projection_groups", "receptors", "drugs"):
+            cls.docs.extend(_load_jsonl(DATA_DIR / f"{name}.jsonl"))
+
+    def test_no_inline_quotes_remain(self):
+        # Every quote-bearing source must have been externalized: no emitted dict
+        # anywhere still carries an inline `quote` string (only quotes.jsonl does).
+        for doc in self.docs:
+            for d in _walk(doc):
+                self.assertNotIn(
+                    "quote", d,
+                    f"inline quote survived externalization: {d!r}")
+
+    def test_references_resolve_and_no_orphans(self):
+        referenced = set()
+        for doc in self.docs:
+            for d in _walk(doc):
+                qid = d.get("quote_id")
+                if isinstance(qid, str):
+                    referenced.add(qid)
+                    self.assertIn(qid, self.quotes,
+                                  f"quote_id {qid!r} missing from quotes.jsonl")
+        orphans = set(self.quotes) - referenced
+        self.assertFalse(orphans, f"orphan quotes (unreferenced): {sorted(orphans)[:3]}")
+
+    def test_ids_are_deterministic_content_hashes(self):
+        # Recompute each id from its identity fields; a mismatch means the id is
+        # not a stable content hash (so it would churn across regenerations).
+        for qid, q in self.quotes.items():
+            src = {k: q.get(k) for k in ("corpus", "page", "quote", "species")}
+            identity = json.dumps(src, sort_keys=True, ensure_ascii=False)
+            digest = hashlib.sha256(identity.encode("utf-8")).hexdigest()[:12]
+            self.assertEqual(qid, f"q_{digest}",
+                             f"quote id {qid!r} is not its content hash")
 
 
 if __name__ == "__main__":

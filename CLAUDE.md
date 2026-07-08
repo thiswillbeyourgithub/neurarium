@@ -123,8 +123,8 @@ README hero shot in `docs/`.
 keep this file terse. In short: the anatomy is authored once in `generate_data.py` (drugs
 in `tools/data/drugs_data.jsonl`), which emits the committed `public/data/`. `generate_data.py` is
 now a thin orchestrator: the data lives in the `tools/data_generators/` package (`i18n`,
-`provenance`, `drugs`, `geometry`, `presentation`, `connectivity`, `quotes/`, `receptors/`,
-`regions/`; per-module purpose in `tools/README.md`). Each geometry form
+`provenance`, `drugs`, `geometry`, `presentation`, `connectivity`, `quotes/`, `quote_table`,
+`receptors/`, `regions/`; per-module purpose in `tools/README.md`). Each geometry form
 is one `data/shapes/<name>.json` (`blob`/`curve`/`composite`, L/R pairs share one right-side
 file via `mirror:true`). The author-side scripts are grouped: external-data fetchers under
 `tools/fetch/`, provenance appliers under `tools/sourcing/`; their generated caches in
@@ -150,7 +150,9 @@ Viewer (`public/`):
   deploy's `no-store` freshness intent), and `favicon.svg` + `icon-192/512.png` +
   `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
   favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
-- `js/data.js` — fetches `meta.json` + the `.jsonl` + shape files; returns a normalized
+- `js/data.js` — fetches `meta.json` + the `.jsonl` (incl. `quotes.jsonl`) + shape files, rehydrates
+  each `{quote_id, provenance}` source from the deduplicated `quotes.jsonl` excerpt table
+  (`rehydrateQuotes`, mirror of the generator's externalize; see Source provenance); returns a normalized
   `{structures, projections, circuits, projectionGroups, projectionGroupsByKey, receptors,
   targets, drugs, drugsByTarget, byId, meta}`. Resolves each node's localized fields + derived
   render props (projection `color`/`sign`, receptor labels + `structureIds`, per-binding

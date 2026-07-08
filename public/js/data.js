@@ -48,6 +48,32 @@ async function fetchJsonl(url) {
 }
 
 /**
+ * Rehydrate externalized source quotes in place. The emitted data replaces every
+ * quote-bearing source with a `{quote_id, provenance}` reference and stores the
+ * excerpt once in quotes.jsonl (see quote_table.py). This deep-walk merges the
+ * quote node's `corpus`/`page`/`quote`/`species` fields back onto each reference,
+ * so downstream code reads `source.quote` etc. exactly as before. A dangling
+ * `quote_id` (no matching quote) is left as-is (check_data.py guards against it).
+ * @param {*} node       Any value (object/array/scalar) to walk.
+ * @param {object} byId  quote_id -> quote node map.
+ */
+function rehydrateQuotes(node, byId) {
+  if (Array.isArray(node)) {
+    for (const v of node) rehydrateQuotes(v, byId);
+  } else if (node && typeof node === "object") {
+    if (typeof node.quote_id === "string") {
+      const q = byId[node.quote_id];
+      if (q) {
+        for (const k of ["corpus", "page", "quote", "species"]) {
+          if (k in q) node[k] = q[k];
+        }
+      }
+    }
+    for (const k in node) rehydrateQuotes(node[k], byId);
+  }
+}
+
+/**
  * Resolve a translatable field to the chosen language. The data file stores
  * translatable strings as `{en, fr}` objects (see generate_data.py's `_t`);
  * `window.__I18N__.pick` collapses one to the active language. A plain string
@@ -153,7 +179,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     }
   }
   const [metaRecord, structures, projections, circuits, projectionGroups,
-         receptors, drugs] =
+         receptors, drugs, quotes] =
     await Promise.all([
       fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
       fetchJsonl(`${dataDir}/structures.jsonl`),
@@ -162,7 +188,17 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       fetchJsonl(`${dataDir}/projection_groups.jsonl`),
       fetchJsonl(`${dataDir}/receptors.jsonl`),
       fetchJsonl(`${dataDir}/drugs.jsonl`),
+      fetchJsonl(`${dataDir}/quotes.jsonl`),
     ]);
+  // Source quotes are emitted once into quotes.jsonl (deduplicated), each node
+  // carrying only a `{quote_id, provenance}` reference (see quote_table.py).
+  // Rehydrate every reference in place BEFORE any downstream use, so the rest of
+  // the viewer sees each source with its `corpus`/`page`/`quote`/`species` fields
+  // as if they had been emitted inline. The `provenance` grade stays on the node.
+  const quotesById = Object.create(null);
+  for (const q of quotes) quotesById[q.id] = q;
+  rehydrateQuotes([metaRecord, structures, projections, circuits,
+                   projectionGroups, receptors, drugs], quotesById);
   // A symmetric pathway is stored once carrying `mirror: true` (the emitted file
   // authors only the right-hemisphere record, avoiding a duplicate row per
   // pathway; see generate_data.py _projection_records). Reflect each such record

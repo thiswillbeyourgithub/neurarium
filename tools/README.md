@@ -135,7 +135,8 @@ Screenshots).
 - `tools/data_generators/` — pure-data modules imported by `generate_data.py`: `drugs.py`,
   `provenance.py` (also houses the sourcing-tally helpers `_GRADE_RANK`/`_strongest_grade`/
   `_binding_grade` + `_provenance_stats`, which reduce the emitted nodes to `meta.provenance_stats`),
-  `i18n.py`, and the `receptors/` subpackage (one module per neurotransmitter
+  `i18n.py`, `quote_table.py` (the serialization-time source-quote externalize pass -> `quotes.jsonl`,
+  mirroring the i18n externalize), and the `receptors/` subpackage (one module per neurotransmitter
   family, e.g. `serotonergic.py`, each exposing `ENTRIES`; `__init__.py` concatenates them into
   `RECEPTORS` in the original order), the `regions/` subpackage (one module per anatomical `group`,
   e.g. `cortex.py`/`basal_ganglia.py`, each exposing `PAIRED` + `MIDLINE`; `__init__.py` concatenates
@@ -209,6 +210,15 @@ The field list of each emitted file. The viewer reads exactly these shapes; the 
 emits them. Every claim carries its own quote-level source (see CLAUDE.md Source provenance);
 there is no node-level catch-all `sources` block.
 
+> **Source quotes are externalized.** A quote-bearing source is emitted on the node as a bare
+> `{quote_id, provenance}` reference; its immutable excerpt `{id, corpus, page, quote, species?}`
+> lives once in the deduplicated `quotes.jsonl` side table (keyed by a content hash, so identical
+> excerpts share one entry). The viewer (`js/data.js`) and `check_data.py` both rehydrate each
+> reference in memory (merging the excerpt back onto the source) at load, so every shape below that
+> shows `sources[{corpus,page,quote,...}]` is the *rehydrated* view; on disk it is `{quote_id,
+> provenance}`. Ki sources (no `quote`) and bare wikipedia provenance are not externalized. See the
+> serialization pass in `data_generators/quote_table.py` (mirrors the i18n externalize pass).
+
 > **Emitted data is English-only.** Display strings marked `{en,fr}` below are *authored*
 > bilingual but serialized as the plain English string; the French is deduplicated into one
 > side table, `translations.fr.json` (`{english: french}`, sorted keys), which the viewer
@@ -230,6 +240,10 @@ there is no node-level catch-all `sources` block.
   keys, covering every emitted display string whose French differs from its English. Fetched by
   the viewer only in French (English users skip it); a missing key falls back to the English
   string. Written last by `write_artifacts` from the externalize pass (see docs/I18N.md).
+- `quotes.jsonl` — the deduplicated source-quote side table, one quote node per line sorted by
+  `id` (a `q_<12 hex>` content hash): `id`, `corpus`, `page`, `quote`, optional `species`. Every
+  node's quote-bearing source references one by `quote_id`; the viewer + `check_data.py` rehydrate
+  it at load (see the externalize note above).
 - `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend
   row), `group`, `position`, `color`, `shape_file`, `classification_provenance`, optional
   `wikipedia`(+`_provenance`), optional `structure_image` (hot-linked Wikimedia url, shared by

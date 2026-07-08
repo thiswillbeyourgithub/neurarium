@@ -146,6 +146,14 @@ from data_generators.i18n import (  # noqa: E402
     externalize,
     reset_translations,
 )
+# Serialization-time quote externalization: the per-node source quotes are
+# collapsed into a single deduplicated public/data/quotes.jsonl side table.
+from data_generators.quote_table import (  # noqa: E402
+    QUOTES,
+    externalize_quotes,
+    quote_lines,
+    reset_quotes,
+)
 
 # The receptor classification records (pure data, one module per neurotransmitter
 # family) live in the data_generators.receptors package. See the schema comment at
@@ -1246,12 +1254,20 @@ def write_artifacts(root: Path) -> None:
     # by the viewer from the side table (see externalize() + js/i18n.js). Reset the
     # accumulator first so a second run in the same process starts clean.
     reset_translations()
+    # Collapse every embedded source quote into the deduplicated quotes.jsonl side
+    # table, replacing it with a {quote_id, provenance} reference. Applied after the
+    # i18n externalize (quote text is plain English, never bilingual); both the
+    # viewer and check_data.py rehydrate it in memory. Reset first (idempotent run).
+    reset_quotes()
+
+    def _emit(record):
+        return externalize_quotes(externalize(record))
 
     # meta is a single object -> pretty-printed meta.json; the collections are one
     # JSON object per line -> one *.jsonl each.
     meta_path = data_dir / "meta.json"
     meta_path.write_text(
-        json.dumps(externalize(data["meta"]), ensure_ascii=False, indent=2) + "\n",
+        json.dumps(_emit(data["meta"]), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8")
     log.info("wrote %s", meta_path)
 
@@ -1260,8 +1276,15 @@ def write_artifacts(root: Path) -> None:
         path = data_dir / f"{name}.jsonl"
         with path.open("w", encoding="utf-8") as fh:
             for record in data[name]:
-                fh.write(json.dumps(externalize(record), ensure_ascii=False) + "\n")
+                fh.write(json.dumps(_emit(record), ensure_ascii=False) + "\n")
         log.info("wrote %s (%d lines)", path, len(data[name]))
+
+    # The deduplicated quote table, one quote node per line, sorted by id for
+    # stable diffs. Fetched by the viewer (rehydrated onto each source at load).
+    quotes_path = data_dir / "quotes.jsonl"
+    quotes_path.write_text(
+        "".join(line + "\n" for line in quote_lines()), encoding="utf-8")
+    log.info("wrote %s (%d quotes)", quotes_path, len(QUOTES))
 
     # The deduplicated French side table, keys sorted for stable diffs. Fetched by
     # the viewer only when the active language is French (see js/data.js).

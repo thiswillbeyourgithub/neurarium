@@ -116,11 +116,8 @@
       "location_sources": {
         "raphe": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A4",
-            "quote": "SLC6A4 detected in raphe: probe 1051457 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_3b6726f6d947",
+            "provenance": "verified"
           }
         ]
       },
@@ -128,10 +125,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 131,
-          "provenance": "verified",
-          "quote": "There is also a presynaptic transport pump selective for serotonin, called the serotonin transporter (SERT), which clears serotonin out of the synapse and back into the presynaptic neuron."
+          "quote_id": "q_c3614ce650ea",
+          "provenance": "verified"
         }
       ]
     },
@@ -153,11 +148,8 @@
       "location_sources": {
         "locus_coeruleus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A2",
-            "quote": "SLC6A2 detected in locus_coeruleus: probe 1023146 PACall present in 10/10 samples (donors 9861,10021,15697)",
-            "species": "Human"
+            "quote_id": "q_96c9f296fd16",
+            "provenance": "verified"
           }
         ]
       },
@@ -165,10 +157,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 271,
-          "provenance": "verified",
-          "quote": "The norepinephrine transporter (NET) exists presynaptically and is responsible for clearing excess norepinephrine out of the synapse."
+          "quote_id": "q_9f1907fb2642",
+          "provenance": "verified"
         }
       ]
     },
@@ -189,56 +179,38 @@
       "location_sources": {
         "accumbens": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A3",
-            "quote": "SLC6A3 detected in accumbens: probe 1051520 PACall present in 14/15 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_6e9aa522923e",
+            "provenance": "verified"
           }
         ],
         "caudate": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A3",
-            "quote": "SLC6A3 detected in caudate: probe 1051520 PACall present in 80/82 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_7f3d02f575bc",
+            "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A3",
-            "quote": "SLC6A3 detected in frontal: probe 1051520 PACall present in 471/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_5ab5b09e6b03",
+            "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A3",
-            "quote": "SLC6A3 detected in putamen: probe 1051520 PACall present in 53/55 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_1ba7007c5e26",
+            "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A3",
-            "quote": "SLC6A3 detected in substantia_nigra: probe 1051520 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_1286dcd53376",
+            "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A3",
-            "quote": "SLC6A3 detected in vta: probe 1051520 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_19c3102c3b49",
+            "provenance": "verified"
           }
         ]
       },
@@ -246,10 +218,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 96,
-          "provenance": "verified",
-          "quote": "Dopamine can be transported out of the synaptic cleft and back into the presynaptic neuron via the dopamine transporter (DAT), where it may be repackaged for future use."
+          "quote_id": "q_0b9972a4b647",
+          "provenance": "verified"
         }
       ]
     },
@@ -269,47 +239,32 @@
       "location_sources": {
         "cerebellum": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A1",
-            "quote": "SLC6A1 detected in cerebellum: probe 1051544 PACall present in 304/306 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_b06accfc5062",
+            "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A1",
-            "quote": "SLC6A1 detected in frontal: probe 1051544 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_49267cfb4ae4",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A1",
-            "quote": "SLC6A1 detected in hippocampus: probe 1051544 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_84164fde696d",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A1",
-            "quote": "SLC6A1 detected in temporal: probe 1051544 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_8e0c401d07fb",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC6A1",
-            "quote": "SLC6A1 detected in thalamus: probe 1051544 PACall present in 187/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_67bc8bfc5c42",
+            "provenance": "verified"
           }
         ]
       },
@@ -317,10 +272,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 274,
-          "provenance": "verified",
-          "quote": "GABA's synaptic actions are terminated by the presynaptic GABA transporter (GAT), also known as the GABA reuptake pump (Figure 6-18), analogous to similar transporters for other neurotransmitters discussed throughout this text."
+          "quote_id": "q_1048c1d21924",
+          "provenance": "verified"
         }
       ]
     },
@@ -341,66 +294,46 @@
       "vesicular": true,
       "polarity_sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 191,
-          "provenance": "verified",
-          "quote": "The VMAT2 is an intraneuronal transporter located on synaptic vesicles. VMAT2 takes intraneuronal monoamines, including dopamine, up into the synaptic vesicles so that they can be stored until they are needed for release during neurotransmission."
+          "quote_id": "q_7940a8e66a89",
+          "provenance": "verified"
         }
       ],
       "polarity_provenance": "verified",
       "location_sources": {
         "caudate": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC18A2",
-            "quote": "SLC18A2 detected in caudate: probe 1051381 PACall present in 81/82 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_b41625995fc2",
+            "provenance": "verified"
           }
         ],
         "locus_coeruleus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC18A2",
-            "quote": "SLC18A2 detected in locus_coeruleus: probe 1051381 PACall present in 10/10 samples (donors 9861,10021,15697)",
-            "species": "Human"
+            "quote_id": "q_2f6c637b6d3f",
+            "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC18A2",
-            "quote": "SLC18A2 detected in putamen: probe 1051381 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_7998a53cac2c",
+            "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC18A2",
-            "quote": "SLC18A2 detected in raphe: probe 1051381 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_b194a1664cdb",
+            "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC18A2",
-            "quote": "SLC18A2 detected in substantia_nigra: probe 1051381 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_a8b395a1c044",
+            "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SLC18A2",
-            "quote": "SLC18A2 detected in vta: probe 1051381 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_7f643b001190",
+            "provenance": "verified"
           }
         ]
       },
@@ -408,10 +341,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 191,
-          "provenance": "verified",
-          "quote": "The VMAT2 is an intraneuronal transporter located on synaptic vesicles. VMAT2 takes intraneuronal monoamines, including dopamine, up into the synaptic vesicles so that they can be stored until they are needed for release during neurotransmission."
+          "quote_id": "q_7940a8e66a89",
+          "provenance": "verified"
         }
       ]
     },
@@ -433,65 +364,44 @@
       "location_sources": {
         "locus_coeruleus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOA",
-            "quote": "MAOA detected in locus_coeruleus: probe 1054334 PACall present in 10/10 samples (donors 9861,10021,15697)",
-            "species": "Human"
+            "quote_id": "q_d5b844b4f711",
+            "provenance": "verified"
           }
         ],
         "medulla": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOA",
-            "quote": "MAOA detected in medulla: probe 1054334 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_51c08c9fc856",
+            "provenance": "verified"
           }
         ],
         "midbrain": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOA",
-            "quote": "MAOA detected in midbrain: probe 1054334 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_f954f614c0ee",
+            "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOA",
-            "quote": "MAOA detected in pons: probe 1054334 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_4c626ece393e",
+            "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOA",
-            "quote": "MAOA detected in raphe: probe 1054334 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_2be52cadce44",
+            "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOA",
-            "quote": "MAOA detected in substantia_nigra: probe 1054334 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_bbadc3f48ad7",
+            "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOA",
-            "quote": "MAOA detected in vta: probe 1054334 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_58b3416358c0",
+            "provenance": "verified"
           }
         ]
       },
@@ -499,10 +409,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 355,
-          "provenance": "verified",
-          "quote": "The enzyme MAO-A metabolizes serotonin (5HT) and norepinephrine (NE) as well as dopamine (DA) (left panels)."
+          "quote_id": "q_4228136b5d28",
+          "provenance": "verified"
         }
       ]
     },
@@ -523,56 +431,38 @@
       "location_sources": {
         "medulla": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOB",
-            "quote": "MAOB detected in medulla: probe 1054302 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_44820b5d924d",
+            "provenance": "verified"
           }
         ],
         "midbrain": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOB",
-            "quote": "MAOB detected in midbrain: probe 1054302 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_72454fcb10c8",
+            "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOB",
-            "quote": "MAOB detected in pons: probe 1054302 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_17d8aef3bd04",
+            "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOB",
-            "quote": "MAOB detected in raphe: probe 1054302 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_6420e4458f86",
+            "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOB",
-            "quote": "MAOB detected in substantia_nigra: probe 1054302 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_9c0565ec4361",
+            "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MAOB",
-            "quote": "MAOB detected in vta: probe 1054302 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_8fcfeb86ab65",
+            "provenance": "verified"
           }
         ]
       },
@@ -580,10 +470,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 96,
-          "provenance": "verified",
-          "quote": "Other enzymes that break down dopamine are monoamine oxidase A (MAO-A) and monoamine oxidase B (MAO-B), which are present in mitochondria within the presynaptic neuron and in other cells such as glia."
+          "quote_id": "q_8b7016ba0b20",
+          "provenance": "verified"
         }
       ]
     },
@@ -603,47 +491,32 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ACHE",
-            "quote": "ACHE detected in frontal: probe 1022702 PACall present in 472/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_5f627de57e84",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ACHE",
-            "quote": "ACHE detected in hippocampus: probe 1022702 PACall present in 169/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_1be62e891e85",
+            "provenance": "verified"
           }
         ],
         "septal_nuclei": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ACHE",
-            "quote": "ACHE detected in septal_nuclei: probe 1022702 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_27739dc5b712",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ACHE",
-            "quote": "ACHE detected in temporal: probe 1022702 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_e88e00665e13",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ACHE",
-            "quote": "ACHE detected in thalamus: probe 1022702 PACall present in 187/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_07a4b24be98d",
+            "provenance": "verified"
           }
         ]
       },
@@ -651,10 +524,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 521,
-          "provenance": "verified",
-          "quote": "ACh's actions are terminated by one of two enzymes, either acetylcholinesterase (AChE) or butyrylcholinesterase (BuChE), sometimes also called \"pseudocholinesterase\" or \"nonspecific cholinesterase\" (Figure 12-25)."
+          "quote_id": "q_bf38ba0191ee",
+          "provenance": "verified"
         }
       ]
     },
@@ -672,29 +543,20 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "BCHE",
-            "quote": "BCHE detected in frontal: probe 1058870 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_613797a6763d",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "BCHE",
-            "quote": "BCHE detected in hippocampus: probe 1058870 PACall present in 164/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_5c4ce7e9ada7",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "BCHE",
-            "quote": "BCHE detected in temporal: probe 1058870 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_3c90aaddcfa3",
+            "provenance": "verified"
           }
         ]
       },
@@ -702,10 +564,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 521,
-          "provenance": "verified",
-          "quote": "ACh's actions are terminated by one of two enzymes, either acetylcholinesterase (AChE) or butyrylcholinesterase (BuChE), sometimes also called \"pseudocholinesterase\" or \"nonspecific cholinesterase\" (Figure 12-25)."
+          "quote_id": "q_bf38ba0191ee",
+          "provenance": "verified"
         }
       ]
     },
@@ -746,56 +606,38 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SCN1A",
-            "quote": "SCN1A detected in frontal: probe 1022570 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_b3a7cd444f80",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SCN1A",
-            "quote": "SCN1A detected in hippocampus: probe 1022570 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_077bdbd32285",
+            "provenance": "verified"
           }
         ],
         "occipital": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SCN1A",
-            "quote": "SCN1A detected in occipital: probe 1022570 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_ccdb3f43fe7b",
+            "provenance": "verified"
           }
         ],
         "parietal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SCN1A",
-            "quote": "SCN1A detected in parietal: probe 1022570 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_b9b34bc4c891",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SCN1A",
-            "quote": "SCN1A detected in temporal: probe 1022570 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_e786e90398f1",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SCN2A",
-            "quote": "SCN2A detected in thalamus: probe 1022207 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_a77f256e0fc2",
+            "provenance": "verified"
           }
         ]
       },
@@ -803,10 +645,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 25,
-          "provenance": "verified",
-          "quote": "Electrical impulses open ion channels – both voltage-sensitive sodium channels (VSSCs) and voltage-sensitive calcium channels (VSCCs) – by changing the ionic charge across neuronal membranes."
+          "quote_id": "q_524c0da2af25",
+          "provenance": "verified"
         }
       ]
     },
@@ -825,38 +665,26 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA1A",
-            "quote": "CACNA1A detected in frontal: probe 1020304 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_bfa4c5f86463",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA1A",
-            "quote": "CACNA1A detected in hippocampus: probe 1020304 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_9222aeeef40a",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA1A",
-            "quote": "CACNA1A detected in temporal: probe 1020304 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_40baafa2ca6d",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA1C",
-            "quote": "CACNA1C detected in thalamus: probe 1015380 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_7f1a6bed1b33",
+            "provenance": "verified"
           }
         ]
       },
@@ -864,10 +692,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 25,
-          "provenance": "verified",
-          "quote": "Electrical impulses open ion channels – both voltage-sensitive sodium channels (VSSCs) and voltage-sensitive calcium channels (VSCCs) – by changing the ionic charge across neuronal membranes."
+          "quote_id": "q_524c0da2af25",
+          "provenance": "verified"
         }
       ]
     },
@@ -886,38 +712,26 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA2D1",
-            "quote": "CACNA2D1 detected in frontal: probe 1028198 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_44a3e9bce8f5",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA2D1",
-            "quote": "CACNA2D1 detected in hippocampus: probe 1028198 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_0b189a373c58",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA2D1",
-            "quote": "CACNA2D1 detected in temporal: probe 1028198 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_f7e9ce856623",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA2D1",
-            "quote": "CACNA2D1 detected in thalamus: probe 1028198 PACall present in 187/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_38b197e5eec9",
+            "provenance": "verified"
           }
         ]
       },
@@ -925,10 +739,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 413,
-          "provenance": "verified",
-          "quote": "Alpha-2-delta ligands such as gabapentin or pregabalin bind to the α2δ subunit of voltage-sensitive calcium channels (VSCCs), changing their conformation to reduce calcium influx and therefore reduce excessive stimulation of postsynaptic receptors."
+          "quote_id": "q_6ce626fa7c2e",
+          "provenance": "verified"
         }
       ]
     },
@@ -946,29 +758,20 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA1G",
-            "quote": "CACNA1G detected in frontal: probe 1049164 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_a33bf4332cb2",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA1G",
-            "quote": "CACNA1G detected in temporal: probe 1049164 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_d8e415e91ea4",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "CACNA1H",
-            "quote": "CACNA1H detected in thalamus: probe 1023782 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_1d3d55cfbf95",
+            "provenance": "verified"
           }
         ]
       },
@@ -990,38 +793,26 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SV2A",
-            "quote": "SV2A detected in frontal: probe 1048051 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_a779d1bf4648",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SV2A",
-            "quote": "SV2A detected in hippocampus: probe 1048051 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_ef853daa995f",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SV2A",
-            "quote": "SV2A detected in temporal: probe 1048051 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_8284b17be367",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "SV2A",
-            "quote": "SV2A detected in thalamus: probe 1048051 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_26312bfc2076",
+            "provenance": "verified"
           }
         ]
       },
@@ -1029,10 +820,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 51,
-          "provenance": "verified",
-          "quote": "A novel 12-transmembrane-region synaptic vesicle transporter of uncertain mechanism and with unclear substrates, called the SV2A transporter and localized within the synaptic vesicle membrane, binds the anticonvulsant levetiracetam, perhaps interfering with neurotransmitter release and thereby reducing seizures."
+          "quote_id": "q_9bacd4eb53ec",
+          "provenance": "verified"
         }
       ]
     },
@@ -1058,74 +847,50 @@
       "location_sources": {
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2A",
-            "quote": "ADRA2A detected in frontal: probe 1059351 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_56b1e3705ae7",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2C",
-            "quote": "ADRA2C detected in hippocampus: probe 1027284 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_9af60a04b2ae",
+            "provenance": "verified"
           }
         ],
         "hypothalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2C",
-            "quote": "ADRA2C detected in hypothalamus: probe 1027284 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_e36df9a4bc8b",
+            "provenance": "verified"
           }
         ],
         "locus_coeruleus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2A",
-            "quote": "ADRA2A detected in locus_coeruleus: probe 1059351 PACall present in 10/10 samples (donors 9861,10021,15697)",
-            "species": "Human"
+            "quote_id": "q_a3bdb2d1bfdc",
+            "provenance": "verified"
           }
         ],
         "medulla": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2C",
-            "quote": "ADRA2C detected in medulla: probe 1027284 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_a52359aa2ba1",
+            "provenance": "verified"
           }
         ],
         "midbrain": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2C",
-            "quote": "ADRA2C detected in midbrain: probe 1027284 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_3271a3f11d12",
+            "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2A",
-            "quote": "ADRA2A detected in pons: probe 1059351 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_5cfc73af6dea",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "ADRA2C",
-            "quote": "ADRA2C detected in thalamus: probe 1027284 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_8cb8ef4b3e24",
+            "provenance": "verified"
           }
         ]
       },
@@ -1133,10 +898,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 270,
-          "provenance": "verified",
-          "quote": "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 (Figure 6-14)."
+          "quote_id": "q_25c5e5a6b44e",
+          "provenance": "verified"
         }
       ]
     },
@@ -1158,65 +921,44 @@
       "location_sources": {
         "caudate": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "GRIN1",
-            "quote": "GRIN1 detected in caudate: probe 1055938 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_969a7e2fe489",
+            "provenance": "verified"
           }
         ],
         "cerebellum": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "GRIN1",
-            "quote": "GRIN1 detected in cerebellum: probe 1055938 PACall present in 305/306 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_35e1d84841bd",
+            "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "GRIN1",
-            "quote": "GRIN1 detected in frontal: probe 1055938 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_f5e2cb343692",
+            "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "GRIN1",
-            "quote": "GRIN1 detected in hippocampus: probe 1055938 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_29435f2ad3a6",
+            "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "GRIN1",
-            "quote": "GRIN1 detected in putamen: probe 1055938 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_12a48554a8de",
+            "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "GRIN1",
-            "quote": "GRIN1 detected in temporal: probe 1055938 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_4dbcc2a0a2b5",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "GRIN1",
-            "quote": "GRIN1 detected in thalamus: probe 1055938 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_2386ef402721",
+            "provenance": "verified"
           }
         ]
       },
@@ -1224,10 +966,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 92,
-          "provenance": "verified",
-          "quote": "The other subclass of ligand-gated ion channels has a tetrameric structure, and includes many glutamate receptors, including the AMPA, kainate, and NMDA subtypes."
+          "quote_id": "q_20edaa302bc7",
+          "provenance": "verified"
         }
       ]
     },
@@ -1247,47 +987,32 @@
       "location_sources": {
         "hypothalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "HCRTR1",
-            "quote": "HCRTR1 detected in hypothalamus: probe 1055736 PACall present in 83/86 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_140b5540535f",
+            "provenance": "verified"
           }
         ],
         "locus_coeruleus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "HCRTR1",
-            "quote": "HCRTR1 detected in locus_coeruleus: probe 1055736 PACall present in 10/10 samples (donors 9861,10021,15697)",
-            "species": "Human"
+            "quote_id": "q_a127de8a0c19",
+            "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "HCRTR1",
-            "quote": "HCRTR1 detected in raphe: probe 1055736 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_e1b1d41c20e2",
+            "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "HCRTR1",
-            "quote": "HCRTR1 detected in thalamus: probe 1055736 PACall present in 168/188 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_3633aa7f2232",
+            "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "HCRTR1",
-            "quote": "HCRTR1 detected in vta: probe 1055736 PACall present in 13/14 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_1ce243b72b75",
+            "provenance": "verified"
           }
         ]
       },
@@ -1295,10 +1020,8 @@
       "wikipedia_provenance": "sourced",
       "sources": [
         {
-          "corpus": "stahl_essential",
-          "page": 425,
-          "provenance": "verified",
-          "quote": "Orexin neurotransmission is mediated by two types of postsynaptic G-protein-coupled receptors, orexin 1 (OX1R) and orexin 2 (OX2R)."
+          "quote_id": "q_9ded3344460a",
+          "provenance": "verified"
         }
       ]
     },
@@ -1314,11 +1037,8 @@
       "location_sources": {
         "hypothalamus": [
           {
-            "corpus": "allen_ahba",
-            "provenance": "verified",
-            "page": "MC3R",
-            "quote": "MC3R detected in hypothalamus: probe 1054271 PACall present in 44/86 samples (donors 9861,10021,12876,14380,15697)",
-            "species": "Human"
+            "quote_id": "q_b4b205d31c0a",
+            "provenance": "verified"
           }
         ]
       },

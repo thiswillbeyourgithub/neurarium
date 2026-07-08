@@ -223,6 +223,77 @@ def walk_strings(obj, path):
 
 
 # --------------------------------------------------------------------------- #
+# Quote table (externalized source quotes)
+# --------------------------------------------------------------------------- #
+
+def load_quotes(report):
+    """Load ``quotes.jsonl`` into a ``quote_id -> quote node`` map.
+
+    Source quotes are emitted once into this side table; each node references
+    one by ``quote_id`` (see quote_table.py). A duplicate id is a hard error.
+    """
+    by_id = {}
+    for q in load_jsonl(report, "quotes"):
+        qid = q.get("id")
+        if not isinstance(qid, str):
+            report.error(f"quotes.jsonl: entry without a string id: {q!r}")
+            continue
+        if qid in by_id:
+            report.error(f"quotes.jsonl: duplicate quote id {qid!r}")
+        by_id[qid] = q
+    return by_id
+
+
+def rehydrate_quotes(node, by_id, referenced, dangling):
+    """Merge each ``{quote_id, ...}`` reference's excerpt back in place.
+
+    Mirrors the viewer's rehydration (js/data.js): copies the quote node's
+    ``corpus``/``page``/``quote``/``species`` onto the reference and drops the
+    ``quote_id`` key, so every later check sees the original inline source shape.
+    Records each referenced id (for the orphan check) and any id with no entry.
+    """
+    if isinstance(node, dict):
+        qid = node.get("quote_id")
+        if isinstance(qid, str):
+            referenced.add(qid)
+            quote = by_id.get(qid)
+            if quote is None:
+                dangling.append(qid)
+            else:
+                for k in ("corpus", "page", "quote", "species"):
+                    if k in quote:
+                        node[k] = quote[k]
+            node.pop("quote_id", None)
+        for value in node.values():
+            rehydrate_quotes(value, by_id, referenced, dangling)
+    elif isinstance(node, list):
+        for value in node:
+            rehydrate_quotes(value, by_id, referenced, dangling)
+
+
+def check_quotes(report, quotes_by_id, referenced, dangling):
+    """Referential integrity of the externalized quote table.
+
+    Every node's ``quote_id`` must resolve to a quote node, and every quote node
+    must be referenced by at least one node (no orphans left behind by the
+    generator). ``referenced``/``dangling`` are collected during rehydration.
+    """
+    report.header("0. Quote table")
+    if dangling:
+        for qid in sorted(set(dangling)):
+            report.error(f"quote reference {qid!r} has no entry in quotes.jsonl")
+    else:
+        report.ok(f"all {len(referenced)} distinct quote references resolve "
+                  f"to a quote node")
+    orphans = sorted(set(quotes_by_id) - referenced)
+    if orphans:
+        report.error(f"{len(orphans)} quote(s) in quotes.jsonl are unreferenced "
+                     f"(orphans, e.g. {orphans[:3]})")
+    else:
+        report.ok(f"no orphan quotes ({len(quotes_by_id)} quotes all referenced)")
+
+
+# --------------------------------------------------------------------------- #
 # 1. Duplicates
 # --------------------------------------------------------------------------- #
 
@@ -1015,6 +1086,15 @@ def main():
     projection_groups = load_jsonl(report, "projection_groups")
     receptors = load_jsonl(report, "receptors")
     drugs = load_jsonl(report, "drugs")
+
+    # Rehydrate the externalized source quotes in place (collecting referenced +
+    # dangling ids), so every check below sees the original inline source shape;
+    # then report the quote table's referential integrity.
+    quotes_by_id = load_quotes(report)
+    referenced, dangling = set(), []
+    rehydrate_quotes([meta, structures, projections, circuits, projection_groups,
+                      receptors, drugs], quotes_by_id, referenced, dangling)
+    check_quotes(report, quotes_by_id, referenced, dangling)
 
     args = (report, meta, structures, projections, circuits, projection_groups,
             receptors, drugs)
