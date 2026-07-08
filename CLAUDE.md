@@ -150,7 +150,13 @@ Viewer (`public/`):
   deploy's `no-store` freshness intent), and `favicon.svg` + `icon-192/512.png` +
   `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
   favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
-- `js/data.js` — fetches `meta.json` + the `.jsonl` (incl. `quotes.jsonl`) + shape files, rehydrates
+- `js/data-cache.js` — version-keyed client cache of the fetched core data (localStorage + gzip via
+  `CompressionStream`): a matching `__APP_VERSION__` is a guaranteed-fresh hit so no core data is
+  re-downloaded (the deploy is `no-store` + network-first SW, so otherwise every visit re-fetches
+  ~600 KB). Bypassed on dev hosts (localhost) so local edits stay fresh; shape files are not cached
+  here (they stay on the SW path). `readDataCache`/`writeDataCache`, keyed by version + language.
+- `js/data.js` — fetches `meta.json` + the `.jsonl` (incl. `quotes.jsonl`) + shape files (core data
+  via the `js/data-cache.js` version-keyed cache), rehydrates
   each `{quote_id, provenance}` source from the deduplicated `quotes.jsonl` excerpt table
   (`rehydrateQuotes`, mirror of the generator's externalize; see Source provenance); returns a normalized
   `{structures, projections, circuits, projectionGroups, projectionGroupsByKey, receptors,
