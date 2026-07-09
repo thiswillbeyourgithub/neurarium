@@ -28,8 +28,8 @@ Live at **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 > shapes, projections, descriptions) is not yet reviewed or sourced and may contain
 > model hallucinations; the drug data is machine-extracted (psychiatric drugs from
 > Stahl's *Prescriber's Guide*, other substances from measured PDSP Ki affinities) and
-> likewise unreviewed. It is an early tool for exploring and learning, **not** a
-> clinical reference: do not rely on it, and never bet a patient's care on it.
+> likewise unreviewed. It is an early tool for exploring and learning or finding sources but **not** as a
+> primary clinical reference: do not rely on it, and never bet a patient's care solely on it.
 
 ## FAQ
 
@@ -72,10 +72,8 @@ it**, and you explore outward from whatever you clicked.
 <details>
 <summary><strong>Who made neurarium?</strong></summary>
 
-Built by [Olivier Cornelis](https://olicorne.org/), a developer and psychiatrist, with
-the help of [Claude Code](https://claude.com/claude-code). Drug descriptions and
-molecular-structure images come from Wikipedia, used under
-[CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).
+Initialy built in less than a week by [Olivier Cornelis](https://olicorne.org/), french developer and resident psychiatrist, with
+the help of [Claude Code](https://claude.com/claude-code).
 
 </details>
 
@@ -91,7 +89,7 @@ spend your effort reconstructing the connections instead of using them. Putting 
 one map, each with a visible source grade, makes those connections the thing you look
 at.
 
-I also believe this kind of interactive, source-graded viewer could be useful beyond
+As a strong believer in the usefulness of reorganizing information as structured data, I believe this kind of interactive, source-graded viewer could be useful beyond
 psychopharmacology, and I would happily build similar animations for **other medical
 topics**. If you think a map like this would help your teaching or research, please
 [get in touch](https://olicorne.org/en/contact).
@@ -171,10 +169,6 @@ Receptor pre/postsynaptic site  ████░░░░░░░░░░░░
 
 <!-- SOURCING_STATS:END -->
 
-Drug bindings lead because they pass the full quote-verification gate; the anatomy,
-pathways, and expression regions are the current frontier. The same key and coverage
-bar live in the app's About panel.
-
 </details>
 
 <a name="what-are-the-sources"></a>
@@ -249,6 +243,7 @@ build on neurarium, but any reuse or hosting of it (including a modified version
 a website) must keep its source open under the same terms. The point is to keep the
 work and its data freely available and prevent it from being closed off into a
 proprietary fork.
+Drug descriptions and molecular-structure images come from Wikipedia, used under [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).
 
 </details>
 
