@@ -20,8 +20,8 @@ En ligne sur [neurarium.olicorne.org](https://neurarium.olicorne.org).
 > **Travail en cours : il contient très probablement des erreurs.** L'anatomie
 > (régions, formes, projections, descriptions) n'est pas encore relue ni sourcée et
 > peut contenir des hallucinations du modèle ; les données sur les médicaments sont
-> extraites automatiquement d'une source unique (le *Prescriber's Guide* de Stahl) et
-> ne sont pas relues non plus. Ne vous fiez à rien de tout ceci, et ne l'utilisez
+> extraites automatiquement (les médicaments psychiatriques du *Prescriber's Guide* de
+> Stahl, les autres substances des affinités PDSP Ki mesurées) et ne sont pas relues non plus. Ne vous fiez à rien de tout ceci, et ne l'utilisez
 > jamais pour des décisions médicales.
 
 neurarium prend des faits qui vivent d'ordinaire éparpillés entre atlas, schémas de
@@ -40,7 +40,7 @@ confiance.
 | **Anatomie** | Lobes corticaux, noyaux gris centraux, diencéphale, système limbique et tronc cérébral comme un seul maillage 3D procédural | Faire tourner, écarter au curseur pour révéler les noyaux profonds, rendre transparent, retirer la face proche, ou isoler une seule structure |
 | **Câblage** | Les projections neuronales comme des flèches orientées, colorées par type (excitatrice, dopaminergique, ...) ou par signe excitateur/inhibiteur | Cliquer une voie pour son trajet, son transmetteur et ses sources ; jouer un **circuit fonctionnel** nommé sous forme d'impulsion qui circule |
 | **Récepteurs & cibles** | Les récepteurs plus d'autres cibles moléculaires (transporteurs, enzymes, canaux ioniques) | En focaliser un : le cerveau se ternit vers les structures qui l'expriment (parsemées de points lumineux), à côté de sa classe, son signe et chaque médicament qui agit dessus |
-| **Médicaments** | Des médicaments psychiatriques tirés du *Prescriber's Guide* de Stahl | En focaliser un : des points colorés par effet (renforce / bloque / module) s'animent sur les régions qu'il touche, des billes circulent le long des systèmes de transmetteurs par lesquels il agit, et le panneau montre sa structure, sa classe, ses liaisons et la source de chacune |
+| **Médicaments** | Des médicaments psychiatriques (tirés du *Prescriber's Guide* de Stahl) aux côtés de substances récréatives et autres substances psychoactives (LSD, MDMA, kétamine, cocaïne, nicotine, ...), et ouvert à d'autres : un médicament n'est qu'une ligne de liaisons sourcées, donc toute substance dont les affinités sont publiées peut être ajoutée | En focaliser un : des points colorés par effet (renforce / bloque / module) s'animent sur les régions qu'il touche, des billes circulent le long des systèmes de transmetteurs par lesquels il agit, et le panneau montre sa structure, sa classe, ses liaisons et la source de chacune |
 | **Tout** | Une seule barre de recherche ; un état entièrement adressable par URL | Chercher régions, voies, récepteurs et médicaments à la fois ; pivoter d'un médicament vers sa classe ou d'une cible vers tous les médicaments qui l'atteignent ; partager n'importe quelle vue par un lien direct |
 
 ## Chaque nœud est sourcé
@@ -59,10 +59,10 @@ sur place avec une **pastille de provenance** colorée. L'objectif de conception
 **chaque nœud porte une source**, et la pastille rend les manques visibles. Du plus
 faible au plus fort :
 
+- **orange `NOSOURCE` :** pas encore de source ni de référence pour ce nœud.
 - **gris `?` (LLM seul) :** produit par un modèle de mémoire, non vérifié ; peut être une hallucination.
 - **jaune `~` (sourcé) :** issu du document cité, mais le nœud lui-même n'a pas été vérifié par citation.
 - **vert `✓` (vérifié) :** un modèle a extrait une citation, sa présence dans la source citée a été confirmée *programmatiquement*, et un second modèle a convenu qu'elle étaye le nœud. Note la plus élevée disponible, et toujours pilotée par un modèle.
-- **orange `NOSOURCE` :** pas encore de source ni de référence pour ce nœud.
 
 La note fait partie des données, relevée à mesure que chaque nœud est vérifié, si bien
 que la couverture ci-dessous est un vrai comptage :

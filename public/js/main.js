@@ -3784,15 +3784,15 @@ function buildAboutSourcing(meta) {
   // viewer has bugs. Keep this prominent so nobody reads a pill as "true".
   host.appendChild(h("p", "about-caveat", t("about.sourcingCaveat")));
 
-  // Grade key: a pill swatch + its meaning, in strongest-to-weakest order, then
-  // the NOSOURCE case. The pills reuse the info-panel CSS classes so the legend
-  // matches the pills shown next to each source.
+  // Grade key: a pill swatch + its meaning, in weakest-to-strongest order
+  // (NOSOURCE first, then LLM-only up to verified). The pills reuse the
+  // info-panel CSS classes so the legend matches the pills shown next to each source.
   const key = h("ul", "src-key");
   const keyRows = [
-    ["src-prov-verified", "✓", "about.gradeVerified"],
-    ["src-prov-sourced", "~", "about.gradeSourced"],
-    ["src-prov-llm", "?", "about.gradeLlm"],
     ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
+    ["src-prov-llm", "?", "about.gradeLlm"],
+    ["src-prov-sourced", "~", "about.gradeSourced"],
+    ["src-prov-verified", "✓", "about.gradeVerified"],
   ];
   for (const [cls, glyph, tip] of keyRows) {
     const li = document.createElement("li");

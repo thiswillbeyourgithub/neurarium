@@ -19,8 +19,9 @@ Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
 > [!WARNING]
 > **Work in progress: it very likely contains mistakes.** The anatomy (regions,
 > shapes, projections, descriptions) is not yet reviewed or sourced and may contain
-> model hallucinations; the drug data is machine-extracted from a single source
-> (Stahl's *Prescriber's Guide*) and likewise unreviewed. Do not rely on any of it,
+> model hallucinations; the drug data is machine-extracted (psychiatric drugs from
+> Stahl's *Prescriber's Guide*, other substances from measured PDSP Ki affinities)
+> and likewise unreviewed. Do not rely on any of it,
 > and never use it for medical decisions.
 
 neurarium takes facts that normally live scattered across atlases, pathway diagrams,
@@ -54,10 +55,10 @@ is *how do we know this?* Every source shown in a panel answers it inline with a
 colored **provenance pill**. The design goal is that **every node carries a source**,
 and the pill makes the gaps visible. From weakest to strongest:
 
+- **orange `NOSOURCE`:** no source or reference for that node yet.
 - **grey `?` (LLM-only):** produced by a model from memory, unchecked; may be a hallucination.
 - **yellow `~` (sourced):** from the cited document, but the node itself was not quote-verified.
 - **green `✓` (verified):** a model extracted a quote, it was *programmatically* confirmed present in the cited source, and a second model agreed it supports the node. Highest grade available, and still model-driven.
-- **orange `NOSOURCE`:** no source or reference for that node yet.
 
 The grade is part of the data, upgraded as each node is checked, so the coverage below
 is a real count:
