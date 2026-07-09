@@ -2,37 +2,55 @@
 
 *Read this in [French / en français](README.fr.md).*
 
-**A free, source-graded 3D atlas of the human brain: every region, pathway,
-receptor, and drug is a graded, inspectable node on one map you can rotate, pull
-apart, search, and click through.**
+neurarium is my modest attempt at a **3D brain encyclopedia** where every fact is
+backed by a reputable source (a reference medical textbook, an online pharmacology
+database, a research paper), reorganized into an intuitive 3D brain you can rotate,
+pull apart, search, and click through.
+
+Brain knowledge normally lives scattered across atlases, pathway diagrams, receptor
+tables, and drug monographs. neurarium lays it onto a single 3D model so the
+*relationships* (which region projects where, which receptor sits in which structure,
+what a drug does and to what) are visible at a glance instead of reconstructed in your
+head. Because the dataset is machine-assembled, every fact carries a colored grade
+telling you how well it is sourced, so you always know how much to trust it.
+
+Live at **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
+
+[![neurarium demo](docs/images/preview.gif)](https://neurarium.olicorne.org)
 
 > [!IMPORTANT]
 > <!-- SOURCED_HEADLINE:START --><b>90% of the 2129 knowledge nodes are sourced or verified</b><!-- SOURCED_HEADLINE:END -->
 > in the shipped dataset, and every fact in the app carries a provenance grade you
-> can inspect. This is a real programmatic count of the data (see
-> [Every node is sourced](#every-node-is-sourced)).
-
-Live at [neurarium.olicorne.org](https://neurarium.olicorne.org).
-
-[![neurarium demo](docs/images/preview.gif)](https://neurarium.olicorne.org)
+> can inspect (see [How does the sourcing work?](#how-does-the-sourcing-work)).
 
 > [!WARNING]
 > **Work in progress: it very likely contains mistakes.** The anatomy (regions,
 > shapes, projections, descriptions) is not yet reviewed or sourced and may contain
 > model hallucinations; the drug data is machine-extracted (psychiatric drugs from
-> Stahl's *Prescriber's Guide*, other substances from measured PDSP Ki affinities)
-> and likewise unreviewed. Do not rely on any of it,
-> and never use it for medical decisions.
+> Stahl's *Prescriber's Guide*, other substances from measured PDSP Ki affinities) and
+> likewise unreviewed. It is an early tool for exploring and learning, **not** a
+> clinical reference: do not rely on it, and never bet a patient's care on it.
 
-neurarium takes facts that normally live scattered across atlases, pathway diagrams,
-receptor tables, and drug monographs, and lays them onto a single 3D model. The point
-is to make the *relationships* between them (which region projects where, which
-receptor sits in which structure, what a drug does and to what) visible at a glance
-rather than reconstructed in your head. Under the hood it is a **graph of nodes**, and
-because the dataset is machine-assembled, every node carries a source grade so you
-always know how much to trust it.
+## FAQ
 
-## What you can explore
+- [What kind of information is inside?](#what-kind-of-information-is-inside)
+- [Who made neurarium?](#who-made-neurarium)
+- [Why did you make it?](#why-did-you-make-it)
+- [Is it free?](#is-it-free)
+- [How do I run it myself?](#how-do-i-run-it-myself)
+- [How does the sourcing work?](#how-does-the-sourcing-work)
+- [What are the sources?](#what-are-the-sources)
+- [How can I reuse the data?](#how-can-i-reuse-the-data)
+- [What's the license, and why?](#whats-the-license-and-why)
+- [What's on the roadmap?](#whats-on-the-roadmap)
+- [What is it built with?](#what-is-it-built-with)
+- [How do I give feedback or get in touch?](#how-do-i-give-feedback-or-get-in-touch)
+
+<a name="what-kind-of-information-is-inside"></a>
+<details>
+<summary><strong>What kind of information is inside?</strong></summary>
+
+Four layers of data on one model, all clickable:
 
 | Layer | What you see | What you can do with it |
 | --- | --- | --- |
@@ -42,18 +60,83 @@ always know how much to trust it.
 | **Drugs** | Psychiatric drugs (from Stahl's *Prescriber's Guide*) alongside recreational and other psychoactive substances (LSD, MDMA, ketamine, cocaine, nicotine, ...), and open to more: a drug is just a row of sourced bindings, so any substance with published affinities can be added | Focus one: effect-colored dots (boost / block / modulate) animate over the regions it touches, beads flow along the transmitter systems it works through, and the panel shows its structure, class, bindings, and each binding's source |
 | **Everything** | One search box; fully URL-addressable state | Search regions, pathways, receptors, and drugs at once; pivot from a drug to its class or from a target to every drug that hits it; share any view as a deep link |
 
-## Every node is sourced
+Under the hood it is a **graph of nodes**. A *node* is any sourceable datum: a brain
+region, a projection between two regions, a functional circuit, a receptor, a
+receptor's expression in a given region, a drug, a single drug-to-target binding.
+Nodes interlink, so a detail panel is a view of **one node plus every node linked to
+it**, and you explore outward from whatever you clicked.
 
-A *node* is any sourceable datum: a brain region, a projection between two regions, a
-functional circuit, a receptor, a receptor's expression in a given region, a drug, a
-single drug-to-target binding. Nodes interlink (a receptor links to the regions
-expressing it and the drugs acting on it), and a detail panel is a view of **one node
-plus every node linked to it**, so you explore outward from whatever you clicked.
+</details>
 
-Because the dataset is large and machine-assembled, the honest question for any node
-is *how do we know this?* Every source shown in a panel answers it inline with a
-colored **provenance pill**. The design goal is that **every node carries a source**,
-and the pill makes the gaps visible. From weakest to strongest:
+<a name="who-made-neurarium"></a>
+<details>
+<summary><strong>Who made neurarium?</strong></summary>
+
+Built by [Olivier Cornelis](https://olicorne.org/), a developer and psychiatrist, with
+the help of [Claude Code](https://claude.com/claude-code). Drug descriptions and
+molecular-structure images come from Wikipedia, used under
+[CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).
+
+</details>
+
+<a name="why-did-you-make-it"></a>
+<details>
+<summary><strong>Why did you make it?</strong></summary>
+
+It began as a few-days demo during my medical residency, and it has kept absorbing new
+kinds of data more easily than expected. The recurring frustration it answers: the
+facts you need to reason about the brain are true but *scattered*, its regions in one
+atlas, its wiring in another, its receptors in a table, its drugs in monographs, so you
+spend your effort reconstructing the connections instead of using them. Putting them on
+one map, each with a visible source grade, makes those connections the thing you look
+at.
+
+I also believe this kind of interactive, source-graded viewer could be useful beyond
+psychopharmacology, and I would happily build similar animations for **other medical
+topics**. If you think a map like this would help your teaching or research, please
+[get in touch](https://olicorne.org/en/contact).
+
+</details>
+
+<a name="is-it-free"></a>
+<details>
+<summary><strong>Is it free?</strong></summary>
+
+Yes. It is free to use at [neurarium.olicorne.org](https://neurarium.olicorne.org),
+free and open source (see [the license](#whats-the-license-and-why)), and the
+underlying data is free to reuse (see [How can I reuse the data?](#how-can-i-reuse-the-data)).
+No account, no tracking beyond basic anonymous usage counts, no paywall.
+
+</details>
+
+<a name="how-do-i-run-it-myself"></a>
+<details>
+<summary><strong>How do I run it myself?</strong></summary>
+
+The page loads its data with `fetch()`, so it must be served over HTTP (not opened from
+disk). The served site is `public/`. From the repository root:
+
+```sh
+python tools/serve.py            # serves public/ with caching disabled
+# or: cd public && python -m http.server 8000
+```
+
+Then open <http://localhost:8000/>.
+
+For deployment there is a hardened [Caddy](https://caddyserver.com/) container under
+`docker/`; the full data flow and module graph are in
+[`ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+</details>
+
+<a name="how-does-the-sourcing-work"></a>
+<details>
+<summary><strong>How does the sourcing work?</strong></summary>
+
+Because the dataset is large and machine-assembled, the honest question for any node is
+*how do we know this?* Every source shown in a panel answers it inline with a colored
+**provenance pill**. The goal is that **every node carries a source**, and the pill
+makes the gaps visible. From weakest to strongest:
 
 - **orange `NOSOURCE`:** no source or reference for that node yet.
 - **grey `?` (LLM-only):** produced by a model from memory, unchecked; may be a hallucination.
@@ -92,7 +175,11 @@ Drug bindings lead because they pass the full quote-verification gate; the anato
 pathways, and expression regions are the current frontier. The same key and coverage
 bar live in the app's About panel.
 
-**On the sources.**
+</details>
+
+<a name="what-are-the-sources"></a>
+<details>
+<summary><strong>What are the sources?</strong></summary>
 
 <!-- SOURCES_TABLE:START (generated by tools/update_readme_stats.py; do not edit by hand) -->
 
@@ -113,27 +200,27 @@ Every `~` and `✓` grade is checked against one of the sources below. Each is a
 
 The book references are copyrighted, so only the tooling that uses them is committed,
 not the text. Anyone holding a copy can reproduce the extraction and confirm every
-`✓`-graded quote: drop the Stahl PDF into `data_sources/books/stahl/` and three committed
-scripts rebuild exactly what the gate checks against:
+`✓`-graded quote: drop the Stahl PDF into `data_sources/books/stahl/` and three
+committed scripts rebuild exactly what the gate checks against:
 
 ```sh
 uv run tools/fetch/pdf_to_pages.py    # the PDF -> one Markdown file per page
 uv run tools/fetch/build_index.py     # the per-drug page index
-python tools/check_data.py      # re-verifies every quote is on its cited page
+python tools/check_data.py            # re-verifies every quote is on its cited page
 ```
 
-## Built to be reused
+</details>
+
+<a name="how-can-i-reuse-the-data"></a>
+<details>
+<summary><strong>How can I reuse the data?</strong></summary>
 
 The anatomy is plain **structured data**, kept deliberately separate from the
-rendering. Under `public/data/` it is split by node kind (`structures`, `projections`,
-`circuits`, `receptors`, `drugs`; one JSON object per line) beside a self-describing
-`meta.json` (colour and legend maps plus the sourcing tally) and one geometry file per
-shape. It is generated from a single source of truth (`tools/generate_data.py`, with
-the drug list in `tools/data/drugs_data.jsonl`), so the plain JSONL/JSON is easy to consume
-from another engine.
-
-<details>
-<summary><strong>The data files, one link each</strong> (plain JSONL / JSON, free to reuse)</summary>
+rendering. Under `public/data/` it is split by node kind (one JSON object per line)
+beside a self-describing `meta.json` (colour and legend maps plus the sourcing tally)
+and one geometry file per shape. It is generated from a single source of truth
+(`tools/generate_data.py`, with the drug list in `tools/data/drugs_data.jsonl`), so the
+plain JSONL/JSON is easy to consume from another engine.
 
 | File | What it holds |
 | --- | --- |
@@ -144,54 +231,43 @@ from another engine.
 | [`receptors.jsonl`](public/data/receptors.jsonl) | Receptors: classification + expression regions, each graded |
 | [`drugs.jsonl`](public/data/drugs.jsonl) | Drugs: bindings (target, action, Ki), class, nomenclature |
 
-Each row of every file carries its own provenance grade and source, so the graph stays self-describing.
+Each row of every file carries its own provenance grade and source, so the graph stays
+self-describing. For how to extend the dataset, the per-tool reference, and the
+emitted-data field contract, see [`tools/README.md`](tools/README.md). The data is under
+the same [license](#whats-the-license-and-why) as the code.
 
 </details>
 
-For the full data flow and module graph see [`ARCHITECTURE.md`](docs/ARCHITECTURE.md); for how
-to extend the dataset, the per-tool reference, and the emitted-data field contract see
-[`tools/README.md`](tools/README.md); for the viewer's file-by-file map and the non-obvious
-rules see [`CLAUDE.md`](CLAUDE.md).
+<a name="whats-the-license-and-why"></a>
+<details>
+<summary><strong>What's the license, and why?</strong></summary>
 
-## Roadmap
+[GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE).
 
-A sample of the planned directions, none fixed in order: **more animation** of
-activity and signal flow across the brain; **more substances** (LSD, MDMA, ketamine,
-nicotine, cannabis) with their commercial brand names; **pathologies** mapped onto
-regions, circuits, and transmitter systems; **deeper pharmacology** (CYP enzymatic
-interactions, second-order receptor effects); **consistency checks** that flag
-self-contradicting data; and **toward full sourcing**, lifting every node's grade from
-grey toward green as it is checked.
+I chose a strong copyleft license on purpose: anyone is free to use, study, modify, and
+build on neurarium, but any reuse or hosting of it (including a modified version run as
+a website) must keep its source open under the same terms. The point is to keep the
+work and its data freely available and prevent it from being closed off into a
+proprietary fork.
 
-## Feedback
+</details>
 
-Found a bug, an anatomical or pharmacological **inaccuracy**, or have a **feature
-request**? Please **open an issue** on this repository. Corrections to the regions,
-projections, receptor, and drug data are especially welcome, as are **ideas for what
-else belongs on a map like this**. This began as a few-days demo during my medical
-residency and has kept absorbing new kinds of data more easily than expected, so
-suggestions for where to take it next genuinely help.
+<a name="whats-on-the-roadmap"></a>
+<details>
+<summary><strong>What's on the roadmap?</strong></summary>
 
-I also believe this kind of interactive, source-graded viewer could be genuinely
-useful to the field beyond psychopharmacology, and I would happily build similar
-animations for **other medical topics**. If you have an idea for one, or think a map
-like this would help your teaching or research, please **get in touch** and tell me
-what would be useful. You can reach me on
-[my website](https://olicorne.org/en/contact).
+A sample of the planned directions, none fixed in order: **more animation** of activity
+and signal flow across the brain; **more substances** with their commercial brand
+names; **pathologies** mapped onto regions, circuits, and transmitter systems; **deeper
+pharmacology** (CYP enzymatic interactions, second-order receptor effects);
+**consistency checks** that flag self-contradicting data; and **toward full sourcing**,
+lifting every node's grade from grey toward green as it is checked.
 
-## Running
+</details>
 
-The page loads its data with `fetch()`, so it must be served over HTTP (not opened
-from disk). The served site is `public/`. From the repository root:
-
-```sh
-python tools/serve.py            # serves public/ with caching disabled
-# or: cd public && python -m http.server 8000
-```
-
-Then open <http://localhost:8000/>.
-
-## Stack
+<a name="what-is-it-built-with"></a>
+<details>
+<summary><strong>What is it built with?</strong></summary>
 
 Deliberately lightweight, with a small attack surface and no build step:
 
@@ -206,13 +282,21 @@ Deliberately lightweight, with a small attack surface and no build step:
 - **Debugging:** an [eruda](https://github.com/liriliri/eruda) on-screen console,
   loaded only in dev or with `?debug` so it never ships to normal visitors.
 
-## Credits
+For the viewer's file-by-file map and the non-obvious rules, see
+[`CLAUDE.md`](CLAUDE.md).
 
-Built by [Olivier Cornelis](https://olicorne.org/) (developer and psychiatrist) with
-the help of [Claude Code](https://claude.com/claude-code). Drug descriptions and
-molecular-structure images come from Wikipedia, used under
-[CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/).
+</details>
 
-## License
+<a name="how-do-i-give-feedback-or-get-in-touch"></a>
+<details>
+<summary><strong>How do I give feedback or get in touch?</strong></summary>
 
-[GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE).
+Found a bug, an anatomical or pharmacological **inaccuracy**, or have a **feature
+request**? Please **open an issue** on this repository. Corrections to the regions,
+projections, receptor, and drug data are especially welcome, as are **ideas for what
+else belongs on a map like this**.
+
+For anything else, or to talk about a similar viewer for another medical topic, you can
+reach me on [my website](https://olicorne.org/en/contact).
+
+</details>
