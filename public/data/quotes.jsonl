@@ -48,6 +48,7 @@
 {"id": "q_0b9972a4b647", "corpus": "stahl_essential", "page": 96, "quote": "Dopamine can be transported out of the synaptic cleft and back into the presynaptic neuron via the dopamine transporter (DAT), where it may be repackaged for future use."}
 {"id": "q_0bc72078d6f3", "corpus": "allen_ahba", "page": "HTR1A", "quote": "HTR1A detected in hippocampus: probe 1024804 PACall present in 163/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_0beb93d3b8dc", "corpus": "stahl", "page": 199, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex"}
+{"id": "q_0bf2797fc947", "corpus": "carlat", "page": 192, "quote": "Weak NMDA antagonist and potentiates dopaminergic neurons"}
 {"id": "q_0c06b856256d", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in occipital: probe 1027138 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_0c358ff12c7e", "corpus": "kandel", "page": 1048, "quote": "Rather, scientists refer to the cholinergic neurons by their location, eg, the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the pons, which project widely from the cerebral cortex to the medulla, and the basal forebrain (Ch1–Ch4) groups, which project to the cerebral cortex, hippocampus, and amygdala."}
 {"id": "q_0c4c48d89171", "corpus": "stahl", "page": 931, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)"}
