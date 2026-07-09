@@ -2108,11 +2108,11 @@
     "by_kind": {
       "drug_bindings": {
         "total": 998,
-        "verified": 960,
+        "verified": 961,
         "sourced": 0,
         "llm": 0,
-        "nosource": 38,
-        "missing": 38
+        "nosource": 37,
+        "missing": 37
       },
       "drug_nbn": {
         "total": 116,
@@ -2237,12 +2237,12 @@
     },
     "nodes": {
       "total": 2134,
-      "verified": 1916,
+      "verified": 1917,
       "sourced": 0,
       "llm": 178,
-      "nosource": 40,
-      "missing": 218,
-      "backed": 1916,
+      "nosource": 39,
+      "missing": 217,
+      "backed": 1917,
       "pct_backed": 90
     }
   }
