@@ -28,7 +28,7 @@ Live at **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 > shapes, projections, descriptions) is not yet reviewed or sourced and may contain
 > model hallucinations; the drug data is machine-extracted (psychiatric drugs from
 > Stahl's *Prescriber's Guide*, other substances from measured PDSP Ki affinities) and
-> likewise unreviewed. It is an early tool for exploring and learning or finding sources but **not** as a
+> likewise unreviewed. neurarium is an early tool for exploring and learning or finding sources but **not** as a
 > primary clinical reference: do not rely on it, and never bet a patient's care solely on it.
 
 ## FAQ
@@ -191,6 +191,14 @@ Every `~` and `✓` grade is checked against one of the sources below. Each is a
 | [Allen Human Brain Atlas, microarray (Hawrylycz et al. 2012)](https://human.brain-map.org/) | Brain transcriptome atlas (microarray) | Receptor & target expression regions |
 
 <!-- SOURCES_TABLE:END -->
+
+**Wikipedia** sits outside the table above. The drug and structure descriptions and the
+molecule images are fetched live from the current Wikipedia article at runtime (under
+[CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/)), so the dataset ships no
+copyrighted prose. A live fetch is a verbatim, programmatic read that cannot drift from
+the source, so in the app these carry a green `✓` pill; they are tallied as reference
+links (the "Wikipedia reference links" row in the coverage above), kept separate from
+the knowledge-node total.
 
 The book references are copyrighted, so only the tooling that uses them is committed,
 not the text. Anyone holding a copy can reproduce the extraction and confirm every

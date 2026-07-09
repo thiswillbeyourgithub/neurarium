@@ -35,7 +35,7 @@ En ligne sur **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 > peut contenir des hallucinations du modèle ; les données sur les médicaments sont
 > extraites automatiquement (les médicaments psychiatriques du *Prescriber's Guide* de
 > Stahl, les autres substances des affinités PDSP Ki mesurées) et ne sont pas relues non
-> plus. C'est un outil précoce pour explorer, apprendre ou trouver des sources, **pas**
+> plus. neurarium est un outil précoce pour explorer, apprendre ou trouver des sources, **pas**
 > une référence clinique de premier plan : ne vous y fiez pas, et ne pariez jamais les
 > soins d'un patient uniquement dessus.
 
@@ -209,6 +209,16 @@ Every `~` and `✓` grade is checked against one of the sources below. Each is a
 | [Allen Human Brain Atlas, microarray (Hawrylycz et al. 2012)](https://human.brain-map.org/) | Brain transcriptome atlas (microarray) | Receptor & target expression regions |
 
 <!-- SOURCES_TABLE:END -->
+
+**Wikipédia** est en dehors du tableau ci-dessus. Les descriptions de médicaments et de
+structures ainsi que les images de molécules sont récupérées en direct depuis l'article
+Wikipédia courant à l'exécution (sous
+[CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/)), de sorte que le jeu de
+données ne livre aucune prose sous droit d'auteur. Une récupération en direct est une
+lecture programmatique verbatim qui ne peut pas diverger de la source, donc dans
+l'application celles-ci portent une pastille verte `✓` ; elles sont comptées comme des
+liens de référence (la ligne « Wikipedia reference links » de la couverture ci-dessus),
+tenues à part du total des nœuds de connaissance.
 
 Les références de livres sont sous droit d'auteur, donc seul l'outillage qui les utilise
 est versionné, pas le texte. Quiconque possède un exemplaire peut reproduire
