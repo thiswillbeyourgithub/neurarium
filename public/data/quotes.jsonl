@@ -330,6 +330,7 @@
 {"id": "q_439b9dfeccf3", "corpus": "stahl", "page": 329, "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)"}
 {"id": "q_43ca72ac5495", "corpus": "stahl_essential", "page": 457, "quote": "an antagonist at purine receptors, and in particular adenosine receptors"}
 {"id": "q_4448192ad104", "corpus": "stahl_essential", "page": 275, "quote": "GABAA and GABAC receptors are ligand-gated ion channels; they are part of a macromolecular complex that forms an inhibitory chloride channel."}
+{"id": "q_446fa1524d19", "corpus": "stahl", "page": 761, "quote": "Serotonin 2C properties may contribute to antidepressant actions"}
 {"id": "q_44820b5d924d", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in medulla: probe 1054302 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_44a3e9bce8f5", "corpus": "allen_ahba", "page": "CACNA2D1", "quote": "CACNA2D1 detected in frontal: probe 1028198 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_44c493b6b723", "corpus": "stahl", "page": 277, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission"}
