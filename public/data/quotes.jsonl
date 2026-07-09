@@ -976,7 +976,6 @@
 {"id": "q_ca66b788e9d4", "corpus": "allen_ahba", "page": "SIGMAR1", "quote": "SIGMAR1 detected in occipital: probe 1047600 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ca8fec6c103d", "corpus": "stahl", "page": 577, "quote": "Blocks serotonin 2A receptors potently"}
 {"id": "q_cac95b47599d", "corpus": "stahl", "page": 545, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine reversible enzyme inhibitor (SN-RevEI)"}
-{"id": "q_cacfdb2f7a34", "corpus": "stahl", "page": 863, "quote": "Presumably desensitizes both serotonin 1A receptors and beta adrenergic receptors"}
 {"id": "q_cba30dfb30d2", "corpus": "stahl", "page": 788, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus"}
 {"id": "q_cbd667e4ef67", "corpus": "stahl", "page": 806, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope"}
 {"id": "q_cbe6bf31524b", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in septal_nuclei: probe 1057496 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
