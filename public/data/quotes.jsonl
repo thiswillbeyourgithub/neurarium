@@ -859,6 +859,7 @@
 {"id": "q_afe5860bbac2", "corpus": "nieuwenhuys", "page": 655, "quote": "a considerable number of limbic cortical areas, including the entorhinal, perirhinal, temporopolar, posterior orbitofrontal and cingulate cortices, as well as the amygdaloid complex, are reciprocally connected with agranular and dysgranular sectors in the anterior and anterobasal parts of the insula"}
 {"id": "q_affef373abf0", "corpus": "stahl", "page": 915, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms"}
 {"id": "q_b01cbffe55b8", "corpus": "allen_ahba", "page": "HTR5A", "quote": "HTR5A detected in hypothalamus: probe 1021969 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_b03c5d703fa5", "corpus": "stahl", "page": 945, "quote": "Zuclopenthixol may have serotonin 2A antagonist properties, but these have never been systematically investigated for atypical antipsychotic properties at low doses"}
 {"id": "q_b06accfc5062", "corpus": "allen_ahba", "page": "SLC6A1", "quote": "SLC6A1 detected in cerebellum: probe 1051544 PACall present in 304/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_b079d09d689b", "corpus": "stahl", "page": 479, "quote": "Blocks postsynaptic dopamine 2 receptors"}
 {"id": "q_b163fb18adbb", "corpus": "stahl", "page": 883, "quote": "Smoking cessation treatment; alpha 4 beta 2 partial agonist at nicotinic acetylcholine receptors"}
