@@ -1199,6 +1199,7 @@
 {"id": "q_f6e9580cc2d5", "corpus": "stahl", "page": 487, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions"}
 {"id": "q_f6f981a5a73b", "corpus": "allen_ahba", "page": "HRH3", "quote": "HRH3 detected in occipital: probe 1046403 PACall present in 98/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_f718382ef2be", "corpus": "stahl", "page": 283, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission"}
+{"id": "q_f7ca591e323a", "corpus": "stahl", "page": 641, "quote": "Interactions at serotonin 1A receptors may contribute to efficacy for cognitive and affective symptoms in some patients"}
 {"id": "q_f7e9ce856623", "corpus": "allen_ahba", "page": "CACNA2D1", "quote": "CACNA2D1 detected in temporal: probe 1028198 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_f8481918badb", "corpus": "stahl", "page": 215, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis"}
 {"id": "q_f869a311a4e5", "corpus": "stahl", "page": 335, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)"}

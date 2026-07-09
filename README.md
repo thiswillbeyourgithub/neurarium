@@ -72,8 +72,8 @@ Drug nomenclature (NbN)         ████████████████
 Brain-region anatomy            ██████████████████████████  100%    52/52
 Projection groups               ██████████████████████████  100%    10/10
 Functional circuits             ██████████████████████████  100%      6/6
+Drug target bindings            █████████████████████████░   96%  963/998
 Receptor system/family          █████████████████████████░   96%    54/56
-Drug target bindings            █████████████████████████░   96%  962/998
 Neuron pathways                 █████████████████████████░   96%    52/54
 Receptor expression regions     ████████████████████████░░   94%  360/383
 Drug class                      ███████████████████████░░░   90%  156/173
