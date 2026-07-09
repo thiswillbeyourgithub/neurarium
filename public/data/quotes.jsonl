@@ -163,6 +163,7 @@
 {"id": "q_210f520d7cd9", "corpus": "stahl", "page": 551, "quote": "Wake-promoting"}
 {"id": "q_212355604d84", "corpus": "allen_ahba", "page": "CHRNA7", "quote": "CHRNA7 detected in occipital: probe 1022067 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_21352763c4a6", "corpus": "stahl", "page": 225, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission"}
+{"id": "q_215457549d3a", "corpus": "stahl", "page": 105, "quote": "Actions at dopamine 3 receptors could theoretically contribute to blonanserin's efficacy"}
 {"id": "q_21f5ec58551c", "corpus": "stahl", "page": 695, "quote": "For PTSD, blockade of beta 1 adrenergic receptors may theoretically prevent fear conditioning and reconsolidation of fear"}
 {"id": "q_220ae17ad39d", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in putamen: probe 1027284 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_2213061bb4b0", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in medulla: probe 1017111 PACall present in 132/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}

@@ -73,8 +73,8 @@ Brain-region anatomy            ████████████████
 Projection groups               ██████████████████████████  100%    10/10
 Functional circuits             ██████████████████████████  100%      6/6
 Receptor system/family          █████████████████████████░   96%    54/56
+Drug target bindings            █████████████████████████░   96%  962/998
 Neuron pathways                 █████████████████████████░   96%    52/54
-Drug target bindings            █████████████████████████░   96%  961/998
 Receptor expression regions     ████████████████████████░░   94%  360/383
 Drug class                      ███████████████████████░░░   90%  156/173
 Target expression regions       ██████████████████████░░░░   85%    82/96
