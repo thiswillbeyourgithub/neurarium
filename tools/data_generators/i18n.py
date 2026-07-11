@@ -258,10 +258,10 @@ FR: dict[str, str] = {
     "perforant path.":
         "Le cortex entorhinal (temporal médial) active l'hippocampe via la voie "
         "perforante.",
-    "The major hippocampal output gathers into the fornix, the great arching "
-    "tract of the Papez circuit.":
-        "La principale sortie hippocampique se rassemble dans le fornix, le "
-        "grand faisceau arqué du circuit de Papez.",
+    "The main output of the hippocampal formation, arising chiefly from the "
+    "subiculum, gathers into the fornix, the great arching tract of the Papez circuit.":
+        "La principale sortie de la formation hippocampique, issue surtout du "
+        "subiculum, se rassemble dans le fornix, le grand faisceau arqué du circuit de Papez.",
     "The fornix carries hippocampal output forward to the mammillary bodies "
     "(Papez circuit).":
         "Le fornix transporte la sortie hippocampique vers les corps "

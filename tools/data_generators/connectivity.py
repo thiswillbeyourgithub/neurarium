@@ -179,7 +179,8 @@ PROJECTIONS: list[dict[str, Any]] = [
     dict(**{"from": "hippocampus_R", "to": "fornix_R"},
          kind="excitatory", neurotransmitter="Glutamate",
          label="Fornix (hippocampal output)",
-         description="The major hippocampal output gathers into the fornix, the "
+         description="The main output of the hippocampal formation, arising "
+                     "chiefly from the subiculum, gathers into the fornix, the "
                      "great arching tract of the Papez circuit."),
     dict(**{"from": "fornix_R", "to": "mammillary_R"},
          kind="excitatory", neurotransmitter="Glutamate",
