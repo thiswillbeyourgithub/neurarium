@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/favicon.svg" alt="neurarium logo" width="120" height="120">
+</p>
+
 # neurarium
 
 *Read this in [French / en français](README.fr.md).*
