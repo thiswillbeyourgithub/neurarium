@@ -521,6 +521,11 @@ Every node's grade rides its own row/heading (`makeProvenancePill(level)`, `info
 no source shows `NOSOURCE`, never a blank. How the tally buckets these grades (and why `llm` counts as
 unbacked): see The "% sourced" figure.
 
+**The sourcing model.** A verified quote node may carry an optional `llm` (`haiku`/`sonnet`/`opus`,
+`SOURCING_LLMS`) naming the model that extracted+judged it, so a reader can weigh a quote by that
+model's capability; it is quote-node metadata (not part of the id hash), absent = unknown. Any new
+sourcing/recheck pass must stamp it (a non-LLM deterministic source like Allen's PACall omits it).
+
 **Where the grade lives.** One source shape, quote-level `{corpus, page, quote, provenance}` against a
 `SOURCE_CORPORA` corpus; `provenance` defaults `DEFAULT_PROVENANCE` (`"llm"`), a sourceless node is
 `NOSOURCE`. Each `wikipedia` reference emits a sibling `wikipedia_provenance` (`WIKIPEDIA_PROVENANCE`

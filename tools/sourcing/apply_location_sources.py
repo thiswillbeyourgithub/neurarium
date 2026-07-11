@@ -74,9 +74,11 @@ def owner_regions() -> tuple[dict[str, set], dict[str, set]]:
     return rec, tgt
 
 
-def collect_gtopdb(judged_path: str) -> tuple[list[tuple], list[str], int]:
+def collect_gtopdb(judged_path: str, llm: str | None = None) -> tuple[list[tuple], list[str], int]:
     """Yield (owner_kind, owner, base, src) from the GtoPdb judged file (confirm-only
-    judge maps each existing region to a candidate quote by index)."""
+    judge maps each existing region to a candidate quote by index). ``llm`` names the
+    model that ran the judge, stamped onto each source (Allen's path takes no llm: its
+    PACall present/absent call is deterministic, not model-sourced)."""
     worklist = load_worklist()
     judged = json.loads(Path(judged_path).read_text("utf-8"))
     out, warnings, skipped = [], [], 0
@@ -100,6 +102,8 @@ def collect_gtopdb(judged_path: str) -> tuple[list[tuple], list[str], int]:
             src = {"corpus": "gtopdb", "page": tid, "quote": quote, "provenance": "verified"}
             if cands[idx].get("species"):
                 src["species"] = cands[idx]["species"]
+            if llm:
+                src["llm"] = llm
             out.append(("receptor", rid, base, src))
     return out, warnings, skipped
 
@@ -139,12 +143,15 @@ def main() -> int:
                     help="gtopdb judge results JSON [{receptor_id, matches:[{base, candidate}]}]")
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would be written, change nothing")
+    ap.add_argument("--llm", choices=["haiku", "sonnet", "opus"],
+                    help="model that ran the gtopdb judge; stamped onto each quote node "
+                         "(ignored for --corpus allen, whose PACall call is deterministic)")
     args = ap.parse_args()
 
     if args.corpus == "gtopdb":
         if not args.judged:
             ap.error("--judged is required with --corpus gtopdb")
-        sources, warnings, skipped = collect_gtopdb(args.judged)
+        sources, warnings, skipped = collect_gtopdb(args.judged, args.llm)
     else:
         sources, warnings, skipped = collect_allen()
 

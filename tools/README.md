@@ -241,7 +241,8 @@ there is no node-level catch-all `sources` block.
   the viewer only in French (English users skip it); a missing key falls back to the English
   string. Written last by `write_artifacts` from the externalize pass (see docs/I18N.md).
 - `quotes.jsonl` — the deduplicated source-quote side table, one quote node per line sorted by
-  `id` (a `q_<12 hex>` content hash): `id`, `corpus`, `page`, `quote`, optional `species`. Every
+  `id` (a `q_<12 hex>` content hash): `id`, `corpus`, `page`, `quote`, optional `species`, optional
+  `llm` (the model that extracted+judged the quote, `haiku`/`sonnet`/`opus`; absent = unknown). Every
   node's quote-bearing source references one by `quote_id`; the viewer + `check_data.py` rehydrate
   it at load (see the externalize note above).
 - `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend

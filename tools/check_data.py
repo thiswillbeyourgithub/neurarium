@@ -260,7 +260,7 @@ def rehydrate_quotes(node, by_id, referenced, dangling):
             if quote is None:
                 dangling.append(qid)
             else:
-                for k in ("corpus", "page", "quote", "species"):
+                for k in ("corpus", "page", "quote", "species", "llm"):
                     if k in quote:
                         node[k] = quote[k]
             node.pop("quote_id", None)

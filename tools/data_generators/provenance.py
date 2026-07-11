@@ -34,6 +34,13 @@ from typing import Any
 PROVENANCE_LEVELS: tuple[str, ...] = ("llm", "sourced", "verified")
 DEFAULT_PROVENANCE = "llm"
 
+# The model that extracted + judged a *verified* quote, recorded on the quote node
+# (``llm`` metadata field, see quote_table.py) so the reader can weigh a quote by the
+# capability of the model that sourced it. Optional: a quote authored before this was
+# tracked (or a non-LLM deterministic source like Allen's PACall) simply omits it and
+# reads as "unknown" until a recheck stamps it. Any new sourcing/recheck pass MUST set it.
+SOURCING_LLMS: tuple[str, ...] = ("haiku", "sonnet", "opus")
+
 # Per-link provenance overrides for the *wikipedia* references (which are bare URL
 # strings, not ``{citation, url}`` objects, so they have nowhere inline to carry a
 # grade). Keyed by the owner's id: a structure *base* id, a receptor id, a
@@ -389,6 +396,14 @@ def _quote_sources(sources: Any, what: str) -> list[dict[str, Any]]:
         # quote-verified), but the reader should see what was actually measured.
         if s.get("species"):
             rec["species"] = s["species"]
+        # The model that sourced this verified quote (extract + judge). Optional metadata,
+        # carried onto the quote node by quote_table.externalize_quotes; absence = "unknown".
+        if s.get("llm"):
+            if s["llm"] not in SOURCING_LLMS:
+                raise ValueError(
+                    f"{what} cites unknown sourcing llm {s['llm']!r} "
+                    f"(not one of {SOURCING_LLMS})")
+            rec["llm"] = s["llm"]
         if prov == "verified" and not (rec.get("page") is not None and rec.get("quote")):
             raise ValueError(
                 f"{what} has a 'verified' source without a page + quote (verified "

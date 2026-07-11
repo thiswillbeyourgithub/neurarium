@@ -54,7 +54,7 @@ async function fetchJsonl(url) {
  * Rehydrate externalized source quotes in place. The emitted data replaces every
  * quote-bearing source with a `{quote_id, provenance}` reference and stores the
  * excerpt once in quotes.jsonl (see quote_table.py). This deep-walk merges the
- * quote node's `corpus`/`page`/`quote`/`species` fields back onto each reference,
+ * quote node's `corpus`/`page`/`quote`/`species`/`llm` fields back onto each reference,
  * so downstream code reads `source.quote` etc. exactly as before. A dangling
  * `quote_id` (no matching quote) is left as-is (check_data.py guards against it).
  * @param {*} node       Any value (object/array/scalar) to walk.
@@ -67,7 +67,7 @@ function rehydrateQuotes(node, byId) {
     if (typeof node.quote_id === "string") {
       const q = byId[node.quote_id];
       if (q) {
-        for (const k of ["corpus", "page", "quote", "species"]) {
+        for (const k of ["corpus", "page", "quote", "species", "llm"]) {
           if (k in q) node[k] = q[k];
         }
       }

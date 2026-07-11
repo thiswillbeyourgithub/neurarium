@@ -23,12 +23,18 @@ import hashlib
 import json
 from typing import Any
 
-# Accumulated quote nodes: quote_id -> {"id", "corpus", "page", "quote", "species"?}.
+# Accumulated quote nodes: quote_id -> {"id", "corpus", "page", "quote", "species"?, "llm"?}.
 QUOTES: dict[str, dict[str, Any]] = {}
 
 # The excerpt-identity fields (hash input + what the quote node carries). ``provenance``
 # is deliberately excluded: it grades the claim, not the quote (see module docstring).
 _IDENTITY_FIELDS = ("corpus", "page", "quote", "species")
+
+# Non-identity metadata carried onto the quote node but excluded from the id hash: ``llm``
+# names the model that sourced the quote (see provenance.SOURCING_LLMS). Kept off the hash
+# so re-attributing a quote's sourcing model doesn't churn its id (the excerpt identity is
+# the text, not who found it); a genuine llm disagreement on one excerpt is a hard error below.
+_METADATA_FIELDS = ("llm",)
 
 
 def reset_quotes() -> None:
@@ -67,7 +73,7 @@ def externalize_quotes(obj):
     if _is_quote_source(obj):
         qid = quote_id(obj)
         entry = {"id": qid}
-        for k in _IDENTITY_FIELDS:
+        for k in _IDENTITY_FIELDS + _METADATA_FIELDS:
             if k in obj:
                 entry[k] = obj[k]
         existing = QUOTES.get(qid)
@@ -78,7 +84,7 @@ def externalize_quotes(obj):
         QUOTES[qid] = entry
         ref: dict[str, Any] = {"quote_id": qid}
         for k, v in obj.items():
-            if k not in _IDENTITY_FIELDS:
+            if k not in _IDENTITY_FIELDS and k not in _METADATA_FIELDS:
                 ref[k] = externalize_quotes(v)
         return ref
     if isinstance(obj, dict):
