@@ -2107,8 +2107,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 993,
-        "verified": 965,
+        "total": 998,
+        "verified": 970,
         "sourced": 0,
         "llm": 0,
         "nosource": 28,
@@ -2123,8 +2123,8 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 173,
-        "verified": 156,
+        "total": 177,
+        "verified": 160,
         "sourced": 0,
         "llm": 17,
         "nosource": 0,
@@ -2227,22 +2227,22 @@
         "missing": 0
       },
       "references": {
-        "total": 308,
+        "total": 312,
         "verified": 0,
-        "sourced": 308,
+        "sourced": 312,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 2129,
-      "verified": 1921,
+      "total": 2138,
+      "verified": 1930,
       "sourced": 0,
       "llm": 178,
       "nosource": 30,
       "missing": 208,
-      "backed": 1921,
+      "backed": 1930,
       "pct_backed": 90
     }
   }

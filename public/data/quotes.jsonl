@@ -515,6 +515,7 @@
 {"id": "q_69a3a84fe82a", "corpus": "stahl", "page": 675, "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)"}
 {"id": "q_69d8ef4a1df7", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 detected in hippocampus: probe 1026650 PACall present in 170/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_6a3b3b16a250", "corpus": "kandel", "page": 1560, "quote": "Serotonin is synthesized in a group of brain stem nuclei called the raphe nuclei."}
+{"id": "q_6a44289421d3", "corpus": "carlat", "page": 251, "quote": "Opioid agonist", "llm": "opus"}
 {"id": "q_6a5fedd4a81f", "corpus": "stahl_essential", "page": 421, "quote": "Histamine 3 (H3) receptors are presynaptic autoreceptors"}
 {"id": "q_6a9560f1623c", "corpus": "kandel", "page": 59, "quote": "The midbrain, rostral to the pons, controls many sensory and motor functions, including eye movement and the coordination of visual and auditory reflexes."}
 {"id": "q_6ac12e453071", "corpus": "stahl", "page": 233, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission"}
@@ -574,6 +575,7 @@
 {"id": "q_76162cf29405", "corpus": "stahl", "page": 487, "quote": "antagonist actions at serotonin 7 and alpha 2A and alpha 2C receptors"}
 {"id": "q_763e0d417cd5", "corpus": "stahl", "page": 325, "quote": "Benzodiazepine (hypnotic)"}
 {"id": "q_7679f2bd55da", "corpus": "stahl", "page": 849, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis"}
+{"id": "q_76bdc7050d55", "corpus": "carlat", "page": 196, "quote": "Reversible inhibitor of vesicular monoamine transporter 2 (VMAT2)", "llm": "opus"}
 {"id": "q_76c9bd1a290e", "corpus": "stahl", "page": 745, "quote": "Transdermal selegiline (recommended doses): in the brain , irreversibly inhibits both MAO-A and MAO-B from breaking down norepinephrine, serotonin, and dopamine, which boosts noradrenergic, serotonergic, and dopaminergic neurotransmission"}
 {"id": "q_76d990009ada", "corpus": "stahl", "page": 225, "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)"}
 {"id": "q_76e683d4bd3e", "corpus": "stahl", "page": 864, "quote": "Sedative effects and weight gain may be due to antihistamine properties"}
@@ -722,6 +724,7 @@
 {"id": "q_969a7e2fe489", "corpus": "allen_ahba", "page": "GRIN1", "quote": "GRIN1 detected in caudate: probe 1055938 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_969ace8187c2", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in amygdala: probe 1027284 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_96c9f296fd16", "corpus": "allen_ahba", "page": "SLC6A2", "quote": "SLC6A2 detected in locus_coeruleus: probe 1023146 PACall present in 10/10 samples (donors 9861,10021,15697)", "species": "Human"}
+{"id": "q_96d8eca6b09e", "corpus": "carlat", "page": 184, "quote": "antagonistic effects at serotonin receptors", "llm": "opus"}
 {"id": "q_96dfd33c1235", "corpus": "gtopdb", "page": 6, "quote": "CNS: olfactory bulb, neocortex, claustrum, piriform cortex, mamillary bodies, pontine nuclei, red nucleus and cranial motor nuclei.", "species": "Rat"}
 {"id": "q_9713d7bfa522", "corpus": "stahl", "page": 849, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)"}
 {"id": "q_974debd39c0b", "corpus": "stahl", "page": 905, "quote": "Mode 2: binds to G-protein-linked receptors (full agonist at serotonin 1A receptors; partial agonist at serotonin 1B receptors, antagonist at serotonin 1D and serotonin 7 receptors)"}
@@ -987,6 +990,7 @@
 {"id": "q_cbe6bf31524b", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in septal_nuclei: probe 1057496 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_cbeeba738cd7", "corpus": "allen_ahba", "page": "ADRB1", "quote": "ADRB1 detected in parietal: probe 1021604 PACall present in 256/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_cc509ce560d2", "corpus": "allen_ahba", "page": "GRIK1", "quote": "GRIK1 detected in occipital: probe 1026815 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_cc564c343651", "corpus": "carlat", "page": 71, "quote": "Gamma-aminobutyric acid A (GABAA) modulator", "llm": "opus"}
 {"id": "q_cc6f0b4b8ce8", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in parietal: probe 1059354 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_cc7d1c164518", "corpus": "stahl", "page": 179, "quote": "Tricyclic antidepressant (TCA)"}
 {"id": "q_ccdb3f43fe7b", "corpus": "allen_ahba", "page": "SCN1A", "quote": "SCN1A detected in occipital: probe 1022570 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1161,6 +1165,7 @@
 {"id": "q_edff7c20b123", "corpus": "stahl", "page": 291, "quote": "Weakly blocks dopamine reuptake pump (dopamine transporter), and may increase dopamine neurotransmission"}
 {"id": "q_ee082e674223", "corpus": "gtopdb", "page": 288, "quote": "Hypothalamus, retina, small intestine > liver, heart SA node.", "species": "Rat"}
 {"id": "q_ee101b8043ec", "corpus": "stahl", "page": 395, "quote": "Tricyclic antidepressant (TCA)"}
+{"id": "q_ee1b1b278349", "corpus": "carlat", "page": 184, "quote": "Histamine H1 receptor antagonist with mild antiserotonergic effects", "llm": "opus"}
 {"id": "q_ee370980042a", "corpus": "allen_ahba", "page": "CHRM5", "quote": "CHRM5 detected in vta: probe 1058213 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ee7f9178592f", "corpus": "stahl", "page": 571, "quote": "Bupropion increases dopamine and norepinephrine by blocking both the dopamine and the norepinephrine transporters."}
 {"id": "q_eec056569270", "corpus": "stahl", "page": 69, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist (DS-RPA)"}
