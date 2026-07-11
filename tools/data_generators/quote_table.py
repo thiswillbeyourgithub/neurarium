@@ -21,10 +21,33 @@ so it stays on the referencing node. Made with the help of Claude Code.
 """
 import hashlib
 import json
+import os
 from typing import Any
 
 # Accumulated quote nodes: quote_id -> {"id", "corpus", "page", "quote", "species"?, "llm"?}.
 QUOTES: dict[str, dict[str, Any]] = {}
+
+# Central quote_id -> sourcing-llm overrides, written by tools/sourcing/recheck_quotes.py
+# (a Sonnet recheck that confirmed the quote is present + supports its claim). Applied
+# uniformly by id in externalize_quotes, so one recheck pass stamps every kind of quote
+# without editing each authoring site. An override WINS over a source-level ``llm`` (it is
+# the most recent verification); a quote absent from the map keeps its source llm, else
+# reads as unknown. Loaded once from the committed generated_cache (best-effort: absent = {}).
+_LLM_OVERRIDES: dict[str, str] = {}
+
+
+def _load_llm_overrides() -> dict[str, str]:
+    path = os.path.join(
+        os.path.dirname(__file__), "..", "generated_cache", "quote_llm.json")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        return {qid: v for qid, v in data.items() if isinstance(v, str)}
+    except (FileNotFoundError, ValueError):
+        return {}
+
+
+_LLM_OVERRIDES = _load_llm_overrides()
 
 # The excerpt-identity fields (hash input + what the quote node carries). ``provenance``
 # is deliberately excluded: it grades the claim, not the quote (see module docstring).
@@ -76,6 +99,9 @@ def externalize_quotes(obj):
         for k in _IDENTITY_FIELDS + _METADATA_FIELDS:
             if k in obj:
                 entry[k] = obj[k]
+        # A recheck override wins over any source-level llm (uniform by id -> no collision).
+        if qid in _LLM_OVERRIDES:
+            entry["llm"] = _LLM_OVERRIDES[qid]
         existing = QUOTES.get(qid)
         if existing is not None and existing != entry:
             raise ValueError(

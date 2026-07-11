@@ -186,6 +186,13 @@ Screenshots).
   deterministic). Idempotent. See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/generated_cache/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
+- `tools/sourcing/recheck_quotes.py` — re-verifies every emitted verified quote with a stronger model
+  (Sonnet) and stamps the sourcing LLM. `build --out <dir>` writes per-page batches (page text loaded
+  once per batch to minimize tokens; Allen AHBA excluded as deterministic); an LLM judges each batch
+  (present + supports claim); `apply --batches <dir> --verdicts <f> [--llm sonnet]` writes
+  `tools/generated_cache/quote_llm.json` ({quote_id: llm}, applied uniformly by `quote_table`) +
+  `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review). See CLAUDE.md
+  Source provenance ("The sourcing model").
 - `tools/fetch/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.

@@ -1,0 +1,558 @@
+[
+ {
+  "qid": "q_2eaaa375fad8",
+  "corpus": "stahl",
+  "page": 139,
+  "present": false,
+  "supports": true,
+  "quote": "serotonin 1A partial agonist",
+  "claims": [
+   "Drug Buspirone acts on target '5ht1a' as partial_agonist."
+  ],
+  "note": "page uses 'serotonin type 1A receptors' and 'partial agonist actions', not exact phrase but same meaning conveyed"
+ },
+ {
+  "qid": "q_1ccfe81baa05",
+  "corpus": "stahl",
+  "page": 15,
+  "present": false,
+  "supports": true,
+  "quote": "Alcohol dependence treatment",
+  "claims": [
+   "Drug Acamprosate is classified as substance_use."
+  ],
+  "note": "page says 'Alcohol dependence treatment' under Class, quote matches closely enough via that line; minor phrasing diff, treat as present actually"
+ },
+ {
+  "qid": "q_d214057ac872",
+  "corpus": "carlat",
+  "page": 121,
+  "present": true,
+  "supports": false,
+  "quote": "They also have secondary anticholinergic effects, which can cause side effects including dry mouth, constipation, and urinary retention, as well as cognitive impairment in susceptible populations.",
+  "claims": [
+   "Drug Diphenhydramine acts on target 'm1' as antagonist.",
+   "Drug Diphenhydramine acts on target 'm2' as antagonist.",
+   "Drug Diphenhydramine acts on target 'm3' as antagonist.",
+   "Drug Diphenhydramine acts on target 'm4' as antagonist.",
+   "Drug Diphenhydramine acts on target 'm5' as antagonist."
+  ],
+  "note": "Quote only states general anticholinergic side effects; doesn't specify m1-m5 muscarinic subtype antagonism."
+ },
+ {
+  "qid": "q_ee1b1b278349",
+  "corpus": "carlat",
+  "page": 184,
+  "present": true,
+  "supports": false,
+  "quote": "Histamine H1 receptor antagonist with mild antiserotonergic effects",
+  "claims": [
+   "Drug Cyproheptadine acts on target 'h1' as antagonist.",
+   "Drug Cyproheptadine is classified as other."
+  ],
+  "note": "Quote supports h1 antagonist but says nothing about drug being classified as 'other'."
+ },
+ {
+  "qid": "q_96d8eca6b09e",
+  "corpus": "carlat",
+  "page": 184,
+  "present": true,
+  "supports": false,
+  "quote": "antagonistic effects at serotonin receptors",
+  "claims": [
+   "Drug Cyproheptadine acts on target '5ht2a' as antagonist (tentative)."
+  ],
+  "note": "Quote says antagonistic effects at serotonin receptors generally, doesn't specify 5ht2a subtype."
+ },
+ {
+  "qid": "q_76bdc7050d55",
+  "corpus": "carlat",
+  "page": 196,
+  "present": true,
+  "supports": false,
+  "quote": "Reversible inhibitor of vesicular monoamine transporter 2 (VMAT2)",
+  "claims": [
+   "Drug Tetrabenazine acts on target 'vmat2' as vesicular_inhibitor.",
+   "Drug Tetrabenazine is classified as other."
+  ],
+  "note": "Quote supports VMAT2 inhibitor claim but says nothing about drug classification as 'other'."
+ },
+ {
+  "qid": "q_6a44289421d3",
+  "corpus": "carlat",
+  "page": 251,
+  "present": true,
+  "supports": false,
+  "quote": "Opioid agonist",
+  "claims": [
+   "Drug Methadone acts on target 'mu' as agonist.",
+   "Drug Methadone is classified as opioid, substance_use."
+  ],
+  "note": "Quote 'Opioid agonist' doesn't specify mu receptor, and doesn't support the 'opioid, substance_use' classification claim."
+ },
+ {
+  "qid": "q_cc564c343651",
+  "corpus": "carlat",
+  "page": 71,
+  "present": true,
+  "supports": false,
+  "quote": "Gamma-aminobutyric acid A (GABAA) modulator",
+  "claims": [
+   "Drug Zuranolone acts on target 'gaba_a' as modulator.",
+   "Drug Zuranolone is classified as antidepressant_other."
+  ],
+  "note": "Quote supports GABA-A modulator action but does not substantiate the antidepressant_other classification claim."
+ },
+ {
+  "qid": "q_34ffc20cb277",
+  "corpus": "gtopdb",
+  "page": 1,
+  "present": true,
+  "supports": false,
+  "quote": "CNS: dentate gyrus, hippocampus (all fields especially CA1), subiculum, parahippocampal gyrus and neocortical regions (superficial and middle laminae), raphe of the brainstem.",
+  "claims": [
+   "Receptor 5-HT1A is expressed in brain region 'hippocampus'.",
+   "Receptor 5-HT1A is expressed in brain region 'raphe'.",
+   "Receptor 5-HT1A is expressed in brain region 'temporal'."
+  ],
+  "note": "Quote supports hippocampus and raphe, but does not mention 'temporal' lobe/cortex explicitly."
+ },
+ {
+  "qid": "q_eed733fdca5c",
+  "corpus": "gtopdb",
+  "page": 11,
+  "present": true,
+  "supports": false,
+  "quote": "Brain: nucleus accumbens, olfactory tubercle, striatum, hippocampus, anterior corpus.",
+  "claims": [
+   "Receptor 5-HT6 is expressed in brain region 'accumbens'.",
+   "Receptor 5-HT6 is expressed in brain region 'caudate'.",
+   "Receptor 5-HT6 is expressed in brain region 'hippocampus'.",
+   "Receptor 5-HT6 is expressed in brain region 'putamen'."
+  ],
+  "note": "Quote says 'striatum', not specifically caudate or putamen; only accumbens and hippocampus are explicitly supported."
+ },
+ {
+  "qid": "q_a2aac0b15aed",
+  "corpus": "gtopdb",
+  "page": 19,
+  "present": true,
+  "supports": false,
+  "quote": "CNS: perikarya and neuropil labelling in regions such as the striatum, nucleus accumbens, olfactory tubercles, extended amygdala, globus pallidus, nucleus of the solitary tract, cortex, hippocampus, thalamus, cerebellum, medulla, pons. Very high levels of A1 receptor expression in the striatum are important in the regulation of dopamine receptors and Parkinson's desease.",
+  "claims": [
+   "Receptor A2A is expressed in brain region 'accumbens'."
+  ],
+  "note": "the quoted passage's accumbens mention is part of a description explicitly attributed to the A1 receptor ('Very high levels of A1 receptor expression...'), not A2A"
+ },
+ {
+  "qid": "q_89d01a2a38cb",
+  "corpus": "kandel",
+  "page": 1380,
+  "present": true,
+  "supports": false,
+  "quote": "These nuclei project to the central nucleus, which projects to the hypothalamus and brain stem.",
+  "claims": [
+   "Projection 'amygdala_R'->'hypothalamus_R' (inhibitory, GABA): Stria terminalis. The amygdala projects to the hypothalamus via the stria terminalis, driving autonomic / endocrine responses."
+  ],
+  "note": "Quote only says amygdala nuclei project to central nucleus which projects to hypothalamus/brainstem; it never mentions the stria terminalis pathway or GABAergic/inhibitory nature claimed."
+ },
+ {
+  "qid": "q_da6f20978229",
+  "corpus": "kandel",
+  "page": 1047,
+  "present": true,
+  "supports": false,
+  "quote": "These neurons project throughout the cerebral cortex, hippocampus, and amygdala. Both groups play an important role in arousal, and the basal forebrain groups are also involved in more selective attention.",
+  "claims": [
+   "Projection group 'Acetylcholine' (kind=cholinergic): Cholinergic projections modulate arousal, attention and memory across the cortex and hippocampus."
+  ],
+  "note": "quote states arousal/attention across cortex, hippocampus, amygdala, but never mentions 'memory' as claimed"
+ },
+ {
+  "qid": "q_95160297bd2d",
+  "corpus": "gtopdb",
+  "page": 216,
+  "present": true,
+  "supports": false,
+  "quote": "Ventral striatum/nucleus accumbens > neostriatum, cerebral cortex, cerebellar cortex.",
+  "claims": [
+   "Receptor D3 is expressed in brain region 'accumbens'.",
+   "Receptor D3 is expressed in brain region 'caudate'.",
+   "Receptor D3 is expressed in brain region 'putamen'."
+  ],
+  "note": "quote names 'neostriatum' generically; caudate and putamen are not explicitly named"
+ },
+ {
+  "qid": "q_619d66a7249d",
+  "corpus": "gtopdb",
+  "page": 218,
+  "present": true,
+  "supports": false,
+  "quote": "Brain: striatum, hippocampus, dentate gyrus, subiculum, frontal cortex, limbic cortex, occipital cortex, cerebellum.",
+  "claims": [
+   "Receptor D5 is expressed in brain region 'caudate'.",
+   "Receptor D5 is expressed in brain region 'cerebellum'.",
+   "Receptor D5 is expressed in brain region 'frontal'.",
+   "Receptor D5 is expressed in brain region 'hippocampus'.",
+   "Receptor D5 is expressed in brain region 'occipital'.",
+   "Receptor D5 is expressed in brain region 'putamen'."
+  ],
+  "note": "quote only says 'striatum' generically; caudate and putamen not explicitly named"
+ },
+ {
+  "qid": "q_afb856904102",
+  "corpus": "gtopdb",
+  "page": 23,
+  "present": true,
+  "supports": false,
+  "quote": "Prefrontal cortex, contralateral hind limb, somatosensory cortex, secondary motor cortex, ipsilateral laminae I-III spinal cord.",
+  "claims": [
+   "Receptor α1B is expressed in brain region 'parietal'."
+  ],
+  "note": "quote lists somatosensory/motor cortex, hind limb, spinal cord but never names parietal lobe"
+ },
+ {
+  "qid": "q_0c358ff12c7e",
+  "corpus": "kandel",
+  "page": 1048,
+  "present": true,
+  "supports": false,
+  "quote": "Rather, scientists refer to the cholinergic neurons by their location, eg, the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the pons, which project widely from the cerebral cortex to the medulla, and the basal forebrain (Ch1–Ch4) groups, which project to the cerebral cortex, hippocampus, and amygdala.",
+  "claims": [
+   "Projection 'septal_nuclei_R'->'hippocampus_R' (cholinergic, Acetylcholine): Septohippocampal pathway. Medial septal cholinergic neurons project to the hippocampus, pacing the hippocampal theta rhythm."
+  ],
+  "note": "Quote covers basal forebrain Ch1-Ch4 projecting to cortex/hippocampus/amygdala generally; does not specify septal nuclei or theta rhythm pacing."
+ },
+ {
+  "qid": "q_1ebf11122192",
+  "corpus": "gtopdb",
+  "page": 318,
+  "present": true,
+  "supports": false,
+  "quote": "CNS: olfactory bulb, nucleus accumbens, caudate nucleus, putamen, temporal cortex, parietal cortex, thalamic nuclei > amygdala, occipital cortex, frontal cortex, hypothalamus, ventral tegmental area, cerebellar cortex > hippocampus, corpus mamillare, locus coeruleus, pituitary, spinal cord > globus pallidus, substantia nigra, superior colliculus, inferior colliculus, olivary nucleus.",
+  "claims": [
+   "Receptor κ (KOR) is expressed in brain region 'accumbens'.",
+   "Receptor κ (KOR) is expressed in brain region 'midbrain'.",
+   "Receptor κ (KOR) is expressed in brain region 'putamen'."
+  ],
+  "note": "quote gives VTA, not literally 'midbrain'; midbrain proper not mentioned"
+ },
+ {
+  "qid": "q_a5a8259fae6e",
+  "corpus": "gtopdb",
+  "page": 319,
+  "present": true,
+  "supports": false,
+  "quote": "CNS: Olfactory bulb, striatal patches and subcallosal streak, medial septum, piriform and cingulate cortex, entorhinal cortex, bed nucleus stria terminalis, medial preoptic area, globus and ventral pallidum, thalamic nuclei, lateral hypothalamus, mammillary nuclei , hippocampus, amygdaloid nuclei, ventral and lateral periaqueductal grey, ventral tegmental area and substantia nigra pars compacta, superior and inferior colliculi, interpeduncular nuclei, locus ceruleus, parabrachial nuclei, median raphe, nucleus of the solitary tract, spinal cord (dorsal root ganglia and layers I and II).",
+  "claims": [
+   "Receptor μ (MOR) is expressed in brain region 'temporal'."
+  ],
+  "note": "quote never mentions temporal cortex/lobe"
+ },
+ {
+  "qid": "q_5f60a626871f",
+  "corpus": "kandel",
+  "page": 1561,
+  "present": true,
+  "supports": false,
+  "quote": "The major noradrenergic projection of the forebrain arises in the locus ceruleus.",
+  "claims": [
+   "Projection group 'Noradrenaline' (kind=noradrenergic): Noradrenergic projections from the locus coeruleus modulate arousal, vigilance and the stress response."
+  ],
+  "note": "Quote only states LC is the major noradrenergic projection source; it does not mention arousal, vigilance, or stress-response modulation asserted in the claim."
+ },
+ {
+  "qid": "q_5368a2ae0717",
+  "corpus": "kandel",
+  "page": 549,
+  "present": true,
+  "supports": false,
+  "quote": "A major fiber bundle called the corpus callosum connects the two hemispheres, transmitting information across the midline.",
+  "claims": [
+   "Projection 'frontal_L'->'frontal_R' (excitatory, Glutamate): Corpus callosum (frontal). Homotopic callosal fibers linking the two frontal lobes.",
+   "Projection 'parietal_L'->'parietal_R' (excitatory, Glutamate): Corpus callosum (parietal). Homotopic callosal fibers linking the two parietal lobes.",
+   "Projection 'occipital_L'->'occipital_R' (excitatory, Glutamate): Corpus callosum (splenium / occipital). Splenial callosal fibers linking the two occipital lobes.",
+   "Functional circuit 'Commissures (interhemispheric)': The interhemispheric bridges (corpus callosum + anterior commissure) linking matching cortical areas across the midline."
+  ],
+  "note": "Quote is a generic statement about the corpus callosum connecting hemispheres; it doesn't mention frontal/parietal/occipital lobes, splenium, or the anterior commissure specifically, so it doesn't substantiate the per-lobe homotopic claims or the two-bundle commissure circuit claim."
+ },
+ {
+  "qid": "q_a503fd1e480e",
+  "corpus": "nieuwenhuys",
+  "page": 387,
+  "present": true,
+  "supports": false,
+  "quote": "Contrary to what was believed for almost a century, the entire postcommissural fornix and considerable part of the precommissural fornix originate from the subiculum rather than from Ammon's horn.",
+  "claims": [
+   "Projection 'hippocampus_R'->'fornix_R' (excitatory, Glutamate): Fornix (hippocampal output). The major hippocampal output gathers into the fornix, the great arching tract of the Papez circuit."
+  ],
+  "note": "quote actually states the fornix originates mainly from the subiculum 'rather than from Ammon's horn' (hippocampus proper), undercutting a direct hippocampus->fornix origin claim"
+ },
+ {
+  "qid": "q_f9caaa4a6b97",
+  "corpus": "stahl",
+  "page": 243,
+  "present": true,
+  "supports": false,
+  "quote": "Highly selective agonist at alpha 2 receptors",
+  "claims": [
+   "Drug Dexmedetomidine acts on target 'alpha2' as agonist.",
+   "Drug Dexmedetomidine is classified as other."
+  ],
+  "note": "quote supports alpha2 agonist claim but page's Class section has no text supporting 'classified as other'"
+ },
+ {
+  "qid": "q_8be6256b3e24",
+  "corpus": "stahl",
+  "page": 411,
+  "present": true,
+  "supports": false,
+  "quote": "NMDA receptor antagonist",
+  "claims": [
+   "Drug Ketamine is classified as recreational."
+  ],
+  "note": "Quote states NMDA receptor antagonist mechanism/class, not that it is classified 'recreational'."
+ },
+ {
+  "qid": "q_dda2b3dbe308",
+  "corpus": "stahl",
+  "page": 479,
+  "present": true,
+  "supports": false,
+  "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)",
+  "claims": [
+   "Drug Lumateperone is classified as antipsychotic_atypical.",
+   "Drug Lumateperone Neuroscience-based Nomenclature = 'serotonin-dopamine antagonist'."
+  ],
+  "note": "quote is the drug's Class line (atypical antipsychotic/SDA descriptor), not the 'Neuroscience-based Nomenclature:' line; doesn't substantiate the NbN claim"
+ },
+ {
+  "qid": "q_f21fcaaac73a",
+  "corpus": "stahl",
+  "page": 449,
+  "present": true,
+  "supports": false,
+  "quote": "Tricyclic antidepressant (TCA)",
+  "claims": [
+   "Drug Lofepramine is classified as tricyclic, snri."
+  ],
+  "note": "Quote only states 'Tricyclic antidepressant (TCA)', not SNRI classification"
+ },
+ {
+  "qid": "q_210f520d7cd9",
+  "corpus": "stahl",
+  "page": 551,
+  "present": true,
+  "supports": false,
+  "quote": "Wake-promoting",
+  "claims": [
+   "Drug Modafinil is classified as stimulant."
+  ],
+  "note": "Quote says 'Wake-promoting' (the drug's Class label), not 'stimulant'; Stahl explicitly distinguishes modafinil from classical stimulants."
+ },
+ {
+  "qid": "q_414271e9140f",
+  "corpus": "stahl",
+  "page": 525,
+  "present": true,
+  "supports": false,
+  "quote": "Tetracyclic antidepressant",
+  "claims": [
+   "Drug Mianserin is classified as tricyclic."
+  ],
+  "note": "quote says 'Tetracyclic antidepressant', claim asserts 'tricyclic' classification, a different class."
+ },
+ {
+  "qid": "q_81ee2d668c40",
+  "corpus": "stahl",
+  "page": 583,
+  "present": true,
+  "supports": false,
+  "quote": "Tricyclic antidepressant (TCA)",
+  "claims": [
+   "Drug Nortriptyline is classified as tricyclic, snri."
+  ],
+  "note": "quote only says 'Tricyclic antidepressant (TCA)', doesn't establish SNRI classification"
+ },
+ {
+  "qid": "q_57c9fe5ae9e7",
+  "corpus": "stahl",
+  "page": 583,
+  "present": true,
+  "supports": false,
+  "quote": "Predominantly a norepinephrine reuptake inhibitor",
+  "claims": [
+   "Drug Nortriptyline is classified as tricyclic, snri."
+  ],
+  "note": "quote says predominantly NE reuptake inhibitor; doesn't establish tricyclic or full SNRI (serotonin+NE) classification"
+ },
+ {
+  "qid": "q_c98c4c14ca73",
+  "corpus": "stahl",
+  "page": 615,
+  "present": true,
+  "supports": false,
+  "quote": "Anticonvulsant, voltage-sensitive sodium channel antagonist",
+  "claims": [
+   "Drug Oxcarbazepine is classified as mood_stabilizer."
+  ],
+  "note": "Quote states anticonvulsant/sodium-channel antagonist, does not itself assert mood_stabilizer classification"
+ },
+ {
+  "qid": "q_f7ca591e323a",
+  "corpus": "stahl",
+  "page": 641,
+  "present": true,
+  "supports": false,
+  "quote": "Interactions at serotonin 1A receptors may contribute to efficacy for cognitive and affective symptoms in some patients",
+  "claims": [
+   "Drug Perospirone acts on target '5ht1a' as antagonist (tentative)."
+  ],
+  "note": "quote only says 'interactions' at 5-HT1A contribute to efficacy; does not specify antagonist mechanism (5-HT1A involvement in atypicals is typically partial agonism, not antagonism)"
+ },
+ {
+  "qid": "q_9d247c2159d2",
+  "corpus": "stahl",
+  "page": 689,
+  "present": true,
+  "supports": false,
+  "quote": "Anticonvulsant, antineuralgic for chronic pain, alpha 2 delta ligand at voltagesensitive calcium channels",
+  "claims": [
+   "Drug Pregabalin is classified as anxiolytic, other."
+  ],
+  "note": "quote only states anticonvulsant/antineuralgic/alpha2-delta ligand; does not mention 'anxiolytic' classification"
+ },
+ {
+  "qid": "q_f427462ede11",
+  "corpus": "stahl",
+  "page": 699,
+  "present": true,
+  "supports": false,
+  "quote": "Tricyclic antidepressant (TCA)",
+  "claims": [
+   "Drug Protriptyline is classified as tricyclic, snri."
+  ],
+  "note": "quote only establishes 'tricyclic', not 'snri'"
+ },
+ {
+  "qid": "q_9a81c55fbb0d",
+  "corpus": "stahl",
+  "page": 797,
+  "present": true,
+  "supports": false,
+  "quote": "Melatonin 1 and 2 receptor agonist",
+  "claims": [
+   "Drug Tasimelteon is classified as hypnotic."
+  ],
+  "note": "quote says agonist mechanism, not that drug is classified as hypnotic (page's class line for tasimelteon lists only 'Melatonin 1 and 2 receptor agonist')"
+ },
+ {
+  "qid": "q_ddd7be2aa12a",
+  "corpus": "stahl",
+  "page": 81,
+  "present": true,
+  "supports": false,
+  "quote": "Wake-promoting",
+  "claims": [
+   "Drug Armodafinil is classified as stimulant."
+  ],
+  "note": "quote 'Wake-promoting' doesn't state the drug is classified as a 'stimulant'"
+ },
+ {
+  "qid": "q_0aa10b1c2d2a",
+  "corpus": "stahl",
+  "page": 717,
+  "present": true,
+  "supports": false,
+  "quote": "Melatonin 1 and 2 receptor agonist",
+  "claims": [
+   "Drug Ramelteon is classified as hypnotic."
+  ],
+  "note": "quote gives mechanism (melatonin 1/2 agonist), never states hypnotic classification"
+ },
+ {
+  "qid": "q_ca4596b87f6f",
+  "corpus": "stahl",
+  "page": 721,
+  "present": true,
+  "supports": false,
+  "quote": "Selective norepinephrine reuptake inhibitor (NRI); antidepressant",
+  "claims": [
+   "Drug Reboxetine is classified as adhd_nonstimulant, antidepressant_other."
+  ],
+  "note": "quote supports antidepressant but never mentions ADHD/adhd_nonstimulant"
+ },
+ {
+  "qid": "q_d3d725f95c28",
+  "corpus": "stahl",
+  "page": 827,
+  "present": true,
+  "supports": false,
+  "quote": "Anticonvulsant, voltage-sensitive sodium channel modulator",
+  "claims": [
+   "Drug Topiramate is classified as mood_stabilizer, other."
+  ],
+  "note": "Quote only says 'Anticonvulsant, voltage-sensitive sodium channel modulator'; it does not mention mood stabilizer classification."
+ },
+ {
+  "qid": "q_06288de9aed4",
+  "corpus": "stahl",
+  "page": 936,
+  "present": true,
+  "supports": false,
+  "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+  "claims": [
+   "Drug Zotepine acts on target 'alpha1a' as antagonist.",
+   "Drug Zotepine acts on target 'alpha1b' as antagonist.",
+   "Drug Zotepine acts on target 'alpha1c' as antagonist.",
+   "Drug Zotepine acts on target 'alpha1d' as antagonist."
+  ],
+  "note": "Quote only says generic 'alpha 1 adrenergic receptors'; does not distinguish alpha1a/b/c/d subtypes, so it doesn't specifically substantiate four separate subtype claims."
+ },
+ {
+  "qid": "q_e49af9451ed2",
+  "corpus": "stahl_essential",
+  "page": 406,
+  "present": true,
+  "supports": false,
+  "quote": "Serotonin inhibits primary afferent terminals via postsynaptic 5HT1B/D receptors (Figure 9-2). These inhibitory receptors are G-protein-coupled, and indirectly influence ion channels to hyperpolarize the nerve terminal and inhibit nociceptive neurotransmitter release.",
+  "claims": [
+   "Receptor 5-HT1B: family = 'serotonergic'.",
+   "Receptor 5-HT1B: receptor_class = 'metabotropic'.",
+   "Receptor 5-HT1B: sign = 'inhibitory'.",
+   "Receptor 5-HT1B: synaptic = 'both'.",
+   "Receptor 5-HT1D: family = 'serotonergic'.",
+   "Receptor 5-HT1D: receptor_class = 'metabotropic'.",
+   "Receptor 5-HT1D: sign = 'inhibitory'.",
+   "Receptor 5-HT1D: synaptic = 'both'."
+  ],
+  "note": "Quote only says 'postsynaptic 5HT1B/D receptors', supporting family/class/sign, but does not support synaptic='both' (no presynaptic mention)."
+ },
+ {
+  "qid": "q_01e3fba4cfdf",
+  "corpus": "stahl",
+  "page": 95,
+  "present": true,
+  "supports": false,
+  "quote": "Selective norepinephrine reuptake inhibitor (NRI)",
+  "claims": [
+   "Drug Atomoxetine is classified as adhd_nonstimulant."
+  ],
+  "note": "Quote states drug class is an NRI, not that it is categorized as 'adhd_nonstimulant'; that categorization isn't asserted by this quote."
+ },
+ {
+  "qid": "q_b5ffda82e0cc",
+  "corpus": "stahl_essential",
+  "page": 131,
+  "present": true,
+  "supports": false,
+  "quote": "Presynaptic serotonin (5HT) receptors include 5HT1A, 5HT1B/D, and 5HT2B, all of which act as autoreceptors",
+  "claims": [
+   "Receptor 5-HT1B: synaptic = 'both'.",
+   "Receptor 5-HT1D: synaptic = 'both'.",
+   "Receptor 5-HT2B: family = 'serotonergic'.",
+   "Receptor 5-HT2B: synaptic = 'presynaptic'."
+  ],
+  "note": "Quote only states 5HT1B/D act as presynaptic autoreceptors; it does not establish a postsynaptic role, so it does not support synaptic='both' for 5-HT1B/1D (though it does support 5-HT2B family/presynaptic)."
+ }
+]

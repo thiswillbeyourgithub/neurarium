@@ -525,6 +525,10 @@ unbacked): see The "% sourced" figure.
 `SOURCING_LLMS`) naming the model that extracted+judged it, so a reader can weigh a quote by that
 model's capability; it is quote-node metadata (not part of the id hash), absent = unknown. Any new
 sourcing/recheck pass must stamp it (a non-LLM deterministic source like Allen's PACall omits it).
+A batch recheck (`tools/sourcing/recheck_quotes.py`, run as a Sonnet workflow) writes a central
+`generated_cache/quote_llm.json` (`{quote_id: llm}`) that `quote_table` applies uniformly (an override
+wins over a source-level `llm`); quotes it could not confirm land in `quote_recheck_flagged.json` for
+review, not stamped.
 
 **Where the grade lives.** One source shape, quote-level `{corpus, page, quote, provenance}` against a
 `SOURCE_CORPORA` corpus; `provenance` defaults `DEFAULT_PROVENANCE` (`"llm"`), a sourceless node is
