@@ -378,6 +378,14 @@ def _is_pdsp_ki(binding):
     return binding.get("ki", {}).get("source", {}).get("corpus") == "pdsp_ki"
 
 
+def _is_curated_ki(binding):
+    """A hand-attached Ki the auto-pass must NOT touch. The resolver drops every
+    assay >=10 uM as "inactive", so a genuine but weak binder (caffeine at A2a,
+    amantadine at NMDA: real, sub-sentinel measurements) can only be recorded by
+    hand; mark it ``source.curated`` so this idempotent refresh never strips it."""
+    return bool(binding.get("ki", {}).get("source", {}).get("curated"))
+
+
 def apply_all():
     """Write PDSP Ki into tools/data/drugs_data.jsonl for every resolvable drug: annotate
     existing bindings with a `ki`, add the median-stronger omitted targets as new
@@ -386,11 +394,14 @@ def apply_all():
     data = drugs_io.load_drugs()
     n_ann = n_add = n_drugs = 0
     for d in data:
-        # Idempotency: drop what a previous --apply added before recomputing.
+        # Idempotency: drop what a previous --apply added before recomputing, but
+        # never a hand-curated Ki (a real sub-sentinel binder the resolver can't
+        # reproduce, see _is_curated_ki).
         d["bindings"] = [b for b in d.get("bindings", [])
-                         if not (b.get("affinity_only") and _is_pdsp_ki(b))]
+                         if not (b.get("affinity_only") and _is_pdsp_ki(b)
+                                 and not _is_curated_ki(b))]
         for b in d["bindings"]:
-            if _is_pdsp_ki(b):
+            if _is_pdsp_ki(b) and not _is_curated_ki(b):
                 b.pop("ki", None)
 
         if combo_constituents(d["name"]):     # combos handled in the viewer, not here
@@ -404,6 +415,8 @@ def apply_all():
             _stamp_mapping(s, mapping)
         touched = False
         for b in d["bindings"]:
+            if _is_curated_ki(b):        # deliberate hand-curation, leave it alone
+                continue
             s = res["annotated"].get(b["target"])
             if s and s.get("ki_nm"):
                 b["ki"] = _ki_from_summary(s)

@@ -472,6 +472,9 @@ fixed Stahl list.
   with a neutral glyph, no source pill, and never animate (excluded from `structureIds`/`flowKinds`).
   A **combo** drug (name "A + B") leads with a warning box linking each constituent (`drug.combo`);
   combos carry no Ki. A measured Ki backs `_binding_grade`, lifting the binding to `verified`.
+  `fetch_ki.py --apply` drops every PDSP assay >=10 uM as "inactive", so a genuine but weak binder
+  (caffeine at A2a) can only be recorded by hand; such a `ki.source` carries `"curated": true` so the
+  idempotent `--apply` refresh never strips it (`_is_curated_ki`).
 
 5 drugs stay unbound as genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
 triiodothyronine, caprylidene). The Stahl corpus `url` is `"TODO"` (the grade, not the link, conveys
