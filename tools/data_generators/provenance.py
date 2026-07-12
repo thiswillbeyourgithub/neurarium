@@ -10,6 +10,7 @@ expression locations). Kept dependency-free so any data module can import it.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -546,6 +547,29 @@ def _provenance_stats(structures: list[dict[str, Any]],
 
     binding_grades = [_binding_grade(b)
                       for d in drugs for b in d.get("bindings", [])]
+    # Measured-affinity (PDSP Ki) coverage: a SEPARATE data-quality signal from the
+    # grade tally. A binding can be legitimately backed by a Stahl quote with no Ki
+    # (the grade counts it as sourced), so "no Ki" is NOT "unsourced"; this figure
+    # instead tracks how much of the corpus carries a *measured* affinity and names the
+    # drugs where one was never looked up (the "we didn't even bother to look" case the
+    # % sourced can't see). Combo drugs ("A + B") are Ki-exempt by design, so they are
+    # excluded here, matching js/data.js's combo detection (a +/–/— in the name).
+    def _is_combo(d: dict[str, Any]) -> bool:
+        return bool(re.search(r"[+–—]", d.get("name", "")))
+    ki_drugs = [d for d in drugs if d.get("bindings") and not _is_combo(d)]
+    ki_bindings = [b for d in ki_drugs for b in d["bindings"]]
+    with_ki = [b for b in ki_bindings if b.get("ki")]
+    drugs_no_ki = [d for d in ki_drugs
+                   if not any(b.get("ki") for b in d["bindings"])]
+    ki_coverage = {
+        "bindings_total": len(ki_bindings),
+        "bindings_with_ki": len(with_ki),
+        "pct_bindings_with_ki": (round(100 * len(with_ki) / len(ki_bindings))
+                                 if ki_bindings else 0),
+        "drugs_total": len(ki_drugs),
+        "drugs_without_ki": len(drugs_no_ki),
+        "drugs_without_ki_ids": sorted(d["id"] for d in drugs_no_ki),
+    }
     nbn_grades = [_strongest_grade(d.get("nbn_sources"))
                   for d in drugs if d.get("nbn")]
     # Drug class-classification nodes ("this drug is an SSRI/..."), one per drug that
@@ -661,4 +685,4 @@ def _provenance_stats(structures: list[dict[str, Any]],
     nodes["backed"] = backed
     nodes["pct_backed"] = (
         round(100 * backed / nodes["total"]) if nodes["total"] else 0)
-    return {"by_kind": by_kind, "nodes": nodes}
+    return {"by_kind": by_kind, "nodes": nodes, "ki_coverage": ki_coverage}

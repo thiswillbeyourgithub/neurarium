@@ -599,6 +599,10 @@ yellow noise); it is emitted as `meta.provenance_stats` (key `nodes`). Each expr
 upgradeable. **The live per-kind figures live in the README `SOURCING_STATS` block (auto-written by
 `update_readme_stats.py`, CI runs it `--check`) and the Sources & provenance popup; they are not repeated
 here, to avoid drift.** `check_data.py` re-confirms the tally is self-consistent (coverage columns M/S/S+V).
+Separately, `meta.provenance_stats.ki_coverage` tracks **measured-affinity (PDSP Ki) coverage** (bindings
+with a Ki, drugs with none; combos excluded): NOT a grade (a quote-only binding is still sourced), but the
+honest complement surfacing where a measured affinity was never looked up. Rendered in the sourcing popup +
+README block, warned per-drug by `check_data.py` family 7.
 
 ## Changing the data
 
