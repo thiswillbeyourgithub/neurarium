@@ -120,7 +120,7 @@ STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {
     # Other adrenergic subtypes: the NE-receptor enumeration classifies them.
     # (α2D is not named in the book, so it stays llm; α2A keeps its own quote above.)
     "alpha1a": _SE_NE_GROUPS, "alpha1b": _SE_NE_GROUPS,
-    "alpha1c": _SE_NE_GROUPS, "alpha1d": _SE_NE_GROUPS,
+    "alpha1d": _SE_NE_GROUPS,
     "alpha2b": _SE_NE_GROUPS, "alpha2c": _SE_NE_GROUPS,
     "beta1": _SE_NE_GROUPS, "beta2": _SE_NE_GROUPS, "beta3": _SE_NE_GROUPS,
     # Serotonin subtypes (5HT1E/1F are absent from this corpus, so they stay llm).
@@ -191,7 +191,7 @@ RECEPTOR_CLASSIFICATION_COVERAGE: dict[str, tuple[str, ...]] = {
     # `synaptic` is covered there, not here.
     "5ht1b": _FCG, "5ht1d": _FCG,
     # Pure NE enumeration: only names the family, nothing mechanistic.
-    "alpha1a": _F, "alpha1b": _F, "alpha1c": _F, "alpha1d": _F,
+    "alpha1a": _F, "alpha1b": _F, "alpha1d": _F,
     "alpha2b": _F, "alpha2c": _F, "beta1": _F, "beta2": _F, "beta3": _F,
     # 5-HT sign sentence: family + the excitatory/inhibitory sign it lists.
     "5ht1a": _FG, "5ht2a": _FG, "5ht2c": _FG, "5ht4": _FG, "5ht5a": _FG, "5ht6": _FG,

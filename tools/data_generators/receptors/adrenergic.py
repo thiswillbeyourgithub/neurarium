@@ -22,11 +22,6 @@ ENTRIES = [
                         "postsynaptique, largement exprimé dans le cortex et les "
                         "régions sous-corticales.",
          wikipedia="https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"),
-    # Stub: α1C is obsolete (found identical to α1A; no distinct human subtype).
-    dict(id="alpha1c", name="α1C", family="adrenergic",
-         neurotransmitter="Noradrenaline", receptor_class="metabotropic",
-         sign="excitatory", synaptic="postsynaptic", locations=[],
-         wikipedia="https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor"),
     dict(id="alpha1d", name="α1D", family="adrenergic",
          neurotransmitter="Noradrenaline", receptor_class="metabotropic",
          sign="excitatory", synaptic="postsynaptic",
