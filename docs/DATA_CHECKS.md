@@ -6,7 +6,7 @@
 
 `tools/check_data.py` (stdlib) runs over the **emitted** `public/data/`,
 independent of `generate_data.py`. Exit 0 = no errors (warnings allowed), 1 =
-errors. Functions take loaded data as args (unit-testable). Seven families:
+errors. Functions take loaded data as args (unit-testable). Eight families:
 
 - **Quote table** (referential integrity of the externalized `quotes.jsonl`): every node's
   `{quote_id, provenance}` source must resolve to a quote node, and every quote node must be
@@ -43,3 +43,8 @@ errors. Functions take loaded data as args (unit-testable). Seven families:
   outward-only structures from the projection endpoints (`bidirectional` counts
   both ways). Source nuclei + olfactory bulb are expected outward-only, pituitary
   inward-only; the point is to flag a region wired one-way (e.g. a missing return pathway).
+- **Measured-affinity (Ki) coverage** (warns, never errors): lists each drug with
+  bindings but **zero** PDSP Ki across all of them (combos excluded), and cross-checks
+  `meta.provenance_stats.ki_coverage` against a recompute. A quote-only binding is still
+  sourced, so this is not a grade gate: it surfaces where a *measured* affinity was never
+  looked up, the honest complement to "% sourced".
