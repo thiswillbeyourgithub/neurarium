@@ -154,7 +154,7 @@ is a real count:
 
 ```
 
-Separately, **measured binding affinity (PDSP Ki) covers 68% of the 926 drug bindings**; 73 of 167 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
+Separately, **measured binding affinity (PDSP Ki) covers 68% of the 926 drug bindings**; 72 of 167 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
 
 <!-- SOURCING_STATS:END -->
 
