@@ -190,11 +190,24 @@ def render_block(stats: dict) -> str:
         f"(`tools/update_readme_stats.py`, from the emitted data), not hand-typed:",
         "",
         "```",
-        *chart,
-        "```",
-        "",
-        END,
     ]
+    # Measured-affinity (PDSP Ki) coverage: a SEPARATE honesty line, not part of the %
+    # above. A binding backed by a book quote with no Ki is still sourced, so "no Ki" is
+    # not "unsourced"; this states how much of the corpus carries a *measured* affinity
+    # and how many drugs never had one looked up, so a quote-only corpus can't read as
+    # exhaustively measured. Omitted on an older dataset that predates the field.
+    ki = stats.get("ki_coverage")
+    if ki and ki.get("bindings_total"):
+        lines += [
+            "",
+            f"Separately, **measured binding affinity (PDSP Ki) covers "
+            f"{ki['pct_bindings_with_ki']}% of the {ki['bindings_total']} drug "
+            f"bindings**; {ki['drugs_without_ki']} of {ki['drugs_total']} drugs carry "
+            f"no Ki on any binding (sourced by book quote only, or not yet sourced). A "
+            f"Ki is a measured value, not a grade: this tracks where one was never "
+            f"looked up, complementing the sourcing figure above.",
+        ]
+    lines += ["", END]
     return "\n".join(lines)
 
 

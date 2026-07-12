@@ -166,23 +166,8 @@ que la couverture ci-dessous est un décompte réel :
 **90% of the 2093 knowledge nodes in the dataset are sourced or verified.** A node is any sourceable datum (a region, a pathway, a receptor, a drug binding, ...). This is a programmatic count (`tools/update_readme_stats.py`, from the emitted data), not hand-typed:
 
 ```
-Wikipedia reference links       ██████████████████████████  100%  311/311
-Drug nomenclature (NbN)         ██████████████████████████  100%  116/116
-Brain-region anatomy            ██████████████████████████  100%    52/52
-Projection groups               ██████████████████████████  100%    10/10
-Functional circuits             ██████████████████████████  100%      6/6
-Drug target bindings            █████████████████████████░   97%  925/953
-Receptor system/family          █████████████████████████░   96%    54/56
-Neuron pathways                 █████████████████████████░   96%    52/54
-Receptor expression regions     ████████████████████████░░   94%  360/383
-Drug class                      ████████████████████████░░   90%  160/177
-Target expression regions       ██████████████████████░░░░   85%    82/96
-Target classifications          █████████████████████░░░░░   80%    16/20
-Receptor mechanism class        ██████████████░░░░░░░░░░░░   54%    30/56
-Target tone polarity            █████████████░░░░░░░░░░░░░   50%      1/2
-Receptor sign (excit./inhib.)   ██████░░░░░░░░░░░░░░░░░░░░   23%    13/56
-Receptor pre/postsynaptic site  ████░░░░░░░░░░░░░░░░░░░░░░   14%     8/56
-```
+
+Separately, **measured binding affinity (PDSP Ki) covers 68% of the 926 drug bindings**; 73 of 167 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
 
 <!-- SOURCING_STATS:END -->
 
