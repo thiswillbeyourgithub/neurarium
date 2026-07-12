@@ -3881,6 +3881,20 @@ function buildAboutSourcing(meta) {
     row.appendChild(bar);
     wrap.appendChild(row);
   }
+  // Measured-affinity (PDSP Ki) coverage: a SEPARATE honesty line, not a grade bar. A
+  // binding backed by a Stahl quote with no Ki is still sourced, so this does not feed
+  // the % above; it surfaces how much of the corpus carries a *measured* affinity and
+  // how many drugs never had one looked up, so a fully quote-only corpus can't read as
+  // exhaustively measured.
+  const ki = stats.ki_coverage;
+  if (ki && ki.bindings_total) {
+    wrap.appendChild(h("p", "src-stat-kifoot", t("about.kiCoverage", {
+      pct: ki.pct_bindings_with_ki,
+      total: ki.bindings_total,
+      drugsNone: ki.drugs_without_ki,
+      drugs: ki.drugs_total,
+    })));
+  }
   host.appendChild(wrap);
   host.appendChild(key);
 }

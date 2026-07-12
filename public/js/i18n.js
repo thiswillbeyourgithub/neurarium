@@ -300,6 +300,8 @@
       "about.coverageTitle": "Coverage",
       "about.sourcingHeadline":
         "{pct}% of the {total} knowledge nodes here are sourced or verified.",
+      "about.kiCoverage":
+        "Measured binding affinity (PDSP Ki): {pct}% of {total} drug bindings carry one; {drugsNone} of {drugs} drugs have none (quote-sourced or unsourced).",
       "about.kindBindings": "Drug target bindings",
       "about.kindNbn": "Drug nomenclature (NbN)",
       "about.kindDrugCategories": "Drug class",
@@ -595,6 +597,8 @@
       "about.coverageTitle": "Couverture",
       "about.sourcingHeadline":
         "{pct} % des {total} nœuds de connaissance ici sont sourcés ou vérifiés.",
+      "about.kiCoverage":
+        "Affinité de liaison mesurée (Ki PDSP) : {pct} % des {total} liaisons en portent une ; {drugsNone} des {drugs} médicaments n'en ont aucune (sourcés par citation ou sans source).",
       "about.kindBindings": "Liaisons cibles des médicaments",
       "about.kindNbn": "Nomenclature des médicaments (NbN)",
       "about.kindDrugCategories": "Classe du médicament",
