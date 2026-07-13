@@ -440,18 +440,24 @@ def _binding_sources(drug_id: str, binding: dict[str, Any]) -> list[dict[str, An
 
 
 def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | None:
-    """Validate + normalize a binding's PDSP ``ki`` annotation (measured binding
+    """Validate + normalize a binding's ``ki`` annotation (measured binding
     affinity), or ``None`` when absent.
 
-    Shape: ``{median, min, max, n_human, n_nonhuman, source}`` where ``source`` is
-    one specific PDSP CSV row: ``{corpus:"pdsp_ki", ki_id, value_nm, species,
-    preparation, radioligand, reference, provenance}`` plus, for a match recovered
-    through the alias map (:data:`tools.fetch_ki.ALIAS`), ``mapped``/``measured_as``/
-    ``relation``/``pdsp_names`` so the viewer warns *which* compound the Ki was
-    measured on. The Ki carries its **own** ``verified`` source (rendered as its own
-    badge beside the binding), separate from the binding's quote ``sources``, because
-    it is a distinct measurement (an affinity), not a source for the binding node.
-    ``check_data.py`` confirms the ``ki_id`` row is really in the corpus CSV.
+    Shape: ``{median, min, max, n_human, n_nonhuman, source}``. Two source flavours,
+    both graded ``verified`` and each verified by ``check_data.py`` in its own way:
+
+    * a **PDSP CSV row** (``corpus:"pdsp_ki"``): ``{ki_id, value_nm, species,
+      preparation, radioligand, reference, ...}`` plus, for a match recovered through
+      the alias map (:data:`tools.fetch_ki.ALIAS`), ``mapped``/``measured_as``/
+      ``relation``/``pdsp_names`` so the viewer warns *which* compound it was measured
+      on. Checked by the ``ki_id`` row really being in the corpus CSV.
+    * a **quote-gated page** (a ``pages_dir`` corpus, e.g. #9 ``wikipedia_pharm``):
+      ``{page, quote, value_nm, reference}`` where ``quote`` is a verbatim affinity-
+      table row on the cited page. Checked by the normal verbatim-quote gate.
+
+    The Ki carries its **own** source (rendered as its own badge beside the binding),
+    separate from the binding's quote ``sources``, because it is a distinct
+    measurement (an affinity), not a source for the binding node.
     """
     ki = binding.get("ki")
     if not ki:
@@ -465,11 +471,16 @@ def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | No
     if corpus not in SOURCE_CORPORA:
         raise KeyError(f"{what} source cites unknown corpus {corpus!r}")
     prov = _provenance(src.get("provenance", DEFAULT_PROVENANCE), f"{what} source")
-    if prov == "verified" and src.get("ki_id") is None:
-        raise ValueError(f"{what} 'verified' source needs a ki_id (the PDSP row id)")
+    is_csv = bool(SOURCE_CORPORA[corpus].get("csv"))
+    if prov == "verified":
+        if is_csv and src.get("ki_id") is None:
+            raise ValueError(f"{what} 'verified' PDSP source needs a ki_id (the row id)")
+        if not is_csv and not (src.get("quote") and src.get("page") is not None):
+            raise ValueError(f"{what} 'verified' quote-gated source needs a page + quote")
     out_src: dict[str, Any] = {"corpus": corpus, "provenance": prov}
     for f in ("ki_id", "value_nm", "species", "preparation", "radioligand",
-              "reference", "note", "mapped", "measured_as", "relation", "pdsp_names"):
+              "reference", "note", "mapped", "measured_as", "relation", "pdsp_names",
+              "page", "quote"):
         if src.get(f) not in (None, ""):
             out_src[f] = src[f]
     out = {

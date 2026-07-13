@@ -903,6 +903,13 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         for binding in drug.get("bindings", []):
             for i, src in enumerate(binding.get("sources", []) or []):
                 check_one(f"drug {did} binding {binding.get('target')} sources[{i}]", src)
+            # A quote-carrying Ki source (corpus #9 wikipedia_pharm cites the verbatim
+            # affinity-table row) is gated here like any other quote. A PDSP Ki cites a
+            # CSV row (ki_id, no quote) and is verified by the CSV gate below instead, so
+            # only feed a Ki source that actually carries a quote.
+            ki_src = (binding.get("ki") or {}).get("source")
+            if ki_src and ki_src.get("quote"):
+                check_one(f"drug {did} binding {binding.get('target')} ki.source", ki_src)
         for i, src in enumerate(drug.get("nbn_sources", []) or []):
             check_one(f"drug {did} nbn_sources[{i}]", src)
         for i, src in enumerate(drug.get("category_sources", []) or []):
@@ -980,6 +987,10 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             ctx = f"drug {did} binding {binding.get('target')} ki"
             src = ki.get("source") or {}
             corpus, ki_id = src.get("corpus"), src.get("ki_id")
+            # Only a CSV corpus (PDSP) cites a row by ki_id; a quote-gated Ki corpus
+            # (wikipedia_pharm) was already verified by the source-quote gate above.
+            if not (corpora.get(corpus) or {}).get("csv"):
+                continue
             if src.get("provenance") == "verified" and ki_id is None:
                 report.error(f"{ctx}: 'verified' source needs a ki_id")
                 continue
