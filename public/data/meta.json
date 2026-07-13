@@ -2099,8 +2099,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 955,
-        "verified": 928,
+        "total": 960,
+        "verified": 933,
         "sourced": 0,
         "llm": 0,
         "nosource": 27,
@@ -2115,12 +2115,12 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 177,
+        "total": 178,
         "verified": 160,
         "sourced": 0,
-        "llm": 17,
+        "llm": 18,
         "nosource": 0,
-        "missing": 17
+        "missing": 18
       },
       "projections": {
         "total": 54,
@@ -2219,29 +2219,29 @@
         "missing": 0
       },
       "references": {
-        "total": 311,
+        "total": 312,
         "verified": 0,
-        "sourced": 311,
+        "sourced": 312,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 2095,
-      "verified": 1888,
+      "total": 2101,
+      "verified": 1893,
       "sourced": 0,
-      "llm": 178,
+      "llm": 179,
       "nosource": 29,
-      "missing": 207,
-      "backed": 1888,
+      "missing": 208,
+      "backed": 1893,
       "pct_backed": 90
     },
     "ki_coverage": {
-      "bindings_total": 928,
-      "bindings_with_ki": 636,
+      "bindings_total": 933,
+      "bindings_with_ki": 641,
       "pct_bindings_with_ki": 69,
-      "drugs_total": 167,
+      "drugs_total": 168,
       "drugs_without_ki": 69,
       "drugs_without_ki_ids": [
         "acamprosate",
