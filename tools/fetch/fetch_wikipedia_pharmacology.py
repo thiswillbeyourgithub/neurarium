@@ -152,9 +152,9 @@ def resolve_wiki_target(name: str, valid_ids: set[str]) -> str | None:
     if not n:
         return None
     # Dopamine-receptor isoform / splice-variant suffixes collapse to the base id:
-    # D2S/D2L -> d2, D4.2/D4.4/D4.7 -> d4 (the "." is stripped by norm, leaving "d42").
-    n = re.sub(r"^(d[1-5])[sl]$", r"\1", n)
-    n = re.sub(r"^(d[1-5])\d$", r"\1", n)
+    # D2S/D2L -> d2, D4.2/D4.4/D4.7 -> d4, D4.4L -> d4 (the "." is stripped by norm,
+    # leaving "d42"/"d44l"): an optional variant-number run then an optional S/L tail.
+    n = re.sub(r"^(d[1-5])\d*[sl]?$", r"\1", n)
     # Nicotinic subunit combos (a name carrying "beta", e.g. "α4β2", "α4β4", "α3β4")
     # resolve here rather than via the shared PDSP NAME_PATTERNS, which buckets EVERY
     # non-α4β2 combo onto nachr_a7 and would then mislabel one subtype's Ki as α7's
@@ -192,6 +192,10 @@ NUM_RE = re.compile(r"([<>≥≤]?)\s*(\d[\d.]*)\s*(\+?)")
 KI_LABEL_RE = re.compile(r"\(\s*k\s*i\s*\)", re.I)   # the "(Ki)" tag itself
 # Any per-value metric tag inside a cell that lists several: "(Ki)", "(IC50)", "(Kd)".
 METRIC_LABEL_RE = re.compile(r"(\(\s*(?:k\s*i|ic\s*50|ec\s*50|k\s*[dab])\s*\))", re.I)
+# A functional / non-binding metric named anywhere in a value cell (IC50, EC50, Kd, Ka,
+# Kb, pA2, pKi). Matched even when its parenthesis is unclosed in the flattened text
+# ("530 ( EC 50"), so the label's own digits never leak in as a measurement.
+OTHER_METRIC_CELL_RE = re.compile(r"\b(?:ic|ec)\s*50|\bk\s*[dab]\b|\bpa\s*2\b|\bpk\s*i", re.I)
 
 
 def parse_ki_cell(raw: str):
@@ -215,6 +219,12 @@ def parse_ki_cell(raw: str):
         kept = [toks[i - 1] for i in range(1, len(toks), 2) if KI_LABEL_RE.search(toks[i])]
         if kept:
             s = " ".join(kept)
+    # A cell reporting only a functional/other constant (an EC50/IC50/Kd/Ka/Kb/pA2/pKi)
+    # and no (Ki) tag is not a binding Ki: drop the whole cell rather than read its
+    # measurement as a Ki or leak the label's own digits ("50" from "EC 50") as a range
+    # bound (e.g. mianserin's "KOR | 530 (EC50)" was becoming a bogus 50-530 nM range).
+    if OTHER_METRIC_CELL_RE.search(s) and not KI_LABEL_RE.search(s):
+        return None
     s = re.sub(r"\([^)]*\)", " ", s)               # drop (rat)/(canine)/(HT29) notes
     s = s.replace(",", "").replace("≈", "").replace("~", "")
     if not s or s.strip() in {"-", "–", "—", "?", "ND", "n.d.", "N/A"}:
