@@ -103,9 +103,13 @@ DROP_NAMES = {"alpha1", "alpha1adrenergic", "alpha1adrenoceptor"}
 FOOTNOTE_RE = re.compile(r"\[[^\]]*\]")          # [1], [note 2], [a]
 TOOLTIP_RE = re.compile(r"\bTooltip\b.*$")       # "SERT Tooltip Serotonin transporter" -> "SERT"
 WS_RE = re.compile(r"\s+")
-# A Ki header: mentions Ki (and typically nM/affinity) but NOT the other constants.
-KI_HEAD_RE = re.compile(r"\bk\s*i\b|\bki\b")
-NOT_KI_RE = re.compile(r"ic50|ec50|\bkd\b|\bka\b|\bkb\b|ia\(|%\)")
+# A Ki header: mentions Ki, or a plain "affinity" column (binding affinity ~ Ki, e.g.
+# zuclopenthixol's "Site | Action | Affinity"), but NOT a functional/other-constant
+# column (IC50/EC50/Kd/Ka/Kb) nor a log-unit pKi column (values there aren't nM).
+# "potency" is deliberately excluded: it labels functional IC50/EC50 (e.g. modafinil's
+# uptake-inhibition table), which is not a binding Ki.
+KI_HEAD_RE = re.compile(r"\bk\s*i\b|\bki\b|affinity")
+NOT_KI_RE = re.compile(r"ic\s*50|ec\s*50|\bkd\b|\bka\b|\bkb\b|pk\s*i|ia\(|%\)")
 TARGET_HEAD_RE = re.compile(r"target|site|receptor|protein|compound")
 # A target cell that names a RANGE of receptors ("D 1 – D 5", "α 1 – β 3", "H 1 – H 4"):
 # one Ki can't be attributed to one target, so drop it. A range dash is flanked by
@@ -151,6 +155,16 @@ def resolve_wiki_target(name: str, valid_ids: set[str]) -> str | None:
     # D2S/D2L -> d2, D4.2/D4.4/D4.7 -> d4 (the "." is stripped by norm, leaving "d42").
     n = re.sub(r"^(d[1-5])[sl]$", r"\1", n)
     n = re.sub(r"^(d[1-5])\d$", r"\1", n)
+    # Nicotinic subunit combos (a name carrying "beta", e.g. "α4β2", "α4β4", "α3β4")
+    # resolve here rather than via the shared PDSP NAME_PATTERNS, which buckets EVERY
+    # non-α4β2 combo onto nachr_a7 and would then mislabel one subtype's Ki as α7's
+    # (varenicline lists α4β4 = 0.121 nM next to α7 = 100 nM). Only α4β2 and α7 have a
+    # dedicated id; the other homeless combos are dropped, not mis-bucketed. Bare
+    # "α1"/"α2" are adrenergic (no "beta") and fall through to normal resolution.
+    if "beta" in n and re.fullmatch(r"alpha\d+beta\d+", n):
+        return "nachr_a4b2" if n == "alpha4beta2" else None
+    if n == "alpha7":
+        return "nachr_a7"
     if n in DROP_NAMES:              # subtype-less coarse name we deliberately drop
         return None
     if n in valid_ids:
@@ -188,11 +202,11 @@ def parse_ki_cell(raw: str):
     "148 nM (canine)", and cells that inline other metrics
     "0.087-0.5 (Ki) 1.9-50 (IC50)". Strategy: when a cell tags multiple metrics keep
     only the (Ki)-tagged value group(s); strip notes/units/commas; pull every number
-    but drop lower-bound ceilings (">X"/"X+", i.e. "weaker than X, inactive") and any
-    value >= 10 uM (fetch_ki.SENTINEL_NM, mirroring the PDSP filter); summarize the
-    remaining active numbers as median/min/max. None when nothing active survives (a
-    purely ">10,000" / "300+" / no-data cell). "<X" (an upper bound, genuinely strong)
-    is kept as a conservative estimate."""
+    but drop lower-bound ceilings (">X"/"X+"/a truncated "X-", i.e. "weaker than X,
+    inactive") and any value >= 10 uM (fetch_ki.SENTINEL_NM, mirroring the PDSP filter);
+    summarize the remaining active numbers as median/min/max. None when nothing active
+    survives (a purely ">10,000" / "300+" / "100-" / no-data cell). "<X" (an upper bound,
+    genuinely strong) is kept as a conservative estimate."""
     s = clean_cell(raw or "")
     # A cell that tags several metrics keeps only the value groups labelled "(Ki)":
     # "0.087-0.5 (Ki) 1.9-50 (IC50)" -> "0.087-0.5".
@@ -207,8 +221,15 @@ def parse_ki_cell(raw: str):
         return None
     factor = 1000.0 if UNIT_UM_RE.search(s) else 1.0
     nums = []
-    for qual, num, plus in NUM_RE.findall(s):
-        if qual in (">", "≥") or plus:             # lower-bound ceiling -> inactive
+    for m in NUM_RE.finditer(s):
+        qual, num, plus = m.group(1), m.group(2), m.group(3)
+        if qual in (">", "≥") or plus:             # ">X"/"X+": lower-bound ceiling -> inactive
+            continue
+        # A number trailed by a lone dash with no upper value ("100-") is a truncated
+        # ">100"/indeterminate marker, not a precise Ki -> drop. A dash *followed* by
+        # another number is a range separator ("0.20-9.8", "1044->10,000"), so keep it.
+        rest = s[m.end():].lstrip()
+        if rest[:1] in ("-", "–", "—") and not re.search(r"\d", rest):
             continue
         try:
             nums.append(float(num) * factor)
@@ -509,10 +530,11 @@ def apply_all(only: str | None = None) -> None:
     """Write Wikipedia Ki into tools/data/drugs_data.jsonl for every drug whose page
     is already stored under data_sources/wikipedia/raw/ (fetch the drugs you want
     first; ``only`` restricts to one drug id). PDSP fallback: a Ki is written only
-    onto a binding that has NONE, never over a PDSP (or any existing) Ki; then,
-    mirroring fetch_ki, unmatched targets stronger than the weakest bound one are
-    auto-added as `affinity_only`. Idempotent: strips its own prior output (wiki Ki
-    annotations + wiki affinity_only adds) first, so re-running just refreshes."""
+    onto a binding that has NONE, never over a PDSP (or any existing) Ki; then every
+    remaining unmatched target the table lists a genuine Ki for is auto-added as
+    `affinity_only` (the whole curated table is kept, not just the strongest rows).
+    Idempotent: strips its own prior output (wiki Ki annotations + wiki affinity_only
+    adds) first, so re-running just refreshes."""
     valid_ids = load_valid_ids()
     data = fetch_ki.drugs_io.load_drugs()
     n_drugs = n_ann = n_add = 0
@@ -537,27 +559,22 @@ def apply_all(only: str | None = None) -> None:
                 b.pop("ki", None)
         bound = {b["target"] for b in d["bindings"]}
         touched = False
-        medians = []
         for b in d["bindings"]:
             if b.get("ki"):                      # an existing (e.g. PDSP) Ki wins
-                medians.append(b["ki"]["median"])
                 continue
             w = wiki.get(b["target"])
             if w:                                # fill a binding PDSP left without a Ki
                 b["ki"] = _wiki_ki_obj(w, slug, permalink)
-                medians.append(w["ki"]["median"])
                 n_ann += 1
                 touched = True
-        # Auto-add strong unmatched targets as affinity_only: keep any at least as
-        # strong as the weakest already-bound target (`> threshold` skips only the
-        # strictly weaker ones). The boundary is inclusive so a target tied with an
-        # already-kept binding is not dropped for the tie (e.g. lumateperone's D4 and
-        # α1A/α1B all read "100-": all three are kept, not two).
-        threshold = max(medians) if medians else None
+        # Add every remaining unmatched target the table gives a genuine Ki for as
+        # affinity_only. parse_ki_cell already dropped ceilings (">X"/"X+") and >=10uM
+        # values, so each surviving row is a real measured affinity: keep the whole
+        # curated table rather than only its strongest rows (an earlier affinity
+        # threshold silently discarded real values, e.g. pimavanserin 5-HT2B = 436 nM
+        # and sigma1 = 120 nM).
         for tid, w in sorted(wiki.items()):
             if tid in bound:
-                continue
-            if threshold is not None and w["ki"]["median"] > threshold:
                 continue
             d["bindings"].append({"target": tid, "affinity_only": True,
                                   "ki": _wiki_ki_obj(w, slug, permalink)})
