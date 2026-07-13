@@ -2094,6 +2094,12 @@
       "citation": "Hawrylycz MJ, Lein ES, Guillozet-Bongaarts AL, et al. An anatomically comprehensive atlas of the adult human brain transcriptome. Nature. 2012;489(7416):391-399. human.brain-map.org.",
       "url": "https://human.brain-map.org/",
       "pages_dir": "data_sources/allen/pages"
+    },
+    "wikipedia_pharm": {
+      "ref": "Wikipedia (English), drug pharmacodynamics table",
+      "citation": "Wikipedia contributors. Pharmacodynamics binding table of the cited drug article. Wikipedia, The Free Encyclopedia. en.wikipedia.org (revision pinned per citation).",
+      "url": "https://en.wikipedia.org/",
+      "pages_dir": "data_sources/wikipedia/pages"
     }
   },
   "provenance_stats": {

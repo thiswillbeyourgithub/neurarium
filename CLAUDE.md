@@ -573,6 +573,11 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
   species tag prefers Human (`locationEntry`), so an Allen confirmation clears the amber tag. **Caveat:**
   microarray = mRNA in cell bodies, so a transporter confirms at its source nucleus (SERT->raphe,
   NET->LC) and its terminal-region claims honestly stay `llm`.
+- **#9 Wikipedia pharm** (`wikipedia_pharm`, `page` = the article slug) backs a binding **Ki** where PDSP
+  (#5) has none (a *fallback*, never overriding a measured assay). `fetch_wikipedia_pharmacology.py` stores
+  the whole English article author-side (pinned to a revision id) and mines its pharmacodynamics binding
+  table; a Ki source's `quote` is the verbatim table row, gated exactly like a book page. A tertiary
+  source citing the primary literature: the grade attests quote-presence, the corpus label conveys tier.
 
 **Descriptions** are not a node kind (not tallied). Drugs, structures and non-receptor targets carry
 **no baked description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via

@@ -359,6 +359,24 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "https://human.brain-map.org/",
         "pages_dir": "data_sources/allen/pages",
     },
+    "wikipedia_pharm": {
+        # Binding-affinity corpus #9: the curated pharmacodynamics/binding table on a
+        # drug's English Wikipedia article, backing a binding `ki` where PDSP (corpus
+        # #5) has no value (a fallback, never overriding a measured PDSP assay).
+        # tools/fetch/fetch_wikipedia_pharmacology.py fetches the article pinned to a
+        # revision id and writes the whole page as author-side text; a Ki source's
+        # `page` is the article slug and its `quote` is the verbatim table row, so the
+        # normal verbatim-quote gate applies unchanged (author-side, skipped on a clone
+        # lacking data_sources/wikipedia/, like the book corpora). Wikipedia is a
+        # tertiary source citing the primary literature: the grade attests the quote is
+        # really on the page, and this corpus label makes the source's tier explicit.
+        "ref": "Wikipedia (English), drug pharmacodynamics table",
+        "citation": "Wikipedia contributors. Pharmacodynamics binding table of the "
+                    "cited drug article. Wikipedia, The Free Encyclopedia. "
+                    "en.wikipedia.org (revision pinned per citation).",
+        "url": "https://en.wikipedia.org/",
+        "pages_dir": "data_sources/wikipedia/pages",
+    },
 }
 
 

@@ -196,6 +196,13 @@ Screenshots).
 - `tools/fetch/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.
+- `tools/fetch/fetch_wikipedia_pharmacology.py` — `uv run` (deps: beautifulsoup4). Fetches a drug's
+  English Wikipedia article pinned to its revision id, stores the whole page author-side
+  (`data_sources/wikipedia/raw/<slug>.html` + `pages/<slug>.md`, corpus #9 `wikipedia_pharm`), and mines
+  the pharmacodynamics binding table for a per-target Ki (adaptive multi-row-header grid + fuzzy target
+  resolution reusing `fetch_ki`'s `norm`/`parse_ki`/`NAME_PATTERNS`). A Ki source's `quote` is the
+  verbatim table row, so the normal quote gate applies. Preview by default; `--json`, `--no-fetch`. Fills
+  the Ki gap where PDSP has none (e.g. alpha1, non-psychiatric agents). See CLAUDE.md Drugs.
 - `tools/fetch/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
   `uv run`, `--layout` for OCR.
 - `tools/fetch/build_toc_index.py` — `INDEX.md` from a PDF's embedded TOC (generic). `uv run`.
