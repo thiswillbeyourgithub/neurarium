@@ -429,6 +429,112 @@ def drug_title(drug_id: str) -> str | None:
     return None
 
 
+# --------------------------------------------------------------------------- #
+# --apply: write the extracted Ki into drugs_data.jsonl (PDSP fallback)
+# --------------------------------------------------------------------------- #
+
+HEADER_RE = re.compile(r"revision:\s*(\S+).*?permalink:\s*(\S+)", re.S)
+
+
+def _stored_meta(raw_html: str) -> tuple[str, str]:
+    """(revid, permalink) from the header comment we stamped into raw/<slug>.html."""
+    m = HEADER_RE.search(raw_html[:400])
+    return (m.group(1), m.group(2)) if m else ("", "")
+
+
+def extract_stored(slug: str, valid_ids: set[str]) -> tuple[dict, str] | None:
+    """Parse a stored raw/<slug>.html -> (extraction result, permalink), or None."""
+    raw_path = os.path.join(RAW_DIR, f"{slug}.html")
+    if not os.path.exists(raw_path):
+        return None
+    with open(raw_path, encoding="utf-8") as f:
+        html = f.read()
+    _, permalink = _stored_meta(html)
+    return extract_bindings(BeautifulSoup(html, "html.parser"), valid_ids), permalink
+
+
+def _wiki_ki_obj(w: dict, slug: str, permalink: str) -> dict:
+    """The binding `ki` object for a Wikipedia-sourced value. Quote-gated -> verified.
+
+    No human/non-human assay counts (Wikipedia gives a literature value, not a raw
+    assay), so the viewer renders it as a literature Ki, not a measured one."""
+    ki = w["ki"]
+    return {
+        "median": ki["median"], "min": ki["min"], "max": ki["max"],
+        "source": {
+            "corpus": "wikipedia_pharm", "page": slug, "quote": w["quote"],
+            "value_nm": ki["median"], "reference": permalink,
+            "provenance": "verified",
+        },
+    }
+
+
+def _is_wiki_ki(binding: dict) -> bool:
+    return binding.get("ki", {}).get("source", {}).get("corpus") == "wikipedia_pharm"
+
+
+def apply_all(only: str | None = None) -> None:
+    """Write Wikipedia Ki into tools/data/drugs_data.jsonl for every drug whose page
+    is already stored under data_sources/wikipedia/raw/ (fetch the drugs you want
+    first; ``only`` restricts to one drug id). PDSP fallback: a Ki is written only
+    onto a binding that has NONE, never over a PDSP (or any existing) Ki; then,
+    mirroring fetch_ki, unmatched targets stronger than the weakest bound one are
+    auto-added as `affinity_only`. Idempotent: strips its own prior output (wiki Ki
+    annotations + wiki affinity_only adds) first, so re-running just refreshes."""
+    valid_ids = load_valid_ids()
+    data = fetch_ki.drugs_io.load_drugs()
+    n_drugs = n_ann = n_add = 0
+    for d in data:
+        if only and d["id"] != only:
+            continue
+        title = drug_title(d["id"])
+        if not title or fetch_ki.combo_constituents(d["name"]):
+            continue
+        got = extract_stored(slugify(title), valid_ids)
+        if got is None:
+            continue
+        res, permalink = got
+        wiki = res["bindings"]
+        slug = slugify(title)
+        # Idempotency: drop our prior affinity_only adds + Ki annotations, keeping any
+        # PDSP/other Ki and any hand-authored binding untouched.
+        d["bindings"] = [b for b in d["bindings"]
+                         if not (b.get("affinity_only") and _is_wiki_ki(b))]
+        for b in d["bindings"]:
+            if _is_wiki_ki(b):
+                b.pop("ki", None)
+        bound = {b["target"] for b in d["bindings"]}
+        touched = False
+        medians = []
+        for b in d["bindings"]:
+            if b.get("ki"):                      # an existing (e.g. PDSP) Ki wins
+                medians.append(b["ki"]["median"])
+                continue
+            w = wiki.get(b["target"])
+            if w:                                # fill a binding PDSP left without a Ki
+                b["ki"] = _wiki_ki_obj(w, slug, permalink)
+                medians.append(w["ki"]["median"])
+                n_ann += 1
+                touched = True
+        # Auto-add strong unmatched targets as affinity_only (fetch_ki's rule: median
+        # stronger than the weakest already-bound target).
+        threshold = max(medians) if medians else None
+        for tid, w in sorted(wiki.items()):
+            if tid in bound:
+                continue
+            if threshold is not None and w["ki"]["median"] >= threshold:
+                continue
+            d["bindings"].append({"target": tid, "affinity_only": True,
+                                  "ki": _wiki_ki_obj(w, slug, permalink)})
+            n_add += 1
+            touched = True
+        if touched:
+            n_drugs += 1
+    fetch_ki.drugs_io.save_drugs(data)
+    print(f"applied Wikipedia Ki to {n_drugs} drug(s): {n_ann} binding(s) annotated, "
+          f"{n_add} affinity-only added")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -437,7 +543,14 @@ def main() -> None:
     ap.add_argument("--no-fetch", action="store_true",
                     help="re-parse the stored raw/<slug>.html instead of fetching")
     ap.add_argument("--json", metavar="OUT", help="also write the extraction JSON here")
+    ap.add_argument("--apply", action="store_true",
+                    help="write the extracted Ki into drugs_data.jsonl (PDSP fallback) "
+                         "for every drug whose page is already stored")
     args = ap.parse_args()
+
+    if args.apply:
+        apply_all(args.drug)
+        return
 
     title = args.title or (drug_title(args.drug) if args.drug else None)
     if not title:
