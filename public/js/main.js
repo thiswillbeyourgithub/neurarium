@@ -1999,6 +1999,25 @@ function createInfoPanel(data) {
   // drug's own number. Returns a fragment appended to the binding row.
   const kiChip = (ki) => {
     const frag = document.createDocumentFragment();
+    // A literature Ki (a quote-gated corpus like Wikipedia) is a single value quoted
+    // from a source, not a raw assay: it has no ki_id and no human/non-human counts.
+    // Render it plainly (value + optional range + a "literature value" tag), with the
+    // corpus + revision permalink in the pill tooltip; skip the assay-only chrome
+    // (species counts, "measured in non-human", the alias ⚠ warning).
+    const measured = ki.kiId != null || ki.nHuman > 0 || ki.nNonhuman > 0;
+    if (!measured) {
+      const chip = el("span", "ki-chip");
+      chip.appendChild(el("span", "ki-val", `Ki ${fmtKi(ki.median)} nM`));
+      chip.appendChild(el("span", "ki-detail",
+        (ki.min !== ki.max ? `${fmtKi(ki.min)}–${fmtKi(ki.max)} · ` : "")
+        + t("drug.kiCited")));
+      frag.appendChild(chip);
+      let tip = ki.corpusRef;
+      if (ki.reference) tip += "\n" + ki.reference;
+      tip += "\n\n" + t("drug.kiCitedTip");
+      frag.appendChild(makeProvenancePill(ki.provenance, tip));
+      return frag;
+    }
     const chip = el("span", "ki-chip");
     chip.appendChild(el("span", "ki-val", `Ki ${fmtKi(ki.median)} nM`));
     chip.appendChild(el("span", "ki-detail",

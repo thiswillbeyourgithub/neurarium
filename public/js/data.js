@@ -506,6 +506,11 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       nHuman: ki.n_human || 0, nNonhuman: ki.n_nonhuman || 0,
       inactive: ki.inactive || 0,
       provenance: src.provenance || null,
+      // The Ki source corpus: a CSV assay corpus (pdsp_ki) reports per-assay
+      // species counts + a representative row; a quote-gated literature corpus
+      // (wikipedia_pharm) reports a single value with no assay counts, so the panel
+      // renders it as a literature Ki (no human/non-human line, no "measured in X").
+      corpus: src.corpus || "",
       kiId: src.ki_id != null ? src.ki_id : null,
       valueNm: src.value_nm != null ? src.value_nm : null,
       species: src.species || "", preparation: src.preparation || "",
