@@ -1942,19 +1942,47 @@ function createInfoPanel(data) {
   const sourcesTip = (sources) =>
     (sources || []).map(sourceTipLine).filter(Boolean).join("\n\n");
 
+  // The corpus reference for a Ki source, rendered as the tooltip "extra": the corpus
+  // label made a live link to the exact source (ki.reference pinned-revision permalink,
+  // falling back to the corpus's generic URL) when a URL is available, else plain text
+  // (the reference on its own line). Returned as a fragment so the link stays clickable.
+  // Shared by kiChip's verified badge and the binding row's source pill, so a literature
+  // Ki (e.g. a Wikipedia pharmacodynamics table) is reachable from both, not only the Ki
+  // badge. `dash` prepends the leading source-line dash marker (the binding pill wants it;
+  // kiChip does not, since it appends its own kiCited explainer after).
+  const kiCorpusRefNode = (ki, { dash = false } = {}) => {
+    const label = ki.corpusRef || "PDSP Ki Database";
+    const refUrl = /^https?:\/\//i.test(ki.reference || "") ? ki.reference
+      : (/^https?:\/\//i.test(ki.corpusUrl || "") ? ki.corpusUrl : "");
+    const frag = document.createDocumentFragment();
+    if (dash) frag.append("— ");
+    if (refUrl) {
+      const a = el("a", null, label);
+      a.href = refUrl;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      frag.append(a);
+    } else {
+      frag.append(label + (ki.reference ? "\n" + ki.reference : ""));
+    }
+    return frag;
+  };
+
   // The provenance pill for a drug binding row (shared by the drug panel's "Acts
   // on" list and a target panel's "Interacting drugs" list, the same resolved
   // binding object). Its grade + tooltip come from whatever backs the binding: its
   // own quote-level Stahl source if present, else its measured PDSP Ki (which lifts
   // it to verified, mirroring _binding_grade), else nothing -> a NOSOURCE pill.
   // There is no drug-level citation fallback: an unsourced binding honestly shows
-  // NOSOURCE rather than borrowing the book at large.
+  // NOSOURCE rather than borrowing the book at large. When the backing is a Ki whose
+  // corpus is URL-addressable (a literature Ki, e.g. the Wikipedia table), the label
+  // is a clickable link, matching the Ki badge's tooltip below the row.
   const bindingProvenancePill = (binding) => {
     if (binding.sources && binding.sources.length)
       return makeProvenancePill(binding.provenance, sourcesTip(binding.sources));
     if (binding.ki)
       return makeProvenancePill(binding.provenance,
-        "— " + (binding.ki.corpusRef || "PDSP Ki Database"));
+        kiCorpusRefNode(binding.ki, { dash: true }));
     return makeProvenancePill(binding.provenance);
   };
 
@@ -2051,23 +2079,11 @@ function createInfoPanel(data) {
         (ki.min !== ki.max ? `${fmtKi(ki.min)}–${fmtKi(ki.max)} · ` : "")
         + t("drug.kiCited")));
       frag.appendChild(chip);
-      // The corpus label doubles as the link to the exact source: ki.reference is the
-      // pinned revision permalink (?oldid=), falling back to the corpus's generic URL,
-      // so a click opens the very table the value was quoted from. A non-URL reference
-      // degrades to plain text. The kiCited explainer follows; makeProvenancePill then
-      // appends the grade explainer under it.
-      const refUrl = /^https?:\/\//i.test(ki.reference || "") ? ki.reference
-        : (/^https?:\/\//i.test(ki.corpusUrl || "") ? ki.corpusUrl : "");
-      const extra = document.createDocumentFragment();
-      if (refUrl) {
-        const a = el("a", null, ki.corpusRef);
-        a.href = refUrl;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        extra.append(a);
-      } else {
-        extra.append(ki.corpusRef + (ki.reference ? "\n" + ki.reference : ""));
-      }
+      // The corpus label doubles as the link to the exact source (see kiCorpusRefNode:
+      // ki.reference's pinned-revision permalink, else the corpus URL), so a click opens
+      // the very table the value was quoted from. The kiCited explainer follows;
+      // makeProvenancePill then appends the grade explainer under it.
+      const extra = kiCorpusRefNode(ki);
       extra.append("\n\n" + t("drug.kiCitedTip"));
       frag.appendChild(makeProvenancePill(ki.provenance, extra));
       return frag;
