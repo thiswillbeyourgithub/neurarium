@@ -150,6 +150,7 @@
 {"id": "q_1eef71031dd5", "corpus": "allen_ahba", "page": "CHRM5", "quote": "CHRM5 detected in mammillary: probe 1058213 PACall present in 9/9 samples (donors 10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_1f2f6f25e00d", "corpus": "stahl", "page": 167, "quote": "Combination of dopamine D2, histamine H1, and cholinergic M1 blockade in the vomiting center may reduce nausea and vomiting", "llm": "sonnet"}
 {"id": "q_1f319e388313", "corpus": "stahl", "page": 167, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and improving other behaviors", "llm": "sonnet"}
+{"id": "q_1f46f443ca77", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 1B | 33 | 120 | 55 | Partial agonist"}
 {"id": "q_1febf2762cd2", "corpus": "stahl", "page": 19, "quote": "Antagonist at serotonin 2C receptors", "llm": "sonnet"}
 {"id": "q_201f8338608a", "corpus": "stahl", "page": 641, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms", "llm": "sonnet"}
 {"id": "q_206c042c78c1", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 detected in thalamus: probe 1026650 PACall present in 185/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -204,6 +205,7 @@
 {"id": "q_278584d067d5", "corpus": "nieuwenhuys", "page": 617, "quote": "Commissural fibres from the inferotemporal cortex cross in the posterior part of the body of the corpus callosum and in the anterior commissure", "llm": "sonnet"}
 {"id": "q_27ecdfa4f054", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in parietal: probe 1057496 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_280e6a79c7e3", "corpus": "kandel", "page": 140, "quote": "We know that a structure called the hippocampus (or more properly the hippocampal formation, since it is several cortical regions) is a key component of a medial temporal lobe memory system that encodes and stores memories of our lives (Figure 4–17).", "llm": "sonnet"}
+{"id": "q_282125602e26", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "β 1 -adr. | 46 | – | – | Antagonist"}
 {"id": "q_292000431e34", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in temporal: probe 1057496 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_29435f2ad3a6", "corpus": "allen_ahba", "page": "GRIN1", "quote": "GRIN1 detected in hippocampus: probe 1055938 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_295b29df497c", "corpus": "stahl", "page": 633, "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet"}
@@ -408,6 +410,7 @@
 {"id": "q_556fcd3786f1", "corpus": "allen_ahba", "page": "GRIK1", "quote": "GRIK1 detected in hippocampus: probe 1026815 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_55835bcf6c7a", "corpus": "stahl_essential", "page": 311, "quote": "The physiological function of σ1 sites is still a mystery, and thus sometimes called the “sigma enigma”", "llm": "sonnet"}
 {"id": "q_55c9a7dc1eac", "corpus": "stahl_essential", "page": 575, "quote": "neurons that release enkephalin synapse with postsynaptic δ-opioid receptors", "llm": "sonnet"}
+{"id": "q_560e6e3f0fd5", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "SERT | 1.6 | 5.4 | – | Inhibition"}
 {"id": "q_565e6c07c513", "corpus": "stahl", "page": 905, "quote": "Mode 3: binds to ion-channel-linked receptors (antagonist at serotonin 3 receptors)", "llm": "sonnet"}
 {"id": "q_56818ff84c0d", "corpus": "allen_ahba", "page": "CHRM2", "quote": "CHRM2 detected in hippocampus: probe 1029156 PACall present in 168/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_568d6f423f9e", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in cerebellum: probe 1027138 PACall present in 304/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -504,6 +507,7 @@
 {"id": "q_6803ed58d657", "corpus": "stahl", "page": 199, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet"}
 {"id": "q_681664d68ca0", "corpus": "kandel", "page": 734, "quote": "The axons of olfactory sensory neurons project to the ipsilateral olfactory bulb, whose rostral end lies just above the olfactory epithelium.", "llm": "sonnet"}
 {"id": "q_686bfe0a34fa", "corpus": "allen_ahba", "page": "GRIK1", "quote": "GRIK1 detected in temporal: probe 1026815 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_68751e476d50", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 1D | 54 | 370 | – | Antagonist"}
 {"id": "q_689bfdb7476e", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in medulla: probe 1019914 PACall present in 211/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_689ed55441ba", "corpus": "gtopdb", "page": 215, "quote": "Pituitary, substantia nigra (SN) and ventral tegmental area (VTA).", "species": "Human", "llm": "sonnet"}
 {"id": "q_68a4406e89dc", "corpus": "stahl", "page": 633, "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)", "llm": "sonnet"}
@@ -1048,6 +1052,7 @@
 {"id": "q_d62465327f42", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in amygdala: probe 1057496 PACall present in 59/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d66572dd2fe3", "corpus": "stahl", "page": 647, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}
 {"id": "q_d6990f4c6d52", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in hippocampus: probe 1020459 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_d6b11c7c3755", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 7 | 19 | 450 | – | Antagonist"}
 {"id": "q_d6f017ed5bf8", "corpus": "gtopdb", "page": 318, "quote": "CNS: amygdala, caudate nucleus, hypothalamus, subthalamic nucleus > hippocampus, thalamus > substantia nigra, corpus callosum.", "species": "Human", "llm": "sonnet"}
 {"id": "q_d6f61c5c815a", "corpus": "gtopdb", "page": 27, "quote": "α2C-AR mRNA labeling primarily in the olfactory bulb, cerebral cortex, islands of Calleja, striatum, hippocampal formation, cerebellar cortex, and dorsal root ganglia.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_d702b6b68e45", "corpus": "gtopdb", "page": 1, "quote": "Limbic system: septum, hippocampus, thalamus, amygdala, olfactory bulb, medulla, mesencephalon, hypothalamus.", "species": "Rat", "llm": "sonnet"}
@@ -1162,12 +1167,14 @@
 {"id": "q_ed2c0437245b", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in midbrain: probe 1027138 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ed4aa96ca45a", "corpus": "allen_ahba", "page": "ADRA1B", "quote": "ADRA1B detected in parietal: probe 1023485 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ede7f91fe17d", "corpus": "nieuwenhuys", "page": 421, "quote": "The claustrum is a thin sheet of grey matter, embedded in the white matter of the cerebral hemispheres and largely situated between the putamen and the insular cortex.", "llm": "sonnet"}
+{"id": "q_edfd6688a295", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 3A | 3.7 | 12 | – | Antagonist"}
 {"id": "q_edff7c20b123", "corpus": "stahl", "page": 291, "quote": "Weakly blocks dopamine reuptake pump (dopamine transporter), and may increase dopamine neurotransmission", "llm": "sonnet"}
 {"id": "q_ee082e674223", "corpus": "gtopdb", "page": 288, "quote": "Hypothalamus, retina, small intestine > liver, heart SA node.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_ee101b8043ec", "corpus": "stahl", "page": 395, "quote": "Tricyclic antidepressant (TCA)", "llm": "sonnet"}
 {"id": "q_ee1b1b278349", "corpus": "carlat", "page": 184, "quote": "Histamine H1 receptor antagonist with mild antiserotonergic effects", "llm": "opus"}
 {"id": "q_ee370980042a", "corpus": "allen_ahba", "page": "CHRM5", "quote": "CHRM5 detected in vta: probe 1058213 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ee7f9178592f", "corpus": "stahl", "page": 571, "quote": "Bupropion increases dopamine and norepinephrine by blocking both the dopamine and the norepinephrine transporters.", "llm": "sonnet"}
+{"id": "q_eeba97226d80", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 1A | 15 | 200 | 96 | Agonist"}
 {"id": "q_eec056569270", "corpus": "stahl", "page": 69, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist (DS-RPA)", "llm": "sonnet"}
 {"id": "q_eed733fdca5c", "corpus": "gtopdb", "page": 11, "quote": "Brain: nucleus accumbens, olfactory tubercle, striatum, hippocampus, anterior corpus.", "species": "Rat"}
 {"id": "q_ef24b8c91d3b", "corpus": "gtopdb", "page": 264, "quote": "Brain: thalamus, caudate nucleus, putamen, cerebellum, amygdala, substantia nigra, hippocampus, hypothalamus, cerebral cortex.", "species": "Human", "llm": "sonnet"}
