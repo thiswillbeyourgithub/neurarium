@@ -116,6 +116,10 @@
         --accent-bright: #b48bff;
         --accent-light: #c8a8ff;
         --accent-soft: rgba(138, 92, 240, 0.35);
+        /* The bottom-left control-panel width (landscape). One source of truth so a
+           tooltip can size itself just under the panel (see .help-tip). Portrait
+           overrides the panel to full-width; the tooltip's vw cap covers that case. */
+        --panel-w: clamp(240px, 25vw, 420px);
       }
       * { box-sizing: border-box; }
       html, body {
@@ -226,7 +230,7 @@
          without `:has` just keeps the bottom-left box (graceful fallback). */
       @media (orientation: landscape) {
         #controls {
-          width: clamp(240px, 25vw, 420px);
+          width: var(--panel-w);
         }
         /* When EXPANDED, take the full vertical height so the section list has room
            to scroll through (each open section at natural height, the lower headers
@@ -1237,7 +1241,11 @@
         left: 0;
         top: 0;
         width: max-content;
-        max-width: min(260px, 78vw);
+        /* Sit just under the control panel's width (never the old thin 260px), and
+           on a narrow/portrait screen cap to the viewport. A long unbreakable token
+           wraps instead of overflowing. attachTip's place() sets a precise max-height
+           per position so the bubble scrolls internally and is never cropped. */
+        max-width: min(calc(var(--panel-w) - 16px), 92vw);
         padding: 8px 10px;
         background: rgba(18, 18, 22, 0.98);
         border: 1px solid rgba(255, 255, 255, 0.16);
@@ -1250,12 +1258,22 @@
         /* the per-claim source pill builds a multi-line tooltip (the source / quote
            + page ref, then the grade explainer); honour the \n it inserts. */
         white-space: pre-line;
+        overflow-wrap: anywhere;
+        overflow-y: auto;
+        overflow-x: hidden;
         z-index: 60;
       }
       /* The bubble is appended to <body> while shown (see withTip in js/main.js), so
          it is toggled by a class on itself, not on the wrapping .help-icon, and it
          escapes the panel's clipping + any dimmed row's opacity. */
       .help-tip.show { display: block; }
+      /* A source link inside a tooltip (e.g. the Wikipedia Ki corpus label linking to
+         the pinned revision): legible accent on the dark bubble. The tooltip stays
+         open while hovered/pinned (see attachTip), so the link is clickable. */
+      .help-tip a {
+        color: var(--accent-light);
+        text-decoration: underline;
+      }
       .info-connections li {
         display: flex;
         align-items: center;

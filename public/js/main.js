@@ -1606,17 +1606,40 @@ function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
   const tip = document.createElement("span");
   tip.className = "help-tip";
   tip.setAttribute("role", "tooltip");
-  tip.textContent = tipText;
+  // `tipText` is usually a string (set as textContent). It may instead be a Node
+  // (e.g. a fragment carrying a clickable source link): appended live so the link
+  // stays interactive. The node is consumed once here; it then lives in this bubble
+  // permanently, moving in/out of <body> with it on open/close.
+  if (tipText instanceof Node) tip.appendChild(tipText);
+  else tip.textContent = tipText;
   if (zIndex != null) tip.style.zIndex = String(zIndex);
   if (!wrap) trigger.style.cursor = "help";
   let pinned = false, hideTimer = 0;
   const place = () => {
     const r = trigger.getBoundingClientRect();
-    const tw = tip.offsetWidth, th = tip.offsetHeight, m = 6;
+    const m = 6, gap = 4;
+    // Choose the vertical side (above default, matching the arrow-less convention),
+    // then cap the bubble to that side's free space so a long tooltip scrolls inside
+    // itself (overflow-y:auto) instead of running off-screen and being cropped.
+    tip.style.maxHeight = "none";            // measure the natural height first
+    const natural = tip.offsetHeight;
+    // Free space each side, capped to the viewport (a partly-scrolled trigger can push
+    // r.top/r.bottom past the edges, which would otherwise let maxHeight exceed the
+    // screen and re-crop a long tooltip).
+    const vLimit = window.innerHeight - 2 * m;
+    const spaceAbove = Math.min(r.top - m - gap, vLimit);
+    const spaceBelow = Math.min(window.innerHeight - r.bottom - m - gap, vLimit);
+    let below;
+    if (natural <= spaceAbove) below = false;        // fits above -> above
+    else if (natural <= spaceBelow) below = true;    // else fits below -> below
+    else below = spaceBelow > spaceAbove;            // fits neither -> roomier side (scrolls)
+    const avail = Math.max(0, Math.floor(below ? spaceBelow : spaceAbove));
+    tip.style.maxHeight = `${avail}px`;
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
     let left = r.left + r.width / 2 - tw / 2;
     left = Math.max(m, Math.min(left, window.innerWidth - tw - m));
-    let top = r.top - th - 4;
-    if (top < m) top = r.bottom + 4; // flip below the trigger if no room above
+    let top = below ? r.bottom + gap : r.top - th - gap;
+    top = Math.max(m, Math.min(top, window.innerHeight - th - m)); // never off-screen
     // With the bubble in <body> there is normally no fixed-positioning containing
     // block (offsets zero), but keep the generic subtraction in case a transformed /
     // filtered ancestor ever forms one.
@@ -1630,6 +1653,13 @@ function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
   const reposition = () => {
     if (!trigger.isConnected) { close(); return; }
     if (tip.classList.contains("show")) place();
+  };
+  // A scroll INSIDE the bubble (reading a long, height-capped tooltip) must not
+  // reposition it: place() re-measures the natural height, which would fight the
+  // user's scroll. Only an outside scroll (the page/panel moving) repositions.
+  const onScroll = (e) => {
+    if (e.target === tip || (e.target instanceof Node && tip.contains(e.target))) return;
+    reposition();
   };
   const onDocPointer = (e) => {
     if (host.contains(e.target) || tip.contains(e.target)) return;
@@ -1645,7 +1675,7 @@ function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
     // Re-place after this frame: tapping a button can focus-scroll it into view
     // *after* the click handler runs, which would otherwise strand the bubble.
     requestAnimationFrame(place);
-    window.addEventListener("scroll", reposition, true);
+    window.addEventListener("scroll", onScroll, true);
     window.addEventListener("resize", reposition);
     document.addEventListener("pointerdown", onDocPointer, true);
   };
@@ -1655,7 +1685,7 @@ function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
     if (_openTip === close) _openTip = null;
     tip.classList.remove("show");
     tip.remove();
-    window.removeEventListener("scroll", reposition, true);
+    window.removeEventListener("scroll", onScroll, true);
     window.removeEventListener("resize", reposition);
     document.removeEventListener("pointerdown", onDocPointer, true);
   };
@@ -1859,7 +1889,16 @@ function createInfoPanel(data) {
   const makeProvenancePill = (level, extra) => {
     const spec = PROVENANCE_PILLS[level];
     const base = spec ? t(spec.tip) : t("info.provNone");
-    const tip = extra ? `${extra}\n\n${base}` : base;
+    // `extra` is usually a string; it may be a Node (e.g. a clickable source link),
+    // in which case keep it live and append the grade explainer under it (the
+    // .help-tip is white-space:pre-line, so the blank line renders).
+    let tip;
+    if (extra instanceof Node) {
+      tip = document.createDocumentFragment();
+      tip.append(extra, document.createTextNode(`\n\n${base}`));
+    } else {
+      tip = extra ? `${extra}\n\n${base}` : base;
+    }
     const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
     const pill = el("button", cls, spec ? spec.glyph : NOSOURCE_GLYPH);
     pill.type = "button";
@@ -2012,10 +2051,25 @@ function createInfoPanel(data) {
         (ki.min !== ki.max ? `${fmtKi(ki.min)}–${fmtKi(ki.max)} · ` : "")
         + t("drug.kiCited")));
       frag.appendChild(chip);
-      let tip = ki.corpusRef;
-      if (ki.reference) tip += "\n" + ki.reference;
-      tip += "\n\n" + t("drug.kiCitedTip");
-      frag.appendChild(makeProvenancePill(ki.provenance, tip));
+      // The corpus label doubles as the link to the exact source: ki.reference is the
+      // pinned revision permalink (?oldid=), falling back to the corpus's generic URL,
+      // so a click opens the very table the value was quoted from. A non-URL reference
+      // degrades to plain text. The kiCited explainer follows; makeProvenancePill then
+      // appends the grade explainer under it.
+      const refUrl = /^https?:\/\//i.test(ki.reference || "") ? ki.reference
+        : (/^https?:\/\//i.test(ki.corpusUrl || "") ? ki.corpusUrl : "");
+      const extra = document.createDocumentFragment();
+      if (refUrl) {
+        const a = el("a", null, ki.corpusRef);
+        a.href = refUrl;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        extra.append(a);
+      } else {
+        extra.append(ki.corpusRef + (ki.reference ? "\n" + ki.reference : ""));
+      }
+      extra.append("\n\n" + t("drug.kiCitedTip"));
+      frag.appendChild(makeProvenancePill(ki.provenance, extra));
       return frag;
     }
     const chip = el("span", "ki-chip");
