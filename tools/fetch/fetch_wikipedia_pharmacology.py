@@ -107,6 +107,10 @@ WS_RE = re.compile(r"\s+")
 KI_HEAD_RE = re.compile(r"\bk\s*i\b|\bki\b")
 NOT_KI_RE = re.compile(r"ic50|ec50|\bkd\b|\bka\b|\bkb\b|ia\(|%\)")
 TARGET_HEAD_RE = re.compile(r"target|site|receptor|protein|compound")
+# A target cell that names a RANGE of receptors ("D 1 – D 5", "α 1 – β 3", "H 1 – H 4"):
+# one Ki can't be attributed to one target, so drop it. A range dash is flanked by
+# spaces, which never happens inside a single code ("5-HT 2A" has no spaced dash).
+RANGE_RE = re.compile(r".+\s[–—-]\s.+")
 
 
 def slugify(title: str) -> str:
@@ -132,8 +136,9 @@ def resolve_wiki_target(name: str, valid_ids: set[str]) -> str | None:
     """Map a Wikipedia target-cell name to our target id, or None (logged upstream).
 
     Order: exact norm()-equality against a real id (covers 5-HT1A, D2, H1, M1, SERT,
-    α1A, NMDA, AMPA, ...), then the WIKI_ALIASES table, then the reused PDSP
-    NAME_PATTERNS, then the explicit DROP set (subtype-less coarse names)."""
+    α1A, NMDA, AMPA, ...), then the WIKI_ALIASES table, then a clean-prefix match
+    against a real id, then the reused PDSP NAME_PATTERNS. The explicit DROP set
+    (subtype-less coarse names) is checked first."""
     base = greek_to_latin(name)
     # Drop trailing descriptor words so "5-HT1A receptor" / "β1-adrenergic" / "β1-adr."
     # reduce toward the bare code before matching.
@@ -142,46 +147,69 @@ def resolve_wiki_target(name: str, valid_ids: set[str]) -> str | None:
     n = fetch_ki.norm(base)
     if not n:
         return None
+    # Dopamine-receptor isoform / splice-variant suffixes collapse to the base id:
+    # D2S/D2L -> d2, D4.2/D4.4/D4.7 -> d4 (the "." is stripped by norm, leaving "d42").
+    n = re.sub(r"^(d[1-5])[sl]$", r"\1", n)
+    n = re.sub(r"^(d[1-5])\d$", r"\1", n)
     if n in DROP_NAMES:              # subtype-less coarse name we deliberately drop
         return None
     if n in valid_ids:
         return n
     if n in WIKI_ALIASES:
         return WIKI_ALIASES[n]
-    for pat, tid in fetch_ki.NAME_PATTERNS:
-        if pat.search(n) and tid in valid_ids:
-            return tid
-    # Last resort: a real id (>=4 chars, so no d2/h1/m1 false hits) is a clean prefix
-    # of the normalized name ("beta1adr" -> beta1, "ampareceptor" -> ampa). Longest id
-    # first so alpha2a wins over alpha2.
+    # A real id (>=4 chars, so no d2/h1/m1 false hits) is a clean prefix of the
+    # normalized name ("beta1adr" -> beta1, "ampareceptor" -> ampa, "gabaaα1β1γ2" ->
+    # gaba_a). Longest id first so alpha2a wins over alpha2. Checked BEFORE the looser
+    # substring NAME_PATTERNS so a compound subunit name ("GABA-A α2β1γ2") maps to
+    # gaba_a rather than a stray "alpha2" substring hit.
     for tid in sorted(valid_ids, key=len, reverse=True):
         nid = fetch_ki.norm(tid)
         if len(nid) >= 4 and n.startswith(nid):
+            return tid
+    for pat, tid in fetch_ki.NAME_PATTERNS:
+        if pat.search(n) and tid in valid_ids:
             return tid
     return None
 
 
 UNIT_UM_RE = re.compile(r"[µμ]m|\bum\b", re.I)      # micromolar -> x1000 to nM
-NUM_RE = re.compile(r"[<>]?\s*(\d[\d.]*)")           # a number, optional </> prefix
+# A number with its optional bound qualifier: "<10", ">300", "300+", "436".
+NUM_RE = re.compile(r"([<>≥≤]?)\s*(\d[\d.]*)\s*(\+?)")
+KI_LABEL_RE = re.compile(r"\(\s*k\s*i\s*\)", re.I)   # the "(Ki)" tag itself
+# Any per-value metric tag inside a cell that lists several: "(Ki)", "(IC50)", "(Kd)".
+METRIC_LABEL_RE = re.compile(r"(\(\s*(?:k\s*i|ic\s*50|ec\s*50|k\s*[dab])\s*\))", re.I)
 
 
 def parse_ki_cell(raw: str):
     """A Ki cell -> {median,min,max,raw} in nM, or None if it holds no active value.
 
     Wikipedia affinity cells vary wildly: "1.6", a range "0.20-9.8 nM", commas
-    "1,044", ceilings ">10,000 nM", µM units, and trailing species notes
-    "148 nM (canine)". Strategy: strip notes/units/commas, pull every number, drop
-    any >= 10 uM (fetch_ki.SENTINEL_NM, the "tested, inactive" ceiling, mirroring the
-    PDSP filter), and summarize the remaining active numbers as median/min/max. None
-    when nothing active survives (a purely ">10,000" / no-data cell)."""
+    "1,044", ceilings ">10,000 nM" / "300+", µM units, trailing species notes
+    "148 nM (canine)", and cells that inline other metrics
+    "0.087-0.5 (Ki) 1.9-50 (IC50)". Strategy: when a cell tags multiple metrics keep
+    only the (Ki)-tagged value group(s); strip notes/units/commas; pull every number
+    but drop lower-bound ceilings (">X"/"X+", i.e. "weaker than X, inactive") and any
+    value >= 10 uM (fetch_ki.SENTINEL_NM, mirroring the PDSP filter); summarize the
+    remaining active numbers as median/min/max. None when nothing active survives (a
+    purely ">10,000" / "300+" / no-data cell). "<X" (an upper bound, genuinely strong)
+    is kept as a conservative estimate."""
     s = clean_cell(raw or "")
+    # A cell that tags several metrics keeps only the value groups labelled "(Ki)":
+    # "0.087-0.5 (Ki) 1.9-50 (IC50)" -> "0.087-0.5".
+    if KI_LABEL_RE.search(s) and METRIC_LABEL_RE.search(s):
+        toks = METRIC_LABEL_RE.split(s)
+        kept = [toks[i - 1] for i in range(1, len(toks), 2) if KI_LABEL_RE.search(toks[i])]
+        if kept:
+            s = " ".join(kept)
     s = re.sub(r"\([^)]*\)", " ", s)               # drop (rat)/(canine)/(HT29) notes
     s = s.replace(",", "").replace("≈", "").replace("~", "")
     if not s or s.strip() in {"-", "–", "—", "?", "ND", "n.d.", "N/A"}:
         return None
     factor = 1000.0 if UNIT_UM_RE.search(s) else 1.0
     nums = []
-    for num in NUM_RE.findall(s):
+    for qual, num, plus in NUM_RE.findall(s):
+        if qual in (">", "≥") or plus:             # lower-bound ceiling -> inactive
+            continue
         try:
             nums.append(float(num) * factor)
         except ValueError:
@@ -376,6 +404,10 @@ def extract_from_table(table: Tag, valid_ids: set[str]) -> tuple[list[dict], lis
         # and a real target name is a short code, never a sentence.
         if name == row[ki_col]["text"] or len(name) > 45:
             continue
+        # Skip a receptor-RANGE row ("D 1 - D 5", "α 1 - β 3"): one Ki can't be pinned
+        # to a single target, and a loose match would mis-attribute it.
+        if RANGE_RE.match(greek_to_latin(name)):
+            continue
         ki = parse_ki_cell(row[ki_col]["text"])
         if ki is None:
             continue
@@ -516,13 +548,16 @@ def apply_all(only: str | None = None) -> None:
                 medians.append(w["ki"]["median"])
                 n_ann += 1
                 touched = True
-        # Auto-add strong unmatched targets as affinity_only (fetch_ki's rule: median
-        # stronger than the weakest already-bound target).
+        # Auto-add strong unmatched targets as affinity_only: keep any at least as
+        # strong as the weakest already-bound target (`> threshold` skips only the
+        # strictly weaker ones). The boundary is inclusive so a target tied with an
+        # already-kept binding is not dropped for the tie (e.g. lumateperone's D4 and
+        # α1A/α1B all read "100-": all three are kept, not two).
         threshold = max(medians) if medians else None
         for tid, w in sorted(wiki.items()):
             if tid in bound:
                 continue
-            if threshold is not None and w["ki"]["median"] >= threshold:
+            if threshold is not None and w["ki"]["median"] > threshold:
                 continue
             d["bindings"].append({"target": tid, "affinity_only": True,
                                   "ki": _wiki_ki_obj(w, slug, permalink)})
