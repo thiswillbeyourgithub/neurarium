@@ -211,6 +211,9 @@
          the menus at the same time. The 50vh cap + internal scroll keep a tall
          expanded legend inside that bottom half. */
       @media (orientation: portrait) {
+        /* The panel spans full width here (left/right 8px), so track that for the
+           tooltip's width too (it reads --panel-w; see .help-tip). */
+        :root { --panel-w: calc(100vw - 16px); }
         #controls {
           left: 8px;
           right: 8px;
