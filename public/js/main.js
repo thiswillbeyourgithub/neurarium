@@ -2358,19 +2358,15 @@ function createInfoPanel(data) {
   };
 
 
-  // Shared by the receptor + target views: the drugs that act on this target, so
-  // you can go from a target to every drug touching it. Grouped by primary drug
-  // category (antipsychotic, MAOI, ...) in the meta order, alphabetical within each;
-  // every row carries the binding's net-effect swatch (boost / block / modulate) so
-  // the kind of interaction is visible, and clicking it opens that drug (focus +
-  // panel) via onDrugPick. Omitted entirely when no drug in the dataset acts on it.
-  const appendInteractingDrugs = (targetId) => {
-    const list = (data.drugsByTarget && data.drugsByTarget.get(targetId)) || [];
-    if (!list.length) return;
-    const wrap = el("div", "info-bindings info-interactors");
-    wrap.appendChild(el(
-      "h3", null, `${t("targets.interactingDrugs")} (${list.length})`));
-
+  // Group a {drug, binding}[] by primary drug category and append the category
+  // sub-headings + rows into `container`. Shared by the group/target's own
+  // "Interacting drugs" list and the per-subtype dropdowns below it, so the sort +
+  // row shape can never drift between the two. Sort: within a class, strongest-
+  // affinity drug first (by this target's binding Ki, Infinity when unmeasured; equal
+  // Ki tie-broken by name); classes ordered by the class's hardest binding (its min
+  // Ki), classes with no measured Ki keeping the meta / Drugs-legend order among
+  // themselves. Matches the drug panel's "Acts on" order and the target legend.
+  const appendDrugsByCategory = (list, container) => {
     const cats = data.meta.drugCategoryLabels || {};
     const byCat = new Map();
     for (const item of list) {
@@ -2378,23 +2374,14 @@ function createInfoPanel(data) {
       if (!byCat.has(cat)) byCat.set(cat, []);
       byCat.get(cat).push(item);
     }
-    // Within a class, strongest-affinity drug first (by this target's binding Ki,
-    // Infinity when unmeasured; equal Ki tie-broken by name), matching the drug
-    // panel's "Acts on" order and the target legend's affinity sort.
     for (const items of byCat.values()) {
       items.sort((a, b) => {
         const ka = bindingKi(a.binding), kb = bindingKi(b.binding);
         return ka !== kb ? ka - kb : a.drug.name.localeCompare(b.drug.name);
       });
     }
-    // Class order: the class binding this target hardest first (its strongest drug's
-    // Ki = the min binding Ki over the class). Classes with no measured Ki keep the
-    // meta / Drugs-legend order among themselves, so an unmeasured target still reads
-    // in the familiar order.
     const metaOrder = [...Object.keys(cats),
                        ...[...byCat.keys()].filter((c) => !(c in cats))];
-    // Precompute each class's min binding Ki once (decorate-then-sort), rather than
-    // recomputing it inside the comparator on every comparison.
     const classKi = new Map();
     for (const [cat, its] of byCat)
       classKi.set(cat, Math.min(...its.map((it) => bindingKi(it.binding))));
@@ -2403,17 +2390,56 @@ function createInfoPanel(data) {
       return ka !== kb ? ka - kb : metaOrder.indexOf(a) - metaOrder.indexOf(b);
     });
     for (const cat of order) {
-      const items = byCat.get(cat);
-      wrap.appendChild(el("h4", "drug-cat", cats[cat] || cat));
+      container.appendChild(el("h4", "drug-cat", cats[cat] || cat));
       const ul = el("ul");
       // Same shared row builder as the drug panel's "Acts on" list (same resolved
       // binding, seen from the target's side), so the effect glyph, action, the
       // measured Ki chip and the shared source pill all render identically here;
       // clicking a row opens that drug.
-      for (const { drug, binding } of items) {
+      for (const { drug, binding } of byCat.get(cat)) {
         ul.appendChild(bindingRow(binding, drug, drug.name, () => onDrugPick(drug)));
       }
-      wrap.appendChild(ul);
+      container.appendChild(ul);
+    }
+  };
+
+  // Shared by the receptor + target views: the drugs that act on this target, so
+  // you can go from a target to every drug touching it (grouped by category, see
+  // appendDrugsByCategory). Omitted entirely when no drug in the dataset acts on it.
+  const appendInteractingDrugs = (targetId) => {
+    const list = (data.drugsByTarget && data.drugsByTarget.get(targetId)) || [];
+    if (!list.length) return;
+    const wrap = el("div", "info-bindings info-interactors");
+    wrap.appendChild(el(
+      "h3", null, `${t("targets.interactingDrugs")} (${list.length})`));
+    appendDrugsByCategory(list, wrap);
+    body.appendChild(wrap);
+  };
+
+  // A receptor_group panel (α2 / glutamate) links to its modeled subtype receptors
+  // (target.subtypes, a sourceless taxonomy). Below the group's own interacting
+  // drugs, list each subtype that has drugs of its own in a collapsed <details>
+  // dropdown, so from the coarse α2 panel you can reach (and expand) the drugs that
+  // bind α2A/B/C/D specifically (e.g. asenapine at α2A). Subtypes with no interacting
+  // drug are skipped; the whole section is omitted when none qualify.
+  const appendSubtypeInteractors = (subtypes) => {
+    if (!Array.isArray(subtypes) || !subtypes.length) return;
+    const withDrugs = subtypes
+      .map((sid) => ({
+        sid, list: (data.drugsByTarget && data.drugsByTarget.get(sid)) || [],
+      }))
+      .filter((s) => s.list.length);
+    if (!withDrugs.length) return;
+    const wrap = el("div", "info-bindings info-interactors info-subtype-interactors");
+    wrap.appendChild(el("h3", null, t("targets.bySubtype")));
+    for (const { list } of withDrugs) {
+      // The subtype's display name comes off the resolved binding (localized), so it
+      // needs no separate receptor lookup and stays in sync with the drug panel.
+      const name = (list[0].binding && list[0].binding.targetName) || "";
+      const details = el("details", "subtype-group");
+      details.appendChild(el("summary", null, `${name} (${list.length})`));
+      appendDrugsByCategory(list, details);
+      wrap.appendChild(details);
     }
     body.appendChild(wrap);
   };
@@ -2773,6 +2799,9 @@ function createInfoPanel(data) {
 
       // Drugs that act on this target, grouped by category.
       appendInteractingDrugs(target.id);
+      // For a receptor_group (α2 / glutamate): drugs binding each modeled subtype
+      // (α2A/B/C/D, ...) in a collapsed per-subtype dropdown below the group's own.
+      appendSubtypeInteractors(target.subtypes);
     },
 
     /**

@@ -841,6 +841,12 @@
         "medulla"
       ],
       "classification_provenance": "verified",
+      "subtypes": [
+        "alpha2a",
+        "alpha2b",
+        "alpha2c",
+        "alpha2d"
+      ],
       "sign": "inhibitory",
       "synaptic": "presynaptic",
       "polarity_provenance": "llm",
@@ -918,6 +924,18 @@
         "putamen"
       ],
       "classification_provenance": "verified",
+      "subtypes": [
+        "nmda",
+        "ampa",
+        "kainate",
+        "mglur1",
+        "mglur2",
+        "mglur3",
+        "mglur4",
+        "mglur5",
+        "mglur6",
+        "mglur7"
+      ],
       "location_sources": {
         "caudate": [
           {

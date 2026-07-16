@@ -244,6 +244,14 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     # beta1..3, nachr_a4b2/a7) in drugs_data.jsonl, so each subtype carries its own
     # measured per-subtype Ki (fetch_ki, CHRM1..5 / ADRA1A.. etc.) instead of an
     # aggregate, and the drug shows up when browsing that receptor.
+    #
+    # `subtypes` links a group to its modeled subtype receptor ids: a self-evident
+    # taxonomy (α2 -> α2A/B/C/D), so it carries NO source (see CLAUDE.md "Nodes":
+    # a group->subtype link is not a sourceable claim). The viewer uses it to list,
+    # under the group panel's own interacting drugs, one collapsible dropdown per
+    # subtype that has drugs of its own, so a subtype-specific binder (asenapine at
+    # α2A) is reachable from the coarse α2 panel. Omit it for a group whose subtypes
+    # are not modeled (orexin/melanocortin have no OX1R/OX2R/MC* receptor records).
     "alpha2": {"name": {"en": "α2 adrenergic receptors",
                         "fr": "Récepteurs α2 adrénergiques"},
                "type": "receptor_group", "system": "adrenergic",
@@ -259,6 +267,7 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
                # would silently drop the drug-flow overlay for clonidine / mirtazapine
                # / yohimbine.
                "sign": "inhibitory", "synaptic": "presynaptic",
+               "subtypes": ["alpha2a", "alpha2b", "alpha2c", "alpha2d"],
                "wikipedia":
                    "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
                "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
@@ -266,6 +275,8 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     "glutamate": {"name": {"en": "Glutamate receptors",
                            "fr": "Récepteurs du glutamate"},
                   "type": "receptor_group", "system": "glutamatergic",
+                  "subtypes": ["nmda", "ampa", "kainate", "mglur1", "mglur2",
+                               "mglur3", "mglur4", "mglur5", "mglur6", "mglur7"],
                   "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
                   "regions": ["frontal", "temporal", "hippocampus", "thalamus",
                               "cerebellum", "caudate", "putamen"]},

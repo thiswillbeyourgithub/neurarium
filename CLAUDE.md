@@ -388,8 +388,11 @@ in `js/data.js`.
   name-search links (`uniprotSearchUrl`/`gtopdbSearchUrl`, no pill). Both carry an **Interacting
   drugs** section (from `drugsByTarget`, grouped by category, each row an `effectGlyph` + the
   binding's `bindingProvenancePill` = the *same* resolved binding the drug panel shows; jumps via
-  `info.onDrug`). Both make each "Found in" region clickable (`info.onStructure` -> `selectStructure`).
-  A stub receptor / unlocated target renders muted.
+  `info.onDrug`). A **receptor_group** target (α2/glutamate) additionally lists, under its own
+  Interacting drugs, one collapsed **By receptor subtype** dropdown per modeled subtype that has drugs
+  (`appendSubtypeInteractors` off `target.subtypes`, a sourceless taxonomy in `meta.drug_targets`), so
+  a subtype binder (asenapine at α2A) is reachable from the coarse panel. Both make each "Found in"
+  region clickable (`info.onStructure` -> `selectStructure`). A stub receptor / unlocated target renders muted.
 
 Receptor data: `_receptor_record` validates every family/class/sign/synaptic key + location base;
 `locations="ALL"` -> `ubiquitous`. Each of the four classification attributes is a **separate** graded

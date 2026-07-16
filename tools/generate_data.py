@@ -619,6 +619,19 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
         # depletes -> lowers tone), and `sign`/`synaptic` give a receptor_group the
         # presynaptic-autoreceptor character a specific receptor carries on its own
         # record (the α2 family). Absent for a target with no tone effect.
+        # A receptor_group's modeled subtype receptor ids (α2 -> α2A/B/C/D): a
+        # self-evident taxonomy, no source (see DRUG_TARGETS). The viewer lists each
+        # subtype's own drugs in a dropdown under the group panel. Validate every id
+        # names a real receptor so a typo can't dangle.
+        subtypes = spec.get("subtypes")
+        if subtypes:
+            receptor_ids = {r["id"] for r in receptors}
+            unknown = [s for s in subtypes if s not in receptor_ids]
+            if unknown:
+                raise SystemExit(
+                    f"DRUG_TARGETS[{tid!r}].subtypes references unknown receptor id(s): "
+                    f"{unknown}")
+            targets[tid]["subtypes"] = list(subtypes)
         has_polarity = False
         for opt in ("vesicular", "sign", "synaptic"):
             if opt in spec:

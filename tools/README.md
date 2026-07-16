@@ -247,7 +247,9 @@ there is no node-level catch-all `sources` block.
   Drugs legend order, `drug_actions` action->{label,effect}, `drug_effect_colors`,
   `drug_effect_labels`, `drug_targets` = every non-receptor target + every receptor id; a target
   with a direction-flipping `vesicular`/`sign`/`synaptic` flag also carries `polarity_provenance`
-  (+ optional `polarity_sources`), its own graded node kind `target_polarity`),
+  (+ optional `polarity_sources`), its own graded node kind `target_polarity`; a `receptor_group`
+  target also carries `subtypes` (its modeled subtype receptor ids, a sourceless taxonomy the
+  viewer lists as per-subtype drug dropdowns)),
   `target_type_labels`/`target_type_colors`, `source_corpora`, `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
 - `translations.fr.json` — the deduplicated French side table, `{english: french}` with sorted

@@ -1487,6 +1487,32 @@
       }
       .info-interactors .drug-cat:first-of-type { margin-top: 2px; }
 
+      /* A receptor_group panel (α2 / glutamate) lists, below its own interacting
+         drugs, one collapsed <details> per modeled subtype receptor that has drugs of
+         its own (js/main.js appendSubtypeInteractors), so α2A/B/C/D etc. are reachable
+         from the coarse group panel. The summary is a caret + subtype name that reads
+         like a disclosure toggle; the drug list inside reuses the .drug-cat styling. */
+      .info-subtype-interactors { margin-top: 12px; }
+      .subtype-group { margin: 2px 0; }
+      .subtype-group > summary {
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent-bright);
+        padding: 3px 0;
+        list-style: none; /* replace the default marker with our own caret below */
+        user-select: none;
+      }
+      .subtype-group > summary::-webkit-details-marker { display: none; }
+      .subtype-group > summary::before {
+        content: "\25B8"; /* right-pointing triangle, rotates when open */
+        display: inline-block;
+        margin-right: 6px;
+        color: var(--muted);
+        transition: transform 0.12s ease;
+      }
+      .subtype-group[open] > summary::before { transform: rotate(90deg); }
+
       /* Startup loading overlay (js/loading.js). Covers the canvas (its own opaque
          page-coloured background) above every panel/banner so the brain assembles
          unseen until ready, then fades out. */

@@ -736,6 +736,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       typeLabel,
       systemLabel,
       wikipedia: tgt.wikipedia || "",
+      // A receptor_group's modeled subtype receptor ids (α2 -> α2A/B/C/D), a
+      // sourceless taxonomy (meta.drug_targets[].subtypes). The panel lists each
+      // subtype's own interacting drugs in a dropdown; empty for a non-group target.
+      subtypes: tgt.subtypes || [],
       // Source grade backing this target's classification (type / system / regions),
       // shown as the panel's "Source" pill (default "llm"); `sources` carries the
       // quote-level source(s) so the pill tooltip can show the verbatim quote.
