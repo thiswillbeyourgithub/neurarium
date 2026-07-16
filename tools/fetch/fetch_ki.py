@@ -386,6 +386,24 @@ def _is_curated_ki(binding):
     return bool(binding.get("ki", {}).get("source", {}).get("curated"))
 
 
+def _ki_owned_by_pdsp(binding):
+    """True iff --apply may write/refresh this binding's ``ki``: it has no Ki yet, or
+    the Ki it has is fetch_ki's own prior (non-curated PDSP) output.
+
+    A ``wikipedia_pharm`` fallback Ki (corpus #9, written only where PDSP had none) and
+    a hand-curated Ki both belong to another tool. Annotating over them would flip the
+    source corpus to ``pdsp_ki``; the NEXT --apply's strip then deletes the (now
+    pdsp-looking) affinity-only binding, so the pass oscillates and loses data. Leaving
+    a non-owned slot alone keeps --apply an idempotent fixpoint (its documented
+    contract: it "only owns pdsp_ki Ki")."""
+    ki = binding.get("ki")
+    if not ki:
+        return True
+    if _is_curated_ki(binding):
+        return False
+    return _is_pdsp_ki(binding)
+
+
 def apply_all():
     """Write PDSP Ki into tools/data/drugs_data.jsonl for every resolvable drug: annotate
     existing bindings with a `ki`, add the median-stronger omitted targets as new
@@ -415,7 +433,7 @@ def apply_all():
             _stamp_mapping(s, mapping)
         touched = False
         for b in d["bindings"]:
-            if _is_curated_ki(b):        # deliberate hand-curation, leave it alone
+            if not _ki_owned_by_pdsp(b):   # curated or wikipedia_pharm fallback: leave alone
                 continue
             s = res["annotated"].get(b["target"])
             if s and s.get("ki_nm"):
