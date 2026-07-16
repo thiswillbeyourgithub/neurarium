@@ -68,11 +68,25 @@ Six families of checks:
    (projects out but never receives, e.g. the modeled ascending source nuclei).
    An eyeball list for the author, not a gate.
 
+7. **Measured-affinity (Ki) coverage**. Warns (never errors) per drug that carries
+   bindings but no measured PDSP Ki on any of them, and re-confirms the shipped
+   ``meta.provenance_stats.ki_coverage`` figure against a recompute. The honest
+   complement to "% sourced": where a measured affinity was never looked up.
+
+8. **Drug flow vs. binding consistency**. Warns (never errors) where a drug's
+   by-mechanism flow overlay and its own receptor bindings tell opposite stories:
+   the modeled flow raises a system's tone while the drug's postsynaptic receptors
+   on that system net-block (or the reverse), and where it boosts a system's flow
+   *into* a region whose receptors it strongly blocks. Ports the viewer's flow
+   model so it reasons about the same numbers; an eyeball list (most flags are the
+   intended presynaptic-tone vs. postsynaptic-block split), not a gate.
+
 Built with the help of Claude Code.
 """
 
 import csv
 import json
+import math
 import re
 import sys
 import unicodedata
@@ -1126,6 +1140,187 @@ def check_ki_coverage(report, meta, drugs):
               f"{len(no_ki)}/{len(ki_drugs)} drugs have none")
 
 
+def _base_id(structure_id):
+    """Drop a trailing ``_R`` / ``_L`` so a mirrored endpoint compares against a
+    base region name (a receptor ``location`` / target ``region`` is a base)."""
+    return _HEMISPHERE_RE.sub("", structure_id) if structure_id else structure_id
+
+
+def _affinity_weight(ki):
+    """Ki (nM) -> a 0.35..1 engagement weight, a faithful port of js/data.js
+    ``affinityWeightOf`` (a pKi ramp, 1 uM..0.1 nM -> 0.35..1). A binding with no
+    measured Ki gets the same neutral mid weight the viewer uses, so the check
+    reasons about the exact numbers the flow overlay animates."""
+    median = ki.get("median") if isinstance(ki, dict) else None
+    if not (isinstance(median, (int, float)) and median > 0):
+        return 0.55
+    pki = 9 - math.log10(median)
+    t = max(0.0, min(1.0, (pki - 6) / 4))
+    return 0.35 + 0.65 * t
+
+
+def _tone_of(target, action, rec_meta):
+    """Signed tone contribution of one binding + the *label* of the mechanism that
+    set it, a port of js/data.js ``toneSignOf``: ``(+1|-1|0, driver|None)``. +1 raises
+    the transmitter's tone, -1 lowers it, 0 = not a tone-setter (a postsynaptic
+    receptor -> dots only, never flow). The label lets the check say *why* a system's
+    flow points the way it does (a reuptake block vs. an autoreceptor block).
+
+    Kept in sync with js/data.js by hand: both are the one tone-setter/autoreceptor
+    model, so a divergence here is a bug in one of the two."""
+    ttype = target.get("type", "")
+    if ttype == "transporter":
+        if target.get("vesicular"):
+            return ((-1, "vesicular depletion")
+                    if action in ("vesicular_inhibitor", "blocker") else (0, None))
+        return ((1, "reuptake block / release")
+                if action in ("reuptake_inhibitor", "releaser") else (0, None))
+    if ttype == "enzyme":
+        return (1, "enzyme inhibition") if action == "enzyme_inhibitor" else (0, None)
+    if ttype == "vesicle_protein":
+        return (-1, "vesicle-protein block") if action == "blocker" else (0, None)
+    if ttype in ("receptor", "receptor_group"):
+        # sign/synaptic from the specific receptor record (a modeled 5-HT1x / D2/D3),
+        # else the group's own flag (the alpha2 family, in meta.drug_targets).
+        rm = rec_meta.get(target.get("receptor")) if target.get("receptor") else target
+        presyn = bool(rm) and rm.get("synaptic") in ("presynaptic", "both")
+        if presyn and rm.get("sign") == "inhibitory":
+            if action in ("agonist", "partial_agonist"):
+                return (-1, "autoreceptor agonism")
+            if action in ("antagonist", "inverse_agonist"):
+                return (1, "autoreceptor block")
+    return (0, None)
+
+
+def _target_regions(target, rec_meta):
+    """Base regions where a drug target is expressed: a receptor-linked target
+    reuses its receptor's ``locations``, a bare DRUG_TARGETS entry its ``regions``."""
+    rid = target.get("receptor")
+    if rid and rid in rec_meta:
+        return set(rec_meta[rid].get("locations", []))
+    return set(target.get("regions", []))
+
+
+def check_flow_consistency(report, meta, drugs, projections, receptors):
+    """Cross-check each drug's by-mechanism flow overlay against its own receptor
+    bindings, as an **informational** eyeball list (warnings, never errors, like the
+    connectivity family): where the modeled flow direction and the drug's receptor
+    actions tell opposite stories, so a human can confirm the picture is intended.
+
+    Two views (the user asked for both), each collapsed to one line per drug+system:
+
+    * **system-level** (8a): the flow overlay drives a transmitter's tone one way
+      while the drug's *postsynaptic* receptor bindings on that same system net the
+      other way (e.g. an SSRI raising serotonergic tone via SERT while antagonising
+      5-HT2 postsynaptically). The driver tag says which mechanism set the flow.
+    * **region-level** (8b): the drug boosts a system's ascending flow *into* a
+      region while strongly blocking that system's receptors expressed *there*, so
+      the streamed beads overstate the downstream effect (the user's own example).
+
+    Most flags are the **intended** presynaptic-tone-vs-postsynaptic-block split, the
+    documented autoreceptor caveat (a D2-antagonist antipsychotic reads dopamine-up
+    because it blocks the D2 autoreceptor, while its postsynaptic blockade shows in
+    the block-coloured dots). This is a review aid, not a gate: it cannot tell an
+    intended dual action from a mis-entered ``action``, only surface the mismatch.
+    The flow model (``_affinity_weight`` / ``_tone_of``) is the same one js/data.js
+    animates, ported here so the check reasons about the very numbers the user sees."""
+    report.header("8. Drug flow vs. binding consistency")
+    drug_targets = meta.get("drug_targets", {})
+    drug_actions = meta.get("drug_actions", {})
+    system_flow_kinds = meta.get("system_flow_kinds", {})
+    rec_meta = {r.get("id"): r for r in receptors}
+    effect_sign = {"boost": 1, "block": -1, "modulate": 0}
+
+    # Base target-regions per projection kind: where increased flow of a kind would
+    # arrive, so its postsynaptic receptors are the ones the region-level check cares
+    # about. (Projections are already mirror-expanded by the caller.)
+    arrives_in = defaultdict(set)
+    for proj in projections:
+        kind, dst = proj.get("kind"), _base_id(proj.get("to"))
+        if kind and dst:
+            arrives_in[kind].add(dst)
+
+    STRONG = 0.6   # per-binding engagement weight that counts as a "strong" block
+    NET = 0.4      # net postsynaptic magnitude that counts as a real opposite lean
+    is_combo = lambda d: bool(re.search(r"[+–—]", d.get("name", "")))
+
+    a_flags, b_flags = [], []
+    for drug in drugs:
+        if is_combo(drug):
+            continue  # a combo "A + B" has no unified flow (handled in the viewer)
+        tone = defaultdict(float)          # system -> summed toneSign * affinity
+        tone_drivers = defaultdict(list)   # system -> [(sign, driver_label)]
+        postsyn = defaultdict(float)       # system -> summed effectSign * affinity
+        postsyn_targets = defaultdict(set)  # system -> {receptor ids with an effect}
+        strong_blocks = []                 # (system, target_id, base-region set)
+        for b in drug.get("bindings", []):
+            if b.get("affinity_only"):
+                continue  # measured affinity, no direction -> never animates
+            target = drug_targets.get(b.get("target"), {})
+            system = target.get("system")
+            if not system:
+                continue
+            action = b.get("action")
+            aff = _affinity_weight(b.get("ki"))
+            sign, driver = _tone_of(target, action, rec_meta)
+            if sign:
+                tone[system] += sign * aff
+                tone_drivers[system].append((sign, driver))
+                continue
+            effect = drug_actions.get(action, {}).get("effect")
+            es = effect_sign.get(effect, 0)
+            if es:
+                postsyn[system] += es * aff
+                postsyn_targets[system].add(b["target"])
+            if (effect == "block" and aff >= STRONG
+                    and target.get("type") in ("receptor", "receptor_group")):
+                strong_blocks.append(
+                    (system, b["target"], _target_regions(target, rec_meta)))
+
+        # 8a: flow direction opposes the net postsynaptic lean on the same system.
+        for system, tsum in tone.items():
+            if system not in system_flow_kinds or abs(tsum) < 1e-9:
+                continue
+            flow_dir = 1 if tsum > 0 else -1
+            pnet = postsyn.get(system, 0.0)
+            if (flow_dir > 0 and pnet <= -NET) or (flow_dir < 0 and pnet >= NET):
+                drivers = sorted({drv for sgn, drv in tone_drivers[system]
+                                  if sgn == flow_dir and drv})
+                a_flags.append((
+                    drug["id"], system, "up" if flow_dir > 0 else "down",
+                    "; ".join(drivers) or "?",
+                    "block" if pnet < 0 else "boost",
+                    sorted(postsyn_targets[system])))
+
+        # 8b: boosts a system's flow into regions whose receptors it strongly blocks.
+        up_systems = {s for s, v in tone.items()
+                      if s in system_flow_kinds and v > 0}
+        by_system = defaultdict(lambda: (set(), set()))  # system -> (recs, regions)
+        for system, tid, regions in strong_blocks:
+            if system not in up_systems:
+                continue
+            hit = regions & arrives_in.get(system_flow_kinds[system], set())
+            if hit:
+                recs, regs = by_system[system]
+                recs.add(tid)
+                regs |= hit
+        for system, (recs, regs) in by_system.items():
+            b_flags.append((drug["id"], system, sorted(recs), sorted(regs)))
+
+    for did, system, direction, drivers, lean, blocked in sorted(a_flags):
+        report.warn(
+            f"drug {did!r}: {system} flow modeled {direction} ({drivers}) but its "
+            f"postsynaptic {system} bindings net-{lean} ({', '.join(blocked)})")
+    for did, system, recs, regs in sorted(b_flags):
+        report.warn(
+            f"drug {did!r}: boosts {system} flow into {', '.join(regs)} yet blocks "
+            f"{system} receptor(s) expressed there ({', '.join(recs)})")
+    report.ok(
+        f"{len(a_flags)} flow/postsynaptic + {len(b_flags)} flow-into-blocked-region "
+        f"mismatches flagged (mostly the intended presynaptic-tone vs. postsynaptic-"
+        f"block split; review, not a gate)")
+
+
 def main():
     report = Report()
     print(f"neurarium data integrity check\nreading {DATA_DIR}")
@@ -1156,6 +1351,7 @@ def main():
     check_sources(report, meta, drugs, projections, structures, receptors)
     check_connectivity(report, structures, projections)
     check_ki_coverage(report, meta, drugs)
+    check_flow_consistency(report, meta, drugs, projections, receptors)
 
     print(f"\nSummary: {report.errors} error(s), {report.warnings} warning(s)")
     if report.errors:
