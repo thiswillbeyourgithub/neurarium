@@ -86,10 +86,11 @@ class GoldenTest(unittest.TestCase):
 
 
 class ReceptorTest(unittest.TestCase):
-    # Pinned regression guard (verified against the real data 2026-07).
+    # Pinned regression guard (re-verified against the real data 2026-07-16, after
+    # the obsolete alpha1c stub was removed: adrenergic 11 -> 10, total 63 -> 62).
     EXPECTED_FAMILIES = {
         "serotonergic": 13,
-        "adrenergic": 11,
+        "adrenergic": 10,
         "glutamatergic": 10,
         "cholinergic": 8,
         "dopaminergic": 5,
@@ -108,16 +109,16 @@ class ReceptorTest(unittest.TestCase):
         cls.receptors = _load_jsonl(DATA_DIR / "receptors.jsonl")
 
     def test_count_and_unique_ids(self):
-        self.assertEqual(len(self.receptors), 63)
+        self.assertEqual(len(self.receptors), 62)
         ids = [r["id"] for r in self.receptors]
-        self.assertEqual(len(set(ids)), 63, "receptor ids are not unique")
+        self.assertEqual(len(set(ids)), 62, "receptor ids are not unique")
 
     def test_family_distribution(self):
         counts = {}
         for r in self.receptors:
             counts[r["family"]] = counts.get(r["family"], 0) + 1
         self.assertEqual(counts, self.EXPECTED_FAMILIES)
-        self.assertEqual(sum(counts.values()), 63)
+        self.assertEqual(sum(counts.values()), 62)
 
 
 class ReferentialIntegrityTest(unittest.TestCase):
