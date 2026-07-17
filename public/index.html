@@ -624,6 +624,85 @@
         border-radius: 6px;
       }
 
+      /* Guided tour ("Take a tour"): the coach-mark overlay driven by js/tour.js.
+         A dimmed page with a cut-out ring around the highlighted control (or an
+         un-dimmed caption over a live brain demo) plus a Back/Next/Skip bubble.
+         Sits above every panel (5), banner (50) and modal (60/80). */
+      #tour-root { position: fixed; inset: 0; z-index: 95; pointer-events: none; }
+      #tour-root[hidden] { display: none; }
+      /* Full-screen click-eater: transparent under a spotlight (the ring's own
+         box-shadow does the dimming), a visible dim for a no-target modal step. */
+      .tour-blocker { position: absolute; inset: 0; pointer-events: auto; background: transparent; }
+      .tour-blocker[hidden] { display: none; }
+      .tour-blocker.modal { background: rgba(0, 0, 0, 0.55); }
+      /* The spotlight cut-out: a transparent rounded rect whose huge box-shadow
+         dims everything around it, ringed in accent so the target reads clearly. */
+      .tour-ring {
+        position: absolute;
+        border-radius: 10px;
+        pointer-events: none;
+        box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+        outline: 2px solid var(--accent-bright);
+        outline-offset: 1px;
+        transition: left 0.2s ease, top 0.2s ease, width 0.2s ease, height 0.2s ease;
+      }
+      .tour-ring[hidden] { display: none; }
+      .tour-bubble {
+        position: absolute;
+        pointer-events: auto;
+        width: min(320px, calc(100vw - 24px));
+        padding: 14px 16px 12px;
+        color: var(--text);
+        background: var(--panel-bg);
+        border: 1px solid var(--accent-soft);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(8px);
+        transition: left 0.2s ease, top 0.2s ease;
+      }
+      .tour-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+      .tour-body { font-size: 13px; line-height: 1.5; color: var(--muted); }
+      .tour-body b, .tour-body strong { color: var(--text); }
+      .tour-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
+      .tour-step { font-size: 11px; color: var(--muted); letter-spacing: 0.03em; flex: 0 0 auto; }
+      .tour-actions { display: flex; gap: 6px; }
+      .tour-btn {
+        padding: 5px 12px;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 7px;
+        cursor: pointer;
+      }
+      .tour-btn:hover { background: rgba(255, 255, 255, 0.12); }
+      .tour-btn:disabled { opacity: 0.4; cursor: default; }
+      .tour-next { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .tour-next:hover { background: var(--accent-bright); border-color: var(--accent-bright); }
+      .tour-skip { background: none; border-color: transparent; color: var(--muted); font-weight: 500; }
+      .tour-skip:hover { background: rgba(255, 255, 255, 0.08); color: var(--text); }
+      @media (prefers-reduced-motion: reduce) {
+        .tour-ring, .tour-bubble { transition: none; }
+      }
+      /* "Take a tour" button in the #about-modal (replays the guided tour). */
+      .about-tour-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .about-tour-btn:hover { background: var(--accent-bright); border-color: var(--accent-bright); }
+
       /* Language switch: a small EN/FR segmented control at the top of the panel
          body. The active language is highlighted (blue, like .tool-btn.active). */
       .lang-switch { display: flex; gap: 4px; margin: 0 0 6px; }
@@ -1992,6 +2071,11 @@
         <!-- What the drug animation shows (the tone-setter flow model), so a
              visitor isn't left guessing what the beads mean. -->
         <p class="about-text" data-i18n-html="about.animationModel"></p>
+        <!-- Replay the guided tour (js/tour.js). Auto-runs once on a first visit;
+             this button re-runs it. Wired in js/main.js (closes this popup first). -->
+        <p class="about-text">
+          <button type="button" id="about-tour" class="about-tour-btn" data-i18n="tour.start"></button>
+        </p>
         <!-- Data access: the whole dataset is plain JSONL/JSON served same-origin
              under /data/, free to reuse. A collapsed dropdown links each file
              directly (relative to this site, so it always resolves and downloads

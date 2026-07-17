@@ -200,6 +200,12 @@ Viewer (`public/`):
   adaptive). See Settings & toggles + Rendering (adaptive quality).
 - `js/wiki.js` — `fetchWikiLead(url, lang)` runtime fetch of a Wikipedia lead; locale wins via
   langlinks, English fallback; cached; best-effort (failure -> null).
+- `js/tour.js`: `createTour({steps, labels, onEnd, seenKey})`, a generic, three.js-free coach-mark
+  engine (spotlight ring / caption bubble, Back/Next/Skip, Esc/arrow keys, resize reposition,
+  localStorage "seen" gate). The app-specific step list is built in `js/main.js`; each step's
+  `before()` drives the real viewer live (spread, focus a circuit/receptor/drug, open a section).
+  Auto-runs once on a first visit (after the intro settles and the Sources gate closes); replayed
+  from the About popup's "Take a tour" button (`#about-tour`).
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,
   auto-rotate, hover/pick raycasting; `createInfoPanel`; search; the legend builders
   (`buildLegend`/`buildLegendKey`/`buildTargetLegend`/`buildDrugLegend`); the on-demand render loop.

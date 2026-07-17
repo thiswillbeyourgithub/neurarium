@@ -95,6 +95,44 @@
       "shortcuts.tabs": "Switch between tabs",
       "shortcuts.close": "Close search / collapse sections",
 
+      "tour.start": "Take a tour",
+      "tour.next": "Next",
+      "tour.back": "Back",
+      "tour.done": "Done",
+      "tour.skip": "Skip",
+      "tour.step": "{n} of {total}",
+      "tour.aria": "Guided tour",
+      "tour.welcome.title": "Welcome to neurarium",
+      "tour.welcome.body":
+        "A 3D map of the brain: its regions, the pathways between them, and the receptors and drugs that act on them. This quick tour shows the main features. You can leave any time.",
+      "tour.rotate.title": "Move around",
+      "tour.rotate.body":
+        "<b>Drag</b> to rotate the brain, <b>scroll</b> or pinch to zoom, and drag with two fingers (or right-click) to pan. Every shape is a real brain structure.",
+      "tour.separate.title": "Pull it apart",
+      "tour.separate.body":
+        "The <b>Separate</b> slider blows the brain open along the way out, exposing the deep nuclei that are otherwise buried under the cortex.",
+      "tour.browse.title": "Browse the data",
+      "tour.browse.body":
+        "Four lists let you explore everything: <b>Structures</b>, <b>Projections &amp; Circuits</b>, <b>Receptors &amp; targets</b> and <b>Drugs</b>. Open one and click any row to focus it. Let's look at a few.",
+      "tour.circuit.title": "Circuits come alive",
+      "tour.circuit.body":
+        "Focusing a <b>circuit</b> dims the brain and plays the signal traveling along its pathways, in firing order. This is the hippocampal / limbic (Papez) memory loop.",
+      "tour.receptor.title": "Where receptors live",
+      "tour.receptor.body":
+        "Focusing a <b>receptor</b> lights up the regions where it is expressed with glowing gem dots. This is 5-HT2A, a serotonin receptor.",
+      "tour.drug.title": "What a drug does",
+      "tour.drug.body":
+        "Focusing a <b>drug</b> colours the brain by its effects (boost / block / modulate) and streams a by-mechanism flow overlay. This is fluoxetine, an SSRI raising serotonin tone.",
+      "tour.search.title": "Find anything",
+      "tour.search.body":
+        "<b>Search</b> jumps straight to any region, pathway, receptor or drug by name. You can also filter drugs by class or nomenclature.",
+      "tour.sources.title": "Every fact is sourced",
+      "tour.sources.body":
+        "This dataset is LLM-assisted, so each fact carries a provenance grade. <b>Sources &amp; provenance</b> shows how much is verified, sourced or still unchecked.",
+      "tour.wrap.title": "You're set",
+      "tour.wrap.body":
+        "That's the tour. Settings, the EN/FR switch and this tour all live in the panel; you can replay the tour any time from <b>About</b>. Enjoy exploring.",
+
       "legend.showNames": "Show all names",
       "legend.showProjections": "Show projections",
       "legend.projections": "Projections",
@@ -385,6 +423,44 @@
       "shortcuts.search": "Ouvrir la recherche",
       "shortcuts.tabs": "Naviguer entre les onglets",
       "shortcuts.close": "Fermer la recherche / replier les sections",
+
+      "tour.start": "Visite guidée",
+      "tour.next": "Suivant",
+      "tour.back": "Précédent",
+      "tour.done": "Terminer",
+      "tour.skip": "Passer",
+      "tour.step": "{n} sur {total}",
+      "tour.aria": "Visite guidée",
+      "tour.welcome.title": "Bienvenue sur neurarium",
+      "tour.welcome.body":
+        "Une carte 3D du cerveau : ses régions, les voies qui les relient, et les récepteurs et médicaments qui agissent dessus. Cette courte visite présente les principales fonctionnalités. Vous pouvez la quitter à tout moment.",
+      "tour.rotate.title": "Se déplacer",
+      "tour.rotate.body":
+        "<b>Faites glisser</b> pour tourner le cerveau, <b>défilez</b> ou pincez pour zoomer, et déplacez à deux doigts (ou clic droit) pour vous déplacer. Chaque forme est une structure cérébrale réelle.",
+      "tour.separate.title": "Écarter les régions",
+      "tour.separate.body":
+        "Le curseur <b>Séparer</b> ouvre le cerveau vers l'extérieur, révélant les noyaux profonds autrement enfouis sous le cortex.",
+      "tour.browse.title": "Parcourir les données",
+      "tour.browse.body":
+        "Quatre listes permettent de tout explorer : <b>Structures</b>, <b>Projections et circuits</b>, <b>Récepteurs et cibles</b> et <b>Médicaments</b>. Ouvrez-en une et cliquez sur une ligne pour la mettre en avant. Voyons-en quelques-unes.",
+      "tour.circuit.title": "Les circuits s'animent",
+      "tour.circuit.body":
+        "Mettre en avant un <b>circuit</b> assombrit le cerveau et anime le signal qui parcourt ses voies, dans l'ordre d'activation. Voici la boucle mnésique hippocampique / limbique (de Papez).",
+      "tour.receptor.title": "Où vivent les récepteurs",
+      "tour.receptor.body":
+        "Mettre en avant un <b>récepteur</b> illumine les régions où il est exprimé avec des points scintillants. Voici le 5-HT2A, un récepteur de la sérotonine.",
+      "tour.drug.title": "Ce que fait un médicament",
+      "tour.drug.body":
+        "Mettre en avant un <b>médicament</b> colore le cerveau selon ses effets (stimuler / bloquer / moduler) et diffuse une animation de flux par mécanisme. Voici la fluoxétine, un ISRS qui augmente le tonus sérotoninergique.",
+      "tour.search.title": "Tout retrouver",
+      "tour.search.body":
+        "La <b>recherche</b> mène directement à n'importe quelle région, voie, récepteur ou médicament par son nom. Vous pouvez aussi filtrer les médicaments par classe ou nomenclature.",
+      "tour.sources.title": "Chaque fait est sourcé",
+      "tour.sources.body":
+        "Ce jeu de données est assisté par IA : chaque fait porte donc une note de provenance. <b>Sources et provenance</b> montre la part vérifiée, sourcée ou encore non contrôlée.",
+      "tour.wrap.title": "Vous êtes prêt",
+      "tour.wrap.body":
+        "Voilà pour la visite. Les réglages, le sélecteur EN/FR et cette visite se trouvent dans le panneau ; vous pouvez relancer la visite à tout moment depuis <b>À propos</b>. Bonne exploration.",
 
       "legend.showNames": "Afficher tous les noms",
       "legend.showProjections": "Afficher les projections",

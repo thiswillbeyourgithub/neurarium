@@ -24,6 +24,7 @@ import { createReceptorMarkers } from "./receptor-markers.js";
 import { createDrugAnimation } from "./drug-anim.js";
 import { animSettings } from "./anim-settings.js";
 import { fetchWikiLead } from "./wiki.js";
+import { createTour } from "./tour.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -438,7 +439,7 @@ function createAdaptiveQuality({ renderer, baseDpr }) {
  *   camera:THREE.PerspectiveCamera, controls:OrbitControls,
  *   focus:ReturnType<typeof createCameraFocus>}} deps
  */
-function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus }) {
+function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus, onDone }) {
   const FROM = 1; // fully blown out (slider max)
   const TO = 0; // assembled whole
   const SWEEP = INTRO_ROTATION_TURNS * Math.PI * 2; // radians to sweep in
@@ -463,9 +464,13 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus 
 
   // We drive the rotation ourselves during the intro, so OrbitControls' own
   // auto-rotate must be off until we hand back at the end (or on cancel).
-  const finish = () => {
+  // `completed` distinguishes a natural finish (the assemble ran to the end)
+  // from a cancel (slider grab / deep link): only the former fires onDone, so a
+  // follow-on like the guided tour never auto-starts over a user's own action.
+  const finish = (completed) => {
     running = false;
     controls.autoRotate = wasAutoRotate;
+    if (completed && onDone) onDone();
   };
 
   return {
@@ -483,7 +488,7 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus 
       applyAmount(FROM);
     },
     cancel() {
-      if (running) finish();
+      if (running) finish(false);
     },
     tick() {
       if (!running) return false;
@@ -504,7 +509,7 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus 
       sph.makeSafe();
       tmpOffset.setFromSpherical(sph);
       camera.position.copy(controls.target).add(tmpOffset);
-      if (t >= 1) finish();
+      if (t >= 1) finish(true);
       return true; // animating (incl. the finishing frame), so keep rendering
     },
   };
@@ -5761,12 +5766,117 @@ async function main() {
     `Loaded ${meshes.length} structures and ${arrows.length} projections.`,
   );
 
+  // ---- Guided tour ("Take a tour") ----------------------------------------------
+  // A coach-mark walkthrough (js/tour.js) that shows the main features live: each
+  // step's before() drives the real viewer (spread the brain, focus a circuit /
+  // receptor / drug, open a section) rather than showing a static picture. It
+  // auto-runs ONCE on a first visit (fired from the intro's onDone below, so it
+  // starts only after the assemble settles) and is replayable from the About popup.
+  const tourEl = (id) => document.getElementById(id);
+  // Expand the controls panel + show the Settings pane (a focus demo swaps the
+  // pane out for the Details view, so a later control-spotlight step needs it back).
+  const tourEnsurePanel = () => {
+    const body = tourEl("controls-body");
+    if (body && body.hidden) {
+      tourEl("controls-toggle")?.setAttribute("aria-expanded", "true");
+      body.hidden = false;
+    }
+    const cs = tourEl("controls-settings-body");
+    if (cs && cs.hidden) tourEl("controls-settings-toggle")?.click();
+    tabs.showSettings();
+  };
+  const tourOpenSection = (name) => {
+    tourEnsurePanel();
+    const body = tourEl(`${name}-body`);
+    if (body && body.hidden) tourEl(`${name}-toggle`)?.click();
+  };
+  // Clear any focus / isolate / tab a previous demo left, so each live demo starts
+  // from a clean scene (idempotent: steps re-run when the user goes Back too).
+  const tourReset = () => { tabs.closeAll(); selection.clear(); };
+  // Sample nodes the demos focus (guarded: a missing id just skips that demo).
+  const tourCircuit = data.circuits.find((c) => c.id === "limbic_memory");
+  const tourReceptor = data.targets.find((tg) => tg.id === "5ht2a");
+  const tourDrug = data.drugs.find((d) => d.id === "fluoxetine");
+  const tourSteps = [
+    { title: t("tour.welcome.title"), body: t("tour.welcome.body"),
+      dim: true, placement: "center" },
+    { title: t("tour.rotate.title"), body: t("tour.rotate.body"),
+      dim: false, placement: "top", before: tourReset },
+    { title: t("tour.separate.title"), body: t("tour.separate.body"),
+      target: "#explode",
+      before: () => { tourEnsurePanel(); autoSpread.spreadTo(0.55); } },
+    { title: t("tour.browse.title"), body: t("tour.browse.body"),
+      target: "#structures-toggle", before: () => tourOpenSection("structures") },
+    { title: t("tour.circuit.title"), body: t("tour.circuit.body"),
+      dim: false, placement: "top",
+      before: () => { tourReset(); if (tourCircuit) focusCircuit(tourCircuit, { frame: true }); } },
+    { title: t("tour.receptor.title"), body: t("tour.receptor.body"),
+      dim: false, placement: "top",
+      before: () => { tourReset(); if (tourReceptor) focusTarget(tourReceptor, { frame: true }); } },
+    { title: t("tour.drug.title"), body: t("tour.drug.body"),
+      dim: false, placement: "top",
+      before: () => { tourReset(); if (tourDrug) focusDrug(tourDrug, { frame: true }); } },
+    { title: t("tour.search.title"), body: t("tour.search.body"),
+      target: "#search-toggle", before: tourEnsurePanel },
+    { title: t("tour.sources.title"), body: t("tour.sources.body"),
+      target: "#sourcing-toggle", before: tourEnsurePanel },
+    { title: t("tour.wrap.title"), body: t("tour.wrap.body"),
+      target: "#about-toggle", before: tourEnsurePanel },
+  ];
+  const tour = createTour({
+    steps: tourSteps,
+    labels: {
+      next: t("tour.next"), back: t("tour.back"), done: t("tour.done"),
+      skip: t("tour.skip"), aria: t("tour.aria"),
+      step: (n, total) => t("tour.step", { n, total }),
+    },
+    seenKey: "neurarium:tourSeen",
+    // Restore a clean default view once the tour ends (completed or skipped).
+    onEnd: () => {
+      tourReset();
+      const sl = tourEl("explode");
+      if (sl) { sl.value = "0"; applyExplode(meshes, 0, arrows); }
+      focus.recenter();
+    },
+  });
+  // Auto-start only on a genuinely fresh view: not a screenshot / deep-link mode,
+  // and nothing already focused (a hash deep link, or a click during the intro).
+  const tourEligible = () => {
+    const p = new URLSearchParams(window.location.search);
+    return p.get("ui") !== "0" && !p.has("explode")
+      && !tabs.activeKey() && !selection.getSelected();
+  };
+  // Replay from the About popup (close it first so the tour isn't behind it).
+  tourEl("about-tour")?.addEventListener("click", () => {
+    aboutModal.close();
+    tour.start();
+  });
+  // Auto-start is gated on TWO things being out of the way, whichever is last:
+  // the assemble intro having settled, and the startup Sources gate being closed
+  // (it opens over the loading brain; the tour must not stack on top of it). The
+  // observer catches the case where the intro finishes while the gate is still open.
+  let tourIntroSettled = false;
+  const tourGateEl = tourEl("sourcing-modal");
+  const tourGateOpen = () => tourGateEl && !tourGateEl.hidden;
+  const tryAutoTour = () => {
+    if (tourIntroSettled && !tourGateOpen()) tour.maybeAutoStart(tourEligible());
+  };
+  if (tourGateEl) {
+    new MutationObserver(tryAutoTour)
+      .observe(tourGateEl, { attributes: true, attributeFilter: ["hidden"] });
+  }
+
   // Auto-play the "assemble" intro on a plain load. Grabbing the explode slider
   // cancels it so a manual drag wins. Skipped when ?explode= is pinned (deep
   // links / headless screenshots) so the requested static amount is honored.
   const explodeSlider = document.getElementById("explode");
   const intro = createIntroAnimation(
-    { meshes, arrows, slider: explodeSlider, camera, controls, focus });
+    { meshes, arrows, slider: explodeSlider, camera, controls, focus,
+      // Once the assemble settles, offer the tour (once per visitor, and only
+      // after the Sources gate closes: see tryAutoTour). onDone fires only on a
+      // natural finish, never on a cancel, so a deep-link / manual drag never
+      // triggers it.
+      onDone: () => { tourIntroSettled = true; tryAutoTour(); } });
   explodeSlider.addEventListener("input", () => intro.cancel());
   if (!new URLSearchParams(window.location.search).has("explode")) {
     // Seat the resting pose on the exact framing the reset button produces, so a
@@ -5785,8 +5895,14 @@ async function main() {
     }
     // The assemble intro is a decorative animation, so honor the Animations toggle:
     // when off, present the brain already whole (explode 0) instead of playing it in.
-    if (animSettings.enabled) intro.start();
-    else applyExplode(meshes, 0, arrows);
+    if (animSettings.enabled) {
+      intro.start();
+    } else {
+      applyExplode(meshes, 0, arrows);
+      // No assemble intro to finish (so onDone never fires); mark it settled after
+      // a short beat and let tryAutoTour honor the same Sources-gate condition.
+      setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
+    }
   }
 
   // ---- Deep links (URL hash <-> focus) ------------------------------------------
