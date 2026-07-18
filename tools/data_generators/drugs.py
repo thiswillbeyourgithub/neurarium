@@ -72,6 +72,14 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     # anticholinergic agent") is respected. A drug may list both (doxylamine).
     "antihistamine": {"en": "Antihistamine", "fr": "Antihistaminique"},
     "anticholinergic": {"en": "Anticholinergic", "fr": "Anticholinergique"},
+    # Adrenergic blockers repurposed in psychiatry (prazosin for PTSD nightmares,
+    # propranolol for performance anxiety / akathisia) + the H3 antagonist wake
+    # promoter (pitolisant): each carried a distinct Stahl class line collapsed to
+    # "other". Kept as their own classes so that source line is respected.
+    "alpha_blocker": {"en": "Alpha blocker", "fr": "Alpha-bloquant"},
+    "beta_blocker": {"en": "Beta blocker", "fr": "Bêta-bloquant"},
+    "h3_antagonist": {"en": "H3 antagonist (wake-promoter)",
+                      "fr": "Antagoniste H3 (éveillant)"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 

@@ -95,6 +95,9 @@
     "recreational": "Recreational / psychoactive",
     "antihistamine": "Antihistamine",
     "anticholinergic": "Anticholinergic",
+    "alpha_blocker": "Alpha blocker",
+    "beta_blocker": "Beta blocker",
+    "h3_antagonist": "H3 antagonist (wake-promoter)",
     "other": "Other"
   },
   "drug_targets": {
