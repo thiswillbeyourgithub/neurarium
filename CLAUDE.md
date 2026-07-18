@@ -206,10 +206,12 @@ Viewer (`public/`):
   A step is passive (ring + Next) or **`interactive`** (the blocker gets a clip-path click-through
   hole so the user's real tap reaches the highlighted control); an interactive step advances on that
   tap, or with **`stayAfterTap`** stays put and steps its spotlight aside so the live demo it fired is
-  watchable. The app-specific step list is built in `js/main.js`; the data demos are hands-on (open a
-  list, tap the highlighted circuit/receptor/drug row via its `data-tour-id`), each step's `before()`
-  setting the scene (spread, open/collapse a section, reset a prior demo). Auto-runs once on a first
-  visit (after the intro settles and the Sources gate closes), forced every load with `?tour=1`, and
+  watchable. A step's `target` may be one element or an **array** (a group highlight: the ring spans
+  their union, e.g. the four browse sections). Steps glide between positions (snap only on the first
+  step + during an active scroll). The app-specific step list is built in `js/main.js`; the data demos
+  are hands-on (open a list, tap the highlighted circuit/receptor/drug row via its `data-tour-id`),
+  each step's `before()` setting the scene (spread, open/collapse a section, reset a prior demo).
+  Auto-runs once on a first visit (after the intro settles), forced every load with `?tour=1`, and
   replayed from the About popup's "Take a tour" button (`#about-tour`).
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,
   auto-rotate, hover/pick raycasting; `createInfoPanel`; search; the legend builders
@@ -274,7 +276,7 @@ material location).
 
 ## Loading overlay
 
-> Moved to [`docs/BANNERS.md`](docs/BANNERS.md) to keep this file terse: startup `#loading` progress overlay (`js/loading.js`) + the startup Sources-and-provenance gate.
+> Moved to [`docs/BANNERS.md`](docs/BANNERS.md) to keep this file terse: startup `#loading` progress overlay (`js/loading.js`) + its `.loading-tagline` tease. The Sources popup is NOT shown on launch (it opens on demand only).
 
 ## Controls
 

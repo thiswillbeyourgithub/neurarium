@@ -26,12 +26,12 @@ then detach) and `fail()` (detach at once so an error banner takes over). `js/ma
 drives it: the data fetch fills the first half (`loadBrainData`'s `onProgress` fires per
 shape file), SDF meshing the back half (`sdf-pool` `meshAll`'s per-item `onItem`,
 captioned with each region's name), then `done()` fades it out as the assemble intro
-begins. i18n keys `loading.*`.
+begins. Under the bar a static one-line tease (`.loading-tagline`, i18n `loading.tagline`)
+pitches the sourcing angle while the data loads. i18n keys `loading.*`.
 
-**Startup sourcing gate.** Immediately (before the data load), `main()` shows the
-**Sources & provenance** popup (`#sourcing-modal`) over the still-visible `#loading`
-overlay (it sits above via a higher `z-index`, 80 > `#loading`'s 70), so a visitor reads
-how the data is sourced while it loads and closes it to reach the app (still loading
-behind it, or already up). Skipped for the `?ui=0` clean-shot mode. Its static intro +
-grade key render at once (`buildAboutSourcing(null)`); the coverage tally fills once the
-dataset loads.
+**No startup gate.** The **Sources & provenance** popup (`#sourcing-modal`) is *not* shown
+on launch: a visitor just watches the loading bar + its tagline. The modal is wired early
+(`wireSourcingModal`, its static intro + grade key rendered at once via
+`buildAboutSourcing(null)`, the coverage tally filled once the dataset loads) but only
+opens on demand: its own toolbar button (`#sourcing-toggle`), the Legend/About "Sources &
+provenance" links, or the guided tour's Sources step.

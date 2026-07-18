@@ -1651,6 +1651,15 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+      /* A static one-line tease under the bar (the sourcing pitch), shown while
+         the data loads now that the Sources popup no longer opens on launch. */
+      .loading-tagline {
+        margin-top: 8px;
+        font-size: 12px;
+        font-style: italic;
+        color: var(--muted);
+        opacity: 0.8;
+      }
       @media (prefers-reduced-motion: reduce) {
         #loading, .loading-fill { transition: none; }
       }
@@ -1739,6 +1748,7 @@
         <div class="loading-title">neurarium</div>
         <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
         <div id="loading-caption" class="loading-caption" data-i18n="loading.start">Loading…</div>
+        <div class="loading-tagline" data-i18n="loading.tagline">a (mostly) sourced atlas of psychiatric neuroscience</div>
       </div>
     </div>
 

@@ -66,6 +66,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let waitEl = null; // the element an interactive step is waiting on
   let waitFn = null; // its one-shot click handler (removed on leave)
   let observed = false; // a stayAfterTap step whose demo has been triggered
+  let shownOnce = false; // false until the first step paints (snap it, don't fly in)
 
   const seen = () => {
     if (!seenKey) return false;
@@ -138,15 +139,35 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     return b;
   }
 
-  // Resolve a step's target to an Element (or null for a caption step). A
-  // selector that matches nothing, or an element with no box (display:none),
-  // degrades gracefully to a caption.
-  function targetOf(step) {
-    let el = null;
-    if (typeof step.target === "function") el = step.target();
-    else if (typeof step.target === "string") el = document.querySelector(step.target);
-    if (el && el.getClientRects().length === 0) el = null;
-    return el || null;
+  // Resolve a step's target to a list of on-screen Elements. `target` may be a
+  // CSS selector, an Element, or a function returning any of those or an array
+  // (a group highlight, e.g. the four browse sections). Elements with no box
+  // (display:none) are dropped, so an unresolved target degrades to a caption.
+  function resolveTargets(step) {
+    let t = step.target;
+    if (typeof t === "function") t = t();
+    if (t == null) return [];
+    const raw = Array.isArray(t) ? t : [t];
+    const els = [];
+    for (const item of raw) {
+      const el = typeof item === "string" ? document.querySelector(item) : item;
+      if (el && el.getClientRects().length > 0) els.push(el);
+    }
+    return els;
+  }
+  // The element an interactive step listens on / scrolls to: the first target.
+  const primaryTarget = (step) => resolveTargets(step)[0] || null;
+  // Bounding box of one or many elements (the spotlight ring spans them all).
+  function unionRect(els) {
+    let L = Infinity, T = Infinity, R = -Infinity, B = -Infinity;
+    for (const el of els) {
+      const r = el.getBoundingClientRect();
+      L = Math.min(L, r.left);
+      T = Math.min(T, r.top);
+      R = Math.max(R, r.right);
+      B = Math.max(B, r.bottom);
+    }
+    return { left: L, top: T, right: R, bottom: B, width: R - L, height: B - T };
   }
 
   // Cut a rectangular hole in the click-eating blocker so a tap lands on the
@@ -168,11 +189,11 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   function layout() {
     if (index < 0) return;
     const step = steps[index];
-    const target = targetOf(step);
+    const els = resolveTargets(step);
     // A stayAfterTap step, once tapped, steps its spotlight aside so the live
     // demo it triggered is watchable: no ring, no dim, bubble tucked off the scene.
     const consumed = !!step.stayAfterTap && observed;
-    const spotlight = !!target && !consumed;
+    const spotlight = els.length > 0 && !consumed;
     const interactive = spotlight && !!step.interactive;
     const dim = consumed
       ? false
@@ -184,7 +205,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     blocker.classList.toggle("modal", dim && !spotlight);
 
     if (spotlight) {
-      const r = target.getBoundingClientRect();
+      const r = unionRect(els);
       const x = Math.max(0, r.left - RING_PAD);
       const y = Math.max(0, r.top - RING_PAD);
       const w = r.width + RING_PAD * 2;
@@ -282,6 +303,10 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     }
     index = i;
     observed = false;
+    // The very first step snaps into place (no fly-in from the corner); every
+    // later step glides from the previous one (smooth step-to-step transitions).
+    setAnim(shownOnce);
+    shownOnce = true;
     const step = steps[index];
     try {
       step.before && step.before();
@@ -302,11 +327,13 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     //     stays put; the spotlight steps aside (see layout `consumed`) and Next
     //     proceeds when the user is ready.
     if (step.interactive) {
-      const el = targetOf(step);
+      const el = primaryTarget(step);
       if (el) {
         if (step.scrollTo) {
+          // Smooth-scroll the row into view (it slides in, rather than jumping);
+          // the ring tracks it tightly as it moves (see onScroll's no-anim).
           try {
-            el.scrollIntoView({ block: "center", inline: "nearest" });
+            el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
           } catch (e) {
             el.scrollIntoView();
           }
@@ -336,18 +363,34 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     scheduleLayout();
   }
 
+  // Whether the ring + bubble ease between positions (smooth) or snap (tight
+  // tracking). Steps glide by default; during an active scroll we snap so the
+  // ring rides the scrolling row 1:1 instead of lagging behind it.
+  function setAnim(on) {
+    root.classList.toggle("no-anim", !on);
+  }
+
   function scheduleLayout() {
-    // Place instantly on entry (no transition sweep over the target), then drop
-    // the guard so the later re-settles animate gently.
-    root.classList.add("no-anim");
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        layout();
-        requestAnimationFrame(() => root.classList.remove("no-anim"));
-      }),
-    );
-    setTimeout(layout, 160);
-    setTimeout(layout, 340);
+    // A step change glides to the new target (smooth). Re-settle a couple of
+    // times: a scrolled-into-view row or a just-opened list can reflow a frame
+    // or two later, and the bubble must track the target's final spot.
+    requestAnimationFrame(() => requestAnimationFrame(layout));
+    setTimeout(layout, 180);
+    setTimeout(layout, 380);
+  }
+
+  // Follow the target while the page/panel scrolls (e.g. a row sliding into view,
+  // or the user scrolling the list). Snap during the scroll so the ring tracks
+  // tightly, then restore the smooth glide once it settles.
+  let scrollTimer = null;
+  function onScroll() {
+    if (index < 0) return;
+    setAnim(false);
+    layout();
+    if (scrollTimer) clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      if (index >= 0) setAnim(true);
+    }, 140);
   }
 
   function onKey(e) {
@@ -370,12 +413,13 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     if (active) return;
     build();
     active = true;
+    shownOnce = false; // snap the first step into place, glide the rest
     root.hidden = false;
     root.setAttribute("aria-hidden", "false");
     // Capture phase so the tour's keys take priority over the viewer shortcuts.
     window.addEventListener("keydown", onKey, true);
     window.addEventListener("resize", layout);
-    window.addEventListener("scroll", layout, true);
+    window.addEventListener("scroll", onScroll, true);
     go(opts && opts.fromStep ? opts.fromStep : 0);
   }
 
@@ -384,9 +428,10 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     active = false;
     index = -1;
     clearWait();
+    if (scrollTimer) clearTimeout(scrollTimer);
     window.removeEventListener("keydown", onKey, true);
     window.removeEventListener("resize", layout);
-    window.removeEventListener("scroll", layout, true);
+    window.removeEventListener("scroll", onScroll, true);
     if (root) {
       clearHole();
       root.hidden = true;

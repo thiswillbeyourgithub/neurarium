@@ -111,9 +111,12 @@
       "tour.separate.title": "Pull it apart",
       "tour.separate.body":
         "The <b>Separate</b> slider blows the brain open along the way out, exposing the deep nuclei that are otherwise buried under the cortex.",
-      "tour.circuitOpen.title": "Browse the data",
+      "tour.browse.title": "Browse the data",
+      "tour.browse.body":
+        "Everything lives in four lists: <b>Structures</b>, <b>Projections &amp; Circuits</b>, <b>Receptors &amp; targets</b> and <b>Drugs</b>. Open any one and tap a row to focus it. Let's try a few.",
+      "tour.circuitOpen.title": "Open a list",
       "tour.circuitOpen.body":
-        "The panel holds four lists. Tap the highlighted <b>Projections &amp; Circuits</b> to open it.",
+        "Tap the highlighted <b>Projections &amp; Circuits</b> to open it.",
       "tour.circuitTap.title": "Circuits come alive",
       "tour.circuitTap.body":
         "Now tap the highlighted <b>circuit</b> row (the hippocampal / limbic Papez memory loop). The brain dims and the signal travels its pathways in firing order.",
@@ -134,7 +137,7 @@
         "<b>Search</b> jumps straight to any region, pathway, receptor or drug by name. You can also filter drugs by class or nomenclature.",
       "tour.sources.title": "Every fact is sourced",
       "tour.sources.body":
-        "This dataset is LLM-assisted, so each fact carries a provenance grade. <b>Sources &amp; provenance</b> shows how much is verified, sourced or still unchecked.",
+        "This dataset is LLM-assisted, so each fact carries a provenance grade. Tap the highlighted <b>Sources &amp; provenance</b> button to see how much is verified, sourced or still unchecked.",
       "tour.wrap.title": "You're set",
       "tour.wrap.body":
         "That's the tour. Settings, the EN/FR switch and this tour all live in the panel; you can replay the tour any time from <b>About</b>. Enjoy exploring.",
@@ -267,6 +270,7 @@
       "loading.shapes": "Loading shapes…",
       "loading.meshing": "Building {name}…",
       "loading.building": "Assembling the brain…",
+      "loading.tagline": "a (mostly) sourced atlas of psychiatric neuroscience",
 
       "about.p1":
         "neurarium is a work-in-progress, interactive 3D map of the brain. It " +
@@ -446,9 +450,12 @@
       "tour.separate.title": "Écarter les régions",
       "tour.separate.body":
         "Le curseur <b>Séparer</b> ouvre le cerveau vers l'extérieur, révélant les noyaux profonds autrement enfouis sous le cortex.",
-      "tour.circuitOpen.title": "Parcourir les données",
+      "tour.browse.title": "Parcourir les données",
+      "tour.browse.body":
+        "Tout se trouve dans quatre listes : <b>Structures</b>, <b>Projections et circuits</b>, <b>Récepteurs et cibles</b> et <b>Médicaments</b>. Ouvrez-en une et touchez une ligne pour la mettre en avant. Essayons-en quelques-unes.",
+      "tour.circuitOpen.title": "Ouvrir une liste",
       "tour.circuitOpen.body":
-        "Le panneau contient quatre listes. Touchez <b>Projections et circuits</b> (en surbrillance) pour l'ouvrir.",
+        "Touchez <b>Projections et circuits</b> (en surbrillance) pour l'ouvrir.",
       "tour.circuitTap.title": "Les circuits s'animent",
       "tour.circuitTap.body":
         "Touchez maintenant la ligne du <b>circuit</b> en surbrillance (la boucle mnésique hippocampique / limbique de Papez). Le cerveau s'assombrit et le signal parcourt ses voies dans l'ordre d'activation.",
@@ -469,7 +476,7 @@
         "La <b>recherche</b> mène directement à n'importe quelle région, voie, récepteur ou médicament par son nom. Vous pouvez aussi filtrer les médicaments par classe ou nomenclature.",
       "tour.sources.title": "Chaque fait est sourcé",
       "tour.sources.body":
-        "Ce jeu de données est assisté par IA : chaque fait porte donc une note de provenance. <b>Sources et provenance</b> montre la part vérifiée, sourcée ou encore non contrôlée.",
+        "Ce jeu de données est assisté par IA : chaque fait porte donc une note de provenance. Touchez le bouton <b>Sources et provenance</b> (en surbrillance) pour voir la part vérifiée, sourcée ou encore non contrôlée.",
       "tour.wrap.title": "Vous êtes prêt",
       "tour.wrap.body":
         "Voilà pour la visite. Les réglages, le sélecteur EN/FR et cette visite se trouvent dans le panneau ; vous pouvez relancer la visite à tout moment depuis <b>À propos</b>. Bonne exploration.",
@@ -602,6 +609,7 @@
       "loading.shapes": "Chargement des formes…",
       "loading.meshing": "Construction : {name}…",
       "loading.building": "Assemblage du cerveau…",
+      "loading.tagline": "un atlas (en grande partie) sourcé des neurosciences psychiatriques",
 
       "about.p1":
         "neurarium est une carte 3D interactive du cerveau, en cours de " +

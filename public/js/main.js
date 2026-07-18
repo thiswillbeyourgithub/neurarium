@@ -3902,9 +3902,9 @@ function buildAboutSourcing(meta) {
 
   // The "Sources & provenance" title is the #sourcing-modal's own <h2>; this block
   // is the intro + grade key + coverage tally. The intro + grade key need no loaded
-  // data, so render them always: the popup is meaningful the instant it opens over
-  // the loading overlay (the startup gate), called first with no meta, then again
-  // with data.meta once loaded to fill the tally.
+  // data, so render them always: the popup is meaningful the instant it opens (on
+  // demand), called first with no meta, then again with data.meta once loaded to
+  // fill the tally.
   host.appendChild(h("p", "about-text", t("about.sourcingIntro")));
   // A source is not proof: sources err, quote-to-claim mapping can slip, and the
   // viewer has bugs. Keep this prominent so nobody reads a pill as "true".
@@ -5070,24 +5070,20 @@ async function main() {
   const loading = createLoadingScreen();
   loading.setProgress(0.02, t("loading.data"));
 
-  // Sources & provenance popup (the startup gate): wire it + fill its static parts
-  // (intro + grade key) now and show it over the still-visible loading overlay (it
-  // sits above it via a higher z-index, see the CSS). A visitor reads how the data
-  // is sourced while the app loads and closes it to continue (the app may still be
-  // loading behind it, or already up). Its coverage tally needs the loaded dataset,
-  // so it is filled in below once data arrives. Skipped for the clean-shot ?ui=0
-  // mode (screenshots / deep links). The Legend + About popups reference this
-  // controller (their "Sources & provenance" links open it), so it is created here.
+  // Sources & provenance popup: wire it + fill its static parts (intro + grade
+  // key) now; its coverage tally needs the loaded dataset, so it is filled in
+  // below once data arrives. It is NOT shown on launch (a visitor just watches
+  // the loading bar + its tagline); it opens on demand from the Sources button,
+  // the Legend/About "Sources & provenance" links, and the guided tour.
   const sourcingModal = wireSourcingModal();
   buildAboutSourcing(null);
-  if (new URLSearchParams(window.location.search).get("ui") !== "0") sourcingModal.open();
 
   let data;
   try {
     data = await loadBrainData("data", (p) => {
-      // Fill the sourcing gate's coverage bars as soon as meta lands (before the
-      // slow shape/mesh phase), so a visitor watching the load sees the sourcing
-      // coverage, not just the intro text.
+      // Fill the sourcing popup's coverage bars as soon as meta lands (before the
+      // slow shape/mesh phase), so the tally is ready the instant a visitor opens
+      // the popup on demand, not just the intro text.
       if (p.stage === "meta-ready" && p.meta?.provenance_stats) {
         buildAboutSourcing({ provenanceStats: p.meta.provenance_stats });
       }
@@ -5753,7 +5749,7 @@ async function main() {
   const lightbox = wireImageLightbox();
   info.onImage((src, alt, opts) => lightbox.open(src, alt, opts));
   const shortcutsHelp = wireShortcutsHelp(); // the "?" / keyboard-button popup
-  // sourcingModal was created early (the startup gate, above); the Legend + About
+  // sourcingModal was created early (wired above, opens on demand); the Legend + About
   // popups link to it via their "Sources & provenance" rows.
   const legendModal = wireLegendModal(sourcingModal); // toolbar legend button / k key
   const aboutModal = wireAboutModal(sourcingModal); // the toolbar info-button popup
@@ -5778,15 +5774,24 @@ async function main() {
   const tourEl = (id) => document.getElementById(id);
   // Expand the controls panel + show the Settings pane (a focus demo swaps the
   // pane out for the Details view, so a later control-spotlight step needs it back).
-  const tourEnsurePanel = () => {
+  const tourExpandPanel = () => {
     const body = tourEl("controls-body");
     if (body && body.hidden) {
       tourEl("controls-toggle")?.setAttribute("aria-expanded", "true");
       body.hidden = false;
     }
+    tabs.showSettings();
+  };
+  // Open the Settings sub-pane (the sliders + toolbar buttons a control spotlight
+  // targets); tourCollapseSettings folds it so the browse sections sit up top.
+  const tourEnsurePanel = () => {
+    tourExpandPanel();
     const cs = tourEl("controls-settings-body");
     if (cs && cs.hidden) tourEl("controls-settings-toggle")?.click();
-    tabs.showSettings();
+  };
+  const tourCollapseSettings = () => {
+    const cs = tourEl("controls-settings-body");
+    if (cs && !cs.hidden) tourEl("controls-settings-toggle")?.click();
   };
   const tourOpenSection = (name) => {
     tourEnsurePanel();
@@ -5800,9 +5805,18 @@ async function main() {
     const body = tourEl(`${name}-body`);
     if (body && !body.hidden) tourEl(`${name}-toggle`)?.click();
   };
-  // Clear any focus / isolate / tab a previous demo left, so each live demo starts
-  // from a clean scene (idempotent: steps re-run when the user goes Back too).
-  const tourReset = () => { tabs.closeAll(); selection.clear(); };
+  // The four browse sections (for the overview highlight); collapse them all so
+  // the ring spans a tight group of headers.
+  const TOUR_SECTIONS = ["structures", "projections", "receptors", "drugs"];
+  const tourCollapseSections = () => {
+    for (const name of TOUR_SECTIONS) {
+      const b = tourEl(`${name}-body`);
+      if (b && !b.hidden) tourEl(`${name}-toggle`)?.click();
+    }
+  };
+  // Clear any focus / isolate / tab / open sourcing modal a previous step left, so
+  // each demo starts from a clean scene (idempotent: steps re-run on Back too).
+  const tourReset = () => { tabs.closeAll(); selection.clear(); sourcingModal.close(); };
   // The demos are hands-on: the user opens each list and taps the highlighted row
   // themselves (interactive steps in js/tour.js advance on that real tap). The row
   // hooks are `data-tour-id` attributes set in the legend builders; these sample
@@ -5815,6 +5829,14 @@ async function main() {
     { title: t("tour.separate.title"), body: t("tour.separate.body"),
       target: "#explode",
       before: () => { tourEnsurePanel(); autoSpread.spreadTo(0.55); } },
+    // Orientation: highlight the four browse sections as a group.
+    { title: t("tour.browse.title"), body: t("tour.browse.body"),
+      target: () => TOUR_SECTIONS.map((n) => `#${n}-toggle`),
+      before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
+    // Sourcing early: tap the Sources button to open the provenance breakdown.
+    { title: t("tour.sources.title"), body: t("tour.sources.body"),
+      target: "#sourcing-toggle", interactive: true, scrollTo: true, stayAfterTap: true,
+      before: () => { tourReset(); tourEnsurePanel(); } },
     // Circuits: open the list, then tap the highlighted circuit row (it plays live).
     { title: t("tour.circuitOpen.title"), body: t("tour.circuitOpen.body"),
       target: "#projections-toggle", interactive: true, scrollTo: true,
@@ -5838,10 +5860,8 @@ async function main() {
       stayAfterTap: true, before: () => tourOpenSection("drugs") },
     { title: t("tour.search.title"), body: t("tour.search.body"),
       target: "#search-toggle", before: () => { tourReset(); tourEnsurePanel(); } },
-    { title: t("tour.sources.title"), body: t("tour.sources.body"),
-      target: "#sourcing-toggle", before: tourEnsurePanel },
     { title: t("tour.wrap.title"), body: t("tour.wrap.body"),
-      target: "#about-toggle", before: tourEnsurePanel },
+      target: "#about-toggle", before: () => { tourReset(); tourEnsurePanel(); } },
   ];
   const tour = createTour({
     steps: tourSteps,
@@ -5861,7 +5881,8 @@ async function main() {
   });
   // `?tour=1` forces the tour on every load, bypassing the once-per-visitor
   // "seen" gate and the eligibility checks (handy for testing / a shared link
-  // that always runs it). It still waits for the intro + Sources gate below.
+  // that always runs it). It still waits for the intro (and won't stack on an
+  // open Sources popup) below.
   const tourForced = new URLSearchParams(window.location.search).get("tour") === "1";
   // Auto-start only on a genuinely fresh view: not a screenshot / deep-link mode,
   // and nothing already focused (a hash deep link, or a click during the intro).
@@ -5875,10 +5896,11 @@ async function main() {
     aboutModal.close();
     tour.start();
   });
-  // Auto-start is gated on TWO things being out of the way, whichever is last:
-  // the assemble intro having settled, and the startup Sources gate being closed
-  // (it opens over the loading brain; the tour must not stack on top of it). The
-  // observer catches the case where the intro finishes while the gate is still open.
+  // Auto-start waits for the assemble intro to settle, and declines to stack on an
+  // open Sources popup: it no longer opens on launch, but a visitor could open it
+  // manually during the intro, so if it is up we defer and the observer retries the
+  // moment it closes. (Mid-tour the observer is a no-op: maybeAutoStart/start bail
+  // when the tour is already active, so the step-5 open / step-6 close can't restart it.)
   let tourIntroSettled = false;
   let tourForcedStarted = false; // one-shot guard for the ?tour=1 forced start
   const tourGateEl = tourEl("sourcing-modal");
@@ -5903,10 +5925,9 @@ async function main() {
   const explodeSlider = document.getElementById("explode");
   const intro = createIntroAnimation(
     { meshes, arrows, slider: explodeSlider, camera, controls, focus,
-      // Once the assemble settles, offer the tour (once per visitor, and only
-      // after the Sources gate closes: see tryAutoTour). onDone fires only on a
-      // natural finish, never on a cancel, so a deep-link / manual drag never
-      // triggers it.
+      // Once the assemble settles, offer the tour (once per visitor, and not while
+      // the Sources popup is open: see tryAutoTour). onDone fires only on a natural
+      // finish, never on a cancel, so a deep-link / manual drag never triggers it.
       onDone: () => { tourIntroSettled = true; tryAutoTour(); } });
   explodeSlider.addEventListener("input", () => intro.cancel());
   if (!new URLSearchParams(window.location.search).has("explode")) {

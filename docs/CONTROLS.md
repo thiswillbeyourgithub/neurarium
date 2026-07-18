@@ -108,9 +108,10 @@ through beats a nearer non-focused one.
   (`#legend-open-sourcing`). Wired by `wireLegendModal`.
 - **Sources & provenance** (`#sourcing-modal`, `wireSourcingModal`): the grade key + coverage
   tally (`#about-sourcing`, `buildAboutSourcing` from `data.meta.provenanceStats`). The single
-  place explaining the sourcing system (see Source provenance); auto-shown over the loading overlay
-  on startup (the gate). `buildAboutSourcing(null)` renders the static intro + key immediately, a
-  second call fills the tally once loaded.
+  place explaining the sourcing system (see Source provenance); NOT auto-shown on startup, opens
+  only on demand (this button, the Legend/About links, the tour's Sources step).
+  `buildAboutSourcing(null)` renders the static intro + key immediately, a second call fills the
+  tally once loaded.
 - **Receptors & targets** (`#receptors`) / **Drugs** (`#drugs`): see their sections.
 - **About** (`#about-modal`, ⓘ, `wireAboutModal`): a blurb (Olivier Cornelis + Claude), an "open
   an issue" link (`cfg.sourceUrl + "/issues"`, dropped unless `sourceUrl` is repo-like), a Source
