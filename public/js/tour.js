@@ -329,15 +329,6 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     if (step.interactive) {
       const el = primaryTarget(step);
       if (el) {
-        if (step.scrollTo) {
-          // Smooth-scroll the row into view (it slides in, rather than jumping);
-          // the ring tracks it tightly as it moves (see onScroll's no-anim).
-          try {
-            el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-          } catch (e) {
-            el.scrollIntoView();
-          }
-        }
         waitEl = el;
         waitFn = () => {
           if (step.stayAfterTap) {
@@ -355,6 +346,11 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       }
     }
 
+    // Smooth-scroll a scrollTo step's target into view (deferred to its own task;
+    // see scrollStepIntoView for why inline would jump). onScroll keeps the ring
+    // tracking the row as it slides.
+    scrollStepIntoView(step);
+
     // Let the scene set-up (before()) and the new bubble text settle, then
     // measure + position. A scrolled-into-view row or a just-opened list can
     // still reflow a frame or two later (its final rect differs from the first),
@@ -368,6 +364,45 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   // ring rides the scrolling row 1:1 instead of lagging behind it.
   function setAnim(on) {
     root.classList.toggle("no-anim", !on);
+  }
+
+  // Nearest ancestor of `el` that actually scrolls vertically (else null).
+  function scrollParent(el) {
+    let n = el.parentElement;
+    while (n) {
+      const oy = getComputedStyle(n).overflowY;
+      if ((oy === "auto" || oy === "scroll") && n.scrollHeight > n.clientHeight + 1) return n;
+      n = n.parentElement;
+    }
+    return null;
+  }
+
+  // Smooth-scroll a scrollTo step's target to the centre of its scroll container
+  // (native compositor smooth-scroll; the explicit `behavior` overrides the
+  // container's CSS scroll-behavior:auto). Deferred to its OWN task (setTimeout)
+  // rather than run inline in go(): doing it inline, in the same synchronous tick
+  // that before() opened the section and go() rewrote the panel, made Chrome
+  // collapse a short smooth scroll to an instant jump (the circuits list snapped
+  // while the longer drugs scroll still glided). A clean task, after that layout
+  // churn settles, lets it animate uniformly regardless of distance. setTimeout
+  // (not rAF) because the viewer's on-demand render loop can leave rAF idle. The
+  // scroll fires scroll events, so onScroll keeps the ring tracking the moving row.
+  function scrollStepIntoView(step) {
+    if (!step.scrollTo) return;
+    const startIndex = index;
+    setTimeout(() => {
+      if (!active || index !== startIndex) return; // step already changed
+      const el = primaryTarget(step);
+      if (!el) return;
+      const c = scrollParent(el);
+      if (!c) return;
+      const cr = c.getBoundingClientRect();
+      const er = el.getBoundingClientRect();
+      const want = c.scrollTop + (er.top - cr.top) - (c.clientHeight - er.height) / 2;
+      const to = Math.max(0, Math.min(want, c.scrollHeight - c.clientHeight));
+      if (Math.abs(to - c.scrollTop) < 2) return; // already centred enough
+      c.scrollTo({ top: to, behavior: "smooth" });
+    }, 0);
   }
 
   function scheduleLayout() {
