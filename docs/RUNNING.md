@@ -54,6 +54,10 @@ The `--params` string is the URL query parsed by `applyViewParams` in
 
 `only`/`view` auto-fit the camera to whatever is visible.
 
+A separate startup flag, `?tour=1`, forces the guided tour to run on every load,
+bypassing the once-per-visitor "seen" gate (it still waits for the intro + Sources
+gate). Read directly in the tour wiring, not by `applyViewParams`.
+
 ### Node deep links (URL hash)
 
 A URL **hash** focuses one node on load (and on `hashchange`), exactly as picking it

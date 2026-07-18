@@ -5859,6 +5859,10 @@ async function main() {
       focus.recenter();
     },
   });
+  // `?tour=1` forces the tour on every load, bypassing the once-per-visitor
+  // "seen" gate and the eligibility checks (handy for testing / a shared link
+  // that always runs it). It still waits for the intro + Sources gate below.
+  const tourForced = new URLSearchParams(window.location.search).get("tour") === "1";
   // Auto-start only on a genuinely fresh view: not a screenshot / deep-link mode,
   // and nothing already focused (a hash deep link, or a click during the intro).
   const tourEligible = () => {
@@ -5876,10 +5880,17 @@ async function main() {
   // (it opens over the loading brain; the tour must not stack on top of it). The
   // observer catches the case where the intro finishes while the gate is still open.
   let tourIntroSettled = false;
+  let tourForcedStarted = false; // one-shot guard for the ?tour=1 forced start
   const tourGateEl = tourEl("sourcing-modal");
   const tourGateOpen = () => tourGateEl && !tourGateEl.hidden;
   const tryAutoTour = () => {
-    if (tourIntroSettled && !tourGateOpen()) tour.maybeAutoStart(tourEligible());
+    if (!tourIntroSettled || tourGateOpen()) return;
+    if (tourForced) {
+      // Forced: ignore the seen gate + eligibility, but never re-trigger.
+      if (!tourForcedStarted) { tourForcedStarted = true; tour.start(); }
+    } else {
+      tour.maybeAutoStart(tourEligible());
+    }
   };
   if (tourGateEl) {
     new MutationObserver(tryAutoTour)
@@ -5923,6 +5934,10 @@ async function main() {
       // a short beat and let tryAutoTour honor the same Sources-gate condition.
       setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
     }
+  } else if (tourForced) {
+    // ?explode= pinned: the intro block above is skipped, so onDone never fires.
+    // A forced tour still wants to run, so settle the gate condition after a beat.
+    setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
   }
 
   // ---- Deep links (URL hash <-> focus) ------------------------------------------

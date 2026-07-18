@@ -209,8 +209,8 @@ Viewer (`public/`):
   watchable. The app-specific step list is built in `js/main.js`; the data demos are hands-on (open a
   list, tap the highlighted circuit/receptor/drug row via its `data-tour-id`), each step's `before()`
   setting the scene (spread, open/collapse a section, reset a prior demo). Auto-runs once on a first
-  visit (after the intro settles and the Sources gate closes); replayed from the About popup's "Take a
-  tour" button (`#about-tour`).
+  visit (after the intro settles and the Sources gate closes), forced every load with `?tour=1`, and
+  replayed from the About popup's "Take a tour" button (`#about-tour`).
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,
   auto-rotate, hover/pick raycasting; `createInfoPanel`; search; the legend builders
   (`buildLegend`/`buildLegendKey`/`buildTargetLegend`/`buildDrugLegend`); the on-demand render loop.
