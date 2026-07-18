@@ -66,6 +66,12 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
                "fr": "Opioïde / modulateur opioïde"},
     "recreational": {"en": "Recreational / psychoactive",
                      "fr": "Récréatif / psychoactif"},
+    # First-generation H1 antihistamines + muscarinic anticholinergics used in
+    # psychiatry (sleep aids, movement-disorder agents): kept as their own classes
+    # rather than dumped in "other", so Stahl's/Carlat's own class line ("Antihistamine;
+    # anticholinergic agent") is respected. A drug may list both (doxylamine).
+    "antihistamine": {"en": "Antihistamine", "fr": "Antihistaminique"},
+    "anticholinergic": {"en": "Anticholinergic", "fr": "Anticholinergique"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 

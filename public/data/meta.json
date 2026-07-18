@@ -93,6 +93,8 @@
     "substance_use": "Substance-use treatment",
     "opioid": "Opioid / opioid modulator",
     "recreational": "Recreational / psychoactive",
+    "antihistamine": "Antihistamine",
+    "anticholinergic": "Anticholinergic",
     "other": "Other"
   },
   "drug_targets": {
