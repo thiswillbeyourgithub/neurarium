@@ -95,6 +95,13 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("vta_R", "amygdala_R"): _KQ_VTA_REWARD,
     ("vta_R", "frontal_R"): _KQ_VTA_REWARD,
     ("vta_R", "hippocampus_R"): _KQ_VTA_REWARD,
+    # Ascending histaminergic: one Kandel sentence (p.1052) names the
+    # tuberomammillary histamine neurons innervating cortex/thalamus/hypothalamus/
+    # basal forebrain, backing all four TMN targets.
+    ("tuberomammillary_R", "frontal_R"): _KQ_MONOAMINE_INNERV,
+    ("tuberomammillary_R", "thalamus_R"): _KQ_MONOAMINE_INNERV,
+    ("tuberomammillary_R", "hypothalamus_R"): _KQ_MONOAMINE_INNERV,
+    ("tuberomammillary_R", "septal_nuclei_R"): _KQ_MONOAMINE_INNERV,
     # Interhemispheric corpus callosum (homologous cortical areas across midline);
     # the anterior commissure (temporal) + claustro-cortical pathways stay
     # unsourced (Kandel has no temporal-commissure sentence and never mentions the
@@ -283,6 +290,7 @@ STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
     "vta": _kandel(982,
         "The substantia nigra pars compacta/ventral tegmental area contain an "
         "important population of dopaminergic neurons."),
+    "tuberomammillary": _KQ_MONOAMINE_INNERV,
     # Diencephalon.
     "hypothalamus": _kandel(1025,
         "Neurons controlling the internal environment are concentrated in the "

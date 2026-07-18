@@ -305,6 +305,32 @@ PROJECTIONS: list[dict[str, Any]] = [
          label="Mesolimbic (hippocampal)",
          description="VTA dopamine projects to the hippocampus, gating "
                      "reward-related memory."),
+    # --- Ascending histaminergic from the tuberomammillary nucleus (the sole
+    #     histamine source, ventral posterior hypothalamus): a diffuse
+    #     wakefulness-promoting fan. One Kandel sentence (p.1052, PROJECTION_QUOTES)
+    #     backs all four targets. tuberomammillary is paired, so these mirror
+    #     fully. Histaminergic is a tone-setter kind (SYSTEM_FLOW_KINDS), so an H3
+    #     autoreceptor drug (pitolisant) rides these arrows. ---
+    dict(**{"from": "tuberomammillary_R", "to": "frontal_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (prefrontal)",
+         description="Tuberomammillary histamine neurons project diffusely to the "
+                     "cortex, promoting wakefulness and arousal."),
+    dict(**{"from": "tuberomammillary_R", "to": "thalamus_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (thalamic)",
+         description="Tuberomammillary histamine projects to the thalamus, gating "
+                     "cortical arousal."),
+    dict(**{"from": "tuberomammillary_R", "to": "hypothalamus_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (hypothalamic)",
+         description="Tuberomammillary histamine projects within the hypothalamus, "
+                     "supporting the sleep-wake switch."),
+    dict(**{"from": "tuberomammillary_R", "to": "septal_nuclei_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (basal forebrain)",
+         description="Tuberomammillary histamine projects to the basal forebrain, "
+                     "reinforcing cortical activation."),
     # --- Interhemispheric commissures (bidirectional, defined once across the
     #     midline so symmetric=False keeps them from mirroring into duplicates) ---
     dict(**{"from": "frontal_L", "to": "frontal_R"},
@@ -553,6 +579,14 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
          description_fr="Les projections noradrénergiques du locus coeruleus "
                         "modulent l'éveil, la vigilance et la réponse au stress.",
          wikipedia="https://en.wikipedia.org/wiki/Norepinephrine"),
+    dict(mode="kind", key="histaminergic", name="Histamine",
+         sources=[_KQ_MONOAMINE_INNERV],
+         description="Histaminergic projections from the tuberomammillary nucleus "
+                     "promote wakefulness and arousal across the cortex and thalamus.",
+         description_fr="Les projections histaminergiques du noyau tubéromammillaire "
+                        "favorisent l'éveil et la vigilance dans le cortex et le "
+                        "thalamus.",
+         wikipedia="https://en.wikipedia.org/wiki/Histaminergic"),
     # --- per-sign (mode="sign"); name = the SIGN_LABELS heading ------------------
     dict(mode="sign", key="excitatory", name="Excitatory",
          sources=[_SG_GLUTAMATE],

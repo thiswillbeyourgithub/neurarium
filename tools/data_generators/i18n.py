@@ -83,6 +83,7 @@ FR: dict[str, str] = {
     "Raphe nuclei": "Noyaux du raphé",
     "Locus coeruleus": "Locus cœruleus",
     "Ventral tegmental area": "Aire tegmentale ventrale",
+    "Tuberomammillary nucleus": "Noyau tubéromammillaire",
     # Circuit names
     "Direct pathway (motor)": "Voie directe (motrice)",
     "Indirect pathway": "Voie indirecte",
@@ -152,6 +153,14 @@ FR: dict[str, str] = {
     "Mesocortical": "Mésocorticale",
     "Mesolimbic (amygdala)": "Mésolimbique (amygdale)",
     "Mesolimbic (hippocampal)": "Mésolimbique (hippocampique)",
+    "Ascending histaminergic (prefrontal)":
+        "Histaminergique ascendante (préfrontale)",
+    "Ascending histaminergic (thalamic)":
+        "Histaminergique ascendante (thalamique)",
+    "Ascending histaminergic (hypothalamic)":
+        "Histaminergique ascendante (hypothalamique)",
+    "Ascending histaminergic (basal forebrain)":
+        "Histaminergique ascendante (prosencéphale basal)",
     # Projection descriptions
     "Dorsal raphe serotonin neurons project diffusely to the prefrontal cortex, "
     "shaping mood and cognition.":
@@ -191,6 +200,22 @@ FR: dict[str, str] = {
     "VTA dopamine projects to the hippocampus, gating reward-related memory.":
         "La dopamine de l'ATV projette vers l'hippocampe, contrôlant la mémoire "
         "liée à la récompense.",
+    "Tuberomammillary histamine neurons project diffusely to the cortex, "
+    "promoting wakefulness and arousal.":
+        "Les neurones histaminergiques tubéromammillaires projettent de façon "
+        "diffuse vers le cortex, favorisant l'éveil et la vigilance.",
+    "Tuberomammillary histamine projects to the thalamus, gating cortical "
+    "arousal.":
+        "L'histamine tubéromammillaire projette vers le thalamus, contrôlant "
+        "l'activation corticale.",
+    "Tuberomammillary histamine projects within the hypothalamus, supporting "
+    "the sleep-wake switch.":
+        "L'histamine tubéromammillaire projette au sein de l'hypothalamus, "
+        "soutenant le basculement veille-sommeil.",
+    "Tuberomammillary histamine projects to the basal forebrain, reinforcing "
+    "cortical activation.":
+        "L'histamine tubéromammillaire projette vers le prosencéphale basal, "
+        "renforçant l'activation corticale.",
     "Sensorimotor frontal cortex drives the putamen, the motor input nucleus "
     "of the basal ganglia.":
         "Le cortex frontal sensorimoteur active le putamen, le noyau d'entrée "

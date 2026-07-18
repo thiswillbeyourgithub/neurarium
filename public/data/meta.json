@@ -6,7 +6,8 @@
     "cholinergic": "#edc948",
     "neuroendocrine": "#b07aa1",
     "serotonergic": "#76b7b2",
-    "noradrenergic": "#ff9da7"
+    "noradrenergic": "#ff9da7",
+    "histaminergic": "#f0912e"
   },
   "kind_labels": {
     "excitatory": "excitatory",
@@ -15,7 +16,8 @@
     "cholinergic": "cholinergic",
     "neuroendocrine": "neuroendocrine",
     "serotonergic": "serotonergic",
-    "noradrenergic": "noradrenergic"
+    "noradrenergic": "noradrenergic",
+    "histaminergic": "histaminergic"
   },
   "group_labels": {
     "lobe": "Lobes",
@@ -32,7 +34,8 @@
     "cholinergic": "modulatory",
     "neuroendocrine": "modulatory",
     "serotonergic": "modulatory",
-    "noradrenergic": "modulatory"
+    "noradrenergic": "modulatory",
+    "histaminergic": "modulatory"
   },
   "sign_colors": {
     "excitatory": "#e15759",
@@ -48,7 +51,8 @@
     "serotonergic": "serotonergic",
     "adrenergic": "noradrenergic",
     "dopaminergic": "dopaminergic",
-    "cholinergic": "cholinergic"
+    "cholinergic": "cholinergic",
+    "histaminergic": "histaminergic"
   },
   "receptor_family_labels": {
     "adrenergic": "Adrenergic",
@@ -2152,8 +2156,8 @@
         "missing": 19
       },
       "projections": {
-        "total": 54,
-        "verified": 52,
+        "total": 58,
+        "verified": 56,
         "sourced": 0,
         "llm": 0,
         "nosource": 2,
@@ -2168,8 +2172,8 @@
         "missing": 0
       },
       "projection_groups": {
-        "total": 10,
-        "verified": 10,
+        "total": 11,
+        "verified": 11,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2240,30 +2244,30 @@
         "missing": 14
       },
       "structures": {
-        "total": 52,
-        "verified": 52,
+        "total": 54,
+        "verified": 54,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       },
       "references": {
-        "total": 313,
+        "total": 315,
         "verified": 0,
         "sourced": 313,
         "llm": 0,
-        "nosource": 0,
-        "missing": 0
+        "nosource": 2,
+        "missing": 2
       }
     },
     "nodes": {
-      "total": 2653,
-      "verified": 2455,
+      "total": 2660,
+      "verified": 2462,
       "sourced": 0,
       "llm": 180,
       "nosource": 18,
       "missing": 198,
-      "backed": 2455,
+      "backed": 2462,
       "pct_backed": 93
     },
     "ki_coverage": {

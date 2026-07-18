@@ -25,6 +25,7 @@ PROJECTION_COLORS: dict[str, str] = {
     "neuroendocrine": "#b07aa1",
     "serotonergic": "#76b7b2",
     "noradrenergic": "#ff9da7",
+    "histaminergic": "#f0912e",  # warm orange: the tuberomammillary histamine fan
 }
 
 # The viewer offers two arrow colour modes (a toggle in the panel):
@@ -46,6 +47,7 @@ KIND_TO_SIGN: dict[str, str] = {
     "neuroendocrine": "modulatory",
     "serotonergic": "modulatory",
     "noradrenergic": "modulatory",
+    "histaminergic": "modulatory",
 }
 SIGN_COLORS: dict[str, str] = {
     "excitatory": "#e15759",  # red, same as the excitatory kind
@@ -65,10 +67,10 @@ SIGN_LABELS: dict[str, str] = {
 # lights flowing beads along the projections of its target transmitter *system*.
 # This maps a drug target's ``system`` (the neurotransmitter family: a DRUG_TARGETS
 # ``system`` or a receptor ``family``) to the projection ``kind`` that carries it,
-# but *only* for the diffuse ascending modulatory systems with a brainstem source
-# nucleus modeled (serotonin / raphe, noradrenaline / locus coeruleus, dopamine /
-# VTA + substantia nigra, acetylcholine / septum). Fast point-to-point systems
-# (glutamatergic / gabaergic) and unmodeled ones (histaminergic, ...) are absent on
+# but *only* for the diffuse ascending modulatory systems with a source nucleus
+# modeled (serotonin / raphe, noradrenaline / locus coeruleus, dopamine /
+# VTA + substantia nigra, acetylcholine / septum, histamine / tuberomammillary).
+# Fast point-to-point systems (glutamatergic / gabaergic) are absent on
 # purpose: mapping them would flood the view with every excitatory/inhibitory arrow
 # instead of a drug-specific fan. A drug whose systems aren't here gets no flow,
 # just its dots + wash. Emitted into meta.json so the viewer hardcodes no table.
@@ -77,6 +79,7 @@ SYSTEM_FLOW_KINDS: dict[str, str] = {
     "adrenergic": "noradrenergic",
     "dopaminergic": "dopaminergic",
     "cholinergic": "cholinergic",
+    "histaminergic": "histaminergic",
 }
 
 # Structure ``group`` -> legend heading, in legend display order (object key

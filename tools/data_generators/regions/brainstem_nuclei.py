@@ -37,6 +37,17 @@ PAIRED: list[dict[str, Any]] = [
          # the mesolimbic / mesocortical pathways (reward, D2 autoreceptors).
          # Small smooth blob, dopamine-green to echo the dopaminergic arrows.
          radii=(0.26, 0.2, 0.3), seed=83, detail=5, noise=0.05),
+    dict(base="tuberomammillary", name="Tuberomammillary nucleus",
+         group="brainstem_nuclei",
+         pos=(0.5, -0.7, 0.0), color="#f0912e",
+         scale=0.3,  # anatomical: a small nucleus in the ventral posterior hypothalamus
+         # The brain's sole histamine source: histaminergic neurons in the ventral
+         # posterior hypothalamus that innervate the cortex, thalamus and
+         # hypothalamus (Kandel p.1052), driving wakefulness. A small smooth blob,
+         # histamine-orange to echo the histaminergic arrows. Carries the H3
+         # somatodendritic autoreceptors. Position/size are an anatomical guess:
+         # tune in a browser.
+         radii=(0.22, 0.17, 0.24), seed=84, detail=5, noise=0.05),
 ]
 
 MIDLINE: list[dict[str, Any]] = [
