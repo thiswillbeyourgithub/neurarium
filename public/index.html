@@ -630,6 +630,10 @@
          Sits above every panel (5), banner (50) and modal (60/80). */
       #tour-root { position: fixed; inset: 0; z-index: 95; pointer-events: none; }
       #tour-root[hidden] { display: none; }
+      /* On a step change the ring + bubble are placed instantly (no sweep across
+         the very control the user must tap); the transition is kept only for the
+         gentle follow when the page scrolls/resizes mid-step. */
+      #tour-root.no-anim .tour-ring, #tour-root.no-anim .tour-bubble { transition: none; }
       /* Full-screen click-eater: transparent under a spotlight (the ring's own
          box-shadow does the dimming), a visible dim for a no-target modal step. */
       .tour-blocker { position: absolute; inset: 0; pointer-events: auto; background: transparent; }
@@ -647,6 +651,13 @@
         transition: left 0.2s ease, top 0.2s ease, width 0.2s ease, height 0.2s ease;
       }
       .tour-ring[hidden] { display: none; }
+      /* Interactive step: the blocker gets a click-through hole over this ring, so
+         the user's real tap reaches the control. Pulse the outline to invite it. */
+      .tour-ring.interactive { animation: tour-pulse 1.4s ease-in-out infinite; }
+      @keyframes tour-pulse {
+        0%, 100% { outline-offset: 1px; }
+        50% { outline-offset: 4px; }
+      }
       .tour-bubble {
         position: absolute;
         pointer-events: auto;
@@ -685,6 +696,7 @@
       .tour-skip:hover { background: rgba(255, 255, 255, 0.08); color: var(--text); }
       @media (prefers-reduced-motion: reduce) {
         .tour-ring, .tour-bubble { transition: none; }
+        .tour-ring.interactive { animation: none; }
       }
       /* "Take a tour" button in the #about-modal (replays the guided tour). */
       .about-tour-btn {

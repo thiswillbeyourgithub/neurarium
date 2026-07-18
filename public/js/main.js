@@ -1055,6 +1055,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
       // Neutral swatch (a circuit has no single colour) drawn as a thin bar.
       const row = addLegendItem(projectionsBody, "#b0b0b0", circuit.name, true);
       row.classList.add("clickable");
+      row.dataset.tourId = `circuit:${circuit.id}`; // guided-tour target hook
       const entry = { row, id: circuit.id, meshes, meshSet, arrows: circuitArrows };
       row.addEventListener("click", () => {
         if (activeCircuitId === circuit.id) selection.clear();
@@ -3302,6 +3303,7 @@ function buildTargetLegend(data, onPick) {
               .filter(Boolean).join(" · ")
           : [tgt.typeLabel, tgt.systemLabel].filter(Boolean).join(" · ");
         row.classList.add("clickable");
+        row.dataset.tourId = `target:${tgt.id}`; // guided-tour target hook
         row.addEventListener("click", () => onPick(tgt));
         rows.push({ row, id: tgt.id });
       } else {
@@ -3387,6 +3389,7 @@ function buildDrugLegend(data, onPick) {
         container, drugSwatchColor(drug, effectColors), drug.name, true);
       row.classList.add("drug-item");
       row._haystack = foldText(`${drug.name} ${drug.keywords}`);
+      row.dataset.tourId = `drug:${drug.id}`; // guided-tour target hook
       if (drug.focusable) {
         row.classList.add("clickable");
         row.title = drug.categoryLabels.join(" · ");
@@ -5790,34 +5793,51 @@ async function main() {
     const body = tourEl(`${name}-body`);
     if (body && body.hidden) tourEl(`${name}-toggle`)?.click();
   };
+  // Collapse a section so the "tap to open it" interactive step visibly opens it.
+  // Runs from a step's before() (which re-fires on Back), so it sets state, not toggles.
+  const tourCloseSection = (name) => {
+    tourEnsurePanel();
+    const body = tourEl(`${name}-body`);
+    if (body && !body.hidden) tourEl(`${name}-toggle`)?.click();
+  };
   // Clear any focus / isolate / tab a previous demo left, so each live demo starts
   // from a clean scene (idempotent: steps re-run when the user goes Back too).
   const tourReset = () => { tabs.closeAll(); selection.clear(); };
-  // Sample nodes the demos focus (guarded: a missing id just skips that demo).
-  const tourCircuit = data.circuits.find((c) => c.id === "limbic_memory");
-  const tourReceptor = data.targets.find((tg) => tg.id === "5ht2a");
-  const tourDrug = data.drugs.find((d) => d.id === "fluoxetine");
+  // The demos are hands-on: the user opens each list and taps the highlighted row
+  // themselves (interactive steps in js/tour.js advance on that real tap). The row
+  // hooks are `data-tour-id` attributes set in the legend builders; these sample
+  // ids must exist in the data (a stale id just leaves the row untargetable).
   const tourSteps = [
     { title: t("tour.welcome.title"), body: t("tour.welcome.body"),
       dim: true, placement: "center" },
     { title: t("tour.rotate.title"), body: t("tour.rotate.body"),
-      dim: false, placement: "top", before: tourReset },
+      dim: false, placement: "brain", before: tourReset },
     { title: t("tour.separate.title"), body: t("tour.separate.body"),
       target: "#explode",
       before: () => { tourEnsurePanel(); autoSpread.spreadTo(0.55); } },
-    { title: t("tour.browse.title"), body: t("tour.browse.body"),
-      target: "#structures-toggle", before: () => tourOpenSection("structures") },
-    { title: t("tour.circuit.title"), body: t("tour.circuit.body"),
-      dim: false, placement: "top",
-      before: () => { tourReset(); if (tourCircuit) focusCircuit(tourCircuit, { frame: true }); } },
-    { title: t("tour.receptor.title"), body: t("tour.receptor.body"),
-      dim: false, placement: "top",
-      before: () => { tourReset(); if (tourReceptor) focusTarget(tourReceptor, { frame: true }); } },
-    { title: t("tour.drug.title"), body: t("tour.drug.body"),
-      dim: false, placement: "top",
-      before: () => { tourReset(); if (tourDrug) focusDrug(tourDrug, { frame: true }); } },
+    // Circuits: open the list, then tap the highlighted circuit row (it plays live).
+    { title: t("tour.circuitOpen.title"), body: t("tour.circuitOpen.body"),
+      target: "#projections-toggle", interactive: true, scrollTo: true,
+      before: () => { tourReset(); tourCloseSection("projections"); } },
+    { title: t("tour.circuitTap.title"), body: t("tour.circuitTap.body"),
+      target: '[data-tour-id="circuit:limbic_memory"]', interactive: true, scrollTo: true,
+      stayAfterTap: true, before: () => tourOpenSection("projections") },
+    // Receptors: open the list, then tap the highlighted receptor row.
+    { title: t("tour.receptorOpen.title"), body: t("tour.receptorOpen.body"),
+      target: "#receptors-toggle", interactive: true, scrollTo: true,
+      before: () => { tourReset(); tourCloseSection("receptors"); } },
+    { title: t("tour.receptorTap.title"), body: t("tour.receptorTap.body"),
+      target: '[data-tour-id="target:5ht2a"]', interactive: true, scrollTo: true,
+      stayAfterTap: true, before: () => tourOpenSection("receptors") },
+    // Drugs: open the list, then tap the highlighted drug row.
+    { title: t("tour.drugOpen.title"), body: t("tour.drugOpen.body"),
+      target: "#drugs-toggle", interactive: true, scrollTo: true,
+      before: () => { tourReset(); tourCloseSection("drugs"); } },
+    { title: t("tour.drugTap.title"), body: t("tour.drugTap.body"),
+      target: '[data-tour-id="drug:fluoxetine"]', interactive: true, scrollTo: true,
+      stayAfterTap: true, before: () => tourOpenSection("drugs") },
     { title: t("tour.search.title"), body: t("tour.search.body"),
-      target: "#search-toggle", before: tourEnsurePanel },
+      target: "#search-toggle", before: () => { tourReset(); tourEnsurePanel(); } },
     { title: t("tour.sources.title"), body: t("tour.sources.body"),
       target: "#sourcing-toggle", before: tourEnsurePanel },
     { title: t("tour.wrap.title"), body: t("tour.wrap.body"),

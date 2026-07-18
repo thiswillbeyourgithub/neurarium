@@ -201,11 +201,16 @@ Viewer (`public/`):
 - `js/wiki.js` — `fetchWikiLead(url, lang)` runtime fetch of a Wikipedia lead; locale wins via
   langlinks, English fallback; cached; best-effort (failure -> null).
 - `js/tour.js`: `createTour({steps, labels, onEnd, seenKey})`, a generic, three.js-free coach-mark
-  engine (spotlight ring / caption bubble, Back/Next/Skip, Esc/arrow keys, resize reposition,
-  localStorage "seen" gate). The app-specific step list is built in `js/main.js`; each step's
-  `before()` drives the real viewer live (spread, focus a circuit/receptor/drug, open a section).
-  Auto-runs once on a first visit (after the intro settles and the Sources gate closes); replayed
-  from the About popup's "Take a tour" button (`#about-tour`).
+  engine (spotlight ring / caption bubble, viewport-aware placement that never covers the target or
+  the 3D scene, Back/Next/Skip, Esc/arrow keys, resize/scroll reposition, localStorage "seen" gate).
+  A step is passive (ring + Next) or **`interactive`** (the blocker gets a clip-path click-through
+  hole so the user's real tap reaches the highlighted control); an interactive step advances on that
+  tap, or with **`stayAfterTap`** stays put and steps its spotlight aside so the live demo it fired is
+  watchable. The app-specific step list is built in `js/main.js`; the data demos are hands-on (open a
+  list, tap the highlighted circuit/receptor/drug row via its `data-tour-id`), each step's `before()`
+  setting the scene (spread, open/collapse a section, reset a prior demo). Auto-runs once on a first
+  visit (after the intro settles and the Sources gate closes); replayed from the About popup's "Take a
+  tour" button (`#about-tour`).
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,
   auto-rotate, hover/pick raycasting; `createInfoPanel`; search; the legend builders
   (`buildLegend`/`buildLegendKey`/`buildTargetLegend`/`buildDrugLegend`); the on-demand render loop.

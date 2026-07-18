@@ -111,18 +111,24 @@
       "tour.separate.title": "Pull it apart",
       "tour.separate.body":
         "The <b>Separate</b> slider blows the brain open along the way out, exposing the deep nuclei that are otherwise buried under the cortex.",
-      "tour.browse.title": "Browse the data",
-      "tour.browse.body":
-        "Four lists let you explore everything: <b>Structures</b>, <b>Projections &amp; Circuits</b>, <b>Receptors &amp; targets</b> and <b>Drugs</b>. Open one and click any row to focus it. Let's look at a few.",
-      "tour.circuit.title": "Circuits come alive",
-      "tour.circuit.body":
-        "Focusing a <b>circuit</b> dims the brain and plays the signal traveling along its pathways, in firing order. This is the hippocampal / limbic (Papez) memory loop.",
-      "tour.receptor.title": "Where receptors live",
-      "tour.receptor.body":
-        "Focusing a <b>receptor</b> lights up the regions where it is expressed with glowing gem dots. This is 5-HT2A, a serotonin receptor.",
-      "tour.drug.title": "What a drug does",
-      "tour.drug.body":
-        "Focusing a <b>drug</b> colours the brain by its effects (boost / block / modulate) and streams a by-mechanism flow overlay. This is fluoxetine, an SSRI raising serotonin tone.",
+      "tour.circuitOpen.title": "Browse the data",
+      "tour.circuitOpen.body":
+        "The panel holds four lists. Tap the highlighted <b>Projections &amp; Circuits</b> to open it.",
+      "tour.circuitTap.title": "Circuits come alive",
+      "tour.circuitTap.body":
+        "Now tap the highlighted <b>circuit</b> row (the hippocampal / limbic Papez memory loop). The brain dims and the signal travels its pathways in firing order.",
+      "tour.receptorOpen.title": "Where receptors live",
+      "tour.receptorOpen.body":
+        "Tap the highlighted <b>Receptors &amp; targets</b> to open that list.",
+      "tour.receptorTap.title": "Light up a receptor",
+      "tour.receptorTap.body":
+        "Tap the highlighted <b>5-HT2A</b> receptor. The regions where it is expressed light up with glowing gem dots.",
+      "tour.drugOpen.title": "What a drug does",
+      "tour.drugOpen.body":
+        "Tap the highlighted <b>Drugs</b> to open that list.",
+      "tour.drugTap.title": "See a drug act",
+      "tour.drugTap.body":
+        "Tap the highlighted <b>Fluoxetine</b>, an SSRI. The brain is coloured by its effects (boost / block / modulate) and a by-mechanism flow overlay streams along the pathways.",
       "tour.search.title": "Find anything",
       "tour.search.body":
         "<b>Search</b> jumps straight to any region, pathway, receptor or drug by name. You can also filter drugs by class or nomenclature.",
@@ -440,18 +446,24 @@
       "tour.separate.title": "Écarter les régions",
       "tour.separate.body":
         "Le curseur <b>Séparer</b> ouvre le cerveau vers l'extérieur, révélant les noyaux profonds autrement enfouis sous le cortex.",
-      "tour.browse.title": "Parcourir les données",
-      "tour.browse.body":
-        "Quatre listes permettent de tout explorer : <b>Structures</b>, <b>Projections et circuits</b>, <b>Récepteurs et cibles</b> et <b>Médicaments</b>. Ouvrez-en une et cliquez sur une ligne pour la mettre en avant. Voyons-en quelques-unes.",
-      "tour.circuit.title": "Les circuits s'animent",
-      "tour.circuit.body":
-        "Mettre en avant un <b>circuit</b> assombrit le cerveau et anime le signal qui parcourt ses voies, dans l'ordre d'activation. Voici la boucle mnésique hippocampique / limbique (de Papez).",
-      "tour.receptor.title": "Où vivent les récepteurs",
-      "tour.receptor.body":
-        "Mettre en avant un <b>récepteur</b> illumine les régions où il est exprimé avec des points scintillants. Voici le 5-HT2A, un récepteur de la sérotonine.",
-      "tour.drug.title": "Ce que fait un médicament",
-      "tour.drug.body":
-        "Mettre en avant un <b>médicament</b> colore le cerveau selon ses effets (stimuler / bloquer / moduler) et diffuse une animation de flux par mécanisme. Voici la fluoxétine, un ISRS qui augmente le tonus sérotoninergique.",
+      "tour.circuitOpen.title": "Parcourir les données",
+      "tour.circuitOpen.body":
+        "Le panneau contient quatre listes. Touchez <b>Projections et circuits</b> (en surbrillance) pour l'ouvrir.",
+      "tour.circuitTap.title": "Les circuits s'animent",
+      "tour.circuitTap.body":
+        "Touchez maintenant la ligne du <b>circuit</b> en surbrillance (la boucle mnésique hippocampique / limbique de Papez). Le cerveau s'assombrit et le signal parcourt ses voies dans l'ordre d'activation.",
+      "tour.receptorOpen.title": "Où vivent les récepteurs",
+      "tour.receptorOpen.body":
+        "Touchez <b>Récepteurs et cibles</b> (en surbrillance) pour ouvrir cette liste.",
+      "tour.receptorTap.title": "Illuminer un récepteur",
+      "tour.receptorTap.body":
+        "Touchez le récepteur <b>5-HT2A</b> en surbrillance. Les régions où il est exprimé s'illuminent de points scintillants.",
+      "tour.drugOpen.title": "Ce que fait un médicament",
+      "tour.drugOpen.body":
+        "Touchez <b>Médicaments</b> (en surbrillance) pour ouvrir cette liste.",
+      "tour.drugTap.title": "Voir un médicament agir",
+      "tour.drugTap.body":
+        "Touchez la <b>fluoxétine</b> en surbrillance, un ISRS. Le cerveau se colore selon ses effets (stimuler / bloquer / moduler) et une animation de flux par mécanisme parcourt les voies.",
       "tour.search.title": "Tout retrouver",
       "tour.search.body":
         "La <b>recherche</b> mène directement à n'importe quelle région, voie, récepteur ou médicament par son nom. Vous pouvez aussi filtrer les médicaments par classe ou nomenclature.",
