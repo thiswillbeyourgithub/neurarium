@@ -640,6 +640,19 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // the panel's "Projections affected" list. Empty for a drug that sets no tone (a
     // purely postsynaptic agent gets just dots + wash).
     d.flowKinds = Object.keys(d.flowSystems);
+    // Static "context" pathways (viewer-side, split from the flow): the ascending
+    // systems the drug acts *within* through a POSTSYNAPTIC receptor (a flow-mapped
+    // system carrying no tone-setter binding) e.g. an H1 / 5-HT2 / postsynaptic-D2
+    // blocker. Blocking a postsynaptic receptor does NOT change the transmitter's
+    // release/tone, so these earn no beads and no direction: main.js pins them at a
+    // dimmed *static* opacity so a purely postsynaptic agent (an antihistamine) still
+    // visibly engages its system's pathways, without falsely claiming a tone shift. A
+    // kind already flowing (in flowSystems) is excluded, the beads already cover it.
+    const ctxKinds = new Set();
+    for (const b of d.bindings) {
+      if (b.flowKind && !b.toneSign && !d.flowSystems[b.flowKind]) ctxKinds.add(b.flowKind);
+    }
+    d.contextKinds = [...ctxKinds];
     // Focusable if it carries any binding (the info panel + search work even when
     // a target has no modeled region to light); the generator already cleared it
     // for a drug with no bindings at all.

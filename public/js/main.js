@@ -610,6 +610,11 @@ function createSelection({ meshes, arrows }) {
   // unrelated arrows alike): faint enough that the focus pops, but not fully
   // gone, so the rest of the brain still reads as context.
   const DIM = 0.12;
+  // Opacity for *static context* arrows (a drug's postsynaptic-receptor pathways):
+  // clearly visible so the engaged system reads, but below the flowing/pinned
+  // arrows (full, itself capped at ARROW_MAX_OPACITY) so "acts within" never looks
+  // like the animated "sets the tone of".
+  const CONTEXT_ARROW_OPACITY = 0.42;
   const white = new THREE.Color(0xffffff);
 
   for (const mesh of meshes) {
@@ -640,6 +645,12 @@ function createSelection({ meshes, arrows }) {
   // opaque. When empty, isolate mode falls back to "arrows touching an isolated
   // structure" (so a plain structure isolate still lights up its connections).
   const isolatedArrows = new Set();
+  // Static "context" arrows: pathways a focus engages but does NOT animate (a drug's
+  // postsynaptic-receptor systems, see js/data.js contextKinds). Rendered at a
+  // dimmed static opacity, brighter than the faded background but never full-opaque,
+  // and deliberately kept OUT of isolatedArrows so the flow animation's exact-match
+  // watcher (circuitAnim.matches) is unaffected and they carry no beads.
+  const contextArrows = new Set();
   let baseOpacity = 1; // current transparency-slider value
   // Focus-change subscribers, each called on every apply() with the live isolate
   // state. Multiple because both the legend (greying) and the circuit pulse
@@ -659,10 +670,15 @@ function createSelection({ meshes, arrows }) {
 
   const touchesIsolated = (arrow) =>
     isolated.has(arrow.fromMesh) || isolated.has(arrow.toMesh);
-  // Is an arrow part of the current focus? Circuits pin an explicit arrow set;
-  // otherwise any arrow touching an isolated structure counts.
+  // Is an arrow part of the current focus? Circuits/drugs pin an explicit arrow set;
+  // otherwise any arrow touching an isolated structure counts. Once EITHER an explicit
+  // pin or a static-context set exists we are in "explicit" mode, so the touch fallback
+  // is off (a purely postsynaptic drug pins only context arrows and must not relight
+  // every arrow grazing its regions).
   const arrowInFocus = (arrow) =>
-    isolatedArrows.size > 0 ? isolatedArrows.has(arrow) : touchesIsolated(arrow);
+    isolatedArrows.size > 0 || contextArrows.size > 0
+      ? isolatedArrows.has(arrow)
+      : touchesIsolated(arrow);
 
   // Recompute halos + opacity from the current highlight/isolate/base state. One
   // function so the triggers (3D pick, legend, circuits) can never drift apart.
@@ -681,7 +697,11 @@ function createSelection({ meshes, arrows }) {
     // Arrows: keep those in the focus opaque, fade the rest into the background
     // with the dimmed structures; the picked arrow also lights its halo.
     for (const arrow of arrows) {
-      arrow.setOpacity(!active || arrowInFocus(arrow) ? 1 : DIM);
+      let op;
+      if (!active || arrowInFocus(arrow)) op = 1;
+      else if (contextArrows.has(arrow)) op = CONTEXT_ARROW_OPACITY;
+      else op = DIM;
+      arrow.setOpacity(op);
       arrow.setHalo(arrow === highlightedArrow);
     }
     // Pass the pinned-arrow set too (empty unless a circuit/kind is focused) so
@@ -730,18 +750,24 @@ function createSelection({ meshes, arrows }) {
         else isolated.add(m);
       }
       isolatedArrows.clear();
+      contextArrows.clear();
       apply();
       onPickContent();
     },
     /**
      * Replace the whole focus with an explicit circuit: just `meshes` opaque +
      * just `circuitArrows` opaque, everything else faint. Empty args clear it.
+     * `staticArrows` (optional) are pinned at a dimmed *static* opacity (a drug's
+     * postsynaptic-receptor pathways): highlighted but never animated, and kept out
+     * of the pinned set so the flow animation's exact-match watcher is unaffected.
      */
-    setCircuit(circuitMeshes, circuitArrows) {
+    setCircuit(circuitMeshes, circuitArrows, staticArrows = []) {
       isolated.clear();
       isolatedArrows.clear();
+      contextArrows.clear();
       for (const m of circuitMeshes) isolated.add(m);
       for (const a of circuitArrows) isolatedArrows.add(a);
+      for (const a of staticArrows) if (!isolatedArrows.has(a)) contextArrows.add(a);
       highlighted = null;
       highlightedArrow = null;
       apply();
@@ -753,6 +779,7 @@ function createSelection({ meshes, arrows }) {
       highlightedArrow = null;
       isolated.clear();
       isolatedArrows.clear();
+      contextArrows.clear();
       apply();
     },
     /**
@@ -3020,6 +3047,33 @@ function createInfoPanel(data) {
         }
         proj.appendChild(ul);
         body.appendChild(proj);
+      }
+
+      // Acts within (context): the ascending systems this drug engages only through a
+      // POSTSYNAPTIC receptor (drug.contextKinds, e.g. an H1 / 5-HT2 blocker). Their
+      // pathways light statically in the 3D view (dimmed, no beads); blocking a
+      // postsynaptic receptor makes NO tone claim, so they are listed apart from
+      // "Projections affected" above, with a neutral swatch and no direction arrow.
+      // Excludes any system already flowing (that one is a tone-setter row above).
+      if ((drug.contextKinds || []).length && groupsByKey) {
+        const ctx = el("div", "info-connections");
+        ctx.appendChild(el("h3", null, t("drug.actsWithin")));
+        ctx.appendChild(el("p", "legend-caption", t("drug.actsWithinHint")));
+        const ul = el("ul");
+        for (const kind of drug.contextKinds) {
+          const group = groupsByKey.get(`kind:${kind}`);
+          if (!group) continue;
+          const li = el("li", "clickable");
+          li.title = group.name;
+          const sw = el("span", "swatch line");
+          sw.style.background = projColors[kind] || "#fff";
+          li.appendChild(sw);
+          li.appendChild(el("span", "conn-label", group.name));
+          li.addEventListener("click", () => onProjectionGroupPick(group));
+          ul.appendChild(li);
+        }
+        ctx.appendChild(ul);
+        body.appendChild(ctx);
       }
     },
 
@@ -5298,10 +5352,19 @@ async function main() {
     const kinds = new Set(drug.flowKinds || []);
     return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
   };
+  // The arrows for this drug's *context* systems (postsynaptic-receptor pathways, its
+  // `contextKinds` from js/data.js): pinned statically (dimmed, no beads) so a purely
+  // postsynaptic agent (an antihistamine blocking H1) still visibly engages its
+  // system's fan, without the flow overlay's tone claim.
+  const contextArrowsOf = (drug) => {
+    const kinds = new Set(drug.contextKinds || []);
+    return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
+  };
   const focusDrug = (drug, { frame = false, preview = false } = {}) => {
     const meshSet = drugMeshesOf(drug);
     const flowArrows = flowArrowsOf(drug);
-    selection.setCircuit(meshSet, flowArrows);
+    const ctxArrows = contextArrowsOf(drug);
+    selection.setCircuit(meshSet, flowArrows, ctxArrows);
     drugAnim.show(drug, meshById);
     // Per-kind flow direction/weight (js/data.js flowSystems): the pulse rides
     // "up" the fan when the drug raises that system's tone, damped "down" when it
