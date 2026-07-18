@@ -5829,14 +5829,14 @@ async function main() {
     { title: t("tour.separate.title"), body: t("tour.separate.body"),
       target: "#explode",
       before: () => { tourEnsurePanel(); autoSpread.spreadTo(0.55); } },
-    // Orientation: highlight the four browse sections as a group.
-    { title: t("tour.browse.title"), body: t("tour.browse.body"),
-      target: () => TOUR_SECTIONS.map((n) => `#${n}-toggle`),
-      before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
     // Sourcing early: tap the Sources button to open the provenance breakdown.
     { title: t("tour.sources.title"), body: t("tour.sources.body"),
       target: "#sourcing-toggle", interactive: true, scrollTo: true, stayAfterTap: true,
       before: () => { tourReset(); tourEnsurePanel(); } },
+    // Orientation: highlight the four browse sections as a group.
+    { title: t("tour.browse.title"), body: t("tour.browse.body"),
+      target: () => TOUR_SECTIONS.map((n) => `#${n}-toggle`),
+      before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
     // Circuits: open the list, then tap the highlighted circuit row (it plays live).
     { title: t("tour.circuitOpen.title"), body: t("tour.circuitOpen.body"),
       target: "#projections-toggle", interactive: true, scrollTo: true,
