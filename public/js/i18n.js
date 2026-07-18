@@ -113,7 +113,7 @@
         "The <b>Separate</b> slider blows the brain open along the way out, exposing the deep nuclei that are otherwise buried under the cortex.",
       "tour.browse.title": "Browse the data",
       "tour.browse.body":
-        "Everything lives in four lists: <b>Structures</b>, <b>Projections &amp; Circuits</b>, <b>Receptors &amp; targets</b> and <b>Drugs</b>. Open any one and tap a row to focus it. Let's try a few.",
+        "Everything lives in four lists: <b>Structures</b> ({structures}+), <b>Projections &amp; Circuits</b> ({projections}+), <b>Receptors &amp; targets</b> ({receptors}+) and <b>Drugs</b> ({drugs}+). Open any one and tap a row to focus it. Let's try a few.",
       "tour.circuitOpen.title": "Open a list",
       "tour.circuitOpen.body":
         "Tap the highlighted <b>Projections &amp; Circuits</b> to open it.",
@@ -452,7 +452,7 @@
         "Le curseur <b>Séparer</b> ouvre le cerveau vers l'extérieur, révélant les noyaux profonds autrement enfouis sous le cortex.",
       "tour.browse.title": "Parcourir les données",
       "tour.browse.body":
-        "Tout se trouve dans quatre listes : <b>Structures</b>, <b>Projections et circuits</b>, <b>Récepteurs et cibles</b> et <b>Médicaments</b>. Ouvrez-en une et touchez une ligne pour la mettre en avant. Essayons-en quelques-unes.",
+        "Tout se trouve dans quatre listes : <b>Structures</b> ({structures}+), <b>Projections et circuits</b> ({projections}+), <b>Récepteurs et cibles</b> ({receptors}+) et <b>Médicaments</b> ({drugs}+). Ouvrez-en une et touchez une ligne pour la mettre en avant. Essayons-en quelques-unes.",
       "tour.circuitOpen.title": "Ouvrir une liste",
       "tour.circuitOpen.body":
         "Touchez <b>Projections et circuits</b> (en surbrillance) pour l'ouvrir.",

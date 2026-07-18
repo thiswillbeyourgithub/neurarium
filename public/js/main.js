@@ -5821,6 +5821,9 @@ async function main() {
   // themselves (interactive steps in js/tour.js advance on that real tap). The row
   // hooks are `data-tour-id` attributes set in the legend builders; these sample
   // ids must exist in the data (a stale id just leaves the row untargetable).
+  // Round a count DOWN to a friendly floor (179 -> 150, 52 -> 50) so the tour's
+  // "150+" teasers are always truthful (an undercount), never overstating.
+  const tourCount = (n) => { const step = n >= 100 ? 50 : 10; return Math.floor(n / step) * step; };
   const tourSteps = [
     { title: t("tour.welcome.title"), body: t("tour.welcome.body"),
       dim: true, placement: "center" },
@@ -5833,8 +5836,21 @@ async function main() {
     { title: t("tour.sources.title"), body: t("tour.sources.body"),
       target: "#sourcing-toggle", interactive: true, scrollTo: true, stayAfterTap: true,
       before: () => { tourReset(); tourEnsurePanel(); } },
-    // Orientation: highlight the four browse sections as a group.
-    { title: t("tour.browse.title"), body: t("tour.browse.body"),
+    // Orientation: highlight the four browse sections as a group, each teased with
+    // a rounded-down count ("150+"), always an honest undercount (see tourCount).
+    { title: t("tour.browse.title"),
+      body: t("tour.browse.body", {
+        structures: tourCount(data.structures.length),
+        // data.projections is L/R-expanded at load (symmetric twins share one id),
+        // so its length double-counts; the node count (what the collapsed browse
+        // list shows) is the canonical tally total.
+        projections: tourCount(
+          data.meta?.provenanceStats?.by_kind?.projections?.total ??
+            data.projections.length,
+        ),
+        receptors: tourCount(data.targets.length),
+        drugs: tourCount(data.drugs.length),
+      }),
       target: () => TOUR_SECTIONS.map((n) => `#${n}-toggle`),
       before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
     // Circuits: open the list, then tap the highlighted circuit row (it plays live).
