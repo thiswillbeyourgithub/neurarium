@@ -657,7 +657,33 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // a target has no modeled region to light); the generator already cleared it
     // for a drug with no bindings at all.
     d.focusable = !!d.focusable && d.bindings.length > 0;
-    d.keywords = [...d.categoryLabels, d.nbn, ...d.bindings.map((b) => b.targetName)]
+    // Commercial brand names, ordered for THIS locale (the `region` tag orders only,
+    // it is never shown): a French reader sees fr -> eu -> na, everyone else
+    // na -> eu -> fr; within a region the authored order is kept (first = most iconic).
+    // `brandsOrdered` are the graded brand nodes in that order (deduped by name so a
+    // name shared across regions shows once, keeping its first/top-region source);
+    // `primaryBrand` is the single most-iconic name shown after the drug name
+    // everywhere (see drugDisplayName), `brandNames` the full list, `displayName` the
+    // name + primary. All brand names also feed search. See CLAUDE.md "Drugs".
+    const brandRank = (window.__I18N__ && window.__I18N__.lang === "fr")
+      ? { fr: 0, eu: 1, na: 2 }
+      : { na: 0, eu: 1, fr: 2 };
+    const brandSeen = new Set();
+    d.brandsOrdered = (d.brands || [])
+      .map((b, i) => ({ b, r: brandRank[b.region] ?? 9, i }))
+      .sort((x, y) => x.r - y.r || x.i - y.i)
+      .map((x) => x.b)
+      .filter((b) => {
+        const k = (b.name || "").toLowerCase();
+        if (!k || brandSeen.has(k)) return false;
+        brandSeen.add(k);
+        return true;
+      });
+    d.brandNames = d.brandsOrdered.map((b) => b.name);
+    d.primaryBrand = d.brandNames[0] || null;
+    d.displayName = d.primaryBrand ? `${d.name} (${d.primaryBrand})` : d.name;
+    d.keywords = [...d.categoryLabels, d.nbn, ...d.brandNames,
+                  ...d.bindings.map((b) => b.targetName)]
       .filter(Boolean)
       .join(" ");
   }

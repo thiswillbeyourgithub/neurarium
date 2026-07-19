@@ -2430,7 +2430,7 @@ function createInfoPanel(data) {
       // measured Ki chip and the shared source pill all render identically here;
       // clicking a row opens that drug.
       for (const { drug, binding } of byCat.get(cat)) {
-        ul.appendChild(bindingRow(binding, drug, drug.name, () => onDrugPick(drug)));
+        ul.appendChild(bindingRow(binding, drug, drug.displayName, () => onDrugPick(drug)));
       }
       container.appendChild(ul);
     }
@@ -2862,7 +2862,7 @@ function createInfoPanel(data) {
           if (i) links.appendChild(document.createTextNode(" · "));
           const linked = c.drugId && drugById.get(c.drugId);
           if (linked && linked.focusable) {
-            const a = el("button", "combo-link", c.name);
+            const a = el("button", "combo-link", linked.displayName);
             a.type = "button";
             a.addEventListener("click", () => onDrugPick(linked));
             links.appendChild(a);
@@ -2979,6 +2979,27 @@ function createInfoPanel(data) {
         });
       }
       if (facts.childElementCount) body.appendChild(facts);
+
+      // Commercial brand names, each its own graded node (Stahl backs na, Wikipedia
+      // eu/fr). Listed in the locale's order (the primary/most-iconic brand first, the
+      // same one shown after the drug name everywhere); the region tag is never shown.
+      // Each brand carries its own provenance pill, so no node is left unbadged and a
+      // mixed-grade list (once eu/fr are added) reads honestly.
+      if (drug.brandsOrdered && drug.brandsOrdered.length) {
+        const brandsEl = el("div", "info-bindings info-brands");
+        brandsEl.appendChild(el("h3", null, t("drug.brands")));
+        const ul = el("ul");
+        for (const b of drug.brandsOrdered) {
+          const li = el("li");
+          li.appendChild(el("span", "bind-target", b.name));
+          li.appendChild(b.sources && b.sources.length
+            ? makeProvenancePill(b.sources[0].provenance, sourcesTip(b.sources))
+            : makeProvenancePill(null));
+          ul.appendChild(li);
+        }
+        brandsEl.appendChild(ul);
+        body.appendChild(brandsEl);
+      }
 
       // (Ki ranking uses the shared bindingKi helper.)
 
@@ -3196,8 +3217,8 @@ function createInfoPanel(data) {
           const ul = el("ul");
           for (const d of acting) {
             const li = el("li", "clickable");
-            li.title = d.name;
-            li.appendChild(el("span", "bind-target", d.name));
+            li.title = d.displayName;
+            li.appendChild(el("span", "bind-target", d.displayName));
             const cat = d.categoryLabels && d.categoryLabels[0];
             if (cat) li.appendChild(el("span", "legend-tag", cat));
             // Symmetric sourcing with the drug panel's "Projections affected" row:
@@ -3440,7 +3461,7 @@ function buildDrugLegend(data, onPick) {
     const groupRows = [];
     for (const drug of list) {
       const row = addLegendItem(
-        container, drugSwatchColor(drug, effectColors), drug.name, true);
+        container, drugSwatchColor(drug, effectColors), drug.displayName, true);
       row.classList.add("drug-item");
       row._haystack = foldText(`${drug.name} ${drug.keywords}`);
       row.dataset.tourId = `drug:${drug.id}`; // guided-tour target hook
@@ -4483,7 +4504,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // clickable Class / Nomenclature values), pre-folded for matching.
     ...(data.drugs || []).filter((d) => d.focusable).map((drug) => ({
       type: "drug",
-      label: drug.name + (drug.category ? ` · ${drug.category}` : ""),
+      label: drug.displayName + (drug.category ? ` · ${drug.category}` : ""),
       keywords: drug.keywords || "",
       fields: {
         class: foldText(drug.categoryLabels.join(" ")),
@@ -5379,7 +5400,7 @@ async function main() {
     if (frame && meshSet.length) focus.focusMeshes(meshSet);
     activeDrugId = drug.id;
     refreshDrugRows();
-    openDetailTab(`drug:${drug.id}`, drug.name, () => focusDrug(drug));
+    openDetailTab(`drug:${drug.id}`, drug.displayName, () => focusDrug(drug));
   };
   const toggleDrug = (drug) => {
     if (activeDrugId === drug.id) selection.clear(); // watcher hides the animation
