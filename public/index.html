@@ -1412,6 +1412,20 @@
         color: var(--accent-light);
         text-decoration: underline;
       }
+      /* The "Click for details" cue inside a provenance tooltip: a link-styled
+         button that opens the Sources & provenance popup (see makeDetailsCue). */
+      .src-details-cue {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font: inherit;
+        color: var(--accent-light);
+        background: none;
+        border: none;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .src-details-cue:hover { color: var(--accent-bright); }
       .info-connections li {
         display: flex;
         align-items: center;

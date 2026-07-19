@@ -1722,6 +1722,9 @@ function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
     window.removeEventListener("resize", reposition);
     document.removeEventListener("pointerdown", onDocPointer, true);
   };
+  // Exposed so an interactive element *inside* the bubble (e.g. a provenance pill's
+  // "Click for details" cue) can dismiss it cleanly before opening a popup.
+  tip._close = close;
   const scheduleHide = () => {
     clearTimeout(hideTimer);
     hideTimer = setTimeout(() => {
@@ -1746,7 +1749,7 @@ function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
   return host;
 }
 
-function createInfoPanel(data) {
+function createInfoPanel(data, sourcingModal) {
   const body = document.getElementById("info-body");
   const nameOf = (id) => data.byId.get(id)?.name || id;
   // Hemisphere-stripped name ("Frontal lobe", not "Right frontal lobe"): used by
@@ -1914,24 +1917,38 @@ function createInfoPanel(data) {
     // trustworthy" checkmark rather than a cryptic "W" (the tooltip still names which).
     wikipedia: { glyph: "✓", tip: "info.provWikipedia" },
   };
+  // A small "Click for details" cue for a provenance tooltip: opens the Sources &
+  // provenance popup (the single place that explains what each grade means) and
+  // dismisses its own tooltip first. Replaces the verbose per-grade paragraph that
+  // used to be inlined into every pill (see makeProvenancePill).
+  const makeDetailsCue = () => {
+    const cue = el("button", "src-details-cue", t("info.provDetails"));
+    cue.type = "button";
+    cue.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const tipEl = cue.closest(".help-tip");
+      if (tipEl && tipEl._close) tipEl._close();
+      if (sourcingModal && sourcingModal.open) sourcingModal.open();
+    });
+    return cue;
+  };
+
   // `extra` (optional) is the concrete source shown *first* in the tooltip (the
-  // per-claim drug pill's verbatim quote + page ref, or a bibliographic citation),
-  // followed after a blank line by the grade explainer (`base`): the actual source
-  // is what the reader wants up top, the tier explanation is the footnote under it
-  // (.help-tip is white-space:pre-line so the newlines show).
+  // per-claim drug pill's verbatim quote + page ref, or a bibliographic citation);
+  // under it sits a "Click for details" cue that opens the Sources & provenance
+  // popup for the grade key (the verbose per-grade explainer is no longer inlined
+  // into every pill). `base` (the full grade text) stays as the pill's aria-label.
+  // (.help-tip is white-space:pre-line so the newlines show.)
   const makeProvenancePill = (level, extra) => {
     const spec = PROVENANCE_PILLS[level];
     const base = spec ? t(spec.tip) : t("info.provNone");
-    // `extra` is usually a string; it may be a Node (e.g. a clickable source link),
-    // in which case keep it live and append the grade explainer under it (the
-    // .help-tip is white-space:pre-line, so the blank line renders).
-    let tip;
+    const tip = document.createDocumentFragment();
     if (extra instanceof Node) {
-      tip = document.createDocumentFragment();
-      tip.append(extra, document.createTextNode(`\n\n${base}`));
-    } else {
-      tip = extra ? `${extra}\n\n${base}` : base;
+      tip.append(extra, document.createTextNode("\n\n"));
+    } else if (extra) {
+      tip.append(document.createTextNode(`${extra}\n\n`));
     }
+    tip.append(makeDetailsCue());
     const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
     const pill = el("button", cls, spec ? spec.glyph : NOSOURCE_GLYPH);
     pill.type = "button";
@@ -5252,7 +5269,7 @@ async function main() {
   // Connection info panel (populated when an arrow is clicked or a connection is
   // picked in the search). Created here so the click/tap handlers below can use it.
   const tabs = createPanelTabs();
-  const info = createInfoPanel(data);
+  const info = createInfoPanel(data, sourcingModal);
   // Open (or re-activate) a detail tab for the thing a select* just rendered +
   // focused; the reopen thunk re-runs that select* so clicking the tab restores
   // the panel + the 3D focus. Kept here (not in createInfoPanel) so the tab's key

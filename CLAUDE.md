@@ -550,9 +550,12 @@ coloured **pill**; the grade is **data**. Grades (`PROVENANCE_LEVELS`, weakest t
   the source, and a separate LLM agreed it supports the claim. Highest grade; still LLM-driven.
 - absence -> a red **✕** pill (`NOSOURCE_GLYPH`, `.src-todo`). Not a stored grade.
 
-Every node's grade rides its own row/heading (`makeProvenancePill(level)`, `info.prov*` tooltip via
-`withTip`), never a separate bottom "Sources" block (a source only ever grades one node); a node with
-no source shows `NOSOURCE`, never a blank. How the tally buckets these grades (and why `llm` counts as
+Every node's grade rides its own row/heading (`makeProvenancePill(level)`), never a separate bottom
+"Sources" block (a source only ever grades one node); a node with no source shows `NOSOURCE`, never a
+blank. The pill's tooltip shows the concrete source (the verbatim quote + citation) then a small "Click
+for details" cue (`makeDetailsCue`) that opens the Sources & provenance popup: that popup is the single
+place explaining what each grade means, so the verbose per-grade paragraph is not inlined into every
+pill (it stays only as the pill's `aria-label`, `info.prov*`). How the tally buckets these grades (and why `llm` counts as
 unbacked): see The "% sourced" figure.
 
 **The sourcing model.** A verified quote node may carry an optional `llm` (`haiku`/`sonnet`/`opus`,
