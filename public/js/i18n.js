@@ -275,7 +275,7 @@
       "loading.tagline": "a (mostly) sourced atlas of psychiatric neuroscience",
       "loading.cta":
         'Have an idea for a feature? I\'d happily build it, ' +
-        '<a href="https://olicorne.org/" target="_blank" ' +
+        '<a href="https://olicorne.org/en/contact" target="_blank" ' +
         'rel="noopener noreferrer">get in touch</a>.',
 
       "about.p1":
@@ -620,7 +620,7 @@
       "loading.tagline": "un atlas (en grande partie) sourcé des neurosciences psychiatriques",
       "loading.cta":
         'Une idée de fonctionnalité ? Je la réaliserais volontiers, ' +
-        '<a href="https://olicorne.org/" target="_blank" ' +
+        '<a href="https://olicorne.org/fr/contact" target="_blank" ' +
         'rel="noopener noreferrer">prenez contact</a>.',
 
       "about.p1":
