@@ -67,6 +67,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let waitFn = null; // its one-shot click handler (removed on leave)
   let observed = false; // a stayAfterTap step whose demo has been triggered
   let shownOnce = false; // false until the first step paints (snap it, don't fly in)
+  let scrolling = false; // true while a scrollTo row is easing into view (see onScroll)
 
   const seen = () => {
     if (!seenKey) return false;
@@ -219,11 +220,15 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       const box = { left: x, top: y, right: x + w, bottom: y + h };
       if (interactive) setHole(box);
       else clearHole();
-      placeBubbleBy(box);
+      // While a row scrolls into view the ring tracks it 1:1 (snapped, above), but
+      // the bubble is left alone so it doesn't snap frame-by-frame: onScroll's
+      // settle re-runs layout with the glide on, easing the bubble to its final
+      // spot in one smooth move instead of jittering along with the scroll.
+      if (!scrolling) placeBubbleBy(box);
     } else {
       ring.hidden = true;
       clearHole();
-      placeCaption(consumed ? "brain" : step.placement || "top");
+      if (!scrolling) placeCaption(consumed ? "brain" : step.placement || "top");
     }
   }
 
@@ -303,6 +308,8 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     }
     index = i;
     observed = false;
+    scrolling = false; // a fresh step always places its bubble (a prior scroll may not have settled)
+    if (scrollTimer) { clearTimeout(scrollTimer); scrollTimer = null; }
     // The very first step snaps into place (no fly-in from the corner); every
     // later step glides from the previous one (smooth step-to-step transitions).
     setAnim(shownOnce);
@@ -420,11 +427,15 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let scrollTimer = null;
   function onScroll() {
     if (index < 0) return;
+    scrolling = true; // freeze the bubble (layout skips it); the ring still tracks 1:1
     setAnim(false);
     layout();
     if (scrollTimer) clearTimeout(scrollTimer);
     scrollTimer = setTimeout(() => {
-      if (index >= 0) setAnim(true);
+      if (index < 0) return;
+      scrolling = false;
+      setAnim(true);
+      layout(); // re-place the bubble with the glide on, easing it to its settled spot
     }, 140);
   }
 
