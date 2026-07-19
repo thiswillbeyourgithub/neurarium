@@ -439,6 +439,42 @@ def _binding_sources(drug_id: str, binding: dict[str, Any]) -> list[dict[str, An
         f"Drug {drug_id!r} binding {binding.get('target')!r}")
 
 
+# The regions a brand's ``region`` tag may take, used ONLY to order a drug's brands
+# per locale (fr -> eu -> na in French, na -> eu -> fr in English); the tag is never
+# shown in the UI. na comes from Stahl, eu/fr from Wikipedia (see apply_brand_sources.py).
+BRAND_REGIONS = ("na", "eu", "fr")
+
+
+def _drug_brands(drug_id: str, brands: Any) -> list[dict[str, Any]]:
+    """Validate + normalize a drug's commercial ``brands`` (one graded node each).
+
+    Each authored brand is ``{name, region, sources}``: ``name`` a non-empty brand
+    string (a proper noun, so NOT run through the FR table), ``region`` a
+    :data:`BRAND_REGIONS` tag used only for per-locale ordering (never displayed),
+    and ``sources`` the usual quote-level provenance (validated + quote-checked like
+    an NbN source). List order is significant: the first brand of a region is its most
+    iconic one (the one shown after the drug name in that locale). Returns the emitted
+    brand nodes (empty list when none authored); each is its own graded node
+    (kind ``drug_brands`` in the provenance tally).
+    """
+    out: list[dict[str, Any]] = []
+    for br in brands or []:
+        name = br.get("name")
+        if not (isinstance(name, str) and name.strip()):
+            raise ValueError(f"Drug {drug_id!r} has a brand with no non-empty 'name'")
+        region = br.get("region")
+        if region not in BRAND_REGIONS:
+            raise ValueError(
+                f"Drug {drug_id!r} brand {name!r} has region {region!r} "
+                f"(not one of {BRAND_REGIONS})")
+        rec: dict[str, Any] = {"name": name.strip(), "region": region}
+        sources = _quote_sources(br.get("sources"), f"Drug {drug_id!r} brand {name!r}")
+        if sources:
+            rec["sources"] = sources
+        out.append(rec)
+    return out
+
+
 def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | None:
     """Validate + normalize a binding's ``ki`` annotation (measured binding
     affinity), or ``None`` when absent.
@@ -601,6 +637,11 @@ def _provenance_stats(structures: list[dict[str, Any]],
     }
     nbn_grades = [_strongest_grade(d.get("nbn_sources"))
                   for d in drugs if d.get("nbn")]
+    # Commercial-brand nodes ("this drug is marketed as <brand>"), one per authored
+    # brand across all drugs, graded by that brand's own sources (Stahl for na,
+    # Wikipedia for eu/fr; see apply_brand_sources.py).
+    brand_grades = [_strongest_grade(br.get("sources"))
+                    for d in drugs for br in d.get("brands", [])]
     # Drug class-classification nodes ("this drug is an SSRI/..."), one per drug that
     # has categories: the emitted category_provenance (llm unless overridden/sourced).
     category_grades = [d.get("category_provenance", DEFAULT_PROVENANCE)
@@ -684,6 +725,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
     by_kind = {
         "drug_bindings": tally(binding_grades),
         "drug_nbn": tally(nbn_grades),
+        "drug_brands": tally(brand_grades),
         "drug_categories": tally(category_grades),
         "projections": tally(projection_grades),
         "circuits": tally(circuit_grades),

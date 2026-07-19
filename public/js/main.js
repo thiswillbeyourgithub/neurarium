@@ -3996,6 +3996,7 @@ function buildAboutSourcing(meta) {
   const KIND_LABELS = {
     drug_bindings: "about.kindBindings",
     drug_nbn: "about.kindNbn",
+    drug_brands: "about.kindDrugBrands",
     drug_categories: "about.kindDrugCategories",
     projections: "about.kindProjections",
     circuits: "about.kindCircuits",

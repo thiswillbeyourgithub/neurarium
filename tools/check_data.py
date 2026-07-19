@@ -628,10 +628,11 @@ def print_coverage(stats):
     by = stats.get("by_kind", {})
     a = stats.get("nodes", {})
     # The node kinds folded into the headline, in the generator's order.
-    node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
-                  "circuits", "projection_groups", "receptors", "receptor_class",
-                  "receptor_sign", "receptor_synaptic", "receptor_locations",
-                  "targets", "target_polarity", "target_locations", "structures")
+    node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
+                  "projections", "circuits", "projection_groups", "receptors",
+                  "receptor_class", "receptor_sign", "receptor_synaptic",
+                  "receptor_locations", "targets", "target_polarity",
+                  "target_locations", "structures")
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -799,8 +800,8 @@ def check_provenance(report, meta, structures, projections, circuits,
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
-        node_kinds = ("drug_bindings", "drug_nbn", "drug_categories", "projections",
-                      "circuits", "projection_groups", "receptors",
+        node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
+                      "projections", "circuits", "projection_groups", "receptors",
                       "receptor_class", "receptor_sign", "receptor_synaptic",
                       "receptor_locations", "targets", "target_polarity",
                       "target_locations", "structures")

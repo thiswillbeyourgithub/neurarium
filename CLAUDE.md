@@ -85,6 +85,8 @@ in `meta.provenance_stats.by_kind`):
 - target *expression region* -> a target's `location_sources` -> `target_locations`
 - drug binding -> a drug's `bindings[]` -> `drug_bindings`
 - drug NbN label -> a drug's `nbn` -> `drug_nbn`
+- drug commercial brand name -> a drug's `brands[]` -> `drug_brands` (each brand a graded
+  node; `region` na/eu/fr orders them per locale, never shown; na from Stahl, eu/fr from Wikipedia)
 - drug class classification -> a drug's `categories` (+ `category_provenance`) -> `drug_categories`
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
   tallied but excluded from the headline; a reference is not itself a knowledge node)
@@ -578,7 +580,10 @@ author-side (see `CLAUDE.local.md`), so the quote gate is skipped + warned on a 
 `NOSOURCE`. The **NbN** is simpler: `apply_nbn_sources.py` greps Stahl's verbatim
 "Neuroscience-based Nomenclature: <value>" line and confirms the dataset `nbn` is a substring (stronger
 than a judge for this fixed field); a newer drug with no NbN line falls back to Stahl's **Class** line
-under the same gate, marked `nbn_nonstandard`.
+under the same gate, marked `nbn_nonstandard`. **Brands** are gated the same way:
+`apply_brand_sources.py` reads each drug's Stahl "Brands?" dump list and confirms each brand appears
+verbatim on the drug's page range (region `na`, `verified`); a brand not found verbatim is dropped, not
+guessed. The eu/fr brands come from Wikipedia (see corpus #9 style), region-tagged only for ordering.
 
 The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless noted:
 - **#1 Stahl / #2 Kandel / #3 Stahl Essential / #4 Carlat / #6 Nieuwenhuys** are `pages_dir` book

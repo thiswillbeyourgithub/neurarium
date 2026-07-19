@@ -117,6 +117,7 @@ from data_generators.provenance import (  # noqa: E402
     WIKIPEDIA_PROVENANCE,
     _GRADE_RANK,
     _binding_sources,
+    _drug_brands,
     _ki_annotation,
     _location_sources,
     _lookup_provenance,
@@ -803,6 +804,12 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         nbn_sources = _quote_sources(drug.get("nbn_sources"), f"Drug {drug['id']!r} nbn")
         if nbn_sources:
             out["nbn_sources"] = nbn_sources
+    # Commercial brand names (Xanax, ...), each a graded node with its own source
+    # (kind `drug_brands`). Region-tagged (na/eu/fr) only to order them per locale;
+    # the viewer never shows the region. See _drug_brands + apply_brand_sources.py.
+    brands = _drug_brands(drug["id"], drug.get("brands"))
+    if brands:
+        out["brands"] = brands
     # Drug descriptions are intentionally NOT baked: the panel fetches the current
     # Wikipedia lead at runtime (js/wiki.js), exactly like a structure/target, so the
     # text stays up to date and the dataset ships no copyrighted prose. A drug whose
