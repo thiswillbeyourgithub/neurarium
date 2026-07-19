@@ -86,6 +86,7 @@ CORPUS_DESC = {
 KIND_LABELS = {
     "drug_bindings": "Drug target bindings",
     "drug_nbn": "Drug nomenclature (NbN)",
+    "drug_brands": "Drug brand names",
     "drug_categories": "Drug class",
     "projections": "Neuron pathways",
     "circuits": "Functional circuits",
@@ -190,6 +191,8 @@ def render_block(stats: dict) -> str:
         f"pathway, a receptor, a drug binding, ...). This is a programmatic count "
         f"(`tools/update_readme_stats.py`, from the emitted data), not hand-typed:",
         "",
+        "```",
+        *chart,
         "```",
     ]
     # Measured-affinity (PDSP Ki) coverage: a SEPARATE honesty line, not part of the %
