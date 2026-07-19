@@ -1355,6 +1355,13 @@
       /* Separator between sibling reference links (e.g. Wikipedia · Vidal on a
          French drug panel). */
       .info-wiki .ref-sep { color: var(--muted); margin: 0 6px; }
+      /* A live-fetched Wikipedia description shows its provenance as the Wikipedia
+         link itself, relocated to the end of the description in place of a grade
+         pill (see liveWikiDescription): it reuses the green .src-prov-wikipedia
+         pill shape (so it reads as the trusted "live, verbatim, no-AI" tier) but
+         stays a link, so drop the .info-wiki underline; nowrap keeps the label +
+         its ↗ together. */
+      .wiki-src { text-decoration: none; white-space: nowrap; }
       /* "?" caveat badge next to every Source / Reference: the citations + links
          are LLM-inferred and not yet human-checked. The tooltip shows on
          hover/focus (desktop) and is pinned on click/tap via .show (touch, where

@@ -353,6 +353,10 @@
       "about.gradeLlm":
         "AI only: may be a hallucination.",
       "about.gradeNone": "No source: none gathered yet.",
+      "about.gradeWikipedia":
+        "Wikipedia link: shown instead of a grade on a live description. The text is " +
+        "the article's current lead, read live and verbatim (no AI); the link is the " +
+        "source, click it to open the article.",
       "about.segVerified": "Verified",
       "about.segSourced": "Sourced",
       "about.segLlm": "AI only",
@@ -711,6 +715,10 @@
       "about.gradeLlm":
         "IA seule : peut être une hallucination.",
       "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
+      "about.gradeWikipedia":
+        "Lien Wikipédia : affiché à la place d’un niveau sur une description en direct. " +
+        "Le texte est l’introduction actuelle de l’article, lue en direct et telle quelle " +
+        "(sans IA) ; le lien est la source, cliquez pour ouvrir l’article.",
       "about.segVerified": "Vérifié",
       "about.segSourced": "Sourcé",
       "about.segLlm": "IA seule",

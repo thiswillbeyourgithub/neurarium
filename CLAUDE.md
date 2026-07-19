@@ -630,13 +630,18 @@ the dataset ships no copyrighted prose (a panel whose live lead fails shows none
 groups carry a short **authored** `description` as the offline fallback, overridden best-effort by the
 live lead. Needs the `connect-src https://*.wikipedia.org` CSP allowance.
 
-**The `wikipedia` pill (green, viewer-only).** A live-fetched lead renders a green **✓** pill (same
-glyph as `verified`: both are inspectable non-LLM extracts), NOT the stored `sourced`/`llm` grade: a
-live fetch is a verbatim programmatic read that cannot drift from the article. It is a **presentation**
-(`PROVENANCE_PILLS.wikipedia` + `info.provWikipedia`, `.src-prov-wikipedia` shares the green), **not** a
-stored grade and **not** tallied. Asymmetry: a **baked** Wikipedia snapshot stays yellow `sourced` (a
-stored copy *can* drift); only the **live** read earns green. A present reference *link* carries no pill
-(the description above already grades the same source, `appendWiki(url)`); a missing link shows `NOSOURCE`.
+**The live-Wikipedia source link (green, viewer-only).** A live-fetched lead shows its provenance as the
+**Wikipedia link itself**, relocated (by `liveWikiDescription`) to the end of the description in place of a
+grade pill and styled as a green pill-link (`.wiki-src`, reusing `.src-prov-wikipedia`): a live fetch is a
+verbatim programmatic read that cannot drift, so it earns the green tier, and the link (not a cryptic ✓)
+makes plain the text is *from* Wikipedia and clicks through to it. `appendWiki` stashes the reference link
+as `wrap._refLink`; on a successful fetch it moves up and the emptied reference row is dropped (any lookup
+links stay). It is a **presentation**, **not** a stored grade and **not** tallied; the green ✓
+`PROVENANCE_PILLS.wikipedia` pill (`info.provWikipedia`) remains only as a fallback if the link can't be
+moved. Asymmetry: a **baked** Wikipedia snapshot stays yellow `sourced` (a stored copy *can* drift); only
+the **live** read earns the green link. When the live fetch fails, the baked description keeps its stored
+pill and the reference link stays in its own row; a missing link shows `NOSOURCE`. The Sources & provenance
+popup's grade key carries this Wikipedia-link exception as its last row (`about.gradeWikipedia`).
 
 **The "% sourced" figure.** `_provenance_stats` reduces every node + reference to its strongest grade and
 buckets it into **verified** (quote-checked) / **sourced** (from a document) / **missing** (no document).

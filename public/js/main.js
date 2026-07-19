@@ -1912,9 +1912,11 @@ function createInfoPanel(data, sourcingModal) {
     llm: { glyph: "?", tip: "info.provLlm" },
     sourced: { glyph: "~", tip: "info.provSourced" },
     verified: { glyph: "✓", tip: "info.provVerified" },
-    // A live Wikipedia read shares the green *and* the ✓ of `verified`: both are an
-    // inspectable, non-LLM extract of a real source, so a newcomer reads one "this is
-    // trustworthy" checkmark rather than a cryptic "W" (the tooltip still names which).
+    // Fallback marker for a live Wikipedia read. Normally the read's provenance is
+    // the Wikipedia link itself, relocated into the description (see
+    // liveWikiDescription); this ✓ pill only shows if that link could not be moved.
+    // It shares the green of `verified` because both are an inspectable, non-LLM
+    // extract of a real source (the tooltip names which).
     wikipedia: { glyph: "✓", tip: "info.provWikipedia" },
   };
   // A small "Click for details" cue for a provenance tooltip: opens the Sources &
@@ -2242,6 +2244,12 @@ function createInfoPanel(data, sourcingModal) {
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       wrap.appendChild(a);
+      // Stash the reference link so a successful live-lead fetch can relocate it
+      // up into the description as that text's source marker (see
+      // liveWikiDescription), in place of a grade pill: for a live verbatim read
+      // the link both names the source and reaches it, so a checkmark beside a
+      // link to the very same source is redundant.
+      wrap._refLink = a;
     } else {
       wrap.appendChild(el("span", null, t("info.reference")));
       wrap.appendChild(makeProvenancePill(null)); // no reference -> NOSOURCE pill
@@ -2294,7 +2302,7 @@ function createInfoPanel(data, sourcingModal) {
   // replacing any baked fallback: a live fetch is a programmatic verbatim read of the
   // article, so it grades higher than the baked snapshot it supersedes.
   const liveWikiDescription = (url, {
-    paragraph = null, anchor = null, before = false,
+    paragraph = null, anchor = null, before = false, linkWrap = null,
   } = {}) => {
     if (typeof url !== "string" || !/^https?:\/\//i.test(url)) return;
     fetchWikiLead(url, window.__I18N__.lang).then((live) => {
@@ -2309,7 +2317,7 @@ function createInfoPanel(data, sourcingModal) {
       }
       // The live lead is now the full intro (several newline-separated
       // paragraphs): the first reuses `p`, the rest become sibling <p>s, and the
-      // provenance pill trails the last so it all reads as one sourced block.
+      // source marker trails the last so it all reads as one sourced block.
       const paras = live.text.split(/\n+/).map((s) => s.trim()).filter(Boolean);
       p.textContent = paras.length ? paras[0] : live.text;
       let last = p;
@@ -2319,7 +2327,24 @@ function createInfoPanel(data, sourcingModal) {
         last = extra;
       }
       last.appendChild(document.createTextNode(" "));
-      last.appendChild(makeProvenancePill("wikipedia"));
+      // Provenance for a live verbatim read is the Wikipedia link itself, shown
+      // here in place of a green ✓ pill: a checkmark beside a link to the very
+      // same source added nothing (its tooltip only pointed back at the link),
+      // whereas the link makes plain the text is *from* Wikipedia and clicks
+      // through to it. Relocate the reference-row link up here (reusing the node,
+      // so there is no duplicate) and style it as the green source pill, then
+      // tidy the row it left: drop a now-leading "·" separator, and the whole row
+      // if only the reference lived there (lookup links, if any, stay).
+      const refLink = linkWrap && linkWrap._refLink;
+      if (refLink && refLink.isConnected) {
+        refLink.classList.add("src-pill", "src-prov-wikipedia", "wiki-src");
+        last.appendChild(refLink);
+        const lead = linkWrap.firstElementChild;
+        if (lead && lead.classList.contains("ref-sep")) lead.remove();
+        if (!linkWrap.querySelector("a")) linkWrap.remove();
+      } else {
+        last.appendChild(makeProvenancePill("wikipedia")); // fallback marker
+      }
     });
   };
 
@@ -2349,8 +2374,8 @@ function createInfoPanel(data, sourcingModal) {
     // Link goes after the description so the reference sits below the text it backs.
     const wiki = appendWiki(url);
     liveWikiDescription(url, paragraph
-      ? { paragraph }
-      : { anchor: wiki, before: true });
+      ? { paragraph, linkWrap: wiki }
+      : { anchor: wiki, before: true, linkWrap: wiki });
     return { paragraph, wiki };
   };
 
@@ -4003,14 +4028,18 @@ function buildAboutSourcing(meta) {
   host.appendChild(h("p", "about-caveat", t("about.sourcingCaveat")));
 
   // Grade key: a pill swatch + its meaning, in weakest-to-strongest order
-  // (NOSOURCE first, then LLM-only up to verified). The pills reuse the
-  // info-panel CSS classes so the legend matches the pills shown next to each source.
+  // (NOSOURCE first, then LLM-only up to verified, then the live-Wikipedia link).
+  // The swatches reuse the info-panel CSS classes so the legend matches what is
+  // shown next to each source. The last row is the exception the panels make for a
+  // live-fetched description: its source is the green Wikipedia link itself, in
+  // place of a grade pill (see liveWikiDescription / .wiki-src).
   const key = h("ul", "src-key");
   const keyRows = [
     ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
     ["src-prov-llm", "?", "about.gradeLlm"],
     ["src-prov-sourced", "~", "about.gradeSourced"],
     ["src-prov-verified", "✓", "about.gradeVerified"],
+    ["src-prov-wikipedia wiki-src", t("info.wikipedia"), "about.gradeWikipedia"],
   ];
   for (const [cls, glyph, tip] of keyRows) {
     const li = document.createElement("li");

@@ -204,7 +204,9 @@ Views:
   Arrow picking (`pickArrowAt`) beats the region behind.
 - **structure** (`showStructure`): name, a group heading with the anatomy grade pill
   (`classification_provenance`), a Reference row (Wikipedia link or `NOSOURCE`), the live Wikipedia
-  lead as a `sourced` description (fetch-only, no baked copy), then the pathway list. Each connection
+  lead as a description whose source marker is the Wikipedia link itself, relocated inline in place of a
+  grade pill (the reference row is then dropped; it stays only for a failed fetch or lookups), then the
+  pathway list. Each connection
   row: a bold `directionArrow` (inline SVG, pathway colour, out/in/both; wrapped in `withTip` so a
   tap explains direction without bubbling to the row click), the other endpoint, and the pathway's
   summary pill (`proj.provenance`, resolved in `js/data.js`). Left/right twin pathways collapse to
