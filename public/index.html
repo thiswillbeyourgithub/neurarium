@@ -577,7 +577,13 @@
            padding). The .modal wins over .panel's narrow feel; each popup's own
            content sets its natural width up to this cap. */
         width: min(540px, calc(100vw - 32px));
+        /* dvh (not vh) so the cap tracks the *visible* viewport: on mobile 100vh is
+           the URL-bar-hidden height, so a vh-sized modal overshoots the screen, gets
+           centered, and its top (the close ×) is clipped above the fold and cannot be
+           reached (the overlay is fixed, so the page can't scroll to it). dvh fits the
+           visible area, so the modal scrolls its own content instead. vh line = fallback. */
         max-height: calc(100vh - 32px);
+        max-height: calc(100dvh - 32px);
         overflow-y: auto;
         /* .modal reuses the .panel class for chrome, but .panel sets
            user-select:none (it is the 3D-control surface). Popups are reading
@@ -589,7 +595,7 @@
          It still scrolls its own overflow (max-height + overflow-y above). */
       @media (max-width: 560px) {
         .modal-overlay { padding: 10px; }
-        .modal { width: calc(100vw - 20px); max-height: calc(100vh - 20px); }
+        .modal { width: calc(100vw - 20px); max-height: calc(100vh - 20px); max-height: calc(100dvh - 20px); }
       }
       .modal h2 { margin: 2px 0 14px; font-size: 15px; padding-right: 20px; }
       /* Image lightbox (#image-lightbox): the clicked illustration shown large,
@@ -624,10 +630,17 @@
       .lightbox-close:hover { background: rgba(40, 46, 54, 0.95); }
       /* A panel image the user can click to enlarge gets the zoom cursor. */
       .structure-image img, .mol-structure img { cursor: zoom-in; }
+      /* Sticky (not absolute) + float so the × stays pinned to the modal's visible
+         top-right while a long popup scrolls its content under it: an absolute button
+         is part of the scrollable overflow and scrolls out of view (the cause of the
+         "cross is hidden, can't close" on tall popups). float puts it top-right beside
+         the title; sticky top:0 keeps it there as the .modal scroll area moves. */
       .modal .info-close {
-        position: absolute;
-        top: 12px;
-        right: 14px;
+        position: sticky;
+        top: 0;
+        float: right;
+        margin: -4px -6px 4px 8px;
+        z-index: 1;
         width: 24px;
         height: 24px;
         padding: 0;
