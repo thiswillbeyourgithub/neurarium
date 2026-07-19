@@ -233,10 +233,14 @@ Viewer (`public/`):
   `window.__APP_VERSION__` (Versioning).
 
 Deployment (`docker/`): `docker-compose.yml` (hardened Caddy), `Dockerfile`
-(strips caddy's `cap_net_bind_service` so `exec` works under `no-new-privileges`),
+(two-stage: `xcaddy build`s a custom binary with the `caddy-ratelimit` module,
+so `docker compose build` needs network; then strips caddy's
+`cap_net_bind_service` so `exec` works under `no-new-privileges`),
 `Caddyfile` (serves `/srv` on `:8359`, serves `/gen/app-config.js` for
 `/app-config.js`, split `Cache-Control`: `no-cache` on `/data/*` (revalidate -> cheap `304`s,
-never stale), `no-store` on code + shell; security headers incl. CSP),
+never stale), `no-store` on code + shell; a generous per-`{client_ip}` `rate_limit`
+flood guard, keyed via the front proxy's `X-Forwarded-For`/`trusted_proxies`;
+security headers incl. CSP),
 `env.example`, `entrypoint.sh` (stamps `STARTED_AT`, validates `ANALYTICS_URL`,
 derives `ANALYTICS_ORIGIN`, renders `/gen/app-config.js`).
 

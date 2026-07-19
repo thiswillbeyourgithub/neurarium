@@ -10,12 +10,46 @@
 	# the read-only rootfs anyway). admin off drops the local admin API surface.
 	admin off
 	auto_https off
+
+	# rate_limit comes from the caddy-ratelimit module (built into the binary by
+	# docker/Dockerfile), so it is not in Caddy's default directive order and must
+	# be placed explicitly. Run it first, before headers/file_server, so a flood is
+	# rejected cheaply.
+	order rate_limit before header
+
+	# TLS + the public connection terminate at the host reverse proxy, so the peer
+	# Caddy sees is that proxy (a loopback / private address), not the visitor.
+	# Trust private-range peers so {client_ip} resolves to the real client from the
+	# proxy's X-Forwarded-For header (used as the rate-limit key below). Harmless if
+	# the proxy is on a private/loopback address (it is); see the rate_limit note.
+	servers {
+		trusted_proxies static private_ranges
+	}
 }
 
 :8359 {
 	root * /srv
 
 	encode gzip zstd
+
+	# Generous per-client flood guard (caddy-ratelimit module), purely to blunt a
+	# single-source DoS, NOT to ration normal use. A cold page load is ~100 requests
+	# (index + JS modules + meta.json + the ~40 shape files), so 600 events / 10s per
+	# client leaves room for several full loads back-to-back and forgives quickly; a
+	# client past it gets 429 until its window drains.
+	#
+	# Keyed on {client_ip} = the real visitor IP, which requires the host reverse
+	# proxy to send X-Forwarded-For (it is trusted via `trusted_proxies` above). If
+	# that proxy does NOT forward XFF, {client_ip} falls back to the proxy's own IP,
+	# so every visitor would share one bucket: in that setup, do rate limiting at the
+	# front proxy instead and drop this block.
+	rate_limit {
+		zone flood {
+			key {client_ip}
+			events 600
+			window 10s
+		}
+	}
 
 	# The runtime app config (window.__APP_CONFIG__) is rendered from the
 	# container environment (ANALYTICS_* + DEV from docker/.env, STARTED_AT
