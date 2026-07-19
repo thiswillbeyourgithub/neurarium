@@ -10,7 +10,47 @@
          page and render the molecule black-on-grey. Paired with `color-scheme: dark`
          in the CSS below. -->
     <meta name="color-scheme" content="dark" />
-    <title>neurarium</title>
+    <title>neurarium: a 3D brain atlas for psychiatric neuroscience</title>
+
+    <!-- SEO + social. These are STATIC English strings (a crawler reads the raw HTML
+         before js/i18n.js localizes anything; there is no build/prerender step), and the
+         canonical/og:url + absolute og:image URL are pinned to the public site domain
+         (same domain app-config.js defaults sourceUrl to). Update all three if the
+         primary domain ever changes. og-image.png is docs/images/screenshot.png copied
+         into the served public/ root. -->
+    <meta name="description" content="An interactive 3D atlas of the brain for psychiatric neuroscience: explore brain regions, neural pathways, neurotransmitter receptors and how psychiatric drugs act on them, from sourced data." />
+    <link rel="canonical" href="https://neurarium.olicorne.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="neurarium" />
+    <meta property="og:title" content="neurarium: a 3D brain atlas for psychiatric neuroscience" />
+    <meta property="og:description" content="Explore brain regions, neural pathways, neurotransmitter receptors and how psychiatric drugs act on them, in an interactive 3D map built from sourced data." />
+    <meta property="og:url" content="https://neurarium.olicorne.org/" />
+    <meta property="og:image" content="https://neurarium.olicorne.org/og-image.png" />
+    <meta property="og:image:width" content="751" />
+    <meta property="og:image:height" content="631" />
+    <meta property="og:image:alt" content="The neurarium 3D brain visualizer" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="neurarium: a 3D brain atlas for psychiatric neuroscience" />
+    <meta name="twitter:description" content="Explore brain regions, neural pathways, neurotransmitter receptors and how psychiatric drugs act on them, in an interactive 3D map built from sourced data." />
+    <meta name="twitter:image" content="https://neurarium.olicorne.org/og-image.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "neurarium",
+        "url": "https://neurarium.olicorne.org/",
+        "description": "An interactive 3D atlas of the brain for psychiatric neuroscience: brain regions, neural pathways, neurotransmitter receptors and how psychiatric drugs act on them, from sourced data.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires JavaScript and WebGL",
+        "image": "https://neurarium.olicorne.org/og-image.png",
+        "inLanguage": ["en", "fr"],
+        "isAccessibleForFree": true,
+        "author": { "@type": "Person", "name": "Olivier Cornelis", "url": "https://olicorne.org/" }
+      }
+    </script>
 
     <!-- PWA: installable + offline. The manifest, icons and service worker are all
          vendored same-origin (covered by CSP default-src 'self'). theme-color tints
@@ -1774,6 +1814,24 @@
 
   <body>
     <canvas id="scene"></canvas>
+
+    <!-- Crawlable / no-JS fallback: the app is a JS-built WebGL canvas, so without
+         this a crawler or a JS-disabled visitor sees almost no text. Hidden the moment
+         scripts run is unnecessary (it is inside <noscript> for no-JS, plus a visible
+         static summary the loading overlay already shows). This <noscript> targets the
+         no-JS case; search engines that run JS get the full app. -->
+    <noscript>
+      <div style="max-width: 40rem; margin: 3rem auto; padding: 0 1.25rem; color: #ddd; font-family: system-ui, sans-serif; line-height: 1.6;">
+        <h1>neurarium</h1>
+        <p>An interactive 3D atlas of the brain for psychiatric neuroscience. It maps
+          brain regions, the neural pathways between them, neurotransmitter receptors,
+          and how psychiatric drugs (from Stahl's Prescriber's Guide and measured PDSP Ki
+          data) act on them, with per-datum sources and provenance grades.</p>
+        <p>The visualization needs JavaScript and WebGL. Please enable JavaScript to
+          explore the brain, or read more at
+          <a href="https://olicorne.org/" style="color: #b48bff;">olicorne.org</a>.</p>
+      </div>
+    </noscript>
 
     <!-- Startup loading overlay (driven by js/loading.js): shown over the canvas
          while the dataset is fetched and the brain is meshed, so a slow first load

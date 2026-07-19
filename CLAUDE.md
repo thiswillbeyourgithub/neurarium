@@ -159,6 +159,12 @@ Viewer (`public/`):
   `favicon.svg` + `icon-192/512.png` +
   `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
   favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
+- SEO/social: static `<head>` meta (description, Open Graph, Twitter card, JSON-LD
+  `WebApplication`) + a `<noscript>` text fallback in `index.html`; `robots.txt` +
+  `sitemap.xml` + `og-image.png` (a copy of `docs/images/screenshot.png`) in `public/`.
+  All English (a crawler reads the raw HTML before i18n; no prerender step) and the
+  canonical / `og:url` / `og:image` / JSON-LD URLs are **hardcoded to the public domain**
+  (update all four spots + `sitemap.xml`/`robots.txt` if it ever changes).
 - `js/data.js` — fetches `meta.json` + the `.jsonl` (incl. `quotes.jsonl`) + shape files, rehydrates
   each `{quote_id, provenance}` source from the deduplicated `quotes.jsonl` excerpt table
   (`rehydrateQuotes`, mirror of the generator's externalize; see Source provenance); returns a normalized

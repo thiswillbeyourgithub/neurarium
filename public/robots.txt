@@ -1,0 +1,9 @@
+# neurarium is a single-page app; everything worth indexing is the one page.
+# Allow all crawlers, point them at the sitemap. The bulky vendored library and
+# raw data files are not pages, so keep them out of the crawl budget.
+User-agent: *
+Allow: /
+Disallow: /vendor/
+Disallow: /data/
+
+Sitemap: https://neurarium.olicorne.org/sitemap.xml

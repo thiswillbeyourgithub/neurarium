@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Single-page app: the one canonical URL. Deep links are hash fragments
+     (#focusDrug=...), which crawlers fold into this same URL, so there is nothing
+     more to list. No <lastmod> on purpose: a hardcoded date would go stale. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://neurarium.olicorne.org/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
