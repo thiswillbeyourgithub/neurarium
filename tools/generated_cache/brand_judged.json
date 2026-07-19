@@ -1,0 +1,510 @@
+{
+  "acamprosate": [
+    "Campral"
+  ],
+  "agomelatine": [
+    "Valdoxan",
+    "Melitor",
+    "Thymanax"
+  ],
+  "alprazolam": [],
+  "amantadine": [],
+  "amisulpride": [
+    "Solian",
+    "Deniban",
+    "Amitrex"
+  ],
+  "amitriptyline": [
+    "Elavil",
+    "Tryptanol",
+    "Endep",
+    "Elatrol",
+    "Tryptizol",
+    "Trepiline",
+    "Laroxyl",
+    "Redomex"
+  ],
+  "amoxapine": [],
+  "amphetamine_d": [
+    "Dexedrine",
+    "Attentin"
+  ],
+  "amphetamine_dl": [
+    "Benzédrine",
+    "Attentin",
+    "Dexedrine"
+  ],
+  "aripiprazole": [
+    "Abilify"
+  ],
+  "armodafinil": [
+    "Nuvigil"
+  ],
+  "asenapine": [],
+  "atomoxetine": [
+    "Strattera"
+  ],
+  "benztropine": [
+    "Cogentin"
+  ],
+  "blonanserin": [
+    "Lonasen"
+  ],
+  "bremelanotide": [
+    "Vyleesi"
+  ],
+  "brexanolone": [],
+  "brexpiprazole": [],
+  "buprenorphine": [
+    "Temgésic",
+    "Subutex"
+  ],
+  "bupropion": [
+    "Zyban",
+    "Wellbutrin",
+    "Voxra",
+    "Budeprion",
+    "Aplenzin",
+    "Contrave",
+    "Mysimba"
+  ],
+  "buspirone": [
+    "Buspar"
+  ],
+  "caffeine": [],
+  "carbamazepine": [
+    "Tegretol"
+  ],
+  "cariprazine": [],
+  "chlordiazepoxide": [
+    "Librium",
+    "Librax"
+  ],
+  "chlorpromazine": [
+    "Largactil",
+    "Thorazine"
+  ],
+  "citalopram": [
+    "Celapram",
+    "Celexa",
+    "Ciazil",
+    "Cilift",
+    "Cipram",
+    "Cipramil",
+    "Ciprapine",
+    "Citabax",
+    "Citalec",
+    "Citaxin",
+    "Citrol",
+    "Ecosol",
+    "Recital",
+    "Seropram",
+    "Talam",
+    "Zentius",
+    "Zetalo"
+  ],
+  "clomipramine": [],
+  "clonazepam": [
+    "Rivotril"
+  ],
+  "clonidine": [
+    "Catapressan"
+  ],
+  "clorazepate": [
+    "Tranxène",
+    "Tranxilium"
+  ],
+  "clozapine": [
+    "Leponex"
+  ],
+  "cocaine": [],
+  "cyamemazine": [
+    "Tercian"
+  ],
+  "cyproheptadine": [
+    "Periactine"
+  ],
+  "daridorexant": [
+    "Quviviq"
+  ],
+  "desipramine": [],
+  "desvenlafaxine": [
+    "Pristiq"
+  ],
+  "deutetrabenazine": [
+    "Austedo"
+  ],
+  "dexmedetomidine": [
+    "Dexdor"
+  ],
+  "dextromethorphanbupropion": [
+    "Auvelity"
+  ],
+  "diazepam": [
+    "Valium"
+  ],
+  "diphenhydramine": [],
+  "disulfiram": [
+    "Espéral"
+  ],
+  "dmt": [],
+  "donepezil": [
+    "Aricept"
+  ],
+  "doxepin": [],
+  "doxylamine": [],
+  "duloxetine": [
+    "Cymbalta",
+    "Yentreve",
+    "Xeristar",
+    "AriClaim"
+  ],
+  "escitalopram": [
+    "Lexapro",
+    "Cipralex",
+    "Sipralexa",
+    "Seroplex"
+  ],
+  "esketamine": [
+    "Eskesia",
+    "Spravato",
+    "Ketanest",
+    "Keta-S"
+  ],
+  "estazolam": [
+    "Nuctalon",
+    "Prosom"
+  ],
+  "eszopiclone": [],
+  "flibanserin": [
+    "Addyi"
+  ],
+  "flumazenil": [
+    "Anexate"
+  ],
+  "flunitrazepam": [
+    "Rohypnol"
+  ],
+  "fluoxetine": [
+    "Prozac",
+    "Sarafem"
+  ],
+  "flupenthixol": [],
+  "fluphenazine": [],
+  "flurazepam": [
+    "Dalmane",
+    "Dalmadorm"
+  ],
+  "fluvoxamine": [],
+  "gabapentin": [
+    "Neurontin"
+  ],
+  "galantamine": [
+    "Réminyl"
+  ],
+  "guanfacine": [],
+  "haloperidol": [
+    "Haldol"
+  ],
+  "hydroxyzine": [
+    "Atarax"
+  ],
+  "iloperidone": [
+    "Fanapt",
+    "Zomaril"
+  ],
+  "imipramine": [
+    "Tofranil"
+  ],
+  "isocarboxazid": [
+    "Marplan",
+    "Marplon",
+    "Enerzer"
+  ],
+  "ketamine": [
+    "Spravato"
+  ],
+  "lamotrigine": [],
+  "lemborexant": [
+    "Dayvigo"
+  ],
+  "levetiracetam": [
+    "Keppra"
+  ],
+  "levomilnacipran": [
+    "Fetzima"
+  ],
+  "lisdexamfetamine": [
+    "Vyvanse",
+    "Elvanse",
+    "XURTA",
+    "Aduvanz",
+    "Samexid",
+    "Tyvense",
+    "Venvanse"
+  ],
+  "lithium": [
+    "Téralithe"
+  ],
+  "lofexidine": [
+    "Lucemyra"
+  ],
+  "loflazepate": [
+    "Victan"
+  ],
+  "lorazepam": [
+    "Témesta",
+    "Ativan"
+  ],
+  "loxapine": [
+    "Loxapac",
+    "Adasuve"
+  ],
+  "lsd": [],
+  "lumateperone": [
+    "Caplyta"
+  ],
+  "lurasidone": [],
+  "maprotiline": [],
+  "mdma": [],
+  "melatonin": [
+    "Circadin"
+  ],
+  "memantine": [
+    "Axura",
+    "Akatinol",
+    "Namenda",
+    "Ebixa",
+    "Abixa",
+    "Memox"
+  ],
+  "methadone": [],
+  "methamphetamine": [
+    "Pervitin",
+    "Methedrine",
+    "Pervitine",
+    "Isophan"
+  ],
+  "methylfolate_l": [],
+  "methylphenidate_d": [
+    "Focalin",
+    "Attenade"
+  ],
+  "methylphenidate_dl": [
+    "Ritalin",
+    "Rilatine"
+  ],
+  "mianserin": [],
+  "midazolam": [
+    "Hypnovel",
+    "Versed",
+    "Dormicum"
+  ],
+  "milnacipran": [
+    "Ixel",
+    "Fetzima"
+  ],
+  "mirtazapine": [],
+  "moclobemide": [],
+  "modafinil": [
+    "Provigil",
+    "Modiodal",
+    "Alertec",
+    "Modasomil"
+  ],
+  "nalmefene": [
+    "Revex",
+    "Selincro"
+  ],
+  "naltrexone": [
+    "Revia",
+    "Depade",
+    "Vivitrol"
+  ],
+  "nicotine": [],
+  "nortriptyline": [
+    "Sensoval",
+    "Pamelor",
+    "Norpress",
+    "Allegron",
+    "Noritren",
+    "Nortrilen",
+    "Aventyl"
+  ],
+  "olanzapine": [
+    "Zyprexa",
+    "Zypadhera"
+  ],
+  "oxazepam": [],
+  "oxcarbazepine": [
+    "Trileptal"
+  ],
+  "paliperidone": [
+    "Xeplion",
+    "Trevicta",
+    "Invega"
+  ],
+  "paroxetine": [
+    "Paxil",
+    "Deroxat",
+    "Seroxat"
+  ],
+  "perphenazine": [],
+  "phenterminetopiramate": [
+    "Qsymia"
+  ],
+  "pimavanserin": [],
+  "pimozide": [],
+  "pipothiazine": [
+    "Piportil"
+  ],
+  "pitolisant": [
+    "Wakix"
+  ],
+  "pramipexole": [],
+  "prazosin": [],
+  "pregabalin": [
+    "Lyrica"
+  ],
+  "propranolol": [],
+  "quazepam": [],
+  "quetiapine": [
+    "Xeroquel",
+    "Seroquel",
+    "Sequase",
+    "Ketipinor"
+  ],
+  "ramelteon": [
+    "Rozerem"
+  ],
+  "reboxetine": [],
+  "risperidone": [
+    "Risperdal",
+    "Risperdalconsta"
+  ],
+  "rivastigmine": [
+    "Exelon"
+  ],
+  "ropinirole": [],
+  "rotigotine": [],
+  "selegiline": [],
+  "sertindole": [
+    "Serdolect",
+    "Serlect"
+  ],
+  "sertraline": [
+    "Zoloft",
+    "Sertralin",
+    "Lustral",
+    "Apo-Sertral",
+    "Asentra",
+    "Gladem",
+    "Serlift",
+    "No-Dep",
+    "Stimuloton",
+    "Xydep",
+    "Serlain",
+    "Concorz"
+  ],
+  "sildenafil": [
+    "Viagra",
+    "Revatio",
+    "Verventi",
+    "Spedra"
+  ],
+  "sodium_oxybate": [
+    "Xyrem",
+    "Alcover"
+  ],
+  "solriamfetol": [
+    "Sunosi"
+  ],
+  "sulpiride": [
+    "Aiglonyl",
+    "Dogmatil",
+    "Synedil"
+  ],
+  "suvorexant": [
+    "Belsomra"
+  ],
+  "tasimelteon": [
+    "Hetlioz"
+  ],
+  "temazepam": [
+    "Normison",
+    "Euhypnos",
+    "Levanxol",
+    "Planum",
+    "Restoril"
+  ],
+  "tetrabenazine": [
+    "Xenazine",
+    "Xentra",
+    "Nitoman"
+  ],
+  "thc": [
+    "Sativex"
+  ],
+  "thioridazine": [
+    "Mellaril",
+    "Melleril"
+  ],
+  "tiagabine": [
+    "Gabitril"
+  ],
+  "tianeptine": [
+    "Stablon",
+    "Coaxil",
+    "Tatinol"
+  ],
+  "topiramate": [
+    "Epitomax",
+    "Topamax"
+  ],
+  "trazodone": [],
+  "triazolam": [],
+  "trifluoperazine": [],
+  "trihexyphenidyl": [
+    "Artane"
+  ],
+  "triiodothyronine": [],
+  "trimipramine": [],
+  "tropatepine": [
+    "Lepticur"
+  ],
+  "valbenazine": [
+    "Ingrezza"
+  ],
+  "valproate": [
+    "Dépakine",
+    "Micropakine",
+    "Dépakote",
+    "Dépamide"
+  ],
+  "varenicline": [
+    "Champix",
+    "Chantix"
+  ],
+  "venlafaxine": [],
+  "vilazodone": [
+    "ViiBryd"
+  ],
+  "viloxazine": [
+    "Qelbree"
+  ],
+  "vortioxetine": [],
+  "zaleplon": [],
+  "ziprasidone": [
+    "Geodon"
+  ],
+  "zolpidem": [
+    "Sublinox"
+  ],
+  "zonisamide": [
+    "Zonegran"
+  ],
+  "zopiclone": [
+    "Imovane"
+  ],
+  "zuclopenthixol": []
+}

@@ -257,24 +257,31 @@ def parse_ki_cell(raw: str):
 # Fetch + store
 # --------------------------------------------------------------------------- #
 
-def fetch_page(title: str) -> dict:
-    """Fetch the rendered article (action=parse) pinned to its current revision."""
+def fetch_page(title: str, lang: str = "en") -> dict:
+    """Fetch the rendered article (action=parse) pinned to its current revision.
+
+    `lang` selects the Wikipedia edition (en/fr/...); `langlinks` is returned so a
+    caller can hop to the same article on another edition (EN -> FR for brand names).
+    """
+    api = f"https://{lang}.wikipedia.org/w/api.php"
     q = urllib.parse.urlencode({
-        "action": "parse", "page": title, "prop": "text|revid|displaytitle",
+        "action": "parse", "page": title, "prop": "text|revid|displaytitle|langlinks",
         "format": "json", "redirects": 1, "formatversion": 2})
-    req = urllib.request.Request(f"{API}?{q}", headers={"User-Agent": UA})
+    req = urllib.request.Request(f"{api}?{q}", headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as resp:
         data = json.load(resp)
     if "error" in data:
-        raise SystemExit(f"Wikipedia API error for {title!r}: {data['error']}")
+        raise SystemExit(f"Wikipedia API error for {title!r} ({lang}): {data['error']}")
     p = data["parse"]
     real = p["title"]
     return {
         "title": real,
+        "lang": lang,
         "revid": p["revid"],
         "html": p["text"],
-        "url": f"https://en.wikipedia.org/wiki/{urllib.parse.quote(real.replace(' ', '_'))}",
-        "oldid_url": f"https://en.wikipedia.org/w/index.php?oldid={p['revid']}",
+        "langlinks": p.get("langlinks", []),
+        "url": f"https://{lang}.wikipedia.org/wiki/{urllib.parse.quote(real.replace(' ', '_'))}",
+        "oldid_url": f"https://{lang}.wikipedia.org/w/index.php?oldid={p['revid']}",
         "fetched_at": datetime.datetime.now(datetime.timezone.utc)
                       .replace(microsecond=0).isoformat(),
     }
@@ -315,17 +322,22 @@ def render_page_text(soup: BeautifulSoup) -> str:
     return "\n".join(out) + "\n"
 
 
-def store_page(page: dict, page_text: str) -> tuple[str, str]:
-    """Write raw/<slug>.html + pages/<slug>.md, both header-stamped. Returns paths."""
-    os.makedirs(RAW_DIR, exist_ok=True)
-    os.makedirs(PAGES_DIR, exist_ok=True)
+def store_page(page: dict, page_text: str,
+               pages_dir: str = PAGES_DIR, raw_dir: str = RAW_DIR) -> tuple[str, str]:
+    """Write raw/<slug>.html + pages/<slug>.md, both header-stamped. Returns paths.
+
+    `pages_dir`/`raw_dir` default to the EN store; the FR brand pass points them at
+    the FR sibling (pages_fr/, raw_fr/) so each edition keeps its own quote-gate tree.
+    """
+    os.makedirs(raw_dir, exist_ok=True)
+    os.makedirs(pages_dir, exist_ok=True)
     slug = slugify(page["title"])
     header = (f"source: {page['url']}\nrevision: {page['revid']}\n"
               f"permalink: {page['oldid_url']}\nfetched_at: {page['fetched_at']}\n")
-    raw_path = os.path.join(RAW_DIR, f"{slug}.html")
+    raw_path = os.path.join(raw_dir, f"{slug}.html")
     with open(raw_path, "w", encoding="utf-8") as f:
         f.write(f"<!--\n{header}-->\n{page['html']}")
-    pages_path = os.path.join(PAGES_DIR, f"{slug}.md")
+    pages_path = os.path.join(pages_dir, f"{slug}.md")
     with open(pages_path, "w", encoding="utf-8") as f:
         f.write(f"<!-- {page['title']} -->\n" + header.replace("\n", " | ") + "\n\n"
                 + page_text)

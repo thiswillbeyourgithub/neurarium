@@ -79,6 +79,7 @@ CORPUS_DESC = {
     "pdsp_ki":         ("Receptor binding pharmacology", "Drug binding affinities (Ki)"),
     "allen_ahba":      ("Brain transcriptome atlas (microarray)", "Receptor & target expression regions"),
     "wikipedia_pharm": ("Encyclopedia (pharmacodynamics tables)", "Drug binding affinities (Ki)"),
+    "wikipedia_fr":    ("Encyclopedia (French, article prose)", "Drug brand names (European / French)"),
 }
 
 # Per-node-kind display labels for the README table (English; the README is English).

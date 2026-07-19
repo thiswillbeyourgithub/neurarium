@@ -377,6 +377,24 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "https://en.wikipedia.org/",
         "pages_dir": "data_sources/wikipedia/pages",
     },
+    "wikipedia_fr": {
+        # Brand-name corpus #10: the French Wikipedia article, the source for a drug's
+        # European / French commercial brands (`eu`/`fr` region). The FR infobox carries
+        # only chemistry, so the trade names live in the prose ("commercialisée sous les
+        # noms Xeroquel, Seroquel..."); tools/fetch/fetch_brand_names.py stores the whole
+        # FR article author-side (pinned to a revision id) and an LLM reads the candidate
+        # sentences, apply_brand_names.py quote-gating each returned brand verbatim on the
+        # page. A brand source's `page` is the FR article slug, its `quote` the brand name,
+        # so the normal verbatim-quote gate applies (author-side, skipped on a clone lacking
+        # data_sources/wikipedia/pages_fr, like the book corpora). Tertiary source: the
+        # grade attests the name is really on the page, the label makes the tier explicit.
+        "ref": "Wikipedia (French), drug article (commercial names)",
+        "citation": "Wikipedia contributors. Commercial names of the cited drug article. "
+                    "Wikipedia, l'encyclopedie libre. fr.wikipedia.org (revision pinned "
+                    "per citation).",
+        "url": "https://fr.wikipedia.org/",
+        "pages_dir": "data_sources/wikipedia/pages_fr",
+    },
 }
 
 

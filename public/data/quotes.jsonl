@@ -1,5 +1,6 @@
 {"id": "q_0019a11cebbc", "corpus": "stahl", "page": 115, "quote": "Neuroactive steroid", "llm": "sonnet"}
 {"id": "q_0046f0b3a048", "corpus": "stahl", "page": 915, "quote": "Atypical antipsychotic (serotonin– dopamine, serotonin; second-generation antipsychotic; also a mood stabilizer)", "llm": "sonnet"}
+{"id": "q_004efb1eb3e6", "corpus": "wikipedia_fr", "page": "m_mantine", "quote": "Axura"}
 {"id": "q_007c8889c167", "corpus": "stahl", "page": 267, "quote": "Antabuse"}
 {"id": "q_00d108171b19", "corpus": "wikipedia_pharm", "page": "duloxetine", "quote": "5-HT 6 | 419"}
 {"id": "q_00fc7501663d", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "5-HT 5A | 291 | ND"}
@@ -22,12 +23,14 @@
 {"id": "q_03b5393de39e", "corpus": "allen_ahba", "page": "CHRM2", "quote": "CHRM2 detected in parietal: probe 1029156 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_041606a0f139", "corpus": "allen_ahba", "page": "HRH3", "quote": "HRH3 detected in caudate: probe 1046403 PACall present in 68/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_048145cd43d2", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in parietal: probe 1059351 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_04bd2c684a20", "corpus": "wikipedia_fr", "page": "m_mantine", "quote": "Ebixa"}
 {"id": "q_05170853c357", "corpus": "gtopdb", "page": 317, "quote": "Widely distributed throughout the CNS, most prominant expression in the forebrain regions. Caudate putamen, nucleus accumbens, amygdala, pontine nucleus, olfactory bulb, olfactory tubercle > interpeduncular nucleus, cortex (most dense in layers II-III and V-VI) > thalamus, hypothalamus, stria terminalis, hippocampus, globus pallidus, preoptic area, colliculi. Virtually no binding in the periaqueductal grey and raphe nuclei.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_0557ea47e55b", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "5-HT 1B | 60"}
 {"id": "q_058417e5da43", "corpus": "stahl", "page": 173, "quote": "Celexa"}
 {"id": "q_058f41441058", "corpus": "stahl", "page": 383, "quote": "Vistaril"}
 {"id": "q_0590bbf63dc1", "corpus": "allen_ahba", "page": "HTR1A", "quote": "HTR1A detected in parietal: probe 1024804 PACall present in 249/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_05a4d56470a1", "corpus": "stahl", "page": 153, "quote": "Blocks serotonin 2A receptors", "llm": "sonnet"}
+{"id": "q_05e7ce36f2f5", "corpus": "wikipedia_fr", "page": "escitalopram", "quote": "Sipralexa"}
 {"id": "q_0604c2ff534c", "corpus": "stahl", "page": 139, "quote": "BuSpar"}
 {"id": "q_06288de9aed4", "corpus": "stahl", "page": 936, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope"}
 {"id": "q_064544a9d3fa", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "α 2A | 134.15 | 1612.9 (HB) | ND"}
@@ -42,7 +45,9 @@
 {"id": "q_06db981eec65", "corpus": "stahl", "page": 216, "quote": "Anticholinergic actions, especially at high doses, may cause sedation, blurred vision, constipation, dry mouth", "llm": "sonnet"}
 {"id": "q_06f220c374e7", "corpus": "stahl", "page": 495, "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)", "llm": "sonnet"}
 {"id": "q_06f2fa31fdab", "corpus": "stahl", "page": 291, "quote": "Neuroscience-based Nomenclature: serotonin and norepinephrine reuptake inhibitor (SN-RI)", "llm": "sonnet"}
+{"id": "q_07048706745c", "corpus": "wikipedia_fr", "page": "agom_latine", "quote": "Thymanax"}
 {"id": "q_0739866949dd", "corpus": "stahl_essential", "page": 473, "quote": "Alpha-2A receptors are linked to the molecule cyclic adenosine monophosphate (cAMP) via the inhibitory G protein (Gi) (Figure 11-17).", "llm": "sonnet"}
+{"id": "q_07454a525b18", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Citaxin"}
 {"id": "q_0758d5cb5b21", "corpus": "stahl", "page": 787, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet"}
 {"id": "q_077bdbd32285", "corpus": "allen_ahba", "page": "SCN1A", "quote": "SCN1A detected in hippocampus: probe 1022570 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_07a10248b755", "corpus": "stahl", "page": 539, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine receptor antagonist (SN-RAn)", "llm": "sonnet"}
@@ -53,12 +58,14 @@
 {"id": "q_07fee5f32cae", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "5-HT 1E | 360–1279 | ND"}
 {"id": "q_080301800b98", "corpus": "gtopdb", "page": 216, "quote": "Accumbens nucleus, islands of Calleja, bed nucleus of the stria terminalis, hippocampus, mammillary nuclei, substantia nigra.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_080f6686e2b7", "corpus": "stahl", "page": 711, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
+{"id": "q_080f80b6ebd2", "corpus": "wikipedia_fr", "page": "clonidine", "quote": "Catapressan"}
 {"id": "q_0860d1740b9a", "corpus": "stahl", "page": 239, "quote": "Deutetrabenazine is a selective and reversible inhibitor of the vesicular monoamine transporter 2 (VMAT2)", "llm": "sonnet"}
 {"id": "q_08a8dff5847b", "corpus": "stahl", "page": 801, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
 {"id": "q_0949ab3e60d4", "corpus": "gtopdb", "page": 215, "quote": "Prelimbic cortex.", "species": "Mouse", "llm": "sonnet"}
 {"id": "q_09546bd1fed7", "corpus": "stahl", "page": 676, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_099ae4da974e", "corpus": "stahl", "page": 247, "quote": "Bupropion also blocks reuptake of both norepinephrine and dopamine", "llm": "sonnet"}
 {"id": "q_09a298a8cc93", "corpus": "allen_ahba", "page": "HTR6", "quote": "HTR6 detected in accumbens: probe 1055247 PACall present in 9/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_09dfb3de6826", "corpus": "wikipedia_fr", "page": "t_trahydrocannabinol", "quote": "Sativex"}
 {"id": "q_0a30e29d56f1", "corpus": "stahl", "page": 745, "quote": "Eldepryl"}
 {"id": "q_0a5934ee3f11", "corpus": "stahl", "page": 871, "quote": "Ingrezza"}
 {"id": "q_0a5ed7fa5149", "corpus": "stahl", "page": 806, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
@@ -66,6 +73,8 @@
 {"id": "q_0a969b206991", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in amygdala: probe 1022773 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_0a999801d4fe", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "5-HT 2C | 53 | 157 | ND | Believed to play a role in the weight gain-promoting effects of antipsychotics."}
 {"id": "q_0aa10b1c2d2a", "corpus": "stahl", "page": 717, "quote": "Melatonin 1 and 2 receptor agonist"}
+{"id": "q_0ac0b22ac0ea", "corpus": "wikipedia_fr", "page": "sild_nafil", "quote": "Spedra"}
+{"id": "q_0adc3a9b796e", "corpus": "wikipedia_fr", "page": "nortriptyline", "quote": "Aventyl"}
 {"id": "q_0aef2b5843ce", "corpus": "stahl_essential", "page": 208, "quote": "With full agonists, the receptor conformation is such that there is robust signal transduction through the G-protein-linked second-messenger system of D2 receptors (left).", "llm": "sonnet"}
 {"id": "q_0b189a373c58", "corpus": "allen_ahba", "page": "CACNA2D1", "quote": "CACNA2D1 detected in hippocampus: probe 1028198 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_0b7c71a698ac", "corpus": "stahl", "page": 431, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)", "llm": "sonnet"}
@@ -85,12 +94,14 @@
 {"id": "q_0c4c48d89171", "corpus": "stahl", "page": 931, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet"}
 {"id": "q_0c50ab0f8f1a", "corpus": "stahl", "page": 487, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet"}
 {"id": "q_0c584f08f598", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "α 2A | 37 | 137.6"}
+{"id": "q_0c6b09869365", "corpus": "wikipedia_fr", "page": "nortriptyline", "quote": "Allegron"}
 {"id": "q_0c715866b964", "corpus": "stahl", "page": 325, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
 {"id": "q_0c88400318c7", "corpus": "stahl", "page": 376, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_0c8bb18f7b97", "corpus": "stahl", "page": 551, "quote": "Provigil"}
 {"id": "q_0cc88a9b8219", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "M 4 | 1,520 | ND"}
 {"id": "q_0ce121a3d5b9", "corpus": "allen_ahba", "page": "HRH2", "quote": "HRH2 detected in cerebellum: probe 1019471 PACall present in 211/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_0d1c51079e90", "corpus": "stahl", "page": 709, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms", "llm": "sonnet"}
+{"id": "q_0d2e8ab27d80", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Tryptizol"}
 {"id": "q_0d3493f19b18", "corpus": "stahl", "page": 225, "quote": "A more potent inhibitor of norepinephrine reuptake pump than serotonin reuptake pump (serotonin transporter)", "llm": "sonnet"}
 {"id": "q_0d5ed17f0018", "corpus": "stahl", "page": 215, "quote": "Tercian"}
 {"id": "q_0dbbc8f6b64a", "corpus": "stahl", "page": 728, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
@@ -100,6 +111,7 @@
 {"id": "q_0f6584913dab", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in temporal: probe 1027284 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_0f696f0e76e9", "corpus": "stahl", "page": 411, "quote": "Ketamine is a noncompetitive open-channel inhibitor of the NMDA receptor; specifically, it binds to the phencyclidine site of the NMDA receptor", "llm": "sonnet"}
 {"id": "q_0f8b4d4f00d3", "corpus": "gtopdb", "page": 293, "quote": "Olfactory bulb, anterior olfactory nuclei, olfactory tubercle, cerebral cortex, hippocampus, lateral septum, striatum, nucleus accumbens, inferior colliculus, and spinal trigeminal nuclei.", "species": "Rat", "llm": "sonnet"}
+{"id": "q_0fe7fef58145", "corpus": "wikipedia_fr", "page": "m_latonine", "quote": "Circadin"}
 {"id": "q_100c6ff4652c", "corpus": "stahl", "page": 669, "quote": "Blocks dopamine 2 receptors in the nigrostriatal dopamine pathway, reducing tics in Tourette's syndrome", "llm": "sonnet"}
 {"id": "q_102a34fef254", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "5-HT 7 | 30–126 | ?"}
 {"id": "q_10389c0a737b", "corpus": "kandel", "page": 368, "quote": "Neuromodulators are substances that bind to receptors, most of which are metabotropic, to alter the excitability of neurons, the likelihood of transmitter release, or the functional state of receptors on postsynaptic neurons.", "llm": "sonnet"}
@@ -119,8 +131,10 @@
 {"id": "q_11573219beaa", "corpus": "stahl", "page": 578, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_1167cc7eff78", "corpus": "allen_ahba", "page": "SIGMAR1", "quote": "SIGMAR1 detected in medulla: probe 1047600 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_117b60180a76", "corpus": "stahl", "page": 226, "quote": "Anticholinergic activity for desipramine may be somewhat less than for some other TCAs", "llm": "sonnet"}
+{"id": "q_118d8b0acbc4", "corpus": "wikipedia_fr", "page": "isocarboxazide", "quote": "Marplon"}
 {"id": "q_119b405018bd", "corpus": "stahl", "page": 329, "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet"}
 {"id": "q_119da77dcbc3", "corpus": "stahl", "page": 533, "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); antidepressant; chronic pain treatment", "llm": "sonnet"}
+{"id": "q_11c26bf6b07c", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Celapram"}
 {"id": "q_11d0f66f683e", "corpus": "kandel", "page": 1058, "quote": "The neuroendocrine system works differently, by secreting several peptide hormones from the pituitary, the \"master gland,\" located just beneath the hypothalamus.", "llm": "sonnet"}
 {"id": "q_11e42deb1bca", "corpus": "stahl", "page": 47, "quote": "Neuroscience-based Nomenclature: norepinephrine, serotonin reuptake inhibitor (SN-RI)", "llm": "sonnet"}
 {"id": "q_1207c796e314", "corpus": "stahl", "page": 87, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)", "llm": "sonnet"}
@@ -133,6 +147,7 @@
 {"id": "q_12a30d76190a", "corpus": "wikipedia_pharm", "page": "zotepine", "quote": "SERT | 151"}
 {"id": "q_12a48554a8de", "corpus": "allen_ahba", "page": "GRIN1", "quote": "GRIN1 detected in putamen: probe 1055938 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_12b933af4dc7", "corpus": "stahl", "page": 767, "quote": "Sertraline also has some ability to block dopamine reuptake pump (dopamine transporter), which could increase dopamine neurotransmission and contribute to its therapeutic actions", "llm": "sonnet"}
+{"id": "q_139967085d73", "corpus": "wikipedia_fr", "page": "palip_ridone", "quote": "Trevicta"}
 {"id": "q_13bafbbbb6ca", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "5-HT 5A | 8.8 | 1.6 | Antagonist"}
 {"id": "q_13ce51d3166b", "corpus": "stahl", "page": 845, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet"}
 {"id": "q_13eff888031c", "corpus": "stahl", "page": 335, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}
@@ -140,6 +155,7 @@
 {"id": "q_140b5540535f", "corpus": "allen_ahba", "page": "HCRTR1", "quote": "HCRTR1 detected in hypothalamus: probe 1055736 PACall present in 83/86 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_140e85553089", "corpus": "stahl", "page": 180, "quote": "Sedative effects and weight gain may be due to antihistamine properties", "llm": "sonnet"}
 {"id": "q_1412bdb35015", "corpus": "gtopdb", "page": 12, "quote": "Amygdala, aorta, cerebral cortex, hippocampus, thalamus, small intestine >> spleen, pancreas, stomach, kidney.", "species": "Human", "llm": "sonnet"}
+{"id": "q_144e9dd4910c", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Lustral"}
 {"id": "q_14c37766f2bc", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in thalamus: probe 1059691 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_14c9384440a5", "corpus": "stahl", "page": 161, "quote": "Librium"}
 {"id": "q_14e1948cdf55", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "5-HT 6 | 61–76 | Antagonist"}
@@ -177,6 +193,7 @@
 {"id": "q_19734f7e2e59", "corpus": "stahl", "page": 917, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope, especially at high doses", "llm": "sonnet"}
 {"id": "q_197383807dfe", "corpus": "allen_ahba", "page": "HTR2A", "quote": "HTR2A detected in occipital: probe 1028615 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_19939de00555", "corpus": "gtopdb", "page": 9, "quote": "Brain: basal ganglia (caudate nucleus, putamen, nucleus accumbens), hippocampal formation (CA1, CA2, CA3 fields, subiculum, dentate gyrus, entorhinal cortex).", "species": "Human", "llm": "sonnet"}
+{"id": "q_19af300b9e15", "corpus": "wikipedia_fr", "page": "disulfirame", "quote": "Espéral"}
 {"id": "q_19c3102c3b49", "corpus": "allen_ahba", "page": "SLC6A3", "quote": "SLC6A3 detected in vta: probe 1051520 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_19c43947992a", "corpus": "stahl", "page": 653, "quote": "Nardil"}
 {"id": "q_19d4593844f8", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "5-HT 1B | 2800–4700 | Rat"}
@@ -202,6 +219,7 @@
 {"id": "q_1babe3aa4655", "corpus": "wikipedia_pharm", "page": "buspirone", "quote": "5-HT 7 | 375–381 840 | Antagonist ? | Rat Human"}
 {"id": "q_1baf00ba8404", "corpus": "allen_ahba", "page": "HTR1A", "quote": "HTR1A detected in amygdala: probe 1024804 PACall present in 34/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_1bb2b0d91e47", "corpus": "allen_ahba", "page": "DRD2", "quote": "DRD2 detected in vta: probe 1030267 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_1be32227e671", "corpus": "wikipedia_fr", "page": "esk_tamine", "quote": "Ketanest"}
 {"id": "q_1be62e891e85", "corpus": "allen_ahba", "page": "ACHE", "quote": "ACHE detected in hippocampus: probe 1022702 PACall present in 169/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_1be95b0425c4", "corpus": "wikipedia_pharm", "page": "paliperidone", "quote": "H 1 | 19"}
 {"id": "q_1c14f3f649c0", "corpus": "stahl", "page": 583, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet"}
@@ -226,6 +244,7 @@
 {"id": "q_1e0524deff70", "corpus": "stahl", "page": 793, "quote": "suvorexant binds to orexin 1 and orexin 2 receptors, blocking orexin from binding there and thus preventing it from promoting wakefulness", "llm": "sonnet"}
 {"id": "q_1e10786027aa", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "5-HT 5A | 206 | Antagonist"}
 {"id": "q_1e512ca167c6", "corpus": "stahl", "page": 927, "quote": "Excegran"}
+{"id": "q_1e5b0a98b237", "corpus": "wikipedia_fr", "page": "sel_de_lithium", "quote": "Téralithe"}
 {"id": "q_1e7f2bab7325", "corpus": "stahl", "page": 225, "quote": "Norpramin"}
 {"id": "q_1eb58646209e", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in putamen: probe 1028488 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_1ebf11122192", "corpus": "gtopdb", "page": 318, "quote": "CNS: olfactory bulb, nucleus accumbens, caudate nucleus, putamen, temporal cortex, parietal cortex, thalamic nuclei > amygdala, occipital cortex, frontal cortex, hypothalamus, ventral tegmental area, cerebellar cortex > hippocampus, corpus mamillare, locus coeruleus, pituitary, spinal cord > globus pallidus, substantia nigra, superior colliculus, inferior colliculus, olivary nucleus.", "species": "Human"}
@@ -242,9 +261,11 @@
 {"id": "q_204eafebc151", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "α 2A | 15 | Antagonist"}
 {"id": "q_206c042c78c1", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 detected in thalamus: probe 1026650 PACall present in 185/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_20732ef8da85", "corpus": "wikipedia_pharm", "page": "lumateperone", "quote": "SERT | Antagonist | 62"}
+{"id": "q_207ffa622972", "corpus": "wikipedia_fr", "page": "sulpiride", "quote": "Dogmatil"}
 {"id": "q_2099af9e3d55", "corpus": "stahl", "page": 602, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
 {"id": "q_209ad2389cd7", "corpus": "stahl_essential", "page": 112, "quote": "Glutamate is the major excitatory neurotransmitter in the central nervous system", "llm": "sonnet"}
 {"id": "q_20b39098673f", "corpus": "stahl", "page": 788, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
+{"id": "q_20c5ca03369e", "corpus": "wikipedia_fr", "page": "amisulpride", "quote": "Amitrex"}
 {"id": "q_20ccd37a255c", "corpus": "stahl", "page": 263, "quote": "Also has potent histamine 1 antagonist properties", "llm": "sonnet"}
 {"id": "q_20d8d19c6319", "corpus": "stahl", "page": 111, "quote": "Bremelanotide is a nonselective melanocortin receptor agonist", "llm": "sonnet"}
 {"id": "q_20e5d47a4966", "corpus": "stahl", "page": 375, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and possibly combative, explosive, and hyperactive behaviors", "llm": "sonnet"}
@@ -321,16 +342,20 @@
 {"id": "q_295b29df497c", "corpus": "stahl", "page": 633, "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet"}
 {"id": "q_296bf58e3046", "corpus": "stahl", "page": 168, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_2982038f68e8", "corpus": "stahl", "page": 533, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet"}
+{"id": "q_299915597827", "corpus": "wikipedia_fr", "page": "estazolam", "quote": "Nuctalon"}
 {"id": "q_29a2d8894fdd", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "β 1 | 141 | Agonist"}
 {"id": "q_29bd050c1b52", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "5-HT 2A | 4,600–>10,000 (K i ) 1,260–12,500 ( EC 50 ) 21–77% ( E max )"}
+{"id": "q_29d83108f198", "corpus": "wikipedia_fr", "page": "galantamine", "quote": "Réminyl"}
 {"id": "q_2a3429a2efe8", "corpus": "allen_ahba", "page": "HTR2C", "quote": "HTR2C detected in accumbens: probe 1055276 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_2a6e6ff92638", "corpus": "stahl", "page": 69, "quote": "Aristada Initio"}
+{"id": "q_2a7066162efb", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Venvanse"}
 {"id": "q_2a9fc516fe66", "corpus": "stahl", "page": 161, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
 {"id": "q_2b0e78d06675", "corpus": "wikipedia_pharm", "page": "ropinirole", "quote": "D 4 | 7.8 | 81% | Partial Agonist"}
 {"id": "q_2b143bad1675", "corpus": "stahl", "page": 539, "quote": "Blocks alpha 2 adrenergic presynaptic receptor, thereby increasing norepinephrine neurotransmission", "llm": "sonnet"}
 {"id": "q_2b2cf2617434", "corpus": "stahl", "page": 817, "quote": "Anticonvulsant; selective GABA reuptake inhibitor (SGRI)", "llm": "sonnet"}
 {"id": "q_2b353a51208c", "corpus": "stahl", "page": 675, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet"}
 {"id": "q_2b7a1d80e46b", "corpus": "wikipedia_pharm", "page": "paliperidone", "quote": "α 2C | 2.7"}
+{"id": "q_2b7b5663d6ae", "corpus": "wikipedia_fr", "page": "escitalopram", "quote": "Cipralex"}
 {"id": "q_2b9d56de88c7", "corpus": "gtopdb", "page": 14, "quote": "CNS: cerebral cortex, hipocampus, corpus striatum, olfactory tubercle, midbrain, pons-medulla, cerebellum.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_2bb5d5e5b101", "corpus": "stahl", "page": 321, "quote": "Benzodiazepine receptor antagonist", "llm": "sonnet"}
 {"id": "q_2bcb5d3f4fe1", "corpus": "wikipedia_pharm", "page": "diphenhydramine", "quote": "DAT | 1100–2200 | Human"}
@@ -347,8 +372,10 @@
 {"id": "q_2db6a0107730", "corpus": "stahl", "page": 591, "quote": "Olasek"}
 {"id": "q_2dbdc4a6b419", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "M 1 | 40 | Human"}
 {"id": "q_2dc0f89ac629", "corpus": "stahl", "page": 365, "quote": "Razadyne"}
+{"id": "q_2ddc2300d63d", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Laroxyl"}
 {"id": "q_2df87a89858d", "corpus": "stahl", "page": 935, "quote": "Atypical antipsychotic (serotonin– dopamine antagonist)", "llm": "sonnet"}
 {"id": "q_2e0a76f081b6", "corpus": "wikipedia_pharm", "page": "pitolisant", "quote": "5-HT 2A | 544 nM | Antagonist"}
+{"id": "q_2e1042e7a4bc", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Citalec"}
 {"id": "q_2e395cee718f", "corpus": "kandel", "page": 983, "quote": "Striatal neurons containing enkephalin and expressing mainly D2 dopamine receptors make excitatory contact with the output nuclei via relays in the globus pallidus and subthalamus: the indirect pathway.", "llm": "sonnet"}
 {"id": "q_2e47931c5a81", "corpus": "stahl", "page": 503, "quote": "NMDA receptor antagonist; NMDA subtype of glutamate receptor antagonist; cognitive enhancer", "llm": "sonnet"}
 {"id": "q_2e4ca18c6a09", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "D 4.2 | 3.9"}
@@ -365,8 +392,10 @@
 {"id": "q_30459dad9ea6", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "5-HT 1A | 400–2600 | Human"}
 {"id": "q_3050ec9cab56", "corpus": "wikipedia_pharm", "page": "fluvoxamine", "quote": "σ 1 | 36"}
 {"id": "q_30717383ac3a", "corpus": "allen_ahba", "page": "ADRB2", "quote": "ADRB2 detected in frontal: probe 1059348 PACall present in 472/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_30b3777f75ac", "corpus": "wikipedia_fr", "page": "t_trab_nazine", "quote": "Nitoman"}
 {"id": "q_30b5d24d70a2", "corpus": "stahl", "page": 927, "quote": "Anticonvulsant, voltage-sensitive sodium channel modulator; T-type calcium channel modulator; structurally a sulfonamide", "llm": "sonnet"}
 {"id": "q_30dff4d8767b", "corpus": "allen_ahba", "page": "HTR5A", "quote": "HTR5A detected in frontal: probe 1021969 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_30fd51dcef97", "corpus": "wikipedia_fr", "page": "cyproheptadine", "quote": "Periactine"}
 {"id": "q_311afedeb7a3", "corpus": "stahl", "page": 431, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission", "llm": "sonnet"}
 {"id": "q_312b380d9594", "corpus": "stahl", "page": 455, "quote": "Lucemyra"}
 {"id": "q_313ae205c845", "corpus": "stahl", "page": 101, "quote": "Prevents the action of acetylcholine on muscarinic receptors", "llm": "sonnet"}
@@ -440,6 +469,7 @@
 {"id": "q_3a3c6f022a64", "corpus": "allen_ahba", "page": "CHRM1", "quote": "CHRM1 detected in accumbens: probe 1058221 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3a5c8d2dcf27", "corpus": "kandel", "page": 1124, "quote": "This work is beginning to define the distinct roles that various glutamatergic projections to the nucleus accumbens— from the prefrontal cortex, hippocampus, amygdala, and thalamus—play in controlling different cell types in the nucleus accumbens and the broader reward circuitry and in producing distinct addiction-related behavioral abnormalities.", "llm": "sonnet"}
 {"id": "q_3ab0065a7972", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in hippocampus: probe 1028488 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_3ab39664ba7e", "corpus": "wikipedia_fr", "page": "midazolam", "quote": "Dormicum"}
 {"id": "q_3abab8b4bc15", "corpus": "stahl", "page": 503, "quote": "Neuroscience-based Nomenclature: glutamate receptor antagonist (Glu-RAn)", "llm": "sonnet"}
 {"id": "q_3ac87cdd74c8", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 2C | 135"}
 {"id": "q_3addd74569a4", "corpus": "stahl", "page": 329, "quote": "Blocks serotonin reuptake pump (serotonin transporter)", "llm": "sonnet"}
@@ -453,6 +483,7 @@
 {"id": "q_3b91bf676fa3", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "α 2C | 8.9 | 1.2 | Antagonist"}
 {"id": "q_3b9fc64a2633", "corpus": "allen_ahba", "page": "ADRA1B", "quote": "ADRA1B detected in occipital: probe 1023485 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3bd08ff21167", "corpus": "stahl", "page": 69, "quote": "Abilify"}
+{"id": "q_3be770a6311c", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Cilift"}
 {"id": "q_3c27ed2c0530", "corpus": "stahl", "page": 827, "quote": "Topimax"}
 {"id": "q_3c8eca520a21", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "5-HT 3 | 776 | Human"}
 {"id": "q_3c90aaddcfa3", "corpus": "allen_ahba", "page": "BCHE", "quote": "BCHE detected in temporal: probe 1058870 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -513,7 +544,10 @@
 {"id": "q_4266ed851d25", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "5-HT 1B | 2,515–6,300 nM"}
 {"id": "q_42692641eefc", "corpus": "stahl", "page": 571, "quote": "Contrave"}
 {"id": "q_426cd37f2065", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "H 3 | 3713 | Antagonist"}
+{"id": "q_427ff4927d3d", "corpus": "wikipedia_fr", "page": "dexm_d_tomidine", "quote": "Dexdor"}
 {"id": "q_429cf46aeb2d", "corpus": "stahl", "page": 173, "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)", "llm": "sonnet"}
+{"id": "q_4316df2267a0", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "No-Dep"}
+{"id": "q_431fa0bf469c", "corpus": "wikipedia_fr", "page": "bupropion", "quote": "Voxra"}
 {"id": "q_43329b4439bd", "corpus": "gtopdb", "page": 214, "quote": "Brain: Striatum, substantia nigra pars reticulata, globus pallidus, olfactory bulb, amygdala, cerebellar granule cell layer.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_43465b497cce", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in substantia_nigra: probe 1059691 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_435bc03b1832", "corpus": "stahl", "page": 247, "quote": "a sigma 1 receptor agonist", "llm": "sonnet"}
@@ -527,6 +561,7 @@
 {"id": "q_441e5a174671", "corpus": "wikipedia_pharm", "page": "citalopram", "quote": "M 1 | 1430"}
 {"id": "q_4448192ad104", "corpus": "stahl_essential", "page": 275, "quote": "GABAA and GABAC receptors are ligand-gated ion channels; they are part of a macromolecular complex that forms an inhibitory chloride channel.", "llm": "sonnet"}
 {"id": "q_444d5bca5aa1", "corpus": "wikipedia_pharm", "page": "nefazodone", "quote": "D 2 | 910 | Human"}
+{"id": "q_44598822d4e4", "corpus": "wikipedia_fr", "page": "sild_nafil", "quote": "Verventi"}
 {"id": "q_445ff4ef8166", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "NET | 842 | ND | ND"}
 {"id": "q_446fa1524d19", "corpus": "stahl", "page": 761, "quote": "Serotonin 2C properties may contribute to antidepressant actions", "llm": "sonnet"}
 {"id": "q_44820b5d924d", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in medulla: probe 1054302 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -550,11 +585,16 @@
 {"id": "q_467bee879bfc", "corpus": "stahl", "page": 633, "quote": "Blocks serotonin reuptake pump (serotonin transporter)", "llm": "sonnet"}
 {"id": "q_4680b063c352", "corpus": "stahl", "page": 31, "quote": "Does have antagonist actions at serotonin 7 receptors and serotonin 2B receptors, which may contribute to antidepressant effects", "llm": "sonnet"}
 {"id": "q_469e5cf0233f", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "α 2C | 59–77 | Antagonist"}
+{"id": "q_46d082c1ab03", "corpus": "wikipedia_fr", "page": "loraz_pam", "quote": "Témesta"}
 {"id": "q_46dfd1cb26a6", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in globus_pallidus: probe 1027284 PACall present in 36/36 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_471d864272b8", "corpus": "allen_ahba", "page": "HTR2C", "quote": "HTR2C detected in substantia_nigra: probe 1055276 PACall present in 42/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_47488c9b74ef", "corpus": "stahl", "page": 335, "quote": "Depixol"}
 {"id": "q_475a3f25278a", "corpus": "stahl", "page": 685, "quote": "Blocks alpha 1 adrenergic receptors to reduce noradrenergic hyperactivation", "llm": "sonnet"}
+{"id": "q_477836fbe51b", "corpus": "wikipedia_fr", "page": "amph_tamine", "quote": "Dexedrine"}
 {"id": "q_478125fbf49b", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "5-HT 1A | 6,300–12,200 (K i ) 126–36,000 nM ( EC 50 ) 21–64% ( E max"}
+{"id": "q_47907ee5dba4", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Elvanse"}
+{"id": "q_47bbcf6fa29a", "corpus": "wikipedia_fr", "page": "naltrexone", "quote": "Revia"}
+{"id": "q_48b0a883ccff", "corpus": "wikipedia_fr", "page": "milnacipran", "quote": "Fetzima"}
 {"id": "q_49267cfb4ae4", "corpus": "allen_ahba", "page": "SLC6A1", "quote": "SLC6A1 detected in frontal: probe 1051544 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_4932a7724ab9", "corpus": "stahl", "page": 601, "quote": "Lybalvi"}
 {"id": "q_493dd7b788e5", "corpus": "wikipedia_pharm", "page": "lumateperone", "quote": "5-HT 2A | Antagonist | 0.54"}
@@ -562,16 +602,20 @@
 {"id": "q_494dc12639cd", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in occipital: probe 1020459 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_497513d21c7c", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in hypothalamus: probe 1022773 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_4996fcb57cf2", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "σ 1 | 2,000 | Guinea pig"}
+{"id": "q_49a54fcc5f93", "corpus": "wikipedia_fr", "page": "escitalopram", "quote": "Seroplex"}
 {"id": "q_49d219722d69", "corpus": "stahl", "page": 87, "quote": "Secuado (transdermal)"}
 {"id": "q_49d7073f2e94", "corpus": "stahl", "page": 313, "quote": "Lunesta"}
+{"id": "q_49e0ff536520", "corpus": "wikipedia_fr", "page": "risp_ridone", "quote": "Risperdalconsta"}
 {"id": "q_49e73eef44fb", "corpus": "gtopdb", "page": 465, "quote": "Brain:- High levels of expression in most thalamic nuclei, although deeper layers of cortex (IV-VI) express much more α4 mRNA that the more superficial layers. Expression is very dense in the substantia nigra pars compacta and ventral tegmental area. In contrast to rat, significant expression is observed in locus coeruleus of the mouse. α4 mRNA is also prominent in the hindbrain, with particularly strong signal in the dorsal tegmental nucleus. α4 mRNA expression is quite low in the caudate putamen, hippocampus (except for subiculum), and cerebellum.", "species": "Mouse", "llm": "sonnet"}
 {"id": "q_4a06e62f9e0e", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "5-HT 1B | 1,600 | ?"}
 {"id": "q_4a32d576c96b", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "α 1A | 1815 | Human"}
 {"id": "q_4a58d3b1cc52", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in putamen: probe 1020459 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_4a5944f63278", "corpus": "stahl", "page": 812, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
+{"id": "q_4aea9317dd05", "corpus": "wikipedia_fr", "page": "acide_valpro_que", "quote": "Dépakote"}
 {"id": "q_4bd18df0f745", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "α 2B | Agonist | 480"}
 {"id": "q_4be2a84acf63", "corpus": "stahl", "page": 893, "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)", "llm": "sonnet"}
 {"id": "q_4bfec0b2b574", "corpus": "allen_ahba", "page": "HRH3", "quote": "HRH3 detected in putamen: probe 1046403 PACall present in 44/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_4c167648c941", "corpus": "wikipedia_fr", "page": "dextroamph_tamine", "quote": "Attentin"}
 {"id": "q_4c16db58fbf3", "corpus": "allen_ahba", "page": "CHRM4", "quote": "CHRM4 detected in frontal: probe 1024432 PACall present in 372/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_4c2ffd58f401", "corpus": "stahl", "page": 69, "quote": "Partial agonism at serotonin 1A receptors may be relevant at clinical doses", "llm": "sonnet"}
 {"id": "q_4c626ece393e", "corpus": "allen_ahba", "page": "MAOA", "quote": "MAOA detected in pons: probe 1054334 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -593,6 +637,8 @@
 {"id": "q_4e5181cd80d6", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "D 5 | 258 | ND | ND"}
 {"id": "q_4e52adc971f6", "corpus": "stahl", "page": 127, "quote": "Zubsolv (with naloxone)"}
 {"id": "q_4e71af0e0b76", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in pons: probe 1017111 PACall present in 96/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_4e7ee8fd9984", "corpus": "wikipedia_fr", "page": "loflaz_pate_d_thyle", "quote": "Victan"}
+{"id": "q_4e88accb0432", "corpus": "wikipedia_fr", "page": "k_tamine", "quote": "Spravato"}
 {"id": "q_4eae338ea9a6", "corpus": "stahl", "page": 811, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}
 {"id": "q_4f273337b8c8", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "D 1 | 83"}
 {"id": "q_4f2b90097e95", "corpus": "wikipedia_pharm", "page": "cariprazine", "quote": "5-HT 7 | 111 | Antagonist"}
@@ -637,9 +683,11 @@
 {"id": "q_5445b435ef97", "corpus": "stahl", "page": 309, "quote": "Benzodiazepine (hypnotic)", "llm": "sonnet"}
 {"id": "q_5454d7aaa88a", "corpus": "stahl", "page": 823, "quote": "Modulates glutamatergic neurotransmission, perhaps through potentiation of AMPA receptor function", "llm": "sonnet"}
 {"id": "q_548323235dfd", "corpus": "stahl", "page": 633, "quote": "Paxil"}
+{"id": "q_54bf88d6c89d", "corpus": "wikipedia_fr", "page": "clonaz_pam", "quote": "Rivotril"}
 {"id": "q_54c524193b66", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in occipital: probe 1059691 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_54c9b9e16b30", "corpus": "gtopdb", "page": 22, "quote": "In the human brain, the highest levels of α1A message are found in olfactory system, hypothalamic nuclei and in regions of the brainstem and spinal cord related to motor function. Also expressed in the hippocampus.", "species": "Human", "llm": "sonnet"}
 {"id": "q_550877887f7e", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 2B | 27"}
+{"id": "q_55114044103d", "corpus": "wikipedia_fr", "page": "sertindole", "quote": "Serlect"}
 {"id": "q_551b75655266", "corpus": "allen_ahba", "page": "ADRB1", "quote": "ADRB1 detected in cingulate: probe 1021604 PACall present in 121/123 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_552341c45d7f", "corpus": "stahl", "page": 247, "quote": "Dextromethorphan is a nonselective, noncompetitive NMDA receptor antagonist", "llm": "sonnet"}
 {"id": "q_5525e5603d0e", "corpus": "stahl", "page": 253, "quote": "Dextromethorphan also has affinity for the serotonin transporter and may therefore modulate serotonin levels", "llm": "sonnet"}
@@ -650,6 +698,7 @@
 {"id": "q_55755db088e3", "corpus": "wikipedia_pharm", "page": "desipramine", "quote": "D 2 | 3,400 | Human"}
 {"id": "q_55835bcf6c7a", "corpus": "stahl_essential", "page": 311, "quote": "The physiological function of σ1 sites is still a mystery, and thus sometimes called the “sigma enigma”", "llm": "sonnet"}
 {"id": "q_55c9a7dc1eac", "corpus": "stahl_essential", "page": 575, "quote": "neurons that release enkephalin synapse with postsynaptic δ-opioid receptors", "llm": "sonnet"}
+{"id": "q_55f742a2355a", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Tryptanol"}
 {"id": "q_560e6e3f0fd5", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "SERT | 1.6 | 5.4 | – | Inhibition"}
 {"id": "q_565e6c07c513", "corpus": "stahl", "page": 905, "quote": "Mode 3: binds to ion-channel-linked receptors (antagonist at serotonin 3 receptors)", "llm": "sonnet"}
 {"id": "q_56818ff84c0d", "corpus": "allen_ahba", "page": "CHRM2", "quote": "CHRM2 detected in hippocampus: probe 1029156 PACall present in 168/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -663,6 +712,7 @@
 {"id": "q_57c9fe5ae9e7", "corpus": "stahl", "page": 583, "quote": "Predominantly a norepinephrine reuptake inhibitor"}
 {"id": "q_58077bb56ae9", "corpus": "wikipedia_pharm", "page": "paliperidone", "quote": "5-HT 6 | 24"}
 {"id": "q_5876d3f6330c", "corpus": "allen_ahba", "page": "OPRD1", "quote": "OPRD1 detected in temporal: probe 1028943 PACall present in 288/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_58a043f17645", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Samexid"}
 {"id": "q_58a6e571ec24", "corpus": "allen_ahba", "page": "CHRNA7", "quote": "CHRNA7 detected in hippocampus: probe 1022067 PACall present in 167/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_58b3416358c0", "corpus": "allen_ahba", "page": "MAOA", "quote": "MAOA detected in vta: probe 1054334 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_58b75257e8db", "corpus": "stahl", "page": 335, "quote": "Conventional antipsychotic (neuroleptic, thioxanthene, dopamine 2 antagonist)", "llm": "sonnet"}
@@ -700,6 +750,7 @@
 {"id": "q_5c5bcd0990d7", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in occipital: probe 1059351 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_5cd9732c0ff7", "corpus": "kandel", "page": 964, "quote": "The output is transmitted through the dentate nucleus, which projects via the thalamus to contralateral motor, premotor, parietal, and prefrontal cortices.", "llm": "sonnet"}
 {"id": "q_5cfc73af6dea", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in pons: probe 1059351 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_5d68a7e48731", "corpus": "wikipedia_fr", "page": "bupr_norphine", "quote": "Subutex"}
 {"id": "q_5d8075afed2a", "corpus": "stahl", "page": 471, "quote": "Conventional antipsychotic (neuroleptic, dopamine 2 antagonist, serotonin– dopamine antagonist)", "llm": "sonnet"}
 {"id": "q_5d8627f2ac6a", "corpus": "wikipedia_pharm", "page": "protriptyline", "quote": "D 2 | 2,300 | Human"}
 {"id": "q_5dc6706c70b6", "corpus": "stahl", "page": 927, "quote": "Zonegran"}
@@ -708,6 +759,7 @@
 {"id": "q_5e0704bee107", "corpus": "stahl", "page": 647, "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist, antiemetic)", "llm": "sonnet"}
 {"id": "q_5e0ce9e5dbec", "corpus": "stahl", "page": 253, "quote": "\u0007Nuedexta (in combination with quinidine)"}
 {"id": "q_5e23d6b2b14f", "corpus": "stahl", "page": 247, "quote": "Auvelity"}
+{"id": "q_5eb0bf280aff", "corpus": "wikipedia_fr", "page": "parox_tine", "quote": "Deroxat"}
 {"id": "q_5ee810a64beb", "corpus": "stahl", "page": 593, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_5ef58fb9bb41", "corpus": "wikipedia_pharm", "page": "blonanserin", "quote": "D 4 | 150 | -"}
 {"id": "q_5ef76a8b2678", "corpus": "gtopdb", "page": 10, "quote": "Brain: neocortical regions (mainly layers II-III and V-VI), hippocampus (dentate gyrus and pyramidal cell layer of CA1 and CA3 fields), cerebellum (Purkinje cells, dentate nucleus and granule cells).", "species": "Human", "llm": "sonnet"}
@@ -729,6 +781,7 @@
 {"id": "q_60e244d1a47d", "corpus": "stahl", "page": 336, "quote": "Antihistaminic actions may cause sedation, weight gain", "llm": "sonnet"}
 {"id": "q_6106c24a4b3b", "corpus": "allen_ahba", "page": "CHRM2", "quote": "CHRM2 detected in occipital: probe 1029156 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_613797a6763d", "corpus": "allen_ahba", "page": "BCHE", "quote": "BCHE detected in frontal: probe 1058870 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_6145bc33f55b", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Concorz"}
 {"id": "q_615651f68cb7", "corpus": "stahl", "page": 591, "quote": "Specifically, antagonist actions at serotonin 2C receptors may contribute to efficacy for cognitive and affective symptoms in some patients", "llm": "sonnet"}
 {"id": "q_617aaab55c39", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in thalamus: probe 1027138 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_618938612b58", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 detected in amygdala: probe 1026650 PACall present in 55/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -742,6 +795,7 @@
 {"id": "q_6231ae21f25c", "corpus": "stahl", "page": 935, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms", "llm": "sonnet"}
 {"id": "q_6234d07f8d31", "corpus": "allen_ahba", "page": "CHRM4", "quote": "CHRM4 detected in caudate: probe 1024432 PACall present in 69/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_624a612c6f1f", "corpus": "stahl", "page": 341, "quote": "Prolixin"}
+{"id": "q_624a6ed41718", "corpus": "wikipedia_fr", "page": "bupropion", "quote": "Mysimba"}
 {"id": "q_6277ac960af6", "corpus": "nieuwenhuys", "page": 939, "quote": "Comparable functional specializations have been observed in the organization of the projections from the lateral septal complex to the medial preoptico-hypothalamic zone.", "llm": "sonnet"}
 {"id": "q_6285b3e6ca12", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "NET | 0% at 10 μM | Blocker"}
 {"id": "q_62b62e4c658a", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 1B | 273"}
@@ -794,6 +848,7 @@
 {"id": "q_670fde63b286", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "5-HT 6 | silent antagonist | 3666"}
 {"id": "q_6739932d771e", "corpus": "stahl", "page": 19, "quote": "Neuroscience-based Nomenclature: melatonin multimodal (Mel-MM)", "llm": "sonnet"}
 {"id": "q_676274170e0a", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "5-HT 1B | 1489 | Human"}
+{"id": "q_676aee565378", "corpus": "wikipedia_fr", "page": "modafinil", "quote": "Modasomil"}
 {"id": "q_677be5fcbc94", "corpus": "gtopdb", "page": 218, "quote": "Brain: substantia nigra, inferior colliculus, oculomotor nucleus, superior colliculus, hypothalamus, mammillary nucleus, supraoptic nucleus, thalamus, striatum, hippocampus, dentate gyrus, subiculum, frontal cortex, limbic cortex, occipital cortex, cerebellum, olfactory bulb.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_678328c0f8cc", "corpus": "stahl", "page": 291, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet"}
 {"id": "q_6796931441ca", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "H 2 | 174 | Human"}
@@ -843,6 +898,7 @@
 {"id": "q_6c6ee6773b6c", "corpus": "stahl", "page": 633, "quote": "Paroxetine may have mild norepinephrine reuptake blocking actions", "llm": "sonnet"}
 {"id": "q_6c8da9379de9", "corpus": "stahl", "page": 47, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}
 {"id": "q_6c8dadbdcfbc", "corpus": "wikipedia_pharm", "page": "paliperidone", "quote": "D 1 | 41"}
+{"id": "q_6ca83e692373", "corpus": "wikipedia_fr", "page": "acide_gamma_hydroxybutyrique", "quote": "Alcover"}
 {"id": "q_6cbe529b5218", "corpus": "stahl", "page": 133, "quote": "Blocks dopamine reuptake pump (dopamine transporter), presumably increasing dopaminergic neurotransmission", "llm": "sonnet"}
 {"id": "q_6cc38bd96379", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in medulla: probe 1027138 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_6ccb9d98ebd2", "corpus": "stahl", "page": 496, "quote": "Sedative effects and weight gain may be due to antihistamine properties", "llm": "sonnet"}
@@ -861,6 +917,7 @@
 {"id": "q_6e7e587e37c0", "corpus": "stahl", "page": 253, "quote": "Dextromethorphan reduces glutamate neurotransmission through blocking NMDA receptors", "llm": "sonnet"}
 {"id": "q_6e9aa522923e", "corpus": "allen_ahba", "page": "SLC6A3", "quote": "SLC6A3 detected in accumbens: probe 1051520 PACall present in 14/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_6ea565336ed0", "corpus": "stahl", "page": 257, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
+{"id": "q_6eb2ea5eb7cf", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Seropram"}
 {"id": "q_6ec7735e9b0e", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in caudate: probe 1059691 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_6edf162b039a", "corpus": "stahl", "page": 911, "quote": "May enhance GABA inhibitory actions that provide sedative hypnotic effects more selectively than other actions of GABA", "llm": "sonnet"}
 {"id": "q_6f174fe24ba3", "corpus": "stahl", "page": 383, "quote": "Marax"}
@@ -872,6 +929,7 @@
 {"id": "q_6fb3589c9723", "corpus": "stahl", "page": 699, "quote": "Predominantly a norepinephrine reuptake inhibitor", "llm": "sonnet"}
 {"id": "q_6fea71b3b0de", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "M 4 | 151 | Human"}
 {"id": "q_70174ed78b63", "corpus": "stahl", "page": 495, "quote": "Tricyclic antidepressant (TCA), sometimes classified as a tetracyclic antidepressant (tetra)", "llm": "sonnet"}
+{"id": "q_702dc122c3de", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "XURTA"}
 {"id": "q_70bf5f1915e3", "corpus": "allen_ahba", "page": "GRIK1", "quote": "GRIK1 detected in frontal: probe 1026815 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_70ce41b3f320", "corpus": "stahl", "page": 727, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet"}
 {"id": "q_70df0749e9b9", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "5-HT 6 | 148 | Rat"}
@@ -880,11 +938,13 @@
 {"id": "q_7127be47fb4f", "corpus": "gtopdb", "page": 19, "quote": "Brain: caudate nucleus.", "species": "Human", "llm": "sonnet"}
 {"id": "q_71392d192c3d", "corpus": "stahl", "page": 923, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet"}
 {"id": "q_715b100760c3", "corpus": "stahl", "page": 503, "quote": "Is a low to moderate affinity noncompetitive (open-channel) NMDA receptor antagonist", "llm": "sonnet"}
+{"id": "q_719a6230c6e3", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Citabax"}
 {"id": "q_71bdf4c073aa", "corpus": "stahl", "page": 396, "quote": "Anticholinergic activity may explain sedative effects, dry mouth, constipation, and blurred vision", "llm": "sonnet"}
 {"id": "q_71eb8d920bd8", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "D 5 | 66% at 1 μM | ND | ND"}
 {"id": "q_72010c10b6f0", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 2C | 180 | – | – | –"}
 {"id": "q_721ee0f8a90e", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "5-HT 1A | 3330–5010 | Human"}
 {"id": "q_72454fcb10c8", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in midbrain: probe 1054302 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_72819bd471d0", "corpus": "wikipedia_fr", "page": "t_trab_nazine", "quote": "Xenazine"}
 {"id": "q_730975131024", "corpus": "stahl", "page": 283, "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)", "llm": "sonnet"}
 {"id": "q_732eab98f4ca", "corpus": "stahl", "page": 365, "quote": "Razadyne ER"}
 {"id": "q_733ae4cc835a", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in caudate: probe 1027284 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -905,6 +965,7 @@
 {"id": "q_754a28f7cba3", "corpus": "stahl", "page": 225, "quote": "Tricyclic antidepressant (TCA)", "llm": "sonnet"}
 {"id": "q_7596841b9d45", "corpus": "wikipedia_pharm", "page": "reboxetine", "quote": "5-HT 2C | 457"}
 {"id": "q_75a322115a63", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in pons: probe 1019914 PACall present in 144/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_75eab02cb43d", "corpus": "wikipedia_fr", "page": "m_mantine", "quote": "Abixa"}
 {"id": "q_76162cf29405", "corpus": "stahl", "page": 487, "quote": "antagonist actions at serotonin 7 and alpha 2A and alpha 2C receptors", "llm": "sonnet"}
 {"id": "q_763e0d417cd5", "corpus": "stahl", "page": 325, "quote": "Benzodiazepine (hypnotic)", "llm": "sonnet"}
 {"id": "q_7679f2bd55da", "corpus": "stahl", "page": 849, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}
@@ -915,6 +976,7 @@
 {"id": "q_76e68d230243", "corpus": "allen_ahba", "page": "HTR2C", "quote": "HTR2C detected in amygdala: probe 1055276 PACall present in 57/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_772f58de53cf", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "5-HT 2C | 34 | Antagonist"}
 {"id": "q_7730f7f2466f", "corpus": "stahl", "page": 153, "quote": "Vraylar"}
+{"id": "q_773d208fdc2e", "corpus": "wikipedia_fr", "page": "dexm_thylph_nidate", "quote": "Attenade"}
 {"id": "q_7768d874ae76", "corpus": "allen_ahba", "page": "GRM1", "quote": "GRM1 detected in thalamus: probe 1010994 PACall present in 174/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_777f68b758e0", "corpus": "stahl", "page": 180, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_7789474f1cc3", "corpus": "stahl", "page": 727, "quote": "Risperdal"}
@@ -939,6 +1001,7 @@
 {"id": "q_7a69dd90c53c", "corpus": "stahl", "page": 705, "quote": "Doral"}
 {"id": "q_7a71d8a4f884", "corpus": "stahl", "page": 511, "quote": "Stimulant", "llm": "sonnet"}
 {"id": "q_7a8c91cf2ec4", "corpus": "stahl", "page": 39, "quote": "Elavil"}
+{"id": "q_7a9895f051b8", "corpus": "wikipedia_fr", "page": "nalm_f_ne", "quote": "Revex"}
 {"id": "q_7ac7f911f86b", "corpus": "wikipedia_pharm", "page": "blonanserin", "quote": "M 1 | 100 | -"}
 {"id": "q_7b23c56cc838", "corpus": "allen_ahba", "page": "GRM2", "quote": "GRM2 detected in amygdala: probe 1014136 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7b2fba010bd1", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "5-HT 1D | 579 | ND | ND"}
@@ -961,19 +1024,23 @@
 {"id": "q_7e07bdbcef8f", "corpus": "stahl", "page": 61, "quote": "Evekeo"}
 {"id": "q_7e403b44590c", "corpus": "stahl", "page": 39, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission", "llm": "sonnet"}
 {"id": "q_7e4728620296", "corpus": "kandel", "page": 59, "quote": "The pons, rostral to the medulla, conveys information about movement from the cerebral hemispheres to the cerebellum.", "llm": "sonnet"}
+{"id": "q_7e831a41a89c", "corpus": "wikipedia_fr", "page": "fluraz_pam", "quote": "Dalmadorm"}
 {"id": "q_7e8778ec53b9", "corpus": "allen_ahba", "page": "HTR1D", "quote": "HTR1D detected in putamen: probe 1055345 PACall present in 53/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7e8db454ce37", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "5-HT 1B | 14.9 | Antagonist"}
 {"id": "q_7e91db871219", "corpus": "allen_ahba", "page": "HTR1E", "quote": "HTR1E detected in cingulate: probe 1055340 PACall present in 122/123 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7eb6b1b6bfbd", "corpus": "stahl_essential", "page": 422, "quote": "There is a fourth type of histamine receptor, H4", "llm": "sonnet"}
 {"id": "q_7ed1adfdb401", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in midbrain: probe 1057496 PACall present in 153/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7ee19b190a30", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "D 4 | 4.92"}
+{"id": "q_7f12e6e99b45", "corpus": "wikipedia_fr", "page": "palip_ridone", "quote": "Xeplion"}
 {"id": "q_7f1a6bed1b33", "corpus": "allen_ahba", "page": "CACNA1C", "quote": "CACNA1C detected in thalamus: probe 1015380 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7f3d02f575bc", "corpus": "allen_ahba", "page": "SLC6A3", "quote": "SLC6A3 detected in caudate: probe 1051520 PACall present in 80/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7f5949da4c7b", "corpus": "stahl", "page": 551, "quote": "Hypothetically acts as an inhibitor of the dopamine transporter", "llm": "sonnet"}
 {"id": "q_7f643b001190", "corpus": "allen_ahba", "page": "SLC18A2", "quote": "SLC18A2 detected in vta: probe 1051381 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_7f95a0a85cc3", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Xydep"}
 {"id": "q_7fa4490dc790", "corpus": "stahl", "page": 450, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_7fd242a6f8aa", "corpus": "kandel", "page": 1052, "quote": "The noradrenergic locus ceruleus, serotonergic dorsal and median raphe nuclei, dopaminergic A10 neurons, and histaminergic tuberomammillary neurons innervate the thalamus, hypothalamus, basal forebrain, and cerebral cortex.", "llm": "sonnet"}
 {"id": "q_7ffedfa00dd1", "corpus": "gtopdb", "page": 215, "quote": "Striatum.", "species": "Rat", "llm": "sonnet"}
+{"id": "q_8004b026eb6e", "corpus": "wikipedia_fr", "page": "acide_valpro_que", "quote": "Micropakine"}
 {"id": "q_80090dfe7a43", "corpus": "stahl", "page": 443, "quote": "Neuroscience-based Nomenclature: lithium enzyme interactions (Li-Eint)", "llm": "sonnet"}
 {"id": "q_80100a343a96", "corpus": "stahl", "page": 15, "quote": "Campral"}
 {"id": "q_8026bd9e54d9", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in vta: probe 1059691 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -986,6 +1053,7 @@
 {"id": "q_805d33479540", "corpus": "stahl", "page": 25, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet"}
 {"id": "q_80ea06fb63ef", "corpus": "stahl", "page": 622, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_8159f09c11a0", "corpus": "stahl", "page": 283, "quote": "Tricyclic antidepressant (TCA)", "llm": "sonnet"}
+{"id": "q_81698c63b79f", "corpus": "wikipedia_fr", "page": "t_maz_pam", "quote": "Normison"}
 {"id": "q_816a4b02f630", "corpus": "allen_ahba", "page": "ADRA1B", "quote": "ADRA1B detected in temporal: probe 1023485 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_816b54700a18", "corpus": "allen_ahba", "page": "CHRM3", "quote": "CHRM3 detected in midbrain: probe 1023697 PACall present in 154/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_818571f19473", "corpus": "allen_ahba", "page": "CHRNA7", "quote": "CHRNA7 detected in temporal: probe 1022067 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -997,6 +1065,7 @@
 {"id": "q_8284b17be367", "corpus": "allen_ahba", "page": "SV2A", "quote": "SV2A detected in temporal: probe 1048051 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_82953e83ff37", "corpus": "stahl", "page": 465, "quote": "Ativan"}
 {"id": "q_82ee7f05d1df", "corpus": "stahl", "page": 517, "quote": "Ritalin LA"}
+{"id": "q_830b4ee728db", "corpus": "wikipedia_fr", "page": "dulox_tine", "quote": "Yentreve"}
 {"id": "q_836d27b06ec6", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "α 2B | 82–180 | Antagonist"}
 {"id": "q_83bb37c650be", "corpus": "stahl", "page": 739, "quote": "Exelon"}
 {"id": "q_83c1edf4d62e", "corpus": "stahl", "page": 127, "quote": "Buprenorphine is also an antagonist at the kappa opioid receptor", "llm": "sonnet"}
@@ -1024,9 +1093,11 @@
 {"id": "q_874a48cd9ef3", "corpus": "stahl", "page": 850, "quote": "Antihistaminic actions may cause sedation, weight gain", "llm": "sonnet"}
 {"id": "q_876d5c2993f4", "corpus": "allen_ahba", "page": "OPRK1", "quote": "OPRK1 detected in caudate: probe 1021758 PACall present in 75/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_8772f1121bef", "corpus": "gtopdb", "page": 218, "quote": "Cerebral cortex, basal ganglia, basal forebrain, hippocampus, diencephalon, brainstem, cerebellum, olfactory bulb, islands of Calleja, superior colliculus", "species": "Monkey", "llm": "sonnet"}
+{"id": "q_879488b83b74", "corpus": "wikipedia_fr", "page": "olanzapine", "quote": "Zypadhera"}
 {"id": "q_879b19279296", "corpus": "stahl", "page": 601, "quote": "Blocks mu opioid receptors, ameliorating antipsychotic-induced weight gain and possibly metabolic abnormalities", "llm": "sonnet"}
 {"id": "q_87ad04cb4f6e", "corpus": "stahl", "page": 659, "quote": "Norepinephrine and dopamine reuptake inhibitor (phentermine) combined with a voltage-sensitive sodium channel modulator (topiramate); weight management medication", "llm": "sonnet"}
 {"id": "q_87da751ee48b", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "D 4L | 417–603 | ~30% | Partial agonist / functional full agonist"}
+{"id": "q_87e90956014b", "corpus": "wikipedia_fr", "page": "m_thamph_tamine", "quote": "Isophan"}
 {"id": "q_87e924eb3312", "corpus": "stahl", "page": 329, "quote": "Prozac weekly"}
 {"id": "q_87f02e01c04a", "corpus": "wikipedia_pharm", "page": "blonanserin", "quote": "5-HT 1A | 804 | -"}
 {"id": "q_87f62a9743fb", "corpus": "allen_ahba", "page": "GRIK1", "quote": "GRIK1 detected in cerebellum: probe 1026815 PACall present in 306/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1035,9 +1106,11 @@
 {"id": "q_882ca28eacbb", "corpus": "nieuwenhuys", "page": 64, "quote": "the fornix, a large fibre system that connects the hippocampal formation with the septum and the hypothalamus.", "llm": "sonnet"}
 {"id": "q_888a0bf496f1", "corpus": "stahl", "page": 855, "quote": "Prevents the action of acetylcholine on muscarinic receptors", "llm": "sonnet"}
 {"id": "q_888fecc65d3e", "corpus": "stahl", "page": 558, "quote": "Antihistaminic actions may cause sedation, weight gain", "llm": "sonnet"}
+{"id": "q_88aa9c785a59", "corpus": "wikipedia_fr", "page": "loxapine", "quote": "Adasuve"}
 {"id": "q_88da0d588713", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 detected in frontal: probe 1026650 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_890635ba9f67", "corpus": "stahl", "page": 621, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms", "llm": "sonnet"}
 {"id": "q_89a372bcf5ca", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in amygdala: probe 1028488 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_89af48581fa3", "corpus": "wikipedia_fr", "page": "m_mantine", "quote": "Akatinol"}
 {"id": "q_89afc3221b2d", "corpus": "stahl", "page": 787, "quote": "Dolmatil"}
 {"id": "q_89d01a2a38cb", "corpus": "kandel", "page": 1380, "quote": "These nuclei project to the central nucleus, which projects to the hypothalamus and brain stem."}
 {"id": "q_89fc4c9312ca", "corpus": "stahl", "page": 779, "quote": "Has agonist actions at GHB receptors and partial agonist actions at GABA-B receptors", "llm": "sonnet"}
@@ -1050,9 +1123,11 @@
 {"id": "q_8b08b5bd1ab2", "corpus": "wikipedia_pharm", "page": "sertraline", "quote": "NET | 420–925 | Human"}
 {"id": "q_8b0a71eb71b8", "corpus": "wikipedia_pharm", "page": "paliperidone", "quote": "5-HT 1A | 6.17"}
 {"id": "q_8b1e1c05526f", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 1A | 176"}
+{"id": "q_8b27c21a434c", "corpus": "wikipedia_fr", "page": "bupropion", "quote": "Budeprion"}
 {"id": "q_8b29c3c16bb9", "corpus": "stahl", "page": 567, "quote": "Alcohol dependence treatment; mu opioid receptor antagonist", "llm": "sonnet"}
 {"id": "q_8b2abc544040", "corpus": "stahl", "page": 450, "quote": "Anticholinergic activity may explain sedative effects, dry mouth, constipation, and blurred vision", "llm": "sonnet"}
 {"id": "q_8b44744af7eb", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in pons: probe 1027138 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_8b4813cdafd2", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Tyvense"}
 {"id": "q_8b7016ba0b20", "corpus": "stahl_essential", "page": 96, "quote": "Other enzymes that break down dopamine are monoamine oxidase A (MAO-A) and monoamine oxidase B (MAO-B), which are present in mitochondria within the presynaptic neuron and in other cells such as glia.", "llm": "sonnet"}
 {"id": "q_8ba9e3da91fa", "corpus": "stahl", "page": 161, "quote": "Limbitrol"}
 {"id": "q_8bd684b9ea2d", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in amygdala: probe 1020459 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1067,6 +1142,7 @@
 {"id": "q_8cd77867e099", "corpus": "wikipedia_pharm", "page": "lofexidine", "quote": "α 2B | 67"}
 {"id": "q_8cf4b6bbb283", "corpus": "stahl", "page": 193, "quote": "stimulates alpha 2 adrenergic receptors in the brain stem", "llm": "sonnet"}
 {"id": "q_8cff3471d92a", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in cerebellum: probe 1059354 PACall present in 306/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_8d474a3cb483", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Ciazil"}
 {"id": "q_8d4a9294ca23", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "D 5 | 2,500 nM"}
 {"id": "q_8d6bda1b754b", "corpus": "stahl", "page": 883, "quote": "Neuroscience-based Nomenclature: acetylcholine receptor partial agonist (ACh-RPA)", "llm": "sonnet"}
 {"id": "q_8d7e9dccf37e", "corpus": "kandel", "page": 1560, "quote": "Serotonergic and noradrenergic neurons in the pons and medulla project widely to highly diverse terminal fields in brain regions that include the hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex (Figures 61–5 and 61–6).", "llm": "sonnet"}
@@ -1075,9 +1151,11 @@
 {"id": "q_8e1d9758ee45", "corpus": "stahl", "page": 801, "quote": "Restoril"}
 {"id": "q_8e64f32d92f0", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "α 2B | 108 | Antagonist"}
 {"id": "q_8eb82d2cf40c", "corpus": "stahl", "page": 717, "quote": "Rozerem"}
+{"id": "q_8eb90e397da8", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Stimuloton"}
 {"id": "q_8f259dcf55f3", "corpus": "stahl", "page": 783, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing norepinephrine neurotransmission in the prefrontal cortex and throughout the brain", "llm": "sonnet"}
 {"id": "q_8f44e5c94abb", "corpus": "stahl", "page": 699, "quote": "Triptil"}
 {"id": "q_8f591213c629", "corpus": "stahl", "page": 147, "quote": "Anticonvulsant, antineuralgic for chronic pain, voltage-sensitive sodium channel antagonist", "llm": "sonnet"}
+{"id": "q_8f6941df1c6b", "corpus": "wikipedia_fr", "page": "qu_tiapine", "quote": "Sequase"}
 {"id": "q_8f6ed71dbb65", "corpus": "stahl", "page": 81, "quote": "Nuvigil"}
 {"id": "q_8f9c9d9be69b", "corpus": "stahl", "page": 615, "quote": "Trileptal"}
 {"id": "q_8fcfeb86ab65", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in vta: probe 1054302 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1124,6 +1202,7 @@
 {"id": "q_9413101f9d44", "corpus": "allen_ahba", "page": "GRM3", "quote": "GRM3 detected in parietal: probe 1055926 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_9422a239292b", "corpus": "stahl", "page": 31, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet"}
 {"id": "q_946b7ed2ab2d", "corpus": "stahl", "page": 676, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
+{"id": "q_94757852acfc", "corpus": "wikipedia_fr", "page": "nortriptyline", "quote": "Noritren"}
 {"id": "q_948334e7ca5f", "corpus": "wikipedia_pharm", "page": "diphenhydramine", "quote": "α 2B | 1600 | Human"}
 {"id": "q_94bc3a0f032f", "corpus": "stahl", "page": 936, "quote": "By blocking histamine 1 receptors in the brain, it can cause sedation and weight gain", "llm": "sonnet"}
 {"id": "q_94cf71d81248", "corpus": "stahl", "page": 935, "quote": "Specifically inhibits norepinephrine uptake", "llm": "sonnet"}
@@ -1134,6 +1213,7 @@
 {"id": "q_953f31118eba", "corpus": "stahl", "page": 863, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet"}
 {"id": "q_954af7fff09e", "corpus": "stahl", "page": 31, "quote": "Theoretically blocks postsynaptic dopamine 2 receptors at higher doses", "llm": "sonnet"}
 {"id": "q_95ad8acef3f8", "corpus": "wikipedia_pharm", "page": "protriptyline", "quote": "5-HT 2A | 70 | Human"}
+{"id": "q_95ef0225397d", "corpus": "wikipedia_fr", "page": "m_mantine", "quote": "Memox"}
 {"id": "q_962f90d0934b", "corpus": "allen_ahba", "page": "SIGMAR1", "quote": "SIGMAR1 detected in hippocampus: probe 1047600 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_96494e03a1fb", "corpus": "wikipedia_pharm", "page": "duloxetine", "quote": "5-HT 2C | 916"}
 {"id": "q_96685000b46e", "corpus": "stahl", "page": 115, "quote": "Positive allosteric modulator at neuroactive steroid sites on both GABA-A benzodiazepine-sensitive and benzodiazepine-insensitive ligand-gated ion channels", "llm": "sonnet"}
@@ -1154,15 +1234,18 @@
 {"id": "q_97ad3ef83f44", "corpus": "stahl", "page": 95, "quote": "Strattera"}
 {"id": "q_97b5f6304f38", "corpus": "stahl", "page": 81, "quote": "Hypothetically acts as an inhibitor of the dopamine transporter", "llm": "sonnet"}
 {"id": "q_980525c997e4", "corpus": "stahl", "page": 602, "quote": "By blocking histamine 1 receptors in the brain, it can cause sedation and possibly weight gain", "llm": "sonnet"}
+{"id": "q_98435feb7377", "corpus": "wikipedia_fr", "page": "amph_tamine", "quote": "Attentin"}
 {"id": "q_984dcffd26e6", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "5-HT 1A | 1,044–>10,000 nM"}
 {"id": "q_98692cd2bc5c", "corpus": "stahl", "page": 533, "quote": "Savella"}
 {"id": "q_98831bf9cacc", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in cerebellum: probe 1059351 PACall present in 299/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_98c1165394cb", "corpus": "gtopdb", "page": 373, "quote": "Area postrema, nucleus of the spinal tract of the trigeminal nerve, nucleus solitarius, dorsal motor nucleus of the vagus, cingulate, entorhinal and olfactory cortices, amygdala, lateral dorsal and ventral hippocampus, dentate gyrus, interpenduncular nucleus.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_98d938cbcdc0", "corpus": "stahl", "page": 205, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms", "llm": "sonnet"}
+{"id": "q_98f15bd7f93e", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Ecosol"}
 {"id": "q_98f69c558a01", "corpus": "stahl", "page": 709, "quote": "Seroquel"}
 {"id": "q_98fe7040d38f", "corpus": "stahl", "page": 479, "quote": "Binds as a partial agonist at presynaptic dopamine 2 receptors", "llm": "sonnet"}
 {"id": "q_9924e877c92e", "corpus": "stahl", "page": 827, "quote": "Carbonic anhydrase inhibitor", "llm": "sonnet"}
 {"id": "q_993dd1cb4702", "corpus": "stahl", "page": 61, "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)", "llm": "sonnet"}
+{"id": "q_994eb3a54643", "corpus": "wikipedia_fr", "page": "esk_tamine", "quote": "Keta-S"}
 {"id": "q_9992b3608d70", "corpus": "stahl_essential", "page": 522, "quote": "Muscarinic acetylcholine receptors are G-protein-linked and can be either excitatory or inhibitory.", "llm": "sonnet"}
 {"id": "q_999cc66929f2", "corpus": "stahl", "page": 700, "quote": "Blockade of alpha 1 adrenergic receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_999e8526d0e6", "corpus": "stahl", "page": 53, "quote": "Xelstrym"}
@@ -1198,7 +1281,9 @@
 {"id": "q_9d48b7500254", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "α 1A | 3.8 | Antagonist"}
 {"id": "q_9d5724888443", "corpus": "kandel", "page": 735, "quote": "The axons of the mitral and tufted relay neurons of the olfactory bulb project through the lateral olfactory tract to the olfactory cortex (Figure 29–8 and see Figure 29–1).", "llm": "sonnet"}
 {"id": "q_9d5e48cc1e0b", "corpus": "gtopdb", "page": 14, "quote": "CNS: hippocampus.", "species": "Rat", "llm": "sonnet"}
+{"id": "q_9d7608a4cddf", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Ciprapine"}
 {"id": "q_9d8a40fad9ba", "corpus": "stahl", "page": 257, "quote": "Other"}
+{"id": "q_9d9c5d2272fa", "corpus": "wikipedia_fr", "page": "m_thamph_tamine", "quote": "Methedrine"}
 {"id": "q_9db741091224", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "D 4 | 148 nM (canine)"}
 {"id": "q_9dba4d1accdc", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "5-HT 1A | 30"}
 {"id": "q_9de49a683499", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "5-HT 1E | 344 | Human"}
@@ -1207,6 +1292,8 @@
 {"id": "q_9df40a2f3429", "corpus": "stahl", "page": 577, "quote": "SARI (serotonin 2 antagonist/reuptake inhibitor); antidepressant", "llm": "sonnet"}
 {"id": "q_9df9ebe6ff32", "corpus": "stahl", "page": 179, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet"}
 {"id": "q_9e0c60c7682c", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "5-HT 1E | 1,500 | ?"}
+{"id": "q_9e52aaeac83e", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Citrol"}
+{"id": "q_9e52d738c5d5", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Serlift"}
 {"id": "q_9e7a339050d8", "corpus": "stahl", "page": 472, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_9e7b960011be", "corpus": "wikipedia_pharm", "page": "propranolol", "quote": "5-HT 2B | 457–513 ( + ) 166–316 ( – ) | Human Human"}
 {"id": "q_9e7de6819216", "corpus": "stahl", "page": 179, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission", "llm": "sonnet"}
@@ -1237,6 +1324,7 @@
 {"id": "q_a1647089e7a6", "corpus": "stahl", "page": 387, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet"}
 {"id": "q_a1717349e18e", "corpus": "wikipedia_pharm", "page": "propranolol", "quote": "β 3 | 450 | Mouse"}
 {"id": "q_a17d28d7584d", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "β 1 | 5,000 | 6,239"}
+{"id": "q_a184ea20b641", "corpus": "wikipedia_fr", "page": "naltrexone", "quote": "Depade"}
 {"id": "q_a190d346c59e", "corpus": "stahl", "page": 833, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine multimodal enzyme inhibitor (SN-MM)", "llm": "sonnet"}
 {"id": "q_a1aa9936b09b", "corpus": "stahl", "page": 621, "quote": "Serotonin 7 antagonist properties may contribute to antidepressant actions", "llm": "sonnet"}
 {"id": "q_a1b0d7b93b4c", "corpus": "allen_ahba", "page": "CHRNA7", "quote": "CHRNA7 detected in thalamus: probe 1022067 PACall present in 176/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1244,6 +1332,7 @@
 {"id": "q_a1e1f6980a40", "corpus": "wikipedia_pharm", "page": "paroxetine", "quote": "D 2 | 7,700"}
 {"id": "q_a1ee3c349c20", "corpus": "stahl", "page": 47, "quote": "Tricyclic antidepressant (TCA), sometimes classified as a tetracyclic antidepressant", "llm": "sonnet"}
 {"id": "q_a2013005e481", "corpus": "stahl", "page": 859, "quote": "Synthetic hormone; antidepressant adjunct", "llm": "sonnet"}
+{"id": "q_a234ceb85df5", "corpus": "wikipedia_fr", "page": "qu_tiapine", "quote": "Ketipinor"}
 {"id": "q_a27e425a153a", "corpus": "stahl", "page": 875, "quote": "Stavzor"}
 {"id": "q_a28f4a3c87a1", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "D 5 | 290 | Antagonist"}
 {"id": "q_a298356b34d2", "corpus": "kandel", "page": 1117, "quote": "There are also GABAergic projections from the NAc to the VTA, with some in a direct pathway innervating the VTA and some in an indirect pathway innervating the VTA via intervening GABAergic neurons in the ventral pallidum", "llm": "sonnet"}
@@ -1257,6 +1346,7 @@
 {"id": "q_a353050293fa", "corpus": "stahl", "page": 634, "quote": "Paroxetine's weak antimuscarinic properties can cause constipation, dry mouth, sedation", "llm": "sonnet"}
 {"id": "q_a358177d1ddb", "corpus": "stahl", "page": 935, "quote": "Zoleptil"}
 {"id": "q_a375473087c6", "corpus": "stahl_essential", "page": 97, "quote": "The first group is the D1-like receptors, including both D1 and D5 receptors. D1-like receptors are excitatory, and positively linked to adenylate cyclase (Figure 4-4, left).", "llm": "sonnet"}
+{"id": "q_a380448e7b01", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Recital"}
 {"id": "q_a3849783dd76", "corpus": "wikipedia_pharm", "page": "diphenhydramine", "quote": "α 2A | 2900 | Human"}
 {"id": "q_a3bdb2d1bfdc", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in locus_coeruleus: probe 1059351 PACall present in 10/10 samples (donors 9861,10021,15697)", "species": "Human"}
 {"id": "q_a404783e57b8", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in parietal: probe 1019914 PACall present in 242/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1286,16 +1376,21 @@
 {"id": "q_a5d7d33e91f4", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "5-HT 7 | 99 | 73 (RC) | ND"}
 {"id": "q_a5e0d6208472", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "D 2 | 8.9 | 1.3 | Antagonist"}
 {"id": "q_a5f2fd101e62", "corpus": "stahl", "page": 395, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet"}
+{"id": "q_a649e8b2ab0f", "corpus": "wikipedia_fr", "page": "t_trab_nazine", "quote": "Xentra"}
 {"id": "q_a64abad190d7", "corpus": "stahl", "page": 823, "quote": "Tatinol"}
 {"id": "q_a65ad5b650fb", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in substantia_nigra: probe 1028488 PACall present in 36/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a65b111a4b94", "corpus": "stahl", "page": 681, "quote": "Wakix"}
+{"id": "q_a679ce5649d2", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Serlain"}
 {"id": "q_a683d0903df4", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in temporal: probe 1020459 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a689fa98235b", "corpus": "stahl", "page": 517, "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine multimodal (DN-MM)", "llm": "sonnet"}
 {"id": "q_a693f05ac761", "corpus": "stahl", "page": 15, "quote": "Neuroscience-based Nomenclature: glutamate multimodal (Glu-MM)", "llm": "sonnet"}
 {"id": "q_a6987f547ba7", "corpus": "kandel", "page": 59, "quote": "The cingulate cortex lies dorsal to the corpus callosum and is important for regulation of emotion, pain perception, and cognition.", "llm": "sonnet"}
 {"id": "q_a69965eae113", "corpus": "allen_ahba", "page": "HTR1A", "quote": "HTR1A detected in septal_nuclei: probe 1024804 PACall present in 8/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_a6a40f273202", "corpus": "wikipedia_fr", "page": "tropat_pine", "quote": "Lepticur"}
 {"id": "q_a6a6418ebd95", "corpus": "stahl", "page": 349, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet"}
 {"id": "q_a6a6e8e67f35", "corpus": "stahl", "page": 105, "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a potential mood stabilizer)", "llm": "sonnet"}
+{"id": "q_a6f82053ca98", "corpus": "wikipedia_fr", "page": "esk_tamine", "quote": "Eskesia"}
+{"id": "q_a702809812c3", "corpus": "wikipedia_fr", "page": "m_thamph_tamine", "quote": "Pervitin"}
 {"id": "q_a7191fe5b3c5", "corpus": "allen_ahba", "page": "GLRA1", "quote": "GLRA1 detected in medulla: probe 1012904 PACall present in 171/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a729a00bcb5f", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "H 3 | 1000 | Human"}
 {"id": "q_a73d1181a68b", "corpus": "wikipedia_pharm", "page": "doxylamine", "quote": "M 1 | 490 | Human"}
@@ -1317,6 +1412,7 @@
 {"id": "q_a9126395a7a9", "corpus": "stahl", "page": 727, "quote": "Risperdal Consta"}
 {"id": "q_a9888cbe16d4", "corpus": "allen_ahba", "page": "CHRM1", "quote": "CHRM1 detected in frontal: probe 1058221 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a996b29bb460", "corpus": "wikipedia_pharm", "page": "guanfacine", "quote": "α 2B | 1,020 – 1,380 | Human"}
+{"id": "q_a9a7864af80e", "corpus": "wikipedia_fr", "page": "cloraz_pate", "quote": "Tranxilium"}
 {"id": "q_a9b4cf5155f1", "corpus": "allen_ahba", "page": "CHRM1", "quote": "CHRM1 detected in occipital: probe 1058221 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a9bd7ec49419", "corpus": "stahl", "page": 284, "quote": "blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_a9c807bcec10", "corpus": "stahl", "page": 303, "quote": "Nonselective, noncompetitive open-channel inhibitor of the NMDA receptor", "llm": "sonnet"}
@@ -1338,6 +1434,7 @@
 {"id": "q_ad25c4c24b40", "corpus": "wikipedia_pharm", "page": "paroxetine", "quote": "α 2 | 3,900"}
 {"id": "q_ad2e613a7ce5", "corpus": "allen_ahba", "page": "GRM3", "quote": "GRM3 detected in hippocampus: probe 1055926 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ad4d2baa0ce2", "corpus": "stahl", "page": 147, "quote": "Carbatrol"}
+{"id": "q_ad5fb75dcc1a", "corpus": "wikipedia_fr", "page": "cloraz_pate", "quote": "Tranxène"}
 {"id": "q_ad9c0f125e1e", "corpus": "stahl", "page": 840, "quote": "Sedative effects may be due to antihistamine properties", "llm": "sonnet"}
 {"id": "q_ada4e4d04bd6", "corpus": "wikipedia_pharm", "page": "amoxapine", "quote": "DAT | 4,310 | Human"}
 {"id": "q_ada8a8c35a7f", "corpus": "carlat", "page": 60, "quote": "Non-selective monoamine oxidase inhibitors.", "llm": "sonnet"}
@@ -1392,6 +1489,7 @@
 {"id": "q_b378d6b7b17b", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "H 4 | 6 | 1"}
 {"id": "q_b3a7cd444f80", "corpus": "allen_ahba", "page": "SCN1A", "quote": "SCN1A detected in frontal: probe 1022570 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_b3ad5a8f9f04", "corpus": "allen_ahba", "page": "DRD3", "quote": "DRD3 detected in putamen: probe 1025406 PACall present in 39/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_b3af927ccddf", "corpus": "wikipedia_fr", "page": "naltrexone", "quote": "Vivitrol"}
 {"id": "q_b402f6996cb6", "corpus": "allen_ahba", "page": "HTR1E", "quote": "HTR1E detected in accumbens: probe 1055340 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_b414d6fd0462", "corpus": "stahl", "page": 779, "quote": "Xyrem"}
 {"id": "q_b41625995fc2", "corpus": "allen_ahba", "page": "SLC18A2", "quote": "SLC18A2 detected in caudate: probe 1051381 PACall present in 81/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1405,6 +1503,7 @@
 {"id": "q_b50b9fe5f70b", "corpus": "stahl", "page": 147, "quote": "Acts as a use-dependent blocker of voltagesensitive sodium channels", "llm": "sonnet"}
 {"id": "q_b51666f92f78", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "D 1L | 1290–2630 | Agonist"}
 {"id": "q_b5248b3b523f", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "D 4.4 | 14.9 | Antagonist"}
+{"id": "q_b56c4ffba9d7", "corpus": "wikipedia_fr", "page": "chlorpromazine", "quote": "Largactil"}
 {"id": "q_b5b716d86bb8", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "5-HT 1A | 276 | Human"}
 {"id": "q_b5bd1bcc08a8", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "β 1 | 5000"}
 {"id": "q_b5bf6f21b1ef", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "α 2B | 103 | ND"}
@@ -1417,6 +1516,7 @@
 {"id": "q_b67a119d5e8d", "corpus": "stahl", "page": 341, "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)", "llm": "sonnet"}
 {"id": "q_b715b923e711", "corpus": "stahl", "page": 839, "quote": "Blocks serotonin reuptake pump (serotonin transporter) less potently", "llm": "sonnet"}
 {"id": "q_b737ae255058", "corpus": "stahl", "page": 689, "quote": "Neuroscience-based Nomenclature: glutamate voltage-gated calcium channel blocker (Glu-CB)", "llm": "sonnet"}
+{"id": "q_b7404e60466a", "corpus": "wikipedia_fr", "page": "bupropion", "quote": "Contrave"}
 {"id": "q_b75d14fd8a12", "corpus": "stahl", "page": 517, "quote": "Stimulant", "llm": "sonnet"}
 {"id": "q_b788861d4403", "corpus": "stahl_essential", "page": 575, "quote": "synapse with postsynaptic sites containing μ-opioid receptors", "llm": "sonnet"}
 {"id": "q_b7a43de4e899", "corpus": "wikipedia_pharm", "page": "perphenazine", "quote": "α 2A | 810 | - | -"}
@@ -1426,6 +1526,7 @@
 {"id": "q_b7fa21f2db1e", "corpus": "stahl", "page": 233, "quote": "Pristiq"}
 {"id": "q_b7fa7b9a91f3", "corpus": "wikipedia_pharm", "page": "amisulpride", "quote": "α 2C | 1540 | Human"}
 {"id": "q_b8069f183111", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in hippocampus: probe 1019914 PACall present in 141/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_b80dc633c452", "corpus": "wikipedia_fr", "page": "amisulpride", "quote": "Deniban"}
 {"id": "q_b81d143deacf", "corpus": "stahl", "page": 216, "quote": "Antihistamine actions may contribute to anxiolytic actions at low doses and to sedation and weight gain at high doses", "llm": "sonnet"}
 {"id": "q_b82b4e2f5f81", "corpus": "stahl", "page": 437, "quote": "Neuroscience-based Nomenclature: dopamine and norepinephrine reuptake inhibitor and releaser (DN-RIRe)", "llm": "sonnet"}
 {"id": "q_b855eeefa68f", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "5HT 4 | 9.44 | 11.9"}
@@ -1434,9 +1535,11 @@
 {"id": "q_b88a3f505ac8", "corpus": "stahl", "page": 53, "quote": "Dexedrine"}
 {"id": "q_b8aed193495c", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "NET | 71 | Human"}
 {"id": "q_b8c0a291579d", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "SERT | 1259 | ND | ND"}
+{"id": "q_b8f176845b18", "corpus": "wikipedia_fr", "page": "amph_tamine", "quote": "Benzédrine"}
 {"id": "q_b9393d37a778", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "H 3 | 60–388 | ND"}
 {"id": "q_b950cf25c4c0", "corpus": "stahl", "page": 931, "quote": "Imovane"}
 {"id": "q_b953a96c76a2", "corpus": "stahl", "page": 277, "quote": "Prothiaden"}
+{"id": "q_b967fac78553", "corpus": "wikipedia_fr", "page": "sulpiride", "quote": "Synedil"}
 {"id": "q_b995ba78069b", "corpus": "stahl", "page": 563, "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (O-RAn)", "llm": "sonnet"}
 {"id": "q_b9ae5980676c", "corpus": "kandel", "page": 982, "quote": "Pars reticulata neurons are also GABAergic and impose strong inhibitory control over parts of the thalamus and brain stem, including the superior colliculus, pedunculopontine nucleus, and parts of the midbrain and medullary reticular formation.", "llm": "sonnet"}
 {"id": "q_b9b260beb555", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in vta: probe 1017111 PACall present in 8/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1457,10 +1560,12 @@
 {"id": "q_bb6c7ce973a7", "corpus": "allen_ahba", "page": "CHRM4", "quote": "CHRM4 detected in accumbens: probe 1024432 PACall present in 9/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_bb8cbe58dc41", "corpus": "stahl", "page": 699, "quote": "Vivactil"}
 {"id": "q_bb96b0914cba", "corpus": "wikipedia_pharm", "page": "clonidine", "quote": "α 2B | 69.18 – 309.0 | Human"}
+{"id": "q_bb9f853361d5", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Zentius"}
 {"id": "q_bbadc3f48ad7", "corpus": "allen_ahba", "page": "MAOA", "quote": "MAOA detected in substantia_nigra: probe 1054334 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_bbf72b754844", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "M 5 | 6,340–>10,000"}
 {"id": "q_bc63bb1e4c25", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in occipital: probe 1022773 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_bc8b8004624a", "corpus": "stahl", "page": 133, "quote": "Wellbutrin XL"}
+{"id": "q_bc8f24cec817", "corpus": "wikipedia_fr", "page": "isocarboxazide", "quote": "Enerzer"}
 {"id": "q_bc9738af3570", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "α 2C | Agonist | 550"}
 {"id": "q_bc99a8b3fcfd", "corpus": "stahl", "page": 551, "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)", "llm": "sonnet"}
 {"id": "q_bce150cc860b", "corpus": "stahl", "page": 403, "quote": "Monoamine oxidase inhibitor (MAOI)", "llm": "sonnet"}
@@ -1472,10 +1577,12 @@
 {"id": "q_be31dfcdb7a5", "corpus": "stahl", "page": 205, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin, norepinephrine receptor antagonist (DSN-RAn)", "llm": "sonnet"}
 {"id": "q_be5750cfa895", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "5-HT 6 | 58 | Antagonist"}
 {"id": "q_be586e9f98b4", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "D 1 | 190–464 nM"}
+{"id": "q_be96048c584f", "corpus": "wikipedia_fr", "page": "nortriptyline", "quote": "Sensoval"}
 {"id": "q_beb989eb57e9", "corpus": "stahl", "page": 899, "quote": "Selective norepinephrine reuptake inhibitor (NRI)", "llm": "sonnet"}
 {"id": "q_bee79060f250", "corpus": "wikipedia_pharm", "page": "fluvoxamine", "quote": "NET | 1427"}
 {"id": "q_bee8c411b14d", "corpus": "stahl", "page": 517, "quote": "Quillivant XR"}
 {"id": "q_beeb56b9a41c", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in temporal: probe 1022773 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_beec271b49a2", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Elatrol"}
 {"id": "q_bf10baf0c6df", "corpus": "stahl", "page": 797, "quote": "Binds selectively to melatonin 1 and melatonin 2 receptors as a full agonist, with greater affinity for melatonin 2 receptors than for melatonin 1 receptors", "llm": "sonnet"}
 {"id": "q_bf369019bd57", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "α 1D | 2.6 | Antagonist"}
 {"id": "q_bf38ba0191ee", "corpus": "stahl_essential", "page": 521, "quote": "ACh's actions are terminated by one of two enzymes, either acetylcholinesterase (AChE) or butyrylcholinesterase (BuChE), sometimes also called \"pseudocholinesterase\" or \"nonspecific cholinesterase\" (Figure 12-25).", "llm": "sonnet"}
@@ -1498,8 +1605,10 @@
 {"id": "q_c137db7dacad", "corpus": "stahl", "page": 431, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet"}
 {"id": "q_c186685ae382", "corpus": "allen_ahba", "page": "OPRK1", "quote": "OPRK1 detected in claustrum: probe 1021758 PACall present in 41/42 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_c2203f48d5bd", "corpus": "stahl", "page": 670, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
+{"id": "q_c282c2e4e417", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Apo-Sertral"}
 {"id": "q_c292a3134040", "corpus": "kandel", "page": 1025, "quote": "Neurons controlling the internal environment are concentrated in the hypothalamus, a small area of the diencephalon that comprises less than 1% of the total brain volume.", "llm": "sonnet"}
 {"id": "q_c299b9c1c371", "corpus": "wikipedia_pharm", "page": "pimavanserin", "quote": "5-HT 2C | 0.44–10 (K i ) 91 ( IC 50 )"}
+{"id": "q_c299d93a17d6", "corpus": "wikipedia_fr", "page": "dulox_tine", "quote": "Xeristar"}
 {"id": "q_c29bc536a8b2", "corpus": "stahl", "page": 665, "quote": "Nuplazid"}
 {"id": "q_c2a48d16d0ce", "corpus": "stahl", "page": 173, "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet"}
 {"id": "q_c2bd560eaf8a", "corpus": "stahl", "page": 472, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
@@ -1527,8 +1636,10 @@
 {"id": "q_c4a1af661273", "corpus": "stahl", "page": 517, "quote": "Methylin ER"}
 {"id": "q_c4a73cbe5764", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "5-HT 1B | 8.4 | 4.0 | Antagonist"}
 {"id": "q_c4beb9ba5f8a", "corpus": "stahl", "page": 161, "quote": "Librax"}
+{"id": "q_c4c1832f78d2", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Cipram"}
 {"id": "q_c4d23483d2b3", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "D 3 | 2840 | Human"}
 {"id": "q_c4dd208efc62", "corpus": "allen_ahba", "page": "DRD4", "quote": "DRD4 detected in cerebellum: probe 1057541 PACall present in 306/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_c51f51edbd99", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Endep"}
 {"id": "q_c5bff442bfb5", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "α 2C | 18–110 | Human"}
 {"id": "q_c60dc06c6a33", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "SERT | 4000 | Human"}
 {"id": "q_c618ff7374a1", "corpus": "stahl", "page": 727, "quote": "Perseris"}
@@ -1542,6 +1653,7 @@
 {"id": "q_c752a06eb873", "corpus": "stahl", "page": 187, "quote": "Klonopin"}
 {"id": "q_c754716403e6", "corpus": "gtopdb", "page": 15, "quote": "CNS: cerebral cortex, hippocampu, corpus striatum, olfactory tubercle, midbrain, pons-medulla, cerebellum.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_c771ff6ec257", "corpus": "allen_ahba", "page": "ADRB2", "quote": "ADRB2 detected in parietal: probe 1059348 PACall present in 257/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_c792005be9e8", "corpus": "wikipedia_fr", "page": "loxapine", "quote": "Loxapac"}
 {"id": "q_c7ade881d563", "corpus": "stahl", "page": 927, "quote": "Modulates voltage-sensitive sodium channels by an unknown mechanism", "llm": "sonnet"}
 {"id": "q_c7be50eaf2c3", "corpus": "allen_ahba", "page": "GRM2", "quote": "GRM2 detected in temporal: probe 1014136 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_c7d020cada63", "corpus": "kandel", "page": 986, "quote": "Following cortical activation, short-latency excitatory effects in the subthalamus are thought to be mediated via these \"hyperdirect\" connections, whereas longer-latency suppressive effects are more likely to come from indirect inhibitory inputs from other basal ganglia nuclei, principally the external globus pallidus.", "llm": "sonnet"}
@@ -1575,6 +1687,7 @@
 {"id": "q_cc6f0b4b8ce8", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in parietal: probe 1059354 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_cc7d1c164518", "corpus": "stahl", "page": 179, "quote": "Tricyclic antidepressant (TCA)", "llm": "sonnet"}
 {"id": "q_cc81ec120cfb", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "M 4 | 20–82 | Human"}
+{"id": "q_ccd9309ff2ec", "corpus": "wikipedia_fr", "page": "sulpiride", "quote": "Aiglonyl"}
 {"id": "q_ccdb3f43fe7b", "corpus": "allen_ahba", "page": "SCN1A", "quote": "SCN1A detected in occipital: probe 1022570 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_cce270824494", "corpus": "wikipedia_pharm", "page": "lofexidine", "quote": "α 2A | 4"}
 {"id": "q_ccfd5e745c38", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "5-HT 2C | 8.5 | Rat"}
@@ -1585,6 +1698,7 @@
 {"id": "q_cdf448697dc6", "corpus": "gtopdb", "page": 13, "quote": "CNS: caudate putamen, nucleus accumbens, olfactory tubercle.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_ce08c4814148", "corpus": "kandel", "page": 59, "quote": "The cerebellum, behind the pons, modulates the force and range of movement and is involved in the learning of motor skills.", "llm": "sonnet"}
 {"id": "q_ce1dcd4bf2f9", "corpus": "stahl", "page": 905, "quote": "Mode 1: blocks serotonin reuptake pump (serotonin transporter)", "llm": "sonnet"}
+{"id": "q_ce697262a2e9", "corpus": "wikipedia_fr", "page": "nortriptyline", "quote": "Norpress"}
 {"id": "q_ce81983c2b4b", "corpus": "stahl", "page": 375, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet"}
 {"id": "q_ce91bdba888f", "corpus": "stahl", "page": 863, "quote": "Surmontil"}
 {"id": "q_ce96bd2f26ba", "corpus": "stahl", "page": 533, "quote": "Toledomin"}
@@ -1606,6 +1720,7 @@
 {"id": "q_cfd30292a646", "corpus": "wikipedia_pharm", "page": "lumateperone", "quote": "D 1 | Agonist | 52"}
 {"id": "q_cfeb3fbad379", "corpus": "gtopdb", "page": 23, "quote": "Cerebral cortex, cerebellum, amygdaloid, hypothalamus, midbrain, pontine, spinal cord, olfactory, periaqueductal grey, NG2 oligodendrocytes.", "species": "Mouse", "llm": "sonnet"}
 {"id": "q_d02935ec3d05", "corpus": "allen_ahba", "page": "HTR1E", "quote": "HTR1E detected in frontal: probe 1055340 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_d02c92c54387", "corpus": "wikipedia_fr", "page": "m_thylph_nidate", "quote": "Rilatine"}
 {"id": "q_d05ffd9d6dd7", "corpus": "stahl_essential", "page": 117, "quote": "NMDA ( _N_ -methyl-D-asparate), AMPA (α-amino3-hydroxy-5-methyl-4-isoxazole-propionic acid), and kainate receptors for glutamate, named after the agonists that selectively bind to them, are all members of the ligand-gated ion-channel family of receptors (Figure 4-23 and Table 4-2).", "llm": "sonnet"}
 {"id": "q_d076d6c592b6", "corpus": "stahl", "page": 471, "quote": "Loxitane"}
 {"id": "q_d122e6d9cd93", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in occipital: probe 1027284 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1642,6 +1757,7 @@
 {"id": "q_d42551365f15", "corpus": "stahl", "page": 558, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_d4535482bf33", "corpus": "stahl", "page": 455, "quote": "Centrally acting alpha 2 agonist", "llm": "sonnet"}
 {"id": "q_d4732b7f0210", "corpus": "stahl", "page": 529, "quote": "Versed"}
+{"id": "q_d48338c5e45f", "corpus": "wikipedia_fr", "page": "daridorexant", "quote": "Quviviq"}
 {"id": "q_d48e64365d16", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in cingulate: probe 1019914 PACall present in 116/123 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d4d53fcc26e4", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "H 1 | 19 | Antagonist"}
 {"id": "q_d4e60037df2f", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 2A | 338"}
@@ -1677,6 +1793,7 @@
 {"id": "q_d84347f09ba4", "corpus": "stahl", "page": 365, "quote": "Neuroscience-based Nomenclature: acetylcholine multimodal; enzyme inhibitor; receptor PAM (ACh-MM)", "llm": "sonnet"}
 {"id": "q_d86880176a14", "corpus": "stahl", "page": 25, "quote": "Benzodiazepine (anxiolytic)", "llm": "sonnet"}
 {"id": "q_d874d820cb2f", "corpus": "stahl", "page": 545, "quote": "Aurorix"}
+{"id": "q_d8b0e95b294a", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Trepiline"}
 {"id": "q_d8e3639465cf", "corpus": "stahl", "page": 329, "quote": "Prozac"}
 {"id": "q_d8e415e91ea4", "corpus": "allen_ahba", "page": "CACNA1G", "quote": "CACNA1G detected in temporal: probe 1049164 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d8edde267cd3", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "D 1 | 30–130 | ND"}
@@ -1687,6 +1804,7 @@
 {"id": "q_d94e1084cd23", "corpus": "allen_ahba", "page": "DRD3", "quote": "DRD3 detected in frontal: probe 1025406 PACall present in 345/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d958ecfcdd3b", "corpus": "allen_ahba", "page": "GRM1", "quote": "GRM1 detected in temporal: probe 1010994 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d983adcd9958", "corpus": "stahl", "page": 313, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet"}
+{"id": "q_d98e92636b41", "corpus": "wikipedia_fr", "page": "bupr_norphine", "quote": "Temgésic"}
 {"id": "q_d9a62bb95edf", "corpus": "allen_ahba", "page": "CHRM1", "quote": "CHRM1 detected in cingulate: probe 1058221 PACall present in 123/123 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d9c4552e80fa", "corpus": "wikipedia_pharm", "page": "pimozide", "quote": "α 2C | 376.5"}
 {"id": "q_d9c97e0aa451", "corpus": "kandel", "page": 130, "quote": "The _anterior group_ receives its major input from the mammillary nuclei of the hypothalamus and from the presubiculum of the hippocampal formation.", "llm": "sonnet"}
@@ -1699,11 +1817,13 @@
 {"id": "q_da35cd61f01b", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "5-HT 7 | irreversible silent antagonist | 377.2"}
 {"id": "q_da435f586403", "corpus": "stahl", "page": 61, "quote": "Stimulant", "llm": "sonnet"}
 {"id": "q_da4bd019d6a0", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "5-HT 1D | 452 | Human"}
+{"id": "q_da6161cb9aad", "corpus": "wikipedia_fr", "page": "qu_tiapine", "quote": "Xeroquel"}
 {"id": "q_da6f20978229", "corpus": "kandel", "page": 1047, "quote": "These neurons project throughout the cerebral cortex, hippocampus, and amygdala. Both groups play an important role in arousal, and the basal forebrain groups are also involved in more selective attention."}
 {"id": "q_dabe7d55b3fe", "corpus": "allen_ahba", "page": "DRD2", "quote": "DRD2 detected in substantia_nigra: probe 1030267 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_dacd80157ac1", "corpus": "stahl", "page": 101, "quote": "Antiparkinson agent; anticholinergic", "llm": "sonnet"}
 {"id": "q_db03aa5880bc", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "5-HT 6 | 57.05 | 380 | ND"}
 {"id": "q_db2b71b72732", "corpus": "stahl", "page": 371, "quote": "stimulates alpha 2A adrenergic receptors in the brain stem", "llm": "sonnet"}
+{"id": "q_db43197ca0bf", "corpus": "wikipedia_fr", "page": "acide_valpro_que", "quote": "Dépakine"}
 {"id": "q_db55dfda36a6", "corpus": "wikipedia_pharm", "page": "desipramine", "quote": "DAT | 3,190 | Human"}
 {"id": "q_db74774ee637", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in parietal: probe 1027284 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_db768d1ba88f", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "α 2C | 159 nM (opossum)"}
@@ -1743,10 +1863,13 @@
 {"id": "q_df0066d1bde0", "corpus": "stahl", "page": 823, "quote": "Often classified as a tricyclic antidepressant, but pharmacologically distinct", "llm": "sonnet"}
 {"id": "q_df6cfb7f2880", "corpus": "stahl", "page": 39, "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)", "llm": "sonnet"}
 {"id": "q_df749cf1641b", "corpus": "stahl", "page": 61, "quote": "Adderall"}
+{"id": "q_df9895ab14d4", "corpus": "wikipedia_fr", "page": "parox_tine", "quote": "Seroxat"}
 {"id": "q_dfaec49468df", "corpus": "stahl", "page": 539, "quote": "Blocks histamine 1 receptors", "llm": "sonnet"}
 {"id": "q_dfd1b075aaee", "corpus": "stahl", "page": 855, "quote": "Antiparkinson agent; anticholinergic", "llm": "sonnet"}
 {"id": "q_dff6f25dcb31", "corpus": "allen_ahba", "page": "HTR5A", "quote": "HTR5A detected in cerebellum: probe 1021969 PACall present in 304/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e00a9ecf2dc2", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in parietal: probe 1022773 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_e027b16e6711", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Gladem"}
+{"id": "q_e02d8e2c615d", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Redomex"}
 {"id": "q_e062290b37ff", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in frontal: probe 1020459 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e0bb344a9423", "corpus": "kandel", "page": 1096, "quote": "The outputs of the hypothalamus reach the cingulate via the anterior thalamus, and the outputs of the cingulate reach the hypothalamus via the hippocampus.", "llm": "sonnet"}
 {"id": "q_e0d5d48495ea", "corpus": "stahl", "page": 839, "quote": "Blocks serotonin 2A receptors potently", "llm": "sonnet"}
@@ -1758,7 +1881,10 @@
 {"id": "q_e174f44cf318", "corpus": "wikipedia_pharm", "page": "dexmedetomidine", "quote": "α 2B | 2.0–34 | Human"}
 {"id": "q_e1b1d41c20e2", "corpus": "allen_ahba", "page": "HCRTR1", "quote": "HCRTR1 detected in raphe: probe 1055736 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e214c0d5faa6", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "α 1A | 6.3 nM"}
+{"id": "q_e217a059a8c4", "corpus": "wikipedia_fr", "page": "ilop_ridone", "quote": "Zomaril"}
 {"id": "q_e22eb8db2efa", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in pons: probe 1027284 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_e22eedf6b235", "corpus": "wikipedia_fr", "page": "nortriptyline", "quote": "Nortrilen"}
+{"id": "q_e236e913075c", "corpus": "wikipedia_fr", "page": "thioridazine", "quote": "Melleril"}
 {"id": "q_e23f8e797354", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "5-HT 1B | 509–660 | ND"}
 {"id": "q_e252d856a01b", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "D 1 | 10–117 | ?"}
 {"id": "q_e28677243274", "corpus": "stahl", "page": 591, "quote": "Symbyax (olanzapine–fluoxetine combination)"}
@@ -1814,15 +1940,18 @@
 {"id": "q_e84655c7ece4", "corpus": "allen_ahba", "page": "DRD2", "quote": "DRD2 detected in frontal: probe 1030267 PACall present in 472/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e855515c07c0", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "M 5 | 2,330 | ND"}
 {"id": "q_e87c368afebf", "corpus": "stahl", "page": 755, "quote": "d-methylphenidate increases norepinephrine and especially dopamine actions by blocking their reuptake", "llm": "sonnet"}
+{"id": "q_e8881f1f65d6", "corpus": "wikipedia_fr", "page": "zolpidem", "quote": "Sublinox"}
 {"id": "q_e88e00665e13", "corpus": "allen_ahba", "page": "ACHE", "quote": "ACHE detected in temporal: probe 1022702 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e8922a949057", "corpus": "allen_ahba", "page": "HTR2A", "quote": "HTR2A detected in parietal: probe 1028615 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e8bbea4b89fe", "corpus": "stahl", "page": 775, "quote": "Viagra"}
 {"id": "q_e8bc8b88b42d", "corpus": "allen_ahba", "page": "OPRK1", "quote": "OPRK1 detected in amygdala: probe 1021758 PACall present in 42/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e8cdeaa7c7f9", "corpus": "stahl", "page": 443, "quote": "Lithium citrate syrup"}
 {"id": "q_e8e80d5b760b", "corpus": "stahl", "page": 609, "quote": "Benzodiazepine (anxiolytic)", "llm": "sonnet"}
+{"id": "q_e9095de614a9", "corpus": "wikipedia_fr", "page": "midazolam", "quote": "Hypnovel"}
 {"id": "q_e92d77b7f09e", "corpus": "stahl", "page": 685, "quote": "Minipress"}
 {"id": "q_e93ae9b77435", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "α 2B | 1,785"}
 {"id": "q_e9550123b59e", "corpus": "stahl", "page": 111, "quote": "Nonselective melanocortin receptor agonist", "llm": "sonnet"}
+{"id": "q_e9701ee5000f", "corpus": "wikipedia_fr", "page": "t_maz_pam", "quote": "Levanxol"}
 {"id": "q_e9b687913d31", "corpus": "stahl", "page": 787, "quote": "Conventional antipsychotic (neuroleptic, benzamide, dopamine 2 antagonist)", "llm": "sonnet"}
 {"id": "q_e9db272860f8", "corpus": "stahl", "page": 827, "quote": "Trokendi XR"}
 {"id": "q_e9f72bd500ab", "corpus": "stahl", "page": 313, "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform selective agonist of GABA-A/ benzodiazepine receptors", "llm": "sonnet"}
@@ -1842,6 +1971,7 @@
 {"id": "q_eb6545d214b0", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "5-HT 6 | 9.5 | 0.25 | Antagonist"}
 {"id": "q_eb8bec3e9e3a", "corpus": "stahl", "page": 271, "quote": "Reversibly but noncompetitively inhibits centrally active acetylcholinesterase, making more acetylcholine available", "llm": "sonnet"}
 {"id": "q_ebbb204dc785", "corpus": "stahl", "page": 539, "quote": "Other"}
+{"id": "q_ebd82d442fcc", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Zetalo"}
 {"id": "q_ebdc4bd5d175", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "5-HT 1A | 8.6 | 2.5 | Partial agonist"}
 {"id": "q_ebe17abb0d9d", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in occipital: probe 1057496 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_eca6db96ce2d", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in midbrain: probe 1059351 PACall present in 145/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1873,13 +2003,17 @@
 {"id": "q_ef24b8c91d3b", "corpus": "gtopdb", "page": 264, "quote": "Brain: thalamus, caudate nucleus, putamen, cerebellum, amygdala, substantia nigra, hippocampus, hypothalamus, cerebral cortex.", "species": "Human", "llm": "sonnet"}
 {"id": "q_ef2680e6b661", "corpus": "gtopdb", "page": 289, "quote": "Cerebellum, mitral and tufted cells of the olfactory bulb, hippocampus, lateral septum, thalamus, globus pallidus, entopendenuclear nucleus, ventral pallidum, magnocellular preoptic nucleus, substantia nigra, dorsal cochlear nucleus > dentate gyrus, striatum, islands of Calleja, superficial layers of the retrospinal, cingulate and entorhinal cortices, mammillary nuclei, red nucleus, superior colliculus.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_ef445b3143ad", "corpus": "stahl", "page": 193, "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)", "llm": "sonnet"}
+{"id": "q_ef45ad7d0032", "corpus": "wikipedia_fr", "page": "t_maz_pam", "quote": "Euhypnos"}
 {"id": "q_ef853daa995f", "corpus": "allen_ahba", "page": "SV2A", "quote": "SV2A detected in hippocampus: probe 1048051 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_efbd02ea20fa", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "5-HT 2C | 12.0 | Inverse agonist"}
 {"id": "q_efcd2896996e", "corpus": "stahl", "page": 147, "quote": "Equetro"}
+{"id": "q_f02329429198", "corpus": "wikipedia_fr", "page": "agom_latine", "quote": "Melitor"}
 {"id": "q_f03187677c81", "corpus": "stahl", "page": 893, "quote": "Viibryd"}
+{"id": "q_f06153ef4fc8", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Talam"}
 {"id": "q_f062dc59ffbb", "corpus": "stahl", "page": 621, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet"}
 {"id": "q_f0b6e3d11eae", "corpus": "stahl", "page": 40, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_f0ed12ee5d4b", "corpus": "stahl", "page": 511, "quote": "Focalin"}
+{"id": "q_f11a0977e7a9", "corpus": "wikipedia_fr", "page": "acide_valpro_que", "quote": "Dépamide"}
 {"id": "q_f133ac439e8c", "corpus": "stahl", "page": 615, "quote": "Acts as a use-dependent blocker of voltagesensitive sodium channels", "llm": "sonnet"}
 {"id": "q_f1b7e0a086e5", "corpus": "stahl", "page": 471, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet"}
 {"id": "q_f1ba40c575f2", "corpus": "stahl", "page": 95, "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)", "llm": "sonnet"}
@@ -1912,6 +2046,7 @@
 {"id": "q_f4d7f33deacb", "corpus": "stahl", "page": 517, "quote": "Methylin"}
 {"id": "q_f4de3ce72e09", "corpus": "stahl", "page": 427, "quote": "Keppra"}
 {"id": "q_f4fa666ae07d", "corpus": "stahl", "page": 583, "quote": "A more potent inhibitor of norepinephrine reuptake pump than serotonin reuptake pump (serotonin transporter)", "llm": "sonnet"}
+{"id": "q_f5012ce911ac", "corpus": "wikipedia_fr", "page": "m_thamph_tamine", "quote": "Pervitine"}
 {"id": "q_f5272bec46c6", "corpus": "nieuwenhuys", "page": 412, "quote": "Secondary olfactory fibres originating from the olfactory bulb pass by way of the lateral olfactory tract to the amygdala, where they terminate mainly in the cortical nucleus", "llm": "sonnet"}
 {"id": "q_f527af770576", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "5-HT 5A | 364 | ND | ND"}
 {"id": "q_f55bc246b289", "corpus": "gtopdb", "page": 423, "quote": "Spinal cord, olfactory bulb, cerebellum, hippocampus.", "species": "Rat", "llm": "sonnet"}
@@ -1925,6 +2060,7 @@
 {"id": "q_f676586a1500", "corpus": "stahl", "page": 239, "quote": "Austedo XR"}
 {"id": "q_f68d31ed2d0b", "corpus": "gtopdb", "page": 56, "quote": "Primarily CNS and some peripheral neurones; particularly prevalent in basal ganglia, hippocampus, cerebellum, cerebral cortex. Also present in some non-neuronal cells and tissues, for example leukocytes and testis.", "species": "Human", "llm": "sonnet"}
 {"id": "q_f69ec93742f6", "corpus": "allen_ahba", "page": "DRD4", "quote": "DRD4 detected in amygdala: probe 1057541 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_f6c15471d597", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Aduvanz"}
 {"id": "q_f6db7ffd39b1", "corpus": "stahl", "page": 271, "quote": "Memac"}
 {"id": "q_f6e9580cc2d5", "corpus": "stahl", "page": 487, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions", "llm": "sonnet"}
 {"id": "q_f6f981a5a73b", "corpus": "allen_ahba", "page": "HRH3", "quote": "HRH3 detected in occipital: probe 1046403 PACall present in 98/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1938,6 +2074,7 @@
 {"id": "q_f7d181928959", "corpus": "wikipedia_pharm", "page": "zuclopenthixol", "quote": "5-HT6 | ? | 6.77"}
 {"id": "q_f7d4120e5c0b", "corpus": "stahl", "page": 709, "quote": "Seroquel XR"}
 {"id": "q_f7e9ce856623", "corpus": "allen_ahba", "page": "CACNA2D1", "quote": "CACNA2D1 detected in temporal: probe 1028198 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_f82ff4f6d729", "corpus": "wikipedia_fr", "page": "t_maz_pam", "quote": "Planum"}
 {"id": "q_f8312a38c383", "corpus": "wikipedia_pharm", "page": "protriptyline", "quote": "H 2 | 398 | Human"}
 {"id": "q_f8481918badb", "corpus": "stahl", "page": 215, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}
 {"id": "q_f869a311a4e5", "corpus": "stahl", "page": 335, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet"}
@@ -1945,6 +2082,7 @@
 {"id": "q_f87d3f7740b6", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "α 2B | 450"}
 {"id": "q_f88b2e105192", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "D 1 | 244 | Antagonist"}
 {"id": "q_f8973c14bc97", "corpus": "stahl", "page": 695, "quote": "Beta blocker, antihypertensive", "llm": "sonnet"}
+{"id": "q_f8e5c0dad584", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Cipramil"}
 {"id": "q_f8e8b484ba0b", "corpus": "wikipedia_pharm", "page": "duloxetine", "quote": "5-HT 2A | 504"}
 {"id": "q_f921d911c854", "corpus": "stahl", "page": 875, "quote": "Depacon"}
 {"id": "q_f930e5f480d2", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "5-HT 1A | 423 | Antagonist"}
@@ -1965,6 +2103,7 @@
 {"id": "q_fad8e5ca1225", "corpus": "stahl", "page": 893, "quote": "Blocks serotonin reuptake pump (serotonin transporter)", "llm": "sonnet"}
 {"id": "q_fb0a32fdab3f", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "H 1 | 20.1 | Inverse agonist"}
 {"id": "q_fb1021854f7f", "corpus": "stahl", "page": 81, "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)", "llm": "sonnet"}
+{"id": "q_fb16aaee9da1", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Asentra"}
 {"id": "q_fb8662093b3f", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "5-HT 6 | 136 | Rat"}
 {"id": "q_fb8e02627758", "corpus": "allen_ahba", "page": "ADRA1B", "quote": "ADRA1B detected in medulla: probe 1023485 PACall present in 232/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_fbab37dca617", "corpus": "stahl", "page": 875, "quote": "Neuroscience-based Nomenclature: glutamate (Glu); yet to be determined", "llm": "sonnet"}
@@ -1973,6 +2112,7 @@
 {"id": "q_fc6ed644a912", "corpus": "stahl", "page": 935, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet"}
 {"id": "q_fc747a3c3431", "corpus": "stahl_essential", "page": 146, "quote": "5HT7 receptors are postsynaptic, excitatory, and", "llm": "sonnet"}
 {"id": "q_fc7795815aeb", "corpus": "stahl", "page": 850, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
+{"id": "q_fc7925651606", "corpus": "wikipedia_fr", "page": "dulox_tine", "quote": "AriClaim"}
 {"id": "q_fc90954e1b6a", "corpus": "stahl", "page": 205, "quote": "Specifically, interactions at serotonin 2C and 1A receptors may contribute to efficacy for cognitive and affective symptoms in some patients", "llm": "sonnet"}
 {"id": "q_fcab0122d3af", "corpus": "stahl", "page": 336, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
 {"id": "q_fcb042c93e21", "corpus": "wikipedia_pharm", "page": "varenicline", "quote": "α 7 | 0.18 ± 0.02 | 69.0 ± 8.1 | 100 | 101 ± 8 | Full/Super Agonist"}
@@ -1983,6 +2123,7 @@
 {"id": "q_fd5a2a66a2d8", "corpus": "allen_ahba", "page": "HTR5A", "quote": "HTR5A detected in accumbens: probe 1021969 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_fd8c1965d8b6", "corpus": "gtopdb", "page": 287, "quote": "Suprachiasmatic nucleus.", "species": "Human", "llm": "sonnet"}
 {"id": "q_fda224a28c60", "corpus": "stahl", "page": 709, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin multimodal (DS-MM)", "llm": "sonnet"}
+{"id": "q_fdbe4a6059d8", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Sertralin"}
 {"id": "q_fde54394fa82", "corpus": "stahl", "page": 665, "quote": "Atypical antipsychotic; serotonin 2A/2C antagonist/inverse agonist", "llm": "sonnet"}
 {"id": "q_fdecb889c155", "corpus": "gtopdb", "page": 423, "quote": "Spinal cord, trigeminal nuclei, superior olive nucleus, nuclei of lateral lemniscus, vestibular nuclei, cuneate nucleus, gracile nucleus, hypoglossal nucleus, dorsal motor nucleus of vagus, superior colliculus", "species": "Human", "llm": "sonnet"}
 {"id": "q_fe1d9557c43a", "corpus": "stahl", "page": 699, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)", "llm": "sonnet"}

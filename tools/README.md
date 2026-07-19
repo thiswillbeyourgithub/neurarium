@@ -203,6 +203,15 @@ Screenshots).
   resolution reusing `fetch_ki`'s `norm`/`parse_ki`/`NAME_PATTERNS`). A Ki source's `quote` is the
   verbatim table row, so the normal quote gate applies. Preview by default; `--json`, `--no-fetch`. Fills
   the Ki gap where PDSP has none (e.g. alpha1, non-psychiatric agents). See CLAUDE.md Drugs.
+- `tools/fetch/fetch_brand_names.py` — `uv run` (deps: beautifulsoup4). Resolves each drug's French
+  Wikipedia article via the EN article's langlinks (reusing `fetch_wikipedia_pharmacology.py`), stores it
+  author-side (`data_sources/wikipedia/pages_fr/<slug>.md`, corpus #10 `wikipedia_fr`), and writes a
+  candidate trade-name-sentence worklist (`tools/generated_cache/brand_worklist.json`) for the LLM that
+  extracts each drug's ordered European/French brands. EN is used only for the langlink (its pages are not
+  refetched, so no corpus #9 Ki gate can drift). See CLAUDE.md Source provenance (corpus #10).
+- `tools/sourcing/apply_brand_names.py` — merges the LLM-extracted eu/fr brands (`brand_judged.json`) into
+  `drugs_data.jsonl`, quote-gating each name verbatim on its FR page and tagging the first `fr`, the rest
+  `eu` (na from Stahl is kept). Idempotent. See CLAUDE.md Source provenance (corpus #10).
 - `tools/fetch/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
   `uv run`, `--layout` for OCR.
 - `tools/fetch/build_toc_index.py` — `INDEX.md` from a PDF's embedded TOC (generic). `uv run`.

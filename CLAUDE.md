@@ -589,7 +589,7 @@ than a judge for this fixed field); a newer drug with no NbN line falls back to 
 under the same gate, marked `nbn_nonstandard`. **Brands** are gated the same way:
 `apply_brand_sources.py` reads each drug's Stahl "Brands?" dump list and confirms each brand appears
 verbatim on the drug's page range (region `na`, `verified`); a brand not found verbatim is dropped, not
-guessed. The eu/fr brands come from Wikipedia (see corpus #9 style), region-tagged only for ordering.
+guessed. The eu/fr brands come from Wikipedia (corpus #10 `wikipedia_fr`), region-tagged only for ordering.
 
 The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless noted:
 - **#1 Stahl / #2 Kandel / #3 Stahl Essential / #4 Carlat / #6 Nieuwenhuys** are `pages_dir` book
@@ -615,6 +615,13 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
   the whole English article author-side (pinned to a revision id) and mines its pharmacodynamics binding
   table; a Ki source's `quote` is the verbatim table row, gated exactly like a book page. A tertiary
   source citing the primary literature: the grade attests quote-presence, the corpus label conveys tier.
+- **#10 Wikipedia FR** (`wikipedia_fr`, `page` = the FR article slug) is the source for a drug's
+  **European / French** commercial brands (`eu`/`fr` region; na comes from Stahl). The FR infobox holds
+  only chemistry, so the trade names live in prose; `fetch_brand_names.py` resolves each drug's FR article
+  (via the EN article's langlinks), stores it author-side under `data_sources/wikipedia/pages_fr/`, and
+  emits a candidate-sentence worklist; an LLM extracts each drug's ordered trade names, and
+  `apply_brand_names.py` quote-gates every name verbatim on the FR page (the hallucination backstop),
+  writing the first as `fr` and the rest as `eu`. A brand source's `quote` is the brand name.
 
 **Descriptions** are not a node kind (not tallied). Drugs, structures and non-receptor targets carry
 **no baked description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
