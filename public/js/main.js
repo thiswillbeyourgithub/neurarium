@@ -5968,7 +5968,7 @@ async function main() {
   const tour = createTour({
     steps: tourSteps,
     labels: {
-      next: t("tour.next"), back: t("tour.back"), done: t("tour.done"),
+      continue: t("tour.continue"), back: t("tour.back"), done: t("tour.done"),
       skip: t("tour.skip"), aria: t("tour.aria"),
       step: (n, total) => t("tour.step", { n, total }),
     },

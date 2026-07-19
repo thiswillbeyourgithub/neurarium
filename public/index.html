@@ -714,6 +714,12 @@
       .tour-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
       .tour-body { font-size: 13px; line-height: 1.5; color: var(--muted); }
       .tour-body b, .tour-body strong { color: var(--text); }
+      /* "Click to continue" cue: the only forward affordance (no Next button).
+         Hidden on an interactive step, where the real tap drives the tour. */
+      .tour-cue { margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent-bright); cursor: pointer; }
+      .tour-cue::after { content: " \2192"; }
+      .tour-cue:hover { text-decoration: underline; }
+      .tour-cue[hidden] { display: none; }
       .tour-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
       .tour-step { font-size: 11px; color: var(--muted); letter-spacing: 0.03em; flex: 0 0 auto; }
       .tour-actions { display: flex; gap: 6px; }
@@ -730,8 +736,6 @@
       }
       .tour-btn:hover { background: rgba(255, 255, 255, 0.12); }
       .tour-btn:disabled { opacity: 0.4; cursor: default; }
-      .tour-next { background: var(--accent); border-color: var(--accent); color: #fff; }
-      .tour-next:hover { background: var(--accent-bright); border-color: var(--accent-bright); }
       .tour-skip { background: none; border-color: transparent; color: var(--muted); font-weight: 500; }
       .tour-skip:hover { background: rgba(255, 255, 255, 0.08); color: var(--text); }
       @media (prefers-reduced-motion: reduce) {

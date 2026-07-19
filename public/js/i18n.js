@@ -96,7 +96,7 @@
       "shortcuts.close": "Close search / collapse sections",
 
       "tour.start": "Take a tour",
-      "tour.next": "Next",
+      "tour.continue": "Click to continue",
       "tour.back": "Back",
       "tour.done": "Done",
       "tour.skip": "Skip",
@@ -444,7 +444,7 @@
       "shortcuts.close": "Fermer la recherche / replier les sections",
 
       "tour.start": "Visite guidée",
-      "tour.next": "Suivant",
+      "tour.continue": "Cliquez pour continuer",
       "tour.back": "Précédent",
       "tour.done": "Terminer",
       "tour.skip": "Passer",

@@ -1,18 +1,22 @@
 // Guided "take a tour" coach-marks. A small, app-agnostic overlay engine: it
 // knows how to spotlight a DOM element (a dimmed backdrop with a cut-out ring)
-// or float a caption over the live scene, and how to step Back / Next / Skip
-// through an ordered list. It knows NOTHING about the brain, three.js or the
-// data: the caller (js/main.js) supplies the steps, each carrying its own
-// `before()` hook that sets the scene up (spread the brain, open a section) so
-// the tour can show real features live rather than static pictures.
+// or float a caption over the live scene, and how to step Back / Skip through an
+// ordered list. It knows NOTHING about the brain, three.js or the data: the
+// caller (js/main.js) supplies the steps, each carrying its own `before()` hook
+// that sets the scene up (spread the brain, open a section) so the tour can show
+// real features live rather than static pictures.
 //
-// Two kinds of spotlight step:
-//   - passive: the ring highlights an element while the backdrop eats every
-//     click; the user reads and presses Next.
+// There is deliberately NO Next button (only Back + Skip): the user advances by
+// acting on the step, so they cannot fast-forward past a hands-on demo and leave
+// the UI half-set-up. How forward works depends on the step:
+//   - passive / caption: a "click to continue" cue sits in the bubble, and a
+//     click on the dim backdrop also advances (a live-scene step with no backdrop
+//     advances via the cue only, keeping the scene draggable).
 //   - interactive (`interactive:true`): the backdrop gets a click-through hole
 //     over the target (a clip-path cut-out), so the user's real tap reaches the
-//     highlighted control. The tour advances when they actually do it (Next
-//     stays as a fallback so a stuck user is never trapped).
+//     highlighted control and drives the tour. The cue is hidden and every click
+//     off the target is eaten, so the only way forward is the real tap: the user
+//     cannot skip the hands-on action. Back/Skip (and Esc) stay the escapes.
 //
 // Kept dependency-free (like js/circuit-schedule.js) so it stays reusable and
 // the no-build viewer loads it as a plain ES module.
@@ -60,7 +64,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let blocker = null; // full-screen click-eater / modal dim
   let ring = null; // the spotlight cut-out (box-shadow does the dimming)
   let bubble = null;
-  let elTitle, elBody, elStep, btnBack, btnNext, btnSkip;
+  let elTitle, elBody, elCue, elStep, btnBack, btnSkip;
   let index = -1; // current step, -1 when inactive
   let active = false;
   let waitEl = null; // the element an interactive step is waiting on
@@ -94,11 +98,16 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
 
     blocker = document.createElement("div");
     blocker.className = "tour-blocker";
-    // Eat clicks so a mis-click on the page behind doesn't fire mid-tour; the
-    // user drives with the buttons. Does not dismiss (avoids an accidental exit).
-    // On an interactive step a clip-path hole (see setHole) lets the tap through
-    // to the real target; everything else the blocker still swallows.
-    blocker.addEventListener("click", (e) => e.stopPropagation());
+    // Eat clicks so a mis-click on the page behind doesn't fire mid-tour. On a
+    // passive/caption step a click on the dim backdrop is "continue" (there is no
+    // Next button). On an interactive step a clip-path hole (see setHole) lets the
+    // tap through to the real target and awaitingTap() is true, so a click that
+    // lands on the blocker (off the target) is swallowed without advancing: the
+    // user must act on the highlighted control. Never dismisses (no accidental exit).
+    blocker.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!awaitingTap()) go(index + 1);
+    });
 
     ring = document.createElement("div");
     ring.className = "tour-ring";
@@ -114,6 +123,15 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     elBody = document.createElement("div");
     elBody.className = "tour-body";
 
+    // The "click to continue" cue (there is no Next button). Shown on a step that
+    // is not awaiting a real tap; clicking it advances. Hidden on an interactive
+    // step, whose body already says which control to tap.
+    elCue = document.createElement("div");
+    elCue.className = "tour-cue";
+    elCue.addEventListener("click", () => {
+      if (!awaitingTap()) go(index + 1);
+    });
+
     const foot = document.createElement("div");
     foot.className = "tour-foot";
     elStep = document.createElement("span");
@@ -122,11 +140,10 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     actions.className = "tour-actions";
     btnSkip = mkBtn("tour-skip", labels.skip, () => stop("skipped"));
     btnBack = mkBtn("tour-back", labels.back, () => go(index - 1));
-    btnNext = mkBtn("tour-next", labels.next, () => go(index + 1));
-    actions.append(btnSkip, btnBack, btnNext);
+    actions.append(btnSkip, btnBack);
     foot.append(elStep, actions);
 
-    bubble.append(elTitle, elBody, foot);
+    bubble.append(elTitle, elBody, elCue, foot);
     root.append(blocker, ring, bubble);
     document.body.appendChild(root);
   }
@@ -299,6 +316,30 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     waitFn = null;
   }
 
+  // True while the step's only way forward is a real tap on its highlighted
+  // target: an interactive step whose target resolved and whose demo (if any)
+  // has not fired yet. When true, the cue is hidden, the backdrop eats every
+  // off-target click, and forward keys are inert, so the user cannot skip the
+  // hands-on action. A stayAfterTap step drops out of "awaiting" once tapped
+  // (its demo is playing) so the cue can offer "continue".
+  function awaitingTap() {
+    if (index < 0) return false;
+    const step = steps[index];
+    if (!step || !step.interactive || !waitEl) return false;
+    return !(step.stayAfterTap && observed);
+  }
+
+  // Show/hide the "click to continue" cue for the current state. Hidden while a
+  // real tap is required; otherwise a clickable cue ("Done" on the last step).
+  function refreshCue() {
+    if (index < 0) return;
+    const wait = awaitingTap();
+    elCue.hidden = wait;
+    if (wait) return;
+    elCue.textContent =
+      index === steps.length - 1 ? labels.done : labels.continue;
+  }
+
   function go(i) {
     clearWait();
     if (i < 0) i = 0;
@@ -324,7 +365,6 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     elBody.innerHTML = step.body || "";
     elStep.textContent = labels.step(index + 1, steps.length);
     btnBack.disabled = index === 0;
-    btnNext.textContent = index === steps.length - 1 ? labels.done : labels.next;
 
     // Interactive step: the user's real tap on the highlighted target drives it
     // (the app's own handler runs first; our listener is added after it). Next
@@ -341,6 +381,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
           if (step.stayAfterTap) {
             observed = true; // the demo is now playing: get the overlay out of its way
             layout();
+            refreshCue(); // demo fired: offer "continue" now that no tap is pending
           } else {
             ring.hidden = true; // the target is about to change/disappear; hide it now
             clearHole();
@@ -357,6 +398,9 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     // see scrollStepIntoView for why inline would jump). onScroll keeps the ring
     // tracking the row as it slides.
     scrollStepIntoView(step);
+
+    // Set the "click to continue" cue now that waitEl (if any) is attached.
+    refreshCue();
 
     // Let the scene set-up (before()) and the new bubble text settle, then
     // measure + position. A scrolled-into-view row or a just-opened list can
@@ -444,7 +488,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     if (e.key === "Escape") {
       stop("skipped");
     } else if (e.key === "ArrowRight" || e.key === "Enter") {
-      go(index + 1);
+      if (!awaitingTap()) go(index + 1); // when a tap is required, keys can't skip it
     } else if (e.key === "ArrowLeft") {
       go(index - 1);
     } else {

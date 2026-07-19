@@ -210,11 +210,14 @@ Viewer (`public/`):
   langlinks, English fallback; cached; best-effort (failure -> null).
 - `js/tour.js`: `createTour({steps, labels, onEnd, seenKey})`, a generic, three.js-free coach-mark
   engine (spotlight ring / caption bubble, viewport-aware placement that never covers the target or
-  the 3D scene, Back/Next/Skip, Esc/arrow keys, resize/scroll reposition, localStorage "seen" gate).
-  A step is passive (ring + Next) or **`interactive`** (the blocker gets a clip-path click-through
-  hole so the user's real tap reaches the highlighted control); an interactive step advances on that
-  tap, or with **`stayAfterTap`** stays put and steps its spotlight aside so the live demo it fired is
-  watchable. A step's `target` may be one element or an **array** (a group highlight: the ring spans
+  the 3D scene, resize/scroll reposition, localStorage "seen" gate). There is **no Next button** (only
+  Back + Skip + Esc): the user advances by acting on the step, so they cannot fast-forward past a
+  hands-on demo. A step is passive/caption (a "click to continue" cue in the bubble, and a click on the
+  dim backdrop, advance it) or **`interactive`** (the blocker gets a clip-path click-through hole so the
+  user's real tap reaches the highlighted control; the cue is hidden and every off-target click + the
+  forward keys are inert, so the only way on is the real tap). An interactive step advances on that tap,
+  or with **`stayAfterTap`** stays put and steps its spotlight aside so the live demo it fired is
+  watchable (the cue then returns to move on). A step's `target` may be one element or an **array** (a group highlight: the ring spans
   their union, e.g. the four browse sections). Steps glide between positions (snap only on the first
   step + during an active scroll). The app-specific step list is built in `js/main.js`; the data demos
   are hands-on (open a list, tap the highlighted circuit/receptor/drug row via its `data-tour-id`),
