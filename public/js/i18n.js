@@ -277,6 +277,7 @@
         'Have an idea for a feature? I\'d happily build it, ' +
         '<a href="https://olicorne.org/en/contact" target="_blank" ' +
         'rel="noopener noreferrer">get in touch</a>.',
+      "loading.enter": "Start exploring",
 
       "about.p1":
         "neurarium is a work-in-progress, interactive 3D map of the brain. It " +
@@ -622,6 +623,7 @@
         'Une idée de fonctionnalité ? Je la réaliserais volontiers, ' +
         '<a href="https://olicorne.org/fr/contact" target="_blank" ' +
         'rel="noopener noreferrer">prenez contact</a>.',
+      "loading.enter": "Commencer l'exploration",
 
       "about.p1":
         "neurarium est une carte 3D interactive du cerveau, en cours de " +

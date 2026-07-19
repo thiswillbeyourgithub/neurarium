@@ -40,11 +40,33 @@ export function createLoadingScreen() {
     root.classList.add("loaded");
     setTimeout(remove, 500); // matches the #loading.loaded fade duration
   }
+  // Interactive dismissal: fill the bar, swap the progress caption for a "Start
+  // exploring" button, and resolve only once the visitor clicks it (then fade +
+  // remove, exactly like done()). Lets the tagline + feature-request invite be
+  // read instead of flashing by, and lets the caller begin the assemble intro on
+  // the click so the reveal still coincides with the fade. Degrades to done() when
+  // the button markup is absent, so the app never blocks on a missing element.
+  function waitForStart() {
+    setProgress(1);
+    const btn = document.getElementById("loading-start");
+    if (!btn) { done(); return Promise.resolve(); }
+    if (caption) caption.hidden = true;
+    btn.hidden = false;
+    // Autofocus so a keyboard user can just press Enter/Space to enter.
+    try { btn.focus({ preventScroll: true }); } catch { btn.focus(); }
+    return new Promise((resolve) => {
+      btn.addEventListener("click", function onStart() {
+        root.classList.add("loaded");
+        setTimeout(remove, 500);
+        resolve();
+      }, { once: true });
+    });
+  }
   // On a load failure an error banner takes over, so drop the overlay outright
   // rather than leave a half-filled bar stuck on screen.
   function fail() {
     remove();
   }
 
-  return { setProgress, done, fail };
+  return { setProgress, done, waitForStart, fail };
 }

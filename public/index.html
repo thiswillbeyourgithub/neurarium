@@ -1670,6 +1670,32 @@
         color: var(--muted);
       }
       .loading-cta a { color: var(--accent-light); text-decoration: underline; }
+      /* Revealed once loading finishes (js/loading.js waitForStart): the deliberate
+         "enter the app" action, so the tagline + invite can be read first. */
+      .loading-start {
+        margin-top: 14px;
+        padding: 9px 22px;
+        font: inherit;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: var(--accent);
+        border: 0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .loading-start:hover, .loading-start:focus-visible { background: var(--accent-bright); }
+      /* Phones: the fixed px sizes above read too small on a small viewport, so
+         bump every line and widen the card to give the larger text room. */
+      @media (max-width: 560px) {
+        .loading-card { width: min(360px, 88vw); }
+        .loading-title { font-size: 26px; }
+        .loading-tagline { font-size: 16px; }
+        .loading-caption { font-size: 16px; }
+        .loading-start { font-size: 17px; padding: 11px 26px; }
+        .loading-cta { font-size: 15px; }
+      }
       @media (prefers-reduced-motion: reduce) {
         #loading, .loading-fill { transition: none; }
       }
@@ -1759,6 +1785,7 @@
         <div class="loading-tagline" data-i18n="loading.tagline">a (mostly) sourced atlas of psychiatric neuroscience</div>
         <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
         <div id="loading-caption" class="loading-caption" data-i18n="loading.start">Loading…</div>
+        <button id="loading-start" class="loading-start" type="button" hidden data-i18n="loading.enter">Start exploring</button>
         <div class="loading-cta" data-i18n-html="loading.cta">Have an idea for a feature? I'd happily build it, <a href="https://olicorne.org/en/contact" target="_blank" rel="noopener noreferrer">get in touch</a>.</div>
       </div>
     </div>

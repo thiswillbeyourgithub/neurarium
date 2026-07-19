@@ -5820,10 +5820,11 @@ async function main() {
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
-  // Scene is built: fill + fade out the loading overlay, revealing the brain just
-  // as the assemble intro (created below) begins.
+  // Scene is built: fill the loading bar. The overlay's dismissal is coupled to
+  // the intro launch further below (an interactive load waits for the visitor to
+  // click "Start exploring"; an automated view drops it at once), so the brain is
+  // revealed just as the assemble intro begins.
   loading.setProgress(1, t("loading.building"));
-  loading.done();
   console.log(
     `Loaded ${meshes.length} structures and ${arrows.length} projections.`,
   );
@@ -6009,35 +6010,51 @@ async function main() {
       // finish, never on a cancel, so a deep-link / manual drag never triggers it.
       onDone: () => { tourIntroSettled = true; tryAutoTour(); } });
   explodeSlider.addEventListener("input", () => intro.cancel());
-  if (!new URLSearchParams(window.location.search).has("explode")) {
-    // Seat the resting pose on the exact framing the reset button produces, so a
-    // fresh load already appears centered (not a hardcoded distance that only
-    // roughly matched). Done first, so the DEV-banner nudge + intro capture build
-    // on the centered pose.
-    focus.frameAllNow();
-    // When the dev / WIP banner is up (DEV=1 container; same flag dev-banner.js
-    // reads), present the brain a little lower + further back so it sits clear
-    // below the banner. Done before intro.start() so the captured resting pose
-    // (what the intro settles on) already includes it.
-    if ((window.__APP_CONFIG__ || {}).dev === "1") {
-      camera.position.multiplyScalar(DEV_BANNER_UNZOOM);
-      controls.target.y += DEV_BANNER_DROP;
-      controls.update();
-    }
-    // The assemble intro is a decorative animation, so honor the Animations toggle:
-    // when off, present the brain already whole (explode 0) instead of playing it in.
-    if (animSettings.enabled) {
-      intro.start();
-    } else {
-      applyExplode(meshes, 0, arrows);
-      // No assemble intro to finish (so onDone never fires); mark it settled after
-      // a short beat and let tryAutoTour honor the same Sources-gate condition.
+  // The launch (assemble intro, or an instant settle when animations are off) is
+  // wrapped so it can fire exactly when the loading overlay is dismissed below.
+  const beginScene = () => {
+    if (!new URLSearchParams(window.location.search).has("explode")) {
+      // Seat the resting pose on the exact framing the reset button produces, so a
+      // fresh load already appears centered (not a hardcoded distance that only
+      // roughly matched). Done first, so the DEV-banner nudge + intro capture build
+      // on the centered pose.
+      focus.frameAllNow();
+      // When the dev / WIP banner is up (DEV=1 container; same flag dev-banner.js
+      // reads), present the brain a little lower + further back so it sits clear
+      // below the banner. Done before intro.start() so the captured resting pose
+      // (what the intro settles on) already includes it.
+      if ((window.__APP_CONFIG__ || {}).dev === "1") {
+        camera.position.multiplyScalar(DEV_BANNER_UNZOOM);
+        controls.target.y += DEV_BANNER_DROP;
+        controls.update();
+      }
+      // The assemble intro is a decorative animation, so honor the Animations toggle:
+      // when off, present the brain already whole (explode 0) instead of playing it in.
+      if (animSettings.enabled) {
+        intro.start();
+      } else {
+        applyExplode(meshes, 0, arrows);
+        // No assemble intro to finish (so onDone never fires); mark it settled after
+        // a short beat and let tryAutoTour honor the same Sources-gate condition.
+        setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
+      }
+    } else if (tourForced) {
+      // ?explode= pinned: the intro block above is skipped, so onDone never fires.
+      // A forced tour still wants to run, so settle the gate condition after a beat.
       setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
     }
-  } else if (tourForced) {
-    // ?explode= pinned: the intro block above is skipped, so onDone never fires.
-    // A forced tour still wants to run, so settle the gate condition after a beat.
-    setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
+  };
+  // Dismiss the loading overlay, coupled to the launch. An automated view (headless
+  // ui=0, or an ?explode= deep-link / screenshot) drops it at once so a capture is
+  // never trapped behind the overlay; a normal interactive load keeps it up showing
+  // the "Start exploring" button (so the tagline + invite can be read) and launches
+  // on the click, the assemble intro playing as the overlay fades.
+  const introParams = new URLSearchParams(window.location.search);
+  if (introParams.get("ui") === "0" || introParams.has("explode")) {
+    loading.done();
+    beginScene();
+  } else {
+    loading.waitForStart().then(beginScene);
   }
 
   // ---- Deep links (URL hash <-> focus) ------------------------------------------
