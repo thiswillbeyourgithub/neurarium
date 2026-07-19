@@ -1661,6 +1661,15 @@
         color: var(--muted);
         opacity: 0.8;
       }
+      /* A gentle "feature requests welcome" invite below the bar. Wraps freely
+         (unlike the caption) since it is prose, not a status line. */
+      .loading-cta {
+        margin-top: 16px;
+        font-size: 13px;
+        line-height: 1.45;
+        color: var(--muted);
+      }
+      .loading-cta a { color: var(--accent-light); text-decoration: underline; }
       @media (prefers-reduced-motion: reduce) {
         #loading, .loading-fill { transition: none; }
       }
@@ -1750,6 +1759,7 @@
         <div class="loading-tagline" data-i18n="loading.tagline">a (mostly) sourced atlas of psychiatric neuroscience</div>
         <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
         <div id="loading-caption" class="loading-caption" data-i18n="loading.start">Loading…</div>
+        <div class="loading-cta" data-i18n-html="loading.cta">Have an idea for a feature? I'd happily build it, <a href="https://olicorne.org/" target="_blank" rel="noopener noreferrer">get in touch</a>.</div>
       </div>
     </div>
 
