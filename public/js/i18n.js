@@ -96,7 +96,6 @@
       "shortcuts.close": "Close search / collapse sections",
 
       "tour.start": "Take a tour",
-      "tour.continue": "Click to continue",
       "tour.next": "Next",
       "tour.back": "Back",
       "tour.done": "Done",
@@ -108,37 +107,64 @@
         "A 3D map of the brain: its regions, the pathways between them, and the receptors and drugs that act on them. This quick tour shows the main features. You can leave any time.",
       "tour.rotate.title": "Move around",
       "tour.rotate.body":
-        "<b>Drag</b> to rotate the brain, <b>scroll</b> or pinch to zoom, and drag with two fingers (or right-click) to pan. Every shape is a real brain structure.",
+        "<b>Drag</b> the brain to rotate it (scroll or pinch to zoom, two fingers or right-click to pan). Every shape is a real brain structure. Give it a spin to continue.",
       "tour.separate.title": "Pull it apart",
       "tour.separate.body":
-        "The <b>Separate</b> slider blows the brain open along the way out, exposing the deep nuclei that are otherwise buried under the cortex.",
+        "The <b>Separate</b> slider blows the brain open, exposing the deep nuclei otherwise buried under the cortex. Watch it sweep out and back, then grab the slider yourself to continue.",
+      "tour.sourcesOpen.title": "Every fact is sourced",
+      "tour.sourcesOpen.body":
+        "This dataset is LLM-assisted, so each fact carries a provenance grade. Tap the highlighted <b>Sources &amp; provenance</b> button to open the breakdown.",
+      "tour.sourcesDetail.title": "The provenance breakdown",
+      "tour.sourcesDetail.body":
+        "This popup tallies how much of the data is verified against a quoted source, merely sourced, or still unchecked. Close it (the highlighted &times;) to continue.",
       "tour.browse.title": "Browse the data",
       "tour.browse.body":
         "Everything lives in four lists: <b>Structures</b> ({structures}+), <b>Projections &amp; Circuits</b> ({projections}+), <b>Receptors &amp; targets</b> ({receptors}+) and <b>Drugs</b> ({drugs}+). Open any one and tap a row to focus it. Let's try a few.",
       "tour.circuitOpen.title": "Open a list",
       "tour.circuitOpen.body":
         "Tap the highlighted <b>Projections &amp; Circuits</b> to open it.",
-      "tour.circuitTap.title": "Circuits come alive",
+      "tour.circuitTap.title": "The Papez memory loop",
       "tour.circuitTap.body":
-        "Now tap the highlighted <b>circuit</b> row (the hippocampal / limbic Papez memory loop). The brain dims and the signal travels its pathways in firing order.",
-      "tour.receptorOpen.title": "Where receptors live",
-      "tour.receptorOpen.body":
-        "Tap the highlighted <b>Receptors &amp; targets</b> to open that list.",
+        "Tap the highlighted <b>Papez memory loop</b> circuit. The brain dims and the signal travels its pathways in firing order.",
+      "tour.circuitWiki.title": "Read about it",
+      "tour.circuitWiki.body":
+        "Each panel opens with an illustration and a live description pulled from Wikipedia. <b>Scroll the panel</b> down to continue.",
+      "tour.circuitStructures.title": "Its structures",
+      "tour.circuitStructures.body":
+        "The <b>structures</b> the loop passes through are listed here. Tap any one to jump to it.",
+      "tour.circuitPathways.title": "Its pathways",
+      "tour.circuitPathways.body":
+        "And the individual <b>pathways</b> that make up the loop, each its own sourced connection.",
+      "tour.receptorSystem.title": "A family of receptors",
+      "tour.receptorSystem.body":
+        "Receptors are grouped by neurotransmitter system. This highlighted block is the <b>serotonergic</b> family. We'll open one of them next.",
       "tour.receptorTap.title": "Light up a receptor",
       "tour.receptorTap.body":
         "Tap the highlighted <b>5-HT2A</b> receptor. The regions where it is expressed light up with glowing gem dots.",
-      "tour.drugOpen.title": "What a drug does",
-      "tour.drugOpen.body":
-        "Tap the highlighted <b>Drugs</b> to open that list.",
-      "tour.drugTap.title": "See a drug act",
-      "tour.drugTap.body":
-        "Tap the highlighted <b>Fluoxetine</b>, an SSRI. The brain is coloured by its effects (boost / block / modulate) and a by-mechanism flow overlay streams along the pathways.",
+      "tour.receptorFacts.title": "How it's classified",
+      "tour.receptorFacts.body":
+        "Its <b>classification</b>: neurotransmitter family, mechanism, whether it excites or inhibits, and where on the synapse it sits. Each fact carries its own provenance grade.",
+      "tour.receptorRegions.title": "Where it's found",
+      "tour.receptorRegions.body":
+        "The <b>regions</b> where this receptor is expressed, each with its own source. Tap any region to jump to it.",
+      "tour.receptorDrugs.title": "Drugs that act on it",
+      "tour.receptorDrugs.body":
+        "And the <b>drugs</b> that bind it. The highlighted <b>Olanzapine</b> row shows a measured affinity (Ki): the smaller the number, the tighter it binds.",
+      "tour.receptorTapDrug.title": "Follow it to a drug",
+      "tour.receptorTapDrug.body":
+        "Tap the highlighted <b>Olanzapine</b> row to open its own panel.",
+      "tour.drugWiki.title": "What it is",
+      "tour.drugWiki.body":
+        "The drug panel leads with its structure and a live Wikipedia description. Olanzapine is an atypical antipsychotic.",
+      "tour.drugBrands.title": "Its brand names",
+      "tour.drugBrands.body":
+        "The <b>commercial names</b> it is sold under, by region. Each is checked against its source.",
+      "tour.drugBindings.title": "What it acts on",
+      "tour.drugBindings.body":
+        "Its <b>bindings</b>: every receptor and target it acts on, the effect, and the measured affinity (Ki) where known. This is what colours the brain when you focus it.",
       "tour.search.title": "Find anything",
       "tour.search.body":
-        "<b>Search</b> jumps straight to any region, pathway, receptor or drug by name. You can also filter drugs by class or nomenclature.",
-      "tour.sources.title": "Every fact is sourced",
-      "tour.sources.body":
-        "This dataset is LLM-assisted, so each fact carries a provenance grade. Tap the highlighted <b>Sources &amp; provenance</b> button to see how much is verified, sourced or still unchecked.",
+        "<b>Search</b> jumps straight to any region, pathway, receptor or drug by name (try typing here). You can also filter drugs by class or nomenclature.",
       "tour.wrap.title": "You're set",
       "tour.wrap.body":
         "That's the tour. Settings, the EN/FR switch and this tour all live in the panel; you can replay the tour any time from <b>About</b>. Enjoy exploring.",
@@ -450,7 +476,6 @@
       "shortcuts.close": "Fermer la recherche / replier les sections",
 
       "tour.start": "Visite guidée",
-      "tour.continue": "Cliquez pour continuer",
       "tour.next": "Suivant",
       "tour.back": "Précédent",
       "tour.done": "Terminer",
@@ -462,37 +487,64 @@
         "Une carte 3D du cerveau : ses régions, les voies qui les relient, et les récepteurs et médicaments qui agissent dessus. Cette courte visite présente les principales fonctionnalités. Vous pouvez la quitter à tout moment.",
       "tour.rotate.title": "Se déplacer",
       "tour.rotate.body":
-        "<b>Faites glisser</b> pour tourner le cerveau, <b>défilez</b> ou pincez pour zoomer, et déplacez à deux doigts (ou clic droit) pour vous déplacer. Chaque forme est une structure cérébrale réelle.",
+        "<b>Faites glisser</b> le cerveau pour le tourner (défilez ou pincez pour zoomer, deux doigts ou clic droit pour vous déplacer). Chaque forme est une structure cérébrale réelle. Faites-le tourner pour continuer.",
       "tour.separate.title": "Écarter les régions",
       "tour.separate.body":
-        "Le curseur <b>Séparer</b> ouvre le cerveau vers l'extérieur, révélant les noyaux profonds autrement enfouis sous le cortex.",
+        "Le curseur <b>Séparer</b> ouvre le cerveau vers l'extérieur, révélant les noyaux profonds autrement enfouis sous le cortex. Regardez-le balayer puis revenir, puis saisissez le curseur vous-même pour continuer.",
+      "tour.sourcesOpen.title": "Chaque fait est sourcé",
+      "tour.sourcesOpen.body":
+        "Ce jeu de données est assisté par IA : chaque fait porte donc une note de provenance. Touchez le bouton <b>Sources et provenance</b> (en surbrillance) pour ouvrir le récapitulatif.",
+      "tour.sourcesDetail.title": "Le récapitulatif de provenance",
+      "tour.sourcesDetail.body":
+        "Cette fenêtre chiffre la part des données vérifiée face à une citation, simplement sourcée, ou encore non contrôlée. Fermez-la (le &times; en surbrillance) pour continuer.",
       "tour.browse.title": "Parcourir les données",
       "tour.browse.body":
         "Tout se trouve dans quatre listes : <b>Structures</b> ({structures}+), <b>Projections et circuits</b> ({projections}+), <b>Récepteurs et cibles</b> ({receptors}+) et <b>Médicaments</b> ({drugs}+). Ouvrez-en une et touchez une ligne pour la mettre en avant. Essayons-en quelques-unes.",
       "tour.circuitOpen.title": "Ouvrir une liste",
       "tour.circuitOpen.body":
         "Touchez <b>Projections et circuits</b> (en surbrillance) pour l'ouvrir.",
-      "tour.circuitTap.title": "Les circuits s'animent",
+      "tour.circuitTap.title": "La boucle mnésique de Papez",
       "tour.circuitTap.body":
-        "Touchez maintenant la ligne du <b>circuit</b> en surbrillance (la boucle mnésique hippocampique / limbique de Papez). Le cerveau s'assombrit et le signal parcourt ses voies dans l'ordre d'activation.",
-      "tour.receptorOpen.title": "Où vivent les récepteurs",
-      "tour.receptorOpen.body":
-        "Touchez <b>Récepteurs et cibles</b> (en surbrillance) pour ouvrir cette liste.",
+        "Touchez le circuit <b>boucle mnésique de Papez</b> en surbrillance. Le cerveau s'assombrit et le signal parcourt ses voies dans l'ordre d'activation.",
+      "tour.circuitWiki.title": "En savoir plus",
+      "tour.circuitWiki.body":
+        "Chaque panneau s'ouvre sur une illustration et une description tirée en direct de Wikipédia. <b>Faites défiler le panneau</b> vers le bas pour continuer.",
+      "tour.circuitStructures.title": "Ses structures",
+      "tour.circuitStructures.body":
+        "Les <b>structures</b> que traverse la boucle sont listées ici. Touchez-en une pour y accéder.",
+      "tour.circuitPathways.title": "Ses voies",
+      "tour.circuitPathways.body":
+        "Et les <b>voies</b> individuelles qui composent la boucle, chacune une connexion sourcée.",
+      "tour.receptorSystem.title": "Une famille de récepteurs",
+      "tour.receptorSystem.body":
+        "Les récepteurs sont regroupés par système de neurotransmetteur. Ce bloc en surbrillance est la famille <b>sérotoninergique</b>. Nous allons en ouvrir un.",
       "tour.receptorTap.title": "Illuminer un récepteur",
       "tour.receptorTap.body":
         "Touchez le récepteur <b>5-HT2A</b> en surbrillance. Les régions où il est exprimé s'illuminent de points scintillants.",
-      "tour.drugOpen.title": "Ce que fait un médicament",
-      "tour.drugOpen.body":
-        "Touchez <b>Médicaments</b> (en surbrillance) pour ouvrir cette liste.",
-      "tour.drugTap.title": "Voir un médicament agir",
-      "tour.drugTap.body":
-        "Touchez la <b>fluoxétine</b> en surbrillance, un ISRS. Le cerveau se colore selon ses effets (stimuler / bloquer / moduler) et une animation de flux par mécanisme parcourt les voies.",
+      "tour.receptorFacts.title": "Sa classification",
+      "tour.receptorFacts.body":
+        "Sa <b>classification</b> : famille de neurotransmetteur, mécanisme, s'il excite ou inhibe, et sa position sur la synapse. Chaque fait porte sa propre note de provenance.",
+      "tour.receptorRegions.title": "Où on le trouve",
+      "tour.receptorRegions.body":
+        "Les <b>régions</b> où ce récepteur est exprimé, chacune avec sa source. Touchez une région pour y accéder.",
+      "tour.receptorDrugs.title": "Les médicaments qui agissent dessus",
+      "tour.receptorDrugs.body":
+        "Et les <b>médicaments</b> qui s'y lient. La ligne <b>olanzapine</b> en surbrillance montre une affinité mesurée (Ki) : plus le nombre est petit, plus la liaison est forte.",
+      "tour.receptorTapDrug.title": "Suivre vers un médicament",
+      "tour.receptorTapDrug.body":
+        "Touchez la ligne <b>olanzapine</b> en surbrillance pour ouvrir son propre panneau.",
+      "tour.drugWiki.title": "Ce que c'est",
+      "tour.drugWiki.body":
+        "Le panneau du médicament s'ouvre sur sa structure et une description Wikipédia en direct. L'olanzapine est un antipsychotique atypique.",
+      "tour.drugBrands.title": "Ses noms commerciaux",
+      "tour.drugBrands.body":
+        "Les <b>noms commerciaux</b> sous lesquels il est vendu, par région. Chacun est vérifié face à sa source.",
+      "tour.drugBindings.title": "Ce sur quoi il agit",
+      "tour.drugBindings.body":
+        "Ses <b>liaisons</b> : tous les récepteurs et cibles sur lesquels il agit, l'effet, et l'affinité mesurée (Ki) lorsqu'elle est connue. C'est ce qui colore le cerveau quand vous le mettez en avant.",
       "tour.search.title": "Tout retrouver",
       "tour.search.body":
-        "La <b>recherche</b> mène directement à n'importe quelle région, voie, récepteur ou médicament par son nom. Vous pouvez aussi filtrer les médicaments par classe ou nomenclature.",
-      "tour.sources.title": "Chaque fait est sourcé",
-      "tour.sources.body":
-        "Ce jeu de données est assisté par IA : chaque fait porte donc une note de provenance. Touchez le bouton <b>Sources et provenance</b> (en surbrillance) pour voir la part vérifiée, sourcée ou encore non contrôlée.",
+        "La <b>recherche</b> mène directement à n'importe quelle région, voie, récepteur ou médicament par son nom (essayez d'en taper un ici). Vous pouvez aussi filtrer les médicaments par classe ou nomenclature.",
       "tour.wrap.title": "Vous êtes prêt",
       "tour.wrap.body":
         "Voilà pour la visite. Les réglages, le sélecteur EN/FR et cette visite se trouvent dans le panneau ; vous pouvez relancer la visite à tout moment depuis <b>À propos</b>. Bonne exploration.",

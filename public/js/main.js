@@ -5998,6 +5998,72 @@ async function main() {
   // Clear any focus / isolate / tab / open sourcing modal a previous step left, so
   // each demo starts from a clean scene (idempotent: steps re-run on Back too).
   const tourReset = () => { tabs.closeAll(); selection.clear(); sourcingModal.close(); };
+
+  // The nodes the guided story walks through (resolved once; a missing id just makes
+  // its step a caption). 5-HT2A -> Olanzapine ties the receptor demo to the drug demo.
+  const tour5ht2a = data.targets.find((x) => x.id === "5ht2a");
+  const tourOlanzapine = data.drugs.find((d) => d.id === "olanzapine");
+  const tourPapez = data.circuits.find((c) => c.id === "limbic_memory");
+  // Re-open a node's detail panel only if it is not already the active tab, so a
+  // detail sub-step's before() (which re-runs on Back) never restarts the focus /
+  // animation while the user is reading it.
+  const tourEnsureTab = (key, node, show) => () => {
+    if (node && tabs.activeKey() !== key) show(node);
+  };
+
+  // --- Gesture gates: return a teardown; call signal() when the action happens. See
+  // js/tour.js (a gate keeps Next greyed until fired, or auto-advances on gateAdvances).
+  const tourGateRotate = (signal) => {
+    // OrbitControls "start" fires on a real pointer-down drag, NOT on idle
+    // auto-rotate, so a passive spin never trips the gate.
+    const on = () => signal();
+    controls.addEventListener("start", on);
+    return () => controls.removeEventListener("start", on);
+  };
+  const tourGateSlider = (signal) => {
+    // playSequence sets slider.value in JS (no "input" event), so only a real grab fires.
+    const el = tourEl("explode");
+    if (!el) return () => {};
+    const on = () => signal();
+    el.addEventListener("input", on);
+    return () => el.removeEventListener("input", on);
+  };
+  const tourGateModalClosed = (id) => (signal) => {
+    const el = tourEl(id);
+    if (!el) return () => {};
+    const obs = new MutationObserver(() => { if (el.hidden) signal(); });
+    obs.observe(el, { attributes: true, attributeFilter: ["hidden"] });
+    return () => obs.disconnect();
+  };
+  const tourGateScroll = (signal) => {
+    // Ungrey once the user scrolls the details panel (wheel / touch / arrow keys).
+    // A wheel/touch event fires even at a scroll boundary, so a short panel can't trap
+    // the user; the programmatic scrollTo emits "scroll", not these, so it is ignored.
+    const el = document.getElementById("details-pane");
+    if (!el) return () => {};
+    const on = () => signal();
+    el.addEventListener("wheel", on, { passive: true });
+    el.addEventListener("touchmove", on, { passive: true });
+    el.addEventListener("keydown", on);
+    return () => {
+      el.removeEventListener("wheel", on);
+      el.removeEventListener("touchmove", on);
+      el.removeEventListener("keydown", on);
+    };
+  };
+  // The "serotonergic receptors" box in the open Receptors list: its system heading
+  // plus the focusable rows under it (up to the next heading), for a group highlight.
+  const tourSeroSystem = tour5ht2a && tour5ht2a.system;
+  const tourSeroBox = () => {
+    if (!tourSeroSystem) return [];
+    const h = document.querySelector(`[data-tour-system="${CSS.escape(tourSeroSystem)}"]`);
+    if (!h) return [];
+    const els = [h];
+    for (let n = h.nextElementSibling; n && n.tagName !== "H2"; n = n.nextElementSibling) {
+      if (n.classList.contains("clickable")) els.push(n);
+    }
+    return els;
+  };
   // The demos are hands-on: the user opens each list and taps the highlighted row
   // themselves (interactive steps in js/tour.js advance on that real tap). The row
   // hooks are `data-tour-id` attributes set in the legend builders; these sample
@@ -6006,19 +6072,31 @@ async function main() {
   // "150+" teasers are always truthful (an undercount), never overstating.
   const tourCount = (n) => { const step = n >= 100 ? 50 : 10; return Math.floor(n / step) * step; };
   const tourSteps = [
+    // 1. Welcome (caption).
     { title: t("tour.welcome.title"), body: t("tour.welcome.body"),
-      dim: true, placement: "center" },
+      dim: true, placement: "center", before: tourReset },
+    // 2. Rotate: dim just the panel (veil), keep the brain draggable; Next ungreys
+    //    once the user actually drags it.
     { title: t("tour.rotate.title"), body: t("tour.rotate.body"),
-      dim: false, placement: "brain", before: tourReset },
+      dim: false, placement: "brain", veil: ["#controls"], gate: tourGateRotate,
+      before: tourReset },
+    // 3. Separate: sweep the slider off -> max -> middle (replays on Back->Next); Next
+    //    ungreys once the user grabs the slider themselves.
     { title: t("tour.separate.title"), body: t("tour.separate.body"),
-      target: "#explode",
-      before: () => { tourEnsurePanel(); autoSpread.spreadTo(0.55); } },
-    // Sourcing early: tap the Sources button to open the provenance breakdown.
-    { title: t("tour.sources.title"), body: t("tour.sources.body"),
-      target: "#sourcing-toggle", interactive: true, scrollTo: true, stayAfterTap: true,
+      target: "#explode", dim: false, gate: tourGateSlider,
+      before: () => { tourReset(); tourEnsurePanel(); autoSpread.playSequence([0, 1, 0.5]); } },
+    // 4. Sourcing: tap the Sources button (opens the popup, auto-advances).
+    { title: t("tour.sourcesOpen.title"), body: t("tour.sourcesOpen.body"),
+      target: "#sourcing-toggle", interactive: true, scrollTo: true,
       before: () => { tourReset(); tourEnsurePanel(); } },
-    // Orientation: highlight the four browse sections as a group, each teased with
-    // a rounded-down count ("150+"), always an honest undercount (see tourCount).
+    // 5. Sourcing detail: explain the popup; ring its close X (no dim), bubble docked
+    //    aside (left on desktop, centered on a phone); closing the popup proceeds.
+    { title: t("tour.sourcesDetail.title"), body: t("tour.sourcesDetail.body"),
+      target: "#sourcing-close", dim: false, placement: "aside",
+      gate: tourGateModalClosed("sourcing-modal"), gateAdvances: true,
+      before: () => sourcingModal.open() },
+    // 6. Browse: highlight the four sections as a group, each teased with a rounded-
+    //    down count ("150+"), always an honest undercount (see tourCount).
     { title: t("tour.browse.title"),
       body: t("tour.browse.body", {
         structures: tourCount(data.structures.length),
@@ -6034,29 +6112,62 @@ async function main() {
       }),
       target: () => TOUR_SECTIONS.map((n) => `#${n}-toggle`),
       before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
-    // Circuits: open the list, then tap the highlighted circuit row (it plays live).
+    // 7-8. Circuits: open the list, then tap the Papez memory loop row (plays live).
     { title: t("tour.circuitOpen.title"), body: t("tour.circuitOpen.body"),
       target: "#projections-toggle", interactive: true, scrollTo: true,
       before: () => { tourReset(); tourCloseSection("projections"); } },
     { title: t("tour.circuitTap.title"), body: t("tour.circuitTap.body"),
       target: '[data-tour-id="circuit:limbic_memory"]', interactive: true, scrollTo: true,
-      stayAfterTap: true, before: () => tourOpenSection("projections") },
-    // Receptors: open the list, then tap the highlighted receptor row.
-    { title: t("tour.receptorOpen.title"), body: t("tour.receptorOpen.body"),
-      target: "#receptors-toggle", interactive: true, scrollTo: true,
-      before: () => { tourReset(); tourCloseSection("receptors"); } },
+      before: () => tourOpenSection("projections") },
+    // 9-11. Walk the circuit panel section by section (it stays open from the tap;
+    //    dim:false so the live pulse stays visible beside the readable panel). Next on
+    //    the first ungreys once the user scrolls the panel.
+    { title: t("tour.circuitWiki.title"), body: t("tour.circuitWiki.body"),
+      target: '[data-tour-sec="wiki"]', dim: false, scrollTo: true, gate: tourGateScroll,
+      before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
+    { title: t("tour.circuitStructures.title"), body: t("tour.circuitStructures.body"),
+      target: '[data-tour-sec="structures"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
+    { title: t("tour.circuitPathways.title"), body: t("tour.circuitPathways.body"),
+      target: '[data-tour-sec="pathways"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
+    // 12. Receptors: open the list, highlight the whole serotonergic system box.
+    { title: t("tour.receptorSystem.title"), body: t("tour.receptorSystem.body"),
+      target: tourSeroBox, scrollTo: true,
+      before: () => { tourReset(); tourOpenSection("receptors"); } },
+    // 13. Tap 5-HT2A (opens its panel + gem dots).
     { title: t("tour.receptorTap.title"), body: t("tour.receptorTap.body"),
       target: '[data-tour-id="target:5ht2a"]', interactive: true, scrollTo: true,
-      stayAfterTap: true, before: () => tourOpenSection("receptors") },
-    // Drugs: open the list, then tap the highlighted drug row.
-    { title: t("tour.drugOpen.title"), body: t("tour.drugOpen.body"),
-      target: "#drugs-toggle", interactive: true, scrollTo: true,
-      before: () => { tourReset(); tourCloseSection("drugs"); } },
-    { title: t("tour.drugTap.title"), body: t("tour.drugTap.body"),
-      target: '[data-tour-id="drug:fluoxetine"]', interactive: true, scrollTo: true,
-      stayAfterTap: true, before: () => tourOpenSection("drugs") },
+      before: () => tourOpenSection("receptors") },
+    // 14-16. Walk the receptor panel: classification, regions, then Olanzapine's Ki.
+    { title: t("tour.receptorFacts.title"), body: t("tour.receptorFacts.body"),
+      target: '[data-tour-sec="facts"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
+    { title: t("tour.receptorRegions.title"), body: t("tour.receptorRegions.body"),
+      target: '[data-tour-sec="regions"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
+    { title: t("tour.receptorDrugs.title"), body: t("tour.receptorDrugs.body"),
+      target: '[data-tour-id="ixdrug:olanzapine"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
+    // 17. Tap Olanzapine (jumps from the receptor's drug list to its own panel).
+    { title: t("tour.receptorTapDrug.title"), body: t("tour.receptorTapDrug.body"),
+      target: '[data-tour-id="ixdrug:olanzapine"]', interactive: true, scrollTo: true,
+      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
+    // 18-20. Walk the drug panel: what it is (Wikipedia), brands, what it acts on + Ki.
+    { title: t("tour.drugWiki.title"), body: t("tour.drugWiki.body"),
+      target: '[data-tour-sec="wiki"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
+    { title: t("tour.drugBrands.title"), body: t("tour.drugBrands.body"),
+      target: '[data-tour-sec="brands"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
+    { title: t("tour.drugBindings.title"), body: t("tour.drugBindings.body"),
+      target: '[data-tour-sec="bindings"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
+    // 21. Search demo: pre-filled results; the box is live (dim:false) so they can type.
     { title: t("tour.search.title"), body: t("tour.search.body"),
-      target: "#search-toggle", before: () => { tourReset(); tourEnsurePanel(); } },
+      target: "#search", dim: false,
+      before: () => { tourReset(); tourExpandPanel(); toolbar.openSearchWithQuery("olanzapine"); } },
+    // 22. Wrap (spotlight the About button, where the tour can be replayed).
     { title: t("tour.wrap.title"), body: t("tour.wrap.body"),
       target: "#about-toggle", before: () => { tourReset(); tourEnsurePanel(); } },
   ];
