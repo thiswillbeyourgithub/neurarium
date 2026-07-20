@@ -689,9 +689,16 @@
       #tour-root.no-anim .tour-ring, #tour-root.no-anim .tour-bubble { transition: none; }
       /* Full-screen click-eater: transparent under a spotlight (the ring's own
          box-shadow does the dimming), a visible dim for a no-target modal step. */
-      .tour-blocker { position: absolute; inset: 0; pointer-events: auto; background: transparent; }
+      .tour-blocker { position: absolute; inset: 0; pointer-events: auto; background: transparent; transition: opacity 0.3s ease; }
       .tour-blocker[hidden] { display: none; }
       .tour-blocker.modal { background: rgba(0, 0, 0, 0.55); }
+      /* Opening beat of each step: the dim + highlight are held invisible for ~1s
+         (js/tour.js REVEAL_MS) then faded in, so the scene the step set up reads
+         before the overlay lands on it. They stay positioned underneath (just
+         transparent), so the fade-in needs no reflow. */
+      #tour-root.pre-reveal .tour-ring,
+      #tour-root.pre-reveal .tour-blocker,
+      #tour-root.pre-reveal .tour-veil { opacity: 0; }
       /* The spotlight cut-out: a transparent rounded rect whose huge box-shadow
          dims everything around it, ringed in accent so the target reads clearly. */
       .tour-ring {
@@ -701,9 +708,12 @@
         box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
         outline: 2px solid var(--accent-bright);
         outline-offset: 1px;
-        transition: left 0.34s cubic-bezier(0.33, 1, 0.68, 1), top 0.34s cubic-bezier(0.33, 1, 0.68, 1), width 0.34s cubic-bezier(0.33, 1, 0.68, 1), height 0.34s cubic-bezier(0.33, 1, 0.68, 1);
+        transition: left 0.34s cubic-bezier(0.33, 1, 0.68, 1), top 0.34s cubic-bezier(0.33, 1, 0.68, 1), width 0.34s cubic-bezier(0.33, 1, 0.68, 1), height 0.34s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
       }
       .tour-ring[hidden] { display: none; }
+      /* spotlightOnly step: keep the accent ring but drop the dimming box-shadow, so
+         a popup the step is explaining stays fully readable behind the highlight. */
+      .tour-ring.no-dim { box-shadow: none; }
       /* Interactive step: the blocker gets a click-through hole over this ring, so
          the user's real tap reaches the control. Pulse the outline to invite it. */
       .tour-ring.interactive { animation: tour-pulse 1.4s ease-in-out infinite; }
@@ -735,7 +745,7 @@
         pointer-events: none;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 12px;
-        transition: left 0.34s cubic-bezier(0.33, 1, 0.68, 1), top 0.34s cubic-bezier(0.33, 1, 0.68, 1), width 0.34s cubic-bezier(0.33, 1, 0.68, 1), height 0.34s cubic-bezier(0.33, 1, 0.68, 1);
+        transition: left 0.34s cubic-bezier(0.33, 1, 0.68, 1), top 0.34s cubic-bezier(0.33, 1, 0.68, 1), width 0.34s cubic-bezier(0.33, 1, 0.68, 1), height 0.34s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
       }
       .tour-veil[hidden] { display: none; }
       .tour-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }

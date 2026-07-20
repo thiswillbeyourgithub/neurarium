@@ -45,6 +45,20 @@
 //                                  // while the brain stays draggable.
 //     scrollTo?: boolean,          // scrollIntoView the target when shown (rows
 //                                  // deep in a scrolling panel).
+//     scrollAlign?: "center"|"top",// where scrollTo lands the target (default
+//                                  // "center"; "top" brings a tall section's heading
+//                                  // to the top of the panel instead of scrolling
+//                                  // past it to centre the whole block).
+//     spotlightOnly?: boolean,     // ring the target with NO page-dimming shadow, so
+//                                  // a popup the step is explaining stays fully
+//                                  // readable (a plain highlight, not a spotlight).
+//     clickThrough?: sel|el|fn|array, // extra element(s) the user may click on a
+//                                  // non-interactive step. Off the bubble and these
+//                                  // (and an interactive step's own target), EVERY
+//                                  // click is inert while a step shows, so a stray tap
+//                                  // on a row/toolbar can't derail the walkthrough.
+//                                  // Scroll + brain-drag use wheel/pointer events (not
+//                                  // click), so they keep working regardless.
 //     dim?:    boolean,            // darken the rest of the page. Defaults true
 //                                  // for a spotlight/modal step, false for a
 //                                  // caption (so a live brain demo stays visible).
@@ -61,6 +75,9 @@ const GAP = 14; // px between the spotlight ring and the bubble
 const MARGIN = 12; // px min gap from the viewport edge
 const RING_PAD = 6; // px the ring extends past the target on each side
 const ADVANCE_MS = 360; // let the tapped action (open a tab, spread) settle first
+const REVEAL_MS = 1000; // hold the dim + highlight back this long, then fade it in,
+// so the scene the step just set up reads for a beat before the overlay lands on it
+const SCROLL_TOP_PAD = 12; // px above a scrollAlign:"top" target once scrolled to the top
 
 /**
  * @param {{
@@ -88,6 +105,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let veilEls = []; // pooled translucent "veil" divs (partial dim over UI)
   let shownOnce = false; // false until the first step paints (snap it, don't fly in)
   let scrolling = false; // true while a scrollTo row is easing into view (see onScroll)
+  let revealTimer = null; // the setTimeout that ends a step's opening beat + fades in the overlay
 
   const seen = () => {
     if (!seenKey) return false;
@@ -254,6 +272,40 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     veilEls = [];
   }
 
+  // Is `target` a control the current step invites the user to click? The tour's
+  // own bubble is always live; beyond it, only an interactive step's tap target and
+  // any `clickThrough` element(s) are. Everything else is inert while a step shows
+  // (see onClickCapture), so a stray tap on a row/toolbar can't derail the tour.
+  function isClickAllowed(target) {
+    const step = index >= 0 ? steps[index] : null;
+    if (!step) return false;
+    if (step.interactive && waitEl && (waitEl === target || waitEl.contains(target))) {
+      return true;
+    }
+    const ct = step.clickThrough;
+    const raw = typeof ct === "function" ? ct() : ct;
+    const items = raw == null ? [] : Array.isArray(raw) ? raw : [raw];
+    for (const it of items) {
+      const el = typeof it === "string" ? document.querySelector(it) : it;
+      if (el && (el === target || el.contains(target))) return true;
+    }
+    return false;
+  }
+
+  // Capture-phase click guard, live for the whole tour: a click that is not on the
+  // bubble or an allowed control is swallowed (stopPropagation + preventDefault)
+  // before the app's own handlers see it, so reading a highlighted section can't be
+  // interrupted by a mis-click that opens some other panel. Scroll (wheel/touchmove)
+  // and rotating the brain (pointer drag) are not clicks, so they are unaffected; a
+  // tap on the 3D scene is separately made inert in js/main.js (handleSelect).
+  function onClickCapture(e) {
+    if (!active) return;
+    if (bubble && bubble.contains(e.target)) return;
+    if (isClickAllowed(e.target)) return;
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
   function layout() {
     if (index < 0) return;
     const step = steps[index];
@@ -281,6 +333,9 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       const h = r.height + RING_PAD * 2;
       ring.hidden = false;
       ring.classList.toggle("interactive", interactive);
+      // spotlightOnly: keep the accent ring but drop the page-dimming box-shadow, so
+      // a popup the step is pointing INTO (e.g. the sources breakdown) stays readable.
+      ring.classList.toggle("no-dim", !!step.spotlightOnly);
       ring.style.left = `${x}px`;
       ring.style.top = `${y}px`;
       ring.style.width = `${w}px`;
@@ -419,6 +474,11 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     // later step glides from the previous one (smooth step-to-step transitions).
     setAnim(shownOnce);
     shownOnce = true;
+    // Hold the dim + highlight back for a beat (pre-reveal keeps ring/dim/veil at
+    // opacity 0), then fade them in: the scene before() set up reads first, and the
+    // overlay lands smoothly rather than snapping on. The bubble text is not held.
+    if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
+    root.classList.add("pre-reveal");
     const step = steps[index];
     try {
       step.before && step.before();
@@ -493,6 +553,16 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     // so re-settle a couple of times: the bubble must track the target's final
     // spot, or it can end up covering the very control the user must tap.
     scheduleLayout();
+
+    // After the opening beat, drop pre-reveal so the (already positioned, still
+    // invisible) dim + highlight fade in over the settled scene. The index guard
+    // ignores a stale timer after a fast Back/Next moved on.
+    revealTimer = setTimeout(() => {
+      if (!active || index !== i) return;
+      revealTimer = null;
+      layout();
+      root.classList.remove("pre-reveal");
+    }, REVEAL_MS);
   }
 
   // Whether the ring + bubble ease between positions (smooth) or snap (tight
@@ -534,7 +604,12 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       if (!c) return;
       const cr = c.getBoundingClientRect();
       const er = el.getBoundingClientRect();
-      const want = c.scrollTop + (er.top - cr.top) - (c.clientHeight - er.height) / 2;
+      // Default: centre the target. "top": land its heading near the top of the
+      // panel instead (for a section taller than the viewport, centring scrolls
+      // past its heading so you can't tell what you're looking at; top keeps it).
+      const want = step.scrollAlign === "top"
+        ? c.scrollTop + (er.top - cr.top) - SCROLL_TOP_PAD
+        : c.scrollTop + (er.top - cr.top) - (c.clientHeight - er.height) / 2;
       const to = Math.max(0, Math.min(want, c.scrollHeight - c.clientHeight));
       if (Math.abs(to - c.scrollTop) < 2) return; // already centred enough
       c.scrollTo({ top: to, behavior: "smooth" });
@@ -595,6 +670,9 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     window.addEventListener("keydown", onKey, true);
     window.addEventListener("resize", layout);
     window.addEventListener("scroll", onScroll, true);
+    // Capture phase so an off-target click is swallowed before the app's own
+    // handlers fire (keeps the walkthrough on the rails, see onClickCapture).
+    window.addEventListener("click", onClickCapture, true);
     go(opts && opts.fromStep ? opts.fromStep : 0);
   }
 
@@ -604,11 +682,14 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     index = -1;
     clearWait();
     if (scrollTimer) clearTimeout(scrollTimer);
+    if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
     window.removeEventListener("keydown", onKey, true);
     window.removeEventListener("resize", layout);
     window.removeEventListener("scroll", onScroll, true);
+    window.removeEventListener("click", onClickCapture, true);
     if (root) {
       clearHole();
+      root.classList.remove("pre-reveal");
       root.hidden = true;
       root.setAttribute("aria-hidden", "true");
     }
