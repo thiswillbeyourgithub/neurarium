@@ -97,6 +97,7 @@
 
       "tour.start": "Take a tour",
       "tour.continue": "Click to continue",
+      "tour.next": "Next",
       "tour.back": "Back",
       "tour.done": "Done",
       "tour.skip": "Skip",
@@ -450,6 +451,7 @@
 
       "tour.start": "Visite guidée",
       "tour.continue": "Cliquez pour continuer",
+      "tour.next": "Suivant",
       "tour.back": "Précédent",
       "tour.done": "Terminer",
       "tour.skip": "Passer",

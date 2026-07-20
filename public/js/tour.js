@@ -6,17 +6,20 @@
 // that sets the scene up (spread the brain, open a section) so the tour can show
 // real features live rather than static pictures.
 //
-// There is deliberately NO Next button (only Back + Skip): the user advances by
-// acting on the step, so they cannot fast-forward past a hands-on demo and leave
-// the UI half-set-up. How forward works depends on the step:
-//   - passive / caption: a "click to continue" cue sits in the bubble, and a
-//     click on the dim backdrop also advances (a live-scene step with no backdrop
-//     advances via the cue only, keeping the scene draggable).
+// Forward is a Next button (right of Back + Skip), but it stays DISABLED on a
+// hands-on step until the required action is done, so the user still cannot
+// fast-forward past a demo and leave the UI half-set-up (see awaiting()):
+//   - passive / caption: Next is enabled immediately; a click on the dim backdrop
+//     also advances.
 //   - interactive (`interactive:true`): the backdrop gets a click-through hole
 //     over the target (a clip-path cut-out), so the user's real tap reaches the
-//     highlighted control and drives the tour. The cue is hidden and every click
-//     off the target is eaten, so the only way forward is the real tap: the user
-//     cannot skip the hands-on action. Back/Skip (and Esc) stay the escapes.
+//     highlighted control. A plain tap advances the tour; a `stayAfterTap` tap
+//     fires a live demo, keeps the tour on the step (spotlight steps aside), and
+//     ungreys Next. Next stays disabled until the tap, so it can't skip the action.
+//   - gate (`gate(signal)`): the step arms a signal the app fires when the user
+//     performs a gesture (rotate / move a slider / scroll / close a modal); Next
+//     ungreys then, or the step auto-advances when `gateAdvances`.
+// Back/Skip (and Esc) stay the escapes.
 //
 // Kept dependency-free (like js/circuit-schedule.js) so it stays reusable and
 // the no-build viewer loads it as a plain ES module.
@@ -30,15 +33,25 @@
 //                                  // => a caption step (no spotlight).
 //     interactive?: boolean,       // let the user's tap reach the target and
 //                                  // advance the tour (click-through hole).
+//     stayAfterTap?: boolean,      // (interactive) the tap fires a demo to watch:
+//                                  // stay on the step, step the spotlight aside,
+//                                  // ungrey Next instead of auto-advancing.
+//     gate?: (signal) => cleanup,  // arm a gesture gate: call signal() when the
+//                                  // required action happens; returns a teardown.
+//     gateAdvances?: boolean,      // (gate) auto-advance on signal() instead of
+//                                  // just ungreying Next (e.g. close-to-proceed).
+//     veil?: sel|el|fn|array,      // translucent dim over these element(s) only
+//                                  // (pointer-events:none), e.g. the controls panel
+//                                  // while the brain stays draggable.
 //     scrollTo?: boolean,          // scrollIntoView the target when shown (rows
 //                                  // deep in a scrolling panel).
 //     dim?:    boolean,            // darken the rest of the page. Defaults true
 //                                  // for a spotlight/modal step, false for a
 //                                  // caption (so a live brain demo stays visible).
-//     placement?: "top" | "center" | "brain", // caption position when there is
-//                                  // no target. "brain" = keep the 3D scene
-//                                  // clear (bottom on a portrait phone where the
-//                                  // brain is up top, top on a wide screen).
+//     placement?: "top"|"center"|"brain"|"aside", // caption position when there is
+//                                  // no target. "brain" = keep the 3D scene clear.
+//                                  // "aside" = left edge on desktop, centered on a
+//                                  // portrait phone (clear of a centered modal).
 //     before?: () => void,         // run when the step is shown (idempotent:
 //                                  // it re-runs on Back too, so make it set the
 //                                  // exact state it wants, not toggle).
@@ -64,12 +77,15 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let blocker = null; // full-screen click-eater / modal dim
   let ring = null; // the spotlight cut-out (box-shadow does the dimming)
   let bubble = null;
-  let elTitle, elBody, elCue, elStep, btnBack, btnSkip;
+  let elTitle, elBody, elStep, btnBack, btnSkip, btnNext;
   let index = -1; // current step, -1 when inactive
   let active = false;
   let waitEl = null; // the element an interactive step is waiting on
   let waitFn = null; // its one-shot click handler (removed on leave)
   let observed = false; // a stayAfterTap step whose demo has been triggered
+  let gateFired = false; // a gate step's signal() has fired (Next may ungrey)
+  let gateCleanup = null; // the current gate's teardown (removes its listeners)
+  let veilEls = []; // pooled translucent "veil" divs (partial dim over UI)
   let shownOnce = false; // false until the first step paints (snap it, don't fly in)
   let scrolling = false; // true while a scrollTo row is easing into view (see onScroll)
 
@@ -101,12 +117,12 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     // Eat clicks so a mis-click on the page behind doesn't fire mid-tour. On a
     // passive/caption step a click on the dim backdrop is "continue" (there is no
     // Next button). On an interactive step a clip-path hole (see setHole) lets the
-    // tap through to the real target and awaitingTap() is true, so a click that
+    // tap through to the real target and awaiting() is true, so a click that
     // lands on the blocker (off the target) is swallowed without advancing: the
     // user must act on the highlighted control. Never dismisses (no accidental exit).
     blocker.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (!awaitingTap()) go(index + 1);
+      if (!awaiting()) go(index + 1);
     });
 
     ring = document.createElement("div");
@@ -123,15 +139,6 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     elBody = document.createElement("div");
     elBody.className = "tour-body";
 
-    // The "click to continue" cue (there is no Next button). Shown on a step that
-    // is not awaiting a real tap; clicking it advances. Hidden on an interactive
-    // step, whose body already says which control to tap.
-    elCue = document.createElement("div");
-    elCue.className = "tour-cue";
-    elCue.addEventListener("click", () => {
-      if (!awaitingTap()) go(index + 1);
-    });
-
     const foot = document.createElement("div");
     foot.className = "tour-foot";
     elStep = document.createElement("span");
@@ -140,10 +147,14 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     actions.className = "tour-actions";
     btnSkip = mkBtn("tour-skip", labels.skip, () => stop("skipped"));
     btnBack = mkBtn("tour-back", labels.back, () => go(index - 1));
-    actions.append(btnSkip, btnBack);
+    // The Next button is the sole forward affordance (no "click to continue" link).
+    // On a hands-on step it stays disabled until the required action is done (see
+    // awaiting()); clicking it advances, or finishes on the last step.
+    btnNext = mkBtn("tour-next", labels.next, () => { if (!awaiting()) go(index + 1); });
+    actions.append(btnSkip, btnBack, btnNext);
     foot.append(elStep, actions);
 
-    bubble.append(elTitle, elBody, elCue, foot);
+    bubble.append(elTitle, elBody, foot);
     root.append(blocker, ring, bubble);
     document.body.appendChild(root);
   }
@@ -204,9 +215,49 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     blocker.style.clipPath = "none";
   }
 
+  // A translucent "veil" over specific elements (e.g. the controls panel) so a step
+  // can dim just those while leaving the 3D scene fully interactive. The veils are
+  // pointer-events:none (purely visual: the veiled UI still works), pooled, and
+  // re-sized every layout(). `step.veil` is a selector, an element, a resolver, or
+  // an array of those.
+  function applyVeil(step) {
+    const raw = step && step.veil;
+    const sel = typeof raw === "function" ? raw() : raw;
+    const items = sel == null ? [] : Array.isArray(sel) ? sel : [sel];
+    const els = [];
+    for (const it of items) {
+      const el = typeof it === "string" ? document.querySelector(it) : it;
+      if (el && el.getClientRects().length > 0) els.push(el);
+    }
+    while (veilEls.length < els.length) {
+      const v = document.createElement("div");
+      v.className = "tour-veil";
+      root.appendChild(v);
+      veilEls.push(v);
+    }
+    for (let k = 0; k < veilEls.length; k++) {
+      const v = veilEls[k];
+      if (k < els.length) {
+        const r = els[k].getBoundingClientRect();
+        v.hidden = false;
+        v.style.left = `${r.left}px`;
+        v.style.top = `${r.top}px`;
+        v.style.width = `${r.width}px`;
+        v.style.height = `${r.height}px`;
+      } else {
+        v.hidden = true;
+      }
+    }
+  }
+  function removeVeils() {
+    for (const v of veilEls) v.remove();
+    veilEls = [];
+  }
+
   function layout() {
     if (index < 0) return;
     const step = steps[index];
+    applyVeil(step);
     const els = resolveTargets(step);
     // A stayAfterTap step, once tapped, steps its spotlight aside so the live
     // demo it triggered is watchable: no ring, no dim, bubble tucked off the scene.
@@ -291,10 +342,16 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     const bh = bubble.offsetHeight;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const left = clamp((vw - bw) / 2, MARGIN, vw - bw - MARGIN);
+    let left = clamp((vw - bw) / 2, MARGIN, vw - bw - MARGIN);
     let top;
     if (where === "center") {
       top = (vh - bh) / 2;
+    } else if (where === "aside") {
+      // Wide screen: dock to the left edge (clear of a centered modal). Portrait
+      // phone: keep it centered (partially over the coverage bars, which matter
+      // least here), since there is no roomy side.
+      top = (vh - bh) / 2;
+      if (vw > vh) left = MARGIN;
     } else if (where === "brain") {
       // Keep the 3D scene clear. On a portrait phone the brain is the top half
       // and the panel the bottom, so the bubble goes to the bottom; on a wide
@@ -309,35 +366,42 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
 
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
-  // Stop waiting on an interactive target (leaving the step, or teardown).
+  // Stop waiting on the current step's action (leaving the step, or teardown): drop
+  // the interactive-tap listener, run the gate's teardown, and remove any veils.
   function clearWait() {
     if (waitEl && waitFn) waitEl.removeEventListener("click", waitFn);
     waitEl = null;
     waitFn = null;
+    if (gateCleanup) {
+      try { gateCleanup(); } catch (e) { /* best-effort teardown */ }
+      gateCleanup = null;
+    }
+    gateFired = false;
+    removeVeils();
   }
 
-  // True while the step's only way forward is a real tap on its highlighted
-  // target: an interactive step whose target resolved and whose demo (if any)
-  // has not fired yet. When true, the cue is hidden, the backdrop eats every
-  // off-target click, and forward keys are inert, so the user cannot skip the
-  // hands-on action. A stayAfterTap step drops out of "awaiting" once tapped
-  // (its demo is playing) so the cue can offer "continue".
-  function awaitingTap() {
+  // True while the step's only way forward is a required action not yet done: an
+  // interactive step whose target resolved and whose tap (or stayAfterTap demo) has
+  // not fired, OR a gate step whose signal() has not fired. When true the Next button
+  // is disabled, the backdrop eats every off-target click, and the forward keys are
+  // inert, so the user cannot skip the hands-on action. A stayAfterTap step drops out
+  // once tapped (its demo is playing), and a gate step once signalled.
+  function awaiting() {
     if (index < 0) return false;
     const step = steps[index];
-    if (!step || !step.interactive || !waitEl) return false;
-    return !(step.stayAfterTap && observed);
+    if (!step) return false;
+    if (step.interactive && waitEl && !(step.stayAfterTap && observed)) return true;
+    if (step.gate && !gateFired) return true;
+    return false;
   }
 
-  // Show/hide the "click to continue" cue for the current state. Hidden while a
-  // real tap is required; otherwise a clickable cue ("Done" on the last step).
-  function refreshCue() {
+  // Reflect the current state on the Next button: disabled while an action is still
+  // required (see awaiting()), and labelled "Done" on the last step.
+  function refreshNav() {
     if (index < 0) return;
-    const wait = awaitingTap();
-    elCue.hidden = wait;
-    if (wait) return;
-    elCue.textContent =
-      index === steps.length - 1 ? labels.done : labels.continue;
+    btnNext.disabled = awaiting();
+    btnNext.textContent =
+      index === steps.length - 1 ? labels.done : labels.next;
   }
 
   function go(i) {
@@ -367,12 +431,11 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     btnBack.disabled = index === 0;
 
     // Interactive step: the user's real tap on the highlighted target drives it
-    // (the app's own handler runs first; our listener is added after it). Next
-    // stays visible as a fallback so a mis-tap can never trap the user.
+    // (the app's own handler runs first; our listener is added after it).
     //   - default: the tap advances the tour (open a list, then move on).
     //   - stayAfterTap: the tap fires a live demo we want watched, so the tour
     //     stays put; the spotlight steps aside (see layout `consumed`) and Next
-    //     proceeds when the user is ready.
+    //     ungreys so the user proceeds when ready.
     if (step.interactive) {
       const el = primaryTarget(step);
       if (el) {
@@ -381,7 +444,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
           if (step.stayAfterTap) {
             observed = true; // the demo is now playing: get the overlay out of its way
             layout();
-            refreshCue(); // demo fired: offer "continue" now that no tap is pending
+            refreshNav(); // demo fired: ungrey Next now that no tap is pending
           } else {
             ring.hidden = true; // the target is about to change/disappear; hide it now
             clearHole();
@@ -394,13 +457,35 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       }
     }
 
+    // Gate step: arm its signal. When the app reports the required action (the user
+    // rotated the brain / moved the slider / scrolled the panel / closed the modal)
+    // the step stops "awaiting" and Next ungreys, or auto-advances when gateAdvances.
+    // step.gate(signal) sets up its own listeners and returns a teardown (run on leave
+    // by clearWait). `fired` dedupes; the index guard ignores a late signal after a
+    // manual Back/Next moved on.
+    if (step.gate) {
+      let fired = false;
+      const signal = () => {
+        if (fired || !active || index !== i) return;
+        fired = true;
+        gateFired = true;
+        if (step.gateAdvances) go(i + 1);
+        else refreshNav();
+      };
+      try {
+        gateCleanup = step.gate(signal) || null;
+      } catch (e) {
+        console.warn("tour step gate() failed", e);
+      }
+    }
+
     // Smooth-scroll a scrollTo step's target into view (deferred to its own task;
     // see scrollStepIntoView for why inline would jump). onScroll keeps the ring
     // tracking the row as it slides.
     scrollStepIntoView(step);
 
-    // Set the "click to continue" cue now that waitEl (if any) is attached.
-    refreshCue();
+    // Reflect the Next button state now that waitEl / the gate (if any) are attached.
+    refreshNav();
 
     // Let the scene set-up (before()) and the new bubble text settle, then
     // measure + position. A scrolled-into-view row or a just-opened list can
@@ -488,7 +573,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     if (e.key === "Escape") {
       stop("skipped");
     } else if (e.key === "ArrowRight" || e.key === "Enter") {
-      if (!awaitingTap()) go(index + 1); // when a tap is required, keys can't skip it
+      if (!awaiting()) go(index + 1); // when an action is required, keys can't skip it
     } else if (e.key === "ArrowLeft") {
       go(index - 1);
     } else {
@@ -527,7 +612,10 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       root.hidden = true;
       root.setAttribute("aria-hidden", "true");
     }
-    markSeen(); // a finished tour (done OR skipped) is not re-shown automatically
+    // A finished tour (completed) OR one the user explicitly dismissed (Skip / Esc,
+    // reason "skipped") is not re-shown automatically. An interrupted visit (reload /
+    // tab-close mid-tour) never reaches stop(), so it re-appears next time.
+    if (reason === "completed" || reason === "skipped") markSeen();
     try {
       onEnd && onEnd(reason || "completed");
     } catch (e) {
