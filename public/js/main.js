@@ -6119,7 +6119,8 @@ async function main() {
     // 3. Separate: sweep the slider off -> max -> middle (replays on Back->Next); Next
     //    ungreys once the user grabs the slider themselves.
     { title: t("tour.separate.title"), body: t("tour.separate.body"),
-      target: "#explode", dim: false, gate: tourGateSlider, clickThrough: "#explode",
+      target: "#explode", dim: false, spotlightOnly: true, gate: tourGateSlider,
+      clickThrough: "#explode",
       before: () => { tourReset(); tourEnsurePanel(); autoSpread.playSequence([0, 1, 0, 0.5]); } },
     // 4. Sourcing: tap the Sources button (opens the popup, auto-advances).
     { title: t("tour.sourcesOpen.title"), body: t("tour.sourcesOpen.body"),
