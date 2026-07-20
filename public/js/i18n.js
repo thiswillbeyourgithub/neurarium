@@ -352,7 +352,10 @@
         "blockers, enzyme inhibitors, vesicle blockers, presynaptic autoreceptors) send " +
         "beads streaming along the ascending pathways of the neurotransmitter systems " +
         "they raise or lower. Density and speed are normalized per drug, so what you read " +
-        "is the <em>relative</em> activity across systems, not an absolute dose.",
+        "is the <em>relative</em> activity across systems, not an absolute dose. " +
+        "<strong>The drug animations are by far the least scientific part of neurarium " +
+        "and are still very much being worked out</strong>: treat them as an " +
+        "evolving illustration, not settled fact.",
       "about.dataSummary": "The data is yours to reuse",
       "about.dataIntro":
         "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +
@@ -752,7 +755,11 @@
         "autorécepteurs présynaptiques) envoient des billes le long des voies ascendantes " +
         "des systèmes de neurotransmetteurs qu’il augmente ou diminue. La densité et la " +
         "vitesse sont normalisées par médicament : ce que vous lisez est l’activité " +
-        "<em>relative</em> entre systèmes, pas une dose absolue.",
+        "<em>relative</em> entre systèmes, pas une dose absolue. " +
+        "<strong>Les animations de médicaments sont de loin l’aspect le moins " +
+        "scientifique de neurarium et sont encore très largement en cours " +
+        "d’élaboration</strong> : voyez-les comme une illustration évolutive, pas " +
+        "comme un fait établi.",
       "about.dataSummary": "Les données sont libres de réutilisation",
       "about.dataIntro":
         "L’ensemble des données est du simple JSONL / JSON, séparé du rendu et libre de " +
