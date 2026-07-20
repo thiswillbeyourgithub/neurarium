@@ -3020,6 +3020,10 @@ function createInfoPanel(data, sourcingModal) {
           "info.fdaTitle");
       }
 
+      // The reference row itself (the Wikipedia link + the external-database
+      // lookups) is its own tour anchor, so a step can point at "links to reputable
+      // sources to read more" distinctly from the description that sits above it.
+      if (wiki) wiki.dataset.tourSec = "links";
       // Group the description + Wikipedia link (+ lookups) under one anchor so the
       // guided tour can spotlight the "what it is" section; the live lead lands
       // inside it too (inserted above the link). No-op when there is no wiki wrap.
