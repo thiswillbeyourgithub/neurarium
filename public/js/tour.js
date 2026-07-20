@@ -104,6 +104,8 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let gateCleanup = null; // the current gate's teardown (removes its listeners)
   let veilEls = []; // pooled translucent "veil" divs (partial dim over UI)
   let shownOnce = false; // false until the first step paints (snap it, don't fly in)
+  let navGuardUntil = 0; // performance.now() until which a reflow-scroll after a step
+  // change must NOT snap (so the step-to-step move glides); see go() + onScroll()
   let scrolling = false; // true while a scrollTo row is easing into view (see onScroll)
   let revealTimer = null; // the setTimeout that ends a step's opening beat + fades in the overlay
 
@@ -479,6 +481,10 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     // later step glides from the previous one (smooth step-to-step transitions).
     setAnim(shownOnce);
     shownOnce = true;
+    // A step change often triggers a reflow-scroll (before() opens/collapses a
+    // section, a modal closes). Guard the next moment so onScroll doesn't flip the
+    // ring/bubble to no-anim and snap them: the step-to-step move must glide.
+    navGuardUntil = performance.now() + 320;
     // Hold the dim + highlight back for a beat (pre-reveal keeps ring/dim/veil at
     // opacity 0), then fade them in: the scene before() set up reads first, and the
     // overlay lands smoothly rather than snapping on. The bubble text is not held.
@@ -636,6 +642,14 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let scrollTimer = null;
   function onScroll() {
     if (index < 0) return;
+    // Just after a step change, a reflow-scroll must not snap: keep the glide on and
+    // re-place (the step-to-step move eases in). scrollTo steps are exempt so their
+    // programmatic smooth-scroll still snap-tracks its row 1:1.
+    const step = steps[index];
+    if (step && !step.scrollTo && performance.now() < navGuardUntil) {
+      layout();
+      return;
+    }
     scrolling = true; // freeze the bubble (layout skips it); the ring still tracks 1:1
     setAnim(false);
     layout();
