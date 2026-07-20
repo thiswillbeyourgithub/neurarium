@@ -58,6 +58,7 @@
       "panel.autorotate": "Auto-rotate",
       "panel.seeInside": "See inside",
       "panel.animations": "Animations",
+      "panel.speed": "Animation speed",
       "panel.arrowColors": "Arrow colours",
       "panel.colorNt": "Neurotransmitter",
       "panel.colorPotential": "Potential",
@@ -155,7 +156,7 @@
         "One last kind of node: the pathways between regions. Click the highlighted <b>Projections</b>.",
       "tour.projectionTap.title": "A whole system",
       "tour.projectionTap.body":
-        "Click the highlighted <b>Dopamine</b> system. It pins every dopaminergic pathway at once and streams the signal along them.",
+        "Click the highlighted <b>Dopamine</b> system. It pins every dopaminergic pathway at once, from the midbrain out across the brain.",
       "tour.projectionLook.title": "Read about it",
       "tour.projectionLook.body":
         "Its <b>member pathways</b> and a description. <b>Scroll the panel</b> down to continue.",
@@ -447,6 +448,7 @@
       "panel.autorotate": "Rotation auto",
       "panel.seeInside": "Voir l'intérieur",
       "panel.animations": "Animations",
+      "panel.speed": "Vitesse d'animation",
       "panel.arrowColors": "Couleur des flèches",
       "panel.colorNt": "Neurotransmetteur",
       "panel.colorPotential": "Potentiel",
@@ -544,7 +546,7 @@
         "Un dernier type de nœud : les voies entre régions. Cliquez sur <b>Projections</b> en surbrillance.",
       "tour.projectionTap.title": "Un système entier",
       "tour.projectionTap.body":
-        "Cliquez sur le système <b>dopamine</b> en surbrillance. Il épingle d'un coup toutes les voies dopaminergiques et y fait circuler le signal.",
+        "Cliquez sur le système <b>dopamine</b> en surbrillance. Il épingle d'un coup toutes les voies dopaminergiques, du mésencéphale à travers le cerveau.",
       "tour.projectionLook.title": "En savoir plus",
       "tour.projectionLook.body":
         "Ses <b>voies membres</b> et une description. <b>Faites défiler le panneau</b> vers le bas pour continuer.",

@@ -234,13 +234,22 @@ export function createCircuitAnimation({ scene }) {
       return playing.every((a) => arrowSet.has(a));
     },
 
+    /** Whether a traveling pulse is currently running (mirrors drugAnim/receptorMarkers
+     *  `active`), so the viewer can show the speed slider only while something animates. */
+    get active() {
+      return !!playing;
+    },
+
     /** Advance the beads + node flashes. Call once per frame in the render loop.
      *  Returns true while playing, so the on-demand render loop keeps drawing. */
     tick() {
       if (!playing) return false;
       const now = performance.now();
       if (lastTime === null) lastTime = now;
-      const dt = now - lastTime;
+      // Scale the wall-clock delta by the user's speed multiplier: everything downstream
+      // (bead phase, wash aging, the continuous stream) is driven by dt, so this one
+      // multiply re-paces the whole animation with no phase jump on a live change.
+      const dt = (now - lastTime) * animSettings.speed;
       lastTime = now;
       elapsed = (elapsed + dt) % (numSteps * STEP_MS);
 

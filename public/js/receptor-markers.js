@@ -218,6 +218,11 @@ export function createReceptorMarkers({ scene }) {
   // One Points cloud per lit structure, parented to that structure's mesh.
   let clouds = []; // { points, material, meshes:Set } -- meshes tracked for matches()
   let litMeshes = new Set(); // the structure meshes currently lit (for matches())
+  // Speed-scaled pulse clock (ms). Reads this accumulated, speed-multiplied time rather
+  // than raw performance.now() so the Settings speed slider re-paces the twinkle without
+  // a phase jump; reset to null when idle/paused so a resume starts a fresh delta.
+  let clock = 0;
+  let lastNow = null;
 
   function clear() {
     for (const c of clouds) {
@@ -277,14 +282,20 @@ export function createReceptorMarkers({ scene }) {
      *  Returns true while a cloud is shown, so the on-demand render loop keeps
      *  drawing the pulse. */
     tick() {
-      if (clouds.length === 0) return false;
+      if (clouds.length === 0) { lastNow = null; return false; }
       // Animations off: hold the dots at full brightness (still clearly marking the
       // focused regions) and report "not animating" so the on-demand loop idles.
       if (!animSettings.enabled) {
         for (const c of clouds) c.material.opacity = PULSE_MAX;
+        lastNow = null;
         return false;
       }
-      const phase = (performance.now() % PULSE_PERIOD_MS) / PULSE_PERIOD_MS;
+      // Advance the speed-scaled clock (see the `clock`/`lastNow` declaration).
+      const now = performance.now();
+      if (lastNow === null) lastNow = now;
+      clock += (now - lastNow) * animSettings.speed;
+      lastNow = now;
+      const phase = (clock % PULSE_PERIOD_MS) / PULSE_PERIOD_MS;
       const k = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2); // 0..1..0
       const opacity = PULSE_MIN + (PULSE_MAX - PULSE_MIN) * k;
       for (const c of clouds) c.material.opacity = opacity;

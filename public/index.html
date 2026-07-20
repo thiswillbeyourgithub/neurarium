@@ -2088,6 +2088,17 @@
                 </div>
               </div>
 
+              <!-- "Animation speed": a speed multiplier for the decorative animations,
+                   revealed only while one is actually playing (js/main.js toggles this
+                   row's [hidden] from the focus / animation watchers). The input is a
+                   plain linear 0..1; js/main.js maps it LOGARITHMICALLY to 0.25x..4x with
+                   the midpoint (0.5) = 1x, so the centre reads as the normal speed.
+                   Persisted through animSettings.setSpeed. -->
+              <div class="row" id="anim-speed-row" hidden>
+                <label for="anim-speed" data-i18n="panel.speed"></label>
+                <input type="range" id="anim-speed" min="0" max="1" step="0.01" value="0.5" />
+              </div>
+
               <!-- The four global toggles as a 2x2 grid (.toggle-grid): two
                    columns are shorter than a four-row stack, tidier on a phone. -->
               <div class="toggle-grid">

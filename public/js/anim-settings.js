@@ -1,5 +1,5 @@
 // Single source of truth for the decorative-animation settings, read by every
-// animated module so they all agree on one state. Two independent knobs:
+// animated module so they all agree on one state. Three independent knobs:
 //
 //   - enabled: the user's "Animations" toggle (a Controls checkbox). When off, the
 //     eye-candy motion stops (the assemble intro is skipped, the receptor/drug gem
@@ -18,11 +18,33 @@
 //     NOT persisted: it is a live measurement of this session's hardware, re-learned
 //     each load (a resize / GPU-state change should be free to re-raise it).
 //
+//   - speed: the user's animation-speed multiplier (a Settings slider that surfaces
+//     only while an animation is showing). 1 = the reference (baked) pace; the slider's
+//     midpoint maps to 1 and its ends to [0.25x, 4x]. Every animated module multiplies
+//     its per-frame time delta by this, so a live change re-paces without a phase jump.
+//     Persisted to localStorage like `enabled` (an explicit preference, not a measurement).
+//
 // No dependency: a tiny observable holding two numbers. Modules import the shared
 // `animSettings` singleton; nothing here touches three.js or the DOM beyond
 // matchMedia + localStorage for the default/persistence.
 
 const STORE_KEY = "neurarium.animations";
+const SPEED_KEY = "neurarium.animspeed";
+
+/** Speed multiplier bounds. 1 = the reference (baked) pace; the Settings slider maps its
+ *  midpoint to 1 and its ends to these, so "50%" reads as the normal speed. */
+const SPEED_MIN = 0.25;
+const SPEED_MAX = 4;
+
+function loadSpeed() {
+  try {
+    const v = parseFloat(localStorage.getItem(SPEED_KEY));
+    if (Number.isFinite(v)) return Math.max(SPEED_MIN, Math.min(SPEED_MAX, v));
+  } catch (_) {
+    /* localStorage unavailable: fall back to the reference speed */
+  }
+  return 1;
+}
 
 /** The heuristic default when the user has made no explicit choice: on for a fine
  *  pointer (desktop/laptop), off for a coarse pointer (phone/tablet) or when the OS
@@ -48,6 +70,7 @@ function loadEnabled() {
 
 let enabled = loadEnabled();
 let quality = 1;
+let speed = loadSpeed();
 const subs = new Set();
 
 function notify() {
@@ -84,6 +107,26 @@ export const animSettings = {
    *  side effects (devicePixelRatio + repaint), so a change here notifies no one. */
   setQuality(q) {
     quality = Math.max(0, Math.min(1, q));
+  },
+
+  /** The user's animation-speed multiplier (1 = the reference pace). Read live each
+   *  frame by every animated module, so a change takes effect immediately. */
+  get speed() {
+    return speed;
+  },
+  /** Set the speed multiplier (clamped to [SPEED_MIN, SPEED_MAX]) and persist it, like
+   *  `enabled`. Silent: the modules read `speed` live, so no subscriber needs waking. */
+  setSpeed(v) {
+    speed = Math.max(SPEED_MIN, Math.min(SPEED_MAX, Number(v) || 1));
+    try {
+      localStorage.setItem(SPEED_KEY, String(speed));
+    } catch (_) {
+      /* ignore: persistence is best-effort */
+    }
+  },
+  /** The speed slider's bounds, so the UI's log mapping stays in sync with this module. */
+  get speedRange() {
+    return { min: SPEED_MIN, max: SPEED_MAX };
   },
 
   /** Subscribe to `enabled` changes; returns an unsubscribe fn. */

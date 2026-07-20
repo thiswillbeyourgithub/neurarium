@@ -49,6 +49,12 @@ export function createDrugAnimation(_deps = {}) {
   // phase }. `litMeshes` is the union of structure meshes lit (for matches()).
   let clouds = [];
   let litMeshes = new Set();
+  // Speed-scaled animation clock (ms). The pulse phase reads this instead of the raw
+  // performance.now() so the Settings speed slider re-paces it, and accumulating a
+  // scaled delta (rather than scaling absolute time) means a live speed change never
+  // jumps the phase. Reset to null whenever idle/paused so a resume starts a fresh delta.
+  let clock = 0;
+  let lastNow = null;
 
   function clear() {
     for (const c of clouds) {
@@ -148,7 +154,7 @@ export function createDrugAnimation(_deps = {}) {
      *  Returns true while a cloud is shown, so the on-demand render loop keeps
      *  drawing the pulse. */
     tick() {
-      if (clouds.length === 0) return false;
+      if (clouds.length === 0) { lastNow = null; return false; }
       // Animations off: hold every cloud at its effect's peak (colour still reads
       // the boost/block/modulate) at the base dot size, no wash, and report "not
       // animating" so the on-demand loop idles on a static frame.
@@ -158,12 +164,17 @@ export function createDrugAnimation(_deps = {}) {
           c.material.size = c.baseSize;
           c.wash?.setWave(0, 0);
         }
+        lastNow = null;
         return false;
       }
+      // Advance the speed-scaled clock (see the `clock`/`lastNow` declaration).
       const now = performance.now();
+      if (lastNow === null) lastNow = now;
+      clock += (now - lastNow) * animSettings.speed;
+      lastNow = now;
       for (const c of clouds) {
         const p = c.pulse;
-        const phase = ((now / p.period) + c.phase) % 1;
+        const phase = ((clock / p.period) + c.phase) % 1;
         const k = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2); // 0..1..0
         c.material.opacity = (p.opMin + (p.opMax - p.opMin) * k) * (c.opAff ?? 1);
         c.material.size = c.baseSize * (p.sizeMin + (p.sizeMax - p.sizeMin) * k);

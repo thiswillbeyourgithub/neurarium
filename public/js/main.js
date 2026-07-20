@@ -6503,6 +6503,34 @@ async function main() {
     window.addEventListener(ev, invalidate, { capture: true, passive: true });
   }
 
+  // Animation-speed slider (Controls > Settings): a persisted multiplier that every
+  // animated module applies (js/anim-settings.js `speed`). Revealed only while an
+  // animation is actually on screen (a focused drug / receptor / circuit); its
+  // visibility is recomputed each rendered frame below, so it appears the instant one
+  // starts and hides the instant the focus clears, with no per-controller bookkeeping.
+  // The input is a linear 0..1; map it GEOMETRICALLY onto the [min,max] speed range so
+  // the midpoint (0.5) reads as 1x (min*max == 1 by construction, see anim-settings.js).
+  const speedRow = document.getElementById("anim-speed-row");
+  const speedSlider = document.getElementById("anim-speed");
+  const { min: SPD_MIN, max: SPD_MAX } = animSettings.speedRange;
+  const sliderToSpeed = (v) => SPD_MIN * Math.pow(SPD_MAX / SPD_MIN, v);
+  const speedToSlider = (s) => Math.log(s / SPD_MIN) / Math.log(SPD_MAX / SPD_MIN);
+  if (speedSlider) {
+    speedSlider.value = String(speedToSlider(animSettings.speed));
+    speedSlider.addEventListener("input", () => {
+      animSettings.setSpeed(sliderToSpeed(parseFloat(speedSlider.value)));
+      invalidate(); // repaint so the new pace takes visible effect at once
+    });
+  }
+  const animationShown = () => animSettings.enabled
+    && (drugAnim.active || receptorMarkers.active || circuitAnim.active);
+  const updateSpeedRow = () => {
+    if (!speedRow) return;
+    const show = animationShown();
+    if (speedRow.hidden === show) speedRow.hidden = !show; // write only on a change
+  };
+  updateSpeedRow(); // initial: hidden (nothing focused yet)
+
   renderer.setAnimationLoop(() => {
     // Advance the intro + any focus/recenter tween before controls.update()
     // reads the target + camera position for this frame. Each tick() returns
@@ -6526,6 +6554,10 @@ async function main() {
     if (adaptive.tick(rendered && active)) needsRender = true;
     if (!needsRender) return; // idle: skip the render + label passes this frame
     needsRender = false;
+    // Reveal/hide the speed slider from the live animation state. Cheap + guarded to a
+    // no-op when unchanged; a stop always triggers one final render here, so it can't
+    // stay stuck visible after the focus clears.
+    updateSpeedRow();
     // After controls.update() so the cull reads this frame's camera + target.
     cull.tick();
     renderer.render(scene, camera);
