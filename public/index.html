@@ -359,6 +359,9 @@
       .collapse-header[aria-expanded="true"] .chevron { transform: rotate(90deg); }
       /* Version tag next to the panel title (set from version.js by js/main.js). */
       .collapse-header .version { font-weight: 400; font-size: 11px; color: var(--muted); }
+      /* Author byline at the top of the settings pane, under the title. */
+      .panel-byline { margin: -2px 0 10px; font-size: 12px; color: var(--muted); }
+      .panel-byline a { color: var(--accent-light); text-decoration: underline; }
       .row { margin: 12px 0; }
       .row label { display: block; margin-bottom: 6px; color: var(--muted); }
       .row.inline label {
@@ -1770,6 +1773,15 @@
         color: var(--muted);
       }
       .loading-cta a { color: var(--accent-light); text-decoration: underline; }
+      /* Author byline pinned to the bottom-right of the loading overlay. */
+      .loading-byline {
+        position: absolute;
+        right: 16px;
+        bottom: 12px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .loading-byline a { color: var(--accent-light); text-decoration: underline; }
       /* Revealed once loading finishes (js/loading.js waitForStart): the deliberate
          "enter the app" action, so the tagline + invite can be read first. */
       .loading-start {
@@ -1906,6 +1918,9 @@
         <button id="loading-start" class="loading-start" type="button" hidden data-i18n="loading.enter">Start exploring</button>
         <div class="loading-cta" data-i18n-html="loading.cta">Have an idea for a feature? I'd happily build it, <a href="https://olicorne.org/en/contact" target="_blank" rel="noopener noreferrer">get in touch</a>.</div>
       </div>
+      <!-- Author byline, docked bottom-right of the overlay (a direct child of
+           #loading, not the centered card). Locale-specific href via common.byline. -->
+      <div class="loading-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></div>
     </div>
 
     <!-- Top banner stack: the optional WIP banner (js/dev-banner.js, hidden
@@ -1946,6 +1961,9 @@
         <!-- Settings pane: the normal controls. Hidden while the Details tab is
              active. -->
         <div id="settings-pane">
+        <!-- Author byline under the "neurarium" title. Locale-specific href via
+             common.byline (shared with the loading overlay). -->
+        <div class="panel-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></div>
         <!-- Language switch (en / fr). Always visible (the sliders now live in
              their own collapsible Controls section, so the panel top no longer
              hides when a section opens). Buttons carry data-lang; js/i18n.js

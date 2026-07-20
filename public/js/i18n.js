@@ -319,6 +319,9 @@
         '<a href="https://olicorne.org/en/contact" target="_blank" ' +
         'rel="noopener noreferrer">get in touch</a>.',
       "loading.enter": "Start exploring",
+      "common.byline":
+        'by <a href="https://olicorne.org/en" target="_blank" ' +
+        'rel="noopener noreferrer">Olivier Cornelis</a>',
 
       "about.p1":
         "neurarium is a work-in-progress, interactive 3D map of the brain. It " +
@@ -711,6 +714,9 @@
         '<a href="https://olicorne.org/fr/contact" target="_blank" ' +
         'rel="noopener noreferrer">prenez contact</a>.',
       "loading.enter": "Commencer l'exploration",
+      "common.byline":
+        'par <a href="https://olicorne.org/fr" target="_blank" ' +
+        'rel="noopener noreferrer">Olivier Cornelis</a>',
 
       "about.p1":
         "neurarium est une carte 3D interactive du cerveau, en cours de " +
