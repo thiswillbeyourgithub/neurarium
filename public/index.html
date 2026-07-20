@@ -649,12 +649,15 @@
         padding: 0;
         font-size: 18px;
         line-height: 1;
-        color: var(--muted);
-        background: none;
+        /* Clearly visible (a muted, background-less × read as "transparent / hidden",
+           and is easy to miss when the tour rings it on the spotlightOnly sources step). */
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
         border: 0;
+        border-radius: 6px;
         cursor: pointer;
       }
-      .modal .info-close:hover { color: var(--text); }
+      .modal .info-close:hover { color: var(--accent-light); background: rgba(255, 255, 255, 0.12); }
       /* key -> action rows: a two-column grid (the key(s) | the action). */
       #shortcuts-list {
         margin: 0;

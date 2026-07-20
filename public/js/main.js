@@ -6164,7 +6164,7 @@ async function main() {
     //    keeps its controls (incl. the X) live, and closing it advances (gateAdvances).
     { title: t("tour.sourcesDetail.title"), body: t("tour.sourcesDetail.body"),
       target: "#sourcing-close", dim: false, spotlightOnly: true,
-      clickThrough: "#sourcing-modal",
+      clickThrough: "#sourcing-modal", bubbleDock: "bottom",
       gate: tourGateModalClosed("sourcing-modal"), gateAdvances: true,
       before: () => sourcingModal.open() },
     // 6. Browse: highlight the four sections as a group, each teased with a rounded-

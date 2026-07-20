@@ -365,6 +365,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   // narrow portrait screen, where the old "right-then-clamp" logic overlapped.
   function placeBubbleBy(box) {
     bubble.style.maxWidth = "";
+    const step = index >= 0 ? steps[index] : null;
     const bw = bubble.offsetWidth;
     const bh = bubble.offsetHeight;
     const vw = window.innerWidth;
@@ -374,7 +375,14 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     const cx = box.left + (box.right - box.left) / 2;
     const cy = box.top + (box.bottom - box.top) / 2;
     let left, top;
-    if (vw - box.right >= needW) {
+    if (step && step.bubbleDock === "bottom" && vh >= vw) {
+      // Portrait override: dock the bubble low on the screen (over the least
+      // informative area, e.g. a sources popup's mostly-empty progress bars) so it
+      // covers neither the target nor the upper text. Landscape keeps the side
+      // placement below (there is room beside the target, no need to cover anything).
+      top = vh - bh - MARGIN;
+      left = (vw - bw) / 2;
+    } else if (vw - box.right >= needW) {
       left = box.right + GAP; // right of the target
       top = cy - bh / 2;
     } else if (box.left >= needW) {
