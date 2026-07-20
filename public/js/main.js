@@ -6018,6 +6018,22 @@ async function main() {
   // Clear any focus / isolate / tab / open sourcing modal a previous step left, so
   // each demo starts from a clean scene (idempotent: steps re-run on Back too).
   const tourReset = () => { tabs.closeAll(); selection.clear(); sourcingModal.close(); };
+  // A FULL reset for the launch of the tour (and its end): everything tourReset does,
+  // plus un-spread the brain, recenter the camera, collapse the browse sections, fold
+  // the search box, and re-expand the panel. Wired to step 1's before(), so every entry
+  // point (auto-start, ?tour=1, the About replay) runs it via go(0) at launch: a
+  // derailed UI (a spread brain, an open list, an active animation, a stray search)
+  // can never carry into the tour.
+  const tourFullReset = () => {
+    tourReset();
+    const sl = tourEl("explode");
+    if (sl) { sl.value = "0"; applyExplode(meshes, 0, arrows); }
+    const sb = tourEl("search");
+    if (sb && !sb.hidden) tourEl("search-toggle")?.click();
+    tourExpandPanel();
+    tourCollapseSections();
+    focus.recenter();
+  };
 
   // The nodes the guided story walks through (resolved once; a missing id just makes
   // its step a caption). 5-HT2A -> Olanzapine ties the receptor demo to the drug demo.
@@ -6112,9 +6128,9 @@ async function main() {
   // "150+" teasers are always truthful (an undercount), never overstating.
   const tourCount = (n) => { const step = n >= 100 ? 50 : 10; return Math.floor(n / step) * step; };
   const tourSteps = [
-    // 1. Welcome (caption).
+    // 1. Welcome (caption). Fully reset the UI here so any entry point starts clean.
     { title: t("tour.welcome.title"), body: t("tour.welcome.body"),
-      dim: true, placement: "center", before: tourReset },
+      dim: true, placement: "center", before: tourFullReset },
     // 2. Rotate: dim just the panel (veil), keep the brain draggable; Next ungreys
     //    once the user actually drags it.
     { title: t("tour.rotate.title"), body: t("tour.rotate.body"),
@@ -6245,12 +6261,7 @@ async function main() {
     },
     seenKey: "neurarium:tourSeen",
     // Restore a clean default view once the tour ends (completed or skipped).
-    onEnd: () => {
-      tourReset();
-      const sl = tourEl("explode");
-      if (sl) { sl.value = "0"; applyExplode(meshes, 0, arrows); }
-      focus.recenter();
-    },
+    onEnd: tourFullReset,
   });
   // `?tour=1` forces the tour on every load, bypassing the once-per-visitor
   // "seen" gate and the eligibility checks (handy for testing / a shared link
