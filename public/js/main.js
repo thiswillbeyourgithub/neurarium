@@ -4293,11 +4293,15 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // (language switch + reset/search row) stays visible throughout; the open section grows to
   // fill the tall sidebar via the :has(...) CSS in index.html, so no JS layout
   // class is needed here anymore.
+  // Order mirrors the on-screen section order (Drugs / Receptors / Structures /
+  // Projections, set by the markup in index.html). This array only drives the
+  // single-open accordion + keyboard nav, so it is order-agnostic, but keeping it
+  // aligned avoids surprises when reading the two together.
   const sections = [
+    { toggle: drugsToggle, body: drugsBody },
+    { toggle: receptorsToggle, body: receptorsBody },
     { toggle: structuresToggle, body: structuresBody },
     { toggle: projectionsToggle, body: projectionsBody },
-    { toggle: receptorsToggle, body: receptorsBody },
-    { toggle: drugsToggle, body: drugsBody },
   ];
   for (const s of sections) {
     if (!s.toggle || !s.body) continue;
@@ -4914,8 +4918,8 @@ function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal,
   const collapseOpen = () => {
     const search = document.getElementById("search");
     if (search && !search.hidden) click("search-toggle");
-    for (const id of ["structures-toggle", "projections-toggle", "receptors-toggle",
-                      "drugs-toggle"]) {
+    for (const id of ["drugs-toggle", "receptors-toggle", "structures-toggle",
+                      "projections-toggle"]) {
       const tg = document.getElementById(id);
       if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
     }
@@ -4947,10 +4951,10 @@ function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal,
   // the arrow/Enter keys keep their default behaviour elsewhere.
   const sectionNav = (() => {
     const BODIES = [
+      ["drugs-toggle", "drugs-body"],
+      ["receptors-toggle", "receptors-body"],
       ["structures-toggle", "structures-body"],
       ["projections-toggle", "projections-body"],
-      ["receptors-toggle", "receptors-body"],
-      ["drugs-toggle", "drugs-body"],
     ];
     let activeEl = null;
     let lastBody = null;
