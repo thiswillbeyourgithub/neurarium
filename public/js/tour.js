@@ -451,9 +451,14 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   }
 
   // Reflect the current state on the Next button: disabled while an action is still
-  // required (see awaiting()), and labelled "Done" on the last step.
+  // required (see awaiting()), and labelled "Done" on the last step. An interactive
+  // tap step hides Next entirely: the highlighted control IS the forward action, so a
+  // greyed "Next" beside it is just noise. A stayAfterTap step keeps Next (its tap
+  // fires a demo, then Next proceeds); gate and caption steps keep it too.
   function refreshNav() {
     if (index < 0) return;
+    const step = steps[index];
+    btnNext.hidden = !!(step && step.interactive && !step.stayAfterTap);
     btnNext.disabled = awaiting();
     btnNext.textContent =
       index === steps.length - 1 ? labels.done : labels.next;
