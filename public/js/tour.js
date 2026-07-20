@@ -78,6 +78,7 @@ const ADVANCE_MS = 360; // let the tapped action (open a tab, spread) settle fir
 const REVEAL_MS = 1000; // hold the dim + highlight back this long, then fade it in,
 // so the scene the step just set up reads for a beat before the overlay lands on it
 const SCROLL_TOP_PAD = 12; // px above a scrollAlign:"top" target once scrolled to the top
+const ELASTIC_PX = 10; // px the ring rubber-bands when a panel step's scroll is clamped
 
 /**
  * @param {{
@@ -636,16 +637,65 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     setTimeout(layout, 380);
   }
 
+  // Elastic scroll-clamp: rubber-band the ring by a few px, then spring it back, as
+  // tactile feedback that a panel step's scroll just hit a boundary. Uses transform
+  // (layout() only writes left/top/width/height), so it composes with the ring flash.
+  let bounceTimer = null;
+  function ringBounce(dir) {
+    if (!ring || ring.hidden) return;
+    const y = dir > 0 ? ELASTIC_PX : -ELASTIC_PX;
+    ring.style.transition = "transform 0.10s ease-out";
+    ring.style.transform = `translateY(${y}px)`;
+    if (bounceTimer) clearTimeout(bounceTimer);
+    bounceTimer = setTimeout(() => {
+      ring.style.transition = "transform 0.26s cubic-bezier(0.22, 1, 0.36, 1)";
+      ring.style.transform = "translateY(0)";
+      bounceTimer = setTimeout(() => { ring.style.transition = ""; ring.style.transform = ""; }, 280);
+    }, 110);
+  }
+
+  // On a panel step (dim:false, ring inside a scroll container), keep the highlighted
+  // target from being scrolled out of view: if the scroll passes the point where the
+  // target's top/bottom edge reaches the container edge, snap it back to that boundary
+  // and bounce, so the ring can't drift off over the 3D scene (a short target locks in
+  // place; a target taller than the container can be scrolled through but not past).
+  // Steps that WANT free scrolling (a scroll gate, see tourGateScroll) opt out with
+  // scrollFree:true. Returns true when it clamped.
+  function clampTargetScroll(step) {
+    if (!step || step.dim !== false || step.scrollFree) return false;
+    const el = primaryTarget(step);
+    if (!el) return false;
+    const c = scrollParent(el);
+    if (!c) return false;
+    const cr = c.getBoundingClientRect();
+    const er = el.getBoundingClientRect();
+    const tTop = c.scrollTop + (er.top - cr.top);      // target top within scroll content
+    const a = tTop;                                    // scrollTop keeping the target top visible
+    const b = tTop + er.height - c.clientHeight;        // ... keeping its bottom visible
+    const lo = Math.max(0, Math.min(a, b));
+    const hi = Math.min(c.scrollHeight - c.clientHeight, Math.max(a, b));
+    const st = c.scrollTop;
+    if (st >= lo - 0.5 && st <= hi + 0.5) return false; // within bounds: allow the scroll
+    const clamped = Math.max(lo, Math.min(hi, st));
+    const over = st - clamped;
+    c.scrollTop = clamped;                              // snap back inside bounds
+    ringBounce(over > 0 ? 1 : -1);
+    return true;
+  }
+
   // Follow the target while the page/panel scrolls (e.g. a row sliding into view,
   // or the user scrolling the list). Snap during the scroll so the ring tracks
   // tightly, then restore the smooth glide once it settles.
   let scrollTimer = null;
   function onScroll() {
     if (index < 0) return;
+    const step = steps[index];
+    // Elastic clamp first: on a locked panel step this snaps the scroll back and bounces
+    // the ring instead of letting the target (and the ring) leave the panel.
+    if (clampTargetScroll(step)) { layout(); return; }
     // Just after a step change, a reflow-scroll must not snap: keep the glide on and
     // re-place (the step-to-step move eases in). scrollTo steps are exempt so their
     // programmatic smooth-scroll still snap-tracks its row 1:1.
-    const step = steps[index];
     if (step && !step.scrollTo && performance.now() < navGuardUntil) {
       layout();
       return;

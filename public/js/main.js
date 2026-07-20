@@ -6184,7 +6184,7 @@ async function main() {
     //    frames the illustration AND its description together, and Next ungreys once
     //    the user scrolls the panel.
     { title: t("tour.circuitWiki.title"), body: t("tour.circuitWiki.body"),
-      target: tourCircuitIntro, dim: false, scrollTo: true, gate: tourGateScroll,
+      target: tourCircuitIntro, dim: false, scrollTo: true, scrollFree: true, gate: tourGateScroll,
       before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
     { title: t("tour.circuitStructures.title"), body: t("tour.circuitStructures.body"),
       target: '[data-tour-sec="structures"]', dim: false, scrollTo: true,
@@ -6227,7 +6227,7 @@ async function main() {
     //    brands, then what it acts on (its "Acts on" heading brought to the top rather
     //    than scrolling the tall list past it, see scrollAlign).
     { title: t("tour.drugLinks.title"), body: t("tour.drugLinks.body"),
-      target: '[data-tour-sec="links"]', dim: false, scrollTo: true, gate: tourGateScroll,
+      target: '[data-tour-sec="links"]', dim: false, scrollTo: true, scrollFree: true, gate: tourGateScroll,
       before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
     { title: t("tour.drugBrands.title"), body: t("tour.drugBrands.body"),
       target: '[data-tour-sec="brands"]', dim: false, scrollTo: true,
