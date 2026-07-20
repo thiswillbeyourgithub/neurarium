@@ -530,31 +530,56 @@ function createAutoSpread({ slider, apply }) {
   const DURATION_MS = 600;
   const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
   let running = false;
-  let startTime = null;
-  let from = 0;
-  let to = 0;
+  let frames = []; // remaining target keyframes to visit, in order
+  let segFrom = 0; // slider value at the start of the current segment
+  let segStart = null; // performance.now() when the current segment began
+  let segDur = DURATION_MS;
+  // Start a segment from wherever the slider is now (so back-to-back segments chain).
+  const beginSegment = () => { segFrom = parseFloat(slider.value); segStart = null; };
   return {
     /** Animate the spread up to `target` (0..1). No-op if already at/above it. */
     spreadTo(target) {
       const current = parseFloat(slider.value);
       if (current >= target - 1e-3) return; // already spread enough
-      from = current;
-      to = target;
-      startTime = null;
+      frames = [target];
+      segDur = DURATION_MS;
+      beginSegment();
+      running = true;
+    },
+    /**
+     * Play a scripted keyframe sweep from the current value through each target in
+     * `keyframes` in turn (e.g. [0, 1, 0.5] = down to off, out to max, settle at the
+     * middle), one segment each. Used by the guided tour's "Separate" demo; being
+     * re-callable, a step's before() replays the whole sweep on Back->Next. Setting
+     * slider.value here does NOT fire an "input" event, so it never trips the tour's
+     * user-move gate.
+     */
+    playSequence(keyframes, { segMs = DURATION_MS } = {}) {
+      if (!keyframes || !keyframes.length) return;
+      frames = keyframes.slice();
+      segDur = segMs;
+      beginSegment();
       running = true;
     },
     /** Stop the auto-spread (a manual slider grab wins). */
     cancel() {
       running = false;
+      frames = [];
     },
     tick() {
       if (!running) return false;
-      if (startTime === null) startTime = performance.now();
-      const t = Math.min(1, (performance.now() - startTime) / DURATION_MS);
-      const amount = from + (to - from) * ease(t);
+      if (!frames.length) { running = false; return false; }
+      if (segStart === null) segStart = performance.now();
+      const target = frames[0];
+      const t = Math.min(1, (performance.now() - segStart) / segDur);
+      const amount = segFrom + (target - segFrom) * ease(t);
       slider.value = String(amount);
       apply(amount);
-      if (t >= 1) running = false;
+      if (t >= 1) {
+        frames.shift();
+        if (frames.length) beginSegment(); // chain into the next keyframe
+        else running = false;
+      }
       return true;
     },
   };
