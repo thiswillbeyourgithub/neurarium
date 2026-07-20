@@ -2412,7 +2412,7 @@ function createInfoPanel(data, sourcingModal) {
   // so never inverted. `altName` names the subject for the alt text; the gallery is
   // built lazily on first expand so the extra images never load unless asked. No-op
   // when there is no hero, so a panel can call it unconditionally.
-  const appendWikiImages = (heroUrl, gallery, altName) => {
+  const appendWikiImages = (heroUrl, gallery, altName, tourSec = "") => {
     if (!heroUrl) return;
     const figure = (src) => {
       const fig = el("figure", "structure-image loading");
@@ -2431,7 +2431,9 @@ function createInfoPanel(data, sourcingModal) {
       fig.appendChild(img);
       return fig;
     };
-    body.appendChild(figure(heroUrl));
+    const hero = figure(heroUrl);
+    if (tourSec) hero.dataset.tourSec = tourSec; // guided-tour section anchor
+    body.appendChild(hero);
     const gal = gallery || [];
     if (!gal.length) return;
     const wrap = el("div", "structure-gallery");
@@ -2497,7 +2499,9 @@ function createInfoPanel(data, sourcingModal) {
       // measured Ki chip and the shared source pill all render identically here;
       // clicking a row opens that drug.
       for (const { drug, binding } of byCat.get(cat)) {
-        ul.appendChild(bindingRow(binding, drug, drug.displayName, () => onDrugPick(drug)));
+        const row = bindingRow(binding, drug, drug.displayName, () => onDrugPick(drug));
+        row.dataset.tourId = `ixdrug:${drug.id}`; // guided-tour hook: a drug row inside a target panel
+        ul.appendChild(row);
       }
       container.appendChild(ul);
     }
@@ -2510,6 +2514,7 @@ function createInfoPanel(data, sourcingModal) {
     const list = (data.drugsByTarget && data.drugsByTarget.get(targetId)) || [];
     if (!list.length) return;
     const wrap = el("div", "info-bindings info-interactors");
+    wrap.dataset.tourSec = "drugs"; // guided-tour section anchor
     wrap.appendChild(el(
       "h3", null, `${t("targets.interactingDrugs")} (${list.length})`));
     appendDrugsByCategory(list, wrap);
@@ -2629,7 +2634,7 @@ function createInfoPanel(data, sourcingModal) {
   // A titled "member pathways" list (the circuit + projection-group panels): one
   // pathwayRow per projection, each showing its full from -> to route (twins
   // collapsed via pathwayList).
-  const appendPathwayList = (titleText, projs) => {
+  const appendPathwayList = (titleText, projs, tourSec = "") => {
     if (!projs.length) return;
     const { ul, count } = pathwayList(projs, (proj) => {
       const glyph = proj.bidirectional ? "↔" : "→";
@@ -2639,6 +2644,7 @@ function createInfoPanel(data, sourcingModal) {
       };
     });
     const wrap = el("div", "info-connections");
+    if (tourSec) wrap.dataset.tourSec = tourSec; // guided-tour section anchor
     wrap.appendChild(el("h3", null, `${titleText} (${count})`));
     wrap.appendChild(ul);
     body.appendChild(wrap);
@@ -2798,6 +2804,7 @@ function createInfoPanel(data, sourcingModal) {
             ? sourcesTip(entry.sources) : undefined);
       };
       const facts = el("div", "info-facts");
+      facts.dataset.tourSec = "facts"; // guided-tour section anchor
       addFactRow(facts, t("receptor.neurotransmitter"), receptor.neurotransmitter,
         null, { pill: attrPill("family") });
       addFactRow(facts, t("receptor.type"), receptor.classLabel,
@@ -2810,6 +2817,7 @@ function createInfoPanel(data, sourcingModal) {
 
       // Where it is expressed.
       const where = el("div", "info-locations");
+      where.dataset.tourSec = "regions"; // guided-tour section anchor
       where.appendChild(el("h3", null, t("receptor.foundIn")));
       if (receptor.ubiquitous) {
         const p = el("p", "info-desc info-desc-pilled", t("receptor.ubiquitous"));
@@ -2967,7 +2975,7 @@ function createInfoPanel(data, sourcingModal) {
       // Description (the drug's Wikipedia lead, baked + live-refreshed) then the
       // Wikipedia link below it, via the shared appendReference. A "sourced"
       // description is the WP lead (CC BY-SA); an "llm" one a mechanism synthesis.
-      const { wiki } = appendReference({
+      const { paragraph, wiki } = appendReference({
         url: drug.wikipedia, description: drug.description,
         descriptionProvenance: drug.descriptionProvenance,
         descriptionExtra: drug.descriptionProvenance === "sourced"
@@ -3011,11 +3019,23 @@ function createInfoPanel(data, sourcingModal) {
           "info.fdaTitle");
       }
 
+      // Group the description + Wikipedia link (+ lookups) under one anchor so the
+      // guided tour can spotlight the "what it is" section; the live lead lands
+      // inside it too (inserted above the link). No-op when there is no wiki wrap.
+      if (wiki && wiki.parentNode) {
+        const introWrap = el("div", "info-intro");
+        introWrap.dataset.tourSec = "wiki";
+        wiki.parentNode.insertBefore(introWrap, paragraph || wiki);
+        if (paragraph) introWrap.appendChild(paragraph);
+        introWrap.appendChild(wiki);
+      }
+
       // Classification facts: the coarse class(es) and the NbN nomenclature line.
       // Both are clickable: each runs a search (class:"..." / nbn:"...") that filters
       // to the matching drugs, so you can pivot from one drug to its whole class. The
       // class list shows one clickable chip per category.
       const facts = el("div", "info-facts");
+      facts.dataset.tourSec = "facts"; // guided-tour section anchor
       // The class classification is its own node: pill it (its own grade, or the
       // verbatim quote when category_sources exist), so the claim "this drug is an
       // SSRI/..." carries its provenance beside the value like every other node.
@@ -3054,6 +3074,7 @@ function createInfoPanel(data, sourcingModal) {
       // mixed-grade list (once eu/fr are added) reads honestly.
       if (drug.brandsOrdered && drug.brandsOrdered.length) {
         const brandsEl = el("div", "info-bindings info-brands");
+        brandsEl.dataset.tourSec = "brands"; // guided-tour section anchor
         brandsEl.appendChild(el("h3", null, t("drug.brands")));
         const ul = el("ul");
         for (const b of drug.brandsOrdered) {
@@ -3072,6 +3093,7 @@ function createInfoPanel(data, sourcingModal) {
 
       // What it binds: one row per target, coloured by the action's net effect.
       const acts = el("div", "info-bindings");
+      acts.dataset.tourSec = "bindings"; // guided-tour section anchor
       acts.appendChild(el("h3", null, t("drug.actsOn")));
       if (!drug.bindings.length) {
         acts.appendChild(el("p", "info-desc", t("drug.noTargets")));
@@ -3186,7 +3208,7 @@ function createInfoPanel(data, sourcingModal) {
       // Wikipedia illustration (hero + lazy gallery), the same hot-linked treatment a
       // brain structure gets (see appendWikiImages); no-op when unillustrated.
       appendWikiImages(circuit.structureImage, circuit.structureImageGallery,
-        circuit.name);
+        circuit.name, "wiki");
 
       // Description (baked fallback) + the Wikipedia reference below it, then the
       // live-lead refresh (upgrades to the current WP lead when reachable), via the
@@ -3219,6 +3241,7 @@ function createInfoPanel(data, sourcingModal) {
       }
       if (bases.length) {
         const where = el("div", "info-locations");
+        where.dataset.tourSec = "structures"; // guided-tour section anchor
         where.appendChild(el("h3", null, t("circuit.structures")));
         where.appendChild(locationList(names, bases));
         body.appendChild(where);
@@ -3230,7 +3253,7 @@ function createInfoPanel(data, sourcingModal) {
       const idSet = new Set(circuit.structures);
       const members = data.projections.filter(
         (p) => idSet.has(p.from) && idSet.has(p.to));
-      appendPathwayList(t("circuit.pathways"), members);
+      appendPathwayList(t("circuit.pathways"), members, "pathways");
     },
 
     /**
@@ -3426,6 +3449,7 @@ function buildTargetLegend(data, onPick) {
     if (!list || !list.length) continue;
     const h = document.createElement("h2");
     h.textContent = key === "_other" ? t("targets.otherSystem") : (families[key] || key);
+    h.dataset.tourSystem = key; // guided-tour hook: spotlight a whole system's box
     container.appendChild(h);
     for (const tgt of list) {
       const row = addLegendItem(container, tgt.swatchColor, tgt.name);
