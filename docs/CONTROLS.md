@@ -11,11 +11,13 @@ the `#lang-switch` (EN/FR) + a keyboard-shortcuts / reset / search / legend / so
 `.toolbar-row`, then:
 
 - **Controls** (`#controls-settings`): the **Separate** + **Transparency** sliders, the
+  **animation-speed** slider (`#anim-speed-row`, hidden unless an animation is on screen), the
   **Auto-rotate** / **Show all names** / **Show projections** / **See inside** checkboxes, and the
   **arrow colour-mode** switch (`#color-mode`). Ships open; toggles independently of the accordion.
-- Four **single-open-accordion** sections (opening one closes the others): **Structures**
-  (`#structures`), **Projections** (`#projections`, "Projections & Circuits"), **Receptors &
-  targets** (`#receptors`), **Drugs** (`#drugs`, with `#drugs-filter`).
+- Four **single-open-accordion** sections (opening one closes the others), in on-screen order
+  **Drugs** (`#drugs`, with `#drugs-filter`), **Receptors & targets** (`#receptors`), **Structures**
+  (`#structures`), **Projections** (`#projections`, "Projections & Circuits"). Markup order in
+  `index.html` sets the order (see the browse-section comment there).
 - Three **toolbar-icon popups** (all `.modal-overlay`, via `wireModal`): **Legend**
   (`#legend-modal`), **Sources & provenance** (`#sourcing-modal`), **About** (`#about-modal`).
 
@@ -46,6 +48,11 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   gem-dot twinkle, drug wash, circuit pulse). Default on for a fine pointer, off for coarse /
   reduced-motion; persisted. Off is *content-preserving*: focus still lights regions/arrows + shows
   a static gem field, just frozen (intro skipped, `tick()`s to a still frame, `play` no-ops).
+- **Animation speed** (`#anim-speed`, `animSettings.speed`, persisted): a multiplier every animated
+  module applies live to its per-frame time delta (no phase jump). The linear 0..1 input maps
+  geometrically to 0.25x..4x with the midpoint = 1x (the reference pace). Its row (`#anim-speed-row`)
+  is revealed only while an animation is actually on screen (a focused drug / receptor / circuit),
+  recomputed each rendered frame in the render loop from the controllers' `active` getters.
 - **Arrow colour-mode** (`#color-mode`, default Neurotransmitter): Neurotransmitter =
   `projection.color` per molecule; Potential = `projection.signColor` by coarse sign (from meta
   `signColors`/`signLabels`). `setColorMode` recolours in place + rebuilds the Projections section

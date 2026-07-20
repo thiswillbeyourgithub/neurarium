@@ -144,7 +144,9 @@ Viewer (`public/`):
 - `index.html` — page shell: loads three.js (vendored import map) and, on `?debug=1`, vendored
   eruda. Holds the `#controls` panel, the popups (`#shortcuts-modal`, `#legend-modal`,
   `#sourcing-modal`, `#about-modal`, `#image-lightbox`, all `.modal-overlay`), the `#banners`
-  stack, the startup `#loading` overlay. UI-chrome accent = the `--accent*` palette in `:root`;
+  stack, the startup `#loading` overlay. An author **byline** ("by Olivier Cornelis", linking
+  olicorne.org per locale via the shared `common.byline` i18n key) sits both in `#loading`
+  (`.loading-byline`) and atop the settings pane (`.panel-byline`). UI-chrome accent = the `--accent*` palette in `:root`;
   data/semantic colours live in `meta.json`, never here. Also wires the PWA: links
   `manifest.webmanifest` + registers `sw.js`.
 - PWA (installable + offline): `manifest.webmanifest` (name/icons/`theme_color`), `sw.js`
@@ -205,7 +207,8 @@ Viewer (`public/`):
   primitive (used by circuit echo + drug glow).
 - `js/anim-settings.js` — `animSettings`, the single source of truth for decorative-animation
   state (read by every animated module): `enabled` (the **Animations** toggle) + `quality` (0..1
-  adaptive). See Settings & toggles + Rendering (adaptive quality).
+  adaptive) + `speed` (persisted 0.25..4 speed multiplier, the **Animation speed** slider). See
+  Settings & toggles + Rendering (adaptive quality).
 - `js/wiki.js` — `fetchWikiLead(url, lang)` runtime fetch of a Wikipedia lead; locale wins via
   langlinks, English fallback; cached; best-effort (failure -> null).
 - `js/tour.js`: `createTour({steps, labels, onEnd, seenKey})`, a generic, three.js-free coach-mark
@@ -220,7 +223,9 @@ Viewer (`public/`):
   watchable (the cue then returns to move on). A step's `target` may be one element or an **array** (a group highlight: the ring spans
   their union, e.g. the four browse sections). Steps glide between positions (snap only on the first
   step + during an active scroll). The app-specific step list is built in `js/main.js`; the data demos
-  are hands-on (open a list, tap the highlighted circuit/receptor/drug row via its `data-tour-id`),
+  are hands-on and follow the data graph (focus a **drug** (olanzapine), follow one of its bindings to
+  a **receptor** (H1), then visit a **structure** (hippocampus) and a **projection system** (dopamine,
+  a static group, not a circuit); each opened by tapping the highlighted row via its `data-tour-id`),
   each step's `before()` setting the scene (spread, open/collapse a section, reset a prior demo).
   Auto-runs once on a first visit (after the intro settles), forced every load with `?tour=1`, and
   replayed from the About popup's "Take a tour" button (`#about-tour`).
