@@ -711,15 +711,24 @@
         box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
         outline: 2px solid var(--accent-bright);
         outline-offset: 1px;
+        /* Flash the ring bright -> semi-bright on a loop so it catches the eye on
+           every step (not just interactive ones). Only outline colour/width animate,
+           so the dimming box-shadow (and the no-dim variant) are untouched. */
+        animation: tour-flash 1.1s ease-in-out infinite;
         transition: left 0.34s cubic-bezier(0.33, 1, 0.68, 1), top 0.34s cubic-bezier(0.33, 1, 0.68, 1), width 0.34s cubic-bezier(0.33, 1, 0.68, 1), height 0.34s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
+      }
+      @keyframes tour-flash {
+        0%, 100% { outline-color: var(--accent-bright); outline-width: 3px; }
+        50% { outline-color: var(--accent); outline-width: 2px; }
       }
       .tour-ring[hidden] { display: none; }
       /* spotlightOnly step: keep the accent ring but drop the dimming box-shadow, so
          a popup the step is explaining stays fully readable behind the highlight. */
       .tour-ring.no-dim { box-shadow: none; }
       /* Interactive step: the blocker gets a click-through hole over this ring, so
-         the user's real tap reaches the control. Pulse the outline to invite it. */
-      .tour-ring.interactive { animation: tour-pulse 1.4s ease-in-out infinite; }
+         the user's real tap reaches the control. Pulse the outline offset to invite
+         the tap, on top of the shared bright/semi-bright flash. */
+      .tour-ring.interactive { animation: tour-flash 1.1s ease-in-out infinite, tour-pulse 1.4s ease-in-out infinite; }
       @keyframes tour-pulse {
         0%, 100% { outline-offset: 1px; }
         50% { outline-offset: 4px; }
@@ -778,7 +787,7 @@
       .tour-next:disabled { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); color: var(--text); }
       @media (prefers-reduced-motion: reduce) {
         .tour-ring, .tour-bubble, .tour-veil { transition: none; }
-        .tour-ring.interactive { animation: none; }
+        .tour-ring, .tour-ring.interactive { animation: none; }
       }
       /* "Take a tour" button in the #about-modal (replays the guided tour). */
       .about-tour-btn {
