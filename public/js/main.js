@@ -1020,7 +1020,8 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
       const label = s.base_name || s.name;
       let entry = byLabel.get(label);
       if (!entry) {
-        entry = { color: s.color, meshes: [] };
+        // base = the hemisphere-stripped structure id, a stable guided-tour hook.
+        entry = { color: s.color, meshes: [], base: (s.id || "").replace(/_[LR]$/, "") };
         byLabel.set(label, entry);
       }
       const mesh = meshById.get(s.id);
@@ -1029,6 +1030,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
     const groupMeshes = [];
     for (const [label, entry] of byLabel) {
       const row = addLegendItem(structuresBody, entry.color, label);
+      if (entry.base) row.dataset.tourId = `structure:${entry.base}`; // guided-tour hook
       // Clicking the row toggles its structure(s) in the isolate/focus set AND,
       // when that click isolated it (not when it toggled it off), opens the
       // structure's detail tab, so a legend pick reads about the region like a 3D
@@ -1072,6 +1074,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
     projectionsBody.appendChild(h);
     for (const g of projGroups) {
       const row = addLegendItem(projectionsBody, g.color, g.label, true);
+      if (g.dataKey) row.dataset.tourId = `group:${g.dataKey}`; // guided-tour hook
       // Endpoints of those arrows, kept opaque so an isolated group still reads as
       // connecting real regions rather than floating in a dimmed brain.
       const groupMeshes = [...new Set(g.arrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
@@ -3115,7 +3118,9 @@ function createInfoPanel(data, sourcingModal) {
           const tgt = targetById.get(b.target);
           const onActivate = tgt && tgt.focusable
             ? () => onTargetPick(tgt) : null;
-          ul.appendChild(bindingRow(b, drug, b.targetName, onActivate));
+          const row = bindingRow(b, drug, b.targetName, onActivate);
+          row.dataset.tourId = `ixtarget:${b.target}`; // guided-tour hook: target row in a drug panel
+          ul.appendChild(row);
         }
         acts.appendChild(ul);
       }
@@ -6036,10 +6041,16 @@ async function main() {
   };
 
   // The nodes the guided story walks through (resolved once; a missing id just makes
-  // its step a caption). 5-HT2A -> Olanzapine ties the receptor demo to the drug demo.
-  const tour5ht2a = data.targets.find((x) => x.id === "5ht2a");
+  // its step a caption). The story: Olanzapine (drug) -> its H1 receptor -> a structure
+  // (hippocampus) -> a projection system (dopamine), each tapped hands-on.
   const tourOlanzapine = data.drugs.find((d) => d.id === "olanzapine");
-  const tourPapez = data.circuits.find((c) => c.id === "limbic_memory");
+  const tourH1 = data.targets.find((x) => x.id === "h1");
+  const tourStructMesh = meshById.get("hippocampus_R"); // meshes[0] (R) is the row's pick
+  const tourDopGroup = data.projectionGroupsByKey.get("kind:dopaminergic");
+  // Direct focus helpers for the structure / projection-group re-open hooks (their
+  // legend rows toggle isolate, so re-clicking is not idempotent; focus directly).
+  const tourShowStruct = () => selectStructure(tourStructMesh, { frame: true, isolate: true });
+  const tourShowDopGroup = () => focusProjectionGroup(tourDopGroup, { frame: true });
   // Re-open a node's detail panel only if it is not already the active tab, so a
   // detail sub-step's before() (which re-runs on Back) never restarts the focus /
   // animation while the user is reading it.
@@ -6102,24 +6113,12 @@ async function main() {
       el.removeEventListener("scroll", check);
     };
   };
-  // The "serotonergic receptors" box in the open Receptors list: its system heading
-  // plus the focusable rows under it (up to the next heading), for a group highlight.
-  const tourSeroSystem = tour5ht2a && tour5ht2a.system;
-  const tourSeroBox = () => {
-    if (!tourSeroSystem) return [];
-    const h = document.querySelector(`[data-tour-system="${CSS.escape(tourSeroSystem)}"]`);
-    if (!h) return [];
-    const els = [h];
-    for (let n = h.nextElementSibling; n && n.tagName !== "H2"; n = n.nextElementSibling) {
-      if (n.classList.contains("clickable")) els.push(n);
-    }
-    return els;
-  };
-  // The circuit panel's illustration AND its description text, as one group highlight
-  // (the wiki figure carries data-tour-sec="wiki"; the live/baked lead lands in
-  // .info-desc paragraphs beside it). Union-highlighted so the "read about it" step
-  // frames both, not just the picture.
-  const tourCircuitIntro = () => {
+  // Any open detail panel's illustration AND its description text, as one group
+  // highlight (the wiki figure carries data-tour-sec="wiki"; the live/baked lead lands
+  // in .info-desc paragraphs beside it). Union-highlighted so a "read about it" step
+  // frames both, not just the picture. Generic: works for a structure / receptor /
+  // projection-group panel alike.
+  const tourPanelIntro = () => {
     const pane = document.getElementById("details-pane");
     if (!pane) return [];
     const els = [];
@@ -6184,76 +6183,68 @@ async function main() {
       }),
       target: () => TOUR_SECTIONS.map((n) => `#${n}-toggle`),
       before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
-    // 7-8. Circuits: open the list, then tap the Papez memory loop row (plays live).
-    { title: t("tour.circuitOpen.title"), body: t("tour.circuitOpen.body"),
-      target: "#projections-toggle", interactive: true, scrollTo: true,
-      before: () => { tourReset(); tourCloseSection("projections"); } },
-    { title: t("tour.circuitTap.title"), body: t("tour.circuitTap.body"),
-      target: '[data-tour-id="circuit:limbic_memory"]', interactive: true, scrollTo: true,
-      before: () => tourOpenSection("projections") },
-    // 9-11. Walk the circuit panel section by section (it stays open from the tap;
-    //    dim:false so the live pulse stays visible beside the readable panel). Step 9
-    //    frames the illustration AND its description together, and Next ungreys once
-    //    the user scrolls the panel.
-    { title: t("tour.circuitWiki.title"), body: t("tour.circuitWiki.body"),
-      target: tourCircuitIntro, dim: false, scrollTo: true, scrollFree: true,
-      gate: tourGateScroll, gateAdvances: true,
-      before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
-    { title: t("tour.circuitStructures.title"), body: t("tour.circuitStructures.body"),
-      target: '[data-tour-sec="structures"]', dim: false, scrollTo: true,
-      before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
-    { title: t("tour.circuitPathways.title"), body: t("tour.circuitPathways.body"),
-      target: '[data-tour-sec="pathways"]', dim: false, scrollTo: true,
-      before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
-    // 12-13. Leave the circuit panel by hand, then open the next list by hand, so the
-    //    jump from one node kind to another is a visible action, not a teleport: tap
-    //    the panel's close × (back to the browse lists), then tap Receptors & targets.
-    { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
-      target: tourActiveTabClose, interactive: true,
-      before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
-    { title: t("tour.openReceptors.title"), body: t("tour.openReceptors.body"),
-      target: "#receptors-toggle", interactive: true, scrollTo: true,
-      before: () => tourCloseSection("receptors") },
-    // 14. Receptors: highlight the whole serotonergic system box (already open above).
-    { title: t("tour.receptorSystem.title"), body: t("tour.receptorSystem.body"),
-      target: tourSeroBox, scrollTo: true,
-      before: () => tourOpenSection("receptors") },
-    // 15. Tap 5-HT2A (opens its panel + gem dots).
-    { title: t("tour.receptorTap.title"), body: t("tour.receptorTap.body"),
-      target: '[data-tour-id="target:5ht2a"]', interactive: true, scrollTo: true,
-      before: () => tourOpenSection("receptors") },
-    // 16-18. Walk the receptor panel: classification, regions, then Olanzapine's Ki.
-    { title: t("tour.receptorFacts.title"), body: t("tour.receptorFacts.body"),
-      target: '[data-tour-sec="facts"]', dim: false, scrollTo: true,
-      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
-    { title: t("tour.receptorRegions.title"), body: t("tour.receptorRegions.body"),
-      target: '[data-tour-sec="regions"]', dim: false, scrollTo: true,
-      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
-    { title: t("tour.receptorDrugs.title"), body: t("tour.receptorDrugs.body"),
-      target: '[data-tour-id="ixdrug:olanzapine"]', dim: false, scrollTo: true,
-      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
-    // 19. Tap Olanzapine (jumps from the receptor's drug list to its own panel).
-    { title: t("tour.receptorTapDrug.title"), body: t("tour.receptorTapDrug.body"),
-      target: '[data-tour-id="ixdrug:olanzapine"]', interactive: true, scrollTo: true,
-      before: tourEnsureTab("target:5ht2a", tour5ht2a, focusTarget) },
-    // 20-22. Walk the drug panel: the reference/lookup links (scroll to proceed),
-    //    brands, then what it acts on (its "Acts on" heading brought to the top rather
-    //    than scrolling the tall list past it, see scrollAlign).
-    { title: t("tour.drugLinks.title"), body: t("tour.drugLinks.body"),
-      target: '[data-tour-sec="links"]', dim: false, scrollTo: true, scrollFree: true,
-      gate: tourGateScroll, gateAdvances: true,
-      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
-    { title: t("tour.drugBrands.title"), body: t("tour.drugBrands.body"),
-      target: '[data-tour-sec="brands"]', dim: false, scrollTo: true,
-      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
-    { title: t("tour.drugBindings.title"), body: t("tour.drugBindings.body"),
+    // 7-8. Drugs first: open the list, then tap Olanzapine (opens its panel and plays
+    //    the effect animation live on the brain).
+    { title: t("tour.openDrugs.title"), body: t("tour.openDrugs.body"),
+      target: "#drugs-toggle", interactive: true, scrollTo: true,
+      before: () => { tourReset(); tourCloseSection("drugs"); } },
+    { title: t("tour.drugTap.title"), body: t("tour.drugTap.body"),
+      target: '[data-tour-id="drug:olanzapine"]', interactive: true, scrollTo: true,
+      before: () => tourOpenSection("drugs") },
+    // 9. The drug's "Acts on" list (dim:false so the live animation stays visible). The
+    //    body flags the drug animations as the least-scientific, still-WIP part.
+    { title: t("tour.drugActs.title"), body: t("tour.drugActs.body"),
       target: '[data-tour-sec="bindings"]', dim: false, scrollTo: true, scrollAlign: "top",
       before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
-    // 23-24. Get to search by hand: tap Settings (back to the main panel), then the
+    // 10. Follow one binding, the H1 receptor row, to that receptor's own panel.
+    { title: t("tour.drugToReceptor.title"), body: t("tour.drugToReceptor.body"),
+      target: '[data-tour-id="ixtarget:h1"]', interactive: true, scrollTo: true,
+      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
+    // 11-12. Walk the receptor (H1) panel: how it is classified, then where it is found.
+    { title: t("tour.receptorFacts.title"), body: t("tour.receptorFacts.body"),
+      target: '[data-tour-sec="facts"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("target:h1", tourH1, focusTarget) },
+    { title: t("tour.receptorRegions.title"), body: t("tour.receptorRegions.body"),
+      target: '[data-tour-sec="regions"]', dim: false, scrollTo: true,
+      before: tourEnsureTab("target:h1", tourH1, focusTarget) },
+    // 13. Back out of the receptor panel by hand (tap its close ×).
+    { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
+      target: tourActiveTabClose, interactive: true,
+      before: tourEnsureTab("target:h1", tourH1, focusTarget) },
+    // 14-15. Structures: open the list, then tap the hippocampus row (isolates it).
+    { title: t("tour.openStructures.title"), body: t("tour.openStructures.body"),
+      target: "#structures-toggle", interactive: true, scrollTo: true,
+      before: () => tourCloseSection("structures") },
+    { title: t("tour.structureTap.title"), body: t("tour.structureTap.body"),
+      target: '[data-tour-id="structure:hippocampus"]', interactive: true, scrollTo: true,
+      before: () => tourOpenSection("structures") },
+    // 16. Read the structure panel (illustration + description; scroll to proceed).
+    { title: t("tour.structureLook.title"), body: t("tour.structureLook.body"),
+      target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
+      gate: tourGateScroll, gateAdvances: true,
+      before: tourEnsureTab("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
+    // 17. Back out of the structure panel by hand.
+    { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
+      target: tourActiveTabClose, interactive: true,
+      before: tourEnsureTab("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
+    // 18-19. Projections: open the list, then tap a projection SYSTEM (Dopamine), NOT a
+    //    circuit; it pins that system's pathways and streams the by-mechanism flow.
+    { title: t("tour.openProjections.title"), body: t("tour.openProjections.body"),
+      target: "#projections-toggle", interactive: true, scrollTo: true,
+      before: () => tourCloseSection("projections") },
+    { title: t("tour.projectionTap.title"), body: t("tour.projectionTap.body"),
+      target: '[data-tour-id="group:kind:dopaminergic"]', interactive: true, scrollTo: true,
+      before: () => tourOpenSection("projections") },
+    // 20. Read the projection-system panel (member pathways + description).
+    { title: t("tour.projectionLook.title"), body: t("tour.projectionLook.body"),
+      target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
+      gate: tourGateScroll, gateAdvances: true,
+      before: tourEnsureTab("group:kind_dopaminergic", tourDopGroup, tourShowDopGroup) },
+    // 21-22. Get to search by hand: tap Settings (back to the main panel), then the
     //    magnifier (opens the search box). Both auto-advance on the real tap.
     { title: t("tour.backToSettings.title"), body: t("tour.backToSettings.body"),
       target: "#tab-settings", interactive: true,
-      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
+      before: tourEnsureTab("group:kind_dopaminergic", tourDopGroup, tourShowDopGroup) },
     { title: t("tour.openSearch.title"), body: t("tour.openSearch.body"),
       target: "#search-toggle", interactive: true,
       before: () => tabs.showSettings() },

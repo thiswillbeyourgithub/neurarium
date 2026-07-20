@@ -119,58 +119,49 @@
         "This popup tallies how much of the data is verified against a quoted source, merely sourced, or still unchecked. Close it (the highlighted &times;) to continue.",
       "tour.browse.title": "Browse the data",
       "tour.browse.body":
-        "Everything lives in four lists: <b>Structures</b> ({structures}+), <b>Projections &amp; Circuits</b> ({projections}+), <b>Receptors &amp; targets</b> ({receptors}+) and <b>Drugs</b> ({drugs}+). Open any one and click a row to focus it. Let's try a few.",
-      "tour.circuitOpen.title": "Open a list",
-      "tour.circuitOpen.body":
-        "Click the highlighted <b>Projections &amp; Circuits</b> to open it.",
-      "tour.circuitTap.title": "The Papez memory loop",
-      "tour.circuitTap.body":
-        "Click the highlighted <b>Papez memory loop</b> circuit. The brain dims and the signal travels its pathways in firing order.",
-      "tour.circuitWiki.title": "Read about it",
-      "tour.circuitWiki.body":
-        "Each panel opens with an illustration and a live description pulled from Wikipedia. <b>Scroll the panel</b> down to continue.",
-      "tour.circuitStructures.title": "Its structures",
-      "tour.circuitStructures.body":
-        "The <b>structures</b> the loop passes through are listed here. Click any one to jump to it.",
-      "tour.circuitPathways.title": "Its pathways",
-      "tour.circuitPathways.body":
-        "And the individual <b>pathways</b> that make up the loop, each its own sourced connection.",
-      "tour.closePanel.title": "Close the panel",
-      "tour.closePanel.body":
-        "Done reading? Click the highlighted <b>&times;</b> to close this panel and go back to the lists.",
-      "tour.openReceptors.title": "Open the receptors",
-      "tour.openReceptors.body":
-        "Now open a different list: click the highlighted <b>Receptors &amp; targets</b>.",
-      "tour.receptorSystem.title": "A family of receptors",
-      "tour.receptorSystem.body":
-        "Receptors are grouped by neurotransmitter system. This highlighted block is the <b>serotonergic</b> family. We'll open one of them next.",
-      "tour.receptorTap.title": "Light up a receptor",
-      "tour.receptorTap.body":
-        "Click the highlighted <b>5-HT2A</b> receptor. The regions where it is expressed light up with glowing gem dots.",
+        "Everything lives in four lists: <b>Drugs</b> ({drugs}+), <b>Receptors &amp; targets</b> ({receptors}+), <b>Structures</b> ({structures}+) and <b>Projections &amp; Circuits</b> ({projections}+). Open any one and click a row to focus it. Let's try a few.",
+      "tour.openDrugs.title": "Open a list",
+      "tour.openDrugs.body":
+        "Let's start with a drug. Click the highlighted <b>Drugs</b> to open the list.",
+      "tour.drugTap.title": "Focus a drug",
+      "tour.drugTap.body":
+        "Click the highlighted <b>Olanzapine</b> row. The brain dims and its effects animate: coloured dots on the regions it reaches, and flow along the systems whose tone it shifts.",
+      "tour.drugActs.title": "What it acts on",
+      "tour.drugActs.body":
+        "Its <b>bindings</b>: every receptor and target it touches, the effect, and the measured affinity (Ki) where known, which is what drives the animation. <b>One caveat:</b> the drug animations are by far the least scientific part of neurarium and are still being worked out, so treat them as an evolving illustration, not settled fact.",
+      "tour.drugToReceptor.title": "Follow it to a receptor",
+      "tour.drugToReceptor.body":
+        "Each binding is a link. Click the highlighted <b>H1</b> row to open that receptor's own panel.",
       "tour.receptorFacts.title": "How it's classified",
       "tour.receptorFacts.body":
         "Its <b>classification</b>: neurotransmitter family, mechanism, whether it excites or inhibits, and where on the synapse it sits. Each fact carries its own provenance grade.",
       "tour.receptorRegions.title": "Where it's found",
       "tour.receptorRegions.body":
         "The <b>regions</b> where this receptor is expressed, each with its own source. Click any region to jump to it.",
-      "tour.receptorDrugs.title": "Drugs that act on it",
-      "tour.receptorDrugs.body":
-        "And the <b>drugs</b> that bind it. The highlighted <b>Olanzapine</b> row shows a measured affinity (Ki): the smaller the number, the tighter it binds.",
-      "tour.receptorTapDrug.title": "Follow it to a drug",
-      "tour.receptorTapDrug.body":
-        "Click the highlighted <b>Olanzapine</b> row to open its own panel.",
-      "tour.drugLinks.title": "Links to read more",
-      "tour.drugLinks.body":
-        "The panel leads with the molecule and a live Wikipedia description. Under them sit <b>links to reputable databases</b> (Drugs.com, the EMA, the FDA) to dig deeper. Scroll the panel down to continue.",
-      "tour.drugBrands.title": "Its brand names",
-      "tour.drugBrands.body":
-        "The <b>commercial names</b> it is sold under, by region. Each is checked against its source.",
-      "tour.drugBindings.title": "What it acts on",
-      "tour.drugBindings.body":
-        "Its <b>bindings</b>: every receptor and target it acts on, the effect, and the measured affinity (Ki) where known. This is what colours the brain when you focus it.",
+      "tour.closePanel.title": "Close the panel",
+      "tour.closePanel.body":
+        "Done reading? Click the highlighted <b>&times;</b> to close this panel and go back to the lists.",
+      "tour.openStructures.title": "Open a structure",
+      "tour.openStructures.body":
+        "Now a different kind of node. Click the highlighted <b>Structures</b> to open the list.",
+      "tour.structureTap.title": "Isolate a region",
+      "tour.structureTap.body":
+        "Click the highlighted <b>Hippocampus</b> row. It is isolated from the rest of the brain so you can see it on its own.",
+      "tour.structureLook.title": "Read about it",
+      "tour.structureLook.body":
+        "Each panel opens with an illustration and a live description pulled from Wikipedia. <b>Scroll the panel</b> down to continue.",
+      "tour.openProjections.title": "Open the projections",
+      "tour.openProjections.body":
+        "One last kind of node: the pathways between regions. Click the highlighted <b>Projections</b>.",
+      "tour.projectionTap.title": "A whole system",
+      "tour.projectionTap.body":
+        "Click the highlighted <b>Dopamine</b> system. It pins every dopaminergic pathway at once and streams the signal along them.",
+      "tour.projectionLook.title": "Read about it",
+      "tour.projectionLook.body":
+        "Its <b>member pathways</b> and a description. <b>Scroll the panel</b> down to continue.",
       "tour.backToSettings.title": "Back to the panel",
       "tour.backToSettings.body":
-        "One last feature. Click <b>Settings</b> to leave this drug and return to the main panel.",
+        "One last feature. Click <b>Settings</b> to leave this panel and return to the main panel.",
       "tour.openSearch.title": "Open search",
       "tour.openSearch.body":
         "Click the highlighted <b>magnifier</b> to open the search box.",
@@ -517,58 +508,49 @@
         "Cette fenêtre chiffre la part des données vérifiée face à une citation, simplement sourcée, ou encore non contrôlée. Fermez-la (le &times; en surbrillance) pour continuer.",
       "tour.browse.title": "Parcourir les données",
       "tour.browse.body":
-        "Tout se trouve dans quatre listes : <b>Structures</b> ({structures}+), <b>Projections et circuits</b> ({projections}+), <b>Récepteurs et cibles</b> ({receptors}+) et <b>Médicaments</b> ({drugs}+). Ouvrez-en une et cliquez sur une ligne pour la mettre en avant. Essayons-en quelques-unes.",
-      "tour.circuitOpen.title": "Ouvrir une liste",
-      "tour.circuitOpen.body":
-        "Cliquez sur <b>Projections et circuits</b> (en surbrillance) pour l'ouvrir.",
-      "tour.circuitTap.title": "La boucle mnésique de Papez",
-      "tour.circuitTap.body":
-        "Cliquez sur le circuit <b>boucle mnésique de Papez</b> en surbrillance. Le cerveau s'assombrit et le signal parcourt ses voies dans l'ordre d'activation.",
-      "tour.circuitWiki.title": "En savoir plus",
-      "tour.circuitWiki.body":
-        "Chaque panneau s'ouvre sur une illustration et une description tirée en direct de Wikipédia. <b>Faites défiler le panneau</b> vers le bas pour continuer.",
-      "tour.circuitStructures.title": "Ses structures",
-      "tour.circuitStructures.body":
-        "Les <b>structures</b> que traverse la boucle sont listées ici. Cliquez sur l'une d'elles pour y accéder.",
-      "tour.circuitPathways.title": "Ses voies",
-      "tour.circuitPathways.body":
-        "Et les <b>voies</b> individuelles qui composent la boucle, chacune une connexion sourcée.",
-      "tour.closePanel.title": "Fermer le panneau",
-      "tour.closePanel.body":
-        "Lecture terminée ? Cliquez sur le <b>&times;</b> en surbrillance pour fermer ce panneau et revenir aux listes.",
-      "tour.openReceptors.title": "Ouvrir les récepteurs",
-      "tour.openReceptors.body":
-        "Ouvrez maintenant une autre liste : cliquez sur <b>Récepteurs et cibles</b> en surbrillance.",
-      "tour.receptorSystem.title": "Une famille de récepteurs",
-      "tour.receptorSystem.body":
-        "Les récepteurs sont regroupés par système de neurotransmetteur. Ce bloc en surbrillance est la famille <b>sérotoninergique</b>. Nous allons en ouvrir un.",
-      "tour.receptorTap.title": "Illuminer un récepteur",
-      "tour.receptorTap.body":
-        "Cliquez sur le récepteur <b>5-HT2A</b> en surbrillance. Les régions où il est exprimé s'illuminent de points scintillants.",
+        "Tout se trouve dans quatre listes : <b>Médicaments</b> ({drugs}+), <b>Récepteurs et cibles</b> ({receptors}+), <b>Structures</b> ({structures}+) et <b>Projections et circuits</b> ({projections}+). Ouvrez-en une et cliquez sur une ligne pour la mettre en avant. Essayons-en quelques-unes.",
+      "tour.openDrugs.title": "Ouvrir une liste",
+      "tour.openDrugs.body":
+        "Commençons par un médicament. Cliquez sur <b>Médicaments</b> (en surbrillance) pour ouvrir la liste.",
+      "tour.drugTap.title": "Mettre un médicament en avant",
+      "tour.drugTap.body":
+        "Cliquez sur la ligne <b>olanzapine</b> en surbrillance. Le cerveau s'assombrit et ses effets s'animent : des points colorés sur les régions qu'il atteint, et un flux le long des systèmes dont il modifie le tonus.",
+      "tour.drugActs.title": "Ce sur quoi il agit",
+      "tour.drugActs.body":
+        "Ses <b>liaisons</b> : tous les récepteurs et cibles qu'il touche, l'effet, et l'affinité mesurée (Ki) lorsqu'elle est connue, ce qui pilote l'animation. <b>Une réserve :</b> les animations de médicaments sont de loin l'aspect le moins scientifique de neurarium et sont encore en cours d'élaboration ; considérez-les comme une illustration qui évolue, pas un fait établi.",
+      "tour.drugToReceptor.title": "Suivre vers un récepteur",
+      "tour.drugToReceptor.body":
+        "Chaque liaison est un lien. Cliquez sur la ligne <b>H1</b> en surbrillance pour ouvrir le panneau de ce récepteur.",
       "tour.receptorFacts.title": "Sa classification",
       "tour.receptorFacts.body":
         "Sa <b>classification</b> : famille de neurotransmetteur, mécanisme, s'il excite ou inhibe, et sa position sur la synapse. Chaque fait porte sa propre note de provenance.",
       "tour.receptorRegions.title": "Où on le trouve",
       "tour.receptorRegions.body":
         "Les <b>régions</b> où ce récepteur est exprimé, chacune avec sa source. Cliquez sur une région pour y accéder.",
-      "tour.receptorDrugs.title": "Les médicaments qui agissent dessus",
-      "tour.receptorDrugs.body":
-        "Et les <b>médicaments</b> qui s'y lient. La ligne <b>olanzapine</b> en surbrillance montre une affinité mesurée (Ki) : plus le nombre est petit, plus la liaison est forte.",
-      "tour.receptorTapDrug.title": "Suivre vers un médicament",
-      "tour.receptorTapDrug.body":
-        "Cliquez sur la ligne <b>olanzapine</b> en surbrillance pour ouvrir son propre panneau.",
-      "tour.drugLinks.title": "Des liens pour aller plus loin",
-      "tour.drugLinks.body":
-        "Le panneau s'ouvre sur la molécule et une description Wikipédia en direct. En dessous, des <b>liens vers des bases de données de référence</b> (Drugs.com, l'EMA, la FDA) permettent d'approfondir. Faites défiler le panneau pour continuer.",
-      "tour.drugBrands.title": "Ses noms commerciaux",
-      "tour.drugBrands.body":
-        "Les <b>noms commerciaux</b> sous lesquels il est vendu, par région. Chacun est vérifié face à sa source.",
-      "tour.drugBindings.title": "Ce sur quoi il agit",
-      "tour.drugBindings.body":
-        "Ses <b>liaisons</b> : tous les récepteurs et cibles sur lesquels il agit, l'effet, et l'affinité mesurée (Ki) lorsqu'elle est connue. C'est ce qui colore le cerveau quand vous le mettez en avant.",
+      "tour.closePanel.title": "Fermer le panneau",
+      "tour.closePanel.body":
+        "Lecture terminée ? Cliquez sur le <b>&times;</b> en surbrillance pour fermer ce panneau et revenir aux listes.",
+      "tour.openStructures.title": "Ouvrir une structure",
+      "tour.openStructures.body":
+        "Passons à un autre type de nœud. Cliquez sur <b>Structures</b> (en surbrillance) pour ouvrir la liste.",
+      "tour.structureTap.title": "Isoler une région",
+      "tour.structureTap.body":
+        "Cliquez sur la ligne <b>hippocampe</b> en surbrillance. Elle est isolée du reste du cerveau pour que vous puissiez la voir seule.",
+      "tour.structureLook.title": "En savoir plus",
+      "tour.structureLook.body":
+        "Chaque panneau s'ouvre sur une illustration et une description tirée en direct de Wikipédia. <b>Faites défiler le panneau</b> vers le bas pour continuer.",
+      "tour.openProjections.title": "Ouvrir les projections",
+      "tour.openProjections.body":
+        "Un dernier type de nœud : les voies entre régions. Cliquez sur <b>Projections</b> en surbrillance.",
+      "tour.projectionTap.title": "Un système entier",
+      "tour.projectionTap.body":
+        "Cliquez sur le système <b>dopamine</b> en surbrillance. Il épingle d'un coup toutes les voies dopaminergiques et y fait circuler le signal.",
+      "tour.projectionLook.title": "En savoir plus",
+      "tour.projectionLook.body":
+        "Ses <b>voies membres</b> et une description. <b>Faites défiler le panneau</b> vers le bas pour continuer.",
       "tour.backToSettings.title": "Retour au panneau",
       "tour.backToSettings.body":
-        "Une dernière fonctionnalité. Cliquez sur <b>Réglages</b> pour quitter ce médicament et revenir au panneau principal.",
+        "Une dernière fonctionnalité. Cliquez sur <b>Réglages</b> pour quitter ce panneau et revenir au panneau principal.",
       "tour.openSearch.title": "Ouvrir la recherche",
       "tour.openSearch.body":
         "Cliquez sur la <b>loupe</b> en surbrillance pour ouvrir le champ de recherche.",
