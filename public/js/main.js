@@ -6075,19 +6075,31 @@ async function main() {
     return () => obs.disconnect();
   };
   const tourGateScroll = (signal) => {
-    // Ungrey once the user scrolls the details panel (wheel / touch / arrow keys).
-    // A wheel/touch event fires even at a scroll boundary, so a short panel can't trap
-    // the user; the programmatic scrollTo emits "scroll", not these, so it is ignored.
+    // Fire once the user has scrolled the details panel "enough": to near the bottom of
+    // its scrollable content (or on any scroll gesture if there is almost nothing to
+    // scroll, so a short panel can't trap them). Paired with gateAdvances, that moves the
+    // tour on by itself rather than merely ungreying Next. A real gesture (wheel / touch /
+    // arrow keys) must happen first, so the step's own programmatic scrollTo (which emits
+    // "scroll" but no gesture) never trips it.
     const el = document.getElementById("details-pane");
     if (!el) return () => {};
-    const on = () => signal();
-    el.addEventListener("wheel", on, { passive: true });
-    el.addEventListener("touchmove", on, { passive: true });
-    el.addEventListener("keydown", on);
+    const NEAR = 24; // px from the bottom that counts as "scrolled enough"
+    let userScrolled = false;
+    const check = () => {
+      if (!userScrolled) return;
+      const room = el.scrollHeight - el.clientHeight;
+      if (room <= NEAR || el.scrollTop >= room - NEAR) signal();
+    };
+    const mark = () => { userScrolled = true; check(); };
+    el.addEventListener("wheel", mark, { passive: true });
+    el.addEventListener("touchmove", mark, { passive: true });
+    el.addEventListener("keydown", mark);
+    el.addEventListener("scroll", check, { passive: true });
     return () => {
-      el.removeEventListener("wheel", on);
-      el.removeEventListener("touchmove", on);
-      el.removeEventListener("keydown", on);
+      el.removeEventListener("wheel", mark);
+      el.removeEventListener("touchmove", mark);
+      el.removeEventListener("keydown", mark);
+      el.removeEventListener("scroll", check);
     };
   };
   // The "serotonergic receptors" box in the open Receptors list: its system heading
@@ -6184,7 +6196,8 @@ async function main() {
     //    frames the illustration AND its description together, and Next ungreys once
     //    the user scrolls the panel.
     { title: t("tour.circuitWiki.title"), body: t("tour.circuitWiki.body"),
-      target: tourCircuitIntro, dim: false, scrollTo: true, scrollFree: true, gate: tourGateScroll,
+      target: tourCircuitIntro, dim: false, scrollTo: true, scrollFree: true,
+      gate: tourGateScroll, gateAdvances: true,
       before: tourEnsureTab("circuit:limbic_memory", tourPapez, focusCircuit) },
     { title: t("tour.circuitStructures.title"), body: t("tour.circuitStructures.body"),
       target: '[data-tour-sec="structures"]', dim: false, scrollTo: true,
@@ -6227,7 +6240,8 @@ async function main() {
     //    brands, then what it acts on (its "Acts on" heading brought to the top rather
     //    than scrolling the tall list past it, see scrollAlign).
     { title: t("tour.drugLinks.title"), body: t("tour.drugLinks.body"),
-      target: '[data-tour-sec="links"]', dim: false, scrollTo: true, scrollFree: true, gate: tourGateScroll,
+      target: '[data-tour-sec="links"]', dim: false, scrollTo: true, scrollFree: true,
+      gate: tourGateScroll, gateAdvances: true,
       before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
     { title: t("tour.drugBrands.title"), body: t("tour.drugBrands.body"),
       target: '[data-tour-sec="brands"]', dim: false, scrollTo: true,
