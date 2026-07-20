@@ -548,8 +548,9 @@ function createAutoSpread({ slider, apply }) {
     },
     /**
      * Play a scripted keyframe sweep from the current value through each target in
-     * `keyframes` in turn (e.g. [0, 1, 0.5] = down to off, out to max, settle at the
-     * middle), one segment each. Used by the guided tour's "Separate" demo; being
+     * `keyframes` in turn (e.g. [0, 1, 0, 0.5] = down to off, out to max, back to
+     * off, settle at the middle), one segment each. Used by the guided tour's
+     * "Separate" demo; being
      * re-callable, a step's before() replays the whole sweep on Back->Next. Setting
      * slider.value here does NOT fire an "input" event, so it never trips the tour's
      * user-move gate.
@@ -5563,7 +5564,17 @@ async function main() {
   // back to the generous arrow hull, so a thin arrow over the background is still
   // easy to hit; a true miss clears the halo, label, and panel. handleSelect owns
   // the label set so callers need no separate fallback.
+  // While the guided tour is on screen, a tap on the brain is inert: the tour
+  // drives selection itself, and a stray pick would derail it. Dragging to rotate
+  // never reaches here (it fails the movement threshold), and wheel/pinch zoom is
+  // untouched, so the brain still moves. Checked via the overlay's own visibility
+  // so the 3D wiring stays decoupled from the tour module.
+  const tourOnScreen = () => {
+    const tr = document.getElementById("tour-root");
+    return !!(tr && !tr.hidden);
+  };
   const handleSelect = (clientX, clientY) => {
+    if (tourOnScreen()) return false;
     const structHit = pickStructureHit(clientX, clientY);
     const arrowHit = pickVisibleArrowHit(clientX, clientY);
     let arrow = null;
@@ -5809,6 +5820,7 @@ async function main() {
   info.onProjectionGroup((group) => focusProjectionGroup(group, { frame: true }));
 
   canvas.addEventListener("dblclick", (event) => {
+    if (tourOnScreen()) return; // brain interactions are inert during the tour
     const mesh = pickAt(event.clientX, event.clientY);
     if (mesh) {
       // Same as clicking the structure's legend row: isolate/focus the pair.
@@ -6084,7 +6096,7 @@ async function main() {
     //    ungreys once the user grabs the slider themselves.
     { title: t("tour.separate.title"), body: t("tour.separate.body"),
       target: "#explode", dim: false, gate: tourGateSlider,
-      before: () => { tourReset(); tourEnsurePanel(); autoSpread.playSequence([0, 1, 0.5]); } },
+      before: () => { tourReset(); tourEnsurePanel(); autoSpread.playSequence([0, 1, 0, 0.5]); } },
     // 4. Sourcing: tap the Sources button (opens the popup, auto-advances).
     { title: t("tour.sourcesOpen.title"), body: t("tour.sourcesOpen.body"),
       target: "#sourcing-toggle", interactive: true, scrollTo: true,
