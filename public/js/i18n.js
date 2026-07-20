@@ -135,6 +135,12 @@
       "tour.circuitPathways.title": "Its pathways",
       "tour.circuitPathways.body":
         "And the individual <b>pathways</b> that make up the loop, each its own sourced connection.",
+      "tour.closePanel.title": "Close the panel",
+      "tour.closePanel.body":
+        "Done reading? Tap the highlighted <b>&times;</b> to close this panel and go back to the lists.",
+      "tour.openReceptors.title": "Open the receptors",
+      "tour.openReceptors.body":
+        "Now open a different list: tap the highlighted <b>Receptors &amp; targets</b>.",
       "tour.receptorSystem.title": "A family of receptors",
       "tour.receptorSystem.body":
         "Receptors are grouped by neurotransmitter system. This highlighted block is the <b>serotonergic</b> family. We'll open one of them next.",
@@ -153,15 +159,21 @@
       "tour.receptorTapDrug.title": "Follow it to a drug",
       "tour.receptorTapDrug.body":
         "Tap the highlighted <b>Olanzapine</b> row to open its own panel.",
-      "tour.drugWiki.title": "What it is",
-      "tour.drugWiki.body":
-        "The drug panel leads with its structure and a live Wikipedia description. Olanzapine is an atypical antipsychotic.",
+      "tour.drugLinks.title": "Links to read more",
+      "tour.drugLinks.body":
+        "The panel leads with the molecule and a live Wikipedia description. Under them sit <b>links to reputable databases</b> (Drugs.com, the EMA, the FDA) to dig deeper. Scroll the panel down to continue.",
       "tour.drugBrands.title": "Its brand names",
       "tour.drugBrands.body":
         "The <b>commercial names</b> it is sold under, by region. Each is checked against its source.",
       "tour.drugBindings.title": "What it acts on",
       "tour.drugBindings.body":
         "Its <b>bindings</b>: every receptor and target it acts on, the effect, and the measured affinity (Ki) where known. This is what colours the brain when you focus it.",
+      "tour.backToSettings.title": "Back to the panel",
+      "tour.backToSettings.body":
+        "One last feature. Tap <b>Settings</b> to leave this drug and return to the main panel.",
+      "tour.openSearch.title": "Open search",
+      "tour.openSearch.body":
+        "Tap the highlighted <b>magnifier</b> to open the search box.",
       "tour.search.title": "Find anything",
       "tour.search.body":
         "<b>Search</b> jumps straight to any region, pathway, receptor or drug by name (try typing here). You can also filter drugs by class or nomenclature.",
@@ -515,6 +527,12 @@
       "tour.circuitPathways.title": "Ses voies",
       "tour.circuitPathways.body":
         "Et les <b>voies</b> individuelles qui composent la boucle, chacune une connexion sourcée.",
+      "tour.closePanel.title": "Fermer le panneau",
+      "tour.closePanel.body":
+        "Lecture terminée ? Touchez le <b>&times;</b> en surbrillance pour fermer ce panneau et revenir aux listes.",
+      "tour.openReceptors.title": "Ouvrir les récepteurs",
+      "tour.openReceptors.body":
+        "Ouvrez maintenant une autre liste : touchez <b>Récepteurs et cibles</b> en surbrillance.",
       "tour.receptorSystem.title": "Une famille de récepteurs",
       "tour.receptorSystem.body":
         "Les récepteurs sont regroupés par système de neurotransmetteur. Ce bloc en surbrillance est la famille <b>sérotoninergique</b>. Nous allons en ouvrir un.",
@@ -533,15 +551,21 @@
       "tour.receptorTapDrug.title": "Suivre vers un médicament",
       "tour.receptorTapDrug.body":
         "Touchez la ligne <b>olanzapine</b> en surbrillance pour ouvrir son propre panneau.",
-      "tour.drugWiki.title": "Ce que c'est",
-      "tour.drugWiki.body":
-        "Le panneau du médicament s'ouvre sur sa structure et une description Wikipédia en direct. L'olanzapine est un antipsychotique atypique.",
+      "tour.drugLinks.title": "Des liens pour aller plus loin",
+      "tour.drugLinks.body":
+        "Le panneau s'ouvre sur la molécule et une description Wikipédia en direct. En dessous, des <b>liens vers des bases de données de référence</b> (Drugs.com, l'EMA, la FDA) permettent d'approfondir. Faites défiler le panneau pour continuer.",
       "tour.drugBrands.title": "Ses noms commerciaux",
       "tour.drugBrands.body":
         "Les <b>noms commerciaux</b> sous lesquels il est vendu, par région. Chacun est vérifié face à sa source.",
       "tour.drugBindings.title": "Ce sur quoi il agit",
       "tour.drugBindings.body":
         "Ses <b>liaisons</b> : tous les récepteurs et cibles sur lesquels il agit, l'effet, et l'affinité mesurée (Ki) lorsqu'elle est connue. C'est ce qui colore le cerveau quand vous le mettez en avant.",
+      "tour.backToSettings.title": "Retour au panneau",
+      "tour.backToSettings.body":
+        "Une dernière fonctionnalité. Touchez <b>Réglages</b> pour quitter ce médicament et revenir au panneau principal.",
+      "tour.openSearch.title": "Ouvrir la recherche",
+      "tour.openSearch.body":
+        "Touchez la <b>loupe</b> en surbrillance pour ouvrir le champ de recherche.",
       "tour.search.title": "Tout retrouver",
       "tour.search.body":
         "La <b>recherche</b> mène directement à n'importe quelle région, voie, récepteur ou médicament par son nom (essayez d'en taper un ici). Vous pouvez aussi filtrer les médicaments par classe ou nomenclature.",
