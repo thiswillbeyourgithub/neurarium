@@ -109,6 +109,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   // change must NOT snap (so the step-to-step move glides); see go() + onScroll()
   let scrolling = false; // true while a scrollTo row is easing into view (see onScroll)
   let revealTimer = null; // the setTimeout that ends a step's opening beat + fades in the overlay
+  let bubbleDragged = false; // user dragged the bubble this step: stop auto-placing it
 
   const seen = () => {
     if (!seenKey) return false;
@@ -154,6 +155,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     bubble.setAttribute("role", "dialog");
     bubble.setAttribute("aria-modal", "true");
     if (labels.aria) bubble.setAttribute("aria-label", labels.aria);
+    enableBubbleDrag();
 
     elTitle = document.createElement("div");
     elTitle.className = "tour-title";
@@ -178,6 +180,52 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     bubble.append(elTitle, elBody, foot);
     root.append(blocker, ring, bubble);
     document.body.appendChild(root);
+  }
+
+  // Let the user drag the bubble out of the way (touch or mouse) so it can be
+  // moved off anything it happens to occlude. Once dragged, the bubble stays put
+  // for the rest of the step (layout() stops auto-placing it); a step change
+  // (go()) resets it. A press that starts on a button or a link is left alone so
+  // those keep working; a tiny jitter under the threshold still counts as a click.
+  function enableBubbleDrag() {
+    let dragging = false;
+    let sx = 0, sy = 0, ox = 0, oy = 0, moved = false;
+    const onDown = (e) => {
+      if (e.target.closest("button, a")) return;
+      if (e.button != null && e.button !== 0) return; // primary button / touch only
+      dragging = true;
+      moved = false;
+      sx = e.clientX;
+      sy = e.clientY;
+      const r = bubble.getBoundingClientRect();
+      ox = r.left;
+      oy = r.top;
+      bubble.style.transition = "none"; // track the pointer 1:1 while dragging
+      try { bubble.setPointerCapture(e.pointerId); } catch (_) { /* older UA */ }
+    };
+    const onMove = (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - sx;
+      const dy = e.clientY - sy;
+      if (!moved && Math.abs(dx) + Math.abs(dy) < 3) return; // ignore jitter (keep clicks)
+      moved = true;
+      e.preventDefault();
+      const bw = bubble.offsetWidth;
+      const bh = bubble.offsetHeight;
+      bubble.style.left = `${clamp(ox + dx, MARGIN, window.innerWidth - bw - MARGIN)}px`;
+      bubble.style.top = `${clamp(oy + dy, MARGIN, window.innerHeight - bh - MARGIN)}px`;
+    };
+    const onUp = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      bubble.style.transition = "";
+      try { bubble.releasePointerCapture(e.pointerId); } catch (_) { /* older UA */ }
+      if (moved) bubbleDragged = true; // stop auto-placing it for the rest of this step
+    };
+    bubble.addEventListener("pointerdown", onDown);
+    bubble.addEventListener("pointermove", onMove);
+    bubble.addEventListener("pointerup", onUp);
+    bubble.addEventListener("pointercancel", onUp);
   }
 
   function mkBtn(cls, text, onClick) {
@@ -350,11 +398,11 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       // the bubble is left alone so it doesn't snap frame-by-frame: onScroll's
       // settle re-runs layout with the glide on, easing the bubble to its final
       // spot in one smooth move instead of jittering along with the scroll.
-      if (!scrolling) placeBubbleBy(box);
+      if (!scrolling && !bubbleDragged) placeBubbleBy(box);
     } else {
       ring.hidden = true;
       clearHole();
-      if (!scrolling) placeCaption(consumed ? "brain" : step.placement || "top");
+      if (!scrolling && !bubbleDragged) placeCaption(consumed ? "brain" : step.placement || "top");
     }
   }
 
@@ -484,6 +532,8 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     }
     index = i;
     observed = false;
+    bubbleDragged = false; // a fresh step re-auto-places the bubble (drop any drag offset)
+    bubble.style.transition = ""; // clear a drag's inline transition:none
     scrolling = false; // a fresh step always places its bubble (a prior scroll may not have settled)
     if (scrollTimer) { clearTimeout(scrollTimer); scrollTimer = null; }
     // The very first step snaps into place (no fly-in from the corner); every
