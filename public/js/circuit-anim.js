@@ -73,14 +73,17 @@ const burstFor = (sign) => BURST[sign] || BURST.modulatory;
 // the strongest engaged system = 1): dosage is variable, so what matters is the
 // relative "dirtiness" of activity across systems, not an absolute magnitude. A
 // stronger system rides more beads, faster; a weaker one fewer, slower.
-const STREAM_MIN_BEADS = 2;
+const STREAM_MIN_BEADS = 3;
 const STREAM_MAX_BEADS = 7;
-// Faster than the first cut (0.30..0.62): a drug's flow beads share the screen with
-// the bright, pulsing per-region gem-dot clouds (drug-anim.js) and ride dimmed
-// arrows, so a slow crawl was easy to miss next to a circuit's brisk volley. The
-// min<max ratio still carries the *relative* speed across a drug's systems.
-const STREAM_MIN_SPEED = 0.45; // arcs travelled per second (weakest system)
-const STREAM_MAX_SPEED = 0.95; // arcs travelled per second (strongest system)
+// A drug's flow beads share the screen with the bright, pulsing per-region gem-dot
+// clouds (drug-anim.js) and ride dimmed arrows, so the band is pitched to read next to
+// a circuit's brisk volley. The floor is high enough that even the weakest engaged
+// system is clearly *moving* (never an immobile crawl), and the ceiling stays calm
+// enough to follow with the eye. The min<max ratio still carries the *relative* speed
+// across a drug's systems (affinity itself is compared on a pKi scale in js/data.js,
+// so the perceptual widening lives here in the output band, not in that ramp).
+const STREAM_MIN_SPEED = 0.55; // arcs/sec (weakest system): clearly moving, not immobile
+const STREAM_MAX_SPEED = 1.05; // arcs/sec (strongest system): brisk but still followable
 // And lift the stream's glow a touch, for the same reason: the beads compete with
 // the gem-dot clouds, so they need a little more presence to read as clearly as a
 // circuit's beads do on their own.
