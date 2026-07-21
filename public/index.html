@@ -359,9 +359,24 @@
       .collapse-header[aria-expanded="true"] .chevron { transform: rotate(90deg); }
       /* Version tag next to the panel title (set from version.js by js/main.js). */
       .collapse-header .version { font-weight: 400; font-size: 11px; color: var(--muted); }
-      /* Author byline at the top of the settings pane, under the title. */
-      .panel-byline { margin: -2px 0 10px; font-size: 12px; color: var(--muted); }
+      /* Author byline, inline to the RIGHT of the "neurarium" panel title (see
+         #controls-header below); also reused in the loading overlay via the shared
+         common.byline i18n key. */
+      .panel-byline { margin: 0; font-size: 12px; font-weight: 400; color: var(--muted); }
       .panel-byline a { color: var(--accent-light); text-decoration: underline; }
+      /* Panel header row: an invisible full-size hit button (the collapse toggle,
+         keyboard-focusable) sits UNDER the visible title + inline byline + chevron.
+         The overlay content is pointer-events:none so a click anywhere on the row
+         reaches the toggle beneath, EXCEPT the byline link (pointer-events:auto) so
+         the author link stays clickable without also toggling the panel. This is
+         what lets the byline sit beside the title (a plain <a> can't nest in a
+         <button>). */
+      #controls-header { position: relative; justify-content: flex-start; align-items: baseline; }
+      #controls-header > .collapse-hit { position: absolute; inset: 0; width: 100%; padding: 0; margin: 0; background: none; border: 0; cursor: pointer; }
+      #controls-header > :not(.collapse-hit) { position: relative; pointer-events: none; }
+      #controls-header .panel-byline a { pointer-events: auto; }
+      #controls-header .chevron { margin-left: auto; align-self: center; }
+      #controls-header:has(> .collapse-hit[aria-expanded="true"]) .chevron { transform: rotate(90deg); }
       .row { margin: 12px 0; }
       .row label { display: block; margin-bottom: 6px; color: var(--muted); }
       .row.inline label {
@@ -1954,10 +1969,17 @@
          appears at the top and the detail shows in the Details pane (see
          createPanelTabs / createInfoPanel in js/main.js). -->
     <div id="controls" class="panel">
-      <button type="button" id="controls-toggle" class="collapse-header" aria-expanded="true">
-        <span>neurarium <span class="version" id="app-version"></span></span>
+      <!-- Panel header: the collapse toggle is a full-size invisible hit button
+           BEHIND the visible title, so the linked "by Olivier Cornelis" byline can
+           sit inline to the right of the title without nesting an <a> in a <button>
+           (see #controls-header CSS). The visible title is aria-hidden (the button's
+           aria-label carries the name for screen readers); the byline stays read. -->
+      <div id="controls-header" class="collapse-header">
+        <button type="button" id="controls-toggle" class="collapse-hit" aria-expanded="true" aria-controls="controls-body" aria-label="neurarium"></button>
+        <span class="panel-title" aria-hidden="true">neurarium <span class="version" id="app-version"></span></span>
+        <span class="panel-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></span>
         <span class="chevron" aria-hidden="true">&#9656;</span>
-      </button>
+      </div>
 
       <div id="controls-body">
         <!-- Browser-style detail tabs. Shipped hidden; revealed once the first
@@ -1973,9 +1995,6 @@
         <!-- Settings pane: the normal controls. Hidden while the Details tab is
              active. -->
         <div id="settings-pane">
-        <!-- Author byline under the "neurarium" title. Locale-specific href via
-             common.byline (shared with the loading overlay). -->
-        <div class="panel-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></div>
         <!-- Language switch (en / fr). Always visible (the sliders now live in
              their own collapsible Controls section, so the panel top no longer
              hides when a section opens). Buttons carry data-lang; js/i18n.js
