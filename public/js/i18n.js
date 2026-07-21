@@ -129,7 +129,7 @@
         "Click <b>Olanzapine</b>. The brain dims and its effects animate on the regions it reaches.",
       "tour.drugActs.title": "What it acts on",
       "tour.drugActs.body":
-        "Its <b>bindings</b>: each target it hits, the effect, and the affinity (Ki) that drives the animation. <b>Heads-up:</b> the drug animations are the least scientific part of neurarium, still a work in progress, so read them as illustration, not fact.",
+        "Its <b>bindings</b>, ordered strongest affinity first: each target it hits, the effect, and the affinity (Ki) that drives the animation. <b>Heads-up:</b> the drug animations are the least scientific part of neurarium, still a work in progress, so read them as illustration, not fact.",
       "tour.drugToReceptor.title": "Follow it to a receptor",
       "tour.drugToReceptor.body":
         "Each binding is a link. Click the <b>H1</b> row to open that receptor.",
@@ -519,7 +519,7 @@
         "Cliquez sur <b>olanzapine</b>. Le cerveau s'assombrit et ses effets s'animent sur les régions qu'il atteint.",
       "tour.drugActs.title": "Ce sur quoi il agit",
       "tour.drugActs.body":
-        "Ses <b>liaisons</b> : chaque cible touchée, l'effet, et l'affinité (Ki) qui pilote l'animation. <b>À noter :</b> les animations de médicaments sont l'aspect le moins scientifique de neurarium, encore en chantier ; voyez-les comme une illustration, pas un fait.",
+        "Ses <b>liaisons</b>, classées de la plus forte affinité à la plus faible : chaque cible touchée, l'effet, et l'affinité (Ki) qui pilote l'animation. <b>À noter :</b> les animations de médicaments sont l'aspect le moins scientifique de neurarium, encore en chantier ; voyez-les comme une illustration, pas un fait.",
       "tour.drugToReceptor.title": "Suivre vers un récepteur",
       "tour.drugToReceptor.body":
         "Chaque liaison est un lien. Cliquez sur la ligne <b>H1</b> pour ouvrir ce récepteur.",
