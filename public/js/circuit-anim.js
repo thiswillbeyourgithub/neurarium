@@ -75,8 +75,16 @@ const burstFor = (sign) => BURST[sign] || BURST.modulatory;
 // stronger system rides more beads, faster; a weaker one fewer, slower.
 const STREAM_MIN_BEADS = 2;
 const STREAM_MAX_BEADS = 7;
-const STREAM_MIN_SPEED = 0.30; // arcs travelled per second (weakest system)
-const STREAM_MAX_SPEED = 0.62; // arcs travelled per second (strongest system)
+// Faster than the first cut (0.30..0.62): a drug's flow beads share the screen with
+// the bright, pulsing per-region gem-dot clouds (drug-anim.js) and ride dimmed
+// arrows, so a slow crawl was easy to miss next to a circuit's brisk volley. The
+// min<max ratio still carries the *relative* speed across a drug's systems.
+const STREAM_MIN_SPEED = 0.45; // arcs travelled per second (weakest system)
+const STREAM_MAX_SPEED = 0.95; // arcs travelled per second (strongest system)
+// And lift the stream's glow a touch, for the same reason: the beads compete with
+// the gem-dot clouds, so they need a little more presence to read as clearly as a
+// circuit's beads do on their own.
+const STREAM_BRIGHT = 1.2;
 const lerp = (a, b, t) => a + (b - a) * t;
 
 /**
@@ -164,7 +172,7 @@ export function createCircuitAnimation({ scene }) {
           const beadCount = Math.max(1, Math.round(
             lerp(STREAM_MIN_BEADS, STREAM_MAX_BEADS, rel) * animSettings.quality));
           const streamSpeed = lerp(STREAM_MIN_SPEED, STREAM_MAX_SPEED, rel) * (dir < 0 ? 0.82 : 1);
-          const bright = burst.bright * (dir > 0 ? 1 : 0.62);
+          const bright = STREAM_BRIGHT * burst.bright * (dir > 0 ? 1 : 0.72);
           for (const reverse of dirs) for (let i = 0; i < beadCount; i++) {
             const material = new THREE.MeshBasicMaterial({
               color: color.clone(), transparent: true, opacity: 0,
