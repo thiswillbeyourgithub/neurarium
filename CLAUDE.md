@@ -146,7 +146,9 @@ Viewer (`public/`):
   `#sourcing-modal`, `#about-modal`, `#image-lightbox`, all `.modal-overlay`), the `#banners`
   stack, the startup `#loading` overlay. An author **byline** ("by Olivier Cornelis", linking
   olicorne.org per locale via the shared `common.byline` i18n key) sits both in `#loading`
-  (`.loading-byline`) and atop the settings pane (`.panel-byline`). UI-chrome accent = the `--accent*` palette in `:root`;
+  (`.loading-byline`) and inline in the panel header, right of the `neurarium` title
+  (`.panel-byline` in `#controls-header`, over an invisible full-row `.collapse-hit` button so a
+  row click still toggles the panel while the byline link stays clickable). UI-chrome accent = the `--accent*` palette in `:root`;
   data/semantic colours live in `meta.json`, never here. Also wires the PWA: links
   `manifest.webmanifest` + registers `sw.js`.
 - PWA (installable + offline): `manifest.webmanifest` (name/icons/`theme_color`), `sw.js`
@@ -213,7 +215,9 @@ Viewer (`public/`):
   langlinks, English fallback; cached; best-effort (failure -> null).
 - `js/tour.js`: `createTour({steps, labels, onEnd, seenKey})`, a generic, three.js-free coach-mark
   engine (spotlight ring / caption bubble, viewport-aware placement that never covers the target or
-  the 3D scene, resize/scroll reposition, localStorage "seen" gate). There is **no Next button** (only
+  the 3D scene, resize/scroll reposition, localStorage "seen" gate). The bubble is **drag-repositionable**
+  (pointer-drag past a small jitter threshold; a dragged bubble opts out of auto-placement for the step)
+  and layered **above any `veil`** so it is never itself dimmed. There is **no Next button** (only
   Back + Skip + Esc): the user advances by acting on the step, so they cannot fast-forward past a
   hands-on demo. A step is passive/caption (a "click to continue" cue in the bubble, and a click on the
   dim backdrop, advance it) or **`interactive`** (the blocker gets a clip-path click-through hole so the
