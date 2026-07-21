@@ -105,73 +105,73 @@
       "tour.aria": "Guided tour",
       "tour.welcome.title": "Welcome to neurarium",
       "tour.welcome.body":
-        "A 3D map of the brain: its regions, the pathways between them, and the receptors and drugs that act on them. This quick tour shows the main features. You can leave any time.",
+        "A 3D map of the brain: its regions, their pathways, and the receptors and drugs acting on them. Quick tour, leave any time.",
       "tour.rotate.title": "Move around",
       "tour.rotate.body":
-        "<b>Drag</b> the brain to rotate it (scroll or pinch to zoom, two fingers or right-click to pan). Every shape is a real brain structure. Give it a spin to continue.",
+        "<b>Drag</b> to spin the brain, scroll to zoom. Give it a spin to continue.",
       "tour.separate.title": "Pull it apart",
       "tour.separate.body":
-        "The <b>Separate</b> slider blows the brain open, exposing the deep nuclei otherwise buried under the cortex. Watch it sweep out and back, then grab the slider yourself to continue.",
+        "The <b>Separate</b> slider pulls the brain apart to reveal the deep nuclei. Grab it to continue.",
       "tour.sourcesOpen.title": "Every fact is sourced",
       "tour.sourcesOpen.body":
-        "This dataset is LLM-assisted, so each fact carries a provenance grade. Click the highlighted <b>Sources &amp; provenance</b> button to open the breakdown.",
+        "The data is LLM-assisted, so every fact is graded. Click <b>Sources &amp; provenance</b> to see the breakdown.",
       "tour.sourcesDetail.title": "The provenance breakdown",
       "tour.sourcesDetail.body":
-        "This popup tallies how much of the data is verified against a quoted source, merely sourced, or still unchecked. Close it (the highlighted &times;) to continue.",
+        "How much of the data is verified, sourced, or still unchecked. Close it (the <b>&times;</b>) to continue.",
       "tour.browse.title": "Browse the data",
       "tour.browse.body":
-        "Everything lives in four lists: <b>Drugs</b> ({drugs}+), <b>Receptors &amp; targets</b> ({receptors}+), <b>Structures</b> ({structures}+) and <b>Projections &amp; Circuits</b> ({projections}+). Open any one and click a row to focus it. Let's try a few.",
+        "Everything sits in four lists: <b>Drugs</b> ({drugs}+), <b>Receptors</b> ({receptors}+), <b>Brain structures</b> ({structures}+), <b>Projections</b> ({projections}+). We'll open a few next.",
       "tour.openDrugs.title": "Open a list",
       "tour.openDrugs.body":
-        "Let's start with a drug. Click the highlighted <b>Drugs</b> to open the list.",
+        "Start with a drug. Click <b>Drugs</b> to open the list.",
       "tour.drugTap.title": "Focus a drug",
       "tour.drugTap.body":
-        "Click the highlighted <b>Olanzapine</b> row. The brain dims and its effects animate: coloured dots on the regions it reaches, and flow along the systems whose tone it shifts.",
+        "Click <b>Olanzapine</b>. The brain dims and its effects animate on the regions it reaches.",
       "tour.drugActs.title": "What it acts on",
       "tour.drugActs.body":
-        "Its <b>bindings</b>: every receptor and target it touches, the effect, and the measured affinity (Ki) where known, which is what drives the animation. <b>One caveat:</b> the drug animations are by far the least scientific part of neurarium and are still being worked out, so treat them as an evolving illustration, not settled fact.",
+        "Its <b>bindings</b>: each target it hits, the effect, and the affinity (Ki) that drives the animation. <b>Heads-up:</b> the drug animations are the least scientific part of neurarium, still a work in progress, so read them as illustration, not fact.",
       "tour.drugToReceptor.title": "Follow it to a receptor",
       "tour.drugToReceptor.body":
-        "Each binding is a link. Click the highlighted <b>H1</b> row to open that receptor's own panel.",
+        "Each binding is a link. Click the <b>H1</b> row to open that receptor.",
       "tour.receptorFacts.title": "How it's classified",
       "tour.receptorFacts.body":
-        "Its <b>classification</b>: neurotransmitter family, mechanism, whether it excites or inhibits, and where on the synapse it sits. Each fact carries its own provenance grade.",
+        "Its <b>classification</b>: family, mechanism, excites or inhibits, synapse site. Each fact has its own grade.",
       "tour.receptorRegions.title": "Where it's found",
       "tour.receptorRegions.body":
-        "The <b>regions</b> where this receptor is expressed, each with its own source. Click any region to jump to it.",
+        "The <b>regions</b> where it's expressed, each with its own source, and each one clickable.",
       "tour.closePanel.title": "Close the panel",
       "tour.closePanel.body":
-        "Done reading? Click the highlighted <b>&times;</b> to close this panel and go back to the lists.",
+        "Done reading? Click the <b>&times;</b> to close the panel.",
       "tour.openStructures.title": "Open a structure",
       "tour.openStructures.body":
-        "Now a different kind of node. Click the highlighted <b>Structures</b> to open the list.",
+        "A different kind of node. Click <b>Brain structures</b> to open the list.",
       "tour.structureTap.title": "Isolate a region",
       "tour.structureTap.body":
-        "Click the highlighted <b>Hippocampus</b> row. It is isolated from the rest of the brain so you can see it on its own.",
+        "Click <b>Hippocampus</b>. It's isolated so you can see it on its own.",
       "tour.structureLook.title": "Read about it",
       "tour.structureLook.body":
-        "Each panel opens with an illustration and a live description pulled from Wikipedia. <b>Scroll the panel</b> down to continue.",
+        "Each panel opens with an image and a live Wikipedia description. <b>Scroll down</b> to continue.",
       "tour.openProjections.title": "Open the projections",
       "tour.openProjections.body":
-        "One last kind of node: the pathways between regions. Click the highlighted <b>Projections</b>.",
+        "Last kind of node: the pathways between regions. Click <b>Projections</b>.",
       "tour.projectionTap.title": "A whole system",
       "tour.projectionTap.body":
-        "Click the highlighted <b>Dopamine</b> system. It pins every dopaminergic pathway at once, from the midbrain out across the brain.",
+        "Click the <b>Dopamine</b> system. It pins every dopaminergic pathway at once.",
       "tour.projectionLook.title": "Read about it",
       "tour.projectionLook.body":
-        "Its <b>member pathways</b> and a description. <b>Scroll the panel</b> down to continue.",
+        "Its <b>member pathways</b> and a description. <b>Scroll down</b> to continue.",
       "tour.backToSettings.title": "Back to the panel",
       "tour.backToSettings.body":
-        "One last feature. Click <b>Settings</b> to leave this panel and return to the main panel.",
+        "One last thing. Click <b>Settings</b> to return to the main panel.",
       "tour.openSearch.title": "Open search",
       "tour.openSearch.body":
-        "Click the highlighted <b>magnifier</b> to open the search box.",
+        "Click the <b>magnifier</b> to open search.",
       "tour.search.title": "Find anything",
       "tour.search.body":
-        "<b>Search</b> jumps straight to any region, pathway, receptor or drug by name (try typing here). You can also filter drugs by class or nomenclature.",
+        "<b>Search</b> jumps to any structure, pathway, receptor or drug by name (try it). You can also filter drugs by class.",
       "tour.wrap.title": "You're set",
       "tour.wrap.body":
-        "That's the tour. Settings, the EN/FR switch and this tour all live in the panel; you can replay the tour any time from <b>About</b>. Enjoy exploring.",
+        "That's the tour. Settings, the EN / FR switch and a replay of this tour all live in the panel (replay from <b>About</b>). Enjoy.",
 
       "legend.showNames": "Show all names",
       "legend.showProjections": "Show projections",
@@ -495,73 +495,73 @@
       "tour.aria": "Visite guidée",
       "tour.welcome.title": "Bienvenue sur neurarium",
       "tour.welcome.body":
-        "Une carte 3D du cerveau : ses régions, les voies qui les relient, et les récepteurs et médicaments qui agissent dessus. Cette courte visite présente les principales fonctionnalités. Vous pouvez la quitter à tout moment.",
+        "Une carte 3D du cerveau : ses régions, leurs voies, et les récepteurs et médicaments qui agissent dessus. Visite rapide, quittez quand vous voulez.",
       "tour.rotate.title": "Se déplacer",
       "tour.rotate.body":
-        "<b>Faites glisser</b> le cerveau pour le tourner (défilez ou pincez pour zoomer, deux doigts ou clic droit pour vous déplacer). Chaque forme est une structure cérébrale réelle. Faites-le tourner pour continuer.",
+        "<b>Faites glisser</b> pour tourner le cerveau, défilez pour zoomer. Faites-le tourner pour continuer.",
       "tour.separate.title": "Écarter les régions",
       "tour.separate.body":
-        "Le curseur <b>Séparer</b> ouvre le cerveau vers l'extérieur, révélant les noyaux profonds autrement enfouis sous le cortex. Regardez-le balayer puis revenir, puis saisissez le curseur vous-même pour continuer.",
+        "Le curseur <b>Séparer</b> ouvre le cerveau et révèle les noyaux profonds. Saisissez-le pour continuer.",
       "tour.sourcesOpen.title": "Chaque fait est sourcé",
       "tour.sourcesOpen.body":
-        "Ce jeu de données est assisté par IA : chaque fait porte donc une note de provenance. Cliquez sur le bouton <b>Sources et provenance</b> (en surbrillance) pour ouvrir le récapitulatif.",
+        "Les données sont assistées par IA : chaque fait est noté. Cliquez sur <b>Sources et provenance</b> pour voir le détail.",
       "tour.sourcesDetail.title": "Le récapitulatif de provenance",
       "tour.sourcesDetail.body":
-        "Cette fenêtre chiffre la part des données vérifiée face à une citation, simplement sourcée, ou encore non contrôlée. Fermez-la (le &times; en surbrillance) pour continuer.",
+        "La part des données vérifiée, sourcée, ou encore non contrôlée. Fermez-la (le <b>&times;</b>) pour continuer.",
       "tour.browse.title": "Parcourir les données",
       "tour.browse.body":
-        "Tout se trouve dans quatre listes : <b>Médicaments</b> ({drugs}+), <b>Récepteurs et cibles</b> ({receptors}+), <b>Structures</b> ({structures}+) et <b>Projections et circuits</b> ({projections}+). Ouvrez-en une et cliquez sur une ligne pour la mettre en avant. Essayons-en quelques-unes.",
+        "Tout tient en quatre listes : <b>Médicaments</b> ({drugs}+), <b>Récepteurs</b> ({receptors}+), <b>Structures cérébrales</b> ({structures}+), <b>Projections</b> ({projections}+). On en ouvre quelques-unes ensuite.",
       "tour.openDrugs.title": "Ouvrir une liste",
       "tour.openDrugs.body":
-        "Commençons par un médicament. Cliquez sur <b>Médicaments</b> (en surbrillance) pour ouvrir la liste.",
+        "Commençons par un médicament. Cliquez sur <b>Médicaments</b> pour ouvrir la liste.",
       "tour.drugTap.title": "Mettre un médicament en avant",
       "tour.drugTap.body":
-        "Cliquez sur la ligne <b>olanzapine</b> en surbrillance. Le cerveau s'assombrit et ses effets s'animent : des points colorés sur les régions qu'il atteint, et un flux le long des systèmes dont il modifie le tonus.",
+        "Cliquez sur <b>olanzapine</b>. Le cerveau s'assombrit et ses effets s'animent sur les régions qu'il atteint.",
       "tour.drugActs.title": "Ce sur quoi il agit",
       "tour.drugActs.body":
-        "Ses <b>liaisons</b> : tous les récepteurs et cibles qu'il touche, l'effet, et l'affinité mesurée (Ki) lorsqu'elle est connue, ce qui pilote l'animation. <b>Une réserve :</b> les animations de médicaments sont de loin l'aspect le moins scientifique de neurarium et sont encore en cours d'élaboration ; considérez-les comme une illustration qui évolue, pas un fait établi.",
+        "Ses <b>liaisons</b> : chaque cible touchée, l'effet, et l'affinité (Ki) qui pilote l'animation. <b>À noter :</b> les animations de médicaments sont l'aspect le moins scientifique de neurarium, encore en chantier ; voyez-les comme une illustration, pas un fait.",
       "tour.drugToReceptor.title": "Suivre vers un récepteur",
       "tour.drugToReceptor.body":
-        "Chaque liaison est un lien. Cliquez sur la ligne <b>H1</b> en surbrillance pour ouvrir le panneau de ce récepteur.",
+        "Chaque liaison est un lien. Cliquez sur la ligne <b>H1</b> pour ouvrir ce récepteur.",
       "tour.receptorFacts.title": "Sa classification",
       "tour.receptorFacts.body":
-        "Sa <b>classification</b> : famille de neurotransmetteur, mécanisme, s'il excite ou inhibe, et sa position sur la synapse. Chaque fait porte sa propre note de provenance.",
+        "Sa <b>classification</b> : famille, mécanisme, excite ou inhibe, place sur la synapse. Chaque fait a sa propre note.",
       "tour.receptorRegions.title": "Où on le trouve",
       "tour.receptorRegions.body":
-        "Les <b>régions</b> où ce récepteur est exprimé, chacune avec sa source. Cliquez sur une région pour y accéder.",
+        "Les <b>régions</b> où il est exprimé, chacune avec sa source, et toutes cliquables.",
       "tour.closePanel.title": "Fermer le panneau",
       "tour.closePanel.body":
-        "Lecture terminée ? Cliquez sur le <b>&times;</b> en surbrillance pour fermer ce panneau et revenir aux listes.",
+        "Lecture terminée ? Cliquez sur le <b>&times;</b> pour fermer le panneau.",
       "tour.openStructures.title": "Ouvrir une structure",
       "tour.openStructures.body":
-        "Passons à un autre type de nœud. Cliquez sur <b>Structures</b> (en surbrillance) pour ouvrir la liste.",
+        "Un autre type de nœud. Cliquez sur <b>Structures cérébrales</b> pour ouvrir la liste.",
       "tour.structureTap.title": "Isoler une région",
       "tour.structureTap.body":
-        "Cliquez sur la ligne <b>hippocampe</b> en surbrillance. Elle est isolée du reste du cerveau pour que vous puissiez la voir seule.",
+        "Cliquez sur <b>hippocampe</b>. Il est isolé pour que vous le voyiez seul.",
       "tour.structureLook.title": "En savoir plus",
       "tour.structureLook.body":
-        "Chaque panneau s'ouvre sur une illustration et une description tirée en direct de Wikipédia. <b>Faites défiler le panneau</b> vers le bas pour continuer.",
+        "Chaque panneau s'ouvre sur une image et une description Wikipédia en direct. <b>Faites défiler</b> vers le bas pour continuer.",
       "tour.openProjections.title": "Ouvrir les projections",
       "tour.openProjections.body":
-        "Un dernier type de nœud : les voies entre régions. Cliquez sur <b>Projections</b> en surbrillance.",
+        "Dernier type de nœud : les voies entre régions. Cliquez sur <b>Projections</b>.",
       "tour.projectionTap.title": "Un système entier",
       "tour.projectionTap.body":
-        "Cliquez sur le système <b>dopamine</b> en surbrillance. Il épingle d'un coup toutes les voies dopaminergiques, du mésencéphale à travers le cerveau.",
+        "Cliquez sur le système <b>dopamine</b>. Il épingle d'un coup toutes les voies dopaminergiques.",
       "tour.projectionLook.title": "En savoir plus",
       "tour.projectionLook.body":
-        "Ses <b>voies membres</b> et une description. <b>Faites défiler le panneau</b> vers le bas pour continuer.",
+        "Ses <b>voies membres</b> et une description. <b>Faites défiler</b> vers le bas pour continuer.",
       "tour.backToSettings.title": "Retour au panneau",
       "tour.backToSettings.body":
-        "Une dernière fonctionnalité. Cliquez sur <b>Réglages</b> pour quitter ce panneau et revenir au panneau principal.",
+        "Une dernière chose. Cliquez sur <b>Réglages</b> pour revenir au panneau principal.",
       "tour.openSearch.title": "Ouvrir la recherche",
       "tour.openSearch.body":
-        "Cliquez sur la <b>loupe</b> en surbrillance pour ouvrir le champ de recherche.",
+        "Cliquez sur la <b>loupe</b> pour ouvrir la recherche.",
       "tour.search.title": "Tout retrouver",
       "tour.search.body":
-        "La <b>recherche</b> mène directement à n'importe quelle région, voie, récepteur ou médicament par son nom (essayez d'en taper un ici). Vous pouvez aussi filtrer les médicaments par classe ou nomenclature.",
+        "La <b>recherche</b> mène à toute structure, voie, récepteur ou médicament par son nom (essayez). Vous pouvez aussi filtrer les médicaments par classe.",
       "tour.wrap.title": "Vous êtes prêt",
       "tour.wrap.body":
-        "Voilà pour la visite. Les réglages, le sélecteur EN/FR et cette visite se trouvent dans le panneau ; vous pouvez relancer la visite à tout moment depuis <b>À propos</b>. Bonne exploration.",
+        "Voilà la visite. Les réglages, le sélecteur EN/FR et une relance de la visite sont dans le panneau (relance depuis <b>À propos</b>). Bonne exploration.",
 
       "legend.showNames": "Afficher tous les noms",
       "legend.showProjections": "Afficher les projections",
