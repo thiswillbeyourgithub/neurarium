@@ -150,6 +150,11 @@ export function createCircuitAnimation({ scene }) {
         const whiten = flow ? (flow.direction > 0 ? 0.55 : 0.22) : 0.55;
         const color = arrow.material.color.clone().lerp(WHITE, whiten);
 
+        // A bidirectional pathway (corpus callosum, claustro links) streams beads
+        // BOTH ways so it reads as a two-way connection, not a one-way arrow; a
+        // one-way pathway keeps a single forward stream.
+        const dirs = arrow.projection.bidirectional ? [false, true] : [false];
+
         if (continuous) {
           // Relative intensity (0..1), normalized across the drug's systems so the
           // strongest streams fullest (js/data.js `rel`); both bead count (density)
@@ -160,7 +165,7 @@ export function createCircuitAnimation({ scene }) {
             lerp(STREAM_MIN_BEADS, STREAM_MAX_BEADS, rel) * animSettings.quality));
           const streamSpeed = lerp(STREAM_MIN_SPEED, STREAM_MAX_SPEED, rel) * (dir < 0 ? 0.82 : 1);
           const bright = burst.bright * (dir > 0 ? 1 : 0.62);
-          for (let i = 0; i < beadCount; i++) {
+          for (const reverse of dirs) for (let i = 0; i < beadCount; i++) {
             const material = new THREE.MeshBasicMaterial({
               color: color.clone(), transparent: true, opacity: 0,
               blending: THREE.AdditiveBlending, depthWrite: false,
@@ -171,7 +176,7 @@ export function createCircuitAnimation({ scene }) {
             mesh.raycast = () => {};
             scene.add(mesh);
             // Even spacing along the arc so the stream looks steady, not clumped.
-            pulses.push({ arrow, mesh, material, streamOffset: i / beadCount, streamSpeed, bright });
+            pulses.push({ arrow, mesh, material, streamOffset: i / beadCount, streamSpeed, bright, reverse });
           }
           continue;
         }
@@ -183,7 +188,7 @@ export function createCircuitAnimation({ scene }) {
         // Scale the volley size by the adaptive quality (and flow weight) so a
         // struggling GPU or a weak affinity rides fewer beads (always at least one).
         const beadCount = Math.max(1, Math.round(burst.count * countScale * animSettings.quality));
-        for (let i = 0; i < beadCount; i++) {
+        for (const reverse of dirs) for (let i = 0; i < beadCount; i++) {
           const material = new THREE.MeshBasicMaterial({
             color: color.clone(),
             transparent: true,
@@ -198,19 +203,22 @@ export function createCircuitAnimation({ scene }) {
           scene.add(mesh);
           pulses.push({
             arrow, phase, mesh, material,
-            offset: i * burst.gap, speed, bright,
+            offset: i * burst.gap, speed, bright, reverse,
           });
         }
       }
-      // One wash shell per distinct target region (parented to it, so it tracks
-      // the structure's explode/mirror transform for free, like the halo). Starts
-      // idle (age past WASH_MS); a landing bead seeds + retriggers it.
+      // One wash shell per distinct region (parented to it, so it tracks the
+      // structure's explode/mirror transform for free, like the halo). Starts idle
+      // (age past WASH_MS); a landing bead seeds + retriggers it. A bidirectional
+      // pathway washes BOTH ends (a reverse bead lands on the source).
       for (const arrow of circuitArrows) {
-        const target = arrow.toMesh;
-        if (nodeWashes.has(target)) continue;
-        const wash = buildWashShell(target, target.userData.structure.color);
-        if (!wash) continue;
-        nodeWashes.set(target, { mesh: target, wash, age: WASH_MS, bright: 0 });
+        const ends = arrow.projection.bidirectional ? [arrow.toMesh, arrow.fromMesh] : [arrow.toMesh];
+        for (const target of ends) {
+          if (nodeWashes.has(target)) continue;
+          const wash = buildWashShell(target, target.userData.structure.color);
+          if (!wash) continue;
+          nodeWashes.set(target, { mesh: target, wash, age: WASH_MS, bright: 0 });
+        }
       }
       playing = circuitArrows;
     },
@@ -283,11 +291,16 @@ export function createCircuitAnimation({ scene }) {
             continue;
           }
         }
-        p.arrow.curve.getPoint(t, tmpPoint); // reuse the scratch vec (no per-bead alloc)
+        // A reverse bead (on a bidirectional pathway) rides the arc head->tail, so
+        // its curve parameter is mirrored; `t` stays the 0->1 travel progress used
+        // for the fade + landing below, identical in both directions.
+        const pos = p.reverse ? 1 - t : t;
+        p.arrow.curve.getPoint(pos, tmpPoint); // reuse the scratch vec (no per-bead alloc)
         p.mesh.position.copy(tmpPoint);
         p.mesh.visible = true;
         // Fade in/out at the ends of the run so beads don't pop, but stay bright
-        // across the middle so the hand-off at each node reads clearly.
+        // across the middle so the hand-off at each node reads clearly (symmetric
+        // in the travel progress t, so it works either direction).
         const edge = 0.12;
         const k = Math.min(t / edge, (1 - t) / edge, 1);
         p.material.opacity = (0.2 + 0.8 * Math.max(0, k)) * p.bright;
@@ -295,12 +308,14 @@ export function createCircuitAnimation({ scene }) {
         // arrow's colour, but only if the node's previous ripple has finished, so
         // a volley's first bead fires the echo and the rest don't restart it
         // (the next loop's bead retriggers once this one has dissolved). Scaled by
-        // the sign's brightness, so excitatory volleys echo harder.
+        // the sign's brightness, so excitatory volleys echo harder. A reverse bead
+        // lands on the SOURCE node (the arc tail) instead of the target.
         if (t >= ARRIVAL_ZONE) {
-          const f = nodeWashes.get(p.arrow.toMesh);
+          const landMesh = p.reverse ? p.arrow.fromMesh : p.arrow.toMesh;
+          const f = nodeWashes.get(landMesh);
           if (f && f.age >= WASH_MS) {
-            p.arrow.curve.getPoint(1, tmpPoint); // arc head, in world space
-            p.arrow.toMesh.worldToLocal(tmpPoint); // -> the target's local frame
+            p.arrow.curve.getPoint(p.reverse ? 0 : 1, tmpPoint); // the arc end it lands on
+            landMesh.worldToLocal(tmpPoint); // -> that node's local frame
             f.wash.setOrigin(tmpPoint);
             f.wash.setColor(p.arrow.material.color);
             f.bright = p.bright;
