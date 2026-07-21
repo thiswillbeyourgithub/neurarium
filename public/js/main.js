@@ -6035,7 +6035,11 @@ async function main() {
     if (sl) { sl.value = "0"; applyExplode(meshes, 0, arrows); }
     const sb = tourEl("search");
     if (sb && !sb.hidden) tourEl("search-toggle")?.click();
-    tourExpandPanel();
+    // Force a deterministic launch view: panel expanded, Settings sub-pane open
+    // (the sliders visible), the Settings tab focused (tourEnsurePanel), and the
+    // browse sections collapsed. So the tour always opens on the same clean state
+    // whatever the user left behind.
+    tourEnsurePanel();
     tourCollapseSections();
     focus.recenter();
   };
