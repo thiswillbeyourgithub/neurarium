@@ -6061,6 +6061,22 @@ async function main() {
   const tourEnsureTab = (key, node, show) => () => {
     if (node && tabs.activeKey() !== key) show(node);
   };
+  // Reset the open details panel to its top. Paired with a tourGateScroll "read this
+  // panel" step (16 structure, 20 projection system): if the pane were left scrolled
+  // near the bottom (a Back into the step, or a prior deep scroll), the gate's
+  // "reached the bottom" test would fire on the user's very first gesture and autoskip
+  // the step before they read a word. Forcing scrollTop = 0 here (synchronously, before
+  // the gate arms) makes the panel always start at the illustration.
+  const tourPanelToTop = () => {
+    const pane = document.getElementById("details-pane");
+    if (pane) pane.scrollTop = 0;
+  };
+  // A "read this panel" step's before(): re-open the node's tab if needed, then always
+  // start the panel at its top (see tourPanelToTop) so the scroll gate can't autoskip.
+  const tourReadPanel = (key, node, show) => () => {
+    tourEnsureTab(key, node, show)();
+    tourPanelToTop();
+  };
 
   // --- Gesture gates: return a teardown; call signal() when the action happens. See
   // js/tour.js (a gate keeps Next greyed until fired, or auto-advances on gateAdvances).
@@ -6226,7 +6242,7 @@ async function main() {
     { title: t("tour.structureLook.title"), body: t("tour.structureLook.body"),
       target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
       gate: tourGateScroll, gateAdvances: true,
-      before: tourEnsureTab("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
+      before: tourReadPanel("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
     // 17. Back out of the structure panel by hand.
     { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
       target: tourActiveTabClose, interactive: true,
@@ -6243,7 +6259,7 @@ async function main() {
     { title: t("tour.projectionLook.title"), body: t("tour.projectionLook.body"),
       target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
       gate: tourGateScroll, gateAdvances: true,
-      before: tourEnsureTab("group:kind_dopaminergic", tourDopGroup, tourShowDopGroup) },
+      before: tourReadPanel("group:kind_dopaminergic", tourDopGroup, tourShowDopGroup) },
     // 21-22. Get to search by hand: tap Settings (back to the main panel), then the
     //    magnifier (opens the search box). Both auto-advance on the real tap.
     { title: t("tour.backToSettings.title"), body: t("tour.backToSettings.body"),
