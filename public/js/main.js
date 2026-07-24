@@ -4220,7 +4220,7 @@ function applyViewParams(bundle) {
  * source) and the programmatic coverage tally. The numbers come straight from the
  * data (generate_data.py _provenance_stats), so the headline % is a real count.
  */
-function buildAboutSourcing(meta) {
+function buildAboutSourcing(meta, opts = {}) {
   const host = document.getElementById("about-sourcing");
   if (!host) return;
   host.replaceChildren();
@@ -4242,19 +4242,18 @@ function buildAboutSourcing(meta) {
   // viewer has bugs. Keep this prominent so nobody reads a pill as "true".
   host.appendChild(h("p", "about-caveat", t("about.sourcingCaveat")));
 
-  // Grade key: a pill swatch + its meaning, in weakest-to-strongest order
-  // (NOSOURCE first, then LLM-only up to verified, then the live-Wikipedia link).
-  // The swatches reuse the info-panel CSS classes so the legend matches what is
-  // shown next to each source. The last row is the exception the panels make for a
-  // live-fetched description: its source is the green Wikipedia link itself, in
-  // place of a grade pill (see liveWikiDescription / .wiki-src).
+  // Grade key: a pill swatch + its meaning, in weakest-to-strongest order (NOSOURCE
+  // first, then LLM-only, then verified). The swatches reuse the info-panel CSS classes
+  // so the legend matches what is shown next to each source. The `~ sourced` (orange)
+  // and live-Wikipedia (green) rows are intentionally omitted: no *knowledge* node is
+  // ever graded `sourced` (only Wikipedia references are, and they render as the green
+  // link, not a coverage bar), so both rows explained pills that never label a tallied
+  // node here and only added noise.
   const key = h("ul", "src-key");
   const keyRows = [
     ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
     ["src-prov-llm", "?", "about.gradeLlm"],
-    ["src-prov-sourced", "~", "about.gradeSourced"],
     ["src-prov-verified", "✓", "about.gradeVerified"],
-    ["src-prov-wikipedia wiki-src", t("info.wikipedia"), "about.gradeWikipedia"],
   ];
   for (const [cls, glyph, tip] of keyRows) {
     const li = document.createElement("li");
@@ -4273,8 +4272,6 @@ function buildAboutSourcing(meta) {
   // A headline over the knowledge nodes, then a per-node-kind bar.
   const a = stats.nodes || {};
   const wrap = h("div", "src-stats");
-  wrap.appendChild(h("p", "src-stat-headline",
-    t("about.sourcingHeadline", { pct: a.pct_backed, total: a.total })));
   const KIND_LABELS = {
     drug_bindings: "about.kindBindings",
     drug_nbn: "about.kindNbn",
@@ -4311,7 +4308,7 @@ function buildAboutSourcing(meta) {
     const llm = c.llm != null ? c.llm : (c.missing || 0) - nosource;
     const backed = verified + sourced;
     const pct = Math.round((100 * backed) / c.total);
-    rows.push({ labelKey, verified, sourced, llm, nosource, backed, total: c.total, pct });
+    rows.push({ kind, labelKey, verified, sourced, llm, nosource, backed, total: c.total, pct });
   }
   rows.sort((x, y) => y.pct - x.pct || y.total - x.total);
   // The four grade segments, strongest to weakest: (count, CSS class, tooltip label).
@@ -4321,29 +4318,80 @@ function buildAboutSourcing(meta) {
     ["llm", "src-seg-llm", "about.segLlm"],
     ["nosource", "src-seg-nosource", "about.segNone"],
   ];
-  for (const r of rows) {
-    const row = h("div", "src-stat-row");
-    row.appendChild(h("span", "src-stat-label", t(r.labelKey)));
-    row.appendChild(h("span", "src-stat-count", `${r.backed} / ${r.total} (${r.pct}%)`));
+  // One flush segment per non-empty grade, width proportional to its share, so a
+  // partly-sourced kind reads as green+yellow+grey+red instead of green-on-empty.
+  const buildBar = (counts, total) => {
     const bar = h("div", "src-stat-bar");
-    // One flush segment per non-empty grade, width proportional to its share, so a
-    // partly-sourced kind reads as green+yellow+grey+red instead of green-on-empty.
-    for (const [field, cls, labelKey] of SEGMENTS) {
-      const n = r[field];
-      if (!n) continue;
+    for (const [field, cls] of SEGMENTS) {
+      const n = counts[field] || 0;
+      if (!n || !total) continue;
       const seg = h("span", cls);
-      seg.style.width = `${(100 * n) / r.total}%`;
+      seg.style.width = `${(100 * n) / total}%`;
       bar.appendChild(seg);
     }
-    // Per-grade counts tooltip via the shared attachTip (not a native `title`) so it
-    // also works on touch: one tap pins it, a tap elsewhere dismisses it. zIndex 90
-    // lifts the bubble above the #sourcing-modal (80) it lives in.
-    attachTip(bar, SEGMENTS
-      .map(([field, , labelKey]) => `${t(labelKey)}: ${r[field]}`)
-      .join("  ·  "), { zIndex: 90 });
-    row.appendChild(bar);
-    wrap.appendChild(row);
+    return bar;
+  };
+  // Only grades that actually occur, so a kind with nothing "sourced"/no-source reads
+  // "Verified: 54" instead of trailing a row of zeros (the ~sourced tier is always 0
+  // for knowledge nodes, which is why its legend row was dropped).
+  const gradeCountsText = (counts) => SEGMENTS
+    .filter(([field]) => counts[field])
+    .map(([field, , labelKey]) => `${t(labelKey)}: ${counts[field]}`)
+    .join("  ·  ");
+
+  // The GLOBAL bar is the only thing shown by default: one aggregate number + bar over
+  // every knowledge node. It is a button that expands the per-node-kind breakdown, so
+  // the popup stays a single glanceable figure until the reader asks for detail.
+  const globalCounts = {
+    verified: a.verified || 0, sourced: a.sourced || 0,
+    llm: a.llm || 0, nosource: a.nosource || 0,
+  };
+  const globalBtn = h("button", "src-global");
+  globalBtn.type = "button";
+  globalBtn.setAttribute("aria-expanded", "false");
+  globalBtn.appendChild(h("p", "src-stat-headline",
+    t("about.sourcingHeadline", { pct: a.pct_backed, total: a.total })));
+  globalBtn.appendChild(buildBar(globalCounts, a.total));
+  globalBtn.appendChild(h("span", "src-global-hint", t("about.sourcingByKind")));
+  wrap.appendChild(globalBtn);
+
+  // The per-kind breakdown, hidden until the global bar is clicked. Each kind is itself
+  // a button revealing its grade counts + one clickable example node (built from the
+  // loaded dataset when available, so it navigates to a real drug/receptor/structure).
+  const kindsBox = h("div", "src-kinds");
+  kindsBox.hidden = true;
+  for (const r of rows) {
+    const row = h("div", "src-stat-row");
+    const head = h("button", "src-stat-head");
+    head.type = "button";
+    head.setAttribute("aria-expanded", "false");
+    head.appendChild(h("span", "src-stat-label", t(r.labelKey)));
+    head.appendChild(h("span", "src-stat-count", `${r.backed} / ${r.total} (${r.pct}%)`));
+    head.appendChild(buildBar(r, r.total));
+
+    const detail = h("div", "src-ex-wrap");
+    detail.hidden = true;
+    detail.appendChild(h("div", "src-ex-counts", gradeCountsText(r)));
+    const example = (opts.data && opts.nav)
+      ? buildKindExample(r.kind, opts.data, opts.nav) : null;
+    if (example) detail.appendChild(example);
+
+    head.addEventListener("click", () => {
+      const open = detail.hidden;
+      detail.hidden = !open;
+      head.setAttribute("aria-expanded", String(open));
+    });
+    row.appendChild(head);
+    row.appendChild(detail);
+    kindsBox.appendChild(row);
   }
+  globalBtn.addEventListener("click", () => {
+    const open = kindsBox.hidden;
+    kindsBox.hidden = !open;
+    globalBtn.setAttribute("aria-expanded", String(open));
+  });
+  wrap.appendChild(kindsBox);
+
   // Measured-affinity (PDSP Ki) coverage: a SEPARATE honesty line, not a grade bar. A
   // binding backed by a Stahl quote with no Ki is still sourced, so this does not feed
   // the % above; it surfaces how much of the corpus carries a *measured* affinity and
@@ -4360,6 +4408,126 @@ function buildAboutSourcing(meta) {
   }
   host.appendChild(wrap);
   host.appendChild(key);
+}
+
+/**
+ * Build one clickable "example node" for a node kind, shown when its coverage bar is
+ * expanded in the Sources popup. It reads a representative node from the loaded dataset
+ * and renders it as a knowledge triplet: a clickable subject (which navigates to the
+ * real drug / receptor / structure / circuit / group) followed by the node's specific
+ * notion in quotation marks. Deliberately NOT an "A -> B" arrow: the quoted notion is
+ * what makes each abstraction concrete ("Olanzapine" ... "Antagonist, 5-HT2A").
+ *
+ * @param {string} kind    a provenance by_kind key (e.g. "drug_bindings")
+ * @param {object} data    the normalized dataset (drugs / targets / structures / ...)
+ * @param {object} nav     navigation callbacks, one per focusable entity kind; each
+ *                         closes the popup and focuses the node (drug/target/structure/
+ *                         circuit/group)
+ * @returns {HTMLElement|null} the example line, or null when this kind has no clean example
+ */
+function buildKindExample(kind, data, nav) {
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  // Locale-aware quotation marks around the notion (French uses guillemets + NBSP).
+  const fr = (document.documentElement.lang || "").startsWith("fr");
+  const quoted = (s) => (fr ? `« ${s} »` : `“${s}”`);
+
+  // Representative nodes: a recognizable one when present, else the first available, so
+  // the example is stable and never empty for a kind that has any data.
+  const pick = (arr, prefer) => (arr || []).find(prefer) || (arr || [])[0] || null;
+  const drug = pick((data.drugs || []).filter((d) => d.focusable), (d) => d.id === "olanzapine");
+  const recTargets = (data.targets || []).filter((t) => t.kind === "receptor" && t.focusable);
+  const rec = pick(recTargets, (t) => t.id === "5ht2a");
+  const otherTargets = (data.targets || []).filter((t) => t.kind !== "receptor" && t.focusable);
+  const tgt = pick(otherTargets, (t) => t.id === "sert");
+  const structure = pick(data.structures, (s) => /hippocamp/i.test(s.id || ""));
+  const circuit = (data.circuits || [])[0] || null;
+  const group = pick(data.projectionGroups, (g) => g.mode === "kind");
+  const proj = pick(data.projections, (p) => data.byId && data.byId.get(p.from));
+
+  // Assemble "e.g. <subject-link> <quoted notion>". With quoteSubject, the subject name
+  // itself is the quoted notion (used for entity kinds like a circuit, where the node IS
+  // the named thing rather than a claim about another node).
+  const line = (subject, notion, onClick, quoteSubject) => {
+    const div = el("div", "src-ex");
+    div.appendChild(el("span", "src-ex-lead", `${t("about.exampleLead")} `));
+    const a = el("a", "src-ex-link", quoteSubject ? quoted(subject) : subject);
+    a.href = "#";
+    a.addEventListener("click", (e) => { e.preventDefault(); onClick && onClick(); });
+    div.appendChild(a);
+    if (notion) div.appendChild(el("span", "src-ex-notion", ` ${quoted(notion)}`));
+    return div;
+  };
+
+  const regionName = (id) => {
+    const s = id && data.byId && data.byId.get(id);
+    return s ? (s.base_name || s.name) : null;
+  };
+  const firstAction = (d) => (d && d.bindings || []).find(
+    (b) => !b.affinity_only && b.actionLabel && b.targetName);
+
+  switch (kind) {
+    case "drug_bindings":
+    case "drug_metabolite_bindings": {
+      if (!drug) return null;
+      const b = firstAction(drug);
+      return b ? line(drug.name, `${b.actionLabel}, ${b.targetName}`, () => nav.drug(drug)) : null;
+    }
+    case "drug_nbn":
+      return drug && drug.nbn ? line(drug.name, drug.nbn, () => nav.drug(drug)) : null;
+    case "drug_brands": {
+      const brand = drug && (drug.brandNames || [])[0];
+      return brand ? line(drug.name, brand, () => nav.drug(drug)) : null;
+    }
+    case "drug_categories": {
+      const c = drug && (drug.categoryLabels || [])[0];
+      return c ? line(drug.name, c, () => nav.drug(drug)) : null;
+    }
+    case "receptors":
+      return rec ? line(rec.name, rec.receptor.familyLabel, () => nav.target(rec)) : null;
+    case "receptor_class":
+      return rec ? line(rec.name, rec.receptor.classLabel, () => nav.target(rec)) : null;
+    case "receptor_sign":
+      return rec ? line(rec.name, rec.receptor.signLabel, () => nav.target(rec)) : null;
+    case "receptor_synaptic":
+      return rec ? line(rec.name, rec.receptor.synapticLabel, () => nav.target(rec)) : null;
+    case "receptor_locations": {
+      const rn = rec && regionName((rec.receptor.structureIds || [])[0]);
+      return rn ? line(rec.name, rn, () => nav.target(rec)) : null;
+    }
+    case "targets":
+      return tgt ? line(tgt.name, tgt.typeLabel, () => nav.target(tgt)) : null;
+    case "target_locations": {
+      const rn = tgt && (tgt.locationNames || [])[0];
+      return rn ? line(tgt.name, rn, () => nav.target(tgt)) : null;
+    }
+    case "target_polarity": {
+      const pol = pick(otherTargets, (t2) =>
+        t2.vesicular || t2.polaritySign || t2.polaritySynaptic || t2.polarityProvenance);
+      return pol ? line(pol.name, pol.typeLabel, () => nav.target(pol)) : null;
+    }
+    case "structures": {
+      if (!structure) return null;
+      const g = (data.meta.groupLabels || {})[structure.group] || structure.group;
+      return line(structure.base_name || structure.name, g, () => nav.structure(structure.id));
+    }
+    case "projections": {
+      if (!proj) return null;
+      const notion = (data.meta.signLabels || {})[proj.kind] || proj.neurotransmitter || proj.kind;
+      const subj = regionName(proj.from) || proj.from;
+      return line(subj, notion, () => nav.structure(proj.from));
+    }
+    case "circuits":
+      return circuit ? line(circuit.name, null, () => nav.circuit(circuit), true) : null;
+    case "projection_groups":
+      return group ? line(group.name, null, () => nav.group(group), true) : null;
+    default:
+      return null;
+  }
 }
 
 /** Wire the DOM controls to the scene behaviors. */
@@ -6108,9 +6276,21 @@ async function main() {
   // encodings (gem-dot signs, drug effect colours, dotted = speculative) from the
   // meta maps and doesn't depend on the arrow colour mode.
   buildLegendKey(data);
-  // Fill the About panel's "Sources & provenance" block (grade key + the
-  // programmatic coverage tally) from the dataset's meta.
-  buildAboutSourcing(data.meta);
+  // Fill the About panel's "Sources & provenance" block (grade key + the programmatic
+  // coverage tally) from the dataset's meta. `nav` lets an expanded kind's example node
+  // jump to the real entity: each callback closes the popup first so the focus is
+  // visible behind it, then focuses the drug / target / structure / circuit / group.
+  const sourcingNav = {
+    drug: (d) => { sourcingModal.close(); focusDrug(d, { frame: true }); },
+    target: (tg) => { sourcingModal.close(); focusTarget(tg, { frame: true }); },
+    structure: (id) => {
+      const mesh = meshById.get(id);
+      if (mesh) { sourcingModal.close(); selectStructure(mesh, { frame: true }); }
+    },
+    circuit: (c) => { sourcingModal.close(); focusCircuit(c, { frame: true }); },
+    group: (g) => { sourcingModal.close(); focusProjectionGroup(g, { frame: true }); },
+  };
+  buildAboutSourcing(data.meta, { data, nav: sourcingNav });
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
   // segmented control in the Controls section. Picking an option recolours the
   // arrows and rebuilds the Projections legend rows to match. The switch lives

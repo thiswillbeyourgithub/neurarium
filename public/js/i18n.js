@@ -392,15 +392,9 @@
         "well be an error. Corrections are very welcome via the issue link below.",
       "about.gradeVerified":
         "Verified: the supporting quote was confirmed present in the cited source.",
-      "about.gradeSourced":
-        "Sourced: drawn from a document (e.g. Wikipedia), but the quote was not checked.",
       "about.gradeLlm":
         "AI only: may be a hallucination.",
       "about.gradeNone": "No source: none gathered yet.",
-      "about.gradeWikipedia":
-        "Wikipedia link: shown instead of a grade on a live description. The text is " +
-        "the article's current lead, read live and verbatim (no AI); the link is the " +
-        "source, click it to open the article.",
       "about.segVerified": "Verified",
       "about.segSourced": "Sourced",
       "about.segLlm": "AI only",
@@ -408,6 +402,10 @@
       "about.coverageTitle": "Coverage",
       "about.sourcingHeadline":
         "{pct}% of the {total} knowledge nodes here are sourced or verified.",
+      // The global sourcing bar is clickable to reveal the per-node-kind breakdown;
+      // each kind row is in turn clickable to reveal its grade counts + an example node.
+      "about.sourcingByKind": "Break it down by node kind",
+      "about.exampleLead": "e.g.",
       "about.kiCoverage":
         "Measured binding affinity (PDSP Ki): {pct}% of {total} drug bindings carry one; {drugsNone} of {drugs} drugs have none (quote-sourced or unsourced).",
       "about.kindBindings": "Drug target bindings",
@@ -799,15 +797,9 @@
         "bienvenues via le lien de signalement ci-dessous.",
       "about.gradeVerified":
         "Vérifié : la citation à l’appui a été confirmée présente dans la source citée.",
-      "about.gradeSourced":
-        "Sourcé : tiré d’un document (p. ex. Wikipédia), mais la citation n’a pas été vérifiée.",
       "about.gradeLlm":
         "IA seule : peut être une hallucination.",
       "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
-      "about.gradeWikipedia":
-        "Lien Wikipédia : affiché à la place d’un niveau sur une description en direct. " +
-        "Le texte est l’introduction actuelle de l’article, lue en direct et telle quelle " +
-        "(sans IA) ; le lien est la source, cliquez pour ouvrir l’article.",
       "about.segVerified": "Vérifié",
       "about.segSourced": "Sourcé",
       "about.segLlm": "IA seule",
@@ -815,6 +807,8 @@
       "about.coverageTitle": "Couverture",
       "about.sourcingHeadline":
         "{pct} % des {total} nœuds de connaissance ici sont sourcés ou vérifiés.",
+      "about.sourcingByKind": "Détailler par type de nœud",
+      "about.exampleLead": "p. ex.",
       "about.kiCoverage":
         "Affinité de liaison mesurée (Ki PDSP) : {pct} % des {total} liaisons en portent une ; {drugsNone} des {drugs} médicaments n'en ont aucune (sourcés par citation ou sans source).",
       "about.kindBindings": "Liaisons cibles des médicaments",

@@ -1114,6 +1114,47 @@
       .src-seg-sourced  { background: #e3c14a; }
       .src-seg-llm      { background: #b6bcc4; }
       .src-seg-nosource { background: #ef5f6b; }
+      /* Progressive-disclosure sourcing tally: one global bar is shown by default; it is
+         a button that expands the per-node-kind breakdown, and each kind row is in turn a
+         button that expands its grade counts + a clickable example node. Keeps the popup
+         a single glanceable number until the reader asks for more. */
+      .src-global {
+        display: block; width: 100%; text-align: left;
+        background: none; border: 0; padding: 0; margin: 0 0 4px; cursor: pointer;
+        color: inherit; font: inherit;
+      }
+      .src-global .src-stat-headline { margin: 0 0 6px; }
+      .src-global .src-stat-bar { height: 9px; cursor: pointer; }
+      /* A caret hint under the global bar; rotates when the breakdown is open. */
+      .src-global-hint {
+        display: inline-flex; align-items: center; gap: 4px;
+        margin-top: 6px; font-size: 0.85em; color: var(--muted);
+      }
+      .src-global-hint::after {
+        content: "\25be"; /* ▾ */ transition: transform 0.15s ease;
+      }
+      .src-global[aria-expanded="true"] .src-global-hint::after { transform: rotate(-180deg); }
+      .src-kinds { margin-top: 4px; }
+      /* Each kind row's clickable header carries the same 2-col grid the static row had. */
+      .src-stat-head {
+        display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center;
+        width: 100%; text-align: left; background: none; border: 0; padding: 4px 0;
+        cursor: pointer; color: var(--muted); font: inherit;
+      }
+      .src-stat-head:hover .src-stat-label { color: var(--text); }
+      .src-stat-head .src-stat-count { white-space: nowrap; font-variant-numeric: tabular-nums; }
+      .src-stat-head .src-stat-bar { grid-column: 1 / -1; cursor: pointer; }
+      /* The revealed detail: per-grade counts + one example node. */
+      .src-ex-wrap { padding: 2px 0 8px 2px; font-size: 0.92em; }
+      .src-ex-counts { color: var(--muted); margin-bottom: 3px; }
+      .src-ex { color: var(--muted); line-height: 1.4; }
+      .src-ex-lead { opacity: 0.8; }
+      .src-ex-link {
+        color: var(--accent); text-decoration: none; border-bottom: 1px dotted currentColor;
+        cursor: pointer;
+      }
+      .src-ex-link:hover { color: var(--text); }
+      .src-ex-notion { color: var(--text); }
       /* The section bodies are NOT individually capped/scrolled: the whole panel
          list (#controls-main) is the single scroll area now, so an open section
          shows at its natural height and you scroll through it before reaching the
