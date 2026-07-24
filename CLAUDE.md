@@ -91,8 +91,10 @@ in `meta.provenance_stats.by_kind`):
 - drug elimination half-life (T½) -> a drug's `half_life` (+ `half_life_sources`) -> `drug_half_life`
 - drug active metabolite -> a drug's `metabolites[]` (each `{name, drug_id?, half_life?,
   bindings?, sources}`) -> `drug_metabolites` (a metabolite that is itself a modeled drug
-  links via `drug_id` + reuses its bindings/T½; non-drug metabolite bindings deferred to a
-  later Wikipedia/PDSP pass, so name + own T½ only for now)
+  links via `drug_id` + reuses its bindings/T½)
+- non-modeled-metabolite receptor binding -> a metabolite's `bindings[]` -> `drug_metabolite_bindings`
+  (sourced from the metabolite's own Wikipedia pharmacology, corpus #9; graded like a drug binding,
+  a separate kind so the drug Ki coverage is unperturbed; surfaces on the receptor's Interacting drugs)
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
   tallied but excluded from the headline; a reference is not itself a knowledge node)
 
@@ -518,12 +520,23 @@ fixed Stahl list.
   `formatHalfLife`, between the brands and the **Acts on** list) and an **Active metabolites** section
   (each row its name + its own T½ chip, "a bit like the Ki"). In `buildDrugLegend` a default-on
   **Show active metabolites** toggle (`#drugs-show-metabolites`, persisted `neurarium.metabolites`) adds
-  discreet indented `.metab-item` bullets under each parent. A receptor's Interacting-drugs row shows a
-  metabolite binder as "NAME (metab. of PRODRUG)" (`drug.metaboliteOf`; wired, currently empty since
-  non-drug-metabolite bindings are deferred). Pipeline mirrors the brand one:
+  discreet indented `.metab-item` bullets under each parent (a bullet + its parent both stay visible
+  when the drugs filter or the global search matches the metabolite name). Pipeline mirrors the brand one:
   `tools/fetch/fetch_pharmacokinetics.py` scans the Stahl page spans into `pk_worklist.json`, one LLM pass
   writes `pk_judged.json`, and `tools/sourcing/apply_pharmacokinetics.py` quote-gates + merges T½/metabolites
   into `drugs_data.jsonl` (idempotent, sole writer).
+- **Non-modeled-metabolite receptor bindings (Wikipedia).** A metabolite that is not itself a modeled
+  drug carries its own `bindings[]` (kind `drug_metabolite_bindings`), sourced from the metabolite's own
+  English Wikipedia pharmacology (corpus #9 `wikipedia_pharm`): **target + action** from a quote-gated
+  prose sentence, **affinity** Wikipedia-primary with a PDSP measured Ki (corpus #5) preferred where one
+  exists; a Ki-table target with no sourced action becomes an `affinity_only` binding. A receptor's
+  Interacting-drugs list then shows the binder as "NAME (metab. of PRODRUG)" (`drug.metaboliteOf`, via
+  `drugsByTarget`). Pipeline: `tools/fetch/fetch_metabolite_bindings.py` (reuses
+  `fetch_wikipedia_pharmacology` as a library) mines each metabolite's own article (an allow-list of
+  confirmed own-articles; others fall back to the parent article for prose only, mention-filtered so a
+  parent-only claim can't leak) into `metabolite_bindings_worklist.json`; one LLM pass writes
+  `metabolite_bindings_judged.json`; `tools/sourcing/apply_metabolite_bindings.py` quote-gates + merges
+  into `drugs_data.jsonl` (idempotent, sole writer of a metabolite's bindings).
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
   median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
   assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as

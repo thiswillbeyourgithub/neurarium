@@ -220,6 +220,16 @@ Screenshots).
   (`pk_judged.json`) into `drugs_data.jsonl`, quote-gating each value verbatim on its Stahl page and
   resolving a metabolite's `drug_id` by norm-name match (never self-link). Idempotent, sole writer of
   `half_life`/`metabolites`. See CLAUDE.md Drugs (Half-life + active metabolites).
+- `tools/fetch/fetch_metabolite_bindings.py` — `uv run` (deps: beautifulsoup4). Reuses
+  `fetch_wikipedia_pharmacology` as a library to mine each non-modeled active metabolite's own English
+  Wikipedia article (an allow-list of confirmed own-articles; the rest fall back to the parent article
+  for prose only, filtered to sentences naming the metabolite) into `metabolite_bindings_worklist.json`
+  (Ki-table rows + candidate action sentences) for the LLM pass. See CLAUDE.md Drugs.
+- `tools/sourcing/apply_metabolite_bindings.py` — `uv run` (deps: beautifulsoup4). Merges the
+  LLM-extracted metabolite bindings (`metabolite_bindings_judged.json`) into `drugs_data.jsonl`:
+  quote-gates each action sentence, resolves the target, attaches a Ki (PDSP measured preferred, else
+  the Wikipedia table value), and adds every remaining Ki-table target as `affinity_only`. Idempotent,
+  sole writer of a metabolite's `bindings`. See CLAUDE.md Drugs.
 - `tools/fetch/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
   `uv run`, `--layout` for OCR.
 - `tools/fetch/build_toc_index.py` — `INDEX.md` from a PDF's embedded TOC (generic). `uv run`.
@@ -310,7 +320,8 @@ there is no node-level catch-all `sources` block.
   (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
   optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
   `metabolites[]` (each: `name`, optional `half_life`(+`half_life_sources`), `sources[]`, optional
-  `drug_id` linking a modeled drug),
+  `drug_id` linking a modeled drug, optional `bindings[]` for a non-modeled metabolite: same shape as a
+  drug binding, kind `drug_metabolite_bindings`),
   optional `wikipedia`(+prov), optional `structure_image` (vendored `data/molecules/<id>.svg`,
   only when the file exists), `focusable`. No drug-level source: provenance is per-claim (see
   CLAUDE.md Source provenance).
