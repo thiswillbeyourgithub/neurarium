@@ -88,6 +88,11 @@ in `meta.provenance_stats.by_kind`):
 - drug commercial brand name -> a drug's `brands[]` -> `drug_brands` (each brand a graded
   node; `region` na/eu/fr orders them per locale, never shown; na from Stahl, eu/fr from Wikipedia)
 - drug class classification -> a drug's `categories` (+ `category_provenance`) -> `drug_categories`
+- drug elimination half-life (T½) -> a drug's `half_life` (+ `half_life_sources`) -> `drug_half_life`
+- drug active metabolite -> a drug's `metabolites[]` (each `{name, drug_id?, half_life?,
+  bindings?, sources}`) -> `drug_metabolites` (a metabolite that is itself a modeled drug
+  links via `drug_id` + reuses its bindings/T½; non-drug metabolite bindings deferred to a
+  later Wikipedia/PDSP pass, so name + own T½ only for now)
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
   tallied but excluded from the headline; a reference is not itself a knowledge node)
 
@@ -505,6 +510,20 @@ fixed Stahl list.
   Nomenclature are clickable (open search with a `class:`/`nbn:` filter) and each carries its grade
   pill: the NbN quote source, and the class classification's `category_provenance` (its own node, kind
   `drug_categories`, default `llm`, upgradeable via `DRUG_CATEGORY_PROVENANCE` / `category_sources`).
+- **Half-life + active metabolites (Stahl PK).** A drug carries an elimination `half_life`
+  (`{hours, hours_max?}`, its own graded node kind `drug_half_life`, source `half_life_sources`) and a
+  `metabolites[]` list, each an **active metabolite** (a `name`, its own `half_life`/`half_life_sources`,
+  and `sources`; graded node kind `drug_metabolites`; a `drug_id` when the metabolite is itself a modeled
+  drug so the panel links to it). `showDrug` renders T½ as an `hl-chip` (auto-scaled to min/h/days via
+  `formatHalfLife`, between the brands and the **Acts on** list) and an **Active metabolites** section
+  (each row its name + its own T½ chip, "a bit like the Ki"). In `buildDrugLegend` a default-on
+  **Show active metabolites** toggle (`#drugs-show-metabolites`, persisted `neurarium.metabolites`) adds
+  discreet indented `.metab-item` bullets under each parent. A receptor's Interacting-drugs row shows a
+  metabolite binder as "NAME (metab. of PRODRUG)" (`drug.metaboliteOf`; wired, currently empty since
+  non-drug-metabolite bindings are deferred). Pipeline mirrors the brand one:
+  `tools/fetch/fetch_pharmacokinetics.py` scans the Stahl page spans into `pk_worklist.json`, one LLM pass
+  writes `pk_judged.json`, and `tools/sourcing/apply_pharmacokinetics.py` quote-gates + merges T½/metabolites
+  into `drugs_data.jsonl` (idempotent, sole writer).
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
   median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
   assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as

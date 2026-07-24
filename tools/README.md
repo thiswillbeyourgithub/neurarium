@@ -212,6 +212,14 @@ Screenshots).
 - `tools/sourcing/apply_brand_names.py` — merges the LLM-extracted eu/fr brands (`brand_judged.json`) into
   `drugs_data.jsonl`, quote-gating each name verbatim on its FR page and tagging the first `fr`, the rest
   `eu` (na from Stahl is kept). Idempotent. See CLAUDE.md Source provenance (corpus #10).
+- `tools/fetch/fetch_pharmacokinetics.py` — stdlib. Scans each drug's Stahl page span (from `INDEX.md`)
+  for elimination half-life + active-metabolite lines, pre-parsing durations to hours, into a candidate
+  worklist (`tools/generated_cache/pk_worklist.json`) for the LLM that extracts each drug's T½ +
+  metabolites. See CLAUDE.md Drugs (Half-life + active metabolites).
+- `tools/sourcing/apply_pharmacokinetics.py` — merges the LLM-extracted T½ + metabolites
+  (`pk_judged.json`) into `drugs_data.jsonl`, quote-gating each value verbatim on its Stahl page and
+  resolving a metabolite's `drug_id` by norm-name match (never self-link). Idempotent, sole writer of
+  `half_life`/`metabolites`. See CLAUDE.md Drugs (Half-life + active metabolites).
 - `tools/fetch/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
   `uv run`, `--layout` for OCR.
 - `tools/fetch/build_toc_index.py` — `INDEX.md` from a PDF's embedded TOC (generic). `uv run`.
@@ -300,6 +308,9 @@ there is no node-level catch-all `sources` block.
   value is Stahl's class descriptor not a formal NbN), `bindings[]` (each: `target`, `action`,
   optional `effect`/`note{en,fr}`/`tentative`/`sources[{corpus,page,quote,provenance}]`/`ki`
   (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
+  optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
+  `metabolites[]` (each: `name`, optional `half_life`(+`half_life_sources`), `sources[]`, optional
+  `drug_id` linking a modeled drug),
   optional `wikipedia`(+prov), optional `structure_image` (vendored `data/molecules/<id>.svg`,
   only when the file exists), `focusable`. No drug-level source: provenance is per-claim (see
   CLAUDE.md Source provenance).
