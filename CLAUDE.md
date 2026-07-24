@@ -601,8 +601,14 @@ Every node's grade rides its own row/heading (`makeProvenancePill(level)`), neve
 blank. The pill's tooltip shows the concrete source (the verbatim quote + citation) then a small "Click
 for details" cue (`makeDetailsCue`) that opens the Sources & provenance popup: that popup is the single
 place explaining what each grade means, so the verbose per-grade paragraph is not inlined into every
-pill (it stays only as the pill's `aria-label`, `info.prov*`). How the tally buckets these grades (and why `llm` counts as
-unbacked): see The "% sourced" figure.
+pill (it stays only as the pill's `aria-label`, `info.prov*`). The popup's tally is
+**progressive-disclosure** (`buildAboutSourcing`): one global bar over all knowledge nodes by default,
+clickable to reveal the per-node-kind bars, each of which is in turn clickable to reveal its grade counts
++ one clickable **example node** (`buildKindExample`: a representative datum rendered as a knowledge
+triplet, its notion in quotation marks, that navigates to the real drug/receptor/structure/circuit/group).
+The grade key lists only `NOSOURCE` / `llm` / `verified` (the `~sourced` and live-Wikipedia rows were
+dropped: no knowledge node is ever graded `sourced`). How the tally buckets these grades (and why `llm`
+counts as unbacked): see The "% sourced" figure.
 
 **The sourcing model.** A verified quote node may carry an optional `llm` (`haiku`/`sonnet`/`opus`,
 `SOURCING_LLMS`) naming the model that extracted+judged it, so a reader can weigh a quote by that
@@ -686,8 +692,7 @@ links stay). It is a **presentation**, **not** a stored grade and **not** tallie
 `PROVENANCE_PILLS.wikipedia` pill (`info.provWikipedia`) remains only as a fallback if the link can't be
 moved. Asymmetry: a **baked** Wikipedia snapshot stays yellow `sourced` (a stored copy *can* drift); only
 the **live** read earns the green link. When the live fetch fails, the baked description keeps its stored
-pill and the reference link stays in its own row; a missing link shows `NOSOURCE`. The Sources & provenance
-popup's grade key carries this Wikipedia-link exception as its last row (`about.gradeWikipedia`).
+pill and the reference link stays in its own row; a missing link shows `NOSOURCE`.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every node + reference to its strongest grade and
 buckets it into **verified** (quote-checked) / **sourced** (from a document) / **missing** (no document).
