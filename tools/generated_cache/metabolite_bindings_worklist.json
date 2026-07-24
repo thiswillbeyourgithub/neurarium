@@ -1,7 +1,9 @@
 [
   {
     "metabolite": "7-Hydroxyamoxapine",
-    "parent": "amoxapine",
+    "parents": [
+      "amoxapine"
+    ],
     "key": "7_hydroxyamoxapine",
     "wiki_title": "7-Hydroxyamoxapine",
     "slug": "7_hydroxyamoxapine",
@@ -16,7 +18,9 @@
   },
   {
     "metabolite": "8-Hydroxyamoxapine",
-    "parent": "amoxapine",
+    "parents": [
+      "amoxapine"
+    ],
     "key": "8_hydroxyamoxapine",
     "wiki_title": "8-Hydroxyamoxapine",
     "slug": "8_hydroxyamoxapine",
@@ -31,7 +35,9 @@
   },
   {
     "metabolite": "Dehydroaripiprazole",
-    "parent": "aripiprazole",
+    "parents": [
+      "aripiprazole"
+    ],
     "key": "dehydroaripiprazole",
     "wiki_title": "Aripiprazole",
     "slug": "aripiprazole",
@@ -44,7 +50,9 @@
   },
   {
     "metabolite": "DM-3411",
-    "parent": "brexpiprazole",
+    "parents": [
+      "brexpiprazole"
+    ],
     "key": "dm_3411",
     "wiki_title": "Brexpiprazole",
     "slug": "brexpiprazole",
@@ -57,7 +65,9 @@
   },
   {
     "metabolite": "6-Hydroxybupropion",
-    "parent": "bupropion",
+    "parents": [
+      "bupropion"
+    ],
     "key": "6_hydroxybupropion",
     "wiki_title": "Hydroxybupropion",
     "slug": "hydroxybupropion",
@@ -72,7 +82,9 @@
   },
   {
     "metabolite": "Carbamazepine-10,11-epoxide",
-    "parent": "carbamazepine",
+    "parents": [
+      "carbamazepine"
+    ],
     "key": "carbamazepine_10_11_epoxide",
     "wiki_title": "Carbamazepine",
     "slug": "carbamazepine",
@@ -85,7 +97,9 @@
   },
   {
     "metabolite": "Didesmethyl cariprazine",
-    "parent": "cariprazine",
+    "parents": [
+      "cariprazine"
+    ],
     "key": "didesmethyl_cariprazine",
     "wiki_title": "Cariprazine",
     "slug": "cariprazine",
@@ -98,7 +112,9 @@
   },
   {
     "metabolite": "Desmethylclomipramine",
-    "parent": "clomipramine",
+    "parents": [
+      "clomipramine"
+    ],
     "key": "desmethylclomipramine",
     "wiki_title": "Norclomipramine",
     "slug": "norclomipramine",
@@ -111,7 +127,9 @@
   },
   {
     "metabolite": "Diethyldithiocarbamate",
-    "parent": "disulfiram",
+    "parents": [
+      "disulfiram"
+    ],
     "key": "diethyldithiocarbamate",
     "wiki_title": "Sodium diethyldithiocarbamate",
     "slug": "sodium_diethyldithiocarbamate",
@@ -124,7 +142,9 @@
   },
   {
     "metabolite": "Carbon disulfide",
-    "parent": "disulfiram",
+    "parents": [
+      "disulfiram"
+    ],
     "key": "carbon_disulfide",
     "wiki_title": "Carbon disulfide",
     "slug": "carbon_disulfide",
@@ -137,7 +157,9 @@
   },
   {
     "metabolite": "Norfluoxetine",
-    "parent": "fluoxetine",
+    "parents": [
+      "fluoxetine"
+    ],
     "key": "norfluoxetine",
     "wiki_title": "Seproxetine",
     "slug": "seproxetine",
@@ -150,7 +172,9 @@
   },
   {
     "metabolite": "Meta-chlorophenylpiperazine",
-    "parent": "nefazodone",
+    "parents": [
+      "nefazodone"
+    ],
     "key": "meta_chlorophenylpiperazine",
     "wiki_title": "meta-Chlorophenylpiperazine",
     "slug": "meta_chlorophenylpiperazine",
@@ -419,7 +443,9 @@
   },
   {
     "metabolite": "N-dealkylated samidorphan",
-    "parent": "olanzapinesamidorphan",
+    "parents": [
+      "olanzapinesamidorphan"
+    ],
     "key": "n_dealkylated_samidorphan",
     "wiki_title": "Olanzapine/samidorphan",
     "slug": "olanzapine_samidorphan",
@@ -432,7 +458,9 @@
   },
   {
     "metabolite": "Samidorphan N-oxide",
-    "parent": "olanzapinesamidorphan",
+    "parents": [
+      "olanzapinesamidorphan"
+    ],
     "key": "samidorphan_n_oxide",
     "wiki_title": "Olanzapine/samidorphan",
     "slug": "olanzapine_samidorphan",
@@ -445,7 +473,9 @@
   },
   {
     "metabolite": "Licarbazepine",
-    "parent": "oxcarbazepine",
+    "parents": [
+      "oxcarbazepine"
+    ],
     "key": "licarbazepine",
     "wiki_title": "Licarbazepine",
     "slug": "licarbazepine",
@@ -458,7 +488,9 @@
   },
   {
     "metabolite": "N-Desmethylpimavanserin",
-    "parent": "pimavanserin",
+    "parents": [
+      "pimavanserin"
+    ],
     "key": "n_desmethylpimavanserin",
     "wiki_title": "Pimavanserin",
     "slug": "pimavanserin",
@@ -471,7 +503,9 @@
   },
   {
     "metabolite": "Norquetiapine",
-    "parent": "quetiapine",
+    "parents": [
+      "quetiapine"
+    ],
     "key": "norquetiapine",
     "wiki_title": "Norquetiapine",
     "slug": "norquetiapine",
@@ -486,7 +520,9 @@
   },
   {
     "metabolite": "M-II",
-    "parent": "ramelteon",
+    "parents": [
+      "ramelteon"
+    ],
     "key": "m_ii",
     "wiki_title": "Ramelteon",
     "slug": "ramelteon",
@@ -499,7 +535,9 @@
   },
   {
     "metabolite": "Desmethylselegiline",
-    "parent": "selegiline",
+    "parents": [
+      "selegiline"
+    ],
     "key": "desmethylselegiline",
     "wiki_title": "Desmethylselegiline",
     "slug": "desmethylselegiline",
@@ -519,7 +557,9 @@
   },
   {
     "metabolite": "L-Amphetamine",
-    "parent": "selegiline",
+    "parents": [
+      "selegiline"
+    ],
     "key": "l_amphetamine",
     "wiki_title": "Levoamphetamine",
     "slug": "levoamphetamine",
@@ -535,7 +575,9 @@
   },
   {
     "metabolite": "L-Methamphetamine",
-    "parent": "selegiline",
+    "parents": [
+      "selegiline"
+    ],
     "key": "l_methamphetamine",
     "wiki_title": "Levomethamphetamine",
     "slug": "levomethamphetamine",
@@ -550,7 +592,9 @@
   },
   {
     "metabolite": "(+)-alpha-Dihydrotetrabenazine",
-    "parent": "valbenazine",
+    "parents": [
+      "valbenazine"
+    ],
     "key": "alpha_dihydrotetrabenazine",
     "wiki_title": "Dihydrotetrabenazine",
     "slug": "dihydrotetrabenazine",
@@ -565,7 +609,9 @@
   },
   {
     "metabolite": "O-desmethylvenlafaxine",
-    "parent": "venlafaxine",
+    "parents": [
+      "venlafaxine"
+    ],
     "key": "o_desmethylvenlafaxine",
     "wiki_title": "Desvenlafaxine",
     "slug": "desvenlafaxine",
@@ -606,7 +652,9 @@
   },
   {
     "metabolite": "Norzotepine",
-    "parent": "zotepine",
+    "parents": [
+      "zotepine"
+    ],
     "key": "norzotepine",
     "wiki_title": "Zotepine",
     "slug": "zotepine",

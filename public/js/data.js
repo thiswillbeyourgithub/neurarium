@@ -747,8 +747,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // modeled drug (by explicit drug_id, else by matching its name) so the panel can
   // reuse that drug's already-resolved bindings + T½ and jump to it (no duplication).
   // A metabolite keeps its OWN identity provenance (`sources`) and optional own T½;
-  // its inline `bindings` (deferred to a later Wikipedia/PDSP pass, usually empty)
-  // are resolved for display via the shared bindingDisplayFields.
+  // its inline `bindings` (a non-modeled metabolite's own Wikipedia/PDSP-sourced
+  // receptor bindings) are resolved for display via the shared bindingDisplayFields.
   const drugById = new Map(drugs.map((d) => [d.id, d]));
   for (const d of drugs) {
     d.metabolites = (d.metabolites || []).map((m) => {
@@ -787,6 +787,14 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // Deduped to one row per (drug, target) in case a drug binds the same target
   // twice (the first binding wins).
   const drugsByTarget = new Map();
+  // One metabolite can be produced by several modeled drugs (e.g. mCPP by both
+  // nefazodone and trazodone), so it would otherwise contribute a separate, identical
+  // row per parent to the same target. We collapse those into ONE row keyed by
+  // (folded metabolite name, target) and merge the parents into `viaMetaboliteOfList`,
+  // so the panel reads "metab. of A, B" once instead of listing the same molecule
+  // twice. Persists across the outer drug loop (a shared metabolite is visited under
+  // each parent).
+  const metabRowByKey = new Map();
   for (const d of drugs) {
     const seen = new Set();
     for (const b of d.bindings) {
@@ -797,22 +805,31 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     }
     // Surface a metabolite's OWN bindings under their target too, attributed to the
     // parent drug ("NAME (metab. of PRODRUG)"). Only its own (non-linked) bindings,
-    // and only when the metabolite is not itself a focusable drug already listed
-    // here, so nothing is double-listed. Populates once the deferred bindings pass
-    // lands; empty for now.
+    // and only when the metabolite is not itself a focusable drug already listed here,
+    // so nothing is double-listed.
     for (const m of d.metabolites) {
       if (m.linkFocusable) continue;
-      const mSeen = new Set();
       for (const b of m.ownBindings) {
-        if (mSeen.has(b.target)) continue;
-        mSeen.add(b.target);
+        const rowKey = `${normName(m.name)}:${b.target}`;
+        const existing = metabRowByKey.get(rowKey);
+        if (existing) {
+          // Same metabolite, same target, different parent: merge the prodrug into the
+          // existing row rather than adding a duplicate. (The bindings are identical
+          // across parents, guarded by check_data, so keeping the first is safe.)
+          if (!existing.viaMetaboliteOfList.includes(d.displayName)) {
+            existing.viaMetaboliteOfList.push(d.displayName);
+          }
+          continue;
+        }
         if (!drugsByTarget.has(b.target)) drugsByTarget.set(b.target, []);
-        drugsByTarget.get(b.target).push({
+        const row = {
           drug: d,
           binding: b,
-          viaMetaboliteOf: d.displayName,
+          viaMetaboliteOfList: [d.displayName],
           metaboliteName: m.name,
-        });
+        };
+        metabRowByKey.set(rowKey, row);
+        drugsByTarget.get(b.target).push(row);
       }
     }
   }

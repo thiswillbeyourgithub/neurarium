@@ -114,17 +114,25 @@ MAX_ACTION_LINES = 14   # cap candidate lines per metabolite (keeps the worklist
 
 
 def non_modeled_metabolites(drugs: list[dict]) -> list[dict]:
-    """Every metabolite that is not itself a modeled drug, with its parent id.
+    """Every metabolite that is not itself a modeled drug, deduped by identity.
 
     Mirrors ``js/data.js``: a metabolite links to a modeled drug by explicit
     ``drug_id`` or by its name matching a drug id, and those reuse that drug's
     bindings (nothing to source here). The rest are returned as
-    ``{name, parent, key}`` (``key`` = a stable lowercase id for --only / worklist)."""
+    ``{name, parents, key}`` (``key`` = a stable lowercase id for --only / worklist).
+
+    A single metabolite can be produced by more than one modeled drug (e.g. mCPP by
+    nefazodone AND trazodone). Its bindings are a property of the molecule, not of the
+    parent relationship, so it is sourced ONCE: we key by ``wp.slugify(name).lower()``
+    and collect every parent into ``parents``. The applier then writes that one judged
+    binding list identically under each parent (check_data guards they stay identical),
+    and the tally + viewer dedup the same way -- so a shared metabolite is never
+    double-counted or double-listed."""
     drug_ids = {d["id"] for d in drugs}
     by_norm = {}
     for d in drugs:
         by_norm[re.sub(r"[^a-z0-9]+", "", d.get("name", "").lower())] = d["id"]
-    out = []
+    by_key: dict[str, dict] = {}
     for d in drugs:
         for m in d.get("metabolites", []):
             name = m["name"]
@@ -132,9 +140,14 @@ def non_modeled_metabolites(drugs: list[dict]) -> list[dict]:
                 re.sub(r"[^a-z0-9]+", "", name.lower()))
             if linked and linked in drug_ids:
                 continue
-            out.append({"name": name, "parent": d["id"],
-                        "key": wp.slugify(name).lower()})
-    return out
+            key = wp.slugify(name).lower()
+            entry = by_key.get(key)
+            if entry:
+                if d["id"] not in entry["parents"]:
+                    entry["parents"].append(d["id"])
+            else:
+                by_key[key] = {"name": name, "parents": [d["id"]], "key": key}
+    return list(by_key.values())
 
 
 def _norm(s: str) -> str:
@@ -223,12 +236,15 @@ def main() -> int:
         # other falls back to the PARENT drug's article for prose sentences only, and
         # only those naming the metabolite (mis-attribution guard, see OWN_ARTICLE).
         own = m["name"].lower() in OWN_ARTICLE
-        parent_title = ptitles.get(m["parent"], "")
+        # Parent-article fallback uses the first parent's article (any works: a shared
+        # metabolite's prose is the same fact wherever it is described, and own-article
+        # metabolites ignore the parent entirely).
+        parent_title = ptitles.get(m["parents"][0], "")
         title = OWN_ARTICLE[m["name"].lower()] if own else parent_title
         slug = wp.slugify(title)
         raw_path = os.path.join(wp.RAW_DIR, f"{slug}.html")
 
-        entry = {"metabolite": m["name"], "parent": m["parent"], "key": m["key"],
+        entry = {"metabolite": m["name"], "parents": m["parents"], "key": m["key"],
                  "wiki_title": title, "slug": slug, "own_article": own, "found": False,
                  "from_parent": not own, "ki_bindings": [], "unresolved_ki": [],
                  "action_candidates": []}
@@ -279,7 +295,7 @@ def main() -> int:
 
         n_ki = len(entry["ki_bindings"])
         n_act = len(entry["action_candidates"])
-        tag = "" if own else f" (from parent {m['parent']})"
+        tag = "" if own else f" (from parent {m['parents'][0]})"
         print(f"  - {m['name']} [{real_title}]{tag}: {n_ki} Ki rows, {n_act} action lines")
         worklist.append(entry)
 

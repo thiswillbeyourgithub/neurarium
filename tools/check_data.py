@@ -544,6 +544,32 @@ def check_reachability(report, meta, structures, projections, circuits,
                     report.error(f"drug {did}: metabolite {m.get('name')!r} binding "
                                  f"target {binding.get('target')!r} is not a known target")
 
+    # Shared-metabolite consistency guard. One metabolite can be produced by several
+    # modeled drugs (e.g. desipramine by imipramine AND lofepramine, mCPP by nefazodone
+    # AND trazodone), so it appears once under each parent. Its bindings are intrinsic to
+    # the molecule, not to which parent made it, so every occurrence MUST carry the same
+    # bindings; the applier guarantees this (it keys by metabolite name and writes an
+    # identical list to each parent), but a hand-edit to drugs_data.jsonl could diverge
+    # the two inline copies. That would make the viewer show contradictory rows and the
+    # tally count them inconsistently, so we fail loudly here. (Fold on the name only,
+    # matching the tally + viewer identity key.)
+    metab_occurrences = {}
+    for drug in drugs:
+        for m in drug.get("metabolites", []) or []:
+            key = re.sub(r"[^a-z0-9]", "", (m.get("name") or "").lower())
+            metab_occurrences.setdefault(key, []).append(
+                (drug.get("id"), m.get("name"),
+                 json.dumps(m.get("bindings", []) or [], sort_keys=True)))
+    for key, occ in metab_occurrences.items():
+        distinct = {b for _, _, b in occ}
+        if len(occ) > 1 and len(distinct) > 1:
+            parents = ", ".join(sorted(did for did, _, _ in occ))
+            report.error(f"metabolite {occ[0][1]!r} is shared by drugs [{parents}] but "
+                         f"carries DIFFERENT bindings under them; a metabolite's bindings "
+                         f"are a property of the molecule and must be identical across "
+                         f"parents (re-run apply_metabolite_bindings.py, which writes them "
+                         f"consistently, or reconcile the hand-edit)")
+
     if report.errors == before:
         report.ok("every cross-reference (drug -> target/action/category, projection "
                   "-> structure/kind, circuit/receptor/target -> structure) resolves; "

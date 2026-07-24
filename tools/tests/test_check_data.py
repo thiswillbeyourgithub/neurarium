@@ -143,5 +143,47 @@ class FlowConsistencyEndToEndTest(unittest.TestCase):
         self.assertEqual(warns, [])
 
 
+class SharedMetaboliteGuardTest(unittest.TestCase):
+    """The shared-metabolite consistency guard in check_reachability.
+
+    One metabolite can be produced by several modeled drugs (desipramine by imipramine
+    AND lofepramine, mCPP by nefazodone AND trazodone). Its bindings are a property of
+    the molecule, so every parent's inline copy must be identical; the guard fails loudly
+    when a hand-edit diverges them, since divergence would double-list the molecule and
+    skew the tally. These lock that behavior against a synthetic pair of parents.
+    """
+
+    META = {"drug_targets": {"h1": {}, "d2": {}}, "source_corpora": {}}
+
+    @staticmethod
+    def _errors(drugs):
+        """Errors raised by check_reachability over a synthetic drug list."""
+        report = check_data.Report()
+        with redirect_stdout(io.StringIO()):
+            check_data.check_reachability(report, SharedMetaboliteGuardTest.META,
+                                          [], [], [], [], [], drugs)
+        return report.errors
+
+    @staticmethod
+    def _parents(binding_a, binding_b):
+        """Two drugs sharing a metabolite 'FooBar' with the given inline bindings."""
+        return [
+            {"id": "drugA", "name": "DrugA", "bindings": [],
+             "metabolites": [{"name": "FooBar", "bindings": binding_a}]},
+            {"id": "drugB", "name": "DrugB", "bindings": [],
+             "metabolites": [{"name": "FooBar", "bindings": binding_b}]},
+        ]
+
+    def test_divergent_bindings_add_exactly_one_error(self):
+        b = [{"target": "h1", "action": "antagonist"}]
+        # Same two parents, once with identical metabolite bindings and once with
+        # divergent ones: only the divergence trips the guard, so it costs exactly one
+        # extra error (isolating the guard from any unrelated per-drug errors).
+        identical = self._errors(self._parents(b, [dict(b[0])]))
+        diverged = self._errors(self._parents(
+            b, [{"target": "d2", "action": "antagonist"}]))
+        self.assertEqual(diverged, identical + 1)
+
+
 if __name__ == "__main__":
     unittest.main()

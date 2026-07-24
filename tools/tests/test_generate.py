@@ -200,11 +200,21 @@ class MetaAndTranslationsTest(unittest.TestCase):
         valid_targets = set(meta["drug_targets"].keys())
         drugs = [json.loads(l) for l in
                  (DATA_DIR / "drugs.jsonl").read_text(encoding="utf-8").splitlines() if l]
+        # A metabolite produced by several drugs appears once under EACH parent with
+        # identical bindings; those bindings are a property of the molecule, so the tally
+        # counts them ONCE per unique metabolite (deduped by folded name), not per parent.
+        # Mirror that dedup here so the count matches the tally even if a shared
+        # metabolite is added later.
+        seen_metab = set()
         n_bindings = 0
         for d in drugs:
             for m in d.get("metabolites", []):
+                key = re.sub(r"[^a-z0-9]", "", (m.get("name") or "").lower())
+                first_occurrence = key not in seen_metab
+                seen_metab.add(key)
                 for b in m.get("bindings", []):
-                    n_bindings += 1
+                    if first_occurrence:
+                        n_bindings += 1
                     self.assertIn(b["target"], valid_targets,
                                   f"{m['name']} binding hits unknown target {b['target']}")
                     # An action binding names a functional action (the viewer derives the
@@ -217,7 +227,7 @@ class MetaAndTranslationsTest(unittest.TestCase):
                                         f"{m['name']} action binding lacks an action")
         kind = meta["provenance_stats"]["by_kind"].get("drug_metabolite_bindings", {})
         self.assertEqual(kind.get("total", 0), n_bindings,
-                         "drug_metabolite_bindings tally != emitted metabolite bindings")
+                         "drug_metabolite_bindings tally != unique metabolite bindings")
 
     def test_translations_nonempty_and_deduped(self):
         tr = json.loads(

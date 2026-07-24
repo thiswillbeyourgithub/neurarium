@@ -2532,9 +2532,10 @@ function createInfoPanel(data, sourcingModal) {
         const { drug, binding } = item;
         // A metabolite entry (its own non-drug binding surfaced here) reads
         // "NAME (metab. of PRODRUG)" and clicks through to the parent drug; a normal
-        // drug entry just shows its display name.
-        const label = item.viaMetaboliteOf
-          ? `${item.metaboliteName} (${t("drug.metaboliteOf", { prodrug: item.viaMetaboliteOf })})`
+        // drug entry just shows its display name. A metabolite shared by several parents
+        // lists them all ("metab. of A, B") in one row (see drugsByTarget merge).
+        const label = item.viaMetaboliteOfList
+          ? `${item.metaboliteName} (${t("drug.metaboliteOf", { prodrug: item.viaMetaboliteOfList.join(", ") })})`
           : drug.displayName;
         const row = bindingRow(binding, drug, label, () => onDrugPick(drug));
         row.dataset.tourId = `ixdrug:${drug.id}`; // guided-tour hook: a drug row inside a target panel
@@ -4781,17 +4782,38 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     // IS a modeled drug is already searchable as its own drug row, so it is skipped
     // here to avoid a duplicate). A pick focuses the parent drug, whose panel lists
     // the metabolite under "Active metabolites"; the label carries the "metab. of X"
-    // tag and keywords match on both the metabolite and the parent name.
-    ...(data.drugs || []).filter((d) => d.focusable).flatMap((drug) =>
-      (drug.metabolites || [])
-        .filter((m) => !m.linkFocusable)
-        .map((m) => ({
-          type: "drug",
-          label: `${m.name} · ${t("drug.metaboliteOf", { prodrug: drug.displayName })}`,
-          keywords: `${drug.name} ${drug.displayName} ${drug.keywords || ""}`,
-          select: () => focusDrug(drug, { frame: true }),
-          preview: () => focusDrug(drug, { preview: true }),
-        }))),
+    // tag and keywords match on both the metabolite and the parent name. A metabolite
+    // produced by several parents (e.g. mCPP) collapses to ONE entry keyed by folded
+    // name, listing every parent, so search never shows the same molecule twice.
+    ...(() => {
+      const byKey = new Map();
+      for (const drug of (data.drugs || []).filter((d) => d.focusable)) {
+        for (const m of (drug.metabolites || []).filter((x) => !x.linkFocusable)) {
+          const key = m.name.toLowerCase().replace(/[^a-z0-9]/g, "");
+          const existing = byKey.get(key);
+          if (existing) {
+            if (!existing.prodrugs.includes(drug.displayName)) existing.prodrugs.push(drug.displayName);
+            existing.keywords += ` ${drug.name} ${drug.displayName} ${drug.keywords || ""}`;
+            continue;
+          }
+          // The first parent seen owns the focus target; every parent's panel lists this
+          // metabolite identically, so which one we open does not matter.
+          byKey.set(key, {
+            name: m.name,
+            drug,
+            prodrugs: [drug.displayName],
+            keywords: `${drug.name} ${drug.displayName} ${drug.keywords || ""}`,
+          });
+        }
+      }
+      return [...byKey.values()].map((e) => ({
+        type: "drug",
+        label: `${e.name} · ${t("drug.metaboliteOf", { prodrug: e.prodrugs.join(", ") })}`,
+        keywords: e.keywords,
+        select: () => focusDrug(e.drug, { frame: true }),
+        preview: () => focusDrug(e.drug, { preview: true }),
+      }));
+    })(),
     // Named circuits (the loops in the Projections section): a pick isolates the
     // loop, plays its traveling pulse and opens its panel, exactly like its legend
     // row, so search reaches them too (part of "anything from search == the panel").

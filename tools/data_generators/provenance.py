@@ -718,9 +718,26 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # Non-modeled-metabolite receptor bindings, graded exactly like a drug binding
     # (quote source or measured Ki). A separate kind from drug_bindings so the drug Ki
     # coverage figures are unperturbed; authored by apply_metabolite_bindings.py.
-    metabolite_binding_grades = [_binding_grade(b)
-                                 for d in drugs for m in d.get("metabolites", [])
-                                 for b in m.get("bindings", [])]
+    #
+    # A single metabolite can be produced by more than one modeled drug (e.g. mCPP by
+    # nefazodone and trazodone), so it appears once under EACH parent in the data with
+    # identical bindings (the applier keys by metabolite name -> writes the same list to
+    # each parent; check_data guards that they stay identical). Those bindings are a
+    # property of the metabolite molecule, not of the parent relationship, so the tally
+    # counts them ONCE per unique metabolite (deduped by folded name), never once per
+    # parent -- else a shared metabolite would inflate the coverage denominator. (The
+    # identity node above legitimately stays per-parent: "X is a metabolite of A" and
+    # "X is a metabolite of B" are two distinct, separately sourced claims.)
+    metabolite_binding_grades = []
+    _seen_metab_bindings = set()
+    for d in drugs:
+        for m in d.get("metabolites", []):
+            key = re.sub(r"[^a-z0-9]", "", (m.get("name") or "").lower())
+            if key in _seen_metab_bindings:
+                continue
+            _seen_metab_bindings.add(key)
+            metabolite_binding_grades.extend(_binding_grade(b)
+                                             for b in m.get("bindings", []))
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
     # Functional-circuit + projection-group nodes: each a "these structures / pathways
     # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
