@@ -2138,6 +2138,30 @@ function createInfoPanel(data, sourcingModal) {
     return isFinite(p) ? String(parseFloat(p.toPrecision(3))) : "?";
   };
 
+  // Format an elimination half-life ({hours, hours_max?}) into a compact human
+  // string, choosing ONE unit (minutes / hours / days) from the largest bound so a
+  // range reads in a single unit ("2–3 days", "6–8 h", "45 min"). The data stores
+  // canonical hours precisely so this is the only place the days/h/min choice lives.
+  // Returns "" for a missing value.
+  const formatHalfLife = (hl) => {
+    if (!hl || typeof hl.hours !== "number") return "";
+    const lo = hl.hours;
+    const hi = typeof hl.hours_max === "number" ? hl.hours_max : null;
+    const ref = hi != null ? hi : lo; // pick the unit off the upper bound
+    let div, unit;
+    if (ref < 1) { div = 1 / 60; unit = t("drug.hlMinutes"); }
+    else if (ref < 48) { div = 1; unit = t("drug.hlHours"); }
+    else { div = 24; unit = t("drug.hlDays"); }
+    // Show integers plainly, otherwise one decimal (a near-integer snaps to int).
+    const fmt = (h) => {
+      const v = h / div;
+      return Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
+    };
+    return hi != null && hi !== lo
+      ? `${fmt(lo)}–${fmt(hi)} ${unit}`
+      : `${fmt(lo)} ${unit}`;
+  };
+
   // The measured PDSP Ki shown to the right of a binding's source badge: the median
   // value + [min-max] range + human/non-human assay counts, then its own "truth
   // badge" (a verified provenance pill whose tooltip cites the one representative
@@ -2502,8 +2526,15 @@ function createInfoPanel(data, sourcingModal) {
       // binding, seen from the target's side), so the effect glyph, action, the
       // measured Ki chip and the shared source pill all render identically here;
       // clicking a row opens that drug.
-      for (const { drug, binding } of byCat.get(cat)) {
-        const row = bindingRow(binding, drug, drug.displayName, () => onDrugPick(drug));
+      for (const item of byCat.get(cat)) {
+        const { drug, binding } = item;
+        // A metabolite entry (its own non-drug binding surfaced here) reads
+        // "NAME (metab. of PRODRUG)" and clicks through to the parent drug; a normal
+        // drug entry just shows its display name.
+        const label = item.viaMetaboliteOf
+          ? `${item.metaboliteName} (${t("drug.metaboliteOf", { prodrug: item.viaMetaboliteOf })})`
+          : drug.displayName;
+        const row = bindingRow(binding, drug, label, () => onDrugPick(drug));
         row.dataset.tourId = `ixdrug:${drug.id}`; // guided-tour hook: a drug row inside a target panel
         ul.appendChild(row);
       }
@@ -3097,6 +3128,20 @@ function createInfoPanel(data, sourcingModal) {
         body.appendChild(brandsEl);
       }
 
+      // Elimination half-life (T½): its own sourced node, placed between brands and
+      // the binding list, formatted to days/hours/minutes and pilled like any node.
+      if (drug.halfLife) {
+        const hlEl = el("div", "info-bindings info-halflife");
+        hlEl.appendChild(el("h3", null, t("drug.halfLife")));
+        const chip = el("span", "hl-chip");
+        chip.appendChild(el("span", "hl-val", formatHalfLife(drug.halfLife)));
+        chip.appendChild(drug.halfLifeSources && drug.halfLifeSources.length
+          ? makeProvenancePill(drug.halfLifeProvenance, sourcesTip(drug.halfLifeSources))
+          : makeProvenancePill(drug.halfLifeProvenance || null));
+        hlEl.appendChild(chip);
+        body.appendChild(hlEl);
+      }
+
       // (Ki ranking uses the shared bindingKi helper.)
 
       // What it binds: one row per target, coloured by the action's net effect.
@@ -3125,6 +3170,47 @@ function createInfoPanel(data, sourcingModal) {
         acts.appendChild(ul);
       }
       body.appendChild(acts);
+
+      // Active metabolites: one row per metabolite (its own sourced identity node).
+      // A metabolite that is itself a modeled drug links to it (jump via onDrugPick);
+      // each shows its own T½ underneath, a bit like a binding's Ki. A non-drug
+      // metabolite's receptor bindings arrive in a later Wikipedia/PDSP pass, so only
+      // its name + T½ show for now.
+      if (drug.metabolites && drug.metabolites.length) {
+        const metaEl = el("div", "info-bindings info-metabolites");
+        metaEl.dataset.tourSec = "metabolites";
+        metaEl.appendChild(el("h3", null, t("drug.metabolites")));
+        const ul = el("ul");
+        for (const m of drug.metabolites) {
+          const li = el("li", "metab-row");
+          const head = el("div", "metab-head");
+          const linked = m.drugId ? drugById.get(m.drugId) : null;
+          if (linked && m.linkFocusable) {
+            const btn = el("button", "combo-link", m.name);
+            btn.addEventListener("click", () => onDrugPick(linked));
+            head.appendChild(btn);
+          } else {
+            head.appendChild(el("span", "bind-target", m.name));
+          }
+          head.appendChild(m.sources && m.sources.length
+            ? makeProvenancePill(m.provenance, sourcesTip(m.sources))
+            : makeProvenancePill(m.provenance || null));
+          li.appendChild(head);
+          const hlStr = formatHalfLife(m.halfLife);
+          if (hlStr) {
+            const chip = el("span", "hl-chip metab-hl");
+            chip.appendChild(el("span", "hl-label", `${t("drug.halfLife")} `));
+            chip.appendChild(el("span", "hl-val", hlStr));
+            if (m.halfLifeSources && m.halfLifeSources.length)
+              chip.appendChild(makeProvenancePill(
+                m.halfLifeProvenance, sourcesTip(m.halfLifeSources)));
+            li.appendChild(chip);
+          }
+          ul.appendChild(li);
+        }
+        metaEl.appendChild(ul);
+        body.appendChild(metaEl);
+      }
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
       // always refers to a specific binding node rather than "the whole drug".
@@ -3529,9 +3615,28 @@ function drugSwatchColor(drug, effectColors) {
  * @param {(drug: object) => void} onPick
  * @returns {(activeId: string|null) => void}
  */
+// localStorage key for the Drugs list's "show active metabolites" toggle (default
+// on). Persisted so the choice survives reloads, mirroring anim-settings' idiom.
+const METAB_TOGGLE_KEY = "neurarium.metabolites";
+function loadShowMetabolites() {
+  try {
+    return localStorage.getItem(METAB_TOGGLE_KEY) !== "off";
+  } catch {
+    return true;
+  }
+}
+function saveShowMetabolites(on) {
+  try {
+    localStorage.setItem(METAB_TOGGLE_KEY, on ? "on" : "off");
+  } catch {
+    /* private mode / storage disabled: toggle just won't persist. */
+  }
+}
+
 function buildDrugLegend(data, onPick) {
   const container = document.getElementById("drugs-list");
   const filterInput = document.getElementById("drugs-filter");
+  const metabToggle = document.getElementById("drugs-show-metabolites");
   if (!container) return () => {};
   container.replaceChildren();
   const rows = [];   // { row, id } for the focusable drugs (for reflect)
@@ -3576,6 +3681,35 @@ function buildDrugLegend(data, onPick) {
         row.title = t("drug.stubHint");
       }
       groupRows.push(row);
+      // Active metabolites as discreet indented bullets under the parent drug, each
+      // showing its own T½; a metabolite that is itself a modeled drug jumps to it.
+      // Toggled by #drugs-show-metabolites; marked _isMetab so applyFilter can gate
+      // them, and given a haystack (own + parent name) so filtering behaves.
+      for (const m of drug.metabolites || []) {
+        const mrow = document.createElement("div");
+        mrow.className = "legend-item metab-item";
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "metab-name";
+        nameSpan.textContent = m.name;
+        mrow.appendChild(nameSpan);
+        const hlStr = formatHalfLife(m.halfLife);
+        if (hlStr) {
+          const hlSpan = document.createElement("span");
+          hlSpan.className = "metab-item-hl";
+          hlSpan.textContent = hlStr;
+          mrow.appendChild(hlSpan);
+        }
+        const linked = m.drugId ? data.byId.get(m.drugId) : null;
+        if (linked && m.linkFocusable) {
+          mrow.classList.add("clickable");
+          mrow.title = t("drug.metaboliteOf", { prodrug: drug.displayName });
+          mrow.addEventListener("click", () => onPick(linked));
+        }
+        mrow._haystack = foldText(`${m.name} ${drug.name}`);
+        mrow._isMetab = true;
+        container.appendChild(mrow);
+        groupRows.push(mrow);
+      }
     }
     groups.push({ heading: h, rows: groupRows });
   }
@@ -3589,11 +3723,14 @@ function buildDrugLegend(data, onPick) {
 
   const applyFilter = () => {
     const q = foldText((filterInput?.value || "").trim());
+    const showMetab = metabToggle ? metabToggle.checked : true;
     let anyVisible = false;
     for (const g of groups) {
       let groupVisible = false;
       for (const row of g.rows) {
-        const match = !q || row._haystack.includes(q);
+        // A metabolite bullet is visible only when the toggle is on AND it matches.
+        const match = (!q || row._haystack.includes(q)) &&
+          (!row._isMetab || showMetab);
         row.hidden = !match;
         if (match) groupVisible = true;
       }
@@ -3606,6 +3743,14 @@ function buildDrugLegend(data, onPick) {
     filterInput.value = "";
     filterInput.addEventListener("input", applyFilter);
   }
+  if (metabToggle) {
+    metabToggle.checked = loadShowMetabolites();
+    metabToggle.addEventListener("change", () => {
+      saveShowMetabolites(metabToggle.checked);
+      applyFilter();
+    });
+  }
+  applyFilter(); // apply the persisted toggle state on first build
 
   return function reflect(activeId) {
     for (const { row, id } of rows) {

@@ -1199,6 +1199,31 @@
          space them apart. */
       #receptors-body h2,
       #drugs-list h2 { margin: 14px 0 8px; }
+      /* "Show active metabolites" toggle, sits under the filter box. */
+      .drugs-toggle {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 6px 0 2px;
+        font-size: 11px;
+        color: var(--muted);
+        cursor: pointer;
+        user-select: none;
+      }
+      .drugs-toggle input { margin: 0; }
+      /* Active-metabolite bullet under a parent drug row: indented + dimmer so it
+         reads as a discreet sub-item, with its T½ trailing in muted text. */
+      #drugs-list .metab-item {
+        margin-left: 22px;
+        padding: 1px 0;
+        font-size: 11px;
+        color: var(--muted);
+        opacity: 0.85;
+      }
+      #drugs-list .metab-item::before { content: "└ "; opacity: 0.5; }
+      #drugs-list .metab-item.clickable { cursor: pointer; }
+      #drugs-list .metab-item.clickable:hover { color: var(--fg); opacity: 1; }
+      #drugs-list .metab-item .metab-item-hl { margin-left: 6px; opacity: 0.75; }
       /* Clickable category headings toggle the whole group; same selected/dimmed
          states as the rows. The clickable group headings live in #structures
          (the region rows); #projections headings are plain labels. */
@@ -1682,6 +1707,28 @@
       .ki-mapped { color: #e6b800; font-size: 10px; white-space: nowrap; }
       /* Affinity-only (PDSP) binding: no known direction, panel-only, slightly muted. */
       .info-bindings li.affinity-only .bind-action { font-style: italic; }
+      /* Elimination half-life (T½) chip: mirrors the Ki chip (value + provenance
+         pill), so a drug's T½ reads like a binding's measured value. */
+      .hl-chip {
+        display: inline-flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 2px 5px;
+        font-size: 12px;
+      }
+      .hl-chip .hl-val { font-weight: 600; color: var(--accent-light); white-space: nowrap; }
+      .hl-chip .hl-label { color: var(--muted); font-size: 11px; }
+      /* Active-metabolites list: each row is a name (+ its identity pill) with its own
+         T½ underneath, indented and dimmer so it reads as a sub-fact of the drug. */
+      .info-metabolites .metab-row { margin-bottom: 6px; }
+      .info-metabolites .metab-head {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 4px 6px;
+      }
+      .info-metabolites .metab-hl { margin-left: 12px; font-size: 11px; }
+      .info-metabolites .metab-hl .hl-val { color: var(--muted); font-weight: 600; }
       /* Combination-drug warning at the top of a combo's panel. */
       .combo-warning {
         background: rgba(230, 184, 0, 0.08);
@@ -2218,6 +2265,7 @@
             </button>
             <div id="drugs-body" hidden>
               <input type="text" id="drugs-filter" class="drugs-filter" data-i18n-attr="placeholder:drugs.filter" autocomplete="off" />
+              <label class="drugs-toggle"><input type="checkbox" id="drugs-show-metabolites" checked /><span data-i18n="drugs.showMetabolites"></span></label>
               <div id="drugs-list"></div>
             </div>
           </div>
