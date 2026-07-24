@@ -1,0 +1,620 @@
+[
+  {
+    "metabolite": "7-Hydroxyamoxapine",
+    "parent": "amoxapine",
+    "key": "7_hydroxyamoxapine",
+    "wiki_title": "7-Hydroxyamoxapine",
+    "slug": "7_hydroxyamoxapine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "7-Hydroxyamoxapine is an active metabolite of the antidepressant drug amoxapine (Asendin). It contributes to amoxapine's pharmacology. It is a dopamine receptor antagonist and contributes to amoxapine's antipsychotic properties."
+    ]
+  },
+  {
+    "metabolite": "8-Hydroxyamoxapine",
+    "parent": "amoxapine",
+    "key": "8_hydroxyamoxapine",
+    "wiki_title": "8-Hydroxyamoxapine",
+    "slug": "8_hydroxyamoxapine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "8-Hydroxyamoxapine is an active metabolite of the antidepressant drug amoxapine (Asendin). It contributes to amoxapine's pharmacology. It is a serotonin-norepinephrine reuptake inhibitor (SNRI) with similar norepinephrine , but more serotonin , reuptake inhibition as its parent compound. It plays a part in balancing amoxapine's ratio of serotonin to norepinephrine transporter blockage."
+    ]
+  },
+  {
+    "metabolite": "Dehydroaripiprazole",
+    "parent": "aripiprazole",
+    "key": "dehydroaripiprazole",
+    "wiki_title": "Aripiprazole",
+    "slug": "aripiprazole",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "DM-3411",
+    "parent": "brexpiprazole",
+    "key": "dm_3411",
+    "wiki_title": "Brexpiprazole",
+    "slug": "brexpiprazole",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "6-Hydroxybupropion",
+    "parent": "bupropion",
+    "key": "6_hydroxybupropion",
+    "wiki_title": "Hydroxybupropion",
+    "slug": "hydroxybupropion",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Compared to bupropion, hydroxybupropion is similar in its potency as a norepinephrine reuptake inhibitor ( IC 50 = 1.7 μM), but is substantially weaker as a dopamine reuptake inhibitor (IC 50 = >10 μM). Like bupropion, hydroxybupropion is also a non-competitive antagonist of nACh receptors , such as α 4 β 2 and α 3 β 4 , but is even more potent in comparison."
+    ]
+  },
+  {
+    "metabolite": "Carbamazepine-10,11-epoxide",
+    "parent": "carbamazepine",
+    "key": "carbamazepine_10_11_epoxide",
+    "wiki_title": "Carbamazepine",
+    "slug": "carbamazepine",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Didesmethyl cariprazine",
+    "parent": "cariprazine",
+    "key": "didesmethyl_cariprazine",
+    "wiki_title": "Cariprazine",
+    "slug": "cariprazine",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Desmethylclomipramine",
+    "parent": "clomipramine",
+    "key": "desmethylclomipramine",
+    "wiki_title": "Norclomipramine",
+    "slug": "norclomipramine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Diethyldithiocarbamate",
+    "parent": "disulfiram",
+    "key": "diethyldithiocarbamate",
+    "wiki_title": "Sodium diethyldithiocarbamate",
+    "slug": "sodium_diethyldithiocarbamate",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Carbon disulfide",
+    "parent": "disulfiram",
+    "key": "carbon_disulfide",
+    "wiki_title": "Carbon disulfide",
+    "slug": "carbon_disulfide",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Norfluoxetine",
+    "parent": "fluoxetine",
+    "key": "norfluoxetine",
+    "wiki_title": "Seproxetine",
+    "slug": "seproxetine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Meta-chlorophenylpiperazine",
+    "parent": "nefazodone",
+    "key": "meta_chlorophenylpiperazine",
+    "wiki_title": "meta-Chlorophenylpiperazine",
+    "slug": "meta_chlorophenylpiperazine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [
+      {
+        "target": "sert",
+        "wiki_name": "SERT",
+        "ki": {
+          "median": 317.0,
+          "min": 202.0,
+          "max": 432.0,
+          "raw": "202–432"
+        },
+        "quote": "SERT | 202–432 | Human"
+      },
+      {
+        "target": "net",
+        "wiki_name": "NET",
+        "ki": {
+          "median": 3150.0,
+          "min": 1940.0,
+          "max": 4360.0,
+          "raw": "1,940–4,360"
+        },
+        "quote": "NET | 1,940–4,360 | Human"
+      },
+      {
+        "target": "5ht1a",
+        "wiki_name": "5-HT 1A",
+        "ki": {
+          "median": 222.0,
+          "min": 44.0,
+          "max": 400.0,
+          "raw": "44–400"
+        },
+        "quote": "5-HT 1A | 44–400 | Human"
+      },
+      {
+        "target": "5ht1b",
+        "wiki_name": "5-HT 1B",
+        "ki": {
+          "median": 295.0,
+          "min": 89.0,
+          "max": 501.0,
+          "raw": "89–501"
+        },
+        "quote": "5-HT 1B | 89–501 | Human"
+      },
+      {
+        "target": "5ht1d",
+        "wiki_name": "5-HT 1D",
+        "ki": {
+          "median": 755.0,
+          "min": 210.0,
+          "max": 1300.0,
+          "raw": "210–1,300"
+        },
+        "quote": "5-HT 1D | 210–1,300 | Human"
+      },
+      {
+        "target": "5ht2a",
+        "wiki_name": "5-HT 2A",
+        "ki": {
+          "median": 215.0,
+          "min": 32.0,
+          "max": 398.0,
+          "raw": "32–398"
+        },
+        "quote": "5-HT 2A | 32–398 | Human"
+      },
+      {
+        "target": "5ht2b",
+        "wiki_name": "5-HT 2B",
+        "ki": {
+          "median": 33.1,
+          "min": 3.2,
+          "max": 63.0,
+          "raw": "3.2–63"
+        },
+        "quote": "5-HT 2B | 3.2–63 | Human"
+      },
+      {
+        "target": "5ht2c",
+        "wiki_name": "5-HT 2C",
+        "ki": {
+          "median": 127.2,
+          "min": 3.4,
+          "max": 251.0,
+          "raw": "3.4–251"
+        },
+        "quote": "5-HT 2C | 3.4–251 | Human"
+      },
+      {
+        "target": "5ht3",
+        "wiki_name": "5-HT 3",
+        "ki": {
+          "median": 427.0,
+          "min": 427.0,
+          "max": 427.0,
+          "raw": "427"
+        },
+        "quote": "5-HT 3 | 427 | Human"
+      },
+      {
+        "target": "5ht5a",
+        "wiki_name": "5-HT 5A",
+        "ki": {
+          "median": 1354.0,
+          "min": 1354.0,
+          "max": 1354.0,
+          "raw": "1,354"
+        },
+        "quote": "5-HT 5A | 1,354 | Human"
+      },
+      {
+        "target": "5ht6",
+        "wiki_name": "5-HT 6",
+        "ki": {
+          "median": 1748.0,
+          "min": 1748.0,
+          "max": 1748.0,
+          "raw": "1,748"
+        },
+        "quote": "5-HT 6 | 1,748 | Human"
+      },
+      {
+        "target": "5ht7",
+        "wiki_name": "5-HT 7",
+        "ki": {
+          "median": 163.0,
+          "min": 163.0,
+          "max": 163.0,
+          "raw": "163"
+        },
+        "quote": "5-HT 7 | 163 | Human"
+      },
+      {
+        "target": "alpha1a",
+        "wiki_name": "α 1A",
+        "ki": {
+          "median": 1386.0,
+          "min": 1386.0,
+          "max": 1386.0,
+          "raw": "1,386"
+        },
+        "quote": "α 1A | 1,386 | Human"
+      },
+      {
+        "target": "alpha1b",
+        "wiki_name": "α 1B",
+        "ki": {
+          "median": 915.0,
+          "min": 915.0,
+          "max": 915.0,
+          "raw": "915"
+        },
+        "quote": "α 1B | 915 | Human"
+      },
+      {
+        "target": "alpha2",
+        "wiki_name": "α 2",
+        "ki": {
+          "median": 341.0,
+          "min": 112.0,
+          "max": 570.0,
+          "raw": "112–570"
+        },
+        "quote": "α 2 | 112–570 | Human"
+      },
+      {
+        "target": "alpha2a",
+        "wiki_name": "α 2A",
+        "ki": {
+          "median": 145.0,
+          "min": 145.0,
+          "max": 145.0,
+          "raw": "145"
+        },
+        "quote": "α 2A | 145 | Human"
+      },
+      {
+        "target": "alpha2b",
+        "wiki_name": "α 2B",
+        "ki": {
+          "median": 106.0,
+          "min": 106.0,
+          "max": 106.0,
+          "raw": "106"
+        },
+        "quote": "α 2B | 106 | Human"
+      },
+      {
+        "target": "alpha2c",
+        "wiki_name": "α 2C",
+        "ki": {
+          "median": 124.0,
+          "min": 124.0,
+          "max": 124.0,
+          "raw": "124"
+        },
+        "quote": "α 2C | 124 | Human"
+      },
+      {
+        "target": "beta1",
+        "wiki_name": "β 1",
+        "ki": {
+          "median": 2359.0,
+          "min": 2359.0,
+          "max": 2359.0,
+          "raw": "2,359"
+        },
+        "quote": "β 1 | 2,359 | Human"
+      },
+      {
+        "target": "beta2",
+        "wiki_name": "β 2",
+        "ki": {
+          "median": 3474.0,
+          "min": 3474.0,
+          "max": 3474.0,
+          "raw": "3,474"
+        },
+        "quote": "β 2 | 3,474 | Human"
+      },
+      {
+        "target": "d1",
+        "wiki_name": "D 1",
+        "ki": {
+          "median": 7000.0,
+          "min": 7000.0,
+          "max": 7000.0,
+          "raw": "7,000"
+        },
+        "quote": "D 1 | 7,000 | Human"
+      },
+      {
+        "target": "h1",
+        "wiki_name": "H 1",
+        "ki": {
+          "median": 326.0,
+          "min": 326.0,
+          "max": 326.0,
+          "raw": "326"
+        },
+        "quote": "H 1 | 326 | Human"
+      }
+    ],
+    "unresolved_ki": [
+      "'α 1' (Ki 97–2,900)",
+      "'β' (Ki 2,500)",
+      "'σ 2' (Ki 8,350)",
+      "'I 1' (Ki 759)",
+      "'VDCC' (Ki 6,043)"
+    ],
+    "action_candidates": [
+      "mCPP is known to induce headaches in humans and has been used for testing potential antimigraine medications. It has potent anorectic effects and has encouraged the development of selective 5-HT 2C receptor agonists for the treatment of obesity as well.",
+      "mCPP's strongest actions are at the 5-HT 2B and 5-HT 2C receptors and its discriminative cue is mediated primarily by 5-HT 2C . Its negative effects such as anxiety , headaches , and appetite loss are likely mediated by its actions on the 5-HT 2C receptor. Other effects of mCPP include nausea , hypoactivity , and penile erection , the latter two the result of increased 5-HT 2C activity and the former likely via 5-HT 3 stimulation. mCPP is known to induce migraines and this may be mediated by serotonin 5-HT 2B receptor agonism.",
+      "In comparison studies, mCPP has approximately 10-fold selectivity for the human 5-HT 2C receptor over the human 5-HT 2A and 5-HT 2B receptors (K i = 3.4 nM vs. 32.1 and 28.8 nM). It acts as a partial agonist of the human 5-HT 2A and 5-HT 2C receptors but as an antagonist of the human 5-HT 2B receptors.",
+      "mCPP does not produce the head-twitch response , a behavioral proxy of psychedelic effects, in rodents. Instead, it has been found to dose-dependently antagonize the head-twitch response induced by the serotonergic psychedelic DOI . However, when mCPP is combined with the selective serotonin 5-HT 2C receptor antagonist SB-242084 , it is able to dose-dependently induce head twitches. These findings suggest that serotonin 5-HT 2C receptor activation inhibits and can mask the head-twitch response induced by serotonin 5-HT 2A receptor agonists.",
+      "The anxiety- and panic-inducing effects of mCPP in humans can be blocked or reduced by non-selective serotonin receptor antagonists such as metergoline and to a lesser extent methysergide as well as by the serotonin 5-HT 2A and 5-HT 2C receptor antagonist ritanserin . Chronic pre-treatment with serotonin reuptake inhibitors like fluoxetine and clomipramine can also reverse the anxiogenic effects of mCPP. Relatedly, serotonin reuptake inhibitors also reduce many other effects of mCPP and this is thought to be related to desensitization of serotonin 5-HT 2C and 5-HT 2A receptors. The benzodiazepine alprazolam can block mCPP-induced anxiety as well.",
+      "mCPP has been found to dose-dependently increase oxytocin levels in rodents. It can increase oxytocin levels by up to 3- to 6-fold at high doses. The oxytocin increases caused by mCPP are near-completely blocked by the serotonin 5-HT 2 receptor antagonists mianserin , LY-53857 , and metergoline , but are minimally affected by the serotonin 5-HT 2A receptor antagonist ketanserin . These findings suggest the involvement of the serotonin 5-HT 2C receptor in oxytocin secretion with mCPP rather than other serotonin receptors like the serotonin 5-HT 2A receptor. In humans, the drug robustly increased oxytocin levels in women but not in men."
+    ]
+  },
+  {
+    "metabolite": "N-dealkylated samidorphan",
+    "parent": "olanzapinesamidorphan",
+    "key": "n_dealkylated_samidorphan",
+    "wiki_title": "Olanzapine/samidorphan",
+    "slug": "olanzapine_samidorphan",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Samidorphan N-oxide",
+    "parent": "olanzapinesamidorphan",
+    "key": "samidorphan_n_oxide",
+    "wiki_title": "Olanzapine/samidorphan",
+    "slug": "olanzapine_samidorphan",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Licarbazepine",
+    "parent": "oxcarbazepine",
+    "key": "licarbazepine",
+    "wiki_title": "Licarbazepine",
+    "slug": "licarbazepine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "N-Desmethylpimavanserin",
+    "parent": "pimavanserin",
+    "key": "n_desmethylpimavanserin",
+    "wiki_title": "Pimavanserin",
+    "slug": "pimavanserin",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Norquetiapine",
+    "parent": "quetiapine",
+    "key": "norquetiapine",
+    "wiki_title": "Norquetiapine",
+    "slug": "norquetiapine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Norquetiapine , also known as N -desalkylquetiapine , is a 5-HT 2B serotonin receptor modulator , and norepinephrine reuptake inhibitor . It is the principal metabolite of quetiapine ."
+    ]
+  },
+  {
+    "metabolite": "M-II",
+    "parent": "ramelteon",
+    "key": "m_ii",
+    "wiki_title": "Ramelteon",
+    "slug": "ramelteon",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  },
+  {
+    "metabolite": "Desmethylselegiline",
+    "parent": "selegiline",
+    "key": "desmethylselegiline",
+    "wiki_title": "Desmethylselegiline",
+    "slug": "desmethylselegiline",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Like selegiline, DMS is a monoamine oxidase inhibitor (MAOI); specifically, it is a selective and irreversible inhibitor of monoamine oxidase B (MAO-B). In addition, it is a catecholaminergic activity enhancer (CAE) similarly to selegiline. The drug also produces levoamphetamine as an active metabolite , which is a norepinephrine–dopamine releasing agent with sympathomimetic and psychostimulant effects.",
+      "DMS is a monoamine oxidase inhibitor (MAOI), similarly to selegiline . It is specifically a selective and irreversible inhibitor of monoamine oxidase B (MAO-B). The compound is also a catecholaminergic activity enhancer (CAE) like selegiline. The potency of DMS as a CAE appears to be similar to that of selegiline.",
+      "Aside from being an active metabolite of selegiline, DMS itself has been studied clinically. A single 10 mg oral dose of DMS inhibited platelet MAO-B activity by 68 ± 16%, relative to 94 ± 9% with a single 10 mg dose of selegiline. Subsequently, platelet MAO-B activity returned to baseline after 2 weeks. Hence, although less potent than selegiline, DMS is also an effective MAO-B inhibitor.",
+      "DMS has been found to be 60-fold less potent than selegiline as an MAO-B inhibitor in vitro . However, it was only 3-fold less potent than selegiline orally in vivo in rats with repeated administration. In other research, DMS was 6-fold less potent than selegiline in inhibition of platelet MAO-B activity.",
+      "Selegiline produces levomethamphetamine and levoamphetamine as active metabolites, whereas DMS produces only levoamphetamine as a metabolite. Unlike DMS and selegiline, levoamphetamine and levomethamphetamine are not active as MAO-B inhibitors at concentrations up to 100 μM in vitro . However, levoamphetamine is a releaser of norepinephrine and dopamine and has sympathomimetic and psychostimulant effects. Similarly to selegiline, but unlike levoamphetamine and levomethamphetamine, DMS itself is not a monoamine releasing agent .",
+      "DMS shows neuroprotective , antioxidant , and antiapoptotic activity similarly to selegiline. DMS is more potent in some of these effects than selegiline. The neuroprotective and antioxidant properties of DMS and selegiline appear to be independent of MAO-B inhibition. Both selegiline and DMS have been found to bind to and inhibit glyceraldehyde-3-phosphate dehydrogenase (GAPDH), which may be involved in their neuroprotective effects."
+    ]
+  },
+  {
+    "metabolite": "L-Amphetamine",
+    "parent": "selegiline",
+    "key": "l_amphetamine",
+    "wiki_title": "Levoamphetamine",
+    "slug": "levoamphetamine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "In addition to its catecholamine-releasing activity, levoamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levoamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is similarly potent to selegiline and levomethamphetamine but is more potent than dextromethamphetamine and dextroamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism.",
+      "Levoamphetamine is a major active metabolite of selegiline ( L -deprenyl; N -propargyl- L -methamphetamine). Selegiline is a monoamine oxidase inhibitor (MAOI), specifically a selective inhibitor of monoamine oxidase B (MAO-B) at lower doses and a dual inhibitor of both monoamine oxidase A (MAO-A) and MAO-B at higher doses. It also has additional activities, such as acting as a catecholaminergic activity enhancer (CAE), possibly via agonism of the TAAR1 , and having potential neuroprotective effects. Selegiline is clinically used as an antiparkinsonian agent in the treatment of Parkinson's disease and as an antidepressant in the treatment of major depressive disorder ."
+    ]
+  },
+  {
+    "metabolite": "L-Methamphetamine",
+    "parent": "selegiline",
+    "key": "l_methamphetamine",
+    "wiki_title": "Levomethamphetamine",
+    "slug": "levomethamphetamine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "In addition to its norepinephrine-releasing activity, levomethamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levomethamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is 1- to 10-fold less potent than selegiline but is 3- to 5-fold more potent than dextromethamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism."
+    ]
+  },
+  {
+    "metabolite": "(+)-alpha-Dihydrotetrabenazine",
+    "parent": "valbenazine",
+    "key": "alpha_dihydrotetrabenazine",
+    "wiki_title": "Dihydrotetrabenazine",
+    "slug": "dihydrotetrabenazine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "DTBZ as a PET radioligand with affinity for VMAT2 was developed in the mid 1990s by David E. Kuhl and colleagues at the University of Michigan . There are two enantiomers of alpha-dihydrotetrabenazine, and the dextrorotary (or (+) isomer) has a high affinity of about 1 nanomolar K i whereas the levorotary (or (-) isomer) has approximately 1000 fold lower affinity with a K i of about 2 micromolar."
+    ]
+  },
+  {
+    "metabolite": "O-desmethylvenlafaxine",
+    "parent": "venlafaxine",
+    "key": "o_desmethylvenlafaxine",
+    "wiki_title": "Desvenlafaxine",
+    "slug": "desvenlafaxine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [
+      {
+        "target": "sert",
+        "wiki_name": "SERT",
+        "ki": {
+          "median": 40.2,
+          "min": 40.2,
+          "max": 40.2,
+          "raw": "40.2"
+        },
+        "quote": "SERT | 40.2 | 47.3"
+      },
+      {
+        "target": "net",
+        "wiki_name": "NET",
+        "ki": {
+          "median": 558.4,
+          "min": 558.4,
+          "max": 558.4,
+          "raw": "558.4"
+        },
+        "quote": "NET | 558.4 | 531.3"
+      }
+    ],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Desvenlafaxine , sold under the brand name Pristiq among others, is a medication used to treat major depressive disorder . It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class and is taken by mouth. It is recommended that the need for further treatment be occasionally reassessed. Studies have shown similar effectiveness compared to its parent compound venlafaxine .",
+      "Post-SSRI sexual dysfunction (PSSD) is an iatrogenic condition in which sexual side effects persist after discontinuation of serotonin reuptake inhibiting antidepressants, including desvenlafaxine. Characteristic symptoms include genital numbness, pleasureless or weak orgasm, loss of libido, and erectile dysfunction ; non-sexual symptoms such as emotional blunting and cognitive impairment may also occur. The condition can arise after even brief exposure to a serotonin reuptake inhibitor and may persist indefinitely; there is currently no established treatment. The DSM-5 noted in 2013 that serotonin reuptake inhibitor-induced sexual dysfunction may persist after the agent is discontinued.",
+      "As the primary active metabolite of venlafaxine , desvenlafaxine shares its parent compound's serotonin reuptake inhibiting mechanism, and PSSD has been reported with both drugs. A 2023 retrospective cohort study of over 12,000 males estimated the risk of irreversible sexual dysfunction at approximately 0.46% of patients treated with serotonergic antidepressants, including SNRIs, though the actual prevalence remains uncertain and the condition is likely underreported.",
+      "Desvenlafaxine is a synthetic form of the isolated major active metabolite of venlafaxine , and is categorized as a serotonin–norepinephrine reuptake inhibitor (SNRI). When most normal metabolizers take venlafaxine, approximately 70% of the dose is metabolized into desvenlafaxine, so the effects of the two drugs are expected to be very similar. It works by blocking the \"reuptake\" transporters for key neurotransmitters affecting mood, thereby leaving more active neurotransmitters in the synapse . The neurotransmitters affected are serotonin (5-hydroxytryptamine) and norepinephrine (noradrenaline). It is approximately 10 times more potent at inhibiting serotonin uptake than norepinephrine uptake."
+    ]
+  },
+  {
+    "metabolite": "Norzotepine",
+    "parent": "zotepine",
+    "key": "norzotepine",
+    "wiki_title": "Zotepine",
+    "slug": "zotepine",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": []
+  }
+]

@@ -1,0 +1,114 @@
+{
+  "8_hydroxyamoxapine": {
+    "bindings": [
+      {
+        "target": "sert",
+        "action": "reuptake_inhibitor",
+        "quote": "It is a serotonin-norepinephrine reuptake inhibitor (SNRI) with similar norepinephrine , but more serotonin , reuptake inhibition as its parent compound."
+      },
+      {
+        "target": "net",
+        "action": "reuptake_inhibitor",
+        "quote": "It is a serotonin-norepinephrine reuptake inhibitor (SNRI) with similar norepinephrine , but more serotonin , reuptake inhibition as its parent compound."
+      }
+    ]
+  },
+  "6_hydroxybupropion": {
+    "bindings": [
+      {
+        "target": "net",
+        "action": "reuptake_inhibitor",
+        "quote": "hydroxybupropion is similar in its potency as a norepinephrine reuptake inhibitor ( IC 50 = 1.7 μM)"
+      },
+      {
+        "target": "dat",
+        "action": "reuptake_inhibitor",
+        "quote": "is substantially weaker as a dopamine reuptake inhibitor (IC 50 = >10 μM)"
+      },
+      {
+        "target": "nachr_a4b2",
+        "action": "antagonist",
+        "quote": "hydroxybupropion is also a non-competitive antagonist of nACh receptors , such as α 4 β 2"
+      }
+    ]
+  },
+  "meta_chlorophenylpiperazine": {
+    "bindings": [
+      {
+        "target": "5ht2a",
+        "action": "partial_agonist",
+        "quote": "It acts as a partial agonist of the human 5-HT 2A and 5-HT 2C receptors but as an antagonist of the human 5-HT 2B receptors."
+      },
+      {
+        "target": "5ht2c",
+        "action": "partial_agonist",
+        "quote": "It acts as a partial agonist of the human 5-HT 2A and 5-HT 2C receptors but as an antagonist of the human 5-HT 2B receptors."
+      },
+      {
+        "target": "5ht2b",
+        "action": "antagonist",
+        "quote": "It acts as a partial agonist of the human 5-HT 2A and 5-HT 2C receptors but as an antagonist of the human 5-HT 2B receptors."
+      }
+    ]
+  },
+  "norquetiapine": {
+    "bindings": [
+      {
+        "target": "5ht2b",
+        "action": "modulator",
+        "quote": "is a 5-HT 2B serotonin receptor modulator"
+      },
+      {
+        "target": "net",
+        "action": "reuptake_inhibitor",
+        "quote": "norepinephrine reuptake inhibitor"
+      }
+    ]
+  },
+  "desmethylselegiline": {
+    "bindings": [
+      {
+        "target": "mao_b",
+        "action": "enzyme_inhibitor",
+        "quote": "it is a selective and irreversible inhibitor of monoamine oxidase B (MAO-B)"
+      }
+    ]
+  },
+  "l_amphetamine": {
+    "bindings": [
+      {
+        "target": "dat",
+        "action": "releaser",
+        "quote": "In addition to its catecholamine-releasing activity, levoamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1)."
+      },
+      {
+        "target": "net",
+        "action": "releaser",
+        "quote": "In addition to its catecholamine-releasing activity, levoamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1)."
+      }
+    ]
+  },
+  "l_methamphetamine": {
+    "bindings": [
+      {
+        "target": "net",
+        "action": "releaser",
+        "quote": "In addition to its norepinephrine-releasing activity, levomethamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1)."
+      }
+    ]
+  },
+  "o_desmethylvenlafaxine": {
+    "bindings": [
+      {
+        "target": "sert",
+        "action": "reuptake_inhibitor",
+        "quote": "It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class"
+      },
+      {
+        "target": "net",
+        "action": "reuptake_inhibitor",
+        "quote": "It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class"
+      }
+    ]
+  }
+}
