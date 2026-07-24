@@ -89,6 +89,8 @@ KIND_LABELS = {
     "drug_nbn": "Drug nomenclature (NbN)",
     "drug_brands": "Drug brand names",
     "drug_categories": "Drug class",
+    "drug_half_life": "Drug half-life (T½)",
+    "drug_metabolites": "Drug active metabolites",
     "projections": "Neuron pathways",
     "circuits": "Functional circuits",
     "projection_groups": "Projection groups",
