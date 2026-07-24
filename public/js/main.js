@@ -3709,6 +3709,7 @@ function buildDrugLegend(data, onPick) {
         }
         mrow._haystack = foldText(`${m.name} ${drug.name}`);
         mrow._isMetab = true;
+        mrow._parentRow = row; // so a filter match on the bullet can pull its parent back in
         container.appendChild(mrow);
         groupRows.push(mrow);
       }
@@ -3728,14 +3729,21 @@ function buildDrugLegend(data, onPick) {
     const showMetab = metabToggle ? metabToggle.checked : true;
     let anyVisible = false;
     for (const g of groups) {
-      let groupVisible = false;
       for (const row of g.rows) {
         // A metabolite bullet is visible only when the toggle is on AND it matches.
         const match = (!q || row._haystack.includes(q)) &&
           (!row._isMetab || showMetab);
         row.hidden = !match;
-        if (match) groupVisible = true;
       }
+      // A matched metabolite pulls its parent drug back into view even when the
+      // parent's own name doesn't match (searching "norf" shows fluoxetine so the
+      // Norfluoxetine bullet is never orphaned under a hidden parent).
+      for (const row of g.rows) {
+        if (row._isMetab && !row.hidden && row._parentRow) {
+          row._parentRow.hidden = false;
+        }
+      }
+      const groupVisible = g.rows.some((row) => !row.hidden);
       g.heading.hidden = !groupVisible;
       if (groupVisible) anyVisible = true;
     }
@@ -4769,6 +4777,21 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
       select: () => focusDrug(drug, { frame: true }),
       preview: () => focusDrug(drug, { preview: true }),
     })),
+    // Active metabolites that are not themselves a focusable drug (a metabolite that
+    // IS a modeled drug is already searchable as its own drug row, so it is skipped
+    // here to avoid a duplicate). A pick focuses the parent drug, whose panel lists
+    // the metabolite under "Active metabolites"; the label carries the "metab. of X"
+    // tag and keywords match on both the metabolite and the parent name.
+    ...(data.drugs || []).filter((d) => d.focusable).flatMap((drug) =>
+      (drug.metabolites || [])
+        .filter((m) => !m.linkFocusable)
+        .map((m) => ({
+          type: "drug",
+          label: `${m.name} · ${t("drug.metaboliteOf", { prodrug: drug.displayName })}`,
+          keywords: `${drug.name} ${drug.displayName} ${drug.keywords || ""}`,
+          select: () => focusDrug(drug, { frame: true }),
+          preview: () => focusDrug(drug, { preview: true }),
+        }))),
     // Named circuits (the loops in the Projections section): a pick isolates the
     // loop, plays its traveling pulse and opens its panel, exactly like its legend
     // row, so search reaches them too (part of "anything from search == the panel").
