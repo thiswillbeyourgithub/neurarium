@@ -1,0 +1,4951 @@
+{
+  "acamprosate": {
+    "name": "Acamprosate",
+    "pages": [
+      15,
+      18
+    ],
+    "half_life_candidates": [
+      {
+        "page": 16,
+        "line": "Terminal half-life 20–33 hours",
+        "parsed": {
+          "hours": 20.0,
+          "hours_max": 33.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 16,
+        "line": "Is not hepatically metabolized and thus is unlikely to be affected by drugs that induce or inhibit hepatic enzymes"
+      },
+      {
+        "page": 16,
+        "line": "Does not inhibit hepatic enzymes, and thus is unlikely to affect plasma concentrations of drugs metabolized by those enzymes"
+      }
+    ]
+  },
+  "agomelatine": {
+    "name": "Agomelatine",
+    "pages": [
+      19,
+      24
+    ],
+    "half_life_candidates": [
+      {
+        "page": 21,
+        "line": "Half-life 1–2 hours",
+        "parsed": {
+          "hours": 1.0,
+          "hours_max": 2.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 21,
+        "line": "Metabolized primarily by CYP1A2"
+      }
+    ]
+  },
+  "alprazolam": {
+    "name": "Alprazolam",
+    "pages": [
+      25,
+      30
+    ],
+    "half_life_candidates": [
+      {
+        "page": 27,
+        "line": "Frequency of dosing in practice is often greater than predicted from half-life, as duration of biological activity is often shorter than pharmacokinetic terminal half-life"
+      },
+      {
+        "page": 27,
+        "line": "Elimination half-life 12–15 hours",
+        "parsed": {
+          "hours": 12.0,
+          "hours_max": 15.0
+        }
+      },
+      {
+        "page": 29,
+        "line": "Clinical duration of action may be shorter than plasma half-life, leading to dosing more frequently than 2–3 times daily in"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 27,
+        "line": "Metabolized by CYP3A4"
+      },
+      {
+        "page": 27,
+        "line": "Inactive metabolites"
+      }
+    ]
+  },
+  "amisulpride": {
+    "name": "Amisulpride",
+    "pages": [
+      31,
+      38
+    ],
+    "half_life_candidates": [
+      {
+        "page": 34,
+        "line": "Elimination half-life approximately 12 hours",
+        "parsed": {
+          "hours": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 32,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 34,
+        "line": "Since amisulpride is only weakly metabolized, few drug interactions that could raise amisulpride plasma levels are expected"
+      }
+    ]
+  },
+  "amitriptyline": {
+    "name": "Amitriptyline",
+    "pages": [
+      39,
+      46
+    ],
+    "half_life_candidates": [
+      {
+        "page": 41,
+        "line": "Plasma half-life 10–28 hours",
+        "parsed": {
+          "hours": 10.0,
+          "hours_max": 28.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 41,
+        "line": "Metabolized to an active metabolite, nortriptyline, which is predominantly a norepinephrine reuptake inhibitor, by demethylation via CYP1A2"
+      },
+      {
+        "page": 42,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 42,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 42,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 42,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 44,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "amoxapine": {
+    "name": "Amoxapine",
+    "pages": [
+      47,
+      52
+    ],
+    "half_life_candidates": [
+      {
+        "page": 49,
+        "line": "Half-life of parent drug approximately 8 hours",
+        "parsed": {
+          "hours": 8.0
+        }
+      },
+      {
+        "page": 49,
+        "line": "Half-life of the active metabolites approximately 24 hours",
+        "parsed": {
+          "hours": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 47,
+        "line": "Parent drug and especially an active metabolite are dopamine 2 antagonists"
+      },
+      {
+        "page": 49,
+        "line": "7- and 8-hydroxymetabolites are active and possess serotonin 2A and dopamine 2 antagonist properties, similar to atypical antipsychotics"
+      },
+      {
+        "page": 49,
+        "line": "Amoxapine is the _N_ -desmethyl metabolite of the conventional antipsychotic loxapine"
+      },
+      {
+        "page": 49,
+        "line": "Half-life of the active metabolites approximately 24 hours"
+      },
+      {
+        "page": 49,
+        "line": "Methylphenidate may inhibit metabolism of TCAs/tetracyclics"
+      },
+      {
+        "page": 50,
+        "line": "TCAs/tetracyclics can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit its metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 50,
+        "line": "If patient is taking drugs that inhibit TCA/ tetracyclic metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 50,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 52,
+        "line": "At high doses, patients who form high concentrations of active metabolites may have akathisia or drug-induced parkinsonism, and possibly develop tardive dyskinesia"
+      },
+      {
+        "page": 52,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "amphetamine_d": {
+    "name": "Amphetamine (D)",
+    "pages": [
+      53,
+      60
+    ],
+    "half_life_candidates": [
+      {
+        "page": 55,
+        "line": "Clinical duration of action often differs from pharmacokinetic half-life"
+      },
+      {
+        "page": 56,
+        "line": "Half-life approximately 9–11 hours",
+        "parsed": {
+          "hours": 9.0,
+          "hours_max": 11.0
+        }
+      },
+      {
+        "page": 57,
+        "line": "Half-life and duration of clinical action tend to be shorter in younger children"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 56,
+        "line": "MAOIs slow metabolism of amphetamines and thus potentiate their actions, which can cause headache, hypertension, and rarely hypertensive crisis and malignant hyperthermia, sometimes with fatal results"
+      }
+    ]
+  },
+  "amphetamine_dl": {
+    "name": "Amphetamine (D,L)",
+    "pages": [
+      61,
+      68
+    ],
+    "half_life_candidates": [
+      {
+        "page": 63,
+        "line": "Clinical duration of action often differs from pharmacokinetic half-life"
+      },
+      {
+        "page": 64,
+        "line": "In adults, half-life for d-amphetamine is 10 hours and for l-amphetamine is 13 hours",
+        "parsed": {
+          "hours": 10.0
+        }
+      },
+      {
+        "page": 64,
+        "line": "For children ages 6–12, half-life for d-amphetamine is 9 hours and for l-amphetamine is 11 hours",
+        "parsed": {
+          "hours": 9.0
+        }
+      },
+      {
+        "page": 66,
+        "line": "Half-life and duration of clinical action tend to be shorter in younger children"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 65,
+        "line": "MAOIs slow metabolism of amphetamines and thus potentiate their actions, which can cause headache, hypertension, and rarely hypertensive crisis and malignant hyperthermia, sometimes with fatal results"
+      }
+    ]
+  },
+  "aripiprazole": {
+    "name": "Aripiprazole",
+    "pages": [
+      69,
+      80
+    ],
+    "half_life_candidates": [
+      {
+        "page": 73,
+        "line": "Due to its very long half-life, aripiprazole will take longer to reach steady state when initiating dosing, and longer to wash out when stopping dosing, than other atypical antipsychotics"
+      },
+      {
+        "page": 73,
+        "line": "Rapid discontinuation could theoretically lead to rebound psychosis and worsening of symptoms, but less likely with aripiprazole due to its long half-life"
+      },
+      {
+        "page": 73,
+        "line": "Mean elimination half-life 75 hours (aripiprazole) and 94 hours (major metabolite dehydroaripiprazole)",
+        "parsed": {
+          "hours": 75.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 71,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 73,
+        "line": "Metabolized primarily by CYP2D6 and CYP3A4"
+      },
+      {
+        "page": 73,
+        "line": "Mean elimination half-life 75 hours (aripiprazole) and 94 hours (major metabolite dehydroaripiprazole)"
+      },
+      {
+        "page": 77,
+        "line": "The rate-limiting step for plasma drug levels for LAIs is not drug metabolism, but rather slow absorption from the injection site"
+      },
+      {
+        "page": 77,
+        "line": "Downward dose adjustment of Aristada or Abilify Maintena may be needed for poor CYP2D6 metabolizers and patients taking strong CYP2D6 or CYP3A4 inhibitors; avoid use of Abilify Maintena or Asimtuf  with strong CYP3A4 inducers, as this can lead to subtherapeutic plasma levels"
+      },
+      {
+        "page": 77,
+        "line": "Because dose adjustment is not possible for Aristada Initio, it should be avoided in patients who are known CYP2D6 poor metabolizers or who are taking strong CYP2D6 inhibitors, strong CYP3A4 inhibitors, and strong CYP3A4 inducers"
+      },
+      {
+        "page": 77,
+        "line": "|Poor CYP2D6 metabolizers|N/A|300 mg|"
+      },
+      {
+        "page": 77,
+        "line": "|Poor CYP2D6 metabolizers taking<br>concomitant CYP3A4 inhibitors|N/A|200 mg|"
+      },
+      {
+        "page": 78,
+        "line": "Abilify Asimtufi : CYP dose adjustment** Adjusted dose Poor CYP2D6 metabolizers N/A Patients taking strong CYP2D6 OR CYP3A4 inhibitors 720 mg Poor CUP2D6 metabolizers taking concomitant CYP3A4 inhibitors Avoid use Patients taking CYP2D6 AND CYP3A4 inhibitors Avoid use Patients taking CYP3A4 inducers Avoid use ~~=—=~~ **Aristada: CYP dose adjustment** Adjusted dose Adjusted dose Adjusted dose Adjusted dose for patients for patients for patients for patients taking 441 mg taking 662 mg taking 882 mg taking 1064 mg Poor CYP2D6 metabolizers N/A N/A N/A N/A Patients taking strong CYP2D6 OR N/A 441 mg 662 mg 882 mg CYP3A4 inhibitors Poor CYP2D6 metabolizers taking N/A 441 mg 441 mg 441 mg concomitant CYP3A4 inhibitors Patients taking CYP2D6 AND N/A Avoid use Avoid use Avoid use CYP3A4 inhibitors Patients taking CYP3A4 inducers 662 mg N/A N/A N/A **THE ART OF SWITCHING** ~~mun~~ **Switching from Oral Antipsychotics to Aripiprazole** • It is advisable to begin aripiprazole at an intermediate dose and build the dose rapidly over 3–7 days"
+      },
+      {
+        "page": 79,
+        "line": "Nasrallah HA. Atypical antipsychoticinduced metabolic side effects: insights from receptor-binding profiles. Mol Psychiatry 2008;13(1):27–35."
+      }
+    ]
+  },
+  "armodafinil": {
+    "name": "Armodafinil",
+    "pages": [
+      81,
+      86
+    ],
+    "half_life_candidates": [
+      {
+        "page": 83,
+        "line": "Elimination half-life approximately 15 hours",
+        "parsed": {
+          "hours": 15.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 82,
+        "line": "At high doses, may slightly induce its own metabolism, possibly by actions of inducing CYP3A4"
+      },
+      {
+        "page": 83,
+        "line": "Metabolized by the liver"
+      },
+      {
+        "page": 83,
+        "line": "May increase plasma levels of drugs metabolized by CYP2C19 (e.g., diazepam, phenytoin, propranolol)"
+      },
+      {
+        "page": 85,
+        "line": "Darwish M, Kirby M, Hellriegel ET, Robertson P Jr. Interaction profile of armodafinil with medications metabolized by cytochrome P450 enzymes 1A2, 3A4, and 2C19 in healthy subjects. Clin Pharmacokinet 2008;47(1):61–74."
+      }
+    ]
+  },
+  "asenapine": {
+    "name": "Asenapine",
+    "pages": [
+      87,
+      94
+    ],
+    "half_life_candidates": [
+      {
+        "page": 90,
+        "line": "Once daily use seems theoretically possible because the half-life of asenapine is 13– 39 hours, but this has not been extensively studied and may be limited by the need to expose the limited sublingual surface area to a limited amount of sublingual drug dosage",
+        "parsed": {
+          "hours": 13.0,
+          "hours_max": 39.0
+        }
+      },
+      {
+        "page": 91,
+        "line": "Sublingual: half-life 13–39 hours; optimal bioavailability is with sublingual administration (~35%); if food or liquid is consumed within 10 minutes of administration bioavailability decreases to 28%; bioavailability decreases to 2% if swallowed",
+        "parsed": {
+          "hours": 13.0,
+          "hours_max": 39.0
+        }
+      },
+      {
+        "page": 91,
+        "line": "Transdermal: maximum asenapine concentrations are typically reached between 12 and 24 hours, with sustained concentrations during wear time (24 hours); following removal, elimination half-life is approximately 30 hours",
+        "parsed": {
+          "hours": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 88,
+        "line": "high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "atomoxetine": {
+    "name": "Atomoxetine",
+    "pages": [
+      95,
+      100
+    ],
+    "half_life_candidates": [
+      {
+        "page": 97,
+        "line": "Efficacy with once daily dosing despite a half-life of 5 hours suggests therapeutic effects persist beyond direct pharmacological effects, unlike stimulants whose effects are generally closely correlated with plasma drug levels",
+        "parsed": {
+          "hours": 5.0
+        }
+      },
+      {
+        "page": 97,
+        "line": "Half-life approximately 5 hours",
+        "parsed": {
+          "hours": 5.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 97,
+        "line": "Patients especially sensitive to the side effects of atomoxetine may include those individuals deficient in the enzyme that metabolizes atomoxetine, CYP2D6 (i.e., 7% of Caucasians and 2% of African Americans)"
+      },
+      {
+        "page": 97,
+        "line": "Metabolized by CYP2D6"
+      }
+    ]
+  },
+  "benztropine": {
+    "name": "Benztropine",
+    "pages": [
+      101,
+      104
+    ],
+    "half_life_candidates": [
+      {
+        "page": 102,
+        "line": "Half-life 36 hours, although greatest effect lasts about 6–8 hours",
+        "parsed": {
+          "hours": 36.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 102,
+        "line": "Metabolism is not well understood"
+      }
+    ]
+  },
+  "blonanserin": {
+    "name": "Blonanserin",
+    "pages": [
+      105,
+      110
+    ],
+    "half_life_candidates": [
+      {
+        "page": 108,
+        "line": "Elimination half-life 10–16 hours after single dose",
+        "parsed": {
+          "hours": 10.0,
+          "hours_max": 16.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 106,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 108,
+        "line": "Metabolized by CYP3A4"
+      }
+    ]
+  },
+  "bremelanotide": {
+    "name": "Bremelanotide",
+    "pages": [
+      111,
+      114
+    ],
+    "half_life_candidates": [
+      {
+        "page": 112,
+        "line": "Mean terminal half-life approximately 2.7 hours",
+        "parsed": {
+          "hours": 2.7
+        }
+      },
+      {
+        "page": 113,
+        "line": "Bremelanotide is dosed episodically (average 2–3 times per month) and has a half-life of 2.7 hours",
+        "parsed": {
+          "hours": 2.7
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "brexanolone": {
+    "name": "Brexanolone",
+    "pages": [
+      115,
+      118
+    ],
+    "half_life_candidates": [
+      {
+        "page": 116,
+        "line": "Terminal half-life approximately 9 hours",
+        "parsed": {
+          "hours": 9.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 116,
+        "line": "Extensively metabolized by non-CYP-based pathways; metabolites are inactive"
+      }
+    ]
+  },
+  "brexpiprazole": {
+    "name": "Brexpiprazole",
+    "pages": [
+      119,
+      126
+    ],
+    "half_life_candidates": [
+      {
+        "page": 122,
+        "line": "However, the long half-life suggests that it may be possible to stop brexpiprazole abruptly"
+      },
+      {
+        "page": 122,
+        "line": "Rapid discontinuation could theoretically lead to rebound psychosis and worsening of symptoms, but less likely with brexpiprazole due to its long half-life"
+      },
+      {
+        "page": 123,
+        "line": "Mean half-life 91 hours (brexpiprazole) and 86 hours (major metabolite DM-3411)",
+        "parsed": {
+          "hours": 91.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 120,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 123,
+        "line": "Metabolized primarily by CYP2D6 and CYP3A4"
+      },
+      {
+        "page": 123,
+        "line": "Mean half-life 91 hours (brexpiprazole) and 86 hours (major metabolite DM-3411)"
+      },
+      {
+        "page": 123,
+        "line": "In patients with schizophrenia who are receiving a strong/moderate CYP2D6 inhibitor (e.g., quinidine) or who are known CYP2D6 poor metabolizers, brexpiprazole should be administered at half the usual dose"
+      },
+      {
+        "page": 123,
+        "line": "In patients receiving a strong/moderate CYP3A4 inhibitor who are known CYP2D6 poor metabolizers, brexpiprazole should be administered at one-quarter the usual dose"
+      }
+    ]
+  },
+  "buprenorphine": {
+    "name": "Buprenorphine",
+    "pages": [
+      127,
+      132
+    ],
+    "half_life_candidates": [
+      {
+        "page": 130,
+        "line": "Elimination half-life of sublingual buprenorphine is 24–42 hours",
+        "parsed": {
+          "hours": 24.0,
+          "hours_max": 42.0
+        }
+      },
+      {
+        "page": 130,
+        "line": "Elimination half-life of naloxone is 2–12 hours",
+        "parsed": {
+          "hours": 2.0,
+          "hours_max": 12.0
+        }
+      },
+      {
+        "page": 131,
+        "line": "In patients with moderate to severe impairment, plasma levels of buprenorphine can be higher and half-life can be longer; thus, these patients should be monitored for signs and symptoms of toxicity or overdose"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 130,
+        "line": "Metabolized by CYP3A4"
+      }
+    ]
+  },
+  "bupropion": {
+    "name": "Bupropion",
+    "pages": [
+      133,
+      138
+    ],
+    "half_life_candidates": [
+      {
+        "page": 136,
+        "line": "Parent half-life 10–14 hours",
+        "parsed": {
+          "hours": 10.0,
+          "hours_max": 14.0
+        }
+      },
+      {
+        "page": 136,
+        "line": "Metabolite half-life 20–27 hours",
+        "parsed": {
+          "hours": 20.0,
+          "hours_max": 27.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 135,
+        "line": "Patients who do not respond to 450 mg/day should discontinue use or get blood levels of bupropion and its major active metabolite 6-hydroxy-bupropion"
+      },
+      {
+        "page": 135,
+        "line": "If levels of parent drug and active metabolite are low despite dosing at 450 mg/day, experts can prudently increase dosing beyond the therapeutic range while monitoring closely, informing the patient of the potential risk of seizures and weighing risk–benefit ratios in difficult-to-treat patients"
+      },
+      {
+        "page": 136,
+        "line": "Metabolite half-life 20–27 hours"
+      },
+      {
+        "page": 138,
+        "line": "The active enantiomer of the principal active metabolite [(+)-6-hydroxybupropion] is in clinical development as a novel antidepressant"
+      }
+    ]
+  },
+  "buspirone": {
+    "name": "Buspirone",
+    "pages": [
+      139,
+      142
+    ],
+    "half_life_candidates": [
+      {
+        "page": 140,
+        "line": "Elimination half-life approximately 2–3 hours",
+        "parsed": {
+          "hours": 2.0,
+          "hours_max": 3.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 140,
+        "line": "Metabolized primarily by CYP3A4"
+      },
+      {
+        "page": 140,
+        "line": "Buspirone may raise levels of nordiazepam, the active metabolite of diazepam, which may result in increased symptoms of dizziness, headache, or nausea"
+      }
+    ]
+  },
+  "caprylidene": {
+    "name": "Caprylidene",
+    "pages": [
+      143,
+      146
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 143,
+        "line": "Triglyceride levels should be monitored periodically for individuals who meet multiple criteria for metabolic syndrome (i.e., elevated waist circumference, elevated triglycerides, high blood pressure, reduced fasting HDL, and/or elevated fasting glucose)"
+      },
+      {
+        "page": 143,
+        "line": "Dietary management of metabolic processes associated with Alzheimer disease (mild to moderate)**"
+      },
+      {
+        "page": 144,
+        "line": "Absorbed in the gut; metabolized in the liver"
+      }
+    ]
+  },
+  "carbamazepine": {
+    "name": "Carbamazepine",
+    "pages": [
+      147,
+      152
+    ],
+    "half_life_candidates": [
+      {
+        "page": 149,
+        "line": "Initial half-life 26–65 hours (35–40 hours for extended-release formulation); half-life 12–17 hours with repeated doses",
+        "parsed": {
+          "hours": 26.0,
+          "hours_max": 65.0
+        }
+      },
+      {
+        "page": 149,
+        "line": "Half-life of active metabolite is approximately 34 hours",
+        "parsed": {
+          "hours": 34.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 148,
+        "line": "Major metabolite (carbamazepine-10, 11 epoxide) may be the cause of many side effects"
+      },
+      {
+        "page": 149,
+        "line": "Carbamazepine often requires a dosage adjustment upward with time, as the drug induces its own metabolism, thus lowering its own plasma levels over the first several weeks to months of treatment"
+      },
+      {
+        "page": 149,
+        "line": "Metabolized in the liver, primarily by CYP3A4"
+      },
+      {
+        "page": 149,
+        "line": "Active metabolite (carbamazepine-10,11 epoxide)"
+      },
+      {
+        "page": 149,
+        "line": "Half-life of active metabolite is approximately 34 hours"
+      },
+      {
+        "page": 149,
+        "line": "Thus, carbamazepine induces its own metabolism, often requiring an upward dosage adjustment"
+      }
+    ]
+  },
+  "cariprazine": {
+    "name": "Cariprazine",
+    "pages": [
+      153,
+      160
+    ],
+    "half_life_candidates": [
+      {
+        "page": 156,
+        "line": "Because of its long half-life, and the especially long half-life of one of its active metabolites, monitor for adverse effects"
+      },
+      {
+        "page": 156,
+        "line": "Because of its long half-life, missing a few doses may not be as detrimental compared to other antipsychotics"
+      },
+      {
+        "page": 157,
+        "line": "Based on the time to reach steady state, the half-life for cariprazine is 2–4 days and for one of its active metabolites, didesmethyl cariprazine (DDCAR), is 1–3 weeks",
+        "parsed": {
+          "hours": 48.0,
+          "hours_max": 96.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 154,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 155,
+        "line": "• Side effects may theoretically appear several weeks after initiating cariprazine because plasma levels and major active metabolites accumulate over time"
+      },
+      {
+        "page": 156,
+        "line": "Because of its long half-life, and the especially long half-life of one of its active metabolites, monitor for adverse effects"
+      },
+      {
+        "page": 157,
+        "line": "Metabolized by CYP3A4 into two longlasting active metabolites"
+      },
+      {
+        "page": 157,
+        "line": "Based on the time to reach steady state, the half-life for cariprazine is 2–4 days and for one of its active metabolites, didesmethyl cariprazine (DDCAR), is 1–3 weeks"
+      },
+      {
+        "page": 158,
+        "line": "Cariprazine is metabolized into a very long-lasting active metabolite; it is therefore possible that adverse events could appear several weeks after initiation of cariprazine due to accumulation of cariprazine and major metabolites over time"
+      },
+      {
+        "page": 158,
+        "line": "It is also possible that cariprazine or its very long-lasting active metabolites could be developed as an “oral depot,” namely, a very long-lasting oral formulation for weekly or even monthly oral administration"
+      },
+      {
+        "page": 159,
+        "line": "Based on short-term clinical trials, cariprazine appears to have a favorable metabolic profile, with changes in triglycerides, fasting glucose, and cholesterol similar to placebo; little or no weight gain in bipolar depression, and a small amount of weight gain in bipolar mania and schizophrenia studies especially at higher doses"
+      }
+    ]
+  },
+  "chlordiazepoxide": {
+    "name": "Chlordiazepoxide",
+    "pages": [
+      161,
+      166
+    ],
+    "half_life_candidates": [
+      {
+        "page": 162,
+        "line": "Frequency of dosing in practice is often greater than predicted from half-life, as duration of biological activity is often shorter than pharmacokinetic terminal half-life"
+      },
+      {
+        "page": 163,
+        "line": "Elimination half-life 24–48 hours",
+        "parsed": {
+          "hours": 24.0,
+          "hours_max": 48.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "chlorpromazine": {
+    "name": "Chlorpromazine",
+    "pages": [
+      167,
+      172
+    ],
+    "half_life_candidates": [
+      {
+        "page": 170,
+        "line": "Half-life approximately 8–33 hours",
+        "parsed": {
+          "hours": 8.0,
+          "hours_max": 33.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 168,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 170,
+        "line": "May reduce phenytoin metabolism and increase phenytoin levels"
+      }
+    ]
+  },
+  "citalopram": {
+    "name": "Citalopram",
+    "pages": [
+      173,
+      178
+    ],
+    "half_life_candidates": [
+      {
+        "page": 175,
+        "line": "Parent drug has 23–45-hour half-life",
+        "parsed": {
+          "hours": 45.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 175,
+        "line": "Metabolized by CYP3A4 and CYP2C19"
+      }
+    ]
+  },
+  "clomipramine": {
+    "name": "Clomipramine",
+    "pages": [
+      179,
+      186
+    ],
+    "half_life_candidates": [
+      {
+        "page": 181,
+        "line": "Half-life approximately 17–28 hours",
+        "parsed": {
+          "hours": 17.0,
+          "hours_max": 28.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 179,
+        "line": "Active metabolite is a potent norepinephrine reuptake inhibitor"
+      },
+      {
+        "page": 181,
+        "line": "Metabolized to an active metabolite, desmethyl-clomipramine, a predominantly norepinephrine reuptake inhibitor, by demethylation via CYP1A2"
+      },
+      {
+        "page": 182,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 182,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 182,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 182,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 184,
+        "line": "Normally, clomipramine (CMI), a potent serotonin reuptake blocker, at steady state is metabolized extensively to its"
+      },
+      {
+        "page": 184,
+        "line": "active metabolite desmethyl-clomipramine (de-CMI), a potent norepinephrine reuptake blocker, by the enzyme CYP1A2"
+      },
+      {
+        "page": 184,
+        "line": "For the expert only: addition of the SSRI fluvoxamine to CMI in treatment-resistant OCD can powerfully enhance serotonergic activity, not only due to the inherent additive pharmacodynamic serotonergic activity of fluvoxamine added to CMI, but also due to a favorable pharmacokinetic interaction inhibiting CYP1A2 and thus converting CMI’s metabolism to a more powerful serotonergic portfolio of parent drug"
+      },
+      {
+        "page": 185,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "clonazepam": {
+    "name": "Clonazepam",
+    "pages": [
+      187,
+      192
+    ],
+    "half_life_candidates": [
+      {
+        "page": 189,
+        "line": "Frequency of dosing in practice is often greater than predicted from half-life, as duration of biological activity is often shorter than pharmacokinetic terminal half-life"
+      },
+      {
+        "page": 189,
+        "line": "Long half-life compared to other benzodiazepine anxiolytics (elimination half-life approximately 30–40 hours)",
+        "parsed": {
+          "hours": 30.0,
+          "hours_max": 40.0
+        }
+      },
+      {
+        "page": 191,
+        "line": "Easier to taper than some other benzodiazepines because of long half-life"
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "clonidine": {
+    "name": "Clonidine",
+    "pages": [
+      193,
+      198
+    ],
+    "half_life_candidates": [
+      {
+        "page": 195,
+        "line": "Half-life 12–16 hours",
+        "parsed": {
+          "hours": 12.0,
+          "hours_max": 16.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 195,
+        "line": "Metabolized by the liver"
+      }
+    ]
+  },
+  "clorazepate": {
+    "name": "Clorazepate",
+    "pages": [
+      199,
+      204
+    ],
+    "half_life_candidates": [
+      {
+        "page": 200,
+        "line": "Frequency of dosing in practice is often greater than predicted from half-life, as duration of biological activity is often shorter than pharmacokinetic terminal half-life"
+      },
+      {
+        "page": 201,
+        "line": "Elimination half-life 40–50 hours",
+        "parsed": {
+          "hours": 40.0,
+          "hours_max": 50.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "clozapine": {
+    "name": "Clozapine",
+    "pages": [
+      205,
+      214
+    ],
+    "half_life_candidates": [
+      {
+        "page": 208,
+        "line": "Plasma half-life suggests twice daily administration, but in practice it may be given once a day at night"
+      },
+      {
+        "page": 210,
+        "line": "Half-life 5–16 hours",
+        "parsed": {
+          "hours": 5.0,
+          "hours_max": 16.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 206,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 208,
+        "line": "Weight gain and metabolic effects"
+      },
+      {
+        "page": 210,
+        "line": "Metabolized primarily by CYP1A2 and to a lesser extent by CYP2D6 and CYP3A4"
+      }
+    ]
+  },
+  "cyamemazine": {
+    "name": "Cyamemazine",
+    "pages": [
+      215,
+      220
+    ],
+    "half_life_candidates": [
+      {
+        "page": 218,
+        "line": "Half-life 10 hours",
+        "parsed": {
+          "hours": 10.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 216,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 216,
+        "line": "Metabolic effects, glucose tolerance"
+      }
+    ]
+  },
+  "daridorexant": {
+    "name": "Daridorexant",
+    "pages": [
+      221,
+      224
+    ],
+    "half_life_candidates": [
+      {
+        "page": 222,
+        "line": "Terminal half-life 8 hours",
+        "parsed": {
+          "hours": 8.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 222,
+        "line": "Metabolized primarily by CYP3A4"
+      }
+    ]
+  },
+  "desipramine": {
+    "name": "Desipramine",
+    "pages": [
+      225,
+      232
+    ],
+    "half_life_candidates": [
+      {
+        "page": 227,
+        "line": "Half-life approximately 24 hours",
+        "parsed": {
+          "hours": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 227,
+        "line": "Is the active metabolite of imipramine, formed by demethylation via CYP1A2"
+      },
+      {
+        "page": 228,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 228,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 228,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 228,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 231,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "desvenlafaxine": {
+    "name": "Desvenlafaxine",
+    "pages": [
+      233,
+      238
+    ],
+    "half_life_candidates": [
+      {
+        "page": 235,
+        "line": "For some patients with severe problems discontinuing desvenlafaxine, it may be useful to add an SSRI with a long halflife, especially fluoxetine, prior to taper of desvenlafaxine. While maintaining fluoxetine dosing, first slowly taper desvenlafaxine and then taper fluoxetine"
+      },
+      {
+        "page": 235,
+        "line": "Half-life 9–13 hours",
+        "parsed": {
+          "hours": 9.0,
+          "hours_max": 13.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 235,
+        "line": "Desvenlafaxine is the active metabolite O-desmethylvenlafaxine (ODV) of venlafaxine, and is formed as the result of CYP2D6"
+      },
+      {
+        "page": 235,
+        "line": "Desvenlafaxine is the active metabolite of venlafaxine; fatal toxicity index data from the UK suggest a higher rate of deaths"
+      },
+      {
+        "page": 235,
+        "line": "Active metabolite of venlafaxine"
+      },
+      {
+        "page": 235,
+        "line": "Minimally metabolized by CYP3A4"
+      },
+      {
+        "page": 236,
+        "line": "Desvenlafaxine is the active metabolite of venlafaxine, which is contraindicated in patients with heart disease in the UK"
+      },
+      {
+        "page": 237,
+        "line": "Because desvenlafaxine is only minimally metabolized by CYP3A4 and is not metabolized at all by CYP2D6, as venlafaxine is, it should have more consistent plasma levels than venlafaxine"
+      }
+    ]
+  },
+  "deutetrabenazine": {
+    "name": "Deutetrabenazine",
+    "pages": [
+      239,
+      242
+    ],
+    "half_life_candidates": [
+      {
+        "page": 241,
+        "line": "Half-life of total (α + β)dihydrotetrabenazine from deutetrabenazine is approximately 9 to 10 hours",
+        "parsed": {
+          "hours": 9.0,
+          "hours_max": 10.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 240,
+        "line": "trials were conducted; however, food has no effect on the AUC of deutetrabenazine’s active metabolites, but increased Cmax by 50%"
+      },
+      {
+        "page": 241,
+        "line": "Substitution of deuterium for hydrogen slows the breakdown of metabolites; thus, the active metabolites of deutetrabenazine have longer half-lives and greater absorption than those of tetrabenazine"
+      },
+      {
+        "page": 241,
+        "line": "Deutetrabenazine is broken down into 4 metabolites"
+      },
+      {
+        "page": 241,
+        "line": "Metabolized by CYP2D6, but deuteration means that, unlike tetrabenazine, CYP2D6 genotyping is not necessary"
+      },
+      {
+        "page": 241,
+        "line": "Strong CYP2D6 inhibitors (e.g., paroxetine, fluoxetine) may increase exposure to deutetrabenazine; maximum recommended dose in patients taking strong CYP2D6 inhibitors or who are known CYP2D6 poor metabolizers is 36 mg/day"
+      },
+      {
+        "page": 242,
+        "line": "At therapeutic doses, deutetrabenazine’s active metabolites bind predominantly to VMAT2, with low dopamine 2 receptor blockade"
+      },
+      {
+        "page": 242,
+        "line": "Deutetrabenazine’s active metabolites have moderate blockade of serotonin 7; the clinical significance of this is unknown, although serotonin 7 antagonism has been associated with antidepressant and procognitive actions in animal models"
+      }
+    ]
+  },
+  "dexmedetomidine": {
+    "name": "Dexmedetomidine",
+    "pages": [
+      243,
+      246
+    ],
+    "half_life_candidates": [
+      {
+        "page": 244,
+        "line": "Mean terminal half-life approximately 2.8 hours following sublingual or buccal administration",
+        "parsed": {
+          "hours": 2.8
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "dextromethorphanbupropion": {
+    "name": "Dextromethorphan + Bupropion",
+    "pages": [
+      247,
+      252
+    ],
+    "half_life_candidates": [
+      {
+        "page": 249,
+        "line": "Mean elimination half-life of dextromethorphan/bupropion is 22 hours and 15 hours, respectively",
+        "parsed": {
+          "hours": 22.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 247,
+        "line": "Bupropion increases availability of dextromethorphan by inhibiting its metabolism via CYP2D6"
+      },
+      {
+        "page": 249,
+        "line": "Dextromethorphan is metabolized by CYP2D6, while bupropion inhibits CYP2D6"
+      },
+      {
+        "page": 249,
+        "line": "Bupropion is metabolized by CYP2B6"
+      },
+      {
+        "page": 249,
+        "line": "For patients taking strong CYP2D6 inhibitors or who are poor CYP2D6 metabolizers, the recommended dose is 45 mg/105 mg dextromethorphan/ bupropion once daily in the morning"
+      },
+      {
+        "page": 249,
+        "line": "Via CYP2D6 inhibition, dextromethorphan– bupropion could increase concentrations of drugs metabolized by CYP2D6"
+      },
+      {
+        "page": 249,
+        "line": "Bupropion is metabolized by CYP2B6; avoid use of dextromethorphan–bupropion in patients taking strong CYP2B6 inducers"
+      }
+    ]
+  },
+  "dextromethorphanquinidine": {
+    "name": "Dextromethorphan + Quinidine",
+    "pages": [
+      253,
+      256
+    ],
+    "half_life_candidates": [
+      {
+        "page": 254,
+        "line": "Elimination half-life of dextromethorphan is approximately 13 hours",
+        "parsed": {
+          "hours": 13.0
+        }
+      },
+      {
+        "page": 254,
+        "line": "Elimination half-life of quinidine is approximately 7 hours",
+        "parsed": {
+          "hours": 7.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 253,
+        "line": "Quinidine increases availability of dextromethorphan by inhibiting its metabolism via CYP2D6"
+      },
+      {
+        "page": 254,
+        "line": "Dextromethorphan is metabolized by CYP2D6, while quinidine inhibits CYP2D6"
+      },
+      {
+        "page": 254,
+        "line": "Quinidine is metabolized by CYP3A4"
+      },
+      {
+        "page": 254,
+        "line": "Via CYP2D6 inhibition, dextromethorphan– quinidine could increase plasma concentrations of drugs metabolized by CYP2D6 (e.g., desipramine), potentially requiring dose reduction of the substrate"
+      },
+      {
+        "page": 255,
+        "line": "If patient is taking a drug that prolongs the QTc interval and is metabolized by CYP2D6 (e.g., thioridazine, pimozide)"
+      },
+      {
+        "page": 255,
+        "line": "CYP2D6 poor metabolizers may require dose reduction"
+      },
+      {
+        "page": 255,
+        "line": "Quinidine is intended to increase the actions of dextromethorphan by inhibiting its metabolism by CYP2D6; therefore, poor metabolizers of CYP2D6 may not benefit as much from this treatment while still experiencing adverse effects associated with quinidine"
+      }
+    ]
+  },
+  "diazepam": {
+    "name": "Diazepam",
+    "pages": [
+      257,
+      262
+    ],
+    "half_life_candidates": [
+      {
+        "page": 259,
+        "line": "Frequency of dosing in practice is often greater than predicted from half-life, as duration of biological activity is often shorter than pharmacokinetic terminal half-life"
+      },
+      {
+        "page": 259,
+        "line": "Elimination half-life 20–50 hours",
+        "parsed": {
+          "hours": 20.0,
+          "hours_max": 50.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "diphenhydramine": {
+    "name": "Diphenhydramine",
+    "pages": [
+      263,
+      266
+    ],
+    "half_life_candidates": [
+      {
+        "page": 264,
+        "line": "Plasma half-life approximately 8 hours; may be longer in children and in the elderly",
+        "parsed": {
+          "hours": 8.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "disulfiram": {
+    "name": "Disulfiram",
+    "pages": [
+      267,
+      270
+    ],
+    "half_life_candidates": [
+      {
+        "page": 268,
+        "line": "Half-life of parent drug is 60–120 hours",
+        "parsed": {
+          "hours": 60.0,
+          "hours_max": 120.0
+        }
+      },
+      {
+        "page": 268,
+        "line": "Half-life of metabolites is 13.9 hours (diethyldithiocarbamate) and 8.9 hours (carbon disulfide)",
+        "parsed": {
+          "hours": 13.9
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 267,
+        "line": "Irreversibly inhibits aldehyde dehydrogenase, the enzyme involved in second-stage metabolism of alcohol"
+      },
+      {
+        "page": 267,
+        "line": "Alcohol is metabolized to acetaldehyde, which in turn is metabolized by aldehyde dehydrogenase; thus, disulfiram blocks this second-stage metabolism"
+      },
+      {
+        "page": 267,
+        "line": "One of disulfiram’s metabolites is carbon disulfide, which may be excreted through the lungs; this could account for the side effect of metallic taste"
+      },
+      {
+        "page": 268,
+        "line": "Half-life of metabolites is 13.9 hours (diethyldithiocarbamate) and 8.9 hours (carbon disulfide)"
+      }
+    ]
+  },
+  "donepezil": {
+    "name": "Donepezil",
+    "pages": [
+      271,
+      276
+    ],
+    "half_life_candidates": [
+      {
+        "page": 273,
+        "line": "Elimination half-life is approximately 70 hours for oral formulation and 91 hours for transdermal system",
+        "parsed": {
+          "hours": 70.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 273,
+        "line": "Metabolized by CYP2D6 and CYP3A4"
+      },
+      {
+        "page": 273,
+        "line": "Inhibitors of CYP2D6 and CYP3A4 may inhibit donepezil metabolism and increase its plasma levels"
+      }
+    ]
+  },
+  "dothiepin": {
+    "name": "Dothiepin",
+    "pages": [
+      277,
+      282
+    ],
+    "half_life_candidates": [
+      {
+        "page": 279,
+        "line": "Half-life approximately 14–40 hours",
+        "parsed": {
+          "hours": 14.0,
+          "hours_max": 40.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 279,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 280,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 280,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 280,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 282,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "doxepin": {
+    "name": "Doxepin",
+    "pages": [
+      283,
+      290
+    ],
+    "half_life_candidates": [
+      {
+        "page": 286,
+        "line": "Half-life approximately 8–24 hours",
+        "parsed": {
+          "hours": 8.0,
+          "hours_max": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 286,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 286,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 287,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 287,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 289,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "duloxetine": {
+    "name": "Duloxetine",
+    "pages": [
+      291,
+      296
+    ],
+    "half_life_candidates": [
+      {
+        "page": 294,
+        "line": "Elimination half-life approximately 12 hours",
+        "parsed": {
+          "hours": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 294,
+        "line": "Metabolized mainly by CYP2D6 and CYP1A2"
+      }
+    ]
+  },
+  "escitalopram": {
+    "name": "Escitalopram",
+    "pages": [
+      297,
+      302
+    ],
+    "half_life_candidates": [
+      {
+        "page": 299,
+        "line": "Mean terminal half-life 27–32 hours",
+        "parsed": {
+          "hours": 27.0,
+          "hours_max": 32.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "esketamine": {
+    "name": "Esketamine",
+    "pages": [
+      303,
+      308
+    ],
+    "half_life_candidates": [
+      {
+        "page": 305,
+        "line": "Mean terminal half-life 7–12 hours",
+        "parsed": {
+          "hours": 7.0,
+          "hours_max": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 305,
+        "line": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
+      },
+      {
+        "page": 305,
+        "line": "Little potential to affect metabolism of drugs cleared by CYP enzymes"
+      }
+    ]
+  },
+  "estazolam": {
+    "name": "Estazolam",
+    "pages": [
+      309,
+      312
+    ],
+    "half_life_candidates": [
+      {
+        "page": 310,
+        "line": "Half-life 10–24 hours",
+        "parsed": {
+          "hours": 10.0,
+          "hours_max": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 310,
+        "line": "Inactive metabolites"
+      }
+    ]
+  },
+  "eszopiclone": {
+    "name": "Eszopiclone",
+    "pages": [
+      313,
+      316
+    ],
+    "half_life_candidates": [
+      {
+        "page": 314,
+        "line": "Terminal elimination half-life approximately 6 hours",
+        "parsed": {
+          "hours": 6.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 314,
+        "line": "Metabolized by CYP3A4 and CYP2E1"
+      }
+    ]
+  },
+  "flibanserin": {
+    "name": "Flibanserin",
+    "pages": [
+      317,
+      320
+    ],
+    "half_life_candidates": [
+      {
+        "page": 318,
+        "line": "Mean terminal half-life approximately 11 hours",
+        "parsed": {
+          "hours": 11.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 318,
+        "line": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP2C19"
+      },
+      {
+        "page": 318,
+        "line": "Use of flibanserin in patients who are poor CYP2C19 metabolizers may increase flibanserin exposure, potentially increasing risk of adverse effects"
+      }
+    ]
+  },
+  "flumazenil": {
+    "name": "Flumazenil",
+    "pages": [
+      321,
+      324
+    ],
+    "half_life_candidates": [
+      {
+        "page": 322,
+        "line": "Terminal half-life 41–79 minutes",
+        "parsed": {
+          "hours": 0.683,
+          "hours_max": 1.317
+        }
+      },
+      {
+        "page": 322,
+        "line": "May need to administer follow-up doses to reverse actions of benzodiazepines that have a longer half-life than flumazenil (i.e., longer than 1 hour)",
+        "parsed": {
+          "hours": 1.0
+        }
+      },
+      {
+        "page": 323,
+        "line": "Prolongation of half-life"
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "flunitrazepam": {
+    "name": "Flunitrazepam",
+    "pages": [
+      325,
+      328
+    ],
+    "half_life_candidates": [
+      {
+        "page": 326,
+        "line": "Elimination half-life 16–35 hours",
+        "parsed": {
+          "hours": 16.0,
+          "hours_max": 35.0
+        }
+      },
+      {
+        "page": 326,
+        "line": "Half-life of active metabolite 23–33 hours",
+        "parsed": {
+          "hours": 23.0,
+          "hours_max": 33.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 326,
+        "line": "Half-life of active metabolite 23–33 hours"
+      }
+    ]
+  },
+  "fluoxetine": {
+    "name": "Fluoxetine",
+    "pages": [
+      329,
+      334
+    ],
+    "half_life_candidates": [
+      {
+        "page": 331,
+        "line": "Taper rarely necessary since fluoxetine tapers itself after immediate discontinuation, due to the long half-life of fluoxetine and its active metabolites"
+      },
+      {
+        "page": 331,
+        "line": "Active metabolite (norfluoxetine) has 2-week half-life",
+        "parsed": {
+          "hours": 336.0
+        }
+      },
+      {
+        "page": 331,
+        "line": "Parent drug has 2–3-day half-life",
+        "parsed": {
+          "hours": 72.0
+        }
+      },
+      {
+        "page": 334,
+        "line": "Long half-life; even longer-lasting active metabolite"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 331,
+        "line": "The long half-lives of fluoxetine and its active metabolites mean that dose changes will not be fully reflected in plasma for several weeks, lengthening titration to final dose and extending withdrawal from treatment"
+      },
+      {
+        "page": 331,
+        "line": "Taper rarely necessary since fluoxetine tapers itself after immediate discontinuation, due to the long half-life of fluoxetine and its active metabolites"
+      },
+      {
+        "page": 331,
+        "line": "Active metabolite (norfluoxetine) has 2-week half-life"
+      },
+      {
+        "page": 334,
+        "line": "Long half-life; even longer-lasting active metabolite"
+      }
+    ]
+  },
+  "flupenthixol": {
+    "name": "Flupenthixol",
+    "pages": [
+      335,
+      340
+    ],
+    "half_life_candidates": [
+      {
+        "page": 337,
+        "line": "Intramuscular: rate-limiting half-life approximately 8 days with single dose, approximately 17 days with multiple doses",
+        "parsed": {
+          "hours": 192.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 335,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "fluphenazine": {
+    "name": "Fluphenazine",
+    "pages": [
+      341,
+      348
+    ],
+    "half_life_candidates": [
+      {
+        "page": 343,
+        "line": "Mean half-life of oral formulation approximately 15 hours",
+        "parsed": {
+          "hours": 15.0
+        }
+      },
+      {
+        "page": 343,
+        "line": "Mean half-life of intramuscular formulation approximately 6.8–9.6 days",
+        "parsed": {
+          "hours": 163.2,
+          "hours_max": 230.4
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 341,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "flurazepam": {
+    "name": "Flurazepam",
+    "pages": [
+      349,
+      352
+    ],
+    "half_life_candidates": [
+      {
+        "page": 350,
+        "line": "Because of its relatively longer half-life, flurazepam may cause some daytime sedation and/or impaired motor/cognitive function, and may do so progressively over time"
+      },
+      {
+        "page": 350,
+        "line": "Elimination half-life approximately 24–100 hours",
+        "parsed": {
+          "hours": 24.0,
+          "hours_max": 100.0
+        }
+      },
+      {
+        "page": 352,
+        "line": "Flurazepam has a longer half-life than some other sedative hypnotics, so it may be less likely to cause rebound insomnia on discontinuation"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 350,
+        "line": "Active metabolites"
+      },
+      {
+        "page": 352,
+        "line": "Long-term accumulation of flurazepam and its active metabolites may cause insidious onset of confusion or falls, especially in the elderly"
+      }
+    ]
+  },
+  "fluvoxamine": {
+    "name": "Fluvoxamine",
+    "pages": [
+      353,
+      358
+    ],
+    "half_life_candidates": [
+      {
+        "page": 355,
+        "line": "Parent drug has 9–28 hour half-life",
+        "parsed": {
+          "hours": 9.0,
+          "hours_max": 28.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 354,
+        "line": "In the USA, augmentation is more commonly administered for the treatment of OCD, especially with atypical antipsychotics, buspirone, or even clomipramine; clomipramine should be added with caution and at low doses as fluvoxamine can alter clomipramine metabolism and raise its levels"
+      },
+      {
+        "page": 356,
+        "line": "Metabolism of fluvoxamine may be enhanced in smokers and thus its levels lowered, requiring higher dosing"
+      },
+      {
+        "page": 358,
+        "line": "Normally, clomipramine (CMI), a potent serotonin reuptake blocker, at steady state is metabolized extensively to its active metabolite desmethyl-clomipramine (de-CMI), a potent noradrenergic reuptake blocker"
+      },
+      {
+        "page": 358,
+        "line": "Thus, addition of the SSRI fluvoxamine to CMI in treatment-resistant OCD can powerfully enhance serotonergic activity, not only due to the inherent serotonergic activity of fluvoxamine, but also due to a favorable pharmacokinetic interaction inhibiting CYP1A2 and thus converting CMI’s metabolism to a more powerful serotonergic portfolio of parent drug"
+      }
+    ]
+  },
+  "gabapentin": {
+    "name": "Gabapentin",
+    "pages": [
+      359,
+      364
+    ],
+    "half_life_candidates": [
+      {
+        "page": 361,
+        "line": "Elimination half-life approximately 5–7 hours",
+        "parsed": {
+          "hours": 5.0,
+          "hours_max": 7.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 361,
+        "line": "Gabapentin is not metabolized but excreted intact renally"
+      },
+      {
+        "page": 362,
+        "line": "No available data but not metabolized by the liver and clinical experience suggests normal dosing"
+      }
+    ]
+  },
+  "galantamine": {
+    "name": "Galantamine",
+    "pages": [
+      365,
+      370
+    ],
+    "half_life_candidates": [
+      {
+        "page": 366,
+        "line": "Terminal elimination half-life approximately 7 hours",
+        "parsed": {
+          "hours": 7.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 366,
+        "line": "Metabolized by CYP2D6 and CYP3A4"
+      },
+      {
+        "page": 366,
+        "line": "Inhibitors of CYP2D6 and CYP3A4 may inhibit galantamine metabolism and raise galantamine plasma levels"
+      }
+    ]
+  },
+  "guanfacine": {
+    "name": "Guanfacine",
+    "pages": [
+      371,
+      374
+    ],
+    "half_life_candidates": [
+      {
+        "page": 373,
+        "line": "Elimination half-life may be longer in elderly patients"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 372,
+        "line": "Metabolized by CYP3A4"
+      }
+    ]
+  },
+  "haloperidol": {
+    "name": "Haloperidol",
+    "pages": [
+      375,
+      382
+    ],
+    "half_life_candidates": [
+      {
+        "page": 378,
+        "line": "Decanoate half-life approximately 3 weeks",
+        "parsed": {
+          "hours": 504.0
+        }
+      },
+      {
+        "page": 378,
+        "line": "Oral half-life approximately 12–38 hours",
+        "parsed": {
+          "hours": 12.0,
+          "hours_max": 38.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 376,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 380,
+        "line": "The rate-limiting step for plasma drug levels for LAIs is not drug metabolism, but rather slow absorption from the injection site"
+      }
+    ]
+  },
+  "hydroxyzine": {
+    "name": "Hydroxyzine",
+    "pages": [
+      383,
+      386
+    ],
+    "half_life_candidates": [
+      {
+        "page": 384,
+        "line": "Mean elimination half-life approximately 20 hours",
+        "parsed": {
+          "hours": 20.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "iloperidone": {
+    "name": "Iloperidone",
+    "pages": [
+      387,
+      394
+    ],
+    "half_life_candidates": [
+      {
+        "page": 389,
+        "line": "Once daily use seems theoretically possible because the half-life of iloperidone is 18–33 hours",
+        "parsed": {
+          "hours": 18.0,
+          "hours_max": 33.0
+        }
+      },
+      {
+        "page": 390,
+        "line": "Half-life 18–33 hours",
+        "parsed": {
+          "hours": 18.0,
+          "hours_max": 33.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 388,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 390,
+        "line": "Metabolized by CYP2D6 and CYP3A4"
+      },
+      {
+        "page": 390,
+        "line": "Iloperidone prolongs QTc interval more than some other antipsychotics, an effect that is augmented by concomitant use of drugs that inhibit iloperidone metabolism"
+      }
+    ]
+  },
+  "imipramine": {
+    "name": "Imipramine",
+    "pages": [
+      395,
+      402
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 397,
+        "line": "Metabolized to an active metabolite, desipramine, a predominantly norepinephrine reuptake inhibitor, by demethylation via CYP1A2"
+      },
+      {
+        "page": 398,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 398,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit its metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 398,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 398,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 400,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by 2D6"
+      }
+    ]
+  },
+  "isocarboxazid": {
+    "name": "Isocarboxazid",
+    "pages": [
+      403,
+      410
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": []
+  },
+  "ketamine": {
+    "name": "Ketamine",
+    "pages": [
+      411,
+      414
+    ],
+    "half_life_candidates": [
+      {
+        "page": 413,
+        "line": "Plasma half-life: alpha: 10–15 minutes; beta: 2.5 hours; 1–3 hours intramuscular; 2.5–3 hours orally; 12 hours norketamine",
+        "parsed": {
+          "hours": 0.167,
+          "hours_max": 0.25
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 413,
+        "line": "Metabolized by CYP2B6, CYP2C9, and CYP3A4"
+      },
+      {
+        "page": 414,
+        "line": "The use of ketamine can cause urinary tract symptoms (e.g., frequency, urgency, urge incontinence, dysuria, and hematuria); the causal agent has not been determined, but direct irritation by ketamine and/or its metabolites is a possibility. (Investigations have revealed interstitial cystitis, detrusor overactivity, decreased bladder capacity; symptoms generally settle several weeks after stopping ketamine)"
+      },
+      {
+        "page": 414,
+        "line": "Ketamine increases cerebral metabolism and cerebral blood flow while producing a noncompetitive block of the neuronal postsynaptic NMDA receptor"
+      }
+    ]
+  },
+  "lamotrigine": {
+    "name": "Lamotrigine",
+    "pages": [
+      415,
+      422
+    ],
+    "half_life_candidates": [
+      {
+        "page": 418,
+        "line": "Elimination half-life in healthy volunteers approximately 33 hours after a single dose of lamotrigine",
+        "parsed": {
+          "hours": 33.0
+        }
+      },
+      {
+        "page": 418,
+        "line": "Elimination half-life in patients receiving concomitant valproate treatment approximately 59 hours after a single dose of lamotrigine",
+        "parsed": {
+          "hours": 59.0
+        }
+      },
+      {
+        "page": 418,
+        "line": "Elimination half-life in patients receiving concomitant enzyme-inducing antiepileptic drugs (such as carbamazepine, phenobarbital, phenytoin, and primidone) approximately 14 hours after a single dose of lamotrigine",
+        "parsed": {
+          "hours": 14.0
+        }
+      },
+      {
+        "page": 418,
+        "line": "Valproate increases plasma concentrations and half-life of lamotrigine, requiring lower doses of lamotrigine (half or less)"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 417,
+        "line": "If lamotrigine is added to patients taking valproate, remember that valproate inhibits lamotrigine metabolism and therefore"
+      },
+      {
+        "page": 418,
+        "line": "Metabolized in the liver through glucuronidation but not through the CYP enzyme system"
+      },
+      {
+        "page": 418,
+        "line": "Inactive metabolite"
+      }
+    ]
+  },
+  "lemborexant": {
+    "name": "Lemborexant",
+    "pages": [
+      423,
+      426
+    ],
+    "half_life_candidates": [
+      {
+        "page": 424,
+        "line": "Terminal elimination half-life 52.8 hours; effective half-life 17–29 hours",
+        "parsed": {
+          "hours": 52.8
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 424,
+        "line": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP3A5"
+      }
+    ]
+  },
+  "levetiracetam": {
+    "name": "Levetiracetam",
+    "pages": [
+      427,
+      430
+    ],
+    "half_life_candidates": [
+      {
+        "page": 428,
+        "line": "Elimination half-life approximately 6–8 hours",
+        "parsed": {
+          "hours": 6.0,
+          "hours_max": 8.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 428,
+        "line": "Inactive metabolites"
+      },
+      {
+        "page": 428,
+        "line": "Not metabolized by CYP enzymes"
+      },
+      {
+        "page": 428,
+        "line": "Because levetiracetam is not metabolized by CYP enzymes and does not inhibit or induce CYP enzymes, it is unlikely to have significant pharmacokinetic drug interactions"
+      }
+    ]
+  },
+  "levomilnacipran": {
+    "name": "Levomilnacipran",
+    "pages": [
+      431,
+      436
+    ],
+    "half_life_candidates": [
+      {
+        "page": 433,
+        "line": "Terminal elimination half-life approximately 12 hours",
+        "parsed": {
+          "hours": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 433,
+        "line": "Metabolized by CYP3A4; renally excreted"
+      }
+    ]
+  },
+  "lisdexamfetamine": {
+    "name": "Lisdexamfetamine",
+    "pages": [
+      437,
+      442
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 440,
+        "line": "MAOIs slow metabolism of amphetamines and thus potentiate their actions, which can cause headache, hypertension, and rarely hypertensive crisis and malignant hyperthermia, sometimes with fatal results"
+      }
+    ]
+  },
+  "lithium": {
+    "name": "Lithium",
+    "pages": [
+      443,
+      448
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 443,
+        "line": "Alters metabolism of neurotransmitters including catecholamines and serotonin"
+      }
+    ]
+  },
+  "lofepramine": {
+    "name": "Lofepramine",
+    "pages": [
+      449,
+      454
+    ],
+    "half_life_candidates": [
+      {
+        "page": 451,
+        "line": "Half-life of parent compound approximately 1.5–6 hours",
+        "parsed": {
+          "hours": 1.5,
+          "hours_max": 6.0
+        }
+      },
+      {
+        "page": 451,
+        "line": "Major metabolite is the antidepressant desipramine, with a half-life of approximately 24 hours",
+        "parsed": {
+          "hours": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 451,
+        "line": "Major metabolite is the antidepressant desipramine, with a half-life of approximately 24 hours"
+      },
+      {
+        "page": 452,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 452,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit its metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 452,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 452,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 454,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "lofexidine": {
+    "name": "Lofexidine",
+    "pages": [
+      455,
+      458
+    ],
+    "half_life_candidates": [
+      {
+        "page": 456,
+        "line": "Elimination half-life approximately 12 hours",
+        "parsed": {
+          "hours": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 456,
+        "line": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19"
+      }
+    ]
+  },
+  "loflazepate": {
+    "name": "Loflazepate",
+    "pages": [
+      459,
+      464
+    ],
+    "half_life_candidates": [
+      {
+        "page": 460,
+        "line": "Because of its long half-life, patients who require chronic treatment may need dose reduction after a few weeks due to drug accumulation"
+      },
+      {
+        "page": 460,
+        "line": "Because of its long half-life, once daily dosing is the most frequent dosing generally necessary"
+      },
+      {
+        "page": 460,
+        "line": "Because of its long half-life, some patients may have sustained benefits even if dosing is intermittently skipped on some days"
+      },
+      {
+        "page": 460,
+        "line": "Frequency of dosing in practice is often greater than predicted from half-life, as duration of biological activity is often shorter than pharmacokinetic terminal half-life, which is why once daily dosing is usually the favored option despite the long half-life"
+      },
+      {
+        "page": 461,
+        "line": "Elimination half-life approximately 122 hours (ultra-long half-life)",
+        "parsed": {
+          "hours": 122.0
+        }
+      },
+      {
+        "page": 462,
+        "line": "Is the only “ultra-long half-life” benzodiazepine with a half-life much longer than 24 hours",
+        "parsed": {
+          "hours": 24.0
+        }
+      },
+      {
+        "page": 462,
+        "line": "Long half-life could theoretically reduce abuse and withdrawal symptoms"
+      },
+      {
+        "page": 462,
+        "line": "Clinical duration of action may be shorter than plasma half-life, leading to dosing more frequently than 2–3 times daily in some patients"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 463,
+        "line": "Ba BB, Iliadis A, Cano JP. Pharmacokinetic modeling of ethyl loflazepate (Victan) and its main active metabolites. Ann Biomed Eng 1989;17(6):633–46."
+      }
+    ]
+  },
+  "lorazepam": {
+    "name": "Lorazepam",
+    "pages": [
+      465,
+      470
+    ],
+    "half_life_candidates": [
+      {
+        "page": 467,
+        "line": "Frequency of dosing in practice is often greater than predicted from the half-life, as the duration of biological activity is often shorter than the pharmacokinetic terminal half-life"
+      },
+      {
+        "page": 467,
+        "line": "Elimination half-life 10–20 hours",
+        "parsed": {
+          "hours": 10.0,
+          "hours_max": 20.0
+        }
+      },
+      {
+        "page": 468,
+        "line": "Because of its short half-life and inactive metabolites, lorazepam may be a preferred benzodiazepine in some patients with liver disease"
+      },
+      {
+        "page": 469,
+        "line": "Because of its short half-life and inactive metabolites, lorazepam may be preferred over some benzodiazepines for patients with liver disease"
+      },
+      {
+        "page": 469,
+        "line": "Clinical duration of action may be shorter than plasma half-life, leading to dosing more frequently than 2–3 times daily in some patients"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 467,
+        "line": "No active metabolites"
+      },
+      {
+        "page": 468,
+        "line": "Because of its short half-life and inactive metabolites, lorazepam may be a preferred benzodiazepine in some patients with liver disease"
+      },
+      {
+        "page": 469,
+        "line": "Because of its short half-life and inactive metabolites, lorazepam may be preferred over some benzodiazepines for patients with liver disease"
+      }
+    ]
+  },
+  "loxapine": {
+    "name": "Loxapine",
+    "pages": [
+      471,
+      478
+    ],
+    "half_life_candidates": [
+      {
+        "page": 474,
+        "line": "Half-life approximately 4 hours for oral formulation",
+        "parsed": {
+          "hours": 4.0
+        }
+      },
+      {
+        "page": 474,
+        "line": "Half-life approximately 12 hours for intramuscular formulation",
+        "parsed": {
+          "hours": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 472,
+        "line": "high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 474,
+        "line": "Multiple active metabolites with longer halflives than parent drug"
+      },
+      {
+        "page": 476,
+        "line": "Active metabolites are also serotonin– dopamine antagonists with longer half-lives than parent drug, thus possibly allowing once daily treatment"
+      },
+      {
+        "page": 476,
+        "line": "One active metabolite is an antidepressant (amoxapine, also known as _N_ -desmethylloxapine)"
+      }
+    ]
+  },
+  "lumateperone": {
+    "name": "Lumateperone",
+    "pages": [
+      479,
+      486
+    ],
+    "half_life_candidates": [
+      {
+        "page": 482,
+        "line": "Terminal half-life approximately 18 hours after intravenous administration",
+        "parsed": {
+          "hours": 18.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 480,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 482,
+        "line": "Metabolized by multiple enzymes, including CYP3A4 and CYP1A2"
+      },
+      {
+        "page": 482,
+        "line": "Little potential to affect metabolism of drugs cleared by CYP enzymes"
+      },
+      {
+        "page": 483,
+        "line": "Patients wishing to avoid weight gain and metabolic dysfunction such as dyslipidemia"
+      },
+      {
+        "page": 484,
+        "line": "Favorable metabolic profile with changes in triglycerides, fasting glucose, and"
+      }
+    ]
+  },
+  "lurasidone": {
+    "name": "Lurasidone",
+    "pages": [
+      487,
+      494
+    ],
+    "half_life_candidates": [
+      {
+        "page": 491,
+        "line": "Half-life 18–31 hours (shorter half-life better documented at the 40 mg dose)",
+        "parsed": {
+          "hours": 18.0,
+          "hours_max": 31.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 488,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 491,
+        "line": "Metabolized by CYP3A4"
+      },
+      {
+        "page": 493,
+        "line": "One of the few “metabolically friendly” antipsychotics"
+      }
+    ]
+  },
+  "maprotiline": {
+    "name": "Maprotiline",
+    "pages": [
+      495,
+      502
+    ],
+    "half_life_candidates": [
+      {
+        "page": 497,
+        "line": "Mean half-life approximately 51 hours",
+        "parsed": {
+          "hours": 51.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 498,
+        "line": "Methylphenidate may inhibit metabolism of TCAs/tetracyclics"
+      },
+      {
+        "page": 498,
+        "line": "TCAs/tetracyclics can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA/tetracyclic metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 498,
+        "line": "If patient is taking drugs that inhibit TCA/ tetracyclic metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 498,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 500,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "memantine": {
+    "name": "Memantine",
+    "pages": [
+      503,
+      506
+    ],
+    "half_life_candidates": [
+      {
+        "page": 504,
+        "line": "Despite very long half-life, is generally dosed twice daily, although some data suggest once daily is safe and tolerable"
+      },
+      {
+        "page": 504,
+        "line": "Terminal elimination half-life approximately 60–80 hours",
+        "parsed": {
+          "hours": 60.0,
+          "hours_max": 80.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 504,
+        "line": "Little metabolism; mostly excreted unchanged in the urine"
+      },
+      {
+        "page": 504,
+        "line": "No interactions with drugs metabolized by CYP enzymes"
+      }
+    ]
+  },
+  "methylfolate_l": {
+    "name": "Methylfolate L",
+    "pages": [
+      507,
+      510
+    ],
+    "half_life_candidates": [
+      {
+        "page": 508,
+        "line": "Mean elimination half-life approximately 3 hours for d,l-methylfolate",
+        "parsed": {
+          "hours": 3.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 507,
+        "line": "May monitor folate levels for patients taking an agent capable of affecting folate metabolism, absorption, or degradation"
+      },
+      {
+        "page": 509,
+        "line": "Folic acid, when administered in doses above 800 μg, may increase the amount of unmetabolized folic acid, which has been linked to accelerated growth of existing neoplasms in the colon; l-methylfolate may be less likely than folic acid to accelerate the growth of existing neoplasms"
+      },
+      {
+        "page": 510,
+        "line": "Bottiglieri T. Homocysteine and folate metabolism in depression. Prog Neuropsychopharmacology Biol Psychiatry 2005;29:1103–12."
+      }
+    ]
+  },
+  "methylphenidate_d": {
+    "name": "Methylphenidate (D)",
+    "pages": [
+      511,
+      516
+    ],
+    "half_life_candidates": [
+      {
+        "page": 513,
+        "line": "Mean plasma elimination half-life approximately 2.2 hours (same as d,lmethylphenidate)",
+        "parsed": {
+          "hours": 2.2
+        }
+      },
+      {
+        "page": 515,
+        "line": "Half-life and duration of clinical action tend to be shorter in younger children"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 514,
+        "line": "Racemic methylphenidate may inhibit metabolism of SSRIs, anticonvulsants (phenobarbital, phenytoin, primidone), tricyclic antidepressants (TCAs), and coumarin anticoagulants; downward dose adjustments of these drugs may be required when given concomitantly with methylphenidate"
+      }
+    ]
+  },
+  "methylphenidate_dl": {
+    "name": "Methylphenidate (D,L)",
+    "pages": [
+      517,
+      524
+    ],
+    "half_life_candidates": [
+      {
+        "page": 519,
+        "line": "Clinical duration of action often differs from pharmacokinetic half-life"
+      },
+      {
+        "page": 521,
+        "line": "Average half-life of methylphenidate in adults is 3.5 hours (1.3–7.7 hours)",
+        "parsed": {
+          "hours": 3.5
+        }
+      },
+      {
+        "page": 521,
+        "line": "Average half-life of methylphenidate in children is 2.5 hours (1.5–5 hours)",
+        "parsed": {
+          "hours": 2.5
+        }
+      },
+      {
+        "page": 521,
+        "line": "Half-life of methylphenidate is the same regardless of which formulation; it is the release kinetics that determine the onset and duration of clinical effect"
+      },
+      {
+        "page": 523,
+        "line": "Half-life and duration of clinical action tend to be shorter in younger children"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 521,
+        "line": "First-pass metabolism is not extensive with transdermal dosing, thus resulting in notably higher exposure to methylphenidate and lower exposure to metabolites as compared to oral dosing"
+      },
+      {
+        "page": 521,
+        "line": "Racemic methylphenidate may inhibit metabolism of SSRIs, anticonvulsants (phenobarbital, phenytoin, primidone), tricyclic antidepressants (TCAs), and coumarin anticoagulants; downward dose adjustments of these drugs may be required when given concomitantly with methylphenidate"
+      }
+    ]
+  },
+  "mianserin": {
+    "name": "Mianserin",
+    "pages": [
+      525,
+      528
+    ],
+    "half_life_candidates": [
+      {
+        "page": 527,
+        "line": "Half-life 12–29 hours",
+        "parsed": {
+          "hours": 12.0,
+          "hours_max": 29.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 528,
+        "line": "Rotzinger S, Bourin M, Akimoto Y, Coutts RT, Baker GB. Metabolism of some “second-” and “fourth-”generation antidepressants: iprindole, viloxazine, bupropion, mianserin, maprotiline, trazodone, nefazodone, and venlafaxine. Cell Mol Neurobiol 1999;19(4):427–42."
+      }
+    ]
+  },
+  "midazolam": {
+    "name": "Midazolam",
+    "pages": [
+      529,
+      532
+    ],
+    "half_life_candidates": [
+      {
+        "page": 530,
+        "line": "May have longer elimination half-life, prolonging time to recovery"
+      },
+      {
+        "page": 530,
+        "line": "Elimination half-life 1.8–6.4 hours • Active metabolite",
+        "parsed": {
+          "hours": 1.8,
+          "hours_max": 6.4
+        }
+      },
+      {
+        "page": 530,
+        "line": "Longer elimination half-life; clearance is reduced"
+      },
+      {
+        "page": 531,
+        "line": "Seriously ill neonates have reduced clearance and longer elimination half-life"
+      },
+      {
+        "page": 531,
+        "line": "Half-life may be longer in obese patients"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 530,
+        "line": "Elimination half-life 1.8–6.4 hours • Active metabolite"
+      },
+      {
+        "page": 531,
+        "line": "Yuan R, Flockhart DA, Balian JD. Pharmacokinetic and pharmacodynamic consequences of metabolism-based drug interactions with alprazolam, midazolam, and triazolam. J Clin Pharmacol 1999;39:1109–25."
+      }
+    ]
+  },
+  "milnacipran": {
+    "name": "Milnacipran",
+    "pages": [
+      533,
+      538
+    ],
+    "half_life_candidates": [
+      {
+        "page": 536,
+        "line": "Half-life 8 hours",
+        "parsed": {
+          "hours": 8.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 536,
+        "line": "No active metabolite"
+      }
+    ]
+  },
+  "mirtazapine": {
+    "name": "Mirtazapine",
+    "pages": [
+      539,
+      544
+    ],
+    "half_life_candidates": [
+      {
+        "page": 541,
+        "line": "Half-life 20–40 hours",
+        "parsed": {
+          "hours": 20.0,
+          "hours_max": 40.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "moclobemide": {
+    "name": "Moclobemide",
+    "pages": [
+      545,
+      550
+    ],
+    "half_life_candidates": [
+      {
+        "page": 546,
+        "line": "Clinical duration of action may be longer than biological half-life and allow twice daily dosing in some patients, or even once daily dosing, especially at lower doses"
+      },
+      {
+        "page": 546,
+        "line": "Elimination half-life approximately 1–4 hours",
+        "parsed": {
+          "hours": 1.0,
+          "hours_max": 4.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 546,
+        "line": "Partially metabolized by CYP2C19 and CYP2D6"
+      },
+      {
+        "page": 546,
+        "line": "Inactive metabolites"
+      }
+    ]
+  },
+  "modafinil": {
+    "name": "Modafinil",
+    "pages": [
+      551,
+      556
+    ],
+    "half_life_candidates": [
+      {
+        "page": 553,
+        "line": "Elimination half-life 10–12 hours",
+        "parsed": {
+          "hours": 10.0,
+          "hours_max": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 552,
+        "line": "At high doses, may slightly induce its own metabolism, possibly by actions of inducing CYP3A4"
+      },
+      {
+        "page": 553,
+        "line": "Metabolized by the liver"
+      },
+      {
+        "page": 553,
+        "line": "May increase plasma levels of drugs metabolized by CYP2C19 (e.g., diazepam, phenytoin, propranolol)"
+      }
+    ]
+  },
+  "molindone": {
+    "name": "Molindone",
+    "pages": [
+      557,
+      562
+    ],
+    "half_life_candidates": [
+      {
+        "page": 559,
+        "line": "Half-life approximately 1.5 hours",
+        "parsed": {
+          "hours": 1.5
+        }
+      },
+      {
+        "page": 559,
+        "line": "Very short half-life, but some patients may only require once daily dosing"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 557,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "nalmefene": {
+    "name": "Nalmefene",
+    "pages": [
+      563,
+      566
+    ],
+    "half_life_candidates": [
+      {
+        "page": 564,
+        "line": "Extensively metabolized by the liver • Terminal half-life is 12.5 hours",
+        "parsed": {
+          "hours": 12.5
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 564,
+        "line": "Extensively metabolized by the liver • Terminal half-life is 12.5 hours"
+      }
+    ]
+  },
+  "naltrexone": {
+    "name": "Naltrexone",
+    "pages": [
+      567,
+      570
+    ],
+    "half_life_candidates": [
+      {
+        "page": 568,
+        "line": "Elimination half-life of oral naltrexone is approximately 13 hours",
+        "parsed": {
+          "hours": 13.0
+        }
+      },
+      {
+        "page": 568,
+        "line": "Elimination half-life of naltrexone via injection is 5–10 days",
+        "parsed": {
+          "hours": 120.0,
+          "hours_max": 240.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 568,
+        "line": "Is hepatically metabolized by dihydrodiol dehydrogenase and not by the CYP enzyme system, and thus is unlikely to be affected by drugs that induce or inhibit CYP enzymes"
+      }
+    ]
+  },
+  "naltrexonebupropion": {
+    "name": "Naltrexone + Bupropion",
+    "pages": [
+      571,
+      576
+    ],
+    "half_life_candidates": [
+      {
+        "page": 572,
+        "line": "Mean elimination half-life following a single dose of naltrexone–bupropion to healthy"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 573,
+        "line": "Via CYP2D6 inhibition, naltrexone– bupropion could increase concentrations of drugs metabolized by CYP2D6 (e.g., tricyclic antidepressants [TCAs], thioridazine); this may require lower doses of the concomitant medication"
+      },
+      {
+        "page": 573,
+        "line": "Bupropion is metabolized by CYP2B6; the maximum dose of naltrexone–bupropion in patients receiving a concomitant CYP2B6 inhibitor (ticlopidine, clopidogrel) is 8 mg/90 mg twice per day; coadministration of naltrexone–bupropion with CYP2B6 inducers (e.g., ritonavir, lopinavir, efavirenz) is not recommended"
+      },
+      {
+        "page": 573,
+        "line": "Naltrexone is hepatically metabolized by dihydrodiol dehydrogenase and not by the CYP enzyme system, and thus is unlikely to be affected by drugs that induce or inhibit CYP enzymes"
+      }
+    ]
+  },
+  "nefazodone": {
+    "name": "Nefazodone",
+    "pages": [
+      577,
+      582
+    ],
+    "half_life_candidates": [
+      {
+        "page": 579,
+        "line": "Via CYP3A4 inhibition, nefazodone may increase the half-life of alprazolam and triazolam, so their dosing may need to be reduced by half or more"
+      },
+      {
+        "page": 579,
+        "line": "Half-life of parent compound is 2–4 hours",
+        "parsed": {
+          "hours": 2.0,
+          "hours_max": 4.0
+        }
+      },
+      {
+        "page": 579,
+        "line": "Half-life of active mebatolites up to 12 hours",
+        "parsed": {
+          "hours": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 578,
+        "line": "A metabolite of nefazodone, mCPP (metachloro-phenyl-piperazine), can cause side effects if its levels rise significantly"
+      },
+      {
+        "page": 579,
+        "line": "Since a metabolite of nefazodone, mCPP, is a substrate of CYP2D6, combination of CYP2D6 inhibitors with nefazodone will raise mCPP levels, leading to stimulation"
+      }
+    ]
+  },
+  "nortriptyline": {
+    "name": "Nortriptyline",
+    "pages": [
+      583,
+      590
+    ],
+    "half_life_candidates": [
+      {
+        "page": 585,
+        "line": "Half-life approximately 36 hours",
+        "parsed": {
+          "hours": 36.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 585,
+        "line": "Nortriptyline is the active metabolite of amitriptyline, formed by demethylation via CYP1A2"
+      },
+      {
+        "page": 586,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 586,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 586,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 586,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 589,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "olanzapine": {
+    "name": "Olanzapine",
+    "pages": [
+      591,
+      600
+    ],
+    "half_life_candidates": [
+      {
+        "page": 595,
+        "line": "Parent drug has 21–54-hour half-life",
+        "parsed": {
+          "hours": 54.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 592,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 595,
+        "line": "Metabolites are inactive"
+      },
+      {
+        "page": 597,
+        "line": "The same head-to-head study in schizophrenia suggests greater efficacy but greater metabolic side effects compared to some other atypical and conventional antipsychotics"
+      },
+      {
+        "page": 598,
+        "line": "The rate-limiting step for plasma drug levels for LAIs is not drug metabolism, but rather slow absorption from the injection site"
+      },
+      {
+        "page": 600,
+        "line": "Nasrallah HA. Atypical antipsychoticinduced metabolic side effects: insights from receptor-binding profiles. Mol Psychiatry 2008;13(1):27–35."
+      }
+    ]
+  },
+  "olanzapinesamidorphan": {
+    "name": "Olanzapine + Samidorphan",
+    "pages": [
+      601,
+      608
+    ],
+    "half_life_candidates": [
+      {
+        "page": 604,
+        "line": "Olanzapine metabolites are inactive; parent drug has 35–52-hour half-life",
+        "parsed": {
+          "hours": 52.0
+        }
+      },
+      {
+        "page": 605,
+        "line": "agonist and antagonist, respectively; parent drug has 7–11-hour half-life",
+        "parsed": {
+          "hours": 11.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 601,
+        "line": "Blocks mu opioid receptors, ameliorating antipsychotic-induced weight gain and possibly metabolic abnormalities"
+      },
+      {
+        "page": 602,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 603,
+        "line": "The opioid system is thought to play a key role in feeding and metabolism"
+      },
+      {
+        "page": 604,
+        "line": "The recommended starting dose is 5 mg/10 mg once daily in patients who have a higher risk of hypotensive reactions, are at risk of slower olanzapine metabolism, or may be more pharmacodynamically sensitive to olanzapine"
+      },
+      {
+        "page": 604,
+        "line": "Olanzapine metabolites are inactive; parent drug has 35–52-hour half-life"
+      },
+      {
+        "page": 604,
+        "line": "Samidorphan metabolites N-dealkylated and N-oxide function as a mu opioid receptor"
+      },
+      {
+        "page": 607,
+        "line": "Patients who are candidates for olanzapine but either already have or are at risk of obesity or metabolic dysregulation"
+      }
+    ]
+  },
+  "oxazepam": {
+    "name": "Oxazepam",
+    "pages": [
+      609,
+      614
+    ],
+    "half_life_candidates": [
+      {
+        "page": 610,
+        "line": "Frequency of dosing in practice is often greater than predicted from half-life, as duration of biological activity is often shorter than pharmacokinetic terminal half-life"
+      },
+      {
+        "page": 611,
+        "line": "Elimination half-life 3–21 hours",
+        "parsed": {
+          "hours": 3.0,
+          "hours_max": 21.0
+        }
+      },
+      {
+        "page": 611,
+        "line": "Because of its short half-life and inactive metabolites, oxazepam may be a preferred benzodiazepine in some patients with liver disease"
+      },
+      {
+        "page": 612,
+        "line": "Because of its short half-life and inactive metabolites, oxazepam may be preferred over some benzodiazepines for patients with liver disease"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 611,
+        "line": "No active metabolites"
+      },
+      {
+        "page": 611,
+        "line": "Because of its short half-life and inactive metabolites, oxazepam may be a preferred benzodiazepine in some patients with liver disease"
+      },
+      {
+        "page": 612,
+        "line": "Because of its short half-life and inactive metabolites, oxazepam may be preferred over some benzodiazepines for patients with liver disease"
+      }
+    ]
+  },
+  "oxcarbazepine": {
+    "name": "Oxcarbazepine",
+    "pages": [
+      615,
+      620
+    ],
+    "half_life_candidates": [
+      {
+        "page": 617,
+        "line": "Half-life of parent drug is approximately 2 hours; half-life of MHD is approximately 9 hours; thus oxcarbazepine is essentially a prodrug rapidly converted to its MHD, licarbazepine",
+        "parsed": {
+          "hours": 2.0
+        }
+      },
+      {
+        "page": 617,
+        "line": "Elimination half-life of active metabolite MHD is increased"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 617,
+        "line": "Metabolized in the liver"
+      },
+      {
+        "page": 617,
+        "line": "This main active metabolite is sometimes called the monohydroxy derivative or MHD, and is also known as licarbazepine"
+      },
+      {
+        "page": 617,
+        "line": "Elimination half-life of active metabolite MHD is increased"
+      },
+      {
+        "page": 617,
+        "line": "Strong inducers of CYP cytochromes (e.g., carbamazepine, phenobarbital, phenytoin, and primidone) can decrease plasma levels of the active metabolite MHD"
+      },
+      {
+        "page": 617,
+        "line": "Verapamil may decrease plasma levels of the active metabolite MHD"
+      },
+      {
+        "page": 619,
+        "line": "Oxcarbazepine is the 10-keto analog of carbamazepine, but not a metabolite of carbamazepine"
+      },
+      {
+        "page": 619,
+        "line": "Specifically, oxcarbazepine and its active metabolite, the monohydroxy derivative (MHD), cause less enzyme induction of CYP3A4 than the structurally related carbamazepine"
+      },
+      {
+        "page": 619,
+        "line": "The active metabolite MHD, also called licarbazepine, is a racemic mixture of 80% S-MHD (active) and 20% R-MHD (inactive)"
+      }
+    ]
+  },
+  "paliperidone": {
+    "name": "Paliperidone",
+    "pages": [
+      621,
+      632
+    ],
+    "half_life_candidates": [
+      {
+        "page": 624,
+        "line": "Half-life approximately 23 hours",
+        "parsed": {
+          "hours": 23.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 622,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 624,
+        "line": "Active metabolite of risperidone"
+      },
+      {
+        "page": 629,
+        "line": "The rate-limiting step for plasma drug levels for LAIs is not drug metabolism, but rather slow absorption from the injection site"
+      }
+    ]
+  },
+  "paroxetine": {
+    "name": "Paroxetine",
+    "pages": [
+      633,
+      640
+    ],
+    "half_life_candidates": [
+      {
+        "page": 636,
+        "line": "For some patients with severe problems discontinuing paroxetine, it may be useful to add an SSRI with a long half-life, especially fluoxetine, prior to taper of paroxetine; while maintaining fluoxetine dosing, first slowly taper paroxetine and then taper fluoxetine"
+      },
+      {
+        "page": 636,
+        "line": "Half-life approximately 24 hours",
+        "parsed": {
+          "hours": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 636,
+        "line": "Paroxetine inhibits its own metabolism and thus plasma concentrations can double when oral doses increase by 50%; plasma concentrations can increase 2–7-fold when oral doses are doubled"
+      },
+      {
+        "page": 636,
+        "line": "Paroxetine’s withdrawal effects may be related in part to the fact that it inhibits its own metabolism"
+      },
+      {
+        "page": 636,
+        "line": "Thus, when paroxetine is withdrawn, the rate of its decline can be faster as it stops inhibiting its metabolism"
+      },
+      {
+        "page": 636,
+        "line": "Inactive metabolites"
+      },
+      {
+        "page": 639,
+        "line": "Inhibits own metabolism, so dosing is not linear"
+      }
+    ]
+  },
+  "perospirone": {
+    "name": "Perospirone",
+    "pages": [
+      641,
+      646
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 642,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 643,
+        "line": "Metabolized primarily by CYP3A4 • No active metabolites"
+      }
+    ]
+  },
+  "perphenazine": {
+    "name": "Perphenazine",
+    "pages": [
+      647,
+      652
+    ],
+    "half_life_candidates": [
+      {
+        "page": 649,
+        "line": "Half-life approximately 9.5 hours",
+        "parsed": {
+          "hours": 9.5
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 647,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "phenelzine": {
+    "name": "Phenelzine",
+    "pages": [
+      653,
+      658
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": []
+  },
+  "phenterminetopiramate": {
+    "name": "Phentermine–Topiramate",
+    "pages": [
+      659,
+      664
+    ],
+    "half_life_candidates": [
+      {
+        "page": 661,
+        "line": "Phentermine mean terminal half-life approximately 20 hours",
+        "parsed": {
+          "hours": 20.0
+        }
+      },
+      {
+        "page": 661,
+        "line": "Topiramate mean terminal half-life approximately 65 hours",
+        "parsed": {
+          "hours": 65.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 660,
+        "line": "Inhibition of carbonic anhydrase may also lead to metabolic acidosis"
+      },
+      {
+        "page": 660,
+        "line": "Metabolic acidosis"
+      },
+      {
+        "page": 660,
+        "line": "Topiramate: severe metabolic acidosis, convulsions, sedation, speech disturbance, blurred or double vision, impaired coordination, hypotension, abdominal pain, agitation, dizziness"
+      },
+      {
+        "page": 661,
+        "line": "Neither phentermine nor topiramate is extensively metabolized"
+      },
+      {
+        "page": 661,
+        "line": "If symptoms of metabolic acidosis develop and persist (hyperventilation, fatigue, anorexia, cardiac arrhythmias, stupor), dose may need to be reduced or treatment may need to be discontinued"
+      },
+      {
+        "page": 662,
+        "line": "Patients with a history of kidney stones or risks for metabolic acidosis"
+      }
+    ]
+  },
+  "pimavanserin": {
+    "name": "Pimavanserin",
+    "pages": [
+      665,
+      668
+    ],
+    "half_life_candidates": [
+      {
+        "page": 666,
+        "line": "The long half-life suggests that it may be possible to stop pimavanserin abruptly"
+      },
+      {
+        "page": 666,
+        "line": "Rapid discontinuation could theoretically lead to rebound psychosis and worsening of symptoms, but less likely with pimavanserin due to its long half-life"
+      },
+      {
+        "page": 666,
+        "line": "Mean half-life 57 hours (pimavanserin) and 200 hours (active metabolite N-desmethylated metabolite)",
+        "parsed": {
+          "hours": 57.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 666,
+        "line": "Mean half-life 57 hours (pimavanserin) and 200 hours (active metabolite N-desmethylated metabolite)"
+      },
+      {
+        "page": 666,
+        "line": "Metabolized primarily by CYP3A4 and CYP3A5"
+      },
+      {
+        "page": 667,
+        "line": "Not associated with the metabolic side effects of quetiapine and clozapine,"
+      }
+    ]
+  },
+  "pimozide": {
+    "name": "Pimozide",
+    "pages": [
+      669,
+      674
+    ],
+    "half_life_candidates": [
+      {
+        "page": 671,
+        "line": "Mean elimination half-life approximately 55 hours",
+        "parsed": {
+          "hours": 55.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 669,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 671,
+        "line": "Metabolized by CYP3A and to a lesser extent by CYP1A2"
+      },
+      {
+        "page": 672,
+        "line": "If patient is taking drugs that inhibit pimozide metabolism, such as macrolide antibiotics, azole antifungal agents (ketoconazole, itraconazole), protease inhibitors, nefazodone, fluvoxamine, fluoxetine, sertaline, etc."
+      }
+    ]
+  },
+  "pipothiazine": {
+    "name": "Pipothiazine",
+    "pages": [
+      675,
+      680
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 675,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 678,
+        "line": "Elderly patients do not metabolize the drug as quickly"
+      }
+    ]
+  },
+  "pitolisant": {
+    "name": "Pitolisant",
+    "pages": [
+      681,
+      684
+    ],
+    "half_life_candidates": [
+      {
+        "page": 682,
+        "line": "Median half-life approximately 20 hours",
+        "parsed": {
+          "hours": 20.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 682,
+        "line": "Extensively metabolized by CYP2D6 and to a lesser extent by CYP3A4"
+      },
+      {
+        "page": 682,
+        "line": "No active metabolites"
+      },
+      {
+        "page": 682,
+        "line": "In patients who are poor metabolizers of CYP2D6 the maximum dose is 17.8 mg once daily"
+      }
+    ]
+  },
+  "prazosin": {
+    "name": "Prazosin",
+    "pages": [
+      685,
+      688
+    ],
+    "half_life_candidates": [
+      {
+        "page": 686,
+        "line": "• Elimination half-life 2–3 hours",
+        "parsed": {
+          "hours": 2.0,
+          "hours_max": 3.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "pregabalin": {
+    "name": "Pregabalin",
+    "pages": [
+      689,
+      694
+    ],
+    "half_life_candidates": [
+      {
+        "page": 691,
+        "line": "Elimination half-life approximately 5–7 hours",
+        "parsed": {
+          "hours": 5.0,
+          "hours_max": 7.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 691,
+        "line": "Pregabalin is not metabolized but excreted intact renally"
+      }
+    ]
+  },
+  "propranolol": {
+    "name": "Propranolol",
+    "pages": [
+      695,
+      698
+    ],
+    "half_life_candidates": [
+      {
+        "page": 697,
+        "line": "Half-life 3–5 hours (immediate-release) or 8–11 hours (extended-release)",
+        "parsed": {
+          "hours": 3.0,
+          "hours_max": 5.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 697,
+        "line": "Cimetidine, oral contraceptives, ciprofloxacin, hydralazine, hydroxychloroquine, loop diuretics, certain SSRIs (with CYP2D6 metabolism), and phenothiazines can increase levels and/or effects of propranolol"
+      }
+    ]
+  },
+  "protriptyline": {
+    "name": "Protriptyline",
+    "pages": [
+      699,
+      704
+    ],
+    "half_life_candidates": [
+      {
+        "page": 701,
+        "line": "Half-life approximately 74 hours",
+        "parsed": {
+          "hours": 74.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 701,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 702,
+        "line": "only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 702,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 702,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 704,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      },
+      {
+        "page": 704,
+        "line": "Rudorfer MV, Potter WZ. Metabolism of tricyclic antidepressants. Cell Mol Neurobiol 1999;19(3):373–409."
+      }
+    ]
+  },
+  "quazepam": {
+    "name": "Quazepam",
+    "pages": [
+      705,
+      708
+    ],
+    "half_life_candidates": [
+      {
+        "page": 706,
+        "line": "Half-life 25–41 hours",
+        "parsed": {
+          "hours": 25.0,
+          "hours_max": 41.0
+        }
+      },
+      {
+        "page": 706,
+        "line": "Because of its relatively longer half-life, quazepam may cause some daytime sedation and/or impaired motor/cognitive function, and may do so progressively over time"
+      },
+      {
+        "page": 708,
+        "line": "Quazepam has a longer half-life than some other sedative hypnotics, so it may be less likely to cause rebound insomnia on discontinuation"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 706,
+        "line": "Active metabolite"
+      },
+      {
+        "page": 706,
+        "line": "Metabolized in part by CYP3A4"
+      },
+      {
+        "page": 708,
+        "line": "Long-term accumulation of quazepam and its active metabolites may cause insidious"
+      }
+    ]
+  },
+  "quetiapine": {
+    "name": "Quetiapine",
+    "pages": [
+      709,
+      716
+    ],
+    "half_life_candidates": [
+      {
+        "page": 713,
+        "line": "Parent drug has 6–7-hour half-life",
+        "parsed": {
+          "hours": 7.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 711,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 713,
+        "line": "Quetiapine XR may theoretically generate increased concentrations of active metabolite norquetiapine, with theoretically improved profile for affective and anxiety disorders"
+      },
+      {
+        "page": 715,
+        "line": "The active metabolite of quetiapine, norquetiapine, has the additional properties of norepinephrine reuptake inhibition and antagonism of serotonin 2C receptors, which may contribute to therapeutic effects for mood and cognition"
+      },
+      {
+        "page": 716,
+        "line": "Nasrallah HA. Atypical antipsychoticinduced metabolic side effects: insights from receptor-binding profiles. Mol Psychiatry 2008;13(1):27–35."
+      }
+    ]
+  },
+  "ramelteon": {
+    "name": "Ramelteon",
+    "pages": [
+      717,
+      720
+    ],
+    "half_life_candidates": [
+      {
+        "page": 718,
+        "line": "Mean elimination half-life of parent drug 1–2.6 hours",
+        "parsed": {
+          "hours": 1.0,
+          "hours_max": 2.6
+        }
+      },
+      {
+        "page": 718,
+        "line": "Mean elimination half-life of major metabolite, M-II, is 2–5 hours",
+        "parsed": {
+          "hours": 2.0,
+          "hours_max": 5.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 718,
+        "line": "Metabolized predominantly by CYP1A2"
+      },
+      {
+        "page": 718,
+        "line": "CYP3A4 and CYP2C are also involved in metabolism of ramelteon"
+      },
+      {
+        "page": 718,
+        "line": "Mean elimination half-life of major metabolite, M-II, is 2–5 hours"
+      }
+    ]
+  },
+  "reboxetine": {
+    "name": "Reboxetine",
+    "pages": [
+      721,
+      726
+    ],
+    "half_life_candidates": [
+      {
+        "page": 723,
+        "line": "Elimination half-life approximately 13 hours",
+        "parsed": {
+          "hours": 13.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 723,
+        "line": "Metabolized by CYP3A4"
+      }
+    ]
+  },
+  "risperidone": {
+    "name": "Risperidone",
+    "pages": [
+      727,
+      738
+    ],
+    "half_life_candidates": [
+      {
+        "page": 731,
+        "line": "Parent drug of oral formulation has 20–24hour half-life",
+        "parsed": {
+          "hours": 20.0,
+          "hours_max": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 728,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 731,
+        "line": "Metabolites are active"
+      },
+      {
+        "page": 731,
+        "line": "Metabolized by CYP2D6"
+      },
+      {
+        "page": 731,
+        "line": "Since risperidone is metabolized by CYP2D6, any agent that inhibits this enzyme could theoretically raise risperidone plasma levels; however, dose reduction of oral risperidone is usually not necessary when such combinations are used"
+      },
+      {
+        "page": 735,
+        "line": "The rate-limiting step for plasma drug levels for LAIs is not drug metabolism, but rather slow absorption from the injection site"
+      },
+      {
+        "page": 736,
+        "line": "Concomitant use with paliperidone ER is not recommended; paliperidone ER is the active metabolite of risperidone, and the combination of the two may lead to additive active antipsychotic fraction exposure"
+      },
+      {
+        "page": 737,
+        "line": "Nasrallah HA. Atypical antipsychotic-induced metabolic side effects: insights from receptorbinding profiles. Mol Psychiatry 2008;13(1):27–35."
+      }
+    ]
+  },
+  "rivastigmine": {
+    "name": "Rivastigmine",
+    "pages": [
+      739,
+      744
+    ],
+    "half_life_candidates": [
+      {
+        "page": 741,
+        "line": "Elimination half-life 1–2 hours",
+        "parsed": {
+          "hours": 1.0,
+          "hours_max": 2.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 741,
+        "line": "Not hepatically metabolized; no CYPmediated pharmacokinetic drug interactions"
+      }
+    ]
+  },
+  "selegiline": {
+    "name": "Selegiline",
+    "pages": [
+      745,
+      754
+    ],
+    "half_life_candidates": [
+      {
+        "page": 748,
+        "line": "Mean half-life of transdermal selegiline is approximately 18–25 hours",
+        "parsed": {
+          "hours": 18.0,
+          "hours_max": 25.0
+        }
+      },
+      {
+        "page": 748,
+        "line": "Steady-state mean elimination half-life of oral selegiline is approximately 10 hours",
+        "parsed": {
+          "hours": 10.0
+        }
+      },
+      {
+        "page": 748,
+        "line": "Theoretically and especially at high doses, selegiline could cause a fatal “serotonin syndrome” when combined with drugs that block serotonin reuptake, so do not use with a serotonin reuptake inhibitor for up to 5 half-lives after stopping the serotonin reuptake inhibitor (i.e., “wash-in” of selegiline should be about 1 week after discontinuing most agents [except 5 weeks or more after discontinuing fluoxetine because of its long half-life and that of its active metabolite]) (see Table 1 after Pearls)",
+        "parsed": {
+          "hours": 168.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 745,
+        "line": "Oral: above recommended doses, irreversibly blocks both MAO-A and MAO-B from breaking down norepinephrine, serotonin, and dopamine while simultaneously blocking metabolism of tyramine in the gut"
+      },
+      {
+        "page": 748,
+        "line": "Lack of evidence for abuse potential with transdermal selegiline despite its metabolism to l-amphetamine and l-methamphetamine"
+      },
+      {
+        "page": 748,
+        "line": "Major metabolite of selegiline is desmethylselegiline; other metabolites are l-methamphetamine and l-amphetamine"
+      },
+      {
+        "page": 748,
+        "line": "Because first-pass metabolism is not extensive with transdermal dosing, this results in notably higher exposure to selegiline and lower exposure to metabolites as compared to oral dosing"
+      },
+      {
+        "page": 748,
+        "line": "Theoretically and especially at high doses, selegiline could cause a fatal “serotonin syndrome” when combined with drugs that block serotonin reuptake, so do not use with a serotonin reuptake inhibitor for up to 5 half-lives after stopping the serotonin reuptake inhibitor (i.e., “wash-in” of selegiline should be about 1 week after discontinuing most agents [except 5 weeks or more after discontinuing fluoxetine because of its long half-life and that of its active metabolite]) (see Table 1 after Pearls)"
+      },
+      {
+        "page": 751,
+        "line": "Transdermal selegiline may have low risk of weight gain and sexual dysfunction, and may be useful for cognitive dysfunction in attention deficit disorder and other cognitive disorders, as it increases dopamine and is metabolized to l-amphetamine and l-methamphetamine"
+      }
+    ]
+  },
+  "serdexmethylphenidate": {
+    "name": "Serdexmethylphenidate",
+    "pages": [
+      755,
+      760
+    ],
+    "half_life_candidates": [
+      {
+        "page": 757,
+        "line": "Mean plasma elimination halflife approximately 5.7 hours (serdexmethylphenidate) and 11.7 hours (d-methylphenidate)",
+        "parsed": {
+          "hours": 5.7
+        }
+      },
+      {
+        "page": 759,
+        "line": "Half-life and duration of clinical action tend to be shorter in younger children"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 757,
+        "line": "Racemic methylphenidate may inhibit metabolism of SSRIs, anticonvulsants (phenobarbital, phenytoin, primidone), tricyclic antidepressants (TCAs), and coumarin anticoagulants; downward dose adjustments of these drugs may be required when given concomitantly with methylphenidate"
+      }
+    ]
+  },
+  "sertindole": {
+    "name": "Sertindole",
+    "pages": [
+      761,
+      766
+    ],
+    "half_life_candidates": [
+      {
+        "page": 764,
+        "line": "Terminal half-life approximately 3 days",
+        "parsed": {
+          "hours": 72.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 762,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 764,
+        "line": "Extensively metabolized by CYP2D6 and CYP3A"
+      }
+    ]
+  },
+  "sertraline": {
+    "name": "Sertraline",
+    "pages": [
+      767,
+      774
+    ],
+    "half_life_candidates": [
+      {
+        "page": 770,
+        "line": "Parent drug has 22–36-hour half-life",
+        "parsed": {
+          "hours": 36.0
+        }
+      },
+      {
+        "page": 770,
+        "line": "Metabolite half-life 62–104 hours",
+        "parsed": {
+          "hours": 62.0,
+          "hours_max": 104.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 770,
+        "line": "Metabolite half-life 62–104 hours"
+      }
+    ]
+  },
+  "sildenafil": {
+    "name": "Sildenafil",
+    "pages": [
+      775,
+      778
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 776,
+        "line": "Metabolized to an active metabolite, primarily by CYP3A4 (major route) and CYP2C9 (minor route)"
+      },
+      {
+        "page": 776,
+        "line": "Parent drug and its active metabolite have ~4-hour terminal half-lives"
+      }
+    ]
+  },
+  "sodium_oxybate": {
+    "name": "Sodium Oxybate",
+    "pages": [
+      779,
+      782
+    ],
+    "half_life_candidates": [
+      {
+        "page": 781,
+        "line": "Elimination half-life approximately 30–60 minutes",
+        "parsed": {
+          "hours": 0.5,
+          "hours_max": 1.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 781,
+        "line": "Metabolized by the liver"
+      }
+    ]
+  },
+  "solriamfetol": {
+    "name": "Solriamfetol",
+    "pages": [
+      783,
+      786
+    ],
+    "half_life_candidates": [
+      {
+        "page": 784,
+        "line": "Mean elimination half-life approximately 7.1 hours",
+        "parsed": {
+          "hours": 7.1
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 784,
+        "line": "Minimally metabolized; primarily cleared through the kidneys"
+      }
+    ]
+  },
+  "sulpiride": {
+    "name": "Sulpiride",
+    "pages": [
+      787,
+      792
+    ],
+    "half_life_candidates": [
+      {
+        "page": 789,
+        "line": "Elimination half-life approximately 6–8 hours",
+        "parsed": {
+          "hours": 6.0,
+          "hours_max": 8.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 787,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "suvorexant": {
+    "name": "Suvorexant",
+    "pages": [
+      793,
+      796
+    ],
+    "half_life_candidates": [
+      {
+        "page": 794,
+        "line": "Mean terminal half-life approximately 12 hours",
+        "parsed": {
+          "hours": 12.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 794,
+        "line": "Metabolized by CYP3A4"
+      }
+    ]
+  },
+  "tasimelteon": {
+    "name": "Tasimelteon",
+    "pages": [
+      797,
+      800
+    ],
+    "half_life_candidates": [
+      {
+        "page": 798,
+        "line": "Mean elimination half-life 1.3 hours",
+        "parsed": {
+          "hours": 1.3
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 798,
+        "line": "Metabolized by CYP1A2 and CYP3A4"
+      }
+    ]
+  },
+  "temazepam": {
+    "name": "Temazepam",
+    "pages": [
+      801,
+      804
+    ],
+    "half_life_candidates": [
+      {
+        "page": 802,
+        "line": "Half-life approximately 8–15 hours",
+        "parsed": {
+          "hours": 8.0,
+          "hours_max": 15.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 802,
+        "line": "No active metabolites"
+      }
+    ]
+  },
+  "thioridazine": {
+    "name": "Thioridazine",
+    "pages": [
+      805,
+      810
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 805,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 807,
+        "line": "Metabolized by CYP2D6"
+      },
+      {
+        "page": 807,
+        "line": "Fluvoxamine, propranolol, and pindolol also inhibit thioridazine metabolism and can raise thioridazine to dangerous levels"
+      },
+      {
+        "page": 808,
+        "line": "If patient is taking drugs that inhibit thioridazine metabolism, including CYP inhibitors"
+      },
+      {
+        "page": 808,
+        "line": "If there is reduced CYP2D6 function, such as in patients who are CYP2D6 poor metabolizers"
+      },
+      {
+        "page": 809,
+        "line": "Those with low CYP2D6 metabolism"
+      }
+    ]
+  },
+  "thiothixene": {
+    "name": "Thiothixene",
+    "pages": [
+      811,
+      816
+    ],
+    "half_life_candidates": [
+      {
+        "page": 813,
+        "line": "Initial elimination half-life approximately 3.4 hours",
+        "parsed": {
+          "hours": 3.4
+        }
+      },
+      {
+        "page": 813,
+        "line": "Terminal elimination half-life approximately 34 hours",
+        "parsed": {
+          "hours": 34.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 811,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "tiagabine": {
+    "name": "Tiagabine",
+    "pages": [
+      817,
+      822
+    ],
+    "half_life_candidates": [
+      {
+        "page": 819,
+        "line": "Half-life approximately 7–9 hours",
+        "parsed": {
+          "hours": 7.0,
+          "hours_max": 9.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 819,
+        "line": "Primarily metabolized by CYP3A4"
+      }
+    ]
+  },
+  "tianeptine": {
+    "name": "Tianeptine",
+    "pages": [
+      823,
+      826
+    ],
+    "half_life_candidates": [
+      {
+        "page": 824,
+        "line": "Short half-life means multiple daily doses"
+      },
+      {
+        "page": 824,
+        "line": "Half-life approximately 2.5 hours",
+        "parsed": {
+          "hours": 2.5
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 824,
+        "line": "Not primarily metabolized by CYP enzyme system"
+      },
+      {
+        "page": 825,
+        "line": "Is not metabolized by CYP; therefore, the risk of pharmacokinetic drug-drug interactions is minimized"
+      }
+    ]
+  },
+  "topiramate": {
+    "name": "Topiramate",
+    "pages": [
+      827,
+      832
+    ],
+    "half_life_candidates": [
+      {
+        "page": 829,
+        "line": "Elimination half-life approximately 21 hours",
+        "parsed": {
+          "hours": 21.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 827,
+        "line": "Baseline and periodic serum bicarbonate levels to monitor for hyperchloremic, non-anion gap metabolic acidosis (i.e., decreased serum bicarbonate below the normal reference range in the absence of chronic respiratory alkalosis)"
+      },
+      {
+        "page": 828,
+        "line": "Inhibition of carbonic anhydrase may also lead to metabolic acidosis"
+      },
+      {
+        "page": 828,
+        "line": "Metabolic acidosis"
+      },
+      {
+        "page": 829,
+        "line": "No fatalities have been reported in monotherapy; convulsions, sedation, speech disturbance, blurred or double vision, metabolic acidosis, impaired coordination, hypotension, abdominal pain, agitation, dizziness"
+      },
+      {
+        "page": 829,
+        "line": "Topiramate may decrease the exposure of pioglitazone and its active metabolites; patients taking both medications should be carefully monitored for adequate control of their diabetic disease state"
+      },
+      {
+        "page": 830,
+        "line": "If symptoms of metabolic acidosis develop and persist (hyperventilation, fatigue, anorexia, cardiac arrhythmias, stupor), dose may need to be reduced or treatment may need to be discontinued"
+      },
+      {
+        "page": 830,
+        "line": "In patients with metabolic acidosis who are taking metformin (extended-release)"
+      },
+      {
+        "page": 831,
+        "line": "Patients with a history of kidney stones or risks for metabolic acidosis"
+      }
+    ]
+  },
+  "tranylcypromine": {
+    "name": "Tranylcypromine",
+    "pages": [
+      833,
+      838
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": []
+  },
+  "trazodone": {
+    "name": "Trazodone",
+    "pages": [
+      839,
+      844
+    ],
+    "half_life_candidates": [
+      {
+        "page": 841,
+        "line": "Although use as a monotherapy for depression is usually in divided doses due to its short half-life, use as an adjunct is often effective and best tolerated once daily at bedtime"
+      },
+      {
+        "page": 841,
+        "line": "Half-life is biphasic; first phase is approximately 3–6 hours; second phase is approximately 5–9 hours",
+        "parsed": {
+          "hours": 3.0,
+          "hours_max": 6.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 841,
+        "line": "Metabolized by CYP3A4"
+      },
+      {
+        "page": 843,
+        "line": "Rotzinger S, Bourin M, Akimoto Y, Coutts RT, Baker GB. Metabolism of some “second”- and"
+      }
+    ]
+  },
+  "triazolam": {
+    "name": "Triazolam",
+    "pages": [
+      845,
+      848
+    ],
+    "half_life_candidates": [
+      {
+        "page": 846,
+        "line": "Increased wakefulness during the latter part of the night (wearing off) or an increase in daytime anxiety (rebound) may occur because of short half-life"
+      },
+      {
+        "page": 846,
+        "line": "Half-life 1.5–5.5 hours",
+        "parsed": {
+          "hours": 1.5,
+          "hours_max": 5.5
+        }
+      },
+      {
+        "page": 848,
+        "line": "The shorter half-life should prevent impairments in cognitive and motor performance during the day as well as daytime sedation"
+      },
+      {
+        "page": 848,
+        "line": "If tolerance develops, the short half-life of elimination may result in increased anxiety during the day and/or increased"
+      },
+      {
+        "page": 848,
+        "line": "The short half-life may minimize the risk of drug interactions with agents taken during the day (e.g., alcohol)"
+      },
+      {
+        "page": 848,
+        "line": "Because of its short half-life and inactive metabolites, triazolam may be preferred over some benzodiazepines for patients with liver disease"
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 846,
+        "line": "Inactive metabolites"
+      },
+      {
+        "page": 848,
+        "line": "Because of its short half-life and inactive metabolites, triazolam may be preferred over some benzodiazepines for patients with liver disease"
+      },
+      {
+        "page": 848,
+        "line": "Yuan R, Flockhart DA, Balian JD. Pharmacokinetic and pharmacodynamic consequences of metabolism-based drug interactions with alprazolam, midazolam, and triazolam. J Clin Pharmacol 1999;39:1109–25."
+      }
+    ]
+  },
+  "trifluoperazine": {
+    "name": "Trifluoperazine",
+    "pages": [
+      849,
+      854
+    ],
+    "half_life_candidates": [
+      {
+        "page": 851,
+        "line": "Mean elimination half-life approximately 12.5 hours",
+        "parsed": {
+          "hours": 12.5
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 849,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      }
+    ]
+  },
+  "trihexyphenidyl": {
+    "name": "Trihexyphenidyl",
+    "pages": [
+      855,
+      858
+    ],
+    "half_life_candidates": [
+      {
+        "page": 856,
+        "line": "Half-life 6–10 hours; time to peak effect is 1–1.3 hours",
+        "parsed": {
+          "hours": 6.0,
+          "hours_max": 10.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 856,
+        "line": "Metabolism is not well understood"
+      }
+    ]
+  },
+  "triiodothyronine": {
+    "name": "Triiodothyronine",
+    "pages": [
+      859,
+      862
+    ],
+    "half_life_candidates": [
+      {
+        "page": 860,
+        "line": "Half-life approximately 2.5 days",
+        "parsed": {
+          "hours": 60.0
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "trimipramine": {
+    "name": "Trimipramine",
+    "pages": [
+      863,
+      870
+    ],
+    "half_life_candidates": [
+      {
+        "page": 865,
+        "line": "Half-life approximately 7–23 hours",
+        "parsed": {
+          "hours": 7.0,
+          "hours_max": 23.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 865,
+        "line": "Methylphenidate may inhibit metabolism of TCAs"
+      },
+      {
+        "page": 866,
+        "line": "TCAs can increase QTc interval, especially at toxic doses, which can be attained not only by overdose but also by combining with drugs that inhibit TCA metabolism via CYP2D6, potentially causing torsade de pointes-type arrhythmia or sudden death"
+      },
+      {
+        "page": 866,
+        "line": "If patient is taking drugs that inhibit TCA metabolism, including CYP2D6 inhibitors, except by an expert"
+      },
+      {
+        "page": 866,
+        "line": "If there is reduced CYP2D6 function, such as patients who are poor CYP2D6 metabolizers, except by an expert and at low doses"
+      },
+      {
+        "page": 868,
+        "line": "Patients who seem to have extraordinarily severe side effects at normal or low doses may have this phenotypic CYP2D6 variant and require low doses or switching to another antidepressant not metabolized by CYP2D6"
+      }
+    ]
+  },
+  "valbenazine": {
+    "name": "Valbenazine",
+    "pages": [
+      871,
+      874
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 872,
+        "line": "and by oxidative metabolism, primarily by CYP3A4/5, to form monooxidized valbenazine and other minor metabolites"
+      },
+      {
+        "page": 872,
+        "line": "[+]-α-HTBZ is further metabolized in part by CYP2D6"
+      },
+      {
+        "page": 872,
+        "line": "Very little of the parent drug, valbenazine, is present in the blood due to rapid conversion to its metabolites"
+      },
+      {
+        "page": 872,
+        "line": "Strong CYP2D6 inhibitors (e.g., paroxetine, fluoxetine) may increase exposure to valbenazine’s active metabolite; consider reducing dose based on tolerability in patients taking a strong CYP2D6 inhibitor or who are known CYP poor metabolizers"
+      },
+      {
+        "page": 872,
+        "line": "Valbenazine is extensively metabolized by hydrolysis of the valine ester to form the active metabolite ([+]-α-dihydrotetrabenazine [HTBZ])"
+      },
+      {
+        "page": 873,
+        "line": "Valbenazine and its active metabolites bind predominantly only to VMAT2, so there are no significant off-target pharmacological actions such as blocking the dopamine 2 receptor or the serotonin 7 receptor, as is the case with tetrabenazine’s and deutetrabenazine’s active metabolites"
+      },
+      {
+        "page": 874,
+        "line": "Grigoriadis DE, Smith E, Hoare SR, Madan A, Bozigian H. Pharmacologic characterization of valbenazine (NBI-98854) and its metabolites. J Pharmacol Exp Ther 2017; 361(3):454-61."
+      }
+    ]
+  },
+  "valproate": {
+    "name": "Valproate",
+    "pages": [
+      875,
+      882
+    ],
+    "half_life_candidates": [
+      {
+        "page": 877,
+        "line": "Given the half-life of immediate-release valproate (e.g., Depakene, Depakote), twice daily dosing is probably ideal"
+      },
+      {
+        "page": 877,
+        "line": "Mean terminal half-life 9–16 hours",
+        "parsed": {
+          "hours": 9.0,
+          "hours_max": 16.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 877,
+        "line": "Metabolized primarily by the liver, approximately 25% dependent upon CYP system (CYP2C9 and CYP2C19)"
+      },
+      {
+        "page": 878,
+        "line": "valproate inhibits metabolism of lamotrigine and raises lamotrigine plasma levels, theoretically increasing the risk of rash"
+      },
+      {
+        "page": 878,
+        "line": "Aspirin may inhibit metabolism of valproate and increase valproate plasma levels"
+      },
+      {
+        "page": 878,
+        "line": "Valproate inhibits metabolism of ethosuximide, phenobarbital, and phenytoin, and can thus increase their plasma levels"
+      },
+      {
+        "page": 880,
+        "line": "In particular, valpromide is a potent inhibitor of liver microsomal epoxide hydrolase and thus causes clinically significant increases in the plasma levels of carbamazepine-10,11-epoxide (the active metabolite of carbamazepine)"
+      }
+    ]
+  },
+  "varenicline": {
+    "name": "Varenicline",
+    "pages": [
+      883,
+      886
+    ],
+    "half_life_candidates": [
+      {
+        "page": 884,
+        "line": "Elimination half-life 24 hours",
+        "parsed": {
+          "hours": 24.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 884,
+        "line": "Is not hepatically metabolized and thus is unlikely to be affected by other drugs"
+      }
+    ]
+  },
+  "venlafaxine": {
+    "name": "Venlafaxine",
+    "pages": [
+      887,
+      892
+    ],
+    "half_life_candidates": [
+      {
+        "page": 889,
+        "line": "For some patients with severe problems discontinuing venlafaxine, it may be useful to add an SSRI with a long half-life, especially fluoxetine, prior to taper of venlafaxine; while maintaining fluoxetine dosing, first slowly taper venlafaxine and then taper fluoxetine"
+      },
+      {
+        "page": 890,
+        "line": "Parent drug has 3–7-hour half-life",
+        "parsed": {
+          "hours": 7.0
+        }
+      },
+      {
+        "page": 890,
+        "line": "Active metabolite has 9–13-hour half-life",
+        "parsed": {
+          "hours": 13.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 889,
+        "line": "Venlafaxine has an active metabolite O-desmethylvenlafaxine (ODV), which is formed as the result of CYP2D6"
+      },
+      {
+        "page": 890,
+        "line": "Active metabolite has 9–13-hour half-life"
+      },
+      {
+        "page": 892,
+        "line": "In vitro binding studies tend to underestimate in vivo potency for reuptake blockade, as they do not factor in the presence of high concentrations of an active metabolite, higher oral mg dosing, or the lower protein binding which can increase functional drug levels at receptor sites"
+      }
+    ]
+  },
+  "vilazodone": {
+    "name": "Vilazodone",
+    "pages": [
+      893,
+      898
+    ],
+    "half_life_candidates": [
+      {
+        "page": 895,
+        "line": "Mean terminal half-life 25 hours",
+        "parsed": {
+          "hours": 25.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 895,
+        "line": "Metabolized by CYP3A4"
+      }
+    ]
+  },
+  "viloxazine": {
+    "name": "Viloxazine",
+    "pages": [
+      899,
+      904
+    ],
+    "half_life_candidates": [
+      {
+        "page": 901,
+        "line": "Half-life approximately 7 hours",
+        "parsed": {
+          "hours": 7.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 901,
+        "line": "Metabolized primarily by CYP2D6, UGT1A9, and UGT2B15"
+      }
+    ]
+  },
+  "vortioxetine": {
+    "name": "Vortioxetine",
+    "pages": [
+      905,
+      910
+    ],
+    "half_life_candidates": [
+      {
+        "page": 907,
+        "line": "Mean terminal half-life approximately 66 hours",
+        "parsed": {
+          "hours": 66.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 907,
+        "line": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+      }
+    ]
+  },
+  "zaleplon": {
+    "name": "Zaleplon",
+    "pages": [
+      911,
+      914
+    ],
+    "half_life_candidates": [
+      {
+        "page": 912,
+        "line": "Terminal phase elimination half-life approximately 1 hour (ultra-short half-life)",
+        "parsed": {
+          "hours": 1.0
+        }
+      },
+      {
+        "page": 912,
+        "line": "Not generally intended for long-term use • Increased wakefulness during the latter part of the night (wearing off) or an increase in daytime anxiety (rebound) may occur because of short half-life"
+      },
+      {
+        "page": 914,
+        "line": "Popular for uses requiring short half-life (e.g., dosing in the middle of the night, sleeping on airplanes, jet lag)"
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "ziprasidone": {
+    "name": "Ziprasidone",
+    "pages": [
+      915,
+      922
+    ],
+    "half_life_candidates": [
+      {
+        "page": 919,
+        "line": "Mean half-life 6.6 hours",
+        "parsed": {
+          "hours": 6.6
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 916,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 919,
+        "line": "Metabolized by CYP3A4"
+      },
+      {
+        "page": 919,
+        "line": "Little potential to affect metabolism of drugs cleared by CYP enzymes"
+      },
+      {
+        "page": 921,
+        "line": "Head-to-head study in schizophrenia suggests lower metabolic side effects and comparable efficacy compared to some other atypical and conventional antipsychotics"
+      },
+      {
+        "page": 922,
+        "line": "Nasrallah HA Jr. Atypical antipsychoticinduced metabolic side effects: insights from receptor-binding profiles. Mol Psychiatry 2008;13(1):27–35."
+      }
+    ]
+  },
+  "zolpidem": {
+    "name": "Zolpidem",
+    "pages": [
+      923,
+      926
+    ],
+    "half_life_candidates": [
+      {
+        "page": 925,
+        "line": "Short elimination half-life (approximately 2.5 hours)",
+        "parsed": {
+          "hours": 2.5
+        }
+      }
+    ],
+    "metabolite_candidates": []
+  },
+  "zonisamide": {
+    "name": "Zonisamide",
+    "pages": [
+      927,
+      930
+    ],
+    "half_life_candidates": [
+      {
+        "page": 928,
+        "line": "Plasma elimination half-life approximately 63 hours",
+        "parsed": {
+          "hours": 63.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 928,
+        "line": "Metabolized in part by CYP3A4"
+      }
+    ]
+  },
+  "zopiclone": {
+    "name": "Zopiclone",
+    "pages": [
+      931,
+      934
+    ],
+    "half_life_candidates": [
+      {
+        "page": 932,
+        "line": "Terminal elimination half-life approximately 3.5–6.5 hours",
+        "parsed": {
+          "hours": 3.5,
+          "hours_max": 6.5
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 932,
+        "line": "Metabolized by CYP3A4"
+      }
+    ]
+  },
+  "zotepine": {
+    "name": "Zotepine",
+    "pages": [
+      935,
+      940
+    ],
+    "half_life_candidates": [],
+    "metabolite_candidates": [
+      {
+        "page": 936,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 938,
+        "line": "Metabolized by CYP3A4 and CYP1A2"
+      },
+      {
+        "page": 938,
+        "line": "Active metabolite norzotepine"
+      }
+    ]
+  },
+  "zuclopenthixol": {
+    "name": "Zuclopenthixol",
+    "pages": [
+      941,
+      946
+    ],
+    "half_life_candidates": [
+      {
+        "page": 944,
+        "line": "For oral formulation, elimination half-life approximately 20 hours",
+        "parsed": {
+          "hours": 20.0
+        }
+      },
+      {
+        "page": 944,
+        "line": "For acetate, rate-limiting half-life approximately 32 hours",
+        "parsed": {
+          "hours": 32.0
+        }
+      },
+      {
+        "page": 944,
+        "line": "For decanoate, rate-limiting half-life approximately 17–21 days with multiple doses",
+        "parsed": {
+          "hours": 408.0,
+          "hours_max": 504.0
+        }
+      }
+    ],
+    "metabolite_candidates": [
+      {
+        "page": 941,
+        "line": "Consider monitoring fasting triglycerides monthly for several months in patients at high risk for metabolic complications and when initiating or switching antipsychotics"
+      },
+      {
+        "page": 944,
+        "line": "Metabolized by CYP2D6 and CYP3A4"
+      },
+      {
+        "page": 946,
+        "line": "Davies S, Westin A, Castberg I, et al. Characterisation of zuclopenthixol metabolism by in vitro and therapeutic drug monitoring studies. Acta Psychiatr Scand 2010;122(6):444–53."
+      }
+    ]
+  }
+}
