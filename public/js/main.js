@@ -878,6 +878,31 @@ function addLegendItem(container, color, label, line = false) {
   return row;
 }
 
+// Format an elimination half-life ({hours, hours_max?}) into a compact human string,
+// choosing ONE unit (minutes / hours / days) from the largest bound so a range reads
+// in a single unit ("2–3 days", "6–8 h", "45 min"). The data stores canonical hours
+// precisely, so this is the single place the days/h/min choice lives. Returns "" for
+// a missing value. Module-level so BOTH the drug panel (showDrug) and the drugs list
+// (buildDrugLegend) can format T½ the same way.
+function formatHalfLife(hl) {
+  if (!hl || typeof hl.hours !== "number") return "";
+  const lo = hl.hours;
+  const hi = typeof hl.hours_max === "number" ? hl.hours_max : null;
+  const ref = hi != null ? hi : lo; // pick the display unit off the upper bound
+  let div, unit;
+  if (ref < 1) { div = 1 / 60; unit = t("drug.hlMinutes"); }
+  else if (ref < 48) { div = 1; unit = t("drug.hlHours"); }
+  else { div = 24; unit = t("drug.hlDays"); }
+  // Show integers plainly, otherwise one decimal (a near-integer snaps to int).
+  const fmt = (h) => {
+    const v = h / div;
+    return Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
+  };
+  return hi != null && hi !== lo
+    ? `${fmt(lo)}–${fmt(hi)} ${unit}`
+    : `${fmt(lo)} ${unit}`;
+}
+
 /**
  * Build the legend from the live dataset so it can never drift from what is
  * actually drawn. Left/right pairs share a color and are collapsed to a single
@@ -2138,29 +2163,6 @@ function createInfoPanel(data, sourcingModal) {
     return isFinite(p) ? String(parseFloat(p.toPrecision(3))) : "?";
   };
 
-  // Format an elimination half-life ({hours, hours_max?}) into a compact human
-  // string, choosing ONE unit (minutes / hours / days) from the largest bound so a
-  // range reads in a single unit ("2–3 days", "6–8 h", "45 min"). The data stores
-  // canonical hours precisely so this is the only place the days/h/min choice lives.
-  // Returns "" for a missing value.
-  const formatHalfLife = (hl) => {
-    if (!hl || typeof hl.hours !== "number") return "";
-    const lo = hl.hours;
-    const hi = typeof hl.hours_max === "number" ? hl.hours_max : null;
-    const ref = hi != null ? hi : lo; // pick the unit off the upper bound
-    let div, unit;
-    if (ref < 1) { div = 1 / 60; unit = t("drug.hlMinutes"); }
-    else if (ref < 48) { div = 1; unit = t("drug.hlHours"); }
-    else { div = 24; unit = t("drug.hlDays"); }
-    // Show integers plainly, otherwise one decimal (a near-integer snaps to int).
-    const fmt = (h) => {
-      const v = h / div;
-      return Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
-    };
-    return hi != null && hi !== lo
-      ? `${fmt(lo)}–${fmt(hi)} ${unit}`
-      : `${fmt(lo)} ${unit}`;
-  };
 
   // The measured PDSP Ki shown to the right of a binding's source badge: the median
   // value + [min-max] range + human/non-human assay counts, then its own "truth
