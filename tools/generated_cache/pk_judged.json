@@ -1,0 +1,1472 @@
+{
+ "acamprosate": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 16,
+   "quote": "Terminal half-life 20–33 hours",
+   "hours_max": 33.0
+  },
+  "metabolites": []
+ },
+ "agomelatine": {
+  "half_life": {
+   "hours": 1.0,
+   "page": 21,
+   "quote": "Half-life 1–2 hours",
+   "hours_max": 2.0
+  },
+  "metabolites": []
+ },
+ "alprazolam": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 27,
+   "quote": "Elimination half-life 12–15 hours",
+   "hours_max": 15.0
+  },
+  "metabolites": []
+ },
+ "amisulpride": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 34,
+   "quote": "Elimination half-life approximately 12 hours"
+  },
+  "metabolites": []
+ },
+ "amitriptyline": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 41,
+   "quote": "Plasma half-life 10–28 hours",
+   "hours_max": 28.0
+  },
+  "metabolites": [
+   {
+    "name": "Nortriptyline",
+    "page": 41,
+    "quote": "Metabolized to an active metabolite, nortriptyline, which is predominantly a norepinephrine reuptake inhibitor, by demethylation via CYP1A2"
+   }
+  ]
+ },
+ "amoxapine": {
+  "half_life": {
+   "hours": 8.0,
+   "page": 49,
+   "quote": "Half-life of parent drug approximately 8 hours"
+  },
+  "metabolites": [
+   {
+    "name": "7-Hydroxyamoxapine",
+    "page": 49,
+    "quote": "7- and 8-hydroxymetabolites are active and possess serotonin 2A and dopamine 2 antagonist properties, similar to atypical antipsychotics",
+    "half_life": {
+     "hours": 24.0,
+     "page": 49,
+     "quote": "Half-life of the active metabolites approximately 24 hours"
+    }
+   },
+   {
+    "name": "8-Hydroxyamoxapine",
+    "page": 49,
+    "quote": "7- and 8-hydroxymetabolites are active and possess serotonin 2A and dopamine 2 antagonist properties, similar to atypical antipsychotics",
+    "half_life": {
+     "hours": 24.0,
+     "page": 49,
+     "quote": "Half-life of the active metabolites approximately 24 hours"
+    }
+   }
+  ]
+ },
+ "amphetamine_d": {
+  "half_life": {
+   "hours": 9.0,
+   "page": 56,
+   "quote": "Half-life approximately 9–11 hours",
+   "hours_max": 11.0
+  },
+  "metabolites": []
+ },
+ "amphetamine_dl": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 64,
+   "quote": "In adults, half-life for d-amphetamine is 10 hours and for l-amphetamine is 13 hours",
+   "hours_max": 13.0
+  },
+  "metabolites": []
+ },
+ "aripiprazole": {
+  "half_life": {
+   "hours": 75.0,
+   "page": 73,
+   "quote": "Mean elimination half-life 75 hours (aripiprazole) and 94 hours (major metabolite dehydroaripiprazole)"
+  },
+  "metabolites": [
+   {
+    "name": "Dehydroaripiprazole",
+    "page": 73,
+    "quote": "Mean elimination half-life 75 hours (aripiprazole) and 94 hours (major metabolite dehydroaripiprazole)",
+    "half_life": {
+     "hours": 94.0,
+     "page": 73,
+     "quote": "Mean elimination half-life 75 hours (aripiprazole) and 94 hours (major metabolite dehydroaripiprazole)"
+    }
+   }
+  ]
+ },
+ "armodafinil": {
+  "half_life": {
+   "hours": 15.0,
+   "page": 83,
+   "quote": "Elimination half-life approximately 15 hours"
+  },
+  "metabolites": []
+ },
+ "asenapine": {
+  "half_life": {
+   "hours": 13.0,
+   "page": 91,
+   "quote": "Sublingual: half-life 13–39 hours; optimal bioavailability is with sublingual administration (~35%); if food or liquid is consumed within 10 minutes of administration bioavailability decreases to 28%; bioavailability decreases to 2% if swallowed",
+   "hours_max": 39.0
+  },
+  "metabolites": []
+ },
+ "atomoxetine": {
+  "half_life": {
+   "hours": 5.0,
+   "page": 97,
+   "quote": "Half-life approximately 5 hours"
+  },
+  "metabolites": []
+ },
+ "benztropine": {
+  "half_life": {
+   "hours": 36.0,
+   "page": 102,
+   "quote": "Half-life 36 hours, although greatest effect lasts about 6–8 hours"
+  },
+  "metabolites": []
+ },
+ "blonanserin": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 108,
+   "quote": "Elimination half-life 10–16 hours after single dose",
+   "hours_max": 16.0
+  },
+  "metabolites": []
+ },
+ "bremelanotide": {
+  "half_life": {
+   "hours": 2.7,
+   "page": 112,
+   "quote": "Mean terminal half-life approximately 2.7 hours"
+  },
+  "metabolites": []
+ },
+ "brexanolone": {
+  "half_life": {
+   "hours": 9.0,
+   "page": 116,
+   "quote": "Terminal half-life approximately 9 hours"
+  },
+  "metabolites": []
+ },
+ "brexpiprazole": {
+  "half_life": {
+   "hours": 91.0,
+   "page": 123,
+   "quote": "Mean half-life 91 hours (brexpiprazole) and 86 hours (major metabolite DM-3411)"
+  },
+  "metabolites": [
+   {
+    "name": "DM-3411",
+    "page": 123,
+    "quote": "Mean half-life 91 hours (brexpiprazole) and 86 hours (major metabolite DM-3411)",
+    "half_life": {
+     "hours": 86.0,
+     "page": 123,
+     "quote": "Mean half-life 91 hours (brexpiprazole) and 86 hours (major metabolite DM-3411)"
+    }
+   }
+  ]
+ },
+ "buprenorphine": {
+  "half_life": {
+   "hours": 24.0,
+   "page": 130,
+   "quote": "Elimination half-life of sublingual buprenorphine is 24–42 hours",
+   "hours_max": 42.0
+  },
+  "metabolites": []
+ },
+ "bupropion": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 136,
+   "quote": "Parent half-life 10–14 hours",
+   "hours_max": 14.0
+  },
+  "metabolites": [
+   {
+    "name": "6-Hydroxybupropion",
+    "page": 135,
+    "quote": "Patients who do not respond to 450 mg/day should discontinue use or get blood levels of bupropion and its major active metabolite 6-hydroxy-bupropion"
+   }
+  ]
+ },
+ "buspirone": {
+  "half_life": {
+   "hours": 2.0,
+   "page": 140,
+   "quote": "Elimination half-life approximately 2–3 hours",
+   "hours_max": 3.0
+  },
+  "metabolites": []
+ },
+ "carbamazepine": {
+  "half_life": {
+   "hours": 26.0,
+   "page": 149,
+   "quote": "Initial half-life 26–65 hours (35–40 hours for extended-release formulation); half-life 12–17 hours with repeated doses",
+   "hours_max": 65.0
+  },
+  "metabolites": [
+   {
+    "name": "Carbamazepine-10,11-epoxide",
+    "page": 149,
+    "quote": "Active metabolite (carbamazepine-10,11 epoxide)",
+    "half_life": {
+     "hours": 34.0,
+     "page": 149,
+     "quote": "Half-life of active metabolite is approximately 34 hours"
+    }
+   }
+  ]
+ },
+ "cariprazine": {
+  "half_life": {
+   "hours": 48.0,
+   "page": 157,
+   "quote": "Based on the time to reach steady state, the half-life for cariprazine is 2–4 days and for one of its active metabolites, didesmethyl cariprazine (DDCAR), is 1–3 weeks",
+   "hours_max": 96.0
+  },
+  "metabolites": [
+   {
+    "name": "Didesmethyl cariprazine",
+    "page": 157,
+    "quote": "Based on the time to reach steady state, the half-life for cariprazine is 2–4 days and for one of its active metabolites, didesmethyl cariprazine (DDCAR), is 1–3 weeks",
+    "half_life": {
+     "hours": 168.0,
+     "page": 157,
+     "quote": "Based on the time to reach steady state, the half-life for cariprazine is 2–4 days and for one of its active metabolites, didesmethyl cariprazine (DDCAR), is 1–3 weeks",
+     "hours_max": 504.0
+    }
+   }
+  ]
+ },
+ "chlordiazepoxide": {
+  "half_life": {
+   "hours": 24.0,
+   "page": 163,
+   "quote": "Elimination half-life 24–48 hours",
+   "hours_max": 48.0
+  },
+  "metabolites": []
+ },
+ "chlorpromazine": {
+  "half_life": {
+   "hours": 8.0,
+   "page": 170,
+   "quote": "Half-life approximately 8–33 hours",
+   "hours_max": 33.0
+  },
+  "metabolites": []
+ },
+ "citalopram": {
+  "half_life": {
+   "hours": 23.0,
+   "page": 175,
+   "quote": "Parent drug has 23–45-hour half-life",
+   "hours_max": 45.0
+  },
+  "metabolites": []
+ },
+ "clomipramine": {
+  "half_life": {
+   "hours": 17.0,
+   "page": 181,
+   "quote": "Half-life approximately 17–28 hours",
+   "hours_max": 28.0
+  },
+  "metabolites": [
+   {
+    "name": "Desmethylclomipramine",
+    "page": 181,
+    "quote": "Metabolized to an active metabolite, desmethyl-clomipramine, a predominantly norepinephrine reuptake inhibitor, by demethylation via CYP1A2"
+   }
+  ]
+ },
+ "clonazepam": {
+  "half_life": {
+   "hours": 30.0,
+   "page": 189,
+   "quote": "Long half-life compared to other benzodiazepine anxiolytics (elimination half-life approximately 30–40 hours)",
+   "hours_max": 40.0
+  },
+  "metabolites": []
+ },
+ "clonidine": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 195,
+   "quote": "Half-life 12–16 hours",
+   "hours_max": 16.0
+  },
+  "metabolites": []
+ },
+ "clorazepate": {
+  "half_life": {
+   "hours": 40.0,
+   "page": 201,
+   "quote": "Elimination half-life 40–50 hours",
+   "hours_max": 50.0
+  },
+  "metabolites": []
+ },
+ "clozapine": {
+  "half_life": {
+   "hours": 5.0,
+   "page": 210,
+   "quote": "Half-life 5–16 hours",
+   "hours_max": 16.0
+  },
+  "metabolites": []
+ },
+ "cyamemazine": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 218,
+   "quote": "Half-life 10 hours"
+  },
+  "metabolites": []
+ },
+ "daridorexant": {
+  "half_life": {
+   "hours": 8.0,
+   "page": 222,
+   "quote": "Terminal half-life 8 hours"
+  },
+  "metabolites": []
+ },
+ "desipramine": {
+  "half_life": {
+   "hours": 24.0,
+   "page": 227,
+   "quote": "Half-life approximately 24 hours"
+  },
+  "metabolites": []
+ },
+ "desvenlafaxine": {
+  "half_life": {
+   "hours": 9.0,
+   "page": 235,
+   "quote": "Half-life 9–13 hours",
+   "hours_max": 13.0
+  },
+  "metabolites": []
+ },
+ "deutetrabenazine": {
+  "half_life": {
+   "hours": 9.0,
+   "page": 241,
+   "quote": "Half-life of total (α + β)dihydrotetrabenazine from deutetrabenazine is approximately 9 to 10 hours",
+   "hours_max": 10.0
+  },
+  "metabolites": []
+ },
+ "dexmedetomidine": {
+  "half_life": {
+   "hours": 2.8,
+   "page": 244,
+   "quote": "Mean terminal half-life approximately 2.8 hours following sublingual or buccal administration"
+  },
+  "metabolites": []
+ },
+ "dextromethorphanbupropion": {
+  "half_life": {
+   "hours": 22.0,
+   "page": 249,
+   "quote": "Mean elimination half-life of dextromethorphan/bupropion is 22 hours and 15 hours, respectively"
+  },
+  "metabolites": []
+ },
+ "dextromethorphanquinidine": {
+  "half_life": {
+   "hours": 13.0,
+   "page": 254,
+   "quote": "Elimination half-life of dextromethorphan is approximately 13 hours"
+  },
+  "metabolites": []
+ },
+ "diazepam": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 259,
+   "quote": "Elimination half-life 20–50 hours",
+   "hours_max": 50.0
+  },
+  "metabolites": []
+ },
+ "diphenhydramine": {
+  "half_life": {
+   "hours": 8.0,
+   "page": 264,
+   "quote": "Plasma half-life approximately 8 hours; may be longer in children and in the elderly"
+  },
+  "metabolites": []
+ },
+ "disulfiram": {
+  "half_life": {
+   "hours": 60.0,
+   "page": 268,
+   "quote": "Half-life of parent drug is 60–120 hours",
+   "hours_max": 120.0
+  },
+  "metabolites": [
+   {
+    "name": "Diethyldithiocarbamate",
+    "page": 268,
+    "quote": "Half-life of metabolites is 13.9 hours (diethyldithiocarbamate) and 8.9 hours (carbon disulfide)",
+    "half_life": {
+     "hours": 13.9,
+     "page": 268,
+     "quote": "Half-life of metabolites is 13.9 hours (diethyldithiocarbamate) and 8.9 hours (carbon disulfide)"
+    }
+   },
+   {
+    "name": "Carbon disulfide",
+    "page": 267,
+    "quote": "One of disulfiram’s metabolites is carbon disulfide, which may be excreted through the lungs; this could account for the side effect of metallic taste",
+    "half_life": {
+     "hours": 8.9,
+     "page": 268,
+     "quote": "Half-life of metabolites is 13.9 hours (diethyldithiocarbamate) and 8.9 hours (carbon disulfide)"
+    }
+   }
+  ]
+ },
+ "donepezil": {
+  "half_life": {
+   "hours": 70.0,
+   "page": 273,
+   "quote": "Elimination half-life is approximately 70 hours for oral formulation and 91 hours for transdermal system"
+  },
+  "metabolites": []
+ },
+ "dothiepin": {
+  "half_life": {
+   "hours": 14.0,
+   "page": 279,
+   "quote": "Half-life approximately 14–40 hours",
+   "hours_max": 40.0
+  },
+  "metabolites": []
+ },
+ "doxepin": {
+  "half_life": {
+   "hours": 8.0,
+   "page": 286,
+   "quote": "Half-life approximately 8–24 hours",
+   "hours_max": 24.0
+  },
+  "metabolites": []
+ },
+ "duloxetine": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 294,
+   "quote": "Elimination half-life approximately 12 hours"
+  },
+  "metabolites": []
+ },
+ "escitalopram": {
+  "half_life": {
+   "hours": 27.0,
+   "page": 299,
+   "quote": "Mean terminal half-life 27–32 hours",
+   "hours_max": 32.0
+  },
+  "metabolites": []
+ },
+ "esketamine": {
+  "half_life": {
+   "hours": 7.0,
+   "page": 305,
+   "quote": "Mean terminal half-life 7–12 hours",
+   "hours_max": 12.0
+  },
+  "metabolites": []
+ },
+ "estazolam": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 310,
+   "quote": "Half-life 10–24 hours",
+   "hours_max": 24.0
+  },
+  "metabolites": []
+ },
+ "eszopiclone": {
+  "half_life": {
+   "hours": 6.0,
+   "page": 314,
+   "quote": "Terminal elimination half-life approximately 6 hours"
+  },
+  "metabolites": []
+ },
+ "flibanserin": {
+  "half_life": {
+   "hours": 11.0,
+   "page": 318,
+   "quote": "Mean terminal half-life approximately 11 hours"
+  },
+  "metabolites": []
+ },
+ "flumazenil": {
+  "half_life": {
+   "hours": 0.683,
+   "page": 322,
+   "quote": "Terminal half-life 41–79 minutes",
+   "hours_max": 1.317
+  },
+  "metabolites": []
+ },
+ "flunitrazepam": {
+  "half_life": {
+   "hours": 16.0,
+   "page": 326,
+   "quote": "Elimination half-life 16–35 hours",
+   "hours_max": 35.0
+  },
+  "metabolites": []
+ },
+ "fluoxetine": {
+  "half_life": {
+   "hours": 48.0,
+   "page": 331,
+   "quote": "Parent drug has 2–3-day half-life",
+   "hours_max": 72.0
+  },
+  "metabolites": [
+   {
+    "name": "Norfluoxetine",
+    "page": 331,
+    "quote": "Active metabolite (norfluoxetine) has 2-week half-life",
+    "half_life": {
+     "hours": 336.0,
+     "page": 331,
+     "quote": "Active metabolite (norfluoxetine) has 2-week half-life"
+    }
+   }
+  ]
+ },
+ "flupenthixol": {
+  "half_life": {
+   "hours": 192.0,
+   "page": 337,
+   "quote": "Intramuscular: rate-limiting half-life approximately 8 days with single dose, approximately 17 days with multiple doses"
+  },
+  "metabolites": []
+ },
+ "fluphenazine": {
+  "half_life": {
+   "hours": 15.0,
+   "page": 343,
+   "quote": "Mean half-life of oral formulation approximately 15 hours"
+  },
+  "metabolites": []
+ },
+ "flurazepam": {
+  "half_life": {
+   "hours": 24.0,
+   "page": 350,
+   "quote": "Elimination half-life approximately 24–100 hours",
+   "hours_max": 100.0
+  },
+  "metabolites": []
+ },
+ "fluvoxamine": {
+  "half_life": {
+   "hours": 9.0,
+   "page": 355,
+   "quote": "Parent drug has 9–28 hour half-life",
+   "hours_max": 28.0
+  },
+  "metabolites": []
+ },
+ "gabapentin": {
+  "half_life": {
+   "hours": 5.0,
+   "page": 361,
+   "quote": "Elimination half-life approximately 5–7 hours",
+   "hours_max": 7.0
+  },
+  "metabolites": []
+ },
+ "galantamine": {
+  "half_life": {
+   "hours": 7.0,
+   "page": 366,
+   "quote": "Terminal elimination half-life approximately 7 hours"
+  },
+  "metabolites": []
+ },
+ "haloperidol": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 378,
+   "quote": "Oral half-life approximately 12–38 hours",
+   "hours_max": 38.0
+  },
+  "metabolites": []
+ },
+ "hydroxyzine": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 384,
+   "quote": "Mean elimination half-life approximately 20 hours"
+  },
+  "metabolites": []
+ },
+ "iloperidone": {
+  "half_life": {
+   "hours": 18.0,
+   "page": 390,
+   "quote": "Half-life 18–33 hours",
+   "hours_max": 33.0
+  },
+  "metabolites": []
+ },
+ "imipramine": {
+  "metabolites": [
+   {
+    "name": "Desipramine",
+    "page": 397,
+    "quote": "Metabolized to an active metabolite, desipramine, a predominantly norepinephrine reuptake inhibitor, by demethylation via CYP1A2"
+   }
+  ]
+ },
+ "ketamine": {
+  "half_life": {
+   "hours": 2.5,
+   "page": 413,
+   "quote": "Plasma half-life: alpha: 10–15 minutes; beta: 2.5 hours; 1–3 hours intramuscular; 2.5–3 hours orally; 12 hours norketamine",
+   "hours_max": 0.25
+  },
+  "metabolites": []
+ },
+ "lamotrigine": {
+  "half_life": {
+   "hours": 33.0,
+   "page": 418,
+   "quote": "Elimination half-life in healthy volunteers approximately 33 hours after a single dose of lamotrigine"
+  },
+  "metabolites": []
+ },
+ "lemborexant": {
+  "half_life": {
+   "hours": 52.8,
+   "page": 424,
+   "quote": "Terminal elimination half-life 52.8 hours; effective half-life 17–29 hours"
+  },
+  "metabolites": []
+ },
+ "levetiracetam": {
+  "half_life": {
+   "hours": 6.0,
+   "page": 428,
+   "quote": "Elimination half-life approximately 6–8 hours",
+   "hours_max": 8.0
+  },
+  "metabolites": []
+ },
+ "levomilnacipran": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 433,
+   "quote": "Terminal elimination half-life approximately 12 hours"
+  },
+  "metabolites": []
+ },
+ "lofepramine": {
+  "half_life": {
+   "hours": 1.5,
+   "page": 451,
+   "quote": "Half-life of parent compound approximately 1.5–6 hours",
+   "hours_max": 6.0
+  },
+  "metabolites": [
+   {
+    "name": "Desipramine",
+    "page": 451,
+    "quote": "Major metabolite is the antidepressant desipramine, with a half-life of approximately 24 hours"
+   }
+  ]
+ },
+ "lofexidine": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 456,
+   "quote": "Elimination half-life approximately 12 hours"
+  },
+  "metabolites": []
+ },
+ "loflazepate": {
+  "half_life": {
+   "hours": 122.0,
+   "page": 461,
+   "quote": "Elimination half-life approximately 122 hours (ultra-long half-life)"
+  },
+  "metabolites": []
+ },
+ "lorazepam": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 467,
+   "quote": "Elimination half-life 10–20 hours",
+   "hours_max": 20.0
+  },
+  "metabolites": []
+ },
+ "loxapine": {
+  "half_life": {
+   "hours": 4.0,
+   "page": 474,
+   "quote": "Half-life approximately 4 hours for oral formulation"
+  },
+  "metabolites": [
+   {
+    "name": "Amoxapine",
+    "page": 476,
+    "quote": "One active metabolite is an antidepressant (amoxapine, also known as _N_ -desmethylloxapine)"
+   }
+  ]
+ },
+ "lumateperone": {
+  "half_life": {
+   "hours": 18.0,
+   "page": 482,
+   "quote": "Terminal half-life approximately 18 hours after intravenous administration"
+  },
+  "metabolites": []
+ },
+ "lurasidone": {
+  "half_life": {
+   "hours": 18.0,
+   "page": 491,
+   "quote": "Half-life 18–31 hours (shorter half-life better documented at the 40 mg dose)",
+   "hours_max": 31.0
+  },
+  "metabolites": []
+ },
+ "maprotiline": {
+  "half_life": {
+   "hours": 51.0,
+   "page": 497,
+   "quote": "Mean half-life approximately 51 hours"
+  },
+  "metabolites": []
+ },
+ "memantine": {
+  "half_life": {
+   "hours": 60.0,
+   "page": 504,
+   "quote": "Terminal elimination half-life approximately 60–80 hours",
+   "hours_max": 80.0
+  },
+  "metabolites": []
+ },
+ "methylfolate_l": {
+  "half_life": {
+   "hours": 3.0,
+   "page": 508,
+   "quote": "Mean elimination half-life approximately 3 hours for d,l-methylfolate"
+  },
+  "metabolites": []
+ },
+ "methylphenidate_d": {
+  "half_life": {
+   "hours": 2.2,
+   "page": 513,
+   "quote": "Mean plasma elimination half-life approximately 2.2 hours (same as d,lmethylphenidate)"
+  },
+  "metabolites": []
+ },
+ "methylphenidate_dl": {
+  "half_life": {
+   "hours": 3.5,
+   "page": 521,
+   "quote": "Average half-life of methylphenidate in adults is 3.5 hours (1.3–7.7 hours)"
+  },
+  "metabolites": []
+ },
+ "mianserin": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 527,
+   "quote": "Half-life 12–29 hours",
+   "hours_max": 29.0
+  },
+  "metabolites": []
+ },
+ "midazolam": {
+  "half_life": {
+   "hours": 1.8,
+   "page": 530,
+   "quote": "Elimination half-life 1.8–6.4 hours • Active metabolite",
+   "hours_max": 6.4
+  },
+  "metabolites": []
+ },
+ "milnacipran": {
+  "half_life": {
+   "hours": 8.0,
+   "page": 536,
+   "quote": "Half-life 8 hours"
+  },
+  "metabolites": []
+ },
+ "mirtazapine": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 541,
+   "quote": "Half-life 20–40 hours",
+   "hours_max": 40.0
+  },
+  "metabolites": []
+ },
+ "moclobemide": {
+  "half_life": {
+   "hours": 1.0,
+   "page": 546,
+   "quote": "Elimination half-life approximately 1–4 hours",
+   "hours_max": 4.0
+  },
+  "metabolites": []
+ },
+ "modafinil": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 553,
+   "quote": "Elimination half-life 10–12 hours",
+   "hours_max": 12.0
+  },
+  "metabolites": []
+ },
+ "molindone": {
+  "half_life": {
+   "hours": 1.5,
+   "page": 559,
+   "quote": "Half-life approximately 1.5 hours"
+  },
+  "metabolites": []
+ },
+ "nalmefene": {
+  "half_life": {
+   "hours": 12.5,
+   "page": 564,
+   "quote": "Extensively metabolized by the liver • Terminal half-life is 12.5 hours"
+  },
+  "metabolites": []
+ },
+ "naltrexone": {
+  "half_life": {
+   "hours": 13.0,
+   "page": 568,
+   "quote": "Elimination half-life of oral naltrexone is approximately 13 hours"
+  },
+  "metabolites": []
+ },
+ "nefazodone": {
+  "half_life": {
+   "hours": 2.0,
+   "page": 579,
+   "quote": "Half-life of parent compound is 2–4 hours",
+   "hours_max": 4.0
+  },
+  "metabolites": [
+   {
+    "name": "Meta-chlorophenylpiperazine",
+    "page": 578,
+    "quote": "A metabolite of nefazodone, mCPP (metachloro-phenyl-piperazine), can cause side effects if its levels rise significantly",
+    "half_life": {
+     "hours": 12.0,
+     "page": 579,
+     "quote": "Half-life of active mebatolites up to 12 hours"
+    }
+   }
+  ]
+ },
+ "nortriptyline": {
+  "half_life": {
+   "hours": 36.0,
+   "page": 585,
+   "quote": "Half-life approximately 36 hours"
+  },
+  "metabolites": []
+ },
+ "olanzapine": {
+  "half_life": {
+   "hours": 21.0,
+   "page": 595,
+   "quote": "Parent drug has 21–54-hour half-life",
+   "hours_max": 54.0
+  },
+  "metabolites": []
+ },
+ "olanzapinesamidorphan": {
+  "half_life": {
+   "hours": 35.0,
+   "page": 604,
+   "quote": "Olanzapine metabolites are inactive; parent drug has 35–52-hour half-life",
+   "hours_max": 52.0
+  },
+  "metabolites": [
+   {
+    "name": "N-dealkylated samidorphan",
+    "page": 604,
+    "quote": "Samidorphan metabolites N-dealkylated and N-oxide function as a mu opioid receptor"
+   },
+   {
+    "name": "Samidorphan N-oxide",
+    "page": 604,
+    "quote": "Samidorphan metabolites N-dealkylated and N-oxide function as a mu opioid receptor"
+   }
+  ]
+ },
+ "oxazepam": {
+  "half_life": {
+   "hours": 3.0,
+   "page": 611,
+   "quote": "Elimination half-life 3–21 hours",
+   "hours_max": 21.0
+  },
+  "metabolites": []
+ },
+ "oxcarbazepine": {
+  "half_life": {
+   "hours": 2.0,
+   "page": 617,
+   "quote": "Half-life of parent drug is approximately 2 hours; half-life of MHD is approximately 9 hours; thus oxcarbazepine is essentially a prodrug rapidly converted to its MHD, licarbazepine"
+  },
+  "metabolites": [
+   {
+    "name": "Licarbazepine",
+    "page": 617,
+    "quote": "This main active metabolite is sometimes called the monohydroxy derivative or MHD, and is also known as licarbazepine",
+    "half_life": {
+     "hours": 9.0,
+     "page": 617,
+     "quote": "Half-life of parent drug is approximately 2 hours; half-life of MHD is approximately 9 hours; thus oxcarbazepine is essentially a prodrug rapidly converted to its MHD, licarbazepine"
+    }
+   }
+  ]
+ },
+ "paliperidone": {
+  "half_life": {
+   "hours": 23.0,
+   "page": 624,
+   "quote": "Half-life approximately 23 hours"
+  },
+  "metabolites": []
+ },
+ "paroxetine": {
+  "half_life": {
+   "hours": 24.0,
+   "page": 636,
+   "quote": "Half-life approximately 24 hours"
+  },
+  "metabolites": []
+ },
+ "perphenazine": {
+  "half_life": {
+   "hours": 9.5,
+   "page": 649,
+   "quote": "Half-life approximately 9.5 hours"
+  },
+  "metabolites": []
+ },
+ "phenterminetopiramate": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 661,
+   "quote": "Phentermine mean terminal half-life approximately 20 hours"
+  },
+  "metabolites": []
+ },
+ "pimavanserin": {
+  "half_life": {
+   "hours": 57.0,
+   "page": 666,
+   "quote": "Mean half-life 57 hours (pimavanserin) and 200 hours (active metabolite N-desmethylated metabolite)"
+  },
+  "metabolites": [
+   {
+    "name": "N-Desmethylpimavanserin",
+    "page": 666,
+    "quote": "Mean half-life 57 hours (pimavanserin) and 200 hours (active metabolite N-desmethylated metabolite)",
+    "half_life": {
+     "hours": 200.0,
+     "page": 666,
+     "quote": "Mean half-life 57 hours (pimavanserin) and 200 hours (active metabolite N-desmethylated metabolite)"
+    }
+   }
+  ]
+ },
+ "pimozide": {
+  "half_life": {
+   "hours": 55.0,
+   "page": 671,
+   "quote": "Mean elimination half-life approximately 55 hours"
+  },
+  "metabolites": []
+ },
+ "pitolisant": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 682,
+   "quote": "Median half-life approximately 20 hours"
+  },
+  "metabolites": []
+ },
+ "prazosin": {
+  "half_life": {
+   "hours": 2.0,
+   "page": 686,
+   "quote": "• Elimination half-life 2–3 hours",
+   "hours_max": 3.0
+  },
+  "metabolites": []
+ },
+ "pregabalin": {
+  "half_life": {
+   "hours": 5.0,
+   "page": 691,
+   "quote": "Elimination half-life approximately 5–7 hours",
+   "hours_max": 7.0
+  },
+  "metabolites": []
+ },
+ "propranolol": {
+  "half_life": {
+   "hours": 3.0,
+   "page": 697,
+   "quote": "Half-life 3–5 hours (immediate-release) or 8–11 hours (extended-release)",
+   "hours_max": 5.0
+  },
+  "metabolites": []
+ },
+ "protriptyline": {
+  "half_life": {
+   "hours": 74.0,
+   "page": 701,
+   "quote": "Half-life approximately 74 hours"
+  },
+  "metabolites": []
+ },
+ "quazepam": {
+  "half_life": {
+   "hours": 25.0,
+   "page": 706,
+   "quote": "Half-life 25–41 hours",
+   "hours_max": 41.0
+  },
+  "metabolites": []
+ },
+ "quetiapine": {
+  "half_life": {
+   "hours": 6.0,
+   "page": 713,
+   "quote": "Parent drug has 6–7-hour half-life",
+   "hours_max": 7.0
+  },
+  "metabolites": [
+   {
+    "name": "Norquetiapine",
+    "page": 713,
+    "quote": "Quetiapine XR may theoretically generate increased concentrations of active metabolite norquetiapine, with theoretically improved profile for affective and anxiety disorders"
+   }
+  ]
+ },
+ "ramelteon": {
+  "half_life": {
+   "hours": 1.0,
+   "page": 718,
+   "quote": "Mean elimination half-life of parent drug 1–2.6 hours",
+   "hours_max": 2.6
+  },
+  "metabolites": [
+   {
+    "name": "M-II",
+    "page": 718,
+    "quote": "Mean elimination half-life of major metabolite, M-II, is 2–5 hours"
+   }
+  ]
+ },
+ "reboxetine": {
+  "half_life": {
+   "hours": 13.0,
+   "page": 723,
+   "quote": "Elimination half-life approximately 13 hours"
+  },
+  "metabolites": []
+ },
+ "risperidone": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 731,
+   "quote": "Parent drug of oral formulation has 20–24hour half-life",
+   "hours_max": 24.0
+  },
+  "metabolites": [
+   {
+    "name": "Paliperidone",
+    "page": 736,
+    "quote": "Concomitant use with paliperidone ER is not recommended; paliperidone ER is the active metabolite of risperidone, and the combination of the two may lead to additive active antipsychotic fraction exposure"
+   }
+  ]
+ },
+ "rivastigmine": {
+  "half_life": {
+   "hours": 1.0,
+   "page": 741,
+   "quote": "Elimination half-life 1–2 hours",
+   "hours_max": 2.0
+  },
+  "metabolites": []
+ },
+ "selegiline": {
+  "half_life": {
+   "hours": 10.0,
+   "page": 748,
+   "quote": "Steady-state mean elimination half-life of oral selegiline is approximately 10 hours"
+  },
+  "metabolites": [
+   {
+    "name": "Desmethylselegiline",
+    "page": 748,
+    "quote": "Major metabolite of selegiline is desmethylselegiline; other metabolites are l-methamphetamine and l-amphetamine"
+   },
+   {
+    "name": "L-Amphetamine",
+    "page": 748,
+    "quote": "Major metabolite of selegiline is desmethylselegiline; other metabolites are l-methamphetamine and l-amphetamine"
+   },
+   {
+    "name": "L-Methamphetamine",
+    "page": 748,
+    "quote": "Major metabolite of selegiline is desmethylselegiline; other metabolites are l-methamphetamine and l-amphetamine"
+   }
+  ]
+ },
+ "serdexmethylphenidate": {
+  "half_life": {
+   "hours": 5.7,
+   "page": 757,
+   "quote": "Mean plasma elimination halflife approximately 5.7 hours (serdexmethylphenidate) and 11.7 hours (d-methylphenidate)"
+  },
+  "metabolites": []
+ },
+ "sertindole": {
+  "half_life": {
+   "hours": 72.0,
+   "page": 764,
+   "quote": "Terminal half-life approximately 3 days"
+  },
+  "metabolites": []
+ },
+ "sertraline": {
+  "half_life": {
+   "hours": 22.0,
+   "page": 770,
+   "quote": "Parent drug has 22–36-hour half-life",
+   "hours_max": 36.0
+  },
+  "metabolites": []
+ },
+ "sildenafil": {
+  "half_life": {
+   "hours": 4.0,
+   "page": 776,
+   "quote": "Parent drug and its active metabolite have ~4-hour terminal half-lives"
+  },
+  "metabolites": []
+ },
+ "sodium_oxybate": {
+  "half_life": {
+   "hours": 0.5,
+   "page": 781,
+   "quote": "Elimination half-life approximately 30–60 minutes",
+   "hours_max": 1.0
+  },
+  "metabolites": []
+ },
+ "solriamfetol": {
+  "half_life": {
+   "hours": 7.1,
+   "page": 784,
+   "quote": "Mean elimination half-life approximately 7.1 hours"
+  },
+  "metabolites": []
+ },
+ "sulpiride": {
+  "half_life": {
+   "hours": 6.0,
+   "page": 789,
+   "quote": "Elimination half-life approximately 6–8 hours",
+   "hours_max": 8.0
+  },
+  "metabolites": []
+ },
+ "suvorexant": {
+  "half_life": {
+   "hours": 12.0,
+   "page": 794,
+   "quote": "Mean terminal half-life approximately 12 hours"
+  },
+  "metabolites": []
+ },
+ "tasimelteon": {
+  "half_life": {
+   "hours": 1.3,
+   "page": 798,
+   "quote": "Mean elimination half-life 1.3 hours"
+  },
+  "metabolites": []
+ },
+ "temazepam": {
+  "half_life": {
+   "hours": 8.0,
+   "page": 802,
+   "quote": "Half-life approximately 8–15 hours",
+   "hours_max": 15.0
+  },
+  "metabolites": []
+ },
+ "thiothixene": {
+  "half_life": {
+   "hours": 34.0,
+   "page": 813,
+   "quote": "Terminal elimination half-life approximately 34 hours"
+  },
+  "metabolites": []
+ },
+ "tiagabine": {
+  "half_life": {
+   "hours": 7.0,
+   "page": 819,
+   "quote": "Half-life approximately 7–9 hours",
+   "hours_max": 9.0
+  },
+  "metabolites": []
+ },
+ "tianeptine": {
+  "half_life": {
+   "hours": 2.5,
+   "page": 824,
+   "quote": "Half-life approximately 2.5 hours"
+  },
+  "metabolites": []
+ },
+ "topiramate": {
+  "half_life": {
+   "hours": 21.0,
+   "page": 829,
+   "quote": "Elimination half-life approximately 21 hours"
+  },
+  "metabolites": []
+ },
+ "trazodone": {
+  "half_life": {
+   "hours": 5.0,
+   "page": 841,
+   "quote": "Half-life is biphasic; first phase is approximately 3–6 hours; second phase is approximately 5–9 hours",
+   "hours_max": 9.0
+  },
+  "metabolites": []
+ },
+ "triazolam": {
+  "half_life": {
+   "hours": 1.5,
+   "page": 846,
+   "quote": "Half-life 1.5–5.5 hours",
+   "hours_max": 5.5
+  },
+  "metabolites": []
+ },
+ "trifluoperazine": {
+  "half_life": {
+   "hours": 12.5,
+   "page": 851,
+   "quote": "Mean elimination half-life approximately 12.5 hours"
+  },
+  "metabolites": []
+ },
+ "trihexyphenidyl": {
+  "half_life": {
+   "hours": 6.0,
+   "page": 856,
+   "quote": "Half-life 6–10 hours; time to peak effect is 1–1.3 hours",
+   "hours_max": 10.0
+  },
+  "metabolites": []
+ },
+ "triiodothyronine": {
+  "half_life": {
+   "hours": 60.0,
+   "page": 860,
+   "quote": "Half-life approximately 2.5 days"
+  },
+  "metabolites": []
+ },
+ "trimipramine": {
+  "half_life": {
+   "hours": 7.0,
+   "page": 865,
+   "quote": "Half-life approximately 7–23 hours",
+   "hours_max": 23.0
+  },
+  "metabolites": []
+ },
+ "valbenazine": {
+  "metabolites": [
+   {
+    "name": "(+)-alpha-Dihydrotetrabenazine",
+    "page": 872,
+    "quote": "Valbenazine is extensively metabolized by hydrolysis of the valine ester to form the active metabolite ([+]-α-dihydrotetrabenazine [HTBZ])"
+   }
+  ]
+ },
+ "valproate": {
+  "half_life": {
+   "hours": 9.0,
+   "page": 877,
+   "quote": "Mean terminal half-life 9–16 hours",
+   "hours_max": 16.0
+  },
+  "metabolites": []
+ },
+ "varenicline": {
+  "half_life": {
+   "hours": 24.0,
+   "page": 884,
+   "quote": "Elimination half-life 24 hours"
+  },
+  "metabolites": []
+ },
+ "venlafaxine": {
+  "half_life": {
+   "hours": 3.0,
+   "page": 890,
+   "quote": "Parent drug has 3–7-hour half-life",
+   "hours_max": 7.0
+  },
+  "metabolites": [
+   {
+    "name": "O-desmethylvenlafaxine",
+    "page": 889,
+    "quote": "Venlafaxine has an active metabolite O-desmethylvenlafaxine (ODV), which is formed as the result of CYP2D6",
+    "half_life": {
+     "hours": 9.0,
+     "page": 890,
+     "quote": "Active metabolite has 9–13-hour half-life",
+     "hours_max": 13.0
+    }
+   }
+  ]
+ },
+ "vilazodone": {
+  "half_life": {
+   "hours": 25.0,
+   "page": 895,
+   "quote": "Mean terminal half-life 25 hours"
+  },
+  "metabolites": []
+ },
+ "viloxazine": {
+  "half_life": {
+   "hours": 7.0,
+   "page": 901,
+   "quote": "Half-life approximately 7 hours"
+  },
+  "metabolites": []
+ },
+ "vortioxetine": {
+  "half_life": {
+   "hours": 66.0,
+   "page": 907,
+   "quote": "Mean terminal half-life approximately 66 hours"
+  },
+  "metabolites": []
+ },
+ "zaleplon": {
+  "half_life": {
+   "hours": 1.0,
+   "page": 912,
+   "quote": "Terminal phase elimination half-life approximately 1 hour (ultra-short half-life)"
+  },
+  "metabolites": []
+ },
+ "ziprasidone": {
+  "half_life": {
+   "hours": 6.6,
+   "page": 919,
+   "quote": "Mean half-life 6.6 hours"
+  },
+  "metabolites": []
+ },
+ "zolpidem": {
+  "half_life": {
+   "hours": 2.5,
+   "page": 925,
+   "quote": "Short elimination half-life (approximately 2.5 hours)"
+  },
+  "metabolites": []
+ },
+ "zonisamide": {
+  "half_life": {
+   "hours": 63.0,
+   "page": 928,
+   "quote": "Plasma elimination half-life approximately 63 hours"
+  },
+  "metabolites": []
+ },
+ "zopiclone": {
+  "half_life": {
+   "hours": 3.5,
+   "page": 932,
+   "quote": "Terminal elimination half-life approximately 3.5–6.5 hours",
+   "hours_max": 6.5
+  },
+  "metabolites": []
+ },
+ "zotepine": {
+  "metabolites": [
+   {
+    "name": "Norzotepine",
+    "page": 938,
+    "quote": "Active metabolite norzotepine"
+   }
+  ]
+ },
+ "zuclopenthixol": {
+  "half_life": {
+   "hours": 20.0,
+   "page": 944,
+   "quote": "For oral formulation, elimination half-life approximately 20 hours"
+  },
+  "metabolites": []
+ }
+}
