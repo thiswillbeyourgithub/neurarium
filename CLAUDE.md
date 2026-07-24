@@ -536,7 +536,12 @@ fixed Stahl list.
   confirmed own-articles; others fall back to the parent article for prose only, mention-filtered so a
   parent-only claim can't leak) into `metabolite_bindings_worklist.json`; one LLM pass writes
   `metabolite_bindings_judged.json`; `tools/sourcing/apply_metabolite_bindings.py` quote-gates + merges
-  into `drugs_data.jsonl` (idempotent, sole writer of a metabolite's bindings).
+  into `drugs_data.jsonl` (idempotent, sole writer of a metabolite's bindings). **Shared metabolite:** one
+  metabolite can be produced by several modeled drugs (desipramine by imipramine + lofepramine, mCPP by
+  nefazodone + trazodone), so it appears once under each parent; its bindings are a property of the
+  molecule, so the applier keys by metabolite name and writes an **identical** list to each parent, the
+  tally + viewer dedup it by folded name (counted / listed once, "metab. of A, B"), and `check_data` fails
+  loud if two parents' inline copies ever diverge (a hand-edit backstop).
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
   median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
   assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as
