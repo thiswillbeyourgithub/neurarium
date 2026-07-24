@@ -91,6 +91,7 @@ KIND_LABELS = {
     "drug_categories": "Drug class",
     "drug_half_life": "Drug half-life (T½)",
     "drug_metabolites": "Drug active metabolites",
+    "drug_metabolite_bindings": "Drug metabolite bindings",
     "projections": "Neuron pathways",
     "circuits": "Functional circuits",
     "projection_groups": "Projection groups",

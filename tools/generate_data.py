@@ -765,10 +765,12 @@ def _drug_metabolites(drug_id: str, metabolites: Any,
       cross-checked in check_data.py (which holds every drug id).
     - ``half_life`` is the metabolite's own elimination T½ (canonical hours), graded
       by its ``half_life_sources``.
-    - ``bindings`` are inline receptor bindings for a NON-drug metabolite. Deferred to
-      a later Wikipedia/PDSP pass (usually empty now), but validated like a drug
-      binding when present, so the receptor "Interacting drugs" list can attribute
-      them as "<name> (metab. of <drug>)".
+    - ``bindings`` are inline receptor bindings for a NON-drug metabolite, sourced from
+      the metabolite's own Wikipedia pharmacology by ``apply_metabolite_bindings.py``
+      (corpus #9, target + action + Ki, PDSP Ki preferred). Validated + Ki-normalized
+      exactly like a drug binding, so the receptor "Interacting drugs" list attributes
+      them as "<name> (metab. of <drug>)". Empty for a metabolite Wikipedia does not
+      cover.
     - ``sources`` grades the "<name> is an active metabolite of <drug_id>" identity
       claim (kind ``drug_metabolites``); a metabolite with no source is NOSOURCE.
 
@@ -802,8 +804,12 @@ def _drug_metabolites(drug_id: str, metabolites: Any,
                                         f"{label} half_life")
             if hl_sources:
                 rec["half_life_sources"] = hl_sources
+        # with_ki=True: a non-modeled metabolite's bindings carry their own measured/
+        # literature Ki (PDSP or Wikipedia), authored by apply_metabolite_bindings.py,
+        # exactly like a drug binding. owner_id is the parent drug id, used only in Ki
+        # error messages (the Ki itself is already resolved onto the authored binding).
         m_bindings = [_normalize_binding(b, valid_targets, owner_id=drug_id,
-                                         owner_label=label, with_ki=False)
+                                         owner_label=label, with_ki=True)
                       for b in m.get("bindings") or []]
         if m_bindings:
             rec["bindings"] = m_bindings

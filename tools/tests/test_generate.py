@@ -192,6 +192,33 @@ class MetaAndTranslationsTest(unittest.TestCase):
         meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
         self.assertIn("provenance_stats", meta)
 
+    def test_metabolite_bindings_are_tallied_and_valid(self):
+        """A non-modeled metabolite's receptor bindings are their own graded node kind
+        (drug_metabolite_bindings), and each targets a real drug_target with a valid
+        net effect, exactly like a drug binding."""
+        meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+        valid_targets = set(meta["drug_targets"].keys())
+        drugs = [json.loads(l) for l in
+                 (DATA_DIR / "drugs.jsonl").read_text(encoding="utf-8").splitlines() if l]
+        n_bindings = 0
+        for d in drugs:
+            for m in d.get("metabolites", []):
+                for b in m.get("bindings", []):
+                    n_bindings += 1
+                    self.assertIn(b["target"], valid_targets,
+                                  f"{m['name']} binding hits unknown target {b['target']}")
+                    # An action binding names a functional action (the viewer derives the
+                    # net effect from it); an affinity-only one carries only a Ki.
+                    if b.get("affinity_only"):
+                        self.assertIn("ki", b,
+                                      f"{m['name']} affinity-only binding lacks a Ki")
+                    else:
+                        self.assertTrue(b.get("action"),
+                                        f"{m['name']} action binding lacks an action")
+        kind = meta["provenance_stats"]["by_kind"].get("drug_metabolite_bindings", {})
+        self.assertEqual(kind.get("total", 0), n_bindings,
+                         "drug_metabolite_bindings tally != emitted metabolite bindings")
+
     def test_translations_nonempty_and_deduped(self):
         tr = json.loads(
             (DATA_DIR / "translations.fr.json").read_text(encoding="utf-8")

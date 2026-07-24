@@ -642,7 +642,7 @@ def print_coverage(stats):
     a = stats.get("nodes", {})
     # The node kinds folded into the headline, in the generator's order.
     node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
-                  "drug_half_life", "drug_metabolites",
+                  "drug_half_life", "drug_metabolites", "drug_metabolite_bindings",
                   "projections", "circuits", "projection_groups", "receptors",
                   "receptor_class", "receptor_sign", "receptor_synaptic",
                   "receptor_locations", "targets", "target_polarity",
@@ -829,7 +829,7 @@ def check_provenance(report, meta, structures, projections, circuits,
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
         node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
-                      "drug_half_life", "drug_metabolites",
+                      "drug_half_life", "drug_metabolites", "drug_metabolite_bindings",
                       "projections", "circuits", "projection_groups", "receptors",
                       "receptor_class", "receptor_sign", "receptor_synaptic",
                       "receptor_locations", "targets", "target_polarity",
@@ -971,6 +971,11 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             for binding in m.get("bindings", []) or []:
                 for i, src in enumerate(binding.get("sources", []) or []):
                     check_one(f"{mid} binding {binding.get('target')} sources[{i}]", src)
+                # A metabolite binding's quote-carrying Ki (wikipedia_pharm table row) is
+                # gated exactly like a drug binding's (a PDSP CSV Ki is checked below).
+                ki_src = (binding.get("ki") or {}).get("source")
+                if ki_src and ki_src.get("quote"):
+                    check_one(f"{mid} binding {binding.get('target')} ki.source", ki_src)
 
     for proj in projections:
         pid = f"{proj.get('from')}->{proj.get('to')}"
@@ -1035,40 +1040,50 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
 
     n_ki = 0
     ki_skipped = set()
+
+    def check_ki(ctx, binding):
+        """Gate one binding's PDSP-CSV Ki (a metabolite binding's Ki is checked the same
+        way as a drug's). Returns 1 if a CSV row was confirmed, else 0."""
+        nonlocal n_ki
+        ki = binding.get("ki")
+        if not ki:
+            return
+        src = ki.get("source") or {}
+        corpus, ki_id = src.get("corpus"), src.get("ki_id")
+        # Only a CSV corpus (PDSP) cites a row by ki_id; a quote-gated Ki corpus
+        # (wikipedia_pharm) was already verified by the source-quote gate above.
+        if not (corpora.get(corpus) or {}).get("csv"):
+            return
+        if src.get("provenance") == "verified" and ki_id is None:
+            report.error(f"{ctx}: 'verified' source needs a ki_id")
+            return
+        if ki_id is None:
+            return
+        idx = ki_index(corpus)
+        if idx is None:
+            ki_skipped.add(corpus)
+            return
+        if ki_id not in idx:
+            report.error(f"{ctx}: ki_id {ki_id} not found in {corpus} CSV")
+            return
+        # The stored value must be the row's own value (we took it from there).
+        try:
+            if abs(float(idx[ki_id]) - float(src.get("value_nm"))) > 0.01:
+                report.error(f"{ctx}: value_nm {src.get('value_nm')} != CSV row "
+                             f"{ki_id} value {idx[ki_id]!r}")
+                return
+        except (TypeError, ValueError):
+            pass
+        n_ki += 1
+
     for drug in drugs:
         did = drug.get("id")
         for binding in drug.get("bindings", []):
-            ki = binding.get("ki")
-            if not ki:
-                continue
-            ctx = f"drug {did} binding {binding.get('target')} ki"
-            src = ki.get("source") or {}
-            corpus, ki_id = src.get("corpus"), src.get("ki_id")
-            # Only a CSV corpus (PDSP) cites a row by ki_id; a quote-gated Ki corpus
-            # (wikipedia_pharm) was already verified by the source-quote gate above.
-            if not (corpora.get(corpus) or {}).get("csv"):
-                continue
-            if src.get("provenance") == "verified" and ki_id is None:
-                report.error(f"{ctx}: 'verified' source needs a ki_id")
-                continue
-            if ki_id is None:
-                continue
-            idx = ki_index(corpus)
-            if idx is None:
-                ki_skipped.add(corpus)
-                continue
-            if ki_id not in idx:
-                report.error(f"{ctx}: ki_id {ki_id} not found in {corpus} CSV")
-                continue
-            # The stored value must be the row's own value (we took it from there).
-            try:
-                if abs(float(idx[ki_id]) - float(src.get("value_nm"))) > 0.01:
-                    report.error(f"{ctx}: value_nm {src.get('value_nm')} != CSV row "
-                                 f"{ki_id} value {idx[ki_id]!r}")
-                    continue
-            except (TypeError, ValueError):
-                pass
-            n_ki += 1
+            check_ki(f"drug {did} binding {binding.get('target')} ki", binding)
+        for m in drug.get("metabolites", []) or []:
+            for binding in m.get("bindings", []) or []:
+                check_ki(f"drug {did} metabolite {m.get('name')} binding "
+                         f"{binding.get('target')} ki", binding)
     if ki_skipped:
         report.warn(f"Ki CSV absent for {sorted(ki_skipped)} (author-only material); "
                     f"skipped the ki-row-in-CSV check there")

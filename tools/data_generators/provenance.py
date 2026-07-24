@@ -710,10 +710,17 @@ def _provenance_stats(structures: list[dict[str, Any]],
                         for d in drugs if d.get("half_life")]
     # Active-metabolite identity nodes ("<name> is an active metabolite of <drug>"),
     # one per authored metabolite across all drugs, graded by that metabolite's own
-    # sources (the Stahl line naming it). The metabolite's optional T½ / bindings are
-    # extra sourced facts shown in the panel, not separate tally kinds.
+    # sources (the Stahl line naming it). The metabolite's optional T½ is an extra
+    # sourced fact shown in the panel; its receptor BINDINGS are their own tally kind
+    # below (each a graded graph edge appearing on the receptor's Interacting drugs).
     metabolite_grades = [_strongest_grade(m.get("sources"))
                          for d in drugs for m in d.get("metabolites", [])]
+    # Non-modeled-metabolite receptor bindings, graded exactly like a drug binding
+    # (quote source or measured Ki). A separate kind from drug_bindings so the drug Ki
+    # coverage figures are unperturbed; authored by apply_metabolite_bindings.py.
+    metabolite_binding_grades = [_binding_grade(b)
+                                 for d in drugs for m in d.get("metabolites", [])
+                                 for b in m.get("bindings", [])]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
     # Functional-circuit + projection-group nodes: each a "these structures / pathways
     # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
@@ -797,6 +804,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_categories": tally(category_grades),
         "drug_half_life": tally(half_life_grades),
         "drug_metabolites": tally(metabolite_grades),
+        "drug_metabolite_bindings": tally(metabolite_binding_grades),
         "projections": tally(projection_grades),
         "circuits": tally(circuit_grades),
         "projection_groups": tally(projection_group_grades),
