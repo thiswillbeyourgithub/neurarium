@@ -4277,6 +4277,9 @@ function buildAboutSourcing(meta, opts = {}) {
     drug_nbn: "about.kindNbn",
     drug_brands: "about.kindDrugBrands",
     drug_categories: "about.kindDrugCategories",
+    drug_half_life: "about.kindDrugHalfLife",
+    drug_metabolites: "about.kindDrugMetabolites",
+    drug_metabolite_bindings: "about.kindDrugMetaboliteBindings",
     projections: "about.kindProjections",
     circuits: "about.kindCircuits",
     projection_groups: "about.kindProjectionGroups",
@@ -4439,7 +4442,8 @@ function buildKindExample(kind, data, nav) {
   // Representative nodes: a recognizable one when present, else the first available, so
   // the example is stable and never empty for a kind that has any data.
   const pick = (arr, prefer) => (arr || []).find(prefer) || (arr || [])[0] || null;
-  const drug = pick((data.drugs || []).filter((d) => d.focusable), (d) => d.id === "olanzapine");
+  const focusableDrugs = (data.drugs || []).filter((d) => d.focusable);
+  const drug = pick(focusableDrugs, (d) => d.id === "olanzapine");
   const recTargets = (data.targets || []).filter((t) => t.kind === "receptor" && t.focusable);
   const rec = pick(recTargets, (t) => t.id === "5ht2a");
   const otherTargets = (data.targets || []).filter((t) => t.kind !== "receptor" && t.focusable);
@@ -4471,8 +4475,7 @@ function buildKindExample(kind, data, nav) {
     (b) => !b.affinity_only && b.actionLabel && b.targetName);
 
   switch (kind) {
-    case "drug_bindings":
-    case "drug_metabolite_bindings": {
+    case "drug_bindings": {
       if (!drug) return null;
       const b = firstAction(drug);
       return b ? line(drug.name, `${b.actionLabel}, ${b.targetName}`, () => nav.drug(drug)) : null;
@@ -4486,6 +4489,36 @@ function buildKindExample(kind, data, nav) {
     case "drug_categories": {
       const c = drug && (drug.categoryLabels || [])[0];
       return c ? line(drug.name, c, () => nav.drug(drug)) : null;
+    }
+    case "drug_half_life": {
+      const d = pick(focusableDrugs, (x) => x.id === "olanzapine" && x.halfLife)
+        || focusableDrugs.find((x) => x.halfLife);
+      const s = d && d.halfLife && formatHalfLife(d.halfLife);
+      return s ? line(d.name, `T½ ${s}`, () => nav.drug(d)) : null;
+    }
+    case "drug_metabolites": {
+      const d = pick(focusableDrugs, (x) => x.id === "fluoxetine" && (x.metabolites || []).length)
+        || focusableDrugs.find((x) => (x.metabolites || []).length);
+      const m = d && (d.metabolites || [])[0];
+      return m ? line(d.name, m.name, () => nav.drug(d)) : null;
+    }
+    case "drug_metabolite_bindings": {
+      // A metabolite's own receptor binding: its parent drug is the clickable subject
+      // (the metabolite is listed under the drug's "Active metabolites"), the notion
+      // names the metabolite and its action, e.g. Nefazodone "mCPP: Agonist, 5-HT2C".
+      let hit = null;
+      for (const d of focusableDrugs) {
+        for (const m of d.metabolites || []) {
+          const b = (m.ownBindings || []).find(
+            (x) => !x.affinity_only && x.actionLabel && x.targetName);
+          if (b) { hit = { d, m, b }; break; }
+        }
+        if (hit) break;
+      }
+      return hit
+        ? line(hit.d.name, `${hit.m.name}: ${hit.b.actionLabel}, ${hit.b.targetName}`,
+          () => nav.drug(hit.d))
+        : null;
     }
     case "receptors":
       return rec ? line(rec.name, rec.receptor.familyLabel, () => nav.target(rec)) : null;
