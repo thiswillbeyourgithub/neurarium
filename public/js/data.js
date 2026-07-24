@@ -520,6 +520,40 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       relation: src.relation || "", pdspNames: src.pdsp_names || [],
     };
   };
+  // Resolve the display + provenance fields of a binding, shared by a drug's own
+  // bindings and a metabolite's inline bindings (the receptor "Interacting drugs"
+  // row reads exactly these). It deliberately OMITS the animation fields
+  // (structureIds / flowKind / affinityWeight / toneSign): those drive the 3D
+  // overlay, which only a focusable drug plays, so the drug loop adds them on top.
+  // Returns the resolved target dict as `tgt` too, so the drug loop reuses it for
+  // structureIds/flow without a second lookup (the metabolite path drops it).
+  const bindingDisplayFields = (b) => {
+    const tgt = drugTargets[b.target] || {};
+    const affinityOnly = !!b.affinity_only;
+    const act = affinityOnly ? {} : drugActions[b.action] || {};
+    const effect = affinityOnly ? null : b.effect || act.effect || "modulate";
+    return {
+      tgt,
+      affinityOnly,
+      effect,
+      target: b.target,
+      targetName: tgt.name ? localize(tgt.name) : b.target,
+      system: tgt.system || null,
+      receptor: tgt.receptor || null,
+      action: affinityOnly ? null : b.action,
+      actionLabel: affinityOnly ? null : act.label ? localize(act.label) : b.action,
+      effectColor: affinityOnly ? null : drugEffectColors[effect] || "#ffffff",
+      effectLabel: affinityOnly ? null : drugEffectLabels[effect] || effect,
+      note: b.note ? localize(b.note) : "",
+      tentative: !!b.tentative,
+      sources: mapSources(b.sources),
+      provenance: strongestGrade([
+        ...(b.sources || []),
+        ...(b.ki && b.ki.source ? [b.ki.source] : []),
+      ]),
+      ki: resolveKi(b.ki),
+    };
+  };
   for (const d of drugs) {
     d.description = d.description ? localize(d.description) : "";
     // Provenance grade of the description (llm synthesis vs a sourced Wikipedia
@@ -545,15 +579,22 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // generator only when the file was fetched; the drug panel embeds it as an
     // <img>. Null when no SVG is available (no image shown).
     d.structureImage = d.structure_image || null;
+    // Elimination half-life (T½): {hours, hours_max?} passed through raw; the panel
+    // formats it via formatHalfLife (js/main.js). Its own sourced node, so carry the
+    // strongest grade + sources for the pill next to it.
+    d.halfLife = d.half_life || null;
+    d.halfLifeSources = mapSources(d.half_life_sources);
+    d.halfLifeProvenance = strongestGrade(d.half_life_sources);
     const affected = new Set();
     d.bindings = (d.bindings || []).map((b) => {
-      const tgt = drugTargets[b.target] || {};
+      // Display + provenance fields come from the shared resolver; the drug loop
+      // then layers on the animation-only fields (structureIds/flow/weights). See
+      // bindingDisplayFields. `tgt` is reused, `disp.tgt` is not returned to callers.
+      const disp = bindingDisplayFields(b);
+      const { tgt, affinityOnly, effect } = disp;
       // An affinity_only binding is PDSP-derived with no known direction: it is
       // listed in the panel (with its Ki) but has no action/effect and never
       // animates, so it contributes nothing to the lit-region union or flow.
-      const affinityOnly = !!b.affinity_only;
-      const act = affinityOnly ? {} : drugActions[b.action] || {};
-      const effect = affinityOnly ? null : b.effect || act.effect || "modulate";
       let structureIds = [];
       if (affinityOnly) {
         structureIds = [];
@@ -568,23 +609,23 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       }
       if (!affinityOnly) for (const id of structureIds) affected.add(id);
       return {
-        target: b.target,
-        targetName: tgt.name ? localize(tgt.name) : b.target,
-        system: tgt.system || null,
+        target: disp.target,
+        targetName: disp.targetName,
+        system: disp.system,
         // The projection kind this binding's target system feeds (meta.system_flow_
         // kinds), null when the system has no modeled ascending pathway or the
         // binding is affinity-only. Lets a panel list the "projections affected" per
         // binding and lets d.flowKinds below dedupe from a single field.
         flowKind: affinityOnly ? null : systemFlowKinds[tgt.system] || null,
-        receptor: tgt.receptor || null,
+        receptor: disp.receptor,
         affinityOnly,
-        action: affinityOnly ? null : b.action,
-        actionLabel: affinityOnly ? null : act.label ? localize(act.label) : b.action,
+        action: disp.action,
+        actionLabel: disp.actionLabel,
         effect,
-        effectColor: affinityOnly ? null : drugEffectColors[effect] || "#ffffff",
-        effectLabel: affinityOnly ? null : drugEffectLabels[effect] || effect,
-        note: b.note ? localize(b.note) : "",
-        tentative: !!b.tentative,
+        effectColor: disp.effectColor,
+        effectLabel: disp.effectLabel,
+        note: disp.note,
+        tentative: disp.tentative,
         structureIds,
         // Relative engagement from the measured Ki (0.35..1), NOT effect size.
         // Scales the dot cloud in drug-anim; also weights this binding's system
@@ -593,20 +634,13 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // Signed tone-setter contribution to its system's ascending flow (+1 raises
         // the transmitter's tone, -1 lowers, 0 = not a tone-setter -> dots only).
         toneSign: affinityOnly ? 0 : toneSignOf(tgt, b.action),
-        // Per-claim sources ({corpus, page, quote, provenance}); the verbatim
-        // quote is what tools/check_data.py confirms is in the cited page. The
-        // full citation is resolved client-side from meta.sourceCorpora by
-        // `corpus`, not denormalized here. `provenance` is the strongest grade
-        // among the quote sources AND the measured Ki (a verified Ki confirms the
-        // drug binds the target, so it backs the binding); null = no source at all,
-        // which renders a NOSOURCE pill. Mirrors _binding_grade in generate_data.py.
-        sources: mapSources(b.sources),
-        provenance: strongestGrade([
-          ...(b.sources || []),
-          ...(b.ki && b.ki.source ? [b.ki.source] : []),
-        ]),
+        // Per-claim sources ({corpus, page, quote, provenance}); `provenance` is the
+        // strongest grade among the quote sources AND the measured Ki. See
+        // bindingDisplayFields / _binding_grade in generate_data.py.
+        sources: disp.sources,
+        provenance: disp.provenance,
         // The measured PDSP Ki (own verified badge), null when absent.
-        ki: resolveKi(b.ki),
+        ki: disp.ki,
       };
     });
     d.structureIds = [...affected];
@@ -709,6 +743,42 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       : null;
   }
 
+  // Resolve each drug's active metabolites. Link a metabolite that is itself a
+  // modeled drug (by explicit drug_id, else by matching its name) so the panel can
+  // reuse that drug's already-resolved bindings + T½ and jump to it (no duplication).
+  // A metabolite keeps its OWN identity provenance (`sources`) and optional own T½;
+  // its inline `bindings` (deferred to a later Wikipedia/PDSP pass, usually empty)
+  // are resolved for display via the shared bindingDisplayFields.
+  const drugById = new Map(drugs.map((d) => [d.id, d]));
+  for (const d of drugs) {
+    d.metabolites = (d.metabolites || []).map((m) => {
+      const linkedId = m.drug_id || drugByNorm.get(normName(m.name)) || null;
+      const linked = linkedId ? drugById.get(linkedId) || null : null;
+      const ownBindings = (m.bindings || []).map((b) => {
+        // Drop the resolver's `tgt` scratch field; keep only display/provenance.
+        const { tgt, ...disp } = bindingDisplayFields(b);
+        void tgt;
+        return disp;
+      });
+      return {
+        name: m.name,
+        drugId: linkedId,
+        // Whether the link points at a standalone, clickable drug (so we can jump to
+        // it AND avoid re-listing it under a receptor where it already appears).
+        linkFocusable: !!(linked && linked.focusable),
+        // Own inline bindings for the receptor row; else the linked drug's resolved
+        // bindings (a metabolite-that-is-a-drug surfaces its targets for free).
+        bindings: ownBindings.length ? ownBindings : linked ? linked.bindings : [],
+        ownBindings,
+        halfLife: m.half_life || (linked ? linked.halfLife : null),
+        halfLifeSources: mapSources(m.half_life_sources),
+        halfLifeProvenance: strongestGrade(m.half_life_sources),
+        sources: mapSources(m.sources),
+        provenance: strongestGrade(m.sources),
+      };
+    });
+  }
+
   // Reverse index from the bindings: a target id -> the drugs that act on it, each
   // paired with its resolved binding (so the binding's net-effect colour + action
   // is available). The key is the binding's `target` (a receptor id or a
@@ -724,6 +794,26 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       seen.add(b.target);
       if (!drugsByTarget.has(b.target)) drugsByTarget.set(b.target, []);
       drugsByTarget.get(b.target).push({ drug: d, binding: b });
+    }
+    // Surface a metabolite's OWN bindings under their target too, attributed to the
+    // parent drug ("NAME (metab. of PRODRUG)"). Only its own (non-linked) bindings,
+    // and only when the metabolite is not itself a focusable drug already listed
+    // here, so nothing is double-listed. Populates once the deferred bindings pass
+    // lands; empty for now.
+    for (const m of d.metabolites) {
+      if (m.linkFocusable) continue;
+      const mSeen = new Set();
+      for (const b of m.ownBindings) {
+        if (mSeen.has(b.target)) continue;
+        mSeen.add(b.target);
+        if (!drugsByTarget.has(b.target)) drugsByTarget.set(b.target, []);
+        drugsByTarget.get(b.target).push({
+          drug: d,
+          binding: b,
+          viaMetaboliteOf: d.displayName,
+          metaboliteName: m.name,
+        });
+      }
     }
   }
 
