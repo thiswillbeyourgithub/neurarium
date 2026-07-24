@@ -481,6 +481,7 @@ def check_reachability(report, meta, structures, projections, circuits,
         "blocker": {"ion_channel", "vesicle_protein"},
     }
     compat_errors = 0
+    drug_ids = {d.get("id") for d in drugs}
 
     for drug in drugs:
         did = drug.get("id")
@@ -530,6 +531,18 @@ def check_reachability(report, meta, structures, projections, circuits,
                 if corpus not in (meta.get("source_corpora", {}) or {}):
                     report.error(f"drug {did}: binding {target!r} ki source corpus "
                                  f"{corpus!r} is not in source_corpora")
+        # Active metabolites: a linked drug_id must be a real drug, and any inline
+        # metabolite binding target must be a known target (so it can be attributed
+        # in the receptor 'Interacting drugs' list once bindings are sourced).
+        for m in drug.get("metabolites", []) or []:
+            link = m.get("drug_id")
+            if link and link not in drug_ids:
+                report.error(f"drug {did}: metabolite {m.get('name')!r} links "
+                             f"drug_id {link!r} which is not a modeled drug")
+            for binding in m.get("bindings", []) or []:
+                if binding.get("target") not in targets:
+                    report.error(f"drug {did}: metabolite {m.get('name')!r} binding "
+                                 f"target {binding.get('target')!r} is not a known target")
 
     if report.errors == before:
         report.ok("every cross-reference (drug -> target/action/category, projection "
@@ -629,6 +642,7 @@ def print_coverage(stats):
     a = stats.get("nodes", {})
     # The node kinds folded into the headline, in the generator's order.
     node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
+                  "drug_half_life", "drug_metabolites",
                   "projections", "circuits", "projection_groups", "receptors",
                   "receptor_class", "receptor_sign", "receptor_synaptic",
                   "receptor_locations", "targets", "target_polarity",
@@ -721,6 +735,20 @@ def check_provenance(report, meta, structures, projections, circuits,
                   f"drug {drug.get('id')} category_provenance")
         for i, src in enumerate(drug.get("category_sources", []) or []):
             grade(src.get("provenance"), f"drug {drug.get('id')} category_sources[{i}]")
+        # Half-life (T½) node + each active-metabolite node (and a metabolite's own
+        # T½ / inline bindings) carry their own quote-level grades, same shape.
+        for i, src in enumerate(drug.get("half_life_sources", []) or []):
+            grade(src.get("provenance"), f"drug {drug.get('id')} half_life_sources[{i}]")
+        for mi, m in enumerate(drug.get("metabolites", []) or []):
+            mid = f"drug {drug.get('id')} metabolite {m.get('name')}"
+            for i, src in enumerate(m.get("sources", []) or []):
+                grade(src.get("provenance"), f"{mid} sources[{i}]")
+            for i, src in enumerate(m.get("half_life_sources", []) or []):
+                grade(src.get("provenance"), f"{mid} half_life_sources[{i}]")
+            for binding in m.get("bindings", []) or []:
+                for i, src in enumerate(binding.get("sources", []) or []):
+                    grade(src.get("provenance"),
+                          f"{mid} binding {binding.get('target')} sources[{i}]")
         # A drug's description carries its own grade (llm synthesis vs sourced WP lead).
         if drug.get("description"):
             grade(drug.get("description_provenance"),
@@ -801,6 +829,7 @@ def check_provenance(report, meta, structures, projections, circuits,
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
         node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
+                      "drug_half_life", "drug_metabolites",
                       "projections", "circuits", "projection_groups", "receptors",
                       "receptor_class", "receptor_sign", "receptor_synaptic",
                       "receptor_locations", "targets", "target_polarity",
@@ -929,6 +958,19 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             check_one(f"drug {did} nbn_sources[{i}]", src)
         for i, src in enumerate(drug.get("category_sources", []) or []):
             check_one(f"drug {did} category_sources[{i}]", src)
+        # Half-life quote + each metabolite's identity/T½/binding quotes are gated the
+        # same way (verbatim substring on the cited corpus page).
+        for i, src in enumerate(drug.get("half_life_sources", []) or []):
+            check_one(f"drug {did} half_life_sources[{i}]", src)
+        for m in drug.get("metabolites", []) or []:
+            mid = f"drug {did} metabolite {m.get('name')}"
+            for i, src in enumerate(m.get("sources", []) or []):
+                check_one(f"{mid} sources[{i}]", src)
+            for i, src in enumerate(m.get("half_life_sources", []) or []):
+                check_one(f"{mid} half_life_sources[{i}]", src)
+            for binding in m.get("bindings", []) or []:
+                for i, src in enumerate(binding.get("sources", []) or []):
+                    check_one(f"{mid} binding {binding.get('target')} sources[{i}]", src)
 
     for proj in projections:
         pid = f"{proj.get('from')}->{proj.get('to')}"

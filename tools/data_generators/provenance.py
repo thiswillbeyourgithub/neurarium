@@ -493,6 +493,45 @@ def _drug_brands(drug_id: str, brands: Any) -> list[dict[str, Any]]:
     return out
 
 
+def _half_life(hl: Any, *, what: str) -> dict[str, Any]:
+    """Validate + normalize a half-life (T½) value into canonical hours.
+
+    Authored as ``{hours, hours_max?}``: ``hours`` is the low/representative
+    elimination half-life in **hours** (a positive number) and the optional
+    ``hours_max`` closes a stated range (Stahl commonly prints "24-48 hours"). Hours
+    is the single stored unit deliberately: the viewer formats the pair into a
+    human-readable days/hours/minutes string (see js/data.js ``formatHalfLife``), so
+    the data never carries a pre-rendered string that could drift from its number.
+    ``what`` labels errors (the parent drug or a metabolite name).
+
+    Parameters
+    ----------
+    hl
+        The authored ``half_life`` object.
+    what
+        Human label for error messages.
+
+    Returns
+    -------
+    dict
+        ``{"hours": float}`` plus ``"hours_max": float`` when a range was authored.
+    """
+    if not isinstance(hl, dict):
+        raise TypeError(f"{what} half_life must be an object with an 'hours' number")
+    hours = hl.get("hours")
+    # bool is an int subclass; reject it so a stray True/False can't pass as a value.
+    if isinstance(hours, bool) or not isinstance(hours, (int, float)) or hours <= 0:
+        raise ValueError(f"{what} half_life 'hours' must be a positive number")
+    rec: dict[str, Any] = {"hours": float(hours)}
+    hi = hl.get("hours_max")
+    if hi is not None:
+        if isinstance(hi, bool) or not isinstance(hi, (int, float)) or hi < hours:
+            raise ValueError(
+                f"{what} half_life 'hours_max' must be a number >= 'hours'")
+        rec["hours_max"] = float(hi)
+    return rec
+
+
 def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | None:
     """Validate + normalize a binding's ``ki`` annotation (measured binding
     affinity), or ``None`` when absent.
@@ -664,6 +703,17 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # has categories: the emitted category_provenance (llm unless overridden/sourced).
     category_grades = [d.get("category_provenance", DEFAULT_PROVENANCE)
                        for d in drugs if d.get("categories")]
+    # Elimination half-life (T½) nodes, one per drug that carries a half_life, graded
+    # by that drug's own half_life_sources (Stahl states it verbatim; see
+    # apply_pharmacokinetics.py). A drug with no half_life is simply not a node here.
+    half_life_grades = [_strongest_grade(d.get("half_life_sources"))
+                        for d in drugs if d.get("half_life")]
+    # Active-metabolite identity nodes ("<name> is an active metabolite of <drug>"),
+    # one per authored metabolite across all drugs, graded by that metabolite's own
+    # sources (the Stahl line naming it). The metabolite's optional T½ / bindings are
+    # extra sourced facts shown in the panel, not separate tally kinds.
+    metabolite_grades = [_strongest_grade(m.get("sources"))
+                         for d in drugs for m in d.get("metabolites", [])]
     projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
     # Functional-circuit + projection-group nodes: each a "these structures / pathways
     # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
@@ -745,6 +795,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_nbn": tally(nbn_grades),
         "drug_brands": tally(brand_grades),
         "drug_categories": tally(category_grades),
+        "drug_half_life": tally(half_life_grades),
+        "drug_metabolites": tally(metabolite_grades),
         "projections": tally(projection_grades),
         "circuits": tally(circuit_grades),
         "projection_groups": tally(projection_group_grades),

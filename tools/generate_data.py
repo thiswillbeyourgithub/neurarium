@@ -118,6 +118,7 @@ from data_generators.provenance import (  # noqa: E402
     _GRADE_RANK,
     _binding_sources,
     _drug_brands,
+    _half_life,
     _ki_annotation,
     _location_sources,
     _lookup_provenance,
@@ -685,6 +686,134 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
     return targets
 
 
+def _normalize_binding(b: dict[str, Any], valid_targets: set[str], *,
+                       owner_id: str, owner_label: str,
+                       with_ki: bool) -> dict[str, Any]:
+    """Validate + normalize one binding row (target/action/effect + sources + Ki).
+
+    Shared by a drug's own ``bindings`` and a metabolite's inline ``bindings`` so the
+    two never drift: both validate the target against the same ``valid_targets`` set
+    (DRUG_TARGETS keys + receptor ids) and the action/effect against the drug
+    vocabularies. An ``affinity_only`` binding is PDSP-derived: we know the owner
+    binds the target (measured Ki) but not the functional direction, so it carries no
+    action/effect and the viewer lists but never animates it.
+
+    Parameters
+    ----------
+    b
+        The authored binding dict.
+    valid_targets
+        Valid binding target ids.
+    owner_id
+        Id used for the Ki lookup (a drug id); ignored when ``with_ki`` is False.
+    owner_label
+        Human label for error/source messages (e.g. ``"Drug 'fluoxetine'"`` or
+        ``"Drug 'fluoxetine' metabolite 'Norfluoxetine'"``).
+    with_ki
+        Whether to attach a PDSP ``ki`` annotation (drug bindings only; metabolite
+        bindings have no measured Ki in this pass).
+
+    Returns
+    -------
+    dict
+        The emitted binding record.
+    """
+    if b["target"] not in valid_targets:
+        raise KeyError(f"{owner_label} binding target {b['target']!r} "
+                       f"is not a known target (DRUG_TARGETS key or receptor id)")
+    if bool(b.get("affinity_only")):
+        out_b: dict[str, Any] = {"target": b["target"], "affinity_only": True}
+    else:
+        if b["action"] not in DRUG_ACTIONS:
+            raise KeyError(f"{owner_label} binding action {b['action']!r} "
+                           f"has no DRUG_ACTIONS entry")
+        out_b = {"target": b["target"], "action": b["action"]}
+        if "effect" in b:
+            if b["effect"] not in DRUG_EFFECT_COLORS:
+                raise KeyError(f"{owner_label} binding effect "
+                               f"{b['effect']!r} has no DRUG_EFFECT_COLORS entry")
+            out_b["effect"] = b["effect"]
+    if b.get("note"):
+        out_b["note"] = b["note"]
+    if b.get("tentative"):
+        out_b["tentative"] = True
+    # Per-claim sources ({corpus, page, quote, provenance}); the verbatim quote is
+    # what check_data.py confirms is present in the cited corpus page.
+    binding_sources = _quote_sources(b.get("sources"), f"{owner_label} binding "
+                                     f"{b.get('target')!r}")
+    if binding_sources:
+        out_b["sources"] = binding_sources
+    if with_ki:
+        # PDSP measured binding affinity (its own verified source; see _ki_annotation).
+        ki = _ki_annotation(owner_id, b)
+        if ki:
+            out_b["ki"] = ki
+    return out_b
+
+
+def _drug_metabolites(drug_id: str, metabolites: Any,
+                      valid_targets: set[str]) -> list[dict[str, Any]]:
+    """Validate + normalize a drug's active ``metabolites`` (one graded node each).
+
+    Each authored metabolite is ``{name, drug_id?, half_life?, half_life_sources?,
+    bindings?, sources?}``:
+
+    - ``name`` is a non-empty proper noun (not FR-translated; a chemical name).
+    - ``drug_id`` links a metabolite that is ITSELF a modeled drug (desvenlafaxine,
+      paliperidone, ...). The viewer then reuses that drug's bindings + T½ and links
+      the row, so we deliberately do NOT duplicate them here. Its existence is
+      cross-checked in check_data.py (which holds every drug id).
+    - ``half_life`` is the metabolite's own elimination T½ (canonical hours), graded
+      by its ``half_life_sources``.
+    - ``bindings`` are inline receptor bindings for a NON-drug metabolite. Deferred to
+      a later Wikipedia/PDSP pass (usually empty now), but validated like a drug
+      binding when present, so the receptor "Interacting drugs" list can attribute
+      them as "<name> (metab. of <drug>)".
+    - ``sources`` grades the "<name> is an active metabolite of <drug_id>" identity
+      claim (kind ``drug_metabolites``); a metabolite with no source is NOSOURCE.
+
+    Parameters
+    ----------
+    drug_id
+        Parent drug id (for error messages + the identity claim).
+    metabolites
+        The authored ``metabolites`` list (or None).
+    valid_targets
+        Valid binding target ids, for any inline metabolite bindings.
+
+    Returns
+    -------
+    list of dict
+        The emitted metabolite nodes (empty when none authored).
+    """
+    out: list[dict[str, Any]] = []
+    for m in metabolites or []:
+        name = m.get("name")
+        if not (isinstance(name, str) and name.strip()):
+            raise ValueError(f"Drug {drug_id!r} has a metabolite with no 'name'")
+        name = name.strip()
+        label = f"Drug {drug_id!r} metabolite {name!r}"
+        rec: dict[str, Any] = {"name": name}
+        if m.get("drug_id"):
+            rec["drug_id"] = m["drug_id"]
+        if m.get("half_life"):
+            rec["half_life"] = _half_life(m["half_life"], what=label)
+            hl_sources = _quote_sources(m.get("half_life_sources"),
+                                        f"{label} half_life")
+            if hl_sources:
+                rec["half_life_sources"] = hl_sources
+        m_bindings = [_normalize_binding(b, valid_targets, owner_id=drug_id,
+                                         owner_label=label, with_ki=False)
+                      for b in m.get("bindings") or []]
+        if m_bindings:
+            rec["bindings"] = m_bindings
+        sources = _quote_sources(m.get("sources"), label)
+        if sources:
+            rec["sources"] = sources
+        out.append(rec)
+    return out
+
+
 def _drug_record(drug: dict[str, Any], valid_targets: set[str],
                  known_bases: set[str],
                  molecule_ids: set[str]) -> dict[str, Any]:
@@ -729,44 +858,9 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
         if cat not in DRUG_CATEGORY_LABELS:
             raise KeyError(f"Drug {drug['id']!r} category {cat!r} has no "
                            f"DRUG_CATEGORY_LABELS entry")
-    bindings: list[dict[str, Any]] = []
-    for b in drug["bindings"]:
-        if b["target"] not in valid_targets:
-            raise KeyError(f"Drug {drug['id']!r} binding target {b['target']!r} "
-                           f"is not a known target (DRUG_TARGETS key or receptor id)")
-        # An `affinity_only` binding is PDSP-derived: we know the drug binds the
-        # target (with a measured Ki) but not the functional direction (agonist vs
-        # antagonist), so it carries no action/effect and is listed in the panel but
-        # excluded from the 3D animation (see js/data.js). Every other binding must
-        # name a known action.
-        affinity_only = bool(b.get("affinity_only"))
-        if affinity_only:
-            out_b: dict[str, Any] = {"target": b["target"], "affinity_only": True}
-        else:
-            if b["action"] not in DRUG_ACTIONS:
-                raise KeyError(f"Drug {drug['id']!r} binding action {b['action']!r} "
-                               f"has no DRUG_ACTIONS entry")
-            out_b = {"target": b["target"], "action": b["action"]}
-            if "effect" in b:
-                if b["effect"] not in DRUG_EFFECT_COLORS:
-                    raise KeyError(f"Drug {drug['id']!r} binding effect "
-                                   f"{b['effect']!r} has no DRUG_EFFECT_COLORS entry")
-                out_b["effect"] = b["effect"]
-        if b.get("note"):
-            out_b["note"] = b["note"]
-        if b.get("tentative"):
-            out_b["tentative"] = True
-        # Per-claim sources ({corpus, page, quote, provenance}); the verbatim quote
-        # is what check_data.py confirms is present in the cited corpus page. See
-        # _binding_sources / SOURCE_CORPORA.
-        binding_sources = _binding_sources(drug["id"], b)
-        if binding_sources:
-            out_b["sources"] = binding_sources
-        # PDSP measured binding affinity (its own verified source; see _ki_annotation).
-        ki = _ki_annotation(drug["id"], b)
-        if ki:
-            out_b["ki"] = ki
-        bindings.append(out_b)
+    bindings = [_normalize_binding(b, valid_targets, owner_id=drug["id"],
+                                   owner_label=f"Drug {drug['id']!r}", with_ki=True)
+                for b in drug["bindings"]]
     out: dict[str, Any] = {
         "id": drug["id"],
         "name": drug["name"],
@@ -810,6 +904,23 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     brands = _drug_brands(drug["id"], drug.get("brands"))
     if brands:
         out["brands"] = brands
+    # Elimination half-life (T½), stored as canonical hours (+ optional range); its
+    # own sourced node (kind `drug_half_life`). Rendered between Brands and Acts-on,
+    # formatted to days/hours/minutes by the viewer. See apply_pharmacokinetics.py.
+    if drug.get("half_life"):
+        out["half_life"] = _half_life(drug["half_life"],
+                                      what=f"Drug {drug['id']!r}")
+        hl_sources = _quote_sources(drug.get("half_life_sources"),
+                                    f"Drug {drug['id']!r} half_life")
+        if hl_sources:
+            out["half_life_sources"] = hl_sources
+    # Active metabolites named in the source (one graded node each, kind
+    # `drug_metabolites`); a metabolite that is itself a modeled drug links via
+    # drug_id and reuses its bindings/T½ (no duplication), see _drug_metabolites.
+    metabolites = _drug_metabolites(drug["id"], drug.get("metabolites"),
+                                    valid_targets)
+    if metabolites:
+        out["metabolites"] = metabolites
     # Drug descriptions are intentionally NOT baked: the panel fetches the current
     # Wikipedia lead at runtime (js/wiki.js), exactly like a structure/target, so the
     # text stays up to date and the dataset ships no copyrighted prose. A drug whose
