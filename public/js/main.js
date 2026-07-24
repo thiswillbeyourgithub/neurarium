@@ -3176,9 +3176,11 @@ function createInfoPanel(data, sourcingModal) {
 
       // Active metabolites: one row per metabolite (its own sourced identity node).
       // A metabolite that is itself a modeled drug links to it (jump via onDrugPick);
-      // each shows its own T½ underneath, a bit like a binding's Ki. A non-drug
-      // metabolite's receptor bindings arrive in a later Wikipedia/PDSP pass, so only
-      // its name + T½ show for now.
+      // each shows its own T½ underneath, a bit like a binding's Ki. A non-modeled
+      // metabolite's OWN receptor bindings (Wikipedia/PDSP-sourced) are listed under it
+      // via the same bindingRow the drug's "Acts on" uses, so a reader can see what the
+      // metabolite hits without hunting each receptor panel. (A linked metabolite shows
+      // none here: its bindings live on its own drug row, reachable via the link.)
       if (drug.metabolites && drug.metabolites.length) {
         const metaEl = el("div", "info-bindings info-metabolites");
         metaEl.dataset.tourSec = "metabolites";
@@ -3208,6 +3210,22 @@ function createInfoPanel(data, sourcingModal) {
               chip.appendChild(makeProvenancePill(
                 m.halfLifeProvenance, sourcesTip(m.halfLifeSources)));
             li.appendChild(chip);
+          }
+          // A non-modeled metabolite's OWN sourced receptor bindings (m.ownBindings,
+          // resolved in js/data.js from its Wikipedia/PDSP pharmacology). Rendered with
+          // the same bindingRow the drug's "Acts on" uses, strongest-affinity first, each
+          // row jumping to its target when browsable. A linked (modeled-drug) metabolite
+          // has no ownBindings here (its bindings live on its own drug row via the link),
+          // so this stays empty for those and for a metabolite with none recorded yet.
+          if (m.ownBindings && m.ownBindings.length) {
+            const bul = el("ul", "metab-bindings");
+            const mbinds = [...m.ownBindings].sort((a, b) => bindingKi(a) - bindingKi(b));
+            for (const b of mbinds) {
+              const tgt = targetById.get(b.target);
+              const onActivate = tgt && tgt.focusable ? () => onTargetPick(tgt) : null;
+              bul.appendChild(bindingRow(b, drug, b.targetName, onActivate));
+            }
+            li.appendChild(bul);
           }
           ul.appendChild(li);
         }

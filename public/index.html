@@ -1770,6 +1770,14 @@
       }
       .info-metabolites .metab-hl { margin-left: 12px; font-size: 11px; }
       .info-metabolites .metab-hl .hl-val { color: var(--muted); font-weight: 600; }
+      /* A metabolite's own receptor bindings, nested under its row: indented and
+         separated by a faint left rule so they read as sub-facts of the metabolite,
+         reusing the same bindingRow markup as the drug's "Acts on" list. */
+      .info-metabolites .metab-bindings {
+        margin: 4px 0 2px 12px;
+        padding-left: 8px;
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+      }
       /* Combination-drug warning at the top of a combo's panel. */
       .combo-warning {
         background: rgba(230, 184, 0, 0.08);
