@@ -2537,7 +2537,12 @@ function createInfoPanel(data, sourcingModal) {
         const label = item.viaMetaboliteOfList
           ? `${item.metaboliteName} (${t("drug.metaboliteOf", { prodrug: item.viaMetaboliteOfList.join(", ") })})`
           : drug.displayName;
-        const row = bindingRow(binding, drug, label, () => onDrugPick(drug));
+        // A metabolite deep-links to its parent drug (no standalone metabolite view),
+        // passing its name so the parent panel scrolls to + flashes that metabolite's row.
+        const row = bindingRow(binding, drug, label,
+          item.viaMetaboliteOfList
+            ? () => onDrugPick(drug, { highlightMetabolite: item.metaboliteName })
+            : () => onDrugPick(drug));
         row.dataset.tourId = `ixdrug:${drug.id}`; // guided-tour hook: a drug row inside a target panel
         ul.appendChild(row);
       }
@@ -2958,7 +2963,11 @@ function createInfoPanel(data, sourcingModal) {
      * with a note / "speculative" marker when present, and a source pill: its own
      * quote-level source or the drug-level Stahl citation as a fallback).
      */
-    showDrug(drug) {
+    // opts.highlightMetabolite: a metabolite name to scroll to + briefly flash in the
+    // "Active metabolites" section. Used when arriving here from a receptor's Interacting
+    // drugs row for a non-modeled metabolite (which deep-links to its parent drug, since a
+    // non-drug metabolite has no standalone view), so the click has a visible destination.
+    showDrug(drug, opts = {}) {
       body.innerHTML = "";
       body.appendChild(el("h2", "info-title", drug.name));
       if (drug.category) body.appendChild(el("div", "info-group", drug.category));
@@ -3186,8 +3195,10 @@ function createInfoPanel(data, sourcingModal) {
         metaEl.dataset.tourSec = "metabolites";
         metaEl.appendChild(el("h3", null, t("drug.metabolites")));
         const ul = el("ul");
+        let flashLi = null; // the row to scroll to + flash (opts.highlightMetabolite)
         for (const m of drug.metabolites) {
           const li = el("li", "metab-row");
+          if (opts.highlightMetabolite && m.name === opts.highlightMetabolite) flashLi = li;
           const head = el("div", "metab-head");
           const linked = m.drugId ? drugById.get(m.drugId) : null;
           if (linked && m.linkFocusable) {
@@ -3231,6 +3242,14 @@ function createInfoPanel(data, sourcingModal) {
         }
         metaEl.appendChild(ul);
         body.appendChild(metaEl);
+        // Arrived from a metabolite's receptor row: bring it into view and flash it, so
+        // the user sees why the parent drug opened and where its metabolite's bindings are.
+        if (flashLi) {
+          flashLi.scrollIntoView({ block: "nearest" });
+          flashLi.classList.add("metab-flash");
+          flashLi.addEventListener("animationend",
+            () => flashLi.classList.remove("metab-flash"), { once: true });
+        }
       }
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
@@ -5902,7 +5921,7 @@ async function main() {
     const kinds = new Set(drug.contextKinds || []);
     return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
   };
-  const focusDrug = (drug, { frame = false, preview = false } = {}) => {
+  const focusDrug = (drug, { frame = false, preview = false, highlightMetabolite = null } = {}) => {
     const meshSet = drugMeshesOf(drug);
     const flowArrows = flowArrowsOf(drug);
     const ctxArrows = contextArrowsOf(drug);
@@ -5914,7 +5933,7 @@ async function main() {
     circuitAnim.play(flowArrows, drug.flowSystems || {}); // no-op for a drug with no mapped pathways
     if (preview) return; // hover preview: dim + dots + flow only, no panel/tab/spread
     autoSpreadIfDeep(meshSet);
-    info.showDrug(drug);
+    info.showDrug(drug, { highlightMetabolite });
     // From the search box, frame the affected regions; from the list row, leave
     // the view where it is.
     if (frame && meshSet.length) focus.focusMeshes(meshSet);
@@ -5926,7 +5945,7 @@ async function main() {
     if (activeDrugId === drug.id) selection.clear(); // watcher hides the animation
     else focusDrug(drug);
   };
-  const selectDrug = (drug) => focusDrug(drug, { frame: true });
+  const selectDrug = (drug, opts = {}) => focusDrug(drug, { frame: true, ...opts });
   selection.onIsolate((isolated) => {
     if (drugAnim.active && !drugAnim.matches(isolated)) {
       drugAnim.hide();

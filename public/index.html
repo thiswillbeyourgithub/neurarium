@@ -1778,6 +1778,16 @@
         padding-left: 8px;
         border-left: 1px solid rgba(255, 255, 255, 0.12);
       }
+      /* Brief highlight when a metabolite row is jumped to from a receptor's
+         Interacting-drugs list, so the arrival on the parent drug has a visible anchor. */
+      .info-metabolites .metab-row.metab-flash {
+        animation: metab-flash 1.6s ease-out;
+        border-radius: 4px;
+      }
+      @keyframes metab-flash {
+        0% { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); }
+        100% { background: transparent; box-shadow: 0 0 0 4px transparent; }
+      }
       /* Combination-drug warning at the top of a combo's panel. */
       .combo-warning {
         background: rgba(230, 184, 0, 0.08);
