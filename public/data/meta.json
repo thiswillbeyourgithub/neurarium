@@ -130,6 +130,27 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.95,
+        "profile": {
+          "raphe": 5.78,
+          "accumbens": -0.14,
+          "frontal": -0.19,
+          "cingulate": -0.23,
+          "temporal": -0.24,
+          "hippocampus": -0.29,
+          "amygdala": -0.31,
+          "thalamus": -0.31,
+          "hypothalamus": -0.34
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_936deae1d9f7",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -158,6 +179,25 @@
         "locus_coeruleus": [
           {
             "quote_id": "q_96c9f296fd16",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.82,
+        "profile": {
+          "locus_coeruleus": 9.34,
+          "amygdala": 0.16,
+          "hypothalamus": 0.0,
+          "thalamus": -0.09,
+          "cerebellum": -0.11,
+          "hippocampus": -0.15,
+          "frontal": -0.21
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_ea06838d1722",
             "provenance": "verified"
           }
         ]
@@ -223,6 +263,24 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.9,
+        "profile": {
+          "substantia_nigra": 4.72,
+          "vta": 4.07,
+          "accumbens": 0.05,
+          "putamen": -0.08,
+          "caudate": -0.28,
+          "frontal": -0.42
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_eb9c67a0ff89",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -273,6 +331,23 @@
         "thalamus": [
           {
             "quote_id": "q_67bc8bfc5c42",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.74,
+        "profile": {
+          "thalamus": 0.71,
+          "temporal": 0.21,
+          "frontal": 0.19,
+          "cerebellum": -0.79,
+          "hippocampus": -1.28
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_2e7e94e84fef",
             "provenance": "verified"
           }
         ]
@@ -346,6 +421,24 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.95,
+        "profile": {
+          "locus_coeruleus": 4.45,
+          "substantia_nigra": 3.8,
+          "vta": 3.3,
+          "raphe": 2.8,
+          "putamen": -0.1,
+          "caudate": -0.21
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_228a079ef83f",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -414,6 +507,25 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.9,
+        "profile": {
+          "locus_coeruleus": 4.4,
+          "substantia_nigra": 1.17,
+          "midbrain": 1.14,
+          "vta": 1.07,
+          "pons": 0.71,
+          "raphe": 0.49,
+          "medulla": 0.31
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_616bf02b31f6",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -475,6 +587,24 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.87,
+        "profile": {
+          "raphe": 2.13,
+          "medulla": 0.91,
+          "vta": 0.88,
+          "midbrain": 0.75,
+          "substantia_nigra": 0.54,
+          "pons": 0.53
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_b650c768a7b7",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -529,6 +659,23 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.96,
+        "profile": {
+          "septal_nuclei": 0.79,
+          "thalamus": 0.54,
+          "hippocampus": -0.42,
+          "frontal": -0.7,
+          "temporal": -0.81
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_b9e33c25a3c8",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -565,6 +712,21 @@
         "temporal": [
           {
             "quote_id": "q_3c90aaddcfa3",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.78,
+        "profile": {
+          "temporal": -0.3,
+          "frontal": -0.37,
+          "hippocampus": -0.6
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_05b3c2dbce79",
             "provenance": "verified"
           }
         ]
@@ -650,6 +812,24 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.9,
+        "profile": {
+          "hippocampus": 0.79,
+          "temporal": 0.4,
+          "frontal": 0.35,
+          "parietal": 0.27,
+          "occipital": 0.24,
+          "thalamus": -0.76
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_6caa6cae746e",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -693,6 +873,22 @@
         "thalamus": [
           {
             "quote_id": "q_7f1a6bed1b33",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.85,
+        "profile": {
+          "temporal": 0.34,
+          "hippocampus": 0.26,
+          "frontal": 0.22,
+          "thalamus": 0.18
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_56b1474d31e4",
             "provenance": "verified"
           }
         ]
@@ -744,6 +940,22 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.91,
+        "profile": {
+          "thalamus": -0.29,
+          "frontal": -0.34,
+          "temporal": -0.47,
+          "hippocampus": -1.93
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_5b3e6d8db2b5",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -780,6 +992,21 @@
         "thalamus": [
           {
             "quote_id": "q_1d3d55cfbf95",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.89,
+        "profile": {
+          "thalamus": 1.43,
+          "temporal": 0.3,
+          "frontal": 0.23
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_3c85fa04b95b",
             "provenance": "verified"
           }
         ]
@@ -821,6 +1048,22 @@
         "thalamus": [
           {
             "quote_id": "q_26312bfc2076",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.63,
+        "profile": {
+          "thalamus": 0.77,
+          "hippocampus": 0.22,
+          "temporal": 0.17,
+          "frontal": 0.15
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_2cea1a8b81f5",
             "provenance": "verified"
           }
         ]
@@ -909,6 +1152,26 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.96,
+        "profile": {
+          "locus_coeruleus": 1.02,
+          "frontal": 0.09,
+          "medulla": -0.16,
+          "hippocampus": -0.27,
+          "midbrain": -0.28,
+          "pons": -0.31,
+          "hypothalamus": -0.39,
+          "thalamus": -0.87
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_888810ba215f",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -989,6 +1252,25 @@
           }
         ]
       },
+      "density": {
+        "reliability": 0.94,
+        "profile": {
+          "hippocampus": 1.19,
+          "temporal": 0.6,
+          "frontal": 0.56,
+          "caudate": 0.26,
+          "putamen": 0.24,
+          "cerebellum": -0.46,
+          "thalamus": -1.12
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_e0a453071918",
+            "provenance": "verified"
+          }
+        ]
+      },
       "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
       "wikipedia_provenance": "sourced",
       "sources": [
@@ -1039,6 +1321,23 @@
         "vta": [
           {
             "quote_id": "q_1ce243b72b75",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.73,
+        "profile": {
+          "raphe": 2.2,
+          "hypothalamus": 0.69,
+          "vta": 0.45,
+          "thalamus": 0.05,
+          "locus_coeruleus": -0.33
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_17c42dae4547",
             "provenance": "verified"
           }
         ]
@@ -2257,6 +2556,14 @@
         "nosource": 0,
         "missing": 23
       },
+      "receptor_density": {
+        "total": 36,
+        "verified": 36,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0
+      },
       "targets": {
         "total": 20,
         "verified": 16,
@@ -2281,6 +2588,14 @@
         "nosource": 0,
         "missing": 14
       },
+      "target_density": {
+        "total": 17,
+        "verified": 17,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0
+      },
       "structures": {
         "total": 54,
         "verified": 54,
@@ -2299,13 +2614,13 @@
       }
     },
     "nodes": {
-      "total": 3307,
-      "verified": 3109,
+      "total": 3360,
+      "verified": 3162,
       "sourced": 0,
       "llm": 180,
       "nosource": 18,
       "missing": 198,
-      "backed": 3109,
+      "backed": 3162,
       "pct_backed": 94
     },
     "ki_coverage": {

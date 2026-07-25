@@ -17,8 +17,9 @@ do under attribution.
 Pipeline (mirrors ``fetch_gtopdb.py`` -> ``apply_location_sources.py``):
   1. Download each donor's ``normalized_microarray_donor<id>.zip`` (~426 MB) into
      ``data_sources/allen/raw/`` (author-side, gitignored; skipped if already present). We read
-     only PACall.csv + SampleAnnot.csv + Probes.csv from the zip, never the ~400 MB
-     MicroarrayExpression.csv, so memory stays small.
+     PACall.csv + SampleAnnot.csv + Probes.csv from the zip, plus (for the density pass,
+     see step 5) the probes we actually model out of the ~400 MB MicroarrayExpression.csv,
+     filtered as it streams so memory stays small.
   2. Map each tissue sample to our coarse ``base`` region via ``BASE_ALLEN`` (the Allen
      ontology-subtree crosswalk) using the cached ``raw/ontology.json`` structure paths.
   3. For each gene (``TARGET_GENES`` / ``fetch_gtopdb.RECEPTOR_GENES``), pick the
@@ -31,6 +32,12 @@ Pipeline (mirrors ``fetch_gtopdb.py`` -> ``apply_location_sources.py``):
      --corpus allen`` merges into ``tools/generated_cache/location_sources.json``). Un-confirmable
      (owner, base) pairs (region has 0 Allen samples, e.g. pituitary) are logged, not
      dropped.
+  5. **Density pass** (``--skip-density`` to omit): the same probe's *continuous*
+     intensities become one relative per-region profile per owner, scored by cross-donor
+     agreement (see ``DENSITY_MIN_R``). Its quote line lands on the same gene page and the
+     profile in ``data_sources/allen/density.json``, which
+     ``tools/sourcing/apply_expression_density.py`` merges into
+     ``tools/generated_cache/expression_density.json``.
 
 Stdlib only (urllib + zipfile + csv). Idempotent; ``--only``/``--donors``/``--refresh``.
 Run from the repo root::
@@ -46,6 +53,7 @@ import argparse
 import csv
 import io
 import json
+import statistics
 import sys
 import urllib.error
 import urllib.request
@@ -78,6 +86,23 @@ DONORS = {
 }
 
 PRESENT_MIN = 0.5  # a base is "present" if the representative probe detects in >= half its samples
+
+# --- Expression *density* (how much, not just whether) ---
+#
+# PACall answers "is it here"; the same zips also carry MicroarrayExpression.csv, whose
+# continuous intensities answer "is it concentrated here". Within each donor the gene's
+# values are z-scored across that donor's samples (so a value is *relative to that brain's
+# own expression of that gene*, the only comparison a microarray licenses), then averaged
+# per base across donors.
+#
+# A low-abundance gene sits at the array noise floor and its "profile" is then just noise,
+# so every profile is scored by how well the donors AGREE (median pairwise Pearson r over
+# the per-base profile) and only profiles clearing DENSITY_MIN_R ship. That r rides the
+# emitted quote, so a reader can weigh the profile inside the viewer rather than trust it
+# blind.
+DENSITY_MIN_R = 0.5     # publish a profile only if the donors reproduce it this well
+DENSITY_MIN_DONORS = 2  # ... and only rank a base sampled in at least this many donors
+DENSITY_MIN_BASES = 8   # ... and only score r over donors sharing this many bases
 
 # --- Crosswalk: our coarse base region -> Allen ontology-subtree root id(s). A sample
 # counts toward a base if its structure_id_path contains any of the base's roots. Nesting
@@ -183,9 +208,17 @@ def download_donor(donor: int) -> Path | None:
     return dest
 
 
-def read_donor(zpath: Path) -> tuple[dict[int, list[str]], list[int], dict[int, list[int]]]:
+def read_donor(zpath: Path, expr_genes: set[str] | None = None
+               ) -> tuple[dict[int, list[str]], list[int], dict[int, list[int]],
+                          dict[int, list[float]]]:
     """From a donor zip, return (probe_id -> [PACall per sample], sample structure_ids,
-    gene_symbol -> [probe_ids]). Reads only the three small members, not expression."""
+    gene_symbol -> [probe_ids], probe_id -> [expression per sample]).
+
+    The first three come from the three small members. The fourth is read from the ~400 MB
+    MicroarrayExpression.csv and is needed only for the density pass, so it is filtered to
+    the probes of ``expr_genes`` (the ~84 genes we actually model) as the file streams by:
+    memory stays in the same league as the rest, we just pay one extra scan. Pass
+    ``expr_genes=None`` to skip that member entirely."""
     with zipfile.ZipFile(zpath) as z:
         names = {n.split("/")[-1]: n for n in z.namelist()}
         # SampleAnnot.csv: one row per sample (same column order as PACall), has structure_id
@@ -205,7 +238,16 @@ def read_donor(zpath: Path) -> tuple[dict[int, list[str]], list[int], dict[int, 
                 pid = int(row[0])
                 if pid in wanted:
                     pacall[pid] = [int(v) for v in row[1:]]
-    return pacall, sample_structs, gene_probes
+        # MicroarrayExpression.csv: same shape as PACall but log2 intensities, not booleans.
+        expr: dict[int, list[float]] = {}
+        if expr_genes:
+            keep = {p for g in expr_genes for p in gene_probes.get(g, [])}
+            with z.open(names["MicroarrayExpression.csv"]) as fh:
+                for row in csv.reader(io.TextIOWrapper(fh, "utf-8")):
+                    pid = int(row[0])
+                    if pid in keep:
+                        expr[pid] = [float(v) for v in row[1:]]
+    return pacall, sample_structs, gene_probes, expr
 
 
 def presence_for_gene(gene: str, donor_data: list[tuple]) -> dict[str, dict]:
@@ -213,7 +255,7 @@ def presence_for_gene(gene: str, donor_data: list[tuple]) -> dict[str, dict]:
     probe}}. Representative probe = the gene's probe with the most detections overall."""
     # tally per (base) using each donor's representative probe for this gene
     agg: dict[str, dict] = {}
-    for pacall, sample_structs, gene_probes, struct_bases, donor in donor_data:
+    for pacall, sample_structs, gene_probes, struct_bases, donor, _expr in donor_data:
         probes = [p for p in gene_probes.get(gene, []) if p in pacall]
         if not probes:
             continue
@@ -230,11 +272,67 @@ def presence_for_gene(gene: str, donor_data: list[tuple]) -> dict[str, dict]:
     return agg
 
 
+def _pearson(a: list[float], b: list[float]) -> float:
+    """Plain Pearson r (stdlib only; no numpy in this tree)."""
+    ma, mb = statistics.mean(a), statistics.mean(b)
+    num = sum((x - ma) * (y - mb) for x, y in zip(a, b))
+    da = sum((x - ma) ** 2 for x in a) ** 0.5
+    db = sum((y - mb) ** 2 for y in b) ** 0.5
+    return num / (da * db) if da and db else 0.0
+
+
+def density_for_gene(gene: str, donor_data: list[tuple]) -> dict | None:
+    """Per-base relative expression for one gene -> ``{profile, donors, reliability}``.
+
+    ``profile`` maps base -> ``{z, donors}`` where ``z`` is the mean (across donors) of the
+    within-donor z-score of the gene's representative probe over that base's samples, and
+    ``reliability`` is the median pairwise Pearson r between donors' profiles: the honesty
+    score that separates a real gradient from array noise (see DENSITY_MIN_R). Returns None
+    when no donor carries the gene's expression."""
+    per_donor: dict[int, dict[str, float]] = {}
+    probes: dict[int, int] = {}
+    for pacall, sample_structs, gene_probes, struct_bases, donor, expr in donor_data:
+        candidates = [p for p in gene_probes.get(gene, []) if p in expr and p in pacall]
+        if not candidates:
+            continue
+        rep = max(candidates, key=lambda p: sum(pacall[p]))  # same pick as presence_for_gene
+        vals = expr[rep]
+        mu = statistics.mean(vals)
+        sd = statistics.pstdev(vals) or 1.0  # a flat probe would divide by zero
+        zs = [(v - mu) / sd for v in vals]
+        by_base: dict[str, list[float]] = {}
+        for j, sid in enumerate(sample_structs):
+            for base in struct_bases.get(sid, ()):
+                by_base.setdefault(base, []).append(zs[j])
+        per_donor[donor] = {b: statistics.mean(v) for b, v in by_base.items()}
+        probes[donor] = rep
+    if not per_donor:
+        return None
+    donors = sorted(per_donor)
+    rs = []
+    for i in range(len(donors)):
+        for j in range(i + 1, len(donors)):
+            a, b = per_donor[donors[i]], per_donor[donors[j]]
+            common = sorted(set(a) & set(b))
+            if len(common) >= DENSITY_MIN_BASES:
+                rs.append(_pearson([a[c] for c in common], [b[c] for c in common]))
+    pooled: dict[str, dict] = {}
+    for base in {b for p in per_donor.values() for b in p}:
+        vals = [p[base] for p in per_donor.values() if base in p]
+        if len(vals) >= DENSITY_MIN_DONORS:
+            pooled[base] = {"z": round(statistics.mean(vals), 2), "donors": len(vals)}
+    return {"profile": pooled, "donors": donors, "probes": probes,
+            "reliability": round(statistics.median(rs), 2) if rs else 0.0}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--only", help="comma-separated owner ids (targets/receptors) to limit")
     ap.add_argument("--donors", help="comma-separated donor ids (default: all 6)")
     ap.add_argument("--refresh", action="store_true", help="re-download donor zips")
+    ap.add_argument("--skip-density", action="store_true",
+                    help="presence pass only; skips reading MicroarrayExpression.csv "
+                         "(faster, but leaves the density lines off the gene pages)")
     args = ap.parse_args()
 
     # receptor genes reuse the GtoPdb map (Phase 2b); targets use TARGET_GENES.
@@ -267,8 +365,9 @@ def main() -> int:
         z = download_donor(d)
         if z is None:
             continue
-        pacall, sample_structs, gene_probes = read_donor(z)
-        donor_data.append((pacall, sample_structs, gene_probes, struct_bases, d))
+        pacall, sample_structs, gene_probes, expr = read_donor(
+            z, None if args.skip_density else {g for _, gs in owners.values() for g in gs})
+        donor_data.append((pacall, sample_structs, gene_probes, struct_bases, d, expr))
         log(f"donor {d}: {len(sample_structs)} samples, {len(gene_probes)} genes on array")
     if not donor_data:
         log("error: no donor zips available; aborting")
@@ -284,9 +383,11 @@ def main() -> int:
 
     PAGES.mkdir(parents=True, exist_ok=True)
     confirmed: list[dict] = []
+    density: list[dict] = []
     page_lines: dict[str, list[str]] = {}
     unconfirmable: list[str] = []
-    stats = {"owners": 0, "confirmed": 0, "absent": 0, "nodata": 0}
+    stats = {"owners": 0, "confirmed": 0, "absent": 0, "nodata": 0,
+             "density": 0, "density_noisy": 0}
 
     for owner, (kind, genes) in sorted(owners.items()):
         claimed = (rec_regions if kind == "receptor" else tgt_regions).get(owner, set())
@@ -326,10 +427,48 @@ def main() -> int:
                               "page": g, "quote": quote})
             stats["confirmed"] += 1
 
-    # emit one page per gene (the quote-gate reference text) + the confirm list
+        # --- density: one profile node for the owner (not one per region) ---
+        #
+        # "Where is it concentrated" is a single measurement over the owner's regions, so
+        # it is ONE sourceable claim, not one per region: tallying it per region would add
+        # ~1000 uniformly-verified nodes and flatter the headline coverage for free.
+        # A multi-gene owner (the muscarinic / adrenergic groups) has no single profile,
+        # so the most reproducible member gene stands for it, and the quote names it.
+        if args.skip_density:
+            continue
+        best_den = None
+        for g in genes:
+            den = density_for_gene(g, donor_data)
+            if den and (best_den is None or den["reliability"] > best_den[1]["reliability"]):
+                best_den = (g, den)
+        if best_den is None:
+            continue
+        g, den = best_den
+        # Confirm-only, exactly like presence: rank only regions the owner already claims.
+        ranked = sorted(((b, v) for b, v in den["profile"].items() if b in claimed),
+                        key=lambda kv: -kv[1]["z"])
+        if den["reliability"] < DENSITY_MIN_R or len(ranked) < 2:
+            stats["density_noisy"] += 1
+            continue
+        donors_s = ",".join(str(x) for x in den["donors"])
+        probe_s = den["probes"][den["donors"][0]]
+        quote = (f"{g} relative expression across {len(den['donors'])} donors "
+                 f"({donors_s}), probe {probe_s}, within-donor z-score of log2 intensity, "
+                 f"cross-donor profile agreement r={den['reliability']:+.2f}: "
+                 + ", ".join(f"{b} {v['z']:+.2f} ({v['donors']}d)" for b, v in ranked))
+        page_lines.setdefault(g, []).append(quote)
+        density.append({"owner_kind": kind, "owner": owner, "page": g, "quote": quote,
+                        "reliability": den["reliability"],
+                        "profile": {b: v["z"] for b, v in ranked}})
+        stats["density"] += 1
+
+    # emit one page per gene (the quote-gate reference text) + the confirm lists
     for g, lines in page_lines.items():
         (PAGES / f"{g}.md").write_text("\n".join(sorted(set(lines))) + "\n", encoding="utf-8")
     (ALLEN / "confirmed.json").write_text(json.dumps(confirmed, indent=2) + "\n", encoding="utf-8")
+    if not args.skip_density:
+        (ALLEN / "density.json").write_text(json.dumps(density, indent=2) + "\n",
+                                            encoding="utf-8")
 
     for u in unconfirmable[:40]:
         log(f"  [nodata] {u}")
@@ -337,7 +476,11 @@ def main() -> int:
         log(f"  ... +{len(unconfirmable)-40} more un-confirmable (region unsampled/off-atlas)")
     log(f"\nowners with claims: {stats['owners']}; confirmed present: {stats['confirmed']}; "
         f"sampled-but-absent (stays llm): {stats['absent']}; unsampled (stays llm): {stats['nodata']}")
-    log(f"wrote {len(page_lines)} gene pages + data_sources/allen/confirmed.json")
+    if not args.skip_density:
+        log(f"density profiles: {stats['density']} kept, {stats['density_noisy']} dropped "
+            f"(cross-donor r < {DENSITY_MIN_R} or < 2 ranked regions)")
+    log(f"wrote {len(page_lines)} gene pages + data_sources/allen/confirmed.json"
+        + ("" if args.skip_density else " + density.json"))
     return 0
 
 

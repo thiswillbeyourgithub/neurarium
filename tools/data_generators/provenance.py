@@ -158,6 +158,32 @@ RECEPTOR_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 TARGET_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 
 
+# Relative expression *density* across an owner's regions: the claim "receptor R is not
+# merely present in these regions, it is concentrated in these ones". A separate node kind
+# (``receptor_density`` / ``target_density``) from the per-region presence nodes, and ONE
+# node per owner rather than one per region: it is a single measurement over the whole
+# region set, so per-region tallying would inflate the coverage headline with ~1000
+# uniformly-verified nodes. Shape: ``{owner_id: {reliability, profile {base: z},
+# sources [...]}}``. Machine-written (Allen AHBA, see below); empty when that file is absent.
+RECEPTOR_DENSITY: dict[str, dict[str, Any]] = {}
+TARGET_DENSITY: dict[str, dict[str, Any]] = {}
+
+
+def _merge_external_density() -> None:
+    """Merge ``tools/generated_cache/expression_density.json`` into the two registries above.
+
+    Written by ``tools/fetch/fetch_allen.py`` -> ``tools/sourcing/apply_expression_density.py``
+    (the Allen microarray intensities behind the same PACall booleans that source the
+    presence nodes). A missing file is fine: no owner then carries a density, exactly as
+    before the pass existed."""
+    src = Path(__file__).resolve().parent.parent / "generated_cache" / "expression_density.json"
+    if not src.exists():
+        return
+    data = json.loads(src.read_text(encoding="utf-8"))
+    RECEPTOR_DENSITY.update(data.get("receptors") or {})
+    TARGET_DENSITY.update(data.get("targets") or {})
+
+
 def _merge_external_location_sources() -> None:
     """Merge author-side sourced expression locations from ``tools/generated_cache/location_sources.json``
     into the two registries above.
@@ -181,6 +207,7 @@ def _merge_external_location_sources() -> None:
 
 
 _merge_external_location_sources()
+_merge_external_density()
 
 
 def _receptor_provenance(receptor_id: str) -> str:
@@ -235,6 +262,36 @@ def _location_sources(
         out[base] = _quote_sources(
             sources, f"{label} {owner_id!r} location {base!r}")
     return out
+
+
+def _density_node(registry: dict[str, dict[str, Any]], owner_id: str,
+                  regions: list[str], label: str) -> dict[str, Any]:
+    """Emitted ``density`` for an owner whose regions carry a *relative* expression
+    profile (:data:`RECEPTOR_DENSITY` / :data:`TARGET_DENSITY`), or ``{}`` when it has none.
+
+    ``{reliability, profile {base: z}, grade, sources}``: one graded node (see the registry
+    comment for why it is one node and not one per region). ``reliability`` is the
+    cross-donor agreement of the profile, carried so the viewer can show *how much to trust
+    the shape* rather than presenting every profile as equally solid. Every ranked base must
+    be one of the owner's own ``regions``, so a profile can never imply an expression site
+    the owner does not claim."""
+    entry = registry.get(owner_id)
+    if not entry:
+        return {}
+    known = set(regions)
+    profile = entry.get("profile") or {}
+    stray = sorted(set(profile) - known)
+    if stray:
+        raise KeyError(
+            f"{label} {owner_id!r} has a density profile for {stray}, "
+            f"which is not among its regions {sorted(known)}")
+    sources = _quote_sources(entry.get("sources") or [], f"{label} {owner_id!r} density")
+    grade = DEFAULT_PROVENANCE
+    if sources:
+        grade = max((s["provenance"] for s in sources), key=lambda p: _GRADE_RANK[p])
+    return {"reliability": entry["reliability"],
+            "profile": {b: profile[b] for b in sorted(profile, key=lambda k: -profile[k])},
+            "grade": grade, "sources": sources}
 
 
 # The constant source backing every drug record (the user-verified fair-use
@@ -780,6 +837,11 @@ def _provenance_stats(structures: list[dict[str, Any]],
 
     receptor_location_grades = [g for r in receptors
                                 for g in location_grades(r, "locations")]
+    # Expression-DENSITY nodes ("and it is concentrated in these regions"), ONE per owner
+    # that carries a measured profile (an owner without one is simply not a node here,
+    # like a drug with no half-life). Distinct from the presence nodes above: presence and
+    # concentration are different claims and can be sourced independently.
+    receptor_density_grades = [r["density"]["grade"] for r in receptors if r.get("density")]
     # Non-receptor drug target classifications (type / system), graded per target.
     # Receptor-linked targets are skipped (already counted as receptors, not twice).
     target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
@@ -790,6 +852,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
     target_location_grades = [g for t in drug_targets.values()
                               if t.get("type") != "receptor"
                               for g in location_grades(t, "regions")]
+    target_density_grades = [t["density"]["grade"] for t in drug_targets.values()
+                             if t.get("type") != "receptor" and t.get("density")]
     # Target tone-polarity sub-claims: one graded node per non-receptor target that
     # carries a direction-flipping flag (vesicular / sign / synaptic). Kept distinct
     # from the target's type/system classification so a wrong direction shows honestly.
@@ -830,9 +894,11 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "receptor_sign": tally(receptor_sign_grades),
         "receptor_synaptic": tally(receptor_synaptic_grades),
         "receptor_locations": tally(receptor_location_grades),
+        "receptor_density": tally(receptor_density_grades),
         "targets": tally(target_grades),
         "target_polarity": tally(target_polarity_grades),
         "target_locations": tally(target_location_grades),
+        "target_density": tally(target_density_grades),
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }

@@ -103,10 +103,12 @@ from data_generators.provenance import (  # noqa: E402
     DEFAULT_PROVENANCE,
     DRUG_CATEGORY_PROVENANCE,
     PROVENANCE_LEVELS,
+    RECEPTOR_DENSITY,
     RECEPTOR_LOCATION_SOURCES,
     RECEPTOR_PROVENANCE,
     SOURCE_CORPORA,
     STRUCTURE_PROVENANCE,
+    TARGET_DENSITY,
     TARGET_LOCATION_SOURCES,
     TARGET_POLARITY_PROVENANCE,
     TARGET_PROVENANCE,
@@ -120,6 +122,7 @@ from data_generators.provenance import (  # noqa: E402
     _drug_brands,
     _half_life,
     _ki_annotation,
+    _density_node,
     _location_sources,
     _lookup_provenance,
     _provenance,
@@ -572,6 +575,13 @@ def _receptor_record(rec: dict[str, Any],
             RECEPTOR_LOCATION_SOURCES, rec["id"], out["locations"], "Receptor")
         if loc_sources:
             out["location_sources"] = loc_sources
+        # Relative expression density across those regions ("concentrated where?"), its
+        # own graded node (kind receptor_density). Omitted when unmeasured, so a receptor
+        # without one simply reads as present/absent, as before.
+        density = _density_node(
+            RECEPTOR_DENSITY, rec["id"], out["locations"], "Receptor")
+        if density:
+            out["density"] = density
     if "description" in rec:
         out["description"] = {"en": rec["description"], "fr": rec["description_fr"]}
     if "wikipedia" in rec:
@@ -659,6 +669,11 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
             TARGET_LOCATION_SOURCES, tid, spec["regions"], "Target")
         if tloc:
             targets[tid]["location_sources"] = tloc
+        # ... and the relative-density profile over those regions (kind target_density),
+        # the mirror of a receptor's. Omitted when unmeasured.
+        tden = _density_node(TARGET_DENSITY, tid, spec["regions"], "Target")
+        if tden:
+            targets[tid]["density"] = tden
         if spec.get("wikipedia"):
             targets[tid]["wikipedia"] = spec["wikipedia"]
             targets[tid]["wikipedia_provenance"] = _wiki_provenance(tid)

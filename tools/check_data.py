@@ -108,6 +108,17 @@ _HEMISPHERE_RE = re.compile(r"_(R|L)$")
 # value the viewer renders as the grey/yellow/green source pill.
 _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 
+# The knowledge-node kinds folded into the headline coverage, in the generator's order
+# (mirrors provenance.py's by_kind minus "references", which points *at* a node rather
+# than being one). Adding a node kind means adding it here too, in one place: both the
+# coverage table and the self-consistency check read this.
+NODE_KINDS = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
+              "drug_half_life", "drug_metabolites", "drug_metabolite_bindings",
+              "projections", "circuits", "projection_groups", "receptors",
+              "receptor_class", "receptor_sign", "receptor_synaptic",
+              "receptor_locations", "receptor_density", "targets", "target_polarity",
+              "target_locations", "target_density", "structures")
+
 
 def _flip_hemisphere(structure_id):
     """Flip a structure id to the other hemisphere; midline ids unchanged."""
@@ -381,6 +392,21 @@ def check_reachability(report, meta, structures, projections, circuits,
         if value not in pool:
             report.error(context)
 
+    def check_density(ctx, owner, own_regions):
+        """A density profile ranks the owner's OWN regions and nothing else: a stray base
+        would draw an expression site the owner never claims. Shared by receptors and
+        non-receptor targets (identical shape)."""
+        density = owner.get("density")
+        if not density:
+            return
+        for base in density.get("profile", {}):
+            if base not in own_regions:
+                report.error(f"{ctx}: density profile ranks {base!r}, which is not one "
+                             f"of its regions (would imply an unclaimed expression site)")
+        if not -1.0 <= density.get("reliability", 0) <= 1.0:
+            report.error(f"{ctx}: density reliability {density.get('reliability')!r} "
+                         f"is not a correlation in [-1, 1]")
+
     for structure in structures:
         require(structure.get("group"), meta.get("group_labels", {}),
                 f"structure {structure.get('id')}: group {structure.get('group')!r} "
@@ -438,6 +464,7 @@ def check_reachability(report, meta, structures, projections, circuits,
             if base == "ALL" and not receptor.get("ubiquitous"):
                 report.error(f"receptor {rid}: location_sources 'ALL' but the "
                              f"receptor is not ubiquitous")
+        check_density(f"receptor {rid}", receptor, own)
         # The merged Receptors & targets browse list expects every receptor to
         # also be a drug_targets key (a binding can target it directly).
         if rid not in targets:
@@ -458,6 +485,7 @@ def check_reachability(report, meta, structures, projections, circuits,
             if base not in own_regions:
                 report.error(f"target {key}: location_sources key {base!r} is not "
                              f"one of its regions (grades a region it doesn't claim)")
+        check_density(f"target {key}", target, own_regions)
         linked = target.get("receptor")
         if linked is not None and linked not in receptor_ids:
             report.error(f"target {key}: linked receptor {linked!r} is not a receptor id")
@@ -666,13 +694,7 @@ def print_coverage(stats):
     node total."""
     by = stats.get("by_kind", {})
     a = stats.get("nodes", {})
-    # The node kinds folded into the headline, in the generator's order.
-    node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
-                  "drug_half_life", "drug_metabolites", "drug_metabolite_bindings",
-                  "projections", "circuits", "projection_groups", "receptors",
-                  "receptor_class", "receptor_sign", "receptor_synaptic",
-                  "receptor_locations", "targets", "target_polarity",
-                  "target_locations", "structures")
+    node_kinds = NODE_KINDS
 
     def backed_pct(c):
         total = c.get("total", 0)
@@ -854,12 +876,7 @@ def check_provenance(report, meta, structures, projections, circuits,
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
-        node_kinds = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
-                      "drug_half_life", "drug_metabolites", "drug_metabolite_bindings",
-                      "projections", "circuits", "projection_groups", "receptors",
-                      "receptor_class", "receptor_sign", "receptor_synaptic",
-                      "receptor_locations", "targets", "target_polarity",
-                      "target_locations", "structures")
+        node_kinds = NODE_KINDS
         by = stats.get("by_kind", {})
         for key in ("total", "verified", "sourced", "missing"):
             want = sum(by.get(k, {}).get(key, 0) for k in node_kinds)
@@ -1021,6 +1038,10 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         for base, srcs in (r.get("location_sources") or {}).items():
             for i, src in enumerate(srcs or []):
                 check_one(f"receptor {r.get('id')} location_sources[{base}][{i}]", src)
+        # The density profile's quote carries the z per region and the cross-donor
+        # agreement, so gating it verbatim is what keeps those numbers honest.
+        for i, src in enumerate((r.get("density") or {}).get("sources") or []):
+            check_one(f"receptor {r.get('id')} density sources[{i}]", src)
 
     for tid, tinfo in (meta.get("drug_targets", {}) or {}).items():
         if isinstance(tinfo, dict):
@@ -1031,6 +1052,8 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             for base, srcs in (tinfo.get("location_sources") or {}).items():
                 for i, src in enumerate(srcs or []):
                     check_one(f"target {tid} location_sources[{base}][{i}]", src)
+            for i, src in enumerate((tinfo.get("density") or {}).get("sources") or []):
+                check_one(f"target {tid} density sources[{i}]", src)
 
     if skipped_corpora:
         report.warn(f"source pages absent for {sorted(skipped_corpora)} "
