@@ -1871,7 +1871,7 @@ function createInfoPanel(data, sourcingModal) {
   // One "Found in" region row: the name (clickable -> jump when the base resolves)
   // plus, when `meta` is given, its own per-region provenance pill (since "found in
   // region B" is graded per region, separate from the mechanism/type pill above).
-  const locationRow = (name, base, meta) => {
+  const locationRow = (name, base, meta, density) => {
     const li = el("li");
     li.appendChild(el("span", "loc-name", name));
     // A non-human expression claim (the source was checked in rat/mouse/monkey,
@@ -1893,6 +1893,23 @@ function createInfoPanel(data, sourcingModal) {
         ? sourcesTip(meta.sources) : t("receptor.locUnsourced");
       li.appendChild(makeProvenancePill(meta.provenance, tip));
     }
+    // How much sits here, when the owner carries a measured profile: a bar scaled
+    // against its own strongest region (see densityEntry) plus the signed z, since a
+    // bar alone would read as an absolute quantity it is not. Last in the row so the
+    // bars line up in a column at the panel edge and the pill keeps its spot by the name.
+    // Ternary, not `density && ...`: that yields null (not undefined) for an owner with
+    // no profile, which the `!== undefined` guard would wave through into z.toFixed().
+    const z = density ? density.profile[base] : undefined;
+    if (z !== undefined) {
+      const signed = `${z > 0 ? "+" : ""}${z.toFixed(2)}`;
+      const wrap = el("span", "loc-density");
+      wrap.title = t("receptor.densityValueTip", { z: signed });
+      const bar = el("span", "loc-density-bar");
+      bar.style.setProperty("--fill", `${Math.round(density.rel[base] * 100)}%`);
+      wrap.appendChild(bar);
+      wrap.appendChild(el("span", "loc-density-z", signed));
+      li.appendChild(wrap);
+    }
     return li;
   };
 
@@ -1903,7 +1920,7 @@ function createInfoPanel(data, sourcingModal) {
   // panel and the extra vertical spacing keeps the provenance pills from crowding.
   // Bases that don't resolve to a group fall into a trailing "other" bucket (with a
   // heading only when there are also real groups; an all-unresolved list stays flat).
-  const locationList = (names, bases, info) => {
+  const locationList = (names, bases, info, density) => {
     const buckets = new Map(); // group key (or null) -> [{name, base, meta}]
     names.forEach((name, i) => {
       const base = bases && bases[i];
@@ -1914,6 +1931,26 @@ function createInfoPanel(data, sourcingModal) {
     const order = [...Object.keys(data.meta.groupLabels), null]
       .filter((g) => buckets.has(g));
     const container = el("div", "loc-groups");
+    // The profile is ONE claim over the whole list, so its caption + grade pill sit
+    // above the rows rather than repeating on each: what varies per row is the value,
+    // what is graded once is the measurement. The caption also carries how well the
+    // donors agreed, so a reader can weigh the bars instead of trusting them blind.
+    if (density) {
+      const cap = el("p", "loc-density-caption", t("receptor.density"));
+      cap.title = t("receptor.densityTip");
+      const r = `${density.reliability > 0 ? "+" : ""}${density.reliability.toFixed(2)}`;
+      const agree = el("span", "loc-density-agree",
+        t("receptor.densityAgreement", { r }));
+      agree.title = t("receptor.densityAgreementTip", {
+        donors: density.donors,
+        min: (data.meta.densityMinReliability ?? 0).toFixed(2),
+      });
+      cap.appendChild(agree);
+      cap.appendChild(makeProvenancePill(
+        density.provenance,
+        density.sources.length ? sourcesTip(density.sources) : undefined));
+      container.appendChild(cap);
+    }
     for (const g of order) {
       if (g !== null) {
         container.appendChild(el("h4", "loc-group-label", data.meta.groupLabels[g]));
@@ -1922,7 +1959,7 @@ function createInfoPanel(data, sourcingModal) {
       }
       const ul = el("ul");
       for (const { name, base, meta } of buckets.get(g)) {
-        ul.appendChild(locationRow(name, base, meta));
+        ul.appendChild(locationRow(name, base, meta, density));
       }
       container.appendChild(ul);
     }
@@ -2875,7 +2912,7 @@ function createInfoPanel(data, sourcingModal) {
         where.appendChild(el("p", "info-desc", t("receptor.noRole")));
       } else {
         where.appendChild(locationList(receptor.locationNames, receptor.locations,
-          receptor.locationInfo));
+          receptor.locationInfo, receptor.densityInfo));
       }
       body.appendChild(where);
 
@@ -2944,7 +2981,7 @@ function createInfoPanel(data, sourcingModal) {
         where.appendChild(el("p", "info-desc", t("receptor.noRole")));
       } else {
         where.appendChild(locationList(target.locationNames, target.locationBases,
-          target.locationInfo));
+          target.locationInfo, target.densityInfo));
       }
       body.appendChild(where);
 
@@ -4325,9 +4362,11 @@ function buildAboutSourcing(meta, opts = {}) {
     receptor_sign: "about.kindReceptorSign",
     receptor_synaptic: "about.kindReceptorSynaptic",
     receptor_locations: "about.kindReceptorLocations",
+    receptor_density: "about.kindReceptorDensity",
     targets: "about.kindTargets",
     target_polarity: "about.kindTargetPolarity",
     target_locations: "about.kindTargetLocations",
+    target_density: "about.kindTargetDensity",
     structures: "about.kindStructures",
     // Wikipedia `references` are deliberately NOT a coverage bar: a reference is a
     // pointer *at* a knowledge node, not itself a node, and every present link
@@ -4508,6 +4547,10 @@ function buildKindExample(kind, data, nav) {
     const s = id && data.byId && data.byId.get(id);
     return s ? (s.base_name || s.name) : null;
   };
+  // A density profile is keyed by structure *base*, which is only a byId key for a
+  // midline structure; a paired one resolves through its right hemisphere.
+  const baseLabel = (base) =>
+    regionName(base) || regionName(`${base}_R`) || base;
   const firstAction = (d) => (d && d.bindings || []).find(
     (b) => !b.affinity_only && b.actionLabel && b.targetName);
 
@@ -4569,11 +4612,24 @@ function buildKindExample(kind, data, nav) {
       const rn = rec && regionName((rec.receptor.structureIds || [])[0]);
       return rn ? line(rec.name, rn, () => nav.target(rec)) : null;
     }
+    case "receptor_density": {
+      // Name the region the profile ranks highest: what a density node claims is *which*
+      // region stands out, so a bare receptor name would not show the claim.
+      const den = pick(recTargets, (t2) => t2.receptor && t2.receptor.densityInfo);
+      const top = den && den.receptor.densityInfo
+        && Object.keys(den.receptor.densityInfo.profile)[0];
+      return top ? line(den.name, baseLabel(top), () => nav.target(den)) : null;
+    }
     case "targets":
       return tgt ? line(tgt.name, tgt.typeLabel, () => nav.target(tgt)) : null;
     case "target_locations": {
       const rn = tgt && (tgt.locationNames || [])[0];
       return rn ? line(tgt.name, rn, () => nav.target(tgt)) : null;
+    }
+    case "target_density": {
+      const den = pick(otherTargets, (t2) => t2.densityInfo);
+      const top = den && den.densityInfo && Object.keys(den.densityInfo.profile)[0];
+      return top ? line(den.name, baseLabel(top), () => nav.target(den)) : null;
     }
     case "target_polarity": {
       const pol = pick(otherTargets, (t2) =>

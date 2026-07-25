@@ -80,9 +80,13 @@ in `meta.provenance_stats.by_kind`):
   -> `receptor_class`; `sign` (excit./inhib.) -> `receptor_sign`; `synaptic` site (pre/post) ->
   `receptor_synaptic` (a receptor's `classification[attr]` each carry their own grade)
 - receptor *expression region* -> a receptor's `location_sources` -> `receptor_locations`
+- receptor *expression density profile* -> a receptor's `density` -> `receptor_density` (ONE
+  node for the whole profile, not one per region: it is a single measurement ranking the
+  receptor's regions against each other, see Expression density)
 - non-receptor drug target -> `meta.drug_targets` -> `targets`
 - target *tone polarity* (a direction-flipping `vesicular`/`sign`/`synaptic` flag) -> a target's `polarity_provenance` -> `target_polarity`
 - target *expression region* -> a target's `location_sources` -> `target_locations`
+- target *expression density profile* -> a target's `density` -> `target_density` (same shape)
 - drug binding -> a drug's `bindings[]` -> `drug_bindings`
 - drug NbN label -> a drug's `nbn` -> `drug_nbn`
 - drug commercial brand name -> a drug's `brands[]` -> `drug_brands` (each brand a graded
@@ -453,6 +457,33 @@ expression region is a **separate** graded claim (kind
 quote-checked); these drove the `brainstem_nuclei` group. A non-receptor target's type/system/regions
 are authored in `DRUG_TARGETS`; its regions grade identically (kind `target_locations`,
 `TARGET_LOCATION_SOURCES`; both share the `_location_sources` emitter).
+
+### Expression density
+
+The "Found in" list answers *where*, not *how much*; a `density` profile ranks those regions
+against each other. Derived from **Allen AHBA** (corpus #8) microarray intensity: per donor, the
+representative probe's log2 intensity is z-scored across all that donor's samples, averaged per
+base, then averaged across donors, so a region's `z` reads "this many standard deviations from
+this gene's brain-wide average". Reliability = the median pairwise Pearson **r** between donors'
+profiles; a gene below `DENSITY_MIN_R` (0.5, in `fetch_allen.py`) publishes **nothing**, so the
+noise floor is an honesty gate rather than a caveat. **Confirm-only**: a profile is trimmed to the
+regions the owner already claims, never adding one.
+
+- **One node per profile**, not per region (`receptor_density` / `target_density`): it is a single
+  measurement over the owner's regions, so per-region tallying would flood the headline with ~1000
+  uniformly-verified nodes.
+- The whole profile (every region's z, the donor list, the probe, and `r`) is written **into the
+  quote**, so `check_data.py`'s verbatim gate covers the numbers a reader judges it by, and the
+  pill tooltip exposes them in-app.
+- Pipeline: `fetch_allen.py` (`--skip-density` opts out of the heavy MicroarrayExpression read)
+  -> `data_sources/allen/density.json` -> `tools/sourcing/apply_expression_density.py` ->
+  the committed `tools/generated_cache/expression_density.json`, merged into `RECEPTOR_DENSITY` /
+  `TARGET_DENSITY` + `DENSITY_MIN_RELIABILITY` (emitted as `meta.density_min_reliability`).
+- Viewer: `js/data.js` `densityEntry` normalizes it to `{profile, rel, reliability, donors,
+  provenance, sources}` (`rel` = the z rescaled to 0.08..1 for the bar); `locationList` prepends a
+  caption row ("Relative amount" + the donor-agreement r + the profile's grade pill) and
+  `locationRow` appends a bar + signed z per region. **Caveat shipped in the caption tooltip:**
+  mRNA, not protein, and transcript sits in cell bodies, not terminals (SERT peaks at raphe).
 
 ## Drugs
 

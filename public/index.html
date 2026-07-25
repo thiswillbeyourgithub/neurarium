@@ -1409,6 +1409,51 @@
         white-space: nowrap;
         cursor: default;
       }
+      /* Relative amount per region (Allen mRNA), when the owner carries a measured
+         profile. The caption + its grade pill sit once above the rows because the
+         profile is ONE claim; only the value varies per row. */
+      .info-locations .loc-density-caption {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 6px 0 2px;
+        font-size: 11px;
+        color: var(--muted);
+        cursor: help;
+      }
+      .info-locations .loc-density-agree {
+        font-size: 10px;
+        color: var(--muted);
+        opacity: 0.85;
+        white-space: nowrap;
+      }
+      /* Per-row bar + signed z. The bar is scaled against this owner's own strongest
+         region (a z is only comparable within one gene), so it reads as "more here
+         than there", never as an absolute quantity. */
+      .info-locations .loc-density {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: auto;
+        cursor: help;
+      }
+      .info-locations .loc-density-bar {
+        width: 34px;
+        height: 4px;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.12);
+        background-image: linear-gradient(var(--accent-bright), var(--accent-bright));
+        background-repeat: no-repeat;
+        background-size: var(--fill, 0%) 100%;
+      }
+      .info-locations .loc-density-z {
+        font-size: 10px;
+        font-variant-numeric: tabular-nums;
+        color: var(--muted);
+        min-width: 30px;
+        text-align: right;
+      }
       /* A region row that resolves to a modeled structure jumps to it on click. */
       .info-locations li.clickable { cursor: pointer; }
       .info-locations li.clickable:hover { color: var(--accent-bright); }

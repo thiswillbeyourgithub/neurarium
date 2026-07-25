@@ -486,10 +486,13 @@ equally at home in a dozen regions, which is not what the biology says. Three ca
   receptors/transporters, in-vivo human, but cortical parcellations (Schaefer / Lausanne) and
   **CC BY-NC-SA 4.0**, whose ShareAlike is a poorer fit than Allen's cite-and-use terms.
 
-**Verdict: viable, via Allen, as a new graded node kind** (`receptor_density` /
-`target_density`) reusing the corpus #8 quote-gate pipeline: the citation line already names
-probe, donors and sample counts, so the density line gates identically. Scope it to the ~50
-owners clearing r >= 0.7 and render it as a per-region intensity, not a number.
+**Verdict: adopted.** Shipped as two graded node kinds (`receptor_density` / `target_density`)
+reusing the corpus #8 quote-gate pipeline: the whole profile (per-region z plus the cross-donor
+`r`) is written into the quote itself, so the verbatim gate covers the numbers a reader would
+use to judge it, and the panel's pill tooltip exposes them inside the app. The floor shipped at
+**r >= 0.5** (`DENSITY_MIN_R` in `tools/fetch/fetch_allen.py`), yielding **53 published profiles
+(36 receptors, 17 targets)**; a gene below it publishes nothing, so a noisy profile never
+reaches the viewer. Rendered as a per-region bar plus the signed z, never as fmol/mg.
 
 ### Drug **blood-brain-barrier** penetration
 

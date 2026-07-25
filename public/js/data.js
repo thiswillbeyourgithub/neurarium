@@ -265,6 +265,9 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // its tooltip ref (see SOURCE_CORPORA in generate_data.py). Raw map (citation is
   // language-neutral); pages_dir is author-side and ignored by the viewer.
   const sourceCorpora = metaRecord.source_corpora || {};
+  // Cross-donor-agreement floor a density profile had to clear to be published, so the
+  // panel can state the real threshold rather than restate the generator's constant.
+  const densityMinReliability = metaRecord.density_min_reliability ?? null;
   // Programmatic sourcing tally (per kind + headline) for the About panel; passed
   // through as-is (the numbers are computed in generate_data.py, see
   // _provenance_stats). Null on a dataset that predates it.
@@ -308,6 +311,34 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       provenance: strongestGrade(srcs) || "llm",
       species,
       nonHuman: !!species && species !== "Human",
+    };
+  };
+
+  // Normalize an owner's relative-expression density node (a receptor's or a
+  // non-receptor target's; identical shape) for the panel. The emitted `profile` maps a
+  // region base -> a z-score against that gene's own brain-wide average, so the numbers
+  // are comparable WITHIN one owner and not across owners; `rel` therefore scales each
+  // region against this owner's own strongest/weakest region, which is the only bar width
+  // that means anything. A floor keeps the weakest region a visible sliver rather than
+  // reading as "absent" (it is present: that is what the presence node said).
+  const densityEntry = (density) => {
+    if (!density || !density.profile) return null;
+    const zs = Object.values(density.profile);
+    if (zs.length < 2) return null;
+    const min = Math.min(...zs);
+    const max = Math.max(...zs);
+    const span = max - min;
+    const rel = {};
+    for (const [base, z] of Object.entries(density.profile)) {
+      rel[base] = span > 0 ? 0.08 + 0.92 * ((z - min) / span) : 1;
+    }
+    return {
+      profile: density.profile,
+      rel,
+      reliability: density.reliability,
+      donors: density.donors,
+      provenance: density.grade || "llm",
+      sources: density.sources || [],
     };
   };
 
@@ -420,6 +451,9 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     const locSrc = r.location_sources || {};
     r.locationInfo = r.locations.map((b, i) =>
       locationEntry(b, r.locationNames[i], locSrc[b]));
+    // How much of it sits in each region (one measured profile over those regions,
+    // its own graded node). Null when unmeasured -> the panel just omits the bars.
+    r.densityInfo = densityEntry(r.density);
     // A ubiquitous receptor is one "throughout the brain" expression node
     // (its location_sources under the "ALL" sentinel), graded like a region.
     if (r.ubiquitous) {
@@ -912,6 +946,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // locationInfo. From the emitted target.location_sources ({base: [source]}).
       locationInfo: (tgt.regions || []).map((b) =>
         locationEntry(b, baseName.get(b) || b, (tgt.location_sources || {})[b])),
+      // Relative amount per region, the mirror of a receptor's densityInfo.
+      densityInfo: densityEntry(tgt.density),
       keywords: [typeLabel, systemLabel].filter(Boolean).join(" "),
     });
   }
@@ -943,6 +979,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       drugEffectColors,
       drugEffectLabels,
       sourceCorpora,
+      densityMinReliability,
       provenanceStats,
     },
   };

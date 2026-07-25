@@ -113,8 +113,13 @@ network, idempotent, polite; each touches only what changed). Always finish with
    to `data_sources/allen/`, author-side; ~2GB across donors), then `python
    tools/sourcing/apply_location_sources.py --corpus allen` merges the deterministic `verified`
    sources (no judge) into `tools/generated_cache/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
-6. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
-7. `python tools/update_readme_stats.py` — refresh the README sourcing table
+6. **Allen AHBA expression density** (the `receptor_density` + `target_density` profiles): the same
+   `fetch_allen.py` run also z-scores each gene's microarray intensity per region and writes
+   `data_sources/allen/density.json` (pass `--skip-density` to opt out of the heavy
+   MicroarrayExpression read), then `python tools/sourcing/apply_expression_density.py` re-gates each
+   profile quote and writes `tools/generated_cache/expression_density.json`. See CLAUDE.md Expression density.
+7. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
+8. `python tools/update_readme_stats.py` — refresh the README sourcing table
    (CI runs it `--check`).
 
 Panel **descriptions** need no refresh script: each fetches the current Wikipedia lead
@@ -180,7 +185,13 @@ Screenshots).
   `allen_ahba`), the source for **target expression regions** + the receptor regions GtoPdb
   misses; a PACall detection-boolean vote per (gene, region), no judge. `TARGET_GENES` +
   `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `data_sources/allen/` + `confirmed.json`.
-  See CLAUDE.md Source provenance (corpora #7/#8).
+  The same run also emits the **density** profiles into `data_sources/allen/density.json`
+  (`--skip-density` opts out of the heavy MicroarrayExpression read; `DENSITY_MIN_R` is the
+  cross-donor reliability floor). See CLAUDE.md Source provenance (corpora #7/#8) + Expression density.
+- `tools/sourcing/apply_expression_density.py` — re-gates each density profile's quote against
+  `data_sources/allen/pages/<gene>.md`, trims it to the regions the owner claims, and writes
+  `tools/generated_cache/expression_density.json` (loaded into `RECEPTOR_DENSITY` / `TARGET_DENSITY`).
+  Idempotent. See CLAUDE.md Expression density.
 - `tools/sourcing/apply_location_sources.py` — merges accepted expression quotes into
   `tools/generated_cache/location_sources.json`, `--corpus {gtopdb,allen}` (gtopdb needs a judged file; allen is
   deterministic). Idempotent. See CLAUDE.md Source provenance (corpora #7/#8).
@@ -276,8 +287,10 @@ there is no node-level catch-all `sources` block.
   with a direction-flipping `vesicular`/`sign`/`synaptic` flag also carries `polarity_provenance`
   (+ optional `polarity_sources`), its own graded node kind `target_polarity`; a `receptor_group`
   target also carries `subtypes` (its modeled subtype receptor ids, a sourceless taxonomy the
-  viewer lists as per-subtype drug dropdowns)),
-  `target_type_labels`/`target_type_colors`, `source_corpora`, `provenance_stats` (the sourcing
+  viewer lists as per-subtype drug dropdowns); a target with an Allen profile carries the same
+  `density` object as a receptor),
+  `target_type_labels`/`target_type_colors`, `source_corpora`, `density_min_reliability` (the
+  cross-donor r floor every published profile clears), `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
 - `translations.fr.json` — the deduplicated French side table, `{english: french}` with sorted
   keys, covering every emitted display string whose French differs from its English. Fetched by
@@ -311,8 +324,10 @@ there is no node-level catch-all `sources` block.
   `ubiquitous:true`, `classification` (`{family,receptor_class,sign,synaptic}` -> each a
   `{grade, sources?}` sub-claim, so a quote grades only the attributes it substantiates), optional
   `location_sources` (`{base:[quote-source]}`, sparse per-region upgrade above `llm`; `"ALL"` =
-  the ubiquitous claim), optional `description{en,fr}` + `wikipedia`(+prov). Empty locations + no
-  description = a deliberate stub (listed, not focusable).
+  the ubiquitous claim), optional `density` (`{reliability, donors, profile:{base:z} sorted
+  strongest first, grade, sources}`, ONE graded node for the whole Allen z-score profile, see
+  CLAUDE.md Expression density), optional `description{en,fr}` + `wikipedia`(+prov). Empty
+  locations + no description = a deliberate stub (listed, not focusable).
 - `drugs.jsonl` — `id`, `name`, `categories`, `category_provenance` (+ optional
   `category_sources`), optional `nbn{en,fr}` (+ `nbn_sources`, + `nbn_nonstandard:true` when the
   value is Stahl's class descriptor not a formal NbN), `bindings[]` (each: `target`, `action`,
