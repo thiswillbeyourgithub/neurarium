@@ -133,8 +133,8 @@
 {"id": "q_104d302f2053", "corpus": "stahl_essential", "page": 421, "quote": "When histamine binds to postsynaptic H2 receptors it activates a G-proteinlinked second-messenger system with cyclic adenosine monophosphate (cAMP), phosphokinase A (PKA), and the gene product CREB.", "llm": "sonnet"}
 {"id": "q_107b9e148432", "corpus": "stahl", "page": 317, "quote": "Serotonin 1A agonist and serotonin 2A antagonist", "llm": "sonnet"}
 {"id": "q_10a6996a1ab5", "corpus": "stahl", "page": 647, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet"}
+{"id": "q_10c4495c924a", "corpus": "wikipedia_pharm", "page": "fluoxetine", "quote": "Norfluoxetine and desmethylfluoxetine are metabolites of fluoxetine and also act as serotonin reuptake inhibitors, increasing the duration of action of the drug."}
 {"id": "q_10c46a2744bf", "corpus": "stahl", "page": 193, "quote": "Kapvay"}
-{"id": "q_10e8c9c326ea", "corpus": "wikipedia_pharm", "page": "desvenlafaxine", "quote": "NET | 558.4 | 531.3"}
 {"id": "q_10ea72df23ac", "corpus": "stahl", "page": 801, "quote": "Benzodiazepine (hypnotic)", "llm": "sonnet"}
 {"id": "q_10ef1e3e107c", "corpus": "allen_ahba", "page": "HRH2", "quote": "HRH2 detected in frontal: probe 1019471 PACall present in 471/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_10ef2d60adc2", "corpus": "stahl", "page": 415, "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium channel blocker (Glu-CB)", "llm": "sonnet"}
@@ -816,6 +816,7 @@
 {"id": "q_5bacc6fd9015", "corpus": "stahl", "page": 153, "quote": "Dopamine partial agonist (dopamine– serotonin partial agonist, dopamine stabilizer, atypical antipsychotic, thirdgeneration antipsychotic; sometimes included as a second-generation antipsychotic; also a potential mood stabilizer)", "llm": "sonnet"}
 {"id": "q_5bc5b79756be", "corpus": "wikipedia_pharm", "page": "desipramine", "quote": "σ 1 | 1,990–4,000 | Rodent"}
 {"id": "q_5bdae2558899", "corpus": "wikipedia_pharm", "page": "propranolol", "quote": "5-HT 1D | 4,070 | Pig"}
+{"id": "q_5c07ce29823a", "corpus": "wikipedia_pharm", "page": "amoxapine", "quote": "7-Hydroxyamoxapine, a major active metabolite of amoxapine, is a more potent dopamine receptor antagonist and contributes to its neuroleptic efficacy, whereas 8-Hydroxyamoxapine is a norepinephrine reuptake inhibitor."}
 {"id": "q_5c17b5a8e0b5", "corpus": "wikipedia_pharm", "page": "blonanserin", "quote": "D 1 | 1070 | 1020"}
 {"id": "q_5c2d9342c172", "corpus": "stahl", "page": 226, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_5c3f751ea353", "corpus": "wikipedia_pharm", "page": "cyamemazine", "quote": "α 2 | 1320 | Rat"}
@@ -892,6 +893,7 @@
 {"id": "q_63868f8f9fac", "corpus": "stahl", "page": 591, "quote": "Ziprexa"}
 {"id": "q_63d107a9f8a4", "corpus": "stahl", "page": 817, "quote": "Selectively blocks reuptake of gammaaminobutyric acid (GABA) by presynaptic and glial GABA transporters", "llm": "sonnet"}
 {"id": "q_6420e4458f86", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in raphe: probe 1054302 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_644f3ee5cf76", "corpus": "wikipedia_pharm", "page": "seproxetine", "quote": "Seproxetine is both an inhibitor of serotonin and dopamine transporters , 5-HT 2A and 5-HT 2C receptors."}
 {"id": "q_6479ea783e88", "corpus": "kandel", "page": 986, "quote": "The subthalamus therefore receives phasic excitatory (glutamatergic) signals from the cerebral cortex, thalamus, and brain stem.", "llm": "sonnet"}
 {"id": "q_647ae5d1c07d", "corpus": "wikipedia_pharm", "page": "sertraline", "quote": "σ 1 | 32–57 | Rat"}
 {"id": "q_647fc0e6a877", "corpus": "gtopdb", "page": 13, "quote": "CNS: hippocampus.", "species": "Rat", "llm": "sonnet"}
@@ -2268,7 +2270,6 @@
 {"id": "q_f7d181928959", "corpus": "wikipedia_pharm", "page": "zuclopenthixol", "quote": "5-HT6 | ? | 6.77"}
 {"id": "q_f7d4120e5c0b", "corpus": "stahl", "page": 709, "quote": "Seroquel XR"}
 {"id": "q_f7e9ce856623", "corpus": "allen_ahba", "page": "CACNA2D1", "quote": "CACNA2D1 detected in temporal: probe 1028198 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
-{"id": "q_f81b64918335", "corpus": "wikipedia_pharm", "page": "desvenlafaxine", "quote": "SERT | 40.2 | 47.3"}
 {"id": "q_f82ff4f6d729", "corpus": "wikipedia_fr", "page": "t_maz_pam", "quote": "Planum"}
 {"id": "q_f8312a38c383", "corpus": "wikipedia_pharm", "page": "protriptyline", "quote": "H 2 | 398 | Human"}
 {"id": "q_f8481918badb", "corpus": "stahl", "page": 215, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}

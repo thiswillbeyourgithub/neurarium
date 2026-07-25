@@ -65,6 +65,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)          # sibling fetch_wikipedia_pharmacology.py + fetch_ki.py
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch/store/extract; no dup)
+import fetch_ki as ki  # noqa: E402  (PDSP Ki: discover a metabolite's measured targets, corpus #5)
 import drugs_io  # noqa: E402
 
 WORKLIST = os.path.join(REPO, "tools", "generated_cache",
@@ -212,6 +213,61 @@ def parent_titles(drugs: list[dict]) -> dict[str, str]:
     return out
 
 
+def load_page(title: str, no_fetch: bool, refresh: bool):
+    """Load one Wikipedia article's stored text (fetching + storing it if allowed and not
+    already cached), reusing the corpus #9 raw/pages store so a quote taken from the
+    returned text gates against ``pages/<slug>.md``.
+
+    Returns ``(found, real_title, slug, page_text, soup)``; ``found`` is False (and the
+    rest best-effort) when the page is neither stored nor fetchable."""
+    slug = wp.slugify(title)
+    raw_path = os.path.join(wp.RAW_DIR, f"{slug}.html")
+    if no_fetch or (os.path.exists(raw_path) and not refresh):
+        if not os.path.exists(raw_path):
+            return (False, title, slug, "", None)
+        html = open(raw_path, encoding="utf-8").read()
+        # The real (post-redirect) title is stamped into the stored comment header.
+        hm = re.search(r"<!--\s*(.+?)\s*-->", html[:200])
+        real_title = hm.group(1) if hm else title
+    else:
+        try:
+            page = wp.fetch_page(title)
+        except SystemExit:
+            return (False, title, slug, "", None)
+        soup0 = BeautifulSoup(page["html"], "html.parser")
+        wp.store_page(page, wp.render_page_text(soup0))
+        html = f"<!-- {page['title']} -->\n{page['html']}"
+        real_title = page["title"]
+        slug = wp.slugify(real_title)   # store_page slugs on the real title
+    soup = BeautifulSoup(html, "html.parser")
+    page_md = os.path.join(wp.PAGES_DIR, f"{slug}.md")
+    page_text = open(page_md, encoding="utf-8").read() if os.path.exists(page_md) else ""
+    return (True, real_title, slug, page_text, soup)
+
+
+def pdsp_targets(name: str) -> list[dict]:
+    """Every modeled target for which the PDSP Ki database (corpus #5) has an ACTIVE
+    (sub-10 uM) assay measured on this metabolite's OWN name -> ``[{target, ki_id,
+    value_nm}]`` for a representative assay.
+
+    This makes PDSP a target-DISCOVERY source, not merely a Ki upgrade for a
+    Wikipedia-found target as before: a metabolite absent from Wikipedia's binding table
+    but present in PDSP (norfluoxetine: 40 assays across 15 sites) still gets its measured
+    bindings. The applier turns each into an ``affinity_only`` binding (a measured Ki, no
+    functional direction); the judge may still attach an action from prose."""
+    try:
+        rows, _ = ki.resolve_rows(name, None)
+    except Exception:
+        return []
+    out = []
+    for tid in sorted({ki.resolve_target(r) for r in rows} - {None}):
+        s = ki.summarize_target(rows, tid)
+        if s and s.get("ki_nm"):   # has an active tier (not inactive-/qualified-only)
+            out.append({"target": tid, "ki_id": s["source"]["ki_id"],
+                        "value_nm": s["source"]["value_nm"]})
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--refresh", action="store_true",
@@ -232,71 +288,65 @@ def main() -> int:
 
     worklist = []
     for m in metabs:
-        # A confirmed own-article metabolite harvests its own page (Ki + all prose); any
-        # other falls back to the PARENT drug's article for prose sentences only, and
-        # only those naming the metabolite (mis-attribution guard, see OWN_ARTICLE).
         own = m["name"].lower() in OWN_ARTICLE
-        # Parent-article fallback uses the first parent's article (any works: a shared
-        # metabolite's prose is the same fact wherever it is described, and own-article
-        # metabolites ignore the parent entirely).
         parent_title = ptitles.get(m["parents"][0], "")
-        title = OWN_ARTICLE[m["name"].lower()] if own else parent_title
-        slug = wp.slugify(title)
-        raw_path = os.path.join(wp.RAW_DIR, f"{slug}.html")
+        # Pages to mine for ACTION prose, each tagged whether it is the metabolite's OWN
+        # article (every sentence describes it -> unfiltered) or the PARENT article (only
+        # sentences that explicitly name the metabolite -> the mis-attribution guard).
+        # #3 relaxation: an own-article metabolite ALSO draws on its parent's prose,
+        # because a thin own article (Seproxetine for norfluoxetine) routinely omits the
+        # binding profile that the parent article (Fluoxetine) states about the
+        # metabolite. A parent-fallback metabolite reads only the parent, as before.
+        to_read: list[tuple[str, bool]] = []
+        if own:
+            to_read.append((OWN_ARTICLE[m["name"].lower()], True))
+        if parent_title:
+            to_read.append((parent_title, False))
+        if not to_read:                      # neither an own nor a parent article known
+            to_read.append((m["name"], False))
 
         entry = {"metabolite": m["name"], "parents": m["parents"], "key": m["key"],
-                 "wiki_title": title, "slug": slug, "own_article": own, "found": False,
+                 "wiki_title": "", "slug": "", "own_article": own, "found": False,
                  "from_parent": not own, "ki_bindings": [], "unresolved_ki": [],
-                 "action_candidates": []}
+                 "action_candidates": [], "pages": [],
+                 # PDSP target discovery (corpus #5), keyed by the metabolite's own name.
+                 "pdsp_targets": pdsp_targets(m["name"])}
 
-        if args.no_fetch or (os.path.exists(raw_path) and not args.refresh):
-            if not os.path.exists(raw_path):
-                print(f"  - {m['name']}: no stored page (run without --no-fetch)")
-                worklist.append(entry)
+        seen_lines: set[str] = set()
+        for title, is_own in to_read:
+            found, real_title, slug, page_text, soup = load_page(
+                title, args.no_fetch, args.refresh)
+            if not found:
                 continue
-            html = open(raw_path, encoding="utf-8").read()
-            # The real (post-redirect) title is stamped into the stored comment header.
-            hm = re.search(r"<!--\s*(.+?)\s*-->", html[:200])
-            real_title = hm.group(1) if hm else title
-        else:
-            try:
-                page = wp.fetch_page(title)
-            except SystemExit as e:
-                print(f"  - {m['name']}: fetch failed ({e})")
-                worklist.append(entry)
-                continue
-            soup0 = BeautifulSoup(page["html"], "html.parser")
-            wp.store_page(page, wp.render_page_text(soup0))
-            html = f"<!-- {page['title']} -->\n{page['html']}"
-            real_title = page["title"]
-            slug = wp.slugify(real_title)   # store_page slugs on the real title
-            entry["slug"] = slug
+            entry["found"] = True
+            if not entry["slug"]:            # primary page = first one successfully read
+                entry["slug"] = slug
+                entry["wiki_title"] = real_title
+            if slug not in entry["pages"]:   # a judged quote may gate against ANY read page
+                entry["pages"].append(slug)
+            for line in action_lines(page_text,
+                                     must_mention=None if is_own else m["name"]):
+                if line not in seen_lines:
+                    seen_lines.add(line)
+                    entry["action_candidates"].append(line)
+            # The Ki table is harvested ONLY from a confirmed own article (a parent's table
+            # is the parent's affinities, never the metabolite's).
+            if is_own and soup is not None:
+                res = wp.extract_bindings(soup, valid_ids)
+                for tid, b in res["bindings"].items():
+                    entry["ki_bindings"].append({
+                        "target": tid, "wiki_name": b["wiki_name"],
+                        "ki": b["ki"], "quote": b["quote"]})
+                entry["unresolved_ki"] = res["unresolved"]
 
-        entry["found"] = True
-        entry["wiki_title"] = real_title
-        soup = BeautifulSoup(html, "html.parser")
-
-        page_md = os.path.join(wp.PAGES_DIR, f"{slug}.md")
-        page_text = open(page_md, encoding="utf-8").read() if os.path.exists(page_md) else ""
-        # Own article -> every action sentence describes the metabolite; parent-article
-        # fallback -> keep only sentences that explicitly name the metabolite.
-        entry["action_candidates"] = action_lines(
-            page_text, must_mention=None if own else m["name"])
-
-        # Ki table is harvested ONLY from a confirmed own article (the parent's table is
-        # the parent's affinities, never the metabolite's).
-        if own:
-            res = wp.extract_bindings(soup, valid_ids)
-            for tid, b in res["bindings"].items():
-                entry["ki_bindings"].append({
-                    "target": tid, "wiki_name": b["wiki_name"],
-                    "ki": b["ki"], "quote": b["quote"]})
-            entry["unresolved_ki"] = res["unresolved"]
-
+        entry["action_candidates"] = entry["action_candidates"][:MAX_ACTION_LINES]
+        if not entry["found"]:
+            print(f"  - {m['name']}: no page found (run without --no-fetch to fetch)")
         n_ki = len(entry["ki_bindings"])
         n_act = len(entry["action_candidates"])
-        tag = "" if own else f" (from parent {m['parents'][0]})"
-        print(f"  - {m['name']} [{real_title}]{tag}: {n_ki} Ki rows, {n_act} action lines")
+        n_pdsp = len(entry["pdsp_targets"])
+        print(f"  - {m['name']} [{entry['wiki_title'] or '?'}]: {n_ki} Ki rows, "
+              f"{n_act} action lines, {n_pdsp} PDSP targets, pages={entry['pages']}")
         worklist.append(entry)
 
     os.makedirs(os.path.dirname(WORKLIST), exist_ok=True)
@@ -306,9 +356,11 @@ def main() -> int:
     n_found = sum(1 for e in worklist if e["found"])
     n_ki = sum(len(e["ki_bindings"]) for e in worklist)
     n_act = sum(len(e["action_candidates"]) for e in worklist)
+    n_pdsp = sum(len(e["pdsp_targets"]) for e in worklist)
     print(f"\nwrote {WORKLIST}")
     print(f"  {len(worklist)} metabolites, {n_found} pages found, "
-          f"{n_ki} Ki-table rows, {n_act} action candidate lines")
+          f"{n_ki} Ki-table rows, {n_act} action candidate lines, "
+          f"{n_pdsp} PDSP-discovered targets")
     return 0
 
 

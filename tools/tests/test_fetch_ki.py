@@ -57,5 +57,47 @@ class KiOwnershipTest(unittest.TestCase):
         self.assertFalse(fetch_ki._ki_owned_by_pdsp(_binding(corpus="something_else")))
 
 
+class ResolveRowsShapeTest(unittest.TestCase):
+    """``resolve_rows`` returns a ``(rows, mapping)`` TUPLE, never a bare list. A caller
+    that forgets to unpack it and passes the whole tuple to ``summarize_target`` gets no
+    Ki: exactly the bug that made ``apply_metabolite_bindings._pdsp_ki`` a silent no-op,
+    so the documented "PDSP measured Ki preferred where one exists" never actually fired
+    (and PDSP-direct metabolite affinity-only bindings were dropped). Lock the contract so
+    a future edit that reverts the unpack fails loudly here. Uses a monkeypatched row
+    table so no PDSP CSV is needed (like the ownership tests above)."""
+
+    def setUp(self):
+        self._saved = fetch_ki._ALL_ROWS
+        # One synthetic assay: norfluoxetine at SERT (SLC6A4 -> our `sert`), human, 10 nM.
+        fetch_ki._ALL_ROWS = [{
+            " Ligand Name": "Norfluoxetine", "Unigene": "SLC6A4", "ki Val": "10",
+            "species": "HUMAN", "source": "membrane", "Hotligand": "paroxetine",
+            "Number": "1", "Name": "SERT", "Reference": "", "ki Note": "",
+        }]
+
+    def tearDown(self):
+        fetch_ki._ALL_ROWS = self._saved
+
+    def test_returns_two_tuple(self):
+        result = fetch_ki.resolve_rows("Norfluoxetine", None)
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 2)
+        rows, mapping = result
+        self.assertTrue(rows)           # the fake assay matched by ligand name
+        self.assertIsNone(mapping)      # a direct name match carries no alias mapping
+
+    def test_unpacked_rows_summarize_but_the_raw_tuple_does_not(self):
+        rows, _ = fetch_ki.resolve_rows("Norfluoxetine", None)
+        # Correct usage: unpack, then summarize -> a real Ki.
+        s = fetch_ki.summarize_target(rows, "sert")
+        self.assertIsNotNone(s)
+        self.assertIn("ki_nm", s)
+        # The buggy path (whole tuple in) must NOT yield a summary. Iterating the 2-tuple
+        # feeds `resolve_target` a list, which raises inside the comprehension -> the caller
+        # (_pdsp_ki) swallows it as "no Ki". Assert that failure mode explicitly.
+        with self.assertRaises(Exception):
+            fetch_ki.summarize_target(fetch_ki.resolve_rows("Norfluoxetine", None), "sert")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

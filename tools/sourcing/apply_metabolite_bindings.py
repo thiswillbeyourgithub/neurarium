@@ -103,7 +103,7 @@ def _pdsp_ki(name: str, target: str) -> dict | None:
     """A measured PDSP Ki for (metabolite name, target), or None. Preferred over the
     Wikipedia table value when it exists (a raw assay beats a literature figure)."""
     try:
-        rows = fetch_ki.resolve_rows(name, None)
+        rows, _mapping = fetch_ki.resolve_rows(name, None)   # resolve_rows -> (rows, mapping)
         s = fetch_ki.summarize_target(rows, target)
     except Exception:
         return None
@@ -120,8 +120,12 @@ def build_bindings(metab_name: str, entry: dict, judged: dict,
     LLM's ``{"bindings": [{target, action, quote}, ...]}`` for this metabolite. Returns
     the emitted binding dicts (action bindings first, then affinity-only Ki rows)."""
     slug = entry["slug"]
-    page = _page_text(slug)
-    permalink = _permalink(slug)
+    # A judged action quote may come from the metabolite's OWN article OR its parent's
+    # (the #3 relaxation the fetcher now collects both), so gate against EACH candidate
+    # page and record the matching one as the source page. Ki-table objects still cite the
+    # own article (`slug`), where the affinity table lives.
+    pages = entry.get("pages") or [slug]
+    page_texts = {s: _page_text(s) for s in pages}
     wiki_ki = {b["target"]: b for b in entry.get("ki_bindings", [])}
 
     def ki_for(target: str) -> dict | None:
@@ -129,9 +133,21 @@ def build_bindings(metab_name: str, entry: dict, judged: dict,
         if pdsp:
             return pdsp
         w = wiki_ki.get(target)
-        return wp._wiki_ki_obj(w, slug, permalink) if w else None
+        return wp._wiki_ki_obj(w, slug, _permalink(slug)) if w else None
 
-    out, actioned = [], set()
+    def gate(quote: str | None) -> str | None:
+        """The slug whose stored page contains ``quote`` verbatim, or None. Tried in page
+        order (own article first), so the recorded source page is the closest attribution."""
+        if not quote:
+            return None
+        nq = normalize_for_match(quote)
+        for s in pages:
+            pt = page_texts.get(s)
+            if pt and nq in normalize_for_match(pt):
+                return s
+        return None
+
+    out, emitted = [], set()
     for jb in (judged or {}).get("bindings", []):
         target, action, quote = jb.get("target"), jb.get("action"), jb.get("quote")
         if target not in valid_ids:
@@ -140,15 +156,15 @@ def build_bindings(metab_name: str, entry: dict, judged: dict,
         if action not in DRUG_ACTIONS:
             warn(f"{metab_name}: unknown action {action!r} for {target} - dropped")
             continue
-        if not quote or page is None or normalize_for_match(quote) not in \
-                normalize_for_match(page):
-            warn(f"{metab_name}: quote for {target} not verbatim on {slug} - dropped")
+        src_slug = gate(quote)
+        if not src_slug:
+            warn(f"{metab_name}: quote for {target} not verbatim on any of {pages} - dropped")
             continue
-        if target in actioned:
+        if target in emitted:
             continue
-        actioned.add(target)
+        emitted.add(target)
         b = {"target": target, "action": action,
-             "sources": [{"corpus": "wikipedia_pharm", "page": slug,
+             "sources": [{"corpus": "wikipedia_pharm", "page": src_slug,
                           "quote": quote, "provenance": "verified"}]}
         ki = ki_for(target)
         if ki:
@@ -159,11 +175,25 @@ def build_bindings(metab_name: str, entry: dict, judged: dict,
     # value, no direction), exactly like the drug-level Wikipedia pass keeps the whole
     # curated table rather than only the strongest rows.
     for target in sorted(wiki_ki):
-        if target in actioned:
+        if target in emitted:
             continue
         ki = ki_for(target)
         if ki:
             out.append({"target": target, "affinity_only": True, "ki": ki})
+            emitted.add(target)
+
+    # PDSP-discovered targets (corpus #5) with no Wikipedia table row and no judged action
+    # -> affinity_only. This is the "use PDSP directly" path: a measured Ki on the
+    # metabolite's own name with no known functional direction (norfluoxetine's 15 sites),
+    # mirroring the drug-level PDSP affinity_only rows. A verified CSV-row source.
+    for pt in entry.get("pdsp_targets", []):
+        target = pt["target"]
+        if target in emitted:
+            continue
+        ki = _pdsp_ki(metab_name, target)
+        if ki:
+            out.append({"target": target, "affinity_only": True, "ki": ki})
+            emitted.add(target)
     return out
 
 

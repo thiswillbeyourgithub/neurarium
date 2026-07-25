@@ -527,14 +527,19 @@ fixed Stahl list.
   into `drugs_data.jsonl` (idempotent, sole writer).
 - **Non-modeled-metabolite receptor bindings (Wikipedia).** A metabolite that is not itself a modeled
   drug carries its own `bindings[]` (kind `drug_metabolite_bindings`), sourced from the metabolite's own
-  English Wikipedia pharmacology (corpus #9 `wikipedia_pharm`): **target + action** from a quote-gated
-  prose sentence, **affinity** Wikipedia-primary with a PDSP measured Ki (corpus #5) preferred where one
-  exists; a Ki-table target with no sourced action becomes an `affinity_only` binding. A receptor's
+  English Wikipedia pharmacology (corpus #9 `wikipedia_pharm`) + the PDSP Ki database (corpus #5): **target
+  + action** from a quote-gated prose sentence; **affinity** prefers a PDSP measured Ki, else the Wikipedia
+  table value. PDSP is BOTH a target-discovery source (every modeled target with an active assay on the
+  metabolite's own name becomes a binding, so norfluoxetine gets its 11 measured sites even though its
+  Wikipedia article has no Ki table) AND the preferred Ki for a Wikipedia-found target; a discovered target
+  with no sourced action stays an `affinity_only` binding. A receptor's
   Interacting-drugs list then shows the binder as "NAME (metab. of PRODRUG)" (`drug.metaboliteOf`, via
   `drugsByTarget`). Pipeline: `tools/fetch/fetch_metabolite_bindings.py` (reuses
   `fetch_wikipedia_pharmacology` as a library) mines each metabolite's own article (an allow-list of
-  confirmed own-articles; others fall back to the parent article for prose only, mention-filtered so a
-  parent-only claim can't leak) into `metabolite_bindings_worklist.json`; one LLM pass writes
+  confirmed own-articles) **and its parent drug's article** for prose (parent lines mention-filtered to the
+  metabolite so a parent-only claim can't leak; an own-article metabolite still draws on its parent because
+  a thin own article, e.g. Seproxetine for norfluoxetine, often omits the binding profile the parent states),
+  a quote gating against whichever read page holds it, into `metabolite_bindings_worklist.json`; one LLM pass writes
   `metabolite_bindings_judged.json`; `tools/sourcing/apply_metabolite_bindings.py` quote-gates + merges
   into `drugs_data.jsonl` (idempotent, sole writer of a metabolite's bindings). **Shared metabolite:** one
   metabolite can be produced by several modeled drugs (desipramine by imipramine + lofepramine, mCPP by

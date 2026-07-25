@@ -13,8 +13,14 @@
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "7-Hydroxyamoxapine is an active metabolite of the antidepressant drug amoxapine (Asendin). It contributes to amoxapine's pharmacology. It is a dopamine receptor antagonist and contributes to amoxapine's antipsychotic properties."
-    ]
+      "7-Hydroxyamoxapine is an active metabolite of the antidepressant drug amoxapine (Asendin). It contributes to amoxapine's pharmacology. It is a dopamine receptor antagonist and contributes to amoxapine's antipsychotic properties.",
+      "7-Hydroxyamoxapine , a major active metabolite of amoxapine, is a more potent dopamine receptor antagonist and contributes to its neuroleptic efficacy, whereas 8-Hydroxyamoxapine is a norepinephrine reuptake inhibitor but a stronger serotonin reuptake inhibitor and helps to balance amoxapine's ratio of serotonin to norepinephrine transporter blockade."
+    ],
+    "pages": [
+      "7_hydroxyamoxapine",
+      "amoxapine"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "8-Hydroxyamoxapine",
@@ -30,7 +36,19 @@
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "8-Hydroxyamoxapine is an active metabolite of the antidepressant drug amoxapine (Asendin). It contributes to amoxapine's pharmacology. It is a serotonin-norepinephrine reuptake inhibitor (SNRI) with similar norepinephrine , but more serotonin , reuptake inhibition as its parent compound. It plays a part in balancing amoxapine's ratio of serotonin to norepinephrine transporter blockage."
+      "8-Hydroxyamoxapine is an active metabolite of the antidepressant drug amoxapine (Asendin). It contributes to amoxapine's pharmacology. It is a serotonin-norepinephrine reuptake inhibitor (SNRI) with similar norepinephrine , but more serotonin , reuptake inhibition as its parent compound. It plays a part in balancing amoxapine's ratio of serotonin to norepinephrine transporter blockage.",
+      "7-Hydroxyamoxapine , a major active metabolite of amoxapine, is a more potent dopamine receptor antagonist and contributes to its neuroleptic efficacy, whereas 8-Hydroxyamoxapine is a norepinephrine reuptake inhibitor but a stronger serotonin reuptake inhibitor and helps to balance amoxapine's ratio of serotonin to norepinephrine transporter blockade."
+    ],
+    "pages": [
+      "8_hydroxyamoxapine",
+      "amoxapine"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "d2",
+        "ki_id": 62860,
+        "value_nm": 670.0
+      }
     ]
   },
   {
@@ -46,7 +64,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "aripiprazole"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "DM-3411",
@@ -61,7 +83,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "brexpiprazole"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "6-Hydroxybupropion",
@@ -78,7 +104,12 @@
     "unresolved_ki": [],
     "action_candidates": [
       "Compared to bupropion, hydroxybupropion is similar in its potency as a norepinephrine reuptake inhibitor ( IC 50 = 1.7 μM), but is substantially weaker as a dopamine reuptake inhibitor (IC 50 = >10 μM). Like bupropion, hydroxybupropion is also a non-competitive antagonist of nACh receptors , such as α 4 β 2 and α 3 β 4 , but is even more potent in comparison."
-    ]
+    ],
+    "pages": [
+      "hydroxybupropion",
+      "bupropion"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Carbamazepine-10,11-epoxide",
@@ -93,7 +124,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "carbamazepine"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Didesmethyl cariprazine",
@@ -108,7 +143,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "cariprazine"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Desmethylclomipramine",
@@ -123,7 +162,12 @@
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "norclomipramine",
+      "clomipramine"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Diethyldithiocarbamate",
@@ -138,7 +182,12 @@
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "sodium_diethyldithiocarbamate",
+      "disulfiram"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Carbon disulfide",
@@ -153,7 +202,12 @@
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "carbon_disulfide",
+      "disulfiram"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Norfluoxetine",
@@ -168,7 +222,70 @@
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [
+      "The bioavailability of fluoxetine is relatively high (72%), and peak plasma concentrations are reached in 6–8 hours. It is highly bound to plasma proteins, mostly albumin and α 1 -glycoprotein. Fluoxetine is metabolized in the liver by isoenzymes of the cytochrome P450 system, including CYP2D6 . The role of CYP2D6 in the metabolism of fluoxetine may be clinically important, as there is great genetic variability in the function of this enzyme among people. CYP2D6 is responsible for converting fluoxetine to its only active metabolite, norfluoxetine . Both drugs are also potent inhibitors of CYP2D6."
+    ],
+    "pages": [
+      "seproxetine",
+      "fluoxetine"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "5ht2a",
+        "ki_id": 5029,
+        "value_nm": 295.12
+      },
+      {
+        "target": "5ht2b",
+        "ki_id": 14123,
+        "value_nm": 5063.0
+      },
+      {
+        "target": "5ht2c",
+        "ki_id": 5091,
+        "value_nm": 91.2
+      },
+      {
+        "target": "dat",
+        "ki_id": 56017,
+        "value_nm": 3661.0
+      },
+      {
+        "target": "m1",
+        "ki_id": 41998,
+        "value_nm": 1200.0
+      },
+      {
+        "target": "m2",
+        "ki_id": 42017,
+        "value_nm": 4600.0
+      },
+      {
+        "target": "m3",
+        "ki_id": 42036,
+        "value_nm": 760.0
+      },
+      {
+        "target": "m4",
+        "ki_id": 42055,
+        "value_nm": 2600.0
+      },
+      {
+        "target": "m5",
+        "ki_id": 42074,
+        "value_nm": 2200.0
+      },
+      {
+        "target": "net",
+        "ki_id": 9630,
+        "value_nm": 3947.0
+      },
+      {
+        "target": "sert",
+        "ki_id": 56025,
+        "value_nm": 26.0
+      }
+    ]
   },
   {
     "metabolite": "Meta-chlorophenylpiperazine",
@@ -439,7 +556,12 @@
       "mCPP does not produce the head-twitch response , a behavioral proxy of psychedelic effects, in rodents. Instead, it has been found to dose-dependently antagonize the head-twitch response induced by the serotonergic psychedelic DOI . However, when mCPP is combined with the selective serotonin 5-HT 2C receptor antagonist SB-242084 , it is able to dose-dependently induce head twitches. These findings suggest that serotonin 5-HT 2C receptor activation inhibits and can mask the head-twitch response induced by serotonin 5-HT 2A receptor agonists.",
       "The anxiety- and panic-inducing effects of mCPP in humans can be blocked or reduced by non-selective serotonin receptor antagonists such as metergoline and to a lesser extent methysergide as well as by the serotonin 5-HT 2A and 5-HT 2C receptor antagonist ritanserin . Chronic pre-treatment with serotonin reuptake inhibitors like fluoxetine and clomipramine can also reverse the anxiogenic effects of mCPP. Relatedly, serotonin reuptake inhibitors also reduce many other effects of mCPP and this is thought to be related to desensitization of serotonin 5-HT 2C and 5-HT 2A receptors. The benzodiazepine alprazolam can block mCPP-induced anxiety as well.",
       "mCPP has been found to dose-dependently increase oxytocin levels in rodents. It can increase oxytocin levels by up to 3- to 6-fold at high doses. The oxytocin increases caused by mCPP are near-completely blocked by the serotonin 5-HT 2 receptor antagonists mianserin , LY-53857 , and metergoline , but are minimally affected by the serotonin 5-HT 2A receptor antagonist ketanserin . These findings suggest the involvement of the serotonin 5-HT 2C receptor in oxytocin secretion with mCPP rather than other serotonin receptors like the serotonin 5-HT 2A receptor. In humans, the drug robustly increased oxytocin levels in women but not in men."
-    ]
+    ],
+    "pages": [
+      "meta_chlorophenylpiperazine",
+      "nefazodone"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "N-dealkylated samidorphan",
@@ -454,7 +576,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "olanzapine_samidorphan"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Samidorphan N-oxide",
@@ -469,7 +595,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "olanzapine_samidorphan"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Licarbazepine",
@@ -484,7 +614,12 @@
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "licarbazepine",
+      "oxcarbazepine"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "N-Desmethylpimavanserin",
@@ -499,7 +634,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "pimavanserin"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Norquetiapine",
@@ -515,8 +654,14 @@
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "Norquetiapine , also known as N -desalkylquetiapine , is a 5-HT 2B serotonin receptor modulator , and norepinephrine reuptake inhibitor . It is the principal metabolite of quetiapine ."
-    ]
+      "Norquetiapine , also known as N -desalkylquetiapine , is a 5-HT 2B serotonin receptor modulator , and norepinephrine reuptake inhibitor . It is the principal metabolite of quetiapine .",
+      "Since the noradrenaline transporter is responsible for most of the dopamine clearance in the prefrontal cortex, norquetiapine blocks reuptake of dopamine too, accumulating the dopamine in the synapse."
+    ],
+    "pages": [
+      "norquetiapine",
+      "quetiapine"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "M-II",
@@ -531,7 +676,11 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "ramelteon"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Desmethylselegiline",
@@ -553,7 +702,12 @@
       "DMS has been found to be 60-fold less potent than selegiline as an MAO-B inhibitor in vitro . However, it was only 3-fold less potent than selegiline orally in vivo in rats with repeated administration. In other research, DMS was 6-fold less potent than selegiline in inhibition of platelet MAO-B activity.",
       "Selegiline produces levomethamphetamine and levoamphetamine as active metabolites, whereas DMS produces only levoamphetamine as a metabolite. Unlike DMS and selegiline, levoamphetamine and levomethamphetamine are not active as MAO-B inhibitors at concentrations up to 100 μM in vitro . However, levoamphetamine is a releaser of norepinephrine and dopamine and has sympathomimetic and psychostimulant effects. Similarly to selegiline, but unlike levoamphetamine and levomethamphetamine, DMS itself is not a monoamine releasing agent .",
       "DMS shows neuroprotective , antioxidant , and antiapoptotic activity similarly to selegiline. DMS is more potent in some of these effects than selegiline. The neuroprotective and antioxidant properties of DMS and selegiline appear to be independent of MAO-B inhibition. Both selegiline and DMS have been found to bind to and inhibit glyceraldehyde-3-phosphate dehydrogenase (GAPDH), which may be involved in their neuroprotective effects."
-    ]
+    ],
+    "pages": [
+      "desmethylselegiline",
+      "selegiline"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "L-Amphetamine",
@@ -571,7 +725,12 @@
     "action_candidates": [
       "In addition to its catecholamine-releasing activity, levoamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levoamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is similarly potent to selegiline and levomethamphetamine but is more potent than dextromethamphetamine and dextroamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism.",
       "Levoamphetamine is a major active metabolite of selegiline ( L -deprenyl; N -propargyl- L -methamphetamine). Selegiline is a monoamine oxidase inhibitor (MAOI), specifically a selective inhibitor of monoamine oxidase B (MAO-B) at lower doses and a dual inhibitor of both monoamine oxidase A (MAO-A) and MAO-B at higher doses. It also has additional activities, such as acting as a catecholaminergic activity enhancer (CAE), possibly via agonism of the TAAR1 , and having potential neuroprotective effects. Selegiline is clinically used as an antiparkinsonian agent in the treatment of Parkinson's disease and as an antidepressant in the treatment of major depressive disorder ."
-    ]
+    ],
+    "pages": [
+      "levoamphetamine",
+      "selegiline"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "L-Methamphetamine",
@@ -588,7 +747,12 @@
     "unresolved_ki": [],
     "action_candidates": [
       "In addition to its norepinephrine-releasing activity, levomethamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levomethamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is 1- to 10-fold less potent than selegiline but is 3- to 5-fold more potent than dextromethamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism."
-    ]
+    ],
+    "pages": [
+      "levomethamphetamine",
+      "selegiline"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "(+)-alpha-Dihydrotetrabenazine",
@@ -605,7 +769,12 @@
     "unresolved_ki": [],
     "action_candidates": [
       "DTBZ as a PET radioligand with affinity for VMAT2 was developed in the mid 1990s by David E. Kuhl and colleagues at the University of Michigan . There are two enantiomers of alpha-dihydrotetrabenazine, and the dextrorotary (or (+) isomer) has a high affinity of about 1 nanomolar K i whereas the levorotary (or (-) isomer) has approximately 1000 fold lower affinity with a K i of about 2 micromolar."
-    ]
+    ],
+    "pages": [
+      "dihydrotetrabenazine",
+      "valbenazine"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "O-desmethylvenlafaxine",
@@ -648,6 +817,22 @@
       "Post-SSRI sexual dysfunction (PSSD) is an iatrogenic condition in which sexual side effects persist after discontinuation of serotonin reuptake inhibiting antidepressants, including desvenlafaxine. Characteristic symptoms include genital numbness, pleasureless or weak orgasm, loss of libido, and erectile dysfunction ; non-sexual symptoms such as emotional blunting and cognitive impairment may also occur. The condition can arise after even brief exposure to a serotonin reuptake inhibitor and may persist indefinitely; there is currently no established treatment. The DSM-5 noted in 2013 that serotonin reuptake inhibitor-induced sexual dysfunction may persist after the agent is discontinued.",
       "As the primary active metabolite of venlafaxine , desvenlafaxine shares its parent compound's serotonin reuptake inhibiting mechanism, and PSSD has been reported with both drugs. A 2023 retrospective cohort study of over 12,000 males estimated the risk of irreversible sexual dysfunction at approximately 0.46% of patients treated with serotonergic antidepressants, including SNRIs, though the actual prevalence remains uncertain and the condition is likely underreported.",
       "Desvenlafaxine is a synthetic form of the isolated major active metabolite of venlafaxine , and is categorized as a serotonin–norepinephrine reuptake inhibitor (SNRI). When most normal metabolizers take venlafaxine, approximately 70% of the dose is metabolized into desvenlafaxine, so the effects of the two drugs are expected to be very similar. It works by blocking the \"reuptake\" transporters for key neurotransmitters affecting mood, thereby leaving more active neurotransmitters in the synapse . The neurotransmitters affected are serotonin (5-hydroxytryptamine) and norepinephrine (noradrenaline). It is approximately 10 times more potent at inhibiting serotonin uptake than norepinephrine uptake."
+    ],
+    "pages": [
+      "desvenlafaxine",
+      "venlafaxine"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "net",
+        "ki_id": 9626,
+        "value_nm": 2753.0
+      },
+      {
+        "target": "sert",
+        "ki_id": 9535,
+        "value_nm": 7.7
+      }
     ]
   },
   {
@@ -663,6 +848,10 @@
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
-    "action_candidates": []
+    "action_candidates": [],
+    "pages": [
+      "zotepine"
+    ],
+    "pdsp_targets": []
   }
 ]

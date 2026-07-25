@@ -110,5 +110,38 @@
         "quote": "It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class"
       }
     ]
+  },
+  "norfluoxetine": {
+    "bindings": [
+      {
+        "target": "sert",
+        "action": "reuptake_inhibitor",
+        "quote": "Norfluoxetine and desmethylfluoxetine are metabolites of fluoxetine and also act as serotonin reuptake inhibitors, increasing the duration of action of the drug."
+      },
+      {
+        "target": "dat",
+        "action": "reuptake_inhibitor",
+        "quote": "Seproxetine is both an inhibitor of serotonin and dopamine transporters , 5-HT 2A and 5-HT 2C receptors."
+      },
+      {
+        "target": "5ht2a",
+        "action": "antagonist",
+        "quote": "Seproxetine is both an inhibitor of serotonin and dopamine transporters , 5-HT 2A and 5-HT 2C receptors."
+      },
+      {
+        "target": "5ht2c",
+        "action": "antagonist",
+        "quote": "Seproxetine is both an inhibitor of serotonin and dopamine transporters , 5-HT 2A and 5-HT 2C receptors."
+      }
+    ]
+  },
+  "7_hydroxyamoxapine": {
+    "bindings": [
+      {
+        "target": "d2",
+        "action": "antagonist",
+        "quote": "7-Hydroxyamoxapine, a major active metabolite of amoxapine, is a more potent dopamine receptor antagonist and contributes to its neuroleptic efficacy, whereas 8-Hydroxyamoxapine is a norepinephrine reuptake inhibitor."
+      }
+    ]
   }
 }

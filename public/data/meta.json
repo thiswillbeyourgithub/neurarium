@@ -2186,8 +2186,8 @@
         "missing": 0
       },
       "drug_metabolite_bindings": {
-        "total": 35,
-        "verified": 35,
+        "total": 48,
+        "verified": 48,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2299,13 +2299,13 @@
       }
     },
     "nodes": {
-      "total": 3294,
-      "verified": 3096,
+      "total": 3307,
+      "verified": 3109,
       "sourced": 0,
       "llm": 180,
       "nosource": 18,
       "missing": 198,
-      "backed": 3096,
+      "backed": 3109,
       "pct_backed": 94
     },
     "ki_coverage": {
