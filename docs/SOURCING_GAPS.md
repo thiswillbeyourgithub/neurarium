@@ -439,3 +439,82 @@ Ordered by **value per unit effort**, not by raw node count:
 - **NCBI/PubMed primary literature** as the genuine last resort for the handful of claims
   (claustrum-to-frontal/insula connectivity, a few tentative subtype affinities) no
   reference book states.
+
+## Candidate new data *dimensions* (surveyed 2026-07-26)
+
+The sections above are about grading nodes we already have. This one is about node kinds we
+do **not** have: axes the dataset could gain. Each entry says what exists in the world, what
+it would cost, and the verdict, so a later session does not re-survey it.
+
+### Receptor expression **density** (how much, not just where)
+
+Today a "Found in" region is a boolean: a receptor is in a region or it is not. So M5 reads as
+equally at home in a dozen regions, which is not what the biology says. Three candidate sources:
+
+- **Allen AHBA microarray intensity** (corpus #8, *already downloaded*). `fetch_allen.py` reads
+  only `PACall.csv` (the present/absent boolean) and deliberately skips the ~400 MB
+  `MicroarrayExpression.csv` sitting in the same donor zips. That matrix gives a continuous
+  per-sample value; z-scored within donor and averaged per base region it yields a **relative**
+  expression profile. Measured feasibility over the 5 local donors (84 genes, 76 owners),
+  scoring each gene by the median pairwise cross-donor Pearson r of its per-region profile:
+
+  | cross-donor r | genes | owners (receptors / targets) |
+  |---|---|---|
+  | >= 0.7 | 54 / 84 | 50 (29 / 21) |
+  | >= 0.5 | 68 / 84 | 62 (37 / 25) |
+  | >= 0.3 | 78 / 84 | 70 (45 / 25) |
+
+  The profiles reproduce textbook anatomy: `SLC6A3` peaks at substantia nigra (+4.7) and VTA
+  (+4.1), `SLC6A4` at raphe (+5.8), `DRD2` at putamen / caudate / accumbens, `HTR2A` across
+  cortex with cerebellum lowest (-1.9). **`CHRM5` (r = +0.86) peaks at substantia nigra (+2.5)
+  and VTA (+2.2)** and is lowest in caudate / cerebellum, matching M5's known role on midbrain
+  dopamine neurons: the M5 question has a real answer in data we already hold. The low-r genes
+  (`HTR2B` -0.09, `HTR3A` -0.03, `CHRM2` +0.05, `ADRB1` +0.16, `HRH1` +0.37) sit near the array
+  noise floor, so the reliability score doubles as an **honesty gate**: publish a density
+  profile only where the donors agree, leave the rest boolean.
+  Caveats that must ship with it: it is **mRNA, not protein**, it is **relative, not fmol/mg**,
+  and (the already-documented Allen caveat) transcript sits in **cell bodies, not terminals**,
+  which is exactly why SERT peaks at raphe rather than at the cortex where the protein works.
+- **EBRAINS / siibra quantitative autoradiography** (Zilles, Palomero-Gallagher, Amunts): real
+  **protein** density in fmol/mg. But only **16 receptor types**, of which 12 map onto our 62
+  (`5ht1a`, `5ht2a`, `ampa`, `d1`, `gaba_a`, `gaba_b`, `m1`, `m2`, `m3`, `nmda`, `kainate`,
+  `mglur2`), they are subtype-blind ("5-HT2", not 5-HT2A), and they are resolved on
+  **cytoarchitectonic cortical areas** of the Julich-Brain, so none of our deep nuclei are
+  covered. Notably there is **no M4 and no M5** (no selective radioligand), so the source that
+  would be most authoritative cannot answer the question that prompted this survey.
+- **PET tracer maps** (Hansen et al. 2022, `netneurolab/hansen_receptors`): 19
+  receptors/transporters, in-vivo human, but cortical parcellations (Schaefer / Lausanne) and
+  **CC BY-NC-SA 4.0**, whose ShareAlike is a poorer fit than Allen's cite-and-use terms.
+
+**Verdict: viable, via Allen, as a new graded node kind** (`receptor_density` /
+`target_density`) reusing the corpus #8 quote-gate pipeline: the citation line already names
+probe, donors and sample counts, so the density line gates identically. Scope it to the ~50
+owners clearing r >= 0.7 and render it as a per-region intensity, not a number.
+
+### Drug **blood-brain-barrier** penetration
+
+- **B3DB** (`theochem/B3DB`, **CC0**, TSV on GitHub) is the best open dataset: 7982 compounds
+  with a BBB+/BBB- label, 1058 with a numeric `logBB`. Matching it by name + brand against our
+  179 drugs gives **130 with a label, 59 with a numeric logBB**.
+- Both figures are **traps for this corpus**, which is why this is not adopted:
+  1. The label is degenerate. Of the 130 matched, **125 are BBB+ and 5 BBB-**: a psychiatric
+     corpus is pre-selected for brain penetration, so the flag carries almost no information.
+     It is also noisy at the edges (B3DB labels **propranolol** BBB-, the textbook *penetrant*
+     beta-blocker; 4 of our drugs get conflicting labels across its source rows).
+  2. `logBB` is the **wrong parameter**. It is a *total* brain:plasma ratio, so it tracks
+     lipophilicity and non-specific tissue binding rather than free drug at the receptor. In
+     our own matched set escitalopram sits at -0.37 and sertraline at +1.60, a ~100x spread
+     between two SSRIs with comparable clinical SERT occupancy. Presenting that as "how much
+     reaches the brain" would actively mislead.
+- The parameter that *is* meaningful is **Kp,uu,brain**, the *unbound* brain-to-plasma ratio
+  (1.0 = free equilibrium, < 1 net efflux, > 1 net influx; industry treats > 0.3-0.5 as
+  penetrant). See Loryan et al. 2022, *Pharm Res* (PMC9246790). But there is **no open
+  machine-readable Kp,uu database**: that paper is an industry survey with no compound table,
+  and the compiled sets live in small paywalled tables (Kalvass 2007, 34 drugs; Liu 2009, 18
+  compounds), mostly **rodent**. Corpus-scale coverage is not attainable.
+
+**Verdict: do not add a corpus-wide numeric field.** The honest version is a small
+hand-curated, quote-gated fact on the few drugs where brain entry is actually a clinical
+story (P-gp substrates such as paliperidone; the poorly-penetrant benzamides sulpiride /
+amisulpride; peripherally-restricted agents), sourced from Stahl's pharmacokinetics prose
+like any other node, rather than a number pinned to all 179.
