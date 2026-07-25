@@ -132,6 +132,7 @@
       },
       "density": {
         "reliability": 0.95,
+        "donors": 5,
         "profile": {
           "raphe": 5.78,
           "accumbens": -0.14,
@@ -146,7 +147,7 @@
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_936deae1d9f7",
+            "quote_id": "q_e526fa958128",
             "provenance": "verified"
           }
         ]
@@ -185,6 +186,7 @@
       },
       "density": {
         "reliability": 0.82,
+        "donors": 5,
         "profile": {
           "locus_coeruleus": 9.34,
           "amygdala": 0.16,
@@ -265,6 +267,7 @@
       },
       "density": {
         "reliability": 0.9,
+        "donors": 5,
         "profile": {
           "substantia_nigra": 4.72,
           "vta": 4.07,
@@ -337,6 +340,7 @@
       },
       "density": {
         "reliability": 0.74,
+        "donors": 5,
         "profile": {
           "thalamus": 0.71,
           "temporal": 0.21,
@@ -423,6 +427,7 @@
       },
       "density": {
         "reliability": 0.95,
+        "donors": 5,
         "profile": {
           "locus_coeruleus": 4.45,
           "substantia_nigra": 3.8,
@@ -509,6 +514,7 @@
       },
       "density": {
         "reliability": 0.9,
+        "donors": 5,
         "profile": {
           "locus_coeruleus": 4.4,
           "substantia_nigra": 1.17,
@@ -589,6 +595,7 @@
       },
       "density": {
         "reliability": 0.87,
+        "donors": 5,
         "profile": {
           "raphe": 2.13,
           "medulla": 0.91,
@@ -661,6 +668,7 @@
       },
       "density": {
         "reliability": 0.96,
+        "donors": 5,
         "profile": {
           "septal_nuclei": 0.79,
           "thalamus": 0.54,
@@ -718,6 +726,7 @@
       },
       "density": {
         "reliability": 0.78,
+        "donors": 5,
         "profile": {
           "temporal": -0.3,
           "frontal": -0.37,
@@ -814,6 +823,7 @@
       },
       "density": {
         "reliability": 0.9,
+        "donors": 5,
         "profile": {
           "hippocampus": 0.79,
           "temporal": 0.4,
@@ -879,6 +889,7 @@
       },
       "density": {
         "reliability": 0.85,
+        "donors": 5,
         "profile": {
           "temporal": 0.34,
           "hippocampus": 0.26,
@@ -942,6 +953,7 @@
       },
       "density": {
         "reliability": 0.91,
+        "donors": 5,
         "profile": {
           "thalamus": -0.29,
           "frontal": -0.34,
@@ -998,6 +1010,7 @@
       },
       "density": {
         "reliability": 0.89,
+        "donors": 5,
         "profile": {
           "thalamus": 1.43,
           "temporal": 0.3,
@@ -1054,6 +1067,7 @@
       },
       "density": {
         "reliability": 0.63,
+        "donors": 5,
         "profile": {
           "thalamus": 0.77,
           "hippocampus": 0.22,
@@ -1154,6 +1168,7 @@
       },
       "density": {
         "reliability": 0.96,
+        "donors": 5,
         "profile": {
           "locus_coeruleus": 1.02,
           "frontal": 0.09,
@@ -1254,6 +1269,7 @@
       },
       "density": {
         "reliability": 0.94,
+        "donors": 5,
         "profile": {
           "hippocampus": 1.19,
           "temporal": 0.6,
@@ -1327,6 +1343,7 @@
       },
       "density": {
         "reliability": 0.73,
+        "donors": 5,
         "profile": {
           "raphe": 2.2,
           "hypothalamus": 0.69,
@@ -2434,6 +2451,7 @@
       "pages_dir": "data_sources/wikipedia/pages_fr"
     }
   },
+  "density_min_reliability": 0.5,
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {

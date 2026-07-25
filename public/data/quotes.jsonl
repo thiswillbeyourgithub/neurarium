@@ -665,7 +665,6 @@
 {"id": "q_475a3f25278a", "corpus": "stahl", "page": 685, "quote": "Blocks alpha 1 adrenergic receptors to reduce noradrenergic hyperactivation", "llm": "sonnet"}
 {"id": "q_477836fbe51b", "corpus": "wikipedia_fr", "page": "amph_tamine", "quote": "Dexedrine"}
 {"id": "q_478125fbf49b", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "5-HT 1A | 6,300–12,200 (K i ) 126–36,000 nM ( EC 50 ) 21–64% ( E max"}
-{"id": "q_47846ad84e25", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1017111, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: accumbens +1.15 (5d), thalamus +1.12 (5d), hypothalamus +0.82 (5d), amygdala +0.82 (5d), vta +0.17 (5d), medulla +0.17 (5d), caudate +0.03 (5d), pons -0.14 (5d), frontal -0.20 (5d), putamen -0.22 (5d), temporal -0.22 (5d), midbrain -0.23 (5d), parietal -0.45 (5d), occipital -0.86 (5d), hippocampus -0.86 (5d)", "species": "Human"}
 {"id": "q_47907ee5dba4", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Elvanse"}
 {"id": "q_47bbcf6fa29a", "corpus": "wikipedia_fr", "page": "naltrexone", "quote": "Revia"}
 {"id": "q_48b0a883ccff", "corpus": "wikipedia_fr", "page": "milnacipran", "quote": "Fetzima"}
@@ -1338,7 +1337,6 @@
 {"id": "q_933a0dd896a6", "corpus": "stahl", "page": 459, "quote": "Benzodiazepine (anxiolytic)", "llm": "sonnet"}
 {"id": "q_933fdd21cfc4", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "α 2C | 3.8 | Human"}
 {"id": "q_934fd6022145", "corpus": "allen_ahba", "page": "ADRA1B", "quote": "ADRA1B detected in cerebellum: probe 1023485 PACall present in 304/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
-{"id": "q_936deae1d9f7", "corpus": "allen_ahba", "page": "SLC6A4", "quote": "SLC6A4 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1051457, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.95: raphe +5.78 (5d), accumbens -0.14 (5d), frontal -0.19 (5d), cingulate -0.23 (5d), temporal -0.24 (5d), hippocampus -0.29 (5d), thalamus -0.31 (5d), amygdala -0.31 (5d), hypothalamus -0.34 (5d)", "species": "Human"}
 {"id": "q_937215dabbf5", "corpus": "allen_ahba", "page": "CHRM3", "quote": "CHRM3 detected in medulla: probe 1023697 PACall present in 238/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_9384437d32a0", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "5-HT 6 | 96–150 | ?"}
 {"id": "q_93de208829dd", "corpus": "stahl", "page": 423, "quote": "Dual orexin receptor antagonist (DORA); hypnotic", "llm": "sonnet"}
@@ -1522,6 +1520,7 @@
 {"id": "q_a43f1aeadf13", "corpus": "gtopdb", "page": 264, "quote": "Brain: cerebral cortex, thalamic nuclei, hippocampus, dentate gyrus, basal ganglia, substantia nigra, caudate putamen, nucleus accumbens, amygdala, thalamus, hypothalamus, brainstem, cerebellum.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_a457fe7a30a2", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "DAT | 1,140 | Human"}
 {"id": "q_a458226d4bd3", "corpus": "wikipedia_pharm", "page": "desipramine", "quote": "5-HT 2C | 244–748 | Rat"}
+{"id": "q_a48046f06321", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1017111, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: accumbens +1.15 (5d), thalamus +1.12 (5d), hypothalamus +0.82 (5d), amygdala +0.82 (5d), vta +0.17 (5d), medulla +0.17 (5d), caudate +0.03 (5d), pons -0.14 (5d), frontal -0.20 (5d), temporal -0.22 (5d), putamen -0.22 (5d), midbrain -0.23 (5d), parietal -0.45 (5d), occipital -0.86 (5d), hippocampus -0.86 (5d)", "species": "Human"}
 {"id": "q_a491eaf6fd86", "corpus": "stahl", "page": 525, "quote": "Blocks alpha 2 adrenergic presynaptic receptor, thereby increasing norepinephrine neurotransmission", "llm": "sonnet"}
 {"id": "q_a49dbd0a8ccc", "corpus": "stahl", "page": 927, "quote": "Inhibits carbonic anhydrase", "llm": "sonnet"}
 {"id": "q_a49f7af9007d", "corpus": "stahl", "page": 167, "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist, antiemetic)", "llm": "sonnet"}
@@ -2145,6 +2144,7 @@
 {"id": "q_e50710cfa7c6", "corpus": "stahl", "page": 839, "quote": "SARI (serotonin 2 antagonist/reuptake inhibitor); antidepressant; hypnotic", "llm": "sonnet"}
 {"id": "q_e50f0518072e", "corpus": "stahl", "page": 277, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission", "llm": "sonnet"}
 {"id": "q_e52014920fa6", "corpus": "stahl", "page": 187, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
+{"id": "q_e526fa958128", "corpus": "allen_ahba", "page": "SLC6A4", "quote": "SLC6A4 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1051457, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.95: raphe +5.78 (5d), accumbens -0.14 (5d), frontal -0.19 (5d), cingulate -0.23 (5d), temporal -0.24 (5d), hippocampus -0.29 (5d), amygdala -0.31 (5d), thalamus -0.31 (5d), hypothalamus -0.34 (5d)", "species": "Human"}
 {"id": "q_e53fadbc2add", "corpus": "stahl", "page": 571, "quote": "Naltrexone can block mu opioid receptors, thus preventing opioid-mediated negative feedback.", "llm": "sonnet"}
 {"id": "q_e5640c205618", "corpus": "stahl", "page": 571, "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (naltrexone, O-RAn) and dopamine reuptake inhibitor and releaser (bupropion, D-RIRe)", "llm": "sonnet"}
 {"id": "q_e58a50568d07", "corpus": "stahl", "page": 855, "quote": "Artane"}

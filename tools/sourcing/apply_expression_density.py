@@ -49,10 +49,12 @@ def collect() -> tuple[dict[str, dict], list[str], int]:
     """Read the fetcher's density list -> ``{"receptors"/"targets": {owner: entry}}``."""
     if not ALLEN_DENSITY.exists():
         raise SystemExit(f"error: {ALLEN_DENSITY} missing; run tools/fetch/fetch_allen.py first")
-    entries = json.loads(ALLEN_DENSITY.read_text("utf-8"))
+    raw = json.loads(ALLEN_DENSITY.read_text("utf-8"))
+    entries = raw["profiles"]
     rec_regions, tgt_regions = owner_regions()
     page_cache: dict[str, str] = {}
-    buckets: dict[str, dict] = {"receptors": {}, "targets": {}}
+    buckets: dict[str, dict] = {"receptors": {}, "targets": {},
+                                "min_reliability": raw["min_reliability"]}
     warnings, skipped = [], 0
     for e in entries:
         kind, owner, gene, quote = e["owner_kind"], e["owner"], e["page"], e["quote"]
@@ -74,6 +76,7 @@ def collect() -> tuple[dict[str, dict], list[str], int]:
             continue
         buckets["receptors" if kind == "receptor" else "targets"][owner] = {
             "reliability": e["reliability"],
+            "donors": e["donors"],
             "profile": profile,
             "sources": [{"corpus": "allen_ahba", "page": gene, "quote": quote,
                          "provenance": "verified", "species": "Human"}],

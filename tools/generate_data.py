@@ -101,6 +101,7 @@ from data_generators.drugs import (  # noqa: E402
 # ---------------------------------------------------------------------------
 from data_generators.provenance import (  # noqa: E402
     DEFAULT_PROVENANCE,
+    DENSITY_MIN_RELIABILITY,
     DRUG_CATEGORY_PROVENANCE,
     PROVENANCE_LEVELS,
     RECEPTOR_DENSITY,
@@ -1367,6 +1368,12 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # each binding's source; check_data.py reads pages_dir to confirm quotes.
         # Self-describing so a port needs no hardcoded citation.
         "source_corpora": SOURCE_CORPORA,
+        # Cross-donor-agreement floor a relative-expression profile had to clear to be
+        # published (see the density pass in tools/fetch/fetch_allen.py). Emitted so the
+        # panel can state the real threshold instead of restating the constant. Absent
+        # when no density has been applied.
+        **({"density_min_reliability": DENSITY_MIN_RELIABILITY}
+           if DENSITY_MIN_RELIABILITY is not None else {}),
         # Programmatic sourcing tally over the shipped data (per-kind + headline);
         # the About panel + README read it so the "% sourced" figure is a real
         # count, never hand-typed. See _provenance_stats.

@@ -1,6 +1,8 @@
 {
+  "min_reliability": 0.5,
   "receptors": {
     "5ht1a": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.14,
         "frontal": 0.52,
@@ -23,6 +25,7 @@
       ]
     },
     "5ht1d": {
+      "donors": 5,
       "profile": {
         "accumbens": 2.65,
         "caudate": 2.3,
@@ -44,6 +47,7 @@
       ]
     },
     "5ht1e": {
+      "donors": 5,
       "profile": {
         "accumbens": 0.76,
         "cingulate": 0.41,
@@ -62,6 +66,7 @@
       ]
     },
     "5ht1f": {
+      "donors": 5,
       "profile": {
         "frontal": 0.78,
         "occipital": 1.14,
@@ -79,6 +84,7 @@
       ]
     },
     "5ht2a": {
+      "donors": 5,
       "profile": {
         "claustrum": 0.6,
         "frontal": 0.78,
@@ -98,6 +104,7 @@
       ]
     },
     "5ht2c": {
+      "donors": 5,
       "profile": {
         "accumbens": 2.22,
         "amygdala": 1.05,
@@ -118,6 +125,7 @@
       ]
     },
     "5ht4": {
+      "donors": 5,
       "profile": {
         "accumbens": 2.03,
         "caudate": 2.07,
@@ -137,6 +145,7 @@
       ]
     },
     "5ht5a": {
+      "donors": 5,
       "profile": {
         "accumbens": -0.83,
         "cerebellum": 0.82,
@@ -157,6 +166,7 @@
       ]
     },
     "5ht7": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.42,
         "frontal": 0.19,
@@ -176,6 +186,7 @@
       ]
     },
     "a2a": {
+      "donors": 5,
       "profile": {
         "accumbens": 3.01,
         "caudate": 3.88,
@@ -193,6 +204,7 @@
       ]
     },
     "alpha1b": {
+      "donors": 5,
       "profile": {
         "cerebellum": -1.14,
         "frontal": 0.7,
@@ -217,6 +229,7 @@
       ]
     },
     "alpha2a": {
+      "donors": 5,
       "profile": {
         "cerebellum": 0.01,
         "frontal": 0.44,
@@ -242,6 +255,7 @@
       ]
     },
     "alpha2c": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.65,
         "caudate": 3.45,
@@ -271,6 +285,7 @@
       ]
     },
     "beta2": {
+      "donors": 5,
       "profile": {
         "cerebellum": -1.4,
         "frontal": -0.01,
@@ -291,6 +306,7 @@
       ]
     },
     "cb1": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.87,
         "caudate": 0.98,
@@ -316,6 +332,7 @@
       ]
     },
     "d2": {
+      "donors": 5,
       "profile": {
         "accumbens": 2.31,
         "caudate": 2.61,
@@ -336,6 +353,7 @@
       ]
     },
     "d3": {
+      "donors": 5,
       "profile": {
         "accumbens": 2.44,
         "caudate": 1.18,
@@ -356,6 +374,7 @@
       ]
     },
     "d5": {
+      "donors": 5,
       "profile": {
         "amygdala": -0.14,
         "caudate": -0.44,
@@ -385,6 +404,7 @@
       ]
     },
     "delta": {
+      "donors": 5,
       "profile": {
         "accumbens": -0.34,
         "amygdala": -0.14,
@@ -408,6 +428,7 @@
       ]
     },
     "glycine": {
+      "donors": 5,
       "profile": {
         "cerebellum": -0.03,
         "hippocampus": -0.49,
@@ -427,6 +448,7 @@
       ]
     },
     "h2": {
+      "donors": 5,
       "profile": {
         "caudate": 1.09,
         "cerebellum": -1.3,
@@ -449,6 +471,7 @@
       ]
     },
     "h3": {
+      "donors": 5,
       "profile": {
         "accumbens": 0.54,
         "caudate": 0.87,
@@ -473,6 +496,7 @@
       ]
     },
     "kainate": {
+      "donors": 5,
       "profile": {
         "amygdala": -0.06,
         "cerebellum": -1.11,
@@ -494,6 +518,7 @@
       ]
     },
     "kappa": {
+      "donors": 5,
       "profile": {
         "accumbens": 1.42,
         "amygdala": 0.74,
@@ -517,6 +542,7 @@
       ]
     },
     "m1": {
+      "donors": 5,
       "profile": {
         "accumbens": 0.66,
         "cingulate": 0.66,
@@ -538,6 +564,7 @@
       ]
     },
     "m3": {
+      "donors": 5,
       "profile": {
         "frontal": 0.65,
         "hypothalamus": -0.45,
@@ -560,6 +587,7 @@
       ]
     },
     "m4": {
+      "donors": 5,
       "profile": {
         "accumbens": -0.39,
         "caudate": -0.22,
@@ -579,6 +607,7 @@
       ]
     },
     "m5": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.12,
         "frontal": -0.37,
@@ -600,6 +629,7 @@
       ]
     },
     "mglur1": {
+      "donors": 5,
       "profile": {
         "cerebellum": 1.68,
         "frontal": 0.01,
@@ -621,6 +651,7 @@
       ]
     },
     "mglur2": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.43,
         "frontal": -0.4,
@@ -641,6 +672,7 @@
       ]
     },
     "mglur3": {
+      "donors": 5,
       "profile": {
         "frontal": 0.47,
         "hippocampus": -1.17,
@@ -661,6 +693,7 @@
       ]
     },
     "mglur4": {
+      "donors": 5,
       "profile": {
         "caudate": 1.0,
         "cerebellum": 2.33,
@@ -680,6 +713,7 @@
       ]
     },
     "mglur5": {
+      "donors": 5,
       "profile": {
         "accumbens": 0.74,
         "amygdala": 0.92,
@@ -703,6 +737,7 @@
       ]
     },
     "mu": {
+      "donors": 5,
       "profile": {
         "accumbens": 1.15,
         "amygdala": 0.82,
@@ -726,12 +761,13 @@
           "corpus": "allen_ahba",
           "page": "OPRM1",
           "provenance": "verified",
-          "quote": "OPRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1017111, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: accumbens +1.15 (5d), thalamus +1.12 (5d), hypothalamus +0.82 (5d), amygdala +0.82 (5d), vta +0.17 (5d), medulla +0.17 (5d), caudate +0.03 (5d), pons -0.14 (5d), frontal -0.20 (5d), putamen -0.22 (5d), temporal -0.22 (5d), midbrain -0.23 (5d), parietal -0.45 (5d), occipital -0.86 (5d), hippocampus -0.86 (5d)",
+          "quote": "OPRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1017111, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: accumbens +1.15 (5d), thalamus +1.12 (5d), hypothalamus +0.82 (5d), amygdala +0.82 (5d), vta +0.17 (5d), medulla +0.17 (5d), caudate +0.03 (5d), pons -0.14 (5d), frontal -0.20 (5d), temporal -0.22 (5d), putamen -0.22 (5d), midbrain -0.23 (5d), parietal -0.45 (5d), occipital -0.86 (5d), hippocampus -0.86 (5d)",
           "species": "Human"
         }
       ]
     },
     "nachr_a4b2": {
+      "donors": 5,
       "profile": {
         "accumbens": -0.08,
         "caudate": 0.09,
@@ -756,6 +792,7 @@
       ]
     },
     "nachr_a7": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.01,
         "frontal": 0.53,
@@ -779,6 +816,7 @@
   },
   "targets": {
     "ache": {
+      "donors": 5,
       "profile": {
         "frontal": -0.7,
         "hippocampus": -0.42,
@@ -798,6 +836,7 @@
       ]
     },
     "alpha2": {
+      "donors": 5,
       "profile": {
         "frontal": 0.09,
         "hippocampus": -0.27,
@@ -820,6 +859,7 @@
       ]
     },
     "bche": {
+      "donors": 5,
       "profile": {
         "frontal": -0.37,
         "hippocampus": -0.6,
@@ -837,6 +877,7 @@
       ]
     },
     "cav": {
+      "donors": 5,
       "profile": {
         "frontal": 0.22,
         "hippocampus": 0.26,
@@ -855,6 +896,7 @@
       ]
     },
     "cav_a2d": {
+      "donors": 5,
       "profile": {
         "frontal": -0.34,
         "hippocampus": -1.93,
@@ -873,6 +915,7 @@
       ]
     },
     "cav_t": {
+      "donors": 5,
       "profile": {
         "frontal": 0.23,
         "temporal": 0.3,
@@ -890,6 +933,7 @@
       ]
     },
     "dat": {
+      "donors": 5,
       "profile": {
         "accumbens": 0.05,
         "caudate": -0.28,
@@ -910,6 +954,7 @@
       ]
     },
     "gat": {
+      "donors": 5,
       "profile": {
         "cerebellum": -0.79,
         "frontal": 0.19,
@@ -929,6 +974,7 @@
       ]
     },
     "glutamate": {
+      "donors": 5,
       "profile": {
         "caudate": 0.26,
         "cerebellum": -0.46,
@@ -950,6 +996,7 @@
       ]
     },
     "mao_a": {
+      "donors": 5,
       "profile": {
         "locus_coeruleus": 4.4,
         "medulla": 0.31,
@@ -971,6 +1018,7 @@
       ]
     },
     "mao_b": {
+      "donors": 5,
       "profile": {
         "medulla": 0.91,
         "midbrain": 0.75,
@@ -991,6 +1039,7 @@
       ]
     },
     "nav": {
+      "donors": 5,
       "profile": {
         "frontal": 0.35,
         "hippocampus": 0.79,
@@ -1011,6 +1060,7 @@
       ]
     },
     "net": {
+      "donors": 5,
       "profile": {
         "amygdala": 0.16,
         "cerebellum": -0.11,
@@ -1032,6 +1082,7 @@
       ]
     },
     "orexin": {
+      "donors": 5,
       "profile": {
         "hypothalamus": 0.69,
         "locus_coeruleus": -0.33,
@@ -1051,6 +1102,7 @@
       ]
     },
     "sert": {
+      "donors": 5,
       "profile": {
         "accumbens": -0.14,
         "amygdala": -0.31,
@@ -1068,12 +1120,13 @@
           "corpus": "allen_ahba",
           "page": "SLC6A4",
           "provenance": "verified",
-          "quote": "SLC6A4 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1051457, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.95: raphe +5.78 (5d), accumbens -0.14 (5d), frontal -0.19 (5d), cingulate -0.23 (5d), temporal -0.24 (5d), hippocampus -0.29 (5d), thalamus -0.31 (5d), amygdala -0.31 (5d), hypothalamus -0.34 (5d)",
+          "quote": "SLC6A4 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1051457, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.95: raphe +5.78 (5d), accumbens -0.14 (5d), frontal -0.19 (5d), cingulate -0.23 (5d), temporal -0.24 (5d), hippocampus -0.29 (5d), amygdala -0.31 (5d), thalamus -0.31 (5d), hypothalamus -0.34 (5d)",
           "species": "Human"
         }
       ]
     },
     "sv2a": {
+      "donors": 5,
       "profile": {
         "frontal": 0.15,
         "hippocampus": 0.22,
@@ -1092,6 +1145,7 @@
       ]
     },
     "vmat2": {
+      "donors": 5,
       "profile": {
         "caudate": -0.21,
         "locus_coeruleus": 4.45,

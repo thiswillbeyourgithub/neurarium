@@ -167,6 +167,10 @@ TARGET_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 # sources [...]}}``. Machine-written (Allen AHBA, see below); empty when that file is absent.
 RECEPTOR_DENSITY: dict[str, dict[str, Any]] = {}
 TARGET_DENSITY: dict[str, dict[str, Any]] = {}
+# The cross-donor-agreement floor a profile had to clear to be published at all. Carried
+# from the fetcher through the data (rather than restated in the viewer) so the figure the
+# panel quotes is the one that actually filtered. None when no density file is present.
+DENSITY_MIN_RELIABILITY: float | None = None
 
 
 def _merge_external_density() -> None:
@@ -179,9 +183,11 @@ def _merge_external_density() -> None:
     src = Path(__file__).resolve().parent.parent / "generated_cache" / "expression_density.json"
     if not src.exists():
         return
+    global DENSITY_MIN_RELIABILITY
     data = json.loads(src.read_text(encoding="utf-8"))
     RECEPTOR_DENSITY.update(data.get("receptors") or {})
     TARGET_DENSITY.update(data.get("targets") or {})
+    DENSITY_MIN_RELIABILITY = data.get("min_reliability")
 
 
 def _merge_external_location_sources() -> None:
@@ -289,7 +295,7 @@ def _density_node(registry: dict[str, dict[str, Any]], owner_id: str,
     grade = DEFAULT_PROVENANCE
     if sources:
         grade = max((s["provenance"] for s in sources), key=lambda p: _GRADE_RANK[p])
-    return {"reliability": entry["reliability"],
+    return {"reliability": entry["reliability"], "donors": entry["donors"],
             "profile": {b: profile[b] for b in sorted(profile, key=lambda k: -profile[k])},
             "grade": grade, "sources": sources}
 

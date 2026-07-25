@@ -458,7 +458,7 @@ def main() -> int:
                  + ", ".join(f"{b} {v['z']:+.2f} ({v['donors']}d)" for b, v in ranked))
         page_lines.setdefault(g, []).append(quote)
         density.append({"owner_kind": kind, "owner": owner, "page": g, "quote": quote,
-                        "reliability": den["reliability"],
+                        "reliability": den["reliability"], "donors": len(den["donors"]),
                         "profile": {b: v["z"] for b, v in ranked}})
         stats["density"] += 1
 
@@ -467,8 +467,11 @@ def main() -> int:
         (PAGES / f"{g}.md").write_text("\n".join(sorted(set(lines))) + "\n", encoding="utf-8")
     (ALLEN / "confirmed.json").write_text(json.dumps(confirmed, indent=2) + "\n", encoding="utf-8")
     if not args.skip_density:
-        (ALLEN / "density.json").write_text(json.dumps(density, indent=2) + "\n",
-                                            encoding="utf-8")
+        # The floor travels WITH the profiles (rather than being restated in the viewer)
+        # so the number a reader is told about is the one that actually filtered here.
+        (ALLEN / "density.json").write_text(
+            json.dumps({"min_reliability": DENSITY_MIN_R, "profiles": density}, indent=2)
+            + "\n", encoding="utf-8")
 
     for u in unconfirmable[:40]:
         log(f"  [nodata] {u}")
