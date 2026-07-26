@@ -173,6 +173,15 @@
       "Brexpiprazole"
     ]
   },
+  "bromazepam": {
+    "fr_slug": "bromaz_pam",
+    "fr_title": "Bromazépam",
+    "name": "Bromazepam",
+    "sentences": [
+      "Structure du bromazépam",
+      "Le bromazépam est commercialisé en France sous le nom de marque Lexomil par les laboratoires Roche mais il existe de nombreux génériques depuis que la molécule est tombée dans le domaine public."
+    ]
+  },
   "buprenorphine": {
     "fr_slug": "bupr_norphine",
     "fr_title": "Buprénorphine",
@@ -308,6 +317,15 @@
       "C'est son sel de potassium qui est commercialisé, le clorazépate dipotassique Écouter ⓘ .",
       "Le clorazépate est commercialisé sous les marques Tranxène et Tranxilium par le laboratoire Neuraxpharm depuis mi-2024, Sanofi ayant vendue l'exclusivité de la vente de cette molécule en France à cet autre laboratoire.",
       "Tranxilium 50 n'est pas commercialisé en France."
+    ]
+  },
+  "clotiazepam": {
+    "fr_slug": "clotiaz_pam",
+    "fr_title": "Clotiazépam",
+    "name": "Clotiazepam",
+    "sentences": [
+      "Identification",
+      "Le clotiazépam est une substance chimique de la famille des thiénodiazépines , notamment commercialisée sous le nom de Vératran (en France) ou Clozan (en Belgique)."
     ]
   },
   "clozapine": {

@@ -332,6 +332,7 @@
 {"id": "q_1fe2db4363a6", "corpus": "stahl", "page": 517, "quote": "Concerta"}
 {"id": "q_1febf2762cd2", "corpus": "stahl", "page": 19, "quote": "Antagonist at serotonin 2C receptors", "llm": "sonnet"}
 {"id": "q_201f8338608a", "corpus": "stahl", "page": 641, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions and thus reducing motor side effects and possibly improving cognitive and affective symptoms", "llm": "sonnet"}
+{"id": "q_20254d993b31", "corpus": "wikipedia_pharm", "page": "clotiazepam", "quote": "Elimination half-life | 4 hours"}
 {"id": "q_204eafebc151", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "α 2A | 15 | Antagonist"}
 {"id": "q_206c042c78c1", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 detected in thalamus: probe 1026650 PACall present in 185/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_20732ef8da85", "corpus": "wikipedia_pharm", "page": "lumateperone", "quote": "SERT | Antagonist | 62"}
@@ -681,6 +682,7 @@
 {"id": "q_43329b4439bd", "corpus": "gtopdb", "page": 214, "quote": "Brain: Striatum, substantia nigra pars reticulata, globus pallidus, olfactory bulb, amygdala, cerebellar granule cell layer.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_43465b497cce", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in substantia_nigra: probe 1059691 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_434826a6d5c3", "corpus": "gtopdb_ki", "page": "risperidone", "quote": "risperidone at 5-HT1F receptor (HTR1F, Human): Antagonist / Antagonist, pKi 5.9 [PMID 8935801]", "species": "Human"}
+{"id": "q_43591a4a241d", "corpus": "wikipedia_pharm", "page": "bromazepam", "quote": "Bromazepam, sold under many brand names, is a benzodiazepine. It is mainly an anti-anxiety agent with similar side effects to diazepam"}
 {"id": "q_435bc03b1832", "corpus": "stahl", "page": 247, "quote": "a sigma 1 receptor agonist", "llm": "sonnet"}
 {"id": "q_435dc475cc59", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "β 2 | 5000"}
 {"id": "q_43617a0a78e1", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "5-HT 2B | 1.9 | Antagonist"}
@@ -808,6 +810,7 @@
 {"id": "q_50d12d8fbaab", "corpus": "nieuwenhuys", "page": 383, "quote": "The main bundle of the fornix or postcommissural fornix finally traverses the hypothalamus, where most of its fibres terminate in the mamillary body.", "llm": "sonnet"}
 {"id": "q_50eead92a98d", "corpus": "wikipedia_pharm", "page": "varenicline", "quote": "α 4 β 2 | 1.30 ± 0.18 | 2.8 ± 1.2 | 0.09 | 20 ± 6 | Partial Agonist"}
 {"id": "q_50f31a69f353", "corpus": "kandel", "page": 983, "quote": "Output of the basal ganglia is determined by the balance between a direct pathway from the striatum to the output nuclei.", "llm": "sonnet"}
+{"id": "q_510263167136", "corpus": "wikipedia_fr", "page": "clotiaz_pam", "quote": "Clozan"}
 {"id": "q_5121530fbd0b", "corpus": "stahl", "page": 923, "quote": "Ambien CR"}
 {"id": "q_512b4843f642", "corpus": "stahl", "page": 845, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
 {"id": "q_514608f0d14b", "corpus": "allen_ahba", "page": "SIGMAR1", "quote": "SIGMAR1 detected in midbrain: probe 1047600 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -867,6 +870,7 @@
 {"id": "q_56b1474d31e4", "corpus": "allen_ahba", "page": "CACNA1B", "quote": "CACNA1B relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1011584, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.85: temporal +0.34 (5d), hippocampus +0.26 (5d), frontal +0.22 (5d), thalamus +0.18 (5d)", "species": "Human"}
 {"id": "q_56b1e3705ae7", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in frontal: probe 1059351 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_57004abe6d70", "corpus": "stahl", "page": 718, "quote": "Mean elimination half-life of parent drug 1–2.6 hours"}
+{"id": "q_574979af9e3a", "corpus": "wikipedia_pharm", "page": "clotiazepam", "quote": "is a thienodiazepine drug which is a benzodiazepine analog. The clotiazepam molecule differs from benzodiazepines in that the benzene ring has been replaced by a thiophene ring. It possesses anxiolytic, skeletal muscle relaxant, anticonvulsant, sedative properties"}
 {"id": "q_5749c65df05d", "corpus": "gtopdb_ki", "page": "haloperidol", "quote": "haloperidol at 5-HT1D receptor (HTR1D, Human): Antagonist / Antagonist, pKi 6.6 [PMID 8935801]", "species": "Human"}
 {"id": "q_574a3d929a1a", "corpus": "gtopdb_ki", "page": "haloperidol", "quote": "haloperidol at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 6.3-6.6 [PMID 9298538]", "species": "Human"}
 {"id": "q_5765f356d816", "corpus": "stahl", "page": 291, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission", "llm": "sonnet"}
@@ -1218,6 +1222,7 @@
 {"id": "q_779f36be9da7", "corpus": "stahl", "page": 849, "quote": "Stelazine"}
 {"id": "q_77acd80cafa5", "corpus": "stahl", "page": 61, "quote": "Mydayis"}
 {"id": "q_77c307a68efd", "corpus": "kandel", "page": 59, "quote": "The insular cortex, which lies buried within the overlying frontal, parietal, and temporal lobes, plays an important role in emotion, homeostasis, and taste perception.", "llm": "sonnet"}
+{"id": "q_77ca9b423667", "corpus": "wikipedia_pharm", "page": "bromazepam", "quote": "Bromazepam binds to the GABA A receptor, causing a conformational change and increasing the inhibitory effects of GABA. It acts as a positive modulator, increasing the receptors' response when activated by GABA itself or an agonist"}
 {"id": "q_77d200bb9a33", "corpus": "stahl", "page": 529, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
 {"id": "q_77d50397064c", "corpus": "stahl", "page": 353, "quote": "Luvox"}
 {"id": "q_77faf47e8c80", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "5-HT 1D | 57–79 | ND"}
@@ -1235,6 +1240,7 @@
 {"id": "q_7998a53cac2c", "corpus": "allen_ahba", "page": "SLC18A2", "quote": "SLC18A2 detected in putamen: probe 1051381 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_79ccd0d2adf6", "corpus": "stahl", "page": 621, "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)", "llm": "sonnet"}
 {"id": "q_79e3c3abc583", "corpus": "stahl", "page": 465, "quote": "Benzodiazepine (anxiolytic, anticonvulsant)", "llm": "sonnet"}
+{"id": "q_7a067d8e06b3", "corpus": "wikipedia_pharm", "page": "bromazepam", "quote": "The major metabolite of bromazepam is hydroxybromazepam, which is an active agent too and has a half-life approximately equal to that of bromazepam."}
 {"id": "q_7a2db16a3eb8", "corpus": "gtopdb", "page": 1, "quote": "CNS: Dorsal raphe nucleus, septum, hippocampus, entorhinal cortex, interpeduncular nucleus > olfactory bulb, cerebral cortex, thalamic and hypothalamic nuclei, nuclei of the brainstem, dorsal horn of the spinal cord.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_7a30bd63bb4c", "corpus": "gtopdb_ki", "page": "dimethyltryptamine", "quote": "dimethyltryptamine at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 7-7.3 [PMID 8967979]", "species": "Human"}
 {"id": "q_7a69dd90c53c", "corpus": "stahl", "page": 705, "quote": "Doral"}
@@ -1549,6 +1555,7 @@
 {"id": "q_9992b3608d70", "corpus": "stahl_essential", "page": 522, "quote": "Muscarinic acetylcholine receptors are G-protein-linked and can be either excitatory or inhibitory.", "llm": "sonnet"}
 {"id": "q_999cc66929f2", "corpus": "stahl", "page": 700, "quote": "Blockade of alpha 1 adrenergic receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_999e8526d0e6", "corpus": "stahl", "page": 53, "quote": "Xelstrym"}
+{"id": "q_99a1ac50ee12", "corpus": "wikipedia_pharm", "page": "bromazepam", "quote": "Elimination half-life | 12–20 hours (avg. 17 hours)"}
 {"id": "q_99ae3799b6ae", "corpus": "stahl", "page": 761, "quote": "Serdolect"}
 {"id": "q_99b2e5b8bcd7", "corpus": "stahl", "page": 923, "quote": "Intermezzo"}
 {"id": "q_99df2e54672c", "corpus": "stahl", "page": 53, "quote": "Dexedrine Spansule"}
@@ -1833,6 +1840,7 @@
 {"id": "q_b259f71d4196", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "5-HT 1A | 294 | Human"}
 {"id": "q_b26391e5a972", "corpus": "stahl", "page": 648, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
 {"id": "q_b26bb0a4fd8c", "corpus": "gtopdb_ki", "page": "thioridazine", "quote": "thioridazine at 5-HT6 receptor (HTR6, Human): Antagonist / Inverse agonist, pKi 7.2 [PMID 15821958]", "species": "Human"}
+{"id": "q_b27fbb607fe6", "corpus": "wikipedia_pharm", "page": "bromazepam", "quote": "Metabolites | 3-hydroxybromazepam"}
 {"id": "q_b2841fd4be8f", "corpus": "gtopdb", "page": 9, "quote": "Brain: Frontal cortex, hippocampus > caudate, putamen > globus palidus, substantia nigra.", "species": "Human", "llm": "sonnet"}
 {"id": "q_b2c73aecc705", "corpus": "wikipedia_pharm", "page": "buspirone", "quote": "α 2 | 6,000 | Antagonist | Rat"}
 {"id": "q_b2cd553a9fd8", "corpus": "stahl", "page": 336, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
@@ -1916,6 +1924,7 @@
 {"id": "q_ba78adce2bb2", "corpus": "allen_ahba", "page": "DRD4", "quote": "DRD4 detected in occipital: probe 1057541 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ba7991952023", "corpus": "allen_ahba", "page": "GRM2", "quote": "GRM2 detected in frontal: probe 1014136 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ba7b4d01d62e", "corpus": "wikipedia_pharm", "page": "pimozide", "quote": "α 2A | 1,593"}
+{"id": "q_ba8d958bdde3", "corpus": "wikipedia_fr", "page": "bromaz_pam", "quote": "Lexomil"}
 {"id": "q_bab5aacd496b", "corpus": "kandel", "page": 531, "quote": "Parabrachial neurons project to the amygdala, a critical nucleus of the limbic system, which regulates emotional states (Chapter 42).", "llm": "sonnet"}
 {"id": "q_bac5a43c42d3", "corpus": "allen_ahba", "page": "GRM4", "quote": "GRM4 detected in caudate: probe 1055922 PACall present in 81/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_baca16d053df", "corpus": "stahl_essential", "page": 92, "quote": "One subclass of ligand-gated ion channels has a pentameric structure, and includes GABAA receptors, nicotinic cholinergic receptors, 5HT3 receptors, and certain glycine receptors.", "llm": "sonnet"}
@@ -2032,6 +2041,7 @@
 {"id": "q_c60508371af8", "corpus": "stahl", "page": 456, "quote": "Elimination half-life approximately 12 hours"}
 {"id": "q_c60dc06c6a33", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "SERT | 4000 | Human"}
 {"id": "q_c618ff7374a1", "corpus": "stahl", "page": 727, "quote": "Perseris"}
+{"id": "q_c65ef0526cdf", "corpus": "wikipedia_fr", "page": "clotiaz_pam", "quote": "Vératran"}
 {"id": "q_c6649c2f9c98", "corpus": "stahl", "page": 116, "quote": "Terminal half-life approximately 9 hours"}
 {"id": "q_c672c5700d0c", "corpus": "stahl", "page": 383, "quote": "Antihistamine (anxiolytic, hypnotic, antiemetic)", "llm": "sonnet"}
 {"id": "q_c67a5c56358c", "corpus": "allen_ahba", "page": "HTR4", "quote": "HTR4 detected in caudate: probe 1022876 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -2059,6 +2069,7 @@
 {"id": "q_c9429e83cd86", "corpus": "stahl", "page": 812, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_c98c4c14ca73", "corpus": "stahl", "page": 615, "quote": "Anticonvulsant, voltage-sensitive sodium channel antagonist"}
 {"id": "q_c9ab3fad7fad", "corpus": "stahl", "page": 16, "quote": "Terminal half-life 20–33 hours"}
+{"id": "q_c9bf0ea3b855", "corpus": "wikipedia_pharm", "page": "clotiazepam", "quote": "Clotiazepam binds to the benzodiazepine site of the GABA A receptor where it acts as a full agonist; this action results in an enhanced GABA inhibitory effect at the GABA A receptor"}
 {"id": "q_c9deabc6b7a4", "corpus": "wikipedia_pharm", "page": "lumateperone", "quote": "D 2S | Agonist (partial) | 32?"}
 {"id": "q_c9eb4ce48e64", "corpus": "wikipedia_pharm", "page": "8_hydroxyamoxapine", "quote": "It is a serotonin-norepinephrine reuptake inhibitor (SNRI) with similar norepinephrine , but more serotonin , reuptake inhibition as its parent compound."}
 {"id": "q_ca12676a56ac", "corpus": "stahl", "page": 387, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet"}

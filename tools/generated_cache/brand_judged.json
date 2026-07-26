@@ -55,6 +55,9 @@
   ],
   "brexanolone": [],
   "brexpiprazole": [],
+  "bromazepam": [
+    "Lexomil"
+  ],
   "buprenorphine": [
     "Temgésic",
     "Subutex"
@@ -113,6 +116,10 @@
   "clorazepate": [
     "Tranxène",
     "Tranxilium"
+  ],
+  "clotiazepam": [
+    "Vératran",
+    "Clozan"
   ],
   "clozapine": [
     "Leponex"

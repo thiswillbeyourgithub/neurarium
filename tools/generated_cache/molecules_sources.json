@@ -84,6 +84,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Brexpiprazole.svg",
     "title": "Brexpiprazole"
   },
+  "bromazepam": {
+    "file": "File:Bromazepam.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Bromazepam.svg",
+    "title": "Bromazepam"
+  },
   "buprenorphine": {
     "file": "File:Buprenorphine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Buprenorphine.svg",
@@ -148,6 +153,11 @@
     "file": "File:Clorazepate.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Clorazepate.svg",
     "title": "Clorazepate"
+  },
+  "clotiazepam": {
+    "file": "File:Clotiazepam_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Clotiazepam_structure.svg",
+    "title": "Clotiazepam"
   },
   "clozapine": {
     "file": "File:Clozapine.svg",
