@@ -4557,6 +4557,7 @@ function buildAboutSourcing(meta, opts = {}) {
     drug_brands: "about.kindDrugBrands",
     drug_categories: "about.kindDrugCategories",
     drug_half_life: "about.kindDrugHalfLife",
+    drug_enzymes: "about.kindDrugEnzymes",
     drug_metabolites: "about.kindDrugMetabolites",
     drug_metabolite_bindings: "about.kindDrugMetaboliteBindings",
     projections: "about.kindProjections",
@@ -4780,6 +4781,14 @@ function buildKindExample(kind, data, nav) {
         || focusableDrugs.find((x) => x.halfLife);
       const s = d && d.halfLife && formatHalfLife(d.halfLife);
       return s ? line(d.name, `T½ ${s}`, () => nav.drug(d)) : null;
+    }
+    case "drug_enzymes": {
+      // A metabolism row: the drug is the clickable subject, the notion names the
+      // enzyme and the role, e.g. Fluoxetine "CYP2D6: Inhibitor".
+      const d = pick(focusableDrugs, (x) => x.id === "fluoxetine" && (x.enzymes || []).length)
+        || focusableDrugs.find((x) => (x.enzymes || []).length);
+      const e = d && (d.enzymes || [])[0];
+      return e ? line(d.name, `${e.label}: ${e.roleLabel}`, () => nav.drug(d)) : null;
     }
     case "drug_metabolites": {
       const d = pick(focusableDrugs, (x) => x.id === "fluoxetine" && (x.metabolites || []).length)
