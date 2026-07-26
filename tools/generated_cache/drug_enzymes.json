@@ -1,0 +1,2103 @@
+{
+ "agomelatine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 21,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP1A2"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "alprazolam": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 27,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "amitriptyline": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 41,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 41,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  }
+ ],
+ "amoxapine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 49,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6"
+    }
+   ]
+  }
+ ],
+ "aripiprazole": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 73,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2D6 and CYP3A4"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 73,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2D6 and CYP3A4"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "armodafinil": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 83,
+     "provenance": "verified",
+     "quote": "Induces CYP3A4 (and slightly CYP1A2)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 83,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 83,
+     "provenance": "verified",
+     "quote": "Induces CYP3A4 (and slightly CYP1A2)"
+    }
+   ]
+  }
+ ],
+ "asenapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 91,
+     "provenance": "verified",
+     "quote": "Substrate for CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 91,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6"
+    }
+   ]
+  }
+ ],
+ "atomoxetine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 97,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6"
+    }
+   ]
+  }
+ ],
+ "blonanserin": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 108,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "brexpiprazole": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 123,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2D6 and CYP3A4"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 123,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2D6 and CYP3A4"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "buprenorphine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 130,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "bupropion": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 136,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6"
+    }
+   ]
+  }
+ ],
+ "buspirone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 140,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "carbamazepine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 149,
+     "provenance": "verified",
+     "quote": "Is also an inducer of CYP2C9 and weakly of CYP1A2 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 149,
+     "provenance": "verified",
+     "quote": "Is also an inducer of CYP2C9 and weakly of CYP1A2 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 149,
+     "provenance": "verified",
+     "quote": "Is also an inducer of CYP2C9 and weakly of CYP1A2 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 149,
+     "provenance": "verified",
+     "quote": "Metabolized in the liver, primarily by CYP3A4"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "cariprazine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 157,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "citalopram": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 175,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 175,
+     "provenance": "verified",
+     "quote": "Weak inhibitor of CYP2D6"
+    }
+   ],
+   "strength": "weak"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 175,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4 and CYP2C19"
+    }
+   ]
+  }
+ ],
+ "clomipramine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 181,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 181,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 181,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  }
+ ],
+ "clonazepam": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 189,
+     "provenance": "verified",
+     "quote": "Substrate for CYP3A4"
+    }
+   ]
+  }
+ ],
+ "clozapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 210,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP1A2 and to a lesser extent by CYP2D6 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 210,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP1A2 and to a lesser extent by CYP2D6 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 210,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP1A2 and to a lesser extent by CYP2D6 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "daridorexant": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 222,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "desipramine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 227,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 227,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  }
+ ],
+ "desvenlafaxine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 235,
+     "provenance": "verified",
+     "quote": "Minimally metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "deutetrabenazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 241,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, but deuteration means that, unlike tetrabenazine, CYP2D6 genotyping is not necessary"
+    }
+   ]
+  }
+ ],
+ "diazepam": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 259,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2C19 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 259,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2C19 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "diphenhydramine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 264,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6 weakly"
+    }
+   ]
+  }
+ ],
+ "donepezil": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 273,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 273,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "dothiepin": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 279,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6"
+    }
+   ]
+  }
+ ],
+ "doxepin": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 286,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6"
+    }
+   ]
+  }
+ ],
+ "duloxetine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 294,
+     "provenance": "verified",
+     "quote": "Inhibitor of CYP2D6 (probably clinically significant) and CYP1A2 (probably not clinically significant)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 294,
+     "provenance": "verified",
+     "quote": "Metabolized mainly by CYP2D6 and CYP1A2"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 294,
+     "provenance": "verified",
+     "quote": "Inhibitor of CYP2D6 (probably clinically significant) and CYP1A2 (probably not clinically significant)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 294,
+     "provenance": "verified",
+     "quote": "Metabolized mainly by CYP2D6 and CYP1A2"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "escitalopram": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 299,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2C19 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 299,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2C19 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "esketamine": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 305,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 305,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 305,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 305,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
+    }
+   ]
+  }
+ ],
+ "eszopiclone": [
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 314,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4 and CYP2E1"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 314,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4 and CYP2E1"
+    }
+   ]
+  }
+ ],
+ "flibanserin": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 318,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 318,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP2C19"
+    }
+   ]
+  }
+ ],
+ "fluoxetine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 331,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 331,
+     "provenance": "verified",
+     "quote": "Inhibits CYP3A4"
+    }
+   ]
+  }
+ ],
+ "fluvoxamine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 355,
+     "provenance": "verified",
+     "quote": "Inhibits CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 355,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C9/2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 355,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C9/2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 355,
+     "provenance": "verified",
+     "quote": "Inhibits CYP3A4"
+    }
+   ]
+  }
+ ],
+ "galantamine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 366,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 366,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "guanfacine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 372,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "iloperidone": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 390,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 390,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "imipramine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 397,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 397,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP1A2"
+    }
+   ]
+  }
+ ],
+ "ketamine": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 413,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2B6, CYP2C9, and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 413,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2B6, CYP2C9, and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 413,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2B6, CYP2C9, and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "lemborexant": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 424,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP3A5"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 424,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP3A5"
+    }
+   ]
+  }
+ ],
+ "levomilnacipran": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 433,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4; renally excreted"
+    }
+   ]
+  }
+ ],
+ "lofepramine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 451,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6"
+    }
+   ]
+  }
+ ],
+ "lofexidine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 456,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 456,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 456,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19"
+    }
+   ]
+  }
+ ],
+ "lumateperone": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 482,
+     "provenance": "verified",
+     "quote": "Metabolized by multiple enzymes, including CYP3A4 and CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 482,
+     "provenance": "verified",
+     "quote": "Metabolized by multiple enzymes, including CYP3A4 and CYP1A2"
+    }
+   ]
+  }
+ ],
+ "lurasidone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 491,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "maprotiline": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 497,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6"
+    }
+   ]
+  }
+ ],
+ "mirtazapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 541,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6, CYP3A4, and possibly also CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 541,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6, CYP3A4, and possibly also CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 541,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6, CYP3A4, and possibly also CYP1A2"
+    }
+   ]
+  }
+ ],
+ "moclobemide": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 546,
+     "provenance": "verified",
+     "quote": "Partially metabolized by CYP2C19 and CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 546,
+     "provenance": "verified",
+     "quote": "Partially metabolized by CYP2C19 and CYP2D6"
+    }
+   ]
+  }
+ ],
+ "modafinil": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 553,
+     "provenance": "verified",
+     "quote": "Induces CYP3A4 (and slightly CYP1A2 and CYP2B6)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 553,
+     "provenance": "verified",
+     "quote": "Induces CYP3A4 (and slightly CYP1A2 and CYP2B6)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 553,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C19 (and perhaps CYP2C9)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 553,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C19 (and perhaps CYP2C9)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 553,
+     "provenance": "verified",
+     "quote": "Induces CYP3A4 (and slightly CYP1A2 and CYP2B6)"
+    }
+   ]
+  }
+ ],
+ "nefazodone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 579,
+     "provenance": "verified",
+     "quote": "Inhibits CYP3A4"
+    }
+   ]
+  }
+ ],
+ "nortriptyline": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 585,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 585,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "olanzapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 595,
+     "provenance": "verified",
+     "quote": "Substrate for CYP1A2 and CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 595,
+     "provenance": "verified",
+     "quote": "Substrate for CYP1A2 and CYP2D6"
+    }
+   ]
+  }
+ ],
+ "oxcarbazepine": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 617,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 617,
+     "provenance": "verified",
+     "quote": "A mild inducer of CYP3A4"
+    }
+   ],
+   "strength": "weak"
+  }
+ ],
+ "paroxetine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 636,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6"
+    }
+   ]
+  }
+ ],
+ "perospirone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 643,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "pimavanserin": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 666,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4 and CYP3A5"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 666,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP3A4 and CYP3A5"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "pimozide": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 671,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A and to a lesser extent by CYP1A2"
+    }
+   ],
+   "strength": "minor"
+  }
+ ],
+ "pitolisant": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 682,
+     "provenance": "verified",
+     "quote": "Extensively metabolized by CYP2D6 and to a lesser extent by CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 682,
+     "provenance": "verified",
+     "quote": "Extensively metabolized by CYP2D6 and to a lesser extent by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "protriptyline": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 701,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6"
+    }
+   ]
+  }
+ ],
+ "quazepam": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 706,
+     "provenance": "verified",
+     "quote": "Metabolized in part by CYP3A4"
+    }
+   ],
+   "strength": "minor"
+  }
+ ],
+ "quetiapine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 713,
+     "provenance": "verified",
+     "quote": "Substrate for CYP3A4"
+    }
+   ]
+  }
+ ],
+ "ramelteon": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 718,
+     "provenance": "verified",
+     "quote": "Metabolized predominantly by CYP1A2"
+    }
+   ]
+  }
+ ],
+ "reboxetine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 723,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6 and CYP3A4 at high doses"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 723,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6 and CYP3A4 at high doses"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 723,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "risperidone": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 731,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6"
+    }
+   ]
+  }
+ ],
+ "sertindole": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 764,
+     "provenance": "verified",
+     "quote": "Extensively metabolized by CYP2D6 and CYP3A"
+    }
+   ]
+  }
+ ],
+ "sertraline": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 770,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 770,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6 (weakly at low doses) and is also a substrate for CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 770,
+     "provenance": "verified",
+     "quote": "Inhibits CYP3A4 (weakly at low doses)"
+    }
+   ]
+  }
+ ],
+ "sildenafil": [
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 776,
+     "provenance": "verified",
+     "quote": "Metabolized to an active metabolite, primarily by CYP3A4 (major route) and CYP2C9 (minor route)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 776,
+     "provenance": "verified",
+     "quote": "Metabolized to an active metabolite, primarily by CYP3A4 (major route) and CYP2C9 (minor route)"
+    }
+   ]
+  }
+ ],
+ "suvorexant": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 794,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "tasimelteon": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 798,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP1A2 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 798,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP1A2 and CYP3A4"
+    }
+   ]
+  }
+ ],
+ "thioridazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 807,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6"
+    }
+   ]
+  }
+ ],
+ "tiagabine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 819,
+     "provenance": "verified",
+     "quote": "Primarily metabolized by CYP3A4"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "topiramate": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 829,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C19 and induces CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 829,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C19 and induces CYP3A4"
+    }
+   ]
+  }
+ ],
+ "trazodone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 841,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "trimipramine": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 865,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6, CYP2C19, and CYP2C9"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 865,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6, CYP2C19, and CYP2C9"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 865,
+     "provenance": "verified",
+     "quote": "Substrate for CYP2D6, CYP2C19, and CYP2C9"
+    }
+   ]
+  }
+ ],
+ "valbenazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 872,
+     "provenance": "verified",
+     "quote": "[+]-α-HTBZ is further metabolized in part by CYP2D6"
+    }
+   ],
+   "strength": "minor"
+  }
+ ],
+ "valproate": [
+  {
+   "enzyme": "cyp2c9",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 877,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2C9"
+    }
+   ]
+  }
+ ],
+ "vilazodone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 895,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "viloxazine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 901,
+     "provenance": "verified",
+     "quote": "Inhibits CYP1A2 (strong)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 901,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6 (weak)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 901,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2D6, UGT1A9, and UGT2B15"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 901,
+     "provenance": "verified",
+     "quote": "Inhibits CYP3A4 (weak)"
+    }
+   ]
+  }
+ ],
+ "vortioxetine": [
+  {
+   "enzyme": "cyp2a6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c8",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 907,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6, CYP3A4/5, CYP2C19, CYP2C9, CYP2A6, CYP2C8, and CYP2B6"
+    }
+   ]
+  }
+ ],
+ "ziprasidone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 919,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "zolpidem": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 925,
+     "provenance": "verified",
+     "quote": "Substrate for CYP3A4"
+    }
+   ]
+  }
+ ],
+ "zonisamide": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 928,
+     "provenance": "verified",
+     "quote": "Metabolized in part by CYP3A4"
+    }
+   ],
+   "strength": "minor"
+  }
+ ],
+ "zopiclone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 932,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4"
+    }
+   ]
+  }
+ ],
+ "zotepine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 938,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4 and CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 938,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP3A4 and CYP1A2"
+    }
+   ]
+  }
+ ],
+ "zuclopenthixol": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 944,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 944,
+     "provenance": "verified",
+     "quote": "Metabolized by CYP2D6 and CYP3A4"
+    }
+   ]
+  }
+ ]
+}
