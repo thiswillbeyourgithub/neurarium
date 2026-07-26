@@ -404,14 +404,20 @@ def _ki_owned_by_pdsp(binding):
     return _is_pdsp_ki(binding)
 
 
-def apply_all():
+def apply_all(only=None):
     """Write PDSP Ki into tools/data/drugs_data.jsonl for every resolvable drug: annotate
     existing bindings with a `ki`, add the median-stronger omitted targets as new
     `affinity_only` bindings. Idempotent: strips its own prior output first, so a
-    re-run after a fresh CSV download simply refreshes the values."""
+    re-run after a fresh CSV download simply refreshes the values.
+
+    ``only`` (a set of drug ids) scopes the pass to those drugs. Use it when adding a
+    single drug: a corpus-wide refresh legitimately rewrites every drug whose PDSP rows
+    moved since the last run, which buries the one-drug change in an unrelated diff."""
     data = drugs_io.load_drugs()
     n_ann = n_add = n_drugs = 0
     for d in data:
+        if only and d["id"] not in only:
+            continue
         # Idempotency: drop what a previous --apply added before recomputing, but
         # never a hand-curated Ki (a real sub-sentinel binder the resolver can't
         # reproduce, see _is_curated_ki).
@@ -459,6 +465,8 @@ def main():
     ap.add_argument("--drug", help="drug id / ligand name to preview (e.g. risperidone)")
     ap.add_argument("--apply", action="store_true",
                     help="write Ki into tools/data/drugs_data.jsonl for every drug (idempotent)")
+    ap.add_argument("--only", default="",
+                    help="comma-separated drug ids to scope --apply to (e.g. bromazepam)")
     ap.add_argument("--all", action="store_true",
                     help="also list omitted PDSP targets weaker than our weakest binding")
     ap.add_argument("--json", metavar="OUT", help="write the preview JSON here")
@@ -468,7 +476,7 @@ def main():
         sys.exit("PDSP CSV not found at %s (author-side; see its README)" % CSV_PATH)
 
     if args.apply:
-        apply_all()
+        apply_all({s.strip() for s in args.only.split(",") if s.strip()} or None)
         return
     if not args.drug:
         sys.exit("give --drug <id> to preview, or --apply to write the dataset")
