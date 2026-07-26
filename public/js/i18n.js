@@ -105,7 +105,7 @@
       "tour.aria": "Guided tour",
       "tour.welcome.title": "Welcome to neurarium",
       "tour.welcome.body":
-        "A 3D map of the brain: its regions, their pathways, and the receptors and drugs acting on them. Quick tour, leave any time.",
+        "A 3D map of the brain: its regions, their pathways, and the receptors and drugs acting on them. The tour takes about 3 minutes, and you can leave any time.",
       "tour.rotate.title": "Move around",
       "tour.rotate.body":
         "<b>Drag</b> to spin the brain, scroll to zoom. Give it a spin to continue.",
@@ -510,7 +510,7 @@
       "tour.aria": "Visite guidée",
       "tour.welcome.title": "Bienvenue sur neurarium",
       "tour.welcome.body":
-        "Une carte 3D du cerveau : ses régions, leurs voies, et les récepteurs et médicaments qui agissent dessus. Visite rapide, quittez quand vous voulez.",
+        "Une carte 3D du cerveau : ses régions, leurs voies, et les récepteurs et médicaments qui agissent dessus. La visite dure environ 3 minutes, et vous pouvez la quitter quand vous voulez.",
       "tour.rotate.title": "Se déplacer",
       "tour.rotate.body":
         "<b>Faites glisser</b> pour tourner le cerveau, défilez pour zoomer. Faites-le tourner pour continuer.",
