@@ -609,6 +609,13 @@ measured affinity at all **58 -> 37**; the 37 that remain are the ones no bindin
 anticonvulsants). The applier reports **28 compatible refinements** (inverse-agonist vs
 antagonist, partial-agonist vs agonist: same effect, finer wording) and **10 genuine direction
 conflicts** separately, resolving neither: ours wins in the data, and the disagreement is printed
-for a human. The `provisional_action` bindings are shown in the panel with their source but are
-tagged "not animated" and held out of the 3D layer pending an explicit call (top bullet in
-TODO.md).
+for a human.
+
+Those 193 newly-directional bindings **do** drive the 3D layer (decided in v3.27.0). The effect is
+a deepening rather than an unlock: no drug became newly focusable, but 37 of the 40 affected drugs
+light at least one more region (amitriptyline +9, its five muscarinic sites; risperidone,
+haloperidol and ketanserin +6), and 17 gain an ascending flow system through a canonical
+autoreceptor (clozapine histaminergic via H3, amitriptyline cholinergic via M2, chlorpromazine
+noradrenergic via alpha2A/B/C, several serotonergic via 5-HT1A/1B/1D). Because per-drug flow
+intensity is normalized to the strongest engaged system, this also re-scales the overlays that
+were already there.

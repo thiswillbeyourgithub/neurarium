@@ -589,10 +589,10 @@ fixed Stahl list.
   (caffeine at A2a) can only be recorded by hand; such a `ki.source` carries `"curated": true` so the
   idempotent `--apply` refresh never strips it (`_is_curated_ki`). Where PDSP has no assay at all,
   GtoPdb's curated interactions (corpus #11) fill in: a Ki for a Ki-less binding, and a
-  **`provisional_action`** for an `affinity_only` one (see `apply_gtopdb_ki.py`). Such a binding
-  renders its action with the source pill but is tagged "not animated" (`drug.notAnimated`) and is
-  still held out of the 3D layer, sharing the `affinity_only` exclusion via the single `inert` term
-  in `js/data.js` (an open decision, see TODO.md).
+  a direction for an `affinity_only` one (see `apply_gtopdb_ki.py`). Such a binding is a binding
+  like any other: it animates, and its source pill names the corpus. The authored
+  `provisional_action` flag exists only for that applier's idempotency and is deliberately **not**
+  emitted (`sources` already carry the corpus, so it would be a derivable duplicate).
 
 5 drugs stay unbound as genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
 triiodothyronine, caprylidene). The Stahl corpus `url` is `"TODO"` (the grade, not the link, conveys

@@ -103,8 +103,8 @@ network, idempotent, polite; each touches only what changed). Always finish with
    `https://pdspdb.unc.edu/databases/kiDownload/download.php` over
    `data_sources/books/pdsp_ki/KiDatabase.csv` (author-side; see that dir's `README.md`), then
    `python tools/fetch/fetch_ki.py --apply` to rewrite `drugs_data.jsonl`'s `ki` + `affinity_only`.
-4. **GtoPdb ligand interactions** (the `gtopdb_ki` Ki fallback + the `provisional_action`
-   directions): `python tools/fetch/fetch_gtopdb_ki.py` re-downloads the bulk
+4. **GtoPdb ligand interactions** (the `gtopdb_ki` Ki fallback + the curated directions for
+   `affinity_only` bindings): `python tools/fetch/fetch_gtopdb_ki.py` re-downloads the bulk
    `interactions.csv` and rebuilds `data_sources/gtopdb/pages_ki/` (author-side) +
    `tools/generated_cache/gtopdb_ki.json`, then `python tools/sourcing/apply_gtopdb_ki.py`
    quote-gates + merges into `drugs_data.jsonl`. Run it **after** `fetch_ki.py`, since it only
@@ -351,9 +351,7 @@ there is no node-level catch-all `sources` block.
   `category_sources`), optional `nbn{en,fr}` (+ `nbn_sources`, + `nbn_nonstandard:true` when the
   value is Stahl's class descriptor not a formal NbN), `bindings[]` (each: `target`, `action`,
   optional `effect`/`note{en,fr}`/`tentative`/`sources[{corpus,page,quote,provenance}]`/`ki`
-  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)/
-  `provisional_action:true` (a GtoPdb-sourced direction on a formerly `affinity_only` binding:
-  shown with its source, still panel-only)),
+  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
   optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
   `metabolites[]` (each: `name`, optional `half_life`(+`half_life_sources`), `sources[]`, optional
   `drug_id` linking a modeled drug, optional `bindings[]` for a non-modeled metabolite: same shape as a
