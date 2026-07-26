@@ -521,3 +521,84 @@ hand-curated, quote-gated fact on the few drugs where brain entry is actually a 
 story (P-gp substrates such as paliperidone; the poorly-penetrant benzamides sulpiride /
 amisulpride; peripherally-restricted agents), sourced from Stahl's pharmacokinetics prose
 like any other node, rather than a number pinned to all 179.
+
+## Candidate new *sources* for data we already hold (surveyed 2026-07-26)
+
+Unlike the section above, this is not a new axis: it is a second opinion on nodes that already
+exist. Same format, same purpose (do not re-survey it).
+
+### GtoPdb ligand interactions as a **binding-affinity + direction** source
+
+GtoPdb (IUPHAR/BPS Guide to Pharmacology) is already wired as corpus #7 for receptor expression
+regions, through its `tissueDistribution` API. Its *other* half, the hand-curated
+ligand-target interaction table, is a candidate second affinity source next to PDSP Ki (#5) and
+the Wikipedia pharmacodynamics table (#9).
+
+**What it is.** One versioned bulk file,
+[`DATA/interactions.csv`](https://www.guidetopharmacology.org/DATA/interactions.csv) (7 MB,
+24599 rows at version 2026.2, published 2026-06-15), so this is a PDSP-shaped corpus (one CSV,
+one row per claim), not another paged-text corpus. Each row carries the target with its **gene
+symbol** (the join we already use), the species, `Type` + `Action` (Agonist / Antagonist /
+Inhibitor / Allosteric modulator, and Full agonist / Partial agonist / Inverse agonist /
+Positive / Inhibition), the affinity as a pX **and** in nM, and a `PubMed ID` (21373 of 24599
+rows have one). Affinity unit mix across the whole file: pIC50 9706, pKi 7116, pEC50 2655, pKd
+2278, pKB 147, pA2 75.
+
+**Measured against our corpus** (script kept out of the repo; numbers recomputed from the bulk
+CSV, gene join case-folded because rodent rows use `Scn2a` where human rows use `SCN2A`):
+
+| question | answer |
+|---|---|
+| our drug bindings GtoPdb has a usable affinity for | **454 / 1511** |
+| of those, bindings that have **no Ki today** | **51** |
+| bindings still with no Ki and nothing in GtoPdb | 221 |
+| of the **58 drugs with zero measured Ki**, drugs GtoPdb reaches | **33** |
+| `affinity_only` bindings GtoPdb could give a **direction** to | **193** |
+| binding pairs GtoPdb knows that we do not model at all | 66 |
+| non-modeled metabolites present in GtoPdb | **3 / 24** (norfluoxetine, norquetiapine, norzotepine) |
+
+**It agrees with what we already hold.** On the 388 bindings where PDSP and GtoPdb both have a
+Ki, the median disagreement is **1.5x** (77% within 3x, 92% within 10x), which is ordinary
+inter-assay spread and good independent corroboration of the PDSP medians. On direction, where
+we already state an action and GtoPdb states one: **224 identical, 25 compatible, 11 genuine
+conflicts**. The conflicts are the interesting part, not noise: aripiprazole at 5-HT2A/2C/7
+(we say antagonist from Stahl, GtoPdb says partial agonist), clozapine at 5-HT1A (agonist) and
+M1 (positive allosteric, not antagonist), amisulpride and lumateperone at D2, nalmefene at
+delta/kappa, levetiracetam at SV2A.
+
+**Where the real value is.** Not bulk Ki fill (PDSP already covers 83% of bindings and GtoPdb
+overlaps it heavily), but the two places PDSP structurally cannot reach:
+1. **Targets radioligand-displacement panels do not assay.** The 33 drugs it unblocks are the
+   GABA-A benzodiazepine site (diazepam pKi 7.8 human, clonazepam 8.7, flumazenil 9.0,
+   alprazolam, flunitrazepam, triazolam), MAO-A/B (selegiline, phenelzine, tranylcypromine,
+   moclobemide), acetylcholinesterase (donepezil, galantamine, rivastigmine), orexin
+   (suvorexant, lemborexant, daridorexant), melatonin (melatonin, ramelteon, tasimelteon,
+   agomelatine), plus SV2A, Nav, carbonic anhydrase and PDE5.
+2. **Direction for the 816 `affinity_only` bindings**, which today are listed but never
+   animated because PDSP says only *that* a drug binds. A curated `Type`/`Action` with a PubMed
+   id would turn 193 of them into real directional bindings.
+
+**What it will not fix.** 25 of the 58 Ki-less drugs stay empty, and they are a coherent set:
+most benzodiazepines and Z-drugs (lorazepam, temazepam, oxazepam, midazolam, chlordiazepoxide,
+estazolam, flurazepam, quazepam, clorazepate, zaleplon, zopiclone, eszopiclone), the
+neurosteroids (brexanolone, zuranolone), and the broad anticonvulsants (valproate,
+carbamazepine, oxcarbazepine, gabapentin, pregabalin). GtoPdb has ligand records for most of
+them but curates **no interaction row**, because its tables are built per target family from
+selected literature and are deliberately not exhaustive. Metabolite coverage is likewise thin
+(3 of 24). Name resolution needs an alias map like the Wikipedia one: GtoPdb files INN spellings
+(benzatropine, pipotiazine, flupentixol, dosulepin), markup-bearing names
+(`<i>N</i>-desalkylquetiapine`) and separate enantiomer entries.
+
+**Licensing.** The database is **ODbL**, its contents **CC BY-SA 4.0** (already stated in
+`fetch_gtopdb.py`). CC BY-SA is the licence we hold Wikipedia prose and molecule images under, so
+that half is settled; ODbL's share-alike on a *derived database* is the new part, and it is
+satisfied in practice because the emitted `public/data/` is published openly in an AGPL repo.
+Wiring this means adding the attribution + licence line to the corpus registry entry.
+
+**Verdict: worth doing, as corpus #11 `gtopdb_ki`, scoped to what PDSP cannot reach.** The
+shape is already proven twice over: it is PDSP's file shape (one CSV, `page` = a row key, the
+quote = the reconstructed row, `check_data.py` confirms the row exists) and GtoPdb's existing
+corpus #7 join (our target -> gene symbol). Priority stays PDSP first, GtoPdb second, Wikipedia
+third, so no existing `verified` Ki moves. The 11 direction conflicts should be recorded rather
+than silently resolved: they are a Stahl-vs-primary-literature disagreement a reader deserves to
+see.
