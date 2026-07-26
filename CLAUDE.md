@@ -255,7 +255,8 @@ Viewer (`public/`):
 - Single-purpose modules, each detailed in its own section below: `js/i18n.js` (I18n),
   `js/app-init.js` (Analytics), `js/dev-banner.js` (Dev banner), `js/error-banner.js` (Error
   banners), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
-  `window.__APP_VERSION__` (Versioning).
+  `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`
+  (Rendering / decoration draw order).
 
 Deployment (`docker/`): `docker-compose.yml` (hardened Caddy), `Dockerfile`
 (two-stage: `xcaddy build`s a custom binary with the `caddy-ratelimit` module,
@@ -329,6 +330,16 @@ input).
 
 > Adding a per-frame controller? Make its `tick()` return whether it animated, or it runs but never
 > repaints. Screenshots are unaffected (renders the settled frame, then idles).
+
+### Decoration draw order
+
+Every additive decoration that clings to a structure (gem-dot clouds, wash shells, selection
+halos) is pinned to `DECOR_RENDER_ORDER` (`js/render-order.js`) so it always draws after the
+structures. The structure materials are `transparent: true` (for the slider), and three.js
+sorts that pass by each object's **geometry bounding-sphere centre**, so a decoration with its
+own geometry (a dot cloud is a sparse surface sample) otherwise sorts *before* the region past
+some camera azimuth and the region paints over its own glow: the dots vanish abruptly as you
+rotate. Occlusion is unaffected (structures still write depth, decorations still depth-test).
 
 ### Adaptive quality
 

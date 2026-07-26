@@ -25,6 +25,7 @@
 // No new dependency: three.js only.
 
 import * as THREE from "three";
+import { DECOR_RENDER_ORDER } from "./render-order.js";
 
 const WHITE = new THREE.Color(0xffffff);
 
@@ -120,6 +121,7 @@ export function buildWashShell(mesh, colorHex) {
   const shell = new THREE.Mesh(geom, material); // reuse geometry, like the halo
   shell.visible = false;
   shell.raycast = () => {}; // pure decoration, never pickable
+  shell.renderOrder = DECOR_RENDER_ORDER; // draw over the structures (see render-order.js)
   mesh.add(shell);
   return {
     shell,

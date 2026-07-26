@@ -23,6 +23,7 @@ import { createCircuitAnimation } from "./circuit-anim.js";
 import { createReceptorMarkers } from "./receptor-markers.js";
 import { createDrugAnimation } from "./drug-anim.js";
 import { animSettings } from "./anim-settings.js";
+import { DECOR_RENDER_ORDER } from "./render-order.js";
 import { fetchWikiLead } from "./wiki.js";
 import { createTour } from "./tour.js";
 
@@ -658,6 +659,7 @@ function createSelection({ meshes, arrows }) {
     const shell = new THREE.Mesh(mesh.geometry, material);
     shell.scale.setScalar(SCALE);
     shell.visible = false;
+    shell.renderOrder = DECOR_RENDER_ORDER; // draw over the structures (see render-order.js)
     // Pure decoration: never let the halo intercept picking/hover raycasts.
     shell.raycast = () => {};
     mesh.add(shell);

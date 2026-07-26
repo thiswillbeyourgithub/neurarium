@@ -26,6 +26,7 @@
 
 import * as THREE from "three";
 import { animSettings } from "./anim-settings.js";
+import { DECOR_RENDER_ORDER } from "./render-order.js";
 
 // Dot size in world units (sizeAttenuation on, so dots shrink with distance like
 // real gems set in the surface).
@@ -204,6 +205,10 @@ export function buildGemCloud(mesh, color, densityScale = 1) {
   });
   const points = new THREE.Points(geom, material);
   points.raycast = () => {}; // pure decoration, never pickable
+  // Draw after the structures: this cloud's own bounding sphere would otherwise let
+  // the transparent-pass sort put it *behind* the region it clings to at some camera
+  // angles, and the region would paint over it (see js/render-order.js).
+  points.renderOrder = DECOR_RENDER_ORDER;
   mesh.add(points);
   return { points, material };
 }
