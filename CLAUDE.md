@@ -779,7 +779,9 @@ extraction strictly dump-sourced. The legend rebuilds from the data at runtime.
 ## Versioning
 
 The version is a single string in `version.js` (`window.__APP_VERSION__`), shown in the
-panel header + the WIP banner (both read the global). Follow [semver](https://semver.org/);
+panel header + the loading overlay's title (`js/main.js` fills every `[data-app-version]`
+slot, so a new display spot is markup-only) + the WIP banner (which reads the global
+directly). Follow [semver](https://semver.org/);
 to release, bump `version.js`. It is intentionally not derived from git (the site deploys as
 plain files).
 

@@ -5728,11 +5728,14 @@ function wireImageLightbox() {
 async function main() {
   const { scene, camera, renderer, controls, baseDpr } = initThree();
 
-  // Stamp the version into the panel header (single source: window.__APP_VERSION__
-  // from version.js). Done before the data load so it shows even if that fails.
-  const versionEl = document.getElementById("app-version");
-  if (versionEl && window.__APP_VERSION__) {
-    versionEl.textContent = `v${window.__APP_VERSION__}`;
+  // Stamp the version into every [data-app-version] slot (the panel header and the
+  // loading overlay's title; single source: window.__APP_VERSION__ from version.js).
+  // Done before the data load so it shows even if that fails; a new display spot is
+  // then markup-only, no second lookup here.
+  if (window.__APP_VERSION__) {
+    for (const el of document.querySelectorAll("[data-app-version]")) {
+      el.textContent = `v${window.__APP_VERSION__}`;
+    }
   }
 
   // Startup loading overlay (the #loading element, visible by default): a progress

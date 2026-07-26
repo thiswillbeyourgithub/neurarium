@@ -88,7 +88,8 @@
          choice; loaded early so static markup is filled at DOMContentLoaded. -->
     <script src="js/i18n.js"></script>
 
-    <!-- App version (single source). Read by js/main.js (panel header) and
+    <!-- App version (single source). Read by js/main.js (which fills every
+         [data-app-version] slot: the panel header + the loading overlay) and
          js/dev-banner.js (WIP banner). -->
     <script src="version.js"></script>
 
@@ -1917,6 +1918,13 @@
         color: var(--text);
         margin-bottom: 6px;
       }
+      /* Version tag right of the splash title, same muted treatment as the panel
+         header's .version (both filled from [data-app-version] by js/main.js). */
+      .loading-version {
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--muted);
+      }
       .loading-track {
         height: 6px;
         border-radius: 999px;
@@ -1988,6 +1996,7 @@
       @media (max-width: 560px) {
         .loading-card { width: min(360px, 88vw); }
         .loading-title { font-size: 26px; }
+        .loading-version { font-size: 14px; }
         .loading-tagline { font-size: 16px; }
         .loading-caption { font-size: 16px; }
         .loading-start { font-size: 17px; padding: 11px 26px; }
@@ -2096,7 +2105,7 @@
          paints immediately; main() fades it out once the scene is built. -->
     <div id="loading">
       <div class="loading-card">
-        <div class="loading-title">neurarium</div>
+        <div class="loading-title">neurarium <span class="loading-version" data-app-version></span></div>
         <div class="loading-tagline" data-i18n="loading.tagline">a (mostly) sourced atlas of psychiatric neuroscience</div>
         <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
         <div id="loading-caption" class="loading-caption" data-i18n="loading.start">Loading…</div>
@@ -2134,7 +2143,7 @@
            aria-label carries the name for screen readers); the byline stays read. -->
       <div id="controls-header" class="collapse-header">
         <button type="button" id="controls-toggle" class="collapse-hit" aria-expanded="true" aria-controls="controls-body" aria-label="neurarium"></button>
-        <span class="panel-title" aria-hidden="true">neurarium <span class="version" id="app-version"></span></span>
+        <span class="panel-title" aria-hidden="true">neurarium <span class="version" data-app-version></span></span>
         <span class="panel-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></span>
         <span class="chevron" aria-hidden="true">&#9656;</span>
       </div>
