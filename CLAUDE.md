@@ -518,10 +518,14 @@ fixed Stahl list.
 - **Animation** (`js/drug-anim.js`). Clicking a drug row (`buildDrugLegend`, grouped by category,
   with the live `#drugs-filter`) focuses it: dims to the union of its targets' regions
   (`selection.setCircuit(regionMeshes, flowArrows)`) + `createDrugAnimation.show(...)`, which
-  scatters a `buildGemCloud` per binding coloured by net effect (pulsed per effect) under a
-  `buildWashShell` in the same colour; each binding's `affinityWeight` scales its dot density
-  (`buildGemCloud`'s `densityScale`), size and brightness (potent target reads denser/brighter).
-  Stopped via an `onIsolate` watcher (`.matches`).
+  scatters a `buildGemCloud` coloured by net effect (pulsed per effect) under a `buildWashShell`
+  in the same colour, **one pair per (region, effect)**, not per binding: a region carrying many
+  of the drug's targets otherwise stacked a cloud + a full-surface wash per binding (26 on one
+  region for clozapine), which saturated it to flat white and paid that many shader passes for
+  one colour. The group keeps its strongest binding's `affinityWeight`, which scales dot density
+  (`buildGemCloud`'s `densityScale`), size and brightness (potent target reads denser/brighter),
+  and the wash gain is split between the effects on a region (`washScale`), so a region glows
+  like one wash however many effects it carries. Stopped via an `onIsolate` watcher (`.matches`).
 - **By-mechanism flow overlay** (reuses `js/circuit-anim.js`). The focus also rides beads along the
   projections of the drug's target system(s). It is a **tone-setter + autoreceptor** model, split from
   the dots: only *tone-setting* bindings drive flow (a reuptake/enzyme/vesicle target or a presynaptic

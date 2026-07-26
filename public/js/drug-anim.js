@@ -78,50 +78,76 @@ export function createDrugAnimation(_deps = {}) {
      */
     show(drug, meshById) {
       clear();
-      let phaseSeed = 0;
+      // Collapse the bindings to one entry per (region, effect) before building
+      // anything. A region carrying several of the drug's targets otherwise got one
+      // cloud AND one full-surface wash shell per binding: clozapine stacked 26 on a
+      // single region, which saturated it to flat white (additive light adds up) and
+      // cost 26 extra shader passes over the same mesh for no extra information,
+      // since every binding of one effect paints the same colour. What genuinely
+      // differs between them is engagement, so the group keeps its strongest
+      // binding's affinity weight.
+      const groups = new Map(); // `${regionId}:${effect}` -> {mesh, binding, weight}
       for (const binding of drug.bindings || []) {
+        for (const id of binding.structureIds || []) {
+          const mesh = meshById.get(id);
+          if (!mesh) continue;
+          const w = binding.affinityWeight || 0.55;
+          const prev = groups.get(`${id}:${binding.effect}`);
+          if (prev) {
+            prev.weight = Math.max(prev.weight, w);
+            continue;
+          }
+          groups.set(`${id}:${binding.effect}`, { mesh, binding, weight: w });
+        }
+      }
+      // How many effects land on each mesh, so the wash brightness can be split
+      // between them below: a region glows like one wash however many of the drug's
+      // effects it carries (at most three: boost + block + modulate).
+      const effectsPerMesh = new Map();
+      for (const g of groups.values()) {
+        effectsPerMesh.set(g.mesh, (effectsPerMesh.get(g.mesh) || 0) + 1);
+      }
+      let phaseSeed = 0;
+      for (const { mesh, binding, weight } of groups.values()) {
         const pulse = PULSE[binding.effect] || FALLBACK;
         // Affinity (measured Ki) scales the cloud's density, size and brightness so
         // a potent target reads denser/brighter than a marginal one: relative
         // engagement, NOT effect magnitude. Neutral mid when a binding has no Ki.
-        const w = binding.affinityWeight || 0.55;
-        const densityScale = 0.5 + 0.5 * w; // 0.68..1 dots
-        const sizeAff = 0.8 + 0.35 * w; // 0.92..1.15 x base dot size
-        const opAff = 0.6 + 0.4 * w; // 0.74..1 x pulse opacity
-        for (const id of binding.structureIds || []) {
-          const mesh = meshById.get(id);
-          if (!mesh) continue;
-          const cloud = buildGemCloud(mesh, binding.effectColor, densityScale);
-          if (!cloud) continue;
-          // A surface wash under the dots, looping in the same effect colour: a
-          // ripple of light sweeping across the region's face, so the region itself
-          // feels lit, not just peppered (see surface-wash.js). Seed the origin at
-          // the region's top pole (centre + radius up) rather than its centre: from
-          // the centre every surface point is ~equidistant, so the wavefront would
-          // bloom the whole surface at once instead of sweeping across it. Skipped
-          // entirely when animations are off (the wash is pure motion, so a static
-          // focus doesn't need one).
-          const wash = animSettings.enabled
-            ? buildWashShell(mesh, binding.effectColor)
-            : null;
-          if (wash) {
-            const origin = wash.center.clone();
-            origin.y += wash.maxRadius / 2; // maxRadius == 2 * bounding radius
-            wash.setOrigin(origin);
-          }
-          // Spread the starting phases so the regions don't all pulse in lockstep
-          // (a wave of activity reads better than a single global blink).
-          clouds.push({
-            ...cloud,
-            wash,
-            baseSize: cloud.material.size * sizeAff,
-            opAff,
-            pulse,
-            phase: (phaseSeed % 8) / 8,
-          });
-          litMeshes.add(mesh);
-          phaseSeed += 1;
+        const densityScale = 0.5 + 0.5 * weight; // 0.68..1 dots
+        const sizeAff = 0.8 + 0.35 * weight; // 0.92..1.15 x base dot size
+        const opAff = 0.6 + 0.4 * weight; // 0.74..1 x pulse opacity
+        const cloud = buildGemCloud(mesh, binding.effectColor, densityScale);
+        if (!cloud) continue;
+        // A surface wash under the dots, looping in the same effect colour: a
+        // ripple of light sweeping across the region's face, so the region itself
+        // feels lit, not just peppered (see surface-wash.js). Seed the origin at
+        // the region's top pole (centre + radius up) rather than its centre: from
+        // the centre every surface point is ~equidistant, so the wavefront would
+        // bloom the whole surface at once instead of sweeping across it. Skipped
+        // entirely when animations are off (the wash is pure motion, so a static
+        // focus doesn't need one).
+        const wash = animSettings.enabled
+          ? buildWashShell(mesh, binding.effectColor)
+          : null;
+        if (wash) {
+          const origin = wash.center.clone();
+          origin.y += wash.maxRadius / 2; // maxRadius == 2 * bounding radius
+          wash.setOrigin(origin);
         }
+        // Spread the starting phases so the regions don't all pulse in lockstep
+        // (a wave of activity reads better than a single global blink).
+        clouds.push({
+          ...cloud,
+          wash,
+          // Share one wash's worth of light between the effects on this region.
+          washScale: 1 / (effectsPerMesh.get(mesh) || 1),
+          baseSize: cloud.material.size * sizeAff,
+          opAff,
+          pulse,
+          phase: (phaseSeed % 8) / 8,
+        });
+        litMeshes.add(mesh);
+        phaseSeed += 1;
       }
     },
 
@@ -180,9 +206,14 @@ export function createDrugAnimation(_deps = {}) {
         c.material.size = c.baseSize * (p.sizeMin + (p.sizeMax - p.sizeMin) * k);
         // The wash rides the same looping phase: the wavefront expands from the
         // region's centre (0 -> maxRadius) over one cycle and the half-sine
-        // envelope fades it in then out, scaled by the effect's washGain.
+        // envelope fades it in then out, scaled by the effect's washGain and split
+        // between the effects sharing this region (washScale), so a many-target
+        // region reads lit rather than blown out to white.
         if (c.wash) {
-          c.wash.setWave(phase * c.wash.maxRadius, washStrength(phase) * p.washGain);
+          c.wash.setWave(
+            phase * c.wash.maxRadius,
+            washStrength(phase) * p.washGain * (c.washScale ?? 1),
+          );
         }
       }
       return true;
