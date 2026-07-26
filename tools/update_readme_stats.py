@@ -80,6 +80,7 @@ CORPUS_DESC = {
     "allen_ahba":      ("Brain transcriptome atlas (microarray)", "Receptor & target expression regions"),
     "wikipedia_pharm": ("Encyclopedia (pharmacodynamics tables)", "Drug binding affinities (Ki)"),
     "wikipedia_fr":    ("Encyclopedia (French, article prose)", "Drug brand names (European / French)"),
+    "gtopdb_ki":       ("Molecular pharmacology (IUPHAR/BPS database)", "Drug binding affinities (Ki) and direction"),
 }
 
 # Per-node-kind display labels for the README table (English; the README is English).

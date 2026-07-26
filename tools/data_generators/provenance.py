@@ -458,6 +458,27 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "url": "https://fr.wikipedia.org/",
         "pages_dir": "data_sources/wikipedia/pages_fr",
     },
+    "gtopdb_ki": {
+        # Binding corpus #11: GtoPdb's *other* half. Where corpus #7 uses its tissue
+        # API for expression regions, this uses its hand-curated ligand-interaction
+        # table, which carries a measured affinity, a curated direction and a PubMed
+        # id per row. It complements PDSP (#5) where a radioligand panel structurally
+        # cannot reach: targets PDSP does not assay (GABA-A benzodiazepine site,
+        # MAO-A/B, acetylcholinesterase, orexin, melatonin, SV2A) and the *direction*
+        # of an affinity_only binding. PDSP still wins on a Ki both have.
+        # tools/fetch/fetch_gtopdb_ki.py flattens each matched compound's rows into
+        # one author-side page (`page` = the GtoPdb ligand slug, `quote` = one verbatim
+        # row line), so the normal verbatim-quote gate applies unchanged (skipped on a
+        # clone lacking data_sources/gtopdb/pages_ki, like the book corpora).
+        # Licence: contents CC BY-SA 4.0, database ODbL; both need attribution, which
+        # the citation below carries into every pill tooltip.
+        "ref": "IUPHAR/BPS Guide to Pharmacology (GtoPdb), ligand interactions",
+        "citation": "Harding SD, Armstrong JF, Faccenda E, et al. The IUPHAR/BPS "
+                    "Guide to Pharmacology: ligand-target interaction table. "
+                    "guidetopharmacology.org (CC BY-SA 4.0 / ODbL).",
+        "url": "https://www.guidetopharmacology.org/",
+        "pages_dir": "data_sources/gtopdb/pages_ki",
+    },
 }
 
 
