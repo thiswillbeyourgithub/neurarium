@@ -19,6 +19,30 @@
       "En mars 2006 , Novartis acquiert les droits pour développer et commercialiser le produit aux États-Unis , mais abandonne le développement pour ce marché en octobre 2011 ."
     ]
   },
+  "alimemazine": {
+    "fr_slug": "alim_mazine",
+    "fr_title": "Alimémazine",
+    "name": "Alimemazine",
+    "sentences": [
+      "Informations générales",
+      "L' alimémazine, commercialisé sous le nom de Théralène, est une substance dérivée de la phénothiazine ."
+    ]
+  },
+  "alpidem": {
+    "fr_slug": "alpidem",
+    "fr_title": "Alpidem",
+    "name": "Alpidem",
+    "sentences": [
+      "Informations générales",
+      "L' alpidem , commercialisé sous le nom d' Ananxyl , est un anxiolytique non-benzodiazépinique qui a été utilisé pendant une courte période pour le traitement des troubles anxieux avant d'être retiré du marché .",
+      "Il était également en cours de développement pour une utilisation dans d’autres pays dans les années 1990, mais le développement a été interrompu et le médicament n’a jamais été commercialisé dans aucun autre pays , .",
+      "L'alpidem est un modulateur allostérique positif du récepteur GABA A (GABAkine) , agissant spécifiquement comme un agoniste du site benzodiazépine du complexe récepteur (anciennement connu sous le nom de récepteur central des benzodiazépines (CBR)) .",
+      "L'affinité de l'alpidem pour le TSPO (également connu auparavant sous le nom de récepteur ω 3 ) était autrefois la plus élevée de tous les médicaments connus .",
+      "Cependant, aucun médicament de ce type n'a encore été commercialisé à des fins médicales ni terminé son développement clinique , , , .",
+      "Il a été développé sous le nom de code SL 80.0342 et a été décrit pour la première fois dans la littérature en 1982 , , , .",
+      "Il n'a jamais été commercialisé dans aucun autre pays , , ."
+    ]
+  },
   "alprazolam": {
     "fr_slug": "alprazolam",
     "fr_title": "Alprazolam",
@@ -55,6 +79,15 @@
       "Amitriptyline",
       "L' amitriptyline (ou amitryptyline ) (commercialisé sous les noms Elavil, Tryptanol, Endep, Elatrol, Tryptizol, Trepiline, Laroxyl, Redomex) est un antidépresseur tricyclique .",
       "C'est un composé cristallin très peu soluble dans l'eau ; il est généralement vendu sous forme de comprimés, en solution injectable ou buvable."
+    ]
+  },
+  "amobarbital": {
+    "fr_slug": "amobarbital",
+    "fr_title": "Amobarbital",
+    "name": "Amobarbital",
+    "sentences": [
+      "Données pharmacocinétiques",
+      "Synthétisé pour la première fois en Allemagne et commercialisé pour la première fois en 1923 aux États-Unis par Eli Lilly , il est considéré comme un barbiturique à durée d'action intermédiaire."
     ]
   },
   "amoxapine": {
@@ -130,6 +163,15 @@
       "Le médicament est initialement manufacturé sous le nom de Strattera et produit par la compagnie Eli Lilly and Company ."
     ]
   },
+  "baclofen": {
+    "fr_slug": "baclof_ne",
+    "fr_title": "Baclofène",
+    "name": "Baclofen",
+    "sentences": [
+      "Énantiomère R du baclofène (à gauche) et S-baclofène (à droite).",
+      "Il a antérieurement été vendu sous le nom de Liorésal ou baclocur (en France, à partir de 2018 dans le cadre de l' AMM pour le traitement de l'alcoolisme) ."
+    ]
+  },
   "benztropine": {
     "fr_slug": "benzatropine",
     "fr_title": "Benzatropine",
@@ -137,6 +179,15 @@
     "sentences": [
       "Benzatropine",
       "La benzatropine ou le mésilate de benzatropine ( DCI , code DrugBank = APRD00748), mésylate de benztropine ou benztropine (USAN), commercialisée sous le nom de Cogentin, est un médicament anticholinergique principalement utilisé pour le traitement des :"
+    ]
+  },
+  "biperiden": {
+    "fr_slug": "bip_rid_ne",
+    "fr_title": "Bipéridène",
+    "name": "Biperiden",
+    "sentences": [
+      "Structure ( exo ) de l'une des quatre paires d' énantiomères possibles du bipéridène",
+      "Il est disponible sous les noms commerciaux Akineton et Akinophyl, et sous forme générique ."
     ]
   },
   "blonanserin": {
@@ -182,6 +233,18 @@
       "Le bromazépam est commercialisé en France sous le nom de marque Lexomil par les laboratoires Roche mais il existe de nombreux génériques depuis que la molécule est tombée dans le domaine public."
     ]
   },
+  "brotizolam": {
+    "fr_slug": "brotizolam",
+    "fr_title": "Brotizolam",
+    "name": "Brotizolam",
+    "sentences": [
+      "Identification",
+      "Le brotizolam (commercialisé sous les marques Lendormin , Dormex , Sintonal et Noctilan ) est une molécule analogue des benzodiazépines : c'est une thiénodiazépine , où à la différence des benzodiazépines le cycle benzène a été remplacé par un cycle thiophène .",
+      "Le brotizolam est l'une benzodiazépines commercialisées les plus puissantes, que ce soit au niveau du dosage ou des effets ressentis : son effet se fait sentir à partir de doses aussi faibles que 100 µg (dosage similaire au triazolam , une benzodiazépine retirée du marché en France en 2005 à cause du risque d'abus qu'elle comportait).",
+      "Le brotizolam est commercialisé en Allemagne, en Autriche, en Belgique, en Espagne, en Israël, en Italie, au Japon et au Portugal.",
+      "Par contre, il n'a pas reçu l'autorisation des autorités de santé compétentes pour être commercialisé au Canada, aux États-Unis, en France ni au Royaume-Uni, et cela en raison du risque d'abus important qu'il comporte."
+    ]
+  },
   "buprenorphine": {
     "fr_slug": "bupr_norphine",
     "fr_title": "Buprénorphine",
@@ -208,6 +271,14 @@
     "sentences": [
       "Identification",
       "Autrefois commercialisée par le laboratoire G.GAM sous le nom de Buspar, la buspirone n'existe plus en France qu'en tant que générique des laboratoires Mylan et Sandoz ."
+    ]
+  },
+  "butobarbital": {
+    "fr_slug": "butobarbital",
+    "fr_title": "Butobarbital",
+    "name": "Butobarbital",
+    "sentences": [
+      "Butobarbital"
     ]
   },
   "caffeine": {
@@ -242,6 +313,14 @@
       "Forest Laboratories a acquis en 2004 une licence pour le développement et les droits exclusifs de commercialisation aux États-Unis ."
     ]
   },
+  "chloral_hydrate": {
+    "fr_slug": "hydrate_de_chloral",
+    "fr_title": "Hydrate de chloral",
+    "name": "Chloral hydrate",
+    "sentences": [
+      "Hydrate de chloral"
+    ]
+  },
   "chlordiazepoxide": {
     "fr_slug": "chlordiaz_poxide",
     "fr_title": "Chlordiazépoxide",
@@ -266,6 +345,14 @@
       "N'est plus commercialisé en Belgique"
     ]
   },
+  "chlorprothixene": {
+    "fr_slug": "chlorprothix_ne",
+    "fr_title": "Chlorprothixène",
+    "name": "Chlorprothixene",
+    "sentences": [
+      "Chlorprothixène"
+    ]
+  },
   "citalopram": {
     "fr_slug": "citalopram",
     "fr_title": "Citalopram",
@@ -278,6 +365,27 @@
       "Lundbeck isole alors la forme active : l' énantiomère ( S ) du citalopram qui est en fait un mélange racémique des deux énantiomères (R) et (S), et le brevète sous le nom de S-citalopram ou escitalopram , mais pour lequel il reçoit en 2002 de la commission de transparence un refus de remboursement car il n'apporte aucun effet nouveau (note 5) par rapport au citalopram .",
       "Autrement dit, il s'agit de la même molécule avec les mêmes effets ; en 2004, le dossier est représenté et, grâce à une forte campagne de lobbying auprès des membres de la commission, un bénéfice minime est reconnu (note 4) et la commercialisation commence sous les marques de Seroplex, Cipralex ou Lexapro.",
       "Le citalopram est vendu comme mélange racémique (50 % de chacun des énantiomères), Lundbeck commercialise aussi l'énantiomère S -(+)- citalopram seul sous le nom de Seroplex ou Lexapro ( escitalopram )."
+    ]
+  },
+  "clobazam": {
+    "fr_slug": "clobazam",
+    "fr_title": "Clobazam",
+    "name": "Clobazam",
+    "sentences": [
+      "Molécule de clobazam",
+      "La clobazam est une substance chimique de la famille des benzodiazépines (BZD) notamment commercialisée sous les noms d'Urbanyl et de Frisium, ainsi que sous forme de médicament générique .",
+      "Vendue sous le nom d'Urbanyl, cette benzodiazépine est vendue en boîtes de 30 comprimés avec trois dosages différents : 5 mg , 10 mg et 20 mg ."
+    ]
+  },
+  "clomethiazole": {
+    "fr_slug": "clom_thiazole",
+    "fr_title": "Clométhiazole",
+    "name": "Clomethiazole",
+    "sentences": [
+      "Clométhiazole",
+      "Au Royaume-Uni , il est vendu sous la marque Heminevrin ( AstraZeneca Pharmaceuticals ).",
+      "D'autres noms de marque incluent Nevrin en Roumanie, Distraneurin en Allemagne et Distraneurine en Espagne.",
+      "Le médicament est commercialisé soit sous forme de base libre dans une solution huileuse contenant 192 mg sous forme de gélule ou sous forme de sirop d' édisylate de clométhiazole."
     ]
   },
   "clomipramine": {
@@ -369,6 +477,14 @@
     "sentences": [
       "Cyproheptadine",
       "La cyproheptadine , vendue entre autres sous le nom de marque Periactine , est un antihistaminique de première génération doté de propriétés anticholinergiques , antisérotonergiques et anesthésiques locaux supplémentaires."
+    ]
+  },
+  "cytisine": {
+    "fr_slug": "cytisine",
+    "fr_title": "Cytisine",
+    "name": "Cytisine",
+    "sentences": [
+      "Structure de la cytistine"
     ]
   },
   "daridorexant": {
@@ -732,6 +848,16 @@
       "Le lévétiracétam dérive du Nootropyl (piracétam) et est commercialisé en France sous la marque Keppra par UCB Pharma ."
     ]
   },
+  "levomepromazine": {
+    "fr_slug": "l_vom_promazine",
+    "fr_title": "Lévomépromazine",
+    "name": "Levomepromazine",
+    "sentences": [
+      "Lévomépromazine",
+      "La lévomépromazine est commercialisée en France depuis 1957 sous le nom de Nozinan avec plusieurs formes :",
+      "Ce médicament est aussi commercialisé à l'étranger sous les noms Nozinan, Levoprome, Detenler, Hirnamin, Levotomin et Neurocil."
+    ]
+  },
   "levomilnacipran": {
     "fr_slug": "l_vomilnacipran",
     "fr_title": "Lévomilnacipran",
@@ -785,6 +911,16 @@
       "Le loflazépate d'éthyle est un médicament de la famille des benzodiazépines commercialisé sous le nom de Victan ."
     ]
   },
+  "loprazolam": {
+    "fr_slug": "loprazolam",
+    "fr_title": "Loprazolam",
+    "name": "Loprazolam",
+    "sentences": [
+      "Wikipédia ne donne pas d'avis médical : seul un professionnel (médecin, pharmacien, etc. ) est habilité à le faire.",
+      "Le loprazolam ( DCI ), commercialisé sous les noms commerciaux Havlane en France et Dormonoct en Belgique est une molécule faisant partie de la famille des imidazobenzodiazépines , et à l'instar des autres benzodiazépines , elle possède des propriétés myorelaxantes , anticonvulsivantes , amnésiantes , anxiolytiques et hypno-sédatives .",
+      "Au dosage d'1 mg auquel il est prescrit et conditionné, il n'entraîne cependant pas de tolérance significative à long terme et il conserve ainsi son potentiel hypnotique durablement."
+    ]
+  },
   "lorazepam": {
     "fr_slug": "loraz_pam",
     "fr_title": "Lorazépam",
@@ -793,6 +929,16 @@
       "Cet article semble contenir du texte généré par intelligence artificielle ( juin 2025 ).",
       "Commercialisé notamment sous les noms de Témesta en Europe et Ativan aux États-Unis, le lorazépam a été introduit par la société Wyeth en 1977.",
       "En Belgique, une forme sublinguale de Temesta est disponible sous le nom de Temesta Expidet , contrairement à la France, où seuls les comprimés originaux sont commercialisés."
+    ]
+  },
+  "lormetazepam": {
+    "fr_slug": "lorm_taz_pam",
+    "fr_title": "Lormétazépam",
+    "name": "Lormetazepam",
+    "sentences": [
+      "Lormétazépam",
+      "Le lormétazépam est une substance chimique de la famille des benzodiazépines , commercialisée jusqu'en janvier 2020 sous la marque Noctamide par le laboratoire Bayer Healthcare .",
+      "Elle est néanmoins toujours commercialisée sous sa DCI par différents laboratoires génériques, en France."
     ]
   },
   "loxapine": {
@@ -880,6 +1026,15 @@
       "La mémantine est commercialisée sous les marques Axura et Akatinol par Merz, Namenda par Forest, Ebixa et Abixa par Lundbeck et Memox par Unipharm ."
     ]
   },
+  "meprobamate": {
+    "fr_slug": "m_probamate",
+    "fr_title": "Méprobamate",
+    "name": "Meprobamate",
+    "sentences": [
+      "Identification",
+      "Le méprobamate , anciennement commercialisé sous le nom Equanil ou Miltown , est un médicament faisant partie de la famille des carbamates primaires , famille dont il a été le plus répandu."
+    ]
+  },
   "methadone": {
     "fr_slug": "m_thadone",
     "fr_title": "Méthadone",
@@ -901,6 +1056,21 @@
       "La substance est commercialisée sous les noms de Pervitin , du laboratoire Temmler et Isophan , une version légèrement différente, fabriquée par le laboratoire Knoll Pharmaceuticals (en) .",
       "Elle est utilisée sous le nom de « Panzerschokolade » , « Fliegerschokolade » , « Stuka-Tabletten » ou encore « pilules Hermann Göring » ( « Hermann-Göring-Pillen » ) ou pour les pilotes ( « Fliegermarzipan » ).",
       "À San Francisco , la méthamphétamine est particulièrement répandue au sein de la communauté gay et notamment au sein d'une sous-culture connue sous le nom de party & play ."
+    ]
+  },
+  "methaqualone": {
+    "fr_slug": "m_thaqualone",
+    "fr_title": "Méthaqualone",
+    "name": "Methaqualone",
+    "sentences": [
+      "Méthaqualone",
+      "En 1965, elle était le sédatif le plus prescrit en Grande-Bretagne, où elle était légalement vendue sous les noms Malsed, Malsedin, et Revonal.",
+      "En 1965, de la méthaqualone combinée à un antihistaminique a été lancée, sous le nom Mandrax (méthaqualone 250 mg combiné à de la diphénhydramine 25 mg ) , comme sédatif par les laboratoires Roussel .",
+      "C'est également à ce moment qu'elle devint une drogue récréative très populaire circulant sous les noms mandies et mandrake .",
+      "En 1972, elle était l'un des six sédatifs les plus vendus sur le marché américain où elle était vendue sous le nom de Quaalude.",
+      "Connue sous le nom de Mandrax, M-Pilules ou Bonbon, la méthaqualone n'est pas avalée ; les comprimés sont plutôt écrasés et mélangés dans un tube ou le goulot d'un tesson de bouteille avec de la marijuana .",
+      "Depuis l'arrêt de la commercialisation de la méthaqualone, de nombreuses imitations sont apparues, notamment aux États-Unis .",
+      "Il a souvent été fait référence à la méthaqualone (sous les noms Quaalude ou Lude) dans la culture populaire d'Europe de l'Ouest et des États-Unis, en particulier au cours des années 1960 et 1970 , ."
     ]
   },
   "methylfolate_l": {
@@ -996,6 +1166,14 @@
       "Le nalméfène n'est pas encore commercialisé pour une utilisation dans la dépendance à l'alcool aux États-Unis ."
     ]
   },
+  "naloxone": {
+    "fr_slug": "naloxone",
+    "fr_title": "Naloxone",
+    "name": "Naloxone",
+    "sentences": [
+      "Ne pas confondre avec la naltrexone ."
+    ]
+  },
   "naltrexone": {
     "fr_slug": "naltrexone",
     "fr_title": "Naltrexone",
@@ -1009,6 +1187,14 @@
       "Le 10 septembre 2014 , la Food and Drug Administration (FDA) a donné son feu vert à la commercialisation de l'association bupropion /naltrexone (nom commercial : Contrave de l'entreprise pharmaceutique japonaise Takeda Pharmaceutical ) dans le traitement de l’ obésité ."
     ]
   },
+  "niaprazine": {
+    "fr_slug": "niaprazine",
+    "fr_title": "Niaprazine",
+    "name": "Niaprazine",
+    "sentences": [
+      "Identification"
+    ]
+  },
   "nicotine": {
     "fr_slug": "nicotine",
     "fr_title": "Nicotine",
@@ -1016,6 +1202,25 @@
     "sentences": [
       "Pour les articles homonymes, voir Nicotine (homonymie) .",
       "La commercialisation du snus est interdite dans le reste de l'Union européenne."
+    ]
+  },
+  "nimetazepam": {
+    "fr_slug": "nim_taz_pam",
+    "fr_title": "Nimétazépam",
+    "name": "Nimetazepam",
+    "sentences": [
+      "Identification",
+      "Il n'est pas commercialisé en France."
+    ]
+  },
+  "nitrazepam": {
+    "fr_slug": "nitraz_pam",
+    "fr_title": "Nitrazépam",
+    "name": "Nitrazepam",
+    "sentences": [
+      "Wikipédia ne donne pas d'avis médical : seul un professionnel (médecin, pharmacien, etc. ) est habilité à le faire.",
+      "Elle est commercialisée sous le nom de Mogadon , parmi d'autres.",
+      "Elle fut brevetée en 1961 et fut commercialisée en 1965 , , ce qui en fait l'une des plus vieilles benzodiazépines encore utilisées de nos jours."
     ]
   },
   "nortriptyline": {
@@ -1034,6 +1239,15 @@
     "sentences": [
       "Formule topologique et modélisation de la molécule d'olanzapine.",
       "On le retrouve commercialisé sous les noms Zyprexa , Zyprexa Velotab, Zyprexa Zydis , Zyprexa Relprevv et Zypadhera, et sous forme de médicament générique , , , ."
+    ]
+  },
+  "ondansetron": {
+    "fr_slug": "ondans_tron",
+    "fr_title": "Ondansétron",
+    "name": "Ondansetron",
+    "sentences": [
+      "Énantiomère du S-ondansétron (en haut) et R-ondansétron (en bas)",
+      "Il est commercialisé en France sous le nom de Zophren par le laboratoire GlaxoSmithKline ."
     ]
   },
   "oxazepam": {
@@ -1074,12 +1288,49 @@
       "Elle est généralement commercialisée sous forme de chlorhydrate hémihydrate de paroxétine (en abrégé : chlorhydrate de paroxétine), parfois sous forme de chlorhydrate anhydre de paroxétine ou de mésilate de paroxétine."
     ]
   },
+  "pentobarbital": {
+    "fr_slug": "pentobarbital",
+    "fr_title": "Pentobarbital",
+    "name": "Pentobarbital",
+    "sentences": [
+      "Pentobarbital",
+      "Il est cependant rare car la plupart de ses anciens fabricants ( Abbott , Eli Lilly ...) en ont abandonné la commercialisation."
+    ]
+  },
+  "perampanel": {
+    "fr_slug": "p_rampanel",
+    "fr_title": "Pérampanel",
+    "name": "Perampanel",
+    "sentences": [
+      "Cette section ou cet article est une traduction incomplète ( juillet 2026 ).",
+      "Le pérampanel , vendu sous le nom de marque Fycompa , est un médicament utilisé pour traiter les crises partielles et les crises généralisées tonico-cloniques ."
+    ]
+  },
   "perphenazine": {
     "fr_slug": "perph_nazine",
     "fr_title": "Perphénazine",
     "name": "Perphenazine",
     "sentences": [
       "Perphénazine"
+    ]
+  },
+  "phenazepam": {
+    "fr_slug": "ph_naz_pam",
+    "fr_title": "Phénazépam",
+    "name": "Phenazepam",
+    "sentences": [
+      "Identification",
+      "Il n'est pas commercialisé en France."
+    ]
+  },
+  "phenobarbital": {
+    "fr_slug": "ph_nobarbital",
+    "fr_title": "Phénobarbital",
+    "name": "Phenobarbital",
+    "sentences": [
+      "Phénobarbital",
+      "Sa première commercialisation sous les noms Luminal et Gardénal remonte aux années 1910 .",
+      "Le premier barbiturique commercialisé fut le barbital , ou acide diéthylbarbiturique, en 1904 sous le nom de Véronal."
     ]
   },
   "phenterminetopiramate": {
@@ -1090,6 +1341,14 @@
       "Cet article est une ébauche concernant la pharmacie .",
       "L'association phentermine / topiramate est un couple de deux principes actifs commercialisé aux États-Unis en vue du traitement préventif de l'obésité.",
       "Il a été autorisé par l'agence fédérale des médicaments des États-Unis (FDA) en février 2012 sous le nom de spécialité Qsymia ."
+    ]
+  },
+  "phenytoin": {
+    "fr_slug": "ph_nyto_ne",
+    "fr_title": "Phénytoïne",
+    "name": "Phenytoin",
+    "sentences": [
+      "Identification"
     ]
   },
   "pimavanserin": {
@@ -1106,6 +1365,15 @@
     "name": "Pimozide",
     "sentences": [
       "Identification"
+    ]
+  },
+  "pipamperone": {
+    "fr_slug": "pipamp_rone",
+    "fr_title": "Pipampérone",
+    "name": "Pipamperone",
+    "sentences": [
+      "Identification",
+      "Elle est commercialisée uniquement sur ordonnance aux posologies de 40 mg et également en gouttes (1 goutte = 2 mg )."
     ]
   },
   "pipothiazine": {
@@ -1135,6 +1403,20 @@
       "Identification"
     ]
   },
+  "prazepam": {
+    "fr_slug": "praz_pam",
+    "fr_title": "Prazépam",
+    "name": "Prazepam",
+    "sentences": [
+      "Identification",
+      "Elle est commercialisée notamment sous la dénomination commerciale Lysanxia en France, et est utilisée pour ses vertus anxiolytiques .",
+      "Il est commercialisé par quatre laboratoires pharmaceutiques : sous le nom de Lysanxia ( princeps ) par le laboratoire pharmaceutique Sigma-tau France, ainsi que sous le nom générique de prazépam par les laboratoires pharmaceutiques Arrow, Biogaran et EG.",
+      "Cela fait d'elle la troisième benzodiazépine qui compte le plus de laboratoires qui la commercialisent.",
+      "Le prazépam se présente sous un conditionnement de 40 comprimés de 10 mg , ou 20 comprimés de 40 mg .",
+      "Le laboratoire Sigma-Tau France commercialise le Lysanxia par boîte de 40 comprimés au dosage de 10 milligrammes, par boîte de 20 comprimés au dosage de 40 milligrammes et en solution buvable en flacon de 20 millilitres au dosage de 15 mg par millilitres.",
+      "Les laboratoires Arrow, Biogaran et EG le commercialisent quant à eux à un unique dosage vendu par boîte de 40 comprimés de 10 milligrammes."
+    ]
+  },
   "prazosin": {
     "fr_slug": "prazosine",
     "fr_title": "Prazosine",
@@ -1151,6 +1433,31 @@
     "sentences": [
       "S -prégabaline Nom commercial : Lyrica",
       "En France , son autorisation de mise sur le marché date du 6 septembre 2004 , et la molécule produite par le laboratoire pharmaceutique Pfizer est commercialisée sous le nom Lyrica ."
+    ]
+  },
+  "primidone": {
+    "fr_slug": "primidone",
+    "fr_title": "Primidone",
+    "name": "Primidone",
+    "sentences": [
+      "Identification",
+      "La primidone est commercialisée au Royaume-Uni pour les crises d'épilepsie généralisées tonico-cloniques ainsi que pour les crises d'épilepsie partielles complexes ."
+    ]
+  },
+  "prochlorperazine": {
+    "fr_slug": "prochlorp_razine",
+    "fr_title": "Prochlorpérazine",
+    "name": "Prochlorperazine",
+    "sentences": [
+      "Cet article relève du guide pratique , ce qui n'est pas de nature encyclopédique ( janvier 2026 )."
+    ]
+  },
+  "promethazine": {
+    "fr_slug": "prom_thazine",
+    "fr_title": "Prométhazine",
+    "name": "Promethazine",
+    "sentences": [
+      "Prométhazine"
     ]
   },
   "propranolol": {
@@ -1233,6 +1540,33 @@
     "name": "Rotigotine",
     "sentences": [
       "La rotigotine est un agoniste dopaminergique de type non ergoline produit par les laboratoires UCB Pharma ."
+    ]
+  },
+  "rubidium_chloride": {
+    "fr_slug": "chlorure_de_rubidium",
+    "fr_title": "Chlorure de rubidium",
+    "name": "Rubidium chloride",
+    "sentences": [
+      "Chlorure de rubidium"
+    ]
+  },
+  "scopolamine": {
+    "fr_slug": "scopolamine",
+    "fr_title": "Scopolamine",
+    "name": "Scopolamine",
+    "sentences": [
+      "Structure de la scopolamine",
+      "La scopolamine est en général commercialisée sous forme de bromhydrate de scopolamine.",
+      "La scopolamine est utilisée sous le nom de « burundanga » comme forme de soumission chimique."
+    ]
+  },
+  "secobarbital": {
+    "fr_slug": "s_cobarbital",
+    "fr_title": "Sécobarbital",
+    "name": "Secobarbital",
+    "sentences": [
+      "Sécobarbital",
+      "Le sécobarbital est un somnifère de la famille des barbituriques fabriqué et commercialisé par la société Eli Lilly jusqu'en 2001 sous le nom de Séconal ."
     ]
   },
   "selegiline": {
@@ -1358,6 +1692,15 @@
       "Cette harmonisation facilite la commercialisation de produits contenant du cannabidiol (CBD), à condition que la teneur en THC demeure en dessous de cette limite."
     ]
   },
+  "thiopental": {
+    "fr_slug": "thiopental",
+    "fr_title": "Thiopental",
+    "name": "Thiopental",
+    "sentences": [
+      "Structure du thiopental",
+      "Sa forme soluble injectable est le thiopental sodique , qui est commercialisé sous les noms de Nesdonal ou Pentothal , ."
+    ]
+  },
   "thioridazine": {
     "fr_slug": "thioridazine",
     "fr_title": "Thioridazine",
@@ -1385,6 +1728,22 @@
       "Sous les noms de commerce Stablon , Coaxil ou Tatinol , c'est un médicament utilisé pour traiter les épisodes dépressifs majeurs.",
       "La tianeptine (sous le nom de Coaxil ) a été utilisée par voie intraveineuse par des toxicomanes en Arménie et en Russie .",
       "Fabriquée et commercialisée par les Laboratoires Servier , elle est également commercialisée dans un certain nombre d'autres pays européens sous le nom commercial Coaxil ainsi qu'en Asie et en Amérique latine sous le nom de Stablon et de Tatinol mais elle n'est pas disponible au Royaume-Uni ni aux États-Unis."
+    ]
+  },
+  "tizanidine": {
+    "fr_slug": "tizanidine",
+    "fr_title": "Tizanidine",
+    "name": "Tizanidine",
+    "sentences": [
+      "Identification"
+    ]
+  },
+  "tofisopam": {
+    "fr_slug": "tofisopam",
+    "fr_title": "Tofisopam",
+    "name": "Tofisopam",
+    "sentences": [
+      "Identification"
     ]
   },
   "topiramate": {
@@ -1528,6 +1887,14 @@
     "sentences": [
       "Identification",
       "Il n'est pas commercialisé en France."
+    ]
+  },
+  "zimelidine": {
+    "fr_slug": "zim_lidine",
+    "fr_title": "Zimélidine",
+    "name": "Zimelidine",
+    "sentences": [
+      "Identification"
     ]
   },
   "ziprasidone": {

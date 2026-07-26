@@ -7,6 +7,12 @@
     "Melitor",
     "Thymanax"
   ],
+  "alimemazine": [
+    "Théralène"
+  ],
+  "alpidem": [
+    "Ananxyl"
+  ],
   "alprazolam": [],
   "amantadine": [],
   "amisulpride": [
@@ -24,6 +30,7 @@
     "Laroxyl",
     "Redomex"
   ],
+  "amobarbital": [],
   "amoxapine": [],
   "amphetamine_d": [
     "Dexedrine",
@@ -44,8 +51,16 @@
   "atomoxetine": [
     "Strattera"
   ],
+  "baclofen": [
+    "Liorésal",
+    "Baclocur"
+  ],
   "benztropine": [
     "Cogentin"
+  ],
+  "biperiden": [
+    "Akineton",
+    "Akinophyl"
   ],
   "blonanserin": [
     "Lonasen"
@@ -57,6 +72,12 @@
   "brexpiprazole": [],
   "bromazepam": [
     "Lexomil"
+  ],
+  "brotizolam": [
+    "Lendormin",
+    "Dormex",
+    "Sintonal",
+    "Noctilan"
   ],
   "buprenorphine": [
     "Temgésic",
@@ -74,11 +95,13 @@
   "buspirone": [
     "Buspar"
   ],
+  "butobarbital": [],
   "caffeine": [],
   "carbamazepine": [
     "Tegretol"
   ],
   "cariprazine": [],
+  "chloral_hydrate": [],
   "chlordiazepoxide": [
     "Librium",
     "Librax"
@@ -87,6 +110,7 @@
     "Largactil",
     "Thorazine"
   ],
+  "chlorprothixene": [],
   "citalopram": [
     "Celapram",
     "Celexa",
@@ -105,6 +129,15 @@
     "Talam",
     "Zentius",
     "Zetalo"
+  ],
+  "clobazam": [
+    "Urbanyl",
+    "Frisium"
+  ],
+  "clomethiazole": [
+    "Heminevrin",
+    "Distraneurin",
+    "Nevrin"
   ],
   "clomipramine": [],
   "clonazepam": [
@@ -131,6 +164,7 @@
   "cyproheptadine": [
     "Periactine"
   ],
+  "cytisine": [],
   "daridorexant": [
     "Quviviq"
   ],
@@ -238,6 +272,14 @@
   "levetiracetam": [
     "Keppra"
   ],
+  "levomepromazine": [
+    "Nozinan",
+    "Levoprome",
+    "Detenler",
+    "Hirnamin",
+    "Levotomin",
+    "Neurocil"
+  ],
   "levomilnacipran": [
     "Fetzima"
   ],
@@ -259,9 +301,16 @@
   "loflazepate": [
     "Victan"
   ],
+  "loprazolam": [
+    "Havlane",
+    "Dormonoct"
+  ],
   "lorazepam": [
     "Témesta",
     "Ativan"
+  ],
+  "lormetazepam": [
+    "Noctamide"
   ],
   "loxapine": [
     "Loxapac",
@@ -285,12 +334,23 @@
     "Abixa",
     "Memox"
   ],
+  "meprobamate": [
+    "Equanil",
+    "Miltown"
+  ],
   "methadone": [],
   "methamphetamine": [
     "Pervitin",
     "Methedrine",
     "Pervitine",
     "Isophan"
+  ],
+  "methaqualone": [
+    "Mandrax",
+    "Quaalude",
+    "Malsed",
+    "Malsedin",
+    "Revonal"
   ],
   "methylfolate_l": [],
   "methylphenidate_d": [
@@ -323,12 +383,18 @@
     "Revex",
     "Selincro"
   ],
+  "naloxone": [],
   "naltrexone": [
     "Revia",
     "Depade",
     "Vivitrol"
   ],
+  "niaprazine": [],
   "nicotine": [],
+  "nimetazepam": [],
+  "nitrazepam": [
+    "Mogadon"
+  ],
   "nortriptyline": [
     "Sensoval",
     "Pamelor",
@@ -341,6 +407,9 @@
   "olanzapine": [
     "Zyprexa",
     "Zypadhera"
+  ],
+  "ondansetron": [
+    "Zophren"
   ],
   "oxazepam": [],
   "oxcarbazepine": [
@@ -356,12 +425,23 @@
     "Deroxat",
     "Seroxat"
   ],
+  "pentobarbital": [],
+  "perampanel": [
+    "Fycompa"
+  ],
   "perphenazine": [],
+  "phenazepam": [],
+  "phenobarbital": [
+    "Gardénal",
+    "Luminal"
+  ],
   "phenterminetopiramate": [
     "Qsymia"
   ],
+  "phenytoin": [],
   "pimavanserin": [],
   "pimozide": [],
+  "pipamperone": [],
   "pipothiazine": [
     "Piportil"
   ],
@@ -369,10 +449,16 @@
     "Wakix"
   ],
   "pramipexole": [],
+  "prazepam": [
+    "Lysanxia"
+  ],
   "prazosin": [],
   "pregabalin": [
     "Lyrica"
   ],
+  "primidone": [],
+  "prochlorperazine": [],
+  "promethazine": [],
   "propranolol": [],
   "quazepam": [],
   "quetiapine": [
@@ -394,6 +480,11 @@
   ],
   "ropinirole": [],
   "rotigotine": [],
+  "rubidium_chloride": [],
+  "scopolamine": [],
+  "secobarbital": [
+    "Séconal"
+  ],
   "selegiline": [],
   "sertindole": [
     "Serdolect",
@@ -452,6 +543,10 @@
   "thc": [
     "Sativex"
   ],
+  "thiopental": [
+    "Nesdonal",
+    "Pentothal"
+  ],
   "thioridazine": [
     "Mellaril",
     "Melleril"
@@ -464,6 +559,8 @@
     "Coaxil",
     "Tatinol"
   ],
+  "tizanidine": [],
+  "tofisopam": [],
   "topiramate": [
     "Epitomax",
     "Topamax"
@@ -501,6 +598,7 @@
   ],
   "vortioxetine": [],
   "zaleplon": [],
+  "zimelidine": [],
   "ziprasidone": [
     "Geodon"
   ],

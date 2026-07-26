@@ -954,6 +954,59 @@
     }
    }
   },
+  "baclofen": {
+   "gaba_b": {
+    "action": "agonist",
+    "pmid": "9069281",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "baclofen",
+     "provenance": "verified",
+     "quote": "(-)-baclofen at GABAB1 (Gabbr1, Rat): Agonist / Full agonist, pIC50 4.4-4.6 [PMID 9069281]",
+     "species": "Rat"
+    }
+   }
+  },
+  "benperidol": {
+   "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.0269,
+     "median": 0.0269,
+     "min": 0.0269,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9577836",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "benperidol",
+     "provenance": "verified",
+     "quote": "benperidol at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 10.57 [PMID 9577836]",
+     "species": "Human"
+    }
+   },
+   "d4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.0661,
+     "median": 0.0661,
+     "min": 0.0661,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9577836",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "benperidol",
+     "provenance": "verified",
+     "quote": "benperidol at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 10.18 [PMID 9577836]",
+     "species": "Human"
+    }
+   }
+  },
   "benztropine": {
    "dat": {
     "action": "reuptake_inhibitor",
@@ -1010,6 +1063,103 @@
      "provenance": "verified",
      "quote": "benzatropine at M2 receptor (Chrm2, Rat): Antagonist / Antagonist, pKi 8.59 [PMID 7562926]",
      "species": "Rat"
+    }
+   }
+  },
+  "biperiden": {
+   "m1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.4786,
+     "median": 0.4786,
+     "min": 0.4786,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKd"
+    },
+    "pmid": "1346637",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "biperiden",
+     "provenance": "verified",
+     "quote": "biperiden at M1 receptor (CHRM1, Human): Antagonist / Antagonist, pKd 9.32 [PMID 1346637]",
+     "species": "Human"
+    }
+   },
+   "m2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKd"
+    },
+    "pmid": "1346637",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "biperiden",
+     "provenance": "verified",
+     "quote": "biperiden at M2 receptor (CHRM2, Human): Antagonist / Antagonist, pKd 8.2 [PMID 1346637]",
+     "species": "Human"
+    }
+   },
+   "m3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.8905,
+     "median": 3.8905,
+     "min": 3.8905,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKd"
+    },
+    "pmid": "1346637",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "biperiden",
+     "provenance": "verified",
+     "quote": "biperiden at M3 receptor (CHRM3, Human): Antagonist / Antagonist, pKd 8.41 [PMID 1346637]",
+     "species": "Human"
+    }
+   },
+   "m4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.3988,
+     "median": 2.3988,
+     "min": 2.3988,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKd"
+    },
+    "pmid": "1346637",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "biperiden",
+     "provenance": "verified",
+     "quote": "biperiden at M4 receptor (CHRM4, Human): Antagonist / Antagonist, pKd 8.62 [PMID 1346637]",
+     "species": "Human"
+    }
+   },
+   "m5": {
+    "action": "antagonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKd"
+    },
+    "pmid": "1346637",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "biperiden",
+     "provenance": "verified",
+     "quote": "biperiden at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKd 8.2 [PMID 1346637]",
+     "species": "Human"
     }
    }
   },
@@ -1570,6 +1720,65 @@
      "page": "chlorpromazine",
      "provenance": "verified",
      "quote": "chlorpromazine at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 8.2 [PMID 12629531]",
+     "species": "Human"
+    }
+   }
+  },
+  "chlorprothixene": {
+   "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.9512,
+     "median": 2.9512,
+     "min": 2.9512,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19091563",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "chlorprothixene",
+     "provenance": "verified",
+     "quote": "chlorprothixene at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.53 [PMID 19091563]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 4.5709,
+     "median": 4.5709,
+     "min": 4.5709,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19091563",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "chlorprothixene",
+     "provenance": "verified",
+     "quote": "chlorprothixene at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 8.34 [PMID 19091563]",
+     "species": "Human"
+    }
+   },
+   "h1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.7153,
+     "median": 3.7153,
+     "min": 3.7153,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19091563",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "chlorprothixene",
+     "provenance": "verified",
+     "quote": "chlorprothixene at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 8.43 [PMID 19091563]",
      "species": "Human"
     }
    }
@@ -3520,6 +3729,103 @@
     }
    }
   },
+  "fluspirilene": {
+   "5ht1a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 63.0957,
+     "median": 63.0957,
+     "min": 63.0957,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fluspirilene",
+     "provenance": "verified",
+     "quote": "fluspirilene at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 7.2 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 1000.0,
+     "min": 1000.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fluspirilene",
+     "provenance": "verified",
+     "quote": "fluspirilene at 5-HT1D receptor (HTR1D, Human): Antagonist / Antagonist, pKi 6 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2511.8864,
+     "median": 2511.8864,
+     "min": 2511.8864,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fluspirilene",
+     "provenance": "verified",
+     "quote": "fluspirilene at 5-ht1e receptor (HTR1E, Human): Antagonist / Antagonist, pKi 5.6 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 10.0,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fluspirilene",
+     "provenance": "verified",
+     "quote": "fluspirilene at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 8 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "h1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 12.5893,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fluspirilene",
+     "provenance": "verified",
+     "quote": "fluspirilene at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 7.9 [PMID 8935801]",
+     "species": "Human"
+    }
+   }
+  },
   "fluvoxamine": {
    "sert": {
     "action": "reuptake_inhibitor",
@@ -5116,6 +5422,122 @@
     }
    }
   },
+  "mesoridazine": {
+   "5ht1a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 104.7129,
+     "median": 104.7129,
+     "min": 104.7129,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15357957",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mesoridazine",
+     "provenance": "verified",
+     "quote": "mesoridazine at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 6.98 [PMID 15357957]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 54.9541,
+     "median": 54.9541,
+     "min": 54.9541,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15357957",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mesoridazine",
+     "provenance": "verified",
+     "quote": "mesoridazine at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 7.26 [PMID 15357957]",
+     "species": "Human"
+    }
+   },
+   "5ht2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 407.3804,
+     "median": 407.3804,
+     "min": 407.3804,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15357957",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mesoridazine",
+     "provenance": "verified",
+     "quote": "mesoridazine at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 6.39 [PMID 15357957]",
+     "species": "Human"
+    }
+   },
+   "d1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 102.3294,
+     "median": 102.3294,
+     "min": 102.3294,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15357957",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mesoridazine",
+     "provenance": "verified",
+     "quote": "mesoridazine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 6.99 [PMID 15357957]",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.1878,
+     "median": 2.1878,
+     "min": 2.1878,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15357957",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mesoridazine",
+     "provenance": "verified",
+     "quote": "mesoridazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.66 [PMID 15357957]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 22.9087,
+     "median": 22.9087,
+     "min": 22.9087,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15357957",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mesoridazine",
+     "provenance": "verified",
+     "quote": "mesoridazine at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 7.64 [PMID 15357957]",
+     "species": "Human"
+    }
+   }
+  },
   "methadone": {
    "delta": {
     "action": "agonist",
@@ -5771,6 +6193,65 @@
     }
    }
   },
+  "naloxone": {
+   "delta": {
+    "action": "antagonist",
+    "ki": {
+     "max": 63.0958,
+     "median": 63.0958,
+     "min": 63.0958,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naloxone",
+     "provenance": "verified",
+     "quote": "naloxone at δ receptor (OPRD1, Human): Antagonist / Antagonist, pKi 7.2 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "antagonist",
+    "ki": {
+     "max": 25.1189,
+     "median": 13.8154,
+     "min": 2.5119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naloxone",
+     "provenance": "verified",
+     "quote": "naloxone at κ receptor (OPRK1, Human): Antagonist / Antagonist, pKi 7.6-8.6 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.2589,
+     "median": 1.2589,
+     "min": 1.2589,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naloxone",
+     "provenance": "verified",
+     "quote": "naloxone at μ receptor (OPRM1, Human): Antagonist / Antagonist, pKi 8.9 [PMID 9686407]",
+     "species": "Human"
+    }
+   }
+  },
   "naltrexone": {
    "delta": {
     "action": "antagonist",
@@ -6202,6 +6683,40 @@
     }
    }
   },
+  "ondansetron": {
+   "5ht3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 15.8489,
+     "median": 10.4304,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7565620",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ondansetron",
+     "provenance": "verified",
+     "quote": "ondansetron at 5-HT3A (HTR3A, Human): Antagonist / Antagonist, pKi 7.8-8.3 [PMID 7565620]",
+     "species": "Human"
+    }
+   }
+  },
+  "pargyline": {
+   "mao_b": {
+    "action": "enzyme_inhibitor",
+    "pmid": "6817759",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pargyline",
+     "provenance": "verified",
+     "quote": "pargyline at Monoamine oxidase B (Maob, Rat): Inhibitor / Inhibition, pIC50 5.74 [PMID 6817759]",
+     "species": "Rat"
+    }
+   }
+  },
   "paroxetine": {
    "sert": {
     "action": "reuptake_inhibitor",
@@ -6514,6 +7029,19 @@
     }
    }
   },
+  "phenytoin": {
+   "nav": {
+    "action": "blocker",
+    "pmid": "1658608",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "phenytoin",
+     "provenance": "verified",
+     "quote": "phenytoin at Nav1.2 (SCN2A, Human): Channel blocker / Pore blocker, pIC50 4.9 [PMID 1658608]",
+     "species": "Human"
+    }
+   }
+  },
   "pimavanserin": {
    "5ht2a": {
     "action": "inverse_agonist",
@@ -6677,6 +7205,103 @@
      "page": "pimozide",
      "provenance": "verified",
      "quote": "pimozide at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 6.2 [PMID 12629531]",
+     "species": "Human"
+    }
+   }
+  },
+  "pipamperone": {
+   "5ht1a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2511.8864,
+     "median": 2511.8864,
+     "min": 2511.8864,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pipamperone",
+     "provenance": "verified",
+     "quote": "pipamperone at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 5.6 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 630.9573,
+     "median": 630.9573,
+     "min": 630.9573,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pipamperone",
+     "provenance": "verified",
+     "quote": "pipamperone at 5-HT1B receptor (HTR1B, Human): Antagonist / Antagonist, pKi 6.2 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 158.4893,
+     "median": 158.4893,
+     "min": 158.4893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pipamperone",
+     "provenance": "verified",
+     "quote": "pipamperone at 5-HT1D receptor (HTR1D, Human): Antagonist / Antagonist, pKi 6.8 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 5.0119,
+     "median": 5.0119,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pipamperone",
+     "provenance": "verified",
+     "quote": "pipamperone at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 8.3 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
+   "h1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2511.8864,
+     "median": 2511.8864,
+     "min": 2511.8864,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pipamperone",
+     "provenance": "verified",
+     "quote": "pipamperone at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 5.6 [PMID 8935801]",
      "species": "Human"
     }
    }
@@ -6970,6 +7595,105 @@
      "page": "prazosin",
      "provenance": "verified",
      "quote": "prazosin at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 5.3-6.5 [PMID 1353247]",
+     "species": "Human"
+    }
+   }
+  },
+  "prochlorperazine": {
+   "d1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 77.6247,
+     "median": 77.6247,
+     "min": 77.6247,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "prochlorperazine",
+     "provenance": "verified",
+     "quote": "prochlorperazine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 7.11",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.6308,
+     "median": 3.6308,
+     "min": 3.6308,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "prochlorperazine",
+     "provenance": "verified",
+     "quote": "prochlorperazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.44",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 4.4668,
+     "median": 4.4668,
+     "min": 4.4668,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "prochlorperazine",
+     "provenance": "verified",
+     "quote": "prochlorperazine at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 8.35",
+     "species": "Human"
+    }
+   },
+   "d4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 812.8302,
+     "median": 812.8302,
+     "min": 812.8302,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "prochlorperazine",
+     "provenance": "verified",
+     "quote": "prochlorperazine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 6.09",
+     "species": "Human"
+    }
+   }
+  },
+  "promethazine": {
+   "h1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.2399,
+     "median": 0.2399,
+     "min": 0.2399,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "16782354",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "promethazine",
+     "provenance": "verified",
+     "quote": "promethazine at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 9.62 [PMID 16782354]",
      "species": "Human"
     }
    }
@@ -7831,6 +8555,103 @@
     }
    }
   },
+  "scopolamine": {
+   "m1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.0,
+     "median": 1.0,
+     "min": 1.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12049493",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "scopolamine",
+     "provenance": "verified",
+     "quote": "scopolamine at M1 receptor (CHRM1, Human): Antagonist / Antagonist, pKi 9 [PMID 12049493]",
+     "species": "Human"
+    }
+   },
+   "m2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.9953,
+     "median": 1.9953,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12049493",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "scopolamine",
+     "provenance": "verified",
+     "quote": "scopolamine at M2 receptor (CHRM2, Human): Antagonist / Antagonist, pKi 8.7 [PMID 12049493]",
+     "species": "Human"
+    }
+   },
+   "m3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.3981,
+     "median": 0.3981,
+     "min": 0.3981,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12049493",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "scopolamine",
+     "provenance": "verified",
+     "quote": "scopolamine at M3 receptor (CHRM3, Human): Antagonist / Antagonist, pKi 9.4 [PMID 12049493]",
+     "species": "Human"
+    }
+   },
+   "m4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.7943,
+     "median": 0.5553,
+     "min": 0.3162,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12049493",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "scopolamine",
+     "provenance": "verified",
+     "quote": "scopolamine at M4 receptor (CHRM4, Human): Antagonist / Antagonist, pKi 9.1-9.5 [PMID 12049493]",
+     "species": "Human"
+    }
+   },
+   "m5": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.9953,
+     "median": 1.9953,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1346637",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "scopolamine",
+     "provenance": "verified",
+     "quote": "scopolamine at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKi 8.7 [PMID 1346637]",
+     "species": "Human"
+    }
+   }
+  },
   "selegiline": {
    "mao_a": {
     "action": "enzyme_inhibitor",
@@ -8531,6 +9352,84 @@
      "page": "tiagabine",
      "provenance": "verified",
      "quote": "tiagabine at GAT1 (SLC6A1, Human): Inhibitor / Inhibition, pIC50 7.2 [PMID 7851497]",
+     "species": "Human"
+    }
+   }
+  },
+  "tizanidine": {
+   "alpha2": {
+    "action": "agonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 1000.0,
+     "min": 1000.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "36101495",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tizanidine",
+     "provenance": "verified",
+     "quote": "tizanidine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Agonist, pKi 6 [PMID 36101495]",
+     "species": "Human"
+    }
+   },
+   "alpha2a": {
+    "action": "agonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 1000.0,
+     "min": 1000.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "36101495",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tizanidine",
+     "provenance": "verified",
+     "quote": "tizanidine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Agonist, pKi 6 [PMID 36101495]",
+     "species": "Human"
+    }
+   },
+   "alpha2b": {
+    "action": "agonist",
+    "ki": {
+     "max": 1584.8925,
+     "median": 1584.8925,
+     "min": 1584.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "36101495",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tizanidine",
+     "provenance": "verified",
+     "quote": "tizanidine at α2B-adrenoceptor (ADRA2B, Human): Agonist / Agonist, pKi 5.8 [PMID 36101495]",
+     "species": "Human"
+    }
+   },
+   "alpha2d": {
+    "action": "agonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 1000.0,
+     "min": 1000.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "36101495",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tizanidine",
+     "provenance": "verified",
+     "quote": "tizanidine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Agonist, pKi 6 [PMID 36101495]",
      "species": "Human"
     }
    }
