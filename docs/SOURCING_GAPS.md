@@ -619,3 +619,55 @@ autoreceptor (clozapine histaminergic via H3, amitriptyline cholinergic via M2, 
 noradrenergic via alpha2A/B/C, several serotonergic via 5-HT1A/1B/1D). Because per-drug flow
 intensity is normalized to the strongest engaged system, this also re-scales the overlays that
 were already there.
+
+## Drug-roster coverage: what the Wikipedia lists have that we do not (surveyed 2026-07-26)
+
+Not a sourcing gap but a **coverage** gap, kept here because it is the same kind of survey
+(measure once, write it down, do not re-survey). Prompted by noticing bromazepam and
+clotiazepam were absent.
+
+**Method.** Every generic name on the three English Wikipedia roster pages
+([List of psychotropic medications](https://en.wikipedia.org/wiki/List_of_psychotropic_medications),
+[List of psychiatric medications](https://en.wikipedia.org/wiki/List_of_psychiatric_medications),
+[List of psychiatric medications by condition treated](https://en.wikipedia.org/wiki/List_of_psychiatric_medications_by_condition_treated))
+diffed against our 179 drug ids, with an alias map for the spellings that differ
+(dextroamphetamine -> `amphetamine_d`, valproic acid / sodium valproate / divalproex ->
+`valproate`, flupentixol -> `flupenthixol`, pipotiazine -> `pipothiazine`, allopregnanolone ->
+`brexanolone`, ...). **68 names** come back missing.
+
+**The lists are themselves incomplete**, so this is a lower bound, not a target: clotiazepam
+appears on none of the three, which is exactly how it went unnoticed. The upper bound worth
+aiming at is a marketing-status list (EMA / ANSM / FDA), not a wiki roster.
+
+Sorted by whether adding one would actually teach a visitor something:
+
+**Tier 1: marketed, mechanistically or geographically distinct (35).** The real gap. Mostly
+European/Japanese agents a US-centric corpus (Stahl 8th ed.) omits, so each needs the non-Stahl
+sourcing route (Wikipedia pharm #9 + PDSP #5 + GtoPdb #11 + FR brands #10), the one already used
+for cyamemazine / tropatepine / loflazepate.
+
+| family | missing |
+|---|---|
+| benzodiazepines + relatives | bromazepam, clotiazepam, clobazam, nitrazepam, lormetazepam, loprazolam, brotizolam, prazepam, tofisopam |
+| conventional antipsychotics | benperidol, bromperidol, pipamperone, melperone, prothipendyl, perazine, chlorprothixene, levomepromazine, fluspirilene, prochlorperazine |
+| sedating antihistamines | promethazine, alimemazine, niaprazine |
+| anticonvulsants used in psychiatry | phenobarbital, primidone, phenytoin, perampanel |
+| anticholinergic / antiparkinsonian | biperiden, scopolamine |
+| other anxiolytics + hypnotics | meprobamate, clomethiazole |
+| substance-use + adjuncts | baclofen, cytisine, naloxone, ondansetron, tizanidine |
+
+Highest value inside Tier 1: the conventional antipsychotics (they would populate D2/5-HT2A/H1/M1
+binding space we already model), then the benzodiazepines (cheap: one `gaba_a` PAM binding each,
+and the class is currently 15 members with several European mainstays absent).
+
+**Tier 2: obsolete or withdrawn, historically real (21).** Worth adding only if the goal becomes
+"the history of psychopharmacology": mesoridazine, zimelidine, indalpine, alpidem, methaqualone,
+chloral hydrate, glutethimide, sulfonmethane, azacyclonol, clorgiline, pargyline, calcium
+carbimide, rubidium chloride, phenazepam, nimetazepam, and the barbiturates amobarbital,
+butobarbital, cyclobarbital, pentobarbital, secobarbital, thiopental.
+
+**Tier 3: never marketed / research compounds (12).** Skip. Almost all are the abandoned
+non-benzodiazepine GABA-A modulator programme: divaplon, fasiplon, indiplon, lorediplon,
+necopidem, ocinaplon, pagoclone, panadiplon, pazinaclone, saripidem, suriclone, taniplon.
+
+**Not psychiatric (1).** itopride (a prokinetic; it is on the list for its D2 antagonism).
