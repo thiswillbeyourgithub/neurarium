@@ -833,10 +833,13 @@
       }
       .about-tour-btn:hover { background: var(--accent-bright); border-color: var(--accent-bright); }
 
-      /* Language switch: a small EN/FR segmented control at the top of the panel
-         body. The active language is highlighted (blue, like .tool-btn.active). */
-      .lang-switch { display: flex; gap: 4px; margin: 0 0 6px; }
-      .lang-btn {
+      /* Segmented control: a row of small mutually-exclusive buttons, the active one
+         highlighted (blue, like .tool-btn.active). Used for the EN/FR language switch
+         at the top of the panel body (.lang-switch) and for the drug panel's
+         Interactions grouping (.seg-switch); one style, two callers. */
+      .lang-switch, .seg-switch { display: flex; gap: 4px; margin: 0 0 6px; }
+      .seg-switch { margin: 4px 0 8px; }
+      .lang-btn, .seg-btn {
         flex: 0 0 auto;
         padding: 2px 8px;
         font: inherit;
@@ -849,8 +852,26 @@
         border-radius: 6px;
         cursor: pointer;
       }
-      .lang-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
-      .lang-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .lang-btn:hover, .seg-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
+      .lang-btn.active, .seg-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+      /* "+N more" under a capped Interactions group: expands the rest in place, so a
+         long list is trimmed for readability without hiding what was trimmed. */
+      .pk-more {
+        margin: 2px 0 8px;
+        padding: 2px 6px;
+        font: inherit;
+        font-size: 11px;
+        color: var(--muted);
+        background: none;
+        border: none;
+        border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+      }
+      .pk-more:hover { color: var(--text); }
+      /* A group heading that navigates (the Interactions by-enzyme headings). */
+      .drug-cat.clickable { cursor: pointer; }
+      .drug-cat.clickable:hover { color: var(--text); text-decoration: underline; }
 
       /* Search shown in place of #controls-main while the magnifier is on. */
       #search { margin-top: 12px; }
@@ -1827,13 +1848,15 @@
         padding-left: 8px;
         border-left: 1px solid rgba(255, 255, 255, 0.12);
       }
-      /* Brief highlight when a metabolite row is jumped to from a receptor's
-         Interacting-drugs list, so the arrival on the parent drug has a visible anchor. */
-      .info-metabolites .metab-row.metab-flash {
-        animation: metab-flash 1.6s ease-out;
+      /* Brief highlight on the row a jump landed ON, so arriving in another node's
+         panel has a visible anchor (a metabolite reached from a receptor's
+         Interacting-drugs list, an isoform reached from another drug's Interactions
+         list). Applied by createInfoPanel's flashRow to any row element. */
+      .node-flash {
+        animation: node-flash 1.6s ease-out;
         border-radius: 4px;
       }
-      @keyframes metab-flash {
+      @keyframes node-flash {
         0% { background: var(--accent-soft); box-shadow: 0 0 0 4px var(--accent-soft); }
         100% { background: transparent; box-shadow: 0 0 0 4px transparent; }
       }

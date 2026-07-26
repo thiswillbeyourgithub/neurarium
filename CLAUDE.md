@@ -635,14 +635,19 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   authored in `drugs_data.jsonl`). Only that block is read: the `Drug Interactions` block's
   isoform sentences are mostly about *other* drugs acting on this one.
 - **Viewer.** `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
-  pill, clickable to the enzyme) and an **Interacts with** list; an **Enzymes** accordion section
+  pill, clickable to the enzyme) and an **Interactions** list, both **after** the anatomy sections
+  (pharmacokinetics lights nothing in the scene, so it does not interrupt Acts on -> Projections
+  affected -> Acts within); an **Enzymes** accordion section
   (`buildEnzymeLegend`) opens `showEnzyme`, that isoform's drugs grouped by role. Both ends share
   one `enzymeRow` builder (same node, either side).
 - **The drug -> drug edges are derived, never stored** (`pkInteractionsOf` in `js/data.js`, like
   `flowSystems`): an inhibitor/inducer of an enzyme meets its substrates, one row per (other drug,
-  direction) naming every shared isoform. Capped at 12 with the remainder counted out loud. The
-  caption states it is a flag to check with a prescriber, **never a contraindication**, and that a
-  missing row is not a safety claim.
+  direction) naming every shared isoform. Rendered two ways from the same edges via a persisted
+  segmented control (`PK_GROUP_KEY`): **by drug** (four direction buckets, raises/lowers first,
+  then raised-by/lowered-by) or **by enzyme** (one heading per isoform, so a pair meeting at two
+  isoforms appears under each). Capped **per group** (8) with the rest expandable in place, since
+  a global cap would swallow whole headings. The caption states it is a flag to check with a
+  prescriber, **never a contraindication**, and that a missing row is not a safety claim.
 
 ## Images
 

@@ -206,6 +206,14 @@ Hover/focus reveals; clicking pins it (selectable); only one open at a time (`op
 the click-toggle path only. Text shows the concrete source first, the grade explainer under. Pill
 tooltips are `info.provNone/provLlm/provSourced/provVerified`.
 
+Every view starts from `clearBody()` (never a bare `body.innerHTML = ""`): it also resets
+`#details-pane`'s scroll, so a click deep in a long panel does not open the next one already
+scrolled into its middle. The exception is a jump that has a *reason*: `flashRow(el)` scrolls that
+one row into view and flashes it (`.node-flash`), so arriving in another node's panel lands on the
+row that explains the jump (a metabolite reached from a receptor, an isoform reached from another
+drug's Interactions list, via `showDrug`'s `highlightMetabolite` / `highlightEnzymes` opts). It
+defers a frame because the caller shows the pane *after* rendering.
+
 Views:
 - **connection**: label, a `Projection` type line, route (`from → to`, `↔` bidirectional; each
   endpoint clickable via `endpointEl` -> `onStructurePick`), kind + neurotransmitter, description.

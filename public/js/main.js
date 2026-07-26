@@ -1817,6 +1817,32 @@ function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
 
 function createInfoPanel(data, sourcingModal) {
   const body = document.getElementById("info-body");
+  // The pane, not #info-body, is the scrolling box (see the overflow rules in
+  // index.html); every show*() rebuilds the body inside it.
+  const pane = document.getElementById("details-pane");
+  // Start every view at the top. Replacing the body's children leaves the pane's
+  // scrollTop wherever the *previous* (possibly much taller) panel was, so a click
+  // deep in a long panel would open the next one already scrolled into its middle,
+  // with no visible reason. One helper instead of a line per show*(), so a new view
+  // cannot forget it.
+  const clearBody = () => {
+    body.innerHTML = "";
+    if (pane) pane.scrollTop = 0;
+  };
+  // Scroll a just-built row into view and flash it, for a click that navigates to
+  // another node *because of* that row: arriving on the target's panel, the reader
+  // lands on the row that explains the jump instead of hunting for it. Deferred a
+  // frame because the caller shows the details pane right AFTER rendering (see
+  // focusDrug -> openDetailTab), and scrollIntoView on a hidden box is a no-op.
+  const flashRow = (elm) => {
+    if (!elm) return;
+    requestAnimationFrame(() => {
+      elm.scrollIntoView({ block: "center", behavior: "smooth" });
+      elm.classList.add("node-flash");
+      elm.addEventListener("animationend",
+        () => elm.classList.remove("node-flash"), { once: true });
+    });
+  };
   const nameOf = (id) => data.byId.get(id)?.name || id;
   // Hemisphere-stripped name ("Frontal lobe", not "Right frontal lobe"): used by
   // every pathway list so left/right twins collapse to one row (see pathwayList).
@@ -2795,7 +2821,7 @@ function createInfoPanel(data, sourcingModal) {
 
   return {
     show(proj) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", proj.label || t("info.connection")));
       // Type line: the connection's analogue of a structure's group line ("Lobe"
       // etc.), stating plainly what this node is (a projection / neuron pathway).
@@ -2845,7 +2871,7 @@ function createInfoPanel(data, sourcingModal) {
      * onConnectionPick so the caller can frame it + open the connection panel.
      */
     showStructure(structure) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", structure.name));
       // The anatomy classification grade (existence / group / position) rides the
       // group line it actually grades, not a broad "Source" row at the bottom (a
@@ -2903,7 +2929,7 @@ function createInfoPanel(data, sourcingModal) {
      * or a no-CNS-role note for a stub). Built fresh each call like the others.
      */
     showReceptor(receptor) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", receptor.name));
       body.appendChild(el("div", "info-group", receptor.familyLabel));
 
@@ -2976,7 +3002,7 @@ function createInfoPanel(data, sourcingModal) {
      * showReceptor view; this is the lighter sibling for the non-receptor targets.
      */
     showTarget(target) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", target.name));
       body.appendChild(el(
         "div", "info-group", target.systemLabel || t("targets.otherSystem")));
@@ -3051,7 +3077,7 @@ function createInfoPanel(data, sourcingModal) {
      * here (the Stahl pharmacokinetics line), so the claim is auditable in place.
      */
     showEnzyme(enzyme) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", enzyme.label));
       body.appendChild(el("div", "info-group", t("enzyme.heading")));
       appendReference({ url: enzyme.wikipedia });
@@ -3094,12 +3120,16 @@ function createInfoPanel(data, sourcingModal) {
      * with a note / "speculative" marker when present, and a source pill: its own
      * quote-level source or the drug-level Stahl citation as a fallback).
      */
-    // opts.highlightMetabolite: a metabolite name to scroll to + briefly flash in the
-    // "Active metabolites" section. Used when arriving here from a receptor's Interacting
-    // drugs row for a non-modeled metabolite (which deep-links to its parent drug, since a
-    // non-drug metabolite has no standalone view), so the click has a visible destination.
+    // Both opts are "why did this panel open" hints: the clicked row's counterpart is
+    // scrolled to + briefly flashed here, so a jump lands on its reason rather than at
+    // the top of an unfamiliar panel (see flashRow).
+    // opts.highlightMetabolite: a metabolite name, in the "Active metabolites" section.
+    //   Used when arriving from a receptor's Interacting-drugs row for a non-modeled
+    //   metabolite (which deep-links to its parent, having no standalone view).
+    // opts.highlightEnzymes: enzyme ids, in the "Metabolism" section. Used when arriving
+    //   from another drug's Interactions row, which names the isoform they share.
     showDrug(drug, opts = {}) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", drug.name));
       if (drug.category) body.appendChild(el("div", "info-group", drug.category));
 
@@ -3375,71 +3405,7 @@ function createInfoPanel(data, sourcingModal) {
         body.appendChild(metaEl);
         // Arrived from a metabolite's receptor row: bring it into view and flash it, so
         // the user sees why the parent drug opened and where its metabolite's bindings are.
-        if (flashLi) {
-          flashLi.scrollIntoView({ block: "nearest" });
-          flashLi.classList.add("metab-flash");
-          flashLi.addEventListener("animationend",
-            () => flashLi.classList.remove("metab-flash"), { once: true });
-        }
-      }
-      // Metabolism: the enzymes that clear this drug or whose activity it changes,
-      // then the drug -> drug interactions those roles imply. Pharmacokinetics, so
-      // it sits with the T½ / metabolites material and lights nothing in the scene.
-      if (drug.enzymes && drug.enzymes.length) {
-        const enzWrap = el("div", "info-bindings");
-        enzWrap.appendChild(el("h3", null, t("drug.metabolism")));
-        enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
-        const ul = el("ul");
-        // Substrate rows first (how the body clears it), then what it does to others.
-        const order = { substrate: 0, inhibitor: 1, inducer: 2 };
-        const sorted = [...drug.enzymes].sort((a, b) =>
-          (order[a.role] - order[b.role]) || a.label.localeCompare(b.label));
-        for (const row of sorted) {
-          const enz = (data.enzymes || []).find((e) => e.id === row.enzyme);
-          ul.appendChild(enzymeRow(row, row.label,
-                                   enz ? () => onEnzymePick(enz) : null,
-                                   { showRole: true }));
-        }
-        enzWrap.appendChild(ul);
-        body.appendChild(enzWrap);
-
-        // Derived, never stored (see pkInteractionsOf): this drug and the listed one
-        // meet at the same enzyme. Capped, because a CYP3A4 inhibitor legitimately
-        // meets dozens of substrates and an uncapped dump would bury the panel; the
-        // remainder is counted out loud rather than silently dropped.
-        const pk = data.pkInteractionsOf ? data.pkInteractionsOf(drug) : null;
-        const edges = pk ? [
-          ...pk.affects.map((x) => ({ ...x, outgoing: true })),
-          ...pk.affectedBy.map((x) => ({ ...x, outgoing: false })),
-        ] : [];
-        if (edges.length) {
-          const pkWrap = el("div", "info-bindings");
-          pkWrap.appendChild(el("h3", null, t("drug.pkInteractions")));
-          pkWrap.appendChild(el("p", "legend-caption", t("drug.pkInteractionsHint")));
-          edges.sort((a, b) => a.drug.displayName.localeCompare(b.drug.displayName));
-          const CAP = 12;
-          const pkUl = el("ul");
-          for (const edge of edges.slice(0, CAP)) {
-            const key = edge.outgoing
-              ? (edge.direction > 0 ? "drug.pkRaises" : "drug.pkLowers")
-              : (edge.direction > 0 ? "drug.pkRaisedBy" : "drug.pkLoweredBy");
-            const li = el("li", "clickable");
-            const text = el("span", "bind-text");
-            text.appendChild(el("span", "bind-target",
-                                t(key, { drug: edge.drug.displayName })));
-            text.appendChild(el("span", "bind-action",
-                                ` · ${edge.enzymes.map((x) => x.label).join(", ")}`));
-            li.appendChild(text);
-            li.addEventListener("click", () => onDrugPick(edge.drug));
-            pkUl.appendChild(li);
-          }
-          pkWrap.appendChild(pkUl);
-          if (edges.length > CAP) {
-            pkWrap.appendChild(el("p", "legend-caption",
-                                  t("drug.pkMore", { n: edges.length - CAP })));
-          }
-          body.appendChild(pkWrap);
-        }
+        flashRow(flashLi);
       }
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
@@ -3511,6 +3477,167 @@ function createInfoPanel(data, sourcingModal) {
         ctx.appendChild(ul);
         body.appendChild(ctx);
       }
+
+      // Metabolism, last: pharmacokinetics has no anatomy, so it sits AFTER the
+      // sections that do (Acts on / Projections affected / Acts within). The enzymes
+      // that clear this drug or whose activity it changes, then the drug -> drug
+      // interactions those roles imply.
+      if (drug.enzymes && drug.enzymes.length) {
+        const enzWrap = el("div", "info-bindings");
+        enzWrap.appendChild(el("h3", null, t("drug.metabolism")));
+        enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
+        const enzUl = el("ul");
+        // Substrate rows first (how the body clears it), then what it does to others.
+        const roleOrder = { substrate: 0, inhibitor: 1, inducer: 2 };
+        const sortedEnz = [...drug.enzymes].sort((a, b) =>
+          (roleOrder[a.role] - roleOrder[b.role]) || a.label.localeCompare(b.label));
+        // opts.highlightEnzymes: arrived from another drug's interaction row, so land
+        // on the isoform the two share instead of making the reader find it.
+        const wanted = new Set(opts.highlightEnzymes || []);
+        let flashEnz = null;
+        for (const row of sortedEnz) {
+          const enz = (data.enzymes || []).find((e) => e.id === row.enzyme);
+          const li = enzymeRow(row, row.label,
+                               enz ? () => onEnzymePick(enz) : null,
+                               { showRole: true });
+          if (!flashEnz && wanted.has(row.enzyme)) flashEnz = li;
+          enzUl.appendChild(li);
+        }
+        enzWrap.appendChild(enzUl);
+        body.appendChild(enzWrap);
+        flashRow(flashEnz);
+
+        // Interactions: derived, never stored (see pkInteractionsOf). This drug and
+        // the listed one meet at the same enzyme, so one shifts the other's level.
+        const pk = data.pkInteractionsOf ? data.pkInteractionsOf(drug) : null;
+        const edges = pk ? [
+          ...pk.affects.map((x) => ({ ...x, outgoing: true })),
+          ...pk.affectedBy.map((x) => ({ ...x, outgoing: false })),
+        ] : [];
+        if (edges.length) {
+          // info-interactors too: reuses that section's .drug-cat sub-heading style.
+          const pkWrap = el("div", "info-bindings info-interactors");
+          pkWrap.appendChild(el("h3", null, t("drug.pkInteractions")));
+          pkWrap.appendChild(el("p", "legend-caption", t("drug.pkInteractionsHint")));
+
+          // One row = one (other drug, direction) edge. `showEnzymes` names the shared
+          // isoforms; by-enzyme mode drops them (the heading IS the isoform) and spells
+          // the direction out in the row instead, since its heading cannot.
+          const pkRow = (edge, showEnzymes) => {
+            const li = el("li", "clickable");
+            const text = el("span", "bind-text");
+            const key = edge.outgoing
+              ? (edge.direction > 0 ? "drug.pkRaises" : "drug.pkLowers")
+              : (edge.direction > 0 ? "drug.pkRaisedBy" : "drug.pkLoweredBy");
+            text.appendChild(el("span", "bind-target",
+                                showEnzymes ? edge.drug.displayName
+                                            : t(key, { drug: edge.drug.displayName })));
+            if (showEnzymes) {
+              text.appendChild(el("span", "bind-action",
+                                  ` · ${edge.enzymes.map((x) => x.label).join(", ")}`));
+            }
+            li.appendChild(text);
+            const via = edge.enzymes.map((x) => x.enzyme);
+            li.addEventListener("click",
+                                () => onDrugPick(edge.drug, { highlightEnzymes: via }));
+            return li;
+          };
+
+          // Capped per GROUP, not globally: a global cap would swallow whole headings
+          // (a CYP3A4 inhibitor legitimately meets dozens of substrates), so each group
+          // shows its first rows and offers the rest in place rather than in a dead-end
+          // count. Rows are built lazily so an unexpanded remainder costs nothing.
+          const GROUP_CAP = 8;
+          const appendGroup = (box, label, rows, onLabel) => {
+            if (!rows.length) return;
+            const head = el("h4", "drug-cat", label);
+            if (onLabel) {
+              head.classList.add("clickable");
+              head.addEventListener("click", onLabel);
+            }
+            box.appendChild(head);
+            const ul = el("ul");
+            for (const make of rows.slice(0, GROUP_CAP)) ul.appendChild(make());
+            box.appendChild(ul);
+            if (rows.length > GROUP_CAP) {
+              const more = el("button", "pk-more",
+                              t("drug.pkMore", { n: rows.length - GROUP_CAP }));
+              more.type = "button";
+              more.addEventListener("click", () => {
+                for (const make of rows.slice(GROUP_CAP)) ul.appendChild(make());
+                more.remove();
+              });
+              box.appendChild(more);
+            }
+          };
+
+          // Two readings of the SAME edges, because the useful question differs: "what
+          // does this drug do to my other prescriptions" (by drug) vs "everything that
+          // goes through CYP3A4" (by enzyme, where a pair sharing two isoforms shows up
+          // under each; that duplication is the point of this reading).
+          const byDrug = (box) => {
+            // What this drug does to others first: that half is the actionable one.
+            const buckets = [
+              ["drug.pkHeadRaises", (e) => e.outgoing && e.direction > 0],
+              ["drug.pkHeadLowers", (e) => e.outgoing && e.direction < 0],
+              ["drug.pkHeadRaisedBy", (e) => !e.outgoing && e.direction > 0],
+              ["drug.pkHeadLoweredBy", (e) => !e.outgoing && e.direction < 0],
+            ];
+            for (const [key, keep] of buckets) {
+              const rows = edges.filter(keep)
+                .sort((a, b) => a.drug.displayName.localeCompare(b.drug.displayName))
+                .map((e) => () => pkRow(e, true));
+              appendGroup(box, t(key), rows);
+            }
+          };
+          const byEnzyme = (box) => {
+            const per = new Map();
+            for (const edge of edges) {
+              for (const enz of edge.enzymes) {
+                if (!per.has(enz.enzyme)) per.set(enz.enzyme, { label: enz.label, rows: [] });
+                per.get(enz.enzyme).rows.push(edge);
+              }
+            }
+            // Busiest isoform first (that is where the risk concentrates), ties by name.
+            const groups = [...per.entries()].sort((a, b) =>
+              (b[1].rows.length - a[1].rows.length) || a[1].label.localeCompare(b[1].label));
+            for (const [id, grp] of groups) {
+              const rows = grp.rows
+                .sort((a, b) => (b.direction - a.direction)
+                                || (Number(b.outgoing) - Number(a.outgoing))
+                                || a.drug.displayName.localeCompare(b.drug.displayName))
+                .map((e) => () => pkRow(e, false));
+              const enz = (data.enzymes || []).find((x) => x.id === id);
+              appendGroup(box, grp.label, rows, enz ? () => onEnzymePick(enz) : null);
+            }
+          };
+
+          const listBox = el("div");
+          const modeSwitch = el("div", "seg-switch");
+          const render = (mode) => {
+            listBox.innerHTML = "";
+            for (const btn of modeSwitch.children) {
+              btn.classList.toggle("active", btn.dataset.mode === mode);
+            }
+            if (mode === "enzyme") byEnzyme(listBox); else byDrug(listBox);
+          };
+          for (const [mode, key] of [["drug", "drug.pkByDrug"],
+                                     ["enzyme", "drug.pkByEnzyme"]]) {
+            const btn = el("button", "seg-btn", t(key));
+            btn.type = "button";
+            btn.dataset.mode = mode;
+            btn.addEventListener("click", () => {
+              savePkGrouping(mode);
+              render(mode);
+            });
+            modeSwitch.appendChild(btn);
+          }
+          pkWrap.appendChild(modeSwitch);
+          pkWrap.appendChild(listBox);
+          render(loadPkGrouping());
+          body.appendChild(pkWrap);
+        }
+      }
     },
 
     /**
@@ -3523,7 +3650,7 @@ function createInfoPanel(data, sourcingModal) {
      * locationList so nothing is duplicated.
      */
     showCircuit(circuit) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", circuit.name));
       // The circuit's source grade sits on its identity line (always shown, NOSOURCE
       // when llm-only), not a "Sources" block below the member lists (which would read
@@ -3591,7 +3718,7 @@ function createInfoPanel(data, sourcingModal) {
      * derived not stored).
      */
     showProjectionGroup(group) {
-      body.innerHTML = "";
+      clearBody();
       body.appendChild(el("h2", "info-title", group.name));
       // The group's source grade rides its identity line (always shown, NOSOURCE when
       // llm-only), not a "Sources" block at the bottom. The description keeps its own
@@ -3897,6 +4024,25 @@ function drugSwatchColor(drug, effectColors) {
  * @param {(drug: object) => void} onPick
  * @returns {(activeId: string|null) => void}
  */
+// localStorage key for the drug panel's Interactions grouping ("drug" | "enzyme").
+// A reading preference rather than a per-drug state, so it persists and applies to
+// every drug panel, like the metabolites toggle below.
+const PK_GROUP_KEY = "neurarium.pkGroup";
+function loadPkGrouping() {
+  try {
+    return localStorage.getItem(PK_GROUP_KEY) === "enzyme" ? "enzyme" : "drug";
+  } catch {
+    return "drug";
+  }
+}
+function savePkGrouping(mode) {
+  try {
+    localStorage.setItem(PK_GROUP_KEY, mode);
+  } catch {
+    /* private mode / storage disabled: the choice just won't persist. */
+  }
+}
+
 // localStorage key for the Drugs list's "show active metabolites" toggle (default
 // on). Persisted so the choice survives reloads, mirroring anim-settings' idiom.
 const METAB_TOGGLE_KEY = "neurarium.metabolites";
@@ -6230,7 +6376,11 @@ async function main() {
     const kinds = new Set(drug.contextKinds || []);
     return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
   };
-  const focusDrug = (drug, { frame = false, preview = false, highlightMetabolite = null } = {}) => {
+  // highlightMetabolite / highlightEnzymes: pass-through "why did this open" hints for
+  // the panel (see info.showDrug), not focus state.
+  const focusDrug = (drug, {
+    frame = false, preview = false, highlightMetabolite = null, highlightEnzymes = null,
+  } = {}) => {
     const meshSet = drugMeshesOf(drug);
     const flowArrows = flowArrowsOf(drug);
     const ctxArrows = contextArrowsOf(drug);
@@ -6242,7 +6392,7 @@ async function main() {
     circuitAnim.play(flowArrows, drug.flowSystems || {}); // no-op for a drug with no mapped pathways
     if (preview) return; // hover preview: dim + dots + flow only, no panel/tab/spread
     autoSpreadIfDeep(meshSet);
-    info.showDrug(drug, { highlightMetabolite });
+    info.showDrug(drug, { highlightMetabolite, highlightEnzymes });
     // From the search box, frame the affected regions; from the list row, leave
     // the view where it is.
     if (frame && meshSet.length) focus.focusMeshes(meshSet);
