@@ -140,6 +140,16 @@ function localize(field) {
  *   `structureIds` the focus dims to, `flowSystems` (kind -> {direction, weight},
  *   the signed affinity-weighted per-system flow tone), a `focusable` flag and search `keywords`,
  *   plus a `structureImage` (the vendored molecular-structure SVG path, or null).
+ * @property {object[]} enzymes  The Enzymes browse list: one entry per metabolic
+ *   isoform some drug actually touches, `{id, label, wikipedia, rows, keywords}`
+ *   where `rows` are its `{drug, enzyme}` pairs. Pharmacokinetics, so an entry has no
+ *   anatomy and never lights the scene.
+ * @property {Map<string, {drug: object, enzyme: object}[]>} drugsByEnzyme  Reverse
+ *   index: enzyme id -> the drugs with a role at it, each paired with that role row.
+ * @property {(drug: object) => {affects: object[], affectedBy: object[]}} pkInteractionsOf
+ *   The drug -> drug pharmacokinetic edges implied by those roles (an inhibitor or
+ *   inducer of an enzyme meets its substrates). Derived on demand, never authored;
+ *   one entry per (other drug, direction), naming every enzyme the pair shares.
  * @property {Map<string, {drug: object, binding: object}[]>} drugsByTarget
  *   Reverse index: a target id (a receptor id or a drug_targets key, matching each
  *   `targets` entry's id) -> the drugs that act on it, each paired with its resolved
@@ -256,6 +266,12 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   const drugActions = metaRecord.drug_actions || {};
   const drugEffectColors = metaRecord.drug_effect_colors || {};
   const drugEffectLabels = localizeMap(metaRecord.drug_effect_labels);
+  // Drug metabolism vocabularies (see ENZYMES in generate_data.py): the isoform
+  // id -> {label, wikipedia} map, plus role and strength labels. Raw for the defs
+  // (an isoform name is language-neutral), localized for the prose ones.
+  const enzymeDefs = metaRecord.enzymes || {};
+  const enzymeRoles = metaRecord.enzyme_roles || {};
+  const enzymeStrengths = metaRecord.enzyme_strengths || {};
   // Drug target system -> projection kind, for the per-drug "by-mechanism flow"
   // overlay (only the diffuse ascending modulatory systems are mapped; see
   // generate_data.py SYSTEM_FLOW_KINDS). Language-neutral, applied per drug below.
@@ -619,6 +635,29 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     d.halfLife = d.half_life || null;
     d.halfLifeSources = mapSources(d.half_life_sources);
     d.halfLifeProvenance = strongestGrade(d.half_life_sources);
+    // Metabolism: which enzymes handle this drug, or are inhibited/induced by it.
+    // Pharmacokinetics, so unlike a binding it lights nothing in the 3D scene; it
+    // feeds the panel's Metabolism list, the Enzymes browse section, and the derived
+    // drug -> drug interaction edges below. Labels come from meta.enzymes* so no
+    // isoform name is hardcoded here.
+    d.enzymes = (d.enzymes || []).map((e) => {
+      const def = enzymeDefs[e.enzyme] || {};
+      const role = enzymeRoles[e.role] || {};
+      return {
+        ...e,
+        label: def.label || e.enzyme,
+        wikipedia: def.wikipedia || null,
+        roleLabel: role.label ? localize(role.label) : e.role,
+        // What the drug does to that enzyme's throughput: +1 inhibits (a substrate
+        // co-prescribed with it accumulates), -1 induces (it is cleared faster), 0
+        // for a substrate, which sets no tone of its own.
+        direction: role.direction || 0,
+        strengthLabel: enzymeStrengths[e.strength]
+          ? localize(enzymeStrengths[e.strength]) : null,
+        sources: mapSources(e.sources),
+        provenance: strongestGrade(e.sources),
+      };
+    });
     const affected = new Set();
     d.bindings = (d.bindings || []).map((b) => {
       // Display + provenance fields come from the shared resolver; the drug loop
@@ -870,6 +909,82 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     }
   }
 
+  // The Enzymes browse list + its reverse index, the metabolism mirror of `targets` /
+  // `drugsByTarget` above. One entry per isoform any drug actually touches (an isoform
+  // in meta.enzymes that nothing references would be an empty panel), each carrying
+  // the drugs split by role so the panel can head them "Substrates / Inhibitors /
+  // Inducers" without re-scanning the corpus.
+  const drugsByEnzyme = new Map();
+  for (const d of drugs) {
+    for (const e of d.enzymes) {
+      if (!drugsByEnzyme.has(e.enzyme)) drugsByEnzyme.set(e.enzyme, []);
+      drugsByEnzyme.get(e.enzyme).push({ drug: d, enzyme: e });
+    }
+  }
+  const enzymes = [...drugsByEnzyme.keys()]
+    .map((id) => ({
+      id,
+      label: (enzymeDefs[id] || {}).label || id,
+      wikipedia: (enzymeDefs[id] || {}).wikipedia || null,
+      rows: drugsByEnzyme.get(id),
+      keywords: [id, (enzymeDefs[id] || {}).label || id].join(" ").toLowerCase(),
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }));
+
+  /**
+   * The pharmacokinetic interactions implied by the enzyme nodes, for one drug.
+   *
+   * Derived, never authored, exactly like `flowSystems` and circuit membership: an
+   * inhibitor (or inducer) of an enzyme meets every substrate of that same enzyme.
+   * Recomputing it here means it can never drift from the nodes it comes from.
+   *
+   * `direction` is what happens to the OTHER drug's blood level: +1 when this drug
+   * inhibits an enzyme the other is a substrate of (the other accumulates), -1 when
+   * it induces one (the other is cleared faster). A drug that is only a substrate
+   * has no effect of its own, but is still *affected* by others, so both sides are
+   * returned. This is a flag to check, never a contraindication: the panel says so.
+   * @param {object} drug
+   * @returns {{affects: object[], affectedBy: object[]}}
+   */
+  function pkInteractionsOf(drug) {
+    // Keyed by (other drug, direction), not by enzyme: two drugs often meet at more
+    // than one isoform (fluoxetine inhibits both CYP2D6 and CYP3A4, aripiprazole is
+    // a substrate of both), and listing that pair twice reads as a rendering bug.
+    // One row per pair, naming every enzyme they share.
+    const merge = (map, other, enzymeRow, direction) => {
+      if (other.id === drug.id) return;
+      const key = `${other.id}:${direction}`;
+      const hit = map.get(key);
+      if (hit) {
+        if (!hit.enzymes.some((x) => x.enzyme === enzymeRow.enzyme)) {
+          hit.enzymes.push(enzymeRow);
+        }
+        return;
+      }
+      map.set(key, { drug: other, enzymes: [enzymeRow], direction, key });
+    };
+    const affects = new Map();
+    const affectedBy = new Map();
+    for (const e of drug.enzymes) {
+      const rows = drugsByEnzyme.get(e.enzyme) || [];
+      if (e.direction !== 0) {
+        // This drug modulates the enzyme: it moves every substrate of it.
+        for (const r of rows) {
+          if (r.enzyme.role === "substrate") merge(affects, r.drug, e, e.direction);
+        }
+      }
+      if (e.role === "substrate") {
+        // This drug rides the enzyme: every modulator of it moves this drug.
+        for (const r of rows) {
+          if (r.enzyme.direction !== 0) {
+            merge(affectedBy, r.drug, r.enzyme, r.enzyme.direction);
+          }
+        }
+      }
+    }
+    return { affects: [...affects.values()], affectedBy: [...affectedBy.values()] };
+  }
+
   // Build the merged "Receptors & targets" browse list: one normalized entry per
   // focusable *thing a drug can act on*, so a transporter (SERT), enzyme (MAO-A) or
   // channel (Nav) can be explored on its own, not only as a line in a drug's "Acts
@@ -964,6 +1079,9 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     targets,
     drugs,
     drugsByTarget,
+    enzymes,
+    drugsByEnzyme,
+    pkInteractionsOf,
     byId,
     meta: {
       projectionColors,

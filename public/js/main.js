@@ -1593,6 +1593,16 @@ function createPanelTabs() {
       return true;
     },
     /**
+     * Close one detail tab by key, wherever it sits in the strip. Returns whether
+     * it was open. Used by a legend row that toggles its own focus off but has no
+     * 3D state for `selection.clear()` to unwind (the Enzymes section).
+     */
+    close(key) {
+      if (!openTabs.some((tb) => tb.key === key)) return false;
+      closeTab(key);
+      return true;
+    },
+    /**
      * Cycle the active tab one step (`+1` next, `-1` previous) through the pinned
      * Settings tab plus the open detail tabs, wrapping around. Landing on a detail
      * re-applies its 3D focus (same as clicking it); landing on Settings returns
@@ -1828,6 +1838,7 @@ function createInfoPanel(data, sourcingModal) {
   // panel's "Interacting drugs" list is clicked. The panel hands back the drug
   // record; the caller focuses it exactly like its Drugs legend row / search pick.
   let onDrugPick = () => {};
+  let onEnzymePick = () => {};
   // Set by the caller (onProjectionGroup): what to do when a projection-group row in
   // a drug panel's "Projections affected" list is clicked. The panel hands back the
   // group record; the caller focuses it exactly like its Projections legend row.
@@ -2537,6 +2548,40 @@ function createInfoPanel(data, sourcingModal) {
   // Ki tie-broken by name); classes ordered by the class's hardest binding (its min
   // Ki), classes with no measured Ki keeping the meta / Drugs-legend order among
   // themselves. Matches the drug panel's "Acts on" order and the target legend.
+  /**
+   * One row of a metabolism list, shared by the drug panel's Metabolism section and
+   * the enzyme panel's drug list so both render the same claim identically (the
+   * no-duplication rule: the two views are the same node seen from either end).
+   *
+   * `label` is whichever end the *other* panel is not: the enzyme's name on a drug
+   * panel, the drug's name on an enzyme panel. `showRole` prints the role inline,
+   * for the drug panel where rows are not grouped under a role heading.
+   * @param {object} row       the normalized enzyme row (js/data.js)
+   * @param {string} label     the row's headline text
+   * @param {(() => void)|null} onClick  jump target, or null for an inert row
+   * @param {{showRole?: boolean}} [opts]
+   */
+  const enzymeRow = (row, label, onClick, { showRole = false } = {}) => {
+    const li = el("li");
+    const text = el("span", "bind-text");
+    text.appendChild(el("span", "bind-target", label));
+    const parts = [];
+    if (showRole) parts.push(row.roleLabel);
+    if (row.strengthLabel) parts.push(row.strengthLabel);
+    if (parts.length) {
+      text.appendChild(el("span", "bind-action", ` ${parts.join(" · ")}`));
+    }
+    li.appendChild(text);
+    li.appendChild(row.sources && row.sources.length
+      ? makeProvenancePill(row.provenance, sourcesTip(row.sources))
+      : makeProvenancePill(row.provenance || null));
+    if (onClick) {
+      li.classList.add("clickable");
+      li.addEventListener("click", onClick);
+    }
+    return li;
+  };
+
   const appendDrugsByCategory = (list, container) => {
     const cats = data.meta.drugCategoryLabels || {};
     const byCat = new Map();
@@ -2995,6 +3040,53 @@ function createInfoPanel(data, sourcingModal) {
     },
 
     /**
+     * Populate the panel for a metabolic *enzyme* (a row in the Enzymes section, or
+     * an enzyme row inside a drug's Metabolism list): its Wikipedia reference, then
+     * the drugs at it grouped by the role they play (substrates first, then the
+     * inhibitors and inducers that move them).
+     *
+     * Deliberately the lightest panel in the app: an enzyme is pharmacokinetics, so
+     * it has no anatomy to show, no expression regions and nothing to light in the
+     * 3D scene. Each drug row carries the grade pill of the very node that put it
+     * here (the Stahl pharmacokinetics line), so the claim is auditable in place.
+     */
+    showEnzyme(enzyme) {
+      body.innerHTML = "";
+      body.appendChild(el("h2", "info-title", enzyme.label));
+      body.appendChild(el("div", "info-group", t("enzyme.heading")));
+      appendReference({ url: enzyme.wikipedia });
+
+      const rows = enzyme.rows || [];
+      const wrap = el("div", "info-bindings info-interactors");
+      wrap.appendChild(el("h3", null, `${t("enzyme.drugs")} (${rows.length})`));
+      if (!rows.length) {
+        wrap.appendChild(el("p", "info-desc", t("enzyme.noDrugs")));
+        body.appendChild(wrap);
+        return;
+      }
+      // Group by role in the vocabulary's own order (substrate, inhibitor, inducer)
+      // rather than alphabetically: a reader wants "what does this enzyme clear"
+      // before "what interferes with it".
+      const byRole = new Map();
+      for (const r of rows) {
+        if (!byRole.has(r.enzyme.role)) byRole.set(r.enzyme.role, []);
+        byRole.get(r.enzyme.role).push(r);
+      }
+      for (const role of ["substrate", "inhibitor", "inducer"]) {
+        const group = byRole.get(role);
+        if (!group) continue;
+        group.sort((a, b) => a.drug.displayName.localeCompare(b.drug.displayName));
+        wrap.appendChild(el("h4", "drug-cat", group[0].enzyme.roleLabel));
+        const ul = el("ul");
+        for (const { drug, enzyme: row } of group) {
+          ul.appendChild(enzymeRow(row, drug.displayName, () => onDrugPick(drug)));
+        }
+        wrap.appendChild(ul);
+      }
+      body.appendChild(wrap);
+    },
+
+    /**
      * Populate the panel for a *drug* (clicking a drug legend/list row or a drug
      * search result): its name, primary category, a Wikipedia link, a one-line
      * description, its class(es) + nomenclature, then the "Acts on" list of
@@ -3290,6 +3382,65 @@ function createInfoPanel(data, sourcingModal) {
             () => flashLi.classList.remove("metab-flash"), { once: true });
         }
       }
+      // Metabolism: the enzymes that clear this drug or whose activity it changes,
+      // then the drug -> drug interactions those roles imply. Pharmacokinetics, so
+      // it sits with the T½ / metabolites material and lights nothing in the scene.
+      if (drug.enzymes && drug.enzymes.length) {
+        const enzWrap = el("div", "info-bindings");
+        enzWrap.appendChild(el("h3", null, t("drug.metabolism")));
+        enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
+        const ul = el("ul");
+        // Substrate rows first (how the body clears it), then what it does to others.
+        const order = { substrate: 0, inhibitor: 1, inducer: 2 };
+        const sorted = [...drug.enzymes].sort((a, b) =>
+          (order[a.role] - order[b.role]) || a.label.localeCompare(b.label));
+        for (const row of sorted) {
+          const enz = (data.enzymes || []).find((e) => e.id === row.enzyme);
+          ul.appendChild(enzymeRow(row, row.label,
+                                   enz ? () => onEnzymePick(enz) : null,
+                                   { showRole: true }));
+        }
+        enzWrap.appendChild(ul);
+        body.appendChild(enzWrap);
+
+        // Derived, never stored (see pkInteractionsOf): this drug and the listed one
+        // meet at the same enzyme. Capped, because a CYP3A4 inhibitor legitimately
+        // meets dozens of substrates and an uncapped dump would bury the panel; the
+        // remainder is counted out loud rather than silently dropped.
+        const pk = data.pkInteractionsOf ? data.pkInteractionsOf(drug) : null;
+        const edges = pk ? [
+          ...pk.affects.map((x) => ({ ...x, outgoing: true })),
+          ...pk.affectedBy.map((x) => ({ ...x, outgoing: false })),
+        ] : [];
+        if (edges.length) {
+          const pkWrap = el("div", "info-bindings");
+          pkWrap.appendChild(el("h3", null, t("drug.pkInteractions")));
+          pkWrap.appendChild(el("p", "legend-caption", t("drug.pkInteractionsHint")));
+          edges.sort((a, b) => a.drug.displayName.localeCompare(b.drug.displayName));
+          const CAP = 12;
+          const pkUl = el("ul");
+          for (const edge of edges.slice(0, CAP)) {
+            const key = edge.outgoing
+              ? (edge.direction > 0 ? "drug.pkRaises" : "drug.pkLowers")
+              : (edge.direction > 0 ? "drug.pkRaisedBy" : "drug.pkLoweredBy");
+            const li = el("li", "clickable");
+            const text = el("span", "bind-text");
+            text.appendChild(el("span", "bind-target",
+                                t(key, { drug: edge.drug.displayName })));
+            text.appendChild(el("span", "bind-action",
+                                ` · ${edge.enzymes.map((x) => x.label).join(", ")}`));
+            li.appendChild(text);
+            li.addEventListener("click", () => onDrugPick(edge.drug));
+            pkUl.appendChild(li);
+          }
+          pkWrap.appendChild(pkUl);
+          if (edges.length > CAP) {
+            pkWrap.appendChild(el("p", "legend-caption",
+                                  t("drug.pkMore", { n: edges.length - CAP })));
+          }
+          body.appendChild(pkWrap);
+        }
+      }
       // No standalone drug-level "Source(s)" block: the Stahl citation that backs
       // the drug is shown per-binding (each binding's pill above), so a source
       // always refers to a specific binding node rather than "the whole drug".
@@ -3529,6 +3680,15 @@ function createInfoPanel(data, sourcingModal) {
     },
 
     /**
+     * Register the handler run when an enzyme row (a drug panel's Metabolism list)
+     * is clicked. Called with the enzyme record from `data.enzymes`; the caller
+     * opens it exactly like its Enzymes legend row.
+     */
+    onEnzyme(fn) {
+      onEnzymePick = fn;
+    },
+
+    /**
      * Register the handler run when a projection-group row in a drug panel's
      * "Projections affected" list is clicked. Called with the group record; the
      * caller focuses it exactly like its Projections legend row / search pick.
@@ -3656,6 +3816,49 @@ function buildTargetLegend(data, onPick) {
     }
   }
 
+  return function reflect(activeId) {
+    for (const { row, id } of rows) {
+      const selected = id === activeId;
+      row.classList.toggle("selected", selected);
+      row.classList.toggle("dimmed", activeId !== null && !selected);
+    }
+  };
+}
+
+/**
+ * Build the Enzymes section (#enzymes-body): one row per metabolic isoform some
+ * drug actually touches, natural-sorted (CYP1A2 ... CYP3A5), each showing how many
+ * drugs sit on it and clickable to open its panel.
+ *
+ * The metabolism mirror of buildTargetLegend, minus everything 3D: an enzyme has no
+ * anatomy, so a row never dims the brain or scatters dots, and the section caption
+ * says so rather than leaving a user waiting for the scene to react.
+ * @param {import("./data.js").BrainData} data
+ * @param {(enzyme: object) => void} onPick
+ * @returns {(activeId: string|null) => void} reflect: lights the active row
+ */
+function buildEnzymeLegend(data, onPick) {
+  const container = document.getElementById("enzymes-body");
+  if (!container) return () => {};
+  container.replaceChildren();
+  const rows = [];
+  const caption = document.createElement("p");
+  caption.className = "legend-caption";
+  caption.textContent = t("enzymes.hint");
+  container.appendChild(caption);
+  for (const enz of data.enzymes || []) {
+    // Neutral swatch: an enzyme carries no effect colour (it is not a binding), and
+    // borrowing one would imply a net effect the row does not claim.
+    const row = addLegendItem(container, "#9aa0a6", enz.label);
+    const tag = document.createElement("span");
+    tag.className = "legend-tag";
+    tag.textContent = String(enz.rows.length);
+    row.appendChild(tag);
+    row.classList.add("clickable");
+    row.dataset.tourId = `enzyme:${enz.id}`;
+    row.addEventListener("click", () => onPick(enz));
+    rows.push({ row, id: enz.id });
+  }
   return function reflect(activeId) {
     for (const { row, id } of rows) {
       const selected = id === activeId;
@@ -4679,6 +4882,8 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const receptorsBody = document.getElementById("receptors-body");
   const drugsToggle = document.getElementById("drugs-toggle");
   const drugsBody = document.getElementById("drugs-body");
+  const enzymesToggle = document.getElementById("enzymes-toggle");
+  const enzymesBody = document.getElementById("enzymes-body");
 
   // One collapse-header behaviour shared by the panel, the Controls section and
   // the accordion sections: toggle aria-expanded + the body's hidden flag. The
@@ -4757,6 +4962,7 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const sections = [
     { toggle: drugsToggle, body: drugsBody },
     { toggle: receptorsToggle, body: receptorsBody },
+    { toggle: enzymesToggle, body: enzymesBody },
     { toggle: structuresToggle, body: structuresBody },
     { toggle: projectionsToggle, body: projectionsBody },
   ];
@@ -5411,8 +5617,8 @@ function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal,
   const collapseOpen = () => {
     const search = document.getElementById("search");
     if (search && !search.hidden) click("search-toggle");
-    for (const id of ["drugs-toggle", "receptors-toggle", "structures-toggle",
-                      "projections-toggle"]) {
+    for (const id of ["drugs-toggle", "receptors-toggle", "enzymes-toggle",
+                      "structures-toggle", "projections-toggle"]) {
       const tg = document.getElementById(id);
       if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
     }
@@ -5446,6 +5652,7 @@ function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal,
     const BODIES = [
       ["drugs-toggle", "drugs-body"],
       ["receptors-toggle", "receptors-body"],
+      ["enzymes-toggle", "enzymes-body"],
       ["structures-toggle", "structures-body"],
       ["projections-toggle", "projections-body"],
     ];
@@ -5886,7 +6093,14 @@ async function main() {
   selection.onHighlight((mesh) => labels.setPinned(mesh ? isolateGroupFor(mesh) : null));
   // When the last detail tab is closed, nothing is selected any more: clear the
   // 3D focus (halo / isolate / dim / dots) so the scene matches the empty strip.
-  tabs.setOnEmpty(() => { selection.clear(); afterTabChange(); });
+  // Last tab closed: drop the 3D focus and, since an enzyme focus has no 3D state
+  // for selection.clear() to unwind, its row highlight too.
+  tabs.setOnEmpty(() => {
+    selection.clear();
+    activeEnzymeId = null;
+    reflectEnzymes(null);
+    afterTabChange();
+  });
 
   // Circuit "traveling pulse" animation: glowing beads sweeping each isolated
   // circuit's arrows from source to target (js/circuit-anim.js). Started from the
@@ -5946,6 +6160,31 @@ async function main() {
     }
   });
   reflectTargets = buildTargetLegend(data, toggleTarget);
+
+  // Enzyme focus (the Enzymes section + a drug panel's Metabolism row). Unlike every
+  // other focus in this file it touches NOTHING in the 3D scene: a metabolic enzyme
+  // is pharmacokinetics with no anatomy, so there is no mesh set to dim, no dots and
+  // no arrows to pin. It is a panel + tab only, and the section caption says so, so
+  // the still scene reads as intended rather than as a broken click.
+  let activeEnzymeId = null;
+  let reflectEnzymes = () => {};
+  const focusEnzyme = (enz) => {
+    info.showEnzyme(enz);
+    activeEnzymeId = enz.id;
+    reflectEnzymes(activeEnzymeId);
+    openDetailTab(`enzyme:${enz.id}`, enz.label, () => focusEnzyme(enz));
+  };
+  const toggleEnzyme = (enz) => {
+    if (activeEnzymeId === enz.id) {
+      activeEnzymeId = null;
+      reflectEnzymes(null);
+      tabs.close(`enzyme:${enz.id}`);
+    } else {
+      focusEnzyme(enz);
+    }
+  };
+  reflectEnzymes = buildEnzymeLegend(data, toggleEnzyme);
+  info.onEnzyme(focusEnzyme);
 
   // Per-drug animation + focus (js/drug-anim.js), the same shape as the receptor
   // focus above. Clicking a drug row dims the brain to the union of regions its
