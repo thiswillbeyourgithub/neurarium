@@ -595,10 +595,20 @@ that half is settled; ODbL's share-alike on a *derived database* is the new part
 satisfied in practice because the emitted `public/data/` is published openly in an AGPL repo.
 Wiring this means adding the attribution + licence line to the corpus registry entry.
 
-**Verdict: worth doing, as corpus #11 `gtopdb_ki`, scoped to what PDSP cannot reach.** The
-shape is already proven twice over: it is PDSP's file shape (one CSV, `page` = a row key, the
-quote = the reconstructed row, `check_data.py` confirms the row exists) and GtoPdb's existing
-corpus #7 join (our target -> gene symbol). Priority stays PDSP first, GtoPdb second, Wikipedia
-third, so no existing `verified` Ki moves. The 11 direction conflicts should be recorded rather
-than silently resolved: they are a Stahl-vs-primary-literature disagreement a reader deserves to
-see.
+**Verdict: adopted.** Shipped in v3.26.0 as corpus #11 `gtopdb_ki`, scoped to what PDSP cannot
+reach. It reuses the existing `pages_dir` quote gate unchanged (the bulk CSV is flattened to one
+quotable row line per interaction under `data_sources/gtopdb/pages_ki/<slug>.md`), and joins our
+targets by gene symbol exactly like corpus #7. Priority is PDSP first, GtoPdb second, Wikipedia
+third, so no existing `verified` Ki moved.
+
+What actually landed: **35 Ki-less bindings gained a measured affinity** (393 already had one and
+were left alone), and **193 `affinity_only` bindings gained a curated direction**, written as
+`provisional_action`. Corpus-wide, measured-Ki coverage went **83% -> 86%** and the drugs with no
+measured affinity at all **58 -> 37**; the 37 that remain are the ones no binding database reaches
+(benzodiazepines and Z-drugs at the GABA-A modulatory site, neurosteroids, broad-mechanism
+anticonvulsants). The applier reports **28 compatible refinements** (inverse-agonist vs
+antagonist, partial-agonist vs agonist: same effect, finer wording) and **10 genuine direction
+conflicts** separately, resolving neither: ours wins in the data, and the disagreement is printed
+for a human. The `provisional_action` bindings are shown in the panel with their source but are
+tagged "not animated" and held out of the 3D layer pending an explicit call (top bullet in
+TODO.md).

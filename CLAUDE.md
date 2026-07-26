@@ -587,7 +587,12 @@ fixed Stahl list.
   combos carry no Ki. A measured Ki backs `_binding_grade`, lifting the binding to `verified`.
   `fetch_ki.py --apply` drops every PDSP assay >=10 uM as "inactive", so a genuine but weak binder
   (caffeine at A2a) can only be recorded by hand; such a `ki.source` carries `"curated": true` so the
-  idempotent `--apply` refresh never strips it (`_is_curated_ki`).
+  idempotent `--apply` refresh never strips it (`_is_curated_ki`). Where PDSP has no assay at all,
+  GtoPdb's curated interactions (corpus #11) fill in: a Ki for a Ki-less binding, and a
+  **`provisional_action`** for an `affinity_only` one (see `apply_gtopdb_ki.py`). Such a binding
+  renders its action with the source pill but is tagged "not animated" (`drug.notAnimated`) and is
+  still held out of the 3D layer, sharing the `affinity_only` exclusion via the single `inert` term
+  in `js/data.js` (an open decision, see TODO.md).
 
 5 drugs stay unbound as genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
 triiodothyronine, caprylidene). The Stahl corpus `url` is `"TODO"` (the grade, not the link, conveys
@@ -710,6 +715,19 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
   emits a candidate-sentence worklist; an LLM extracts each drug's ordered trade names, and
   `apply_brand_names.py` quote-gates every name verbatim on the FR page (the hallucination backstop),
   writing the first as `fr` and the rest as `eu`. A brand source's `quote` is the brand name.
+- **#11 GtoPdb ligand interactions** (`gtopdb_ki`, `page` = the GtoPdb ligand slug) is GtoPdb's
+  *other* half (#7 is its tissue API) and complements PDSP (#5) where a radioligand panel
+  structurally cannot reach: **targets PDSP does not assay** (the GABA-A benzodiazepine site,
+  MAO-A/B, acetylcholinesterase, orexin, melatonin, SV2A, Nav) and the **direction** of an
+  `affinity_only` binding. One versioned bulk CSV (`DATA/interactions.csv`), so
+  `fetch_gtopdb_ki.py` is deterministic (no judge): it joins on **gene symbol** (case-folded, a
+  rodent row reads `Scn2a`), flattens each matched compound's rows into
+  `data_sources/gtopdb/pages_ki/<slug>.md`, and a proposal's `quote` is one verbatim row line, so
+  the normal quote gate applies unchanged. `apply_gtopdb_ki.py` merges **confirm-only** (never
+  adds a target) and **PDSP-first** (a Ki only where there is none; a stated direction always
+  wins), reporting rather than resolving a disagreement. Only a pKi/pKd becomes a `ki`: a
+  functional potency (pIC50/pEC50) rides along as the direction's citation. Contents CC BY-SA 4.0,
+  database ODbL.
 
 **Descriptions** are not a node kind (not tallied). Drugs, structures and non-receptor targets carry
 **no baked description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via

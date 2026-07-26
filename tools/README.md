@@ -103,23 +103,29 @@ network, idempotent, polite; each touches only what changed). Always finish with
    `https://pdspdb.unc.edu/databases/kiDownload/download.php` over
    `data_sources/books/pdsp_ki/KiDatabase.csv` (author-side; see that dir's `README.md`), then
    `python tools/fetch/fetch_ki.py --apply` to rewrite `drugs_data.jsonl`'s `ki` + `affinity_only`.
-4. **GtoPdb receptor expression** (the `receptor_locations` sources): `python
+4. **GtoPdb ligand interactions** (the `gtopdb_ki` Ki fallback + the `provisional_action`
+   directions): `python tools/fetch/fetch_gtopdb_ki.py` re-downloads the bulk
+   `interactions.csv` and rebuilds `data_sources/gtopdb/pages_ki/` (author-side) +
+   `tools/generated_cache/gtopdb_ki.json`, then `python tools/sourcing/apply_gtopdb_ki.py`
+   quote-gates + merges into `drugs_data.jsonl`. Run it **after** `fetch_ki.py`, since it only
+   fills what PDSP left empty. See CLAUDE.md Source provenance (corpus #11).
+5. **GtoPdb receptor expression** (the `receptor_locations` sources): `python
    tools/fetch/fetch_gtopdb.py` re-pulls each receptor's tissue comments (caches to
    `data_sources/gtopdb/`, author-side), then run the confirm-only judge over
    `data_sources/gtopdb/worklist.json` and `python tools/sourcing/apply_location_sources.py --judged <f>`
    to merge new `verified` sources into `tools/generated_cache/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
-5. **Allen AHBA expression** (the `target_locations` + residual `receptor_locations`
+6. **Allen AHBA expression** (the `target_locations` + residual `receptor_locations`
    sources): `python tools/fetch/fetch_allen.py` re-pulls each donor's microarray PACall (caches
    to `data_sources/allen/`, author-side; ~2GB across donors), then `python
    tools/sourcing/apply_location_sources.py --corpus allen` merges the deterministic `verified`
    sources (no judge) into `tools/generated_cache/location_sources.json`. See CLAUDE.md Source provenance (corpora #7/#8).
-6. **Allen AHBA expression density** (the `receptor_density` + `target_density` profiles): the same
+7. **Allen AHBA expression density** (the `receptor_density` + `target_density` profiles): the same
    `fetch_allen.py` run also z-scores each gene's microarray intensity per region and writes
    `data_sources/allen/density.json` (pass `--skip-density` to opt out of the heavy
    MicroarrayExpression read), then `python tools/sourcing/apply_expression_density.py` re-gates each
    profile quote and writes `tools/generated_cache/expression_density.json`. See CLAUDE.md Expression density.
-7. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
-8. `python tools/update_readme_stats.py` — refresh the README sourcing table
+8. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
+9. `python tools/update_readme_stats.py` — refresh the README sourcing table
    (CI runs it `--check`).
 
 Panel **descriptions** need no refresh script: each fetches the current Wikipedia lead
@@ -207,6 +213,19 @@ Screenshots).
 - `tools/fetch/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.
+- `tools/fetch/fetch_gtopdb_ki.py` — stdlib. Downloads GtoPdb's bulk ligand-interaction CSV
+  (`data_sources/gtopdb/interactions.csv`, author-side), joins it to our drugs by name (an HTML-stripping
+  `norm` + a curated `LIGAND_ALIASES`) and to our targets by **case-folded gene symbol** (reusing
+  `fetch_gtopdb.RECEPTOR_GENES` + `TARGET_GENES`, plus `EXTRA_TARGET_GENES` for the ionotropic subunit
+  families), and writes one quotable row line per interaction into `data_sources/gtopdb/pages_ki/<slug>.md`
+  (corpus #11 `gtopdb_ki`) + the proposals into `tools/generated_cache/gtopdb_ki.json`. Only a pKi/pKd
+  becomes a Ki (`10^(9-pKi)` nM); a functional potency rides along as the direction's citation. No judge:
+  the CSV's own `type` column is the direction. See CLAUDE.md Source provenance (corpus #11).
+- `tools/sourcing/apply_gtopdb_ki.py` — merges those proposals into `drugs_data.jsonl`: confirm-only (never
+  adds a target), PDSP-first (a `ki` only where there is none), and a `provisional_action` only on an
+  `affinity_only` binding, so a stated direction always wins. A disagreement is reported, split into
+  compatible refinements (`COMPATIBLE`) and genuine conflicts, never auto-resolved. Re-gates every quote
+  through `check_data.normalize_for_match`; idempotent (`strip_previous` rebuilds its own prior write).
 - `tools/fetch/fetch_wikipedia_pharmacology.py` — `uv run` (deps: beautifulsoup4). Fetches a drug's
   English Wikipedia article pinned to its revision id, stores the whole page author-side
   (`data_sources/wikipedia/raw/<slug>.html` + `pages/<slug>.md`, corpus #9 `wikipedia_pharm`), and mines
@@ -332,7 +351,9 @@ there is no node-level catch-all `sources` block.
   `category_sources`), optional `nbn{en,fr}` (+ `nbn_sources`, + `nbn_nonstandard:true` when the
   value is Stahl's class descriptor not a formal NbN), `bindings[]` (each: `target`, `action`,
   optional `effect`/`note{en,fr}`/`tentative`/`sources[{corpus,page,quote,provenance}]`/`ki`
-  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
+  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)/
+  `provisional_action:true` (a GtoPdb-sourced direction on a formerly `affinity_only` binding:
+  shown with its source, still panel-only)),
   optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
   `metabolites[]` (each: `name`, optional `half_life`(+`half_life_sources`), `sources[]`, optional
   `drug_id` linking a modeled drug, optional `bindings[]` for a non-modeled metabolite: same shape as a
