@@ -522,6 +522,99 @@ story (P-gp substrates such as paliperidone; the poorly-penetrant benzamides sul
 amisulpride; peripherally-restricted agents), sourced from Stahl's pharmacokinetics prose
 like any other node, rather than a number pinned to all 179.
 
+### Drug **metabolism**: which CYP a drug touches, and which enzyme makes a metabolite
+
+Two halves of one ask: (a) be able to look up which drug interacts with which CYP, and
+(b) when we list an active metabolite, record which enzyme produced it. Both are
+pharmacokinetics, so neither has a place in the 3D scene (hepatic enzymes are not brain
+regions, and the brain's own CYP expression is a separate and far weaker story). They are
+panel + browse data.
+
+**What the corpora we already hold contain.** Measured, not guessed:
+
+- **Stahl (corpus #1) is the natural source and it is already structured.** All 158
+  monographs carry a `Pharmacokinetics?` block and a `Drug Interactions?` block; **92**
+  and **80** of them respectively name a CYP isoform, in terse role-explicit lines
+  ("Substrate for CYP2D6 and CYP1A2", "Metabolized primarily by CYP1A2", "Inhibits
+  CYP2C19", "CYP3A4 inducers may increase clearance of ..."). Feasibility against the
+  existing quote gate was measured directly: of the CYP-bearing bullets, **109/113 (96%)**
+  of the pharmacokinetics ones and **176/191 (92%)** of the interaction ones are already
+  **verbatim** on that drug's page range, so `pages_dir` gating applies unchanged. The
+  misses are page-break artifacts (a wrapped line, a spliced-in DOI footer), fixable by
+  shortening the quote.
+- **Wikipedia EN (corpus #9)**, already stored for 220 of our 235 drugs: **128** name at
+  least one isoform (median 2 per page, max 9). It adds **51 drugs Stahl has no CYP line
+  for**, which is exactly the non-Stahl roster (the European benzodiazepines, the
+  barbiturates, the recreational agents). Prose, not a table, so it needs the same
+  extract-then-judge pass a binding gets.
+- **Union coverage of the two: 137 / 235 drugs.** Isoform spread is the expected one:
+  3A4 (61), 2D6 (44), 1A2 (25), 2C19 (16), 2C9 (10), then a tail.
+- **Third-party interaction tables** (FDA's "Table of Substrates, Inhibitors and
+  Inducers", Indiana's Flockhart table, DrugBank). The FDA one is US-government work and
+  so reusable, and it is where the strong/moderate/weak vocabulary comes from, but it
+  lists *index and example* drugs rather than a full roster, and it is HTML with no
+  machine-readable download. Its page 404'd from this session, so this paragraph is
+  recalled, not verified: re-check before relying on it. Flockhart and DrugBank are not
+  openly licensed. **None is needed to start**: the corpora we already hold cover more of
+  *our* roster than an index-drug list would.
+
+**The metrics.** Three, in increasing cost, and the recommendation is to stop after two:
+
+1. **role** (categorical, always stated): `substrate` / `inhibitor` / `inducer`. This is
+   the axis that carries the clinical meaning, and the only one every source states.
+2. **strength** (ordinal, often stated): for a substrate `major` / `minor` (Stahl writes
+   "primarily", "minor route"); for an inhibitor or inducer the regulatory `strong` /
+   `moderate` / `weak` tiers. Ordinal on purpose. The fold-change in the victim drug's AUC
+   that defines those tiers is essentially never in our corpora, and publishing a number
+   we cannot source would repeat the `logBB` mistake above.
+3. **a quantitative Ki / IC50 on the enzyme**: exists in the literature, scattered across
+   papers, no open corpus-scale table. Skip, exactly as with Kp,uu. The ordinal tier is
+   what a prescriber actually reasons with.
+
+**The node kinds.** Two, both ordinary graded nodes under the existing contract:
+
+- **`drug_enzymes`**, one node per (drug, enzyme, role) triple, on the drug as
+  `enzymes[]`: `{enzyme, role, strength?, sources[]}`. Yield from the Stahl
+  pharmacokinetics block alone: **75 substrate drugs, 20 inhibitors, 5 inducers = 86
+  drugs**; a few hundred nodes once the interaction block and Wikipedia are folded in.
+  Small enough not to swamp the headline the way per-region density would have.
+- **`drug_metabolite_enzyme`**, the second half of the ask, on the existing metabolite row
+  as `formed_by`: `{enzyme, reaction?, sources[]}`. **This one is genuinely thin.** Of our
+  36 metabolite rows only **8** have a Stahl line naming both the metabolite and the
+  forming enzyme ("Metabolized to an active metabolite, nortriptyline ... by demethylation
+  via CYP1A2"), and most Wikipedia matches turn out to be the metabolite *inhibiting* an
+  enzyme rather than being *made* by one. Expect roughly 10-15 of 36 sourceable and the
+  rest honestly `NOSOURCE`. Still worth having: it is the prodrug story (why a CYP2D6 poor
+  metabolizer gets no effect from codeine or tramadol). Do it as a small hand-curated set,
+  not a pipeline.
+
+Name the field **`enzyme`, not `cyp`**, and validate it against an `ENZYMES` vocabulary in
+`generate_data.py` emitted into `meta.json` (like `drug_targets`): the non-CYP routes are
+common and already show up in the corpus (UGT glucuronidation, plasma esterases, MAO-A/B,
+flavin monooxygenase). Keep the reaction verb when the source states one ("demethylation",
+"hydroxylation", "hydrolysis of the valine ester"), since it is what makes the row readable.
+
+**Where it surfaces.** `showDrug` gains a **Metabolism** section beside the T½ chip, one
+row per enzyme carrying a role glyph, the strength, and its own grade pill, shaped like
+the Acts-on list. Each row is clickable into a new **Enzymes** browse section (mirroring
+Receptors & targets) whose panel lists that enzyme's substrates, inhibitors and inducers.
+
+**The payoff is derived, not stored.** An inhibitor (or inducer) of enzyme X plus a
+substrate of X is a predicted pharmacokinetic interaction. Measured on the Stahl
+pharmacokinetics lines *alone* that is already **1014 drug -> drug edges**. Compute it in
+`js/data.js` like `flowSystems` and circuit membership, never author it, so it cannot
+drift from the nodes; render the direction (A raises / lowers B's level). It must ship
+with the caveat, in the caption and not only in a tooltip: an overlap is a flag to check,
+never a contraindication, and the absence of an edge is not a safety claim. This is a
+knowledge map, not a prescribing aid.
+
+**Verdict: adopt, in two steps.** Step 1, the drug <-> enzyme roles out of Stahl's
+pharmacokinetics block: it is regular enough to grep, so it needs **no LLM judge at all**
+(the same argument that makes `apply_nbn_sources.py` stronger than a judge for the NbN
+line), and it lands 86 drugs. Step 2, the Wikipedia sweep for the 51 drugs Stahl does not
+reach, plus the metabolite `formed_by` hand-curation. Do **not** open with an external
+interaction table.
+
 ## Candidate new *sources* for data we already hold (surveyed 2026-07-26)
 
 Unlike the section above, this is not a new axis: it is a second opinion on nodes that already
