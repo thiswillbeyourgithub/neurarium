@@ -162,7 +162,7 @@ Drug active metabolites         ████████████████
 Projection groups               ██████████████████████████  100%      11/11
 Functional circuits             ██████████████████████████  100%        6/6
 Wikipedia reference links       ██████████████████████████   99%    313/315
-Drug target bindings            ██████████████████████████   99%  1495/1511
+Drug target bindings            ██████████████████████████   99%  1497/1511
 Neuron pathways                 █████████████████████████░   97%      56/58
 Receptor system/family          █████████████████████████░   96%      54/56
 Receptor expression regions     ████████████████████████░░   94%    360/383
@@ -175,7 +175,7 @@ Receptor sign (excit./inhib.)   ██████░░░░░░░░░░
 Receptor pre/postsynaptic site  ████░░░░░░░░░░░░░░░░░░░░░░   14%       8/56
 ```
 
-Separately, **measured binding affinity (PDSP Ki) covers 83% of the 1484 drug bindings**; 58 of 169 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
+Separately, **measured binding affinity (PDSP Ki) covers 86% of the 1484 drug bindings**; 37 of 169 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
 
 <!-- SOURCING_STATS:END -->
 
@@ -201,6 +201,7 @@ Every `~` and `✓` grade is checked against one of the sources below. Each is a
 | [Allen Human Brain Atlas, microarray (Hawrylycz et al. 2012)](https://human.brain-map.org/) | Brain transcriptome atlas (microarray) | Receptor & target expression regions |
 | [Wikipedia (English), drug pharmacodynamics table](https://en.wikipedia.org/) | Encyclopedia (pharmacodynamics tables) | Drug binding affinities (Ki) |
 | [Wikipedia (French), drug article (commercial names)](https://fr.wikipedia.org/) | Encyclopedia (French, article prose) | Drug brand names (European / French) |
+| [IUPHAR/BPS Guide to Pharmacology (GtoPdb), ligand interactions](https://www.guidetopharmacology.org/) | Molecular pharmacology (IUPHAR/BPS database) | Drug binding affinities (Ki) and direction |
 
 <!-- SOURCES_TABLE:END -->
 

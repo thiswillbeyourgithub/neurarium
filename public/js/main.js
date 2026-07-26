@@ -2302,6 +2302,11 @@ function createInfoPanel(data, sourcingModal) {
     const parts = [affinity ? t("drug.affinityOnly") : binding.actionLabel,
                    binding.note];
     if (binding.tentative) parts.push(t("drug.speculative"));
+    // A GtoPdb-sourced direction on a binding PDSP had left affinity-only. Said out
+    // loud because the row otherwise looks like any other, yet the drug's animation
+    // deliberately ignores it (see js/data.js `inert`), and a reader watching the
+    // brain would have no way to tell why this target never lights up.
+    if (binding.provisionalAction) parts.push(t("drug.notAnimated"));
     const detail = parts.filter(Boolean).join(" · ");
     if (detail) txt.appendChild(el("span", "bind-action", detail));
     // Ki stacked under the name+action, with its own verified badge beside it.
