@@ -213,6 +213,9 @@ Screenshots).
 - `tools/fetch/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.
+  **When adding one drug, scope every writer with its `--only`** (`fetch_ki.py`, `fetch_gtopdb_ki.py`,
+  `fetch_molecules.py`, `fetch_brand_names.py`): an unscoped refresh legitimately rewrites every drug
+  whose upstream rows moved, burying the one-drug change. A scoped run merges into the committed cache.
 - `tools/fetch/fetch_gtopdb_ki.py` — stdlib. Downloads GtoPdb's bulk ligand-interaction CSV
   (`data_sources/gtopdb/interactions.csv`, author-side), joins it to our drugs by name (an HTML-stripping
   `norm` + a curated `LIGAND_ALIASES`) and to our targets by **case-folded gene symbol** (reusing

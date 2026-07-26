@@ -185,6 +185,17 @@ def main():
         }
         print(f"[{i}/{len(drugs)}] {d['id']:<22} FR={fr_title!r:<28} sentences={len(sents)}")
 
+    # A scoped run only looked at those drugs, so it cannot stand for the whole corpus:
+    # merge over the committed worklist instead of replacing it (a plain write would
+    # silently drop every other drug's candidate sentences).
+    if (args.only or args.limit) and os.path.exists(WORKLIST):
+        with open(WORKLIST, encoding="utf-8") as f:
+            prior = json.load(f)
+        for d in drugs:                        # a re-run that now finds nothing must clear
+            prior.pop(d["id"], None)
+        prior.update(worklist)
+        worklist = prior
+
     with open(WORKLIST, "w", encoding="utf-8") as f:
         json.dump(worklist, f, ensure_ascii=False, indent=2, sort_keys=True)
     print(f"\nwrote {os.path.relpath(WORKLIST, REPO)} ({len(worklist)} drugs)")

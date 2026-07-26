@@ -363,6 +363,16 @@ def main() -> int:
             proposals[drug["id"]] = found
             stats["drugs"] += 1
 
+    # A scoped run only ever *looked* at `only`, so its proposals cannot stand for the
+    # whole corpus: merge them over the committed cache instead of replacing it (a plain
+    # write would silently drop every other drug's proposals).
+    if only and CACHE.exists():
+        prior = json.loads(CACHE.read_text(encoding="utf-8")).get("drugs", {})
+        for did in only:                       # a re-run that now finds nothing must clear
+            prior.pop(did, None)
+        prior.update(proposals)
+        proposals = prior
+
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps({"version": version, "url": URL, "drugs": proposals},
                                 indent=1, ensure_ascii=False, sort_keys=True) + "\n",
