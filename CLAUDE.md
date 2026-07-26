@@ -93,6 +93,8 @@ in `meta.provenance_stats.by_kind`):
   node; `region` na/eu/fr orders them per locale, never shown; na from Stahl, eu/fr from Wikipedia)
 - drug class classification -> a drug's `categories` (+ `category_provenance`) -> `drug_categories`
 - drug elimination half-life (T½) -> a drug's `half_life` (+ `half_life_sources`) -> `drug_half_life`
+- drug metabolism role -> a drug's `enzymes[]` (`{enzyme, role, strength?}`) -> `drug_enzymes`
+  (one node per (enzyme, role) pair; pharmacokinetics, so it has no anatomy, see Drug metabolism)
 - drug active metabolite -> a drug's `metabolites[]` (each `{name, drug_id?, half_life?,
   bindings?, sources}`) -> `drug_metabolites` (a metabolite that is itself a modeled drug
   links via `drug_id` + reuses its bindings/T½)
@@ -246,7 +248,8 @@ Viewer (`public/`):
   replayed from the About popup's "Take a tour" button (`#about-tour`).
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,
   auto-rotate, hover/pick raycasting; `createInfoPanel`; search; the legend builders
-  (`buildLegend`/`buildLegendKey`/`buildTargetLegend`/`buildDrugLegend`); the on-demand render loop.
+  (`buildLegend`/`buildLegendKey`/`buildTargetLegend`/`buildEnzymeLegend`/`buildDrugLegend`); the
+  on-demand render loop.
 - `app-config.js` — `window.__APP_CONFIG__`. This committed copy is the local-dev
   fallback (feature fields empty). In the container `entrypoint.sh` renders an
   env-filled copy into `/gen` and Caddy serves that. Generic name (not
@@ -612,6 +615,34 @@ fixed Stahl list.
 5 drugs stay unbound as genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
 triiodothyronine, caprylidene). The Stahl corpus `url` is `"TODO"` (the grade, not the link, conveys
 provenance).
+
+## Drug metabolism
+
+Which enzymes clear a drug, or have their activity changed by it. **Pharmacokinetics, so it
+has no anatomy**: a liver enzyme is not a brain region, and nothing here ever lights the 3D
+scene (the Enzymes section's caption says so, so a still scene reads as intended).
+
+- **Data.** `ENZYMES` / `ENZYME_ROLES` (`substrate`/`inhibitor`/`inducer`, each with the
+  `direction` it moves a co-prescribed substrate's level) / `ENZYME_STRENGTHS` (`major`/`minor`
+  for a substrate, `strong`/`moderate`/`weak` for the rest) live in `tools/data_generators/drugs.py`,
+  emitted into `meta.enzymes*`. Field is `enzyme`, not `cyp`: the non-CYP routes (UGT, esterases,
+  MAO) will want the same one. Strength is **ordinal on purpose**: the AUC fold-changes behind
+  the regulatory tiers are not in the corpora (see `docs/SOURCING_GAPS.md`).
+- **Sourcing.** `tools/fetch/fetch_cyp.py` reads Stahl's per-drug `Pharmacokinetics` block,
+  which is regular enough ("Substrate for CYP2D6", "Inhibits CYP2C19") that the pass needs **no
+  LLM**: pattern match + the ordinary verbatim quote gate, writing the committed
+  `tools/generated_cache/drug_enzymes.json` that `generate_data.py` merges in (rows are NOT
+  authored in `drugs_data.jsonl`). Only that block is read: the `Drug Interactions` block's
+  isoform sentences are mostly about *other* drugs acting on this one.
+- **Viewer.** `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
+  pill, clickable to the enzyme) and an **Interacts with** list; an **Enzymes** accordion section
+  (`buildEnzymeLegend`) opens `showEnzyme`, that isoform's drugs grouped by role. Both ends share
+  one `enzymeRow` builder (same node, either side).
+- **The drug -> drug edges are derived, never stored** (`pkInteractionsOf` in `js/data.js`, like
+  `flowSystems`): an inhibitor/inducer of an enzyme meets its substrates, one row per (other drug,
+  direction) naming every shared isoform. Capped at 12 with the remainder counted out loud. The
+  caption states it is a flag to check with a prescriber, **never a contraindication**, and that a
+  missing row is not a safety claim.
 
 ## Images
 

@@ -14,8 +14,9 @@ the `#lang-switch` (EN/FR) + a keyboard-shortcuts / reset / search / legend / so
   **animation-speed** slider (`#anim-speed-row`, hidden unless an animation is on screen), the
   **Auto-rotate** / **Show all names** / **Show projections** / **See inside** checkboxes, and the
   **arrow colour-mode** switch (`#color-mode`). Ships open; toggles independently of the accordion.
-- Four **single-open-accordion** sections (opening one closes the others), in on-screen order
-  **Drugs** (`#drugs`, with `#drugs-filter`), **Receptors & targets** (`#receptors`), **Brain structures**
+- Five **single-open-accordion** sections (opening one closes the others), in on-screen order
+  **Drugs** (`#drugs`, with `#drugs-filter`), **Receptors & targets** (`#receptors`), **Metabolising
+  enzymes** (`#enzymes`), **Brain structures**
   (`#structures`, headed by the `panel.structures` string), **Projections** (`#projections`, "Projections & Circuits"). Markup order in
   `index.html` sets the order (see the browse-section comment there).
 - Three **toolbar-icon popups** (all `.modal-overlay`, via `wireModal`): **Legend**
@@ -119,7 +120,8 @@ through beats a nearer non-focused one.
   only on demand (this button, the Legend/About links, the tour's Sources step).
   `buildAboutSourcing(null)` renders the static intro + key immediately, a second call fills the
   tally once loaded.
-- **Receptors & targets** (`#receptors`) / **Drugs** (`#drugs`): see their sections.
+- **Receptors & targets** (`#receptors`) / **Drugs** (`#drugs`) / **Metabolising enzymes**
+  (`#enzymes`, `buildEnzymeLegend` -> `showEnzyme`): see their sections.
 - **About** (`#about-modal`, ⓘ, `wireAboutModal`): a blurb (Olivier Cornelis + Claude), an "open
   an issue" link (`cfg.sourceUrl + "/issues"`, dropped unless `sourceUrl` is repo-like), a Source
   code link, a licence line (AGPL-3.0), a CC BY-SA attribution line, and a Sources & provenance
@@ -184,8 +186,8 @@ whether first picked or re-shown. An empty-space click returns to Settings
 
 > [!IMPORTANT]
 > **Panel changes are cross-cutting: think in node kinds, not one panel.** All info
-> is organized into nodes, and the seven `show*()` views (connection / structure /
-> receptor / target / drug / circuit / projection-group) share the same building
+> is organized into nodes, and the eight `show*()` views (connection / structure /
+> receptor / target / drug / enzyme / circuit / projection-group) share the same building
 > blocks (`makeProvenancePill`, `appendSourcedHeading` = a node's identity line +
 > its grade pill, `pathwayRow` / `appendPathwayList`, `locationList`,
 > `appendReference` / `appendWikiImages`, the "Interacting drugs" / "Found in" lists).
@@ -218,7 +220,7 @@ Views:
   tap explains direction without bubbling to the row click), the other endpoint, and the pathway's
   summary pill (`proj.provenance`, resolved in `js/data.js`). Left/right twin pathways collapse to
   one row (by direction + other-endpoint `base_name` + label).
-- **receptor / target / drug / circuit / projection-group**: see their sections.
+- **receptor / target / drug / enzyme / circuit / projection-group**: see their sections.
 
 A click on empty space closes the panel. **Double-click**: on a structure isolates it; on empty
 space recenters.

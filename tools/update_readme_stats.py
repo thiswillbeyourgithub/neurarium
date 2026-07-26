@@ -91,6 +91,7 @@ KIND_LABELS = {
     "drug_brands": "Drug brand names",
     "drug_categories": "Drug class",
     "drug_half_life": "Drug half-life (T½)",
+    "drug_enzymes": "Drug metabolising enzymes",
     "drug_metabolites": "Drug active metabolites",
     "drug_metabolite_bindings": "Drug metabolite bindings",
     "projections": "Neuron pathways",

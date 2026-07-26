@@ -210,6 +210,12 @@ Screenshots).
   `tools/generated_cache/quote_llm.json` ({quote_id: llm}, applied uniformly by `quote_table`) +
   `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review). See CLAUDE.md
   Source provenance ("The sourcing model").
+- `tools/fetch/fetch_cyp.py`: stdlib, offline. Reads Stahl's per-drug `Pharmacokinetics` block out of
+  the author-side dump, classifies each CYP line's role (`substrate`/`inhibitor`/`inducer`) + optional
+  strength, re-confirms it **verbatim** on a page in that drug's own `INDEX.md` range, and writes the
+  committed `tools/generated_cache/drug_enzymes.json` (merged in at build time, NOT authored in
+  `drugs_data.jsonl`). No LLM: the sentence shape is fixed enough to grep, so the quote gate is the
+  whole guarantee. `--dry-run` reports, `--verbose` lists dropped bullets. See CLAUDE.md Drug metabolism.
 - `tools/fetch/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.
@@ -311,6 +317,9 @@ there is no node-level catch-all `sources` block.
   target also carries `subtypes` (its modeled subtype receptor ids, a sourceless taxonomy the
   viewer lists as per-subtype drug dropdowns); a target with an Allen profile carries the same
   `density` object as a receptor),
+  `enzymes` (metabolic isoform id -> {label, wikipedia}), `enzyme_roles`
+  (role -> {label, `direction`: what it does to a co-prescribed substrate's level}) and
+  `enzyme_strengths` (see CLAUDE.md Drug metabolism),
   `target_type_labels`/`target_type_colors`, `source_corpora`, `density_min_reliability` (the
   cross-donor r floor every published profile clears), `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
@@ -356,6 +365,9 @@ there is no node-level catch-all `sources` block.
   optional `effect`/`note{en,fr}`/`tentative`/`sources[{corpus,page,quote,provenance}]`/`ki`
   (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
   optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
+  `enzymes[]` (each: `enzyme` (a `meta.enzymes` key), `role`, optional `strength`, `sources[]`;
+  one node per (enzyme, role) pair, kind `drug_enzymes`, merged in from the committed
+  `generated_cache/drug_enzymes.json`, never authored),
   `metabolites[]` (each: `name`, optional `half_life`(+`half_life_sources`), `sources[]`, optional
   `drug_id` linking a modeled drug, optional `bindings[]` for a non-modeled metabolite: same shape as a
   drug binding, kind `drug_metabolite_bindings`),
