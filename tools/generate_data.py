@@ -91,6 +91,9 @@ from data_generators.drugs import (  # noqa: E402
     DRUG_EFFECT_COLORS,
     DRUG_EFFECT_LABELS,
     DRUG_TARGETS,
+    ENZYMES,
+    ENZYME_ROLES,
+    ENZYME_STRENGTHS,
     TARGET_TYPE_COLORS,
     TARGET_TYPE_LABELS,
 )
@@ -841,9 +844,63 @@ def _drug_metabolites(drug_id: str, metabolites: Any,
     return out
 
 
+def _drug_enzymes(drug_id: str, rows: Any) -> list[dict[str, Any]]:
+    """Validate + normalize a drug's metabolising / inhibited / induced enzymes.
+
+    One node per (enzyme, role) pair, kind ``drug_enzymes``, shaped
+    ``{enzyme, role, strength?, sources[]}``:
+
+    - ``enzyme`` must be an :data:`ENZYMES` key (``"cyp2d6"``), so a typo cannot ship
+      an isoform the viewer has no label for.
+    - ``role`` is an :data:`ENZYME_ROLES` key: what the drug is *to* that enzyme.
+    - ``strength`` is optional and must belong to :data:`ENZYME_STRENGTHS`; a source
+      that does not qualify the claim leaves it out rather than guessing a tier.
+    - ``sources`` grades the claim like any other node (kind ``drug_enzymes``).
+
+    These rows are not authored in ``drugs_data.jsonl``: they come from the committed
+    ``tools/generated_cache/drug_enzymes.json`` that ``tools/fetch/fetch_cyp.py``
+    writes deterministically from Stahl, so this is a validation pass over generated
+    input, and a bad row is a bug in that fetcher rather than a typo to tolerate.
+    """
+    out: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for row in rows or []:
+        enzyme, role = row.get("enzyme"), row.get("role")
+        label = f"Drug {drug_id!r} enzyme {enzyme!r}"
+        if enzyme not in ENZYMES:
+            raise ValueError(f"{label}: unknown enzyme (see ENZYMES)")
+        if role not in ENZYME_ROLES:
+            raise ValueError(f"{label}: unknown role {role!r} (see ENZYME_ROLES)")
+        if (enzyme, role) in seen:
+            raise ValueError(f"{label}: duplicate {role} row")
+        seen.add((enzyme, role))
+        rec: dict[str, Any] = {"enzyme": enzyme, "role": role}
+        strength = row.get("strength")
+        if strength is not None:
+            if strength not in ENZYME_STRENGTHS:
+                raise ValueError(f"{label}: unknown strength {strength!r}")
+            rec["strength"] = strength
+        rec["sources"] = _quote_sources(row.get("sources"), what=label)
+        out.append(rec)
+    return out
+
+
+def _load_drug_enzymes() -> dict[str, list[dict[str, Any]]]:
+    """The committed CYP-role cache, drug id -> its enzyme rows (empty if absent).
+
+    Written by ``tools/fetch/fetch_cyp.py`` off the author-side Stahl tree, committed
+    so this offline generator (and a clone with no books) reproduces the same data.
+    """
+    src = Path(__file__).resolve().parent / "generated_cache" / "drug_enzymes.json"
+    if not src.exists():
+        return {}
+    return json.loads(src.read_text(encoding="utf-8"))
+
+
 def _drug_record(drug: dict[str, Any], valid_targets: set[str],
                  known_bases: set[str],
-                 molecule_ids: set[str]) -> dict[str, Any]:
+                 molecule_ids: set[str],
+                 enzyme_rows: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     """Validate + normalize one authored drug into its ``drugs.jsonl`` record.
 
     The authored drug (from ``tools/data/drugs_data.jsonl``) is mostly passed through;
@@ -948,6 +1005,13 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
                                     valid_targets)
     if metabolites:
         out["metabolites"] = metabolites
+    # Metabolising / inhibited / induced enzymes (one graded node each, kind
+    # `drug_enzymes`). Not authored in drugs_data.jsonl: the whole set is derived
+    # deterministically from Stahl by fetch_cyp.py into the committed
+    # generated_cache, so it is merged in here rather than hand-maintained.
+    enzymes = _drug_enzymes(drug["id"], enzyme_rows.get(drug["id"]))
+    if enzymes:
+        out["enzymes"] = enzymes
     # Drug descriptions are intentionally NOT baked: the panel fetches the current
     # Wikipedia lead at runtime (js/wiki.js), exactly like a structure/target, so the
     # text stays up to date and the dataset ships no copyrighted prose. A drug whose
@@ -1290,13 +1354,15 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     drug_targets = _build_drug_targets(receptors)
     valid_targets = set(drug_targets.keys())
     molecule_ids = _available_molecule_ids()
+    enzyme_rows = _load_drug_enzymes()
     seen_drug_ids: set[str] = set()
     for drug in _load_drugs():
         if drug["id"] in seen_drug_ids:
             raise KeyError(f"Duplicate drug id {drug['id']!r}")
         seen_drug_ids.add(drug["id"])
         drugs.append(
-            _drug_record(drug, valid_targets, receptor_bases, molecule_ids))
+            _drug_record(drug, valid_targets, receptor_bases, molecule_ids,
+                         enzyme_rows))
 
     # Fail loudly if the data uses a kind or group with no entry in the maps above.
     kinds = {r["kind"] for r in projections}
@@ -1368,6 +1434,13 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         "drug_actions": DRUG_ACTIONS,
         "drug_effect_colors": DRUG_EFFECT_COLORS,
         "drug_effect_labels": DRUG_EFFECT_LABELS,
+        # Drug metabolism vocabularies (see ENZYMES in data_generators.drugs): the
+        # enzyme id -> {label, wikipedia} map the Metabolism rows and the Enzymes
+        # browse section read, plus the role and strength labels. Self-describing so
+        # the viewer never hardcodes an isoform name or a role heading.
+        "enzymes": ENZYMES,
+        "enzyme_roles": ENZYME_ROLES,
+        "enzyme_strengths": ENZYME_STRENGTHS,
         # Source corpora the per-binding (and later per-field) drug sources cite,
         # keyed by id (see SOURCE_CORPORA). The viewer reads citation/url to render
         # each binding's source; check_data.py reads pages_dir to confirm quotes.

@@ -229,6 +229,40 @@ class MetaAndTranslationsTest(unittest.TestCase):
         self.assertEqual(kind.get("total", 0), n_bindings,
                          "drug_metabolite_bindings tally != unique metabolite bindings")
 
+    def test_drug_enzymes_are_tallied_and_valid(self):
+        """A drug's metabolism rows are their own graded node kind (drug_enzymes), and
+        each names a real enzyme / role / strength from the emitted vocabularies.
+
+        The vocabularies ship in meta.json precisely so the viewer never hardcodes an
+        isoform name, so a row pointing outside them would render as a blank label.
+        """
+        meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+        enzymes = set(meta["enzymes"])
+        roles = set(meta["enzyme_roles"])
+        strengths = set(meta["enzyme_strengths"])
+        drugs = [json.loads(l) for l in
+                 (DATA_DIR / "drugs.jsonl").read_text(encoding="utf-8").splitlines() if l]
+        n_rows = 0
+        for d in drugs:
+            seen = set()
+            for e in d.get("enzymes", []):
+                n_rows += 1
+                self.assertIn(e["enzyme"], enzymes,
+                              f"{d['id']} names unknown enzyme {e['enzyme']}")
+                self.assertIn(e["role"], roles,
+                              f"{d['id']} {e['enzyme']} has unknown role {e['role']}")
+                if "strength" in e:
+                    self.assertIn(e["strength"], strengths,
+                                  f"{d['id']} {e['enzyme']} unknown strength")
+                self.assertTrue(e.get("sources"),
+                                f"{d['id']} {e['enzyme']} row carries no source")
+                key = (e["enzyme"], e["role"])
+                self.assertNotIn(key, seen, f"{d['id']} has a duplicate {key} row")
+                seen.add(key)
+        kind = meta["provenance_stats"]["by_kind"].get("drug_enzymes", {})
+        self.assertEqual(kind.get("total", 0), n_rows,
+                         "drug_enzymes tally != emitted enzyme rows")
+
     def test_translations_nonempty_and_deduped(self):
         tr = json.loads(
             (DATA_DIR / "translations.fr.json").read_text(encoding="utf-8")

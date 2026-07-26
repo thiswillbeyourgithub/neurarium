@@ -131,6 +131,51 @@ DRUG_EFFECT_LABELS: dict[str, dict[str, str]] = {
     "modulate": {"en": "Modulates", "fr": "Module"},
 }
 
+# --- Drug metabolism (the enzymes a drug is handled by, or acts on) -------------
+# A separate axis from the binding targets above: this is pharmacokinetics, so it has
+# no anatomy and never lights the 3D scene (these are liver enzymes). It answers
+# "which drug touches which CYP", and the derived drug -> drug interaction edges fall
+# out of it in the viewer (an inhibitor of an enzyme plus a substrate of the same
+# enzyme). Filled from Stahl's per-drug Pharmacokinetics block by
+# tools/fetch/fetch_cyp.py -> tools/generated_cache/drug_enzymes.json.
+#
+# Named `enzyme` rather than `cyp` on purpose: the non-CYP routes (UGT
+# glucuronidation, plasma esterases, MAO) are common and will want the same field.
+ENZYMES: dict[str, dict[str, Any]] = {
+    "cyp1a2": {"label": "CYP1A2", "wikipedia": "https://en.wikipedia.org/wiki/CYP1A2"},
+    "cyp2a6": {"label": "CYP2A6", "wikipedia": "https://en.wikipedia.org/wiki/CYP2A6"},
+    "cyp2b6": {"label": "CYP2B6", "wikipedia": "https://en.wikipedia.org/wiki/CYP2B6"},
+    "cyp2c8": {"label": "CYP2C8", "wikipedia": "https://en.wikipedia.org/wiki/CYP2C8"},
+    "cyp2c9": {"label": "CYP2C9", "wikipedia": "https://en.wikipedia.org/wiki/CYP2C9"},
+    "cyp2c19": {"label": "CYP2C19", "wikipedia": "https://en.wikipedia.org/wiki/CYP2C19"},
+    "cyp2d6": {"label": "CYP2D6", "wikipedia": "https://en.wikipedia.org/wiki/CYP2D6"},
+    "cyp2e1": {"label": "CYP2E1", "wikipedia": "https://en.wikipedia.org/wiki/CYP2E1"},
+    "cyp3a4": {"label": "CYP3A4", "wikipedia": "https://en.wikipedia.org/wiki/CYP3A4"},
+    "cyp3a5": {"label": "CYP3A5", "wikipedia": "https://en.wikipedia.org/wiki/CYP3A5"},
+}
+
+# The role a drug plays at an enzyme. ``direction`` is what the drug does to that
+# enzyme's activity, and it is what makes the derived interaction edge readable: an
+# inhibitor RAISES a co-prescribed substrate's level, an inducer LOWERS it.
+ENZYME_ROLES: dict[str, dict[str, Any]] = {
+    "substrate": {"label": {"en": "Substrate", "fr": "Substrat"}, "direction": 0},
+    "inhibitor": {"label": {"en": "Inhibitor", "fr": "Inhibiteur"}, "direction": 1},
+    "inducer": {"label": {"en": "Inducer", "fr": "Inducteur"}, "direction": -1},
+}
+
+# How much of the role. Ordinal on purpose (see docs/SOURCING_GAPS.md): the AUC
+# fold-changes that define the regulatory tiers are essentially never in the corpora,
+# and publishing a number we cannot source would be the logBB mistake again. A
+# substrate is major/minor (which metabolic route dominates), an inhibitor or inducer
+# strong/moderate/weak. Absent when the source does not qualify it.
+ENZYME_STRENGTHS: dict[str, dict[str, str]] = {
+    "major": {"en": "major route", "fr": "voie principale"},
+    "minor": {"en": "minor route", "fr": "voie secondaire"},
+    "strong": {"en": "strong", "fr": "puissant"},
+    "moderate": {"en": "moderate", "fr": "modéré"},
+    "weak": {"en": "weak", "fr": "faible"},
+}
+
 # Non-receptor binding targets (a key) -> {name {en,fr}, type, system, regions,
 # optional wikipedia}. Receptors already modeled in RECEPTORS are ALSO valid targets
 # (a binding may use any receptor id directly); the generator merges them into the

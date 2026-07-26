@@ -2389,6 +2389,69 @@
     "block": "Blocks",
     "modulate": "Modulates"
   },
+  "enzymes": {
+    "cyp1a2": {
+      "label": "CYP1A2",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP1A2"
+    },
+    "cyp2a6": {
+      "label": "CYP2A6",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2A6"
+    },
+    "cyp2b6": {
+      "label": "CYP2B6",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2B6"
+    },
+    "cyp2c8": {
+      "label": "CYP2C8",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2C8"
+    },
+    "cyp2c9": {
+      "label": "CYP2C9",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2C9"
+    },
+    "cyp2c19": {
+      "label": "CYP2C19",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2C19"
+    },
+    "cyp2d6": {
+      "label": "CYP2D6",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2D6"
+    },
+    "cyp2e1": {
+      "label": "CYP2E1",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2E1"
+    },
+    "cyp3a4": {
+      "label": "CYP3A4",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP3A4"
+    },
+    "cyp3a5": {
+      "label": "CYP3A5",
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP3A5"
+    }
+  },
+  "enzyme_roles": {
+    "substrate": {
+      "label": "Substrate",
+      "direction": 0
+    },
+    "inhibitor": {
+      "label": "Inhibitor",
+      "direction": 1
+    },
+    "inducer": {
+      "label": "Inducer",
+      "direction": -1
+    }
+  },
+  "enzyme_strengths": {
+    "major": "major route",
+    "minor": "minor route",
+    "strong": "strong",
+    "moderate": "moderate",
+    "weak": "weak"
+  },
   "source_corpora": {
     "stahl": {
       "ref": "Prescriber's Guide: Stahl's Essential Psychopharmacology, 8th ed.",
@@ -2495,6 +2558,14 @@
       "drug_half_life": {
         "total": 185,
         "verified": 185,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0
+      },
+      "drug_enzymes": {
+        "total": 159,
+        "verified": 159,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2638,13 +2709,13 @@
       }
     },
     "nodes": {
-      "total": 3684,
-      "verified": 3452,
+      "total": 3843,
+      "verified": 3611,
       "sourced": 0,
       "llm": 197,
       "nosource": 35,
       "missing": 232,
-      "backed": 3452,
+      "backed": 3611,
       "pct_backed": 94
     },
     "ki_coverage": {

@@ -792,6 +792,13 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # apply_pharmacokinetics.py). A drug with no half_life is simply not a node here.
     half_life_grades = [_strongest_grade(d.get("half_life_sources"))
                         for d in drugs if d.get("half_life")]
+    # Drug-metabolism nodes ("<drug> is a substrate of / inhibits / induces <enzyme>"),
+    # one per (drug, enzyme, role) row. A pharmacokinetic claim, independent of the
+    # drug's receptor bindings: it is what the derived drug -> drug interaction edges
+    # in the viewer are built from, so it earns its own kind rather than riding along
+    # with the class or half-life node.
+    enzyme_grades = [_strongest_grade(e.get("sources"))
+                     for d in drugs for e in d.get("enzymes", [])]
     # Active-metabolite identity nodes ("<name> is an active metabolite of <drug>"),
     # one per authored metabolite across all drugs, graded by that metabolite's own
     # sources (the Stahl line naming it). The metabolite's optional T½ is an extra
@@ -911,6 +918,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_brands": tally(brand_grades),
         "drug_categories": tally(category_grades),
         "drug_half_life": tally(half_life_grades),
+        "drug_enzymes": tally(enzyme_grades),
         "drug_metabolites": tally(metabolite_grades),
         "drug_metabolite_bindings": tally(metabolite_binding_grades),
         "projections": tally(projection_grades),

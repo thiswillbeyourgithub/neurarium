@@ -113,7 +113,8 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # than being one). Adding a node kind means adding it here too, in one place: both the
 # coverage table and the self-consistency check read this.
 NODE_KINDS = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
-              "drug_half_life", "drug_metabolites", "drug_metabolite_bindings",
+              "drug_half_life", "drug_enzymes", "drug_metabolites",
+              "drug_metabolite_bindings",
               "projections", "circuits", "projection_groups", "receptors",
               "receptor_class", "receptor_sign", "receptor_synaptic",
               "receptor_locations", "receptor_density", "targets", "target_polarity",
@@ -1005,6 +1006,12 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         # same way (verbatim substring on the cited corpus page).
         for i, src in enumerate(drug.get("half_life_sources", []) or []):
             check_one(f"drug {did} half_life_sources[{i}]", src)
+        # Metabolism rows (fetch_cyp.py already gates these on the way in, but that
+        # is the author-side pass; this is the backstop that also catches a later
+        # hand-edit of the emitted data).
+        for e in drug.get("enzymes", []) or []:
+            for i, src in enumerate(e.get("sources", []) or []):
+                check_one(f"drug {did} enzyme {e.get('enzyme')} sources[{i}]", src)
         for m in drug.get("metabolites", []) or []:
             mid = f"drug {did} metabolite {m.get('name')}"
             for i, src in enumerate(m.get("sources", []) or []):
