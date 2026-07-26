@@ -753,12 +753,11 @@ def _normalize_binding(b: dict[str, Any], valid_targets: set[str], *,
         out_b["note"] = b["note"]
     if b.get("tentative"):
         out_b["tentative"] = True
-    # The direction came from GtoPdb (corpus #11) onto a binding PDSP had left
-    # affinity-only. It is a real sourced action and renders as one, but whether such
-    # a binding should also drive the 3D overlay is still an open call (see TODO.md),
-    # so the flag rides through to the viewer, which holds it out of the animation.
-    if b.get("provisional_action"):
-        out_b["provisional_action"] = True
+    # `provisional_action` (a direction GtoPdb gave to a binding PDSP had left
+    # affinity-only) is deliberately NOT emitted: such a binding behaves like any
+    # other, and its `sources` already name the corpus, so the flag would be a
+    # derivable duplicate. It stays in drugs_data.jsonl for apply_gtopdb_ki.py's
+    # idempotency (it recognises its own writes by it).
     # Per-claim sources ({corpus, page, quote, provenance}); the verbatim quote is
     # what check_data.py confirms is present in the cited corpus page.
     binding_sources = _quote_sources(b.get("sources"), f"{owner_label} binding "

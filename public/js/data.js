@@ -565,11 +565,6 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     const tgt = drugTargets[b.target] || {};
     const affinityOnly = !!b.affinity_only;
     const act = affinityOnly ? {} : drugActions[b.action] || {};
-    // The direction came from GtoPdb (corpus #11) onto a binding PDSP had left
-    // affinity-only. It renders as a normal sourced action; what is still open is
-    // whether it should also drive the 3D overlay (see TODO.md), so the drug loop
-    // below keeps it out of the animation. To animate them, delete `provisionalAction`
-    // from the `inert` expression there and nothing else.
     const effect = affinityOnly ? null : b.effect || act.effect || "modulate";
     return {
       tgt,
@@ -585,7 +580,6 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       effectLabel: affinityOnly ? null : drugEffectLabels[effect] || effect,
       note: b.note ? localize(b.note) : "",
       tentative: !!b.tentative,
-      provisionalAction: !!b.provisional_action,
       sources: mapSources(b.sources),
       provenance: strongestGrade([
         ...(b.sources || []),
@@ -632,16 +626,13 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // bindingDisplayFields. `tgt` is reused, `disp.tgt` is not returned to callers.
       const disp = bindingDisplayFields(b);
       const { tgt, affinityOnly, effect } = disp;
-      // An affinity_only binding is PDSP-derived with no known direction: it is
-      // listed in the panel (with its Ki) but has no action/effect and never
-      // animates, so it contributes nothing to the lit-region union or flow.
-      // A provisional_action binding is one GtoPdb since gave a direction to: it
-      // DOES show an action + effect in the panel, but stays out of the overlay
-      // until that call is made (see TODO.md). To animate them, drop the second
-      // term here and nothing else changes.
-      const inert = affinityOnly || disp.provisionalAction;
+      // An affinity_only binding has a measured Ki but no known direction (neither
+      // PDSP nor GtoPdb states one): it is listed in the panel with its Ki but has no
+      // action/effect, so it never animates and contributes nothing to the lit-region
+      // union or the flow. Every binding that DOES state a direction animates,
+      // whichever corpus sourced it.
       let structureIds = [];
-      if (inert) {
+      if (affinityOnly) {
         structureIds = [];
       } else if (tgt.ubiquitous) {
         structureIds = allIds.slice();
@@ -652,7 +643,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
           [bse, `${bse}_R`, `${bse}_L`].filter((id) => byId.has(id)),
         );
       }
-      if (!inert) for (const id of structureIds) affected.add(id);
+      if (!affinityOnly) for (const id of structureIds) affected.add(id);
       return {
         target: disp.target,
         targetName: disp.targetName,
@@ -661,7 +652,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // kinds), null when the system has no modeled ascending pathway or the
         // binding is affinity-only. Lets a panel list the "projections affected" per
         // binding and lets d.flowKinds below dedupe from a single field.
-        flowKind: inert ? null : systemFlowKinds[tgt.system] || null,
+        flowKind: affinityOnly ? null : systemFlowKinds[tgt.system] || null,
         receptor: disp.receptor,
         affinityOnly,
         action: disp.action,
@@ -671,15 +662,14 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         effectLabel: disp.effectLabel,
         note: disp.note,
         tentative: disp.tentative,
-        provisionalAction: disp.provisionalAction,
         structureIds,
         // Relative engagement from the measured Ki (0.35..1), NOT effect size.
         // Scales the dot cloud in drug-anim; also weights this binding's system
         // tone below. Neutral mid-value when no Ki.
-        affinityWeight: inert ? 0 : affinityWeightOf(b.ki),
+        affinityWeight: affinityOnly ? 0 : affinityWeightOf(b.ki),
         // Signed tone-setter contribution to its system's ascending flow (+1 raises
         // the transmitter's tone, -1 lowers, 0 = not a tone-setter -> dots only).
-        toneSign: inert ? 0 : toneSignOf(tgt, b.action),
+        toneSign: affinityOnly ? 0 : toneSignOf(tgt, b.action),
         // Per-claim sources ({corpus, page, quote, provenance}); `provenance` is the
         // strongest grade among the quote sources AND the measured Ki. See
         // bindingDisplayFields / _binding_grade in generate_data.py.
