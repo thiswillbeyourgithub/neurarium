@@ -63,6 +63,14 @@ CHROME_SVG = (
     "wikisource", "wikiquote", "wikibooks", "portal", "symbol_", "emblem",
     "flag_", "increase", "decrease", "steady", "magnify", "wiki letter",
 )
+# Drugs whose article lead image is not the skeletal formula we want (a 3D
+# ball-and-stick render, a photograph), mapped to the Commons file to take
+# instead. Checked before the pageimages lookup.
+FILE_OVERRIDES = {
+    # The Ethanol article leads with a 1.5 MB ball-and-stick render; the flat
+    # formula next to it is 1 KB and matches every other molecule in the panel.
+    "ethanol": "File:Ethanol-2D-flat.svg",
+}
 # Tokens that mark a structure SVG, used to rank fallback candidates.
 STRUCTURE_HINTS = (
     "structure", "skeletal", "chemical", "2d", "racemic", "acs", "_200",
@@ -122,6 +130,20 @@ def article_title(wiki_url: str) -> str | None:
 def _is_chrome(name: str) -> bool:
     low = name.lower()
     return any(tok in low for tok in CHROME_SVG)
+
+
+def resolve_file(file_title: str) -> tuple[str, str] | None:
+    """Resolve a Commons ``File:x.svg`` title to ``(file_title, url)``."""
+    info = http_json({
+        "action": "query", "prop": "imageinfo", "iiprop": "url",
+        "titles": file_title,
+    })
+    for page in info.get("query", {}).get("pages", {}).values():
+        for ii in page.get("imageinfo", []):
+            url = ii.get("url", "")
+            if url.lower().endswith(".svg"):
+                return (file_title, url)
+    return None
 
 
 def resolve_svg(title: str) -> tuple[str, str] | None:
@@ -226,6 +248,13 @@ def _strip_background(text: str) -> str:
                   text, flags=re.IGNORECASE)
 
 
+# Ceiling for a committed molecule SVG. A skeletal structural formula is a few KB
+# (the median here is ~6 KB); a file an order of magnitude past that is the article's
+# 3D model, which is both the wrong illustration for the panel and a large asset to
+# ship to a phone. Generous enough to keep the genuinely intricate formulas.
+MAX_SVG_BYTES = 200_000
+
+
 def sanitize_svg(raw: bytes) -> bytes:
     """Clean a fetched SVG: strip scripts + opaque background, ensure intrinsic size.
 
@@ -261,6 +290,9 @@ def main() -> None:
                     help="only process the first N drugs (smoke test)")
     ap.add_argument("--delay", type=float, default=0.2,
                     help="seconds to sleep between drugs (politeness)")
+    ap.add_argument("--allow-huge", action="store_true",
+                    help=f"keep an SVG larger than {MAX_SVG_BYTES} bytes (by default "
+                         "such a file is refused: it is a 3D render, not a formula)")
     args = ap.parse_args()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -275,7 +307,7 @@ def main() -> None:
     if args.limit:
         drugs = drugs[:args.limit]
 
-    fetched, skipped, missing, errors = [], [], [], []
+    fetched, skipped, missing, errors, oversized = [], [], [], [], []
     for i, drug in enumerate(drugs, 1):
         did = drug["id"]
         out = OUT_DIR / f"{did}.svg"
@@ -287,14 +319,28 @@ def main() -> None:
             missing.append((did, "no wikipedia title"))
             continue
         try:
-            resolved = resolve_svg(title)
+            override = FILE_OVERRIDES.get(did)
+            resolved = resolve_file(override) if override else resolve_svg(title)
             if not resolved:
                 missing.append((did, f"no SVG on '{title}'"))
                 print(f"[{i}/{len(drugs)}] {did}: MISSING (no SVG)")
                 time.sleep(args.delay)
                 continue
             file_title, url = resolved
-            out.write_bytes(sanitize_svg(http_bytes(url)))
+            svg = sanitize_svg(http_bytes(url))
+            if len(svg) > MAX_SVG_BYTES and not args.allow_huge:
+                # A skeletal formula is a few KB. Anything this size is the article's
+                # 3D ball-and-stick or space-filling render, which resolves as the
+                # lead image on some molecules (ethanol's is 1.5 MB, 250x the median
+                # and bigger than the whole rest of the directory put together). It
+                # is the wrong picture AND a heavy one, so it is refused rather than
+                # committed; --allow-huge takes it anyway.
+                oversized.append((did, len(svg), file_title))
+                print(f"[{i}/{len(drugs)}] {did}: REFUSED {file_title} "
+                      f"({len(svg)} bytes > {MAX_SVG_BYTES} limit)")
+                time.sleep(args.delay)
+                continue
+            out.write_bytes(svg)
             sources[did] = {"file": file_title, "url": url, "title": title}
             fetched.append(did)
             print(f"[{i}/{len(drugs)}] {did}: {file_title} "
@@ -315,6 +361,10 @@ def main() -> None:
     print(f"missing : {len(missing)}")
     for did, why in missing:
         print(f"          - {did}: {why}")
+    if oversized:
+        print(f"refused : {len(oversized)} (over {MAX_SVG_BYTES} bytes)")
+        for did, size, file_title in oversized:
+            print(f"          - {did}: {file_title} ({size} bytes)")
     if errors:
         print(f"errors  : {len(errors)}")
         for did, why in errors:

@@ -24,6 +24,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Alprazolam_structure.svg",
     "title": "Alprazolam"
   },
+  "amantadine": {
+    "file": "File:Amantadine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Amantadine.svg",
+    "title": "Amantadine"
+  },
   "amisulpride": {
     "file": "File:Amisulpride.enantiomers labelled.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Amisulpride.enantiomers_labelled.svg",
@@ -53,6 +58,11 @@
     "file": "File:Amphetamine structure.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Amphetamine_structure.svg",
     "title": "Amphetamine"
+  },
+  "apomorphine": {
+    "file": "File:Apomorphine2DCSD.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Apomorphine2DCSD.svg",
+    "title": "Apomorphine"
   },
   "aripiprazole": {
     "file": "File:Aripiprazole chemical structure.svg",
@@ -119,6 +129,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Bromazepam.svg",
     "title": "Bromazepam"
   },
+  "bromocriptine": {
+    "file": "File:Bromocriptine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Bromocriptine.svg",
+    "title": "Bromocriptine"
+  },
   "bromperidol": {
     "file": "File:Bromperidol.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Bromperidol.svg",
@@ -128,6 +143,11 @@
     "file": "File:Brotizolam.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Brotizolam.svg",
     "title": "Brotizolam"
+  },
+  "bumetanide": {
+    "file": "File:Bumetanide_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Bumetanide_structure.svg",
+    "title": "Bumetanide"
   },
   "buprenorphine": {
     "file": "File:Buprenorphine.svg",
@@ -148,6 +168,16 @@
     "file": "File:Butobarbital.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Butobarbital.svg",
     "title": "Butobarbital"
+  },
+  "cabergoline": {
+    "file": "File:Cabergoline.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Cabergoline.svg",
+    "title": "Cabergoline"
+  },
+  "caffeine": {
+    "file": "File:Caffeine_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Caffeine_structure.svg",
+    "title": "Caffeine"
   },
   "calcium_carbimide": {
     "file": "File:Symbol category class.svg",
@@ -193,6 +223,11 @@
     "file": "File:Citalopram_racemic.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Citalopram_racemic.svg",
     "title": "Citalopram"
+  },
+  "clobazam": {
+    "file": "File:Norclobazam.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Norclobazam.svg",
+    "title": "Clobazam"
   },
   "clomethiazole": {
     "file": "File:Clomethiazole_structure.svg",
@@ -248,6 +283,11 @@
     "file": "File:Cyclobarbital.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Cyclobarbital.svg",
     "title": "Cyclobarbital"
+  },
+  "cyproheptadine": {
+    "file": "File:Cyproheptadine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Cyproheptadine.svg",
+    "title": "Cyproheptadine"
   },
   "cytisine": {
     "file": "File:(-)-Cytisine.svg",
@@ -319,6 +359,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/Doxepin-2D-skeletal.svg",
     "title": "Doxepin"
   },
+  "doxylamine": {
+    "file": "File:Doxylamine_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Doxylamine_structure.svg",
+    "title": "Doxylamine"
+  },
   "duloxetine": {
     "file": "File:Duloxetine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Duloxetine.svg",
@@ -343,6 +388,11 @@
     "file": "File:Eszopiclone.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Eszopiclone.svg",
     "title": "Eszopiclone"
+  },
+  "ethanol": {
+    "file": "File:Ethanol-2D-flat.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Ethanol-2D-flat.svg",
+    "title": "Alcohol (drug)"
   },
   "flibanserin": {
     "file": "File:Flibanserin.svg",
@@ -388,6 +438,11 @@
     "file": "File:Fluvoxamine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Fluvoxamine.svg",
     "title": "Fluvoxamine"
+  },
+  "furosemide": {
+    "file": "File:Furosemide.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Furosemide.svg",
+    "title": "Furosemide"
   },
   "gabapentin": {
     "file": "File:Gabapentin_structure.svg",
@@ -444,6 +499,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Ketamine2DCSD.svg",
     "title": "Ketamine"
   },
+  "ketanserin": {
+    "file": "File:Ketanserin.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Ketanserin.svg",
+    "title": "Ketanserin"
+  },
   "lamotrigine": {
     "file": "File:Lamotrigine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Lamotrigine.svg",
@@ -494,10 +554,20 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Ethyl_loflazepate.svg",
     "title": "Loflazepate"
   },
+  "loprazolam": {
+    "file": "File:Loprazolam_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Loprazolam_structure.svg",
+    "title": "Loprazolam"
+  },
   "lorazepam": {
     "file": "File:Lorazepam.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lorazepam.svg",
     "title": "Lorazepam"
+  },
+  "lormetazepam": {
+    "file": "File:Lormetazepam.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Lormetazepam.svg",
+    "title": "Lormetazepam"
   },
   "loxapine": {
     "file": "File:Loxapine.svg",
@@ -529,6 +599,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/MDMA_structure.svg",
     "title": "MDMA"
   },
+  "melatonin": {
+    "file": "File:Melatonin.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Melatonin.svg",
+    "title": "Melatonin"
+  },
   "melperone": {
     "file": "File:Melperone.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Melperone.svg",
@@ -548,6 +623,11 @@
     "file": "File:Mesoridazine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Mesoridazine.svg",
     "title": "Mesoridazine"
+  },
+  "methadone": {
+    "file": "File:Methadone_enantiomers_labelled.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Methadone_enantiomers_labelled.svg",
+    "title": "Methadone"
   },
   "methamphetamine": {
     "file": "File:Methamphetamine_structure.svg",
@@ -648,6 +728,11 @@
     "file": "File:Nimetazepam.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Nimetazepam.svg",
     "title": "Nimetazepam"
+  },
+  "nitrazepam": {
+    "file": "File:Nitrazepam.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Nitrazepam.svg",
+    "title": "Nitrazepam"
   },
   "nortriptyline": {
     "file": "File:Nortriptyline.svg",
@@ -764,6 +849,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Pitolisant_skeletal.svg",
     "title": "Pitolisant"
   },
+  "pramipexole": {
+    "file": "File:Pramipexole.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Pramipexole.svg",
+    "title": "Pramipexole"
+  },
   "prazepam": {
     "file": "File:Prazepam.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Prazepam.svg",
@@ -824,10 +914,20 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Ramelteon_skeletal_formula.svg",
     "title": "Ramelteon"
   },
+  "rasagiline": {
+    "file": "File:Rasagiline2DCSD.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Rasagiline2DCSD.svg",
+    "title": "Rasagiline"
+  },
   "reboxetine": {
     "file": "File:Reboxetine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Reboxetine.svg",
     "title": "Reboxetine"
+  },
+  "reserpine": {
+    "file": "File:Reserpine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Reserpine.svg",
+    "title": "Reserpine"
   },
   "risperidone": {
     "file": "File:Risperidone.svg",
@@ -839,10 +939,25 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Rivastigmine_ACS.svg",
     "title": "Rivastigmine"
   },
+  "ropinirole": {
+    "file": "File:Ropinirole structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Ropinirole_structure.svg",
+    "title": "Ropinirole"
+  },
+  "rotigotine": {
+    "file": "File:Rotigotine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Rotigotine.svg",
+    "title": "Rotigotine"
+  },
   "rubidium_chloride": {
     "file": "File:NFPA 704.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/NFPA_704.svg",
     "title": "Rubidium chloride"
+  },
+  "safinamide": {
+    "file": "File:Safinamide.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Safinamide.svg",
+    "title": "Safinamide"
   },
   "scopolamine": {
     "file": "File:L-Scopolamin.svg",
@@ -913,6 +1028,16 @@
     "file": "File:Temazepam.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Temazepam.svg",
     "title": "Temazepam"
+  },
+  "tetrabenazine": {
+    "file": "File:Tetrabenazine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Tetrabenazine.svg",
+    "title": "Tetrabenazine"
+  },
+  "thc": {
+    "file": "File:THC.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/THC.svg",
+    "title": "Tetrahydrocannabinol"
   },
   "thiopental": {
     "file": "File:Sodium_thiopental.svg",
@@ -988,6 +1113,11 @@
     "file": "File:Trimipramine2DACS.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Trimipramine2DACS.svg",
     "title": "Trimipramine"
+  },
+  "tropatepine": {
+    "file": "File:Tropatepine synthesis.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Tropatepine_synthesis.svg",
+    "title": "Tropatepine"
   },
   "valbenazine": {
     "file": "File:Valbenazine.svg",
@@ -1068,5 +1198,10 @@
     "file": "File:Zuclopenthixol.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Zuclopenthixol.svg",
     "title": "Zuclopenthixol"
+  },
+  "zuranolone": {
+    "file": "File:Zuranolone.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Zuranolone.svg",
+    "title": "Zuranolone"
   }
 }
