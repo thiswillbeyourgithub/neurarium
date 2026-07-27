@@ -658,7 +658,7 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   enzyme but not the step. `generate_data.py` raises if a key matches no metabolite, so an
   applier re-run cannot silently drop a node.
 - **Viewer.** `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
-  pill, clickable to the enzyme) and an **Interactions** list, both **after** the anatomy sections
+  pill, clickable to the enzyme) and a **Drug interactions** list, both **after** the anatomy sections
   (pharmacokinetics lights nothing in the scene, so it does not interrupt Acts on -> Projections
   affected -> Acts within); each **Active metabolites** row gains a `.metab-formed` "formed by
   <enzyme>" line with its own pill. An **Enzymes** accordion section
@@ -670,8 +670,11 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   segmented control (`PK_GROUP_KEY`): **by drug** (four direction buckets, raises/lowers first,
   then raised-by/lowered-by) or **by enzyme** (one heading per isoform, so a pair meeting at two
   isoforms appears under each). Capped **per group** (8) with the rest expandable in place, since
-  a global cap would swallow whole headings. The caption states it is a flag to check with a
-  prescriber, **never a contraindication**, and that a missing row is not a safety claim.
+  a global cap would swallow whole headings. Collapsed by default (a `disclosure` `<details>`,
+  summary = title + edge count, opening it scrolls itself to the top of the pane) so dozens of
+  derived rows don't bury the sourced sections above. Because the edges are an **inference**, every
+  string stays conditional ("could raise", never "raises"). The caption states it is a flag to check
+  with a prescriber, **never a contraindication**, and that a missing row is not a safety claim.
 
 ## Images
 

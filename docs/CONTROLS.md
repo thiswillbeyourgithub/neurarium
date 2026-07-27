@@ -211,7 +211,7 @@ Every view starts from `clearBody()` (never a bare `body.innerHTML = ""`): it al
 scrolled into its middle. The exception is a jump that has a *reason*: `flashRow(el)` scrolls that
 one row into view and flashes it (`.node-flash`), so arriving in another node's panel lands on the
 row that explains the jump (a metabolite reached from a receptor, an isoform reached from another
-drug's Interactions list, via `showDrug`'s `highlightMetabolite` / `highlightEnzymes` opts). It
+drug's Drug-interactions list, via `showDrug`'s `highlightMetabolite` / `highlightEnzymes` opts). It
 defers a frame because the caller shows the pane *after* rendering.
 
 Views:

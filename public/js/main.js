@@ -2695,7 +2695,7 @@ function createInfoPanel(data, sourcingModal) {
       // The subtype's display name comes off the resolved binding (localized), so it
       // needs no separate receptor lookup and stays in sync with the drug panel.
       const name = (list[0].binding && list[0].binding.targetName) || "";
-      const details = el("details", "subtype-group");
+      const details = el("details", "disclosure subtype-group");
       details.appendChild(el("summary", null, `${name} (${list.length})`));
       appendDrugsByCategory(list, details);
       wrap.appendChild(details);
@@ -3537,6 +3537,7 @@ function createInfoPanel(data, sourcingModal) {
       // interactions those roles imply.
       if (drug.enzymes && drug.enzymes.length) {
         const enzWrap = el("div", "info-bindings");
+        enzWrap.dataset.tourSec = "metabolism"; // guided-tour section anchor
         enzWrap.appendChild(el("h3", null, t("drug.metabolism")));
         enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
         const enzUl = el("ul");
@@ -3560,8 +3561,10 @@ function createInfoPanel(data, sourcingModal) {
         body.appendChild(enzWrap);
         flashRow(flashEnz);
 
-        // Interactions: derived, never stored (see pkInteractionsOf). This drug and
-        // the listed one meet at the same enzyme, so one shifts the other's level.
+        // Drug interactions: derived, never stored (see pkInteractionsOf). This drug
+        // and the listed one meet at the same enzyme, so one COULD shift the other's
+        // level; the wording stays conditional throughout because the edge is an
+        // inference from the enzyme roles, not a measured interaction study.
         const pk = data.pkInteractionsOf ? data.pkInteractionsOf(drug) : null;
         const edges = pk ? [
           ...pk.affects.map((x) => ({ ...x, outgoing: true })),
@@ -3569,8 +3572,26 @@ function createInfoPanel(data, sourcingModal) {
         ] : [];
         if (edges.length) {
           // info-interactors too: reuses that section's .drug-cat sub-heading style.
-          const pkWrap = el("div", "info-bindings info-interactors");
-          pkWrap.appendChild(el("h3", null, t("drug.pkInteractions")));
+          // Collapsed by default (a `disclosure` <details>, same caret as the receptor
+          // subtype dropdowns): a busy isoform yields dozens of derived rows, which
+          // otherwise bury the sourced sections above. The summary carries the count so
+          // the reader can see there is something worth opening.
+          const pkWrap = el("details", "info-bindings info-interactors disclosure");
+          pkWrap.dataset.tourSec = "pk"; // guided-tour section anchor
+          const pkSummary = el(
+            "summary", null, `${t("drug.pkInteractions")} (${edges.length})`);
+          pkWrap.appendChild(pkSummary);
+          // It is the panel's LAST section, so opening it unfolds everything below the
+          // fold: bring the summary up to the top of the pane so what you see is the
+          // list you just asked for, not the rows above it.
+          pkWrap.addEventListener("toggle", () => {
+            // setTimeout, not rAF: let the newly shown rows lay out first, and the
+            // viewer's on-demand render loop can leave rAF idle.
+            if (pkWrap.open) {
+              setTimeout(
+                () => pkSummary.scrollIntoView({ block: "start", behavior: "smooth" }), 0);
+            }
+          });
           pkWrap.appendChild(el("p", "legend-caption", t("drug.pkInteractionsHint")));
 
           // One row = one (other drug, direction) edge. `showEnzymes` names the shared
