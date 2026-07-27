@@ -669,10 +669,12 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
 - **The drug -> drug edges are derived, never stored** (`pkInteractionsOf` in `js/data.js`, like
   `flowSystems`): an inhibitor/inducer of an enzyme meets its substrates, one row per (other drug,
   direction) naming every shared isoform. Rendered two ways from the same edges via a persisted
-  segmented control (`PK_GROUP_KEY`): **by drug** (four direction buckets, raises/lowers first,
-  then raised-by/lowered-by) or **by enzyme** (one heading per isoform, so a pair meeting at two
-  isoforms appears under each). Capped **per group** (8) with the rest expandable in place, since
-  a global cap would swallow whole headings. Collapsed by default (a `disclosure` `<details>`,
+  segmented control (`PK_GROUP_KEY`): **by drug** (the four `PK_DIRECTIONS` buckets as headings,
+  raises/lowers first, then raised-by/lowered-by) or **by enzyme** (one heading per isoform, so a
+  pair meeting at two isoforms appears under each, sub-grouped by those same four directions). A
+  row is the drug name alone: the direction is always a heading above it, never repeated per row.
+  Capped **per heading** (8) with the rest expandable in place, since a global cap would swallow
+  whole headings. Collapsed by default (a `disclosure` `<details>`,
   summary = title + edge count, opening it scrolls itself to the top of the pane) so dozens of
   derived rows don't bury the sourced sections above. Because the edges are an **inference**, every
   string stays conditional ("could raise", never "raises"). The caption states it is a flag to check

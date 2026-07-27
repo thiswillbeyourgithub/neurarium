@@ -3594,18 +3594,15 @@ function createInfoPanel(data, sourcingModal) {
           });
           pkWrap.appendChild(el("p", "legend-caption", t("drug.pkInteractionsHint")));
 
-          // One row = one (other drug, direction) edge. `showEnzymes` names the shared
-          // isoforms; by-enzyme mode drops them (the heading IS the isoform) and spells
-          // the direction out in the row instead, since its heading cannot.
+          // One row = one (other drug, direction) edge, and it carries the drug name
+          // ALONE: the direction is always a heading above it (a bucket in by-drug mode,
+          // a sub-heading under the isoform in by-enzyme mode), so spelling it out per
+          // row just repeated the same phrase down the list. `showEnzymes` appends the
+          // shared isoforms; by-enzyme mode drops them (the heading IS the isoform).
           const pkRow = (edge, showEnzymes) => {
             const li = el("li", "clickable");
             const text = el("span", "bind-text");
-            const key = edge.outgoing
-              ? (edge.direction > 0 ? "drug.pkRaises" : "drug.pkLowers")
-              : (edge.direction > 0 ? "drug.pkRaisedBy" : "drug.pkLoweredBy");
-            text.appendChild(el("span", "bind-target",
-                                showEnzymes ? edge.drug.displayName
-                                            : t(key, { drug: edge.drug.displayName })));
+            text.appendChild(el("span", "bind-target", edge.drug.displayName));
             if (showEnzymes) {
               text.appendChild(el("span", "bind-action",
                                   ` · ${edge.enzymes.map((x) => x.label).join(", ")}`));
@@ -3617,13 +3614,17 @@ function createInfoPanel(data, sourcingModal) {
             return li;
           };
 
-          // Capped per GROUP, not globally: a global cap would swallow whole headings
-          // (a CYP3A4 inhibitor legitimately meets dozens of substrates), so each group
+          // Capped per HEADING, not globally: a global cap would swallow whole headings
+          // (a CYP3A4 inhibitor legitimately meets dozens of substrates), so each one
           // shows its first rows and offers the rest in place rather than in a dead-end
           // count. Rows are built lazily so an unexpanded remainder costs nothing.
           const GROUP_CAP = 8;
-          const appendGroup = (box, label, rows, onLabel) => {
-            if (!rows.length) return;
+          // One group = a heading plus its `sections`, each `{label?, rows}`. A section
+          // label is the direction sub-heading by-enzyme mode needs (by-drug mode passes
+          // a single unlabelled section, since its own heading IS the direction).
+          const appendGroup = (box, label, sections, onLabel) => {
+            const filled = sections.filter((s) => s.rows.length);
+            if (!filled.length) return;
             const head = el("h4", "drug-cat", label);
             if (onLabel) {
               head.classList.add("clickable");
@@ -3632,41 +3633,53 @@ function createInfoPanel(data, sourcingModal) {
             box.appendChild(head);
             // The rows (and the "+n more" that extends them) live in their own indented
             // body under the heading, so which bucket / isoform a drug belongs to reads
-            // at a glance in a list of several groups.
+            // at a glance in a list of several groups. A labelled section indents one
+            // step further, under its own sub-heading.
             const groupBody = el("div", "pk-group-body");
-            const ul = el("ul");
-            for (const make of rows.slice(0, GROUP_CAP)) ul.appendChild(make());
-            groupBody.appendChild(ul);
-            if (rows.length > GROUP_CAP) {
-              const more = el("button", "pk-more",
-                              t("drug.pkMore", { n: rows.length - GROUP_CAP }));
-              more.type = "button";
-              more.addEventListener("click", () => {
-                for (const make of rows.slice(GROUP_CAP)) ul.appendChild(make());
-                more.remove();
-              });
-              groupBody.appendChild(more);
+            for (const section of filled) {
+              let target = groupBody;
+              if (section.label) {
+                groupBody.appendChild(el("h5", "pk-dir", section.label));
+                target = el("div", "pk-dir-body");
+                groupBody.appendChild(target);
+              }
+              const ul = el("ul");
+              for (const make of section.rows.slice(0, GROUP_CAP)) ul.appendChild(make());
+              target.appendChild(ul);
+              if (section.rows.length > GROUP_CAP) {
+                const more = el("button", "pk-more",
+                                t("drug.pkMore", { n: section.rows.length - GROUP_CAP }));
+                more.type = "button";
+                more.addEventListener("click", () => {
+                  for (const make of section.rows.slice(GROUP_CAP)) ul.appendChild(make());
+                  more.remove();
+                });
+                target.appendChild(more);
+              }
             }
             box.appendChild(groupBody);
           };
+          // The four direction readings, in the order they are useful: what this drug
+          // does to others first (that half is the actionable one), then what others do
+          // to it. by-drug mode makes each a top-level heading, by-enzyme mode a
+          // sub-heading under every isoform, so the labels are defined once here.
+          const PK_DIRECTIONS = [
+            ["drug.pkHeadRaises", (e) => e.outgoing && e.direction > 0],
+            ["drug.pkHeadLowers", (e) => e.outgoing && e.direction < 0],
+            ["drug.pkHeadRaisedBy", (e) => !e.outgoing && e.direction > 0],
+            ["drug.pkHeadLoweredBy", (e) => !e.outgoing && e.direction < 0],
+          ];
+          const byName = (a, b) => a.drug.displayName.localeCompare(b.drug.displayName);
 
           // Two readings of the SAME edges, because the useful question differs: "what
           // does this drug do to my other prescriptions" (by drug) vs "everything that
           // goes through CYP3A4" (by enzyme, where a pair sharing two isoforms shows up
           // under each; that duplication is the point of this reading).
           const byDrug = (box) => {
-            // What this drug does to others first: that half is the actionable one.
-            const buckets = [
-              ["drug.pkHeadRaises", (e) => e.outgoing && e.direction > 0],
-              ["drug.pkHeadLowers", (e) => e.outgoing && e.direction < 0],
-              ["drug.pkHeadRaisedBy", (e) => !e.outgoing && e.direction > 0],
-              ["drug.pkHeadLoweredBy", (e) => !e.outgoing && e.direction < 0],
-            ];
-            for (const [key, keep] of buckets) {
-              const rows = edges.filter(keep)
-                .sort((a, b) => a.drug.displayName.localeCompare(b.drug.displayName))
+            for (const [key, keep] of PK_DIRECTIONS) {
+              const rows = edges.filter(keep).sort(byName)
                 .map((e) => () => pkRow(e, true));
-              appendGroup(box, t(key), rows);
+              appendGroup(box, t(key), [{ rows }]);
             }
           };
           const byEnzyme = (box) => {
@@ -3681,13 +3694,16 @@ function createInfoPanel(data, sourcingModal) {
             const groups = [...per.entries()].sort((a, b) =>
               (b[1].rows.length - a[1].rows.length) || a[1].label.localeCompare(b[1].label));
             for (const [id, grp] of groups) {
-              const rows = grp.rows
-                .sort((a, b) => (b.direction - a.direction)
-                                || (Number(b.outgoing) - Number(a.outgoing))
-                                || a.drug.displayName.localeCompare(b.drug.displayName))
-                .map((e) => () => pkRow(e, false));
+              // Split by direction under the isoform, rather than spelling the direction
+              // out on every row: an isoform's rows are mostly one direction, so the
+              // per-row phrasing repeated itself line after line.
+              const sections = PK_DIRECTIONS.map(([key, keep]) => ({
+                label: t(key),
+                rows: grp.rows.filter(keep).sort(byName)
+                  .map((e) => () => pkRow(e, false)),
+              }));
               const enz = enzymeById.get(id);
-              appendGroup(box, grp.label, rows, enz ? () => onEnzymePick(enz) : null);
+              appendGroup(box, grp.label, sections, enz ? () => onEnzymePick(enz) : null);
             }
           };
 

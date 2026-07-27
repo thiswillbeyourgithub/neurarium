@@ -863,6 +863,18 @@
         padding-left: 9px;
         border-left: 1px solid rgba(154, 166, 179, 0.35);
       }
+      /* By-enzyme mode splits each isoform's rows by direction: the sub-heading says it
+         once, and its drug names indent under it (the direction used to be repeated on
+         every single row). */
+      .pk-dir {
+        font-size: 10.5px;
+        font-weight: 600;
+        font-style: italic;
+        color: var(--muted);
+        margin: 8px 0 1px;
+      }
+      .pk-dir:first-child { margin-top: 2px; }
+      .pk-dir-body { padding-left: 10px; }
       /* "+N more" under a capped Interactions group: expands the rest in place, so a
          long list is trimmed for readability without hiding what was trimmed. */
       .pk-more {
