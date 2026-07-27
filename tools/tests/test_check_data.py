@@ -14,6 +14,7 @@ Built with the help of Claude Code.
 """
 
 import io
+import json
 import sys
 import unittest
 from contextlib import redirect_stdout
@@ -21,6 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import check_data  # noqa: E402
+from data_generators.drugs import DRUG_ACTIONS, TONE_RULES  # noqa: E402
 
 
 def _run_check(meta, drugs, projections, receptors):
@@ -50,23 +52,32 @@ class AffinityWeightTest(unittest.TestCase):
 
 
 class ToneSignTest(unittest.TestCase):
+    """The flow model's directions. The rule table is DATA, authored once in
+    tools/data_generators/drugs.py and shipped as ``meta.tone_rules``, so these load
+    the real table rather than a fixture: a direction changed there without a matching
+    intent fails here, and the viewer reads the same table so the two cannot drift."""
+
     def setUp(self):
         # a modeled presynaptic inhibitory autoreceptor + a postsynaptic receptor
         self.rec_meta = {
             "alpha2a": {"id": "alpha2a", "sign": "inhibitory", "synaptic": "both"},
             "5ht2a": {"id": "5ht2a", "sign": "excitatory", "synaptic": "postsynaptic"},
         }
+        self.rules = TONE_RULES
+
+    def _tone(self, tgt, action, rec_meta=None):
+        return check_data._tone_of(tgt, action, rec_meta or {}, self.rules)
 
     def test_transporter_reuptake_raises(self):
         tgt = {"type": "transporter", "system": "serotonergic"}
-        self.assertEqual(check_data._tone_of(tgt, "reuptake_inhibitor", {})[0], 1)
+        self.assertEqual(self._tone(tgt, "reuptake_inhibitor")[0], 1)
         # a non-tone-setting action on the same transporter contributes nothing
-        self.assertEqual(check_data._tone_of(tgt, "agonist", {})[0], 0)
+        self.assertEqual(self._tone(tgt, "agonist")[0], 0)
 
     def test_vesicular_transporter_lowers(self):
         tgt = {"type": "transporter", "system": "dopaminergic", "vesicular": True}
-        self.assertEqual(check_data._tone_of(tgt, "blocker", {})[0], -1)
-        self.assertEqual(check_data._tone_of(tgt, "vesicular_inhibitor", {})[0], -1)
+        self.assertEqual(self._tone(tgt, "blocker")[0], -1)
+        self.assertEqual(self._tone(tgt, "vesicular_inhibitor")[0], -1)
 
     def test_vesicular_substrate_raises(self):
         """The other way to engage VMAT2: a substrate (amphetamine, MDMA) dumps the
@@ -74,23 +85,49 @@ class ToneSignTest(unittest.TestCase):
         direction has to come from the action, not from the target being vesicular
         (which would read the archetypal dopamine-raising drug as lowering it)."""
         tgt = {"type": "transporter", "system": "dopaminergic", "vesicular": True}
-        self.assertEqual(check_data._tone_of(tgt, "vesicular_releaser", {})[0], 1)
+        self.assertEqual(self._tone(tgt, "vesicular_releaser")[0], 1)
         # a non-tone-setting action on the same transporter still contributes nothing
-        self.assertEqual(check_data._tone_of(tgt, "agonist", {}), (0, None))
+        self.assertEqual(self._tone(tgt, "agonist"), (0, None))
 
     def test_enzyme_inhibition_raises(self):
         tgt = {"type": "enzyme", "system": "serotonergic"}
-        self.assertEqual(check_data._tone_of(tgt, "enzyme_inhibitor", {})[0], 1)
+        self.assertEqual(self._tone(tgt, "enzyme_inhibitor")[0], 1)
 
     def test_presynaptic_inhibitory_autoreceptor(self):
         tgt = {"type": "receptor", "system": "adrenergic", "receptor": "alpha2a"}
-        self.assertEqual(check_data._tone_of(tgt, "agonist", self.rec_meta)[0], -1)
-        self.assertEqual(check_data._tone_of(tgt, "antagonist", self.rec_meta)[0], 1)
+        self.assertEqual(self._tone(tgt, "agonist", self.rec_meta)[0], -1)
+        self.assertEqual(self._tone(tgt, "antagonist", self.rec_meta)[0], 1)
 
     def test_postsynaptic_receptor_is_not_a_tone_setter(self):
         tgt = {"type": "receptor", "system": "serotonergic", "receptor": "5ht2a"}
-        self.assertEqual(check_data._tone_of(tgt, "antagonist", self.rec_meta),
+        self.assertEqual(self._tone(tgt, "antagonist", self.rec_meta),
                          (0, None))
+
+
+class ToneRulesAreSharedTest(unittest.TestCase):
+    """The rule table has to actually REACH both consumers, or deduplicating it just
+    moved the drift somewhere quieter. These lock the two ends of the pipe: the table
+    is emitted into meta.json (what the viewer fetches), and every action it names is
+    a real one (a typo would silently mean "no tone" rather than failing)."""
+
+    def test_emitted_into_meta(self):
+        meta_path = (Path(__file__).resolve().parent.parent.parent
+                     / "public" / "data" / "meta.json")
+        emitted = json.loads(meta_path.read_text("utf-8")).get("tone_rules")
+        self.assertEqual(emitted, json.loads(json.dumps(TONE_RULES)))
+
+    def test_every_rule_names_a_real_action(self):
+        actions = set(DRUG_ACTIONS)
+        for bucket, rules in TONE_RULES.items():
+            for action, rule in rules.items():
+                self.assertIn(action, actions, f"{bucket}.{action}")
+                self.assertIn(rule[0], (1, -1), f"{bucket}.{action}")
+
+    def test_the_two_vmat2_directions_stay_opposite(self):
+        """The bug that motivated the dedup: a VMAT2 substrate and a VMAT2 blocker
+        engage one target and must move tone opposite ways."""
+        ves = TONE_RULES["vesicular_transporter"]
+        self.assertEqual(ves["vesicular_releaser"][0], -ves["vesicular_inhibitor"][0])
 
 
 class FlowConsistencyEndToEndTest(unittest.TestCase):
@@ -113,6 +150,9 @@ class FlowConsistencyEndToEndTest(unittest.TestCase):
                 "agonist": {"effect": "boost"},
             },
             "system_flow_kinds": {"serotonergic": "serotonergic"},
+            # The real rule table, not a fixture copy: the check reads its
+            # directions from meta exactly as the viewer does.
+            "tone_rules": TONE_RULES,
         }
 
     def _receptors(self):

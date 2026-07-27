@@ -54,6 +54,66 @@
     "cholinergic": "cholinergic",
     "histaminergic": "histaminergic"
   },
+  "tone_rules": {
+    "transporter": {
+      "reuptake_inhibitor": [
+        1,
+        "reuptake_block"
+      ],
+      "releaser": [
+        1,
+        "transporter_release"
+      ]
+    },
+    "vesicular_transporter": {
+      "vesicular_inhibitor": [
+        -1,
+        "vesicular_depletion"
+      ],
+      "blocker": [
+        -1,
+        "vesicular_depletion"
+      ],
+      "vesicular_releaser": [
+        1,
+        "vesicular_store_release"
+      ],
+      "releaser": [
+        1,
+        "vesicular_store_release"
+      ]
+    },
+    "enzyme": {
+      "enzyme_inhibitor": [
+        1,
+        "enzyme_inhibition"
+      ]
+    },
+    "vesicle_protein": {
+      "blocker": [
+        -1,
+        "vesicle_protein_block"
+      ]
+    },
+    "autoreceptor": {
+      "agonist": [
+        -1,
+        "autoreceptor_agonism"
+      ],
+      "partial_agonist": [
+        -1,
+        "autoreceptor_agonism"
+      ],
+      "antagonist": [
+        1,
+        "autoreceptor_block"
+      ],
+      "inverse_agonist": [
+        1,
+        "autoreceptor_block"
+      ]
+    }
+  },
   "receptor_family_labels": {
     "adrenergic": "Adrenergic",
     "cholinergic": "Cholinergic",

@@ -142,6 +142,58 @@ DRUG_EFFECT_LABELS: dict[str, dict[str, str]] = {
     "modulate": {"en": "Modulates", "fr": "Module"},
 }
 
+# --- Tone rules (the by-mechanism flow model) ------------------------------------
+# Which bindings SET a transmitter's tone, and in which direction. This is the single
+# source of truth for the flow overlay: emitted as ``meta.tone_rules`` and read by
+# BOTH consumers (``toneSignOf`` in js/data.js, which animates it, and ``_tone_of`` in
+# tools/check_data.py, which cross-checks it). It used to be transcribed by hand in
+# each language, which is exactly how the VMAT2 direction bug survived a release in
+# one copy: a rule you have to remember to change twice is a rule that drifts.
+#
+# Shape: bucket -> {action -> [tone, mechanism]}. ``tone`` is +1 (raises the
+# transmitter's tone) or -1 (lowers it); an action absent from its bucket contributes
+# nothing, which is the common case (a postsynaptic receptor binding stays dots-only
+# and never draws flow). ``mechanism`` is a stable snake_case KEY, not display text:
+# nothing renders it, check_data spells it out in a warning so a reader can see *why*
+# a system's flow points the way it does.
+#
+# Picking the bucket is the one part each consumer still does itself, because it is a
+# join rather than a rule: the target's ``type`` (plus its ``vesicular`` flag) selects
+# the first four, and the last needs the RECEPTOR record behind the binding, since a
+# receptor only feeds back when it is presynaptic AND inhibitory.
+TONE_RULES: dict[str, dict[str, list]] = {
+    # A plasma-membrane reuptake pump (SERT / DAT / NET / GAT): blocking it, or
+    # running it backwards, leaves more transmitter in the synapse.
+    "transporter": {
+        "reuptake_inhibitor": [1, "reuptake_block"],
+        "releaser": [1, "transporter_release"],
+    },
+    # A vesicular transporter (VMAT2, flagged ``vesicular`` in DRUG_TARGETS) is the
+    # mirror image, and the direction comes from the ACTION, not from the target:
+    # inhibiting it never fills the vesicle (depletion, tone down), while riding it as
+    # a substrate dumps the stores into the cytosol (tone up).
+    "vesicular_transporter": {
+        "vesicular_inhibitor": [-1, "vesicular_depletion"],
+        "blocker": [-1, "vesicular_depletion"],
+        "vesicular_releaser": [1, "vesicular_store_release"],
+        "releaser": [1, "vesicular_store_release"],
+    },
+    # A degrading enzyme (MAO, AChE): inhibiting it spares the transmitter.
+    "enzyme": {"enzyme_inhibitor": [1, "enzyme_inhibition"]},
+    # A vesicle protein (SV2A): blocking it impairs release.
+    "vesicle_protein": {"blocker": [-1, "vesicle_protein_block"]},
+    # A PRESYNAPTIC INHIBITORY receptor (the autoreceptor case, e.g. alpha-2, 5-HT1A,
+    # D2 on the source neuron): engaging it is negative feedback, so an agonist damps
+    # release and an antagonist disinhibits it. This is why a D2-antagonist
+    # antipsychotic reads dopaminergic-UP (see the caveat in CLAUDE.md "Drugs").
+    "autoreceptor": {
+        "agonist": [-1, "autoreceptor_agonism"],
+        "partial_agonist": [-1, "autoreceptor_agonism"],
+        "antagonist": [1, "autoreceptor_block"],
+        "inverse_agonist": [1, "autoreceptor_block"],
+    },
+}
+
 # --- Drug metabolism (the enzymes a drug is handled by, or acts on) -------------
 # A separate axis from the binding targets above: this is pharmacokinetics, so it has
 # no anatomy and never lights the 3D scene (these are liver enzymes). It answers

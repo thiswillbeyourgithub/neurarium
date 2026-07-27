@@ -97,6 +97,7 @@ from data_generators.drugs import (  # noqa: E402
     ENZYME_STRENGTHS,
     TARGET_TYPE_COLORS,
     TARGET_TYPE_LABELS,
+    TONE_RULES,
 )
 
 # ---------------------------------------------------------------------------
@@ -606,6 +607,27 @@ def _receptor_record(rec: dict[str, Any],
         out["wikipedia"] = rec["wikipedia"]
         out["wikipedia_provenance"] = _wiki_provenance(rec["id"])
     return out
+
+
+def _check_tone_rules() -> None:
+    """Fail loud if a tone rule names an action the drug vocabulary does not have.
+
+    A rule keyed on a typo is invisible at runtime: the action simply never matches,
+    the binding contributes no tone, and the drug quietly loses its flow overlay. So
+    the keys are confirmed against :data:`DRUG_ACTIONS` at generation instead, where a
+    mistake stops the build (the same fail-loud rule the rest of the generator uses).
+    """
+    for bucket, rules in TONE_RULES.items():
+        for action, rule in rules.items():
+            if action not in DRUG_ACTIONS:
+                raise SystemExit(
+                    f"TONE_RULES[{bucket!r}] names unknown action {action!r}; "
+                    f"add it to DRUG_ACTIONS or fix the typo"
+                )
+            if len(rule) != 2 or rule[0] not in (1, -1):
+                raise SystemExit(
+                    f"TONE_RULES[{bucket!r}][{action!r}] must be [+1|-1, mechanism]"
+                )
 
 
 def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -1502,6 +1524,10 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # Drug target system -> projection kind, for the per-drug flow overlay (see
         # SYSTEM_FLOW_KINDS). Language-neutral keys both sides.
         "system_flow_kinds": SYSTEM_FLOW_KINDS,
+        # Which bindings set a transmitter's tone, and which way (see TONE_RULES).
+        # Emitted rather than transcribed because two consumers need the same rule:
+        # the viewer animates it and check_data cross-checks it.
+        "tone_rules": TONE_RULES,
         # Receptor legend maps: family -> heading, mechanism class -> label, and
         # pre/post-synaptic -> label (all bilingual). The per-receptor sign reuses
         # sign_colors / sign_labels above, so the receptor legend needs no extra
@@ -1569,6 +1595,7 @@ def write_artifacts(root: Path) -> None:
     ``data/shapes`` directory is cleared of stale ``*.json`` first so removing a
     structure here also removes its orphaned shape file.
     """
+    _check_tone_rules()
     data, shapes = build_records()
 
     data_dir = root / "data"

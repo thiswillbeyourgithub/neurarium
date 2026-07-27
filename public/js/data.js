@@ -507,39 +507,39 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     const t = Math.max(0, Math.min(1, (pKi - 6) / 4)); // 1 uM..0.1 nM -> 0..1
     return 0.35 + 0.65 * t;
   };
-  // Signed tone contribution of one binding to its system's ascending flow (the
-  // "Tone-setters + autoreceptors" model): +1 raises the transmitter's tone, -1
-  // lowers it, 0 = not a tone-setter (a postsynaptic receptor -> dots only). Direction
-  // comes from target type + action (+ autoreceptor sign for presynaptic receptors),
-  // NOT from receptor class (a postsynaptic gain claim we deliberately do not make).
-  const toneSignOf = (tgt, action) => {
+  // The "tone-setters + autoreceptors" flow model. Direction comes from target type +
+  // action (+ the autoreceptor sign for presynaptic receptors), NOT from receptor
+  // class (a postsynaptic gain claim we deliberately do not make). The rule table is
+  // authored once in tools/data_generators/drugs.py and shipped as meta.tone_rules.
+  const toneRules = metaRecord.tone_rules || {};
+  // Which tone bucket a binding falls in (see meta.tone_rules): the join the rule
+  // table cannot express, since it needs the target's type + vesicular flag and, for
+  // the autoreceptor case, the receptor record behind the binding.
+  const toneBucketOf = (tgt) => {
     const type = tgt.type || "";
     if (type === "transporter") {
-      // A vesicular transporter (VMAT2, flagged in meta.drug_targets) loads
-      // vesicles, so inhibiting it *depletes* the transmitter and lowers tone, the
-      // opposite of a plasma-membrane reuptake transporter (SERT/DAT/NET). But a
-      // substrate of the same transporter (the amphetamines, MDMA) dumps the stored
-      // monoamine into the cytosol and *raises* tone, so the direction comes from
-      // the action, not from the target being vesicular.
-      if (tgt.vesicular) {
-        if (action === "vesicular_inhibitor" || action === "blocker") return -1;
-        return action === "vesicular_releaser" || action === "releaser" ? 1 : 0;
-      }
-      return action === "reuptake_inhibitor" || action === "releaser" ? 1 : 0;
+      return tgt.vesicular ? "vesicular_transporter" : "transporter";
     }
-    if (type === "enzyme") return action === "enzyme_inhibitor" ? 1 : 0;
-    if (type === "vesicle_protein") return action === "blocker" ? -1 : 0;
+    if (type === "enzyme" || type === "vesicle_protein") return type;
     if (type === "receptor" || type === "receptor_group") {
       // Sign/synaptic from the specific receptor record (a modeled 5-HT1x / D2/D3),
       // else from the group's own flag (the α2 family, carried in meta.drug_targets).
       const rm = tgt.receptor ? receptorMeta.get(tgt.receptor) : tgt;
       const presyn = rm && (rm.synaptic === "presynaptic" || rm.synaptic === "both");
-      if (presyn && rm.sign === "inhibitory") {
-        if (action === "agonist" || action === "partial_agonist") return -1;
-        if (action === "antagonist" || action === "inverse_agonist") return 1;
-      }
+      // Only a presynaptic INHIBITORY receptor feeds back on release; every other
+      // receptor binding stays dots-only and draws no flow.
+      if (presyn && rm.sign === "inhibitory") return "autoreceptor";
     }
-    return 0;
+    return null;
+  };
+  // The signed tone one binding sets: +1 raises the transmitter's tone, -1 lowers it,
+  // 0 = not a tone setter. The rule table itself is DATA (meta.tone_rules, authored in
+  // tools/data_generators/drugs.py), so this and check_data.py's _tone_of read one
+  // source of truth instead of each transcribing it.
+  const toneSignOf = (tgt, action) => {
+    const bucket = toneBucketOf(tgt);
+    const rule = bucket && (toneRules[bucket] || {})[action];
+    return rule ? rule[0] : 0;
   };
   // Normalize a quote-level sources list (a binding's `sources` or a drug's
   // `nbn_sources`) into the shape the panel renders.

@@ -1301,41 +1301,48 @@ def _affinity_weight(ki):
     return 0.35 + 0.65 * t
 
 
-def _tone_of(target, action, rec_meta):
-    """Signed tone contribution of one binding + the *label* of the mechanism that
-    set it, a port of js/data.js ``toneSignOf``: ``(+1|-1|0, driver|None)``. +1 raises
-    the transmitter's tone, -1 lowers it, 0 = not a tone-setter (a postsynaptic
-    receptor -> dots only, never flow). The label lets the check say *why* a system's
-    flow points the way it does (a reuptake block vs. an autoreceptor block).
+def _tone_bucket_of(target, rec_meta):
+    """Which ``meta.tone_rules`` bucket a binding falls in, or None for no tone.
 
-    Kept in sync with js/data.js by hand: both are the one tone-setter/autoreceptor
-    model, so a divergence here is a bug in one of the two."""
+    The one part of the flow model that is not in the rule table, because it is a
+    join rather than a rule: the target's ``type`` (plus its ``vesicular`` flag)
+    picks the first four buckets, and the autoreceptor bucket needs the RECEPTOR
+    record behind the binding, since a receptor only feeds back on release when it
+    is presynaptic AND inhibitory. Mirrors ``toneBucketOf`` in js/data.js.
+    """
     ttype = target.get("type", "")
     if ttype == "transporter":
-        if target.get("vesicular"):
-            if action in ("vesicular_inhibitor", "blocker"):
-                return (-1, "vesicular depletion")
-            # A substrate of the same vesicular transporter dumps the stored
-            # monoamine into the cytosol instead: same target, tone *up*.
-            return ((1, "vesicular store release")
-                    if action in ("vesicular_releaser", "releaser") else (0, None))
-        return ((1, "reuptake block / release")
-                if action in ("reuptake_inhibitor", "releaser") else (0, None))
-    if ttype == "enzyme":
-        return (1, "enzyme inhibition") if action == "enzyme_inhibitor" else (0, None)
-    if ttype == "vesicle_protein":
-        return (-1, "vesicle-protein block") if action == "blocker" else (0, None)
+        return "vesicular_transporter" if target.get("vesicular") else "transporter"
+    if ttype in ("enzyme", "vesicle_protein"):
+        return ttype
     if ttype in ("receptor", "receptor_group"):
         # sign/synaptic from the specific receptor record (a modeled 5-HT1x / D2/D3),
         # else the group's own flag (the alpha2 family, in meta.drug_targets).
         rm = rec_meta.get(target.get("receptor")) if target.get("receptor") else target
         presyn = bool(rm) and rm.get("synaptic") in ("presynaptic", "both")
         if presyn and rm.get("sign") == "inhibitory":
-            if action in ("agonist", "partial_agonist"):
-                return (-1, "autoreceptor agonism")
-            if action in ("antagonist", "inverse_agonist"):
-                return (1, "autoreceptor block")
-    return (0, None)
+            return "autoreceptor"
+    return None
+
+
+def _tone_of(target, action, rec_meta, tone_rules):
+    """Signed tone contribution of one binding + the *label* of the mechanism that
+    set it: ``(+1|-1|0, driver|None)``. +1 raises the transmitter's tone, -1 lowers
+    it, 0 = not a tone-setter (a postsynaptic receptor -> dots only, never flow). The
+    label lets the check say *why* a system's flow points the way it does (a reuptake
+    block vs. an autoreceptor block).
+
+    ``tone_rules`` is ``meta.tone_rules``, the SAME table js/data.js animates: the
+    rule used to be transcribed by hand in each language, which is how the VMAT2
+    direction bug survived in one copy. Now only the bucket join above is per-language
+    and the directions themselves have one author (TONE_RULES in
+    tools/data_generators/drugs.py)."""
+    bucket = _tone_bucket_of(target, rec_meta)
+    rule = (tone_rules.get(bucket) or {}).get(action) if bucket else None
+    if not rule:
+        return (0, None)
+    tone, mechanism = rule[0], rule[1]
+    return (tone, mechanism.replace("_", " "))
 
 
 def _target_regions(target, rec_meta):
@@ -1374,6 +1381,7 @@ def check_flow_consistency(report, meta, drugs, projections, receptors):
     drug_targets = meta.get("drug_targets", {})
     drug_actions = meta.get("drug_actions", {})
     system_flow_kinds = meta.get("system_flow_kinds", {})
+    tone_rules = meta.get("tone_rules", {})
     rec_meta = {r.get("id"): r for r in receptors}
     effect_sign = {"boost": 1, "block": -1, "modulate": 0}
 
@@ -1408,7 +1416,7 @@ def check_flow_consistency(report, meta, drugs, projections, receptors):
                 continue
             action = b.get("action")
             aff = _affinity_weight(b.get("ki"))
-            sign, driver = _tone_of(target, action, rec_meta)
+            sign, driver = _tone_of(target, action, rec_meta, tone_rules)
             if sign:
                 tone[system] += sign * aff
                 tone_drivers[system].append((sign, driver))
