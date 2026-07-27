@@ -10,9 +10,9 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-27, after the GtoPdb classification pass)
+## Snapshot (2026-07-27, after the GtoPdb classification pass and the Wikipedia CYP sweep)
 
-Headline: **3673 / 3843 knowledge nodes backed (96%)**. In the tally a bare `llm`
+Headline: **3782 / 3952 knowledge nodes backed (96%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 "missing" below means `llm` or no source at all. 170 knowledge nodes are missing.
 
@@ -24,6 +24,10 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 > autoreceptor sentence, Stahl Essential p271) and the last 2 `references` (a Wikipedia link
 > for the tuberomammillary nucleus). `receptor_synaptic` is untouched: GtoPdb has no
 > pre/post-synaptic field at all.
+>
+> **The Wikipedia CYP sweep, same day**, added 109 `drug_enzymes` nodes (62 drugs Stahl has no
+> monograph for). All verified, so it grows the denominator without touching the gap: 3843 to
+> 3952 nodes, the same 170 missing, still 96%. The table below is unchanged by it.
 >
 > **The earlier drop from 96% (1673 / 1743) to 94% is still worth naming**, because the
 > denominator grew faster than the gap for two structural reasons:
@@ -39,7 +43,7 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 >   and benzodiazepines arrive with a GABA-A binding no affinity database assays.
 >
 > **Node kinds that landed since, all at 100%:** `drug_brands` (469), `drug_half_life` (185),
-> `drug_enzymes` (159), `drug_metabolite_bindings` (48), `drug_metabolites` (36),
+> `drug_enzymes` (268), `drug_metabolite_bindings` (48), `drug_metabolites` (36),
 > `receptor_density` (36), `target_density` (17). Each shipped quote-gated from the start,
 > which is why none of them contributes to the gap.
 >
@@ -58,7 +62,7 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 | `projections` | 2 | 58 | 1.2% | Hard | claustrum primary lit |
 | `receptor_class` (GPCR/ionotropic) | 1 | 56 | 0.6% | limit | sigma-1 is a GtoPdb `other_protein` |
 | `references` | 0 | 371 | not in headline | done | closed |
-| everything else | 0 | 1157 | closed | done | see "Kinds now closed" below |
+| everything else | 0 | 1324 | closed | done | see "Kinds now closed" below |
 
 **The shape of the problem: no single lever dominates any more.** The GtoPdb classification
 pass took the 121-node block that used to be half the gap and left 62 of it, of which 48 are
@@ -392,10 +396,11 @@ Kept as a record of which lever worked, so a later session does not re-derive it
   quote-gates and merges.
 - **`drug_metabolite_bindings` 48/48.** The metabolite's own Wikipedia pharmacology (corpus #9)
   for target + action, PDSP (corpus #5) for the affinity and for target discovery.
-- **`drug_enzymes` 159/159.** Stahl's Pharmacokinetics block is regular enough
-  ("Substrate for CYP2D6", "Inhibits CYP2C19") that `fetch_cyp.py` needs **no LLM at all**:
-  pattern match plus the ordinary verbatim quote gate. 86 drugs, 121 substrate / 29 inhibitor /
-  9 inducer rows.
+- **`drug_enzymes` 268/268.** Two greps behind the same verbatim quote gate, **no LLM at all**:
+  Stahl's Pharmacokinetics block is regular enough ("Substrate for CYP2D6", "Inhibits CYP2C19")
+  for `fetch_cyp.py` (159 nodes over 86 drugs), and `fetch_cyp_wikipedia.py` adds the drugs Stahl
+  has no monograph for out of the stored English articles (corpus #9; 109 further nodes over 62
+  drugs). Stahl wins any pair both state. 119 drugs, 220 substrate / 37 inhibitor / 11 inducer.
 - **`receptor_density` 36/36 and `target_density` 17/17.** Allen microarray intensity
   (corpus #8), one node per profile with the whole profile written into the quote, published
   only above the cross-donor reliability floor.
@@ -631,7 +636,7 @@ with the caveat, in the caption and not only in a tooltip: an overlap is a flag 
 never a contraindication, and the absence of an edge is not a safety claim. This is a
 knowledge map, not a prescribing aid.
 
-**Verdict: adopted; step 1 shipped, step 2 open.** Step 1, the drug to enzyme roles out of
+**Verdict: adopted; steps 1 and 2 shipped, metabolite `formed_by` open.** Step 1, the drug to enzyme roles out of
 Stahl's pharmacokinetics block, landed in v3.30.0 to v3.31.1 exactly as scoped: regular enough
 to grep, so `fetch_cyp.py` uses **no LLM judge at all** (the same argument that makes
 `apply_nbn_sources.py` stronger than a judge for the NbN line). It emits **159 `drug_enzymes`
@@ -640,11 +645,19 @@ nodes over 86 drugs** (121 substrate, 29 inhibitor, 9 inducer; 3A4 58, 2D6 44, 1
 (`pkInteractionsOf`), a **Metabolism** and **Interactions** list in `showDrug`, and an
 **Enzymes** browse section.
 
-**Still open, in the order they are worth doing:**
-- **The Wikipedia sweep for the drugs Stahl has no CYP line for.** 149 of our 235 drugs carry
-  no enzyme node, and the non-Stahl roster (now 70 drugs larger than when this was surveyed)
-  is most of them. Corpus #9 is already stored for them; this is the same extract-then-judge
-  pass a binding gets.
+**Step 2, the Wikipedia sweep, also landed, and also with no LLM.** The survey expected an
+extract-then-judge pass; the article's drugbox `Metabolism |` row turned out to be as regular as a
+Stahl bullet, so `fetch_cyp_wikipedia.py` imports `fetch_cyp.py`'s role/strength/victim rules and
+adds only what a long prose paragraph needs: a sentence split, a negation veto, a rule that the
+drug's own name must appear before the verb with no `which` / `that` / paren / comma between, and a
+two-roles-in-one-sentence veto. Those three rules are what stops the wrong claims a paragraph
+offers: "Smoking induces CYP1A2" read as clozapine inducing it, a co-prescribed victim drug's
+profile read as the subject's ("... mirtazapine, which is mainly metabolized by ..."), and a
+reference-list title read as prose. Yield: **190 nodes over 101 drugs**, of which **109 over 62
+drugs** survive the Stahl-first merge (Stahl already stated the rest), taking `drug_enzymes` from
+159/86 to **268 nodes over 119 drugs**, all verified.
+
+**Still open:**
 - **Metabolite `formed_by`.** All 36 metabolite rows still have none. Expect roughly 10 to 15
   sourceable from Stahl, hand-curated rather than piped, and the rest honestly `NOSOURCE`. It
   is the prodrug story (why a CYP2D6 poor metabolizer gets nothing from codeine or tramadol).

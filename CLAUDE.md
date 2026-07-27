@@ -628,12 +628,21 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   emitted into `meta.enzymes*`. Field is `enzyme`, not `cyp`: the non-CYP routes (UGT, esterases,
   MAO) will want the same one. Strength is **ordinal on purpose**: the AUC fold-changes behind
   the regulatory tiers are not in the corpora (see `docs/SOURCING_GAPS.md`).
-- **Sourcing.** `tools/fetch/fetch_cyp.py` reads Stahl's per-drug `Pharmacokinetics` block,
-  which is regular enough ("Substrate for CYP2D6", "Inhibits CYP2C19") that the pass needs **no
-  LLM**: pattern match + the ordinary verbatim quote gate, writing the committed
-  `tools/generated_cache/drug_enzymes.json` that `generate_data.py` merges in (rows are NOT
-  authored in `drugs_data.jsonl`). Only that block is read: the `Drug Interactions` block's
-  isoform sentences are mostly about *other* drugs acting on this one.
+- **Sourcing: two deterministic fetchers, no LLM in either**, each writing a committed cache
+  `generate_data.py` merges (rows are NOT authored in `drugs_data.jsonl`); **Stahl wins** a
+  (enzyme, role) pair both state.
+  - `tools/fetch/fetch_cyp.py` -> `generated_cache/drug_enzymes.json`, from Stahl's per-drug
+    `Pharmacokinetics` block, regular enough ("Substrate for CYP2D6", "Inhibits CYP2C19") that
+    a pattern match + the ordinary verbatim quote gate beats a judge. Only that block is read:
+    the `Drug Interactions` block's isoform sentences are mostly about *other* drugs acting on
+    this one.
+  - `tools/fetch/fetch_cyp_wikipedia.py` -> `generated_cache/drug_enzymes_wikipedia.json`, from
+    the drug's stored English Wikipedia article (corpus #9), the only source for the drugs
+    outside Stahl's roster. Leans on the **drugbox `Metabolism` row** (regular, and a substrate
+    claim by construction); prose is read only per *sentence*, with the drug named before the
+    verb and nothing in between that hands the verb another subject, plus negation /
+    victim-frame / two-roles-at-once vetoes (Wikipedia states absence and other molecules'
+    metabolism constantly, which Stahl's terse bullets never did).
 - **Viewer.** `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
   pill, clickable to the enzyme) and an **Interactions** list, both **after** the anatomy sections
   (pharmacokinetics lights nothing in the scene, so it does not interrupt Acts on -> Projections

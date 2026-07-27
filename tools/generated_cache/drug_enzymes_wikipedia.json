@@ -1,0 +1,2524 @@
+{
+ "agomelatine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "agomelatine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (90% CYP1A2 and 10% CYP2C9 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "agomelatine",
+     "provenance": "verified",
+     "quote": "Agomelatine is a substrate of CYP1A2 , CYP2C9 and CYP2C19 ."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "agomelatine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (90% CYP1A2 and 10% CYP2C9 )"
+    }
+   ]
+  }
+ ],
+ "alprazolam": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alprazolam",
+     "provenance": "verified",
+     "quote": "Alprazolam is primarily metabolized via CYP3A4 ."
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "amitriptyline": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "amitriptyline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (CYP2D6, CYP2C19, CYP3A4)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "amitriptyline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (CYP2D6, CYP2C19, CYP3A4)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "amitriptyline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (CYP2D6, CYP2C19, CYP3A4)"
+    }
+   ]
+  }
+ ],
+ "amphetamine_d": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dextroamphetamine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , DBH , FMO3"
+    }
+   ]
+  }
+ ],
+ "amphetamine_dl": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "amphetamine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , DBH , FMO3"
+    }
+   ]
+  }
+ ],
+ "aripiprazole": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "aripiprazole",
+     "provenance": "verified",
+     "quote": "Aripiprazole is a substrate of CYP2D6 and CYP3A4 ."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "aripiprazole",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mostly via CYP3A4 and 2D6 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "armodafinil": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "armodafinil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , including CYP3A4 and other enzymes ( hydrolytic amidation , sulfoxidation , aromatic ring hydroxylation , and glucuronide conjugation )"
+    }
+   ]
+  }
+ ],
+ "asenapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "asenapine",
+     "provenance": "verified",
+     "quote": "Metabolism | hepatic (glucurinodation by UGT1A4 and oxidative metabolism by CYP1A2 )"
+    }
+   ]
+  }
+ ],
+ "atomoxetine": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "atomoxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : ring hydroxylation ( CYP2D6 , others), benzylic hydroxylation, N - demethylation ( CYP2C19 ), glucuronidation ( UGTs"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "atomoxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : ring hydroxylation ( CYP2D6 , others), benzylic hydroxylation, N - demethylation ( CYP2C19 ), glucuronidation ( UGTs"
+    }
+   ]
+  }
+ ],
+ "blonanserin": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "blonanserin",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4"
+    }
+   ]
+  }
+ ],
+ "brexpiprazole": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "brexpiprazole",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mainly mediated by CYP3A4 and CYP2D6 )"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "brexpiprazole",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mainly mediated by CYP3A4 and CYP2D6 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "buprenorphine": [
+  {
+   "enzyme": "cyp2c8",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "buprenorphine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2C8 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "buprenorphine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2C8 )"
+    }
+   ]
+  }
+ ],
+ "bupropion": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "bupropion",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , intestines ( CYP2B6 , others)"
+    }
+   ]
+  }
+ ],
+ "buspirone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "buspirone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (via CYP3A4 )"
+    }
+   ]
+  }
+ ],
+ "caffeine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "caffeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primary: CYP1A2 Minor: CYP2E1 , CYP3A4 , CYP2C8 , CYP2C9"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c8",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "caffeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primary: CYP1A2 Minor: CYP2E1 , CYP3A4 , CYP2C8 , CYP2C9"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "caffeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primary: CYP1A2 Minor: CYP2E1 , CYP3A4 , CYP2C8 , CYP2C9"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "caffeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primary: CYP1A2 Minor: CYP2E1 , CYP3A4 , CYP2C8 , CYP2C9"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "caffeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primary: CYP1A2 Minor: CYP2E1 , CYP3A4 , CYP2C8 , CYP2C9"
+    }
+   ]
+  }
+ ],
+ "carbamazepine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carbamazepine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 )"
+    }
+   ]
+  }
+ ],
+ "cariprazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cariprazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver via CYP3A4 and to a lesser extent CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cariprazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver via CYP3A4 and to a lesser extent CYP2D6"
+    }
+   ]
+  }
+ ],
+ "chlorpromazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "chlorpromazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , mostly CYP2D6 -mediated"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "citalopram": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "citalopram",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 and CYP2C19 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "citalopram",
+     "provenance": "verified",
+     "quote": "Citalopram is metabolized in the liver mostly by CYP2C19 , but also by CYP3A4 and CYP2D6 ."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "citalopram",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 and CYP2C19 )"
+    }
+   ]
+  }
+ ],
+ "clomipramine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "clomipramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "clonidine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "clonidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver to inactive metabolites , 2/3 CYP2D6"
+    }
+   ]
+  }
+ ],
+ "clozapine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "clozapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , by several CYP isozymes mainly via CYP2D6"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "cocaine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cocaine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , CYP3A4"
+    }
+   ]
+  }
+ ],
+ "daridorexant": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "daridorexant",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensive (mainly CYP3A4 (89%))"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "desipramine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desipramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "desvenlafaxine": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desvenlafaxine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2C19 , CYP3A4 , ( CYP2D6 is not involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desvenlafaxine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2C19 , CYP3A4 , ( CYP2D6 is not involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desvenlafaxine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2C19 , CYP3A4 , ( CYP2D6 is not involved)"
+    }
+   ]
+  }
+ ],
+ "dexmedetomidine": [
+  {
+   "enzyme": "cyp2a6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dexmedetomidine",
+     "provenance": "verified",
+     "quote": "Dexmedetomidine is metabolized by the liver , largely by glucuronidation (34%) as well as by oxidation via CYP2A6 and other cytochrome P450 enzymes ."
+    }
+   ]
+  }
+ ],
+ "dextromethorphanbupropion": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dextromethorphan_bupropion",
+     "provenance": "verified",
+     "quote": "Bupropion | Norepinephrine–dopamine reuptake inhibitor , CYP2D6 inhibitor"
+    }
+   ]
+  }
+ ],
+ "dextromethorphanquinidine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dextromethorphan_quinidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver, extensive. Dextromethorphan is catalyzed by CYP2D6. Quinidine is metabolized by CYP3A4 and competitively inhibits the metabolism of dextromethorphan to increase and prolong plasma concentrations of dextromethorphan"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dextromethorphan_quinidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver, extensive. Dextromethorphan is catalyzed by CYP2D6. Quinidine is metabolized by CYP3A4 and competitively inhibits the metabolism of dextromethorphan to increase and prolong plasma concentrations of dextromethorphan"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "diazepam": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "diazepam",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver – CYP2B6 (minor route) to desmethyldiazepam , CYP2C19 (major route) to inactive metabolites, CYP3A4 (major route) to temazepam"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "diazepam",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver – CYP2B6 (minor route) to desmethyldiazepam , CYP2C19 (major route) to inactive metabolites, CYP3A4 (major route) to temazepam"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "diazepam",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver – CYP2B6 (minor route) to desmethyldiazepam , CYP2C19 (major route) to inactive metabolites, CYP3A4 (major route) to temazepam"
+    }
+   ]
+  }
+ ],
+ "diphenhydramine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "diphenhydramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 , others)"
+    }
+   ]
+  }
+ ],
+ "donepezil": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "donepezil",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , CYP3A4 , and glucuronidation . Four major metabolites, two of which are active."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "donepezil",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , CYP3A4 , and glucuronidation . Four major metabolites, two of which are active."
+    }
+   ]
+  }
+ ],
+ "doxepin": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "doxepin",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 , CYP2C19 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "doxepin",
+     "provenance": "verified",
+     "quote": "Doxepin has been identified as an inhibitor of CYP2D6 in vivo in a study of human patients being treated with 75 to 250 mg/day for depression."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "doxepin",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 , CYP2C19 )"
+    }
+   ]
+  }
+ ],
+ "doxylamine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "doxylamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP2D6 , CYP1A2 , CYP2C9 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "doxylamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP2D6 , CYP1A2 , CYP2C9 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "doxylamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP2D6 , CYP1A2 , CYP2C9 )"
+    }
+   ]
+  }
+ ],
+ "duloxetine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "duloxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , two P450 isozymes, CYP2D6 and CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "duloxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , two P450 isozymes, CYP2D6 and CYP1A2"
+    }
+   ]
+  }
+ ],
+ "escitalopram": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "escitalopram",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2C19 , CYP3A4 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "escitalopram",
+     "provenance": "verified",
+     "quote": "As escitalopram is only a weak inhibitor of CYP2D6, analgesia from tramadol may not be affected."
+    }
+   ],
+   "strength": "weak"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "escitalopram",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2C19 , CYP3A4 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "escitalopram",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2C19 , CYP3A4 , CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "eszopiclone": [
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eszopiclone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver oxidation and demethylation ( CYP3A4 and CYP2E1 -mediated)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eszopiclone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver oxidation and demethylation ( CYP3A4 and CYP2E1 -mediated)"
+    }
+   ]
+  }
+ ],
+ "flibanserin": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "flibanserin",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensive by liver (mainly by CYP3A4 and CYP2C19 )"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "flibanserin",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensive by liver (mainly by CYP3A4 and CYP2C19 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "fluoxetine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fluoxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mostly CYP2D6 -mediated)"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "fluvoxamine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fluvoxamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (primarily O- demethylation ) Major: CYP2D6 or CYP1A2 Minor: CYP3A4 , CYP2C19 , and/or CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fluvoxamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (primarily O- demethylation ) Major: CYP2D6 or CYP1A2 Minor: CYP3A4 , CYP2C19 , and/or CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fluvoxamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (primarily O- demethylation ) Major: CYP2D6 or CYP1A2 Minor: CYP3A4 , CYP2C19 , and/or CYP1A2"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fluvoxamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (primarily O- demethylation ) Major: CYP2D6 or CYP1A2 Minor: CYP3A4 , CYP2C19 , and/or CYP1A2"
+    }
+   ]
+  }
+ ],
+ "galantamine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "galantamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver partially CYP450 : CYP2D6 / 3A4 substrate"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "galantamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver partially CYP450 : CYP2D6 / 3A4 substrate"
+    }
+   ]
+  }
+ ],
+ "guanfacine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "guanfacine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4"
+    }
+   ]
+  }
+ ],
+ "hydroxyzine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "hydroxyzine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver by CYP3A4 and CYP3A5"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "hydroxyzine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver by CYP3A4 and CYP3A5"
+    }
+   ]
+  }
+ ],
+ "iloperidone": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iloperidone",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP2D6 -mediated hydroxylation and CYP3A4 -mediated O -demethylation)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iloperidone",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP2D6 -mediated hydroxylation and CYP3A4 -mediated O -demethylation)"
+    }
+   ]
+  }
+ ],
+ "imipramine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "imipramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 , CYP2C19 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "imipramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 , CYP2C19 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "imipramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 , CYP2C19 , CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "ketamine": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ketamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , intestine (oral): Major: CYP3A4 , CYP2B6"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ketamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , intestine (oral): Major: CYP3A4 , CYP2B6"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "lemborexant": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lemborexant",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (major: CYP3A4 , minor: CYP3A5 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lemborexant",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (major: CYP3A4 , minor: CYP3A5 )"
+    }
+   ]
+  }
+ ],
+ "levomilnacipran": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "levomilnacipran",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (primarily by CYP3A4 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "lofepramine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lofepramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (via cytochrome P450 , including CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "loxapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "loxapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensive Liver ; active metabolites include amoxapine and 8-hydroxyloxapine. Inhibits P-gp and is a substrate of CYP1A2 , CYP3A4 and CYP2D6"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "loxapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensive Liver ; active metabolites include amoxapine and 8-hydroxyloxapine. Inhibits P-gp and is a substrate of CYP1A2 , CYP3A4 and CYP2D6"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "loxapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensive Liver ; active metabolites include amoxapine and 8-hydroxyloxapine. Inhibits P-gp and is a substrate of CYP1A2 , CYP3A4 and CYP2D6"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "lurasidone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lurasidone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 -mediated)"
+    }
+   ]
+  }
+ ],
+ "mdma": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mdma",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , CYP450 extensively involved, including CYP2D6"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "methadone": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methadone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2B6 and CYP2D6 -mediated)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methadone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2B6 and CYP2D6 -mediated)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methadone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2B6 and CYP2D6 -mediated)"
+    }
+   ]
+  }
+ ],
+ "methamphetamine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methamphetamine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 and FMO3"
+    }
+   ]
+  }
+ ],
+ "mianserin": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mianserin",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 ; via aromatic hydroxylation , N - oxidation , N - demethylation )"
+    }
+   ]
+  }
+ ],
+ "midazolam": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "midazolam",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP3A3 , CYP3A4 , CYP3A5"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "midazolam",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP3A3 , CYP3A4 , CYP3A5"
+    }
+   ]
+  }
+ ],
+ "mirtazapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirtazapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 , CYP2D6 , CYP3A4 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirtazapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 , CYP2D6 , CYP3A4 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirtazapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 , CYP2D6 , CYP3A4 )"
+    }
+   ]
+  }
+ ],
+ "modafinil": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( amide hydrolysis , S - oxidation , aromatic ring hydroxylation , glucuronide conjugation ; CYP1A2 , CYP2B6 , CYP2C9 , CYP2C19 , CYP3A4 , CYP3A5 involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( amide hydrolysis , S - oxidation , aromatic ring hydroxylation , glucuronide conjugation ; CYP1A2 , CYP2B6 , CYP2C9 , CYP2C19 , CYP3A4 , CYP3A5 involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( amide hydrolysis , S - oxidation , aromatic ring hydroxylation , glucuronide conjugation ; CYP1A2 , CYP2B6 , CYP2C9 , CYP2C19 , CYP3A4 , CYP3A5 involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( amide hydrolysis , S - oxidation , aromatic ring hydroxylation , glucuronide conjugation ; CYP1A2 , CYP2B6 , CYP2C9 , CYP2C19 , CYP3A4 , CYP3A5 involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( amide hydrolysis , S - oxidation , aromatic ring hydroxylation , glucuronide conjugation ; CYP1A2 , CYP2B6 , CYP2C9 , CYP2C19 , CYP3A4 , CYP3A5 involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( amide hydrolysis , S - oxidation , aromatic ring hydroxylation , glucuronide conjugation ; CYP1A2 , CYP2B6 , CYP2C9 , CYP2C19 , CYP3A4 , CYP3A5 involved)"
+    }
+   ]
+  }
+ ],
+ "nefazodone": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nefazodone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nefazodone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "nicotine": [
+  {
+   "enzyme": "cyp2a6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nicotine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primarily hepatic : CYP2A6 , CYP2B6 , FMO3 , others"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nicotine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primarily hepatic : CYP2A6 , CYP2B6 , FMO3 , others"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "olanzapine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "olanzapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (direct glucuronidation and CYP1A2 mediated oxidation)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "olanzapine",
+     "provenance": "verified",
+     "quote": "Olanzapine is metabolized by the cytochrome P450 (CYP) system; principally by isozyme 1A2 (CYP1A2) and to a lesser extent by CYP2D6."
+    }
+   ]
+  }
+ ],
+ "ondansetron": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ondansetron",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ondansetron",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ondansetron",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "paroxetine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "paroxetine",
+     "provenance": "verified",
+     "quote": "Paroxetine is a mechanism-based inhibitor of CYP2D6 ."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "paroxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensive, liver (mostly CYP2D6 -mediated)"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "perampanel": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "perampanel",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , mostly via CYP3A4 and/or CYP3A5"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "perampanel",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , mostly via CYP3A4 and/or CYP3A5"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "phenobarbital": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "phenobarbital",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mostly CYP2C19 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "phenytoin": [
+  {
+   "enzyme": "cyp2c9",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "phenytoin",
+     "provenance": "verified",
+     "quote": "Phenytoin is an inducer of the CYP3A4 and CYP2C9 families of the P450 enzyme responsible for the liver's degradation of various drugs."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "phenytoin",
+     "provenance": "verified",
+     "quote": "Phenytoin is primarily metabolized to its inactive form by the enzyme CYP2C9 ."
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "phenytoin",
+     "provenance": "verified",
+     "quote": "Phenytoin is an inducer of the CYP3A4 and CYP2C9 families of the P450 enzyme responsible for the liver's degradation of various drugs."
+    }
+   ]
+  }
+ ],
+ "pimavanserin": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pimavanserin",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP3A4 , CYP3A5 , CYP2J2 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pimavanserin",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP3A4 , CYP3A5 , CYP2J2 )"
+    }
+   ]
+  }
+ ],
+ "pimozide": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pimozide",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4 , CYP1A2 and CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pimozide",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4 , CYP1A2 and CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pimozide",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4 , CYP1A2 and CYP2D6"
+    }
+   ]
+  }
+ ],
+ "pitolisant": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pitolisant",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pitolisant",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , CYP3A4"
+    }
+   ]
+  }
+ ],
+ "prochlorperazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "prochlorperazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly Liver ( CYP2D6 and/or CYP3A4 )"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "prochlorperazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly Liver ( CYP2D6 and/or CYP3A4 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "propranolol": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "propranolol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (extensive) CYP1A2 , CYP2D6 ; minor: CYP2C19 , CYP3A4 ; aromatic hydroxylation (mainly 4-hydroxylation), N - dealkylation , side-chain oxidation , glucuronidation"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "propranolol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (extensive) CYP1A2 , CYP2D6 ; minor: CYP2C19 , CYP3A4 ; aromatic hydroxylation (mainly 4-hydroxylation), N - dealkylation , side-chain oxidation , glucuronidation"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "propranolol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (extensive) CYP1A2 , CYP2D6 ; minor: CYP2C19 , CYP3A4 ; aromatic hydroxylation (mainly 4-hydroxylation), N - dealkylation , side-chain oxidation , glucuronidation"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "propranolol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (extensive) CYP1A2 , CYP2D6 ; minor: CYP2C19 , CYP3A4 ; aromatic hydroxylation (mainly 4-hydroxylation), N - dealkylation , side-chain oxidation , glucuronidation"
+    }
+   ]
+  }
+ ],
+ "quetiapine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "quetiapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver via CYP3A4-catalysed sulfoxidation to its active metabolite norquetiapine ( N-desalkylquetiapine )"
+    }
+   ]
+  }
+ ],
+ "ramelteon": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ramelteon",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 major, CYP2C and CYP3A4 minor)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ramelteon",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 major, CYP2C and CYP3A4 minor)"
+    }
+   ]
+  }
+ ],
+ "reboxetine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "reboxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 -mediated)"
+    }
+   ]
+  }
+ ],
+ "risperidone": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "risperidone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 mediated to 9-hydroxyrisperidone )"
+    }
+   ]
+  }
+ ],
+ "ropinirole": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ropinirole",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 )"
+    }
+   ]
+  }
+ ],
+ "scopolamine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "scopolamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 )"
+    }
+   ]
+  }
+ ],
+ "selegiline": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "selegiline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , other tissues ( CYP2B6 , CYP2C19 , others)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "selegiline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , other tissues ( CYP2B6 , CYP2C19 , others)"
+    }
+   ]
+  }
+ ],
+ "sertindole": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sertindole",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mostly via CYP2D6 and CYP3A4 )"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sertindole",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mostly via CYP2D6 and CYP3A4 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "sertraline": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sertraline",
+     "provenance": "verified",
+     "quote": "Sertraline is a moderate inhibitor of CYP2D6 and CYP2B6 in vitro ."
+    }
+   ],
+   "strength": "moderate"
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sertraline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (primarily N - demethylation mainly by CYP2B6 ; also metabolism by CYP2C19 , others)"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sertraline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (primarily N - demethylation mainly by CYP2B6 ; also metabolism by CYP2C19 , others)"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sertraline",
+     "provenance": "verified",
+     "quote": "Sertraline is a moderate inhibitor of CYP2D6 and CYP2B6 in vitro ."
+    }
+   ],
+   "strength": "moderate"
+  }
+ ],
+ "sildenafil": [
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sildenafil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP3A4 (major route), CYP2C9 (minor route)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sildenafil",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP3A4 (major route), CYP2C9 (minor route)"
+    }
+   ]
+  }
+ ],
+ "suvorexant": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "suvorexant",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A major, CYP2C19 minor)"
+    }
+   ]
+  }
+ ],
+ "tasimelteon": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tasimelteon",
+     "provenance": "verified",
+     "quote": "Metabolism | extensive liver, primarily CYP1A2 and CYP3A4 -mediated"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tasimelteon",
+     "provenance": "verified",
+     "quote": "Metabolism | extensive liver, primarily CYP1A2 and CYP3A4 -mediated"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "tetrabenazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tetrabenazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 -mediated)"
+    }
+   ]
+  }
+ ],
+ "thioridazine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thioridazine",
+     "provenance": "verified",
+     "quote": "Thioridazine is an inhibitor of CYP1A2 and CYP3A4."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thioridazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (at least partly mediated by CYP2D6 )"
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thioridazine",
+     "provenance": "verified",
+     "quote": "Thioridazine is an inhibitor of CYP1A2 and CYP3A4."
+    }
+   ]
+  }
+ ],
+ "tiagabine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tiagabine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4 , possibly other CYP450 enzymes , glucuronidation"
+    }
+   ]
+  }
+ ],
+ "tizanidine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tizanidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 , 95%)"
+    }
+   ]
+  }
+ ],
+ "tranylcypromine": [
+  {
+   "enzyme": "cyp2a6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tranylcypromine",
+     "provenance": "verified",
+     "quote": "Tranylcypromine inhibits CYP2A6 at therapeutic concentrations."
+    }
+   ]
+  }
+ ],
+ "trazodone": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "trazodone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2D6 , CYP1A2 ?)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "trazodone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2D6 , CYP1A2 ?)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "trazodone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP2D6 , CYP1A2 ?)"
+    }
+   ]
+  }
+ ],
+ "valbenazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "valbenazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Activation by hydrolysis , deactivation by CYP3A , CYP2D6"
+    }
+   ]
+  }
+ ],
+ "valproate": [
+  {
+   "enzyme": "cyp2c9",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "valproate",
+     "provenance": "verified",
+     "quote": "Valproate inhibits CYP2C9 , glucuronyl transferase , and epoxide hydrolase and is highly protein bound and hence may interact with drugs that are substrates for any of these enzymes or are highly protein bound themselves."
+    }
+   ]
+  }
+ ],
+ "venlafaxine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "venlafaxine",
+     "provenance": "verified",
+     "quote": "Metabolism | Extensively metabolised by the liver , primarily via CYP2D6"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "vilazodone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "vilazodone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver via CYP3A4"
+    }
+   ]
+  }
+ ],
+ "viloxazine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "viloxazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hydroxylation ( CYP2D6 ), glucuronidation ( UGT1A9 , UGT2B15 )"
+    }
+   ]
+  }
+ ],
+ "vortioxetine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "vortioxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , primarily CYP2D6 -mediated oxidation"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "zaleplon": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zaleplon",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver aldehyde oxidase (91%), CYP3A4 (9%)"
+    }
+   ]
+  }
+ ],
+ "zolpidem": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolpidem",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver through CYP3A4 (~60%), CYP2C9 (~20%), and CYP1A2 (~14%)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolpidem",
+     "provenance": "verified",
+     "quote": "Microsome studies indicate zolpidem is metabolized by CYP3A4 (61%) CYP2C9 (22%), CYP1A2 (14%), CYP2D6 (<3%), and CYP2C19 (<3%)."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolpidem",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver through CYP3A4 (~60%), CYP2C9 (~20%), and CYP1A2 (~14%)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolpidem",
+     "provenance": "verified",
+     "quote": "Microsome studies indicate zolpidem is metabolized by CYP3A4 (61%) CYP2C9 (22%), CYP1A2 (14%), CYP2D6 (<3%), and CYP2C19 (<3%)."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolpidem",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver through CYP3A4 (~60%), CYP2C9 (~20%), and CYP1A2 (~14%)"
+    }
+   ]
+  }
+ ],
+ "zonisamide": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zonisamide",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver through CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zonisamide",
+     "provenance": "verified",
+     "quote": "Zonisamide is metabolized mostly by the CYP3A4 isoenzyme , but also CYP3A7 and CYP3A5 , to 2-(sulphamoylacetyl)-phenol via reductive cleavage of the 1,2- benzisoxazole ring."
+    }
+   ]
+  }
+ ],
+ "zopiclone": [
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zopiclone",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic through CYP3A4 and CYP2E1"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zopiclone",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic through CYP3A4 and CYP2E1"
+    }
+   ]
+  }
+ ],
+ "zuclopenthixol": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zuclopenthixol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 and CYP3A4 -mediated)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zuclopenthixol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 and CYP3A4 -mediated)"
+    }
+   ]
+  }
+ ],
+ "zuranolone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zuranolone",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4"
+    }
+   ]
+  }
+ ]
+}

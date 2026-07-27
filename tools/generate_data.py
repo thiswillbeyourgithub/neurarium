@@ -898,15 +898,30 @@ def _drug_enzymes(drug_id: str, rows: Any) -> list[dict[str, Any]]:
 
 
 def _load_drug_enzymes() -> dict[str, list[dict[str, Any]]]:
-    """The committed CYP-role cache, drug id -> its enzyme rows (empty if absent).
+    """The committed CYP-role caches merged, drug id -> its enzyme rows.
 
-    Written by ``tools/fetch/fetch_cyp.py`` off the author-side Stahl tree, committed
-    so this offline generator (and a clone with no books) reproduces the same data.
+    Two deterministic fetchers write these, both committed so this offline generator
+    (and a clone with no author-side trees) reproduces the same data:
+    ``tools/fetch/fetch_cyp.py`` from Stahl's Pharmacokinetics block, and
+    ``tools/fetch/fetch_cyp_wikipedia.py`` from the drug's English Wikipedia article
+    (corpus #9), which is the only source for the 149 drugs outside Stahl's roster.
+
+    **Stahl wins.** A (enzyme, role) pair Stahl already states keeps its Stahl quote;
+    Wikipedia only fills pairs Stahl is silent on. Same discipline as the Ki fallback,
+    where a Wikipedia value never overrides a measured PDSP assay.
     """
-    src = Path(__file__).resolve().parent / "generated_cache" / "drug_enzymes.json"
-    if not src.exists():
-        return {}
-    return json.loads(src.read_text(encoding="utf-8"))
+    cache = Path(__file__).resolve().parent / "generated_cache"
+    merged: dict[str, list[dict[str, Any]]] = {}
+    for name in ("drug_enzymes.json", "drug_enzymes_wikipedia.json"):
+        src = cache / name
+        if not src.exists():
+            continue
+        for drug_id, rows in json.loads(src.read_text(encoding="utf-8")).items():
+            have = {(r["enzyme"], r["role"]) for r in merged.get(drug_id, [])}
+            merged.setdefault(drug_id, []).extend(
+                r for r in rows if (r["enzyme"], r["role"]) not in have)
+    return {k: sorted(v, key=lambda r: (r["enzyme"], r["role"]))
+            for k, v in merged.items()}
 
 
 def _drug_record(drug: dict[str, Any], valid_targets: set[str],
