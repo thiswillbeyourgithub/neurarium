@@ -131,9 +131,15 @@
       "tour.drugActs.title": "What it acts on",
       "tour.drugActs.body":
         "Its <b>bindings</b>, ordered strongest affinity first: each target it hits, the effect, and the affinity (Ki) that drives the animation. <b>Heads-up:</b> the drug animations are the least scientific part of neurarium, still a work in progress, so read them as illustration, not fact.",
+      "tour.drugMetabolism.title": "How the body clears it",
+      "tour.drugMetabolism.body":
+        "Further down, its <b>metabolism</b>: the liver enzymes that break this drug down, or whose activity it changes. Each one is sourced, and clickable. This is pharmacokinetics, so nothing lights up in the 3D view.",
+      "tour.drugPk.title": "And what that implies",
+      "tour.drugPk.body":
+        "Open <b>Drug interactions</b>. These rows are <b>inferred</b> from the enzymes above, never measured: two drugs meeting at one enzyme <i>could</i> shift each other's blood level. A flag to raise with a prescriber, never a contraindication.",
       "tour.drugToReceptor.title": "Follow it to a receptor",
       "tour.drugToReceptor.body":
-        "Each binding is a link. Click the <b>H1</b> row to open that receptor.",
+        "Back up to the bindings: each one is a link. Click the <b>H1</b> row to open that receptor.",
       "tour.receptorFacts.title": "How it's classified",
       "tour.receptorFacts.body":
         "Its <b>classification</b>: family, mechanism, excites or inhibits, synapse site. Each fact has its own grade.",
@@ -562,9 +568,15 @@
       "tour.drugActs.title": "Ce sur quoi il agit",
       "tour.drugActs.body":
         "Ses <b>liaisons</b>, classées de la plus forte affinité à la plus faible : chaque cible touchée, l'effet, et l'affinité (Ki) qui pilote l'animation. <b>À noter :</b> les animations de médicaments sont l'aspect le moins scientifique de neurarium, encore en chantier ; voyez-les comme une illustration, pas un fait.",
+      "tour.drugMetabolism.title": "Comment le corps l'élimine",
+      "tour.drugMetabolism.body":
+        "Plus bas, son <b>métabolisme</b> : les enzymes hépatiques qui dégradent ce médicament, ou dont il modifie l'activité. Chacune est sourcée, et cliquable. C'est de la pharmacocinétique : rien ne s'allume dans la vue 3D.",
+      "tour.drugPk.title": "Et ce que cela implique",
+      "tour.drugPk.body":
+        "Ouvrez <b>Interactions médicamenteuses</b>. Ces lignes sont <b>déduites</b> des enzymes ci-dessus, jamais mesurées : deux médicaments qui se croisent sur une même enzyme <i>pourraient</i> déplacer leur concentration sanguine. Un signal à évoquer avec un prescripteur, jamais une contre-indication.",
       "tour.drugToReceptor.title": "Suivre vers un récepteur",
       "tour.drugToReceptor.body":
-        "Chaque liaison est un lien. Cliquez sur la ligne <b>H1</b> pour ouvrir ce récepteur.",
+        "Remontez aux liaisons : chacune est un lien. Cliquez sur la ligne <b>H1</b> pour ouvrir ce récepteur.",
       "tour.receptorFacts.title": "Sa classification",
       "tour.receptorFacts.body":
         "Sa <b>classification</b> : famille, mécanisme, excite ou inhibe, place sur la synapse. Chaque fait a sa propre note.",

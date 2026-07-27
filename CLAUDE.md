@@ -244,9 +244,11 @@ Viewer (`public/`):
   watchable (the cue then returns to move on). A step's `target` may be one element or an **array** (a group highlight: the ring spans
   their union, e.g. the four browse sections). Steps glide between positions (snap only on the first
   step + during an active scroll). The app-specific step list is built in `js/main.js`; the data demos
-  are hands-on and follow the data graph (focus a **drug** (olanzapine), follow one of its bindings to
-  a **receptor** (H1), then visit a **structure** (hippocampus) and a **projection system** (dopamine,
-  a static group, not a circuit); each opened by tapping the highlighted row via its `data-tour-id`),
+  are hands-on and follow the data graph (focus a **drug** (olanzapine), read its pharmacodynamics then
+  its pharmacokinetics (**Metabolism**, then open the collapsed **Drug interactions**), follow one of its
+  bindings to a **receptor** (H1), then visit a **structure** (hippocampus) and a **projection system**
+  (dopamine, a static group, not a circuit); each opened by tapping the highlighted row via its
+  `data-tour-id`, each panel section reached via its `data-tour-sec`),
   each step's `before()` setting the scene (spread, open/collapse a section, reset a prior demo).
   Auto-runs once on a first visit (after the intro settles), forced every load with `?tour=1`, and
   replayed from the About popup's "Take a tour" button (`#about-tour`).

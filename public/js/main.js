@@ -7070,6 +7070,16 @@ async function main() {
     tourEnsureTab(key, node, show)();
     tourPanelToTop();
   };
+  // The olanzapine panel, re-opened only when it is not already the active tab: the
+  // drug walk-through (Acts on -> Metabolism -> Drug interactions -> the H1 row) is
+  // four sub-steps reading ONE panel, so they share this before().
+  const tourDrugPanel = tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug);
+  // The drug panel's collapsed "Drug interactions" <details> (see showDrug). Its step
+  // is hands-on (the user opens it), so the step's before() re-collapses it: a Back
+  // into the step must leave something to open.
+  const tourPkDetails = () =>
+    document.querySelector('#details-pane [data-tour-sec="pk"]');
+  const tourCollapsePk = () => { const d = tourPkDetails(); if (d) d.open = false; };
 
   // --- Gesture gates: return a teardown; call signal() when the action happens. See
   // js/tour.js (a gate keeps Next greyed until fired, or auto-advances on gateAdvances).
@@ -7208,39 +7218,54 @@ async function main() {
     //    body flags the drug animations as the least-scientific, still-WIP part.
     { title: t("tour.drugActs.title"), body: t("tour.drugActs.body"),
       target: '[data-tour-sec="bindings"]', dim: false, scrollTo: true, scrollAlign: "top",
-      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
-    // 10. Follow one binding, the H1 receptor row, to that receptor's own panel.
+      before: tourDrugPanel },
+    // 10-11. Still the same panel, further down: the pharmacokinetic half. The enzymes
+    //    that clear it (sourced nodes), then the drug -> drug interactions those roles
+    //    imply, collapsed so the user opens it themselves (stayAfterTap keeps the step
+    //    up so the list it reveals is readable).
+    { title: t("tour.drugMetabolism.title"), body: t("tour.drugMetabolism.body"),
+      target: '[data-tour-sec="metabolism"]', dim: false, scrollTo: true,
+      scrollAlign: "top", before: tourDrugPanel },
+    { title: t("tour.drugPk.title"), body: t("tour.drugPk.body"),
+      target: () => {
+        const d = tourPkDetails();
+        return d ? d.querySelector("summary") : null;
+      },
+      interactive: true, stayAfterTap: true, dim: false, scrollTo: true,
+      scrollAlign: "top", // the list it opens unfolds BELOW the summary: leave it room
+      before: () => { tourDrugPanel(); tourCollapsePk(); } },
+    // 12. Follow one binding, the H1 receptor row, to that receptor's own panel.
     { title: t("tour.drugToReceptor.title"), body: t("tour.drugToReceptor.body"),
       target: '[data-tour-id="ixtarget:h1"]', interactive: true, scrollTo: true,
-      before: tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug) },
-    // 11-12. Walk the receptor (H1) panel: how it is classified, then where it is found.
+      before: tourDrugPanel },
+    // 13-14. Walk the receptor (H1) panel: how it is classified, then where it is found.
     { title: t("tour.receptorFacts.title"), body: t("tour.receptorFacts.body"),
       target: '[data-tour-sec="facts"]', dim: false, scrollTo: true,
       before: tourEnsureTab("target:h1", tourH1, focusTarget) },
     { title: t("tour.receptorRegions.title"), body: t("tour.receptorRegions.body"),
       target: '[data-tour-sec="regions"]', dim: false, scrollTo: true,
       before: tourEnsureTab("target:h1", tourH1, focusTarget) },
-    // 13. Back out of the receptor panel by hand (tap its close ×).
+    // 15. Back out of the receptor panel by hand (tap its close ×).
     { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
       target: tourActiveTabClose, interactive: true,
       before: tourEnsureTab("target:h1", tourH1, focusTarget) },
-    // 14-15. Structures: open the list, then tap the hippocampus row (isolates it).
+    // 16-17. Structures: open the list, then tap the hippocampus row (isolates it).
     { title: t("tour.openStructures.title"), body: t("tour.openStructures.body"),
       target: "#structures-toggle", interactive: true, scrollTo: true,
       before: () => tourCloseSection("structures") },
     { title: t("tour.structureTap.title"), body: t("tour.structureTap.body"),
       target: '[data-tour-id="structure:hippocampus"]', interactive: true, scrollTo: true,
       before: () => tourOpenSection("structures") },
-    // 16. Read the structure panel (illustration + description; scroll to proceed).
+    // 18. Read the structure panel (illustration + description; scroll to proceed).
     { title: t("tour.structureLook.title"), body: t("tour.structureLook.body"),
       target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
       gate: tourGateScroll, gateAdvances: true,
       before: tourReadPanel("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
-    // 17. Back out of the structure panel by hand.
+    // 19. Back out of the structure panel by hand.
     { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
       target: tourActiveTabClose, interactive: true,
       before: tourEnsureTab("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
-    // 18-19. Projections: open the list, then tap a projection SYSTEM (Dopamine), NOT a
+    // 20-21. Projections: open the list, then tap a projection SYSTEM (Dopamine), NOT a
     //    circuit; it pins that system's pathways and streams the by-mechanism flow.
     { title: t("tour.openProjections.title"), body: t("tour.openProjections.body"),
       target: "#projections-toggle", interactive: true, scrollTo: true,
@@ -7248,12 +7273,12 @@ async function main() {
     { title: t("tour.projectionTap.title"), body: t("tour.projectionTap.body"),
       target: '[data-tour-id="group:kind:dopaminergic"]', interactive: true, scrollTo: true,
       before: () => tourOpenSection("projections") },
-    // 20. Read the projection-system panel (member pathways + description).
+    // 22. Read the projection-system panel (member pathways + description).
     { title: t("tour.projectionLook.title"), body: t("tour.projectionLook.body"),
       target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
       gate: tourGateScroll, gateAdvances: true,
       before: tourReadPanel("group:kind_dopaminergic", tourDopGroup, tourShowDopGroup) },
-    // 21-22. Get to search by hand: tap Settings (back to the main panel), then the
+    // 23-24. Get to search by hand: tap Settings (back to the main panel), then the
     //    magnifier (opens the search box). Both auto-advance on the real tap.
     { title: t("tour.backToSettings.title"), body: t("tour.backToSettings.body"),
       target: "#tab-settings", interactive: true,
