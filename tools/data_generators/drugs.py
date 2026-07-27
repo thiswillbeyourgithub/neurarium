@@ -251,6 +251,52 @@ ENZYME_REACTIONS: dict[str, dict[str, str]] = {
     "hydroxylation": {"en": "hydroxylation", "fr": "hydroxylation"},
 }
 
+# Extra names a user might type in the search box for a drug we already model:
+# street names, chemical synonyms, abbreviations, and the alternate INN/USAN spellings
+# a non-English reader reaches for. Search-only, never displayed, which is why they are
+# plain tokens rather than the usual {en, fr} pairs: put every spelling in the one list
+# and the search matches whichever the user types. (The search box already folds
+# accents and hyphens, so a French spelling that differs only in accents needs no
+# entry; only genuinely DIFFERENT words belong here.) Brand names are searchable
+# already, as sourced `drug_brands` nodes.
+#
+# NOT a knowledge node and deliberately ungraded: an alias is a fact about what people
+# call the molecule, not a claim about the brain, so it earns no provenance grade and
+# does not enter the sourcing tally.
+DRUG_ALIASES: dict[str, list[str]] = {
+    # The one that prompted this: GHB is modeled under its medicine name.
+    "sodium_oxybate": ["GHB", "gamma-hydroxybutyrate", "gamma hydroxybutyrate",
+                       "gamma-hydroxybutyric acid", "oxybate", "Xyrem"],
+    "ethanol": ["alcohol", "alcool", "ethyl alcohol", "EtOH", "booze"],
+    "mdma": ["ecstasy", "molly", "XTC", "3,4-methylenedioxymethamphetamine"],
+    "methamphetamine": ["meth", "crystal meth", "crystal", "ice", "metamfetamine",
+                        "methamfetamine"],
+    "amphetamine_d": ["dexamfetamine", "dextroamphetamine", "dexamphetamine",
+                      "amfetamine", "speed"],
+    "amphetamine_dl": ["racemic amphetamine", "amfetamine", "speed"],
+    "lsd": ["acid", "lysergide", "lysergic acid diethylamide", "LSD-25"],
+    "dmt": ["dimethyltryptamine", "N,N-dimethyltryptamine", "ayahuasca"],
+    "thc": ["tetrahydrocannabinol", "delta-9-tetrahydrocannabinol", "cannabis",
+            "marijuana", "weed", "dronabinol", "haschisch", "hashish"],
+    "ketamine": ["special K", "ketalar"],
+    "esketamine": ["S-ketamine", "S(+)-ketamine"],
+    "cocaine": ["coke", "crack", "benzoylmethylecgonine"],
+    "nicotine": ["tobacco", "tabac", "cigarette", "vaping"],
+    "caffeine": ["coffee", "cafe", "the", "tea", "guarana"],
+    "methaqualone": ["quaalude", "mandrax"],
+    "triiodothyronine": ["T3", "liothyronine", "thyroid hormone"],
+    "methylfolate_l": ["L-methylfolate", "levomefolic acid", "5-MTHF", "vitamin B9",
+                       "folate"],
+    "valproate": ["valproic acid", "sodium valproate", "divalproex", "valproate semisodium"],
+    "lithium": ["lithium carbonate", "lithium citrate"],
+    # Loop diuretics: the reason NKCC1 is modeled at all, and both are better known
+    # by their kidney indication than by their brain one.
+    "furosemide": ["frusemide", "loop diuretic"],
+    "bumetanide": ["loop diuretic"],
+    "reserpine": ["rauwolfia", "Rauwolfia serpentina"],
+}
+
+
 # Non-receptor binding targets (a key) -> {name {en,fr}, type, system, regions,
 # optional wikipedia}. Receptors already modeled in RECEPTORS are ALSO valid targets
 # (a binding may use any receptor id directly); the generator merges them into the

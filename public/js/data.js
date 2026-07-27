@@ -799,7 +799,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     d.brandNames = d.brandsOrdered.map((b) => b.name);
     d.primaryBrand = d.brandNames[0] || null;
     d.displayName = d.primaryBrand ? `${d.name} (${d.primaryBrand})` : d.name;
-    d.keywords = [...d.categoryLabels, d.nbn, ...d.brandNames,
+    // `aliases` are the search-only alternate names (GHB for sodium oxybate, ecstasy
+    // for MDMA, ...). They join the haystack and are never rendered: a drug is always
+    // shown under its own name, so an alias only ever helps someone find it.
+    d.keywords = [...d.categoryLabels, d.nbn, ...d.brandNames, ...(d.aliases || []),
                   ...d.bindings.map((b) => b.targetName)]
       .filter(Boolean)
       .join(" ");

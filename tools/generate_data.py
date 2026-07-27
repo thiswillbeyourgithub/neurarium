@@ -87,6 +87,7 @@ from data_generators.presentation import (  # noqa: E402
 # ---------------------------------------------------------------------------
 from data_generators.drugs import (  # noqa: E402
     DRUG_ACTIONS,
+    DRUG_ALIASES,
     DRUG_CATEGORY_LABELS,
     DRUG_EFFECT_COLORS,
     DRUG_EFFECT_LABELS,
@@ -609,6 +610,20 @@ def _receptor_record(rec: dict[str, Any],
     return out
 
 
+def _check_drug_aliases(drug_ids: set[str]) -> None:
+    """Fail loud if a search alias is keyed on a drug id that does not exist.
+
+    An alias keyed on a typo is silently inert (nothing ever looks it up), which
+    would read as "GHB still doesn't find it" with nothing to grep for.
+    """
+    unknown = sorted(set(DRUG_ALIASES) - drug_ids)
+    if unknown:
+        raise SystemExit(
+            f"DRUG_ALIASES keys are not drug ids: {unknown}; "
+            f"fix the id or drop the entry"
+        )
+
+
 def _check_tone_rules() -> None:
     """Fail loud if a tone rule names an action the drug vocabulary does not have.
 
@@ -1123,6 +1138,12 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     # Wikipedia lead at runtime (js/wiki.js), exactly like a structure/target, so the
     # text stays up to date and the dataset ships no copyrighted prose. A drug whose
     # live lead fails to load simply shows no description.
+    # Search-only alternate names (street names, chemical synonyms, INN/USAN
+    # variants). Not a node: an alias says what people CALL the molecule, not
+    # anything about the brain, so it carries no grade and is never displayed.
+    aliases = DRUG_ALIASES.get(drug["id"])
+    if aliases:
+        out["aliases"] = list(aliases)
     if drug.get("wikipedia"):
         out["wikipedia"] = drug["wikipedia"]
         out["wikipedia_provenance"] = _wiki_provenance(drug["id"])
@@ -1470,6 +1491,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         drugs.append(
             _drug_record(drug, valid_targets, receptor_bases, molecule_ids,
                          enzyme_rows))
+    _check_drug_aliases(seen_drug_ids)
     # A hand-curated formed_by row whose (drug, metabolite) key matched nothing: the
     # metabolite was renamed or dropped by an applier re-run, so the node silently
     # vanished. Raise rather than publish a quieter dataset than the author wrote.
