@@ -47,6 +47,12 @@ const SURFACE_OFFSET = 0.05;
 // glint at different strengths instead of forming a uniform wash.
 const BRIGHT_MIN = 0.55;
 const BRIGHT_MAX = 1.0;
+// How far the dot colour is lightened toward white by default: the sign colours a
+// receptor focus uses are dark enough that a little whitening reads as "glowing".
+// A caller whose colour must stay *identifiable* (the drug effect colours, where
+// the hue IS the meaning) passes a smaller mix, since whitening a hue is exactly
+// what makes it read as pale and washed out.
+const GEM_WHITE_MIX = 0.35;
 // Gentle breathing of the whole dot field (opacity), so the markers shimmer. Kept
 // bright at the trough so a focused receptor stays clearly visible.
 const PULSE_MIN = 0.72;
@@ -172,14 +178,17 @@ export const GEM_DOT_SIZE = DOT_SIZE;
  * has no usable geometry.
  * @param {THREE.Mesh} mesh
  * @param {string} color hex colour string
- * @param {number} [densityScale] thin the cloud (drug focus, weak affinity)
+ * @param {{densityScale?: number, whiteMix?: number}} [opts]
+ *   `densityScale` thins the cloud (drug focus, weak affinity); `whiteMix` how far
+ *   the colour is lightened toward white (see GEM_WHITE_MIX).
  * @returns {{points: THREE.Points, material: THREE.PointsMaterial}|null}
  */
-export function buildGemCloud(mesh, color, densityScale = 1) {
+export function buildGemCloud(mesh, color, opts = {}) {
+  const { densityScale = 1, whiteMix = GEM_WHITE_MIX } = opts;
   if (!mesh.geometry) return null;
   const positions = sampleSurface(mesh.geometry, dotCountFor(mesh.geometry, densityScale));
   if (positions.length === 0) return null;
-  const tint = new THREE.Color(color).lerp(WHITE, 0.35);
+  const tint = new THREE.Color(color).lerp(WHITE, whiteMix);
   const geom = new THREE.BufferGeometry();
   geom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
   // Per-dot brightness variation (baked into a vertex-colour attribute) so the

@@ -28,16 +28,26 @@ import { animSettings } from "./anim-settings.js";
 
 // Per-effect pulse character. `period` ms is the breathing cycle; opacity swings
 // between [opMin, opMax] and the dot size between [sizeMin, sizeMax] * GEM_DOT_SIZE
-// over that cycle. Boost is fast/bright/swelling, block slow/dim/shrunk, modulate
-// in between, so the three effects read distinctly even in one drug's view. The
-// same `period` clocks the surface wash under the dots (see buildWashShell), and
-// `washGain` scales that wash's brightness so a boost glows stronger than a block.
+// over that cycle. Boost is fast/swelling, block slow/steadier, modulate in
+// between, so the three effects read distinctly even in one drug's view. The same
+// `period` clocks the surface wash under the dots (see buildWashShell), and
+// `washGain` scales that wash's brightness.
+//
+// The *rhythm* carries the boost/block contrast, NOT the brightness: a block cloud
+// used to sit at 0.22-0.66 opacity on 0.7-1.0 dots, which on a dark dimmed brain
+// made the rose dots read as barely-there smudges. Every effect now pulses in a
+// clearly visible band; a block simply breathes slower and swells less.
 const PULSE = {
-  boost: { period: 1050, opMin: 0.55, opMax: 1.0, sizeMin: 0.95, sizeMax: 1.55, washGain: 0.9 },
-  block: { period: 2100, opMin: 0.22, opMax: 0.66, sizeMin: 0.7, sizeMax: 1.0, washGain: 0.5 },
-  modulate: { period: 1550, opMin: 0.5, opMax: 0.9, sizeMin: 0.85, sizeMax: 1.2, washGain: 0.7 },
+  boost: { period: 1050, opMin: 0.6, opMax: 1.0, sizeMin: 0.95, sizeMax: 1.55, washGain: 0.9 },
+  block: { period: 2100, opMin: 0.55, opMax: 1.0, sizeMin: 0.9, sizeMax: 1.2, washGain: 0.8 },
+  modulate: { period: 1550, opMin: 0.55, opMax: 1.0, sizeMin: 0.85, sizeMax: 1.3, washGain: 0.8 },
 };
 const FALLBACK = PULSE.modulate;
+// The drug dots + wash keep their hue: unlike a receptor focus (where the colour is
+// a nicety), here the colour IS the datum (boost / block / modulate), so lightening
+// it toward white until it reads pastel destroys the thing it is meant to say.
+// Well below the gem/wash defaults (0.35 / 0.4) on purpose.
+const EFFECT_WHITE_MIX = 0.1;
 
 /**
  * Build the per-drug animation controller.
@@ -115,8 +125,11 @@ export function createDrugAnimation(_deps = {}) {
         // engagement, NOT effect magnitude. Neutral mid when a binding has no Ki.
         const densityScale = 0.5 + 0.5 * weight; // 0.68..1 dots
         const sizeAff = 0.8 + 0.35 * weight; // 0.92..1.15 x base dot size
-        const opAff = 0.6 + 0.4 * weight; // 0.74..1 x pulse opacity
-        const cloud = buildGemCloud(mesh, binding.effectColor, densityScale);
+        const opAff = 0.8 + 0.2 * weight; // 0.87..1 x pulse opacity
+        const cloud = buildGemCloud(mesh, binding.effectColor, {
+          densityScale,
+          whiteMix: EFFECT_WHITE_MIX,
+        });
         if (!cloud) continue;
         // A surface wash under the dots, looping in the same effect colour: a
         // ripple of light sweeping across the region's face, so the region itself
@@ -127,7 +140,7 @@ export function createDrugAnimation(_deps = {}) {
         // entirely when animations are off (the wash is pure motion, so a static
         // focus doesn't need one).
         const wash = animSettings.enabled
-          ? buildWashShell(mesh, binding.effectColor)
+          ? buildWashShell(mesh, binding.effectColor, { whiteMix: EFFECT_WHITE_MIX })
           : null;
         if (wash) {
           const origin = wash.center.clone();

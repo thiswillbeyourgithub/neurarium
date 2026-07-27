@@ -2410,9 +2410,9 @@
     }
   },
   "drug_effect_colors": {
-    "boost": "#34d399",
-    "block": "#fb7185",
-    "modulate": "#c084fc"
+    "boost": "#00e5a0",
+    "block": "#ff2e63",
+    "modulate": "#b14bff"
   },
   "drug_effect_labels": {
     "boost": "Enhances",

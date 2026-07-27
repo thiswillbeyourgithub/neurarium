@@ -40,6 +40,8 @@ const BAND_FACTOR = 0.5;
 // it sits just above the real mesh instead of z-fighting with it.
 const INFLATE_FACTOR = 0.015;
 // Lighten the source colour toward white so the wash glows rather than tinting.
+// A caller whose colour carries the meaning (the drug effect colours) passes a
+// smaller mix: whitening is precisely what makes a hue read as pale.
 const WHITE_MIX = 0.4;
 
 // Vertex shader: pass the *unscaled* geometry-local position so the fragment can
@@ -84,13 +86,15 @@ const FRAG = `
  * (`dispose()`); the geometry is the mesh's own and is *not* disposed here.
  * @param {THREE.Mesh} mesh
  * @param {string} colorHex
+ * @param {{whiteMix?: number}} [opts] how far the colour is lightened toward white
  * @returns {{
  *   shell: THREE.Mesh, maxRadius: number, center: THREE.Vector3,
  *   setColor(hex: string): void, setOrigin(v: THREE.Vector3): void,
  *   setWave(radius: number, strength: number): void, dispose(): void
  * }|null}
  */
-export function buildWashShell(mesh, colorHex) {
+export function buildWashShell(mesh, colorHex, opts = {}) {
+  const { whiteMix = WHITE_MIX } = opts;
   const geom = mesh.geometry;
   if (!geom) return null;
   if (!geom.boundingSphere) geom.computeBoundingSphere();
@@ -100,7 +104,7 @@ export function buildWashShell(mesh, colorHex) {
   // uColor holds this Color object by reference, so setColor() mutating it in place
   // recolours the live wash (used by the circuit echo, which takes each arrow's
   // colour as the bead lands).
-  const tint = new THREE.Color(colorHex).lerp(WHITE, WHITE_MIX);
+  const tint = new THREE.Color(colorHex).lerp(WHITE, whiteMix);
   const uniforms = {
     uOrigin: { value: center.clone() },
     uColor: { value: tint },
@@ -130,7 +134,7 @@ export function buildWashShell(mesh, colorHex) {
     center,
     /** Recolour the live wash (lightened toward white), in place. */
     setColor(hex) {
-      tint.set(hex).lerp(WHITE, WHITE_MIX);
+      tint.set(hex).lerp(WHITE, whiteMix);
     },
     /** Move the ripple's origin (a point in the mesh's local / geometry space). */
     setOrigin(v) {

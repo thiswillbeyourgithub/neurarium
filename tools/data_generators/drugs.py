@@ -121,9 +121,9 @@ DRUG_ACTIONS: dict[str, dict[str, Any]] = {
 # Net-effect (a key) -> animation swatch colour and bilingual label. Distinct hues
 # from the projection/sign palette so a drug focus reads as its own thing.
 DRUG_EFFECT_COLORS: dict[str, str] = {
-    "boost": "#34d399",     # emerald: increases activity / transmitter availability
-    "block": "#fb7185",     # rose: blocks / dampens the target
-    "modulate": "#c084fc",  # violet: mixed / context-dependent
+    "boost": "#00e5a0",     # emerald: increases activity / transmitter availability
+    "block": "#ff2e63",     # crimson: blocks / dampens the target
+    "modulate": "#b14bff",  # violet: mixed / context-dependent
 }
 DRUG_EFFECT_LABELS: dict[str, dict[str, str]] = {
     "boost": {"en": "Enhances", "fr": "Renforce"},
