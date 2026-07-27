@@ -779,6 +779,17 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
   wins), reporting rather than resolving a disagreement. Only a pKi/pKd becomes a `ki`: a
   functional potency (pIC50/pEC50) rides along as the direction's citation. Contents CC BY-SA 4.0,
   database ODbL.
+- **#12 GtoPdb target classification** (`gtopdb_class`, `page` = the GtoPdb targetId) is GtoPdb's
+  third slice, backing the *mechanism* nodes: a target's `type` (gpcr/lgic/vgic/enzyme) is a
+  receptor's `receptor_class` and a non-receptor target's `type`, read directly; a GPCR's `sign`
+  is **mapped** from its transduction table (`transducers` + `effectors`) under the narrow table
+  in `apply_classification_sources.py` (Gi/Go -> inhibitory, Gs / Gq/G11 -> excitatory; anything
+  mixed or unmapped writes nothing), since GtoPdb states the transduction and never a sign. No
+  judge: `fetch_gtopdb_class.py` flattens both fields into `data_sources/gtopdb/pages_class/
+  <targetId>.md` and the applier is **confirm-only** (writes only where GtoPdb agrees with the
+  value we already state, reporting a disagreement instead of rewriting the data). The sources
+  **add to** a book quote rather than replacing it, so an attribute both cover shows two
+  citations. GtoPdb has **no pre/post-synaptic field**, so `synaptic` is out of its reach.
 
 **Descriptions** are not a node kind (not tallied). Drugs, structures and non-receptor targets carry
 **no baked description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via

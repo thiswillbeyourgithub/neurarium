@@ -1,0 +1,1480 @@
+{
+  "receptors": {
+    "5ht1a": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 1,
+          "provenance": "verified",
+          "quote": "5-HT1A receptor (HTR1A), GtoPdb target 1 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 1,
+          "provenance": "verified",
+          "quote": "5-HT1A receptor (HTR1A), GtoPdb target 1 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 1,
+          "provenance": "verified",
+          "quote": "5-HT1A receptor (HTR1A), GtoPdb target 1 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "5ht1b": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 2,
+          "provenance": "verified",
+          "quote": "5-HT1B receptor (HTR1B), GtoPdb target 2 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 2,
+          "provenance": "verified",
+          "quote": "5-HT1B receptor (HTR1B), GtoPdb target 2 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 2,
+          "provenance": "verified",
+          "quote": "5-HT1B receptor (HTR1B), GtoPdb target 2 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "5ht1d": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 3,
+          "provenance": "verified",
+          "quote": "5-HT1D receptor (HTR1D), GtoPdb target 3 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 3,
+          "provenance": "verified",
+          "quote": "5-HT1D receptor (HTR1D), GtoPdb target 3 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 3,
+          "provenance": "verified",
+          "quote": "5-HT1D receptor (HTR1D), GtoPdb target 3 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "5ht1e": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 4,
+          "provenance": "verified",
+          "quote": "5-ht1e receptor (HTR1E), GtoPdb target 4 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 4,
+          "provenance": "verified",
+          "quote": "5-ht1e receptor (HTR1E), GtoPdb target 4 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 4,
+          "provenance": "verified",
+          "quote": "5-ht1e receptor (HTR1E), GtoPdb target 4 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "5ht1f": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 5,
+          "provenance": "verified",
+          "quote": "5-HT1F receptor (HTR1F), GtoPdb target 5 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 5,
+          "provenance": "verified",
+          "quote": "5-HT1F receptor (HTR1F), GtoPdb target 5 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 5,
+          "provenance": "verified",
+          "quote": "5-HT1F receptor (HTR1F), GtoPdb target 5 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "5ht2a": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 6,
+          "provenance": "verified",
+          "quote": "5-HT2A receptor (HTR2A), GtoPdb target 6 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 6,
+          "provenance": "verified",
+          "quote": "5-HT2A receptor (HTR2A), GtoPdb target 6 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 6,
+          "provenance": "verified",
+          "quote": "5-HT2A receptor (HTR2A), GtoPdb target 6 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "5ht2b": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 7,
+          "provenance": "verified",
+          "quote": "5-HT2B receptor (HTR2B), GtoPdb target 7 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 7,
+          "provenance": "verified",
+          "quote": "5-HT2B receptor (HTR2B), GtoPdb target 7 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 7,
+          "provenance": "verified",
+          "quote": "5-HT2B receptor (HTR2B), GtoPdb target 7 | transduction: Gq/G11 family"
+        }
+      ]
+    },
+    "5ht2c": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 8,
+          "provenance": "verified",
+          "quote": "5-HT2C receptor (HTR2C), GtoPdb target 8 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 8,
+          "provenance": "verified",
+          "quote": "5-HT2C receptor (HTR2C), GtoPdb target 8 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 8,
+          "provenance": "verified",
+          "quote": "5-HT2C receptor (HTR2C), GtoPdb target 8 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "5ht3": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 373,
+          "provenance": "verified",
+          "quote": "5-HT3A (HTR3A), GtoPdb target 373 | type: lgic | family: 5-HT3 receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 373,
+          "provenance": "verified",
+          "quote": "5-HT3A (HTR3A), GtoPdb target 373 | type: lgic | family: 5-HT3 receptors"
+        }
+      ]
+    },
+    "5ht4": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 9,
+          "provenance": "verified",
+          "quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 9,
+          "provenance": "verified",
+          "quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 9,
+          "provenance": "verified",
+          "quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | transduction: Gs family | effectors: Adenylyl cyclase stimulation, Calcium channel, Other - See Comments"
+        }
+      ]
+    },
+    "5ht5a": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 10,
+          "provenance": "verified",
+          "quote": "5-HT5A receptor (HTR5A), GtoPdb target 10 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 10,
+          "provenance": "verified",
+          "quote": "5-HT5A receptor (HTR5A), GtoPdb target 10 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 10,
+          "provenance": "verified",
+          "quote": "5-HT5A receptor (HTR5A), GtoPdb target 10 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "5ht6": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 11,
+          "provenance": "verified",
+          "quote": "5-HT6 receptor (HTR6), GtoPdb target 11 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 11,
+          "provenance": "verified",
+          "quote": "5-HT6 receptor (HTR6), GtoPdb target 11 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 11,
+          "provenance": "verified",
+          "quote": "5-HT6 receptor (HTR6), GtoPdb target 11 | transduction: Gs family | effectors: Adenylyl cyclase stimulation"
+        }
+      ]
+    },
+    "5ht7": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 12,
+          "provenance": "verified",
+          "quote": "5-HT7 receptor (HTR7), GtoPdb target 12 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 12,
+          "provenance": "verified",
+          "quote": "5-HT7 receptor (HTR7), GtoPdb target 12 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 12,
+          "provenance": "verified",
+          "quote": "5-HT7 receptor (HTR7), GtoPdb target 12 | transduction: Gs family | effectors: Adenylyl cyclase stimulation"
+        }
+      ]
+    },
+    "a2a": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 19,
+          "provenance": "verified",
+          "quote": "A2A receptor (ADORA2A), GtoPdb target 19 | type: gpcr | family: Adenosine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 19,
+          "provenance": "verified",
+          "quote": "A2A receptor (ADORA2A), GtoPdb target 19 | type: gpcr | family: Adenosine receptors"
+        }
+      ]
+    },
+    "alpha1a": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 22,
+          "provenance": "verified",
+          "quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 22,
+          "provenance": "verified",
+          "quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 22,
+          "provenance": "verified",
+          "quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments"
+        }
+      ]
+    },
+    "alpha1b": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 23,
+          "provenance": "verified",
+          "quote": "\u03b11B-adrenoceptor (ADRA1B), GtoPdb target 23 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 23,
+          "provenance": "verified",
+          "quote": "\u03b11B-adrenoceptor (ADRA1B), GtoPdb target 23 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 23,
+          "provenance": "verified",
+          "quote": "\u03b11B-adrenoceptor (ADRA1B), GtoPdb target 23 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments"
+        }
+      ]
+    },
+    "alpha1d": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 24,
+          "provenance": "verified",
+          "quote": "\u03b11D-adrenoceptor (ADRA1D), GtoPdb target 24 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 24,
+          "provenance": "verified",
+          "quote": "\u03b11D-adrenoceptor (ADRA1D), GtoPdb target 24 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 24,
+          "provenance": "verified",
+          "quote": "\u03b11D-adrenoceptor (ADRA1D), GtoPdb target 24 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments"
+        }
+      ]
+    },
+    "alpha2a": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 25,
+          "provenance": "verified",
+          "quote": "\u03b12A-adrenoceptor (ADRA2A), GtoPdb target 25 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 25,
+          "provenance": "verified",
+          "quote": "\u03b12A-adrenoceptor (ADRA2A), GtoPdb target 25 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 25,
+          "provenance": "verified",
+          "quote": "\u03b12A-adrenoceptor (ADRA2A), GtoPdb target 25 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Phospholipase A2 stimulation"
+        }
+      ]
+    },
+    "alpha2b": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 26,
+          "provenance": "verified",
+          "quote": "\u03b12B-adrenoceptor (ADRA2B), GtoPdb target 26 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 26,
+          "provenance": "verified",
+          "quote": "\u03b12B-adrenoceptor (ADRA2B), GtoPdb target 26 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 26,
+          "provenance": "verified",
+          "quote": "\u03b12B-adrenoceptor (ADRA2B), GtoPdb target 26 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Other - See Comments"
+        }
+      ]
+    },
+    "alpha2c": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 27,
+          "provenance": "verified",
+          "quote": "\u03b12C-adrenoceptor (ADRA2C), GtoPdb target 27 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 27,
+          "provenance": "verified",
+          "quote": "\u03b12C-adrenoceptor (ADRA2C), GtoPdb target 27 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 27,
+          "provenance": "verified",
+          "quote": "\u03b12C-adrenoceptor (ADRA2C), GtoPdb target 27 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Other - See Comments"
+        }
+      ]
+    },
+    "ampa": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 444,
+          "provenance": "verified",
+          "quote": "GluA1 (GRIA1), GtoPdb target 444 | type: lgic | family: Ionotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 444,
+          "provenance": "verified",
+          "quote": "GluA1 (GRIA1), GtoPdb target 444 | type: lgic | family: Ionotropic glutamate receptors"
+        }
+      ]
+    },
+    "beta1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 28,
+          "provenance": "verified",
+          "quote": "\u03b21-adrenoceptor (ADRB1), GtoPdb target 28 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 28,
+          "provenance": "verified",
+          "quote": "\u03b21-adrenoceptor (ADRB1), GtoPdb target 28 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 28,
+          "provenance": "verified",
+          "quote": "\u03b21-adrenoceptor (ADRB1), GtoPdb target 28 | transduction: Gs family | effectors: Adenylyl cyclase stimulation"
+        }
+      ]
+    },
+    "beta2": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 29,
+          "provenance": "verified",
+          "quote": "\u03b22-adrenoceptor (ADRB2), GtoPdb target 29 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 29,
+          "provenance": "verified",
+          "quote": "\u03b22-adrenoceptor (ADRB2), GtoPdb target 29 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 29,
+          "provenance": "verified",
+          "quote": "\u03b22-adrenoceptor (ADRB2), GtoPdb target 29 | transduction: Gs family"
+        }
+      ]
+    },
+    "beta3": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 30,
+          "provenance": "verified",
+          "quote": "\u03b23-adrenoceptor (ADRB3), GtoPdb target 30 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 30,
+          "provenance": "verified",
+          "quote": "\u03b23-adrenoceptor (ADRB3), GtoPdb target 30 | type: gpcr | family: Adrenoceptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 30,
+          "provenance": "verified",
+          "quote": "\u03b23-adrenoceptor (ADRB3), GtoPdb target 30 | transduction: Gs family"
+        }
+      ]
+    },
+    "cb1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 56,
+          "provenance": "verified",
+          "quote": "CB1 receptor (CNR1), GtoPdb target 56 | type: gpcr | family: Cannabinoid receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 56,
+          "provenance": "verified",
+          "quote": "CB1 receptor (CNR1), GtoPdb target 56 | type: gpcr | family: Cannabinoid receptors"
+        }
+      ]
+    },
+    "d1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 214,
+          "provenance": "verified",
+          "quote": "D1 receptor (DRD1), GtoPdb target 214 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 214,
+          "provenance": "verified",
+          "quote": "D1 receptor (DRD1), GtoPdb target 214 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 214,
+          "provenance": "verified",
+          "quote": "D1 receptor (DRD1), GtoPdb target 214 | transduction: Gs family | effectors: Adenylyl cyclase stimulation"
+        }
+      ]
+    },
+    "d2": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 215,
+          "provenance": "verified",
+          "quote": "D2 receptor (DRD2), GtoPdb target 215 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 215,
+          "provenance": "verified",
+          "quote": "D2 receptor (DRD2), GtoPdb target 215 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 215,
+          "provenance": "verified",
+          "quote": "D2 receptor (DRD2), GtoPdb target 215 | transduction: Gi/Go family, G protein independent mechanism | effectors: Adenylyl cyclase inhibition, Other - See Comments"
+        }
+      ]
+    },
+    "d3": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 216,
+          "provenance": "verified",
+          "quote": "D3 receptor (DRD3), GtoPdb target 216 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 216,
+          "provenance": "verified",
+          "quote": "D3 receptor (DRD3), GtoPdb target 216 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 216,
+          "provenance": "verified",
+          "quote": "D3 receptor (DRD3), GtoPdb target 216 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel"
+        }
+      ]
+    },
+    "d4": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 217,
+          "provenance": "verified",
+          "quote": "D4 receptor (DRD4), GtoPdb target 217 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 217,
+          "provenance": "verified",
+          "quote": "D4 receptor (DRD4), GtoPdb target 217 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 217,
+          "provenance": "verified",
+          "quote": "D4 receptor (DRD4), GtoPdb target 217 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "d5": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 218,
+          "provenance": "verified",
+          "quote": "D5 receptor (DRD5), GtoPdb target 218 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 218,
+          "provenance": "verified",
+          "quote": "D5 receptor (DRD5), GtoPdb target 218 | type: gpcr | family: Dopamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 218,
+          "provenance": "verified",
+          "quote": "D5 receptor (DRD5), GtoPdb target 218 | transduction: Gs family | effectors: Adenylyl cyclase stimulation"
+        }
+      ]
+    },
+    "delta": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 317,
+          "provenance": "verified",
+          "quote": "\u03b4 receptor (OPRD1), GtoPdb target 317 | type: gpcr | family: Opioid receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 317,
+          "provenance": "verified",
+          "quote": "\u03b4 receptor (OPRD1), GtoPdb target 317 | type: gpcr | family: Opioid receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 317,
+          "provenance": "verified",
+          "quote": "\u03b4 receptor (OPRD1), GtoPdb target 317 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Other - See Comments"
+        }
+      ]
+    },
+    "gaba_a": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 404,
+          "provenance": "verified",
+          "quote": "GABAA receptor \u03b11 subunit (GABRA1), GtoPdb target 404 | type: lgic | family: GABAA receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 404,
+          "provenance": "verified",
+          "quote": "GABAA receptor \u03b11 subunit (GABRA1), GtoPdb target 404 | type: lgic | family: GABAA receptors"
+        }
+      ]
+    },
+    "gaba_a_rho": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 420,
+          "provenance": "verified",
+          "quote": "GABAA receptor \u03c11 subunit (GABRR1), GtoPdb target 420 | type: lgic | family: GABAA receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 420,
+          "provenance": "verified",
+          "quote": "GABAA receptor \u03c11 subunit (GABRR1), GtoPdb target 420 | type: lgic | family: GABAA receptors"
+        }
+      ]
+    },
+    "gaba_b": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 240,
+          "provenance": "verified",
+          "quote": "GABAB1 (GABBR1), GtoPdb target 240 | type: gpcr | family: GABAB receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 240,
+          "provenance": "verified",
+          "quote": "GABAB1 (GABBR1), GtoPdb target 240 | type: gpcr | family: GABAB receptors"
+        }
+      ]
+    },
+    "glycine": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 423,
+          "provenance": "verified",
+          "quote": "glycine receptor \u03b11 subunit (GLRA1), GtoPdb target 423 | type: lgic | family: Glycine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 423,
+          "provenance": "verified",
+          "quote": "glycine receptor \u03b11 subunit (GLRA1), GtoPdb target 423 | type: lgic | family: Glycine receptors"
+        }
+      ]
+    },
+    "h1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 262,
+          "provenance": "verified",
+          "quote": "H1 receptor (HRH1), GtoPdb target 262 | type: gpcr | family: Histamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 262,
+          "provenance": "verified",
+          "quote": "H1 receptor (HRH1), GtoPdb target 262 | type: gpcr | family: Histamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 262,
+          "provenance": "verified",
+          "quote": "H1 receptor (HRH1), GtoPdb target 262 | transduction: Gq/G11 family | effectors: Adenylyl cyclase stimulation"
+        }
+      ]
+    },
+    "h2": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 263,
+          "provenance": "verified",
+          "quote": "H2 receptor (HRH2), GtoPdb target 263 | type: gpcr | family: Histamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 263,
+          "provenance": "verified",
+          "quote": "H2 receptor (HRH2), GtoPdb target 263 | type: gpcr | family: Histamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 263,
+          "provenance": "verified",
+          "quote": "H2 receptor (HRH2), GtoPdb target 263 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "h3": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 264,
+          "provenance": "verified",
+          "quote": "H3 receptor (HRH3), GtoPdb target 264 | type: gpcr | family: Histamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 264,
+          "provenance": "verified",
+          "quote": "H3 receptor (HRH3), GtoPdb target 264 | type: gpcr | family: Histamine receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 264,
+          "provenance": "verified",
+          "quote": "H3 receptor (HRH3), GtoPdb target 264 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "h4": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 265,
+          "provenance": "verified",
+          "quote": "H4 receptor (HRH4), GtoPdb target 265 | type: gpcr | family: Histamine receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 265,
+          "provenance": "verified",
+          "quote": "H4 receptor (HRH4), GtoPdb target 265 | type: gpcr | family: Histamine receptors"
+        }
+      ]
+    },
+    "kainate": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 450,
+          "provenance": "verified",
+          "quote": "GluK1 (GRIK1), GtoPdb target 450 | type: lgic | family: Ionotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 450,
+          "provenance": "verified",
+          "quote": "GluK1 (GRIK1), GtoPdb target 450 | type: lgic | family: Ionotropic glutamate receptors"
+        }
+      ]
+    },
+    "kappa": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 318,
+          "provenance": "verified",
+          "quote": "\u03ba receptor (OPRK1), GtoPdb target 318 | type: gpcr | family: Opioid receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 318,
+          "provenance": "verified",
+          "quote": "\u03ba receptor (OPRK1), GtoPdb target 318 | type: gpcr | family: Opioid receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 318,
+          "provenance": "verified",
+          "quote": "\u03ba receptor (OPRK1), GtoPdb target 318 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel, Calcium channel"
+        }
+      ]
+    },
+    "m1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 13,
+          "provenance": "verified",
+          "quote": "M1 receptor (CHRM1), GtoPdb target 13 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 13,
+          "provenance": "verified",
+          "quote": "M1 receptor (CHRM1), GtoPdb target 13 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 13,
+          "provenance": "verified",
+          "quote": "M1 receptor (CHRM1), GtoPdb target 13 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "m2": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 14,
+          "provenance": "verified",
+          "quote": "M2 receptor (CHRM2), GtoPdb target 14 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 14,
+          "provenance": "verified",
+          "quote": "M2 receptor (CHRM2), GtoPdb target 14 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 14,
+          "provenance": "verified",
+          "quote": "M2 receptor (CHRM2), GtoPdb target 14 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "m3": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 15,
+          "provenance": "verified",
+          "quote": "M3 receptor (CHRM3), GtoPdb target 15 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 15,
+          "provenance": "verified",
+          "quote": "M3 receptor (CHRM3), GtoPdb target 15 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 15,
+          "provenance": "verified",
+          "quote": "M3 receptor (CHRM3), GtoPdb target 15 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "m4": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 16,
+          "provenance": "verified",
+          "quote": "M4 receptor (CHRM4), GtoPdb target 16 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 16,
+          "provenance": "verified",
+          "quote": "M4 receptor (CHRM4), GtoPdb target 16 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 16,
+          "provenance": "verified",
+          "quote": "M4 receptor (CHRM4), GtoPdb target 16 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "m5": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 17,
+          "provenance": "verified",
+          "quote": "M5 receptor (CHRM5), GtoPdb target 17 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 17,
+          "provenance": "verified",
+          "quote": "M5 receptor (CHRM5), GtoPdb target 17 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 17,
+          "provenance": "verified",
+          "quote": "M5 receptor (CHRM5), GtoPdb target 17 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "mglur1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 289,
+          "provenance": "verified",
+          "quote": "mGlu1 receptor (GRM1), GtoPdb target 289 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 289,
+          "provenance": "verified",
+          "quote": "mGlu1 receptor (GRM1), GtoPdb target 289 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 289,
+          "provenance": "verified",
+          "quote": "mGlu1 receptor (GRM1), GtoPdb target 289 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "mglur2": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 290,
+          "provenance": "verified",
+          "quote": "mGlu2 receptor (GRM2), GtoPdb target 290 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 290,
+          "provenance": "verified",
+          "quote": "mGlu2 receptor (GRM2), GtoPdb target 290 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 290,
+          "provenance": "verified",
+          "quote": "mGlu2 receptor (GRM2), GtoPdb target 290 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel"
+        }
+      ]
+    },
+    "mglur3": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 291,
+          "provenance": "verified",
+          "quote": "mGlu3 receptor (GRM3), GtoPdb target 291 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 291,
+          "provenance": "verified",
+          "quote": "mGlu3 receptor (GRM3), GtoPdb target 291 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 291,
+          "provenance": "verified",
+          "quote": "mGlu3 receptor (GRM3), GtoPdb target 291 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel, Calcium channel"
+        }
+      ]
+    },
+    "mglur4": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 292,
+          "provenance": "verified",
+          "quote": "mGlu4 receptor (GRM4), GtoPdb target 292 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 292,
+          "provenance": "verified",
+          "quote": "mGlu4 receptor (GRM4), GtoPdb target 292 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 292,
+          "provenance": "verified",
+          "quote": "mGlu4 receptor (GRM4), GtoPdb target 292 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition"
+        }
+      ]
+    },
+    "mglur5": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 293,
+          "provenance": "verified",
+          "quote": "mGlu5 receptor (GRM5), GtoPdb target 293 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 293,
+          "provenance": "verified",
+          "quote": "mGlu5 receptor (GRM5), GtoPdb target 293 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 293,
+          "provenance": "verified",
+          "quote": "mGlu5 receptor (GRM5), GtoPdb target 293 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"
+        }
+      ]
+    },
+    "mglur6": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 294,
+          "provenance": "verified",
+          "quote": "mGlu6 receptor (GRM6), GtoPdb target 294 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 294,
+          "provenance": "verified",
+          "quote": "mGlu6 receptor (GRM6), GtoPdb target 294 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 294,
+          "provenance": "verified",
+          "quote": "mGlu6 receptor (GRM6), GtoPdb target 294 | transduction: Gi/Go family | effectors: Other - See Comments"
+        }
+      ]
+    },
+    "mglur7": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 295,
+          "provenance": "verified",
+          "quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 295,
+          "provenance": "verified",
+          "quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | type: gpcr | family: Metabotropic glutamate receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 295,
+          "provenance": "verified",
+          "quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Calcium channel"
+        }
+      ]
+    },
+    "mt1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 287,
+          "provenance": "verified",
+          "quote": "MT1 receptor (MTNR1A), GtoPdb target 287 | type: gpcr | family: Melatonin receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 287,
+          "provenance": "verified",
+          "quote": "MT1 receptor (MTNR1A), GtoPdb target 287 | type: gpcr | family: Melatonin receptors"
+        }
+      ]
+    },
+    "mt2": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 288,
+          "provenance": "verified",
+          "quote": "MT2 receptor (MTNR1B), GtoPdb target 288 | type: gpcr | family: Melatonin receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 288,
+          "provenance": "verified",
+          "quote": "MT2 receptor (MTNR1B), GtoPdb target 288 | type: gpcr | family: Melatonin receptors"
+        }
+      ]
+    },
+    "mu": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 319,
+          "provenance": "verified",
+          "quote": "\u03bc receptor (OPRM1), GtoPdb target 319 | type: gpcr | family: Opioid receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 319,
+          "provenance": "verified",
+          "quote": "\u03bc receptor (OPRM1), GtoPdb target 319 | type: gpcr | family: Opioid receptors"
+        }
+      ],
+      "sign": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 319,
+          "provenance": "verified",
+          "quote": "\u03bc receptor (OPRM1), GtoPdb target 319 | transduction: Gi/Go family | effectors: Adenylyl cyclase stimulation, Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments"
+        }
+      ]
+    },
+    "nachr_a4b2": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 465,
+          "provenance": "verified",
+          "quote": "nicotinic acetylcholine receptor \u03b14 subunit (CHRNA4), GtoPdb target 465 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 465,
+          "provenance": "verified",
+          "quote": "nicotinic acetylcholine receptor \u03b14 subunit (CHRNA4), GtoPdb target 465 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+        }
+      ]
+    },
+    "nachr_a7": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 468,
+          "provenance": "verified",
+          "quote": "nicotinic acetylcholine receptor \u03b17 subunit (CHRNA7), GtoPdb target 468 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 468,
+          "provenance": "verified",
+          "quote": "nicotinic acetylcholine receptor \u03b17 subunit (CHRNA7), GtoPdb target 468 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+        }
+      ]
+    },
+    "nachr_muscle": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 462,
+          "provenance": "verified",
+          "quote": "nicotinic acetylcholine receptor \u03b11 subunit (CHRNA1), GtoPdb target 462 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 462,
+          "provenance": "verified",
+          "quote": "nicotinic acetylcholine receptor \u03b11 subunit (CHRNA1), GtoPdb target 462 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+        }
+      ]
+    },
+    "nmda": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 455,
+          "provenance": "verified",
+          "quote": "GluN1 (GRIN1), GtoPdb target 455 | type: lgic | family: Ionotropic glutamate receptors"
+        }
+      ],
+      "receptor_class": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 455,
+          "provenance": "verified",
+          "quote": "GluN1 (GRIN1), GtoPdb target 455 | type: lgic | family: Ionotropic glutamate receptors"
+        }
+      ]
+    },
+    "sigma1": {
+      "family": [
+        {
+          "corpus": "gtopdb_class",
+          "page": 2552,
+          "provenance": "verified",
+          "quote": "sigma non-opioid intracellular receptor 1 (SIGMAR1), GtoPdb target 2552 | type: other_protein | family: Sigma receptors"
+        }
+      ]
+    }
+  },
+  "targets": {
+    "carbonic_anhydrase": [
+      {
+        "corpus": "gtopdb_class",
+        "page": 3092,
+        "provenance": "verified",
+        "quote": "carbonic anhydrase 2 (CA2), GtoPdb target 3092 | type: enzyme | family: Carbonic anhydrases"
+      }
+    ],
+    "cav_t": [
+      {
+        "corpus": "gtopdb_class",
+        "page": 535,
+        "provenance": "verified",
+        "quote": "Cav3.1 (CACNA1G), GtoPdb target 535 | type: vgic | family: Voltage-gated calcium channels (CaV)"
+      }
+    ],
+    "melanocortin": [
+      {
+        "corpus": "gtopdb_class",
+        "page": 285,
+        "provenance": "verified",
+        "quote": "MC4 receptor (MC4R), GtoPdb target 285 | type: gpcr | family: Melanocortin receptors"
+      }
+    ],
+    "pde5": [
+      {
+        "corpus": "gtopdb_class",
+        "page": 1304,
+        "provenance": "verified",
+        "quote": "phosphodiesterase 5A (PDE5A), GtoPdb target 1304 | type: enzyme | family: Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)"
+      }
+    ]
+  }
+}

@@ -190,6 +190,37 @@ def _merge_external_density() -> None:
     DENSITY_MIN_RELIABILITY = data.get("min_reliability")
 
 
+# Machine-written *classification* sources, the mechanism counterpart of the location
+# registries above. A receptor's classification is four independent graded sub-claims,
+# so this is keyed per attribute: ``{receptor_id: {attr: [source, ...]}}`` for
+# ``receptor_class`` / ``sign`` (GtoPdb states neither ``family`` nor a pre/post site,
+# so those attributes never appear here). A non-receptor target's single classification
+# node takes a flat list: ``{target_id: [source, ...]}``. These *add to* whatever a book
+# quote already backs rather than replacing it, so a doubly-sourced attribute shows both.
+RECEPTOR_CLASSIFICATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
+TARGET_CLASSIFICATION_SOURCES: dict[str, list[dict[str, Any]]] = {}
+
+
+def _merge_external_classification_sources() -> None:
+    """Merge ``tools/generated_cache/classification_sources.json`` into the two
+    registries above.
+
+    Written by ``tools/fetch/fetch_gtopdb_class.py`` ->
+    ``tools/sourcing/apply_classification_sources.py`` (corpus #12 ``gtopdb_class``:
+    GtoPdb's ``type`` field and its transduction table, applied confirm-only). A
+    missing file is fine: every mechanism attribute then grades as it did before the
+    pass existed."""
+    src = (Path(__file__).resolve().parent.parent / "generated_cache"
+           / "classification_sources.json")
+    if not src.exists():
+        return
+    data = json.loads(src.read_text(encoding="utf-8"))
+    for owner, per_attr in (data.get("receptors") or {}).items():
+        RECEPTOR_CLASSIFICATION_SOURCES.setdefault(owner, {}).update(per_attr)
+    for owner, srcs in (data.get("targets") or {}).items():
+        TARGET_CLASSIFICATION_SOURCES.setdefault(owner, []).extend(srcs)
+
+
 def _merge_external_location_sources() -> None:
     """Merge author-side sourced expression locations from ``tools/generated_cache/location_sources.json``
     into the two registries above.
@@ -214,6 +245,7 @@ def _merge_external_location_sources() -> None:
 
 _merge_external_location_sources()
 _merge_external_density()
+_merge_external_classification_sources()
 
 
 def _receptor_provenance(receptor_id: str) -> str:
@@ -478,6 +510,29 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "guidetopharmacology.org (CC BY-SA 4.0 / ODbL).",
         "url": "https://www.guidetopharmacology.org/",
         "pages_dir": "data_sources/gtopdb/pages_ki",
+    },
+    "gtopdb_class": {
+        # Classification corpus #12: GtoPdb's third slice (after #7 tissue distribution
+        # and #11 ligand interactions). Two structured fields per target back a
+        # *mechanism* node no book prose states uniformly: its `type` (gpcr / lgic /
+        # vgic / enzyme), which is a receptor's `receptor_class` and a non-receptor
+        # target's `type`; and its transduction table (transducer family + effectors),
+        # from which a GPCR's `sign` is mapped under the narrow, confirm-only rule in
+        # tools/sourcing/apply_classification_sources.py (GtoPdb states the
+        # transduction, never a sign, so the quote carried into the pill is the
+        # transduction line itself and the reader can see what backs it).
+        # tools/fetch/fetch_gtopdb_class.py flattens both into one author-side page per
+        # target id (`page` = the GtoPdb target id, `quote` = one verbatim line), so the
+        # normal verbatim-quote gate applies unchanged (skipped on a clone lacking
+        # data_sources/gtopdb/pages_class, like every other pages*/). GtoPdb has no
+        # pre/post-synaptic field, so `synaptic` is out of this corpus's reach.
+        # Licence: contents CC BY-SA 4.0, database ODbL, as for #7 and #11.
+        "ref": "IUPHAR/BPS Guide to Pharmacology (GtoPdb), target classification",
+        "citation": "Harding SD, Armstrong JF, Faccenda E, et al. The IUPHAR/BPS "
+                    "Guide to Pharmacology: target type and transduction. "
+                    "guidetopharmacology.org (CC BY-SA 4.0 / ODbL).",
+        "url": "https://www.guidetopharmacology.org/",
+        "pages_dir": "data_sources/gtopdb/pages_class",
     },
 }
 

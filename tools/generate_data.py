@@ -107,11 +107,13 @@ from data_generators.provenance import (  # noqa: E402
     DENSITY_MIN_RELIABILITY,
     DRUG_CATEGORY_PROVENANCE,
     PROVENANCE_LEVELS,
+    RECEPTOR_CLASSIFICATION_SOURCES,
     RECEPTOR_DENSITY,
     RECEPTOR_LOCATION_SOURCES,
     RECEPTOR_PROVENANCE,
     SOURCE_CORPORA,
     STRUCTURE_PROVENANCE,
+    TARGET_CLASSIFICATION_SOURCES,
     TARGET_DENSITY,
     TARGET_LOCATION_SOURCES,
     TARGET_POLARITY_PROVENANCE,
@@ -548,12 +550,17 @@ def _receptor_record(rec: dict[str, Any],
     covered = set(RECEPTOR_CLASSIFICATION_COVERAGE.get(rec["id"], ()))
     attr_quotes = RECEPTOR_ATTR_QUOTES.get(rec["id"], {})
     classification: dict[str, dict[str, Any]] = {}
+    gtopdb_attrs = RECEPTOR_CLASSIFICATION_SOURCES.get(rec["id"], {})
     for attr in CLASSIFICATION_ATTRS:
         entry: dict[str, Any] = {"grade": base_grade}
         # A per-attribute override wins; else the main quote if COVERAGE lists this attr.
         srcs = attr_quotes.get(attr)
         if srcs is None and rq is not None and attr in covered:
             srcs = [rq]
+        # A machine-sourced classification fact (GtoPdb, corpus #12) *adds to* the book
+        # quote rather than replacing it: an attribute both state is doubly cited.
+        if gtopdb_attrs.get(attr):
+            srcs = list(srcs or []) + list(gtopdb_attrs[attr])
         if srcs:
             entry["sources"] = [dict(s) for s in srcs]
             best = max((s["provenance"] for s in srcs), key=lambda p: _GRADE_RANK[p])
@@ -681,13 +688,18 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
         if spec.get("wikipedia"):
             targets[tid]["wikipedia"] = spec["wikipedia"]
             targets[tid]["wikipedia_provenance"] = _wiki_provenance(tid)
-        # Verified Stahl Essential quote-source for this target's classification.
-        tq = STAHL_ESSENTIAL_TARGET_QUOTES.get(tid)
-        if tq is not None:
-            targets[tid]["sources"] = [dict(tq)]
-            if _GRADE_RANK[tq["provenance"]] > _GRADE_RANK[
+        # Verified quote-sources for this target's classification: the Stahl Essential
+        # sentence and/or the GtoPdb type line (corpus #12), whichever exist. They add
+        # up rather than override, so a target both cover carries both citations.
+        tsrcs = [dict(tq) for tq in ([STAHL_ESSENTIAL_TARGET_QUOTES[tid]]
+                                     if tid in STAHL_ESSENTIAL_TARGET_QUOTES else [])]
+        tsrcs += [dict(s) for s in TARGET_CLASSIFICATION_SOURCES.get(tid, [])]
+        if tsrcs:
+            targets[tid]["sources"] = tsrcs
+            best = max((s["provenance"] for s in tsrcs), key=lambda p: _GRADE_RANK[p])
+            if _GRADE_RANK[best] > _GRADE_RANK[
                     targets[tid]["classification_provenance"]]:
-                targets[tid]["classification_provenance"] = tq["provenance"]
+                targets[tid]["classification_provenance"] = best
     for rec in receptors:
         # A receptor id is also a valid target; link it so the viewer reuses the
         # receptor's lit regions. Receptor ids and DRUG_TARGETS keys never collide

@@ -1,0 +1,1182 @@
+{
+  "5ht1a": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR1A",
+    "kind": "receptor",
+    "target_id": 1,
+    "target_name": "5-HT1A receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-HT1A receptor (HTR1A), GtoPdb target 1 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "5-HT1A receptor (HTR1A), GtoPdb target 1 | transduction: not stated | effectors: Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": ""
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT1A receptor (HTR1A), GtoPdb target 1 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht1b": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR1B",
+    "kind": "receptor",
+    "target_id": 2,
+    "target_name": "5-HT1B receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-HT1B receptor (HTR1B), GtoPdb target 2 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT1B receptor (HTR1B), GtoPdb target 2 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht1d": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR1D",
+    "kind": "receptor",
+    "target_id": 3,
+    "target_name": "5-HT1D receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-HT1D receptor (HTR1D), GtoPdb target 3 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT1D receptor (HTR1D), GtoPdb target 3 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht1e": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR1E",
+    "kind": "receptor",
+    "target_id": 4,
+    "target_name": "5-ht1e receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-ht1e receptor (HTR1E), GtoPdb target 4 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-ht1e receptor (HTR1E), GtoPdb target 4 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht1f": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR1F",
+    "kind": "receptor",
+    "target_id": 5,
+    "target_name": "5-HT1F receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-HT1F receptor (HTR1F), GtoPdb target 5 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT1F receptor (HTR1F), GtoPdb target 5 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht2a": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR2A",
+    "kind": "receptor",
+    "target_id": 6,
+    "target_name": "5-HT2A receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "5-HT2A receptor (HTR2A), GtoPdb target 6 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-HT2A receptor (HTR2A), GtoPdb target 6 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT2A receptor (HTR2A), GtoPdb target 6 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht2b": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR2B",
+    "kind": "receptor",
+    "target_id": 7,
+    "target_name": "5-HT2B receptor",
+    "transduction": [
+      {
+        "effectors": "",
+        "quote": "5-HT2B receptor (HTR2B), GtoPdb target 7 | transduction: Gq/G11 family",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT2B receptor (HTR2B), GtoPdb target 7 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht2c": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR2C",
+    "kind": "receptor",
+    "target_id": 8,
+    "target_name": "5-HT2C receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "5-HT2C receptor (HTR2C), GtoPdb target 8 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-HT2C receptor (HTR2C), GtoPdb target 8 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT2C receptor (HTR2C), GtoPdb target 8 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht3": {
+    "family": "5-HT3 receptors",
+    "gene": "HTR3A",
+    "kind": "receptor",
+    "target_id": 373,
+    "target_name": "5-HT3A",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "5-HT3A (HTR3A), GtoPdb target 373 | type: lgic | family: 5-HT3 receptors"
+  },
+  "5ht4": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR4",
+    "kind": "receptor",
+    "target_id": 9,
+    "target_name": "5-HT4 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation, Calcium channel, Other - See Comments",
+        "quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | transduction: Gs family | effectors: Adenylyl cyclase stimulation, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Other - See Comments",
+        "quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | transduction: G12/G13 family | effectors: Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "G12/G13 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht5a": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR5A",
+    "kind": "receptor",
+    "target_id": 10,
+    "target_name": "5-HT5A receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "5-HT5A receptor (HTR5A), GtoPdb target 10 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "5-HT5A receptor (HTR5A), GtoPdb target 10 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT5A receptor (HTR5A), GtoPdb target 10 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht6": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR6",
+    "kind": "receptor",
+    "target_id": 11,
+    "target_name": "5-HT6 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "5-HT6 receptor (HTR6), GtoPdb target 11 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "5-HT6 receptor (HTR6), GtoPdb target 11 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT6 receptor (HTR6), GtoPdb target 11 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "5ht7": {
+    "family": "5-Hydroxytryptamine receptors",
+    "gene": "HTR7",
+    "kind": "receptor",
+    "target_id": 12,
+    "target_name": "5-HT7 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "5-HT7 receptor (HTR7), GtoPdb target 12 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "5-HT7 receptor (HTR7), GtoPdb target 12 | type: gpcr | family: 5-Hydroxytryptamine receptors"
+  },
+  "a2a": {
+    "family": "Adenosine receptors",
+    "gene": "ADORA2A",
+    "kind": "receptor",
+    "target_id": 19,
+    "target_name": "A2A receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "A2A receptor (ADORA2A), GtoPdb target 19 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Adenylyl cyclase stimulation, Phospholipase C stimulation",
+        "quote": "A2A receptor (ADORA2A), GtoPdb target 19 | transduction: Gq/G11 family | effectors: Adenylyl cyclase stimulation, Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "A2A receptor (ADORA2A), GtoPdb target 19 | type: gpcr | family: Adenosine receptors"
+  },
+  "alpha1a": {
+    "family": "Adrenoceptors",
+    "gene": "ADRA1A",
+    "kind": "receptor",
+    "target_id": 22,
+    "target_name": "\u03b11A-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments",
+        "quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | transduction: G12/G13 family | effectors: Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "G12/G13 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | type: gpcr | family: Adrenoceptors"
+  },
+  "alpha1b": {
+    "family": "Adrenoceptors",
+    "gene": "ADRA1B",
+    "kind": "receptor",
+    "target_id": 23,
+    "target_name": "\u03b11B-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "quote": "\u03b11B-adrenoceptor (ADRA1B), GtoPdb target 23 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Phospholipase D stimulation, Other - See Comments",
+        "quote": "\u03b11B-adrenoceptor (ADRA1B), GtoPdb target 23 | transduction: not stated | effectors: Phospholipase D stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": ""
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b11B-adrenoceptor (ADRA1B), GtoPdb target 23 | type: gpcr | family: Adrenoceptors"
+  },
+  "alpha1d": {
+    "family": "Adrenoceptors",
+    "gene": "ADRA1D",
+    "kind": "receptor",
+    "target_id": 24,
+    "target_name": "\u03b11D-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "quote": "\u03b11D-adrenoceptor (ADRA1D), GtoPdb target 24 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Phospholipase D stimulation, Other - See Comments",
+        "quote": "\u03b11D-adrenoceptor (ADRA1D), GtoPdb target 24 | transduction: not stated | effectors: Phospholipase D stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": ""
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b11D-adrenoceptor (ADRA1D), GtoPdb target 24 | type: gpcr | family: Adrenoceptors"
+  },
+  "alpha2a": {
+    "family": "Adrenoceptors",
+    "gene": "ADRA2A",
+    "kind": "receptor",
+    "target_id": 25,
+    "target_name": "\u03b12A-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Potassium channel, Calcium channel, Phospholipase A2 stimulation",
+        "quote": "\u03b12A-adrenoceptor (ADRA2A), GtoPdb target 25 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Phospholipase A2 stimulation",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "",
+        "quote": "\u03b12A-adrenoceptor (ADRA2A), GtoPdb target 25 | transduction: Gs family | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b12A-adrenoceptor (ADRA2A), GtoPdb target 25 | type: gpcr | family: Adrenoceptors"
+  },
+  "alpha2b": {
+    "family": "Adrenoceptors",
+    "gene": "ADRA2B",
+    "kind": "receptor",
+    "target_id": 26,
+    "target_name": "\u03b12B-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Potassium channel, Calcium channel, Other - See Comments",
+        "quote": "\u03b12B-adrenoceptor (ADRA2B), GtoPdb target 26 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "",
+        "quote": "\u03b12B-adrenoceptor (ADRA2B), GtoPdb target 26 | transduction: Gs family | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b12B-adrenoceptor (ADRA2B), GtoPdb target 26 | type: gpcr | family: Adrenoceptors"
+  },
+  "alpha2c": {
+    "family": "Adrenoceptors",
+    "gene": "ADRA2C",
+    "kind": "receptor",
+    "target_id": 27,
+    "target_name": "\u03b12C-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Potassium channel, Calcium channel, Other - See Comments",
+        "quote": "\u03b12C-adrenoceptor (ADRA2C), GtoPdb target 27 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b12C-adrenoceptor (ADRA2C), GtoPdb target 27 | type: gpcr | family: Adrenoceptors"
+  },
+  "ampa": {
+    "family": "Ionotropic glutamate receptors",
+    "gene": "GRIA1",
+    "kind": "receptor",
+    "target_id": 444,
+    "target_name": "GluA1",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "GluA1 (GRIA1), GtoPdb target 444 | type: lgic | family: Ionotropic glutamate receptors"
+  },
+  "beta1": {
+    "family": "Adrenoceptors",
+    "gene": "ADRB1",
+    "kind": "receptor",
+    "target_id": 28,
+    "target_name": "\u03b21-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "\u03b21-adrenoceptor (ADRB1), GtoPdb target 28 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Guanylate cyclase stimulation, Other - See Comments",
+        "quote": "\u03b21-adrenoceptor (ADRB1), GtoPdb target 28 | transduction: Gi/Go family | effectors: Guanylate cyclase stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b21-adrenoceptor (ADRB1), GtoPdb target 28 | type: gpcr | family: Adrenoceptors"
+  },
+  "beta2": {
+    "family": "Adrenoceptors",
+    "gene": "ADRB2",
+    "kind": "receptor",
+    "target_id": 29,
+    "target_name": "\u03b22-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "",
+        "quote": "\u03b22-adrenoceptor (ADRB2), GtoPdb target 29 | transduction: Gs family",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Guanylate cyclase stimulation",
+        "quote": "\u03b22-adrenoceptor (ADRB2), GtoPdb target 29 | transduction: Gi/Go family | effectors: Guanylate cyclase stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b22-adrenoceptor (ADRB2), GtoPdb target 29 | type: gpcr | family: Adrenoceptors"
+  },
+  "beta3": {
+    "family": "Adrenoceptors",
+    "gene": "ADRB3",
+    "kind": "receptor",
+    "target_id": 30,
+    "target_name": "\u03b23-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "",
+        "quote": "\u03b23-adrenoceptor (ADRB3), GtoPdb target 30 | transduction: Gs family",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Guanylate cyclase stimulation",
+        "quote": "\u03b23-adrenoceptor (ADRB3), GtoPdb target 30 | transduction: Gi/Go family | effectors: Guanylate cyclase stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b23-adrenoceptor (ADRB3), GtoPdb target 30 | type: gpcr | family: Adrenoceptors"
+  },
+  "carbonic_anhydrase": {
+    "family": "Carbonic anhydrases",
+    "gene": "CA2",
+    "kind": "target",
+    "target_id": 3092,
+    "target_name": "carbonic anhydrase 2",
+    "transduction": [],
+    "type": "enzyme",
+    "type_quote": "carbonic anhydrase 2 (CA2), GtoPdb target 3092 | type: enzyme | family: Carbonic anhydrases"
+  },
+  "cav_t": {
+    "family": "Voltage-gated calcium channels (CaV)",
+    "gene": "CACNA1G",
+    "kind": "target",
+    "target_id": 535,
+    "target_name": "Cav3.1",
+    "transduction": [],
+    "type": "vgic",
+    "type_quote": "Cav3.1 (CACNA1G), GtoPdb target 535 | type: vgic | family: Voltage-gated calcium channels (CaV)"
+  },
+  "cb1": {
+    "family": "Cannabinoid receptors",
+    "gene": "CNR1",
+    "kind": "receptor",
+    "target_id": 56,
+    "target_name": "CB1 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Potassium channel, Calcium channel, Other - See Comments",
+        "quote": "CB1 receptor (CNR1), GtoPdb target 56 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "CB1 receptor (CNR1), GtoPdb target 56 | transduction: Gs family | effectors: Adenylyl cyclase stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "CB1 receptor (CNR1), GtoPdb target 56 | type: gpcr | family: Cannabinoid receptors"
+  },
+  "d1": {
+    "family": "Dopamine receptors",
+    "gene": "DRD1",
+    "kind": "receptor",
+    "target_id": 214,
+    "target_name": "D1 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "D1 receptor (DRD1), GtoPdb target 214 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Calcium channel, Other - See Comments",
+        "quote": "D1 receptor (DRD1), GtoPdb target 214 | transduction: Gs family | effectors: Calcium channel, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "D1 receptor (DRD1), GtoPdb target 214 | type: gpcr | family: Dopamine receptors"
+  },
+  "d2": {
+    "family": "Dopamine receptors",
+    "gene": "DRD2",
+    "kind": "receptor",
+    "target_id": 215,
+    "target_name": "D2 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Other - See Comments",
+        "quote": "D2 receptor (DRD2), GtoPdb target 215 | transduction: Gi/Go family, G protein independent mechanism | effectors: Adenylyl cyclase inhibition, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gi/Go family, G protein independent mechanism"
+      },
+      {
+        "effectors": "Potassium channel, Other - See Comments",
+        "quote": "D2 receptor (DRD2), GtoPdb target 215 | transduction: not stated | effectors: Potassium channel, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": ""
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "D2 receptor (DRD2), GtoPdb target 215 | type: gpcr | family: Dopamine receptors"
+  },
+  "d3": {
+    "family": "Dopamine receptors",
+    "gene": "DRD3",
+    "kind": "receptor",
+    "target_id": 216,
+    "target_name": "D3 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Potassium channel",
+        "quote": "D3 receptor (DRD3), GtoPdb target 216 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "D3 receptor (DRD3), GtoPdb target 216 | type: gpcr | family: Dopamine receptors"
+  },
+  "d4": {
+    "family": "Dopamine receptors",
+    "gene": "DRD4",
+    "kind": "receptor",
+    "target_id": 217,
+    "target_name": "D4 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "D4 receptor (DRD4), GtoPdb target 217 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "D4 receptor (DRD4), GtoPdb target 217 | type: gpcr | family: Dopamine receptors"
+  },
+  "d5": {
+    "family": "Dopamine receptors",
+    "gene": "DRD5",
+    "kind": "receptor",
+    "target_id": 218,
+    "target_name": "D5 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "D5 receptor (DRD5), GtoPdb target 218 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "D5 receptor (DRD5), GtoPdb target 218 | type: gpcr | family: Dopamine receptors"
+  },
+  "delta": {
+    "family": "Opioid receptors",
+    "gene": "OPRD1",
+    "kind": "receptor",
+    "target_id": 317,
+    "target_name": "\u03b4 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Other - See Comments",
+        "quote": "\u03b4 receptor (OPRD1), GtoPdb target 317 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b4 receptor (OPRD1), GtoPdb target 317 | type: gpcr | family: Opioid receptors"
+  },
+  "gaba_a": {
+    "family": "GABAA receptors",
+    "gene": "GABRA1",
+    "kind": "receptor",
+    "target_id": 404,
+    "target_name": "GABAA receptor \u03b11 subunit",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "GABAA receptor \u03b11 subunit (GABRA1), GtoPdb target 404 | type: lgic | family: GABAA receptors"
+  },
+  "gaba_a_rho": {
+    "family": "GABAA receptors",
+    "gene": "GABRR1",
+    "kind": "receptor",
+    "target_id": 420,
+    "target_name": "GABAA receptor \u03c11 subunit",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "GABAA receptor \u03c11 subunit (GABRR1), GtoPdb target 420 | type: lgic | family: GABAA receptors"
+  },
+  "gaba_b": {
+    "family": "GABAB receptors",
+    "gene": "GABBR1",
+    "kind": "receptor",
+    "target_id": 240,
+    "target_name": "GABAB1",
+    "transduction": [],
+    "type": "gpcr",
+    "type_quote": "GABAB1 (GABBR1), GtoPdb target 240 | type: gpcr | family: GABAB receptors"
+  },
+  "glycine": {
+    "family": "Glycine receptors",
+    "gene": "GLRA1",
+    "kind": "receptor",
+    "target_id": 423,
+    "target_name": "glycine receptor \u03b11 subunit",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "glycine receptor \u03b11 subunit (GLRA1), GtoPdb target 423 | type: lgic | family: Glycine receptors"
+  },
+  "h1": {
+    "family": "Histamine receptors",
+    "gene": "HRH1",
+    "kind": "receptor",
+    "target_id": 262,
+    "target_name": "H1 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "H1 receptor (HRH1), GtoPdb target 262 | transduction: Gq/G11 family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "H1 receptor (HRH1), GtoPdb target 262 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "H1 receptor (HRH1), GtoPdb target 262 | type: gpcr | family: Histamine receptors"
+  },
+  "h2": {
+    "family": "Histamine receptors",
+    "gene": "HRH2",
+    "kind": "receptor",
+    "target_id": 263,
+    "target_name": "H2 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "H2 receptor (HRH2), GtoPdb target 263 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "H2 receptor (HRH2), GtoPdb target 263 | transduction: Gs family | effectors: Adenylyl cyclase stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "H2 receptor (HRH2), GtoPdb target 263 | type: gpcr | family: Histamine receptors"
+  },
+  "h3": {
+    "family": "Histamine receptors",
+    "gene": "HRH3",
+    "kind": "receptor",
+    "target_id": 264,
+    "target_name": "H3 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "H3 receptor (HRH3), GtoPdb target 264 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "H3 receptor (HRH3), GtoPdb target 264 | type: gpcr | family: Histamine receptors"
+  },
+  "h4": {
+    "family": "Histamine receptors",
+    "gene": "HRH4",
+    "kind": "receptor",
+    "target_id": 265,
+    "target_name": "H4 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "H4 receptor (HRH4), GtoPdb target 265 | transduction: Gi/Go family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "H4 receptor (HRH4), GtoPdb target 265 | type: gpcr | family: Histamine receptors"
+  },
+  "kainate": {
+    "family": "Ionotropic glutamate receptors",
+    "gene": "GRIK1",
+    "kind": "receptor",
+    "target_id": 450,
+    "target_name": "GluK1",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "GluK1 (GRIK1), GtoPdb target 450 | type: lgic | family: Ionotropic glutamate receptors"
+  },
+  "kappa": {
+    "family": "Opioid receptors",
+    "gene": "OPRK1",
+    "kind": "receptor",
+    "target_id": 318,
+    "target_name": "\u03ba receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Potassium channel, Calcium channel",
+        "quote": "\u03ba receptor (OPRK1), GtoPdb target 318 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel, Calcium channel",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Adenylyl cyclase inhibition, Phospholipase C stimulation, Other - See Comments",
+        "quote": "\u03ba receptor (OPRK1), GtoPdb target 318 | transduction: Gi/Go family, G12/G13 family | effectors: Adenylyl cyclase inhibition, Phospholipase C stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family, G12/G13 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03ba receptor (OPRK1), GtoPdb target 318 | type: gpcr | family: Opioid receptors"
+  },
+  "m1": {
+    "family": "Acetylcholine receptors (muscarinic)",
+    "gene": "CHRM1",
+    "kind": "receptor",
+    "target_id": 13,
+    "target_name": "M1 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "M1 receptor (CHRM1), GtoPdb target 13 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "M1 receptor (CHRM1), GtoPdb target 13 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+  },
+  "m2": {
+    "family": "Acetylcholine receptors (muscarinic)",
+    "gene": "CHRM2",
+    "kind": "receptor",
+    "target_id": 14,
+    "target_name": "M2 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "M2 receptor (CHRM2), GtoPdb target 14 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Adenylyl cyclase stimulation, Phospholipase C stimulation",
+        "quote": "M2 receptor (CHRM2), GtoPdb target 14 | transduction: Gs family, Gq/G11 family | effectors: Adenylyl cyclase stimulation, Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family, Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "M2 receptor (CHRM2), GtoPdb target 14 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+  },
+  "m3": {
+    "family": "Acetylcholine receptors (muscarinic)",
+    "gene": "CHRM3",
+    "kind": "receptor",
+    "target_id": 15,
+    "target_name": "M3 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "M3 receptor (CHRM3), GtoPdb target 15 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "M3 receptor (CHRM3), GtoPdb target 15 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+  },
+  "m4": {
+    "family": "Acetylcholine receptors (muscarinic)",
+    "gene": "CHRM4",
+    "kind": "receptor",
+    "target_id": 16,
+    "target_name": "M4 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "M4 receptor (CHRM4), GtoPdb target 16 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "M4 receptor (CHRM4), GtoPdb target 16 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+  },
+  "m5": {
+    "family": "Acetylcholine receptors (muscarinic)",
+    "gene": "CHRM5",
+    "kind": "receptor",
+    "target_id": 17,
+    "target_name": "M5 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "M5 receptor (CHRM5), GtoPdb target 17 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "M5 receptor (CHRM5), GtoPdb target 17 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
+  },
+  "melanocortin": {
+    "family": "Melanocortin receptors",
+    "gene": "MC4R",
+    "kind": "target",
+    "target_id": 285,
+    "target_name": "MC4 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "MC4 receptor (MC4R), GtoPdb target 285 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Other - See Comments",
+        "quote": "MC4 receptor (MC4R), GtoPdb target 285 | transduction: G protein (identity unknown) | effectors: Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "G protein (identity unknown)"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "MC4 receptor (MC4R), GtoPdb target 285 | type: gpcr | family: Melanocortin receptors"
+  },
+  "mglur1": {
+    "family": "Metabotropic glutamate receptors",
+    "gene": "GRM1",
+    "kind": "receptor",
+    "target_id": 289,
+    "target_name": "mGlu1 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "mGlu1 receptor (GRM1), GtoPdb target 289 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Adenylyl cyclase stimulation, Adenylyl cyclase inhibition, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments",
+        "quote": "mGlu1 receptor (GRM1), GtoPdb target 289 | transduction: Gs family, Gi/Go family, G protein independent mechanism | effectors: Adenylyl cyclase stimulation, Adenylyl cyclase inhibition, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family, Gi/Go family, G protein independent mechanism"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "mGlu1 receptor (GRM1), GtoPdb target 289 | type: gpcr | family: Metabotropic glutamate receptors"
+  },
+  "mglur2": {
+    "family": "Metabotropic glutamate receptors",
+    "gene": "GRM2",
+    "kind": "receptor",
+    "target_id": 290,
+    "target_name": "mGlu2 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Potassium channel",
+        "quote": "mGlu2 receptor (GRM2), GtoPdb target 290 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "mGlu2 receptor (GRM2), GtoPdb target 290 | type: gpcr | family: Metabotropic glutamate receptors"
+  },
+  "mglur3": {
+    "family": "Metabotropic glutamate receptors",
+    "gene": "GRM3",
+    "kind": "receptor",
+    "target_id": 291,
+    "target_name": "mGlu3 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Potassium channel, Calcium channel",
+        "quote": "mGlu3 receptor (GRM3), GtoPdb target 291 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Potassium channel, Calcium channel",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "mGlu3 receptor (GRM3), GtoPdb target 291 | type: gpcr | family: Metabotropic glutamate receptors"
+  },
+  "mglur4": {
+    "family": "Metabotropic glutamate receptors",
+    "gene": "GRM4",
+    "kind": "receptor",
+    "target_id": 292,
+    "target_name": "mGlu4 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "mGlu4 receptor (GRM4), GtoPdb target 292 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "mGlu4 receptor (GRM4), GtoPdb target 292 | type: gpcr | family: Metabotropic glutamate receptors"
+  },
+  "mglur5": {
+    "family": "Metabotropic glutamate receptors",
+    "gene": "GRM5",
+    "kind": "receptor",
+    "target_id": 293,
+    "target_name": "mGlu5 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "mGlu5 receptor (GRM5), GtoPdb target 293 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Adenylyl cyclase stimulation, Potassium channel, Calcium channel, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments",
+        "quote": "mGlu5 receptor (GRM5), GtoPdb target 293 | transduction: Gs family, Gi/Go family | effectors: Adenylyl cyclase stimulation, Potassium channel, Calcium channel, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family, Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "mGlu5 receptor (GRM5), GtoPdb target 293 | type: gpcr | family: Metabotropic glutamate receptors"
+  },
+  "mglur6": {
+    "family": "Metabotropic glutamate receptors",
+    "gene": "GRM6",
+    "kind": "receptor",
+    "target_id": 294,
+    "target_name": "mGlu6 receptor",
+    "transduction": [
+      {
+        "effectors": "Other - See Comments",
+        "quote": "mGlu6 receptor (GRM6), GtoPdb target 294 | transduction: Gi/Go family | effectors: Other - See Comments",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "mGlu6 receptor (GRM6), GtoPdb target 294 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "mGlu6 receptor (GRM6), GtoPdb target 294 | type: gpcr | family: Metabotropic glutamate receptors"
+  },
+  "mglur7": {
+    "family": "Metabotropic glutamate receptors",
+    "gene": "GRM7",
+    "kind": "receptor",
+    "target_id": 295,
+    "target_name": "mGlu7 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Calcium channel",
+        "quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Calcium channel",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | transduction: Gi/Go family | effectors: Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gi/Go family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | type: gpcr | family: Metabotropic glutamate receptors"
+  },
+  "mt1": {
+    "family": "Melatonin receptors",
+    "gene": "MTNR1A",
+    "kind": "receptor",
+    "target_id": 287,
+    "target_name": "MT1 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition",
+        "quote": "MT1 receptor (MTNR1A), GtoPdb target 287 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Phospholipase C stimulation, Potassium channel, Calcium channel",
+        "quote": "MT1 receptor (MTNR1A), GtoPdb target 287 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Potassium channel, Calcium channel | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "MT1 receptor (MTNR1A), GtoPdb target 287 | type: gpcr | family: Melatonin receptors"
+  },
+  "mt2": {
+    "family": "Melatonin receptors",
+    "gene": "MTNR1B",
+    "kind": "receptor",
+    "target_id": 288,
+    "target_name": "MT2 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase inhibition, Phospholipase C stimulation",
+        "quote": "MT2 receptor (MTNR1B), GtoPdb target 288 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Other - See Comments",
+        "quote": "MT2 receptor (MTNR1B), GtoPdb target 288 | transduction: not stated | effectors: Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": ""
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "MT2 receptor (MTNR1B), GtoPdb target 288 | type: gpcr | family: Melatonin receptors"
+  },
+  "mu": {
+    "family": "Opioid receptors",
+    "gene": "OPRM1",
+    "kind": "receptor",
+    "target_id": 319,
+    "target_name": "\u03bc receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation, Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments",
+        "quote": "\u03bc receptor (OPRM1), GtoPdb target 319 | transduction: Gi/Go family | effectors: Adenylyl cyclase stimulation, Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gi/Go family"
+      },
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "\u03bc receptor (OPRM1), GtoPdb target 319 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03bc receptor (OPRM1), GtoPdb target 319 | type: gpcr | family: Opioid receptors"
+  },
+  "nachr_a4b2": {
+    "family": "Nicotinic acetylcholine receptors (nACh)",
+    "gene": "CHRNA4",
+    "kind": "receptor",
+    "target_id": 465,
+    "target_name": "nicotinic acetylcholine receptor \u03b14 subunit",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "nicotinic acetylcholine receptor \u03b14 subunit (CHRNA4), GtoPdb target 465 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+  },
+  "nachr_a7": {
+    "family": "Nicotinic acetylcholine receptors (nACh)",
+    "gene": "CHRNA7",
+    "kind": "receptor",
+    "target_id": 468,
+    "target_name": "nicotinic acetylcholine receptor \u03b17 subunit",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "nicotinic acetylcholine receptor \u03b17 subunit (CHRNA7), GtoPdb target 468 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+  },
+  "nachr_muscle": {
+    "family": "Nicotinic acetylcholine receptors (nACh)",
+    "gene": "CHRNA1",
+    "kind": "receptor",
+    "target_id": 462,
+    "target_name": "nicotinic acetylcholine receptor \u03b11 subunit",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "nicotinic acetylcholine receptor \u03b11 subunit (CHRNA1), GtoPdb target 462 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
+  },
+  "nmda": {
+    "family": "Ionotropic glutamate receptors",
+    "gene": "GRIN1",
+    "kind": "receptor",
+    "target_id": 455,
+    "target_name": "GluN1",
+    "transduction": [],
+    "type": "lgic",
+    "type_quote": "GluN1 (GRIN1), GtoPdb target 455 | type: lgic | family: Ionotropic glutamate receptors"
+  },
+  "pde5": {
+    "family": "Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)",
+    "gene": "PDE5A",
+    "kind": "target",
+    "target_id": 1304,
+    "target_name": "phosphodiesterase 5A",
+    "transduction": [],
+    "type": "enzyme",
+    "type_quote": "phosphodiesterase 5A (PDE5A), GtoPdb target 1304 | type: enzyme | family: Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)"
+  },
+  "sigma1": {
+    "family": "Sigma receptors",
+    "gene": "SIGMAR1",
+    "kind": "receptor",
+    "target_id": 2552,
+    "target_name": "sigma non-opioid intracellular receptor 1",
+    "transduction": [],
+    "type": "other_protein",
+    "type_quote": "sigma non-opioid intracellular receptor 1 (SIGMAR1), GtoPdb target 2552 | type: other_protein | family: Sigma receptors"
+  }
+}

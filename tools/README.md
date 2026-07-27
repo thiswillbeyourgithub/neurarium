@@ -124,8 +124,15 @@ network, idempotent, polite; each touches only what changed). Always finish with
    `data_sources/allen/density.json` (pass `--skip-density` to opt out of the heavy
    MicroarrayExpression read), then `python tools/sourcing/apply_expression_density.py` re-gates each
    profile quote and writes `tools/generated_cache/expression_density.json`. See CLAUDE.md Expression density.
-8. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
-9. `python tools/update_readme_stats.py` — refresh the README sourcing table
+8. **GtoPdb target classification** (the `receptor_class` + `sign` + non-receptor `targets`
+   sources): `python tools/fetch/fetch_gtopdb_class.py` pulls each target's `type` +
+   transduction table (caches to `data_sources/gtopdb/pages_class/`, author-side, +
+   `tools/generated_cache/gtopdb_class.json`), then `python
+   tools/sourcing/apply_classification_sources.py` maps + quote-gates + merges the confirm-only
+   `verified` sources (no judge) into `tools/generated_cache/classification_sources.json`. See
+   CLAUDE.md Source provenance (corpus #12).
+9. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
+10. `python tools/update_readme_stats.py` — refresh the README sourcing table
    (CI runs it `--check`).
 
 Panel **descriptions** need no refresh script: each fetches the current Wikipedia lead
