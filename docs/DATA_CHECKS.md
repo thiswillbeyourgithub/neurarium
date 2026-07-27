@@ -6,7 +6,7 @@
 
 `tools/check_data.py` (stdlib) runs over the **emitted** `public/data/`,
 independent of `generate_data.py`. Exit 0 = no errors (warnings allowed), 1 =
-errors. Functions take loaded data as args (unit-testable). Eight families:
+errors. Functions take loaded data as args (unit-testable). Nine families:
 
 - **Quote table** (referential integrity of the externalized `quotes.jsonl`): every node's
   `{quote_id, provenance}` source must resolve to a quote node, and every quote node must be
@@ -55,3 +55,10 @@ errors. Functions take loaded data as args (unit-testable). Eight families:
   `meta.provenance_stats.ki_coverage` against a recompute. A quote-only binding is still
   sourced, so this is not a grade gate: it surfaces where a *measured* affinity was never
   looked up, the honest complement to "% sourced".
+- **Changelog** (release notes per version): `public/data/changelog.json` must be
+  well-formed, newest-version-first (the order the viewer relies on to show every
+  release since a visitor's last one), with no duplicate version, a known category on
+  every entry and a real sha on every commit ref. The one that bites: the version in
+  `public/version.js` must have a `docs/changelog/<version>/changelog.md`, so bumping
+  the version without writing notes fails here instead of shipping a What's new popup
+  that announces an update it cannot describe.

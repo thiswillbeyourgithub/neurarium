@@ -252,6 +252,8 @@ Viewer (`public/`):
   each step's `before()` setting the scene (spread, open/collapse a section, reset a prior demo).
   Auto-runs once on a first visit (after the intro settles), forced every load with `?tour=1`, and
   replayed from the About popup's "Take a tour" button (`#about-tour`).
+- `js/changelog.js` — `createChangelog()`, the "What's new" popup (`#changelog-modal`). See
+  Versioning / Changelog.
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,
   auto-rotate, hover/pick raycasting; `createInfoPanel`; search; the legend builders
   (`buildLegend`/`buildLegendKey`/`buildTargetLegend`/`buildEnzymeLegend`/`buildDrugLegend`); the
@@ -297,7 +299,7 @@ material location).
 
 ## Data checks
 
-> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: six families (duplicates, reachability, TODOs, provenance grades, source quotes, connectivity).
+> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: nine families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, changelog).
 
 ## Internationalization (i18n)
 
@@ -879,8 +881,24 @@ The version is a single string in `version.js` (`window.__APP_VERSION__`), shown
 panel header + the loading overlay's title (`js/main.js` fills every `[data-app-version]`
 slot, so a new display spot is markup-only) + the WIP banner (which reads the global
 directly). Follow [semver](https://semver.org/);
-to release, bump `version.js`. It is intentionally not derived from git (the site deploys as
-plain files).
+to release, bump `version.js` **and write that version's changelog** (below). It is
+intentionally not derived from git (the site deploys as plain files).
+
+### Changelog ("What's new")
+
+Release notes for casual visitors, one file per version: `docs/changelog/<major.minor.patch>/
+changelog.md`, `## <Category>` sections (closed vocabulary `CATEGORIES` in
+`tools/data_generators/changelog.py`) of `- bullet (sha, sha)` lines, each with an indented
+`fr:` line (required, like every display string). `docs/` is not web-exposed, so
+`generate_data.py` emits them newest-first to `public/data/changelog.json`.
+`js/changelog.js` `createChangelog()` fetches that **only when its popup opens**, and
+`showIfUnseen()` shows every release after the version in `localStorage`
+`neurarium.changelogSeen` (a first-ever visitor is silently marked current: they get the
+tour instead). Also reachable from the About popup's "What's new" link; scrolls via the
+shared `.modal` rule. A commit sha links to `<sourceUrl>/commit/<sha>` only when
+`sourceUrl` points *into* a repository (same rule as the About "open an issue" link, so
+no repo/username is hardcoded); otherwise it renders as plain text.
+`check_data.py` family 9 fails if `version.js` has no changelog directory.
 
 ## Conventions
 

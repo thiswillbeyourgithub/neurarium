@@ -1057,6 +1057,46 @@
          so it needs a higher z-index than #loading (70) to sit on top of it (the
          other modals live at 60, below the overlay). */
       #sourcing-modal { z-index: 80; }
+      /* "What's new" popup (#changelog-modal, built by js/changelog.js): one section
+         per version, each a version heading then the bullets grouped under their
+         category. It scrolls with the shared .modal rule (max-height + overflow-y),
+         which matters here more than elsewhere: a visitor returning after several
+         releases reads a long list. Shown once after an update and from About. */
+      .changelog-release { margin: 0 0 18px; }
+      .changelog-release:last-child { margin-bottom: 2px; }
+      .changelog-release > h3 {
+        margin: 0 0 6px;
+        font-size: 13px;
+        color: var(--accent-bright);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 4px;
+      }
+      .changelog-cat {
+        margin: 10px 0 3px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .changelog-list {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+      .changelog-list li { margin: 3px 0; }
+      /* The commit refs trailing a bullet: a monospace tag, a link only when the
+         configured sourceUrl points into a repository (see changelog.js commitUrl). */
+      .changelog-commit {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 10px;
+        opacity: 0.75;
+        white-space: nowrap;
+      }
+      a.changelog-commit { color: var(--accent-bright); text-decoration: underline; }
+      .changelog-empty { font-size: 12px; color: var(--muted); }
       /* A "jump to another popup" link row (Legend / About -> Sources & provenance):
          set off from the content above it with a hairline. */
       .modal-jump-row {
@@ -2609,6 +2649,11 @@
         <p class="about-text modal-jump-row">
           <a href="#" id="about-open-sourcing" data-i18n="sourcing.openLink"></a>
         </p>
+        <!-- Jump to the What's new popup (js/main.js closes this and opens
+             #changelog-modal, showing the notes for every released version). -->
+        <p class="about-text">
+          <a href="#" id="about-open-changelog" data-i18n="changelog.openLink"></a>
+        </p>
       </div>
     </div>
 
@@ -2644,6 +2689,19 @@
         <button type="button" id="sourcing-close" class="info-close" aria-label="Close">&times;</button>
         <h2 id="sourcing-title" data-i18n="about.sourcingTitle"></h2>
         <div id="about-sourcing"></div>
+      </div>
+    </div>
+
+    <!-- "What's new" popup: the release notes for every version since the visitor's
+         last one. Auto-opens once after an update (js/changelog.js showIfUnseen) and
+         from the About popup's link. The body is built at open time from
+         data/changelog.json; the shared .modal rule makes it scroll. -->
+    <div id="changelog-modal" class="modal-overlay" hidden>
+      <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="changelog-title">
+        <button type="button" id="changelog-close" class="info-close" aria-label="Close"
+                data-i18n-attr="aria-label:image.close">&times;</button>
+        <h2 id="changelog-title" data-i18n="changelog.title"></h2>
+        <div id="changelog-body"></div>
       </div>
     </div>
 

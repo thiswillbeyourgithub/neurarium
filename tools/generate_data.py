@@ -169,6 +169,11 @@ from data_generators.quote_table import (  # noqa: E402
     reset_quotes,
 )
 
+# The per-version "what's new" bullets, authored under docs/changelog/ and emitted
+# to public/data/changelog.json (docs/ is not web-exposed, so the emit is what makes
+# them reachable).
+from data_generators.changelog import load_changelog  # noqa: E402
+
 # The receptor classification records (pure data, one module per neurotransmitter
 # family) live in the data_generators.receptors package. See the schema comment at
 # the RECEPTORS use-site below.
@@ -1658,6 +1663,19 @@ def write_artifacts(root: Path) -> None:
             for record in data[name]:
                 fh.write(json.dumps(_emit(record), ensure_ascii=False) + "\n")
         log.info("wrote %s (%d lines)", path, len(data[name]))
+
+    # The per-version "what's new" bullets, newest version first. Authored under
+    # docs/changelog/<version>/changelog.md, which is not web-exposed; emitted here
+    # so the viewer can fetch it, and only when its popup opens (it is not part of
+    # the boot payload). Goes through _emit like everything else, so its French ends
+    # up in translations.fr.json rather than duplicated in the file.
+    changelog_path = data_dir / "changelog.json"
+    releases = [_emit(release) for release in
+                load_changelog(Path(__file__).resolve().parent.parent / "docs")]
+    changelog_path.write_text(
+        json.dumps({"versions": releases}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8")
+    log.info("wrote %s (%d versions)", changelog_path, len(releases))
 
     # The deduplicated quote table, one quote node per line, sorted by id for
     # stable diffs. Fetched by the viewer (rehydrated onto each source at load).

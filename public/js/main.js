@@ -26,6 +26,7 @@ import { animSettings } from "./anim-settings.js";
 import { DECOR_RENDER_ORDER } from "./render-order.js";
 import { fetchWikiLead } from "./wiki.js";
 import { createTour } from "./tour.js";
+import { createChangelog } from "./changelog.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -5863,7 +5864,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
  * dim) so the brain returns to its plain state, see the Escape case. `lightbox` is
  * the image popup: when it is open Esc closes it before anything else.
  */
-function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal) {
+function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -5994,7 +5995,7 @@ function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal,
     // lightbox is checked first so it wins when stacked over another (it can be
     // opened from a panel behind a modal). Only one popup is open at a time.
     if (event.key === "Escape") {
-      for (const modal of [lightbox, help, aboutModal, legendModal, sourcingModal]) {
+      for (const modal of [lightbox, help, changelog, aboutModal, legendModal, sourcingModal]) {
         if (modal?.isOpen) {
           modal.close();
           event.preventDefault();
@@ -6111,17 +6112,20 @@ function wireModal({ modalId, toggleId, closeId, onOpen }) {
 /**
  * About popup (#about-modal): the project blurb + source / issues / licence /
  * attribution links. Opened by the toolbar's info button; the ×, a backdrop click,
- * or Esc close it. Its bottom "Sources & provenance" link closes this and opens the
- * #sourcing-modal (passed in). Prose + href wiring live in the markup + wireControls.
+ * or Esc close it. Its bottom links close this and open the #sourcing-modal or the
+ * #changelog-modal (both passed in). Prose + hrefs live in the markup + wireControls.
  * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
  */
-function wireAboutModal(sourcing) {
+function wireAboutModal(sourcing, changelog) {
   const ctrl = wireModal({ modalId: "about-modal", toggleId: "about-toggle", closeId: "about-close" });
-  document.getElementById("about-open-sourcing")?.addEventListener("click", (event) => {
-    event.preventDefault();
-    ctrl.close();
-    sourcing?.open();
-  });
+  const jump = (id, target) =>
+    document.getElementById(id)?.addEventListener("click", (event) => {
+      event.preventDefault();
+      ctrl.close();
+      target?.open();
+    });
+  jump("about-open-sourcing", sourcing);
+  jump("about-open-changelog", changelog);
   return ctrl;
 }
 
@@ -6971,8 +6975,15 @@ async function main() {
   // sourcingModal was created early (wired above, opens on demand); the Legend + About
   // popups link to it via their "Sources & provenance" rows.
   const legendModal = wireLegendModal(sourcingModal); // toolbar legend button / k key
-  const aboutModal = wireAboutModal(sourcingModal); // the toolbar info-button popup
-  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
+  // "What's new": auto-opens once after an update (below, after the intro settles)
+  // and from the About popup's link. Its notes are fetched only when it opens.
+  const changelog = createChangelog({
+    version: String(window.__APP_VERSION__ || ""),
+    sourceUrl: (window.__APP_CONFIG__ || {}).sourceUrl,
+    t, pick: window.__I18N__.pick, wireModal,
+  });
+  const aboutModal = wireAboutModal(sourcingModal, changelog); // the toolbar info-button popup
+  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels });
@@ -7366,6 +7377,11 @@ async function main() {
     } else {
       tour.maybeAutoStart(tourEligible());
     }
+    // "What's new" rides the same gate: after the intro, and never stacked on the
+    // tour (a first visitor gets the tour and is silently marked up to date, so in
+    // practice only a returning visitor sees it). Fire-and-forget: it decides for
+    // itself whether there is anything to show.
+    if (!tour.active) changelog.showIfUnseen();
   };
   if (tourGateEl) {
     new MutationObserver(tryAutoTour)

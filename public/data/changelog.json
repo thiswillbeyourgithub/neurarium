@@ -1,0 +1,158 @@
+{
+  "versions": [
+    {
+      "version": "3.39.0",
+      "entries": [
+        {
+          "category": "added",
+          "text": "This \"What's new\" popup: after an update it lists everything that changed since your last visit, and you can reopen it any time from About",
+          "commits": []
+        },
+        {
+          "category": "improved",
+          "text": "A drug's possible interactions now say the direction once, as a heading, and read \"could raise\" rather than \"raises\": they are a flag to check with a prescriber, never a verdict",
+          "commits": [
+            "d92cd0b",
+            "2400b8d",
+            "d179eda"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The guided tour now walks through a drug's metabolism and interactions too",
+          "commits": [
+            "81ed349",
+            "e1cedc6"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Twenty book quotes were cut mid-sentence and lost the subject they were about; they now read as whole sentences",
+          "commits": [
+            "2e7c22f"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Every quote is now checked to come from the right drug's own pages in the book, not a neighbour's",
+          "commits": [
+            "211e89f"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Five metabolism facts that a too-strict filter had been silently dropping are back, including alcohol's own enzyme",
+          "commits": [
+            "9c70ade"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.38.0",
+      "entries": [
+        {
+          "category": "added",
+          "text": "NKCC1 and bumetanide, the pair behind the chloride gradient that decides whether GABA calms or excites a neuron",
+          "commits": [
+            "ce28d98"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Molecule diagrams for the seven newest drugs",
+          "commits": [
+            "21f73ca"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Search now finds a drug by its other names, so \"Prozac\" and \"fluox\" both land on fluoxetine",
+          "commits": [
+            "8a01e7e"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Alcohol's action on the NMDA receptor is now sourced rather than assumed",
+          "commits": [
+            "f7a509e"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.37.0",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Alcohol, which was missing from the drug list",
+          "commits": [
+            "5826f66"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Reserpine, the drug that empties the monoamine storage vesicles",
+          "commits": [
+            "1bb82c6"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The Parkinson's dopamine agonists and MAO-B inhibitors: pramipexole, ropinirole, rotigotine, rasagiline and friends",
+          "commits": [
+            "9b34250"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Molecule diagrams for nine more drugs",
+          "commits": [
+            "abca432"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Removed 91 drug-receptor links that came from a Stahl sentence describing the drug class, not the drug",
+          "commits": [
+            "2996432"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.36.0",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Furosemide, a diuretic that also damps one specific GABA-A receptor in the cerebellum",
+          "commits": [
+            "7bcd3c3"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Methamphetamine now shows its sigma-1 action alongside its dopamine one",
+          "commits": [
+            "f414864"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The amphetamines now empty the neurotransmitter storage vesicles in the animation, which is how they really raise dopamine",
+          "commits": [
+            "2949fa5"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Reloading the site is much faster on a phone: the code is now checked for updates instead of downloaded again every time",
+          "commits": [
+            "22c255e"
+          ]
+        }
+      ]
+    }
+  ]
+}

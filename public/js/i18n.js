@@ -412,6 +412,17 @@
         "links to its source article.",
       "about.sourcingTitle": "Sources & provenance",
       "sourcing.openLink": "Sources & provenance →",
+      // "What's new" popup (js/changelog.js). The category labels key off the
+      // closed vocabulary in tools/data_generators/changelog.py: adding one there
+      // means adding a changelog.cat.* string here (and in the FR block).
+      "changelog.title": "What's new",
+      "changelog.openLink": "What's new →",
+      "changelog.commit": "See this change in the source repository",
+      "changelog.empty": "No release notes yet.",
+      "changelog.cat.added": "New",
+      "changelog.cat.improved": "Improved",
+      "changelog.cat.fixed": "Fixed",
+      "changelog.cat.data": "Data & sources",
       "about.sourcingIntro":
         "Every node in this dataset (any sourceable datum: a region, a pathway, a " +
         "receptor, a drug binding, ...) carries a source grade. None of it has been " +
@@ -853,6 +864,14 @@
         "renvoie à son article source.",
       "about.sourcingTitle": "Sources et provenance",
       "sourcing.openLink": "Sources et provenance →",
+      "changelog.title": "Nouveautés",
+      "changelog.openLink": "Nouveautés →",
+      "changelog.commit": "Voir ce changement dans le dépôt du code source",
+      "changelog.empty": "Pas encore de notes de version.",
+      "changelog.cat.added": "Nouveau",
+      "changelog.cat.improved": "Améliorations",
+      "changelog.cat.fixed": "Corrections",
+      "changelog.cat.data": "Données et sources",
       "about.sourcingIntro":
         "Chaque nœud de ce jeu de données (toute donnée sourçable : une région, " +
         "une voie, un récepteur, une liaison médicamenteuse, ...) porte un niveau " +

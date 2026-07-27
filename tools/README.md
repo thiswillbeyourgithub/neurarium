@@ -86,6 +86,31 @@ attribute a *different* quote than the main one, or several to back a compound v
 
 The legend is generated at runtime from the data, so it updates automatically.
 
+## Writing release notes
+
+Every version bump needs a `docs/changelog/<major>.<minor>.<patch>/changelog.md`, or
+`check_data.py` family 9 fails (the gate exists so a bump can never ship a "What's new"
+popup that announces an update it cannot describe). The format:
+
+```markdown
+# 3.39.0
+
+## Added
+- What a visitor can now do, in their words, no jargon (2e7c22f, 211e89f)
+  fr: La même chose en francais
+```
+
+- Headings are the four categories `Added` / `Improved` / `Fixed` / `Data` (`CATEGORIES` in
+  `data_generators/changelog.py`); a `# <version>` title line is optional and ignored.
+- Every bullet needs an indented `fr:` line right under it, like every other display string.
+- A trailing `(sha, sha)` list is stripped into `commits` and rendered as links to the commit
+  on the source host; other trailing parentheses stay as prose. Write the shas after committing
+  the work, so they are real (family 9 checks the shape, the host resolves the rest).
+- Write for a casual reader: what changed for them, not which module changed.
+
+Then `python tools/generate_data.py` compiles the whole tree into `data/changelog.json`
+(newest first) and the French into `translations.fr.json`.
+
 ## Refreshing external data (author-side)
 
 To re-pull every third-party asset the dataset hot-links or vendors, run these (all
@@ -180,6 +205,9 @@ Screenshots).
   connectivity `_KQ_*`); `stahl_essential.py` = `STAHL_ESSENTIAL_RECEPTOR_QUOTES`/`STAHL_ESSENTIAL_TARGET_QUOTES`/
   `RECEPTOR_ATTR_QUOTES`/`RECEPTOR_CLASSIFICATION_COVERAGE`/`CLASSIFICATION_ATTRS`/`TARGET_POLARITY_QUOTES`; chain
   stays acyclic provenance <- connectivity <- quotes <- generate_data).
+- `tools/data_generators/changelog.py` — parses the authored `docs/changelog/<version>/changelog.md`
+  files into the `changelog.json` shape (stdlib, no deps). Fails loud with `file:line` on an unknown
+  category, a bullet with no `fr:` line, or stray prose, so a typo cannot silently drop a bullet.
 - `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
@@ -360,6 +388,11 @@ there is no node-level catch-all `sources` block.
   `llm` (the model that extracted+judged the quote, `haiku`/`sonnet`/`opus`; absent = unknown). Every
   node's quote-bearing source references one by `quote_id`; the viewer + `check_data.py` rehydrate
   it at load (see the externalize note above).
+- `changelog.json` — the release notes, `{versions: [{version, entries[{category, text{en,fr},
+  commits[sha]}]}]}`, newest version first (the order `js/changelog.js` walks to show every release
+  since a visitor's last one). Not a node kind: it is editorial prose about the app, carries no
+  provenance grade, and is absent from the sourcing tally. Compiled from the authored
+  `docs/changelog/<version>/changelog.md` files (see Writing release notes below).
 - `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend
   row), `group`, `position`, `color`, `shape_file`, `classification_provenance`, optional
   `wikipedia`(+`_provenance`), optional `structure_image` (hot-linked Wikimedia url, shared by

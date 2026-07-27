@@ -1568,6 +1568,76 @@ def check_flow_consistency(report, meta, drugs, projections, receptors):
         f"block split; review, not a gate)")
 
 
+_APP_VERSION_RE = re.compile(r"""__APP_VERSION__\s*=\s*["']([^"']+)["']""")
+
+# The changelog category vocabulary, imported rather than restated: the authoring
+# module owns it (adding one there must not need an edit here). That module is
+# stdlib-only and imports nothing else, so this stays a cheap standalone script.
+sys.path.insert(0, str(Path(__file__).resolve().parent / "data_generators"))
+from changelog import CATEGORIES as CHANGELOG_CATEGORIES  # noqa: E402
+
+
+def check_changelog(report):
+    """Family 9: the release notes the viewer pops up after an update.
+
+    Cheap structural checks (well-formed, ordered, no duplicates), plus the one that
+    actually matters: the running version must have notes. Bumping version.js without
+    writing them ships an update that announces nothing, and nobody notices until a
+    visitor sees an empty popup."""
+    report.header("9. Changelog (release notes per version)")
+    before = report.errors
+    path = DATA_DIR / "changelog.json"
+    version_js = REPO_ROOT / "public" / "version.js"
+    if not path.exists():
+        report.error("public/data/changelog.json is missing (run generate_data.py)")
+        return
+    try:
+        releases = json.loads(path.read_text(encoding="utf-8")).get("versions") or []
+    except json.JSONDecodeError as exc:
+        report.error(f"changelog.json is not valid JSON: {exc}")
+        return
+
+    keys, seen = [], set()
+    for release in releases:
+        version = release.get("version")
+        try:
+            key = tuple(int(p) for p in re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", version).groups())
+        except (AttributeError, TypeError):
+            report.error(f"changelog: {version!r} is not a major.minor.patch version")
+            continue
+        if version in seen:
+            report.error(f"changelog: version {version} appears twice")
+        seen.add(version)
+        keys.append(key)
+        if not release.get("entries"):
+            report.error(f"changelog {version}: no entries (an empty release note)")
+        for entry in release.get("entries") or []:
+            if entry.get("category") not in CHANGELOG_CATEGORIES:
+                report.error(f"changelog {version}: unknown category "
+                             f"{entry.get('category')!r}")
+            if not str(entry.get("text") or "").strip():
+                report.error(f"changelog {version}: an entry has no text")
+            for sha in entry.get("commits") or []:
+                if not re.fullmatch(r"[0-9a-f]{7,40}", str(sha)):
+                    report.error(f"changelog {version}: {sha!r} is not a commit sha")
+    if keys != sorted(keys, reverse=True):
+        report.error("changelog: versions are not newest-first (the viewer relies on "
+                     "the order to show the releases since a visitor's last one)")
+
+    match = _APP_VERSION_RE.search(version_js.read_text(encoding="utf-8")) \
+        if version_js.exists() else None
+    if not match:
+        report.warn("public/version.js: could not read __APP_VERSION__; skipped the "
+                    "check that the running version has release notes")
+    elif match.group(1) not in seen:
+        report.error(f"version.js is {match.group(1)} but docs/changelog/{match.group(1)}/"
+                     f"changelog.md does not exist. Every released version needs notes, "
+                     f"else the What's new popup announces an update it cannot describe")
+    if report.errors == before:
+        report.ok(f"{len(releases)} version(s) of release notes, newest first, "
+                  f"current version covered")
+
+
 def main():
     report = Report()
     print(f"neurarium data integrity check\nreading {DATA_DIR}")
@@ -1599,6 +1669,7 @@ def main():
     check_connectivity(report, structures, projections)
     check_ki_coverage(report, meta, drugs)
     check_flow_consistency(report, meta, drugs, projections, receptors)
+    check_changelog(report)
 
     print(f"\nSummary: {report.errors} error(s), {report.warnings} warning(s)")
     if report.errors:
