@@ -1077,6 +1077,7 @@
 {"id": "q_560e6e3f0fd5", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "SERT | 1.6 | 5.4 | – | Inhibition"}
 {"id": "q_564258885ffa", "corpus": "stahl", "page": 807, "quote": "Metabolized by CYP2D6"}
 {"id": "q_565e6c07c513", "corpus": "stahl", "page": 905, "quote": "Mode 3: binds to ion-channel-linked receptors (antagonist at serotonin 3 receptors)", "llm": "sonnet"}
+{"id": "q_567689f4a407", "corpus": "stahl_essential", "page": 571, "quote": "Alcohol hypothetically enhances inhibition at GABA synapses by binding at both GABAA and GABAB receptors"}
 {"id": "q_56818ff84c0d", "corpus": "allen_ahba", "page": "CHRM2", "quote": "CHRM2 detected in hippocampus: probe 1029156 PACall present in 168/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_568d6f423f9e", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in cerebellum: probe 1027138 PACall present in 304/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_569aa031f66d", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in hippocampus: probe 1059351 PACall present in 165/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -2443,6 +2444,7 @@
 {"id": "q_c348194bc1d9", "corpus": "stahl", "page": 133, "quote": "Norepinephrine and dopamine reuptake inhibitor; antidepressant; smoking cessation treatment", "llm": "sonnet"}
 {"id": "q_c34e3280b7b0", "corpus": "stahl", "page": 359, "quote": "Binds to the alpha 2 delta subunit of voltage-sensitive calcium channels", "llm": "sonnet"}
 {"id": "q_c3614ce650ea", "corpus": "stahl_essential", "page": 131, "quote": "There is also a presynaptic transport pump selective for serotonin, called the serotonin transporter (SERT), which clears serotonin out of the synapse and back into the presynaptic neuron.", "llm": "sonnet"}
+{"id": "q_c365caf2e054", "corpus": "stahl_essential", "page": 571, "quote": "Alcohol may also reduce the actions of glutamate at postsynaptic NMDA receptors and postsynaptic mGluR receptors"}
 {"id": "q_c38150fcd189", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in temporal: probe 1017111 PACall present in 361/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_c38279d4dbb3", "corpus": "stahl", "page": 697, "quote": "Half-life 3–5 hours (immediate-release) or 8–11 hours (extended-release)"}
 {"id": "q_c3970c15ab85", "corpus": "stahl", "page": 863, "quote": "Tricyclic antidepressant (TCA)", "llm": "sonnet"}
