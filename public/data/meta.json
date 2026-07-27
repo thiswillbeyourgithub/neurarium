@@ -1133,7 +1133,13 @@
       ],
       "sign": "inhibitory",
       "synaptic": "presynaptic",
-      "polarity_provenance": "llm",
+      "polarity_sources": [
+        {
+          "quote_id": "q_4fda36420a37",
+          "provenance": "verified"
+        }
+      ],
+      "polarity_provenance": "verified",
       "location_sources": {
         "frontal": [
           {
@@ -2699,11 +2705,11 @@
       },
       "target_polarity": {
         "total": 2,
-        "verified": 1,
+        "verified": 2,
         "sourced": 0,
-        "llm": 1,
+        "llm": 0,
         "nosource": 0,
-        "missing": 1
+        "missing": 0
       },
       "target_locations": {
         "total": 96,
@@ -2740,12 +2746,12 @@
     },
     "nodes": {
       "total": 3843,
-      "verified": 3672,
+      "verified": 3673,
       "sourced": 0,
-      "llm": 136,
+      "llm": 135,
       "nosource": 35,
-      "missing": 171,
-      "backed": 3672,
+      "missing": 170,
+      "backed": 3673,
       "pct_backed": 96
     },
     "ki_coverage": {

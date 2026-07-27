@@ -306,10 +306,12 @@ TARGET_POLARITY_QUOTES: dict[str, dict[str, Any]] = {
     # monoamines *into* vesicles, so inhibiting it depletes -> lowers tone. That
     # genuinely backs the `vesicular` flag, so its polarity is verified.
     "vmat2": STAHL_ESSENTIAL_TARGET_QUOTES["vmat2"],
-    # NOTE: `alpha2` is deliberately NOT here. Its classification quote
-    # (_SE_NE_GROUPS) only classifies α2 as an NE receptor family; it does NOT
-    # state the presynaptic *inhibitory autoreceptor* character its sign/synaptic
-    # flags encode. That claim is textbook-correct but not yet quote-verified, so
-    # its polarity honestly grades `llm`. TODO: add an α2-autoreceptor quote
-    # (author-side, quote-gated) to upgrade it.
+    # α2's own quote, NOT its classification one: _SE_NE_GROUPS only classifies α2
+    # as an NE receptor family and never speaks to direction. This sentence states
+    # both halves of the polarity flag in one breath: *presynaptic* (the site) and
+    # "turn off further release" (the inhibitory autoreceptor sign), which is exactly
+    # what makes an α2 antagonist raise noradrenergic tone in the flow overlay.
+    "alpha2": _stahl_ess(271,
+        "That is, when presynaptic α2 receptors recognize NE, they turn off further "
+        "release of NE"),
 }

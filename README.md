@@ -164,6 +164,7 @@ Drug active metabolites         ████████████████
 Target classifications          ██████████████████████████  100%      20/20
 Projection groups               ██████████████████████████  100%      11/11
 Functional circuits             ██████████████████████████  100%        6/6
+Target tone polarity            ██████████████████████████  100%        2/2
 Wikipedia reference links       ██████████████████████████   99%    369/371
 Receptor mechanism class        ██████████████████████████   98%      55/56
 Drug target bindings            █████████████████████████░   98%  1655/1688
@@ -172,7 +173,6 @@ Receptor expression regions     ████████████████
 Target expression regions       ██████████████████████░░░░   85%      82/96
 Drug class                      ██████████████████████░░░░   85%    199/235
 Receptor sign (excit./inhib.)   ████████████████████░░░░░░   77%      43/56
-Target tone polarity            █████████████░░░░░░░░░░░░░   50%        1/2
 Receptor pre/postsynaptic site  ████░░░░░░░░░░░░░░░░░░░░░░   14%       8/56
 ```
 

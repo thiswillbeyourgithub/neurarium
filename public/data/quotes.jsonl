@@ -946,6 +946,7 @@
 {"id": "q_4fa0a0123ac3", "corpus": "stahl", "page": 865, "quote": "Half-life approximately 7–23 hours"}
 {"id": "q_4fc5eaadb72b", "corpus": "stahl", "page": 877, "quote": "Inhibits CYP2C9"}
 {"id": "q_4fd187882a77", "corpus": "gtopdb", "page": 26, "quote": "α2B-AR mRNA labeling in thalamus.", "species": "Rat", "llm": "sonnet"}
+{"id": "q_4fda36420a37", "corpus": "stahl_essential", "page": 271, "quote": "That is, when presynaptic α2 receptors recognize NE, they turn off further release of NE"}
 {"id": "q_5019115dba4e", "corpus": "gtopdb_ki", "page": "rotigotine", "quote": "rotigotine at D4 receptor (DRD4, Human): Agonist / Agonist, pKi 7.26 [PMID 8863800]", "species": "Human"}
 {"id": "q_501afebd847e", "corpus": "wikipedia_pharm", "page": "dexmedetomidine", "quote": "α 2A | 0.015–16 | Human"}
 {"id": "q_501c5dbbcc2b", "corpus": "wikipedia_pharm", "page": "phenobarbital", "quote": "Phenobarbital acts as an allosteric modulator which extends the amount of time the chloride ion channel is open by interacting with GABA A receptor subunits."}
