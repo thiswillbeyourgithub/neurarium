@@ -1815,8 +1815,10 @@
       .ki-mapped { color: #e6b800; font-size: 10px; white-space: nowrap; }
       /* Affinity-only (PDSP) binding: no known direction, panel-only, slightly muted. */
       .info-bindings li.affinity-only .bind-action { font-style: italic; }
-      /* Elimination half-life (T½) chip: mirrors the Ki chip (value + provenance
-         pill), so a drug's T½ reads like a binding's measured value. */
+      /* Elimination half-life (T½) chip: a value + its provenance pill. The value
+         is styled like a brand name (plain bold --text, not the accent colour a
+         Ki uses): a T½ is a stated property of the drug, like its trade name, not
+         a measured affinity, so it should not read as one. */
       .hl-chip {
         display: inline-flex;
         align-items: baseline;
@@ -1824,7 +1826,7 @@
         gap: 2px 5px;
         font-size: 12px;
       }
-      .hl-chip .hl-val { font-weight: 600; color: var(--accent-light); white-space: nowrap; }
+      .hl-chip .hl-val { font-weight: 600; color: var(--text); white-space: nowrap; }
       .hl-chip .hl-label { color: var(--muted); font-size: 11px; }
       /* Active-metabolites list: each row is a name (+ its identity pill) with its own
          T½ underneath, indented and dimmer so it reads as a sub-fact of the drug. */
