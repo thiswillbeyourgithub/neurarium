@@ -177,6 +177,7 @@
 {"id": "q_0fddb691560e", "corpus": "gtopdb_ki", "page": "quetiapine", "quote": "quetiapine at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 5.7 [PMID 8935801]", "species": "Human"}
 {"id": "q_0fe7fef58145", "corpus": "wikipedia_fr", "page": "m_latonine", "quote": "Circadin"}
 {"id": "q_100c6ff4652c", "corpus": "stahl", "page": 669, "quote": "Blocks dopamine 2 receptors in the nigrostriatal dopamine pathway, reducing tics in Tourette's syndrome", "llm": "sonnet"}
+{"id": "q_1011417db03a", "corpus": "wikipedia_pharm", "page": "topiramate", "quote": "- Topiramate itself is a weak inhibitor of CYP2C19 and induces CYP3A4 ; a decrease in plasma levels of estrogens and digoxin has been noted during topiramate therapy."}
 {"id": "q_102a34fef254", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "5-HT 7 | 30–126 | ?"}
 {"id": "q_102b28841b6d", "corpus": "wikipedia_pharm", "page": "levomethamphetamine", "quote": "In addition to its norepinephrine-releasing activity, levomethamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1)."}
 {"id": "q_10389c0a737b", "corpus": "kandel", "page": 368, "quote": "Neuromodulators are substances that bind to receptors, most of which are metabotropic, to alter the excitability of neurons, the likelihood of transmitter release, or the functional state of receptors on postsynaptic neurons.", "llm": "sonnet"}
@@ -646,7 +647,6 @@
 {"id": "q_343652c82685", "corpus": "gtopdb_ki", "page": "risperidone", "quote": "risperidone at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 7.3 [PMID 35224877]", "species": "Human"}
 {"id": "q_347087a441fc", "corpus": "stahl", "page": 563, "quote": "mu and delta opioid receptor antagonist", "llm": "sonnet"}
 {"id": "q_348c63b58c80", "corpus": "stahl", "page": 941, "quote": "Conventional antipsychotic (neuroleptic, thioxanthene, dopamine 2 antagonist)", "llm": "sonnet"}
-{"id": "q_34d56671c640", "corpus": "wikipedia_pharm", "page": "escitalopram", "quote": "As escitalopram is only a weak inhibitor of CYP2D6, analgesia from tramadol may not be affected."}
 {"id": "q_34e1b80721ef", "corpus": "wikipedia_pharm", "page": "hydroxybupropion", "quote": "is substantially weaker as a dopamine reuptake inhibitor (IC 50 = >10 μM)"}
 {"id": "q_34eeec37f2d3", "corpus": "allen_ahba", "page": "CHRM3", "quote": "CHRM3 detected in occipital: probe 1023697 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_34f9aae707cf", "corpus": "kandel", "page": 130, "quote": "The ventral anterior and ventral lateral nuclei are important for motor control and carry information from the basal ganglia and cerebellum to the motor cortex.", "llm": "sonnet"}
@@ -750,6 +750,7 @@
 {"id": "q_3d2dd082daed", "corpus": "stahl", "page": 899, "quote": "Blocks norepinephrine reuptake pumps, also known as norepinephrine transporters", "llm": "sonnet"}
 {"id": "q_3d46502150e4", "corpus": "kandel", "page": 981, "quote": "The striatum is the largest nucleus of the basal ganglia. It receives direct input from most regions of the cerebral cortex and limbic structures, including the amygdala and hippocampus.", "llm": "sonnet"}
 {"id": "q_3d6cb2fb3b75", "corpus": "stahl", "page": 863, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet"}
+{"id": "q_3d6d23d44d19", "corpus": "wikipedia_pharm", "page": "escitalopram", "quote": "Escitalopram weakly inhibits CYP2D6 , and hence may increase plasma levels of some CYP2D6 substrates such as aripiprazole , risperidone , tramadol , or codeine ."}
 {"id": "q_3d77e20db24d", "corpus": "wikipedia_pharm", "page": "melperone", "quote": "D 4 | 555"}
 {"id": "q_3d9ef7a9dd88", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in occipital: probe 1059354 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3da94feda167", "corpus": "stahl", "page": 175, "quote": "Weak inhibitor of CYP2D6"}
@@ -2905,6 +2906,7 @@
 {"id": "q_e52014920fa6", "corpus": "stahl", "page": 187, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
 {"id": "q_e526fa958128", "corpus": "allen_ahba", "page": "SLC6A4", "quote": "SLC6A4 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1051457, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.95: raphe +5.78 (5d), accumbens -0.14 (5d), frontal -0.19 (5d), cingulate -0.23 (5d), temporal -0.24 (5d), hippocampus -0.29 (5d), amygdala -0.31 (5d), thalamus -0.31 (5d), hypothalamus -0.34 (5d)", "species": "Human"}
 {"id": "q_e53fadbc2add", "corpus": "stahl", "page": 571, "quote": "Naltrexone can block mu opioid receptors, thus preventing opioid-mediated negative feedback.", "llm": "sonnet"}
+{"id": "q_e548d3b24210", "corpus": "wikipedia_pharm", "page": "selegiline", "quote": "In addition to CYP2B6 and other cytochrome P450 enzymes, selegiline is a potent mechanism-based inhibitor of CYP2A6 and may increase exposure to nicotine (a major CYP2A6 substrate)."}
 {"id": "q_e5640c205618", "corpus": "stahl", "page": 571, "quote": "Neuroscience-based Nomenclature: opioid receptor antagonist (naltrexone, O-RAn) and dopamine reuptake inhibitor and releaser (bupropion, D-RIRe)", "llm": "sonnet"}
 {"id": "q_e583dca65e0c", "corpus": "wikipedia_pharm", "page": "apomorphine", "quote": "5-HT 2C | 102 | antagonist"}
 {"id": "q_e58a50568d07", "corpus": "stahl", "page": 855, "quote": "Artane"}
@@ -3146,6 +3148,7 @@
 {"id": "q_f954f614c0ee", "corpus": "allen_ahba", "page": "MAOA", "quote": "MAOA detected in midbrain: probe 1054334 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_f965d2cb4227", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in medulla: probe 1059354 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_f97eaaa46ff6", "corpus": "wikipedia_pharm", "page": "blonanserin", "quote": "5-HT 2C | 26.4 | 4.50"}
+{"id": "q_f989db723481", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "Since doxepin is mainly metabolized by CYP2D6, CYP2C9, and CYP2C19, genetic variations within the genes coding for these enzymes can affect its metabolism, leading to changes in the concentrations of the drug in the body."}
 {"id": "q_f990bcadec25", "corpus": "stahl", "page": 291, "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); may be classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet"}
 {"id": "q_f99825a34aa8", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "DAT | 1684 | ND | ND"}
 {"id": "q_f9a70f557a99", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "α 2A | 145 | Human"}

@@ -34,13 +34,19 @@ paragraph is long and talks about other molecules constantly:
   and a pattern match cannot see the "without".
 
 Precision over yield, same as the Stahl pass. On top of the three rules above: a
-sentence about *other* drugs acting on this one is vetoed (``VICTIM_RE``, imported);
-a reference-list line is skipped (a cited paper's title names roles it does not
-assert *here*); an isoform our ``ENZYMES`` vocabulary does not carry is skipped
+sentence whose *head* frames another molecule as the actor is vetoed (``VICTIM_RE``,
+imported); a reference-list line is skipped (a cited paper's title names roles it does
+not assert *here*); an isoform our ``ENZYMES`` vocabulary does not carry is skipped
 (midazolam's row names the obsolete CYP3A3), so the cache never proposes a row the
 build would reject; and every accepted line is re-confirmed **verbatim** on the
 stored page with ``check_data``'s own normalizer, so ``check_data.py``'s gate passes
 unchanged.
+
+A sentence may state **two roles at once** ("a weak inducer of CYP3A4 and a weak
+inhibitor of CYP2C19"). Those are split by position rather than dropped: each enzyme
+belongs to the role verb it follows, each role is qualified from its own segment, and
+a later verb counts only while it stays **coordinated** with the first (see
+``predicates``), which is what keeps the subject shared.
 
 Stahl still wins: ``generate_data.py`` merges this cache **after** the Stahl one and
 keeps the existing row for any (enzyme, role) pair Stahl already states.
@@ -87,7 +93,19 @@ OUT = os.path.join(REPO, "tools", "generated_cache", "drug_enzymes_wikipedia.jso
 # The isoform ids the dataset models (mirrors ENZYMES in data_generators/drugs.py; not
 # imported because this script must run with only the repo's stdlib path set up).
 KNOWN_ENZYMES = {"cyp1a2", "cyp2a6", "cyp2b6", "cyp2c8", "cyp2c9", "cyp2c19",
-                 "cyp2d6", "cyp2e1", "cyp3a4", "cyp3a5"}
+                 "cyp2d6", "cyp2e1", "cyp3a4", "cyp3a5", "adh"}
+
+# The non-CYP routes the dataset models, as the phrase a drugbox row spells them with.
+# The field is `enzyme`, not `cyp`, precisely so a non-cytochrome route is a row like
+# any other: ethanol's own drugbox names alcohol dehydrogenase beside CYP2E1, and
+# reading only `CYP` left that route invisible. Only routes ENZYMES already carries
+# are matched, so the cache never proposes a row the build would reject. (The other
+# routes Wikipedia's drugboxes name -- UGT/glucuronidation, FMO3, MAO, esterases --
+# are a vocabulary gap, not an extraction one; see docs/SOURCING_GAPS.md.)
+NON_CYP_ENZYMES = [(re.compile(r"\balcohol\s+dehydrogenase\b", re.I), "adh")]
+
+ENZYME_RE = re.compile("|".join([CYP_RE.pattern] +
+                                [p.pattern for p, _ in NON_CYP_ENZYMES]), re.I)
 
 # The flattened drugbox row. `pageimages`-style tables come through as "cell | cell",
 # so the metabolism field is a line whose first cell is exactly "Metabolism".
@@ -175,9 +193,25 @@ def page_for(drug: dict) -> str | None:
     return path if os.path.exists(path) else None
 
 
+def enzyme_hits(text: str) -> list[tuple[int, str]]:
+    """Every enzyme named in a line, as (position, id), in the order they appear.
+
+    ``isoforms`` (shared with the Stahl pass) resolves the CYP shorthands but drops the
+    positions, which the role split below needs, so the CYP matches are re-walked here
+    and the modeled non-CYP routes appended.
+    """
+    out: list[tuple[int, str]] = []
+    for m in CYP_RE.finditer(text):
+        for enzyme in isoforms(m.group(0)):
+            out.append((m.start(), enzyme))
+    for pat, enzyme in NON_CYP_ENZYMES:
+        out += [(m.start(), enzyme) for m in pat.finditer(text)]
+    return sorted(out)
+
+
 def qualifier(text: str, table: list, allowed: set[str]) -> str | None:
     """The single strength tier a line states before its first isoform, else None."""
-    first = CYP_RE.search(text)
+    first = ENZYME_RE.search(text)
     head = text[: first.start()] if first else text
     present = {s for s, pat in table if s in allowed and pat.search(text)}
     if len(present) != 1:
@@ -206,12 +240,58 @@ def subject_names(drug: dict, page: str) -> list[re.Pattern]:
             for n in sorted(names) if len(n) >= 5]
 
 
-def claims(text: str, names: list[re.Pattern]) -> list[tuple[str, str, str | None]]:
-    """Every (quote, role, strength) claim a page states about the drug itself."""
-    out: list[tuple[str, str, str | None]] = []
+def predicates(sentence: str, names: list[re.Pattern]) -> list[tuple[re.Match, str]]:
+    """The role verbs in a sentence whose subject is the drug, in reading order.
+
+    The FIRST role verb carries the sentence's subject, so it is the one the drug-name
+    and victim-frame checks apply to. A later role verb is kept only when it is
+    **coordinated** with the previous one ("is a weak inducer of CYP3A4 *and a weak
+    inhibitor of* CYP2C19"): coordinated predicates share the subject, while a comma,
+    a parenthesis or a relative pronoun in between means the sentence has handed the
+    verb someone else ("Nefazodone is a potent inhibitor of CYP3A4, and may interact
+    adversely with many commonly used medications *that are metabolized by* CYP3A4").
+    """
+    hits = [(m, role) for role, pat in ROLE_PATTERNS if (m := pat.search(sentence))]
+    hits.sort(key=lambda h: h[0].start())
+    if not hits:
+        return [], 0
+    # The subject checks, at the first verb: a victim frame ahead of it means the
+    # subject is another molecule, and the drug must be named with nothing in between
+    # that hands the verb a different subject. Both look at the head ONLY: what
+    # follows the verb is the claim's consequence ("Escitalopram weakly inhibits
+    # CYP2D6, and hence may increase plasma levels of some CYP2D6 substrates"), not a
+    # second subject, and vetoing on it dropped genuine claims.
+    head = sentence[: hits[0][0].start()]
+    if VICTIM_RE.search(head) or WIKI_VICTIM_RE.search(head):
+        return [], 0
+    lowered = head.lower()
+    ends = [m.end() for pat in names for m in pat.finditer(lowered)]
+    if not ends or HEAD_BREAK_RE.search(lowered[max(ends):]):
+        return [], 0
+    kept = [hits[0]]
+    for (prev, _), cur in zip(hits, hits[1:]):
+        if HEAD_BREAK_RE.search(sentence[prev.end(): cur[0].start()]):
+            break
+        kept.append(cur)
+    # Where the drug stops being the sentence's subject: the first verb that broke
+    # coordination, or the first victim frame after the claim ("... and hence may
+    # increase plasma levels of some CYP2D6 substrates"). Vetoing on that tail dropped
+    # genuine claims, but reading enzymes out of it would invent them, so it BOUNDS
+    # the claim instead of killing it.
+    stop = hits[len(kept)][0].start() if len(kept) < len(hits) else len(sentence)
+    for pat in (VICTIM_RE, WIKI_VICTIM_RE):
+        victim = pat.search(sentence, kept[0][0].end())
+        if victim:
+            stop = min(stop, victim.start())
+    return kept, stop
+
+
+def claims(text: str, names: list[re.Pattern]) -> list[tuple[str, str, str | None, list[str]]]:
+    """Every (quote, role, strength, enzymes) claim a page states about the drug."""
+    out: list[tuple[str, str, str | None, list[str]]] = []
     for raw in text.splitlines():
         line = raw.strip()
-        if not line or not CYP_RE.search(line):
+        if not line or not ENZYME_RE.search(line):
             continue
         infobox = INFOBOX_RE.match(line)
         if infobox:
@@ -220,32 +300,36 @@ def claims(text: str, names: list[re.Pattern]) -> list[tuple[str, str, str | Non
             if not NEGATION_RE.search(line):
                 out.append((line, "substrate",
                             qualifier(infobox.group(1), INFOBOX_STRENGTH,
-                                      {"major", "minor"})))
+                                      {"major", "minor"}),
+                            [e for _pos, e in enzyme_hits(line)]))
             continue
         if REFERENCE_RE.search(line):
             continue
         for sentence in SENTENCE_SPLIT.split(line):
             sentence = sentence.strip()
-            if not CYP_RE.search(sentence) or NEGATION_RE.search(sentence):
+            if not ENZYME_RE.search(sentence) or NEGATION_RE.search(sentence):
                 continue
-            if VICTIM_RE.search(sentence) or WIKI_VICTIM_RE.search(sentence):
+            kept, stop = predicates(sentence, names)
+            if not kept:
                 continue
-            hits = [(pat.search(sentence), role) for role, pat in ROLE_PATTERNS]
-            hits = [(m, role) for m, role in hits if m]
-            # A sentence stating two roles at once ("a weak inducer of CYP3A4 and a
-            # weak inhibitor of CYP2C19") cannot be split by isoform without guessing
-            # which half owns which, so it is dropped rather than half-attributed.
-            if len(hits) != 1:
-                continue
-            hit, role = hits[0]
-            # The drug must be named BEFORE the verb, with nothing in between that
-            # hands the verb a different subject.
-            head = sentence[: hit.start()].lower()
-            ends = [m.end() for pat in names for m in pat.finditer(head)]
-            if not ends or HEAD_BREAK_RE.search(head[max(ends):]):
-                continue
-            out.append((sentence, role,
-                        qualifier(sentence, STRENGTH_RE, ROLE_STRENGTHS[role])))
+            # Each enzyme belongs to the role verb it follows (one before the first
+            # verb belongs to that first role, which is what a single-role sentence
+            # has always done), and each role is qualified from its own segment, so
+            # "a weak inducer of CYP3A4 and a weak inhibitor of CYP2C19" no longer
+            # has to be dropped for fear of pairing the wrong half with the wrong
+            # isoform.
+            found = enzyme_hits(sentence)
+            bounds = [0] + [m.start() for m, _role in kept][1:] + [stop]
+            for i, (_hit, role) in enumerate(kept):
+                # The strength adjective sits BEFORE its verb ("and a *weak* inhibitor
+                # of"), so a role's segment starts where the previous role's enzyme
+                # did, while its enzymes are only the ones past its own verb.
+                segment = sentence[kept[i - 1][0].end() if i else 0: bounds[i + 1]]
+                enzymes = [e for pos, e in found if bounds[i] <= pos < bounds[i + 1]]
+                if enzymes:
+                    out.append((sentence, role,
+                                qualifier(segment, STRENGTH_RE, ROLE_STRENGTHS[role]),
+                                enzymes))
     return out
 
 
@@ -271,12 +355,12 @@ def main() -> int:
         page = os.path.splitext(os.path.basename(path))[0]
         normalized = check_data.normalize_for_match(text)
         rows: dict[tuple[str, str], dict] = {}
-        for line, role, strength in claims(text, subject_names(drug, page)):
+        for line, role, strength, enzymes in claims(text, subject_names(drug, page)):
             if check_data.normalize_for_match(line) not in normalized:
                 stats["line: quote not verbatim on the page"] += 1
                 dropped.append((drug["id"], "gate", line))
                 continue
-            for enzyme in isoforms(line):
+            for enzyme in enzymes:
                 if enzyme not in KNOWN_ENZYMES:
                     stats[f"line: isoform not modeled ({enzyme})"] += 1
                     continue

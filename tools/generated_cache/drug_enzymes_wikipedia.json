@@ -722,6 +722,19 @@
    ]
   },
   {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "doxepin",
+     "provenance": "verified",
+     "quote": "Since doxepin is mainly metabolized by CYP2D6, CYP2C9, and CYP2C19, genetic variations within the genes coding for these enzymes can affect its metabolism, leading to changes in the concentrations of the drug in the body."
+    }
+   ],
+   "strength": "major"
+  },
+  {
    "enzyme": "cyp2d6",
    "role": "inhibitor",
    "sources": [
@@ -831,7 +844,7 @@
      "corpus": "wikipedia_pharm",
      "page": "escitalopram",
      "provenance": "verified",
-     "quote": "As escitalopram is only a weak inhibitor of CYP2D6, analgesia from tramadol may not be affected."
+     "quote": "Escitalopram weakly inhibits CYP2D6 , and hence may increase plasma levels of some CYP2D6 substrates such as aripiprazole , risperidone , tramadol , or codeine ."
     }
    ],
    "strength": "weak"
@@ -888,6 +901,18 @@
   }
  ],
  "ethanol": [
+  {
+   "enzyme": "adh",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alcohol_drug",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (90%): • Alcohol dehydrogenase • MEOS ( CYP2E1 )"
+    }
+   ]
+  },
   {
    "enzyme": "cyp2e1",
    "role": "substrate",
@@ -1434,6 +1459,19 @@
   },
   {
    "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Modafinil is a weak to moderate inducer of CYP3A4 and a weak inhibitor of CYP2C19 , enzymes of the cytochrome P450 system."
+    }
+   ],
+   "strength": "weak"
+  },
+  {
+   "enzyme": "cyp2c19",
    "role": "substrate",
    "sources": [
     {
@@ -1453,6 +1491,18 @@
      "page": "modafinil",
      "provenance": "verified",
      "quote": "Metabolism | Liver ( amide hydrolysis , S - oxidation , aromatic ring hydroxylation , glucuronide conjugation ; CYP1A2 , CYP2B6 , CYP2C9 , CYP2C19 , CYP3A4 , CYP3A5 involved)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "modafinil",
+     "provenance": "verified",
+     "quote": "Modafinil is a weak to moderate inducer of CYP3A4 and a weak inhibitor of CYP2C19 , enzymes of the cytochrome P450 system."
     }
    ]
   },
@@ -1496,6 +1546,19 @@
   },
   {
    "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nefazodone",
+     "provenance": "verified",
+     "quote": "Nefazodone is a potent inhibitor of CYP3A4 , and may interact adversely with many commonly used medications that are metabolized by CYP3A4."
+    }
+   ],
+   "strength": "strong"
+  },
+  {
+   "enzyme": "cyp3a4",
    "role": "substrate",
    "sources": [
     {
@@ -1533,6 +1596,20 @@
     }
    ],
    "strength": "major"
+  }
+ ],
+ "nortriptyline": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nortriptyline",
+     "provenance": "verified",
+     "quote": "Nortriptyline is metabolized in the liver by the hepatic enzyme CYP2D6 , and genetic variations within the gene coding for this enzyme can affect its metabolism, leading to changes in the concentrations of the drug in the body."
+    }
+   ]
   }
  ],
  "olanzapine": [
@@ -1988,6 +2065,30 @@
  ],
  "selegiline": [
   {
+   "enzyme": "cyp2a6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "selegiline",
+     "provenance": "verified",
+     "quote": "In addition to CYP2B6 and other cytochrome P450 enzymes, selegiline is a potent mechanism-based inhibitor of CYP2A6 and may increase exposure to nicotine (a major CYP2A6 substrate)."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "selegiline",
+     "provenance": "verified",
+     "quote": "In addition to CYP2B6 and other cytochrome P450 enzymes, selegiline is a potent mechanism-based inhibitor of CYP2A6 and may increase exposure to nicotine (a major CYP2A6 substrate)."
+    }
+   ]
+  },
+  {
    "enzyme": "cyp2b6",
    "role": "substrate",
    "sources": [
@@ -2239,6 +2340,33 @@
      "page": "tizanidine",
      "provenance": "verified",
      "quote": "Metabolism | Liver ( CYP1A2 , 95%)"
+    }
+   ]
+  }
+ ],
+ "topiramate": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "topiramate",
+     "provenance": "verified",
+     "quote": "- Topiramate itself is a weak inhibitor of CYP2C19 and induces CYP3A4 ; a decrease in plasma levels of estrogens and digoxin has been noted during topiramate therapy."
+    }
+   ],
+   "strength": "weak"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "topiramate",
+     "provenance": "verified",
+     "quote": "- Topiramate itself is a weak inhibitor of CYP2C19 and induces CYP3A4 ; a decrease in plasma levels of estrogens and digoxin has been noted during topiramate therapy."
     }
    ]
   }

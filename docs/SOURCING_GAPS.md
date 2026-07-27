@@ -674,13 +674,43 @@ nodes over 86 drugs** (121 substrate, 29 inhibitor, 9 inducer; 3A4 58, 2D6 44, 1
 extract-then-judge pass; the article's drugbox `Metabolism |` row turned out to be as regular as a
 Stahl bullet, so `fetch_cyp_wikipedia.py` imports `fetch_cyp.py`'s role/strength/victim rules and
 adds only what a long prose paragraph needs: a sentence split, a negation veto, a rule that the
-drug's own name must appear before the verb with no `which` / `that` / paren / comma between, and a
-two-roles-in-one-sentence veto. Those three rules are what stops the wrong claims a paragraph
-offers: "Smoking induces CYP1A2" read as clozapine inducing it, a co-prescribed victim drug's
-profile read as the subject's ("... mirtazapine, which is mainly metabolized by ..."), and a
-reference-list title read as prose. Yield: **190 nodes over 101 drugs**, of which **109 over 62
-drugs** survive the Stahl-first merge (Stahl already stated the rest), taking `drug_enzymes` from
-159/86 to **268 nodes over 119 drugs**, all verified.
+drug's own name must appear before the verb with no `which` / `that` / paren / comma between. Those
+rules are what stops the wrong claims a paragraph offers: "Smoking induces CYP1A2" read as
+clozapine inducing it, a co-prescribed victim drug's profile read as the subject's
+("... mirtazapine, which is mainly metabolized by ..."), and a reference-list title read as prose.
+Yield: **190 nodes over 101 drugs**, of which **109 over 62 drugs** survive the Stahl-first merge
+(Stahl already stated the rest), taking `drug_enzymes` from 159/86 to **268 nodes over 119 drugs**,
+all verified.
+
+**Audited 2026-07-28 (the "does alcohol induce anything?" question), +5 nodes.** Re-running the
+pass's own rules over every stored article and printing the *rejected* role sentences showed 26
+drops, 22 of them right. The four wrong ones were two over-broad vetoes, both now fixed in
+`fetch_cyp_wikipedia.py`:
+- the **victim frame was tested on the whole sentence**, so a genuine claim was vetoed by its own
+  consequence clause ("Escitalopram weakly inhibits CYP2D6, and hence may increase plasma levels
+  of some CYP2D6 substrates"). It is tested on the **head** only now: what follows the verb is
+  that claim's consequence, not a second subject.
+- the **two-roles-in-one-sentence veto** dropped every "a weak inducer of CYP3A4 and a weak
+  inhibitor of CYP2C19". Split by position instead: each enzyme belongs to the role verb it
+  follows, each role is qualified from its own segment, and a later verb counts only while it
+  stays coordinated with the first (a comma / `that` / paren in between still hands the verb
+  someone else, which is what keeps nefazodone's "medications that are metabolized by CYP3A4" out).
+
+Alcohol itself was **not** a data error: no corpus we hold states that ethanol *induces* anything
+(the CYP2E1 induction claim lives on the CYP2E1 article, and the pass reads only the drug's own
+article), so publishing it would have been unsourced. The audit did find a real miss next to it:
+ethanol's own drugbox row names **alcohol dehydrogenase** beside CYP2E1, and the extractor only
+ever looked for `CYP`, so the route we already model as `adh` was invisible. Fixed, and the field
+was named `enzyme` for exactly this.
+
+**Still open there:** two known limits, both yield rather than correctness.
+- **Non-CYP vocabulary.** 28 stored drugbox rows name a route `ENZYMES` does not carry: UGT /
+  glucuronidation (the big one), FMO3, MAO-A, carboxylesterase, AKR, SULT, DBH. Each is a
+  vocabulary line plus a phrase pattern, and the extraction already works.
+- **Pronoun subjects.** Three genuine claims are unreachable because the sentence says "It"
+  (reboxetine, selegiline at CYP2B6, clomethiazole at CYP2B6/2A6). Resolving the antecedent
+  is what the subject rule deliberately refuses to guess; hand-curating those three is the
+  cheaper answer if they are ever wanted.
 
 **Metabolite `formed_by` landed too, and the estimate held.** 14 of the 36 metabolites are covered
 by **17 nodes** (kind `drug_metabolite_enzyme`, all verified), hand-curated in

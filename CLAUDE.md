@@ -647,9 +647,13 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
     the drug's stored English Wikipedia article (corpus #9), the only source for the drugs
     outside Stahl's roster. Leans on the **drugbox `Metabolism` row** (regular, and a substrate
     claim by construction); prose is read only per *sentence*, with the drug named before the
-    verb and nothing in between that hands the verb another subject, plus negation /
-    victim-frame / two-roles-at-once vetoes (Wikipedia states absence and other molecules'
-    metabolism constantly, which Stahl's terse bullets never did).
+    verb and nothing in between that hands the verb another subject, plus a negation veto and a
+    victim-frame veto tested on the sentence **head** only (Wikipedia states absence and other
+    molecules' metabolism constantly, which Stahl's terse bullets never did; what follows the
+    verb is the claim's own consequence, so vetoing on it dropped genuine rows). A sentence
+    stating two roles is **split by position**, each enzyme going to the verb it follows, while
+    a later verb stays coordinated with the first. Non-CYP routes are read only where `ENZYMES`
+    carries them (`adh`), never guessed.
 - **Which enzyme FORMS an active metabolite** is the mirror relation (there the drug is the
   substrate, here the metabolite is the product) and its own node kind, so it is **hand-curated**
   in `tools/data_generators/quotes/metabolism.py` (`METABOLITE_ENZYME_QUOTES`, keyed
