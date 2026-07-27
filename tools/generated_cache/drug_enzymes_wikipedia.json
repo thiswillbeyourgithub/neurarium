@@ -1916,6 +1916,20 @@
    ]
   }
  ],
+ "rasagiline": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rasagiline",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP1A2 )"
+    }
+   ]
+  }
+ ],
  "reboxetine": [
   {
    "enzyme": "cyp3a4",

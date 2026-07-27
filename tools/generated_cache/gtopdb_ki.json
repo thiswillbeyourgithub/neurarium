@@ -568,6 +568,274 @@
     }
    }
   },
+  "apomorphine": {
+   "5ht1a": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at 5-HT1A receptor (HTR1A, Human): Agonist / Partial agonist, pKi 6.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 6.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at 5-HT2B receptor (HTR2B, Human): Antagonist / Antagonist, pKi 6.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 100.0,
+     "median": 100.0,
+     "min": 100.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 7 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 39.8107,
+     "median": 39.8107,
+     "min": 39.8107,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7.4 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2a": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Partial agonist, pKi 6.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 63.0957,
+     "median": 63.0957,
+     "min": 63.0957,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at α2B-adrenoceptor (ADRA2B, Human): Antagonist / Antagonist, pKi 7.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 39.8107,
+     "median": 39.8107,
+     "min": 39.8107,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7.4 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2d": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Partial agonist, pKi 6.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d1": {
+    "action": "agonist",
+    "ki": {
+     "max": 5011.8723,
+     "median": 2821.4148,
+     "min": 630.9573,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1826762",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at D1 receptor (DRD1, Human): Agonist / Full agonist, pKi 5.3-6.2 [PMID 1826762]",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 1995.2632,
+     "median": 1013.443,
+     "min": 31.6228,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at D2 receptor (DRD2, Human): Agonist / Partial agonist, pKi 5.7-7.5 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 794.3284,
+     "median": 409.7236,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at D3 receptor (DRD3, Human): Agonist / Partial agonist, pKi 6.1-7.6 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d4": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 3.9811,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at D4 receptor (DRD4, Human): Agonist / Partial agonist, pKi 8.4 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d5": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 398.1072,
+     "median": 206.9781,
+     "min": 15.8489,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at D5 receptor (DRD5, Human): Agonist / Partial agonist, pKi 6.4-7.8 [PMID 12388666]",
+     "species": "Human"
+    }
+   }
+  },
   "aripiprazole": {
    "5ht1a": {
     "action": "partial_agonist",
@@ -1245,6 +1513,350 @@
     }
    }
   },
+  "bromocriptine": {
+   "5ht1a": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 12.5893,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT1A receptor (HTR1A, Human): Agonist / Partial agonist, pKi 7.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 316.2278,
+     "median": 316.2278,
+     "min": 316.2278,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT1B receptor (HTR1B, Human): Agonist / Partial agonist, pKi 6.5 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 10.0,
+     "median": 10.0,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT1D receptor (HTR1D, Human): Agonist / Partial agonist, pKi 8 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 100.0,
+     "median": 100.0,
+     "min": 100.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT2A receptor (HTR2A, Human): Agonist / Partial agonist, pKi 7 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 50.1187,
+     "min": 50.1187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT2B receptor (HTR2B, Human): Antagonist / Antagonist, pKi 7.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2c": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 794.3282,
+     "median": 794.3282,
+     "min": 794.3282,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT2C receptor (HTR2C, Human): Agonist / Partial agonist, pKi 6.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht6": {
+    "action": "agonist",
+    "ki": {
+     "max": 31.6228,
+     "median": 31.6228,
+     "min": 31.6228,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8522988",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT6 receptor (HTR6, Human): Agonist / Full agonist, pKi 7.5 [PMID 8522988]",
+     "species": "Human"
+    }
+   },
+   "5ht7": {
+    "action": "agonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 30.0594,
+     "min": 10.0,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "8394362",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at 5-HT7 receptor (Htr7, Rat): Agonist / Full agonist, pKi 7.3-8 [PMID 8394362]",
+     "species": "Rat"
+    }
+   },
+   "alpha2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 7.5059,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 8-8.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 7.5059,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 8-8.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 78.7576,
+     "min": 31.6228,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at α2B-adrenoceptor (ADRA2B, Human): Antagonist / Antagonist, pKi 6.9-7.5 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 25.1189,
+     "median": 25.1189,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7.6 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 7.5059,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 8-8.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d1": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 630.9573,
+     "median": 630.9573,
+     "min": 630.9573,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at D1 receptor (DRD1, Human): Agonist / Partial agonist, pKi 6.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "agonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 27.5653,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at D2 receptor (DRD2, Human): Agonist / Full agonist, pKi 7.3-8.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 42.8712,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at D3 receptor (DRD3, Human): Agonist / Partial agonist, pKi 7.1-8.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 398.1071,
+     "median": 398.1071,
+     "min": 398.1071,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 6.4 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d5": {
+    "action": "agonist",
+    "ki": {
+     "max": 501.1872,
+     "median": 501.1872,
+     "min": 501.1872,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 6.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   }
+  },
   "buprenorphine": {
    "kappa": {
     "action": "antagonist",
@@ -1354,6 +1966,331 @@
      "provenance": "verified",
      "quote": "buspirone at 5-HT7 receptor (Htr7, Rat): Agonist / Partial agonist, pKi 6.4 [PMID 8397408]",
      "species": "Rat"
+    }
+   }
+  },
+  "cabergoline": {
+   "5ht1a": {
+    "action": "agonist",
+    "ki": {
+     "max": 19.9526,
+     "median": 19.9526,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at 5-HT1A receptor (HTR1A, Human): Agonist / Full agonist, pKi 7.7 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "agonist",
+    "ki": {
+     "max": 501.1872,
+     "median": 501.1872,
+     "min": 501.1872,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 6.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 7.9433,
+     "median": 7.9433,
+     "min": 7.9433,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at 5-HT1D receptor (HTR1D, Human): Agonist / Partial agonist, pKi 8.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "agonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at 5-HT2A receptor (HTR2A, Human): Agonist / Full agonist, pKi 8.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "agonist",
+    "ki": {
+     "max": 1.2589,
+     "median": 1.2589,
+     "min": 1.2589,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at 5-HT2B receptor (HTR2B, Human): Agonist / Full agonist, pKi 8.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2c": {
+    "action": "agonist",
+    "ki": {
+     "max": 630.9573,
+     "median": 630.9573,
+     "min": 630.9573,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at 5-HT2C receptor (HTR2C, Human): Agonist / Full agonist, pKi 6.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha1a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 316.2278,
+     "median": 316.2278,
+     "min": 316.2278,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 6.5 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 12.5893,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 7.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 12.5893,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 7.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 79.4328,
+     "min": 79.4328,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at α2B-adrenoceptor (ADRA2B, Human): Antagonist / Antagonist, pKi 7.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 19.9526,
+     "median": 19.9526,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7.7 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 12.5893,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 7.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d1": {
+    "action": "agonist",
+    "ki": {
+     "max": 199.5262,
+     "median": 199.5262,
+     "min": 199.5262,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at D1 receptor (DRD1, Human): Agonist / Full agonist, pKi 6.7 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 1.0,
+     "median": 0.8155,
+     "min": 0.631,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at D2 receptor (DRD2, Human): Agonist / Partial agonist, pKi 9-9.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 0.7943,
+     "median": 0.7943,
+     "min": 0.7943,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at D3 receptor (DRD3, Human): Agonist / Partial agonist, pKi 9.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d4": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 50.1187,
+     "min": 50.1187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at D4 receptor (DRD4, Human): Agonist / Partial agonist, pKi 7.3 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d5": {
+    "action": "agonist",
+    "ki": {
+     "max": 19.9526,
+     "median": 19.9526,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 7.7 [PMID 12388666]",
+     "species": "Human"
     }
    }
   },
@@ -8029,6 +8966,19 @@
     }
    }
   },
+  "rasagiline": {
+   "mao_b": {
+    "action": "enzyme_inhibitor",
+    "pmid": "11159700",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rasagiline",
+     "provenance": "verified",
+     "quote": "rasagiline at Monoamine oxidase B (MAOB, Human): Inhibitor / Inhibition, pIC50 7.85 [PMID 11159700]",
+     "species": "Human"
+    }
+   }
+  },
   "reboxetine": {
    "net": {
     "action": "reuptake_inhibitor",
@@ -8572,6 +9522,27 @@
      "page": "rotigotine",
      "provenance": "verified",
      "quote": "rotigotine at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 6 [PMID 1826762]",
+     "species": "Human"
+    }
+   }
+  },
+  "safinamide": {
+   "mao_b": {
+    "action": "enzyme_inhibitor",
+    "ki": {
+     "max": 446.6837,
+     "median": 446.6837,
+     "min": 446.6837,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15027868",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "safinamide",
+     "provenance": "verified",
+     "quote": "safinamide at Monoamine oxidase B (MAOB, Human): Inhibitor / Inhibition, pKi 6.35 [PMID 15027868]",
      "species": "Human"
     }
    }
