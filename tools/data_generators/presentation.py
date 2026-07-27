@@ -171,4 +171,5 @@ WIKIPEDIA: dict[str, str] = {
     "raphe": "https://en.wikipedia.org/wiki/Raphe_nuclei",
     "locus_coeruleus": "https://en.wikipedia.org/wiki/Locus_coeruleus",
     "vta": "https://en.wikipedia.org/wiki/Ventral_tegmental_area",
+    "tuberomammillary": "https://en.wikipedia.org/wiki/Tuberomammillary_nucleus",
 }

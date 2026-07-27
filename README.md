@@ -154,6 +154,7 @@ is a real count:
 
 ```
 Drug brand names                ██████████████████████████  100%    469/469
+Wikipedia reference links       ██████████████████████████  100%    371/371
 Drug half-life (T½)             ██████████████████████████  100%    185/185
 Drug metabolising enzymes       ██████████████████████████  100%    159/159
 Drug nomenclature (NbN)         ██████████████████████████  100%    116/116
@@ -165,7 +166,6 @@ Target classifications          ████████████████
 Projection groups               ██████████████████████████  100%      11/11
 Functional circuits             ██████████████████████████  100%        6/6
 Target tone polarity            ██████████████████████████  100%        2/2
-Wikipedia reference links       ██████████████████████████   99%    369/371
 Receptor mechanism class        ██████████████████████████   98%      55/56
 Drug target bindings            █████████████████████████░   98%  1655/1688
 Neuron pathways                 █████████████████████████░   97%      56/58

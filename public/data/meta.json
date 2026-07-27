@@ -2738,10 +2738,10 @@
       "references": {
         "total": 371,
         "verified": 0,
-        "sourced": 369,
+        "sourced": 371,
         "llm": 0,
-        "nosource": 2,
-        "missing": 2
+        "nosource": 0,
+        "missing": 0
       }
     },
     "nodes": {
