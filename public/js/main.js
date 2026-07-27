@@ -3630,9 +3630,13 @@ function createInfoPanel(data, sourcingModal) {
               head.addEventListener("click", onLabel);
             }
             box.appendChild(head);
+            // The rows (and the "+n more" that extends them) live in their own indented
+            // body under the heading, so which bucket / isoform a drug belongs to reads
+            // at a glance in a list of several groups.
+            const groupBody = el("div", "pk-group-body");
             const ul = el("ul");
             for (const make of rows.slice(0, GROUP_CAP)) ul.appendChild(make());
-            box.appendChild(ul);
+            groupBody.appendChild(ul);
             if (rows.length > GROUP_CAP) {
               const more = el("button", "pk-more",
                               t("drug.pkMore", { n: rows.length - GROUP_CAP }));
@@ -3641,8 +3645,9 @@ function createInfoPanel(data, sourcingModal) {
                 for (const make of rows.slice(GROUP_CAP)) ul.appendChild(make());
                 more.remove();
               });
-              box.appendChild(more);
+              groupBody.appendChild(more);
             }
+            box.appendChild(groupBody);
           };
 
           // Two readings of the SAME edges, because the useful question differs: "what

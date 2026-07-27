@@ -855,6 +855,14 @@
       .lang-btn:hover, .seg-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
       .lang-btn.active, .seg-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
+      /* One Drug-interactions group: its rows (and the "+N more" that extends them) are
+         indented off their heading, with a hairline rail, so which direction bucket /
+         isoform a drug sits under reads at a glance down a list of several groups. */
+      .pk-group-body {
+        margin-left: 3px;
+        padding-left: 9px;
+        border-left: 1px solid rgba(154, 166, 179, 0.35);
+      }
       /* "+N more" under a capped Interactions group: expands the rest in place, so a
          long list is trimmed for readability without hiding what was trimmed. */
       .pk-more {
