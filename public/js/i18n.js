@@ -121,7 +121,7 @@
         "How much of the data is verified, sourced, or still unchecked. Close it (the <b>&times;</b>) to continue.",
       "tour.browse.title": "Browse the data",
       "tour.browse.body":
-        "Everything sits in four lists: <b>Drugs</b> ({drugs}+), <b>Receptors</b> ({receptors}+), <b>Brain structures</b> ({structures}+), <b>Projections</b> ({projections}+). We'll open a few next.",
+        "Everything sits in five lists: <b>Drugs</b> ({drugs}+), <b>Receptors</b> ({receptors}+), <b>Brain structures</b> ({structures}+), <b>Projections</b> ({projections}+), and the <b>Enzymes</b> that clear the drugs. We'll open a few next.",
       "tour.openDrugs.title": "Open a list",
       "tour.openDrugs.body":
         "Start with a drug. Click <b>Drugs</b> to open the list.",
@@ -558,7 +558,7 @@
         "La part des données vérifiée, sourcée, ou encore non contrôlée. Fermez-la (le <b>&times;</b>) pour continuer.",
       "tour.browse.title": "Parcourir les données",
       "tour.browse.body":
-        "Tout tient en quatre listes : <b>Médicaments</b> ({drugs}+), <b>Récepteurs</b> ({receptors}+), <b>Structures cérébrales</b> ({structures}+), <b>Projections</b> ({projections}+). On en ouvre quelques-unes ensuite.",
+        "Tout tient en cinq listes : <b>Médicaments</b> ({drugs}+), <b>Récepteurs</b> ({receptors}+), <b>Structures cérébrales</b> ({structures}+), <b>Projections</b> ({projections}+), et les <b>Enzymes</b> qui éliminent les médicaments. On en ouvre quelques-unes ensuite.",
       "tour.openDrugs.title": "Ouvrir une liste",
       "tour.openDrugs.body":
         "Commençons par un médicament. Cliquez sur <b>Médicaments</b> pour ouvrir la liste.",

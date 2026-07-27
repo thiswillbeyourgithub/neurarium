@@ -78,6 +78,8 @@ const ADVANCE_MS = 360; // let the tapped action (open a tab, spread) settle fir
 const REVEAL_MS = 1000; // hold the dim + highlight back this long, then fade it in,
 // so the scene the step just set up reads for a beat before the overlay lands on it
 const SCROLL_TOP_PAD = 12; // px above a scrollAlign:"top" target once scrolled to the top
+const SCROLL_RECHECK_MS = 200; // how often a scrollTo step re-checks its target is still in view
+const SCROLL_RECHECK_FOR_MS = 4000; // ... and for how long after the step opens (see scrollStepIntoView)
 const ELASTIC_PX = 10; // px the ring rubber-bands when a panel step's scroll is clamped
 
 /**
@@ -110,6 +112,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let scrolling = false; // true while a scrollTo row is easing into view (see onScroll)
   let revealTimer = null; // the setTimeout that ends a step's opening beat + fades in the overlay
   let bubbleDragged = false; // user dragged the bubble this step: stop auto-placing it
+  let userScrolled = false; // user scrolled by hand this step: scrollStepIntoView backs off
 
   const seen = () => {
     if (!seenKey) return false;
@@ -532,6 +535,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     }
     index = i;
     observed = false;
+    userScrolled = false; // a fresh step may re-scroll its target into view (see scrollStepIntoView)
     bubbleDragged = false; // a fresh step re-auto-places the bubble (drop any drag offset)
     bubble.style.transition = ""; // clear a drag's inline transition:none
     scrolling = false; // a fresh step always places its bubble (a prior scroll may not have settled)
@@ -666,24 +670,46 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   function scrollStepIntoView(step) {
     if (!step.scrollTo) return;
     const startIndex = index;
-    setTimeout(() => {
+    const attempt = (first) => {
       if (!active || index !== startIndex) return; // step already changed
-      const el = primaryTarget(step);
-      if (!el) return;
-      const c = scrollParent(el);
+      if (!first && userScrolled) return; // never fight a deliberate scroll
+      const els = resolveTargets(step);
+      if (!els.length) return;
+      const c = scrollParent(els[0]);
       if (!c) return;
       const cr = c.getBoundingClientRect();
-      const er = el.getBoundingClientRect();
-      // Default: centre the target. "top": land its heading near the top of the
-      // panel instead (for a section taller than the viewport, centring scrolls
-      // past its heading so you can't tell what you're looking at; top keeps it).
-      const want = step.scrollAlign === "top"
+      // The WHOLE group, not just the first target: a group highlight (the four
+      // browse sections) must land in view as one block, or the ring spans rows
+      // that are off-screen.
+      const er = unionRect(els);
+      if (!first) {
+        // A retry only acts on a target that is genuinely off-screen (see below):
+        // enough of it showing means the first scroll worked, leave it alone.
+        const visible = Math.max(0, Math.min(er.bottom, cr.bottom) - Math.max(er.top, cr.top));
+        if (visible >= Math.min(er.height, c.clientHeight * 0.6) - 2) return;
+      }
+      // Default: centre the target. "top" (or a block taller than the panel): land
+      // its heading near the top instead, since centring a tall block scrolls past
+      // its heading so you can't tell what you are looking at.
+      const want = step.scrollAlign === "top" || er.height > c.clientHeight
         ? c.scrollTop + (er.top - cr.top) - SCROLL_TOP_PAD
         : c.scrollTop + (er.top - cr.top) - (c.clientHeight - er.height) / 2;
       const to = Math.max(0, Math.min(want, c.scrollHeight - c.clientHeight));
       if (Math.abs(to - c.scrollTop) < 2) return; // already centred enough
       c.scrollTo({ top: to, behavior: "smooth" });
-    }, 0);
+    };
+    // Then re-checked for a few seconds: a panel's content keeps arriving after the step
+    // opens (a live Wikipedia lead is a network fetch, an illustration loads lazily) and
+    // that reflow slides the target back out of view under the first scroll. Polling
+    // beats one fixed retry because there is no telling when the fetch lands; it costs a
+    // couple of rect reads per tick, only while a scrollTo step is showing, and it stops
+    // the moment the user scrolls by hand.
+    setTimeout(() => attempt(true), 0);
+    const poll = setInterval(() => {
+      if (!active || index !== startIndex || userScrolled) clearInterval(poll);
+      else attempt(false);
+    }, SCROLL_RECHECK_MS);
+    setTimeout(() => clearInterval(poll), SCROLL_RECHECK_FOR_MS);
   }
 
   function scheduleLayout() {
@@ -699,8 +725,13 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   // tactile feedback that a panel step's scroll just hit a boundary. Uses transform
   // (layout() only writes left/top/width/height), so it composes with the ring flash.
   let bounceTimer = null;
+  let bouncing = false;
   function ringBounce(dir) {
-    if (!ring || ring.hidden) return;
+    // One bounce per clamp episode, NOT one per event: a wheel/touch flick against the
+    // boundary fires scroll events every few ms, and restarting the animation on each
+    // one pinned the ring at its offset and read as jitter rather than a rubber-band.
+    if (!ring || ring.hidden || bouncing) return;
+    bouncing = true;
     const y = dir > 0 ? ELASTIC_PX : -ELASTIC_PX;
     ring.style.transition = "transform 0.10s ease-out";
     ring.style.transform = `translateY(${y}px)`;
@@ -708,30 +739,42 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     bounceTimer = setTimeout(() => {
       ring.style.transition = "transform 0.26s cubic-bezier(0.22, 1, 0.36, 1)";
       ring.style.transform = "translateY(0)";
-      bounceTimer = setTimeout(() => { ring.style.transition = ""; ring.style.transform = ""; }, 280);
+      bounceTimer = setTimeout(() => {
+        ring.style.transition = "";
+        ring.style.transform = "";
+        bouncing = false;
+      }, 280);
     }, 110);
   }
 
   // On a panel step (dim:false, ring inside a scroll container), keep the highlighted
-  // target from being scrolled out of view: if the scroll passes the point where the
-  // target's top/bottom edge reaches the container edge, snap it back to that boundary
-  // and bounce, so the ring can't drift off over the 3D scene (a short target locks in
-  // place; a target taller than the container can be scrolled through but not past).
-  // Steps that WANT free scrolling (a scroll gate, see tourGateScroll) opt out with
-  // scrollFree:true. Returns true when it clamped.
-  function clampTargetScroll(step) {
-    if (!step || step.dim !== false || step.scrollFree) return false;
+  // target from being scrolled out of view: [lo, hi] is the scroll range where its
+  // top/bottom edge still reaches the container edge, so the ring can't drift off over
+  // the 3D scene (a short target locks in place; a target taller than the container can
+  // be scrolled through but not past). Null when the step is not locked (steps that WANT
+  // free scrolling, a scroll gate, opt out with scrollFree:true) or nothing scrolls.
+  // Two enforcers share it: onWheelClamp (before the fact) + clampTargetScroll (after).
+  function targetScrollBounds(step) {
+    if (!step || step.dim !== false || step.scrollFree) return null;
     const el = primaryTarget(step);
-    if (!el) return false;
+    if (!el) return null;
     const c = scrollParent(el);
-    if (!c) return false;
+    if (!c) return null;
     const cr = c.getBoundingClientRect();
     const er = el.getBoundingClientRect();
     const tTop = c.scrollTop + (er.top - cr.top);      // target top within scroll content
     const a = tTop;                                    // scrollTop keeping the target top visible
     const b = tTop + er.height - c.clientHeight;        // ... keeping its bottom visible
-    const lo = Math.max(0, Math.min(a, b));
-    const hi = Math.min(c.scrollHeight - c.clientHeight, Math.max(a, b));
+    return {
+      c,
+      lo: Math.max(0, Math.min(a, b)),
+      hi: Math.min(c.scrollHeight - c.clientHeight, Math.max(a, b)),
+    };
+  }
+  function clampTargetScroll(step) {
+    const bounds = targetScrollBounds(step);
+    if (!bounds) return false;
+    const { c, lo, hi } = bounds;
     const st = c.scrollTop;
     if (st >= lo - 0.5 && st <= hi + 0.5) return false; // within bounds: allow the scroll
     const clamped = Math.max(lo, Math.min(hi, st));
@@ -739,6 +782,31 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     c.scrollTop = clamped;                              // snap back inside bounds
     ringBounce(over > 0 ? 1 : -1);
     return true;
+  }
+
+  // Cancel an out-of-bounds wheel BEFORE the browser acts on it. clampTargetScroll alone
+  // is an after-the-fact snap, and against a trackpad's inertia (which keeps firing for
+  // ~a second) that means scroll-out/jump-back every frame: visible jitter. Cancelling at
+  // the boundary makes it simply stop, with one rubber-band bounce.
+  function onWheelClamp(e) {
+    if (index < 0 || e.ctrlKey) return; // ctrl+wheel is a zoom gesture, not a scroll
+    const bounds = targetScrollBounds(steps[index]);
+    if (!bounds) return;
+    const { c, lo, hi } = bounds;
+    if (!c.contains(e.target)) return; // a wheel over the scene / another panel is not ours
+    // deltaMode: 0 px, 1 lines, 2 pages (Firefox reports lines for a mouse wheel).
+    const px = e.deltaMode === 1 ? e.deltaY * 16
+      : e.deltaMode === 2 ? e.deltaY * c.clientHeight
+        : e.deltaY;
+    const next = c.scrollTop + px;
+    if (next >= lo - 0.5 && next <= hi + 0.5) return; // stays in range: let it through
+    e.preventDefault();
+    const clamped = Math.max(lo, Math.min(hi, next));
+    if (Math.abs(clamped - c.scrollTop) > 0.5) {
+      c.scrollTop = clamped; // travel the part of the gesture that IS in range
+      layout();
+    }
+    ringBounce(next > hi ? 1 : -1);
   }
 
   // Follow the target while the page/panel scrolls (e.g. a row sliding into view,
@@ -800,7 +868,17 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     // Capture phase so an off-target click is swallowed before the app's own
     // handlers fire (keeps the walkthrough on the rails, see onClickCapture).
     window.addEventListener("click", onClickCapture, true);
+    // A real scroll gesture (as opposed to our own programmatic scrollTo, which emits
+    // "scroll" but no wheel/touch): it tells scrollStepIntoView to stop re-centring.
+    window.addEventListener("wheel", onUserScroll, { capture: true, passive: true });
+    window.addEventListener("touchmove", onUserScroll, { capture: true, passive: true });
+    // Non-passive (it may preventDefault): the boundary stop for a locked panel step.
+    window.addEventListener("wheel", onWheelClamp, { capture: true, passive: false });
     go(opts && opts.fromStep ? opts.fromStep : 0);
+  }
+
+  function onUserScroll() {
+    userScrolled = true;
   }
 
   function stop(reason) {
@@ -814,6 +892,9 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     window.removeEventListener("resize", layout);
     window.removeEventListener("scroll", onScroll, true);
     window.removeEventListener("click", onClickCapture, true);
+    window.removeEventListener("wheel", onUserScroll, true);
+    window.removeEventListener("touchmove", onUserScroll, true);
+    window.removeEventListener("wheel", onWheelClamp, true);
     if (root) {
       clearHole();
       root.classList.remove("pre-reveal");

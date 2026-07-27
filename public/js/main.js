@@ -7006,7 +7006,11 @@ async function main() {
   };
   // The four browse sections (for the overview highlight); collapse them all so
   // the ring spans a tight group of headers.
-  const TOUR_SECTIONS = ["structures", "projections", "receptors", "drugs"];
+  // The browse sections the tour rings as one group (step 6) and collapses beforehand.
+  // Enzymes is in the list because it sits BETWEEN the others in the panel: the group
+  // ring spans them all whether or not it is named, so leaving it out would ring a
+  // section the caption ignores.
+  const TOUR_SECTIONS = ["structures", "projections", "receptors", "drugs", "enzymes"];
   const tourCollapseSections = () => {
     for (const name of TOUR_SECTIONS) {
       const b = tourEl(`${name}-body`);
@@ -7205,6 +7209,7 @@ async function main() {
         drugs: tourCount(data.drugs.length),
       }),
       target: () => TOUR_SECTIONS.map((n) => `#${n}-toggle`),
+      scrollTo: true, // the four headings must land in view as a block, not half off it
       before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
     // 7-8. Drugs first: open the list, then tap Olanzapine (opens its panel and plays
     //    the effect animation live on the brain).
