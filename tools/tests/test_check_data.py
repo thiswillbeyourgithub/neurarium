@@ -196,5 +196,41 @@ class SharedMetaboliteGuardTest(unittest.TestCase):
         self.assertEqual(diverged, identical + 1)
 
 
+class NoSubjectQuoteTest(unittest.TestCase):
+    """A binding quote can be verbatim on the page and still support nothing.
+
+    Stahl's "How Drug Causes Side Effects" block lists the CLASS's mechanisms as
+    subject-less rules, identically across monographs, so it never says this drug
+    has the action; 151 antipsychotic bindings were once sourced from three such
+    lines. The guard has to separate those from the sentences that do attribute
+    the action, which look superficially similar."""
+
+    def _m(self, quote):
+        return bool(check_data._NO_SUBJECT_QUOTE.match(quote))
+
+    def test_class_boilerplate_is_rejected(self):
+        for quote in (
+            "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred "
+            "vision, urinary retention, constipation, and paralytic ileus",
+            "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, "
+            "and syncope",
+            "Antihistaminic actions may cause sedation, weight gain",
+        ):
+            self.assertTrue(self._m(quote), quote)
+
+    def test_attributed_mechanism_is_accepted(self):
+        for quote in (
+            # the subject is the drug ("it"), so this one really does claim H1 blockade
+            "By blocking histamine 1 receptors in the brain, it can cause sedation and "
+            "possibly weight gain",
+            "Paroxetine's weak antimuscarinic properties can cause constipation, dry "
+            "mouth, and blurred vision",
+            "Anticholinergic actions, especially at high doses, may cause sedation",
+            # a plain mechanism statement, the normal "How the Drug Works" shape
+            "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis",
+        ):
+            self.assertFalse(self._m(quote), quote)
+
+
 if __name__ == "__main__":
     unittest.main()

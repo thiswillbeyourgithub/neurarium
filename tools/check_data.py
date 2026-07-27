@@ -911,6 +911,19 @@ def check_provenance(report, meta, structures, projections, circuits,
 # about even when it "matches".
 _MIN_QUOTE_CHARS = 16
 
+# A quote can be verbatim on the cited page and still not support the claim. The
+# recurring way that happened here: Stahl's "How Drug Causes Side Effects" block
+# lists the mechanisms of the drug's CLASS as subject-less rules ("Blocking
+# muscarinic cholinergic receptors can cause dry mouth ..."), printed identically
+# across the monographs (that one on 17 pages, the alpha-1 one on 28), so it never
+# states that THIS drug blocks anything. 151 antipsychotic bindings were once
+# sourced from three such lines, including muscarinic + H1 + alpha-1 blockade for
+# sulpiride, a benzamide with none of them. A sentence that attributes the action
+# ("By blocking X, IT can cause Y", "Paroxetine's weak antimuscarinic properties
+# can cause ...") is fine and deliberately not matched: the subject is the point.
+_NO_SUBJECT_QUOTE = re.compile(
+    r"^(Blocking\b|Antihistaminic actions\b)[^.]*\b(can|may) cause\b", re.I)
+
 
 def check_sources(report, meta, drugs, projections, structures, receptors):
     """The core of the sourcing system: confirm every quote-level source (a
@@ -993,7 +1006,16 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         did = drug.get("id")
         for binding in drug.get("bindings", []):
             for i, src in enumerate(binding.get("sources", []) or []):
-                check_one(f"drug {did} binding {binding.get('target')} sources[{i}]", src)
+                ctx = f"drug {did} binding {binding.get('target')} sources[{i}]"
+                check_one(ctx, src)
+                if _NO_SUBJECT_QUOTE.match(src.get("quote") or ""):
+                    report.error(
+                        f"{ctx}: quote is a subject-less mechanism -> side-effect rule "
+                        f"({src.get('quote')!r}). Stahl's 'How Drug Causes Side Effects' "
+                        f"block prints the same lines on every monograph in the class, so "
+                        f"such a sentence never says THIS drug has the action: it cannot "
+                        f"source a binding (an attributed one, 'By blocking X, IT can "
+                        f"cause Y', can)")
             # A quote-carrying Ki source (corpus #9 wikipedia_pharm cites the verbatim
             # affinity-table row) is gated here like any other quote. A PDSP Ki cites a
             # CSV row (ki_id, no quote) and is verified by the CSV gate below instead, so
