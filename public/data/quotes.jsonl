@@ -1151,6 +1151,7 @@
 {"id": "q_5eb0bf280aff", "corpus": "wikipedia_fr", "page": "parox_tine", "quote": "Deroxat"}
 {"id": "q_5eb1f1e67ede", "corpus": "wikipedia_pharm", "page": "promethazine", "quote": "α2C-adrenoceptor (Human) | 353"}
 {"id": "q_5ecc25df23dc", "corpus": "gtopdb_ki", "page": "thioridazine", "quote": "thioridazine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 7 [PMID 1826762]", "species": "Human"}
+{"id": "q_5ee1255859ae", "corpus": "wikipedia_pharm", "page": "methamphetamine", "quote": "Methamphetamine binds to and activates both sigma receptor subtypes, σ 1 and σ 2 , with micromolar affinity"}
 {"id": "q_5ee810a64beb", "corpus": "stahl", "page": 593, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_5eeaf62bbdbf", "corpus": "stahl", "page": 294, "quote": "Elimination half-life approximately 12 hours"}
 {"id": "q_5ef58fb9bb41", "corpus": "wikipedia_pharm", "page": "blonanserin", "quote": "D 4 | 150 | -"}

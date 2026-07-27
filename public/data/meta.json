@@ -2572,8 +2572,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1693,
-        "verified": 1681,
+        "total": 1694,
+        "verified": 1682,
         "sourced": 0,
         "llm": 0,
         "nosource": 12,
@@ -2765,17 +2765,17 @@
       }
     },
     "nodes": {
-      "total": 3974,
-      "verified": 3825,
+      "total": 3975,
+      "verified": 3826,
       "sourced": 0,
       "llm": 135,
       "nosource": 14,
       "missing": 149,
-      "backed": 3825,
+      "backed": 3826,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1666,
+      "bindings_total": 1667,
       "bindings_with_ki": 1386,
       "pct_bindings_with_ki": 83,
       "drugs_total": 220,
