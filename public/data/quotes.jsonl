@@ -593,6 +593,7 @@
 {"id": "q_3006cf3b60f6", "corpus": "wikipedia_pharm", "page": "atomoxetine", "quote": "Metabolism | Liver : ring hydroxylation ( CYP2D6 , others), benzylic hydroxylation, N - demethylation ( CYP2C19 ), glucuronidation ( UGTs"}
 {"id": "q_300f1a261196", "corpus": "stahl", "page": 745, "quote": "Emsam"}
 {"id": "q_301bfafe2c03", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "5-HT 5A | 670 | Human"}
+{"id": "q_304038645f3f", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in occipital: probe 1051414 PACall present in 212/212 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_30459dad9ea6", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "5-HT 1A | 400–2600 | Human"}
 {"id": "q_3050ec9cab56", "corpus": "wikipedia_pharm", "page": "fluvoxamine", "quote": "σ 1 | 36"}
 {"id": "q_306653feeb48", "corpus": "stahl", "page": 355, "quote": "Inhibits CYP1A2"}
@@ -654,6 +655,7 @@
 {"id": "q_3531bd7e354f", "corpus": "stahl", "page": 366, "quote": "Terminal elimination half-life approximately 7 hours"}
 {"id": "q_354a2aee1678", "corpus": "stahl", "page": 365, "quote": "Cholinesterase inhibitor (acetylcholinesterase inhibitor); also an allosteric nicotinic cholinergic modulator; cognitive enhancer", "llm": "sonnet"}
 {"id": "q_35580f77f0b1", "corpus": "stahl", "page": 871, "quote": "Vesicular monoamine transporter 2 (VMAT2) inhibitor", "llm": "sonnet"}
+{"id": "q_3563d3d2a194", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1051414, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.87: thalamus +0.98 (6d), putamen +0.67 (6d), caudate +0.09 (6d), occipital -0.15 (6d), parietal -0.19 (6d), hypothalamus -0.23 (6d), frontal -0.26 (6d), temporal -0.34 (6d), amygdala -0.42 (6d), hippocampus -0.88 (6d), cerebellum -0.96 (6d)", "species": "Human"}
 {"id": "q_35afffb8318b", "corpus": "allen_ahba", "page": "ADRB1", "quote": "ADRB1 detected in frontal: probe 1021604 PACall present in 469/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_35c17e74a0f8", "corpus": "wikipedia_pharm", "page": "quetiapine", "quote": "Metabolism | Liver via CYP3A4-catalysed sulfoxidation to its active metabolite norquetiapine"}
 {"id": "q_35e1d84841bd", "corpus": "allen_ahba", "page": "GRIN1", "quote": "GRIN1 detected in cerebellum: probe 1055938 PACall present in 305/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -820,6 +822,7 @@
 {"id": "q_417f60feb5df", "corpus": "stahl", "page": 781, "quote": "Elimination half-life approximately 30–60 minutes"}
 {"id": "q_418d158bb491", "corpus": "gtopdb_class", "page": 25, "quote": "α2A-adrenoceptor (ADRA2A), GtoPdb target 25 | type: gpcr | family: Adrenoceptors"}
 {"id": "q_41aa8192c11e", "corpus": "kandel", "page": 1387, "quote": "In the indirect pathway, the axons of neurons in layer II of the entorhinal cortex project through the _perforant pathway_ to excite the granule cells of the dentate gyrus (an area considered part of the hippocampus).", "llm": "sonnet"}
+{"id": "q_41ae16d38c86", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in cerebellum: probe 1051414 PACall present in 366/368 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_41ca7968b335", "corpus": "stahl", "page": 87, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet"}
 {"id": "q_41d91f520302", "corpus": "stahl", "page": 517, "quote": "Metadate CD"}
 {"id": "q_41fbb60e465e", "corpus": "wikipedia_pharm", "page": "scopolamine", "quote": "Scopolamine acts as a nonspecific muscarinic antagonist at all four ( M 1 , M 2 , M 3 , and M 4 ) receptor sites.\nIn doses higher than intended for medicinal use, the hallucinogenic alteration of consciousness , as well as the delirium in particular, are tied to the compound's activity at the M 1 muscarinic receptor."}
@@ -1071,6 +1074,7 @@
 {"id": "q_55afaf26f4fc", "corpus": "wikipedia_pharm", "page": "alcohol_drug", "quote": "by facilitating GABA's actions in the GABA A receptor , alcohol suppresses the activity of the central nervous system"}
 {"id": "q_55bc450b8384", "corpus": "stahl", "page": 195, "quote": "Half-life 12–16 hours"}
 {"id": "q_55c9a7dc1eac", "corpus": "stahl_essential", "page": 575, "quote": "neurons that release enkephalin synapse with postsynaptic δ-opioid receptors", "llm": "sonnet"}
+{"id": "q_55cba261151b", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in thalamus: probe 1051414 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_55ef267eec37", "corpus": "wikipedia_pharm", "page": "lormetazepam", "quote": "Lormetazepam , sold under the brand name Noctamid among others, is a drug which is a short to intermediate acting 3-hydroxy benzodiazepine derivative and temazepam analogue."}
 {"id": "q_55f742a2355a", "corpus": "wikipedia_fr", "page": "amitriptyline", "quote": "Tryptanol"}
 {"id": "q_55fd3375499c", "corpus": "stahl", "page": 907, "quote": "Mean terminal half-life approximately 66 hours"}
@@ -1512,6 +1516,7 @@
 {"id": "q_7875f22ce7de", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in thalamus: probe 1057496 PACall present in 163/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7884390dc311", "corpus": "stahl", "page": 669, "quote": "Orap"}
 {"id": "q_788cefb56931", "corpus": "allen_ahba", "page": "ADORA2A", "quote": "ADORA2A detected in accumbens: probe 1059366 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_7896203292c1", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in hypothalamus: probe 1051414 PACall present in 102/102 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_78bb32998ef8", "corpus": "stahl", "page": 536, "quote": "Half-life 8 hours"}
 {"id": "q_78c6ab8fee80", "corpus": "gtopdb_ki", "page": "loxapine", "quote": "loxapine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 8.11 [PMID 9015795]", "species": "Human"}
 {"id": "q_78faa7205e42", "corpus": "kandel", "page": 129, "quote": "The thalamus is an egg-shaped structure that constitutes the dorsal portion of the diencephalon.", "llm": "sonnet"}
@@ -1723,6 +1728,7 @@
 {"id": "q_8be6256b3e24", "corpus": "stahl", "page": 411, "quote": "NMDA receptor antagonist"}
 {"id": "q_8c0125808cbf", "corpus": "stahl", "page": 647, "quote": "Trilafon"}
 {"id": "q_8c0e3c71b269", "corpus": "stahl", "page": 779, "quote": "Xywav"}
+{"id": "q_8c293862b4c7", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in putamen: probe 1051414 PACall present in 62/62 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_8c8dbdf40de6", "corpus": "gtopdb", "page": 373, "quote": "Hippocampus, caudate nucleus, putamen, nucleus accumbens, amygdala, cervical vagus nerve.", "species": "Human", "llm": "sonnet"}
 {"id": "q_8cb8ef4b3e24", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in thalamus: probe 1027284 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_8cc7aa3512cc", "corpus": "gtopdb_class", "page": 215, "quote": "D2 receptor (DRD2), GtoPdb target 215 | type: gpcr | family: Dopamine receptors"}
@@ -1768,6 +1774,7 @@
 {"id": "q_901fb6325f33", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "H 2 | 136 | ND | ND | Regulates the release of hydrochloric acid into the stomach ."}
 {"id": "q_9032484238a2", "corpus": "stahl", "page": 349, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet"}
 {"id": "q_90514798b68c", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "5-HT 7 | 265 | Human"}
+{"id": "q_905e5ba9dcbf", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in temporal: probe 1051414 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_907033f01eb9", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in medulla: probe 1059351 PACall present in 238/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_9092cada4791", "corpus": "stahl", "page": 601, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet"}
 {"id": "q_909ccdbe4ef4", "corpus": "kandel", "page": 59, "quote": "The various brain regions described above are often divided into three broader regions: the hindbrain (comprising the medulla oblongata, pons, and cerebellum); midbrain (comprising the tectum, substantia nigra, reticular formation, and periaqueductal gray matter); and forebrain (comprising the diencephalon and cerebrum).", "llm": "sonnet"}
@@ -1917,6 +1924,7 @@
 {"id": "q_9b15883578fa", "corpus": "wikipedia_pharm", "page": "indalpine", "quote": "Indalpine is a selective serotonin reuptake inhibitor (SSRI) and antihistamine .\nIndalpine was invented by 1977 and was introduced for medical use in France in 1983."}
 {"id": "q_9b22209a9917", "corpus": "gtopdb_ki", "page": "chlorpromazine", "quote": "chlorpromazine at 5-HT7 receptor (HTR7, Human): Antagonist / Inverse agonist, pKi 7.6 [PMID 15821958]", "species": "Human"}
 {"id": "q_9b2234c0a457", "corpus": "kandel", "page": 1075, "quote": "A group of hypothalamic peptide hormones that control pituitary hormone secretion from the five classic endocrine cell types in the anterior pituitary.", "llm": "sonnet"}
+{"id": "q_9b3a12f6911d", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in caudate: probe 1051414 PACall present in 90/91 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_9b44ce55cea5", "corpus": "carlat", "page": 198, "quote": "Reversible inhibitor of vesicular monoamine transporter 2 (VMAT2).", "llm": "sonnet"}
 {"id": "q_9b46b6db1279", "corpus": "stahl", "page": 911, "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform agonist of GABA-A/benzodiazepine receptors", "llm": "sonnet"}
 {"id": "q_9b4bacd9ac63", "corpus": "gtopdb_ki", "page": "cabergoline", "quote": "cabergoline at D4 receptor (DRD4, Human): Agonist / Partial agonist, pKi 7.3 [PMID 12388666]", "species": "Human"}
@@ -2020,6 +2028,7 @@
 {"id": "q_a2013005e481", "corpus": "stahl", "page": 859, "quote": "Synthetic hormone; antidepressant adjunct", "llm": "sonnet"}
 {"id": "q_a209f9f39fa9", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 6.2 [PMID 8935801]", "species": "Human"}
 {"id": "q_a234ceb85df5", "corpus": "wikipedia_fr", "page": "qu_tiapine", "quote": "Ketipinor"}
+{"id": "q_a239a827f244", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in hippocampus: probe 1051414 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_a27e425a153a", "corpus": "stahl", "page": 875, "quote": "Stavzor"}
 {"id": "q_a28f4a3c87a1", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "D 5 | 290 | Antagonist"}
 {"id": "q_a298356b34d2", "corpus": "kandel", "page": 1117, "quote": "There are also GABAergic projections from the NAc to the VTA, with some in a direct pathway innervating the VTA and some in an indirect pathway innervating the VTA via intervening GABAergic neurons in the ventral pallidum", "llm": "sonnet"}
@@ -2362,6 +2371,7 @@
 {"id": "q_bbdd9312ed3c", "corpus": "stahl", "page": 701, "quote": "Half-life approximately 74 hours"}
 {"id": "q_bbe6d15dc9d4", "corpus": "wikipedia_pharm", "page": "tizanidine", "quote": "Tizanidine is an α 2 receptor agonist closely related to clonidine ."}
 {"id": "q_bbf72b754844", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "M 5 | 6,340–>10,000"}
+{"id": "q_bc4ba0d81fcb", "corpus": "gtopdb_ki", "page": "furosemide", "quote": "furosemide at Basolateral Na-K-Cl symporter (SLC12A2, Human): Inhibitor / Inhibition, pIC50 5.13 [PMID 11882915]"}
 {"id": "q_bc63bb1e4c25", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in occipital: probe 1022773 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_bc8b8004624a", "corpus": "stahl", "page": 133, "quote": "Wellbutrin XL"}
 {"id": "q_bc8f24cec817", "corpus": "wikipedia_fr", "page": "isocarboxazide", "quote": "Enerzer"}
@@ -2799,6 +2809,7 @@
 {"id": "q_de63555b9118", "corpus": "stahl", "page": 239, "quote": "Austedo"}
 {"id": "q_de647f12e807", "corpus": "wikipedia_pharm", "page": "imipramine", "quote": "Metabolism | Liver ( CYP1A2 , CYP2C19 , CYP2D6 )"}
 {"id": "q_de7bb86398e3", "corpus": "stahl", "page": 507, "quote": "Medical food (bioavailable form of folate)", "llm": "sonnet"}
+{"id": "q_de8c7d03b047", "corpus": "gtopdb_ki", "page": "bumetanide", "quote": "bumetanide at Basolateral Na-K-Cl symporter (SLC12A2, Human): Inhibitor / Inhibition, pIC50 5.6 [PMID 11882915]"}
 {"id": "q_de98895ddb93", "corpus": "wikipedia_pharm", "page": "cyamemazine", "quote": "D 4 | 5.3 | Human"}
 {"id": "q_ded81e10535d", "corpus": "stahl", "page": 875, "quote": "Depakene"}
 {"id": "q_dede75dbeb18", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "5-HT 1F | 583 | Human"}
@@ -2882,6 +2893,7 @@
 {"id": "q_e46994898839", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "5-HT 2A | 32–398 | Human"}
 {"id": "q_e48d46210132", "corpus": "stahl", "page": 496, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_e49221b05a41", "corpus": "wikipedia_pharm", "page": "loprazolam", "quote": "Elimination half-life | 6–12 hours"}
+{"id": "q_e493feeb1b96", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in frontal: probe 1051414 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_e49af9451ed2", "corpus": "stahl_essential", "page": 406, "quote": "Serotonin inhibits primary afferent terminals via postsynaptic 5HT1B/D receptors (Figure 9-2). These inhibitory receptors are G-protein-coupled, and indirectly influence ion channels to hyperpolarize the nerve terminal and inhibit nociceptive neurotransmitter release."}
 {"id": "q_e4cc0e108591", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in temporal: probe 1059351 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e4d4948e9b80", "corpus": "stahl_essential", "page": 489, "quote": "Lisdexamfetamine is the prodrug of D-amphetamine, linked to the amino acid lysine. It is only centrally active as D-amphetamine once it has been cleaved in the stomach into the active compounds D-amphetamine plus free L-lysine"}
@@ -3035,6 +3047,7 @@
 {"id": "q_f07356fe607c", "corpus": "wikipedia_pharm", "page": "zopiclone", "quote": "Metabolism | Hepatic through CYP3A4 and CYP2E1"}
 {"id": "q_f0b6e3d11eae", "corpus": "stahl", "page": 40, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet"}
 {"id": "q_f0ed12ee5d4b", "corpus": "stahl", "page": 511, "quote": "Focalin"}
+{"id": "q_f0feb36c8a8b", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in amygdala: probe 1051414 PACall present in 67/67 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_f11a0977e7a9", "corpus": "wikipedia_fr", "page": "acide_valpro_que", "quote": "Dépamide"}
 {"id": "q_f133ac439e8c", "corpus": "stahl", "page": 615, "quote": "Acts as a use-dependent blocker of voltagesensitive sodium channels", "llm": "sonnet"}
 {"id": "q_f1b7e0a086e5", "corpus": "stahl", "page": 471, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet"}
@@ -3174,6 +3187,7 @@
 {"id": "q_fccce07c0dff", "corpus": "stahl", "page": 872, "quote": "[+]-α-HTBZ is further metabolized in part by CYP2D6"}
 {"id": "q_fd07438aa9c4", "corpus": "stahl", "page": 61, "quote": "Adzenys ER"}
 {"id": "q_fd0c7fc51f22", "corpus": "stahl", "page": 511, "quote": "Increases norepinephrine and especially dopamine actions by blocking their reuptake", "llm": "sonnet"}
+{"id": "q_fd2883ffa7ca", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in parietal: probe 1051414 PACall present in 290/290 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_fd35e775180b", "corpus": "wikipedia_pharm", "page": "hydroxyzine", "quote": "Metabolism | Liver by CYP3A4 and CYP3A5"}
 {"id": "q_fd4df61055c8", "corpus": "allen_ahba", "page": "CHRM3", "quote": "CHRM3 detected in temporal: probe 1023697 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_fd5a2a66a2d8", "corpus": "allen_ahba", "page": "HTR5A", "quote": "HTR5A detected in accumbens: probe 1021969 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}

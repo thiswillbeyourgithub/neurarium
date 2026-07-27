@@ -84,10 +84,33 @@ def collect() -> tuple[dict[str, dict], list[str], int]:
     return buckets, warnings, skipped
 
 
+def _merged_over_cache(payload: dict) -> tuple[dict, int]:
+    """Layer freshly applied profiles over the committed cache: (payload, carried).
+
+    ``carried`` counts the profiles that were already there and are not in this run,
+    i.e. exactly what a --replace would have discarded.
+    """
+    if not OUT.exists():
+        return payload, 0
+    cached = json.loads(OUT.read_text("utf-8"))
+    carried = 0
+    for bucket in ("receptors", "targets"):
+        old = cached.get(bucket) or {}
+        fresh = payload.get(bucket) or {}
+        carried += len(set(old) - set(fresh))
+        if old:
+            payload[bucket] = {k: v for k, v in sorted({**old, **fresh}.items())}
+    return payload, carried
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would be written, change nothing")
+    ap.add_argument("--replace", action="store_true",
+                    help="write ONLY the profiles in density.json, dropping any "
+                         "already in the cache (use after a full fetch_allen.py run; "
+                         "the default merges, so a scoped --only run is safe)")
     args = ap.parse_args()
 
     buckets, warnings, skipped = collect()
@@ -97,6 +120,16 @@ def main() -> int:
     n_rec, n_tgt = len(buckets["receptors"]), len(buckets["targets"])
     print(f"applied {n_rec + n_tgt} density profile(s), skipped {skipped} "
           f"({n_rec} receptors, {n_tgt} targets)")
+    # MERGE by default. ``fetch_allen.py --only <owner>`` rewrites density.json with
+    # just that owner, so writing the fresh payload straight out would silently delete
+    # every other profile from the committed cache (it did once, for 53 of them). A
+    # full-corpus refresh that genuinely wants to drop a now-unreliable profile passes
+    # --replace.
+    if not args.replace:
+        payload, carried = _merged_over_cache(payload)
+        if carried:
+            print(f"merged into the existing cache ({carried} profile(s) carried over; "
+                  f"pass --replace to rebuild from scratch)")
     if args.dry_run:
         print("(dry run: not written)")
         return 0

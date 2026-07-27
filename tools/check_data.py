@@ -508,7 +508,11 @@ def check_reachability(report, meta, structures, projections, circuits,
         "inverse_agonist": {"receptor", "receptor_group"},
         "pam": {"receptor", "receptor_group"},
         "nam": {"receptor", "receptor_group"},
-        "blocker": {"ion_channel", "vesicle_protein"},
+        # A cotransporter (NKCC1) moves ions rather than a transmitter, so it is
+        # blocked, never "reuptake-inhibited"; its own type keeps `blocker` legal
+        # here without loosening it on a reuptake pump, where it would silently
+        # mean no tone at all.
+        "blocker": {"ion_channel", "vesicle_protein", "cotransporter"},
     }
     compat_errors = 0
     drug_ids = {d.get("id") for d in drugs}

@@ -129,6 +129,8 @@ BASE_ALLEN = {
 # ANY member gene detects there; the citation names the member gene that did.
 TARGET_GENES = {
     "sert": ["SLC6A4"], "net": ["SLC6A2"], "dat": ["SLC6A3"], "gat": ["SLC6A1"],
+    # NKCC1, the chloride-gradient setter (SLC12A1 is its kidney-only sibling).
+    "nkcc1": ["SLC12A2"],
     "vmat2": ["SLC18A2"], "mao_a": ["MAOA"], "mao_b": ["MAOB"],
     "ache": ["ACHE"], "bche": ["BCHE"],
     "carbonic_anhydrase": ["CA2"], "pde5": ["PDE5A"],

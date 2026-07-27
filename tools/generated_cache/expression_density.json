@@ -1081,6 +1081,32 @@
         }
       ]
     },
+    "nkcc1": {
+      "donors": 6,
+      "profile": {
+        "amygdala": -0.42,
+        "caudate": 0.09,
+        "cerebellum": -0.96,
+        "frontal": -0.26,
+        "hippocampus": -0.88,
+        "hypothalamus": -0.23,
+        "occipital": -0.15,
+        "parietal": -0.19,
+        "putamen": 0.67,
+        "temporal": -0.34,
+        "thalamus": 0.98
+      },
+      "reliability": 0.87,
+      "sources": [
+        {
+          "corpus": "allen_ahba",
+          "page": "SLC12A2",
+          "provenance": "verified",
+          "quote": "SLC12A2 relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1051414, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.87: thalamus +0.98 (6d), putamen +0.67 (6d), caudate +0.09 (6d), occipital -0.15 (6d), parietal -0.19 (6d), hypothalamus -0.23 (6d), frontal -0.26 (6d), temporal -0.34 (6d), amygdala -0.42 (6d), hippocampus -0.88 (6d), cerebellum -0.96 (6d)",
+          "species": "Human"
+        }
+      ]
+    },
     "orexin": {
       "donors": 5,
       "profile": {

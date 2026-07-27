@@ -425,6 +425,120 @@
         }
       ]
     },
+    "nkcc1": {
+      "name": "Na-K-2Cl cotransporter (NKCC1)",
+      "type": "cotransporter",
+      "system": "gabaergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "parietal",
+        "occipital",
+        "hippocampus",
+        "thalamus",
+        "hypothalamus",
+        "cerebellum",
+        "caudate",
+        "putamen",
+        "amygdala"
+      ],
+      "classification_provenance": "llm",
+      "location_sources": {
+        "amygdala": [
+          {
+            "quote_id": "q_f0feb36c8a8b",
+            "provenance": "verified"
+          }
+        ],
+        "caudate": [
+          {
+            "quote_id": "q_9b3a12f6911d",
+            "provenance": "verified"
+          }
+        ],
+        "cerebellum": [
+          {
+            "quote_id": "q_41ae16d38c86",
+            "provenance": "verified"
+          }
+        ],
+        "frontal": [
+          {
+            "quote_id": "q_e493feeb1b96",
+            "provenance": "verified"
+          }
+        ],
+        "hippocampus": [
+          {
+            "quote_id": "q_a239a827f244",
+            "provenance": "verified"
+          }
+        ],
+        "hypothalamus": [
+          {
+            "quote_id": "q_7896203292c1",
+            "provenance": "verified"
+          }
+        ],
+        "occipital": [
+          {
+            "quote_id": "q_304038645f3f",
+            "provenance": "verified"
+          }
+        ],
+        "parietal": [
+          {
+            "quote_id": "q_fd2883ffa7ca",
+            "provenance": "verified"
+          }
+        ],
+        "putamen": [
+          {
+            "quote_id": "q_8c293862b4c7",
+            "provenance": "verified"
+          }
+        ],
+        "temporal": [
+          {
+            "quote_id": "q_905e5ba9dcbf",
+            "provenance": "verified"
+          }
+        ],
+        "thalamus": [
+          {
+            "quote_id": "q_55cba261151b",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.87,
+        "donors": 6,
+        "profile": {
+          "thalamus": 0.98,
+          "putamen": 0.67,
+          "caudate": 0.09,
+          "occipital": -0.15,
+          "parietal": -0.19,
+          "hypothalamus": -0.23,
+          "frontal": -0.26,
+          "temporal": -0.34,
+          "amygdala": -0.42,
+          "hippocampus": -0.88,
+          "cerebellum": -0.96
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_3563d3d2a194",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "wikipedia": "https://en.wikipedia.org/wiki/Na-K-Cl_cotransporter",
+      "wikipedia_provenance": "sourced"
+    },
     "vmat2": {
       "name": "Vesicular monoamine transporter (VMAT2)",
       "type": "transporter",
@@ -2407,6 +2521,7 @@
   "target_type_labels": {
     "receptor": "Receptor",
     "transporter": "Transporter",
+    "cotransporter": "Ion cotransporter",
     "enzyme": "Enzyme",
     "ion_channel": "Ion channel",
     "vesicle_protein": "Vesicle protein",
@@ -2414,6 +2529,7 @@
   },
   "target_type_colors": {
     "transporter": "#3fb6a8",
+    "cotransporter": "#4a90d9",
     "enzyme": "#d8a23a",
     "ion_channel": "#7c83ff",
     "vesicle_protein": "#5fb56a",
@@ -2632,8 +2748,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1668,
-        "verified": 1656,
+        "total": 1670,
+        "verified": 1658,
         "sourced": 0,
         "llm": 0,
         "nosource": 12,
@@ -2656,12 +2772,12 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 243,
+        "total": 244,
         "verified": 199,
         "sourced": 0,
-        "llm": 44,
+        "llm": 45,
         "nosource": 0,
-        "missing": 44
+        "missing": 45
       },
       "drug_half_life": {
         "total": 185,
@@ -2776,12 +2892,12 @@
         "missing": 0
       },
       "targets": {
-        "total": 20,
+        "total": 21,
         "verified": 20,
         "sourced": 0,
-        "llm": 0,
+        "llm": 1,
         "nosource": 0,
-        "missing": 0
+        "missing": 1
       },
       "target_polarity": {
         "total": 2,
@@ -2792,16 +2908,16 @@
         "missing": 0
       },
       "target_locations": {
-        "total": 96,
-        "verified": 82,
+        "total": 107,
+        "verified": 93,
         "sourced": 0,
         "llm": 14,
         "nosource": 0,
         "missing": 14
       },
       "target_density": {
-        "total": 17,
-        "verified": 17,
+        "total": 18,
+        "verified": 18,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2816,30 +2932,30 @@
         "missing": 0
       },
       "references": {
-        "total": 379,
+        "total": 381,
         "verified": 0,
-        "sourced": 379,
+        "sourced": 381,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 3959,
-      "verified": 3802,
+      "total": 3975,
+      "verified": 3816,
       "sourced": 0,
-      "llm": 143,
+      "llm": 145,
       "nosource": 14,
-      "missing": 157,
-      "backed": 3802,
+      "missing": 159,
+      "backed": 3816,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1649,
+      "bindings_total": 1651,
       "bindings_with_ki": 1444,
-      "pct_bindings_with_ki": 88,
-      "drugs_total": 228,
-      "drugs_without_ki": 73,
+      "pct_bindings_with_ki": 87,
+      "drugs_total": 229,
+      "drugs_without_ki": 74,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -2852,6 +2968,7 @@
         "brexanolone",
         "bromazepam",
         "brotizolam",
+        "bumetanide",
         "butobarbital",
         "carbamazepine",
         "chloral_hydrate",

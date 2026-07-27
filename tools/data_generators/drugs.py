@@ -294,6 +294,21 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
             "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter",
             "regions": ["frontal", "temporal", "thalamus", "hippocampus",
                         "cerebellum"]},
+    # NKCC1 moves no transmitter: it imports chloride, setting the gradient that
+    # decides whether opening a GABA-A channel hyperpolarizes a neuron or
+    # depolarizes it. That is why it is filed under the GABA system despite being a
+    # cotransporter, and why blocking it (bumetanide) is studied where that gradient
+    # is thought to be immature or reverted. Do not confuse it with its
+    # loop-diuretic sibling NKCC2 / SLC12A1, which GtoPdb itself labels the
+    # "Kidney-specific Na-K-Cl symporter": that one is the kidney's, this one is in
+    # neurons and glia.
+    "nkcc1": {"name": {"en": "Na-K-2Cl cotransporter (NKCC1)",
+                       "fr": "Cotransporteur Na-K-2Cl (NKCC1)"},
+              "type": "cotransporter", "system": "gabaergic",
+              "wikipedia": "https://en.wikipedia.org/wiki/Na-K-Cl_cotransporter",
+              "regions": ["frontal", "temporal", "parietal", "occipital",
+                          "hippocampus", "thalamus", "hypothalamus", "cerebellum",
+                          "caudate", "putamen", "amygdala"]},
     "vmat2": {"name": {"en": "Vesicular monoamine transporter (VMAT2)",
                        "fr": "Transporteur vésiculaire des monoamines (VMAT2)"},
               "type": "transporter", "system": "dopaminergic",
@@ -435,6 +450,10 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
 TARGET_TYPE_LABELS: dict[str, str] = {
     "receptor": "Receptor",
     "transporter": "Transporter",
+    # A cotransporter moves ions, not a transmitter, so it can never set a system's
+    # tone the way a reuptake pump does. Its own type keeps that distinction visible
+    # (and keeps `blocker` a legal action, which it is not on a reuptake pump).
+    "cotransporter": "Ion cotransporter",
     "enzyme": "Enzyme",
     "ion_channel": "Ion channel",
     "vesicle_protein": "Vesicle protein",
@@ -446,6 +465,7 @@ TARGET_TYPE_LABELS: dict[str, str] = {
 # these. Emitted into meta.json (language-neutral), so the viewer hardcodes nothing.
 TARGET_TYPE_COLORS: dict[str, str] = {
     "transporter": "#3fb6a8",      # teal
+    "cotransporter": "#4a90d9",    # blue (an ion mover, not a transmitter pump)
     "enzyme": "#d8a23a",           # amber
     "ion_channel": "#7c83ff",      # periwinkle
     "vesicle_protein": "#5fb56a",  # green

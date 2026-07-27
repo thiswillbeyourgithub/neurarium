@@ -390,6 +390,7 @@ FR: dict[str, str] = {
     "Enzyme": "Enzyme",
     "Ion channel": "Canal ionique",
     "Vesicle protein": "Protéine vésiculaire",
+    "Ion cotransporter": "Cotransporteur ionique",
     "Receptor group": "Groupe de récepteurs",
     "Noradrenaline": "Noradrénaline",
     "Serotonin": "Sérotonine",
