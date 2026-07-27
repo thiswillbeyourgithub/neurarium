@@ -184,6 +184,7 @@
 {"id": "q_10c46a2744bf", "corpus": "stahl", "page": 193, "quote": "Kapvay"}
 {"id": "q_10df2a5766e5", "corpus": "wikipedia_fr", "page": "brotizolam", "quote": "Noctilan"}
 {"id": "q_10ea72df23ac", "corpus": "stahl", "page": 801, "quote": "Benzodiazepine (hypnotic)", "llm": "sonnet"}
+{"id": "q_10ebb012aff5", "corpus": "gtopdb_ki", "page": "reserpine", "quote": "reserpine at Vesicular monoamine transporter 2 (SLC18A2, Human): Inhibitor / Inhibition, pKi 7.9 [PMID 8643547]", "species": "Human"}
 {"id": "q_10ef1e3e107c", "corpus": "allen_ahba", "page": "HRH2", "quote": "HRH2 detected in frontal: probe 1019471 PACall present in 471/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_10ef2d60adc2", "corpus": "stahl", "page": 415, "quote": "Neuroscience-based Nomenclature: glutamate, voltage-gated sodium channel blocker (Glu-CB)", "llm": "sonnet"}
 {"id": "q_110e74b0959f", "corpus": "allen_ahba", "page": "HRH3", "quote": "HRH3 detected in parietal: probe 1046403 PACall present in 133/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -681,6 +682,7 @@
 {"id": "q_3a43b241be1a", "corpus": "gtopdb_class", "page": 10, "quote": "5-HT5A receptor (HTR5A), GtoPdb target 10 | type: gpcr | family: 5-Hydroxytryptamine receptors"}
 {"id": "q_3a4f15dbe6b9", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1026650, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.87: thalamus +1.57 (5d), hippocampus +0.67 (5d), hypothalamus +0.52 (5d), amygdala +0.42 (5d), frontal +0.19 (5d)", "species": "Human"}
 {"id": "q_3a5c8d2dcf27", "corpus": "kandel", "page": 1124, "quote": "This work is beginning to define the distinct roles that various glutamatergic projections to the nucleus accumbens— from the prefrontal cortex, hippocampus, amygdala, and thalamus—play in controlling different cell types in the nucleus accumbens and the broader reward circuitry and in producing distinct addiction-related behavioral abnormalities.", "llm": "sonnet"}
+{"id": "q_3a7bcf33772e", "corpus": "gtopdb_ki", "page": "reserpine", "quote": "reserpine at Vesicular monoamine transporter 2 (SLC18A2, Human): Inhibitor / Inhibition, pKi 7.9 [PMID 8643547]"}
 {"id": "q_3ab0065a7972", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in hippocampus: probe 1028488 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3ab39664ba7e", "corpus": "wikipedia_fr", "page": "midazolam", "quote": "Dormicum"}
 {"id": "q_3ab4d8456e3d", "corpus": "gtopdb_class", "page": 319, "quote": "μ receptor (OPRM1), GtoPdb target 319 | transduction: Gi/Go family | effectors: Adenylyl cyclase stimulation, Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments"}

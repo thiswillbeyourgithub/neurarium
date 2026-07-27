@@ -8050,6 +8050,27 @@
     }
    }
   },
+  "reserpine": {
+   "vmat2": {
+    "action": "vesicular_inhibitor",
+    "ki": {
+     "max": 12.5893,
+     "median": 12.5893,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8643547",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "reserpine",
+     "provenance": "verified",
+     "quote": "reserpine at Vesicular monoamine transporter 2 (SLC18A2, Human): Inhibitor / Inhibition, pKi 7.9 [PMID 8643547]",
+     "species": "Human"
+    }
+   }
+  },
   "risperidone": {
    "5ht1a": {
     "action": "antagonist",
