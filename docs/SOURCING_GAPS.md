@@ -10,20 +10,29 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-27, after the drug-metabolism pass)
+## Snapshot (2026-07-27, after the GtoPdb classification pass)
 
-Headline: **3611 / 3843 knowledge nodes backed (94%)**. In the tally a bare `llm`
+Headline: **3673 / 3843 knowledge nodes backed (96%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
-"missing" below means `llm` or no source at all. 232 knowledge nodes are missing.
+"missing" below means `llm` or no source at all. 170 knowledge nodes are missing.
 
-> **The headline read 96% (1673 / 1743) at the previous snapshot and reads 94% now, while
-> the verified count more than doubled.** The denominator grew faster than the gap, for two
-> reasons worth naming rather than smoothing over:
+> **What the GtoPdb classification pass (corpus #12) just did, same day:** 232 missing to
+> 170, 94% to 96%. `receptor_class` 30 to **55 / 56** (only sigma-1 left, a GtoPdb
+> `other_protein` whose type does not assert our "chaperone"), `receptor_sign` 13 to
+> **43 / 56**, `receptors` family 54 to **56 / 56** (5-HT1E and 5-HT1F, which the Essential
+> corpus never names), `targets` 16 to **20 / 20**, plus the last `target_polarity` (the α2
+> autoreceptor sentence, Stahl Essential p271) and the last 2 `references` (a Wikipedia link
+> for the tuberomammillary nucleus). `receptor_synaptic` is untouched: GtoPdb has no
+> pre/post-synaptic field at all.
+>
+> **The earlier drop from 96% (1673 / 1743) to 94% is still worth naming**, because the
+> denominator grew faster than the gap for two structural reasons:
 > - **The receptor classification node was split into four independent sub-claims**
 >   (neurotransmitter `family`, mechanism `receptor_class`, `sign`, `synaptic` site). One
 >   grade per receptor became four, and the attributes a quote never actually asserted
->   stopped riding the family quote's grade. **117 of the 232 missing nodes are that split.**
->   They are not new ignorance; they are ignorance that used to be hidden.
+>   stopped riding the family quote's grade. That split was 117 missing nodes; the GtoPdb
+>   pass closed 55 of them and 62 remain. They were never new ignorance; they were ignorance
+>   that used to be hidden.
 > - **70 drugs were added outside Stahl's roster** (the roster pass at the end of this file,
 >   v3.28 to v3.29). Stahl is where the class line and most binding quotes come from, so each
 >   non-Stahl drug arrives with an unsourceable `drug_categories` node, and the barbiturates
@@ -40,39 +49,34 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 
 | Node kind | Missing | Total | Share of the gap | Difficulty | Best lever |
 | --- | ---: | ---: | ---: | --- | --- |
-| `receptor_synaptic` (pre/post site) | 48 | 56 | 20.7% | Medium | one GtoPdb receptor-page pass, with sign + class |
-| `receptor_sign` (excit./inhib.) | 43 | 56 | 18.5% | Medium | same pass |
-| `drug_categories` | 36 | 235 | 15.5% | limit | 25 non-Stahl drugs + 9 recreational + 2 flagged |
-| `drug_bindings` | 33 | 1688 | 14.2% | Hard | no database assays the GABA-A site; primary lit |
-| `receptor_class` (GPCR/ionotropic) | 26 | 56 | 11.2% | Medium | same pass |
-| `receptor_locations` | 23 | 383 | 9.9% | limit | off-atlas bases + Allen not-detected |
-| `target_locations` | 14 | 96 | 6.0% | limit | SERT/NET terminals: mRNA sits at the source nucleus |
-| `targets` (classification) | 4 | 20 | 1.7% | Medium | absent from Stahl Essential; same GtoPdb pass |
-| `receptors` (family) | 2 | 56 | 0.9% | limit | 5-HT1E/1F absent from the corpus |
-| `projections` | 2 | 58 | 0.9% | Hard | claustrum primary lit |
-| `target_polarity` | 1 | 2 | 0.4% | Easy | one quote for the α2 group's sign/synaptic flag |
-| `references` | 2 | 371 | not in headline | Easy | a Wikipedia link for tuberomammillary L/R |
-| everything else | 0 | 2938 | closed | done | see "Kinds now closed" below |
+| `receptor_synaptic` (pre/post site) | 48 | 56 | 28.2% | Hard | no database has the field; textbook prose |
+| `drug_categories` | 36 | 235 | 21.2% | limit | 25 non-Stahl drugs + 9 recreational + 2 flagged |
+| `drug_bindings` | 33 | 1688 | 19.4% | Hard | no database assays the GABA-A site; primary lit |
+| `receptor_locations` | 23 | 383 | 13.5% | limit | off-atlas bases + Allen not-detected |
+| `target_locations` | 14 | 96 | 8.2% | limit | SERT/NET terminals: mRNA sits at the source nucleus |
+| `receptor_sign` (excit./inhib.) | 13 | 56 | 7.6% | Hard | GtoPdb's transduction is mixed/absent for these |
+| `projections` | 2 | 58 | 1.2% | Hard | claustrum primary lit |
+| `receptor_class` (GPCR/ionotropic) | 1 | 56 | 0.6% | limit | sigma-1 is a GtoPdb `other_protein` |
+| `references` | 0 | 371 | not in headline | done | closed |
+| everything else | 0 | 1157 | closed | done | see "Kinds now closed" below |
 
-**The shape of the problem: one lever now dominates again.** The three receptor-attribute
-kinds are **117 nodes, 50% of the whole gap**, and they are one coherent job: a receptor
-**classification database** (IUPHAR/BPS GtoPdb) states family, type and transduction for all
-56 subtypes in a uniform format, which no book's running prose does. With the 4 `targets`,
-**121 of the 232 missing nodes (52%) sit behind that one corpus**, though they do not all close
-equally: the mechanism class is a clean read, the sign is derivable from transduction under a
-conservative rule, and the pre/post site has no field anywhere and is the hard residue (see
-#1). Everything else is small or a hard limit: 37 expression-location nodes are
-off-atlas or mRNA-at-the-source-nucleus, the 36 `drug_categories` and 33 `drug_bindings` are
-mostly the non-Stahl roster meeting corpora that do not cover it, and the last 2 `projections`
-need claustrum-specific primary literature.
+**The shape of the problem: no single lever dominates any more.** The GtoPdb classification
+pass took the 121-node block that used to be half the gap and left 62 of it, of which 48 are
+the one attribute no database carries. What is left is four roughly equal piles, three of them
+documented limits rather than oversights: **48 `receptor_synaptic`** (pre/post site, needs
+textbook prose, a fraction will honestly stay `llm`), **36 `drug_categories`** and **33
+`drug_bindings`** (both mostly the non-Stahl roster meeting corpora that do not cover it),
+and **37 expression-location nodes** (off-atlas bases, or transporter mRNA sitting at the
+source nucleus). The residue is small and specific: 13 `receptor_sign` GtoPdb could not map,
+sigma-1's `receptor_class`, and the 2 claustrum `projections`.
 
-Eleven corpora are wired into `SOURCE_CORPORA` today: five books (`stahl`, `kandel`,
-`stahl_essential`, `carlat`, `nieuwenhuys`) and six data sources (the `pdsp_ki` CSV, the
-`gtopdb` tissue API, the `allen_ahba` microarray, `wikipedia_pharm`, `wikipedia_fr`, and
-`gtopdb_ki`). The book-prose wins they allow are essentially exhausted (see the sourcing
-memory). What remains needs a **receptor-classification database** (the 121 nodes above), a
-corpus that covers **non-Stahl marketed drugs** (the class lines), or **primary literature**
-(the claustrum pathways, a handful of subtype affinities).
+Twelve corpora are wired into `SOURCE_CORPORA` today: five books (`stahl`, `kandel`,
+`stahl_essential`, `carlat`, `nieuwenhuys`) and seven data sources (the `pdsp_ki` CSV, the
+`gtopdb` tissue API, the `allen_ahba` microarray, `wikipedia_pharm`, `wikipedia_fr`,
+`gtopdb_ki`, and `gtopdb_class`). The book-prose wins they allow are essentially exhausted
+(see the sourcing memory). What remains needs a **neuropharmacology textbook** read for
+pre/post site, a corpus that covers **non-Stahl marketed drugs** (the class lines), or
+**primary literature** (the claustrum pathways, a handful of subtype affinities).
 
 ---
 
@@ -202,47 +206,62 @@ counts, mirroring `fetch_ki.py`'s representative-row choice.
 
 ## The gaps, biggest lever first
 
-### 1. `receptor_class` + `receptor_sign` + `receptor_synaptic`, 117 / 168 missing (**50% of the whole gap**)
+### 1. `receptor_synaptic`, 48 / 56 missing (**28% of the whole gap**)
 
-**What.** Three of the four sub-claims a receptor's classification is split into:
-- `receptor_class`, the mechanism (GPCR versus ionotropic): **30 / 56 verified**, 26 missing.
-- `receptor_sign` (excitatory / inhibitory / modulatory): **13 / 56 verified**, 43 missing.
-- `receptor_synaptic` (presynaptic / postsynaptic / both): **8 / 56 verified**, 48 missing.
+**What.** The pre- versus postsynaptic site sub-claim, one of the four a receptor's
+classification is split into. Its three siblings are now essentially closed by the GtoPdb
+classification pass (corpus #12): `family` 56 / 56, `receptor_class` 55 / 56,
+`receptor_sign` 43 / 56. This one it could not touch at all.
 
-(The fourth, `family`, is 54 / 56, see #7.)
+**Why it is not verified.** Two independent reasons, and neither is an oversight:
+- **No database carries the field.** GtoPdb states type, family, transduction, tissue
+  distribution and ligand affinities, and never where on the neuron the receptor sits.
+  Grepping the 47 cached raw target responses found ~10 mentions of "presynaptic" or
+  "postsynaptic", mostly inside reference *titles*. Allen is mRNA. PDSP is affinity.
+- **Running prose states it rarely, and a compound value needs two quotes.** A Stahl
+  Essential quote grades **only** the attributes listed in
+  `RECEPTOR_CLASSIFICATION_COVERAGE` for that receptor, assigned conservatively, and the
+  book names a receptor's site only when the site is the point of the passage (the 5-HT1A
+  somatodendritic autoreceptor, the 5-HT1B/D terminal autoreceptor). A `synaptic="both"`
+  needs **two** quotes, one per site, which is why only 8 are closed.
 
-**Why they are not verified.** The split is deliberate and is what exposed this: a Stahl
-Essential quote grades **only** the attributes listed for that receptor in
-`RECEPTOR_CLASSIFICATION_COVERAGE`, assigned conservatively (never when the quote and the
-record disagree: CB1's "inhibition of release" sentence describes retrograde function, not the
-receptor's own sign, so CB1 `sign` stays `llm`). Running prose names a receptor's transmitter
-family readily, its transduction mechanism sometimes, its excitatory/inhibitory sign rarely in
-a quotable sentence, and its pre- versus postsynaptic site almost never. `synaptic` is the
-worst case because a compound value (`both`) needs **two** quotes, one per site.
+**How to tackle.** A **neuropharmacology textbook** read is the only route: Rang and Dale,
+Katzung, or the Stahl Essential autoreceptor figures the prose pass skipped. The α2 polarity
+node closed exactly this way (Stahl Essential p271, "when presynaptic α2 receptors recognize
+NE, they turn off further release of NE"), so the pattern works where the book makes the
+site the subject. Budget for a minority of the 48, not all of them: for a receptor whose
+site the literature genuinely does not commit to, `llm` is the honest grade.
 
-**How to tackle. This is the biggest lever left, but the three attributes do not close
-equally, and pretending otherwise would set up a pass that half-fails.** The
-**IUPHAR/BPS Guide to Pharmacology receptor pages** are the natural corpus: GtoPdb is already
-wired twice (corpus #7 for tissue distribution, corpus #11 for ligand interactions), so a third
-slice reuses the `pages_dir` quote gate, the gene/targetId map in `fetch_gtopdb.py`, and the
-confirm-only merge pattern unchanged. Per attribute:
+### 1b. `receptor_sign`, 13 / 56 missing, and `receptor_class`, 1 / 56 missing (the classification residue)
 
-- **`receptor_class` (26): clean win.** GtoPdb classifies every target by family and type
-  (GPCR versus ligand-gated ion channel versus enzyme), which is our `receptor_class`
-  verbatim. Expect all 26.
-- **`receptor_sign` (43): derivable, with a conservative rule.** GtoPdb states **transduction**
-  (Gi/Go versus Gq versus Gs, anion versus cation channel), not a sign. Map only where it is
-  unambiguous, the same discipline the Stahl pass used, and leave the rest `llm` rather than
-  inferring. Expect most, not all.
-- **`receptor_synaptic` (48): the genuinely hard one, and the biggest.** GtoPdb has **no
-  pre/post field**; localization appears only in free-text comments, unevenly. A compound
-  `both` needs two quotes, one per site. Realistically this needs a **neuropharmacology
-  textbook** pass (Rang and Dale, Katzung, or the Stahl Essential figures the prose pass
-  skipped), and a fraction will honestly stay `llm`.
+**What is left after the GtoPdb pass.** The applier maps a receptor's **sign** from GtoPdb's
+transduction table under a deliberately narrow rule (one unambiguous primary transducer
+family, or several primary rows that agree). 13 counted receptors do not clear it, in three
+groups:
+- **7 ligand-gated ion channels** (5-HT3, AMPA, NMDA, kainate, glycine, nAChR α4β2, nAChR α7)
+  have **no transduction row at all**: GtoPdb's transduction table is a GPCR-only structure,
+  so an ion channel returns nothing to map. (GABA-A is already verified against Stahl
+  Essential, which is the route these want.)
+- **2 with an empty table** for their own reasons: GABA-B (a GPCR GtoPdb lists without a
+  transduction row) and sigma-1 (`other_protein`).
+- **4 reported conflicts**, below.
 
-Do it as one pass over all 56 receptors writing all four attributes rather than three passes,
-and **fold in the 4 `targets` of #6**, but budget for closing roughly 26 + most of 43 + a
-minority of 48, not a clean 121.
+`receptor_class` has exactly one left: **sigma-1**, which GtoPdb types as `other_protein`.
+That does not assert our "chaperone" value, so the applier writes nothing rather than
+stretching the mapping.
+
+**The 4 conflicts the pass reported and deliberately did not resolve.** a2a, cb1, mt1 and mt2
+are `modulatory` in our data, while their transduction implies a direction (Gs for a2a, Gi/Go
+for the other three; h4 is the same case but is an uncounted stub). A sourcing pass never
+rewrites data to match a source, so these stayed `llm` and are flagged here instead. Two
+readings are possible and picking one is a data decision, not a sourcing one: either
+`modulatory` is the right call for a receptor whose net effect depends on where it sits (cb1
+as a retrograde presynaptic brake), or these are genuinely inhibitory and the value should
+change. Resolve it against a textbook, then re-run the applier and the sign closes with it.
+
+**How to tackle the 7 ionotropic signs.** An ion channel's sign is its permeant ion (cation
+influx depolarizes, chloride influx hyperpolarizes), which Stahl Essential does state in
+prose for the big ones. That is a small, targeted quote hunt, not a corpus.
 
 ### 2. `drug_categories`, 36 / 235 missing (199 verified against Stahl)
 
@@ -333,29 +352,7 @@ This is a property of the assay, not a hole in our sourcing.
 atlas) would confirm terminals. Not worth a corpus for 14 nodes; the caveat is already shipped
 in the density caption.
 
-### 6. `targets` (classification), 4 / 20 missing
-
-**What.** Four non-receptor target classification nodes: carbonic anhydrase, PDE5, T-type Ca
-channel (`cav_t`), melanocortin receptor group.
-
-**Why not verified.** Confirmed absent from Stahl Essential during the receptor-mechanism pass:
-"anhydrase" and "carbonic" never appear, "T-type" is never named (the book discusses only N,
-P/Q and L-type VSCCs), and "melanocortin" appears only inside "pro-opiomelanocortin (POMC)", a
-peptide precursor, never as the receptor class. The only "phosphodiesterase" mention is PDE9/10
-in a schizophrenia passage, so citing it for PDE5 would misattribute the isoform.
-
-**How to tackle.** Fold into the **GtoPdb classification pass** in #1: all four are
-textbook-standard targets with a GtoPdb page each.
-
-### 7. `receptors` (family), 2 / 56 missing
-
-**What.** The neurotransmitter-family sub-claim, 54 / 56 verified against Stahl Essential.
-
-**The 2 that stay `llm`.** 5-HT1E and 5-HT1F: neither is named anywhere in the Essential corpus
-(5-HT1E appears only inside binding-affinity table cells, 5-HT1F not at all), so there is no
-classification sentence to quote. Same GtoPdb pass as #1 closes them.
-
-### 8. `projections`, 2 / 58 missing
+### 6. `projections`, 2 / 58 missing
 
 **What.** Two pathway arrows remain unsourced: claustrum to frontal, and claustrum to insula.
 (The tally counts a mirrored pathway once, so these are 2 nodes, not 4.) The fornix chain,
@@ -373,29 +370,7 @@ neocortical areas" sentence for both, so they were not forced.
 successors) or a tract-tracing paper, via NCBI. Given how thin claustrum connectivity is in the
 literature, they may honestly stay `llm`.
 
-### 9. `target_polarity`, 1 / 2 missing
-
-**What.** The direction-flipping `vesicular` / `sign` / `synaptic` flag a target carries when it
-sets the drug-flow overlay's sign. VMAT2 is verified; the **α2 receptor group** is `llm`.
-
-**Why it matters more than "1 node" suggests.** This flag decides whether a drug binding at α2
-drives the ascending noradrenergic overlay **up or down**, so an unsourced flag is an unsourced
-animation, not just an unsourced pill. It is also the failure mode the
-`provenance-silent-inheritance` note records: the flag used to ride the target's single
-classification grade, which never asserted it.
-
-**How to tackle.** One Stahl Essential quote stating that α2 autoreceptors are presynaptic and
-inhibit noradrenaline release. This is the cheapest verified node available anywhere in this
-document; take it with the #1 pass.
-
-### 10. `references`, 2 / 371 missing (not in the headline)
-
-**What.** The tuberomammillary nucleus (left and right) carries no `wikipedia` link, so its
-panel shows `NOSOURCE`. Every other structure, receptor, target and drug has one.
-
-**How to tackle.** Add the URL to the structure's entry in `generate_data.py`. One line.
-
-### 11. Kinds now closed
+### 7. Kinds now closed
 
 Kept as a record of which lever worked, so a later session does not re-derive it:
 
@@ -424,6 +399,22 @@ Kept as a record of which lever worked, so a later session does not re-derive it
 - **`receptor_density` 36/36 and `target_density` 17/17.** Allen microarray intensity
   (corpus #8), one node per profile with the whole profile written into the quote, published
   only above the cross-donor reliability floor.
+- **`receptors` (family) 56/56.** Stahl Essential for 54; the last two (5-HT1E and 5-HT1F,
+  which the Essential corpus never names outside affinity-table cells) against GtoPdb's own
+  family label (corpus #12), a direct read: "5-Hydroxytryptamine receptors" *is* serotonergic.
+- **`targets` (classification) 20/20.** Stahl Essential for 16; carbonic anhydrase, PDE5, the
+  T-type Ca channel and the melanocortin group against GtoPdb's `type` field (corpus #12).
+  All four were confirmed absent from Stahl Essential first ("anhydrase" and "T-type" never
+  appear; "melanocortin" only inside "pro-opiomelanocortin"; the only phosphodiesterase
+  mention is PDE9/10, so citing it for PDE5 would misattribute the isoform).
+- **`target_polarity` 2/2.** VMAT2 rode its own classification sentence (which does state
+  packaging *into* vesicles). The α2 group closed against Stahl Essential p271, "when
+  presynaptic α2 receptors recognize NE, they turn off further release of NE", one sentence
+  carrying both halves of the flag (presynaptic site, inhibitory sign). This is the node the
+  `provenance-silent-inheritance` memory is about: the flag used to ride the target's single
+  classification grade, from a quote that never addressed direction.
+- **`references` 371/371.** The last two were the tuberomammillary nucleus (left and right),
+  which had no `wikipedia` link; one line in `presentation.py`.
 
 ---
 
@@ -431,39 +422,41 @@ Kept as a record of which lever worked, so a later session does not re-derive it
 
 Ordered by **value per unit effort**, not by raw node count. Everything above step 1 is done:
 `drug_categories` against Stahl, `circuits` + `projection_groups` + `structures` +
-`projections` against Kandel and Nieuwenhuys, `receptors` family against Stahl Essential,
-`receptor_locations` against GtoPdb (Phase 1) then Allen (Phase 2b), `target_locations`
-against Allen (Phase 2a), and the whole drug-pharmacokinetics family (brands, T½,
-metabolites, metabolite bindings, enzymes) quote-gated from the start. Headline over that
-run: 55% to 67% to 78% to 95% to 96%, then to 94% as the receptor split and the roster
-expansion enlarged the denominator (see the snapshot).
+`projections` against Kandel and Nieuwenhuys, `receptors` family against Stahl Essential then
+GtoPdb, `receptor_locations` against GtoPdb (Phase 1) then Allen (Phase 2b),
+`target_locations` against Allen (Phase 2a), the whole drug-pharmacokinetics family (brands,
+T½, metabolites, metabolite bindings, enzymes) quote-gated from the start, and the **GtoPdb
+classification pass** (corpus #12: `receptor_class`, most of `receptor_sign`, the last two
+families, all four `targets`, the α2 `target_polarity`, the last 2 `references`). Headline
+over that run: 55% to 67% to 78% to 95% to 96%, then down to 94% as the receptor split and
+the roster expansion enlarged the denominator, then back to **96%** (see the snapshot).
 
-1. **The GtoPdb receptor-classification pass: up to 121 nodes, 52% of the gap, one corpus.**
-   The 117 `receptor_class` / `receptor_sign` / `receptor_synaptic` nodes plus the 4 `targets`.
-   GtoPdb is already wired twice, so the fetch/gate/merge plumbing is reuse, not new build.
-   Budget for the mechanism class closing cleanly, the sign mostly, and the pre/post site only
-   partly (#1 breaks this down). Take the 1 `target_polarity` and the 2 `references` in the
-   same commit (three lines of data between them). Nothing else here comes close on value per
-   unit effort.
-2. **The non-Stahl `drug_categories` (about 20 of 36 reachable).** The French and English
-   Wikipedia pages for these drugs are **already stored author-side** (corpora #10 and #9),
-   and an article's opening sentence states the class. Cheap because there is no new corpus
-   and no new gate; only an extract-and-judge pass over pages already on disk.
-3. **`drug_bindings` (33), opportunistic.** A PDSP refresh scoped with `--only` to the
+1. **The non-Stahl `drug_categories` (about 20 of 36 reachable).** Now the single biggest
+   *closeable* pile. The French and English Wikipedia pages for these drugs are **already
+   stored author-side** (corpora #10 and #9), and an article's opening sentence states the
+   class. Cheap because there is no new corpus and no new gate; only an extract-and-judge
+   pass over pages already on disk.
+2. **`drug_bindings` (33), opportunistic.** A PDSP refresh scoped with `--only` to the
    affected drugs, then Wikipedia pharmacodynamics prose for the older antipsychotics'
    muscarinic and α1 profiles. The 7 GABA-A modulatory-site bindings will not close: no
    database assays that site.
-4. **The last 2 `projections`**, claustrum-specific primary literature; may honestly stay
+3. **The classification residue (13 `receptor_sign` + 1 `receptor_class`), small and
+   targeted.** 7 of the signs are ligand-gated ion channels whose sign is their permeant ion,
+   which Stahl Essential states in prose; 4 are the reported conflicts, which need a *data*
+   decision before any source can back them (see #1b). Not a corpus, a quote hunt.
+4. **`receptor_synaptic` (48): the largest remaining pile, and the least tractable.** No
+   database carries the field, so it needs a neuropharmacology textbook read, and a fraction
+   will honestly stay `llm` (#1). Worth attempting only after steps 1 to 3.
+5. **The last 2 `projections`**, claustrum-specific primary literature; may honestly stay
    `llm`.
-5. **The 37 expression-location nodes: do not chase.** Off-atlas bases and transporter mRNA
+6. **The 37 expression-location nodes: do not chase.** Off-atlas bases and transporter mRNA
    sitting at the source nucleus are properties of the assay. Only a protein-level atlas
    would move them, at a licence and parcellation cost out of proportion to the count.
 
-**Sources we still need (beyond the eleven wired):**
-- **IUPHAR/BPS Guide to Pharmacology receptor pages** for the 121 classification nodes in
-  step 1. Its tissue-distribution API (corpus #7) and its ligand-interaction CSV (corpus #11)
-  are both wired already; the receptor *classification* pages are a third, still-open slice
-  of the same database.
+**Sources we still need (beyond the twelve wired):**
+- **A neuropharmacology textbook** (Rang and Dale, Katzung) for the 48 `receptor_synaptic`
+  nodes in step 4. This is the only gap left that a whole new corpus would address, and even
+  it will not close completely.
 - **NCBI/PubMed primary literature** as the genuine last resort for the handful of claims no
   reference book states: claustrum-to-frontal and claustrum-to-insula connectivity, a few
   subtype affinities.
@@ -753,6 +746,32 @@ autoreceptor (clozapine histaminergic via H3, amitriptyline cholinergic via M2, 
 noradrenergic via alpha2A/B/C, several serotonergic via 5-HT1A/1B/1D). Because per-drug flow
 intensity is normalized to the strongest engaged system, this also re-scales the overlays that
 were already there.
+
+### GtoPdb target records as a **classification** source
+
+> **Status: adopted, shipped as corpus #12 `gtopdb_class`** (2026-07-27). Same database, third
+> slice, so the fetch/gate/merge plumbing was reuse rather than new build:
+> `tools/fetch/fetch_gtopdb_class.py` -> `data_sources/gtopdb/pages_class/` ->
+> `tools/sourcing/apply_classification_sources.py`.
+
+The survey question was whether a structured database could source the receptor classification
+attributes running prose keeps missing. Answer, measured rather than assumed: **partly**, and
+knowing which part is the useful result.
+
+- **`type` is a direct read.** `gpcr` *is* metabotropic, `lgic` *is* ionotropic. Same for a
+  non-receptor target's `type` and, from the family label, a receptor's transmitter `family`.
+- **`sign` has to be mapped from the transduction table** (Gi/Go, Gs, Gq/G11), which GtoPdb
+  offers for GPCRs only. Under a narrow rule (one unambiguous primary transducer family, or
+  primary rows that agree) it reaches 43 of 56; ion channels return no table at all.
+- **Pre/post-synaptic site is simply not in the database.** No field, and the free-text
+  comments mention it about ten times across 47 cached target records, mostly inside reference
+  titles. Do not re-survey this hoping for a hidden endpoint: there is not one.
+
+The three things worth knowing before touching it again: `/services/families/{id}` 404s (the
+family name arrives on the target record instead); a transducer cell can list several
+mechanisms, so it needs splitting on commas with "G protein independent mechanism" ignored (D2
+reads "Gi/Go family, G protein independent mechanism"); and the pass reports 4 conflicts it
+must not resolve (#1b).
 
 ## Drug-roster coverage: what the Wikipedia lists have that we do not (surveyed 2026-07-26)
 
