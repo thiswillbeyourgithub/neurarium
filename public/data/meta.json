@@ -2572,8 +2572,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1694,
-        "verified": 1682,
+        "total": 1695,
+        "verified": 1683,
         "sourced": 0,
         "llm": 0,
         "nosource": 12,
@@ -2596,12 +2596,12 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 235,
+        "total": 236,
         "verified": 199,
         "sourced": 0,
-        "llm": 36,
+        "llm": 37,
         "nosource": 0,
-        "missing": 36
+        "missing": 37
       },
       "drug_half_life": {
         "total": 185,
@@ -2756,30 +2756,30 @@
         "missing": 0
       },
       "references": {
-        "total": 371,
+        "total": 372,
         "verified": 0,
-        "sourced": 371,
+        "sourced": 372,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 3975,
-      "verified": 3826,
+      "total": 3977,
+      "verified": 3827,
       "sourced": 0,
-      "llm": 135,
+      "llm": 136,
       "nosource": 14,
-      "missing": 149,
-      "backed": 3826,
+      "missing": 150,
+      "backed": 3827,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1667,
+      "bindings_total": 1668,
       "bindings_with_ki": 1386,
       "pct_bindings_with_ki": 83,
-      "drugs_total": 220,
-      "drugs_without_ki": 70,
+      "drugs_total": 221,
+      "drugs_without_ki": 71,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -2807,6 +2807,7 @@
         "estazolam",
         "eszopiclone",
         "flurazepam",
+        "furosemide",
         "gabapentin",
         "galantamine",
         "glutethimide",

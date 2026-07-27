@@ -161,6 +161,7 @@
 {"id": "q_0dbbc8f6b64a", "corpus": "stahl", "page": 728, "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope", "llm": "sonnet"}
 {"id": "q_0dbec0eed98c", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "α 2A | 192–470 | Antagonist"}
 {"id": "q_0deacb6eddd8", "corpus": "wikipedia_pharm", "page": "melperone", "quote": "H 1 | 580"}
+{"id": "q_0ded860a1ea0", "corpus": "gtopdb_ki", "page": "furosemide", "quote": "furosemide at GABAA receptor α6 subunit (GABRA6, Human): Allosteric modulator / Antagonist, no affinity reported [PMID 30275042]"}
 {"id": "q_0df01936d43b", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "5-HT 1D | 84.6 | Antagonist"}
 {"id": "q_0e03f0a51bf4", "corpus": "stahl", "page": 384, "quote": "Mean elimination half-life approximately 20 hours"}
 {"id": "q_0e20d20adf8a", "corpus": "gtopdb_ki", "page": "xanomeline", "quote": "xanomeline at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 7.4 [PMID 9884068]", "species": "Human"}
