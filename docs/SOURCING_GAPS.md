@@ -10,11 +10,11 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-27, after the GtoPdb classification pass and the metabolism pass)
+## Snapshot (2026-07-27, after the GtoPdb classification, metabolism and drug-binding passes)
 
-Headline: **3799 / 3969 knowledge nodes backed (96%)**. In the tally a bare `llm`
+Headline: **3820 / 3969 knowledge nodes backed (96%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
-"missing" below means `llm` or no source at all. 170 knowledge nodes are missing.
+"missing" below means `llm` or no source at all. 149 knowledge nodes are missing.
 
 > **What the GtoPdb classification pass (corpus #12) just did, same day:** 232 missing to
 > 170, 94% to 96%. `receptor_class` 30 to **55 / 56** (only sigma-1 left, a GtoPdb
@@ -29,6 +29,12 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 > (62 drugs Stahl has no monograph for) plus 17 `drug_metabolite_enzyme` nodes, a new kind for which
 > enzyme forms each active metabolite. All verified, so they grow the denominator without touching
 > the gap: 3843 to 3969 nodes, the same 170 missing, still 96%. The table below is unchanged by them.
+>
+> **The drug-binding pass, same day**, closed 21 of the 33 unsourced bindings by hand
+> (`tools/sourcing/apply_binding_sources.py`) after confirming PDSP and GtoPdb are exhausted for
+> all 33: 170 missing to **149**, `drug_bindings` 33 to **12 / 1688**. The 12 left are the 7
+> GABA-A modulatory-site PAMs, prochlorperazine's 3 α1 subtypes, tropatepine at H1, and
+> trimipramine at Nav (see section 3).
 >
 > **The earlier drop from 96% (1673 / 1743) to 94% is still worth naming**, because the
 > denominator grew faster than the gap for two structural reasons:
@@ -55,14 +61,14 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 
 | Node kind | Missing | Total | Share of the gap | Difficulty | Best lever |
 | --- | ---: | ---: | ---: | --- | --- |
-| `receptor_synaptic` (pre/post site) | 48 | 56 | 28.2% | Hard | no database has the field; textbook prose |
-| `drug_categories` | 36 | 235 | 21.2% | limit | 25 non-Stahl drugs + 9 recreational + 2 flagged |
-| `drug_bindings` | 33 | 1688 | 19.4% | Hard | no database assays the GABA-A site; primary lit |
-| `receptor_locations` | 23 | 383 | 13.5% | limit | off-atlas bases + Allen not-detected |
-| `target_locations` | 14 | 96 | 8.2% | limit | SERT/NET terminals: mRNA sits at the source nucleus |
-| `receptor_sign` (excit./inhib.) | 13 | 56 | 7.6% | Hard | GtoPdb's transduction is mixed/absent for these |
-| `projections` | 2 | 58 | 1.2% | Hard | claustrum primary lit |
-| `receptor_class` (GPCR/ionotropic) | 1 | 56 | 0.6% | limit | sigma-1 is a GtoPdb `other_protein` |
+| `receptor_synaptic` (pre/post site) | 48 | 56 | 32.2% | Hard | no database has the field; textbook prose |
+| `drug_categories` | 36 | 235 | 24.2% | limit | 25 non-Stahl drugs + 9 recreational + 2 flagged |
+| `receptor_locations` | 23 | 383 | 15.4% | limit | off-atlas bases + Allen not-detected |
+| `target_locations` | 14 | 96 | 9.4% | limit | SERT/NET terminals: mRNA sits at the source nucleus |
+| `receptor_sign` (excit./inhib.) | 13 | 56 | 8.7% | Hard | GtoPdb's transduction is mixed/absent for these |
+| `drug_bindings` | 12 | 1688 | 8.1% | Hard | no database assays the GABA-A site; primary lit |
+| `projections` | 2 | 58 | 1.3% | Hard | claustrum primary lit |
+| `receptor_class` (GPCR/ionotropic) | 1 | 56 | 0.7% | limit | sigma-1 is a GtoPdb `other_protein` |
 | `references` | 0 | 371 | not in headline | done | closed |
 | everything else | 0 | 1341 | closed | done | see "Kinds now closed" below |
 
@@ -70,8 +76,8 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 pass took the 121-node block that used to be half the gap and left 62 of it, of which 48 are
 the one attribute no database carries. What is left is four roughly equal piles, three of them
 documented limits rather than oversights: **48 `receptor_synaptic`** (pre/post site, needs
-textbook prose, a fraction will honestly stay `llm`), **36 `drug_categories`** and **33
-`drug_bindings`** (both mostly the non-Stahl roster meeting corpora that do not cover it),
+textbook prose, a fraction will honestly stay `llm`) and **36 `drug_categories`** (mostly the
+non-Stahl roster meeting corpora that do not cover it),
 and **37 expression-location nodes** (off-atlas bases, or transporter mRNA sitting at the
 source nucleus). The residue is small and specific: 13 `receptor_sign` GtoPdb could not map,
 sigma-1's `receptor_class`, and the 2 claustrum `projections`.
@@ -299,28 +305,42 @@ famille des phénothiazines"). That is the cheapest route: same quote gate, page
 disk, no new corpus. English Wikipedia (corpus #9) is stored for most of them too. Expect
 roughly 20 of 25 closeable; the 9 recreational and 2 flagged stay.
 
-### 3. `drug_bindings`, 33 / 1688 missing
+### 3. `drug_bindings`, 12 / 1688 missing (**mostly closed**)
 
-**What.** 33 bindings with neither a quote source nor a Ki (`affinity_only` bindings are
-excluded: they are listed but never animated).
+**What.** 12 bindings with neither a quote source nor a Ki (`affinity_only` bindings are
+excluded: they are listed but never animated). Was 33; a hand-curated pass
+(`tools/sourcing/apply_binding_sources.py`) closed 21 of them, after confirming PDSP and
+GtoPdb are genuinely exhausted for all 33 (PDSP has several of these compounds but only at
+coarse target names, "alpha1" and "Muscarinic Acetylcholine Receptor", where the dataset models
+subtypes; GtoPdb's bulk CSV has no matching interaction row at all).
 
-**Why not verified.** Two clusters, both structural:
+**What closed.** Carbamazepine at glutamate and maprotiline at M1-M5 and sulpiride at H1 from
+Stahl prose; tropatepine at M1-M5, prothipendyl at D2 + H1, chlorprothixene at α1A/B/D, and
+levomepromazine at 5-HT2A + α1A/B/D from each drug's own English Wikipedia pharmacodynamics
+(corpus #9). Two of those apply the pre-existing house convention that one coarse sentence
+backs every modeled subtype of the family it names ("anticholinergic activity" -> M1-M5,
+"blocking ... adrenergic receptors" -> α1A/B/D), as Stahl's lines already do on imipramine and
+chlorpromazine.
+
+**Why the 12 stay `llm`.** Structural, exactly as predicted:
 - **The GABA-A modulatory site, 7 bindings** (glutethimide, phenazepam, nimetazepam,
   butobarbital, cyclobarbital, secobarbital, brotizolam). No radioligand panel assays it the
   way PDSP assays a receptor, and GtoPdb curates no interaction row for these older agents.
   This is the same set the GtoPdb survey below predicted would stay empty.
-- **Non-Stahl drugs' receptor profiles, 18 bindings** (tropatepine at M1-M5 + H1, prothipendyl
-  at D2 + H1, chlorprothixene and levomepromazine and prochlorperazine at α1A/B/D,
-  levomepromazine at 5-HT2A). The drug has no Stahl monograph to quote and PDSP has no assay
-  under that name.
-- **The long-standing 8**: carbamazepine at the glutamate modulator site, maprotiline at
-  M1-M5, sulpiride at H1, trimipramine at Nav (tentative).
+- **Prochlorperazine at α1A/B/D** (3): its article's pharmacodynamics prose names only the
+  dopamine blockade, and its Ki table's α1 row is a coarse family value, not a subtype assay.
+- **Tropatepine at H1**: the one sentence its article carries is anticholinergic-only.
+- **Trimipramine at Nav** (tentative): Stahl says only "blockade of ion channels", and the
+  existing Nav precedent requires an explicit sodium-channel statement.
 
-**How to tackle.** Opportunistic, in this order: (a) re-run `fetch_ki.py --apply` after a fresh
-PDSP download, scoped with `--only` to these drugs; (b) the drug's own Wikipedia
-pharmacodynamics prose (corpus #9), which is where the muscarinic profile of an older
-antihistaminic antipsychotic is usually stated; (c) primary literature for the rest. Some will
-honestly stay unsourced: publishing a binding we cannot cite is worse than an `NOSOURCE` pill.
+**Known conflict, deliberately not resolved.** Stahl p788 explains sulpiride's sedation and dry
+mouth by antihistaminic and muscarinic blockade (the source now on H1, matching its already
+sourced M1-M5 and α1 siblings), while the English Wikipedia article states a "lack of α1
+adrenergic, histamine and muscarinic acetylcholine receptor affinity". The applier prints this
+on every run rather than arbitrating it.
+
+**How to tackle the rest.** Primary literature only. Some will honestly stay unsourced:
+publishing a binding we cannot cite is worse than an `NOSOURCE` pill.
 
 ### 4. `receptor_locations`, 23 / 383 missing (**limit, not a gap**)
 
@@ -437,7 +457,7 @@ GtoPdb, `receptor_locations` against GtoPdb (Phase 1) then Allen (Phase 2b),
 `target_locations` against Allen (Phase 2a), the whole drug-pharmacokinetics family (brands,
 T½, metabolites, metabolite bindings, enzymes) quote-gated from the start, and the **GtoPdb
 classification pass** (corpus #12: `receptor_class`, most of `receptor_sign`, the last two
-families, all four `targets`, the α2 `target_polarity`, the last 2 `references`). Headline
+families, all four `targets`, the α2 `target_polarity`, the last 2 `references`), and the **hand-curated drug-binding pass** (21 of the 33 unsourced bindings). Headline
 over that run: 55% to 67% to 78% to 95% to 96%, then down to 94% as the receptor split and
 the roster expansion enlarged the denominator, then back to **96%** (see the snapshot).
 
@@ -446,10 +466,10 @@ the roster expansion enlarged the denominator, then back to **96%** (see the sna
    stored author-side** (corpora #10 and #9), and an article's opening sentence states the
    class. Cheap because there is no new corpus and no new gate; only an extract-and-judge
    pass over pages already on disk.
-2. **`drug_bindings` (33), opportunistic.** A PDSP refresh scoped with `--only` to the
-   affected drugs, then Wikipedia pharmacodynamics prose for the older antipsychotics'
-   muscarinic and α1 profiles. The 7 GABA-A modulatory-site bindings will not close: no
-   database assays that site.
+2. ~~**`drug_bindings` (33), opportunistic.**~~ **Done** (21 of 33 closed by hand from Stahl
+   and Wikipedia pharmacodynamics prose; see section 3). The 12 left need primary literature:
+   the 7 GABA-A modulatory-site bindings will not close because no database assays that site,
+   and the other 5 are prose gaps in the drugs' own articles.
 3. **The classification residue (13 `receptor_sign` + 1 `receptor_class`), small and
    targeted.** 7 of the signs are ligand-gated ion channels whose sign is their permeant ion,
    which Stahl Essential states in prose; 4 are the reported conflicts, which need a *data*

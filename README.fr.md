@@ -180,8 +180,8 @@ Metabolite-forming enzymes      ████████████████
 Projection groups               ██████████████████████████  100%      11/11
 Functional circuits             ██████████████████████████  100%        6/6
 Target tone polarity            ██████████████████████████  100%        2/2
+Drug target bindings            ██████████████████████████   99%  1676/1688
 Receptor mechanism class        ██████████████████████████   98%      55/56
-Drug target bindings            █████████████████████████░   98%  1655/1688
 Neuron pathways                 █████████████████████████░   97%      56/58
 Receptor expression regions     ████████████████████████░░   94%    360/383
 Target expression regions       ██████████████████████░░░░   85%      82/96

@@ -198,6 +198,11 @@ Screenshots).
 - `tools/sourcing/apply_category_sources.py` — sources each drug's class classification (`drug_categories`)
   from an extract/judge results file (a judge is needed: our coarse `categories` re-map Stahl's
   free-text class line, unlike the fixed NbN field). Idempotent.
+- `tools/sourcing/apply_binding_sources.py` — writes the small hand-curated `BINDING_SOURCES` table onto
+  the bindings no mechanical pass can reach (PDSP/GtoPdb have no assay at the subtype granularity we
+  model, and the page prose is too irregular to grep). Re-gates every quote with `check_data`'s own
+  normalizer, never overwrites an existing source, and prints known cross-corpus `CONFLICTS` rather
+  than resolving them. Idempotent; `--dry-run`.
 - `tools/fetch/fetch_gtopdb.py` — fetches receptor tissue-distribution comments from the Guide to
   Pharmacology API (corpus #7 `gtopdb`), the source for **receptor expression regions**;
   `RECEPTOR_GENES` maps receptor->gene->targetId. Caches `data_sources/gtopdb/` + `worklist.json`

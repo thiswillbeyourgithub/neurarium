@@ -273,6 +273,7 @@
 {"id": "q_1716b97dc726", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at α1D-adrenoceptor (ADRA1D, Human): Antagonist / Antagonist, pKi 7.7 [PMID 11459121]", "species": "Human"}
 {"id": "q_171b11e3397e", "corpus": "gtopdb", "page": 24, "quote": "In the rat brain, highest levels of α1D-adrenoceptor message are found in the olfactory bulb, cerebral cortex, hippocampus, dentate gyrus, reticular thalamic nucleus, motor neurons and the inferior olivary complex. In the thalamus, the α1B and α1D-adrenoceptors have a complimentary distribution.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_17247c77e30f", "corpus": "gtopdb_class", "page": 262, "quote": "H1 receptor (HRH1), GtoPdb target 262 | transduction: Gq/G11 family | effectors: Adenylyl cyclase stimulation"}
+{"id": "q_1757d51ea706", "corpus": "wikipedia_pharm", "page": "prothipendyl", "quote": "is an anxiolytic , antiemetic , and antihistamine of the azaphenothiazine group"}
 {"id": "q_17743a1a6bed", "corpus": "stahl", "page": 823, "quote": "Full agonist at mu opioid receptors; animal studies suggest that this may contribute to its antidepressant effects", "llm": "sonnet"}
 {"id": "q_17907a37530d", "corpus": "kandel", "page": 1048, "quote": "The B5-B7 neurons in the pons mainly provide serotonergic innervation of the thalamus, hypothalamus, and cerebral cortex.", "llm": "sonnet"}
 {"id": "q_17afe7ce992c", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "α 2 | 112–570 | Human"}
@@ -860,6 +861,7 @@
 {"id": "q_456275cbe002", "corpus": "stahl", "page": 353, "quote": "Luvox CR"}
 {"id": "q_4565630c3553", "corpus": "stahl", "page": 461, "quote": "Elimination half-life approximately 122 hours (ultra-long half-life)"}
 {"id": "q_45860f3421fc", "corpus": "allen_ahba", "page": "CHRNA7", "quote": "CHRNA7 detected in parietal: probe 1022067 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_45b1999950a3", "corpus": "wikipedia_pharm", "page": "levomepromazine", "quote": "levomepromazine is a \" dirty drug \", that is, it exerts its effects by blocking a variety of receptors , including adrenergic receptors , dopamine receptors , histamine receptors , muscarinic acetylcholine receptors and serotonin receptors ."}
 {"id": "q_45bc6ce5cd86", "corpus": "wikipedia_pharm", "page": "phenytoin", "quote": "Elimination half-life | 10–22 hours"}
 {"id": "q_45c33555bfdd", "corpus": "gtopdb_ki", "page": "flibanserin", "quote": "flibanserin at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 7.31 [PMID 12177684]", "species": "Human"}
 {"id": "q_45d7e71dc9fb", "corpus": "stahl", "page": 557, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet"}
@@ -1272,6 +1274,7 @@
 {"id": "q_66c13abb2f9e", "corpus": "stahl", "page": 297, "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet"}
 {"id": "q_66c26929cb00", "corpus": "stahl", "page": 22, "quote": "agonist at melatonergic MT1/MT2 receptors and antagonist at serotonin 2C receptors acting synergistically", "llm": "sonnet"}
 {"id": "q_66c7d0da4c6f", "corpus": "wikipedia_pharm", "page": "doxylamine", "quote": "M 4 | 380 | Human"}
+{"id": "q_66e20391e73a", "corpus": "wikipedia_pharm", "page": "prothipendyl", "quote": "Prothipendyl is said to not possess antipsychotic effects, and in accordance, appears to be a weaker dopamine receptor antagonist than other phenothiazines."}
 {"id": "q_66fe9ff0bc5b", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "α 2A | 8.9 | 1.2 | Antagonist"}
 {"id": "q_670703b99d72", "corpus": "stahl", "page": 681, "quote": "Histamine 3 antagonist/inverse agonist", "llm": "sonnet"}
 {"id": "q_670fde63b286", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "5-HT 6 | silent antagonist | 3666"}
@@ -1618,6 +1621,7 @@
 {"id": "q_85dc8c0ee87b", "corpus": "stahl", "page": 119, "quote": "Partial agonism at dopamine 2 receptors", "llm": "sonnet"}
 {"id": "q_85dd4df2f5a5", "corpus": "stahl", "page": 427, "quote": "Keppra XR"}
 {"id": "q_85ebca0bb048", "corpus": "wikipedia_pharm", "page": "citalopram", "quote": "Citalopram is metabolized in the liver mostly by CYP2C19 , but also by CYP3A4 and CYP2D6 ."}
+{"id": "q_86251a715747", "corpus": "wikipedia_pharm", "page": "chlorprothixene", "quote": "Chlorprothixene is an antagonist of the following receptors : - 5-HT 2 , 5-HT 6 , 5-HT 7 : antipsychotic effects, sedation/anxiolysis, antidepressant effect, weight gain - D 1 , D 2 , D 3 , D 4 , D 5 : antipsychotic effects, sedation, extrapyramidal side effects, prolactin increase, depression, apathy/anhedonia, weight gain - H 1 : sedation, weight gain - Muscarinic acetylcholine receptors : anticholinergic effects, inhibition of extrapyramidal side effects - α 1 -Adrenergic : hypotension, sedation, anxiolysis"}
 {"id": "q_8625dd6b83ec", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in thalamus: probe 1017111 PACall present in 165/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_86445d48a0c3", "corpus": "wikipedia_pharm", "page": "desipramine", "quote": "H 4 | 9,550 | Human"}
 {"id": "q_868be95d4c94", "corpus": "gtopdb_ki", "page": "amoxapine", "quote": "amoxapine at 5-HT7 receptor (Htr7, Rat): Antagonist / Antagonist, pKi 7.4 [PMID 7908055]", "species": "Rat"}
@@ -2371,6 +2375,7 @@
 {"id": "q_c186685ae382", "corpus": "allen_ahba", "page": "OPRK1", "quote": "OPRK1 detected in claustrum: probe 1021758 PACall present in 41/42 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_c21da0785338", "corpus": "wikipedia_pharm", "page": "propranolol", "quote": "Metabolism | Liver (extensive) CYP1A2 , CYP2D6 ; minor: CYP2C19 , CYP3A4 ; aromatic hydroxylation (mainly 4-hydroxylation), N - dealkylation , side-chain oxidation , glucuronidation"}
 {"id": "q_c2203f48d5bd", "corpus": "stahl", "page": 670, "quote": "Blocking muscarinic cholinergic receptors can cause dry mouth, blurred vision, urinary retention, constipation, and paralytic ileus", "llm": "sonnet"}
+{"id": "q_c23dd6329dde", "corpus": "stahl", "page": 147, "quote": "Inhibits release of glutamate"}
 {"id": "q_c282c2e4e417", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Apo-Sertral"}
 {"id": "q_c28f986b4485", "corpus": "stahl", "page": 264, "quote": "Plasma half-life approximately 8 hours; may be longer in children and in the elderly"}
 {"id": "q_c292a3134040", "corpus": "kandel", "page": 1025, "quote": "Neurons controlling the internal environment are concentrated in the hypothalamus, a small area of the diencephalon that comprises less than 1% of the total brain volume.", "llm": "sonnet"}
@@ -2682,6 +2687,7 @@
 {"id": "q_da4bd019d6a0", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "5-HT 1D | 452 | Human"}
 {"id": "q_da6161cb9aad", "corpus": "wikipedia_fr", "page": "qu_tiapine", "quote": "Xeroquel"}
 {"id": "q_da6f20978229", "corpus": "kandel", "page": 1047, "quote": "These neurons project throughout the cerebral cortex, hippocampus, and amygdala. Both groups play an important role in arousal, and the basal forebrain groups are also involved in more selective attention."}
+{"id": "q_da757af94909", "corpus": "stahl", "page": 496, "quote": "Anticholinergic activity may explain sedative effects, dry mouth, constipation, and blurred vision"}
 {"id": "q_daac5371dac8", "corpus": "wikipedia_pharm", "page": "prochlorperazine", "quote": "α 2 | 1700 | Human"}
 {"id": "q_dab7d5cdda03", "corpus": "gtopdb_ki", "page": "guanfacine", "quote": "guanfacine at α2C-adrenoceptor (ADRA2C, Human): Agonist / Agonist, pKi 5.4-6.2 [PMID 9605427]", "species": "Human"}
 {"id": "q_dabe7d55b3fe", "corpus": "allen_ahba", "page": "DRD2", "quote": "DRD2 detected in substantia_nigra: probe 1030267 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -2834,6 +2840,7 @@
 {"id": "q_e63648e66402", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "α 1B | 12 | Human"}
 {"id": "q_e646a99af935", "corpus": "gtopdb_ki", "page": "chlorpromazine", "quote": "chlorpromazine at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 7.6-8.2 [PMID 12629531]", "species": "Human"}
 {"id": "q_e65117d51801", "corpus": "wikipedia_pharm", "page": "dexmedetomidine", "quote": "α 1D | 79 | Human"}
+{"id": "q_e65ed82af400", "corpus": "wikipedia_pharm", "page": "tropatepine", "quote": "Tropatepine (brand name Lepticur ) is an anticholinergic used as an antiparkinsonian agent."}
 {"id": "q_e68181bee4c5", "corpus": "stahl", "page": 739, "quote": "Inhibits butyrylcholinesterase", "llm": "sonnet"}
 {"id": "q_e6966f1495a6", "corpus": "stahl", "page": 739, "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)", "llm": "sonnet"}
 {"id": "q_e6d0c3516591", "corpus": "stahl", "page": 539, "quote": "Remeron"}
@@ -2949,6 +2956,7 @@
 {"id": "q_ef57f73838bb", "corpus": "stahl", "page": 264, "quote": "Inhibits CYP2D6 weakly"}
 {"id": "q_ef853daa995f", "corpus": "allen_ahba", "page": "SV2A", "quote": "SV2A detected in hippocampus: probe 1048051 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ef95258483bd", "corpus": "stahl", "page": 41, "quote": "Plasma half-life 10–28 hours"}
+{"id": "q_ef9b038c693f", "corpus": "stahl", "page": 788, "quote": "Antihistaminic actions may cause sedation, weight gain"}
 {"id": "q_ef9de934b0ce", "corpus": "stahl", "page": 890, "quote": "Parent drug has 3–7-hour half-life"}
 {"id": "q_efb3d2b7b65d", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "5-HT 6 | 1,748 | Human"}
 {"id": "q_efbd02ea20fa", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "5-HT 2C | 12.0 | Inverse agonist"}
