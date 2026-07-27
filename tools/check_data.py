@@ -114,7 +114,7 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # coverage table and the self-consistency check read this.
 NODE_KINDS = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
               "drug_half_life", "drug_enzymes", "drug_metabolites",
-              "drug_metabolite_bindings",
+              "drug_metabolite_enzyme", "drug_metabolite_bindings",
               "projections", "circuits", "projection_groups", "receptors",
               "receptor_class", "receptor_sign", "receptor_synaptic",
               "receptor_locations", "receptor_density", "targets", "target_polarity",
@@ -1018,6 +1018,9 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
                 check_one(f"{mid} sources[{i}]", src)
             for i, src in enumerate(m.get("half_life_sources", []) or []):
                 check_one(f"{mid} half_life_sources[{i}]", src)
+            for f in m.get("formed_by", []) or []:
+                for i, src in enumerate(f.get("sources", []) or []):
+                    check_one(f"{mid} formed_by {f.get('enzyme')} sources[{i}]", src)
             for binding in m.get("bindings", []) or []:
                 for i, src in enumerate(binding.get("sources", []) or []):
                     check_one(f"{mid} binding {binding.get('target')} sources[{i}]", src)

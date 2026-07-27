@@ -2459,6 +2459,10 @@
     "cyp3a5": {
       "label": "CYP3A5",
       "wikipedia": "https://en.wikipedia.org/wiki/CYP3A5"
+    },
+    "adh": {
+      "label": "Alcohol dehydrogenase",
+      "wikipedia": "https://en.wikipedia.org/wiki/Alcohol_dehydrogenase"
     }
   },
   "enzyme_roles": {
@@ -2481,6 +2485,10 @@
     "strong": "strong",
     "moderate": "moderate",
     "weak": "weak"
+  },
+  "enzyme_reactions": {
+    "demethylation": "demethylation",
+    "hydroxylation": "hydroxylation"
   },
   "source_corpora": {
     "stahl": {
@@ -2610,6 +2618,14 @@
       "drug_metabolites": {
         "total": 36,
         "verified": 36,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0
+      },
+      "drug_metabolite_enzyme": {
+        "total": 17,
+        "verified": 17,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2745,13 +2761,13 @@
       }
     },
     "nodes": {
-      "total": 3952,
-      "verified": 3782,
+      "total": 3969,
+      "verified": 3799,
       "sourced": 0,
       "llm": 135,
       "nosource": 35,
       "missing": 170,
-      "backed": 3782,
+      "backed": 3799,
       "pct_backed": 96
     },
     "ki_coverage": {

@@ -1837,6 +1837,20 @@
       }
       .info-metabolites .metab-hl { margin-left: 12px; font-size: 11px; }
       .info-metabolites .metab-hl .hl-val { color: var(--muted); font-weight: 600; }
+      /* "formed by <enzyme>": the enzyme that MAKES this metabolite, sitting with the
+         T½ as another sub-fact of the row, and clickable through to that enzyme. */
+      .info-metabolites .metab-formed {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 4px 6px;
+        margin-left: 12px;
+        font-size: 11px;
+      }
+      .info-metabolites .metab-formed.clickable { cursor: pointer; }
+      .info-metabolites .metab-formed.clickable:hover .bind-target {
+        color: var(--accent-light);
+      }
       /* A metabolite's own receptor bindings, nested under its row: indented and
          separated by a faint left rule so they read as sub-facts of the metabolite,
          reusing the same bindingRow markup as the drug's "Acts on" list. */

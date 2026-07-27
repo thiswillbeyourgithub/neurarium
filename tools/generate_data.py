@@ -92,6 +92,7 @@ from data_generators.drugs import (  # noqa: E402
     DRUG_EFFECT_LABELS,
     DRUG_TARGETS,
     ENZYMES,
+    ENZYME_REACTIONS,
     ENZYME_ROLES,
     ENZYME_STRENGTHS,
     TARGET_TYPE_COLORS,
@@ -192,7 +193,13 @@ from data_generators.quotes import (  # noqa: E402
     TARGET_POLARITY_QUOTES,
     RECEPTOR_CLASSIFICATION_COVERAGE,
     CLASSIFICATION_ATTRS,
+    METABOLITE_ENZYME_QUOTES,
 )
+
+# Every METABOLITE_ENZYME_QUOTES key consumed while building the drugs, so a key naming
+# a metabolite no drug carries (a rename, a dropped metabolite) raises instead of
+# silently publishing nothing. Reset per build; checked once the drug loop is done.
+_METABOLITE_ENZYME_SEEN: set[tuple[str, str]] = set()
 
 
 # ---------------------------------------------------------------------------
@@ -787,6 +794,48 @@ def _normalize_binding(b: dict[str, Any], valid_targets: set[str], *,
     return out_b
 
 
+def _metabolite_enzymes(drug_id: str, name: str) -> list[dict[str, Any]]:
+    """The enzymes that FORM this metabolite (one graded node each, kind
+    ``drug_metabolite_enzyme``), shaped ``{enzyme, reaction?, sources[]}``.
+
+    The mirror of :func:`_drug_enzymes`: there the drug is the substrate, here the
+    metabolite is the product ("CYP2D6 turns venlafaxine into ODV"). Authored by hand in
+    :data:`METABOLITE_ENZYME_QUOTES` rather than grepped, because the source states this
+    as prose whose near misses are all wrong in the same direction (an enzyme that clears
+    the metabolite, or makes a *different* one); the module docstring has the survey.
+
+    ``enzyme`` must be an :data:`ENZYMES` key and ``reaction``, when present, an
+    :data:`ENZYME_REACTIONS` key, so neither can ship a value the viewer has no label
+    for. Several enzymes per metabolite is normal (one demethylation, several isoforms).
+    """
+    rows = METABOLITE_ENZYME_QUOTES.get((drug_id, name))
+    if not rows:
+        return []
+    _METABOLITE_ENZYME_SEEN.add((drug_id, name))
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in rows:
+        enzyme = row.get("enzyme")
+        label = f"Drug {drug_id!r} metabolite {name!r} formed_by {enzyme!r}"
+        if enzyme not in ENZYMES:
+            raise ValueError(f"{label}: unknown enzyme (see ENZYMES)")
+        if enzyme in seen:
+            raise ValueError(f"{label}: duplicate enzyme row")
+        seen.add(enzyme)
+        rec: dict[str, Any] = {"enzyme": enzyme}
+        reaction = row.get("reaction")
+        if reaction is not None:
+            if reaction not in ENZYME_REACTIONS:
+                raise ValueError(f"{label}: unknown reaction {reaction!r} "
+                                 "(see ENZYME_REACTIONS)")
+            rec["reaction"] = reaction
+        rec["sources"] = _quote_sources(
+            [{k: v for k, v in row.items() if k in ("corpus", "page", "quote")}
+             | {"provenance": "verified"}], what=label)
+        out.append(rec)
+    return out
+
+
 def _drug_metabolites(drug_id: str, metabolites: Any,
                       valid_targets: set[str]) -> list[dict[str, Any]]:
     """Validate + normalize a drug's active ``metabolites`` (one graded node each).
@@ -809,6 +858,9 @@ def _drug_metabolites(drug_id: str, metabolites: Any,
       cover.
     - ``sources`` grades the "<name> is an active metabolite of <drug_id>" identity
       claim (kind ``drug_metabolites``); a metabolite with no source is NOSOURCE.
+    - ``formed_by`` is which enzyme(s) make it, from the hand-curated
+      :data:`METABOLITE_ENZYME_QUOTES` rather than from this file (see
+      :func:`_metabolite_enzymes`). Absent for the metabolites no corpus pins down.
 
     Parameters
     ----------
@@ -849,6 +901,12 @@ def _drug_metabolites(drug_id: str, metabolites: Any,
                       for b in m.get("bindings") or []]
         if m_bindings:
             rec["bindings"] = m_bindings
+        # Which enzyme MADE it (kind `drug_metabolite_enzyme`), a claim about the
+        # (parent, metabolite) pair rather than about the molecule, so it is not shared
+        # between two parents of the same metabolite the way `bindings` are.
+        formed_by = _metabolite_enzymes(drug_id, name)
+        if formed_by:
+            rec["formed_by"] = formed_by
         sources = _quote_sources(m.get("sources"), label)
         if sources:
             rec["sources"] = sources
@@ -1390,6 +1448,14 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         drugs.append(
             _drug_record(drug, valid_targets, receptor_bases, molecule_ids,
                          enzyme_rows))
+    # A hand-curated formed_by row whose (drug, metabolite) key matched nothing: the
+    # metabolite was renamed or dropped by an applier re-run, so the node silently
+    # vanished. Raise rather than publish a quieter dataset than the author wrote.
+    orphans = sorted(set(METABOLITE_ENZYME_QUOTES) - _METABOLITE_ENZYME_SEEN)
+    if orphans:
+        raise KeyError(
+            "METABOLITE_ENZYME_QUOTES keys match no metabolite in drugs_data.jsonl: "
+            + ", ".join(f"{d}/{n}" for d, n in orphans))
 
     # Fail loudly if the data uses a kind or group with no entry in the maps above.
     kinds = {r["kind"] for r in projections}
@@ -1468,6 +1534,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         "enzymes": ENZYMES,
         "enzyme_roles": ENZYME_ROLES,
         "enzyme_strengths": ENZYME_STRENGTHS,
+        "enzyme_reactions": ENZYME_REACTIONS,
         # Source corpora the per-binding (and later per-field) drug sources cite,
         # keyed by id (see SOURCE_CORPORA). The viewer reads citation/url to render
         # each binding's source; check_data.py reads pages_dir to confirm quotes.

@@ -10,9 +10,9 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
-## Snapshot (2026-07-27, after the GtoPdb classification pass and the Wikipedia CYP sweep)
+## Snapshot (2026-07-27, after the GtoPdb classification pass and the metabolism pass)
 
-Headline: **3782 / 3952 knowledge nodes backed (96%)**. In the tally a bare `llm`
+Headline: **3799 / 3969 knowledge nodes backed (96%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 "missing" below means `llm` or no source at all. 170 knowledge nodes are missing.
 
@@ -25,9 +25,10 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 > for the tuberomammillary nucleus). `receptor_synaptic` is untouched: GtoPdb has no
 > pre/post-synaptic field at all.
 >
-> **The Wikipedia CYP sweep, same day**, added 109 `drug_enzymes` nodes (62 drugs Stahl has no
-> monograph for). All verified, so it grows the denominator without touching the gap: 3843 to
-> 3952 nodes, the same 170 missing, still 96%. The table below is unchanged by it.
+> **The metabolism pass, same day**, added 109 `drug_enzymes` nodes from the Wikipedia CYP sweep
+> (62 drugs Stahl has no monograph for) plus 17 `drug_metabolite_enzyme` nodes, a new kind for which
+> enzyme forms each active metabolite. All verified, so they grow the denominator without touching
+> the gap: 3843 to 3969 nodes, the same 170 missing, still 96%. The table below is unchanged by them.
 >
 > **The earlier drop from 96% (1673 / 1743) to 94% is still worth naming**, because the
 > denominator grew faster than the gap for two structural reasons:
@@ -44,6 +45,7 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 >
 > **Node kinds that landed since, all at 100%:** `drug_brands` (469), `drug_half_life` (185),
 > `drug_enzymes` (268), `drug_metabolite_bindings` (48), `drug_metabolites` (36),
+> `drug_metabolite_enzyme` (17),
 > `receptor_density` (36), `target_density` (17). Each shipped quote-gated from the start,
 > which is why none of them contributes to the gap.
 >
@@ -62,7 +64,7 @@ grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 | `projections` | 2 | 58 | 1.2% | Hard | claustrum primary lit |
 | `receptor_class` (GPCR/ionotropic) | 1 | 56 | 0.6% | limit | sigma-1 is a GtoPdb `other_protein` |
 | `references` | 0 | 371 | not in headline | done | closed |
-| everything else | 0 | 1324 | closed | done | see "Kinds now closed" below |
+| everything else | 0 | 1341 | closed | done | see "Kinds now closed" below |
 
 **The shape of the problem: no single lever dominates any more.** The GtoPdb classification
 pass took the 121-node block that used to be half the gap and left 62 of it, of which 48 are
@@ -396,6 +398,9 @@ Kept as a record of which lever worked, so a later session does not re-derive it
   quote-gates and merges.
 - **`drug_metabolite_bindings` 48/48.** The metabolite's own Wikipedia pharmacology (corpus #9)
   for target + action, PDSP (corpus #5) for the affinity and for target discovery.
+- **`drug_metabolite_enzyme` 17/17.** Which enzyme forms each active metabolite: hand-curated
+  (Stahl + Wikipedia), covering 14 of the 36 metabolites, the rest left NOSOURCE. 100% of what
+  exists, and the only kind here whose *coverage* is deliberately partial rather than complete.
 - **`drug_enzymes` 268/268.** Two greps behind the same verbatim quote gate, **no LLM at all**:
   Stahl's Pharmacokinetics block is regular enough ("Substrate for CYP2D6", "Inhibits CYP2C19")
   for `fetch_cyp.py` (159 nodes over 86 drugs), and `fetch_cyp_wikipedia.py` adds the drugs Stahl
@@ -636,7 +641,7 @@ with the caveat, in the caption and not only in a tooltip: an overlap is a flag 
 never a contraindication, and the absence of an edge is not a safety claim. This is a
 knowledge map, not a prescribing aid.
 
-**Verdict: adopted; steps 1 and 2 shipped, metabolite `formed_by` open.** Step 1, the drug to enzyme roles out of
+**Verdict: adopted; all three steps shipped.** Step 1, the drug to enzyme roles out of
 Stahl's pharmacokinetics block, landed in v3.30.0 to v3.31.1 exactly as scoped: regular enough
 to grep, so `fetch_cyp.py` uses **no LLM judge at all** (the same argument that makes
 `apply_nbn_sources.py` stronger than a judge for the NbN line). It emits **159 `drug_enzymes`
@@ -657,7 +662,24 @@ reference-list title read as prose. Yield: **190 nodes over 101 drugs**, of whic
 drugs** survive the Stahl-first merge (Stahl already stated the rest), taking `drug_enzymes` from
 159/86 to **268 nodes over 119 drugs**, all verified.
 
-**Still open:**
+**Metabolite `formed_by` landed too, and the estimate held.** 14 of the 36 metabolites are covered
+by **17 nodes** (kind `drug_metabolite_enzyme`, all verified), hand-curated in
+`tools/data_generators/quotes/metabolism.py` exactly as the plan below said to do it. Sourcing it
+by pattern was never on: the near misses a grep produces are all wrong in the same direction, and
+all three appeared while reading the 36 rows. An enzyme that **clears** the metabolite instead of
+making it (clobazam's own article states both in adjacent sentences). An enzyme named on the
+metabolite's article with **no parent in the sentence** ("It is formed by dealkylation via CYP3A4"
+on the mCPP page means from trazodone, not from nefazodone). An enzyme handling a **different**
+metabolite of the same drug (valbenazine's CYP3A4/5 oxidation makes monooxidized valbenazine, not
+the dihydrotetrabenazine we list). The other 22 stay NOSOURCE; primidone is the one worth quoting,
+since its article says outright that the responsible P450s are still unknown, which is an answer
+rather than a gap.
+
+**What the survey below got wrong:** it expected the yield to come from Stahl. It came mostly from
+Wikipedia (10 of the 17 rows), because Stahl states the forming enzyme only in the TCA monographs'
+one stock sentence ("Metabolized to an active metabolite, X, ... by demethylation via CYP1A2").
+
+**Still open:** nothing in this section. Kept for the record:
 - **Metabolite `formed_by`.** All 36 metabolite rows still have none. Expect roughly 10 to 15
   sourceable from Stahl, hand-curated rather than piped, and the rest honestly `NOSOURCE`. It
   is the prodrug story (why a CYP2D6 poor metabolizer gets nothing from codeine or tramadol).

@@ -96,8 +96,11 @@ in `meta.provenance_stats.by_kind`):
 - drug metabolism role -> a drug's `enzymes[]` (`{enzyme, role, strength?}`) -> `drug_enzymes`
   (one node per (enzyme, role) pair; pharmacokinetics, so it has no anatomy, see Drug metabolism)
 - drug active metabolite -> a drug's `metabolites[]` (each `{name, drug_id?, half_life?,
-  bindings?, sources}`) -> `drug_metabolites` (a metabolite that is itself a modeled drug
-  links via `drug_id` + reuses its bindings/T½)
+  bindings?, formed_by?, sources}`) -> `drug_metabolites` (a metabolite that is itself a modeled
+  drug links via `drug_id` + reuses its bindings/T½)
+- metabolite-forming enzyme -> a metabolite's `formed_by[]` (`{enzyme, reaction?, sources}`) ->
+  `drug_metabolite_enzyme` (one node per (parent, metabolite, enzyme); the mirror of
+  `drug_enzymes`, counted per PARENT since two parents make it by two reactions)
 - non-modeled-metabolite receptor binding -> a metabolite's `bindings[]` -> `drug_metabolite_bindings`
   (sourced from the metabolite's own Wikipedia pharmacology, corpus #9; graded like a drug binding,
   a separate kind so the drug Ki coverage is unperturbed; surfaces on the receptor's Interacting drugs)
@@ -643,12 +646,22 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
     verb and nothing in between that hands the verb another subject, plus negation /
     victim-frame / two-roles-at-once vetoes (Wikipedia states absence and other molecules'
     metabolism constantly, which Stahl's terse bullets never did).
+- **Which enzyme FORMS an active metabolite** is the mirror relation (there the drug is the
+  substrate, here the metabolite is the product) and its own node kind, so it is **hand-curated**
+  in `tools/data_generators/quotes/metabolism.py` (`METABOLITE_ENZYME_QUOTES`, keyed
+  `(drug_id, metabolite name)`) rather than grepped: the corpora state it as prose whose near
+  misses are all wrong the same way (an enzyme that *clears* the metabolite, or makes a different
+  one). 14 of the 36 metabolites are covered; the rest stay NOSOURCE. `reaction` is an optional
+  `ENZYME_REACTIONS` key (a closed, translated vocabulary), omitted when the source names the
+  enzyme but not the step. `generate_data.py` raises if a key matches no metabolite, so an
+  applier re-run cannot silently drop a node.
 - **Viewer.** `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
   pill, clickable to the enzyme) and an **Interactions** list, both **after** the anatomy sections
   (pharmacokinetics lights nothing in the scene, so it does not interrupt Acts on -> Projections
-  affected -> Acts within); an **Enzymes** accordion section
-  (`buildEnzymeLegend`) opens `showEnzyme`, that isoform's drugs grouped by role. Both ends share
-  one `enzymeRow` builder (same node, either side).
+  affected -> Acts within); each **Active metabolites** row gains a `.metab-formed` "formed by
+  <enzyme>" line with its own pill. An **Enzymes** accordion section
+  (`buildEnzymeLegend`) opens `showEnzyme`: the metabolites that isoform forms, then its drugs
+  grouped by role. Both ends share one `enzymeRow` builder (same node, either side).
 - **The drug -> drug edges are derived, never stored** (`pkInteractionsOf` in `js/data.js`, like
   `flowSystems`): an inhibitor/inducer of an enzyme meets its substrates, one row per (other drug,
   direction) naming every shared isoform. Rendered two ways from the same edges via a persisted

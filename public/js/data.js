@@ -141,9 +141,10 @@ function localize(field) {
  *   the signed affinity-weighted per-system flow tone), a `focusable` flag and search `keywords`,
  *   plus a `structureImage` (the vendored molecular-structure SVG path, or null).
  * @property {object[]} enzymes  The Enzymes browse list: one entry per metabolic
- *   isoform some drug actually touches, `{id, label, wikipedia, rows, keywords}`
- *   where `rows` are its `{drug, enzyme}` pairs. Pharmacokinetics, so an entry has no
- *   anatomy and never lights the scene.
+ *   isoform some drug actually touches, `{id, label, wikipedia, rows, metabolites,
+ *   keywords}` where `rows` are its `{drug, enzyme}` role pairs and `metabolites` its
+ *   `{drug, metabolite, formedBy}` triples (the active metabolites it forms).
+ *   Pharmacokinetics, so an entry has no anatomy and never lights the scene.
  * @property {Map<string, {drug: object, enzyme: object}[]>} drugsByEnzyme  Reverse
  *   index: enzyme id -> the drugs with a role at it, each paired with that role row.
  * @property {(drug: object) => {affects: object[], affectedBy: object[]}} pkInteractionsOf
@@ -272,6 +273,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   const enzymeDefs = metaRecord.enzymes || {};
   const enzymeRoles = metaRecord.enzyme_roles || {};
   const enzymeStrengths = metaRecord.enzyme_strengths || {};
+  const enzymeReactions = metaRecord.enzyme_reactions || {};
   // Drug target system -> projection kind, for the per-drug "by-mechanism flow"
   // overlay (only the diffuse ascending modulatory systems are mapped; see
   // generate_data.py SYSTEM_FLOW_KINDS). Language-neutral, applied per drug below.
@@ -835,9 +837,26 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         void tgt;
         return disp;
       });
+      // Which enzyme(s) MADE this metabolite: the mirror of d.enzymes above (there the
+      // drug is the substrate, here the metabolite is the product), so it reuses the
+      // same meta.enzymes labels and gets a `direction` of 0 (forming a metabolite says
+      // nothing about the enzyme's throughput, so it never feeds a PK interaction edge).
+      const formedBy = (m.formed_by || []).map((f) => {
+        const def = enzymeDefs[f.enzyme] || {};
+        return {
+          ...f,
+          label: def.label || f.enzyme,
+          wikipedia: def.wikipedia || null,
+          reactionLabel: enzymeReactions[f.reaction]
+            ? localize(enzymeReactions[f.reaction]) : null,
+          sources: mapSources(f.sources),
+          provenance: strongestGrade(f.sources),
+        };
+      });
       return {
         name: m.name,
         drugId: linkedId,
+        formedBy,
         // Whether the link points at a standalone, clickable drug (so we can jump to
         // it AND avoid re-listing it under a receptor where it already appears).
         linkFocusable: !!(linked && linked.focusable),
@@ -915,18 +934,29 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // the drugs split by role so the panel can head them "Substrates / Inhibitors /
   // Inducers" without re-scanning the corpus.
   const drugsByEnzyme = new Map();
+  // The same index for the OTHER metabolism relation: which active metabolites this
+  // isoform forms. Kept apart from the role rows because it is a different claim (the
+  // enzyme is the maker, not the handler) and the enzyme panel heads it separately.
+  const metabolitesByEnzyme = new Map();
   for (const d of drugs) {
     for (const e of d.enzymes) {
       if (!drugsByEnzyme.has(e.enzyme)) drugsByEnzyme.set(e.enzyme, []);
       drugsByEnzyme.get(e.enzyme).push({ drug: d, enzyme: e });
     }
+    for (const m of d.metabolites) {
+      for (const f of m.formedBy || []) {
+        if (!metabolitesByEnzyme.has(f.enzyme)) metabolitesByEnzyme.set(f.enzyme, []);
+        metabolitesByEnzyme.get(f.enzyme).push({ drug: d, metabolite: m, formedBy: f });
+      }
+    }
   }
-  const enzymes = [...drugsByEnzyme.keys()]
+  const enzymes = [...new Set([...drugsByEnzyme.keys(), ...metabolitesByEnzyme.keys()])]
     .map((id) => ({
       id,
       label: (enzymeDefs[id] || {}).label || id,
       wikipedia: (enzymeDefs[id] || {}).wikipedia || null,
-      rows: drugsByEnzyme.get(id),
+      rows: drugsByEnzyme.get(id) || [],
+      metabolites: metabolitesByEnzyme.get(id) || [],
       keywords: [id, (enzymeDefs[id] || {}).label || id].join(" ").toLowerCase(),
     }))
     .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }));

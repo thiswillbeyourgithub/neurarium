@@ -1881,6 +1881,7 @@ function createInfoPanel(data, sourcingModal) {
   // its drug_targets key). Only focusable entries become clickable.
   const targetById = new Map(data.targets.map((tg) => [tg.id, tg]));
   const drugById = new Map((data.drugs || []).map((d) => [d.id, d]));
+  const enzymeById = new Map((data.enzymes || []).map((e) => [e.id, e]));
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -3082,6 +3083,35 @@ function createInfoPanel(data, sourcingModal) {
       body.appendChild(el("div", "info-group", t("enzyme.heading")));
       appendReference({ url: enzyme.wikipedia });
 
+      // The active metabolites this isoform MAKES, the other half of the metabolism
+      // graph (the rows below are what it *handles*). Same node seen from the enzyme's
+      // end: each row carries the very grade pill the parent drug's panel shows, and
+      // clicks through to that parent, where the metabolite is listed.
+      const made = enzyme.metabolites || [];
+      if (made.length) {
+        const box = el("div", "info-bindings info-metabolites");
+        box.appendChild(el("h3", null, `${t("enzyme.forms")} (${made.length})`));
+        const ul = el("ul");
+        for (const { drug, metabolite, formedBy } of made) {
+          const li = el("li");
+          const text = el("span", "bind-text");
+          text.appendChild(el("span", "bind-target", metabolite.name));
+          const parts = [t("enzyme.formsOf", { drug: drug.displayName })];
+          if (formedBy.reactionLabel) parts.push(formedBy.reactionLabel);
+          text.appendChild(el("span", "bind-action", ` ${parts.join(" · ")}`));
+          li.appendChild(text);
+          li.appendChild(formedBy.sources && formedBy.sources.length
+            ? makeProvenancePill(formedBy.provenance, sourcesTip(formedBy.sources))
+            : makeProvenancePill(formedBy.provenance || null));
+          li.classList.add("clickable");
+          li.addEventListener("click",
+            () => onDrugPick(drug, { highlightMetabolite: metabolite.name }));
+          ul.appendChild(li);
+        }
+        box.appendChild(ul);
+        body.appendChild(box);
+      }
+
       const rows = enzyme.rows || [];
       const wrap = el("div", "info-bindings info-interactors");
       wrap.appendChild(el("h3", null, `${t("enzyme.drugs")} (${rows.length})`));
@@ -3373,6 +3403,29 @@ function createInfoPanel(data, sourcingModal) {
             ? makeProvenancePill(m.provenance, sourcesTip(m.sources))
             : makeProvenancePill(m.provenance || null));
           li.appendChild(head);
+          // Which enzyme makes it, each its own sourced node and clickable to that
+          // enzyme's panel: the prodrug story (why a CYP2D6 poor metabolizer gets a
+          // different drug than the label says). Absent for the metabolites no corpus
+          // pins down, which is most of them, so no NOSOURCE row is shown here.
+          for (const f of m.formedBy || []) {
+            const row = el("div", "metab-formed");
+            const text = el("span", "bind-text");
+            text.appendChild(el("span", "bind-action", `${t("drug.formedBy")} `));
+            const name = el("span", "bind-target", f.label);
+            text.appendChild(name);
+            if (f.reactionLabel)
+              text.appendChild(el("span", "bind-action", ` · ${f.reactionLabel}`));
+            row.appendChild(text);
+            row.appendChild(f.sources && f.sources.length
+              ? makeProvenancePill(f.provenance, sourcesTip(f.sources))
+              : makeProvenancePill(f.provenance || null));
+            const enz = enzymeById.get(f.enzyme);
+            if (enz) {
+              row.classList.add("clickable");
+              row.addEventListener("click", () => onEnzymePick(enz));
+            }
+            li.appendChild(row);
+          }
           const hlStr = formatHalfLife(m.halfLife);
           if (hlStr) {
             const chip = el("span", "hl-chip metab-hl");
@@ -3496,7 +3549,7 @@ function createInfoPanel(data, sourcingModal) {
         const wanted = new Set(opts.highlightEnzymes || []);
         let flashEnz = null;
         for (const row of sortedEnz) {
-          const enz = (data.enzymes || []).find((e) => e.id === row.enzyme);
+          const enz = enzymeById.get(row.enzyme);
           const li = enzymeRow(row, row.label,
                                enz ? () => onEnzymePick(enz) : null,
                                { showRole: true });
@@ -3607,7 +3660,7 @@ function createInfoPanel(data, sourcingModal) {
                                 || (Number(b.outgoing) - Number(a.outgoing))
                                 || a.drug.displayName.localeCompare(b.drug.displayName))
                 .map((e) => () => pkRow(e, false));
-              const enz = (data.enzymes || []).find((x) => x.id === id);
+              const enz = enzymeById.get(id);
               appendGroup(box, grp.label, rows, enz ? () => onEnzymePick(enz) : null);
             }
           };
@@ -4705,6 +4758,7 @@ function buildAboutSourcing(meta, opts = {}) {
     drug_half_life: "about.kindDrugHalfLife",
     drug_enzymes: "about.kindDrugEnzymes",
     drug_metabolites: "about.kindDrugMetabolites",
+    drug_metabolite_enzyme: "about.kindDrugMetaboliteEnzyme",
     drug_metabolite_bindings: "about.kindDrugMetaboliteBindings",
     projections: "about.kindProjections",
     circuits: "about.kindCircuits",
@@ -4941,6 +4995,23 @@ function buildKindExample(kind, data, nav) {
         || focusableDrugs.find((x) => (x.metabolites || []).length);
       const m = d && (d.metabolites || [])[0];
       return m ? line(d.name, m.name, () => nav.drug(d)) : null;
+    }
+    case "drug_metabolite_enzyme": {
+      // Which enzyme MAKES a metabolite: the parent drug is the clickable subject, the
+      // notion pairs the metabolite with its maker, e.g. Venlafaxine "O-desmethyl-
+      // venlafaxine: formed by CYP2D6".
+      let hit = null;
+      for (const d of focusableDrugs) {
+        for (const m of d.metabolites || []) {
+          const f = (m.formedBy || [])[0];
+          if (f) { hit = { d, m, f }; break; }
+        }
+        if (hit) break;
+      }
+      return hit
+        ? line(hit.d.name, `${hit.m.name}: ${t("drug.formedBy")} ${hit.f.label}`,
+          () => nav.drug(hit.d))
+        : null;
     }
     case "drug_metabolite_bindings": {
       // A metabolite's own receptor binding: its parent drug is the clickable subject

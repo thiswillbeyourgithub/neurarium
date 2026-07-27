@@ -263,6 +263,42 @@ class MetaAndTranslationsTest(unittest.TestCase):
         self.assertEqual(kind.get("total", 0), n_rows,
                          "drug_enzymes tally != emitted enzyme rows")
 
+    def test_metabolite_forming_enzymes_are_tallied_and_valid(self):
+        """Which enzyme FORMS a metabolite is its own graded node kind
+        (drug_metabolite_enzyme), one per (parent, metabolite, enzyme).
+
+        Unlike a metabolite's bindings, this is NOT deduped by molecule: the same
+        metabolite made by two parents is two reactions, two separately sourced claims.
+        Every row must name a real enzyme + a real reaction verb from the emitted
+        vocabularies, and must carry a source (the whole point of the kind is that only
+        14 of the metabolites have one).
+        """
+        meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+        enzymes = set(meta["enzymes"])
+        reactions = set(meta["enzyme_reactions"])
+        drugs = [json.loads(l) for l in
+                 (DATA_DIR / "drugs.jsonl").read_text(encoding="utf-8").splitlines() if l]
+        n_rows = 0
+        for d in drugs:
+            for m in d.get("metabolites", []):
+                seen = set()
+                for f in m.get("formed_by", []):
+                    n_rows += 1
+                    where = f"{d['id']}/{m['name']}"
+                    self.assertIn(f["enzyme"], enzymes,
+                                  f"{where} names unknown enzyme {f['enzyme']}")
+                    if "reaction" in f:
+                        self.assertIn(f["reaction"], reactions,
+                                      f"{where} unknown reaction {f['reaction']}")
+                    self.assertTrue(f.get("sources"),
+                                    f"{where} formed_by row carries no source")
+                    self.assertNotIn(f["enzyme"], seen,
+                                     f"{where} has a duplicate {f['enzyme']} row")
+                    seen.add(f["enzyme"])
+        kind = meta["provenance_stats"]["by_kind"].get("drug_metabolite_enzyme", {})
+        self.assertEqual(kind.get("total", 0), n_rows,
+                         "drug_metabolite_enzyme tally != emitted formed_by rows")
+
     def test_translations_nonempty_and_deduped(self):
         tr = json.loads(
             (DATA_DIR / "translations.fr.json").read_text(encoding="utf-8")

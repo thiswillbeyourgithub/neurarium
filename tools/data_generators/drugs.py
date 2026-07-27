@@ -152,6 +152,8 @@ ENZYMES: dict[str, dict[str, Any]] = {
     "cyp2e1": {"label": "CYP2E1", "wikipedia": "https://en.wikipedia.org/wiki/CYP2E1"},
     "cyp3a4": {"label": "CYP3A4", "wikipedia": "https://en.wikipedia.org/wiki/CYP3A4"},
     "cyp3a5": {"label": "CYP3A5", "wikipedia": "https://en.wikipedia.org/wiki/CYP3A5"},
+    "adh": {"label": "Alcohol dehydrogenase",
+            "wikipedia": "https://en.wikipedia.org/wiki/Alcohol_dehydrogenase"},
 }
 
 # The role a drug plays at an enzyme. ``direction`` is what the drug does to that
@@ -174,6 +176,16 @@ ENZYME_STRENGTHS: dict[str, dict[str, str]] = {
     "strong": {"en": "strong", "fr": "puissant"},
     "moderate": {"en": "moderate", "fr": "modéré"},
     "weak": {"en": "weak", "fr": "faible"},
+}
+
+# The chemical step by which an enzyme turns a drug into one of its active metabolites
+# (the `reaction` on a METABOLITE_ENZYME_QUOTES row). A closed vocabulary rather than
+# free text, so it can be translated and cannot be misspelled; it holds only the verbs
+# the curated sources actually state, and a new one is a single line here. Optional on
+# a row: a source that names the enzyme but not the step leaves it out.
+ENZYME_REACTIONS: dict[str, dict[str, str]] = {
+    "demethylation": {"en": "demethylation", "fr": "déméthylation"},
+    "hydroxylation": {"en": "hydroxylation", "fr": "hydroxylation"},
 }
 
 # Non-receptor binding targets (a key) -> {name {en,fr}, type, system, regions,

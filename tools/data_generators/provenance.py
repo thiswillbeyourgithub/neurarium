@@ -864,6 +864,16 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # below (each a graded graph edge appearing on the receptor's Interacting drugs).
     metabolite_grades = [_strongest_grade(m.get("sources"))
                          for d in drugs for m in d.get("metabolites", [])]
+    # Which enzyme FORMS each active metabolite, one node per (parent, metabolite,
+    # enzyme). The mirror of the enzyme nodes above (there the drug is the substrate,
+    # here the metabolite is the product), and its own kind because it is separately
+    # sourced and separately missing: only 14 of the metabolites have a corpus that
+    # names their forming enzyme. Counted per PARENT, unlike the bindings below: "CYP2D6
+    # makes X out of A" and "... out of B" are two different reactions, not one fact
+    # about the molecule.
+    metabolite_enzyme_grades = [_strongest_grade(f.get("sources"))
+                                for d in drugs for m in d.get("metabolites", [])
+                                for f in m.get("formed_by", [])]
     # Non-modeled-metabolite receptor bindings, graded exactly like a drug binding
     # (quote source or measured Ki). A separate kind from drug_bindings so the drug Ki
     # coverage figures are unperturbed; authored by apply_metabolite_bindings.py.
@@ -978,6 +988,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_half_life": tally(half_life_grades),
         "drug_enzymes": tally(enzyme_grades),
         "drug_metabolites": tally(metabolite_grades),
+        "drug_metabolite_enzyme": tally(metabolite_enzyme_grades),
         "drug_metabolite_bindings": tally(metabolite_binding_grades),
         "projections": tally(projection_grades),
         "circuits": tally(circuit_grades),

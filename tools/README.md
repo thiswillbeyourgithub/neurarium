@@ -341,7 +341,8 @@ there is no node-level catch-all `sources` block.
   `density` object as a receptor),
   `enzymes` (metabolic isoform id -> {label, wikipedia}), `enzyme_roles`
   (role -> {label, `direction`: what it does to a co-prescribed substrate's level}) and
-  `enzyme_strengths` (see CLAUDE.md Drug metabolism),
+  `enzyme_strengths` + `enzyme_reactions` (the chemical step by which an enzyme makes an
+  active metabolite; see CLAUDE.md Drug metabolism),
   `target_type_labels`/`target_type_colors`, `source_corpora`, `density_min_reliability` (the
   cross-donor r floor every published profile clears), `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
@@ -389,10 +390,12 @@ there is no node-level catch-all `sources` block.
   optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
   `enzymes[]` (each: `enzyme` (a `meta.enzymes` key), `role`, optional `strength`, `sources[]`;
   one node per (enzyme, role) pair, kind `drug_enzymes`, merged in from the committed
-  `generated_cache/drug_enzymes.json`, never authored),
+  `generated_cache/drug_enzymes.json` + `drug_enzymes_wikipedia.json`, never authored),
   `metabolites[]` (each: `name`, optional `half_life`(+`half_life_sources`), `sources[]`, optional
   `drug_id` linking a modeled drug, optional `bindings[]` for a non-modeled metabolite: same shape as a
-  drug binding, kind `drug_metabolite_bindings`),
+  drug binding, kind `drug_metabolite_bindings`; optional `formed_by[]` (each: `enzyme`, optional
+  `reaction` (a `meta.enzyme_reactions` key), `sources[]`), one node per (parent, metabolite, enzyme),
+  kind `drug_metabolite_enzyme`, hand-curated in `data_generators/quotes/metabolism.py`),
   optional `wikipedia`(+prov), optional `structure_image` (vendored `data/molecules/<id>.svg`,
   only when the file exists), `focusable`. No drug-level source: provenance is per-claim (see
   CLAUDE.md Source provenance).
