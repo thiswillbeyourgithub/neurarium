@@ -52,7 +52,7 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "The substantia nigra is suppressed by the caudate nucleus, which in turn "
         "is excited by the frontal eye fields."),
     ("frontal_R", "putamen_R"): _kandel(986,
-        "the sensorimotor territories of the dorsolateral striatum receive "
+        "For example, the sensorimotor territories of the dorsolateral striatum receive "
         "collateral fibers from motor cortex axons that send signals to the "
         "spinal cord."),
     # Hyperdirect: cortex -> STN (glutamate).
@@ -210,7 +210,8 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "Commissural fibres from the inferotemporal cortex cross in the posterior "
         "part of the body of the corpus callosum and in the anterior commissure"),
     ("insula_R", "cingulate_R"): _nieuwenhuys(655,
-        "a considerable number of limbic cortical areas, including the "
+        "Finally, it may be mentioned that a considerable number of limbic "
+        "cortical areas, including the "
         "entorhinal, perirhinal, temporopolar, posterior orbitofrontal and "
         "cingulate cortices, as well as the amygdaloid complex, are reciprocally "
         "connected with agranular and dysgranular sectors in the anterior and "

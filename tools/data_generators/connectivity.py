@@ -65,8 +65,8 @@ _KQ_BG_DIRECT = _kandel(983,
     "Output of the basal ganglia is determined by the balance between a direct "
     "pathway from the striatum to the output nuclei.")
 _KQ_BG_INDIRECT = _kandel(983,
-    "Striatal neurons containing enkephalin and expressing mainly D2 dopamine "
-    "receptors make excitatory contact with the output nuclei via relays in the "
+    "In contrast, striatal neurons containing enkephalin and expressing mainly "
+    "D2 dopamine receptors make excitatory contact with the output nuclei via relays in the "
     "globus pallidus and subthalamus: the indirect pathway.")
 
 PROJECTIONS: list[dict[str, Any]] = [
