@@ -18,12 +18,13 @@ under the same guarantees as every other applier here:
   ``data_sources/gtopdb/pages_ki/<slug>.md`` through ``check_data.normalize_for_match``,
   so a stale cache cannot smuggle an unsourced claim through.
 * **idempotent, sole writer** - its own prior writes (recognised by the
-  ``gtopdb_ki`` corpus) are rebuilt from scratch each run.
+  ``provisional_action`` marker, see ``strip_previous``) are rebuilt from scratch
+  each run, leaving a hand-authored ``gtopdb_ki`` citation untouched.
 
-A direction written here is marked ``provisional_action``: it is shown in the panel
-with its source, but is deliberately held out of the 3D animation until that call is
-made (see the top bullet in TODO.md). Flipping it on is a one-line change in
-``js/data.js``.
+A direction written here is marked ``provisional_action``, which exists purely for
+that rollback: ``generate_data.py`` does not emit it, so such a binding behaves like
+any other in the panel and the 3D animation (its ``sources`` already name the corpus,
+which is what a reader weighs it by).
 
 Run from the repo root, then regenerate + check::
 
@@ -78,17 +79,29 @@ def gate(quote: str, slug: str, cache: dict[str, str]) -> bool:
 
 
 def strip_previous(binding: dict) -> None:
-    """Undo this script's own prior write, so a re-run rebuilds rather than stacks."""
-    binding["sources"] = [s for s in binding.get("sources", [])
-                          if s.get("corpus") != CORPUS] or None
-    if binding["sources"] is None:
-        binding.pop("sources")
+    """Undo this script's own prior write, so a re-run rebuilds rather than stacks.
+
+    Only *our* write. The corpus alone cannot identify it: a binding that already
+    states its direction may cite ``gtopdb_ki`` by hand (furosemide's GABA-A alpha6
+    NAM does), and that is precisely the case this script never writes, so dropping
+    every ``gtopdb_ki`` source would silently delete a hand-authored one on each run.
+    The ``provisional_action`` flag is the reliable marker: it is set on exactly the
+    bindings whose direction (and the single source appended with it) came from here.
+    """
     if (binding.get("ki") or {}).get("source", {}).get("corpus") == CORPUS:
         binding.pop("ki")
     if binding.pop("provisional_action", None):
-        # The action came from us, so it goes back to being affinity-only.
+        # The action came from us, so it goes back to being affinity-only, and the
+        # source appended alongside it goes with it (the last one we added).
         binding.pop("action", None)
         binding["affinity_only"] = True
+        sources = binding.get("sources", [])
+        for i in range(len(sources) - 1, -1, -1):
+            if sources[i].get("corpus") == CORPUS:
+                sources.pop(i)
+                break
+        if not sources:
+            binding.pop("sources", None)
 
 
 def main() -> int:
