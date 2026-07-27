@@ -6,27 +6,29 @@
  * stale-while-revalidate: SWR would answer from cache before confirming freshness,
  * which is unacceptable here.
  *
- * Two strategies, split by what the asset IS:
+ * One strategy for everything (data, code and shell alike): EXPLICIT CONDITIONAL
+ * REVALIDATION. We can't lean on the browser HTTP cache for cheap 304s, because a
+ * plain `fetch()` inside a service worker does not reliably emit a conditional
+ * request (it re-downloads the full 200). So we do it by hand: keep each cached
+ * response's validator (`ETag` / `Last-Modified`) and send it back as
+ * `If-None-Match` / `If-Modified-Since`. The server answers `304 Not Modified`
+ * when unchanged (we serve the cached copy, zero body transferred) or a fresh
+ * `200` when it actually changed (we cache + serve that). Always fresh, cheap
+ * when unchanged.
  *
- * - DATA (/data/*, incl. shapes): EXPLICIT CONDITIONAL REVALIDATION. We can't lean
- *   on the browser HTTP cache for cheap 304s, because a plain `fetch()` inside a
- *   service worker does not reliably emit a conditional request (it re-downloads
- *   the full 200). So we do it by hand: keep each cached response's validator
- *   (`ETag` / `Last-Modified`) and send it back as `If-None-Match` /
- *   `If-Modified-Since`. The server answers `304 Not Modified` when unchanged (we
- *   serve the cached copy, zero body transferred) or a fresh `200` when it actually
- *   changed (we cache + serve that). Always fresh, cheap when unchanged.
- * - CODE + shell (js/*, index.html, vendor, ...): plain NETWORK-FIRST (always
- *   refetch the full file). No conditional revalidation: `no-store` + a full
- *   refetch keeps the "never mix a stale module with a fresh one" guarantee the
- *   no-build rsync deploy relies on. Cache-API copy is the offline fallback only.
- *
- * Because every online visit revalidates the whole set together, the offline
- * fallback stays internally consistent (all-old, never old+new).
+ * Code used to be plain network-first (re-download the full file every time) out
+ * of caution about mixing a stale ES module with a fresh one on this no-build,
+ * rsync-deployed site. That caution is satisfied by revalidation: every single
+ * file is confirmed current with the server before it is used, so an old module
+ * can never run. What it is NOT is a re-download of ~1 MB of code + shell on every
+ * load, which is what made a phone reload crawl. (The residual "a deploy lands
+ * mid-load" window is identical either way, and every online visit revalidates
+ * the whole set together, so the offline fallback stays internally consistent:
+ * all-old, never old+new.)
  *
  * Bump CACHE when the caching logic itself changes; activate() prunes older caches.
  */
-const CACHE = "neurarium-v2";
+const CACHE = "neurarium-v3";
 
 // Minimal app shell precached on install so a first offline launch has a page +
 // icons even before anything else was visited. The bulk of assets (js/*, data/*,
@@ -61,21 +63,10 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch the request fresh and cache a copy of any good response (offline copy).
-// Returns the live response; rejects if the network is unavailable.
-async function fetchAndCache(req) {
-  const res = await fetch(req);
-  if (res && res.ok) {
-    const cache = await caches.open(CACHE);
-    await cache.put(req, res.clone());
-  }
-  return res;
-}
-
-// Explicit conditional revalidation for the dataset: always contact the server,
-// but cheaply. We forward the cached copy's validator so the server can answer a
-// bodyless `304 Not Modified` when nothing changed (we then serve the cached copy)
-// and a full `200` only when it did. `cache: "no-store"` bypasses the browser HTTP
+// Explicit conditional revalidation: always contact the server, but cheaply. We
+// forward the cached copy's validator so the server can answer a bodyless
+// `304 Not Modified` when nothing changed (we then serve the cached copy) and a
+// full `200` only when it did. `cache: "no-store"` bypasses the browser HTTP
 // cache so OUR conditional headers are the only ones in play (a plain fetch would
 // otherwise just re-download the full body). Falls back to the cached copy offline.
 async function revalidate(req) {
@@ -109,18 +100,11 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   if (new URL(req.url).origin !== self.location.origin) return;
 
-  // Dataset (+ shapes): explicit conditional revalidation (fresh, cheap 304s).
-  if (new URL(req.url).pathname.startsWith("/data/")) {
-    event.respondWith(revalidate(req));
-    return;
-  }
-
-  // Code + shell: network-first (always refetch the full file); the Cache-API copy
-  // is the offline fallback only.
+  // Everything same-origin: revalidate (fresh, and free when unchanged). Offline,
+  // `revalidate` already returns the cached copy; the catch below only handles the
+  // case where there is nothing cached for this request at all.
   event.respondWith(
-    fetchAndCache(req).catch(async () => {
-      const cached = await caches.match(req);
-      if (cached) return cached;
+    revalidate(req).catch(async () => {
       // A navigation with nothing cached for it falls back to the app shell.
       if (req.mode === "navigate") {
         const shell = await caches.match("index.html");

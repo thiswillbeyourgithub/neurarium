@@ -170,14 +170,15 @@ Viewer (`public/`):
 - PWA (installable + offline): `manifest.webmanifest` (name/icons/`theme_color`), `sw.js`
   (service worker that ALWAYS contacts the server when online, so a visitor never renders
   outdated data or a stale ES module; the Cache-API copy is an offline-only fallback, NOT
-  stale-while-revalidate. Split by asset kind: `/data/*` (data + shapes) uses **explicit
-  conditional revalidation** (`revalidate()` forwards the cached copy's `ETag`/`Last-Modified`
-  as `If-None-Match`/`If-Modified-Since` so an unchanged file returns a bodyless `304` served
-  from cache, a changed one a fresh `200`: always fresh, cheap when unchanged, no version key to
-  forget; `cache:"no-store"` on the fetch so OUR validator is the only one in play, since a plain
-  SW fetch re-downloads the full body); code + shell use plain **network-first** (always refetch
-  the full file, never mixing a stale ES module with a fresh one, matching the deploy's `no-store`
-  intent). Bump `CACHE` when the caching logic changes; `activate()` prunes older caches), and
+  stale-while-revalidate. One strategy for every same-origin asset (data, code, shell):
+  **explicit conditional revalidation** (`revalidate()` forwards the cached copy's
+  `ETag`/`Last-Modified` as `If-None-Match`/`If-Modified-Since` so an unchanged file returns a
+  bodyless `304` served from cache, a changed one a fresh `200`: always fresh, cheap when
+  unchanged, no version key to forget; `cache:"no-store"` on the fetch so OUR validator is the
+  only one in play, since a plain SW fetch re-downloads the full body). Revalidating code is
+  what keeps a stale ES module from running (each file is confirmed current before use) *without*
+  re-downloading ~1 MB every load, which is what made a phone reload crawl. Bump `CACHE` when the
+  caching logic changes; `activate()` prunes older caches), and
   `favicon.svg` + `icon-192/512.png` +
   `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
   favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
@@ -269,8 +270,8 @@ Deployment (`docker/`): `docker-compose.yml` (hardened Caddy), `Dockerfile`
 so `docker compose build` needs network; then strips caddy's
 `cap_net_bind_service` so `exec` works under `no-new-privileges`),
 `Caddyfile` (serves `/srv` on `:8359`, serves `/gen/app-config.js` for
-`/app-config.js`, split `Cache-Control`: `no-cache` on `/data/*` (revalidate -> cheap `304`s,
-never stale), `no-store` on code + shell; a generous per-`{client_ip}` `rate_limit`
+`/app-config.js`, `Cache-Control: no-cache` on everything (store but always revalidate ->
+cheap `304`s, never stale, and never a heuristically-cached module); a generous per-`{client_ip}` `rate_limit`
 flood guard, keyed via the front proxy's `X-Forwarded-For`/`trusted_proxies`;
 security headers incl. CSP),
 `env.example`, `entrypoint.sh` (stamps `STARTED_AT`, validates `ANALYTICS_URL`,

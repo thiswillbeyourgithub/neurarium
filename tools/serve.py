@@ -41,7 +41,7 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
     setting the caching headers there covers static files, directory listings and
     error pages alike, without having to override each ``do_*`` method.
 
-    Cache-Control is split by path, exactly like docker/Caddyfile:
+    Cache-Control is split by path:
 
     - **/data/\\*** (the dataset + shapes): ``no-cache`` -> the browser stores it
       but MUST revalidate before every use, so a stale dataset is never served;
@@ -51,6 +51,11 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
     - **everything else** (the ES modules etc.): ``no-store`` -> always refetched,
       so a plain reload never runs a stale module next to a fresh one (see the
       module docstring above).
+
+    Deliberately STRICTER than prod, which sends ``no-cache`` everywhere (see
+    docker/Caddyfile): in dev the files under the editor change constantly and a
+    round trip costs nothing, so paying for a guaranteed-current module beats
+    debugging a revalidation subtlety.
     """
 
     def end_headers(self) -> None:
