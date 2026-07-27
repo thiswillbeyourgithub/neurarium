@@ -451,6 +451,7 @@
 {"id": "q_2456ce85ab87", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in temporal: probe 1059691 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_2473167fecce", "corpus": "stahl", "page": 119, "quote": "Actions at dopamine 3 receptors could theoretically contribute to brexpiprazole's efficacy", "llm": "sonnet"}
 {"id": "q_248639afadac", "corpus": "stahl", "page": 641, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet"}
+{"id": "q_24bba9a54ba8", "corpus": "wikipedia_pharm", "page": "alcohol_drug", "quote": "Metabolism | Liver (90%): • Alcohol dehydrogenase • MEOS ( CYP2E1 )"}
 {"id": "q_24cfa29a5ff2", "corpus": "stahl", "page": 931, "quote": "May enhance GABA inhibitory actions that provide sedative hypnotic effects more selectively than other actions of GABA", "llm": "sonnet"}
 {"id": "q_250216e315e4", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "SERT | 15–18 | Human"}
 {"id": "q_252172112162", "corpus": "stahl", "page": 553, "quote": "Elimination half-life 10–12 hours"}
@@ -460,6 +461,7 @@
 {"id": "q_256690b05ae0", "corpus": "stahl", "page": 153, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor partial agonist and antagonist", "llm": "sonnet"}
 {"id": "q_25a42ac91bc8", "corpus": "wikipedia_pharm", "page": "zotepine", "quote": "α 2A | 180"}
 {"id": "q_25c5e5a6b44e", "corpus": "stahl_essential", "page": 270, "quote": "Other NE receptors are classified as α1, α2A, α2B, or α2C, or as β1, β2, or β3 (Figure 6-14).", "llm": "sonnet"}
+{"id": "q_25e9930de0b3", "corpus": "gtopdb_ki", "page": "ethanol", "quote": "ethanol at 5-HT3A (Htr3a, Mouse): Allosteric modulator / Positive, no affinity reported [PMID 16257471]"}
 {"id": "q_25fed39ad7d3", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in medulla: probe 1057496 PACall present in 240/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_260ba673161c", "corpus": "stahl", "page": 660, "quote": "Weak inhibition of carbonic anhydrase may lead to kidney stones and paresthesia", "llm": "sonnet"}
 {"id": "q_26312bfc2076", "corpus": "allen_ahba", "page": "SV2A", "quote": "SV2A detected in thalamus: probe 1048051 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1035,6 +1037,7 @@
 {"id": "q_557ab3fe0411", "corpus": "gtopdb_class", "page": 262, "quote": "H1 receptor (HRH1), GtoPdb target 262 | type: gpcr | family: Histamine receptors"}
 {"id": "q_55835bcf6c7a", "corpus": "stahl_essential", "page": 311, "quote": "The physiological function of σ1 sites is still a mystery, and thus sometimes called the “sigma enigma”", "llm": "sonnet"}
 {"id": "q_559a83a9796c", "corpus": "wikipedia_fr", "page": "praz_pam", "quote": "Lysanxia"}
+{"id": "q_55afaf26f4fc", "corpus": "wikipedia_pharm", "page": "alcohol_drug", "quote": "by facilitating GABA's actions in the GABA A receptor , alcohol suppresses the activity of the central nervous system"}
 {"id": "q_55bc450b8384", "corpus": "stahl", "page": 195, "quote": "Half-life 12–16 hours"}
 {"id": "q_55c9a7dc1eac", "corpus": "stahl_essential", "page": 575, "quote": "neurons that release enkephalin synapse with postsynaptic δ-opioid receptors", "llm": "sonnet"}
 {"id": "q_55ef267eec37", "corpus": "wikipedia_pharm", "page": "lormetazepam", "quote": "Lormetazepam , sold under the brand name Noctamid among others, is a drug which is a short to intermediate acting 3-hydroxy benzodiazepine derivative and temazepam analogue."}
@@ -2598,6 +2601,7 @@
 {"id": "q_d6b11c7c3755", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 7 | 19 | 450 | – | Antagonist"}
 {"id": "q_d6b836048817", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "α 2A | 330 | ?"}
 {"id": "q_d6d2bfcf5696", "corpus": "gtopdb_ki", "page": "mianserin", "quote": "mianserin at α1D-adrenoceptor (ADRA1D, Human): Antagonist / Antagonist, pKi 7.5 [PMID 11459121]", "species": "Human"}
+{"id": "q_d6d69790c9ac", "corpus": "gtopdb_ki", "page": "ethanol", "quote": "ethanol at Glycine Receptor (All subtypes) (?, Human): Allosteric modulator / Potentiation, no affinity reported [PMID 8700149]"}
 {"id": "q_d6e32ace3fd9", "corpus": "wikipedia_pharm", "page": "promethazine", "quote": "New studies have shown that promethazine acts as a strong non-competitive selective NMDA receptor antagonist, with an EC50 of 20 μM; which might promote sedation in addition with the strong antihistaminergic effects of the H 1 receptor , but also as a weaker analgesic ."}
 {"id": "q_d6f017ed5bf8", "corpus": "gtopdb", "page": 318, "quote": "CNS: amygdala, caudate nucleus, hypothalamus, subthalamic nucleus > hippocampus, thalamus > substantia nigra, corpus callosum.", "species": "Human", "llm": "sonnet"}
 {"id": "q_d6f61c5c815a", "corpus": "gtopdb", "page": 27, "quote": "α2C-AR mRNA labeling primarily in the olfactory bulb, cerebral cortex, islands of Calleja, striatum, hippocampal formation, cerebellar cortex, and dorsal root ganglia.", "species": "Rat", "llm": "sonnet"}

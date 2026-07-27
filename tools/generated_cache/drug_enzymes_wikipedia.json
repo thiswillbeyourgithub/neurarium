@@ -887,6 +887,20 @@
    ]
   }
  ],
+ "ethanol": [
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alcohol_drug",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (90%): • Alcohol dehydrogenase • MEOS ( CYP2E1 )"
+    }
+   ]
+  }
+ ],
  "flibanserin": [
   {
    "enzyme": "cyp2c19",

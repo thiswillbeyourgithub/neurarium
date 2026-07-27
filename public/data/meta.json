@@ -2572,8 +2572,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1605,
-        "verified": 1593,
+        "total": 1608,
+        "verified": 1596,
         "sourced": 0,
         "llm": 0,
         "nosource": 12,
@@ -2596,12 +2596,12 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 237,
+        "total": 238,
         "verified": 199,
         "sourced": 0,
-        "llm": 38,
+        "llm": 39,
         "nosource": 0,
-        "missing": 38
+        "missing": 39
       },
       "drug_half_life": {
         "total": 185,
@@ -2612,8 +2612,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 268,
-        "verified": 268,
+        "total": 269,
+        "verified": 269,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2756,30 +2756,30 @@
         "missing": 0
       },
       "references": {
-        "total": 373,
+        "total": 374,
         "verified": 0,
-        "sourced": 373,
+        "sourced": 374,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 3888,
-      "verified": 3737,
+      "total": 3893,
+      "verified": 3741,
       "sourced": 0,
-      "llm": 137,
+      "llm": 138,
       "nosource": 14,
-      "missing": 151,
-      "backed": 3737,
+      "missing": 152,
+      "backed": 3741,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1586,
+      "bindings_total": 1589,
       "bindings_with_ki": 1387,
       "pct_bindings_with_ki": 87,
-      "drugs_total": 222,
-      "drugs_without_ki": 71,
+      "drugs_total": 223,
+      "drugs_without_ki": 72,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -2806,6 +2806,7 @@
         "donepezil",
         "estazolam",
         "eszopiclone",
+        "ethanol",
         "flurazepam",
         "furosemide",
         "gabapentin",
