@@ -10,6 +10,53 @@ so re-derive them after any data change rather than trusting the counts below fo
 
 Made with the help of Claude Code.
 
+## Quote-quality audit (2026-07-28, the sulpiride follow-up)
+
+A `verified` grade only ever meant "this sentence is really on that page". It never
+meant "this sentence is about this drug", which is exactly how the sulpiride mistake
+got in. Three questions were asked of all 3233 stored quotes; what each turned up:
+
+**1. Is the quote on the right drug's pages?** Yes, everywhere: all Stahl quotes on
+all 158 monographed drugs fall inside that drug's own page span. This is now a gate
+rather than a finding, `check_data.py` family 5 reads Stahl's generated `INDEX.md` and
+errors on a quote cited outside its drug's monograph, so the answer stays yes.
+
+**2. Is the quote a whole sentence?** 29 were stored mid-sentence, with the subject
+left behind on the other side of the cut. 20 were widened back to the full sentence.
+The remaining 9 stay clipped on purpose: their preceding words are a PDF artifact (a
+figure label `(B)`, a running head `Pharmacokinetics**`, a hyphen-broken word), which
+reads worse than the fragment. 14 book quotes still open on a lowercase letter, but
+almost all of those open on the drug's own lowercase name ("daridorexant binds to
+orexin 1 and orexin 2 receptors ..."), which is the subject the audit was looking for.
+
+**3. Does the quote actually assert the claim?** This is the sulpiride shape and it is
+**not** fully closed. 47 binding sources are quotes Stahl prints in its **How Drug
+Causes Side Effects** block, which states rules without a subject ("Blockade of alpha
+adrenergic 1 receptors may explain dizziness, sedation, and hypotension"). Of those, 5
+attribute the action with a pronoun ("By blocking X, **it** can cause Y") and are fine.
+The other 42 were kept, on evidence rather than convenience:
+
+- Unlike the three class-wide antipsychotic lines already stripped (printed on 17 to 28
+  monographs including benzamides that lack the property), these lines are printed
+  selectively: the alpha-1 one on 13 monographs, the anticholinergic one on 10, the
+  antihistamine one on 12, all tricyclics and all genuinely carrying the property.
+- Most are independently backed by a measured PDSP Ki on the same binding.
+- Stripping them would not improve the data anyway: PDSP only holds a generic
+  "Muscarinic Acetylcholine Receptor" / "adrenergic Alpha1" assay for these compounds,
+  which the m1-m5 / alpha1a-b-d granularity we model cannot consume. This is the same
+  granularity gap `tools/sourcing/apply_binding_sources.py` documents.
+
+**Repetition across monographs is not itself a red flag**, and a check keyed on it
+would be wrong: "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis"
+appears on 29 pages because Stahl writes it on every antipsychotic, and every one of
+them does block D2. What distinguished the sulpiride case was the section it sat in
+plus a drug that lacked the property, not the repetition.
+
+**Still open here:** a check for #3 that fires on a genuinely wrong claim without
+firing on the 42 correct ones. It needs the section a quote sits in (parseable from the
+page files) *and* independent evidence the drug lacks the property, which today only
+exists as a Ki for the coarse target we do not model.
+
 ## Snapshot (2026-07-27, after the GtoPdb classification, metabolism and drug-binding passes)
 
 Headline: **3820 / 3969 knowledge nodes backed (96%)**. In the tally a bare `llm`

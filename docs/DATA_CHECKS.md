@@ -36,6 +36,13 @@ errors. Functions take loaded data as args (unit-testable). Eight families:
   exact substring of the normalized cited page text. Page material is author-side
   (see CLAUDE.local.md); the quote check is skipped + warned on a clone without it.
   A quote not on its page = error (the gate that keeps the LLM extraction honest).
+  Verbatim-on-the-page is not the same as about-this-drug, so two more gates ask the
+  second question: a binding quote may not be one of Stahl's subject-less class rules
+  ("Blocking X can cause Y", the sulpiride mistake), and every Stahl quote on a drug
+  must cite a page inside that drug's own monograph (read from the book's generated
+  `INDEX.md`, author-side, skipped + warned on a clone). A quote lifted off the
+  neighbouring drug's entry is verbatim on the page it cites and still says nothing
+  about this drug, so only the range check can catch it.
   Also checks each binding's `ki`: its source corpus resolves, an `affinity_only`
   binding carries a `ki`, and (author-side, skipped on a clone) the cited `ki_id` row
   is really in the corpus CSV with that value (the PDSP analogue of the quote gate).

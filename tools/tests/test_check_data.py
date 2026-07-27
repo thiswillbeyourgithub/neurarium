@@ -272,5 +272,60 @@ class NoSubjectQuoteTest(unittest.TestCase):
             self.assertFalse(self._m(quote), quote)
 
 
+class StahlMonographRangeTest(unittest.TestCase):
+    """The other half of "is this quote about this drug?": a Stahl quote has to sit
+    on a page of the drug's OWN monograph. A sentence lifted off the neighbouring
+    entry is verbatim on the page it cites and still says nothing about this drug,
+    so the verbatim gate alone cannot catch it."""
+
+    RANGES = {"sulpiride": (786, 790), "sertraline": (770, 775),
+              "dextromethorphanbupropion": (247, 252), "bupropion": (128, 133)}
+
+    def _drug(self, name, pages, **extra):
+        return {"id": name.lower(), "name": name, "bindings": [
+            {"target": "d2", "sources": [{"corpus": "stahl", "page": p, "quote": "x"}]}
+            for p in pages], **extra}
+
+    def test_own_monograph_passes(self):
+        pages, span, stray = check_data.stahl_monograph_check(
+            self._drug("Sulpiride", [786, 788]), self.RANGES)
+        self.assertEqual((pages, span, stray), ([786, 788], (786, 790), []))
+
+    def test_neighbouring_monograph_is_caught(self):
+        _pages, span, stray = check_data.stahl_monograph_check(
+            self._drug("Sulpiride", [788, 771]), self.RANGES)
+        self.assertEqual(span, (786, 790))
+        self.assertEqual(stray, [771])
+
+    def test_quotes_are_found_anywhere_in_the_drug(self):
+        """Not just on bindings: half-life, NbN, metabolite and brand sources all
+        cite pages the same way, so the walk has to reach them too."""
+        drug = self._drug("Sulpiride", [788])
+        drug["half_life_sources"] = [{"corpus": "stahl", "page": 4242, "quote": "x"}]
+        drug["metabolites"] = [{"name": "m", "sources": [
+            {"corpus": "kandel", "page": 9, "quote": "x"},      # another corpus: ignored
+            {"corpus": "stahl", "page": 789, "quote": "x"}]}]
+        pages, _span, stray = check_data.stahl_monograph_check(drug, self.RANGES)
+        self.assertEqual(pages, [788, 789, 4242])
+        self.assertEqual(stray, [4242])
+
+    def test_combo_matches_either_half(self):
+        """A combo is indexed under its own name here; when it is not, either
+        constituent's monograph is the honest span."""
+        _pages, span, _stray = check_data.stahl_monograph_check(
+            self._drug("Bupropion + Naltrexone", [130]), self.RANGES)
+        self.assertEqual(span, (128, 133))
+
+    def test_unindexed_drug_reports_no_span(self):
+        """A drug Stahl has no monograph for is unrangeable, not in violation."""
+        pages, span, stray = check_data.stahl_monograph_check(
+            self._drug("Psilocybin", [500]), self.RANGES)
+        self.assertEqual((pages, span, stray), ([500], None, []))
+
+    def test_name_folding_ignores_case_and_punctuation(self):
+        self.assertEqual(check_data._fold_name("Amphetamine (D,L)"),
+                         check_data._fold_name("amphetamine (d,l)"))
+
+
 if __name__ == "__main__":
     unittest.main()
