@@ -106,6 +106,17 @@ DRUG_ACTIONS: dict[str, dict[str, Any]] = {
     "vesicular_inhibitor": {"label": {"en": "Vesicular transport inhibitor",
                                       "fr": "Inhibiteur du transport vésiculaire"},
                             "effect": "block"},
+    # The OTHER way to engage a vesicular transporter, and the opposite outcome: a
+    # substrate (the amphetamines, MDMA) rides VMAT2 into the vesicle and dumps the
+    # stored monoamine into the cytosol, which then floods out through the reversed
+    # plasma-membrane transporter. Same target as tetrabenazine, opposite direction:
+    # tetrabenazine empties the vesicle by never filling it (tone down), amphetamine
+    # empties it into the synapse (tone up). Modeling both as "vesicular_inhibitor"
+    # would have coloured amphetamine's VMAT2 action block-red and driven its
+    # dopaminergic flow *downward*, i.e. exactly backwards.
+    "vesicular_releaser": {"label": {"en": "Vesicular store releaser",
+                                     "fr": "Libérateur des stocks vésiculaires"},
+                           "effect": "boost"},
     "enzyme_inhibitor": {"label": {"en": "Enzyme inhibitor",
                                    "fr": "Inhibiteur enzymatique"}, "effect": "boost"},
     "pam": {"label": {"en": "Positive allosteric modulator",

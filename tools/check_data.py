@@ -500,6 +500,7 @@ def check_reachability(report, meta, structures, projections, circuits,
         "reuptake_inhibitor": {"transporter"},
         "releaser": {"transporter"},
         "vesicular_inhibitor": {"transporter", "vesicle_protein"},
+        "vesicular_releaser": {"transporter"},
         "enzyme_inhibitor": {"enzyme"},
         "agonist": {"receptor", "receptor_group"},
         "partial_agonist": {"receptor", "receptor_group"},
@@ -549,9 +550,11 @@ def check_reachability(report, meta, structures, projections, circuits,
                                  f"direction is almost certainly mis-assigned")
                 elif tgt.get("vesicular") and action in ("reuptake_inhibitor", "releaser"):
                     compat_errors += 1
-                    report.error(f"drug {did}: vesicular target {target!r} uses "
-                                 f"{action!r} (reads as a boost); blocking vesicular "
-                                 f"loading depletes -> use vesicular_inhibitor")
+                    report.error(f"drug {did}: vesicular target {target!r} uses the "
+                                 f"plasma-membrane action {action!r}; say which vesicular "
+                                 f"direction it is -> vesicular_inhibitor (blocks loading, "
+                                 f"depletes, tone down) or vesicular_releaser (a substrate "
+                                 f"dumping the stores, tone up)")
             # The Ki annotation's source corpus must resolve (its verbatim-presence
             # in the CSV is confirmed in check_sources).
             ki = binding.get("ki")
@@ -1288,8 +1291,12 @@ def _tone_of(target, action, rec_meta):
     ttype = target.get("type", "")
     if ttype == "transporter":
         if target.get("vesicular"):
-            return ((-1, "vesicular depletion")
-                    if action in ("vesicular_inhibitor", "blocker") else (0, None))
+            if action in ("vesicular_inhibitor", "blocker"):
+                return (-1, "vesicular depletion")
+            # A substrate of the same vesicular transporter dumps the stored
+            # monoamine into the cytosol instead: same target, tone *up*.
+            return ((1, "vesicular store release")
+                    if action in ("vesicular_releaser", "releaser") else (0, None))
         return ((1, "reuptake block / release")
                 if action in ("reuptake_inhibitor", "releaser") else (0, None))
     if ttype == "enzyme":

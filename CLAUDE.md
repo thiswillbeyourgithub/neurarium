@@ -537,7 +537,8 @@ fixed Stahl list.
   the dots: only *tone-setting* bindings drive flow (a reuptake/enzyme/vesicle target or a presynaptic
   inhibitory autoreceptor), never a postsynaptic receptor (those stay dots). `js/data.js` gives each
   binding a signed `toneSign` (`toneSignOf`: reuptake-inhibitor/releaser/MAO-inhibitor +, vesicular
-  (VMAT2)/vesicle-protein blocker −, autoreceptor agonist − / antagonist +; a `vesicular` flag + the α2
+  (VMAT2)/vesicle-protein blocker − but a VMAT2 **substrate** (`vesicular_releaser`: the amphetamines,
+  MDMA, which dump the stores) +, autoreceptor agonist − / antagonist +; a `vesicular` flag + the α2
   group's `sign`/`synaptic` come from `meta.drug_targets`) and an `affinityWeight` (0.35..1 pKi ramp
   from the measured Ki, engagement not effect size). Per engaged kind it sums `toneSign*affinityWeight`
   into `flowSystems` (`{direction, weight, rel}`): the sign is the flow direction (an SSRI drives serotonergic

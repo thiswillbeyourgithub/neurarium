@@ -66,6 +66,17 @@ class ToneSignTest(unittest.TestCase):
     def test_vesicular_transporter_lowers(self):
         tgt = {"type": "transporter", "system": "dopaminergic", "vesicular": True}
         self.assertEqual(check_data._tone_of(tgt, "blocker", {})[0], -1)
+        self.assertEqual(check_data._tone_of(tgt, "vesicular_inhibitor", {})[0], -1)
+
+    def test_vesicular_substrate_raises(self):
+        """The other way to engage VMAT2: a substrate (amphetamine, MDMA) dumps the
+        vesicular stores into the cytosol, so the SAME target reads tone *up*. The
+        direction has to come from the action, not from the target being vesicular
+        (which would read the archetypal dopamine-raising drug as lowering it)."""
+        tgt = {"type": "transporter", "system": "dopaminergic", "vesicular": True}
+        self.assertEqual(check_data._tone_of(tgt, "vesicular_releaser", {})[0], 1)
+        # a non-tone-setting action on the same transporter still contributes nothing
+        self.assertEqual(check_data._tone_of(tgt, "agonist", {}), (0, None))
 
     def test_enzyme_inhibition_raises(self):
         tgt = {"type": "enzyme", "system": "serotonergic"}

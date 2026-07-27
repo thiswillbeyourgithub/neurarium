@@ -756,6 +756,7 @@
 {"id": "q_3e8b4f96393f", "corpus": "stahl", "page": 127, "quote": "Brixadi (subcutaneous injection)"}
 {"id": "q_3e9833245ed0", "corpus": "wikipedia_pharm", "page": "lurasidone", "quote": "D 1 | 262 | ND | ND"}
 {"id": "q_3ea3e44b2edd", "corpus": "allen_ahba", "page": "OPRK1", "quote": "OPRK1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1021758, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.83: claustrum +1.95 (5d), accumbens +1.42 (5d), amygdala +0.74 (5d), caudate +0.73 (5d), hypothalamus +0.52 (5d), pons +0.13 (5d), putamen -0.28 (5d), medulla -0.29 (5d), midbrain -0.44 (5d)", "species": "Human"}
+{"id": "q_3eb97d226855", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "MDMA also acts on the vesicular monoamine transporter 2 (VMAT2) on synaptic vesicles to increase the cytosolic concentrations of the monoamine neurotransmitters available for efflux"}
 {"id": "q_3ebf6c93b6fb", "corpus": "stahl", "page": 727, "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)", "llm": "sonnet"}
 {"id": "q_3ed60171cc0e", "corpus": "allen_ahba", "page": "GRM3", "quote": "GRM3 detected in occipital: probe 1055926 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3ed843441772", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "5-HT 5A | 57 | ?"}
@@ -1848,6 +1849,7 @@
 {"id": "q_993dd1cb4702", "corpus": "stahl", "page": 61, "quote": "Neuroscience-based Nomenclature: dopamine, norepinephrine reuptake inhibitor and releaser (DN-RIRe)", "llm": "sonnet"}
 {"id": "q_994818e7bd62", "corpus": "stahl", "page": 770, "quote": "Parent drug has 22–36-hour half-life"}
 {"id": "q_994eb3a54643", "corpus": "wikipedia_fr", "page": "esk_tamine", "quote": "Keta-S"}
+{"id": "q_9971c0f66292", "corpus": "wikipedia_pharm", "page": "methamphetamine", "quote": "methamphetamine inhibits synaptic vesicle function by inhibiting VMAT2 , which prevents monoamine uptake into the vesicles and promotes their release"}
 {"id": "q_997736e5f133", "corpus": "stahl", "page": 789, "quote": "Elimination half-life approximately 6–8 hours"}
 {"id": "q_997a28dec41b", "corpus": "gtopdb_ki", "page": "risperidone", "quote": "risperidone at 5-HT6 receptor (HTR6, Human): Antagonist / Antagonist, pKi 5.6 [PMID 8522988]", "species": "Human"}
 {"id": "q_99827e334a94", "corpus": "gtopdb_class", "page": 26, "quote": "α2B-adrenoceptor (ADRA2B), GtoPdb target 26 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Other - See Comments"}
@@ -2776,6 +2778,7 @@
 {"id": "q_e140882beb7f", "corpus": "stahl", "page": 647, "quote": "Combination of dopamine D2, histamine H1, and cholinergic M1 blockade in the vomiting center may reduce nausea and vomiting", "llm": "sonnet"}
 {"id": "q_e1637e9b5e87", "corpus": "stahl", "page": 479, "quote": "Caplyta"}
 {"id": "q_e174f44cf318", "corpus": "wikipedia_pharm", "page": "dexmedetomidine", "quote": "α 2B | 2.0–34 | Human"}
+{"id": "q_e1968c119f74", "corpus": "stahl_essential", "page": 489, "quote": "D,L-amphetamine and D-amphetamine are both competitive inhibitors at norepinephrine transporters (NETs), dopamine transporters (DATs), and vesicular monoamine transporters (VMATs)"}
 {"id": "q_e1afb0662d91", "corpus": "gtopdb_ki", "page": "suvorexant", "quote": "suvorexant at OX2 receptor (HCRTR2, Human): Antagonist / Antagonist, pKi 9.4 [PMID 28663311]", "species": "Human"}
 {"id": "q_e1b1d41c20e2", "corpus": "allen_ahba", "page": "HCRTR1", "quote": "HCRTR1 detected in raphe: probe 1055736 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e1c3a127d573", "corpus": "wikipedia_pharm", "page": "baclofen", "quote": "Baclofen produces its effects by selectively activating the GABA B receptor ."}
@@ -2823,6 +2826,7 @@
 {"id": "q_e49221b05a41", "corpus": "wikipedia_pharm", "page": "loprazolam", "quote": "Elimination half-life | 6–12 hours"}
 {"id": "q_e49af9451ed2", "corpus": "stahl_essential", "page": 406, "quote": "Serotonin inhibits primary afferent terminals via postsynaptic 5HT1B/D receptors (Figure 9-2). These inhibitory receptors are G-protein-coupled, and indirectly influence ion channels to hyperpolarize the nerve terminal and inhibit nociceptive neurotransmitter release."}
 {"id": "q_e4cc0e108591", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in temporal: probe 1059351 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_e4d4948e9b80", "corpus": "stahl_essential", "page": 489, "quote": "Lisdexamfetamine is the prodrug of D-amphetamine, linked to the amino acid lysine. It is only centrally active as D-amphetamine once it has been cleaved in the stomach into the active compounds D-amphetamine plus free L-lysine"}
 {"id": "q_e4d94e7ebfa7", "corpus": "stahl", "page": 427, "quote": "Anticonvulsant, synaptic vesicle protein SV2A modulator", "llm": "sonnet"}
 {"id": "q_e4e3252cdb00", "corpus": "stahl", "page": 371, "quote": "Tenex"}
 {"id": "q_e4f5016402de", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "α 2B | 17 | Antagonist"}
