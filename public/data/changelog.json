@@ -6,7 +6,9 @@
         {
           "category": "added",
           "text": "This \"What's new\" popup: after an update it lists everything that changed since your last visit, and you can reopen it any time from About",
-          "commits": []
+          "commits": [
+            "d36c46b"
+          ]
         },
         {
           "category": "improved",
