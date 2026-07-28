@@ -159,6 +159,388 @@
           ]
         }
       ]
+    },
+    {
+      "version": "3.35.0",
+      "date": "2026-07-27",
+      "entries": [
+        {
+          "category": "data",
+          "text": "21 of the 33 drug actions that carried no source at all now have one, quote-checked against the book it came from",
+          "commits": [
+            "73d0700"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.34.0",
+      "date": "2026-07-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Each active metabolite now says which enzyme forms it, where a source states it: 14 of the 36 so far, the rest openly marked as unsourced",
+          "commits": [
+            "de2dc23"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.33.0",
+      "date": "2026-07-27",
+      "entries": [
+        {
+          "category": "data",
+          "text": "The drugs outside the reference prescriber's guide now have their metabolism sourced too, read from their encyclopedia articles",
+          "commits": [
+            "8ec659b"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The alpha-2 receptor's role in setting noradrenaline tone is now backed by a textbook quote",
+          "commits": [
+            "96a7a86"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The tuberomammillary nucleus got its encyclopedia link, so its panel now shows a description",
+          "commits": [
+            "c75beba"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.32.0",
+      "date": "2026-07-27",
+      "entries": [
+        {
+          "category": "data",
+          "text": "What kind of receptor something is, and whether it excites or inhibits, is now backed by the Guide to Pharmacology rather than asserted",
+          "commits": [
+            "29933d1"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Where that source and this dataset disagree, the disagreement is reported rather than quietly overwritten",
+          "commits": [
+            "29933d1"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Refreshed the survey of what is still unsourced against the live figures",
+          "commits": [
+            "eb28f14"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.31.0",
+      "date": "2026-07-26",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Possible interactions can now be read two ways, by the other drug or by the enzyme they meet at, and clicking one lands you on the reason rather than the top of the page",
+          "commits": [
+            "503690f"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The Enzymes section now looks like a section of its own, instead of an item tucked inside Drugs",
+          "commits": [
+            "c3bbc7c"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.30.0",
+      "date": "2026-07-26",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Metabolism: each drug now lists the liver enzymes that clear it, or whose activity it changes, with the source for each",
+          "commits": [
+            "9c1b26d",
+            "439f759"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Possible drug interactions, worked out from those enzymes: which other drugs in the dataset could see their levels rise or fall",
+          "commits": [
+            "279ae71"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "An Enzymes section in the side panel: pick an enzyme to see the drugs it handles, grouped by role",
+          "commits": [
+            "279ae71",
+            "1dad5cb"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Molecule diagrams for the 53 drugs added in the previous release",
+          "commits": [
+            "4cda9c7"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Surveyed how drug metabolism could be sourced before building it",
+          "commits": [
+            "7c51882"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.29.0",
+      "date": "2026-07-26",
+      "entries": [
+        {
+          "category": "added",
+          "text": "54 more marketed drugs, the ones the survey found missing, each with its sourced brand names and measured affinities",
+          "commits": [
+            "62867b9",
+            "1d415d4"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.28.0",
+      "date": "2026-07-26",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Two more benzodiazepines: bromazepam and clotiazepam",
+          "commits": [
+            "5a33f2a"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A region carrying many of a drug's targets no longer washes out to flat white; it now glows once, as brightly as the drug's strongest action there",
+          "commits": [
+            "5473089"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Surveyed which marketed drugs the reference rosters have and this dataset does not",
+          "commits": [
+            "cb3af62"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.27.0",
+      "date": "2026-07-26",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Bindings that only had a measured strength, with no known direction, now have one and light up the 3D scene like any other",
+          "commits": [
+            "4c4fc4b",
+            "b7d8f9a"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The guided tour says up front that it takes about three minutes",
+          "commits": [
+            "7e3bd5c"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The version number now also shows on the loading screen",
+          "commits": [
+            "f5ca91f"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The glowing dots on a region no longer vanish when you rotate the brain past a certain angle",
+          "commits": [
+            "e2ecadc"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.26.0",
+      "date": "2026-07-26",
+      "entries": [
+        {
+          "category": "data",
+          "text": "A twelfth source, the Guide to Pharmacology's curated affinities, fills the targets a radioligand panel cannot reach: the benzodiazepine site, MAO, acetylcholinesterase, orexin, melatonin",
+          "commits": [
+            "29d0073",
+            "b1b4da5"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "It filled in 35 missing affinity values and 193 missing directions, taking measured-affinity coverage to 86%",
+          "commits": [
+            "961265d"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.25.0",
+      "date": "2026-07-26",
+      "entries": [
+        {
+          "category": "added",
+          "text": "\"Found in\" now answers how much, not only where: each region gets a bar showing the relative amount of that receptor, measured from human donor brains",
+          "commits": [
+            "db8efd5",
+            "4dcd3c9"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Each profile says how many donors it rests on and how well they agreed; a gene whose donors disagreed publishes nothing rather than a shaky number",
+          "commits": [
+            "77694fb"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.24.0",
+      "date": "2026-07-25",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Metabolites now draw on the measured-affinity database directly, so one like norfluoxetine shows its eleven measured targets even though its own encyclopedia page lists none",
+          "commits": [
+            "f3e31c0"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Wrote up where receptor density and blood-brain-barrier data could come from, for a later pass",
+          "commits": [
+            "7f17813"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.23.0",
+      "date": "2026-07-24",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The \"Sources & provenance\" panel now opens one bar at a time: click the overall figure for a breakdown by kind of fact, then a kind for its grades and a real example you can jump to",
+          "commits": [
+            "d65a4c5",
+            "ae00010"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Half-lives, metabolites and their receptor actions each got their own coverage bar in that panel",
+          "commits": [
+            "415087d"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "A metabolite's own receptor actions are now listed under it in the drug panel, not only on the receptor's side",
+          "commits": [
+            "f80d393"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Jumping from a receptor to a metabolite now flashes the right row, so you can see which of the drug's metabolites you landed on",
+          "commits": [
+            "76f8b80"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.22.0",
+      "date": "2026-07-24",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Active metabolites now have receptor actions of their own, so a receptor's page lists them beside the drugs, marked \"metabolite of\"",
+          "commits": [
+            "6b7d2b2",
+            "8f95f64"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Searching for a metabolite by name now finds it, and keeps the drug it comes from visible in the list",
+          "commits": [
+            "63b9134"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A metabolite made by two different drugs is now counted and listed once instead of twice",
+          "commits": [
+            "b2161a8",
+            "b3f4198"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "3.21.0",
+      "date": "2026-07-24",
+      "entries": [
+        {
+          "category": "added",
+          "text": "How long a drug stays in the body: each drug now shows its half-life, next to its brand names",
+          "commits": [
+            "934a567",
+            "2eb1809"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Active metabolites: the substances your body turns a drug into that keep working on their own, each with its own half-life",
+          "commits": [
+            "68132ee",
+            "69d4fed"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A switch in the drug list to show or hide those metabolites under their parent drug",
+          "commits": [
+            "2eb1809"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The new half-life and metabolite facts are counted in the sourcing tally like everything else, so the \"% sourced\" figure stays honest",
+          "commits": [
+            "19c21d4",
+            "d5d304e"
+          ]
+        }
+      ]
     }
   ]
 }
