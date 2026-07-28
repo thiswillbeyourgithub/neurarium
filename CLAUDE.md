@@ -887,15 +887,22 @@ intentionally not derived from git (the site deploys as plain files).
 ### Changelog ("What's new")
 
 Release notes for casual visitors, one file per version: `docs/changelog/<major.minor.patch>/
-changelog.md`, `## <Category>` sections (closed vocabulary `CATEGORIES` in
-`tools/data_generators/changelog.py`) of `- bullet (sha, sha)` lines, each with an indented
-`fr:` line (required, like every display string). `docs/` is not web-exposed, so
-`generate_data.py` emits them newest-first to `public/data/changelog.json`.
+changelog.md`, a required `# <version> (YYYY-MM-DD)` title (the release **date** has nowhere
+else to live, the emit being a file read with no git history to date a version from; the
+version doubles as a copy-paste check against the directory) then `## <Category>` sections
+(closed vocabulary `CATEGORIES` in `tools/data_generators/changelog.py`) of
+`- bullet (sha, sha)` lines, each with an indented `fr:` line (required, like every display
+string). `docs/` is not web-exposed, so `generate_data.py` emits them newest-first to
+`public/data/changelog.json`.
 `js/changelog.js` `createChangelog()` fetches that **only when its popup opens**, and
 `showIfUnseen()` shows every release after the version in `localStorage`
 `neurarium.changelogSeen` (a first-ever visitor is silently marked current: they get the
-tour instead). Also reachable from the About popup's "What's new" link; scrolls via the
-shared `.modal` rule. A commit sha links to `<sourceUrl>/commit/<sha>` only when
+tour instead), with a **Show all release notes** button under them (rendered only while the
+view is a subset, so the rest of the history is a click away rather than a wall to scroll).
+Also reachable from the About popup's "What's new" link, which opens the full history;
+scrolls via the shared `.modal` rule. Each version heading carries its date, formatted in
+the reader's locale (read from `documentElement.lang` at render time, so an EN/FR switch
+follows). A commit sha links to `<sourceUrl>/commit/<sha>` only when
 `sourceUrl` points *into* a repository (same rule as the About "open an issue" link, so
 no repo/username is hardcoded); otherwise it renders as plain text.
 `check_data.py` family 9 fails if `version.js` has no changelog directory.

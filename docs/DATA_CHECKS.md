@@ -57,7 +57,8 @@ errors. Functions take loaded data as args (unit-testable). Nine families:
   looked up, the honest complement to "% sourced".
 - **Changelog** (release notes per version): `public/data/changelog.json` must be
   well-formed, newest-version-first (the order the viewer relies on to show every
-  release since a visitor's last one), with no duplicate version, a known category on
+  release since a visitor's last one), with no duplicate version, a real `YYYY-MM-DD`
+  date whose order matches the version order, a known category on
   every entry and a real sha on every commit ref. The one that bites: the version in
   `public/version.js` must have a `docs/changelog/<version>/changelog.md`, so bumping
   the version without writing notes fails here instead of shipping a What's new popup

@@ -419,10 +419,12 @@
       "changelog.openLink": "What's new →",
       "changelog.commit": "See this change in the source repository",
       "changelog.empty": "No release notes yet.",
+      "changelog.showAll": "Show all release notes",
       "changelog.cat.added": "New",
       "changelog.cat.improved": "Improved",
       "changelog.cat.fixed": "Fixed",
       "changelog.cat.data": "Data & sources",
+      "changelog.cat.docs": "Documentation",
       "about.sourcingIntro":
         "Every node in this dataset (any sourceable datum: a region, a pathway, a " +
         "receptor, a drug binding, ...) carries a source grade. None of it has been " +
@@ -868,10 +870,12 @@
       "changelog.openLink": "Nouveautés →",
       "changelog.commit": "Voir ce changement dans le dépôt du code source",
       "changelog.empty": "Pas encore de notes de version.",
+      "changelog.showAll": "Voir toutes les notes de version",
       "changelog.cat.added": "Nouveau",
       "changelog.cat.improved": "Améliorations",
       "changelog.cat.fixed": "Corrections",
       "changelog.cat.data": "Données et sources",
+      "changelog.cat.docs": "Documentation",
       "about.sourcingIntro":
         "Chaque nœud de ce jeu de données (toute donnée sourçable : une région, " +
         "une voie, un récepteur, une liaison médicamenteuse, ...) porte un niveau " +

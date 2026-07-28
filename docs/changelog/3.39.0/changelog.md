@@ -1,3 +1,5 @@
+# 3.39.0 (2026-07-28)
+
 ## Added
 - This "What's new" popup: after an update it lists everything that changed since your last visit, and you can reopen it any time from About (d36c46b)
   fr: Cette fenêtre « Nouveautés » : après une mise à jour, elle liste tout ce qui a changé depuis votre dernière visite, et vous pouvez la rouvrir à tout moment depuis À propos

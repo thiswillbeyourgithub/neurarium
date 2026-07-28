@@ -7,10 +7,15 @@ which the viewer fetches only when the popup opens. ``docs/`` is not web-exposed
 
 The file format, kept deliberately small so writing one is a two-minute job::
 
+    # 3.39.0 (2026-07-28)
+
     ## Added
     - What a casual visitor gets out of it, one line (2e7c22f, 211e89f)
       fr: La meme chose en francais
 
+* The ``# <version> (<date>)`` title is **required** and must name the directory's own
+  version: it carries the release date (there is nowhere else to put it, the emit being
+  a plain file copy rather than anything git-aware) and doubles as a copy-paste check.
 * ``## <Category>`` opens a section; the category must be one of :data:`CATEGORIES`
   (a closed set so the viewer can label + translate it without parsing prose).
 * ``- text`` is one bullet. A trailing ``(sha, sha)`` is the commits it came from;
@@ -23,15 +28,18 @@ Written with the help of Claude Code.
 from __future__ import annotations
 
 import re
+from datetime import date as _date
 from pathlib import Path
 from typing import Any
 
-# The categories a bullet can sit under, in the order the viewer shows them. Closed
-# on purpose: the labels are UI strings (`changelog.cat.*` in js/i18n.js), not data,
-# so a new category is a deliberate two-file change rather than a typo in a heading.
-CATEGORIES = ("added", "improved", "fixed", "data")
+# The categories a bullet can sit under. Closed on purpose: the labels are UI strings
+# (`changelog.cat.*` in js/i18n.js), not data, so a new category is a deliberate
+# two-file change rather than a typo in a heading. Within a release the viewer keeps
+# the authored order, so this tuple is the vocabulary, not the running order.
+CATEGORIES = ("added", "improved", "fixed", "data", "docs")
 
 _VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
+_TITLE_RE = re.compile(r"^#\s+(\d+\.\d+\.\d+)\s+\((\d{4}-\d{2}-\d{2})\)\s*$")
 _HEADING_RE = re.compile(r"^##\s+(.+?)\s*$")
 _BULLET_RE = re.compile(r"^[-*]\s+(.*?)\s*$")
 _FR_RE = re.compile(r"^\s+fr:\s*(.+?)\s*$")
@@ -45,17 +53,33 @@ def version_key(version: str) -> tuple[int, int, int]:
     return tuple(int(p) for p in version.split("."))  # type: ignore[return-value]
 
 
-def parse_changelog(text: str, where: str) -> list[dict[str, Any]]:
-    """Parse one ``changelog.md`` body into its ordered list of entries.
+def parse_changelog(text: str, where: str) -> dict[str, Any]:
+    """Parse one ``changelog.md`` body into ``{"version", "date", "entries"}``.
 
     Every failure is loud and names the file + line: a changelog that silently ate a
     bullet would be worse than no changelog, since nobody re-reads the emitted JSON.
     """
     entries: list[dict[str, Any]] = []
     category: str | None = None
+    version: str | None = None
+    released: str | None = None
     for lineno, raw in enumerate(text.splitlines(), 1):
         line = raw.rstrip()
-        if not line.strip() or line.startswith("#") and not line.startswith("##"):
+        if not line.strip():
+            continue
+        if line.startswith("#") and not line.startswith("##"):
+            title = _TITLE_RE.match(line)
+            if not title:
+                raise ValueError(
+                    f"{where}:{lineno}: the title must read '# <version> (YYYY-MM-DD)', "
+                    f"got {line!r}")
+            if version is not None:
+                raise ValueError(f"{where}:{lineno}: a second '# <version>' title")
+            version, released = title.group(1), title.group(2)
+            try:
+                _date.fromisoformat(released)
+            except ValueError:
+                raise ValueError(f"{where}:{lineno}: {released!r} is not a real date") from None
             continue
         heading = _HEADING_RE.match(line)
         if heading:
@@ -95,7 +119,9 @@ def parse_changelog(text: str, where: str) -> list[dict[str, Any]]:
                          f"starting with {missing[0]!r}")
     if not entries:
         raise ValueError(f"{where}: no bullets (an empty changelog is not a release note)")
-    return entries
+    if version is None:
+        raise ValueError(f"{where}: no '# <version> (YYYY-MM-DD)' title, so no release date")
+    return {"version": version, "date": released, "entries": entries}
 
 
 def load_changelog(docs_dir: Path) -> list[dict[str, Any]]:
@@ -116,12 +142,17 @@ def load_changelog(docs_dir: Path) -> list[dict[str, Any]]:
         if not md.exists():
             raise ValueError(f"changelog: {entry.name}/ has no changelog.md")
         rel = f"docs/changelog/{entry.name}/changelog.md"
+        parsed = parse_changelog(md.read_text(encoding="utf-8"), rel)
+        if parsed["version"] != entry.name:
+            raise ValueError(f"{rel}: titled {parsed['version']} but sits in "
+                             f"{entry.name}/ (one of the two is a copy-paste slip)")
         releases.append((key, {
             "version": entry.name,
+            "date": parsed["date"],
             # `text` is already the {en, fr} shape the serializer externalizes: the
             # French rides beside its English here rather than in i18n.py's global FR
             # table, because a release note is written once and never reused.
-            "entries": parse_changelog(md.read_text(encoding="utf-8"), rel),
+            "entries": parsed["entries"],
         }))
     releases.sort(key=lambda pair: pair[0], reverse=True)
     return [release for _key, release in releases]

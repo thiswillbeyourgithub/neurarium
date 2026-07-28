@@ -1,3 +1,5 @@
+# 3.38.0 (2026-07-27)
+
 ## Added
 - NKCC1 and bumetanide, the pair behind the chloride gradient that decides whether GABA calms or excites a neuron (ce28d98)
   fr: NKCC1 et le bumétanide, le duo derrière le gradient de chlorure qui décide si le GABA calme ou excite un neurone

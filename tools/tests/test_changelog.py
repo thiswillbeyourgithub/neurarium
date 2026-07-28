@@ -18,9 +18,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_generators
 import changelog  # noqa: E402
 
 
+TITLE = "# 1.0.0 (2026-01-31)\n"
+
+
 class ParseTest(unittest.TestCase):
-    def parse(self, text):
-        return changelog.parse_changelog(text, "test.md")
+    def parse(self, text, title=TITLE):
+        """The bullets of a file, with a valid title prepended (the title's own rules
+        are covered by TitleTest, so every other case can ignore it)."""
+        return changelog.parse_changelog(title + text, "test.md")["entries"]
 
     def test_bullet_with_french_and_commits(self):
         entries = self.parse(
@@ -50,8 +55,8 @@ class ParseTest(unittest.TestCase):
             "## Added\n- A\n  fr: A\n")
         self.assertEqual([e["category"] for e in entries], ["fixed", "added"])
 
-    def test_blank_lines_and_a_title_are_ignored(self):
-        entries = self.parse("# 3.39.0\n\n## Added\n\n- A\n  fr: A\n\n")
+    def test_blank_lines_are_ignored(self):
+        entries = self.parse("\n## Added\n\n- A\n  fr: A\n\n")
         self.assertEqual(len(entries), 1)
 
     def test_unknown_category_raises(self):
@@ -81,6 +86,36 @@ class ParseTest(unittest.TestCase):
             self.parse("## Added\n")
 
 
+class TitleTest(unittest.TestCase):
+    """The title carries the release date, which has nowhere else to live: the emit is
+    a plain file read, with no git history to date a version from."""
+
+    def parse(self, text):
+        return changelog.parse_changelog(text, "test.md")
+
+    def test_title_yields_version_and_date(self):
+        parsed = self.parse("# 3.39.0 (2026-07-28)\n## Added\n- A\n  fr: A\n")
+        self.assertEqual(parsed["version"], "3.39.0")
+        self.assertEqual(parsed["date"], "2026-07-28")
+
+    def test_missing_title_raises(self):
+        with self.assertRaisesRegex(ValueError, "no release date"):
+            self.parse("## Added\n- A\n  fr: A\n")
+
+    def test_dateless_title_raises(self):
+        with self.assertRaisesRegex(ValueError, "YYYY-MM-DD"):
+            self.parse("# 3.39.0\n## Added\n- A\n  fr: A\n")
+
+    def test_impossible_date_raises(self):
+        with self.assertRaisesRegex(ValueError, "not a real date"):
+            self.parse("# 3.39.0 (2026-02-31)\n## Added\n- A\n  fr: A\n")
+
+    def test_two_titles_raise(self):
+        with self.assertRaisesRegex(ValueError, "second"):
+            self.parse("# 3.39.0 (2026-07-28)\n# 3.40.0 (2026-07-29)\n"
+                       "## Added\n- A\n  fr: A\n")
+
+
 class VersionKeyTest(unittest.TestCase):
     def test_orders_numerically_not_lexically(self):
         versions = ["3.9.0", "3.10.0", "3.10.1"]
@@ -104,6 +139,15 @@ class LoadTest(unittest.TestCase):
         self.assertEqual(keys, sorted(keys, reverse=True))
         for release in releases:
             self.assertTrue(release["entries"], release["version"])
+            self.assertTrue(release["date"], release["version"])
+
+    def test_dates_never_run_backwards(self):
+        """Newest first by version must also read newest first by date, or the popup
+        would show a 'newer' release dated before the one under it."""
+        releases = changelog.load_changelog(
+            Path(__file__).resolve().parent.parent.parent / "docs")
+        dates = [r["date"] for r in releases]
+        self.assertEqual(dates, sorted(dates, reverse=True))
 
 
 if __name__ == "__main__":

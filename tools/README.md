@@ -93,15 +93,18 @@ Every version bump needs a `docs/changelog/<major>.<minor>.<patch>/changelog.md`
 popup that announces an update it cannot describe). The format:
 
 ```markdown
-# 3.39.0
+# 3.39.0 (2026-07-28)
 
 ## Added
 - What a visitor can now do, in their words, no jargon (2e7c22f, 211e89f)
   fr: La même chose en francais
 ```
 
-- Headings are the four categories `Added` / `Improved` / `Fixed` / `Data` (`CATEGORIES` in
-  `data_generators/changelog.py`); a `# <version>` title line is optional and ignored.
+- The `# <version> (YYYY-MM-DD)` title is required: it carries the release date (nothing else
+  does, the emit being a plain file read) and must match its directory, which catches the
+  copy-paste that made the file.
+- Headings are the five categories `Added` / `Improved` / `Fixed` / `Data` / `Docs`
+  (`CATEGORIES` in `data_generators/changelog.py`), used in whatever order the release wants.
 - Every bullet needs an indented `fr:` line right under it, like every other display string.
 - A trailing `(sha, sha)` list is stripped into `commits` and rendered as links to the commit
   on the source host; other trailing parentheses stay as prose. Write the shas after committing
@@ -388,9 +391,9 @@ there is no node-level catch-all `sources` block.
   `llm` (the model that extracted+judged the quote, `haiku`/`sonnet`/`opus`; absent = unknown). Every
   node's quote-bearing source references one by `quote_id`; the viewer + `check_data.py` rehydrate
   it at load (see the externalize note above).
-- `changelog.json` — the release notes, `{versions: [{version, entries[{category, text{en,fr},
-  commits[sha]}]}]}`, newest version first (the order `js/changelog.js` walks to show every release
-  since a visitor's last one). Not a node kind: it is editorial prose about the app, carries no
+- `changelog.json` — the release notes, `{versions: [{version, date, entries[{category,
+  text{en,fr}, commits[sha]}]}]}`, newest version first (the order `js/changelog.js` walks to show
+  every release since a visitor's last one). Not a node kind: it is editorial prose about the app, carries no
   provenance grade, and is absent from the sourcing tally. Compiled from the authored
   `docs/changelog/<version>/changelog.md` files (see Writing release notes below).
 - `structures.jsonl` — `id`, `name{en,fr}`, `base_name{en,fr}` (hemisphere-stripped, legend

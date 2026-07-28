@@ -1096,6 +1096,30 @@
         white-space: nowrap;
       }
       a.changelog-commit { color: var(--accent-bright); text-decoration: underline; }
+      /* The release date, riding its version heading rather than a line of its own. */
+      .changelog-date {
+        float: right;
+        font-size: 11px;
+        font-weight: 400;
+        color: var(--muted);
+      }
+      /* "Show all release notes": only rendered when the popup is showing a subset
+         (i.e. just what landed since the last visit), so the rest of the history is
+         one click away instead of a wall to scroll past. */
+      .changelog-showall {
+        display: block;
+        width: 100%;
+        margin: 14px 0 2px;
+        padding: 7px 10px;
+        font: inherit;
+        font-size: 12px;
+        color: var(--accent-bright);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .changelog-showall:hover { background: rgba(255, 255, 255, 0.08); }
       .changelog-empty { font-size: 12px; color: var(--muted); }
       /* A "jump to another popup" link row (Legend / About -> Sources & provenance):
          set off from the content above it with a hairline. */

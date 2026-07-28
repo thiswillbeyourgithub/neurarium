@@ -1,3 +1,5 @@
+# 3.36.0 (2026-07-27)
+
 ## Added
 - Furosemide, a diuretic that also damps one specific GABA-A receptor in the cerebellum (7bcd3c3)
   fr: Le furosémide, un diurétique qui freine aussi un récepteur GABA-A précis du cervelet

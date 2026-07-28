@@ -1,3 +1,5 @@
+# 3.37.0 (2026-07-27)
+
 ## Added
 - Alcohol, which was missing from the drug list (5826f66)
   fr: L'alcool, qui manquait à la liste des médicaments

@@ -59,6 +59,25 @@ export function commitUrl(sourceUrl, sha) {
 }
 
 /**
+ * An authored `YYYY-MM-DD` as a long date in the reader's language, or "" if unset.
+ *
+ * The locale is read from the document rather than captured, so the date follows an
+ * EN/FR switch without the popup having to be rebuilt. Built from the parts instead of
+ * `new Date(iso)`, which would read the string as UTC and slide a day west of Greenwich.
+ */
+export function formatDate(iso, lang) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ""));
+  if (!m) return "";
+  const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  try {
+    return d.toLocaleDateString(lang || undefined,
+      { year: "numeric", month: "long", day: "numeric" });
+  } catch {
+    return iso;                                     // an odd locale tag: the raw date still reads
+  }
+}
+
+/**
  * The "What's new" popup controller.
  *
  * @param {object} opts
@@ -100,6 +119,14 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
     section.className = "changelog-release";
     const h = document.createElement("h3");
     h.textContent = release.version;
+    const when = formatDate(release.date, document.documentElement.lang);
+    if (when) {
+      const stamp = document.createElement("time");
+      stamp.className = "changelog-date";
+      stamp.dateTime = release.date;
+      stamp.textContent = when;
+      h.append(" ", stamp);
+    }
     section.append(h);
 
     // Group by category, keeping the authored order of both the categories and the
@@ -140,6 +167,11 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
     return section;
   }
 
+  /** Every release this build can honestly show, newest first. */
+  function shippedReleases() {
+    return (cache || []).filter((r) => compareVersions(r.version, version) <= 0);
+  }
+
   function render(releases) {
     if (!body) return;
     body.textContent = "";
@@ -151,6 +183,17 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
       return;
     }
     for (const release of releases) body.append(renderRelease(release));
+    // After an update the popup opens on just the new releases, which is the point;
+    // the rest of the history is one click away rather than scrolled past.
+    const all = shippedReleases();
+    if (releases.length < all.length) {
+      const more = document.createElement("button");
+      more.type = "button";
+      more.className = "changelog-showall";
+      more.textContent = t("changelog.showAll");
+      more.addEventListener("click", () => render(all));
+      body.append(more);
+    }
     body.scrollTop = 0;
   }
 
@@ -160,7 +203,7 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
     try {
       releases = await load();
     } catch { /* offline / missing file: the empty message says so */ }
-    render(releases.filter((r) => compareVersions(r.version, version) <= 0));
+    render(shippedReleases());
     markSeen();
     ctrl.open();
   }

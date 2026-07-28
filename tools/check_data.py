@@ -91,6 +91,7 @@ import re
 import sys
 import unicodedata
 from collections import Counter, defaultdict
+from datetime import date
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "public" / "data"
@@ -1597,7 +1598,7 @@ def check_changelog(report):
         report.error(f"changelog.json is not valid JSON: {exc}")
         return
 
-    keys, seen = [], set()
+    keys, dates, seen = [], [], set()
     for release in releases:
         version = release.get("version")
         try:
@@ -1609,6 +1610,12 @@ def check_changelog(report):
             report.error(f"changelog: version {version} appears twice")
         seen.add(version)
         keys.append(key)
+        released = str(release.get("date") or "")
+        try:
+            date.fromisoformat(released)
+            dates.append(released)
+        except ValueError:
+            report.error(f"changelog {version}: {released!r} is not a YYYY-MM-DD date")
         if not release.get("entries"):
             report.error(f"changelog {version}: no entries (an empty release note)")
         for entry in release.get("entries") or []:
@@ -1623,6 +1630,9 @@ def check_changelog(report):
     if keys != sorted(keys, reverse=True):
         report.error("changelog: versions are not newest-first (the viewer relies on "
                      "the order to show the releases since a visitor's last one)")
+    if dates != sorted(dates, reverse=True):
+        report.error("changelog: the release dates run backwards somewhere, so a "
+                     "release would sit above an older version but carry an earlier date")
 
     match = _APP_VERSION_RE.search(version_js.read_text(encoding="utf-8")) \
         if version_js.exists() else None
