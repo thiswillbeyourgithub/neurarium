@@ -562,7 +562,8 @@ fixed Stahl list.
 - **Panel** (`showDrug`): the molecule image (when fetched), the class, the NbN, the description
   (live-refreshed from Wikipedia, re-graded `sourced`), a Wikipedia link, then the **Acts on** binding
   list (each row: an effect glyph + target + action·note, "· speculative" when tentative, plus a
-  `bindingProvenancePill` = the binding's quote source, else its Ki (verified), else `NOSOURCE`),
+  `bindingProvenancePill` = the binding's quote source, else its Ki (verified), else `NOSOURCE`, or the
+  orange ⚠ when it carries `uncertainty[]`, see Source provenance),
   sorted strongest-affinity first. Below it a **Projections affected** list (only when `flowKinds`
   non-empty): one row per ascending system whose tone the drug sets (jumps to that kind-mode group,
   pilled with the strongest binding on the system), an out-/in-arrow per `flowSystems[kind].direction`
@@ -724,6 +725,9 @@ coloured **pill**; the grade is **data**. Grades (`PROVENANCE_LEVELS`, weakest t
 - **`verified`** (green **✓**): an LLM extracted a quote, it was *programmatically* confirmed present in
   the source, and a separate LLM agreed it supports the claim. Highest grade; still LLM-driven.
 - absence -> a red **✕** pill (`NOSOURCE_GLYPH`, `.src-todo`). Not a stored grade.
+- **`uncertain`** (orange **⚠**): not a stored grade either but a **display grade**, taken by a node
+  whose `uncertainty` bullets are non-empty (see below). It replaces the green ✓ on the pill and in the
+  tally, and buckets as **backed** (the quote really was checked).
 
 Every node's grade rides its own row/heading (`makeProvenancePill(level)`), never a separate bottom
 "Sources" block (a source only ever grades one node); a node with no source shows `NOSOURCE`, never a
@@ -735,9 +739,9 @@ pill (it stays only as the pill's `aria-label`, `info.prov*`). The popup's tally
 clickable to reveal the per-node-kind bars, each of which is in turn clickable to reveal its grade counts
 + one clickable **example node** (`buildKindExample`: a representative datum rendered as a knowledge
 triplet, its notion in quotation marks, that navigates to the real drug/receptor/structure/circuit/group).
-The grade key lists only `NOSOURCE` / `llm` / `verified` (the `~sourced` and live-Wikipedia rows were
-dropped: no knowledge node is ever graded `sourced`). How the tally buckets these grades (and why `llm`
-counts as unbacked): see The "% sourced" figure.
+The grade key lists only `NOSOURCE` / `llm` / `uncertain` / `verified` (the `~sourced` and
+live-Wikipedia rows were dropped: no knowledge node is ever graded `sourced`). How the tally buckets
+these grades (and why `llm` counts as unbacked): see The "% sourced" figure.
 
 **The sourcing model.** A verified quote node may carry an optional `llm` (`haiku`/`sonnet`/`opus`,
 `SOURCING_LLMS`) naming the model that extracted+judged it, so a reader can weigh a quote by that
@@ -753,6 +757,22 @@ review, not stamped.
 `NOSOURCE`. Each `wikipedia` reference emits a sibling `wikipedia_provenance` (`WIKIPEDIA_PROVENANCE`
 registry); a **present** link defaults `"sourced"` (`WIKIPEDIA_DEFAULT_PROVENANCE`), not `llm` (a real
 reference the viewer live-fetches). `_provenance` validates every grade; upgrading a source is a data edit.
+
+**Doubting a `verified` claim (the `uncertain` badge).** `verified` says the sentence is on the page; it
+never said the sentence is *about this node*. A node whose quote does not attribute the claim carries an
+`uncertainty[]` array (today only drug bindings do, `tools/data_generators/quotes/uncertainty.py`), which
+takes over its pill: orange ⚠, tooltip = "Here are LLM-written reasons to be uncertain about this claim:"
+then one bullet per reason, then the node's own source as usual. **Every bullet is itself a badged,
+sourced claim**: a `kind` from the closed `UNCERTAINTY_REASONS` vocabulary (emitted as
+`meta.uncertainty_reasons`) + slot `args`, and either a real quote-gated source (the kind declares whether
+it reuses the owner's own quote or its Ki) or `absence: true`, which renders the red ✕ and reads "the
+corpus does not say this". No prose is stored: the sentence comes from an `uncertain.<kind>` i18n key, so
+a new kind means a new string in **both** catalogues. Forgetting a source raises at generation
+(`_uncertainty_bullet`) and errors in `check_data.py` family 5, which also gates each bullet quote
+verbatim and stands its subject-less-quote guard down for a binding that declares uncertainty (the two
+answer the same problem). The flagged claims are authored in `UNCERTAIN_BINDING_CLAIMS` and applied as a
+post-pass (`apply_binding_uncertainty`, not `_binding_record`) because the `class_wide` bullet counts
+across drugs; naming a (drug, target) with no binding raises, so a data edit cannot silently drop a flag.
 
 **Per-claim sources + the verify gate.** The nodes carrying such a source: a
 binding's `sources[]`, a drug's `nbn_sources[]`, a projection/circuit/group quote (`KANDEL_QUOTES`), a
@@ -848,9 +868,12 @@ the **live** read earns the green link. When the live fetch fails, the baked des
 pill and the reference link stays in its own row; a missing link shows `NOSOURCE`.
 
 **The "% sourced" figure.** `_provenance_stats` reduces every node + reference to its strongest grade and
-buckets it into **verified** (quote-checked) / **sourced** (from a document) / **missing** (no document).
-A bare `llm` grade *is* missing (an LLM asserting from memory has no document), so it buckets with a
-sourceless node (the viewer still shows them differently, grey `?` vs orange `NOSOURCE`). It tallies per
+buckets it into **verified** (quote-checked) / **uncertain** (quote-checked, but its `uncertainty[]`
+bullets say the quote does not attribute the claim) / **sourced** (from a document) / **missing** (no
+document). A bare `llm` grade *is* missing (an LLM asserting from memory has no document), so it buckets
+with a sourceless node (the viewer still shows them differently, grey `?` vs orange `NOSOURCE`).
+`uncertain` counts as **backed** (a real document exists), so flagging a claim leaves `pct_backed`
+untouched and only moves the node out of the green count. It tallies per
 node kind (drug bindings, NbN, drug class, projections, circuits, projection groups, receptor/target
 classifications, receptor/target expression regions, region anatomy, wikipedia references), plus a
 headline `pct_backed` over the **knowledge nodes** (references excluded, a reference points *at* a node).

@@ -42,7 +42,14 @@ errors. Functions take loaded data as args (unit-testable). Nine families:
   must cite a page inside that drug's own monograph (read from the book's generated
   `INDEX.md`, author-side, skipped + warned on a clone). A quote lifted off the
   neighbouring drug's entry is verbatim on the page it cites and still says nothing
-  about this drug, so only the range check can catch it.
+  about this drug, so only the range check can catch it. The subject-less gate **stands
+  down** for a binding that declares `uncertainty[]`: the orange badge answers the same
+  question out loud instead of banning the quote (see CLAUDE.md Source provenance). Those
+  bullets are then gated in turn: the `kind` must be in `meta.uncertainty_reasons`, each
+  bullet source goes through the same verbatim quote check, and a bullet with no source
+  must declare `absence: true` (a silent blank reads exactly like "the corpus is silent"
+  while meaning the source was forgotten; citing a source *and* claiming absence is an
+  error too).
   Also checks each binding's `ki`: its source corpus resolves, an `affinity_only`
   binding carries a `ki`, and (author-side, skipped on a clone) the cited `ki_id` row
   is really in the corpus CSV with that value (the PDSP analogue of the quote gate).

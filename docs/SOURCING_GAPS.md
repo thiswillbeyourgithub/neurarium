@@ -29,21 +29,25 @@ reads worse than the fragment. 14 book quotes still open on a lowercase letter, 
 almost all of those open on the drug's own lowercase name ("daridorexant binds to
 orexin 1 and orexin 2 receptors ..."), which is the subject the audit was looking for.
 
-**3. Does the quote actually assert the claim?** This is the sulpiride shape and it is
-**not** fully closed. 46 (drug, quote) claims are sentences Stahl prints in its **How
-Drug Causes Side Effects** block, which states rules without a subject ("Blockade of
-alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension"). Of
-those, 6 name the drug and 5 attribute the action with a pronoun ("By blocking X, **it**
-can cause Y"); both are fine. **35 have no subject at all**, and because one such
-sentence sources every subtype it mentions (m1-m5, alpha1a/b/d), they carry **99
-individual bindings**. Count them at the claim level, not the binding level: 35 editorial
-decisions, not 99. They were kept, on evidence rather than convenience:
+**3. Does the quote actually assert the claim?** This is the sulpiride shape. 46 (drug,
+quote) claims are sentences Stahl prints in its **How Drug Causes Side Effects** block,
+which states rules without a subject ("Blockade of alpha adrenergic 1 receptors may
+explain dizziness, sedation, and hypotension"). Of those, 6 name the drug and 5
+attribute the action with a pronoun ("By blocking X, **it** can cause Y"); both are
+fine. **33 have no subject at all**, and because one such sentence sources every subtype
+it mentions (m1-m5, alpha1a/b/d), they carry **89 individual bindings** across 17 drugs.
+Count them at the claim level, not the binding level: 33 editorial decisions, not 89.
+(An earlier pass over the same material counted 35 claims / 99 bindings; that detector
+also caught sentences outside the side-effect block and verb-first ones like "Blocks
+histamine 1 receptors", which do read as statements about the drug. 33 / 89 is the
+number actually shipped, in `UNCERTAIN_BINDING_CLAIMS`.) They were kept, on evidence
+rather than convenience:
 
 - Unlike the three class-wide antipsychotic lines already stripped (printed on 17 to 28
   monographs including benzamides that lack the property), these lines are printed
   selectively: the alpha-1 one on 13 monographs, the anticholinergic one on 10, the
   antihistamine one on 12, all tricyclics and all genuinely carrying the property.
-- Most are independently backed by a measured PDSP Ki on the same binding (58 of the 99
+- Half are independently backed by a measured PDSP Ki on the same binding (44 of the 89
   bindings carry one; a whole claim without any is the exception, e.g. clomipramine's
   m1-m5 on p.180).
 - Stripping them would not improve the data anyway: PDSP only holds a generic
@@ -57,16 +61,37 @@ appears on 29 pages because Stahl writes it on every antipsychotic, and every on
 them does block D2. What distinguished the sulpiride case was the section it sat in
 plus a drug that lacked the property, not the repetition.
 
-**Still open here:** a check for #3 that fires on a genuinely wrong claim without
-firing on the 42 correct ones. It needs the section a quote sits in (parseable from the
-page files) *and* independent evidence the drug lacks the property, which today only
-exists as a Ki for the coarse target we do not model.
+**Resolved (2026-07-28) by making the doubt legible rather than by deleting or blessing
+the claims:** all 33 now carry an **uncertain** badge (orange `⚠`) in place of the green
+check, and its tooltip gives the reasons to doubt them, each reason itself a badged,
+quote-gated node (the sentence explains a side effect; it is printed on N other
+monographs; a measured Ki backs it, or there is none; Stahl never lists the action among
+the drug's mechanisms). See `CLAUDE.md` "Source provenance" for the badge, the tally
+bucket and the bullet contract, and `tools/data_generators/quotes/uncertainty.py` for the
+vocabulary + the claims. The nodes stay *backed* (a real document does exist, so the
+headline is unchanged) but leave the green `verified` count.
+
+**Still open here:**
+
+- The **11 attributed claims** (6 naming the drug, 5 using a pronoun) are fine as they
+  stand and are deliberately **not** flagged. Re-read them if the badge's vocabulary
+  grows a kind that fits them better.
+- An automatic check for #3, one that fires on a genuinely wrong claim without firing on
+  the 42 correct ones. It needs the section a quote sits in (parseable from the page
+  files) *and* independent evidence the drug lacks the property, which today only exists
+  as a Ki for the coarse target we do not model. The badge is a curated stand-in: it
+  makes the weak claims visible, it does not detect new ones.
 
 ## Snapshot (2026-07-27, after the GtoPdb classification, metabolism and drug-binding passes)
 
 Headline: **3820 / 3969 knowledge nodes backed (96%)**. In the tally a bare `llm`
 grade counts as **missing** ("an LLM asserted it from memory" = no document), so
 "missing" below means `llm` or no source at all. 149 knowledge nodes are missing.
+
+> **The uncertain badge (2026-07-28) does not move any figure in this section.** It moved
+> 89 `drug_bindings` out of `verified` into their own `uncertain` bucket; both are backed,
+> so the headline, the per-kind coverage and the gap are unchanged. The live numbers are in
+> the README `SOURCING_STATS` block and the in-app Sources popup, never re-typed here.
 
 > **What the GtoPdb classification pass (corpus #12) just did, same day:** 232 missing to
 > 170, 94% to 96%. `receptor_class` 30 to **55 / 56** (only sigma-1 left, a GtoPdb

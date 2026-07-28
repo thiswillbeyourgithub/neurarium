@@ -206,8 +206,10 @@ Screenshots).
   plus the per-structure `WIKIPEDIA` link table; a dependency-free leaf), and the `quotes/` subpackage (verified quote registries by
   corpus: `kandel.py` = `PROJECTION_QUOTES` + `STRUCTURE_QUOTES` (Kandel/Nieuwenhuys anatomy, cites the
   connectivity `_KQ_*`); `stahl_essential.py` = `STAHL_ESSENTIAL_RECEPTOR_QUOTES`/`STAHL_ESSENTIAL_TARGET_QUOTES`/
-  `RECEPTOR_ATTR_QUOTES`/`RECEPTOR_CLASSIFICATION_COVERAGE`/`CLASSIFICATION_ATTRS`/`TARGET_POLARITY_QUOTES`; chain
-  stays acyclic provenance <- connectivity <- quotes <- generate_data).
+  `RECEPTOR_ATTR_QUOTES`/`RECEPTOR_CLASSIFICATION_COVERAGE`/`CLASSIFICATION_ATTRS`/`TARGET_POLARITY_QUOTES`;
+  `metabolism.py` = `METABOLITE_ENZYME_QUOTES`; `uncertainty.py` = the mirror image of the others
+  (`UNCERTAINTY_REASONS` + `UNCERTAIN_BINDING_CLAIMS` + `apply_binding_uncertainty`: why a quote-checked
+  claim still deserves doubt); chain stays acyclic provenance <- connectivity <- quotes <- generate_data).
 - `tools/data_generators/changelog.py` — parses the authored `docs/changelog/<version>/changelog.md`
   files into the `changelog.json` shape (stdlib, no deps). Fails loud with `file:line` on an unknown
   category, a bullet with no `fr:` line, or stray prose, so a typo cannot silently drop a bullet.
@@ -379,7 +381,9 @@ there is no node-level catch-all `sources` block.
   (role -> {label, `direction`: what it does to a co-prescribed substrate's level}) and
   `enzyme_strengths` + `enzyme_reactions` (the chemical step by which an enzyme makes an
   active metabolite; see CLAUDE.md Drug metabolism),
-  `target_type_labels`/`target_type_colors`, `source_corpora`, `density_min_reliability` (the
+  `target_type_labels`/`target_type_colors`, `source_corpora`, `uncertainty_reasons` (the closed
+  vocabulary a node's `uncertainty[]` bullets draw from, each `{source, absence, args}`),
+  `density_min_reliability` (the
   cross-donor r floor every published profile clears), `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
 - `translations.fr.json` — the deduplicated French side table, `{english: french}` with sorted
@@ -427,7 +431,10 @@ there is no node-level catch-all `sources` block.
   `category_sources`), optional `nbn{en,fr}` (+ `nbn_sources`, + `nbn_nonstandard:true` when the
   value is Stahl's class descriptor not a formal NbN), `bindings[]` (each: `target`, `action`,
   optional `effect`/`note{en,fr}`/`tentative`/`sources[{corpus,page,quote,provenance}]`/`ki`
-  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)),
+  (measured PDSP affinity)/`affinity_only:true` (Ki but no known direction, panel-only)/
+  `uncertainty[]` (each: `kind` (a `meta.uncertainty_reasons` key), optional `args` (the i18n
+  sentence's slots), and either `sources[]` or `absence:true`; non-empty = the orange ⚠ badge
+  takes the pill over, see CLAUDE.md Source provenance)),
   optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
   `enzymes[]` (each: `enzyme` (a `meta.enzymes` key), `role`, optional `strength`, `sources[]`;
   one node per (enzyme, role) pair, kind `drug_enzymes`, merged in from the committed
