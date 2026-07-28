@@ -1501,8 +1501,9 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             _drug_record(drug, valid_targets, receptor_bases, molecule_ids,
                          enzyme_rows))
     _check_drug_aliases(seen_drug_ids)
-    # The "uncertain" badges: a post-pass, not part of _drug_record, because one of the
-    # bullets counts how many monographs print the same sentence (see the module).
+    # The "uncertain" badges: a post-pass, not part of _drug_record, because two of the
+    # bullets look across bindings (how many monographs print the same sentence, and how
+    # many subtypes one sentence covers). See the module.
     apply_binding_uncertainty(drugs)
     # A hand-curated formed_by row whose (drug, metabolite) key matched nothing: the
     # metabolite was renamed or dropped by an applier re-run, so the node silently

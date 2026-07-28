@@ -376,7 +376,11 @@ class UncertaintyTest(unittest.TestCase):
     The badge exists to stop a flat green check overstating a claim whose quote does
     not attribute it, so the failure mode to guard is a bullet that LOOKS sourced but
     is not: an unknown reason kind, a missing slot arg, or a blank source with no
-    absence declaration (which reads to a user exactly like "the corpus is silent")."""
+    absence declaration (which reads to a user exactly like "the corpus is silent").
+
+    The flags themselves are **derived**, so the other half is the derivation: does a
+    sentence attribute its claim to the drug? That decides whether a real claim keeps its
+    green check, so it is tested on the sentences that shaped it."""
 
     @classmethod
     def setUpClass(cls):
@@ -386,10 +390,12 @@ class UncertaintyTest(unittest.TestCase):
         cls.drugs = {d["id"]: d for d in _load_jsonl(DATA_DIR / "drugs.jsonl")}
         cls.meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
 
-    def _binding(self, ki=True):
-        b = {"target": "m3", "action": "antagonist",
-             "sources": [{"corpus": "stahl", "page": 207, "quote": "q",
-                          "provenance": "verified"}]}
+    def _source(self, quote="q", page=207):
+        return {"corpus": "stahl", "page": page, "quote": quote,
+                "provenance": "verified"}
+
+    def _binding(self, ki=True, target="m3"):
+        b = {"target": target, "action": "antagonist", "sources": [self._source()]}
         if ki:
             b["ki"] = {"median": 25.0, "min": 1, "max": 99, "n_human": 4,
                        "n_nonhuman": 0,
@@ -400,13 +406,14 @@ class UncertaintyTest(unittest.TestCase):
     def test_unknown_kind_raises(self):
         with self.assertRaises(KeyError):
             self.mod._uncertainty_bullet("vibes", what="x", binding=self._binding(),
-                                         page=207)
+                                         source=self._source())
 
     def test_missing_slot_arg_raises(self):
         # class_wide takes {n}; without it the panel would print a literal "{n}".
         with self.assertRaises(ValueError):
             self.mod._uncertainty_bullet("class_wide", what="x",
-                                         binding=self._binding(), page=207)
+                                         binding=self._binding(),
+                                         source=self._source())
 
     def test_sourceless_non_absence_raises(self):
         """The user's explicit requirement: a bullet cites a document or says outright
@@ -414,42 +421,50 @@ class UncertaintyTest(unittest.TestCase):
         while actually meaning the source was forgotten."""
         with self.assertRaises(ValueError):
             self.mod._uncertainty_bullet("measured_ki", what="x",
-                                         binding=self._binding(ki=False), page=207,
+                                         binding=self._binding(ki=False),
                                          args={"ki": 1, "n": 1})
 
     def test_absence_bullet_carries_no_source(self):
         b = self.mod._uncertainty_bullet("not_a_mechanism", what="x",
-                                         binding=self._binding(), page=207)
+                                         binding=self._binding())
         self.assertTrue(b["absence"])
         self.assertNotIn("sources", b)
 
-    def test_own_quote_bullet_cites_the_page_it_was_given(self):
+    def test_own_quote_bullet_cites_the_source_it_was_given(self):
         b = self.mod._uncertainty_bullet("side_effect_rule", what="x",
-                                         binding=self._binding(), page=207)
-        self.assertEqual(b["sources"][0]["page"], 207)
-        # ... and a page the binding does not carry is an error, not a blank
+                                         binding=self._binding(),
+                                         source=self._source(page=42))
+        self.assertEqual(b["sources"][0]["page"], 42)
+        # ... and no source at all is an error, not a silent blank
         with self.assertRaises(ValueError):
             self.mod._uncertainty_bullet("side_effect_rule", what="x",
-                                         binding=self._binding(), page=999)
+                                         binding=self._binding())
 
-    def test_claim_naming_a_missing_binding_raises(self):
-        """Mirrors the METABOLITE_ENZYME_QUOTES rule: a later data edit must not be
-        able to drop a flagged binding and silently restore its green check."""
-        drugs = [{"id": "clozapine", "bindings": [{"target": "d2", "sources": []}]}]
-        real = self.mod.UNCERTAIN_BINDING_CLAIMS
-        try:
-            self.mod.UNCERTAIN_BINDING_CLAIMS = (
-                {"drug": "clozapine", "page": 207, "targets": ("m3",),
-                 "reasons": ("not_a_mechanism",)},)
-            with self.assertRaises(KeyError):
-                self.mod.apply_binding_uncertainty(drugs)
-            self.mod.UNCERTAIN_BINDING_CLAIMS = (
-                {"drug": "nosuchdrug", "page": 1, "targets": ("m3",),
-                 "reasons": ("not_a_mechanism",)},)
-            with self.assertRaises(KeyError):
-                self.mod.apply_binding_uncertainty(drugs)
-        finally:
-            self.mod.UNCERTAIN_BINDING_CLAIMS = real
+    def test_a_sentence_attributes_its_claim_three_ways(self):
+        """Naming the drug, a pronoun subject, or Stahl's elided subject. Each of these
+        is a real corpus sentence that must KEEP its green check."""
+        drug = {"id": "paroxetine", "name": "paroxetine"}
+        for quote in ("Paroxetine's weak antimuscarinic properties can cause "
+                      "constipation, dry mouth, sedation",
+                      "Anticholinergic activity for paroxetine may be somewhat less "
+                      "than for some other TCAs",
+                      "By blocking histamine 1 receptors in the brain, it can cause "
+                      "sedation and possibly weight gain",
+                      "Prevents the action of acetylcholine on muscarinic receptors"):
+            self.assertTrue(self.mod._attributes_to_drug(quote, drug), quote)
+
+    def test_a_mechanism_subject_attributes_nothing(self):
+        """The shape the badge exists for: the subject is the mechanism, so the sentence
+        never says this drug has it."""
+        drug = {"id": "nortriptyline", "name": "nortriptyline"}
+        for quote in ("Blockade of alpha adrenergic 1 receptors may explain dizziness, "
+                      "sedation, and hypotension",
+                      "Anticholinergic activity may explain sedative effects, dry mouth, "
+                      "constipation, and blurred vision",
+                      "Sedative effects and weight gain may be due to antihistamine "
+                      "properties"):
+            self.assertFalse(self.mod._attributes_to_drug(quote, drug), quote)
+
 
     def test_every_emitted_bullet_is_sourced_or_declares_absence(self):
         kinds = set(self.meta["uncertainty_reasons"])

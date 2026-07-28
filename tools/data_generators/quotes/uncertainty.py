@@ -1,51 +1,84 @@
 """Why a `verified` binding claim still deserves doubt (the ``uncertainty`` bullets).
 
 A `verified` grade only ever meant "this sentence really is on that page". It never meant
-"this sentence is *about this drug*", and the quote-quality audit
-(``docs/SOURCING_GAPS.md``) found one shape where the difference matters: Stahl's **How
-Drug Causes Side Effects** block prints mechanism-to-side-effect rules whose grammatical
-subject is the *mechanism*, not the drug, so nothing in the sentence says this drug has
-the action:
+"this sentence is *about this drug*", nor "this sentence is about *this* receptor". The shape
+where the difference matters, **derived** here rather than hand-listed:
+
+**The subject-less side-effect rule.** Stahl's **How Drug Causes Side Effects** block
+prints mechanism-to-side-effect rules whose grammatical subject is the *mechanism*, not
+the drug, so nothing in the sentence says this drug has the action::
 
     "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and
      hypotension"
 
-Those claims were kept, on evidence rather than convenience (the lines are printed
-selectively, only on monographs that genuinely carry the property, and half the bindings
-carry an independent measured Ki). But a flat green check overstates them, so they carry
-an **uncertain** badge instead: same source, same quote, plus the reasons to doubt it,
-each reason itself a badged, quote-gated claim.
+The block is identified by the quote's own **heading trail** (see
+``tools/fetch/fetch_quote_headers.py``), which is exactly what headings were resolved for;
+the subject test is :func:`_attributes_to_drug`.
+
+Those claims are kept, on evidence rather than convenience (the side-effect lines are
+printed selectively, only on monographs that genuinely carry the property, and half the
+bindings carry an independent measured Ki). But a flat green check overstates them, so
+they carry an **uncertain** badge instead: same source, same quote, plus the reasons to
+doubt it, each reason itself a badged, quote-gated claim.
+
+**Nothing here is authored per site.** The flags and every bullet are derived from the
+emitted data (the heading trail, the quote text, the drug's other sources, the Ki), so a
+data edit cannot leave a stale flag behind and a new drug is covered the day it lands. The
+derivation reproduces, binding for binding, the 89 that the hand audit in
+``docs/SOURCING_GAPS.md`` had flagged.
 
 **No prose is stored.** A bullet is a ``kind`` from :data:`UNCERTAINTY_REASONS` plus
 optional slot ``args``; the viewer builds the sentence from an i18n key, so both languages
-live in ``public/js/i18n.js`` with every other display string and the 89 flagged bindings
-do not carry 89 copies of the same three sentences.
+live in ``public/js/i18n.js`` with every other display string and the flagged bindings do
+not carry a copy of the same sentences each.
 
 **Every bullet is itself sourced, or says so.** A bullet either resolves a real
-quote-gated source (``source: "own_quote"`` reuses the binding's own quote,
+quote-gated source (``source: "own_quote"`` reuses the quote the flag was read off,
 ``source: "ki"`` its measured affinity) or declares ``absence: True``, which renders the
 red NOSOURCE pill and reads as "the corpus does not say this". Forgetting a source is an
 error, not a silent blank (:func:`_uncertainty_bullet` raises, and ``check_data.py``
 family 5 re-checks it on the emitted data).
-
-Only the *judgement* kinds are authored below. The Ki bullet is appended automatically
-from the binding's own ``ki``, so it can never drift from the affinity actually shipped.
 """
 from __future__ import annotations
 
+import collections
+import re
 from typing import Any
+
+from .. import quote_table
+
+# The Stahl subsections the derivation reads. The book's subsection vocabulary is closed
+# and stable across all 158 monographs (which is what makes the heading trail derivable
+# at all), so matching them by name is safe rather than brittle.
+SIDE_EFFECT_SUBSECTION = "How Drug Causes Side Effects"
+MECHANISM_SUBSECTION = "How the Drug Works"
+
+# Stahl's telegraphic style elides the subject of a predicate about the drug ("Prevents
+# the action of acetylcholine on muscarinic receptors"), so a verb-initial sentence IS
+# attributed: its subject is the drug, just unwritten. Only openers that actually occur
+# in the corpus are listed; an opener missing here can only ADD doubt to a claim, never
+# remove it, which is the safe direction for this list to be wrong in.
+_ELIDED_SUBJECT = re.compile(
+    r"^(blocks|prevents|inhibits|binds|increases|decreases|boosts|enhances|reduces|"
+    r"stimulates|activates|antagonizes|modulates|potentiates|releases|occupies|"
+    r"desensitizes|converts|acts|has|does|is)\b", re.I)
+
+# "By blocking histamine 1 receptors in the brain, IT can cause sedation": a pronoun
+# subject attributes the action as squarely as the drug's own name does.
+_ATTRIBUTING_PRONOUN = re.compile(r"\bits?\b", re.I)
+
 
 # The closed vocabulary of reason kinds. Each entry declares where its source comes from:
 #
-# - ``own_quote``: the binding's own quote source (the sentence being doubted). The bullet
-#   is a reading OF that quote, so it cites it and inherits its grade.
+# - ``own_quote``: the quote the flag was read off (the sentence being doubted). The
+#   bullet is a reading OF that quote, so it cites it and inherits its grade.
 # - ``ki``:        the binding's measured-affinity source (PDSP / GtoPdb / Wikipedia).
 # - ``None``:      an absence-of-evidence bullet; it MUST set ``absence`` so the viewer
 #   renders NOSOURCE and the gate knows the blank is deliberate.
 #
-# ``args`` lists the slots the i18n sentence takes, so a typo in an authored/derived arg
-# is caught here rather than surfacing as a literal "{ki}" in the panel. Adding a kind
-# means adding its ``uncertain.<kind>`` string to BOTH i18n catalogues.
+# ``args`` lists the slots the i18n sentence takes, so a typo in a derived arg is caught
+# here rather than surfacing as a literal "{ki}" in the panel. Adding a kind means adding
+# its ``uncertain.<kind>`` string to BOTH i18n catalogues.
 UNCERTAINTY_REASONS: dict[str, dict[str, Any]] = {
     # "The source sentence explains a side effect; its subject is the mechanism, not
     # the drug." The finding itself, cited on the very sentence it is about.
@@ -63,76 +96,49 @@ UNCERTAINTY_REASONS: dict[str, dict[str, Any]] = {
 }
 
 
-def _claim(drug: str, page: int, targets: tuple[str, ...],
-           reasons: tuple[str, ...] = ("side_effect_rule", "not_a_mechanism"),
-           ) -> dict[str, Any]:
-    return {"drug": drug, "page": page, "targets": targets, "reasons": reasons}
+def _english(value: Any) -> str:
+    """A display string that may still be an authored ``{en, fr}`` pair."""
+    if isinstance(value, dict):
+        return str(value.get("en") or "")
+    return str(value or "")
 
 
-# The flagged claims, one record per (drug, Stahl page, target set): 33 editorial
-# decisions carrying 89 bindings. Counted at the claim level on purpose, since one
-# sentence sources every subtype it mentions (m1-m5, alpha1a/b/d).
-#
-# `targets` must match bindings the drug actually has (``_uncertainty`` raises otherwise,
-# mirroring the METABOLITE_ENZYME_QUOTES rule), so a later data edit cannot silently drop
-# a flag. `page` picks which of the binding's sources the ``own_quote`` bullets cite.
-#
-# Every one is the same shape: a mechanism-noun-phrase sentence in the side-effect block,
-# and an action Stahl's own "How the Drug Works" list never states. The `class_wide` and
-# `measured_ki` bullets are derived, not authored.
-_TCA_MUSCARINIC = ("m1", "m2", "m3", "m4", "m5")
-_ALPHA1 = ("alpha1a", "alpha1b", "alpha1d")
+def _tokens(text: str) -> str:
+    """``text`` reduced to space-separated alphanumeric tokens, space-padded.
 
-UNCERTAIN_BINDING_CLAIMS: tuple[dict[str, Any], ...] = (
-    _claim("amitriptyline", 40, _ALPHA1),
-    _claim("amoxapine", 48, _ALPHA1),
-    _claim("clomipramine", 180, _TCA_MUSCARINIC),
-    _claim("clomipramine", 180, ("h1",)),
-    _claim("clomipramine", 180, _ALPHA1),
-    # The user-facing example: Stahl names M3 only to explain a pancreatic side effect,
-    # and never lists a muscarinic action among clozapine's mechanisms. The measured Ki
-    # is what keeps the binding rather than dropping it.
-    _claim("clozapine", 207, ("m3",)),
-    _claim("cyamemazine", 216, _TCA_MUSCARINIC),
-    _claim("cyamemazine", 216, ("h1",)),
-    _claim("desipramine", 226, ("h1",)),
-    _claim("desipramine", 226, _ALPHA1),
-    _claim("dothiepin", 278, _ALPHA1),
-    _claim("doxepin", 284, _ALPHA1),
-    _claim("imipramine", 396, _TCA_MUSCARINIC),
-    _claim("imipramine", 396, ("h1",)),
-    _claim("imipramine", 396, _ALPHA1),
-    _claim("lofepramine", 450, _TCA_MUSCARINIC),
-    _claim("lofepramine", 450, ("h1",)),
-    _claim("lofepramine", 450, _ALPHA1),
-    _claim("maprotiline", 496, _TCA_MUSCARINIC),
-    _claim("maprotiline", 496, ("h1",)),
-    _claim("maprotiline", 496, _ALPHA1),
-    _claim("nefazodone", 578, _ALPHA1),
-    _claim("nortriptyline", 584, _TCA_MUSCARINIC),
-    _claim("nortriptyline", 584, ("h1",)),
-    _claim("nortriptyline", 584, _ALPHA1),
-    _claim("phenterminetopiramate", 660, ("carbonic_anhydrase",)),
-    _claim("protriptyline", 700, ("h1",)),
-    _claim("protriptyline", 700, _ALPHA1),
-    _claim("trazodone", 840, ("h1",)),
-    _claim("trazodone", 840, _ALPHA1),
-    _claim("trimipramine", 864, _TCA_MUSCARINIC),
-    _claim("trimipramine", 864, ("h1",)),
-    _claim("trimipramine", 864, _ALPHA1),
-)
+    Matching happens on whole tokens rather than raw substrings, so a drug name cannot be
+    "found" inside a longer word."""
+    return " " + re.sub(r"[^a-z0-9]+", " ", text.lower()).strip() + " "
+
+
+def _attributes_to_drug(quote: str, drug: dict[str, Any]) -> bool:
+    """Does ``quote`` say that **this drug** has the action, rather than stating a rule?
+
+    Three ways a Stahl sentence attributes: it names the drug ("Paroxetine's weak
+    antimuscarinic properties..."), it uses a pronoun subject ("...IT can cause
+    sedation"), or it elides the subject in the book's telegraphic style ("Prevents the
+    action of acetylcholine..."). Anything else has a *mechanism* for a subject and never
+    states that this drug has it.
+    """
+    text = quote.strip()
+    if _ELIDED_SUBJECT.match(text) or _ATTRIBUTING_PRONOUN.search(text):
+        return True
+    tokens = _tokens(text)
+    names = {drug["id"]}
+    names.update(re.findall(r"[a-z]{4,}", _english(drug.get("name")).lower()))
+    return any(f" {name} " in tokens for name in names)
 
 
 def _uncertainty_bullet(kind: str, *, what: str, binding: dict[str, Any],
-                        page: Any, args: dict[str, Any] | None = None
-                        ) -> dict[str, Any]:
+                        source: dict[str, Any] | None = None,
+                        args: dict[str, Any] | None = None) -> dict[str, Any]:
     """One ``uncertainty`` bullet: a reason kind, its slot args, and its own source.
 
-    Where the source comes from is declared by the kind, not by the author (see
+    Where the source comes from is declared by the kind, not by the caller (see
     :data:`UNCERTAINTY_REASONS`), so a bullet cannot cite the wrong thing:
 
-    * ``own_quote`` reuses the binding's own source for ``page`` (the very sentence the
-      bullet is a reading of), so the bullet inherits its grade and its quote gate;
+    * ``own_quote`` cites the passed ``source`` (the very sentence the bullet is a
+      reading of), so the bullet inherits its grade and its quote gate;
     * ``ki`` reuses the binding's measured-affinity source;
     * an ``absence`` kind carries no source on purpose and renders NOSOURCE.
 
@@ -156,7 +162,7 @@ def _uncertainty_bullet(kind: str, *, what: str, binding: dict[str, Any],
         out["absence"] = True
         return out
     if spec["source"] == "own_quote":
-        src = next((s for s in binding.get("sources", []) if s.get("page") == page), None)
+        src = source
     elif spec["source"] == "ki":
         src = (binding.get("ki") or {}).get("source")
     else:
@@ -171,69 +177,72 @@ def _uncertainty_bullet(kind: str, *, what: str, binding: dict[str, Any],
 
 
 def apply_binding_uncertainty(drugs: list[dict[str, Any]]) -> None:
-    """Attach the ``uncertainty`` bullets to the flagged bindings, in place.
+    """Derive and attach the ``uncertainty`` bullets to every doubtful binding, in place.
 
-    Run as a post-pass over the emitted drugs rather than inside ``_binding_record``,
-    because one bullet (``class_wide``) is a count *across* drugs: the same Stahl
-    sentence printed on a dozen monographs is exactly the context a reader needs in
-    order to weigh it, and no single binding can see that.
+    Run as a post-pass over the assembled drugs rather than inside ``_binding_record``,
+    because the ``class_wide`` bullet counts the drugs the same sentence is printed on,
+    which no single binding can see.
 
-    Raises when a claim names a drug or a (drug, target) binding that does not exist,
-    mirroring the ``METABOLITE_ENZYME_QUOTES`` rule: a later data edit must not be able
-    to silently drop a flag and quietly restore a green check.
+    Must run **before** serialization, while the sources are still inline: the heading
+    trail is looked up through :func:`quote_table.heading_of`, which keys on the quote's
+    content hash.
     """
-    by_id = {d["id"]: d for d in drugs}
-    # How many drugs each flagged sentence is printed on. Keyed by the quote text,
-    # since that is what "the same sentence" means to a reader.
-    spread: dict[str, set[str]] = {}
-    for claim in UNCERTAIN_BINDING_CLAIMS:
-        drug = by_id.get(claim["drug"])
-        if drug is None:
-            raise KeyError(f"UNCERTAIN_BINDING_CLAIMS names unknown drug "
-                           f"{claim['drug']!r}")
+    # How many drugs each Stahl sentence is printed on. Keyed by the quote TEXT, since
+    # that is what "the same sentence" means to a reader (the same line on two pages is
+    # two quote nodes but one printed rule).
+    spread: dict[str, set[str]] = collections.defaultdict(set)
+    for drug in drugs:
         for b in drug.get("bindings", []):
-            if b["target"] not in claim["targets"]:
-                continue
-            for s in b.get("sources", []):
-                if s.get("page") == claim["page"] and s.get("quote"):
-                    spread.setdefault(s["quote"], set()).add(drug["id"])
+            for src in b.get("sources", []):
+                if src.get("corpus") == "stahl" and src.get("quote"):
+                    spread[src["quote"]].add(drug["id"])
 
-    for claim in UNCERTAIN_BINDING_CLAIMS:
-        drug = by_id[claim["drug"]]
-        found = {b["target"] for b in drug.get("bindings", [])}
-        missing = [t for t in claim["targets"] if t not in found]
-        if missing:
-            raise KeyError(
-                f"UNCERTAIN_BINDING_CLAIMS for drug {claim['drug']!r} p.{claim['page']} "
-                f"names target(s) {missing} the drug has no binding for")
-        for b in drug["bindings"]:
-            if b["target"] not in claim["targets"]:
-                continue
+    for drug in drugs:
+        for b in drug.get("bindings", []):
             what = f"Drug {drug['id']!r} binding {b['target']!r}"
-            bullets = [_uncertainty_bullet(kind, what=what, binding=b,
-                                           page=claim["page"])
-                       for kind in claim["reasons"]]
-            quote = next((s.get("quote") for s in b.get("sources", [])
-                          if s.get("page") == claim["page"]), None)
-            n_others = len(spread.get(quote or "", set())) - 1
-            if n_others > 0:
+            rule_source = None          # the subject-less side-effect sentence, if any
+            in_stahl = False            # is this binding read off a Stahl monograph ...
+            has_mechanism = False       # ... and does the book state it as a mechanism?
+            for src in b.get("sources", []):
+                if src.get("corpus") != "stahl" or not src.get("quote"):
+                    continue
+                in_stahl = True
+                trail = quote_table.heading_of(src)
+                where = trail[-1] if trail else None
+                if where == MECHANISM_SUBSECTION:
+                    has_mechanism = True
+                elif (where == SIDE_EFFECT_SUBSECTION
+                        and not _attributes_to_drug(src["quote"], drug)):
+                    rule_source = src
+            if not rule_source:
+                continue
+
+            bullets = [_uncertainty_bullet(
+                "side_effect_rule", what=what, binding=b, source=rule_source)]
+            others = len(spread.get(rule_source.get("quote", ""), ())) - 1
+            if others > 0:
                 bullets.append(_uncertainty_bullet(
-                    "class_wide", what=what, binding=b, page=claim["page"],
-                    args={"n": n_others}))
+                    "class_wide", what=what, binding=b, source=rule_source,
+                    args={"n": others}))
             # The affinity bullet is derived, never authored, so it cannot drift from
             # the Ki actually shipped: it says what the measurement is, or that there
             # is none (which is itself a reason to doubt).
             ki = b.get("ki")
             if ki:
                 bullets.append(_uncertainty_bullet(
-                    "measured_ki", what=what, binding=b, page=claim["page"],
+                    "measured_ki", what=what, binding=b,
                     args={"ki": ki["median"],
                           "n": int(ki.get("n_human", 0)) + int(ki.get("n_nonhuman", 0))}))
             else:
                 bullets.append(_uncertainty_bullet(
-                    "no_measured_ki", what=what, binding=b, page=claim["page"]))
+                    "no_measured_ki", what=what, binding=b))
+            # Only sayable about a drug the book actually covers: "the corpus never lists
+            # this among its mechanisms" is a statement about a monograph that exists.
+            if in_stahl and not has_mechanism:
+                bullets.append(_uncertainty_bullet(
+                    "not_a_mechanism", what=what, binding=b))
             # Evidence first, absences last: the list reads as "here is what the source
             # does say ... but here is what it never says", which is the shape of the
-            # doubt. Stable within each half (authored order, then the derived bullets).
+            # doubt. Stable within each half (the order they were built in).
             bullets.sort(key=lambda bl: bool(bl.get("absence")))
             b["uncertainty"] = bullets

@@ -26,14 +26,10 @@ from data_generators.quotes.stahl_essential import (
     STAHL_ESSENTIAL_TARGET_QUOTES,
     TARGET_POLARITY_QUOTES,
 )
-from data_generators.quotes.uncertainty import (
-    UNCERTAIN_BINDING_CLAIMS,
-    UNCERTAINTY_REASONS,
-)
+from data_generators.quotes.uncertainty import UNCERTAINTY_REASONS
 
 __all__ = [
     "METABOLITE_ENZYME_QUOTES",
-    "UNCERTAIN_BINDING_CLAIMS",
     "UNCERTAINTY_REASONS",
     "PROJECTION_QUOTES",
     "STRUCTURE_QUOTES",

@@ -68,19 +68,27 @@ quote-gated node (the sentence explains a side effect; it is printed on N other
 monographs; a measured Ki backs it, or there is none; Stahl never lists the action among
 the drug's mechanisms). See `CLAUDE.md` "Source provenance" for the badge, the tally
 bucket and the bullet contract, and `tools/data_generators/quotes/uncertainty.py` for the
-vocabulary + the claims. The nodes stay *backed* (a real document does exist, so the
-headline is unchanged) but leave the green `verified` count.
+vocabulary. The nodes stay *backed* (a real document does exist, so the headline is
+unchanged) but leave the green `verified` count.
+
+**Made automatic (2026-07-28), which closes the "curated stand-in" caveat this section
+used to end on.** The badge started as a hand-written list of the 33 claims. It is now
+**derived** from the emitted data: the quote's heading trail (see `CLAUDE.md` "Where a
+quote sits") says the sentence is in the *How Drug Causes Side Effects* block, and
+`_attributes_to_drug` says it has no subject. The derivation reproduces the audit's 33
+claims / 89 bindings exactly, binding for binding, which is the strongest evidence either
+of them is right. New drugs are now covered the day they land, and the list cannot go
+stale against a data edit.
 
 **Still open here:**
 
 - The **11 attributed claims** (6 naming the drug, 5 using a pronoun) are fine as they
   stand and are deliberately **not** flagged. Re-read them if the badge's vocabulary
   grows a kind that fits them better.
-- An automatic check for #3, one that fires on a genuinely wrong claim without firing on
-  the 42 correct ones. It needs the section a quote sits in (parseable from the page
-  files) *and* independent evidence the drug lacks the property, which today only exists
-  as a Ki for the coarse target we do not model. The badge is a curated stand-in: it
-  makes the weak claims visible, it does not detect new ones.
+- Detecting a claim that is genuinely *wrong* (rather than weakly stated) still needs
+  independent evidence the drug lacks the property, which today only exists as a Ki for
+  the coarse target we do not model. The badge makes weak claims visible; it does not
+  adjudicate them.
 
 ## Snapshot (2026-07-27, after the GtoPdb classification, metabolism and drug-binding passes)
 

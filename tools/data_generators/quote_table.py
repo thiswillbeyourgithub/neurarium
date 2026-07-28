@@ -104,6 +104,19 @@ def quote_id(source: dict[str, Any]) -> str:
     return f"q_{digest}"
 
 
+def heading_of(source: dict[str, Any]) -> list[str]:
+    """The derived heading trail for a quote-bearing source, or ``[]``.
+
+    The one way to ask "where in its book does this source sit?" **before**
+    serialization, so a generator pass (see ``quotes/uncertainty.py``, which reads a
+    Stahl subsection to decide whether a sentence attributes its claim) shares this
+    module's id hash instead of recomputing it.
+    """
+    if not _is_quote_source(source):
+        return []
+    return _HEADERS.get(quote_id(source), [])
+
+
 def externalize_quotes(obj):
     """Recursively replace every quote-bearing source with a ``{quote_id, ...}`` ref.
 

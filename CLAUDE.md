@@ -792,9 +792,14 @@ corpus does not say this". No prose is stored: the sentence comes from an `uncer
 a new kind means a new string in **both** catalogues. Forgetting a source raises at generation
 (`_uncertainty_bullet`) and errors in `check_data.py` family 5, which also gates each bullet quote
 verbatim and stands its subject-less-quote guard down for a binding that declares uncertainty (the two
-answer the same problem). The flagged claims are authored in `UNCERTAIN_BINDING_CLAIMS` and applied as a
-post-pass (`apply_binding_uncertainty`, not `_binding_record`) because the `class_wide` bullet counts
-across drugs; naming a (drug, target) with no binding raises, so a data edit cannot silently drop a flag.
+answer the same problem). **Nothing is authored per site**: `apply_binding_uncertainty` *derives* both
+the flags and the bullets from the emitted data, so a data edit cannot leave a stale flag behind and a new
+drug is covered the day it lands. One flag today, the **subject-less side-effect rule** (89 bindings): the
+quote's heading trail ends in Stahl's *How Drug Causes Side Effects* and the sentence does not attribute
+the action to the drug (`_attributes_to_drug`: it neither names it, nor uses a pronoun subject, nor elides
+the subject in Stahl's telegraphic style). This is what the heading trails were resolved for. It runs as a
+post-pass (not `_binding_record`) because the `class_wide` bullet counts the drugs the same sentence is
+printed on, which no single binding can see.
 
 **Per-claim sources + the verify gate.** The nodes carrying such a source: a
 binding's `sources[]`, a drug's `nbn_sources[]`, a projection/circuit/group quote (`KANDEL_QUOTES`), a
