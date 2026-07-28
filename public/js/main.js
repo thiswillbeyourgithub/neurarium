@@ -2167,20 +2167,14 @@ function createInfoPanel(data, sourcingModal) {
       : line;
   };
 
-  // "Clozapine · Side effects › How Drug Causes Side Effects\n" for a source that
-  // knows where in its book it sits, else "". The section is stored as the book
-  // prints it (ALL CAPS); sentence-cased here so the breadcrumb does not shout.
+  // "Clozapine › Side effects › How Drug Causes Side Effects\n" for a source that
+  // knows where in its book it sits, else "". Stored as a plain outermost-first
+  // list because the books do not share a heading shape (a Stahl monograph, a
+  // Kandel part/chapter/section, a Nieuwenhuys chapter), so the viewer only joins.
   // The heading text itself stays in the book's language: it is part of the quote's
-  // citation, not UI chrome, so only the separators come from the catalogue.
-  const headingTrail = (h) => {
-    if (!h) return "";
-    const section = h.section
-      ? h.section.charAt(0) + h.section.slice(1).toLowerCase()
-      : "";
-    const path = [section, h.subsection].filter(Boolean).join(" › ");
-    const crumb = [h.drug, path].filter(Boolean).join(" · ");
-    return crumb ? `${crumb}\n` : "";
-  };
+  // citation, not UI chrome, so only the separator comes from the catalogue.
+  const headingTrail = (trail) =>
+    Array.isArray(trail) && trail.length ? `${trail.join(" › ")}\n` : "";
 
   // Localized species name for an assay/expression source (Human/Rat/Mouse/Monkey,
   // as stored in the data); an unknown value passes through unchanged.

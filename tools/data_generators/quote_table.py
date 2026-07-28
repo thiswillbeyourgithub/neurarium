@@ -53,16 +53,19 @@ def _load_llm_overrides() -> dict[str, str]:
 
 _LLM_OVERRIDES = _load_llm_overrides()
 
-# Central quote_id -> {drug, section, subsection}: where in its book a quote sits,
-# derived by tools/fetch/fetch_quote_headers.py from the author-side page tree.
-# Applied by id like the llm overrides above (one derivation, never authored per
-# site), because the same passage always sits under the same heading. It is
-# **context, not a claim**: it tells a reader (and an LLM judge) that a sentence
-# comes from "How Drug Causes Side Effects" rather than "How the Drug Works",
-# which is exactly the distinction the uncertainty badges rest on.
-_HEADERS: dict[str, dict[str, str]] = {
-    qid: h for qid, h in ((_cache("quote_headers.json") or {}).get("quotes")
-                          or {}).items() if isinstance(h, dict) and h
+# Central quote_id -> heading trail (a list of headings, outermost first): where in
+# its book a quote sits, derived by tools/fetch/fetch_quote_headers.py from the
+# author-side page trees. Applied by id like the llm overrides above (one
+# derivation, never authored per site), because the same passage always sits under
+# the same heading. It is **context, not a claim**: it tells a reader (and an LLM
+# judge) that a sentence comes from "How Drug Causes Side Effects" rather than "How
+# the Drug Works", which is exactly the distinction the uncertainty badges rest on.
+# A flat list, not named levels, because the books do not share a shape (a Stahl
+# monograph, a Kandel part/chapter/section, a Nieuwenhuys chapter).
+_HEADERS: dict[str, list[str]] = {
+    qid: [str(part) for part in trail]
+    for qid, trail in ((_cache("quote_headers.json") or {}).get("quotes")
+                       or {}).items() if isinstance(trail, list) and trail
 }
 
 # The excerpt-identity fields (hash input + what the quote node carries). ``provenance``

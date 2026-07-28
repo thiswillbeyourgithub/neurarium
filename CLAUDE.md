@@ -758,19 +758,27 @@ review, not stamped.
 registry); a **present** link defaults `"sourced"` (`WIKIPEDIA_DEFAULT_PROVENANCE`), not `llm` (a real
 reference the viewer live-fetches). `_provenance` validates every grade; upgrading a source is a data edit.
 
-**Where a quote sits (the book heading).** A quote node may carry a derived `heading`
-(`{drug?, section?, subsection?}`), rendered as a breadcrumb above the passage in the source
-tooltip and handed to the LLM judge in `recheck_quotes.py`'s batches. It is **context, not a
-claim** (not a node, not graded, not tallied), and it is what makes a quote judgeable rather than
-merely checkable: the same sentence under *How the Drug Works* is Stahl attributing a mechanism to
-that drug, under *How Drug Causes Side Effects* it is a subject-less rule (the distinction the
-`uncertain` badge rests on). Derived by `tools/fetch/fetch_quote_headers.py` into the committed
-`generated_cache/quote_headers.json` and applied by id in `quote_table` (like `quote_llm.json`);
-Stahl only so far. Subsection = positional; **section = a subsection -> section majority vote over
-all 158 monographs**, since the extraction drops ~30 section headings and the nearest surviving one
-then leaks in from the previous section or drug. An unresolved heading is **omitted**, never
-guessed. `check_data.py` family 5 re-derives the checkable half offline (the named drug's monograph
-must contain the cited page), which catches a stale or hand-edited cache.
+**Where a quote sits (the book heading).** A quote node from a **book** corpus may carry a derived
+`heading`: a **trail** of headings, outermost first (`["Clozapine", "Side effects", "How Drug Causes
+Side Effects"]`, capped to its 3 deepest levels), rendered as a breadcrumb above the passage in the
+source tooltip and handed to the LLM judge in `recheck_quotes.py`'s batches. A flat list, not named
+levels, because the books do not share a shape (a Stahl monograph, a Kandel part/chapter/section, a
+Nieuwenhuys chapter), so the viewer only joins it. It is **context, not a claim** (not a node, not
+graded, not tallied), and it is what makes a quote judgeable rather than merely checkable: the same
+sentence under *How the Drug Works* is Stahl attributing a mechanism to that drug, under *How Drug
+Causes Side Effects* it is a subject-less rule (the distinction the `uncertain` badge rests on).
+Derived by `tools/fetch/fetch_quote_headers.py` into the committed
+`generated_cache/quote_headers.json` and applied by id in `quote_table` (like `quote_llm.json`).
+Two resolvers: the four outline-bearing books (Kandel, Stahl Essential, Carlat, Nieuwenhuys) take
+the ancestor chain of their `INDEX.md` entry covering the page; **Stahl** has no usable outline, so
+its trail is read off the page text (monograph title from `INDEX.md`, then positional subsection,
+then **section = a subsection -> section majority vote over all 158 monographs**, since the
+extraction drops ~30 section headings and the nearest surviving one then leaks in from the previous
+section or drug). A corpus is a "book" exactly when its page tree has an `INDEX.md`, which is what
+excludes the flat stores (GtoPdb, Allen, Wikipedia) where a chapter has no meaning. An unresolved
+level is **omitted**, never guessed. `check_data.py` family 5 checks the shape, then re-derives the
+checkable half offline (a Stahl trail must open with the monograph containing the cited page),
+which catches a stale or hand-edited cache.
 
 **Doubting a `verified` claim (the `uncertain` badge).** `verified` says the sentence is on the page; it
 never said the sentence is *about this node*. A node whose quote does not attribute the claim carries an

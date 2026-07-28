@@ -1229,6 +1229,27 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
                   f"in its cited page" if n_checked
                   else "no source quotes to verify yet")
 
+    # A source's `heading` (the breadcrumb of book headings the passage sits under)
+    # is DERIVED, keyed by quote id, from the author-side page trees by
+    # tools/fetch/fetch_quote_headers.py. Nothing in the emitted data proves it is
+    # still current, so check what is checkable without the books: the shape. A
+    # blank level would render as an empty crumb, which reads like a heading the
+    # book actually prints rather than one the resolver failed to find.
+    before_shape = report.errors
+    for ctx, corpus, page, trail in headings:
+        if not isinstance(trail, list) or not trail:
+            report.error(f"{ctx}: heading must be a non-empty list of headings, "
+                         f"outermost first (got {trail!r}); omit it rather than "
+                         f"storing an empty breadcrumb")
+            continue
+        for part in trail:
+            if not isinstance(part, str) or not part.strip():
+                report.error(f"{ctx}: heading trail has a blank level ({trail!r}); "
+                             f"drop the level rather than storing a blank crumb")
+    if report.errors == before_shape and headings:
+        report.ok(f"all {len(headings)} derived heading trails are non-empty lists "
+                  f"of non-blank headings")
+
     # Every Stahl quote on a drug must come off that drug's own monograph pages.
     ranges = stahl_monograph_ranges()
     if ranges is None:
@@ -1258,35 +1279,30 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             report.ok(f"all Stahl quotes on {checked} drugs come from that drug's own "
                       f"monograph" + (f" ({unindexed} unindexed)" if unindexed else ""))
 
-        # A source's `heading` (where in the book the passage sits: drug, section,
-        # subsection) is DERIVED, keyed by quote id, from the author-side page tree
-        # by tools/fetch/fetch_quote_headers.py. Nothing in the emitted data proves
-        # it is still current, so re-derive the one part that is checkable offline:
-        # the drug it names must be the monograph the cited page actually falls in.
-        # That is what catches a hand-edited or stale generated_cache entry, which
-        # would otherwise print a confident and wrong breadcrumb over a real quote.
+        # A Stahl heading trail LEADS with the monograph title, which is checkable
+        # offline against the same INDEX.md ranges: the drug it names must be the
+        # monograph the cited page actually falls in. That is what catches a
+        # hand-edited or stale generated_cache entry, which would otherwise print a
+        # confident and wrong breadcrumb over a real quote.
         before_head = report.errors
-        for ctx, corpus, page, heading in headings:
-            if corpus != "stahl" or page is None:
+        stahl_headings = 0
+        for ctx, corpus, page, trail in headings:
+            if corpus != "stahl" or page is None or not isinstance(trail, list):
                 continue
-            named = heading.get("drug")
-            if named:
-                span = ranges.get(_fold_name(named))
-                if span is None:
-                    report.error(f"{ctx}: heading names drug {named!r}, which has no "
-                                 f"INDEX.md monograph")
-                elif not (span[0] <= page <= span[1]):
-                    report.error(f"{ctx}: heading says the quote is in {named!r}'s "
-                                 f"monograph (pages {span[0]}-{span[1]}) but it cites "
-                                 f"p.{page}. Re-run tools/fetch/fetch_quote_headers.py")
-            for key in ("section", "subsection"):
-                if key in heading and not str(heading[key] or "").strip():
-                    report.error(f"{ctx}: heading has an empty {key!r} (omit the key "
-                                 f"rather than storing a blank breadcrumb)")
+            stahl_headings += 1
+            span = ranges.get(_fold_name(trail[0])) if trail else None
+            if span is None:
+                report.error(f"{ctx}: heading trail leads with {trail[:1]!r}, which "
+                             f"is no INDEX.md monograph. A Stahl trail must open "
+                             f"with the drug whose monograph the page falls in")
+            elif not (span[0] <= page <= span[1]):
+                report.error(f"{ctx}: heading says the quote is in {trail[0]!r}'s "
+                             f"monograph (pages {span[0]}-{span[1]}) but it cites "
+                             f"p.{page}. Re-run tools/fetch/fetch_quote_headers.py")
         if report.errors == before_head:
-            report.ok(f"all {len(headings)} book headings name the monograph their "
-                      f"page falls in" if headings
-                      else "no derived book headings yet "
+            report.ok(f"all {stahl_headings} Stahl heading trails open with the "
+                      f"monograph their page falls in" if stahl_headings
+                      else "no derived Stahl headings yet "
                            "(run tools/fetch/fetch_quote_headers.py)")
 
     # A binding's `ki` cites one CSV row by ki_id (the analogue of a quote's page):

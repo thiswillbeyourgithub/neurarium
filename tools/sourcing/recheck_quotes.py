@@ -30,8 +30,9 @@ Three steps (the middle one is the only LLM spend):
    ``{"verdicts": {qid: {present, supports, note?}}}``.
 
    **Tell the judge what ``heading`` means**, because it decides the harder half of the
-   verdict: it is where in the book the passage sits (``{drug, section, subsection}``),
-   and Stahl's sections are not interchangeable. A sentence under *How the Drug Works*
+   verdict: it is where in the book the passage sits (a breadcrumb of headings,
+   outermost first), and Stahl's sections are not interchangeable. A sentence under
+   *How the Drug Works*
    is the book attributing a mechanism to that drug; the same sentence under *How Drug
    Causes Side Effects* is a rule printed with the mechanism, not the drug, as its
    subject, so it does not by itself say this drug has the action (that distinction is
@@ -189,7 +190,7 @@ def cmd_build(args):
         for qid in qidlist:
             item = {"qid": qid, "page_ref": pref,
                     "quote": quotes[qid]["quote"], "claims": claims[qid]}
-            # Where in the book the passage sits (drug, section, subsection; derived
+            # Where in the book the passage sits (a heading breadcrumb, derived
             # by tools/fetch/fetch_quote_headers.py). It is the single most useful
             # piece of context for the "supports" half of the verdict: the same
             # sentence under "How the Drug Works" is the book attributing a mechanism

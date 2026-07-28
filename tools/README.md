@@ -265,15 +265,18 @@ Screenshots).
   carries the quote's `heading` (below), which is the context the "supports" half of the verdict turns on.
   Corpus -> page dir is read from `meta.source_corpora`, never restated. See CLAUDE.md
   Source provenance ("The sourcing model").
-- `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted Stahl
-  quote, the **drug** whose monograph the page falls in and the **section > subsection** it sits under,
-  into the committed `tools/generated_cache/quote_headers.json` ({quote_id: {drug, section, subsection}}),
-  which `quote_table` merges onto the quote nodes by id. Reads the emitted `quotes.jsonl`, so the order is
-  generate -> fetch -> generate (like `recheck_quotes.py`). The subsection is positional (the last heading
-  above the quote's offset, walked back within the monograph); the **section** comes from a
-  subsection -> section majority vote over all 158 monographs, because the extraction drops ~30 section
-  headings and the nearest surviving one then leaks in from the previous section or drug. No LLM.
-  `--dry-run` reports without writing. See CLAUDE.md Source provenance ("Where a quote sits").
+- `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted quote
+  from a **book** corpus (a paged corpus whose page tree has an `INDEX.md`), the **trail** of headings it
+  sits under, into the committed `tools/generated_cache/quote_headers.json` ({quote_id: [outermost, ...,
+  innermost]}), which `quote_table` merges onto the quote nodes by id. Reads the emitted `quotes.jsonl`, so
+  the order is generate -> fetch -> generate (like `recheck_quotes.py`). Two resolvers: `OutlineIndex` takes
+  the ancestor chain of the `INDEX.md` outline entry covering the page (Kandel, Stahl Essential, Carlat,
+  Nieuwenhuys), `StahlPages` reads Stahl's page text (which has no usable outline) for the monograph title,
+  the positional subsection, and the **section** from a subsection -> section majority vote over all 158
+  monographs, because the extraction drops ~30 section headings and the nearest surviving one then leaks in
+  from the previous section or drug. Capped to `MAX_TRAIL` levels. A book missing from the checkout keeps
+  its cached trails rather than dropping them. No LLM. `--dry-run` reports without writing. See CLAUDE.md
+  Source provenance ("Where a quote sits").
 - `tools/fetch/fetch_cyp.py`: stdlib, offline. Reads Stahl's per-drug `Pharmacokinetics` block out of
   the author-side dump, classifies each CYP line's role (`substrate`/`inhibitor`/`inducer`) + optional
   strength, re-confirms it **verbatim** on a page in that drug's own `INDEX.md` range, and writes the
@@ -404,8 +407,8 @@ there is no node-level catch-all `sources` block.
 - `quotes.jsonl` — the deduplicated source-quote side table, one quote node per line sorted by
   `id` (a `q_<12 hex>` content hash): `id`, `corpus`, `page`, `quote`, optional `species`, optional
   `llm` (the model that extracted+judged the quote, `haiku`/`sonnet`/`opus`; absent = unknown),
-  optional `heading` (`{drug?, section?, subsection?}`: where in its book the passage sits, derived
-  by `fetch/fetch_quote_headers.py`; only the keys it could resolve are present). Every
+  optional `heading` (the trail of book headings the passage sits under, outermost first, derived
+  by `fetch/fetch_quote_headers.py`; only the levels it could resolve are present). Every
   node's quote-bearing source references one by `quote_id`; the viewer + `check_data.py` rehydrate
   it at load (see the externalize note above).
 - `changelog.json` — the release notes, `{versions: [{version, date, entries[{category,
