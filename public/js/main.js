@@ -2151,12 +2151,35 @@ function createInfoPanel(data, sourcingModal) {
     const ref = s.page != null
       ? t("info.sourceRef", { corpus: label, page: s.page })
       : label;
-    const line = s.quote ? `“${s.quote}”\n— ${ref}` : `— ${ref}`;
+    // Where in the book the passage sits, above the passage itself. The same
+    // sentence reads very differently under "How the Drug Works" (a mechanism the
+    // book attributes to this drug) than under "How Drug Causes Side Effects" (a
+    // rule it prints without a subject), so the breadcrumb is what lets a reader
+    // judge the quote rather than just confirm it exists.
+    const trail = headingTrail(s.heading);
+    const line = s.quote
+      ? `${trail}“${s.quote}”\n— ${ref}`
+      : `${trail}— ${ref}`;
     // An expression source (GtoPdb tissue distribution) names the assay species;
     // show it so a non-human claim is explicit on the pill itself, not only the tag.
     return s.species
       ? `${line}\n${t("info.sourceSpecies", { species: speciesLabel(s.species) })}`
       : line;
+  };
+
+  // "Clozapine · Side effects › How Drug Causes Side Effects\n" for a source that
+  // knows where in its book it sits, else "". The section is stored as the book
+  // prints it (ALL CAPS); sentence-cased here so the breadcrumb does not shout.
+  // The heading text itself stays in the book's language: it is part of the quote's
+  // citation, not UI chrome, so only the separators come from the catalogue.
+  const headingTrail = (h) => {
+    if (!h) return "";
+    const section = h.section
+      ? h.section.charAt(0) + h.section.slice(1).toLowerCase()
+      : "";
+    const path = [section, h.subsection].filter(Boolean).join(" › ");
+    const crumb = [h.drug, path].filter(Boolean).join(" · ");
+    return crumb ? `${crumb}\n` : "";
   };
 
   // Localized species name for an assay/expression source (Human/Rat/Mouse/Monkey,

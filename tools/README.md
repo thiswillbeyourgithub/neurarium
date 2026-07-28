@@ -261,8 +261,19 @@ Screenshots).
   once per batch to minimize tokens; Allen AHBA excluded as deterministic); an LLM judges each batch
   (present + supports claim); `apply --batches <dir> --verdicts <f> [--llm sonnet]` writes
   `tools/generated_cache/quote_llm.json` ({quote_id: llm}, applied uniformly by `quote_table`) +
-  `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review). See CLAUDE.md
+  `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review). Each batch item
+  carries the quote's `heading` (below), which is the context the "supports" half of the verdict turns on.
+  Corpus -> page dir is read from `meta.source_corpora`, never restated. See CLAUDE.md
   Source provenance ("The sourcing model").
+- `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted Stahl
+  quote, the **drug** whose monograph the page falls in and the **section > subsection** it sits under,
+  into the committed `tools/generated_cache/quote_headers.json` ({quote_id: {drug, section, subsection}}),
+  which `quote_table` merges onto the quote nodes by id. Reads the emitted `quotes.jsonl`, so the order is
+  generate -> fetch -> generate (like `recheck_quotes.py`). The subsection is positional (the last heading
+  above the quote's offset, walked back within the monograph); the **section** comes from a
+  subsection -> section majority vote over all 158 monographs, because the extraction drops ~30 section
+  headings and the nearest surviving one then leaks in from the previous section or drug. No LLM.
+  `--dry-run` reports without writing. See CLAUDE.md Source provenance ("Where a quote sits").
 - `tools/fetch/fetch_cyp.py`: stdlib, offline. Reads Stahl's per-drug `Pharmacokinetics` block out of
   the author-side dump, classifies each CYP line's role (`substrate`/`inhibitor`/`inducer`) + optional
   strength, re-confirms it **verbatim** on a page in that drug's own `INDEX.md` range, and writes the
@@ -392,7 +403,9 @@ there is no node-level catch-all `sources` block.
   string. Written last by `write_artifacts` from the externalize pass (see docs/I18N.md).
 - `quotes.jsonl` — the deduplicated source-quote side table, one quote node per line sorted by
   `id` (a `q_<12 hex>` content hash): `id`, `corpus`, `page`, `quote`, optional `species`, optional
-  `llm` (the model that extracted+judged the quote, `haiku`/`sonnet`/`opus`; absent = unknown). Every
+  `llm` (the model that extracted+judged the quote, `haiku`/`sonnet`/`opus`; absent = unknown),
+  optional `heading` (`{drug?, section?, subsection?}`: where in its book the passage sits, derived
+  by `fetch/fetch_quote_headers.py`; only the keys it could resolve are present). Every
   node's quote-bearing source references one by `quote_id`; the viewer + `check_data.py` rehydrate
   it at load (see the externalize note above).
 - `changelog.json` — the release notes, `{versions: [{version, date, entries[{category,

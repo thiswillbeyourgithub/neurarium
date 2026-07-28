@@ -36,18 +36,34 @@ QUOTES: dict[str, dict[str, Any]] = {}
 _LLM_OVERRIDES: dict[str, str] = {}
 
 
-def _load_llm_overrides() -> dict[str, str]:
-    path = os.path.join(
-        os.path.dirname(__file__), "..", "generated_cache", "quote_llm.json")
+def _cache(name: str) -> Any:
+    """One committed generated_cache/<name>.json, or ``None`` when absent."""
+    path = os.path.join(os.path.dirname(__file__), "..", "generated_cache", name)
     try:
         with open(path, encoding="utf-8") as fh:
-            data = json.load(fh)
-        return {qid: v for qid, v in data.items() if isinstance(v, str)}
+            return json.load(fh)
     except (FileNotFoundError, ValueError):
-        return {}
+        return None
+
+
+def _load_llm_overrides() -> dict[str, str]:
+    data = _cache("quote_llm.json") or {}
+    return {qid: v for qid, v in data.items() if isinstance(v, str)}
 
 
 _LLM_OVERRIDES = _load_llm_overrides()
+
+# Central quote_id -> {drug, section, subsection}: where in its book a quote sits,
+# derived by tools/fetch/fetch_quote_headers.py from the author-side page tree.
+# Applied by id like the llm overrides above (one derivation, never authored per
+# site), because the same passage always sits under the same heading. It is
+# **context, not a claim**: it tells a reader (and an LLM judge) that a sentence
+# comes from "How Drug Causes Side Effects" rather than "How the Drug Works",
+# which is exactly the distinction the uncertainty badges rest on.
+_HEADERS: dict[str, dict[str, str]] = {
+    qid: h for qid, h in ((_cache("quote_headers.json") or {}).get("quotes")
+                          or {}).items() if isinstance(h, dict) and h
+}
 
 # The excerpt-identity fields (hash input + what the quote node carries). ``provenance``
 # is deliberately excluded: it grades the claim, not the quote (see module docstring).
@@ -102,6 +118,8 @@ def externalize_quotes(obj):
         # A recheck override wins over any source-level llm (uniform by id -> no collision).
         if qid in _LLM_OVERRIDES:
             entry["llm"] = _LLM_OVERRIDES[qid]
+        if qid in _HEADERS:
+            entry["heading"] = _HEADERS[qid]
         existing = QUOTES.get(qid)
         if existing is not None and existing != entry:
             raise ValueError(

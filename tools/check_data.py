@@ -298,7 +298,7 @@ def rehydrate_quotes(node, by_id, referenced, dangling):
             if quote is None:
                 dangling.append(qid)
             else:
-                for k in ("corpus", "page", "quote", "species", "llm"):
+                for k in ("corpus", "page", "quote", "species", "llm", "heading"):
                     if k in quote:
                         node[k] = quote[k]
             node.pop("quote_id", None)
@@ -959,18 +959,29 @@ def _fold_name(name):
     return "".join(c for c in name.lower() if c.isalnum())
 
 
+def stahl_index_rows():
+    """``[(display drug name, first page, last page)]`` from Stahl's generated
+    INDEX.md, in book order; empty when the author-side tree is absent.
+
+    The one parser for that table: :func:`stahl_monograph_ranges` folds it for the
+    monograph-range gate, and ``tools/fetch/fetch_quote_headers.py`` reads the
+    display title (what a reader sees above a quote) off the same rows."""
+    if not _STAHL_INDEX.exists():
+        return []
+    rows = []
+    for line in _STAHL_INDEX.read_text(encoding="utf-8").splitlines():
+        m = _STAHL_INDEX_ROW.match(line)
+        if m:
+            rows.append((m.group(1), int(m.group(2)), int(m.group(3))))
+    return rows
+
+
 def stahl_monograph_ranges():
     """``folded drug name -> (first page, last page)`` from Stahl's generated INDEX.md.
 
     ``None`` when the author-side book tree is absent (a plain clone), so the
     caller skips the check exactly like the verbatim-quote gate does."""
-    if not _STAHL_INDEX.exists():
-        return None
-    ranges = {}
-    for line in _STAHL_INDEX.read_text(encoding="utf-8").splitlines():
-        m = _STAHL_INDEX_ROW.match(line)
-        if m:
-            ranges[_fold_name(m.group(1))] = (int(m.group(2)), int(m.group(3)))
+    ranges = {_fold_name(title): (lo, hi) for title, lo, hi in stahl_index_rows()}
     return ranges or None
 
 
@@ -1037,6 +1048,9 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
     page_cache = {}            # (corpus, page) -> normalized page text or None
     skipped_corpora = set()
     n_checked = 0
+    # Every source carrying a derived book heading, checked in one pass below
+    # (collected here so the whole dataset is walked once, not twice).
+    headings = []
 
     def page_text(corpus, page):
         key = (corpus, page)
@@ -1060,6 +1074,8 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             report.error(f"{ctx}: corpus {corpus!r} is not in "
                          f"meta.source_corpora (citation unrenderable)")
             return
+        if src.get("heading"):
+            headings.append((ctx, corpus, src.get("page"), src["heading"]))
         quote, page = src.get("quote"), src.get("page")
         if src.get("provenance") == "verified" and not (quote and page is not None):
             report.error(f"{ctx}: 'verified' source missing a page or quote "
@@ -1241,6 +1257,37 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         if report.errors == before_range:
             report.ok(f"all Stahl quotes on {checked} drugs come from that drug's own "
                       f"monograph" + (f" ({unindexed} unindexed)" if unindexed else ""))
+
+        # A source's `heading` (where in the book the passage sits: drug, section,
+        # subsection) is DERIVED, keyed by quote id, from the author-side page tree
+        # by tools/fetch/fetch_quote_headers.py. Nothing in the emitted data proves
+        # it is still current, so re-derive the one part that is checkable offline:
+        # the drug it names must be the monograph the cited page actually falls in.
+        # That is what catches a hand-edited or stale generated_cache entry, which
+        # would otherwise print a confident and wrong breadcrumb over a real quote.
+        before_head = report.errors
+        for ctx, corpus, page, heading in headings:
+            if corpus != "stahl" or page is None:
+                continue
+            named = heading.get("drug")
+            if named:
+                span = ranges.get(_fold_name(named))
+                if span is None:
+                    report.error(f"{ctx}: heading names drug {named!r}, which has no "
+                                 f"INDEX.md monograph")
+                elif not (span[0] <= page <= span[1]):
+                    report.error(f"{ctx}: heading says the quote is in {named!r}'s "
+                                 f"monograph (pages {span[0]}-{span[1]}) but it cites "
+                                 f"p.{page}. Re-run tools/fetch/fetch_quote_headers.py")
+            for key in ("section", "subsection"):
+                if key in heading and not str(heading[key] or "").strip():
+                    report.error(f"{ctx}: heading has an empty {key!r} (omit the key "
+                                 f"rather than storing a blank breadcrumb)")
+        if report.errors == before_head:
+            report.ok(f"all {len(headings)} book headings name the monograph their "
+                      f"page falls in" if headings
+                      else "no derived book headings yet "
+                           "(run tools/fetch/fetch_quote_headers.py)")
 
     # A binding's `ki` cites one CSV row by ki_id (the analogue of a quote's page):
     # confirm that row really exists in the corpus CSV with the cited value. Like the

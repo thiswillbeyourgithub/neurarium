@@ -67,7 +67,7 @@ function rehydrateQuotes(node, byId) {
     if (typeof node.quote_id === "string") {
       const q = byId[node.quote_id];
       if (q) {
-        for (const k of ["corpus", "page", "quote", "species", "llm"]) {
+        for (const k of ["corpus", "page", "quote", "species", "llm", "heading"]) {
           if (k in q) node[k] = q[k];
         }
       }
@@ -549,6 +549,11 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       page: s.page != null ? s.page : null,
       quote: s.quote || "",
       provenance: s.provenance || "llm",
+      // Where in the book the passage sits ({drug, section, subsection}, derived
+      // by tools/fetch/fetch_quote_headers.py). Absent for a corpus with no page
+      // structure (a Ki CSV row) and for a quote whose heading could not be
+      // resolved: the tooltip then simply shows no breadcrumb.
+      heading: s.heading || null,
     }));
   // A binding's measured PDSP Ki -> the display object the drug panel renders beside
   // the binding (value + range + human/non-human counts, its own verified badge, and

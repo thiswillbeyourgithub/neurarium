@@ -1,0 +1,5708 @@
+{
+  "_readme": "Derived by tools/fetch/fetch_quote_headers.py from the author-side Stahl page tree; applied onto the quote nodes by data_generators/quote_table.py. Do not hand-edit.",
+  "sections": {
+    "After Starting an Atypical Antipsychotic": "THERAPEUTICS",
+    "Before Starting an Atypical Antipsychotic": "THERAPEUTICS",
+    "Before starting an atypical antipsychotic": "THERAPEUTICS",
+    "Best Augmenting Agents for Side Effects": "SIDE EFFECTS",
+    "Best Augmenting Combos for Partial Response or Treatment Resistance": "THERAPEUTICS",
+    "Brands": "THERAPEUTICS",
+    "Breast Feeding": "SPECIAL POPULATIONS",
+    "Cardiac Impairment": "SPECIAL POPULATIONS",
+    "Children and Adolescents": "SPECIAL POPULATIONS",
+    "Class": "THERAPEUTICS",
+    "Commonly Prescribed for": "THERAPEUTICS",
+    "Do Not Use": "DOSING AND USE",
+    "Dosage Forms": "DOSING AND USE",
+    "Dosing Tips": "DOSING AND USE",
+    "Dosing Tips – Oral": "DOSING AND USE",
+    "Drug Interactions": "DOSING AND USE",
+    "Elderly": "SPECIAL POPULATIONS",
+    "Generic? No": "THERAPEUTICS",
+    "Generic? Yes": "THERAPEUTICS",
+    "Habit Forming?": "DOSING AND USE",
+    "Hepatic Impairment": "SPECIAL POPULATIONS",
+    "How Drug Causes Side Effects": "SIDE EFFECTS",
+    "How Long Until It Works": "THERAPEUTICS",
+    "How the Drug Works": "THERAPEUTICS",
+    "How to Dose": "DOSING AND USE",
+    "How to Stop": "DOSING AND USE",
+    "If It Doesn’t Work": "THERAPEUTICS",
+    "If It Doesn’t Work (ADHD)": "THERAPEUTICS",
+    "If It Doesn’t Work (Depression)": "THERAPEUTICS",
+    "If It Doesn’t Work (for Bipolar Disorder)": "THERAPEUTICS",
+    "If It Works": "THERAPEUTICS",
+    "If It Works (ADHD)": "THERAPEUTICS",
+    "If It Works (Depression)": "THERAPEUTICS",
+    "Life-Threatening or Dangerous Side Effects": "SIDE EFFECTS",
+    "Life-Threatening or g Dangerous Side Effects": "SIDE EFFECTS",
+    "Long-Term Use": "DOSING AND USE",
+    "METHYLPHENIDATE (D) (continued)": "THERAPEUTICS",
+    "METHYLPHENIDATE (D,L) (continued)": "THERAPEUTICS",
+    "Monitoring after starting an atypical antipsychotic": "THERAPEUTICS",
+    "Notable Side Effects": "SIDE EFFECTS",
+    "Other Warnings/": "DOSING AND USE",
+    "Other Warnings/ Precautions": "DOSING AND USE",
+    "Other Warnings/Precautions": "DOSING AND USE",
+    "Overdose": "DOSING AND USE",
+    "Pearls": "THE ART OF PSYCHOPHARMACOLOGY",
+    "Pharmacokinetics": "DOSING AND USE",
+    "Potential Advantages": "THE ART OF PSYCHOPHARMACOLOGY",
+    "Potential Disadvantages": "THE ART OF PSYCHOPHARMACOLOGY",
+    "Precautions": "DOSING AND USE",
+    "Pregnancy": "SPECIAL POPULATIONS",
+    "Primary Target Symptoms": "THE ART OF PSYCHOPHARMACOLOGY",
+    "Renal Impairment": "SPECIAL POPULATIONS",
+    "Sedation": "SIDE EFFECTS",
+    "Suggested Reading": "THE ART OF PSYCHOPHARMACOLOGY",
+    "Tests": "THERAPEUTICS",
+    "Usual Dosage Range": "DOSING AND USE",
+    "Weight Gain": "SIDE EFFECTS",
+    "What to Do About Side Effects": "SIDE EFFECTS"
+  },
+  "quotes": {
+    "q_0019a11cebbc": {
+      "drug": "Brexanolone",
+      "section": "THERAPEUTICS",
+      "subsection": "Best Augmenting Combos for Partial Response or Treatment Resistance"
+    },
+    "q_0046f0b3a048": {
+      "drug": "Ziprasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_0070fd8dd655": {
+      "drug": "Tasimelteon",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_007c8889c167": {
+      "drug": "Disulfiram",
+      "section": "THERAPEUTICS"
+    },
+    "q_01a7b42df31c": {
+      "drug": "Clomipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Dosing Tips"
+    },
+    "q_01c48956cfa3": {
+      "drug": "Alprazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_01d92a51ab4d": {
+      "drug": "Molindone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_01e3f17f9061": {
+      "drug": "Lorazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_01e3fba4cfdf": {
+      "drug": "Atomoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_0217a6450583": {
+      "drug": "Rivastigmine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_0269031767fc": {
+      "drug": "Isocarboxazid",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_027f6be6855d": {
+      "drug": "Lofepramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_02c237800074": {
+      "drug": "Sertraline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_02d8ebe1de87": {
+      "drug": "Dothiepin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_035ce7a5d70b": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_046bddb0c577": {
+      "drug": "Nefazodone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_04bd8e6b683d": {
+      "drug": "Maprotiline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_055408330d53": {
+      "drug": "Lofexidine",
+      "section": "DOSING AND USE",
+      "subsection": "Do Not Use"
+    },
+    "q_05728faa83e9": {
+      "drug": "Moclobemide",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_058417e5da43": {
+      "drug": "Citalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_058872374184": {
+      "drug": "Amoxapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_058f41441058": {
+      "drug": "Hydroxyzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_05a4d56470a1": {
+      "drug": "Cariprazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_0604c2ff534c": {
+      "drug": "Buspirone",
+      "section": "THERAPEUTICS"
+    },
+    "q_0652762a6f2c": {
+      "drug": "Diazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_066666bc7f7b": {
+      "drug": "Donepezil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_06962e550039": {
+      "drug": "Sertindole",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_069eddf12d0e": {
+      "drug": "Esketamine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_06db981eec65": {
+      "drug": "Cyamemazine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_06f220c374e7": {
+      "drug": "Maprotiline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_06f2fa31fdab": {
+      "drug": "Duloxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_0758d5cb5b21": {
+      "drug": "Sulpiride",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_07678d654b62": {
+      "drug": "Zaleplon",
+      "section": "SIDE EFFECTS",
+      "subsection": "What to Do About Side Effects"
+    },
+    "q_07a10248b755": {
+      "drug": "Mirtazapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_07a8778349c9": {
+      "drug": "Lurasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_07b19bde01af": {
+      "drug": "Pitolisant",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0860d1740b9a": {
+      "drug": "Deutetrabenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_08a8dff5847b": {
+      "drug": "Temazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_08f925bc33a1": {
+      "drug": "Reboxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0970d2ad7b02": {
+      "drug": "Zolpidem",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_099ae4da974e": {
+      "drug": "Dextromethorphan–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_09afaef384b7": {
+      "drug": "Memantine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0a30e29d56f1": {
+      "drug": "Selegiline",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_0a5934ee3f11": {
+      "drug": "Valbenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_0a94883d2b35": {
+      "drug": "Ketamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_0aa10b1c2d2a": {
+      "drug": "Ramelteon",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_0ad987cb6515": {
+      "drug": "Carbamazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0aeb2a4ac7de": {
+      "drug": "Carbamazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0b4abb2c15cb": {
+      "drug": "Pimozide",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0b7c71a698ac": {
+      "drug": "Levomilnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_0b8eb0b43330": {
+      "drug": "Nortriptyline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_0bcb6e5ebc4e": {
+      "drug": "Caprylidene",
+      "section": "THERAPEUTICS"
+    },
+    "q_0beb93d3b8dc": {
+      "drug": "Clorazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_0c265070ae51": {
+      "drug": "Levomilnacipran",
+      "section": "THERAPEUTICS"
+    },
+    "q_0c4c48d89171": {
+      "drug": "Zopiclone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_0c50ab0f8f1a": {
+      "drug": "Lurasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_0c715866b964": {
+      "drug": "Flunitrazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_0c8bb18f7b97": {
+      "drug": "Modafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_0d1c51079e90": {
+      "drug": "Quetiapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_0d3493f19b18": {
+      "drug": "Desipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_0d5ed17f0018": {
+      "drug": "Cyamemazine",
+      "section": "THERAPEUTICS"
+    },
+    "q_0e03f0a51bf4": {
+      "drug": "Hydroxyzine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0e8fcaa316f8": {
+      "drug": "Protriptyline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_0ef328ab65f6": {
+      "drug": "Sertindole",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_0f5f10329052": {
+      "drug": "Dothiepin",
+      "section": "DOSING AND USE",
+      "subsection": "Dosage Forms"
+    },
+    "q_0f696f0e76e9": {
+      "drug": "Ketamine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_100c6ff4652c": {
+      "drug": "Pimozide",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_103e0d1b9f04": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_107b9e148432": {
+      "drug": "Flibanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_10a6996a1ab5": {
+      "drug": "Perphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_10c46a2744bf": {
+      "drug": "Clonidine",
+      "section": "THERAPEUTICS"
+    },
+    "q_10ea72df23ac": {
+      "drug": "Temazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_10ef2d60adc2": {
+      "drug": "Lamotrigine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1112efc74c40": {
+      "drug": "Paroxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_114da3b4c6c9": {
+      "drug": "Clonidine",
+      "section": "THERAPEUTICS"
+    },
+    "q_11573219beaa": {
+      "drug": "Nefazodone",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_117b60180a76": {
+      "drug": "Desipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_119b405018bd": {
+      "drug": "Fluoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_119da77dcbc3": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_11c8a16b6d17": {
+      "drug": "Agomelatine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_11e42deb1bca": {
+      "drug": "Amoxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1207c796e314": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_121f38dfa404": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS"
+    },
+    "q_122284a54da8": {
+      "drug": "Pimavanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_122338294290": {
+      "drug": "Imipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_12411b7fa618": {
+      "drug": "Pimozide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_126189a5dac0": {
+      "drug": "Triiodothyronine",
+      "section": "THERAPEUTICS"
+    },
+    "q_1262f75b363e": {
+      "drug": "Valproate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_12b933af4dc7": {
+      "drug": "Sertraline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_13ce51d3166b": {
+      "drug": "Triazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_13e0fd628bfc": {
+      "drug": "Carbamazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_13eff888031c": {
+      "drug": "Flupenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_14059aff18a2": {
+      "drug": "Imipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_140e85553089": {
+      "drug": "Clomipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_140ec88d49e2": {
+      "drug": "Amoxapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_141d8eab7e2c": {
+      "drug": "Amphetamine (D)",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_14bc0fb076f5": {
+      "drug": "Maprotiline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_14c9384440a5": {
+      "drug": "Chlordiazepoxide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_15dbd440f4f5": {
+      "drug": "Risperidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_15e771debc77": {
+      "drug": "Nefazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_15ece6802afc": {
+      "drug": "Mirtazapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_15f6c1170e05": {
+      "drug": "Haloperidol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_160afca7bece": {
+      "drug": "Methylphenidate (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_17743a1a6bed": {
+      "drug": "Tianeptine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_182904e2d8ce": {
+      "drug": "Ziprasidone",
+      "section": "THERAPEUTICS"
+    },
+    "q_184d40fe32fa": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1852868ac4e7": {
+      "drug": "Reboxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_18d0b2f0fb69": {
+      "drug": "Ramelteon",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_18f66c7e8f96": {
+      "drug": "Citalopram",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1913b368da83": {
+      "drug": "Clorazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_195c0aa3c901": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS"
+    },
+    "q_19628b85681d": {
+      "drug": "Amitriptyline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_19c43947992a": {
+      "drug": "Phenelzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_19deb0cf25dc": {
+      "drug": "Viloxazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_19e27b46a2b1": {
+      "drug": "Desipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_19ee789b5de4": {
+      "drug": "Chlorpromazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_19fd28003a64": {
+      "drug": "Asenapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1a453a155dfa": {
+      "drug": "Quetiapine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_1a98954efdcf": {
+      "drug": "Lamotrigine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1a9f0ed44973": {
+      "drug": "Propranolol",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_1ac87e2f3db8": {
+      "drug": "Pipothiazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_1ae3e9ff3361": {
+      "drug": "Hydroxyzine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1b3f820a456d": {
+      "drug": "Perospirone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1b550bd5816d": {
+      "drug": "Pipothiazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1be40f59ffb2": {
+      "drug": "Imipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1bf982ddb011": {
+      "drug": "Pimavanserin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1c14f3f649c0": {
+      "drug": "Nortriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1c235593433f": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1c312a1bd407": {
+      "drug": "Caprylidene",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1c3d94874c7b": {
+      "drug": "Guanfacine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_1c4b16292140": {
+      "drug": "Quetiapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1c8a17299056": {
+      "drug": "Thioridazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1c977d9f1435": {
+      "drug": "Buprenorphine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1ccfe81baa05": {
+      "drug": "Acamprosate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_1d10d021cee4": {
+      "drug": "Trazodone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1d11dabe77dc": {
+      "drug": "Mianserin",
+      "section": "THERAPEUTICS",
+      "subsection": "If It Doesn’t Work"
+    },
+    "q_1dd88d1a82c0": {
+      "drug": "Zonisamide",
+      "section": "DOSING AND USE",
+      "subsection": "Usual Dosage Range"
+    },
+    "q_1de427b25b6e": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS"
+    },
+    "q_1e0524deff70": {
+      "drug": "Suvorexant",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1e512ca167c6": {
+      "drug": "Zonisamide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_1e7f2bab7325": {
+      "drug": "Desipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_1ec741d72575": {
+      "drug": "Ramelteon",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1ee859c36ba6": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Commonly Prescribed for"
+    },
+    "q_1f2f6f25e00d": {
+      "drug": "Chlorpromazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1f319e388313": {
+      "drug": "Chlorpromazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_1f96761b69c7": {
+      "drug": "Reboxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_1fe2db4363a6": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_1febf2762cd2": {
+      "drug": "Agomelatine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_201f8338608a": {
+      "drug": "Perospirone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_20ccd37a255c": {
+      "drug": "Diphenhydramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_20d8d19c6319": {
+      "drug": "Bremelanotide",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_20e5d47a4966": {
+      "drug": "Haloperidol",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_210c609b49af": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_210f520d7cd9": {
+      "drug": "Modafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_21352763c4a6": {
+      "drug": "Desipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_213ef9dd3f0d": {
+      "drug": "Donepezil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_215457549d3a": {
+      "drug": "Blonanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_21da9b2cc696": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_21dd96c5357e": {
+      "drug": "Lorazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_21f5ec58551c": {
+      "drug": "Propranolol",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_22357a0b997d": {
+      "drug": "Clozapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2263aec33efc": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_227a871d47a9": {
+      "drug": "Solriamfetol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_227c77d0f783": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_22b8b1c45c93": {
+      "drug": "Trifluoperazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_22e5ea1315ad": {
+      "drug": "Ziprasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_2329237fd7b8": {
+      "drug": "Clorazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_2375ef73b473": {
+      "drug": "Protriptyline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_237c5a748c81": {
+      "drug": "Desvenlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_23bf17908b16": {
+      "drug": "Molindone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_23ce5db5b26b": {
+      "drug": "Quazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Long-Term Use"
+    },
+    "q_240fcf160318": {
+      "drug": "Propranolol",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_24410e5f4d7e": {
+      "drug": "Lurasidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_244cf0e6f1dc": {
+      "drug": "Varenicline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2455c9e893fa": {
+      "drug": "Midazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2473167fecce": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Commonly Prescribed for"
+    },
+    "q_248639afadac": {
+      "drug": "Perospirone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_24cfa29a5ff2": {
+      "drug": "Zopiclone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_252172112162": {
+      "drug": "Modafinil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_25260352b0a3": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_256690b05ae0": {
+      "drug": "Cariprazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_260ba673161c": {
+      "drug": "Phentermine–Topiramate",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_26595dbfbf67": {
+      "drug": "Pregabalin",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_2683961bba93": {
+      "drug": "Fluvoxamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_26d7c0336fed": {
+      "drug": "Maprotiline",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_2711bbac8e81": {
+      "drug": "Amoxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_271364104c81": {
+      "drug": "Clomipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_27479caa0e79": {
+      "drug": "Lurasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_27713d0721ce": {
+      "drug": "Maprotiline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_27bd1b9f9150": {
+      "drug": "Eszopiclone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_27f9948c2ac2": {
+      "drug": "Sildenafil",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_28531f2fe5e1": {
+      "drug": "Phentermine–Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_285f0921b439": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS"
+    },
+    "q_28997565286f": {
+      "drug": "Moclobemide",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_28c73607e3d6": {
+      "drug": "Oxcarbazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_28f8e8173034": {
+      "drug": "Zuclopenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_291282293aba": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_2929c5341558": {
+      "drug": "Cariprazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_295b29df497c": {
+      "drug": "Paroxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2982038f68e8": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_29c1a587e4b1": {
+      "drug": "Amitriptyline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2a2f29799b03": {
+      "drug": "Phentermine–Topiramate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2a30c6ce8da3": {
+      "drug": "Thiothixene",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2a6e6ff92638": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_2a9fc516fe66": {
+      "drug": "Chlordiazepoxide",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_2b143bad1675": {
+      "drug": "Mirtazapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_2b2cf2617434": {
+      "drug": "Tiagabine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2b353a51208c": {
+      "drug": "Pipothiazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2bb5d5e5b101": {
+      "drug": "Flumazenil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2be99bfe7d20": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2c146614cc49": {
+      "drug": "Temazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_2c2ade68dfcf": {
+      "drug": "Levomilnacipran",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2c5e9397aafe": {
+      "drug": "Fluoxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2c709332de5f": {
+      "drug": "Daridorexant",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2cd0aa0f64fa": {
+      "drug": "Doxepin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2d08c69e5810": {
+      "drug": "Ziprasidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_2db6a0107730": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_2dc0f89ac629": {
+      "drug": "Galantamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_2df87a89858d": {
+      "drug": "Zotepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2e47931c5a81": {
+      "drug": "Memantine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2e561bbe1051": {
+      "drug": "Citalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_2e6b669923ef": {
+      "drug": "Gabapentin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2eaaa375fad8": {
+      "drug": "Buspirone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_2f4664fb4b0e": {
+      "drug": "Sildenafil",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_2fb1a345a6f3": {
+      "drug": "Fluvoxamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_300f1a261196": {
+      "drug": "Selegiline",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_306653feeb48": {
+      "drug": "Fluvoxamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_30ad1829f2a3": {
+      "drug": "Estazolam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_30b5d24d70a2": {
+      "drug": "Zonisamide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_311afedeb7a3": {
+      "drug": "Levomilnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_312b380d9594": {
+      "drug": "Lofexidine",
+      "section": "THERAPEUTICS"
+    },
+    "q_313ae205c845": {
+      "drug": "Benztropine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_31df0eab653d": {
+      "drug": "Reboxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_31ed606e8dfc": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_3222fdb0b778": {
+      "drug": "Bupropion",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3286883b8706": {
+      "drug": "Clonidine",
+      "section": "THERAPEUTICS"
+    },
+    "q_32e6d4d77682": {
+      "drug": "Viloxazine",
+      "section": "THERAPEUTICS"
+    },
+    "q_331b39c39dbf": {
+      "drug": "Cyamemazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_332d2975d807": {
+      "drug": "Buspirone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_333790620574": {
+      "drug": "Protriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3337a05d5510": {
+      "drug": "Clorazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_333f095ddbaf": {
+      "drug": "Venlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_337d1e6bdb74": {
+      "drug": "Lofepramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_33b35a439a64": {
+      "drug": "Lumateperone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_33bdb728c793": {
+      "drug": "Zuclopenthixol",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_33c316d5fac0": {
+      "drug": "Amitriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_33ec1d07cfe9": {
+      "drug": "Iloperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_33ff153077b2": {
+      "drug": "Trazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_347087a441fc": {
+      "drug": "Nalmefene",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_348c63b58c80": {
+      "drug": "Zuclopenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_351c03f5ef8e": {
+      "drug": "Zaleplon",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3531bd7e354f": {
+      "drug": "Galantamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_354a2aee1678": {
+      "drug": "Galantamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_35580f77f0b1": {
+      "drug": "Valbenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_35fd88d64175": {
+      "drug": "Lumateperone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_361423d97632": {
+      "drug": "Valproate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_366349fe8ce4": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_3664c282c3ff": {
+      "drug": "Diazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_366aa6e4ee2b": {
+      "drug": "Viloxazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_36d15c8b8463": {
+      "drug": "Disulfiram",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_372d2834a32d": {
+      "drug": "Amoxapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3775dc8afdfc": {
+      "drug": "Nortriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_37b3ec7d35c2": {
+      "drug": "Lofepramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_37fd752667b4": {
+      "drug": "Lorazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3853a0b2c6e1": {
+      "drug": "Donepezil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_388d5b189778": {
+      "drug": "Reboxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_38f705f8edbd": {
+      "drug": "Methylfolate (L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_39097506a125": {
+      "drug": "Olanzapine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_392abbdfee0c": {
+      "drug": "Zaleplon",
+      "section": "THERAPEUTICS"
+    },
+    "q_392c3c23f3bc": {
+      "drug": "Tianeptine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_393edc3def14": {
+      "drug": "Iloperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_398bb8b99893": {
+      "drug": "Gabapentin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_39f455bf919d": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3abab8b4bc15": {
+      "drug": "Memantine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3addd74569a4": {
+      "drug": "Fluoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3b282236c244": {
+      "drug": "Diazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3b7899b8fdc0": {
+      "drug": "Fluvoxamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3b7fedff016d": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3ba606ce03bf": {
+      "drug": "Nefazodone",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_3bd08ff21167": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_3c27ed2c0530": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_3cfa78c2bcd0": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS"
+    },
+    "q_3d05b36d5def": {
+      "drug": "Nefazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3d1da076c521": {
+      "drug": "Desvenlafaxine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3d2dd082daed": {
+      "drug": "Viloxazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3d6cb2fb3b75": {
+      "drug": "Trimipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3da94feda167": {
+      "drug": "Citalopram",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3daf061713e3": {
+      "drug": "Duloxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_3dd9240ece82": {
+      "drug": "Citalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3dedfa81b7cb": {
+      "drug": "Sildenafil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3e06c95f0461": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3e3df81c5b0b": {
+      "drug": "Levetiracetam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3e43114d9f91": {
+      "drug": "Venlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_3e5baa2899b5": {
+      "drug": "Chlorpromazine",
+      "section": "THERAPEUTICS"
+    },
+    "q_3e8b4f96393f": {
+      "drug": "Buprenorphine",
+      "section": "THERAPEUTICS"
+    },
+    "q_3ebf6c93b6fb": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3efcea0c3a47": {
+      "drug": "Thioridazine",
+      "section": "THERAPEUTICS"
+    },
+    "q_3f0edfeaf3dd": {
+      "drug": "Prazosin",
+      "section": "SIDE EFFECTS",
+      "subsection": "Notable Side Effects"
+    },
+    "q_3f3132bab177": {
+      "drug": "Modafinil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3f75fe644c42": {
+      "drug": "Desipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_3f943544cbea": {
+      "drug": "Nalmefene",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3fa1449c6c92": {
+      "drug": "Lofepramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_3fb09200608e": {
+      "drug": "Thioridazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_40040ba6c987": {
+      "drug": "Flumazenil",
+      "section": "THERAPEUTICS"
+    },
+    "q_400a89851861": {
+      "drug": "Zuclopenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_4010dba88bec": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_402a737f815c": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_404ffac56b06": {
+      "drug": "Zotepine",
+      "section": "DOSING AND USE",
+      "subsection": "How to Stop"
+    },
+    "q_40d1d8463577": {
+      "drug": "Vortioxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4118fd39c73e": {
+      "drug": "Lumateperone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_414271e9140f": {
+      "drug": "Mianserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_417f60feb5df": {
+      "drug": "Sodium Oxybate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_41ca7968b335": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_41d91f520302": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_4201cd19ad5b": {
+      "drug": "Gabapentin",
+      "section": "THERAPEUTICS"
+    },
+    "q_42444b810499": {
+      "drug": "Oxazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_42692641eefc": {
+      "drug": "Naltrexone–Bupropion",
+      "section": "THERAPEUTICS"
+    },
+    "q_429cf46aeb2d": {
+      "drug": "Citalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_438e6063e762": {
+      "drug": "Sildenafil",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_439b9dfeccf3": {
+      "drug": "Fluoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_446fa1524d19": {
+      "drug": "Sertindole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_44c493b6b723": {
+      "drug": "Dothiepin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_4503bd83976a": {
+      "drug": "Methylfolate (L)",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_450c0c54b727": {
+      "drug": "Pimozide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_454b3ee2ba0b": {
+      "drug": "Venlafaxine",
+      "section": "SIDE EFFECTS",
+      "subsection": "Best Augmenting Agents for Side Effects"
+    },
+    "q_456275cbe002": {
+      "drug": "Fluvoxamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_4565630c3553": {
+      "drug": "Loflazepate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_45d7e71dc9fb": {
+      "drug": "Molindone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_45f6edaf81e3": {
+      "drug": "Dextromethorphan–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_46623c151e96": {
+      "drug": "Imipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_467bee879bfc": {
+      "drug": "Paroxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_4680b063c352": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_47176256a93a": {
+      "drug": "Doxepin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4726a498c1a5": {
+      "drug": "Flibanserin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_47488c9b74ef": {
+      "drug": "Flupenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_475a3f25278a": {
+      "drug": "Prazosin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_486e5ac1d71e": {
+      "drug": "Carbamazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_488ce8e9f4fc": {
+      "drug": "Sertraline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_488d9264046b": {
+      "drug": "Ramelteon",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4932a7724ab9": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "THERAPEUTICS"
+    },
+    "q_49d219722d69": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_49d7073f2e94": {
+      "drug": "Eszopiclone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_4be2a84acf63": {
+      "drug": "Vilazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_4bfb4d71aeaa": {
+      "drug": "Modafinil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4c2ffd58f401": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_4c92cf2b8c2f": {
+      "drug": "Thiothixene",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_4cdaf1490fe3": {
+      "drug": "Daridorexant",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4d1b1aa2706f": {
+      "drug": "Quetiapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4d59de88aa0c": {
+      "drug": "Thioridazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_4d61674b151b": {
+      "drug": "Lurasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_4d65f11ee108": {
+      "drug": "Loflazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_4e2915fc8682": {
+      "drug": "Agomelatine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_4e52adc971f6": {
+      "drug": "Buprenorphine",
+      "section": "THERAPEUTICS"
+    },
+    "q_4eae338ea9a6": {
+      "drug": "Thiothixene",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_4ef2938bcbe3": {
+      "drug": "Zolpidem",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4f4469b29332": {
+      "drug": "Propranolol",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_4f9945b7f381": {
+      "drug": "Solriamfetol",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_4fa0a0123ac3": {
+      "drug": "Trimipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_4fc5eaadb72b": {
+      "drug": "Valproate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_50385d4dcb0f": {
+      "drug": "Triazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_5040160a7cc1": {
+      "drug": "Buspirone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_50501e0f001e": {
+      "drug": "Blonanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_50809b7e11a0": {
+      "drug": "Oxazepam",
+      "section": "THERAPEUTICS"
+    },
+    "q_509368fb584c": {
+      "drug": "Naltrexone",
+      "section": "THERAPEUTICS"
+    },
+    "q_50c5ba4adfe3": {
+      "drug": "Tiagabine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5121530fbd0b": {
+      "drug": "Zolpidem",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_512b4843f642": {
+      "drug": "Triazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_51355241a6ad": {
+      "drug": "Dextromethorphan–Quinidine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_51549f173865": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_51ab1ad4235b": {
+      "drug": "Gabapentin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_51ad592a334b": {
+      "drug": "Molindone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_51f2559abbf7": {
+      "drug": "Chlorpromazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_523a7546cedb": {
+      "drug": "Vilazodone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_52ef474437cc": {
+      "drug": "Desvenlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_53c4f6466c56": {
+      "drug": "Alprazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_53d6e545ef22": {
+      "drug": "Oxcarbazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_53e8184b978c": {
+      "drug": "Amoxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_53f0c1fb7c40": {
+      "drug": "Oxazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_542ebba3e11b": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5445b435ef97": {
+      "drug": "Estazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5454d7aaa88a": {
+      "drug": "Tianeptine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_548323235dfd": {
+      "drug": "Paroxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_552341c45d7f": {
+      "drug": "Dextromethorphan–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_5525e5603d0e": {
+      "drug": "Dextromethorphan–Quinidine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_552c546e2e35": {
+      "drug": "Viloxazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_556f49c689ca": {
+      "drug": "Armodafinil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_55bc450b8384": {
+      "drug": "Clonidine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_55fd3375499c": {
+      "drug": "Vortioxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_564258885ffa": {
+      "drug": "Thioridazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_565e6c07c513": {
+      "drug": "Vortioxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_56ae200b4486": {
+      "drug": "Atomoxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_57004abe6d70": {
+      "drug": "Ramelteon",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5765f356d816": {
+      "drug": "Duloxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_5774e2d591ff": {
+      "drug": "Iloperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_57c9fe5ae9e7": {
+      "drug": "Nortriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_58b00ff5f241": {
+      "drug": "Flupenthixol",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_58b75257e8db": {
+      "drug": "Flupenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_58fb7cf5f18f": {
+      "drug": "Perospirone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5912316164b0": {
+      "drug": "Fluphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_596087126bc7": {
+      "drug": "Flibanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_596c31633d2e": {
+      "drug": "Moclobemide",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_598054e7f151": {
+      "drug": "Triazolam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_59ed3181f324": {
+      "drug": "Pregabalin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_5a58b8cb0325": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_5a5f695d95aa": {
+      "drug": "Valproate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5a84b5faff6e": {
+      "drug": "Nefazodone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5a8716e67d53": {
+      "drug": "Flunitrazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_5a895d9bbc8a": {
+      "drug": "Dexmedetomidine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_5ade5a557f3b": {
+      "drug": "Amoxapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5b10c7c1104c": {
+      "drug": "Selegiline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_5b718e31ee8b": {
+      "drug": "Dothiepin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5bacc6fd9015": {
+      "drug": "Cariprazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5c2d9342c172": {
+      "drug": "Desipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_5d8075afed2a": {
+      "drug": "Loxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5dc6706c70b6": {
+      "drug": "Zonisamide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_5ddcd9eaf9a6": {
+      "drug": "Thiothixene",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5e0704bee107": {
+      "drug": "Perphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5e0ce9e5dbec": {
+      "drug": "Dextromethorphan–Quinidine"
+    },
+    "q_5e23d6b2b14f": {
+      "drug": "Dextromethorphan–Bupropion",
+      "section": "THERAPEUTICS"
+    },
+    "q_5e89b7e1fbb9": {
+      "drug": "Selegiline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5eeaf62bbdbf": {
+      "drug": "Duloxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_5f0e2129f354": {
+      "drug": "Diazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5f4f1037aa22": {
+      "drug": "Sulpiride",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_5f6fcf0e31e2": {
+      "drug": "Selegiline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_5f70f1cabfa0": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_6018739b7089": {
+      "drug": "Zonisamide",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_60ba66b862e3": {
+      "drug": "Loxapine",
+      "section": "THE ART OF PSYCHOPHARMACOLOGY",
+      "subsection": "Pearls"
+    },
+    "q_60ccd6462cdc": {
+      "drug": "Sulpiride",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_615651f68cb7": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6184e96143f3": {
+      "drug": "Rivastigmine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_618b1924a860": {
+      "drug": "Deutetrabenazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_61e45a5e82a5": {
+      "drug": "Clomipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_620dec937f73": {
+      "drug": "Viloxazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_6231ae21f25c": {
+      "drug": "Zotepine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_624a612c6f1f": {
+      "drug": "Fluphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_63559b4e983f": {
+      "drug": "Tianeptine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_63851a9f80c2": {
+      "drug": "Reboxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_63868f8f9fac": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_63d107a9f8a4": {
+      "drug": "Tiagabine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_63d14277d50a": {
+      "drug": "Oxcarbazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_64a1b3a2c066": {
+      "drug": "Phenelzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_64c732950123": {
+      "drug": "Clozapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_64cd8f5d409d": {
+      "drug": "Fluoxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_64da37974a32": {
+      "drug": "Loflazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_64f42ae0e9ab": {
+      "drug": "Dextromethorphan–Quinidine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_6507e74cca59": {
+      "drug": "Lofepramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_650d0c17a875": {
+      "drug": "Ramelteon",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_656d27d1ff9f": {
+      "drug": "Levomilnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_65723d283e71": {
+      "drug": "Iloperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_65958613137c": {
+      "drug": "Perospirone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_65da152389a1": {
+      "drug": "Deutetrabenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_65e8d2a1497d": {
+      "drug": "Memantine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_6602560c406d": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6666512dce50": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6678d822090c": {
+      "drug": "Perphenazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_66969969018b": {
+      "drug": "Maprotiline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_66c13abb2f9e": {
+      "drug": "Escitalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_670703b99d72": {
+      "drug": "Pitolisant",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6739932d771e": {
+      "drug": "Agomelatine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_678328c0f8cc": {
+      "drug": "Duloxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_67d95a5641c8": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_67e361d9cfb6": {
+      "drug": "Zotepine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6803ed58d657": {
+      "drug": "Clorazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6860c44d949a": {
+      "drug": "Midazolam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_68a4406e89dc": {
+      "drug": "Paroxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_68c69b139a69": {
+      "drug": "Cyamemazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_68e3c419863a": {
+      "drug": "Quazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_690661acac13": {
+      "drug": "Desvenlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_693327f0cc86": {
+      "drug": "Topiramate",
+      "section": "DOSING AND USE",
+      "subsection": "Overdose"
+    },
+    "q_693614ac8cde": {
+      "drug": "Alprazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_695d910e5495": {
+      "drug": "Daridorexant",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_6985c11eb068": {
+      "drug": "Zopiclone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_69a3a84fe82a": {
+      "drug": "Pipothiazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6aa7f59a2961": {
+      "drug": "Quetiapine",
+      "section": "DOSING AND USE",
+      "subsection": "Dosing Tips"
+    },
+    "q_6ac12e453071": {
+      "drug": "Desvenlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6add534b5585": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6af39ba40f15": {
+      "drug": "Haloperidol",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_6afdfe2f6ea9": {
+      "drug": "Venlafaxine",
+      "section": "DOSING AND USE",
+      "subsection": "Do Not Use"
+    },
+    "q_6b5520af9edd": {
+      "drug": "Lofexidine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6b7157c55280": {
+      "drug": "Fluvoxamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_6b7d009dc80d": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS"
+    },
+    "q_6b9683abec14": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6bce7ac14073": {
+      "drug": "Cariprazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6be863931dfa": {
+      "drug": "Escitalopram",
+      "section": "THERAPEUTICS"
+    },
+    "q_6c19ec788c29": {
+      "drug": "Amitriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6c1e531ce6fc": {
+      "drug": "Pregabalin",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_6c6ee6773b6c": {
+      "drug": "Paroxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6c8da9379de9": {
+      "drug": "Amoxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6cbe529b5218": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6ccb9d98ebd2": {
+      "drug": "Maprotiline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_6d29e3cf2569": {
+      "drug": "Quetiapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6d759ebd2392": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS"
+    },
+    "q_6db7a906d20a": {
+      "drug": "Amitriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6dbdb6d6613a": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_6dc071c94b9a": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6e7e587e37c0": {
+      "drug": "Dextromethorphan–Quinidine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6ea565336ed0": {
+      "drug": "Diazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6edf162b039a": {
+      "drug": "Zaleplon",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_6f174fe24ba3": {
+      "drug": "Hydroxyzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_6f3dd48bf0d5": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_6fb3589c9723": {
+      "drug": "Protriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_70174ed78b63": {
+      "drug": "Maprotiline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_701d475a1264": {
+      "drug": "Chlordiazepoxide",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_70ce41b3f320": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_710a55181601": {
+      "drug": "Zolpidem",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_710fb524c37c": {
+      "drug": "Modafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_71392d192c3d": {
+      "drug": "Zolpidem",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_715b100760c3": {
+      "drug": "Memantine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_71bad2288fdd": {
+      "drug": "Nortriptyline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_71bdf4c073aa": {
+      "drug": "Imipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_71bf78f6ce82": {
+      "drug": "Prazosin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_730975131024": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_732eab98f4ca": {
+      "drug": "Galantamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_733bdb1cd568": {
+      "drug": "Methylphenidate (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_7342561984af": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_734618237ac4": {
+      "drug": "Risperidone",
+      "subsection": "Switching from Oral Antipsychotics to Risperidone"
+    },
+    "q_734848d037a7": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_7391ffde1e80": {
+      "drug": "Lamotrigine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_7393668ed116": {
+      "drug": "Chlordiazepoxide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_73aa07f3b179": {
+      "drug": "Moclobemide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_74465a972706": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_75322cd20ea6": {
+      "drug": "Lemborexant",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_754a28f7cba3": {
+      "drug": "Desipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_75f0a8d38a82": {
+      "drug": "Nefazodone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_763e0d417cd5": {
+      "drug": "Flunitrazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_7679f2bd55da": {
+      "drug": "Trifluoperazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_76c9bd1a290e": {
+      "drug": "Selegiline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_76d990009ada": {
+      "drug": "Desipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_76e683d4bd3e": {
+      "drug": "Trimipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_7730f7f2466f": {
+      "drug": "Cariprazine",
+      "section": "THERAPEUTICS"
+    },
+    "q_777f68b758e0": {
+      "drug": "Clomipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_7789474f1cc3": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_779f36be9da7": {
+      "drug": "Trifluoperazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_77acd80cafa5": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_77d200bb9a33": {
+      "drug": "Midazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_77d50397064c": {
+      "drug": "Fluvoxamine"
+    },
+    "q_7805d51f25cc": {
+      "drug": "Galantamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_7841d8fbd1c9": {
+      "drug": "Moclobemide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_7884390dc311": {
+      "drug": "Pimozide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_78bb32998ef8": {
+      "drug": "Milnacipran",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_797b030951ec": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_79ccd0d2adf6": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_79e3c3abc583": {
+      "drug": "Lorazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_7a69dd90c53c": {
+      "drug": "Quazepam",
+      "section": "THERAPEUTICS"
+    },
+    "q_7a71d8a4f884": {
+      "drug": "Methylphenidate (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_7a8c91cf2ec4": {
+      "drug": "Amitriptyline",
+      "section": "THERAPEUTICS"
+    },
+    "q_7bcbf1cb0154": {
+      "drug": "Flumazenil",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_7bd59e13b00f": {
+      "drug": "Duloxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_7bef6373cde6": {
+      "drug": "Methylphenidate (D)",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_7c3d97640a71": {
+      "drug": "Solriamfetol",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_7c6b86c46f7f": {
+      "drug": "Tasimelteon",
+      "section": "THERAPEUTICS"
+    },
+    "q_7c8cfe4aa3a7": {
+      "drug": "Clonazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_7d242c3e7c5f": {
+      "drug": "Sodium Oxybate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_7d83b2b6f38d": {
+      "drug": "Acamprosate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_7db171d18557": {
+      "drug": "Tranylcypromine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_7dbf9fcc0a5e": {
+      "drug": "Pimavanserin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_7dbff024aaf3": {
+      "drug": "Daridorexant",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_7e07bdbcef8f": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_7e403b44590c": {
+      "drug": "Amitriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_7efc4b3baeea": {
+      "drug": "Atomoxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_7f5949da4c7b": {
+      "drug": "Modafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_7fa4490dc790": {
+      "drug": "Lofepramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_7fb74fb56a31": {
+      "drug": "Triiodothyronine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_80090dfe7a43": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_80100a343a96": {
+      "drug": "Acamprosate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_805ce231cf56": {
+      "drug": "Lisdexamfetamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_805d33479540": {
+      "drug": "Alprazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_8159f09c11a0": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_81a9ab279162": {
+      "drug": "Tiagabine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_81ee2d668c40": {
+      "drug": "Nortriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_824bcd1cd606": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_825ef3b4cf79": {
+      "drug": "Esketamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_82953e83ff37": {
+      "drug": "Lorazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_82ee7f05d1df": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_83bb37c650be": {
+      "drug": "Rivastigmine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_83c1edf4d62e": {
+      "drug": "Buprenorphine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_83c5b9c60906": {
+      "drug": "Pregabalin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_84eccead07d2": {
+      "drug": "Buspirone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_8548193975bb": {
+      "drug": "Tranylcypromine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_855b003189e7": {
+      "drug": "Paroxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_855b58facd1d": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS"
+    },
+    "q_85dc8c0ee87b": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_85dd4df2f5a5": {
+      "drug": "Levetiracetam",
+      "section": "THERAPEUTICS"
+    },
+    "q_868c9b7cd4b7": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_86bb9b8c7018": {
+      "drug": "Estazolam",
+      "section": "THERAPEUTICS"
+    },
+    "q_86e89ea9b771": {
+      "drug": "Mianserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_870aa1fb8086": {
+      "drug": "Donepezil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_879b19279296": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_87ad04cb4f6e": {
+      "drug": "Phentermine–Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_87e924eb3312": {
+      "drug": "Fluoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_8802194f3178": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Commonly Prescribed for"
+    },
+    "q_880ca97413c6": {
+      "drug": "Flumazenil",
+      "section": "THERAPEUTICS"
+    },
+    "q_888a0bf496f1": {
+      "drug": "Trihexyphenidyl",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_890635ba9f67": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_898f03e53c9a": {
+      "drug": "Escitalopram",
+      "section": "DOSING AND USE",
+      "subsection": "Dosage Forms"
+    },
+    "q_89afc3221b2d": {
+      "drug": "Sulpiride",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_89fc4c9312ca": {
+      "drug": "Sodium Oxybate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_8ade1bd5abd7": {
+      "drug": "Phentermine–Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_8af1d5d8d5d0": {
+      "drug": "Oxazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_8b29c3c16bb9": {
+      "drug": "Naltrexone",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_8b2abc544040": {
+      "drug": "Lofepramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_8ba9e3da91fa": {
+      "drug": "Chlordiazepoxide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_8be6256b3e24": {
+      "drug": "Ketamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_8c0125808cbf": {
+      "drug": "Perphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_8c0e3c71b269": {
+      "drug": "Sodium Oxybate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_8d14fbe19f44": {
+      "drug": "Loxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_8d548d1bace4": {
+      "drug": "Fluphenazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_8d6bda1b754b": {
+      "drug": "Varenicline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_8d79801cc707": {
+      "drug": "Levetiracetam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_8da58fe30ead": {
+      "drug": "Naltrexone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_8dbb7cbd07a5": {
+      "drug": "Sildenafil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_8e1d9758ee45": {
+      "drug": "Temazepam",
+      "section": "THERAPEUTICS"
+    },
+    "q_8eb82d2cf40c": {
+      "drug": "Ramelteon",
+      "section": "THERAPEUTICS"
+    },
+    "q_8ecb467995a4": {
+      "drug": "Flumazenil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_8f259dcf55f3": {
+      "drug": "Solriamfetol",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_8f44e5c94abb": {
+      "drug": "Protriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_8f591213c629": {
+      "drug": "Carbamazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_8f6ed71dbb65": {
+      "drug": "Armodafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_8f9c9d9be69b": {
+      "drug": "Oxcarbazepine",
+      "section": "THERAPEUTICS"
+    },
+    "q_8fc0a8e147fc": {
+      "drug": "Paroxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_90005fb673de": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9007a91d6502": {
+      "drug": "Triazolam",
+      "section": "THERAPEUTICS"
+    },
+    "q_9032484238a2": {
+      "drug": "Flurazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9092cada4791": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_90c0a3380d7e": {
+      "drug": "Zuclopenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_90d22cacf2be": {
+      "drug": "Midazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9132241f3bae": {
+      "drug": "Diphenhydramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9145c6157830": {
+      "drug": "Imipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_916d3741c216": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_91b6c068aefc": {
+      "drug": "Sertraline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_91dde698ebb6": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_91ffc8862948": {
+      "drug": "Clozapine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_91ffe5d2cdb7": {
+      "drug": "Dextromethorphan–Bupropion",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_92104f7f53b5": {
+      "drug": "Guanfacine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_924582e0d59a": {
+      "drug": "Desvenlafaxine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_9268257a2365": {
+      "drug": "Escitalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_92a828d4ee2f": {
+      "drug": "Zonisamide",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9324b9cef106": {
+      "drug": "Buprenorphine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_933a0dd896a6": {
+      "drug": "Loflazepate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_93de208829dd": {
+      "drug": "Lemborexant",
+      "section": "SIDE EFFECTS",
+      "subsection": "Notable Side Effects"
+    },
+    "q_9422a239292b": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_94bc3a0f032f": {
+      "drug": "Zotepine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_94caccec7f30": {
+      "drug": "Oxcarbazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_94cf71d81248": {
+      "drug": "Zotepine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_950bbd47ac90": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9518f8721acf": {
+      "drug": "Lamotrigine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9533d7e20bb0": {
+      "drug": "Trimipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_953f31118eba": {
+      "drug": "Trimipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_954af7fff09e": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_96685000b46e": {
+      "drug": "Brexanolone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_966f9114b284": {
+      "drug": "Bupropion",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_96a4e74332df": {
+      "drug": "Lofepramine",
+      "section": "THERAPEUTICS"
+    },
+    "q_96de6b44f88a": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_96df8c203a8f": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9713d7bfa522": {
+      "drug": "Trifluoperazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_974debd39c0b": {
+      "drug": "Vortioxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9789e750e7c5": {
+      "drug": "Carbamazepine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_979607db2513": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9798253a4986": {
+      "drug": "Cariprazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_97ad3ef83f44": {
+      "drug": "Atomoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_97b5f6304f38": {
+      "drug": "Armodafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_980525c997e4": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_981f7f43c43b": {
+      "drug": "Desipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_98692cd2bc5c": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9889230eda92": {
+      "drug": "Eszopiclone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_98d938cbcdc0": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_98f69c558a01": {
+      "drug": "Quetiapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_98fe7040d38f": {
+      "drug": "Lumateperone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_991da4e8bc9e": {
+      "drug": "Cariprazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_9924e877c92e": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_993dd1cb4702": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_994818e7bd62": {
+      "drug": "Sertraline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_997736e5f133": {
+      "drug": "Sulpiride",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_999cc66929f2": {
+      "drug": "Protriptyline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_999e8526d0e6": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS"
+    },
+    "q_99ae3799b6ae": {
+      "drug": "Sertindole",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_99b2e5b8bcd7": {
+      "drug": "Zolpidem",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_99bbde992970": {
+      "drug": "Guanfacine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_99bc570190b7": {
+      "drug": "Ketamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_99df2e54672c": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS"
+    },
+    "q_9a1a2b711053": {
+      "drug": "Valbenazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_9a1b90d85108": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9a6bf2394d59": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9a81c55fbb0d": {
+      "drug": "Tasimelteon",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9a8c66df2b39": {
+      "drug": "Sertraline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_9a91daeb45d8": {
+      "drug": "Amoxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9aeb06346d43": {
+      "drug": "Venlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9b46b6db1279": {
+      "drug": "Zaleplon",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9b5ca21bc3f5": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_9ba5539ebf9c": {
+      "drug": "Hydroxyzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9bf6673a193b": {
+      "drug": "Reboxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_9c6d4483e325": {
+      "drug": "Disulfiram",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_9c817f312856": {
+      "drug": "Cariprazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9cdb13805f22": {
+      "drug": "Phenelzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9d247c2159d2": {
+      "drug": "Pregabalin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9d8a40fad9ba": {
+      "drug": "Diazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_9de78726faad": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9df40a2f3429": {
+      "drug": "Nefazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9df9ebe6ff32": {
+      "drug": "Clomipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9e7de6819216": {
+      "drug": "Clomipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9ea604644949": {
+      "drug": "Nortriptyline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_9ecfd2185348": {
+      "drug": "Tiagabine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_9eee33b6181a": {
+      "drug": "Agomelatine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9f052aa3af9d": {
+      "drug": "Olanzapine–Samidorphan",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9f08b708d209": {
+      "drug": "Levetiracetam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9f15bdca6554": {
+      "drug": "Flunitrazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_9f241c3c52a3": {
+      "drug": "Estazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9f2c5ddae70a": {
+      "drug": "Clonidine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_9f4d87b10160": {
+      "drug": "Amoxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_9f53bc541050": {
+      "drug": "Phenelzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a039759a7b89": {
+      "drug": "Paliperidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a0bd56f054d7": {
+      "drug": "Clonidine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a0da63199cc0": {
+      "drug": "Selegiline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a1136cb11307": {
+      "drug": "Bremelanotide",
+      "section": "THERAPEUTICS"
+    },
+    "q_a1647089e7a6": {
+      "drug": "Iloperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a184dc135768": {
+      "drug": "Pregabalin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a190d346c59e": {
+      "drug": "Tranylcypromine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a1aa9936b09b": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a1c0761a3c36": {
+      "drug": "Clorazepate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a1ee3c349c20": {
+      "drug": "Amoxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a2013005e481": {
+      "drug": "Triiodothyronine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a27e425a153a": {
+      "drug": "Valproate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_a298df5fafef": {
+      "drug": "Venlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a2d9433377cc": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS"
+    },
+    "q_a353050293fa": {
+      "drug": "Paroxetine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_a358177d1ddb": {
+      "drug": "Zotepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_a4197153b4d1": {
+      "drug": "Zotepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_a48d8cbb8aed": {
+      "drug": "Doxepin",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_a491eaf6fd86": {
+      "drug": "Mianserin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a49dbd0a8ccc": {
+      "drug": "Zonisamide",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a49f7af9007d": {
+      "drug": "Chlorpromazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a4ca6f10c0a9": {
+      "drug": "Dextromethorphan–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a4d58c035521": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_a532ee941d41": {
+      "drug": "Fluvoxamine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_a54adaeefab3": {
+      "drug": "Nortriptyline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a54d626aa067": {
+      "drug": "Estazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a55ccb917ebd": {
+      "drug": "Lurasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a5b5d4b8c6d2": {
+      "drug": "Protriptyline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a5f2fd101e62": {
+      "drug": "Imipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a62761453d11": {
+      "drug": "Levomilnacipran",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a64abad190d7": {
+      "drug": "Tianeptine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_a65b111a4b94": {
+      "drug": "Pitolisant",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_a689fa98235b": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a693f05ac761": {
+      "drug": "Acamprosate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a6a6418ebd95": {
+      "drug": "Flurazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a6a6e8e67f35": {
+      "drug": "Blonanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a7c538c18101": {
+      "drug": "Lemborexant",
+      "section": "SAFETY AND TOLERABILITY"
+    },
+    "q_a7fe2216f26a": {
+      "drug": "Lurasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a8773659304c": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_a8774052742e": {
+      "drug": "Lofepramine",
+      "section": "THERAPEUTICS"
+    },
+    "q_a8a675ac3ab3": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a8cf195ac49c": {
+      "drug": "Bupropion",
+      "section": "DOSING AND USE",
+      "subsection": "Dosing Tips"
+    },
+    "q_a8e4385fc350": {
+      "drug": "Lumateperone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_a9126395a7a9": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_a949d8e6c793": {
+      "drug": "Blonanserin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a9acfd6fcda3": {
+      "drug": "Vilazodone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_a9c807bcec10": {
+      "drug": "Esketamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_a9d8335d47b8": {
+      "drug": "Lamotrigine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_aa3dee2b15ad": {
+      "drug": "Clonazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ab15d6c8ec2a": {
+      "drug": "Carbamazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_ab304f4860ce": {
+      "drug": "Nefazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_aba892e5d6fb": {
+      "drug": "Lofepramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_abcc3feeede6": {
+      "drug": "Loxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ac0f1cd7ca8e": {
+      "drug": "Amisulpride",
+      "section": "THERAPEUTICS"
+    },
+    "q_ac14da05564d": {
+      "drug": "Pimozide",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ad1f8336a2e5": {
+      "drug": "Blonanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ad4d2baa0ce2": {
+      "drug": "Carbamazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_ad9c0f125e1e": {
+      "drug": "Trazodone",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_adebd769abc2": {
+      "drug": "Viloxazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ae018a33a59a": {
+      "drug": "Donepezil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ae4a132fc202": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_ae57341eb1d7": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ae88b4a84a82": {
+      "drug": "Trazodone",
+      "section": "THERAPEUTICS"
+    },
+    "q_aed882c282e2": {
+      "drug": "Trimipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_af023216efbb": {
+      "drug": "Solriamfetol",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_af3360ee299c": {
+      "drug": "Buprenorphine",
+      "section": "THERAPEUTICS"
+    },
+    "q_af48cf86ed12": {
+      "drug": "Alprazolam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_af5e27e00a51": {
+      "drug": "Nalmefene",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_afeb1ea8f69b": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_affaeab03718": {
+      "drug": "Zopiclone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_affef373abf0": {
+      "drug": "Ziprasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b03c5d703fa5": {
+      "drug": "Zuclopenthixol",
+      "section": "THE ART OF PSYCHOPHARMACOLOGY",
+      "subsection": "Pearls"
+    },
+    "q_b03e1c01bfed": {
+      "drug": "Buspirone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b05448fae384": {
+      "drug": "Lisdexamfetamine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b079d09d689b": {
+      "drug": "Lumateperone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b081e3d9e04f": {
+      "drug": "Flurazepam",
+      "section": "THERAPEUTICS"
+    },
+    "q_b0a0c61dd392": {
+      "drug": "Iloperidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b163fb18adbb": {
+      "drug": "Varenicline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b18b9373a3ee": {
+      "drug": "Trimipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b1b3f8673148": {
+      "drug": "Protriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b1bc24454da1": {
+      "drug": "Ketamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b1de80a3aac3": {
+      "drug": "Aripiprazole",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b1e9cf37498a": {
+      "drug": "Iloperidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b226b62b3a3a": {
+      "drug": "Mianserin",
+      "section": "THERAPEUTICS",
+      "subsection": "If It Doesn’t Work"
+    },
+    "q_b22fcc462367": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_b251a6156044": {
+      "drug": "Galantamine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b28cb7726fdf": {
+      "drug": "Zotepine",
+      "section": "DOSING AND USE",
+      "subsection": "How to Stop"
+    },
+    "q_b350583e58ad": {
+      "drug": "Cyamemazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b414a208b494": {
+      "drug": "Sildenafil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b414d6fd0462": {
+      "drug": "Sodium Oxybate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_b42bbe8529bf": {
+      "drug": "Bremelanotide",
+      "section": "DOSING AND USE",
+      "subsection": "Habit Forming?"
+    },
+    "q_b47682bd71e6": {
+      "drug": "Atomoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b49b837719e7": {
+      "drug": "Clonazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b50b9fe5f70b": {
+      "drug": "Carbamazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b534c4697357": {
+      "drug": "Buprenorphine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b62389b3f693": {
+      "drug": "Blonanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_b623a20347b4": {
+      "drug": "Alprazolam",
+      "section": "DOSING AND USE",
+      "subsection": "How to Stop"
+    },
+    "q_b639ce1d4fc7": {
+      "drug": "Fluvoxamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b67a119d5e8d": {
+      "drug": "Fluphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b715b923e711": {
+      "drug": "Trazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b737ae255058": {
+      "drug": "Pregabalin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b75d14fd8a12": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b7cef505b641": {
+      "drug": "Galantamine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b7d00ca38534": {
+      "drug": "Sertindole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_b7d0649409f4": {
+      "drug": "Cyamemazine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_b7fa21f2db1e": {
+      "drug": "Desvenlafaxine",
+      "section": "THERAPEUTICS"
+    },
+    "q_b808ffa47540": {
+      "drug": "Venlafaxine",
+      "section": "SIDE EFFECTS",
+      "subsection": "Best Augmenting Agents for Side Effects"
+    },
+    "q_b81d143deacf": {
+      "drug": "Cyamemazine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_b82b4e2f5f81": {
+      "drug": "Lisdexamfetamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b88a3f505ac8": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS"
+    },
+    "q_b911e9109d66": {
+      "drug": "Trimipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_b950cf25c4c0": {
+      "drug": "Zopiclone",
+      "section": "THERAPEUTICS"
+    },
+    "q_b953a96c76a2": {
+      "drug": "Dothiepin",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_b995ba78069b": {
+      "drug": "Nalmefene",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_b9dbfe73d79d": {
+      "drug": "Clomipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Dosing Tips"
+    },
+    "q_ba6c37bd701c": {
+      "drug": "Deutetrabenazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_bb41f541ab1f": {
+      "drug": "Zuclopenthixol",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_bb4894fd29dc": {
+      "drug": "Vortioxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_bb8cbe58dc41": {
+      "drug": "Protriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_bbdd9312ed3c": {
+      "drug": "Protriptyline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_bc8b8004624a": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS"
+    },
+    "q_bc99a8b3fcfd": {
+      "drug": "Modafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_bce150cc860b": {
+      "drug": "Isocarboxazid",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_bd36116fee52": {
+      "drug": "Escitalopram",
+      "section": "DOSING AND USE",
+      "subsection": "Dosage Forms"
+    },
+    "q_bd71448efdf1": {
+      "drug": "Quazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_bdb29a2d1954": {
+      "drug": "Flurazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_be31dfcdb7a5": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_be3f5356e3af": {
+      "drug": "Clomipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Dosing Tips"
+    },
+    "q_beb989eb57e9": {
+      "drug": "Viloxazine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_bee8c411b14d": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_bf10baf0c6df": {
+      "drug": "Tasimelteon",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_bf60f5f2d224": {
+      "drug": "Quetiapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_bf8adee0ccfc": {
+      "drug": "Carbamazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_bff9f45a932c": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_bffe9db1f1be": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c0e60a6553a8": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_c131432adf3f": {
+      "drug": "Serdexmethylphenidate",
+      "section": "THERAPEUTICS"
+    },
+    "q_c137db7dacad": {
+      "drug": "Levomilnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c23dd6329dde": {
+      "drug": "Carbamazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c28f986b4485": {
+      "drug": "Diphenhydramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c29bc536a8b2": {
+      "drug": "Pimavanserin",
+      "section": "THERAPEUTICS"
+    },
+    "q_c2a1d12a5ccc": {
+      "drug": "Armodafinil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c2a48d16d0ce": {
+      "drug": "Citalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_c2d7b8f222ac": {
+      "drug": "Lorazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c2e584eba66f": {
+      "drug": "Serdexmethylphenidate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_c33aab525dba": {
+      "drug": "Clozapine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_c33c4163f5f4": {
+      "drug": "Donepezil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c348194bc1d9": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_c34e3280b7b0": {
+      "drug": "Gabapentin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c38279d4dbb3": {
+      "drug": "Propranolol",
+      "section": "DOSING AND USE",
+      "subsection": "Do Not Use"
+    },
+    "q_c3970c15ab85": {
+      "drug": "Trimipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_c3cafb4b366e": {
+      "drug": "Zolpidem",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_c3e8214ee443": {
+      "drug": "Brexpiprazole",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c4457017d97a": {
+      "drug": "Suvorexant",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_c450b97db2a4": {
+      "drug": "Modafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_c476383a4e4c": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c4a1af661273": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_c4bce815f340": {
+      "drug": "Flibanserin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c4beb9ba5f8a": {
+      "drug": "Chlordiazepoxide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_c4f4f7905438": {
+      "drug": "Benztropine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c60508371af8": {
+      "drug": "Lofexidine",
+      "section": "DOSING AND USE",
+      "subsection": "Do Not Use"
+    },
+    "q_c618ff7374a1": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_c6649c2f9c98": {
+      "drug": "Brexanolone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c672c5700d0c": {
+      "drug": "Hydroxyzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_c6c3e8dd9ca4": {
+      "drug": "Lemborexant",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c6c5ff58b109": {
+      "drug": "Asenapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c6d93913aaee": {
+      "drug": "Nalmefene",
+      "section": "THERAPEUTICS"
+    },
+    "q_c6f85a417f1a": {
+      "drug": "Vortioxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_c70773dd8dcb": {
+      "drug": "Dexmedetomidine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c752a06eb873": {
+      "drug": "Clonazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_c7ade881d563": {
+      "drug": "Zonisamide",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c88333906c99": {
+      "drug": "Brexpiprazole",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_c8ee3dde6808": {
+      "drug": "Imipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c98c15686975": {
+      "drug": "Guanfacine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_c98c4c14ca73": {
+      "drug": "Oxcarbazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_c9ab3fad7fad": {
+      "drug": "Acamprosate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ca12676a56ac": {
+      "drug": "Iloperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ca2d19c38565": {
+      "drug": "Sertindole",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ca4596b87f6f": {
+      "drug": "Reboxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ca8fec6c103d": {
+      "drug": "Nefazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_cab1c8a0bbed": {
+      "drug": "Lamotrigine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_cac95b47599d": {
+      "drug": "Moclobemide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_cb5883425fe1": {
+      "drug": "Diphenhydramine",
+      "section": "THERAPEUTICS"
+    },
+    "q_cb7aa35bf4a0": {
+      "drug": "Daridorexant",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_cc7d1c164518": {
+      "drug": "Clomipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ccf6bd359c72": {
+      "drug": "Tasimelteon",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_cd146cacb780": {
+      "drug": "Disulfiram",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_cd226726a462": {
+      "drug": "Olanzapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_cd79aa6b8eb0": {
+      "drug": "Topiramate",
+      "section": "DOSING AND USE",
+      "subsection": "Overdose"
+    },
+    "q_ce1dcd4bf2f9": {
+      "drug": "Vortioxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ce81983c2b4b": {
+      "drug": "Haloperidol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ce91bdba888f": {
+      "drug": "Trimipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_ce96bd2f26ba": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_cebba66dbfb3": {
+      "drug": "Naltrexone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_cebc51f8d758": {
+      "drug": "Fluoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_cec0e96ca78a": {
+      "drug": "Fluvoxamine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_cec45188267d": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_cf1309cc1733": {
+      "drug": "Naltrexone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_cf25b6e13647": {
+      "drug": "Venlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_cf5f382a79c0": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_cf650326fa57": {
+      "drug": "Buprenorphine",
+      "section": "THERAPEUTICS"
+    },
+    "q_cf75cf7f56ee": {
+      "drug": "Trimipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_cf8fa6dc5e18": {
+      "drug": "Imipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_cf91652b4136": {
+      "drug": "Temazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Overdose"
+    },
+    "q_d076d6c592b6": {
+      "drug": "Loxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d12639d5147c": {
+      "drug": "Mirtazapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d1b4b066faf6": {
+      "drug": "Esketamine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_d1e8d8f05699": {
+      "drug": "Varenicline",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d2031cc59ec4": {
+      "drug": "Guanfacine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d219f938fe67": {
+      "drug": "Memantine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d25335e43c1e": {
+      "drug": "Vilazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d258806361f8": {
+      "drug": "Nortriptyline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_d26fcb10eb96": {
+      "drug": "Dextromethorphan–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_d2840d0f9041": {
+      "drug": "Tranylcypromine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d285f891ee3d": {
+      "drug": "Lamotrigine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d296e37380b4": {
+      "drug": "Memantine",
+      "section": "SPECIAL POPULATIONS",
+      "subsection": "Breast Feeding"
+    },
+    "q_d361082354cf": {
+      "drug": "Dothiepin",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_d3c971a0543a": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d3d725f95c28": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d41b9d0830db": {
+      "drug": "Amphetamine (D)",
+      "section": "THERAPEUTICS"
+    },
+    "q_d4535482bf33": {
+      "drug": "Lofexidine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d4732b7f0210": {
+      "drug": "Midazolam",
+      "section": "SIDE EFFECTS"
+    },
+    "q_d4c5128a8e5b": {
+      "drug": "Citalopram",
+      "section": "DOSING AND USE",
+      "subsection": "Dosing Tips"
+    },
+    "q_d4f1be826101": {
+      "drug": "Clomipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d4f45525add7": {
+      "drug": "Trazodone",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_d5174f2711d1": {
+      "drug": "Lurasidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_d51cefea1e16": {
+      "drug": "Escitalopram",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d528d6dbddf0": {
+      "drug": "Flibanserin",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_d5807d49aea7": {
+      "drug": "Quazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_d596b8a88e8f": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d5f8e27f03e9": {
+      "drug": "Nalmefene",
+      "section": "THE ART OF PSYCHOPHARMACOLOGY",
+      "subsection": "Pearls"
+    },
+    "q_d66572dd2fe3": {
+      "drug": "Perphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_d6775ad8656c": {
+      "drug": "Pitolisant",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_d6fa026d7f08": {
+      "drug": "Diphenhydramine",
+      "section": "THERAPEUTICS"
+    },
+    "q_d798befd745c": {
+      "drug": "Ziprasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d80b48906f31": {
+      "drug": "Sertraline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d84347f09ba4": {
+      "drug": "Galantamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d86880176a14": {
+      "drug": "Alprazolam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d874d820cb2f": {
+      "drug": "Moclobemide",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d8e3639465cf": {
+      "drug": "Fluoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_d8faf1587146": {
+      "drug": "Trazodone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_d93b6226a6c8": {
+      "drug": "Dextromethorphan–Quinidine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d983adcd9958": {
+      "drug": "Eszopiclone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_d9a1741ba5b2": {
+      "drug": "Cariprazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_da047d2fe0ec": {
+      "drug": "Dothiepin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_da0f5b954869": {
+      "drug": "Pitolisant",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_da2912562863": {
+      "drug": "Suvorexant",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_da435f586403": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_da757af94909": {
+      "drug": "Maprotiline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_dacd80157ac1": {
+      "drug": "Benztropine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_dae6458cde8e": {
+      "drug": "Olanzapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_db992ae73e81": {
+      "drug": "Rivastigmine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_db99a7ea843e": {
+      "drug": "Amoxapine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_dbc2037fb57a": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS"
+    },
+    "q_dc39beccb155": {
+      "drug": "Pimavanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_dd03a3aad72b": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_dd1ab7f23769": {
+      "drug": "Isocarboxazid",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_dd5bd9f6e4e8": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_dd72521ac999": {
+      "drug": "Quazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_dd93dcb6541e": {
+      "drug": "Mianserin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_dda2b3dbe308": {
+      "drug": "Lumateperone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_dda3ccb4482d": {
+      "drug": "Lofepramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_ddc9f1e8106b": {
+      "drug": "Disulfiram",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ddd7be2aa12a": {
+      "drug": "Armodafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_de36850ddf41": {
+      "drug": "Quetiapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_de553477c69e": {
+      "drug": "Perospirone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_de63555b9118": {
+      "drug": "Deutetrabenazine"
+    },
+    "q_de7bb86398e3": {
+      "drug": "Methylfolate (L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ded81e10535d": {
+      "drug": "Valproate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_df0066d1bde0": {
+      "drug": "Tianeptine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_df6cfb7f2880": {
+      "drug": "Amitriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_df749cf1641b": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_df81495945b6": {
+      "drug": "Lemborexant",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_dfaec49468df": {
+      "drug": "Mirtazapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_dfd1b075aaee": {
+      "drug": "Trihexyphenidyl",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e09b0045e706": {
+      "drug": "Armodafinil",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e0d5d48495ea": {
+      "drug": "Trazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e1031773d5b6": {
+      "drug": "Diazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e1066292f575": {
+      "drug": "Lisdexamfetamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e116e149f58d": {
+      "drug": "Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e140882beb7f": {
+      "drug": "Perphenazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e1637e9b5e87": {
+      "drug": "Lumateperone",
+      "section": "THERAPEUTICS"
+    },
+    "q_e1d06754d5d3": {
+      "drug": "Fluoxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e2350dc9ca79": {
+      "drug": "Amisulpride",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e28677243274": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_e2e6c20bbca3": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_e2e7bceb7d43": {
+      "drug": "Zuclopenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e2f235a4905b": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e37618c4042f": {
+      "drug": "Mirtazapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e3a1b1ac191c": {
+      "drug": "Olanzapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e3bcda89b089": {
+      "drug": "Serdexmethylphenidate",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e3c307b16db8": {
+      "drug": "Blonanserin",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e3d32921a7ea": {
+      "drug": "Loxapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e3e9beddddbf": {
+      "drug": "Flurazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e412f82cba93": {
+      "drug": "Venlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e48d46210132": {
+      "drug": "Maprotiline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_e4d94e7ebfa7": {
+      "drug": "Levetiracetam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e4e3252cdb00": {
+      "drug": "Guanfacine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e50710cfa7c6": {
+      "drug": "Trazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e50f0518072e": {
+      "drug": "Dothiepin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e52014920fa6": {
+      "drug": "Clonazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e53fadbc2add": {
+      "drug": "Naltrexone–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e5640c205618": {
+      "drug": "Naltrexone–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e58a50568d07": {
+      "drug": "Trihexyphenidyl",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e5d95cf4d52d": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e68181bee4c5": {
+      "drug": "Rivastigmine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e6966f1495a6": {
+      "drug": "Rivastigmine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e6d0c3516591": {
+      "drug": "Mirtazapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_e6eb88a292cc": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e75f6b52ee5d": {
+      "drug": "Diphenhydramine",
+      "section": "THERAPEUTICS"
+    },
+    "q_e7aa062f5455": {
+      "drug": "Gabapentin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e7c1a2bdab96": {
+      "drug": "Propranolol",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e7c2986867c0": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e7cd28bf7670": {
+      "drug": "Clomipramine",
+      "section": "DOSING AND USE",
+      "subsection": "Dosing Tips"
+    },
+    "q_e87c368afebf": {
+      "drug": "Serdexmethylphenidate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_e8bbea4b89fe": {
+      "drug": "Sildenafil",
+      "section": "THERAPEUTICS"
+    },
+    "q_e8cdeaa7c7f9": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_e8e80d5b760b": {
+      "drug": "Oxazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e900b2a150c4": {
+      "drug": "Agomelatine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_e92d77b7f09e": {
+      "drug": "Prazosin",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_e9550123b59e": {
+      "drug": "Bremelanotide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e9b687913d31": {
+      "drug": "Sulpiride",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_e9db272860f8": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_e9f72bd500ab": {
+      "drug": "Eszopiclone",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ea27ba612d3d": {
+      "drug": "Brexanolone",
+      "section": "THERAPEUTICS"
+    },
+    "q_ea4d6fba3563": {
+      "drug": "Hydroxyzine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_eac21731a65a": {
+      "drug": "Sertraline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_eac429136fe7": {
+      "drug": "Imipramine",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_eadee9af6c0f": {
+      "drug": "Fluoxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_eb1ee39eeead": {
+      "drug": "Eszopiclone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_eb2ddb90628f": {
+      "drug": "Zolpidem",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_eb398b367d48": {
+      "drug": "Esketamine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_eb47a315a0f7": {
+      "drug": "Valproate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_eb8bec3e9e3a": {
+      "drug": "Donepezil",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ebbb204dc785": {
+      "drug": "Mirtazapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_ebe249970073": {
+      "drug": "Dothiepin",
+      "section": "DOSING AND USE",
+      "subsection": "Dosage Forms"
+    },
+    "q_ebf47ca116db": {
+      "drug": "Aripiprazole",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ecc615bc4f76": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_ed18b1b9c7db": {
+      "drug": "Moclobemide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ede701b6ef1e": {
+      "drug": "Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_ededd95dac12": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_edff7c20b123": {
+      "drug": "Duloxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ee101b8043ec": {
+      "drug": "Imipramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ee7f9178592f": {
+      "drug": "Naltrexone–Bupropion",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_eeb98b483b25": {
+      "drug": "Nefazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_eec056569270": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_eeec2a0c1e60": {
+      "drug": "Trihexyphenidyl",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ef2dddc175a3": {
+      "drug": "Ziprasidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ef445b3143ad": {
+      "drug": "Clonidine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ef57f73838bb": {
+      "drug": "Diphenhydramine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ef95258483bd": {
+      "drug": "Amitriptyline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ef9de934b0ce": {
+      "drug": "Venlafaxine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_efcd2896996e": {
+      "drug": "Carbamazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f03187677c81": {
+      "drug": "Vilazodone",
+      "section": "THERAPEUTICS"
+    },
+    "q_f03a0b530fdc": {
+      "drug": "Duloxetine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_f062dc59ffbb": {
+      "drug": "Paliperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f0b6e3d11eae": {
+      "drug": "Amitriptyline",
+      "section": "SIDE EFFECTS",
+      "subsection": "How Drug Causes Side Effects"
+    },
+    "q_f0ed12ee5d4b": {
+      "drug": "Methylphenidate (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f133ac439e8c": {
+      "drug": "Oxcarbazepine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f16c0ae00bdb": {
+      "drug": "Agomelatine",
+      "section": "THE ART OF PSYCHOPHARMACOLOGY",
+      "subsection": "Pearls"
+    },
+    "q_f1b7e0a086e5": {
+      "drug": "Loxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f1ba40c575f2": {
+      "drug": "Atomoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f2082e546024": {
+      "drug": "Brexpiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "Commonly Prescribed for"
+    },
+    "q_f21fcaaac73a": {
+      "drug": "Lofepramine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f25aa84f6c5c": {
+      "drug": "Benztropine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f263dbe6b012": {
+      "drug": "Fluoxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f27e79602f2a": {
+      "drug": "Haloperidol",
+      "section": "THERAPEUTICS"
+    },
+    "q_f290fc61240f": {
+      "drug": "Aripiprazole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f2a585d86592": {
+      "drug": "Diazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f3054d1f3c27": {
+      "drug": "Asenapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f32bf40f5369": {
+      "drug": "Gabapentin",
+      "section": "THERAPEUTICS"
+    },
+    "q_f348ccdea5bf": {
+      "drug": "Asenapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_f36d2e81ad60": {
+      "drug": "Tianeptine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f40ae47ca035": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_f427462ede11": {
+      "drug": "Protriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f49b52209e46": {
+      "drug": "Loxapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f4ab2ded15c5": {
+      "drug": "Nortriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f4c2c28cfc1e": {
+      "drug": "Clonazepam",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f4d7f33deacb": {
+      "drug": "Methylphenidate (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f4de3ce72e09": {
+      "drug": "Levetiracetam",
+      "section": "THERAPEUTICS"
+    },
+    "q_f4fa666ae07d": {
+      "drug": "Nortriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f5317333a787": {
+      "drug": "Viloxazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_f583492d0d70": {
+      "drug": "Zopiclone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_f585ca79dcb1": {
+      "drug": "Phentermine–Topiramate",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f5bb16f2747f": {
+      "drug": "Risperidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f5c61f25aa34": {
+      "drug": "Suvorexant",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f649968fd547": {
+      "drug": "Selegiline",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_f676586a1500": {
+      "drug": "Deutetrabenazine"
+    },
+    "q_f6db7ffd39b1": {
+      "drug": "Donepezil",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f6e9580cc2d5": {
+      "drug": "Lurasidone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f718382ef2be": {
+      "drug": "Doxepin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f745ca9d3be3": {
+      "drug": "Flumazenil",
+      "section": "THERAPEUTICS"
+    },
+    "q_f7a973c05951": {
+      "drug": "Mianserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f7ca591e323a": {
+      "drug": "Perospirone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f7d4120e5c0b": {
+      "drug": "Quetiapine",
+      "section": "THERAPEUTICS"
+    },
+    "q_f8481918badb": {
+      "drug": "Cyamemazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f869a311a4e5": {
+      "drug": "Flupenthixol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f8973c14bc97": {
+      "drug": "Propranolol",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f8c5e89d5fda": {
+      "drug": "Trifluoperazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_f8f7e6af4b73": {
+      "drug": "Varenicline",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f921d911c854": {
+      "drug": "Valproate",
+      "section": "THERAPEUTICS",
+      "subsection": "Brands"
+    },
+    "q_f9510cad5e68": {
+      "drug": "Mianserin",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_f990bcadec25": {
+      "drug": "Duloxetine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_f9caaa4a6b97": {
+      "drug": "Dexmedetomidine",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_f9d8483fee26": {
+      "drug": "Donepezil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fa5924d171cf": {
+      "drug": "Viloxazine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_fad8e5ca1225": {
+      "drug": "Vilazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_fb1021854f7f": {
+      "drug": "Armodafinil",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fb14d7680e39": {
+      "drug": "Amphetamine (D,L)",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_fb1c02702063": {
+      "drug": "Risperidone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_fbab37dca617": {
+      "drug": "Valproate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fbb47bba70a4": {
+      "drug": "Varenicline",
+      "section": "THERAPEUTICS",
+      "subsection": "Tests"
+    },
+    "q_fc4997263b25": {
+      "drug": "Lithium",
+      "section": "THERAPEUTICS"
+    },
+    "q_fc6ed644a912": {
+      "drug": "Zotepine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fc8371f97114": {
+      "drug": "Lumateperone",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_fc90954e1b6a": {
+      "drug": "Clozapine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_fcaa7b6dfd88": {
+      "drug": "Flunitrazepam",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_fccce07c0dff": {
+      "drug": "Valbenazine",
+      "section": "SIDE EFFECTS",
+      "subsection": "Best Augmenting Agents for Side Effects"
+    },
+    "q_fd07438aa9c4": {
+      "drug": "Amphetamine (D,L)",
+      "section": "THERAPEUTICS",
+      "subsection": "How Long Until It Works"
+    },
+    "q_fd0c7fc51f22": {
+      "drug": "Methylphenidate (D)",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_fda224a28c60": {
+      "drug": "Quetiapine",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fde54394fa82": {
+      "drug": "Pimavanserin",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fe1d9557c43a": {
+      "drug": "Protriptyline",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fe327cad43b6": {
+      "drug": "Naltrexone",
+      "section": "THERAPEUTICS"
+    },
+    "q_fe35e12c2806": {
+      "drug": "Sertindole",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_fe35f7e91fc6": {
+      "drug": "Tianeptine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_fe53a276ce13": {
+      "drug": "Sodium Oxybate",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_fe719b34a76e": {
+      "drug": "Sertraline",
+      "section": "THERAPEUTICS"
+    },
+    "q_fef9c47901a7": {
+      "drug": "Vilazodone",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ff18fd5b85e4": {
+      "drug": "Chlordiazepoxide",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ff1fb40e4e28": {
+      "drug": "Venlafaxine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ff4da96697ed": {
+      "drug": "Cyamemazine",
+      "section": "THERAPEUTICS",
+      "subsection": "How the Drug Works"
+    },
+    "q_ff5c791df9f1": {
+      "drug": "Vortioxetine",
+      "section": "THERAPEUTICS"
+    },
+    "q_ff5f6a03981a": {
+      "drug": "Isocarboxazid",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ff630e7cc552": {
+      "drug": "Milnacipran",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    },
+    "q_ff8faab86c0c": {
+      "drug": "Mirtazapine",
+      "section": "DOSING AND USE",
+      "subsection": "Pharmacokinetics"
+    },
+    "q_ffaf21a1b463": {
+      "drug": "Trazodone",
+      "section": "THERAPEUTICS"
+    },
+    "q_ffc0394fa8a1": {
+      "drug": "Suvorexant",
+      "section": "DOSING AND USE",
+      "subsection": "Do Not Use"
+    },
+    "q_ffe7d14c370f": {
+      "drug": "Sertindole",
+      "section": "THERAPEUTICS",
+      "subsection": "Class"
+    }
+  }
+}

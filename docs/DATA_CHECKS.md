@@ -49,7 +49,11 @@ errors. Functions take loaded data as args (unit-testable). Nine families:
   bullet source goes through the same verbatim quote check, and a bullet with no source
   must declare `absence: true` (a silent blank reads exactly like "the corpus is silent"
   while meaning the source was forgotten; citing a source *and* claiming absence is an
-  error too).
+  error too). A source's derived `heading` (the book breadcrumb) is re-derived where it
+  can be offline: the drug it names must be the monograph the cited page actually falls
+  in, and a stored `section`/`subsection` may not be blank. That catches a stale or
+  hand-edited `generated_cache/quote_headers.json`, which would otherwise print a
+  confident and wrong breadcrumb over a genuine quote.
   Also checks each binding's `ki`: its source corpus resolves, an `affinity_only`
   binding carries a `ki`, and (author-side, skipped on a clone) the cited `ki_id` row
   is really in the corpus CSV with that value (the PDSP analogue of the quote gate).
