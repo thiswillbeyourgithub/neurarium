@@ -12,6 +12,14 @@
           ]
         },
         {
+          "category": "added",
+          "text": "Every release is dated, and one button under the new ones opens the whole history, back to the release that added drug half-lives and metabolites",
+          "commits": [
+            "0213e0a",
+            "070c8e9"
+          ]
+        },
+        {
           "category": "improved",
           "text": "A drug's possible interactions now say the direction once, as a heading, and read \"could raise\" rather than \"raises\": they are a flag to check with a prescriber, never a verdict",
           "commits": [

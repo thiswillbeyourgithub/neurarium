@@ -3,6 +3,8 @@
 ## Added
 - This "What's new" popup: after an update it lists everything that changed since your last visit, and you can reopen it any time from About (d36c46b)
   fr: Cette fenêtre « Nouveautés » : après une mise à jour, elle liste tout ce qui a changé depuis votre dernière visite, et vous pouvez la rouvrir à tout moment depuis À propos
+- Every release is dated, and one button under the new ones opens the whole history, back to the release that added drug half-lives and metabolites (0213e0a, 070c8e9)
+  fr: Chaque version est datée, et un bouton sous les nouveautés ouvre tout l'historique, jusqu'à la version qui a ajouté les demi-vies et les métabolites des médicaments
 
 ## Improved
 - A drug's possible interactions now say the direction once, as a heading, and read "could raise" rather than "raises": they are a flag to check with a prescriber, never a verdict (d92cd0b, 2400b8d, d179eda)
