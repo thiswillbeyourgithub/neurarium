@@ -1,6 +1,55 @@
 {
   "versions": [
     {
+      "version": "3.40.0",
+      "date": "2026-07-28",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A new orange \"uncertain\" badge takes the green check's place on a claim whose quote does not actually say it is about that drug; hover it for the reasons to doubt it, each with its own source",
+          "commits": [
+            "217dc92",
+            "31796b0"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "When the guided tour needs to scroll a panel, a purple arrow now shows which way it is going and lands on what it is taking you to",
+          "commits": [
+            "9faa243"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A metabolite that has its own page now offers a \"see its bindings\" button instead of showing nothing",
+          "commits": [
+            "164f5e4"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Switching between detail tabs keeps where you were reading in each one",
+          "commits": [
+            "e30c466"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "In the drugs list, a metabolite that itself has metabolites now shows them indented under it",
+          "commits": [
+            "8987806"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "89 drug bindings, almost all the tricyclics' antihistamine, anticholinergic and alpha-1 side-effect claims, now carry the uncertain badge: the book states them as a rule without naming the drug, and half are backed by a measured affinity anyway",
+          "commits": [
+            "31796b0"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.39.0",
       "date": "2026-07-28",
       "entries": [
