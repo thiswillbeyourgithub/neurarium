@@ -3493,6 +3493,20 @@ function createInfoPanel(data, sourcingModal) {
               bul.appendChild(bindingRow(b, drug, b.targetName, onActivate));
             }
             li.appendChild(bul);
+          } else if (linked && m.linkFocusable && linked.bindings.length) {
+            // A metabolite that IS a modeled drug keeps its bindings on its own panel,
+            // so listing them again here would duplicate the source of truth. It used to
+            // render nothing at all though, which reads as "nothing known" for a
+            // nortriptyline that has 22 bindings one tap away. Same indented slot, one
+            // row, pointing at where they live.
+            const bul = el("ul", "metab-bindings");
+            const jump = el("li", "metab-jump");
+            const btn = el("button", "combo-link",
+              t("drug.metabSeeBindings", { n: linked.bindings.length }));
+            btn.addEventListener("click", () => onDrugPick(linked));
+            jump.appendChild(btn);
+            bul.appendChild(jump);
+            li.appendChild(bul);
           }
           ul.appendChild(li);
         }

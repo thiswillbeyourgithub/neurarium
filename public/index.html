@@ -1955,6 +1955,9 @@
         padding-left: 8px;
         border-left: 1px solid rgba(255, 255, 255, 0.12);
       }
+      /* Same slot, for a metabolite that is itself a modeled drug: its bindings live
+         on its own panel, so this points there instead of duplicating them. */
+      .info-metabolites .metab-jump { font-size: 12px; }
       /* Brief highlight on the row a jump landed ON, so arriving in another node's
          panel has a visible anchor (a metabolite reached from a receptor's
          Interacting-drugs list, an isoform reached from another drug's Interactions
