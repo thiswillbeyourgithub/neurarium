@@ -51,5 +51,33 @@ class ChartRenderTest(unittest.TestCase):
                              f"kind {kind!r} ({label!r}) missing/duplicated in chart")
 
 
+class UncertainCountsAsBackedTest(unittest.TestCase):
+    """An ``uncertain`` node is backed: the badge doubts the *attribution* of a
+    quote that really was checked, so dropping it from the bar would understate
+    the corpus and, worse, make the README disagree with the in-app tally."""
+
+    def _row(self, kind, **counts):
+        c = {"total": 0, "verified": 0, "uncertain": 0, "sourced": 0,
+             "llm": 0, "nosource": 0, "missing": 0, **counts}
+        backed = c["verified"] + c["uncertain"] + c["sourced"]
+        nodes = dict(c, backed=backed,
+                     pct_backed=round(100 * backed / c["total"]) if c["total"] else 0)
+        return {"nodes": nodes, "by_kind": {kind: c}}
+
+    def test_uncertain_fills_the_bar_like_verified(self):
+        kind = next(iter(_urs.KIND_LABELS))
+        with_unc = _urs.render_block(self._row(kind, total=10, verified=5, uncertain=5))
+        all_ver = _urs.render_block(self._row(kind, total=10, verified=10))
+        self.assertIn("100%", with_unc)
+        self.assertEqual(with_unc.count("░"), all_ver.count("░"))
+
+    def test_a_missing_uncertain_key_is_tolerated(self):
+        """Older meta.json snapshots predate the bucket; the tool must not KeyError."""
+        kind = next(iter(_urs.KIND_LABELS))
+        stats = self._row(kind, total=4, verified=2, missing=2)
+        del stats["by_kind"][kind]["uncertain"]
+        self.assertIn("50%", _urs.render_block(stats))
+
+
 if __name__ == "__main__":
     unittest.main()

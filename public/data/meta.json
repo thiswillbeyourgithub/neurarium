@@ -2744,12 +2744,45 @@
       "pages_dir": "data_sources/gtopdb/pages_class"
     }
   },
+  "uncertainty_reasons": {
+    "side_effect_rule": {
+      "source": "own_quote",
+      "absence": false,
+      "args": []
+    },
+    "class_wide": {
+      "source": "own_quote",
+      "absence": false,
+      "args": [
+        "n"
+      ]
+    },
+    "measured_ki": {
+      "source": "ki",
+      "absence": false,
+      "args": [
+        "ki",
+        "n"
+      ]
+    },
+    "no_measured_ki": {
+      "source": null,
+      "absence": true,
+      "args": []
+    },
+    "not_a_mechanism": {
+      "source": null,
+      "absence": true,
+      "args": []
+    }
+  },
   "density_min_reliability": 0.5,
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
         "total": 1670,
         "verified": 1658,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 12,
@@ -2758,6 +2791,7 @@
       "drug_nbn": {
         "total": 116,
         "verified": 116,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2766,6 +2800,7 @@
       "drug_brands": {
         "total": 469,
         "verified": 469,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2774,6 +2809,7 @@
       "drug_categories": {
         "total": 244,
         "verified": 199,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 45,
         "nosource": 0,
@@ -2782,6 +2818,7 @@
       "drug_half_life": {
         "total": 185,
         "verified": 185,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2790,6 +2827,7 @@
       "drug_enzymes": {
         "total": 275,
         "verified": 275,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2798,6 +2836,7 @@
       "drug_metabolites": {
         "total": 36,
         "verified": 36,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2806,6 +2845,7 @@
       "drug_metabolite_enzyme": {
         "total": 17,
         "verified": 17,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2814,6 +2854,7 @@
       "drug_metabolite_bindings": {
         "total": 48,
         "verified": 48,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2822,6 +2863,7 @@
       "projections": {
         "total": 58,
         "verified": 56,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 2,
@@ -2830,6 +2872,7 @@
       "circuits": {
         "total": 6,
         "verified": 6,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2838,6 +2881,7 @@
       "projection_groups": {
         "total": 11,
         "verified": 11,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2846,6 +2890,7 @@
       "receptors": {
         "total": 56,
         "verified": 56,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2854,6 +2899,7 @@
       "receptor_class": {
         "total": 56,
         "verified": 55,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 1,
         "nosource": 0,
@@ -2862,6 +2908,7 @@
       "receptor_sign": {
         "total": 56,
         "verified": 43,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 13,
         "nosource": 0,
@@ -2870,6 +2917,7 @@
       "receptor_synaptic": {
         "total": 56,
         "verified": 8,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 48,
         "nosource": 0,
@@ -2878,6 +2926,7 @@
       "receptor_locations": {
         "total": 383,
         "verified": 360,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 23,
         "nosource": 0,
@@ -2886,6 +2935,7 @@
       "receptor_density": {
         "total": 36,
         "verified": 36,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2894,6 +2944,7 @@
       "targets": {
         "total": 21,
         "verified": 20,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 1,
         "nosource": 0,
@@ -2902,6 +2953,7 @@
       "target_polarity": {
         "total": 2,
         "verified": 2,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2910,6 +2962,7 @@
       "target_locations": {
         "total": 107,
         "verified": 93,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 14,
         "nosource": 0,
@@ -2918,6 +2971,7 @@
       "target_density": {
         "total": 18,
         "verified": 18,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2926,6 +2980,7 @@
       "structures": {
         "total": 54,
         "verified": 54,
+        "uncertain": 0,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -2934,6 +2989,7 @@
       "references": {
         "total": 381,
         "verified": 0,
+        "uncertain": 0,
         "sourced": 381,
         "llm": 0,
         "nosource": 0,
@@ -2943,6 +2999,7 @@
     "nodes": {
       "total": 3980,
       "verified": 3821,
+      "uncertain": 0,
       "sourced": 0,
       "llm": 145,
       "nosource": 14,

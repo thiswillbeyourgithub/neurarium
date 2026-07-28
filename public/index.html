@@ -1269,6 +1269,7 @@
          red no-source. Widths are set inline (proportional to each grade's count). */
       .src-stat-bar > span { display: block; height: 100%; }
       .src-seg-verified { background: #66cf85; }
+      .src-seg-uncertain { background: #f0913f; }
       .src-seg-sourced  { background: #e3c14a; }
       .src-seg-llm      { background: #b6bcc4; }
       .src-seg-nosource { background: #ef5f6b; }
@@ -1681,6 +1682,32 @@
         color: #66cf85;
         background: rgba(102, 207, 133, 0.18);
         border: 1px solid rgba(102, 207, 133, 0.5);
+      }
+      /* Quote-checked, but the sentence does not attribute the claim (orange ⚠).
+         Deliberately NOT the yellow `sourced` tier: the document is just as strong,
+         it is the attribution that is an inference. Its tooltip leads with the
+         reasons (below), so the badge is a "read me", not a downgrade. */
+      .src-prov-uncertain {
+        color: #f0913f;
+        background: rgba(240, 145, 63, 0.16);
+        border: 1px solid rgba(240, 145, 63, 0.55);
+      }
+      /* The reasons-to-doubt block at the top of an uncertain pill's tooltip. Each
+         row carries an inert badge (green ✓ / red ✕) so a sourced reason and an
+         absence-of-evidence reason are told apart at a glance. */
+      .src-uncertain { margin-bottom: 4px; }
+      .src-uncertain-lead { color: #f0913f; font-weight: 600; margin-bottom: 6px; }
+      .src-uncertain-list { list-style: none; margin: 0; padding: 0; }
+      .src-uncertain-list li { display: flex; gap: 6px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 8px; }
+      /* The badges here are decoration inside a tooltip, never a control: no pointer,
+         no hover, and they must not inherit the real pill's button sizing. */
+      .src-uncertain-list .src-pill { cursor: default; flex: 0 0 auto; margin-top: 1px; }
+      .src-uncertain-text { flex: 1 1 140px; min-width: 0; }
+      .src-uncertain-src {
+        flex: 1 1 100%;
+        margin-left: 26px;
+        color: var(--muted);
+        font-style: italic;
       }
       /* Structure panel: a clickable list of the structure's connections. */
       .info-group { font-size: 12px; color: var(--muted); margin: -4px 0 12px; }

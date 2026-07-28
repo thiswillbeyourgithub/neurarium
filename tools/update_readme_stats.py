@@ -177,7 +177,10 @@ def render_block(stats: dict) -> str:
         c = stats["by_kind"].get(kind)
         if not c or not c["total"]:
             continue
-        backed = c["verified"] + c["sourced"]
+        # ``uncertain`` is backed: the claim rests on a quote-checked document, the
+        # badge only flags that the sentence does not attribute it (see
+        # tools/data_generators/quotes/uncertainty.py).
+        backed = c["verified"] + c.get("uncertain", 0) + c["sourced"]
         rows.append((backed, c["total"], order, label))
     rows.sort(key=lambda r: (-(r[0] / r[1]), -r[1], r[2]))
 
@@ -218,6 +221,18 @@ def render_block(stats: dict) -> str:
             f"no Ki on any binding (sourced by book quote only, or not yet sourced). A "
             f"Ki is a measured value, not a grade: this tracks where one was never "
             f"looked up, complementing the sourcing figure above.",
+        ]
+    # The "uncertain" badge: nodes whose quote is confirmed present but does not
+    # attribute the claim. They stay *backed* above (a real document does exist), so
+    # this is the line that keeps that from reading as a clean bill of health.
+    uncertain = a.get("uncertain", 0)
+    if uncertain:
+        lines += [
+            "",
+            f"Of those, **{uncertain} carry an `uncertain` badge**: the quote is "
+            f"confirmed present in the source, but the sentence states a general rule "
+            f"without naming the drug, so the attribution is an inference. The badge's "
+            f"tooltip lists the reasons to doubt it, each with its own source.",
         ]
     lines += ["", END]
     return "\n".join(lines)

@@ -201,6 +201,10 @@ from data_generators.quotes import (  # noqa: E402
     RECEPTOR_CLASSIFICATION_COVERAGE,
     CLASSIFICATION_ATTRS,
     METABOLITE_ENZYME_QUOTES,
+    UNCERTAINTY_REASONS,
+)
+from data_generators.quotes.uncertainty import (  # noqa: E402
+    apply_binding_uncertainty,
 )
 
 # Every METABOLITE_ENZYME_QUOTES key consumed while building the drugs, so a key naming
@@ -1497,6 +1501,9 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             _drug_record(drug, valid_targets, receptor_bases, molecule_ids,
                          enzyme_rows))
     _check_drug_aliases(seen_drug_ids)
+    # The "uncertain" badges: a post-pass, not part of _drug_record, because one of the
+    # bullets counts how many monographs print the same sentence (see the module).
+    apply_binding_uncertainty(drugs)
     # A hand-curated formed_by row whose (drug, metabolite) key matched nothing: the
     # metabolite was renamed or dropped by an applier re-run, so the node silently
     # vanished. Raise rather than publish a quieter dataset than the author wrote.
@@ -1593,6 +1600,10 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # each binding's source; check_data.py reads pages_dir to confirm quotes.
         # Self-describing so a port needs no hardcoded citation.
         "source_corpora": SOURCE_CORPORA,
+        # The closed vocabulary of "uncertain" reason kinds (see quotes/uncertainty.py).
+        # Emitted so the viewer knows which i18n sentence a bullet takes and check_data.py
+        # can reject a kind that is not one of these, from one list rather than three.
+        "uncertainty_reasons": UNCERTAINTY_REASONS,
         # Cross-donor-agreement floor a relative-expression profile had to clear to be
         # published (see the density pass in tools/fetch/fetch_allen.py). Emitted so the
         # panel can state the real threshold instead of restating the constant. Absent

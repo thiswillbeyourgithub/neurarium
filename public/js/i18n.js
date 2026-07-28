@@ -227,6 +227,13 @@
       "info.provLlm": "Source grade: LLM-only. Produced by an LLM from memory and not checked against any document, so it may be a hallucination.",
       "info.provSourced": "Source grade: sourced. Written by an LLM that was given the source document (e.g. Stahl's guide), but this specific node was not quote-verified.",
       "info.provVerified": "Source grade: verified. An LLM extracted a quote, it was programmatically confirmed to appear in the source, and a separate LLM agreed the quote supports this node. This is still the highest grade available here and remains LLM-driven, so it can still be wrong: going further would take considerable human effort and is itself error-prone, so it is out of scope for this project.",
+      "info.provUncertain": "Source grade: uncertain. The quote below really is in the source and really does mention this action, but it does not say this drug has it: it states a general rule, so the attribution is an inference. The reasons to doubt it are listed above, each with its own source.",
+      "info.uncertainLead": "Here are LLM-written reasons to be uncertain about this claim:",
+      "uncertain.side_effect_rule": "The source sentence explains a side effect, and its subject is the mechanism rather than the drug, so it never states that this drug has the action.",
+      "uncertain.class_wide": "The same sentence is printed on {n} other drug monographs, so it may be a rule about the mechanism rather than a measurement on this drug.",
+      "uncertain.measured_ki": "An independent measured affinity backs it: median Ki {ki} nM over {n} assays.",
+      "uncertain.no_measured_ki": "No measured binding affinity was found for this target, so nothing independent backs the sentence.",
+      "uncertain.not_a_mechanism": "The source never lists this action among the drug's mechanisms of action.",
       "info.provWikipedia": "Loaded directly from Wikipedia. This text is fetched live and verbatim from the current Wikipedia article (CC BY-SA), with no LLM in the loop, so it cannot drift from the article. See the Reference link above to inspect the source.",
       "info.descFromWikipedia": "This description is the lead section of the drug's Wikipedia article, used verbatim under CC BY-SA. See the Reference link above.",
       "info.sourceRef": "{corpus}, p. {page}",
@@ -441,7 +448,11 @@
       "about.gradeLlm":
         "AI only: may be a hallucination.",
       "about.gradeNone": "No source: none gathered yet.",
+      "about.gradeUncertain":
+        "Uncertain: the quote is confirmed present, but it does not attribute the claim. " +
+        "Hover the badge for the reasons, each with its own source.",
       "about.segVerified": "Verified",
+      "about.segUncertain": "Uncertain",
       "about.segSourced": "Sourced",
       "about.segLlm": "AI only",
       "about.segNone": "No source",
@@ -675,6 +686,13 @@
       "info.provLlm": "Niveau de source : LLM seul. Produite de mémoire par un LLM, sans vérification dans aucun document : il peut donc s’agir d’une hallucination.",
       "info.provSourced": "Niveau de source : documentée. Rédigée par un LLM ayant eu accès au document source (par ex. le guide de Stahl), mais ce nœud précis n’a pas été vérifié par citation.",
       "info.provVerified": "Niveau de source : vérifiée. Un LLM a extrait une citation, sa présence dans la source a été confirmée par programme, et un second LLM a confirmé qu’elle étaye ce nœud. C’est le niveau le plus élevé disponible ici et il reste piloté par un LLM : il peut donc encore se tromper. Aller plus loin demanderait un effort humain considérable, lui-même sujet à erreur, et sort donc du cadre de ce projet.",
+      "info.provUncertain": "Niveau de source : incertaine. La citation ci-dessous figure bien dans la source et mentionne bien cette action, mais elle ne dit pas que ce médicament la possède : elle énonce une règle générale, l’attribution est donc une inférence. Les raisons d’en douter sont listées ci-dessus, chacune avec sa propre source.",
+      "info.uncertainLead": "Voici des raisons, rédigées par un LLM, de douter de cette affirmation :",
+      "uncertain.side_effect_rule": "La phrase source explique un effet indésirable, et son sujet est le mécanisme plutôt que le médicament : elle n’affirme donc jamais que ce médicament a cette action.",
+      "uncertain.class_wide": "La même phrase est imprimée sur {n} autres monographies, elle peut donc énoncer une règle sur le mécanisme plutôt qu’une mesure sur ce médicament.",
+      "uncertain.measured_ki": "Une affinité mesurée indépendante l’étaye : Ki médian de {ki} nM sur {n} essais.",
+      "uncertain.no_measured_ki": "Aucune affinité de liaison mesurée n’a été trouvée pour cette cible : rien d’indépendant n’étaye la phrase.",
+      "uncertain.not_a_mechanism": "La source ne cite jamais cette action parmi les mécanismes d’action du médicament.",
       "info.provWikipedia": "Chargé directement depuis Wikipédia. Ce texte est récupéré en direct et tel quel depuis l’article Wikipédia actuel (CC BY-SA), sans aucun LLM : il ne peut donc pas s’écarter de l’article. Voir le lien Référence ci-dessus pour inspecter la source.",
       "info.descFromWikipedia": "Cette description est l’introduction de l’article Wikipédia du médicament, reprise telle quelle sous licence CC BY-SA. Voir le lien Référence ci-dessus.",
       "info.sourceRef": "{corpus}, p. {page}",
@@ -896,7 +914,11 @@
       "about.gradeLlm":
         "IA seule : peut être une hallucination.",
       "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
+      "about.gradeUncertain":
+        "Incertain : la citation est bien présente, mais elle n’attribue pas " +
+        "l’affirmation. Survolez le badge pour les raisons, chacune avec sa source.",
       "about.segVerified": "Vérifié",
+      "about.segUncertain": "Incertain",
       "about.segSourced": "Sourcé",
       "about.segLlm": "IA seule",
       "about.segNone": "Sans source",

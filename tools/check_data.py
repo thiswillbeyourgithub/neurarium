@@ -122,6 +122,17 @@ NODE_KINDS = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
               "target_locations", "target_density", "structures")
 
 
+def _backed(counts):
+    """Nodes resting on a real document: verified + uncertain + sourced.
+
+    ``uncertain`` counts here on purpose (see quotes/uncertainty.py): the claim does
+    have a quote-checked source, the badge only says the sentence does not attribute
+    it. Only ``missing`` (a bare llm assertion or nothing at all) is unbacked.
+    """
+    return (counts.get("verified", 0) + counts.get("uncertain", 0)
+            + counts.get("sourced", 0))
+
+
 def _flip_hemisphere(structure_id):
     """Flip a structure id to the other hemisphere; midline ids unchanged."""
     if structure_id.endswith("_R"):
@@ -707,23 +718,26 @@ def print_coverage(stats):
 
     def backed_pct(c):
         total = c.get("total", 0)
-        return round(100 * (c.get("verified", 0) + c.get("sourced", 0)) / total) if total else 0
+        return round(100 * _backed(c) / total) if total else 0
 
     def row(label, c, pct=None, suffix=""):
         pct = backed_pct(c) if pct is None else pct
         m = c.get("missing", 0)
         s = c.get("sourced", 0)
-        sv = s + c.get("verified", 0)  # sourced-or-verified = the backed count (S ⊆ S+V)
-        print(f"    {label:<19}{m:>6}{s:>6}{sv:>6}{c.get('total', 0):>8}{pct:>7}%{suffix}")
+        u = c.get("uncertain", 0)
+        sv = _backed(c)  # sourced-or-verified-or-uncertain = the backed count
+        print(f"    {label:<19}{m:>6}{s:>6}{u:>6}{sv:>6}"
+              f"{c.get('total', 0):>8}{pct:>7}%{suffix}")
 
     # Grade columns: M = missing (no source document: a bare llm assertion, or nothing
-    # at all), S = sourced (document-backed but not quote-checked), S+V =
-    # sourced-or-verified (the backed count; S is a subset of it). S is ~always 0 on
-    # the node kinds because the sourcing pipeline goes straight from llm to
-    # quote-verified; it shows up only on Wikipedia refs.
+    # at all), S = sourced (document-backed but not quote-checked), U = uncertain
+    # (quote-checked, but the quote does not attribute the claim), S+V = the backed
+    # count (S and U are both subsets of it). S is ~always 0 on the node kinds because
+    # the sourcing pipeline goes straight from llm to quote-verified; it shows up only
+    # on Wikipedia refs.
     print("\n  node coverage by kind (each node reduced to its strongest grade;")
-    print("  M=missing  S=sourced  S+V=sourced-or-verified [=backed]):")
-    print(f"    {'kind':<19}{'M':>6}{'S':>6}{'S+V':>6}{'total':>8}{'backed':>8}")
+    print("  M=missing  S=sourced  U=uncertain  S+V=backed):")
+    print(f"    {'kind':<19}{'M':>6}{'S':>6}{'U':>6}{'S+V':>6}{'total':>8}{'backed':>8}")
     for kind in node_kinds:
         row(kind, by.get(kind, {}))
     print(f"    {'-' * 53}")
@@ -880,22 +894,23 @@ def check_provenance(report, meta, structures, projections, circuits,
     else:
         before_stats = report.errors
         for kind, c in stats.get("by_kind", {}).items():
-            parts = c.get("verified", 0) + c.get("sourced", 0) + c.get("missing", 0)
+            parts = (c.get("verified", 0) + c.get("uncertain", 0)
+                     + c.get("sourced", 0) + c.get("missing", 0))
             if parts != c.get("total", 0):
                 report.error(f"provenance_stats by_kind[{kind}] buckets "
                              f"({parts}) do not sum to total ({c.get('total')})")
         a = stats.get("nodes", {})
         node_kinds = NODE_KINDS
         by = stats.get("by_kind", {})
-        for key in ("total", "verified", "sourced", "missing"):
+        for key in ("total", "verified", "uncertain", "sourced", "missing"):
             want = sum(by.get(k, {}).get(key, 0) for k in node_kinds)
             if a.get(key) != want:
                 report.error(f"provenance_stats nodes[{key}]={a.get(key)} "
                              f"!= sum over node kinds ({want})")
-        backed = a.get("verified", 0) + a.get("sourced", 0)
+        backed = _backed(a)
         if a.get("backed") != backed:
             report.error(f"provenance_stats nodes.backed={a.get('backed')} "
-                         f"!= verified+sourced ({backed})")
+                         f"!= verified+uncertain+sourced ({backed})")
         want_pct = round(100 * backed / a["total"]) if a.get("total") else 0
         if a.get("pct_backed") != want_pct:
             report.error(f"provenance_stats nodes.pct_backed="
@@ -1014,6 +1029,9 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
     breaking on a clone that lacks the sources."""
     report.header("5. Source quotes (verbatim in cited page)")
     corpora = meta.get("source_corpora", {})
+    # The closed vocabulary the "uncertain" bullets draw their reason kinds from,
+    # read from the data rather than restated here so the two cannot drift.
+    reason_kinds = set(meta.get("uncertainty_reasons", {}))
     before = report.errors
 
     page_cache = {}            # (corpus, page) -> normalized page text or None
@@ -1070,10 +1088,14 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
     for drug in drugs:
         did = drug.get("id")
         for binding in drug.get("bindings", []):
+            # A binding that DECLARES the problem (the orange "uncertain" badge, whose
+            # own bullets say the sentence attributes nothing) is not silently passing
+            # a subject-less quote off as a green check, so the gate below stands down.
+            declared = bool(binding.get("uncertainty"))
             for i, src in enumerate(binding.get("sources", []) or []):
                 ctx = f"drug {did} binding {binding.get('target')} sources[{i}]"
                 check_one(ctx, src)
-                if _NO_SUBJECT_QUOTE.match(src.get("quote") or ""):
+                if not declared and _NO_SUBJECT_QUOTE.match(src.get("quote") or ""):
                     report.error(
                         f"{ctx}: quote is a subject-less mechanism -> side-effect rule "
                         f"({src.get('quote')!r}). Stahl's 'How Drug Causes Side Effects' "
@@ -1088,6 +1110,34 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             ki_src = (binding.get("ki") or {}).get("source")
             if ki_src and ki_src.get("quote"):
                 check_one(f"drug {did} binding {binding.get('target')} ki.source", ki_src)
+            # The "uncertain" badge's bullets. Each is itself a claim shown to the
+            # reader with its own pill, so each is gated like any other node: its
+            # quote must be verbatim on the cited page, its reason kind must be one
+            # the vocabulary defines, and a bullet with no source must SAY it is an
+            # absence of evidence rather than leave a silent blank.
+            for j, u in enumerate(binding.get("uncertainty", []) or []):
+                uctx = (f"drug {did} binding {binding.get('target')} "
+                        f"uncertainty[{j}] ({u.get('kind')})")
+                if u.get("kind") not in reason_kinds:
+                    report.error(f"{uctx}: reason kind is not one of "
+                                 f"meta.uncertainty_reasons ({sorted(reason_kinds)})")
+                srcs = u.get("sources") or []
+                if not srcs and not u.get("absence"):
+                    report.error(
+                        f"{uctx}: has no source and does not declare absence=true. "
+                        f"A bullet either cites a document or says outright that the "
+                        f"corpus is silent; a blank one reads as the latter while "
+                        f"meaning the source was forgotten")
+                if srcs and u.get("absence"):
+                    report.error(f"{uctx}: declares absence=true yet cites a source")
+                for k, src in enumerate(srcs):
+                    # A measured-affinity source is a CSV row id, not prose, so it is
+                    # gated by the Ki family (8) instead, exactly like the binding's
+                    # own ki.source above.
+                    if (corpora.get(src.get("corpus"), {}).get("csv")
+                            and not src.get("quote")):
+                        continue
+                    check_one(f"{uctx} sources[{k}]", src)
         for i, src in enumerate(drug.get("nbn_sources", []) or []):
             check_one(f"drug {did} nbn_sources[{i}]", src)
         for i, src in enumerate(drug.get("category_sources", []) or []):

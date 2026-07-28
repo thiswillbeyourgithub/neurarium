@@ -2087,6 +2087,11 @@ function createInfoPanel(data, sourcingModal) {
     llm: { glyph: "?", tip: "info.provLlm" },
     sourced: { glyph: "~", tip: "info.provSourced" },
     verified: { glyph: "✓", tip: "info.provVerified" },
+    // Same source, same quote gate as `verified`, but the audit found the sentence
+    // does not attribute the claim (see quotes/uncertainty.py). Its tooltip leads
+    // with the reasons to doubt it, each itself badged; the grade is data, this is
+    // the badge the data asks for.
+    uncertain: { glyph: "⚠", tip: "info.provUncertain" },
     // Fallback marker for a live Wikipedia read. Normally the read's provenance is
     // the Wikipedia link itself, relocated into the description (see
     // liveWikiDescription); this ✓ pill only shows if that link could not be moved.
@@ -2205,12 +2210,57 @@ function createInfoPanel(data, sourcingModal) {
   // corpus is URL-addressable (a literature Ki, e.g. the Wikipedia table), the label
   // is a clickable link, matching the Ki badge's tooltip below the row.
   const bindingProvenancePill = (binding) => {
+    // A flagged binding keeps its own source in the tooltip, under the reasons to
+    // doubt it: same evidence, honestly framed. See uncertaintyTip.
+    const doubt = binding.uncertainty && binding.uncertainty.length
+      ? binding.uncertainty : null;
+    const grade = doubt ? "uncertain" : binding.provenance;
     if (binding.sources && binding.sources.length)
-      return makeProvenancePill(binding.provenance, sourcesTip(binding.sources));
+      return makeProvenancePill(grade,
+        withUncertainty(doubt, sourcesTip(binding.sources)));
     if (binding.ki)
-      return makeProvenancePill(binding.provenance,
-        kiCorpusRefNode(binding.ki, { dash: true }));
-    return makeProvenancePill(binding.provenance);
+      return makeProvenancePill(grade,
+        withUncertainty(doubt, kiCorpusRefNode(binding.ki, { dash: true })));
+    return makeProvenancePill(grade, withUncertainty(doubt, null));
+  };
+
+  // The "why this is uncertain" block that leads a flagged binding's tooltip: a lead
+  // line, then one row per reason. Each row carries its OWN badge, so the reader sees
+  // at a glance which reasons rest on a source (green ✓, its quote right there) and
+  // which are absences of evidence (red ✕, "the corpus never says this"). The badges
+  // are inert spans, not real pills: nesting a .help-tip button inside a tooltip would
+  // put a tooltip inside a tooltip. The sentences are i18n strings keyed by the reason
+  // `kind`, so nothing here is stored prose (see quotes/uncertainty.py).
+  const uncertaintyTip = (list) => {
+    const box = el("div", "src-uncertain");
+    box.appendChild(el("div", "src-uncertain-lead", t("info.uncertainLead")));
+    const ul = el("ul", "src-uncertain-list");
+    for (const u of list) {
+      const li = el("li");
+      const badge = el("span",
+        u.absence ? "src-pill src-todo" : "src-pill src-prov-verified",
+        u.absence ? NOSOURCE_GLYPH : "✓");
+      badge.setAttribute("aria-hidden", "true");
+      li.append(badge, el("span", "src-uncertain-text",
+        t(`uncertain.${u.kind}`, u.args || {})));
+      const src = (u.sources || []).map(sourceTipLine).filter(Boolean).join("\n\n");
+      if (src) li.appendChild(el("div", "src-uncertain-src", src));
+      ul.appendChild(li);
+    }
+    box.appendChild(ul);
+    return box;
+  };
+
+  // Prepend uncertaintyTip to whatever tooltip content a pill would otherwise get
+  // (a string of source lines, a node, or nothing). Returns `extra` untouched when
+  // the binding is not flagged, so every non-flagged pill is byte-identical.
+  const withUncertainty = (list, extra) => {
+    if (!list) return extra;
+    const frag = document.createDocumentFragment();
+    frag.appendChild(uncertaintyTip(list));
+    if (extra instanceof Node) frag.append(extra);
+    else if (extra) frag.append(document.createTextNode(extra));
+    return frag;
   };
 
   // The strongest-affinity binding a drug has feeding a transmitter system (the
@@ -4853,6 +4903,7 @@ function buildAboutSourcing(meta, opts = {}) {
   const keyRows = [
     ["src-todo", NOSOURCE_GLYPH, "about.gradeNone"],
     ["src-prov-llm", "?", "about.gradeLlm"],
+    ["src-prov-uncertain", "⚠", "about.gradeUncertain"],
     ["src-prov-verified", "✓", "about.gradeVerified"],
   ];
   for (const [cls, glyph, tip] of keyRows) {
@@ -4921,6 +4972,9 @@ function buildAboutSourcing(meta, opts = {}) {
   // The four grade segments, strongest to weakest: (count, CSS class, tooltip label).
   const SEGMENTS = [
     ["verified", "src-seg-verified", "about.segVerified"],
+    // Between verified and sourced on purpose: still quote-checked (it is not a
+    // weaker document), but the sentence does not attribute the claim.
+    ["uncertain", "src-seg-uncertain", "about.segUncertain"],
     ["sourced", "src-seg-sourced", "about.segSourced"],
     ["llm", "src-seg-llm", "about.segLlm"],
     ["nosource", "src-seg-nosource", "about.segNone"],
@@ -4950,7 +5004,7 @@ function buildAboutSourcing(meta, opts = {}) {
   // every knowledge node. It is a button that expands the per-node-kind breakdown, so
   // the popup stays a single glanceable figure until the reader asks for detail.
   const globalCounts = {
-    verified: a.verified || 0, sourced: a.sourced || 0,
+    verified: a.verified || 0, uncertain: a.uncertain || 0, sourced: a.sourced || 0,
     llm: a.llm || 0, nosource: a.nosource || 0,
   };
   const globalBtn = h("button", "src-global");

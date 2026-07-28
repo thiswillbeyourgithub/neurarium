@@ -370,5 +370,87 @@ class QuoteTableTest(unittest.TestCase):
                              f"quote id {qid!r} is not its content hash")
 
 
+class UncertaintyTest(unittest.TestCase):
+    """The "uncertain" badge (tools/data_generators/quotes/uncertainty.py).
+
+    The badge exists to stop a flat green check overstating a claim whose quote does
+    not attribute it, so the failure mode to guard is a bullet that LOOKS sourced but
+    is not: an unknown reason kind, a missing slot arg, or a blank source with no
+    absence declaration (which reads to a user exactly like "the corpus is silent")."""
+
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(REPO_ROOT / "tools"))
+        from data_generators.quotes import uncertainty
+        cls.mod = uncertainty
+        cls.drugs = {d["id"]: d for d in _load_jsonl(DATA_DIR / "drugs.jsonl")}
+        cls.meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+
+    def _binding(self, ki=True):
+        b = {"target": "m3", "action": "antagonist",
+             "sources": [{"corpus": "stahl", "page": 207, "quote": "q",
+                          "provenance": "verified"}]}
+        if ki:
+            b["ki"] = {"median": 25.0, "min": 1, "max": 99, "n_human": 4,
+                       "n_nonhuman": 0,
+                       "source": {"corpus": "pdsp_ki", "ki_id": 1,
+                                  "provenance": "verified"}}
+        return b
+
+    def test_unknown_kind_raises(self):
+        with self.assertRaises(KeyError):
+            self.mod._uncertainty_bullet("vibes", what="x", binding=self._binding(),
+                                         page=207)
+
+    def test_missing_slot_arg_raises(self):
+        # class_wide takes {n}; without it the panel would print a literal "{n}".
+        with self.assertRaises(ValueError):
+            self.mod._uncertainty_bullet("class_wide", what="x",
+                                         binding=self._binding(), page=207)
+
+    def test_sourceless_non_absence_raises(self):
+        """The user's explicit requirement: a bullet cites a document or says outright
+        that the corpus is silent. A silent blank is indistinguishable from the latter
+        while actually meaning the source was forgotten."""
+        with self.assertRaises(ValueError):
+            self.mod._uncertainty_bullet("measured_ki", what="x",
+                                         binding=self._binding(ki=False), page=207,
+                                         args={"ki": 1, "n": 1})
+
+    def test_absence_bullet_carries_no_source(self):
+        b = self.mod._uncertainty_bullet("not_a_mechanism", what="x",
+                                         binding=self._binding(), page=207)
+        self.assertTrue(b["absence"])
+        self.assertNotIn("sources", b)
+
+    def test_own_quote_bullet_cites_the_page_it_was_given(self):
+        b = self.mod._uncertainty_bullet("side_effect_rule", what="x",
+                                         binding=self._binding(), page=207)
+        self.assertEqual(b["sources"][0]["page"], 207)
+        # ... and a page the binding does not carry is an error, not a blank
+        with self.assertRaises(ValueError):
+            self.mod._uncertainty_bullet("side_effect_rule", what="x",
+                                         binding=self._binding(), page=999)
+
+    def test_claim_naming_a_missing_binding_raises(self):
+        """Mirrors the METABOLITE_ENZYME_QUOTES rule: a later data edit must not be
+        able to drop a flagged binding and silently restore its green check."""
+        drugs = [{"id": "clozapine", "bindings": [{"target": "d2", "sources": []}]}]
+        real = self.mod.UNCERTAIN_BINDING_CLAIMS
+        try:
+            self.mod.UNCERTAIN_BINDING_CLAIMS = (
+                {"drug": "clozapine", "page": 207, "targets": ("m3",),
+                 "reasons": ("not_a_mechanism",)},)
+            with self.assertRaises(KeyError):
+                self.mod.apply_binding_uncertainty(drugs)
+            self.mod.UNCERTAIN_BINDING_CLAIMS = (
+                {"drug": "nosuchdrug", "page": 1, "targets": ("m3",),
+                 "reasons": ("not_a_mechanism",)},)
+            with self.assertRaises(KeyError):
+                self.mod.apply_binding_uncertainty(drugs)
+        finally:
+            self.mod.UNCERTAIN_BINDING_CLAIMS = real
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

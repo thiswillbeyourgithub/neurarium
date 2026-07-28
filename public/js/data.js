@@ -609,6 +609,17 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         ...(b.sources || []),
         ...(b.ki && b.ki.source ? [b.ki.source] : []),
       ]),
+      // Reasons this claim's source does not attribute it (the orange "uncertain"
+      // badge, authored in tools/data_generators/quotes/uncertainty.py). Each bullet
+      // is a reason `kind` + slot `args` + its own source, or `absence` when the
+      // point IS that the corpus never says it; the sentence itself is an i18n
+      // string, so nothing here is prose. Empty for all but the flagged bindings.
+      uncertainty: (b.uncertainty || []).map((u) => ({
+        kind: u.kind,
+        args: u.args || {},
+        absence: !!u.absence,
+        sources: mapSources(u.sources),
+      })),
       ki: resolveKi(b.ki),
     };
   };
@@ -722,6 +733,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // bindingDisplayFields / _binding_grade in generate_data.py.
         sources: disp.sources,
         provenance: disp.provenance,
+        // Non-empty -> the badge reads "uncertain" instead of the green check.
+        uncertainty: disp.uncertainty,
         // The measured PDSP Ki (own verified badge), null when absent.
         ki: disp.ki,
       };

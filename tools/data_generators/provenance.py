@@ -786,6 +786,14 @@ def _provenance_stats(structures: list[dict[str, Any]],
     which point *at* a node but are not themselves a knowledge node).
     """
     def bucket(rank_or_grade: Any) -> str:
+        # An "uncertain" node is a real quote-checked source that the audit flagged as
+        # not attributing the claim (see quotes/uncertainty.py). It carries a document,
+        # so it stays *backed* (the headline is unchanged), but it leaves the green
+        # verified count: a flat check would overstate it.
+        if isinstance(rank_or_grade, tuple):
+            rank_or_grade, uncertain = rank_or_grade
+            if uncertain:
+                return "uncertain"
         rank = (rank_or_grade if isinstance(rank_or_grade, int)
                 else _GRADE_RANK.get(rank_or_grade, 0))
         # rank 1 = a bare ``llm`` grade (asserted from memory), rank 0 = no source
@@ -799,7 +807,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         # ``missing`` is kept as the llm+nosource sum (the headline / README / check_data
         # read it); ``llm`` and ``nosource`` are the finer split the sourcing bar renders
         # as distinct grey and red segments.
-        counts = {"total": 0, "verified": 0, "sourced": 0,
+        counts = {"total": 0, "verified": 0, "uncertain": 0, "sourced": 0,
                   "llm": 0, "nosource": 0, "missing": 0}
         for g in grades:
             counts["total"] += 1
@@ -809,7 +817,9 @@ def _provenance_stats(structures: list[dict[str, Any]],
                 counts["missing"] += 1
         return counts
 
-    binding_grades = [_binding_grade(b)
+    # (grade, is_uncertain) pairs: a flagged binding buckets as ``uncertain`` however
+    # strong its quote is (see bucket()).
+    binding_grades = [(_binding_grade(b), bool(b.get("uncertainty")))
                       for d in drugs for b in d.get("bindings", [])]
     # Measured-affinity (PDSP Ki) coverage: a SEPARATE data-quality signal from the
     # grade tally. A binding can be legitimately backed by a Stahl quote with no Ki
@@ -1012,12 +1022,15 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # so adding a node kind is a single-line edit (add it to by_kind) with no second
     # list to keep in sync.
     node_kinds = tuple(k for k in by_kind if k != "references")
-    nodes = {"total": 0, "verified": 0, "sourced": 0,
+    nodes = {"total": 0, "verified": 0, "uncertain": 0, "sourced": 0,
              "llm": 0, "nosource": 0, "missing": 0}
     for kind in node_kinds:
         for key in nodes:
             nodes[key] += by_kind[kind][key]
-    backed = nodes["verified"] + nodes["sourced"]
+    # ``uncertain`` counts as backed: the claim does rest on a real, quote-checked
+    # document, and the badge says what is doubtful about it. Moving it out of
+    # ``verified`` is the honest part; moving it out of ``backed`` would not be.
+    backed = nodes["verified"] + nodes["uncertain"] + nodes["sourced"]
     nodes["backed"] = backed
     nodes["pct_backed"] = (
         round(100 * backed / nodes["total"]) if nodes["total"] else 0)

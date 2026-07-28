@@ -327,5 +327,75 @@ class StahlMonographRangeTest(unittest.TestCase):
                          check_data._fold_name("amphetamine (d,l)"))
 
 
+class UncertaintyBulletTest(unittest.TestCase):
+    """Family 5's gates on the "uncertain" badge's bullets.
+
+    The trap this exists for (see the new-node-kind checklist): family 5 passes
+    silently until its walk actually *visits* a new kind, so every case below is
+    written to fail if the walk skips ``binding["uncertainty"]`` entirely."""
+
+    META = {"source_corpora": {"stahl": {"ref": "Stahl"},
+                               "pdsp_ki": {"ref": "PDSP", "csv": "x.csv"}},
+            "uncertainty_reasons": {"side_effect_rule": {}, "not_a_mechanism": {}}}
+    # A subject-less side-effect rule: verbatim on the page, and it attributes
+    # nothing. This is the shape the badge exists for.
+    QUOTE = ("Blocking alpha 1 adrenergic receptors can cause dizziness, "
+             "hypotension, and syncope")
+
+    def _errors(self, binding):
+        report = check_data.Report()
+        with redirect_stdout(io.StringIO()):
+            check_data.check_sources(report, self.META,
+                                     [{"id": "d", "bindings": [binding]}], [], [], [])
+        return report.errors
+
+    def _binding(self, uncertainty, quote="a plain attributed sentence"):
+        return {"target": "alpha1a", "uncertainty": uncertainty,
+                "sources": [{"corpus": "stahl", "page": 40, "quote": quote,
+                             "provenance": "verified"}]}
+
+    def test_a_sourceless_bullet_must_declare_absence(self):
+        self.assertEqual(self._errors(self._binding(
+            [{"kind": "side_effect_rule"}])), 1)
+        self.assertEqual(self._errors(self._binding(
+            [{"kind": "not_a_mechanism", "absence": True}])), 0)
+
+    def test_an_absence_bullet_may_not_also_cite_a_source(self):
+        """Contradictory: the pill would read NOSOURCE over a real citation."""
+        self.assertEqual(self._errors(self._binding(
+            [{"kind": "not_a_mechanism", "absence": True,
+              "sources": [{"corpus": "stahl", "page": 40, "quote": "x"}]}])), 1)
+
+    def test_kind_must_be_in_the_shipped_vocabulary(self):
+        self.assertEqual(self._errors(self._binding(
+            [{"kind": "vibes", "absence": True}])), 1)
+
+    def test_bullet_sources_go_through_the_quote_gate(self):
+        """Proven with an unresolvable corpus, which errors on any machine; the
+        verbatim half needs the author-side pages and is exercised by the real
+        run of check_data.py."""
+        self.assertEqual(self._errors(self._binding(
+            [{"kind": "side_effect_rule",
+              "sources": [{"corpus": "nosuchbook", "page": 40, "quote": "x"}]}])), 1)
+
+    def test_a_measured_ki_bullet_is_not_asked_for_prose(self):
+        """A PDSP source is a CSV row id, gated by family 8, so requiring a quote
+        here would fail every measured_ki bullet."""
+        self.assertEqual(self._errors(self._binding(
+            [{"kind": "side_effect_rule",
+              "sources": [{"corpus": "pdsp_ki", "ki_id": 7,
+                           "provenance": "verified"}]}])), 0)
+
+    def test_declaring_uncertainty_stands_the_subjectless_guard_down(self):
+        """The two mechanisms answer the same problem, so they must not both fire:
+        the guard bans such a quote outright, the badge keeps it and says why."""
+        self.assertEqual(self._errors(self._binding(
+            [{"kind": "not_a_mechanism", "absence": True}], quote=self.QUOTE)), 0)
+        # ... and without the declaration the guard still rejects it
+        b = self._binding([], quote=self.QUOTE)
+        del b["uncertainty"]
+        self.assertEqual(self._errors(b), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

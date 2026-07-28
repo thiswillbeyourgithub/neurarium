@@ -6,6 +6,8 @@ Each module groups the quote registries by source corpus:
   polarity registries (Stahl's Essential Psychopharmacology).
 - ``metabolism``: which enzyme forms each active metabolite (Stahl + Wikipedia; the one
   enzyme registry that is hand-curated rather than grepped, see the module docstring).
+- ``uncertainty``: the reasons a `verified` binding claim still deserves doubt (the
+  ``uncertain`` badge; not a corpus but a judgement *about* quotes already stored).
 
 Dependency chain stays acyclic: provenance <- connectivity <- quotes <- generate_data.
 """
@@ -24,9 +26,15 @@ from data_generators.quotes.stahl_essential import (
     STAHL_ESSENTIAL_TARGET_QUOTES,
     TARGET_POLARITY_QUOTES,
 )
+from data_generators.quotes.uncertainty import (
+    UNCERTAIN_BINDING_CLAIMS,
+    UNCERTAINTY_REASONS,
+)
 
 __all__ = [
     "METABOLITE_ENZYME_QUOTES",
+    "UNCERTAIN_BINDING_CLAIMS",
+    "UNCERTAINTY_REASONS",
     "PROJECTION_QUOTES",
     "STRUCTURE_QUOTES",
     "CLASSIFICATION_ATTRS",
