@@ -451,6 +451,30 @@ class UncertaintyTest(unittest.TestCase):
         finally:
             self.mod.UNCERTAIN_BINDING_CLAIMS = real
 
+    def test_every_emitted_bullet_is_sourced_or_declares_absence(self):
+        kinds = set(self.meta["uncertainty_reasons"])
+        seen = 0
+        for d in self.drugs.values():
+            for b in d.get("bindings", []):
+                for u in b.get("uncertainty", []) or []:
+                    seen += 1
+                    self.assertIn(u["kind"], kinds)
+                    self.assertTrue(u.get("sources") or u.get("absence"),
+                                    f"{d['id']} {b['target']} {u['kind']}")
+        self.assertGreater(seen, 0, "no uncertainty bullets emitted at all")
+
+    def test_the_flagged_nodes_leave_verified_but_stay_backed(self):
+        """The agreed tally rule: `uncertain` is its own bucket out of `verified`, and
+        the headline is unchanged because a real document does exist."""
+        c = self.meta["provenance_stats"]["by_kind"]["drug_bindings"]
+        flagged = sum(1 for d in self.drugs.values() for b in d.get("bindings", [])
+                      if b.get("uncertainty"))
+        self.assertEqual(c["uncertain"], flagged)
+        self.assertEqual(c["verified"] + c["uncertain"] + c["sourced"] + c["missing"],
+                         c["total"])
+        a = self.meta["provenance_stats"]["nodes"]
+        self.assertEqual(a["backed"], a["verified"] + a["uncertain"] + a["sourced"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

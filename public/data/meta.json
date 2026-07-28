@@ -2781,8 +2781,8 @@
     "by_kind": {
       "drug_bindings": {
         "total": 1670,
-        "verified": 1658,
-        "uncertain": 0,
+        "verified": 1569,
+        "uncertain": 89,
         "sourced": 0,
         "llm": 0,
         "nosource": 12,
@@ -2998,8 +2998,8 @@
     },
     "nodes": {
       "total": 3980,
-      "verified": 3821,
-      "uncertain": 0,
+      "verified": 3732,
+      "uncertain": 89,
       "sourced": 0,
       "llm": 145,
       "nosource": 14,

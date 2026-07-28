@@ -83,7 +83,44 @@ def _claim(drug: str, page: int, targets: tuple[str, ...],
 _TCA_MUSCARINIC = ("m1", "m2", "m3", "m4", "m5")
 _ALPHA1 = ("alpha1a", "alpha1b", "alpha1d")
 
-UNCERTAIN_BINDING_CLAIMS: tuple[dict[str, Any], ...] = ()
+UNCERTAIN_BINDING_CLAIMS: tuple[dict[str, Any], ...] = (
+    _claim("amitriptyline", 40, _ALPHA1),
+    _claim("amoxapine", 48, _ALPHA1),
+    _claim("clomipramine", 180, _TCA_MUSCARINIC),
+    _claim("clomipramine", 180, ("h1",)),
+    _claim("clomipramine", 180, _ALPHA1),
+    # The user-facing example: Stahl names M3 only to explain a pancreatic side effect,
+    # and never lists a muscarinic action among clozapine's mechanisms. The measured Ki
+    # is what keeps the binding rather than dropping it.
+    _claim("clozapine", 207, ("m3",)),
+    _claim("cyamemazine", 216, _TCA_MUSCARINIC),
+    _claim("cyamemazine", 216, ("h1",)),
+    _claim("desipramine", 226, ("h1",)),
+    _claim("desipramine", 226, _ALPHA1),
+    _claim("dothiepin", 278, _ALPHA1),
+    _claim("doxepin", 284, _ALPHA1),
+    _claim("imipramine", 396, _TCA_MUSCARINIC),
+    _claim("imipramine", 396, ("h1",)),
+    _claim("imipramine", 396, _ALPHA1),
+    _claim("lofepramine", 450, _TCA_MUSCARINIC),
+    _claim("lofepramine", 450, ("h1",)),
+    _claim("lofepramine", 450, _ALPHA1),
+    _claim("maprotiline", 496, _TCA_MUSCARINIC),
+    _claim("maprotiline", 496, ("h1",)),
+    _claim("maprotiline", 496, _ALPHA1),
+    _claim("nefazodone", 578, _ALPHA1),
+    _claim("nortriptyline", 584, _TCA_MUSCARINIC),
+    _claim("nortriptyline", 584, ("h1",)),
+    _claim("nortriptyline", 584, _ALPHA1),
+    _claim("phenterminetopiramate", 660, ("carbonic_anhydrase",)),
+    _claim("protriptyline", 700, ("h1",)),
+    _claim("protriptyline", 700, _ALPHA1),
+    _claim("trazodone", 840, ("h1",)),
+    _claim("trazodone", 840, _ALPHA1),
+    _claim("trimipramine", 864, _TCA_MUSCARINIC),
+    _claim("trimipramine", 864, ("h1",)),
+    _claim("trimipramine", 864, _ALPHA1),
+)
 
 
 def _uncertainty_bullet(kind: str, *, what: str, binding: dict[str, Any],
