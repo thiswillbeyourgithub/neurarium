@@ -1366,6 +1366,38 @@ function createPanelTabs() {
   let press = null; // in-flight pointer press (long-press / reorder bookkeeping)
   let suppressClick = false; // a reorder drag must not also activate the tab
 
+  // Where each tab was left scrolled to, so coming back to it resumes reading
+  // instead of jumping to the top. Necessary because a tab switch re-runs the whole
+  // show*(), and createInfoPanel's clearBody() zeroes the pane on every render.
+  const scrollByKey = new Map(); // key -> scrollTop
+  let pendingRestore = null; // single-shot offset, set by activate(), used by openDetail()
+  // Record the live offset while a detail is shown: one hook covers every leave path
+  // (a tab click, the Settings tab, a close, the Tab-key cycle).
+  detailsPane.addEventListener("scroll", () => {
+    if (activeKey !== null && pendingRestore === null) {
+      scrollByKey.set(activeKey, detailsPane.scrollTop);
+    }
+  }, { passive: true });
+
+  // Put the pane back where this tab was left. Applied on the next frame (the panel
+  // is rebuilt synchronously, so its height is only final after layout), then once
+  // more shortly after: a panel keeps growing as its live Wikipedia lead and lazy
+  // illustration land, which would otherwise clamp the restore short. The re-apply
+  // bows out the moment the offset is no longer ours, so it never fights the user.
+  const restoreScroll = (top) => {
+    const apply = () => {
+      const max = Math.max(0, detailsPane.scrollHeight - detailsPane.clientHeight);
+      detailsPane.scrollTop = Math.min(top, max);
+      return detailsPane.scrollTop;
+    };
+    requestAnimationFrame(() => {
+      const settled = apply();
+      setTimeout(() => {
+        if (Math.abs(detailsPane.scrollTop - settled) < 2 && settled < top) apply();
+      }, 250);
+    });
+  };
+
   // Show the Settings or Details pane and keep the bar's visibility + the pinned
   // Settings tab's active state in sync. The bar hides entirely with no detail
   // tabs open (back to the plain Settings view).
@@ -1418,16 +1450,22 @@ function createPanelTabs() {
   };
 
   // Re-show a tab's detail: its reopen() re-renders + re-applies the 3D focus and
-  // calls openDetail(key), which marks it active and shows the Details pane.
+  // calls openDetail(key), which marks it active and shows the Details pane. Arm the
+  // scroll restore here, not in openDetail: coming BACK to a tab resumes where it was
+  // left, while a fresh open (or a jump from a link inside a panel) still starts at
+  // the top, and flashRow's deliberate scroll is left alone.
   const activate = (key) => {
     const tab = openTabs.find((tb) => tb.key === key);
-    if (tab) tab.reopen();
+    if (!tab) return;
+    pendingRestore = scrollByKey.get(key) || 0;
+    tab.reopen();
   };
 
   const closeTab = (key) => {
     const idx = openTabs.findIndex((tb) => tb.key === key);
     if (idx === -1) return;
     openTabs.splice(idx, 1);
+    scrollByKey.delete(key); // reopening it later is a fresh open, so start at the top
     if (key !== activeKey) { render(); return; } // 3D unchanged; just drop the chip
     if (openTabs.length) {
       // Fall back to the neighbour that slid into this slot (or the new last one),
@@ -1565,7 +1603,7 @@ function createPanelTabs() {
         openTabs.push(tab);
         if (openTabs.length > MAX_TABS) {
           const drop = openTabs.findIndex((tb) => tb.key !== key && tb.key !== activeKey);
-          if (drop !== -1) openTabs.splice(drop, 1);
+          if (drop !== -1) scrollByKey.delete(openTabs.splice(drop, 1)[0].key);
         }
       }
       activeKey = key;
@@ -1573,6 +1611,11 @@ function createPanelTabs() {
       showPane(true);
       render();
       scrollActiveIntoView();
+      // Consume the offset activate() armed (single-shot, so only a return to a tab
+      // resumes; a first open lands at the top like any freshly rendered panel).
+      const resume = pendingRestore;
+      pendingRestore = null;
+      if (resume !== null) restoreScroll(resume);
     },
     /**
      * Switch to the pinned Settings tab without closing any detail tabs (they stay

@@ -244,6 +244,12 @@
         min-height: 0;
         overflow-y: auto;
         overflow-x: hidden;
+        /* Rendering a detail empties this box and refills it, and the browser's scroll
+           anchoring then "helpfully" re-derives an offset from the new content, landing
+           somewhere arbitrary (and silently, without a scroll event). The panel decides
+           where a detail starts: the top for a fresh one, the remembered offset when you
+           come back to a tab (createPanelTabs). */
+        overflow-anchor: none;
       }
       /* Portrait / vertical screens: a bottom-left box would cover the centered
          brain, so make the controls span the FULL WIDTH but only the bottom HALF
