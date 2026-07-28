@@ -81,6 +81,10 @@ const SCROLL_TOP_PAD = 12; // px above a scrollAlign:"top" target once scrolled 
 const SCROLL_RECHECK_MS = 200; // how often a scrollTo step re-checks its target is still in view
 const SCROLL_RECHECK_FOR_MS = 4000; // ... and for how long after the step opens (see scrollStepIntoView)
 const ELASTIC_PX = 10; // px the ring rubber-bands when a panel step's scroll is clamped
+const ARROW_EDGE_PAD = 30; // px inside the scroll container's edge the scroll arrow rides
+const ARROW_TARGET_GAP = 16; // px off the target the arrow lands on before fading out
+const ARROW_LINGER_MS = 500; // how long it rests on the arrived target before fading
+const ARROW_FADE_MS = 320; // must match the .tour-scroll-arrow opacity transition
 
 /**
  * @param {{
@@ -113,6 +117,10 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let revealTimer = null; // the setTimeout that ends a step's opening beat + fades in the overlay
   let bubbleDragged = false; // user dragged the bubble this step: stop auto-placing it
   let userScrolled = false; // user scrolled by hand this step: scrollStepIntoView backs off
+  let scrollArrow = null; // the purple "look this way" chevron (see updateScrollArrow)
+  let arrowDir = 0; // -1 up / +1 down: the direction it was raised in, kept while it lands
+  let arrowTimer = null; // the linger timeout once the arrow has reached its target
+  let arrowFade = null; // the timeout that display:none-s it after the fade-out
 
   const seen = () => {
     if (!seenKey) return false;
@@ -180,8 +188,21 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     actions.append(btnSkip, btnBack, btnNext);
     foot.append(elStep, actions);
 
+    // The scroll arrow (see updateScrollArrow). Three nested elements on purpose:
+    // the outer one is positioned, the middle one bobs, the inner chevron rotates
+    // for the "up" direction, so none of the three transforms fights the others.
+    scrollArrow = document.createElement("div");
+    scrollArrow.className = "tour-scroll-arrow";
+    scrollArrow.hidden = true;
+    if (labels.scrollHint) scrollArrow.setAttribute("aria-label", labels.scrollHint);
+    const bob = document.createElement("span");
+    bob.className = "tour-arrow-bob";
+    bob.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true">'
+      + '<path d="M6 11l10 11 10-11" /></svg>';
+    scrollArrow.appendChild(bob);
+
     bubble.append(elTitle, elBody, foot);
-    root.append(blocker, ring, bubble);
+    root.append(blocker, ring, scrollArrow, bubble);
     document.body.appendChild(root);
   }
 
@@ -407,6 +428,83 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       clearHole();
       if (!scrolling && !bubbleDragged) placeCaption(consumed ? "brain" : step.placement || "top");
     }
+    updateScrollArrow();
+  }
+
+  // A big purple chevron shown while a step's target sits outside its scroll
+  // container. The tour scrolls the panel for you (scrollStepIntoView), but a pane
+  // sliding on its own reads as "something moved", not as "look down here", so the
+  // arrow names the direction. It rides the container edge the target is hiding
+  // behind while it is still out of view, then, once the target shows, glides onto
+  // it and fades: it ends up pointing at the box you were being taken to. It is
+  // also what comes back when a hand-scroll pushed the target away, since the
+  // auto-scroll deliberately stops fighting the user (see userScrolled).
+  function updateScrollArrow() {
+    if (!scrollArrow) return;
+    if (!active || index < 0 || ring.hidden) return hideScrollArrow();
+    const els = resolveTargets(steps[index]);
+    const c = els.length ? scrollParent(els[0]) : null;
+    if (!c) return hideScrollArrow();
+
+    const cr = c.getBoundingClientRect();
+    const er = unionRect(els);
+    const shown = Math.max(0, Math.min(er.bottom, cr.bottom) - Math.max(er.top, cr.top));
+    // The same "enough of it is on screen" test scrollStepIntoView settles on, so
+    // the arrow lands exactly when the scroll stops chasing.
+    const arrived = shown >= Math.min(er.height, c.clientHeight * 0.6) - 2;
+
+    if (!arrived) {
+      arrowDir = er.top < cr.top ? -1 : 1;
+      placeArrow(
+        clamp(er.left + er.width / 2, cr.left + ARROW_EDGE_PAD, cr.right - ARROW_EDGE_PAD),
+        arrowDir > 0 ? cr.bottom - ARROW_EDGE_PAD : cr.top + ARROW_EDGE_PAD,
+        false,
+      );
+      return;
+    }
+    // Arrived. Only meaningful if the arrow was actually raised: a step whose
+    // target never left the pane must not flash one, and one already landing must
+    // not restart its own descent every scroll frame.
+    if (!scrollArrow.classList.contains("show")
+      || scrollArrow.classList.contains("landed")) return;
+    placeArrow(
+      clamp(er.left + er.width / 2, cr.left + ARROW_EDGE_PAD, cr.right - ARROW_EDGE_PAD),
+      arrowDir > 0 ? er.top - ARROW_TARGET_GAP : er.bottom + ARROW_TARGET_GAP,
+      true,
+    );
+    arrowTimer = setTimeout(() => {
+      arrowTimer = null;
+      hideScrollArrow();
+    }, ARROW_LINGER_MS);
+  }
+
+  function placeArrow(x, y, landed) {
+    if (arrowFade) {
+      clearTimeout(arrowFade); // a re-raise cancels a pending hide
+      arrowFade = null;
+    }
+    scrollArrow.hidden = false;
+    scrollArrow.style.left = `${x}px`;
+    scrollArrow.style.top = `${y}px`;
+    scrollArrow.classList.toggle("up", arrowDir < 0);
+    scrollArrow.classList.toggle("landed", landed);
+    scrollArrow.classList.add("show");
+  }
+
+  function hideScrollArrow() {
+    if (arrowTimer) {
+      clearTimeout(arrowTimer);
+      arrowTimer = null;
+    }
+    if (!scrollArrow || scrollArrow.hidden || arrowFade) return;
+    scrollArrow.classList.remove("show");
+    // Let the fade-out run before taking it out of the layout, so the arrow
+    // dissolves on the target rather than blinking off it.
+    arrowFade = setTimeout(() => {
+      arrowFade = null;
+      scrollArrow.hidden = true;
+      scrollArrow.classList.remove("landed");
+    }, ARROW_FADE_MS);
   }
 
   // Position the bubble against a spotlighted rect without covering it. Try to
@@ -539,6 +637,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     bubbleDragged = false; // a fresh step re-auto-places the bubble (drop any drag offset)
     bubble.style.transition = ""; // clear a drag's inline transition:none
     scrolling = false; // a fresh step always places its bubble (a prior scroll may not have settled)
+    hideScrollArrow(); // the previous step's arrow points nowhere now
     if (scrollTimer) { clearTimeout(scrollTimer); scrollTimer = null; }
     // The very first step snaps into place (no fly-in from the corner); every
     // later step glides from the previous one (smooth step-to-step transitions).
@@ -888,6 +987,14 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     clearWait();
     if (scrollTimer) clearTimeout(scrollTimer);
     if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
+    // Hard-reset the scroll arrow (no fade: the whole overlay is about to vanish),
+    // so a replay doesn't start with a stale one showing.
+    if (arrowTimer) { clearTimeout(arrowTimer); arrowTimer = null; }
+    if (arrowFade) { clearTimeout(arrowFade); arrowFade = null; }
+    if (scrollArrow) {
+      scrollArrow.classList.remove("show", "landed");
+      scrollArrow.hidden = true;
+    }
     window.removeEventListener("keydown", onKey, true);
     window.removeEventListener("resize", layout);
     window.removeEventListener("scroll", onScroll, true);

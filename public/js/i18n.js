@@ -104,6 +104,7 @@
       "tour.skip": "Skip",
       "tour.step": "{n} of {total}",
       "tour.aria": "Guided tour",
+      "tour.scrollHint": "Scroll this way to the highlighted part",
       "tour.welcome.title": "Welcome to neurarium",
       "tour.welcome.body":
         "A 3D map of the brain: its regions, their pathways, and the receptors and drugs acting on them. The tour takes about 3 minutes, and you can leave any time.",
@@ -551,6 +552,7 @@
       "tour.skip": "Passer",
       "tour.step": "{n} sur {total}",
       "tour.aria": "Visite guidée",
+      "tour.scrollHint": "Faites défiler dans ce sens jusqu'à la partie en surbrillance",
       "tour.welcome.title": "Bienvenue sur neurarium",
       "tour.welcome.body":
         "Une carte 3D du cerveau : ses régions, leurs voies, et les récepteurs et médicaments qui agissent dessus. La visite dure environ 3 minutes, et vous pouvez la quitter quand vous voulez.",

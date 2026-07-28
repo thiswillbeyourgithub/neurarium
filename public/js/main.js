@@ -7415,7 +7415,7 @@ async function main() {
     steps: tourSteps,
     labels: {
       next: t("tour.next"), back: t("tour.back"), done: t("tour.done"),
-      skip: t("tour.skip"), aria: t("tour.aria"),
+      skip: t("tour.skip"), aria: t("tour.aria"), scrollHint: t("tour.scrollHint"),
       step: (n, total) => t("tour.step", { n, total }),
     },
     seenKey: "neurarium:tourSeen",

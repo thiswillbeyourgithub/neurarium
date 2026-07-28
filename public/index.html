@@ -795,6 +795,54 @@
         transition: left 0.34s cubic-bezier(0.33, 1, 0.68, 1), top 0.34s cubic-bezier(0.33, 1, 0.68, 1), width 0.34s cubic-bezier(0.33, 1, 0.68, 1), height 0.34s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
       }
       .tour-veil[hidden] { display: none; }
+      /* Scroll arrow: a big accent chevron raised while a step's target is still
+         off-screen inside a scrolling panel, bobbing the way the panel is taking
+         you, then gliding onto the target and fading (js/tour.js
+         updateScrollArrow). Deliberately NOT in the #tour-root.no-anim rule below:
+         that glide happens mid-scroll, which is exactly when no-anim is on. */
+      .tour-scroll-arrow {
+        position: absolute;
+        z-index: 3; /* over the ring, under the bubble */
+        pointer-events: none;
+        width: 46px;
+        height: 46px;
+        margin: -23px 0 0 -23px; /* centre on the (left, top) js/tour.js sets */
+        opacity: 0;
+        color: var(--accent-bright);
+        transition: left 0.42s cubic-bezier(0.33, 1, 0.68, 1), top 0.42s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.32s ease;
+      }
+      .tour-scroll-arrow[hidden] { display: none; }
+      .tour-scroll-arrow.show { opacity: 1; }
+      .tour-scroll-arrow svg { width: 100%; height: 100%; display: block; }
+      .tour-scroll-arrow path {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 4.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .tour-scroll-arrow.up svg { transform: rotate(180deg); }
+      .tour-arrow-bob {
+        display: block;
+        width: 100%;
+        height: 100%;
+        /* The glow is what makes it read over a dimmed panel; drop-shadow follows
+           the chevron's own outline, unlike a box-shadow on the square box. */
+        filter: drop-shadow(0 0 9px var(--accent)) drop-shadow(0 0 3px var(--accent-soft));
+        animation: tour-arrow-bob 1.15s ease-in-out infinite;
+      }
+      .tour-scroll-arrow.up .tour-arrow-bob { animation-name: tour-arrow-bob-up; }
+      /* Landed on the target: stop nudging and shrink slightly, so the last beat
+         reads as "here", not as "keep going". */
+      .tour-scroll-arrow.landed .tour-arrow-bob { animation: none; transform: scale(0.82); transition: transform 0.32s ease; }
+      @keyframes tour-arrow-bob {
+        0%, 100% { transform: translateY(-5px); }
+        50% { transform: translateY(5px); }
+      }
+      @keyframes tour-arrow-bob-up {
+        0%, 100% { transform: translateY(5px); }
+        50% { transform: translateY(-5px); }
+      }
       .tour-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
       .tour-step { font-size: 11px; color: var(--muted); letter-spacing: 0.03em; flex: 0 0 auto; }
       .tour-actions { display: flex; gap: 6px; }
@@ -819,8 +867,8 @@
       .tour-next:hover:not(:disabled) { background: var(--accent-bright); border-color: var(--accent-bright); }
       .tour-next:disabled { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); color: var(--text); }
       @media (prefers-reduced-motion: reduce) {
-        .tour-ring, .tour-bubble, .tour-veil { transition: none; }
-        .tour-ring, .tour-ring.interactive { animation: none; }
+        .tour-ring, .tour-bubble, .tour-veil, .tour-scroll-arrow { transition: none; }
+        .tour-ring, .tour-ring.interactive, .tour-arrow-bob { animation: none; }
       }
       /* "Take a tour" button in the #about-modal (replays the guided tour). */
       .about-tour-btn {
