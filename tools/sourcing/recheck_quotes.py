@@ -21,13 +21,22 @@ Three steps (the middle one is the only LLM spend):
    Reconstructs, for every non-Allen quote, the claim(s) it backs (Allen AHBA quotes are
    deterministic PACall confirmations, not LLM-sourced, so they are excluded) and writes
    ``<dir>/batch_<i>.json`` (each: ``{pages: {ref: text}, items: [{qid, page_ref, quote,
-   claims}]}``) + ``manifest.json``.
+   claims, heading?}]}``) + ``manifest.json``.
 
 2. Judge each batch with the chosen model. This project ran it as a Workflow: one agent
    per batch reads its file and returns, per item, ``{qid, present, supports, note?}``
    against the embedded page text (present allowing OCR noise; supports = the quote
    substantiates the claim). Aggregate every agent's ``verdicts`` into one JSON object
    ``{"verdicts": {qid: {present, supports, note?}}}``.
+
+   **Tell the judge what ``heading`` means**, because it decides the harder half of the
+   verdict: it is where in the book the passage sits (``{drug, section, subsection}``),
+   and Stahl's sections are not interchangeable. A sentence under *How the Drug Works*
+   is the book attributing a mechanism to that drug; the same sentence under *How Drug
+   Causes Side Effects* is a rule printed with the mechanism, not the drug, as its
+   subject, so it does not by itself say this drug has the action (that distinction is
+   what the "uncertain" badges rest on, see CLAUDE.md Source provenance). ``supports``
+   should be false when the claim needs an attribution the section cannot give.
 
 3. ``python tools/sourcing/recheck_quotes.py apply --batches <dir> --verdicts <file> [--llm sonnet]``
    Writes ``quote_llm.json`` (present AND supports -> stamped) + ``quote_recheck_flagged.json``.
@@ -47,14 +56,22 @@ CACHE = os.path.join(ROOT, "tools", "generated_cache")
 
 # corpus -> author-side page directory (the same trees check_data.py's quote gate reads).
 # Allen AHBA is intentionally absent: its quotes are deterministic, not LLM-sourced.
-PAGE_DIR = {
-    "stahl": "data_sources/books/stahl/pages",
-    "kandel": "data_sources/books/eric_kandel/pages",
-    "stahl_essential": "data_sources/books/stahl_essential_pharmacology/pages",
-    "carlat": "data_sources/books/carlat_medication/pages",
-    "nieuwenhuys": "data_sources/books/nieuwenhuys_atlas/pages",
-    "gtopdb": "data_sources/gtopdb/pages",
-}
+def _page_dirs():
+    """``corpus -> author-side page directory``, read from the emitted
+    ``meta.source_corpora``.
+
+    Not a hardcoded map: the corpus registry already carries every ``pages_dir``
+    (generate_data.py's SOURCE_CORPORA), and a copy here silently went stale as
+    corpora #9-#12 were added, crashing this script with a KeyError on the first
+    quote from a corpus it had never heard of. A corpus with no ``pages_dir`` (a Ki
+    CSV) has no page text to embed and is skipped like the excluded ones."""
+    with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
+        corpora = json.load(fh).get("source_corpora", {})
+    return {name: entry["pages_dir"] for name, entry in corpora.items()
+            if entry.get("pages_dir")}
+
+
+PAGE_DIR = _page_dirs()
 EXCLUDE_CORPUS = {"allen_ahba"}
 MAX_Q, MAX_P = 22, 7  # per-batch caps (quotes, distinct pages)
 
@@ -155,9 +172,10 @@ def cmd_build(args):
     def page_text(corpus, page):
         key = (corpus, page)
         if key not in page_cache:
-            fn = os.path.join(ROOT, PAGE_DIR[corpus], f"{page}.md")
+            page_dir = PAGE_DIR.get(corpus)
+            fn = os.path.join(ROOT, page_dir, f"{page}.md") if page_dir else None
             page_cache[key] = (open(fn, encoding="utf-8", errors="replace").read()
-                               if os.path.exists(fn) else None)
+                               if fn and os.path.exists(fn) else None)
         return page_cache[key]
 
     batches, cur = [], {"items": [], "pages": {}}
@@ -169,8 +187,17 @@ def cmd_build(args):
             cur = {"items": [], "pages": {}}
         cur["pages"][pref] = page_text(corpus, page)
         for qid in qidlist:
-            cur["items"].append({"qid": qid, "page_ref": pref,
-                                 "quote": quotes[qid]["quote"], "claims": claims[qid]})
+            item = {"qid": qid, "page_ref": pref,
+                    "quote": quotes[qid]["quote"], "claims": claims[qid]}
+            # Where in the book the passage sits (drug, section, subsection; derived
+            # by tools/fetch/fetch_quote_headers.py). It is the single most useful
+            # piece of context for the "supports" half of the verdict: the same
+            # sentence under "How the Drug Works" is the book attributing a mechanism
+            # to this drug, while under "How Drug Causes Side Effects" it is a rule
+            # printed without a subject. Absent for a quote whose heading is unknown.
+            if quotes[qid].get("heading"):
+                item["heading"] = quotes[qid]["heading"]
+            cur["items"].append(item)
     if cur["items"]:
         batches.append(cur)
 
@@ -204,6 +231,7 @@ def cmd_apply(args):
         if q not in quotes or (v.get("present") and v.get("supports")):
             continue
         flagged.append({"qid": q, "corpus": quotes[q]["corpus"], "page": quotes[q]["page"],
+                        "heading": quotes[q].get("heading"),
                         "present": v.get("present"), "supports": v.get("supports"),
                         "quote": quotes[q]["quote"], "claims": claims.get(q, []),
                         "note": v.get("note", "")})
