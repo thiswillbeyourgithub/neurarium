@@ -30,17 +30,22 @@ almost all of those open on the drug's own lowercase name ("daridorexant binds t
 orexin 1 and orexin 2 receptors ..."), which is the subject the audit was looking for.
 
 **3. Does the quote actually assert the claim?** This is the sulpiride shape and it is
-**not** fully closed. 47 binding sources are quotes Stahl prints in its **How Drug
-Causes Side Effects** block, which states rules without a subject ("Blockade of alpha
-adrenergic 1 receptors may explain dizziness, sedation, and hypotension"). Of those, 5
-attribute the action with a pronoun ("By blocking X, **it** can cause Y") and are fine.
-The other 42 were kept, on evidence rather than convenience:
+**not** fully closed. 46 (drug, quote) claims are sentences Stahl prints in its **How
+Drug Causes Side Effects** block, which states rules without a subject ("Blockade of
+alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension"). Of
+those, 6 name the drug and 5 attribute the action with a pronoun ("By blocking X, **it**
+can cause Y"); both are fine. **35 have no subject at all**, and because one such
+sentence sources every subtype it mentions (m1-m5, alpha1a/b/d), they carry **99
+individual bindings**. Count them at the claim level, not the binding level: 35 editorial
+decisions, not 99. They were kept, on evidence rather than convenience:
 
 - Unlike the three class-wide antipsychotic lines already stripped (printed on 17 to 28
   monographs including benzamides that lack the property), these lines are printed
   selectively: the alpha-1 one on 13 monographs, the anticholinergic one on 10, the
   antihistamine one on 12, all tricyclics and all genuinely carrying the property.
-- Most are independently backed by a measured PDSP Ki on the same binding.
+- Most are independently backed by a measured PDSP Ki on the same binding (58 of the 99
+  bindings carry one; a whole claim without any is the exception, e.g. clomipramine's
+  m1-m5 on p.180).
 - Stripping them would not improve the data anyway: PDSP only holds a generic
   "Muscarinic Acetylcholine Receptor" / "adrenergic Alpha1" assay for these compounds,
   which the m1-m5 / alpha1a-b-d granularity we model cannot consume. This is the same
