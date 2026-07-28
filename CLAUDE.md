@@ -794,12 +794,17 @@ a new kind means a new string in **both** catalogues. Forgetting a source raises
 verbatim and stands its subject-less-quote guard down for a binding that declares uncertainty (the two
 answer the same problem). **Nothing is authored per site**: `apply_binding_uncertainty` *derives* both
 the flags and the bullets from the emitted data, so a data edit cannot leave a stale flag behind and a new
-drug is covered the day it lands. One flag today, the **subject-less side-effect rule** (89 bindings): the
-quote's heading trail ends in Stahl's *How Drug Causes Side Effects* and the sentence does not attribute
-the action to the drug (`_attributes_to_drug`: it neither names it, nor uses a pronoun subject, nor elides
-the subject in Stahl's telegraphic style). This is what the heading trails were resolved for. It runs as a
-post-pass (not `_binding_record`) because the `class_wide` bullet counts the drugs the same sentence is
-printed on, which no single binding can see.
+drug is covered the day it lands. Two flags today, and a binding hit by either is uncertain:
+- **the subject-less side-effect rule** (89 bindings): the quote's heading trail ends in Stahl's *How Drug
+  Causes Side Effects* and the sentence does not attribute the action to the drug (`_attributes_to_drug`:
+  it neither names it, nor uses a pronoun subject, nor elides the subject in Stahl's telegraphic style).
+  This is what the heading trails were resolved for.
+- **the family-level claim** (`family_claim`, +22): one source sentence covers several of the drug's
+  bindings on subtypes of one family (same id stem) and names none of them individually, so the split into
+  subtypes is ours, not the book's ("Blockade of alpha adrenergic 1 receptors" -> alpha1A/B/D). Bearable
+  when a measured Ki pins the subtype down, so it only flags a subtype **with no Ki**.
+It runs as a post-pass (not `_binding_record`) because two bullets look across bindings: `class_wide`
+counts the drugs the same sentence is printed on, `family_claim` the siblings one sentence covers.
 
 **Per-claim sources + the verify gate.** The nodes carrying such a source: a
 binding's `sources[]`, a drug's `nbn_sources[]`, a projection/circuit/group quote (`KANDEL_QUOTES`), a

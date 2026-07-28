@@ -378,9 +378,10 @@ class UncertaintyTest(unittest.TestCase):
     is not: an unknown reason kind, a missing slot arg, or a blank source with no
     absence declaration (which reads to a user exactly like "the corpus is silent").
 
-    The flags themselves are **derived**, so the other half is the derivation: does a
-    sentence attribute its claim to the drug? That decides whether a real claim keeps its
-    green check, so it is tested on the sentences that shaped it."""
+    The flags themselves are **derived**, so the other half is the two derivations: does
+    a sentence attribute its claim to the drug, and does one sentence cover a family of
+    subtypes without naming them. Both decide whether a real claim keeps its green
+    check, so both are tested on the sentences that shaped them."""
 
     @classmethod
     def setUpClass(cls):
@@ -465,6 +466,41 @@ class UncertaintyTest(unittest.TestCase):
                       "properties"):
             self.assertFalse(self.mod._attributes_to_drug(quote, drug), quote)
 
+    def _family_of(self, quote, targets):
+        drug = {"id": "d", "name": "d", "bindings": [
+            {"target": t, "sources": [self._source(quote)]} for t in targets]}
+        return self.mod._family_groups(drug)
+
+    def test_one_sentence_over_unnamed_subtypes_is_a_family_claim(self):
+        """The user's nortriptyline case: Stahl writes "alpha 1", we publish A/B/D."""
+        fam = self._family_of("Blockade of alpha adrenergic 1 receptors may explain "
+                              "dizziness", ("alpha1a", "alpha1b", "alpha1d"))
+        self.assertEqual({i: n for i, (n, _s) in fam.items()}, {0: 3, 1: 3, 2: 3})
+        self.assertEqual(len(self._family_of(
+            "Anticholinergic activity may explain dry mouth",
+            ("m1", "m2", "m3", "m4", "m5"))), 5)
+
+    def test_a_sentence_naming_each_subtype_is_not_one(self):
+        """Three stated claims that happen to share a sentence, not one family claim.
+        The spellings differ across the corpus (a bare number, a glued id), and missing
+        one would publish a false doubt."""
+        self.assertFalse(self._family_of(
+            "Binds selectively to melatonin 1 and melatonin 2 receptors as a full "
+            "agonist", ("mt1", "mt2")))
+        self.assertFalse(self._family_of(
+            "Blocks dopamine 3 and 4 receptors", ("d3", "d4")))
+        self.assertFalse(self._family_of(
+            "Has antagonist actions at serotonin 2B receptors and agonist actions at "
+            "serotonin 2C receptors", ("5ht2b", "5ht2c")))
+        self.assertFalse(self._family_of(
+            "binding at both GABAA and GABAB receptors", ("gaba_a", "gaba_b")))
+
+    def test_unrelated_targets_sharing_a_sentence_are_not_a_family(self):
+        """A family claim is about OUR subtype split; two different receptors named in
+        one sentence are two claims, however unnamed."""
+        self.assertFalse(self._family_of(
+            "Increases norepinephrine and especially dopamine actions by blocking "
+            "their reuptake", ("dat", "net")))
 
     def test_every_emitted_bullet_is_sourced_or_declares_absence(self):
         kinds = set(self.meta["uncertainty_reasons"])

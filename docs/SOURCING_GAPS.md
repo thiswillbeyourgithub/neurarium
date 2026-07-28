@@ -80,6 +80,16 @@ claims / 89 bindings exactly, binding for binding, which is the strongest eviden
 of them is right. New drugs are now covered the day they land, and the list cannot go
 stale against a data edit.
 
+A second derived flag was added at the same time, from the same insight, for a different
+way a quote can fail to be about the node: the **family-level claim**. One sentence covers
+several of the drug's bindings on subtypes of one family and names none of them
+individually ("Blockade of alpha adrenergic 1 receptors" -> alpha1A/B/D, "Anticholinergic
+activity" -> M1-M5), so the split into subtypes is our reading, not the book's. That is
+bearable when a measured Ki reaches the subtype (prazosin's alpha1A/B/D are each assayed),
+so it only flags a subtype **with no Ki of its own**: nortriptyline has an alpha1A assay
+and nothing for alpha1B or alpha1D, which are left resting on a sentence that says
+"alpha 1". +22 bindings, taking the badge to 111.
+
 **Still open here:**
 
 - The **11 attributed claims** (6 naming the drug, 5 using a pronoun) are fine as they

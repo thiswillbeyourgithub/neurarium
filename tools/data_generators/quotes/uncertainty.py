@@ -1,19 +1,27 @@
 """Why a `verified` binding claim still deserves doubt (the ``uncertainty`` bullets).
 
 A `verified` grade only ever meant "this sentence really is on that page". It never meant
-"this sentence is *about this drug*", nor "this sentence is about *this* receptor". The shape
-where the difference matters, **derived** here rather than hand-listed:
+"this sentence is *about this drug*", nor "this sentence is about *this* receptor". Two
+shapes where the difference matters, both **derived** here rather than hand-listed:
 
-**The subject-less side-effect rule.** Stahl's **How Drug Causes Side Effects** block
-prints mechanism-to-side-effect rules whose grammatical subject is the *mechanism*, not
-the drug, so nothing in the sentence says this drug has the action::
+1. **The subject-less side-effect rule.** Stahl's **How Drug Causes Side Effects** block
+   prints mechanism-to-side-effect rules whose grammatical subject is the *mechanism*, not
+   the drug, so nothing in the sentence says this drug has the action::
 
-    "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and
-     hypotension"
+       "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and
+        hypotension"
 
-The block is identified by the quote's own **heading trail** (see
-``tools/fetch/fetch_quote_headers.py``), which is exactly what headings were resolved for;
-the subject test is :func:`_attributes_to_drug`.
+   The block is identified by the quote's own **heading trail** (see
+   ``tools/fetch/fetch_quote_headers.py``), which is exactly what headings were resolved
+   for; the subject test is :func:`_attributes_to_drug`.
+
+2. **The family-level claim.** The source names a receptor *family* ("alpha 1 adrenergic
+   receptors", "muscarinic receptors") and we publish its **subtypes** (alpha1A/B/D,
+   M1-M5): one sentence covering several of a drug's bindings without naming any of them
+   is a family claim by construction, and the split into subtypes is our reading, not the
+   book's. On its own that is bearable when a measured Ki pins the subtype down; it is a
+   real reason to doubt when it does not (nortriptyline has an alpha1A assay, nothing for
+   alpha1B or alpha1D, and Stahl only ever wrote "alpha 1").
 
 Those claims are kept, on evidence rather than convenience (the side-effect lines are
 printed selectively, only on monographs that genuinely carry the property, and half the
@@ -67,6 +75,10 @@ _ELIDED_SUBJECT = re.compile(
 # subject attributes the action as squarely as the drug's own name does.
 _ATTRIBUTING_PRONOUN = re.compile(r"\bits?\b", re.I)
 
+# A modeled receptor subtype ends in the letter or digit that distinguishes it from its
+# siblings (alpha1**a**, m**3**, 5ht2**c**); dropping it gives the family stem the source
+# would have named.
+_SUBTYPE_SUFFIX = re.compile(r"[a-e]$|[0-9]$")
 
 # The closed vocabulary of reason kinds. Each entry declares where its source comes from:
 #
@@ -83,6 +95,9 @@ UNCERTAINTY_REASONS: dict[str, dict[str, Any]] = {
     # "The source sentence explains a side effect; its subject is the mechanism, not
     # the drug." The finding itself, cited on the very sentence it is about.
     "side_effect_rule": {"source": "own_quote", "absence": False, "args": ()},
+    # "One sentence covers n receptor subtypes at once, so it names the family and the
+    # split is ours." Cited on that sentence, which is its own evidence.
+    "family_claim": {"source": "own_quote", "absence": False, "args": ("n",)},
     # "The same sentence is printed on N other monographs." Not damning on its own
     # (Stahl writes true class-wide lines constantly), but it is what the reader needs
     # in order to weigh the one above.
@@ -106,8 +121,9 @@ def _english(value: Any) -> str:
 def _tokens(text: str) -> str:
     """``text`` reduced to space-separated alphanumeric tokens, space-padded.
 
-    Matching happens on whole tokens rather than raw substrings, so a drug name cannot be
-    "found" inside a longer word."""
+    Matching happens on tokens rather than raw substrings because "alpha 1 adrenergic"
+    contains the letters of "alpha1a" once punctuation is stripped, and that false
+    positive is exactly the family claim this module exists to catch."""
     return " " + re.sub(r"[^a-z0-9]+", " ", text.lower()).strip() + " "
 
 
@@ -127,6 +143,66 @@ def _attributes_to_drug(quote: str, drug: dict[str, Any]) -> bool:
     names = {drug["id"]}
     names.update(re.findall(r"[a-z]{4,}", _english(drug.get("name")).lower()))
     return any(f" {name} " in tokens for name in names)
+
+
+def _designations(target: str) -> set[str]:
+    """The tokens by which a source would be naming **this** subtype.
+
+    Its own id (``mt1``, ``5ht2a``, ``gaba_a`` -> "gaba a") and its family-relative
+    designation: the bare digit for a numbered subtype (``m3`` -> ``3``, as in
+    "muscarinic 3"), the family's number plus the letter for a lettered one (``alpha1a``
+    -> ``1a``, as in "alpha 1A"). Tokenized like the quote it will be searched in, so an
+    id carrying punctuation still matches the prose spelling.
+    """
+    out = {target}
+    m = _SUBTYPE_SUFFIX.search(target)
+    if m:
+        suffix, stem = m.group(0), target[:m.start()]
+        if suffix.isdigit():
+            out.add(suffix)
+        else:
+            number = re.search(r"(\d+)$", stem)
+            out.add(number.group(1) + suffix if number else suffix)
+    # Both spellings: spaced ("gaba a") and glued ("gabaa"), because prose writes an id's
+    # separator either way and a missed spelling would publish a false family claim.
+    return ({_tokens(d).strip() for d in out}
+            | {re.sub(r"[^a-z0-9]", "", d.lower()) for d in out})
+
+
+def _family_groups(drug: dict[str, Any]) -> dict[int, tuple[int, dict[str, Any]]]:
+    """``binding index -> (family size, the shared source)`` for this drug's family claims.
+
+    A family claim is a group of the drug's bindings that (a) share **one** source quote,
+    (b) are subtypes of one family (same stem once the distinguishing suffix is dropped),
+    and (c) are **not** named individually in that quote. (c) is what separates "Blocks
+    serotonin 2A, 2C, and 3 receptors" (three claims, each stated) from "Blockade of alpha
+    adrenergic 1 receptors" (one claim, three subtypes of our own making).
+    """
+    bindings = drug.get("bindings", [])
+    by_quote: dict[str, list[int]] = collections.defaultdict(list)
+    source_of: dict[tuple[int, str], dict[str, Any]] = {}
+    for i, b in enumerate(bindings):
+        for src in b.get("sources", []):
+            if not src.get("quote"):
+                continue
+            qid = quote_table.quote_id(src)
+            by_quote[qid].append(i)
+            source_of[(i, qid)] = src
+
+    out: dict[int, tuple[int, dict[str, Any]]] = {}
+    for qid, idx in by_quote.items():
+        if len(idx) < 2:
+            continue
+        targets = [bindings[i]["target"] for i in idx]
+        stems = {_SUBTYPE_SUFFIX.sub("", t) for t in targets}
+        if len(stems) != 1 or not stems.pop():
+            continue                       # not one family (or no stem left at all)
+        quote = _tokens(source_of[(idx[0], qid)]["quote"])
+        if any(f" {d} " in quote for t in targets for d in _designations(t)):
+            continue                       # the sentence names them one by one
+        for i in idx:
+            out[i] = (len(set(targets)), source_of[(i, qid)])
+    return out
 
 
 def _uncertainty_bullet(kind: str, *, what: str, binding: dict[str, Any],
@@ -180,8 +256,9 @@ def apply_binding_uncertainty(drugs: list[dict[str, Any]]) -> None:
     """Derive and attach the ``uncertainty`` bullets to every doubtful binding, in place.
 
     Run as a post-pass over the assembled drugs rather than inside ``_binding_record``,
-    because the ``class_wide`` bullet counts the drugs the same sentence is printed on,
-    which no single binding can see.
+    because two of the bullets look *across* bindings: ``class_wide`` counts the drugs the
+    same sentence is printed on, and ``family_claim`` needs the sibling bindings the same
+    sentence covers. No single binding can see either.
 
     Must run **before** serialization, while the sources are still inline: the heading
     trail is looked up through :func:`quote_table.heading_of`, which keys on the quote's
@@ -198,7 +275,8 @@ def apply_binding_uncertainty(drugs: list[dict[str, Any]]) -> None:
                     spread[src["quote"]].add(drug["id"])
 
     for drug in drugs:
-        for b in drug.get("bindings", []):
+        families = _family_groups(drug)
+        for i, b in enumerate(drug.get("bindings", [])):
             what = f"Drug {drug['id']!r} binding {b['target']!r}"
             rule_source = None          # the subject-less side-effect sentence, if any
             in_stahl = False            # is this binding read off a Stahl monograph ...
@@ -214,15 +292,28 @@ def apply_binding_uncertainty(drugs: list[dict[str, Any]]) -> None:
                 elif (where == SIDE_EFFECT_SUBSECTION
                         and not _attributes_to_drug(src["quote"], drug)):
                     rule_source = src
-            if not rule_source:
+            family = families.get(i)
+            # A family claim on its own is bearable when a measured affinity pins the
+            # subtype down (prazosin's alpha1A/B/D are each assayed); it is a reason to
+            # doubt when nothing outside that one family-level sentence reaches this
+            # subtype. That conjunction is the whole point of the flag.
+            family_doubt = bool(family) and not b.get("ki")
+            if not rule_source and not family_doubt:
                 continue
 
-            bullets = [_uncertainty_bullet(
-                "side_effect_rule", what=what, binding=b, source=rule_source)]
-            others = len(spread.get(rule_source.get("quote", ""), ())) - 1
+            bullets = []
+            if rule_source:
+                bullets.append(_uncertainty_bullet(
+                    "side_effect_rule", what=what, binding=b, source=rule_source))
+            if family:
+                bullets.append(_uncertainty_bullet(
+                    "family_claim", what=what, binding=b, source=family[1],
+                    args={"n": family[0]}))
+            quoted = rule_source or family[1]
+            others = len(spread.get(quoted.get("quote", ""), ())) - 1
             if others > 0:
                 bullets.append(_uncertainty_bullet(
-                    "class_wide", what=what, binding=b, source=rule_source,
+                    "class_wide", what=what, binding=b, source=quoted,
                     args={"n": others}))
             # The affinity bullet is derived, never authored, so it cannot drift from
             # the Ki actually shipped: it says what the measurement is, or that there
