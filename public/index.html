@@ -1366,8 +1366,10 @@
       .drugs-toggle input { margin: 0; }
       /* Active-metabolite bullet under a parent drug row: indented + dimmer so it
          reads as a discreet sub-item, with its T½ trailing in muted text. */
+      /* --metab-depth (set only past the first level) steps the indent for a
+         metabolite of a metabolite: loxapine -> amoxapine -> 7-hydroxyamoxapine. */
       #drugs-list .metab-item {
-        margin-left: 22px;
+        margin-left: calc(22px * var(--metab-depth, 1));
         padding: 1px 0;
         font-size: 11px;
         color: var(--muted);

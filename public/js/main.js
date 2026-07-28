@@ -3483,9 +3483,7 @@ function createInfoPanel(data, sourcingModal) {
           // A non-modeled metabolite's OWN sourced receptor bindings (m.ownBindings,
           // resolved in js/data.js from its Wikipedia/PDSP pharmacology). Rendered with
           // the same bindingRow the drug's "Acts on" uses, strongest-affinity first, each
-          // row jumping to its target when browsable. A linked (modeled-drug) metabolite
-          // has no ownBindings here (its bindings live on its own drug row via the link),
-          // so this stays empty for those and for a metabolite with none recorded yet.
+          // row jumping to its target when browsable.
           if (m.ownBindings && m.ownBindings.length) {
             const bul = el("ul", "metab-bindings");
             const mbinds = [...m.ownBindings].sort((a, b) => bindingKi(a) - bindingKi(b));
@@ -4204,12 +4202,64 @@ function buildDrugLegend(data, onPick) {
   const container = document.getElementById("drugs-list");
   const filterInput = document.getElementById("drugs-filter");
   const metabToggle = document.getElementById("drugs-show-metabolites");
+  // Drug id -> drug. NOT data.byId, which is the *structure* index: looking a drug up
+  // there always missed, so a metabolite bullet that should link to its own drug row
+  // silently rendered inert.
+  const drugById = new Map(data.drugs.map((d) => [d.id, d]));
   if (!container) return () => {};
   container.replaceChildren();
   const rows = [];   // { row, id } for the focusable drugs (for reflect)
   const groups = []; // { heading, rows:[row,...] } for the live filter
   const effectColors = data.meta.drugEffectColors || {};
   const cats = data.meta.drugCategoryLabels || {};
+
+  // Active metabolites as discreet indented bullets under the parent drug, each
+  // showing its own T½; a metabolite that is itself a modeled drug jumps to it.
+  // Toggled by #drugs-show-metabolites; marked _isMetab so applyFilter can gate them,
+  // and given a haystack (own + parent name) so filtering behaves.
+  //
+  // Recursive: a metabolite that IS a modeled drug has metabolites of its own
+  // (loxapine -> amoxapine -> 7-/8-hydroxyamoxapine), and flattening those onto one
+  // level lost which molecule made which. `depth` drives the indent, `ancestors` is
+  // the chain applyFilter must reveal when a deep bullet matches, and `seen` guards a
+  // metabolic cycle in the data from spinning here forever.
+  const MAX_METAB_DEPTH = 3;
+  function addMetabRows(owner, ancestors, depth, seen, groupRows) {
+    if (depth > MAX_METAB_DEPTH) return;
+    for (const m of owner.metabolites || []) {
+      const mrow = document.createElement("div");
+      mrow.className = "legend-item metab-item";
+      if (depth > 1) mrow.style.setProperty("--metab-depth", String(depth));
+      const nameSpan = document.createElement("span");
+      nameSpan.className = "metab-name";
+      nameSpan.textContent = m.name;
+      mrow.appendChild(nameSpan);
+      const hlStr = formatHalfLife(m.halfLife);
+      if (hlStr) {
+        const hlSpan = document.createElement("span");
+        hlSpan.className = "metab-item-hl";
+        hlSpan.textContent = hlStr;
+        mrow.appendChild(hlSpan);
+      }
+      const linked = m.drugId ? drugById.get(m.drugId) : null;
+      if (linked && m.linkFocusable) {
+        mrow.classList.add("clickable");
+        mrow.title = t("drug.metaboliteOf", { prodrug: owner.displayName });
+        mrow.addEventListener("click", () => onPick(linked));
+      }
+      mrow._haystack = foldText(`${m.name} ${owner.name}`);
+      mrow._isMetab = true;
+      // The whole chain up to the drug row, so a match on a grandchild pulls every
+      // level above it back into view rather than orphaning the bullet.
+      mrow._ancestorRows = ancestors;
+      container.appendChild(mrow);
+      groupRows.push(mrow);
+      if (linked && !seen.has(linked.id)) {
+        addMetabRows(linked, [...ancestors, mrow], depth + 1,
+          new Set([...seen, linked.id]), groupRows);
+      }
+    }
+  }
 
   // Group drugs by their primary (first) category.
   const byCat = new Map();
@@ -4248,36 +4298,7 @@ function buildDrugLegend(data, onPick) {
         row.title = t("drug.stubHint");
       }
       groupRows.push(row);
-      // Active metabolites as discreet indented bullets under the parent drug, each
-      // showing its own T½; a metabolite that is itself a modeled drug jumps to it.
-      // Toggled by #drugs-show-metabolites; marked _isMetab so applyFilter can gate
-      // them, and given a haystack (own + parent name) so filtering behaves.
-      for (const m of drug.metabolites || []) {
-        const mrow = document.createElement("div");
-        mrow.className = "legend-item metab-item";
-        const nameSpan = document.createElement("span");
-        nameSpan.className = "metab-name";
-        nameSpan.textContent = m.name;
-        mrow.appendChild(nameSpan);
-        const hlStr = formatHalfLife(m.halfLife);
-        if (hlStr) {
-          const hlSpan = document.createElement("span");
-          hlSpan.className = "metab-item-hl";
-          hlSpan.textContent = hlStr;
-          mrow.appendChild(hlSpan);
-        }
-        const linked = m.drugId ? data.byId.get(m.drugId) : null;
-        if (linked && m.linkFocusable) {
-          mrow.classList.add("clickable");
-          mrow.title = t("drug.metaboliteOf", { prodrug: drug.displayName });
-          mrow.addEventListener("click", () => onPick(linked));
-        }
-        mrow._haystack = foldText(`${m.name} ${drug.name}`);
-        mrow._isMetab = true;
-        mrow._parentRow = row; // so a filter match on the bullet can pull its parent back in
-        container.appendChild(mrow);
-        groupRows.push(mrow);
-      }
+      addMetabRows(drug, [row], 1, new Set([drug.id]), groupRows);
     }
     groups.push({ heading: h, rows: groupRows });
   }
@@ -4300,12 +4321,13 @@ function buildDrugLegend(data, onPick) {
           (!row._isMetab || showMetab);
         row.hidden = !match;
       }
-      // A matched metabolite pulls its parent drug back into view even when the
-      // parent's own name doesn't match (searching "norf" shows fluoxetine so the
-      // Norfluoxetine bullet is never orphaned under a hidden parent).
+      // A matched metabolite pulls its whole chain back into view even when no name
+      // above it matches (searching "norf" shows fluoxetine so the Norfluoxetine
+      // bullet is never orphaned; "hydroxyamoxapine" shows loxapine AND the amoxapine
+      // bullet between them, so the two-step route stays readable).
       for (const row of g.rows) {
-        if (row._isMetab && !row.hidden && row._parentRow) {
-          row._parentRow.hidden = false;
+        if (row._isMetab && !row.hidden) {
+          for (const up of row._ancestorRows || []) up.hidden = false;
         }
       }
       const groupVisible = g.rows.some((row) => !row.hidden);
