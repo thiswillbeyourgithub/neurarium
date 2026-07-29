@@ -1,6 +1,56 @@
 {
   "versions": [
     {
+      "version": "3.40.1",
+      "date": "2026-07-29",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A source's tooltip now shows where in the book the passage sits, as a trail like \"Clozapine › Side effects › How Drug Causes Side Effects\", for all five books",
+          "commits": [
+            "bd27676",
+            "9eab4ce",
+            "7e1b5dc"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The uncertain claims were missing from the per-topic bars in the Sources popup, which left a gap in each bar and understated its percentage",
+          "commits": [
+            "3d688ca"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "\"What's new\" no longer skips a visit where you grabbed the separate slider while the brain was assembling",
+          "commits": [
+            "1a1c181"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A release whose notes had not been published yet is no longer marked as read, which used to lose it for good",
+          "commits": [
+            "2b1b78f"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "22 more drug bindings carry the uncertain badge: where the book names a whole receptor family and we publish its subtypes, a subtype with no measured affinity is our own reading, not the book's",
+          "commits": [
+            "c745ba5"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The uncertain badge is now derived from where each quote sits in the book rather than from a hand-written list, so a new drug is covered the day it lands",
+          "commits": [
+            "e8098eb"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.40.0",
       "date": "2026-07-28",
       "entries": [

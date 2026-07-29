@@ -939,6 +939,13 @@ directly). Follow [semver](https://semver.org/);
 to release, bump `version.js` **and write that version's changelog** (below). It is
 intentionally not derived from git (the site deploys as plain files).
 
+> [!IMPORTANT]
+> **Every code change ships a version bump: patch at the very least.** A fix, a
+> refactor, a doc-only touch to shipped code: bump the patch and write the changelog
+> entry for it. The version is what a visitor's browser compares against to decide
+> whether to show them anything new, so an unbumped change is invisible to them and
+> indistinguishable from the previous build. Reserve minor/major for what semver says.
+
 ### Changelog ("What's new")
 
 Release notes for casual visitors, one file per version: `docs/changelog/<major.minor.patch>/
