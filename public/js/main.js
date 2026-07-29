@@ -4976,14 +4976,21 @@ function buildAboutSourcing(meta, opts = {}) {
     const c = (stats.by_kind || {})[kind];
     if (!c || !c.total) continue;
     const verified = c.verified || 0;
+    // Quote-checked like `verified`, so it counts as backed here exactly as it does
+    // in the global bar; it only leaves the green segment. Omitting it left the
+    // flagged nodes out of both the bar (a gap) and the kind's %.
+    const uncertain = c.uncertain || 0;
     const sourced = c.sourced || 0;
     // Older meta lacked the llm/nosource split; fall back to lumping them as llm
     // (grey) so an out-of-date dataset still renders a sensible bar.
     const nosource = c.nosource != null ? c.nosource : 0;
     const llm = c.llm != null ? c.llm : (c.missing || 0) - nosource;
-    const backed = verified + sourced;
+    const backed = verified + uncertain + sourced;
     const pct = Math.round((100 * backed) / c.total);
-    rows.push({ kind, labelKey, verified, sourced, llm, nosource, backed, total: c.total, pct });
+    rows.push({
+      kind, labelKey, verified, uncertain, sourced, llm, nosource,
+      backed, total: c.total, pct,
+    });
   }
   rows.sort((x, y) => y.pct - x.pct || y.total - x.total);
   // The four grade segments, strongest to weakest: (count, CSS class, tooltip label).
