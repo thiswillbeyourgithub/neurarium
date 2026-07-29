@@ -439,9 +439,10 @@ function createAdaptiveQuality({ renderer, baseDpr }) {
  * easeInOutCubic for a smooth departure + gentle settle.
  * @param {{meshes:THREE.Mesh[], arrows:object[], slider:HTMLInputElement,
  *   camera:THREE.PerspectiveCamera, controls:OrbitControls,
- *   focus:ReturnType<typeof createCameraFocus>}} deps
+ *   focus:ReturnType<typeof createCameraFocus>,
+ *   onSettle?:(completed:boolean)=>void}} deps
  */
-function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus, onDone }) {
+function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus, onSettle }) {
   const FROM = 1; // fully blown out (slider max)
   const TO = 0; // assembled whole
   const SWEEP = INTRO_ROTATION_TURNS * Math.PI * 2; // radians to sweep in
@@ -466,13 +467,16 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus,
 
   // We drive the rotation ourselves during the intro, so OrbitControls' own
   // auto-rotate must be off until we hand back at the end (or on cancel).
-  // `completed` distinguishes a natural finish (the assemble ran to the end)
-  // from a cancel (slider grab / deep link): only the former fires onDone, so a
-  // follow-on like the guided tour never auto-starts over a user's own action.
+  // Either way the launch is over, so `onSettle` always fires; its `completed`
+  // flag tells a natural finish (the assemble ran to the end) from a cancel
+  // (slider grab / deep link). One callback with a flag rather than a
+  // natural-finish-only hook, because the two follow-ons want different things:
+  // the guided tour must not auto-start over a user's own action, while the
+  // "What's new" popup still has to appear on a load the user interrupted.
   const finish = (completed) => {
     running = false;
     controls.autoRotate = wasAutoRotate;
-    if (completed && onDone) onDone();
+    if (onSettle) onSettle(completed);
   };
 
   return {
@@ -7157,7 +7161,7 @@ async function main() {
   // A coach-mark walkthrough (js/tour.js) that shows the main features live: each
   // step's before() drives the real viewer (spread the brain, focus a circuit /
   // receptor / drug, open a section) rather than showing a static picture. It
-  // auto-runs ONCE on a first visit (fired from the intro's onDone below, so it
+  // auto-runs ONCE on a first visit (fired from the intro's onSettle below, so it
   // starts only after the assemble settles) and is replayable from the About popup.
   const tourEl = (id) => document.getElementById(id);
   // Expand the controls panel + show the Settings pane (a focus demo swaps the
@@ -7522,23 +7526,40 @@ async function main() {
   // manually during the intro, so if it is up we defer and the observer retries the
   // moment it closes. (Mid-tour the observer is a no-op: maybeAutoStart/start bail
   // when the tour is already active, so the step-5 open / step-6 close can't restart it.)
-  let tourIntroSettled = false;
+  // Two gates, not one. `sceneSettled` means the launch is over however it ended,
+  // which is all "What's new" needs; `introCompleted` means the assemble reached its
+  // natural end, which the tour additionally requires so it never starts over a
+  // user's own action. Conflating them cost the changelog every load where the
+  // visitor grabbed the spread slider or followed a deep link (both cancel the
+  // intro), which is a load like any other as far as release notes are concerned.
+  let sceneSettled = false;
+  let introCompleted = false;
+  let changelogTried = false;    // one-shot: it decides for itself, but only once
   let tourForcedStarted = false; // one-shot guard for the ?tour=1 forced start
   const tourGateEl = tourEl("sourcing-modal");
   const tourGateOpen = () => tourGateEl && !tourGateEl.hidden;
   const tryAutoTour = () => {
-    if (!tourIntroSettled || tourGateOpen()) return;
+    if (!sceneSettled || tourGateOpen()) return;
     if (tourForced) {
       // Forced: ignore the seen gate + eligibility, but never re-trigger.
       if (!tourForcedStarted) { tourForcedStarted = true; tour.start(); }
-    } else {
+    } else if (introCompleted) {
       tour.maybeAutoStart(tourEligible());
     }
-    // "What's new" rides the same gate: after the intro, and never stacked on the
-    // tour (a first visitor gets the tour and is silently marked up to date, so in
-    // practice only a returning visitor sees it). Fire-and-forget: it decides for
-    // itself whether there is anything to show.
-    if (!tour.active) changelog.showIfUnseen();
+    // "What's new" rides the same gate, minus the natural-finish requirement, and is
+    // never stacked on the tour (a first visitor gets the tour and is silently marked
+    // up to date, so in practice only a returning visitor sees it). Fire-and-forget:
+    // it decides for itself whether there is anything to show.
+    if (!tour.active && !changelogTried) {
+      changelogTried = true;
+      changelog.showIfUnseen();
+    }
+  };
+  /** The launch is over; `completed` says the assemble reached its natural end. */
+  const settleScene = (completed) => {
+    sceneSettled = true;
+    if (completed) introCompleted = true;
+    tryAutoTour();
   };
   if (tourGateEl) {
     new MutationObserver(tryAutoTour)
@@ -7552,9 +7573,9 @@ async function main() {
   const intro = createIntroAnimation(
     { meshes, arrows, slider: explodeSlider, camera, controls, focus,
       // Once the assemble settles, offer the tour (once per visitor, and not while
-      // the Sources popup is open: see tryAutoTour). onDone fires only on a natural
-      // finish, never on a cancel, so a deep-link / manual drag never triggers it.
-      onDone: () => { tourIntroSettled = true; tryAutoTour(); } });
+      // the Sources popup is open: see tryAutoTour). Fires on a cancel too, with
+      // completed=false, which settles the scene without earning the tour.
+      onSettle: settleScene });
   explodeSlider.addEventListener("input", () => intro.cancel());
   // The launch (assemble intro, or an instant settle when animations are off) is
   // wrapped so it can fire exactly when the loading overlay is dismissed below.
@@ -7580,14 +7601,15 @@ async function main() {
         intro.start();
       } else {
         applyExplode(meshes, 0, arrows);
-        // No assemble intro to finish (so onDone never fires); mark it settled after
-        // a short beat and let tryAutoTour honor the same Sources-gate condition.
-        setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
+        // No assemble intro to finish (so onSettle never fires); settle after a short
+        // beat. It counts as completed: there was no animation for the user to cut
+        // short, so the tour is as welcome here as after a full assemble.
+        setTimeout(() => settleScene(true), 500);
       }
     } else if (tourForced) {
-      // ?explode= pinned: the intro block above is skipped, so onDone never fires.
+      // ?explode= pinned: the intro block above is skipped, so onSettle never fires.
       // A forced tour still wants to run, so settle the gate condition after a beat.
-      setTimeout(() => { tourIntroSettled = true; tryAutoTour(); }, 500);
+      setTimeout(() => settleScene(false), 500);
     }
   };
   // Dismiss the loading overlay, coupled to the launch. An automated view (headless
