@@ -952,7 +952,10 @@ string). `docs/` is not web-exposed, so `generate_data.py` emits them newest-fir
 `js/changelog.js` `createChangelog()` fetches that **only when its popup opens**, and
 `showIfUnseen()` shows every release after the version in `localStorage`
 `neurarium.changelogSeen` (a first-ever visitor is silently marked current: they get the
-tour instead), with a **Show all release notes** button under them (rendered only while the
+tour instead). What it records there is the newest release **the notes carry**, never the
+running build, and a failed fetch records nothing: `changelog.json` and `version.js` are
+emitted separately, so marking the build would burn a release whose notes had not landed
+yet and it would never be shown. Shown with a **Show all release notes** button under them (rendered only while the
 view is a subset, so the rest of the history is a click away rather than a wall to scroll).
 Also reachable from the About popup's "What's new" link, which opens the full history;
 scrolls via the shared `.modal` rule. Each version heading carries its date, formatted in

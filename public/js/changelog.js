@@ -109,8 +109,8 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
     try { return localStorage.getItem(STORAGE_KEY) || ""; } catch { return ""; }
   }
 
-  function markSeen() {
-    try { localStorage.setItem(STORAGE_KEY, version); } catch { /* private mode */ }
+  function markSeen(mark) {
+    try { localStorage.setItem(STORAGE_KEY, mark || version); } catch { /* private mode */ }
   }
 
   /** One release: its version heading, then its bullets grouped under category headings. */
@@ -172,6 +172,22 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
     return (cache || []).filter((r) => compareVersions(r.version, version) <= 0);
   }
 
+  /**
+   * The version to record as seen: the newest release the notes actually carry,
+   * never the running build.
+   *
+   * changelog.json is emitted separately from version.js, so the two can be a beat
+   * apart (a bumped build whose notes are not written yet, a cached copy of the file
+   * that predates the build). Recording the *build* there would burn that release:
+   * the notes would land later with nothing left to compare against, and the popup
+   * would never show them. Falls back to the build only when nothing is loaded.
+   */
+  function seenMark() {
+    return shippedReleases().reduce(
+      (best, r) => (compareVersions(r.version, best) > 0 ? r.version : best), "")
+      || version;
+  }
+
   function render(releases) {
     if (!body) return;
     body.textContent = "";
@@ -204,25 +220,29 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
       releases = await load();
     } catch { /* offline / missing file: the empty message says so */ }
     render(shippedReleases());
-    markSeen();
+    markSeen(seenMark());
     ctrl.open();
   }
 
   /**
    * Open showing only what changed since the last visit; resolves to whether it
-   * opened. Records the current version either way, so a first visit (and a build
-   * with no notes) stays silent from then on.
+   * opened. Records what the notes cover either way, so a first visit (and a build
+   * whose releases are all already seen) stays silent from then on.
    */
   async function showIfUnseen() {
     const seen = seenVersion();
-    if (!seen) { markSeen(); return false; }          // first ever visit: stay quiet
-    if (compareVersions(seen, version) >= 0) return false;
+    // Nothing this build could show is newer than what was seen (releasesSince caps
+    // at the running version), so skip the fetch entirely: the steady state costs
+    // nothing at boot.
+    if (seen && compareVersions(seen, version) >= 0) return false;
     let releases = [];
     try {
       releases = releasesSince(await load(), seen, version);
-    } catch { /* can't fetch: don't nag with an empty popup */ }
-    markSeen();
-    if (!releases.length) return false;
+    } catch {
+      return false;   // offline / missing file: leave the key alone and retry next visit
+    }
+    markSeen(seenMark());
+    if (!seen || !releases.length) return false;      // first ever visit: stay quiet
     render(releases);
     ctrl.open();
     return true;
