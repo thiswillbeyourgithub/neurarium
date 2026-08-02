@@ -6,7 +6,8 @@
 
 `tools/check_data.py` (stdlib) runs over the **emitted** `public/data/`,
 independent of `generate_data.py`. Exit 0 = no errors (warnings allowed), 1 =
-errors. Functions take loaded data as args (unit-testable). Nine families:
+errors. Functions take loaded data as args (unit-testable). Eleven families (numbered
+0-10 in the output):
 
 - **Quote table** (referential integrity of the externalized `quotes.jsonl`): every node's
   `{quote_id, provenance}` source must resolve to a quote node, and every quote node must be
@@ -68,6 +69,23 @@ errors. Functions take loaded data as args (unit-testable). Nine families:
   `meta.provenance_stats.ki_coverage` against a recompute. A quote-only binding is still
   sourced, so this is not a grade gate: it surfaces where a *measured* affinity was never
   looked up, the honest complement to "% sourced".
+- **Drug flow vs. binding consistency** (warns, never errors): where the derived
+  by-mechanism flow overlay and a drug's own bindings tell different stories (a
+  postsynaptic-only engagement, or a system whose tone the drug raises into regions
+  where it blocks that same transmitter's receptors). Mostly the intended
+  presynaptic-tone vs. postsynaptic-block split, so it is a review list, not a gate.
+- **Innervation coverage** (warns, never errors): per transmitter system, the regions
+  that **express** it (receptor `locations` + non-receptor target `regions`) but that
+  **no projection of that kind reaches**. The two layers have very different coverage
+  (expression is sourced in bulk from GtoPdb/Allen, a pathway needs its own textbook
+  quote), so a region can carry six adrenergic receptors with no noradrenergic arrow
+  near it: the viewer then says "acts here" while drawing no supply. Usually a missing
+  *pathway* from an existing source nucleus, occasionally a missing *structure* (this is
+  the shape of hole the nucleus basalis filled). Also reports the mirror case (a pathway
+  landing where the system has no recorded receptor: an *expression* gap) and any
+  receptor family with no projection kind at all (no modeled source nucleus; expected
+  for a local neuromodulator like opioid or cannabinoid). Glutamate + GABA are outside
+  `system_flow_kinds` by design and never appear.
 - **Changelog** (release notes per version): `public/data/changelog.json` must be
   well-formed, newest-version-first (the order the viewer relies on to show every
   release since a visitor's last one), with no duplicate version, a real `YYYY-MM-DD`

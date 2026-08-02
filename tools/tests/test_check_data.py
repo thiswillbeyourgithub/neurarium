@@ -397,5 +397,69 @@ class UncertaintyBulletTest(unittest.TestCase):
         self.assertEqual(self._errors(b), 1)
 
 
+class InnervationCoverageTest(unittest.TestCase):
+    """Family 10: regions expressing a transmitter system that no pathway of that
+    system reaches. Warning-only, so what these lock is that the arithmetic points at
+    the right regions (a false 'fully covered' would quietly hide the gap the check
+    exists to surface)."""
+
+    STRUCTS = [{"id": f"{b}_R", "base_name": b.title()} for b in
+               ("raphe", "frontal", "occipital", "thalamus")]
+
+    def _run(self, receptors, projections, meta=None):
+        report = check_data.Report()
+        buf = io.StringIO()
+        base_meta = {"system_flow_kinds": {"serotonergic": "serotonergic"},
+                     "drug_targets": {}}
+        with redirect_stdout(buf):
+            check_data.check_innervation(report, meta or base_meta, self.STRUCTS,
+                                         projections, receptors)
+        return [ln.split("[warn]", 1)[1].strip()
+                for ln in buf.getvalue().splitlines() if "[warn]" in ln]
+
+    def test_unreached_region_is_named(self):
+        warns = self._run(
+            [{"id": "5ht2a", "family": "serotonergic",
+              "locations": ["frontal", "occipital"]}],
+            [{"kind": "serotonergic", "from": "raphe_R", "to": "frontal_R"}])
+        self.assertEqual(len(warns), 1)
+        self.assertIn("1/2 region(s)", warns[0])
+        self.assertIn("Occipital", warns[0])
+        self.assertNotIn("Frontal", warns[0])
+
+    def test_full_coverage_warns_nothing(self):
+        self.assertEqual(self._run(
+            [{"id": "5ht2a", "family": "serotonergic", "locations": ["frontal"]}],
+            [{"kind": "serotonergic", "from": "raphe_R", "to": "frontal_R"}]), [])
+
+    def test_ubiquitous_receptor_is_ignored(self):
+        """A receptor expressed everywhere would put every region in every gap and
+        drown the signal, so it is excluded rather than counted as unreached."""
+        self.assertEqual(self._run(
+            [{"id": "5ht2a", "family": "serotonergic", "ubiquitous": True,
+              "locations": ["frontal", "occipital", "thalamus"]}],
+            [{"kind": "serotonergic", "from": "raphe_R", "to": "frontal_R"}]), [])
+
+    def test_expression_gap_is_reported_but_not_for_a_source_nucleus(self):
+        """The mirror question: a pathway landing where the system has no recorded
+        receptor means the expression layer is thin. Its own source nucleus does not
+        count (a nucleus need not express what it projects onto)."""
+        warns = self._run(
+            [{"id": "5ht2a", "family": "serotonergic", "locations": ["frontal"]}],
+            [{"kind": "serotonergic", "from": "raphe_R", "to": "frontal_R"},
+             {"kind": "serotonergic", "from": "raphe_R", "to": "thalamus_R"}])
+        gaps = [w for w in warns if "expression gap" in w]
+        self.assertEqual(len(gaps), 1)
+        self.assertIn("thalamus", gaps[0])
+        self.assertNotIn("raphe", gaps[0])
+
+    def test_family_with_no_projection_kind_is_flagged(self):
+        warns = self._run(
+            [{"id": "mt1", "family": "melatonergic", "locations": ["thalamus"]}],
+            [])
+        self.assertTrue(any("no projection kind at all" in w and "melatonergic" in w
+                            for w in warns))
+
+
 if __name__ == "__main__":
     unittest.main()

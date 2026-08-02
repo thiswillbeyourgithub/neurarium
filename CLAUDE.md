@@ -299,7 +299,7 @@ material location).
 
 ## Data checks
 
-> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: nine families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, changelog).
+> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: eleven families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage).
 
 ## Internationalization (i18n)
 
