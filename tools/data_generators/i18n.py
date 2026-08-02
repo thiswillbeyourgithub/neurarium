@@ -84,6 +84,7 @@ FR: dict[str, str] = {
     "Locus coeruleus": "Locus cœruleus",
     "Ventral tegmental area": "Aire tegmentale ventrale",
     "Tuberomammillary nucleus": "Noyau tubéromammillaire",
+    "Nucleus basalis of Meynert": "Noyau basal de Meynert",
     # Circuit names
     "Direct pathway (motor)": "Voie directe (motrice)",
     "Indirect pathway": "Voie indirecte",
@@ -161,6 +162,18 @@ FR: dict[str, str] = {
         "Histaminergique ascendante (hypothalamique)",
     "Ascending histaminergic (basal forebrain)":
         "Histaminergique ascendante (prosencéphale basal)",
+    "Basal forebrain cholinergic (frontal)":
+        "Cholinergique du prosencéphale basal (frontale)",
+    "Basal forebrain cholinergic (parietal)":
+        "Cholinergique du prosencéphale basal (pariétale)",
+    "Basal forebrain cholinergic (temporal)":
+        "Cholinergique du prosencéphale basal (temporale)",
+    "Basal forebrain cholinergic (occipital)":
+        "Cholinergique du prosencéphale basal (occipitale)",
+    "Basal forebrain cholinergic (cingulate)":
+        "Cholinergique du prosencéphale basal (cingulaire)",
+    "Basal forebrain cholinergic (amygdala)":
+        "Cholinergique du prosencéphale basal (amygdalienne)",
     # Projection descriptions
     "Dorsal raphe serotonin neurons project diffusely to the prefrontal cortex, "
     "shaping mood and cognition.":
@@ -216,6 +229,23 @@ FR: dict[str, str] = {
     "cortical activation.":
         "L'histamine tubéromammillaire projette vers le prosencéphale basal, "
         "renforçant l'activation corticale.",
+    "Nucleus basalis cholinergic neurons innervate the frontal cortex, "
+    "sustaining attention and cortical activation.":
+        "Les neurones cholinergiques du noyau basal innervent le cortex frontal, "
+        "soutenant l'attention et l'activation corticale.",
+    "Nucleus basalis cholinergic fibers innervate the parietal cortex.":
+        "Les fibres cholinergiques du noyau basal innervent le cortex pariétal.",
+    "Nucleus basalis cholinergic fibers innervate the temporal cortex.":
+        "Les fibres cholinergiques du noyau basal innervent le cortex temporal.",
+    "Nucleus basalis cholinergic fibers innervate the occipital (visual) "
+    "cortex.":
+        "Les fibres cholinergiques du noyau basal innervent le cortex occipital "
+        "(visuel).",
+    "Nucleus basalis cholinergic fibers innervate the cingulate cortex.":
+        "Les fibres cholinergiques du noyau basal innervent le cortex cingulaire.",
+    "Basal forebrain cholinergic neurons also innervate the amygdala.":
+        "Les neurones cholinergiques du prosencéphale basal innervent également "
+        "l'amygdale.",
     "Sensorimotor frontal cortex drives the putamen, the motor input nucleus "
     "of the basal ganglia.":
         "Le cortex frontal sensorimoteur active le putamen, le noyau d'entrée "

@@ -53,6 +53,11 @@ _KQ_MONOAMINE_INNERV = _kandel(1052,
     "The noradrenergic locus ceruleus, serotonergic dorsal and median raphe "
     "nuclei, dopaminergic A10 neurons, and histaminergic tuberomammillary neurons "
     "innervate the thalamus, hypothalamus, basal forebrain, and cerebral cortex.")
+_KQ_CHOLINERGIC_BASAL = _kandel(1047,
+    "Those in the basal forebrain are divided into the medial septum, the "
+    "nuclei of the vertical and horizontal limbs of the diagonal band, and the "
+    "nucleus basalis of Meynert. These neurons project throughout the cerebral "
+    "cortex, hippocampus, and amygdala.")
 _KQ_MONOAMINE_LIMBIC = _kandel(1560,
     "Serotonergic and noradrenergic neurons in the pons and medulla project widely "
     "to highly diverse terminal fields in brain regions that include the "
@@ -331,6 +336,45 @@ PROJECTIONS: list[dict[str, Any]] = [
          label="Ascending histaminergic (basal forebrain)",
          description="Tuberomammillary histamine projects to the basal forebrain, "
                      "reinforcing cortical activation."),
+    # --- Ascending cholinergic from the nucleus basalis of Meynert (the basal
+    #     forebrain, the cortex's acetylcholine source): the second diffuse
+    #     cholinergic fan next to the septohippocampal pathway above, and the one
+    #     that makes a muscarinic drug legible. Without it the cortical M1-M5
+    #     receptors a drug like scopolamine blocks lit up with no cholinergic
+    #     supply anywhere near them. One Kandel sentence (p.1047,
+    #     PROJECTION_QUOTES) backs all six targets ("throughout the cerebral
+    #     cortex, hippocampus, and amygdala"); the hippocampus is left to the
+    #     septohippocampal arrow rather than drawn twice. ---
+    dict(**{"from": "nucleus_basalis_R", "to": "frontal_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Basal forebrain cholinergic (frontal)",
+         description="Nucleus basalis cholinergic neurons innervate the frontal "
+                     "cortex, sustaining attention and cortical activation."),
+    dict(**{"from": "nucleus_basalis_R", "to": "parietal_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Basal forebrain cholinergic (parietal)",
+         description="Nucleus basalis cholinergic fibers innervate the parietal "
+                     "cortex."),
+    dict(**{"from": "nucleus_basalis_R", "to": "temporal_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Basal forebrain cholinergic (temporal)",
+         description="Nucleus basalis cholinergic fibers innervate the temporal "
+                     "cortex."),
+    dict(**{"from": "nucleus_basalis_R", "to": "occipital_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Basal forebrain cholinergic (occipital)",
+         description="Nucleus basalis cholinergic fibers innervate the occipital "
+                     "(visual) cortex."),
+    dict(**{"from": "nucleus_basalis_R", "to": "cingulate_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Basal forebrain cholinergic (cingulate)",
+         description="Nucleus basalis cholinergic fibers innervate the cingulate "
+                     "cortex."),
+    dict(**{"from": "nucleus_basalis_R", "to": "amygdala_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Basal forebrain cholinergic (amygdala)",
+         description="Basal forebrain cholinergic neurons also innervate the "
+                     "amygdala."),
     # --- Interhemispheric commissures (bidirectional, defined once across the
     #     midline so symmetric=False keeps them from mirroring into duplicates) ---
     dict(**{"from": "frontal_L", "to": "frontal_R"},

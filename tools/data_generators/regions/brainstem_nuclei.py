@@ -48,6 +48,21 @@ PAIRED: list[dict[str, Any]] = [
          # somatodendritic autoreceptors. Position/size are an anatomical guess:
          # tune in a browser.
          radii=(0.22, 0.17, 0.24), seed=84, detail=5, noise=0.05),
+    dict(base="nucleus_basalis", name="Nucleus basalis of Meynert",
+         group="brainstem_nuclei",
+         pos=(1.3, -0.5, 0.45), color="#edc948",
+         scale=0.45,  # anatomical: a thin sheet of cells, not a compact ball
+         # The cortex's acetylcholine source: basal-forebrain cholinergic neurons
+         # under the globus pallidus (substantia innominata) that innervate the
+         # whole neocortex, so a muscarinic drug (scopolamine, an anticholinergic
+         # antipsychotic) has a modeled tract to ride instead of lighting cortical
+         # M1-M5 receptors with no visible cholinergic supply. Not a brainstem
+         # nucleus, but grouped with the other diffuse source nuclei (as the
+         # tuberomammillary one already is) since it plays the same role and must
+         # stay out of the deep-nuclei jigsaw clipping. A flattened elongated blob
+         # slung under the pallidum; cholinergic-yellow to echo its arrows.
+         # Position/size are an anatomical guess: tune in a browser.
+         radii=(0.30, 0.14, 0.22), seed=85, detail=5, noise=0.05),
 ]
 
 MIDLINE: list[dict[str, Any]] = [

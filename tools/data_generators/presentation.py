@@ -172,4 +172,5 @@ WIKIPEDIA: dict[str, str] = {
     "locus_coeruleus": "https://en.wikipedia.org/wiki/Locus_coeruleus",
     "vta": "https://en.wikipedia.org/wiki/Ventral_tegmental_area",
     "tuberomammillary": "https://en.wikipedia.org/wiki/Tuberomammillary_nucleus",
+    "nucleus_basalis": "https://en.wikipedia.org/wiki/Nucleus_basalis",
 }

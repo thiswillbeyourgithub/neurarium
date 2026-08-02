@@ -12,6 +12,7 @@ from data_generators.connectivity import (
     _KQ_CORPUS_CALLOSUM,
     _KQ_CORTICOPONTINE,
     _KQ_CORTICOSTRIATAL,
+    _KQ_CHOLINERGIC_BASAL,
     _KQ_MONOAMINE_INNERV,
     _KQ_MONOAMINE_LIMBIC,
     _KQ_NIGROSTRIATAL,
@@ -102,6 +103,16 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("tuberomammillary_R", "thalamus_R"): _KQ_MONOAMINE_INNERV,
     ("tuberomammillary_R", "hypothalamus_R"): _KQ_MONOAMINE_INNERV,
     ("tuberomammillary_R", "septal_nuclei_R"): _KQ_MONOAMINE_INNERV,
+    # Ascending cholinergic: one Kandel sentence (p.1047) puts the nucleus basalis
+    # of Meynert in the basal forebrain group and has it projecting "throughout the
+    # cerebral cortex, hippocampus, and amygdala", backing all six NBM targets
+    # (the four lobes + cingulate cortex + amygdala).
+    ("nucleus_basalis_R", "frontal_R"): _KQ_CHOLINERGIC_BASAL,
+    ("nucleus_basalis_R", "parietal_R"): _KQ_CHOLINERGIC_BASAL,
+    ("nucleus_basalis_R", "temporal_R"): _KQ_CHOLINERGIC_BASAL,
+    ("nucleus_basalis_R", "occipital_R"): _KQ_CHOLINERGIC_BASAL,
+    ("nucleus_basalis_R", "cingulate_R"): _KQ_CHOLINERGIC_BASAL,
+    ("nucleus_basalis_R", "amygdala_R"): _KQ_CHOLINERGIC_BASAL,
     # Interhemispheric corpus callosum (homologous cortical areas across midline);
     # the anterior commissure (temporal) + claustro-cortical pathways stay
     # unsourced (Kandel has no temporal-commissure sentence and never mentions the
@@ -232,6 +243,14 @@ _KSQ_STRIATUM = _kandel(981,
     "tegmental area are the three major input nuclei of the basal ganglia, "
     "receiving signals directly and indirectly from structures distributed "
     "throughout the neuraxis (Figure 38–2).")
+# The one sentence that names the basal-forebrain cholinergic nuclei, so it grades
+# both structures it names (the medial septum and the nucleus basalis of Meynert).
+# The projections out of them cite the sentence that follows it instead
+# (_KQ_CHOLINERGIC_BASAL), which is where the innervation is stated.
+_KSQ_BASAL_FOREBRAIN = _kandel(1047,
+    "Those in the basal forebrain are divided into the medial septum, the "
+    "nuclei of the vertical and horizontal limbs of the diagonal band, and "
+    "the nucleus basalis of Meynert.")
 _KSQ_LOBES = _kandel(63,
     "The frontal lobe is largely concerned with short-term memory, planning future "
     "actions, and control of movement; the parietal lobe mediates somatic "
@@ -292,6 +311,9 @@ STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
         "The substantia nigra pars compacta/ventral tegmental area contain an "
         "important population of dopaminergic neurons."),
     "tuberomammillary": _KQ_MONOAMINE_INNERV,
+    # Same sentence as its projections: it is what names the nucleus and places it
+    # in the basal-forebrain cholinergic group.
+    "nucleus_basalis": _KQ_CHOLINERGIC_BASAL,
     # Diencephalon.
     "hypothalamus": _kandel(1025,
         "Neurons controlling the internal environment are concentrated in the "
@@ -344,8 +366,6 @@ STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
         "The axons of olfactory sensory neurons project to the ipsilateral "
         "olfactory bulb, whose rostral end lies just above the olfactory "
         "epithelium."),
-    "septal_nuclei": _kandel(1047,
-        "Those in the basal forebrain are divided into the medial septum, the "
-        "nuclei of the vertical and horizontal limbs of the diagonal band, and "
-        "the nucleus basalis of Meynert."),
+    "septal_nuclei": _KSQ_BASAL_FOREBRAIN,
+    "nucleus_basalis": _KSQ_BASAL_FOREBRAIN,
 }
