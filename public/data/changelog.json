@@ -17,6 +17,13 @@
           "commits": [
             "62c6f9e"
           ]
+        },
+        {
+          "category": "fixed",
+          "text": "A region named after a person keeps that name capitalized when the side is added (\"Right nucleus basalis of Meynert\")",
+          "commits": [
+            "3593ff3"
+          ]
         }
       ]
     },
