@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.41.0",
+      "date": "2026-08-02",
+      "entries": [
+        {
+          "category": "data",
+          "text": "The nucleus basalis of Meynert joins the brain: the basal-forebrain nucleus that supplies the whole cortex with acetylcholine, with its six projections to the four lobes, the cingulate cortex and the amygdala",
+          "commits": [
+            "62c6f9e"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "An anticholinergic drug (scopolamine, an antipsychotic with muscarinic blockade) now has a cholinergic pathway to travel: until now it lit up cortical receptors with no acetylcholine supply drawn anywhere near them",
+          "commits": [
+            "62c6f9e"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.40.1",
       "date": "2026-07-29",
       "entries": [
