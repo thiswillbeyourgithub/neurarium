@@ -192,6 +192,19 @@ class MetaAndTranslationsTest(unittest.TestCase):
         meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
         self.assertIn("provenance_stats", meta)
 
+    def test_sided_name_keeps_a_proper_noun_capitalized(self):
+        """Prefixing "Right"/"Left" lowers only the base name's FIRST letter. It used
+        to lowercase the whole string, which ate a proper noun sitting mid-name
+        ("Nucleus basalis of Meynert" -> "Right nucleus basalis of meynert")."""
+        sys.path.insert(0, str(REPO_ROOT / "tools"))
+        from data_generators.i18n import _side_name
+        sided = _side_name({"en": "Nucleus basalis of Meynert",
+                            "fr": "Noyau basal de Meynert"}, "m", "R")
+        self.assertEqual(sided["en"], "Right nucleus basalis of Meynert")
+        # The ordinary common-noun case is unchanged.
+        self.assertEqual(_side_name({"en": "Putamen", "fr": "Putamen"}, "m", "L")["en"],
+                         "Left putamen")
+
     def test_metabolite_bindings_are_tallied_and_valid(self):
         """A non-modeled metabolite's receptor bindings are their own graded node kind
         (drug_metabolite_bindings), and each targets a real drug_target with a valid

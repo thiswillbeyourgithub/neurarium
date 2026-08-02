@@ -514,12 +514,16 @@ def externalize(obj):
 def _side_name(base: dict[str, str], gender: str, side: str) -> dict[str, str]:
     """Compose a per-hemisphere display name in both languages from a base name.
 
-    English prefixes ``Right``/``Left`` to the lowercased base; French suffixes
-    the agreed ``droit``/``gauche`` form (see :data:`_FR_RIGHT` / :data:`_FR_LEFT`).
+    English prefixes ``Right``/``Left`` to the base with only its FIRST letter
+    lowered (not the whole string, which would eat a proper noun mid-name:
+    "Nucleus basalis of Meynert" -> "Right nucleus basalis of meynert"); French
+    suffixes the agreed ``droit``/``gauche`` form (see :data:`_FR_RIGHT` /
+    :data:`_FR_LEFT`).
     """
     word = "Right" if side == "R" else "Left"
     fr_word = (_FR_RIGHT if side == "R" else _FR_LEFT)[gender]
+    en = base["en"]
     return {
-        "en": f"{word} {base['en'].lower()}",
+        "en": f"{word} {en[:1].lower()}{en[1:]}",
         "fr": f"{base['fr']} {fr_word}",
     }
