@@ -120,6 +120,13 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # of Meynert in the basal forebrain group and has it projecting "throughout the
     # cerebral cortex, hippocampus, and amygdala", backing all six NBM targets
     # (the four lobes + cingulate cortex + amygdala).
+    # The sentence immediately before the one _KQ_CHOLINERGIC_BASAL quotes: same
+    # figure legend, the other half of the cholinergic map.
+    ("pons", "thalamus_R"): _kandel(1047,
+        "Those in the pons and midbrain (mesopontine groups) are divided into a "
+        "ventrolateral cluster (pedunculopontine nucleus) and the dorsomedial "
+        "cluster (laterodorsal tegmental nucleus). The mesopontine cholinergic "
+        "neurons project to the brain stem reticular formation and the thalamus."),
     ("nucleus_basalis_R", "frontal_R"): _KQ_CHOLINERGIC_BASAL,
     ("nucleus_basalis_R", "parietal_R"): _KQ_CHOLINERGIC_BASAL,
     ("nucleus_basalis_R", "temporal_R"): _KQ_CHOLINERGIC_BASAL,

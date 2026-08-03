@@ -413,6 +413,18 @@ PROJECTIONS: list[dict[str, Any]] = [
     #     PROJECTION_QUOTES) backs all six targets ("throughout the cerebral
     #     cortex, hippocampus, and amygdala"); the hippocampus is left to the
     #     septohippocampal arrow rather than drawn twice. ---
+    # --- The OTHER cholinergic source Kandel names on the same page: the
+    #     mesopontine groups (pedunculopontine + laterodorsal tegmental nuclei),
+    #     which sit inside the already-modeled pons and are the thalamus's
+    #     acetylcholine supply. Cutting them out as their own nuclei is not yet
+    #     demand-justified (the brainstem is deliberately coarse), so the arrow
+    #     leaves the pons itself. ---
+    dict(**{"from": "pons", "to": "thalamus_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Mesopontine cholinergic (thalamic)",
+         description="Pedunculopontine and laterodorsal tegmental cholinergic "
+                     "neurons in the pons innervate the thalamus, gating what it "
+                     "relays to the cortex across the sleep-wake cycle."),
     dict(**{"from": "nucleus_basalis_R", "to": "frontal_R"},
          kind="cholinergic", neurotransmitter="Acetylcholine",
          label="Basal forebrain cholinergic (frontal)",

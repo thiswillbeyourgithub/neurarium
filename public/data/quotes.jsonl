@@ -1595,6 +1595,7 @@
 {"id": "q_7f3d02f575bc", "corpus": "allen_ahba", "page": "SLC6A3", "quote": "SLC6A3 detected in caudate: probe 1051520 PACall present in 80/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_7f5949da4c7b", "corpus": "stahl", "page": 551, "quote": "Hypothetically acts as an inhibitor of the dopamine transporter", "llm": "sonnet", "heading": ["Modafinil", "Therapeutics", "How the Drug Works"]}
 {"id": "q_7f643b001190", "corpus": "allen_ahba", "page": "SLC18A2", "quote": "SLC18A2 detected in vta: probe 1051381 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_7f7e97e86e13", "corpus": "kandel", "page": 1047, "quote": "Those in the pons and midbrain (mesopontine groups) are divided into a ventrolateral cluster (pedunculopontine nucleus) and the dorsomedial cluster (laterodorsal tegmental nucleus). The mesopontine cholinergic neurons project to the brain stem reticular formation and the thalamus."}
 {"id": "q_7f95a0a85cc3", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Xydep"}
 {"id": "q_7fa4490dc790", "corpus": "stahl", "page": 450, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet", "heading": ["Lofepramine", "Side effects", "How Drug Causes Side Effects"]}
 {"id": "q_7fb74fb56a31", "corpus": "stahl", "page": 860, "quote": "Half-life approximately 2.5 days", "heading": ["Triiodothyronine", "Dosing and use", "Pharmacokinetics"]}

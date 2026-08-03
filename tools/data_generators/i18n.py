@@ -192,6 +192,8 @@ FR: dict[str, str] = {
         "Histaminergique ascendante (hypothalamique)",
     "Ascending histaminergic (basal forebrain)":
         "Histaminergique ascendante (prosencéphale basal)",
+    "Mesopontine cholinergic (thalamic)":
+        "Cholinergique mésopontine (thalamique)",
     "Basal forebrain cholinergic (frontal)":
         "Cholinergique du prosencéphale basal (frontale)",
     "Basal forebrain cholinergic (parietal)":
@@ -301,6 +303,12 @@ FR: dict[str, str] = {
     "cortical activation.":
         "L'histamine tubéromammillaire projette vers le prosencéphale basal, "
         "renforçant l'activation corticale.",
+    "Pedunculopontine and laterodorsal tegmental cholinergic neurons in the "
+    "pons innervate the thalamus, gating what it relays to the cortex across "
+    "the sleep-wake cycle.":
+        "Les neurones cholinergiques pédonculopontins et tegmentaux "
+        "latérodorsaux du pont innervent le thalamus, filtrant ce qu'il relaie "
+        "vers le cortex au fil du cycle veille-sommeil.",
     "Nucleus basalis cholinergic neurons innervate the frontal cortex, "
     "sustaining attention and cortical activation.":
         "Les neurones cholinergiques du noyau basal innervent le cortex frontal, "
