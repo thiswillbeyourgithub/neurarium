@@ -1,6 +1,49 @@
 {
   "versions": [
     {
+      "version": "3.42.0",
+      "date": "2026-08-03",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Serotonin and noradrenaline now reach where their receptors are: fifteen new pathways take the raphe nuclei to the thalamus, three more lobes, the cingulate cortex, the striatum and the substantia nigra, and the locus coeruleus to three more lobes, the cingulate cortex, the hypothalamus and the cerebellum",
+          "commits": [
+            "da9e49f"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Focusing an antidepressant now shows a real serotonergic fan across the brain instead of four lonely arrows",
+          "commits": [
+            "da9e49f"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The thalamus gets its acetylcholine supply: the mesopontine cholinergic neurons of the pons, the other half of the brain's cholinergic map",
+          "commits": [
+            "640d84a"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The pineal gland joins the brain, along with melatonin as a system of its own: the MT1 and MT2 receptors finally have a source for the hormone they respond to. It is drawn as a hormonal route to the body clock, not as a nerve tract",
+          "commits": [
+            "c6d8bf6"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Every one of these claims is quote-checked against Kandel's Principles of Neural Science or the Nieuwenhuys atlas",
+          "commits": [
+            "da9e49f",
+            "640d84a",
+            "c6d8bf6"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.41.0",
       "date": "2026-08-02",
       "entries": [
