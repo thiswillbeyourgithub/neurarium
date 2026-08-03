@@ -148,8 +148,38 @@ FR: dict[str, str] = {
         "Noradrénergique ascendante (hippocampique)",
     "Ascending noradrenergic (amygdala)":
         "Noradrénergique ascendante (amygdale)",
+    "Ascending serotonergic (thalamic)":
+        "Sérotoninergique ascendante (thalamique)",
+    "Ascending serotonergic (parietal)":
+        "Sérotoninergique ascendante (pariétale)",
+    "Ascending serotonergic (temporal)":
+        "Sérotoninergique ascendante (temporale)",
+    "Ascending serotonergic (occipital)":
+        "Sérotoninergique ascendante (occipitale)",
+    "Ascending serotonergic (cingulate)":
+        "Sérotoninergique ascendante (cingulaire)",
+    "Ascending serotonergic (accumbens)":
+        "Sérotoninergique ascendante (accumbens)",
+    "Ascending serotonergic (caudate)":
+        "Sérotoninergique ascendante (noyau caudé)",
+    "Ascending serotonergic (putamen)":
+        "Sérotoninergique ascendante (putamen)",
+    "Ascending serotonergic (nigral)":
+        "Sérotoninergique ascendante (nigrale)",
     "Ascending noradrenergic (thalamic)":
         "Noradrénergique ascendante (thalamique)",
+    "Ascending noradrenergic (parietal)":
+        "Noradrénergique ascendante (pariétale)",
+    "Ascending noradrenergic (temporal)":
+        "Noradrénergique ascendante (temporale)",
+    "Ascending noradrenergic (occipital)":
+        "Noradrénergique ascendante (occipitale)",
+    "Ascending noradrenergic (cingulate)":
+        "Noradrénergique ascendante (cingulaire)",
+    "Ascending noradrenergic (hypothalamic)":
+        "Noradrénergique ascendante (hypothalamique)",
+    "Ascending noradrenergic (cerebellar)":
+        "Noradrénergique ascendante (cérébelleuse)",
     "Mesolimbic (VTA)": "Mésolimbique (ATV)",
     "Mesocortical": "Mésocorticale",
     "Mesolimbic (amygdala)": "Mésolimbique (amygdale)",
@@ -198,8 +228,50 @@ FR: dict[str, str] = {
     "memory.":
         "La noradrénaline du locus cœruleus renforce la mémoire émotionnelle "
         "dépendante de l'amygdale.",
+    "Raphe serotonin projects to the thalamus, colouring the sensory traffic it "
+    "relays to the cortex.":
+        "La sérotonine du raphé projette vers le thalamus, colorant le trafic "
+        "sensoriel qu'il relaie vers le cortex.",
+    "Raphe serotonin fibers reach the parietal cortex.":
+        "Les fibres sérotoninergiques du raphé atteignent le cortex pariétal.",
+    "Raphe serotonin fibers reach the temporal cortex.":
+        "Les fibres sérotoninergiques du raphé atteignent le cortex temporal.",
+    "Raphe serotonin fibers reach the occipital cortex.":
+        "Les fibres sérotoninergiques du raphé atteignent le cortex occipital.",
+    "Raphe serotonin innervates the cingulate cortex, part of the mood "
+    "circuitry an antidepressant acts on.":
+        "La sérotonine du raphé innerve le cortex cingulaire, l'un des circuits "
+        "de l'humeur sur lesquels agit un antidépresseur.",
+    "Dorsal raphe serotonin projects to the ventral striatum, damping reward "
+    "drive.":
+        "La sérotonine du raphé dorsal projette vers le striatum ventral, "
+        "atténuant la motivation liée à la récompense.",
+    "Dorsal raphe serotonin projects to the caudate nucleus.":
+        "La sérotonine du raphé dorsal projette vers le noyau caudé.",
+    "Dorsal raphe serotonin projects to the putamen.":
+        "La sérotonine du raphé dorsal projette vers le putamen.",
+    "Median raphe serotonin reaches the substantia nigra, restraining its "
+    "dopamine neurons.":
+        "La sérotonine du raphé médian atteint la substance noire, freinant ses "
+        "neurones dopaminergiques.",
     "Locus coeruleus noradrenaline projects to the thalamus.":
         "La noradrénaline du locus cœruleus projette vers le thalamus.",
+    "Locus coeruleus noradrenaline reaches the parietal cortex.":
+        "La noradrénaline du locus cœruleus atteint le cortex pariétal.",
+    "Locus coeruleus noradrenaline reaches the temporal cortex.":
+        "La noradrénaline du locus cœruleus atteint le cortex temporal.",
+    "Locus coeruleus noradrenaline reaches the occipital cortex.":
+        "La noradrénaline du locus cœruleus atteint le cortex occipital.",
+    "Locus coeruleus noradrenaline reaches the cingulate cortex.":
+        "La noradrénaline du locus cœruleus atteint le cortex cingulaire.",
+    "Locus coeruleus noradrenaline projects to the hypothalamus, coupling "
+    "arousal to autonomic and endocrine control.":
+        "La noradrénaline du locus cœruleus projette vers l'hypothalamus, "
+        "couplant l'éveil au contrôle autonome et endocrinien.",
+    "Locus coeruleus noradrenaline innervates the cerebellar cortex, setting "
+    "the gain of its circuitry.":
+        "La noradrénaline du locus cœruleus innerve le cortex cérébelleux, "
+        "réglant le gain de ses circuits.",
     "VTA dopamine projects to the nucleus accumbens, the core of the reward "
     "pathway.":
         "La dopamine de l'ATV projette vers le noyau accumbens, cœur du circuit "

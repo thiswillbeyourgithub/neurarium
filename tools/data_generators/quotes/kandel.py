@@ -22,6 +22,19 @@ from data_generators.connectivity import (
     _KQ_VTA_REWARD,
 )
 
+# Two sentences that each back a whole fan of ascending arrows, so they are
+# written once here rather than per endpoint. They are cited only by
+# PROJECTION_QUOTES (no CIRCUIT / PROJECTION_GROUP uses them), which is why they
+# live in this module and not in data_generators.connectivity.
+_KQ_RAPHE_FOREBRAIN = _kandel(1048,
+    "The B5–B7 neurons in the pons mainly provide serotonergic innervation of "
+    "the thalamus, hypothalamus, and cerebral cortex.")
+_NQ_RAPHE_STRIATUM = _nieuwenhuys(896,
+    "The main projections of the dorsal raphe nucleus are to the lateral "
+    "geniculate body, the striatum, the entorhinal cortex, the olfactory bulb "
+    "and the amygdala, and from the median raphe nucleus to the septum, basal "
+    "forebrain and hippocampus")
+
 # Verified quote-sources for pathways, keyed by RIGHT-side ``(from, to)``
 # endpoint pair (matching how PROJECTIONS defines each pathway once on the right).
 # Most are Kandel (the ``_kandel`` helper); a few connectivity claims Kandel does
@@ -179,10 +192,30 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("locus_coeruleus_R", "frontal_R"): _KQ_MONOAMINE_INNERV,
     ("locus_coeruleus_R", "thalamus_R"): _KQ_MONOAMINE_INNERV,
     ("locus_coeruleus_R", "hippocampus_R"): _KQ_MONOAMINE_LIMBIC,
+    ("locus_coeruleus_R", "parietal_R"): _KQ_MONOAMINE_INNERV,
+    ("locus_coeruleus_R", "temporal_R"): _KQ_MONOAMINE_INNERV,
+    ("locus_coeruleus_R", "occipital_R"): _KQ_MONOAMINE_INNERV,
+    ("locus_coeruleus_R", "cingulate_R"): _KQ_MONOAMINE_INNERV,
+    ("locus_coeruleus_R", "hypothalamus_R"): _KQ_MONOAMINE_INNERV,
+    # The cerebellum is outside every "forebrain" sentence, so it needs the atlas.
+    ("locus_coeruleus_R", "cerebellum"): _nieuwenhuys(900,
+        "The cerebellar noradrenergic innervation of the cerebellum and the "
+        "inferior olive stems from the locus coeruleus and the groups A5 and A7"),
     ("raphe", "frontal_R"): _KQ_MONOAMINE_INNERV,
     ("raphe", "hypothalamus_R"): _KQ_MONOAMINE_INNERV,
     ("raphe", "amygdala_R"): _KQ_MONOAMINE_LIMBIC,
     ("raphe", "hippocampus_R"): _KQ_MONOAMINE_LIMBIC,
+    ("raphe", "thalamus_R"): _KQ_RAPHE_FOREBRAIN,
+    ("raphe", "parietal_R"): _KQ_RAPHE_FOREBRAIN,
+    ("raphe", "temporal_R"): _KQ_RAPHE_FOREBRAIN,
+    ("raphe", "occipital_R"): _KQ_RAPHE_FOREBRAIN,
+    ("raphe", "cingulate_R"): _KQ_RAPHE_FOREBRAIN,
+    ("raphe", "accumbens_R"): _NQ_RAPHE_STRIATUM,
+    ("raphe", "caudate_R"): _NQ_RAPHE_STRIATUM,
+    ("raphe", "putamen_R"): _NQ_RAPHE_STRIATUM,
+    ("raphe", "substantia_nigra_R"): _nieuwenhuys(896,
+        "The median raphe nucleus connects with the interpeduncular nucleus, the "
+        "substantia nigra and the mamillary body."),
     ("septal_nuclei_R", "hippocampus_R"): _kandel(1048,
         "Rather, scientists refer to the cholinergic neurons by their location, eg, "
         "the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the "

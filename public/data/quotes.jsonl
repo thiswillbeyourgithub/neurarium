@@ -1366,6 +1366,7 @@
 {"id": "q_6b7157c55280", "corpus": "stahl", "page": 355, "quote": "Parent drug has 9–28 hour half-life", "heading": ["Fluvoxamine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_6b78e18a0721", "corpus": "wikipedia_pharm", "page": "escitalopram", "quote": "H 1 | 2,000"}
 {"id": "q_6b7d009dc80d", "corpus": "stahl", "page": 31, "quote": "Barhemsys", "heading": ["Amisulpride", "Therapeutics"]}
+{"id": "q_6b9491cce1b7", "corpus": "kandel", "page": 1048, "quote": "The B5–B7 neurons in the pons mainly provide serotonergic innervation of the thalamus, hypothalamus, and cerebral cortex."}
 {"id": "q_6b9683abec14", "corpus": "stahl", "page": 533, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission", "llm": "sonnet", "heading": ["Milnacipran", "Therapeutics", "How the Drug Works"]}
 {"id": "q_6bce7ac14073", "corpus": "stahl", "page": 153, "quote": "Dopamine 3 partial agonism could theoretically be useful for treating cognition, mood, emotions, and reward/substance use", "llm": "sonnet", "heading": ["Cariprazine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_6be863931dfa", "corpus": "stahl", "page": 297, "quote": "Lexapro", "heading": ["Escitalopram", "Therapeutics"]}
@@ -1862,6 +1863,7 @@
 {"id": "q_9712c8201631", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "5-HT 4L | 1,000 nM (rat)"}
 {"id": "q_9713d7bfa522", "corpus": "stahl", "page": 849, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet", "heading": ["Trifluoperazine", "Therapeutics", "Class"]}
 {"id": "q_974debd39c0b", "corpus": "stahl", "page": 905, "quote": "Mode 2: binds to G-protein-linked receptors (full agonist at serotonin 1A receptors; partial agonist at serotonin 1B receptors, antagonist at serotonin 1D and serotonin 7 receptors)", "llm": "sonnet", "heading": ["Vortioxetine", "Therapeutics", "How the Drug Works"]}
+{"id": "q_975add60c1b6", "corpus": "nieuwenhuys", "page": 896, "quote": "The median raphe nucleus connects with the interpeduncular nucleus, the substantia nigra and the mamillary body."}
 {"id": "q_976e36931dba", "corpus": "wikipedia_pharm", "page": "prochlorperazine", "quote": "5-HT 1A | 5,888 | Human"}
 {"id": "q_977ed6a1466d", "corpus": "allen_ahba", "page": "GLRA1", "quote": "GLRA1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1012904, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.89: medulla +2.22 (5d), pons +1.73 (5d), midbrain +0.73 (5d), cerebellum -0.03 (5d), hippocampus -0.49 (5d)", "species": "Human"}
 {"id": "q_9789e750e7c5", "corpus": "stahl", "page": 149, "quote": "Initial half-life 26–65 hours (35–40 hours for extended-release formulation); half-life 12–17 hours with repeated doses", "heading": ["Carbamazepine", "Dosing and use", "Pharmacokinetics"]}
@@ -2112,6 +2114,7 @@
 {"id": "q_a779d1bf4648", "corpus": "allen_ahba", "page": "SV2A", "quote": "SV2A detected in frontal: probe 1048051 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a77f256e0fc2", "corpus": "allen_ahba", "page": "SCN2A", "quote": "SCN2A detected in thalamus: probe 1022207 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a77f961ceae4", "corpus": "gtopdb_ki", "page": "haloperidol", "quote": "haloperidol at D5 receptor (DRD5, Human): Antagonist / Antagonist, pKi 6.3 [PMID 1826762]", "species": "Human"}
+{"id": "q_a7a551dce646", "corpus": "nieuwenhuys", "page": 896, "quote": "The main projections of the dorsal raphe nucleus are to the lateral geniculate body, the striatum, the entorhinal cortex, the olfactory bulb and the amygdala, and from the median raphe nucleus to the septum, basal forebrain and hippocampus"}
 {"id": "q_a7c538c18101", "corpus": "stahl", "page": 423, "quote": "Dayvigo", "heading": ["Lemborexant", "Safety and tolerability"]}
 {"id": "q_a7f8c2e4c655", "corpus": "allen_ahba", "page": "ADRB2", "quote": "ADRB2 detected in occipital: probe 1059348 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a7fe2216f26a", "corpus": "stahl", "page": 487, "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a potential mood stabilizer)", "llm": "sonnet", "heading": ["Lurasidone", "Therapeutics", "Class"]}
@@ -2290,6 +2293,7 @@
 {"id": "q_b5248b3b523f", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "D 4.4 | 14.9 | Antagonist"}
 {"id": "q_b534c4697357", "corpus": "stahl", "page": 130, "quote": "Metabolized by CYP3A4", "heading": ["Buprenorphine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_b56c4ffba9d7", "corpus": "wikipedia_fr", "page": "chlorpromazine", "quote": "Largactil"}
+{"id": "q_b587ef6e6f49", "corpus": "nieuwenhuys", "page": 900, "quote": "The cerebellar noradrenergic innervation of the cerebellum and the inferior olive stems from the locus coeruleus and the groups A5 and A7"}
 {"id": "q_b598ebb59be7", "corpus": "wikipedia_fr", "page": "ph_nobarbital", "quote": "Gardénal"}
 {"id": "q_b5b716d86bb8", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "5-HT 1A | 276 | Human"}
 {"id": "q_b5bd1bcc08a8", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "β 1 | 5000"}
