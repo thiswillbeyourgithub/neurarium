@@ -58,6 +58,15 @@ _KQ_CHOLINERGIC_BASAL = _kandel(1047,
     "nuclei of the vertical and horizontal limbs of the diagonal band, and the "
     "nucleus basalis of Meynert. These neurons project throughout the cerebral "
     "cortex, hippocampus, and amygdala.")
+# One sentence pair backing the whole melatonin story: that the pineal makes it,
+# and that the suprachiasmatic nucleus is where its receptors are. Cited by the
+# pineal structure, the pineal -> hypothalamus pathway and the melatonergic group.
+_KQ_MELATONIN = _kandel(1137,
+    "Melatonin is made by the pineal gland, and the suprachiasmatic neurons time "
+    "its release through communication with neurons in the paraventricular "
+    "nucleus of the hypothalamus that activate sympathetic innervation of the "
+    "pineal gland. Neurons in the suprachiasmatic nucleus contain melatonin "
+    "receptors, which reinforce circadian rhythms.")
 _KQ_MONOAMINE_LIMBIC = _kandel(1560,
     "Serotonergic and noradrenergic neurons in the pons and medulla project widely "
     "to highly diverse terminal fields in brain regions that include the "
@@ -413,6 +422,22 @@ PROJECTIONS: list[dict[str, Any]] = [
     #     PROJECTION_QUOTES) backs all six targets ("throughout the cerebral
     #     cortex, hippocampus, and amygdala"); the hippocampus is left to the
     #     septohippocampal arrow rather than drawn twice. ---
+    # --- Melatonin: the one modeled transmitter that travels as a HORMONE, not
+    #     along an axon. The pineal releases it into the CSF and the bloodstream
+    #     and it acts on MT1/MT2 in the suprachiasmatic nucleus, so this arrow is
+    #     a route, not a tract (the description says so). Drawn because without it
+    #     MT1/MT2 were the only receptors in the dataset with no source of their
+    #     transmitter anywhere. The return leg (suprachiasmatic -> paraventricular
+    #     -> spinal cord -> superior cervical ganglion -> pineal) is deliberately
+    #     NOT drawn: it leaves the brain, and a direct arrow would sell a
+    #     multi-synaptic peripheral loop as one hop. ---
+    dict(**{"from": "pineal", "to": "hypothalamus_R"},
+         kind="melatonergic", neurotransmitter="Melatonin",
+         label="Pineal melatonin (suprachiasmatic)",
+         description="Melatonin from the pineal gland reaches the MT1 and MT2 "
+                     "receptors of the suprachiasmatic nucleus, the body clock. "
+                     "A hormonal route through the CSF and the bloodstream, not "
+                     "an axonal tract."),
     # --- The OTHER cholinergic source Kandel names on the same page: the
     #     mesopontine groups (pedunculopontine + laterodorsal tegmental nuclei),
     #     which sit inside the already-modeled pons and are the thalamus's
@@ -711,6 +736,18 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "favorisent l'éveil et la vigilance dans le cortex et le "
                         "thalamus.",
          wikipedia="https://en.wikipedia.org/wiki/Histaminergic"),
+    dict(mode="kind", key="melatonergic", name="Melatonin",
+         sources=[_KQ_MELATONIN],
+         description="The pineal gland releases melatonin into the CSF and the "
+                     "bloodstream at night; it acts on MT1 and MT2 receptors in "
+                     "the suprachiasmatic nucleus to time the body clock. A "
+                     "hormonal route rather than an axonal pathway.",
+         description_fr="La glande pinéale libère la mélatonine dans le liquide "
+                        "céphalo-rachidien et le sang pendant la nuit ; elle agit "
+                        "sur les récepteurs MT1 et MT2 du noyau suprachiasmatique "
+                        "pour régler l'horloge biologique. Une voie hormonale "
+                        "plutôt qu'un faisceau axonal.",
+         wikipedia="https://en.wikipedia.org/wiki/Melatonin"),
     # --- per-sign (mode="sign"); name = the SIGN_LABELS heading ------------------
     dict(mode="sign", key="excitatory", name="Excitatory",
          sources=[_SG_GLUTAMATE],

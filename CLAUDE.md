@@ -553,8 +553,9 @@ fixed Stahl list.
   beads **continuously** end-to-end along each arc (a curated circuit keeps its sequential BFS volley; a drug
   focus, signalled by a passed `flowSystems`, streams so the relative density + speed read), recolouring/scaling
   per arrow off `rel` (boost = warm/bright/fast/dense, damp = cool/dim/slow/sparse). The system map is data: `system_flow_kinds`
-  (target `system` -> projection `kind`, the diffuse ascending systems with a modeled source nucleus;
-  glutamate/GABA left out). `focusDrug` filters arrows (`flowArrowsOf`), pins + `circuitAnim.play()`s
+  (target `system` -> projection `kind`, the diffuse systems with a modeled source; glutamate/GABA
+  left out, and `melatonergic` is mapped for the group panel though its MT1/MT2 are postsynaptic so no
+  drug ever rides it). `focusDrug` filters arrows (`flowArrowsOf`), pins + `circuitAnim.play()`s
   them; a purely postsynaptic drug sets no tone -> dots + wash only. **Caveat:** a D2-antagonist
   antipsychotic reads dopaminergic-**up** (blocking the D2 *autoreceptor* disinhibits release); its
   postsynaptic blockade shows in the block-coloured dots. (This is why the dataset carries the ascending

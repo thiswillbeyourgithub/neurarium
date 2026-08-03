@@ -13,6 +13,7 @@ from data_generators.connectivity import (
     _KQ_CORTICOPONTINE,
     _KQ_CORTICOSTRIATAL,
     _KQ_CHOLINERGIC_BASAL,
+    _KQ_MELATONIN,
     _KQ_MONOAMINE_INNERV,
     _KQ_MONOAMINE_LIMBIC,
     _KQ_NIGROSTRIATAL,
@@ -120,6 +121,7 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # of Meynert in the basal forebrain group and has it projecting "throughout the
     # cerebral cortex, hippocampus, and amygdala", backing all six NBM targets
     # (the four lobes + cingulate cortex + amygdala).
+    ("pineal", "hypothalamus_R"): _KQ_MELATONIN,
     # The sentence immediately before the one _KQ_CHOLINERGIC_BASAL quotes: same
     # figure legend, the other half of the cholinergic map.
     ("pons", "thalamus_R"): _kandel(1047,
@@ -363,6 +365,7 @@ STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
         "The sensory cortex then projects to both the cingulate cortex and the "
         "hippocampus, which in turn makes connections with the mammillary bodies "
         "of the hypothalamus, thus completing the loop"),
+    "pineal": _KQ_MELATONIN,
     "pituitary": _kandel(1058,
         'The neuroendocrine system works differently, by secreting several '
         'peptide hormones from the pituitary, the "master gland," located just '

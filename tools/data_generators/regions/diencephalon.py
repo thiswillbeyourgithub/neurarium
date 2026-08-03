@@ -40,6 +40,17 @@ PAIRED: list[dict[str, Any]] = [
 ]
 
 MIDLINE: list[dict[str, Any]] = [
+    dict(base="pineal", name="Pineal gland", group="diencephalon", fr_gender="f",
+         pos=(0.0, 0.3, -1.3), color="#9d8fd4",
+         scale=0.7,  # anatomical: pea-sized, ~8mm (so a bit larger than a
+                     # mammillary body, which is modeled at 0.55)
+         # The brain's melatonin source, added so the MT1/MT2 receptors have a
+         # supply instead of floating with no origin anywhere in the model. Sits
+         # on the midline behind and just above the thalamus, on the posterior
+         # wall of the third ventricle. Unpaired, so no mirror; a small smooth
+         # blob, blue-violet for the night hormone. Position/size are an
+         # anatomical guess: tune in a browser. Provenance: llm.
+         radii=(0.20, 0.18, 0.23), seed=91, detail=4, noise=0.04),
     dict(base="pituitary", name="Pituitary gland", group="diencephalon",
          pos=(0.0, -1.0, 0.35), color="#d2a06e",
          scale=(0.9, 0.5, 0.7),  # anatomical: ~10x9x6mm (bean-sized)

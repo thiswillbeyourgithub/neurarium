@@ -100,6 +100,7 @@
 {"id": "q_08f925bc33a1", "corpus": "stahl", "page": 723, "quote": "Metabolized by CYP3A4", "heading": ["Reboxetine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_0926a165c348", "corpus": "wikipedia_pharm", "page": "scopolamine", "quote": "Elimination half-life | 5 hours"}
 {"id": "q_0949ab3e60d4", "corpus": "gtopdb", "page": 215, "quote": "Prelimbic cortex.", "species": "Mouse", "llm": "sonnet"}
+{"id": "q_094e2a4a34cc", "corpus": "kandel", "page": 1137, "quote": "Melatonin is made by the pineal gland, and the suprachiasmatic neurons time its release through communication with neurons in the paraventricular nucleus of the hypothalamus that activate sympathetic innervation of the pineal gland. Neurons in the suprachiasmatic nucleus contain melatonin receptors, which reinforce circadian rhythms."}
 {"id": "q_0970d2ad7b02", "corpus": "stahl", "page": 925, "quote": "Short elimination half-life (approximately 2.5 hours)", "heading": ["Zolpidem", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_099ae4da974e", "corpus": "stahl", "page": 247, "quote": "Bupropion also blocks reuptake of both norepinephrine and dopamine", "llm": "sonnet", "heading": ["Dextromethorphan–Bupropion", "Therapeutics", "How the Drug Works"]}
 {"id": "q_09a298a8cc93", "corpus": "allen_ahba", "page": "HTR6", "quote": "HTR6 detected in accumbens: probe 1055247 PACall present in 9/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}

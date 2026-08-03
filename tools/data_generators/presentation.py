@@ -26,6 +26,7 @@ PROJECTION_COLORS: dict[str, str] = {
     "serotonergic": "#76b7b2",
     "noradrenergic": "#ff9da7",
     "histaminergic": "#f0912e",  # warm orange: the tuberomammillary histamine fan
+    "melatonergic": "#8d7be0",  # indigo: the night hormone, from the pineal gland
 }
 
 # The viewer offers two arrow colour modes (a toggle in the panel):
@@ -48,6 +49,7 @@ KIND_TO_SIGN: dict[str, str] = {
     "serotonergic": "modulatory",
     "noradrenergic": "modulatory",
     "histaminergic": "modulatory",
+    "melatonergic": "modulatory",
 }
 SIGN_COLORS: dict[str, str] = {
     "excitatory": "#e15759",  # red, same as the excitatory kind
@@ -67,9 +69,10 @@ SIGN_LABELS: dict[str, str] = {
 # lights flowing beads along the projections of its target transmitter *system*.
 # This maps a drug target's ``system`` (the neurotransmitter family: a DRUG_TARGETS
 # ``system`` or a receptor ``family``) to the projection ``kind`` that carries it,
-# but *only* for the diffuse ascending modulatory systems with a source nucleus
-# modeled (serotonin / raphe, noradrenaline / locus coeruleus, dopamine /
-# VTA + substantia nigra, acetylcholine / septum, histamine / tuberomammillary).
+# but *only* for the diffuse modulatory systems with a source modeled (serotonin /
+# raphe, noradrenaline / locus coeruleus, dopamine / VTA + substantia nigra,
+# acetylcholine / septum + nucleus basalis + pons, histamine / tuberomammillary,
+# melatonin / pineal).
 # Fast point-to-point systems (glutamatergic / gabaergic) are absent on
 # purpose: mapping them would flood the view with every excitatory/inhibitory arrow
 # instead of a drug-specific fan. A drug whose systems aren't here gets no flow,
@@ -80,6 +83,11 @@ SYSTEM_FLOW_KINDS: dict[str, str] = {
     "dopaminergic": "dopaminergic",
     "cholinergic": "cholinergic",
     "histaminergic": "histaminergic",
+    # Melatonin is the odd one: the route is hormonal, not axonal, and MT1/MT2 are
+    # postsynaptic, so a melatonin agonist still sets no tone and rides no beads.
+    # Mapped anyway so the group panel exists and the innervation check can see
+    # that the system now has a source.
+    "melatonergic": "melatonergic",
 }
 
 # Structure ``group`` -> legend heading, in legend display order (object key
@@ -163,6 +171,7 @@ WIKIPEDIA: dict[str, str] = {
     "septal_nuclei": "https://en.wikipedia.org/wiki/Septal_area",
     "hypothalamus": "https://en.wikipedia.org/wiki/Hypothalamus",
     "mammillary": "https://en.wikipedia.org/wiki/Mammillary_body",
+    "pineal": "https://en.wikipedia.org/wiki/Pineal_gland",
     "pituitary": "https://en.wikipedia.org/wiki/Pituitary_gland",
     "cerebellum": "https://en.wikipedia.org/wiki/Cerebellum",
     "midbrain": "https://en.wikipedia.org/wiki/Midbrain",

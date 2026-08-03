@@ -73,6 +73,7 @@ FR: dict[str, str] = {
     "Septal nuclei": "Noyaux septaux",
     "Hypothalamus": "Hypothalamus",
     "Mammillary bodies": "Corps mammillaires",
+    "Pineal gland": "Glande pinéale",
     "Pituitary gland": "Hypophyse",
     "Cerebellum": "Cervelet",
     "Midbrain": "Mésencéphale",
@@ -194,6 +195,8 @@ FR: dict[str, str] = {
         "Histaminergique ascendante (prosencéphale basal)",
     "Mesopontine cholinergic (thalamic)":
         "Cholinergique mésopontine (thalamique)",
+    "Pineal melatonin (suprachiasmatic)":
+        "Mélatonine pinéale (suprachiasmatique)",
     "Basal forebrain cholinergic (frontal)":
         "Cholinergique du prosencéphale basal (frontale)",
     "Basal forebrain cholinergic (parietal)":
@@ -303,6 +306,12 @@ FR: dict[str, str] = {
     "cortical activation.":
         "L'histamine tubéromammillaire projette vers le prosencéphale basal, "
         "renforçant l'activation corticale.",
+    "Melatonin from the pineal gland reaches the MT1 and MT2 receptors of the "
+    "suprachiasmatic nucleus, the body clock. A hormonal route through the CSF "
+    "and the bloodstream, not an axonal tract.":
+        "La mélatonine de la glande pinéale atteint les récepteurs MT1 et MT2 du "
+        "noyau suprachiasmatique, l'horloge biologique. Une voie hormonale par le "
+        "liquide céphalo-rachidien et le sang, non un faisceau axonal.",
     "Pedunculopontine and laterodorsal tegmental cholinergic neurons in the "
     "pons innervate the thalamus, gating what it relays to the cortex across "
     "the sleep-wake cycle.":
