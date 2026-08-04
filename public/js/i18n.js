@@ -97,7 +97,7 @@
       "shortcuts.tabs": "Switch between tabs",
       "shortcuts.close": "Close search / collapse sections",
 
-      "tour.start": "See the tutorial",
+      "tour.start": "Start the tutorial",
       "tour.next": "Next",
       "tour.back": "Back",
       "tour.done": "Done",
@@ -395,14 +395,9 @@
         "drug molecules travelling through the brain. Everything below is derived from " +
         "the drug's binding data, so it changes as that data does.",
       "about.animList":
-        "<li><b>Dimmed brain, a few regions left bright: what you focused on touches " +
-        "these.</b> Selecting a drug, a receptor, a pathway or a circuit dims " +
-        "everything it does not involve, so the shape of its reach is what you see " +
-        "first. Click the same row again, or press Escape, to bring the whole brain " +
-        "back.</li>" +
-        "<li><b>Coloured gem dots: a receptor this drug binds is expressed here.</b> " +
-        "The dots are scattered over the surface of every region that expresses that " +
-        "target, and their colour is what the drug does to it:" +
+        "<li><b>Coloured gem dots on the surface of a brain structure: a receptor this " +
+        "drug binds is expressed there.</b> The dots are scattered over every region " +
+        "that expresses that target, and their colour is what the drug does to it:" +
         "<ul>" +
         "<li>green = boosts it (agonist, reuptake blocker, releaser)</li>" +
         "<li>red = blocks it (antagonist, inverse agonist, blocker)</li>" +
@@ -412,10 +407,6 @@
         "target reads louder than a side one. Focusing a receptor on its own uses the " +
         "same dots without the colour coding: there, they only say <em>expressed " +
         "here</em>.</li>" +
-        "<li><b>A glow washing over a whole region: the same thing, read at a " +
-        "glance.</b> One wash per region and per effect, in the same green / red / " +
-        "violet, so a region carrying twenty of the drug's targets glows once rather " +
-        "than twenty times over.</li>" +
         "<li><b>Beads streaming along an arrow: the drug shifts that whole system's " +
         "tone.</b> Only <em>tone-setting</em> bindings do this (reuptake blockers, " +
         "enzyme inhibitors, vesicle blockers, presynaptic autoreceptors); a purely " +
@@ -435,15 +426,16 @@
         "lighting once the one feeding it has arrived, with a wash of light where each " +
         "bead lands. A drug focus streams continuously instead, because a drug does not " +
         "fire a circuit, it changes a background level.</li>" +
+        "<li><b>A glow washing over a whole region: the same dots, read at a " +
+        "glance.</b> One wash per region and per effect, in the same green / red / " +
+        "violet, so a region carrying twenty of the drug's targets glows once rather " +
+        "than twenty times over.</li>" +
         "<li><b>A pale rim around one structure: that is the one you selected.</b> " +
         "Hovering shows its name; clicking pins it and opens its panel.</li>" +
         "<li><b>A dotted arrow instead of a solid one: that pathway is tentative.</b> " +
         "The connection is proposed rather than well established, and its source grade " +
-        "in the panel says how well it is backed.</li>" +
-        "<li><b>Nothing moving at all: not every panel has anatomy to show.</b> The " +
-        "metabolism and drug-interaction sections are pharmacokinetics, which happens " +
-        "in the liver, so they never light anything in the 3D scene.</li>",
-      "about.dataSummary": "The data is yours to reuse",
+        "in the panel says how well it is backed.</li>",
+      "about.dataSummary": "Click to access the structured data",
       "about.dataIntro":
         "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +
         "free to reuse. Each file below is served directly from this site (one JSON " +
@@ -457,7 +449,7 @@
       "about.issues":
         "Found a bug, an inaccuracy, or have a feature request? Please " +
         '<a id="about-issues" target="_blank" rel="noopener noreferrer">open an ' +
-        "issue</a>.",
+        "issue on GitHub</a>.",
       "about.sourceCode": "Source code",
       "about.license":
         'Licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +
@@ -604,7 +596,7 @@
       "shortcuts.tabs": "Naviguer entre les onglets",
       "shortcuts.close": "Fermer la recherche / replier les sections",
 
-      "tour.start": "Voir le tutoriel",
+      "tour.start": "Démarrer le tutoriel",
       "tour.next": "Suivant",
       "tour.back": "Précédent",
       "tour.done": "Terminer",
@@ -906,14 +898,10 @@
         "image littérale de molécules circulant dans le cerveau. Tout ce qui suit est " +
         "dérivé des données de liaison du médicament, et évolue donc avec elles.",
       "about.animList":
-        "<li><b>Cerveau assombri, quelques régions restées vives : ce que vous avez " +
-        "sélectionné les touche.</b> Choisir un médicament, un récepteur, une voie ou un " +
-        "circuit assombrit tout ce qui n’y participe pas, pour que la forme de sa portée " +
-        "saute aux yeux. Recliquez la même ligne, ou appuyez sur Échap, pour retrouver " +
-        "le cerveau entier.</li>" +
-        "<li><b>Billes-gemmes colorées : un récepteur lié par ce médicament est exprimé " +
-        "ici.</b> Les billes sont dispersées sur la surface de chaque région qui exprime " +
-        "cette cible, et leur couleur dit ce que le médicament lui fait :" +
+        "<li><b>Billes-gemmes colorées à la surface d’une structure cérébrale : un " +
+        "récepteur lié par ce médicament y est exprimé.</b> Les billes sont dispersées " +
+        "sur chaque région qui exprime cette cible, et leur couleur dit ce que le " +
+        "médicament lui fait :" +
         "<ul>" +
         "<li>vert = il la renforce (agoniste, inhibiteur de recapture, libérateur)</li>" +
         "<li>rouge = il la bloque (antagoniste, agoniste inverse, bloqueur)</li>" +
@@ -923,10 +911,6 @@
         "la cible principale d’un médicament ressort donc davantage qu’une cible " +
         "secondaire. Sélectionner un récepteur seul utilise les mêmes billes sans le code " +
         "couleur : elles disent alors seulement <em>exprimé ici</em>.</li>" +
-        "<li><b>Une lueur qui baigne toute une région : la même chose, d’un coup " +
-        "d’œil.</b> Une lueur par région et par effet, dans les mêmes vert / rouge / " +
-        "violet, pour qu’une région portant vingt cibles du médicament brille une fois " +
-        "et non vingt.</li>" +
         "<li><b>Des billes qui filent le long d’une flèche : le médicament déplace le " +
         "tonus de tout un système.</b> Seules les liaisons qui <em>règlent le tonus</em> " +
         "le font (inhibiteurs de recapture, inhibiteurs d’enzyme, bloqueurs vésiculaires, " +
@@ -948,16 +932,17 @@
         "l’alimente, avec une onde de lumière là où chaque bille arrive. Une sélection de " +
         "médicament produit un flux continu : un médicament ne déclenche pas un circuit, " +
         "il change un niveau de fond.</li>" +
+        "<li><b>Une lueur qui baigne toute une région : les mêmes billes, d’un coup " +
+        "d’œil.</b> Une lueur par région et par effet, dans les mêmes vert / rouge / " +
+        "violet, pour qu’une région portant vingt cibles du médicament brille une fois " +
+        "et non vingt.</li>" +
         "<li><b>Un liseré pâle autour d’une structure : c’est celle que vous avez " +
         "sélectionnée.</b> Le survol affiche son nom ; le clic l’épingle et ouvre sa " +
         "fiche.</li>" +
         "<li><b>Une flèche en pointillés plutôt que pleine : cette voie est " +
         "hypothétique.</b> La connexion est proposée plutôt que bien établie, et sa note " +
-        "de source dans la fiche dit à quel point elle est étayée.</li>" +
-        "<li><b>Rien ne bouge : toutes les fiches n’ont pas d’anatomie à montrer.</b> Les " +
-        "sections métabolisme et interactions relèvent de la pharmacocinétique, qui se " +
-        "joue dans le foie : elles n’allument donc jamais rien dans la scène 3D.</li>",
-      "about.dataSummary": "Les données sont libres de réutilisation",
+        "de source dans la fiche dit à quel point elle est étayée.</li>",
+      "about.dataSummary": "Cliquez pour accéder aux données structurées",
       "about.dataIntro":
         "L’ensemble des données est du simple JSONL / JSON, séparé du rendu et libre de " +
         "réutilisation. Chaque fichier ci-dessous est servi directement depuis ce site " +
@@ -972,7 +957,7 @@
       "about.issues":
         "Vous avez repéré un bug, une inexactitude ou une idée de fonctionnalité ? " +
         'Merci d’<a id="about-issues" target="_blank" rel="noopener noreferrer">ouvrir ' +
-        "un ticket</a>.",
+        "un ticket sur GitHub</a>.",
       "about.sourceCode": "Code source",
       "about.license":
         'Sous licence <a href="https://www.gnu.org/licenses/agpl-3.0.html" ' +

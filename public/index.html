@@ -2728,6 +2728,13 @@
         <p class="about-text" data-i18n-html="about.p1"></p>
         <p class="about-text" data-i18n-html="about.p2"></p>
         <p class="about-text" data-i18n-html="about.p3"></p>
+        <!-- Replay the guided tour (js/tour.js). Auto-runs once on a first visit;
+             this button re-runs it. Wired in js/main.js (closes this popup first).
+             Above the animation caveat on purpose: a reader who has not seen the
+             tour wants the offer before a limitation of one feature. -->
+        <p class="about-text">
+          <button type="button" id="about-tour" class="about-tour-btn" data-i18n="tour.start"></button>
+        </p>
         <!-- What the animations mean. The caveat stays outside the dropdown (a
              limitation nobody opens is a limitation nobody reads); the legend
              itself is collapsed, one bullet per visual aspect, so the popup is
@@ -2738,11 +2745,6 @@
           <p class="about-text" data-i18n-html="about.animIntro"></p>
           <ul class="about-anim-list" data-i18n-html="about.animList"></ul>
         </details>
-        <!-- Replay the guided tour (js/tour.js). Auto-runs once on a first visit;
-             this button re-runs it. Wired in js/main.js (closes this popup first). -->
-        <p class="about-text">
-          <button type="button" id="about-tour" class="about-tour-btn" data-i18n="tour.start"></button>
-        </p>
         <!-- Data access: the whole dataset is plain JSONL/JSON served same-origin
              under /data/, free to reuse. A collapsed dropdown links each file
              directly (relative to this site, so it always resolves and downloads
