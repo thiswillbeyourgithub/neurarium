@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.43.0",
+      "date": "2026-08-04",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Histamine now reaches every region that carries a histamine receptor: fourteen new pathways take the tuberomammillary nucleus to three more lobes, the cingulate cortex, the hippocampus, the amygdala, the striatum, the olfactory bulb, the brainstem and the cerebellum",
+          "commits": [
+            "59c92e8"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "A sedating antihistamine (diphenhydramine, mirtazapine, quetiapine and every drowsy antipsychotic) now shows a real histaminergic fan instead of lighting receptors with no supply drawn near them",
+          "commits": [
+            "59c92e8"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Histamine is the first transmitter system in neurarium with complete coverage: every region that expresses it is reached",
+          "commits": [
+            "59c92e8"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.42.1",
       "date": "2026-08-04",
       "entries": [
