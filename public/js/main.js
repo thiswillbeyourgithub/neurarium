@@ -7157,7 +7157,7 @@ async function main() {
     `Loaded ${meshes.length} structures and ${arrows.length} projections.`,
   );
 
-  // ---- Guided tour ("Take a tour") ----------------------------------------------
+  // ---- Guided tour ("See the tutorial") ----------------------------------------------
   // A coach-mark walkthrough (js/tour.js) that shows the main features live: each
   // step's before() drives the real viewer (spread the brain, focus a circuit /
   // receptor / drug, open a section) rather than showing a static picture. It

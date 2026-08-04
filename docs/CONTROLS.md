@@ -122,7 +122,11 @@ through beats a nearer non-focused one.
   tally once loaded.
 - **Receptors & targets** (`#receptors`) / **Drugs** (`#drugs`) / **Metabolising enzymes**
   (`#enzymes`, `buildEnzymeLegend` -> `showEnzyme`): see their sections.
-- **About** (`#about-modal`, ⓘ, `wireAboutModal`): a blurb (Olivier Cornelis + Claude), an "open
+- **About** (`#about-modal`, ⓘ, `wireAboutModal`): a blurb (Olivier Cornelis + Claude), the
+  animation caveat + a collapsed **What the animations mean** dropdown (`about.animCaveat` /
+  `animSummary` / `animIntro` / `animList`: one `<li>` per visual aspect, each opening with a bold
+  "&lt;aspect&gt;: &lt;explainer&gt;"; the caveat stays *outside* the dropdown so a limitation is
+  never behind a click), a "See the tutorial" button (`#about-tour`), a data-reuse dropdown, an "open
   an issue" link (`cfg.sourceUrl + "/issues"`, dropped unless `sourceUrl` is repo-like), a Source
   code link, a licence line (AGPL-3.0), a CC BY-SA attribution line, and a Sources & provenance
   link (`#about-open-sourcing`). The tally is not here (own popup).

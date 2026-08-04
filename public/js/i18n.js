@@ -97,7 +97,7 @@
       "shortcuts.tabs": "Switch between tabs",
       "shortcuts.close": "Close search / collapse sections",
 
-      "tour.start": "Take a tour",
+      "tour.start": "See the tutorial",
       "tour.next": "Next",
       "tour.back": "Back",
       "tour.done": "Done",
@@ -384,18 +384,64 @@
         'and <a href="https://threejs.org/" target="_blank" ' +
         'rel="noopener noreferrer">three.js</a> (vendored, no build step), the ' +
         "anatomy stored as generated data files, served by Caddy.",
-      "about.animationModel":
-        "About the drug animation: it is a <em>tone-setter</em> model, not a literal " +
-        "picture of drug molecules. A drug's binding data drives it: postsynaptic " +
-        "receptors it hits show as coloured gem dots over the regions that express them " +
-        "(boost / block / modulate), while its <em>tone-setting</em> bindings (reuptake " +
-        "blockers, enzyme inhibitors, vesicle blockers, presynaptic autoreceptors) send " +
-        "beads streaming along the ascending pathways of the neurotransmitter systems " +
-        "they raise or lower. Density and speed are normalized per drug, so what you read " +
-        "is the <em>relative</em> activity across systems, not an absolute dose. " +
+      "about.animCaveat":
         "<strong>The drug animations are by far the least scientific part of neurarium " +
-        "and are still very much being worked out</strong>: treat them as an " +
-        "evolving illustration, not settled fact.",
+        "and are still very much being worked out</strong>: treat them as an evolving " +
+        "illustration, not settled fact.",
+      "about.animSummary": "What the animations mean",
+      "about.animIntro":
+        "The drug animation is a <em>tone-setter</em> model, not a literal picture of " +
+        "drug molecules travelling through the brain. Everything below is derived from " +
+        "the drug's binding data, so it changes as that data does.",
+      "about.animList":
+        "<li><b>Dimmed brain, a few regions left bright: what you focused on touches " +
+        "these.</b> Selecting a drug, a receptor, a pathway or a circuit dims " +
+        "everything it does not involve, so the shape of its reach is what you see " +
+        "first. Click the same row again, or press Escape, to bring the whole brain " +
+        "back.</li>" +
+        "<li><b>Coloured gem dots: a receptor this drug binds is expressed here.</b> " +
+        "The dots are scattered over the surface of every region that expresses that " +
+        "target, and their colour is what the drug does to it:" +
+        "<ul>" +
+        "<li>green = boosts it (agonist, reuptake blocker, releaser)</li>" +
+        "<li>red = blocks it (antagonist, inverse agonist, blocker)</li>" +
+        "<li>violet = modulates it (partial agonist, modulator)</li>" +
+        "</ul>" +
+        "Denser and brighter dots mean a stronger measured affinity, so a drug's main " +
+        "target reads louder than a side one. Focusing a receptor on its own uses the " +
+        "same dots without the colour coding: there, they only say <em>expressed " +
+        "here</em>.</li>" +
+        "<li><b>A glow washing over a whole region: the same thing, read at a " +
+        "glance.</b> One wash per region and per effect, in the same green / red / " +
+        "violet, so a region carrying twenty of the drug's targets glows once rather " +
+        "than twenty times over.</li>" +
+        "<li><b>Beads streaming along an arrow: the drug shifts that whole system's " +
+        "tone.</b> Only <em>tone-setting</em> bindings do this (reuptake blockers, " +
+        "enzyme inhibitors, vesicle blockers, presynaptic autoreceptors); a purely " +
+        "postsynaptic drug gets dots and glow only, and no beads at all. Which way it " +
+        "shifts shows in the beads:" +
+        "<ul>" +
+        "<li>warm, bright, fast and dense = raises that system's tone</li>" +
+        "<li>cool, dim, slow and sparse = lowers it</li>" +
+        "</ul>" +
+        "Speed and density are normalized <em>per drug</em>, so what you read is which " +
+        "of that drug's systems it engages most, never an absolute dose. Watch for the " +
+        "counter-intuitive case: an antipsychotic blocking the D2 <em>autoreceptor</em> " +
+        "reads as raising dopamine tone, while its blockade of the postsynaptic D2 " +
+        "receptors shows in the red dots.</li>" +
+        "<li><b>Beads firing in sequence rather than streaming: that is a circuit, not " +
+        "a drug.</b> Selecting a named circuit plays its signal in order, each leg " +
+        "lighting once the one feeding it has arrived, with a wash of light where each " +
+        "bead lands. A drug focus streams continuously instead, because a drug does not " +
+        "fire a circuit, it changes a background level.</li>" +
+        "<li><b>A pale rim around one structure: that is the one you selected.</b> " +
+        "Hovering shows its name; clicking pins it and opens its panel.</li>" +
+        "<li><b>A dotted arrow instead of a solid one: that pathway is tentative.</b> " +
+        "The connection is proposed rather than well established, and its source grade " +
+        "in the panel says how well it is backed.</li>" +
+        "<li><b>Nothing moving at all: not every panel has anatomy to show.</b> The " +
+        "metabolism and drug-interaction sections are pharmacokinetics, which happens " +
+        "in the liver, so they never light anything in the 3D scene.</li>",
       "about.dataSummary": "The data is yours to reuse",
       "about.dataIntro":
         "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +
@@ -557,7 +603,7 @@
       "shortcuts.tabs": "Naviguer entre les onglets",
       "shortcuts.close": "Fermer la recherche / replier les sections",
 
-      "tour.start": "Visite guidée",
+      "tour.start": "Voir le tutoriel",
       "tour.next": "Suivant",
       "tour.back": "Précédent",
       "tour.done": "Terminer",
@@ -847,21 +893,68 @@
         'rel="noopener noreferrer">three.js</a> (embarqué, sans étape de ' +
         "build), l’anatomie stockée dans des fichiers de données " +
         "générés, servis par Caddy.",
-      "about.animationModel":
-        "À propos de l’animation des médicaments : c’est un modèle de <em>réglage du " +
-        "tonus</em>, pas une image littérale des molécules. Ce sont les données de liaison " +
-        "du médicament qui la pilotent : les récepteurs postsynaptiques qu’il touche " +
-        "apparaissent en billes-gemmes colorées sur les régions qui les expriment " +
-        "(renforce / bloque / module), tandis que ses liaisons qui <em>règlent le tonus</em> " +
-        "(inhibiteurs de recapture, inhibiteurs d’enzyme, bloqueurs vésiculaires, " +
-        "autorécepteurs présynaptiques) envoient des billes le long des voies ascendantes " +
-        "des systèmes de neurotransmetteurs qu’il augmente ou diminue. La densité et la " +
-        "vitesse sont normalisées par médicament : ce que vous lisez est l’activité " +
-        "<em>relative</em> entre systèmes, pas une dose absolue. " +
+      "about.animCaveat":
         "<strong>Les animations de médicaments sont de loin l’aspect le moins " +
         "scientifique de neurarium et sont encore très largement en cours " +
         "d’élaboration</strong> : voyez-les comme une illustration évolutive, pas " +
         "comme un fait établi.",
+      "about.animSummary": "Ce que signifient les animations",
+      "about.animIntro":
+        "L’animation des médicaments est un modèle de <em>réglage du tonus</em>, pas une " +
+        "image littérale de molécules circulant dans le cerveau. Tout ce qui suit est " +
+        "dérivé des données de liaison du médicament, et évolue donc avec elles.",
+      "about.animList":
+        "<li><b>Cerveau assombri, quelques régions restées vives : ce que vous avez " +
+        "sélectionné les touche.</b> Choisir un médicament, un récepteur, une voie ou un " +
+        "circuit assombrit tout ce qui n’y participe pas, pour que la forme de sa portée " +
+        "saute aux yeux. Recliquez la même ligne, ou appuyez sur Échap, pour retrouver " +
+        "le cerveau entier.</li>" +
+        "<li><b>Billes-gemmes colorées : un récepteur lié par ce médicament est exprimé " +
+        "ici.</b> Les billes sont dispersées sur la surface de chaque région qui exprime " +
+        "cette cible, et leur couleur dit ce que le médicament lui fait :" +
+        "<ul>" +
+        "<li>vert = il la renforce (agoniste, inhibiteur de recapture, libérateur)</li>" +
+        "<li>rouge = il la bloque (antagoniste, agoniste inverse, bloqueur)</li>" +
+        "<li>violet = il la module (agoniste partiel, modulateur)</li>" +
+        "</ul>" +
+        "Des billes plus denses et plus vives signalent une affinité mesurée plus forte : " +
+        "la cible principale d’un médicament ressort donc davantage qu’une cible " +
+        "secondaire. Sélectionner un récepteur seul utilise les mêmes billes sans le code " +
+        "couleur : elles disent alors seulement <em>exprimé ici</em>.</li>" +
+        "<li><b>Une lueur qui baigne toute une région : la même chose, d’un coup " +
+        "d’œil.</b> Une lueur par région et par effet, dans les mêmes vert / rouge / " +
+        "violet, pour qu’une région portant vingt cibles du médicament brille une fois " +
+        "et non vingt.</li>" +
+        "<li><b>Des billes qui filent le long d’une flèche : le médicament déplace le " +
+        "tonus de tout un système.</b> Seules les liaisons qui <em>règlent le tonus</em> " +
+        "le font (inhibiteurs de recapture, inhibiteurs d’enzyme, bloqueurs vésiculaires, " +
+        "autorécepteurs présynaptiques) ; un médicament purement postsynaptique n’a que " +
+        "des billes et une lueur, et aucun flux. Le sens du déplacement se lit dans les " +
+        "billes :" +
+        "<ul>" +
+        "<li>chaudes, vives, rapides et denses = il augmente le tonus du système</li>" +
+        "<li>froides, ternes, lentes et clairsemées = il le diminue</li>" +
+        "</ul>" +
+        "Vitesse et densité sont normalisées <em>par médicament</em> : ce que vous lisez " +
+        "est lequel de ses systèmes il engage le plus, jamais une dose absolue. Guettez " +
+        "le cas contre-intuitif : un antipsychotique qui bloque l’<em>autorécepteur</em> " +
+        "D2 se lit comme une hausse du tonus dopaminergique, tandis que son blocage des " +
+        "récepteurs D2 postsynaptiques apparaît dans les billes rouges.</li>" +
+        "<li><b>Des billes qui s’allument en séquence plutôt qu’en flux : c’est un " +
+        "circuit, pas un médicament.</b> Sélectionner un circuit nommé joue son signal " +
+        "dans l’ordre, chaque tronçon s’allumant une fois atteint par celui qui " +
+        "l’alimente, avec une onde de lumière là où chaque bille arrive. Une sélection de " +
+        "médicament produit un flux continu : un médicament ne déclenche pas un circuit, " +
+        "il change un niveau de fond.</li>" +
+        "<li><b>Un liseré pâle autour d’une structure : c’est celle que vous avez " +
+        "sélectionnée.</b> Le survol affiche son nom ; le clic l’épingle et ouvre sa " +
+        "fiche.</li>" +
+        "<li><b>Une flèche en pointillés plutôt que pleine : cette voie est " +
+        "hypothétique.</b> La connexion est proposée plutôt que bien établie, et sa note " +
+        "de source dans la fiche dit à quel point elle est étayée.</li>" +
+        "<li><b>Rien ne bouge : toutes les fiches n’ont pas d’anatomie à montrer.</b> Les " +
+        "sections métabolisme et interactions relèvent de la pharmacocinétique, qui se " +
+        "joue dans le foie : elles n’allument donc jamais rien dans la scène 3D.</li>",
       "about.dataSummary": "Les données sont libres de réutilisation",
       "about.dataIntro":
         "L’ensemble des données est du simple JSONL / JSON, séparé du rendu et libre de " +

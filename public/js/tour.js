@@ -1,4 +1,4 @@
-// Guided "take a tour" coach-marks. A small, app-agnostic overlay engine: it
+// Guided "see the tutorial" coach-marks. A small, app-agnostic overlay engine: it
 // knows how to spotlight a DOM element (a dimmed backdrop with a cut-out ring)
 // or float a caption over the live scene, and how to step Back / Skip through an
 // ordered list. It knows NOTHING about the brain, three.js or the data: the

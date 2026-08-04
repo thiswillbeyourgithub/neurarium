@@ -251,7 +251,7 @@ Viewer (`public/`):
   `data-tour-id`, each panel section reached via its `data-tour-sec`),
   each step's `before()` setting the scene (spread, open/collapse a section, reset a prior demo).
   Auto-runs once on a first visit (after the intro settles), forced every load with `?tour=1`, and
-  replayed from the About popup's "Take a tour" button (`#about-tour`).
+  replayed from the About popup's "See the tutorial" button (`#about-tour`).
 - `js/changelog.js` — `createChangelog()`, the "What's new" popup (`#changelog-modal`). See
   Versioning / Changelog.
 - `js/main.js` — scene/camera/renderer/lights/OrbitControls; explode + transparency; the intro,

@@ -706,7 +706,7 @@
         border-radius: 6px;
       }
 
-      /* Guided tour ("Take a tour"): the coach-mark overlay driven by js/tour.js.
+      /* Guided tour ("See the tutorial"): the coach-mark overlay driven by js/tour.js.
          A dimmed page with a cut-out ring around the highlighted control (or an
          un-dimmed caption over a live brain demo) plus a Back/Next/Skip bubble.
          Sits above every panel (5), banner (50) and modal (60/80). */
@@ -870,7 +870,7 @@
         .tour-ring, .tour-bubble, .tour-veil, .tour-scroll-arrow { transition: none; }
         .tour-ring, .tour-ring.interactive, .tour-arrow-bob { animation: none; }
       }
-      /* "Take a tour" button in the #about-modal (replays the guided tour). */
+      /* "See the tutorial" button in the #about-modal (replays the guided tour). */
       .about-tour-btn {
         display: inline-flex;
         align-items: center;
@@ -1207,13 +1207,33 @@
         line-height: 1.6;
       }
       .about-data-list a { color: var(--accent-bright); text-decoration: underline; }
+      /* "What the animations mean" legend inside the same .about-data dropdown:
+         one bullet per visual aspect, each opening with a bold "<aspect>:
+         <one-line explainer>" then a sentence or two, so the popup reads as a key
+         you can scan instead of the paragraph it used to be. Nested <ul> for the
+         per-colour / per-direction sub-cases. */
+      .about-anim-list {
+        margin: 4px 0;
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .about-anim-list > li { margin: 8px 0; }
+      .about-anim-list ul { margin: 3px 0; padding-left: 16px; }
+      .about-anim-list ul li { margin: 2px 0; }
+      /* The lead-in of a bullet, in the panel's text colour so it separates from
+         the muted sentences that develop it. */
+      .about-anim-list b { color: var(--text); }
       /* "Sources & provenance" block (built by buildAboutSourcing) inside the
          #sourcing-modal popup. The grade key reuses the .src-pill / .src-prov-*
          swatches from the info panel so the legend matches the pills shown beside
          each source. */
       #about-sourcing .about-text { margin: 6px 0; }
-      /* "Sourced is not true" caveat: emphasized so it never reads as a footnote. */
-      #about-sourcing .about-caveat {
+      /* Emphasized caveat, so a limitation never reads as a footnote. Used by the
+         "sourced is not true" note in #sourcing-modal and by the drug-animation
+         warning in #about-modal. */
+      .about-caveat {
         margin: 10px 0;
         padding: 8px 10px;
         border-left: 3px solid var(--accent);
@@ -2708,9 +2728,16 @@
         <p class="about-text" data-i18n-html="about.p1"></p>
         <p class="about-text" data-i18n-html="about.p2"></p>
         <p class="about-text" data-i18n-html="about.p3"></p>
-        <!-- What the drug animation shows (the tone-setter flow model), so a
-             visitor isn't left guessing what the beads mean. -->
-        <p class="about-text" data-i18n-html="about.animationModel"></p>
+        <!-- What the animations mean. The caveat stays outside the dropdown (a
+             limitation nobody opens is a limitation nobody reads); the legend
+             itself is collapsed, one bullet per visual aspect, so the popup is
+             scannable instead of the paragraph it used to be. -->
+        <p class="about-text about-caveat" data-i18n-html="about.animCaveat"></p>
+        <details class="about-data">
+          <summary data-i18n="about.animSummary"></summary>
+          <p class="about-text" data-i18n-html="about.animIntro"></p>
+          <ul class="about-anim-list" data-i18n-html="about.animList"></ul>
+        </details>
         <!-- Replay the guided tour (js/tour.js). Auto-runs once on a first visit;
              this button re-runs it. Wired in js/main.js (closes this popup first). -->
         <p class="about-text">
