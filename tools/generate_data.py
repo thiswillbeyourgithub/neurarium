@@ -205,6 +205,7 @@ from data_generators.quotes import (  # noqa: E402
 )
 from data_generators.quotes.uncertainty import (  # noqa: E402
     apply_binding_uncertainty,
+    apply_projection_uncertainty,
 )
 
 # Every METABOLITE_ENZYME_QUOTES key consumed while building the drugs, so a key naming
@@ -1307,6 +1308,10 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
 
     for proj in PROJECTIONS:
         projections.extend(_projection_records(proj))
+    # The "uncertain" badges again, for the pathways a book states as one sweep ("project
+    # to virtually every part of the neuraxis") rather than target by target. A post-pass
+    # for the same reason: the flag counts the SIBLING arrows one sentence covers.
+    apply_projection_uncertainty(projections, structures)
     # Typo guard: every PROJECTION_QUOTES key must address a real PROJECTIONS entry,
     # else its quote silently sources nothing.
     unmatched = set(PROJECTION_QUOTES) - {(p["from"], p["to"]) for p in PROJECTIONS}

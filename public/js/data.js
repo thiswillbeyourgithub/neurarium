@@ -376,6 +376,11 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     p.description = localize(p.description);
     p.neurotransmitter = localize(p.neurotransmitter);
     p.provenance = strongestGrade(p.sources);
+    // Reasons the quote does not actually state THIS pathway (the orange "uncertain"
+    // badge a blanket sweep sentence earns, derived in quotes/uncertainty.py). Same
+    // bullet shape a drug binding carries; always an array so the panel can test
+    // `.length` without a guard. The bullets' sources stay raw, like `p.sources`.
+    p.uncertainty = p.uncertainty || [];
   }
 
   // Localize the structure + circuit display strings (the geometry/ids stay as
@@ -615,7 +620,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         ...(b.ki && b.ki.source ? [b.ki.source] : []),
       ]),
       // Reasons this claim's source does not attribute it (the orange "uncertain"
-      // badge, authored in tools/data_generators/quotes/uncertainty.py). Each bullet
+      // badge, derived in tools/data_generators/quotes/uncertainty.py). Each bullet
       // is a reason `kind` + slot `args` + its own source, or `absence` when the
       // point IS that the corpus never says it; the sentence itself is an i18n
       // string, so nothing here is prose. Empty for all but the flagged bindings.

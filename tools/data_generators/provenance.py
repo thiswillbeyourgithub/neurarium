@@ -907,7 +907,10 @@ def _provenance_stats(structures: list[dict[str, Any]],
             _seen_metab_bindings.add(key)
             metabolite_binding_grades.extend(_binding_grade(b)
                                              for b in m.get("bindings", []))
-    projection_grades = [_strongest_grade(p.get("sources")) for p in projections]
+    # (grade, is_uncertain) pairs, like the bindings above: a pathway the book states
+    # only as a blanket sweep buckets as ``uncertain`` however strong its quote is.
+    projection_grades = [(_strongest_grade(p.get("sources")), bool(p.get("uncertainty")))
+                         for p in projections]
     # Functional-circuit + projection-group nodes: each a "these structures / pathways
     # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
     # matching the viewer's NOSOURCE pill). All missing today (no circuit/group is

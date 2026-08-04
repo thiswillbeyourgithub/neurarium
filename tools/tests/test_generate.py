@@ -419,14 +419,14 @@ class UncertaintyTest(unittest.TestCase):
 
     def test_unknown_kind_raises(self):
         with self.assertRaises(KeyError):
-            self.mod._uncertainty_bullet("vibes", what="x", binding=self._binding(),
+            self.mod._uncertainty_bullet("vibes", what="x", node=self._binding(),
                                          source=self._source())
 
     def test_missing_slot_arg_raises(self):
         # class_wide takes {n}; without it the panel would print a literal "{n}".
         with self.assertRaises(ValueError):
             self.mod._uncertainty_bullet("class_wide", what="x",
-                                         binding=self._binding(),
+                                         node=self._binding(),
                                          source=self._source())
 
     def test_sourceless_non_absence_raises(self):
@@ -435,24 +435,24 @@ class UncertaintyTest(unittest.TestCase):
         while actually meaning the source was forgotten."""
         with self.assertRaises(ValueError):
             self.mod._uncertainty_bullet("measured_ki", what="x",
-                                         binding=self._binding(ki=False),
+                                         node=self._binding(ki=False),
                                          args={"ki": 1, "n": 1})
 
     def test_absence_bullet_carries_no_source(self):
         b = self.mod._uncertainty_bullet("not_a_mechanism", what="x",
-                                         binding=self._binding())
+                                         node=self._binding())
         self.assertTrue(b["absence"])
         self.assertNotIn("sources", b)
 
     def test_own_quote_bullet_cites_the_source_it_was_given(self):
         b = self.mod._uncertainty_bullet("side_effect_rule", what="x",
-                                         binding=self._binding(),
+                                         node=self._binding(),
                                          source=self._source(page=42))
         self.assertEqual(b["sources"][0]["page"], 42)
         # ... and no source at all is an error, not a silent blank
         with self.assertRaises(ValueError):
             self.mod._uncertainty_bullet("side_effect_rule", what="x",
-                                         binding=self._binding())
+                                         node=self._binding())
 
     def test_a_sentence_attributes_its_claim_three_ways(self):
         """Naming the drug, a pronoun subject, or Stahl's elided subject. Each of these
@@ -526,6 +526,79 @@ class UncertaintyTest(unittest.TestCase):
                     self.assertTrue(u.get("sources") or u.get("absence"),
                                     f"{d['id']} {b['target']} {u['kind']}")
         self.assertGreater(seen, 0, "no uncertainty bullets emitted at all")
+
+    # --- shape 3: the blanket pathway claim ---------------------------------------
+    # The regions the derivation is exercised on, in the two forms the atlas and the
+    # books disagree about (our "subthalamic nucleus" is a book's "subthalamus").
+    _REGIONS = {"thalamus": "Thalamus", "frontal": "Frontal lobe",
+                "caudate": "Caudate nucleus", "putamen": "Putamen",
+                "cerebellum": "Cerebellum",
+                "subthalamic_nucleus": "Subthalamic nucleus"}
+
+    def _blanket_of(self, quote, source, targets):
+        projections = [{"from": source, "to": t, "sources": [self._source(quote)]}
+                       for t in targets]
+        des = {b: self.mod._region_designations(b, n)
+               for b, n in self._REGIONS.items()}
+        return self.mod._blanket_groups(projections, des)
+
+    def test_a_sweep_sentence_naming_no_target_is_a_blanket_claim(self):
+        """The user's histamine case: Kandel writes "virtually every part of the
+        neuraxis", we draw fourteen arrows."""
+        g = self._blanket_of(
+            "These neurons project to virtually every part of the neuraxis and play a "
+            "major role in arousal.", "tuberomammillary_R",
+            ("caudate_R", "putamen_R", "cerebellum"))
+        self.assertEqual({i: n for i, (n, _s) in g.items()}, {0: 3, 1: 3, 2: 3})
+
+    def test_a_named_target_keeps_its_green_check(self):
+        """Only the unnamed arrows are doubted: the thalamus IS stated in this sentence,
+        the cortical lobes are our split of "cerebral cortex"."""
+        g = self._blanket_of(
+            "The B5-B7 neurons in the pons mainly provide serotonergic innervation of "
+            "the thalamus, hypothalamus, and cerebral cortex.", "raphe",
+            ("thalamus_R", "frontal_R", "caudate_R"))
+        self.assertEqual(sorted(g), [1, 2])
+
+    def test_a_region_named_in_another_form_is_still_named(self):
+        """A book writes "the subthalamus" for our subthalamic nucleus; missing that
+        would publish a false doubt on a sentence that does name its target."""
+        self.assertFalse(self._blanket_of(
+            "The subthalamus receives phasic excitatory signals from the cerebral "
+            "cortex, and the cerebellum as well.", "frontal_R",
+            ("subthalamic_nucleus_R", "cerebellum")))
+
+    def test_a_single_unnamed_pathway_is_not_a_sweep(self):
+        """Same >= 2 rule the family claim uses: one arrow cannot establish that the
+        sentence was describing a spread rather than that one target."""
+        self.assertFalse(self._blanket_of(
+            "These neurons project widely.", "raphe", ("caudate_R",)))
+
+    def test_two_sources_are_two_sweeps_not_one(self):
+        """Arrows leaving DIFFERENT structures never share a claim, even under one
+        sentence that mentions both nuclei."""
+        projections = [
+            {"from": "raphe", "to": "caudate_R", "sources": [self._source("q")]},
+            {"from": "locus_coeruleus_R", "to": "putamen_R",
+             "sources": [self._source("q")]}]
+        des = {b: self.mod._region_designations(b, n)
+               for b, n in self._REGIONS.items()}
+        self.assertFalse(self.mod._blanket_groups(projections, des))
+
+    def test_every_emitted_projection_bullet_is_sourced(self):
+        kinds = set(self.meta["uncertainty_reasons"])
+        projections = _load_jsonl(DATA_DIR / "projections.jsonl")
+        seen = 0
+        for p in projections:
+            for u in p.get("uncertainty", []) or []:
+                seen += 1
+                self.assertIn(u["kind"], kinds)
+                self.assertTrue(u.get("sources") or u.get("absence"),
+                                f"{p['from']}->{p['to']} {u['kind']}")
+        self.assertGreater(seen, 0, "no projection uncertainty bullets emitted at all")
+        c = self.meta["provenance_stats"]["by_kind"]["projections"]
+        self.assertEqual(c["uncertain"],
+                         sum(1 for p in projections if p.get("uncertainty")))
 
     def test_the_flagged_nodes_leave_verified_but_stay_backed(self):
         """The agreed tally rule: `uncertain` is its own bucket out of `verified`, and

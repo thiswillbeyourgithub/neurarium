@@ -783,7 +783,7 @@ which catches a stale or hand-edited cache.
 
 **Doubting a `verified` claim (the `uncertain` badge).** `verified` says the sentence is on the page; it
 never said the sentence is *about this node*. A node whose quote does not attribute the claim carries an
-`uncertainty[]` array (today only drug bindings do, `tools/data_generators/quotes/uncertainty.py`), which
+`uncertainty[]` array (drug bindings + projections, `tools/data_generators/quotes/uncertainty.py`), which
 takes over its pill: orange ⚠, tooltip = "Here are LLM-written reasons to be uncertain about this claim:"
 then one bullet per reason, then the node's own source as usual. **Every bullet is itself a badged,
 sourced claim**: a `kind` from the closed `UNCERTAINTY_REASONS` vocabulary (emitted as
@@ -793,9 +793,10 @@ corpus does not say this". No prose is stored: the sentence comes from an `uncer
 a new kind means a new string in **both** catalogues. Forgetting a source raises at generation
 (`_uncertainty_bullet`) and errors in `check_data.py` family 5, which also gates each bullet quote
 verbatim and stands its subject-less-quote guard down for a binding that declares uncertainty (the two
-answer the same problem). **Nothing is authored per site**: `apply_binding_uncertainty` *derives* both
-the flags and the bullets from the emitted data, so a data edit cannot leave a stale flag behind and a new
-drug is covered the day it lands. Two flags today, and a binding hit by either is uncertain:
+answer the same problem). **Nothing is authored per site**: `apply_binding_uncertainty` /
+`apply_projection_uncertainty` *derive* both the flags and the bullets from the emitted data, so a data
+edit cannot leave a stale flag behind and a new drug or arrow is covered the day it lands. Three flags
+today, and a node hit by any is uncertain:
 - **the subject-less side-effect rule** (89 bindings): the quote's heading trail ends in Stahl's *How Drug
   Causes Side Effects* and the sentence does not attribute the action to the drug (`_attributes_to_drug`:
   it neither names it, nor uses a pronoun subject, nor elides the subject in Stahl's telegraphic style).
@@ -804,8 +805,14 @@ drug is covered the day it lands. Two flags today, and a binding hit by either i
   bindings on subtypes of one family (same id stem) and names none of them individually, so the split into
   subtypes is ours, not the book's ("Blockade of alpha adrenergic 1 receptors" -> alpha1A/B/D). Bearable
   when a measured Ki pins the subtype down, so it only flags a subtype **with no Ki**.
-It runs as a post-pass (not `_binding_record`) because two bullets look across bindings: `class_wide`
-counts the drugs the same sentence is printed on, `family_claim` the siblings one sentence covers.
+- **the blanket pathway claim** (`blanket_claim`, 35 projections): the projection twin of the above. An
+  anatomy book states a diffuse system by its sweep ("project to virtually every part of the neuraxis"),
+  so one sentence sources several arrows out of one nucleus while naming none of their targets: which
+  regions the sweep is drawn to is our reading. Same `>= 2 siblings, none named` construction, over
+  regions; a target the sentence *does* name (raphe -> thalamus) keeps its green check.
+Both run as a post-pass (not `_binding_record` / `_projection_records`) because the bullets look across
+siblings: `class_wide` counts the drugs the same sentence is printed on, `family_claim` the subtypes one
+sentence covers, `blanket_claim` the arrows.
 
 **Per-claim sources + the verify gate.** The nodes carrying such a source: a
 binding's `sources[]`, a drug's `nbn_sources[]`, a projection/circuit/group quote (`KANDEL_QUOTES`), a

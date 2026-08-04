@@ -332,7 +332,7 @@ class UncertaintyBulletTest(unittest.TestCase):
 
     The trap this exists for (see the new-node-kind checklist): family 5 passes
     silently until its walk actually *visits* a new kind, so every case below is
-    written to fail if the walk skips ``binding["uncertainty"]`` entirely."""
+    written to fail if the walk skips a node's ``uncertainty`` entirely."""
 
     META = {"source_corpora": {"stahl": {"ref": "Stahl"},
                                "pdsp_ki": {"ref": "PDSP", "csv": "x.csv"}},
@@ -395,6 +395,25 @@ class UncertaintyBulletTest(unittest.TestCase):
         b = self._binding([], quote=self.QUOTE)
         del b["uncertainty"]
         self.assertEqual(self._errors(b), 1)
+
+    def test_a_pathways_bullets_are_gated_too(self):
+        """The badge is not a drug-only feature: a blanket pathway carries the same
+        bullets, so the walk must reach them there as well (the checklist trap again,
+        one node kind further on)."""
+        def errors(uncertainty):
+            report = check_data.Report()
+            proj = {"from": "raphe", "to": "caudate_R", "uncertainty": uncertainty,
+                    "sources": [{"corpus": "stahl", "page": 40, "quote": "x",
+                                 "provenance": "verified"}]}
+            with redirect_stdout(io.StringIO()):
+                check_data.check_sources(report, self.META, [], [proj], [], [])
+            return report.errors
+        self.assertEqual(errors([{"kind": "not_a_mechanism", "absence": True}]), 0)
+        self.assertEqual(errors([{"kind": "vibes", "absence": True}]), 1)
+        self.assertEqual(errors([{"kind": "side_effect_rule"}]), 1)
+        self.assertEqual(errors([{"kind": "side_effect_rule",
+                                  "sources": [{"corpus": "nosuchbook", "page": 1,
+                                               "quote": "x"}]}]), 1)
 
 
 class InnervationCoverageTest(unittest.TestCase):

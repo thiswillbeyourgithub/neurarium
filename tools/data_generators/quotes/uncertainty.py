@@ -1,8 +1,9 @@
-"""Why a `verified` binding claim still deserves doubt (the ``uncertainty`` bullets).
+"""Why a `verified` claim still deserves doubt (the ``uncertainty`` bullets).
 
 A `verified` grade only ever meant "this sentence really is on that page". It never meant
-"this sentence is *about this drug*", nor "this sentence is about *this* receptor". Two
-shapes where the difference matters, both **derived** here rather than hand-listed:
+"this sentence is *about this drug*", nor "this sentence is about *this* receptor", nor
+"this sentence is about *this* region". Three shapes where the difference matters, all
+**derived** here rather than hand-listed:
 
 1. **The subject-less side-effect rule.** Stahl's **How Drug Causes Side Effects** block
    prints mechanism-to-side-effect rules whose grammatical subject is the *mechanism*, not
@@ -23,11 +24,24 @@ shapes where the difference matters, both **derived** here rather than hand-list
    real reason to doubt when it does not (nortriptyline has an alpha1A assay, nothing for
    alpha1B or alpha1D, and Stahl only ever wrote "alpha 1").
 
+3. **The blanket pathway claim.** The projection twin of shape 2. The anatomy books
+   describe the diffuse ascending systems by their *sweep*, not target by target::
+
+       "These neurons project to virtually every part of the neuraxis"
+       "the sole source of histaminergic actions in the entire brain, from the cerebral
+        cortex to the spinal cord"
+
+   One such sentence is the source for many arrows out of one nucleus, and it names none
+   of their targets: which regions the sweep is drawn to is our reading of it, exactly as
+   the subtype split is in shape 2. Same ``>= 2 siblings, none named`` construction as
+   :func:`_family_groups`, over the regions instead (:func:`_blanket_groups`).
+
 Those claims are kept, on evidence rather than convenience (the side-effect lines are
-printed selectively, only on monographs that genuinely carry the property, and half the
-bindings carry an independent measured Ki). But a flat green check overstates them, so
-they carry an **uncertain** badge instead: same source, same quote, plus the reasons to
-doubt it, each reason itself a badged, quote-gated claim.
+printed selectively, only on monographs that genuinely carry the property, half the
+bindings carry an independent measured Ki, and a sweep sentence is a real anatomical
+statement about a real system). But a flat green check overstates them, so they carry an
+**uncertain** badge instead: same source, same quote, plus the reasons to doubt it, each
+reason itself a badged, quote-gated claim.
 
 **Nothing here is authored per site.** The flags and every bullet are derived from the
 emitted data (the heading trail, the quote text, the drug's other sources, the Ki), so a
@@ -108,6 +122,10 @@ UNCERTAINTY_REASONS: dict[str, dict[str, Any]] = {
     "no_measured_ki": {"source": None, "absence": True, "args": ()},
     # "The corpus never lists this action among the drug's mechanisms of action."
     "not_a_mechanism": {"source": None, "absence": True, "args": ()},
+    # "One sentence covers n pathways out of this structure at once and names none of
+    # their targets." The projection twin of family_claim (see shape 3 in the module
+    # docstring).
+    "blanket_claim": {"source": "own_quote", "absence": False, "args": ("n",)},
 }
 
 
@@ -205,17 +223,20 @@ def _family_groups(drug: dict[str, Any]) -> dict[int, tuple[int, dict[str, Any]]
     return out
 
 
-def _uncertainty_bullet(kind: str, *, what: str, binding: dict[str, Any],
+def _uncertainty_bullet(kind: str, *, what: str, node: dict[str, Any] | None = None,
                         source: dict[str, Any] | None = None,
                         args: dict[str, Any] | None = None) -> dict[str, Any]:
     """One ``uncertainty`` bullet: a reason kind, its slot args, and its own source.
+
+    ``node`` is the doubted node (a drug binding, a projection): only the ``ki`` kinds
+    read anything off it, so a node kind that has no Ki simply never uses them.
 
     Where the source comes from is declared by the kind, not by the caller (see
     :data:`UNCERTAINTY_REASONS`), so a bullet cannot cite the wrong thing:
 
     * ``own_quote`` cites the passed ``source`` (the very sentence the bullet is a
       reading of), so the bullet inherits its grade and its quote gate;
-    * ``ki`` reuses the binding's measured-affinity source;
+    * ``ki`` reuses the node's measured-affinity source;
     * an ``absence`` kind carries no source on purpose and renders NOSOURCE.
 
     Raises when a non-absence kind resolves to nothing: a bullet with a silent blank
@@ -240,13 +261,13 @@ def _uncertainty_bullet(kind: str, *, what: str, binding: dict[str, Any],
     if spec["source"] == "own_quote":
         src = source
     elif spec["source"] == "ki":
-        src = (binding.get("ki") or {}).get("source")
+        src = ((node or {}).get("ki") or {}).get("source")
     else:
         src = None
     if not src:
         raise ValueError(
             f"{what} uncertainty bullet {kind!r} resolves to no source "
-            f"(it cites {spec['source']!r}, which this binding does not carry). "
+            f"(it cites {spec['source']!r}, which this node does not carry). "
             f"Every bullet must be sourced or declare absence=True.")
     out["sources"] = [dict(src)]
     return out
@@ -304,16 +325,16 @@ def apply_binding_uncertainty(drugs: list[dict[str, Any]]) -> None:
             bullets = []
             if rule_source:
                 bullets.append(_uncertainty_bullet(
-                    "side_effect_rule", what=what, binding=b, source=rule_source))
+                    "side_effect_rule", what=what, node=b, source=rule_source))
             if family:
                 bullets.append(_uncertainty_bullet(
-                    "family_claim", what=what, binding=b, source=family[1],
+                    "family_claim", what=what, node=b, source=family[1],
                     args={"n": family[0]}))
             quoted = rule_source or family[1]
             others = len(spread.get(quoted.get("quote", ""), ())) - 1
             if others > 0:
                 bullets.append(_uncertainty_bullet(
-                    "class_wide", what=what, binding=b, source=quoted,
+                    "class_wide", what=what, node=b, source=quoted,
                     args={"n": others}))
             # The affinity bullet is derived, never authored, so it cannot drift from
             # the Ki actually shipped: it says what the measurement is, or that there
@@ -321,19 +342,138 @@ def apply_binding_uncertainty(drugs: list[dict[str, Any]]) -> None:
             ki = b.get("ki")
             if ki:
                 bullets.append(_uncertainty_bullet(
-                    "measured_ki", what=what, binding=b,
+                    "measured_ki", what=what, node=b,
                     args={"ki": ki["median"],
                           "n": int(ki.get("n_human", 0)) + int(ki.get("n_nonhuman", 0))}))
             else:
                 bullets.append(_uncertainty_bullet(
-                    "no_measured_ki", what=what, binding=b))
+                    "no_measured_ki", what=what, node=b))
             # Only sayable about a drug the book actually covers: "the corpus never lists
             # this among its mechanisms" is a statement about a monograph that exists.
             if in_stahl and not has_mechanism:
                 bullets.append(_uncertainty_bullet(
-                    "not_a_mechanism", what=what, binding=b))
+                    "not_a_mechanism", what=what, node=b))
             # Evidence first, absences last: the list reads as "here is what the source
             # does say ... but here is what it never says", which is the shape of the
             # doubt. Stable within each half (the order they were built in).
             bullets.sort(key=lambda bl: bool(bl.get("absence")))
             b["uncertainty"] = bullets
+
+
+# The words a region's name shares with every other region ("nucleus", "lobe"), which
+# therefore designate none of them: a quote saying "nucleus" has not named the nucleus
+# basalis. Dropping them leaves the distinguishing word the source would have used.
+_REGION_GENERIC = {"nucleus", "nuclei", "lobe", "gland", "cortex", "body", "area",
+                   "gyrus", "complex", "formation", "system", "matter"}
+
+# A source writes a region's name in whatever form its sentence needs ("the subthalamus"
+# for our subthalamic nucleus, "thalamic" for the thalamus), so designations are matched
+# on a shared stem rather than exactly. Six characters is long enough that the pairs the
+# atlas actually contains stay apart (caudate / caudal share only four).
+_REGION_STEM = 6
+
+
+def _region_designations(base: str, name: str) -> set[str]:
+    """The words a source would use to name the region ``base`` (id + display name).
+
+    Generic anatomical nouns are dropped (see :data:`_REGION_GENERIC`), as are words too
+    short to stem-match safely, so what is left is the region's own word: "accumbens",
+    "hippocampus", "tuberomammillary".
+    """
+    words = set(re.split(r"[^a-z0-9]+", base.lower()))
+    words |= set(re.split(r"[^a-z0-9]+", _english(name).lower()))
+    return {w for w in words if len(w) >= 4 and w not in _REGION_GENERIC}
+
+
+def _names_region(quote: str, designations: set[str]) -> bool:
+    """Does ``quote`` name the region, in any of the forms a book would write it in?"""
+    words = [w for w in re.split(r"[^a-z0-9]+", quote.lower()) if len(w) >= 4]
+    for d in designations:
+        for w in words:
+            if w == d:
+                return True
+            # Same stem = same region ("subthalamus" / "subthalamic"). Only for words
+            # long enough that the stem is the region and not a shared prefix.
+            common = 0
+            for a, b in zip(d, w):
+                if a != b:
+                    break
+                common += 1
+            if common >= _REGION_STEM:
+                return True
+    return False
+
+
+def _blanket_groups(projections: list[dict[str, Any]],
+                    designations: dict[str, set[str]],
+                    ) -> dict[int, tuple[int, dict[str, Any]]]:
+    """``projection index -> (group size, the shared source)`` for the blanket claims.
+
+    A blanket group is a set of pathways that (a) leave the **same** structure, (b) share
+    **one** source sentence, and (c) are each unnamed by it. (c) is what separates "The
+    B5-B7 neurons ... provide serotonergic innervation of the thalamus, hypothalamus, and
+    cerebral cortex" (the thalamus arrow is stated; the four cortical-lobe arrows are our
+    split of "cerebral cortex") from a sentence that lists its targets one by one.
+
+    The group must hold **two** unnamed pathways, mirroring :func:`_family_groups`: one
+    sentence covering several targets while naming none of them is a sweep by
+    construction, which a single arrow cannot establish.
+    """
+    named: list[bool] = []
+    by_quote: dict[tuple[str, str], list[int]] = collections.defaultdict(list)
+    source_of: dict[tuple[str, str], dict[str, Any]] = {}
+    for i, p in enumerate(projections):
+        des = designations.get(_base_id(p["to"]), set())
+        hit = False
+        for src in p.get("sources") or []:
+            quote = src.get("quote")
+            if not quote:
+                continue
+            if _names_region(quote, des):
+                hit = True
+            key = (p["from"], quote)
+            by_quote[key].append(i)
+            source_of.setdefault(key, src)
+        named.append(hit)
+
+    out: dict[int, tuple[int, dict[str, Any]]] = {}
+    for key, idx in by_quote.items():
+        unnamed = [i for i in idx if not named[i]]
+        if len(unnamed) < 2:
+            continue
+        for i in unnamed:
+            # A pathway cited by two sweep sentences takes the wider one: that is the
+            # count a reader should weigh the claim against.
+            if i not in out or out[i][0] < len(unnamed):
+                out[i] = (len(unnamed), source_of[key])
+    return out
+
+
+def _base_id(structure_id: str) -> str:
+    """``accumbens_R`` -> ``accumbens`` (a midline structure has no side suffix)."""
+    return re.sub(r"_[RL]$", "", structure_id)
+
+
+def apply_projection_uncertainty(projections: list[dict[str, Any]],
+                                 structures: list[dict[str, Any]]) -> None:
+    """Derive and attach the ``uncertainty`` bullets to every blanket pathway, in place.
+
+    A post-pass for the same reason the binding one is: the flag is a statement about the
+    *sibling* pathways one sentence covers, which no single projection can see.
+    """
+    # Keyed by base, so the two members of an L/R pair share one entry (the side is
+    # never what a source names). ``base_name`` is the hemisphere-stripped display name;
+    # a midline structure carries only ``name``.
+    designations = {
+        _base_id(s["id"]): _region_designations(
+            _base_id(s["id"]), s.get("base_name") or s.get("name"))
+        for s in structures}
+    groups = _blanket_groups(projections, designations)
+    for i, p in enumerate(projections):
+        group = groups.get(i)
+        if not group:
+            continue
+        what = f"Projection {p['from']!r} -> {p['to']!r}"
+        p["uncertainty"] = [_uncertainty_bullet(
+            "blanket_claim", what=what, node=p, source=group[1],
+            args={"n": group[0]})]

@@ -230,9 +230,10 @@ def render_block(stats: dict) -> str:
         lines += [
             "",
             f"Of those, **{uncertain} carry an `uncertain` badge**: the quote is "
-            f"confirmed present in the source, but the sentence states a general rule "
-            f"without naming the drug, so the attribution is an inference. The badge's "
-            f"tooltip lists the reasons to doubt it, each with its own source.",
+            f"confirmed present in the source, but the sentence states something "
+            f"broader than the claim (a rule that never names the drug, a sweep that "
+            f"never names the region), so pinning it to that node is an inference. The "
+            f"badge's tooltip lists the reasons to doubt it, each with its own source.",
         ]
     lines += ["", END]
     return "\n".join(lines)

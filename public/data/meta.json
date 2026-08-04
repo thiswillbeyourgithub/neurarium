@@ -2785,6 +2785,13 @@
       "source": null,
       "absence": true,
       "args": []
+    },
+    "blanket_claim": {
+      "source": "own_quote",
+      "absence": false,
+      "args": [
+        "n"
+      ]
     }
   },
   "density_min_reliability": 0.5,
@@ -2873,8 +2880,8 @@
       },
       "projections": {
         "total": 95,
-        "verified": 93,
-        "uncertain": 0,
+        "verified": 58,
+        "uncertain": 35,
         "sourced": 0,
         "llm": 0,
         "nosource": 2,
@@ -3009,8 +3016,8 @@
     },
     "nodes": {
       "total": 4021,
-      "verified": 3751,
-      "uncertain": 111,
+      "verified": 3716,
+      "uncertain": 146,
       "sourced": 0,
       "llm": 145,
       "nosource": 14,

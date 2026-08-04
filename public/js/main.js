@@ -2274,7 +2274,7 @@ function createInfoPanel(data, sourcingModal) {
 
   // Prepend uncertaintyTip to whatever tooltip content a pill would otherwise get
   // (a string of source lines, a node, or nothing). Returns `extra` untouched when
-  // the binding is not flagged, so every non-flagged pill is byte-identical.
+  // the node is not flagged, so every non-flagged pill is byte-identical.
   const withUncertainty = (list, extra) => {
     if (!list) return extra;
     const frag = document.createDocumentFragment();
@@ -2872,8 +2872,12 @@ function createInfoPanel(data, sourcingModal) {
     li.appendChild(directionArrow(proj.color, dir, colourMeaningOf(proj)));
     li.appendChild(el("span", "conn-label", labelText));
     // Always show the grade pill; an unsourced pathway shows NOSOURCE, never a blank
-    // (a node's provenance is never simply absent from the panel).
-    li.appendChild(makeProvenancePill(proj.provenance, sourcesTip(proj.sources)));
+    // (a node's provenance is never simply absent from the panel). A pathway the book
+    // states only as one blanket sweep wears the orange "uncertain" badge instead of a
+    // green check, its reasons leading the tooltip: same rule the binding pill follows.
+    const doubt = proj.uncertainty && proj.uncertainty.length ? proj.uncertainty : null;
+    li.appendChild(makeProvenancePill(doubt ? "uncertain" : proj.provenance,
+      withUncertainty(doubt, sourcesTip(proj.sources))));
     li.addEventListener("click", () => onConnectionPick(proj));
     return li;
   };

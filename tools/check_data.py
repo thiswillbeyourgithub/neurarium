@@ -1101,6 +1101,38 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             report.warn(f"{ctx}: quote is very short ({quote!r}); it matched "
                         f"but may be an incidental substring")
 
+    def check_uncertainty(what, node):
+        """Gate the "uncertain" badge's bullets on any node that carries them.
+
+        Each bullet is itself a claim shown to the reader with its own pill, so each is
+        gated like any other node: its quote must be verbatim on the cited page, its
+        reason kind must be one the vocabulary defines, and a bullet with no source must
+        SAY it is an absence of evidence rather than leave a silent blank. Shared by the
+        drug bindings and the projections, which carry the same bullet shape.
+        """
+        for j, u in enumerate(node.get("uncertainty", []) or []):
+            uctx = f"{what} uncertainty[{j}] ({u.get('kind')})"
+            if u.get("kind") not in reason_kinds:
+                report.error(f"{uctx}: reason kind is not one of "
+                             f"meta.uncertainty_reasons ({sorted(reason_kinds)})")
+            srcs = u.get("sources") or []
+            if not srcs and not u.get("absence"):
+                report.error(
+                    f"{uctx}: has no source and does not declare absence=true. "
+                    f"A bullet either cites a document or says outright that the "
+                    f"corpus is silent; a blank one reads as the latter while "
+                    f"meaning the source was forgotten")
+            if srcs and u.get("absence"):
+                report.error(f"{uctx}: declares absence=true yet cites a source")
+            for k, src in enumerate(srcs):
+                # A measured-affinity source is a CSV row id, not prose, so it is
+                # gated by the Ki family (8) instead, exactly like a binding's own
+                # ki.source.
+                if (corpora.get(src.get("corpus"), {}).get("csv")
+                        and not src.get("quote")):
+                    continue
+                check_one(f"{uctx} sources[{k}]", src)
+
     for drug in drugs:
         did = drug.get("id")
         for binding in drug.get("bindings", []):
@@ -1126,34 +1158,7 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
             ki_src = (binding.get("ki") or {}).get("source")
             if ki_src and ki_src.get("quote"):
                 check_one(f"drug {did} binding {binding.get('target')} ki.source", ki_src)
-            # The "uncertain" badge's bullets. Each is itself a claim shown to the
-            # reader with its own pill, so each is gated like any other node: its
-            # quote must be verbatim on the cited page, its reason kind must be one
-            # the vocabulary defines, and a bullet with no source must SAY it is an
-            # absence of evidence rather than leave a silent blank.
-            for j, u in enumerate(binding.get("uncertainty", []) or []):
-                uctx = (f"drug {did} binding {binding.get('target')} "
-                        f"uncertainty[{j}] ({u.get('kind')})")
-                if u.get("kind") not in reason_kinds:
-                    report.error(f"{uctx}: reason kind is not one of "
-                                 f"meta.uncertainty_reasons ({sorted(reason_kinds)})")
-                srcs = u.get("sources") or []
-                if not srcs and not u.get("absence"):
-                    report.error(
-                        f"{uctx}: has no source and does not declare absence=true. "
-                        f"A bullet either cites a document or says outright that the "
-                        f"corpus is silent; a blank one reads as the latter while "
-                        f"meaning the source was forgotten")
-                if srcs and u.get("absence"):
-                    report.error(f"{uctx}: declares absence=true yet cites a source")
-                for k, src in enumerate(srcs):
-                    # A measured-affinity source is a CSV row id, not prose, so it is
-                    # gated by the Ki family (8) instead, exactly like the binding's
-                    # own ki.source above.
-                    if (corpora.get(src.get("corpus"), {}).get("csv")
-                            and not src.get("quote")):
-                        continue
-                    check_one(f"{uctx} sources[{k}]", src)
+            check_uncertainty(f"drug {did} binding {binding.get('target')}", binding)
         for i, src in enumerate(drug.get("nbn_sources", []) or []):
             check_one(f"drug {did} nbn_sources[{i}]", src)
         for i, src in enumerate(drug.get("category_sources", []) or []):
@@ -1190,6 +1195,9 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
         pid = f"{proj.get('from')}->{proj.get('to')}"
         for i, src in enumerate(proj.get("sources", []) or []):
             check_one(f"projection {pid} sources[{i}]", src)
+        # A pathway the book only states as a blanket sweep wears the same orange badge
+        # a binding does, and its bullets are gated the same way.
+        check_uncertainty(f"projection {pid}", proj)
 
     for s in structures:
         for i, src in enumerate(s.get("sources", []) or []):
