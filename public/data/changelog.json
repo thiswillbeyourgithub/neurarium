@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.45.0",
+      "date": "2026-08-04",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A brain structure's panel now lists the receptors and other drug targets found there, grouped by neurotransmitter system: the question \"what sits in the hippocampus?\" was only answerable from each receptor's own page before",
+          "commits": [
+            "38f6a07"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Every row carries that region's own source grade, the same claim the receptor's own panel shows from the other end, so the two ends can never disagree",
+          "commits": [
+            "38f6a07"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A receptor present throughout the brain is listed in every region, tagged as such, so it does not read as a claim about that region in particular",
+          "commits": [
+            "38f6a07"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.44.1",
       "date": "2026-08-04",
       "entries": [
