@@ -1,6 +1,40 @@
 {
   "versions": [
     {
+      "version": "3.42.1",
+      "date": "2026-08-04",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The About popup no longer explains the animations as one dense paragraph: it is now a collapsed \"What the animations mean\" list, one bullet per thing you can actually see (the dimmed brain, the coloured dots, the glow, the streaming beads, the sequential circuit pulse, the selection rim, a dotted arrow), each opening with what it is and then developing it",
+          "commits": [
+            "0388c77"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The warning that the drug animations are the least scientific part of neurarium now sits outside that dropdown, so it is read rather than hidden behind a click",
+          "commits": [
+            "0388c77"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Two things the popup never said: what a dotted arrow means, and why the metabolism and interaction sections light nothing in the 3D scene",
+          "commits": [
+            "0388c77"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "\"Take a tour\" is now \"See the tutorial\"",
+          "commits": [
+            "0388c77"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.42.0",
       "date": "2026-08-03",
       "entries": [
