@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.44.0",
+      "date": "2026-08-04",
+      "entries": [
+        {
+          "category": "data",
+          "text": "A pathway the book only states as a sweep (\"these neurons project to virtually every part of the neuraxis\") now wears the orange \"uncertain\" badge instead of a green check: the sentence is real and quoted, but it names none of the regions we drew the arrows to, and the badge says so",
+          "commits": [
+            "18030a5"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "35 of the 95 pathways are concerned, mostly the diffuse ascending systems (histamine, serotonin, noradrenaline, acetylcholine to the cortex, and the striatal splits). A pathway whose source does name its target, such as the raphe to the thalamus, keeps its green check",
+          "commits": [
+            "18030a5"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The overall sourcing figure does not move: an \"uncertain\" claim still rests on a real quoted document, so it stays counted as backed and only leaves the green tally",
+          "commits": [
+            "18030a5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.43.0",
       "date": "2026-08-04",
       "entries": [
