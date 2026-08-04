@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.44.1",
+      "date": "2026-08-04",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The About popup now offers the tutorial before it warns about the drug animations, and the button reads \"Start the tutorial\"",
+          "commits": [
+            "e365157"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The animation legend is shorter and better ordered: the two bullets that stated the obvious are gone, the gem dots say where they appear, and the beads are explained before the glow that refers back to them",
+          "commits": [
+            "e365157"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Two links say what they do: the data dropdown reads \"Click to access the structured data\", and the feedback link names GitHub",
+          "commits": [
+            "e365157"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.44.0",
       "date": "2026-08-04",
       "entries": [
