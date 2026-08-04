@@ -1976,6 +1976,10 @@
          name reads as a link on hover. */
       .info-bindings li.clickable { cursor: pointer; }
       .info-bindings li.clickable:hover .bind-target { color: var(--accent-bright); }
+      /* A structure panel's "Receptors found here" row leads with the target's own
+         swatch (the same colour its legend row carries), nudged down so it sits on
+         the text baseline rather than the top of the flex line. */
+      .info-bindings li > .swatch { margin-top: 2px; }
       /* The text column (name+pill / action / Ki stack) takes only the width it
          needs; the source pill rides the name line (.bind-name) so it stays beside
          the name rather than stranded past the wide Ki line. It still shrinks +

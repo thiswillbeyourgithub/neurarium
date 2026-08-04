@@ -1053,7 +1053,7 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
       let entry = byLabel.get(label);
       if (!entry) {
         // base = the hemisphere-stripped structure id, a stable guided-tour hook.
-        entry = { color: s.color, meshes: [], base: (s.id || "").replace(/_[LR]$/, "") };
+        entry = { color: s.color, meshes: [], base: stripSide(s.id) };
         byLabel.set(label, entry);
       }
       const mesh = meshById.get(s.id);
@@ -2939,6 +2939,80 @@ function createInfoPanel(data, sourcingModal) {
     body.appendChild(groupEl);
   };
 
+  // "Receptors found here": the reverse of a receptor's "Found in" list, read off
+  // data.targetsByStructure. The expression claim belongs to the (target, region)
+  // pair, so each row carries THAT region's own graded node, the same pill (and the
+  // same amber non-human species tag) the receptor panel shows for this structure:
+  // one node, two ends, never two gradings. Grouped by neurotransmitter system in the
+  // Receptors & targets section's own order, biggest system in THIS region first.
+  // Capped per system, since a cortical lobe carries a hundred of them and a global
+  // cap would swallow whole systems (same reasoning as the drug-interactions groups).
+  const EXPRESSED_CAP = 8;
+  const appendExpressedTargets = (base) => {
+    const entries = (data.targetsByStructure || new Map()).get(base) || [];
+    if (!entries.length) return;
+    // One row per target: a target cannot be expressed twice in one region, but the
+    // index is built per (target, region) so guard anyway rather than double-list.
+    const byId = new Map(entries.map((e) => [e.target.id, e]));
+    const families = data.meta.receptorFamilyLabels || {};
+    const wrap = el("div", "info-bindings info-interactors");
+    wrap.dataset.tourSec = "expressed"; // guided-tour section anchor
+    wrap.appendChild(el("h3", null, `${t("structure.expressed")} (${byId.size})`));
+    wrap.appendChild(el("p", "info-caption", t("structure.expressedCaption")));
+    const groups = groupTargetsBySystem([...byId.values()].map((e) => e.target),
+      () => 1);
+    for (const [key, list] of groups) {
+      wrap.appendChild(el("div", "drug-cat",
+        key === "_other" ? t("targets.otherSystem") : (families[key] || key)));
+      const ul = el("ul", "pk-group-body");
+      const rowOf = (tgt) => {
+        const entry = byId.get(tgt.id);
+        const meta = entry.info;
+        const li = el("li");
+        const dot = el("span", "swatch");
+        dot.style.background = tgt.swatchColor;
+        li.appendChild(dot);
+        li.appendChild(el("span", "bind-target", tgt.name));
+        if (tgt.kind !== "receptor" && tgt.typeLabel) {
+          li.appendChild(el("span", "legend-tag", tgt.typeLabel));
+        }
+        // "everywhere": this one is a ubiquitous receptor, listed here because it is
+        // listed everywhere, which is a weaker statement than a named region.
+        if (entry.ubiquitous) {
+          li.appendChild(el("span", "legend-tag", t("structure.expressedEverywhere")));
+        }
+        if (meta && meta.nonHuman) {
+          const tag = el("span", "loc-species",
+            t("receptor.speciesTag", { species: speciesLabel(meta.species) }));
+          tag.title = t("receptor.speciesTip", { species: speciesLabel(meta.species) });
+          li.appendChild(tag);
+        }
+        if (meta) {
+          li.appendChild(makeProvenancePill(meta.provenance,
+            meta.sources && meta.sources.length
+              ? sourcesTip(meta.sources) : t("receptor.locUnsourced")));
+        }
+        if (tgt.focusable) {
+          li.classList.add("clickable");
+          li.addEventListener("click", () => onTargetPick(tgt));
+        }
+        return li;
+      };
+      for (const tgt of list.slice(0, EXPRESSED_CAP)) ul.appendChild(rowOf(tgt));
+      wrap.appendChild(ul);
+      const rest = list.slice(EXPRESSED_CAP);
+      if (rest.length) {
+        const more = el("button", "pk-more", t("info.more", { n: rest.length }));
+        more.addEventListener("click", () => {
+          for (const tgt of rest) ul.appendChild(rowOf(tgt));
+          more.remove();
+        });
+        wrap.appendChild(more);
+      }
+    }
+    body.appendChild(wrap);
+  };
+
   return {
     show(proj) {
       clearBody();
@@ -3022,22 +3096,26 @@ function createInfoPanel(data, sourcingModal) {
         (p) => p.from === structure.id || p.to === structure.id);
       if (conns.length === 0) {
         body.appendChild(el("p", "info-desc", t("info.noConnections")));
-        return;
+      } else {
+        const { ul, count } = pathwayList(conns, (proj) => {
+          const outgoing = proj.from === structure.id;
+          const otherId = outgoing ? proj.to : proj.from;
+          return {
+            dir: proj.bidirectional ? "both" : outgoing ? "out" : "in",
+            label: baseNameOf(otherId),
+          };
+        });
+        const wrap = el("div", "info-connections");
+        wrap.appendChild(el(
+          "h3", null, `${t("info.connections")} (${count})`));
+        wrap.appendChild(ul);
+        body.appendChild(wrap);
       }
 
-      const { ul, count } = pathwayList(conns, (proj) => {
-        const outgoing = proj.from === structure.id;
-        const otherId = outgoing ? proj.to : proj.from;
-        return {
-          dir: proj.bidirectional ? "both" : outgoing ? "out" : "in",
-          label: baseNameOf(otherId),
-        };
-      });
-      const wrap = el("div", "info-connections");
-      wrap.appendChild(el(
-        "h3", null, `${t("info.connections")} (${count})`));
-      wrap.appendChild(ul);
-      body.appendChild(wrap);
+      // What is expressed here: the receptors + non-receptor targets whose "Found in"
+      // list names this region. A structure with no pathway can still carry plenty of
+      // them, so this section is outside the branch above.
+      appendExpressedTargets(stripSide(structure.id));
     },
 
     /**
@@ -3779,7 +3857,7 @@ function createInfoPanel(data, sourcingModal) {
               target.appendChild(ul);
               if (section.rows.length > GROUP_CAP) {
                 const more = el("button", "pk-more",
-                                t("drug.pkMore", { n: section.rows.length - GROUP_CAP }));
+                                t("info.more", { n: section.rows.length - GROUP_CAP }));
                 more.type = "button";
                 more.addEventListener("click", () => {
                   for (const make of section.rows.slice(GROUP_CAP)) ul.appendChild(make());
@@ -4085,6 +4163,43 @@ function createInfoPanel(data, sourcingModal) {
  * @param {(target: object) => void} onPick
  * @returns {(activeId: string|null) => void}
  */
+/** `accumbens_R` -> `accumbens`: the side-stripped base id. A hemisphere is a
+ * rendering detail, so anything keyed by region (expression, search rows, deep
+ * links) keys by the base. */
+function stripSide(id) {
+  return String(id == null ? "" : id).replace(/_[LR]$/, "");
+}
+
+/**
+ * Group targets under their neurotransmitter `system`, the one ordering the whole app
+ * lists receptors in: heaviest system first, the system-less "_other" bucket pinned
+ * last however heavy, members lexicographic within a system (`numeric` so 5-HT2
+ * precedes 5-HT10, `base` sensitivity folding case + accents). What "heaviest" means
+ * is the caller's: the legend weighs a target by its knowledge nodes, the structure
+ * panel by one each (so a region's biggest system leads).
+ * @param {object[]} targets
+ * @param {(target: object) => number} weightOf
+ * @returns {Array<[string, object[]]>} `[systemKey, members]`, in display order
+ */
+function groupTargetsBySystem(targets, weightOf) {
+  const bySystem = new Map();
+  for (const tgt of targets || []) {
+    const key = tgt.system || "_other";
+    if (!bySystem.has(key)) bySystem.set(key, []);
+    bySystem.get(key).push(tgt);
+  }
+  for (const [, list] of bySystem) {
+    list.sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+  }
+  const weight = new Map([...bySystem].map(
+    ([key, list]) => [key, list.reduce((sum, tgt) => sum + weightOf(tgt), 0)]));
+  const order = [...bySystem.keys()].filter((k) => k !== "_other");
+  order.sort((a, b) => weight.get(b) - weight.get(a));
+  if (bySystem.has("_other")) order.push("_other");
+  return order.map((key) => [key, bySystem.get(key)]);
+}
+
 function buildTargetLegend(data, onPick) {
   const container = document.getElementById("receptors-body");
   if (!container) return () => {};
@@ -4094,23 +4209,11 @@ function buildTargetLegend(data, onPick) {
   const families = data.meta.receptorFamilyLabels || {};
   const drugsByTarget = data.drugsByTarget || new Map();
 
-  // Group by system; a null system goes under the "_other" bucket.
-  const bySystem = new Map();
-  for (const tgt of data.targets || []) {
-    const key = tgt.system || "_other";
-    if (!bySystem.has(key)) bySystem.set(key, []);
-    bySystem.get(key).push(tgt);
-  }
-  // Members within a system: plain lexicographic (natural) order by name, so the
-  // list reads predictably (5-HT1A, 5-HT2A, ..., D1, D2, ...). `numeric` keeps
-  // 5-HT2 before 5-HT10; `base` sensitivity folds case + accents.
-  for (const [, list] of bySystem) {
-    list.sort((a, b) =>
-      a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
-  }
   // Each target's "size" is its knowledge nodes: the target itself, its expression
   // "Found in" regions (a ubiquitous receptor is one "throughout the brain" node),
   // and the drug bindings acting on it (data.drugsByTarget, deduped one per drug).
+  // A system's weight is the sum over its targets, so a heavily-expressed,
+  // heavily-drugged system (dopaminergic) outweighs a sparse one (melatoninergic).
   const nodeCount = (tgt) => {
     const locs = tgt.receptor
       ? (tgt.receptor.ubiquitous ? 1 : tgt.receptor.locations.length)
@@ -4118,23 +4221,8 @@ function buildTargetLegend(data, onPick) {
     const drugs = (drugsByTarget.get(tgt.id) || []).length;
     return 1 + locs + drugs;
   };
-  // A system's node count is the sum over its targets, so a heavily-expressed,
-  // heavily-drugged system (dopaminergic) outweighs a sparse one (melatoninergic).
-  const groupNodes = new Map();
-  for (const [key, list] of bySystem) {
-    groupNodes.set(key, list.reduce((sum, tgt) => sum + nodeCount(tgt), 0));
-  }
-  // Heading order: most nodes first (the biggest systems lead), with the "_other"
-  // system-less bucket pinned last regardless of its count.
-  const order = [...bySystem.keys()].filter((k) => k !== "_other");
-  order.sort((a, b) => groupNodes.get(b) - groupNodes.get(a));
-  if (bySystem.has("_other")) order.push("_other");
-  const done = new Set();
-  for (const key of order) {
-    if (done.has(key)) continue;
-    done.add(key);
-    const list = bySystem.get(key);
-    if (!list || !list.length) continue;
+  for (const [key, list] of groupTargetsBySystem(data.targets, nodeCount)) {
+    if (!list.length) continue;
     const h = document.createElement("h2");
     h.textContent = key === "_other" ? t("targets.otherSystem") : (families[key] || key);
     h.dataset.tourSystem = key; // guided-tour hook: spotlight a whole system's box
@@ -5640,7 +5728,6 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
   // receptors show their neurotransmitter as a tag (and carry extra `keywords` so the
   // system / mechanism also match). The match runs over `label` + `keywords`; only
   // `label` is shown.
-  const stripSide = (id) => id.replace(/_[LR]$/, "");
   // Group meshes / arrows by their side-stripped base so each pair yields one row.
   const meshesByBase = new Map();
   for (const mesh of meshes) {
@@ -6462,10 +6549,9 @@ async function main() {
   // Both hemispheres (plus a midline singleton) sharing a mesh's base: a legend
   // row / double-click / search pick isolates this whole pair, and pinning it
   // names both sides. The id base is the structure id minus its _R/_L suffix.
-  const baseOf = (id) => id.replace(/_[LR]$/, "");
   const isolateGroupFor = (mesh) => {
-    const base = baseOf(mesh.userData.structure.id);
-    return meshes.filter((m) => baseOf(m.userData.structure.id) === base);
+    const base = stripSide(mesh.userData.structure.id);
+    return meshes.filter((m) => stripSide(m.userData.structure.id) === base);
   };
 
   // Picking helpers, shared by mouse hover, click, and touch tap so the raycast
@@ -7635,7 +7721,6 @@ async function main() {
   // it from search would. The inverse also holds: focusing any node rewrites the hash
   // to its deep link (see syncHashToFocus), so the address bar is always shareable.
   const linkFold = (s) => foldText(String(s == null ? "" : s));
-  const stripSideId = (id) => String(id).replace(/_[LR]$/, "");
   const findByIdOrName = (list, v) => {
     const q = linkFold(v);
     return list.find((o) => linkFold(o.id) === q)
@@ -7649,10 +7734,10 @@ async function main() {
     focuscircuit: (v) => { const c = findByIdOrName(data.circuits, v); if (c) focusCircuit(c, { frame: true }); return !!c; },
     focusgroup: (v) => { const g = findByIdOrName(data.projectionGroups, v); if (g) focusProjectionGroup(g, { frame: true }); return !!g; },
     focusstructure: (v) => {
-      const q = linkFold(stripSideId(v));
+      const q = linkFold(stripSide(v));
       const group = meshes.filter((m) => {
         const s = m.userData.structure;
-        return linkFold(stripSideId(s.id)) === q || linkFold(s.base_name) === q || linkFold(s.name) === q;
+        return linkFold(stripSide(s.id)) === q || linkFold(s.base_name) === q || linkFold(s.name) === q;
       });
       if (!group.length) return false;
       const rep = group.find((m) => !/_[LR]$/.test(m.userData.structure.id)) || group[0];
@@ -7664,7 +7749,7 @@ async function main() {
       const byBase = new Map();
       for (const a of arrows) {
         const p = a.projection;
-        const key = `${stripSideId(p.from)}->${stripSideId(p.to)}`;
+        const key = `${stripSide(p.from)}->${stripSide(p.to)}`;
         (byBase.get(key) || byBase.set(key, []).get(key)).push(a);
       }
       for (const [key, arr] of byBase) {
@@ -7698,7 +7783,7 @@ async function main() {
     const param = KIND_TO_PARAM[key.slice(0, idx)];
     if (!param) return null;
     const id = key.slice(idx + 1);
-    const value = param === "focusStructure" ? stripSideId(id) : id;
+    const value = param === "focusStructure" ? stripSide(id) : id;
     const url = new URL(window.location.href);
     url.hash = `${param}=${encodeURIComponent(value)}`;
     return url.toString();

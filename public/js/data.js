@@ -131,6 +131,10 @@ function localize(field) {
  *   points back at its receptor record (`receptor`); a non-receptor one adds
  *   `typeLabel` / `systemLabel` / `wikipedia` / `locationNames` (+ the parallel
  *   `locationBases` base ids, so each panel region row can jump to its structure).
+ * @property {Map<string, object[]>} targetsByStructure  The reverse expression index:
+ *   region base id -> `{target, info, ubiquitous}` for every target expressed there,
+ *   `info` being that region's own graded expression node (the same one the receptor
+ *   panel's "Found in" row shows). Lets a structure panel answer "what sits here?".
  * @property {object[]} drugs  Drug records (from drugs.jsonl, sourced from Stahl's
  *   Prescriber's Guide). Each is augmented with localized `description` / `nbn`,
  *   `categoryLabels` (+ primary `category`), and resolved `bindings` (each binding
@@ -1131,6 +1135,33 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     });
   }
 
+  // The reverse of a receptor's "Found in": region base -> the targets expressed
+  // there. Same node, read from the other end (the expression claim belongs to the
+  // (target, region) pair, not to the target), so each entry carries THAT region's
+  // own graded `info` and the structure panel shows the very pill the receptor panel
+  // shows. A ubiquitous receptor is listed in every region under its single
+  // "throughout the brain" node, which is the one expression claim it has.
+  const targetsByStructure = new Map();
+  const pushTarget = (base, entry) => {
+    if (!baseName.has(base)) return; // an expression claim on an unmodeled region
+    if (!targetsByStructure.has(base)) targetsByStructure.set(base, []);
+    targetsByStructure.get(base).push(entry);
+  };
+  for (const tgt of targets) {
+    const rec = tgt.receptor;
+    if (rec && rec.ubiquitous) {
+      for (const base of baseName.keys()) {
+        pushTarget(base, { target: tgt, info: rec.ubiquitousInfo, ubiquitous: true });
+      }
+      continue;
+    }
+    const bases = rec ? rec.locations : tgt.locationBases;
+    const infos = rec ? rec.locationInfo : tgt.locationInfo;
+    (bases || []).forEach((base, i) => {
+      pushTarget(base, { target: tgt, info: infos && infos[i], ubiquitous: false });
+    });
+  }
+
   return {
     structures,
     projections,
@@ -1139,6 +1170,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     projectionGroupsByKey,
     receptors,
     targets,
+    targetsByStructure,
     drugs,
     drugsByTarget,
     enzymes,

@@ -231,8 +231,14 @@ Views:
   pathway list. Each connection
   row: a bold `directionArrow` (inline SVG, pathway colour, out/in/both; wrapped in `withTip` so a
   tap explains direction without bubbling to the row click), the other endpoint, and the pathway's
-  summary pill (`proj.provenance`, resolved in `js/data.js`). Left/right twin pathways collapse to
-  one row (by direction + other-endpoint `base_name` + label).
+  summary pill (`proj.provenance`, resolved in `js/data.js`), orange ⚠ when the pathway is a blanket
+  claim. Left/right twin pathways collapse to
+  one row (by direction + other-endpoint `base_name` + label). Then **Receptors found here**
+  (`appendExpressedTargets`), the reverse of a receptor's "Found in": every target expressed in this
+  region, off `data.targetsByStructure`, grouped by neurotransmitter system in the
+  `groupTargetsBySystem` order (biggest system in THIS region first, capped 8 per group with the rest
+  expandable in place). Each row carries that region's OWN expression node (grade pill + amber species
+  tag), the same claim the receptor panel shows from the other end, and jumps to the target.
 - **receptor / target / drug / enzyme / circuit / projection-group**: see their sections.
 
 A click on empty space closes the panel. **Double-click**: on a structure isolates it; on empty

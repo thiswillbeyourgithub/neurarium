@@ -196,7 +196,9 @@ Viewer (`public/`):
   render props (projection `color`/`sign`, receptor labels + `structureIds`, per-binding
   `targetName`/`actionLabel`/`effect`/`effectColor`/`structureIds`/`flowKind` + the drug's union
   `structureIds`/`flowKinds`/`focusable`/search `keywords`); builds the merged `targets` browse
-  list, the `drugsByTarget` reverse index, and `projectionGroupsByKey` (`${mode}:${key}`).
+  list, the `drugsByTarget` + `targetsByStructure` reverse indexes (the latter reads a receptor's
+  "Found in" from the region's end, so a structure panel can list what is expressed there carrying
+  the very same graded node), and `projectionGroupsByKey` (`${mode}:${key}`).
 - `js/shapes.js` — `buildGeometry()` dispatches on type to `buildBlobGeometry`/
   `buildCurveGeometry`/`buildCompositeGeometry`; `mirrorGeometryX` for the left member.
   Self-contained Perlin `fractalNoise` (fBm/ridged/domain-warp). Cortical lobes are cel-shaded
