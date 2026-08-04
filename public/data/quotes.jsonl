@@ -753,6 +753,7 @@
 {"id": "q_3d6cb2fb3b75", "corpus": "stahl", "page": 863, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet", "heading": ["Trimipramine", "Therapeutics", "Class"]}
 {"id": "q_3d6d23d44d19", "corpus": "wikipedia_pharm", "page": "escitalopram", "quote": "Escitalopram weakly inhibits CYP2D6 , and hence may increase plasma levels of some CYP2D6 substrates such as aripiprazole , risperidone , tramadol , or codeine ."}
 {"id": "q_3d77e20db24d", "corpus": "wikipedia_pharm", "page": "melperone", "quote": "D 4 | 555"}
+{"id": "q_3d9cd5b51c3a", "corpus": "kandel", "page": 1048, "quote": "They are the sole source of histaminergic actions in the entire brain, from the cerebral cortex to the spinal cord, and are involved in a variety of arousal responses.", "llm": "opus", "heading": ["40 The Brain Stem", "Monoaminergic Neurons in the Brain Stem Modulate Sensory, Motor, Autonomic, and Behavioral Functions", "Monoaminergic Neurons Share Many Cellular Properties"]}
 {"id": "q_3d9ef7a9dd88", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in occipital: probe 1059354 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3da94feda167", "corpus": "stahl", "page": 175, "quote": "Weak inhibitor of CYP2D6", "heading": ["Citalopram", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_3daf061713e3", "corpus": "stahl", "page": 291, "quote": "Cymbalta", "heading": ["Duloxetine", "Therapeutics", "Brands"]}
@@ -1332,6 +1333,7 @@
 {"id": "q_689ed55441ba", "corpus": "gtopdb", "page": 215, "quote": "Pituitary, substantia nigra (SN) and ventral tegmental area (VTA).", "species": "Human", "llm": "sonnet"}
 {"id": "q_68a4406e89dc", "corpus": "stahl", "page": 633, "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)", "llm": "sonnet", "heading": ["Paroxetine", "Therapeutics", "Class"]}
 {"id": "q_68b2ed701b10", "corpus": "gtopdb_ki", "page": "sertindole", "quote": "sertindole at 5-HT1D receptor (HTR1D, Human): Antagonist / Antagonist, pKi 7.2 [PMID 8935801]", "species": "Human"}
+{"id": "q_68ba4aefddff", "corpus": "kandel", "page": 1046, "quote": "All histaminergic neurons are located in the posterior lateral hypothalamus, mostly within the tuberomammillary nucleus. These neurons project to virtually every part of the neuraxis and play a major role in arousal.", "llm": "opus", "heading": ["40 The Brain Stem", "Monoaminergic Neurons in the Brain Stem Modulate Sensory, Motor, Autonomic, and Behavioral Functions", "Many Modulatory Systems Use Monoamines as Neurotransmitters"]}
 {"id": "q_68c69b139a69", "corpus": "stahl", "page": 218, "quote": "Half-life 10 hours", "heading": ["Cyamemazine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_68e3c419863a", "corpus": "stahl", "page": 705, "quote": "Benzodiazepine (hypnotic)", "llm": "sonnet", "heading": ["Quazepam", "Therapeutics", "Class"]}
 {"id": "q_690094a4346a", "corpus": "wikipedia_pharm", "page": "cabergoline", "quote": "D 4 | 56 | 49 | Partial agonist"}

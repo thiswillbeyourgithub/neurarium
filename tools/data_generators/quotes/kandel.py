@@ -30,6 +30,14 @@ from data_generators.connectivity import (
 _KQ_RAPHE_FOREBRAIN = _kandel(1048,
     "The B5–B7 neurons in the pons mainly provide serotonergic innervation of "
     "the thalamus, hypothalamus, and cerebral cortex.")
+_KQ_HISTAMINE_CORTEX = _kandel(1048,
+    "They are the sole source of histaminergic actions in the entire brain, from "
+    "the cerebral cortex to the spinal cord, and are involved in a variety of "
+    "arousal responses.")
+_KQ_HISTAMINE_NEURAXIS = _kandel(1046,
+    "All histaminergic neurons are located in the posterior lateral hypothalamus, "
+    "mostly within the tuberomammillary nucleus. These neurons project to "
+    "virtually every part of the neuraxis and play a major role in arousal.")
 _NQ_RAPHE_STRIATUM = _nieuwenhuys(896,
     "The main projections of the dorsal raphe nucleus are to the lateral "
     "geniculate body, the striatum, the entorhinal cortex, the olfactory bulb "
@@ -117,11 +125,32 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("tuberomammillary_R", "thalamus_R"): _KQ_MONOAMINE_INNERV,
     ("tuberomammillary_R", "hypothalamus_R"): _KQ_MONOAMINE_INNERV,
     ("tuberomammillary_R", "septal_nuclei_R"): _KQ_MONOAMINE_INNERV,
+    # The rest of the histamine fan. Kandel never lists this system's targets one
+    # by one; he twice states it in the broadest terms a book can, and those two
+    # sentences are the only sources there are. Split by what each actually
+    # covers: _KQ_HISTAMINE_CORTEX ("from the cerebral cortex to the spinal cord")
+    # for the cortical + limbic targets, _KQ_HISTAMINE_NEURAXIS ("virtually every
+    # part of the neuraxis") for the striatum, olfactory bulb, brainstem and
+    # cerebellum, which "cerebral cortex to spinal cord" only reaches by implication.
+    ("tuberomammillary_R", "parietal_R"): _KQ_HISTAMINE_CORTEX,
+    ("tuberomammillary_R", "temporal_R"): _KQ_HISTAMINE_CORTEX,
+    ("tuberomammillary_R", "occipital_R"): _KQ_HISTAMINE_CORTEX,
+    ("tuberomammillary_R", "cingulate_R"): _KQ_HISTAMINE_CORTEX,
+    ("tuberomammillary_R", "hippocampus_R"): _KQ_HISTAMINE_CORTEX,
+    ("tuberomammillary_R", "amygdala_R"): _KQ_HISTAMINE_CORTEX,
+    ("tuberomammillary_R", "accumbens_R"): _KQ_HISTAMINE_NEURAXIS,
+    ("tuberomammillary_R", "caudate_R"): _KQ_HISTAMINE_NEURAXIS,
+    ("tuberomammillary_R", "putamen_R"): _KQ_HISTAMINE_NEURAXIS,
+    ("tuberomammillary_R", "olfactory_bulb_R"): _KQ_HISTAMINE_NEURAXIS,
+    ("tuberomammillary_R", "midbrain"): _KQ_HISTAMINE_NEURAXIS,
+    ("tuberomammillary_R", "pons"): _KQ_HISTAMINE_NEURAXIS,
+    ("tuberomammillary_R", "medulla"): _KQ_HISTAMINE_NEURAXIS,
+    ("tuberomammillary_R", "cerebellum"): _KQ_HISTAMINE_NEURAXIS,
+    ("pineal", "hypothalamus_R"): _KQ_MELATONIN,
     # Ascending cholinergic: one Kandel sentence (p.1047) puts the nucleus basalis
     # of Meynert in the basal forebrain group and has it projecting "throughout the
     # cerebral cortex, hippocampus, and amygdala", backing all six NBM targets
     # (the four lobes + cingulate cortex + amygdala).
-    ("pineal", "hypothalamus_R"): _KQ_MELATONIN,
     # The sentence immediately before the one _KQ_CHOLINERGIC_BASAL quotes: same
     # figure legend, the other half of the cholinergic map.
     ("pons", "thalamus_R"): _kandel(1047,

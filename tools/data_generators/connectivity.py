@@ -413,6 +413,72 @@ PROJECTIONS: list[dict[str, Any]] = [
          label="Ascending histaminergic (basal forebrain)",
          description="Tuberomammillary histamine projects to the basal forebrain, "
                      "reinforcing cortical activation."),
+    # The tuberomammillary nucleus is the brain's ONLY histamine source, and both
+    # Kandel sentences behind these say so in the broadest terms available ("every
+    # part of the neuraxis", "the entire brain, from the cerebral cortex to the
+    # spinal cord"). So the fan below is wide on purpose: an H1 antihistamine acts
+    # in regions all over the brain, and until now only four of them had a supply
+    # drawn. No corpus in the tree states this system target by target, so every
+    # one of these arrows cites the same blanket claim; the reader sees the quote
+    # on each and can judge it.
+    dict(**{"from": "tuberomammillary_R", "to": "parietal_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (parietal)",
+         description="Tuberomammillary histamine reaches the parietal cortex."),
+    dict(**{"from": "tuberomammillary_R", "to": "temporal_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (temporal)",
+         description="Tuberomammillary histamine reaches the temporal cortex."),
+    dict(**{"from": "tuberomammillary_R", "to": "occipital_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (occipital)",
+         description="Tuberomammillary histamine reaches the occipital cortex."),
+    dict(**{"from": "tuberomammillary_R", "to": "cingulate_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (cingulate)",
+         description="Tuberomammillary histamine reaches the cingulate cortex."),
+    dict(**{"from": "tuberomammillary_R", "to": "hippocampus_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (hippocampal)",
+         description="Tuberomammillary histamine innervates the hippocampus, "
+                     "where H1 blockade by an antihistamine dulls memory."),
+    dict(**{"from": "tuberomammillary_R", "to": "amygdala_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (amygdala)",
+         description="Tuberomammillary histamine innervates the amygdala."),
+    dict(**{"from": "tuberomammillary_R", "to": "accumbens_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (accumbens)",
+         description="Tuberomammillary histamine reaches the ventral striatum."),
+    dict(**{"from": "tuberomammillary_R", "to": "caudate_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (caudate)",
+         description="Tuberomammillary histamine reaches the caudate nucleus."),
+    dict(**{"from": "tuberomammillary_R", "to": "putamen_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (putamen)",
+         description="Tuberomammillary histamine reaches the putamen."),
+    dict(**{"from": "tuberomammillary_R", "to": "olfactory_bulb_R"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Ascending histaminergic (olfactory)",
+         description="Tuberomammillary histamine reaches the olfactory bulb."),
+    dict(**{"from": "tuberomammillary_R", "to": "midbrain"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Descending histaminergic (midbrain)",
+         description="Tuberomammillary histamine descends into the midbrain."),
+    dict(**{"from": "tuberomammillary_R", "to": "pons"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Descending histaminergic (pontine)",
+         description="Tuberomammillary histamine descends into the pons."),
+    dict(**{"from": "tuberomammillary_R", "to": "medulla"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Descending histaminergic (medullary)",
+         description="Tuberomammillary histamine descends into the medulla, on its "
+                     "way to the spinal cord."),
+    dict(**{"from": "tuberomammillary_R", "to": "cerebellum"},
+         kind="histaminergic", neurotransmitter="Histamine",
+         label="Descending histaminergic (cerebellar)",
+         description="Tuberomammillary histamine innervates the cerebellum."),
     # --- Ascending cholinergic from the nucleus basalis of Meynert (the basal
     #     forebrain, the cortex's acetylcholine source): the second diffuse
     #     cholinergic fan next to the septohippocampal pathway above, and the one

@@ -193,6 +193,34 @@ FR: dict[str, str] = {
         "Histaminergique ascendante (hypothalamique)",
     "Ascending histaminergic (basal forebrain)":
         "Histaminergique ascendante (prosencéphale basal)",
+    "Ascending histaminergic (parietal)":
+        "Histaminergique ascendante (pariétale)",
+    "Ascending histaminergic (temporal)":
+        "Histaminergique ascendante (temporale)",
+    "Ascending histaminergic (occipital)":
+        "Histaminergique ascendante (occipitale)",
+    "Ascending histaminergic (cingulate)":
+        "Histaminergique ascendante (cingulaire)",
+    "Ascending histaminergic (hippocampal)":
+        "Histaminergique ascendante (hippocampique)",
+    "Ascending histaminergic (amygdala)":
+        "Histaminergique ascendante (amygdalienne)",
+    "Ascending histaminergic (accumbens)":
+        "Histaminergique ascendante (accumbens)",
+    "Ascending histaminergic (caudate)":
+        "Histaminergique ascendante (noyau caudé)",
+    "Ascending histaminergic (putamen)":
+        "Histaminergique ascendante (putamen)",
+    "Ascending histaminergic (olfactory)":
+        "Histaminergique ascendante (olfactive)",
+    "Descending histaminergic (midbrain)":
+        "Histaminergique descendante (mésencéphalique)",
+    "Descending histaminergic (pontine)":
+        "Histaminergique descendante (pontique)",
+    "Descending histaminergic (medullary)":
+        "Histaminergique descendante (bulbaire)",
+    "Descending histaminergic (cerebellar)":
+        "Histaminergique descendante (cérébelleuse)",
     "Mesopontine cholinergic (thalamic)":
         "Cholinergique mésopontine (thalamique)",
     "Pineal melatonin (suprachiasmatic)":
@@ -306,6 +334,38 @@ FR: dict[str, str] = {
     "cortical activation.":
         "L'histamine tubéromammillaire projette vers le prosencéphale basal, "
         "renforçant l'activation corticale.",
+    "Tuberomammillary histamine reaches the parietal cortex.":
+        "L'histamine tubéromammillaire atteint le cortex pariétal.",
+    "Tuberomammillary histamine reaches the temporal cortex.":
+        "L'histamine tubéromammillaire atteint le cortex temporal.",
+    "Tuberomammillary histamine reaches the occipital cortex.":
+        "L'histamine tubéromammillaire atteint le cortex occipital.",
+    "Tuberomammillary histamine reaches the cingulate cortex.":
+        "L'histamine tubéromammillaire atteint le cortex cingulaire.",
+    "Tuberomammillary histamine innervates the hippocampus, where H1 blockade by "
+    "an antihistamine dulls memory.":
+        "L'histamine tubéromammillaire innerve l'hippocampe, où le blocage des "
+        "récepteurs H1 par un antihistaminique émousse la mémoire.",
+    "Tuberomammillary histamine innervates the amygdala.":
+        "L'histamine tubéromammillaire innerve l'amygdale.",
+    "Tuberomammillary histamine reaches the ventral striatum.":
+        "L'histamine tubéromammillaire atteint le striatum ventral.",
+    "Tuberomammillary histamine reaches the caudate nucleus.":
+        "L'histamine tubéromammillaire atteint le noyau caudé.",
+    "Tuberomammillary histamine reaches the putamen.":
+        "L'histamine tubéromammillaire atteint le putamen.",
+    "Tuberomammillary histamine reaches the olfactory bulb.":
+        "L'histamine tubéromammillaire atteint le bulbe olfactif.",
+    "Tuberomammillary histamine descends into the midbrain.":
+        "L'histamine tubéromammillaire descend dans le mésencéphale.",
+    "Tuberomammillary histamine descends into the pons.":
+        "L'histamine tubéromammillaire descend dans le pont.",
+    "Tuberomammillary histamine descends into the medulla, on its way to the "
+    "spinal cord.":
+        "L'histamine tubéromammillaire descend dans le bulbe rachidien, en route "
+        "vers la moelle épinière.",
+    "Tuberomammillary histamine innervates the cerebellum.":
+        "L'histamine tubéromammillaire innerve le cervelet.",
     "Melatonin from the pineal gland reaches the MT1 and MT2 receptors of the "
     "suprachiasmatic nucleus, the body clock. A hormonal route through the CSF "
     "and the bloodstream, not an axonal tract.":
