@@ -2529,6 +2529,13 @@ function createInfoPanel(data, sourcingModal) {
   // so no CSP change + no provenance pill.
   const uniprotSearchUrl = (name) =>
     `https://www.uniprot.org/uniprotkb?query=${encodeURIComponent(name)}&facets=model_organism%3A9606`;
+  // ClinPGx (the former PharmGKB) name search: pharmacogenomics for a drug (which
+  // gene variants change its response), for its pharmacokinetic pathways
+  // (`type: "Pathway"`), and for a metabolizing enzyme. Same convenience-search
+  // shape as the others (navigated to, never fetched).
+  const clinpgxSearchUrl = (name, type = "") =>
+    "https://www.clinpgx.org/search?query=" + encodeURIComponent(name)
+    + (type ? "&type=" + encodeURIComponent(type) : "");
   const gtopdbSearchUrl = (name) =>
     "https://www.guidetopharmacology.org/GRAC/DatabaseSearchForward?searchString="
     + encodeURIComponent(name)
@@ -3278,7 +3285,14 @@ function createInfoPanel(data, sourcingModal) {
       clearBody();
       body.appendChild(el("h2", "info-title", enzyme.label));
       body.appendChild(el("div", "info-group", t("enzyme.heading")));
-      appendReference({ url: enzyme.wikipedia });
+      const { wiki: enzWiki } = appendReference({ url: enzyme.wikipedia });
+      // ClinPGx covers exactly what this panel cannot: which variants of this
+      // isoform make a carrier a poor or ultra-rapid metabolizer, and the dosing
+      // guidance that follows. Lookup link, so no provenance pill.
+      if (enzWiki) {
+        appendLookupLink(enzWiki, "info.clinpgx",
+          clinpgxSearchUrl(enzyme.label), "info.clinpgxEnzymeTitle");
+      }
 
       // The active metabolites this isoform MAKES, the other half of the metabolism
       // graph (the rows below are what it *handles*). Same node seen from the enzyme's
@@ -3427,6 +3441,19 @@ function createInfoPanel(data, sourcingModal) {
         const addLookup = (labelKey, href, titleKey) =>
           appendLookupLink(wiki, labelKey, href, titleKey);
         const q = encodeURIComponent(drug.name);
+        // Order: the two regulators first (EMA, FDA), then ClinPGx, then the
+        // consumer-facing Drugs.com, so the list runs from the most authoritative
+        // to the most readable.
+        addLookup(
+          "info.ema",
+          "https://www.ema.europa.eu/en/search?search_api_fulltext=" + q,
+          "info.emaTitle");
+        addLookup(
+          "info.fda",
+          "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm"
+            + "?event=BasicSearch.process&searchTerm=" + q,
+          "info.fdaTitle");
+        addLookup("info.clinpgx", clinpgxSearchUrl(drug.name), "info.clinpgxTitle");
         // Drugs.com search by name. A search link (always lands on the drug),
         // chosen over a direct /monograph/<name>.html so it never 404s for a drug
         // whose monograph slug differs (combos especially); shown regardless of
@@ -3443,15 +3470,6 @@ function createInfoPanel(data, sourcingModal) {
               + encodeURIComponent(drug.name.toLowerCase()),
             "info.vidalTitle");
         }
-        addLookup(
-          "info.ema",
-          "https://www.ema.europa.eu/en/search?search_api_fulltext=" + q,
-          "info.emaTitle");
-        addLookup(
-          "info.fda",
-          "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm"
-            + "?event=BasicSearch.process&searchTerm=" + q,
-          "info.fdaTitle");
       }
 
       // The reference row itself (the Wikipedia link + the external-database
@@ -3749,6 +3767,14 @@ function createInfoPanel(data, sourcingModal) {
         enzWrap.dataset.tourSec = "metabolism"; // guided-tour section anchor
         enzWrap.appendChild(el("h3", null, t("drug.metabolism")));
         enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
+        // Where to go read the pharmacokinetic pathways themselves: the enzyme rows
+        // below say *which* isoform, ClinPGx draws the route. A lookup link like the
+        // ones beside the reference, so it carries no provenance pill.
+        const pathRow = el("div", "info-wiki");
+        pathRow.appendChild(el("span", null, t("info.pathways")));
+        appendLookupLink(pathRow, "info.clinpgx",
+          clinpgxSearchUrl(drug.name, "Pathway"), "info.clinpgxPathwaysTitle");
+        enzWrap.appendChild(pathRow);
         const enzUl = el("ul");
         // Substrate rows first (how the body clears it), then what it does to others.
         const roleOrder = { substrate: 0, inhibitor: 1, inducer: 2 };
