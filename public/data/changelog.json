@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.47.3",
+      "date": "2026-08-10",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The opening animation is now two moves instead of one: the view turns around the blown-apart brain first, pauses a beat, then the regions glide back together. Doing both at once was more than a modest graphics card could draw smoothly",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.47.2",
       "date": "2026-08-10",
       "entries": [
