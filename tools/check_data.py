@@ -1859,8 +1859,14 @@ def check_changelog(report):
     match = _APP_VERSION_RE.search(version_js.read_text(encoding="utf-8")) \
         if version_js.exists() else None
     if not match:
-        report.warn("public/version.js: could not read __APP_VERSION__; skipped the "
-                    "check that the running version has release notes")
+        # An error, not a warning: version.js is committed and required, so an
+        # unreadable one is a real defect (it once shipped EMPTY for two releases,
+        # unnoticed because this only warned). With no version the panel header and
+        # loading overlay lose their version tag and the What's new popup can never
+        # decide a release is new, so a visitor is never told anything shipped.
+        report.error("public/version.js: could not read __APP_VERSION__. The version "
+                     "is what a visitor's browser compares against to see what is new, "
+                     "so a build without one announces nothing")
     elif match.group(1) not in seen:
         report.error(f"version.js is {match.group(1)} but docs/changelog/{match.group(1)}/"
                      f"changelog.md does not exist. Every released version needs notes, "
