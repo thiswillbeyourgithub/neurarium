@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.47.1",
+      "date": "2026-08-10",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The \"What's new\" popup's own title and each version heading in it are bigger, so the notes are legible at a glance instead of reading like the small print",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.47.0",
       "date": "2026-08-10",
       "entries": [
