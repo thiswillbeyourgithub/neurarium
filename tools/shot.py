@@ -173,8 +173,9 @@ def main() -> int:
         help="device scale factor for a crisp PNG (default 2)",
     )
     parser.add_argument(
-        "--wait", type=int, default=6000,
-        help="ms to let the scene load + render before capture (default 6000)",
+        "--wait", type=int, default=9000,
+        help="ms to let the scene load + render before capture (default 9000, "
+             "comfortably past the assemble intro's hold + sweep)",
     )
     parser.add_argument(
         "--headed", action="store_true",

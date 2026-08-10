@@ -46,7 +46,13 @@ const EXPLODE_STRENGTH = 2.5;
 // camera pulling in from the spread (like dragging the Separate slider 1 -> 0)
 // while it sweeps INTRO_ROTATION_TURNS of a turn and lands on the resting view.
 // Tuned to feel swift but legible; eased so it departs and arrives smoothly.
-const INTRO_DURATION_MS = 2200;
+const INTRO_DURATION_MS = 4400;
+// Held on the fully blown-out pose for this long before the sweep starts: the
+// first frames after the overlay fades are the most expensive ones (shader
+// compiles, first draw of every mesh), so moving during them read as a stutter.
+// The hold gives them somewhere to land, and the render loop still runs, so the
+// GPU work is done by the time the motion begins.
+const INTRO_HOLD_MS = 1000;
 // How much of a full turn the camera sweeps during the intro before settling on
 // the resting orientation (0.75 = three-quarters of a revolution).
 const INTRO_ROTATION_TURNS = 0.75;
@@ -499,7 +505,12 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus,
     tick() {
       if (!running) return false;
       if (startTime === null) startTime = performance.now();
-      const t = Math.min(1, (performance.now() - startTime) / INTRO_DURATION_MS);
+      // Negative elapsed during the INTRO_HOLD_MS hold clamps t to 0, so the
+      // brain sits still (fully blown out) while the first frames are drawn.
+      const t = Math.min(
+        1,
+        Math.max(0, performance.now() - startTime - INTRO_HOLD_MS) / INTRO_DURATION_MS,
+      );
       const e = ease(t);
       const amount = FROM + (TO - FROM) * e;
       applyAmount(amount);
