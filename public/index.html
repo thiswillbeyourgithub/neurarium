@@ -1116,11 +1116,16 @@
          category. It scrolls with the shared .modal rule (max-height + overflow-y),
          which matters here more than elsewhere: a visitor returning after several
          releases reads a long list. Shown once after an update and from About. */
+      /* Both titles here run larger than the shared modal/section sizes: this popup is
+         read once, cold, by a visitor who did not go looking for it, so the "What's new"
+         header and each version heading have to carry the reading rather than blend into
+         the bullets under them. */
+      #changelog-modal h2 { font-size: 18px; }
       .changelog-release { margin: 0 0 18px; }
       .changelog-release:last-child { margin-bottom: 2px; }
       .changelog-release > h3 {
         margin: 0 0 6px;
-        font-size: 13px;
+        font-size: 15px;
         color: var(--accent-bright);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding-bottom: 4px;
