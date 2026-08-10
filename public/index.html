@@ -2212,11 +2212,9 @@
         color: var(--muted);
       }
       .loading-cta a { color: var(--accent-light); text-decoration: underline; }
-      /* Author byline pinned to the bottom-right of the loading overlay. */
+      /* Author byline, centered in the card between the title and the tagline. */
       .loading-byline {
-        position: absolute;
-        right: 16px;
-        bottom: 12px;
+        margin-bottom: 10px;
         font-size: 12px;
         color: var(--muted);
       }
@@ -2243,6 +2241,7 @@
         .loading-card { width: min(360px, 88vw); }
         .loading-title { font-size: 26px; }
         .loading-version { font-size: 14px; }
+        .loading-byline { font-size: 14px; }
         .loading-tagline { font-size: 16px; }
         .loading-caption { font-size: 16px; }
         .loading-start { font-size: 17px; padding: 11px 26px; }
@@ -2352,15 +2351,14 @@
     <div id="loading">
       <div class="loading-card">
         <div class="loading-title">neurarium <span class="loading-version" data-app-version></span></div>
+        <!-- Author byline, between the title and the tagline. Locale-specific href via common.byline. -->
+        <div class="loading-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></div>
         <div class="loading-tagline" data-i18n="loading.tagline">a (mostly) sourced atlas of psychiatric neuroscience</div>
         <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
         <div id="loading-caption" class="loading-caption" data-i18n="loading.start">Loading…</div>
         <button id="loading-start" class="loading-start" type="button" hidden data-i18n="loading.enter">Start exploring</button>
         <div class="loading-cta" data-i18n-html="loading.cta">Have an idea for a feature? I'd happily build it, <a href="https://olicorne.org/en/contact" target="_blank" rel="noopener noreferrer">get in touch</a>.</div>
       </div>
-      <!-- Author byline, docked bottom-right of the overlay (a direct child of
-           #loading, not the centered card). Locale-specific href via common.byline. -->
-      <div class="loading-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></div>
     </div>
 
     <!-- Top banner stack: the optional WIP banner (js/dev-banner.js, hidden
