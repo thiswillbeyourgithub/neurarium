@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "3.47.2",
+      "date": "2026-08-10",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The author byline on the loading screen now sits between the title and the tagline instead of in a corner",
+          "commits": []
+        },
+        {
+          "category": "improved",
+          "text": "The opening animation waits a second before it starts and now unfolds twice as slowly, so the brain assembles smoothly instead of stuttering on the first frames",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.47.1",
       "date": "2026-08-10",
       "entries": [
