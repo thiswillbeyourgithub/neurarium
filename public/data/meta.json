@@ -218,6 +218,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Serotonin_transporter",
       "wikipedia_provenance": "sourced",
+      "gene": "SLC6A4",
       "sources": [
         {
           "quote_id": "q_c3614ce650ea",
@@ -270,6 +271,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Norepinephrine_transporter",
       "wikipedia_provenance": "sourced",
+      "gene": "SLC6A2",
       "sources": [
         {
           "quote_id": "q_9f1907fb2642",
@@ -350,6 +352,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_transporter",
       "wikipedia_provenance": "sourced",
+      "gene": "SLC6A3",
       "sources": [
         {
           "quote_id": "q_0b9972a4b647",
@@ -422,6 +425,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/GABA_transporter",
       "wikipedia_provenance": "sourced",
+      "gene": "SLC6A1",
       "sources": [
         {
           "quote_id": "q_1048c1d21924",
@@ -541,7 +545,8 @@
         ]
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Na-K-Cl_cotransporter",
-      "wikipedia_provenance": "sourced"
+      "wikipedia_provenance": "sourced",
+      "gene": "SLC12A2"
     },
     "vmat2": {
       "name": "Vesicular monoamine transporter (VMAT2)",
@@ -624,6 +629,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",
       "wikipedia_provenance": "sourced",
+      "gene": "SLC18A2",
       "sources": [
         {
           "quote_id": "q_7940a8e66a89",
@@ -712,6 +718,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_A",
       "wikipedia_provenance": "sourced",
+      "gene": "MAOA",
       "sources": [
         {
           "quote_id": "q_4228136b5d28",
@@ -792,6 +799,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Monoamine_oxidase_B",
       "wikipedia_provenance": "sourced",
+      "gene": "MAOB",
       "sources": [
         {
           "quote_id": "q_8b7016ba0b20",
@@ -864,6 +872,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Acetylcholinesterase",
       "wikipedia_provenance": "sourced",
+      "gene": "ACHE",
       "sources": [
         {
           "quote_id": "q_bf38ba0191ee",
@@ -920,6 +929,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Butyrylcholinesterase",
       "wikipedia_provenance": "sourced",
+      "gene": "BCHE",
       "sources": [
         {
           "quote_id": "q_bf38ba0191ee",
@@ -936,6 +946,7 @@
       "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/Carbonic_anhydrase",
       "wikipedia_provenance": "sourced",
+      "gene": "CA2",
       "sources": [
         {
           "quote_id": "q_3b235323abec",
@@ -952,6 +963,7 @@
       "classification_provenance": "verified",
       "wikipedia": "https://en.wikipedia.org/wiki/PDE5",
       "wikipedia_provenance": "sourced",
+      "gene": "PDE5A",
       "sources": [
         {
           "quote_id": "q_cd6a14235838",
@@ -1032,6 +1044,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel",
       "wikipedia_provenance": "sourced",
+      "gene": "SCN1A",
       "sources": [
         {
           "quote_id": "q_524c0da2af25",
@@ -1096,6 +1109,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel",
       "wikipedia_provenance": "sourced",
+      "gene": "CACNA1A",
       "sources": [
         {
           "quote_id": "q_524c0da2af25",
@@ -1160,6 +1174,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/L-type_calcium_channel",
       "wikipedia_provenance": "sourced",
+      "gene": "CACNA2D1",
       "sources": [
         {
           "quote_id": "q_6ce626fa7c2e",
@@ -1216,6 +1231,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel",
       "wikipedia_provenance": "sourced",
+      "gene": "CACNA1G",
       "sources": [
         {
           "quote_id": "q_603766443e9f",
@@ -1280,6 +1296,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/SV2A",
       "wikipedia_provenance": "sourced",
+      "gene": "SV2A",
       "sources": [
         {
           "quote_id": "q_9bacd4eb53ec",
@@ -1391,6 +1408,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
       "wikipedia_provenance": "sourced",
+      "gene": "ADRA2A",
       "sources": [
         {
           "quote_id": "q_25c5e5a6b44e",
@@ -1491,6 +1509,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Glutamate_receptor",
       "wikipedia_provenance": "sourced",
+      "gene": "GRIN1",
       "sources": [
         {
           "quote_id": "q_20edaa302bc7",
@@ -1563,6 +1582,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Orexin_receptor",
       "wikipedia_provenance": "sourced",
+      "gene": "HCRTR1",
       "sources": [
         {
           "quote_id": "q_9ded3344460a",
@@ -1589,6 +1609,7 @@
       },
       "wikipedia": "https://en.wikipedia.org/wiki/Melanocortin_receptor",
       "wikipedia_provenance": "sourced",
+      "gene": "MC4R",
       "sources": [
         {
           "quote_id": "q_2e92a06b27b1",

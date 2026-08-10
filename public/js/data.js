@@ -1099,6 +1099,9 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       typeLabel,
       systemLabel,
       wikipedia: tgt.wikipedia || "",
+      // Representative HGNC symbol (SERT -> SLC6A4), an identifier, not a graded
+      // claim: what the gene-keyed ClinPGx lookup link searches for.
+      gene: tgt.gene || "",
       // A receptor_group's modeled subtype receptor ids (α2 -> α2A/B/C/D), a
       // sourceless taxonomy (meta.drug_targets[].subtypes). The panel lists each
       // subtype's own interacting drugs in a dropdown; empty for a non-group target.

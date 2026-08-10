@@ -141,7 +141,7 @@ README hero shot in `docs/`.
 keep this file terse. In short: the anatomy is authored once in `generate_data.py` (drugs
 in `tools/data/drugs_data.jsonl`), which emits the committed `public/data/`. `generate_data.py` is
 now a thin orchestrator: the data lives in the `tools/data_generators/` package (`i18n`,
-`provenance`, `drugs`, `geometry`, `presentation`, `connectivity`, `quotes/`, `quote_table`,
+`provenance`, `drugs`, `geometry`, `genes`, `presentation`, `connectivity`, `quotes/`, `quote_table`,
 `receptors/`, `regions/`; per-module purpose in `tools/README.md`). Each geometry form
 is one `data/shapes/<name>.json` (`blob`/`curve`/`composite`, L/R pairs share one right-side
 file via `mirror:true`). The author-side scripts are grouped: external-data fetchers under
@@ -455,9 +455,11 @@ in `js/data.js`.
   grade pills, a **Tone polarity** row for a target carrying a direction-flipping `vesicular`/`sign`/
   `synaptic` flag (its *own* graded node `target_polarity`, not the classification grade, since the flag
   flips the drug-flow overlay's sign; `TARGET_POLARITY_QUOTES` upgrades it, else `llm`), then the same
-  per-region "Found in" list, kind `target_locations`). Both add a **PDSP
-  Ki** lookup link (`appendLookupLink`); a receptor also gets **UniProt** (human-only) + **GtoPdb**
-  name-search links (`uniprotSearchUrl`/`gtopdbSearchUrl`, no pill). Both carry an **Interacting
+  per-region "Found in" list, kind `target_locations`). Both add **PDSP
+  Ki** + **ClinPGx** lookup links (`appendLookupLink`); a receptor also gets **UniProt** (human-only) +
+  **GtoPdb** search links (`uniprotSearchUrl`/`clinpgxSearchUrl`/`gtopdbSearchUrl`, no pill). The
+  gene databases (UniProt, ClinPGx) search the node's `gene`, its HGNC symbol (α1A -> `ADRA1A`; an
+  identifier, not a graded node, mapped in `data_generators/genes.py`), GtoPdb the display name. Both carry an **Interacting
   drugs** section (from `drugsByTarget`, grouped by category, each row an `effectGlyph` + the
   binding's `bindingProvenancePill` = the *same* resolved binding the drug panel shows; jumps via
   `info.onDrug`). A **receptor_group** target (α2/glutamate) additionally lists, under its own

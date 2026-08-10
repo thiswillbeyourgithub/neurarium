@@ -3142,10 +3142,15 @@ function createInfoPanel(data, sourcingModal) {
         url: receptor.wikipedia, description: receptor.description,
       });
       // External lookups beside the reference: PDSP Ki (binding affinity; a browse
-      // link, PDSP has no per-target search URL), UniProt (human-only) and the Guide
-      // to Pharmacology (GtoPdb), both name-searched on the receptor's name.
+      // link, PDSP has no per-target search URL), UniProt, ClinPGx (pharmacogenomics)
+      // and the Guide to Pharmacology (GtoPdb). The first two are protein/gene
+      // databases, so they search the HGNC symbol (`ADRA1A`; the display name "α1A"
+      // finds nothing there), falling back to the name for the one stub receptor
+      // with no human gene; GtoPdb indexes the pharmacological name itself.
+      const recGene = receptor.gene || receptor.name;
       appendLookupLink(recWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
-      appendLookupLink(recWiki, "info.uniprot", uniprotSearchUrl(receptor.name), "info.uniprotTitle");
+      appendLookupLink(recWiki, "info.uniprot", uniprotSearchUrl(recGene), "info.uniprotTitle");
+      appendLookupLink(recWiki, "info.clinpgx", clinpgxSearchUrl(recGene), "info.clinpgxGeneTitle");
       appendLookupLink(recWiki, "info.gtopdb", gtopdbSearchUrl(receptor.name), "info.gtopdbTitle");
 
       // Classification facts as label / value rows; the "effect" value carries the
@@ -3215,8 +3220,15 @@ function createInfoPanel(data, sourcingModal) {
       // Reference + live lead (targets carry no baked description), via the shared
       // appendReference, so the link sits under any live lead like every panel.
       const { wiki: tgtWiki } = appendReference({ url: target.wikipedia });
-      // PDSP covers transporters / enzymes / ion channels too, so the same lookup.
+      // PDSP covers transporters / enzymes / ion channels too, so the same lookup,
+      // and ClinPGx on the gene (SLC6A4 for SERT): a transporter or a metabolizing
+      // enzyme is exactly what the pharmacogenomics literature is about. A group
+      // target (α2 = ADRA2A/B/C) searches its representative member.
       appendLookupLink(tgtWiki, "info.pdsp", PDSP_KIDB_URL, "info.pdspTitle");
+      if (target.gene) {
+        appendLookupLink(tgtWiki, "info.clinpgx",
+          clinpgxSearchUrl(target.gene), "info.clinpgxGeneTitle");
+      }
 
       // The classification grade (type / system claims) sits on each fact's OWN row
       // rather than a single broad "Source" row below, so a source always grades the

@@ -179,6 +179,14 @@ from data_generators.changelog import load_changelog  # noqa: E402
 # the RECEPTORS use-site below.
 from data_generators.receptors import RECEPTORS  # noqa: E402
 
+# HGNC gene symbol per receptor / target, re-exported from the fetchers that own the
+# maps (see data_generators.genes). An identifier for the gene-keyed lookup links,
+# not a graded node.
+from data_generators.genes import (  # noqa: E402
+    RECEPTOR_GENES,
+    TARGET_GENES,
+)
+
 # Connectivity node literals (defined in data_generators.connectivity to keep this
 # module smaller; no import cycle, connectivity imports only provenance). The
 # pathway quote-source constants (``_KQ_*``) it also holds are consumed by the
@@ -617,6 +625,11 @@ def _receptor_record(rec: dict[str, Any],
     if "wikipedia" in rec:
         out["wikipedia"] = rec["wikipedia"]
         out["wikipedia_provenance"] = _wiki_provenance(rec["id"])
+    # The HGNC symbol, an identifier (no grade, not tallied): the pharmacogenomics
+    # databases are gene-keyed, so the panel's ClinPGx link needs ADRA1A where the
+    # display name is "α1A". Absent for the one stub receptor with no human gene.
+    if rec["id"] in RECEPTOR_GENES:
+        out["gene"] = RECEPTOR_GENES[rec["id"]]
     return out
 
 
@@ -632,6 +645,31 @@ def _check_drug_aliases(drug_ids: set[str]) -> None:
             f"DRUG_ALIASES keys are not drug ids: {unknown}; "
             f"fix the id or drop the entry"
         )
+
+
+def _check_genes() -> None:
+    """Fail loud if a modeled receptor / target has no gene symbol.
+
+    The maps live with the fetchers (see data_generators.genes), so a rename on
+    either side would otherwise drop the gene silently: the panel would just stop
+    offering the gene-keyed ClinPGx link for that node, with nothing to grep for.
+    Checked in this direction (coverage, not key validity) because the fetcher maps
+    deliberately also bucket a few receptor *families* that are not target ids.
+    """
+    missing = sorted(tid for tid in DRUG_TARGETS if tid not in TARGET_GENES)
+    if missing:
+        raise SystemExit(
+            f"drug target(s) with no gene symbol: {missing}; add them to "
+            f"TARGET_GENES in tools/fetch/fetch_allen.py")
+    # A receptor carrying regions is one a reader can look up; the stubs (no regions,
+    # e.g. the rodent-only alpha2d) have no human gene and are exempt.
+    missing = sorted(r["id"] for r in RECEPTORS
+                     if r["locations"] and r["id"] not in RECEPTOR_GENES)
+    if missing:
+        raise SystemExit(
+            f"receptor(s) with no gene symbol: {missing}; add them to RECEPTOR_GENES "
+            f"in tools/fetch/fetch_gtopdb.py (or EXTRA_RECEPTOR_GENES in "
+            f"fetch_gtopdb_class.py)")
 
 
 def _check_tone_rules() -> None:
@@ -742,6 +780,10 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
         if spec.get("wikipedia"):
             targets[tid]["wikipedia"] = spec["wikipedia"]
             targets[tid]["wikipedia_provenance"] = _wiki_provenance(tid)
+        # The representative HGNC symbol, same identifier role as a receptor's (see
+        # _receptor_record): what the gene-keyed ClinPGx link searches for.
+        if tid in TARGET_GENES:
+            targets[tid]["gene"] = TARGET_GENES[tid]
         # Verified quote-sources for this target's classification: the Stahl Essential
         # sentence and/or the GtoPdb type line (corpus #12), whichever exist. They add
         # up rather than override, so a target both cover carries both citations.
@@ -1640,6 +1682,7 @@ def write_artifacts(root: Path) -> None:
     structure here also removes its orphaned shape file.
     """
     _check_tone_rules()
+    _check_genes()
     data, shapes = build_records()
 
     data_dir = root / "data"

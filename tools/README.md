@@ -198,6 +198,8 @@ Screenshots).
   helpers, e.g. `_cortex_lobe_entry` + `MIDLINE_GAP`, plus the pure geometry math helpers
   `_scale_sdf`/`_scale_triple`/`_directional_extent`/`_bisecting_clip_planes`, imported by
   `regions/cortex.py` and `generate_data.py`),
+  `genes.py` (the HGNC symbol per receptor / non-receptor target, re-exported from the fetchers that
+  own the maps rather than restated; an identifier for the gene-keyed lookup links, not a graded node),
   and `connectivity.py` (the three connectivity node literals `PROJECTIONS`/`CIRCUITS`/`PROJECTION_GROUPS`
   plus the `_KQ_*`/`_SG_*` pathway quote-source constants they cite; the shared `_kandel`/`_nieuwenhuys`/`_stahl_ess`
   quote constructors live in `provenance.py`), and `presentation.py` (the presentation maps emitted
@@ -392,7 +394,8 @@ there is no node-level catch-all `sources` block.
   (+ optional `polarity_sources`), its own graded node kind `target_polarity`; a `receptor_group`
   target also carries `subtypes` (its modeled subtype receptor ids, a sourceless taxonomy the
   viewer lists as per-subtype drug dropdowns); a target with an Allen profile carries the same
-  `density` object as a receptor),
+  `density` object as a receptor; a non-receptor target also carries `gene`, the representative
+  HGNC symbol, like a receptor's),
   `enzymes` (metabolic isoform id -> {label, wikipedia}), `enzyme_roles`
   (role -> {label, `direction`: what it does to a co-prescribed substrate's level}) and
   `enzyme_strengths` + `enzyme_reactions` (the chemical step by which an enzyme makes an
@@ -443,7 +446,9 @@ there is no node-level catch-all `sources` block.
   `location_sources` (`{base:[quote-source]}`, sparse per-region upgrade above `llm`; `"ALL"` =
   the ubiquitous claim), optional `density` (`{reliability, donors, profile:{base:z} sorted
   strongest first, grade, sources}`, ONE graded node for the whole Allen z-score profile, see
-  CLAUDE.md Expression density), optional `description{en,fr}` + `wikipedia`(+prov). Empty
+  CLAUDE.md Expression density), optional `description{en,fr}` + `wikipedia`(+prov), optional
+  `gene` (the HGNC symbol, an identifier for the gene-keyed lookup links: NOT a graded node; absent
+  only for a stub with no human gene). Empty
   locations + no description = a deliberate stub (listed, not focusable).
 - `drugs.jsonl` — `id`, `name`, `categories`, `category_provenance` (+ optional
   `category_sources`), optional `nbn{en,fr}` (+ `nbn_sources`, + `nbn_nonstandard:true` when the
