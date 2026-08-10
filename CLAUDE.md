@@ -372,7 +372,13 @@ scans, making Separate janky. During a continuous spread the arrows update in `f
 (valid because regions only translate, never rotate) and pick-hull/halo rebuilds are deferred.
 `createArrowRetrim` then re-trims precisely once the spread has been still ~120ms, a chunk per frame;
 a click mid-spread calls `arrow.ensurePickGeometry()`. The settled result matches the per-frame-precise
-layout.
+layout. The other half was **allocation**: every re-fit built a fresh `THREE.TubeGeometry` per arrow
+(~95 typed-array allocations + as many GPU buffer create/deletes per frame), so `writeTube`
+(`js/arrows.js`) rewrites the shaft/halo/pick buffers **in place** instead, the topology written once.
+Never reintroduce a per-frame `new TubeGeometry` here. It is exact, not an approximation: the arcs are
+quadratic Beziers, hence planar, so the plane normal is the parallel-transported binormal and the
+tangent is analytic (no Frenet walk, no `getPointAt` arc-length table). Only a `tentative` arrow's
+dotted shaft still rebuilds (5 arrows, merged from dash segments).
 
 ### Arrow width
 

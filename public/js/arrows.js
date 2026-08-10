@@ -158,6 +158,130 @@ function dashedTubeGeometry(curve, radius) {
   return merged;
 }
 
+// Scratch for writeTube: it runs for every arrow on every frame of a spread, so
+// the hot path must allocate nothing.
+const _tubePoint = new THREE.Vector3();
+const _tubeTangent = new THREE.Vector3();
+const _tubeNormal = new THREE.Vector3();
+const _tubeBinormal = new THREE.Vector3();
+const _tubeD1 = new THREE.Vector3(); // v1 - v0, the Bezier's first leg
+const _tubeD2 = new THREE.Vector3(); // v2 - v1, its second
+// Unit-circle cos/sin table per radial-segment count (the cross-section is the
+// same ring for every arrow and every frame), so a rebuild does no trig at all.
+const _ringCache = new Map();
+function ringTable(radialSegments) {
+  let table = _ringCache.get(radialSegments);
+  if (!table) {
+    table = new Float32Array((radialSegments + 1) * 2);
+    for (let j = 0; j <= radialSegments; j++) {
+      const a = (j / radialSegments) * Math.PI * 2;
+      table[j * 2] = Math.cos(a);
+      table[j * 2 + 1] = Math.sin(a);
+    }
+    _ringCache.set(radialSegments, table);
+  }
+  return table;
+}
+
+/**
+ * Write a tube around `curve` into `geometry` **in place**, reusing the buffers
+ * it already holds.
+ *
+ * Why not `new THREE.TubeGeometry(...)` (which is what this replaces): a spread
+ * re-fits ~95 arrows every frame, and a fresh TubeGeometry per arrow per frame
+ * means ~95 typed-array allocations *and* ~95 GPU buffer creations + deletions
+ * each frame. That churn (not the maths) is what made a continuous spread
+ * stutter. The topology never changes while an arrow lives, so the index is
+ * written once and only the positions/normals are rewritten afterwards.
+ *
+ * The frame is exact rather than a Frenet walk: every arc here is a *quadratic
+ * Bezier*, hence planar, so the plane's normal IS the parallel-transported
+ * binormal, and the tangent is analytic (`B'(t) = 2(1-t)(v1-v0) + 2t(v2-v1)`),
+ * which also avoids `Curve.getTangent`'s numeric differencing (two curve
+ * evaluations + allocations per ring) and `getPointAt`'s 200-division
+ * arc-length table. UVs are dropped, as in mergeIndexedGeometries: the arrows'
+ * flat solid-colour material never samples them.
+ * @param {THREE.BufferGeometry} geometry  Rewritten in place.
+ * @param {THREE.QuadraticBezierCurve3} curve
+ * @param {number} tubularSegments  Rings along the arc.
+ * @param {number} radius
+ * @param {number} radialSegments  Vertices around the cross-section.
+ */
+function writeTube(geometry, curve, tubularSegments, radius, radialSegments) {
+  const rings = tubularSegments + 1;
+  const perRing = radialSegments + 1;
+  const vertexCount = rings * perRing;
+  let position = geometry.getAttribute("position");
+  if (!position || position.count !== vertexCount) {
+    position = new THREE.BufferAttribute(new Float32Array(vertexCount * 3), 3);
+    geometry.setAttribute("position", position);
+    geometry.setAttribute(
+      "normal", new THREE.BufferAttribute(new Float32Array(vertexCount * 3), 3));
+    // Topology depends only on the segment counts, so it is written exactly once.
+    const index = new Uint16Array(tubularSegments * radialSegments * 6);
+    let k = 0;
+    for (let i = 1; i <= tubularSegments; i++) {
+      for (let j = 1; j <= radialSegments; j++) {
+        const a = perRing * (i - 1) + (j - 1);
+        const b = perRing * i + (j - 1);
+        const c = perRing * i + j;
+        const d = perRing * (i - 1) + j;
+        index[k++] = a; index[k++] = b; index[k++] = d;
+        index[k++] = b; index[k++] = c; index[k++] = d;
+      }
+    }
+    geometry.setIndex(new THREE.BufferAttribute(index, 1));
+  }
+  const normalAttr = geometry.getAttribute("normal");
+  const pos = position.array;
+  const nor = normalAttr.array;
+  const ring = ringTable(radialSegments);
+
+  _tubeD1.subVectors(curve.v1, curve.v0);
+  _tubeD2.subVectors(curve.v2, curve.v1);
+  // The arc's plane normal, constant along a planar curve.
+  _tubeBinormal.crossVectors(_tubeD1, _tubeD2);
+  if (_tubeBinormal.lengthSq() < 1e-12) {
+    // Collinear control points (a dead-straight shaft): any perpendicular does.
+    _tubeTangent.subVectors(curve.v2, curve.v0).normalize();
+    _tubeBinormal.set(0, 1, 0).cross(_tubeTangent);
+    if (_tubeBinormal.lengthSq() < 1e-12) {
+      _tubeBinormal.set(1, 0, 0).cross(_tubeTangent);
+    }
+  }
+  _tubeBinormal.normalize();
+
+  let o = 0;
+  for (let i = 0; i < rings; i++) {
+    const t = i / tubularSegments;
+    curve.getPoint(t, _tubePoint);
+    _tubeTangent
+      .copy(_tubeD1).multiplyScalar(2 * (1 - t))
+      .addScaledVector(_tubeD2, 2 * t);
+    if (_tubeTangent.lengthSq() < 1e-12) _tubeTangent.copy(_tubeD1);
+    _tubeTangent.normalize();
+    _tubeNormal.crossVectors(_tubeBinormal, _tubeTangent).normalize();
+    for (let j = 0; j <= radialSegments; j++) {
+      const cos = ring[j * 2];
+      const sin = ring[j * 2 + 1];
+      const nx = cos * _tubeNormal.x + sin * _tubeBinormal.x;
+      const ny = cos * _tubeNormal.y + sin * _tubeBinormal.y;
+      const nz = cos * _tubeNormal.z + sin * _tubeBinormal.z;
+      nor[o] = nx; nor[o + 1] = ny; nor[o + 2] = nz;
+      pos[o] = _tubePoint.x + radius * nx;
+      pos[o + 1] = _tubePoint.y + radius * ny;
+      pos[o + 2] = _tubePoint.z + radius * nz;
+      o += 3;
+    }
+  }
+  position.needsUpdate = true;
+  normalAttr.needsUpdate = true;
+  // Left null so three recomputes them lazily on the next cull / raycast, which
+  // is exactly what a freshly constructed geometry did.
+  geometry.boundingSphere = null;
+  geometry.boundingBox = null;
+}
+
 /**
  * A single projection arrow. Holds its own meshes (tube + one or two cones)
  * grouped under one Object3D and recomputes them from the live source/target
@@ -336,11 +460,7 @@ export class ProjectionArrow {
     // move on a zoom).
     this._shaftCurve = shaftCurve;
 
-    const tubeRadius = TUBE_RADIUS * this._widthScale;
-    this.tube.geometry.dispose();
-    this.tube.geometry = this.tentative
-      ? dashedTubeGeometry(shaftCurve, tubeRadius)
-      : new THREE.TubeGeometry(shaftCurve, 24, tubeRadius, 8, false);
+    this._writeShaft(shaftCurve, TUBE_RADIUS * this._widthScale);
     // The cones share a fixed ConeGeometry; their cross-section (x/z, not the
     // axial y) scales with the width so the heads track the shaft. The apex sits
     // on the y axis (x = z = 0), so scaling x/z leaves it exactly on the surface.
@@ -378,18 +498,33 @@ export class ProjectionArrow {
     this.labelAnchor.position.copy(curve.getPoint(0.5));
   }
 
+  /**
+   * (Re)write the visible shaft along `curve` at `radius`. The one place the
+   * solid-vs-dotted split lives, shared by update() and setWidthScale().
+   * A solid tube is rewritten in place (writeTube, the spread's hot path); a
+   * dotted one is merged from its dash segments, so it is rebuilt (only the 5
+   * tentative pathways pay that, and never at speed).
+   * @param {THREE.QuadraticBezierCurve3} curve
+   * @param {number} radius
+   */
+  _writeShaft(curve, radius) {
+    if (this.tentative) {
+      this.tube.geometry.dispose();
+      this.tube.geometry = dashedTubeGeometry(curve, radius);
+    } else {
+      writeTube(this.tube.geometry, curve, 24, radius, 8);
+    }
+  }
+
   /** (Re)build the fat invisible pick hull from the current arc. */
   _rebuildPick() {
-    this.pick.geometry.dispose();
-    this.pick.geometry = new THREE.TubeGeometry(this.curve, 24, PICK_RADIUS, 6, false);
+    writeTube(this.pick.geometry, this.curve, 24, PICK_RADIUS, 6);
     this._pickDirty = false;
   }
 
   /** (Re)build the halo glow tube from the current arc (tracking the width). */
   _rebuildHalo() {
-    this.halo.geometry.dispose();
-    this.halo.geometry = new THREE.TubeGeometry(
-      this.curve, 24, HALO_RADIUS * this._widthScale, 8, false);
+    writeTube(this.halo.geometry, this.curve, 24, HALO_RADIUS * this._widthScale, 8);
     this._haloDirty = false;
   }
 
@@ -407,13 +542,7 @@ export class ProjectionArrow {
   setWidthScale(scale) {
     if (scale === this._widthScale) return false;
     this._widthScale = scale;
-    if (this._shaftCurve) {
-      const tubeRadius = TUBE_RADIUS * scale;
-      this.tube.geometry.dispose();
-      this.tube.geometry = this.tentative
-        ? dashedTubeGeometry(this._shaftCurve, tubeRadius)
-        : new THREE.TubeGeometry(this._shaftCurve, 24, tubeRadius, 8, false);
-    }
+    if (this._shaftCurve) this._writeShaft(this._shaftCurve, TUBE_RADIUS * scale);
     this.cone.scale.set(scale, 1, scale);
     if (this.coneStart) this.coneStart.scale.set(scale, 1, scale);
     // The halo hugs the (now thinner/fatter) tube while visible; a hidden halo is
