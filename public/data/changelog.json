@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.47.0",
+      "date": "2026-08-10",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Receptors and other drug targets now link to ClinPGx, the pharmacogenomics database: which variants of the gene behind them change how a drug works on you",
+          "commits": [
+            "95fcafa"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The gene and protein databases (ClinPGx, UniProt) are now searched by gene symbol rather than by the receptor's display name, so a receptor written with a Greek letter (α1A) actually lands on its entry (ADRA1A) instead of an empty result page",
+          "commits": [
+            "95fcafa"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.46.0",
       "date": "2026-08-10",
       "entries": [
