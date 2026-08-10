@@ -563,7 +563,8 @@ fixed Stahl list.
   postsynaptic blockade shows in the block-coloured dots. (This is why the dataset carries the ascending
   monoamine pathways.)
 - **Panel** (`showDrug`): the molecule image (when fetched), the class, the NbN, the description
-  (live-refreshed from Wikipedia, re-graded `sourced`), a Wikipedia link, then the **Acts on** binding
+  (live-refreshed from Wikipedia, re-graded `sourced`), a Wikipedia link + the EMA / FDA / ClinPGx /
+  Drugs.com (+ Vidal in French) `appendLookupLink` searches, then the **Acts on** binding
   list (each row: an effect glyph + target + action·note, "· speculative" when tentative, plus a
   `bindingProvenancePill` = the binding's quote source, else its Ki (verified), else `NOSOURCE`, or the
   orange ⚠ when it carries `uncertainty[]`, see Source provenance),
@@ -670,11 +671,13 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   enzyme but not the step. `generate_data.py` raises if a key matches no metabolite, so an
   applier re-run cannot silently drop a node.
 - **Viewer.** `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
-  pill, clickable to the enzyme) and a **Drug interactions** list, both **after** the anatomy sections
+  pill, clickable to the enzyme, headed by a ClinPGx pathway-search link) and a **Drug interactions**
+  list, both **after** the anatomy sections
   (pharmacokinetics lights nothing in the scene, so it does not interrupt Acts on -> Projections
   affected -> Acts within); each **Active metabolites** row gains a `.metab-formed` "formed by
   <enzyme>" line with its own pill. An **Enzymes** accordion section
-  (`buildEnzymeLegend`) opens `showEnzyme`: the metabolites that isoform forms, then its drugs
+  (`buildEnzymeLegend`) opens `showEnzyme`: a ClinPGx search (the variant / poor-vs-ultra-rapid
+  metabolizer story this dataset does not model), the metabolites that isoform forms, then its drugs
   grouped by role. Both ends share one `enzymeRow` builder (same node, either side).
 - **The drug -> drug edges are derived, never stored** (`pkInteractionsOf` in `js/data.js`, like
   `flowSystems`): an inhibitor/inducer of an enzyme meets its substrates, one row per (other drug,

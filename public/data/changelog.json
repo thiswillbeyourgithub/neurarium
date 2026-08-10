@@ -1,6 +1,40 @@
 {
   "versions": [
     {
+      "version": "3.46.0",
+      "date": "2026-08-10",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Every drug now links to ClinPGx, the pharmacogenomics database: which gene variants change how you respond to it. The external links run EMA, FDA, ClinPGx, then Drugs.com",
+          "commits": [
+            "45e51d1"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The Metabolism section gains a \"Pathways\" link: the rows below say which enzyme handles the drug, ClinPGx draws the whole route",
+          "commits": [
+            "45e51d1"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "An enzyme's own panel links to its ClinPGx page, where the poor- versus ultra-rapid-metabolizer variants and the dosing guidance live",
+          "commits": [
+            "45e51d1"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The version number was missing from the panel header and the loading screen for the last two releases, and the \"What's new\" popup could not tell you anything had shipped",
+          "commits": [
+            "96e6c67"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.45.0",
       "date": "2026-08-04",
       "entries": [
