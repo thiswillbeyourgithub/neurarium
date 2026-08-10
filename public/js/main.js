@@ -42,17 +42,23 @@ const { t } = window.__I18N__;
 const EXPLODE_STRENGTH = 2.5;
 
 // Intro animation: on a plain page load the brain starts fully blown out and
-// settles together into the assembled whole over this many milliseconds, the
-// camera pulling in from the spread (like dragging the Separate slider 1 -> 0)
-// while it sweeps INTRO_ROTATION_TURNS of a turn and lands on the resting view.
-// Tuned to feel swift but legible; eased so it departs and arrives smoothly.
-const INTRO_DURATION_MS = 4400;
-// Held on the fully blown-out pose for this long before the sweep starts: the
-// first frames after the overlay fades are the most expensive ones (shader
-// compiles, first draw of every mesh), so moving during them read as a stutter.
-// The hold gives them somewhere to land, and the render loop still runs, so the
-// GPU work is done by the time the motion begins.
+// settles together into the assembled whole, the camera pulling in from the
+// spread (like dragging the Separate slider 1 -> 0). It runs as three beats
+// rather than all at once, because rotating AND re-laying-out the whole brain in
+// the same frames is more than a modest GPU can keep smooth:
+//   1. INTRO_HOLD_MS   still on the blown-out pose (the first frames after the
+//                      overlay fades pay for the shader compiles and the first
+//                      draw of every mesh; moving through them read as a stutter)
+//   2. INTRO_ROTATE_MS the camera alone sweeps INTRO_ROTATION_TURNS of a turn in
+//                      to the resting orientation (no geometry moves)
+//   3. INTRO_PAUSE_MS  a beat on the resting angle, so the two moves read as two
+//   4. INTRO_ASSEMBLE_MS the regions alone glide back together (camera azimuth
+//                      parked; only the distance tracks the spread)
+// Each beat is eased on its own, so it departs and arrives smoothly.
 const INTRO_HOLD_MS = 1000;
+const INTRO_ROTATE_MS = 2000;
+const INTRO_PAUSE_MS = 300;
+const INTRO_ASSEMBLE_MS = 2400;
 // How much of a full turn the camera sweeps during the intro before settling on
 // the resting orientation (0.75 = three-quarters of a revolution).
 const INTRO_ROTATION_TURNS = 0.75;
@@ -437,18 +443,20 @@ function createAdaptiveQuality({ renderer, baseDpr }) {
 /**
  * Auto-play intro: start the regions fully blown out and let them glide back
  * together into the assembled brain, exactly like dragging the Separate slider
- * from 1 to 0. The camera follows the spread (zoomForExplode, so the brain keeps
- * a steady apparent size) and at the same time sweeps INTRO_ROTATION_TURNS of a
- * revolution, both finishing together on the resting view. Advanced once per
- * frame by `tick()` from the render loop. `cancel()` stops it (and restores
- * auto-rotate) so a manual grab of the explode slider always wins. Uses
- * easeInOutCubic for a smooth departure + gentle settle.
+ * from 1 to 0, the camera following the spread (zoomForExplode, so the brain
+ * keeps a steady apparent size). The camera's INTRO_ROTATION_TURNS sweep runs
+ * BEFORE that, as its own beat (see the INTRO_* constants): the two moves cost
+ * too much together to stay smooth, and separated they also read as two.
+ * Advanced once per frame by `tick()` from the render loop. `cancel()` stops it
+ * (and restores auto-rotate) so a manual grab of the explode slider always wins.
+ * Uses easeInOutCubic for a smooth departure + gentle settle.
  * @param {{meshes:THREE.Mesh[], arrows:object[], slider:HTMLInputElement,
  *   camera:THREE.PerspectiveCamera, controls:OrbitControls,
  *   focus:ReturnType<typeof createCameraFocus>,
+ *   retrim:ReturnType<typeof createArrowRetrim>,
  *   onSettle?:(completed:boolean)=>void}} deps
  */
-function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus, onSettle }) {
+function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus, retrim, onSettle }) {
   const FROM = 1; // fully blown out (slider max)
   const TO = 0; // assembled whole
   const SWEEP = INTRO_ROTATION_TURNS * Math.PI * 2; // radians to sweep in
@@ -457,18 +465,25 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus,
   let restAzimuth = 0; // azimuth/polar of the resting pose to land on at t=1
   let restPolar = 0;
   let wasAutoRotate = false; // restored when the intro ends / is cancelled
+  let lastAmount = null; // last spread applied, so a still beat re-lays out nothing
   const tmpOffset = new THREE.Vector3();
   const sph = new THREE.Spherical();
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
 
   // easeInOutCubic: starts and ends at rest, fastest through the middle.
   const ease = (t) =>
     t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  const applyAmount = (amount) => {
+  // `fast` re-fits the arrows cheaply (cached offsets, no surface re-scan), the
+  // same deal the manual spread takes: the precise re-trim then runs once the
+  // assemble has settled. The per-frame scans were ~90% of an explode frame, so
+  // paying them here is what made the assemble stutter.
+  const applyAmount = (amount, fast = false) => {
     // Set the slider directly (no input event) so this doesn't trip the
     // user-input cancel listener wired alongside it.
     slider.value = String(amount);
-    applyExplode(meshes, amount, arrows);
+    applyExplode(meshes, amount, arrows, fast);
+    if (fast && retrim) retrim.markDirty();
   };
 
   // We drive the rotation ourselves during the intro, so OrbitControls' own
@@ -497,7 +512,10 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus,
       sph.setFromVector3(tmpOffset);
       restAzimuth = sph.theta;
       restPolar = sph.phi;
+      // The one precise lay-out of the run: the blown-out pose is held long
+      // enough (hold + sweep + pause) to be worth trimming properly.
       applyAmount(FROM);
+      lastAmount = FROM;
     },
     cancel() {
       if (running) finish(false);
@@ -505,15 +523,24 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus,
     tick() {
       if (!running) return false;
       if (startTime === null) startTime = performance.now();
-      // Negative elapsed during the INTRO_HOLD_MS hold clamps t to 0, so the
-      // brain sits still (fully blown out) while the first frames are drawn.
-      const t = Math.min(
-        1,
-        Math.max(0, performance.now() - startTime - INTRO_HOLD_MS) / INTRO_DURATION_MS,
+      // Elapsed is negative through the INTRO_HOLD_MS hold, which clamps both
+      // beats to 0, so the brain sits still (fully blown out, at the far end of
+      // the sweep) while those first expensive frames are drawn.
+      const elapsed = performance.now() - startTime - INTRO_HOLD_MS;
+      // Beat 1: the camera sweep. Beat 2: the assemble, INTRO_PAUSE_MS later.
+      const rot = clamp01(elapsed / INTRO_ROTATE_MS);
+      const asm = clamp01(
+        (elapsed - INTRO_ROTATE_MS - INTRO_PAUSE_MS) / INTRO_ASSEMBLE_MS,
       );
-      const e = ease(t);
-      const amount = FROM + (TO - FROM) * e;
-      applyAmount(amount);
+      const eRot = ease(rot);
+      const amount = FROM + (TO - FROM) * ease(asm);
+      // Only re-lay-out the brain when the spread actually changed: during the
+      // sweep + the pause the amount is pinned at FROM, so those frames cost a
+      // camera move and nothing else (which is the point of splitting them).
+      if (amount !== lastAmount) {
+        applyAmount(amount, true);
+        lastAmount = amount;
+      }
       // Camera distance tracks the spread (telescoping back to the resting
       // distance at amount 0), exactly like the Separate slider does.
       focus.zoomForExplode(amount);
@@ -521,12 +548,12 @@ function createIntroAnimation({ meshes, arrows, slider, camera, controls, focus,
       // distance zoomForExplode just set.
       tmpOffset.copy(camera.position).sub(controls.target);
       sph.setFromVector3(tmpOffset);
-      sph.theta = restAzimuth - (1 - e) * SWEEP;
+      sph.theta = restAzimuth - (1 - eRot) * SWEEP;
       sph.phi = restPolar;
       sph.makeSafe();
       tmpOffset.setFromSpherical(sph);
       camera.position.copy(controls.target).add(tmpOffset);
-      if (t >= 1) finish(true);
+      if (asm >= 1) finish(true);
       return true; // animating (incl. the finishing frame), so keep rendering
     },
   };
@@ -7711,6 +7738,9 @@ async function main() {
   const explodeSlider = document.getElementById("explode");
   const intro = createIntroAnimation(
     { meshes, arrows, slider: explodeSlider, camera, controls, focus,
+      // The assemble re-fits the arrows in `fast` mode, so it borrows the same
+      // deferred precise re-trim the manual spread uses.
+      retrim: arrowRetrim,
       // Once the assemble settles, offer the tour (once per visitor, and not while
       // the Sources popup is open: see tryAutoTour). Fires on a cancel too, with
       // completed=false, which settles the scene without earning the tour.
