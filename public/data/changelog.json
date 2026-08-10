@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.47.4",
+      "date": "2026-08-10",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Separating and reassembling the brain is much smoother: the arrows now reshape themselves in place instead of being rebuilt from scratch on every single frame, which is what made the motion stutter",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.47.3",
       "date": "2026-08-10",
       "entries": [

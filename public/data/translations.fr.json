@@ -435,6 +435,7 @@
   "Search now finds a drug by its other names, so \"Prozac\" and \"fluox\" both land on fluoxetine": "La recherche trouve désormais un médicament par ses autres noms : « Prozac » et « fluox » mènent tous deux à la fluoxétine",
   "Searching for a metabolite by name now finds it, and keeps the drug it comes from visible in the list": "Chercher un métabolite par son nom le trouve désormais, en gardant visible le médicament dont il provient",
   "Sensorimotor frontal cortex drives the putamen, the motor input nucleus of the basal ganglia.": "Le cortex frontal sensorimoteur active le putamen, le noyau d'entrée moteur des ganglions de la base.",
+  "Separating and reassembling the brain is much smoother: the arrows now reshape themselves in place instead of being rebuilt from scratch on every single frame, which is what made the motion stutter": "Séparer et rassembler le cerveau est nettement plus fluide : les flèches se redessinent désormais sur place au lieu d'être reconstruites de zéro à chaque image, ce qui provoquait les saccades",
   "Septal nuclei": "Noyaux septaux",
   "Septohippocampal pathway": "Voie septohippocampique",
   "Septohypothalamic projection": "Projection septo-hypothalamique",
