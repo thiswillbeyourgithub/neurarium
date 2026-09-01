@@ -193,20 +193,32 @@ def affinity_values(row: dict) -> list[float]:
                                row.get("Affinity Low")) if v]
 
 
-def pick_row(rows: list[dict]) -> dict | None:
+def pick_row(rows: list[dict], target: str) -> dict | None:
     """The most usable row for one (compound, target): a human assay first, then the
-    most Ki-like affinity parameter, then the tightest affinity."""
+    most Ki-like affinity parameter, then the tightest affinity.
+
+    A row with no number at all is still worth something when GtoPdb curated a
+    *direction* on it (cannabidiol's negative allosteric modulation of CB1 is filed
+    exactly that way: an action, no affinity reported), so those are the fallback when
+    the target has no measured row: a claim with a citation and no number beats no
+    claim. Human first there too."""
     scored = []
+    directional = []
     for r in rows:
         vals = affinity_values(r)
         if not vals:
+            if action_for(r, target):
+                directional.append(((r.get("Target Species") != "Human",), r))
             continue
         param = r.get("Affinity Units") or ""
         scored.append(((r.get("Target Species") != "Human",
                         PARAM_ORDER.index(param) if param in PARAM_ORDER else 99,
                         -statistics.median(vals)), r))
     if not scored:
-        return None
+        if not directional:
+            return None
+        directional.sort(key=lambda x: x[0])
+        return directional[0][1]
     scored.sort(key=lambda x: x[0])
     return scored[0][1]
 
@@ -328,7 +340,7 @@ def main() -> int:
 
         found: dict[str, dict] = {}
         for target, trows in per_target.items():
-            row = pick_row(trows)
+            row = pick_row(trows, target)
             if row is None:
                 continue
             entry: dict = {

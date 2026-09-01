@@ -12,19 +12,24 @@ under the same guarantees as every other applier here:
   measured affinity (PDSP #5 or the Wikipedia fallback #9) is never overwritten.
 * **direction only where there is none** - an ``affinity_only`` binding (a measured
   Ki, no known direction) gains the curated ``action``; a binding that already states
-  one is left alone, so a Stahl-sourced direction always wins. Where the two disagree
-  the conflict is reported, not silently resolved.
+  one keeps it, so a Stahl-sourced direction always wins. Where the two disagree the
+  conflict is reported, not silently resolved.
+* **the stated direction cited where nothing else cites it** - when GtoPdb states the
+  very direction we already state and the binding carries no source at all, its row is
+  recorded as that claim's citation. A Ki only ever backed the *affinity*, so such a
+  binding otherwise read NOSOURCE beside a corpus spelling it out. Never an overwrite:
+  a binding that already cites something is left untouched.
 * **re-gated** - each quote is re-confirmed verbatim on
   ``data_sources/gtopdb/pages_ki/<slug>.md`` through ``check_data.normalize_for_match``,
   so a stale cache cannot smuggle an unsourced claim through.
 * **idempotent, sole writer** - its own prior writes (recognised by the
-  ``provisional_action`` marker, see ``strip_previous``) are rebuilt from scratch
-  each run, leaving a hand-authored ``gtopdb_ki`` citation untouched.
+  ``provisional_action`` / ``confirmed_action`` markers, see ``strip_previous``) are
+  rebuilt from scratch each run, leaving a hand-authored ``gtopdb_ki`` citation
+  untouched.
 
-A direction written here is marked ``provisional_action``, which exists purely for
-that rollback: ``generate_data.py`` does not emit it, so such a binding behaves like
-any other in the panel and the 3D animation (its ``sources`` already name the corpus,
-which is what a reader weighs it by).
+Both markers exist purely for that rollback: ``generate_data.py`` emits neither, so
+such a binding behaves like any other in the panel and the 3D animation (its
+``sources`` already name the corpus, which is what a reader weighs it by).
 
 Run from the repo root, then regenerate + check::
 
@@ -78,15 +83,27 @@ def gate(quote: str, slug: str, cache: dict[str, str]) -> bool:
     return bool(page) and normalize_for_match(quote) in page
 
 
+def _drop_our_source(binding: dict) -> None:
+    """Remove the single ``gtopdb_ki`` source this script last appended."""
+    sources = binding.get("sources", [])
+    for i in range(len(sources) - 1, -1, -1):
+        if sources[i].get("corpus") == CORPUS:
+            sources.pop(i)
+            break
+    if not sources:
+        binding.pop("sources", None)
+
+
 def strip_previous(binding: dict) -> None:
     """Undo this script's own prior write, so a re-run rebuilds rather than stacks.
 
     Only *our* write. The corpus alone cannot identify it: a binding that already
     states its direction may cite ``gtopdb_ki`` by hand (furosemide's GABA-A alpha6
-    NAM does), and that is precisely the case this script never writes, so dropping
-    every ``gtopdb_ki`` source would silently delete a hand-authored one on each run.
-    The ``provisional_action`` flag is the reliable marker: it is set on exactly the
-    bindings whose direction (and the single source appended with it) came from here.
+    NAM does), so dropping every ``gtopdb_ki`` source would silently delete a
+    hand-authored one on each run. Two flags are the reliable markers, set on exactly
+    the bindings we wrote to: ``provisional_action`` (the direction itself came from
+    here) and ``confirmed_action`` (the direction was already ours and GtoPdb's row
+    was appended as its citation).
     """
     if (binding.get("ki") or {}).get("source", {}).get("corpus") == CORPUS:
         binding.pop("ki")
@@ -95,13 +112,10 @@ def strip_previous(binding: dict) -> None:
         # source appended alongside it goes with it (the last one we added).
         binding.pop("action", None)
         binding["affinity_only"] = True
-        sources = binding.get("sources", [])
-        for i in range(len(sources) - 1, -1, -1):
-            if sources[i].get("corpus") == CORPUS:
-                sources.pop(i)
-                break
-        if not sources:
-            binding.pop("sources", None)
+        _drop_our_source(binding)
+    elif binding.pop("confirmed_action", None):
+        # The action is the author's; only the citation was ours.
+        _drop_our_source(binding)
 
 
 def main() -> int:
@@ -119,7 +133,7 @@ def main() -> int:
     proposals = json.loads(CACHE.read_text("utf-8"))["drugs"]
     drugs = drugs_io.load_drugs()
     page_cache: dict[str, str] = {}
-    n_ki = n_action = n_gate_fail = 0
+    n_ki = n_action = n_confirm = n_gate_fail = 0
     kept_ki = kept_action = 0
     conflicts: list[str] = []
     refinements: list[str] = []
@@ -157,6 +171,16 @@ def main() -> int:
                 binding["provisional_action"] = True
                 binding.setdefault("sources", []).append(source)
                 n_action += 1
+            elif action and action == binding.get("action") and not binding.get("sources"):
+                # GtoPdb states the very direction we already state, and nothing else
+                # sourced it. That row IS the citation for the direction (a Ki, where
+                # there is one, only ever backed the *affinity*), so record it rather
+                # than leaving the claim reading NOSOURCE next to a corpus that spells
+                # it out. Never overwrites: a binding that already cites something
+                # keeps its own source, and a disagreement still falls through below.
+                binding["confirmed_action"] = True
+                binding["sources"] = [source]
+                n_confirm += 1
             elif action and binding.get("action") and action != binding["action"]:
                 kept_action += 1
                 line = (f"{drug['id']} {binding['target']}: "
@@ -167,7 +191,8 @@ def main() -> int:
                     conflicts.append(line)
 
     print(f"affinity: {n_ki} binding(s) given a Ki, {kept_ki} left alone (already measured)")
-    print(f"direction: {n_action} affinity-only binding(s) given a provisional action")
+    print(f"direction: {n_action} affinity-only binding(s) given a provisional action, "
+          f"{n_confirm} stated direction(s) given GtoPdb's row as their citation")
     if n_gate_fail:
         print(f"gate: {n_gate_fail} proposal(s) dropped, quote not verbatim on its page")
     if refinements:

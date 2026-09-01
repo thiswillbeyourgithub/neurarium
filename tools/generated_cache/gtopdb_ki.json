@@ -2328,6 +2328,51 @@
     }
    }
   },
+  "cannabidiol": {
+   "cb1": {
+    "action": "nam",
+    "pmid": "26218440",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cannabidiol",
+     "provenance": "verified",
+     "quote": "cannabidiol at CB1 receptor (CNR1, Human): Allosteric modulator / Negative, no affinity reported [PMID 26218440]",
+     "species": "Human"
+    }
+   },
+   "nav": {
+    "action": "blocker",
+    "pmid": "30219789",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cannabidiol",
+     "provenance": "verified",
+     "quote": "cannabidiol at Nav1.1 (SCN1A, Human): Channel blocker / None, pIC50 5.54 [PMID 30219789]",
+     "species": "Human"
+    }
+   }
+  },
+  "cannabinol": {
+   "cb1": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 658.1139,
+     "min": 316.2278,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7565624",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cannabinol",
+     "provenance": "verified",
+     "quote": "cannabinol at CB1 receptor (CNR1, Human): Agonist / Partial agonist, pKi 6-6.5 [PMID 7565624]",
+     "species": "Human"
+    }
+   }
+  },
   "cariprazine": {
    "d2": {
     "action": "partial_agonist",
@@ -2984,6 +3029,19 @@
      "page": "clonidine",
      "provenance": "verified",
      "quote": "clonidine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Agonist, pKi 6.7-9.2 [PMID 9824686]",
+     "species": "Human"
+    }
+   }
+  },
+  "clorgiline": {
+   "mao_a": {
+    "action": "enzyme_inhibitor",
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "clorgiline",
+     "provenance": "verified",
+     "quote": "clorgiline at Monoamine oxidase A (MAOA, Human): Inhibitor / Inhibition, no affinity reported",
      "species": "Human"
     }
    }
@@ -3765,6 +3823,19 @@
     }
    }
   },
+  "deutetrabenazine": {
+   "vmat2": {
+    "action": "vesicular_inhibitor",
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "deutetrabenazine",
+     "provenance": "verified",
+     "quote": "deutetrabenazine at Vesicular monoamine transporter 2 (SLC18A2, Human): Inhibitor / Inhibition, no affinity reported",
+     "species": "Human"
+    }
+   }
+  },
   "dexmedetomidine": {
    "alpha2": {
     "action": "partial_agonist",
@@ -4328,6 +4399,19 @@
     }
    }
   },
+  "ethanol": {
+   "5ht3": {
+    "action": "pam",
+    "pmid": "16257471",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ethanol",
+     "provenance": "verified",
+     "quote": "ethanol at 5-HT3A (Htr3a, Mouse): Allosteric modulator / Positive, no affinity reported [PMID 16257471]",
+     "species": "Mouse"
+    }
+   }
+  },
   "flibanserin": {
    "5ht1a": {
     "action": "agonist",
@@ -4856,6 +4940,17 @@
    }
   },
   "furosemide": {
+   "gaba_a": {
+    "action": "antagonist",
+    "pmid": "30275042",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "furosemide",
+     "provenance": "verified",
+     "quote": "furosemide at GABAA receptor α6 subunit (GABRA6, Human): Allosteric modulator / Antagonist, no affinity reported [PMID 30275042]",
+     "species": "Human"
+    }
+   },
    "nkcc1": {
     "action": "blocker",
     "pmid": "11882915",
@@ -7137,6 +7232,27 @@
     }
    }
   },
+  "nabilone": {
+   "cb1": {
+    "action": "agonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 3.9811,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "21885167",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "nabilone",
+     "provenance": "verified",
+     "quote": "nabilone at CB1 receptor (CNR1, Human): Agonist / Agonist, pKi 8.4 [PMID 21885167]",
+     "species": "Human"
+    }
+   }
+  },
   "nalmefene": {
    "delta": {
     "action": "partial_agonist",
@@ -9083,6 +9199,27 @@
      "page": "reserpine",
      "provenance": "verified",
      "quote": "reserpine at Vesicular monoamine transporter 2 (SLC18A2, Human): Inhibitor / Inhibition, pKi 7.9 [PMID 8643547]",
+     "species": "Human"
+    }
+   }
+  },
+  "rimonabant": {
+   "cb1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 7.2923,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7565624",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rimonabant",
+     "provenance": "verified",
+     "quote": "rimonabant at CB1 receptor (CNR1, Human): Antagonist / Antagonist, pKi 7.9-8.7 [PMID 7565624]",
      "species": "Human"
     }
    }
