@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.50.0",
+      "date": "2026-09-01",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A new \"Data browser\" section lists every fact in the dataset in one searchable list, filterable by type and by how well sourced it is, and each line jumps to the panel that explains it. It pairs nicely with the hide-3D button for full-screen browsing",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.49.0",
       "date": "2026-09-01",
       "entries": [
