@@ -2815,8 +2815,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1678,
-        "verified": 1555,
+        "total": 1683,
+        "verified": 1560,
         "uncertain": 111,
         "sourced": 0,
         "llm": 0,
@@ -2842,13 +2842,13 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 245,
+        "total": 249,
         "verified": 199,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 46,
+        "llm": 50,
         "nosource": 0,
-        "missing": 46
+        "missing": 50
       },
       "drug_half_life": {
         "total": 185,
@@ -3022,32 +3022,32 @@
         "missing": 0
       },
       "references": {
-        "total": 385,
+        "total": 389,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 385,
+        "sourced": 389,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 4035,
-      "verified": 3729,
+      "total": 4044,
+      "verified": 3734,
       "uncertain": 146,
       "sourced": 0,
-      "llm": 146,
+      "llm": 150,
       "nosource": 14,
-      "missing": 160,
-      "backed": 3875,
+      "missing": 164,
+      "backed": 3880,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1659,
-      "bindings_with_ki": 1452,
-      "pct_bindings_with_ki": 88,
-      "drugs_total": 230,
-      "drugs_without_ki": 74,
+      "bindings_total": 1664,
+      "bindings_with_ki": 1455,
+      "pct_bindings_with_ki": 87,
+      "drugs_total": 234,
+      "drugs_without_ki": 75,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -3062,6 +3062,7 @@
         "brotizolam",
         "bumetanide",
         "butobarbital",
+        "cannabidiol",
         "carbamazepine",
         "chloral_hydrate",
         "chlordiazepoxide",
