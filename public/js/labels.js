@@ -43,6 +43,9 @@ export function createLabels(meshes, arrows, parentEl) {
   // The overlay sits over the canvas; pointer-events:none lets all mouse/touch
   // input fall through to OrbitControls so labels never block rotation.
   const dom = renderer.domElement;
+  // Named so the stylesheet can hide the overlay together with the canvas in
+  // panel-only mode (body.no-3d), which the renderer knows nothing about.
+  dom.id = "labels-layer";
   dom.style.position = "fixed";
   dom.style.top = "0";
   dom.style.left = "0";

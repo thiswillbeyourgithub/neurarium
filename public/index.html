@@ -295,6 +295,22 @@
           max-height: none;
         }
       }
+      /* Panel-only ("reading") mode, toggled by #toggle-3d: the 3D canvas and the
+         floating-label overlay go away entirely and the panel takes the viewport, so
+         the long sourced texts read like a document rather than a sidebar. Placed
+         after the orientation blocks so it wins in both. Gated on the EXPANDED body
+         exactly like the landscape rule above, so a collapsed panel stays a small
+         bottom-left header; a browser without `:has` keeps the sidebar layout. */
+      body.no-3d #scene,
+      body.no-3d #labels-layer { display: none; }
+      body.no-3d #controls:has(#controls-body:not([hidden])) {
+        top: 8px;
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        width: auto;
+        max-height: none;
+      }
       /* Uncollapsing a section slides its body in (a soft downward slide + fade),
          so opening any accordion section reads as a motion rather than
          a snap. The bodies ship `hidden` (display:none), so showing one (re)runs the
@@ -383,6 +399,31 @@
       #controls-header > .collapse-hit { position: absolute; inset: 0; width: 100%; padding: 0; margin: 0; background: none; border: 0; cursor: pointer; }
       #controls-header > :not(.collapse-hit) { position: relative; pointer-events: none; }
       #controls-header .panel-byline a { pointer-events: auto; }
+      /* Panel-only mode toggle, pinned at the right of the header row before the
+         chevron. Like the byline it must opt back INTO pointer events, or the
+         invisible collapse button underneath would swallow the click and only
+         collapse the panel. It carries the row's right-aligning `margin-left:auto`
+         so the chevron, which normally holds it, sits snug beside it instead. */
+      #controls-header .panel-3d-btn {
+        pointer-events: auto;
+        margin-left: auto;
+        align-self: center;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background: none;
+        border: 0;
+        border-radius: 6px;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      #controls-header .panel-3d-btn svg { width: 16px; height: 16px; display: block; }
+      #controls-header .panel-3d-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.12); }
+      #controls-header .panel-3d-btn[aria-pressed="true"] { color: var(--accent-light); }
+      #controls-header .panel-3d-btn + .chevron { margin-left: 6px; }
       #controls-header .chevron { margin-left: auto; align-self: center; }
       #controls-header:has(> .collapse-hit[aria-expanded="true"]) .chevron { transform: rotate(90deg); }
       .row { margin: 12px 0; }
@@ -2389,6 +2430,15 @@
         <button type="button" id="controls-toggle" class="collapse-hit" aria-expanded="true" aria-controls="controls-body" aria-label="neurarium"></button>
         <span class="panel-title" aria-hidden="true">neurarium <span class="version" data-app-version></span></span>
         <span class="panel-byline" data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></span>
+        <!-- Panel-only ("reading") mode: hides the 3D scene so the expanded panel
+             takes the whole viewport. Pinned here rather than in the Settings pane
+             so it stays reachable once the panel fills the screen. -->
+        <button type="button" id="toggle-3d" class="panel-3d-btn" aria-pressed="false" data-i18n-attr="title:panel.no3d, aria-label:panel.no3d">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l8 5v10l-8 5-8-5V7z" />
+            <path d="M12 22V12M4 7l8 5 8-5" />
+          </svg>
+        </button>
         <span class="chevron" aria-hidden="true">&#9656;</span>
       </div>
 

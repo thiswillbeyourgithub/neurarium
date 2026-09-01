@@ -7958,7 +7958,35 @@ async function main() {
   };
   updateSpeedRow(); // initial: hidden (nothing focused yet)
 
+  // Panel-only ("reading") mode (#toggle-3d in the panel header): the stylesheet
+  // hides the canvas + label overlay and lets the expanded panel fill the viewport,
+  // for reading the sourced texts without a brain behind them. Persisted, since it
+  // is a lasting preference about how the site is used, not a per-visit action.
+  const NO3D_KEY = "neurarium.no3d";
+  const toggle3d = document.getElementById("toggle-3d");
+  const no3dOn = () => document.body.classList.contains("no-3d");
+  const setNo3d = (on) => {
+    document.body.classList.toggle("no-3d", on);
+    toggle3d?.setAttribute("aria-pressed", String(on));
+    try { localStorage.setItem(NO3D_KEY, on ? "on" : "off"); } catch { /* private mode */ }
+    if (!on) invalidate(); // the scene is back and holds a stale frame; repaint it
+  };
+  toggle3d?.addEventListener("click", () => setNo3d(!no3dOn()));
+  let savedNo3d = null;
+  try { savedNo3d = localStorage.getItem(NO3D_KEY); } catch { /* private mode */ }
+  if (savedNo3d === "on") {
+    setNo3d(true);
+    // Nothing renders while the scene is hidden, so the assemble intro would only
+    // be resumed mid-pose on re-enable. Cancel it: turning 3D back on lands on the
+    // settled brain.
+    intro.cancel();
+  }
+
   renderer.setAnimationLoop(() => {
+    // Panel-only mode: the scene (canvas + label overlay) is display:none, so skip
+    // the ticks and the render entirely. Animations freeze in place and resume when
+    // 3D returns, repainted by setNo3d's invalidate().
+    if (no3dOn()) return;
     // Advance the intro + any focus/recenter tween before controls.update()
     // reads the target + camera position for this frame. Each tick() returns
     // whether it animated this frame; controls.update() returns whether the

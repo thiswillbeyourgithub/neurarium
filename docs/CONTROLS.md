@@ -54,6 +54,10 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   geometrically to 0.25x..4x with the midpoint = 1x (the reference pace). Its row (`#anim-speed-row`)
   is revealed only while an animation is actually on screen (a focused drug / receptor / circuit),
   recomputed each rendered frame in the render loop from the controllers' `active` getters.
+- **Panel-only mode** (`#toggle-3d`, an icon button pinned in the panel header, not in Settings so
+  it stays reachable once the panel fills the screen; persisted `neurarium.no3d`): `body.no-3d` hides
+  `#scene` + `#labels-layer` and lets the expanded panel fill the viewport; the render loop
+  early-returns, so animations freeze in place and resume when 3D returns.
 - **Arrow colour-mode** (`#color-mode`, default Neurotransmitter): Neurotransmitter =
   `projection.color` per molecule; Potential = `projection.signColor` by coarse sign (from meta
   `signColors`/`signLabels`). `setColorMode` recolours in place + rebuilds the Projections section
