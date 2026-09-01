@@ -2552,6 +2552,7 @@
 {"id": "q_cac95b47599d", "corpus": "stahl", "page": 545, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine reversible enzyme inhibitor (SN-RevEI)", "llm": "sonnet", "heading": ["Moclobemide", "Therapeutics", "Class"]}
 {"id": "q_cad630e5734d", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "D 1 | 114.8 | Human"}
 {"id": "q_cafd65fbf7d1", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "α 2B | 28 | Human"}
+{"id": "q_cb03d53e46c0", "corpus": "gtopdb_ki", "page": "bromocriptine", "quote": "bromocriptine at 5-HT6 receptor (HTR6, Human): Agonist / Full agonist, pKi 7.5 [PMID 8522988]", "species": "Human"}
 {"id": "q_cb0796801d15", "corpus": "gtopdb_class", "page": 444, "quote": "GluA1 (GRIA1), GtoPdb target 444 | type: lgic | family: Ionotropic glutamate receptors"}
 {"id": "q_cb1f0275f307", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "5-HT 1D | 794–5010 | Human"}
 {"id": "q_cb2e679a66bf", "corpus": "allen_ahba", "page": "ADORA2A", "quote": "ADORA2A relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1059366, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.96: putamen +4.12 (5d), caudate +3.88 (5d), accumbens +3.01 (5d)", "species": "Human"}
@@ -2964,6 +2965,7 @@
 {"id": "q_e9701ee5000f", "corpus": "wikipedia_fr", "page": "t_maz_pam", "quote": "Levanxol"}
 {"id": "q_e992255a0513", "corpus": "wikipedia_pharm", "page": "cytisine", "quote": "It has been used medically to help with smoking cessation ."}
 {"id": "q_e9b687913d31", "corpus": "stahl", "page": 787, "quote": "Conventional antipsychotic (neuroleptic, benzamide, dopamine 2 antagonist)", "llm": "sonnet", "heading": ["Sulpiride", "Therapeutics", "Class"]}
+{"id": "q_e9cfb8488804", "corpus": "gtopdb_ki", "page": "bromocriptine", "quote": "bromocriptine at 5-HT7 receptor (Htr7, Rat): Agonist / Full agonist, pKi 7.3-8 [PMID 8394362]", "species": "Rat"}
 {"id": "q_e9db272860f8", "corpus": "stahl", "page": 827, "quote": "Trokendi XR", "heading": ["Topiramate", "Therapeutics", "Brands"]}
 {"id": "q_e9f72bd500ab", "corpus": "stahl", "page": 313, "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform selective agonist of GABA-A/ benzodiazepine receptors", "llm": "sonnet", "heading": ["Eszopiclone", "Therapeutics", "Class"]}
 {"id": "q_ea03f6728bfe", "corpus": "wikipedia_pharm", "page": "amphetamine", "quote": "Metabolism | CYP2D6 , DBH , FMO3"}
