@@ -85,8 +85,20 @@
       "nodes.count": "{shown} of {total}",
       "nodes.twins": "Show both hemispheres",
       "nodes.twinsHint": "A left/right pair of a region is two facts saying the same "
-        + "thing. Listed separately by default, which is what the sourcing counts "
-        + "count; untick to read each region once, without its side.",
+        + "thing, so each region is read once, without its side. Tick to list both "
+        + "separately, which is what the sourcing counts count.",
+      "nodes.intro": "Every fact below is one node: a named thing (name) stating one "
+        + "notion, of one kind, backed at one grade. One row is one node; click a "
+        + "grade badge for its source, or the row to open what it belongs to.",
+      "nodes.dataFiles": "The same data as files →",
+      "nodes.dataFilesHint": "Open the list of downloadable data files (and the "
+        + "source repository) from the About popup",
+      "nodes.colGrade": "grade: how well this fact is sourced (click the badge for "
+        + "the source itself)",
+      "nodes.colName": "name: the thing the fact is about",
+      "nodes.colNotion": "notion: what the fact states about it",
+      "nodes.colKind": "kind: which sort of fact it is, as counted in the sourcing "
+        + "coverage",
       "panel.tabSettings": "Settings",
       "panel.tabDetails": "Details",
       "panel.closeTab": "Close tab",
@@ -610,9 +622,22 @@
       "nodes.count": "{shown} sur {total}",
       "nodes.twins": "Afficher les deux hémisphères",
       "nodes.twinsHint": "Une région gauche/droite forme deux faits qui disent la "
-        + "même chose. Ils sont listés séparément par défaut, ce que comptent les "
-        + "statistiques de sources ; décochez pour lire chaque région une seule fois, "
-        + "sans son côté.",
+        + "même chose : chaque région est donc lue une seule fois, sans son côté. "
+        + "Cochez pour les lister séparément, ce que comptent les statistiques de "
+        + "sources.",
+      "nodes.intro": "Chaque fait ci-dessous est un nœud : une chose nommée (name) "
+        + "qui énonce une notion, d’un certain type (kind), avec un niveau de source "
+        + "(grade). Une ligne = un nœud ; cliquez la pastille pour voir sa source, ou "
+        + "la ligne pour ouvrir ce à quoi elle appartient.",
+      "nodes.dataFiles": "Les mêmes données en fichiers →",
+      "nodes.dataFilesHint": "Ouvrir la liste des fichiers de données téléchargeables "
+        + "(et le dépôt du code source) depuis la fenêtre À propos",
+      "nodes.colGrade": "grade : à quel point ce fait est sourcé (cliquez la pastille "
+        + "pour la source elle-même)",
+      "nodes.colName": "name : la chose dont parle le fait",
+      "nodes.colNotion": "notion : ce que le fait en dit",
+      "nodes.colKind": "kind : la sorte de fait dont il s’agit, telle que comptée "
+        + "dans la couverture des sources",
       "panel.tabSettings": "Réglages",
       "panel.tabDetails": "Détails",
       "panel.closeTab": "Fermer l’onglet",
