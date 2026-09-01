@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.51.0",
+      "date": "2026-09-01",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Applied a backlog of measured binding affinities across 26 drugs (melperone gains its whole measured table); measured-affinity coverage of drug bindings rises from 87% to 88%",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.50.0",
       "date": "2026-09-01",
       "entries": [
