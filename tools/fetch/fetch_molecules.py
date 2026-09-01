@@ -70,6 +70,8 @@ FILE_OVERRIDES = {
     # The Ethanol article leads with a 1.5 MB ball-and-stick render; the flat
     # formula next to it is 1 KB and matches every other molecule in the panel.
     "ethanol": "File:Ethanol-2D-flat.svg",
+    # Same story: the Domperidone lead is a 3D ball-and-stick PNG.
+    "domperidone": "File:Domperidone 2D structure.svg",
 }
 # Tokens that mark a structure SVG, used to rank fallback candidates.
 STRUCTURE_HINTS = (
@@ -132,6 +134,15 @@ def _is_chrome(name: str) -> bool:
     return any(tok in low for tok in CHROME_SVG)
 
 
+def _is_svg_url(url: str) -> bool:
+    """True if the URL's *path* names an ``.svg``.
+
+    The MediaWiki API started appending ``?utm_source=...`` tracking params to
+    ``imageinfo``/``pageimages`` URLs, so a bare ``url.endswith(".svg")`` broke.
+    """
+    return urllib.parse.urlparse(url).path.lower().endswith(".svg")
+
+
 def resolve_file(file_title: str) -> tuple[str, str] | None:
     """Resolve a Commons ``File:x.svg`` title to ``(file_title, url)``."""
     info = http_json({
@@ -141,7 +152,7 @@ def resolve_file(file_title: str) -> tuple[str, str] | None:
     for page in info.get("query", {}).get("pages", {}).values():
         for ii in page.get("imageinfo", []):
             url = ii.get("url", "")
-            if url.lower().endswith(".svg"):
+            if _is_svg_url(url):
                 return (file_title, url)
     return None
 
@@ -166,7 +177,7 @@ def resolve_svg(title: str) -> tuple[str, str] | None:
     for page in pages.values():
         name = page.get("pageimage") or ""
         src = (page.get("original") or {}).get("source") or ""
-        if name.lower().endswith(".svg") and src.lower().endswith(".svg") \
+        if name.lower().endswith(".svg") and _is_svg_url(src) \
                 and not _is_chrome(name):
             return (f"File:{name}", src)
 
@@ -203,7 +214,7 @@ def resolve_svg(title: str) -> tuple[str, str] | None:
     for page in info.get("query", {}).get("pages", {}).values():
         for ii in page.get("imageinfo", []):
             url = ii.get("url", "")
-            if url.lower().endswith(".svg"):
+            if _is_svg_url(url):
                 return (best, url)
     return None
 
