@@ -1,6 +1,54 @@
 {
   "versions": [
     {
+      "version": "3.53.0",
+      "date": "2026-09-01",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The Data browser now opens as its own tab instead of a dropdown inside the panel, so the whole list of facts gets the full pane",
+          "commits": [
+            "f0a95cf"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Two more things are now shareable as a link: the Data browser itself (add `#browser=1` to the address) and the reading mode that hides the 3D brain (`#panel=1`, or `#panel=0` to force the brain back on)",
+          "commits": [
+            "f0a95cf"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The Data browser explains what a node is and labels its columns with the fields each line carries, so it reads as the graph of facts it is",
+          "commits": [
+            "564f411"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A \"The same data as files\" link at the top of the Data browser opens the list of downloadable data files",
+          "commits": [
+            "564f411"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A sourcing badge in the Data browser only offered \"Click for details\"; it now shows the actual source behind the fact (the quote, the measured affinity, or the reasons to doubt it), like the same badge inside a panel",
+          "commits": [
+            "564f411"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "\"Show both hemispheres\" is now off by default in the Data browser, so each region is read once instead of twice, and the checkbox only appears when brain structures are actually in view",
+          "commits": [
+            "564f411"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.52.0",
       "date": "2026-09-01",
       "entries": [
