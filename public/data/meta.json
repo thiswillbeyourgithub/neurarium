@@ -2700,31 +2700,26 @@
     "stahl": {
       "ref": "Prescriber's Guide: Stahl's Essential Psychopharmacology, 8th ed.",
       "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
-      "url": "TODO",
       "pages_dir": "data_sources/books/stahl/pages"
     },
     "kandel": {
       "ref": "Kandel, Principles of Neural Science, 6th ed.",
       "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA, eds. Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
-      "url": "TODO",
       "pages_dir": "data_sources/books/eric_kandel/pages"
     },
     "stahl_essential": {
       "ref": "Stahl's Essential Psychopharmacology: Neuroscientific Basis, 5th ed.",
       "citation": "Stahl SM. Stahl's Essential Psychopharmacology: Neuroscientific Basis and Practical Applications. 5th ed. Cambridge University Press; 2021.",
-      "url": "TODO",
       "pages_dir": "data_sources/books/stahl_essential_pharmacology/pages"
     },
     "carlat": {
       "ref": "Carlat Medication Fact Book for Psychiatric Practice, 7th ed.",
       "citation": "Carlat DJ. The Carlat Medication Fact Book for Psychiatric Practice. 7th ed. Carlat Publishing; 2024.",
-      "url": "TODO",
       "pages_dir": "data_sources/books/carlat_medication/pages"
     },
     "nieuwenhuys": {
       "ref": "Nieuwenhuys, Voogd & van Huijzen, The Human Central Nervous System, 4th ed.",
       "citation": "Nieuwenhuys R, Voogd J, van Huijzen C. The Human Central Nervous System. 4th ed. Springer; 2008.",
-      "url": "TODO",
       "pages_dir": "data_sources/books/nieuwenhuys_atlas/pages"
     },
     "gtopdb": {

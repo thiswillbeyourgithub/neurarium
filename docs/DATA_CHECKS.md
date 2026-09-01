@@ -25,7 +25,9 @@ errors. Functions take loaded data as args (unit-testable). Eleven families (num
 - **TODOs** (provenance-aware): a literal `"TODO"` outside a source url, or a
   focusable target with no `wikipedia`, = warning. A source *url* left `"TODO"` is
   `[ok]` for an `llm` citation (expected) but **warned** if the source claims a
-  higher grade. TODOs never fail the run.
+  higher grade. TODOs never fail the run. A source *corpus* with no `url` at all is
+  expected (a book has no free landing page); a corpus url that is present but not a
+  real link is an **error**.
 - **Provenance grades**: every `provenance` (incl. per-binding sources, `nbn_sources`,
   circuit + projection-group sources), every `classification_provenance`, every
   `wikipedia_provenance` must be a known grade (`llm`/`sourced`/`verified`) or

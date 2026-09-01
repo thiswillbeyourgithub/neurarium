@@ -99,10 +99,9 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "public" / "data"
 # ``data_sources/books/stahl/pages``) for the quote-in-page check (see check_sources).
 REPO_ROOT = DATA_DIR.parent.parent
 
-# A path like "...sources[3].url" (a citation) or "...source_corpora.<id>.url" (a
-# corpus reference) is a source url: its TODO is the known backlog, reported on
-# its own. Anything else is a stray TODO.
-_SOURCE_URL_RE = re.compile(r"(\.sources\[\d+\]\.url|\.source_corpora\.[^.]+\.url)$")
+# A path like "...sources[3].url" (a citation) is a source url: its TODO is the
+# known backlog, reported on its own. Anything else is a stray TODO.
+_SOURCE_URL_RE = re.compile(r"\.sources\[\d+\]\.url$")
 # Trailing hemisphere suffix on a structure id ("frontal_R" -> "frontal").
 _HEMISPHERE_RE = re.compile(r"_(R|L)$")
 # Valid source provenance grades (mirrors generate_data.py PROVENANCE_LEVELS), the
@@ -677,21 +676,27 @@ def check_todos(report, meta, structures, projections, circuits,
         for key in missing_wiki:
             report.warn(f"target {key}: no wikipedia url (shows a TODO pill)")
 
-    # --- corpus-url TODOs (expected, not flagged) ---
+    # --- corpus links ---
     # Per-claim sources are quote-level ``{corpus, page, quote}`` and carry no url of
-    # their own (the viewer resolves the link from ``meta.source_corpora``). A book
-    # corpus may legitimately have no free url (Stahl's ``url`` is "TODO"); the
-    # provenance pill, not a link, is what conveys the grade, so this is expected and
-    # merely reported, never warned.
-    expected_no_link = 0
+    # their own (the viewer resolves the link from ``meta.source_corpora``). A corpus's
+    # ``url`` is optional: a copyrighted book has no free landing page to link, and the
+    # provenance pill, not a link, is what conveys the grade, so the key is simply
+    # omitted there. What would be a bug is a *present* url that is not a real link.
+    no_link = []
     for cid, corpus in (meta.get("source_corpora", {}) or {}).items():
-        if isinstance(corpus, dict) and corpus.get("url") == "TODO":
-            expected_no_link += 1
-    if expected_no_link:
-        report.ok(f"{expected_no_link} source corpus/corpora have no free url yet "
-                  f"(expected: the provenance pill conveys the grade, not the url)")
+        if not isinstance(corpus, dict):
+            continue
+        url = corpus.get("url")
+        if url is None:
+            no_link.append(cid)
+        elif not str(url).startswith(("http://", "https://")):
+            report.error(f"source_corpora.{cid}.url is not a real link: {url!r} "
+                         f"(omit the key instead)")
+    if no_link:
+        report.ok(f"{len(no_link)} source corpus/corpora carry no url "
+                  f"(expected for a book: {', '.join(sorted(no_link))})")
     else:
-        report.ok("every source corpus has a real url")
+        report.ok("every source corpus carries a real url")
 
 
 # --------------------------------------------------------------------------- #

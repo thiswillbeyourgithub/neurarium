@@ -480,5 +480,33 @@ class InnervationCoverageTest(unittest.TestCase):
                             for w in warns))
 
 
+class CorpusUrlTest(unittest.TestCase):
+    """A source corpus's ``url`` is optional but, when present, must be a real link.
+
+    A copyrighted book has no free landing page, so it carries no ``url`` at all (the
+    provenance pill, not a link, conveys the grade). The placeholder it used to carry
+    was indistinguishable from a forgotten one, so a present-but-unlinkable url is now
+    an error: these lock both halves.
+    """
+
+    @staticmethod
+    def _errors(corpora):
+        report = check_data.Report()
+        with redirect_stdout(io.StringIO()):
+            check_data.check_todos(report, {"source_corpora": corpora},
+                                   [], [], [], [], [], [])
+        return report.errors
+
+    def test_absent_url_is_accepted(self):
+        self.assertEqual(self._errors({"stahl": {"ref": "Stahl", "citation": "S."}}), 0)
+
+    def test_real_url_is_accepted(self):
+        self.assertEqual(
+            self._errors({"gtopdb": {"ref": "G", "url": "https://example.org/"}}), 0)
+
+    def test_placeholder_url_is_an_error(self):
+        self.assertEqual(self._errors({"stahl": {"ref": "Stahl", "url": "TODO"}}), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

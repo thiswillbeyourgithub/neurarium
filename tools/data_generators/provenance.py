@@ -351,7 +351,10 @@ def _density_node(registry: dict[str, dict[str, Any]], owner_id: str,
 # (see ``data_sources/books/stahl/`` in CLAUDE.local.md); it is emitted into ``meta.json`` so the
 # checker is data-driven, and is simply absent on a checkout without that
 # (uncommitted, large) source material, in which case the quote-in-page check is
-# skipped while the structural checks still run.
+# skipped while the structural checks still run. ``url`` is *optional* and carried
+# only by the web corpora that have a free landing page: a copyrighted book has no
+# such link, and the provenance pill (not a link) is what conveys the grade, so the
+# key is omitted rather than filled with a placeholder.
 SOURCE_CORPORA: dict[str, dict[str, str]] = {
     "stahl": {
         # Label for the per-claim tooltip ref ("<ref>, p. N"). The full book title
@@ -361,7 +364,6 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "ref": "Prescriber's Guide: Stahl's Essential Psychopharmacology, 8th ed.",
         "citation": "Stahl SM. Prescriber's Guide: Stahl's Essential "
                     "Psychopharmacology. 8th ed. Cambridge University Press; 2024.",
-        "url": "TODO",
         "pages_dir": "data_sources/books/stahl/pages",
     },
     "kandel": {
@@ -371,7 +373,6 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "ref": "Kandel, Principles of Neural Science, 6th ed.",
         "citation": "Kandel ER, Koester JD, Mack SH, Siegelbaum SA, eds. "
                     "Principles of Neural Science. 6th ed. McGraw Hill; 2021.",
-        "url": "TODO",
         "pages_dir": "data_sources/books/eric_kandel/pages",
     },
     "stahl_essential": {
@@ -382,7 +383,6 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "citation": "Stahl SM. Stahl's Essential Psychopharmacology: "
                     "Neuroscientific Basis and Practical Applications. 5th ed. "
                     "Cambridge University Press; 2021.",
-        "url": "TODO",
         "pages_dir": "data_sources/books/stahl_essential_pharmacology/pages",
     },
     "carlat": {
@@ -390,7 +390,6 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "ref": "Carlat Medication Fact Book for Psychiatric Practice, 7th ed.",
         "citation": "Carlat DJ. The Carlat Medication Fact Book for Psychiatric "
                     "Practice. 7th ed. Carlat Publishing; 2024.",
-        "url": "TODO",
         "pages_dir": "data_sources/books/carlat_medication/pages",
     },
     "nieuwenhuys": {
@@ -402,7 +401,6 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                "System, 4th ed.",
         "citation": "Nieuwenhuys R, Voogd J, van Huijzen C. The Human Central "
                     "Nervous System. 4th ed. Springer; 2008.",
-        "url": "TODO",
         "pages_dir": "data_sources/books/nieuwenhuys_atlas/pages",
     },
     "gtopdb": {

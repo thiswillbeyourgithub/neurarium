@@ -638,8 +638,9 @@ fixed Stahl list.
   emitted (`sources` already carry the corpus, so it would be a derivable duplicate).
 
 5 drugs stay unbound as genuinely non-receptor agents (lithium, disulfiram, l-methylfolate,
-triiodothyronine, caprylidene). The Stahl corpus `url` is `"TODO"` (the grade, not the link, conveys
-provenance).
+triiodothyronine, caprylidene). A book corpus carries no `url` key at all (there is no free landing
+page to link, and the grade, not the link, conveys provenance); a *present* corpus url must be a
+real link, which `check_data.py` enforces.
 
 ## Drug metabolism
 
