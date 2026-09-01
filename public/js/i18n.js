@@ -83,6 +83,10 @@
       "nodes.sortName": "Name",
       "nodes.sortKind": "Kind",
       "nodes.count": "{shown} of {total}",
+      "nodes.twins": "Show both hemispheres",
+      "nodes.twinsHint": "A left/right pair of a region is two facts saying the same "
+        + "thing. Listed separately by default, which is what the sourcing counts "
+        + "count; untick to read each region once, without its side.",
       "panel.tabSettings": "Settings",
       "panel.tabDetails": "Details",
       "panel.closeTab": "Close tab",
@@ -604,6 +608,11 @@
       "nodes.sortName": "Nom",
       "nodes.sortKind": "Type",
       "nodes.count": "{shown} sur {total}",
+      "nodes.twins": "Afficher les deux hémisphères",
+      "nodes.twinsHint": "Une région gauche/droite forme deux faits qui disent la "
+        + "même chose. Ils sont listés séparément par défaut, ce que comptent les "
+        + "statistiques de sources ; décochez pour lire chaque région une seule fois, "
+        + "sans son côté.",
       "panel.tabSettings": "Réglages",
       "panel.tabDetails": "Détails",
       "panel.closeTab": "Fermer l’onglet",

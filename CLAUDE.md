@@ -273,6 +273,10 @@ Viewer (`public/`):
 - `js/node-browser.js` — `collectNodes` + `createNodeBrowser`, the Data browser section
   (`#nodes`): every graded knowledge node as one filterable/sortable list (see
   [`docs/CONTROLS.md`](docs/CONTROLS.md)).
+- `js/prefs.js` — `loadFlag(key, dflt)` / `saveFlag(key, on)`, the only place a persisted
+  on/off preference touches `localStorage` (panel-only mode, show-metabolites, show-twins;
+  storage throws in private mode, so a read falls back to the default and a write is
+  best-effort). `anim-settings.js` keeps its own, persisting a number beside its flag.
 
 Deployment (`docker/`): `docker-compose.yml` (hardened Caddy), `Dockerfile`
 (two-stage: `xcaddy build`s a custom binary with the `caddy-ratelimit` module,

@@ -28,6 +28,7 @@ import { fetchWikiLead } from "./wiki.js";
 import { createTour } from "./tour.js";
 import { createChangelog } from "./changelog.js";
 import { createNodeBrowser } from "./node-browser.js";
+import { loadFlag, saveFlag } from "./prefs.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -4445,22 +4446,8 @@ function savePkGrouping(mode) {
 }
 
 // localStorage key for the Drugs list's "show active metabolites" toggle (default
-// on). Persisted so the choice survives reloads, mirroring anim-settings' idiom.
+// on). Persisted so the choice survives reloads (see js/prefs.js).
 const METAB_TOGGLE_KEY = "neurarium.metabolites";
-function loadShowMetabolites() {
-  try {
-    return localStorage.getItem(METAB_TOGGLE_KEY) !== "off";
-  } catch {
-    return true;
-  }
-}
-function saveShowMetabolites(on) {
-  try {
-    localStorage.setItem(METAB_TOGGLE_KEY, on ? "on" : "off");
-  } catch {
-    /* private mode / storage disabled: toggle just won't persist. */
-  }
-}
 
 function buildDrugLegend(data, onPick) {
   const container = document.getElementById("drugs-list");
@@ -4605,9 +4592,9 @@ function buildDrugLegend(data, onPick) {
     filterInput.addEventListener("input", applyFilter);
   }
   if (metabToggle) {
-    metabToggle.checked = loadShowMetabolites();
+    metabToggle.checked = loadFlag(METAB_TOGGLE_KEY);
     metabToggle.addEventListener("change", () => {
-      saveShowMetabolites(metabToggle.checked);
+      saveFlag(METAB_TOGGLE_KEY, metabToggle.checked);
       applyFilter();
     });
   }
@@ -8037,13 +8024,11 @@ async function main() {
   const setNo3d = (on) => {
     document.body.classList.toggle("no-3d", on);
     toggle3d?.setAttribute("aria-pressed", String(on));
-    try { localStorage.setItem(NO3D_KEY, on ? "on" : "off"); } catch { /* private mode */ }
+    saveFlag(NO3D_KEY, on);
     if (!on) invalidate(); // the scene is back and holds a stale frame; repaint it
   };
   toggle3d?.addEventListener("click", () => setNo3d(!no3dOn()));
-  let savedNo3d = null;
-  try { savedNo3d = localStorage.getItem(NO3D_KEY); } catch { /* private mode */ }
-  if (savedNo3d === "on") {
+  if (loadFlag(NO3D_KEY, false)) {
     setNo3d(true);
     // Nothing renders while the scene is hidden, so the assemble intro would only
     // be resumed mid-pose on re-enable. Cancel it: turning 3D back on lands on the

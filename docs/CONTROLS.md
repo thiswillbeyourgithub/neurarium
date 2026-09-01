@@ -143,12 +143,13 @@ coverage bars read node by node. `collectNodes(data, deps)` enumerates every gra
 (references excluded, like the bars) as `{kind, name, notion, grade, uncertain, go}`, where `grade`
 is the *display* grade a pill shows (`uncertain` overrides a quote-checked node carrying
 uncertainty bullets) and `go` navigates to the owning panel. Its per-kind counts match
-`meta.provenance_stats.by_kind` (drift is a bug), with one intended exception: a mirrored
-structure is listed once, not per hemisphere, so `structures` reads 32 rows against 57 counted
-nodes. It runs **lazily**, on the section's
+`meta.provenance_stats.by_kind` (drift is a bug). It runs **lazily**, on the section's
 first open, since walking the whole dataset should not cost a visitor who never opens it.
 `createNodeBrowser` renders a filter box (`#nodes-filter`, folded through the same `foldText` the
-search uses) plus kind / grade / sort selects, a "{shown} of {total}" line, and the rows in chunks
+search uses) plus kind / grade / sort selects, a **Show both hemispheres** checkbox
+(`#nodes-show-twins`, persisted `neurarium.nodeTwins`, default on: a mirrored structure then lists
+per side, which is what the tally counts; unticked it collapses each pair to one side-less row, 32
+against 57), a "{shown} of {total}" line, and the rows in chunks
 (150, then +300 per "show more"). **Default sort is weakest-grade first**: the section doubles as a
 sourcing workbench, so the unsourced claims surface on top. A row's pill is `info.provenancePill`
 and its kind tag `KIND_LABELS` (both shared with the popup, so the two views cannot drift); rows

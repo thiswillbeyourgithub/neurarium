@@ -14,6 +14,8 @@
 // No three.js here: rows navigate through the `nav` callbacks main.js hands in, so
 // this module never touches the scene.
 
+import { loadFlag, saveFlag } from "./prefs.js";
+
 // Sort rank of a display grade, weakest to strongest. `uncertain` sits between
 // sourced and verified for the same reason the Sources popup's bar does: the quote
 // really was checked, it just may not attribute the claim.
@@ -71,15 +73,18 @@ const stripSide = (id) => String(id || "").replace(/_[RL]$/, "");
  * Wikipedia references are deliberately absent: a reference points *at* a node, it
  * is not itself one (same rule as the popup's bars). The per-kind counts otherwise
  * match `meta.provenance_stats.by_kind` exactly, so a drift between the two is a
- * bug; the single intended exception is `structures` (see below).
+ * bug; `twins: false` is the one deliberate departure (see `structures` below).
  *
  * @param {import("./data.js").BrainData} data normalized dataset
  * @param {{t: Function, formatHalfLife: Function, nav: object}} deps
+ * @param {{twins?: boolean}} [opts] `twins` (default true) lists both hemispheres of
+ *   a mirrored region; false collapses each pair to one side-less row
  * @returns {Array<{kind: string, name: string, notion: string, grade: string,
  *                  uncertain: boolean, go: (() => void)|null}>}
  */
-export function collectNodes(data, deps) {
+export function collectNodes(data, deps, opts = {}) {
   const { t, formatHalfLife, nav } = deps;
+  const twins = opts.twins !== false;
   const rows = [];
   // `grade` is already defaulted by each caller (the per-kind default differs: an
   // unsourced classification is authored, hence "llm", while an unsourced binding
@@ -116,13 +121,15 @@ export function collectNodes(data, deps) {
     : `${b.actionLabel}, ${b.targetName}`);
 
   // Structures. A symmetric region is authored once and mirrored, so the `_L` twin
-  // repeats its twin's name, group and grade verbatim; a reading list gains nothing
-  // from the duplicate, so only one side gets a row. This is the ONE place the
-  // browser deliberately counts differently from the coverage tally (which counts
-  // each emitted record, both hemispheres): 32 rows against 57 counted nodes.
+  // repeats its twin's group and grade verbatim, differing only in the side its name
+  // carries. Listing both (the default) is what makes the browser's count match the
+  // coverage tally, which counts each emitted record: 57 rows. Collapsing them is
+  // offered because for *reading* the pair says one thing twice; the collapsed row
+  // then drops the side from its name (57 rows against 32 collapsed).
   for (const s of data.structures || []) {
-    if (/_L$/.test(s.id) && byId.has(`${stripSide(s.id)}_R`)) continue;
-    push("structures", s.base_name || s.name,
+    const twin = /_L$/.test(s.id) && byId.has(`${stripSide(s.id)}_R`);
+    if (twin && !twins) continue;
+    push("structures", twins ? s.name : (s.base_name || s.name),
       (meta.groupLabels || {})[s.group] || s.group,
       s.classification_provenance || "llm",
       () => nav.structure(s.id));
@@ -259,9 +266,13 @@ export function collectNodes(data, deps) {
   return rows;
 }
 
+// localStorage key for the browser's "show mirrored twins" checkbox (default on,
+// which is the reading that matches the coverage tally). See js/prefs.js.
+const TWINS_KEY = "neurarium.nodeTwins";
+
 /**
  * Build the Data browser into a section body: a filter box, kind / grade / sort
- * selects, a count line and the chunked row list.
+ * selects, a mirrored-twins checkbox, a count line and the chunked row list.
  *
  * The node list is collected LAZILY, on the first `open()`, because enumerating
  * every node walks the whole dataset and a visitor who never opens the section
@@ -314,6 +325,18 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     controls.appendChild(sel);
     return sel;
   };
+
+  // A mirrored region is two emitted records saying one thing, so whether the pair
+  // reads as one row or two is a preference, not a fact: both hemispheres by default
+  // (the browser then counts exactly what the coverage tally counts).
+  const twinsLabel = el("label", "list-toggle");
+  const twinsBox = document.createElement("input");
+  twinsBox.type = "checkbox";
+  twinsBox.id = "nodes-show-twins";
+  twinsBox.checked = loadFlag(TWINS_KEY);
+  twinsLabel.appendChild(twinsBox);
+  twinsLabel.appendChild(el("span", null, t("nodes.twins")));
+  twinsLabel.title = t("nodes.twinsHint");
 
   const countEl = el("div", "node-count");
   const list = el("div", "node-list");
@@ -386,9 +409,11 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     debounce = setTimeout(apply, 120);
   };
 
+  const collect = () => { rows = collectNodes(data, deps, { twins: twinsBox.checked }); };
+
   const build = () => {
     if (rows) return;
-    rows = collectNodes(data, deps);
+    collect();
 
     const presentKinds = new Set(rows.map((r) => r.kind));
     kindSel = makeSelect(t("nodes.kindLabel"), [
@@ -412,6 +437,11 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     kindSel.addEventListener("change", apply);
     gradeSel.addEventListener("change", apply);
     sortSel.addEventListener("change", apply);
+    twinsBox.addEventListener("change", () => {
+      saveFlag(TWINS_KEY, twinsBox.checked);
+      collect(); // the structure rows themselves change, so re-enumerate before filtering
+      apply();
+    });
     moreBtn.addEventListener("click", () => {
       limit += PAGE_MORE;
       render();
@@ -419,6 +449,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
 
     body.appendChild(filterInput);
     body.appendChild(controls);
+    body.appendChild(twinsLabel);
     body.appendChild(countEl);
     body.appendChild(list);
     body.appendChild(moreBtn);

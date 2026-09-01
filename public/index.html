@@ -1467,8 +1467,9 @@
       #receptors-body h2,
       #enzymes-body h2,
       #drugs-list h2 { margin: 14px 0 8px; }
-      /* "Show active metabolites" toggle, sits under the filter box. */
-      .drugs-toggle {
+      /* Small checkbox row under a browse list's filter box (Drugs "show active
+         metabolites", Data browser "show mirrored twins"). */
+      .list-toggle {
         display: flex;
         align-items: center;
         gap: 6px;
@@ -1478,7 +1479,7 @@
         cursor: pointer;
         user-select: none;
       }
-      .drugs-toggle input { margin: 0; }
+      .list-toggle input { margin: 0; }
       /* Active-metabolite bullet under a parent drug row: indented + dimmer so it
          reads as a discreet sub-item, with its T½ trailing in muted text. */
       /* --metab-depth (set only past the first level) steps the indent for a
@@ -2730,7 +2731,7 @@
             </button>
             <div id="drugs-body" hidden>
               <input type="text" id="drugs-filter" class="drugs-filter" data-i18n-attr="placeholder:drugs.filter" autocomplete="off" />
-              <label class="drugs-toggle"><input type="checkbox" id="drugs-show-metabolites" checked /><span data-i18n="drugs.showMetabolites"></span></label>
+              <label class="list-toggle"><input type="checkbox" id="drugs-show-metabolites" checked /><span data-i18n="drugs.showMetabolites"></span></label>
               <div id="drugs-list"></div>
             </div>
           </div>
