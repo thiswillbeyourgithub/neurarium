@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.51.1",
+      "date": "2026-09-01",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Hovering an active-metabolite bullet in the Drugs list now brightens its text as intended (the hover colour pointed at an undefined style token, so nothing happened)",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.51.0",
       "date": "2026-09-01",
       "entries": [
