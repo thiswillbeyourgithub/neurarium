@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.49.0",
+      "date": "2026-09-01",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A new button at the top of the panel hides the 3D brain so the panel can use the whole screen for reading. Press it again to bring the brain back, and your choice is remembered for next time",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.48.0",
       "date": "2026-09-01",
       "entries": [
