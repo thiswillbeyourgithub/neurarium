@@ -166,6 +166,7 @@
     "alpha_blocker": "Alpha blocker",
     "beta_blocker": "Beta blocker",
     "h3_antagonist": "H3 antagonist (wake-promoter)",
+    "antiemetic": "Antiemetic / prokinetic",
     "other": "Other"
   },
   "drug_targets": {
@@ -2819,8 +2820,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1670,
-        "verified": 1547,
+        "total": 1672,
+        "verified": 1549,
         "uncertain": 111,
         "sourced": 0,
         "llm": 0,
@@ -2846,13 +2847,13 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 244,
+        "total": 245,
         "verified": 199,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 45,
+        "llm": 46,
         "nosource": 0,
-        "missing": 45
+        "missing": 46
       },
       "drug_half_life": {
         "total": 185,
@@ -2864,8 +2865,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 275,
-        "verified": 275,
+        "total": 280,
+        "verified": 280,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3026,31 +3027,31 @@
         "missing": 0
       },
       "references": {
-        "total": 384,
+        "total": 385,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 384,
+        "sourced": 385,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 4021,
-      "verified": 3716,
+      "total": 4029,
+      "verified": 3723,
       "uncertain": 146,
       "sourced": 0,
-      "llm": 145,
+      "llm": 146,
       "nosource": 14,
-      "missing": 159,
-      "backed": 3862,
+      "missing": 160,
+      "backed": 3869,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1651,
-      "bindings_with_ki": 1444,
+      "bindings_total": 1653,
+      "bindings_with_ki": 1446,
       "pct_bindings_with_ki": 87,
-      "drugs_total": 229,
+      "drugs_total": 230,
       "drugs_without_ki": 74,
       "drugs_without_ki_ids": [
         "acamprosate",

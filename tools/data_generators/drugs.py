@@ -80,6 +80,12 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     "beta_blocker": {"en": "Beta blocker", "fr": "Bêta-bloquant"},
     "h3_antagonist": {"en": "H3 antagonist (wake-promoter)",
                       "fr": "Antagoniste H3 (éveillant)"},
+    # Dopamine-blocking antiemetics / prokinetics (domperidone first; the
+    # metoclopramide-style CNS-penetrant ones will join it): outside Stahl's
+    # roster, so bindings come from PDSP Ki + the drug's own Wikipedia
+    # pharmacology, like the recreational class.
+    "antiemetic": {"en": "Antiemetic / prokinetic",
+                   "fr": "Antiémétique / procinétique"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 

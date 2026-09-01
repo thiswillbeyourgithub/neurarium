@@ -682,6 +682,68 @@
    ]
   }
  ],
+ "domperidone": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "Domperidone is almost exclusively metabolized by CYP3A4 / 5 , though minor contributions by CYP1A2 , CYP2D6 , and CYP2C8 have been reported."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c8",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "Domperidone is almost exclusively metabolized by CYP3A4 / 5 , though minor contributions by CYP1A2 , CYP2D6 , and CYP2C8 have been reported."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "Domperidone is almost exclusively metabolized by CYP3A4 / 5 , though minor contributions by CYP1A2 , CYP2D6 , and CYP2C8 have been reported."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP3A4 / 5 ) and intestinal ( first-pass )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP3A4 / 5 ) and intestinal ( first-pass )"
+    }
+   ]
+  }
+ ],
  "donepezil": [
   {
    "enzyme": "cyp2d6",

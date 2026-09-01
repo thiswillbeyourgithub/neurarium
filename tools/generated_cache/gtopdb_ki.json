@@ -1857,6 +1857,19 @@
     }
    }
   },
+  "bumetanide": {
+   "nkcc1": {
+    "action": "blocker",
+    "pmid": "11882915",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bumetanide",
+     "provenance": "verified",
+     "quote": "bumetanide at Basolateral Na-K-Cl symporter (SLC12A2, Human): Inhibitor / Inhibition, pIC50 5.6 [PMID 11882915]",
+     "species": "Human"
+    }
+   }
+  },
   "buprenorphine": {
    "kappa": {
     "action": "antagonist",
@@ -3931,6 +3944,46 @@
     }
    }
   },
+  "domperidone": {
+   "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 8.2852,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8301582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "domperidone at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7.9-8.4 [PMID 8301582]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 52.2759,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8301582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "domperidone at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 7.1-7.6 [PMID 8301582]",
+     "species": "Human"
+    }
+   }
+  },
   "donepezil": {
    "ache": {
     "action": "enzyme_inhibitor",
@@ -4798,6 +4851,19 @@
      "page": "fluvoxamine",
      "provenance": "verified",
      "quote": "fluvoxamine at sigma non-opioid intracellular receptor 1 (SIGMAR1, Human): None / Binding, pKi 7.44 [PMID 23641311]",
+     "species": "Human"
+    }
+   }
+  },
+  "furosemide": {
+   "nkcc1": {
+    "action": "blocker",
+    "pmid": "11882915",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "furosemide",
+     "provenance": "verified",
+     "quote": "furosemide at Basolateral Na-K-Cl symporter (SLC12A2, Human): Inhibitor / Inhibition, pIC50 5.13 [PMID 11882915]",
      "species": "Human"
     }
    }

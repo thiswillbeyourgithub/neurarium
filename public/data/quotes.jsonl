@@ -1175,6 +1175,7 @@
 {"id": "q_5e0ce9e5dbec", "corpus": "stahl", "page": 253, "quote": "\u0007Nuedexta (in combination with quinidine)", "heading": ["Dextromethorphan–Quinidine"]}
 {"id": "q_5e23d6b2b14f", "corpus": "stahl", "page": 247, "quote": "Auvelity", "heading": ["Dextromethorphan–Bupropion", "Therapeutics"]}
 {"id": "q_5e280d790dfe", "corpus": "gtopdb_ki", "page": "perphenazine", "quote": "perphenazine at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 8.2 [PMID 12629531]", "species": "Human"}
+{"id": "q_5e2834cb061e", "corpus": "wikipedia_pharm", "page": "domperidone", "quote": "Domperidone is almost exclusively metabolized by CYP3A4 / 5 , though minor contributions by CYP1A2 , CYP2D6 , and CYP2C8 have been reported."}
 {"id": "q_5e89b7e1fbb9", "corpus": "stahl", "page": 748, "quote": "Major metabolite of selegiline is desmethylselegiline; other metabolites are l-methamphetamine and l-amphetamine", "heading": ["Selegiline", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_5eb0bf280aff", "corpus": "wikipedia_fr", "page": "parox_tine", "quote": "Deroxat"}
 {"id": "q_5eb1f1e67ede", "corpus": "wikipedia_pharm", "page": "promethazine", "quote": "α2C-adrenoceptor (Human) | 353"}
@@ -1760,6 +1761,7 @@
 {"id": "q_8e1d9758ee45", "corpus": "stahl", "page": 801, "quote": "Restoril", "heading": ["Temazepam", "Therapeutics"]}
 {"id": "q_8e5f63912626", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at H3 receptor (Hrh3, Rat): Antagonist / Antagonist, pKi 5.8 [PMID 10869375]", "species": "Rat"}
 {"id": "q_8e64f32d92f0", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "α 2B | 108 | Antagonist"}
+{"id": "q_8e8c76b2f848", "corpus": "wikipedia_pharm", "page": "domperidone", "quote": "Metabolism | Hepatic ( CYP3A4 / 5 ) and intestinal ( first-pass )"}
 {"id": "q_8eb82d2cf40c", "corpus": "stahl", "page": 717, "quote": "Rozerem", "heading": ["Ramelteon", "Therapeutics"]}
 {"id": "q_8eb90e397da8", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Stimuloton"}
 {"id": "q_8ecb467995a4", "corpus": "stahl", "page": 322, "quote": "Terminal half-life 41–79 minutes", "heading": ["Flumazenil", "Dosing and use", "Pharmacokinetics"]}
