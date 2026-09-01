@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "3.48.0",
+      "date": "2026-09-01",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Added domperidone, the first drug of a new \"Antiemetic / prokinetic\" class, with measured D2 and D3 affinities, its metabolism route and its molecule drawing. Its notes flag that it barely crosses the blood-brain barrier",
+          "commits": []
+        },
+        {
+          "category": "fixed",
+          "text": "Molecule drawings can be fetched again from Wikipedia (their image links recently changed shape and the importer no longer recognized them)",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.47.4",
       "date": "2026-08-10",
       "entries": [
