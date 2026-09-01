@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.52.0",
+      "date": "2026-09-01",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The Data browser now lists both hemispheres of a region, so its counts line up with the sourcing statistics, and a new \"Show both hemispheres\" checkbox collapses each left/right pair back to a single line for reading",
+          "commits": [
+            "232a0c8"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.51.1",
       "date": "2026-09-01",
       "entries": [
