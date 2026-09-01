@@ -2270,19 +2270,28 @@ function createInfoPanel(data, sourcingModal) {
   // NOSOURCE rather than borrowing the book at large. When the backing is a Ki whose
   // corpus is URL-addressable (a literature Ki, e.g. the Wikipedia table), the label
   // is a clickable link, matching the Ki badge's tooltip below the row.
+  // The generic "pill for a node, opening on whatever backs it": its quote-level
+  // sources if any, else its measured Ki (the only other inspectable backing), else
+  // nothing; reasons to doubt always lead. `node` is any object carrying
+  // `{sources?, ki?, uncertainty?}`, which is the shape a binding already has and the
+  // shape the Data browser's rows are built in, so both go through this one path and
+  // a node badges identically wherever it is shown.
+  const sourceBackedPill = (grade, node) => {
+    const doubt = node && node.uncertainty && node.uncertainty.length
+      ? node.uncertainty : null;
+    const sources = node && node.sources;
+    if (sources && sources.length)
+      return makeProvenancePill(grade, withUncertainty(doubt, sourcesTip(sources)));
+    if (node && node.ki)
+      return makeProvenancePill(grade,
+        withUncertainty(doubt, kiCorpusRefNode(node.ki, { dash: true })));
+    return makeProvenancePill(grade, withUncertainty(doubt, null));
+  };
   const bindingProvenancePill = (binding) => {
     // A flagged binding keeps its own source in the tooltip, under the reasons to
     // doubt it: same evidence, honestly framed. See uncertaintyTip.
-    const doubt = binding.uncertainty && binding.uncertainty.length
-      ? binding.uncertainty : null;
-    const grade = doubt ? "uncertain" : binding.provenance;
-    if (binding.sources && binding.sources.length)
-      return makeProvenancePill(grade,
-        withUncertainty(doubt, sourcesTip(binding.sources)));
-    if (binding.ki)
-      return makeProvenancePill(grade,
-        withUncertainty(doubt, kiCorpusRefNode(binding.ki, { dash: true })));
-    return makeProvenancePill(grade, withUncertainty(doubt, null));
+    const doubt = binding.uncertainty && binding.uncertainty.length;
+    return sourceBackedPill(doubt ? "uncertain" : binding.provenance, binding);
   };
 
   // The "why this is uncertain" block that leads a flagged binding's tooltip: a lead
@@ -4221,12 +4230,26 @@ function createInfoPanel(data, sourcingModal) {
 
     /**
      * The grade pill builder, so a view outside the info panel (the Data browser's
-     * rows) badges a node with the very same element the panel does, tooltip and
-     * "Click for details" cue included, rather than a lookalike.
+     * rows) badges a node with the very same element the panel does: same tooltip,
+     * same verbatim quote / Ki / reasons-to-doubt, same "Click for details" cue.
      * @param {string|null} level a stored grade, or the "uncertain" display grade
+     * @param {{sources?: object[], ki?: object, uncertainty?: object[]}} [node] what
+     *   backs the claim; omit it for a bare grade badge with no source to show
      */
-    provenancePill(level) {
-      return makeProvenancePill(level === "nosource" ? null : level);
+    provenancePill(level, node) {
+      return sourceBackedPill(level === "nosource" ? null : level, node);
+    },
+
+    /**
+     * Render the Data browser's (detached, state-keeping) container in the Details
+     * pane. It is not a show*() view: the browser owns its own DOM so its filter,
+     * selects and scroll survive a tab switch, and the panel only hosts it.
+     * @param {HTMLElement} elm the container built by js/node-browser.js
+     */
+    showNodeBrowser(elm) {
+      clearBody();
+      body.appendChild(el("h2", "info-title", t("panel.nodes")));
+      body.appendChild(elm);
     },
   };
 }
@@ -5494,8 +5517,6 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const drugsBody = document.getElementById("drugs-body");
   const enzymesToggle = document.getElementById("enzymes-toggle");
   const enzymesBody = document.getElementById("enzymes-body");
-  const nodesToggle = document.getElementById("nodes-toggle");
-  const nodesBody = document.getElementById("nodes-body");
 
   // One collapse-header behaviour shared by the panel, the Controls section and
   // the accordion sections: toggle aria-expanded + the body's hidden flag. The
@@ -5570,14 +5591,15 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   // Order mirrors the on-screen section order (Drugs / Receptors / Structures /
   // Projections, set by the markup in index.html). This array only drives the
   // single-open accordion + keyboard nav, so it is order-agnostic, but keeping it
-  // aligned avoids surprises when reading the two together.
+  // aligned avoids surprises when reading the two together. The Data browser row
+  // sits with them in the markup but is NOT here: it opens a detail tab instead of
+  // expanding in place (wired in main()).
   const sections = [
     { toggle: drugsToggle, body: drugsBody },
     { toggle: receptorsToggle, body: receptorsBody },
     { toggle: enzymesToggle, body: enzymesBody },
     { toggle: structuresToggle, body: structuresBody },
     { toggle: projectionsToggle, body: projectionsBody },
-    { toggle: nodesToggle, body: nodesBody },
   ];
   for (const s of sections) {
     if (!s.toggle || !s.body) continue;
@@ -6457,7 +6479,8 @@ function wireModal({ modalId, toggleId, closeId, onOpen }) {
  * attribution links. Opened by the toolbar's info button; the ×, a backdrop click,
  * or Esc close it. Its bottom links close this and open the #sourcing-modal or the
  * #changelog-modal (both passed in). Prose + hrefs live in the markup + wireControls.
- * @returns {{open:()=>void, close:()=>void, isOpen:boolean}}
+ * @returns {{open:()=>void, close:()=>void, isOpen:boolean,
+ *            openDataFiles:()=>void}}
  */
 function wireAboutModal(sourcing, changelog) {
   const ctrl = wireModal({ modalId: "about-modal", toggleId: "about-toggle", closeId: "about-close" });
@@ -6469,7 +6492,24 @@ function wireAboutModal(sourcing, changelog) {
     });
   jump("about-open-sourcing", sourcing);
   jump("about-open-changelog", changelog);
-  return ctrl;
+  return {
+    ...ctrl,
+    get isOpen() { return ctrl.isOpen; },
+    /**
+     * Open the popup straight on its (collapsed) data-file dropdown, expanded and
+     * scrolled to. The Data browser offers "the same data as files" and this is
+     * where that list lives, so it points here instead of shipping a second copy of
+     * the file links.
+     */
+    openDataFiles() {
+      ctrl.open();
+      const box = document.getElementById("about-data-files");
+      if (!box) return;
+      box.open = true;
+      // After the popup is painted, or scrolling a hidden box is a no-op.
+      requestAnimationFrame(() => box.scrollIntoView({ block: "center" }));
+    },
+  };
 }
 
 /**
@@ -7280,13 +7320,24 @@ async function main() {
   };
   buildAboutSourcing(data.meta, { data, nav: sourcingNav });
 
-  // The Data browser section: the same nodes the tally counts, listed one by one.
-  // Its nav is the sourcing one minus the popup closing (a section row is already in
+  // The Data browser: the same nodes the tally counts, listed one by one. It opens
+  // as a **detail tab** rather than expanding in the accordion, because thousands of
+  // rows want the whole pane; its DOM is a detached container the browser owns, so
+  // the filter text, the selects and the scroll position all survive a tab switch
+  // (the panel only hosts it, see info.showNodeBrowser).
+  // Its nav is the sourcing one minus the popup closing (a browser row is already in
   // the open panel), plus a connection callback the popup has no example for: a
   // projection row isolates the arrow that carries it.
+  // Its tab key. Unlike every other detail tab this one identifies a *view*, not a
+  // node, so it carries no id; the deep-link layer maps it to `#browser=1`.
+  const NODES_TAB_KEY = "browser:1";
+  // Open (or re-activate) the Data browser tab. Assigned just below; a no-op if the
+  // section's markup is missing, so the deep link + the row can call it blind.
+  let showNodeBrowser = () => {};
   const nodesToggle = document.getElementById("nodes-toggle");
-  const nodesBody = document.getElementById("nodes-body");
-  if (nodesToggle && nodesBody) {
+  if (nodesToggle) {
+    const nodesBody = document.createElement("div");
+    nodesBody.id = "nodes-body";
     const nodeBrowser = createNodeBrowser({
       body: nodesBody,
       data,
@@ -7313,11 +7364,20 @@ async function main() {
         fold: foldText,
         kindLabel: (k) => t(KIND_LABELS[k] || k),
         gradeLabel: (g) => t(GRADE_LABELS[g] || g),
+        // The downloadable-file list already lives in the About popup; point at it
+        // rather than shipping a second copy of the same links. (Late-bound: the
+        // About modal is wired further down in main().)
+        openDataFiles: () => aboutModal.openDataFiles(),
       },
     });
-    // Lazy: collecting every node walks the whole dataset, so it waits for the first
-    // open rather than running at boot. wireControls already toggles the section.
-    nodesToggle.addEventListener("click", () => nodeBrowser.open(), { once: true });
+    // Lazy: collecting every node walks the whole dataset, so building waits for the
+    // first open rather than running at boot; reopening is then just a re-host.
+    showNodeBrowser = () => {
+      nodeBrowser.open();
+      info.showNodeBrowser(nodesBody);
+      openDetailTab(NODES_TAB_KEY, t("panel.nodes"), showNodeBrowser);
+    };
+    nodesToggle.addEventListener("click", () => showNodeBrowser());
   }
 
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
@@ -7855,6 +7915,13 @@ async function main() {
   // node's detail tab and focuses it on load (and on hashchange), exactly as picking
   // it from search would. The inverse also holds: focusing any node rewrites the hash
   // to its deep link (see syncHashToFocus), so the address bar is always shareable.
+  //
+  // Two kinds of key live in that hash, and they compose (`#browser=1&panel=1`):
+  //   - ONE focus key, mirroring the active detail tab (`focus*`, plus `browser` for
+  //     the Data browser view, which is a tab but not a node);
+  //   - any number of VIEW keys (`hashViews` below), independent scene/layout state
+  //     that is not a focus. Today: `panel=1`, the 3D-hidden reading mode. A view key
+  //     is written only when it is away from its default, so a plain link stays short.
   const linkFold = (s) => foldText(String(s == null ? "" : s));
   const findByIdOrName = (list, v) => {
     const q = linkFold(v);
@@ -7895,10 +7962,40 @@ async function main() {
       }
       return false;
     },
+    // Not a node: the Data browser view. Any value opens it (the canonical link
+    // writes `1`), so `#browser=1` is a shareable "show me the whole dataset".
+    browser: () => { showNodeBrowser(); return true; },
   };
+
+  // ---- Hash view keys (non-focus view state) -------------------------------------
+  // Each entry `read()`s the current value (null when at its default, so it stays out
+  // of the URL) and `write(v)`s a value from the hash. A key is registered by the
+  // control that owns it, which for the panel-only mode happens further down than the
+  // first applyDeepLink() call, so a value seen before its owner exists is parked in
+  // `pendingHashView` and applied the moment it registers. A MISSING key is never
+  // written: the hash then carries no instruction about it, and a persisted
+  // preference must not be silently overridden by a link that simply says nothing.
+  const hashViews = new Map(); // key -> {read, write}
+  const pendingHashView = new Map();
+  const registerHashView = (key, view) => {
+    hashViews.set(key, view);
+    if (pendingHashView.has(key)) view.write(pendingHashView.get(key));
+    pendingHashView.delete(key);
+  };
+  const HASH_VIEW_KEYS = ["panel"];
+  const applyHashViews = (params) => {
+    for (const key of HASH_VIEW_KEYS) {
+      if (!params.has(key)) continue;
+      const view = hashViews.get(key);
+      if (view) view.write(params.get(key));
+      else pendingHashView.set(key, params.get(key));
+    }
+  };
+
   const applyDeepLink = () => {
     const raw = window.location.hash.replace(/^#/, "");
     if (!raw) return false;
+    applyHashViews(new URLSearchParams(raw));
     for (const [k, val] of new URLSearchParams(raw)) {
       const fn = deepLinkResolvers[k.toLowerCase()];
       if (fn && val && fn(val)) return true;
@@ -7906,12 +8003,13 @@ async function main() {
     return false;
   };
 
-  // The inverse: build the shareable link for the active detail tab (`<kind>:<id>`).
+  // The inverse: the hash param for the active detail tab (`<kind>:<id>`).
   const KIND_TO_PARAM = {
     drug: "focusDrug", target: "focusTarget", structure: "focusStructure",
     connection: "focusConnection", circuit: "focusCircuit", group: "focusGroup",
+    browser: "browser",
   };
-  const currentDeepLink = () => {
+  const focusParam = () => {
     const key = tabs.activeKey();
     const idx = key ? key.indexOf(":") : -1;
     if (idx < 0) return null;
@@ -7919,19 +8017,24 @@ async function main() {
     if (!param) return null;
     const id = key.slice(idx + 1);
     const value = param === "focusStructure" ? stripSide(id) : id;
-    const url = new URL(window.location.href);
-    url.hash = `${param}=${encodeURIComponent(value)}`;
-    return url.toString();
+    return `${param}=${encodeURIComponent(value)}`;
   };
 
-  // Keep the address bar in sync with the focus, so the URL is always the shareable
-  // deep link for whatever is on screen: copying it is just selecting the URL bar, no
+  // Keep the address bar in sync with what is on screen, so the URL is always the
+  // shareable deep link for it: copying it is just selecting the URL bar, no
   // dedicated button. `history.replaceState` updates the URL WITHOUT firing
   // `hashchange` (so it never loops back into applyDeepLink) and without spamming
-  // back/forward history with every focus. Clearing the focus strips the hash.
+  // back/forward history with every focus. Nothing focused and every view at its
+  // default strips the hash.
   const focusHash = () => {
-    const link = currentDeepLink();
-    return link ? new URL(link).hash : "";
+    const parts = [];
+    const focus = focusParam();
+    if (focus) parts.push(focus);
+    for (const [key, view] of hashViews) {
+      const v = view.read();
+      if (v != null) parts.push(`${key}=${encodeURIComponent(v)}`);
+    }
+    return parts.length ? `#${parts.join("&")}` : "";
   };
   const syncHashToFocus = () => {
     const want = focusHash();
@@ -8022,19 +8125,25 @@ async function main() {
   const toggle3d = document.getElementById("toggle-3d");
   const no3dOn = () => document.body.classList.contains("no-3d");
   const setNo3d = (on) => {
+    if (on === no3dOn()) return;
     document.body.classList.toggle("no-3d", on);
     toggle3d?.setAttribute("aria-pressed", String(on));
     saveFlag(NO3D_KEY, on);
     if (!on) invalidate(); // the scene is back and holds a stale frame; repaint it
+    else intro.cancel(); // nothing renders while hidden, so don't resume mid-pose
+    syncHashToFocus(); // whether the brain is shown is part of the shareable link
   };
   toggle3d?.addEventListener("click", () => setNo3d(!no3dOn()));
-  if (loadFlag(NO3D_KEY, false)) {
-    setNo3d(true);
-    // Nothing renders while the scene is hidden, so the assemble intro would only
-    // be resumed mid-pose on re-enable. Cancel it: turning 3D back on lands on the
-    // settled brain.
-    intro.cancel();
-  }
+  // `#panel=1` opens straight into the reading mode, `#panel=0` forces the brain back
+  // on; a link that says nothing about it leaves the persisted preference alone.
+  registerHashView("panel", {
+    read: () => (no3dOn() ? "1" : null),
+    write: (v) => setNo3d(v !== "0"),
+  });
+  if (loadFlag(NO3D_KEY, false)) setNo3d(true);
+  // A persisted reading mode is not yet in the URL (no focus change has fired the
+  // sync), so stamp it once here: the address bar must describe what is on screen.
+  syncHashToFocus();
 
   renderer.setAnimationLoop(() => {
     // Panel-only mode: the scene (canvas + label overlay) is display:none, so skip

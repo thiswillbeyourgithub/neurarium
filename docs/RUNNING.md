@@ -71,8 +71,24 @@ in `js/main.js`; the value matches the node's id or (folded, case-insensitive) n
 | `#focusStructure=frontal` | a structure (both hemispheres; use the side-stripped base id/name) |
 | `#focusConnection=cortex->thalamus` | a projection (both sides) |
 | `#focusCircuit=<id>` / `#focusGroup=<id>` | a circuit / projection group |
+| `#browser=1` | the Data browser (a tab, not a node, so it takes no id) |
 
 The inverse also holds automatically: focusing any node rewrites the URL hash to its
-deep link via `history.replaceState` (`syncHashToFocus`, built from `currentDeepLink`),
+deep link via `history.replaceState` (`syncHashToFocus`, built from `focusParam`),
 so the address bar is always the shareable link for what is on screen (no copy button;
 `replaceState` avoids both a `hashchange` loop and back/forward history spam).
+
+### View keys (URL hash)
+
+Beside the one focus key, the hash carries any number of **view keys**: layout state
+that is not a focus. They compose with a focus (`#focusDrug=clozapine&panel=1`) and are
+written only when away from their default, so a plain link stays short.
+
+| hash | does |
+| --- | --- |
+| `#panel=1` | open in panel-only reading mode (the 3D brain hidden, panel full-screen) |
+| `#panel=0` | force the brain back on, overriding a persisted reading mode |
+
+A view key is registered by the control that owns it (`registerHashView` in
+`js/main.js`); a key **missing** from the hash is never written, so a link that says
+nothing about the mode leaves the visitor's persisted preference alone.

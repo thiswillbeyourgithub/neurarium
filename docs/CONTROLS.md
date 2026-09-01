@@ -55,7 +55,8 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   is revealed only while an animation is actually on screen (a focused drug / receptor / circuit),
   recomputed each rendered frame in the render loop from the controllers' `active` getters.
 - **Panel-only mode** (`#toggle-3d`, an icon button pinned in the panel header, not in Settings so
-  it stays reachable once the panel fills the screen; persisted `neurarium.no3d`): `body.no-3d` hides
+  it stays reachable once the panel fills the screen; persisted `neurarium.no3d`, and mirrored into
+  the URL as the `panel` view key, see `docs/RUNNING.md`): `body.no-3d` hides
   `#scene` + `#labels-layer` and lets the expanded panel fill the viewport; the render loop
   early-returns, so animations freeze in place and resume when 3D returns.
 - **Arrow colour-mode** (`#color-mode`, default Neurotransmitter): Neurotransmitter =
@@ -138,23 +139,35 @@ through beats a nearer non-focused one.
 
 ### Data browser
 
-**`#nodes`** (`js/node-browser.js`, built into `#nodes-body`): the Sources & provenance popup's
-coverage bars read node by node. `collectNodes(data, deps)` enumerates every graded knowledge node
-(references excluded, like the bars) as `{kind, name, notion, grade, uncertain, go}`, where `grade`
-is the *display* grade a pill shows (`uncertain` overrides a quote-checked node carrying
-uncertainty bullets) and `go` navigates to the owning panel. Its per-kind counts match
-`meta.provenance_stats.by_kind` (drift is a bug). It runs **lazily**, on the section's
+**`#nodes`** (`js/node-browser.js`): the Sources & provenance popup's coverage bars read node by
+node. Unlike the browse sections above it does **not** expand in place: the `#nodes-toggle` row
+opens a **detail tab** (key `browser:1`, deep-linked `#browser=1`) whose body is a detached
+container the module owns, so its filter, selects and scroll survive a tab switch; the panel only
+hosts it (`info.showNodeBrowser`).
+
+`collectNodes(data, deps)` enumerates every graded knowledge node (references excluded, like the
+bars) as `{kind, name, notion, grade, uncertain, go, sources, uncertainty, ki}`, where `grade` is
+the *display* grade a pill shows (`uncertain` overrides a quote-checked node carrying uncertainty
+bullets), `go` navigates to the owning panel, and the last three are the node's **backing**. Its
+per-kind counts match `meta.provenance_stats.by_kind` (drift is a bug). It runs **lazily**, on the
 first open, since walking the whole dataset should not cost a visitor who never opens it.
-`createNodeBrowser` renders a filter box (`#nodes-filter`, folded through the same `foldText` the
-search uses) plus kind / grade / sort selects, a **Show both hemispheres** checkbox
-(`#nodes-show-twins`, persisted `neurarium.nodeTwins`, default on: a mirrored structure then lists
-per side, which is what the tally counts; unticked it collapses each pair to one side-less row, 32
-against 57), a "{shown} of {total}" line, and the rows in chunks
-(150, then +300 per "show more"). **Default sort is weakest-grade first**: the section doubles as a
-sourcing workbench, so the unsourced claims surface on top. A row's pill is `info.provenancePill`
-and its kind tag `KIND_LABELS` (both shared with the popup, so the two views cannot drift); rows
-navigate via the same callbacks as the popup's example nodes, plus a `connection` one that isolates
-the arrow carrying a projection. A node whose owner has nothing to focus renders inert.
+
+`createNodeBrowser` renders an intro line naming what a node is (plus a **"The same data as
+files"** button opening the About popup's data-file dropdown, `#about-data-files`, rather than
+copying its links), a filter box (`#nodes-filter`, folded through the same `foldText` the search
+uses), kind / grade / sort selects, a **Show both hemispheres** checkbox (`#nodes-show-twins`,
+persisted `neurarium.nodeTwins`, **default off**: each region reads once without its side, 32 rows
+against the 57 the tally counts; shown only while the current result holds some `structures` row,
+the only kind it changes), a "{shown} of {total}" line, a **column header naming the row keys**
+(`grade` / `name` / `notion` / `kind`, each with a localized tooltip, so the node structure is
+visible rather than implied) and the rows in chunks (150, then +300 per "show more"). **Default
+sort is weakest-grade first**: the browser doubles as a sourcing workbench, so the unsourced claims
+surface on top. A row's pill is `info.provenancePill(grade, row)` and its kind tag `KIND_LABELS`
+(both shared with the popup, so the two views cannot drift); passing the row itself means a
+browser pill opens on the node's verbatim quote / measured Ki / reasons to doubt, the very tooltip
+that node's pill shows inside a detail panel (one `sourceBackedPill` builds both). Rows navigate
+via the same callbacks as the popup's example nodes, plus a `connection` one that isolates the
+arrow carrying a projection. A node whose owner has nothing to focus renders inert.
 
 ### Input
 

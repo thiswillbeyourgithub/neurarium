@@ -270,9 +270,10 @@ Viewer (`public/`):
   banners), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
   `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`
   (Rendering / decoration draw order).
-- `js/node-browser.js` — `collectNodes` + `createNodeBrowser`, the Data browser section
-  (`#nodes`): every graded knowledge node as one filterable/sortable list (see
-  [`docs/CONTROLS.md`](docs/CONTROLS.md)).
+- `js/node-browser.js` — `collectNodes` + `createNodeBrowser`, the Data browser (`#nodes`): every
+  graded knowledge node as one filterable/sortable list, opened as a **detail tab** (deep link
+  `#browser=1`) rather than an accordion section, each row carrying its own backing so its pill
+  shows the same source the node's panel pill does (see [`docs/CONTROLS.md`](docs/CONTROLS.md)).
 - `js/prefs.js` — `loadFlag(key, dflt)` / `saveFlag(key, on)`, the only place a persisted
   on/off preference touches `localStorage` (panel-only mode, show-metabolites, show-twins;
   storage throws in private mode, so a read falls back to the default and a write is
