@@ -136,6 +136,25 @@ through beats a nearer non-focused one.
   code link, a licence line (AGPL-3.0), a CC BY-SA attribution line, and a Sources & provenance
   link (`#about-open-sourcing`). The tally is not here (own popup).
 
+### Data browser
+
+**`#nodes`** (`js/node-browser.js`, built into `#nodes-body`): the Sources & provenance popup's
+coverage bars read node by node. `collectNodes(data, deps)` enumerates every graded knowledge node
+(references excluded, like the bars) as `{kind, name, notion, grade, uncertain, go}`, where `grade`
+is the *display* grade a pill shows (`uncertain` overrides a quote-checked node carrying
+uncertainty bullets) and `go` navigates to the owning panel. Its per-kind counts match
+`meta.provenance_stats.by_kind` (drift is a bug), with one intended exception: a mirrored
+structure is listed once, not per hemisphere, so `structures` reads 32 rows against 57 counted
+nodes. It runs **lazily**, on the section's
+first open, since walking the whole dataset should not cost a visitor who never opens it.
+`createNodeBrowser` renders a filter box (`#nodes-filter`, folded through the same `foldText` the
+search uses) plus kind / grade / sort selects, a "{shown} of {total}" line, and the rows in chunks
+(150, then +300 per "show more"). **Default sort is weakest-grade first**: the section doubles as a
+sourcing workbench, so the unsourced claims surface on top. A row's pill is `info.provenancePill`
+and its kind tag `KIND_LABELS` (both shared with the popup, so the two views cannot drift); rows
+navigate via the same callbacks as the popup's example nodes, plus a `connection` one that isolates
+the arrow carrying a projection. A node whose owner has nothing to focus renders inert.
+
 ### Input
 
 - **Touch / mouse**: one finger / left-drag rotates; pinch / wheel zooms; two-finger drag pans

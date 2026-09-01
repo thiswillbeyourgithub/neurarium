@@ -27,6 +27,7 @@ import { DECOR_RENDER_ORDER } from "./render-order.js";
 import { fetchWikiLead } from "./wiki.js";
 import { createTour } from "./tour.js";
 import { createChangelog } from "./changelog.js";
+import { createNodeBrowser } from "./node-browser.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -4216,6 +4217,16 @@ function createInfoPanel(data, sourcingModal) {
     onImage(fn) {
       onImagePick = fn;
     },
+
+    /**
+     * The grade pill builder, so a view outside the info panel (the Data browser's
+     * rows) badges a node with the very same element the panel does, tooltip and
+     * "Click for details" cue included, rather than a lookalike.
+     * @param {string|null} level a stored grade, or the "uncertain" display grade
+     */
+    provenancePill(level) {
+      return makeProvenancePill(level === "nosource" ? null : level);
+    },
   };
 }
 
@@ -5053,6 +5064,48 @@ function applyViewParams(bundle) {
   }
 }
 
+// Node kind -> its i18n label, shared by the Sources popup's coverage bars and the
+// Data browser's rows + kind filter, so the two views can never name a kind
+// differently. Wikipedia `references` are deliberately absent: a reference is a
+// pointer *at* a knowledge node, not itself a node (so it gets no bar and no row),
+// and every present link defaults to `sourced`, which read as uniformly yellow
+// noise. It stays in meta.provenance_stats.by_kind (data), just not rendered.
+const KIND_LABELS = {
+  drug_bindings: "about.kindBindings",
+  drug_nbn: "about.kindNbn",
+  drug_brands: "about.kindDrugBrands",
+  drug_categories: "about.kindDrugCategories",
+  drug_half_life: "about.kindDrugHalfLife",
+  drug_enzymes: "about.kindDrugEnzymes",
+  drug_metabolites: "about.kindDrugMetabolites",
+  drug_metabolite_enzyme: "about.kindDrugMetaboliteEnzyme",
+  drug_metabolite_bindings: "about.kindDrugMetaboliteBindings",
+  projections: "about.kindProjections",
+  circuits: "about.kindCircuits",
+  projection_groups: "about.kindProjectionGroups",
+  receptors: "about.kindReceptors",
+  receptor_class: "about.kindReceptorClass",
+  receptor_sign: "about.kindReceptorSign",
+  receptor_synaptic: "about.kindReceptorSynaptic",
+  receptor_locations: "about.kindReceptorLocations",
+  receptor_density: "about.kindReceptorDensity",
+  targets: "about.kindTargets",
+  target_polarity: "about.kindTargetPolarity",
+  target_locations: "about.kindTargetLocations",
+  target_density: "about.kindTargetDensity",
+  structures: "about.kindStructures",
+};
+
+// Display grade -> its short i18n label ("Verified", "No source", ...), shared by
+// the Sources popup's bar segments and the Data browser's grade filter.
+const GRADE_LABELS = {
+  verified: "about.segVerified",
+  uncertain: "about.segUncertain",
+  sourced: "about.segSourced",
+  llm: "about.segLlm",
+  nosource: "about.segNone",
+};
+
 /**
  * Fill the About panel's "Sources & provenance" block from meta.provenanceStats:
  * the grade key (reusing the .src-pill swatches the info panel shows beside each
@@ -5112,35 +5165,6 @@ function buildAboutSourcing(meta, opts = {}) {
   // A headline over the knowledge nodes, then a per-node-kind bar.
   const a = stats.nodes || {};
   const wrap = h("div", "src-stats");
-  const KIND_LABELS = {
-    drug_bindings: "about.kindBindings",
-    drug_nbn: "about.kindNbn",
-    drug_brands: "about.kindDrugBrands",
-    drug_categories: "about.kindDrugCategories",
-    drug_half_life: "about.kindDrugHalfLife",
-    drug_enzymes: "about.kindDrugEnzymes",
-    drug_metabolites: "about.kindDrugMetabolites",
-    drug_metabolite_enzyme: "about.kindDrugMetaboliteEnzyme",
-    drug_metabolite_bindings: "about.kindDrugMetaboliteBindings",
-    projections: "about.kindProjections",
-    circuits: "about.kindCircuits",
-    projection_groups: "about.kindProjectionGroups",
-    receptors: "about.kindReceptors",
-    receptor_class: "about.kindReceptorClass",
-    receptor_sign: "about.kindReceptorSign",
-    receptor_synaptic: "about.kindReceptorSynaptic",
-    receptor_locations: "about.kindReceptorLocations",
-    receptor_density: "about.kindReceptorDensity",
-    targets: "about.kindTargets",
-    target_polarity: "about.kindTargetPolarity",
-    target_locations: "about.kindTargetLocations",
-    target_density: "about.kindTargetDensity",
-    structures: "about.kindStructures",
-    // Wikipedia `references` are deliberately NOT a coverage bar: a reference is a
-    // pointer *at* a knowledge node, not itself a node, and every present link
-    // defaults to `sourced` (so the bar was uniformly yellow and read as noise). It
-    // stays in meta.provenance_stats.by_kind (data), just not rendered here.
-  };
   // Rows are sorted best-coverage-first (highest % of backed nodes), ties broken by
   // the larger node count, so the strongest-sourced kinds head the list.
   const rows = [];
@@ -5165,15 +5189,16 @@ function buildAboutSourcing(meta, opts = {}) {
     });
   }
   rows.sort((x, y) => y.pct - x.pct || y.total - x.total);
-  // The four grade segments, strongest to weakest: (count, CSS class, tooltip label).
+  // The grade segments, strongest to weakest: (count field, CSS class). `uncertain`
+  // sits between verified and sourced on purpose: still quote-checked (it is not a
+  // weaker document), but the sentence does not attribute the claim. Labels come
+  // from the shared GRADE_LABELS.
   const SEGMENTS = [
-    ["verified", "src-seg-verified", "about.segVerified"],
-    // Between verified and sourced on purpose: still quote-checked (it is not a
-    // weaker document), but the sentence does not attribute the claim.
-    ["uncertain", "src-seg-uncertain", "about.segUncertain"],
-    ["sourced", "src-seg-sourced", "about.segSourced"],
-    ["llm", "src-seg-llm", "about.segLlm"],
-    ["nosource", "src-seg-nosource", "about.segNone"],
+    ["verified", "src-seg-verified"],
+    ["uncertain", "src-seg-uncertain"],
+    ["sourced", "src-seg-sourced"],
+    ["llm", "src-seg-llm"],
+    ["nosource", "src-seg-nosource"],
   ];
   // One flush segment per non-empty grade, width proportional to its share, so a
   // partly-sourced kind reads as green+yellow+grey+red instead of green-on-empty.
@@ -5193,7 +5218,7 @@ function buildAboutSourcing(meta, opts = {}) {
   // for knowledge nodes, which is why its legend row was dropped).
   const gradeCountsText = (counts) => SEGMENTS
     .filter(([field]) => counts[field])
-    .map(([field, , labelKey]) => `${t(labelKey)}: ${counts[field]}`)
+    .map(([field]) => `${t(GRADE_LABELS[field])}: ${counts[field]}`)
     .join("  ·  ");
 
   // The GLOBAL bar is the only thing shown by default: one aggregate number + bar over
@@ -5482,6 +5507,8 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   const drugsBody = document.getElementById("drugs-body");
   const enzymesToggle = document.getElementById("enzymes-toggle");
   const enzymesBody = document.getElementById("enzymes-body");
+  const nodesToggle = document.getElementById("nodes-toggle");
+  const nodesBody = document.getElementById("nodes-body");
 
   // One collapse-header behaviour shared by the panel, the Controls section and
   // the accordion sections: toggle aria-expanded + the body's hidden flag. The
@@ -5563,6 +5590,7 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
     { toggle: enzymesToggle, body: enzymesBody },
     { toggle: structuresToggle, body: structuresBody },
     { toggle: projectionsToggle, body: projectionsBody },
+    { toggle: nodesToggle, body: nodesBody },
   ];
   for (const s of sections) {
     if (!s.toggle || !s.body) continue;
@@ -7264,6 +7292,47 @@ async function main() {
     group: (g) => { sourcingModal.close(); focusProjectionGroup(g, { frame: true }); },
   };
   buildAboutSourcing(data.meta, { data, nav: sourcingNav });
+
+  // The Data browser section: the same nodes the tally counts, listed one by one.
+  // Its nav is the sourcing one minus the popup closing (a section row is already in
+  // the open panel), plus a connection callback the popup has no example for: a
+  // projection row isolates the arrow that carries it.
+  const nodesToggle = document.getElementById("nodes-toggle");
+  const nodesBody = document.getElementById("nodes-body");
+  if (nodesToggle && nodesBody) {
+    const nodeBrowser = createNodeBrowser({
+      body: nodesBody,
+      data,
+      deps: {
+        t,
+        formatHalfLife,
+        nav: {
+          drug: (d) => focusDrug(d, { frame: true }),
+          target: (tg) => focusTarget(tg, { frame: true }),
+          structure: (id) => {
+            const mesh = meshById.get(id);
+            if (mesh) selectStructure(mesh, { frame: true });
+          },
+          connection: (proj) => {
+            const arrow = arrows.find((a) => a.projection === proj);
+            if (arrow) selectConnection(arrow, { frame: true, isolate: true });
+          },
+          circuit: (c) => focusCircuit(c, { frame: true }),
+          group: (g) => focusProjectionGroup(g, { frame: true }),
+        },
+      },
+      ui: {
+        pill: info.provenancePill,
+        fold: foldText,
+        kindLabel: (k) => t(KIND_LABELS[k] || k),
+        gradeLabel: (g) => t(GRADE_LABELS[g] || g),
+      },
+    });
+    // Lazy: collecting every node walks the whole dataset, so it waits for the first
+    // open rather than running at boot. wireControls already toggles the section.
+    nodesToggle.addEventListener("click", () => nodeBrowser.open(), { once: true });
+  }
+
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
   // segmented control in the Controls section. Picking an option recolours the
   // arrows and rebuilds the Projections legend rows to match. The switch lives

@@ -270,6 +270,9 @@ Viewer (`public/`):
   banners), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
   `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`
   (Rendering / decoration draw order).
+- `js/node-browser.js` — `collectNodes` + `createNodeBrowser`, the Data browser section
+  (`#nodes`): every graded knowledge node as one filterable/sortable list (see
+  [`docs/CONTROLS.md`](docs/CONTROLS.md)).
 
 Deployment (`docker/`): `docker-compose.yml` (hardened Caddy), `Dockerfile`
 (two-stage: `xcaddy build`s a custom binary with the `caddy-ratelimit` module,
