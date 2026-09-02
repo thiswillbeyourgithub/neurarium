@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.58.0",
+      "date": "2026-09-03",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The brain's 3D shapes are now built in advance and delivered ready-made, instead of being rebuilt by your device every single time you open the page. On the test machine the shapes appear in 0.7 second instead of 3.0, and the gain is far larger on a phone, which had the most work to do. The brain looks the same; only the waiting is gone",
+          "commits": [
+            "8105de1"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Those ready-made shapes are downloaded once and then kept, so a second visit does not pay for them again, and the page still builds the shapes itself if they are ever unavailable",
+          "commits": [
+            "8105de1"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.57.1",
       "date": "2026-09-02",
       "entries": [
