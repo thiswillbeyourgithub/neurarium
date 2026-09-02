@@ -58,7 +58,11 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   it stays reachable once the panel fills the screen; persisted `neurarium.no3d`, and mirrored into
   the URL as the `panel` view key, see `docs/RUNNING.md`): `body.no-3d` hides
   `#scene` + `#labels-layer` and lets the expanded panel fill the viewport; the render loop
-  early-returns, so animations freeze in place and resume when 3D returns.
+  early-returns, so animations freeze in place and resume when 3D returns. Turning it on expands a
+  collapsed panel first (`expandPanel`, the shared wrapper over `openControlsBody`), since with no
+  brain behind it a folded panel would leave a blank viewport. A view that merely wants the room
+  (the Data browser) passes `{persist: false}` so it borrows the mode without rewriting the
+  visitor's stored preference.
 - **Arrow colour-mode** (`#color-mode`, default Neurotransmitter): Neurotransmitter =
   `projection.color` per molecule; Potential = `projection.signColor` by coarse sign (from meta
   `signColors`/`signLabels`). `setColorMode` recolours in place + rebuilds the Projections section
@@ -143,7 +147,11 @@ through beats a nearer non-focused one.
 node. Unlike the browse sections above it does **not** expand in place: the `#nodes-toggle` row
 opens a **detail tab** (key `browser:1`, deep-linked `#tabs=browser:1`) whose body is a detached
 container the module owns, so its filter, selects and scroll survive a tab switch; the panel only
-hosts it (`info.showNodeBrowser`).
+hosts it (`info.showNodeBrowser`). Clicking that row also enters the panel-only mode for this visit
+(the rows are a wide table reading nothing off the scene); a deep link does not, so it can still
+name the `panel` view itself. Header + rows share one two-level grid template (`grade`, then
+`name`/`notion`/`kind` inside the clickable button), which is why the header is built with a row's
+exact structure and an empty `notion` cell is still emitted.
 
 `collectNodes(data, deps)` enumerates every graded knowledge node (references excluded, like the
 bars) as `{kind, name, notion, grade, uncertain, go, sources, uncertainty, ki}`, where `grade` is

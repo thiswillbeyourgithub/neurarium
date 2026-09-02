@@ -1,6 +1,55 @@
 {
   "versions": [
     {
+      "version": "3.56.0",
+      "date": "2026-09-02",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Opening the Data browser now gives it the whole window instead of a sliver beside the brain, so its four columns have room to be read",
+          "commits": [
+            "7bdbe97",
+            "e6a03b0"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The Data browser is laid out as a real table: the column titles sit exactly over the cells they name, thin rules separate the columns, and every other line is shaded so the eye follows one node all the way across",
+          "commits": [
+            "752c35d"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The scene pane is now called \"3D Controls\", which says what it drives",
+          "commits": [
+            "7bdbe97"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Hiding the brain while the panel was folded down left an empty window; it now unfolds the panel to fill the screen",
+          "commits": [
+            "e6a03b0"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The downloadable data files opened in a tab instead of being downloaded as an unknown file type",
+          "commits": [
+            "604b869"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The cannabinoid is listed under its full name, Tetrahydrocannabinol; searching THC still finds it",
+          "commits": [
+            "5bee634"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.55.0",
       "date": "2026-09-02",
       "entries": [

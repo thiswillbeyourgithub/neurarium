@@ -181,7 +181,8 @@ Viewer (`public/`):
   caching logic changes; `activate()` prunes older caches), and
   `favicon.svg` + `icon-192/512.png` +
   `apple-touch-icon.png` (a **placeholder** node-cluster glyph, to be replaced by the designed
-  favicon). Caddy pins `.webmanifest`'s content-type (Go's mime table lacks it).
+  favicon). Caddy pins the content-type of `.webmanifest` and `.jsonl` (Go's mime table lacks
+  both, and `nosniff` then stops the browser guessing; `tools/serve.py` mirrors the `.jsonl` one).
 - SEO/social: static `<head>` meta (description, Open Graph, Twitter card, JSON-LD
   `WebApplication`) + a `<noscript>` text fallback in `index.html`; `robots.txt` +
   `sitemap.xml` + `og-image.png` (a copy of `docs/images/screenshot.png`) in `public/`.
