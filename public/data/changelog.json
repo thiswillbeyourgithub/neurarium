@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.55.0",
+      "date": "2026-09-02",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The address bar now describes the whole view, so a link brings someone to exactly what you were looking at: every open tab and the order you dragged them into, which one is in front, the popup you had up, the sliders and toggles, the open section, what you had typed in search, and roughly where the brain is turned. Copy the URL, that is the link",
+          "commits": [
+            "c063bfc"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A link to a pathway (`#focusConnection=...`) opened nothing; it now opens the pathway it names",
+          "commits": [
+            "c063bfc"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A link asking for the 3D brain to be shown (`#panel=0`) was ignored for a visitor who had previously turned the brain off; the link now wins",
+          "commits": [
+            "c063bfc"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.54.1",
       "date": "2026-09-02",
       "entries": [
