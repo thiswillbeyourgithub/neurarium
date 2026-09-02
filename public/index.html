@@ -1551,12 +1551,30 @@
         text-decoration: underline;
         cursor: pointer;
       }
-      /* Column header: the row keys, laid out like a .node-row so each key sits over
-         its cell. Monospace + uppercase-free so it reads as a field name, not prose. */
-      .node-head {
-        display: flex;
+      /* The grid the header and the rows share. Two levels, because the clickable
+         half of a row is a <button> that cannot hold the grade pill: the outer grid
+         is `grade | the rest`, the inner one `name | notion | kind`. The header
+         repeats that structure exactly (see node-browser.js), so each key sits over
+         the cell it names whatever the text in it. */
+      .node-head, .node-row {
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr);
         align-items: baseline;
         gap: 6px;
+      }
+      .node-head-main, .node-main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+        align-items: baseline;
+        gap: 6px;
+        padding: 2px 4px;
+      }
+      /* A cell wraps inside its own column rather than pushing the grid around: an
+         id like `5ht2a_terminal` has no space to break at. */
+      .node-head-cell, .node-name, .node-notion, .node-kind { overflow-wrap: anywhere; }
+      /* Column header: monospace + uppercase-free so it reads as a field name, not
+         prose. */
+      .node-head {
         margin: 0 0 2px;
         padding-bottom: 3px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -1564,12 +1582,29 @@
         font-size: 10px;
         color: var(--muted);
       }
+      /* "grade" is wider than its 30px column; let it overhang rather than break in
+         two, since the cell under it is a fixed-size pill. */
       .node-head-cell { cursor: help; }
-      /* Line up with a row: the grade pill and the header's `grade` cell share one
-         fixed column, and `kind` is pushed to the far end like .node-kind. */
-      .node-head-grade, .node-row > .help-icon { flex: 0 0 30px; }
-      .node-head-name { padding-left: 4px; }
-      .node-head-kind { margin-left: auto; }
+      .node-head-grade { overflow-wrap: normal; white-space: nowrap; }
+      /* Make the columns visible: a hairline rule opening each one but the first, in
+         the header and in every row alike. */
+      .node-head-notion, .node-head-kind, .node-notion, .node-kind {
+        border-left: 1px solid rgba(255, 255, 255, 0.14);
+        padding-left: 6px;
+      }
+      /* Too narrow for four columns (a phone, or the panel back at sidebar width):
+         drop the kind onto its own line under the pair it qualifies, keeping the
+         name/notion alignment that does the actual scanning work. */
+      @media (max-width: 560px) {
+        .node-head-main, .node-main {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+        }
+        .node-head-kind, .node-kind {
+          grid-column: 1 / -1;
+          border-left: none;
+          padding-left: 0;
+        }
+      }
       .node-filters { display: flex; gap: 4px; margin-bottom: 6px; }
       .node-select {
         flex: 1 1 0;
@@ -1585,15 +1620,13 @@
       }
       .node-select:focus { border-color: var(--accent); }
       .node-count { color: var(--muted); font-size: 11px; margin: 0 2px 6px; }
-      .node-row { display: flex; align-items: baseline; gap: 6px; margin: 3px 0; }
+      .node-row { padding: 1px 0; }
+      /* Banded rows: with four columns of small text, a band per pair is what keeps
+         the eye on one node's line all the way across. Zebra on the row (not the
+         inner button) so the grade column is banded too. */
+      .node-list > .node-row:nth-child(even) { background: rgba(255, 255, 255, 0.05); }
       .node-main {
-        flex: 1 1 auto;
         min-width: 0;
-        display: flex;
-        align-items: baseline;
-        flex-wrap: wrap;
-        gap: 6px;
-        padding: 2px 4px;
         font: inherit;
         font-size: 12px;
         text-align: left;
@@ -1607,8 +1640,7 @@
       .node-main:disabled { opacity: 0.45; }
       .node-name { font-weight: 600; }
       .node-notion { color: var(--muted); }
-      /* The kind tag is pushed to the row's end, like .legend-tag. */
-      .node-kind { color: var(--muted); font-size: 11px; margin-left: auto; }
+      .node-kind { color: var(--muted); font-size: 11px; }
       .node-more {
         margin: 6px 2px;
         padding: 5px 9px;

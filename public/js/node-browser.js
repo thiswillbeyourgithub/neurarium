@@ -387,14 +387,17 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   intro.appendChild(document.createTextNode(" "));
   intro.appendChild(filesBtn);
 
-  // The column header, laid out exactly like a row (see .node-head in index.html) so
-  // each key sits over the cell it names.
+  // The column header, built with a row's exact structure (grade cell, then a
+  // three-column inner box mirroring .node-main) so the two share one grid template
+  // in the stylesheet and each key really sits over the cell it names.
   const head = el("div", "node-head");
+  const headMain = el("span", "node-head-main");
   for (const [key, tip] of COLUMNS) {
     const cell = el("span", `node-head-cell node-head-${key}`, key);
     cell.title = t(tip);
-    head.appendChild(cell);
+    (key === "grade" ? head : headMain).appendChild(cell);
   }
+  head.appendChild(headMain);
 
   const rowEl = (r) => {
     // A div rather than a button: the grade pill is itself a <button> (it pins its
@@ -408,7 +411,9 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     const main = el("button", r.go ? "node-main clickable" : "node-main");
     main.type = "button";
     main.appendChild(el("span", "node-name", r.name));
-    if (r.notion) main.appendChild(el("span", "node-notion", r.notion));
+    // Always emitted, empty or not: it is a grid cell, and skipping it would slide
+    // the kind tag up into the notion column.
+    main.appendChild(el("span", "node-notion", r.notion || ""));
     main.appendChild(el("span", "node-kind", kindLabel(r.kind)));
     if (r.go) main.addEventListener("click", r.go);
     else main.disabled = true;
