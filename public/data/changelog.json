@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.54.1",
+      "date": "2026-09-02",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "In French, the release notes printed each entry's commit codes twice; they now appear once, as links",
+          "commits": [
+            "d98977a"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.54.0",
       "date": "2026-09-02",
       "entries": [

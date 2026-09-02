@@ -250,6 +250,7 @@
   "Hypothalamic neuroendocrine projections release hormones that control the pituitary and the body's endocrine axes.": "Les projections neuroendocrines de l'hypothalamus libèrent des hormones qui contrôlent l'hypophyse et les axes endocriniens.",
   "Hypothalamic neurons drive the pituitary via the median eminence / portal system and the posterior hypophyseal tract.": "Les neurones hypothalamiques commandent l'hypophyse via l'éminence médiane / le système porte et le tractus hypophysaire postérieur.",
   "Hypothalamo-hypophyseal axis": "Axe hypothalamo-hypophysaire",
+  "In French, the release notes printed each entry's commit codes twice; they now appear once, as links": "En français, les notes de version affichaient deux fois les codes de commit de chaque entrée ; ils n'apparaissent plus qu'une fois, sous forme de liens",
   "In the drugs list, a metabolite that itself has metabolites now shows them indented under it": "Dans la liste des médicaments, un métabolite qui a lui-même des métabolites les affiche désormais en retrait sous lui",
   "Indirect pathway": "Voie indirecte",
   "Inducer": "Inducteur",
