@@ -16,6 +16,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { loadBrainData } from "./data.js";
 import { buildStructureMesh } from "./shapes.js";
 import { createSdfPool } from "./sdf-pool.js";
+import { createMeshBudget } from "./sdf-quality.js";
 import { createLoadingScreen } from "./loading.js";
 import { buildArrows } from "./arrows.js";
 import { createLabels } from "./labels.js";
@@ -6834,16 +6835,28 @@ async function main() {
     .filter((s) => s.shape && s.shape.type === "sdf")
     .map((s) => ({ id: s.id, spec: s.shape }));
   const pool = createSdfPool();
+  // Mesh cheapest-first under a wall-time budget: the small nuclei double as a
+  // throughput probe, and if the machine turns out to be too slow to finish the
+  // heavy lobes at authored resolution, the budget coarsens the ones still queued
+  // (see js/sdf-quality.js). Measured, never sniffed from the user agent.
+  const budget = createMeshBudget();
   let sdfGeoms = new Map();
   try {
-    sdfGeoms = await pool.meshAll(sdfItems, ({ id, done, total, frac }) => {
-      // Meshing fills the back half of the bar. `frac` includes the in-flight
-      // structures' own progress, so on a slow phone the bar keeps moving through
-      // a single heavy mesh; the "(n/total)" counter says how far along the batch
-      // is, so a long pause still reads as progress rather than a freeze.
-      const name = data.byId.get(id)?.base_name || id;
-      loading.setProgress(0.5 + 0.45 * frac, t("loading.meshing", { name, done, total }));
-    });
+    sdfGeoms = await pool.meshAll(
+      budget.order(sdfItems),
+      ({ id, done, total, frac }) => {
+        budget.note(frac); // feed the throughput measurement back to the budget
+        // Meshing fills the back half of the bar. `frac` is cost-weighted and
+        // includes the in-flight structures' own progress, so on a slow phone the
+        // bar keeps moving through a single heavy mesh; the "(n/total)" counter
+        // says how far along the batch is, so a long pause still reads as
+        // progress rather than a freeze.
+        const name = data.byId.get(id)?.base_name || id;
+        loading.setProgress(0.5 + 0.45 * frac, t("loading.meshing", { name, done, total }));
+        if (budget.degraded) loading.notice(t("loading.reducedQuality"));
+      },
+      budget.adjust,
+    );
   } catch (err) {
     console.warn("sdf pool meshing failed; falling back to synchronous", err);
   } finally {

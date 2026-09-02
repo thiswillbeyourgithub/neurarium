@@ -260,6 +260,45 @@ export function fieldBounds(spec) {
 // ----------------------------------------------------------------------------
 
 /**
+ * Per-axis sample counts for a spec's grid. A target voxel size (from
+ * `resolution` over the longest span) sets the density, then each axis gets as
+ * many samples as it needs to hold that density: equant shapes stay ~cubic, but a
+ * thin/elongated structure samples its short axes sparsely instead of padding
+ * them out to a cube of mostly-empty cells (the dominant load-time cost). An
+ * explicit `resolution` triple overrides this where the relief is anisotropic.
+ *
+ * Split out of `meshSdfToArrays` so the load-time budget (js/sdf-quality.js) can
+ * PRICE a spec without meshing it; the two must not drift, hence one function.
+ *
+ * @param {object} spec
+ * @returns {[number, number, number]}
+ */
+export function sdfGridDims(spec) {
+  const { min, max } = fieldBounds(spec);
+  const span = [max[0] - min[0], max[1] - min[1], max[2] - min[2]];
+  if (Array.isArray(spec.resolution)) {
+    const clampN = (n) => Math.max(8, Math.min(160, Math.round(n)));
+    return [clampN(spec.resolution[0]), clampN(spec.resolution[1]), clampN(spec.resolution[2])];
+  }
+  const res = Math.max(16, Math.min(160, spec.resolution || 64));
+  const voxel = Math.max(span[0], span[1], span[2]) / (res - 1);
+  const dimOf = (s) => Math.max(8, Math.min(160, Math.round(s / voxel) + 1));
+  return [dimOf(span[0]), dimOf(span[1]), dimOf(span[2])];
+}
+
+/**
+ * What a spec costs to mesh, in grid samples (one SDF-tree walk each). The field
+ * fill dominates, so this is a good relative price for ordering + budgeting.
+ *
+ * @param {object} spec
+ * @returns {number}
+ */
+export function estimateSdfCost(spec) {
+  const [Nx, Ny, Nz] = sdfGridDims(spec);
+  return Nx * Ny * Nz;
+}
+
+/**
  * @param {object} spec  `{ root, resolution?, bounds?, margin? }`. `resolution` is
  *   the sample count along the LONGEST axis (the other axes scale down with their
  *   extent so voxels stay ~isotropic); pass an explicit `[Nx, Ny, Nz]` triple to
@@ -277,22 +316,7 @@ export function meshSdfToArrays(spec, deps, onProgress) {
   const { min, max } = fieldBounds(spec);
   const span = [max[0] - min[0], max[1] - min[1], max[2] - min[2]];
 
-  // Per-axis sample counts. A target voxel size (from `resolution` over the
-  // longest span) sets the density, then each axis gets as many samples as it
-  // needs to hold that density: equant shapes stay ~cubic, but a thin/elongated
-  // structure samples its short axes sparsely instead of padding them out to a
-  // cube of mostly-empty cells (the dominant load-time cost). An explicit
-  // `resolution` triple overrides this where the relief is anisotropic.
-  let Nx, Ny, Nz;
-  if (Array.isArray(spec.resolution)) {
-    const clampN = (n) => Math.max(8, Math.min(160, Math.round(n)));
-    Nx = clampN(spec.resolution[0]); Ny = clampN(spec.resolution[1]); Nz = clampN(spec.resolution[2]);
-  } else {
-    const res = Math.max(16, Math.min(160, spec.resolution || 64));
-    const voxel = Math.max(span[0], span[1], span[2]) / (res - 1);
-    const dimOf = (s) => Math.max(8, Math.min(160, Math.round(s / voxel) + 1));
-    Nx = dimOf(span[0]); Ny = dimOf(span[1]); Nz = dimOf(span[2]);
-  }
+  const [Nx, Ny, Nz] = sdfGridDims(spec);
 
   // Sample the field on the Nx*Ny*Nz grid, inclusive of both bounds: worldOf(i,a)
   // = min[a] + (i / (Na - 1)) * span[a]. Store -sdf (positive inside) so the

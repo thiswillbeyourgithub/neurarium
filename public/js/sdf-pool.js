@@ -8,6 +8,7 @@
 // renders; the worker pool is a pure performance path, never a correctness one.
 
 import { buildSdfGeometry, geometryFromArrays } from "./sdf.js";
+import { estimateSdfCost } from "./sdf-core.js";
 import { gradientNoise, fractalNoise } from "./noise.js";
 
 const SYNC_DEPS = { noise3d: gradientNoise, fractalNoise };
@@ -15,21 +16,25 @@ const SYNC_DEPS = { noise3d: gradientNoise, fractalNoise };
 /**
  * @param {object} [opts]
  * @param {number} [opts.size]  worker count (default: cores - 1, clamped 2..6).
- * @returns {{ meshAll(items:Array<{id:string, spec:object}>, onProgress?:(p:{id:string|null,done:number,total:number,frac:number})=>void): Promise<Map<string, THREE.BufferGeometry>>, dispose():void }}
+ * @returns {{ meshAll(items:Array<{id:string, spec:object}>, onProgress?:(p:{id:string|null,done:number,total:number,frac:number})=>void, adjustSpec?:(spec:object)=>object): Promise<Map<string, THREE.BufferGeometry>>, dispose():void }}
  */
 export function createSdfPool(opts = {}) {
   /** @type {Array<{w:Worker, busy:boolean, jobId:number}>|false|null} */
   let pool = null; // null = not yet built, false = unusable (sync fallback)
   let nextId = 1;
   const pending = new Map(); // jobId -> { resolve, reject }
-  const queue = []; // { jobId, id, spec }
+  const queue = []; // { jobId, id, spec, cost }
 
   // Progress bookkeeping for the whole batch, shared by pump/onMessage (which sit
-  // outside meshAll). `frac` is the MEAN per-item fraction, not done/total, so the
-  // bar keeps creeping while a single big structure (hippocampus at 112^3) grinds
-  // on a slow phone instead of standing still between two whole-item ticks.
+  // outside meshAll). `frac` is COST-weighted, not done/total: it keeps creeping
+  // while a single big structure (hippocampus at 112^3) grinds on a slow phone
+  // instead of standing still between two whole-item ticks, AND it stays honest
+  // when the batch is meshed cheapest-first (see js/sdf-quality.js), where 40 of
+  // 46 items done can still be a minority of the actual work.
   let report = null; // set by meshAll: (id|null) => void
+  let adjustSpec = null; // set by meshAll: (spec) => spec, the quality budget
   const itemFrac = new Map(); // jobId -> 0..1
+  const itemCost = new Map(); // jobId -> grid samples, the progress weight
 
   function build() {
     if (pool !== null) return pool;
@@ -58,7 +63,11 @@ export function createSdfPool(opts = {}) {
       const job = queue.shift();
       slot.busy = true;
       slot.jobId = job.jobId;
-      slot.w.postMessage({ id: job.jobId, spec: job.spec });
+      // Adjusted at DISPATCH, not at enqueue: that is the last moment before the
+      // work is committed, so the decision sees every measurement taken so far
+      // (js/sdf-quality.js decides mid-batch whether the rest must be coarser).
+      const spec = adjustSpec ? adjustSpec(job.spec) : job.spec;
+      slot.w.postMessage({ id: job.jobId, spec });
       report?.(job.id); // name the structure being built, not the last one finished
     }
   }
@@ -99,9 +108,10 @@ export function createSdfPool(opts = {}) {
     pump();
   }
 
-  function meshOne(id, spec) {
+  function meshOne(id, spec, cost) {
     if (!build()) return Promise.reject(new Error("no pool")); // -> sync fallback
     const jobId = nextId++;
+    itemCost.set(jobId, cost);
     return new Promise((resolve, reject) => {
       pending.set(jobId, { resolve, reject });
       queue.push({ jobId, id, spec });
@@ -109,12 +119,20 @@ export function createSdfPool(opts = {}) {
     });
   }
 
-  async function meshAll(items, onProgress = null) {
+  async function meshAll(items, onProgress = null, adjust = null) {
     const out = new Map();
     if (!items.length) return out;
     let done = 0;
+    let doneCost = 0;
     const total = items.length;
     itemFrac.clear();
+    itemCost.clear();
+    adjustSpec = adjust;
+    // Priced ONCE from the authored spec, so the weights (and hence the bar) stay
+    // fixed even if `adjustSpec` later coarsens some of them; a degraded batch
+    // then simply finishes ahead of its own bar rather than rewriting history.
+    const costs = items.map((it) => estimateSdfCost(it.spec));
+    const totalCost = costs.reduce((a, b) => a + b, 0) || 1;
     // `id` names the structure to caption: the one just dispatched (several are in
     // flight at once), or null on a mid-mesh tick, which leaves the caller's name
     // standing. `done` counts finished items for the "(n/total)" readout, while
@@ -123,24 +141,28 @@ export function createSdfPool(opts = {}) {
     report = onProgress
       ? (id) => {
           if (id) lastId = id;
-          // A finished item counts as a whole 1 via `done` and its itemFrac entry
+          // A finished item is counted whole by `doneCost` and its itemFrac entry
           // is dropped on completion, so the two never double-count.
-          let sum = done;
-          for (const f of itemFrac.values()) sum += f;
-          onProgress({ id: lastId, done, total, frac: Math.min(1, sum / total) });
+          let sum = doneCost;
+          for (const [jobId, f] of itemFrac) sum += f * (itemCost.get(jobId) || 0);
+          onProgress({ id: lastId, done, total, frac: Math.min(1, sum / totalCost) });
         }
       : null;
-    await Promise.all(items.map(async ({ id, spec }) => {
+    await Promise.all(items.map(async ({ id, spec }, i) => {
       try {
-        out.set(id, await meshOne(id, spec));
+        out.set(id, await meshOne(id, spec, costs[i]));
       } catch {
         // Worker path failed for this spec: mesh it here so the brain is whole.
-        out.set(id, buildSdfGeometry(spec, SYNC_DEPS));
+        // Degradation applies on this path too, else a fallback would be the one
+        // spec that ignores the budget, on the very device that needed it.
+        out.set(id, buildSdfGeometry(adjustSpec ? adjustSpec(spec) : spec, SYNC_DEPS));
       }
       done += 1;
+      doneCost += costs[i];
       report?.(id);
     }));
     report = null;
+    adjustSpec = null;
     return out;
   }
 
@@ -150,7 +172,9 @@ export function createSdfPool(opts = {}) {
     pending.clear();
     queue.length = 0;
     itemFrac.clear();
+    itemCost.clear();
     report = null;
+    adjustSpec = null;
   }
 
   return { meshAll, dispose };

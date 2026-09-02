@@ -21,13 +21,29 @@ A startup progress overlay so a slow first load shows feedback instead of a blan
 canvas. `#loading` (static markup in `index.html`, **visible by default** so it paints
 before any ES module parses) covers the canvas above every panel/banner; `js/loading.js`
 `createLoadingScreen()` exposes `setProgress(frac, label)` (monotone: the bar only ever
-moves forward), `done()` (fill to 100%, fade out via the `.loaded` opacity transition,
+moves forward), `notice(text)` (a persistent caveat row, `#loading-note`, see the mesh
+budget below), `done()` (fill to 100%, fade out via the `.loaded` opacity transition,
 then detach) and `fail()` (detach at once so an error banner takes over). `js/main.js`
 drives it: the data fetch fills the first half (`loadBrainData`'s `onProgress` fires per
-shape file), SDF meshing the back half (`sdf-pool` `meshAll`'s per-item `onItem`,
-captioned with each region's name), then `done()` fades it out as the assemble intro
-begins. Under the bar a static one-line tease (`.loading-tagline`, i18n `loading.tagline`)
-pitches the sourcing angle while the data loads. i18n keys `loading.*`.
+shape file), SDF meshing the back half (`sdf-pool` `meshAll`'s `onProgress`, captioned
+with the region being built), then `done()` fades it out as the assemble intro
+begins. Both phases caption a `(done/total)` counter, and the meshing bar is
+**cost-weighted** and fed **sub-item** ticks from inside the worker
+(`meshSdfToArrays`'s `onProgress` off the field-fill z-loop), so a single heavy
+structure (hippocampus, a 112^3 grid) still moves the bar on a slow phone instead of
+reading as a freeze. Under the bar a static one-line tease (`.loading-tagline`, i18n
+`loading.tagline`) pitches the sourcing angle while the data loads. i18n keys `loading.*`.
+
+**Mesh budget (slow devices).** `js/sdf-quality.js` `createMeshBudget()` keeps the meshing
+phase inside a wall-time budget by *measuring* the machine, never sniffing it: `order()`
+sorts the specs **cheapest-first** by `estimateSdfCost` (grid samples) so the small nuclei
+act as a throughput probe, `note(frac)` projects the remaining work from the observed rate,
+and `adjust(spec)` (called by the pool at **dispatch**, so it sees every measurement) scales
+down the `resolution` of whatever is still queued. Monotone (only ever coarsens, so detail
+never flaps mid-load) and floored at `DEFAULT_MIN_SCALE`. When it fires, `loading.notice()`
+shows `loading.reducedQuality` in the amber `.loading-note`: silently shipping coarser
+geometry would misrepresent the atlas, so the visitor is told, and the note survives the
+"Start exploring" step (which hides only the caption) so it is actually read.
 
 **No startup gate.** The **Sources & provenance** popup (`#sourcing-modal`) is *not* shown
 on launch: a visitor just watches the loading bar + its tagline. The modal is wired early

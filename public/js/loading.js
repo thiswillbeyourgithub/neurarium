@@ -10,13 +10,14 @@
 
 /**
  * Wire the static #loading overlay.
- * @returns {{ setProgress(frac:number, label?:string):void, done():void, fail():void }}
+ * @returns {{ setProgress(frac:number, label?:string):void, notice(text:string):void, done():void, fail():void }}
  */
 export function createLoadingScreen() {
   const root = document.getElementById("loading");
   const bar = document.getElementById("loading-bar");
   const caption = document.getElementById("loading-caption");
-  if (!root) return { setProgress() {}, done() {}, fail() {} };
+  const note = document.getElementById("loading-note");
+  if (!root) return { setProgress() {}, notice() {}, done() {}, fail() {} };
 
   // Only ever move the bar forward: the fetch + mesh phases report independently
   // and a later phase must never visually rewind an earlier one.
@@ -26,6 +27,17 @@ export function createLoadingScreen() {
     current = f;
     if (bar) bar.style.width = `${(f * 100).toFixed(1)}%`;
     if (label != null && caption) caption.textContent = label;
+  }
+
+  // A persistent caveat line under the bar, unlike the caption (which is replaced
+  // constantly). Only ever used to say the mesh detail was reduced on a slow
+  // device: silently shipping coarser geometry would misrepresent the atlas, so
+  // the visitor is told, and it stays up through the "Start exploring" step (which
+  // hides only the caption) so it is actually read rather than flashing past.
+  function notice(text) {
+    if (!note || !text) return;
+    note.textContent = text;
+    note.hidden = false;
   }
 
   function remove() {
@@ -68,5 +80,5 @@ export function createLoadingScreen() {
     remove();
   }
 
-  return { setProgress, done, waitForStart, fail };
+  return { setProgress, notice, done, waitForStart, fail };
 }

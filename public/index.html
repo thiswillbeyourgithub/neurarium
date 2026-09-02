@@ -2368,6 +2368,21 @@
         color: var(--muted);
         opacity: 0.8;
       }
+      /* Slow-device notice: only ever shown when the load actually had to coarsen
+         the geometry, so it must read as an explanation, not an error. Amber like
+         the WIP banner (a caveat), and wraps freely since it is prose. */
+      .loading-note {
+        margin-top: 10px;
+        padding: 8px 12px;
+        font-size: 12.5px;
+        line-height: 1.45;
+        text-align: left;
+        color: #e8c789;
+        background: rgba(224, 168, 74, 0.10);
+        border: 1px solid rgba(224, 168, 74, 0.32);
+        border-radius: 8px;
+      }
+
       /* A gentle "feature requests welcome" invite below the bar. Wraps freely
          (unlike the caption) since it is prose, not a status line. */
       .loading-cta {
@@ -2411,6 +2426,7 @@
         .loading-caption { font-size: 16px; }
         .loading-start { font-size: 17px; padding: 11px 26px; }
         .loading-cta { font-size: 15px; }
+        .loading-note { font-size: 13.5px; }
       }
       @media (prefers-reduced-motion: reduce) {
         #loading, .loading-fill { transition: none; }
@@ -2521,6 +2537,9 @@
         <div class="loading-tagline" data-i18n="loading.tagline">a (mostly) sourced atlas of psychiatric neuroscience</div>
         <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
         <div id="loading-caption" class="loading-caption" data-i18n="loading.start">Loading…</div>
+        <!-- Shown only when the mesh budget (js/sdf-quality.js) had to coarsen the
+             geometry on a slow device; filled by js/loading.js notice(). -->
+        <div id="loading-note" class="loading-note" role="status" hidden></div>
         <button id="loading-start" class="loading-start" type="button" hidden data-i18n="loading.enter">Start exploring</button>
         <div class="loading-cta" data-i18n-html="loading.cta">Have an idea for a feature? I'd happily build it, <a href="https://olicorne.org/en/contact" target="_blank" rel="noopener noreferrer">get in touch</a>.</div>
       </div>

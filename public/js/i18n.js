@@ -394,6 +394,8 @@
       "loading.shapes": "Loading shapes… ({done}/{total})",
       "loading.meshing": "Building {name}… ({done}/{total})",
       "loading.building": "Assembling the brain…",
+      "loading.reducedQuality":
+        "This device is meshing slowly, so the remaining structures were built at reduced detail to keep the load time reasonable. The data is unaffected: only the 3D shapes are a little softer.",
       "loading.tagline": "a (mostly) sourced atlas of psychiatric neuroscience",
       "loading.cta":
         'Have an idea for a feature? I\'d happily build it, ' +
@@ -933,6 +935,8 @@
       "loading.shapes": "Chargement des formes… ({done}/{total})",
       "loading.meshing": "Construction : {name}… ({done}/{total})",
       "loading.building": "Assemblage du cerveau…",
+      "loading.reducedQuality":
+        "Cet appareil construit les maillages lentement : les structures restantes ont donc été générées avec moins de détail pour garder un temps de chargement raisonnable. Les données ne sont pas affectées, seules les formes 3D sont un peu plus lisses.",
       "loading.tagline": "un atlas (en grande partie) sourcé des neurosciences psychiatriques",
       "loading.cta":
         'Une idée de fonctionnalité ? Je la réaliserais volontiers, ' +
