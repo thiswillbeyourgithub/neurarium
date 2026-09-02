@@ -38,6 +38,20 @@ class ParseTest(unittest.TestCase):
             "commits": ["2e7c22f", "211e89f"],   # normalized to lowercase
         }])
 
+    def test_french_line_drops_its_own_sha_suffix(self):
+        """A bullet's shas are metadata the viewer renders itself from ``commits``.
+
+        The English half always had them stripped; the French half did not, so a
+        French reader saw the sha list twice (once as literal text, once as the
+        rendered commit links).
+        """
+        entries = self.parse(
+            "## Fixed\n"
+            "- A new thing (2e7c22f)\n"
+            "  fr: Une nouveauté (2e7c22f)\n")
+        self.assertEqual(entries[0]["text"]["fr"], "Une nouveauté")
+        self.assertEqual(entries[0]["commits"], ["2e7c22f"])
+
     def test_commits_are_optional(self):
         entries = self.parse("## Fixed\n- Something\n  fr: Quelque chose\n")
         self.assertEqual(entries[0]["commits"], [])

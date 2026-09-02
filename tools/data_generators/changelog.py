@@ -95,7 +95,10 @@ def parse_changelog(text: str, where: str) -> dict[str, Any]:
                 raise ValueError(f"{where}:{lineno}: 'fr:' line before any bullet")
             if entries[-1]["text"].get("fr"):
                 raise ValueError(f"{where}:{lineno}: this bullet already has a French line")
-            entries[-1]["text"]["fr"] = french.group(1)
+            # The trailing "(sha, sha)" is metadata, not prose: it is stripped here
+            # exactly as on the English bullet (below), since the viewer renders the
+            # commits itself from `commits`. Left in, a French reader saw them twice.
+            entries[-1]["text"]["fr"] = _COMMITS_RE.sub("", french.group(1)).rstrip()
             continue
         bullet = _BULLET_RE.match(line)
         if not bullet:
