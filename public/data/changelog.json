@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.56.1",
+      "date": "2026-09-02",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The Data browser now scrolls sideways when it is narrower than its four columns, so a node's name, notion and kind stay on one readable line instead of being squeezed into a few letters per column",
+          "commits": [
+            "71ed1d7"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.56.0",
       "date": "2026-09-02",
       "entries": [
