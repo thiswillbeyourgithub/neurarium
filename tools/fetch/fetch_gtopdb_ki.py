@@ -99,7 +99,7 @@ EXTRA_TARGET_GENES: dict[str, list[str]] = {
 # left unmatched rather than published as a verified affinity for the wrong molecule.
 _RAW_ALIASES: dict[str, str] = {
     "LSD": "lysergide",
-    "THC": "delta9-tetrahydrocannabinol",
+    "Tetrahydrocannabinol": "delta9-tetrahydrocannabinol",
     "DMT": "dimethyltryptamine",
     "Amphetamine (D)": "dexamfetamine", "Amphetamine (D,L)": "amphetamine",
     "Methylphenidate (D)": "dexmethylphenidate",

@@ -282,7 +282,7 @@ DRUG_ALIASES: dict[str, list[str]] = {
     "amphetamine_dl": ["racemic amphetamine", "amfetamine", "speed"],
     "lsd": ["acid", "lysergide", "lysergic acid diethylamide", "LSD-25"],
     "dmt": ["dimethyltryptamine", "N,N-dimethyltryptamine", "ayahuasca"],
-    "thc": ["tetrahydrocannabinol", "delta-9-tetrahydrocannabinol", "cannabis",
+    "thc": ["THC", "delta-9-tetrahydrocannabinol", "cannabis",
             "marijuana", "weed", "dronabinol", "haschisch", "hashish"],
     "cannabidiol": ["CBD", "Epidiolex", "Epidyolex", "cannabis", "hemp", "chanvre"],
     "cannabinol": ["CBN", "cannabis"],
