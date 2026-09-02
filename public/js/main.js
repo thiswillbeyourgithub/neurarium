@@ -29,6 +29,7 @@ import { createTour } from "./tour.js";
 import { createChangelog } from "./changelog.js";
 import { createNodeBrowser } from "./node-browser.js";
 import { loadFlag, saveFlag } from "./prefs.js";
+import { createUrlState, LIST_SEP } from "./url-state.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -1389,7 +1390,8 @@ function buildLegendKey(data) {
  * swipe-before-hold is therefore driven here in JS. Closing the active tab falls
  * back to its neighbour (re-applying that one's focus) or, if it was the last
  * detail, to Settings + `onEmpty()` (which clears the 3D selection).
- * @returns {{openDetail:Function, showSettings:()=>void, setOnEmpty:Function}}
+ * @returns {{openDetail:Function, showSettings:()=>void, setOnEmpty:Function,
+ *            setOnChange:Function, keys:()=>string[], activate:(key:string)=>void}}
  */
 function createPanelTabs() {
   const bar = document.getElementById("panel-tabs");
@@ -1407,6 +1409,10 @@ function createPanelTabs() {
   let openTabs = []; // [{ key, title, reopen }], left-to-right order
   let activeKey = null; // active detail key, or null when Settings is shown
   let onEmpty = () => {}; // run when the last detail tab is closed (clears the 3D)
+  // Run after ANY change to the strip (opened / closed / activated / reordered), so
+  // the URL can mirror it. render() below is the one choke point every such change
+  // funnels through, which is why the hook hangs off it rather than off each caller.
+  let onChange = () => {};
   let press = null; // in-flight pointer press (long-press / reorder bookkeeping)
   let suppressClick = false; // a reorder drag must not also activate the tab
 
@@ -1486,6 +1492,7 @@ function createPanelTabs() {
     }
     bar.hidden = openTabs.length === 0;
     tabSettings.classList.toggle("active", activeKey === null);
+    onChange();
   };
 
   const scrollActiveIntoView = () => {
@@ -1720,9 +1727,18 @@ function createPanelTabs() {
     },
     /** Set the callback run when the last detail tab is closed (clears the 3D). */
     setOnEmpty(fn) { onEmpty = fn; },
+    /** Set the callback run after ANY strip change (open / close / activate /
+     *  reorder), so the URL can mirror the whole strip, not just the active tab. */
+    setOnChange(fn) { onChange = fn; },
     /** The active detail tab's key (`<kind>:<id>`), or null when Settings is shown.
      *  Used to build the shareable deep link that mirrors the focus into the URL. */
     activeKey() { return activeKey; },
+    /** The open tabs' keys, in strip order (which the user can drag to change), so
+     *  the URL can reproduce both the set and its order. */
+    keys() { return openTabs.map((tb) => tb.key); },
+    /** Re-show one open tab by key (re-applying its 3D focus), as clicking it does.
+     *  No-op for a key that is not open. */
+    activate(key) { activate(key); },
   };
 }
 
@@ -5005,34 +5021,33 @@ function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) {
  *   names=all             : force every structure label on
  *   only=id[,id2,...]     : show only these structures (others + all arrows hidden)
  *   view=front|back|left|right|top|bottom|iso : frame the visible meshes
+ * The first three are ordinary UI state, so they are handed to the very url-state
+ * views the fragment uses (js/url-state.js) rather than re-implemented here; what
+ * stays below is the screenshot-only half, which describes no shareable UI state.
  * Called after wireControls so the initial slider-driven layout is in place.
- * @param {object} bundle  { scene, camera, controls, meshes, arrows, labels }
+ * @param {object} bundle  { scene, camera, controls, meshes, arrows, labels, urlState }
  */
 function applyViewParams(bundle) {
   const q = new URLSearchParams(window.location.search);
   if ([...q].length === 0) return;
-  const { camera, controls, meshes, arrows } = bundle;
+  const { camera, controls, meshes, arrows, urlState } = bundle;
 
-  const explode = document.getElementById("explode");
-  const transparency = document.getElementById("transparency");
   const autorotate = document.getElementById("autorotate");
 
-  if (q.has("explode")) {
-    explode.value = q.get("explode");
-    explode.dispatchEvent(new Event("input"));
+  // Translate the query's (older, screenshot-facing) spellings onto the registry keys.
+  const shared = new URLSearchParams();
+  for (const key of ["explode", "transparency"]) {
+    if (q.has(key)) shared.set(key, q.get(key));
   }
-  if (q.has("transparency")) {
-    transparency.value = q.get("transparency");
-    transparency.dispatchEvent(new Event("input"));
-  }
+  if (q.get("names") === "all") shared.set("names", "1");
+  urlState.apply(shared);
   // Auto-rotate is on by default for a live visit, but a deep link / screenshot
   // wants its exact framed view to hold still, so set it explicitly here (off
   // unless the param asks for it) instead of letting the default keep spinning.
+  // Unlike the keys above this is NOT the registry's "a missing key changes nothing"
+  // rule: ANY query param means a framed view, hence a still one.
   autorotate.checked = q.has("autorotate") && q.get("autorotate") !== "0";
   autorotate.dispatchEvent(new Event("change"));
-  if (q.get("names") === "all") {
-    document.getElementById("toggle-names").click();
-  }
   // ?ui=0 hides the control panel (which now nests the toolbar, legend and the
   // detail/info pane) for clean, uncluttered shots (e.g. reviewing a shape).
   if (q.get("ui") === "0") {
@@ -5495,7 +5510,19 @@ function buildKindExample(kind, data, nav) {
 }
 
 /** Wire the DOM controls to the scene behaviors. */
-function wireControls({ controls, meshes, arrows, labels, focus, selection, projVis, cull }) {
+// url-state priorities (a higher number is applied later, see js/url-state.js). The
+// default 0 carries the focus views; scene state that a focus would otherwise override
+// comes next, and the camera last, so an explicit `cam=` in a link wins over the
+// framing the focused node imposes.
+const SCENE_URL_PRIORITY = 5;
+const CAMERA_URL_PRIORITY = 10;
+// How long a continuously-changing control (a text box being typed into) must be
+// still before its value is written to the URL, so one edit costs one history write.
+const TYPING_SETTLE_MS = 400;
+// The same, for a slider drag (which fires per frame): write the settled value once.
+const SLIDER_SETTLE_MS = 300;
+
+function wireControls({ camera, controls, meshes, arrows, labels, focus, selection, projVis, cull, urlState }) {
   const autorotate = document.getElementById("autorotate");
   const seeInside = document.getElementById("see-inside");
   const toggleAnimations = document.getElementById("toggle-animations");
@@ -5771,6 +5798,138 @@ function wireControls({ controls, meshes, arrows, labels, focus, selection, proj
   onExplode();
   onTransparency();
 
+
+  // ---- URL views owned by this panel ---------------------------------------------
+  // Each control hands the js/url-state.js registry a {read, write} pair, so the
+  // fragment describes it and a link reproduces it. `read` returns null while the
+  // control sits at its shipped default, keeping a plain link short; `write` drives
+  // the control through its own event, so every side effect runs exactly as a click
+  // or a drag would (no second implementation of what the control does).
+  const checkboxView = (input, dflt) => ({
+    read: () => (input.checked === dflt ? null : input.checked ? "1" : "0"),
+    write: (v) => {
+      const on = v !== "0";
+      if (input.checked === on) return;
+      input.checked = on;
+      input.dispatchEvent(new Event("change"));
+    },
+  });
+  const sliderView = (input, dflt) => ({
+    read: () => {
+      const value = parseFloat(input.value);
+      return value === dflt ? null : String(value);
+    },
+    write: (v) => {
+      if (!Number.isFinite(parseFloat(v))) return;
+      input.value = v;
+      input.dispatchEvent(new Event("input"));
+    },
+  });
+  // Register a view AND let the control's own events refresh the URL, so the address
+  // bar tracks it live. A slider fires `input` per frame while dragged, so its sync is
+  // debounced and lands once on the settled value (see url-state.js sync).
+  const registerControl = (key, input, view, event = "change", delay = 0, priority = 0) => {
+    urlState.register(key, view, priority);
+    input.addEventListener(event, () => urlState.sync(delay));
+  };
+  // Explode applies AFTER the focus views: focusing a deep structure auto-spreads the
+  // brain, and a link that states an explode amount must win over that (setting the
+  // slider cancels the auto-spread, see its `input` listener above).
+  registerControl("explode", explode, sliderView(explode, 0), "input", SLIDER_SETTLE_MS,
+    SCENE_URL_PRIORITY);
+  registerControl("transparency", transparency, sliderView(transparency, 1), "input", SLIDER_SETTLE_MS);
+  registerControl("rotate", autorotate, checkboxView(autorotate, true));
+  registerControl("names", toggleNames, checkboxView(toggleNames, false));
+  registerControl("arrows", toggleProjections, checkboxView(toggleProjections, true));
+  registerControl("inside", seeInside, checkboxView(seeInside, false));
+  // Animations have no fixed default: it is the per-device heuristic (off on a phone /
+  // under reduced-motion), so the key is written whenever the visitor diverges from
+  // THEIR default, which is what has to travel for the link to look the same.
+  registerControl("anim", toggleAnimations, {
+    read: () => (toggleAnimations.checked === animSettings.defaultEnabled
+      ? null : toggleAnimations.checked ? "1" : "0"),
+    write: checkboxView(toggleAnimations, animSettings.defaultEnabled).write,
+  });
+
+  // Panel layout: whether the panel body is collapsed, whether the Controls sub-section
+  // is open, and which browse section the accordion has open. Written through the same
+  // setSection the headers use, then the pan-aside recomputed as their click does.
+  urlState.register("collapsed", {
+    read: () => (controlsToggle.getAttribute("aria-expanded") === "true" ? null : "1"),
+    write: (v) => {
+      setSection(controlsToggle, controlsBody, v === "0");
+      updatePanelPan();
+    },
+  });
+  if (controlsSettingsToggle && controlsSettingsBody) {
+    urlState.register("settings", {
+      read: () => (controlsSettingsToggle.getAttribute("aria-expanded") === "true" ? null : "0"),
+      write: (v) => setSection(controlsSettingsToggle, controlsSettingsBody, v !== "0"),
+    });
+  }
+  const sectionId = (s) => s.toggle.id.replace(/-toggle$/, "");
+  urlState.register("section", {
+    read: () => {
+      const open = sections.find(
+        (s) => s.toggle && s.toggle.getAttribute("aria-expanded") === "true");
+      return open ? sectionId(open) : null;
+    },
+    // An empty value closes them all, which is the accordion's own resting state.
+    write: (v) => {
+      for (const s of sections) {
+        if (s.toggle && s.body) setSection(s.toggle, s.body, sectionId(s) === v);
+      }
+    },
+  });
+  for (const s of [{ toggle: controlsToggle }, { toggle: controlsSettingsToggle }, ...sections]) {
+    s.toggle?.addEventListener("click", () => urlState.sync());
+  }
+
+  // `cam=<azimuth>,<polar>,<distance>[,<tx>,<ty>,<tz>]`: the orbit as degrees around
+  // the pivot plus the camera's distance from it, and the pivot itself when a focus has
+  // moved it off the brain centre. Rounded: "approximately this view" is what a shared
+  // link means, and full precision would only churn the address bar.
+  //
+  // Written only while auto-rotate is OFF. A spinning view has no fixed orientation to
+  // capture, and rewriting one every frame would churn history for nothing; so applying
+  // a `cam` also stops the spin (and any running framing tween), or the link's view
+  // would immediately drift off it.
+  const camRound = (n, digits) => Number(n.toFixed(digits));
+  const camOffset = new THREE.Vector3();
+  urlState.register("cam", {
+    read: () => {
+      if (autorotate.checked) return null;
+      const parts = [
+        camRound(THREE.MathUtils.radToDeg(controls.getAzimuthalAngle()), 1),
+        camRound(THREE.MathUtils.radToDeg(controls.getPolarAngle()), 1),
+        camRound(controls.getDistance(), 2),
+      ];
+      if (controls.target.lengthSq() > 1e-4) {
+        parts.push(camRound(controls.target.x, 2), camRound(controls.target.y, 2),
+          camRound(controls.target.z, 2));
+      }
+      return parts.join(LIST_SEP);
+    },
+    write: (v) => {
+      const n = v.split(LIST_SEP).map(Number);
+      if (n.length < 3 || n.some((x) => !Number.isFinite(x))) return;
+      if (autorotate.checked) {
+        autorotate.checked = false;
+        autorotate.dispatchEvent(new Event("change"));
+      }
+      focus.cancel(); // a framing tween would otherwise drag the view off the link's
+      autoSpread.cancel(); // as would a still-running auto-spread's zoom
+      controls.target.set(n[3] || 0, n[4] || 0, n[5] || 0);
+      camOffset.setFromSphericalCoords(
+        n[2], THREE.MathUtils.degToRad(n[1]), THREE.MathUtils.degToRad(n[0]));
+      camera.position.copy(controls.target).add(camOffset);
+      controls.update();
+    },
+  }, CAMERA_URL_PRIORITY);
+  // The camera moves continuously while orbiting, so record the settled value: "end"
+  // fires when a drag / wheel / pinch finishes.
+  controls.addEventListener("end", () => urlState.sync());
+
   // Hand the auto-spread back to the caller: the focus helpers (selectStructure,
   // focusDrug, ...) live in the main scope and call autoSpreadIfDeep, and the
   // render loop advances autoSpread.tick() + arrowRetrim.tick().
@@ -5810,7 +5969,7 @@ function connectionSideTag(proj) {
  *   selectStructure:Function, selectConnection:Function,
  *   selectTarget:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -6126,11 +6285,13 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     renderResults();
     searchInput.focus();
     searchInput.select();
+    urlState.sync(); // whether the panel is searching is part of the shareable link
   }
   function closeSearch() {
     searchBox.hidden = true;
     controlsMain.hidden = false;
     searchToggle.classList.remove("active");
+    urlState.sync();
   }
 
   // Open search pre-filled with a query (a drug panel's clickable Class /
@@ -6142,6 +6303,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     searchInput.value = query;
     renderResults();
     searchInput.focus();
+    urlState.sync();
   }
 
   // The "?" button toggles the search-syntax help block beneath the bar.
@@ -6160,6 +6322,17 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStruc
     else closeSearch();
   });
   searchInput.addEventListener("input", renderResults);
+
+  // `q=<query>`: the in-panel search, which replaces the panel's normal controls, so
+  // whether it is open at all is UI state. An OPEN but empty box reads as `q=` (the
+  // empty string), a closed one as null, which is the difference between "searching,
+  // nothing typed yet" and "not searching". Typing is continuous, so its sync waits
+  // for a pause rather than writing per keystroke.
+  urlState.register("q", {
+    read: () => (searchBox.hidden ? null : searchInput.value),
+    write: (v) => (v === "" ? openSearch() : openSearchWithQuery(v)),
+  });
+  searchInput.addEventListener("input", () => urlState.sync(TYPING_SETTLE_MS));
   // The inline "×": wipe the query, re-render (now empty -> the neutral list) and
   // keep focus so the user can retype immediately; syncClear (in renderResults)
   // hides the button again.
@@ -6454,6 +6627,12 @@ function wireShortcutsHelp() {
   return wireModal({ modalId: "shortcuts-modal", toggleId: "shortcuts-toggle", closeId: "shortcuts-close" });
 }
 
+// Run whenever ANY wireModal popup opens or closes, so the URL can name the one on
+// screen. A module-level hook rather than a per-modal option because every popup goes
+// through wireModal (js/changelog.js is handed the same function), so one seam covers
+// them all; main() points it at the URL sync.
+let onModalToggle = () => {};
+
 /**
  * Shared wiring for a simple .modal-overlay popup (About / Legend / Sources &
  * provenance / the shortcuts help): a toggle button opens it, the × and a click on
@@ -6466,8 +6645,8 @@ function wireModal({ modalId, toggleId, closeId, onOpen }) {
   const modal = document.getElementById(modalId);
   const noop = { open() {}, close() {}, get isOpen() { return false; } };
   if (!modal) return noop;
-  const close = () => { modal.hidden = true; };
-  const open = () => { onOpen?.(); modal.hidden = false; };
+  const close = () => { modal.hidden = true; onModalToggle(); };
+  const open = () => { onOpen?.(); modal.hidden = false; onModalToggle(); };
   if (toggleId) document.getElementById(toggleId)?.addEventListener("click", open);
   if (closeId) document.getElementById(closeId)?.addEventListener("click", close);
   modal.addEventListener("click", (event) => { if (event.target === modal) close(); });
@@ -6713,23 +6892,25 @@ async function main() {
   // Connection info panel (populated when an arrow is clicked or a connection is
   // picked in the search). Created here so the click/tap handlers below can use it.
   const tabs = createPanelTabs();
+  // The URL fragment <-> UI registry (js/url-state.js). Created before anything that
+  // owns a piece of UI state, since each control registers its own {read, write} pair
+  // as it is wired; the fragment is assembled + applied at the end of main().
+  const urlState = createUrlState();
+  // Any strip change (open / close / activate / drag-reorder) is part of what a link
+  // reproduces, so mirror the whole strip, not just the active tab.
+  tabs.setOnChange(() => urlState.sync());
   const info = createInfoPanel(data, sourcingModal);
   // Open (or re-activate) a detail tab for the thing a select* just rendered +
   // focused; the reopen thunk re-runs that select* so clicking the tab restores
   // the panel + the 3D focus. Kept here (not in createInfoPanel) so the tab's key
   // and how to re-focus the scene live with the select* layer.
-  // Run after any detail tab opens / the last one closes, so the URL hash can be
-  // rewritten to mirror the current focus. Assigned once the deep-link layer is set up.
-  let afterTabChange = () => {};
   const openDetailTab = (key, title, reopen) => {
     // The single choke point every node focus (drug / receptor / target / structure /
     // connection / circuit / group) passes through, so emit one semantic analytics
     // event here (the `key` is already `<kind>:<id>`) instead of at each call site.
     // No-op unless umami is loaded (see js/app-init.js window.trackEvent).
     window.trackEvent?.("focus", { node: key });
-    const r = tabs.openDetail({ key, title, reopen });
-    afterTabChange();
-    return r;
+    return tabs.openDetail({ key, title, reopen });
   };
 
   // Selection + isolation controller: glowing halo on the structure picked by
@@ -6753,7 +6934,6 @@ async function main() {
     selection.clear();
     activeEnzymeId = null;
     reflectEnzymes(null);
-    afterTabChange();
   });
 
   // Circuit "traveling pulse" animation: glowing beads sweeping each isolated
@@ -6912,6 +7092,31 @@ async function main() {
     }
   });
   reflectDrugs = buildDrugLegend(data, toggleDrug);
+  // The Drugs section's two list controls. Registered here (once) rather than inside
+  // buildDrugLegend, which re-runs on a language switch: the inputs are static markup,
+  // so one registration covers every rebuild. Each write drives the input's own event,
+  // so the live filter + the persisted metabolite preference behave as if typed/clicked.
+  const drugsFilter = document.getElementById("drugs-filter");
+  const metabToggle = document.getElementById("drugs-show-metabolites");
+  if (drugsFilter) {
+    urlState.register("drugq", {
+      read: () => drugsFilter.value || null,
+      write: (v) => { drugsFilter.value = v; drugsFilter.dispatchEvent(new Event("input")); },
+    });
+    drugsFilter.addEventListener("input", () => urlState.sync(TYPING_SETTLE_MS));
+  }
+  if (metabToggle) {
+    urlState.register("metab", {
+      read: () => (metabToggle.checked ? null : "0"),
+      write: (v) => {
+        const on = v !== "0";
+        if (metabToggle.checked === on) return;
+        metabToggle.checked = on;
+        metabToggle.dispatchEvent(new Event("change"));
+      },
+    });
+    metabToggle.addEventListener("change", () => urlState.sync());
+  }
 
   // Auto-rotate is on by default (a slow turn on load), but the moment the user
   // reaches in to inspect something it should hold still. Stop it (and untick
@@ -7399,15 +7604,20 @@ async function main() {
     rebuildLegend();
   };
   for (const b of modeButtons) {
-    b.addEventListener("click", () => setColorMode(b.dataset.mode === "sign"));
+    b.addEventListener("click", () => { setColorMode(b.dataset.mode === "sign"); urlState.sync(); });
   }
+  // `colors=sign`: which key the arrows are coloured by (transmitter is the default).
+  urlState.register("colors", {
+    read: () => (signColorMode ? "sign" : null),
+    write: (v) => setColorMode(v === "sign"),
+  });
 
   const { autoSpread, autoSpreadIfDeep, arrowRetrim } = wireControls(
-    { controls, meshes, arrows, labels, focus, selection, projVis, cull });
+    { camera, controls, meshes, arrows, labels, focus, selection, projVis, cull, urlState });
   // Hold arrows a constant apparent width as the camera zooms (advanced by its
   // tick() in the render loop, like arrowRetrim).
   const arrowWidth = createArrowWidth({ arrows, camera, controls, focus });
-  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
+  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
@@ -7429,7 +7639,7 @@ async function main() {
   wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
-  applyViewParams({ scene, camera, controls, meshes, arrows, labels });
+  applyViewParams({ scene, camera, controls, meshes, arrows, labels, urlState });
   // Scene is built: fill the loading bar. The overlay's dismissal is coupled to
   // the intro launch further below (an interactive load waits for the visitor to
   // click "Start exploring"; an automated view drops it at once), so the brain is
@@ -7910,32 +8120,40 @@ async function main() {
     loading.waitForStart().then(beginScene);
   }
 
-  // ---- Deep links (URL hash <-> focus) ------------------------------------------
-  // A URL hash like `#focusDrug=vortioxetine` / `#focusReceptor=5-HT2A` opens the
-  // node's detail tab and focuses it on load (and on hashchange), exactly as picking
-  // it from search would. The inverse also holds: focusing any node rewrites the hash
-  // to its deep link (see syncHashToFocus), so the address bar is always shareable.
+  // ---- Deep links: the URL fragment IS the UI state ------------------------------
+  // Everything on screen is described by the fragment, through the js/url-state.js
+  // registry: which detail tabs are open and in what order, which one is active, the
+  // popup showing, the scene sliders + toggles, the panel layout, the open browse
+  // section, the search / filter text, and the camera. Each control registers its own
+  // {read, write} pair as it is wired (see the urlState.register calls in wireControls
+  // / wireToolbar / below); this block adds the ones that need the loaded data, then
+  // applies the incoming URL and starts mirroring later changes back into it.
   //
-  // Two kinds of key live in that hash, and they compose (`#browser=1&panel=1`):
-  //   - ONE focus key, mirroring the active detail tab (`focus*`, plus `browser` for
-  //     the Data browser view, which is a tab but not a node);
-  //   - any number of VIEW keys (`hashViews` below), independent scene/layout state
-  //     that is not a focus. Today: `panel=1`, the 3D-hidden reading mode. A view key
-  //     is written only when it is away from its default, so a plain link stays short.
+  // Two url-state.js rules keep links short and safe to paste: a view at its default
+  // writes nothing, and a key the URL does not carry is left alone, so a link that
+  // says nothing about (say) animations never overrides that visitor's own preference.
   const linkFold = (s) => foldText(String(s == null ? "" : s));
   const findByIdOrName = (list, v) => {
     const q = linkFold(v);
     return list.find((o) => linkFold(o.id) === q)
         || list.find((o) => linkFold(o.name) === q);
   };
-  // param (lowercased) -> resolver(value) -> true iff it matched & focused a node.
-  const deepLinkResolvers = {
-    focusdrug: (v) => { const d = findByIdOrName(data.drugs, v); if (d) focusDrug(d, { frame: true }); return !!d; },
-    focustarget: (v) => { const tg = findByIdOrName(data.targets, v); if (tg) focusTarget(tg, { frame: true }); return !!tg; },
-    focusreceptor: (v) => deepLinkResolvers.focustarget(v), // receptors live in data.targets
-    focuscircuit: (v) => { const c = findByIdOrName(data.circuits, v); if (c) focusCircuit(c, { frame: true }); return !!c; },
-    focusgroup: (v) => { const g = findByIdOrName(data.projectionGroups, v); if (g) focusProjectionGroup(g, { frame: true }); return !!g; },
-    focusstructure: (v) => {
+  // How to reopen one detail tab from the `<id>` half of its `<kind>:<id>` key. A tab
+  // key IS the link value, so the URL round-trips the strip verbatim, and each opener
+  // re-runs the very select* the UI would, so the 3D focus comes back with the panel.
+  // Returns whether it matched. This is also the whole vocabulary the legacy single-
+  // focus params resolve through, so each node kind has exactly one resolver.
+  const TAB_OPENERS = {
+    drug: (v) => { const d = findByIdOrName(data.drugs, v); if (d) focusDrug(d, { frame: true }); return !!d; },
+    target: (v) => { const tg = findByIdOrName(data.targets, v); if (tg) focusTarget(tg, { frame: true }); return !!tg; },
+    circuit: (v) => { const c = findByIdOrName(data.circuits, v); if (c) focusCircuit(c, { frame: true }); return !!c; },
+    group: (v) => { const g = findByIdOrName(data.projectionGroups, v); if (g) focusProjectionGroup(g, { frame: true }); return !!g; },
+    enzyme: (v) => { const e = findByIdOrName(data.enzymes || [], v); if (e) focusEnzyme(e); return !!e; },
+    structure: (v) => {
+      // The exact (sided) id first, so a link round-trips the very mesh the tab named;
+      // then the base, which is what a hand-written `#tabs=structure:hippocampus` says.
+      const exact = meshes.find((m) => linkFold(m.userData.structure.id) === linkFold(v));
+      if (exact) { selectStructure(exact, { frame: true, isolate: true }); return true; }
       const q = linkFold(stripSide(v));
       const group = meshes.filter((m) => {
         const s = m.userData.structure;
@@ -7946,8 +8164,14 @@ async function main() {
       selectStructure(rep, { frame: true, isolate: true });
       return true;
     },
-    focusconnection: (v) => {
+    connection: (v) => {
+      // Same two passes: the exact sided `from->to` a tab key carries, then the
+      // side-stripped pair (or the pathway label) a hand-written link uses, which pins
+      // both hemispheres the way a search pick does.
       const q = linkFold(v);
+      const exact = arrows.find(
+        (a) => linkFold(`${a.projection.from}->${a.projection.to}`) === q);
+      if (exact) { selectConnection(exact, { frame: true, isolate: true }); return true; }
       const byBase = new Map();
       for (const a of arrows) {
         const p = a.projection;
@@ -7962,95 +8186,81 @@ async function main() {
       }
       return false;
     },
-    // Not a node: the Data browser view. Any value opens it (the canonical link
-    // writes `1`), so `#browser=1` is a shareable "show me the whole dataset".
+    // Not a node: the Data browser, a tab whose content is the whole dataset.
     browser: () => { showNodeBrowser(); return true; },
   };
-
-  // ---- Hash view keys (non-focus view state) -------------------------------------
-  // Each entry `read()`s the current value (null when at its default, so it stays out
-  // of the URL) and `write(v)`s a value from the hash. A key is registered by the
-  // control that owns it, which for the panel-only mode happens further down than the
-  // first applyDeepLink() call, so a value seen before its owner exists is parked in
-  // `pendingHashView` and applied the moment it registers. A MISSING key is never
-  // written: the hash then carries no instruction about it, and a persisted
-  // preference must not be silently overridden by a link that simply says nothing.
-  const hashViews = new Map(); // key -> {read, write}
-  const pendingHashView = new Map();
-  const registerHashView = (key, view) => {
-    hashViews.set(key, view);
-    if (pendingHashView.has(key)) view.write(pendingHashView.get(key));
-    pendingHashView.delete(key);
-  };
-  const HASH_VIEW_KEYS = ["panel"];
-  const applyHashViews = (params) => {
-    for (const key of HASH_VIEW_KEYS) {
-      if (!params.has(key)) continue;
-      const view = hashViews.get(key);
-      if (view) view.write(params.get(key));
-      else pendingHashView.set(key, params.get(key));
-    }
+  const openTabKey = (key) => {
+    const idx = key.indexOf(":");
+    const open = idx > 0 ? TAB_OPENERS[key.slice(0, idx)] : null;
+    return !!open && open(key.slice(idx + 1));
   };
 
-  const applyDeepLink = () => {
-    const raw = window.location.hash.replace(/^#/, "");
-    if (!raw) return false;
-    applyHashViews(new URLSearchParams(raw));
-    for (const [k, val] of new URLSearchParams(raw)) {
-      const fn = deepLinkResolvers[k.toLowerCase()];
-      if (fn && val && fn(val)) return true;
-    }
-    return false;
+  // `tabs=<kind>:<id>,...`: every open detail tab, in strip order (which the user can
+  // drag to change, so the order is state too). Applying opens each in turn, which
+  // rebuilds the same strip and leaves the LAST one active; `tab` below corrects that
+  // when the active one is not the last.
+  urlState.register("tabs", {
+    read: () => (tabs.keys().length ? tabs.keys().join(LIST_SEP) : null),
+    write: (v) => { for (const key of v.split(LIST_SEP)) if (key) openTabKey(key); },
+  });
+  // `tab=<index>`: which of them is active. Omitted for the common case (the last one,
+  // where opening the list already lands); `s` means the pinned Settings tab is showing
+  // with detail tabs still open behind it.
+  urlState.register("tab", {
+    read: () => {
+      const keys = tabs.keys();
+      if (!keys.length) return null;
+      if (tabs.activeKey() === null) return "s";
+      const at = keys.indexOf(tabs.activeKey());
+      return at === keys.length - 1 ? null : String(at);
+    },
+    write: (v) => {
+      if (v === "s") { tabs.showSettings(); return; }
+      const key = tabs.keys()[Number(v)];
+      if (key) tabs.activate(key);
+    },
+  });
+  // The legacy single-focus links (`#focusDrug=vortioxetine`, `#browser=1`) that are
+  // already shared around: read-only aliases for one `tabs` entry, applied before it
+  // (priority -10) so an explicit `tabs=` wins. They read as null, or the same focus
+  // would be written twice; the first sync rewrites such a link to the canonical form.
+  const LEGACY_FOCUS = {
+    focusDrug: "drug", focusTarget: "target", focusReceptor: "target",
+    focusStructure: "structure", focusConnection: "connection",
+    focusCircuit: "circuit", focusGroup: "group", browser: "browser",
   };
+  for (const [param, kind] of Object.entries(LEGACY_FOCUS)) {
+    urlState.register(
+      param, { read: () => null, write: (v) => TAB_OPENERS[kind](v) }, -10);
+  }
 
-  // The inverse: the hash param for the active detail tab (`<kind>:<id>`).
-  const KIND_TO_PARAM = {
-    drug: "focusDrug", target: "focusTarget", structure: "focusStructure",
-    connection: "focusConnection", circuit: "focusCircuit", group: "focusGroup",
-    browser: "browser",
+  // `popup=<name>`: the .modal-overlay on screen, if any. One key, because only one is
+  // ever up (opening one from another, e.g. the Legend's "Sources & provenance" link,
+  // closes the first). The image lightbox is deliberately absent: it shows a picture
+  // reached from a panel, not a state of the UI.
+  const POPUPS = {
+    about: aboutModal, legend: legendModal, sources: sourcingModal,
+    shortcuts: shortcutsHelp, whatsnew: changelog,
   };
-  const focusParam = () => {
-    const key = tabs.activeKey();
-    const idx = key ? key.indexOf(":") : -1;
-    if (idx < 0) return null;
-    const param = KIND_TO_PARAM[key.slice(0, idx)];
-    if (!param) return null;
-    const id = key.slice(idx + 1);
-    const value = param === "focusStructure" ? stripSide(id) : id;
-    return `${param}=${encodeURIComponent(value)}`;
-  };
+  urlState.register("popup", {
+    read: () => Object.keys(POPUPS).find((name) => POPUPS[name].isOpen) || null,
+    write: (v) => {
+      for (const [name, ctrl] of Object.entries(POPUPS)) {
+        if (name !== v && ctrl.isOpen) ctrl.close();
+      }
+      POPUPS[v]?.open();
+    },
+  });
+  // Every popup goes through wireModal, so one hook keeps the key current.
+  onModalToggle = () => urlState.sync();
 
-  // Keep the address bar in sync with what is on screen, so the URL is always the
-  // shareable deep link for it: copying it is just selecting the URL bar, no
-  // dedicated button. `history.replaceState` updates the URL WITHOUT firing
-  // `hashchange` (so it never loops back into applyDeepLink) and without spamming
-  // back/forward history with every focus. Nothing focused and every view at its
-  // default strips the hash.
-  const focusHash = () => {
-    const parts = [];
-    const focus = focusParam();
-    if (focus) parts.push(focus);
-    for (const [key, view] of hashViews) {
-      const v = view.read();
-      if (v != null) parts.push(`${key}=${encodeURIComponent(v)}`);
-    }
-    return parts.length ? `#${parts.join("&")}` : "";
-  };
-  const syncHashToFocus = () => {
-    const want = focusHash();
-    if (want !== window.location.hash) {
-      history.replaceState(null, "",
-        want || window.location.pathname + window.location.search);
-    }
-  };
-  afterTabChange = syncHashToFocus;
-
-  // Apply an initial deep link (after the intro exists, so a focused node cancels the
-  // assemble intro rather than fighting its explode tween), then react to later
-  // hash changes (manual edits / pasted links / back-forward). Our own focus-driven
-  // updates use replaceState above, which does not fire this event.
-  if (applyDeepLink()) intro.cancel();
-  window.addEventListener("hashchange", applyDeepLink);
+  // Apply the incoming URL (after the intro exists, so a focused node cancels the
+  // assemble intro rather than fighting its explode tween), then keep the address bar
+  // mirroring the UI: copying it is just selecting the URL bar, no dedicated button.
+  // The sync also normalizes a legacy / hand-written link into the canonical fragment.
+  if (urlState.applyHash()) intro.cancel();
+  urlState.sync();
+  urlState.start();
 
   // On-demand rendering: a mostly-static brain has no reason to repaint at 60fps,
   // which only burns battery / spins fans / throttles phones. We render a frame
@@ -8107,6 +8317,18 @@ async function main() {
       animSettings.setSpeed(sliderToSpeed(parseFloat(speedSlider.value)));
       invalidate(); // repaint so the new pace takes visible effect at once
     });
+    // `speed=<multiplier>`: the multiplier itself (1 = the reference pace), not the
+    // slider's linear position, so the link stays meaningful if the mapping changes.
+    urlState.register("speed", {
+      read: () => (animSettings.speed === 1 ? null : String(Number(animSettings.speed.toFixed(2)))),
+      write: (v) => {
+        if (!Number.isFinite(parseFloat(v))) return;
+        animSettings.setSpeed(parseFloat(v));
+        speedSlider.value = String(speedToSlider(animSettings.speed));
+        invalidate();
+      },
+    });
+    speedSlider.addEventListener("input", () => urlState.sync(SLIDER_SETTLE_MS));
   }
   const animationShown = () => animSettings.enabled
     && (drugAnim.active || receptorMarkers.active || circuitAnim.active);
@@ -8131,19 +8353,24 @@ async function main() {
     saveFlag(NO3D_KEY, on);
     if (!on) invalidate(); // the scene is back and holds a stale frame; repaint it
     else intro.cancel(); // nothing renders while hidden, so don't resume mid-pose
-    syncHashToFocus(); // whether the brain is shown is part of the shareable link
+    urlState.sync(); // whether the brain is shown is part of the shareable link
   };
   toggle3d?.addEventListener("click", () => setNo3d(!no3dOn()));
+  // The persisted preference first, so the link registered below (which may have been
+  // parked since the hash was applied) is the one that wins: `#panel=0` must be able to
+  // force the brain back on for a visitor whose stored preference is the reading mode.
+  if (loadFlag(NO3D_KEY, false)) setNo3d(true);
   // `#panel=1` opens straight into the reading mode, `#panel=0` forces the brain back
   // on; a link that says nothing about it leaves the persisted preference alone.
-  registerHashView("panel", {
+  urlState.register("panel", {
     read: () => (no3dOn() ? "1" : null),
     write: (v) => setNo3d(v !== "0"),
   });
-  if (loadFlag(NO3D_KEY, false)) setNo3d(true);
-  // A persisted reading mode is not yet in the URL (no focus change has fired the
-  // sync), so stamp it once here: the address bar must describe what is on screen.
-  syncHashToFocus();
+
+  // A framing tween (focusing a node, recentering, the explode re-aim) moves the
+  // camera over several frames, so the URL's `cam` is only right once it settles:
+  // record it on the tween's falling edge rather than per frame.
+  let camWasMoving = false;
 
   renderer.setAnimationLoop(() => {
     // Panel-only mode: the scene (canvas + label overlay) is display:none, so skip
@@ -8158,7 +8385,10 @@ async function main() {
     if (intro.tick()) active = true;
     if (autoSpread.tick()) active = true;
     if (arrowRetrim.tick()) active = true;
-    if (focus.tick()) active = true;
+    const camMoving = focus.tick();
+    if (camMoving) active = true;
+    else if (camWasMoving) urlState.sync(); // tween done: the settled view is the link's
+    camWasMoving = camMoving;
     if (circuitAnim.tick()) active = true;
     if (receptorMarkers.tick()) active = true;
     if (drugAnim.tick()) active = true;

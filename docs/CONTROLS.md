@@ -141,7 +141,7 @@ through beats a nearer non-focused one.
 
 **`#nodes`** (`js/node-browser.js`): the Sources & provenance popup's coverage bars read node by
 node. Unlike the browse sections above it does **not** expand in place: the `#nodes-toggle` row
-opens a **detail tab** (key `browser:1`, deep-linked `#browser=1`) whose body is a detached
+opens a **detail tab** (key `browser:1`, deep-linked `#tabs=browser:1`) whose body is a detached
 container the module owns, so its filter, selects and scroll survive a tab switch; the panel only
 hosts it (`info.showNodeBrowser`).
 

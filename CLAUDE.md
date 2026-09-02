@@ -272,8 +272,14 @@ Viewer (`public/`):
   (Rendering / decoration draw order).
 - `js/node-browser.js` — `collectNodes` + `createNodeBrowser`, the Data browser (`#nodes`): every
   graded knowledge node as one filterable/sortable list, opened as a **detail tab** (deep link
-  `#browser=1`) rather than an accordion section, each row carrying its own backing so its pill
+  `#tabs=browser:1`) rather than an accordion section, each row carrying its own backing so its pill
   shows the same source the node's panel pill does (see [`docs/CONTROLS.md`](docs/CONTROLS.md)).
+- `js/url-state.js` — `createUrlState()`, the `key -> {read, write}` registry that makes the URL
+  fragment a complete description of the UI (open tabs + their order, active tab, popup, sliders,
+  toggles, panel layout, open section, search + filter text, camera). Each control registers its
+  own pair as it is wired; a view at its default writes nothing and a missing key is never written,
+  so links stay short and never override a visitor's persisted preference. Keys +
+  the older `#focus*` aliases in [`docs/RUNNING.md`](docs/RUNNING.md).
 - `js/prefs.js` — `loadFlag(key, dflt)` / `saveFlag(key, on)`, the only place a persisted
   on/off preference touches `localStorage` (panel-only mode, show-metabolites, show-twins;
   storage throws in private mode, so a read falls back to the default and a write is

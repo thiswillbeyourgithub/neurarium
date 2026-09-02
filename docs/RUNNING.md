@@ -39,8 +39,10 @@ python tools/shot.py --params "only=putamen_R&view=iso" --out /tmp/putamen.png
 Needs `playwright` + `playwright install chromium` once (or `uv run tools/shot.py`,
 inline deps). `--headed` opens a real window; `--wait` ms before capture (default 6000).
 
-The `--params` string is the URL query parsed by `applyViewParams` in
-`js/main.js`, so the keys also work as deep links:
+The `--params` string is the URL query parsed by `applyViewParams` in `js/main.js`.
+`explode` / `transparency` / `names` are ordinary UI state, so they are handed straight
+to the url-state views below rather than re-implemented there; the rest is
+screenshot-only. The keys also work as deep links:
 
 | key | effect |
 | --- | --- |
@@ -58,37 +60,61 @@ A separate startup flag, `?tour=1`, forces the guided tour to run on every load,
 bypassing the once-per-visitor "seen" gate (it still waits for the intro + Sources
 gate). Read directly in the tour wiring, not by `applyViewParams`.
 
-### Node deep links (URL hash)
+### Deep links: the URL fragment IS the UI state
 
-A URL **hash** focuses one node on load (and on `hashchange`), exactly as picking it
-from search would (opens its detail tab + focuses the 3D). Parsed by `applyDeepLink`
-in `js/main.js`; the value matches the node's id or (folded, case-insensitive) name:
+Everything on screen is described by the URL **fragment**, so the address bar is always
+the shareable link for the current view: which detail tabs are open and in what order,
+which one is active, the popup showing, the scene sliders + toggles, the panel layout,
+the open browse section, the search / filter text, and the camera. Copying it is just
+selecting the URL bar; there is no copy button.
 
-| hash | focuses |
+Both directions run through the `key -> {read, write}` registry in
+[`js/url-state.js`](../public/js/url-state.js): the fragment is applied on load and on
+`hashchange`, and any UI change writes it back with `history.replaceState` (no
+`hashchange` loop, no back/forward spam). Two rules keep links short and safe to paste:
+
+- a view **at its default writes nothing**, so a plain link carries only what actually
+  differs;
+- a key **missing** from the fragment is never written, so a link that says nothing
+  about (say) animations leaves that visitor's own persisted preference alone.
+
+Each control registers its own pair as it is wired (`urlState.register` in
+`js/main.js`), and a value seen before its owner is wired is parked and applied the
+moment it registers.
+
+#### The keys
+
+| hash | holds |
 | --- | --- |
-| `#focusDrug=vortioxetine` | a drug |
-| `#focusReceptor=5ht2a` / `#focusTarget=sert` | a receptor / non-receptor target |
-| `#focusStructure=frontal` | a structure (both hemispheres; use the side-stripped base id/name) |
-| `#focusConnection=cortex->thalamus` | a projection (both sides) |
-| `#focusCircuit=<id>` / `#focusGroup=<id>` | a circuit / projection group |
-| `#browser=1` | the Data browser (a tab, not a node, so it takes no id) |
+| `#tabs=<kind>:<id>,...` | the open detail tabs, in strip order (the order is state: tabs are drag-reorderable) |
+| `#tab=<index>` | which of them is active; omitted when it is the last (where opening the list already lands), `s` = the pinned Settings tab |
+| `#popup=about\|legend\|sources\|shortcuts\|whatsnew` | the open popup |
+| `#cam=<az>,<polar>,<dist>[,<tx>,<ty>,<tz>]` | the orbit: degrees around the pivot, distance from it, and the pivot when a focus moved it off centre |
+| `#explode=0..1` / `#transparency=0.1..1` | the two sliders |
+| `#rotate=0` / `#names=1` / `#arrows=0` / `#inside=1` | Auto-rotate / Show all names / Show projections / See inside |
+| `#anim=0\|1` / `#speed=<multiplier>` | Animations and the animation-speed multiplier (1 = the reference pace) |
+| `#colors=sign` | colour arrows by excitatory/inhibitory instead of by transmitter |
+| `#collapsed=1` / `#settings=0` | the panel body collapsed / the Controls sub-section closed |
+| `#section=drugs\|receptors\|enzymes\|structures\|projections` | the open browse section (empty = all closed) |
+| `#q=<query>` | the in-panel search: open with that query (`#q=` opens it empty) |
+| `#drugq=<text>` / `#metab=0` | the Drugs section's filter box / its "show active metabolites" toggle |
+| `#panel=1` / `#panel=0` | panel-only reading mode (3D hidden) / force the brain back on |
 
-The inverse also holds automatically: focusing any node rewrites the URL hash to its
-deep link via `history.replaceState` (`syncHashToFocus`, built from `focusParam`),
-so the address bar is always the shareable link for what is on screen (no copy button;
-`replaceState` avoids both a `hashchange` loop and back/forward history spam).
+A tab key is `<kind>:<id>` with kind one of `drug`, `target` (receptors live here too),
+`structure`, `connection` (`from->to`), `circuit`, `group`, `enzyme`, `browser`. The id
+matches a node's id or its folded, case-insensitive name, so
+`#tabs=drug:olanzapine,target:5ht2a` is hand-writable; a structure or connection also
+accepts the side-stripped base (`structure:hippocampus`, `connection:cortex->thalamus`),
+which pins both hemispheres the way a search pick does.
 
-### View keys (URL hash)
+**The camera is written only while Auto-rotate is off**: a spinning view has no fixed
+orientation to capture, and rewriting one every frame would churn history for nothing.
+Applying a `cam` therefore turns Auto-rotate off, or the link's view would drift off
+immediately. The angles are rounded, since "approximately this view" is what a shared
+link means. The image lightbox is deliberately not in the fragment: it shows a picture
+reached from a panel, not a state of the UI.
 
-Beside the one focus key, the hash carries any number of **view keys**: layout state
-that is not a focus. They compose with a focus (`#focusDrug=clozapine&panel=1`) and are
-written only when away from their default, so a plain link stays short.
-
-| hash | does |
-| --- | --- |
-| `#panel=1` | open in panel-only reading mode (the 3D brain hidden, panel full-screen) |
-| `#panel=0` | force the brain back on, overriding a persisted reading mode |
-
-A view key is registered by the control that owns it (`registerHashView` in
-`js/main.js`); a key **missing** from the hash is never written, so a link that says
-nothing about the mode leaves the visitor's persisted preference alone.
+The older single-focus links (`#focusDrug=vortioxetine`, `#focusReceptor=5ht2a`,
+`#focusStructure=frontal`, `#focusConnection=cortex->thalamus`, `#focusCircuit=<id>`,
+`#focusGroup=<id>`, `#focusTarget=sert`, `#browser=1`) still work as read-only aliases
+for one `tabs` entry; the first sync rewrites such a link into the canonical form.
