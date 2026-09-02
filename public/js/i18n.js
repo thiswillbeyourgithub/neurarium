@@ -393,6 +393,7 @@
       "loading.data": "Loading data…",
       "loading.shapes": "Loading shapes… ({done}/{total})",
       "loading.meshing": "Building {name}… ({done}/{total})",
+      "loading.geometry": "Loading the 3D shapes… ({done}/{total})",
       "loading.building": "Assembling the brain…",
       "loading.reducedQuality":
         "This device is meshing slowly, so the remaining structures were built at reduced detail to keep the load time reasonable. The data is unaffected: only the 3D shapes are a little softer.",
@@ -934,6 +935,7 @@
       "loading.data": "Chargement des données…",
       "loading.shapes": "Chargement des formes… ({done}/{total})",
       "loading.meshing": "Construction : {name}… ({done}/{total})",
+      "loading.geometry": "Chargement des formes 3D… ({done}/{total})",
       "loading.building": "Assemblage du cerveau…",
       "loading.reducedQuality":
         "Cet appareil construit les maillages lentement : les structures restantes ont donc été générées avec moins de détail pour garder un temps de chargement raisonnable. Les données ne sont pas affectées, seules les formes 3D sont un peu plus lisses.",

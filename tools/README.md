@@ -77,12 +77,16 @@ attribute a *different* quote than the main one, or several to back a compound v
      `FR` table or the build raises listing every miss. For a feminine/plural paired name set
      `fr_gender` (`f`/`mp`/`fp`).
 2. Run `python tools/generate_data.py` to regenerate `public/data/`.
-3. Optionally run `python tools/check_data.py`.
-4. For new drugs/structures with links, run the fetch tools (network, idempotent, touch
+3. If you touched a `data/shapes/*.json` **sdf** spec (or added/removed a structure), re-bake
+   the geometry: `node tools/bake_meshes.mjs`. Skipping it is caught, not silent (`check_data.py`
+   family 11 and `--check` both re-hash the shape files), and the site still renders correctly
+   meanwhile by meshing in the browser, just slower. See [`docs/BAKED_MESHES.md`](../docs/BAKED_MESHES.md).
+4. Optionally run `python tools/check_data.py`.
+5. For new drugs/structures with links, run the fetch tools (network, idempotent, touch
    only the new ones): `fetch_molecules.py`, `fetch_structure_images.py`. To refresh
    binding affinities, run `fetch_ki.py --apply` (reads the local PDSP CSV; idempotent),
    which rewrites `drugs_data.jsonl`'s `ki` annotations + `affinity_only` bindings.
-5. Commit the generator change + the regenerated artifacts together.
+6. Commit the generator change + the regenerated artifacts together.
 
 The legend is generated at runtime from the data, so it updates automatically.
 
@@ -220,6 +224,13 @@ Screenshots).
 - `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
+- `tools/bake_meshes.mjs` — **Node** (no deps): meshes every distinct `sdf` shape author-side into
+  `public/data/meshes/*.bin` + `index.json`, so a visitor downloads the geometry instead of
+  rebuilding it (~0.7s instead of ~3.0s, more on a phone). Imports the browser's own
+  `js/sdf-core.js` + `js/noise.js` so the bake cannot drift from the runtime fallback, and
+  round-trips every mesh through the real decoder before writing. Run after `generate_data.py`
+  (it reads the emitted `structures.jsonl`); `--check` verifies the bake is current and writes
+  nothing. See [`docs/BAKED_MESHES.md`](../docs/BAKED_MESHES.md).
 - `tools/serve.py` — stdlib dev server, `Cache-Control: no-store`, roots at `public/` (see CLAUDE.md Running).
 - `tools/shot.py` — Playwright screenshot helper (see CLAUDE.md Screenshots).
 - `tools/demos/` — Playwright demo-video recorder: `recorder.py` (a `Demo` API) + `neurarium.py`

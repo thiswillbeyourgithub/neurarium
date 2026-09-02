@@ -96,3 +96,11 @@ errors. Functions take loaded data as args (unit-testable). Eleven families (num
   `public/version.js` must have a `docs/changelog/<version>/changelog.md`, so bumping
   the version without writing notes fails here instead of shipping a What's new popup
   that announces an update it cannot describe.
+- **Baked meshes** (pre-built SDF geometry): the manifest `public/data/meshes/index.json`
+  records the `sha256` of every shape file it was baked from, and this re-hashes them. An
+  edited shape with a stale bake is an **error**: the site would ship geometry that no longer
+  matches its spec, which nothing else would catch (it renders fine, just wrong). Also checks
+  each `.bin` exists and is non-empty, and reports orphans. A **missing** manifest is only a
+  warning, since `js/baked-meshes.js` falls back to meshing in the browser: correct, just
+  slower. `node tools/bake_meshes.mjs --check` is the same gate with byte-for-byte file
+  comparison; see [`BAKED_MESHES.md`](BAKED_MESHES.md).

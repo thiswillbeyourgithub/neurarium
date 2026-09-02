@@ -205,6 +205,10 @@ Viewer (`public/`):
   Self-contained Perlin `fractalNoise` (fBm/ridged/domain-warp). Cortical lobes are cel-shaded
   (`MeshToonMaterial`) domes with a shader-drawn swirl (`injectCortexSwirl`/`CORTEX_SWIRL`, pure
   colour, no relief). `buildBlobGeometry` honours `clip_planes` when `JIGSAW_CLIP.enabled`.
+- `js/mesh-codec.js` + `js/baked-meshes.js` — the SDF geometry is meshed author-side
+  (`tools/bake_meshes.mjs` -> `public/data/meshes/`) and downloaded rather than rebuilt on every
+  load; the runtime mesher stays as a `console.info`-logged fallback for any shape the bake does
+  not cover. Format, measurements + the staleness gates: [`docs/BAKED_MESHES.md`](docs/BAKED_MESHES.md).
 - `js/arrows.js` — curved tube+cone arrows; colour from `projection.color`, recolourable via
   `setColor`; `tentative` -> dotted. Exposes `arrow.curve`. Each end attaches to the surface point
   *nearest the other end* (`surfaceToward`, a nearest-vertex scan) so the tip lands on real mass
@@ -292,7 +296,9 @@ so `docker compose build` needs network; then strips caddy's
 `cap_net_bind_service` so `exec` works under `no-new-privileges`),
 `Caddyfile` (serves `/srv` on `:8359`, serves `/gen/app-config.js` for
 `/app-config.js`, `Cache-Control: no-cache` on everything (store but always revalidate ->
-cheap `304`s, never stale, and never a heuristically-cached module); a generous per-`{client_ip}` `rate_limit`
+cheap `304`s, never stale, and never a heuristically-cached module); `encode` compresses by an
+**explicit** content-type list, since Caddy's default omits the baked meshes' octet-stream (so a
+NEW kind of asset ships uncompressed until its type is added there); a generous per-`{client_ip}` `rate_limit`
 flood guard, keyed via the front proxy's `X-Forwarded-For`/`trusted_proxies`;
 security headers incl. CSP),
 `env.example`, `entrypoint.sh` (stamps `STARTED_AT`, validates `ANALYTICS_URL`,
@@ -316,7 +322,7 @@ material location).
 
 ## Data checks
 
-> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: eleven families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage).
+> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: twelve families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage, baked meshes).
 
 ## Internationalization (i18n)
 

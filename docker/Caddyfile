@@ -30,7 +30,25 @@
 :8359 {
 	root * /srv
 
-	encode gzip zstd
+	# Compress by an EXPLICIT content-type list rather than Caddy's built-in
+	# default. The default omits `application/octet-stream`, which is what the
+	# baked meshes (data/meshes/*.bin, pinned below) are: relying on it would ship
+	# them at 2.69 MB instead of 1.29 MB, silently undoing most of what baking the
+	# geometry bought. Being explicit also stops that decision from moving under us
+	# on a Caddy upgrade. Cost of the explicitness: a NEW kind of asset is not
+	# compressed until its type is added here.
+	encode {
+		gzip
+		zstd
+		match {
+			header Content-Type text/*
+			header Content-Type application/json*
+			header Content-Type application/javascript*
+			header Content-Type application/manifest+json*
+			header Content-Type application/octet-stream*
+			header Content-Type image/svg+xml*
+		}
+	}
 
 	# Generous per-client flood guard (caddy-ratelimit module), purely to blunt a
 	# single-source DoS, NOT to ration normal use. A cold page load is ~100 requests
@@ -135,6 +153,12 @@
 	# JSON, so `application/json` would only make a JSON viewer report a parse error.
 	@jsonl path *.jsonl
 	header @jsonl Content-Type "text/plain; charset=utf-8"
+
+	# Third gap, same cause: Go's mime table has no `.bin` either, so the baked
+	# meshes would be typed by content sniffing. Pin them, both so the type is
+	# stated rather than guessed and so the `encode` matcher above can name it.
+	@mesh path /data/meshes/*.bin
+	header @mesh Content-Type "application/octet-stream"
 
 	log {
 		output stdout
