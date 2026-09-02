@@ -430,13 +430,28 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // Fetch all shape files in parallel and attach them to their structure. Report
   // progress per file (these are the bulk of the load, especially on a slow link)
   // so the startup loading bar can advance.
+  //
+  // Deduplicated by url: a symmetric structure's two hemispheres share ONE shape
+  // file (the right-side form, which `structure.mirror` flips for the left), so
+  // 46 structures resolve to 26 files. Fetching per structure meant 20 redundant
+  // requests, which on a phone is 20 extra round trips, and handed the mesher two
+  // distinct-but-identical specs to build twice (see js/main.js `sdfItems`). The
+  // parsed spec is then SHARED between the twins, which is safe because nothing
+  // downstream mutates it: `buildGeometry` only reads, and the mesh budget's
+  // `adjust` returns a copy.
   {
     let loaded = 0;
     const total = structures.length;
     onProgress?.({ stage: "shapes", loaded, total });
+    const byUrl = new Map();
     await Promise.all(
       structures.map(async (s) => {
-        s.shape = await (await fetchOrThrow(s.shape_file)).json();
+        let shape = byUrl.get(s.shape_file);
+        if (!shape) {
+          shape = fetchOrThrow(s.shape_file).then((r) => r.json());
+          byUrl.set(s.shape_file, shape);
+        }
+        s.shape = await shape;
         onProgress?.({ stage: "shapes", loaded: (loaded += 1), total });
       }),
     );

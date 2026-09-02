@@ -6831,9 +6831,21 @@ async function main() {
   // cheap shapes (blob/curve/composite) stay synchronous. The pool falls back to
   // synchronous meshing per-spec if workers are unavailable (see js/sdf-pool.js),
   // so the brain always renders; this is a pure performance path.
-  const sdfItems = data.structures
-    .filter((s) => s.shape && s.shape.type === "sdf")
-    .map((s) => ({ id: s.id, spec: s.shape }));
+  // One job per DISTINCT spec, not per structure: a symmetric structure's two
+  // hemispheres share one shape file (js/data.js dedupes the fetch, so the twins
+  // hold the very same spec object), and the left is the right's geometry flipped
+  // by `mirrorGeometryX`, not a different solid. Meshing both sides re-ran an
+  // identical marching-cubes pass for 20 of the 46 structures: 44% of the field
+  // samples at load, spent to produce a duplicate. The twin gets a `clone()`
+  // below, since `buildStructureMesh` mirrors in place.
+  const sdfBySpec = new Map(); // spec object -> the id whose job meshes it
+  const sdfItems = [];
+  for (const s of data.structures) {
+    if (!s.shape || s.shape.type !== "sdf") continue;
+    if (sdfBySpec.has(s.shape)) continue;
+    sdfBySpec.set(s.shape, s.id);
+    sdfItems.push({ id: s.id, spec: s.shape });
+  }
   const pool = createSdfPool();
   // Mesh cheapest-first under a wall-time budget: the small nuclei double as a
   // throughput probe, and if the machine turns out to be too slow to finish the
@@ -6867,8 +6879,18 @@ async function main() {
   // pre-meshed geometry; everything else is meshed synchronously inside the call.
   const meshes = [];
   const meshById = new Map();
+  const geomUsed = new Set();
   for (const structure of data.structures) {
-    const mesh = buildStructureMesh(structure, sdfGeoms.get(structure.id));
+    // Resolve through the spec, so a mirrored twin picks up the geometry meshed
+    // under its right-side partner's id. Every consumer after the first gets a
+    // clone: `buildStructureMesh` mirrors (and so mutates) what it is handed, and
+    // a clone is a memcpy against a million-sample re-mesh.
+    let geom = sdfGeoms.get(sdfBySpec.get(structure.shape) ?? structure.id);
+    if (geom) {
+      if (geomUsed.has(geom)) geom = geom.clone();
+      else geomUsed.add(geom);
+    }
+    const mesh = buildStructureMesh(structure, geom);
     meshes.push(mesh);
     meshById.set(structure.id, mesh);
     scene.add(mesh);

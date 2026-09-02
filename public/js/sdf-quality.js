@@ -70,6 +70,14 @@ export function createMeshBudget(opts = {}) {
    * small ones, so the detail that gets dropped is on shapes still to come rather
    * than retroactively lost. Sorting is stable on cost ties via the id, so a
    * reload meshes in the same order and the caption sequence is reproducible.
+   *
+   * Measured tradeoff, so it is not "fixed" blindly: cheapest-first is the WORSE
+   * makespan order on a parallel pool (longest-first costs ~11% less wall time
+   * here, since it stops the heavy lobes from all landing in the final wave). It
+   * is kept deliberately: longest-first dispatches the expensive specs before any
+   * measurement exists, which leaves the budget nothing left to act on, and the
+   * budget only matters on the slow devices where 11% is noise against the several
+   * seconds degradation actually saves.
    */
   function order(items) {
     const priced = items.map((it) => ({ it, cost: estimateSdfCost(it.spec) }));
