@@ -6812,7 +6812,10 @@ async function main() {
         buildAboutSourcing({ provenanceStats: p.meta.provenance_stats });
       }
       if (p.stage === "shapes" && p.total) {
-        loading.setProgress(0.05 + 0.45 * (p.loaded / p.total), t("loading.shapes"));
+        loading.setProgress(
+          0.05 + 0.45 * (p.loaded / p.total),
+          t("loading.shapes", { done: p.loaded, total: p.total }),
+        );
       }
     });
   } catch (err) {
@@ -6833,10 +6836,13 @@ async function main() {
   const pool = createSdfPool();
   let sdfGeoms = new Map();
   try {
-    sdfGeoms = await pool.meshAll(sdfItems, (id, done, total) => {
-      // Meshing fills the back half of the bar; name the region as it lands.
+    sdfGeoms = await pool.meshAll(sdfItems, ({ id, done, total, frac }) => {
+      // Meshing fills the back half of the bar. `frac` includes the in-flight
+      // structures' own progress, so on a slow phone the bar keeps moving through
+      // a single heavy mesh; the "(n/total)" counter says how far along the batch
+      // is, so a long pause still reads as progress rather than a freeze.
       const name = data.byId.get(id)?.base_name || id;
-      loading.setProgress(0.5 + 0.45 * (done / total), t("loading.meshing", { name }));
+      loading.setProgress(0.5 + 0.45 * frac, t("loading.meshing", { name, done, total }));
     });
   } catch (err) {
     console.warn("sdf pool meshing failed; falling back to synchronous", err);

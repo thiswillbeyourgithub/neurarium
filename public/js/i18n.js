@@ -391,8 +391,8 @@
 
       "loading.start": "Loading…",
       "loading.data": "Loading data…",
-      "loading.shapes": "Loading shapes…",
-      "loading.meshing": "Building {name}…",
+      "loading.shapes": "Loading shapes… ({done}/{total})",
+      "loading.meshing": "Building {name}… ({done}/{total})",
       "loading.building": "Assembling the brain…",
       "loading.tagline": "a (mostly) sourced atlas of psychiatric neuroscience",
       "loading.cta":
@@ -930,8 +930,8 @@
 
       "loading.start": "Chargement…",
       "loading.data": "Chargement des données…",
-      "loading.shapes": "Chargement des formes…",
-      "loading.meshing": "Construction : {name}…",
+      "loading.shapes": "Chargement des formes… ({done}/{total})",
+      "loading.meshing": "Construction : {name}… ({done}/{total})",
       "loading.building": "Assemblage du cerveau…",
       "loading.tagline": "un atlas (en grande partie) sourcé des neurosciences psychiatriques",
       "loading.cta":

@@ -21,7 +21,13 @@ const deps = { noise3d: gradientNoise, fractalNoise };
 self.onmessage = (e) => {
   const { id, spec } = e.data;
   try {
-    const { positions, indices } = meshSdfToArrays(spec, deps);
+    // Sub-item progress (`{id, progress}`, no geometry): one structure can take
+    // seconds on a phone, so the pool needs to move the loading bar mid-mesh
+    // rather than only when the whole spec lands. The final `{id, positions, ...}`
+    // message is what completes the job, so a dropped progress tick costs nothing.
+    const { positions, indices } = meshSdfToArrays(spec, deps, (progress) => {
+      self.postMessage({ id, progress });
+    });
     // Transfer the backing buffers (zero-copy) rather than structured-cloning them.
     self.postMessage({ id, positions, indices }, [positions.buffer, indices.buffer]);
   } catch (err) {

@@ -266,9 +266,14 @@ export function fieldBounds(spec) {
  *   pin per-axis sampling (e.g. a structure whose finest relief is on a short
  *   axis, like the cerebellum's folia).
  * @param {object} deps  `{ noise3d?, fractalNoise? }` (from js/noise.js).
+ * @param {(frac:number)=>void} [onProgress]  called with 0..1 as the field fills,
+ *   so a slow phone's loading bar keeps moving THROUGH one big structure instead
+ *   of freezing between two whole-item ticks (a 112^3 grid is ~1.4M noise
+ *   evaluations, several seconds on a weak CPU). Reported ~20 times per mesh, off
+ *   the z-slab loop; called once more at 1 when the marcher + weld are done.
  * @returns {{positions: Float32Array, indices: Uint32Array}}
  */
-export function meshSdfToArrays(spec, deps) {
+export function meshSdfToArrays(spec, deps, onProgress) {
   const { min, max } = fieldBounds(spec);
   const span = [max[0] - min[0], max[1] - min[1], max[2] - min[2]];
 
@@ -297,7 +302,13 @@ export function meshSdfToArrays(spec, deps) {
   const field = new Float32Array(Nx * Ny * Nz);
   const sx = span[0] / (Nx - 1), sy = span[1] / (Ny - 1), sz = span[2] / (Nz - 1);
   const planeXY = Nx * Ny;
+  // The field fill dominates the cost (one SDF-tree walk, noise included, per
+  // sample), so it owns the reported 0..FILL_SHARE; the marcher + weld are the
+  // remainder. Reported every `step` slabs to keep the message rate low.
+  const FILL_SHARE = 0.9;
+  const step = Math.max(1, Math.ceil(Nz / 20));
   for (let z = 0; z < Nz; z++) {
+    if (onProgress && z % step === 0) onProgress((z / Nz) * FILL_SHARE);
     const wz = min[2] + z * sz;
     const zo = z * planeXY;
     for (let y = 0; y < Ny; y++) {
@@ -317,6 +328,7 @@ export function meshSdfToArrays(spec, deps) {
     }
   }
 
+  if (onProgress) onProgress(FILL_SHARE);
   const src = marchField(field, [Nx, Ny, Nz], min, span); // flat world-space triangle soup
 
   // Weld coincident vertices into an index so vertex normals come out smooth (and
@@ -354,5 +366,6 @@ export function meshSdfToArrays(spec, deps) {
   }
   if (dropped) console.warn(`sdf: dropped ${dropped} degenerate (non-finite) triangle(s)`);
 
+  if (onProgress) onProgress(1);
   return { positions: new Float32Array(positions), indices: new Uint32Array(indices) };
 }
