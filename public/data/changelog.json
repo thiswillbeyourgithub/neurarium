@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.54.0",
+      "date": "2026-09-02",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Four more cannabinoids join THC in the Drugs list: cannabidiol (CBD), cannabinol (CBN), nabilone (the antiemetic) and rimonabant (the withdrawn anti-obesity drug), each with what it does at CB1 and, where a lab measured it, its binding strength",
+          "commits": [
+            "cf41e21"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Fifty-one drug actions that were already in the dataset but showed no source now carry the Guide to Pharmacology entry that states them, so a green check replaces the red cross",
+          "commits": [
+            "3f50aa9",
+            "cf41e21"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.53.0",
       "date": "2026-09-01",
       "entries": [
