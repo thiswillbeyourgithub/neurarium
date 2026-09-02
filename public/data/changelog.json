@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.56.2",
+      "date": "2026-09-02",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The startup progress bar is now finer-grained: it advances while a single brain structure is being built (not only once the whole structure lands) and the caption counts them off, \"Building Hippocampus… (12/46)\", so a slow phone reads as making progress instead of looking frozen. The \"Loading shapes\" step counts too",
+          "commits": [
+            "3e7871d"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.56.1",
       "date": "2026-09-02",
       "entries": [
