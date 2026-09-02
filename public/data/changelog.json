@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.57.1",
+      "date": "2026-09-02",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The brain's 3D shapes now load a little faster: a structure whose two halves are mirror images of each other is built once instead of twice, which removes about 44% of the shape-building work and 20 network requests. Nothing looks different",
+          "commits": [
+            "4ed991e"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.57.0",
       "date": "2026-09-02",
       "entries": [
