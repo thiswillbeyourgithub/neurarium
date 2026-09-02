@@ -1368,6 +1368,20 @@ function buildLegendKey(data) {
 }
 
 /**
+ * Expand the collapsed control panel, the bare DOM half of it. Several places need
+ * to reveal something that lives inside the panel body (a detail tab, the search
+ * box, the reading mode), so the two lines live here once; `wireControls` wraps
+ * this with the pan-aside recompute + URL sync and hands that wrapper around.
+ * @returns {boolean} whether it actually expanded (false = already open).
+ */
+function openControlsBody(toggle, body) {
+  if (toggle.getAttribute("aria-expanded") === "true") return false;
+  toggle.setAttribute("aria-expanded", "true");
+  body.hidden = false;
+  return true;
+}
+
+/**
  * Browser-style detail tabs at the top of the bottom-left panel. The first tab,
  * **Settings**, is pinned (always first, never scrolled away) and shows the
  * controls pane; every other tab is one opened detail (a structure / connection /
@@ -1459,14 +1473,9 @@ function createPanelTabs() {
     tabSettings.setAttribute("aria-selected", String(!details));
   };
 
-  const expandPanel = () => {
-    // The detail must be visible, so make sure the panel body is expanded (the
-    // ResizeObserver in wireControls then re-runs the small-screen pan-aside).
-    if (controlsToggle.getAttribute("aria-expanded") !== "true") {
-      controlsToggle.setAttribute("aria-expanded", "true");
-      controlsBody.hidden = false;
-    }
-  };
+  // The detail must be visible, so make sure the panel body is expanded (the
+  // ResizeObserver in wireControls then re-runs the small-screen pan-aside).
+  const expandPanel = () => openControlsBody(controlsToggle, controlsBody);
 
   // Rebuild the detail-tab buttons from openTabs (the array is the source of
   // truth). Cheap: a handful of tabs at most.
@@ -5593,6 +5602,14 @@ function wireControls({ camera, controls, meshes, arrows, labels, focus, selecti
     }
   };
   wireCollapse(controlsToggle, controlsBody, updatePanelPan);
+  // Expanding the panel from elsewhere (opening search, entering the reading mode)
+  // goes through here rather than poking the DOM directly, so the pan-aside and the
+  // shareable link end up exactly where a header click would have left them.
+  const expandPanel = () => {
+    if (!openControlsBody(controlsToggle, controlsBody)) return;
+    updatePanelPan();
+    urlState.sync();
+  };
   // Recompute when the orientation flips, and whenever the panel's own size
   // changes (collapsing/expanding, or opening the Legend/About accordion, which
   // changes how far the brain must move). The ResizeObserver also fires once on
@@ -5933,7 +5950,7 @@ function wireControls({ camera, controls, meshes, arrows, labels, focus, selecti
   // Hand the auto-spread back to the caller: the focus helpers (selectStructure,
   // focusDrug, ...) live in the main scope and call autoSpreadIfDeep, and the
   // render loop advances autoSpread.tick() + arrowRetrim.tick().
-  return { autoSpread, autoSpreadIfDeep, arrowRetrim };
+  return { autoSpread, autoSpreadIfDeep, arrowRetrim, expandPanel };
 }
 
 /**
@@ -5969,7 +5986,7 @@ function connectionSideTag(proj) {
  *   selectStructure:Function, selectConnection:Function,
  *   selectTarget:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -6255,21 +6272,11 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, s
     highlight(0); // pre-highlight the first match: Enter selects it straight away
   }
 
-  // The search box lives inside the (collapsible) panel body, so opening search
-  // from the Ctrl/Cmd+F shortcut must also expand a collapsed panel, otherwise
-  // the box would be revealed inside a hidden body. Done by DOM here (the panel
-  // collapse lives in wireControls, a separate scope).
-  const controlsToggle = document.getElementById("controls-toggle");
-  const controlsBody = document.getElementById("controls-body");
-  function ensurePanelOpen() {
-    if (controlsToggle && controlsBody && controlsBody.hidden) {
-      controlsToggle.setAttribute("aria-expanded", "true");
-      controlsBody.hidden = false;
-    }
-  }
-
   function openSearch() {
-    ensurePanelOpen();
+    // The search box lives inside the (collapsible) panel body, so opening search
+    // from the Ctrl/Cmd+F shortcut must also expand a collapsed panel, otherwise
+    // the box would be revealed inside a hidden body.
+    expandPanel();
     // The search box lives in the Settings pane; if a detail's Details tab is
     // active, switch back so the box is actually visible (the detail stays
     // available behind the tab).
@@ -7582,7 +7589,12 @@ async function main() {
       info.showNodeBrowser(nodesBody);
       openDetailTab(NODES_TAB_KEY, t("panel.nodes"), showNodeBrowser);
     };
-    nodesToggle.addEventListener("click", () => showNodeBrowser());
+    // The rows are a wide table and read nothing off the scene, so the browser opens
+    // maximized (this visit only, see setNo3d's `persist`).
+    nodesToggle.addEventListener("click", () => {
+      setNo3d(true, { persist: false });
+      showNodeBrowser();
+    });
   }
 
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
@@ -7612,12 +7624,12 @@ async function main() {
     write: (v) => setColorMode(v === "sign"),
   });
 
-  const { autoSpread, autoSpreadIfDeep, arrowRetrim } = wireControls(
+  const { autoSpread, autoSpreadIfDeep, arrowRetrim, expandPanel } = wireControls(
     { camera, controls, meshes, arrows, labels, focus, selection, projVis, cull, urlState });
   // Hold arrows a constant apparent width as the camera zooms (advanced by its
   // tick() in the render loop, like arrowRetrim).
   const arrowWidth = createArrowWidth({ arrows, camera, controls, focus });
-  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
+  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
@@ -8346,11 +8358,17 @@ async function main() {
   const NO3D_KEY = "neurarium.no3d";
   const toggle3d = document.getElementById("toggle-3d");
   const no3dOn = () => document.body.classList.contains("no-3d");
-  const setNo3d = (on) => {
+  // `persist` is what separates the two ways in: the header button states a lasting
+  // preference, while a view that merely wants the room (the Data browser) borrows
+  // the mode for this visit and must not rewrite what the visitor chose.
+  const setNo3d = (on, { persist = true } = {}) => {
     if (on === no3dOn()) return;
+    // With no brain behind it a collapsed panel would leave a blank viewport, so
+    // entering the reading mode maximizes the panel rather than hiding everything.
+    if (on) expandPanel();
     document.body.classList.toggle("no-3d", on);
     toggle3d?.setAttribute("aria-pressed", String(on));
-    saveFlag(NO3D_KEY, on);
+    if (persist) saveFlag(NO3D_KEY, on);
     if (!on) invalidate(); // the scene is back and holds a stale frame; repaint it
     else intro.cancel(); // nothing renders while hidden, so don't resume mid-pose
     urlState.sync(); // whether the brain is shown is part of the shareable link
