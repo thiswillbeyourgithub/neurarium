@@ -58,6 +58,14 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
     debugging a revalidation subtlety.
     """
 
+    # Python's mimetypes does not know `.jsonl` any more than Go's table does, so
+    # pin it here too, matching the prod Caddyfile (see its @jsonl matcher for why
+    # text/plain rather than a JSON type).
+    extensions_map = {
+        **SimpleHTTPRequestHandler.extensions_map,
+        ".jsonl": "text/plain; charset=utf-8",
+    }
+
     def end_headers(self) -> None:
         if self.path.startswith("/data/"):
             # no-cache: cache but revalidate (304 when unchanged, see class doc).

@@ -126,6 +126,16 @@
 	@webmanifest path *.webmanifest
 	header @webmanifest Content-Type "application/manifest+json"
 
+	# Same gap for the dataset's own files: Go's mime table has no `.jsonl` entry
+	# either, and `X-Content-Type-Options: nosniff` (set above) then stops the
+	# browser guessing, so following an "as files" link downloaded the file instead
+	# of showing it. `text/plain` opens it in a tab; the explicit charset is what
+	# keeps the French strings from being decoded as latin-1. There is no registered
+	# JSONL type a browser renders any better: one JSON object per line is not valid
+	# JSON, so `application/json` would only make a JSON viewer report a parse error.
+	@jsonl path *.jsonl
+	header @jsonl Content-Type "text/plain; charset=utf-8"
+
 	log {
 		output stdout
 		format console
