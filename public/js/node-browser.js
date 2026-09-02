@@ -371,6 +371,10 @@ export function createNodeBrowser({ body, data, deps, ui }) {
 
   const countEl = el("div", "node-count");
   const list = el("div", "node-list");
+  // Header + rows share one horizontal scroller so the four columns keep a readable
+  // width instead of being squeezed into the panel's: the keys stay over the cells
+  // they name because both scroll as one block.
+  const grid = el("div", "node-grid");
   const moreBtn = el("button", "node-more");
   moreBtn.type = "button";
   moreBtn.hidden = true;
@@ -517,8 +521,9 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     body.appendChild(controls);
     body.appendChild(twinsLabel);
     body.appendChild(countEl);
-    body.appendChild(head);
-    body.appendChild(list);
+    grid.appendChild(head);
+    grid.appendChild(list);
+    body.appendChild(grid);
     body.appendChild(moreBtn);
     apply();
   };
