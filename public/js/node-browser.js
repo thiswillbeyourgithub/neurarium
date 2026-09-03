@@ -396,12 +396,16 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   // in the stylesheet and each key really sits over the cell it names.
   const head = el("div", "node-head");
   const headMain = el("span", "node-head-main");
+  const headCells = {};
   for (const [key, tip] of COLUMNS) {
     const cell = el("span", `node-head-cell node-head-${key}`, key);
     cell.title = t(tip);
+    headCells[key] = cell;
     (key === "grade" ? head : headMain).appendChild(cell);
   }
   head.appendChild(headMain);
+  // The notion column's own name, kept so apply() can swap the kind in and back out.
+  const notionDefault = headCells.notion.textContent;
 
   const rowEl = (r) => {
     // A div rather than a button: the grade pill is itself a <button> (it pins its
@@ -470,8 +474,11 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     twinsLabel.hidden = !matches.some((r) => r.kind === "structures");
     // With one kind selected, every row would repeat the kind chosen right above the
     // list, so the column is dropped and its width goes to name + notion. Kept only
-    // in the "all kinds" reading, where it is what tells the rows apart.
+    // in the "all kinds" reading, where it is what tells the rows apart. The kind then
+    // heads the notion column instead: "what this node states" is abstract, while
+    // "Receptor expression regions" says outright what the cells under it are.
     grid.classList.toggle("no-kind", kind !== "");
+    headCells.notion.textContent = kind === "" ? notionDefault : kindLabel(kind);
     limit = PAGE_FIRST;
     render();
   };
