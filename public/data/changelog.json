@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.59.3",
+      "date": "2026-09-03",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The \"Sources & provenance\" popup now says outright that every node it counts is listed one by one in the data browser, and opens it for you",
+          "commits": [
+            "8e20807"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.59.2",
       "date": "2026-09-03",
       "entries": [
