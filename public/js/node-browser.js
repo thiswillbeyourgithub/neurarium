@@ -121,9 +121,16 @@ export function collectNodes(data, deps, opts = {}) {
   // A density profile is keyed by structure *base*, which is only a key in byId for
   // a midline region, so a lateralized one resolves through its right-hand member.
   const baseLabel = (base) => regionName(base) || regionName(`${base}_R`) || base;
+  // A density node ranks its owner's regions against each other, so its claim is the
+  // peak of that ranking: the region the profile puts first (they are emitted in
+  // descending order) AND how far above this gene's brain-wide average it sits. The
+  // region alone would name the claim without stating it. Signed to two decimals, the
+  // same way a panel's "Found in" row writes the z beside its bar.
   const topRegion = (info) => {
-    const bases = info && info.profile ? Object.keys(info.profile) : [];
-    return bases.length ? baseLabel(bases[0]) : "";
+    const entries = info && info.profile ? Object.entries(info.profile) : [];
+    if (!entries.length) return "";
+    const [base, z] = entries[0];
+    return `${baseLabel(base)} ${z > 0 ? "+" : ""}${z.toFixed(2)}`;
   };
   // A binding with a measured Ki but no established direction has no action label,
   // so it reads as its target plus the panel's own "affinity only" caveat.
