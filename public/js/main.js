@@ -315,24 +315,37 @@ function createArrowWidth({ arrows, camera, controls, focus }) {
   };
 }
 
-// "See inside" cull: how far past the orbit-centre plane (toward the camera) a
-// structure's centre must sit before it is hidden. A positive bias keeps the
-// central core (the deep nuclei) visible while the near outer hemisphere drops
-// away, so you can look at the inside without the front cortex in the way.
-const NEAR_CULL_BIAS = 0.9;
+// "See inside" cull: how far past the orbit-centre plane (toward the camera) an
+// outer-shell structure's centre must sit before it is hidden. Small and positive,
+// so a shell straddling the plane is kept rather than blinking at every crossing.
+const NEAR_CULL_BIAS = 0.3;
+
+// The outer shell: the structures big enough to wrap the core and hide it. Only
+// these are ever culled. Culling by position alone (the whole near half, deep nuclei
+// included) reads backwards: from a lateral view it dropped the near hippocampus,
+// amygdala and striatum - the very things you opened the mode to see - while keeping
+// the near frontal and parietal lobes, whose centres sit close to the midline, so the
+// brain still looked whole. Removing only the shell is the anatomical cutaway instead:
+// the near cortex peels away, every nucleus stays, and the far cortex remains as the
+// backdrop that gives them their place.
+const SHELL_STRUCTURE_IDS = new Set(["cerebellum"]); // the one non-lobe that wraps
+const isShellMesh = (mesh) =>
+  mesh.userData.structure?.group === "lobe"
+  || SHELL_STRUCTURE_IDS.has(mesh.userData.id);
 
 /**
- * Toggleable "see inside" mode: hide the structures on the camera-facing side of
- * the brain so the deep nuclei aren't blocked by the near cortex. The hidden set
- * is recomputed every frame from the live camera/target, so it follows as you
- * orbit. Composes with `?only=` (a mesh already hidden stays hidden) and with
- * isolate mode (which dims via opacity, not visibility). Off by default.
+ * Toggleable "see inside" mode: peel away the cortical shell between you and the
+ * core so the deep nuclei aren't blocked by the near cortex. The hidden set is
+ * recomputed every frame from the live camera/target, so it follows as you orbit.
+ * Composes with `?only=` (a mesh already hidden stays hidden) and with isolate mode
+ * (which dims via opacity, not visibility). Off by default.
  *
  * @param {{meshes:THREE.Mesh[], camera:THREE.Camera,
  *          controls:import("three/addons/controls/OrbitControls.js").OrbitControls}} deps
  */
 function createNearCull({ meshes, camera, controls }) {
   let enabled = false;
+  const shells = meshes.filter(isShellMesh);
   const center = new THREE.Vector3();
   const viewOut = new THREE.Vector3();
   const toMesh = new THREE.Vector3();
@@ -343,16 +356,16 @@ function createNearCull({ meshes, camera, controls }) {
       if (on === enabled) return;
       enabled = on;
       if (on) {
-        for (const m of meshes) m.userData.cullRestore = m.visible;
+        for (const m of shells) m.userData.cullRestore = m.visible;
       } else {
-        for (const m of meshes) {
+        for (const m of shells) {
           if (m.userData.cullRestore !== undefined) {
             m.visible = m.userData.cullRestore;
           }
         }
       }
     },
-    /** Per-frame: hide every otherwise-visible structure whose centre is more
+    /** Per-frame: hide every otherwise-visible shell structure whose centre is more
      *  than NEAR_CULL_BIAS past the orbit-centre plane toward the camera. */
     tick() {
       if (!enabled) return;
@@ -360,7 +373,7 @@ function createNearCull({ meshes, camera, controls }) {
       if (viewOut.lengthSq() < 1e-9) return;
       viewOut.normalize();
       center.copy(controls.target);
-      for (const m of meshes) {
+      for (const m of shells) {
         if (!m.userData.cullRestore) {
           m.visible = false;
           continue;
