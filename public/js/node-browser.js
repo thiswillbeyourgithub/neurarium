@@ -468,6 +468,10 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     // only while the current result contains some (both readings keep the kind, so
     // the control does not hide itself the moment it is used).
     twinsLabel.hidden = !matches.some((r) => r.kind === "structures");
+    // With one kind selected, every row would repeat the kind chosen right above the
+    // list, so the column is dropped and its width goes to name + notion. Kept only
+    // in the "all kinds" reading, where it is what tells the rows apart.
+    grid.classList.toggle("no-kind", kind !== "");
     limit = PAGE_FIRST;
     render();
   };

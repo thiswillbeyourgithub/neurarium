@@ -1597,6 +1597,17 @@
         border-left: 1px solid rgba(255, 255, 255, 0.14);
         padding-left: 6px;
       }
+      /* One kind selected: the kind cell would say on every row what the select right
+         above the list already says, so the column goes and the three that are left
+         share its width (also narrowing the grid, so it stops scrolling sideways
+         sooner). Set on .node-grid by node-browser.js's apply(). */
+      .node-grid.no-kind .node-head-kind, .node-grid.no-kind .node-kind { display: none; }
+      .node-grid.no-kind .node-head-main, .node-grid.no-kind .node-main {
+        grid-template-columns: minmax(110px, 1fr) minmax(190px, 1.6fr);
+      }
+      .node-grid.no-kind .node-head, .node-grid.no-kind .node-row {
+        --node-grid-w: 390px;
+      }
       /* Too narrow for four columns (a phone, or the panel back at sidebar width): the
          columns keep their width and the grid scrolls sideways instead of stacking,
          so a row always reads as one line across the same four fields. */
@@ -1604,6 +1615,12 @@
         .node-head, .node-row { --node-grid-w: 460px; }
         .node-head-main, .node-main {
           grid-template-columns: minmax(95px, 1fr) minmax(165px, 1.6fr) minmax(95px, 1fr);
+        }
+        .node-grid.no-kind .node-head, .node-grid.no-kind .node-row {
+          --node-grid-w: 340px;
+        }
+        .node-grid.no-kind .node-head-main, .node-grid.no-kind .node-main {
+          grid-template-columns: minmax(95px, 1fr) minmax(165px, 1.6fr);
         }
       }
       .node-filters { display: flex; gap: 4px; margin-bottom: 6px; }

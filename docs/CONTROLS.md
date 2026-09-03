@@ -155,7 +155,9 @@ hosts it (`info.showNodeBrowser`). Clicking that row also enters the panel-only 
 (the rows are a wide table reading nothing off the scene); a deep link does not, so it can still
 name the `panel` view itself. Header + rows share one two-level grid template (`grade`, then
 `name`/`notion`/`kind` inside the clickable button), which is why the header is built with a row's
-exact structure and an empty `notion` cell is still emitted.
+exact structure and an empty `notion` cell is still emitted. The **kind** column shows only in the
+"All kinds" reading: with one kind selected every row would repeat the select above the list, so
+`apply()` puts `.no-kind` on the grid and the CSS drops the column and reflows the other two.
 
 `collectNodes(data, deps)` enumerates every graded knowledge node (references excluded, like the
 bars) as `{kind, name, notion, grade, uncertain, go, sources, uncertainty, ki}`, where `grade` is
