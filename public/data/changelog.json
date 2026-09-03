@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.59.2",
+      "date": "2026-09-03",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "In the data browser, a \"relative amount per region\" fact showed only which region came out on top, never by how much. It now carries the figure alongside, the same one the receptor and target panels show",
+          "commits": [
+            "4d6524f"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Still in the data browser, kinds whose name already says everything (a circuit, a projection system) no longer show an empty second column: it disappears and the kind heads the name column",
+          "commits": [
+            "102279b"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.59.1",
       "date": "2026-09-03",
       "entries": [

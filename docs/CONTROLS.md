@@ -159,7 +159,9 @@ exact structure and an empty `notion` cell is still emitted. The **kind** column
 "All kinds" reading: with one kind selected every row would repeat the select above the list, so
 `apply()` puts `.no-kind` on the grid and the CSS drops the column and reflows the other two. The
 kind then heads the **notion** column instead of the word "notion", naming what the cells under it
-actually hold.
+actually hold; and when no matching row carries a notion at all (a circuit, a projection group: the
+name *is* the claim) that column goes too, `.no-notion`, and the kind heads the **name** column
+instead.
 
 `collectNodes(data, deps)` enumerates every graded knowledge node (references excluded, like the
 bars) as `{kind, name, notion, grade, uncertain, go, sources, uncertainty, ki}`, where `grade` is
