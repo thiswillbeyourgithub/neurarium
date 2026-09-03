@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.59.0",
+      "date": "2026-09-03",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The arrows between brain regions are no longer all drawn at once when the page opens: there were around a hundred of them and they hid the brain itself. Nothing is lost, because opening a circuit, a drug or a region still draws exactly the pathways it involves, and the \"Show projections\" box brings them all back whenever you want",
+          "commits": [
+            "87da342"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "\"See inside\" now works the way it looks like it should: it lifts off the cortex between you and the centre of the brain, and leaves every deep nucleus in place. Before, it removed the near half of everything, so from the side it took away the hippocampus and the striatum you were trying to see while keeping the lobes that hid the rest",
+          "commits": [
+            "94a6ecb"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "In the data browser, choosing a single kind of fact no longer repeats that kind on every row: the column disappears and its space goes to the name and to what the fact says",
+          "commits": [
+            "18bbeda"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.58.0",
       "date": "2026-09-03",
       "entries": [
