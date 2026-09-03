@@ -51,7 +51,9 @@ DEFAULT_OUT = REPO_ROOT / "docs" / "images" / "screenshot.png"
 
 # Hero-shot defaults: exploded enough to lift the cortex off the deep nuclei and
 # reveal the projection arrows, framed isometric, with the UI panels hidden.
-DEFAULT_PARAMS = "explode=0.45&view=iso&ui=0"
+# The hero shot is about the pathways, so it asks for them: "Show projections" is
+# off by default, and #arrows=1 is the URL view key that turns it back on.
+DEFAULT_PARAMS = "explode=0.45&view=iso&ui=0#arrows=1"
 
 # Headless Chromium only renders WebGL when a software GL backend is wired up;
 # these flags select SwiftShader via ANGLE. Without them index.html's canvas
