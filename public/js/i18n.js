@@ -548,6 +548,11 @@
       "about.exampleLead": "e.g.",
       "about.kiCoverage":
         "Measured binding affinity (PDSP Ki): {pct}% of {total} drug bindings carry one; {drugsNone} of {drugs} drugs have none (quote-sourced or unsourced).",
+      // Under the tally: the bars count the nodes, the Data browser lists them.
+      "about.sourcingBrowser":
+        "Every node counted above is listed one by one in the Data browser, "
+        + "with its own source, filterable by kind and by how well sourced it is.",
+      "about.sourcingBrowserLink": "Open the Data browser \u2192",
       "about.kindBindings": "Drug target bindings",
       "about.kindNbn": "Drug nomenclature (NbN)",
       "about.kindDrugBrands": "Drug brand names",
@@ -1097,6 +1102,10 @@
       "about.exampleLead": "p. ex.",
       "about.kiCoverage":
         "Affinité de liaison mesurée (Ki PDSP) : {pct} % des {total} liaisons en portent une ; {drugsNone} des {drugs} médicaments n'en ont aucune (sourcés par citation ou sans source).",
+      "about.sourcingBrowser":
+        "Chacun des nœuds comptés ci-dessus est listé un par un dans l'explorateur "
+        + "de données, avec sa propre source, filtrable par type et par qualité de sourçage.",
+      "about.sourcingBrowserLink": "Ouvrir l'explorateur de données \u2192",
       "about.kindBindings": "Liaisons cibles des médicaments",
       "about.kindNbn": "Nomenclature des médicaments (NbN)",
       "about.kindDrugBrands": "Noms commerciaux des médicaments",

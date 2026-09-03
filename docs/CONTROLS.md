@@ -132,7 +132,10 @@ through beats a nearer non-focused one.
   place explaining the sourcing system (see Source provenance); NOT auto-shown on startup, opens
   only on demand (this button, the Legend/About links, the tour's Sources step).
   `buildAboutSourcing(null)` renders the static intro + key immediately, a second call fills the
-  tally once loaded.
+  tally once loaded. Under the tally, a line names the **Data browser** and links it
+  (`.src-browser-link` -> `nav.browser`, which closes the popup and opens the tab): the bars count
+  the nodes and a per-kind example shows one, so the reader is told where all of them are. Rendered
+  only when a `browser` callback was handed in, which the pre-load call has not.
 - **Receptors & targets** (`#receptors`) / **Drugs** (`#drugs`) / **Metabolising enzymes**
   (`#enzymes`, `buildEnzymeLegend` -> `showEnzyme`): see their sections.
 - **About** (`#about-modal`, ⓘ, `wireAboutModal`): a blurb (Olivier Cornelis + Claude), a "Start the

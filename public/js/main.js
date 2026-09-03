@@ -5369,6 +5369,20 @@ function buildAboutSourcing(meta, opts = {}) {
       drugs: ki.drugs_total,
     })));
   }
+  // The bars count the nodes; the Data browser lists them. A per-kind example answers
+  // "which ones?" with a single node, so say outright that all of them are one click
+  // away and link it, rather than leaving the browser to be discovered in the panel.
+  // Skipped when no `browser` callback was handed in (the pre-load call, and any host
+  // with no panel to open it in).
+  if (opts.nav && opts.nav.browser) {
+    const line = h("p", "src-stat-browser", t("about.sourcingBrowser"));
+    const btn = h("button", "src-browser-link", t("about.sourcingBrowserLink"));
+    btn.type = "button";
+    btn.addEventListener("click", () => opts.nav.browser());
+    line.appendChild(document.createTextNode(" "));
+    line.appendChild(btn);
+    wrap.appendChild(line);
+  }
   host.appendChild(wrap);
   host.appendChild(key);
 }
@@ -7647,6 +7661,9 @@ async function main() {
     },
     circuit: (c) => { sourcingModal.close(); focusCircuit(c, { frame: true }); },
     group: (g) => { sourcingModal.close(); focusProjectionGroup(g, { frame: true }); },
+    // Not an example node but the whole list: the popup's "Open the Data browser"
+    // line. Reads `showNodeBrowser` at call time, since it is only assigned below.
+    browser: () => { sourcingModal.close(); showNodeBrowser(); },
   };
   buildAboutSourcing(data.meta, { data, nav: sourcingNav });
 

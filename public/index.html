@@ -1306,7 +1306,7 @@
         margin: 0 0 8px;
         line-height: 1.4;
       }
-      .src-stat-kifoot {
+      .src-stat-kifoot, .src-stat-browser {
         color: var(--muted);
         font-size: 0.85em;
         line-height: 1.4;
@@ -1540,9 +1540,11 @@
          .node-main. */
       #nodes-body { padding: 4px 0 8px; }
       .node-intro { color: var(--muted); font-size: 11px; margin: 0 2px 8px; }
-      /* "The same data as files": a link-looking button (it opens the About popup's
-         data-file dropdown rather than navigating). */
-      .node-datafiles {
+      /* A link-looking button: it acts in place (opens the About popup's data-file
+         dropdown, opens the Data browser tab) rather than navigating, so it is a
+         <button> wearing a link's clothes. Shared by the browser's "The same data as
+         files" and the sourcing popup's Data-browser line. */
+      .node-datafiles, .src-browser-link {
         padding: 0;
         font: inherit;
         color: var(--accent-bright);
