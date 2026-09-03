@@ -785,18 +785,26 @@ function createSelection({ meshes, arrows }) {
       mesh.material.depthWrite = op >= 0.99;
     }
     // Arrows: keep those in the focus opaque, fade the rest into the background
-    // with the dimmed structures; the picked arrow also lights its halo.
+    // with the dimmed structures; the picked arrow also lights its halo. The ones
+    // the focus lights (pinned, static context, or - for a plain structure isolate -
+    // touching it) are collected as they are found, so the "Show projections"
+    // toggle can keep exactly those visible while the ambient tangle is hidden.
+    const focusArrows = new Set();
     for (const arrow of arrows) {
       let op;
       if (!active || arrowInFocus(arrow)) op = 1;
       else if (contextArrows.has(arrow)) op = CONTEXT_ARROW_OPACITY;
       else op = DIM;
+      if (active && op !== DIM) focusArrows.add(arrow);
       arrow.setOpacity(op);
       arrow.setHalo(arrow === highlightedArrow);
     }
+    // A picked (haloed) arrow is a focus of one, so it shows through the same way.
+    if (highlightedArrow) focusArrows.add(highlightedArrow);
     // Pass the pinned-arrow set too (empty unless a circuit/kind is focused) so
-    // the legend can tell *which* projection-kind/circuit row is the active one.
-    for (const fn of onIsolateSubs) fn(active ? isolated : null, isolatedArrows);
+    // the legend can tell *which* projection-kind/circuit row is the active one,
+    // then the lit set for the visibility composition above.
+    for (const fn of onIsolateSubs) fn(active ? isolated : null, isolatedArrows, focusArrows);
     for (const fn of onHighlightSubs) fn(highlighted);
   }
 
@@ -979,12 +987,17 @@ function formatHalfLife(hl) {
  * @param {ReturnType<typeof createSelection>} selection
  */
 /**
- * Shared control of which projection arrows are visible, so the global "Hide
- * projections" button and the legend's off-by-default "Hypothetical pathways"
- * toggle compose into one final per-arrow visibility instead of fighting over
- * setVisible(). An arrow shows when projections aren't globally hidden AND it is
- * either established or (when tentative) its section has been toggled on, so
- * speculative pathways start hidden.
+ * Shared control of which projection arrows are visible, so the global "Show
+ * projections" checkbox, the legend's off-by-default "Hypothetical pathways"
+ * toggle and the current focus compose into one final per-arrow visibility instead
+ * of fighting over setVisible(). An arrow shows when it is either established or
+ * (when tentative) its section has been toggled on, AND projections aren't globally
+ * hidden OR the arrow is one the current focus lights.
+ *
+ * That last exemption is what lets "Show projections" default to off: the ambient
+ * ~100-arrow tangle stays out of the way, but focusing a circuit / a drug's systems
+ * / a structure still draws exactly its own pathways, which the selection controller
+ * only ever dimmed (it owns opacity, never visibility).
  * @param {import("./arrows.js").ProjectionArrow[]} arrows
  * @param {{refresh: () => void}} labels  Refreshed after a change so the
  *   connection labels follow their arrows' visibility.
@@ -992,11 +1005,22 @@ function formatHalfLife(hl) {
 function createProjectionVisibility(arrows, labels) {
   let allHidden = false;
   let tentativeShown = false;
+  let focusArrows = null; // the current focus's arrows, exempt from allHidden
   const apply = () => {
     for (const a of arrows) {
-      a.setVisible(!allHidden && (!a.tentative || tentativeShown));
+      const global = !allHidden || (focusArrows !== null && focusArrows.has(a));
+      a.setVisible(global && (!a.tentative || tentativeShown));
     }
     labels.refresh();
+  };
+  // Same members = same result, and this is fed from selection.apply(), which also
+  // runs on every hover; without the compare each hover would re-walk the arrows and
+  // rebuild the connection labels.
+  const same = (a, b) => {
+    if (a === b) return true;
+    if (a === null || b === null || a.size !== b.size) return false;
+    for (const x of a) if (!b.has(x)) return false;
+    return true;
   };
   return {
     apply,
@@ -1004,6 +1028,13 @@ function createProjectionVisibility(arrows, labels) {
     setAllHidden(v) { allHidden = v; apply(); },
     get tentativeShown() { return tentativeShown; },
     setTentativeShown(v) { tentativeShown = v; apply(); },
+    /** The arrows the live focus lights (empty/null = no focus). */
+    setFocusArrows(set) {
+      const next = set && set.size > 0 ? set : null;
+      if (same(next, focusArrows)) return;
+      focusArrows = next;
+      if (allHidden) apply(); // shown-anyway: the exemption changes nothing
+    },
   };
 }
 
@@ -5818,11 +5849,16 @@ function wireControls({ camera, controls, meshes, arrows, labels, focus, selecti
   selection.onIsolate(showAllScoped);
 
   // "Show projections" checkbox (next to Auto-rotate): show/hide every projection
-  // arrow at once (checked by default = arrows shown; unchecking hides them all).
+  // arrow at once. UNCHECKED by default: all ~100 at once bury the anatomy, and the
+  // arrows a focus lights are exempt from the hiding (see createProjectionVisibility),
+  // so a circuit / drug / structure focus still draws its own pathways.
   // projVis refreshes the connection labels (which key off group.visible) and the
   // pick helpers skip hidden groups. Composes with the legend's "Hypothetical
   // pathways" toggle through projVis: hiding wins, and re-showing restores the
   // tentative arrows only if that section is toggled on.
+  projVis.setAllHidden(!toggleProjections.checked);
+  selection.onIsolate((_isolated, _pinned, focusArrows) =>
+    projVis.setFocusArrows(focusArrows));
   toggleProjections.addEventListener("change", () => {
     projVis.setAllHidden(!toggleProjections.checked);
   });
@@ -5873,7 +5909,7 @@ function wireControls({ camera, controls, meshes, arrows, labels, focus, selecti
   registerControl("transparency", transparency, sliderView(transparency, 1), "input", SLIDER_SETTLE_MS);
   registerControl("rotate", autorotate, checkboxView(autorotate, true));
   registerControl("names", toggleNames, checkboxView(toggleNames, false));
-  registerControl("arrows", toggleProjections, checkboxView(toggleProjections, true));
+  registerControl("arrows", toggleProjections, checkboxView(toggleProjections, false));
   registerControl("inside", seeInside, checkboxView(seeInside, false));
   // Animations have no fixed default: it is the per-device heuristic (off on a phone /
   // under reduced-motion), so the key is written whenever the visitor diverges from

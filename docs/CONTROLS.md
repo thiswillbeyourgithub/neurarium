@@ -39,12 +39,16 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
 - **Auto-rotate** (OrbitControls `autoRotate`, on by default): off the moment the user picks
   content (`selection.onPick(stopAutoRotate)`); `?autorotate=1` forces on.
 - **Show all names** (`#toggle-names`, off): every label on. Key **n**; `?names=all`.
-- **Show projections** (`#toggle-projections`, on): unchecking hides every arrow (`projVis`;
-  composes with the Hypothetical toggle).
-- **See inside** (`#see-inside`, off): `createNearCull` recomputes each frame the structures on
-  the camera-facing side (centre > `NEAR_CULL_BIAS` past the centre plane) and hides them so deep
-  nuclei show; snapshots visibility to restore; composes with `?only=`; arrows stay. `cull.tick()`
-  runs after `controls.update()`.
+- **Show projections** (`#toggle-projections`, **off**): checking it draws every arrow at once
+  (`projVis`; composes with the Hypothetical toggle). Off is not "no arrows": the set the current
+  focus lights is exempt (`projVis.setFocusArrows`, fed by `selection.onIsolate`'s third argument),
+  so a circuit / drug / structure focus still draws its own pathways and only those.
+- **See inside** (`#see-inside`, off): `createNearCull` recomputes each frame which **outer-shell**
+  structures (`group == "lobe"` + the cerebellum, `isShellMesh`) sit on the camera-facing side
+  (centre > `NEAR_CULL_BIAS` past the orbit-centre plane) and hides them, peeling the near cortex off
+  the deep nuclei; the nuclei themselves are never culled, or the mode would hide what it is for.
+  Snapshots visibility to restore; composes with `?only=`; arrows stay. `cull.tick()` runs after
+  `controls.update()`.
 - **Animations** (`#toggle-animations`, `animSettings.enabled`): the decorative motion (intro,
   gem-dot twinkle, drug wash, circuit pulse). Default on for a fine pointer, off for coarse /
   reduced-motion; persisted. Off is *content-preserving*: focus still lights regions/arrows + shows

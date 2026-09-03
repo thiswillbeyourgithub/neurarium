@@ -91,7 +91,7 @@ moment it registers.
 | `#popup=about\|legend\|sources\|shortcuts\|whatsnew` | the open popup |
 | `#cam=<az>,<polar>,<dist>[,<tx>,<ty>,<tz>]` | the orbit: degrees around the pivot, distance from it, and the pivot when a focus moved it off centre |
 | `#explode=0..1` / `#transparency=0.1..1` | the two sliders |
-| `#rotate=0` / `#names=1` / `#arrows=0` / `#inside=1` | Auto-rotate / Show all names / Show projections / See inside |
+| `#rotate=0` / `#names=1` / `#arrows=1` / `#inside=1` | Auto-rotate / Show all names / Show projections / See inside |
 | `#anim=0\|1` / `#speed=<multiplier>` | Animations and the animation-speed multiplier (1 = the reference pace) |
 | `#colors=sign` | colour arrows by excitatory/inhibitory instead of by transmitter |
 | `#collapsed=1` / `#settings=0` | the panel body collapsed / the Controls sub-section closed |
