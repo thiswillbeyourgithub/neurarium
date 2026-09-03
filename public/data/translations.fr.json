@@ -256,6 +256,7 @@
   "Hypothalamo-hypophyseal axis": "Axe hypothalamo-hypophysaire",
   "In French, the release notes printed each entry's commit codes twice; they now appear once, as links": "En français, les notes de version affichaient deux fois les codes de commit de chaque entrée ; ils n'apparaissent plus qu'une fois, sous forme de liens",
   "In the data browser, choosing a single kind of fact no longer repeats that kind on every row: the column disappears and its space goes to the name and to what the fact says": "Dans l'explorateur de données, choisir un seul type de fait ne répète plus ce type sur chaque ligne : la colonne disparaît et sa place revient au nom et à ce que le fait énonce",
+  "In the data browser, picking one kind of fact now names the middle column after that kind (\"Functional circuits\", \"Receptor expression regions\") instead of the abstract word \"notion\", so the header says what the cells under it hold": "Dans l'explorateur de données, choisir un seul type de fait nomme désormais la colonne du milieu d'après ce type (« Circuits fonctionnels », « Régions d'expression des récepteurs ») au lieu du mot abstrait « énoncé » : l'en-tête dit ce que contiennent les cellules en dessous",
   "In the drugs list, a metabolite that itself has metabolites now shows them indented under it": "Dans la liste des médicaments, un métabolite qui a lui-même des métabolites les affiche désormais en retrait sous lui",
   "Indirect pathway": "Voie indirecte",
   "Inducer": "Inducteur",

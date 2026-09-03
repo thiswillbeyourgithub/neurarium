@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.59.1",
+      "date": "2026-09-03",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "In the data browser, picking one kind of fact now names the middle column after that kind (\"Functional circuits\", \"Receptor expression regions\") instead of the abstract word \"notion\", so the header says what the cells under it hold",
+          "commits": [
+            "961c891"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.59.0",
       "date": "2026-09-03",
       "entries": [
