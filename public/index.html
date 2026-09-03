@@ -1608,6 +1608,18 @@
       .node-grid.no-kind .node-head, .node-grid.no-kind .node-row {
         --node-grid-w: 390px;
       }
+      /* That kind states its whole claim in the name (a circuit, a projection group), so
+         the notion column is blank on every row: it goes too and the name takes the width,
+         the kind having moved over to head it. Always paired with .no-kind. */
+      .node-grid.no-notion .node-head-notion, .node-grid.no-notion .node-notion {
+        display: none;
+      }
+      .node-grid.no-notion .node-head-main, .node-grid.no-notion .node-main {
+        grid-template-columns: minmax(110px, 1fr);
+      }
+      .node-grid.no-notion .node-head, .node-grid.no-notion .node-row {
+        --node-grid-w: 240px;
+      }
       /* Too narrow for four columns (a phone, or the panel back at sidebar width): the
          columns keep their width and the grid scrolls sideways instead of stacking,
          so a row always reads as one line across the same four fields. */
@@ -1621,6 +1633,12 @@
         }
         .node-grid.no-kind .node-head-main, .node-grid.no-kind .node-main {
           grid-template-columns: minmax(95px, 1fr) minmax(165px, 1.6fr);
+        }
+        .node-grid.no-notion .node-head, .node-grid.no-notion .node-row {
+          --node-grid-w: 200px;
+        }
+        .node-grid.no-notion .node-head-main, .node-grid.no-notion .node-main {
+          grid-template-columns: minmax(95px, 1fr);
         }
       }
       .node-filters { display: flex; gap: 4px; margin-bottom: 6px; }

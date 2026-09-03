@@ -411,7 +411,9 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     (key === "grade" ? head : headMain).appendChild(cell);
   }
   head.appendChild(headMain);
-  // The notion column's own name, kept so apply() can swap the kind in and back out.
+  // The two swappable columns' own names, kept so apply() can put the selected kind
+  // over one of them and hand the name back when it goes.
+  const nameDefault = headCells.name.textContent;
   const notionDefault = headCells.notion.textContent;
 
   const rowEl = (r) => {
@@ -485,6 +487,14 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     // heads the notion column instead: "what this node states" is abstract, while
     // "Receptor expression regions" says outright what the cells under it are.
     grid.classList.toggle("no-kind", kind !== "");
+    // Some kinds state their whole claim in the name (a circuit, a projection group),
+    // leaving the notion cell empty on every row. Then the notion column goes too and
+    // the kind heads the NAME column, rather than pairing a nameless header with a
+    // column of blanks. Read off the rows, not a kind list, so a kind that later gains
+    // a notion (or loses one) is handled without a second place to update.
+    const noNotion = kind !== "" && !matches.some((r) => r.notion);
+    grid.classList.toggle("no-notion", noNotion);
+    headCells.name.textContent = noNotion ? kindLabel(kind) : nameDefault;
     headCells.notion.textContent = kind === "" ? notionDefault : kindLabel(kind);
     limit = PAGE_FIRST;
     render();
