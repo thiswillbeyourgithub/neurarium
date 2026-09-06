@@ -95,6 +95,13 @@ NAME_PATTERNS = [
     (re.compile(r"nmda"), "nmda"),
     (re.compile(r"cannabinoidcb1|^cb1$"), "cb1"),
     (re.compile(r"opiatesigma|sigma1|^sigma$"), "sigma1"),
+    # The opioid receptors reach PDSP under two naming schools: the older "OPIATE
+    # Mu/Delta/Kappa" rows carry a Unigene, so the gene join gets them, while the
+    # newer bare MOR/DOR/KOR rows leave it blank. Anchored, since these are exact
+    # three-letter names (an unanchored "mor" would swallow e.g. "morphine").
+    (re.compile(r"^mor$"), "mu"),
+    (re.compile(r"^dor$"), "delta"),
+    (re.compile(r"^kor$"), "kappa"),
     (re.compile(r"5ht2a"), "5ht2a"), (re.compile(r"5ht2c"), "5ht2c"),
     (re.compile(r"5ht2b"), "5ht2b"), (re.compile(r"5ht7"), "5ht7"),
     (re.compile(r"5ht6"), "5ht6"), (re.compile(r"5ht1a"), "5ht1a"),
@@ -177,6 +184,8 @@ ALIAS = {
     "lisdexamfetamine": (["Amphetamine,(+)", "(+)-Amphetamine"], "prodrug",
                          "(+)-amphetamine"),
     "serdexmethylphenidate": (["METHYLPHENIDATE"], "prodrug", "methylphenidate"),
+    "pethidine": (["Meperidine"], "identity", "meperidine"),
+    "tramadol": (["Tramadol(+-)"], "identity", "(±)-tramadol"),
 }
 
 _ALL_ROWS = None
@@ -225,6 +234,25 @@ def resolve_rows(name, drug_id):
 # from the affinity stats and counted as inactive instead.
 SENTINEL_NM = 10000.0
 
+# A curated exclusion of individual PDSP rows, keyed by Ki id (the CSV row) and
+# carrying the contradiction that justifies dropping it. The mirror of the
+# `curated: true` inclusion `_is_curated_ki` protects: both are hand judgements
+# the automated pass must not undo. Keep it tiny, and only for a row the rest of
+# the database contradicts by orders of magnitude, never for one we merely
+# dislike: a single surprising assay is data, a self-contradicting one is noise.
+KI_ROW_BLOCKLIST = {
+    # Wentland MP et al., 2009 is a coherent opioid panel for every other compound
+    # in it (buprenorphine, naltrexone, naloxone, nalmefene, pentazocine,
+    # hydromorphone all read true), but its tramadol row is misaligned: it puts
+    # tramadol at delta 9.4 nM and kappa 14 nM, i.e. in the potent-opioid tier of
+    # the very same table, while Codd EE et al., 1995 (rat forebrain) and Olson KM
+    # et al., 2019 (human cloned) both put tramadol's delta and kappa above the
+    # 10 uM ceiling. Aggregating them would publish tramadol as a potent delta
+    # ligand. Its mu row (55883, 1600 nM) agrees with the literature and stays.
+    55912: "tramadol/delta 9.4 nM: contradicted by Codd 1995 + Olson 2019 (>10 uM)",
+    55941: "tramadol/kappa 14 nM: contradicted by Codd 1995 + Olson 2019 (>10 uM / 890 nM)",
+}
+
 
 def _is_human(r):
     return (r.get(COL_SPECIES) or "").strip().upper() == "HUMAN"
@@ -241,7 +269,8 @@ def summarize_target(rows, our_target):
     """Aggregate the rows matching `our_target`. Splits assays into active vs the
     inactive (>=10 uM) ceiling, counts human vs non-human, prefers human for the
     reported stats, and cites one representative CSV row (verified-grade source)."""
-    hits = [r for r in rows if matches_our_target(resolve_target(r) or "", our_target)]
+    hits = [r for r in rows if matches_our_target(resolve_target(r) or "", our_target)
+            and int(r.get(COL_ID) or 0) not in KI_ROW_BLOCKLIST]
     if not hits:
         return None
 
