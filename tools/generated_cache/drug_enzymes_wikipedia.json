@@ -507,6 +507,32 @@
    ]
   }
  ],
+ "codeine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "codeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP2D6 (to morphine ), CYP3A4 (to norcodeine ), UGT2B7 (to 3- and 6- glucuronides of codeine, norcodeine, and morphine)"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "codeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP2D6 (to morphine ), CYP3A4 (to norcodeine ), UGT2B7 (to 3- and 6- glucuronides of codeine, norcodeine, and morphine)"
+    }
+   ]
+  }
+ ],
  "daridorexant": [
   {
    "enzyme": "cyp3a4",
@@ -984,6 +1010,20 @@
      "page": "alcohol_drug",
      "provenance": "verified",
      "quote": "Metabolism | Liver (90%): • Alcohol dehydrogenase • MEOS ( CYP2E1 )"
+    }
+   ]
+  }
+ ],
+ "fentanyl": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fentanyl",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , primarily by CYP3A4 Norfentanyl Despropionylfentanyl (minor) Hydroxyfentanyl (minor) Hydroxynorfentanyl (minor secondary metabolite)"
     }
    ]
   }
@@ -1738,6 +1778,33 @@
    ]
   }
  ],
+ "oxycodone": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxycodone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : mainly CYP3A , and, to a much lesser extent, CYP2D6 (~5%); 95% metabolized (i.e., 5% excreted unchanged)"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxycodone",
+     "provenance": "verified",
+     "quote": "Oxycodone is metabolized by the enzymes CYP3A4 and CYP2D6 ."
+    }
+   ]
+  }
+ ],
  "paroxetine": [
   {
    "enzyme": "cyp2d6",
@@ -1791,6 +1858,44 @@
     }
    ],
    "strength": "major"
+  }
+ ],
+ "pethidine": [
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pethidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP2B6 , CYP3A4 , CYP2C19 , Carboxylesterase 1"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pethidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP2B6 , CYP3A4 , CYP2C19 , Carboxylesterase 1"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pethidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP2B6 , CYP3A4 , CYP2C19 , Carboxylesterase 1"
+    }
+   ]
   }
  ],
  "phenobarbital": [
@@ -2297,6 +2402,47 @@
    ]
   }
  ],
+ "tapentadol": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tapentadol",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (mostly via glucuronidation but also by CYP2C9 , CYP2C19 , CYP2D6 )"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tapentadol",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (mostly via glucuronidation but also by CYP2C9 , CYP2C19 , CYP2D6 )"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tapentadol",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (mostly via glucuronidation but also by CYP2C9 , CYP2C19 , CYP2D6 )"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
  "tasimelteon": [
   {
    "enzyme": "cyp1a2",
@@ -2429,6 +2575,32 @@
      "page": "topiramate",
      "provenance": "verified",
      "quote": "- Topiramate itself is a weak inhibitor of CYP2C19 and induces CYP3A4 ; a decrease in plasma levels of estrogens and digoxin has been noted during topiramate therapy."
+    }
+   ]
+  }
+ ],
+ "tramadol": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tramadol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver -mediated demethylation and glucuronidation via CYP2D6 & CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tramadol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver -mediated demethylation and glucuronidation via CYP2D6 & CYP3A4"
     }
    ]
   }

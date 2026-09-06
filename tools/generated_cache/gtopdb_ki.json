@@ -3509,6 +3509,27 @@
     }
    }
   },
+  "codeine": {
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "codeine",
+     "provenance": "verified",
+     "quote": "codeine at μ receptor (OPRM1, Human): Agonist / Full agonist, pKi 6.9 [PMID 9686407]",
+     "species": "Human"
+    }
+   }
+  },
   "cyamemazine": {
    "5ht1a": {
     "action": "antagonist",
@@ -4412,6 +4433,65 @@
     }
    }
   },
+  "fentanyl": {
+   "delta": {
+    "action": "agonist",
+    "ki": {
+     "max": 158.4893,
+     "median": 158.4893,
+     "min": 158.4893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fentanyl",
+     "provenance": "verified",
+     "quote": "fentanyl at δ receptor (OPRD1, Human): Agonist / Full agonist, pKi 6.8 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 79.4328,
+     "min": 79.4328,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fentanyl",
+     "provenance": "verified",
+     "quote": "fentanyl at κ receptor (OPRK1, Human): Agonist / Partial agonist, pKi 7.1 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.631,
+     "median": 0.631,
+     "min": 0.631,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fentanyl",
+     "provenance": "verified",
+     "quote": "fentanyl at μ receptor (OPRM1, Human): Agonist / Full agonist, pKi 9.2 [PMID 9686407]",
+     "species": "Human"
+    }
+   }
+  },
   "flibanserin": {
    "5ht1a": {
     "action": "agonist",
@@ -5280,6 +5360,65 @@
      "page": "haloperidol",
      "provenance": "verified",
      "quote": "haloperidol at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 5.7-6.1 [PMID 8935801]",
+     "species": "Human"
+    }
+   }
+  },
+  "hydromorphone": {
+   "delta": {
+    "action": "agonist",
+    "ki": {
+     "max": 38.0189,
+     "median": 38.0189,
+     "min": 38.0189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19282177",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "hydromorphone",
+     "provenance": "verified",
+     "quote": "hydromorphone at δ receptor (OPRD1, Human): Agonist / Agonist, pKi 7.42 [PMID 19282177]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "agonist",
+    "ki": {
+     "max": 2.8184,
+     "median": 2.8184,
+     "min": 2.8184,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19282177",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "hydromorphone",
+     "provenance": "verified",
+     "quote": "hydromorphone at κ receptor (OPRK1, Human): Agonist / Agonist, pKi 8.55 [PMID 19282177]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.2818,
+     "median": 0.2818,
+     "min": 0.2818,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19282177",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "hydromorphone",
+     "provenance": "verified",
+     "quote": "hydromorphone at μ receptor (OPRM1, Human): Agonist / Agonist, pKi 9.55 [PMID 19282177]",
      "species": "Human"
     }
    }
@@ -7232,6 +7371,65 @@
     }
    }
   },
+  "morphine": {
+   "delta": {
+    "action": "agonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "morphine",
+     "provenance": "verified",
+     "quote": "morphine at δ receptor (OPRD1, Human): Agonist / Full agonist, pKi 6.9 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 50.1187,
+     "min": 50.1187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "morphine",
+     "provenance": "verified",
+     "quote": "morphine at κ receptor (OPRK1, Human): Agonist / Partial agonist, pKi 7.3 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 1.0,
+     "median": 1.0,
+     "min": 1.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "morphine",
+     "provenance": "verified",
+     "quote": "morphine at μ receptor (OPRM1, Human): Agonist / Full agonist, pKi 9 [PMID 9686407]",
+     "species": "Human"
+    }
+   }
+  },
   "nabilone": {
    "cb1": {
     "action": "agonist",
@@ -7857,6 +8055,76 @@
     }
    }
   },
+  "pentazocine": {
+   "delta": {
+    "action": "agonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 50.1187,
+     "min": 50.1187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pentazocine",
+     "provenance": "verified",
+     "quote": "(-)-pentazocine at δ receptor (OPRD1, Human): Agonist / Full agonist, pKi 7.3 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 15.8489,
+     "median": 9.1804,
+     "min": 2.5119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pentazocine",
+     "provenance": "verified",
+     "quote": "(-)-pentazocine at κ receptor (OPRK1, Human): Agonist / Partial agonist, pKi 7.8-8.6 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 3.9811,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pentazocine",
+     "provenance": "verified",
+     "quote": "(-)-pentazocine at μ receptor (OPRM1, Human): Agonist / Partial agonist, pKi 8.4 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "sigma1": {
+    "action": "antagonist",
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pentazocine",
+     "provenance": "verified",
+     "quote": "(-)-pentazocine at sigma non-opioid intracellular receptor 1 (SIGMAR1, Human): Antagonist / Antagonist, no affinity reported",
+     "species": "Human"
+    }
+   }
+  },
   "perospirone": {
    "5ht2a": {
     "action": "antagonist",
@@ -8047,6 +8315,41 @@
      "page": "perphenazine",
      "provenance": "verified",
      "quote": "perphenazine at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 8.1 [PMID 12629531]",
+     "species": "Human"
+    }
+   }
+  },
+  "pethidine": {
+   "delta": {
+    "action": "agonist",
+    "pmid": "11585443",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pethidine",
+     "provenance": "verified",
+     "quote": "pethidine at δ receptor (OPRD1, Human): Agonist / Agonist, pIC50 5 [PMID 11585443]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "agonist",
+    "pmid": "11585443",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pethidine",
+     "provenance": "verified",
+     "quote": "pethidine at κ receptor (OPRK1, Human): Agonist / Agonist, pIC50 5.63 [PMID 11585443]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "agonist",
+    "pmid": "11585443",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pethidine",
+     "provenance": "verified",
+     "quote": "pethidine at μ receptor (OPRM1, Human): Agonist / Agonist, pIC50 6.5 [PMID 11585443]",
      "species": "Human"
     }
    }
@@ -10252,6 +10555,46 @@
     }
    }
   },
+  "tapentadol": {
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 158.4892,
+     "median": 158.4892,
+     "min": 158.4892,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "17656655",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tapentadol",
+     "provenance": "verified",
+     "quote": "tapentadol at μ receptor (OPRM1, Human): Agonist / Agonist, pKi 6.8 [PMID 17656655]",
+     "species": "Human"
+    }
+   },
+   "net": {
+    "action": "reuptake_inhibitor",
+    "ki": {
+     "max": 8709.637,
+     "median": 8709.637,
+     "min": 8709.637,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "17656655",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tapentadol",
+     "provenance": "verified",
+     "quote": "tapentadol at NET (SLC6A2, Human): Inhibitor / Inhibition, pKi 5.06 [PMID 17656655]",
+     "species": "Human"
+    }
+   }
+  },
   "tasimelteon": {
    "mt1": {
     "action": "agonist",
@@ -10625,6 +10968,65 @@
      "page": "tizanidine",
      "provenance": "verified",
      "quote": "tizanidine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Agonist, pKi 6 [PMID 36101495]",
+     "species": "Human"
+    }
+   }
+  },
+  "tramadol": {
+   "delta": {
+    "action": "agonist",
+    "ki": {
+     "max": 9.3325,
+     "median": 9.3325,
+     "min": 9.3325,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19027293",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tramadol",
+     "provenance": "verified",
+     "quote": "tramadol at δ receptor (OPRD1, Human): Agonist / Agonist, pKi 8.03 [PMID 19027293]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "agonist",
+    "ki": {
+     "max": 14.1254,
+     "median": 14.1254,
+     "min": 14.1254,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19282177",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tramadol",
+     "provenance": "verified",
+     "quote": "tramadol at κ receptor (OPRK1, Human): Agonist / Agonist, pKi 7.85 [PMID 19282177]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 1584.8925,
+     "median": 1584.8925,
+     "min": 1584.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19282177",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tramadol",
+     "provenance": "verified",
+     "quote": "tramadol at μ receptor (OPRM1, Human): Agonist / Agonist, pKi 5.8 [PMID 19282177]",
      "species": "Human"
     }
    }
