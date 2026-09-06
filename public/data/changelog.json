@@ -1,6 +1,42 @@
 {
   "versions": [
     {
+      "version": "3.60.0",
+      "date": "2026-09-06",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Ten opioid analgesics join the dataset: morphine, tramadol, codeine, oxycodone, fentanyl, hydromorphone, tapentadol, pethidine, pentazocine and heroin. Until now the only opioids modeled were the addiction-medicine ones (buprenorphine, methadone, naltrexone, naloxone, nalmefene), because the drug corpus grew from a psychiatric prescriber's guide and from lists of psychiatric medications, neither of which covers pain medicine. The mu, delta and kappa receptors were already in the atlas, so each of these lights the brain the day it lands",
+          "commits": []
+        },
+        {
+          "category": "added",
+          "text": "Tramadol and pethidine also inhibit serotonin and noradrenaline reuptake, so both drive the by-mechanism flow overlay along the ascending monoamine pathways, not only the opioid dots",
+          "commits": []
+        },
+        {
+          "category": "data",
+          "text": "Each new drug carries its measured affinities (PDSP, completed by the Guide to Pharmacology where PDSP has no assay), its elimination half-life, its metabolising enzymes and its drug class, every one of them quote-checked against its source. Codeine and tramadol bring the CYP2D6 story with them, so their interaction lists build themselves",
+          "commits": []
+        },
+        {
+          "category": "data",
+          "text": "Heroin is modeled as what it is: a prodrug with low affinity of its own, whose effect is carried by its active metabolites 6-monoacetylmorphine and morphine, the latter now linked to its own entry",
+          "commits": []
+        },
+        {
+          "category": "fixed",
+          "text": "A single affinity measurement placed tramadol among the potent delta and kappa opioids, three orders of magnitude away from every other measurement of the same drug in the same database. It is now excluded by name, with the contradiction written down beside it",
+          "commits": []
+        },
+        {
+          "category": "fixed",
+          "text": "The affinity reader missed every row filed under the short receptor names MOR, DOR and KOR, which carry no gene identifier. Those measurements now count, which sharpens the figures shown for several opioids",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.59.3",
       "date": "2026-09-03",
       "entries": [
