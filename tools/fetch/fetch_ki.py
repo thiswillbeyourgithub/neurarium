@@ -34,6 +34,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))   # repo root (script in tools/fetch/)
 sys.path.insert(0, os.path.dirname(HERE))        # tools/ for the shared drugs_io module
+import chirality  # noqa: E402
 import drugs_io  # noqa: E402
 CSV_PATH = os.path.join(REPO, "data_sources", "books", "pdsp_ki", "KiDatabase.csv")
 
@@ -185,7 +186,6 @@ ALIAS = {
                          "(+)-amphetamine"),
     "serdexmethylphenidate": (["METHYLPHENIDATE"], "prodrug", "methylphenidate"),
     "pethidine": (["Meperidine"], "identity", "meperidine"),
-    "tramadol": (["Tramadol(+-)"], "identity", "(±)-tramadol"),
 }
 
 _ALL_ROWS = None
@@ -210,12 +210,24 @@ def combo_constituents(name):
     return None
 
 
+def _ligand_is(raw, want, drug_id):
+    """Whether one CSV row's ligand name is this drug's own measurement.
+
+    The name must match on its stem AND carry a stereochemistry this drug may
+    claim: PDSP files "PENTAZOCINE (+)", "Morphine,(-)" and "Tramadol(+-)" beside
+    the untagged name, and folding the tag away pooled an enantiomer's assays into
+    the racemate's median (see tools/chirality.py for which drug denotes what).
+    """
+    stem, tag = chirality.split_stereo(raw)
+    return norm(stem) in want and chirality.tag_allowed(tag, drug_id)
+
+
 def resolve_rows(name, drug_id):
     """Return (rows, mapping) for a drug. mapping is None for a direct name match,
     else {pdsp_names, relation, note} when recovered through the alias map."""
     rows = all_rows()
     want = {norm(name), norm(drug_id)}
-    direct = [r for r in rows if norm(r.get(COL_LIGAND)) in want]
+    direct = [r for r in rows if _ligand_is(r.get(COL_LIGAND), want, drug_id)]
     if direct:
         return direct, None
     if drug_id in ALIAS:
@@ -251,6 +263,14 @@ KI_ROW_BLOCKLIST = {
     # ligand. Its mu row (55883, 1600 nM) agrees with the literature and stays.
     55912: "tramadol/delta 9.4 nM: contradicted by Codd 1995 + Olson 2019 (>10 uM)",
     55941: "tramadol/kappa 14 nM: contradicted by Codd 1995 + Olson 2019 (>10 uM / 890 nM)",
+    # Boess FG et al., 1994 puts ketanserin at 5-HT1F 1.25 nM. Ketanserin's entire
+    # 5-HT1 family sits at 1-10 uM across ~40 assays, Adham N et al., 1992 reads the
+    # same human 5-HT1F at the 10 uM ceiling, and that same 1994 paper's own
+    # ketanserin 5-HT1A rows are 2089-8912 nM. A lone value 8000x off the drug's
+    # every other 5-HT1 measurement, which would publish a selective 5-HT2A
+    # antagonist as a sub-nanomolar 5-HT1F ligand.
+    15912: "ketanserin/5ht1f 1.25 nM: contradicted by Adham 1992 (>10 uM) and by the "
+           "drug's whole 5-HT1 family at 1-10 uM",
 }
 
 

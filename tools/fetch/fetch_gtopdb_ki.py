@@ -58,6 +58,7 @@ REPO = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO / "tools"))
 sys.path.insert(0, str(REPO / "tools" / "fetch"))
 
+import chirality                                                   # noqa: E402
 import drugs_io                                                    # noqa: E402
 from fetch_allen import TARGET_GENES                               # noqa: E402
 from fetch_gtopdb import RECEPTOR_GENES                            # noqa: E402
@@ -301,9 +302,15 @@ def main() -> int:
     log(f"gene map covers {len({o for os_ in gene_owner.values() for o in os_})} "
         f"of {len(valid_targets)} targets")
 
-    by_ligand: dict[str, list[dict]] = defaultdict(list)
+    # Keyed by the STEM of the ligand name, with its optical-rotation tag kept
+    # beside each row: "(-)-pentazocine" and "pentazocine" share a stem but are
+    # different molecules, so the tag decides which drug may claim the row (see
+    # tools/chirality.py). Folding the tag away here published one enantiomer's
+    # curated affinities as the racemate's.
+    by_ligand: dict[str, list[tuple]] = defaultdict(list)
     for r in rows:
-        by_ligand[norm(r.get("Ligand"))].append(r)
+        stem, tag = chirality.split_stereo(r.get("Ligand"))
+        by_ligand[norm(stem)].append((tag, r))
 
     drugs = drugs_io.load_drugs()
     only = {x.strip() for x in args.only.split(",")} if args.only else None
@@ -317,7 +324,8 @@ def main() -> int:
         if only and drug["id"] not in only:
             continue
         key = LIGAND_ALIASES.get(norm(drug["name"]), norm(drug["name"]))
-        cands = by_ligand.get(key, [])
+        cands = [r for tag, r in by_ligand.get(key, [])
+                 if chirality.tag_allowed(tag, drug["id"])]
         if not cands:
             # A combination product has no single ligand record, which is expected.
             if " + " not in drug["name"] and "–" not in drug["name"]:

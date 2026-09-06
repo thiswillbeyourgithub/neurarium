@@ -1363,7 +1363,6 @@
 {"id": "q_6831b9bac4dc", "corpus": "wikipedia_pharm", "page": "agomelatine", "quote": "Agomelatine is a substrate of CYP1A2 , CYP2C9 and CYP2C19 ."}
 {"id": "q_6860c44d949a", "corpus": "stahl", "page": 530, "quote": "Elimination half-life 1.8–6.4 hours • Active metabolite", "heading": ["Midazolam", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_686bfe0a34fa", "corpus": "allen_ahba", "page": "GRIK1", "quote": "GRIK1 detected in temporal: probe 1026815 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
-{"id": "q_686f69464257", "corpus": "gtopdb_ki", "page": "propranolol", "quote": "(-)-propranolol at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 7.5 [PMID 9205951]", "species": "Human"}
 {"id": "q_68751e476d50", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 1D | 54 | 370 | – | Antagonist"}
 {"id": "q_687662bdf44f", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "α 2B | 88 | Human"}
 {"id": "q_689bfdb7476e", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in medulla: probe 1019914 PACall present in 211/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -3074,7 +3073,6 @@
 {"id": "q_ebe17abb0d9d", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in occipital: probe 1057496 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ebe249970073", "corpus": "stahl", "page": 279, "quote": "Substrate for CYP2D6", "heading": ["Dothiepin", "Dosing and use", "Dosage Forms"]}
 {"id": "q_ebf47ca116db", "corpus": "stahl", "page": 73, "quote": "Mean elimination half-life 75 hours (aripiprazole) and 94 hours (major metabolite dehydroaripiprazole)", "heading": ["Aripiprazole", "Dosing and use", "Pharmacokinetics"]}
-{"id": "q_ec0e85987965", "corpus": "gtopdb_ki", "page": "pentazocine", "quote": "(-)-pentazocine at μ receptor (OPRM1, Human): Agonist / Partial agonist, pKi 8.4 [PMID 9686407]", "species": "Human"}
 {"id": "q_eca6db96ce2d", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in midbrain: probe 1059351 PACall present in 145/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_eca7e7aacdd4", "corpus": "allen_ahba", "page": "GRM3", "quote": "GRM3 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1055926, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.79: frontal +0.47 (5d), temporal +0.40 (5d), parietal +0.34 (5d), thalamus +0.23 (5d), occipital +0.14 (5d), hippocampus -1.17 (5d)", "species": "Human"}
 {"id": "q_ecb30f489f29", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in vta: probe 1027284 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
