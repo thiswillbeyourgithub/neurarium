@@ -274,6 +274,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Kokain_-_Cocaine.svg",
     "title": "Cocaine"
   },
+  "codeine": {
+    "file": "File:Codeine_Structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Codeine_Structure.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Codeine"
+  },
   "cyamemazine": {
     "file": "File:Cyamemazine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Cyamemazine.svg",
@@ -399,6 +404,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Ethanol-2D-flat.svg",
     "title": "Alcohol (drug)"
   },
+  "fentanyl": {
+    "file": "File:Fentanyl.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Fentanyl.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Fentanyl"
+  },
   "flibanserin": {
     "file": "File:Flibanserin.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Flibanserin.svg",
@@ -473,6 +483,11 @@
     "file": "File:Haloperidol.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Haloperidol.svg",
     "title": "Haloperidol"
+  },
+  "hydromorphone": {
+    "file": "File:Hydromorphone_skeletal.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Hydromorphone_skeletal.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Hydromorphone"
   },
   "hydroxyzine": {
     "file": "File:Hydroxyzine.svg",
@@ -694,6 +709,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Molindone.svg",
     "title": "Molindone"
   },
+  "morphine": {
+    "file": "File:Morphine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Morphine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Morphine"
+  },
   "nalmefene": {
     "file": "File:Nalmefene.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Nalmefene.svg",
@@ -763,6 +783,11 @@
     "file": "File:Oxcarbazepine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Oxcarbazepine.svg",
     "title": "Oxcarbazepine"
+  },
+  "oxycodone": {
+    "file": "File:Oxycodone.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Oxycodone.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Oxycodone"
   },
   "paliperidone": {
     "file": "File:Paliperidone.svg",
@@ -1083,6 +1108,11 @@
     "file": "File:Topiramate_structure.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Topiramate_structure.svg",
     "title": "Topiramate"
+  },
+  "tramadol": {
+    "file": "File:Tramadol_as_a_racemic_mixture.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Tramadol_as_a_racemic_mixture.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Tramadol"
   },
   "tranylcypromine": {
     "file": "File:Tranylcypromine stereoisomers labelled.svg",
