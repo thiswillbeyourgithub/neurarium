@@ -548,6 +548,15 @@ Stahl-bound, their bindings sourced from measured **PDSP Ki** instead. Adding a 
 new row in `drugs_data.jsonl` (see Changing the data), so the corpus is open-ended, not a
 fixed Stahl list.
 
+> [!NOTE]
+> **The roster's scope is CNS-active, not psychiatric.** Both growth routes so far were
+> psychiatry-shaped (Stahl's monographs, then the Wikipedia *psychotropic / psychiatric
+> medications* lists the roster pass diffed against), so whole CNS families were never
+> candidates and their absence looked deliberate when it was only an artefact of the
+> sources. The opioid analgesics closed the first such hole; the remaining families are
+> surveyed in `docs/SOURCING_GAPS.md`. A drug belongs here when it acts on a modeled
+> target, whatever specialty prescribes it.
+
 - **Data.** The drugs live in `tools/data/drugs_data.jsonl`, read by `_load_drugs`. Vocabularies are
   defined once in `generate_data.py`: `DRUG_CATEGORY_LABELS`, `DRUG_ACTIONS` (action -> {label, net
   `effect`}), `DRUG_EFFECT_COLORS`/`DRUG_EFFECT_LABELS` (boost/block/modulate), `DRUG_TARGETS`
