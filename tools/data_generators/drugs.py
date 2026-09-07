@@ -87,6 +87,11 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     "antiemetic": {"en": "Antiemetic / prokinetic",
                    "fr": "Antiémétique / procinétique"},
     "anesthetic": {"en": "Anesthetic", "fr": "Anesthésique"},
+    # Only for the drugs whose whole indication is seizures. The older
+    # anticonvulsants that psychiatry prescribes for mood (carbamazepine,
+    # valproate, lamotrigine) keep the mood_stabilizer class their own source
+    # states, which is how a prescriber meets them.
+    "anticonvulsant": {"en": "Anticonvulsant", "fr": "Anticonvulsivant"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 
@@ -443,6 +448,15 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
               "type": "ion_channel", "system": None,
               "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel",
               "regions": ["thalamus", "frontal", "temporal"]},
+    # The enzyme that DEGRADES GABA, so blocking it raises GABA tone. It sits
+    # in the mitochondria of neurons and astrocytes rather than at the synapse,
+    # which is why it is an enzyme target and not a transporter like GAT.
+    "gaba_t": {"name": {"en": "GABA transaminase (GABA-T)",
+                        "fr": "GABA transaminase (GABA-T)"},
+               "type": "enzyme", "system": "gabaergic",
+               "wikipedia": "https://en.wikipedia.org/wiki/4-Aminobutyrate_aminotransferase",
+               "regions": ["frontal", "temporal", "thalamus", "hippocampus",
+                           "cerebellum"]},
     "sv2a": {"name": {"en": "Synaptic vesicle protein 2A (SV2A)",
                       "fr": "Protéine 2A des vésicules synaptiques (SV2A)"},
              "type": "vesicle_protein", "system": None,

@@ -953,6 +953,26 @@
         }
       ]
     },
+    "gaba_t": {
+      "donors": 6,
+      "profile": {
+        "cerebellum": -0.69,
+        "frontal": 0.22,
+        "hippocampus": -1.25,
+        "temporal": 0.27,
+        "thalamus": -0.06
+      },
+      "reliability": 0.74,
+      "sources": [
+        {
+          "corpus": "allen_ahba",
+          "page": "ABAT",
+          "provenance": "verified",
+          "quote": "ABAT relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1010530, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: temporal +0.27 (6d), frontal +0.22 (6d), thalamus -0.06 (6d), cerebellum -0.69 (6d), hippocampus -1.25 (6d)",
+          "species": "Human"
+        }
+      ]
+    },
     "gat": {
       "donors": 5,
       "profile": {

@@ -4925,6 +4925,53 @@
         }
       ]
     },
+    "gaba_t": {
+      "cerebellum": [
+        {
+          "corpus": "allen_ahba",
+          "page": "ABAT",
+          "provenance": "verified",
+          "quote": "ABAT detected in cerebellum: probe 1010530 PACall present in 368/368 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "frontal": [
+        {
+          "corpus": "allen_ahba",
+          "page": "ABAT",
+          "provenance": "verified",
+          "quote": "ABAT detected in frontal: probe 1010530 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "hippocampus": [
+        {
+          "corpus": "allen_ahba",
+          "page": "ABAT",
+          "provenance": "verified",
+          "quote": "ABAT detected in hippocampus: probe 1010530 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "temporal": [
+        {
+          "corpus": "allen_ahba",
+          "page": "ABAT",
+          "provenance": "verified",
+          "quote": "ABAT detected in temporal: probe 1010530 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "thalamus": [
+        {
+          "corpus": "allen_ahba",
+          "page": "ABAT",
+          "provenance": "verified",
+          "quote": "ABAT detected in thalamus: probe 1010530 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ]
+    },
     "gat": {
       "cerebellum": [
         {

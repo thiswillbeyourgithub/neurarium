@@ -129,6 +129,11 @@
     "title": "Brexpiprazole",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Brexpiprazole.svg"
   },
+  "brivaracetam": {
+    "file": "File:Brivaracetam.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Brivaracetam.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Brivaracetam"
+  },
   "bromazepam": {
     "file": "File:Bromazepam.svg",
     "title": "Bromazepam",
@@ -409,6 +414,11 @@
     "title": "Alcohol (drug)",
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Ethanol-2D-flat.svg"
   },
+  "ethosuximide": {
+    "file": "File:Ethosuximide.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Ethosuximide.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Ethosuximide"
+  },
   "etomidate": {
     "file": "File:Etomidate.svg",
     "title": "Etomidate",
@@ -548,6 +558,11 @@
     "file": "File:Ketanserin.svg",
     "title": "Ketanserin",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Ketanserin.svg"
+  },
+  "lacosamide": {
+    "file": "File:Lacosamide.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Lacosamide.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Lacosamide"
   },
   "lamotrigine": {
     "file": "File:Lamotrigine.svg",
@@ -1228,6 +1243,11 @@
     "file": "File:Venlafaxine_stereoisomers_labelled.svg",
     "title": "Venlafaxine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Venlafaxine_stereoisomers_labelled.svg"
+  },
+  "vigabatrin": {
+    "file": "File:Vigabatrin.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Vigabatrin.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Vigabatrin"
   },
   "vilazodone": {
     "file": "File:Vilazodone.svg",

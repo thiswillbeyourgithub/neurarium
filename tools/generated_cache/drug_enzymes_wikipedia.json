@@ -241,6 +241,20 @@
    "strength": "major"
   }
  ],
+ "brivaracetam": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "brivaracetam",
+     "provenance": "verified",
+     "quote": "Metabolism | Hydrolysis by amidase , CYP2C19 -mediated hydroxylation"
+    }
+   ]
+  }
+ ],
  "buprenorphine": [
   {
    "enzyme": "cyp2c8",
@@ -1010,6 +1024,32 @@
      "page": "alcohol_drug",
      "provenance": "verified",
      "quote": "Metabolism | Liver (90%): • Alcohol dehydrogenase • MEOS ( CYP2E1 )"
+    }
+   ]
+  }
+ ],
+ "ethosuximide": [
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ethosuximide",
+     "provenance": "verified",
+     "quote": "Metabolism | liver ( CYP3A4 , CYP2E1 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ethosuximide",
+     "provenance": "verified",
+     "quote": "Metabolism | liver ( CYP3A4 , CYP2E1 )"
     }
    ]
   }

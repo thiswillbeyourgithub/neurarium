@@ -168,6 +168,7 @@
     "h3_antagonist": "H3 antagonist (wake-promoter)",
     "antiemetic": "Antiemetic / prokinetic",
     "anesthetic": "Anesthetic",
+    "anticonvulsant": "Anticonvulsant",
     "other": "Other"
   },
   "drug_targets": {
@@ -1240,6 +1241,73 @@
           "provenance": "verified"
         }
       ]
+    },
+    "gaba_t": {
+      "name": "GABA transaminase (GABA-T)",
+      "type": "enzyme",
+      "system": "gabaergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "thalamus",
+        "hippocampus",
+        "cerebellum"
+      ],
+      "classification_provenance": "llm",
+      "location_sources": {
+        "cerebellum": [
+          {
+            "quote_id": "q_841d46d5c821",
+            "provenance": "verified"
+          }
+        ],
+        "frontal": [
+          {
+            "quote_id": "q_52f1c08055d4",
+            "provenance": "verified"
+          }
+        ],
+        "hippocampus": [
+          {
+            "quote_id": "q_e6b36e2825e7",
+            "provenance": "verified"
+          }
+        ],
+        "temporal": [
+          {
+            "quote_id": "q_ba0549cb19d5",
+            "provenance": "verified"
+          }
+        ],
+        "thalamus": [
+          {
+            "quote_id": "q_904db39a7947",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.74,
+        "donors": 6,
+        "profile": {
+          "temporal": 0.27,
+          "frontal": 0.22,
+          "thalamus": -0.06,
+          "cerebellum": -0.69,
+          "hippocampus": -1.25
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_c6b3dc73c1a0",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "wikipedia": "https://en.wikipedia.org/wiki/4-Aminobutyrate_aminotransferase",
+      "wikipedia_provenance": "sourced",
+      "gene": "ABAT"
     },
     "sv2a": {
       "name": "Synaptic vesicle protein 2A (SV2A)",
@@ -2816,8 +2884,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1734,
-        "verified": 1611,
+        "total": 1738,
+        "verified": 1615,
         "uncertain": 111,
         "sourced": 0,
         "llm": 0,
@@ -2843,17 +2911,17 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 275,
-        "verified": 225,
+        "total": 279,
+        "verified": 226,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 50,
+        "llm": 53,
         "nosource": 0,
-        "missing": 50
+        "missing": 53
       },
       "drug_half_life": {
-        "total": 206,
-        "verified": 206,
+        "total": 210,
+        "verified": 210,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -2861,8 +2929,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 295,
-        "verified": 295,
+        "total": 298,
+        "verified": 298,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -2978,13 +3046,13 @@
         "missing": 0
       },
       "targets": {
-        "total": 21,
+        "total": 22,
         "verified": 20,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 1,
+        "llm": 2,
         "nosource": 0,
-        "missing": 1
+        "missing": 2
       },
       "target_polarity": {
         "total": 2,
@@ -2996,8 +3064,8 @@
         "missing": 0
       },
       "target_locations": {
-        "total": 107,
-        "verified": 93,
+        "total": 112,
+        "verified": 98,
         "uncertain": 0,
         "sourced": 0,
         "llm": 14,
@@ -3005,8 +3073,8 @@
         "missing": 14
       },
       "target_density": {
-        "total": 18,
-        "verified": 18,
+        "total": 19,
+        "verified": 19,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3023,32 +3091,32 @@
         "missing": 0
       },
       "references": {
-        "total": 415,
+        "total": 420,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 415,
+        "sourced": 420,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 4161,
-      "verified": 3851,
+      "total": 4183,
+      "verified": 3869,
       "uncertain": 146,
       "sourced": 0,
-      "llm": 150,
+      "llm": 154,
       "nosource": 14,
-      "missing": 164,
-      "backed": 3997,
+      "missing": 168,
+      "backed": 4015,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1715,
-      "bindings_with_ki": 1495,
+      "bindings_total": 1719,
+      "bindings_with_ki": 1493,
       "pct_bindings_with_ki": 87,
-      "drugs_total": 258,
-      "drugs_without_ki": 81,
+      "drugs_total": 262,
+      "drugs_without_ki": 85,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -3059,6 +3127,7 @@
         "armodafinil",
         "baclofen",
         "brexanolone",
+        "brivaracetam",
         "bromazepam",
         "brotizolam",
         "bumetanide",
@@ -3078,6 +3147,7 @@
         "estazolam",
         "eszopiclone",
         "ethanol",
+        "ethosuximide",
         "etomidate",
         "flurazepam",
         "furosemide",
@@ -3086,6 +3156,7 @@
         "glutethimide",
         "heroin",
         "isocarboxazid",
+        "lacosamide",
         "lamotrigine",
         "loflazepate",
         "loprazolam",
@@ -3126,6 +3197,7 @@
         "tranylcypromine",
         "tropatepine",
         "valproate",
+        "vigabatrin",
         "xenon",
         "zaleplon",
         "zonisamide",

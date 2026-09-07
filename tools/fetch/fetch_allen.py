@@ -139,6 +139,8 @@ TARGET_GENES = {
     "cav_a2d": ["CACNA2D1", "CACNA2D2"],
     "cav_t": ["CACNA1G", "CACNA1H", "CACNA1I"],
     "sv2a": ["SV2A"],
+    # GABA transaminase, the enzyme that degrades GABA (vigabatrin's target).
+    "gaba_t": ["ABAT"],
     "muscarinic": ["CHRM1", "CHRM2", "CHRM3", "CHRM4", "CHRM5"],
     "nicotinic": ["CHRNA4", "CHRNB2", "CHRNA7"],
     "alpha1": ["ADRA1A", "ADRA1B", "ADRA1D"],
