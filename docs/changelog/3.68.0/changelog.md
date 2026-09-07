@@ -1,0 +1,6 @@
+# 3.68.0 (2026-09-07)
+
+## Added
+
+- Ten more drugs, the last of the ones a survey had flagged as missing: the appetite and sympathomimetic family (phentermine, fenfluramine, ephedrine, pseudoephedrine, sibutramine, and yohimbine, the α2 blocker), plus tiapride, opipramol, atropine and betahistine. Phentermine could be reached before only as half of the phentermine/topiramate combination. Appetite suppressant is a new class: phentermine is a stimulant too and is listed under both, but sibutramine and fenfluramine are not, and what groups them is the appetite indication. (63a834c)
+    fr: Dix médicaments de plus, les derniers qu'un relevé signalait comme manquants : la famille des anorexigènes et sympathomimétiques (phentermine, fenfluramine, éphédrine, pseudoéphédrine, sibutramine et yohimbine, le bloqueur α2), plus le tiapride, l'opipramol, l'atropine et la bétahistine. La phentermine n'était accessible jusqu'ici que comme moitié de l'association phentermine/topiramate. Anorexigène est une nouvelle classe : la phentermine est aussi un stimulant et figure dans les deux, mais la sibutramine et la fenfluramine ne le sont pas, et c'est l'indication sur l'appétit qui les rassemble. (63a834c)

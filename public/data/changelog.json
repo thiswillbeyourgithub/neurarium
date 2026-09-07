@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.68.0",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Ten more drugs, the last of the ones a survey had flagged as missing: the appetite and sympathomimetic family (phentermine, fenfluramine, ephedrine, pseudoephedrine, sibutramine, and yohimbine, the α2 blocker), plus tiapride, opipramol, atropine and betahistine. Phentermine could be reached before only as half of the phentermine/topiramate combination. Appetite suppressant is a new class: phentermine is a stimulant too and is listed under both, but sibutramine and fenfluramine are not, and what groups them is the appetite indication.",
+          "commits": [
+            "63a834c"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.67.0",
       "date": "2026-09-07",
       "entries": [
