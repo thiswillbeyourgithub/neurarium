@@ -1,4 +1,9 @@
 {
+  "2cb": {
+    "file": "File:2C-B.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/2C-B.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "2C-B"
+  },
   "acamprosate": {
     "file": "File:Acamprosate_structure.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Acamprosate_structure.svg",
@@ -504,6 +509,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Hydroxyzine.svg",
     "title": "Hydroxyzine"
   },
+  "ibogaine": {
+    "file": "File:Ibogaine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Ibogaine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Ibogaine"
+  },
   "iloperidone": {
     "file": "File:Iloperidone.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iloperidone.svg",
@@ -654,6 +664,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Meprobamate.svg",
     "title": "Meprobamate"
   },
+  "mescaline": {
+    "file": "File:Mescaline_Structural_Formulae_bondline.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Mescaline_Structural_Formulae_bondline.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Mescaline"
+  },
   "mesoridazine": {
     "file": "File:Mesoridazine.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Mesoridazine.svg",
@@ -779,6 +794,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Nitrazepam.svg",
     "title": "Nitrazepam"
   },
+  "nitrous_oxide": {
+    "file": "File:Symbol category class.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/en/9/96/Symbol_category_class.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Nitrous oxide (medication)"
+  },
   "nortriptyline": {
     "file": "File:Nortriptyline.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Nortriptyline.svg",
@@ -853,6 +873,11 @@
     "file": "File:Phenazepam.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Phenazepam.svg",
     "title": "Phenazepam"
+  },
+  "phencyclidine": {
+    "file": "File:Phencyclidine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Phencyclidine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Phencyclidine"
   },
   "phenelzine": {
     "file": "File:Phenelzine_structure.svg",
@@ -949,6 +974,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Protriptyline.svg",
     "title": "Protriptyline"
   },
+  "psilocybin": {
+    "file": "File:Psilocybin,_Kekulé,_skeletal_formula_of_canonical_psilocybin.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Psilocybin%2C_Kekul%C3%A9%2C_skeletal_formula_of_canonical_psilocybin.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Psilocybin"
+  },
   "quazepam": {
     "file": "File:Quazepam.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Quazepam.svg",
@@ -1008,6 +1038,11 @@
     "file": "File:Safinamide.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Safinamide.svg",
     "title": "Safinamide"
+  },
+  "salvinorin_a": {
+    "file": "File:Salvinorin_A_chemical_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Salvinorin_A_chemical_structure.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Salvinorin A"
   },
   "scopolamine": {
     "file": "File:L-Scopolamin.svg",

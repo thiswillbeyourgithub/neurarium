@@ -1,5 +1,26 @@
 {
  "drugs": {
+  "2cb": {
+   "5ht2a": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.6607,
+     "median": 0.6607,
+     "min": 0.6607,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "16970404",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "2c-b",
+     "provenance": "verified",
+     "quote": "2C-B at 5-HT2A receptor (HTR2A, Human): Agonist / Agonist, pKi 9.18 [PMID 16970404]",
+     "species": "Human"
+    }
+   }
+  },
   "agomelatine": {
    "5ht2a": {
     "action": "antagonist",
@@ -5452,6 +5473,19 @@
     }
    }
   },
+  "ibogaine": {
+   "sert": {
+    "action": "reuptake_inhibitor",
+    "pmid": "35707155",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ibogaine",
+     "provenance": "verified",
+     "quote": "ibogaine at SERT (SLC6A4, Human): Inhibitor / Inhibition, pIC50 6.3 [PMID 35707155]",
+     "species": "Human"
+    }
+   }
+  },
   "iloperidone": {
    "5ht1a": {
     "action": "antagonist",
@@ -6664,6 +6698,19 @@
      "provenance": "verified",
      "quote": "memantine at GluN2C (Grin2c, Rat): Antagonist / Antagonist, pKi 6.15 [PMID 10229619]",
      "species": "Rat"
+    }
+   }
+  },
+  "mescaline": {
+   "5ht2a": {
+    "action": "agonist",
+    "pmid": "12877591",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mescaline",
+     "provenance": "verified",
+     "quote": "mescaline at 5-HT2A receptor (HTR2A, Human): Agonist / Agonist, pEC50 5.59 [PMID 12877591]",
+     "species": "Human"
     }
    }
   },
@@ -8305,6 +8352,19 @@
     }
    }
   },
+  "phencyclidine": {
+   "nmda": {
+    "action": "blocker",
+    "pmid": "17303642",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "phencyclidine",
+     "provenance": "verified",
+     "quote": "phencyclidine at GluN2C (GRIN2C, Human): Channel blocker / None, pIC50 7.11 [PMID 17303642]",
+     "species": "Human"
+    }
+   }
+  },
   "phenelzine": {
    "dat": {
     "action": "reuptake_inhibitor",
@@ -9151,6 +9211,19 @@
     }
    }
   },
+  "psilocybin": {
+   "5ht2c": {
+    "action": "agonist",
+    "pmid": "16061378",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "psilocybin",
+     "provenance": "verified",
+     "quote": "psilocybin at 5-HT2C receptor (HTR2C, Human): Agonist / Agonist, pEC50 7.13 [PMID 16061378]",
+     "species": "Human"
+    }
+   }
+  },
   "quetiapine": {
    "5ht1a": {
     "action": "agonist",
@@ -9943,6 +10016,27 @@
      "page": "safinamide",
      "provenance": "verified",
      "quote": "safinamide at Monoamine oxidase B (MAOB, Human): Inhibitor / Inhibition, pKi 6.35 [PMID 15027868]",
+     "species": "Human"
+    }
+   }
+  },
+  "salvinorin_a": {
+   "kappa": {
+    "action": "agonist",
+    "ki": {
+     "max": 15.8489,
+     "median": 8.9221,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12192085",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "salvinorin-a",
+     "provenance": "verified",
+     "quote": "salvinorin A at κ receptor (OPRK1, Human): Agonist / Full agonist, pKi 7.8-8.7 [PMID 12192085]",
      "species": "Human"
     }
    }

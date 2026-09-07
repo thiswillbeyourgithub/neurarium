@@ -86,6 +86,7 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     # pharmacology, like the recreational class.
     "antiemetic": {"en": "Antiemetic / prokinetic",
                    "fr": "Antiémétique / procinétique"},
+    "anesthetic": {"en": "Anesthetic", "fr": "Anesthésique"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 
@@ -282,6 +283,14 @@ DRUG_ALIASES: dict[str, list[str]] = {
     "amphetamine_dl": ["racemic amphetamine", "amfetamine", "speed"],
     "lsd": ["acid", "lysergide", "lysergic acid diethylamide", "LSD-25"],
     "dmt": ["dimethyltryptamine", "N,N-dimethyltryptamine", "ayahuasca"],
+    "psilocybin": ["magic mushrooms", "shrooms", "psilocybe", "champignons hallucinogènes"],
+    "salvinorin_a": ["salvia", "Salvia divinorum", "diviner's sage", "sauge des devins"],
+    "2cb": ["nexus", "bromo-mescaline", "4-bromo-2,5-dimethoxyphenethylamine"],
+    "nitrous_oxide": ["laughing gas", "protoxyde d'azote", "gaz hilarant", "N2O",
+                      "whippets", "MEOPA"],
+    "phencyclidine": ["PCP", "angel dust", "poussière d'ange"],
+    "ibogaine": ["iboga", "Tabernanthe iboga"],
+    "mescaline": ["peyote", "peyotl", "San Pedro cactus", "mescalin"],
     "thc": ["THC", "delta-9-tetrahydrocannabinol", "cannabis",
             "marijuana", "weed", "dronabinol", "haschisch", "hashish"],
     "cannabidiol": ["CBD", "Epidiolex", "Epidyolex", "cannabis", "hemp", "chanvre"],
