@@ -1,0 +1,8 @@
+# 3.60.2 (2026-09-07)
+
+## Fixed
+
+- A drug is shown everywhere as its name plus its best-known brand, and that brand was simply the first one its source listed. Buprenorphine therefore read as Suboxone, which is buprenorphine plus naloxone and a different medicine, because the book lists only its combinations and its long-acting injections. The brand shown is now one belonging to the drug itself, Subutex here, Temgesic for French readers. Along the way a brand whose parentheses only name a way of taking it now sheds them, so naltrexone reads Revia rather than "Revia (oral)". (a3902d7)
+  fr: Un médicament est présenté partout par son nom suivi de sa marque la plus connue, et cette marque était simplement la première que sa source citait. La buprénorphine s'affichait donc sous le nom de Suboxone, qui est de la buprénorphine associée à de la naloxone, donc un autre médicament, parce que l'ouvrage ne cite que ses associations et ses injections à libération prolongée. La marque affichée appartient désormais au médicament lui-même : Temgésic pour les lecteurs francophones. Au passage, une marque dont la parenthèse ne précise qu'un mode de prise s'en débarrasse, si bien que la naltrexone s'affiche Revia et non « Revia (oral) ».
+- A stray control character from the source extraction was sitting inside one brand name (Nuedexta) and inside the quote backing it. Removed, and the extractor now discards them. (33a3de0)
+  fr: Un caractère de contrôle parasite, hérité de l'extraction de la source, se trouvait dans un nom de marque (Nuedexta) ainsi que dans la citation qui l'appuie. Il a été retiré, et l'extraction les écarte désormais.

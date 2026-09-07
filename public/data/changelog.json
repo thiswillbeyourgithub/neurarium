@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.60.2",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "A drug is shown everywhere as its name plus its best-known brand, and that brand was simply the first one its source listed. Buprenorphine therefore read as Suboxone, which is buprenorphine plus naloxone and a different medicine, because the book lists only its combinations and its long-acting injections. The brand shown is now one belonging to the drug itself, Subutex here, Temgesic for French readers. Along the way a brand whose parentheses only name a way of taking it now sheds them, so naltrexone reads Revia rather than \"Revia (oral)\".",
+          "commits": [
+            "a3902d7"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A stray control character from the source extraction was sitting inside one brand name (Nuedexta) and inside the quote backing it. Removed, and the extractor now discards them.",
+          "commits": [
+            "33a3de0"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.60.1",
       "date": "2026-09-07",
       "entries": [
