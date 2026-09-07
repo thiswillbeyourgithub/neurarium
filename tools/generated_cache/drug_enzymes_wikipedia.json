@@ -1291,6 +1291,34 @@
    ]
   }
  ],
+ "istradefylline": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "istradefylline",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly CYP1A1 , CYP3A4 , and CYP3A5"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a5",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "istradefylline",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly CYP1A1 , CYP3A4 , and CYP3A5"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
  "ketamine": [
   {
    "enzyme": "cyp2b6",

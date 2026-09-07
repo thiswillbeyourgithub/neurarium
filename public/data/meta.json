@@ -91,6 +91,14 @@
       "enzyme_inhibitor": [
         1,
         "enzyme_inhibition"
+      ],
+      "precursor": [
+        1,
+        "precursor_supply"
+      ],
+      "synthesis_inhibitor": [
+        -1,
+        "synthesis_inhibition"
       ]
     },
     "vesicle_protein": {
@@ -169,6 +177,7 @@
     "antiemetic": "Antiemetic / prokinetic",
     "anesthetic": "Anesthetic",
     "anticonvulsant": "Anticonvulsant",
+    "antiparkinson": "Antiparkinson",
     "other": "Other"
   },
   "drug_targets": {
@@ -1241,6 +1250,130 @@
           "provenance": "verified"
         }
       ]
+    },
+    "aadc": {
+      "name": "Aromatic L-amino acid decarboxylase (AADC)",
+      "type": "enzyme",
+      "system": "dopaminergic",
+      "receptor": null,
+      "regions": [
+        "substantia_nigra",
+        "vta",
+        "raphe",
+        "locus_coeruleus",
+        "caudate",
+        "putamen"
+      ],
+      "classification_provenance": "llm",
+      "location_sources": {
+        "caudate": [
+          {
+            "quote_id": "q_5c7c53f95897",
+            "provenance": "verified"
+          }
+        ],
+        "locus_coeruleus": [
+          {
+            "quote_id": "q_c1d418c91af2",
+            "provenance": "verified"
+          }
+        ],
+        "putamen": [
+          {
+            "quote_id": "q_26019982c1c4",
+            "provenance": "verified"
+          }
+        ],
+        "raphe": [
+          {
+            "quote_id": "q_9dc38bc53e9f",
+            "provenance": "verified"
+          }
+        ],
+        "substantia_nigra": [
+          {
+            "quote_id": "q_55b024091614",
+            "provenance": "verified"
+          }
+        ],
+        "vta": [
+          {
+            "quote_id": "q_bf5ff4b7b031",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.98,
+        "donors": 6,
+        "profile": {
+          "locus_coeruleus": 3.88,
+          "raphe": 3.87,
+          "substantia_nigra": 3.33,
+          "vta": 3.06,
+          "putamen": 1.1,
+          "caudate": 1.01
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_7f2929b79721",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "wikipedia": "https://en.wikipedia.org/wiki/Aromatic_L-amino_acid_decarboxylase",
+      "wikipedia_provenance": "sourced",
+      "gene": "DDC"
+    },
+    "comt": {
+      "name": "Catechol-O-methyltransferase (COMT)",
+      "type": "enzyme",
+      "system": "dopaminergic",
+      "receptor": null,
+      "regions": [
+        "frontal",
+        "temporal",
+        "caudate",
+        "putamen",
+        "hippocampus"
+      ],
+      "classification_provenance": "llm",
+      "location_sources": {
+        "caudate": [
+          {
+            "quote_id": "q_b1cc8f85c946",
+            "provenance": "verified"
+          }
+        ],
+        "frontal": [
+          {
+            "quote_id": "q_f078a743ddc3",
+            "provenance": "verified"
+          }
+        ],
+        "hippocampus": [
+          {
+            "quote_id": "q_08f4087656d7",
+            "provenance": "verified"
+          }
+        ],
+        "putamen": [
+          {
+            "quote_id": "q_45e36fba595d",
+            "provenance": "verified"
+          }
+        ],
+        "temporal": [
+          {
+            "quote_id": "q_dfafb122b389",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "wikipedia": "https://en.wikipedia.org/wiki/Catechol-O-methyltransferase",
+      "wikipedia_provenance": "sourced",
+      "gene": "COMT"
     },
     "gaba_t": {
       "name": "GABA transaminase (GABA-T)",
@@ -2667,6 +2800,14 @@
       "label": "Enzyme inhibitor",
       "effect": "boost"
     },
+    "precursor": {
+      "label": "Precursor (substrate)",
+      "effect": "boost"
+    },
+    "synthesis_inhibitor": {
+      "label": "Synthesis inhibitor",
+      "effect": "block"
+    },
     "pam": {
       "label": "Positive allosteric modulator",
       "effect": "boost"
@@ -2884,8 +3025,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1738,
-        "verified": 1615,
+        "total": 1749,
+        "verified": 1626,
         "uncertain": 111,
         "sourced": 0,
         "llm": 0,
@@ -2911,8 +3052,8 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 279,
-        "verified": 226,
+        "total": 285,
+        "verified": 232,
         "uncertain": 0,
         "sourced": 0,
         "llm": 53,
@@ -2920,8 +3061,8 @@
         "missing": 53
       },
       "drug_half_life": {
-        "total": 210,
-        "verified": 210,
+        "total": 215,
+        "verified": 215,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -2929,8 +3070,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 298,
-        "verified": 298,
+        "total": 300,
+        "verified": 300,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3046,13 +3187,13 @@
         "missing": 0
       },
       "targets": {
-        "total": 22,
+        "total": 24,
         "verified": 20,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 2,
+        "llm": 4,
         "nosource": 0,
-        "missing": 2
+        "missing": 4
       },
       "target_polarity": {
         "total": 2,
@@ -3064,8 +3205,8 @@
         "missing": 0
       },
       "target_locations": {
-        "total": 112,
-        "verified": 98,
+        "total": 123,
+        "verified": 109,
         "uncertain": 0,
         "sourced": 0,
         "llm": 14,
@@ -3073,8 +3214,8 @@
         "missing": 14
       },
       "target_density": {
-        "total": 19,
-        "verified": 19,
+        "total": 20,
+        "verified": 20,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3091,32 +3232,32 @@
         "missing": 0
       },
       "references": {
-        "total": 420,
+        "total": 428,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 420,
+        "sourced": 428,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 4183,
-      "verified": 3869,
+      "total": 4221,
+      "verified": 3905,
       "uncertain": 146,
       "sourced": 0,
-      "llm": 154,
+      "llm": 156,
       "nosource": 14,
-      "missing": 168,
-      "backed": 4015,
+      "missing": 170,
+      "backed": 4051,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1719,
-      "bindings_with_ki": 1493,
-      "pct_bindings_with_ki": 87,
-      "drugs_total": 262,
-      "drugs_without_ki": 85,
+      "bindings_total": 1730,
+      "bindings_with_ki": 1496,
+      "pct_bindings_with_ki": 86,
+      "drugs_total": 268,
+      "drugs_without_ki": 88,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -3126,6 +3267,7 @@
         "amobarbital",
         "armodafinil",
         "baclofen",
+        "benserazide",
         "brexanolone",
         "brivaracetam",
         "bromazepam",
@@ -3134,6 +3276,7 @@
         "butobarbital",
         "cannabidiol",
         "carbamazepine",
+        "carbidopa",
         "chloral_hydrate",
         "chlordiazepoxide",
         "clobazam",
@@ -3158,6 +3301,7 @@
         "isocarboxazid",
         "lacosamide",
         "lamotrigine",
+        "levodopa",
         "loflazepate",
         "loprazolam",
         "lorazepam",

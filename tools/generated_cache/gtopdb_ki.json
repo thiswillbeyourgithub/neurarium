@@ -1283,6 +1283,19 @@
     }
    }
   },
+  "benserazide": {
+   "aadc": {
+    "action": "blocker",
+    "pmid": "22384042",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "benserazide",
+     "provenance": "verified",
+     "quote": "benserazide at L-Aromatic amino-acid decarboxylase (DDC, Human): Inhibitor / Inhibition, no affinity reported [PMID 22384042]",
+     "species": "Human"
+    }
+   }
+  },
   "benztropine": {
    "dat": {
     "action": "reuptake_inhibitor",
@@ -2382,6 +2395,19 @@
      "page": "cannabinol",
      "provenance": "verified",
      "quote": "cannabinol at CB1 receptor (CNR1, Human): Agonist / Partial agonist, pKi 6-6.5 [PMID 7565624]",
+     "species": "Human"
+    }
+   }
+  },
+  "carbidopa": {
+   "aadc": {
+    "action": "blocker",
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "carbidopa",
+     "provenance": "verified",
+     "quote": "carbidopa at L-Aromatic amino-acid decarboxylase (DDC, Human): Inhibitor / Inhibition, no affinity reported",
      "species": "Human"
     }
    }
@@ -4404,6 +4430,27 @@
     }
    }
   },
+  "entacapone": {
+   "comt": {
+    "action": "blocker",
+    "ki": {
+     "max": 0.302,
+     "median": 0.302,
+     "min": 0.302,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7703232",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "entacapone",
+     "provenance": "verified",
+     "quote": "entacapone at Catechol-O-methyltransferase (COMT, Human): Inhibitor / Inhibition, pKi 9.52 [PMID 7703232]",
+     "species": "Human"
+    }
+   }
+  },
   "escitalopram": {
    "sert": {
     "action": "reuptake_inhibitor",
@@ -5608,6 +5655,27 @@
      "page": "imipramine",
      "provenance": "verified",
      "quote": "imipramine at SERT (SLC6A4, Human): Inhibitor / Inhibition, pKi 7.69 [PMID 8496700]",
+     "species": "Human"
+    }
+   }
+  },
+  "istradefylline": {
+   "a2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 91.2011,
+     "median": 51.6119,
+     "min": 12.0226,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "17300165",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "istradefylline",
+     "provenance": "verified",
+     "quote": "istradefylline at A2A receptor (ADORA2A, Human): Antagonist / Antagonist, pKi 7.04-7.92 [PMID 17300165]",
      "species": "Human"
     }
    }
@@ -10859,6 +10927,27 @@
      "page": "tizanidine",
      "provenance": "verified",
      "quote": "tizanidine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Agonist, pKi 6 [PMID 36101495]",
+     "species": "Human"
+    }
+   }
+  },
+  "tolcapone": {
+   "comt": {
+    "action": "blocker",
+    "ki": {
+     "max": 0.2692,
+     "median": 0.2692,
+     "min": 0.2692,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7703232",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tolcapone",
+     "provenance": "verified",
+     "quote": "tolcapone at Catechol-O-methyltransferase (COMT, Human): Inhibitor / Inhibition, pKi 9.57 [PMID 7703232]",
      "species": "Human"
     }
    }

@@ -104,6 +104,11 @@
     "title": "Benperidol",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Benperidol.svg"
   },
+  "benserazide": {
+    "file": "File:Benserazid.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Benserazid.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Benserazide"
+  },
   "benztropine": {
     "file": "File:Benzatropine.svg",
     "title": "Benztropine",
@@ -198,6 +203,11 @@
     "file": "File:Carbamazepine.svg",
     "title": "Carbamazepine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Carbamazepine.svg"
+  },
+  "carbidopa": {
+    "file": "File:Carbidopa.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Carbidopa.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Carbidopa"
   },
   "cariprazine": {
     "file": "File:Cariprazine.svg",
@@ -389,6 +399,11 @@
     "title": "Duloxetine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Duloxetine.svg"
   },
+  "entacapone": {
+    "file": "File:Entacapone.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Entacapone.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Entacapone"
+  },
   "escitalopram": {
     "file": "File:Escitalopram.svg",
     "title": "Escitalopram",
@@ -549,6 +564,11 @@
     "title": "Isoflurane",
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Isoflurane.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
   },
+  "istradefylline": {
+    "file": "File:Istradefylline structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Istradefylline_structure.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Istradefylline"
+  },
   "ketamine": {
     "file": "File:Ketamine2DCSD.svg",
     "title": "Ketamine",
@@ -578,6 +598,11 @@
     "file": "File:Levetiracetam.svg",
     "title": "Levetiracetam",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Levetiracetam.svg"
+  },
+  "levodopa": {
+    "file": "File:3,4-Dihydroxy-L-phenylalanin_(Levodopa).svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/3%2C4-Dihydroxy-L-phenylalanin_%28Levodopa%29.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Levodopa"
   },
   "levomepromazine": {
     "file": "File:Levomepromazine.svg",
@@ -1173,6 +1198,11 @@
     "file": "File:Tofisopam_structure.svg",
     "title": "Tofisopam",
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Tofisopam_structure.svg"
+  },
+  "tolcapone": {
+    "file": "File:Tolcapone.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Tolcapone.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Tolcapone"
   },
   "topiramate": {
     "file": "File:Topiramate_structure.svg",
