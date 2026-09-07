@@ -4484,6 +4484,62 @@
     }
   },
   "targets": {
+    "aadc": {
+      "caudate": [
+        {
+          "corpus": "allen_ahba",
+          "page": "DDC",
+          "provenance": "verified",
+          "quote": "DDC detected in caudate: probe 1011160 PACall present in 90/91 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "locus_coeruleus": [
+        {
+          "corpus": "allen_ahba",
+          "page": "DDC",
+          "provenance": "verified",
+          "quote": "DDC detected in locus_coeruleus: probe 1011160 PACall present in 13/13 samples (donors 9861,10021,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "putamen": [
+        {
+          "corpus": "allen_ahba",
+          "page": "DDC",
+          "provenance": "verified",
+          "quote": "DDC detected in putamen: probe 1011160 PACall present in 62/62 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "raphe": [
+        {
+          "corpus": "allen_ahba",
+          "page": "DDC",
+          "provenance": "verified",
+          "quote": "DDC detected in raphe: probe 1011160 PACall present in 35/35 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "substantia_nigra": [
+        {
+          "corpus": "allen_ahba",
+          "page": "DDC",
+          "provenance": "verified",
+          "quote": "DDC detected in substantia_nigra: probe 1011160 PACall present in 51/52 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "vta": [
+        {
+          "corpus": "allen_ahba",
+          "page": "DDC",
+          "provenance": "verified",
+          "quote": "DDC detected in vta: probe 1011160 PACall present in 15/16 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ]
+    },
     "ache": {
       "frontal": [
         {
@@ -4865,6 +4921,53 @@
           "page": "CACNA1H",
           "provenance": "verified",
           "quote": "CACNA1H detected in thalamus: probe 1023782 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
+          "species": "Human"
+        }
+      ]
+    },
+    "comt": {
+      "caudate": [
+        {
+          "corpus": "allen_ahba",
+          "page": "COMT",
+          "provenance": "verified",
+          "quote": "COMT detected in caudate: probe 1028970 PACall present in 91/91 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "frontal": [
+        {
+          "corpus": "allen_ahba",
+          "page": "COMT",
+          "provenance": "verified",
+          "quote": "COMT detected in frontal: probe 1028970 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "hippocampus": [
+        {
+          "corpus": "allen_ahba",
+          "page": "COMT",
+          "provenance": "verified",
+          "quote": "COMT detected in hippocampus: probe 1028970 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "putamen": [
+        {
+          "corpus": "allen_ahba",
+          "page": "COMT",
+          "provenance": "verified",
+          "quote": "COMT detected in putamen: probe 1028970 PACall present in 62/62 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "temporal": [
+        {
+          "corpus": "allen_ahba",
+          "page": "COMT",
+          "provenance": "verified",
+          "quote": "COMT detected in temporal: probe 1028970 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)",
           "species": "Human"
         }
       ]

@@ -92,6 +92,7 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     # valproate, lamotrigine) keep the mood_stabilizer class their own source
     # states, which is how a prescriber meets them.
     "anticonvulsant": {"en": "Anticonvulsant", "fr": "Anticonvulsivant"},
+    "antiparkinson": {"en": "Antiparkinson", "fr": "Antiparkinsonien"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 
@@ -131,6 +132,15 @@ DRUG_ACTIONS: dict[str, dict[str, Any]] = {
                            "effect": "boost"},
     "enzyme_inhibitor": {"label": {"en": "Enzyme inhibitor",
                                    "fr": "Inhibiteur enzymatique"}, "effect": "boost"},
+    # An enzyme that BUILDS a transmitter takes two actions its degrading siblings
+    # never do: a drug can be its substrate (levodopa), or block the synthesis
+    # (carbidopa). Both are enzyme_inhibitor's mirror, so they need their own names:
+    # see the "enzyme" bucket in TONE_RULES, where the direction rides the action.
+    "precursor": {"label": {"en": "Precursor (substrate)",
+                            "fr": "Précurseur (substrat)"}, "effect": "boost"},
+    "synthesis_inhibitor": {"label": {"en": "Synthesis inhibitor",
+                                      "fr": "Inhibiteur de la synthèse"},
+                            "effect": "block"},
     "pam": {"label": {"en": "Positive allosteric modulator",
                       "fr": "Modulateur allostérique positif"}, "effect": "boost"},
     "nam": {"label": {"en": "Negative allosteric modulator",
@@ -190,8 +200,13 @@ TONE_RULES: dict[str, dict[str, list]] = {
         "vesicular_releaser": [1, "vesicular_store_release"],
         "releaser": [1, "vesicular_store_release"],
     },
-    # A degrading enzyme (MAO, AChE): inhibiting it spares the transmitter.
-    "enzyme": {"enzyme_inhibitor": [1, "enzyme_inhibition"]},
+    # A degrading enzyme (MAO, AChE, COMT): inhibiting it spares the transmitter.
+    # A SYNTHESIZING one (AADC) runs the other way, and the direction cannot ride the
+    # target (both kinds are `type: enzyme`), so it rides the action: feeding the
+    # enzyme its substrate makes more transmitter, blocking the synthesis makes less.
+    "enzyme": {"enzyme_inhibitor": [1, "enzyme_inhibition"],
+               "precursor": [1, "precursor_supply"],
+               "synthesis_inhibitor": [-1, "synthesis_inhibition"]},
     # A vesicle protein (SV2A): blocking it impairs release.
     "vesicle_protein": {"blocker": [-1, "vesicle_protein_block"]},
     # A PRESYNAPTIC INHIBITORY receptor (the autoreceptor case, e.g. alpha-2, 5-HT1A,
@@ -448,6 +463,23 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
               "type": "ion_channel", "system": None,
               "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel",
               "regions": ["thalamus", "frontal", "temporal"]},
+    # The enzyme that MAKES dopamine (and serotonin) out of its amino-acid
+    # precursor, so it is the one enzyme here a drug can feed rather than only block:
+    # levodopa is its substrate. Filed under the dopaminergic system because every
+    # drug modeled against it is aimed at dopamine, not at 5-HTP.
+    "aadc": {"name": {"en": "Aromatic L-amino acid decarboxylase (AADC)",
+                      "fr": "Décarboxylase des acides aminés aromatiques (AADC)"},
+             "type": "enzyme", "system": "dopaminergic",
+             "wikipedia": "https://en.wikipedia.org/wiki/Aromatic_L-amino_acid_decarboxylase",
+             "regions": ["substantia_nigra", "vta", "raphe", "locus_coeruleus",
+                         "caudate", "putamen"]},
+    # Catechol-O-methyltransferase, which degrades dopamine (and the other
+    # catecholamines), so inhibiting it spares them: the ordinary enzyme direction.
+    "comt": {"name": {"en": "Catechol-O-methyltransferase (COMT)",
+                      "fr": "Catéchol-O-méthyltransférase (COMT)"},
+             "type": "enzyme", "system": "dopaminergic",
+             "wikipedia": "https://en.wikipedia.org/wiki/Catechol-O-methyltransferase",
+             "regions": ["frontal", "temporal", "caudate", "putamen", "hippocampus"]},
     # The enzyme that DEGRADES GABA, so blocking it raises GABA tone. It sits
     # in the mitochondria of neurons and astrocytes rather than at the synapse,
     # which is why it is an enzyme target and not a transporter like GAT.

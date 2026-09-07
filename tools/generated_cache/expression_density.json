@@ -815,6 +815,27 @@
     }
   },
   "targets": {
+    "aadc": {
+      "donors": 6,
+      "profile": {
+        "caudate": 1.01,
+        "locus_coeruleus": 3.88,
+        "putamen": 1.1,
+        "raphe": 3.87,
+        "substantia_nigra": 3.33,
+        "vta": 3.06
+      },
+      "reliability": 0.98,
+      "sources": [
+        {
+          "corpus": "allen_ahba",
+          "page": "DDC",
+          "provenance": "verified",
+          "quote": "DDC relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1011160, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.98: locus_coeruleus +3.88 (4d), raphe +3.87 (6d), substantia_nigra +3.33 (6d), vta +3.06 (6d), putamen +1.10 (6d), caudate +1.01 (6d)",
+          "species": "Human"
+        }
+      ]
+    },
     "ache": {
       "donors": 5,
       "profile": {

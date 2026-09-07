@@ -141,6 +141,8 @@ TARGET_GENES = {
     "sv2a": ["SV2A"],
     # GABA transaminase, the enzyme that degrades GABA (vigabatrin's target).
     "gaba_t": ["ABAT"],
+    # DOPA decarboxylase (levodopa's enzyme) and catechol-O-methyltransferase.
+    "aadc": ["DDC"], "comt": ["COMT"],
     "muscarinic": ["CHRM1", "CHRM2", "CHRM3", "CHRM4", "CHRM5"],
     "nicotinic": ["CHRNA4", "CHRNB2", "CHRNA7"],
     "alpha1": ["ADRA1A", "ADRA1B", "ADRA1D"],
