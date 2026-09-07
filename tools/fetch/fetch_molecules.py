@@ -62,6 +62,13 @@ CHROME_SVG = (
     "red x", "x_mark", "speaker", "sound", "disambig", "wiktionary",
     "wikisource", "wikiquote", "wikibooks", "portal", "symbol_", "emblem",
     "flag_", "increase", "decrease", "steady", "magnify", "wiki letter",
+    # Article-status badges. A featured article (Xenon) hands `pageimages` its
+    # bronze star as the lead image, which is chrome wearing a molecule's slot.
+    "cscr-", "cscr_", "symbol support", "symbol category",
+    # The NFPA fire diamond and the GHS hazard pictograms sit in the chembox of
+    # an article whose subject is a plain salt (rubidium chloride), so they win
+    # the lead-image slot when there is no skeletal formula to win it.
+    "nfpa", "ghs-pictogram", "hazard_",
 )
 # Drugs whose article lead image is not the skeletal formula we want (a 3D
 # ball-and-stick render, a photograph), mapped to the Commons file to take
@@ -72,6 +79,15 @@ FILE_OVERRIDES = {
     "ethanol": "File:Ethanol-2D-flat.svg",
     # Same story: the Domperidone lead is a 3D ball-and-stick PNG.
     "domperidone": "File:Domperidone 2D structure.svg",
+    # None = there is no structure SVG to take here, so take nothing rather than
+    # let the fallback scan hand the panel whatever SVG is next on the page (a
+    # crystal lattice, a hazard diamond, a metabolic pathway). A monatomic gas
+    # has no bonds at all; the other two articles simply draw their formula as a
+    # raster, and this fetcher is deliberately SVG-only.
+    "xenon": None,
+    "rubidium_chloride": None,
+    "calcium_carbimide": None,
+    "methylfolate_l": None,
 }
 # Tokens that mark a structure SVG, used to rank fallback candidates.
 STRUCTURE_HINTS = (
@@ -130,8 +146,11 @@ def article_title(wiki_url: str) -> str | None:
 
 
 def _is_chrome(name: str) -> bool:
-    low = name.lower()
-    return any(tok in low for tok in CHROME_SVG)
+    # Commons files the same icon under both spellings ("X mark.svg" and
+    # "X_mark.svg"), so underscore and space are folded together on both sides
+    # rather than listing every token twice.
+    low = name.lower().replace("_", " ")
+    return any(tok.replace("_", " ") in low for tok in CHROME_SVG)
 
 
 def _is_svg_url(url: str) -> bool:
@@ -330,6 +349,10 @@ def main() -> None:
             missing.append((did, "no wikipedia title"))
             continue
         try:
+            if did in FILE_OVERRIDES and FILE_OVERRIDES[did] is None:
+                missing.append((did, "no structure SVG (declared)"))
+                print(f"[{i}/{len(drugs)}] {did}: SKIPPED (no structure SVG)")
+                continue
             override = FILE_OVERRIDES.get(did)
             resolved = resolve_file(override) if override else resolve_svg(title)
             if not resolved:
