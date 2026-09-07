@@ -179,6 +179,7 @@
     "anticonvulsant": "Anticonvulsant",
     "antiparkinson": "Antiparkinson",
     "antimigraine": "Antimigraine",
+    "appetite_suppressant": "Appetite suppressant",
     "other": "Other"
   },
   "drug_targets": {
@@ -3131,8 +3132,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1800,
-        "verified": 1677,
+        "total": 1863,
+        "verified": 1740,
         "uncertain": 111,
         "sourced": 0,
         "llm": 0,
@@ -3158,8 +3159,8 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 291,
-        "verified": 238,
+        "total": 301,
+        "verified": 248,
         "uncertain": 0,
         "sourced": 0,
         "llm": 53,
@@ -3167,8 +3168,8 @@
         "missing": 53
       },
       "drug_half_life": {
-        "total": 220,
-        "verified": 220,
+        "total": 230,
+        "verified": 230,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3176,8 +3177,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 338,
-        "verified": 338,
+        "total": 340,
+        "verified": 340,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3338,32 +3339,32 @@
         "missing": 0
       },
       "references": {
-        "total": 435,
+        "total": 445,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 435,
+        "sourced": 445,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 4329,
-      "verified": 4012,
+      "total": 4414,
+      "verified": 4097,
       "uncertain": 146,
       "sourced": 0,
       "llm": 157,
       "nosource": 14,
       "missing": 171,
-      "backed": 4158,
+      "backed": 4243,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1781,
-      "bindings_with_ki": 1543,
+      "bindings_total": 1844,
+      "bindings_with_ki": 1601,
       "pct_bindings_with_ki": 87,
-      "drugs_total": 274,
-      "drugs_without_ki": 90,
+      "drugs_total": 284,
+      "drugs_without_ki": 92,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -3393,6 +3394,7 @@
         "cyclobarbital",
         "deutetrabenazine",
         "donepezil",
+        "ephedrine",
         "erenumab",
         "estazolam",
         "eszopiclone",
@@ -3434,6 +3436,7 @@
         "primidone",
         "propofol",
         "prothipendyl",
+        "pseudoephedrine",
         "quazepam",
         "rasagiline",
         "rimegepant",

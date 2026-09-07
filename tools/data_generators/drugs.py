@@ -94,6 +94,11 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     "anticonvulsant": {"en": "Anticonvulsant", "fr": "Anticonvulsivant"},
     "antiparkinson": {"en": "Antiparkinson", "fr": "Antiparkinsonien"},
     "antimigraine": {"en": "Antimigraine", "fr": "Antimigraineux"},
+    # The anorectics. Their own class, not stimulant: several are stimulants
+    # too (phentermine) and carry both, but sibutramine and fenfluramine are
+    # not, and it is the appetite indication that groups them.
+    "appetite_suppressant": {"en": "Appetite suppressant",
+                             "fr": "Anorexigène"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 

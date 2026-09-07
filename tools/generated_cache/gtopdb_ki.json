@@ -1243,6 +1243,136 @@
     }
    }
   },
+  "atropine": {
+   "alpha2": {
+    "action": "antagonist",
+    "pmid": "29860464",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 4.85 [PMID 29860464]",
+     "species": "Human"
+    }
+   },
+   "alpha2a": {
+    "action": "antagonist",
+    "pmid": "29860464",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 4.85 [PMID 29860464]",
+     "species": "Human"
+    }
+   },
+   "alpha2d": {
+    "action": "antagonist",
+    "pmid": "29860464",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 4.85 [PMID 29860464]",
+     "species": "Human"
+    }
+   },
+   "m1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.1623,
+     "median": 1.7067,
+     "min": 0.2512,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "3443095",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at M1 receptor (CHRM1, Human): Antagonist / Antagonist, pKi 8.5-9.6 [PMID 3443095]",
+     "species": "Human"
+    }
+   },
+   "m2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 15.8489,
+     "median": 8.2399,
+     "min": 0.631,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "3443095",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at M2 receptor (CHRM2, Human): Antagonist / Antagonist, pKi 7.8-9.2 [PMID 3443095]",
+     "species": "Human"
+    }
+   },
+   "m3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.1623,
+     "median": 1.6604,
+     "min": 0.1585,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "3443095",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at M3 receptor (CHRM3, Human): Antagonist / Antagonist, pKi 8.5-9.8 [PMID 3443095]",
+     "species": "Human"
+    }
+   },
+   "m4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.9953,
+     "median": 1.1557,
+     "min": 0.3162,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "3443095",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at M4 receptor (CHRM4, Human): Antagonist / Antagonist, pKi 8.7-9.5 [PMID 3443095]",
+     "species": "Human"
+    }
+   },
+   "m5": {
+    "action": "antagonist",
+    "ki": {
+     "max": 5.0119,
+     "median": 2.7565,
+     "min": 0.5012,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11303071",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKi 8.3-9.3 [PMID 11303071]",
+     "species": "Human"
+    }
+   }
+  },
   "benperidol": {
    "d2": {
     "action": "antagonist",
@@ -4447,6 +4577,27 @@
      "page": "entacapone",
      "provenance": "verified",
      "quote": "entacapone at Catechol-O-methyltransferase (COMT, Human): Inhibitor / Inhibition, pKi 9.52 [PMID 7703232]",
+     "species": "Human"
+    }
+   }
+  },
+  "ephedrine": {
+   "beta2": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 2511.887,
+     "median": 2511.887,
+     "min": 2511.887,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9295336",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ephedrine",
+     "provenance": "verified",
+     "quote": "ephedrine at β2-adrenoceptor (ADRB2, Human): Agonist / Partial agonist, pKi 5.6 [PMID 9295336]",
      "species": "Human"
     }
    }
@@ -10558,6 +10709,65 @@
     }
    }
   },
+  "sibutramine": {
+   "dat": {
+    "action": "reuptake_inhibitor",
+    "ki": {
+     "max": 501.187,
+     "median": 501.187,
+     "min": 501.187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sibutramine",
+     "provenance": "verified",
+     "quote": "sibutramine at DAT (SLC6A3, Human): Inhibitor / Inhibition, pKi 6.3",
+     "species": "Human"
+    }
+   },
+   "net": {
+    "action": "reuptake_inhibitor",
+    "ki": {
+     "max": 5623.4133,
+     "median": 5623.4133,
+     "min": 5623.4133,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sibutramine",
+     "provenance": "verified",
+     "quote": "sibutramine at NET (SLC6A2, Human): Inhibitor / Inhibition, pKi 5.25",
+     "species": "Human"
+    }
+   },
+   "sert": {
+    "action": "reuptake_inhibitor",
+    "ki": {
+     "max": 1096.4781,
+     "median": 1096.4781,
+     "min": 1096.4781,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sibutramine",
+     "provenance": "verified",
+     "quote": "sibutramine at SERT (SLC6A4, Human): Inhibitor / Inhibition, pKi 5.96",
+     "species": "Human"
+    }
+   }
+  },
   "sildenafil": {
    "pde5": {
     "action": "enzyme_inhibitor",
@@ -12161,6 +12371,255 @@
      "page": "xanomeline",
      "provenance": "verified",
      "quote": "xanomeline at M5 receptor (CHRM5, Human): Agonist / Partial agonist, pKi 6.7-7.4 [PMID 9884068]",
+     "species": "Human"
+    }
+   }
+  },
+  "yohimbine": {
+   "5ht1a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 50.1187,
+     "min": 50.1187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10611634",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 7.3 [PMID 10611634]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 158.4893,
+     "median": 91.8041,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10611634",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-HT1B receptor (HTR1B, Human): Antagonist / Antagonist, pKi 6.8-7.6 [PMID 10611634]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 63.0957,
+     "median": 41.5242,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10611634",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-HT1D receptor (HTR1D, Human): Antagonist / Antagonist, pKi 7.2-7.7 [PMID 10611634]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1258.9254,
+     "median": 1258.9254,
+     "min": 1258.9254,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8380639",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-ht1e receptor (HTR1E, Human): Antagonist / Antagonist, pKi 5.9 [PMID 8380639]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "antagonist",
+    "ki": {
+     "max": 100.0,
+     "median": 100.0,
+     "min": 100.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8380639",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-HT1F receptor (HTR1F, Human): Antagonist / Antagonist, pKi 7 [PMID 8380639]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 39.8107,
+     "median": 26.2,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8078486",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-HT2B receptor (HTR2B, Human): Antagonist / Antagonist, pKi 7.4-7.9 [PMID 8078486]",
+     "species": "Human"
+    }
+   },
+   "5ht5a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 5011.8723,
+     "median": 5011.8723,
+     "min": 5011.8723,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7988681",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-HT5A receptor (HTR5A, Human): Antagonist / Antagonist, pKi 5.3 [PMID 7988681]",
+     "species": "Human"
+    }
+   },
+   "5ht7": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2511.8864,
+     "median": 2511.8864,
+     "min": 2511.8864,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8226867",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 5.6 [PMID 8226867]",
+     "species": "Human"
+    }
+   },
+   "alpha2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 2.9882,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7996470",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 8.4-8.7 [PMID 7996470]",
+     "species": "Human"
+    }
+   },
+   "alpha2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 2.9882,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7996470",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 8.4-8.7 [PMID 7996470]",
+     "species": "Human"
+    }
+   },
+   "alpha2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 19.9526,
+     "median": 11.9669,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7996470",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at α2B-adrenoceptor (ADRA2B, Human): Antagonist / Antagonist, pKi 7.7-8.4 [PMID 7996470]",
+     "species": "Human"
+    }
+   },
+   "alpha2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 5.7924,
+     "min": 1.5849,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7996470",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 8-8.8 [PMID 7996470]",
+     "species": "Human"
+    }
+   },
+   "alpha2d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 2.9882,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7996470",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "yohimbine",
+     "provenance": "verified",
+     "quote": "yohimbine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 8.4-8.7 [PMID 7996470]",
      "species": "Human"
     }
    }

@@ -2177,6 +2177,20 @@
    ]
   }
  ],
+ "opipramol": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opipramol",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 -mediated"
+    }
+   ]
+  }
+ ],
  "oxazepam": [
   {
    "enzyme": "ugt",
@@ -2905,6 +2919,20 @@
      "page": "sevoflurane",
      "provenance": "verified",
      "quote": "Metabolism | Liver by CYP2E1"
+    }
+   ]
+  }
+ ],
+ "sibutramine": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sibutramine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP3A4 -mediated)"
     }
    ]
   }

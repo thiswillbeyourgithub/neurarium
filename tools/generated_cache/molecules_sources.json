@@ -89,6 +89,11 @@
     "title": "Atomoxetine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Atomoxetine_structure.svg"
   },
+  "atropine": {
+    "file": "File:Atropine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Atropine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Atropine"
+  },
   "azacyclonol": {
     "file": "File:Azacyclonol.svg",
     "title": "Azacyclonol",
@@ -113,6 +118,11 @@
     "file": "File:Benzatropine.svg",
     "title": "Benztropine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Benzatropine.svg"
+  },
+  "betahistine": {
+    "file": "File:Betahistine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Betahistine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Betahistine"
   },
   "blonanserin": {
     "file": "File:Blonanserin.svg",
@@ -404,6 +414,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Entacapone.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
     "title": "Entacapone"
   },
+  "ephedrine": {
+    "file": "File:Ephedrine_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Ephedrine_structure.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Ephedrine"
+  },
   "escitalopram": {
     "file": "File:Escitalopram.svg",
     "title": "Escitalopram",
@@ -438,6 +453,11 @@
     "file": "File:Etomidate.svg",
     "title": "Etomidate",
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Etomidate.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
+  },
+  "fenfluramine": {
+    "file": "File:Fenfluramine2DCSD.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Fenfluramine2DCSD.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Fenfluramine"
   },
   "fentanyl": {
     "file": "File:Fentanyl.svg",
@@ -854,6 +874,11 @@
     "title": "Ondansetron",
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Ondansetron_structure.svg"
   },
+  "opipramol": {
+    "file": "File:Opipramol2.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Opipramol2.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Opipramol"
+  },
   "oxazepam": {
     "file": "File:Oxazepam.svg",
     "title": "Oxazepam",
@@ -938,6 +963,11 @@
     "file": "File:Phenobarbital2DACS.svg",
     "title": "Phenobarbital",
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Phenobarbital2DACS.svg"
+  },
+  "phentermine": {
+    "file": "File:Phentermine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Phentermine.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Phentermine"
   },
   "phenterminetopiramate": {
     "file": "File:Phentermine_and_topiramate.svg",
@@ -1033,6 +1063,11 @@
     "file": "File:Protriptyline.svg",
     "title": "Protriptyline",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Protriptyline.svg"
+  },
+  "pseudoephedrine": {
+    "file": "File:Pseudoephedrine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Pseudoephedrine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Pseudoephedrine"
   },
   "psilocybin": {
     "file": "File:Psilocybin,_Kekulé,_skeletal_formula_of_canonical_psilocybin.svg",
@@ -1149,6 +1184,11 @@
     "title": "Sevoflurane",
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/25/Sevoflurane.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original"
   },
+  "sibutramine": {
+    "file": "File:Sibutramine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Sibutramine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Sibutramine"
+  },
   "sildenafil": {
     "file": "File:Sildenafil_structure.svg",
     "title": "Sildenafil",
@@ -1233,6 +1273,11 @@
     "file": "File:Tianeptine_skeletal_formula.svg",
     "title": "Tianeptine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Tianeptine_skeletal_formula.svg"
+  },
+  "tiapride": {
+    "file": "File:Tiapride.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Tiapride.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Tiapride"
   },
   "tizanidine": {
     "file": "File:Tizanidine_structure.svg",
@@ -1343,6 +1388,11 @@
     "file": "File:Xanomeline.svg",
     "title": "Xanomeline",
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Xanomeline.svg"
+  },
+  "yohimbine": {
+    "file": "File:Yohimbine_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Yohimbine_structure.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Yohimbine"
   },
   "zaleplon": {
     "file": "File:Zaleplon skeletal.svg",
