@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.66.0",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The six missing migraine drugs: sumatriptan, rizatriptan, flunarizine, pizotifen, erenumab and rimegepant. This was the last of the six drug families a survey found missing, so the roster now covers all of them.",
+          "commits": [
+            "5c93575"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The CGRP receptor, the target the newest migraine drugs were built for. It lists the six brain regions where it is expressed, each confirmed against the Allen human brain atlas, with the relative amount in each.",
+          "commits": [
+            "ff1a92d"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Molecule drawings for five drugs that had none: heroin, pentazocine, pethidine, rimonabant and tapentadol.",
+          "commits": [
+            "b47e9d9"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.65.0",
       "date": "2026-09-07",
       "entries": [
