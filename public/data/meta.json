@@ -2815,8 +2815,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1704,
-        "verified": 1581,
+        "total": 1711,
+        "verified": 1588,
         "uncertain": 111,
         "sourced": 0,
         "llm": 0,
@@ -2842,8 +2842,8 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 259,
-        "verified": 209,
+        "total": 263,
+        "verified": 213,
         "uncertain": 0,
         "sourced": 0,
         "llm": 50,
@@ -2851,8 +2851,8 @@
         "missing": 50
       },
       "drug_half_life": {
-        "total": 194,
-        "verified": 194,
+        "total": 198,
+        "verified": 198,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -2860,8 +2860,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 293,
-        "verified": 293,
+        "total": 294,
+        "verified": 294,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3022,31 +3022,31 @@
         "missing": 0
       },
       "references": {
-        "total": 399,
+        "total": 403,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 399,
+        "sourced": 403,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 4099,
-      "verified": 3789,
+      "total": 4115,
+      "verified": 3805,
       "uncertain": 146,
       "sourced": 0,
       "llm": 150,
       "nosource": 14,
       "missing": 164,
-      "backed": 3935,
+      "backed": 3951,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1685,
-      "bindings_with_ki": 1475,
+      "bindings_total": 1692,
+      "bindings_with_ki": 1482,
       "pct_bindings_with_ki": 88,
-      "drugs_total": 244,
+      "drugs_total": 247,
       "drugs_without_ki": 76,
       "drugs_without_ki_ids": [
         "acamprosate",

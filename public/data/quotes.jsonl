@@ -623,6 +623,7 @@
 {"id": "q_30d3df9ed107", "corpus": "gtopdb_ki", "page": "apomorphine", "quote": "apomorphine at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 7 [PMID 12388666]", "species": "Human"}
 {"id": "q_30dff4d8767b", "corpus": "allen_ahba", "page": "HTR5A", "quote": "HTR5A detected in frontal: probe 1021969 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_30fd51dcef97", "corpus": "wikipedia_fr", "page": "cyproheptadine", "quote": "Periactine"}
+{"id": "q_310c645b9027", "corpus": "wikipedia_pharm", "page": "dimenhydrinate", "quote": "Elimination half-life | 5.5 hours (diphenhydramine component)"}
 {"id": "q_311afedeb7a3", "corpus": "stahl", "page": 431, "quote": "Blocks serotonin reuptake pump (serotonin transporter), presumably increasing serotonergic neurotransmission", "llm": "sonnet", "heading": ["Levomilnacipran", "Therapeutics", "How the Drug Works"]}
 {"id": "q_312b380d9594", "corpus": "stahl", "page": 455, "quote": "Lucemyra", "heading": ["Lofexidine", "Therapeutics"]}
 {"id": "q_3139d51ff8d6", "corpus": "wikipedia_pharm", "page": "pargyline", "quote": "Pargyline , sold under the brand name Eutonyl among others, is a monoamine oxidase inhibitor (MAOI) medication which has been used to treat hypertension (high blood pressure) but is no longer marketed."}
@@ -634,6 +635,7 @@
 {"id": "q_3198cac50fbd", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "α 2C | 96 | Human"}
 {"id": "q_31df0eab653d", "corpus": "stahl", "page": 721, "quote": "Edronax", "heading": ["Reboxetine", "Therapeutics", "Brands"]}
 {"id": "q_31ed606e8dfc", "corpus": "stahl", "page": 517, "quote": "Jornay PM", "heading": ["Methylphenidate (D,L)", "Therapeutics", "How Long Until It Works"]}
+{"id": "q_31f0629654ac", "corpus": "wikipedia_pharm", "page": "metoclopramide", "quote": "Drug class | D 2 receptor antagonist ; 5-HT 3 receptor antagonist ; 5-HT 4 receptor agonist ; Prolactin releaser"}
 {"id": "q_320f45aeec74", "corpus": "stahl_essential", "page": 421, "quote": "When histamine binds to postsynaptic histamine 1 (H1) receptors, it activates a G-protein-linked second-messenger system that activates phosphatidylinositol (PI) and the transcription factor cFOS.", "llm": "sonnet", "heading": ["10 Disorders of Sleep and Wakefulness and Their Treatment: Neurotransmitter Networks for Histamine and Orexin"]}
 {"id": "q_321131fd3106", "corpus": "allen_ahba", "page": "CHRM4", "quote": "CHRM4 detected in putamen: probe 1024432 PACall present in 45/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_321600314ac6", "corpus": "wikipedia_pharm", "page": "citalopram", "quote": "NET | 6190"}
@@ -689,6 +691,7 @@
 {"id": "q_3664c282c3ff", "corpus": "stahl", "page": 257, "quote": "Valium", "heading": ["Diazepam", "Therapeutics", "Brands"]}
 {"id": "q_366aa6e4ee2b", "corpus": "stahl", "page": 901, "quote": "Inhibits CYP3A4 (weak)", "heading": ["Viloxazine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_367394771378", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 6.4 [PMID 8935801]", "species": "Human"}
+{"id": "q_3681d16d4351", "corpus": "wikipedia_pharm", "page": "meclizine", "quote": "Elimination half-life | 5-6 hours"}
 {"id": "q_36bd48a3eaa9", "corpus": "allen_ahba", "page": "HTR2C", "quote": "HTR2C detected in frontal: probe 1055276 PACall present in 472/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_36d15c8b8463", "corpus": "stahl", "page": 267, "quote": "Alcohol dependence treatment", "llm": "sonnet", "heading": ["Disulfiram", "Therapeutics", "Class"]}
 {"id": "q_36d926eca2f6", "corpus": "wikipedia_fr", "page": "m_thaqualone", "quote": "Revonal"}
@@ -1012,6 +1015,7 @@
 {"id": "q_4e7ee8fd9984", "corpus": "wikipedia_fr", "page": "loflaz_pate_d_thyle", "quote": "Victan"}
 {"id": "q_4e88accb0432", "corpus": "wikipedia_fr", "page": "k_tamine", "quote": "Spravato"}
 {"id": "q_4eae338ea9a6", "corpus": "stahl", "page": 811, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet", "heading": ["Thiothixene", "Therapeutics", "How the Drug Works"]}
+{"id": "q_4ee424edf168", "corpus": "wikipedia_pharm", "page": "granisetron", "quote": "Elimination half-life | 3–14 hours"}
 {"id": "q_4ef2938bcbe3", "corpus": "stahl", "page": 925, "quote": "Substrate for CYP3A4", "heading": ["Zolpidem", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_4f273337b8c8", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "D 1 | 83"}
 {"id": "q_4f2b90097e95", "corpus": "wikipedia_pharm", "page": "cariprazine", "quote": "5-HT 7 | 111 | Antagonist"}
@@ -1437,6 +1441,7 @@
 {"id": "q_6db7a906d20a", "corpus": "stahl", "page": 39, "quote": "Tricyclic antidepressant (TCA)", "llm": "sonnet", "heading": ["Amitriptyline", "Therapeutics", "Class"]}
 {"id": "q_6dbdb6d6613a", "corpus": "stahl", "page": 521, "quote": "Average half-life of methylphenidate in adults is 3.5 hours (1.3–7.7 hours)", "heading": ["Methylphenidate (D,L)", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_6dc071c94b9a", "corpus": "stahl", "page": 827, "quote": "Potentiates activity of GABA", "llm": "sonnet", "heading": ["Topiramate", "Therapeutics", "How the Drug Works"]}
+{"id": "q_6de31681e0a8", "corpus": "wikipedia_pharm", "page": "metoclopramide", "quote": "Elimination half-life | 5–6 hours"}
 {"id": "q_6dff1cfd1d97", "corpus": "allen_ahba", "page": "ADRB2", "quote": "ADRB2 detected in temporal: probe 1059348 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_6e245193d57f", "corpus": "wikipedia_pharm", "page": "escitalopram", "quote": "5-HT 2C | 2,500"}
 {"id": "q_6e41473ad08a", "corpus": "gtopdb", "page": 5, "quote": "Brain: lamina V of the frontal cortex in large pyramidal cells, hippocampal pyramidal cells, thalamic nuclei and dorsal raphe.", "species": "Human", "llm": "sonnet"}
@@ -1487,6 +1492,7 @@
 {"id": "q_71eb8d920bd8", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "D 5 | 66% at 1 μM | ND | ND"}
 {"id": "q_72010c10b6f0", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 2C | 180 | – | – | –"}
 {"id": "q_721ee0f8a90e", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "5-HT 1A | 3330–5010 | Human"}
+{"id": "q_723c7a3fadea", "corpus": "wikipedia_pharm", "page": "dimenhydrinate", "quote": "Dimenhydrinate is a theoclate salt composed of diphenhydramine and 8-chlorotheophylline (a theophylline relative) in a 1:1 ratio."}
 {"id": "q_72454fcb10c8", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in midbrain: probe 1054302 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_72819bd471d0", "corpus": "wikipedia_fr", "page": "t_trab_nazine", "quote": "Xenazine"}
 {"id": "q_730975131024", "corpus": "stahl", "page": 283, "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor)", "llm": "sonnet", "heading": ["Doxepin", "Therapeutics", "Class"]}
@@ -1562,6 +1568,7 @@
 {"id": "q_78c6ab8fee80", "corpus": "gtopdb_ki", "page": "loxapine", "quote": "loxapine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 8.11 [PMID 9015795]", "species": "Human"}
 {"id": "q_78e54be61835", "corpus": "gtopdb_ki", "page": "tapentadol", "quote": "tapentadol at μ receptor (OPRM1, Human): Agonist / Agonist, pKi 6.8 [PMID 17656655]", "species": "Human"}
 {"id": "q_78faa7205e42", "corpus": "kandel", "page": 129, "quote": "The thalamus is an egg-shaped structure that constitutes the dorsal portion of the diencephalon.", "llm": "sonnet", "heading": ["Part I Overall Perspective", "4 The Neuroanatomical Bases by Which Neural Circuits Mediate Behavior", "The Thalamus Is an Essential Link Between Sensory Receptors and the Cerebral Cortex"]}
+{"id": "q_793818a8718f", "corpus": "wikipedia_pharm", "page": "meclizine", "quote": "Metabolism | Liver ( CYP2D6 )"}
 {"id": "q_7940a8e66a89", "corpus": "stahl_essential", "page": 191, "quote": "The VMAT2 is an intraneuronal transporter located on synaptic vesicles. VMAT2 takes intraneuronal monoamines, including dopamine, up into the synaptic vesicles so that they can be stored until they are needed for release during neurotransmission.", "llm": "sonnet", "heading": ["5 Targeting Dopamine and Serotonin Receptors for Psychosis, Mood, and Beyond: So-Called “Antipsychotics”"]}
 {"id": "q_797b030951ec", "corpus": "stahl", "page": 621, "quote": "Invega", "heading": ["Paliperidone", "Therapeutics", "Brands"]}
 {"id": "q_798cfff57a96", "corpus": "wikipedia_pharm", "page": "amoxapine", "quote": "α 2 | 2,600 | Human"}
@@ -1770,6 +1777,7 @@
 {"id": "q_8b4813cdafd2", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Tyvense"}
 {"id": "q_8b5a448b4b1c", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at D5 receptor (DRD5, Human): Antagonist / Antagonist, pKi 6.6 [PMID 1826762]", "species": "Human"}
 {"id": "q_8b7016ba0b20", "corpus": "stahl_essential", "page": 96, "quote": "Other enzymes that break down dopamine are monoamine oxidase A (MAO-A) and monoamine oxidase B (MAO-B), which are present in mitochondria within the presynaptic neuron and in other cells such as glia.", "llm": "sonnet", "heading": ["4 Psychosis, Schizophrenia, and the Neurotransmitter Networks Dopamine, Serotonin, and Glutamate"]}
+{"id": "q_8b801b9db0df", "corpus": "wikipedia_pharm", "page": "metoclopramide", "quote": "Metoclopramide appears to bind to dopamine D 2 receptors with nanomolar affinity (K i = 28.8 nM), where it is a receptor antagonist , and is also a mixed 5-HT 3 receptor antagonist/ 5-HT 4 receptor agonist."}
 {"id": "q_8ba10f07507f", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "5-HT 5A | 1,354 | Human"}
 {"id": "q_8ba9e3da91fa", "corpus": "stahl", "page": 161, "quote": "Limbitrol", "heading": ["Chlordiazepoxide", "Therapeutics", "Brands"]}
 {"id": "q_8bb6366854ee", "corpus": "gtopdb_ki", "page": "aripiprazole", "quote": "aripiprazole at 5-HT6 receptor (Htr6, Rat): Antagonist / Antagonist, pKi 6.8 [PMID 10327430]", "species": "Rat"}
@@ -1781,6 +1789,7 @@
 {"id": "q_8c293862b4c7", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in putamen: probe 1051414 PACall present in 62/62 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_8c8dbdf40de6", "corpus": "gtopdb", "page": 373, "quote": "Hippocampus, caudate nucleus, putamen, nucleus accumbens, amygdala, cervical vagus nerve.", "species": "Human", "llm": "sonnet"}
 {"id": "q_8cb8ef4b3e24", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in thalamus: probe 1027284 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_8cba128e10f4", "corpus": "wikipedia_pharm", "page": "meclizine", "quote": "Meclizine , sold under the brand name Bonine , among others, is an antihistamine used to treat motion sickness and dizziness ( vertigo )."}
 {"id": "q_8cc7aa3512cc", "corpus": "gtopdb_class", "page": 215, "quote": "D2 receptor (DRD2), GtoPdb target 215 | type: gpcr | family: Dopamine receptors"}
 {"id": "q_8cc7f38efc7b", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in thalamus: probe 1022773 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_8cc8d061af83", "corpus": "allen_ahba", "page": "HTR2C", "quote": "HTR2C detected in hypothalamus: probe 1055276 PACall present in 84/86 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -2091,6 +2100,7 @@
 {"id": "q_a209f9f39fa9", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 6.2 [PMID 8935801]", "species": "Human"}
 {"id": "q_a234ceb85df5", "corpus": "wikipedia_fr", "page": "qu_tiapine", "quote": "Ketipinor"}
 {"id": "q_a239a827f244", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in hippocampus: probe 1051414 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
+{"id": "q_a2482c8ec8c7", "corpus": "wikipedia_pharm", "page": "meclizine", "quote": "Meclizine is a first-generation antihistamine (nonselective H 1 antagonist ) of the piperazine class."}
 {"id": "q_a27e425a153a", "corpus": "stahl", "page": 875, "quote": "Stavzor", "heading": ["Valproate", "Therapeutics", "Brands"]}
 {"id": "q_a28f4a3c87a1", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "D 5 | 290 | Antagonist"}
 {"id": "q_a298356b34d2", "corpus": "kandel", "page": 1117, "quote": "There are also GABAergic projections from the NAc to the VTA, with some in a direct pathway innervating the VTA and some in an indirect pathway innervating the VTA via intervening GABAergic neurons in the ventral pallidum", "llm": "sonnet", "heading": ["43 Motivation, Reward, and Addictive States", "Drug Addiction Is a Pathological Reward State", "All Drugs of Abuse Target Neurotransmitter Receptors, Transporters, or Ion Channels"]}
@@ -2840,6 +2850,7 @@
 {"id": "q_db369c87c0fc", "corpus": "gtopdb_ki", "page": "cyproheptadine", "quote": "cyproheptadine at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 6.9 [PMID 8226867]", "species": "Human"}
 {"id": "q_db43197ca0bf", "corpus": "wikipedia_fr", "page": "acide_valpro_que", "quote": "Dépakine"}
 {"id": "q_db470f38f3eb", "corpus": "gtopdb_ki", "page": "cabergoline", "quote": "cabergoline at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7.7 [PMID 12388666]", "species": "Human"}
+{"id": "q_db4e348683de", "corpus": "wikipedia_pharm", "page": "granisetron", "quote": "Granisetron is a serotonin 5-HT 3 receptor antagonist used as an antiemetic to treat nausea and vomiting following chemotherapy and radiotherapy."}
 {"id": "q_db55dfda36a6", "corpus": "wikipedia_pharm", "page": "desipramine", "quote": "DAT | 3,190 | Human"}
 {"id": "q_db74774ee637", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in parietal: probe 1027284 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_db7587937e21", "corpus": "wikipedia_pharm", "page": "nimetazepam", "quote": "Elimination half-life | 14–30 hours"}

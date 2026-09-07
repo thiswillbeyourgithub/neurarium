@@ -5043,6 +5043,27 @@
     }
    }
   },
+  "granisetron": {
+   "5ht3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.5119,
+     "median": 2.0484,
+     "min": 1.5849,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7565620",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "granisetron",
+     "provenance": "verified",
+     "quote": "granisetron at 5-HT3A (HTR3A, Human): Antagonist / Antagonist, pKi 8.6-8.8 [PMID 7565620]",
+     "species": "Human"
+    }
+   }
+  },
   "guanfacine": {
    "alpha2": {
     "action": "partial_agonist",
@@ -6836,6 +6857,65 @@
      "provenance": "verified",
      "quote": "methylphenidate at NET (SLC6A2, Human): Inhibitor / Inhibition, pIC50 7.21",
      "species": "Human"
+    }
+   }
+  },
+  "metoclopramide": {
+   "5ht3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 677.4068,
+     "min": 354.8135,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11489465",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "metoclopramide",
+     "provenance": "verified",
+     "quote": "metoclopramide at 5-HT3A (HTR3A, Human): Antagonist / Antagonist, pKi 6-6.45 [PMID 11489465]",
+     "species": "Human"
+    }
+   },
+   "5ht4": {
+    "action": "agonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 1000.0,
+     "min": 1000.0,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "8946946",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "metoclopramide",
+     "provenance": "verified",
+     "quote": "metoclopramide at 5-HT4 receptor (Htr4, Mouse): Agonist / Full agonist, pKi 6 [PMID 8946946]",
+     "species": "Mouse"
+    }
+   },
+   "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 28.8403,
+     "median": 28.8403,
+     "min": 28.8403,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "9808703",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "metoclopramide",
+     "provenance": "verified",
+     "quote": "metoclopramide at D2 receptor (Drd2, Mouse): Antagonist / Antagonist, pKi 7.54 [PMID 9808703]",
+     "species": "Mouse"
     }
    }
   },

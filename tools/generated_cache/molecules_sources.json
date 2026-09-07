@@ -334,6 +334,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Diazepam_structure.svg",
     "title": "Diazepam"
   },
+  "dimenhydrinate": {
+    "file": "File:Dimenhydrinate.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Dimenhydrinate.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Dimenhydrinate"
+  },
   "diphenhydramine": {
     "file": "File:Diphenhydramine_2D_skeletal.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Diphenhydramine_2D_skeletal.svg",
@@ -473,6 +478,11 @@
     "file": "File:Glutethimide.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Glutethimide.svg",
     "title": "Glutethimide"
+  },
+  "granisetron": {
+    "file": "File:Granisetron_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Granisetron_structure.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Granisetron"
   },
   "guanfacine": {
     "file": "File:Guanfacine_structure.svg",
@@ -619,6 +629,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/MDMA_structure.svg",
     "title": "MDMA"
   },
+  "meclizine": {
+    "file": "File:Meclizine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Meclizine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Meclizine"
+  },
   "melatonin": {
     "file": "File:Melatonin.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Melatonin.svg",
@@ -673,6 +688,11 @@
     "file": "File:Methylphenidate.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Methylphenidate.svg",
     "title": "Methylphenidate"
+  },
+  "metoclopramide": {
+    "file": "File:Metoclopramide.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Metoclopramide.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Metoclopramide"
   },
   "mianserin": {
     "file": "File:Mianserin_2D_structure.svg",

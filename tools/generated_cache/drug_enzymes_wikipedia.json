@@ -1404,6 +1404,20 @@
    "strength": "major"
   }
  ],
+ "meclizine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "meclizine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 )"
+    }
+   ]
+  }
+ ],
  "methadone": [
   {
    "enzyme": "cyp2b6",
