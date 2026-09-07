@@ -2578,6 +2578,7 @@ function createInfoPanel(data, sourcingModal) {
     const parts = [affinity ? t("drug.affinityOnly") : binding.actionLabel,
                    binding.note];
     if (binding.tentative) parts.push(t("drug.speculative"));
+    if (binding.peripheral) parts.push(t("drug.peripheral"));
     const detail = parts.filter(Boolean).join(" · ");
     if (detail) txt.appendChild(el("span", "bind-action", detail));
     // Ki stacked under the name+action, with its own verified badge beside it.

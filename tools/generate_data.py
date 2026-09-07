@@ -864,6 +864,13 @@ def _normalize_binding(b: dict[str, Any], valid_targets: set[str], *,
         out_b["note"] = b["note"]
     if b.get("tentative"):
         out_b["tentative"] = True
+    # A binding the source itself says happens OUTSIDE the brain (carbidopa at DDC,
+    # entacapone at COMT: both are stated not to cross the blood-brain barrier). The
+    # claim is real and stays listed with its action + source, but the dataset models
+    # no periphery, so it lights no region and drives no flow: showing carbidopa
+    # damping dopamine across the brain would be the opposite of what it does there.
+    if b.get("peripheral"):
+        out_b["peripheral"] = True
     # `provisional_action` (a direction GtoPdb gave to a binding PDSP had left
     # affinity-only) is deliberately NOT emitted: such a binding behaves like any
     # other, and its `sources` already name the corpus, so the flag would be a

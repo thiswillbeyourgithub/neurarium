@@ -617,11 +617,17 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   const bindingDisplayFields = (b) => {
     const tgt = drugTargets[b.target] || {};
     const affinityOnly = !!b.affinity_only;
+    // The source says this one happens outside the brain (carbidopa at DDC,
+    // entacapone at COMT). It keeps its action, effect colour and source, but the
+    // drug loop below leaves it out of the lit regions and the flow, since the
+    // dataset models no periphery to light.
+    const peripheral = !!b.peripheral;
     const act = affinityOnly ? {} : drugActions[b.action] || {};
     const effect = affinityOnly ? null : b.effect || act.effect || "modulate";
     return {
       tgt,
       affinityOnly,
+      peripheral,
       effect,
       target: b.target,
       targetName: tgt.name ? localize(tgt.name) : b.target,
@@ -719,14 +725,17 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // then layers on the animation-only fields (structureIds/flow/weights). See
       // bindingDisplayFields. `tgt` is reused, `disp.tgt` is not returned to callers.
       const disp = bindingDisplayFields(b);
-      const { tgt, affinityOnly, effect } = disp;
+      const { tgt, affinityOnly, peripheral, effect } = disp;
+      // Neither an affinity-only nor a peripheral binding touches the scene: the
+      // first states no direction, the second states one that happens elsewhere.
+      const inert = affinityOnly || peripheral;
       // An affinity_only binding has a measured Ki but no known direction (neither
       // PDSP nor GtoPdb states one): it is listed in the panel with its Ki but has no
       // action/effect, so it never animates and contributes nothing to the lit-region
       // union or the flow. Every binding that DOES state a direction animates,
       // whichever corpus sourced it.
       let structureIds = [];
-      if (affinityOnly) {
+      if (inert) {
         structureIds = [];
       } else if (tgt.ubiquitous) {
         structureIds = allIds.slice();
@@ -737,7 +746,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
           [bse, `${bse}_R`, `${bse}_L`].filter((id) => byId.has(id)),
         );
       }
-      if (!affinityOnly) for (const id of structureIds) affected.add(id);
+      if (!inert) for (const id of structureIds) affected.add(id);
       return {
         target: disp.target,
         targetName: disp.targetName,
@@ -746,9 +755,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // kinds), null when the system has no modeled ascending pathway or the
         // binding is affinity-only. Lets a panel list the "projections affected" per
         // binding and lets d.flowKinds below dedupe from a single field.
-        flowKind: affinityOnly ? null : systemFlowKinds[tgt.system] || null,
+        flowKind: inert ? null : systemFlowKinds[tgt.system] || null,
         receptor: disp.receptor,
         affinityOnly,
+        peripheral,
         action: disp.action,
         actionLabel: disp.actionLabel,
         effect,
@@ -760,10 +770,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // Relative engagement from the measured Ki (0.35..1), NOT effect size.
         // Scales the dot cloud in drug-anim; also weights this binding's system
         // tone below. Neutral mid-value when no Ki.
-        affinityWeight: affinityOnly ? 0 : affinityWeightOf(b.ki),
+        affinityWeight: inert ? 0 : affinityWeightOf(b.ki),
         // Signed tone-setter contribution to its system's ascending flow (+1 raises
         // the transmitter's tone, -1 lowers, 0 = not a tone-setter -> dots only).
-        toneSign: affinityOnly ? 0 : toneSignOf(tgt, b.action),
+        toneSign: inert ? 0 : toneSignOf(tgt, b.action),
         // Per-claim sources ({corpus, page, quote, provenance}); `provenance` is the
         // strongest grade among the quote sources AND the measured Ki. See
         // bindingDisplayFields / _binding_grade in generate_data.py.
