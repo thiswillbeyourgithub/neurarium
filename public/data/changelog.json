@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.67.0",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The liver's non-cytochrome routes are now read too, so drugs cleared by one of them finally show how the body breaks them down. Methylphenidate is the clearest case: it showed nothing at all, because the enzyme that clears it (CES1) was not part of the vocabulary. Glucuronidation (the UGT enzymes) and FMO3 came in with it, which fills in lamotrigine, morphine, codeine, asenapine, atomoxetine and the amphetamines.",
+          "commits": [
+            "aff10ea"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.66.0",
       "date": "2026-09-07",
       "entries": [
