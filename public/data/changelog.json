@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.61.1",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "A breakdown product of a drug has no page of its own, so looking one up opens the drug it comes from. Search and the Data browser were not saying so: picking 6-monoacetylmorphine, a product of heroin, simply opened a heroin page, as though the two were the same substance. Both now scroll to that product's line and flash it, so it is clear why the page opened.",
+          "commits": [
+            "71b26cb"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.61.0",
       "date": "2026-09-07",
       "entries": [
