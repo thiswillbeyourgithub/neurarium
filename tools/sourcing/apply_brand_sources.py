@@ -86,6 +86,9 @@ def parse_brands(answer):
     brands = []
     for part in _BR.split(answer or ""):
         part = _TAG.sub("", part).replace("•", " ")
+        # The dump carries the odd stray control character (a BEL ahead of Nuedexta),
+        # which `\s` does not match, so one leaked into a brand name and its quote.
+        part = re.sub(r"[\x00-\x1f\x7f]", " ", part)
         part = re.sub(r"\s+", " ", part).strip()
         if part:
             brands.append(part)

@@ -932,6 +932,7 @@
 {"id": "q_47f1d6cb5331", "corpus": "wikipedia_fr", "page": "thiopental", "quote": "Pentothal"}
 {"id": "q_480e3b508373", "corpus": "gtopdb_ki", "page": "chlorpromazine", "quote": "chlorpromazine at 5-HT6 receptor (HTR6, Human): Antagonist / Inverse agonist, pKi 7.7-7.8 [PMID 8522988]", "species": "Human"}
 {"id": "q_486e5ac1d71e", "corpus": "stahl", "page": 149, "quote": "Is also an inducer of CYP2C9 and weakly of CYP1A2 and CYP2C19", "heading": ["Carbamazepine", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_487deca3f9e8", "corpus": "stahl", "page": 253, "quote": "Nuedexta (in combination with quinidine)"}
 {"id": "q_488ce8e9f4fc", "corpus": "stahl", "page": 770, "quote": "Inhibits CYP2C19", "heading": ["Sertraline", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_488d9264046b", "corpus": "stahl", "page": 718, "quote": "Metabolized predominantly by CYP1A2", "heading": ["Ramelteon", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_48b0a883ccff", "corpus": "wikipedia_fr", "page": "milnacipran", "quote": "Fetzima"}
@@ -1203,7 +1204,6 @@
 {"id": "q_5de9f0107d75", "corpus": "gtopdb", "page": 22, "quote": "Prefrontal cortex.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_5e0704bee107", "corpus": "stahl", "page": 647, "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist, antiemetic)", "llm": "sonnet", "heading": ["Perphenazine", "Therapeutics", "Class"]}
 {"id": "q_5e097967dd84", "corpus": "wikipedia_pharm", "page": "promethazine", "quote": "SERT (Serotonin transporter) (Human) | 2130"}
-{"id": "q_5e0ce9e5dbec", "corpus": "stahl", "page": 253, "quote": "\u0007Nuedexta (in combination with quinidine)", "heading": ["Dextromethorphan–Quinidine"]}
 {"id": "q_5e112e104b89", "corpus": "wikipedia_pharm", "page": "heroin", "quote": "Heroin , also known as diacetylmorphine and diamorphine among other names, is a morphinan opioid substance synthesized from the dried latex of the opium poppy ; it is mainly used as a recreational drug for its euphoric effects."}
 {"id": "q_5e23d6b2b14f", "corpus": "stahl", "page": 247, "quote": "Auvelity", "heading": ["Dextromethorphan–Bupropion", "Therapeutics"]}
 {"id": "q_5e280d790dfe", "corpus": "gtopdb_ki", "page": "perphenazine", "quote": "perphenazine at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 8.2 [PMID 12629531]", "species": "Human"}
