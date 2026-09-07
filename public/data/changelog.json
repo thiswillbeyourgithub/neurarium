@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.62.0",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Seven psychedelics and dissociatives join the roster: psilocybin, mescaline, 2C-B, salvinorin A, ibogaine, phencyclidine and nitrous oxide. Only DMT was here before, though LSD, MDMA, ketamine and cannabis already were. Salvinorin A is the odd one out and worth opening: where the others work on a serotonin receptor, the active ingredient of salvia acts on an opioid one, which is why it feels nothing like them.",
+          "commits": [
+            "ea49696"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Ibogaine arrives showing its measured affinities and claiming no mechanism. Its own literature says it touches the opioid, sigma and NMDA systems without ever saying whether it turns them up or down, so its page says exactly that rather than guessing a direction from a number.",
+          "commits": [
+            "ea49696"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Laboratories sometimes file a measurement under a drug's abbreviation rather than its name, and those measurements were being dropped. Phencyclidine had 18 of its 25 measurements filed as \"PCP\", so the affinity shown rested on a single experiment where fourteen exist.",
+          "commits": [
+            "5609617"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.61.1",
       "date": "2026-09-07",
       "entries": [
