@@ -1,6 +1,40 @@
 {
   "versions": [
     {
+      "version": "3.65.0",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The six missing Parkinson's drugs: levodopa, carbidopa, benserazide, entacapone, tolcapone and istradefylline. This was the emptiest family the drug roster had left (3 of 9 present), and every new binding comes with its source quote.",
+          "commits": [
+            "829fa64"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Two new enzymes to act on: AADC, which builds dopamine from levodopa, and COMT, which breaks it down. Both list where they are expressed, confirmed against the Allen human brain atlas.",
+          "commits": [
+            "1019b68"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A drug can now be a precursor of a transmitter, not only a blocker of something: levodopa is dopamine's raw material, so it raises dopaminergic tone the way an enzyme inhibitor does, while blocking that same synthesis (carbidopa) lowers it.",
+          "commits": [
+            "1019b68"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "A binding its own source says happens outside the brain now says so, and lights nothing in the 3D scene. Carbidopa, benserazide and entacapone are built not to cross into the brain, so showing them acting all over it would have been the opposite of the truth.",
+          "commits": [
+            "ce7e5f5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.64.0",
       "date": "2026-09-07",
       "entries": [
