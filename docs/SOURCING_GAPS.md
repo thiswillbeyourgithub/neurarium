@@ -1030,8 +1030,10 @@ never a candidate. The absence was an artefact of the sources, not a scope decis
 
 **Status: opioid analgesics acted on (v3.60.0)**, taking the roster to 259 drugs. The mu,
 delta and kappa receptors were already modeled, and PDSP (#5) plus GtoPdb ligand
-interactions (#11) cover the family well, so the pass cost no new targets. The six
-remaining families, cheapest first, are the pending list in `TODO.md`:
+interactions (#11) cover the family well, so the pass cost no new targets. Then
+**antiparkinson (v3.65.0)** and **migraine (v3.67.0)**, the latter costing the one new
+target the table priced it at (CGRP, a peptide receptor). Four families remain, cheapest
+first:
 
 | family | missing | what it needs first |
 |---|---|---|
@@ -1039,12 +1041,17 @@ remaining families, cheapest first, are the pending list in `TODO.md`:
 | antiepileptics | vigabatrin, ethosuximide, lacosamide, brivaracetam | GABA-T and a T-type calcium channel target (SV2A exists) |
 | psychedelics + dissociatives | psilocybin, mescaline, ibogaine, salvinorin A, 2C-B, nitrous oxide, phencyclidine | nothing: 5-HT2A and NMDA modeled; overlaps the `recreational` category |
 | anesthetics | propofol, sevoflurane, isoflurane, etomidate, xenon | nothing, but the volatiles have no PDSP panel, so most land affinity-only or unbound |
-| antiparkinson | levodopa, carbidopa, benserazide, entacapone, tolcapone, istradefylline | AADC and COMT as targets (istradefylline needs only A2a) |
-| migraine | sumatriptan, rizatriptan, flunarizine, pizotifen, erenumab, rimegepant | a CGRP receptor target; the most expensive of the six |
 
 Already covered, so not a gap: the dementia drugs, the Tier-1 European antipsychotics and
 benzodiazepines from the roster pass above, and the loose CNS set (baclofen, modafinil,
 pitolisant, prazosin, biperiden, meprobamate, clonidine, guanfacine, atomoxetine).
+
+**The loose ends are closed too (v3.68.0).** The same survey left a tail that fit no family
+heading: the appetite / sympathomimetic drugs (phentermine, fenfluramine, ephedrine,
+pseudoephedrine, sibutramine, yohimbine) and four singletons (tiapride, opipramol, atropine,
+betahistine). All ten are in, on the modeled targets, at the cost of one new class
+(`appetite_suppressant`). Phentermine had been reachable only as half of the
+phentermine/topiramate combo.
 
 **Deliberately skipped: loperamide.** It is a mu agonist, but a peripherally restricted one
 that does not cross the blood-brain barrier at therapeutic doses. Adding it would light brain
