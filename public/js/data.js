@@ -652,6 +652,13 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       ki: resolveKi(b.ki),
     };
   };
+  // A brand name can carry a parenthetical note from the source's own list, and two
+  // very different things hide in there. A FORMULATION note ("Saphris (sublingual)")
+  // is the same molecule delivered another way. A COMPOSITION note ("Suboxone (with
+  // naloxone)") is a DIFFERENT product, so letting it headline the drug misnames it:
+  // buprenorphine is not Suboxone. See the primaryBrand pick below.
+  const BRAND_NOTE = /\s*\([^()]*\)\s*$/;
+  const BRAND_COMBO = /\((?:with|in combination|\+)/i;
   for (const d of drugs) {
     d.description = d.description ? localize(d.description) : "";
     // Provenance grade of the description (llm synthesis vs a sourced Wikipedia
@@ -839,7 +846,28 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         return true;
       });
     d.brandNames = d.brandsOrdered.map((b) => b.name);
-    d.primaryBrand = d.brandNames[0] || null;
+    // Locale-ordered brand *stems*, the note dropped: a brand listed both plainly and
+    // with a note (naltrexone's "Revia (oral)" in the NA list, "Revia" in the FR one)
+    // is ONE brand, and counts as plainly named wherever it first appeared.
+    const stems = [];
+    const stemAt = new Map();
+    for (const n of d.brandNames) {
+      const stem = n.replace(BRAND_NOTE, "");
+      const k = stem.toLowerCase();
+      let e = stemAt.get(k);
+      if (!e) { e = { stem, plain: false, combo: false }; stemAt.set(k, e); stems.push(e); }
+      if (!BRAND_NOTE.test(n)) e.plain = true;
+      else if (BRAND_COMBO.test(n)) e.combo = true;
+    }
+    // The headline brand is the first plainly-named one, else the first whose only
+    // note is a formulation, so a combination product never quietly stands in for the
+    // single molecule: Stahl lists nothing but the naloxone combos and the depots for
+    // buprenorphine, whose plain brand (Subutex here, Temgésic in French) is the one
+    // to show. A drug that IS a combination keeps its own, since it is already named.
+    const selfCombo = /[+/]/.test(d.name || "");
+    d.primaryBrand = (stems.find((e) => e.plain)
+      || stems.find((e) => selfCombo || !e.combo)
+      || {}).stem || d.brandNames[0] || null;
     d.displayName = d.primaryBrand ? `${d.name} (${d.primaryBrand})` : d.name;
     // `aliases` are the search-only alternate names (GHB for sodium oxybate, ecstasy
     // for MDMA, ...). They join the haystack and are never rendered: a drug is always
