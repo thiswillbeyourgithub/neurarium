@@ -2376,6 +2376,20 @@
    "strength": "moderate"
   }
  ],
+ "sevoflurane": [
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sevoflurane",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver by CYP2E1"
+    }
+   ]
+  }
+ ],
  "sildenafil": [
   {
    "enzyme": "cyp2c9",
