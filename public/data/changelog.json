@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "3.63.0",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Five general anesthetics: propofol, sevoflurane, isoflurane, etomidate and xenon, in a new Anesthetic class. They act on receptors the dataset already carried (GABA-A, NMDA, glycine, 5-HT3), so their absence said more about where the drug list came from than about the brain (d7c62ff).",
+          "commits": []
+        },
+        {
+          "category": "fixed",
+          "text": "Four drug panels showed a Wikipedia icon where the molecule belongs: rubidium chloride displayed a hazard diamond, nitrous oxide and calcium carbimide a category arrow, xenon the featured-article star. A substance whose article draws no structure now simply shows no image (e9277bd).",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.62.0",
       "date": "2026-09-07",
       "entries": [
