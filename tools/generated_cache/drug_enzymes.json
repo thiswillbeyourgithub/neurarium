@@ -1891,6 +1891,32 @@
      "quote": "Inhibits CYP3A4 (weak)"
     }
    ]
+  },
+  {
+   "enzyme": "ugt1a9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 901,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2D6, UGT1A9, and UGT2B15"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "ugt2b15",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 901,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by CYP2D6, UGT1A9, and UGT2B15"
+    }
+   ],
+   "strength": "major"
   }
  ],
  "vortioxetine": [

@@ -80,6 +80,8 @@ import check_data  # noqa: E402  (reuse the quote gate's normalizer, one definit
 import drugs_io  # noqa: E402
 from fetch_cyp import (  # noqa: E402  (one definition of each shared rule)
     CYP_RE,
+    ENZYME_RE,
+    NON_CYP_ENZYMES,
     ROLE_PATTERNS,
     ROLE_STRENGTHS,
     STRENGTH_RE,
@@ -93,19 +95,8 @@ OUT = os.path.join(REPO, "tools", "generated_cache", "drug_enzymes_wikipedia.jso
 # The isoform ids the dataset models (mirrors ENZYMES in data_generators/drugs.py; not
 # imported because this script must run with only the repo's stdlib path set up).
 KNOWN_ENZYMES = {"cyp1a2", "cyp2a6", "cyp2b6", "cyp2c8", "cyp2c9", "cyp2c19",
-                 "cyp2d6", "cyp2e1", "cyp3a4", "cyp3a5", "adh"}
-
-# The non-CYP routes the dataset models, as the phrase a drugbox row spells them with.
-# The field is `enzyme`, not `cyp`, precisely so a non-cytochrome route is a row like
-# any other: ethanol's own drugbox names alcohol dehydrogenase beside CYP2E1, and
-# reading only `CYP` left that route invisible. Only routes ENZYMES already carries
-# are matched, so the cache never proposes a row the build would reject. (The other
-# routes Wikipedia's drugboxes name -- UGT/glucuronidation, FMO3, MAO, esterases --
-# are a vocabulary gap, not an extraction one; see docs/SOURCING_GAPS.md.)
-NON_CYP_ENZYMES = [(re.compile(r"\balcohol\s+dehydrogenase\b", re.I), "adh")]
-
-ENZYME_RE = re.compile("|".join([CYP_RE.pattern] +
-                                [p.pattern for p, _ in NON_CYP_ENZYMES]), re.I)
+                 "cyp2d6", "cyp2e1", "cyp3a4", "cyp3a5", "adh", "ces1", "fmo3",
+                 "ugt", "ugt1a4", "ugt1a9", "ugt2b7", "ugt2b15"}
 
 # The flattened drugbox row. `pageimages`-style tables come through as "cell | cell",
 # so the metabolism field is a line whose first cell is exactly "Metabolism".

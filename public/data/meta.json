@@ -2957,6 +2957,34 @@
     "adh": {
       "label": "Alcohol dehydrogenase",
       "wikipedia": "https://en.wikipedia.org/wiki/Alcohol_dehydrogenase"
+    },
+    "ces1": {
+      "label": "CES1",
+      "wikipedia": "https://en.wikipedia.org/wiki/Carboxylesterase_1"
+    },
+    "fmo3": {
+      "label": "FMO3",
+      "wikipedia": "https://en.wikipedia.org/wiki/FMO3"
+    },
+    "ugt": {
+      "label": "UGT (glucuronidation)",
+      "wikipedia": "https://en.wikipedia.org/wiki/UDP-glucuronosyltransferase"
+    },
+    "ugt1a4": {
+      "label": "UGT1A4",
+      "wikipedia": "https://en.wikipedia.org/wiki/UGT1A4"
+    },
+    "ugt1a9": {
+      "label": "UGT1A9",
+      "wikipedia": "https://en.wikipedia.org/wiki/UGT1A9"
+    },
+    "ugt2b7": {
+      "label": "UGT2B7",
+      "wikipedia": "https://en.wikipedia.org/wiki/UGT2B7"
+    },
+    "ugt2b15": {
+      "label": "UGT2B15",
+      "wikipedia": "https://en.wikipedia.org/wiki/UGT2B15"
     }
   },
   "enzyme_roles": {
@@ -3148,8 +3176,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 301,
-        "verified": 301,
+        "total": 338,
+        "verified": 338,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3320,14 +3348,14 @@
       }
     },
     "nodes": {
-      "total": 4292,
-      "verified": 3975,
+      "total": 4329,
+      "verified": 4012,
       "uncertain": 146,
       "sourced": 0,
       "llm": 157,
       "nosource": 14,
       "missing": 171,
-      "backed": 4121,
+      "backed": 4158,
       "pct_backed": 96
     },
     "ki_coverage": {

@@ -66,16 +66,41 @@ OUT = os.path.join(REPO, "tools", "generated_cache", "drug_enzymes.json")
 CYP_RE = re.compile(r"CYP\s?([1-4][A-Z]\d{1,2})((?:\s*/\s*\d?[A-Z]?\d{1,2})*)", re.I)
 INDEX_ROW = re.compile(r"\|\s*\d+\s*\|\s*(.+?)\s*\|\s*\[(\d+)-(\d+)\]")
 
+# The non-cytochrome clearance routes the ENZYMES vocabulary carries, as the phrases a
+# source spells them with. Lives here, beside CYP_RE, because both this Stahl pass and
+# the Wikipedia one read the same sentences for the same claim: a drug cleared by one
+# of these has no CYP row at all, so reading only CYP made it look unmetabolized.
+# Only CES1 by name ("carboxylesterase" alone does not say which one, and CES2 is a
+# different enzyme). MAO is deliberately out: it is a modeled drug target too, so a
+# sentence naming it is usually about the drug acting ON it, not being cleared BY it.
+NON_CYP_ENZYMES = [
+    (re.compile(r"\balcohol\s+dehydrogenase\b", re.I), "adh"),
+    (re.compile(r"\bCES-?1\b|\bcarboxylesterase\s*1\b|\bhCE-?1\b", re.I), "ces1"),
+    (re.compile(r"\bFMO-?3\b", re.I), "fmo3"),
+    (re.compile(r"\bUGT-?1A4\b", re.I), "ugt1a4"),
+    (re.compile(r"\bUGT-?1A9\b", re.I), "ugt1a9"),
+    (re.compile(r"\bUGT-?2B7\b", re.I), "ugt2b7"),
+    (re.compile(r"\bUGT-?2B15\b", re.I), "ugt2b15"),
+    # An isoform pattern cannot be swallowed by this generic one: \b does not fall
+    # between "UGT" and "2B7".
+    (re.compile(r"\bUGTs?\b|\bglucuronidation\b", re.I), "ugt"),
+]
+# What a role verb must govern to count: a cytochrome, or one of the routes above.
+ENZYME_TOKEN = "(?:CYP|" + "|".join(p.pattern for p, _ in NON_CYP_ENZYMES) + ")"
+ENZYME_RE = re.compile("|".join([CYP_RE.pattern]
+                                + [p.pattern for p, _ in NON_CYP_ENZYMES]), re.I)
+
 # Subject-is-the-drug patterns, checked in order (substrate first). Each requires the
 # verb to govern an isoform a few words later, not merely to appear in the bullet:
 # amitriptyline's "Metabolized to an active metabolite, nortriptyline, which is
 # predominantly a norepinephrine reuptake inhibitor, by demethylation via CYP1A2" is a
 # substrate claim, and its "inhibitor" describes the metabolite, not a CYP.
 ROLE_PATTERNS = [
-    ("substrate", re.compile(r"\bsubstrate\b(?:\s+\S+){0,3}?\s*CYP|"
-                             r"\bmetaboliz\w*\b.*?\b(?:by|via)\b(?:\s+\S+){0,3}?\s*CYP", re.I)),
-    ("inhibitor", re.compile(r"\binhibit(?:s|or)\b(?:\s+\S+){0,3}?\s*CYP", re.I)),
-    ("inducer", re.compile(r"\binduc(?:es|er)\b(?:\s+\S+){0,3}?\s*CYP", re.I)),
+    ("substrate", re.compile(r"\bsubstrate\b(?:\s+\S+){0,3}?\s*" + ENZYME_TOKEN + "|"
+                             r"\bmetaboliz\w*\b.*?\b(?:by|via)\b(?:\s+\S+){0,3}?\s*"
+                             + ENZYME_TOKEN, re.I)),
+    ("inhibitor", re.compile(r"\binhibit(?:s|or)\b(?:\s+\S+){0,3}?\s*" + ENZYME_TOKEN, re.I)),
+    ("inducer", re.compile(r"\binduc(?:es|er)\b(?:\s+\S+){0,3}?\s*" + ENZYME_TOKEN, re.I)),
 ]
 # A bullet that talks about OTHER drugs' effect on this one, never about its own role.
 VICTIM_RE = re.compile(r"inhibitors\b|\binducers\b|may be increased|"
@@ -146,6 +171,9 @@ def isoforms(text: str) -> list[str]:
             if not re.match(r"^\d[A-Z]", part):         # "5" -> family of the head
                 part = head[:2] + part
             found.append("cyp" + part.lower())
+    for pat, enzyme in NON_CYP_ENZYMES:
+        if pat.search(text):
+            found.append(enzyme)
     return list(dict.fromkeys(found))
 
 
@@ -153,7 +181,7 @@ def classify(bullet: str) -> tuple[str | None, str | None]:
     """(role, strength) for a bullet whose subject is the drug, else (None, None)."""
     if VICTIM_RE.search(bullet) or ORIGIN_RE.search(bullet):
         return None, None
-    first_isoform = CYP_RE.search(bullet)
+    first_isoform = ENZYME_RE.search(bullet)
     head = bullet[: first_isoform.start()] if first_isoform else bullet
     for role, pat in ROLE_PATTERNS:
         if pat.search(bullet):

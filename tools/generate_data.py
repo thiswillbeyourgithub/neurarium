@@ -1074,6 +1074,16 @@ def _load_drug_enzymes() -> dict[str, list[dict[str, Any]]]:
             have = {(r["enzyme"], r["role"]) for r in merged.get(drug_id, [])}
             merged.setdefault(drug_id, []).extend(
                 r for r in rows if (r["enzyme"], r["role"]) not in have)
+    # A source that names no isoform ("metabolized by UGTs") writes the generic `ugt`
+    # row. When another source names the isoform for that same role, the generic one
+    # says strictly less about the same fact, so it is dropped rather than listed
+    # beside it: viloxazine would otherwise read UGT, UGT1A9 and UGT2B15 as three
+    # separate routes when the first IS the other two.
+    for drug_id, rows in merged.items():
+        specific = {r["role"] for r in rows
+                    if r["enzyme"].startswith("ugt") and r["enzyme"] != "ugt"}
+        merged[drug_id] = [r for r in rows
+                           if not (r["enzyme"] == "ugt" and r["role"] in specific)]
     return {k: sorted(v, key=lambda r: (r["enzyme"], r["role"]))
             for k, v in merged.items()}
 

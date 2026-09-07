@@ -102,11 +102,35 @@
      "quote": "Metabolism | CYP2D6 , DBH , FMO3"
     }
    ]
+  },
+  {
+   "enzyme": "fmo3",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dextroamphetamine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , DBH , FMO3"
+    }
+   ]
   }
  ],
  "amphetamine_dl": [
   {
    "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "amphetamine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , DBH , FMO3"
+    }
+   ]
+  },
+  {
+   "enzyme": "fmo3",
    "role": "substrate",
    "sources": [
     {
@@ -171,6 +195,18 @@
      "quote": "Metabolism | hepatic (glucurinodation by UGT1A4 and oxidative metabolism by CYP1A2 )"
     }
    ]
+  },
+  {
+   "enzyme": "ugt1a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "asenapine",
+     "provenance": "verified",
+     "quote": "Metabolism | hepatic (glucurinodation by UGT1A4 and oxidative metabolism by CYP1A2 )"
+    }
+   ]
   }
  ],
  "atomoxetine": [
@@ -197,6 +233,18 @@
      "quote": "Metabolism | Liver : ring hydroxylation ( CYP2D6 , others), benzylic hydroxylation, N - demethylation ( CYP2C19 ), glucuronidation ( UGTs"
     }
    ]
+  },
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "atomoxetine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : ring hydroxylation ( CYP2D6 , others), benzylic hydroxylation, N - demethylation ( CYP2C19 ), glucuronidation ( UGTs"
+    }
+   ]
   }
  ],
  "blonanserin": [
@@ -209,6 +257,20 @@
      "page": "blonanserin",
      "provenance": "verified",
      "quote": "Metabolism | CYP3A4"
+    }
+   ]
+  }
+ ],
+ "brexanolone": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "allopregnanolone",
+     "provenance": "verified",
+     "quote": "Metabolism | Non- CYP450 ( keto - reduction via aldo-keto reductases (AKR), glucuronidation via glucuronosyltransferases (UGT), sulfation via sulfotransferases (SULT))"
     }
    ]
   }
@@ -411,6 +473,32 @@
    ]
   }
  ],
+ "chloral_hydrate": [
+  {
+   "enzyme": "adh",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "chloral_hydrate",
+     "provenance": "verified",
+     "quote": "Chloral hydrate inhibits liver alcohol dehydrogenase in vitro ."
+    }
+   ]
+  },
+  {
+   "enzyme": "adh",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "chloral_hydrate",
+     "provenance": "verified",
+     "quote": "Chloral hydrate is metabolized to both 2,2,2-trichloroethanol (TCE) and trichloroacetic acid (TCA) by alcohol dehydrogenase ."
+    }
+   ]
+  }
+ ],
  "chlorpromazine": [
   {
    "enzyme": "cyp2d6",
@@ -545,6 +633,32 @@
      "quote": "Metabolism | Liver : CYP2D6 (to morphine ), CYP3A4 (to norcodeine ), UGT2B7 (to 3- and 6- glucuronides of codeine, norcodeine, and morphine)"
     }
    ]
+  },
+  {
+   "enzyme": "ugt2b7",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "codeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP2D6 (to morphine ), CYP3A4 (to norcodeine ), UGT2B7 (to 3- and 6- glucuronides of codeine, norcodeine, and morphine)"
+    }
+   ]
+  }
+ ],
+ "cyproheptadine": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cyproheptadine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver , including glucuronidation"
+    }
+   ]
   }
  ],
  "daridorexant": [
@@ -617,6 +731,18 @@
  "dexmedetomidine": [
   {
    "enzyme": "cyp2a6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dexmedetomidine",
+     "provenance": "verified",
+     "quote": "Dexmedetomidine is metabolized by the liver , largely by glucuronidation (34%) as well as by oxidation via CYP2A6 and other cytochrome P450 enzymes ."
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt",
    "role": "substrate",
    "sources": [
     {
@@ -806,6 +932,32 @@
      "page": "donepezil",
      "provenance": "verified",
      "quote": "Metabolism | CYP2D6 , CYP3A4 , and glucuronidation . Four major metabolites, two of which are active."
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "donepezil",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 , CYP3A4 , and glucuronidation . Four major metabolites, two of which are active."
+    }
+   ]
+  }
+ ],
+ "dothiepin": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dosulepin",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (N- demethylation , S- oxidation , glucuronidation )"
     }
    ]
   }
@@ -1096,6 +1248,20 @@
    "strength": "major"
   }
  ],
+ "flumazenil": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "flumazenil",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic: hydrolysis of the ester and glucuronidation"
+    }
+   ]
+  }
+ ],
  "flunarizine": [
   {
    "enzyme": "cyp2d6",
@@ -1362,6 +1528,21 @@
    "strength": "major"
   }
  ],
+ "lamotrigine": [
+  {
+   "enzyme": "ugt1a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lamotrigine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mostly UGT1A4 -mediated)"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
  "lemborexant": [
   {
    "enzyme": "cyp3a4",
@@ -1417,6 +1598,34 @@
    ]
   }
  ],
+ "lofexidine": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lofexidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( glucuronidation )"
+    }
+   ]
+  }
+ ],
+ "lorazepam": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lorazepam",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver glucuronidation"
+    }
+   ]
+  }
+ ],
  "loxapine": [
   {
    "enzyme": "cyp1a2",
@@ -1456,6 +1665,20 @@
     }
    ],
    "strength": "major"
+  }
+ ],
+ "lumateperone": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lumateperone",
+     "provenance": "verified",
+     "quote": "Metabolism | Multiple UGTs , CYP450s , and AKR enzymes"
+    }
+   ]
   }
  ],
  "lurasidone": [
@@ -1551,6 +1774,33 @@
      "quote": "Metabolism | CYP2D6 and FMO3"
     }
    ]
+  },
+  {
+   "enzyme": "fmo3",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methamphetamine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP2D6 and FMO3"
+    }
+   ]
+  }
+ ],
+ "methylphenidate_dl": [
+  {
+   "enzyme": "ces1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methylphenidate",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (80%) mostly CES1 -mediated"
+    }
+   ],
+   "strength": "major"
   }
  ],
  "mianserin": [
@@ -1730,6 +1980,33 @@
    ]
   }
  ],
+ "morphine": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "morphine",
+     "provenance": "verified",
+     "quote": "Morphine is metabolized primarily into morphine-3-glucuronide (M3G) and morphine-6-glucuronide (M6G) via glucuronidation by phase II metabolism enzyme UDP-glucuronosyl transferase-2B7 (UGT2B7)."
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "ugt2b7",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "morphine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : UGT2B7"
+    }
+   ]
+  }
+ ],
  "nefazodone": [
   {
    "enzyme": "cyp2d6",
@@ -1795,6 +2072,19 @@
     }
    ],
    "strength": "major"
+  },
+  {
+   "enzyme": "fmo3",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nicotine",
+     "provenance": "verified",
+     "quote": "Metabolism | Primarily hepatic : CYP2A6 , CYP2B6 , FMO3 , others"
+    }
+   ],
+   "strength": "major"
   }
  ],
  "nortriptyline": [
@@ -1835,6 +2125,18 @@
      "quote": "Olanzapine is metabolized by the cytochrome P450 (CYP) system; principally by isozyme 1A2 (CYP1A2) and to a lesser extent by CYP2D6."
     }
    ]
+  },
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "olanzapine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (direct glucuronidation and CYP1A2 mediated oxidation)"
+    }
+   ]
   }
  ],
  "ondansetron": [
@@ -1871,6 +2173,20 @@
      "page": "ondansetron",
      "provenance": "verified",
      "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
+    }
+   ]
+  }
+ ],
+ "oxazepam": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxazepam",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (glucuronidation)"
     }
    ]
   }
@@ -1959,6 +2275,18 @@
  ],
  "pethidine": [
   {
+   "enzyme": "ces1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pethidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver : CYP2B6 , CYP3A4 , CYP2C19 , Carboxylesterase 1"
+    }
+   ]
+  },
+  {
    "enzyme": "cyp2b6",
    "role": "substrate",
    "sources": [
@@ -1991,6 +2319,20 @@
      "page": "pethidine",
      "provenance": "verified",
      "quote": "Metabolism | Liver : CYP2B6 , CYP3A4 , CYP2C19 , Carboxylesterase 1"
+    }
+   ]
+  }
+ ],
+ "phencyclidine": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "phencyclidine",
+     "provenance": "verified",
+     "quote": "Metabolism | Oxidative hydroxylation in liver by CYP450 enzymes , glucuronidation"
     }
    ]
   }
@@ -2139,6 +2481,20 @@
    ]
   }
  ],
+ "pizotifen": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pizotifen",
+     "provenance": "verified",
+     "quote": "Metabolism | N - Glucuronidation"
+    }
+   ]
+  }
+ ],
  "prochlorperazine": [
   {
    "enzyme": "cyp2d6",
@@ -2165,6 +2521,34 @@
     }
    ],
    "strength": "major"
+  }
+ ],
+ "promethazine": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "promethazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver glucuronidation and sulfoxidation"
+    }
+   ]
+  }
+ ],
+ "propofol": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "propofol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver glucuronidation"
+    }
+   ]
   }
  ],
  "propranolol": [
@@ -2206,6 +2590,18 @@
   },
   {
    "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "propranolol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (extensive) CYP1A2 , CYP2D6 ; minor: CYP2C19 , CYP3A4 ; aromatic hydroxylation (mainly 4-hydroxylation), N - dealkylation , side-chain oxidation , glucuronidation"
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt",
    "role": "substrate",
    "sources": [
     {
@@ -2309,6 +2705,46 @@
      "page": "ropinirole",
      "provenance": "verified",
      "quote": "Metabolism | Liver ( CYP1A2 )"
+    }
+   ]
+  }
+ ],
+ "safinamide": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "safinamide",
+     "provenance": "verified",
+     "quote": "Metabolism | Amidases , glucuronidation"
+    }
+   ]
+  }
+ ],
+ "salvinorin_a": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "salvinorin_a",
+     "provenance": "verified",
+     "quote": "Metabolism | Deacetylation ( esterases , CYP450s ), delactonation ( lactonase ), glucuronidation ( UGT2B7 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt2b7",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "salvinorin_a",
+     "provenance": "verified",
+     "quote": "Metabolism | Deacetylation ( esterases , CYP450s ), delactonation ( lactonase ), glucuronidation ( UGT2B7 )"
     }
    ]
   }
@@ -2552,6 +2988,19 @@
     }
    ],
    "strength": "major"
+  },
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tapentadol",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic (mostly via glucuronidation but also by CYP2C9 , CYP2C19 , CYP2D6 )"
+    }
+   ],
+   "strength": "major"
   }
  ],
  "tasimelteon": [
@@ -2647,6 +3096,18 @@
      "quote": "Metabolism | CYP3A4 , possibly other CYP450 enzymes , glucuronidation"
     }
    ]
+  },
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tiagabine",
+     "provenance": "verified",
+     "quote": "Metabolism | CYP3A4 , possibly other CYP450 enzymes , glucuronidation"
+    }
+   ]
   }
  ],
  "tizanidine": [
@@ -2661,6 +3122,21 @@
      "quote": "Metabolism | Liver ( CYP1A2 , 95%)"
     }
    ]
+  }
+ ],
+ "tolcapone": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tolcapone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver (mainly glucuronidation)"
+    }
+   ],
+   "strength": "major"
   }
  ],
  "topiramate": [
@@ -2705,6 +3181,18 @@
   },
   {
    "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tramadol",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver -mediated demethylation and glucuronidation via CYP2D6 & CYP3A4"
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt",
    "role": "substrate",
    "sources": [
     {
@@ -2828,6 +3316,42 @@
  "viloxazine": [
   {
    "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "viloxazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hydroxylation ( CYP2D6 ), glucuronidation ( UGT1A9 , UGT2B15 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "viloxazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hydroxylation ( CYP2D6 ), glucuronidation ( UGT1A9 , UGT2B15 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt1a9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "viloxazine",
+     "provenance": "verified",
+     "quote": "Metabolism | Hydroxylation ( CYP2D6 ), glucuronidation ( UGT1A9 , UGT2B15 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt2b15",
    "role": "substrate",
    "sources": [
     {

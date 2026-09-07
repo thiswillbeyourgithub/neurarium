@@ -245,6 +245,29 @@ ENZYMES: dict[str, dict[str, Any]] = {
     "cyp3a5": {"label": "CYP3A5", "wikipedia": "https://en.wikipedia.org/wiki/CYP3A5"},
     "adh": {"label": "Alcohol dehydrogenase",
             "wikipedia": "https://en.wikipedia.org/wiki/Alcohol_dehydrogenase"},
+    # The non-cytochrome routes. A drug cleared by one of these has no CYP row at
+    # all (methylphenidate is hydrolysed by CES1, lamotrigine glucuronidated by
+    # UGT1A4), so leaving them out of the vocabulary did not make the metabolism
+    # merely coarse: it made the drug look unmetabolized. Labels stay acronyms,
+    # which read the same in both languages.
+    "ces1": {"label": "CES1",
+             "wikipedia": "https://en.wikipedia.org/wiki/Carboxylesterase_1"},
+    "fmo3": {"label": "FMO3",
+             "wikipedia": "https://en.wikipedia.org/wiki/FMO3"},
+    # A drugbox often names glucuronidation without an isoform ("UGTs"), and the
+    # dataset does not guess which: that source gets the generic row, and only a
+    # source naming the isoform gets one of the four below.
+    "ugt": {"label": "UGT (glucuronidation)",
+            "wikipedia":
+                "https://en.wikipedia.org/wiki/UDP-glucuronosyltransferase"},
+    "ugt1a4": {"label": "UGT1A4",
+               "wikipedia": "https://en.wikipedia.org/wiki/UGT1A4"},
+    "ugt1a9": {"label": "UGT1A9",
+               "wikipedia": "https://en.wikipedia.org/wiki/UGT1A9"},
+    "ugt2b7": {"label": "UGT2B7",
+               "wikipedia": "https://en.wikipedia.org/wiki/UGT2B7"},
+    "ugt2b15": {"label": "UGT2B15",
+                "wikipedia": "https://en.wikipedia.org/wiki/UGT2B15"},
 }
 
 # The role a drug plays at an enzyme. ``direction`` is what the drug does to that

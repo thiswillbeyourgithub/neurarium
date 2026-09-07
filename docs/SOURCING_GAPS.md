@@ -799,9 +799,16 @@ ever looked for `CYP`, so the route we already model as `adh` was invisible. Fix
 was named `enzyme` for exactly this.
 
 **Still open there:** two known limits, both yield rather than correctness.
-- **Non-CYP vocabulary.** 28 stored drugbox rows name a route `ENZYMES` does not carry: UGT /
-  glucuronidation (the big one), FMO3, MAO-A, carboxylesterase, AKR, SULT, DBH. Each is a
-  vocabulary line plus a phrase pattern, and the extraction already works.
+- **Non-CYP vocabulary: mostly closed** (2026-09-07, Claude Code). `ENZYMES` now carries CES1,
+  FMO3 and the UGTs (a generic `ugt` for a source that names no isoform, plus UGT1A4 / 1A9 /
+  2B7 / 2B15), and the role patterns govern them exactly as they do a cytochrome, so the routes
+  are read from the drugbox row AND from prose. That was not a yield question: methylphenidate,
+  cleared almost entirely by CES1, read as *unmetabolized* rather than as metabolized elsewhere.
+  It also gave Stahl's own pass the two UGT rows it had been dropping from viloxazine's quote.
+  **Still out:** AKR, SULT, DBH (rare, one drugbox each), and MAO, which is deliberately left
+  alone: it is a modeled drug *target* too, so a sentence naming it is usually about the drug
+  acting on the enzyme, not being cleared by it. Splitting those two senses needs more than a
+  phrase pattern.
 - **Pronoun subjects.** Three genuine claims are unreachable because the sentence says "It"
   (reboxetine, selegiline at CYP2B6, clomethiazole at CYP2B6/2A6). Resolving the antecedent
   is what the subject rule deliberately refuses to guess; hand-curating those three is the
