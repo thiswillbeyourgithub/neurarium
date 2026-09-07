@@ -143,6 +143,9 @@ TARGET_GENES = {
     "gaba_t": ["ABAT"],
     # DOPA decarboxylase (levodopa's enzyme) and catechol-O-methyltransferase.
     "aadc": ["DDC"], "comt": ["COMT"],
+    # The CGRP receptor is a heterodimer, so both halves are read: CALCRL is the
+    # GPCR, RAMP1 the accessory subunit that makes it CGRP-selective.
+    "cgrp": ["CALCRL", "RAMP1"],
     "muscarinic": ["CHRM1", "CHRM2", "CHRM3", "CHRM4", "CHRM5"],
     "nicotinic": ["CHRNA4", "CHRNB2", "CHRNA7"],
     "alpha1": ["ADRA1A", "ADRA1B", "ADRA1D"],

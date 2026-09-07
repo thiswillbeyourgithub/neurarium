@@ -93,6 +93,7 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     # states, which is how a prescriber meets them.
     "anticonvulsant": {"en": "Anticonvulsant", "fr": "Anticonvulsivant"},
     "antiparkinson": {"en": "Antiparkinson", "fr": "Antiparkinsonien"},
+    "antimigraine": {"en": "Antimigraine", "fr": "Antimigraineux"},
     "other": {"en": "Other", "fr": "Autre"},
 }
 
@@ -552,6 +553,16 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
                      "wikipedia":
                          "https://en.wikipedia.org/wiki/Melanocortin_receptor",
                      "regions": ["hypothalamus"]},
+    # The migraine target. It is a heterodimer (the GPCR calcitonin receptor-like
+    # receptor plus the accessory protein RAMP1), so it answers to two genes, which
+    # is why the Allen pass keys it on both: neither alone IS the receptor.
+    "cgrp": {"name": {"en": "CGRP receptor",
+                      "fr": "Récepteur du CGRP"},
+             "type": "peptide_receptor", "system": None,
+             "wikipedia":
+                 "https://en.wikipedia.org/wiki/Calcitonin_gene-related_peptide_receptor",
+             "regions": ["cerebellum", "thalamus", "hypothalamus", "amygdala",
+                         "pons", "medulla"]},
 }
 
 # Coarse kind of a non-receptor drug target -> {en,fr} legend tag. Receptors merged
@@ -569,6 +580,10 @@ TARGET_TYPE_LABELS: dict[str, str] = {
     "ion_channel": "Ion channel",
     "vesicle_protein": "Vesicle protein",
     "receptor_group": "Receptor group",
+    # A neuropeptide receptor. Its own type because the receptor legend groups by
+    # neurotransmitter system and a peptide belongs to none of the modeled ones, so
+    # it would otherwise have to borrow "receptor group", which it is not.
+    "peptide_receptor": "Peptide receptor",
 }
 # Swatch + expression-dot colour per non-receptor target type (a transporter/enzyme/
 # channel has no excit/inhib sign, so it can't reuse SIGN_COLORS like a receptor;
@@ -581,4 +596,5 @@ TARGET_TYPE_COLORS: dict[str, str] = {
     "ion_channel": "#7c83ff",      # periwinkle
     "vesicle_protein": "#5fb56a",  # green
     "receptor_group": "#9aa0a6",   # grey (coarse, like a stand-in)
+    "peptide_receptor": "#c86fa8", # magenta
 }

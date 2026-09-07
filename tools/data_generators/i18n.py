@@ -571,6 +571,7 @@ FR: dict[str, str] = {
     "Vesicle protein": "Protéine vésiculaire",
     "Ion cotransporter": "Cotransporteur ionique",
     "Receptor group": "Groupe de récepteurs",
+    "Peptide receptor": "Récepteur peptidique",
     "Noradrenaline": "Noradrénaline",
     "Serotonin": "Sérotonine",
     "Histamine": "Histamine",

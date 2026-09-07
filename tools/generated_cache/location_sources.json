@@ -4925,6 +4925,62 @@
         }
       ]
     },
+    "cgrp": {
+      "amygdala": [
+        {
+          "corpus": "allen_ahba",
+          "page": "RAMP1",
+          "provenance": "verified",
+          "quote": "RAMP1 detected in amygdala: probe 1047617 PACall present in 67/67 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "cerebellum": [
+        {
+          "corpus": "allen_ahba",
+          "page": "RAMP1",
+          "provenance": "verified",
+          "quote": "RAMP1 detected in cerebellum: probe 1047617 PACall present in 368/368 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "hypothalamus": [
+        {
+          "corpus": "allen_ahba",
+          "page": "RAMP1",
+          "provenance": "verified",
+          "quote": "RAMP1 detected in hypothalamus: probe 1047617 PACall present in 102/102 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "medulla": [
+        {
+          "corpus": "allen_ahba",
+          "page": "RAMP1",
+          "provenance": "verified",
+          "quote": "RAMP1 detected in medulla: probe 1047617 PACall present in 279/279 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "pons": [
+        {
+          "corpus": "allen_ahba",
+          "page": "RAMP1",
+          "provenance": "verified",
+          "quote": "RAMP1 detected in pons: probe 1047617 PACall present in 189/189 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ],
+      "thalamus": [
+        {
+          "corpus": "allen_ahba",
+          "page": "RAMP1",
+          "provenance": "verified",
+          "quote": "RAMP1 detected in thalamus: probe 1047617 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)",
+          "species": "Human"
+        }
+      ]
+    },
     "comt": {
       "caudate": [
         {

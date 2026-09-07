@@ -508,18 +508,21 @@ def check_reachability(report, meta, structures, projections, circuits,
     # almost certainly mis-assigned. This is the guard that catches a VMAT2 (vesicular)
     # inhibitor mislabeled `reuptake_inhibitor` (which would read as a boost, not the
     # depletion it is). `modulator` is deliberately unconstrained (context-dependent).
+    # A peptide receptor takes every action a receptor does: the type exists to say
+    # which legend heading it belongs under, not to restrict its pharmacology.
+    receptorish = {"receptor", "receptor_group", "peptide_receptor"}
     action_target_types = {
         "reuptake_inhibitor": {"transporter"},
         "releaser": {"transporter"},
         "vesicular_inhibitor": {"transporter", "vesicle_protein"},
         "vesicular_releaser": {"transporter"},
         "enzyme_inhibitor": {"enzyme"},
-        "agonist": {"receptor", "receptor_group"},
-        "partial_agonist": {"receptor", "receptor_group"},
-        "antagonist": {"receptor", "receptor_group", "ion_channel"},
-        "inverse_agonist": {"receptor", "receptor_group"},
-        "pam": {"receptor", "receptor_group"},
-        "nam": {"receptor", "receptor_group"},
+        "agonist": receptorish,
+        "partial_agonist": receptorish,
+        "antagonist": receptorish | {"ion_channel"},
+        "inverse_agonist": receptorish,
+        "pam": receptorish,
+        "nam": receptorish,
         # A cotransporter (NKCC1) moves ions rather than a transmitter, so it is
         # blocked, never "reuptake-inhibited"; its own type keeps `blocker` legal
         # here without loosening it on a reuptake pump, where it would silently

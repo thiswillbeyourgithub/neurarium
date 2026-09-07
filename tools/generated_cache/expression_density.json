@@ -953,6 +953,27 @@
         }
       ]
     },
+    "cgrp": {
+      "donors": 6,
+      "profile": {
+        "amygdala": 0.86,
+        "cerebellum": -0.6,
+        "hypothalamus": 0.12,
+        "medulla": -0.24,
+        "pons": -0.45,
+        "thalamus": 0.07
+      },
+      "reliability": 0.71,
+      "sources": [
+        {
+          "corpus": "allen_ahba",
+          "page": "RAMP1",
+          "provenance": "verified",
+          "quote": "RAMP1 relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1047617, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.71: amygdala +0.86 (6d), hypothalamus +0.12 (6d), thalamus +0.07 (6d), medulla -0.24 (6d), pons -0.45 (6d), cerebellum -0.60 (6d)",
+          "species": "Human"
+        }
+      ]
+    },
     "dat": {
       "donors": 5,
       "profile": {
