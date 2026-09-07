@@ -880,13 +880,17 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
 
   // Combo drugs ("A + B", or "A-B" with an en/em dash): resolve the constituents to
   // our standalone drug ids where they exist, so the panel warns it is a combination
-  // and links out to each part (interactions between them may exist). Derived from
-  // the name, not stored (matching the generator, which leaves combos untouched).
+  // and links out to each part (interactions between them may exist). Read off the
+  // name, since a co-formulation is normally named after its parts. A salt of two
+  // molecules is marketed under an INN of its own instead (dimenhydrinate IS
+  // diphenhydramine + 8-chlorotheophylline), and is the reason a drug may state its
+  // `constituents` explicitly: the name is then the drug's, not a list of its parts.
   const normName = (s) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
   const drugIdSet = new Set(drugs.map((d) => d.id));
   const drugByNorm = new Map(drugs.map((d) => [normName(d.name), d.id]));
   for (const d of drugs) {
-    const parts = /[+–—]/.test(d.name || "")
+    const parts = (d.constituents && d.constituents.length) ? d.constituents
+      : /[+–—]/.test(d.name || "")
       ? d.name.split(/\s*[+–—]\s*/).map((p) => p.trim()).filter(Boolean)
       : null;
     d.combo = parts
