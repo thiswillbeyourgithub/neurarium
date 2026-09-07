@@ -4604,6 +4604,38 @@
     }
    }
   },
+  "flunarizine": {
+   "cav_t": {
+    "action": "antagonist",
+    "pmid": "11784784",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "flunarizine",
+     "provenance": "verified",
+     "quote": "flunarizine at Cav3.1 (CACNA1G, Human): Channel blocker / Antagonist, pIC50 6.27 [PMID 11784784]",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 112.2019,
+     "median": 58.0915,
+     "min": 3.9811,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "7503767",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "flunarizine",
+     "provenance": "verified",
+     "quote": "flunarizine at D2 receptor (Drd2, Rat): Antagonist / Antagonist, pKi 6.95-8.4 [PMID 7503767]",
+     "species": "Rat"
+    }
+   }
+  },
   "flunitrazepam": {
    "gaba_a": {
     "action": "pam",
@@ -8844,6 +8876,27 @@
     }
    }
   },
+  "pizotifen": {
+   "5ht1a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 39.8107,
+     "median": 39.8107,
+     "min": 39.8107,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9205951",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pizotifen",
+     "provenance": "verified",
+     "quote": "pizotifen at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 7.4 [PMID 9205951]",
+     "species": "Human"
+    }
+   }
+  },
   "pramipexole": {
    "d2": {
     "action": "agonist",
@@ -9868,6 +9921,103 @@
     }
    }
   },
+  "rizatriptan": {
+   "5ht1a": {
+    "action": "agonist",
+    "ki": {
+     "max": 398.1072,
+     "median": 398.1072,
+     "min": 398.1072,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rizatriptan",
+     "provenance": "verified",
+     "quote": "rizatriptan at 5-HT1A receptor (HTR1A, Human): Agonist / Full agonist, pKi 6.4 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rizatriptan",
+     "provenance": "verified",
+     "quote": "rizatriptan at 5-HT1B receptor (HTR1B, Human): Agonist / Partial agonist, pKi 6.9 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 12.5893,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rizatriptan",
+     "provenance": "verified",
+     "quote": "rizatriptan at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 7.9 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "agonist",
+    "ki": {
+     "max": 158.4893,
+     "median": 158.4893,
+     "min": 158.4893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rizatriptan",
+     "provenance": "verified",
+     "quote": "rizatriptan at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 6.8 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 398.1072,
+     "median": 278.2982,
+     "min": 158.4893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15900510",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rizatriptan",
+     "provenance": "verified",
+     "quote": "rizatriptan at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 6.4-6.8 [PMID 15900510]",
+     "species": "Human"
+    }
+   }
+  },
   "ropinirole": {
    "d2": {
     "action": "agonist",
@@ -10489,6 +10639,160 @@
      "page": "sulpiride",
      "provenance": "verified",
      "quote": "sulpiride at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 6.85-7.85 [PMID 7576010]",
+     "species": "Human"
+    }
+   }
+  },
+  "sumatriptan": {
+   "5ht1a": {
+    "action": "agonist",
+    "ki": {
+     "max": 1000.0,
+     "median": 1000.0,
+     "min": 1000.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-HT1A receptor (HTR1A, Human): Agonist / Full agonist, pKi 6 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 316.2278,
+     "median": 162.0855,
+     "min": 7.9433,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10611634",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-HT1B receptor (HTR1B, Human): Agonist / Partial agonist, pKi 6.5-8.1 [PMID 10611634]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 10.0,
+     "median": 5.9976,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10611634",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 8-8.7 [PMID 10611634]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "agonist",
+    "ki": {
+     "max": 2511.8864,
+     "median": 2048.3898,
+     "min": 1584.8932,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 5.6-5.8 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 63.0958,
+     "median": 37.8425,
+     "min": 12.5893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15900510",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 7.2-7.9 [PMID 15900510]",
+     "species": "Human"
+    }
+   },
+   "5ht5a": {
+    "action": "agonist",
+    "ki": {
+     "max": 5011.8723,
+     "median": 5011.8723,
+     "min": 5011.8723,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7988681",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-HT5A receptor (HTR5A, Human): Agonist / Full agonist, pKi 5.3 [PMID 7988681]",
+     "species": "Human"
+    }
+   },
+   "5ht6": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2511.8864,
+     "median": 2511.8864,
+     "min": 2511.8864,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8522988",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-HT6 receptor (HTR6, Human): Antagonist / Antagonist, pKi 5.6 [PMID 8522988]",
+     "species": "Human"
+    }
+   },
+   "5ht7": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1995.2623,
+     "median": 1497.6312,
+     "min": 1000.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9298538",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sumatriptan",
+     "provenance": "verified",
+     "quote": "sumatriptan at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 5.7-6 [PMID 9298538]",
      "species": "Human"
     }
    }

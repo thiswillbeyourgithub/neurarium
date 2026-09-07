@@ -524,6 +524,11 @@
     "title": "Haloperidol",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Haloperidol.svg"
   },
+  "heroin": {
+    "file": "File:Diamorphine2DACS3.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Diamorphine2DACS3.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Heroin"
+  },
   "hydromorphone": {
     "file": "File:Hydromorphone_skeletal.svg",
     "title": "Hydromorphone",
@@ -879,6 +884,11 @@
     "title": "Paroxetine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Paroxetine-2D-skeletal.svg"
   },
+  "pentazocine": {
+    "file": "File:Pentazocine-racemate2DCSD.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Pentazocine-racemate2DCSD.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Pentazocine"
+  },
   "pentobarbital": {
     "file": "File:Pentobarbital 2d.svg",
     "title": "Pentobarbital",
@@ -903,6 +913,11 @@
     "file": "File:Perphenazine.svg",
     "title": "Perphenazine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Perphenazine.svg"
+  },
+  "pethidine": {
+    "file": "File:Pethidine2DACS.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Pethidine2DACS.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Pethidine"
   },
   "phenazepam": {
     "file": "File:Phenazepam.svg",
@@ -958,6 +973,11 @@
     "file": "File:Pitolisant skeletal.svg",
     "title": "Pitolisant",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Pitolisant_skeletal.svg"
+  },
+  "pizotifen": {
+    "file": "File:Pizotifen_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Pizotifen_structure.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Pizotifen"
   },
   "pramipexole": {
     "file": "File:Pramipexole.svg",
@@ -1049,6 +1069,16 @@
     "title": "Reserpine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Reserpine.svg"
   },
+  "rimegepant": {
+    "file": "File:Rimegepant.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Rimegepant.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Rimegepant"
+  },
+  "rimonabant": {
+    "file": "File:Rimonabant.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Rimonabant.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Rimonabant"
+  },
   "risperidone": {
     "file": "File:Risperidone.svg",
     "title": "Risperidone",
@@ -1058,6 +1088,11 @@
     "file": "File:Rivastigmine ACS.svg",
     "title": "Rivastigmine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Rivastigmine_ACS.svg"
+  },
+  "rizatriptan": {
+    "file": "File:Rizatriptan_Structural_Formula_V.1.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Rizatriptan_Structural_Formula_V.1.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Rizatriptan"
   },
   "ropinirole": {
     "file": "File:Ropinirole structure.svg",
@@ -1139,10 +1174,20 @@
     "title": "Sulpiride",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Sulpiride.svg"
   },
+  "sumatriptan": {
+    "file": "File:Sumatriptan.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Sumatriptan.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Sumatriptan"
+  },
   "suvorexant": {
     "file": "File:Suvorexant.svg",
     "title": "Suvorexant",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Suvorexant.svg"
+  },
+  "tapentadol": {
+    "file": "File:Tapentadol.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Tapentadol.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Tapentadol"
   },
   "tasimelteon": {
     "file": "File:Tasimelteon 2.svg",

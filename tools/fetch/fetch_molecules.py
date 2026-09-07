@@ -88,6 +88,9 @@ FILE_OVERRIDES = {
     "rubidium_chloride": None,
     "calcium_carbimide": None,
     "methylfolate_l": None,
+    # A monoclonal antibody: a protein of ~1300 residues has no skeletal formula
+    # to draw, so the molecule slot stays empty rather than borrowing a cartoon.
+    "erenumab": None,
 }
 # Tokens that mark a structure SVG, used to rank fallback candidates.
 STRUCTURE_HINTS = (

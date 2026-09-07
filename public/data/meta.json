@@ -178,6 +178,7 @@
     "anesthetic": "Anesthetic",
     "anticonvulsant": "Anticonvulsant",
     "antiparkinson": "Antiparkinson",
+    "antimigraine": "Antimigraine",
     "other": "Other"
   },
   "drug_targets": {
@@ -1820,6 +1821,81 @@
         }
       ]
     },
+    "cgrp": {
+      "name": "CGRP receptor",
+      "type": "peptide_receptor",
+      "system": null,
+      "receptor": null,
+      "regions": [
+        "cerebellum",
+        "thalamus",
+        "hypothalamus",
+        "amygdala",
+        "pons",
+        "medulla"
+      ],
+      "classification_provenance": "llm",
+      "location_sources": {
+        "amygdala": [
+          {
+            "quote_id": "q_468d0d9e6789",
+            "provenance": "verified"
+          }
+        ],
+        "cerebellum": [
+          {
+            "quote_id": "q_86b6ba355f4f",
+            "provenance": "verified"
+          }
+        ],
+        "hypothalamus": [
+          {
+            "quote_id": "q_e9287050abee",
+            "provenance": "verified"
+          }
+        ],
+        "medulla": [
+          {
+            "quote_id": "q_060d6545eedd",
+            "provenance": "verified"
+          }
+        ],
+        "pons": [
+          {
+            "quote_id": "q_aedbddb450bc",
+            "provenance": "verified"
+          }
+        ],
+        "thalamus": [
+          {
+            "quote_id": "q_2a04d879346b",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "density": {
+        "reliability": 0.71,
+        "donors": 6,
+        "profile": {
+          "amygdala": 0.86,
+          "hypothalamus": 0.12,
+          "thalamus": 0.07,
+          "medulla": -0.24,
+          "pons": -0.45,
+          "cerebellum": -0.6
+        },
+        "grade": "verified",
+        "sources": [
+          {
+            "quote_id": "q_a13691948391",
+            "provenance": "verified"
+          }
+        ]
+      },
+      "wikipedia": "https://en.wikipedia.org/wiki/Calcitonin_gene-related_peptide_receptor",
+      "wikipedia_provenance": "sourced",
+      "gene": "CALCRL"
+    },
     "alpha1a": {
       "name": "α1A",
       "type": "receptor",
@@ -2753,7 +2829,8 @@
     "enzyme": "Enzyme",
     "ion_channel": "Ion channel",
     "vesicle_protein": "Vesicle protein",
-    "receptor_group": "Receptor group"
+    "receptor_group": "Receptor group",
+    "peptide_receptor": "Peptide receptor"
   },
   "target_type_colors": {
     "transporter": "#3fb6a8",
@@ -2761,7 +2838,8 @@
     "enzyme": "#d8a23a",
     "ion_channel": "#7c83ff",
     "vesicle_protein": "#5fb56a",
-    "receptor_group": "#9aa0a6"
+    "receptor_group": "#9aa0a6",
+    "peptide_receptor": "#c86fa8"
   },
   "drug_actions": {
     "agonist": {
@@ -3025,8 +3103,8 @@
   "provenance_stats": {
     "by_kind": {
       "drug_bindings": {
-        "total": 1749,
-        "verified": 1626,
+        "total": 1800,
+        "verified": 1677,
         "uncertain": 111,
         "sourced": 0,
         "llm": 0,
@@ -3052,8 +3130,8 @@
         "missing": 0
       },
       "drug_categories": {
-        "total": 285,
-        "verified": 232,
+        "total": 291,
+        "verified": 238,
         "uncertain": 0,
         "sourced": 0,
         "llm": 53,
@@ -3061,8 +3139,8 @@
         "missing": 53
       },
       "drug_half_life": {
-        "total": 215,
-        "verified": 215,
+        "total": 220,
+        "verified": 220,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3070,8 +3148,8 @@
         "missing": 0
       },
       "drug_enzymes": {
-        "total": 300,
-        "verified": 300,
+        "total": 301,
+        "verified": 301,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3187,13 +3265,13 @@
         "missing": 0
       },
       "targets": {
-        "total": 24,
+        "total": 25,
         "verified": 20,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 4,
+        "llm": 5,
         "nosource": 0,
-        "missing": 4
+        "missing": 5
       },
       "target_polarity": {
         "total": 2,
@@ -3205,8 +3283,8 @@
         "missing": 0
       },
       "target_locations": {
-        "total": 123,
-        "verified": 109,
+        "total": 129,
+        "verified": 115,
         "uncertain": 0,
         "sourced": 0,
         "llm": 14,
@@ -3214,8 +3292,8 @@
         "missing": 14
       },
       "target_density": {
-        "total": 20,
-        "verified": 20,
+        "total": 21,
+        "verified": 21,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3232,32 +3310,32 @@
         "missing": 0
       },
       "references": {
-        "total": 428,
+        "total": 435,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 428,
+        "sourced": 435,
         "llm": 0,
         "nosource": 0,
         "missing": 0
       }
     },
     "nodes": {
-      "total": 4221,
-      "verified": 3905,
+      "total": 4292,
+      "verified": 3975,
       "uncertain": 146,
       "sourced": 0,
-      "llm": 156,
+      "llm": 157,
       "nosource": 14,
-      "missing": 170,
-      "backed": 4051,
+      "missing": 171,
+      "backed": 4121,
       "pct_backed": 96
     },
     "ki_coverage": {
-      "bindings_total": 1730,
-      "bindings_with_ki": 1496,
-      "pct_bindings_with_ki": 86,
-      "drugs_total": 268,
-      "drugs_without_ki": 88,
+      "bindings_total": 1781,
+      "bindings_with_ki": 1543,
+      "pct_bindings_with_ki": 87,
+      "drugs_total": 274,
+      "drugs_without_ki": 90,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alimemazine",
@@ -3287,6 +3365,7 @@
         "cyclobarbital",
         "deutetrabenazine",
         "donepezil",
+        "erenumab",
         "estazolam",
         "eszopiclone",
         "ethanol",
@@ -3329,6 +3408,7 @@
         "prothipendyl",
         "quazepam",
         "rasagiline",
+        "rimegepant",
         "rivastigmine",
         "secobarbital",
         "sevoflurane",

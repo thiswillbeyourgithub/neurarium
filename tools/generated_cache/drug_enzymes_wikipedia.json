@@ -1096,6 +1096,21 @@
    "strength": "major"
   }
  ],
+ "flunarizine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "flunarizine",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly CYP2D6"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
  "fluoxetine": [
   {
    "enzyme": "cyp2d6",
