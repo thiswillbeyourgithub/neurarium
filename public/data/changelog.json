@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.61.0",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Four medicines against nausea, vertigo and motion sickness join the roster: metoclopramide, granisetron, meclizine and dimenhydrinate. They act on receptors the brain map already carried, so each arrives with its measured affinities, its half-life and its sourced mechanism. Metoclopramide is worth a look: the dopamine blockade that settles nausea is the same one that can, over months, cause a movement disorder.",
+          "commits": [
+            "6f638d8"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A medicine that is a chemical pairing of two others can now say so under its own name. Dimenhydrinate, the motion-sickness pill, is diphenhydramine bonded to a mild stimulant, so its panel points at both rather than claiming measurements that belong to another molecule.",
+          "commits": [
+            "d09dfa5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.60.2",
       "date": "2026-09-07",
       "entries": [
