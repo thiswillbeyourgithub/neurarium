@@ -1,6 +1,40 @@
 {
   "versions": [
     {
+      "version": "3.60.1",
+      "date": "2026-09-07",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Both affinity databases were read by a name match that ignored stereochemistry, so a single mirror-image form of a molecule was silently counted as the everyday form. Seventeen drugs pooled measurements taken on one mirror image into the other's figures. The two readers now check which form a measurement was made on, and a drug only claims the form it actually is",
+          "commits": [
+            "a646294"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Ketanserin was published as a sub-nanomolar 5-HT1F ligand on the strength of one measurement, while some forty others put the same drug a thousand to ten thousand times weaker across that whole receptor family, one of them on the very same receptor. That measurement is now excluded and the binding with it",
+          "commits": [
+            "a646294"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Pentazocine is measured almost only as its separated mirror images, so its figures now say so: its opioid kappa affinity carries a \"measured as\" warning naming the form assayed, and its sigma-1 affinity uses the measurements made on the mixture actually prescribed",
+          "commits": [
+            "a646294"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Propranolol's serotonin 5-HT1A entry no longer states a direction. The only source for it described a separated mirror image of the molecule, so the affinity stands and the direction does not",
+          "commits": [
+            "a646294"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.60.0",
       "date": "2026-09-06",
       "entries": [
