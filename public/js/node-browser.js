@@ -267,17 +267,23 @@ export function collectNodes(data, deps, opts = {}) {
     }
     for (const m of d.metabolites || []) {
       const mKey = (m.name || "").toLowerCase();
-      push("drug_metabolites", d.name, m.name, m.provenance, go, m);
+      // A metabolite has no panel of its own, so its nodes open the PARENT drug. Say
+      // which metabolite was asked for, or the reader picks "6-Monoacetylmorphine"
+      // and lands on a Heroin panel with nothing pointing at what they clicked.
+      const goMetab = d.focusable
+        ? () => nav.drug(d, { highlightMetabolite: m.name })
+        : null;
+      push("drug_metabolites", d.name, m.name, m.provenance, goMetab, m);
       for (const f of m.formedBy || []) {
         push("drug_metabolite_enzyme", d.name,
-          `${m.name}: ${t("drug.formedBy")} ${f.label}`, f.provenance, go, f);
+          `${m.name}: ${t("drug.formedBy")} ${f.label}`, f.provenance, goMetab, f);
       }
       for (const b of m.ownBindings || []) {
         const bKey = `${mKey}|${b.target}`;
         if (seenMetaboliteBinding.has(bKey)) continue;
         seenMetaboliteBinding.add(bKey);
         push("drug_metabolite_bindings", d.name, `${m.name}: ${bindingNotion(b)}`,
-          b.provenance, go, b);
+          b.provenance, goMetab, b);
       }
     }
   }

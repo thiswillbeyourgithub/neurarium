@@ -6184,11 +6184,15 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
           });
         }
       }
+      // A metabolite has no panel of its own, so the pick opens its parent drug and
+      // hands over the name it was searched under: the parent's panel then scrolls to
+      // that metabolite's row and flashes it. Without it, searching 6-Monoacetylmorphine
+      // simply opened a Heroin tab, with nothing on screen tying the two together.
       return [...byKey.values()].map((e) => ({
         type: "drug",
         label: `${e.name} · ${t("drug.metaboliteOf", { prodrug: e.prodrugs.join(", ") })}`,
         keywords: e.keywords,
-        select: () => focusDrug(e.drug, { frame: true }),
+        select: () => focusDrug(e.drug, { frame: true, highlightMetabolite: e.name }),
         preview: () => focusDrug(e.drug, { preview: true }),
       }));
     })(),
@@ -7692,7 +7696,7 @@ async function main() {
         t,
         formatHalfLife,
         nav: {
-          drug: (d) => focusDrug(d, { frame: true }),
+          drug: (d, opts) => focusDrug(d, { frame: true, ...opts }),
           target: (tg) => focusTarget(tg, { frame: true }),
           structure: (id) => {
             const mesh = meshById.get(id);
