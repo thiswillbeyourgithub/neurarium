@@ -1521,6 +1521,19 @@
     }
    }
   },
+  "brivaracetam": {
+   "sv2a": {
+    "action": "blocker",
+    "pmid": "14736235",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "brivaracetam",
+     "provenance": "verified",
+     "quote": "brivaracetam at synaptic vesicle glycoprotein 2A (Sv2a, Rat): Inhibitor / Inhibition, pIC50 7 [PMID 14736235]",
+     "species": "Rat"
+    }
+   }
+  },
   "bromocriptine": {
    "5ht1a": {
     "action": "partial_agonist",
@@ -2318,14 +2331,6 @@
   "caffeine": {
    "a2a": {
     "action": "antagonist",
-    "ki": {
-     "max": 25118.8698,
-     "median": 13815.3784,
-     "min": 2511.887,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "9920286",
     "source": {
      "corpus": "gtopdb_ki",
@@ -2789,14 +2794,6 @@
   "citalopram": {
    "net": {
     "action": "reuptake_inhibitor",
-    "ki": {
-     "max": 1000000.0,
-     "median": 1000000.0,
-     "min": 1000000.0,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "23168018",
     "source": {
      "corpus": "gtopdb_ki",
@@ -5631,14 +5628,6 @@
   "ketanserin": {
    "5ht1a": {
     "action": "antagonist",
-    "ki": {
-     "max": 10000.0,
-     "median": 10000.0,
-     "min": 10000.0,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "1386736",
     "source": {
      "corpus": "gtopdb_ki",
@@ -5737,14 +5726,6 @@
    },
    "5ht5a": {
     "action": "antagonist",
-    "ki": {
-     "max": 19952.6231,
-     "median": 19952.6231,
-     "min": 19952.6231,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "7988681",
     "source": {
      "corpus": "gtopdb_ki",
@@ -5885,6 +5866,19 @@
      "provenance": "verified",
      "quote": "ketanserin at Vesicular monoamine transporter 2 (SLC18A2, Human): Inhibitor / Inhibition, pKi 6.3 [PMID 8643547]",
      "species": "Human"
+    }
+   }
+  },
+  "lacosamide": {
+   "nav": {
+    "action": "antagonist",
+    "pmid": "24065921",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "lacosamide",
+     "provenance": "verified",
+     "quote": "lacosamide at Nav1.2 (Scn2a, Rat): Channel blocker / Antagonist, pIC50 4.52 [PMID 24065921]",
+     "species": "Rat"
     }
    }
   },
@@ -6118,14 +6112,6 @@
   "lorazepam": {
    "alpha1b": {
     "action": "pam",
-    "ki": {
-     "max": 158489.3366,
-     "median": 158489.3366,
-     "min": 158489.3366,
-     "n_human": 0,
-     "n_nonhuman": 1,
-     "param": "pKi"
-    },
     "pmid": "10565838",
     "source": {
      "corpus": "gtopdb_ki",
@@ -7161,14 +7147,6 @@
   "midazolam": {
    "alpha1b": {
     "action": "pam",
-    "ki": {
-     "max": 199526.2096,
-     "median": 199526.2096,
-     "min": 199526.2096,
-     "n_human": 0,
-     "n_nonhuman": 1,
-     "param": "pKi"
-    },
     "pmid": "10565838",
     "source": {
      "corpus": "gtopdb_ki",
@@ -8126,14 +8104,6 @@
   "perospirone": {
    "5ht2a": {
     "action": "antagonist",
-    "ki": {
-     "max": 18197.0182,
-     "median": 18197.0182,
-     "min": 18197.0182,
-     "n_human": 0,
-     "n_nonhuman": 1,
-     "param": "pKi"
-    },
     "pmid": "1060115",
     "source": {
      "corpus": "gtopdb_ki",
@@ -8425,14 +8395,6 @@
    },
    "net": {
     "action": "reuptake_inhibitor",
-    "ki": {
-     "max": 10000.0,
-     "median": 10000.0,
-     "min": 10000.0,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "9537821",
     "source": {
      "corpus": "gtopdb_ki",
@@ -8444,14 +8406,6 @@
    },
    "sert": {
     "action": "reuptake_inhibitor",
-    "ki": {
-     "max": 10000.0,
-     "median": 10000.0,
-     "min": 10000.0,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "9537821",
     "source": {
      "corpus": "gtopdb_ki",
@@ -8782,14 +8736,6 @@
    },
    "h2": {
     "action": "antagonist",
-    "ki": {
-     "max": 10964.781,
-     "median": 10964.781,
-     "min": 10964.781,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "26084539",
     "source": {
      "corpus": "gtopdb_ki",
@@ -8820,14 +8766,6 @@
    },
    "h4": {
     "action": "antagonist",
-    "ki": {
-     "max": 100000.0,
-     "median": 100000.0,
-     "min": 100000.0,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "26084539",
     "source": {
      "corpus": "gtopdb_ki",
@@ -10141,14 +10079,6 @@
   "selegiline": {
    "mao_a": {
     "action": "enzyme_inhibitor",
-    "ki": {
-     "max": 67608.2857,
-     "median": 67608.2857,
-     "min": 67608.2857,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "21377879",
     "source": {
      "corpus": "gtopdb_ki",
@@ -10426,14 +10356,6 @@
   "solriamfetol": {
    "dat": {
     "action": "reuptake_inhibitor",
-    "ki": {
-     "max": 14125.3785,
-     "median": 14125.3785,
-     "min": 14125.3785,
-     "n_human": 1,
-     "n_nonhuman": 0,
-     "param": "pKi"
-    },
     "pmid": "29891587",
     "source": {
      "corpus": "gtopdb_ki",
@@ -11343,6 +11265,19 @@
      "page": "venlafaxine",
      "provenance": "verified",
      "quote": "venlafaxine at SERT (SLC6A4, Human): Inhibitor / Inhibition, pIC50 7.57 [PMID 20378347]",
+     "species": "Human"
+    }
+   }
+  },
+  "vigabatrin": {
+   "gaba_t": {
+    "action": "blocker",
+    "pmid": "856582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "vigabatrin",
+     "provenance": "verified",
+     "quote": "vigabatrin at 4-aminobutyrate aminotransferase (ABAT, Human): Inhibitor / Irreversible inhibition, pKi 3.07 [PMID 856582]",
      "species": "Human"
     }
    }

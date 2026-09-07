@@ -276,6 +276,11 @@ def row_line(row: dict) -> str:
             f"{f' [PMID {pmid}]' if pmid else ''}")
 
 
+#: Same ceiling ``fetch_ki`` applies to PDSP (see its SENTINEL_NM): an affinity at
+#: or past 10 uM reads as "tested, essentially inactive", not as a binding strength.
+INACTIVE_NM = 10000.0
+
+
 def nm_from(row: dict) -> tuple[float, float, float] | None:
     """(median, min, max) in nM from a row's pX affinity, or None."""
     vals = affinity_values(row)
@@ -317,7 +322,7 @@ def main() -> int:
 
     PAGES.mkdir(parents=True, exist_ok=True)
     proposals: dict[str, dict[str, dict]] = {}
-    stats = {"drugs": 0, "unmatched": 0, "ki": 0, "action": 0, "pages": 0}
+    stats = {"drugs": 0, "unmatched": 0, "ki": 0, "action": 0, "pages": 0, "weak": 0}
     unmatched: list[str] = []
 
     for drug in drugs:
@@ -364,6 +369,15 @@ def main() -> int:
             # Only a true binding affinity (pKi/pKd) becomes a Ki. A functional
             # potency (pIC50/pEC50/pKB/pA2) is a different measurement, so it rides
             # along as the direction's citation without pretending to be a Ki.
+            # PDSP's own ceiling, applied here too so one number does not mean
+            # "measured affinity" from one corpus and "tested, inactive" from the
+            # other: past 10 uM the assay is saying the compound does not really
+            # bind (vigabatrin's 851 uM at its own enzyme, which it inhibits
+            # irreversibly rather than by sitting in the site). The binding and
+            # its direction stay; only the affinity chip is withheld.
+            if nm and nm[0] >= INACTIVE_NM:
+                stats["weak"] += 1
+                nm = None
             if nm and (row.get("Affinity Units") in KI_PARAMS):
                 entry["ki"] = {
                     "median": round(nm[0], 4), "min": round(nm[1], 4), "max": round(nm[2], 4),
@@ -401,7 +415,8 @@ def main() -> int:
     if unmatched:
         log(f"no GtoPdb ligand for {len(unmatched)}: {', '.join(sorted(unmatched))}")
     log(f"{stats['drugs']} drug(s) matched, {stats['pages']} page(s) written, "
-        f"{stats['ki']} affinity + {stats['action']} direction proposal(s)")
+        f"{stats['ki']} affinity + {stats['action']} direction proposal(s)"
+        f"; {stats['weak']} affinity value(s) withheld as >= 10 uM")
     log(f"wrote {CACHE.relative_to(REPO)}")
     return 0
 
