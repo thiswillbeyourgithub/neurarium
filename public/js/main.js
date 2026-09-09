@@ -8584,6 +8584,15 @@ async function main() {
     urlState.sync(); // whether the brain is shown is part of the shareable link
   };
   toggle3d?.addEventListener("click", () => setNo3d(!no3dOn()));
+  // The mirror of setNo3d's expandPanel: entering the reading mode opens the panel so
+  // it has something to fill, and folding the panel back down leaves the reading mode
+  // for the same reason. A collapsed panel with no brain behind it is a bare black
+  // viewport, which is never a state the visitor asked for. This listener is added
+  // after wireControls' own (it runs second), so the body's `hidden` already reflects
+  // the click; a collapse is therefore read off the DOM rather than re-derived.
+  document.getElementById("controls-toggle")?.addEventListener("click", () => {
+    if (document.getElementById("controls-body")?.hidden && no3dOn()) setNo3d(false);
+  });
   // The persisted preference first, so the link registered below (which may have been
   // parked since the hash was applied) is the one that wins: `#panel=0` must be able to
   // force the brain back on for a visitor whose stored preference is the reading mode.

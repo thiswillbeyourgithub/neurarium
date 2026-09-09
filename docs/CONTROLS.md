@@ -64,7 +64,9 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   `#scene` + `#labels-layer` and lets the expanded panel fill the viewport; the render loop
   early-returns, so animations freeze in place and resume when 3D returns. Turning it on expands a
   collapsed panel first (`expandPanel`, the shared wrapper over `openControlsBody`), since with no
-  brain behind it a folded panel would leave a blank viewport. A view that merely wants the room
+  brain behind it a folded panel would leave a blank viewport; **folding the panel back down leaves
+  the mode** for the same reason (the collapse listener in the `setNo3d` block, added after
+  `wireControls`' own so the body's `hidden` already reflects the click). A view that merely wants the room
   (the Data browser) passes `{persist: false}` so it borrows the mode without rewriting the
   visitor's stored preference.
 - **Arrow colour-mode** (`#color-mode`, default Neurotransmitter): Neurotransmitter =
