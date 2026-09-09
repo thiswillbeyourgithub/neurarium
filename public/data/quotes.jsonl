@@ -41,6 +41,7 @@
 {"id": "q_03aa68f2c908", "corpus": "allen_ahba", "page": "HTR4", "quote": "HTR4 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1022876, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.90: caudate +2.07 (5d), accumbens +2.03 (5d), putamen +2.01 (5d), hippocampus +1.44 (5d), frontal +0.11 (5d)", "species": "Human"}
 {"id": "q_03b5393de39e", "corpus": "allen_ahba", "page": "CHRM2", "quote": "CHRM2 detected in parietal: probe 1029156 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_03b6771f2e90", "corpus": "wikipedia_pharm", "page": "tiapride", "quote": "Elimination half-life | 2.9–3.6 hours"}
+{"id": "q_03d501baa6ea", "corpus": "wikipedia_pharm", "page": "fluoxetine", "quote": "In vivo, fluoxetine and norfluoxetine do not significantly affect the activity of CYP1A2 and CYP3A4", "llm": "opus"}
 {"id": "q_041606a0f139", "corpus": "allen_ahba", "page": "HRH3", "quote": "HRH3 detected in caudate: probe 1046403 PACall present in 68/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_042b2c85df90", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 8.1-8.3 [PMID 11459121]", "species": "Human"}
 {"id": "q_046bddb0c577", "corpus": "stahl", "page": 579, "quote": "Inhibits CYP3A4", "heading": ["Nefazodone", "Dosing and use", "Pharmacokinetics"]}
@@ -1805,6 +1806,7 @@
 {"id": "q_8408f29bcb76", "corpus": "allen_ahba", "page": "HRH2", "quote": "HRH2 detected in putamen: probe 1019471 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_84164fde696d", "corpus": "allen_ahba", "page": "SLC6A1", "quote": "SLC6A1 detected in hippocampus: probe 1051544 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_841d46d5c821", "corpus": "allen_ahba", "page": "ABAT", "quote": "ABAT detected in cerebellum: probe 1010530 PACall present in 368/368 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
+{"id": "q_84959c7066da", "corpus": "wikipedia_pharm", "page": "modafinil", "quote": "However, other in-vitro studies find no significant inhibition of CYP2C9", "llm": "opus"}
 {"id": "q_84de77d85cfc", "corpus": "gtopdb_ki", "page": "ziprasidone", "quote": "ziprasidone at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 6.4 [PMID 8935801]", "species": "Human"}
 {"id": "q_84eccead07d2", "corpus": "stahl", "page": 140, "quote": "Elimination half-life approximately 2–3 hours", "heading": ["Buspirone", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_85413a371cb5", "corpus": "nieuwenhuys", "page": 389, "quote": "The precommissural fornix fibres originating from Ammon's horn terminate exclusively in the lateral septal nucleus.", "llm": "sonnet", "heading": ["12. Telencephalon Hippocampus and Related Structures"]}
@@ -3494,6 +3496,7 @@
 {"id": "q_fb1021854f7f", "corpus": "stahl", "page": 81, "quote": "Neuroscience-based Nomenclature: dopamine reuptake inhibitor (D-RI)", "llm": "sonnet", "heading": ["Armodafinil", "Therapeutics", "Class"]}
 {"id": "q_fb14d7680e39", "corpus": "stahl", "page": 64, "quote": "In adults, half-life for d-amphetamine is 10 hours and for l-amphetamine is 13 hours", "heading": ["Amphetamine (D,L)", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_fb16aaee9da1", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Asentra"}
+{"id": "q_fb1b2ca1180f", "corpus": "wikipedia_pharm", "page": "armodafinil", "quote": "In contrast to modafinil, however, armodafinil does not induce CYP1A2", "llm": "opus"}
 {"id": "q_fb1c02702063", "corpus": "stahl", "page": 731, "quote": "Parent drug of oral formulation has 20–24hour half-life", "heading": ["Risperidone", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_fb3606948c0a", "corpus": "wikipedia_pharm", "page": "meprobamate", "quote": "Elimination half-life | 10 hours"}
 {"id": "q_fb8662093b3f", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "5-HT 6 | 136 | Rat"}

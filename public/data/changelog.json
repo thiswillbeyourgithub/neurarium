@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.72.0",
+      "date": "2026-09-09",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Where two of the sources behind this dataset **disagree**, the panel now says so instead of quietly picking one. Three enzyme rows carry the new orange badge, and its tooltip shows both sides: the prescriber's manual states the interaction flatly, while the pharmacology article says the effect measured in the laboratory does not actually show up in a living body. Fluoxetine at CYP3A4 is the clearest case. Neither claim is dropped, because deciding between them would be a judgement no source here makes.",
+          "commits": [
+            "8776fb2"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.71.0",
       "date": "2026-09-09",
       "entries": [
