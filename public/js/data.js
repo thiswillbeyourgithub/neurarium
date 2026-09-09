@@ -732,6 +732,15 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         provenance: strongestGrade(e.sources),
       };
     });
+    // Derived, never stored (like pkInteractionsOf below): the isoforms this drug
+    // is BOTH a substrate of and a modulator of, so it changes its own clearance
+    // (autoinhibition, or autoinduction for an inducer) and its dose/level relation
+    // is not a straight line. No single enzyme row above can say this: each states
+    // one role, and it is their coincidence on one isoform that is the claim. An
+    // inference off graded rows, so the panel words it conditionally and shows no
+    // pill of its own (the rows it reads carry theirs).
+    d.autoModulation = d.enzymes.filter((e) => e.direction !== 0
+      && d.enzymes.some((o) => o.enzyme === e.enzyme && o.role === "substrate"));
     const affected = new Set();
     d.bindings = (d.bindings || []).map((b) => {
       // Display + provenance fields come from the shared resolver; the drug loop

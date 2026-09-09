@@ -765,6 +765,15 @@ a line in the tally.
 - Two today, both `drug.metabolism`: paroxetine + MDMA inhibit the CYP2D6 that clears them
   (mechanism-based / autoinhibition), so their kinetics are non-linear, which the per-isoform rows
   below cannot state (a row gives a role, never a curve).
+- **The `drug.metabolism` slot has a derived fallback.** A drug that is both a substrate and a
+  modulator of one isoform changes its own clearance, and that is computable: `js/data.js`
+  `autoModulation` (an inference over the enzyme rows, like `pkInteractionsOf`) feeds
+  `derivedAutoModulation` in `js/main.js`, which draws the same box worded conditionally, with no
+  source pill and a line saying it is our reading of the two rows. It fires **only when the slot
+  holds no authored addon** (`appendAddons` returns how many it drew): a sourced statement of the
+  mechanism outranks the inference. So the rule covers the ~25 other self-modulating drugs for
+  free, and an authored addon stays the way to state what the rule cannot see (MDMA's
+  autoinhibition is not in its enzyme rows: the corpus gives it a substrate role only).
 
 ## Images
 

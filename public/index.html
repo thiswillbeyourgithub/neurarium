@@ -2324,6 +2324,16 @@
       .addon-glyph { color: rgb(var(--addon-accent)); }
       .addon-title { color: rgb(var(--addon-accent)); }
       .addon-text { margin: 4px 0 0; color: var(--muted); }
+      /* The provenance line of a DERIVED addon (no source pill to carry it): it
+         says the box is an inference off the rows below, so it is set smaller and
+         dimmer than the claim it qualifies. */
+      .addon-derived-note {
+        margin: 6px 0 0;
+        color: var(--muted);
+        opacity: 0.75;
+        font-size: 11px;
+        font-style: italic;
+      }
       /* "Interacting drugs" list on a receptor / target panel: the drugs that act
          on it, grouped by drug category. The .drug-cat sub-heading is a small muted
          label between groups (the section's own h3 keeps the uppercase header look). */

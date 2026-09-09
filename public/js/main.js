@@ -2413,22 +2413,63 @@ function createInfoPanel(data, sourcingModal) {
    * @param {string} ownerKind  the anchored node's kind ("drug", "receptor", ...)
    * @param {string} ownerId    that node's id (a structure anchors its BASE)
    * @param {string} slot       a meta.addon_slots key
+   * @returns {number} how many addons were drawn, so a caller can fall back to a
+   *   derived note only when the slot holds no authored (sourced) one.
    */
   const appendAddons = (host, ownerKind, ownerId, slot) => {
-    if (!ownerId || !data.addonsBySlot) return;
+    if (!ownerId || !data.addonsBySlot) return 0;
     // An unregistered slot is a wiring bug, not a missing addon: the generator
     // validated every authored addon against this same list, so a typo here asks a
     // question no node can ever be authored to answer.
     const slots = data.meta.addonSlots;
     if (slots && !(slot in slots)) {
       console.warn(`addon slot "${slot}" is not in meta.addon_slots`);
-      return;
+      return 0;
     }
+    let drawn = 0;
     for (const addon of data.addonsBySlot.get(`${ownerKind}:${ownerId}:${slot}`) || []) {
       const render = ADDON_RENDERERS[addon.display];
-      if (render) host.appendChild(render(addon));
+      if (render) { host.appendChild(render(addon)); drawn += 1; }
       else console.warn(`addon "${addon.id}": unknown display "${addon.display}"`);
     }
+    return drawn;
+  };
+
+  /**
+   * The derived twin of a `drug.metabolism` addon: a drug that is both a substrate
+   * and a modulator of one isoform changes its own clearance, so its kinetics are
+   * non-linear. Read off `drug.autoModulation` (js/data.js), which is an INFERENCE
+   * over the enzyme rows rendered just below, so this box words itself
+   * conditionally, carries no source pill, and says where it comes from: the rows
+   * it reads each carry their own grade, and the coincidence is our reading, not a
+   * sentence any corpus prints. An authored addon in the same slot outranks it (it
+   * states a mechanism a source really attests), so the caller only falls back here
+   * when the slot is empty.
+   *
+   * @param {object} drug
+   * @returns {HTMLElement|null} the box, or null when the drug modulates no isoform
+   *   that also clears it
+   */
+  const derivedAutoModulation = (drug) => {
+    const rows = drug.autoModulation || [];
+    if (!rows.length) return null;
+    const labels = (role) => rows.filter((r) => r.role === role).map((r) => r.label);
+    const box = el("div", "addon addon-info addon-derived");
+    const head = el("div", "addon-head");
+    const tones = data.meta.addonTones || {};
+    if (tones.info) head.appendChild(el("span", "addon-glyph", tones.info));
+    head.appendChild(el("strong", "addon-title", t("drug.autoPkTitle")));
+    box.appendChild(head);
+    // One sentence per direction: a drug can inhibit one of its own isoforms and
+    // induce another (modafinil), and the two read opposite ways over time.
+    const parts = [];
+    const inhibits = labels("inhibitor");
+    const induces = labels("inducer");
+    if (inhibits.length) parts.push(t("drug.autoPkInhibits", { enzymes: inhibits.join(", ") }));
+    if (induces.length) parts.push(t("drug.autoPkInduces", { enzymes: induces.join(", ") }));
+    box.appendChild(el("p", "addon-text", parts.join(" ")));
+    box.appendChild(el("p", "addon-derived-note", t("drug.autoPkDerived")));
+    return box;
   };
 
   // The "why this is uncertain" block that leads a flagged binding's tooltip: a lead
@@ -3986,7 +4027,12 @@ function createInfoPanel(data, sourcingModal) {
         // Addon slot: a caveat about how this drug is cleared, which the per-isoform
         // rows below cannot state (a row gives a role, never a curve). Above the
         // first enzyme so it is read before them, not as a footnote after.
-        appendAddons(enzWrap, "drug", drug.id, "drug.metabolism");
+        // An authored addon states a mechanism a source attests; failing one, the
+        // same slot takes the derived flag off the enzyme rows below.
+        if (!appendAddons(enzWrap, "drug", drug.id, "drug.metabolism")) {
+          const derived = derivedAutoModulation(drug);
+          if (derived) enzWrap.appendChild(derived);
+        }
         const enzUl = el("ul");
         // Substrate rows first (how the body clears it), then what it does to others.
         const roleOrder = { substrate: 0, inhibitor: 1, inducer: 2 };
