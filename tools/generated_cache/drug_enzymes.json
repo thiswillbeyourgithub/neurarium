@@ -270,7 +270,8 @@
      "provenance": "verified",
      "quote": "Is also an inducer of CYP2C9 and weakly of CYP1A2 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "weak"
   },
   {
    "enzyme": "cyp2c19",
@@ -282,7 +283,8 @@
      "provenance": "verified",
      "quote": "Is also an inducer of CYP2C9 and weakly of CYP1A2 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "weak"
   },
   {
    "enzyme": "cyp2c9",
@@ -293,6 +295,18 @@
      "page": 149,
      "provenance": "verified",
      "quote": "Is also an inducer of CYP2C9 and weakly of CYP1A2 and CYP2C19"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 149,
+     "provenance": "verified",
+     "quote": "Is not only a substrate for CYP3A4, but also an inducer of CYP3A4"
     }
    ]
   },
@@ -426,7 +440,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP1A2 and to a lesser extent by CYP2D6 and CYP3A4"
     }
-   ]
+   ],
+   "strength": "major"
   },
   {
    "enzyme": "cyp2d6",
@@ -438,7 +453,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP1A2 and to a lesser extent by CYP2D6 and CYP3A4"
     }
-   ]
+   ],
+   "strength": "minor"
   },
   {
    "enzyme": "cyp3a4",
@@ -450,7 +466,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP1A2 and to a lesser extent by CYP2D6 and CYP3A4"
     }
-   ]
+   ],
+   "strength": "minor"
   }
  ],
  "daridorexant": [
@@ -505,7 +522,8 @@
      "provenance": "verified",
      "quote": "Minimally metabolized by CYP3A4"
     }
-   ]
+   ],
+   "strength": "minor"
   }
  ],
  "deutetrabenazine": [
@@ -559,7 +577,8 @@
      "provenance": "verified",
      "quote": "Inhibits CYP2D6 weakly"
     }
-   ]
+   ],
+   "strength": "weak"
   }
  ],
  "donepezil": [
@@ -705,7 +724,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "major"
   },
   {
    "enzyme": "cyp2c19",
@@ -717,7 +737,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "minor"
   },
   {
    "enzyme": "cyp2c9",
@@ -729,7 +750,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "minor"
   },
   {
    "enzyme": "cyp3a4",
@@ -741,7 +763,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP2B6 and CYP3A4 and to a lesser extent by CYP2C9 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "major"
   }
  ],
  "eszopiclone": [
@@ -781,7 +804,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP2C19"
     }
-   ]
+   ],
+   "strength": "minor"
   },
   {
    "enzyme": "cyp3a4",
@@ -793,7 +817,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP2C19"
     }
-   ]
+   ],
+   "strength": "major"
   }
  ],
  "fluoxetine": [
@@ -1013,7 +1038,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP3A5"
     }
-   ]
+   ],
+   "strength": "major"
   },
   {
    "enzyme": "cyp3a5",
@@ -1025,7 +1051,8 @@
      "provenance": "verified",
      "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP3A5"
     }
-   ]
+   ],
+   "strength": "minor"
   }
  ],
  "levomilnacipran": [
@@ -1067,7 +1094,8 @@
      "provenance": "verified",
      "quote": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "minor"
   },
   {
    "enzyme": "cyp2c19",
@@ -1079,7 +1107,8 @@
      "provenance": "verified",
      "quote": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "minor"
   },
   {
    "enzyme": "cyp2d6",
@@ -1091,7 +1120,8 @@
      "provenance": "verified",
      "quote": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19"
     }
-   ]
+   ],
+   "strength": "major"
   }
  ],
  "lumateperone": [
@@ -1223,7 +1253,8 @@
      "provenance": "verified",
      "quote": "Induces CYP3A4 (and slightly CYP1A2 and CYP2B6)"
     }
-   ]
+   ],
+   "strength": "weak"
   },
   {
    "enzyme": "cyp2b6",
@@ -1235,7 +1266,8 @@
      "provenance": "verified",
      "quote": "Induces CYP3A4 (and slightly CYP1A2 and CYP2B6)"
     }
-   ]
+   ],
+   "strength": "weak"
   },
   {
    "enzyme": "cyp2c19",
@@ -1450,7 +1482,8 @@
      "provenance": "verified",
      "quote": "Extensively metabolized by CYP2D6 and to a lesser extent by CYP3A4"
     }
-   ]
+   ],
+   "strength": "major"
   },
   {
    "enzyme": "cyp3a4",
@@ -1462,7 +1495,8 @@
      "provenance": "verified",
      "quote": "Extensively metabolized by CYP2D6 and to a lesser extent by CYP3A4"
     }
-   ]
+   ],
+   "strength": "minor"
   }
  ],
  "protriptyline": [
@@ -1490,8 +1524,7 @@
      "provenance": "verified",
      "quote": "Metabolized in part by CYP3A4"
     }
-   ],
-   "strength": "minor"
+   ]
   }
  ],
  "quetiapine": [
@@ -1518,6 +1551,19 @@
      "page": 718,
      "provenance": "verified",
      "quote": "Metabolized predominantly by CYP1A2"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 718,
+     "provenance": "verified",
+     "quote": "CYP3A4 and CYP2C are also involved in metabolism of ramelteon"
     }
    ]
   }
@@ -1585,7 +1631,8 @@
      "provenance": "verified",
      "quote": "Extensively metabolized by CYP2D6 and CYP3A"
     }
-   ]
+   ],
+   "strength": "major"
   }
  ],
  "sertraline": [
@@ -1600,6 +1647,19 @@
      "quote": "Inhibits CYP2C19"
     }
    ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 770,
+     "provenance": "verified",
+     "quote": "Inhibits CYP2D6 (weakly at low doses) and is also a substrate for CYP2D6"
+    }
+   ],
+   "strength": "weak"
   },
   {
    "enzyme": "cyp2d6",
@@ -1623,7 +1683,8 @@
      "provenance": "verified",
      "quote": "Inhibits CYP3A4 (weakly at low doses)"
     }
-   ]
+   ],
+   "strength": "weak"
   }
  ],
  "sildenafil": [
@@ -1637,7 +1698,8 @@
      "provenance": "verified",
      "quote": "Metabolized to an active metabolite, primarily by CYP3A4 (major route) and CYP2C9 (minor route)"
     }
-   ]
+   ],
+   "strength": "minor"
   },
   {
    "enzyme": "cyp3a4",
@@ -1649,7 +1711,8 @@
      "provenance": "verified",
      "quote": "Metabolized to an active metabolite, primarily by CYP3A4 (major route) and CYP2C9 (minor route)"
     }
-   ]
+   ],
+   "strength": "major"
   }
  ],
  "suvorexant": [
@@ -1736,7 +1799,7 @@
   },
   {
    "enzyme": "cyp3a4",
-   "role": "inhibitor",
+   "role": "inducer",
    "sources": [
     {
      "corpus": "stahl",
@@ -1799,22 +1862,19 @@
    ]
   }
  ],
- "valbenazine": [
+ "valproate": [
   {
-   "enzyme": "cyp2d6",
+   "enzyme": "cyp2c19",
    "role": "substrate",
    "sources": [
     {
      "corpus": "stahl",
-     "page": 872,
+     "page": 877,
      "provenance": "verified",
-     "quote": "[+]-α-HTBZ is further metabolized in part by CYP2D6"
+     "quote": "Metabolized primarily by the liver, approximately 25% dependent upon CYP system (CYP2C9 and CYP2C19)"
     }
-   ],
-   "strength": "minor"
-  }
- ],
- "valproate": [
+   ]
+  },
   {
    "enzyme": "cyp2c9",
    "role": "inhibitor",
@@ -1824,6 +1884,18 @@
      "page": 877,
      "provenance": "verified",
      "quote": "Inhibits CYP2C9"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "stahl",
+     "page": 877,
+     "provenance": "verified",
+     "quote": "Metabolized primarily by the liver, approximately 25% dependent upon CYP system (CYP2C9 and CYP2C19)"
     }
    ]
   }
@@ -1853,7 +1925,8 @@
      "provenance": "verified",
      "quote": "Inhibits CYP1A2 (strong)"
     }
-   ]
+   ],
+   "strength": "strong"
   },
   {
    "enzyme": "cyp2d6",
@@ -1865,7 +1938,8 @@
      "provenance": "verified",
      "quote": "Inhibits CYP2D6 (weak)"
     }
-   ]
+   ],
+   "strength": "weak"
   },
   {
    "enzyme": "cyp2d6",
@@ -1890,7 +1964,8 @@
      "provenance": "verified",
      "quote": "Inhibits CYP3A4 (weak)"
     }
-   ]
+   ],
+   "strength": "weak"
   },
   {
    "enzyme": "ugt1a9",
@@ -2056,8 +2131,7 @@
      "provenance": "verified",
      "quote": "Metabolized in part by CYP3A4"
     }
-   ],
-   "strength": "minor"
+   ]
   }
  ],
  "zopiclone": [
