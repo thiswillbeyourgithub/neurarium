@@ -3082,6 +3082,20 @@
       "pages_dir": "data_sources/gtopdb/pages_class"
     }
   },
+  "addon_slots": {
+    "drug.top": "drug",
+    "drug.metabolism": "drug",
+    "receptor.top": "receptor",
+    "target.top": "target",
+    "structure.top": "structure"
+  },
+  "addon_displays": [
+    "admonition"
+  ],
+  "addon_tones": {
+    "info": "ℹ",
+    "caution": "⚠"
+  },
   "uncertainty_reasons": {
     "side_effect_rule": {
       "source": "own_quote",
@@ -3131,6 +3145,15 @@
   "density_min_reliability": 0.5,
   "provenance_stats": {
     "by_kind": {
+      "addons": {
+        "total": 2,
+        "verified": 2,
+        "uncertain": 0,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0
+      },
       "drug_bindings": {
         "total": 1863,
         "verified": 1740,
@@ -3349,14 +3372,14 @@
       }
     },
     "nodes": {
-      "total": 4414,
-      "verified": 4097,
+      "total": 4416,
+      "verified": 4099,
       "uncertain": 146,
       "sourced": 0,
       "llm": 157,
       "nosource": 14,
       "missing": 171,
-      "backed": 4243,
+      "backed": 4245,
       "pct_backed": 96
     },
     "ki_coverage": {

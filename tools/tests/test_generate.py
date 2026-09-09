@@ -348,7 +348,7 @@ class QuoteTableTest(unittest.TestCase):
         cls.quotes = {q["id"]: q for q in _load_jsonl(DATA_DIR / "quotes.jsonl")}
         cls.docs = [json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))]
         for name in ("structures", "projections", "circuits",
-                     "projection_groups", "receptors", "drugs"):
+                     "projection_groups", "receptors", "drugs", "addons"):
             cls.docs.extend(_load_jsonl(DATA_DIR / f"{name}.jsonl"))
 
     def test_no_inline_quotes_remain(self):
@@ -611,6 +611,72 @@ class UncertaintyTest(unittest.TestCase):
                          c["total"])
         a = self.meta["provenance_stats"]["nodes"]
         self.assertEqual(a["backed"], a["verified"] + a["uncertain"] + a["sourced"])
+
+
+class AddonTest(unittest.TestCase):
+    """Addon nodes (tools/data_generators/addons.py): the kind that carries its own
+    insertion point.
+
+    Its distinctive failure mode is *silent*: a node that is well-formed, graded and
+    counted in the tally, but anchored somewhere no panel ever looks, so it simply
+    never appears. Nothing downstream can notice that, which is why the slot /
+    display / tone vocabularies are closed and validated at generation. These tests
+    guard that contract from both ends: the emitted records agree with the emitted
+    registry, and each validator really raises."""
+
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(REPO_ROOT / "tools"))
+        from data_generators import addons
+        cls.mod = addons
+        cls.addons = _load_jsonl(DATA_DIR / "addons.jsonl")
+        cls.meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+
+    def _authored(self, **patch):
+        base = {"id": "t", "owner_kind": "drug", "owner": "mdma",
+                "slot": "drug.metabolism", "display": "admonition",
+                "tone": "caution", "text": {"en": "x", "fr": "x"}, "sources": []}
+        base.update(patch)
+        return base
+
+    def test_every_emitted_addon_fits_the_emitted_registry(self):
+        slots = self.meta["addon_slots"]
+        displays = set(self.meta["addon_displays"])
+        tones = set(self.meta["addon_tones"])
+        self.assertTrue(self.addons, "no addon nodes emitted at all")
+        for a in self.addons:
+            self.assertIn(a["slot"], slots)
+            self.assertEqual(slots[a["slot"]], a["owner_kind"],
+                             f"addon {a['id']} anchors the wrong node kind for its slot")
+            self.assertIn(a["display"], displays)
+            self.assertIn(a["tone"], tones)
+            self.assertTrue(a.get("text"), f"addon {a['id']} states no claim")
+
+    def test_ids_are_unique(self):
+        ids = [a["id"] for a in self.addons]
+        self.assertEqual(len(ids), len(set(ids)))
+
+    def test_an_unknown_slot_display_or_tone_raises(self):
+        for patch in ({"slot": "drug.nowhere"}, {"display": "popup"},
+                      {"tone": "shouting"}):
+            with self.assertRaises(KeyError):
+                self.mod._addon_record(self._authored(**patch))
+
+    def test_anchoring_the_wrong_node_kind_for_a_slot_raises(self):
+        # A receptor addon in a drug slot would be looked up under a key no panel
+        # ever builds, so it would ship and never draw.
+        with self.assertRaises(KeyError):
+            self.mod._addon_record(self._authored(owner_kind="receptor"))
+
+    def test_a_claimless_addon_raises(self):
+        with self.assertRaises(KeyError):
+            self.mod._addon_record(self._authored(text=None))
+
+    def test_the_tally_counts_them_as_nodes(self):
+        c = self.meta["provenance_stats"]["by_kind"]["addons"]
+        self.assertEqual(c["total"], len(self.addons))
+        self.assertEqual(c["verified"] + c["uncertain"] + c["sourced"] + c["missing"],
+                         c["total"])
 
 
 if __name__ == "__main__":

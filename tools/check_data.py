@@ -113,7 +113,7 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # (mirrors provenance.py's by_kind minus "references", which points *at* a node rather
 # than being one). Adding a node kind means adding it here too, in one place: both the
 # coverage table and the self-consistency check read this.
-NODE_KINDS = ("drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
+NODE_KINDS = ("addons", "drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
               "drug_half_life", "drug_enzymes", "drug_metabolites",
               "drug_metabolite_enzyme", "drug_metabolite_bindings",
               "projections", "circuits", "projection_groups", "receptors",
@@ -393,7 +393,7 @@ def check_duplicates(report, meta, structures, projections, circuits,
 # --------------------------------------------------------------------------- #
 
 def check_reachability(report, meta, structures, projections, circuits,
-                       projection_groups, receptors, drugs):
+                       projection_groups, receptors, drugs, addons):
     report.header("2. Reachability (dangling references)")
     structure_ids = {s.get("id") for s in structures}
     base_ids = {_HEMISPHERE_RE.sub("", sid) for sid in structure_ids}
@@ -621,6 +621,45 @@ def check_reachability(report, meta, structures, projections, circuits,
                          f"parents (re-run apply_metabolite_bindings.py, which writes them "
                          f"consistently, or reconcile the hand-edit)")
 
+    # Addon nodes carry their own insertion point, so "does it resolve?" is two
+    # questions: does the anchored node exist, and is the slot one the viewer offers.
+    # A wrong answer to either is a node that ships and is never drawn, which no other
+    # check can see (it is well-formed, graded, and counted in the tally).
+    addon_before = report.errors
+    slots = meta.get("addon_slots") or {}
+    displays = set(meta.get("addon_displays") or ())
+    tones = set(meta.get("addon_tones") or {})
+    addon_pools = {"drug": {d.get("id") for d in drugs},
+                   "receptor": receptor_ids,
+                   "target": set(targets),
+                   "structure": base_ids}
+    for addon in addons:
+        aid = addon.get("id")
+        slot, kind = addon.get("slot"), addon.get("owner_kind")
+        if slot not in slots:
+            report.error(f"addon {aid!r}: slot {slot!r} is not in meta.addon_slots "
+                         f"({sorted(slots)}); nothing would ever draw it")
+        elif slots[slot] != kind:
+            report.error(f"addon {aid!r}: anchors a {kind!r} node in slot {slot!r}, "
+                         f"which is a {slots[slot]!r} panel slot")
+        if addon.get("display") not in displays:
+            report.error(f"addon {aid!r}: display {addon.get('display')!r} is not in "
+                         f"meta.addon_displays ({sorted(displays)})")
+        if addon.get("tone") not in tones:
+            report.error(f"addon {aid!r}: tone {addon.get('tone')!r} is not in "
+                         f"meta.addon_tones ({sorted(tones)})")
+        pool = addon_pools.get(kind)
+        if pool is None:
+            report.error(f"addon {aid!r}: unknown owner_kind {kind!r}")
+        elif addon.get("owner") not in pool:
+            report.error(f"addon {aid!r}: anchors {kind} {addon.get('owner')!r}, "
+                         f"which is not a known {kind} id")
+        if not addon.get("text"):
+            report.error(f"addon {aid!r}: no text (an addon IS its claim)")
+    if addons and report.errors == addon_before:
+        report.ok(f"all {len(addons)} addon nodes anchor a real node in a slot the "
+                  f"viewer offers")
+
     if report.errors == before:
         report.ok("every cross-reference (drug -> target/action/category, projection "
                   "-> structure/kind, circuit/receptor/target -> structure) resolves; "
@@ -756,7 +795,7 @@ def print_coverage(stats):
 
 
 def check_provenance(report, meta, structures, projections, circuits,
-                     projection_groups, receptors, drugs):
+                     projection_groups, receptors, drugs, addons):
     report.header("4. Source provenance grades")
     before = report.errors
     counts = Counter()
@@ -874,6 +913,11 @@ def check_provenance(report, meta, structures, projections, circuits,
             for i, src in enumerate(srcs or []):
                 grade(src.get("provenance"),
                       f"target {key} location_sources[{base}][{i}]")
+
+    # Addon nodes are graded through their quote-level sources like a binding.
+    for addon in addons:
+        for i, src in enumerate(addon.get("sources", []) or []):
+            grade(src.get("provenance"), f"addon {addon.get('id')} sources[{i}]")
 
     # Wikipedia references (structures / receptors / drugs, + the meta targets)
     # carry a sibling `wikipedia_provenance` whenever the link is present.
@@ -1025,7 +1069,7 @@ def quote_pages(node, corpus, out):
     return out
 
 
-def check_sources(report, meta, drugs, projections, structures, receptors):
+def check_sources(report, meta, drugs, projections, structures, receptors, addons):
     """The core of the sourcing system: confirm every quote-level source (a
     binding's ``sources``, a drug's ``nbn_sources``, and a projection's quote-level
     ``sources``) is actually present in the page it cites.
@@ -1199,6 +1243,10 @@ def check_sources(report, meta, drugs, projections, structures, receptors):
                 ki_src = (binding.get("ki") or {}).get("source")
                 if ki_src and ki_src.get("quote"):
                     check_one(f"{mid} binding {binding.get('target')} ki.source", ki_src)
+
+    for addon in addons:
+        for i, src in enumerate(addon.get("sources", []) or []):
+            check_one(f"addon {addon.get('id')} sources[{i}]", src)
 
     for proj in projections:
         pid = f"{proj.get('from')}->{proj.get('to')}"
@@ -1966,6 +2014,7 @@ def main():
     projection_groups = load_jsonl(report, "projection_groups")
     receptors = load_jsonl(report, "receptors")
     drugs = load_jsonl(report, "drugs")
+    addons = load_jsonl(report, "addons")
 
     # Rehydrate the externalized source quotes in place (collecting referenced +
     # dangling ids), so every check below sees the original inline source shape;
@@ -1973,16 +2022,16 @@ def main():
     quotes_by_id = load_quotes(report)
     referenced, dangling = set(), []
     rehydrate_quotes([meta, structures, projections, circuits, projection_groups,
-                      receptors, drugs], quotes_by_id, referenced, dangling)
+                      receptors, drugs, addons], quotes_by_id, referenced, dangling)
     check_quotes(report, quotes_by_id, referenced, dangling)
 
     args = (report, meta, structures, projections, circuits, projection_groups,
             receptors, drugs)
     check_duplicates(*args)
-    check_reachability(*args)
+    check_reachability(*args, addons)
     check_todos(*args)
-    check_provenance(*args)
-    check_sources(report, meta, drugs, projections, structures, receptors)
+    check_provenance(*args, addons)
+    check_sources(report, meta, drugs, projections, structures, receptors, addons)
     check_connectivity(report, structures, projections)
     check_ki_coverage(report, meta, drugs)
     check_flow_consistency(report, meta, drugs, projections, receptors)

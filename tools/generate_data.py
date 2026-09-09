@@ -67,6 +67,16 @@ log = logging.getLogger("generate_data")
 # RECEPTOR_CLASS_LABELS / SYNAPTIC_LABELS label maps) + the per-structure WIKIPEDIA
 # link table were split out verbatim into data_generators.presentation (emitted into
 # meta.json; imported at the use sites below).
+# Addon nodes: the panel-slot annotation kind (a sourced claim that carries its own
+# insertion point). Its slot / display / tone vocabularies are emitted into meta so
+# the viewer reads the hook registry from the data.
+from data_generators.addons import (  # noqa: E402
+    ADDON_DISPLAYS,
+    ADDON_SLOTS,
+    ADDON_TONES,
+    build_addons,
+)
+
 from data_generators.presentation import (  # noqa: E402
     GROUP_LABELS,
     KIND_TO_SIGN,
@@ -1585,6 +1595,27 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             "METABOLITE_ENZYME_QUOTES keys match no metabolite in drugs_data.jsonl: "
             + ", ".join(f"{d}/{n}" for d, n in orphans))
 
+    # Addon nodes: each carries its own insertion point, so the only cross-check the
+    # module cannot do on its own is whether the anchored node exists. A typo'd owner
+    # would emit a node the viewer never draws (it looks up addons by owner id), which
+    # is exactly the silent loss the fail-loud rule exists for.
+    addons = build_addons()
+    addon_pools = {
+        "drug": seen_drug_ids,
+        "receptor": {r["id"] for r in receptors},
+        "target": set(drug_targets),
+        # A structure addon anchors the *base* (both hemispheres show it), matching
+        # how a receptor location or a density profile keys its regions.
+        "structure": receptor_bases,
+    }
+    for addon in addons:
+        pool = addon_pools[addon["owner_kind"]]
+        if addon["owner"] not in pool:
+            raise KeyError(
+                f"Addon {addon['id']!r} anchors {addon['owner_kind']} "
+                f"{addon['owner']!r}, which is not a known "
+                f"{addon['owner_kind']} id")
+
     # Fail loudly if the data uses a kind or group with no entry in the maps above.
     kinds = {r["kind"] for r in projections}
     missing_kinds = kinds - PROJECTION_COLORS.keys()
@@ -1672,6 +1703,15 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # each binding's source; check_data.py reads pages_dir to confirm quotes.
         # Self-describing so a port needs no hardcoded citation.
         "source_corpora": SOURCE_CORPORA,
+        # Addon-node hook registry (see data_generators/addons.py): the slots the
+        # viewer offers (slot -> the node kind whose panel it is in), the display
+        # forms it can draw, and the tone -> glyph vocabulary. Emitted rather than
+        # hardcoded in JS for the usual reason: an addon says where it goes, so the
+        # set of legal answers is part of the data contract, and check_data.py reads
+        # the same list the generator validated against.
+        "addon_slots": ADDON_SLOTS,
+        "addon_displays": list(ADDON_DISPLAYS),
+        "addon_tones": ADDON_TONES,
         # The closed vocabulary of "uncertain" reason kinds (see quotes/uncertainty.py).
         # Emitted so the viewer knows which i18n sentence a bullet takes and check_data.py
         # can reject a kind that is not one of these, from one list rather than three.
@@ -1687,13 +1727,14 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # count, never hand-typed. See _provenance_stats.
         "provenance_stats": _provenance_stats(
             structures, projections, circuits, projection_groups,
-            receptors, drugs, drug_targets),
+            receptors, drugs, drug_targets, addons),
     }
 
     return ({"meta": meta, "structures": structures,
              "projections": projections, "circuits": circuits,
              "projection_groups": projection_groups,
-             "receptors": receptors, "drugs": drugs}, shapes)
+             "receptors": receptors, "drugs": drugs,
+             "addons": addons}, shapes)
 
 
 def write_artifacts(root: Path) -> None:
@@ -1741,7 +1782,7 @@ def write_artifacts(root: Path) -> None:
     log.info("wrote %s", meta_path)
 
     for name in ("structures", "projections", "circuits", "projection_groups",
-                 "receptors", "drugs"):
+                 "receptors", "drugs", "addons"):
         path = data_dir / f"{name}.jsonl"
         with path.open("w", encoding="utf-8") as fh:
             for record in data[name]:

@@ -24,6 +24,7 @@ const GRADE_RANK = { nosource: 0, llm: 1, sourced: 2, uncertain: 3, verified: 4 
 // Enumeration order, and therefore the kind <select>'s option order. Kinds absent
 // from the loaded dataset are dropped from the select, never from this list.
 const KIND_ORDER = [
+  "addons",
   "structures",
   "projections",
   "circuits",
@@ -286,6 +287,14 @@ export function collectNodes(data, deps, opts = {}) {
           b.provenance, goMetab, b);
       }
     }
+  }
+
+  // Addon nodes: a sourced annotation that carries its own panel slot. The row names
+  // the node it annotates (so it reads like every other row: subject, then claim) and
+  // navigates to that node's panel, where the annotation is spliced in.
+  for (const a of data.addons || []) {
+    const go = a.focus ? () => nav[a.focus.nav](a.focus.arg) : null;
+    push("addons", a.ownerName, a.title || a.text, a.provenance, go, a);
   }
 
   return rows;

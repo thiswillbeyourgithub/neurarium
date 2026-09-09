@@ -160,6 +160,13 @@ function localize(field) {
  *   `targets` entry's id) -> the drugs that act on it, each paired with its resolved
  *   binding (its net-effect colour + action), deduped to one row per (drug, target).
  *   Lets a receptor / target panel list its interacting drugs grouped by category.
+ * @property {object[]} addons  Addon records (from addons.jsonl): sourced
+ *   annotations that carry their own insertion point, each `{id, ownerKind, owner,
+ *   slot, display, tone, glyph, title, text, sources, provenance}` plus the resolved
+ *   `ownerName` + `focus` ({nav, arg}) of the node it annotates. The claim is in
+ *   `text`; `slot` says which panel hook draws it (see meta.addonSlots).
+ * @property {Map<string, object[]>} addonsBySlot  Reverse index:
+ *   `${ownerKind}:${owner}:${slot}` -> the addons a panel should splice in there.
  * @property {Map<string, object>} byId  structure id -> structure record.
  * @property {{projectionColors: Object<string,string>,
  *   groupLabels: Object<string,string>,
@@ -197,7 +204,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     }
   }
   const [metaRecord, structures, projections, circuits, projectionGroups,
-         receptors, drugs, quotes] =
+         receptors, drugs, addonRecords, quotes] =
     await Promise.all([
       fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
       fetchJsonl(`${dataDir}/structures.jsonl`),
@@ -206,6 +213,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       fetchJsonl(`${dataDir}/projection_groups.jsonl`),
       fetchJsonl(`${dataDir}/receptors.jsonl`),
       fetchJsonl(`${dataDir}/drugs.jsonl`),
+      fetchJsonl(`${dataDir}/addons.jsonl`),
       fetchJsonl(`${dataDir}/quotes.jsonl`),
     ]);
   // Source quotes are emitted once into quotes.jsonl (deduplicated), each node
@@ -216,7 +224,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   const quotesById = Object.create(null);
   for (const q of quotes) quotesById[q.id] = q;
   rehydrateQuotes([metaRecord, structures, projections, circuits,
-                   projectionGroups, receptors, drugs], quotesById);
+                   projectionGroups, receptors, drugs, addonRecords], quotesById);
   // A symmetric pathway is stored once carrying `mirror: true` (the emitted file
   // authors only the right-hemisphere record, avoiding a duplicate row per
   // pathway; see generate_data.py _projection_records). Reflect each such record
@@ -294,6 +302,11 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // through as-is (the numbers are computed in generate_data.py, see
   // _provenance_stats). Null on a dataset that predates it.
   const provenanceStats = metaRecord.provenance_stats || null;
+  // Addon-node hook registry: slot -> the node kind whose panel it belongs to, and
+  // tone -> its glyph. The viewer renders addons generically off these rather than
+  // knowing any slot by name, so a new hook is a generator edit plus one call site.
+  const addonSlots = metaRecord.addon_slots || {};
+  const addonTones = metaRecord.addon_tones || {};
 
   // Provenance grade ordering (weakest -> strongest); the strongest grade among a
   // record's sources colours its summary source pill. Null when there are none.
@@ -1222,6 +1235,57 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     });
   }
 
+  // Addon nodes: a sourced annotation carrying its OWN insertion point (see
+  // tools/data_generators/addons.py). Nothing downstream knows what a given addon
+  // says: the record names the node it anchors to (`owner_kind` + `owner`) and the
+  // panel `slot` it belongs in, so a panel asks "anything for this slot?" and the
+  // data answers. Keyed by exactly that question, so the lookup is one Map.get.
+  // The anchored node, resolved ONCE here rather than in each consumer: an addon is
+  // listed in the Data browser and exemplified in the Sources popup, and both need
+  // the owner's display name and a way to open its panel. `focus` is the navigation
+  // recipe ({nav, arg}) those views hand to their own nav table, so neither has to
+  // know that a structure navigates by id while a drug navigates by object.
+  const addonOwner = (kind, id) => {
+    if (kind === "drug") {
+      const d = drugs.find((x) => x.id === id);
+      return d && { name: d.displayName || d.name,
+                    focus: d.focusable ? { nav: "drug", arg: d } : null };
+    }
+    if (kind === "receptor" || kind === "target") {
+      const tg = targets.find((x) => x.id === id);
+      return tg && { name: tg.name,
+                     focus: tg.focusable ? { nav: "target", arg: tg } : null };
+    }
+    // A structure addon anchors the hemisphere-less base; the scene is keyed by the
+    // per-side ids, so focus the right-hand member (a midline region IS its base).
+    const sid = byId.has(`${id}_R`) ? `${id}_R` : id;
+    const st = byId.get(sid);
+    return st && { name: st.base_name || st.name,
+                   focus: { nav: "structure", arg: sid } };
+  };
+  const addons = (addonRecords || []).map((a) => {
+    const owner = addonOwner(a.owner_kind, a.owner) || {};
+    return {
+      ...a,
+      ownerKind: a.owner_kind,
+      ownerName: owner.name || a.owner,
+      focus: owner.focus || null,
+      title: a.title ? localize(a.title) : "",
+      text: localize(a.text),
+      // Reduced to one display grade the same way every other node is, so an addon's
+      // pill reads identically in its panel, in the Data browser and in the tally.
+      provenance: strongestGrade(a.sources),
+      glyph: addonTones[a.tone] || "",
+    };
+  });
+  const addonsBySlot = new Map();
+  for (const a of addons) {
+    const key = `${a.ownerKind}:${a.owner}:${a.slot}`;
+    const list = addonsBySlot.get(key);
+    if (list) list.push(a);
+    else addonsBySlot.set(key, [a]);
+  }
+
   return {
     structures,
     projections,
@@ -1236,6 +1300,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     enzymes,
     drugsByEnzyme,
     pkInteractionsOf,
+    addons,
+    addonsBySlot,
     byId,
     meta: {
       projectionColors,
@@ -1255,6 +1321,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       sourceCorpora,
       densityMinReliability,
       provenanceStats,
+      addonSlots,
+      addonTones,
     },
   };
 }

@@ -212,7 +212,7 @@ class SharedMetaboliteGuardTest(unittest.TestCase):
         report = check_data.Report()
         with redirect_stdout(io.StringIO()):
             check_data.check_reachability(report, SharedMetaboliteGuardTest.META,
-                                          [], [], [], [], [], drugs)
+                                          [], [], [], [], [], drugs, [])
         return report.errors
 
     @staticmethod
@@ -346,7 +346,8 @@ class UncertaintyBulletTest(unittest.TestCase):
         report = check_data.Report()
         with redirect_stdout(io.StringIO()):
             check_data.check_sources(report, self.META,
-                                     [{"id": "d", "bindings": [binding]}], [], [], [])
+                                     [{"id": "d", "bindings": [binding]}], [], [], [],
+                                     [])
         return report.errors
 
     def _binding(self, uncertainty, quote="a plain attributed sentence"):
@@ -406,7 +407,7 @@ class UncertaintyBulletTest(unittest.TestCase):
                     "sources": [{"corpus": "stahl", "page": 40, "quote": "x",
                                  "provenance": "verified"}]}
             with redirect_stdout(io.StringIO()):
-                check_data.check_sources(report, self.META, [], [proj], [], [])
+                check_data.check_sources(report, self.META, [], [proj], [], [], [])
             return report.errors
         self.assertEqual(errors([{"kind": "not_a_mechanism", "absence": True}]), 0)
         self.assertEqual(errors([{"kind": "vibes", "absence": True}]), 1)

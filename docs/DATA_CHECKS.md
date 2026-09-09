@@ -22,6 +22,9 @@ errors. Functions take loaded data as args (unit-testable). Eleven families (num
   group `kind`/`sign` key, receptor classification keys, target type + region bases,
   every receptor also a `drug_targets` key). The region-base check is what
   guarantees the panels' "Found in" rows are clickable. Dangling refs = error.
+  Addon nodes are checked from both ends here: the anchored node must exist in its
+  kind's pool AND the `slot`/`display`/`tone` must be in the emitted vocabularies
+  (an addon in a slot no panel offers would ship graded, counted and invisible).
 - **TODOs** (provenance-aware): a literal `"TODO"` outside a source url, or a
   focusable target with no `wikipedia`, = warning. A source *url* left `"TODO"` is
   `[ok]` for an `llm` citation (expected) but **warned** if the source claims a

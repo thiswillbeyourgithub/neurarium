@@ -762,7 +762,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
                       projection_groups: list[dict[str, Any]],
                       receptors: list[dict[str, Any]],
                       drugs: list[dict[str, Any]],
-                      drug_targets: dict[str, dict[str, Any]]) -> dict[str, Any]:
+                      drug_targets: dict[str, dict[str, Any]],
+                      addons: list[dict[str, Any]]) -> dict[str, Any]:
     """Programmatic sourcing tally over the dataset's **nodes** (see the Nodes
     section of CLAUDE.md), emitted into ``meta.provenance_stats``.
 
@@ -991,7 +992,14 @@ def _provenance_stats(structures: list[dict[str, Any]],
         ref_grades.append(_GRADE_RANK.get(tgt.get("wikipedia_provenance"), 0)
                           if tgt.get("wikipedia") else 0)
 
+    # Addon nodes (see data_generators/addons.py): one node per authored annotation,
+    # graded by its own quote sources. Its *slot* is where it draws, not what it
+    # claims, so it tallies like any other claim: the whole point of the kind is that
+    # a panel-placed caveat is held to the same sourcing bar as a binding.
+    addon_grades = [_strongest_grade(a.get("sources")) for a in addons]
+
     by_kind = {
+        "addons": tally(addon_grades),
         "drug_bindings": tally(binding_grades),
         "drug_nbn": tally(nbn_grades),
         "drug_brands": tally(brand_grades),

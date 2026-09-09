@@ -2377,6 +2377,60 @@ function createInfoPanel(data, sourcingModal) {
     return sourceBackedPill(doubt ? "uncertain" : binding.provenance, binding);
   };
 
+  // --- Addon nodes: the panel-slot annotation kind ------------------------------
+  // Every other node kind has an implied home (a binding belongs in "Acts on", an
+  // enzyme row in "Metabolism"), so its collection decides where it draws. An addon
+  // is the kind for a claim with no such home: it carries its OWN insertion point
+  // (see tools/data_generators/addons.py), and these two pieces are the whole hook
+  // system. A panel offers slots; the data decides what, if anything, fills them.
+  //
+  // How an addon draws, keyed by its `display`. A second form (an inline icon with a
+  // tooltip, say) is one entry here plus one string in the generator's ADDON_DISPLAYS,
+  // never a change at any call site.
+  const ADDON_RENDERERS = {
+    // A boxed callout: the tone glyph + title on one line, carrying the node's own
+    // source pill (an addon is a graded claim like a binding, not panel chrome), then
+    // the claim itself.
+    admonition(addon) {
+      const box = el("div", `addon addon-${addon.tone}`);
+      const head = el("div", "addon-head");
+      if (addon.glyph) head.appendChild(el("span", "addon-glyph", addon.glyph));
+      if (addon.title) head.appendChild(el("strong", "addon-title", addon.title));
+      head.appendChild(sourceBackedPill(addon.provenance, addon));
+      box.appendChild(head);
+      box.appendChild(el("p", "addon-text", addon.text));
+      return box;
+    },
+  };
+
+  /**
+   * Splice in whatever addon nodes are anchored at one panel slot. Every registered
+   * slot in meta.addon_slots has exactly one of these calls; a slot with nothing
+   * authored for it appends nothing, so the hook costs one Map lookup on the panels
+   * of the other few thousand nodes.
+   *
+   * @param {HTMLElement} host  where the addons are appended
+   * @param {string} ownerKind  the anchored node's kind ("drug", "receptor", ...)
+   * @param {string} ownerId    that node's id (a structure anchors its BASE)
+   * @param {string} slot       a meta.addon_slots key
+   */
+  const appendAddons = (host, ownerKind, ownerId, slot) => {
+    if (!ownerId || !data.addonsBySlot) return;
+    // An unregistered slot is a wiring bug, not a missing addon: the generator
+    // validated every authored addon against this same list, so a typo here asks a
+    // question no node can ever be authored to answer.
+    const slots = data.meta.addonSlots;
+    if (slots && !(slot in slots)) {
+      console.warn(`addon slot "${slot}" is not in meta.addon_slots`);
+      return;
+    }
+    for (const addon of data.addonsBySlot.get(`${ownerKind}:${ownerId}:${slot}`) || []) {
+      const render = ADDON_RENDERERS[addon.display];
+      if (render) host.appendChild(render(addon));
+      else console.warn(`addon "${addon.id}": unknown display "${addon.display}"`);
+    }
+  };
+
   // The "why this is uncertain" block that leads a flagged binding's tooltip: a lead
   // line, then one row per reason. Each row carries its OWN badge, so the reader sees
   // at a glance which reasons rest on a source (green ✓, its quote right there) and
@@ -3214,6 +3268,9 @@ function createInfoPanel(data, sourcingModal) {
       appendSourcedHeading(
         data.meta.groupLabels[structure.group] || structure.group,
         structure.classification_provenance, structure.sources);
+      // Addon slot: a caveat about this region as a whole (see appendAddons). A
+      // structure addon anchors the hemisphere-less BASE, so it shows on both sides.
+      appendAddons(body, "structure", stripSide(structure.id), "structure.top");
 
       // Wikipedia illustration (the lead rotating-brain GIF, else an SVG diagram or
       // an infobox image) + its lazy "show more" gallery, via the shared helper (see
@@ -3270,6 +3327,7 @@ function createInfoPanel(data, sourcingModal) {
       clearBody();
       body.appendChild(el("h2", "info-title", receptor.name));
       body.appendChild(el("div", "info-group", receptor.familyLabel));
+      appendAddons(body, "receptor", receptor.id, "receptor.top");
 
       const { wiki: recWiki } = appendReference({
         url: receptor.wikipedia, description: receptor.description,
@@ -3349,6 +3407,7 @@ function createInfoPanel(data, sourcingModal) {
       body.appendChild(el("h2", "info-title", target.name));
       body.appendChild(el(
         "div", "info-group", target.systemLabel || t("targets.otherSystem")));
+      appendAddons(body, "target", target.id, "target.top");
 
       // Reference + live lead (targets carry no baked description), via the shared
       // appendReference, so the link sits under any live lead like every panel.
@@ -3542,6 +3601,10 @@ function createInfoPanel(data, sourcingModal) {
         warn.appendChild(links);
         body.appendChild(warn);
       }
+
+      // Addon slot: a caveat about the drug as a whole, above everything it does.
+      // Below the combo warning, which is about what this row even IS.
+      appendAddons(body, "drug", drug.id, "drug.top");
 
       // Vendored molecular-structure SVG (from Wikipedia, see tools/fetch_molecules.py).
       // It is black/grey line art on transparent; the .mol-structure CSS inverts it
@@ -3920,6 +3983,10 @@ function createInfoPanel(data, sourcingModal) {
         appendLookupLink(pathRow, "info.clinpgx",
           clinpgxSearchUrl(drug.name, "Pathway"), "info.clinpgxPathwaysTitle");
         enzWrap.appendChild(pathRow);
+        // Addon slot: a caveat about how this drug is cleared, which the per-isoform
+        // rows below cannot state (a row gives a role, never a curve). Above the
+        // first enzyme so it is read before them, not as a footnote after.
+        appendAddons(enzWrap, "drug", drug.id, "drug.metabolism");
         const enzUl = el("ul");
         // Substrate rows first (how the body clears it), then what it does to others.
         const roleOrder = { substrate: 0, inhibitor: 1, inducer: 2 };
@@ -5164,6 +5231,7 @@ function applyViewParams(bundle) {
 // and every present link defaults to `sourced`, which read as uniformly yellow
 // noise. It stays in meta.provenance_stats.by_kind (data), just not rendered.
 const KIND_LABELS = {
+  addons: "about.kindAddons",
   drug_bindings: "about.kindBindings",
   drug_nbn: "about.kindNbn",
   drug_brands: "about.kindDrugBrands",
@@ -5465,6 +5533,15 @@ function buildKindExample(kind, data, nav) {
     (b) => !b.affinity_only && b.actionLabel && b.targetName);
 
   switch (kind) {
+    case "addons": {
+      // An addon names the node it annotates, so the example reads as that node
+      // saying the annotation: Paroxetine "Non-linear pharmacokinetics".
+      const a = (data.addons || []).find((x) => x.focus);
+      return a
+        ? line(a.ownerName, a.title || a.text,
+          () => nav[a.focus.nav](a.focus.arg))
+        : null;
+    }
     case "drug_bindings": {
       if (!drug) return null;
       const b = firstAction(drug);

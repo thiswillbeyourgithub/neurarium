@@ -73,6 +73,15 @@ attribute a *different* quote than the main one, or several to back a compound v
      classification grade is overridable in `DRUG_CATEGORY_PROVENANCE` (or upgraded by a
      quote-level `category_sources` on the authored drug). Keep extraction strictly
      dump-sourced.
+   - **Panel annotations (addons)**: append to `ADDONS` in `tools/data_generators/addons.py`:
+     `id`, `owner_kind` + `owner` (the node it annotates; a structure anchors its base),
+     `slot` (an `ADDON_SLOTS` key, which is the panel hook the viewer offers), `display`
+     (`admonition`), `tone` (`caution`/`info`), optional `title`, `text` (both inline
+     `{en,fr}`) and `sources` (graded like any node). Use it for a claim no existing kind
+     has a home for. A **new slot** is two edits: the `ADDON_SLOTS` entry here and the one
+     matching `appendAddons(...)` call in `js/main.js`; a slot with no call site would
+     swallow the node silently. A **new display** is an `ADDON_DISPLAYS` entry plus one
+     `ADDON_RENDERERS` function.
    - **Translations**: every display string is wrapped with `_t()`; add the French to the
      `FR` table or the build raises listing every miss. For a feminine/plural paired name set
      `fr_gender` (`f`/`mp`/`fp`).
@@ -206,7 +215,9 @@ Screenshots).
   own the maps rather than restated; an identifier for the gene-keyed lookup links, not a graded node),
   and `connectivity.py` (the three connectivity node literals `PROJECTIONS`/`CIRCUITS`/`PROJECTION_GROUPS`
   plus the `_KQ_*`/`_SG_*` pathway quote-source constants they cite; the shared `_kandel`/`_nieuwenhuys`/`_stahl_ess`
-  quote constructors live in `provenance.py`), and `presentation.py` (the presentation maps emitted
+  quote constructors live in `provenance.py`), `addons.py` (the addon-node kind: the
+  `ADDON_SLOTS`/`ADDON_DISPLAYS`/`ADDON_TONES` vocabularies emitted into `meta.json` plus the
+  authored `ADDONS` list), and `presentation.py` (the presentation maps emitted
   into `meta.json`: the colour/flow maps `PROJECTION_COLORS`/`KIND_TO_SIGN`/`SIGN_COLORS`/`SYSTEM_FLOW_KINDS`,
   the label maps `SIGN_LABELS`/`GROUP_LABELS`/`RECEPTOR_FAMILY_LABELS`/`RECEPTOR_CLASS_LABELS`/`SYNAPTIC_LABELS`,
   plus the per-structure `WIKIPEDIA` link table; a dependency-free leaf), and the `quotes/` subpackage (verified quote registries by
@@ -413,6 +424,8 @@ there is no node-level catch-all `sources` block.
   active metabolite; see CLAUDE.md Drug metabolism),
   `target_type_labels`/`target_type_colors`, `source_corpora`, `uncertainty_reasons` (the closed
   vocabulary a node's `uncertainty[]` bullets draw from, each `{source, absence, args}`),
+  `addon_slots` (the addon-node hook registry, slot -> the node kind whose panel it is in) +
+  `addon_displays` + `addon_tones` (tone -> glyph),
   `density_min_reliability` (the
   cross-donor r floor every published profile clears), `provenance_stats` (the sourcing
   tally; see CLAUDE.md Source provenance).
@@ -481,6 +494,14 @@ there is no node-level catch-all `sources` block.
   optional `wikipedia`(+prov), optional `structure_image` (vendored `data/molecules/<id>.svg`,
   only when the file exists), `focusable`. No drug-level source: provenance is per-claim (see
   CLAUDE.md Source provenance).
+- `addons.jsonl` — **addon nodes**: a sourced annotation that carries its own insertion point.
+  `id`, `owner_kind` (`drug`/`receptor`/`target`/`structure`), `owner` (that node's id; a
+  structure anchors its hemisphere-less *base*), `slot` (a `meta.addon_slots` key), `display`
+  (a `meta.addon_displays` entry), `tone` (a `meta.addon_tones` key), optional `title{en,fr}`,
+  `text{en,fr}` (the claim), `sources[{corpus,page,quote,provenance}]`. Tally kind `addons`.
+  Authored in `data_generators/addons.py`; the vocabularies are closed, and both the generator
+  and `check_data.py` reject an unknown slot / display / tone or an anchor that names no real
+  node (an addon in a slot nothing draws would ship silently invisible).
 - `molecules/<id>.svg` — vendored per-drug structure diagrams (`fetch_molecules.py`). Structure
   illustrations are NOT vendored (hot-linked, see CLAUDE.md Images).
 

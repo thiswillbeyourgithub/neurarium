@@ -104,6 +104,10 @@ in `meta.provenance_stats.by_kind`):
 - non-modeled-metabolite receptor binding -> a metabolite's `bindings[]` -> `drug_metabolite_bindings`
   (sourced from the metabolite's own Wikipedia pharmacology, corpus #9; graded like a drug binding,
   a separate kind so the drug Ki coverage is unperturbed; surfaces on the receptor's Interacting drugs)
+- panel annotation -> `addons.jsonl` -> `addons` (an **addon node**: the kind whose record
+  carries its own insertion point, for a claim no other kind has a home for. `owner_kind` +
+  `owner` name the node it annotates, `slot` a `meta.addon_slots` hook, `display`/`tone` how it
+  draws; authored in `tools/data_generators/addons.py`, see Addon nodes)
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node,
   tallied but excluded from the headline; a reference is not itself a knowledge node)
 
@@ -193,7 +197,7 @@ Viewer (`public/`):
   each `{quote_id, provenance}` source from the deduplicated `quotes.jsonl` excerpt table
   (`rehydrateQuotes`, mirror of the generator's externalize; see Source provenance); returns a normalized
   `{structures, projections, circuits, projectionGroups, projectionGroupsByKey, receptors,
-  targets, drugs, drugsByTarget, byId, meta}`. Resolves each node's localized fields + derived
+  targets, drugs, drugsByTarget, addons, addonsBySlot, byId, meta}`. Resolves each node's localized fields + derived
   render props (projection `color`/`sign`, receptor labels + `structureIds`, per-binding
   `targetName`/`actionLabel`/`effect`/`effectColor`/`structureIds`/`flowKind` + the drug's union
   `structureIds`/`flowKinds`/`focusable`/search `keywords`); builds the merged `targets` browse
@@ -734,6 +738,33 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   derived rows don't bury the sourced sections above. Because the edges are an **inference**, every
   string stays conditional ("could raise", never "raises"). The caption states it is a flag to check
   with a prescriber, **never a contraindication**, and that a missing row is not a safety claim.
+
+## Addon nodes (panel annotations)
+
+Every other node kind has an implied home: a binding belongs in **Acts on**, an enzyme row in
+**Metabolism**, so the collection decides where it draws. An **addon** is the kind for a claim
+with no such home (a caveat over a whole section, a flag on one drug), and it earns its keep by
+**carrying its own insertion point**: adding one is a data edit, never a viewer edit. It is a
+node like any other otherwise: quote-level `sources`, a grade, a pill, a row in the Data browser,
+a line in the tally.
+
+- **Data.** `tools/data_generators/addons.py`: the authored `ADDONS` list plus three **closed**
+  vocabularies emitted into meta so the hook registry is data, not JS: `ADDON_SLOTS`
+  (`meta.addon_slots`, slot -> the node kind whose panel it is in), `ADDON_DISPLAYS`, `ADDON_TONES`
+  (tone -> glyph; the colour ramp each tone paints with is chrome and lives in `index.html`).
+- **A slot exists only if the viewer calls it.** Each `ADDON_SLOTS` key has exactly one
+  `appendAddons(host, ownerKind, ownerId, slot)` call in `js/main.js`; a slot with no call site
+  would swallow its node silently (well-formed, graded, counted, never drawn), which is why the
+  generator AND `check_data.py` both reject an unknown slot / display / tone or an anchor naming
+  no real node. Today: `drug.top`, `drug.metabolism`, `receptor.top`, `target.top`,
+  `structure.top` (a structure addon anchors the hemisphere-less **base**, so it shows on both).
+- **Viewer.** `js/data.js` resolves each addon's owner once (`ownerName` + a `focus` `{nav, arg}`
+  recipe the Data browser and the Sources popup both hand to their own nav table) and indexes them
+  as `addonsBySlot` keyed `${ownerKind}:${owner}:${slot}`. `js/main.js` `ADDON_RENDERERS` dispatches
+  on `display`; a second form is one entry there plus one string in `ADDON_DISPLAYS`.
+- Two today, both `drug.metabolism`: paroxetine + MDMA inhibit the CYP2D6 that clears them
+  (mechanism-based / autoinhibition), so their kinetics are non-linear, which the per-isoform rows
+  below cannot state (a row gives a role, never a curve).
 
 ## Images
 

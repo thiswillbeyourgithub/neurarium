@@ -595,6 +595,7 @@
       "about.kindTargetLocations": "Target expression regions",
       "about.kindTargetDensity": "Target relative amount per region",
       "about.kindStructures": "Brain-region anatomy",
+      "about.kindAddons": "Panel annotations",
 
       "dev.wip": "Work in progress",
       "dev.restarted":
@@ -1167,6 +1168,7 @@
       "about.kindTargetLocations": "Régions d'expression des cibles",
       "about.kindTargetDensity": "Quantité relative des cibles par région",
       "about.kindStructures": "Anatomie des régions",
+      "about.kindAddons": "Annotations de panneau",
 
       "dev.wip": "En cours de développement",
       "dev.restarted":

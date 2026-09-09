@@ -108,6 +108,7 @@ KIND_LABELS = {
     "target_polarity": "Target tone polarity",
     "target_locations": "Target expression regions",
     "structures": "Brain-region anatomy",
+    "addons": "Panel annotations",
     "references": "Wikipedia reference links",
 }
 

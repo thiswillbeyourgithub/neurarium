@@ -2297,6 +2297,33 @@
         text-decoration: underline;
       }
       .combo-warning .combo-plain { color: var(--muted); }
+      /* Addon node (js/main.js ADDON_RENDERERS.admonition): a sourced annotation
+         spliced into a named panel slot. Same boxed-callout shape as the combo
+         warning above, but the accent is keyed by the node's `tone`, which is data
+         (meta.addon_tones) while the ramp each tone paints with is chrome and lives
+         here. --addon-accent is the one knob a new tone sets. */
+      .addon {
+        /* Neutral fallback: a tone with no ramp yet reads plain rather than
+           borrowing another tone's urgency. */
+        --addon-accent: 150, 158, 170;
+        background: rgba(var(--addon-accent), 0.08);
+        border: 1px solid rgba(var(--addon-accent), 0.3);
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin: 0 0 12px;
+        font-size: 12px;
+      }
+      .addon-caution { --addon-accent: 230, 184, 0; }
+      .addon-info { --addon-accent: 120, 170, 255; }
+      .addon-head {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .addon-glyph { color: rgb(var(--addon-accent)); }
+      .addon-title { color: rgb(var(--addon-accent)); }
+      .addon-text { margin: 4px 0 0; color: var(--muted); }
       /* "Interacting drugs" list on a receptor / target panel: the drugs that act
          on it, grouped by drug category. The .drug-cat sub-heading is a small muted
          label between groups (the section's own h3 keeps the uppercase header look). */
