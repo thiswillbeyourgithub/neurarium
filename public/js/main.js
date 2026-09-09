@@ -33,6 +33,7 @@ import { createChangelog } from "./changelog.js";
 import { createNodeBrowser } from "./node-browser.js";
 import { loadFlag, saveFlag } from "./prefs.js";
 import { createUrlState, LIST_SEP } from "./url-state.js";
+import { createTheme } from "./theme.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -143,11 +144,27 @@ function parseSearchQuery(raw) {
   return { field: null, value: "", rest: foldText(String(raw).trim()) };
 }
 
+// The render loop is built at the bottom of this module, long after the scene, so
+// anything up here that needs a repaint goes through this hook, which `invalidate`
+// replaces once it exists. A no-op before then is right: nothing has been drawn yet.
+// It sits at module scope because its two ends live in different functions: the theme
+// fires it from initThree(), the loop fills it in from the boot path.
+let repaint = () => {};
+
 /** Build scene, camera, renderer and controls. @returns {object} the bundle. */
 function initThree() {
   const canvas = document.getElementById("scene");
   const scene = new THREE.Scene();
+  // Set below by the theme, whose token block owns the colour; the literal is only
+  // what the canvas holds for the instant before the first apply() runs.
   scene.background = new THREE.Color("#0e1116");
+  // Light/dark. The palette is CSS tokens (see index.html); the WebGL canvas is not
+  // CSS, so the resolved page background is handed back here and painted into the
+  // scene. See js/theme.js for who decides which theme is on.
+  const theme = createTheme((_name, pageBg) => {
+    if (pageBg) scene.background = new THREE.Color(pageBg);
+    repaint();
+  });
 
   const camera = new THREE.PerspectiveCamera(
     50,
@@ -202,7 +219,7 @@ function initThree() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  return { scene, camera, renderer, controls, baseDpr };
+  return { scene, camera, renderer, controls, baseDpr, theme };
 }
 
 /**
@@ -6983,7 +7000,7 @@ function wireImageLightbox() {
 }
 
 async function main() {
-  const { scene, camera, renderer, controls, baseDpr } = initThree();
+  const { scene, camera, renderer, controls, baseDpr, theme } = initThree();
 
   // Stamp the version into every [data-app-version] slot (the panel header and the
   // loading overlay's title; single source: window.__APP_VERSION__ from version.js).
@@ -8621,6 +8638,9 @@ async function main() {
   // skips the render + CSS2D passes entirely, holding the last drawn frame.
   let needsRender = true;
   const invalidate = () => { needsRender = true; };
+  // Hand the render loop to everything wired before it existed (the theme's scene
+  // repaint); see the `repaint` declaration up top.
+  repaint = invalidate;
   controls.addEventListener("change", invalidate);
   window.addEventListener("resize", invalidate);
 
@@ -8690,6 +8710,22 @@ async function main() {
   // hides the canvas + label overlay and lets the expanded panel fill the viewport,
   // for reading the sourced texts without a brain behind them. Persisted, since it
   // is a lasting preference about how the site is used, not a per-visit action.
+  // Day/night (#toggle-theme, beside it): a pure viewing preference, so it owns no
+  // app state at all. js/theme.js persists the choice and repaints the scene; the
+  // button only flips it and re-announces itself, since its label names the theme a
+  // click would GIVE you, not the one showing.
+  const themeBtn = document.getElementById("toggle-theme");
+  if (themeBtn) {
+    const labelTheme = () => {
+      const next = theme.get() === "dark" ? "light" : "dark";
+      const label = t(next === "light" ? "panel.themeLight" : "panel.themeDark");
+      themeBtn.setAttribute("title", label);
+      themeBtn.setAttribute("aria-label", label);
+    };
+    labelTheme();
+    themeBtn.addEventListener("click", () => { theme.toggle(); labelTheme(); });
+  }
+
   const NO3D_KEY = "neurarium.no3d";
   const toggle3d = document.getElementById("toggle-3d");
   const no3dOn = () => document.body.classList.contains("no-3d");

@@ -145,9 +145,27 @@
            (which turned the inverted molecule SVGs back to black-on-grey). Mirrors
            the <meta name="color-scheme" content="dark"> in <head>. */
         color-scheme: dark;
+        --page-bg: #0e1116;
         --panel-bg: rgba(20, 24, 31, 0.82);
         --text: #e7ecf2;
         --muted: #9aa6b3;
+        /* Emphasis text, one step past --text (a selected legend row, a hovered
+           heading): brighter than --text on a dark ground, DARKER than it on a light
+           one, which is why it is a token and not a literal #fff. The #fff that sits
+           ON var(--accent) is a different thing and stays white in both themes. */
+        --text-strong: #ffffff;
+        /* The overlay channel: every hairline border, hover fill and divider is
+           rgba(var(--ink), a). One triplet flips the whole chrome between a
+           white-on-dark and a black-on-light reading, which is what makes the light
+           theme a token swap instead of 67 hand edits. */
+        --ink: 255, 255, 255;
+        /* The floating structure-name labels sit over the 3D scene, not over a panel,
+           so they carry their own ink + halo rather than reading --text. */
+        --label-ink: #ffffff;
+        --label-halo: 0, 0, 0;
+        /* Molecule SVGs are published as black line art, so they need inverting on a
+           dark ground and NOT on a light one (see .mol-structure img). */
+        --mol-filter: invert(1);
         /* UI accent: the purple of the parakeet_web logo's wing, so the chrome
            (sliders, active tabs/buttons, focus rings, links) is purple-themed.
            These are chrome only; the data/semantic colours (projection kinds,
@@ -162,12 +180,37 @@
            overrides the panel to full-width; the tooltip's vw cap covers that case. */
         --panel-w: clamp(240px, 25vw, 420px);
       }
+      /* The day theme: the same purple chrome over white instead of near-black. Only the
+         tokens above are redefined, never a rule, so a component added later is themed on
+         the day it lands (as long as it reads the tokens). The accents darken rather than
+         lighten: --accent-bright / -light mean "more prominent than --accent", which on
+         white is deeper, not paler, or a link would vanish.
+         Set by js/theme.js on <html>, and only ever by a visitor's click on the sun/moon
+         button in the panel header (persisted). Never by a media query: dark is the
+         fallback whenever nothing was chosen, so an unknown client gets the design the
+         data colours were picked for. */
+      :root[data-theme="light"] {
+        color-scheme: light;
+        --page-bg: #f5f3fa;
+        --panel-bg: rgba(255, 255, 255, 0.88);
+        --text: #1b1f27;
+        --muted: #5d6673;
+        --text-strong: #0a0d12;
+        --ink: 24, 28, 36;
+        --label-ink: #14181f;
+        --label-halo: 255, 255, 255;
+        --mol-filter: none;
+        --accent: #7c4ddb;
+        --accent-bright: #5f2fc4;
+        --accent-light: #4d21ab;
+        --accent-soft: rgba(124, 77, 219, 0.22);
+      }
       * { box-sizing: border-box; }
       html, body {
         margin: 0;
         height: 100%;
         overflow: hidden;
-        background: #0e1116;
+        background: var(--page-bg);
         color: var(--text);
         font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
         /* Let OrbitControls handle all touch gestures instead of the browser. */
@@ -182,7 +225,7 @@
         z-index: 5;
         background: var(--panel-bg);
         backdrop-filter: blur(6px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(var(--ink), 0.08);
         border-radius: 12px;
         padding: 14px 16px;
         font-size: 14px;
@@ -404,9 +447,12 @@
          invisible collapse button underneath would swallow the click and only
          collapse the panel. It carries the row's right-aligning `margin-left:auto`
          so the chevron, which normally holds it, sits snug beside it instead. */
-      #controls-header .panel-3d-btn {
+      /* Shared by the two icon buttons pinned at the right of the header row (theme,
+         panel-only mode): same 24px box, same muted-to-text hover. Only the FIRST of
+         them carries the row's right-aligning margin, or flexbox would split the free
+         space between the two autos and separate the pair. */
+      #controls-header .panel-hdr-btn {
         pointer-events: auto;
-        margin-left: auto;
         align-self: center;
         width: 24px;
         height: 24px;
@@ -420,10 +466,17 @@
         color: var(--muted);
         cursor: pointer;
       }
-      #controls-header .panel-3d-btn svg { width: 16px; height: 16px; display: block; }
-      #controls-header .panel-3d-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.12); }
-      #controls-header .panel-3d-btn[aria-pressed="true"] { color: var(--accent-light); }
-      #controls-header .panel-3d-btn + .chevron { margin-left: 6px; }
+      #controls-header .panel-hdr-btn svg { width: 16px; height: 16px; display: block; }
+      #controls-header .panel-hdr-btn:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
+      #controls-header .panel-hdr-btn[aria-pressed="true"] { color: var(--accent-light); }
+      #controls-header .panel-theme-btn { margin-left: auto; }
+      #controls-header .panel-hdr-btn + .chevron { margin-left: 6px; }
+      /* One <svg> per theme, the inactive one hidden: the button shows what a click
+         would GIVE you (a moon while light is on), which is the reading a sun/moon
+         pair is understood by. */
+      #controls-header .panel-theme-btn .theme-moon { display: none; }
+      :root[data-theme="light"] #controls-header .panel-theme-btn .theme-sun { display: none; }
+      :root[data-theme="light"] #controls-header .panel-theme-btn .theme-moon { display: block; }
       #controls-header .chevron { margin-left: auto; align-self: center; }
       #controls-header:has(> .collapse-hit[aria-expanded="true"]) .chevron { transform: rotate(90deg); }
       .row { margin: 12px 0; }
@@ -471,12 +524,12 @@
         padding: 8px 10px;
         font: inherit;
         color: var(--text);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 8px;
         cursor: pointer;
       }
-      .btn:hover { background: rgba(255, 255, 255, 0.12); }
+      .btn:hover { background: rgba(var(--ink), 0.12); }
       .btn.active {
         background: var(--accent);
         border-color: var(--accent);
@@ -508,7 +561,7 @@
         align-items: center;
         gap: 4px;
         margin: 4px 0 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(var(--ink), 0.1);
       }
       /* The `hidden` attribute (toggled by createPanelTabs when a detail is
          opened / dismissed) must win over the display:flex above; without this
@@ -555,13 +608,13 @@
            subtle "there's more to scroll" hint; the strip still scrolls via wheel /
            touch / long-press drag (driven in JS). */
         scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+        scrollbar-color: rgba(var(--ink), 0.18) transparent;
         touch-action: none;
       }
       .detail-tabs::-webkit-scrollbar { height: 4px; }
       .detail-tabs::-webkit-scrollbar-track { background: transparent; }
       .detail-tabs::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.18);
+        background: rgba(var(--ink), 0.18);
         border-radius: 2px;
       }
       /* One opened detail. Label (ellipsized) + a × close affordance; reorderable
@@ -604,7 +657,7 @@
         line-height: 1;
         color: var(--muted);
       }
-      .detail-tab-close:hover { color: var(--text); background: rgba(255, 255, 255, 0.14); }
+      .detail-tab-close:hover { color: var(--text); background: rgba(var(--ink), 0.14); }
       #details-pane { user-select: text; }
       .tool-btn {
         display: grid;
@@ -613,12 +666,12 @@
         height: 36px;
         padding: 0;
         color: var(--text);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 8px;
         cursor: pointer;
       }
-      .tool-btn:hover { background: rgba(255, 255, 255, 0.12); }
+      .tool-btn:hover { background: rgba(var(--ink), 0.12); }
       .tool-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
       /* currentColor on the SVG strokes makes the icons follow the button text
          color, including the blue .active state of the search toggle. */
@@ -679,7 +732,7 @@
         border-radius: 8px;
         cursor: default;
       }
-      #image-lightbox-img.inverted { filter: invert(1); }
+      #image-lightbox-img.inverted { filter: var(--mol-filter); }
       .lightbox-close {
         position: fixed;
         top: 14px;
@@ -691,7 +744,7 @@
         border-radius: 50%;
         color: var(--text);
         background: rgba(14, 17, 22, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(var(--ink), 0.12);
         cursor: pointer;
       }
       .lightbox-close:hover { background: rgba(40, 46, 54, 0.95); }
@@ -716,12 +769,12 @@
         /* Clearly visible (a muted, background-less × read as "transparent / hidden",
            and is easy to miss when the tour rings it on the spotlightOnly sources step). */
         color: var(--text);
-        background: rgba(255, 255, 255, 0.06);
+        background: rgba(var(--ink), 0.06);
         border: 0;
         border-radius: 6px;
         cursor: pointer;
       }
-      .modal .info-close:hover { color: var(--accent-light); background: rgba(255, 255, 255, 0.12); }
+      .modal .info-close:hover { color: var(--accent-light); background: rgba(var(--ink), 0.12); }
       /* key -> action rows: a two-column grid (the key(s) | the action). */
       #shortcuts-list {
         margin: 0;
@@ -741,8 +794,8 @@
         font-weight: 600;
         text-align: center;
         color: var(--text);
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(var(--ink), 0.08);
+        border: 1px solid rgba(var(--ink), 0.18);
         border-bottom-width: 2px;
         border-radius: 6px;
       }
@@ -893,20 +946,20 @@
         font-size: 12px;
         font-weight: 600;
         color: var(--text);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 7px;
         cursor: pointer;
       }
-      .tour-btn:hover { background: rgba(255, 255, 255, 0.12); }
+      .tour-btn:hover { background: rgba(var(--ink), 0.12); }
       .tour-btn:disabled { opacity: 0.4; cursor: default; }
       .tour-skip { background: none; border-color: transparent; color: var(--muted); font-weight: 500; }
-      .tour-skip:hover { background: rgba(255, 255, 255, 0.08); color: var(--text); }
+      .tour-skip:hover { background: rgba(var(--ink), 0.08); color: var(--text); }
       /* Next is the primary forward affordance: accent-filled, and greyed (the shared
          :disabled rule) while a hands-on step still awaits its action. */
       .tour-next { background: var(--accent); border-color: var(--accent); color: #06131f; }
       .tour-next:hover:not(:disabled) { background: var(--accent-bright); border-color: var(--accent-bright); }
-      .tour-next:disabled { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); color: var(--text); }
+      .tour-next:disabled { background: rgba(var(--ink), 0.06); border-color: rgba(var(--ink), 0.12); color: var(--text); }
       @media (prefers-reduced-motion: reduce) {
         .tour-ring, .tour-bubble, .tour-veil, .tour-scroll-arrow { transition: none; }
         .tour-ring, .tour-ring.interactive, .tour-arrow-bob { animation: none; }
@@ -942,12 +995,12 @@
         font-weight: 600;
         letter-spacing: 0.04em;
         color: var(--muted);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 6px;
         cursor: pointer;
       }
-      .lang-btn:hover, .seg-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
+      .lang-btn:hover, .seg-btn:hover { background: rgba(var(--ink), 0.12); color: var(--text); }
       .lang-btn.active, .seg-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
       /* One Drug-interactions group: its rows (and the "+N more" that extends them) are
@@ -980,7 +1033,7 @@
         color: var(--muted);
         background: none;
         border: none;
-        border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        border-bottom: 1px dotted rgba(var(--ink), 0.3);
         cursor: pointer;
       }
       .pk-more:hover { color: var(--text); }
@@ -1001,8 +1054,8 @@
         padding: 8px 32px 8px 10px;
         font: inherit;
         color: var(--text);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 8px;
         outline: none;
       }
@@ -1029,14 +1082,14 @@
         cursor: pointer;
       }
       #search-clear[hidden] { display: none; }
-      #search-clear:hover { color: var(--text); background: rgba(255, 255, 255, 0.14); }
+      #search-clear:hover { color: var(--text); background: rgba(var(--ink), 0.14); }
       #search-help { flex: 0 0 auto; width: 20px; height: 20px; font-size: 12px; }
       /* The toggled search-syntax help block (the "?" button shows/hides it). */
       #search-syntax {
         margin: 8px 0 0;
         padding: 8px 10px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(var(--ink), 0.05);
+        border: 1px solid rgba(var(--ink), 0.1);
         border-radius: 6px;
         font-size: 11px;
         line-height: 1.5;
@@ -1044,7 +1097,7 @@
       }
       #search-syntax code {
         color: var(--text);
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(var(--ink), 0.08);
         padding: 0 4px;
         border-radius: 4px;
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -1063,18 +1116,18 @@
         font-size: 11px;
         padding: 3px 9px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(var(--ink), 0.14);
+        background: rgba(var(--ink), 0.04);
         color: var(--muted);
         cursor: pointer;
         white-space: nowrap;
       }
       .search-filter:hover {
         color: var(--text);
-        border-color: rgba(255, 255, 255, 0.28);
+        border-color: rgba(var(--ink), 0.28);
       }
       .search-filter.active {
-        color: #fff;
+        color: var(--text-strong);
         background: var(--accent-soft);
         border-color: var(--accent);
       }
@@ -1093,7 +1146,7 @@
         cursor: pointer;
       }
       #search-results li:hover,
-      #search-results li.active { background: rgba(255, 255, 255, 0.12); }
+      #search-results li.active { background: rgba(var(--ink), 0.12); }
       #search-results li.empty { color: var(--muted); cursor: default; }
       #search-results li.empty:hover { background: none; }
       /* Keyboard roving highlight for arrow-key navigation inside an open
@@ -1101,7 +1154,7 @@
          A clear outline reads on
          any row or button regardless of its own background. */
       .kbd-active {
-        outline: 2px solid rgba(255, 255, 255, 0.55);
+        outline: 2px solid rgba(var(--ink), 0.55);
         outline-offset: -2px;
         border-radius: 4px;
       }
@@ -1119,14 +1172,14 @@
         white-space: nowrap;
         font-size: 13px;
         font-weight: 700;
-        color: #ffffff;
+        color: var(--label-ink);
         background: none;
         --label-color: #000;
         text-shadow:
           -1px -1px 0 var(--label-color), 0 -1px 0 var(--label-color), 1px -1px 0 var(--label-color),
           -1px  0   0 var(--label-color),                              1px  0   0 var(--label-color),
           -1px  1px 0 var(--label-color), 0  1px 0 var(--label-color), 1px  1px 0 var(--label-color),
-           0    0   4px rgba(0, 0, 0, 0.95);
+           0    0   4px rgba(var(--label-halo), 0.95);
       }
       /* Connection (pathway) labels: a touch smaller and italic so they read as
          the projection name rather than a region name. Color comes from an
@@ -1144,7 +1197,7 @@
          hairline, reading as an indented sub-item of the section above it. */
       .browse-section {
         margin-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(var(--ink), 0.08);
       }
       #controls-settings .collapse-header,
       .browse-section .collapse-header { padding: 10px 0 4px; }
@@ -1168,7 +1221,7 @@
         margin: 0 0 6px;
         font-size: 15px;
         color: var(--accent-bright);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(var(--ink), 0.1);
         padding-bottom: 4px;
       }
       .changelog-cat {
@@ -1214,19 +1267,19 @@
         font: inherit;
         font-size: 12px;
         color: var(--accent-bright);
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(var(--ink), 0.04);
+        border: 1px solid rgba(var(--ink), 0.14);
         border-radius: 5px;
         cursor: pointer;
       }
-      .changelog-showall:hover { background: rgba(255, 255, 255, 0.08); }
+      .changelog-showall:hover { background: rgba(var(--ink), 0.08); }
       .changelog-empty { font-size: 12px; color: var(--muted); }
       /* A "jump to another popup" link row (Legend / About -> Sources & provenance):
          set off from the content above it with a hairline. */
       .modal-jump-row {
         margin-top: 14px;
         padding-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(var(--ink), 0.1);
       }
       /* About blurb (in the #about-modal popup): muted body text with readable
          links. */
@@ -1283,7 +1336,7 @@
         margin: 10px 0;
         padding: 8px 10px;
         border-left: 3px solid var(--accent);
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(var(--ink), 0.04);
         border-radius: 3px;
         font-size: 0.92em;
       }
@@ -1404,8 +1457,8 @@
         font: inherit;
         font-size: 13px;
         color: var(--text);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 8px;
         outline: none;
         box-sizing: border-box;
@@ -1436,12 +1489,12 @@
         font: inherit;
         font-size: 12px;
         color: var(--muted);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 6px;
         cursor: pointer;
       }
-      .mode-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text); }
+      .mode-btn:hover { background: rgba(var(--ink), 0.12); color: var(--text); }
       .mode-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
       #structures-body h2:first-child,
       #projections-body h2:first-child,
@@ -1501,9 +1554,9 @@
       #structures h2.clickable,
       #projections h2.clickable { cursor: pointer; }
       #structures h2.clickable:hover,
-      #projections h2.clickable:hover { color: #fff; }
+      #projections h2.clickable:hover { color: var(--text-strong); }
       #structures h2.selected,
-      #projections h2.selected { color: #fff; }
+      #projections h2.selected { color: var(--text-strong); }
       #structures h2.dimmed,
       #projections h2.dimmed { opacity: 0.4; }
       .legend-item {
@@ -1516,10 +1569,10 @@
       /* Structure rows are clickable to isolate that region (projection-kind
          rows are not). A subtle hover hints at it. */
       .legend-item.clickable { cursor: pointer; }
-      .legend-item.clickable:hover { color: #fff; }
+      .legend-item.clickable:hover { color: var(--text-strong); }
       /* Isolate/focus mode (a structure row was clicked): the picked rows stay
          lit and bold, the rest grey out, mirroring the dimmed structures. */
-      .legend-item.selected { font-weight: 600; color: #fff; }
+      .legend-item.selected { font-weight: 600; color: var(--text-strong); }
       .legend-item.dimmed { opacity: 0.35; }
       /* A muted kind tag after a non-receptor target's name (e.g. "transporter")
          in the merged Receptors & targets section. */
@@ -1584,7 +1637,7 @@
       .node-head {
         margin: 0 0 2px;
         padding-bottom: 3px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        border-bottom: 1px solid rgba(var(--ink), 0.12);
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         font-size: 10px;
         color: var(--muted);
@@ -1596,7 +1649,7 @@
       /* Make the columns visible: a hairline rule opening each one but the first, in
          the header and in every row alike. */
       .node-head-notion, .node-head-kind, .node-notion, .node-kind {
-        border-left: 1px solid rgba(255, 255, 255, 0.14);
+        border-left: 1px solid rgba(var(--ink), 0.14);
         padding-left: 6px;
       }
       /* One kind selected: the kind cell would say on every row what the select right
@@ -1651,8 +1704,8 @@
         font: inherit;
         font-size: 12px;
         color: var(--text);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 6px;
         outline: none;
       }
@@ -1662,7 +1715,7 @@
       /* Banded rows: with four columns of small text, a band per pair is what keeps
          the eye on one node's line all the way across. Zebra on the row (not the
          inner button) so the grade column is banded too. */
-      .node-list > .node-row:nth-child(even) { background: rgba(255, 255, 255, 0.05); }
+      .node-list > .node-row:nth-child(even) { background: rgba(var(--ink), 0.05); }
       .node-main {
         min-width: 0;
         font: inherit;
@@ -1674,7 +1727,7 @@
         border-radius: 4px;
       }
       .node-main.clickable { cursor: pointer; }
-      .node-main.clickable:hover { background: rgba(255, 255, 255, 0.08); }
+      .node-main.clickable:hover { background: rgba(var(--ink), 0.08); }
       .node-main:disabled { opacity: 0.45; }
       .node-name { font-weight: 600; }
       .node-notion { color: var(--muted); }
@@ -1685,12 +1738,12 @@
         font: inherit;
         font-size: 12px;
         color: var(--muted);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
         border-radius: 6px;
         cursor: pointer;
       }
-      .node-more:hover { color: var(--text); background: rgba(255, 255, 255, 0.12); }
+      .node-more:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
 
       /* Detail info (structure / connection / receptor / target / drug) lives in
          the Details pane of the main panel, shown by the active detail tab (see
@@ -1834,7 +1887,7 @@
         width: 34px;
         height: 4px;
         border-radius: 2px;
-        background: rgba(255, 255, 255, 0.12);
+        background: rgba(var(--ink), 0.12);
         background-image: linear-gradient(var(--accent-bright), var(--accent-bright));
         background-repeat: no-repeat;
         background-size: var(--fill, 0%) 100%;
@@ -1994,7 +2047,7 @@
         max-width: min(calc(var(--panel-w) - 16px), 92vw);
         padding: 8px 10px;
         background: rgba(18, 18, 22, 0.98);
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(var(--ink), 0.16);
         border-radius: 6px;
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
         color: var(--text);
@@ -2072,7 +2125,7 @@
       .mol-structure img {
         max-width: 100%;
         max-height: 160px;
-        filter: invert(1);
+        filter: var(--mol-filter);
       }
 
       /* Structure panel: the Wikipedia illustration (rotating-brain GIF, else an
@@ -2089,7 +2142,7 @@
         max-width: 100%;
         max-height: 240px;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(var(--ink), 0.04);
       }
       /* "Show more" gallery of the structure's other gif/svg (built lazily on first
          expand). A centered pill toggle, then the figures stacked under it. */
@@ -2123,8 +2176,8 @@
         width: 26px;
         height: 26px;
         margin: -13px 0 0 -13px;
-        border: 3px solid rgba(255, 255, 255, 0.18);
-        border-top-color: rgba(255, 255, 255, 0.7);
+        border: 3px solid rgba(var(--ink), 0.18);
+        border-top-color: rgba(var(--ink), 0.7);
         border-radius: 50%;
         animation: img-spin 0.8s linear infinite;
       }
@@ -2259,7 +2312,7 @@
       .info-metabolites .metab-bindings {
         margin: 4px 0 2px 12px;
         padding-left: 8px;
-        border-left: 1px solid rgba(255, 255, 255, 0.12);
+        border-left: 1px solid rgba(var(--ink), 0.12);
       }
       /* Same slot, for a metabolite that is itself a modeled drug: its bindings live
          on its own panel, so this points there instead of duplicating them. */
@@ -2388,7 +2441,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #0e1116; /* the page bg, so the canvas is hidden until ready */
+        background: var(--page-bg); /* the page bg, so the canvas is hidden until ready */
         transition: opacity 0.45s ease;
       }
       #loading.loaded {
@@ -2543,7 +2596,7 @@
         line-height: 1.35;
         text-align: center;
         padding: 9px 44px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        border-bottom: 1px solid rgba(var(--ink), 0.25);
         backdrop-filter: blur(6px);
         user-select: none;
       }
@@ -2558,7 +2611,7 @@
         line-height: 1.35;
         text-align: center;
         padding: 9px 44px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(var(--ink), 0.2);
         backdrop-filter: blur(6px);
       }
       .banner-close {
@@ -2650,7 +2703,18 @@
         <!-- Panel-only ("reading") mode: hides the 3D scene so the expanded panel
              takes the whole viewport. Pinned here rather than in the Settings pane
              so it stays reachable once the panel fills the screen. -->
-        <button type="button" id="toggle-3d" class="panel-3d-btn" aria-pressed="false" data-i18n-attr="title:panel.no3d, aria-label:panel.no3d">
+        <!-- Day/night theme. Left of the 3D toggle, so the two viewing-preference
+             buttons sit together; wired in js/main.js over js/theme.js. -->
+        <button type="button" id="toggle-theme" class="panel-hdr-btn panel-theme-btn" aria-label="Theme">
+          <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+          </svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" />
+          </svg>
+        </button>
+        <button type="button" id="toggle-3d" class="panel-hdr-btn panel-3d-btn" aria-pressed="false" data-i18n-attr="title:panel.no3d, aria-label:panel.no3d">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2l8 5v10l-8 5-8-5V7z" />
             <path d="M12 22V12M4 7l8 5 8-5" />

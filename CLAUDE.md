@@ -279,7 +279,7 @@ Viewer (`public/`):
   `STARTED_AT`, `sourceUrl`.
 - Single-purpose modules, each detailed in its own section below: `js/i18n.js` (I18n),
   `js/app-init.js` (Analytics), `js/dev-banner.js` (Dev banner), `js/error-banner.js` (Error
-  banners), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
+  banners), `js/theme.js` (Theme), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
   `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`
   (Rendering / decoration draw order).
 - `js/node-browser.js` — `collectNodes` + `createNodeBrowser`, the Data browser (`#nodes`): every
@@ -358,6 +358,15 @@ material location).
 ## Controls
 
 > Moved to [`docs/CONTROLS.md`](docs/CONTROLS.md) to keep this file terse: the one collapsible bottom-left `#controls` panel and everything in it: the Settings pane + accordion sections, the detail-tab strip, the seven `show*()` info-panel views, selection/halo + isolate, structure-name labels, legend sections, keyboard/touch input + search, and camera focus.
+
+## Theme (day / night)
+
+Two palettes, one token block. `index.html`'s `:root` defines the dark palette; a `:root[data-theme="light"]` block redefines **only tokens**, never a rule, so a component written later is themed on the day it lands as long as it reads them. The one that makes this cheap is **`--ink`**, an RGB triplet rather than a colour: every white-on-dark hairline, hover fill and divider is `rgba(var(--ink), a)`, so flipping the chrome is one token instead of dozens of edits. Alongside it `--page-bg`, `--text-strong`, `--label-ink` / `--label-halo` (the floating region labels sit over the scene, not the panel, so they carry their own ink) and `--mol-filter` (the molecule line art is inverted on dark, left alone on light). A `#fff` sitting **on** `var(--accent)` stays literal: it is white in both themes.
+
+`js/theme.js` (`createTheme`) owns only the decision, and it is short: the visitor's stored click, else **dark**. It does not read `prefers-color-scheme`, which is the non-obvious part: the feature dropped `no-preference`, so a light query answers `light` both for a visitor who asked and for one who never touched the setting, and following it would hand the un-art-directed palette to everyone who expressed nothing. So light is opt-in, one click on the `#toggle-theme` sun/moon button in the panel header (persisted `neurarium.theme`), and it sticks.
+
+The WebGL canvas is not CSS and cannot read tokens, so `apply()` hands the resolved `--page-bg` to `js/main.js`, which repaints `scene.background` and calls `repaint` (the module-scoped hook the render loop fills in with `invalidate`, since the two ends live in different functions).
+
 
 ## Rendering
 

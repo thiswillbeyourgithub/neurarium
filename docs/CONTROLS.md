@@ -58,6 +58,11 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   geometrically to 0.25x..4x with the midpoint = 1x (the reference pace). Its row (`#anim-speed-row`)
   is revealed only while an animation is actually on screen (a focused drug / receptor / circuit),
   recomputed each rendered frame in the render loop from the controllers' `active` getters.
+- **Day / night** (`#toggle-theme`, a sun/moon button in the panel header, next to panel-only mode; persisted
+  `neurarium.theme`): a pure viewing preference, so unlike every other control it owns no app state
+  at all, writes no URL key, and the button's only job is to flip the theme and re-announce itself.
+  Its label names the theme a click would GIVE you, not the one showing. Dark unless the visitor
+  asks for light, `js/theme.js` for why (`prefers-color-scheme` is deliberately not consulted).
 - **Panel-only mode** (`#toggle-3d`, an icon button pinned in the panel header, not in Settings so
   it stays reachable once the panel fills the screen; persisted `neurarium.no3d`, and mirrored into
   the URL as the `panel` view key, see `docs/RUNNING.md`): `body.no-3d` hides
