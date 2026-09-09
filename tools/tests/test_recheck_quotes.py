@@ -14,6 +14,7 @@ holds the two halves together as new corpora are added.
 Built with the help of Claude Code.
 """
 
+import argparse
 import json
 import sys
 import unittest
@@ -44,6 +45,106 @@ class PageDirTest(unittest.TestCase):
         for name, path in R.PAGE_DIR.items():
             self.assertEqual(path, CORPORA[name]["pages_dir"])
 
+
+
+
+class ClaimReconstructionTest(unittest.TestCase):
+    """The kinds that had never been rechecked must reach the judge as real claims.
+
+    ``reconstruct_claims`` folds any quote it cannot place into a generic claim, and for
+    a long while that fallback read "this quote substantiates a receptor/target mechanism
+    classification" -- which a brand name or a half-life does not. Those kinds sat at 0%
+    stamped, and had a pass run over them it would have asked the judge the wrong
+    question. So: every one of them is reconstructed, and named.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        quotes = {q["id"]: q for q in R._jsonl("quotes.jsonl")}
+        cls.claims, cls.kinds = R.reconstruct_claims(quotes)
+
+    def _one(self, kind):
+        got = [q for q, k in self.kinds.items() if k == kind]
+        self.assertTrue(got, f"no quote reconstructed as {kind}")
+        return got
+
+    def test_brands_half_lives_and_metabolites_are_reconstructed(self):
+        for kind in ("drug_brands", "drug_half_life", "drug_metabolites",
+                     "drug_metabolite_bindings", "drug_metabolite_enzyme",
+                     "drug_enzymes", "addons"):
+            self._one(kind)
+
+    def test_a_brand_claim_names_the_brand(self):
+        drug = next(d for d in R._jsonl("drugs.jsonl") if d.get("brands"))
+        brand = drug["brands"][0]
+        qid = brand["sources"][0]["quote_id"]
+        self.assertIn(brand["name"], " ".join(self.claims[qid]))
+        self.assertEqual(self.kinds[qid], "drug_brands")
+
+    def test_a_half_life_claim_names_the_duration(self):
+        drug = next(d for d in R._jsonl("drugs.jsonl")
+                    if d.get("half_life_sources") and d.get("half_life"))
+        qid = drug["half_life_sources"][0]["quote_id"]
+        self.assertIn(R._hours(drug["half_life"]), " ".join(self.claims[qid]))
+
+    def test_nothing_in_those_kinds_falls_back_to_the_generic_claim(self):
+        scoped = {"drug_brands", "drug_half_life", "drug_metabolites",
+                  "drug_metabolite_bindings"}
+        for qid, kind in self.kinds.items():
+            if kind in scoped:
+                self.assertNotIn("could not be reconstructed",
+                                 " ".join(self.claims[qid]), qid)
+
+
+class ApplyMergeTest(unittest.TestCase):
+    """A scoped pass must not wipe the stamps it did not re-judge.
+
+    ``apply`` used to write ``quote_llm.json`` from this pass's verdicts alone, which was
+    harmless while every run covered the whole corpus and destructive the moment
+    ``build --kinds`` narrowed one: the 759 quotes an earlier pass confirmed would have
+    been dropped by a pass that only looked at brands.
+    """
+
+    def test_merge_keeps_untouched_stamps_and_demotes_a_failed_recheck(self):
+        import tempfile
+        quotes = [q for q in R._jsonl("quotes.jsonl")][:3]
+        keep, demote, promote = (q["id"] for q in quotes)
+        with tempfile.TemporaryDirectory() as tmp:
+            cache, batches = Path(tmp) / "cache", Path(tmp) / "batches"
+            cache.mkdir(), batches.mkdir()
+            (cache / "quote_llm.json").write_text(
+                json.dumps({keep: "sonnet", demote: "sonnet"}), encoding="utf-8")
+            (cache / "quote_recheck_flagged.json").write_text(
+                json.dumps([{"qid": keep, "note": "an older flag"},
+                            {"qid": promote, "note": "this pass re-judged it"}]),
+                encoding="utf-8")
+            (batches / "batch_0.json").write_text(
+                json.dumps({"pages": {}, "items": [{"qid": promote, "page_ref": "x:1",
+                                                    "quote": "q", "claims": ["c"]}]}),
+                encoding="utf-8")
+            verdicts = Path(tmp) / "v.json"
+            verdicts.write_text(json.dumps({"verdicts": {
+                demote: {"present": True, "supports": False, "note": "does not attribute"},
+                promote: {"present": True, "supports": True}}}), encoding="utf-8")
+
+            old_cache = R.CACHE
+            R.CACHE = str(cache)
+            try:
+                R.cmd_apply(argparse.Namespace(batches=str(batches),
+                                               verdicts=str(verdicts), llm="sonnet"))
+            finally:
+                R.CACHE = old_cache
+
+            stamped = json.loads((cache / "quote_llm.json").read_text(encoding="utf-8"))
+            flagged = json.loads(
+                (cache / "quote_recheck_flagged.json").read_text(encoding="utf-8"))
+        self.assertEqual(stamped.get(keep), "sonnet", "an untouched stamp was dropped")
+        self.assertNotIn(demote, stamped, "a failed recheck kept its stamp")
+        self.assertEqual(stamped.get(promote), "sonnet")
+        self.assertIn(keep, [f["qid"] for f in flagged], "an untouched flag was dropped")
+        self.assertIn(demote, [f["qid"] for f in flagged])
+        self.assertNotIn(promote, [f["qid"] for f in flagged],
+                         "a flag this pass cleared was carried over")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

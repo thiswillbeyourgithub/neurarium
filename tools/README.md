@@ -303,7 +303,9 @@ Screenshots).
   `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review). Each batch item
   carries the quote's `heading` (below), which is the context the "supports" half of the verdict turns on.
   Corpus -> page dir is read from `meta.source_corpora`, never restated. See CLAUDE.md
-  Source provenance ("The sourcing model").
+  Source provenance ("The sourcing model"). Scope a pass with `--kinds`/`--unstamped`/`--flagged`; `apply`
+  **merges** into both caches, so a scoped pass keeps the stamps and flags it did not
+  re-judge.
 - `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted quote
   from a **book** corpus (a paged corpus whose page tree has an `INDEX.md`), the **trail** of headings it
   sits under, into the committed `tools/generated_cache/quote_headers.json` ({quote_id: [outermost, ...,

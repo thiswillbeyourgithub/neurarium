@@ -23,6 +23,12 @@ Three steps (the middle one is the only LLM spend):
    ``<dir>/batch_<i>.json`` (each: ``{pages: {ref: text}, items: [{qid, page_ref, quote,
    claims, heading?}]}``) + ``manifest.json``.
 
+   Scope it with ``--kinds a,b,c`` (the node kinds to judge, printed per pass),
+   ``--unstamped`` (skip what ``quote_llm.json`` already stamps) and ``--flagged``
+   (always re-judge what a previous pass could not confirm). A scoped pass is the
+   normal case now that the corpus is large: ``apply`` **merges** its verdicts into the
+   two caches rather than replacing them, so the kinds it did not look at keep theirs.
+
 2. Judge each batch with the chosen model. This project ran it as a Workflow: one agent
    per batch reads its file and returns, per item, ``{qid, present, supports, note?}``
    against the embedded page text (present allowing OCR noise; supports = the quote
@@ -90,47 +96,114 @@ def _qids(sources):
             if isinstance(s, dict) and "quote_id" in s]
 
 
+def _hours(hl):
+    """A half-life record (``{hours, hours_max?}``) as a phrase the judge can weigh."""
+    if not hl:
+        return "an unstated duration"
+    return (f"{hl['hours']}-{hl['hours_max']} hours" if hl.get("hours_max")
+            else f"{hl['hours']} hours")
+
+
+def _load(path, default):
+    """Read a cache file, or ``default`` on the first pass that writes it."""
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except FileNotFoundError:
+        return default
+
+
+
 def reconstruct_claims(quotes):
-    """quote_id -> [human-readable claim strings], scanning the emitted graph."""
+    """``(claims, kinds)``: per quote id, the claim(s) it backs and its node kind."""
     claims = collections.defaultdict(list)
+    kinds = {}
+    # The node kind the loop below is filling, read by ``add``. A holder rather than an
+    # argument on every call site, because the kinds come in runs (one loop, one kind);
+    # it is what lets ``build --kinds`` narrow a rerun to the kinds a pass needs. Coarse
+    # on purpose: ``receptor_classification`` covers the four per-attribute tally kinds.
+    kind = {"now": None}
 
     def add(qid, claim):
         if qid in quotes and quotes[qid]["corpus"] not in EXCLUDE_CORPUS:
+            kinds.setdefault(qid, kind["now"])
             claims[qid].append(claim)
 
     for d in _jsonl("drugs.jsonl"):
         nm = d["name"]
+        kind["now"] = "drug_bindings"
         for b in d.get("bindings", []):
             tag = " (tentative)" if b.get("tentative") else ""
             for q in _qids(b.get("sources", [])):
                 add(q, f"Drug {nm} acts on target '{b['target']}' as {b['action']}{tag}.")
+        kind["now"] = "drug_categories"
         for q in _qids(d.get("category_sources", [])):
             add(q, f"Drug {nm} is classified as {', '.join(d.get('categories', []))}.")
+        kind["now"] = "drug_nbn"
         for q in _qids(d.get("nbn_sources", [])):
             add(q, f"Drug {nm} Neuroscience-based Nomenclature = '{d.get('nbn')}'.")
+        kind["now"] = "drug_brands"
+        for br in d.get("brands", []):
+            for q in _qids(br.get("sources", [])):
+                add(q, f"Drug {nm} is sold under the brand name '{br['name']}'.")
+        kind["now"] = "drug_half_life"
+        for q in _qids(d.get("half_life_sources", [])):
+            add(q, f"Drug {nm} has an elimination half-life of "
+                   f"{_hours(d.get('half_life'))}.")
+        kind["now"] = "drug_enzymes"
+        for e in d.get("enzymes", []):
+            tier = f", {e['strength']}" if e.get("strength") else ""
+            for q in _qids(e.get("sources", [])):
+                add(q, f"Drug {nm} is a {e['role']} of the enzyme "
+                       f"{e['enzyme'].upper()}{tier}.")
+        for m in d.get("metabolites", []):
+            mn = m.get("name")
+            kind["now"] = "drug_metabolites"
+            for q in _qids(m.get("sources", [])):
+                add(q, f"Drug {nm} has an active metabolite, {mn}.")
+            for q in _qids(m.get("half_life_sources", [])):
+                add(q, f"{mn}, an active metabolite of {nm}, has an elimination "
+                       f"half-life of {_hours(m.get('half_life'))}.")
+            kind["now"] = "drug_metabolite_bindings"
+            for mb in m.get("bindings", []):
+                for q in _qids(mb.get("sources", [])):
+                    add(q, f"{mn}, an active metabolite of {nm}, acts on target "
+                           f"'{mb['target']}' as {mb['action']}.")
+            kind["now"] = "drug_metabolite_enzyme"
+            for fb in m.get("formed_by", []):
+                step = f" by {fb['reaction']}" if fb.get("reaction") else ""
+                for q in _qids(fb.get("sources", [])):
+                    add(q, f"The metabolite {mn} is formed from {nm} by the enzyme "
+                           f"{fb['enzyme'].upper()}{step}.")
 
     for r in _jsonl("receptors.jsonl"):
         nm = r["name"]
+        kind["now"] = "receptor_classification"
         for attr, info in (r.get("classification") or {}).items():
             for q in _qids(info.get("sources", [])):
                 add(q, f"Receptor {nm}: {attr} = '{r.get(attr)}'.")
+        kind["now"] = "receptor_locations"
         for region, srcs in (r.get("location_sources") or {}).items():
             for q in _qids(srcs):
                 add(q, f"Receptor {nm} is expressed in brain region '{region}'.")
 
+    kind["now"] = "projections"
     for p in _jsonl("projections.jsonl"):
         for q in _qids(p.get("sources", [])):
             add(q, f"Projection '{p['from']}'->'{p['to']}' ({p.get('kind')}, "
                    f"{p.get('neurotransmitter')}): {p.get('label', '')}. {p.get('description', '')}")
 
+    kind["now"] = "circuits"
     for c in _jsonl("circuits.jsonl"):
         for q in _qids(c.get("sources", [])):
             add(q, f"Functional circuit '{c['name']}': {c.get('description', '')}")
 
+    kind["now"] = "projection_groups"
     for g in _jsonl("projection_groups.jsonl"):
         for q in _qids(g.get("sources", [])):
             add(q, f"Projection group '{g['name']}' ({g['mode']}={g['key']}): {g.get('description', '')}")
 
+    kind["now"] = "structures"
     for s in _jsonl("structures.jsonl"):
         for q in _qids(s.get("sources", [])):
             add(q, f"Brain structure '{s['name']}' ({s.get('base_name')}) anatomy/existence.")
@@ -139,9 +212,11 @@ def reconstruct_claims(quotes):
         meta = json.load(fh)
     for tid, t in meta.get("drug_targets", {}).items():
         nm = t.get("name") or tid
+        kind["now"] = "target_locations"
         for region, srcs in (t.get("location_sources") or {}).items():
             for q in _qids(srcs):
                 add(q, f"Molecular target {nm} is expressed in brain region '{region}'.")
+        kind["now"] = "target_other"
         for k, v in t.items():
             if k == "location_sources":
                 continue
@@ -151,18 +226,57 @@ def reconstruct_claims(quotes):
             elif isinstance(v, list):
                 for q in _qids(v):
                     add(q, f"Molecular target {nm}: {k}.")
+    kind["now"] = "addons"
+    for a in _jsonl("addons.jsonl"):
+        for q in _qids(a.get("sources", [])):
+            add(q, f"Annotation on {a['owner_kind']} '{a['owner']}': {a.get('text', '')}")
+
 
     # Fold any remaining (referenced but unreconstructed) non-Allen quote with a generic claim.
+    kind["now"] = "other"
     for qid, q in quotes.items():
         if q["corpus"] not in EXCLUDE_CORPUS and qid not in claims:
-            add(qid, "This quote substantiates a receptor/target mechanism classification. "
-                     "Confirm it appears verbatim on the page and is a coherent, correct fact.")
-    return claims
+            add(qid, "This quote is cited as the source of a dataset claim whose text "
+                     "could not be reconstructed here. Confirm it appears verbatim on "
+                     "the page and states a coherent, correct fact.")
+    return claims, kinds
+
+
+def _select(claims, kinds, args):
+    """Narrow a build to the quotes this pass actually judges.
+
+    A full rebuild embeds every cited page, so a pass that only needs the kinds nobody
+    has ever rechecked (brands, half-lives, metabolites) would otherwise pay for the
+    whole corpus. ``--flagged`` is a union, not a filter: the quotes a previous pass
+    could not confirm come back whatever else is selected.
+    """
+    wanted = {k for k in args.kinds.split(",") if k} if args.kinds else None
+    keep = {q: c for q, c in claims.items()
+            if wanted is None or kinds.get(q) in wanted}
+    if wanted is not None:
+        unknown = wanted - set(kinds.values())
+        if unknown:
+            sys.exit(f"unknown --kinds: {', '.join(sorted(unknown))}")
+    if args.unstamped:
+        stamped = _load(os.path.join(CACHE, "quote_llm.json"), {})
+        keep = {q: c for q, c in keep.items() if q not in stamped}
+    if args.flagged:
+        for row in _load(os.path.join(CACHE, "quote_recheck_flagged.json"), []):
+            if row.get("qid") in claims:
+                keep[row["qid"]] = claims[row["qid"]]
+    counts = collections.Counter(kinds.get(q) for q in keep)
+    print("selected " + ", ".join(f"{k}={n}" for k, n in sorted(counts.items(),
+                                                               key=lambda kv: str(kv[0]))))
+    return keep
+
 
 
 def cmd_build(args):
     quotes = {q["id"]: q for q in _jsonl("quotes.jsonl")}
-    claims = reconstruct_claims(quotes)
+    claims, kinds = reconstruct_claims(quotes)
+    claims = _select(claims, kinds, args)
+    if not claims:
+        sys.exit("nothing to build: every selected quote is filtered out")
     groups = collections.defaultdict(list)
     for qid in claims:
         q = quotes[qid]
@@ -225,9 +339,19 @@ def cmd_apply(args):
     if isinstance(verdicts, list):
         verdicts = {v["qid"]: v for v in verdicts}
 
-    stamped = {q: args.llm for q, v in verdicts.items()
-               if v.get("present") and v.get("supports") and q in quotes}
-    flagged = []
+    carried = _load(os.path.join(CACHE, "quote_llm.json"), {})
+    carried.update({q: args.llm for q, v in verdicts.items()
+                    if v.get("present") and v.get("supports") and q in quotes})
+    # Merge, never overwrite: a scoped pass (``build --kinds``) re-judges part of the
+    # corpus, so the stamps and flags it did not look at must survive it, while the ones
+    # it did look at take this pass's verdict (a demotion un-stamps).
+    judged = {q for q in verdicts if q in quotes}
+    for q in judged:
+        if not (verdicts[q].get("present") and verdicts[q].get("supports")):
+            carried.pop(q, None)
+    stamped = carried
+    flagged = [f for f in _load(os.path.join(CACHE, "quote_recheck_flagged.json"), [])
+               if f.get("qid") not in judged]
     for q, v in verdicts.items():
         if q not in quotes or (v.get("present") and v.get("supports")):
             continue
@@ -236,7 +360,8 @@ def cmd_apply(args):
                         "present": v.get("present"), "supports": v.get("supports"),
                         "quote": quotes[q]["quote"], "claims": claims.get(q, []),
                         "note": v.get("note", "")})
-    flagged.sort(key=lambda x: (bool(x["present"]), bool(x["supports"])))
+    # ``.get``: the carried-over rows come from an older file that may predate a key.
+    flagged.sort(key=lambda x: (bool(x.get("present")), bool(x.get("supports"))))
 
     os.makedirs(CACHE, exist_ok=True)
     json.dump(stamped, open(os.path.join(CACHE, "quote_llm.json"), "w"),
@@ -251,6 +376,12 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build", help="write per-page batch files for the LLM judge")
     b.add_argument("--out", required=True, help="output directory for batch_*.json")
+    b.add_argument("--kinds", default="",
+                   help="comma-separated node kinds to judge (default: every kind)")
+    b.add_argument("--unstamped", action="store_true",
+                   help="skip the quotes quote_llm.json already stamps")
+    b.add_argument("--flagged", action="store_true",
+                   help="also judge every quote in quote_recheck_flagged.json")
     b.set_defaults(func=cmd_build)
     a = sub.add_parser("apply", help="apply aggregated verdicts -> quote_llm.json + flagged")
     a.add_argument("--batches", required=True, help="the build --out directory")
