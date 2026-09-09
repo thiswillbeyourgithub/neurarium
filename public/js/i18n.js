@@ -138,22 +138,40 @@
       "tour.scrollHint": "Scroll this way to the highlighted part",
       "tour.welcome.title": "Welcome to neurarium",
       "tour.welcome.body":
-        "A 3D map of the brain: its regions, their pathways, and the receptors and drugs acting on them. The tour takes about 3 minutes, and you can leave any time.",
+        "A 3D map of the brain: its regions, their pathways, and the receptors and drugs acting on them. The tour takes about 4 minutes, and you can leave any time.",
       "tour.rotate.title": "Move around",
       "tour.rotate.body":
         "<b>Drag</b> to spin the brain, scroll to zoom. Give it a spin to continue.",
       "tour.separate.title": "Pull it apart",
       "tour.separate.body":
         "The <b>Separate</b> slider pulls the brain apart to reveal the deep nuclei. Grab it to continue.",
+      "tour.legendOpen.title": "The key to the scene",
+      "tour.legendOpen.body":
+        "Colours and symbols carry meaning here. Click <b>Legend</b> to see what they stand for.",
+      "tour.legendLook.title": "The legend",
+      "tour.legendLook.body":
+        "Every colour and symbol the 3D view uses, in one place. It stays a click away in the toolbar. Close it (the <b>&times;</b>) to continue.",
       "tour.sourcesOpen.title": "Every fact is sourced",
       "tour.sourcesOpen.body":
         "The data is LLM-assisted, so every fact is graded. Click <b>Sources &amp; provenance</b> to see the breakdown.",
       "tour.sourcesDetail.title": "The provenance breakdown",
       "tour.sourcesDetail.body":
         "How much of the data is verified, sourced, or still unchecked. Close it (the <b>&times;</b>) to continue.",
+      "tour.nodesOpen.title": "Read the facts themselves",
+      "tour.nodesOpen.body":
+        "Each of those graded facts is a row you can read. Click <b>Data browser</b> to open the list.",
+      "tour.nodesLook.title": "The Data browser",
+      "tour.nodesLook.body":
+        "Every fact in the dataset, in one list: filter it, sort it, keep only one kind or one grade. Each row opens the thing it describes. It is a wide table, so it borrows the whole window and the 3D view steps aside.",
+      "tour.show3d.title": "Show or hide the brain",
+      "tour.show3d.body":
+        "This button hides the 3D view so the panel can fill the screen, for reading. The brain is hidden right now: click it to bring it back.",
+      "tour.collapsePanel.title": "Fold the panel away",
+      "tour.collapsePanel.body":
+        "The other way round: click the <b>neurarium</b> header to fold the panel down to a single line and leave the brain alone on screen. Try it, then <b>Next</b>.",
       "tour.browse.title": "Browse the data",
       "tour.browse.body":
-        "Everything sits in five lists: <b>Drugs</b> ({drugs}+), <b>Receptors</b> ({receptors}+), <b>Brain structures</b> ({structures}+), <b>Projections</b> ({projections}+), and the <b>Enzymes</b> that clear the drugs. We'll open a few next.",
+        "Everything sits in five lists, in panel order: <b>Drugs</b> ({drugs}+), <b>Receptors &amp; targets</b> ({receptors}+), <b>Enzymes</b>, <b>Brain structures</b> ({structures}+) and <b>Projections &amp; Circuits</b> ({projections}+). We'll open a few next.",
       "tour.openDrugs.title": "Open a list",
       "tour.openDrugs.body":
         "Start with a drug. Click <b>Drugs</b> to open the list.",
@@ -168,7 +186,7 @@
         "Further down, its <b>metabolism</b>: the liver enzymes that break this drug down, or whose activity it changes. Each one is sourced, and clickable. This is pharmacokinetics, so nothing lights up in the 3D view.",
       "tour.drugPk.title": "And what that implies",
       "tour.drugPk.body":
-        "Open <b>Drug interactions</b>. These rows are <b>inferred</b> from the enzymes above, never measured: two drugs meeting at one enzyme <i>could</i> shift each other's blood level. A flag to raise with a prescriber, never a contraindication.",
+        "Open <b>Drug interactions</b>. These rows are <b>inferred</b> from the enzymes above, never measured: two drugs meeting at one enzyme <i>could</i> shift each other's blood level. Then <b>Next</b> to continue.",
       "tour.drugToReceptor.title": "Follow it to a receptor",
       "tour.drugToReceptor.body":
         "Back up to the bindings: each one is a link. Click the <b>H1</b> row to open that receptor.",
@@ -192,7 +210,7 @@
         "Each panel opens with an image and a live Wikipedia description. <b>Scroll down</b> to continue.",
       "tour.openProjections.title": "Open the projections",
       "tour.openProjections.body":
-        "Last kind of node: the pathways between regions. Click <b>Projections</b>.",
+        "Last kind of node: the pathways between regions. Click <b>Projections &amp; Circuits</b>.",
       "tour.projectionTap.title": "A whole system",
       "tour.projectionTap.body":
         "Click the <b>Dopamine</b> system. It pins every dopaminergic pathway at once.",
@@ -201,7 +219,7 @@
         "Its <b>member pathways</b> and a description. <b>Scroll down</b> to continue.",
       "tour.backToSettings.title": "Back to the panel",
       "tour.backToSettings.body":
-        "One last thing. Click <b>Settings</b> to return to the main panel.",
+        "Now back to the controls. Click <b>Settings</b> to return to the main panel.",
       "tour.openSearch.title": "Open search",
       "tour.openSearch.body":
         "Click the <b>magnifier</b> to open search.",
@@ -686,22 +704,40 @@
       "tour.scrollHint": "Faites défiler dans ce sens jusqu'à la partie en surbrillance",
       "tour.welcome.title": "Bienvenue sur neurarium",
       "tour.welcome.body":
-        "Une carte 3D du cerveau : ses régions, leurs voies, et les récepteurs et médicaments qui agissent dessus. La visite dure environ 3 minutes, et vous pouvez la quitter quand vous voulez.",
+        "Une carte 3D du cerveau : ses régions, leurs voies, et les récepteurs et médicaments qui agissent dessus. La visite dure environ 4 minutes, et vous pouvez la quitter quand vous voulez.",
       "tour.rotate.title": "Se déplacer",
       "tour.rotate.body":
         "<b>Faites glisser</b> pour tourner le cerveau, défilez pour zoomer. Faites-le tourner pour continuer.",
       "tour.separate.title": "Écarter les régions",
       "tour.separate.body":
         "Le curseur <b>Séparer</b> ouvre le cerveau et révèle les noyaux profonds. Saisissez-le pour continuer.",
+      "tour.legendOpen.title": "La clé de la scène",
+      "tour.legendOpen.body":
+        "Ici, les couleurs et les symboles ont un sens. Cliquez sur <b>Légende</b> pour voir lequel.",
+      "tour.legendLook.title": "La légende",
+      "tour.legendLook.body":
+        "Toutes les couleurs et tous les symboles de la vue 3D, au même endroit. Elle reste à un clic dans la barre d'outils. Fermez-la (le <b>&times;</b>) pour continuer.",
       "tour.sourcesOpen.title": "Chaque fait est sourcé",
       "tour.sourcesOpen.body":
         "Les données sont assistées par IA : chaque fait est noté. Cliquez sur <b>Sources et provenance</b> pour voir le détail.",
       "tour.sourcesDetail.title": "Le récapitulatif de provenance",
       "tour.sourcesDetail.body":
         "La part des données vérifiée, sourcée, ou encore non contrôlée. Fermez-la (le <b>&times;</b>) pour continuer.",
+      "tour.nodesOpen.title": "Lire les faits eux-mêmes",
+      "tour.nodesOpen.body":
+        "Chacun de ces faits notés est une ligne que vous pouvez lire. Cliquez sur <b>Explorateur de données</b> pour ouvrir la liste.",
+      "tour.nodesLook.title": "L'explorateur de données",
+      "tour.nodesLook.body":
+        "Tous les faits du jeu de données en une liste : filtrez, triez, ne gardez qu'un type ou qu'une note. Chaque ligne ouvre la chose qu'elle décrit. C'est un tableau large : il emprunte toute la fenêtre et la vue 3D s'efface.",
+      "tour.show3d.title": "Afficher ou masquer le cerveau",
+      "tour.show3d.body":
+        "Ce bouton masque la vue 3D pour que le panneau occupe tout l'écran, pour lire. Le cerveau est masqué en ce moment : cliquez pour le faire revenir.",
+      "tour.collapsePanel.title": "Replier le panneau",
+      "tour.collapsePanel.body":
+        "Et l'inverse : cliquez sur l'en-tête <b>neurarium</b> pour replier le panneau en une seule ligne et laisser le cerveau seul à l'écran. Essayez, puis <b>Suivant</b>.",
       "tour.browse.title": "Parcourir les données",
       "tour.browse.body":
-        "Tout tient en cinq listes : <b>Médicaments</b> ({drugs}+), <b>Récepteurs</b> ({receptors}+), <b>Structures cérébrales</b> ({structures}+), <b>Projections</b> ({projections}+), et les <b>Enzymes</b> qui éliminent les médicaments. On en ouvre quelques-unes ensuite.",
+        "Tout tient en cinq listes, dans l'ordre du panneau : <b>Médicaments</b> ({drugs}+), <b>Récepteurs et cibles</b> ({receptors}+), <b>Enzymes</b>, <b>Structures cérébrales</b> ({structures}+) et <b>Projections et circuits</b> ({projections}+). On en ouvre quelques-unes ensuite.",
       "tour.openDrugs.title": "Ouvrir une liste",
       "tour.openDrugs.body":
         "Commençons par un médicament. Cliquez sur <b>Médicaments</b> pour ouvrir la liste.",
@@ -716,7 +752,7 @@
         "Plus bas, son <b>métabolisme</b> : les enzymes hépatiques qui dégradent ce médicament, ou dont il modifie l'activité. Chacune est sourcée, et cliquable. C'est de la pharmacocinétique : rien ne s'allume dans la vue 3D.",
       "tour.drugPk.title": "Et ce que cela implique",
       "tour.drugPk.body":
-        "Ouvrez <b>Interactions médicamenteuses</b>. Ces lignes sont <b>déduites</b> des enzymes ci-dessus, jamais mesurées : deux médicaments qui se croisent sur une même enzyme <i>pourraient</i> déplacer leur concentration sanguine. Un signal à évoquer avec un prescripteur, jamais une contre-indication.",
+        "Ouvrez <b>Interactions médicamenteuses</b>. Ces lignes sont <b>déduites</b> des enzymes ci-dessus, jamais mesurées : deux médicaments qui se croisent sur une même enzyme <i>pourraient</i> déplacer leur concentration sanguine. Puis <b>Suivant</b> pour continuer.",
       "tour.drugToReceptor.title": "Suivre vers un récepteur",
       "tour.drugToReceptor.body":
         "Remontez aux liaisons : chacune est un lien. Cliquez sur la ligne <b>H1</b> pour ouvrir ce récepteur.",
@@ -740,7 +776,7 @@
         "Chaque panneau s'ouvre sur une image et une description Wikipédia en direct. <b>Faites défiler</b> vers le bas pour continuer.",
       "tour.openProjections.title": "Ouvrir les projections",
       "tour.openProjections.body":
-        "Dernier type de nœud : les voies entre régions. Cliquez sur <b>Projections</b>.",
+        "Dernier type de nœud : les voies entre régions. Cliquez sur <b>Projections et circuits</b>.",
       "tour.projectionTap.title": "Un système entier",
       "tour.projectionTap.body":
         "Cliquez sur le système <b>dopamine</b>. Il épingle d'un coup toutes les voies dopaminergiques.",
@@ -749,7 +785,7 @@
         "Ses <b>voies membres</b> et une description. <b>Faites défiler</b> vers le bas pour continuer.",
       "tour.backToSettings.title": "Retour au panneau",
       "tour.backToSettings.body":
-        "Une dernière chose. Cliquez sur <b>Réglages</b> pour revenir au panneau principal.",
+        "Retour aux commandes. Cliquez sur <b>Réglages</b> pour revenir au panneau principal.",
       "tour.openSearch.title": "Ouvrir la recherche",
       "tour.openSearch.body":
         "Cliquez sur la <b>loupe</b> pour ouvrir la recherche.",

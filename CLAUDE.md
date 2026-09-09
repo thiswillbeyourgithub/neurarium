@@ -250,7 +250,10 @@ Viewer (`public/`):
   or with **`stayAfterTap`** stays put and steps its spotlight aside so the live demo it fired is
   watchable (the cue then returns to move on). A step's `target` may be one element or an **array** (a group highlight: the ring spans
   their union, e.g. the four browse sections). Steps glide between positions (snap only on the first
-  step + during an active scroll). The app-specific step list is built in `js/main.js`; the data demos
+  step + during an active scroll). The app-specific step list is built in `js/main.js`. It opens with
+  how to *read* the app (Legend, then Sources & provenance, then the **Data browser** those grades
+  count, whose reading mode motivates the two view toggles: bring the 3D back, fold the panel away),
+  then walks the data; the data demos
   are hands-on and follow the data graph (focus a **drug** (olanzapine), read its pharmacodynamics then
   its pharmacokinetics (**Metabolism**, then open the collapsed **Drug interactions**), follow one of its
   bindings to a **receptor** (H1), then visit a **structure** (hippocampus) and a **projection system**

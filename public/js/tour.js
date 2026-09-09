@@ -263,7 +263,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
 
   // Resolve a step's target to a list of on-screen Elements. `target` may be a
   // CSS selector, an Element, or a function returning any of those or an array
-  // (a group highlight, e.g. the four browse sections). Elements with no box
+  // (a group highlight, e.g. the five browse sections). Elements with no box
   // (display:none) are dropped, so an unresolved target degrades to a caption.
   function resolveTargets(step) {
     let t = step.target;
