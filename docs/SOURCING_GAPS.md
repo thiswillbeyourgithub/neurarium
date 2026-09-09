@@ -516,11 +516,16 @@ Kept as a record of which lever worked, so a later session does not re-derive it
 - **`drug_metabolite_enzyme` 17/17.** Which enzyme forms each active metabolite: hand-curated
   (Stahl + Wikipedia), covering 14 of the 36 metabolites, the rest left NOSOURCE. 100% of what
   exists, and the only kind here whose *coverage* is deliberately partial rather than complete.
-- **`drug_enzymes` 268/268.** Two greps behind the same verbatim quote gate, **no LLM at all**:
-  Stahl's Pharmacokinetics block is regular enough ("Substrate for CYP2D6", "Inhibits CYP2C19")
-  for `fetch_cyp.py` (159 nodes over 86 drugs), and `fetch_cyp_wikipedia.py` adds the drugs Stahl
-  has no monograph for out of the stored English articles (corpus #9; 109 further nodes over 62
-  drugs). Stahl wins any pair both state. 119 drugs, 220 substrate / 37 inhibitor / 11 inducer.
+- **`drug_enzymes` 428/428.** The four-step pipeline over two corpora: `fetch_cyp_worklist.py`
+  offers candidate sentences from Stahl's Pharmacokinetics block and the stored English articles
+  (corpus #9) with no verdict of its own, a model answers with a candidate **index** plus
+  (enzyme, role, strength), and `apply_cyp_sources.py` gates the answer (the quote must name the
+  claimed isoform, and be verbatim on the cited page). Stahl wins any pair both state. 172 drugs,
+  342 substrate / 68 inhibitor / 18 inducer. This kind was the last one no model had ever read:
+  two regex fetchers wrote it until 3.74.0, and replacing them added 88 nodes, mostly the plural
+  and class-inclusion subjects a pattern cannot resolve ("Bupropion **and its metabolites** are
+  inhibitors of CYP2D6", "Nitrobenzodiazepines **such as** nitrazepam ... are metabolically
+  activated by CYP3A4"), while dropping four rows that stated the opposite of their own source.
 - **`receptor_density` 36/36 and `target_density` 17/17.** Allen microarray intensity
   (corpus #8), one node per profile with the whole profile written into the quote, published
   only above the cross-donor reliability floor.
