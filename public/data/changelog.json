@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.73.0",
+      "date": "2026-09-09",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A day theme: the sun/moon button in the panel header switches the whole site to a light palette, and remembers your choice. Dark stays the default, since it is what the data colours were picked against.",
+          "commits": [
+            "327ef13"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.72.0",
       "date": "2026-09-09",
       "entries": [
