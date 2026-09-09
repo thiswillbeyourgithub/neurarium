@@ -1470,6 +1470,9 @@ function createPanelTabs() {
   let openTabs = []; // [{ key, title, reopen }], left-to-right order
   let activeKey = null; // active detail key, or null when Settings is shown
   let onEmpty = () => {}; // run when the last detail tab is closed (clears the 3D)
+  // Run when the user hand-picks the Settings tab while a detail was active (the
+  // detail tabs stay in the strip; only the scene focus they applied is dropped).
+  let onSettings = () => {};
   // Run after ANY change to the strip (opened / closed / activated / reordered), so
   // the URL can mirror it. render() below is the one choke point every such change
   // funnels through, which is why the hook hangs off it rather than off each caller.
@@ -1686,12 +1689,17 @@ function createPanelTabs() {
   }, { passive: false });
 
   // Return to the pinned Settings tab (active = none), keeping every detail tab.
-  const selectSettings = () => {
+  // `user` marks the two ways a *person* leaves a detail behind (the Settings chip,
+  // the Tab-key cycle landing on it): those also drop the 3D focus via onSettings, so
+  // a drug's animation does not keep playing behind the controls. The programmatic
+  // showSettings() (search, the tour) leaves the scene alone.
+  const selectSettings = ({ user = false } = {}) => {
     activeKey = null;
     showPane(false);
     render();
+    if (user) onSettings();
   };
-  tabSettings.addEventListener("click", selectSettings);
+  tabSettings.addEventListener("click", () => selectSettings({ user: true }));
 
   return {
     /**
@@ -1765,7 +1773,7 @@ function createPanelTabs() {
       const keys = [null, ...openTabs.map((tb) => tb.key)]; // Settings first, then details
       const at = keys.indexOf(activeKey);
       const target = keys[(at + dir + keys.length) % keys.length];
-      if (target === null) selectSettings();
+      if (target === null) selectSettings({ user: true });
       else activate(target);
       return true;
     },
@@ -1783,6 +1791,9 @@ function createPanelTabs() {
     },
     /** Set the callback run when the last detail tab is closed (clears the 3D). */
     setOnEmpty(fn) { onEmpty = fn; },
+    /** Set the callback run when the user returns to the Settings tab by hand while
+     *  a detail was active (drops the 3D focus; the tabs themselves stay open). */
+    setOnSettings(fn) { onSettings = fn; },
     /** Set the callback run after ANY strip change (open / close / activate /
      *  reorder), so the URL can mirror the whole strip, not just the active tab. */
     setOnChange(fn) { onChange = fn; },
@@ -7074,11 +7085,17 @@ async function main() {
   // 3D focus (halo / isolate / dim / dots) so the scene matches the empty strip.
   // Last tab closed: drop the 3D focus and, since an enzyme focus has no 3D state
   // for selection.clear() to unwind, its row highlight too.
-  tabs.setOnEmpty(() => {
+  const clearNodeFocus = () => {
     selection.clear();
     activeEnzymeId = null;
     reflectEnzymes(null);
-  });
+  };
+  tabs.setOnEmpty(clearNodeFocus);
+  // Stepping back to the Settings tab is "put the scene back": the detail tabs stay
+  // in the strip as history, but whatever they lit (a drug's animation, a circuit
+  // pulse, an isolate) stops, so the controls are never read over a live overlay.
+  // Clicking the tab again re-applies its focus (its reopen thunk).
+  tabs.setOnSettings(clearNodeFocus);
 
   // Circuit "traveling pulse" animation: glowing beads sweeping each isolated
   // circuit's arrows from source to target (js/circuit-anim.js). Started from the

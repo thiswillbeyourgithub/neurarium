@@ -234,7 +234,11 @@ The `select*` layer (`selectStructure`/`selectConnection`/`focusTarget`/`focusDr
 logic. Keys dedupe one tab per thing (`structure:`/`connection:`/`target:`/`drug:`/`circuit:`/
 `group:`); `MAX_TABS` bounds the strip. Closing the active tab falls back to a neighbour (re-applying
 its focus) or, if last, to Settings + `onEmpty()` (`tabs.setOnEmpty(() => selection.clear())`).
-Interactions: click, × to close, **long-press (~450ms) then drag** to reorder, wheel/touch-drag to
+Returning to **Settings by hand** (the chip, or the Tab cycle landing on it) fires the separate
+`onSettings()`, wired to the same clear: the tabs stay in the strip as history but the scene focus
+they applied stops, so the controls are never read over a drug's animation; clicking the tab again
+re-applies it (its `reopen`). The programmatic `showSettings()` (search, the tour) leaves the scene
+alone. Interactions: click, × to close, **long-press (~450ms) then drag** to reorder, wheel/touch-drag to
 scroll. The strip is `touch-action: none` with a JS-driven drag-scroll (a native pan would
 `pointercancel` mid-hold and kill the long-press). **Tab**/**Shift+Tab** cycle (`tabs.cycle`); **Esc**
 closes the active tab (`tabs.closeActive`, false when only Settings is active).
