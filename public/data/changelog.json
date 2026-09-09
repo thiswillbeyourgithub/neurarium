@@ -1,6 +1,40 @@
 {
   "versions": [
     {
+      "version": "3.69.0",
+      "date": "2026-09-09",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The guided tour now shows the three controls it used to walk past: the **Legend** popup, the **Data browser** (introduced right after the sourcing breakdown, since it holds the very facts that tally counts), and the two view toggles, hiding the 3D model to read in peace and folding the panel away to see the brain alone. It opens with how to read the app before walking the data, and runs 32 steps in about four minutes.",
+          "commits": [
+            "1d82c83"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The tour named two sections by labels they no longer carry (\"Receptors\", \"Projections\") and listed them in the wrong order; it now names all five as they appear on screen. The drug-interactions step no longer repeats the caption it is pointing at, and says how to move on.",
+          "commits": [
+            "1d82c83"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Switching from a drug's tab back to **Settings** left the drug's animation, its glow and its pinned pathways playing behind the controls. The scene is now put back; the tab stays open, and clicking it again brings the focus back.",
+          "commits": [
+            "b03ff95"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Folding the panel down while the 3D model was hidden left a single line of header over an empty black screen. Folding the panel now brings the brain back.",
+          "commits": [
+            "b2c2a54"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.68.0",
       "date": "2026-09-07",
       "entries": [
