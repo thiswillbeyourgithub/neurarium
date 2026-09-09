@@ -697,26 +697,25 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   emitted into `meta.enzymes*`. Field is `enzyme`, not `cyp`: the non-CYP routes (UGT, esterases,
   MAO) will want the same one. Strength is **ordinal on purpose**: the AUC fold-changes behind
   the regulatory tiers are not in the corpora (see `docs/SOURCING_GAPS.md`).
-- **Sourcing: two deterministic fetchers, no LLM in either**, each writing a committed cache
+- **Sourcing: the four-step pipeline**, over two corpora, writing two committed caches
   `generate_data.py` merges (rows are NOT authored in `drugs_data.jsonl`); **Stahl wins** a
   (enzyme, role) pair both state.
-  - `tools/fetch/fetch_cyp.py` -> `generated_cache/drug_enzymes.json`, from Stahl's per-drug
-    `Pharmacokinetics` block, regular enough ("Substrate for CYP2D6", "Inhibits CYP2C19") that
-    a pattern match + the ordinary verbatim quote gate beats a judge. Only that block is read:
-    the `Drug Interactions` block's isoform sentences are mostly about *other* drugs acting on
-    this one.
-  - `tools/fetch/fetch_cyp_wikipedia.py` -> `generated_cache/drug_enzymes_wikipedia.json`, from
-    the drug's stored English Wikipedia article (corpus #9), the only source for the drugs
-    outside Stahl's roster. Leans on the **drugbox `Metabolism` row** (regular, and a substrate
-    claim by construction); prose is read only per *sentence*, with the drug named before the
-    verb and nothing in between that hands the verb another subject, plus a negation veto and a
-    victim-frame veto tested on the sentence **head** only (Wikipedia states absence and other
-    molecules' metabolism constantly, which Stahl's terse bullets never did; what follows the
-    verb is the claim's own consequence, so vetoing on it dropped genuine rows). A sentence
-    stating two roles is **split by position**, each enzyme going to the verb it follows, while
-    a later verb stays coordinated with the first. Non-CYP routes are read only where `ENZYMES`
-    carries them (`adh`), never guessed.
-- **Which enzyme FORMS an active metabolite** is the mirror relation (there the drug is the
+  - `tools/fetch/fetch_cyp_worklist.py` -> `generated_cache/cyp_worklist.json`: the worklist
+    builder, and the only pass that reads a corpus. It offers candidate sentences with **no
+    verdict of its own**: Stahl's `Pharmacokinetics` bullets (via `fetch_cyp.py`) and the stored
+    English Wikipedia article's drugbox `Metabolism` row plus its isoform-naming sentences (via
+    `fetch_cyp_wikipedia.py`), each already confirmed verbatim on a real page. It vetoes nothing:
+    a negation or somebody else's drug is the judge's problem, not a regex's.
+  - The extract pass answers per drug with a candidate **index** plus `(enzyme, role, strength?)`
+    into `generated_cache/cyp_judged.json`. An index, never a string, so a paraphrase is not
+    expressible; the worst failure is picking the wrong true sentence, which gate 3 below catches.
+  - `tools/sourcing/apply_cyp_sources.py` -> `generated_cache/drug_enzymes.json` (Stahl) +
+    `drug_enzymes_wikipedia.json` (corpus #9), the **sole writer** of both. Five gates: drug and
+    index resolve; the triple is in the vocabulary; **the quote names the isoform the row claims**;
+    the quote is verbatim on the cited page under `check_data.normalize_for_match`; one
+    (enzyme, role) pair per drug per corpus, keeping the reading that carries a strength tier.
+  - Both fetchers are **libraries, not scripts**: they know where a corpus keeps its pages and how
+    its sentences are shaped, and state no claim.
   substrate, here the metabolite is the product) and its own node kind, so it is **hand-curated**
   in `tools/data_generators/quotes/metabolism.py` (`METABOLITE_ENZYME_QUOTES`, keyed
   `(drug_id, metabolite name)`) rather than grepped: the corpora state it as prose whose near

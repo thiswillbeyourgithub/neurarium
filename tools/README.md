@@ -172,13 +172,14 @@ network, idempotent, polite; each touches only what changed). Always finish with
    tools/sourcing/apply_classification_sources.py` maps + quote-gates + merges the confirm-only
    `verified` sources (no judge) into `tools/generated_cache/classification_sources.json`. See
    CLAUDE.md Source provenance (corpus #12).
-9. **Drug metabolism** (the `drug_enzymes` rows): `python tools/fetch/fetch_cyp.py` re-reads Stahl's
-   per-drug `Pharmacokinetics` block into `tools/generated_cache/drug_enzymes.json`, then `python
-   tools/fetch/fetch_cyp_wikipedia.py` does the same over the stored English Wikipedia articles
-   (`data_sources/wikipedia/pages/`, corpus #9) into
-   `tools/generated_cache/drug_enzymes_wikipedia.json` for the drugs Stahl has no monograph for.
-   Both are offline greps behind the verbatim quote gate (no LLM); `generate_data.py` merges them
-   Stahl-first. A drug whose article is not stored yet needs `uv run
+9. **Drug metabolism** (the `drug_enzymes` rows): `python tools/fetch/fetch_cyp_worklist.py`
+   re-reads Stahl's per-drug `Pharmacokinetics` block and the stored English Wikipedia articles
+   (`data_sources/wikipedia/pages/`, corpus #9) into `tools/generated_cache/cyp_worklist.json`,
+   offering candidate sentences with no verdict. An LLM pass writes each drug's picks (a candidate
+   **index** plus enzyme/role/strength) into `tools/generated_cache/cyp_judged.json`, then `python
+   tools/sourcing/apply_cyp_sources.py` gates them and writes both
+   `tools/generated_cache/drug_enzymes.json` and `drug_enzymes_wikipedia.json`;
+   `generate_data.py` merges them Stahl-first. A drug whose article is not stored yet needs `uv run
    tools/fetch/fetch_wikipedia_pharmacology.py --drug <id>` first. See CLAUDE.md Drug metabolism.
 10. `python tools/generate_data.py` — regenerate `public/data/` from all of the above.
 11. `python tools/update_readme_stats.py` — refresh the README sourcing table
@@ -284,6 +285,15 @@ Screenshots).
   deterministic). Idempotent. See CLAUDE.md Source provenance (corpora #7/#8).
 - `tools/generated_cache/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
+- `tools/sourcing/apply_cyp_sources.py` — quote-gates the judged CYP roles
+  (`cyp_judged.json`, a candidate **index** per row, never a quote string) and is the **sole
+  writer** of both `tools/generated_cache/drug_enzymes.json` (Stahl) and
+  `drug_enzymes_wikipedia.json` (corpus #9). Five gates: the drug and the index resolve; the
+  (enzyme, role, strength) triple is in the vocabulary; the quote names the isoform the row
+  claims; the quote is verbatim on the cited page under `check_data.normalize_for_match`; one
+  (enzyme, role) pair per drug per corpus, keeping the reading that carries a strength tier.
+  Stdlib, author-side (the gate needs the gitignored corpora). `--dry-run` reports, `--verbose`
+  lists every rejected row. See CLAUDE.md Drug metabolism.
 - `tools/sourcing/recheck_quotes.py` — re-verifies every emitted verified quote with a stronger model
   (Sonnet) and stamps the sourcing LLM. `build --out <dir>` writes per-page batches (page text loaded
   once per batch to minimize tokens; Allen AHBA excluded as deterministic); an LLM judges each batch
@@ -305,19 +315,20 @@ Screenshots).
   from the previous section or drug. Capped to `MAX_TRAIL` levels. A book missing from the checkout keeps
   its cached trails rather than dropping them. No LLM. `--dry-run` reports without writing. See CLAUDE.md
   Source provenance ("Where a quote sits").
-- `tools/fetch/fetch_cyp.py`: stdlib, offline. Reads Stahl's per-drug `Pharmacokinetics` block out of
-  the author-side dump, classifies each CYP line's role (`substrate`/`inhibitor`/`inducer`) + optional
-  strength, re-confirms it **verbatim** on a page in that drug's own `INDEX.md` range, and writes the
-  committed `tools/generated_cache/drug_enzymes.json` (merged in at build time, NOT authored in
-  `drugs_data.jsonl`). No LLM: the sentence shape is fixed enough to grep, so the quote gate is the
-  whole guarantee. `--dry-run` reports, `--verbose` lists dropped bullets. See CLAUDE.md Drug metabolism.
-- `tools/fetch/fetch_cyp_wikipedia.py`: stdlib, offline (reads pages corpus #9 already stored). The same
-  pass over a drug's English Wikipedia article, for the drugs Stahl has no monograph for. Reuses
-  `fetch_cyp.py`'s role/strength/victim rules by import, adds the three a long Wikipedia paragraph needs
-  (sentence split, drug-named-before-the-verb, negation veto), and writes the committed
-  `tools/generated_cache/drug_enzymes_wikipedia.json`. Stahl wins any pair both state. `--dry-run`
-  reports, `--verbose` lists dropped lines. A drug whose article URL redirects needs a `PAGE_ALIASES`
-  entry (the store names files after the *resolved* title). See CLAUDE.md Drug metabolism.
+- `tools/fetch/fetch_cyp_worklist.py`: stdlib, offline. The `drug_enzymes` worklist builder, and the
+  only pass that reads a corpus. Pulls Stahl's per-drug `Pharmacokinetics` bullets out of the
+  author-side dump and the drugbox `Metabolism` row plus every isoform-naming sentence out of the
+  stored English Wikipedia article, confirms each **verbatim** on a real page (Stahl's inside that
+  drug's own `INDEX.md` range), and writes `tools/generated_cache/cyp_worklist.json`: per drug, a
+  numbered candidate list plus the enzyme/role/strength vocabularies the judge must answer in. It
+  applies **no veto** and states no role: a negation or a sentence about another molecule is the
+  judge's to reject. `--only <ids>` scopes. See CLAUDE.md Drug metabolism.
+- `tools/fetch/fetch_cyp.py` and `tools/fetch/fetch_cyp_wikipedia.py`: **libraries, not scripts**,
+  imported by the worklist builder. Each knows how one corpus is shaped (Stahl: monograph page
+  spans, the dump's `Pharmacokinetics` answers, the isoform vocabulary, the verbatim gate that
+  shortens a bullet once when a running header or a hyphenated line break defeats it; Wikipedia:
+  which file an article lives in including redirect `PAGE_ALIASES`, the sentence split, the
+  reference-list skip, the drugbox row). Neither decides whether a sentence supports a role.
 - `tools/fetch/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See CLAUDE.md Drugs.

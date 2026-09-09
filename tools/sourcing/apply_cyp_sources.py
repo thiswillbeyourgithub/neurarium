@@ -59,7 +59,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 sys.path.insert(0, os.path.join(REPO, "tools", "fetch"))
 
-from fetch_cyp import ENZYME_RE, isoforms  # noqa: E402
+from fetch_cyp import isoforms  # noqa: E402  (one definition of the isoform vocabulary)
 
 # Reuse check_data's canonical quote-gate normalization (a single source of truth), so
 # a quote accepted here is one check_data.py accepts too.
@@ -86,28 +86,14 @@ def page_text(corpus: str, page) -> str | None:
         return normalize(f.read())
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--dry-run", action="store_true", help="report without writing")
-    ap.add_argument("--verbose", action="store_true", help="list every rejected row")
-    ap.add_argument("--judged", default=JUDGED, help="judged file to apply")
-    args = ap.parse_args()
+def apply(work: dict, judged: dict, read_page) -> tuple[dict, "collections.Counter", list]:
+    """Run the five gates over a judged file. Pure: `read_page(corpus, page)` is the only IO.
 
-    for path in PAGE_DIR.values():
-        if not os.path.isdir(path):
-            print(f"missing the author-side corpus tree ({path}); see CLAUDE.local.md",
-                  file=sys.stderr)
-            return 1
-    for path in (WORKLIST, args.judged):
-        if not os.path.exists(path):
-            print(f"missing {os.path.relpath(path, REPO)}", file=sys.stderr)
-            return 1
-
-    work = json.load(open(WORKLIST, encoding="utf-8"))
-    vocab = work["vocabulary"]
-    drugs = work["drugs"]
-    judged = json.load(open(args.judged, encoding="utf-8"))
-
+    Returns the per-corpus caches, a tally, and one line per rejected row. Split out of
+    ``main`` so the gates can be tested without the author-side corpora, which are
+    gitignored and so absent from a clone.
+    """
+    vocab, drugs = work["vocabulary"], work["drugs"]
     out: dict[str, dict[str, list[dict]]] = {c: {} for c in OUT}
     seen: dict[tuple[str, str, str, str], dict] = {}
     stats: collections.Counter = collections.Counter()
@@ -147,7 +133,7 @@ def main() -> int:
                 continue
             key = (corpus, str(page))
             if key not in pages:
-                pages[key] = page_text(corpus, page)
+                pages[key] = read_page(corpus, page)
             body = pages[key]
             if body is None:
                 reject("no stored page for the citation", label)
@@ -177,6 +163,29 @@ def main() -> int:
     for corpus in out:
         for drug_id in out[corpus]:
             out[corpus][drug_id].sort(key=lambda r: (r["enzyme"], r["role"]))
+    return out, stats, rejected
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--dry-run", action="store_true", help="report without writing")
+    ap.add_argument("--verbose", action="store_true", help="list every rejected row")
+    ap.add_argument("--judged", default=JUDGED, help="judged file to apply")
+    args = ap.parse_args()
+
+    for path in PAGE_DIR.values():
+        if not os.path.isdir(path):
+            print(f"missing the author-side corpus tree ({path}); see CLAUDE.local.md",
+                  file=sys.stderr)
+            return 1
+    for path in (WORKLIST, args.judged):
+        if not os.path.exists(path):
+            print(f"missing {os.path.relpath(path, REPO)}", file=sys.stderr)
+            return 1
+
+    work = json.load(open(WORKLIST, encoding="utf-8"))
+    judged = json.load(open(args.judged, encoding="utf-8"))
+    out, stats, rejected = apply(work, judged, page_text)
 
     for corpus, path in OUT.items():
         print(f"{os.path.basename(path)}: {len(out[corpus])} drugs, "

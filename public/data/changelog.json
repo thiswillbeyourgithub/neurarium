@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.74.0",
+      "date": "2026-09-09",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Every drug-metabolism row (which enzyme clears a drug, which enzyme the drug blocks or speeds up) is now read by a model and checked against the source page, like every other fact in the dataset. They used to be found by pattern matching, which could not tell \"is metabolized by CYP2D6\" from \"is not\", so a handful of rows said the opposite of their own source. 88 more rows, all quote-verified.",
+          "commits": [
+            "747efd5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.73.0",
       "date": "2026-09-09",
       "entries": [
