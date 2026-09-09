@@ -303,7 +303,9 @@ Screenshots).
   `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review). Each batch item
   carries the quote's `heading` (below), which is the context the "supports" half of the verdict turns on.
   Corpus -> page dir is read from `meta.source_corpora`, never restated. See CLAUDE.md
-  Source provenance ("The sourcing model"). Scope a pass with `--kinds`/`--unstamped`/`--flagged`; `apply`
+  Source provenance ("The sourcing model"). Scope a pass with `--kinds`/`--unstamped`/`--flagged`, and
+  `--max-page-chars` trims a page too long to be worth embedding whole (a stored
+  Wikipedia article) to the neighbourhoods of the quotes cited on it; `apply`
   **merges** into both caches, so a scoped pass keeps the stamps and flags it did not
   re-judge.
 - `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted quote

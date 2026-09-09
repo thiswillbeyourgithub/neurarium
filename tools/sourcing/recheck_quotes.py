@@ -55,6 +55,7 @@ import collections
 import glob
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -271,6 +272,48 @@ def _select(claims, kinds, args):
 
 
 
+def _locate(text, quote):
+    """``(start, end)`` of ``quote`` in ``text``, or ``(-1, -1)``.
+
+    Exact first, then a whitespace-tolerant match: the stored pages carry the line breaks
+    of a PDF split or a flattened article, and a quote is one sentence out of them.
+    """
+    i = text.find(quote)
+    if i >= 0:
+        return i, i + len(quote)
+    m = re.search(r"\s+".join(map(re.escape, quote.split())), text, re.I)
+    return (m.start(), m.end()) if m else (-1, -1)
+
+
+def _excerpt(text, quotes, cap):
+    """The page as the judge needs to see it: whole when small, else the neighbourhoods.
+
+    A book page is a page, and fits. A stored Wikipedia article is the WHOLE article (up
+    to 700 KB), and pasting one into a judge's context buys nothing: the verbatim half of
+    the verdict is settled offline by ``check_data.py``'s gate, and the half that is not
+    (does this sentence support the claim?) is decided by the paragraphs around the
+    sentence, not by the other forty sections.
+    """
+    if text is None or len(text) <= cap:
+        return text
+    window = max(cap // (2 * max(len(quotes), 1)), 600)
+    spans = []
+    for q in quotes:
+        a, b = _locate(text, q)
+        if a >= 0:
+            spans.append([max(0, a - window), min(len(text), b + window)])
+    if not spans:
+        return text[:cap] + "\n[... page truncated ...]"
+    spans.sort()
+    merged = [spans[0]]
+    for a, b in spans[1:]:
+        if a <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], b)
+        else:
+            merged.append([a, b])
+    return "\n[... elided ...]\n".join(text[a:b] for a, b in merged)
+
+
 def cmd_build(args):
     quotes = {q["id"]: q for q in _jsonl("quotes.jsonl")}
     claims, kinds = reconstruct_claims(quotes)
@@ -300,7 +343,9 @@ def cmd_build(args):
             if cur["items"]:
                 batches.append(cur)
             cur = {"items": [], "pages": {}}
-        cur["pages"][pref] = page_text(corpus, page)
+        cur["pages"][pref] = _excerpt(page_text(corpus, page),
+                                     [quotes[q]["quote"] for q in qidlist],
+                                     args.max_page_chars)
         for qid in qidlist:
             item = {"qid": qid, "page_ref": pref,
                     "quote": quotes[qid]["quote"], "claims": claims[qid]}
@@ -376,6 +421,8 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build", help="write per-page batch files for the LLM judge")
     b.add_argument("--out", required=True, help="output directory for batch_*.json")
+    b.add_argument("--max-page-chars", type=int, default=24000,
+                   help="embed only the quotes' neighbourhoods on a page longer than this")
     b.add_argument("--kinds", default="",
                    help="comma-separated node kinds to judge (default: every kind)")
     b.add_argument("--unstamped", action="store_true",
