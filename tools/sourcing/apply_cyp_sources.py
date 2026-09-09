@@ -86,7 +86,7 @@ def page_text(corpus: str, page) -> str | None:
         return normalize(f.read())
 
 
-def apply(work: dict, judged: dict, read_page) -> tuple[dict, "collections.Counter", list]:
+def apply(work: dict, judged: dict, read_page, llm: str = "opus") -> tuple[dict, "collections.Counter", list]:
     """Run the five gates over a judged file. Pure: `read_page(corpus, page)` is the only IO.
 
     Returns the per-corpus caches, a tally, and one line per rejected row. Split out of
@@ -144,8 +144,10 @@ def apply(work: dict, judged: dict, read_page) -> tuple[dict, "collections.Count
             rec = {"enzyme": enzyme, "role": role}
             if strength:
                 rec["strength"] = strength
+            # Stamp the model that read the candidate list, so a reader can weigh the
+            # quote against what that model can do (see provenance.SOURCING_LLMS).
             rec["sources"] = [{"corpus": corpus, "page": page, "quote": quote,
-                               "provenance": "verified"}]
+                               "provenance": "verified", "llm": llm}]
             dedup = (corpus, drug_id, enzyme, role)
             kept = seen.get(dedup)
             if kept is not None:
@@ -171,6 +173,8 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true", help="report without writing")
     ap.add_argument("--verbose", action="store_true", help="list every rejected row")
     ap.add_argument("--judged", default=JUDGED, help="judged file to apply")
+    ap.add_argument("--llm", default="opus", choices=("haiku", "sonnet", "opus"),
+                    help="the model that judged this file (stamped on every quote)")
     args = ap.parse_args()
 
     for path in PAGE_DIR.values():
@@ -185,7 +189,7 @@ def main() -> int:
 
     work = json.load(open(WORKLIST, encoding="utf-8"))
     judged = json.load(open(args.judged, encoding="utf-8"))
-    out, stats, rejected = apply(work, judged, page_text)
+    out, stats, rejected = apply(work, judged, page_text, args.llm)
 
     for corpus, path in OUT.items():
         print(f"{os.path.basename(path)}: {len(out[corpus])} drugs, "

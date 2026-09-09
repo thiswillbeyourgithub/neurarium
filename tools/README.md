@@ -293,7 +293,8 @@ Screenshots).
   claims; the quote is verbatim on the cited page under `check_data.normalize_for_match`; one
   (enzyme, role) pair per drug per corpus, keeping the reading that carries a strength tier.
   Stdlib, author-side (the gate needs the gitignored corpora). `--dry-run` reports, `--verbose`
-  lists every rejected row. See CLAUDE.md Drug metabolism.
+  lists every rejected row. See CLAUDE.md Drug metabolism. Every source it writes is stamped `llm` with the model that
+  judged the file (`--llm`, default `opus`).
 - `tools/sourcing/recheck_quotes.py` — re-verifies every emitted verified quote with a stronger model
   (Sonnet) and stamps the sourcing LLM. `build --out <dir>` writes per-page batches (page text loaded
   once per batch to minimize tokens; Allen AHBA excluded as deterministic); an LLM judges each batch
