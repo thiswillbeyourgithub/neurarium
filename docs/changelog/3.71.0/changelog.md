@@ -1,0 +1,6 @@
+# 3.71.0 (2026-09-09)
+
+## Added
+
+- The **Metabolism** section now flags a drug that changes its own clearance, on its own. When a drug is listed both as a substrate and as an inhibitor (or inducer) of the same liver enzyme, it slows down (or speeds up) the very route that eliminates it, so its blood levels do not follow the dose in a straight line. The panel now says so on the roughly twenty-five drugs where that pattern shows, sertraline, fluvoxamine and modafinil among them. It is a reading of the enzyme rows just below, not a claim any source makes, and the note says as much; where a source does state the mechanism, the sourced annotation is shown instead. (7fbc442)
+  fr: La section **Métabolisme** signale désormais d'elle-même un médicament qui modifie sa propre élimination. Quand un médicament figure à la fois comme substrat et comme inhibiteur (ou inducteur) d'une même enzyme hépatique, il ralentit (ou accélère) la voie qui l'élimine, si bien que ses concentrations sanguines ne suivent pas la dose en ligne droite. Le panneau l'indique maintenant sur la vingtaine de médicaments concernés, dont la sertraline, la fluvoxamine et le modafinil. C'est une lecture des lignes d'enzymes juste en dessous, et non une affirmation d'une source : la note le dit. Là où une source énonce le mécanisme, c'est la note sourcée qui s'affiche.
