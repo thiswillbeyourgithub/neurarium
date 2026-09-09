@@ -223,6 +223,7 @@ from data_generators.quotes import (  # noqa: E402
 )
 from data_generators.quotes.uncertainty import (  # noqa: E402
     apply_binding_uncertainty,
+    apply_enzyme_uncertainty,
     apply_projection_uncertainty,
 )
 
@@ -1586,6 +1587,10 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # bullets look across bindings (how many monographs print the same sentence, and how
     # many subtypes one sentence covers). See the module.
     apply_binding_uncertainty(drugs)
+    # The same badge over the metabolism rows, from a hand-written table rather than a
+    # derivation (see quotes/contradictions.py): a corpus denying what another states is
+    # the one doubt this dataset cannot resolve, so both ship and the row says so.
+    apply_enzyme_uncertainty(drugs)
     # A hand-curated formed_by row whose (drug, metabolite) key matched nothing: the
     # metabolite was renamed or dropped by an applier re-run, so the node silently
     # vanished. Raise rather than publish a quieter dataset than the author wrote.

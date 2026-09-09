@@ -880,10 +880,10 @@ corpus does not say this". No prose is stored: the sentence comes from an `uncer
 a new kind means a new string in **both** catalogues. Forgetting a source raises at generation
 (`_uncertainty_bullet`) and errors in `check_data.py` family 5, which also gates each bullet quote
 verbatim and stands its subject-less-quote guard down for a binding that declares uncertainty (the two
-answer the same problem). **Nothing is authored per site**: `apply_binding_uncertainty` /
-`apply_projection_uncertainty` *derive* both the flags and the bullets from the emitted data, so a data
-edit cannot leave a stale flag behind and a new drug or arrow is covered the day it lands. Three flags
-today, and a node hit by any is uncertain:
+answer the same problem). **The three flags about a quote's REACH are derived, never authored per
+site**: `apply_binding_uncertainty` / `apply_projection_uncertainty` compute both the flags and the
+bullets from the emitted data, so a data edit cannot leave a stale flag behind and a new drug or arrow
+is covered the day it lands. Four flags today, and a node hit by any is uncertain:
 - **the subject-less side-effect rule** (89 bindings): the quote's heading trail ends in Stahl's *How Drug
   Causes Side Effects* and the sentence does not attribute the action to the drug (`_attributes_to_drug`:
   it neither names it, nor uses a pronoun subject, nor elides the subject in Stahl's telegraphic style).
@@ -897,7 +897,18 @@ today, and a node hit by any is uncertain:
   so one sentence sources several arrows out of one nucleus while naming none of their targets: which
   regions the sweep is drawn to is our reading. Same `>= 2 siblings, none named` construction, over
   regions; a target the sentence *does* name (raphe -> thalamus) keeps its green check.
-Both run as a post-pass (not `_binding_record` / `_projection_records`) because the bullets look across
+- **the contradicted claim** (`contradicted`, 3 `drug_enzymes` rows): the odd one out, and the only
+  flag about a quote's *truth* rather than its reach. Two quote-gated corpora say opposite things
+  (Stahl's bare "Inhibits CYP3A4" vs the article's "in vivo ... do not significantly affect ...
+  CYP3A4", the recurring in-vitro-vs-in-vivo split), so both ship and the row carries the denial in
+  its tooltip: picking a winner would assert a judgement neither corpus makes. Its bullet is the only
+  one citing an OUTSIDE source (`source: "given"`), and it is **hand-curated** in
+  `tools/data_generators/quotes/contradictions.py`, because the same scan derived returns 50% false
+  positives (a caveat scoped to two named substrates, an exception clause reading as a negation), and
+  a flag that encodes its own errors as doubt is worse than the silence it replaces.
+  `apply_enzyme_uncertainty` raises when an entry names no emitted row, so a fetcher re-run cannot
+  drop the doubted claim and leave the contradiction marking nothing.
+The first three run as a post-pass (not `_binding_record` / `_projection_records`) because the bullets look across
 siblings: `class_wide` counts the drugs the same sentence is printed on, `family_claim` the subtypes one
 sentence covers, `blanket_claim` the arrows.
 

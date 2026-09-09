@@ -864,7 +864,9 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # drug's receptor bindings: it is what the derived drug -> drug interaction edges
     # in the viewer are built from, so it earns its own kind rather than riding along
     # with the class or half-life node.
-    enzyme_grades = [_strongest_grade(e.get("sources"))
+    # A (grade, is_uncertain) pair like a binding's: a row another corpus denies buckets
+    # as ``uncertain`` however strong its own quote is (quotes/contradictions.py).
+    enzyme_grades = [(_strongest_grade(e.get("sources")), bool(e.get("uncertainty")))
                      for d in drugs for e in d.get("enzymes", [])]
     # Active-metabolite identity nodes ("<name> is an active metabolite of <drug>"),
     # one per authored metabolite across all drugs, graded by that metabolite's own

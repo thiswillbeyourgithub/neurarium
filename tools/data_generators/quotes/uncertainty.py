@@ -126,6 +126,11 @@ UNCERTAINTY_REASONS: dict[str, dict[str, Any]] = {
     # their targets." The projection twin of family_claim (see shape 3 in the module
     # docstring).
     "blanket_claim": {"source": "own_quote", "absence": False, "args": ("n",)},
+    # "Another corpus denies this claim outright." The only kind whose evidence is NOT
+    # the doubted node's own quote: it cites the DENYING sentence, handed in by the
+    # caller (source mode "given"), so the reader gets both sides in one tooltip. Hand
+    # -curated in quotes/contradictions.py, unlike the derived kinds above.
+    "contradicted": {"source": "given", "absence": False, "args": ()},
 }
 
 
@@ -258,7 +263,10 @@ def _uncertainty_bullet(kind: str, *, what: str, node: dict[str, Any] | None = N
     if spec["absence"]:
         out["absence"] = True
         return out
-    if spec["source"] == "own_quote":
+    if spec["source"] in ("own_quote", "given"):
+        # Both take the caller's source; they differ in WHAT it is, which is the point
+        # worth spelling out: "own_quote" re-cites the sentence being doubted, "given"
+        # cites the outside sentence that does the doubting.
         src = source
     elif spec["source"] == "ki":
         src = ((node or {}).get("ki") or {}).get("source")
@@ -477,3 +485,33 @@ def apply_projection_uncertainty(projections: list[dict[str, Any]],
         p["uncertainty"] = [_uncertainty_bullet(
             "blanket_claim", what=what, node=p, source=group[1],
             args={"n": group[0]})]
+
+
+def apply_enzyme_uncertainty(drugs: list[dict[str, Any]]) -> None:
+    """Flag every metabolism row another corpus denies, in place.
+
+    The odd one out among the appliers here: the other three *derive* their flags by
+    looking across siblings, while this one reads a hand-written table
+    (``quotes/contradictions.py``), because the derivation's false-positive rate makes it
+    worse than silence. See that module for the three near misses that decided it.
+
+    Raises when a table key names no emitted row, so a re-run of either CYP fetcher
+    cannot quietly drop the doubted claim and leave the contradiction unrecorded.
+    """
+    from .contradictions import ENZYME_CONTRADICTIONS
+
+    rows = {(d["id"], e["enzyme"], e["role"]): e
+            for d in drugs for e in d.get("enzymes", []) or []}
+    for key, source in ENZYME_CONTRADICTIONS.items():
+        row = rows.get(key)
+        if row is None:
+            did, enzyme, role = key
+            raise KeyError(
+                f"ENZYME_CONTRADICTIONS names {enzyme} / {role} on drug {did!r}, which "
+                f"has no such enzyme row. Either the claim it contradicts is gone (drop "
+                f"the entry) or a fetcher stopped emitting it (fix that first): a "
+                f"contradiction with nothing to contradict marks nothing.")
+        did, enzyme, role = key
+        row["uncertainty"] = [_uncertainty_bullet(
+            "contradicted", what=f"Drug {did!r} enzyme {enzyme} ({role})",
+            node=row, source=source)]

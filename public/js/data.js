@@ -592,6 +592,18 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // resolved: the tooltip then simply shows no breadcrumb.
       heading: s.heading || null,
     }));
+  // Reasons the quote does not settle the claim (the orange "uncertain" badge; derived
+  // or curated in tools/data_generators/quotes/). Each bullet is a reason `kind` + slot
+  // `args` + its own source, or `absence` when the point IS that the corpus never says
+  // it; the sentence itself is an i18n string, so nothing here is stored prose. Always
+  // an array, so a panel can test `.length` with no guard.
+  const mapUncertainty = (list) =>
+    (list || []).map((u) => ({
+      kind: u.kind,
+      args: u.args || {},
+      absence: !!u.absence,
+      sources: mapSources(u.sources),
+    }));
   // A binding's measured PDSP Ki -> the display object the drug panel renders beside
   // the binding (value + range + human/non-human counts, its own verified badge, and
   // the exact representative assay for the tooltip). `mapped` flags a value borrowed
@@ -658,16 +670,9 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         ...(b.ki && b.ki.source ? [b.ki.source] : []),
       ]),
       // Reasons this claim's source does not attribute it (the orange "uncertain"
-      // badge, derived in tools/data_generators/quotes/uncertainty.py). Each bullet
-      // is a reason `kind` + slot `args` + its own source, or `absence` when the
-      // point IS that the corpus never says it; the sentence itself is an i18n
-      // string, so nothing here is prose. Empty for all but the flagged bindings.
-      uncertainty: (b.uncertainty || []).map((u) => ({
-        kind: u.kind,
-        args: u.args || {},
-        absence: !!u.absence,
-        sources: mapSources(u.sources),
-      })),
+      // badge, derived in tools/data_generators/quotes/uncertainty.py). Empty for all
+      // but the flagged bindings. See mapUncertainty.
+      uncertainty: mapUncertainty(b.uncertainty),
       ki: resolveKi(b.ki),
     };
   };
@@ -728,8 +733,12 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         direction: role.direction || 0,
         strengthLabel: enzymeStrengths[e.strength]
           ? localize(enzymeStrengths[e.strength]) : null,
-        sources: mapSources(e.sources),
+          sources: mapSources(e.sources),
         provenance: strongestGrade(e.sources),
+        // Another corpus denies this row (quotes/contradictions.py): the pill goes
+        // orange and its tooltip leads with the denial, then shows this row's own
+        // quote. Empty for all but the handful of contradicted rows.
+        uncertainty: mapUncertainty(e.uncertainty),
       };
     });
     // Derived, never stored (like pkInteractionsOf below): the isoforms this drug

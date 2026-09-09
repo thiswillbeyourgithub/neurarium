@@ -2362,20 +2362,21 @@ function createInfoPanel(data, sourcingModal) {
   const sourceBackedPill = (grade, node) => {
     const doubt = node && node.uncertainty && node.uncertainty.length
       ? node.uncertainty : null;
+    // A doubted node reads orange whatever its own quote scored: `uncertain` is a
+    // DISPLAY grade taken by any node carrying bullets (see quotes/uncertainty.py), so
+    // it is decided here rather than at each call site, which cannot forget it. The
+    // node keeps its own source in the tooltip, under the reasons to doubt it: same
+    // evidence, honestly framed.
+    const shown = doubt ? "uncertain" : grade;
     const sources = node && node.sources;
     if (sources && sources.length)
-      return makeProvenancePill(grade, withUncertainty(doubt, sourcesTip(sources)));
+      return makeProvenancePill(shown, withUncertainty(doubt, sourcesTip(sources)));
     if (node && node.ki)
-      return makeProvenancePill(grade,
+      return makeProvenancePill(shown,
         withUncertainty(doubt, kiCorpusRefNode(node.ki, { dash: true })));
-    return makeProvenancePill(grade, withUncertainty(doubt, null));
+    return makeProvenancePill(shown, withUncertainty(doubt, null));
   };
-  const bindingProvenancePill = (binding) => {
-    // A flagged binding keeps its own source in the tooltip, under the reasons to
-    // doubt it: same evidence, honestly framed. See uncertaintyTip.
-    const doubt = binding.uncertainty && binding.uncertainty.length;
-    return sourceBackedPill(doubt ? "uncertain" : binding.provenance, binding);
-  };
+  const bindingProvenancePill = (binding) => sourceBackedPill(binding.provenance, binding);
 
   // --- Addon nodes: the panel-slot annotation kind ------------------------------
   // Every other node kind has an implied home (a binding belongs in "Acts on", an
@@ -2949,9 +2950,10 @@ function createInfoPanel(data, sourcingModal) {
       text.appendChild(el("span", "bind-action", ` ${parts.join(" · ")}`));
     }
     li.appendChild(text);
-    li.appendChild(row.sources && row.sources.length
-      ? makeProvenancePill(row.provenance, sourcesTip(row.sources))
-      : makeProvenancePill(row.provenance || null));
+    // Through the shared node pill, so a metabolism row badges like every other node:
+    // its quote in the tooltip, and the orange "another corpus denies this" lead when
+    // the row carries one (quotes/contradictions.py).
+    li.appendChild(sourceBackedPill(row.provenance || null, row));
     if (onClick) {
       li.classList.add("clickable");
       li.addEventListener("click", onClick);

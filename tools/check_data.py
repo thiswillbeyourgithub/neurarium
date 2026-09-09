@@ -1226,6 +1226,9 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
         for e in drug.get("enzymes", []) or []:
             for i, src in enumerate(e.get("sources", []) or []):
                 check_one(f"drug {did} enzyme {e.get('enzyme')} sources[{i}]", src)
+            # The denial quote of a contradicted row is gated exactly like the claim it
+            # doubts: both sides of a corpus disagreement earn their grade the same way.
+            check_uncertainty(f"drug {did} enzyme {e.get('enzyme')} ({e.get('role')})", e)
         for m in drug.get("metabolites", []) or []:
             mid = f"drug {did} metabolite {m.get('name')}"
             for i, src in enumerate(m.get("sources", []) or []):

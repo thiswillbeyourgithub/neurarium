@@ -224,7 +224,9 @@ Screenshots).
   corpus: `kandel.py` = `PROJECTION_QUOTES` + `STRUCTURE_QUOTES` (Kandel/Nieuwenhuys anatomy, cites the
   connectivity `_KQ_*`); `stahl_essential.py` = `STAHL_ESSENTIAL_RECEPTOR_QUOTES`/`STAHL_ESSENTIAL_TARGET_QUOTES`/
   `RECEPTOR_ATTR_QUOTES`/`RECEPTOR_CLASSIFICATION_COVERAGE`/`CLASSIFICATION_ATTRS`/`TARGET_POLARITY_QUOTES`;
-  `metabolism.py` = `METABOLITE_ENZYME_QUOTES`; `uncertainty.py` = the mirror image of the others
+  `metabolism.py` = `METABOLITE_ENZYME_QUOTES`; `contradictions.py` = `ENZYME_CONTRADICTIONS`, the
+  hand-curated table of metabolism rows another corpus DENIES (the `contradicted` badge, mostly the
+  in-vitro-vs-in-vivo split; read by `apply_enzyme_uncertainty`); `uncertainty.py` = the mirror image of the others
   (`UNCERTAINTY_REASONS` + `apply_binding_uncertainty`: why a quote-checked claim still deserves doubt.
   Alone among these, it authors **nothing**: both flags and bullets are derived from the emitted data,
   reading each quote's heading trail through `quote_table.heading_of`);

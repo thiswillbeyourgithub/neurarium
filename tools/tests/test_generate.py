@@ -679,5 +679,61 @@ class AddonTest(unittest.TestCase):
                          c["total"])
 
 
+class EnzymeContradictionTest(unittest.TestCase):
+    """The ``contradicted`` badge (tools/data_generators/quotes/contradictions.py):
+    a metabolism row another corpus denies.
+
+    Unlike the three derived uncertainty flags, this table is hand-written, so its
+    failure mode is a *stale* entry: a fetcher re-run drops the row the entry doubts
+    and the contradiction silently marks nothing. The applier raises instead, and
+    these tests hold it to that, plus the tally contract (a flagged row buckets as
+    uncertain however strong its own quote is)."""
+
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(REPO_ROOT / "tools"))
+        from data_generators.quotes import contradictions, uncertainty
+        cls.table = contradictions.ENZYME_CONTRADICTIONS
+        cls.apply = staticmethod(uncertainty.apply_enzyme_uncertainty)
+        cls.drugs = _load_jsonl(DATA_DIR / "drugs.jsonl")
+        cls.meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+
+    def _rows(self):
+        return {(d["id"], e["enzyme"], e["role"]): e
+                for d in self.drugs for e in d.get("enzymes", []) or []}
+
+    def test_every_curated_contradiction_lands_on_an_emitted_row(self):
+        rows = self._rows()
+        self.assertTrue(self.table, "no contradictions curated at all")
+        for key in self.table:
+            self.assertIn(key, rows, f"{key} names no emitted enzyme row")
+            self.assertTrue(rows[key].get("uncertainty"),
+                            f"{key} is curated but its row carries no badge")
+
+    def test_the_badge_cites_the_denial_not_the_claim(self):
+        rows = self._rows()
+        quotes = {q["id"]: q for q in _load_jsonl(DATA_DIR / "quotes.jsonl")}
+        for key, source in self.table.items():
+            bullets = rows[key]["uncertainty"]
+            self.assertEqual([b["kind"] for b in bullets], ["contradicted"])
+            cited = [quotes[s["quote_id"]]["quote"] for s in bullets[0]["sources"]]
+            self.assertEqual(cited, [source["quote"]],
+                             f"{key} bullet does not cite the denying sentence")
+
+    def test_a_contradiction_with_nothing_to_contradict_raises(self):
+        with self.assertRaises(KeyError):
+            self.apply([{"id": "fluoxetine", "enzymes": []}])
+
+    def test_a_flagged_row_buckets_as_uncertain(self):
+        c = self.meta["provenance_stats"]["by_kind"]["drug_enzymes"]
+        flagged = sum(1 for d in self.drugs for e in d.get("enzymes", []) or []
+                      if e.get("uncertainty"))
+        self.assertEqual(c["uncertain"], flagged)
+        self.assertEqual(flagged, len(self.table))
+
+    def test_the_reason_kind_is_in_the_emitted_vocabulary(self):
+        self.assertIn("contradicted", self.meta["uncertainty_reasons"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
