@@ -336,6 +336,8 @@ class UncertaintyBulletTest(unittest.TestCase):
 
     META = {"source_corpora": {"stahl": {"ref": "Stahl"},
                                "pdsp_ki": {"ref": "PDSP", "csv": "x.csv"}},
+            "quote_pipelines": {"page_llm_judged": ["raw", "extract_llm",
+                                                    "judge_llm", "neurarium"]},
             "uncertainty_reasons": {"side_effect_rule": {}, "not_a_mechanism": {}}}
     # A subject-less side-effect rule: verbatim on the page, and it attributes
     # nothing. This is the shape the badge exists for.
@@ -353,7 +355,8 @@ class UncertaintyBulletTest(unittest.TestCase):
     def _binding(self, uncertainty, quote="a plain attributed sentence"):
         return {"target": "alpha1a", "uncertainty": uncertainty,
                 "sources": [{"corpus": "stahl", "page": 40, "quote": quote,
-                             "provenance": "verified"}]}
+                             "provenance": "verified",
+                             "pipeline": "page_llm_judged"}]}
 
     def test_a_sourceless_bullet_must_declare_absence(self):
         self.assertEqual(self._errors(self._binding(
@@ -365,7 +368,8 @@ class UncertaintyBulletTest(unittest.TestCase):
         """Contradictory: the pill would read NOSOURCE over a real citation."""
         self.assertEqual(self._errors(self._binding(
             [{"kind": "not_a_mechanism", "absence": True,
-              "sources": [{"corpus": "stahl", "page": 40, "quote": "x"}]}])), 1)
+              "sources": [{"corpus": "stahl", "page": 40, "quote": "x",
+                       "pipeline": "page_llm_judged"}]}])), 1)
 
     def test_kind_must_be_in_the_shipped_vocabulary(self):
         self.assertEqual(self._errors(self._binding(
@@ -405,7 +409,8 @@ class UncertaintyBulletTest(unittest.TestCase):
             report = check_data.Report()
             proj = {"from": "raphe", "to": "caudate_R", "uncertainty": uncertainty,
                     "sources": [{"corpus": "stahl", "page": 40, "quote": "x",
-                                 "provenance": "verified"}]}
+                                 "provenance": "verified",
+                                 "pipeline": "page_llm_judged"}]}
             with redirect_stdout(io.StringIO()):
                 check_data.check_sources(report, self.META, [], [proj], [], [], [])
             return report.errors
@@ -479,6 +484,58 @@ class InnervationCoverageTest(unittest.TestCase):
             [])
         self.assertTrue(any("no projection kind at all" in w and "melatonergic" in w
                             for w in warns))
+
+
+class UnjudgedQuoteGateTest(unittest.TestCase):
+    """No LLM-picked quote ships unjudged.
+
+    A sentence a model *chose* out of prose is the one that can be chosen wrongly
+    (right page, wrong claim), so it is not backed until a second model agreed it
+    supports the claim. The gate reads the rule OFF `meta.quote_pipelines` rather
+    than off a list of key names, so a new pipeline is covered the day it lands;
+    these tests pin both halves of that reading.
+    """
+
+    META = {
+        "source_corpora": {"stahl": {"ref": "Stahl"}},
+        "quote_pipelines": {
+            "page_llm": ["raw", "extract_llm", "neurarium"],
+            "page_llm_judged": ["raw", "extract_llm", "judge_llm", "neurarium"],
+            "page_code": ["raw", "code", "neurarium"],
+        },
+    }
+
+    def _run(self, pipeline):
+        drug = {"id": "clozapine", "name": "Clozapine", "bindings": [{
+            "target": "5ht2a",
+            "sources": [{"corpus": "stahl", "page": 1, "quote": "x",
+                         "provenance": "verified", "pipeline": pipeline}],
+        }]}
+        report = check_data.Report()
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            check_data.check_sources(report, self.META, [drug], [], [], [], [])
+        return report, buf.getvalue()
+
+    def test_an_extracted_but_unjudged_quote_fails(self):
+        report, out = self._run("page_llm")
+        self.assertTrue(report.errors)
+        self.assertIn("never judged", out)
+
+    def test_a_judged_quote_passes(self):
+        report, out = self._run("page_llm_judged")
+        self.assertIn("every LLM-picked quote was judged", out)
+
+    def test_a_code_grepped_quote_needs_no_judge(self):
+        # A quote copied out of a table cannot be chosen wrongly, so the rule reads
+        # it as clean: the chain has no extract_llm step to doubt.
+        _report, out = self._run("page_code")
+        self.assertIn("every LLM-picked quote was judged", out)
+
+    def test_a_pipeline_meta_cannot_render_fails(self):
+        report, out = self._run("page_invented")
+        self.assertTrue(report.errors)
+        self.assertIn("not in meta.quote_pipelines", out)
 
 
 class CorpusUrlTest(unittest.TestCase):

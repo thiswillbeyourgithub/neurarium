@@ -1099,6 +1099,15 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
     reason_kinds = set(meta.get("uncertainty_reasons", {}))
     before = report.errors
 
+    # pipeline key -> its chain of custody (see provenance.QUOTE_PIPELINES). The rule
+    # below is read OFF the chains rather than restated as a list of key names: a
+    # pipeline in which a model chose the sentence but no model ever judged it is the
+    # violation, whatever it ends up being called.
+    pipelines = meta.get("quote_pipelines", {})
+    unjudged_pipelines = {k for k, steps in pipelines.items()
+                          if "extract_llm" in steps and "judge_llm" not in steps}
+    unjudged = []
+
     page_cache = {}            # (corpus, page) -> normalized page text or None
     skipped_corpora = set()
     n_checked = 0
@@ -1135,6 +1144,18 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
             report.error(f"{ctx}: 'verified' source missing a page or quote "
                          f"(verified is the quote-checked grade)")
             return
+        if quote:
+            # NO LLM-PICKED QUOTE SHIPS UNJUDGED. A sentence a model chose out of prose
+            # is the one that can be chosen wrongly (right page, wrong claim), so it
+            # does not count as backed until a second model, which never saw the first
+            # one's reasoning, agreed it supports the claim. A quote code copied out of
+            # a table has no such failure mode and needs no judge. See CLAUDE.md "The
+            # sourcing model" and tools/sourcing/recheck_quotes.py.
+            if src.get("pipeline") not in pipelines:
+                report.error(f"{ctx}: pipeline {src.get('pipeline')!r} is not in "
+                             f"meta.quote_pipelines (chain of custody unrenderable)")
+            elif src["pipeline"] in unjudged_pipelines:
+                unjudged.append(ctx)
         if not quote or page is None:
             return  # weaker grade with no quote to check
         entry = corpora.get(corpus) or {}
@@ -1450,6 +1471,13 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
     if report.errors == ki_before:
         report.ok(f"every checkable Ki annotation ({n_ki}) cites a real CSV row"
                   if n_ki else "no Ki annotations to verify yet")
+
+    if unjudged:
+        report.error(f"{len(unjudged)} LLM-picked quote citation(s) were never judged "
+                     f"by a second model (pipeline {sorted(unjudged_pipelines)}); run "
+                     f"tools/sourcing/recheck_quotes.py, e.g. {unjudged[:2]}")
+    else:
+        report.ok("every LLM-picked quote was judged by a second model")
 
 
 # --------------------------------------------------------------------------- #
