@@ -42,6 +42,79 @@ DEFAULT_PROVENANCE = "llm"
 # reads as "unknown" until a recheck stamps it. Any new sourcing/recheck pass MUST set it.
 SOURCING_LLMS: tuple[str, ...] = ("haiku", "sonnet", "opus")
 
+# How a quote came to be on the page it is cited from, and what checked it on the way.
+# The grade above says how well a claim is backed; this says by what *mechanism*, which
+# is a different question with a different failure mode: a green pill earned by a model
+# reading a book is not the same evidence as one earned by a parser copying a table cell,
+# and a reader deserves to be told which they are looking at.
+#
+# Only ONE bit of this is authored, because only one bit is unrecoverable: who found the
+# sentence. ``EXTRACTIONS`` is that bit, stamped by the pass that wrote the source.
+# Everything else the emitted data already knows: the verbatim gate runs over every paged
+# corpus, and the ``llm`` stamp says whether a second model judged the quote. So the
+# chain is *derived* (see :func:`quote_pipeline`), never a second thing to keep in step.
+EXTRACTIONS: tuple[str, ...] = ("code", "llm")
+DEFAULT_EXTRACTION = "llm"
+
+# pipeline key -> its chain of custody, as ordered step keys. Emitted whole into
+# ``meta.quote_pipelines`` and rendered by the viewer at the bottom of every source
+# tooltip, so a new pipeline is one entry plus its translations and never a viewer edit.
+# The step keys are i18n keys (``quotechain.<step>``), like every other emitted vocabulary.
+QUOTE_PIPELINES: dict[str, tuple[str, ...]] = {
+    # A parser copied the value out of a machine-readable store (a CSV row, an API
+    # response, a wiki table cell) and code confirmed the copy against the stored page.
+    "machine": ("raw_data", "extract_code", "gate", "neurarium"),
+    # As above, but a model then decided WHICH claim the copied line backs (GtoPdb's
+    # tissue comments, corpus #7: confirm-only, it can never add or drop a region).
+    "machine_judged": ("raw_data", "extract_code", "gate", "judge_llm", "neurarium"),
+    # Code read a labelled line off a page of prose (Stahl prints "Brands: ..." and
+    # "Neuroscience-based Nomenclature: ..." in a fixed shape), so no model chose the
+    # sentence even though the corpus is a book.
+    "page_code": ("page", "extract_code", "gate", "neurarium"),
+    "page_code_judged": ("page", "extract_code", "gate", "judge_llm", "neurarium"),
+    # The four-step pipeline: a model reads the page and proposes a sentence, code
+    # confirms the sentence is verbatim on that page, and a second model that has never
+    # seen the first one's reasoning judges whether it really supports the claim.
+    "page_llm_judged": ("page", "extract_llm", "gate", "judge_llm", "neurarium"),
+    # The same, with the judging step still missing. This is a state to fix, not a tier
+    # to ship: ``check_data.py`` fails on it (see CLAUDE.md "The sourcing model").
+    "page_llm": ("page", "extract_llm", "gate", "neurarium"),
+}
+
+# The pipelines whose quote a model chose. These are the ones the judging rule binds:
+# a sentence a model picked out of prose is the one that can be picked wrongly.
+LLM_PICKED_PIPELINES = ("page_llm", "page_llm_judged")
+
+
+def quote_extraction(corpus: str, stated: str | None = None) -> str:
+    """Who found a quote from ``corpus``, unless the pass that wrote it stated otherwise.
+
+    A ``machine`` corpus has no prose to read: every quote from it is a record line a
+    parser copied out of a CSV, an API response or a wiki table, so the corpus answers
+    for its own quotes and no authoring site has to remember to. Everywhere else the
+    honest default is that a model read the page and chose the sentence.
+    """
+    if stated:
+        return stated
+    return "code" if SOURCE_CORPORA.get(corpus, {}).get("machine") else DEFAULT_EXTRACTION
+
+
+def quote_pipeline(corpus: str, extraction: str, llm: str | None) -> str:
+    """The pipeline key for one citation: where it came from, who found it, who judged it.
+
+    Three bits, and none of them is a second thing to keep in step with the data: the
+    corpus says whether there was a page to read at all, ``extraction`` is stamped by the
+    pass that wrote the source (see :func:`quote_extraction`), and ``llm`` is the sourcing
+    stamp, which exists exactly when a second model judged the quote.
+    """
+    if extraction == "code":
+        key = "machine" if SOURCE_CORPORA.get(corpus, {}).get("machine") else "page_code"
+    else:
+        key = "page_llm"
+    return f"{key}_judged" if llm else key
+
+
+
 # Per-link provenance overrides for the *wikipedia* references (which are bare URL
 # strings, not ``{citation, url}`` objects, so they have nowhere inline to carry a
 # grade). Keyed by the owner's id: a structure *base* id, a receptor id, a
@@ -418,6 +491,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "guidetopharmacology.org.",
         "url": "https://www.guidetopharmacology.org/",
         "pages_dir": "data_sources/gtopdb/pages",
+        "machine": True,
     },
     "pdsp_ki": {
         # Binding-affinity corpus: measured Ki (nM) values backing a drug binding's
@@ -432,6 +506,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "Chapel Hill.",
         "url": "https://pdspdb.unc.edu/databases/kidb.php",
         "csv": "data_sources/books/pdsp_ki/KiDatabase.csv",
+        "machine": True,
     },
     "allen_ahba": {
         # Expression corpus: the Allen Human Brain Atlas microarray, backing a
@@ -451,6 +526,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "human.brain-map.org.",
         "url": "https://human.brain-map.org/",
         "pages_dir": "data_sources/allen/pages",
+        "machine": True,
     },
     "wikipedia_pharm": {
         # Corpus #9: a drug's English Wikipedia article, stored whole (article text +
@@ -511,6 +587,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "guidetopharmacology.org (CC BY-SA 4.0 / ODbL).",
         "url": "https://www.guidetopharmacology.org/",
         "pages_dir": "data_sources/gtopdb/pages_ki",
+        "machine": True,
     },
     "gtopdb_class": {
         # Classification corpus #12: GtoPdb's third slice (after #7 tissue distribution
@@ -534,6 +611,7 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
                     "guidetopharmacology.org (CC BY-SA 4.0 / ODbL).",
         "url": "https://www.guidetopharmacology.org/",
         "pages_dir": "data_sources/gtopdb/pages_class",
+        "machine": True,
     },
 }
 
@@ -581,6 +659,18 @@ def _quote_sources(sources: Any, what: str) -> list[dict[str, Any]]:
                     f"{what} cites unknown sourcing llm {s['llm']!r} "
                     f"(not one of {SOURCING_LLMS})")
             rec["llm"] = s["llm"]
+        # How the quote was found, when the pass that wrote the source says so (a drug's
+        # North-American brands are grepped off Stahl's Brands line, its French ones
+        # proposed by a model reading French prose). Left absent, the corpus answers for
+        # it at emit time (see :func:`quote_extraction`); carried, never resolved here,
+        # because plenty of sources reach the quote table without passing through this
+        # function at all (a Ki annotation, a GtoPdb classification fact).
+        if s.get("extraction"):
+            rec["extraction"] = s["extraction"]
+        if rec.get("extraction", DEFAULT_EXTRACTION) not in EXTRACTIONS:
+            raise ValueError(f"{what} cites unknown extraction "
+                             f"{rec['extraction']!r} (not one of {EXTRACTIONS})")
+
         if prov == "verified" and not (rec.get("page") is not None and rec.get("quote")):
             raise ValueError(
                 f"{what} has a 'verified' source without a page + quote (verified "
@@ -716,6 +806,11 @@ def _ki_annotation(drug_id: str, binding: dict[str, Any]) -> dict[str, Any] | No
               "page", "quote"):
         if src.get(f) not in (None, ""):
             out_src[f] = src[f]
+    # A measured affinity is never read out of prose: both flavours are a parser copying
+    # one machine-readable row (a PDSP CSV line, a wiki affinity table cell), so a Ki
+    # quote's chain of custody carries no model even when its corpus otherwise does.
+    if out_src.get("quote"):
+        out_src["extraction"] = "code"
     out = {
         "median": ki["median"], "min": ki["min"], "max": ki["max"],
         "n_human": int(ki.get("n_human", 0)),

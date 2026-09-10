@@ -24,6 +24,8 @@ import json
 import os
 from typing import Any
 
+from .provenance import quote_extraction, quote_pipeline
+
 # Accumulated quote nodes: quote_id -> {"id", "corpus", "page", "quote", "species"?, "llm"?}.
 QUOTES: dict[str, dict[str, Any]] = {}
 
@@ -142,8 +144,23 @@ def externalize_quotes(obj):
                 f"quote id collision: {qid} maps to both {existing!r} and {entry!r}"
             )
         QUOTES[qid] = entry
-        ref: dict[str, Any] = {"quote_id": qid}
+        # The chain of custody, on the REFERENCE rather than the quote node, for the
+        # same reason ``provenance`` is: it grades the citation, not the excerpt. One
+        # sentence can honestly reach two claims by two routes (Stahl's Class line is
+        # proposed by a model for the drug's class node and grepped by code as the NbN
+        # fallback), so pinning one chain to the shared excerpt would make one of them
+        # a lie. Derived here, where both halves are known: how it was found, and the
+        # ``llm`` stamp above, which the central override may just have decided.
+        ref: dict[str, Any] = {
+            "quote_id": qid,
+            "pipeline": quote_pipeline(
+                obj.get("corpus"),
+                quote_extraction(obj.get("corpus"), obj.get("extraction")),
+                entry.get("llm")),
+        }
         for k, v in obj.items():
+            if k == "extraction":
+                continue  # consumed above, into `pipeline`
             if k not in _IDENTITY_FIELDS and k not in _METADATA_FIELDS:
                 ref[k] = externalize_quotes(v)
         return ref

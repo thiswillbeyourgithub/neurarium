@@ -2282,6 +2282,18 @@ function createInfoPanel(data, sourcingModal) {
     return withTip(pill, tip);
   };
 
+  // "How this quote got here: source page → an LLM finds the quote → ..." for one
+  // source, or "" when the data names no pipeline (a bare reference with no quote).
+  //
+  // The steps come from `meta.quote_pipelines`, so adding a pipeline is a data edit plus
+  // its translations and never a viewer edit, exactly like addon slots and uncertainty
+  // reasons. The viewer only joins and localizes.
+  const quoteChain = (pipeline) => {
+    const steps = ((data.meta && data.meta.quotePipelines) || {})[pipeline];
+    if (!Array.isArray(steps) || !steps.length) return "";
+    return `${t("info.quoteChain")} ${steps.map((s) => t(`quotechain.${s}`)).join(" → ")}`;
+  };
+
   // One tooltip line for a single source. Every source is quote-level
   // {corpus,page,quote,provenance} (the one shape used everywhere): it renders the
   // verbatim quote + "<ref>, p.N", resolving the ref from meta.sourceCorpora by
@@ -2306,9 +2318,15 @@ function createInfoPanel(data, sourcingModal) {
       : `${trail}— ${ref}`;
     // An expression source (GtoPdb tissue distribution) names the assay species;
     // show it so a non-human claim is explicit on the pill itself, not only the tag.
-    return s.species
+    const withSpecies = s.species
       ? `${line}\n${t("info.sourceSpecies", { species: speciesLabel(s.species) })}`
       : line;
+    // Last, under everything else: how this quote got here. Every green pill looks the
+    // same, and it should, because the grade really is the same; but a sentence a model
+    // read off a book page and a table cell a parser copied are different evidence, and
+    // the reader is the one entitled to weigh that.
+    const chain = quoteChain(s.pipeline);
+    return chain ? `${withSpecies}\n${chain}` : withSpecies;
   };
 
   // "Clozapine › Side effects › How Drug Causes Side Effects\n" for a source that
@@ -5380,6 +5398,11 @@ function buildAboutSourcing(meta, opts = {}) {
     li.appendChild(h("span", null, t(tip)));
     key.appendChild(li);
   }
+  // The grade key answers "how well is this backed"; this paragraph answers the
+  // question it leaves open, "backed by what process". Two nodes can be equally green
+  // and have got there by different routes, so rather than split the pill into tiers
+  // nobody could rank, each source tooltip ends with its own chain of custody.
+  key.appendChild(h("li", "src-key-note", t("about.quoteChains")));
 
   // Coverage tally: needs the loaded dataset's provenance stats, so it is skipped
   // on the first (pre-load, meta=null) call and filled in on the second. The grade

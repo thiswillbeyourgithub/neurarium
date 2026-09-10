@@ -307,6 +307,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // knowing any slot by name, so a new hook is a generator edit plus one call site.
   const addonSlots = metaRecord.addon_slots || {};
   const addonTones = metaRecord.addon_tones || {};
+  // How a quote came to be cited: pipeline key -> its chain of custody as ordered step
+  // keys, rendered at the bottom of every source tooltip. Passed through as-is; the
+  // viewer only joins and localizes, so a new pipeline never needs a viewer edit.
+  const quotePipelines = metaRecord.quote_pipelines || {};
 
   // Provenance grade ordering (weakest -> strongest); the strongest grade among a
   // record's sources colours its summary source pill. Null when there are none.
@@ -591,6 +595,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // structure (a Ki CSV row) and for a quote whose heading could not be
       // resolved: the tooltip then simply shows no breadcrumb.
       heading: s.heading || null,
+      // How this quote came to be cited (see meta.quotePipelines): the tooltip ends
+      // with the chain, so a reader can tell a parser copying a table cell from a
+      // model reading a book page.
+      pipeline: s.pipeline || null,
     }));
   // Reasons the quote does not settle the claim (the orange "uncertain" badge; derived
   // or curated in tools/data_generators/quotes/). Each bullet is a reason `kind` + slot
@@ -1341,6 +1349,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       provenanceStats,
       addonSlots,
       addonTones,
+      quotePipelines,
     },
   };
 }

@@ -156,8 +156,10 @@ def main():
             src = "Class" if nonstandard else "NbN"
             misses.append(f"{d['id']}: nbn {nbn_en!r} not in {src} line {quote!r}")
             continue
-        d["nbn_sources"] = [{"corpus": "stahl", "page": page,
-                             "quote": quote, "provenance": "verified"}]
+        # ``extraction``: this pass greps a fixed, verbatim line off the monograph
+        # ("Neuroscience-based Nomenclature: <value>"), so no model ever read the page.
+        d["nbn_sources"] = [{"corpus": "stahl", "page": page, "quote": quote,
+                             "provenance": "verified", "extraction": "code"}]
         if nonstandard:
             d["nbn_nonstandard"] = True
         applied += 1

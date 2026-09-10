@@ -292,6 +292,14 @@
       "uncertain.not_a_mechanism": "The source never lists this action among the drug's mechanisms of action.",
       "uncertain.blanket_claim": "One sentence in the source covers {n} pathways out of this structure at once and names none of their targets: it describes how widely the system spreads, so drawing it to this region in particular is our own reading.",
       "uncertain.contradicted": "Another source in this dataset denies this outright, and is quoted below. Corpora most often disagree over what a laboratory measurement means in a living body (an effect real in vitro that does not show up in vivo), so both are kept here rather than one being dropped in silence.",
+      "info.quoteChain": "How this quote got here:",
+      "quotechain.raw_data": "raw data",
+      "quotechain.page": "source page",
+      "quotechain.extract_code": "deterministic extraction",
+      "quotechain.extract_llm": "an LLM finds the quote",
+      "quotechain.gate": "code checks the quote is on the page",
+      "quotechain.judge_llm": "an amnesic LLM judges the quote",
+      "quotechain.neurarium": "neurarium",
       "info.provWikipedia": "Loaded directly from Wikipedia. This text is fetched live and verbatim from the current Wikipedia article (CC BY-SA), with no LLM in the loop, so it cannot drift from the article. See the Reference link above to inspect the source.",
       "info.descFromWikipedia": "This description is the lead section of the drug's Wikipedia article, used verbatim under CC BY-SA. See the Reference link above.",
       "info.sourceRef": "{corpus}, p. {page}",
@@ -557,6 +565,7 @@
       "about.gradeLlm":
         "AI only: may be a hallucination.",
       "about.gradeNone": "No source: none gathered yet.",
+      "about.quoteChains": "Not every green check was earned the same way: some quotes were copied out of a machine-readable table by code alone, others were found on a book page by an LLM, checked word for word against that page, then judged by a second LLM that had not seen the first one’s reasoning. Each source tooltip ends with the exact chain that produced it, so you can weigh it yourself.",
       "about.gradeUncertain":
         "Uncertain: the quote is confirmed present, but it does not attribute the claim. " +
         "Hover the badge for the reasons, each with its own source.",
@@ -866,6 +875,14 @@
       "uncertain.not_a_mechanism": "La source ne cite jamais cette action parmi les mécanismes d’action du médicament.",
       "uncertain.blanket_claim": "Une seule phrase de la source couvre {n} voies issues de cette structure à la fois et ne nomme aucune de leurs cibles : elle décrit l’étendue du système, et la tracer jusqu’à cette région en particulier relève de notre propre lecture.",
       "uncertain.contradicted": "Une autre source de ce jeu de données affirme le contraire, et elle est citée ci-dessous. Les corpus divergent le plus souvent sur ce qu’une mesure de laboratoire signifie chez l’être vivant (un effet réel in vitro qui ne se retrouve pas in vivo) : les deux sont donc conservées ici plutôt que l’une écartée en silence.",
+      "info.quoteChain": "Parcours de cette citation :",
+      "quotechain.raw_data": "données brutes",
+      "quotechain.page": "page source",
+      "quotechain.extract_code": "extraction déterministe",
+      "quotechain.extract_llm": "un LLM trouve la citation",
+      "quotechain.gate": "le code vérifie que la citation est sur la page",
+      "quotechain.judge_llm": "un LLM amnésique juge la citation",
+      "quotechain.neurarium": "neurarium",
       "info.provWikipedia": "Chargé directement depuis Wikipédia. Ce texte est récupéré en direct et tel quel depuis l’article Wikipédia actuel (CC BY-SA), sans aucun LLM : il ne peut donc pas s’écarter de l’article. Voir le lien Référence ci-dessus pour inspecter la source.",
       "info.descFromWikipedia": "Cette description est l’introduction de l’article Wikipédia du médicament, reprise telle quelle sous licence CC BY-SA. Voir le lien Référence ci-dessus.",
       "info.sourceRef": "{corpus}, p. {page}",
@@ -1140,6 +1157,7 @@
       "about.gradeLlm":
         "IA seule : peut être une hallucination.",
       "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
+      "about.quoteChains": "Toutes les coches vertes ne s’obtiennent pas de la même manière : certaines citations ont été recopiées d’un tableau lisible par machine par du code seul, d’autres ont été trouvées sur une page de livre par un LLM, vérifiées mot pour mot sur cette page, puis jugées par un second LLM qui n’avait pas vu le raisonnement du premier. Chaque infobulle de source se termine par le parcours exact qui l’a produite, pour que vous puissiez en juger vous-même.",
       "about.gradeUncertain":
         "Incertain : la citation est bien présente, mais elle n’attribue pas " +
         "l’affirmation. Survolez le badge pour les raisons, chacune avec sa source.",

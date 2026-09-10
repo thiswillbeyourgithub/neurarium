@@ -120,6 +120,7 @@ from data_generators.provenance import (  # noqa: E402
     DENSITY_MIN_RELIABILITY,
     DRUG_CATEGORY_PROVENANCE,
     PROVENANCE_LEVELS,
+    QUOTE_PIPELINES,
     RECEPTOR_CLASSIFICATION_SOURCES,
     RECEPTOR_DENSITY,
     RECEPTOR_LOCATION_SOURCES,
@@ -1721,6 +1722,13 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # Emitted so the viewer knows which i18n sentence a bullet takes and check_data.py
         # can reject a kind that is not one of these, from one list rather than three.
         "uncertainty_reasons": UNCERTAINTY_REASONS,
+        # How a quote came to be cited: pipeline key -> its chain of custody, as ordered
+        # step keys (i18n `quotechain.<step>`). Every green pill looks the same, but a
+        # quote a parser copied out of a table and a quote a model read off a book page
+        # are different evidence, so each source tooltip ends with the chain that
+        # produced it. Emitted rather than hardcoded in JS for the usual reason: adding a
+        # pipeline is a data edit plus its translations, never a viewer edit.
+        "quote_pipelines": {k: list(v) for k, v in QUOTE_PIPELINES.items()},
         # Cross-donor-agreement floor a relative-expression profile had to clear to be
         # published (see the density pass in tools/fetch/fetch_allen.py). Emitted so the
         # panel can state the real threshold instead of restating the constant. Absent

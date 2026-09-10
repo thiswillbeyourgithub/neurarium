@@ -176,6 +176,9 @@ def main():
                     "page": page,
                     "quote": name,
                     "provenance": "verified",
+                    # This pass splits the monograph's "Brands" line on punctuation;
+                    # no model ever read the page, so the chain of custody says so.
+                    "extraction": "code",
                 }],
             })
         if brands:
