@@ -6273,7 +6273,7 @@ function connectionSideTag(proj) {
  *   selectStructure:Function, selectConnection:Function,
  *   selectTarget:Function}} deps
  */
-function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup }) {
+function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusCircuit, focusProjectionGroup }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -8008,7 +8008,7 @@ async function main() {
   // Hold arrows a constant apparent width as the camera zooms (advanced by its
   // tick() in the render loop, like arrowRetrim).
   const arrowWidth = createArrowWidth({ arrows, camera, controls, focus });
-  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusCircuit, focusProjectionGroup });
+  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusCircuit, focusProjectionGroup });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
