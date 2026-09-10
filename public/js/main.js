@@ -8130,7 +8130,22 @@ async function main() {
   // because it sits BETWEEN the others in the panel: the group ring spans them all
   // whether or not it is named, so leaving it out would ring an unnamed section.
   const TOUR_SECTIONS = ["drugs", "receptors", "enzymes", "structures", "projections"];
+  // Collapsing a list is only half of "put it back": a filter the visitor typed
+  // survives the fold, so the next step's "tap Olanzapine" can ring a row that the
+  // reopened list no longer contains. Cleared through the input's own event, which
+  // is what the live filter and the URL both listen to, so this is a typed clear
+  // rather than a value assignment the rest of the app never hears about.
+  const tourClearFilters = () => {
+    for (const id of ["drugs-filter", "search-input"]) {
+      const el = tourEl(id);
+      if (el && el.value) {
+        el.value = "";
+        el.dispatchEvent(new Event("input"));
+      }
+    }
+  };
   const tourCollapseSections = () => {
+    tourClearFilters();
     for (const name of TOUR_SECTIONS) {
       const b = tourEl(`${name}-body`);
       if (b && !b.hidden) tourEl(`${name}-toggle`)?.click();

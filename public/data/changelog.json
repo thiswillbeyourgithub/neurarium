@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.79.3",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "The tour put the browse lists back but left a filter you had typed in place, so a step could point at a row the reopened list no longer showed. Starting the tour, and its \"browse the data\" step, now clear the drugs filter and the search box too.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.79.2",
       "date": "2026-09-10",
       "entries": [
