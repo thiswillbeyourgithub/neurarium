@@ -115,6 +115,25 @@ def _qids(sources):
             if isinstance(s, dict) and "quote_id" in s]
 
 
+def _labels():
+    """``(category id -> label, target id -> display name)``, read from the emitted data.
+
+    The judge is asked whether a sentence supports a claim, so the claim has to be
+    written in the words the dataset actually publishes, not in its internal ids. The
+    difference is not cosmetic: our ``stimulant`` bucket is labelled "Stimulant /
+    wake-promoting", so Stahl's "Wake-promoting agent" supports it and the id does not,
+    and a judge shown the id fails a claim the data never made.
+    """
+    with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
+        meta = json.load(fh)
+    cats = meta.get("drug_category_labels") or {}
+    targets = {tid: (entry.get("name") or tid)
+               for tid, entry in (meta.get("drug_targets") or {}).items()}
+    for rec in _jsonl("receptors.jsonl"):
+        targets.setdefault(rec["id"], rec.get("name") or rec["id"])
+    return cats, targets
+
+
 def _hours(hl):
     """A half-life record (``{hours, hours_max?}``) as a phrase the judge can weigh."""
     if not hl:
@@ -137,6 +156,7 @@ def reconstruct_claims(quotes):
     """``(claims, kinds)``: per quote id, the claim(s) it backs and its node kind."""
     claims = collections.defaultdict(list)
     kinds = {}
+    cat_labels, target_names = _labels()
     # The node kind the loop below is filling, read by ``add``. A holder rather than an
     # argument on every call site, because the kinds come in runs (one loop, one kind);
     # it is what lets ``build --kinds`` narrow a rerun to the kinds a pass needs. Coarse
@@ -153,11 +173,13 @@ def reconstruct_claims(quotes):
         kind["now"] = "drug_bindings"
         for b in d.get("bindings", []):
             tag = " (tentative)" if b.get("tentative") else ""
+            tname = target_names.get(b["target"], b["target"])
             for q in _qids(b.get("sources", [])):
-                add(q, f"Drug {nm} acts on target '{b['target']}' as {b['action']}{tag}.")
+                add(q, f"Drug {nm} acts on target '{tname}' as {b['action']}{tag}.")
         kind["now"] = "drug_categories"
         for q in _qids(d.get("category_sources", [])):
-            add(q, f"Drug {nm} is classified as {', '.join(d.get('categories', []))}.")
+            cats = [cat_labels.get(c, c) for c in d.get("categories", [])]
+            add(q, f"Drug {nm} is classified as {', '.join(cats)}.")
         kind["now"] = "drug_nbn"
         for q in _qids(d.get("nbn_sources", [])):
             add(q, f"Drug {nm} Neuroscience-based Nomenclature = '{d.get('nbn')}'.")
@@ -185,9 +207,10 @@ def reconstruct_claims(quotes):
                        f"half-life of {_hours(m.get('half_life'))}.")
             kind["now"] = "drug_metabolite_bindings"
             for mb in m.get("bindings", []):
+                mt = target_names.get(mb["target"], mb["target"])
                 for q in _qids(mb.get("sources", [])):
                     add(q, f"{mn}, an active metabolite of {nm}, acts on target "
-                           f"'{mb['target']}' as {mb['action']}.")
+                           f"'{mt}' as {mb['action']}.")
             kind["now"] = "drug_metabolite_enzyme"
             for fb in m.get("formed_by", []):
                 step = f" by {fb['reaction']}" if fb.get("reaction") else ""
