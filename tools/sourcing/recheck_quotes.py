@@ -591,6 +591,12 @@ def cmd_apply(args):
                         "present": v.get("present"), "supports": v.get("supports"),
                         "quote": quotes[q]["quote"], "claims": claims.get(q, []),
                         "note": v.get("note", "")})
+    # A row about a quote the dataset no longer cites is dead weight: the sentence was
+    # dropped, or repaired into a different one (the id is a content hash, so a repair
+    # makes a NEW quote). Left in, it is re-proposed by every pass for ever and reads as
+    # an open item that nothing can close.
+    flagged = [f for f in flagged if f.get("qid") in quotes]
+    disputed = {q: d for q, d in disputed.items() if q in quotes}
     # ``.get``: the carried-over rows come from an older file that may predate a key.
     flagged.sort(key=lambda x: (bool(x.get("present")), bool(x.get("supports"))))
 

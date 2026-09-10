@@ -1,101 +1,6 @@
 [
  {
   "claims": [
-   "Drug Cyproheptadine acts on target '5ht2a' as antagonist (tentative)."
-  ],
-  "corpus": "carlat",
-  "note": "Quote says antagonistic effects at serotonin receptors generally, doesn't specify 5ht2a subtype.",
-  "page": 184,
-  "present": true,
-  "qid": "q_96d8eca6b09e",
-  "quote": "antagonistic effects at serotonin receptors",
-  "supports": false
- },
- {
-  "claims": [
-   "Drug Zotepine acts on target 'alpha1a' as antagonist.",
-   "Drug Zotepine acts on target 'alpha1b' as antagonist.",
-   "Drug Zotepine acts on target 'alpha1c' as antagonist.",
-   "Drug Zotepine acts on target 'alpha1d' as antagonist."
-  ],
-  "corpus": "stahl",
-  "note": "Quote only says generic 'alpha 1 adrenergic receptors'; does not distinguish alpha1a/b/c/d subtypes, so it doesn't specifically substantiate four separate subtype claims.",
-  "page": 936,
-  "present": true,
-  "qid": "q_06288de9aed4",
-  "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
-  "supports": false
- },
- {
-  "claims": [
-   "Projection 'septal_nuclei_R'->'hippocampus_R' (cholinergic, Acetylcholine): Septohippocampal pathway. Medial septal cholinergic neurons project to the hippocampus, pacing the hippocampal theta rhythm."
-  ],
-  "corpus": "kandel",
-  "heading": [
-   "40 The Brain Stem",
-   "Monoaminergic Neurons in the Brain Stem Modulate Sensory, Motor, Autonomic, and Behavioral Functions",
-   "Monoaminergic Neurons Share Many Cellular Properties"
-  ],
-  "note": "Quote gives no mention of hippocampal theta rhythm pacing, only a general cortex/hippocampus/amygdala projection.",
-  "page": 1048,
-  "present": true,
-  "qid": "q_0c358ff12c7e",
-  "quote": "Rather, scientists refer to the cholinergic neurons by their location, eg, the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the pons, which project widely from the cerebral cortex to the medulla, and the basal forebrain (Ch1–Ch4) groups, which project to the cerebral cortex, hippocampus, and amygdala.",
-  "supports": false
- },
- {
-  "claims": [
-   "Projection group 'Noradrenaline' (kind=noradrenergic): Noradrenergic projections from the locus coeruleus modulate arousal, vigilance and the stress response."
-  ],
-  "corpus": "kandel",
-  "heading": [
-   "61 Disorders of Mood and Anxiety",
-   "Major Depression and Anxiety Disorders Can Be Treated Effectively",
-   "Current Antidepressant Drugs Affect Monoaminergic Neural Systems"
-  ],
-  "note": "Quote states only the anatomical origin of the projection, not arousal, vigilance, or stress-response function.",
-  "page": 1561,
-  "present": true,
-  "qid": "q_5f60a626871f",
-  "quote": "The major noradrenergic projection of the forebrain arises in the locus ceruleus.",
-  "supports": false
- },
- {
-  "claims": [
-   "Projection 'amygdala_R'->'hypothalamus_R' (inhibitory, GABA): Stria terminalis. The amygdala projects to the hypothalamus via the stria terminalis, driving autonomic / endocrine responses."
-  ],
-  "corpus": "kandel",
-  "heading": [
-   "Part VIII Learning, Memory, Language and Cognition",
-   "53 Cellular Mechanisms of Implicit Memory Storage and the Biological Basis of Individuality",
-   "Memory of Threat Learning in Mammals Involves the Amygdala"
-  ],
-  "note": "Quote never names the stria terminalis, nor mentions GABA/inhibitory sign or autonomic/endocrine function.",
-  "page": 1380,
-  "present": true,
-  "qid": "q_89d01a2a38cb",
-  "quote": "These nuclei project to the central nucleus, which projects to the hypothalamus and brain stem.",
-  "supports": false
- },
- {
-  "claims": [
-   "The metabolite Didesmethyl cariprazine is formed from Cariprazine by the enzyme CYP3A4."
-  ],
-  "corpus": "stahl",
-  "heading": [
-   "Cariprazine",
-   "Dosing and use",
-   "Pharmacokinetics"
-  ],
-  "note": "Quote says CYP3A4 forms 'two longlasting active metabolites' but does not name Didesmethyl cariprazine.",
-  "page": 157,
-  "present": true,
-  "qid": "q_991da4e8bc9e",
-  "quote": "Metabolized by CYP3A4 into two longlasting active metabolites",
-  "supports": false
- },
- {
-  "claims": [
    "Drug Meclizine acts on target 'H1' as antagonist.",
    "Drug Meclizine is classified as Antihistamine, Antiemetic / prokinetic."
   ],
@@ -124,36 +29,6 @@
   "present": true,
   "qid": "q_b5ffda82e0cc",
   "quote": "Presynaptic serotonin (5HT) receptors include 5HT1A, 5HT1B/D, and 5HT2B, all of which act as autoreceptors",
-  "supports": false
- },
- {
-  "claims": [
-   "The metabolite M-II is formed from Ramelteon by the enzyme CYP1A2."
-  ],
-  "corpus": "wikipedia_pharm",
-  "heading": null,
-  "note": "quote says ramelteon is metabolized mainly by CYP1A2 and lists metabolites M-I to M-IV, but never attributes M-II specifically to CYP1A2 rather than CYP2C/CYP3A4",
-  "page": "ramelteon",
-  "present": true,
-  "qid": "q_be5e050ad426",
-  "quote": "Ramelteon is metabolized mainly by CYP1A2 while CYP2C enzymes and CYP3A4 are involved to a minor extent. The metabolites of ramelteon include M-I, M-II, M-III, and M-IV.",
-  "supports": false
- },
- {
-  "claims": [
-   "Projection group 'Acetylcholine' (kind=cholinergic): Cholinergic projections modulate arousal, attention and memory across the cortex and hippocampus."
-  ],
-  "corpus": "kandel",
-  "heading": [
-   "40 The Brain Stem",
-   "Monoaminergic Neurons in the Brain Stem Modulate Sensory, Motor, Autonomic, and Behavioral Functions",
-   "Many Modulatory Systems Use Monoamines as Neurotransmitters"
-  ],
-  "note": "Quote states arousal and selective attention only; it never mentions memory.",
-  "page": 1047,
-  "present": true,
-  "qid": "q_da6f20978229",
-  "quote": "These neurons project throughout the cerebral cortex, hippocampus, and amygdala. Both groups play an important role in arousal, and the basal forebrain groups are also involved in more selective attention.",
   "supports": false
  },
  {

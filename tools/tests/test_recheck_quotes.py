@@ -169,6 +169,38 @@ class ApplyMergeTest(unittest.TestCase):
         self.assertNotIn(promote, [f["qid"] for f in flagged],
                          "a flag this pass cleared was carried over")
 
+    def test_a_flag_on_a_quote_nobody_cites_any_more_is_dropped(self):
+        # A rejected quote is either dropped or repaired into a different sentence, and
+        # the id is a content hash, so both leave the old id uncited. Left in the file it
+        # is re-proposed by every pass for ever and reads as an item nothing can close.
+        quotes = [q for q in R._jsonl("quotes.jsonl")][:2]
+        live, judged = (q["id"] for q in quotes)
+        with tempfile.TemporaryDirectory() as tmp:
+            cache, batches = Path(tmp) / "cache", Path(tmp) / "batches"
+            cache.mkdir(), batches.mkdir()
+            (cache / "quote_recheck_flagged.json").write_text(
+                json.dumps([{"qid": live, "note": "still cited, still open"},
+                            {"qid": "q_goneforever", "note": "its sentence was dropped"}]),
+                encoding="utf-8")
+            (batches / "batch_0.json").write_text(
+                json.dumps({"pages": {}, "items": [{"qid": judged, "page_ref": "x:1",
+                                                    "quote": "q", "claims": ["c"]}]}),
+                encoding="utf-8")
+            verdicts = Path(tmp) / "v.json"
+            verdicts.write_text(json.dumps({"verdicts": {
+                judged: {"present": True, "supports": True}}}), encoding="utf-8")
+            old = R.CACHE
+            try:
+                R.CACHE = str(cache)
+                R.cmd_apply(argparse.Namespace(batches=str(batches),
+                                               verdicts=str(verdicts), llm="sonnet"))
+            finally:
+                R.CACHE = old
+            flagged = {f["qid"] for f in json.loads(
+                (cache / "quote_recheck_flagged.json").read_text(encoding="utf-8"))}
+            self.assertEqual(flagged, {live})
+
+
 class SecondReadTest(unittest.TestCase):
     """A second, weaker model reading a quote can corroborate it or dispute it, never
     silently demote it.
