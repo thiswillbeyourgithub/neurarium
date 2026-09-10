@@ -134,6 +134,11 @@ class Editor:
                 return False
             self.hit_sites.add(here)
         new = target.get("quote")
+        # A re-extraction that answers with the sentence it was asked to replace has
+        # found nothing: writing it back would leave the rejected quote in place while
+        # reporting a repair, so it falls through to removal like any other miss.
+        if new is not None and new.strip() == (src.get("quote") or "").strip():
+            new = None
         if not new:
             self.removed.append(qid)
             return True
@@ -187,9 +192,22 @@ def _targets(args) -> dict[str, dict]:
         if qid.strip():
             out[qid.strip()] = {"sites": sites} if sites else {}
     if args.replace:
-        with open(args.replace, encoding="utf-8") as fh:
-            raw = json.load(fh)
-        for qid, p in (raw.get("proposals", raw) or {}).items():
+        # A re-extraction pass answers one file per batch, so a directory is accepted
+        # and merged rather than made someone's `jq` problem.
+        paths = ([os.path.join(args.replace, n)
+                  for n in sorted(os.listdir(args.replace)) if n.endswith(".json")]
+                 if os.path.isdir(args.replace) else [args.replace])
+        if not paths:
+            sys.exit(f"{args.replace}: no proposal files in there")
+        raw = {}
+        for path in paths:
+            with open(path, encoding="utf-8") as fh:
+                one = json.load(fh)
+            for qid, p in (one.get("proposals", one) or {}).items():
+                if qid in raw and raw[qid] != p:
+                    sys.exit(f"{qid}: two batches proposed different things for it")
+                raw[qid] = p
+        for qid, p in raw.items():
             entry = {"quote": p["quote"]} if p.get("found") and p.get("quote") else {}
             if p.get("sites"):
                 entry["sites"] = list(p["sites"])

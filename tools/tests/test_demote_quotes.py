@@ -70,6 +70,19 @@ class DemoteTest(unittest.TestCase):
         self.assertEqual(ed.replaced, [qid])
         self.assertEqual(rec["category_sources"][0]["quote"], "The better sentence.")
 
+    def test_a_replacement_identical_to_the_rejected_quote_is_a_miss(self):
+        # It happens: asked for a better sentence, a model answers with the same one and
+        # a note saying the page has nothing else. Writing it back would report a repair
+        # while leaving the rejected quote exactly where it was.
+        qid = quote_id(STAHL)
+        with tempfile.TemporaryDirectory() as tmp:
+            rec, ed = self._run(tmp, _drug([dict(STAHL)]),
+                                {qid: {"quote": STAHL["quote"]}},
+                                page_text="Preamble. A wrong sentence. More text.")
+        self.assertEqual(ed.replaced, [])
+        self.assertEqual(ed.removed, [qid])
+        self.assertNotIn("category_sources", rec)
+
     def test_a_replacement_not_on_the_page_is_rejected_not_written(self):
         qid = quote_id(STAHL)
         with tempfile.TemporaryDirectory() as tmp:
