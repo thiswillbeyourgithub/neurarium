@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.78.5",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Searching for a metabolic enzyme and clicking the result did nothing and logged an error. It opens the enzyme's panel now.",
+          "commits": [
+            "6e8de16",
+            "2ebbc56"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.78.4",
       "date": "2026-09-10",
       "entries": [
