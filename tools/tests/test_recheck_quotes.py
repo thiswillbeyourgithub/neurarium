@@ -111,6 +111,18 @@ class ClaimReconstructionTest(unittest.TestCase):
                 text = next(t for t in self.claims[qid] if t.startswith(site + " | "))
                 self.assertNotIn("cited here alongside", text, f"{qid} at {site}")
 
+    def test_the_unreconstructed_placeholder_is_not_a_shared_claim(self):
+        # It is one sentence printed over every quote the walk could not reach, not a
+        # claim any of them share. Counting it told a modafinil quote it was "cited
+        # alongside 691 other quote(s)", and the judge rejected it on that reading.
+        import recheck_quotes as R
+        generic = [t for texts in self.claims.values() for t in texts
+                   if t.startswith(R.UNRECONSTRUCTED_CLAIM[:60])]
+        self.assertTrue(generic, "no unreconstructed quote in the dataset to check")
+        self.assertGreater(len(generic), 1, "one alone could not collide anyway")
+        for text in generic:
+            self.assertNotIn("cited here alongside", text)
+
     def test_nothing_in_those_kinds_falls_back_to_the_generic_claim(self):
         scoped = {"drug_brands", "drug_half_life", "drug_metabolites",
                   "drug_metabolite_bindings"}

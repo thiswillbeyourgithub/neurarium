@@ -167,6 +167,14 @@ def _target_facet(key: str) -> str:
     return "classification" if key == "sources" else key
 
 
+# Printed over a quote the claim walk could not reach (a source on a node kind the
+# reconstruction does not model, e.g. an uncertainty bullet's own citation). It is a
+# prompt, not a claim, so it is deliberately excluded from the co-citation tally below.
+UNRECONSTRUCTED_CLAIM = ("This quote is cited as the source of a dataset claim whose "
+                         "text could not be reconstructed here. Confirm it appears "
+                         "verbatim on the page and states a coherent, correct fact.")
+
+
 def reconstruct_claims(quotes):
     """``(claims, kinds)``: per quote id, the claim(s) it backs and its node kind."""
     claims = collections.defaultdict(list)
@@ -327,9 +335,7 @@ def reconstruct_claims(quotes):
     kind["now"] = "other"
     for qid, q in quotes.items():
         if q["corpus"] not in EXCLUDE_CORPUS and qid not in claims:
-            add(qid, "This quote is cited as the source of a dataset claim whose text "
-                     "could not be reconstructed here. Confirm it appears verbatim on "
-                     "the page and states a coherent, correct fact.")
+            add(qid, UNRECONSTRUCTED_CLAIM)
     # A node backed by SEVERAL quotes is not asking each of them for the whole claim.
     # That is the dataset's own model (a compound value earns its green check only when
     # every part is attested: 5-HT1B's synaptic="both" is one presynaptic quote plus one
@@ -339,7 +345,11 @@ def reconstruct_claims(quotes):
     shared = collections.Counter()
     for qid, texts in claims.items():
         for text in set(texts):
-            shared[text] += 1
+            # The unreconstructed-claim placeholder is not a claim, it is the same
+            # sentence printed over every quote the walk could not reach. Counting it
+            # would tell hundreds of unrelated quotes they are co-cited with each other.
+            if text != UNRECONSTRUCTED_CLAIM:
+                shared[text] += 1
     for texts in claims.values():
         for i, text in enumerate(texts):
             if shared[text] > 1:
