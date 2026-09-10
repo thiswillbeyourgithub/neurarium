@@ -15,6 +15,7 @@ Built with the help of Claude Code.
 """
 
 import argparse
+import inspect
 import json
 import sys
 import tempfile
@@ -122,6 +123,21 @@ class ClaimReconstructionTest(unittest.TestCase):
         self.assertGreater(len(generic), 1, "one alone could not collide anyway")
         for text in generic:
             self.assertNotIn("cited here alongside", text)
+
+    def test_only_disputed_restricts_the_way_only_flagged_does(self):
+        # --disputed is ADDITIVE (judge these too). Settling a disagreement needs the
+        # restrictive form, or the build hands you all 3000 quotes to re-read for the
+        # sake of two. The two "only" flags share one loop so they cannot drift apart.
+        import argparse
+        import recheck_quotes as R
+        src = inspect.getsource(R._select)
+        self.assertIn("only_disputed", src)
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--only-flagged", action="store_true")
+        parser.add_argument("--only-disputed", action="store_true")
+        ns = parser.parse_args(["--only-disputed"])
+        self.assertTrue(ns.only_disputed)
+        self.assertFalse(ns.only_flagged)
 
     def test_nothing_in_those_kinds_falls_back_to_the_generic_claim(self):
         scoped = {"drug_brands", "drug_half_life", "drug_metabolites",

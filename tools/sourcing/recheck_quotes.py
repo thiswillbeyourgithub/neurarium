@@ -427,14 +427,16 @@ def _select(claims, kinds, args):
     if args.unstamped:
         stamped = _load(os.path.join(CACHE, "quote_llm.json"), {})
         keep = {q: c for q, c in keep.items() if q not in stamped}
-    if args.only_flagged:
-        # A re-extraction pass looks at nothing else: its question is not "does this
-        # quote hold" (a previous pass already answered no) but "is there a better
-        # sentence on this page", so every other quote is noise in the batch.
-        keep = {q: c for q, c in claims.items()
-                if q in {row.get("qid")
-                         for row in _load(os.path.join(CACHE,
-                                                       "quote_recheck_flagged.json"), [])}}
+    # The RESTRICTIVE forms: judge that list and nothing else. A re-extraction or a
+    # dispute-settling pass has one question about a handful of quotes ("is there a
+    # better sentence on this page", "the stamping model is asked again"), so every
+    # other quote is noise in the batch and, at 3000-odd of them, unaffordable noise.
+    for flag, fname in (("only_flagged", "quote_recheck_flagged.json"),
+                        ("only_disputed", "quote_recheck_disputed.json")):
+        if not getattr(args, flag):
+            continue
+        qids = {row.get("qid") for row in _load(os.path.join(CACHE, fname), [])}
+        keep = {q: c for q, c in claims.items() if q in qids}
     for flag, fname in (("flagged", "quote_recheck_flagged.json"),
                         ("disputed", "quote_recheck_disputed.json")):
         if not getattr(args, flag):
@@ -641,6 +643,9 @@ def main():
     b.add_argument("--only-flagged", action="store_true",
                    help="judge ONLY the flagged quotes (a re-extraction pass: pair it "
                         "with a large --max-page-chars so the whole page is offered)")
+    b.add_argument("--only-disputed", action="store_true",
+                   help="judge ONLY the disputed quotes (run this with --llm set to the "
+                        "model that stamped them, to settle the disagreement)")
     b.add_argument("--flagged", action="store_true",
                    help="also judge every quote in quote_recheck_flagged.json")
     b.add_argument("--disputed", action="store_true",
