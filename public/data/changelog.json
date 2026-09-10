@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.79.4",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "data",
+          "text": "The population-frequency figures behind \"How fast people clear it\" now ship with the site: the PharmFreq export they come from is committed alongside the code, pinned by checksum, and every figure and citation shown in the app is rebuilt from it and compared before a build is accepted. Nothing rounds or drops a number on the way.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.79.3",
       "date": "2026-09-10",
       "entries": [

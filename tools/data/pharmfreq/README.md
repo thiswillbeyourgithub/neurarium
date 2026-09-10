@@ -3,11 +3,10 @@
 Ethnogeographic metabolizer-phenotype frequencies per pharmacogene, exported from
 [PharmFreq](https://pharmfreq.com/)'s "Metabolizer status tool" on 2026-09-09.
 
-**Raw values only.** These files are committed verbatim, exactly as downloaded. The
-filtering and rounding the enzyme panel applies (drop Normal Metabolizer, keep bands
-above 10%, round to the nearest 10%) happen in the viewer at render time, never here
-and never in the emitted data: what ships is the measurement, what the UI shows is a
-reading of it.
+**Raw values only.** These files are committed verbatim, exactly as downloaded, and
+nothing between here and the panel rounds or drops a number: the stacked bar draws every
+phenotype the gene has at its true width, and hovering a segment names the phenotype and
+its exact frequency.
 
 Format: TSV, header `Subgroup / Gene / Phenotype / Frequency`, 159 data rows over 6 genes
 and 8 subgroups. Frequencies sum to 1.000 per (gene, subgroup) within rounding. The
@@ -16,7 +15,12 @@ UGT1A1 carry only PM/IM/NM), and CYP3A5 has no Oceanian row.
 
 Unlike the book corpora these files are freely downloadable and small, so they are
 committed rather than kept author-side: that is what lets `check_data.py` gate the quotes
-on any clone, with no skipped-and-warned path.
+on any clone, with no skipped-and-warned path. There is no page file to match against,
+because the quote is a sentence composed out of these very rows. Instead
+`tools/generated_cache/enzyme_variability.json` pins each file's sha256, and family 12
+rebuilds every emitted profile and quote from the files here (see
+`tools/data_generators/pharmfreq.py`). Refreshing the download therefore means re-running
+`python tools/fetch/fetch_pharmfreq.py`, or generation fails loudly.
 
 ## Citation
 

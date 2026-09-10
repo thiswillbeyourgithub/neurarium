@@ -3575,7 +3575,15 @@
       "ref": "PharmFreq, metabolizer status by population",
       "citation": "PharmFreq: a global genetic variation database for pharmacogenomics. pharmfreq.com, metabolizer status tool.",
       "url": "https://pharmfreq.com",
-      "pages_dir": "data_sources/pharmfreq/pages",
+      "tsv_dir": "tools/data/pharmfreq",
+      "export_sha256": {
+        "metabolizer_data_CYP2B6_2026-09-09.txt": "1c461496fa0a2b071334da1364b9ecbe90d92d52189b79b4882a06449ae50405",
+        "metabolizer_data_CYP2C19_2026-09-09.txt": "d0ada1c0f766f15ba8604b130b038cc3a4e569d8b41095dda448a7d16d5d4a7b",
+        "metabolizer_data_CYP2C9_2026-09-09.txt": "195c0fe695862803e6ddc59216ac6cf4b2a2a5775d757f42b92b16c7beda293f",
+        "metabolizer_data_CYP2D6_2026-09-09.txt": "9e3db0079ea4a510d4f2dd53fd405344a7fbb5cf4595ed6e4283c24f37cc402c",
+        "metabolizer_data_CYP3A5_2026-09-09.txt": "f080da45dfa3b533cd888584e3a8d405d8dc0f4f7ccb8cd0da12fa87e92139fa",
+        "metabolizer_data_UGT1A1_2026-09-09.txt": "2bcd553404cb06a5e944e7f031785bd3ae06ab32c6f21dc95de221c5ce839049"
+      },
       "machine": true
     }
   },

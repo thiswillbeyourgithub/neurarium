@@ -1159,6 +1159,11 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
         if not quote or page is None:
             return  # weaker grade with no quote to check
         entry = corpora.get(corpus) or {}
+        # A corpus shipping its raw tables (`tsv_dir`) has no prose page to look in:
+        # its quote is COMPOSED out of those tables, so family 13 re-derives it from
+        # them instead. Everything structural above still applies.
+        if entry.get("tsv_dir"):
+            return
         if not entry.get("pages_dir"):
             skipped_corpora.add(corpus)
             return
@@ -1310,6 +1315,16 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
                     check_one(f"target {tid} location_sources[{base}][{i}]", src)
             for i, src in enumerate((tinfo.get("density") or {}).get("sources") or []):
                 check_one(f"target {tid} density sources[{i}]", src)
+
+    # Metabolizer-status profiles hang off `meta.enzymes`, not off any node file, so
+    # they are reached from here rather than by the walks above. The page lookup stands
+    # down for them (see the `tsv_dir` branch), but the structural half applies: a
+    # `verified` grade still owes a page and a quote, and the pipeline still has to be
+    # one `meta.quote_pipelines` describes.
+    for eid, enzyme in sorted((meta.get("enzymes") or {}).items()):
+        for i, src in enumerate(((enzyme.get("variability") or {})
+                                 .get("sources") or [])):
+            check_one(f"enzyme {eid} variability sources[{i}]", src)
 
     if skipped_corpora:
         report.warn(f"source pages absent for {sorted(skipped_corpora)} "
@@ -1787,6 +1802,12 @@ _APP_VERSION_RE = re.compile(r"""__APP_VERSION__\s*=\s*["']([^"']+)["']""")
 sys.path.insert(0, str(Path(__file__).resolve().parent / "data_generators"))
 from changelog import CATEGORIES as CHANGELOG_CATEGORIES  # noqa: E402
 
+# The PharmFreq export reader, imported rather than restated: family 12
+# rebuilds the emitted quotes with the very code that wrote them, which is
+# the whole point of the derivation gate (see data_generators/pharmfreq.py).
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from data_generators import pharmfreq  # noqa: E402
+
 
 def check_innervation(report, meta, structures, projections, receptors):
     """Family 10: per-transmitter-system **innervation coverage** (warns, never errors).
@@ -2035,6 +2056,108 @@ def check_baked_meshes(report, structures):
               f"({total / 1024 / 1024:.2f} MB, served compressed)")
 
 
+def check_enzyme_variability(report, meta):
+    """Family 12: the metabolizer-status profiles, re-derived from their pinned tables.
+
+    Every other corpus proves a quote by finding it verbatim in prose somebody else
+    wrote. PharmFreq (corpus #13) publishes a table instead, and the sentence a reader
+    sees is one this repo composes out of it, so there is no page to look in: writing
+    that sentence to a page file and then finding it there would prove only that the
+    same code ran twice.
+
+    So the proof runs the other way. The export is committed under `tools/data/`
+    (small, freely redistributable, unlike the books), the cache that built the profiles
+    pins each file's sha256, and this rebuilds every emitted profile and quote straight
+    off those files. A hand-edited frequency, a stale cache, a refreshed download nobody
+    re-ran the fetcher over: each one lands here as an error, on any clone, with no
+    author-side material needed.
+    """
+    report.header("12. Enzyme variability (profiles re-derived from the pinned export)")
+    corpora = meta.get("source_corpora") or {}
+    tsv_corpora = {c: e for c, e in corpora.items() if e.get("tsv_dir")}
+    if not tsv_corpora:
+        report.ok("no committed-table corpus to re-derive")
+        return
+    for corpus, entry in sorted(tsv_corpora.items()):
+        export = REPO_ROOT / entry["tsv_dir"]
+        if not export.is_dir():
+            report.error(f"{corpus}: {entry['tsv_dir']} is missing, yet the corpus is "
+                         f"committed with the repo (its quotes cannot be re-derived)")
+            return
+        pins = entry.get("export_sha256") or {}
+        if not pins:
+            report.error(f"{corpus}: declares {entry['tsv_dir']} but pins no file "
+                         f"sha256, so nothing anchors its quotes")
+            return
+        on_disk = set(pharmfreq.export_files(str(export)))
+        for name in sorted(set(pins) | on_disk):
+            if name not in on_disk:
+                report.error(f"{corpus}: pins {name}, which is not in "
+                             f"{entry['tsv_dir']}")
+            elif name not in pins:
+                report.error(f"{corpus}: {entry['tsv_dir']}/{name} is not pinned "
+                             f"(re-run tools/fetch/fetch_pharmfreq.py)")
+            elif pharmfreq.sha256(str(export / name)) != pins[name]:
+                report.error(f"{corpus}: {entry['tsv_dir']}/{name} no longer hashes to "
+                             f"its pin, so the emitted numbers are not the ones in it "
+                             f"(re-run tools/fetch/fetch_pharmfreq.py)")
+        if report.errors:
+            return
+
+    export = REPO_ROOT / tsv_corpora["pharmfreq"]["tsv_dir"]
+    try:
+        raw = pharmfreq.read_export(str(export))
+    except pharmfreq.ExportError as exc:
+        report.error(f"pharmfreq: {exc}")
+        return
+
+    n = 0
+    for eid, enzyme in sorted((meta.get("enzymes") or {}).items()):
+        var = enzyme.get("variability")
+        if not var:
+            continue
+        gene = var.get("gene")
+        ctx = f"enzyme {eid} variability"
+        if gene not in raw:
+            report.error(f"{ctx}: cites gene {gene!r}, which the export does not cover")
+            continue
+        if pharmfreq.GENE_ENZYMES.get(gene) != eid:
+            report.error(f"{ctx}: gene {gene!r} is mapped to "
+                         f"{pharmfreq.GENE_ENZYMES.get(gene)!r}, not to {eid!r}")
+            continue
+        want_profile = pharmfreq.ordered_profile(raw[gene])
+        if var.get("profile") != want_profile:
+            report.error(f"{ctx}: the emitted profile is not what {gene} reads in the "
+                         f"export (re-run tools/fetch/fetch_pharmfreq.py)")
+            continue
+        # Key order is deliberately NOT checked: the viewer walks
+        # `meta.metabolizer_groups` and looks each group up, so the profile is a
+        # mapping and the cache is free to serialize it sorted.
+        want_quote = pharmfreq.quote_for(gene, want_profile)
+        srcs = var.get("sources") or []
+        if not srcs:
+            report.error(f"{ctx}: carries a profile but no source")
+            continue
+        for i, src in enumerate(srcs):
+            if src.get("page") != gene:
+                report.error(f"{ctx} sources[{i}]: page {src.get('page')!r} is not the "
+                             f"gene symbol {gene!r} the profile is keyed by")
+            if src.get("quote") != want_quote:
+                report.error(f"{ctx} sources[{i}]: the quote is not the one the export "
+                             f"yields for {gene} (re-run tools/fetch/fetch_pharmfreq.py)")
+            else:
+                n += 1
+
+    covered = {eid for eid, e in (meta.get("enzymes") or {}).items()
+               if e.get("variability")}
+    uncovered = sorted(set(pharmfreq.GENE_ENZYMES.values()) - covered)
+    if uncovered:
+        report.warn(f"mapped to a PharmFreq gene but carrying no profile: "
+                    f"{', '.join(uncovered)}")
+    report.ok(f"{n} metabolizer-status quote(s) re-derived from the pinned export, "
+              f"exact match")
+
+
 def main():
     report = Report()
     print(f"neurarium data integrity check\nreading {DATA_DIR}")
@@ -2070,6 +2193,7 @@ def main():
     check_changelog(report)
     check_innervation(report, meta, structures, projections, receptors)
     check_baked_meshes(report, structures)
+    check_enzyme_variability(report, meta)
 
     print(f"\nSummary: {report.errors} error(s), {report.warnings} warning(s)")
     if report.errors:

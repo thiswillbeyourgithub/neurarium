@@ -734,8 +734,15 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   is taking the drug. Per isoform, the frequency of each metabolizer phenotype (`METABOLIZER_PHENOTYPES`,
   ordered slowest to fastest: PM/IM/NM/RM/UM) in each population group (`METABOLIZER_GROUPS`, both in
   `data_generators/drugs.py`, emitted as `meta.metabolizer_*`). `tools/fetch/fetch_pharmfreq.py`
-  reshapes the hand-downloaded export into `tools/generated_cache/enzyme_variability.json`, which
+  reshapes the export into `tools/generated_cache/enzyme_variability.json`, which
   `build_enzymes()` merges onto the emitted `meta.enzymes`; deterministic, so `pipeline = machine`.
+  The export is the one corpus **committed** with the repo (`tools/data/pharmfreq/`, one TSV per
+  gene, small and freely redistributable), so its record declares `tsv_dir`, not `pages_dir`: the
+  quote is a sentence composed out of the table, so a page written from the same numbers could not
+  gate it. The cache pins each file's sha256 instead, `provenance.py` re-checks the pins at
+  generation time and `check_data.py` family 12 rebuilds every profile and quote from the files, so
+  this is the only quote gate that runs on a plain clone. Shared reader:
+  `data_generators/pharmfreq.py`.
   5 of the 18 isoforms are covered, and an uncovered one simply has no `variability` key: CYP3A4 and
   CYP1A2, the two this dataset leans on hardest, are absent from the source, which is a gap in the
   corpus and not a claim that they do not vary.

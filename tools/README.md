@@ -342,11 +342,15 @@ Screenshots).
   the real dataset, because a divergence does not crash, it just quietly demotes nothing.
   Stdlib, author-side.
 - `tools/fetch/fetch_pharmfreq.py` — stdlib, offline, author-side. Reshapes PharmFreq's
-  hand-downloaded "Metabolizer status tool" export (an untracked `Metabolism.zip` at the repo
-  root) into corpus #13: one quote-gate page per gene under `data_sources/pharmfreq/pages/`
-  (`page` = the HGNC gene symbol) plus the committed
+  hand-downloaded "Metabolizer status tool" export (corpus #13) into the committed
   `tools/generated_cache/enzyme_variability.json`, which `build_enzymes()` merges onto
-  `meta.enzymes`. One node per isoform (kind `enzyme_variability`) whose quote carries the whole
+  `meta.enzymes`. The export itself is **committed**, one TSV per gene under
+  `tools/data/pharmfreq/` (small and freely redistributable, unlike the books), and the cache
+  pins each file's sha256, so this corpus declares `tsv_dir` instead of `pages_dir`: there is no
+  page, because the quote is composed out of the table and finding it on a page we also wrote
+  would prove nothing. `check_data.py` family 12 rebuilds every profile and quote from the pinned
+  files instead, which is the same guarantee and, unlike every other corpus's gate, one that runs
+  on a plain clone. The reader both ends share lives in `data_generators/pharmfreq.py`. One node per isoform (kind `enzyme_variability`) whose quote carries the whole
   profile, like an Allen density profile, so the verbatim gate covers the numbers the panel shows.
   Deterministic, no judge, no network. Reports the isoforms it could not map (UGT1A1, which names
   no isoform we model) and the two the source omits (CYP3A4, CYP1A2), so a gap never reads as

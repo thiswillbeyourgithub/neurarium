@@ -14,6 +14,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from . import pharmfreq
+
 # ---------------------------------------------------------------------------
 # Source provenance grades. Every source / reference the viewer shows carries a
 # ``provenance`` level saying *how trustworthy its attribution is*, rendered as a
@@ -272,12 +274,46 @@ def _merge_external_density() -> None:
 ENZYME_VARIABILITY: dict[str, dict[str, Any]] = {}
 
 
+# ``{file name: sha256}`` for the committed PharmFreq export the cache above was built
+# from, filled by the merge below and emitted onto the corpus record so `check_data.py`
+# can re-derive every profile straight from the pinned files.
+ENZYME_VARIABILITY_PINS: dict[str, str] = {}
+
+
 def _merge_enzyme_variability() -> None:
-    """Merge ``tools/generated_cache/enzyme_variability.json`` into the registry above."""
+    """Merge ``tools/generated_cache/enzyme_variability.json`` into the registry above.
+
+    The cache pins the sha256 of every source TSV it was built from, and this is where
+    that pin is cashed in: the export is committed (see `pharmfreq.py`), so a mismatch
+    means the cache and the files under `tools/data/pharmfreq/` have parted ways, and
+    the quotes below would then carry numbers no committed measurement backs. Loud, at
+    generation time, rather than a green check nobody can trace.
+    """
     src = Path(__file__).resolve().parent.parent / "generated_cache" / "enzyme_variability.json"
     if not src.exists():
         return
-    ENZYME_VARIABILITY.update(json.loads(src.read_text(encoding="utf-8")).get("enzymes") or {})
+    cache = json.loads(src.read_text(encoding="utf-8"))
+    ENZYME_VARIABILITY.update(cache.get("enzymes") or {})
+    pins = cache.get("export_sha256") or {}
+    root = Path(__file__).resolve().parent.parent.parent
+    export = root / pharmfreq.EXPORT_DIR
+    for name, want in sorted(pins.items()):
+        path = export / name
+        if not path.exists():
+            raise ValueError(f"enzyme_variability.json pins {name}, which is not in "
+                             f"{pharmfreq.EXPORT_DIR}: re-run "
+                             f"tools/fetch/fetch_pharmfreq.py")
+        got = pharmfreq.sha256(str(path))
+        if got != want:
+            raise ValueError(f"{pharmfreq.EXPORT_DIR}/{name} has changed since the "
+                             f"enzyme variability cache was built ({got[:12]} != "
+                             f"{want[:12]}): re-run tools/fetch/fetch_pharmfreq.py")
+    for name in pharmfreq.export_files(str(export)):
+        if name not in pins:
+            raise ValueError(f"{pharmfreq.EXPORT_DIR}/{name} is not pinned by "
+                             f"enzyme_variability.json: re-run "
+                             f"tools/fetch/fetch_pharmfreq.py")
+    ENZYME_VARIABILITY_PINS.update(pins)
 
 
 # Machine-written *classification* sources, the mechanism counterpart of the location
@@ -639,11 +675,17 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         # existing one: nothing else this dataset states about CYP2D6 varies by who
         # is taking the drug.
         # tools/fetch/fetch_pharmfreq.py reshapes the hand-downloaded "Metabolizer
-        # status tool" export into one author-side page per gene (`page` = the HGNC
-        # gene symbol, `quote` = the one line carrying the whole profile, as in the
-        # Allen density profiles), so the verbatim gate covers the numbers a reader
-        # judges the claim by. Deterministic, no judge: PharmFreq publishes the
-        # aggregate and we only reshape it.
+        # status tool" export (`page` = the HGNC gene symbol, `quote` = the one line
+        # carrying the whole profile, as in the Allen density profiles), so the gate
+        # covers the numbers a reader judges the claim by. Deterministic, no judge:
+        # PharmFreq publishes the aggregate and we only reshape it.
+        # The one corpus with `tsv_dir` and no `pages_dir`, for two reasons that go
+        # together. Its export is small and freely redistributable, so it is COMMITTED
+        # rather than kept author-side, and the gate therefore runs on every clone
+        # instead of being skipped-and-warned. And the sentence we quote is one we
+        # compose out of that table, so looking for it on a page we also wrote would
+        # be circular: `check_data.py` instead pins each file by sha256 and rebuilds
+        # the sentence from it (see data_generators/pharmfreq.py).
         # Two isoforms this dataset leans on hardest, CYP3A4 and CYP1A2, have no
         # profile in the tool, so their absence is a gap in the source, not a claim
         # that they do not vary.
@@ -651,7 +693,8 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "citation": "PharmFreq: a global genetic variation database for "
                     "pharmacogenomics. pharmfreq.com, metabolizer status tool.",
         "url": "https://pharmfreq.com",
-        "pages_dir": "data_sources/pharmfreq/pages",
+        "tsv_dir": pharmfreq.EXPORT_DIR,
+        "export_sha256": dict(ENZYME_VARIABILITY_PINS),
         "machine": True,
     },
 }
