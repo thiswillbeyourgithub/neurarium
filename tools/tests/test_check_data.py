@@ -15,6 +15,7 @@ Built with the help of Claude Code.
 
 import io
 import json
+import re
 import sys
 import unittest
 from contextlib import redirect_stdout
@@ -564,6 +565,42 @@ class CorpusUrlTest(unittest.TestCase):
 
     def test_placeholder_url_is_an_error(self):
         self.assertEqual(self._errors({"stahl": {"ref": "Stahl", "url": "TODO"}}), 1)
+
+
+class FamilyCountTest(unittest.TestCase):
+    """The numbered families, against the two docs that count them in prose.
+
+    Adding a family is three edits in three files, and the two doc edits are the ones
+    nothing notices: the count drifts, a reader trusts it, and the newest gate reads as
+    something the checker does not run. So the numbers are read back off the source of
+    truth here rather than restated.
+    """
+
+    ROOT = Path(__file__).resolve().parent.parent.parent
+    WORDS = {11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen",
+             15: "fifteen", 16: "sixteen"}
+
+    @classmethod
+    def setUpClass(cls):
+        src = (cls.ROOT / "tools" / "check_data.py").read_text(encoding="utf-8")
+        cls.numbers = sorted(int(n) for n in
+                             re.findall(r'report\.header\("(\d+)\.', src))
+
+    def test_the_families_are_numbered_contiguously_from_zero(self):
+        # A gap or a repeat would print two families under one number, which reads as
+        # one gate having silently swallowed the other.
+        self.assertEqual(self.numbers, list(range(len(self.numbers))))
+
+    def test_both_docs_state_the_real_count(self):
+        word = self.WORDS[len(self.numbers)]
+        last = self.numbers[-1]
+        want = f"{word.capitalize()} families (numbered\n0-{last} in the output)"
+        checks = (self.ROOT / "docs" / "DATA_CHECKS.md").read_text(encoding="utf-8")
+        # assertIn would print the whole document on failure; the count is the message.
+        self.assertTrue(want in checks, f"docs/DATA_CHECKS.md does not say {want!r}")
+        claude = (self.ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+        self.assertTrue(f"{word} families (" in claude,
+                        f"CLAUDE.md does not say {word!r} families")
 
 
 if __name__ == "__main__":

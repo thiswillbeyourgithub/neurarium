@@ -1072,8 +1072,9 @@ def quote_pages(node, corpus, out):
 
 def check_sources(report, meta, drugs, projections, structures, receptors, addons):
     """The core of the sourcing system: confirm every quote-level source (a
-    binding's ``sources``, a drug's ``nbn_sources``, and a projection's quote-level
-    ``sources``) is actually present in the page it cites.
+    binding's ``sources``, a drug's ``nbn_sources``, an enzyme's ``variability``
+    sources, and a projection's quote-level ``sources``) is actually present in the
+    page it cites.
 
     A source is ``{corpus, page, quote, provenance}`` (the one shape used everywhere:
     drug bindings, NbN, projection/circuit/group quotes, region anatomy). A source
@@ -1091,7 +1092,14 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
     ``pages_dir`` on disk the quote-in-page check is **skipped with a warning**
     while the structural checks above still run. So this hard-fails an invented or
     mistyped quote on the author's machine (and the pre-push gate) without
-    breaking on a clone that lacks the sources."""
+    breaking on a clone that lacks the sources.
+
+    One corpus stands that lookup **down** rather than skipping it. A corpus shipping
+    its own raw tables declares ``tsv_dir`` and no ``pages_dir`` (PharmFreq, #13):
+    there is no prose page to look in, and a page written out of the same numbers as
+    the quote would prove nothing. Its quotes are gated by re-derivation from the
+    sha256-pinned files instead, in :func:`check_enzyme_variability` (family 12),
+    which is why that is the one quote gate that runs on a plain clone."""
     report.header("5. Source quotes (verbatim in cited page)")
     corpora = meta.get("source_corpora", {})
     # The closed vocabulary the "uncertain" bullets draw their reason kinds from,

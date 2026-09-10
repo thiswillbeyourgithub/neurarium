@@ -177,10 +177,10 @@ and **37 expression-location nodes** (off-atlas bases, or transporter mRNA sitti
 source nucleus). The residue is small and specific: 13 `receptor_sign` GtoPdb could not map,
 sigma-1's `receptor_class`, and the 2 claustrum `projections`.
 
-Twelve corpora are wired into `SOURCE_CORPORA` today: five books (`stahl`, `kandel`,
-`stahl_essential`, `carlat`, `nieuwenhuys`) and seven data sources (the `pdsp_ki` CSV, the
+Thirteen corpora are wired into `SOURCE_CORPORA` today: five books (`stahl`, `kandel`,
+`stahl_essential`, `carlat`, `nieuwenhuys`) and eight data sources (the `pdsp_ki` CSV, the
 `gtopdb` tissue API, the `allen_ahba` microarray, `wikipedia_pharm`, `wikipedia_fr`,
-`gtopdb_ki`, and `gtopdb_class`). The book-prose wins they allow are essentially exhausted
+`gtopdb_ki`, `gtopdb_class`, and the committed `pharmfreq` metabolizer export). The book-prose wins they allow are essentially exhausted
 (see the sourcing memory). What remains needs a **neuropharmacology textbook** read for
 pre/post site, a corpus that covers **non-Stahl marketed drugs** (the class lines), or
 **primary literature** (the claustrum pathways, a handful of subtype affinities).
@@ -583,7 +583,7 @@ the roster expansion enlarged the denominator, then back to **96%** (see the sna
    sitting at the source nucleus are properties of the assay. Only a protein-level atlas
    would move them, at a licence and parcellation cost out of proportion to the count.
 
-**Sources we still need (beyond the twelve wired):**
+**Sources we still need (beyond the thirteen wired):**
 - **A neuropharmacology textbook** (Rang and Dale, Katzung) for the 48 `receptor_synaptic`
   nodes in step 4. This is the only gap left that a whole new corpus would address, and even
   it will not close completely.

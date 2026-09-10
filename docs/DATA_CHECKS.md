@@ -6,8 +6,8 @@
 
 `tools/check_data.py` (stdlib) runs over the **emitted** `public/data/`,
 independent of `generate_data.py`. Exit 0 = no errors (warnings allowed), 1 =
-errors. Functions take loaded data as args (unit-testable). Eleven families (numbered
-0-10 in the output):
+errors. Functions take loaded data as args (unit-testable). Thirteen families (numbered
+0-12 in the output):
 
 - **Quote table** (referential integrity of the externalized `quotes.jsonl`): every node's
   `{quote_id, provenance}` source must resolve to a quote node, and every quote node must be
@@ -42,6 +42,14 @@ errors. Functions take loaded data as args (unit-testable). Eleven families (num
   exact substring of the normalized cited page text. Page material is author-side
   (see CLAUDE.local.md); the quote check is skipped + warned on a clone without it.
   A quote not on its page = error (the gate that keeps the LLM extraction honest).
+  A corpus that ships its own raw tables declares `tsv_dir` instead of `pages_dir`, and
+  the page lookup **stands down** for it rather than being skipped: there is no prose page
+  to read, and a page generated out of the same numbers as the quote could not gate
+  anything. Those quotes are proved by re-derivation instead, in the enzyme-variability
+  family below.
+  This walks every quote-level source the emitted data carries, `meta.enzymes[*].variability`
+  included: a node kind nobody routed through here would ship `verified` with nothing
+  checking it.
   Verbatim-on-the-page is not the same as about-this-drug, so two more gates ask the
   second question: a binding quote may not be one of Stahl's subject-less class rules
   ("Blocking X can cause Y", the sulpiride mistake), and every Stahl quote on a drug
@@ -114,3 +122,13 @@ errors. Functions take loaded data as args (unit-testable). Eleven families (num
   warning, since `js/baked-meshes.js` falls back to meshing in the browser: correct, just
   slower. `node tools/bake_meshes.mjs --check` is the same gate with byte-for-byte file
   comparison; see [`BAKED_MESHES.md`](BAKED_MESHES.md).
+- **Enzyme variability** (profiles re-derived from the pinned export): the one quote gate
+  that runs on a plain clone. PharmFreq (corpus #13) is the only corpus whose raw tables are
+  committed (`tools/data/pharmfreq/`), so this re-hashes every file against the
+  `export_sha256` pins in the corpus record, then rebuilds each isoform's whole
+  metabolizer profile and its quote sentence straight from those files through the shared
+  reader `tools/data_generators/pharmfreq.py`, and compares. A hand-edited frequency, a
+  refreshed download nobody re-ran the fetcher over, or a quote that drifted from the
+  numbers it claims to state is an **error**. Also reports the isoforms the export covers
+  nothing for (CYP3A4 and CYP1A2, the two the dataset leans on hardest), so the gap keeps
+  reading as a hole in the corpus rather than as a claim that they do not vary.

@@ -332,7 +332,7 @@ material location).
 
 ## Data checks
 
-> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: twelve families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage, baked meshes).
+> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: thirteen families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage, baked meshes, enzyme variability).
 
 There is a **code** check too, since there is no build step to hold a linter: `tools/check_js.py` (stdlib) walks each `public/**/*.js` scope tree and fails on any identifier reference no enclosing scope binds. That is the crash `node --check` cannot see (the file parses; the browser raises only when that line runs), and it is what a missing destructured parameter looks like. It runs unskippably in `pre-push` and as `tools/tests/test_check_js.py`. It is a lint, not a parser: every ambiguity resolves toward silence, so it under-reports rather than crying wolf (its docstring lists which).
 
@@ -1003,13 +1003,13 @@ sentence covers, `blanket_claim` the arrows.
 **Per-claim sources + the verify gate.** The nodes carrying such a source: a
 binding's `sources[]`, a drug's `nbn_sources[]`, a projection/circuit/group quote (`KANDEL_QUOTES`), a
 receptor/target location/classification, region anatomy. `corpus` keys the source-agnostic
-`SOURCE_CORPORA` registry (`{ref, citation, url, pages_dir}`, emitted as `meta.source_corpora`; the
+`SOURCE_CORPORA` registry (`{ref, citation, url, pages_dir|tsv_dir}`, emitted as `meta.source_corpora`; the
 full citation is resolved from there, not denormalized onto the ~429 bindings). `_quote_sources` /
 `_binding_sources` validate corpus + grade (a `verified` source needs page + quote). `verified` is
 earned by a two-step (LLM extract + LLM judge supports), then `check_data.py`'s source-quote check
 confirms the quote is really on the page (the backstop against a hallucination). **Page files are
 author-side (see `CLAUDE.local.md`), so the quote gate is skipped + warned on a clone that lacks them**
-(true for every corpus below). A binding with no quote source falls back to its **Ki** (verified), else
+(true for every corpus below except #13, whose tables are committed). A binding with no quote source falls back to its **Ki** (verified), else
 `NOSOURCE`. The **NbN** is simpler: `apply_nbn_sources.py` greps Stahl's verbatim
 "Neuroscience-based Nomenclature: <value>" line and confirms the dataset `nbn` is a substring (stronger
 than a judge for this fixed field); a newer drug with no NbN line falls back to Stahl's **Class** line
@@ -1073,6 +1073,9 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
   value we already state, reporting a disagreement instead of rewriting the data). The sources
   **add to** a book quote rather than replacing it, so an attribute both cover shows two
   citations. GtoPdb has **no pre/post-synaptic field**, so `synaptic` is out of its reach.
+- **#13 PharmFreq** (`pharmfreq`, `page` = the HGNC gene) is the one corpus whose raw tables are
+  **committed** (`tools/data/pharmfreq/`), so it declares `tsv_dir` and no `pages_dir` and its quote
+  is gated by re-derivation rather than by a page lookup: see Drug metabolism, Population variability.
 
 **Descriptions** are not a node kind (not tallied). Drugs, structures and non-receptor targets carry
 **no baked description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via
