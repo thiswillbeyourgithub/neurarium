@@ -261,6 +261,39 @@ def reconstruct_claims(quotes):
     return claims, kinds
 
 
+def _unjudged_quotes():
+    """Quote ids a model picked out of prose and no second model has ever judged.
+
+    Read off the emitted citations rather than guessed: each carries the ``pipeline``
+    key its chain of custody resolved to (see provenance.quote_pipeline), and a chain in
+    which a model chose the sentence but none judged it is exactly what the rule in
+    CLAUDE.md forbids shipping. A quote code copied out of a table has no such failure
+    mode and is not selected here.
+    """
+    with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
+        meta = json.load(fh)
+    unjudged = {k for k, steps in (meta.get("quote_pipelines") or {}).items()
+                if "extract_llm" in steps and "judge_llm" not in steps}
+    found = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            if node.get("pipeline") in unjudged and node.get("quote_id"):
+                found.add(node["quote_id"])
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    walk(meta)
+    for name in sorted(os.listdir(DATA)):
+        if name.endswith(".jsonl") and name != "quotes.jsonl":
+            for row in _jsonl(name):
+                walk(row)
+    return found
+
+
 def _quote_llms():
     """``{quote id: model}`` as it stands today: the central override wins over the
     source-level stamp, exactly as ``quote_table`` applies it at emit time."""
@@ -290,9 +323,20 @@ def _select(claims, kinds, args):
         stamps = _quote_llms()
         keep = {q: c for q, c in keep.items()
                 if stamps.get(q) == args.stamped_by}
+    if args.unjudged:
+        picked = _unjudged_quotes()
+        keep = {q: c for q, c in keep.items() if q in picked}
     if args.unstamped:
         stamped = _load(os.path.join(CACHE, "quote_llm.json"), {})
         keep = {q: c for q, c in keep.items() if q not in stamped}
+    if args.only_flagged:
+        # A re-extraction pass looks at nothing else: its question is not "does this
+        # quote hold" (a previous pass already answered no) but "is there a better
+        # sentence on this page", so every other quote is noise in the batch.
+        keep = {q: c for q, c in claims.items()
+                if q in {row.get("qid")
+                         for row in _load(os.path.join(CACHE,
+                                                       "quote_recheck_flagged.json"), [])}}
     for flag, fname in (("flagged", "quote_recheck_flagged.json"),
                         ("disputed", "quote_recheck_disputed.json")):
         if not getattr(args, flag):
@@ -485,8 +529,14 @@ def main():
                    help="comma-separated node kinds to judge (default: every kind)")
     b.add_argument("--stamped-by", default="", choices=("", "haiku", "sonnet", "opus"),
                    help="judge only the quotes this model stamped (a second, corroborating read)")
+    b.add_argument("--unjudged", action="store_true",
+                   help="judge only the quotes a model PICKED and none has judged "
+                        "(the state check_data.py fails on)")
     b.add_argument("--unstamped", action="store_true",
                    help="skip the quotes quote_llm.json already stamps")
+    b.add_argument("--only-flagged", action="store_true",
+                   help="judge ONLY the flagged quotes (a re-extraction pass: pair it "
+                        "with a large --max-page-chars so the whole page is offered)")
     b.add_argument("--flagged", action="store_true",
                    help="also judge every quote in quote_recheck_flagged.json")
     b.add_argument("--disputed", action="store_true",
