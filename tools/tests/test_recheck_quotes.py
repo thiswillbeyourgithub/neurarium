@@ -17,6 +17,7 @@ Built with the help of Claude Code.
 import argparse
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -106,7 +107,6 @@ class ApplyMergeTest(unittest.TestCase):
     """
 
     def test_merge_keeps_untouched_stamps_and_demotes_a_failed_recheck(self):
-        import tempfile
         quotes = [q for q in R._jsonl("quotes.jsonl")][:3]
         keep, demote, promote = (q["id"] for q in quotes)
         with tempfile.TemporaryDirectory() as tmp:
@@ -145,6 +145,73 @@ class ApplyMergeTest(unittest.TestCase):
         self.assertIn(demote, [f["qid"] for f in flagged])
         self.assertNotIn(promote, [f["qid"] for f in flagged],
                          "a flag this pass cleared was carried over")
+
+class SecondReadTest(unittest.TestCase):
+    """A second, weaker model reading a quote can corroborate it or dispute it, never
+    silently demote it.
+
+    The user's rule is that no LLM-picked quote ships unjudged by Sonnet or better, and
+    the corollary is that a quote Opus already confirmed does not become *less* trusted
+    because Sonnet read it too. So a confirming second pass keeps the stronger stamp, and
+    a contradicting one parks the quote in ``quote_recheck_disputed.json`` until the
+    stronger model is asked again.
+    """
+
+    def _apply(self, tmp, prior, verdict, llm):
+        """Run ``apply`` over one quote stamped ``prior``, returning the three caches."""
+        qid = next(q["id"] for q in R._jsonl("quotes.jsonl"))
+        cache, batches = Path(tmp) / "cache", Path(tmp) / "batches"
+        cache.mkdir(), batches.mkdir()
+        (cache / "quote_llm.json").write_text(json.dumps({qid: prior}), encoding="utf-8")
+        (batches / "batch_0.json").write_text(
+            json.dumps({"pages": {}, "items": [{"qid": qid, "page_ref": "x:1",
+                                               "quote": "q", "claims": ["c"]}]}),
+            encoding="utf-8")
+        verdicts = Path(tmp) / "v.json"
+        verdicts.write_text(json.dumps({"verdicts": {qid: verdict}}), encoding="utf-8")
+        old_cache = R.CACHE
+        R.CACHE = str(cache)
+        try:
+            R.cmd_apply(argparse.Namespace(batches=str(batches),
+                                           verdicts=str(verdicts), llm=llm))
+        finally:
+            R.CACHE = old_cache
+        read = lambda name: json.loads((cache / name).read_text(encoding="utf-8"))
+        return qid, read("quote_llm.json"), read("quote_recheck_flagged.json"), \
+            read("quote_recheck_disputed.json")
+
+    def test_a_weaker_confirming_read_keeps_the_stronger_stamp(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            qid, stamped, flagged, disputed = self._apply(
+                tmp, "opus", {"present": True, "supports": True}, "sonnet")
+        self.assertEqual(stamped.get(qid), "opus", "a corroboration demoted the stamp")
+        self.assertEqual(flagged, [])
+        self.assertEqual(disputed, [])
+
+    def test_a_weaker_doubting_read_disputes_rather_than_demotes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            qid, stamped, flagged, disputed = self._apply(
+                tmp, "opus", {"present": True, "supports": False, "note": "no"}, "sonnet")
+        self.assertEqual(stamped.get(qid), "opus", "a disagreement demoted on its own")
+        self.assertEqual(flagged, [], "a disagreement was reported as a settled failure")
+        self.assertEqual([d["qid"] for d in disputed], [qid])
+        self.assertEqual(disputed[0]["doubted_by"], "sonnet")
+
+    def test_the_stamping_model_settling_it_demotes_and_flags(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            qid, stamped, flagged, disputed = self._apply(
+                tmp, "opus", {"present": True, "supports": False, "note": "no"}, "opus")
+        self.assertNotIn(qid, stamped, "the model that stamped it could not un-stamp it")
+        self.assertEqual([f["qid"] for f in flagged], [qid])
+        self.assertEqual(disputed, [])
+
+    def test_a_stronger_confirming_read_upgrades_the_stamp(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            qid, stamped, _, _ = self._apply(
+                tmp, "haiku", {"present": True, "supports": True}, "sonnet")
+        self.assertEqual(stamped.get(qid), "sonnet")
+
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -24,10 +24,12 @@ Three steps (the middle one is the only LLM spend):
    claims, heading?}]}``) + ``manifest.json``.
 
    Scope it with ``--kinds a,b,c`` (the node kinds to judge, printed per pass),
-   ``--unstamped`` (skip what ``quote_llm.json`` already stamps) and ``--flagged``
-   (always re-judge what a previous pass could not confirm). A scoped pass is the
-   normal case now that the corpus is large: ``apply`` **merges** its verdicts into the
-   two caches rather than replacing them, so the kinds it did not look at keep theirs.
+   ``--unstamped`` (skip what ``quote_llm.json`` already stamps), ``--stamped-by <m>``
+   (re-read exactly what model ``m`` vouched for, so a second model corroborates it),
+   ``--flagged`` and ``--disputed`` (always re-judge what a previous pass could not
+   confirm, or what two models disagree about). A scoped pass is the normal case now
+   that the corpus is large: ``apply`` **merges** its verdicts into the three caches
+   rather than replacing them, so the kinds it did not look at keep theirs.
 
 2. Judge each batch with the chosen model. This project ran it as a Workflow: one agent
    per batch reads its file and returns, per item, ``{qid, present, supports, note?}``
@@ -46,7 +48,15 @@ Three steps (the middle one is the only LLM spend):
    should be false when the claim needs an attribution the section cannot give.
 
 3. ``python tools/sourcing/recheck_quotes.py apply --batches <dir> --verdicts <file> [--llm sonnet]``
-   Writes ``quote_llm.json`` (present AND supports -> stamped) + ``quote_recheck_flagged.json``.
+   Writes ``quote_llm.json`` (present AND supports -> stamped) +
+   ``quote_recheck_flagged.json`` + ``quote_recheck_disputed.json``.
+
+   A stamp names the STRONGEST model that has confirmed a quote, so a weaker second
+   pass can only corroborate: it never lowers one. The mirror of that rule is that a
+   weaker model doubting a quote is a *disagreement*, not a verdict, so it lands in
+   ``quote_recheck_disputed.json`` with the stamp untouched. Re-running the stamping
+   model over it (``build --disputed`` then ``apply --llm <that model>``) is the only
+   thing that settles it: confirmed clears the dispute, doubted un-stamps and flags.
 
 Then regenerate (``python tools/generate_data.py``) and check. Made with the help of Claude Code.
 """
@@ -61,6 +71,14 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, "public", "data")
 CACHE = os.path.join(ROOT, "tools", "generated_cache")
+
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+from data_generators.provenance import SOURCING_LLMS  # noqa: E402
+
+# Weakest model first, so a pass can tell a corroboration from a demotion: a second,
+# weaker read that confirms a quote adds confidence without lowering the stamp, while a
+# weaker read that DOUBTS one is a disagreement to escalate, not a verdict to apply.
+LLM_RANK = {m: i for i, m in enumerate(SOURCING_LLMS)}
 
 # corpus -> author-side page directory (the same trees check_data.py's quote gate reads).
 # Allen AHBA is intentionally absent: its quotes are deterministic, not LLM-sourced.
@@ -243,6 +261,14 @@ def reconstruct_claims(quotes):
     return claims, kinds
 
 
+def _quote_llms():
+    """``{quote id: model}`` as it stands today: the central override wins over the
+    source-level stamp, exactly as ``quote_table`` applies it at emit time."""
+    stamps = {q["id"]: q["llm"] for q in _jsonl("quotes.jsonl") if q.get("llm")}
+    stamps.update(_load(os.path.join(CACHE, "quote_llm.json"), {}))
+    return stamps
+
+
 def _select(claims, kinds, args):
     """Narrow a build to the quotes this pass actually judges.
 
@@ -258,11 +284,20 @@ def _select(claims, kinds, args):
         unknown = wanted - set(kinds.values())
         if unknown:
             sys.exit(f"unknown --kinds: {', '.join(sorted(unknown))}")
+    if args.stamped_by:
+        # A quote only one model has ever read is not independently confirmed: a second,
+        # different model reading it is what makes the verdict a corroboration.
+        stamps = _quote_llms()
+        keep = {q: c for q, c in keep.items()
+                if stamps.get(q) == args.stamped_by}
     if args.unstamped:
         stamped = _load(os.path.join(CACHE, "quote_llm.json"), {})
         keep = {q: c for q, c in keep.items() if q not in stamped}
-    if args.flagged:
-        for row in _load(os.path.join(CACHE, "quote_recheck_flagged.json"), []):
+    for flag, fname in (("flagged", "quote_recheck_flagged.json"),
+                        ("disputed", "quote_recheck_disputed.json")):
+        if not getattr(args, flag):
+            continue
+        for row in _load(os.path.join(CACHE, fname), []):
             if row.get("qid") in claims:
                 keep[row["qid"]] = claims[row["qid"]]
     counts = collections.Counter(kinds.get(q) for q in keep)
@@ -384,22 +419,41 @@ def cmd_apply(args):
     if isinstance(verdicts, list):
         verdicts = {v["qid"]: v for v in verdicts}
 
-    carried = _load(os.path.join(CACHE, "quote_llm.json"), {})
-    carried.update({q: args.llm for q, v in verdicts.items()
-                    if v.get("present") and v.get("supports") and q in quotes})
+    stamped = _load(os.path.join(CACHE, "quote_llm.json"), {})
+    disputed = {d["qid"]: d for d in
+                _load(os.path.join(CACHE, "quote_recheck_disputed.json"), [])}
     # Merge, never overwrite: a scoped pass (``build --kinds``) re-judges part of the
-    # corpus, so the stamps and flags it did not look at must survive it, while the ones
-    # it did look at take this pass's verdict (a demotion un-stamps).
+    # corpus, so the stamps, disputes and flags it did not look at must survive it, while
+    # the ones it did look at take this pass's verdict.
     judged = {q for q in verdicts if q in quotes}
-    for q in judged:
-        if not (verdicts[q].get("present") and verdicts[q].get("supports")):
-            carried.pop(q, None)
-    stamped = carried
     flagged = [f for f in _load(os.path.join(CACHE, "quote_recheck_flagged.json"), [])
                if f.get("qid") not in judged]
-    for q, v in verdicts.items():
-        if q not in quotes or (v.get("present") and v.get("supports")):
+    rank = LLM_RANK.get(args.llm, -1)
+    for q in sorted(judged):
+        v = verdicts[q]
+        # The stamp as it stands: the central override, else the source-level one.
+        prior = stamped.get(q) or quotes[q].get("llm")
+        if v.get("present") and v.get("supports"):
+            # Two models confirming a quote beats one, and the stamp names the capability
+            # a reader should weigh the quote against, so it keeps the strongest reader it
+            # has had. A weaker second pass corroborates; it never demotes.
+            if rank >= LLM_RANK.get(prior, -1):
+                stamped[q] = args.llm
+            disputed.pop(q, None)
             continue
+        if rank < LLM_RANK.get(prior, -1):
+            # A weaker model contradicting a stronger one is a disagreement, not a
+            # verdict. The stamp stands until the stronger model is asked again
+            # (``build --disputed`` then ``apply --llm <that model>``), which is the only
+            # thing that can settle it either way.
+            disputed[q] = {"qid": q, "stamped": prior, "doubted_by": args.llm,
+                           "corpus": quotes[q]["corpus"], "page": quotes[q]["page"],
+                           "present": v.get("present"), "supports": v.get("supports"),
+                           "quote": quotes[q]["quote"], "claims": claims.get(q, []),
+                           "note": v.get("note", "")}
+            continue
+        stamped.pop(q, None)
+        disputed.pop(q, None)
         flagged.append({"qid": q, "corpus": quotes[q]["corpus"], "page": quotes[q]["page"],
                         "heading": quotes[q].get("heading"),
                         "present": v.get("present"), "supports": v.get("supports"),
@@ -413,7 +467,11 @@ def cmd_apply(args):
               indent=0, sort_keys=True)
     json.dump(flagged, open(os.path.join(CACHE, "quote_recheck_flagged.json"), "w"),
               indent=1, ensure_ascii=False)
-    print(f"stamped {len(stamped)} quotes '{args.llm}'; flagged {len(flagged)} for review")
+    json.dump(sorted(disputed.values(), key=lambda d: d["qid"]),
+              open(os.path.join(CACHE, "quote_recheck_disputed.json"), "w"),
+              indent=1, ensure_ascii=False)
+    print(f"stamped {len(stamped)} quotes (this pass: '{args.llm}'); "
+          f"flagged {len(flagged)}, disputed {len(disputed)}")
 
 
 def main():
@@ -425,10 +483,15 @@ def main():
                    help="embed only the quotes' neighbourhoods on a page longer than this")
     b.add_argument("--kinds", default="",
                    help="comma-separated node kinds to judge (default: every kind)")
+    b.add_argument("--stamped-by", default="", choices=("", "haiku", "sonnet", "opus"),
+                   help="judge only the quotes this model stamped (a second, corroborating read)")
     b.add_argument("--unstamped", action="store_true",
                    help="skip the quotes quote_llm.json already stamps")
     b.add_argument("--flagged", action="store_true",
                    help="also judge every quote in quote_recheck_flagged.json")
+    b.add_argument("--disputed", action="store_true",
+                   help="also judge every quote in quote_recheck_disputed.json (run this "
+                        "with --llm set to the model that stamped them, to settle it)")
     b.set_defaults(func=cmd_build)
     a = sub.add_parser("apply", help="apply aggregated verdicts -> quote_llm.json + flagged")
     a.add_argument("--batches", required=True, help="the build --out directory")

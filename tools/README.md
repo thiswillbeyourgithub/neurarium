@@ -300,14 +300,20 @@ Screenshots).
   once per batch to minimize tokens; Allen AHBA excluded as deterministic); an LLM judges each batch
   (present + supports claim); `apply --batches <dir> --verdicts <f> [--llm sonnet]` writes
   `tools/generated_cache/quote_llm.json` ({quote_id: llm}, applied uniformly by `quote_table`) +
-  `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review). Each batch item
+  `quote_recheck_flagged.json` (quotes the recheck could not fully confirm, for review) +
+  `quote_recheck_disputed.json` (quotes two models disagree about). Each batch item
   carries the quote's `heading` (below), which is the context the "supports" half of the verdict turns on.
   Corpus -> page dir is read from `meta.source_corpora`, never restated. See CLAUDE.md
-  Source provenance ("The sourcing model"). Scope a pass with `--kinds`/`--unstamped`/`--flagged`, and
+  Source provenance ("The sourcing model"). Scope a pass with
+  `--kinds`/`--unstamped`/`--stamped-by`/`--flagged`/`--disputed`, and
   `--max-page-chars` trims a page too long to be worth embedding whole (a stored
   Wikipedia article) to the neighbourhoods of the quotes cited on it; `apply`
-  **merges** into both caches, so a scoped pass keeps the stamps and flags it did not
-  re-judge.
+  **merges** into the three caches, so a scoped pass keeps the stamps, flags and
+  disputes it did not re-judge. A stamp names the **strongest** model that has confirmed
+  the quote, so a second, weaker read (`--stamped-by opus` re-read by Sonnet) can only
+  corroborate it; the mirror of that rule is that a weaker model *doubting* a quote is a
+  disagreement, not a verdict, so it parks in `quote_recheck_disputed.json` with the stamp
+  intact until the stamping model is asked again (`build --disputed`, `apply --llm <it>`).
 - `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted quote
   from a **book** corpus (a paged corpus whose page tree has an `INDEX.md`), the **trail** of headings it
   sits under, into the committed `tools/generated_cache/quote_headers.json` ({quote_id: [outermost, ...,
