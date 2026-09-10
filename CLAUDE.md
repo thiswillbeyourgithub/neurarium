@@ -870,10 +870,18 @@ review, not stamped.
 one sentence reaching two claims is one id, and the excerpt table stays deduplicated for it. What that
 costs is the ability to say the useful thing, *this backs the binding and not the class*, so a
 **citation site** (`tools/sourcing/citation_site.py`) names one place a quote is cited from
-(`drug:clozapine/bindings[5ht2a]`, `receptor:5ht1a/locations[amygdala]`). `recheck_quotes.py` prefixes
-each reconstructed claim with it and `demote_quotes.py --sites` demotes only the citations named, so
-the quote's other claims keep their source and the quote keeps its stamp. It rides the citation for
-the same reason the grade and the `pipeline` do.
+(`drug:clozapine/bindings[5ht2a:antagonist]`, `receptor:5ht1a/locations[amygdala]`).
+`recheck_quotes.py` prefixes each reconstructed claim with it and `demote_quotes.py --sites` demotes
+only the citations named, so the quote's other claims keep their source and the quote keeps its stamp.
+It rides the citation for the same reason the grade and the `pipeline` do. A site names a **node**, not
+a slot, so where one owner carries two nodes the key carries the distinction (a binding by target AND
+action: amisulpride antagonises D2 and partially agonises it; an enzyme row by isoform AND role).
+
+**The converse: a claim several quotes back TOGETHER is not asking each of them for the whole claim.**
+A compound value earns its green check only when every part is attested (5-HT1B's `synaptic="both"` is
+one presynaptic quote plus one postsynaptic one, a two-category class is one sentence per category), so
+a judge shown one quote beside the whole claim rejects the citation that carries its share. Every claim
+line therefore states how many citations share it, and asks the judge to weigh this one on its share.
 
 **The rule: no LLM-picked quote ships unjudged by Sonnet or better.** A sentence a model *chose* out of
 prose is the one that can be chosen wrongly (right page, wrong claim), so it is not backed until a
