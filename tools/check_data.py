@@ -114,7 +114,8 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # than being one). Adding a node kind means adding it here too, in one place: both the
 # coverage table and the self-consistency check read this.
 NODE_KINDS = ("addons", "drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
-              "drug_half_life", "drug_enzymes", "drug_metabolites",
+              "drug_half_life", "drug_enzymes", "enzyme_variability",
+              "drug_metabolites",
               "drug_metabolite_enzyme", "drug_metabolite_bindings",
               "projections", "circuits", "projection_groups", "receptors",
               "receptor_class", "receptor_sign", "receptor_synaptic",

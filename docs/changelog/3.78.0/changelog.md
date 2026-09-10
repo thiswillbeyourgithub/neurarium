@@ -1,0 +1,6 @@
+# 3.78.0 (2026-09-10)
+
+## Added
+
+- Each drug-metabolising enzyme now opens with how fast people actually clear a drug through it, and how common each speed is across eight broad population groups: CYP2D6 ultrarapid metabolizers run from 1.5% of East Asian cohorts to 11% of Middle Eastern and North African ones, and only 0.4% of Europeans have a working CYP3A5 against 19.8% of Sub-Saharan Africans. Five isoforms are covered, sourced from PharmFreq. These are frequencies across study groups and never a prediction about one person, which the section says plainly.
+    fr: Chaque enzyme du métabolisme des médicaments s'ouvre désormais sur la vitesse à laquelle les gens éliminent réellement un médicament par cette voie, et sur la fréquence de chaque vitesse dans huit grands groupes de population : les métaboliseurs ultrarapides du CYP2D6 vont de 1,5 % des cohortes d'Asie de l'Est à 11 % de celles du Moyen-Orient et d'Afrique du Nord, et seuls 0,4 % des Européens ont un CYP3A5 fonctionnel contre 19,8 % des Africains subsahariens. Cinq isoformes sont couvertes, d'après PharmFreq. Ce sont des fréquences par groupe d'étude, jamais une prédiction pour une personne, ce que la section dit clairement.

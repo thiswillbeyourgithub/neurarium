@@ -3083,7 +3083,75 @@
     },
     "cyp2b6": {
       "label": "CYP2B6",
-      "wikipedia": "https://en.wikipedia.org/wiki/CYP2B6"
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2B6",
+      "variability": {
+        "gene": "CYP2B6",
+        "profile": {
+          "central_south_asian": {
+            "IM": 0.37,
+            "NM": 0.431,
+            "PM": 0.06,
+            "RM": 0.13,
+            "UM": 0.01
+          },
+          "east_asian": {
+            "IM": 0.311,
+            "NM": 0.513,
+            "PM": 0.037,
+            "RM": 0.131,
+            "UM": 0.008
+          },
+          "european": {
+            "IM": 0.359,
+            "NM": 0.512,
+            "PM": 0.055,
+            "RM": 0.073,
+            "UM": 0.003
+          },
+          "middle_east_north_africa": {
+            "IM": 0.461,
+            "NM": 0.287,
+            "PM": 0.13,
+            "RM": 0.111,
+            "UM": 0.011
+          },
+          "north_american": {
+            "IM": 0.426,
+            "NM": 0.426,
+            "PM": 0.095,
+            "RM": 0.051,
+            "UM": 0.002
+          },
+          "oceanian": {
+            "IM": 0.0,
+            "NM": 1.0,
+            "PM": 0.0,
+            "RM": 0.0,
+            "UM": 0.0
+          },
+          "south_american": {
+            "IM": 0.467,
+            "NM": 0.246,
+            "PM": 0.139,
+            "RM": 0.131,
+            "UM": 0.017
+          },
+          "sub_saharan_african": {
+            "IM": 0.498,
+            "NM": 0.223,
+            "PM": 0.279,
+            "RM": 0.0,
+            "UM": 0.0
+          }
+        },
+        "sources": [
+          {
+            "quote_id": "q_79dc567df1a9",
+            "pipeline": "machine",
+            "provenance": "verified"
+          }
+        ]
+      }
     },
     "cyp2c8": {
       "label": "CYP2C8",
@@ -3091,15 +3159,195 @@
     },
     "cyp2c9": {
       "label": "CYP2C9",
-      "wikipedia": "https://en.wikipedia.org/wiki/CYP2C9"
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2C9",
+      "variability": {
+        "gene": "CYP2C9",
+        "profile": {
+          "central_south_asian": {
+            "IM": 0.302,
+            "NM": 0.67,
+            "PM": 0.028
+          },
+          "east_asian": {
+            "IM": 0.077,
+            "NM": 0.921,
+            "PM": 0.002
+          },
+          "european": {
+            "IM": 0.343,
+            "NM": 0.634,
+            "PM": 0.022
+          },
+          "middle_east_north_africa": {
+            "IM": 0.348,
+            "NM": 0.626,
+            "PM": 0.026
+          },
+          "north_american": {
+            "IM": 0.304,
+            "NM": 0.678,
+            "PM": 0.018
+          },
+          "oceanian": {
+            "IM": 0.295,
+            "NM": 0.688,
+            "PM": 0.017
+          },
+          "south_american": {
+            "IM": 0.293,
+            "NM": 0.695,
+            "PM": 0.012
+          },
+          "sub_saharan_african": {
+            "IM": 0.234,
+            "NM": 0.761,
+            "PM": 0.004
+          }
+        },
+        "sources": [
+          {
+            "quote_id": "q_5951951e7d8c",
+            "pipeline": "machine",
+            "provenance": "verified"
+          }
+        ]
+      }
     },
     "cyp2c19": {
       "label": "CYP2C19",
-      "wikipedia": "https://en.wikipedia.org/wiki/CYP2C19"
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2C19",
+      "variability": {
+        "gene": "CYP2C19",
+        "profile": {
+          "central_south_asian": {
+            "IM": 0.441,
+            "NM": 0.256,
+            "PM": 0.108,
+            "RM": 0.167,
+            "UM": 0.027
+          },
+          "east_asian": {
+            "IM": 0.477,
+            "NM": 0.356,
+            "PM": 0.154,
+            "RM": 0.013,
+            "UM": 0.00012
+          },
+          "european": {
+            "IM": 0.261,
+            "NM": 0.39,
+            "PM": 0.024,
+            "RM": 0.277,
+            "UM": 0.049
+          },
+          "middle_east_north_africa": {
+            "IM": 0.21,
+            "NM": 0.442,
+            "PM": 0.014,
+            "RM": 0.288,
+            "UM": 0.047
+          },
+          "north_american": {
+            "IM": 0.257,
+            "NM": 0.398,
+            "PM": 0.023,
+            "RM": 0.274,
+            "UM": 0.047
+          },
+          "oceanian": {
+            "IM": 0.0,
+            "NM": 0.837,
+            "PM": 0.0,
+            "RM": 0.122,
+            "UM": 0.041
+          },
+          "south_american": {
+            "IM": 0.0,
+            "NM": 0.727,
+            "PM": 0.0,
+            "RM": 0.24,
+            "UM": 0.032
+          },
+          "sub_saharan_african": {
+            "IM": 0.37,
+            "NM": 0.286,
+            "PM": 0.06,
+            "RM": 0.235,
+            "UM": 0.048
+          }
+        },
+        "sources": [
+          {
+            "quote_id": "q_179e42a330fc",
+            "pipeline": "machine",
+            "provenance": "verified"
+          }
+        ]
+      }
     },
     "cyp2d6": {
       "label": "CYP2D6",
-      "wikipedia": "https://en.wikipedia.org/wiki/CYP2D6"
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP2D6",
+      "variability": {
+        "gene": "CYP2D6",
+        "profile": {
+          "central_south_asian": {
+            "IM": 0.267,
+            "NM": 0.698,
+            "PM": 0.018,
+            "UM": 0.018
+          },
+          "east_asian": {
+            "IM": 0.402,
+            "NM": 0.577,
+            "PM": 0.007,
+            "UM": 0.015
+          },
+          "european": {
+            "IM": 0.348,
+            "NM": 0.571,
+            "PM": 0.046,
+            "UM": 0.036
+          },
+          "middle_east_north_africa": {
+            "IM": 0.261,
+            "NM": 0.612,
+            "PM": 0.016,
+            "UM": 0.11
+          },
+          "north_american": {
+            "IM": 0.381,
+            "NM": 0.541,
+            "PM": 0.055,
+            "UM": 0.023
+          },
+          "oceanian": {
+            "IM": 0.349,
+            "NM": 0.572,
+            "PM": 0.045,
+            "UM": 0.034
+          },
+          "south_american": {
+            "IM": 0.326,
+            "NM": 0.612,
+            "PM": 0.038,
+            "UM": 0.024
+          },
+          "sub_saharan_african": {
+            "IM": 0.352,
+            "NM": 0.579,
+            "PM": 0.018,
+            "UM": 0.051
+          }
+        },
+        "sources": [
+          {
+            "quote_id": "q_e6a7460421a3",
+            "pipeline": "machine",
+            "provenance": "verified"
+          }
+        ]
+      }
     },
     "cyp2e1": {
       "label": "CYP2E1",
@@ -3111,7 +3359,54 @@
     },
     "cyp3a5": {
       "label": "CYP3A5",
-      "wikipedia": "https://en.wikipedia.org/wiki/CYP3A5"
+      "wikipedia": "https://en.wikipedia.org/wiki/CYP3A5",
+      "variability": {
+        "gene": "CYP3A5",
+        "profile": {
+          "central_south_asian": {
+            "IM": 0.398,
+            "NM": 0.075,
+            "PM": 0.527
+          },
+          "east_asian": {
+            "IM": 0.387,
+            "NM": 0.069,
+            "PM": 0.544
+          },
+          "european": {
+            "IM": 0.125,
+            "NM": 0.004,
+            "PM": 0.871
+          },
+          "middle_east_north_africa": {
+            "IM": 0.145,
+            "NM": 0.006,
+            "PM": 0.849
+          },
+          "north_american": {
+            "IM": 0.245,
+            "NM": 0.02,
+            "PM": 0.735
+          },
+          "south_american": {
+            "IM": 0.315,
+            "NM": 0.038,
+            "PM": 0.647
+          },
+          "sub_saharan_african": {
+            "IM": 0.494,
+            "NM": 0.198,
+            "PM": 0.308
+          }
+        },
+        "sources": [
+          {
+            "quote_id": "q_101e87ed4c99",
+            "pipeline": "machine",
+            "provenance": "verified"
+          }
+        ]
+      }
     },
     "adh": {
       "label": "Alcohol dehydrogenase",
@@ -3145,6 +3440,38 @@
       "label": "UGT2B15",
       "wikipedia": "https://en.wikipedia.org/wiki/UGT2B15"
     }
+  },
+  "metabolizer_phenotypes": {
+    "PM": {
+      "label": "Poor",
+      "note": "little or no enzyme activity"
+    },
+    "IM": {
+      "label": "Intermediate",
+      "note": "reduced activity"
+    },
+    "NM": {
+      "label": "Normal",
+      "note": "the activity dosing guidance assumes"
+    },
+    "RM": {
+      "label": "Rapid",
+      "note": "somewhat increased activity"
+    },
+    "UM": {
+      "label": "Ultrarapid",
+      "note": "much increased activity"
+    }
+  },
+  "metabolizer_groups": {
+    "european": "European",
+    "sub_saharan_african": "Sub-Saharan African",
+    "middle_east_north_africa": "Middle East & North Africa",
+    "central_south_asian": "Central/South Asian",
+    "east_asian": "East Asian",
+    "oceanian": "Oceanian",
+    "north_american": "North American",
+    "south_american": "South American"
   },
   "enzyme_roles": {
     "substrate": {
@@ -3242,6 +3569,13 @@
       "citation": "Harding SD, Armstrong JF, Faccenda E, et al. The IUPHAR/BPS Guide to Pharmacology: target type and transduction. guidetopharmacology.org (CC BY-SA 4.0 / ODbL).",
       "url": "https://www.guidetopharmacology.org/",
       "pages_dir": "data_sources/gtopdb/pages_class",
+      "machine": true
+    },
+    "pharmfreq": {
+      "ref": "PharmFreq, metabolizer status by population",
+      "citation": "PharmFreq: a global genetic variation database for pharmacogenomics. pharmfreq.com, metabolizer status tool.",
+      "url": "https://pharmfreq.com",
+      "pages_dir": "data_sources/pharmfreq/pages",
       "machine": true
     }
   },
@@ -3357,6 +3691,15 @@
       "addons": {
         "total": 2,
         "verified": 2,
+        "uncertain": 0,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0
+      },
+      "enzyme_variability": {
+        "total": 5,
+        "verified": 5,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3581,14 +3924,14 @@
       }
     },
     "nodes": {
-      "total": 4504,
-      "verified": 4184,
+      "total": 4509,
+      "verified": 4189,
       "uncertain": 149,
       "sourced": 0,
       "llm": 157,
       "nosource": 14,
       "missing": 171,
-      "backed": 4333,
+      "backed": 4338,
       "pct_backed": 96
     },
     "ki_coverage": {

@@ -360,6 +360,48 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // region against this owner's own strongest/weakest region, which is the only bar width
   // that means anything. A floor keeps the weakest region a visible sliver rather than
   // reading as "absent" (it is present: that is what the presence node said).
+  /**
+   * Normalize one enzyme's metabolizer-status profile (PharmFreq, corpus #13).
+   *
+   * Reshapes `{group: {phenotype: frequency}}` into the render order the emitted
+   * vocabularies define, so the panel iterates data rather than a hardcoded list of
+   * phenotype letters. Each group's row is the frequencies **in phenotype order**
+   * (slowest clearance first), which is what makes the stacked bars comparable down
+   * the column: the same colour sits at the same end of every bar.
+   *
+   * Returns null when the isoform has no published profile, which the panel shows as
+   * a gap rather than inventing a flat "does not vary".
+   */
+  const variabilityEntry = (variability) => {
+    if (!variability || !variability.profile) return null;
+    const order = Object.keys(metaRecord.metabolizer_phenotypes || {});
+    const groups = [];
+    for (const key of Object.keys(metaRecord.metabolizer_groups || {})) {
+      const row = variability.profile[key];
+      if (!row) continue;
+      groups.push({
+        key,
+        label: localize(metaRecord.metabolizer_groups[key]) || key,
+        cells: order.filter((p) => row[p] != null).map((p) => {
+          const def = metaRecord.metabolizer_phenotypes[p] || {};
+          return {
+            phenotype: p,
+            freq: row[p],
+            label: def.label ? localize(def.label) : p,
+            note: def.note ? localize(def.note) : "",
+          };
+        }),
+      });
+    }
+    if (!groups.length) return null;
+    return {
+      gene: variability.gene,
+      groups,
+      provenance: strongestGrade(variability.sources),
+      sources: mapSources(variability.sources),
+    };
+  };
+
   const densityEntry = (density) => {
     if (!density || !density.profile) return null;
     const zs = Object.values(density.profile);
@@ -1089,6 +1131,11 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       wikipedia: (enzymeDefs[id] || {}).wikipedia || null,
       rows: drugsByEnzyme.get(id) || [],
       metabolites: metabolitesByEnzyme.get(id) || [],
+      // How fast people clear a drug through this isoform, per population group
+      // (PharmFreq, corpus #13). One graded node for the whole profile, like an
+      // expression density profile; absent for an isoform the source does not cover,
+      // which the panel renders as a gap rather than as "does not vary".
+      variability: variabilityEntry((enzymeDefs[id] || {}).variability),
       keywords: [id, (enzymeDefs[id] || {}).label || id].join(" ").toLowerCase(),
     }))
     .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }));

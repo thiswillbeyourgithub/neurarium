@@ -78,6 +78,7 @@ CORPUS_DESC = {
     "gtopdb":          ("Molecular pharmacology (IUPHAR/BPS database)", "Receptor & target expression regions"),
     "pdsp_ki":         ("Receptor binding pharmacology", "Drug binding affinities (Ki)"),
     "allen_ahba":      ("Brain transcriptome atlas (microarray)", "Receptor & target expression regions"),
+    "pharmfreq":       ("Pharmacogenomic allele frequencies", "Enzyme clearance speed by population"),
     "wikipedia_pharm": ("Encyclopedia (pharmacodynamics tables)", "Drug binding affinities (Ki)"),
     "wikipedia_fr":    ("Encyclopedia (French, article prose)", "Drug brand names (European / French)"),
     "gtopdb_ki":       ("Molecular pharmacology (IUPHAR/BPS database)", "Drug binding affinities (Ki) and direction"),

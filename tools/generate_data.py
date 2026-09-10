@@ -106,6 +106,8 @@ from data_generators.drugs import (  # noqa: E402
     ENZYME_REACTIONS,
     ENZYME_ROLES,
     ENZYME_STRENGTHS,
+    METABOLIZER_GROUPS,
+    METABOLIZER_PHENOTYPES,
     TARGET_TYPE_COLORS,
     TARGET_TYPE_LABELS,
     TONE_RULES,
@@ -147,6 +149,7 @@ from data_generators.provenance import (  # noqa: E402
     _lookup_provenance,
     _provenance,
     _provenance_stats,
+    build_enzymes,
     _quote_sources,
     _receptor_provenance,
     _structure_provenance,
@@ -1651,6 +1654,8 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # Presentation metadata (its own meta.json) so a consumer reading the dataset
     # is self-contained: arrow colours + legend headings live in the data, not
     # only in the viewer's JS.
+    enzymes = build_enzymes(ENZYMES)
+
     meta = {
         # Both presentation maps are emitted bilingually: the kind->arrow colour
         # map is language-neutral, but kind_labels/group_labels carry {en, fr}
@@ -1700,7 +1705,12 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # enzyme id -> {label, wikipedia} map the Metabolism rows and the Enzymes
         # browse section read, plus the role and strength labels. Self-describing so
         # the viewer never hardcodes an isoform name or a role heading.
-        "enzymes": ENZYMES,
+        "enzymes": enzymes,
+        # How fast a person clears a drug through one enzyme, and the population
+        # groups PharmFreq (corpus #13) aggregates that over. Ordered vocabularies,
+        # emitted so the panel never hardcodes a phenotype letter or a group name.
+        "metabolizer_phenotypes": METABOLIZER_PHENOTYPES,
+        "metabolizer_groups": METABOLIZER_GROUPS,
         "enzyme_roles": ENZYME_ROLES,
         "enzyme_strengths": ENZYME_STRENGTHS,
         "enzyme_reactions": ENZYME_REACTIONS,
@@ -1740,7 +1750,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # count, never hand-typed. See _provenance_stats.
         "provenance_stats": _provenance_stats(
             structures, projections, circuits, projection_groups,
-            receptors, drugs, drug_targets, addons),
+            receptors, drugs, drug_targets, addons, enzymes),
     }
 
     return ({"meta": meta, "structures": structures,

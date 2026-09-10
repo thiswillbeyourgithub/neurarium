@@ -326,6 +326,16 @@ Screenshots).
   **reported with corpus/page/quote, never rewritten**, so nothing is silently skipped.
   Matching is by `quote_table.quote_id`, so an id from any of the three caches resolves.
   Idempotent; `--flagged` / `--ids` / `--dry-run`. Stdlib, author-side.
+- `tools/fetch/fetch_pharmfreq.py` — stdlib, offline, author-side. Reshapes PharmFreq's
+  hand-downloaded "Metabolizer status tool" export (an untracked `Metabolism.zip` at the repo
+  root) into corpus #13: one quote-gate page per gene under `data_sources/pharmfreq/pages/`
+  (`page` = the HGNC gene symbol) plus the committed
+  `tools/generated_cache/enzyme_variability.json`, which `build_enzymes()` merges onto
+  `meta.enzymes`. One node per isoform (kind `enzyme_variability`) whose quote carries the whole
+  profile, like an Allen density profile, so the verbatim gate covers the numbers the panel shows.
+  Deterministic, no judge, no network. Reports the isoforms it could not map (UGT1A1, which names
+  no isoform we model) and the two the source omits (CYP3A4, CYP1A2), so a gap never reads as
+  "does not vary". `--zip` points at another export, `--dry-run` writes nothing.
 - `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted quote
   from a **book** corpus (a paged corpus whose page tree has an `INDEX.md`), the **trail** of headings it
   sits under, into the committed `tools/generated_cache/quote_headers.json` ({quote_id: [outermost, ...,

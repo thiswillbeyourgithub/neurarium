@@ -3605,6 +3605,49 @@ function createInfoPanel(data, sourcingModal) {
         body.appendChild(box);
       }
 
+      // How fast people clear a drug through this isoform, and how common each speed
+      // is per population group (PharmFreq, corpus #13). It sits above the drug lists
+      // because it qualifies every one of them: a "major substrate" row means
+      // something different to a poor metabolizer than to a normal one. One graded
+      // node for the whole profile, so one pill on the heading.
+      const variability = enzyme.variability;
+      if (variability) {
+        const box = el("div", "info-bindings info-variability");
+        const head = el("h3", null, t("enzyme.variability"));
+        head.appendChild(makeProvenancePill(variability.provenance,
+          sourcesTip(variability.sources)));
+        box.appendChild(head);
+        box.appendChild(el("p", "var-caveat", t("enzyme.variabilityCaveat")));
+        // The key doubles as the caption: PM/IM/NM/UM are jargon, and the colour a
+        // reader is about to see in every bar is defined here once rather than in a
+        // tooltip they would have to hunt for.
+        const key = el("ul", "var-key");
+        for (const { phenotype, label, note } of variability.groups[0].cells) {
+          const li = el("li");
+          li.appendChild(el("span", `var-swatch var-${phenotype.toLowerCase()}`));
+          li.appendChild(el("span", "var-key-label", label));
+          li.appendChild(el("span", "var-key-note", ` · ${note}`));
+          key.appendChild(li);
+        }
+        box.appendChild(key);
+        const ul = el("ul", "var-rows");
+        for (const group of variability.groups) {
+          const li = el("li");
+          li.appendChild(el("span", "var-group", group.label));
+          const bar = el("span", "var-bar");
+          for (const cell of group.cells) {
+            const seg = el("span", `var-seg var-${cell.phenotype.toLowerCase()}`);
+            seg.style.width = `${cell.freq * 100}%`;
+            seg.title = `${cell.label}: ${(cell.freq * 100).toFixed(1)}%`;
+            bar.appendChild(seg);
+          }
+          li.appendChild(bar);
+          ul.appendChild(li);
+        }
+        box.appendChild(ul);
+        body.appendChild(box);
+      }
+
       const rows = enzyme.rows || [];
       const wrap = el("div", "info-bindings info-interactors");
       wrap.appendChild(el("h3", null, `${t("enzyme.drugs")} (${rows.length})`));
@@ -5321,6 +5364,7 @@ const KIND_LABELS = {
   drug_categories: "about.kindDrugCategories",
   drug_half_life: "about.kindDrugHalfLife",
   drug_enzymes: "about.kindDrugEnzymes",
+  enzyme_variability: "about.kindEnzymeVariability",
   drug_metabolites: "about.kindDrugMetabolites",
   drug_metabolite_enzyme: "about.kindDrugMetaboliteEnzyme",
   drug_metabolite_bindings: "about.kindDrugMetaboliteBindings",

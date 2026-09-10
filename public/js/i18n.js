@@ -386,6 +386,12 @@
       "enzyme.forms": "Active metabolites it forms",
       "enzyme.formsOf": "from {drug}",
       "enzyme.noDrugs": "No drug recorded at this enzyme yet.",
+      "enzyme.variability": "How fast people clear it",
+      "enzyme.variabilityCaveat":
+        "How common each clearance speed is, per broad population group. These are "
+        + "frequencies across study cohorts, not a prediction about any one person: "
+        + "most groups contain every speed, and only a genetic test says which one "
+        + "someone has.",
       "enzymes.title": "Enzymes",
       "enzymes.hint": "The drug-metabolising enzymes (mostly liver cytochrome P450). Not part of the brain: this is pharmacokinetics, so selecting one changes nothing in the 3D view.",
       "drug.actsOn": "Acts on",
@@ -595,6 +601,7 @@
       "about.kindDrugCategories": "Drug class",
       "about.kindDrugHalfLife": "Drug half-life (T½)",
       "about.kindDrugEnzymes": "Drug metabolising enzymes",
+      "about.kindEnzymeVariability": "Enzyme clearance speed by population",
       "about.kindDrugMetabolites": "Drug active metabolites",
       "about.kindDrugMetaboliteEnzyme": "Metabolite-forming enzymes",
       "about.kindDrugMetaboliteBindings": "Drug metabolite bindings",
@@ -970,6 +977,12 @@
       "enzyme.forms": "Métabolites actifs qu'elle forme",
       "enzyme.formsOf": "à partir de {drug}",
       "enzyme.noDrugs": "Aucun médicament enregistré sur cette enzyme.",
+      "enzyme.variability": "Vitesse d'élimination selon les personnes",
+      "enzyme.variabilityCaveat":
+        "Fréquence de chaque vitesse d'élimination, par grand groupe de population. "
+        + "Ce sont des fréquences observées dans des cohortes d'étude, pas une "
+        + "prédiction pour une personne donnée : la plupart des groupes contiennent "
+        + "toutes les vitesses, et seul un test génétique dit laquelle on a.",
       "enzymes.title": "Enzymes",
       "enzymes.hint": "Les enzymes qui métabolisent les médicaments (surtout les cytochromes P450 du foie). Elles ne font pas partie du cerveau : c'est de la pharmacocinétique, donc en sélectionner une ne change rien à la vue 3D.",
       "drug.actsOn": "Agit sur",
@@ -1185,6 +1198,7 @@
       "about.kindDrugCategories": "Classe du médicament",
       "about.kindDrugHalfLife": "Demi-vie du médicament (T½)",
       "about.kindDrugEnzymes": "Enzymes du métabolisme du médicament",
+      "about.kindEnzymeVariability": "Vitesse d'élimination par population",
       "about.kindDrugMetabolites": "Métabolites actifs du médicament",
       "about.kindDrugMetaboliteEnzyme": "Enzymes formant les métabolites",
       "about.kindDrugMetaboliteBindings": "Liaisons des métabolites",

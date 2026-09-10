@@ -1,0 +1,309 @@
+{
+ "enzymes": {
+  "cyp2b6": {
+   "gene": "CYP2B6",
+   "profile": {
+    "central_south_asian": {
+     "IM": 0.37,
+     "NM": 0.431,
+     "PM": 0.06,
+     "RM": 0.13,
+     "UM": 0.01
+    },
+    "east_asian": {
+     "IM": 0.311,
+     "NM": 0.513,
+     "PM": 0.037,
+     "RM": 0.131,
+     "UM": 0.008
+    },
+    "european": {
+     "IM": 0.359,
+     "NM": 0.512,
+     "PM": 0.055,
+     "RM": 0.073,
+     "UM": 0.003
+    },
+    "middle_east_north_africa": {
+     "IM": 0.461,
+     "NM": 0.287,
+     "PM": 0.13,
+     "RM": 0.111,
+     "UM": 0.011
+    },
+    "north_american": {
+     "IM": 0.426,
+     "NM": 0.426,
+     "PM": 0.095,
+     "RM": 0.051,
+     "UM": 0.002
+    },
+    "oceanian": {
+     "IM": 0.0,
+     "NM": 1.0,
+     "PM": 0.0,
+     "RM": 0.0,
+     "UM": 0.0
+    },
+    "south_american": {
+     "IM": 0.467,
+     "NM": 0.246,
+     "PM": 0.139,
+     "RM": 0.131,
+     "UM": 0.017
+    },
+    "sub_saharan_african": {
+     "IM": 0.498,
+     "NM": 0.223,
+     "PM": 0.279,
+     "RM": 0.0,
+     "UM": 0.0
+    }
+   },
+   "sources": [
+    {
+     "corpus": "pharmfreq",
+     "extraction": "code",
+     "page": "CYP2B6",
+     "provenance": "verified",
+     "quote": "CYP2B6 metabolizer phenotype frequencies by population group (PharmFreq): European PM 5.5%, IM 35.9%, NM 51.2%, RM 7.3%, UM 0.3%; Sub-Saharan African PM 27.9%, IM 49.8%, NM 22.3%, RM 0.0%, UM 0.0%; Middle East & North Africa PM 13.0%, IM 46.1%, NM 28.7%, RM 11.1%, UM 1.1%; Central/South Asian PM 6.0%, IM 37.0%, NM 43.1%, RM 13.0%, UM 1.0%; East Asian PM 3.7%, IM 31.1%, NM 51.3%, RM 13.1%, UM 0.8%; Oceanian PM 0.0%, IM 0.0%, NM 100.0%, RM 0.0%, UM 0.0%; North American PM 9.5%, IM 42.6%, NM 42.6%, RM 5.1%, UM 0.2%; South American PM 13.9%, IM 46.7%, NM 24.6%, RM 13.1%, UM 1.7%"
+    }
+   ]
+  },
+  "cyp2c19": {
+   "gene": "CYP2C19",
+   "profile": {
+    "central_south_asian": {
+     "IM": 0.441,
+     "NM": 0.256,
+     "PM": 0.108,
+     "RM": 0.167,
+     "UM": 0.027
+    },
+    "east_asian": {
+     "IM": 0.477,
+     "NM": 0.356,
+     "PM": 0.154,
+     "RM": 0.013,
+     "UM": 0.00012
+    },
+    "european": {
+     "IM": 0.261,
+     "NM": 0.39,
+     "PM": 0.024,
+     "RM": 0.277,
+     "UM": 0.049
+    },
+    "middle_east_north_africa": {
+     "IM": 0.21,
+     "NM": 0.442,
+     "PM": 0.014,
+     "RM": 0.288,
+     "UM": 0.047
+    },
+    "north_american": {
+     "IM": 0.257,
+     "NM": 0.398,
+     "PM": 0.023,
+     "RM": 0.274,
+     "UM": 0.047
+    },
+    "oceanian": {
+     "IM": 0.0,
+     "NM": 0.837,
+     "PM": 0.0,
+     "RM": 0.122,
+     "UM": 0.041
+    },
+    "south_american": {
+     "IM": 0.0,
+     "NM": 0.727,
+     "PM": 0.0,
+     "RM": 0.24,
+     "UM": 0.032
+    },
+    "sub_saharan_african": {
+     "IM": 0.37,
+     "NM": 0.286,
+     "PM": 0.06,
+     "RM": 0.235,
+     "UM": 0.048
+    }
+   },
+   "sources": [
+    {
+     "corpus": "pharmfreq",
+     "extraction": "code",
+     "page": "CYP2C19",
+     "provenance": "verified",
+     "quote": "CYP2C19 metabolizer phenotype frequencies by population group (PharmFreq): European PM 2.4%, IM 26.1%, NM 39.0%, RM 27.7%, UM 4.9%; Sub-Saharan African PM 6.0%, IM 37.0%, NM 28.6%, RM 23.5%, UM 4.8%; Middle East & North Africa PM 1.4%, IM 21.0%, NM 44.2%, RM 28.8%, UM 4.7%; Central/South Asian PM 10.8%, IM 44.1%, NM 25.6%, RM 16.7%, UM 2.7%; East Asian PM 15.4%, IM 47.7%, NM 35.6%, RM 1.3%, UM 0.0%; Oceanian PM 0.0%, IM 0.0%, NM 83.7%, RM 12.2%, UM 4.1%; North American PM 2.3%, IM 25.7%, NM 39.8%, RM 27.4%, UM 4.7%; South American PM 0.0%, IM 0.0%, NM 72.7%, RM 24.0%, UM 3.2%"
+    }
+   ]
+  },
+  "cyp2c9": {
+   "gene": "CYP2C9",
+   "profile": {
+    "central_south_asian": {
+     "IM": 0.302,
+     "NM": 0.67,
+     "PM": 0.028
+    },
+    "east_asian": {
+     "IM": 0.077,
+     "NM": 0.921,
+     "PM": 0.002
+    },
+    "european": {
+     "IM": 0.343,
+     "NM": 0.634,
+     "PM": 0.022
+    },
+    "middle_east_north_africa": {
+     "IM": 0.348,
+     "NM": 0.626,
+     "PM": 0.026
+    },
+    "north_american": {
+     "IM": 0.304,
+     "NM": 0.678,
+     "PM": 0.018
+    },
+    "oceanian": {
+     "IM": 0.295,
+     "NM": 0.688,
+     "PM": 0.017
+    },
+    "south_american": {
+     "IM": 0.293,
+     "NM": 0.695,
+     "PM": 0.012
+    },
+    "sub_saharan_african": {
+     "IM": 0.234,
+     "NM": 0.761,
+     "PM": 0.004
+    }
+   },
+   "sources": [
+    {
+     "corpus": "pharmfreq",
+     "extraction": "code",
+     "page": "CYP2C9",
+     "provenance": "verified",
+     "quote": "CYP2C9 metabolizer phenotype frequencies by population group (PharmFreq): European PM 2.2%, IM 34.3%, NM 63.4%; Sub-Saharan African PM 0.4%, IM 23.4%, NM 76.1%; Middle East & North Africa PM 2.6%, IM 34.8%, NM 62.6%; Central/South Asian PM 2.8%, IM 30.2%, NM 67.0%; East Asian PM 0.2%, IM 7.7%, NM 92.1%; Oceanian PM 1.7%, IM 29.5%, NM 68.8%; North American PM 1.8%, IM 30.4%, NM 67.8%; South American PM 1.2%, IM 29.3%, NM 69.5%"
+    }
+   ]
+  },
+  "cyp2d6": {
+   "gene": "CYP2D6",
+   "profile": {
+    "central_south_asian": {
+     "IM": 0.267,
+     "NM": 0.698,
+     "PM": 0.018,
+     "UM": 0.018
+    },
+    "east_asian": {
+     "IM": 0.402,
+     "NM": 0.577,
+     "PM": 0.007,
+     "UM": 0.015
+    },
+    "european": {
+     "IM": 0.348,
+     "NM": 0.571,
+     "PM": 0.046,
+     "UM": 0.036
+    },
+    "middle_east_north_africa": {
+     "IM": 0.261,
+     "NM": 0.612,
+     "PM": 0.016,
+     "UM": 0.11
+    },
+    "north_american": {
+     "IM": 0.381,
+     "NM": 0.541,
+     "PM": 0.055,
+     "UM": 0.023
+    },
+    "oceanian": {
+     "IM": 0.349,
+     "NM": 0.572,
+     "PM": 0.045,
+     "UM": 0.034
+    },
+    "south_american": {
+     "IM": 0.326,
+     "NM": 0.612,
+     "PM": 0.038,
+     "UM": 0.024
+    },
+    "sub_saharan_african": {
+     "IM": 0.352,
+     "NM": 0.579,
+     "PM": 0.018,
+     "UM": 0.051
+    }
+   },
+   "sources": [
+    {
+     "corpus": "pharmfreq",
+     "extraction": "code",
+     "page": "CYP2D6",
+     "provenance": "verified",
+     "quote": "CYP2D6 metabolizer phenotype frequencies by population group (PharmFreq): European PM 4.6%, IM 34.8%, NM 57.1%, UM 3.6%; Sub-Saharan African PM 1.8%, IM 35.2%, NM 57.9%, UM 5.1%; Middle East & North Africa PM 1.6%, IM 26.1%, NM 61.2%, UM 11.0%; Central/South Asian PM 1.8%, IM 26.7%, NM 69.8%, UM 1.8%; East Asian PM 0.7%, IM 40.2%, NM 57.7%, UM 1.5%; Oceanian PM 4.5%, IM 34.9%, NM 57.2%, UM 3.4%; North American PM 5.5%, IM 38.1%, NM 54.1%, UM 2.3%; South American PM 3.8%, IM 32.6%, NM 61.2%, UM 2.4%"
+    }
+   ]
+  },
+  "cyp3a5": {
+   "gene": "CYP3A5",
+   "profile": {
+    "central_south_asian": {
+     "IM": 0.398,
+     "NM": 0.075,
+     "PM": 0.527
+    },
+    "east_asian": {
+     "IM": 0.387,
+     "NM": 0.069,
+     "PM": 0.544
+    },
+    "european": {
+     "IM": 0.125,
+     "NM": 0.004,
+     "PM": 0.871
+    },
+    "middle_east_north_africa": {
+     "IM": 0.145,
+     "NM": 0.006,
+     "PM": 0.849
+    },
+    "north_american": {
+     "IM": 0.245,
+     "NM": 0.02,
+     "PM": 0.735
+    },
+    "south_american": {
+     "IM": 0.315,
+     "NM": 0.038,
+     "PM": 0.647
+    },
+    "sub_saharan_african": {
+     "IM": 0.494,
+     "NM": 0.198,
+     "PM": 0.308
+    }
+   },
+   "sources": [
+    {
+     "corpus": "pharmfreq",
+     "extraction": "code",
+     "page": "CYP3A5",
+     "provenance": "verified",
+     "quote": "CYP3A5 metabolizer phenotype frequencies by population group (PharmFreq): European PM 87.1%, IM 12.5%, NM 0.4%; Sub-Saharan African PM 30.8%, IM 49.4%, NM 19.8%; Middle East & North Africa PM 84.9%, IM 14.5%, NM 0.6%; Central/South Asian PM 52.7%, IM 39.8%, NM 7.5%; East Asian PM 54.4%, IM 38.7%, NM 6.9%; North American PM 73.5%, IM 24.5%, NM 2.0%; South American PM 64.7%, IM 31.5%, NM 3.8%"
+    }
+   ]
+  }
+ }
+}

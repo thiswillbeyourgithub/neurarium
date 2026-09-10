@@ -95,6 +95,9 @@ in `meta.provenance_stats.by_kind`):
 - drug elimination half-life (T½) -> a drug's `half_life` (+ `half_life_sources`) -> `drug_half_life`
 - drug metabolism role -> a drug's `enzymes[]` (`{enzyme, role, strength?}`) -> `drug_enzymes`
   (one node per (enzyme, role) pair; pharmacokinetics, so it has no anatomy, see Drug metabolism)
+- enzyme population variability -> an enzyme's `variability` -> `enzyme_variability` (ONE node
+  per isoform for the whole profile, not one per population group, for the same reason a density
+  profile is one node: a single published aggregation ranking the groups against each other)
 - drug active metabolite -> a drug's `metabolites[]` (each `{name, drug_id?, half_life?,
   bindings?, formed_by?, sources}`) -> `drug_metabolites` (a metabolite that is itself a modeled
   drug links via `drug_id` + reuses its bindings/T½)
@@ -724,7 +727,22 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   `ENZYME_REACTIONS` key (a closed, translated vocabulary), omitted when the source names the
   enzyme but not the step. `generate_data.py` raises if a key matches no metabolite, so an
   applier re-run cannot silently drop a node.
-- **Viewer.** `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
+- **Population variability** (corpus #13 PharmFreq). The rows above say which isoform clears a
+  drug; this says how fast *people* do, which is the only thing in the dataset that varies by who
+  is taking the drug. Per isoform, the frequency of each metabolizer phenotype (`METABOLIZER_PHENOTYPES`,
+  ordered slowest to fastest: PM/IM/NM/RM/UM) in each population group (`METABOLIZER_GROUPS`, both in
+  `data_generators/drugs.py`, emitted as `meta.metabolizer_*`). `tools/fetch/fetch_pharmfreq.py`
+  reshapes the hand-downloaded export into `tools/generated_cache/enzyme_variability.json`, which
+  `build_enzymes()` merges onto the emitted `meta.enzymes`; deterministic, so `pipeline = machine`.
+  5 of the 18 isoforms are covered, and an uncovered one simply has no `variability` key: CYP3A4 and
+  CYP1A2, the two this dataset leans on hardest, are absent from the source, which is a gap in the
+  corpus and not a claim that they do not vary.
+- **Viewer.** `showEnzyme` leads with **How fast people clear it** (one stacked bar per population
+  group, segments in phenotype order, its own grade pill on the heading) above the drug lists,
+  because it qualifies all of them: a "major substrate" row means something different to a poor
+  metabolizer. The caption states the caveat that carries the ethics of the section: these are
+  frequencies across study cohorts, most groups contain every speed, and only a genetic test says
+  which one a person has. `showDrug` gains a **Metabolism** list (enzyme + role + strength + its own grade
   pill, clickable to the enzyme, headed by a ClinPGx pathway-search link) and a **Drug interactions**
   list, both **after** the anatomy sections
   (pharmacokinetics lights nothing in the scene, so it does not interrupt Acts on -> Projections

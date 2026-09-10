@@ -307,6 +307,48 @@ ENZYME_REACTIONS: dict[str, dict[str, str]] = {
     "hydroxylation": {"en": "hydroxylation", "fr": "hydroxylation"},
 }
 
+# How fast a person clears a drug through one enzyme, as the pharmacogenomics
+# literature grades it. Ordered slowest to fastest, because that is the axis a reader
+# is asking about ("am I likely to clear this slowly?"), and the order is the render
+# order. Each carries a one-line meaning, since PM/IM/NM/UM are jargon a visitor has no
+# reason to know. Used by the population-frequency profile below, never by a drug row:
+# this is a property of people, not of a prescription.
+METABOLIZER_PHENOTYPES: dict[str, dict[str, Any]] = {
+    "PM": {"label": {"en": "Poor", "fr": "Lent"},
+           "note": {"en": "little or no enzyme activity",
+                    "fr": "activité enzymatique faible ou nulle"}},
+    "IM": {"label": {"en": "Intermediate", "fr": "Intermédiaire"},
+           "note": {"en": "reduced activity",
+                    "fr": "activité réduite"}},
+    "NM": {"label": {"en": "Normal", "fr": "Normal"},
+           "note": {"en": "the activity dosing guidance assumes",
+                    "fr": "l'activité que suppose la posologie usuelle"}},
+    "RM": {"label": {"en": "Rapid", "fr": "Rapide"},
+           "note": {"en": "somewhat increased activity",
+                    "fr": "activité un peu augmentée"}},
+    "UM": {"label": {"en": "Ultrarapid", "fr": "Ultrarapide"},
+           "note": {"en": "much increased activity",
+                    "fr": "activité fortement augmentée"}},
+}
+
+# The biogeographic groupings PharmFreq (corpus #13) aggregates its allele-frequency
+# studies into. A closed, ordered vocabulary keyed by slug, so the emitted profile
+# cannot carry a group the viewer has no label for. These are **coarse continental
+# groupings of study cohorts**, not ancestries and certainly not nationalities; the
+# caveat is shipped next to the figures in the panel (see `enzyme.variabilityCaveat`),
+# because a frequency across a group says nothing about any individual in it.
+METABOLIZER_GROUPS: dict[str, dict[str, str]] = {
+    "european": {"en": "European", "fr": "Europe"},
+    "sub_saharan_african": {"en": "Sub-Saharan African", "fr": "Afrique subsaharienne"},
+    "middle_east_north_africa": {"en": "Middle East & North Africa",
+                                 "fr": "Moyen-Orient et Afrique du Nord"},
+    "central_south_asian": {"en": "Central/South Asian", "fr": "Asie centrale et du Sud"},
+    "east_asian": {"en": "East Asian", "fr": "Asie de l'Est"},
+    "oceanian": {"en": "Oceanian", "fr": "Océanie"},
+    "north_american": {"en": "North American", "fr": "Amérique du Nord"},
+    "south_american": {"en": "South American", "fr": "Amérique du Sud"},
+}
+
 # Extra names a user might type in the search box for a drug we already model:
 # street names, chemical synonyms, abbreviations, and the alternate INN/USAN spellings
 # a non-English reader reaches for. Search-only, never displayed, which is why they are

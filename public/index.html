@@ -1354,6 +1354,30 @@
       /* The chain-of-custody note under the grade key: no pill of its own, so it runs
          the full width and sits slightly apart from the rows it qualifies. */
       .src-key-note { display: block; margin-top: 8px; }
+
+      /* Enzyme variability (PharmFreq, corpus #13): one stacked bar per population
+         group, segments in phenotype order so the same colour sits at the same end of
+         every bar and the columns can be read down. The five fills are literal rather
+         than tokens: they are a slow -> fast ramp, not chrome, and a solid fill reads
+         the same on either theme. */
+      .var-caveat { margin: 4px 0 10px; font-size: 11px; line-height: 1.45;
+        color: rgba(var(--ink), 0.62); }
+      .var-key { list-style: none; margin: 0 0 10px; padding: 0; display: flex;
+        flex-wrap: wrap; gap: 4px 14px; font-size: 11px; }
+      .var-key li { display: flex; align-items: center; gap: 5px; }
+      .var-key-note { color: rgba(var(--ink), 0.55); }
+      .var-swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+      .var-rows { list-style: none; margin: 0; padding: 0; }
+      .var-rows li { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+      .var-group { flex: 0 0 42%; font-size: 11px; color: rgba(var(--ink), 0.8); }
+      .var-bar { flex: 1; display: flex; height: 11px; border-radius: 3px;
+        overflow: hidden; background: rgba(var(--ink), 0.08); }
+      .var-seg { height: 100%; }
+      .var-pm { background: #3b6ea5; }
+      .var-im { background: #6fa8c7; }
+      .var-nm { background: #9aa7a0; }
+      .var-rm { background: #e0a04a; }
+      .var-um { background: #d1594c; }
       /* The coverage tally: a label, a thin bar, and the count. */
       .src-stats { margin: 8px 0 2px; font-size: 12px; }
       .src-stat-headline {

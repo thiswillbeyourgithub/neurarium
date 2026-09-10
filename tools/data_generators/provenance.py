@@ -263,6 +263,23 @@ def _merge_external_density() -> None:
     DENSITY_MIN_RELIABILITY = data.get("min_reliability")
 
 
+# Machine-written metabolizer-status profiles: ``{enzyme_id: {"gene", "profile":
+# {group: {phenotype: frequency}}, "sources": [...]}}``. One node per enzyme (kind
+# ``enzyme_variability``), not one per population group, for the same reason a density
+# profile is one node and not one per region: it is a single published aggregation
+# ranking the groups against each other. Written by ``tools/fetch/fetch_pharmfreq.py``
+# (corpus #13); empty when that file is absent, in which case no enzyme carries one.
+ENZYME_VARIABILITY: dict[str, dict[str, Any]] = {}
+
+
+def _merge_enzyme_variability() -> None:
+    """Merge ``tools/generated_cache/enzyme_variability.json`` into the registry above."""
+    src = Path(__file__).resolve().parent.parent / "generated_cache" / "enzyme_variability.json"
+    if not src.exists():
+        return
+    ENZYME_VARIABILITY.update(json.loads(src.read_text(encoding="utf-8")).get("enzymes") or {})
+
+
 # Machine-written *classification* sources, the mechanism counterpart of the location
 # registries above. A receptor's classification is four independent graded sub-claims,
 # so this is keyed per attribute: ``{receptor_id: {attr: [source, ...]}}`` for
@@ -318,6 +335,7 @@ def _merge_external_location_sources() -> None:
 
 _merge_external_location_sources()
 _merge_external_density()
+_merge_enzyme_variability()
 _merge_external_classification_sources()
 
 
@@ -613,7 +631,55 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "pages_dir": "data_sources/gtopdb/pages_class",
         "machine": True,
     },
+    "pharmfreq": {
+        # Enzyme variability corpus #13: how fast people clear a drug through one
+        # enzyme, and how common each speed is per population group. The only corpus
+        # here whose subject is *people* rather than molecules or anatomy, which is
+        # why it backs its own node kind (`enzyme_variability`) instead of grading an
+        # existing one: nothing else this dataset states about CYP2D6 varies by who
+        # is taking the drug.
+        # tools/fetch/fetch_pharmfreq.py reshapes the hand-downloaded "Metabolizer
+        # status tool" export into one author-side page per gene (`page` = the HGNC
+        # gene symbol, `quote` = the one line carrying the whole profile, as in the
+        # Allen density profiles), so the verbatim gate covers the numbers a reader
+        # judges the claim by. Deterministic, no judge: PharmFreq publishes the
+        # aggregate and we only reshape it.
+        # Two isoforms this dataset leans on hardest, CYP3A4 and CYP1A2, have no
+        # profile in the tool, so their absence is a gap in the source, not a claim
+        # that they do not vary.
+        "ref": "PharmFreq, metabolizer status by population",
+        "citation": "PharmFreq: a global genetic variation database for "
+                    "pharmacogenomics. pharmfreq.com, metabolizer status tool.",
+        "url": "https://pharmfreq.com",
+        "pages_dir": "data_sources/pharmfreq/pages",
+        "machine": True,
+    },
 }
+
+
+def build_enzymes(enzymes: dict[str, Any]) -> dict[str, Any]:
+    """``ENZYMES`` with each isoform's metabolizer-status profile merged in.
+
+    One node per enzyme, kind ``enzyme_variability`` (see :data:`ENZYME_VARIABILITY`).
+    An isoform PharmFreq does not cover simply has no ``variability`` key, which the
+    panel renders as an honest gap rather than as "does not vary": CYP3A4 and CYP1A2,
+    the two this dataset leans on hardest, are exactly the two the tool omits.
+
+    Returns a copy; ``ENZYMES`` stays the authored vocabulary it is.
+    """
+    out: dict[str, Any] = {}
+    for eid, rec in enzymes.items():
+        rec = dict(rec)
+        var = ENZYME_VARIABILITY.get(eid)
+        if var:
+            rec["variability"] = {
+                "gene": var["gene"],
+                "profile": var["profile"],
+                "sources": _quote_sources(var.get("sources"),
+                                          f"Enzyme {rec['label']!r} variability"),
+            }
+        out[eid] = rec
+    return out
 
 
 def _quote_sources(sources: Any, what: str) -> list[dict[str, Any]]:
@@ -858,7 +924,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
                       receptors: list[dict[str, Any]],
                       drugs: list[dict[str, Any]],
                       drug_targets: dict[str, dict[str, Any]],
-                      addons: list[dict[str, Any]]) -> dict[str, Any]:
+                      addons: list[dict[str, Any]],
+                      enzymes: dict[str, Any] | None = None) -> dict[str, Any]:
     """Programmatic sourcing tally over the dataset's **nodes** (see the Nodes
     section of CLAUDE.md), emitted into ``meta.provenance_stats``.
 
@@ -1095,8 +1162,16 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # a panel-placed caveat is held to the same sourcing bar as a binding.
     addon_grades = [_strongest_grade(a.get("sources")) for a in addons]
 
+    # Enzyme variability (kind ``enzyme_variability``): one node per isoform carrying a
+    # metabolizer-status profile. An isoform PharmFreq does not cover is not a node at
+    # all rather than an unsourced one, because "we have no frequencies for CYP3A4" is
+    # a gap in the corpus, not an unbacked claim we made.
+    variability_grades = [_strongest_grade((e.get("variability") or {}).get("sources"))
+                          for e in (enzymes or {}).values() if e.get("variability")]
+
     by_kind = {
         "addons": tally(addon_grades),
+        "enzyme_variability": tally(variability_grades),
         "drug_bindings": tally(binding_grades),
         "drug_nbn": tally(nbn_grades),
         "drug_brands": tally(brand_grades),
