@@ -179,6 +179,24 @@
            tooltip can size itself just under the panel (see .help-tip). Portrait
            overrides the panel to full-width; the tooltip's vw cap covers that case. */
         --panel-w: clamp(240px, 25vw, 420px);
+        /* Semantic ink for the graded chips, flag tags and callouts. Split out of the
+           rules that use it so the day theme can darken it in ONE place: every one of
+           these was picked to glow on a dark panel, and the very same value on a white
+           one is light-on-light (the yellow ~ pill measures 1.7:1 there). The tinted
+           GROUNDS are deliberately not tokenized: a 15%-alpha tint reads correctly over
+           either page colour, so only the text moves. */
+        --sem-missing: #ef5f6b;
+        --sem-llm: #b6bcc4;
+        --sem-sourced: #e3c14a;
+        --sem-verified: #66cf85;
+        --sem-uncertain: #f0913f;
+        --sem-amber: #e6b86a;
+        --sem-caution: #e6b800;
+        /* The tooltip bubble's own ground. It is NOT --panel-bg: a tip is drawn over
+           the panel it explains, so it has to be opaque and a step further from the
+           page than the panel is, or the text behind it shows through. */
+        --tip-bg: rgba(18, 18, 22, 0.98);
+        --tip-shadow: rgba(0, 0, 0, 0.5);
       }
       /* The day theme: the same purple chrome over white instead of near-black. Only the
          tokens above are redefined, never a rule, so a component added later is themed on
@@ -204,7 +222,24 @@
         --accent-bright: #5f2fc4;
         --accent-light: #4d21ab;
         --accent-soft: rgba(124, 77, 219, 0.22);
+        /* The same roles, darkened: each clears 5:1 over its own tint on white. */
+        --sem-missing: #c1121f;
+        --sem-llm: #4c5561;
+        --sem-sourced: #7a5c00;
+        --sem-verified: #12703a;
+        --sem-uncertain: #9a4700;
+        --sem-amber: #8a5600;
+        --sem-caution: #7d6200;
+        --tip-bg: rgba(255, 255, 255, 0.99);
+        --tip-shadow: rgba(24, 28, 36, 0.22);
       }
+      /* Token-only, like the block above, but scoped to the callouts: --addon-ink
+         defaults to the tone colour, which is exactly what a white ground cannot
+         carry. A boxed callout hands its text to the page ink (the tint and border
+         still say which tone it is); the bare ⚠ beside the T1/2 chip has no tinted
+         ground to say it with, so it keeps --sem-caution, which is themed already. */
+      :root[data-theme="light"] .addon,
+      :root[data-theme="light"] .combo-warning { --addon-ink: var(--text-strong); }
       * { box-sizing: border-box; }
       html, body {
         margin: 0;
@@ -742,9 +777,9 @@
         font-size: 22px;
         line-height: 1;
         border-radius: 50%;
-        color: var(--text);
+        color: #f2f3f5;
         background: rgba(14, 17, 22, 0.85);
-        border: 1px solid rgba(var(--ink), 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.16);
         cursor: pointer;
       }
       .lightbox-close:hover { background: rgba(40, 46, 54, 0.95); }
@@ -1877,7 +1912,7 @@
       .info-locations .loc-species {
         flex: 0 0 auto;
         font-size: 10px;
-        color: #e6b86a;
+        color: var(--sem-amber);
         white-space: nowrap;
         cursor: default;
       }
@@ -1965,19 +2000,19 @@
       /* No source document for the claim yet: red, a ✕ glyph (see NOSOURCE_GLYPH),
          so an unbacked node reads as a clear red cross, not a long word. */
       .src-todo {
-        color: #ef5f6b;
+        color: var(--sem-missing);
         background: rgba(239, 95, 107, 0.15);
         border: 1px solid rgba(239, 95, 107, 0.5);
       }
       /* LLM-only (grey ?): produced from memory, may be a hallucination. */
       .src-prov-llm {
-        color: #b6bcc4;
+        color: var(--sem-llm);
         background: rgba(160, 168, 178, 0.16);
         border: 1px solid rgba(160, 168, 178, 0.5);
       }
       /* LLM had the source (yellow ~): written with the document, not quote-checked. */
       .src-prov-sourced {
-        color: #e3c14a;
+        color: var(--sem-sourced);
         background: rgba(227, 193, 74, 0.15);
         border: 1px solid rgba(227, 193, 74, 0.5);
       }
@@ -1986,7 +2021,7 @@
          inspectable, non-LLM extract of a real source (the tooltip names which). */
       .src-prov-verified,
       .src-prov-wikipedia {
-        color: #66cf85;
+        color: var(--sem-verified);
         background: rgba(102, 207, 133, 0.18);
         border: 1px solid rgba(102, 207, 133, 0.5);
       }
@@ -1995,7 +2030,7 @@
          it is the attribution that is an inference. Its tooltip leads with the
          reasons (below), so the badge is a "read me", not a downgrade. */
       .src-prov-uncertain {
-        color: #f0913f;
+        color: var(--sem-uncertain);
         background: rgba(240, 145, 63, 0.16);
         border: 1px solid rgba(240, 145, 63, 0.55);
       }
@@ -2003,7 +2038,7 @@
          row carries an inert badge (green ✓ / red ✕) so a sourced reason and an
          absence-of-evidence reason are told apart at a glance. */
       .src-uncertain { margin-bottom: 4px; }
-      .src-uncertain-lead { color: #f0913f; font-weight: 600; margin-bottom: 6px; }
+      .src-uncertain-lead { color: var(--sem-uncertain); font-weight: 600; margin-bottom: 6px; }
       .src-uncertain-list { list-style: none; margin: 0; padding: 0; }
       .src-uncertain-list li { display: flex; gap: 6px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 8px; }
       /* The badges here are decoration inside a tooltip, never a control: no pointer,
@@ -2073,10 +2108,10 @@
            per position so the bubble scrolls internally and is never cropped. */
         max-width: min(calc(var(--panel-w) - 16px), 92vw);
         padding: 8px 10px;
-        background: rgba(18, 18, 22, 0.98);
+        background: var(--tip-bg);
         border: 1px solid rgba(var(--ink), 0.16);
         border-radius: 6px;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 6px 16px var(--tip-shadow);
         color: var(--text);
         font: 400 11px/1.45 inherit;
         letter-spacing: normal;
@@ -2290,9 +2325,9 @@
       .ki-chip .ki-detail { color: var(--muted); font-size: 10px; }
       /* A Ki with no human assay: tint the value amber so a non-human number is
          visible at a glance, not only in the tooltip. */
-      .ki-chip.ki-nonhuman .ki-val { color: #e6b86a; }
+      .ki-chip.ki-nonhuman .ki-val { color: var(--sem-amber); }
       /* Alias-borrowed value warning ("⚠ measured on <compound>"): amber, small. */
-      .ki-mapped { color: #e6b800; font-size: 10px; white-space: nowrap; }
+      .ki-mapped { color: var(--sem-caution); font-size: 10px; white-space: nowrap; }
       /* Affinity-only (PDSP) binding: no known direction, panel-only, slightly muted. */
       .info-bindings li.affinity-only .bind-action { font-style: italic; }
       /* Elimination half-life (T½) chip: a value + its provenance pill. The value
@@ -2310,17 +2345,17 @@
       .hl-chip .hl-label { color: var(--muted); font-size: 11px; }
       /* The non-linear-kinetics warning beside a T½: the number above is only
          meaningful while clearance is linear, so this says "there is a caveat" and
-         jumps to where it is written. Yellow off the same --addon-accent the
-         caution admonition uses, so the glyph and the box it points at match. */
+         jumps to where it is written. It carries --sem-caution rather than a boxed
+         callout's --addon-ink: there is no tint behind it to say "caution" on its
+         behalf, so the glyph itself has to, in either theme. */
       .hl-warn {
-        --addon-accent: 230, 184, 0;
         border: 0;
         background: none;
         padding: 0 2px;
         font: inherit;
         line-height: 1;
         cursor: pointer;
-        color: rgb(var(--addon-accent));
+        color: var(--sem-caution);
       }
       .hl-warn:hover, .hl-warn:focus-visible { filter: brightness(1.25); }
       /* Active-metabolites list: each row is a name (+ its identity pill) with its own
@@ -2373,6 +2408,8 @@
       }
       /* Combination-drug warning at the top of a combo's panel. */
       .combo-warning {
+        --addon-accent: 230, 184, 0;
+        --addon-ink: rgb(var(--addon-accent));
         background: rgba(230, 184, 0, 0.08);
         border: 1px solid rgba(230, 184, 0, 0.3);
         border-radius: 6px;
@@ -2380,7 +2417,7 @@
         margin: 0 0 12px;
         font-size: 12px;
       }
-      .combo-warning strong { color: #e6c85a; }
+      .combo-warning strong { color: var(--addon-ink); }
       .combo-warning p { margin: 4px 0 6px; color: var(--muted); }
       .combo-warning .combo-link {
         background: none;
@@ -2401,6 +2438,12 @@
         /* Neutral fallback: a tone with no ramp yet reads plain rather than
            borrowing another tone's urgency. */
         --addon-accent: 150, 158, 170;
+        /* Text colour, split from the tint colour on purpose: --addon-accent is what
+           paints the 8%-alpha ground, so reusing it for the words is yellow-on-yellow
+           the moment that ground is white. Dark theme keeps the tone colour (bright on
+           a dark panel); the day theme swaps the text for the page's strongest ink in
+           one override below, and the tone still reads off the tint and border. */
+        --addon-ink: rgb(var(--addon-accent));
         background: rgba(var(--addon-accent), 0.08);
         border: 1px solid rgba(var(--addon-accent), 0.3);
         border-radius: 6px;
@@ -2416,8 +2459,8 @@
         gap: 6px;
         flex-wrap: wrap;
       }
-      .addon-glyph { color: rgb(var(--addon-accent)); }
-      .addon-title { color: rgb(var(--addon-accent)); }
+      .addon-glyph { color: var(--addon-ink); }
+      .addon-title { color: var(--addon-ink); font-weight: 600; }
       .addon-text { margin: 4px 0 0; color: var(--muted); }
       /* The provenance line of a DERIVED addon (no source pill to carry it): it
          says the box is an inference off the rows below, so it is set smaller and
@@ -2546,7 +2589,7 @@
         font-size: 12.5px;
         line-height: 1.45;
         text-align: left;
-        color: #e8c789;
+        color: var(--sem-amber);
         background: rgba(224, 168, 74, 0.10);
         border: 1px solid rgba(224, 168, 74, 0.32);
         border-radius: 8px;

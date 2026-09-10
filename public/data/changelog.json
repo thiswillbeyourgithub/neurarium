@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "3.79.1",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Day theme: the coloured source pills, flag tags and warning callouts were picked to glow on the night panel and were washed out to the point of illegibility on white. They now darken with the theme, and a warning box hands its title to the page ink instead of repeating the yellow it sits on.",
+          "commits": []
+        },
+        {
+          "category": "fixed",
+          "text": "Day theme: tooltips kept a near-black bubble while their text followed the theme, so hovering a source pill showed dark text on dark. The bubble now flips with the theme.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.79.0",
       "date": "2026-09-10",
       "entries": [
