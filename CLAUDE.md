@@ -802,6 +802,10 @@ a line in the tally.
   mechanism outranks the inference. So the rule covers the ~25 other self-modulating drugs for
   free, and an authored addon stays the way to state what the rule cannot see (MDMA's
   autoinhibition is not in its enzyme rows: the corpus gives it a substrate role only).
+  Either form (authored or derived) also puts a yellow **⚠** beside the drug's T½ chip far above,
+  whose tooltip says the kinetics are non-linear and whose click scrolls down to the section: a T½
+  only means something while clearance is linear, and the caveat is written where the enzyme rows
+  make it legible, so the chip points at it rather than repeating it.
 
 ## Images
 

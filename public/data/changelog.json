@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.79.0",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A drug whose half-life is not the whole story now says so: 27 of them speed up or slow down their own clearance, so a yellow warning sits beside the half-life and takes you down to the Metabolism section that explains it.",
+          "commits": [
+            "a9263f5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.78.5",
       "date": "2026-09-10",
       "entries": [
