@@ -1,0 +1,22 @@
+Subgroup	Gene	Phenotype	Frequency
+Central/South Asian	CYP3A5	PM	0.527
+Central/South Asian	CYP3A5	IM	0.398
+Central/South Asian	CYP3A5	NM	0.075
+East Asian	CYP3A5	PM	0.544
+East Asian	CYP3A5	IM	0.387
+East Asian	CYP3A5	NM	0.069
+European	CYP3A5	PM	0.871
+European	CYP3A5	IM	0.125
+European	CYP3A5	NM	0.004
+Middle East & North Africa	CYP3A5	PM	0.849
+Middle East & North Africa	CYP3A5	IM	0.145
+Middle East & North Africa	CYP3A5	NM	0.006
+North American	CYP3A5	PM	0.735
+North American	CYP3A5	IM	0.245
+North American	CYP3A5	NM	0.02
+South American	CYP3A5	PM	0.647
+South American	CYP3A5	IM	0.315
+South American	CYP3A5	NM	0.038
+Sub-Saharan African	CYP3A5	PM	0.308
+Sub-Saharan African	CYP3A5	IM	0.494
+Sub-Saharan African	CYP3A5	NM	0.198

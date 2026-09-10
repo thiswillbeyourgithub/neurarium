@@ -1,0 +1,41 @@
+Subgroup	Gene	Phenotype	Frequency
+Central/South Asian	CYP2C19	PM	0.108
+Central/South Asian	CYP2C19	IM	0.441
+Central/South Asian	CYP2C19	NM	0.256
+Central/South Asian	CYP2C19	RM	0.167
+Central/South Asian	CYP2C19	UM	0.027
+East Asian	CYP2C19	PM	0.154
+East Asian	CYP2C19	IM	0.477
+East Asian	CYP2C19	NM	0.356
+East Asian	CYP2C19	RM	0.013
+East Asian	CYP2C19	UM	0.00012
+European	CYP2C19	PM	0.024
+European	CYP2C19	IM	0.261
+European	CYP2C19	NM	0.39
+European	CYP2C19	RM	0.277
+European	CYP2C19	UM	0.049
+Middle East & North Africa	CYP2C19	PM	0.014
+Middle East & North Africa	CYP2C19	IM	0.21
+Middle East & North Africa	CYP2C19	NM	0.442
+Middle East & North Africa	CYP2C19	RM	0.288
+Middle East & North Africa	CYP2C19	UM	0.047
+North American	CYP2C19	PM	0.023
+North American	CYP2C19	IM	0.257
+North American	CYP2C19	NM	0.398
+North American	CYP2C19	RM	0.274
+North American	CYP2C19	UM	0.047
+Oceanian	CYP2C19	PM	0
+Oceanian	CYP2C19	IM	0
+Oceanian	CYP2C19	NM	0.837
+Oceanian	CYP2C19	RM	0.122
+Oceanian	CYP2C19	UM	0.041
+South American	CYP2C19	PM	0
+South American	CYP2C19	IM	0
+South American	CYP2C19	NM	0.727
+South American	CYP2C19	RM	0.24
+South American	CYP2C19	UM	0.032
+Sub-Saharan African	CYP2C19	PM	0.06
+Sub-Saharan African	CYP2C19	IM	0.37
+Sub-Saharan African	CYP2C19	NM	0.286
+Sub-Saharan African	CYP2C19	RM	0.235
+Sub-Saharan African	CYP2C19	UM	0.048

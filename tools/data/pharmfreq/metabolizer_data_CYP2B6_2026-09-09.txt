@@ -1,0 +1,41 @@
+Subgroup	Gene	Phenotype	Frequency
+Central/South Asian	CYP2B6	PM	0.06
+Central/South Asian	CYP2B6	IM	0.37
+Central/South Asian	CYP2B6	NM	0.431
+Central/South Asian	CYP2B6	RM	0.13
+Central/South Asian	CYP2B6	UM	0.01
+East Asian	CYP2B6	PM	0.037
+East Asian	CYP2B6	IM	0.311
+East Asian	CYP2B6	NM	0.513
+East Asian	CYP2B6	RM	0.131
+East Asian	CYP2B6	UM	0.008
+European	CYP2B6	PM	0.055
+European	CYP2B6	IM	0.359
+European	CYP2B6	NM	0.512
+European	CYP2B6	RM	0.073
+European	CYP2B6	UM	0.003
+Middle East & North Africa	CYP2B6	PM	0.13
+Middle East & North Africa	CYP2B6	IM	0.461
+Middle East & North Africa	CYP2B6	NM	0.287
+Middle East & North Africa	CYP2B6	RM	0.111
+Middle East & North Africa	CYP2B6	UM	0.011
+North American	CYP2B6	PM	0.095
+North American	CYP2B6	IM	0.426
+North American	CYP2B6	NM	0.426
+North American	CYP2B6	RM	0.051
+North American	CYP2B6	UM	0.002
+Oceanian	CYP2B6	PM	0
+Oceanian	CYP2B6	IM	0
+Oceanian	CYP2B6	NM	1
+Oceanian	CYP2B6	RM	0
+Oceanian	CYP2B6	UM	0
+South American	CYP2B6	PM	0.139
+South American	CYP2B6	IM	0.467
+South American	CYP2B6	NM	0.246
+South American	CYP2B6	RM	0.131
+South American	CYP2B6	UM	0.017
+Sub-Saharan African	CYP2B6	PM	0.279
+Sub-Saharan African	CYP2B6	IM	0.498
+Sub-Saharan African	CYP2B6	NM	0.223
+Sub-Saharan African	CYP2B6	RM	0
+Sub-Saharan African	CYP2B6	UM	0

@@ -1,0 +1,25 @@
+Subgroup	Gene	Phenotype	Frequency
+Central/South Asian	UGT1A1	PM	0.185
+Central/South Asian	UGT1A1	IM	0.49
+Central/South Asian	UGT1A1	NM	0.324
+East Asian	UGT1A1	PM	0.092
+East Asian	UGT1A1	IM	0.423
+East Asian	UGT1A1	NM	0.485
+European	UGT1A1	PM	0.105
+European	UGT1A1	IM	0.439
+European	UGT1A1	NM	0.456
+Middle East & North Africa	UGT1A1	PM	0.11
+Middle East & North Africa	UGT1A1	IM	0.443
+Middle East & North Africa	UGT1A1	NM	0.447
+North American	UGT1A1	PM	0.112
+North American	UGT1A1	IM	0.445
+North American	UGT1A1	NM	0.443
+Oceanian	UGT1A1	PM	0.0005
+Oceanian	UGT1A1	IM	0.044
+Oceanian	UGT1A1	NM	0.956
+South American	UGT1A1	PM	0.163
+South American	UGT1A1	IM	0.482
+South American	UGT1A1	NM	0.355
+Sub-Saharan African	UGT1A1	PM	0.229
+Sub-Saharan African	UGT1A1	IM	0.499
+Sub-Saharan African	UGT1A1	NM	0.272

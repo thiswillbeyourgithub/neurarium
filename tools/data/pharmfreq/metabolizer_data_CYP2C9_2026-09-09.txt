@@ -1,0 +1,25 @@
+Subgroup	Gene	Phenotype	Frequency
+Central/South Asian	CYP2C9	PM	0.028
+Central/South Asian	CYP2C9	IM	0.302
+Central/South Asian	CYP2C9	NM	0.67
+East Asian	CYP2C9	PM	0.002
+East Asian	CYP2C9	IM	0.077
+East Asian	CYP2C9	NM	0.921
+European	CYP2C9	PM	0.022
+European	CYP2C9	IM	0.343
+European	CYP2C9	NM	0.634
+Middle East & North Africa	CYP2C9	PM	0.026
+Middle East & North Africa	CYP2C9	IM	0.348
+Middle East & North Africa	CYP2C9	NM	0.626
+North American	CYP2C9	PM	0.018
+North American	CYP2C9	IM	0.304
+North American	CYP2C9	NM	0.678
+Oceanian	CYP2C9	PM	0.017
+Oceanian	CYP2C9	IM	0.295
+Oceanian	CYP2C9	NM	0.688
+South American	CYP2C9	PM	0.012
+South American	CYP2C9	IM	0.293
+South American	CYP2C9	NM	0.695
+Sub-Saharan African	CYP2C9	PM	0.004
+Sub-Saharan African	CYP2C9	IM	0.234
+Sub-Saharan African	CYP2C9	NM	0.761
