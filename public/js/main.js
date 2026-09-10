@@ -6373,6 +6373,18 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
         preview: () => focusDrug(e.drug, { preview: true }),
       }));
     })(),
+    // Drug-metabolising enzymes (the Enzymes section). Pharmacokinetics, so a pick
+    // changes nothing in the 3D scene; it opens the isoform's panel exactly like its
+    // legend row, which is the whole point: an enzyme is a graded node with drugs on
+    // both sides of it, and it was reachable only by scrolling its section.
+    ...(data.enzymes || []).map((enz) => ({
+      type: "enzyme",
+      label: `${enz.label} · ${t("search.tagEnzyme")}`,
+      keywords: enz.keywords || "",
+      select: () => focusEnzyme(enz),
+      // No preview: an enzyme focus is a panel, not a scene state, so there is
+      // nothing for a hover to show and nothing for it to restore.
+    })),
     // Named circuits (the loops in the Projections section): a pick isolates the
     // loop, plays its traveling pulse and opens its panel, exactly like its legend
     // row, so search reaches them too (part of "anything from search == the panel").
@@ -6406,6 +6418,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
     structure: "panel.structures", connection: "info.connections",
     target: "panel.receptors", drug: "panel.drugs",
     circuit: "legend.circuits", group: "legendKey.pathways",
+    enzyme: "panel.enzymes",
   };
   let activeType = null;
   const filterChips = [];

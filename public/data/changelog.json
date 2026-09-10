@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.77.0",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Search now finds drug-metabolising enzymes: typing CYP2D6, or UGT, or an isoform's full name opens its panel, with the drugs on both sides of it. There is a matching Enzymes filter chip. Until now the only way to an isoform was to scroll its section.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.76.0",
       "date": "2026-09-10",
       "entries": [
