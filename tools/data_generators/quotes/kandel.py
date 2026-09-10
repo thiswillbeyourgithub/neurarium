@@ -195,9 +195,6 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
         "entorhinal cortex project through the _perforant pathway_ to excite the "
         "granule cells of the dentate gyrus (an area considered part of the "
         "hippocampus)."),
-    ("amygdala_R", "hypothalamus_R"): _kandel(1380,
-        "These nuclei project to the central nucleus, which projects to the "
-        "hypothalamus and brain stem."),
     ("amygdala_R", "accumbens_R"): _kandel(1124,
         "This work is beginning to define the distinct roles that various "
         "glutamatergic projections to the nucleus accumbens— from the prefrontal "
@@ -254,12 +251,6 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("raphe", "substantia_nigra_R"): _nieuwenhuys(896,
         "The median raphe nucleus connects with the interpeduncular nucleus, the "
         "substantia nigra and the mamillary body."),
-    ("septal_nuclei_R", "hippocampus_R"): _kandel(1048,
-        "Rather, scientists refer to the cholinergic neurons by their location, eg, "
-        "the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the "
-        "pons, which project widely from the cerebral cortex to the medulla, and "
-        "the basal forebrain (Ch1–Ch4) groups, which project to the cerebral "
-        "cortex, hippocampus, and amygdala."),
     # Ventral striatopallidal: accumbens -> ventral pallidum (the indirect-pathway
     # relay of the reward circuit).
     ("accumbens_R", "globus_pallidus_R"): _kandel(1117,

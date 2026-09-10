@@ -3708,12 +3708,12 @@
       },
       "drug_bindings": {
         "total": 1863,
-        "verified": 1740,
-        "uncertain": 111,
+        "verified": 1729,
+        "uncertain": 106,
         "sourced": 0,
         "llm": 0,
-        "nosource": 12,
-        "missing": 12
+        "nosource": 28,
+        "missing": 28
       },
       "drug_nbn": {
         "total": 116,
@@ -3726,30 +3726,30 @@
       },
       "drug_brands": {
         "total": 469,
-        "verified": 469,
+        "verified": 461,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
-        "nosource": 0,
-        "missing": 0
+        "nosource": 8,
+        "missing": 8
       },
       "drug_categories": {
         "total": 301,
-        "verified": 248,
+        "verified": 239,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 53,
+        "llm": 62,
         "nosource": 0,
-        "missing": 53
+        "missing": 62
       },
       "drug_half_life": {
         "total": 230,
-        "verified": 230,
+        "verified": 222,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
-        "nosource": 0,
-        "missing": 0
+        "nosource": 8,
+        "missing": 8
       },
       "drug_enzymes": {
         "total": 428,
@@ -3762,16 +3762,16 @@
       },
       "drug_metabolites": {
         "total": 40,
-        "verified": 40,
+        "verified": 39,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
-        "nosource": 0,
-        "missing": 0
+        "nosource": 1,
+        "missing": 1
       },
       "drug_metabolite_enzyme": {
-        "total": 17,
-        "verified": 17,
+        "total": 16,
+        "verified": 16,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -3789,12 +3789,12 @@
       },
       "projections": {
         "total": 95,
-        "verified": 58,
+        "verified": 56,
         "uncertain": 35,
         "sourced": 0,
         "llm": 0,
-        "nosource": 2,
-        "missing": 2
+        "nosource": 4,
+        "missing": 4
       },
       "circuits": {
         "total": 6,
@@ -3807,12 +3807,12 @@
       },
       "projection_groups": {
         "total": 12,
-        "verified": 12,
+        "verified": 10,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
-        "nosource": 0,
-        "missing": 0
+        "nosource": 2,
+        "missing": 2
       },
       "receptors": {
         "total": 56,
@@ -3924,15 +3924,15 @@
       }
     },
     "nodes": {
-      "total": 4509,
-      "verified": 4189,
-      "uncertain": 149,
+      "total": 4508,
+      "verified": 4147,
+      "uncertain": 144,
       "sourced": 0,
-      "llm": 157,
-      "nosource": 14,
-      "missing": 171,
-      "backed": 4338,
-      "pct_backed": 96
+      "llm": 166,
+      "nosource": 51,
+      "missing": 217,
+      "backed": 4291,
+      "pct_backed": 95
     },
     "ki_coverage": {
       "bindings_total": 1844,

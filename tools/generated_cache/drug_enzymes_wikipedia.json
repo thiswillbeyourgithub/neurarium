@@ -3973,16 +3973,7 @@
  "risperidone": [
   {
    "enzyme": "cyp2d6",
-   "role": "substrate",
-   "sources": [
-    {
-     "corpus": "wikipedia_pharm",
-     "llm": "opus",
-     "page": "risperidone",
-     "provenance": "verified",
-     "quote": "Metabolism | Liver ( CYP2D6 mediated to 9-hydroxyrisperidone )"
-    }
-   ]
+   "role": "substrate"
   }
  ],
  "ropinirole": [

@@ -720,18 +720,12 @@ _SG_GLUTAMATE = _stahl_ess(112,
 _SG_GABA = _stahl_ess(271,
     "GABA is the principle inhibitory neurotransmitter in the brain, and normally "
     "serves an important regulatory role in reducing the activity of many neurons.")
-_SG_ACH = _kandel(1047,
-    "These neurons project throughout the cerebral cortex, hippocampus, and amygdala. "
-    "Both groups play an important role in arousal, and the basal forebrain groups are "
-    "also involved in more selective attention.")
 _SG_NEUROENDOCRINE = _kandel(1075,
     "A group of hypothalamic peptide hormones that control pituitary hormone secretion "
     "from the five classic endocrine cell types in the anterior pituitary.")
 _SG_SEROTONIN = _kandel(1048,
     "The B5-B7 neurons in the pons mainly provide serotonergic innervation of the "
     "thalamus, hypothalamus, and cerebral cortex.")
-_SG_NORADRENALINE = _kandel(1561,
-    "The major noradrenergic projection of the forebrain arises in the locus ceruleus.")
 _SG_MODULATORY = _kandel(368,
     "Neuromodulators are substances that bind to receptors, most of which are "
     "metabotropic, to alter the excitability of neurons, the likelihood of transmitter "
@@ -765,7 +759,6 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "récompense.",
          wikipedia="https://en.wikipedia.org/wiki/Dopaminergic_pathways"),
     dict(mode="kind", key="cholinergic", name="Acetylcholine",
-         sources=[_SG_ACH],
          description="Cholinergic projections modulate arousal, attention and "
                      "memory across the cortex and hippocampus.",
          description_fr="Les projections cholinergiques modulent l'éveil, "
@@ -788,7 +781,6 @@ PROJECTION_GROUPS: list[dict[str, Any]] = [
                         "dans tout le cerveau.",
          wikipedia="https://en.wikipedia.org/wiki/Serotonergic"),
     dict(mode="kind", key="noradrenergic", name="Noradrenaline",
-         sources=[_SG_NORADRENALINE],
          description="Noradrenergic projections from the locus coeruleus modulate "
                      "arousal, vigilance and the stress response.",
          description_fr="Les projections noradrénergiques du locus coeruleus "

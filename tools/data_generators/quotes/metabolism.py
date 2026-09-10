@@ -83,10 +83,14 @@ METABOLITE_ENZYME_QUOTES: dict[tuple[str, str], list[dict[str, Any]]] = {
               "It is activated, mainly by CYP3A4, to carbamazepine-10,11- epoxide",
               "cyp3a4"),
     ],
-    # Stahl names the enzyme and the count but not which metabolite is which; both of
-    # the two are CYP3A4 products, and didesmethyl cariprazine is the one we list.
+    # Two adjacent Pharmacokinetics bullets, quoted together: the first attributes
+    # the two active metabolites to CYP3A4, the second names DDCAR as one of them.
+    # The first alone never names the metabolite, which is what the row claims.
     ("cariprazine", "Didesmethyl cariprazine"): [
-        _stahl(157, "Metabolized by CYP3A4 into two longlasting active metabolites",
+        _stahl(157, "Metabolized by CYP3A4 into two longlasting active metabolites "
+                    "Based on the time to reach steady state, the half-life for "
+                    "cariprazine is 2–4 days and for one of its active metabolites, "
+                    "didesmethyl cariprazine (DDCAR), is 1–3 weeks",
                "cyp3a4"),
     ],
     # One sentence, three isoforms, three nodes. The NEXT sentence on that page
@@ -128,14 +132,6 @@ METABOLITE_ENZYME_QUOTES: dict[tuple[str, str], list[dict[str, Any]]] = {
     ("quetiapine", "Norquetiapine"): [
         _wiki("quetiapine", "Metabolism | Liver via CYP3A4-catalysed sulfoxidation to "
                             "its active metabolite norquetiapine", "cyp3a4"),
-    ],
-    # Two sentences, quoted together because the first names the enzyme and the second
-    # names M-II among the products; either alone would not carry the claim.
-    ("ramelteon", "M-II"): [
-        _wiki("ramelteon", "Ramelteon is metabolized mainly by CYP1A2 while CYP2C "
-                           "enzymes and CYP3A4 are involved to a minor extent. The "
-                           "metabolites of ramelteon include M-I, M-II, M-III, and M-IV.",
-              "cyp1a2"),
     ],
     # 9-hydroxyrisperidone IS paliperidone (the row links to that modeled drug).
     ("risperidone", "Paliperidone"): [

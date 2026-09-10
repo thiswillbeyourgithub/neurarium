@@ -1,956 +1,162 @@
 [
  {
-  "qid": "q_96d8eca6b09e",
-  "corpus": "carlat",
-  "page": 184,
-  "present": true,
-  "supports": false,
-  "quote": "antagonistic effects at serotonin receptors",
   "claims": [
    "Drug Cyproheptadine acts on target '5ht2a' as antagonist (tentative)."
   ],
-  "note": "Quote says antagonistic effects at serotonin receptors generally, doesn't specify 5ht2a subtype."
+  "corpus": "carlat",
+  "note": "Quote says antagonistic effects at serotonin receptors generally, doesn't specify 5ht2a subtype.",
+  "page": 184,
+  "present": true,
+  "qid": "q_96d8eca6b09e",
+  "quote": "antagonistic effects at serotonin receptors",
+  "supports": false
  },
  {
-  "qid": "q_06288de9aed4",
-  "corpus": "stahl",
-  "page": 936,
-  "present": true,
-  "supports": false,
-  "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
   "claims": [
    "Drug Zotepine acts on target 'alpha1a' as antagonist.",
    "Drug Zotepine acts on target 'alpha1b' as antagonist.",
    "Drug Zotepine acts on target 'alpha1c' as antagonist.",
    "Drug Zotepine acts on target 'alpha1d' as antagonist."
   ],
-  "note": "Quote only says generic 'alpha 1 adrenergic receptors'; does not distinguish alpha1a/b/c/d subtypes, so it doesn't specifically substantiate four separate subtype claims."
- },
- {
-  "qid": "q_a2aac0b15aed",
-  "corpus": "gtopdb",
-  "page": 19,
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "CNS: perikarya and neuropil labelling in regions such as the striatum, nucleus accumbens, olfactory tubercles, extended amygdala, globus pallidus, nucleus of the solitary tract, cortex, hippocampus, thalamus, cerebellum, medulla, pons. Very high levels of A1 receptor expression in the striatum are important in the regulation of dopamine receptors and Parkinson's desease.",
-  "claims": [
-   "Receptor A2A is expressed in brain region 'accumbens'."
-  ],
-  "note": "Quote explicitly names the A1 receptor for the striatal/accumbens expression, not A2A; does not clearly attribute this expression to A2A."
- },
- {
-  "qid": "q_9d8a40fad9ba",
   "corpus": "stahl",
-  "page": 257,
-  "heading": [
-   "Diazepam",
-   "Therapeutics",
-   "Brands"
-  ],
+  "note": "Quote only says generic 'alpha 1 adrenergic receptors'; does not distinguish alpha1a/b/c/d subtypes, so it doesn't specifically substantiate four separate subtype claims.",
+  "page": 936,
   "present": true,
-  "supports": false,
-  "quote": "Other",
-  "claims": [
-   "Drug Diazepam is sold under the brand name 'Other'."
-  ],
-  "note": "\"Other\" is Stahl's catch-all placeholder for unlisted brands, not an actual brand name."
+  "qid": "q_06288de9aed4",
+  "quote": "Blocking alpha 1 adrenergic receptors can cause dizziness, hypotension, and syncope",
+  "supports": false
  },
  {
-  "qid": "q_d6fa026d7f08",
-  "corpus": "stahl",
-  "page": 263,
-  "heading": [
-   "Diphenhydramine",
-   "Therapeutics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Other",
   "claims": [
-   "Drug Diphenhydramine is sold under the brand name 'Other'."
+   "Projection 'septal_nuclei_R'->'hippocampus_R' (cholinergic, Acetylcholine): Septohippocampal pathway. Medial septal cholinergic neurons project to the hippocampus, pacing the hippocampal theta rhythm."
   ],
-  "note": "\"Other\" is Stahl's catch-all placeholder for unlisted brands, not an actual brand name."
- },
- {
-  "qid": "q_21dd96c5357e",
-  "corpus": "stahl",
-  "page": 465,
-  "heading": [
-   "Lorazepam",
-   "Therapeutics",
-   "Brands"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Other",
-  "claims": [
-   "Drug Lorazepam is sold under the brand name 'Other'."
-  ],
-  "note": "'Other' is a page placeholder for unlisted brands, not an actual trade name."
- },
- {
-  "qid": "q_ebbb204dc785",
-  "corpus": "stahl",
-  "page": 539,
-  "heading": [
-   "Mirtazapine",
-   "Therapeutics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Other",
-  "claims": [
-   "Drug Mirtazapine is sold under the brand name 'Other'."
-  ],
-  "note": "'Other' is a page placeholder for unlisted brands, not an actual trade name."
- },
- {
-  "qid": "q_9b5ca21bc3f5",
-  "corpus": "stahl",
-  "page": 591,
-  "heading": [
-   "Olanzapine",
-   "Therapeutics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Other",
-  "claims": [
-   "Drug Olanzapine is sold under the brand name 'Other'."
-  ],
-  "note": "\"Other\" is a catch-all bullet meaning unlisted additional brands exist, not an actual brand name."
- },
- {
-  "qid": "q_438e6063e762",
-  "corpus": "stahl",
-  "page": 775,
-  "heading": [
-   "Sildenafil",
-   "Therapeutics",
-   "Tests"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Other",
-  "claims": [
-   "Drug Sildenafil is sold under the brand name 'Other'."
-  ],
-  "note": "'Other' is a stray bullet/label from OCR, not an actual brand name for sildenafil."
- },
- {
-  "qid": "q_072b75a13d10",
-  "corpus": "stahl_essential",
-  "page": 338,
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Certain general anesthetics (e.g., propofol, etomidate, alphaxolone, alfadalone) also bind at the same sites as neuroactive steroids, but are dosed much higher.",
-  "claims": [
-   "Drug Etomidate acts on target 'GABA-A' as modulator.",
-   "Drug Etomidate is classified as Anesthetic."
-  ],
-  "note": "Quote confirms etomidate is a general anesthetic, but it only says it binds 'the same sites as neuroactive steroids', never naming GABA-A."
- },
- {
-  "qid": "q_09abbee984b4",
-  "corpus": "wikipedia_pharm",
-  "page": "brivaracetam",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Brivaracetam is believed to act by binding to the ubiquitous synaptic vesicle glycoprotein 2A (SV2A), like levetiracetam, but with 20-fold greater affinity.",
-  "claims": [
-   "Drug Brivaracetam acts on target 'Synaptic vesicle protein 2A (SV2A)' as modulator."
-  ],
-  "note": "Quote states only that brivaracetam binds SV2A with greater affinity than levetiracetam; it describes no functional/modulatory effect, so 'modulator' as an action is not substantiated."
- },
- {
-  "qid": "q_09d7cd3e0e32",
-  "corpus": "wikipedia_pharm",
-  "page": "heroin",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Once in the brain, it then is deacetylated variously into the inactive 3-monoacetylmorphine and the active 6-monoacetylmorphine (6-MAM), and then to morphine, which bind to μ-opioid receptors , resulting in the drug's euphoric, analgesic (pain relief), and anxiolytic (anti-anxiety) effects; heroin itself exhibits relatively low affinity for the μ receptor.",
-  "claims": [
-   "Drug Heroin acts on target 'μ (MOR)' as agonist.",
-   "Drug Heroin has an active metabolite, 6-Monoacetylmorphine."
-  ],
-  "note": "supports the active-metabolite claim (6-MAM is explicitly named as active); does not support Heroin acting on mu (MOR) as agonist, since the quote attributes mu-receptor binding to the metabolites (6-MAM, morphine) and explicitly states heroin itself exhibits relatively low affinity for the mu receptor"
- },
- {
-  "qid": "q_0aa10b1c2d2a",
-  "corpus": "stahl",
-  "page": 717,
-  "heading": [
-   "Ramelteon",
-   "Therapeutics",
-   "Class"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Melatonin 1 and 2 receptor agonist",
-  "claims": [
-   "Drug Ramelteon is classified as Hypnotic / sedative."
-  ],
-  "note": "Quote states the mechanism (melatonin 1/2 receptor agonist) but never uses hypnotic/sedative language."
- },
- {
-  "qid": "q_0ac0b22ac0ea",
-  "corpus": "wikipedia_fr",
-  "page": "sild_nafil",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Spedra",
-  "claims": [
-   "Drug Sildenafil is sold under the brand name 'Spedra'."
-  ],
-  "note": "The page attributes 'Spedra' to avanafil, a competing PDE5 inhibitor, not to sildenafil, whose own listed brands are Viagra/Verventi/Sildenafil generics."
- },
- {
-  "qid": "q_0c358ff12c7e",
   "corpus": "kandel",
-  "page": 1048,
   "heading": [
    "40 The Brain Stem",
    "Monoaminergic Neurons in the Brain Stem Modulate Sensory, Motor, Autonomic, and Behavioral Functions",
    "Monoaminergic Neurons Share Many Cellular Properties"
   ],
+  "note": "Quote gives no mention of hippocampal theta rhythm pacing, only a general cortex/hippocampus/amygdala projection.",
+  "page": 1048,
   "present": true,
-  "supports": false,
+  "qid": "q_0c358ff12c7e",
   "quote": "Rather, scientists refer to the cholinergic neurons by their location, eg, the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the pons, which project widely from the cerebral cortex to the medulla, and the basal forebrain (Ch1–Ch4) groups, which project to the cerebral cortex, hippocampus, and amygdala.",
-  "claims": [
-   "Projection 'septal_nuclei_R'->'hippocampus_R' (cholinergic, Acetylcholine): Septohippocampal pathway. Medial septal cholinergic neurons project to the hippocampus, pacing the hippocampal theta rhythm."
-  ],
-  "note": "Quote gives no mention of hippocampal theta rhythm pacing, only a general cortex/hippocampus/amygdala projection."
+  "supports": false
  },
  {
-  "qid": "q_0e2439812d64",
-  "corpus": "wikipedia_pharm",
-  "page": "entacapone",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Entacapone is a selective and reversible inhibitor of the enzyme catechol- O -methyltransferase (COMT). When taken together with levodopa ( L -DOPA) and carbidopa, entacapone stops COMT from breaking down levodopa, resulting in an overall increase of levodopa remaining in the brain and body. Entacapone does not cross into the brain and hence does not inhibit COMT there.",
   "claims": [
-   "Drug Entacapone acts on target 'Catechol-O-methyltransferase (COMT)' as enzyme_inhibitor.",
-   "Drug Entacapone is classified as Antiparkinson."
+   "Projection group 'Noradrenaline' (kind=noradrenergic): Noradrenergic projections from the locus coeruleus modulate arousal, vigilance and the stress response."
   ],
-  "note": "supports the COMT enzyme-inhibitor target claim; does not say Entacapone is classified as Antiparkinson (this quote never mentions Parkinson's disease)"
- },
- {
-  "qid": "q_0ed5f8827362",
-  "corpus": "wikipedia_pharm",
-  "page": "loprazolam",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Loprazolam ( triazulenone ) marketed under many brand names is a benzodiazepine medication.",
-  "claims": [
-   "Drug Loprazolam is classified as Benzodiazepine, Hypnotic / sedative."
-  ],
-  "note": "supports the Benzodiazepine classification (\"benzodiazepine medication\"); does not state Hypnotic/sedative properties in this quote"
- },
- {
-  "qid": "q_106569a3e0ba",
-  "corpus": "wikipedia_pharm",
-  "page": "benserazide",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Benserazide is a peripherally acting aromatic L -amino acid decarboxylase or DOPA decarboxylase inhibitor , which is unable to cross the blood–brain barrier .",
-  "claims": [
-   "Drug Benserazide acts on target 'Aromatic L-amino acid decarboxylase (AADC)' as synthesis_inhibitor.",
-   "Drug Benserazide is classified as Antiparkinson."
-  ],
-  "note": "Quote states the AADC/DOPA-decarboxylase inhibition mechanism but never mentions Parkinson's disease or antiparkinson use, so the Antiparkinson classification part of this compound item is unsupported."
- },
- {
-  "qid": "q_108c355b714f",
-  "corpus": "wikipedia_pharm",
-  "page": "alpidem",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Elimination half-life | Young adults: 19 hours (7–44 hours) Elderly: 22.6 ± 2.3 hours Children: 11.4 ± 1.9 hours",
-  "claims": [
-   "Drug Alpidem has an elimination half-life of 19.0-44.0 hours."
-  ],
-  "note": "Quote states a point value of 19 hours with a separate individual range of 7-44 hours; the claim's invented '19.0-44.0 hours' range combines the point estimate with the range's upper bound, a number the quote never states."
- },
- {
-  "qid": "q_1edf30183c4f",
-  "corpus": "wikipedia_pharm",
-  "page": "alimemazine",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Alimemazine ( INN ), also known as trimeprazine , commonly provided as a tartrate salt, is a phenothiazine derivative that is used as an antipruritic (it prevents itching from causes such as eczema or poison ivy , by acting as an antihistamine ).",
-  "claims": [
-   "Drug Alimemazine acts on target 'H1' as antagonist.",
-   "Drug Alimemazine is classified as Antihistamine."
-  ],
-  "note": "Quote states alimemazine 'acts as an antihistamine' (supporting the Antihistamine classification) but never names the H1 receptor specifically, so the H1-antagonist binding claim is unsupported."
- },
- {
-  "qid": "q_2a2f29799b03",
-  "corpus": "stahl",
-  "page": 661,
-  "heading": [
-   "Phentermine–Topiramate",
-   "Dosing and use",
-   "Pharmacokinetics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Phentermine mean terminal half-life approximately 20 hours",
-  "claims": [
-   "Drug Phentermine–Topiramate has an elimination half-life of 20.0 hours."
-  ],
-  "note": "Quote states phentermine's own half-life alone, not a value attributed to the phentermine-topiramate combo (topiramate has a separately stated, very different 65-hour half-life on the same page)."
- },
- {
-  "qid": "q_310c645b9027",
-  "corpus": "wikipedia_pharm",
-  "page": "dimenhydrinate",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Elimination half-life | 5.5 hours (diphenhydramine component)",
-  "claims": [
-   "Drug Dimenhydrinate has an elimination half-life of 5.5 hours."
-  ],
-  "note": "the 5.5-hour half-life is explicitly attributed to the diphenhydramine component of the salt, not to Dimenhydrinate itself"
- },
- {
-  "qid": "q_31f0629654ac",
-  "corpus": "wikipedia_pharm",
-  "page": "metoclopramide",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Drug class | D 2 receptor antagonist ; 5-HT 3 receptor antagonist ; 5-HT 4 receptor agonist ; Prolactin releaser",
-  "claims": [
-   "Drug Metoclopramide is classified as Antiemetic / prokinetic."
-  ],
-  "note": "the Drug class line lists receptor mechanisms (D2/5-HT3/5-HT4 actions, prolactin releaser) but never says antiemetic or prokinetic."
- },
- {
-  "qid": "q_4317859a29c3",
-  "corpus": "wikipedia_pharm",
-  "page": "carbidopa",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Carbidopa is a peripheral inhibitor of aromatic L-amino acid decarboxylase (also called DOPA decarboxylase or DDC), the enzyme responsible for converting levodopa to dopamine and 5-hydroxytryptophan to serotonin. DDC is present both in peripheral tissues and in the central nervous system. However, carbidopa itself does not significantly cross the blood-brain barrier and therefore acts mainly outside the brain.",
-  "claims": [
-   "Drug Carbidopa acts on target 'Aromatic L-amino acid decarboxylase (AADC)' as synthesis_inhibitor.",
-   "Drug Carbidopa is classified as Antiparkinson."
-  ],
-  "note": "supports the AADC synthesis-inhibitor claim; does not say Carbidopa is classified as Antiparkinson"
- },
- {
-  "qid": "q_4503bd83976a",
-  "corpus": "stahl",
-  "page": 508,
-  "heading": [
-   "Methylfolate (L)",
-   "Dosing and use",
-   "Pharmacokinetics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Mean elimination half-life approximately 3 hours for d,l-methylfolate",
-  "claims": [
-   "Drug Methylfolate L has an elimination half-life of 3.0 hours."
-  ],
-  "note": "Quote gives the half-life of racemic d,l-methylfolate, not specifically L-methylfolate."
- },
- {
-  "qid": "q_453982111075",
-  "corpus": "wikipedia_pharm",
-  "page": "risperidone",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Metabolism | Liver ( CYP2D6 mediated to 9-hydroxyrisperidone )",
-  "claims": [
-   "The metabolite Paliperidone is formed from Risperidone by the enzyme CYP2D6 by hydroxylation."
-  ],
-  "note": "quote names the metabolite only as 9-hydroxyrisperidone, never calling it Paliperidone or identifying the two as the same compound"
- },
- {
-  "qid": "q_46e68873294d",
-  "corpus": "wikipedia_pharm",
-  "page": "rimegepant",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Drug class | Calcitonin gene-related peptide receptor antagonist",
-  "claims": [
-   "Drug Rimegepant is classified as Antimigraine."
-  ],
-  "note": "quote gives rimegepant's drug class as a CGRP receptor antagonist (mechanism), it never states an antimigraine indication/category"
- },
- {
-  "qid": "q_48b0a883ccff",
-  "corpus": "wikipedia_fr",
-  "page": "milnacipran",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Fetzima",
-  "claims": [
-   "Drug Milnacipran is sold under the brand name 'Fetzima'."
-  ],
-  "note": "The page attributes 'Fetzima' to levomilnacipran (milnacipran's enantiomer successor drug), not to milnacipran itself, which is named as sold under 'Ixel'."
- },
- {
-  "qid": "q_55ef267eec37",
-  "corpus": "wikipedia_pharm",
-  "page": "lormetazepam",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Lormetazepam , sold under the brand name Noctamid among others, is a drug which is a short to intermediate acting 3-hydroxy benzodiazepine derivative and temazepam analogue.",
-  "claims": [
-   "Drug Lormetazepam is classified as Benzodiazepine, Hypnotic / sedative."
-  ],
-  "note": "supports the Benzodiazepine classification (\"benzodiazepine derivative\"); does not state Hypnotic/sedative properties in this quote"
- },
- {
-  "qid": "q_58b00ff5f241",
-  "corpus": "stahl",
-  "page": 337,
-  "heading": [
-   "Flupenthixol",
-   "Dosing and use",
-   "Pharmacokinetics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Intramuscular: rate-limiting half-life approximately 8 days with single dose, approximately 17 days with multiple doses",
-  "claims": [
-   "Drug Flupenthixol has an elimination half-life of 192.0 hours."
-  ],
-  "note": "Quote gives an IM 'rate-limiting half-life' of 8 days (single dose) or 17 days (multiple doses), not a stated elimination half-life; claim picks one of two ambiguous values under a different term."
- },
- {
-  "qid": "q_5f60a626871f",
   "corpus": "kandel",
-  "page": 1561,
   "heading": [
    "61 Disorders of Mood and Anxiety",
    "Major Depression and Anxiety Disorders Can Be Treated Effectively",
    "Current Antidepressant Drugs Affect Monoaminergic Neural Systems"
   ],
+  "note": "Quote states only the anatomical origin of the projection, not arousal, vigilance, or stress-response function.",
+  "page": 1561,
   "present": true,
-  "supports": false,
+  "qid": "q_5f60a626871f",
   "quote": "The major noradrenergic projection of the forebrain arises in the locus ceruleus.",
-  "claims": [
-   "Projection group 'Noradrenaline' (kind=noradrenergic): Noradrenergic projections from the locus coeruleus modulate arousal, vigilance and the stress response."
-  ],
-  "note": "Quote states only the anatomical origin of the projection, not arousal, vigilance, or stress-response function."
+  "supports": false
  },
  {
-  "qid": "q_64f42ae0e9ab",
-  "corpus": "stahl",
-  "page": 254,
-  "heading": [
-   "Dextromethorphan–Quinidine",
-   "Dosing and use",
-   "Pharmacokinetics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Elimination half-life of dextromethorphan is approximately 13 hours",
   "claims": [
-   "Drug Dextromethorphan + Quinidine has an elimination half-life of 13.0 hours."
+   "Projection 'amygdala_R'->'hypothalamus_R' (inhibitory, GABA): Stria terminalis. The amygdala projects to the hypothalamus via the stria terminalis, driving autonomic / endocrine responses."
   ],
-  "note": "Quote states dextromethorphan's own half-life alone, not a value attributed to the dextromethorphan-quinidine combo (a different drug)."
- },
- {
-  "qid": "q_723c7a3fadea",
-  "corpus": "wikipedia_pharm",
-  "page": "dimenhydrinate",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Dimenhydrinate is a theoclate salt composed of diphenhydramine and 8-chlorotheophylline (a theophylline relative) in a 1:1 ratio.",
-  "claims": [
-   "Drug Dimenhydrinate is classified as Antihistamine, Antiemetic / prokinetic."
-  ],
-  "note": "quote only describes the theoclate salt composition (diphenhydramine + 8-chlorotheophylline, 1:1); it does not say Dimenhydrinate is classified as Antihistamine or Antiemetic/prokinetic"
- },
- {
-  "qid": "q_7480a6fd198a",
-  "corpus": "wikipedia_pharm",
-  "page": "erenumab",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Erenumab is a fully human monoclonal antibody blocking the calcitonin gene-related peptide receptor (CGRPR).",
-  "claims": [
-   "Drug Erenumab acts on target 'CGRP receptor' as antagonist.",
-   "Drug Erenumab is classified as Antimigraine."
-  ],
-  "note": "supports the CGRP receptor antagonist claim; does not say Erenumab is classified as Antimigraine (migraine is not mentioned in this quote)"
- },
- {
-  "qid": "q_76fac4dd7d71",
-  "corpus": "wikipedia_pharm",
-  "page": "chloral_hydrate",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "The metabolite of chloral hydrate exerts its pharmacological properties via enhancing the GABA receptor complex and therefore is similar in action to benzodiazepines , nonbenzodiazepines and barbiturates .",
-  "claims": [
-   "Drug Chloral hydrate acts on target 'GABA-A' as pam."
-  ],
-  "note": "quote attributes the GABA receptor enhancement to chloral hydrate's metabolite (trichloroethanol), not to chloral hydrate itself"
- },
- {
-  "qid": "q_8592430bfe19",
-  "corpus": "wikipedia_pharm",
-  "page": "flunarizine",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Flunarizine is a selective calcium antagonist with moderate other actions including antihistamine , serotonin receptor blocking and dopamine D 2 blocking activity.",
-  "claims": [
-   "Drug Flunarizine acts on target 'Voltage-gated calcium channel' as blocker.",
-   "Drug Flunarizine acts on target 'H1' as antagonist.",
-   "Drug Flunarizine acts on target 'D2' as antagonist.",
-   "Drug Flunarizine is classified as Antimigraine."
-  ],
-  "note": "supports the calcium-channel(VGCC) antagonist, antihistamine (H1), and dopamine D2-blocking claims; does not say Flunarizine is classified as Antimigraine (migraine is not mentioned in this quote)"
- },
- {
-  "qid": "q_89d01a2a38cb",
   "corpus": "kandel",
-  "page": 1380,
   "heading": [
    "Part VIII Learning, Memory, Language and Cognition",
    "53 Cellular Mechanisms of Implicit Memory Storage and the Biological Basis of Individuality",
    "Memory of Threat Learning in Mammals Involves the Amygdala"
   ],
+  "note": "Quote never names the stria terminalis, nor mentions GABA/inhibitory sign or autonomic/endocrine function.",
+  "page": 1380,
   "present": true,
-  "supports": false,
+  "qid": "q_89d01a2a38cb",
   "quote": "These nuclei project to the central nucleus, which projects to the hypothalamus and brain stem.",
-  "claims": [
-   "Projection 'amygdala_R'->'hypothalamus_R' (inhibitory, GABA): Stria terminalis. The amygdala projects to the hypothalamus via the stria terminalis, driving autonomic / endocrine responses."
-  ],
-  "note": "Quote never names the stria terminalis, nor mentions GABA/inhibitory sign or autonomic/endocrine function."
+  "supports": false
  },
  {
-  "qid": "q_8be6256b3e24",
+  "claims": [
+   "The metabolite Didesmethyl cariprazine is formed from Cariprazine by the enzyme CYP3A4."
+  ],
   "corpus": "stahl",
-  "page": 411,
-  "heading": [
-   "Ketamine",
-   "Therapeutics",
-   "Class"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "NMDA receptor antagonist",
-  "claims": [
-   "Drug Ketamine is classified as Recreational / psychoactive."
-  ],
-  "note": "Quote states ketamine's pharmacological class (NMDA receptor antagonist), not that it is categorized as recreational/psychoactive."
- },
- {
-  "qid": "q_91ffe5d2cdb7",
-  "corpus": "stahl",
-  "page": 249,
-  "heading": [
-   "Dextromethorphan–Bupropion",
-   "Dosing and use",
-   "Pharmacokinetics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Mean elimination half-life of dextromethorphan/bupropion is 22 hours and 15 hours, respectively",
-  "claims": [
-   "Drug Dextromethorphan + Bupropion has an elimination half-life of 22.0 hours."
-  ],
-  "note": "Quote reports dextromethorphan's own 22h value and bupropion's own 15h value separately; neither is a value stated for the combo as such."
- },
- {
-  "qid": "q_92c211915504",
-  "corpus": "wikipedia_pharm",
-  "page": "meprobamate",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Meprobamate binds to GABA A receptors which interrupts neuronal communication in the reticular formation and spinal cord , causing sedation and altered perception of pain.",
-  "claims": [
-   "Drug Meprobamate acts on target 'GABA-A' as pam."
-  ],
-  "note": "quote only says meprobamate binds to GABA-A receptors; it does not specify a positive-allosteric-modulator mechanism."
- },
- {
-  "qid": "q_991da4e8bc9e",
-  "corpus": "stahl",
-  "page": 157,
   "heading": [
    "Cariprazine",
    "Dosing and use",
    "Pharmacokinetics"
   ],
+  "note": "Quote says CYP3A4 forms 'two longlasting active metabolites' but does not name Didesmethyl cariprazine.",
+  "page": 157,
   "present": true,
-  "supports": false,
+  "qid": "q_991da4e8bc9e",
   "quote": "Metabolized by CYP3A4 into two longlasting active metabolites",
-  "claims": [
-   "The metabolite Didesmethyl cariprazine is formed from Cariprazine by the enzyme CYP3A4."
-  ],
-  "note": "Quote says CYP3A4 forms 'two longlasting active metabolites' but does not name Didesmethyl cariprazine."
+  "supports": false
  },
  {
-  "qid": "q_9a81c55fbb0d",
-  "corpus": "stahl",
-  "page": 797,
-  "heading": [
-   "Tasimelteon",
-   "Therapeutics",
-   "Class"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Melatonin 1 and 2 receptor agonist",
-  "claims": [
-   "Drug Tasimelteon is classified as Hypnotic / sedative."
-  ],
-  "note": "Quote states the mechanism (melatonin 1/2 receptor agonist) but never uses hypnotic/sedative language."
- },
- {
-  "qid": "q_9d247c2159d2",
-  "corpus": "stahl",
-  "page": 689,
-  "heading": [
-   "Pregabalin",
-   "Therapeutics",
-   "Class"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Anticonvulsant, antineuralgic for chronic pain, alpha 2 delta ligand at voltagesensitive calcium channels",
-  "claims": [
-   "Drug Pregabalin is classified as Anxiolytic, Other."
-  ],
-  "note": "Quote lists pregabalin's class as anticonvulsant/antineuralgic/calcium-channel ligand; it never says 'Anxiolytic' or 'Other'."
- },
- {
-  "qid": "q_a167dfd9ac22",
-  "corpus": "wikipedia_pharm",
-  "page": "heroin",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Both morphine and 6-MAM are μ-opioid agonists that bind to receptors present throughout the brain, spinal cord , and gut of all mammals .",
-  "claims": [
-   "Drug Heroin has an active metabolite, Morphine."
-  ],
-  "note": "quote states morphine and 6-MAM are mu-opioid agonists; it does not say morphine is formed from/is a metabolite of heroin"
- },
- {
-  "qid": "q_a2482c8ec8c7",
-  "corpus": "wikipedia_pharm",
-  "page": "meclizine",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Meclizine is a first-generation antihistamine (nonselective H 1 antagonist ) of the piperazine class.",
   "claims": [
    "Drug Meclizine acts on target 'H1' as antagonist.",
    "Drug Meclizine is classified as Antihistamine, Antiemetic / prokinetic."
   ],
-  "note": "supports H1 antagonist and the Antihistamine category; the quote does not attest Antiemetic / prokinetic."
- },
- {
-  "qid": "q_a6dadfbb40ce",
   "corpus": "wikipedia_pharm",
-  "page": "psilocybin",
   "heading": null,
+  "note": "supports H1 antagonist and the Antihistamine category; the quote does not attest Antiemetic / prokinetic.",
+  "page": "meclizine",
   "present": true,
-  "supports": false,
-  "quote": "Metabolites | • Psilocin • Psilocin- O -glucuronide • 4-Hydroxyindole-3-acetaldehyde • 4-Hydroxyindole-3-acetic acid (4-HIAA) • 4-Hydroxytryptophol",
-  "claims": [
-   "Drug Psilocybin has an active metabolite, Psilocin."
-  ],
-  "note": "the Metabolites infobox list names Psilocin as a metabolite but never says or implies it is active"
+  "qid": "q_a2482c8ec8c7",
+  "quote": "Meclizine is a first-generation antihistamine (nonselective H 1 antagonist ) of the piperazine class.",
+  "supports": false
  },
  {
-  "qid": "q_b27fbb607fe6",
-  "corpus": "wikipedia_pharm",
-  "page": "bromazepam",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Metabolites | 3-hydroxybromazepam",
-  "claims": [
-   "Drug Bromazepam has an active metabolite, 3-Hydroxybromazepam."
-  ],
-  "note": "Quote is a bare infobox 'Metabolites' table row naming 3-hydroxybromazepam as a metabolite; it never says or implies the metabolite is active."
- },
- {
-  "qid": "q_b5ffda82e0cc",
-  "corpus": "stahl_essential",
-  "page": 131,
-  "heading": [
-   "4 Psychosis, Schizophrenia, and the Neurotransmitter Networks Dopamine, Serotonin, and Glutamate"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Presynaptic serotonin (5HT) receptors include 5HT1A, 5HT1B/D, and 5HT2B, all of which act as autoreceptors",
   "claims": [
    "Receptor 5-HT1B: synaptic = 'both'.",
    "Receptor 5-HT1D: synaptic = 'both'.",
    "Receptor 5-HT2B: family = 'serotonergic'.",
    "Receptor 5-HT2B: synaptic = 'presynaptic'."
   ],
-  "note": "Quote confirms 5-HT1B/1D/2B as presynaptic autoreceptors and 5-HT2B as serotonergic, but gives no postsynaptic evidence for the 5-HT1B/1D synaptic='both' claims."
- },
- {
-  "qid": "q_ba6c37bd701c",
-  "corpus": "stahl",
-  "page": 241,
+  "corpus": "stahl_essential",
   "heading": [
-   "Deutetrabenazine",
-   "Dosing and use",
-   "Pharmacokinetics"
+   "4 Psychosis, Schizophrenia, and the Neurotransmitter Networks Dopamine, Serotonin, and Glutamate"
   ],
+  "note": "Quote confirms 5-HT1B/1D/2B as presynaptic autoreceptors and 5-HT2B as serotonergic, but gives no postsynaptic evidence for the 5-HT1B/1D synaptic='both' claims.",
+  "page": 131,
   "present": true,
-  "supports": false,
-  "quote": "Half-life of total (α + β)dihydrotetrabenazine from deutetrabenazine is approximately 9 to 10 hours",
-  "claims": [
-   "Drug Deutetrabenazine has an elimination half-life of 9.0-10.0 hours."
-  ],
-  "note": "The 9-10 hour half-life is for the metabolite dihydrotetrabenazine, not for deutetrabenazine itself."
+  "qid": "q_b5ffda82e0cc",
+  "quote": "Presynaptic serotonin (5HT) receptors include 5HT1A, 5HT1B/D, and 5HT2B, all of which act as autoreceptors",
+  "supports": false
  },
  {
-  "qid": "q_be5e050ad426",
-  "corpus": "wikipedia_pharm",
-  "page": "ramelteon",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Ramelteon is metabolized mainly by CYP1A2 while CYP2C enzymes and CYP3A4 are involved to a minor extent. The metabolites of ramelteon include M-I, M-II, M-III, and M-IV.",
   "claims": [
    "The metabolite M-II is formed from Ramelteon by the enzyme CYP1A2."
   ],
-  "note": "quote says ramelteon is metabolized mainly by CYP1A2 and lists metabolites M-I to M-IV, but never attributes M-II specifically to CYP1A2 rather than CYP2C/CYP3A4"
- },
- {
-  "qid": "q_c23dd6329dde",
-  "corpus": "stahl",
-  "page": 147,
-  "heading": [
-   "Carbamazepine",
-   "Therapeutics",
-   "How the Drug Works"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Inhibits release of glutamate",
-  "claims": [
-   "Drug Carbamazepine acts on target 'Glutamate receptors' as modulator."
-  ],
-  "note": "Quote describes inhibiting glutamate release (a presynaptic effect), not carbamazepine acting on glutamate receptors as a modulator."
- },
- {
-  "qid": "q_c2672a4a573b",
   "corpus": "wikipedia_pharm",
-  "page": "pizotifen",
   "heading": null,
+  "note": "quote says ramelteon is metabolized mainly by CYP1A2 and lists metabolites M-I to M-IV, but never attributes M-II specifically to CYP1A2 rather than CYP2C/CYP3A4",
+  "page": "ramelteon",
   "present": true,
-  "supports": false,
-  "quote": "Pizotifen is a serotonin antagonist acting mainly at the 5-HT 2A , 5-HT 2B , and 5-HT 2C receptors . It also has some activity as an antihistamine as well as some anticholinergic activity. The drug binds non-selectively to many targets , including serotonin , dopamine , adrenergic , histamine , and muscarinic acetylcholine receptors . Besides its serotonin 5-HT 2 receptor antagonism, pizotifen is a low- potency moderate- efficacy partial agonist of the serotonin 5-HT 1A receptor .",
-  "claims": [
-   "Drug Pizotifen acts on target '5-HT2A' as antagonist.",
-   "Drug Pizotifen acts on target '5-HT2B' as antagonist.",
-   "Drug Pizotifen acts on target '5-HT2C' as antagonist.",
-   "Drug Pizotifen acts on target '5-HT1A' as partial_agonist.",
-   "Drug Pizotifen is classified as Antimigraine."
-  ],
-  "note": "supports the 5-HT2A/5-HT2B/5-HT2C antagonist and 5-HT1A partial-agonist claims; the quote is pure receptor pharmacology and never says pizotifen is used for or classified as an antimigraine drug."
+  "qid": "q_be5e050ad426",
+  "quote": "Ramelteon is metabolized mainly by CYP1A2 while CYP2C enzymes and CYP3A4 are involved to a minor extent. The metabolites of ramelteon include M-I, M-II, M-III, and M-IV.",
+  "supports": false
  },
  {
-  "qid": "q_c3e8214ee443",
-  "corpus": "stahl",
-  "page": 123,
-  "heading": [
-   "Brexpiprazole",
-   "Dosing and use",
-   "Pharmacokinetics"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Mean half-life 91 hours (brexpiprazole) and 86 hours (major metabolite DM-3411)",
   "claims": [
-   "Drug Brexpiprazole has an elimination half-life of 91.0 hours.",
-   "Drug Brexpiprazole has an active metabolite, DM-3411.",
-   "DM-3411, an active metabolite of Brexpiprazole, has an elimination half-life of 86.0 hours."
+   "Projection group 'Acetylcholine' (kind=cholinergic): Cholinergic projections modulate arousal, attention and memory across the cortex and hippocampus."
   ],
-  "note": "Quote calls DM-3411 a 'major metabolite' but never says or implies it is active."
- },
- {
-  "qid": "q_ca4596b87f6f",
-  "corpus": "stahl",
-  "page": 721,
-  "heading": [
-   "Reboxetine",
-   "Therapeutics",
-   "Class"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Selective norepinephrine reuptake inhibitor (NRI); antidepressant",
-  "claims": [
-   "Drug Reboxetine is classified as ADHD non-stimulant, Other antidepressant."
-  ],
-  "note": "Quote confirms 'antidepressant' but the class line never mentions ADHD or non-stimulant."
- },
- {
-  "qid": "q_cb1cc8ad9b93",
-  "corpus": "wikipedia_pharm",
-  "page": "tiapride",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Tiapride is a dopamine D 2 and D 3 receptor antagonist.",
-  "claims": [
-   "Drug Tiapride acts on target 'D2' as antagonist.",
-   "Drug Tiapride acts on target 'D3' as antagonist.",
-   "Drug Tiapride is classified as Conventional antipsychotic."
-  ],
-  "note": "supports D2 and D3 antagonism; the quote never states a Conventional antipsychotic classification"
- },
- {
-  "qid": "q_ceb74108b320",
-  "corpus": "wikipedia_pharm",
-  "page": "tolcapone",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Tolcapone selectively and reversibly binds to the catalytic site of COMT in both the periphery and the central nervous system (CNS) with greater affinity than any of the three catecholamines , including levodopa.",
-  "claims": [
-   "Drug Tolcapone acts on target 'Catechol-O-methyltransferase (COMT)' as enzyme_inhibitor.",
-   "Drug Tolcapone is classified as Antiparkinson."
-  ],
-  "note": "supports the COMT enzyme_inhibitor claim; the quote is purely mechanistic (COMT binding, levodopa interaction) and never states an Antiparkinson indication/category"
- },
- {
-  "qid": "q_cfd8f134b48b",
-  "corpus": "wikipedia_pharm",
-  "page": "istradefylline",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Selective adenosine A 2A receptor antagonists like istradefylline and preladenant may be useful in the treatment of motivational disorders in humans.",
-  "claims": [
-   "Drug Istradefylline acts on target 'A2A' as antagonist.",
-   "Drug Istradefylline is classified as Antiparkinson."
-  ],
-  "note": "supports the A2A antagonist target claim; does not say Istradefylline is classified as Antiparkinson (this quote discusses motivational disorders, not Parkinson's disease)"
- },
- {
-  "qid": "q_d3d725f95c28",
-  "corpus": "stahl",
-  "page": 827,
-  "heading": [
-   "Topiramate",
-   "Therapeutics",
-   "Class"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Anticonvulsant, voltage-sensitive sodium channel modulator",
-  "claims": [
-   "Drug Topiramate is classified as Mood stabilizer / anticonvulsant, Other."
-  ],
-  "note": "Quote confirms the anticonvulsant classification but the class line names no separate 'Other' category."
- },
- {
-  "qid": "q_da6f20978229",
   "corpus": "kandel",
-  "page": 1047,
   "heading": [
    "40 The Brain Stem",
    "Monoaminergic Neurons in the Brain Stem Modulate Sensory, Motor, Autonomic, and Behavioral Functions",
    "Many Modulatory Systems Use Monoamines as Neurotransmitters"
   ],
+  "note": "Quote states arousal and selective attention only; it never mentions memory.",
+  "page": 1047,
   "present": true,
-  "supports": false,
+  "qid": "q_da6f20978229",
   "quote": "These neurons project throughout the cerebral cortex, hippocampus, and amygdala. Both groups play an important role in arousal, and the basal forebrain groups are also involved in more selective attention.",
-  "claims": [
-   "Projection group 'Acetylcholine' (kind=cholinergic): Cholinergic projections modulate arousal, attention and memory across the cortex and hippocampus."
-  ],
-  "note": "Quote states arousal and selective attention only; it never mentions memory."
+  "supports": false
  },
  {
-  "qid": "q_da757af94909",
-  "corpus": "stahl",
-  "page": 496,
-  "heading": [
-   "Maprotiline",
-   "Side effects",
-   "How Drug Causes Side Effects"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Anticholinergic activity may explain sedative effects, dry mouth, constipation, and blurred vision",
-  "claims": [
-   "Drug Maprotiline acts on target 'M1' as antagonist.",
-   "Drug Maprotiline acts on target 'M2' as antagonist.",
-   "Drug Maprotiline acts on target 'M3' as antagonist.",
-   "Drug Maprotiline acts on target 'M4' as antagonist.",
-   "Drug Maprotiline acts on target 'M5' as antagonist."
-  ],
-  "note": "Sentence is a subject-less 'How Drug Causes Side Effects' rule (never names maprotiline) and does not distinguish M1 through M5 individually."
- },
- {
-  "qid": "q_de28c9284e0e",
-  "corpus": "wikipedia_pharm",
-  "page": "loprazolam",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "It possesses anxiolytic , anticonvulsant , hypnotic , sedative and skeletal muscle relaxant properties.",
-  "claims": [
-   "Drug Loprazolam is classified as Benzodiazepine, Hypnotic / sedative."
-  ],
-  "note": "supports the Hypnotic/sedative classification (anxiolytic, anticonvulsant, hypnotic, sedative properties); does not use the term benzodiazepine in this quote"
- },
- {
-  "qid": "q_e1968c119f74",
-  "corpus": "stahl_essential",
-  "page": 489,
-  "heading": [
-   "11 Attention Deficit Hyperactivity Disorder and Its Treatment"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "D,L-amphetamine and D-amphetamine are both competitive inhibitors at norepinephrine transporters (NETs), dopamine transporters (DATs), and vesicular monoamine transporters (VMATs)",
-  "claims": [
-   "Drug Amphetamine (D) acts on target 'Vesicular monoamine transporter (VMAT2)' as vesicular_releaser.",
-   "Drug Amphetamine (D,L) acts on target 'Vesicular monoamine transporter (VMAT2)' as vesicular_releaser.",
-   "Drug Lisdexamfetamine acts on target 'Vesicular monoamine transporter (VMAT2)' as vesicular_releaser."
-  ],
-  "note": "Quote calls D/D,L-amphetamine 'competitive inhibitors' at VMATs, not releasers, and never mentions lisdexamfetamine at all."
- },
- {
-  "qid": "q_e49af9451ed2",
-  "corpus": "stahl_essential",
-  "page": 406,
-  "heading": [
-   "9 Chronic Pain and Its Treatment"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Serotonin inhibits primary afferent terminals via postsynaptic 5HT1B/D receptors (Figure 9-2). These inhibitory receptors are G-protein-coupled, and indirectly influence ion channels to hyperpolarize the nerve terminal and inhibit nociceptive neurotransmitter release.",
   "claims": [
    "Receptor 5-HT1B: family = 'serotonergic'.",
    "Receptor 5-HT1B: receptor_class = 'metabotropic'.",
@@ -961,98 +167,15 @@
    "Receptor 5-HT1D: sign = 'inhibitory'.",
    "Receptor 5-HT1D: synaptic = 'both'."
   ],
-  "note": "Quote confirms family=serotonergic, receptor_class=metabotropic, and sign=inhibitory for 5-HT1B/1D, but states only 'postsynaptic', not both pre- and postsynaptic, so it does not establish synaptic='both'."
- },
- {
-  "qid": "q_e4d4948e9b80",
   "corpus": "stahl_essential",
-  "page": 489,
   "heading": [
-   "11 Attention Deficit Hyperactivity Disorder and Its Treatment"
+   "9 Chronic Pain and Its Treatment"
   ],
+  "note": "Quote confirms family=serotonergic, receptor_class=metabotropic, and sign=inhibitory for 5-HT1B/1D, but states only 'postsynaptic', not both pre- and postsynaptic, so it does not establish synaptic='both'.",
+  "page": 406,
   "present": true,
-  "supports": false,
-  "quote": "Lisdexamfetamine is the prodrug of D-amphetamine, linked to the amino acid lysine. It is only centrally active as D-amphetamine once it has been cleaved in the stomach into the active compounds D-amphetamine plus free L-lysine",
-  "claims": [
-   "Drug Lisdexamfetamine acts on target 'Vesicular monoamine transporter (VMAT2)' as vesicular_releaser."
-  ],
-  "note": "Quote describes lisdexamfetamine's conversion to D-amphetamine in the stomach; it never mentions VMAT2 or any transporter action."
- },
- {
-  "qid": "q_e67c08da0ef6",
-  "corpus": "wikipedia_pharm",
-  "page": "levodopa",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Drug class | Dopamine precursor ; Dopamine receptor agonist",
-  "claims": [
-   "Drug Levodopa is classified as Antiparkinson."
-  ],
-  "note": "quote gives Levodopa's mechanism-based drug class (dopamine precursor; dopamine receptor agonist); it does not say Levodopa is classified as Antiparkinson (Parkinson's disease is not mentioned in this quote)"
- },
- {
-  "qid": "q_e75d13a4140e",
-  "corpus": "wikipedia_pharm",
-  "page": "sevoflurane",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Sevoflurane acts as a positive allosteric modulator of the GABA A receptor in electrophysiology studies of neurons and recombinant receptors. However, it also acts as an NMDA receptor antagonist , potentiates glycine receptor currents, and inhibits nAChR and 5-HT 3 receptor currents.",
-  "claims": [
-   "Drug Sevoflurane acts on target 'GABA-A' as pam.",
-   "Drug Sevoflurane acts on target 'NMDA' as antagonist.",
-   "Drug Sevoflurane acts on target 'Glycine' as pam.",
-   "Drug Sevoflurane acts on target '5-HT3' as antagonist.",
-   "Drug Sevoflurane is classified as Anesthetic."
-  ],
-  "note": "supports the four binding claims (GABA-A PAM, NMDA antagonist, Glycine PAM, 5-HT3 antagonist); never states an anesthetic classification"
- },
- {
-  "qid": "q_edc2c593a1f5",
-  "corpus": "wikipedia_pharm",
-  "page": "2c_b",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "Drug class | Serotonin receptor modulator ; Serotonin 5-HT 2A receptor agonist ; Serotonergic psychedelic ; Hallucinogen ; stimulant; Entactogen",
-  "claims": [
-   "Drug 2C-B is classified as Recreational / psychoactive."
-  ],
-  "note": "Drug class row lists mechanism/pharmacology terms (hallucinogen, stimulant, psychedelic, entactogen) but never states 'recreational' or 'psychoactive' or a direct synonym of either."
- },
- {
-  "qid": "q_f21fcaaac73a",
-  "corpus": "stahl",
-  "page": 449,
-  "heading": [
-   "Lofepramine",
-   "Therapeutics",
-   "Class"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Tricyclic antidepressant (TCA)",
-  "claims": [
-   "Drug Lofepramine is classified as Tricyclic / tetracyclic antidepressant, SNRI."
-  ],
-  "note": "Quote confirms the tricyclic classification but never mentions SNRI."
- },
- {
-  "qid": "q_f7ca591e323a",
-  "corpus": "stahl",
-  "page": 641,
-  "heading": [
-   "Perospirone",
-   "Therapeutics",
-   "How the Drug Works"
-  ],
-  "present": true,
-  "supports": false,
-  "quote": "Interactions at serotonin 1A receptors may contribute to efficacy for cognitive and affective symptoms in some patients",
-  "claims": [
-   "Drug Perospirone acts on target '5-HT1A' as partial_agonist (tentative)."
-  ],
-  "note": "Quote says 5-HT1A 'interactions' contribute to efficacy but never specifies a partial-agonist mechanism."
+  "qid": "q_e49af9451ed2",
+  "quote": "Serotonin inhibits primary afferent terminals via postsynaptic 5HT1B/D receptors (Figure 9-2). These inhibitory receptors are G-protein-coupled, and indirectly influence ion channels to hyperpolarize the nerve terminal and inhibit nociceptive neurotransmitter release.",
+  "supports": false
  }
 ]
