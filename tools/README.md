@@ -314,6 +314,18 @@ Screenshots).
   corroborate it; the mirror of that rule is that a weaker model *doubting* a quote is a
   disagreement, not a verdict, so it parks in `quote_recheck_disputed.json` with the stamp
   intact until the stamping model is asked again (`build --disputed`, `apply --llm <it>`).
+- `tools/sourcing/demote_quotes.py` — the other half of a recheck: applies what the flags mean.
+  A flagged quote is still stored, so the node still shows a green pill for a claim its
+  sentence does not back; this removes that source (never the claim: a drug that loses its
+  class quote is still classified, it just no longer says a book said so) or, with
+  `--replace <proposals.json>` from a re-extraction pass, rewrites the quote in place after
+  re-gating it against the cited page, falling back to removal when the proposal is not
+  verbatim there. Walks `tools/data/drugs_data.jsonl` plus the applier-written caches, drops
+  an emptied `*sources` key rather than leaving it empty, and clears the ids it handled from
+  `quote_llm.json` / `quote_recheck_flagged.json`. Quotes authored in hand-written Python are
+  **reported with corpus/page/quote, never rewritten**, so nothing is silently skipped.
+  Matching is by `quote_table.quote_id`, so an id from any of the three caches resolves.
+  Idempotent; `--flagged` / `--ids` / `--dry-run`. Stdlib, author-side.
 - `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted quote
   from a **book** corpus (a paged corpus whose page tree has an `INDEX.md`), the **trail** of headings it
   sits under, into the committed `tools/generated_cache/quote_headers.json` ({quote_id: [outermost, ...,

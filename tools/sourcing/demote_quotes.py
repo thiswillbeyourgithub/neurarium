@@ -1,0 +1,243 @@
+#!/usr/bin/env python
+"""Remove, by quote id, a source that a judge found does not back its claim.
+
+The recheck pipeline (``recheck_quotes.py``) ends by flagging quotes that are verbatim
+on their cited page but do not substantiate the claim they were attached to. A flag is
+not an outcome: while the source is still stored, the node keeps its green ``verified``
+pill and the reader is told a sentence backs a claim it does not. Either a better
+sentence replaces it (a re-extraction pass, see ``--replace``) or the source has to go,
+and the node falls back to the grade it deserves without it (usually ``llm``, sometimes
+``NOSOURCE``). This applies that second half.
+
+**It removes the source, never the claim.** A drug that loses its class quote is still
+classified; it just no longer says a book said so. Deciding whether the claim itself is
+wrong is a separate, human judgement, and this tool deliberately does not make it.
+
+Sources live in two machine-writable places, and this walks both:
+
+* ``tools/data/drugs_data.jsonl`` (bindings, NbN, class, brands, half-life, metabolites
+  and their bindings / formed_by rows);
+* ``tools/generated_cache/*.json`` (the applier-written caches: expression locations,
+  classifications, the two enzyme caches, expression density).
+
+Anything else is hand-authored Python (``tools/data_generators/quotes/*.py`` and the
+registries in ``provenance.py``), which no script should be rewriting. Those ids are
+**reported, not touched**, with their corpus/page/quote so the authoring site can be
+found by grep. Nothing is silently skipped.
+
+Matching is by the same content hash the emitted data uses (``quote_table.quote_id``
+over corpus + page + quote + species), so an id from ``quote_recheck_flagged.json``,
+from a verdicts file, or read off ``quotes.jsonl`` all resolve to the same sources. One
+excerpt cited by several claims is removed from every one of them: the judge's verdict
+is about the sentence's fitness for the claim, and the claims that share an id share the
+wording of that claim.
+
+Usage:
+    python tools/sourcing/demote_quotes.py --flagged            # every flagged quote
+    python tools/sourcing/demote_quotes.py --ids q_a,q_b [--dry-run]
+    python tools/sourcing/demote_quotes.py --replace PROPOSALS.json
+
+``--replace`` takes a re-extraction pass's proposals
+(``{"proposals": {qid: {"found": true, "quote": "..."}}}``): a proposal with a
+replacement rewrites the source's ``quote`` in place (re-gated against the cited page,
+exactly like every other applier, so a paraphrase is rejected), and a proposal with
+``found: false`` falls through to removal. Idempotent: a second run finds nothing.
+
+Stdlib only; authoring helper, not served. Built with the help of Claude Code.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+CACHE = os.path.join(ROOT, "tools", "generated_cache")
+DRUGS = os.path.join(ROOT, "tools", "data", "drugs_data.jsonl")
+DATA = os.path.join(ROOT, "public", "data")
+
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+from data_generators.quote_table import quote_id  # noqa: E402
+from check_data import normalize_for_match  # noqa: E402
+
+# The applier-written caches that can hold a quote-bearing source. The hand-authored
+# registries are deliberately absent: see the module docstring.
+CACHE_FILES = ("location_sources.json", "classification_sources.json",
+               "drug_enzymes.json", "drug_enzymes_wikipedia.json",
+               "expression_density.json")
+
+
+def _is_source(obj) -> bool:
+    """A dict carrying a verbatim ``quote`` string, i.e. a quote-bearing source."""
+    return isinstance(obj, dict) and isinstance(obj.get("quote"), str) and "corpus" in obj
+
+
+def _page_dirs() -> dict[str, str]:
+    """``corpus -> author-side page directory``, read from the emitted registry."""
+    with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
+        corpora = json.load(fh).get("source_corpora", {})
+    return {name: entry["pages_dir"] for name, entry in corpora.items()
+            if entry.get("pages_dir")}
+
+
+class Editor:
+    """Walks a loaded JSON tree, rewriting or dropping the sources named by id."""
+
+    def __init__(self, targets: dict[str, dict], pages: dict[str, str]):
+        # qid -> {} to remove, or {"quote": "..."} to rewrite in place.
+        self.targets = targets
+        self.pages = pages
+        self.removed: list[str] = []
+        self.replaced: list[str] = []
+        self.rejected: list[str] = []
+        self.seen: set[str] = set()
+
+    def _page_text(self, corpus, page):
+        """The cited page, normalized, or ``None`` when the corpus is not on disk."""
+        d = self.pages.get(corpus)
+        if not d:
+            return None
+        md = os.path.join(ROOT, d, f"{page}.md")
+        if not os.path.exists(md):
+            return None
+        with open(md, encoding="utf-8") as fh:
+            return normalize_for_match(fh.read())
+
+    def _apply_one(self, src):
+        """``True`` when this source should be dropped from the list holding it."""
+        qid = quote_id(src)
+        if qid not in self.targets:
+            return False
+        self.seen.add(qid)
+        new = (self.targets[qid] or {}).get("quote")
+        if not new:
+            self.removed.append(qid)
+            return True
+        # A replacement is only worth as much as the gate behind it, so it goes through
+        # the same verbatim check check_data.py will run on it later. A proposal that
+        # does not match the page is not written at all, and the source is removed
+        # instead: that is the honest fallback, not a silently-kept bad quote.
+        text = self._page_text(src["corpus"], src.get("page"))
+        if text is not None and normalize_for_match(new) not in text:
+            self.rejected.append(qid)
+            self.removed.append(qid)
+            return True
+        src["quote"] = new
+        self.replaced.append(qid)
+        return False
+
+    def walk(self, node):
+        """Rewrite ``node`` in place, returning it (a list may lose members)."""
+        if isinstance(node, list):
+            out = []
+            for v in node:
+                if _is_source(v) and self._apply_one(v):
+                    continue
+                out.append(self.walk(v))
+            return out
+        if isinstance(node, dict):
+            for k, v in list(node.items()):
+                node[k] = self.walk(v)
+                # An emptied `sources` list is not the same as no sources: the key is
+                # dropped so the node reads as unsourced rather than as sourced-by-none.
+                if isinstance(node[k], list) and not node[k] and k.endswith("sources"):
+                    del node[k]
+            return node
+        return node
+
+
+def _targets(args) -> dict[str, dict]:
+    """``qid -> {}`` (remove) or ``{"quote": ...}`` (replace), from the CLI."""
+    out: dict[str, dict] = {}
+    if args.flagged:
+        path = os.path.join(CACHE, "quote_recheck_flagged.json")
+        with open(path, encoding="utf-8") as fh:
+            for row in json.load(fh):
+                out[row["qid"]] = {}
+    for qid in (args.ids or "").split(","):
+        if qid.strip():
+            out[qid.strip()] = {}
+    if args.replace:
+        with open(args.replace, encoding="utf-8") as fh:
+            raw = json.load(fh)
+        for qid, p in (raw.get("proposals", raw) or {}).items():
+            out[qid] = {"quote": p["quote"]} if p.get("found") and p.get("quote") else {}
+    return out
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--flagged", action="store_true",
+                    help="target every quote in quote_recheck_flagged.json")
+    ap.add_argument("--ids", default="", help="comma-separated quote ids")
+    ap.add_argument("--replace", help="a re-extraction pass's proposals JSON")
+    ap.add_argument("--dry-run", action="store_true", help="report, write nothing")
+    args = ap.parse_args()
+
+    targets = _targets(args)
+    if not targets:
+        sys.exit("nothing to do: pass --flagged, --ids or --replace")
+
+    ed = Editor(targets, _page_dirs())
+
+    with open(DRUGS, encoding="utf-8") as fh:
+        rows = [json.loads(line) for line in fh if line.strip()]
+    rows = [ed.walk(r) for r in rows]
+    if not args.dry_run:
+        with open(DRUGS, "w", encoding="utf-8") as fh:
+            for r in rows:
+                fh.write(json.dumps(r, ensure_ascii=False) + "\n")
+
+    for name in CACHE_FILES:
+        path = os.path.join(CACHE, name)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        data = ed.walk(data)
+        if not args.dry_run:
+            with open(path, "w", encoding="utf-8") as fh:
+                json.dump(data, fh, ensure_ascii=False, indent=1, sort_keys=True)
+
+    # A stamp on a quote nobody cites any more is dead weight, and a flag on one that
+    # has been dealt with would be re-proposed by the next pass, so both are cleared.
+    for name in ("quote_llm.json", "quote_recheck_flagged.json"):
+        path = os.path.join(CACHE, name)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        done = {q for q in ed.seen if not (targets[q] or {}).get("quote")} | set(ed.removed)
+        if isinstance(data, dict):
+            data = {k: v for k, v in data.items() if k not in done}
+        else:
+            data = [r for r in data if r.get("qid") not in ed.seen]
+        if not args.dry_run:
+            with open(path, "w", encoding="utf-8") as fh:
+                json.dump(data, fh, ensure_ascii=False,
+                          indent=0 if isinstance(data, dict) else 1, sort_keys=True)
+
+    unreachable = sorted(set(targets) - ed.seen)
+    print(f"removed {len(ed.removed)} source(s), replaced {len(ed.replaced)}"
+          + (f", rejected {len(ed.rejected)} replacement(s) as not verbatim on the page"
+             if ed.rejected else "")
+          + (" (dry run, nothing written)" if args.dry_run else ""))
+    if unreachable:
+        # Hand-authored, so reported with enough to grep for rather than rewritten.
+        quotes = {}
+        with open(os.path.join(DATA, "quotes.jsonl"), encoding="utf-8") as fh:
+            for line in fh:
+                q = json.loads(line)
+                quotes[q["id"]] = q
+        print(f"{len(unreachable)} quote(s) live in hand-authored Python; edit them "
+              f"by hand (grep tools/data_generators/):")
+        for qid in unreachable:
+            q = quotes.get(qid, {})
+            print(f"  {qid}  {q.get('corpus')} p.{q.get('page')}  "
+                  f"{(q.get('quote') or '')[:70]!r}")
+
+
+if __name__ == "__main__":
+    main()
