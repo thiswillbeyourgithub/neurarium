@@ -40,8 +40,8 @@ HAND_AUTHORED = ("/formed_by[",)
 class GrammarTest(unittest.TestCase):
 
     def test_a_site_reads_as_one_address(self):
-        self.assertEqual(CS.site("drug", "clozapine", "bindings[5ht2a]"),
-                         "drug:clozapine/bindings[5ht2a]")
+        self.assertEqual(CS.site("drug", "clozapine", "bindings[5ht2a:antagonist]"),
+                         "drug:clozapine/bindings[5ht2a:antagonist]")
         self.assertEqual(CS.site("receptor", "5ht1a", "locations", "amygdala"),
                          "receptor:5ht1a/locations[amygdala]")
         self.assertEqual(CS.site("circuit", "reward"), "circuit:reward")
@@ -53,10 +53,18 @@ class GrammarTest(unittest.TestCase):
         inh = {"enzyme": "cyp2d6", "role": "inhibitor"}
         self.assertNotEqual(CS.member_label(sub, 0), CS.member_label(inh, 0))
 
+    def test_a_binding_row_is_keyed_by_target_and_action(self):
+        # Amisulpride antagonises D2 and partially agonises it: two nodes, two sources,
+        # so the target alone would address both at once. A binding with no known
+        # direction has nothing to add and keys on the target alone.
+        anta = {"target": "d2", "action": "antagonist"}
+        part = {"target": "d2", "action": "partial_agonist"}
+        self.assertNotEqual(CS.member_label(anta, 0), CS.member_label(part, 0))
+        self.assertEqual(CS.member_label({"target": "d2"}, 0), "d2")
+
     def test_a_list_member_is_named_by_what_it_is(self):
         # Never by position: appliers rewrite these lists wholesale, so an index would
         # silently come to address a different claim.
-        self.assertEqual(CS.member_label({"target": "5ht2a"}, 3), "5ht2a")
         self.assertEqual(CS.member_label({"enzyme": "cyp3a4"}, 3), "cyp3a4")
         self.assertEqual(CS.member_label({"name": "norfluoxetine"}, 3), "norfluoxetine")
         self.assertEqual(CS.member_label({"nothing": "usable"}, 3), "3")

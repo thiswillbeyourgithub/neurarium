@@ -88,6 +88,29 @@ class ClaimReconstructionTest(unittest.TestCase):
         qid = drug["half_life_sources"][0]["quote_id"]
         self.assertIn(R._hours(drug["half_life"]), " ".join(self.claims[qid]))
 
+    def test_a_claim_several_quotes_share_says_so(self):
+        # A judge shown one quote beside a claim that two quotes back TOGETHER rejects a
+        # citation that carries its share: 5-HT1B's synaptic="both" is one presynaptic
+        # quote plus one postsynaptic one, and neither alone says "both". That cost two
+        # good quotes a green check once, so the claim now states the arrangement.
+        import collections
+        per_site = collections.defaultdict(set)
+        for qid, texts in self.claims.items():
+            for text in texts:
+                if " | " in text:
+                    per_site[text.split(" | ", 1)[0]].add(qid)
+        shared = {s for s, q in per_site.items() if len(q) > 1}
+        self.assertTrue(shared, "no co-cited site in the dataset to check against")
+        for site in shared:
+            for qid in per_site[site]:
+                text = next(t for t in self.claims[qid] if t.startswith(site + " | "))
+                self.assertIn("cited here alongside", text, f"{qid} at {site}")
+        for site, qids in per_site.items():
+            if len(qids) == 1:
+                qid = next(iter(qids))
+                text = next(t for t in self.claims[qid] if t.startswith(site + " | "))
+                self.assertNotIn("cited here alongside", text, f"{qid} at {site}")
+
     def test_nothing_in_those_kinds_falls_back_to_the_generic_claim(self):
         scoped = {"drug_brands", "drug_half_life", "drug_metabolites",
                   "drug_metabolite_bindings"}

@@ -13,7 +13,7 @@ place a quote is cited from.
 
     drug:brexpiprazole/half_life
     drug:brexpiprazole/metabolites[DM-3411]/half_life
-    drug:clozapine/bindings[5ht2a]
+    drug:clozapine/bindings[5ht2a:antagonist]
     drug:fluoxetine/enzymes[cyp2d6:inhibitor]
     receptor:5ht1a/classification[family]
     receptor:5ht1a/locations[amygdala]
@@ -46,6 +46,18 @@ def site(kind: str, owner: str, facet: str | None = None,
         if key:
             out += f"[{key}]"
     return out
+
+
+def binding_key(row: dict) -> str:
+    """A binding row's key: the target AND the action.
+
+    Seven drugs state two actions on one target (amisulpride antagonises D2 and partially
+    agonises it, amphetamine both blocks and reverses DAT), and those are two nodes with
+    two sources, so the target alone would address both at once. A binding with no known
+    direction (`affinity_only`) has nothing to add and keys on the target alone.
+    """
+    action = row.get("action")
+    return f"{row.get('target')}:{action}" if action else str(row.get("target"))
 
 
 def enzyme_key(row: dict) -> str:
@@ -176,6 +188,8 @@ def member_label(obj, index: int) -> str:
     if isinstance(obj, dict):
         if "enzyme" in obj and "role" in obj:
             return enzyme_key(obj)
+        if "target" in obj:
+            return binding_key(obj)
         for k in ("target", "name", "id", "enzyme", "region", "brand"):
             if isinstance(obj.get(k), str):
                 return obj[k]

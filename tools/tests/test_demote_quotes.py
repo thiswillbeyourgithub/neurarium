@@ -83,6 +83,21 @@ class DemoteTest(unittest.TestCase):
         self.assertEqual(ed.removed, [qid])
         self.assertNotIn("category_sources", rec)
 
+    def test_a_replacement_that_duplicates_a_sibling_citation_collapses(self):
+        # Two quotes cited from one node often failed for the same reason and get
+        # repaired with the same sentence. The node then holds one citation twice, which
+        # would draw the same pill twice and count a source that is not there.
+        qid = quote_id(STAHL)
+        other = dict(STAHL, quote="Another wrong sentence.")
+        better = "The better sentence."
+        with tempfile.TemporaryDirectory() as tmp:
+            rec, ed = self._run(
+                tmp, _drug([dict(STAHL), other]),
+                {qid: {"quote": better}, quote_id(other): {"quote": better}},
+                page_text=f"Preamble. {better} More text.")
+            self.assertEqual(sorted(ed.replaced), sorted([qid, quote_id(other)]))
+            self.assertEqual([s["quote"] for s in rec["category_sources"]], [better])
+
     def test_a_replacement_not_on_the_page_is_rejected_not_written(self):
         qid = quote_id(STAHL)
         with tempfile.TemporaryDirectory() as tmp:

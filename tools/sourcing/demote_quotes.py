@@ -78,6 +78,26 @@ def _is_source(obj) -> bool:
     return isinstance(obj, dict) and isinstance(obj.get("quote"), str) and "corpus" in obj
 
 
+def _dedupe_sources(members: list) -> list:
+    """``members`` with any repeated source collapsed onto its first occurrence.
+
+    A re-extraction can propose the sentence a sibling citation already carries (two
+    quotes cited from one node often failed for the same reason and are repaired the same
+    way), and two identical citations on one node are one citation: the viewer would draw
+    the same pill twice and the excerpt table, keyed by content hash, would fold them
+    back together anyway.
+    """
+    seen, out = set(), []
+    for m in members:
+        if _is_source(m):
+            key = quote_id(m)
+            if key in seen:
+                continue
+            seen.add(key)
+        out.append(m)
+    return out
+
+
 def _page_dirs() -> dict[str, str]:
     """``corpus -> author-side page directory``, read from the emitted registry."""
     with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
@@ -167,7 +187,7 @@ class Editor:
                 if _is_source(v) and self._apply_one(v, root, path):
                     continue
                 out.append(self.walk(v, root, tuple(path) + (CS.member_label(v, i),)))
-            return out
+            return _dedupe_sources(out)
         if isinstance(node, dict):
             for k, v in list(node.items()):
                 node[k] = self.walk(v, root, tuple(path) + (k,))

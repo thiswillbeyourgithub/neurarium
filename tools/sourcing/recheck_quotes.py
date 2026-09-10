@@ -203,7 +203,7 @@ def reconstruct_claims(quotes):
             tname = target_names.get(b["target"], b["target"])
             for q in _qids(b.get("sources", [])):
                 add(q, f"Drug {nm} acts on target '{tname}' as {b['action']}{tag}.",
-                    CS.site("drug", d["id"], f"bindings[{b['target']}]"))
+                    CS.site("drug", d["id"], f"bindings[{CS.binding_key(b)}]"))
         kind["now"] = "drug_categories"
         for q in _qids(d.get("category_sources", [])):
             cats = [cat_labels.get(c, c) for c in d.get("categories", [])]
@@ -247,7 +247,7 @@ def reconstruct_claims(quotes):
                     add(q, f"{mn}, an active metabolite of {nm}, acts on target "
                            f"'{mt}' as {mb['action']}.",
                         CS.site("drug", d["id"],
-                                f"metabolites[{mn}]/bindings[{mb['target']}]"))
+                                f"metabolites[{mn}]/bindings[{CS.binding_key(mb)}]"))
             kind["now"] = "drug_metabolite_enzyme"
             for fb in m.get("formed_by", []):
                 step = f" by {fb['reaction']}" if fb.get("reaction") else ""
@@ -330,6 +330,22 @@ def reconstruct_claims(quotes):
             add(qid, "This quote is cited as the source of a dataset claim whose text "
                      "could not be reconstructed here. Confirm it appears verbatim on "
                      "the page and states a coherent, correct fact.")
+    # A node backed by SEVERAL quotes is not asking each of them for the whole claim.
+    # That is the dataset's own model (a compound value earns its green check only when
+    # every part is attested: 5-HT1B's synaptic="both" is one presynaptic quote plus one
+    # postsynaptic one, a two-category class is one sentence per category), and a judge
+    # shown one quote beside the whole claim rejects the pair that is exactly right. So
+    # the claim says out loud how many citations share it, and what to weigh THIS one on.
+    shared = collections.Counter()
+    for qid, texts in claims.items():
+        for text in set(texts):
+            shared[text] += 1
+    for texts in claims.values():
+        for i, text in enumerate(texts):
+            if shared[text] > 1:
+                texts[i] = (f"{text} [cited here alongside {shared[text] - 1} other "
+                            f"quote(s): judge whether THIS one carries its share of the "
+                            f"claim, not whether it carries the whole claim alone]")
     return claims, kinds
 
 
