@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.78.3",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "data",
+          "text": "The 36 replacement quotes found in the previous release have now been read by a second model, which never saw the first one's reasoning and agreed every one of them supports the claim it is cited for. Their source tooltips gain the judging step in the chain that says how the quote got here.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.78.2",
       "date": "2026-09-10",
       "entries": [
