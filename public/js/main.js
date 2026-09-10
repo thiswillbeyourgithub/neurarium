@@ -7414,6 +7414,13 @@ async function main() {
   let activeEnzymeId = null;
   let reflectEnzymes = () => {};
   const focusEnzyme = (enz) => {
+    // Having no 3D state of its own is exactly why this focus has to drop the
+    // PREVIOUS one by hand: every other focus replaces the scene as it applies
+    // itself, so stepping from a drug tab to an enzyme tab would otherwise leave
+    // the drug's dots, wash and flow beads running under a panel that no longer
+    // mentions that drug (the watcher below hides them off this clear). Folding
+    // the whole panel away is not a focus change and deliberately keeps it going.
+    selection.clear();
     info.showEnzyme(enz);
     activeEnzymeId = enz.id;
     reflectEnzymes(activeEnzymeId);
@@ -7428,6 +7435,15 @@ async function main() {
       focusEnzyme(enz);
     }
   };
+  // The mirror of the clear inside focusEnzyme: an enzyme row stays lit only while
+  // the enzyme is what is focused, so any focus that DOES touch the scene puts it
+  // out. focusEnzyme clears first and sets activeEnzymeId after, so this fires on
+  // the way in and leaves the incoming enzyme lit.
+  selection.onIsolate(() => {
+    if (activeEnzymeId === null) return;
+    activeEnzymeId = null;
+    reflectEnzymes(null);
+  });
   reflectEnzymes = buildEnzymeLegend(data, toggleEnzyme);
   info.onEnzyme(focusEnzyme);
 

@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.79.2",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "A drug's animation kept playing after you moved to an enzyme tab, so the brain was lit for a drug the panel no longer mentioned. Any tab switch now puts it out; folding the whole panel away still leaves it running, as before.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.79.1",
       "date": "2026-09-10",
       "entries": [
