@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.75.0",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "data",
+          "text": "A second model re-read 790 quotes against their source page and, where it agreed, signed them: brand names, half-lives, active metabolites and metabolite bindings now say which model vouched for each quote, where before they said nothing. 1510 quotes across the dataset now carry that signature.",
+          "commits": [
+            "a775c59"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "39 of those quotes did not survive the second reading and are held back for review rather than signed: a brand name that belongs to a neighbouring molecule (Fetzima brands levomilnacipran, not milnacipran), a half-life printed next to the drug but measured on another one, a metabolite the page calls major without calling it active.",
+          "commits": [
+            "a775c59"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.74.1",
       "date": "2026-09-09",
       "entries": [
