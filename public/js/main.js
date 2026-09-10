@@ -2787,6 +2787,10 @@ function createInfoPanel(data, sourcingModal) {
   // The PDSP Ki database has no URL-addressable per-target search, so every
   // receptor/target links to the same browse page (a "go look it up" convenience).
   const PDSP_KIDB_URL = "https://pdspdb.unc.edu/kidb2/kidb/web/kis-results/index";
+  // PharmFreq is a Shiny app whose tools are in-page tabs, so it has no per-gene URL
+  // either: the link is the same "go look it up" browse convenience as PDSP's, and it
+  // is worth having because the Metabolizer status tool covers genes we do not model.
+  const PHARMFREQ_URL = "https://pharmfreq.com/";
   // UniProt + Guide to Pharmacology (GtoPdb) name searches for a receptor: land on
   // each site's results page for the receptor's name. UniProt is filtered to human
   // (model_organism 9606). Convenience search links (navigated to, never fetched),
@@ -3618,6 +3622,15 @@ function createInfoPanel(data, sourcingModal) {
           sourcesTip(variability.sources)));
         box.appendChild(head);
         box.appendChild(el("p", "var-caveat", t("enzyme.variabilityCaveat")));
+        // Where these numbers come from, and where to go past them: we publish one
+        // profile per isoform we model, PharmFreq publishes the whole atlas. A lookup
+        // link like the ClinPGx one on a drug's Metabolism section, so no pill: the
+        // pill on the heading above already names the source of the claim itself.
+        const freqRow = el("div", "info-wiki");
+        freqRow.appendChild(el("span", null, t("info.frequencies")));
+        appendLookupLink(freqRow, "info.pharmfreq", PHARMFREQ_URL,
+          "info.pharmfreqTitle");
+        box.appendChild(freqRow);
         // The key doubles as the caption: PM/IM/NM/UM are jargon, and the colour a
         // reader is about to see in every bar is defined here once rather than in a
         // tooltip they would have to hunt for.
@@ -3638,10 +3651,15 @@ function createInfoPanel(data, sourcingModal) {
           for (const cell of group.cells) {
             const seg = el("span", `var-seg var-${cell.phenotype.toLowerCase()}`);
             seg.style.width = `${cell.freq * 100}%`;
-            seg.title = `${cell.label}: ${(cell.freq * 100).toFixed(1)}%`;
             bar.appendChild(seg);
           }
-          li.appendChild(bar);
+          // The exact figures, on the bar rather than on each segment: a 1%-wide
+          // segment is not a hover target, and reading one speed against the others is
+          // the whole point of the bar, so the tip carries the row entire. Nothing is
+          // rounded or dropped on the way here; the bar is the shape of the numbers
+          // and this is the numbers.
+          li.appendChild(attachTip(bar, `${group.label}\n` + group.cells
+            .map((c) => `${c.label} ${(c.freq * 100).toFixed(1)}%`).join("\n")));
           ul.appendChild(li);
         }
         box.appendChild(ul);

@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "3.80.0",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Hovering a population bar under \"How fast people clear it\" now names every clearance speed and its exact frequency, so the bar can be read as numbers and not only as widths.",
+          "commits": []
+        },
+        {
+          "category": "added",
+          "text": "A PharmFreq link beside the same section: we publish a profile for the five isoforms we model, its Metabolizer status tool covers many more genes.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.79.4",
       "date": "2026-09-10",
       "entries": [
