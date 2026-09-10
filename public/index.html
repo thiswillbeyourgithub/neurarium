@@ -2781,6 +2781,11 @@
            sit inline to the right of the title without nesting an <a> in a <button>
            (see #controls-header CSS). The visible title is aria-hidden (the button's
            aria-label carries the name for screen readers); the byline stays read. -->
+      <!-- `data-search` marks a control as findable from the search box (js/main.js
+           builds that half of the index by querying for it, and names each row by the
+           control's own visible label, so a new option is searchable the day it lands
+           without a JS edit). A pick clicks the real control. Deliberately NOT on
+           #search-toggle: a result that opens the search you are already in is a loop. -->
       <div id="controls-header" class="collapse-header">
         <button type="button" id="controls-toggle" class="collapse-hit" aria-expanded="true" aria-controls="controls-body" aria-label="neurarium"></button>
         <span class="panel-title" aria-hidden="true">neurarium <span class="version" data-app-version></span></span>
@@ -2790,7 +2795,7 @@
              so it stays reachable once the panel fills the screen. -->
         <!-- Day/night theme. Left of the 3D toggle, so the two viewing-preference
              buttons sit together; wired in js/main.js over js/theme.js. -->
-        <button type="button" id="toggle-theme" class="panel-hdr-btn panel-theme-btn" aria-label="Theme">
+        <button type="button" id="toggle-theme" data-search="dark night mode sombre nuit" class="panel-hdr-btn panel-theme-btn" aria-label="Theme">
           <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
@@ -2799,7 +2804,7 @@
             <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" />
           </svg>
         </button>
-        <button type="button" id="toggle-3d" class="panel-hdr-btn panel-3d-btn" aria-pressed="false" data-i18n-attr="title:panel.no3d, aria-label:panel.no3d">
+        <button type="button" id="toggle-3d" data-search class="panel-hdr-btn panel-3d-btn" aria-pressed="false" data-i18n-attr="title:panel.no3d, aria-label:panel.no3d">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2l8 5v10l-8 5-8-5V7z" />
             <path d="M12 22V12M4 7l8 5 8-5" />
@@ -2841,7 +2846,7 @@
           <!-- Keyboard-shortcuts help (left): opens the #shortcuts-modal popup
                (also opened with the ? key). Keyboard icon: a rounded panel with
                key dots + a space bar (zero-length round-capped lines = dots). -->
-          <button type="button" id="shortcuts-toggle" class="tool-btn" data-i18n-attr="title:shortcuts.title, aria-label:shortcuts.title">
+          <button type="button" id="shortcuts-toggle" data-search class="tool-btn" data-i18n-attr="title:shortcuts.title, aria-label:shortcuts.title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="2" />
               <line x1="6" y1="10" x2="6" y2="10" />
@@ -2853,7 +2858,7 @@
           </button>
           <!-- Reset view: recenter + re-frame the whole brain. Icon: a circular
                reset arrow (a "restore the view" rotate), clearer than a crosshair. -->
-          <button type="button" id="reset-view" class="tool-btn" data-i18n-attr="title:toolbar.reset, aria-label:toolbar.reset">
+          <button type="button" id="reset-view" data-search class="tool-btn" data-i18n-attr="title:toolbar.reset, aria-label:toolbar.reset">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="1 4 1 10 7 10" />
               <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
@@ -2869,7 +2874,7 @@
           <!-- Legend: opens the #legend-modal popup (the static colour/symbol key
                for the scene's encodings). Also opened with the k key. Icon: a
                bulleted-list / key (swatch rings + lines). -->
-          <button type="button" id="legend-toggle" class="tool-btn" data-i18n-attr="title:panel.legend, aria-label:panel.legend">
+          <button type="button" id="legend-toggle" data-search="colours colors couleurs symboles" class="tool-btn" data-i18n-attr="title:panel.legend, aria-label:panel.legend">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <circle cx="5" cy="6" r="1.5" />
               <circle cx="5" cy="12" r="1.5" />
@@ -2883,7 +2888,7 @@
                + coverage tally). Also auto-shown over the loading overlay on
                startup, and linked from the Legend + About popups. Icon: a
                shield with a check (provenance / verified). -->
-          <button type="button" id="sourcing-toggle" class="tool-btn" data-i18n-attr="title:about.sourcingTitle, aria-label:about.sourcingTitle">
+          <button type="button" id="sourcing-toggle" data-search="citations quotes grades citations sources" class="tool-btn" data-i18n-attr="title:about.sourcingTitle, aria-label:about.sourcingTitle">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z" />
               <path d="M9 12l2 2 4-4" />
@@ -2892,7 +2897,7 @@
           <!-- About (right): opens the #about-modal popup (project blurb, source /
                issues / licence / attribution links). The sourcing tally is NOT
                here; it has its own popup (linked from here). -->
-          <button type="button" id="about-toggle" class="tool-btn" data-i18n-attr="title:panel.about, aria-label:panel.about">
+          <button type="button" id="about-toggle" data-search="credits help info aide crédits" class="tool-btn" data-i18n-attr="title:panel.about, aria-label:panel.about">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="9" />
               <line x1="12" y1="11" x2="12" y2="16" />
@@ -2953,7 +2958,7 @@
                        structure or projection turns it off (see js/main.js) so the
                        thing you clicked holds still. -->
                   <label>
-                    <input type="checkbox" id="autorotate" checked />
+                    <input type="checkbox" id="autorotate" data-search checked />
                     <span data-i18n="panel.autorotate"></span>
                   </label>
                 </div>
@@ -2964,7 +2969,7 @@
                        auto-rotate here rather than inside the Structures section.
                        Wired in js/main.js. -->
                   <label>
-                    <input type="checkbox" id="toggle-names" />
+                    <input type="checkbox" id="toggle-names" data-search />
                     <span data-i18n="legend.showNames"></span>
                   </label>
                 </div>
@@ -2977,7 +2982,7 @@
                        A global toggle, so it sits here with auto-rotate rather than
                        inside the Projections section. Wired in js/main.js. -->
                   <label>
-                    <input type="checkbox" id="toggle-projections" />
+                    <input type="checkbox" id="toggle-projections" data-search />
                     <span data-i18n="legend.showProjections"></span>
                   </label>
                 </div>
@@ -2987,7 +2992,7 @@
                        the deep nuclei aren't blocked by the near cortex
                        (createNearCull in js/main.js). Off by default. -->
                   <label>
-                    <input type="checkbox" id="see-inside" />
+                    <input type="checkbox" id="see-inside" data-search />
                     <span data-i18n="panel.seeInside"></span>
                   </label>
                 </div>
@@ -2999,7 +3004,7 @@
                        js/main.js sets the real initial state from animSettings (on
                        for desktop, off for a phone / reduced-motion, persisted). -->
                   <label>
-                    <input type="checkbox" id="toggle-animations" checked />
+                    <input type="checkbox" id="toggle-animations" data-search checked />
                     <span data-i18n="panel.animations"></span>
                   </label>
                 </div>
@@ -3033,13 +3038,13 @@
                focuses that drug: it dims the brain to the regions it acts on and
                animates its effect on each target (see js/drug-anim.js). -->
           <div id="drugs" class="browse-section">
-            <button type="button" id="drugs-toggle" class="collapse-header" aria-expanded="false">
+            <button type="button" id="drugs-toggle" data-search class="collapse-header" aria-expanded="false">
               <span data-i18n="panel.drugs"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
             <div id="drugs-body" hidden>
               <input type="text" id="drugs-filter" class="drugs-filter" data-i18n-attr="placeholder:drugs.filter" autocomplete="off" />
-              <label class="list-toggle"><input type="checkbox" id="drugs-show-metabolites" checked /><span data-i18n="drugs.showMetabolites"></span></label>
+              <label class="list-toggle"><input type="checkbox" id="drugs-show-metabolites" data-search checked /><span data-i18n="drugs.showMetabolites"></span></label>
               <div id="drugs-list"></div>
             </div>
           </div>
@@ -3051,7 +3056,7 @@
                grouped by neurotransmitter system, each row focusable to scatter
                glowing dots over the regions it sits in and dim the rest. -->
           <div id="receptors" class="browse-section">
-            <button type="button" id="receptors-toggle" class="collapse-header" aria-expanded="false">
+            <button type="button" id="receptors-toggle" data-search class="collapse-header" aria-expanded="false">
               <span data-i18n="panel.receptors"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
@@ -3064,7 +3069,7 @@
                anatomy: picking one opens its panel and changes nothing in the 3D
                scene (said out loud in the section's caption). -->
           <div id="enzymes" class="browse-section">
-            <button type="button" id="enzymes-toggle" class="collapse-header" aria-expanded="false">
+            <button type="button" id="enzymes-toggle" data-search class="collapse-header" aria-expanded="false">
               <span data-i18n="panel.enzymes"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
@@ -3076,7 +3081,7 @@
                "Show all names" toggle moved up to the auto-rotate controls (a
                global toggle), so the body is now purely the generated rows. -->
           <div id="structures" class="browse-section">
-            <button type="button" id="structures-toggle" class="collapse-header" aria-expanded="false">
+            <button type="button" id="structures-toggle" data-search class="collapse-header" aria-expanded="false">
               <span data-i18n="panel.structures"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
@@ -3090,7 +3095,7 @@
                Controls section (a global scene control); the show/hide-all-
                projections toggle likewise sits with the auto-rotate controls. -->
           <div id="projections" class="browse-section">
-            <button type="button" id="projections-toggle" class="collapse-header" aria-expanded="false">
+            <button type="button" id="projections-toggle" data-search class="collapse-header" aria-expanded="false">
               <span data-i18n="panel.projections"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
@@ -3106,7 +3111,7 @@
                costs enough that a visitor who never opens it should not pay for it
                at boot) into a detached container js/main.js hands the panel. -->
           <div id="nodes" class="browse-section">
-            <button type="button" id="nodes-toggle" class="collapse-header">
+            <button type="button" id="nodes-toggle" data-search="nodes browse noeuds parcourir" class="collapse-header">
               <span data-i18n="panel.nodes"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
@@ -3172,7 +3177,7 @@
              Above the animation caveat on purpose: a reader who has not seen the
              tour wants the offer before a limitation of one feature. -->
         <p class="about-text">
-          <button type="button" id="about-tour" class="about-tour-btn" data-i18n="tour.start"></button>
+          <button type="button" id="about-tour" data-search="tour guided walkthrough visite guidee guidée" class="about-tour-btn" data-i18n="tour.start"></button>
         </p>
         <!-- What the animations mean. The caveat stays outside the dropdown (a
              limitation nobody opens is a limitation nobody reads); the legend
@@ -3230,7 +3235,7 @@
         <!-- Jump to the What's new popup (js/main.js closes this and opens
              #changelog-modal, showing the notes for every released version). -->
         <p class="about-text">
-          <a href="#" id="about-open-changelog" data-i18n="changelog.openLink"></a>
+          <a href="#" id="about-open-changelog" data-search="changelog release notes versions journal" data-i18n="changelog.openLink"></a>
         </p>
       </div>
     </div>

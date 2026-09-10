@@ -1887,6 +1887,27 @@ function fixedContainingBlock(node) {
  * `opts.zIndex` so the bubble clears the #sourcing-modal backdrop).
  * @returns {HTMLElement} the wrapper when `opts.wrap`, else `trigger` itself.
  */
+/**
+ * Scroll an element into view and flash it, for an action that lands the reader
+ * somewhere they did not choose to scroll to: a click that navigates to another node
+ * *because of* one row (arriving on the target's panel, the row that explains the jump
+ * is under the eye instead of hunted for), or a search pick that flips a setting (the
+ * changed toggle says so itself). Deferred a frame because the caller usually shows
+ * the host pane right AFTER this runs (see focusDrug -> openDetailTab, and the search
+ * pick, which closes the search box only after the item's select()), and
+ * scrollIntoView on a hidden box is a no-op.
+ * @param {?HTMLElement} elm
+ */
+function flashRow(elm) {
+  if (!elm) return;
+  requestAnimationFrame(() => {
+    elm.scrollIntoView({ block: "center", behavior: "smooth" });
+    elm.classList.add("node-flash");
+    elm.addEventListener("animationend",
+      () => elm.classList.remove("node-flash"), { once: true });
+  });
+}
+
 function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
   const host = wrap ? document.createElement("span") : trigger;
   if (wrap) { host.className = "help-icon"; host.append(trigger); }
@@ -2016,20 +2037,6 @@ function createInfoPanel(data, sourcingModal) {
   const clearBody = () => {
     body.innerHTML = "";
     if (pane) pane.scrollTop = 0;
-  };
-  // Scroll a just-built row into view and flash it, for a click that navigates to
-  // another node *because of* that row: arriving on the target's panel, the reader
-  // lands on the row that explains the jump instead of hunting for it. Deferred a
-  // frame because the caller shows the details pane right AFTER rendering (see
-  // focusDrug -> openDetailTab), and scrollIntoView on a hidden box is a no-op.
-  const flashRow = (elm) => {
-    if (!elm) return;
-    requestAnimationFrame(() => {
-      elm.scrollIntoView({ block: "center", behavior: "smooth" });
-      elm.classList.add("node-flash");
-      elm.addEventListener("animationend",
-        () => elm.classList.remove("node-flash"), { once: true });
-    });
   };
   const nameOf = (id) => data.byId.get(id)?.name || id;
   // Hemisphere-stripped name ("Frontal lobe", not "Right frontal lobe"): used by
@@ -6362,6 +6369,50 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
     const key = `${stripSide(p.from)}->${stripSide(p.to)}`;
     (arrowsByBase.get(key) || arrowsByBase.set(key, []).get(key)).push(arrow);
   }
+  // Everything the panel can DO, listed beside everything it can show: the popups
+  // (About, the Legend, Sources & provenance, the keyboard shortcuts, What's new),
+  // the Data browser and the other browse sections, the view toggles and options, and
+  // the guided tour. A control joins this index by carrying `data-search` in the
+  // markup and is named by its own visible label, so a new option is findable the day
+  // it lands and can never drift from what the panel calls it: search owns no second
+  // copy of what a control is or does, and a pick just clicks it. The search box
+  // itself deliberately carries no mark, since a result that opens the search you are
+  // already inside is a loop rather than a result.
+  const commandRows = [...document.querySelectorAll("[data-search]")].map((elm) => {
+    const box = elm.type === "checkbox" ? elm : null;
+    // A checkbox is named by the <label> wrapping it; a button or link by its own
+    // title (the tool buttons are icons, so their title IS their name), else its text.
+    // A trailing "→" is a link's own affordance, not part of its name.
+    const name = () => (box
+      ? (box.closest("label")?.textContent || "")
+      : (elm.getAttribute("title") || elm.getAttribute("aria-label")
+         || elm.textContent || "")).replace(/\s*[→>]\s*$/, "").trim();
+    const row = {
+      type: "command",
+      label: "",
+      // The attribute's value, when it has one, is a list of aliases: the words a
+      // visitor is likely to type for a control whose visible name does not contain
+      // them ("tour" for Start the tutorial, "citations" for Sources & provenance).
+      // Never a second name, always extra ways in to the one the panel shows.
+      keywords: elm.dataset.search || "",
+      refresh: () => {
+        // Re-read before every render, for the two labels that move: an option has to
+        // say what it is set to *now*, and the theme button renames itself on each
+        // click (it names the theme a click would give you, not the one showing).
+        row.label = box ? `${name()} · ${t(box.checked ? "search.on" : "search.off")}`
+          : name();
+      },
+      // Picked is done: this clicks the real control, so its handler stays the one
+      // definition of what it means. An option additionally flashes itself, since
+      // what it changed may be nowhere near the panel; a button opens something
+      // visible and needs no pointing at. flashRow defers a frame, which lands after
+      // the pick has closed the search box and put the controls back on screen.
+      select: () => { elm.click(); if (box) flashRow(box.closest("label") || box); },
+    };
+    row.refresh();
+    return row;
+  });
+
   const items = [
     ...[...meshesByBase.values()].map((group) => {
       // Frame a representative (prefer the midline / right member); the isolate
@@ -6496,6 +6547,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
       select: () => focusProjectionGroup(group, { frame: true }),
       preview: () => focusProjectionGroup(group, { preview: true }),
     })),
+    ...commandRows,
   ];
 
   // Type-filter chips above the results: scope the search to one kind of thing
@@ -6508,7 +6560,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
     structure: "panel.structures", connection: "info.connections",
     target: "panel.receptors", drug: "panel.drugs",
     circuit: "legend.circuits", group: "legendKey.pathways",
-    enzyme: "panel.enzymes",
+    enzyme: "panel.enzymes", command: "search.filterCommands",
   };
   let activeType = null;
   const filterChips = [];
@@ -6560,6 +6612,7 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
     // keeps only items carrying that field whose value matches; the trailing free
     // text still matches the label + keywords.
     const { field, value, rest } = parseSearchQuery(searchInput.value);
+    for (const row of commandRows) row.refresh();  // an option's tag states live state
     syncClear();
     searchResults.innerHTML = "";
     // A structured filter (class:"..." / nbn:"...") is a deliberate "list the whole

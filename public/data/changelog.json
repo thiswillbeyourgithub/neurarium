@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.81.0",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The search box now finds the app's own controls, not only its data: About, the Legend, Sources & provenance, the keyboard shortcuts, What's new, the Data browser and the other browse sections, every view option, and the guided tour. A new \"Controls\" chip scopes the results to them, an option's row says whether it is on or off, and picking one does it.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.80.0",
       "date": "2026-09-10",
       "entries": [

@@ -213,7 +213,18 @@ arrow carrying a projection. A node whose owner has nothing to focus renders ine
 - **Toolbar icon-row** (wraps to a second row when narrow): keyboard-shortcuts, reset, search (swaps
   `#search` in place), legend, sources, about. The three popups share `wireModal`.
 - **Search**: filters structures / connections / receptors / drugs / circuits / projection groups
-  (the last two tagged `· circuit` / `· pathways`). **Type-filter chips** (`#search-filters`) scope
+  (the last two tagged `· circuit` / `· pathways`) **and the panel's own controls** (type `command`,
+  chip "Controls"): the popups, the browse sections + Data browser, the view toggles and options,
+  and the guided tour. That half of the index is read off the DOM: a control joins it by carrying
+  **`data-search`** in `index.html` and is named by its own visible label (a checkbox by its
+  `<label>`, an icon button by its `title`), so a new option is searchable the day it lands with no
+  JS edit and cannot drift from what the panel calls it. The attribute's optional value is a list of
+  **aliases** (`data-search="tour guided ..."`), never a second name. An option's row carries its
+  live state (`· on` / `· off`, re-read on every render, which is also what keeps the theme button's
+  self-renaming label current); a pick **clicks the real control**, so search owns no second
+  definition of what it does, and an option additionally flashes itself (`flashRow`) since what it
+  changed may be off-screen. `#search-toggle` is deliberately unmarked: a result that opens the
+  search you are already in is a loop. **Type-filter chips** (`#search-filters`) scope
   to one kind (`activeType`, session-persisted). **Hovering** a result transiently applies its full
   focus via a `preview` thunk (the `select*`/`focus*` helpers' `preview:true` = scene focus only, no
   panel/tab/camera/auto-spread); leaving the list restores neutral, a click commits. Picking focuses

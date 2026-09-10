@@ -362,7 +362,7 @@ There is a **code** check too, since there is no build step to hold a linter: `t
 
 ## Controls
 
-> Moved to [`docs/CONTROLS.md`](docs/CONTROLS.md) to keep this file terse: the one collapsible bottom-left `#controls` panel and everything in it: the Settings pane + accordion sections, the detail-tab strip, the seven `show*()` info-panel views, selection/halo + isolate, structure-name labels, legend sections, keyboard/touch input + search, and camera focus.
+> Moved to [`docs/CONTROLS.md`](docs/CONTROLS.md) to keep this file terse: the one collapsible bottom-left `#controls` panel and everything in it: the Settings pane + accordion sections, the detail-tab strip, the seven `show*()` info-panel views, selection/halo + isolate, structure-name labels, legend sections, keyboard/touch input + search, and camera focus. One data contract worth knowing here: the search box indexes the panel's **own controls** alongside the data, and a control joins that index by carrying **`data-search`** in `index.html` (named by its own visible label, optional attribute value = search aliases), so a new option is searchable with no JS edit; `tools/tests/test_search_controls.py` guards the contract.
 
 ## Theme (day / night)
 
