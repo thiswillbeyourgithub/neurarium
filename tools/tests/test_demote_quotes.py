@@ -40,7 +40,8 @@ class DemoteTest(unittest.TestCase):
             (d / "42.md").write_text(page_text, encoding="utf-8")
             pages = {"stahl": os.path.relpath(d, D.ROOT)}
         ed = D.Editor(targets, pages)
-        return ed.walk(json.loads(json.dumps(drug))), ed
+        row = json.loads(json.dumps(drug))
+        return ed.walk(row, "drugs_data.jsonl", (row.get("id"),)), ed
 
     def test_a_rejected_source_is_removed_and_its_key_with_it(self):
         qid = quote_id(STAHL)
@@ -78,6 +79,34 @@ class DemoteTest(unittest.TestCase):
         self.assertEqual(ed.rejected, [qid], "a paraphrase was written as a real quote")
         # Rejected means removed, not kept: the honest fallback is no source at all.
         self.assertNotIn("category_sources", rec)
+
+    def test_a_site_filter_demotes_one_claim_and_spares_the_others(self):
+        # The whole point of the citation site: one sentence can back the binding and
+        # not the class, and judged by quote alone it is either kept on a claim it does
+        # not support or stripped off one it does.
+        qid = quote_id(STAHL)
+        drug = {"id": "testolol", "categories": ["ssri"],
+                "category_sources": [dict(STAHL)],
+                "bindings": [{"target": "sert", "action": "antagonist",
+                              "sources": [dict(STAHL)]}]}
+        with tempfile.TemporaryDirectory() as tmp:
+            rec, ed = self._run(tmp, drug,
+                                {qid: {"sites": ["drug:testolol/categories"]}})
+        self.assertNotIn("category_sources", rec)
+        self.assertEqual(len(rec["bindings"][0]["sources"]), 1,
+                         "a citation the verdict did not name lost its source")
+        self.assertIn(qid, ed.partial, "a partly demoted quote must keep its stamp")
+
+    def test_a_site_that_matches_nothing_leaves_the_data_alone(self):
+        # And it is reported by main(); silently succeeding while changing nothing is
+        # the failure mode this whole grammar has to avoid.
+        qid = quote_id(STAHL)
+        with tempfile.TemporaryDirectory() as tmp:
+            rec, ed = self._run(tmp, _drug([dict(STAHL)]),
+                                {qid: {"sites": ["drug:testolol/nbn"]}})
+        self.assertEqual(ed.removed, [])
+        self.assertEqual(len(rec["category_sources"]), 1)
+        self.assertEqual(ed.hit_sites, set())
 
     def test_an_id_that_reaches_nothing_is_reported_not_swallowed(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -28,14 +28,18 @@ found by grep. Nothing is silently skipped.
 Matching is by the same content hash the emitted data uses (``quote_table.quote_id``
 over corpus + page + quote + species), so an id from ``quote_recheck_flagged.json``,
 from a verdicts file, or read off ``quotes.jsonl`` all resolve to the same sources. One
-excerpt cited by several claims is removed from every one of them: the judge's verdict
-is about the sentence's fitness for the claim, and the claims that share an id share the
-wording of that claim.
+excerpt cited by several claims is removed from every one of them **unless the verdict
+says which claim it failed**: a sentence can honestly back the binding and not the
+class, so a target may carry ``"sites"``, the citation sites (see ``citation_site.py``)
+the demotion applies at. The quote's other citations keep their source, and the quote
+keeps its judging stamp. A site that matches nothing is reported rather than passing for
+a run that changed nothing.
 
 Usage:
     python tools/sourcing/demote_quotes.py --flagged            # every flagged quote
     python tools/sourcing/demote_quotes.py --ids q_a,q_b [--dry-run]
     python tools/sourcing/demote_quotes.py --replace PROPOSALS.json
+    python tools/sourcing/demote_quotes.py --ids q_a --sites drug:clozapine/categories
 
 ``--replace`` takes a re-extraction pass's proposals
 (``{"proposals": {qid: {"found": true, "quote": "..."}}}``): a proposal with a
@@ -60,12 +64,13 @@ DATA = os.path.join(ROOT, "public", "data")
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from data_generators.quote_table import quote_id  # noqa: E402
 from check_data import normalize_for_match  # noqa: E402
+import citation_site as CS  # noqa: E402
 
 # The applier-written caches that can hold a quote-bearing source. The hand-authored
 # registries are deliberately absent: see the module docstring.
 CACHE_FILES = ("location_sources.json", "classification_sources.json",
                "drug_enzymes.json", "drug_enzymes_wikipedia.json",
-               "expression_density.json")
+               "expression_density.json", "enzyme_variability.json")
 
 
 def _is_source(obj) -> bool:
@@ -85,13 +90,21 @@ class Editor:
     """Walks a loaded JSON tree, rewriting or dropping the sources named by id."""
 
     def __init__(self, targets: dict[str, dict], pages: dict[str, str]):
-        # qid -> {} to remove, or {"quote": "..."} to rewrite in place.
+        # qid -> {} to remove, {"quote": "..."} to rewrite in place, either of them
+        # optionally narrowed by "sites" to some of the quote's citations (see
+        # citation_site.py): one sentence can back the binding and not the class.
         self.targets = targets
         self.pages = pages
         self.removed: list[str] = []
         self.replaced: list[str] = []
         self.rejected: list[str] = []
         self.seen: set[str] = set()
+        # Every site a narrowed target actually reached, so one that reached nothing can
+        # be reported instead of passing for a silent no-op.
+        self.hit_sites: set[str] = set()
+        # Quotes a site filter spared at least one citation of: they keep their node, so
+        # they must also keep their judging stamp.
+        self.partial: set[str] = set()
 
     def _page_text(self, corpus, page):
         """The cited page, normalized, or ``None`` when the corpus is not on disk."""
@@ -104,13 +117,23 @@ class Editor:
         with open(md, encoding="utf-8") as fh:
             return normalize_for_match(fh.read())
 
-    def _apply_one(self, src):
+    def _apply_one(self, src, root=None, path=()):
         """``True`` when this source should be dropped from the list holding it."""
         qid = quote_id(src)
         if qid not in self.targets:
             return False
         self.seen.add(qid)
-        new = (self.targets[qid] or {}).get("quote")
+        target = self.targets[qid] or {}
+        wanted = target.get("sites")
+        if wanted:
+            here = CS.resolve(root, list(path))
+            if here not in wanted:
+                # A citation the verdict did not name keeps its source: that is the whole
+                # point of judging per claim rather than per sentence.
+                self.partial.add(qid)
+                return False
+            self.hit_sites.add(here)
+        new = target.get("quote")
         if not new:
             self.removed.append(qid)
             return True
@@ -127,18 +150,22 @@ class Editor:
         self.replaced.append(qid)
         return False
 
-    def walk(self, node):
-        """Rewrite ``node`` in place, returning it (a list may lose members)."""
+    def walk(self, node, root=None, path=()):
+        """Rewrite ``node`` in place, returning it (a list may lose members).
+
+        ``root`` + ``path`` are carried purely so a source can be addressed by its
+        citation site; a caller that does not need per-claim targeting can ignore both.
+        """
         if isinstance(node, list):
             out = []
-            for v in node:
-                if _is_source(v) and self._apply_one(v):
+            for i, v in enumerate(node):
+                if _is_source(v) and self._apply_one(v, root, path):
                     continue
-                out.append(self.walk(v))
+                out.append(self.walk(v, root, tuple(path) + (CS.member_label(v, i),)))
             return out
         if isinstance(node, dict):
             for k, v in list(node.items()):
-                node[k] = self.walk(v)
+                node[k] = self.walk(v, root, tuple(path) + (k,))
                 # An emptied `sources` list is not the same as no sources: the key is
                 # dropped so the node reads as unsourced rather than as sourced-by-none.
                 if isinstance(node[k], list) and not node[k] and k.endswith("sources"):
@@ -155,14 +182,18 @@ def _targets(args) -> dict[str, dict]:
         with open(path, encoding="utf-8") as fh:
             for row in json.load(fh):
                 out[row["qid"]] = {}
+    sites = [x.strip() for x in (args.sites or "").split(",") if x.strip()]
     for qid in (args.ids or "").split(","):
         if qid.strip():
-            out[qid.strip()] = {}
+            out[qid.strip()] = {"sites": sites} if sites else {}
     if args.replace:
         with open(args.replace, encoding="utf-8") as fh:
             raw = json.load(fh)
         for qid, p in (raw.get("proposals", raw) or {}).items():
-            out[qid] = {"quote": p["quote"]} if p.get("found") and p.get("quote") else {}
+            entry = {"quote": p["quote"]} if p.get("found") and p.get("quote") else {}
+            if p.get("sites"):
+                entry["sites"] = list(p["sites"])
+            out[qid] = entry
     return out
 
 
@@ -173,6 +204,10 @@ def main() -> None:
                     help="target every quote in quote_recheck_flagged.json")
     ap.add_argument("--ids", default="", help="comma-separated quote ids")
     ap.add_argument("--replace", help="a re-extraction pass's proposals JSON")
+    ap.add_argument("--sites", default="",
+                    help="with --ids, narrow to these comma-separated citation "
+                         "sites (see citation_site.py); the quote's other "
+                         "citations are left alone")
     ap.add_argument("--dry-run", action="store_true", help="report, write nothing")
     args = ap.parse_args()
 
@@ -184,7 +219,7 @@ def main() -> None:
 
     with open(DRUGS, encoding="utf-8") as fh:
         rows = [json.loads(line) for line in fh if line.strip()]
-    rows = [ed.walk(r) for r in rows]
+    rows = [ed.walk(r, "drugs_data.jsonl", (r.get("id"),)) for r in rows]
     if not args.dry_run:
         with open(DRUGS, "w", encoding="utf-8") as fh:
             for r in rows:
@@ -196,7 +231,7 @@ def main() -> None:
             continue
         with open(path, encoding="utf-8") as fh:
             data = json.load(fh)
-        data = ed.walk(data)
+        data = ed.walk(data, name, ())
         if not args.dry_run:
             with open(path, "w", encoding="utf-8") as fh:
                 json.dump(data, fh, ensure_ascii=False, indent=1, sort_keys=True)
@@ -209,7 +244,12 @@ def main() -> None:
             continue
         with open(path, encoding="utf-8") as fh:
             data = json.load(fh)
-        done = {q for q in ed.seen if not (targets[q] or {}).get("quote")} | set(ed.removed)
+        # A quote a site filter only partly demoted still exists and still has judged
+        # citations, so it keeps its stamp; the flag goes either way, since the verdict
+        # it recorded has now been acted on.
+        gone = set(ed.removed) - ed.partial
+        done = ({q for q in ed.seen if not (targets[q] or {}).get("quote")} | gone
+                if name == "quote_recheck_flagged.json" else gone)
         if isinstance(data, dict):
             data = {k: v for k, v in data.items() if k not in done}
         else:
@@ -219,11 +259,21 @@ def main() -> None:
                 json.dump(data, fh, ensure_ascii=False,
                           indent=0 if isinstance(data, dict) else 1, sort_keys=True)
 
+    # A site that reached no citation is the one failure mode this abstraction adds:
+    # the two ends name a claim differently and the demotion quietly does nothing. Say
+    # so, loudly, rather than reporting a successful run that changed nothing.
+    asked = {x for t in targets.values() for x in (t or {}).get("sites", [])}
+    missed = sorted(asked - ed.hit_sites)
     unreachable = sorted(set(targets) - ed.seen)
     print(f"removed {len(ed.removed)} source(s), replaced {len(ed.replaced)}"
           + (f", rejected {len(ed.rejected)} replacement(s) as not verbatim on the page"
              if ed.rejected else "")
           + (" (dry run, nothing written)" if args.dry_run else ""))
+    if missed:
+        print(f"{len(missed)} citation site(s) matched nothing (check the spelling "
+              f"against citation_site.py):")
+        for site in missed:
+            print(f"  {site}")
     if unreachable:
         # Hand-authored, so reported with enough to grep for rather than rewritten.
         quotes = {}

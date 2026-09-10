@@ -22,6 +22,9 @@ Three steps (the middle one is the only LLM spend):
    deterministic PACall confirmations, not LLM-sourced, so they are excluded) and writes
    ``<dir>/batch_<i>.json`` (each: ``{pages: {ref: text}, items: [{qid, page_ref, quote,
    claims, heading?}]}``) + ``manifest.json``.
+   Each claim reads ``<citation site> | <claim text>`` (see ``citation_site.py``),
+   so a judge rejecting one claim of a quote cited from several places can name
+   that one instead of condemning the sentence everywhere it is used.
 
    Scope it with ``--kinds a,b,c`` (the node kinds to judge, printed per pass),
    ``--unstamped`` (skip what ``quote_llm.json`` already stamps), ``--stamped-by <m>``
@@ -74,6 +77,8 @@ CACHE = os.path.join(ROOT, "tools", "generated_cache")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from data_generators.provenance import SOURCING_LLMS  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import citation_site as CS  # noqa: E402
 
 # Weakest model first, so a pass can tell a corroboration from a demotion: a second,
 # weaker read that confirms a quote adds confidence without lowering the stamp, while a
@@ -152,6 +157,16 @@ def _load(path, default):
 
 
 
+def _target_facet(key: str) -> str:
+    """A drug target's own `sources` list is its *classification* source.
+
+    The applier walks `classification_sources.json`, where the same quote sits under the
+    target itself (a non-receptor target states one `type`, so it has no per-attribute
+    level), and a site has to read the same from both ends or it addresses nothing.
+    """
+    return "classification" if key == "sources" else key
+
+
 def reconstruct_claims(quotes):
     """``(claims, kinds)``: per quote id, the claim(s) it backs and its node kind."""
     claims = collections.defaultdict(list)
@@ -163,10 +178,22 @@ def reconstruct_claims(quotes):
     # on purpose: ``receptor_classification`` covers the four per-attribute tally kinds.
     kind = {"now": None}
 
-    def add(qid, claim):
+    def add(qid, claim, site=None):
+        """Record one claim, prefixed by the citation site it is made at.
+
+        The site is what lets a verdict name a claim rather than a sentence: a quote
+        cited from three places gets three claims here, and a judge that rejects one
+        answers with that one site, so the other two keep their source (see
+        ``citation_site.py``, and ``demote_quotes.py --sites``). It rides in the claim
+        string rather than in a field of its own so every reader of a batch, the judge
+        included, sees it beside the claim it addresses instead of in a parallel list
+        that has to be zipped back together.
+        """
         if qid in quotes and quotes[qid]["corpus"] not in EXCLUDE_CORPUS:
             kinds.setdefault(qid, kind["now"])
-            claims[qid].append(claim)
+            # `site | text`, not `[site] text`: a site carries brackets of its own
+            # (`bindings[5ht2a]`), so a bracketed prefix cannot be split back off it.
+            claims[qid].append(f"{site} | {claim}" if site else claim)
 
     for d in _jsonl("drugs.jsonl"):
         nm = d["name"]
@@ -175,80 +202,98 @@ def reconstruct_claims(quotes):
             tag = " (tentative)" if b.get("tentative") else ""
             tname = target_names.get(b["target"], b["target"])
             for q in _qids(b.get("sources", [])):
-                add(q, f"Drug {nm} acts on target '{tname}' as {b['action']}{tag}.")
+                add(q, f"Drug {nm} acts on target '{tname}' as {b['action']}{tag}.",
+                    CS.site("drug", d["id"], f"bindings[{b['target']}]"))
         kind["now"] = "drug_categories"
         for q in _qids(d.get("category_sources", [])):
             cats = [cat_labels.get(c, c) for c in d.get("categories", [])]
-            add(q, f"Drug {nm} is classified as {', '.join(cats)}.")
+            add(q, f"Drug {nm} is classified as {', '.join(cats)}.",
+                CS.site("drug", d["id"], "categories"))
         kind["now"] = "drug_nbn"
         for q in _qids(d.get("nbn_sources", [])):
-            add(q, f"Drug {nm} Neuroscience-based Nomenclature = '{d.get('nbn')}'.")
+            add(q, f"Drug {nm} Neuroscience-based Nomenclature = '{d.get('nbn')}'.",
+                CS.site("drug", d["id"], "nbn"))
         kind["now"] = "drug_brands"
         for br in d.get("brands", []):
             for q in _qids(br.get("sources", [])):
-                add(q, f"Drug {nm} is sold under the brand name '{br['name']}'.")
+                add(q, f"Drug {nm} is sold under the brand name '{br['name']}'.",
+                    CS.site("drug", d["id"], f"brands[{br['name']}]"))
         kind["now"] = "drug_half_life"
         for q in _qids(d.get("half_life_sources", [])):
             add(q, f"Drug {nm} has an elimination half-life of "
-                   f"{_hours(d.get('half_life'))}.")
+                   f"{_hours(d.get('half_life'))}.",
+                CS.site("drug", d["id"], "half_life"))
         kind["now"] = "drug_enzymes"
         for e in d.get("enzymes", []):
             tier = f", {e['strength']}" if e.get("strength") else ""
             for q in _qids(e.get("sources", [])):
                 add(q, f"Drug {nm} is a {e['role']} of the enzyme "
-                       f"{e['enzyme'].upper()}{tier}.")
+                       f"{e['enzyme'].upper()}{tier}.",
+                    CS.site("drug", d["id"], f"enzymes[{CS.enzyme_key(e)}]"))
         for m in d.get("metabolites", []):
             mn = m.get("name")
             kind["now"] = "drug_metabolites"
             for q in _qids(m.get("sources", [])):
-                add(q, f"Drug {nm} has an active metabolite, {mn}.")
+                add(q, f"Drug {nm} has an active metabolite, {mn}.",
+                    CS.site("drug", d["id"], f"metabolites[{mn}]"))
             for q in _qids(m.get("half_life_sources", [])):
                 add(q, f"{mn}, an active metabolite of {nm}, has an elimination "
-                       f"half-life of {_hours(m.get('half_life'))}.")
+                       f"half-life of {_hours(m.get('half_life'))}.",
+                    CS.site("drug", d["id"], f"metabolites[{mn}]/half_life"))
             kind["now"] = "drug_metabolite_bindings"
             for mb in m.get("bindings", []):
                 mt = target_names.get(mb["target"], mb["target"])
                 for q in _qids(mb.get("sources", [])):
                     add(q, f"{mn}, an active metabolite of {nm}, acts on target "
-                           f"'{mt}' as {mb['action']}.")
+                           f"'{mt}' as {mb['action']}.",
+                        CS.site("drug", d["id"],
+                                f"metabolites[{mn}]/bindings[{mb['target']}]"))
             kind["now"] = "drug_metabolite_enzyme"
             for fb in m.get("formed_by", []):
                 step = f" by {fb['reaction']}" if fb.get("reaction") else ""
                 for q in _qids(fb.get("sources", [])):
                     add(q, f"The metabolite {mn} is formed from {nm} by the enzyme "
-                           f"{fb['enzyme'].upper()}{step}.")
+                           f"{fb['enzyme'].upper()}{step}.",
+                        CS.site("drug", d["id"],
+                                f"metabolites[{mn}]/formed_by[{fb['enzyme']}]"))
 
     for r in _jsonl("receptors.jsonl"):
         nm = r["name"]
         kind["now"] = "receptor_classification"
         for attr, info in (r.get("classification") or {}).items():
             for q in _qids(info.get("sources", [])):
-                add(q, f"Receptor {nm}: {attr} = '{r.get(attr)}'.")
+                add(q, f"Receptor {nm}: {attr} = '{r.get(attr)}'.",
+                    CS.site("receptor", r["id"], "classification", attr))
         kind["now"] = "receptor_locations"
         for region, srcs in (r.get("location_sources") or {}).items():
             for q in _qids(srcs):
-                add(q, f"Receptor {nm} is expressed in brain region '{region}'.")
+                add(q, f"Receptor {nm} is expressed in brain region '{region}'.",
+                    CS.site("receptor", r["id"], "locations", region))
 
     kind["now"] = "projections"
     for p in _jsonl("projections.jsonl"):
         for q in _qids(p.get("sources", [])):
             add(q, f"Projection '{p['from']}'->'{p['to']}' ({p.get('kind')}, "
-                   f"{p.get('neurotransmitter')}): {p.get('label', '')}. {p.get('description', '')}")
+                   f"{p.get('neurotransmitter')}): {p.get('label', '')}. {p.get('description', '')}",
+                CS.site("projection", f"{p['from']}->{p['to']}"))
 
     kind["now"] = "circuits"
     for c in _jsonl("circuits.jsonl"):
         for q in _qids(c.get("sources", [])):
-            add(q, f"Functional circuit '{c['name']}': {c.get('description', '')}")
+            add(q, f"Functional circuit '{c['name']}': {c.get('description', '')}",
+                CS.site("circuit", c["id"]))
 
     kind["now"] = "projection_groups"
     for g in _jsonl("projection_groups.jsonl"):
         for q in _qids(g.get("sources", [])):
-            add(q, f"Projection group '{g['name']}' ({g['mode']}={g['key']}): {g.get('description', '')}")
+            add(q, f"Projection group '{g['name']}' ({g['mode']}={g['key']}): {g.get('description', '')}",
+                CS.site("group", f"{g['mode']}:{g['key']}"))
 
     kind["now"] = "structures"
     for s in _jsonl("structures.jsonl"):
         for q in _qids(s.get("sources", [])):
-            add(q, f"Brain structure '{s['name']}' ({s.get('base_name')}) anatomy/existence.")
+            add(q, f"Brain structure '{s['name']}' ({s.get('base_name')}) anatomy/existence.",
+                CS.site("structure", s["id"]))
 
     with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
         meta = json.load(fh)
@@ -257,21 +302,25 @@ def reconstruct_claims(quotes):
         kind["now"] = "target_locations"
         for region, srcs in (t.get("location_sources") or {}).items():
             for q in _qids(srcs):
-                add(q, f"Molecular target {nm} is expressed in brain region '{region}'.")
+                add(q, f"Molecular target {nm} is expressed in brain region '{region}'.",
+                    CS.site("target", tid, "locations", region))
         kind["now"] = "target_other"
         for k, v in t.items():
             if k == "location_sources":
                 continue
             if isinstance(v, dict) and "sources" in v:
                 for q in _qids(v["sources"]):
-                    add(q, f"Molecular target {nm}: {k}.")
+                    add(q, f"Molecular target {nm}: {k}.",
+                        CS.site("target", tid, _target_facet(k)))
             elif isinstance(v, list):
                 for q in _qids(v):
-                    add(q, f"Molecular target {nm}: {k}.")
+                    add(q, f"Molecular target {nm}: {k}.",
+                        CS.site("target", tid, _target_facet(k)))
     kind["now"] = "addons"
     for a in _jsonl("addons.jsonl"):
         for q in _qids(a.get("sources", [])):
-            add(q, f"Annotation on {a['owner_kind']} '{a['owner']}': {a.get('text', '')}")
+            add(q, f"Annotation on {a['owner_kind']} '{a['owner']}': {a.get('text', '')}",
+                CS.site("addon", f"{a['owner_kind']}:{a['owner']}"))
 
 
     # Fold any remaining (referenced but unreconstructed) non-Allen quote with a generic claim.

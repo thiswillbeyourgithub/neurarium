@@ -325,7 +325,19 @@ Screenshots).
   `quote_llm.json` / `quote_recheck_flagged.json`. Quotes authored in hand-written Python are
   **reported with corpus/page/quote, never rewritten**, so nothing is silently skipped.
   Matching is by `quote_table.quote_id`, so an id from any of the three caches resolves.
-  Idempotent; `--flagged` / `--ids` / `--dry-run`. Stdlib, author-side.
+  A verdict that names the claim it failed (a target's `sites`, or `--ids X --sites S`) demotes
+  only those citations: the quote's other claims keep their source and the quote keeps its
+  judging stamp, and a site matching nothing is reported instead of passing for a run that
+  changed nothing. Idempotent; `--flagged` / `--ids` / `--sites` / `--dry-run`. Stdlib, author-side.
+- `tools/sourcing/citation_site.py` — the address of one *citation*, shared by the two passes
+  above. A quote id is a content hash, so one sentence reaching two claims is one id, and a
+  verdict keyed by it can only condemn or clear the sentence everywhere at once. A **site**
+  (`drug:clozapine/bindings[5ht2a]`, `receptor:5ht1a/locations[amygdala]`) names one place the
+  quote is cited from, so a judge can reject the class and keep the binding. `recheck_quotes.py`
+  spells it out of the emitted data and `demote_quotes.py` recognizes it walking the authoring
+  files, whose shapes differ; `tools/tests/test_citation_site.py` cross-checks the two ends over
+  the real dataset, because a divergence does not crash, it just quietly demotes nothing.
+  Stdlib, author-side.
 - `tools/fetch/fetch_pharmfreq.py` — stdlib, offline, author-side. Reshapes PharmFreq's
   hand-downloaded "Metabolizer status tool" export (an untracked `Metabolism.zip` at the repo
   root) into corpus #13: one quote-gate page per gene under `data_sources/pharmfreq/pages/`
