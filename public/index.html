@@ -2308,6 +2308,21 @@
       }
       .hl-chip .hl-val { font-weight: 600; color: var(--text); white-space: nowrap; }
       .hl-chip .hl-label { color: var(--muted); font-size: 11px; }
+      /* The non-linear-kinetics warning beside a T½: the number above is only
+         meaningful while clearance is linear, so this says "there is a caveat" and
+         jumps to where it is written. Yellow off the same --addon-accent the
+         caution admonition uses, so the glyph and the box it points at match. */
+      .hl-warn {
+        --addon-accent: 230, 184, 0;
+        border: 0;
+        background: none;
+        padding: 0 2px;
+        font: inherit;
+        line-height: 1;
+        cursor: pointer;
+        color: rgb(var(--addon-accent));
+      }
+      .hl-warn:hover, .hl-warn:focus-visible { filter: brightness(1.25); }
       /* Active-metabolites list: each row is a name (+ its identity pill) with its own
          T½ underneath, indented and dimmer so it reads as a sub-fact of the drug. */
       .info-metabolites .metab-row { margin-bottom: 6px; }

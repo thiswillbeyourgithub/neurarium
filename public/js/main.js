@@ -3875,6 +3875,20 @@ function createInfoPanel(data, sourcingModal) {
         body.appendChild(brandsEl);
       }
 
+      // Does the Metabolism section below carry a non-linear-kinetics admonition?
+      // A single T½ is only meaningful when clearance is a straight line, so a drug
+      // that changes its own clearance makes the number above misleading on its own.
+      // The admonition is written down there (it needs the enzyme rows to make sense),
+      // so the chip gets a warning that points at it rather than a second copy of it.
+      // Either form counts: the authored addon (a mechanism a source attests) or, in
+      // its absence, the derived autoModulation flag, exactly the fallback the section
+      // itself uses. Gated on the section actually rendering, or the warning would
+      // promise a place to jump to that is not there.
+      const metabAddons = data.addonsBySlot
+        ? data.addonsBySlot.get(`drug:${drug.id}:drug.metabolism`) || [] : [];
+      const nonLinearPk = Boolean(drug.enzymes && drug.enzymes.length
+        && (metabAddons.length || (drug.autoModulation || []).length));
+
       // Elimination half-life (T½): its own sourced node, placed between brands and
       // the binding list, formatted to days/hours/minutes and pilled like any node.
       if (drug.halfLife) {
@@ -3885,6 +3899,20 @@ function createInfoPanel(data, sourcingModal) {
         chip.appendChild(drug.halfLifeSources && drug.halfLifeSources.length
           ? makeProvenancePill(drug.halfLifeProvenance, sourcesTip(drug.halfLifeSources))
           : makeProvenancePill(drug.halfLifeProvenance || null));
+        if (nonLinearPk) {
+          const warn = el("button", "hl-warn",
+            (data.meta.addonTones || {}).caution || "⚠");
+          warn.type = "button";
+          warn.title = t("drug.nonLinearPk");
+          warn.setAttribute("aria-label", t("drug.nonLinearPk"));
+          // Looked up at click time, not captured now: the Metabolism section is
+          // built further down this same render, so it does not exist yet here.
+          warn.addEventListener("click", () => {
+            const sec = body.querySelector('[data-tour-sec="metabolism"]');
+            if (sec) flashRow(sec);
+          });
+          chip.appendChild(warn);
+        }
         hlEl.appendChild(chip);
         body.appendChild(hlEl);
       }
