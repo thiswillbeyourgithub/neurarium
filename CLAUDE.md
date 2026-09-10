@@ -883,7 +883,11 @@ action: amisulpride antagonises D2 and partially agonises it; an enzyme row by i
 A compound value earns its green check only when every part is attested (5-HT1B's `synaptic="both"` is
 one presynaptic quote plus one postsynaptic one, a two-category class is one sentence per category), so
 a judge shown one quote beside the whole claim rejects the citation that carries its share. Every claim
-line therefore states how many citations share it, and asks the judge to weigh this one on its share.
+line therefore states how many citations share it, and asks the judge to weigh this one on its share. A claim the dataset
+**already** doubts arrives with its `uncertainty` bullets spelled out in that same line, in the reader's
+own words (scraped from `js/i18n.js`, so there is one copy): a judge not shown the flag re-derives the
+doubt for itself and hands it back as a rejection, which would demote a citation over something the
+dataset was already honest about.
 
 **The rule: no LLM-picked quote ships unjudged by Sonnet or better.** A sentence a model *chose* out of
 prose is the one that can be chosen wrongly (right page, wrong claim), so it is not backed until a

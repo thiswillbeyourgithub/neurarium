@@ -296,5 +296,55 @@ class SecondReadTest(unittest.TestCase):
 
 
 
+class DoubtsAlreadyRecordedTest(unittest.TestCase):
+    """A judge must be told what the dataset already concedes about a claim.
+
+    Without it the judge re-derives the doubt and calls it a rejection: a Kandel
+    sentence describing a diffuse system's whole sweep was rejected for not naming one
+    pathway, which is precisely the `blanket_claim` those arrows already carry. Acting
+    on that verdict would have demoted a citation over something the dataset was
+    already honest about.
+    """
+
+    def test_an_unflagged_node_adds_nothing(self):
+        self.assertEqual(R._doubts({"target": "d2"}), "")
+        self.assertEqual(R._doubts({"uncertainty": []}), "")
+        self.assertEqual(R._doubts(None), "")
+
+    def test_a_flag_arrives_with_the_words_a_reader_is_shown(self):
+        out = R._doubts({"uncertainty": [{"kind": "side_effect_rule"}]})
+        self.assertIn("side_effect_rule", out)
+        self.assertIn(R.UNCERTAINTY_REASONS["side_effect_rule"], out)
+
+    def test_the_counts_in_a_reason_are_filled_in(self):
+        out = R._doubts({"uncertainty": [{"kind": "family_claim", "args": {"n": 3}}]})
+        self.assertIn("3 receptor subtypes", out)
+        self.assertNotIn("{n}", out)
+
+    def test_an_unknown_kind_still_names_itself(self):
+        # Better a bare key than a silently empty flag: the judge still learns the
+        # claim is doubted, and the missing string shows up as something to write.
+        self.assertIn("brand_new_doubt",
+                      R._doubts({"uncertainty": [{"kind": "brand_new_doubt"}]}))
+
+    def test_every_emitted_reason_has_an_english_sentence(self):
+        # The catalogue is scraped out of js/i18n.js, so a reason added to the
+        # generator without its EN string would reach a judge as a bare key.
+        with open(Path(R.DATA) / "meta.json", encoding="utf-8") as fh:
+            emitted = set(json.load(fh).get("uncertainty_reasons", {}))
+        self.assertEqual(emitted - set(R.UNCERTAINTY_REASONS), set())
+
+    def test_the_real_flagged_claims_carry_their_flag(self):
+        quotes = {q["id"]: q for q in R._jsonl("quotes.jsonl")}
+        claims, _ = R.reconstruct_claims(quotes)
+        flagged = [c for texts in claims.values() for c in texts
+                   if "ALREADY FLAGGED UNCERTAIN" in c]
+        self.assertTrue(flagged, "the dataset flags bindings, projections and enzyme "
+                                 "rows, so some claim line must say so")
+        self.assertTrue(any("blanket_claim" in c for c in flagged),
+                        "the blanket pathway claim is the one that caused a false "
+                        "rejection, so it must be the one a judge now sees")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

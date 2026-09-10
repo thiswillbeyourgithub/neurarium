@@ -175,6 +175,59 @@ UNRECONSTRUCTED_CLAIM = ("This quote is cited as the source of a dataset claim w
                          "verbatim on the page and states a coherent, correct fact.")
 
 
+_UNCERTAIN_RE = re.compile(r'^\s*"uncertain\.([a-z_]+)":\s*"((?:[^"\\\\]|\\\\.)*)"',
+                           re.MULTILINE)
+
+
+def _uncertainty_reasons():
+    """``kind -> the English sentence the viewer prints for that doubt``.
+
+    Read off ``js/i18n.js`` rather than restated here: the judge must be shown the
+    same words a reader is shown, and a second copy would drift the day a reason is
+    reworded. The EN catalogue is written first in that file, so the first match per
+    key wins and the FR one below it is ignored.
+    """
+    fn = os.path.join(ROOT, "public", "js", "i18n.js")
+    out = {}
+    with open(fn, encoding="utf-8") as fh:
+        for kind, text in _UNCERTAIN_RE.findall(fh.read()):
+            out.setdefault(kind, text.replace('\\"', '"').replace("\\'", "'"))
+    return out
+
+
+UNCERTAINTY_REASONS = _uncertainty_reasons()
+
+
+def _doubts(node):
+    """The already-recorded doubts about a node, as a suffix to its claim line.
+
+    THE POINT: a judge that is not told the dataset already doubts a claim will
+    re-derive the doubt from scratch and call it a rejection. That happened: a Kandel
+    sentence covering a whole diffuse system was rejected for not naming one pathway,
+    which is exactly the `blanket_claim` flag those arrows already carry, so the
+    verdict would have demoted a citation the dataset was already honest about.
+
+    The flag is the dataset conceding the point, so the judge is asked the question
+    that is still open (is this sentence on the page, and is it about this at all?)
+    rather than the one already answered.
+    """
+    bullets = (node or {}).get("uncertainty") or []
+    if not bullets:
+        return ""
+    parts = []
+    for b in bullets:
+        kind = b.get("kind")
+        text = UNCERTAINTY_REASONS.get(kind, "")
+        for k, v in (b.get("args") or {}).items():
+            text = text.replace("{" + k + "}", str(v))
+        parts.append(f"{kind}: {text}" if text else kind)
+    return (" [ALREADY FLAGGED UNCERTAIN by the dataset, and shown to readers as such: "
+            + " ".join(parts)
+            + " Do not reject the citation for the reason the flag already states; "
+              "judge only whether the sentence is on the page and is about this claim "
+              "at all.]")
+
+
 def reconstruct_claims(quotes):
     """``(claims, kinds)``: per quote id, the claim(s) it backs and its node kind."""
     claims = collections.defaultdict(list)
@@ -186,7 +239,7 @@ def reconstruct_claims(quotes):
     # on purpose: ``receptor_classification`` covers the four per-attribute tally kinds.
     kind = {"now": None}
 
-    def add(qid, claim, site=None):
+    def add(qid, claim, site=None, node=None):
         """Record one claim, prefixed by the citation site it is made at.
 
         The site is what lets a verdict name a claim rather than a sentence: a quote
@@ -201,6 +254,7 @@ def reconstruct_claims(quotes):
             kinds.setdefault(qid, kind["now"])
             # `site | text`, not `[site] text`: a site carries brackets of its own
             # (`bindings[5ht2a]`), so a bracketed prefix cannot be split back off it.
+            claim += _doubts(node)
             claims[qid].append(f"{site} | {claim}" if site else claim)
 
     for d in _jsonl("drugs.jsonl"):
@@ -211,7 +265,7 @@ def reconstruct_claims(quotes):
             tname = target_names.get(b["target"], b["target"])
             for q in _qids(b.get("sources", [])):
                 add(q, f"Drug {nm} acts on target '{tname}' as {b['action']}{tag}.",
-                    CS.site("drug", d["id"], f"bindings[{CS.binding_key(b)}]"))
+                    CS.site("drug", d["id"], f"bindings[{CS.binding_key(b)}]"), b)
         kind["now"] = "drug_categories"
         for q in _qids(d.get("category_sources", [])):
             cats = [cat_labels.get(c, c) for c in d.get("categories", [])]
@@ -237,7 +291,7 @@ def reconstruct_claims(quotes):
             for q in _qids(e.get("sources", [])):
                 add(q, f"Drug {nm} is a {e['role']} of the enzyme "
                        f"{e['enzyme'].upper()}{tier}.",
-                    CS.site("drug", d["id"], f"enzymes[{CS.enzyme_key(e)}]"))
+                    CS.site("drug", d["id"], f"enzymes[{CS.enzyme_key(e)}]"), e)
         for m in d.get("metabolites", []):
             mn = m.get("name")
             kind["now"] = "drug_metabolites"
@@ -283,7 +337,7 @@ def reconstruct_claims(quotes):
         for q in _qids(p.get("sources", [])):
             add(q, f"Projection '{p['from']}'->'{p['to']}' ({p.get('kind')}, "
                    f"{p.get('neurotransmitter')}): {p.get('label', '')}. {p.get('description', '')}",
-                CS.site("projection", f"{p['from']}->{p['to']}"))
+                CS.site("projection", f"{p['from']}->{p['to']}"), p)
 
     kind["now"] = "circuits"
     for c in _jsonl("circuits.jsonl"):
