@@ -27,6 +27,8 @@ Shipped under `tools/git-hooks/` (tracked = single source of truth), activated
 per-clone once: `git config core.hooksPath tools/git-hooks` (not committed; every
 fresh clone runs it). Current:
 
-- `pre-push`: refuses any ref but `main`. On `main`, prompts on the terminal
+- `pre-push`: refuses any ref but `main`. On `main` it always runs
+  `tools/check_js.py` (under a second, no author-side data, so no prompt and no way
+  past it) and aborts on an unbound JS reference; then it prompts on the terminal
   (`y/N`, via `/dev/tty`) to run `tools/check_data.py`; a check that reports
   **errors** aborts the push (warnings pass). A non-interactive push skips the prompt.

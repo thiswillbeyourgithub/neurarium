@@ -238,6 +238,9 @@ Screenshots).
 - `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
+- `tools/check_js.py` — stdlib scope walk over `public/**/*.js`, reporting every identifier reference
+  no enclosing scope binds (the `ReferenceError` a valid-syntax file still ships). Takes paths, else
+  checks the whole viewer; exit 1 on a finding. Run by `pre-push` and by `tools/tests/test_check_js.py`.
 - `tools/bake_meshes.mjs` — **Node** (no deps): meshes every distinct `sdf` shape author-side into
   `public/data/meshes/*.bin` + `index.json`, so a visitor downloads the geometry instead of
   rebuilding it (~0.7s instead of ~3.0s, more on a phone). Imports the browser's own

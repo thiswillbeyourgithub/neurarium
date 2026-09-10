@@ -29,7 +29,23 @@ while read -r local_ref local_sha remote_ref remote_sha; do
   fi
 done
 
-# The branch is fine: offer to run the dataset integrity check
+# The branch is fine. Before anything optional, run the JS free-variable check
+# (tools/check_js.py): it takes under a second, reads only the files in public/ that
+# the browser loads, and needs no author-side data, so unlike the dataset check below
+# it neither prompts nor can be skipped. It catches the one bug class that ships
+# happily past `node --check`: a name referenced in a scope where nothing binds it,
+# which the browser raises only when that exact line finally runs.
+if [ "$status" -eq 0 ]; then
+  py=$(command -v python || command -v python3)
+  if [ -z "$py" ]; then
+    echo "pre-push: no python interpreter found; skipping the JS check." >&2
+  elif ! "$py" tools/check_js.py >&2; then
+    echo "pre-push: unbound JS reference(s); aborting push." >&2
+    status=1
+  fi
+fi
+
+# offer to run the dataset integrity check
 # (tools/check_data.py) before letting the push through. Prompt + answer go
 # to the controlling terminal, because stdin here is git's ref list (consumed
 # by the loop above), not the keyboard. A non-interactive push (no controlling

@@ -328,11 +328,13 @@ material location).
 
 ## Git hooks
 
-> Moved to [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to keep this file terse: repo-tracked hooks under `tools/git-hooks/`, activated per-clone; `pre-push` guards `main` + offers the data check.
+> Moved to [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to keep this file terse: repo-tracked hooks under `tools/git-hooks/`, activated per-clone; `pre-push` guards `main`, always runs `tools/check_js.py` + offers the data check.
 
 ## Data checks
 
 > Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: twelve families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage, baked meshes).
+
+There is a **code** check too, since there is no build step to hold a linter: `tools/check_js.py` (stdlib) walks each `public/**/*.js` scope tree and fails on any identifier reference no enclosing scope binds. That is the crash `node --check` cannot see (the file parses; the browser raises only when that line runs), and it is what a missing destructured parameter looks like. It runs unskippably in `pre-push` and as `tools/tests/test_check_js.py`. It is a lint, not a parser: every ambiguity resolves toward silence, so it under-reports rather than crying wolf (its docstring lists which).
 
 ## Internationalization (i18n)
 
