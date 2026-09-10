@@ -508,7 +508,6 @@
 {"id": "q_23ce5db5b26b", "corpus": "stahl", "page": 706, "quote": "Metabolized in part by CYP3A4", "llm": "opus", "heading": ["Quazepam", "Dosing and use", "Long-Term Use"]}
 {"id": "q_23fad4c513a4", "corpus": "gtopdb_ki", "page": "cyamemazine", "quote": "cyamemazine at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 6.3 [PMID 12527336]", "species": "Human"}
 {"id": "q_240fcf160318", "corpus": "stahl", "page": 695, "quote": "For tremor, antagonism of peripheral beta 2 receptors is the proposed mechanism", "llm": "sonnet", "heading": ["Propranolol", "Therapeutics", "How the Drug Works"]}
-{"id": "q_243a2a2a4604", "corpus": "carlat", "page": 184, "quote": "Cyproheptadine’s antagonistic effects at serotonin receptors", "llm": "opus", "heading": ["Sexual Dysfunction Medications", "Cyproheptadine (Periactin) Fact Sheet [G]"]}
 {"id": "q_243b48d79aa4", "corpus": "wikipedia_pharm", "page": "niaprazine", "quote": "Niaprazine ( INN ; brand name Nopron ) is a sedative - hypnotic drug of the phenylpiperazine group.", "llm": "sonnet"}
 {"id": "q_24410e5f4d7e", "corpus": "stahl", "page": 491, "quote": "Half-life 18–31 hours (shorter half-life better documented at the 40 mg dose)", "llm": "sonnet", "heading": ["Lurasidone", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_244cf0e6f1dc", "corpus": "stahl", "page": 884, "quote": "Elimination half-life 24 hours", "llm": "sonnet", "heading": ["Varenicline", "Dosing and use", "Pharmacokinetics"]}
