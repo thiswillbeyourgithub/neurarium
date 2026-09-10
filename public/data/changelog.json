@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.78.1",
+      "date": "2026-09-10",
+      "entries": [
+        {
+          "category": "data",
+          "text": "A second model has now read 218 quotes that had only ever been picked by one: the sentences behind drug brands, half-lives, active metabolites and drug classes that no independent reader had checked against the claim they were attached to. 158 held up and now carry that second reading; 60 did not and are held back from the green tier while a better sentence is looked for. Unchecked quote citations across the whole dataset fell from 383 to 116.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.78.0",
       "date": "2026-09-10",
       "entries": [

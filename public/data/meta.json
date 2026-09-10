@@ -1658,7 +1658,7 @@
       "polarity_sources": [
         {
           "quote_id": "q_4fda36420a37",
-          "pipeline": "page_llm",
+          "pipeline": "page_llm_judged",
           "provenance": "verified"
         }
       ],
