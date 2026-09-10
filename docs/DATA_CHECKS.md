@@ -62,6 +62,13 @@ errors. Functions take loaded data as args (unit-testable). Eleven families (num
   page actually falls in. That catches a stale or hand-edited
   `generated_cache/quote_headers.json`, which would otherwise print a confident and wrong
   breadcrumb over a genuine quote.
+  Every citation must also name a `pipeline` in `meta.quote_pipelines` (its chain of
+  custody, see CLAUDE.md Source provenance), and **no LLM-picked quote may ship unjudged**:
+  a pipeline with an `extract_llm` step and no `judge_llm` step is an error, because a
+  sentence a model chose out of prose is the one that can be chosen wrongly and nothing has
+  yet said otherwise. The rule is read off the chains rather than restated as a list of
+  pipeline names, so it keeps holding as pipelines are added. A quote code copied out of a
+  table has no such failure mode and is not asked for a judge.
   Also checks each binding's `ki`: its source corpus resolves, an `affinity_only`
   binding carries a `ki`, and (author-side, skipped on a clone) the cited `ki_id` row
   is really in the corpus CSV with that value (the PDSP analogue of the quote gate).

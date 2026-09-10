@@ -848,6 +848,31 @@ A batch recheck (`tools/sourcing/recheck_quotes.py`, run as a Sonnet workflow) w
 wins over a source-level `llm`); quotes it could not confirm land in `quote_recheck_flagged.json` for
 review, not stamped.
 
+**The rule: no LLM-picked quote ships unjudged by Sonnet or better.** A sentence a model *chose* out of
+prose is the one that can be chosen wrongly (right page, wrong claim), so it is not backed until a
+second model, which never saw the first one's reasoning, has agreed it supports the claim, and that
+second model is `sonnet` or `opus`, never `haiku`. `check_data.py` family 5 fails on any citation whose
+pipeline has an `extract_llm` step and no `judge_llm` step, so a new extraction pass cannot ship its
+quotes and leave the judging for later. A quote **code** copied out of a table has no such failure mode
+and needs no judge. A stamp names the **strongest** model that has confirmed a quote, so a second,
+weaker read can only corroborate it; a weaker model *doubting* one is a disagreement, parked in
+`quote_recheck_disputed.json` until the stamping model is re-asked (see `recheck_quotes.py`).
+
+**How a quote got here (the chain of custody).** The grade says how well a claim is backed; the
+**pipeline** says by what mechanism, which is a different question with a different failure mode. Every
+citation carries a `pipeline` key resolved by `quote_pipeline()` from three facts it never has to
+restate: whether the corpus is a **`machine`** store (PDSP #5, GtoPdb #7/#11/#12, Allen #8: no prose to
+read, so every quote from it is a copied record line), whether the writing pass stamped
+`extraction: "code"` on the source (the only authored bit, because who found the sentence is the only
+unrecoverable one: Stahl's *Brands* and *Neuroscience-based Nomenclature* greps do), and whether the
+quote carries an `llm` stamp (a judge ran). `QUOTE_PIPELINES` maps each key to its ordered steps,
+emitted whole as `meta.quote_pipelines` and rendered at the bottom of every source tooltip as
+`raw data -> deterministic extraction -> ... -> neurarium`; the step names are `quotechain.<step>` i18n
+keys, so a new pipeline is one entry plus its translations and never a viewer edit. It rides the
+**citation**, not the quote node, for the same reason the grade does: one sentence can honestly reach
+two claims by two routes (Stahl's Class line is model-picked for the drug's class and code-grepped as
+the NbN fallback).
+
 **Where the grade lives.** One source shape, quote-level `{corpus, page, quote, provenance}` against a
 `SOURCE_CORPORA` corpus; `provenance` defaults `DEFAULT_PROVENANCE` (`"llm"`), a sourceless node is
 `NOSOURCE`. Each `wikipedia` reference emits a sibling `wikipedia_provenance` (`WIKIPEDIA_PROVENANCE`
