@@ -108,6 +108,24 @@ const GREEK_NAMES = {
   "\u03c9": "omega",
 };
 
+/**
+ * An element's visible words: its text with every `aria-hidden` subtree dropped. A
+ * decorative glyph is marked `aria-hidden` exactly because it is chrome rather than
+ * part of what the control is called (a browse header's chevron, an icon), so
+ * anything naming a control after its own label reads it through here instead of
+ * `textContent`, which would fold the chrome into the name.
+ * @param {Node} node
+ * @returns {string}
+ */
+function visibleText(node) {
+  if (node.nodeType === Node.TEXT_NODE) return node.nodeValue || "";
+  if (node.nodeType !== Node.ELEMENT_NODE) return "";
+  if (node.getAttribute("aria-hidden") === "true") return "";
+  let out = "";
+  for (const child of node.childNodes) out += visibleText(child);
+  return out;
+}
+
 function foldText(s) {
   return String(s)
     .normalize("NFD")
@@ -1873,21 +1891,6 @@ function fixedContainingBlock(node) {
 }
 
 /**
- * Attach a hover/tap tooltip to `trigger`. The bubble is position:fixed just above
- * the trigger, clamped to the viewport, and lives on <body> while shown (so a dimmed
- * ancestor row can't bleed opacity into it, an overflow can't clip it, and you can
- * move onto the bubble to read/select its text). Shows on hover/focus (pointer +
- * keyboard) and is pinned on click/tap: on a touch screen `:hover` never fires, so
- * the click-toggle is the sole path (one tap shows, tap again or tap elsewhere
- * dismisses); on a pointer device a click pins it so its text stays selectable.
- *
- * Shared by the info panel's provenance pills (`opts.wrap` wraps the trigger in a
- * `.help-icon` span and returns that wrapper, so an inline pill anchors to itself)
- * and the sourcing coverage bars (block elements, attached in place with a raised
- * `opts.zIndex` so the bubble clears the #sourcing-modal backdrop).
- * @returns {HTMLElement} the wrapper when `opts.wrap`, else `trigger` itself.
- */
-/**
  * Scroll an element into view and flash it, for an action that lands the reader
  * somewhere they did not choose to scroll to: a click that navigates to another node
  * *because of* one row (arriving on the target's panel, the row that explains the jump
@@ -1908,6 +1911,21 @@ function flashRow(elm) {
   });
 }
 
+/**
+ * Attach a hover/tap tooltip to `trigger`. The bubble is position:fixed just above
+ * the trigger, clamped to the viewport, and lives on <body> while shown (so a dimmed
+ * ancestor row can't bleed opacity into it, an overflow can't clip it, and you can
+ * move onto the bubble to read/select its text). Shows on hover/focus (pointer +
+ * keyboard) and is pinned on click/tap: on a touch screen `:hover` never fires, so
+ * the click-toggle is the sole path (one tap shows, tap again or tap elsewhere
+ * dismisses); on a pointer device a click pins it so its text stays selectable.
+ *
+ * Shared by the info panel's provenance pills (`opts.wrap` wraps the trigger in a
+ * `.help-icon` span and returns that wrapper, so an inline pill anchors to itself)
+ * and the sourcing coverage bars (block elements, attached in place with a raised
+ * `opts.zIndex` so the bubble clears the #sourcing-modal backdrop).
+ * @returns {HTMLElement} the wrapper when `opts.wrap`, else `trigger` itself.
+ */
 function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}) {
   const host = wrap ? document.createElement("span") : trigger;
   if (wrap) { host.className = "help-icon"; host.append(trigger); }
@@ -6381,36 +6399,41 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
   const commandRows = [...document.querySelectorAll("[data-search]")].map((elm) => {
     const box = elm.type === "checkbox" ? elm : null;
     // A checkbox is named by the <label> wrapping it; a button or link by its own
-    // title (the tool buttons are icons, so their title IS their name), else its text.
-    // A trailing "→" is a link's own affordance, not part of its name.
-    const name = () => (box
-      ? (box.closest("label")?.textContent || "")
-      : (elm.getAttribute("title") || elm.getAttribute("aria-label")
-         || elm.textContent || "")).replace(/\s*[→>]\s*$/, "").trim();
-    const row = {
+    // title (the tool buttons are icons, so their title IS their name), else its own
+    // words. Read through visibleText, so a decorative glyph stays out of the name (a
+    // browse header's chevron is aria-hidden chrome); a trailing "→" baked into a
+    // translated link string is that link's affordance, not its name, either.
+    const labelEl = box ? box.closest("label") : null;
+    const clean = (s) => s.replace(/\s*[→>]\s*$/, "").trim();
+    // A wrapping <label>'s words are fixed for the life of the page (js/i18n.js
+    // reloads on a language switch, so nothing re-renders one), so they are read
+    // once, here, rather than re-walked on every keystroke.
+    const boxName = box ? clean(visibleText(labelEl || box)) : "";
+    return {
       type: "command",
-      label: "",
+      // Derived on read, never stored alongside the control it describes: an option
+      // has to say what it is set to *now*, and the theme button renames itself on
+      // each click (it names the theme a click would give you, not the one showing).
+      // A getter is live by construction, so no render path can read a stale one.
+      get label() {
+        return box ? `${boxName} · ${t(box.checked ? "search.on" : "search.off")}`
+          : clean(elm.getAttribute("title") || elm.getAttribute("aria-label")
+                  || visibleText(elm));
+      },
       // The attribute's value, when it has one, is a list of aliases: the words a
       // visitor is likely to type for a control whose visible name does not contain
       // them ("tour" for Start the tutorial, "citations" for Sources & provenance).
-      // Never a second name, always extra ways in to the one the panel shows.
+      // Never a second name, always extra ways in to the one the panel shows. Spelled
+      // once each: the matcher folds accents on both sides (see foldText), so the
+      // unaccented twin of an accented alias would be dead weight.
       keywords: elm.dataset.search || "",
-      refresh: () => {
-        // Re-read before every render, for the two labels that move: an option has to
-        // say what it is set to *now*, and the theme button renames itself on each
-        // click (it names the theme a click would give you, not the one showing).
-        row.label = box ? `${name()} · ${t(box.checked ? "search.on" : "search.off")}`
-          : name();
-      },
       // Picked is done: this clicks the real control, so its handler stays the one
       // definition of what it means. An option additionally flashes itself, since
       // what it changed may be nowhere near the panel; a button opens something
       // visible and needs no pointing at. flashRow defers a frame, which lands after
       // the pick has closed the search box and put the controls back on screen.
-      select: () => { elm.click(); if (box) flashRow(box.closest("label") || box); },
+      select: () => { elm.click(); if (box) flashRow(labelEl || box); },
     };
-    row.refresh();
-    return row;
   });
 
   const items = [
@@ -6612,7 +6635,6 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
     // keeps only items carrying that field whose value matches; the trailing free
     // text still matches the label + keywords.
     const { field, value, rest } = parseSearchQuery(searchInput.value);
-    for (const row of commandRows) row.refresh();  // an option's tag states live state
     syncClear();
     searchResults.innerHTML = "";
     // A structured filter (class:"..." / nbn:"...") is a deliberate "list the whole
