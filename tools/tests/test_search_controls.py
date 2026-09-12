@@ -13,6 +13,7 @@ import re
 import sys
 import unicodedata
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -61,11 +62,104 @@ def marked():
     return out
 
 
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link",
+        "meta", "param", "source", "track", "wbr"}
+
+
+class _Node:
+    """One element: its tag, its attributes, its parent, its children in order."""
+
+    def __init__(self, tag, attrs, parent):
+        self.tag, self.attrs, self.parent, self.kids = tag, dict(attrs), parent, []
+
+    def hidden_ancestor(self):
+        """The nearest enclosing element carrying `hidden`, or None."""
+        node = self.parent
+        while node is not None:
+            if "hidden" in node.attrs:
+                return node
+            node = node.parent
+        return None
+
+    def previous_sibling(self):
+        sibs = self.parent.kids if self.parent else []
+        i = sibs.index(self)
+        return sibs[i - 1] if i else None
+
+
+class _Tree(HTMLParser):
+    """Enough of a DOM to ask "what encloses this, and what sits just before it".
+
+    The other tests here read the markup with regexes, which is all a single tag
+    needs; this one is about where a control *sits*, and nesting is exactly what a
+    regex cannot see. An unmatched end tag pops to its own opening rather than
+    unbalancing everything after it.
+    """
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.root = _Node("#root", [], None)
+        self.stack = [self.root]
+
+    def _open(self, tag, attrs):
+        node = _Node(tag, attrs, self.stack[-1])
+        self.stack[-1].kids.append(node)
+        return node
+
+    def handle_starttag(self, tag, attrs):
+        node = self._open(tag, attrs)
+        if tag not in VOID:
+            self.stack.append(node)
+
+    def handle_startendtag(self, tag, attrs):
+        self._open(tag, attrs)
+
+    def handle_endtag(self, tag):
+        for i in range(len(self.stack) - 1, 0, -1):
+            if self.stack[i].tag == tag:
+                del self.stack[i:]
+                return
+
+    def walk(self, node=None):
+        node = self.root if node is None else node
+        yield node
+        for kid in node.kids:
+            yield from self.walk(kid)
+
+
 class MarkupTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         cls.rows = marked()
+        cls.tree = _Tree()
+        cls.tree.feed(HTML_TEXT)
+
+    def test_the_markup_nests_cleanly(self):
+        # Guards the guard below: every element the tree opened was closed, so an
+        # "this option is visible" answer is the markup's, not a lost end tag's.
+        self.assertEqual(len(self.tree.stack), 1,
+                         "index.html left an element unclosed, so the enclosing-section "
+                         "rule below is reading a broken tree")
+
+    def test_a_marked_option_in_a_collapsed_section_can_be_revealed(self):
+        # A picked option flips a persisted preference, and main.js shows the visitor
+        # it happened by scrolling to the control and flashing it. Both are no-ops on a
+        # `hidden` subtree, so an option inside a collapsed accordion body needs that
+        # body to be openable by clicking the header right before it, which is what
+        # main.js's select() does. An option that is not in one is simply visible.
+        for node in self.tree.walk():
+            if "data-search" not in node.attrs or node.attrs.get("type") != "checkbox":
+                continue
+            body = node.hidden_ancestor()
+            if body is None:
+                continue
+            head = body.previous_sibling()
+            eid = node.attrs.get("id")
+            self.assertIsNotNone(head, f"{eid}: nothing precedes its hidden section")
+            self.assertIn("collapse-header", (head.attrs.get("class") or "").split(),
+                          f"{eid}: its hidden section is not opened by a "
+                          f"collapse-header, so a search pick would flip it invisibly")
 
     def test_the_panel_marks_some_controls(self):
         self.assertGreater(len(self.rows), 10)
@@ -169,6 +263,21 @@ class WiringTest(unittest.TestCase):
         self.assertFalse("textContent" in block,
                          "a command row is named by raw textContent again, which "
                          "folds a chevron / icon glyph into the name")
+
+    def test_a_picked_option_opens_the_section_holding_it(self):
+        # The markup half of this rule is MarkupTest's: a marked option inside a
+        # collapsed body has a collapse-header right before that body. This is the
+        # half that uses it. Without the reveal, picking "Show active metabolites"
+        # from search flips a persisted preference with nothing on screen to show it.
+        js = MAIN.read_text(encoding="utf-8")
+        start = js.index('querySelectorAll("[data-search]")')
+        block = js[start:js.index("const items = [", start)]
+        self.assertIn('closest("[hidden]")', block,
+                      "a picked option no longer looks for the collapsed section "
+                      "holding it, so it would flip invisibly")
+        self.assertIn("collapse-header", block,
+                      "a picked option no longer opens its section by the section's "
+                      "own header")
 
     def test_the_new_strings_are_in_the_catalogue(self):
         # Only the EN side is asserted here: test_i18n's CatalogueParityTest already

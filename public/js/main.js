@@ -6432,7 +6432,20 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
       // what it changed may be nowhere near the panel; a button opens something
       // visible and needs no pointing at. flashRow defers a frame, which lands after
       // the pick has closed the search box and put the controls back on screen.
-      select: () => { elm.click(); if (box) flashRow(labelEl || box); },
+      //
+      // An option inside a collapsed accordion body (Show active metabolites lives in
+      // the Drugs section) has to have that section opened first, or the pick flips a
+      // persisted preference with nothing at all to show for it: scrollIntoView and
+      // the flash are both no-ops on a `hidden` subtree. Opening is the section's own
+      // header click, for the same reason the pick itself is the control's own.
+      select: () => {
+        if (box) {
+          const head = elm.closest("[hidden]")?.previousElementSibling;
+          if (head?.classList.contains("collapse-header")) head.click();
+        }
+        elm.click();
+        if (box) flashRow(labelEl || box);
+      },
     };
   });
 

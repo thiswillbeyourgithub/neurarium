@@ -225,8 +225,9 @@ arrow carrying a projection. A node whose owner has nothing to focus renders ine
   **aliases** (`data-search="tour guided ..."`), never a second name. An option's row carries its
   live state (`· on` / `· off`, re-read on every render, which is also what keeps the theme button's
   self-renaming label current); a pick **clicks the real control**, so search owns no second
-  definition of what it does, and an option additionally flashes itself (`flashRow`) since what it
-  changed may be off-screen. `#search-toggle` is deliberately unmarked: a result that opens the
+  definition of what it does, and an option additionally opens the collapsed accordion body holding
+  it (by that section's own header) and flashes itself (`flashRow`), since what it changed may be
+  off-screen or, worse, inside a `hidden` subtree where both the scroll and the flash are no-ops. `#search-toggle` is deliberately unmarked: a result that opens the
   search you are already in is a loop. **Type-filter chips** (`#search-filters`) scope
   to one kind (`activeType`, session-persisted). **Hovering** a result transiently applies its full
   focus via a `preview` thunk (the `select*`/`focus*` helpers' `preview:true` = scene focus only, no
