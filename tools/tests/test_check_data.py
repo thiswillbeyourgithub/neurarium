@@ -594,8 +594,12 @@ class FamilyCountTest(unittest.TestCase):
     def test_both_docs_state_the_real_count(self):
         word = self.WORDS[len(self.numbers)]
         last = self.numbers[-1]
-        want = f"{word.capitalize()} families (numbered\n0-{last} in the output)"
-        checks = (self.ROOT / "docs" / "DATA_CHECKS.md").read_text(encoding="utf-8")
+        want = f"{word.capitalize()} families (numbered 0-{last} in the output)"
+        # Whitespace-normalized, so the sentence is matched as a sentence: where the
+        # markdown happens to wrap mid-paragraph is not what this test is about (and
+        # the repo's own convention says not to hard-wrap one).
+        checks = " ".join(
+            (self.ROOT / "docs" / "DATA_CHECKS.md").read_text(encoding="utf-8").split())
         # assertIn would print the whole document on failure; the count is the message.
         self.assertTrue(want in checks, f"docs/DATA_CHECKS.md does not say {want!r}")
         claude = (self.ROOT / "CLAUDE.md").read_text(encoding="utf-8")
