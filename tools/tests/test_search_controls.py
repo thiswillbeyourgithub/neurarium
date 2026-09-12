@@ -34,13 +34,21 @@ ALIAS = re.compile(r'\bdata-search="([^"]*)"')
 
 
 def fold(s):
-    """The half of js/main.js `foldText` an alias list is subject to: decompose,
-    drop the combining marks, lowercase. The matcher folds both sides of its
-    comparison through that, so "guidee" and "guidée" reach the same control and
-    spelling both is dead weight rather than a second way in.
+    """The half of js/main.js `foldText` an alias list is subject to: decompose, drop
+    the combining marks, lowercase, then drop hyphens and Unicode dashes. The matcher
+    folds both sides of its comparison through that, so "guidee" and "guidée" reach the
+    same control, and so do "night-mode" and "nightmode": spelling both is dead weight
+    rather than a second way in.
+
+    `foldText`'s remaining step, the Greek letter -> Latin name map, is deliberately
+    not mirrored. It is there so a receptor name written with a glyph is reachable from
+    a keyboard; an alias list is keyboard words already, so no alias can carry the
+    glyph it would fold. Mirroring it would be a second copy of a table to keep in step
+    for a case that cannot arise.
     """
-    return "".join(c for c in unicodedata.normalize("NFD", s.lower())
-                   if not unicodedata.combining(c))
+    folded = "".join(c for c in unicodedata.normalize("NFD", s.lower())
+                     if not unicodedata.combining(c))
+    return re.sub(r"[-‐-―]", "", folded)
 
 
 def marked():
@@ -231,6 +239,34 @@ class MarkupTest(unittest.TestCase):
         self.assertTrue(decorated,
                         "no marked control carries decorative chrome any more, so "
                         "the visible-words rule in WiringTest now proves nothing")
+
+
+class FoldTest(unittest.TestCase):
+    """`fold` against js/main.js `foldText`, the rule it stands in for.
+
+    A guard written from a stale reading of what it guards passes while proving less
+    than it says. `fold` drifted once already, missing the dash step and so unable to
+    see the very collision `test_an_alias_is_spelled_once` exists to catch.
+    """
+
+    def test_the_steps_mirror_foldtext(self):
+        js = (ROOT / "public" / "js" / "main.js").read_text(encoding="utf-8")
+        body = js[js.index("function foldText("):js.index("const SEARCH_FIELDS")]
+        for step, why in (
+                ('normalize("NFD")', "accents no longer decompose"),
+                ("toLowerCase()", "case no longer folds"),
+                # Matched as the source spells them: main.js writes these two ranges
+                # as \u escapes, so the characters themselves would never be found.
+                (r"[\u0300-\u036f]", "combining marks are no longer dropped"),
+                (r"[-\u2010-\u2015]", "dashes are no longer dropped")):
+            self.assertIn(step, body, f"foldText changed: {why}, so `fold` here "
+                                      f"is a stale copy of the matcher's rule")
+
+    def test_it_folds_what_the_matcher_folds(self):
+        for a, b in (("guidée", "guidee"), ("night-mode", "nightmode"),
+                     ("Sombre", "sombre"), ("non‑breaking", "nonbreaking")):
+            self.assertEqual(fold(a), fold(b), f"{a!r} and {b!r} reach the same "
+                                               f"control but fold apart")
 
 
 class WiringTest(unittest.TestCase):
