@@ -127,6 +127,17 @@ class MarkupTest(unittest.TestCase):
                                             f"again once folded")
                 seen[key] = word
 
+    def test_a_marked_control_carries_decorative_chrome(self):
+        # Guards the guard: WiringTest asserts the naming path drops aria-hidden
+        # subtrees, which only means anything while some marked control HAS one (the
+        # browse headers' chevron). If that ever stops being true, the rule below has
+        # quietly become vacuous and should be reconsidered, not left passing.
+        decorated = [eid for _, eid, _, inner, _ in self.rows
+                     if 'aria-hidden="true"' in inner]
+        self.assertTrue(decorated,
+                        "no marked control carries decorative chrome any more, so "
+                        "the visible-words rule in WiringTest now proves nothing")
+
 
 class WiringTest(unittest.TestCase):
     """The three ends that have to agree: the query, the chip, the strings."""
@@ -139,6 +150,25 @@ class WiringTest(unittest.TestCase):
         self.assertIn('command: "search.filterCommands"', js,
                       "the command rows have no type-filter chip, so they cannot be "
                       "scoped to and drown in a common query")
+
+    def test_a_control_is_named_by_its_visible_words(self):
+        # A control is named by its own label, and a glyph marked aria-hidden is not
+        # part of that label: it is the affordance. Read by raw textContent the six
+        # browse headers listed as "Drugs \u25b8". Two ends have to hold for that to
+        # stay fixed: visibleText still skips an aria-hidden subtree, and the naming
+        # path still reads through it instead of going back to textContent.
+        js = MAIN.read_text(encoding="utf-8")
+        self.assertTrue('getAttribute("aria-hidden") === "true"' in js,
+                        "visibleText no longer drops aria-hidden chrome, so a "
+                        "decorative glyph is part of a control's name again")
+        start = js.index('querySelectorAll("[data-search]")')
+        block = js[start:js.index("const items = [", start)]
+        self.assertTrue("visibleText(" in block,
+                        "the command rows no longer name a control by its visible "
+                        "words")
+        self.assertFalse("textContent" in block,
+                         "a command row is named by raw textContent again, which "
+                         "folds a chevron / icon glyph into the name")
 
     def test_the_new_strings_are_in_the_catalogue(self):
         # Only the EN side is asserted here: test_i18n's CatalogueParityTest already
