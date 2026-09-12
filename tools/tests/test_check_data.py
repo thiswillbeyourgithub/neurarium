@@ -577,8 +577,12 @@ class FamilyCountTest(unittest.TestCase):
     """
 
     ROOT = Path(__file__).resolve().parent.parent.parent
+    # The docs spell the count as a word, so the count has to be spelled here too.
+    # Only the range that can plausibly come next: a count outside it is a failure
+    # naming the missing word, not a KeyError that says nothing about the docs.
     WORDS = {11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen",
-             15: "fifteen", 16: "sixteen"}
+             15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen",
+             19: "nineteen", 20: "twenty"}
 
     @classmethod
     def setUpClass(cls):
@@ -592,7 +596,10 @@ class FamilyCountTest(unittest.TestCase):
         self.assertEqual(self.numbers, list(range(len(self.numbers))))
 
     def test_both_docs_state_the_real_count(self):
-        word = self.WORDS[len(self.numbers)]
+        count = len(self.numbers)
+        word = self.WORDS.get(count)
+        self.assertIsNotNone(word, f"{count} families, which WORDS has no word for: "
+                                   f"add it, then say {count} in both docs")
         last = self.numbers[-1]
         want = f"{word.capitalize()} families (numbered 0-{last} in the output)"
         # Whitespace-normalized, so the sentence is matched as a sentence: where the
