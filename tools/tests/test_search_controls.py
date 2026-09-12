@@ -51,6 +51,26 @@ def fold(s):
     return re.sub(r"[-‐-―]", "", folded)
 
 
+def section(text, opening, closing):
+    """The slice of `text` from `opening` up to the next `closing`.
+
+    Every wiring assertion below reads one stretch of js/main.js rather than the whole
+    file, so each needs two landmarks to survive in it. A bare ``str.index`` answers a
+    moved landmark with a ValueError, which reaches the runner as an *error* carrying
+    nothing about the rule that was being checked; this fails instead, naming the
+    landmark that went missing.
+    """
+    start = text.find(opening)
+    if start < 0:
+        raise AssertionError(f"js/main.js no longer contains {opening!r}, so the rule "
+                             f"this landmark delimits cannot be checked")
+    end = text.find(closing, start)
+    if end < 0:
+        raise AssertionError(f"js/main.js no longer contains {closing!r} after "
+                             f"{opening!r}, so the stretch to check is unbounded")
+    return text[start:end]
+
+
 def marked():
     """``[(opening tag, id, alias list or None, inner html, offset)]``, in order.
 
@@ -251,7 +271,7 @@ class FoldTest(unittest.TestCase):
 
     def test_the_steps_mirror_foldtext(self):
         js = (ROOT / "public" / "js" / "main.js").read_text(encoding="utf-8")
-        body = js[js.index("function foldText("):js.index("const SEARCH_FIELDS")]
+        body = section(js, "function foldText(", "const SEARCH_FIELDS")
         for step, why in (
                 ('normalize("NFD")', "accents no longer decompose"),
                 ("toLowerCase()", "case no longer folds"),
@@ -291,12 +311,11 @@ class WiringTest(unittest.TestCase):
         self.assertTrue('getAttribute("aria-hidden") === "true"' in js,
                         "visibleText no longer drops aria-hidden chrome, so a "
                         "decorative glyph is part of a control's name again")
-        start = js.index('querySelectorAll("[data-search]")')
-        block = js[start:js.index("const items = [", start)]
+        block = section(js, 'querySelectorAll("[data-search]")', "const items = [")
         self.assertIn("controlName(", block,
                       "the command rows no longer name a control through controlName, "
                       "so what a control is called now has a second definition")
-        namer = js[js.index("function controlName("):js.index("function foldText(")]
+        namer = section(js, "function controlName(", "function foldText(")
         self.assertIn("visibleText(", namer,
                       "controlName no longer reads a control's visible words")
         self.assertNotIn("textContent", namer,
@@ -309,8 +328,7 @@ class WiringTest(unittest.TestCase):
         # half that uses it. Without the reveal, picking "Show active metabolites"
         # from search flips a persisted preference with nothing on screen to show it.
         js = MAIN.read_text(encoding="utf-8")
-        start = js.index('querySelectorAll("[data-search]")')
-        block = js[start:js.index("const items = [", start)]
+        block = section(js, 'querySelectorAll("[data-search]")', "const items = [")
         self.assertIn('closest("[hidden]")', block,
                       "a picked option no longer looks for the collapsed section "
                       "holding it, so it would flip invisibly")
