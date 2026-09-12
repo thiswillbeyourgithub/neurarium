@@ -2804,6 +2804,11 @@
             <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" />
           </svg>
         </button>
+        <!-- The `data-i18n-attr` pair is this button's name only until the scene boots:
+             its label states what a click would GIVE you, so it cannot be filled once.
+             js/main.js re-announces it on every flip (label3d, beside the theme
+             button's); the markup carries the 3D-showing wording because that is the
+             state every load starts in. -->
         <button type="button" id="toggle-3d" data-search class="panel-hdr-btn panel-3d-btn" aria-pressed="false" data-i18n-attr="title:panel.no3d, aria-label:panel.no3d">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2l8 5v10l-8 5-8-5V7z" />

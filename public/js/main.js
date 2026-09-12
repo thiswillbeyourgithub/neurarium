@@ -8961,6 +8961,17 @@ async function main() {
   const NO3D_KEY = "neurarium.no3d";
   const toggle3d = document.getElementById("toggle-3d");
   const no3dOn = () => document.body.classList.contains("no-3d");
+  // Like the theme button just above, this one's label names the state a click would
+  // GIVE you, so it is re-announced on every flip rather than filled once from the
+  // markup: `aria-pressed` alone left the tooltip, the accessible name AND the search
+  // row (which reads a control's title, see commandRows) offering to hide a 3D model
+  // that was already hidden.
+  const label3d = () => {
+    const label = t(no3dOn() ? "panel.show3d" : "panel.no3d");
+    toggle3d?.setAttribute("title", label);
+    toggle3d?.setAttribute("aria-label", label);
+  };
+  label3d();
   // `persist` is what separates the two ways in: the header button states a lasting
   // preference, while a view that merely wants the room (the Data browser) borrows
   // the mode for this visit and must not rewrite what the visitor chose.
@@ -8971,6 +8982,7 @@ async function main() {
     if (on) expandPanel();
     document.body.classList.toggle("no-3d", on);
     toggle3d?.setAttribute("aria-pressed", String(on));
+    label3d();
     if (persist) saveFlag(NO3D_KEY, on);
     if (!on) invalidate(); // the scene is back and holds a stale frame; repaint it
     else intro.cancel(); // nothing renders while hidden, so don't resume mid-pose

@@ -67,7 +67,10 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   it stays reachable once the panel fills the screen; persisted `neurarium.no3d`, and mirrored into
   the URL as the `panel` view key, see `docs/RUNNING.md`): `body.no-3d` hides
   `#scene` + `#labels-layer` and lets the expanded panel fill the viewport; the render loop
-  early-returns, so animations freeze in place and resume when 3D returns. Turning it on expands a
+  early-returns, so animations freeze in place and resume when 3D returns. Like the theme button it
+  **re-announces itself** on every flip (`label3d`: `panel.no3d` / `panel.show3d`), since its label
+  also names the state a click would give you; the markup's `data-i18n-attr` is only the pre-boot
+  name. That is what its tooltip, its accessible name and its search row all read. Turning it on expands a
   collapsed panel first (`expandPanel`, the shared wrapper over `openControlsBody`), since with no
   brain behind it a folded panel would leave a blank viewport; **folding the panel back down leaves
   the mode** for the same reason (the collapse listener in the `setNo3d` block, added after
