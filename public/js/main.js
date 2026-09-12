@@ -126,6 +126,27 @@ function visibleText(node) {
   return out;
 }
 
+/**
+ * The words a control is called by: its own `title` (an icon button's title IS its
+ * name), else its accessible name, else its visible words, minus a trailing
+ * affordance glyph. A translated link string can bake its own "→" in, and that arrow
+ * is the link's affordance rather than part of its name, exactly as an `aria-hidden`
+ * chevron is. A wrapping `<label>` answers the same question for the checkbox inside
+ * it (it carries neither attribute, so it falls through to its words).
+ *
+ * Read on demand, never cached: a control that names the state a click would GIVE you
+ * renames itself on every flip (the theme + panel-only buttons), and the words are
+ * filled from js/i18n.js at DOMContentLoaded, so a cached copy would also be a silent
+ * bet on having been taken after that.
+ * @param {HTMLElement} elm
+ * @returns {string}
+ */
+function controlName(elm) {
+  const raw = elm.getAttribute("title") || elm.getAttribute("aria-label")
+    || visibleText(elm);
+  return raw.replace(/\s*[→>]\s*$/, "").trim();
+}
+
 function foldText(s) {
   return String(s)
     .normalize("NFD")
@@ -6398,27 +6419,19 @@ function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, e
   // already inside is a loop rather than a result.
   const commandRows = [...document.querySelectorAll("[data-search]")].map((elm) => {
     const box = elm.type === "checkbox" ? elm : null;
-    // A checkbox is named by the <label> wrapping it; a button or link by its own
-    // title (the tool buttons are icons, so their title IS their name), else its own
-    // words. Read through visibleText, so a decorative glyph stays out of the name (a
-    // browse header's chevron is aria-hidden chrome); a trailing "→" baked into a
-    // translated link string is that link's affordance, not its name, either.
+    // A checkbox is named by the <label> wrapping it; everything else by itself. Both
+    // go through controlName, the one definition of what a control is called.
     const labelEl = box ? box.closest("label") : null;
-    const clean = (s) => s.replace(/\s*[→>]\s*$/, "").trim();
-    // A wrapping <label>'s words are fixed for the life of the page (js/i18n.js
-    // reloads on a language switch, so nothing re-renders one), so they are read
-    // once, here, rather than re-walked on every keystroke.
-    const boxName = box ? clean(visibleText(labelEl || box)) : "";
     return {
       type: "command",
       // Derived on read, never stored alongside the control it describes: an option
-      // has to say what it is set to *now*, and the theme button renames itself on
-      // each click (it names the theme a click would give you, not the one showing).
-      // A getter is live by construction, so no render path can read a stale one.
+      // has to say what it is set to *now*, and the theme + panel-only buttons rename
+      // themselves on each click (they name the state a click would give you, not the
+      // one showing). A getter is live by construction, so no render path can read a
+      // stale one.
       get label() {
-        return box ? `${boxName} · ${t(box.checked ? "search.on" : "search.off")}`
-          : clean(elm.getAttribute("title") || elm.getAttribute("aria-label")
-                  || visibleText(elm));
+        const name = controlName(labelEl || elm);
+        return box ? `${name} · ${t(box.checked ? "search.on" : "search.off")}` : name;
       },
       // The attribute's value, when it has one, is a list of aliases: the words a
       // visitor is likely to type for a control whose visible name does not contain

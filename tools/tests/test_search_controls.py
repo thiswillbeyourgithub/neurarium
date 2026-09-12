@@ -293,12 +293,15 @@ class WiringTest(unittest.TestCase):
                         "decorative glyph is part of a control's name again")
         start = js.index('querySelectorAll("[data-search]")')
         block = js[start:js.index("const items = [", start)]
-        self.assertTrue("visibleText(" in block,
-                        "the command rows no longer name a control by its visible "
-                        "words")
-        self.assertFalse("textContent" in block,
-                         "a command row is named by raw textContent again, which "
-                         "folds a chevron / icon glyph into the name")
+        self.assertIn("controlName(", block,
+                      "the command rows no longer name a control through controlName, "
+                      "so what a control is called now has a second definition")
+        namer = js[js.index("function controlName("):js.index("function foldText(")]
+        self.assertIn("visibleText(", namer,
+                      "controlName no longer reads a control's visible words")
+        self.assertNotIn("textContent", namer,
+                         "a control is named by raw textContent again, which folds a "
+                         "chevron / icon glyph into the name")
 
     def test_a_picked_option_opens_the_section_holding_it(self):
         # The markup half of this rule is MarkupTest's: a marked option inside a
