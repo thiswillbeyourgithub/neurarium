@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "3.81.1",
+      "date": "2026-09-12",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "In the search results, the browse sections (Drugs, Receptors & targets, Enzymes, Brain structures, Projections & Circuits, the Data browser) were listed with the little arrow that opens them stuck on the end of their name. They are now named the way the panel names them.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.81.0",
       "date": "2026-09-10",
       "entries": [
