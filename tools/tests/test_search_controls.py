@@ -11,6 +11,7 @@ Stdlib only, no browser. Built with the help of Claude Code.
 """
 import re
 import sys
+import unicodedata
 import unittest
 from pathlib import Path
 
@@ -29,6 +30,16 @@ TAG = re.compile(r"<(?:button|input|a)\b[^>]*\bdata-search\b[^>]*>", re.S)
 CLOSE = re.compile(r"</(?:button|a)>", re.S)
 ID = re.compile(r'\bid="([^"]+)"')
 ALIAS = re.compile(r'\bdata-search="([^"]*)"')
+
+
+def fold(s):
+    """The half of js/main.js `foldText` an alias list is subject to: decompose,
+    drop the combining marks, lowercase. The matcher folds both sides of its
+    comparison through that, so "guidee" and "guidée" reach the same control and
+    spelling both is dead weight rather than a second way in.
+    """
+    return "".join(c for c in unicodedata.normalize("NFD", s.lower())
+                   if not unicodedata.combining(c))
 
 
 def marked():
@@ -100,6 +111,21 @@ class MarkupTest(unittest.TestCase):
                 continue
             self.assertTrue(alias.strip(), f"{eid}: an empty alias list")
             self.assertNotIn("<", alias, f"{eid}: markup in an alias list")
+
+    def test_an_alias_is_spelled_once(self):
+        # An alias is a way IN to a name the panel already shows, so two spellings
+        # the matcher cannot tell apart are not two ways in. Accents fold away on
+        # both sides, so the unaccented twin of an accented alias buys nothing, and
+        # a word repeated outright is just a slip. Both shipped once.
+        for _, eid, alias, _, _ in self.rows:
+            if alias is None:
+                continue
+            seen = {}
+            for word in alias.split():
+                key = fold(word)
+                self.assertNotIn(key, seen, f"{eid}: {word!r} is {seen.get(key)!r} "
+                                            f"again once folded")
+                seen[key] = word
 
 
 class WiringTest(unittest.TestCase):
