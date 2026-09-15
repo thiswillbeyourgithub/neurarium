@@ -89,6 +89,7 @@ CORPUS_DESC = {
 # Keys mirror meta.provenance_stats.by_kind; an unknown kind would simply title-case.
 KIND_LABELS = {
     "drug_bindings": "Drug target bindings",
+    "drug_binding_action": "Drug binding directions",
     "drug_nbn": "Drug nomenclature (NbN)",
     "drug_brands": "Drug brand names",
     "drug_categories": "Drug class",

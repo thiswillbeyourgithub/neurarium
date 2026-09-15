@@ -960,6 +960,22 @@ def _binding_grade(binding: dict[str, Any]) -> int:
     return best
 
 
+def _binding_action_grade(binding: dict[str, Any]) -> int:
+    """A binding DIRECTION's grade = the strongest of its quote ``sources`` alone.
+
+    A measured Ki attests that the ligand binds the target, never whether it
+    activates or blocks it, so the Ki is deliberately excluded here: an
+    ``affinity_only`` binding (a Ki with no known direction) scores 0 and reads as
+    NOSOURCE, which is the whole point of splitting this claim out of
+    ``_binding_grade``. A direction stated with no document behind it floors at
+    ``llm`` (rank 1): it was authored from memory, which is weaker than a quote but
+    stronger than nothing at all.
+    """
+    if not binding.get("action"):
+        return 0
+    return max(1, _strongest_grade(binding.get("sources")))
+
+
 def _provenance_stats(structures: list[dict[str, Any]],
                       projections: list[dict[str, Any]],
                       circuits: list[dict[str, Any]],
@@ -1025,6 +1041,15 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # strong its quote is (see bucket()).
     binding_grades = [(_binding_grade(b), bool(b.get("uncertainty")))
                       for d in drugs for b in d.get("bindings", [])]
+    # The binding's DIRECTION, split out as its own node (see _binding_action_grade):
+    # "this drug binds this target" and "it does so as an agonist/antagonist" are two
+    # claims with two different backings, and only the first one a Ki can attest. One
+    # node per binding, so a Ki-only binding reads as a missing direction instead of
+    # disappearing into a verified binding. It carries the SAME uncertainty flag as the
+    # binding: those bullets are precisely about whether the quote attributes the
+    # action to this drug, which is the direction claim and nothing else.
+    binding_action_grades = [(_binding_action_grade(b), bool(b.get("uncertainty")))
+                             for d in drugs for b in d.get("bindings", [])]
     # Measured-affinity (PDSP Ki) coverage: a SEPARATE data-quality signal from the
     # grade tally. A binding can be legitimately backed by a Stahl quote with no Ki
     # (the grade counts it as sourced), so "no Ki" is NOT "unsourced"; this figure
@@ -1113,6 +1138,11 @@ def _provenance_stats(structures: list[dict[str, Any]],
             _seen_metab_bindings.add(key)
             metabolite_binding_grades.extend(_binding_grade(b)
                                              for b in m.get("bindings", []))
+            # A metabolite's binding direction is the same claim as a drug's, so it is
+            # counted in the SAME drug_binding_action kind (it is a ligand's binding
+            # direction either way), deduped by the same folded name.
+            binding_action_grades.extend(_binding_action_grade(b)
+                                         for b in m.get("bindings", []))
     # (grade, is_uncertain) pairs, like the bindings above: a pathway the book states
     # only as a blanket sweep buckets as ``uncertain`` however strong its quote is.
     projection_grades = [(_strongest_grade(p.get("sources")), bool(p.get("uncertainty")))
@@ -1216,6 +1246,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "addons": tally(addon_grades),
         "enzyme_variability": tally(variability_grades),
         "drug_bindings": tally(binding_grades),
+        "drug_binding_action": tally(binding_action_grades),
         "drug_nbn": tally(nbn_grades),
         "drug_brands": tally(brand_grades),
         "drug_categories": tally(category_grades),

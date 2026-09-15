@@ -242,6 +242,46 @@ class MetaAndTranslationsTest(unittest.TestCase):
         self.assertEqual(kind.get("total", 0), n_bindings,
                          "drug_metabolite_bindings tally != unique metabolite bindings")
 
+    def test_binding_directions_are_their_own_node_kind(self):
+        """A binding's DIRECTION is a separate node from the binding itself
+        (drug_binding_action), graded by the quote sources alone.
+
+        A measured Ki proves the ligand binds the target and says nothing about whether
+        it activates or blocks it, so an affinity_only binding must read as a MISSING
+        direction rather than vanish into a verified binding. Metabolite bindings are
+        counted in the same kind (a ligand's binding direction either way), deduped by
+        folded name exactly like drug_metabolite_bindings.
+        """
+        meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+        drugs = [json.loads(l) for l in
+                 (DATA_DIR / "drugs.jsonl").read_text(encoding="utf-8").splitlines() if l]
+        bindings = [b for d in drugs for b in d.get("bindings", [])]
+        seen_metab = set()
+        for d in drugs:
+            for m in d.get("metabolites", []):
+                key = re.sub(r"[^a-z0-9]", "", (m.get("name") or "").lower())
+                if key in seen_metab:
+                    continue
+                seen_metab.add(key)
+                bindings.extend(m.get("bindings", []))
+
+        kind = meta["provenance_stats"]["by_kind"].get("drug_binding_action")
+        self.assertIsNotNone(kind, "drug_binding_action missing from the tally")
+        self.assertEqual(kind["total"], len(bindings),
+                         "drug_binding_action tally != drug + unique metabolite bindings")
+        # No action => no direction claim at all => NOSOURCE, never a borrowed Ki grade.
+        n_affinity_only = sum(1 for b in bindings if not b.get("action"))
+        self.assertEqual(kind["nosource"], n_affinity_only,
+                         "every affinity_only binding must count as a missing direction")
+        self.assertTrue(n_affinity_only, "expected some affinity_only bindings")
+        # A direction authored with no quote behind it floors at ``llm``: weaker than a
+        # quote, stronger than nothing, and not liftable by the Ki sitting beside it.
+        n_llm = sum(1 for b in bindings
+                    if b.get("action") and not b.get("sources"))
+        self.assertEqual(kind["llm"], n_llm,
+                         "a directed binding with no quote source must count as llm")
+        self.assertTrue(n_llm, "expected some quote-less directed bindings")
+
     def test_drug_enzymes_are_tallied_and_valid(self):
         """A drug's metabolism rows are their own graded node kind (drug_enzymes), and
         each names a real enzyme / role / strength from the emitted vocabularies.

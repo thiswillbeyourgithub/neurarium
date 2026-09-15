@@ -113,7 +113,11 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # (mirrors provenance.py's by_kind minus "references", which points *at* a node rather
 # than being one). Adding a node kind means adding it here too, in one place: both the
 # coverage table and the self-consistency check read this.
-NODE_KINDS = ("addons", "drug_bindings", "drug_nbn", "drug_brands", "drug_categories",
+# ``drug_binding_action`` is graded from the bindings' own quote sources, so its quotes
+# are already walked as part of drug_bindings / drug_metabolite_bindings: the kind adds a
+# tally column, never a new quote to gate.
+NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "drug_brands",
+              "drug_categories",
               "drug_half_life", "drug_enzymes", "enzyme_variability",
               "drug_metabolites",
               "drug_metabolite_enzyme", "drug_metabolite_bindings",
