@@ -88,6 +88,9 @@ in `meta.provenance_stats.by_kind`):
 - target *expression region* -> a target's `location_sources` -> `target_locations`
 - target *expression density profile* -> a target's `density` -> `target_density` (same shape)
 - drug binding -> a drug's `bindings[]` -> `drug_bindings`
+- drug binding direction -> a binding's `action` -> `drug_binding_action` (graded by the
+  binding's quote sources only, a Ki attests binding never direction; `affinity_only` =
+  NOSOURCE; metabolite bindings counted in this same kind)
 - drug NbN label -> a drug's `nbn` -> `drug_nbn`
 - drug commercial brand name -> a drug's `brands[]` -> `drug_brands` (each brand a graded
   node; `region` na/eu/fr orders them per locale, never shown; na from Stahl, eu/fr from Wikipedia)
@@ -681,7 +684,8 @@ fixed Stahl list.
   median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
   assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as
   `<compound>`" warning. `affinity_only` bindings (a Ki, no known direction) list as "affinity only"
-  with a neutral glyph, no source pill, and never animate (excluded from `structureIds`/`flowKinds`).
+  with a neutral glyph, no source pill, and never animate (excluded from `structureIds`/`flowKinds`);
+  the missing direction is its own NOSOURCE node (`drug_binding_action`, red ✕ on the action line).
   A **combo** drug (name "A + B") leads with a warning box linking each constituent (`drug.combo`);
   combos carry no Ki. A measured Ki backs `_binding_grade`, lifting the binding to `verified`.
   `fetch_ki.py --apply` drops every PDSP assay >=10 uM as "inactive", so a genuine but weak binder
