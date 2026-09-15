@@ -31,6 +31,7 @@ import { fetchWikiLead } from "./wiki.js";
 import { createTour } from "./tour.js";
 import { createChangelog } from "./changelog.js";
 import { createNodeBrowser } from "./node-browser.js";
+import { createSimulation } from "./simulation.js";
 import { loadFlag, saveFlag } from "./prefs.js";
 import { createUrlState, LIST_SEP } from "./url-state.js";
 import { createTheme } from "./theme.js";
@@ -4620,6 +4621,18 @@ function createInfoPanel(data, sourcingModal) {
       body.appendChild(el("h2", "info-title", t("panel.nodes")));
       body.appendChild(elm);
     },
+
+    /**
+     * Render the Simulation tab's (detached, state-keeping) container in the Details
+     * pane, exactly as showNodeBrowser does: the tab owns its own DOM so the picked
+     * drugs, the scrub position and the solver's wish list survive a tab switch.
+     * @param {HTMLElement} elm the container built by js/simulation.js
+     */
+    showSimulation(elm) {
+      clearBody();
+      body.appendChild(el("h2", "info-title", t("panel.simulation")));
+      body.appendChild(elm);
+    },
   };
 }
 
@@ -8139,6 +8152,38 @@ async function main() {
     });
   }
 
+  // Simulation (beta): the same detail-tab shape as the Data browser above (a view,
+  // not a node, so its key carries no id and the deep-link layer maps it to
+  // `#simulation=1`), and the same detached container, since the picked drugs and the
+  // solver's wish list are state a tab switch must not throw away. The drug list
+  // itself rides the URL under `sim`, registered further down with the other views.
+  const SIM_TAB_KEY = "simulation:1";
+  let showSimulation = () => {};
+  let simulation = null;
+  const simToggle = document.getElementById("simulation-toggle");
+  if (simToggle) {
+    const simBody = document.createElement("div");
+    simBody.id = "simulation-body";
+    simulation = createSimulation({
+      body: simBody,
+      data,
+      deps: { t, nav: { drug: (d) => focusDrug(d, { frame: true }) } },
+      ui: { fold: foldText },
+    });
+    simulation.setOnChange(() => urlState.sync(200));
+    showSimulation = () => {
+      simulation.open();
+      info.showSimulation(simBody);
+      openDetailTab(SIM_TAB_KEY, t("panel.simulation"), showSimulation);
+    };
+    // Two plots and a solver want the whole pane, and none of it lights the scene
+    // (it is pharmacology, not anatomy), so the tab opens maximized for this visit.
+    simToggle.addEventListener("click", () => {
+      setNo3d(true, { persist: false });
+      showSimulation();
+    });
+  }
+
   // Arrow colour-mode switch (Neurotransmitter | Potential): a two-state
   // segmented control in the Controls section. Picking an option recolours the
   // arrows and rebuilds the Projections legend rows to match. The switch lives
@@ -8810,6 +8855,9 @@ async function main() {
     },
     // Not a node: the Data browser, a tab whose content is the whole dataset.
     browser: () => { showNodeBrowser(); return true; },
+    // Nor is this one: the Simulation tab, a view over the dataset rather than a
+    // node in it. Its own `sim` key carries which drugs are in it.
+    simulation: () => { showSimulation(); return true; },
   };
   const openTabKey = (key) => {
     const idx = key.indexOf(":");
@@ -8842,6 +8890,27 @@ async function main() {
       if (key) tabs.activate(key);
     },
   });
+  // `sim=<id>[:<ratio>],...`: the Simulation tab's picked drugs, in list order, each
+  // with its relative dose (omitted at the default 1, which is the common case). The
+  // rest of the tab (the threshold, the solver's wish list) is a reading aid rather
+  // than a view worth reproducing, so it stays out of the link.
+  urlState.register("sim", {
+    read: () => {
+      const picks = simulation ? simulation.getDrugs() : [];
+      if (!picks.length) return null;
+      return picks.map((p) => (p.ratio === 1 ? p.id : `${p.id}:${p.ratio}`)).join(LIST_SEP);
+    },
+    write: (v) => {
+      if (!simulation) return;
+      simulation.setDrugs(v.split(LIST_SEP).filter(Boolean).map((part) => {
+        const at = part.indexOf(":");
+        return at > 0
+          ? { id: part.slice(0, at), ratio: Number(part.slice(at + 1)) }
+          : { id: part, ratio: 1 };
+      }));
+    },
+  });
+
   // The legacy single-focus links (`#focusDrug=vortioxetine`, `#browser=1`) that are
   // already shared around: read-only aliases for one `tabs` entry, applied before it
   // (priority -10) so an explicit `tabs=` wins. They read as null, or the same focus
@@ -8850,6 +8919,7 @@ async function main() {
     focusDrug: "drug", focusTarget: "target", focusReceptor: "target",
     focusStructure: "structure", focusConnection: "connection",
     focusCircuit: "circuit", focusGroup: "group", browser: "browser",
+    simulation: "simulation",
   };
   for (const [param, kind] of Object.entries(LEGACY_FOCUS)) {
     urlState.register(

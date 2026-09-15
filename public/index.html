@@ -239,6 +239,7 @@
          still say which tone it is); the bare ⚠ beside the T1/2 chip has no tinted
          ground to say it with, so it keeps --sem-caution, which is themed already. */
       :root[data-theme="light"] .addon,
+      :root[data-theme="light"] .sim-warn,
       :root[data-theme="light"] .combo-warning { --addon-ink: var(--text-strong); }
       * { box-sizing: border-box; }
       html, body {
@@ -397,11 +398,11 @@
         from { opacity: 0; transform: translateY(-10px); }
         to   { opacity: 1; transform: translateY(0); }
       }
-      #controls-settings-body, #structures-body, #projections-body, #receptors-body, #enzymes-body, #drugs-body, #nodes-body, #about-body {
+      #controls-settings-body, #structures-body, #projections-body, #receptors-body, #enzymes-body, #drugs-body, #nodes-body, #simulation-body, #about-body {
         animation: section-slide-in 200ms ease-out;
       }
       @media (prefers-reduced-motion: reduce) {
-        #controls-settings-body, #structures-body, #projections-body, #receptors-body, #enzymes-body, #drugs-body, #nodes-body, #about-body { animation: none; }
+        #controls-settings-body, #structures-body, #projections-body, #receptors-body, #enzymes-body, #drugs-body, #nodes-body, #simulation-body, #about-body { animation: none; }
       }
       /* Hide the native scrollbar on the scrollable panels (they still scroll
          via wheel / touch / drag); the chunky bar looks out of place over the
@@ -1807,6 +1808,193 @@
       }
       .node-more:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
 
+      /* Simulation (beta) tab: #simulation-body, built by js/simulation.js with its
+         two inline-SVG plots from js/sim-plots.js and shown in a detail tab like the
+         Data browser. Everything here is chrome; the only colours that arrive as
+         values are the per-drug swatch palette (js/simulation.js) and the projection
+         colour a neurotransmitter system already wears in the 3D scene. */
+      #simulation-body { padding: 4px 0 8px; }
+      .sim-sec { margin: 0 0 16px; }
+      .sim-h { font-size: 13px; font-weight: 600; margin: 0 0 6px; }
+      .sim-caption { color: var(--muted); font-size: 11px; margin: 4px 2px 8px; line-height: 1.45; }
+      .sim-empty { color: var(--muted); font-size: 12px; margin: 6px 2px; }
+      /* The beta + assumptions callout, in the same boxed shape (and caution ramp) an
+         addon node and the combo warning use, so a caveat looks like a caveat
+         wherever the panel raises one. */
+      .sim-warn {
+        --addon-accent: 230, 184, 0;
+        --addon-ink: rgb(var(--addon-accent));
+        background: rgba(var(--addon-accent), 0.08);
+        border: 1px solid rgba(var(--addon-accent), 0.3);
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin: 0 0 14px;
+        font-size: 11px;
+      }
+      .sim-warn-head { display: flex; align-items: center; gap: 6px; }
+      .sim-warn-glyph, .sim-warn-title { color: var(--addon-ink); font-weight: 600; }
+      .sim-warn-sub { color: var(--addon-ink); font-weight: 600; margin-top: 10px; }
+      .sim-warn-list { margin: 6px 0 0; padding-left: 16px; color: var(--muted); }
+      .sim-warn-list li { margin: 3px 0; line-height: 1.45; }
+      .sim-details > summary { cursor: pointer; color: var(--accent-bright); }
+      /* A picked drug, a wished-for receptor and a solver result are all one row of
+         controls, so they share a shape. */
+      .sim-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 2px;
+        font-size: 12px;
+      }
+      .sim-row.muted { opacity: 0.45; }
+      .sim-list > .sim-row:nth-child(even) { background: rgba(var(--ink), 0.05); }
+      .sim-swatch {
+        width: 14px;
+        height: 14px;
+        flex: 0 0 auto;
+        border: 1px solid rgba(var(--ink), 0.25);
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 0;
+      }
+      .sim-name {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 0;
+        font: inherit;
+        text-align: left;
+        color: var(--accent-bright);
+        background: none;
+        border: none;
+        cursor: pointer;
+        overflow-wrap: anywhere;
+      }
+      .sim-name-static { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+      /* A wished-for receptor carries a full-width slider, which leaves no room for
+         its name beside it in the narrow sidebar: let the row wrap instead of
+         squeezing the name into one letter per line. */
+      .sim-want { flex-wrap: wrap; }
+      .sim-want .sim-name-static { flex: 1 0 100%; font-weight: 600; }
+      .sim-want input[type="range"] { flex: 1 1 120px; min-width: 90px; }
+      .sim-ratio { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+      .sim-step {
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        font: inherit;
+        line-height: 1;
+        color: var(--text);
+        background: rgba(var(--ink), 0.08);
+        border: 1px solid rgba(var(--ink), 0.14);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .sim-step:hover { background: rgba(var(--ink), 0.16); }
+      .sim-ratio-input {
+        width: 52px;
+        padding: 2px 4px;
+        font: inherit;
+        font-size: 12px;
+        color: var(--text);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
+        border-radius: 4px;
+      }
+      .sim-remove {
+        padding: 0 5px;
+        font: inherit;
+        color: var(--muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      .sim-remove:hover { color: var(--sem-missing); }
+      .sim-add, .sim-solve {
+        margin: 6px 2px;
+        padding: 5px 9px;
+        font: inherit;
+        font-size: 12px;
+        color: var(--text);
+        background: rgba(var(--ink), 0.06);
+        border: 1px solid rgba(var(--ink), 0.12);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .sim-add.small { margin: 0; padding: 2px 7px; font-size: 11px; }
+      .sim-add:hover, .sim-solve:hover { background: rgba(var(--ink), 0.14); }
+      .sim-solve { border-color: var(--accent); }
+      .sim-solve:disabled { opacity: 0.5; cursor: default; }
+      .sim-picker-box { margin: 4px 0 8px; }
+      .sim-hits { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+      .sim-hit {
+        padding: 3px 7px;
+        font: inherit;
+        font-size: 11px;
+        color: var(--text);
+        background: rgba(var(--ink), 0.08);
+        border: 1px solid rgba(var(--ink), 0.12);
+        border-radius: 999px;
+        cursor: pointer;
+      }
+      .sim-hit:hover { background: var(--accent-soft); }
+      .sim-nohit { color: var(--muted); font-size: 11px; }
+      .sim-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 6px; }
+      .sim-slider { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+      .sim-slider input[type="range"] { flex: 1 1 90px; min-width: 70px; }
+      .sim-slider-val { font-variant-numeric: tabular-nums; color: var(--text); }
+      .sim-readout { color: var(--muted); font-size: 11px; margin: 2px 2px 4px; min-height: 14px; }
+      .sim-legend { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--muted); }
+      .sim-legend-item { display: inline-flex; align-items: center; gap: 4px; }
+      .sim-legend-dot { width: 14px; height: 3px; border-radius: 2px; }
+      /* A metabolite's line is dashed in the plot; its legend key says so with the
+         same broken stroke rather than a second colour. */
+      .sim-legend-dot.dashed {
+        height: 0;
+        border-top: 3px dashed currentcolor;
+        border-radius: 0;
+        background: none !important;
+      }
+      .sim-fit { font-size: 12px; font-weight: 600; margin: 6px 2px; }
+      /* A wide receptor plot scrolls sideways rather than shrinking its columns to
+         unreadable slivers, the same bargain the Data browser's grid makes. */
+      .sim-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+      .sim-plot { width: 100%; height: auto; display: block; touch-action: none; }
+      .sim-rx { min-width: 320px; }
+      .sim-tip { pointer-events: none; z-index: 70; }
+      /* The SVG ink. Fill/stroke are not `color`, but they follow the same rule: one
+         token each, so a plot is themed by the block at the top of this file. */
+      .sim-grid { stroke: rgba(var(--ink), 0.12); stroke-width: 1; }
+      .sim-axis { stroke: rgba(var(--ink), 0.4); stroke-width: 1; }
+      .sim-axis-tick { stroke: rgba(var(--ink), 0.25); stroke-width: 1; }
+      .sim-tick { fill: var(--muted); font-size: 9px; }
+      .sim-axis-name { font-style: italic; }
+      .sim-line { fill: none; stroke-width: 1.8; stroke-linejoin: round; }
+      .sim-cursor { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
+      .sim-seg { stroke: var(--page-bg); stroke-width: 0.5; }
+      .sim-seg-metab { opacity: 0.55; }
+      .sim-net { stroke: var(--text-strong); stroke-width: 1.6; }
+      .sim-unknown-bg { fill: rgba(var(--ink), 0.06); }
+      .sim-unknown-line { stroke: var(--muted); stroke-width: 1.5; }
+      .sim-col { fill: var(--muted); font-size: 9px; }
+      .sim-group { fill: var(--muted); font-size: 10px; font-weight: 600; }
+      .sim-sysbar { fill: var(--muted); }
+      /* The transparent per-column pointer target in the receptor plot. Named apart
+         from the picker's .sim-hit chips: one is an SVG rect, the other a button. */
+      .sim-colhit { fill: rgba(var(--ink), 0); }
+      .sim-colhit.on { fill: rgba(var(--ink), 0.08); }
+      /* "beta" beside the Simulation section's name: a quiet qualifier, not a badge
+         that competes with the name it qualifies. */
+      .beta-tag {
+        margin-left: 6px;
+        padding: 1px 4px;
+        font-size: 9px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--sem-caution);
+        border: 1px solid var(--sem-caution);
+        border-radius: 3px;
+      }
+
       /* Detail info (structure / connection / receptor / target / drug) lives in
          the Details pane of the main panel, shown by the active detail tab (see
          .panel-tabs / .detail-tabs above); the .info-* content styles below are
@@ -3118,6 +3306,20 @@
           <div id="nodes" class="browse-section">
             <button type="button" id="nodes-toggle" data-search="nodes browse noeuds parcourir" class="collapse-header">
               <span data-i18n="panel.nodes"></span>
+              <span class="chevron" aria-hidden="true">&#9656;</span>
+            </button>
+          </div>
+
+          <!-- Simulation (beta): the one section that computes a claim instead of
+               reporting a sourced one, so it opens with a box listing what the model
+               does not know. Like the Data browser above it opens as a detail tab
+               (two plots and a solver want the full pane), and its body is built by
+               js/simulation.js on first open into a detached container js/main.js
+               hands the panel. -->
+          <div id="simulation" class="browse-section">
+            <button type="button" id="simulation-toggle" data-search="simulate combination combinaison cocktail" class="collapse-header">
+              <span data-i18n="panel.simulation"></span>
+              <span class="beta-tag" data-i18n="sim.beta"></span>
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
           </div>
