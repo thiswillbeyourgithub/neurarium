@@ -40,6 +40,7 @@ const KIND_ORDER = [
   "target_locations",
   "target_density",
   "drug_bindings",
+  "drug_binding_action",
   "drug_nbn",
   "drug_brands",
   "drug_categories",
@@ -138,6 +139,15 @@ export function collectNodes(data, deps, opts = {}) {
   const bindingNotion = (b) => (b.affinityOnly
     ? `${b.targetName} (${t("drug.affinityOnly")})`
     : `${b.actionLabel}, ${b.targetName}`);
+
+  // The DIRECTION claim, split out of the binding: backed by the binding's quote
+  // sources ALONE (never its Ki, which attests that the ligand binds and nothing about
+  // whether it activates or blocks), so the row's tooltip can never offer a measured
+  // affinity as evidence for a direction. Same kind for a drug's and a metabolite's
+  // bindings: it is a ligand's binding direction either way.
+  const actionNotion = (b) => `${b.targetName}: ${b.affinityOnly
+    ? t("drug.affinityOnly") : b.actionLabel}`;
+  const actionBacking = (b) => ({ sources: b.sources, uncertainty: b.uncertainty });
 
   // Structures. A symmetric region is authored once and mirrored, so the `_L` twin
   // repeats its twin's group and grade verbatim, differing only in the side its name
@@ -248,6 +258,8 @@ export function collectNodes(data, deps, opts = {}) {
     const go = d.focusable ? () => nav.drug(d) : null;
     for (const b of d.bindings || []) {
       push("drug_bindings", d.name, bindingNotion(b), b.provenance, go, b);
+      push("drug_binding_action", d.name, actionNotion(b), b.actionProvenance, go,
+        actionBacking(b));
     }
     if (d.nbn) push("drug_nbn", d.name, d.nbn, d.nbnProvenance, go,
       { sources: d.nbnSources });
@@ -285,6 +297,8 @@ export function collectNodes(data, deps, opts = {}) {
         seenMetaboliteBinding.add(bKey);
         push("drug_metabolite_bindings", d.name, `${m.name}: ${bindingNotion(b)}`,
           b.provenance, goMetab, b);
+        push("drug_binding_action", d.name, `${m.name}: ${actionNotion(b)}`,
+          b.actionProvenance, goMetab, actionBacking(b));
       }
     }
   }

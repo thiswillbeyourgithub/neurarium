@@ -2460,6 +2460,29 @@ function createInfoPanel(data, sourcingModal) {
   };
   const bindingProvenancePill = (binding) => sourceBackedPill(binding.provenance, binding);
 
+  // The binding's DIRECTION is its own node (kind `drug_binding_action`): "this drug
+  // binds this target" and "it does so as an agonist" are two claims, and a measured Ki
+  // only ever backs the first. Returns a pill ONLY when the direction is worse backed
+  // than the binding beside it, so a row whose quote covers both stays a single pill and
+  // the extra badge means something wherever it appears.
+  const bindingActionPill = (binding) => {
+    const rank = { llm: 1, sourced: 2, verified: 3 };
+    // The pill says what is missing about the DIRECTION, so its screen-reader label
+    // replaces the generic grade text makeProvenancePill would otherwise announce.
+    const pill = (level, why) => {
+      const node = makeProvenancePill(level, why);
+      const btn = node.matches && node.matches(".src-pill")
+        ? node : node.querySelector(".src-pill");
+      if (btn) btn.setAttribute("aria-label", why);
+      return node;
+    };
+    if (binding.affinityOnly) return pill(null, t("drug.actionNoSource"));
+    if (binding.actionProvenance === "llm"
+        && (rank[binding.provenance] || 0) > 1)
+      return pill("llm", t("drug.actionLlm"));
+    return null;
+  };
+
   // --- Addon nodes: the panel-slot annotation kind ------------------------------
   // Every other node kind has an implied home (a binding belongs in "Acts on", an
   // enzyme row in "Metabolism"), so its collection decides where it draws. An addon
@@ -2769,7 +2792,14 @@ function createInfoPanel(data, sourcingModal) {
     if (binding.tentative) parts.push(t("drug.speculative"));
     if (binding.peripheral) parts.push(t("drug.peripheral"));
     const detail = parts.filter(Boolean).join(" · ");
-    if (detail) txt.appendChild(el("span", "bind-action", detail));
+    if (detail) {
+      const line = el("span", "bind-action", detail);
+      // The direction's own grade rides the action line it grades, not the name row
+      // (which carries the binding's).
+      const dirPill = bindingActionPill(binding);
+      if (dirPill) line.appendChild(dirPill);
+      txt.appendChild(line);
+    }
     // Ki stacked under the name+action, with its own verified badge beside it.
     if (binding.ki) {
       const kiLine = el("div", "bind-ki");
@@ -5464,6 +5494,7 @@ function applyViewParams(bundle) {
 const KIND_LABELS = {
   addons: "about.kindAddons",
   drug_bindings: "about.kindBindings",
+  drug_binding_action: "about.kindBindingAction",
   drug_nbn: "about.kindNbn",
   drug_brands: "about.kindDrugBrands",
   drug_categories: "about.kindDrugCategories",
@@ -5783,6 +5814,18 @@ function buildKindExample(kind, data, nav) {
       if (!drug) return null;
       const b = firstAction(drug);
       return b ? line(drug.name, `${b.actionLabel}, ${b.targetName}`, () => nav.drug(drug)) : null;
+    }
+    case "drug_binding_action": {
+      // The direction claim, so the example leads with the action a quote had to back:
+      // Olanzapine "Antagonist · D2".
+      const d = focusableDrugs.find((x) => {
+        const b = firstAction(x);
+        return b && (b.sources || []).length;
+      });
+      const b = d && firstAction(d);
+      return b
+        ? line(d.name, `${b.actionLabel} · ${b.targetName}`, () => nav.drug(d))
+        : null;
     }
     case "drug_nbn":
       return drug && drug.nbn ? line(drug.name, drug.nbn, () => nav.drug(drug)) : null;
