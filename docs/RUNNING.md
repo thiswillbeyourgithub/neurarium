@@ -97,6 +97,7 @@ moment it registers.
 | `#collapsed=1` / `#settings=0` | the panel body collapsed / the Controls sub-section closed |
 | `#section=drugs\|receptors\|enzymes\|structures\|projections` | the open browse section (empty = all closed) |
 | `#q=<query>` | the in-panel search: open with that query (`#q=` opens it empty) |
+| `#sim=<id>[:<ratio>],...` | the Simulation tab's picked drugs, in list order (the ratio is omitted at its default of 1) |
 | `#drugq=<text>` / `#metab=0` | the Drugs section's filter box / its "show active metabolites" toggle |
 | `#panel=1` / `#panel=0` | panel-only reading mode (3D hidden) / force the brain back on |
 

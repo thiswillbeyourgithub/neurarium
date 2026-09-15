@@ -158,6 +158,19 @@ through beats a nearer non-focused one.
   code link, a licence line (AGPL-3.0), a CC BY-SA attribution line, and a Sources & provenance
   link (`#about-open-sourcing`). The tally is not here (own popup).
 
+### Simulation (beta)
+
+**`#simulation`** (`js/simulation.js` + `js/sim-plots.js`): pick drugs, read the combination. Like
+the Data browser below it opens a **detail tab** (key `simulation:1`, deep-linked
+`#tabs=simulation:1` with the picked list under `sim=`) into a detached container the module owns,
+and clicking the row enters the panel-only mode for this visit. Its controls: the per-drug swatch
+(toggles that drug in both plots), a ratio stepper, **Include active metabolites**
+(`#sim-metabolites`, persisted), the receptor plot's **Hide below** threshold
+(`#sim-threshold`, in axis units) and **Show unknown-direction bands** (`#sim-show-unknown`), then
+the solver's **Only these receptors** (`#sim-only-listed`) and **Max drugs** (`#sim-max-drugs`).
+Nothing here lights the 3D scene: it is pharmacology, not anatomy. See CLAUDE.md "Simulation
+(beta)" for what the model assumes.
+
 ### Data browser
 
 **`#nodes`** (`js/node-browser.js`): the Sources & provenance popup's coverage bars read node by

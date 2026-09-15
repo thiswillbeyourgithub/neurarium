@@ -289,6 +289,14 @@ Viewer (`public/`):
   graded knowledge node as one filterable/sortable list, opened as a **detail tab** (deep link
   `#tabs=browser:1`) rather than an accordion section, each row carrying its own backing so its pill
   shows the same source the node's panel pill does (see [`docs/CONTROLS.md`](docs/CONTROLS.md)).
+- `js/sim-model.js` — the drug-combination maths (pure, no DOM): `receptorProfile`, `ligandsOf`,
+  `pkFlags`, `solveCombination` (NNLS), the `toAxis`/`fromAxis` log axis. Its header lists every
+  shortcut it takes; see Simulation (beta). Tested by `tools/tests/sim_model.test.mjs`.
+- `js/simulation.js` — `createSimulation`, the Simulation (beta) tab (`#simulation`): the
+  assumptions callout, the picked-drug list, the two plots and the profile solver, opened as a
+  **detail tab** (deep link `#tabs=simulation:1`) like the Data browser.
+- `js/sim-plots.js` — `buildPkPlot` / `buildRxPlot` (+ `formatKi`), the tab's two inline-SVG plots,
+  given rows and returning an `<svg>` plus the readers a pointer needs.
 - `js/url-state.js` — `createUrlState()`, the `key -> {read, write}` registry that makes the URL
   fragment a complete description of the UI (open tabs + their order, active tab, popup, sliders,
   toggles, panel layout, open section, search + filter text, camera). Each control registers its
@@ -776,6 +784,29 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
   derived rows don't bury the sourced sections above. Because the edges are an **inference**, every
   string stays conditional ("could raise", never "raises"). The caption states it is a flag to check
   with a prescriber, **never a contraindication**, and that a missing row is not a safety claim.
+
+## Simulation (beta)
+
+Pick a few drugs and see what the combination does: the only place in the app that **computes** a
+claim instead of reporting a sourced one, which is why the tab opens with a box listing what the
+model does not know (and why every string in it stays conditional).
+
+- The maths live in `js/sim-model.js`, whose header states each shortcut once (one assumed
+  time-to-peak, a range T½ collapsed to its midpoint, potencies added with no competition, a
+  fully-formed metabolite); the warnings box is that list rendered for the visitor, plus the
+  enzyme-sharing flags `pkFlags` derives from the picked drugs.
+- The tab is `js/simulation.js` (sections + state) over `js/sim-plots.js` (the two SVGs): a plasma
+  plot whose scrub position re-reads the receptor plot at that hour, and a receptor plot of boost /
+  block stacks split per ligand, grouped by neurotransmitter system.
+- **A direction-less (`affinity_only`) binding is not signed**: it draws as a hatched grey "binds,
+  effect unknown" band above the boost stack and stays out of the net, so an occupied receptor
+  nobody sourced a direction for reads as a gap rather than disappearing.
+- The reverse question ("which drugs give me this profile?") is a non-negative least squares over
+  the same matrix, held to the drugs already listed, so it answers what to *add*.
+- URL: tab key `simulation:1` (a view, not a node, so `#simulation=1` is its legacy alias) plus
+  `sim=<id>[:<ratio>],...` for the picked list.
+
+Built with the help of Claude Code.
 
 ## Addon nodes (panel annotations)
 
