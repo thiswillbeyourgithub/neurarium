@@ -1,6 +1,45 @@
 {
   "versions": [
     {
+      "version": "3.82.0",
+      "date": "2026-09-15",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A new **Simulation (beta)** section: pick a few drugs, set how much of each, and see what the combination does. One plot follows each molecule in the blood over the hours or days after a single dose; the other shows which receptors the mixture activates, blocks, or merely occupies without anyone having sourced the effect. Moving across the first plot re-reads the second at that moment.",
+          "commits": [
+            "83bd006",
+            "ba748a8",
+            "be4745f",
+            "7c3d26a"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The same section can work backwards: describe the receptor profile you would want, receptor by receptor, and it looks for a combination of drugs that comes close, keeping the ones you already picked. It is one answer among many that fit alike, and it says so.",
+          "commits": [
+            "83bd006",
+            "be4745f"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The simulation opens with what it does not know, spelled out: no interaction between drugs, one average half-life per molecule, no dose and no absorption data, and effects that simply add up. Where two of your drugs are cleared by the same liver enzyme, or one of them slows the enzyme that clears another, it says so under \"Between these drugs\".",
+          "commits": [
+            "be4745f",
+            "7c3d26a"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The repository map gained a section on the simulation: what it assumes, where its maths live, and why a binding whose direction was never sourced is drawn as its own grey band rather than quietly counted.",
+          "commits": [
+            "1fa5c7c"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.81.2",
       "date": "2026-09-12",
       "entries": [
