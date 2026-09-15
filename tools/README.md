@@ -434,14 +434,14 @@ Screenshots).
   quote-gates each action sentence, resolves the target, attaches a Ki (PDSP measured preferred, else
   the Wikipedia table value), and adds every remaining Ki-table target as `affinity_only`. Idempotent,
   sole writer of a metabolite's `bindings`. See CLAUDE.md Drugs.
-- `tools/fetch/fetch_binding_directions.py` — `uv run` (deps: beautifulsoup4, only because it imports
+- `tools/fetch/fetch_binding_directions.py`: `uv run` (deps: beautifulsoup4, only because it imports
   `fetch_metabolite_bindings`; no HTML is parsed). Offline. The binding-direction worklist builder: for
   every drug with an `affinity_only` binding it reads the stored English Wikipedia article
   (`fetch_cyp_wikipedia.page_for`, which owns the redirect aliases) and offers the prose lines naming
   one of that drug's affinity-only targets, with **no verdict of its own**, into
   `tools/generated_cache/binding_directions_worklist.json`. `--only <ids>` scopes. See CLAUDE.md Drugs
   (Binding directions).
-- `tools/sourcing/apply_binding_directions.py` — stdlib. Quote-gates the judged directions
+- `tools/sourcing/apply_binding_directions.py`: stdlib. Quote-gates the judged directions
   (`binding_directions_judged.json`, a candidate **index** per row, never a quote string) and is the
   **sole writer** of an `action` onto an `affinity_only` binding in `drugs_data.jsonl`. Six gates: the
   drug was offered; the index resolves; the target is a currently affinity-only binding of that drug
@@ -449,7 +449,7 @@ Screenshots).
   target (`tools/target_aliases.py`, the matcher the fetcher offered it with); the quote is verbatim on
   `data_sources/wikipedia/pages/<slug>.md`. Writes no `llm` stamp (`recheck_quotes.py`'s job).
   Idempotent, `--dry-run`/`--verbose`. See CLAUDE.md Drugs (Binding directions).
-- `tools/target_aliases.py` — stdlib **library**, imported by both halves above: every name a modeled
+- `tools/target_aliases.py`: stdlib **library**, imported by both halves above: every name a modeled
   drug target goes by in prose (Greek folded to Latin, separator-tolerant, boundary-strict, so `d2`
   never fires on `CYP2D6` and `alpha2` never absorbs `alpha2A`). One definition, because a gate that
   disagreed with the offer would accept what the worklist could not have shown.
