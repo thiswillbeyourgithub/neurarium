@@ -157,7 +157,9 @@ def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]", "", s.lower())
 
 
-def action_lines(page_text: str, must_mention: str | None = None) -> list[str]:
+def action_lines(page_text: str, must_mention: str | None = None,
+                 limit: int | None = MAX_ACTION_LINES,
+                 max_commas: int | None = 5) -> list[str]:
     """Paragraph lines from the stored page text that name an action verb + a target
     hint, verbatim (so a judge's quote taken from one gates against pages/<slug>.md).
 
@@ -166,7 +168,19 @@ def action_lines(page_text: str, must_mention: str | None = None) -> list[str]:
 
     ``must_mention`` (a metabolite name) restricts to lines that actually name it, used
     when the page is the PARENT article (a fallback): a parent-only sentence must never
-    be quoted for the metabolite, only a sentence that explicitly discusses it."""
+    be quoted for the metabolite, only a sentence that explicitly discusses it.
+
+    ``limit`` caps the result; ``None`` returns every match. The cap is a parameter
+    rather than a constant because a caller that filters the lines further downstream
+    (``fetch_binding_directions.py`` keeps only those naming one of a drug's targets)
+    must see the whole article, or the first fourteen action verbs decide which claims
+    are sourceable.
+
+    ``max_commas`` drops a line carrying more than that many commas, the cheap test for
+    a navbox enumeration that slipped in as a paragraph; ``None`` disables it. It is a
+    parameter for the same reason: on a full DRUG article (as opposed to a metabolite's
+    thin one) the binding claims live in long, comma-rich prose, and the cap silently
+    discarded two thirds of them."""
     mention = _norm(must_mention) if must_mention else None
     seen, out = set(), []
     for raw in page_text.splitlines():
@@ -179,7 +193,7 @@ def action_lines(page_text: str, must_mention: str | None = None) -> list[str]:
             continue
         if not (ACTION_RE.search(line) and TARGET_HINT_RE.search(line)):
             continue
-        if line.count(",") > 5:
+        if max_commas is not None and line.count(",") > max_commas:
             continue  # an enumeration (a navbox caption that slipped in as a <p>)
         # Require real sentence punctuation: a navbox caption / list header ("Serotonin
         # reuptake inhibitors: Atomoxetine ...", "See also: ...") is a run of names with
@@ -194,7 +208,7 @@ def action_lines(page_text: str, must_mention: str | None = None) -> list[str]:
             continue
         seen.add(line)
         out.append(line)
-        if len(out) >= MAX_ACTION_LINES:
+        if limit is not None and len(out) >= limit:
             break
     return out
 
