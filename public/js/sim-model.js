@@ -450,11 +450,19 @@ export function solveCombination(target, candidates, {
     current = bestCand.r;
   }
   const active = activeOf(chosen, current.xs);
+  // A pick can pull AGAINST a wish: when the fixed drugs already overshoot a
+  // receptor, least squares adds an opposing ligand to come back down to it. That
+  // is arithmetically right and reads wrong as a recommendation, so each pick names
+  // the wished targets it opposes and the tab says so beside it.
+  const opposesOf = (vec) => targets.filter((tg, i) =>
+    target.has(tg) && yFull[i] !== 0 && Math.sign(vec[i]) === -Math.sign(yFull[i]));
   return {
-    picks: active.map((e) => ({ drug: e.c.drug, ratio: e.x })).sort((a, b) => b.ratio - a.ratio),
+    picks: active.map((e) => ({ drug: e.c.drug, ratio: e.x, opposes: opposesOf(e.c.vec) }))
+      .sort((a, b) => b.ratio - a.ratio),
     fit: current.fit,
     residual: current.residual,
+    // How many receptor rows the fit was judged over: a 100% over one wished row
+    // is a much weaker statement than 80% over twenty.
+    rows: m,
   };
 }
-
-function norm(v) { let s = 0; for (let i = 0; i < v.length; i++) s += v[i] * v[i]; return Math.sqrt(s); }

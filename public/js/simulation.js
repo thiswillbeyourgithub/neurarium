@@ -683,18 +683,24 @@ export function createSimulation({ body, data, deps, ui }) {
       }
       solveOut.textContent = "";
       solveOut.appendChild(el("p", "sim-fit",
-        t("sim.fit", { pct: Math.round(res.fit * 100) })));
+        t("sim.fit", { pct: Math.round(res.fit * 100), n: res.rows })));
       if (!res.picks.length) {
         solveOut.appendChild(el("p", "sim-empty", t("sim.noPicks")));
         return;
       }
       const picks = res.picks.map((p) => ({
-        drug: p.drug, ratio: Math.max(0.1, Math.round(p.ratio * 10) / 10),
+        drug: p.drug, ratio: Math.max(0.1, Math.round(p.ratio * 10) / 10), opposes: p.opposes,
       }));
       for (const p of picks) {
         const row = el("div", "sim-row");
         row.appendChild(el("span", "sim-name-static",
           `${p.drug.displayName || p.drug.name} × ${p.ratio.toFixed(1)}`));
+        // A pick pulling against a wish only makes sense as a correction of what
+        // the listed drugs overshoot; say so, or the pick reads as a wrong answer.
+        if (p.opposes && p.opposes.length) {
+          const names = p.opposes.map((id) => (targetById.get(id) || { name: id }).name).join(", ");
+          row.appendChild(el("span", "sim-caption", t("sim.pickOpposes", { targets: names })));
+        }
         const add = button("sim-add small", t("sim.addPick"));
         add.addEventListener("click", () => addDrug(p.drug, p.ratio));
         row.appendChild(add);

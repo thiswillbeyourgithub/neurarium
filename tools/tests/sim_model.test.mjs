@@ -123,6 +123,16 @@ test("solveCombination: finds the drug whose profile is the target, respects fix
   // A cap of 1 drug keeps the strongest single contributor.
   const r4 = solveCombination(target, [a, b, c], { maxDrugs: 1 });
   assert.equal(r4.picks.length, 1);
+  assert.equal(r.rows, 3);
+  assert.deepEqual(r.picks.map((p) => p.opposes), [[], []]);
+});
+
+test("solveCombination: a pick that pulls against a wish is named as opposing it", () => {
+  const blocker = drug("blk", [bind("d2", "block", 1)]);
+  const agonist = drug("ago", [bind("d2", "boost", 1)]);
+  // The fixed blocker overshoots a mild d2-block wish; the only way down is the agonist.
+  const r = solveCombination(new Map([["d2", -0.1]]), [agonist], { fixed: [{ drug: blocker, ratio: 1 }] });
+  assert.deepEqual(r.picks.map((p) => [p.drug.id, p.opposes]), [["ago", ["d2"]]]);
 });
 
 test("buildMatrix: skips direction-less bindings and drugs engaging no row", () => {
