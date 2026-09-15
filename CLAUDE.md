@@ -680,6 +680,21 @@ fixed Stahl list.
   molecule, so the applier keys by metabolite name and writes an **identical** list to each parent, the
   tally + viewer dedup it by folded name (counted / listed once, "metab. of A, B"), and `check_data` fails
   loud if two parents' inline copies ever diverge (a hand-edit backstop).
+- **Binding directions (Wikipedia).** An `affinity_only` binding has a measured Ki and no `action`,
+  so what the drug *does* at that target is a NOSOURCE `drug_binding_action` node; a drug's own
+  English Wikipedia article (corpus #9) often states that direction in prose where no assay can.
+  Pipeline, the same four steps as the CYP one: `tools/fetch/fetch_binding_directions.py` offers, per
+  drug, the prose lines naming one of its affinity-only targets (`fetch_metabolite_bindings.action_lines`
+  over the stored page, then the shared alias matcher `tools/target_aliases.py`) into
+  `binding_directions_worklist.json` with **no verdict of its own**; one LLM pass answers by candidate
+  **index** into `binding_directions_judged.json`; `tools/sourcing/apply_binding_directions.py`
+  gates it (drug offered, index resolves, target is a **currently** affinity-only binding of that
+  drug, action in `DRUG_ACTIONS`, the quote names the target under the very matcher that offered it,
+  the quote verbatim on the page) and is the sole writer of the direction; `recheck_quotes.py`
+  then stamps the judge. **Confirm-only**: it never adds a binding and never revises a direction
+  another corpus states. A binding whose article never discusses it stays a NOSOURCE
+  `drug_binding_action` node on purpose, which is most of them (an article states a handful of
+  directions, not a whole assay panel).
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
   median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
   assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as
