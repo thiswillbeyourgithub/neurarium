@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.87.0",
+      "date": "2026-09-16",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Drugs now carry a sourced time to peak: how long after a dose the blood concentration is at its highest. It sits beside the half-life in a new Timing section of the drug panel, with its own source pill, on the 90 drugs a corpus states it for.",
+          "commits": []
+        },
+        {
+          "category": "improved",
+          "text": "The simulation's plasma curve rises at each drug's own pace instead of a single assumed two hours for everyone. A drug that peaks in half an hour and one that peaks in eight now look different, and the warnings box says which of the two a given curve is drawn from.",
+          "commits": []
+        },
+        {
+          "category": "data",
+          "text": "The time-to-peak pass read both stored corpora, claimed 92 values and shipped 90: a second model rejected two of them, one sentence being about a combination product and the other about a breakdown product rather than the drug itself.",
+          "commits": []
+        }
+      ]
+    },
+    {
       "version": "3.86.0",
       "date": "2026-09-16",
       "entries": [
