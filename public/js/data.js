@@ -774,6 +774,13 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     d.halfLife = d.half_life || null;
     d.halfLifeSources = mapSources(d.half_life_sources);
     d.halfLifeProvenance = strongestGrade(d.half_life_sources);
+    // Time to peak plasma concentration (Tmax), same shape and same treatment: its
+    // own sourced node, and the other end of the curve js/sim-model.js draws (the T½
+    // sets the fall, this sets the rise). Null on the ~70% of drugs no corpus states
+    // a peak for; the simulation then uses its single assumed peak.
+    d.tmax = d.tmax || null;
+    d.tmaxSources = mapSources(d.tmax_sources);
+    d.tmaxProvenance = strongestGrade(d.tmax_sources);
     // Metabolism: which enzymes handle this drug, or are inhibited/induced by it.
     // Pharmacokinetics, so unlike a binding it lights nothing in the 3D scene; it
     // feeds the panel's Metabolism list, the Enzymes browse section, and the derived

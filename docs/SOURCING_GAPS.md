@@ -601,9 +601,15 @@ it would cost, and the verdict, so a later session does not re-survey it.
 
 ### Drug **time-to-peak (Tmax)**, and the wider PK the simulation would need (surveyed 2026-09-16)
 
-Asked for the simulation tab, which today gives **every** drug one assumed 2 h time-to-peak
+> **Step 1 shipped (3.87.0).** The prose pass below is done: `fetch_tmax.py` ->
+> `apply_tmax.py` -> `recheck_quotes.py` put a sourced Tmax on **90 drugs** (kind `drug_tmax`,
+> all 90 `verified`), and `js/sim-model.js` now rises to a drug's own peak where one exists.
+> The gap this section measures is therefore the **211 drugs still on the assumed 2 h**, which
+> is what the DailyMed corpus below would address.
+
+Asked for the simulation tab, which gave **every** drug one assumed 2 h time-to-peak
 (`TMAX_HOURS` in `js/sim-model.js`), so a drug that peaks in 20 minutes and one that peaks in
-8 hours draw the same curve. Per-drug Tmax is the cheapest real fix, and unlike the rest of the
+8 hours drew the same curve. Per-drug Tmax is the cheapest real fix, and unlike the rest of the
 PK list below it is genuinely sourceable.
 
 **Measured coverage over the 301 roster drugs**, against the corpora already on disk (a
@@ -625,7 +631,12 @@ and the real pass is prose.
 **Verdict: a Wikipedia prose pass reaches a third of the roster and no stored corpus reaches
 the rest.** It is the same four-step shape as every other pass here (worklist of candidate
 sentences -> one LLM pass answering by index -> quote-gated applier -> recheck), riding the
-existing `fetch_pharmacokinetics.py` machinery since it already scans for durations. For the
+existing `fetch_pharmacokinetics.py` machinery since it already scans for durations. Done: the
+fetcher offered 113 drugs / 171 candidate lines, the extraction claimed 92 (21 skipped as a
+metabolite's peak, a depot formulation, a subjective-effects time course, or a range the
+duration parser cannot express), and the Sonnet judge rejected 2 more (the dextroamphetamine
+sentence is about the mixed-salts product, the dimenhydrinate one gives its diphenhydramine
+moiety's peak), leaving 90. For the
 190 it cannot reach, the source to add would be **DailyMed** (the US SPL label archive: free,
 no key, machine-readable XML, and section 12.3 states Tmax for essentially every oral drug),
 as a new `pages_dir` corpus. Its limit is jurisdictional rather than technical: a roster drug

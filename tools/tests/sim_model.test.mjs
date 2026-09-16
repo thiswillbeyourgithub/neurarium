@@ -4,7 +4,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  TMAX_HOURS, P_FLOOR, bindingSign, toAxis, fromAxis, halfLifeHours, pkCurve,
+  TMAX_HOURS, P_FLOOR, bindingSign, toAxis, fromAxis, halfLifeHours, tmaxHours, pkCurve,
   ligandsOf, receptorProfile, pkFlags, buildMatrix, nnls, solveCombination,
 } from "../../public/js/sim-model.js";
 
@@ -32,6 +32,29 @@ test("halfLifeHours: midpoint of a range, null when absent", () => {
   assert.equal(halfLifeHours({ hours: 21, hours_max: 54 }), 37.5);
   assert.equal(halfLifeHours({ hours: 6 }), 6);
   assert.equal(halfLifeHours(null), null);
+});
+
+test("tmaxHours: the drug's own sourced peak, else the assumed one", () => {
+  assert.equal(tmaxHours({ tmax: { hours: 1, hours_max: 3 } }), 2);
+  assert.equal(tmaxHours({ tmax: { hours: 0.75 } }), 0.75);
+  assert.equal(tmaxHours({ tmax: null }), TMAX_HOURS);
+  assert.equal(tmaxHours(null), TMAX_HOURS);
+});
+
+test("ligandsOf: a sourced tmax moves the peak, an unsourced one keeps the assumption", () => {
+  // Same T½, different sourced peaks: only the rise changes, so the two curves are
+  // the evidence that a drug_tmax node reaches the plot at all.
+  const fast = ligandsOf(drug("fast", [bind("d2", "block", 1)],
+    { tmax: { hours: 0.5 } }))[0];
+  const slow = ligandsOf(drug("slow", [bind("d2", "block", 1)],
+    { tmax: { hours: 6, hours_max: 8 } }))[0];
+  const none = ligandsOf(drug("none", [bind("d2", "block", 1)]))[0];
+  assert.ok(Math.abs(fast.curve.tmax - 0.5) < 1e-6);
+  assert.ok(Math.abs(slow.curve.tmax - 7) < 1e-6);
+  assert.ok(Math.abs(none.curve.tmax - TMAX_HOURS) < 1e-6);
+  // The peak is still normalized to 1 whatever the rise, or the bars would rank
+  // drugs by how fast they are absorbed.
+  for (const l of [fast, slow, none]) assert.ok(Math.abs(l.curve.at(l.curve.tmax) - 1) < 1e-9);
 });
 
 test("pkCurve: peaks at TMAX_HOURS with height 1, halves every T½ late on", () => {

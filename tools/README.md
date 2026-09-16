@@ -424,6 +424,17 @@ Screenshots).
   (`pk_judged.json`) into `drugs_data.jsonl`, quote-gating each value verbatim on its Stahl page and
   resolving a metabolite's `drug_id` by norm-name match (never self-link). Idempotent, sole writer of
   `half_life`/`metabolites`. See CLAUDE.md Drugs (Half-life + active metabolites).
+- `tools/fetch/fetch_tmax.py` — stdlib. Offers, per drug, every line of its own stored Wikipedia article
+  (#9) and Stahl monograph (#1) that names a PEAK and carries a duration, pre-parsed into every
+  `{hours, hours_max?}` it states, into `tools/generated_cache/tmax_worklist.json`. States no verdict of
+  its own: the LLM pass answers only which candidate **index** is the drug's own oral time-to-peak. The
+  drugbox is deliberately not read (no Tmax row; its `Onset of action` is clinical onset). Importable as
+  a library, which is how the applier re-derives what was offered. See CLAUDE.md Drugs (Time-to-peak).
+- `tools/sourcing/apply_tmax.py` — stdlib. Merges `tmax_judged.json` into `drugs_data.jsonl` behind six
+  gates (drug in the dataset, drug offered by a fresh `fetch_tmax.build()`, index resolves, the judged
+  hours equal a duration the quote states (re-parsed here, so the model supplies no number),
+  `MAX_TMAX_HOURS` = 24 h oral plausibility, quote verbatim on its page). Idempotent, sole writer of
+  `tmax`/`tmax_sources`; writes no `llm` stamp, so `recheck_quotes.py` must run after it.
 - `tools/fetch/fetch_metabolite_bindings.py` — `uv run` (deps: beautifulsoup4). Reuses
   `fetch_wikipedia_pharmacology` as a library to mine each non-modeled active metabolite's own English
   Wikipedia article (an allow-list of confirmed own-articles; the rest fall back to the parent article
@@ -581,7 +592,9 @@ there is no node-level catch-all `sources` block.
   `uncertainty[]` (each: `kind` (a `meta.uncertainty_reasons` key), optional `args` (the i18n
   sentence's slots), and either `sources[]` or `absence:true`; non-empty = the orange ⚠ badge
   takes the pill over, see CLAUDE.md Source provenance)),
-  optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`, optional
+  optional `half_life` (`{hours, hours_max?}`, elimination T½) + `half_life_sources[]`,
+  optional `tmax` (same shape, time to peak plasma concentration, kind `drug_tmax`) + `tmax_sources[]`,
+  optional
   `enzymes[]` (each: `enzyme` (a `meta.enzymes` key), `role`, optional `strength`, `sources[]`;
   one node per (enzyme, role) pair, kind `drug_enzymes`, merged in from the committed
   `generated_cache/drug_enzymes.json` + `drug_enzymes_wikipedia.json`, never authored),

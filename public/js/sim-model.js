@@ -18,14 +18,17 @@
 // listed for the visitor in the tab's warnings box, keyed `sim.warn.*`, which says
 // in its own first line that the list is not exhaustive):
 //
-//   1. Pharmacokinetics. Only an elimination half-life is in the data (no dose, no
-//      Tmax, no bioavailability, no protein binding, no brain penetration), so each
-//      ligand gets a one-compartment oral single-dose curve (Bateman) with ONE assumed
-//      absorption time-to-peak shared by every drug (`TMAX_HOURS`), normalized to a
-//      peak of 1 and scaled by the ratio the visitor set. A drug's range T½ (`hours` +
-//      `hours_max`) is collapsed to its midpoint. An active metabolite is formed by
-//      the parent's elimination (its absorption rate = the parent's ke) and cleared by
-//      its own T½, with a formed fraction of 1 (unknown in the data).
+//   1. Pharmacokinetics. Only two durations are in the data (no dose, no
+//      bioavailability, no protein binding, no brain penetration), so each ligand gets
+//      a one-compartment oral single-dose curve (Bateman), normalized to a peak of 1
+//      and scaled by the ratio the visitor set: an elimination half-life sets how it
+//      falls, and the drug's own sourced time-to-peak (`drug.tmax`, kind `drug_tmax`)
+//      sets how it rises. A drug for which no corpus states a peak keeps the single
+//      assumed one (`TMAX_HOURS`), so the two populations are mixed on one plot and
+//      only the T½ tells them apart. Either duration's range (`hours` + `hours_max`)
+//      is collapsed to its midpoint. An active metabolite is formed by the parent's
+//      elimination (its absorption rate = the parent's ke) and cleared by its own T½,
+//      with a formed fraction of 1 (unknown in the data).
 //
 //   2. Receptor engagement. Per (ligand, target) the potency is 1/Ki (nM^-1) from the
 //      measured median Ki, signed by the binding's net effect: boost +1, block -1,
@@ -62,8 +65,9 @@
 //      distribution Vd (dose + F + Vd is what sets the plasma level at all), the
 //      plasma free fraction fu (bound drug binds no receptor), the unbound
 //      brain-to-plasma ratio Kp,uu (the blood-brain barrier and its efflux pumps
-//      make this vary ~100-fold between CNS drugs), and Tmax / an absorption rate for
-//      the time course, which is the one piece already on the roadmap. Two further
+//      make this vary ~100-fold between CNS drugs). Tmax, the one piece of that chain
+//      that a corpus does state, is now sourced per drug (point 1), which fixes the
+//      SHAPE of the curve and nothing about its height. Two further
 //      terms are not PK at all and would still be missing: the endogenous ligand a
 //      drug competes with (dopamine at D2 is why an in-vivo occupancy never matches
 //      an in-vitro Ki), and efficacy, since occupancy is not effect.
@@ -76,7 +80,7 @@
 //      plot's unit from "index" into "% occupied"; until then the axis is deliberately
 //      unitless and the caption says so.
 
-export const TMAX_HOURS = 2; // assumed oral time-to-peak, every drug alike
+export const TMAX_HOURS = 2; // assumed oral time-to-peak, for a drug with no sourced one
 export const ASSUMED_PKI = 7; // a directed binding with no Ki: assumed 100 nM
 export const P_FLOOR = 1e-4; // 1/Ki at 10 µM, the PDSP "inactive" cut-off
 export const LN2 = Math.log(2);
@@ -106,10 +110,24 @@ export function fromAxis(y) {
   return Math.sign(y) * P_FLOOR * (Math.pow(10, Math.abs(y)) - 1);
 }
 
-/** A drug's single T½ in hours: the midpoint of a range, null when absent. */
+/**
+ * A stored `{hours, hours_max?}` duration as a single number: the midpoint of a
+ * range, null when absent. Used for both per-drug durations, which share that shape
+ * (a T½ of "21-54 h" is 37.5 h here, a Tmax of "1-3 h" is 2 h).
+ */
 export function halfLifeHours(hl) {
   if (!hl || !(hl.hours > 0)) return null;
   return hl.hours_max > hl.hours ? (hl.hours + hl.hours_max) / 2 : hl.hours;
+}
+
+/**
+ * The time-to-peak to draw a drug's rise with: its own sourced `tmax` where the
+ * dataset has one, else the model-wide `TMAX_HOURS` assumption. Only ~30% of the
+ * roster states a peak anywhere (see docs/SOURCING_GAPS.md), so the fallback is not
+ * an edge case and the warnings box keeps saying so.
+ */
+export function tmaxHours(drug) {
+  return halfLifeHours(drug && drug.tmax) || TMAX_HOURS;
 }
 
 /**
@@ -156,13 +174,18 @@ export function pkCurve(halfLifeH, { ka = null, tmax = TMAX_HOURS } = {}) {
  * just draws no PK line and weighs 1 at every time).
  */
 export function ligandsOf(drug, { metabolites = true } = {}) {
-  const own = pkCurve(halfLifeHours(drug.halfLife));
+  const tmax = tmaxHours(drug);
+  const own = pkCurve(halfLifeHours(drug.halfLife), { tmax });
   const out = [{ key: drug.id, name: drug.name, drug, metabolite: null,
     bindings: drug.bindings || [], curve: own }];
   if (!metabolites) return out;
   for (const m of drug.metabolites || []) {
     const hl = halfLifeHours(m.halfLife);
-    const curve = hl && own ? pkCurve(hl, { ka: own.ke }) : hl ? pkCurve(hl) : null;
+    // A metabolite rides the parent's absorption where the parent draws a curve at
+    // all; with no parent T½ there is no ke to borrow, so it falls back to the
+    // parent's time-to-peak (the metabolite appears as the parent is absorbed).
+    const curve = hl && own ? pkCurve(hl, { ka: own.ke })
+      : hl ? pkCurve(hl, { tmax }) : null;
     out.push({ key: `${drug.id}/${m.name}`, name: m.name, drug, metabolite: m,
       bindings: m.bindings || [], curve });
   }

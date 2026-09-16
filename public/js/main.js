@@ -3984,31 +3984,48 @@ function createInfoPanel(data, sourcingModal) {
       const nonLinearPk = Boolean(drug.enzymes && drug.enzymes.length
         && (metabAddons.length || (drug.autoModulation || []).length));
 
-      // Elimination half-life (T½): its own sourced node, placed between brands and
-      // the binding list, formatted to days/hours/minutes and pilled like any node.
-      if (drug.halfLife) {
+      // The two per-drug durations, each its own sourced node, placed between brands
+      // and the binding list and formatted to days/hours/minutes. They share one
+      // section because they are the two ends of one curve (the peak is when the
+      // drug arrives, the T½ how long it takes to leave), which is also how
+      // js/sim-model.js reads them; either may be missing on its own.
+      if (drug.halfLife || drug.tmax) {
         const hlEl = el("div", "info-bindings info-halflife");
-        hlEl.appendChild(el("h3", null, t("drug.halfLife")));
-        const chip = el("span", "hl-chip");
-        chip.appendChild(el("span", "hl-val", formatHalfLife(drug.halfLife)));
-        chip.appendChild(drug.halfLifeSources && drug.halfLifeSources.length
-          ? makeProvenancePill(drug.halfLifeProvenance, sourcesTip(drug.halfLifeSources))
-          : makeProvenancePill(drug.halfLifeProvenance || null));
-        if (nonLinearPk) {
-          const warn = el("button", "hl-warn",
-            (data.meta.addonTones || {}).caution || "⚠");
-          warn.type = "button";
-          warn.title = t("drug.nonLinearPk");
-          warn.setAttribute("aria-label", t("drug.nonLinearPk"));
-          // Looked up at click time, not captured now: the Metabolism section is
-          // built further down this same render, so it does not exist yet here.
-          warn.addEventListener("click", () => {
-            const sec = body.querySelector('[data-tour-sec="metabolism"]');
-            if (sec) flashRow(sec);
-          });
-          chip.appendChild(warn);
+        hlEl.appendChild(el("h3", null, t("drug.pkTiming")));
+        if (drug.tmax) {
+          const tchip = el("span", "hl-chip");
+          const tlabel = el("span", "hl-label", `${t("drug.tmax")} `);
+          tlabel.title = t("drug.tmaxTip");
+          tchip.appendChild(tlabel);
+          tchip.appendChild(el("span", "hl-val", formatHalfLife(drug.tmax)));
+          tchip.appendChild(drug.tmaxSources && drug.tmaxSources.length
+            ? makeProvenancePill(drug.tmaxProvenance, sourcesTip(drug.tmaxSources))
+            : makeProvenancePill(drug.tmaxProvenance || null));
+          hlEl.appendChild(tchip);
         }
-        hlEl.appendChild(chip);
+        if (drug.halfLife) {
+          const chip = el("span", "hl-chip");
+          chip.appendChild(el("span", "hl-label", `${t("drug.halfLife")} `));
+          chip.appendChild(el("span", "hl-val", formatHalfLife(drug.halfLife)));
+          chip.appendChild(drug.halfLifeSources && drug.halfLifeSources.length
+            ? makeProvenancePill(drug.halfLifeProvenance, sourcesTip(drug.halfLifeSources))
+            : makeProvenancePill(drug.halfLifeProvenance || null));
+          if (nonLinearPk) {
+            const warn = el("button", "hl-warn",
+              (data.meta.addonTones || {}).caution || "⚠");
+            warn.type = "button";
+            warn.title = t("drug.nonLinearPk");
+            warn.setAttribute("aria-label", t("drug.nonLinearPk"));
+            // Looked up at click time, not captured now: the Metabolism section is
+            // built further down this same render, so it does not exist yet here.
+            warn.addEventListener("click", () => {
+              const sec = body.querySelector('[data-tour-sec="metabolism"]');
+              if (sec) flashRow(sec);
+            });
+            chip.appendChild(warn);
+          }
+          hlEl.appendChild(chip);
+        }
         body.appendChild(hlEl);
       }
 
@@ -5499,6 +5516,7 @@ const KIND_LABELS = {
   drug_brands: "about.kindDrugBrands",
   drug_categories: "about.kindDrugCategories",
   drug_half_life: "about.kindDrugHalfLife",
+  drug_tmax: "about.kindDrugTmax",
   drug_enzymes: "about.kindDrugEnzymes",
   enzyme_variability: "about.kindEnzymeVariability",
   drug_metabolites: "about.kindDrugMetabolites",
@@ -5842,6 +5860,12 @@ function buildKindExample(kind, data, nav) {
         || focusableDrugs.find((x) => x.halfLife);
       const s = d && d.halfLife && formatHalfLife(d.halfLife);
       return s ? line(d.name, `T½ ${s}`, () => nav.drug(d)) : null;
+    }
+    case "drug_tmax": {
+      const d = pick(focusableDrugs, (x) => x.id === "olanzapine" && x.tmax)
+        || focusableDrugs.find((x) => x.tmax);
+      const s = d && d.tmax && formatHalfLife(d.tmax);
+      return s ? line(d.name, `${t("drug.tmax")} ${s}`, () => nav.drug(d)) : null;
     }
     case "drug_enzymes": {
       // A metabolism row: the drug is the clickable subject, the notion names the

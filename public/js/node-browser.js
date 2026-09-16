@@ -45,6 +45,7 @@ const KIND_ORDER = [
   "drug_brands",
   "drug_categories",
   "drug_half_life",
+  "drug_tmax",
   "drug_enzymes",
   "drug_metabolites",
   "drug_metabolite_enzyme",
@@ -274,6 +275,10 @@ export function collectNodes(data, deps, opts = {}) {
     if (d.halfLife) {
       push("drug_half_life", d.name, `T½ ${formatHalfLife(d.halfLife)}`,
         d.halfLifeProvenance, go, { sources: d.halfLifeSources });
+    }
+    if (d.tmax) {
+      push("drug_tmax", d.name, `${t("drug.tmax")} ${formatHalfLife(d.tmax)}`,
+        d.tmaxProvenance, go, { sources: d.tmaxSources });
     }
     for (const e of d.enzymes || []) {
       push("drug_enzymes", d.name, `${e.label}: ${e.roleLabel}`, e.provenance, go, e);

@@ -96,6 +96,8 @@ in `meta.provenance_stats.by_kind`):
   node; `region` na/eu/fr orders them per locale, never shown; na from Stahl, eu/fr from Wikipedia)
 - drug class classification -> a drug's `categories` (+ `category_provenance`) -> `drug_categories`
 - drug elimination half-life (T½) -> a drug's `half_life` (+ `half_life_sources`) -> `drug_half_life`
+- drug time-to-peak (Tmax) -> a drug's `tmax` (+ `tmax_sources`) -> `drug_tmax` (the other end of the same
+  curve as the T½ above, separately sourced and separately missing, so a separate kind)
 - drug metabolism role -> a drug's `enzymes[]` (`{enzyme, role, strength?}`) -> `drug_enzymes`
   (one node per (enzyme, role) pair; pharmacokinetics, so it has no anatomy, see Drug metabolism)
 - enzyme population variability -> an enzyme's `variability` -> `enzyme_variability` (ONE node
@@ -650,7 +652,8 @@ fixed Stahl list.
   `metabolites[]` list, each an **active metabolite** (a `name`, its own `half_life`/`half_life_sources`,
   and `sources`; graded node kind `drug_metabolites`; a `drug_id` when the metabolite is itself a modeled
   drug so the panel links to it). `showDrug` renders T½ as an `hl-chip` (auto-scaled to min/h/days via
-  `formatHalfLife`, between the brands and the **Acts on** list) and an **Active metabolites** section
+  `formatHalfLife`, in a **Timing** section between the brands and the **Acts on** list, beside the Tmax
+  chip below) and an **Active metabolites** section
   (each row its name + its own T½ chip, "a bit like the Ki"). In `buildDrugLegend` a default-on
   **Show active metabolites** toggle (`#drugs-show-metabolites`, persisted `neurarium.metabolites`) adds
   discreet indented `.metab-item` bullets under each parent (a bullet + its parent both stay visible
@@ -658,6 +661,20 @@ fixed Stahl list.
   `tools/fetch/fetch_pharmacokinetics.py` scans the Stahl page spans into `pk_worklist.json`, one LLM pass
   writes `pk_judged.json`, and `tools/sourcing/apply_pharmacokinetics.py` quote-gates + merges T½/metabolites
   into `drugs_data.jsonl` (idempotent, sole writer).
+- **Time-to-peak (Tmax, Wikipedia + Stahl).** A drug carries a `tmax` in the same `{hours, hours_max?}`
+  shape (kind `drug_tmax`, source `tmax_sources`), chipped beside the T½ in the panel's **Timing**
+  section. It is what turns the simulation's single assumed peak into a per-drug one
+  (`js/sim-model.js` `tmaxHours`): the T½ says how the curve falls, this says how it rises, and a drug
+  with no sourced peak keeps `TMAX_HOURS`. Four-step pipeline, over both corpora since neither covers
+  the roster (see `docs/SOURCING_GAPS.md`): `tools/fetch/fetch_tmax.py` offers every peak-naming,
+  duration-carrying line of the drug's own Wikipedia article (#9) and Stahl monograph (#1) into
+  `tmax_worklist.json` with **no verdict of its own**, one LLM pass answers by candidate **index** into
+  `tmax_judged.json`, `tools/sourcing/apply_tmax.py` gates it (drug offered; index resolves; the judged
+  hours are one the quote actually states, re-parsed by code, so the model never supplies a number;
+  `MAX_TMAX_HOURS` = 24 h, which is what rejects a depot or implant peaking in days; quote verbatim on
+  its page) and is the sole writer, then `recheck_quotes.py` stamps the judge. The drugbox is
+  deliberately not read: it has no Tmax row, and its `Onset of action` row is clinical onset on 60 of
+  its 76 rows.
 - **Non-modeled-metabolite receptor bindings (Wikipedia).** A metabolite that is not itself a modeled
   drug carries its own `bindings[]` (kind `drug_metabolite_bindings`), sourced from the metabolite's own
   English Wikipedia pharmacology (corpus #9 `wikipedia_pharm`) + the PDSP Ki database (corpus #5): **target
@@ -826,7 +843,7 @@ out; it is also why potencies add instead of competing, since competition is mea
 every C is on one real scale and would break the linearity the inverse solve needs.
 
 - The maths live in `js/sim-model.js`, whose header states each shortcut once (one assumed
-  time-to-peak, a range T½ collapsed to its midpoint, potencies added with no competition, a
+  time-to-peak for a drug with no sourced one, a range T½ collapsed to its midpoint, potencies added with no competition, a
   fully-formed metabolite); the warnings box is that list rendered for the visitor, plus the
   enzyme-sharing flags `pkFlags` derives from the picked drugs.
 - The tab is `js/simulation.js` (sections + state) over `js/sim-plots.js` (the two SVGs): a plasma
