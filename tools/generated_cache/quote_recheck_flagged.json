@@ -1,1 +1,15 @@
-[]
+[
+ {
+  "qid": "q_7190394e785b",
+  "corpus": "wikipedia_pharm",
+  "page": "propranolol",
+  "heading": null,
+  "present": true,
+  "supports": false,
+  "quote": "In addition to blockade of adrenergic receptors , propranolol has very weak inhibitory effects on the norepinephrine transporter and/or weakly stimulates norepinephrine release (i.e., the concentration of norepinephrine is increased in the synapse ). Since propranolol blocks β-adrenoceptors, the increase in synaptic norepinephrine only results in α-adrenoceptor activation, with the α 1 -adrenoceptor being particularly important for effects observed in animal models . Therefore, it can be looked upon as a weak indirect α 1 -adrenoceptor agonist in addition to potent β-adrenoceptor antagonist. In addition to its effects on the adrenergic system, there is evidence that indicates that propranolol may act as a relatively weak antagonist of certain serotonin receptors , namely the 5-HT 1A , 5-HT 1B , and 5-HT 2B receptors . The latter may be involved in the effectiveness of propranolol in the treatment of migraine at high doses. (–)-Propranolol is not a silent antagonist of the serotonin 5-HT 1A receptor but is instead a very weak partial agonist of the receptor.",
+  "claims": [
+   "drug:propranolol/bindings[5ht1a:partial_agonist] | Drug Propranolol acts on target '5-HT1A' as partial_agonist."
+  ],
+  "note": "drug:propranolol/bindings[5ht1a:partial_agonist] | The sentence stating the partial-agonist action at 5-HT1A is scoped explicitly to '(-)-Propranolol' (the levo enantiomer), not propranolol generally; the quote's own preceding sentence instead describes generic 'propranolol' as a weak antagonist (hedged 'may act as') at 5-HT1A. A statement about one enantiomer does not support a claim about the drug."
+ }
+]

@@ -1,0 +1,414 @@
+{
+ "amisulpride": [],
+ "amitriptyline": [],
+ "amoxapine": [],
+ "apomorphine": [],
+ "aripiprazole": [],
+ "asenapine": [
+  {
+   "target": "5ht2b",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "5ht5a",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "5ht6",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "alpha2a",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "alpha2b",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "alpha2c",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "d1",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "d3",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "d4",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "h2",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "benperidol": [],
+ "benztropine": [],
+ "blonanserin": [],
+ "brexpiprazole": [
+  {
+   "target": "5ht2b",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "alpha1a",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "alpha1d",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "bromocriptine": [],
+ "buprenorphine": [
+  {
+   "target": "delta",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "bupropion": [],
+ "buspirone": [
+  {
+   "target": "d2",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "d3",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "d4",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "alpha2",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "cabergoline": [
+  {
+   "target": "5ht7",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "cariprazine": [],
+ "chlorpromazine": [
+  {
+   "target": "h2",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "m2",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "chlorprothixene": [],
+ "citalopram": [],
+ "clomipramine": [
+  {
+   "target": "5ht2a",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "d3",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "clonidine": [],
+ "clozapine": [],
+ "cyamemazine": [],
+ "cyproheptadine": [
+  {
+   "target": "5ht2b",
+   "action": "antagonist",
+   "index": 2
+  }
+ ],
+ "desipramine": [],
+ "dexmedetomidine": [],
+ "diphenhydramine": [
+  {
+   "target": "5ht2c",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "dmt": [],
+ "dothiepin": [],
+ "doxepin": [
+  {
+   "target": "h2",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "5ht2a",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "5ht2c",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "m1",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "m2",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "m3",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "m4",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "m5",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "escitalopram": [],
+ "fenfluramine": [],
+ "fluphenazine": [],
+ "fluvoxamine": [],
+ "haloperidol": [
+  {
+   "target": "sigma1",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "ibogaine": [],
+ "imipramine": [],
+ "ketanserin": [],
+ "loxapine": [],
+ "lsd": [],
+ "lurasidone": [
+  {
+   "target": "d3",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "maprotiline": [
+  {
+   "target": "d2",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "5ht7",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "mdma": [
+  {
+   "target": "5ht1a",
+   "action": "partial_agonist",
+   "index": 1
+  },
+  {
+   "target": "5ht2a",
+   "action": "partial_agonist",
+   "index": 1
+  },
+  {
+   "target": "5ht2c",
+   "action": "partial_agonist",
+   "index": 1
+  }
+ ],
+ "melperone": [],
+ "mescaline": [],
+ "mesoridazine": [],
+ "methamphetamine": [],
+ "metoclopramide": [],
+ "mianserin": [],
+ "mirtazapine": [],
+ "molindone": [],
+ "nefazodone": [
+  {
+   "target": "5ht2c",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "dat",
+   "action": "reuptake_inhibitor",
+   "index": 1
+  },
+  {
+   "target": "h1",
+   "action": "antagonist",
+   "index": 1
+  }
+ ],
+ "nortriptyline": [
+  {
+   "target": "5ht2a",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "olanzapine": [],
+ "opipramol": [],
+ "oxycodone": [
+  {
+   "target": "delta",
+   "action": "agonist",
+   "index": 0
+  }
+ ],
+ "paliperidone": [
+  {
+   "target": "h1",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "alpha2",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "paroxetine": [],
+ "pentazocine": [],
+ "perphenazine": [],
+ "phencyclidine": [],
+ "pimavanserin": [],
+ "pimozide": [
+  {
+   "target": "d4",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "pipamperone": [],
+ "pitolisant": [],
+ "pizotifen": [],
+ "pramipexole": [],
+ "prochlorperazine": [],
+ "promethazine": [],
+ "propranolol": [],
+ "protriptyline": [],
+ "quetiapine": [],
+ "reboxetine": [
+  {
+   "target": "sert",
+   "action": "reuptake_inhibitor",
+   "index": 0
+  }
+ ],
+ "risperidone": [],
+ "rizatriptan": [],
+ "ropinirole": [
+  {
+   "target": "d4",
+   "action": "agonist",
+   "index": 0
+  }
+ ],
+ "rotigotine": [
+  {
+   "target": "alpha2b",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "sertindole": [],
+ "sertraline": [],
+ "sulpiride": [
+  {
+   "target": "5ht2a",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "sumatriptan": [],
+ "tapentadol": [],
+ "thioridazine": [],
+ "thiothixene": [
+  {
+   "target": "d3",
+   "action": "antagonist",
+   "index": 0
+  },
+  {
+   "target": "5ht7",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "tiapride": [],
+ "trazodone": [
+  {
+   "target": "5ht1a",
+   "action": "partial_agonist",
+   "index": 0
+  },
+  {
+   "target": "alpha2",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "trifluoperazine": [],
+ "trimipramine": [
+  {
+   "target": "d2",
+   "action": "antagonist",
+   "index": 0
+  }
+ ],
+ "varenicline": [
+  {
+   "target": "nachr_a7",
+   "action": "agonist",
+   "index": 0
+  }
+ ],
+ "venlafaxine": [],
+ "vortioxetine": [],
+ "yohimbine": [],
+ "ziprasidone": [],
+ "zotepine": [],
+ "zuclopenthixol": []
+}
