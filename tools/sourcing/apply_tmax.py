@@ -26,8 +26,9 @@ Six gates, all re-derived here rather than trusted from the judged file:
    at 6.5-7.1 days is a real number about a different formulation), and writing it
    would make the tablet's curve nonsense;
 6. the quote is verbatim, under ``check_data.normalize_for_match``, on the page it
-   cites: ``data_sources/books/stahl/pages/<n>.md`` for corpus #1, or
-   ``data_sources/wikipedia/pages/<slug>.md`` for corpus #9.
+   cites: ``data_sources/books/stahl/pages/<n>.md`` for corpus #1,
+   ``data_sources/wikipedia/pages/<slug>.md`` for corpus #9, or
+   ``data_sources/dailymed/pages/<setid>.md`` for corpus #14.
 
 Sole writer of ``tmax`` / ``tmax_sources`` and idempotent: a re-run replaces a judged
 drug's value from the current judged file, and a drug absent from it is left untouched.
@@ -62,6 +63,7 @@ import fetch_tmax                                               # noqa: E402
 JUDGED_PATH = ROOT / "tools" / "generated_cache" / "tmax_judged.json"
 STAHL_PAGES = ROOT / "data_sources" / "books" / "stahl" / "pages"
 WIKI_PAGES = ROOT / "data_sources" / "wikipedia" / "pages"
+DAILYMED_PAGES = ROOT / "data_sources" / "dailymed" / "pages"
 
 # Above this, the line is about a depot / implant / modified-release formulation, not
 # the oral single dose the simulation draws (gate 5). 24 h is generous: the slowest
@@ -86,6 +88,9 @@ def page_path(corpus: str, page) -> Path | None:
     if corpus == "wikipedia_pharm":
         slug = str(page or "")
         return (WIKI_PAGES / f"{slug}.md") if slug else None
+    if corpus == "dailymed":
+        setid = str(page or "")
+        return (DAILYMED_PAGES / f"{setid}.md") if setid else None
     return None
 
 

@@ -1,4 +1,9 @@
 {
+ "2cb": {
+  "index": 1,
+  "hours": 2.0,
+  "hours_max": 2.4
+ },
  "acamprosate": {
   "index": 0,
   "hours": 6.0
@@ -8,13 +13,27 @@
   "hours": 1.0,
   "hours_max": 2.5
  },
+ "alprazolam": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 2.0
+ },
  "amitriptyline": {
   "index": 0,
   "hours": 4.0
  },
+ "amoxapine": {
+  "index": 0,
+  "hours": 1.5
+ },
  "amphetamine_dl": {
   "index": 0,
   "hours": 3.0
+ },
+ "apomorphine": {
+  "index": 0,
+  "hours": 0.167,
+  "hours_max": 1.0
  },
  "aripiprazole": {
   "index": 0,
@@ -25,6 +44,10 @@
   "index": 0,
   "hours": 1.5,
   "hours_max": 2.0
+ },
+ "asenapine": {
+  "index": 0,
+  "hours": 1.0
  },
  "atomoxetine": {
   "index": 2,
@@ -43,6 +66,14 @@
   "index": 0,
   "hours": 4.0
  },
+ "brivaracetam": {
+  "index": 0,
+  "hours": 1.0
+ },
+ "bromocriptine": {
+  "index": 0,
+  "hours": 2.5
+ },
  "bupropion": {
   "index": 0,
   "hours": 1.5
@@ -56,6 +87,20 @@
   "index": 0,
   "hours": 1.0,
   "hours_max": 2.0
+ },
+ "cannabidiol": {
+  "index": 0,
+  "hours": 2.5,
+  "hours_max": 5.0
+ },
+ "citalopram": {
+  "index": 0,
+  "hours": 4.0
+ },
+ "clobazam": {
+  "index": 0,
+  "hours": 0.5,
+  "hours_max": 4.0
  },
  "clomipramine": {
   "index": 0,
@@ -86,6 +131,16 @@
   "hours": 1.0,
   "hours_max": 2.0
  },
+ "deutetrabenazine": {
+  "index": 1,
+  "hours": 3.0,
+  "hours_max": 4.0
+ },
+ "diazepam": {
+  "index": 2,
+  "hours": 1.0,
+  "hours_max": 1.5
+ },
  "diphenhydramine": {
   "index": 0,
   "hours": 2.0,
@@ -113,6 +168,10 @@
   "index": 0,
   "hours": 6.0
  },
+ "escitalopram": {
+  "index": 0,
+  "hours": 5.0
+ },
  "esketamine": {
   "index": 0,
   "hours": 0.333,
@@ -122,6 +181,15 @@
   "index": 0,
   "hours": 1.0,
   "hours_max": 6.0
+ },
+ "eszopiclone": {
+  "index": 0,
+  "hours": 1.0
+ },
+ "ethanol": {
+  "index": 0,
+  "hours": 0.5,
+  "hours_max": 1.5
  },
  "fluoxetine": {
   "index": 0,
@@ -133,15 +201,28 @@
   "hours": 3.0,
   "hours_max": 8.0
  },
+ "fluvoxamine": {
+  "index": 0,
+  "hours": 3.0,
+  "hours_max": 8.0
+ },
  "gabapentin": {
   "index": 0,
   "hours": 3.0,
   "hours_max": 4.0
  },
+ "galantamine": {
+  "index": 0,
+  "hours": 1.0
+ },
  "glutethimide": {
   "index": 0,
   "hours": 1.0,
   "hours_max": 6.0
+ },
+ "guanfacine": {
+  "index": 0,
+  "hours": 2.6
  },
  "haloperidol": {
   "index": 0,
@@ -181,9 +262,18 @@
   "index": 1,
   "hours": 1.0
  },
+ "lithium": {
+  "index": 0,
+  "hours": 0.25,
+  "hours_max": 3.0
+ },
  "lofexidine": {
   "index": 0,
   "hours": 3.0
+ },
+ "lorazepam": {
+  "index": 0,
+  "hours": 2.0
  },
  "lsd": {
   "index": 2,
@@ -195,14 +285,33 @@
   "hours": 1.0,
   "hours_max": 2.0
  },
+ "lurasidone": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 3.0
+ },
  "maprotiline": {
   "index": 0,
   "hours": 12.0
+ },
+ "meclizine": {
+  "index": 0,
+  "hours": 1.5
  },
  "memantine": {
   "index": 0,
   "hours": 3.0,
   "hours_max": 7.0
+ },
+ "mescaline": {
+  "index": 1,
+  "hours": 1.6,
+  "hours_max": 2.3
+ },
+ "methadone": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 7.5
  },
  "methamphetamine": {
   "index": 0,
@@ -213,7 +322,16 @@
   "index": 1,
   "hours": 2.0
  },
+ "metoclopramide": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 2.0
+ },
  "milnacipran": {
+  "index": 0,
+  "hours": 2.0
+ },
+ "mirtazapine": {
   "index": 0,
   "hours": 2.0
  },
@@ -227,6 +345,14 @@
   "hours": 1.5,
   "hours_max": 2.5
  },
+ "molindone": {
+  "index": 0,
+  "hours": 1.5
+ },
+ "nabilone": {
+  "index": 0,
+  "hours": 2.0
+ },
  "naltrexone": {
   "index": 0,
   "hours": 1.0
@@ -235,14 +361,58 @@
   "index": 0,
   "hours": 2.0
  },
+ "olanzapine": {
+  "index": 2,
+  "hours": 6.0
+ },
+ "opipramol": {
+  "index": 1,
+  "hours": 3.0
+ },
+ "oxazepam": {
+  "index": 0,
+  "hours": 3.0
+ },
+ "oxycodone": {
+  "index": 2,
+  "hours": 0.5,
+  "hours_max": 1.0
+ },
+ "paliperidone": {
+  "index": 1,
+  "hours": 24.0
+ },
  "paroxetine": {
   "index": 0,
   "hours": 6.0,
   "hours_max": 10.0
  },
+ "pentazocine": {
+  "index": 0,
+  "hours": 1.7
+ },
+ "perampanel": {
+  "index": 0,
+  "hours": 0.5,
+  "hours_max": 2.5
+ },
+ "perphenazine": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 3.0
+ },
  "phenelzine": {
   "index": 0,
   "hours": 0.717
+ },
+ "phentermine": {
+  "index": 0,
+  "hours": 6.0
+ },
+ "phenytoin": {
+  "index": 0,
+  "hours": 4.0,
+  "hours_max": 12.0
  },
  "pimavanserin": {
   "index": 0,
@@ -257,6 +427,10 @@
   "index": 0,
   "hours": 3.0
  },
+ "pizotifen": {
+  "index": 0,
+  "hours": 5.0
+ },
  "pramipexole": {
   "index": 0,
   "hours": 2.0
@@ -269,6 +443,15 @@
   "index": 0,
   "hours": 2.0
  },
+ "pseudoephedrine": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 4.0
+ },
+ "quazepam": {
+  "index": 0,
+  "hours": 2.0
+ },
  "quetiapine": {
   "index": 0,
   "hours": 1.5
@@ -276,6 +459,29 @@
  "ramelteon": {
   "index": 0,
   "hours": 0.75
+ },
+ "rasagiline": {
+  "index": 0,
+  "hours": 0.5,
+  "hours_max": 0.7
+ },
+ "risperidone": {
+  "index": 1,
+  "hours": 1.0
+ },
+ "rivastigmine": {
+  "index": 1,
+  "hours": 1.0
+ },
+ "rizatriptan": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 1.5
+ },
+ "ropinirole": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 2.0
  },
  "scopolamine": {
   "index": 0,
@@ -285,6 +491,10 @@
   "index": 0,
   "hours": 0.5,
   "hours_max": 1.5
+ },
+ "sibutramine": {
+  "index": 0,
+  "hours": 1.0
  },
  "sodium_oxybate": {
   "index": 0,
@@ -300,6 +510,20 @@
   "hours": 2.0,
   "hours_max": 3.0
  },
+ "tapentadol": {
+  "index": 0,
+  "hours": 1.25
+ },
+ "tasimelteon": {
+  "index": 0,
+  "hours": 0.5,
+  "hours_max": 3.0
+ },
+ "temazepam": {
+  "index": 1,
+  "hours": 1.2,
+  "hours_max": 1.6
+ },
  "thc": {
   "index": 0,
   "hours": 1.0,
@@ -314,6 +538,18 @@
   "index": 0,
   "hours": 1.0
  },
+ "tiapride": {
+  "index": 0,
+  "hours": 1.0
+ },
+ "tizanidine": {
+  "index": 0,
+  "hours": 1.0
+ },
+ "topiramate": {
+  "index": 0,
+  "hours": 2.0
+ },
  "tranylcypromine": {
   "index": 0,
   "hours": 1.0,
@@ -324,10 +560,32 @@
   "hours": 1.0,
   "hours_max": 2.0
  },
+ "triazolam": {
+  "index": 0,
+  "hours": 2.0
+ },
  "trimipramine": {
   "index": 0,
   "hours": 2.0,
   "hours_max": 4.0
+ },
+ "valproate": {
+  "index": 2,
+  "hours": 4.0
+ },
+ "varenicline": {
+  "index": 0,
+  "hours": 3.0,
+  "hours_max": 4.0
+ },
+ "vigabatrin": {
+  "index": 0,
+  "hours": 1.0
+ },
+ "vilazodone": {
+  "index": 1,
+  "hours": 4.0,
+  "hours_max": 5.0
  },
  "vortioxetine": {
   "index": 0,
@@ -337,6 +595,11 @@
  "zaleplon": {
   "index": 0,
   "hours": 0.75
+ },
+ "ziprasidone": {
+  "index": 1,
+  "hours": 6.0,
+  "hours_max": 8.0
  },
  "zolpidem": {
   "index": 0,
@@ -351,64 +614,5 @@
   "index": 0,
   "hours": 1.0,
   "hours_max": 2.0
- },
- "ethanol": {
-  "index": 0,
-  "hours": 0.5,
-  "hours_max": 1.5
- },
- "apomorphine": {
-  "index": 0,
-  "hours": 0.167,
-  "hours_max": 1.0
- },
- "rasagiline": {
-  "index": 0,
-  "hours": 0.5,
-  "hours_max": 0.7
- },
- "oxycodone": {
-  "index": 2,
-  "hours": 0.5,
-  "hours_max": 1.0
- },
- "meclizine": {
-  "index": 0,
-  "hours": 1.5
- },
- "mescaline": {
-  "index": 1,
-  "hours": 1.6,
-  "hours_max": 2.3
- },
- "2cb": {
-  "index": 1,
-  "hours": 2.0,
-  "hours_max": 2.4
- },
- "pizotifen": {
-  "index": 0,
-  "hours": 5.0
- },
- "phentermine": {
-  "index": 0,
-  "hours": 6.0
- },
- "pseudoephedrine": {
-  "index": 0,
-  "hours": 1.0,
-  "hours_max": 4.0
- },
- "sibutramine": {
-  "index": 0,
-  "hours": 1.0
- },
- "tiapride": {
-  "index": 0,
-  "hours": 1.0
- },
- "opipramol": {
-  "index": 1,
-  "hours": 3.0
  }
 }

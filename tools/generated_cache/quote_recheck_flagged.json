@@ -1,28 +1,54 @@
 [
  {
-  "qid": "q_2fe158c82e68",
-  "corpus": "wikipedia_pharm",
-  "page": "dimenhydrinate",
+  "qid": "q_2f12294e7766",
+  "corpus": "dailymed",
+  "page": "1d2cd01c-05e7-44cf-a71d-0f474e826b7e",
   "heading": null,
   "present": true,
   "supports": false,
-  "quote": "The diphenhydramine component requires about 2 hours to reach peak concentration after either oral or sublingual administration of dimen­hydrinate, and has a half-life of 5 – 6 hours in healthy adults.",
+  "quote": "The C max is similar during a migraine attack and during a migraine-free period, but the T max is slightly later during the attack, approximately 2.5 hours compared with 2.0 hours.",
   "claims": [
-   "drug:dimenhydrinate/tmax | Drug Dimenhydrinate reaches its peak plasma concentration 2.0 hours after a dose."
+   "drug:sumatriptan/tmax | Drug Sumatriptan reaches its peak plasma concentration 2.5 hours after a dose."
   ],
-  "note": "The quote attributes the 2-hour Tmax to 'the diphenhydramine component' of dimenhydrinate, a different (dissociated) molecule, not to dimenhydrinate itself; the claim is about the parent drug dimenhydrinate."
+  "note": "Quote gives two conditional Tmax values (2.0h migraine-free vs 2.5h during a migraine attack, not a plain-oral baseline); claim asserts 2.5h unconditionally as if it were the general Tmax, but the sentence never states 2.5h as the drug's default/average peak time."
  },
  {
-  "qid": "q_7bfefd5d71fb",
-  "corpus": "wikipedia_pharm",
-  "page": "dextroamphetamine",
+  "qid": "q_6b85cd34c334",
+  "corpus": "dailymed",
+  "page": "de96349a-5fee-4de9-921c-e453d44b3203",
   "heading": null,
   "present": true,
   "supports": false,
-  "quote": "The immediate-release and extended release variants of salts of both isomers reach peak plasma concentrations at 3 hours and 7 hours post-dose respectively.",
+  "quote": "Based on population pharmacokinetic analysis of plasma donepezil concentrations measured in patients with Alzheimer’s disease, following oral dosing, peak plasma concentration is achieved for donepezil hydrochloride 23 mg tablets in approximately 8 hours, compared with 3 hours for donepezil hydrochloride 10 mg tablets.",
   "claims": [
-   "drug:amphetamine_d/tmax | Drug Amphetamine (D) reaches its peak plasma concentration 3.0 hours after a dose."
+   "drug:donepezil/tmax | Drug Donepezil reaches its peak plasma concentration 3.0 hours after a dose."
   ],
-  "note": "Quote is about the mixed-amphetamine-salts product ('salts of both isomers', i.e. a combination formulation like Adderall reaching 3h/7h for IR/ER), not pure dextroamphetamine (D-amphetamine) monotherapy; the claim attributes this figure to the D-isomer drug alone which the quote does not state."
+  "note": "the sentence gives two dose/formulation-specific Tmax values (~8h for the 23mg tablet vs 3h for the 10mg tablet); the claim silently picks the 10mg figure as the drug's general Tmax with no qualification that it applies only to that strength"
+ },
+ {
+  "qid": "q_9281c167d139",
+  "corpus": "dailymed",
+  "page": "9a443652-6aff-4e27-83fe-90c65fa0f3c1",
+  "heading": null,
+  "present": true,
+  "supports": false,
+  "quote": "The mean T max values across dose groups (0.25, 0.5, and 1.0 mg/kg) range from 0.17 to 2.65 hours.",
+  "claims": [
+   "drug:midazolam/tmax | Drug Midazolam reaches its peak plasma concentration 0.17-2.65 hours after a dose."
+  ],
+  "note": "Quote is mean Tmax across weight-based dose groups (0.25-1.0 mg/kg) from a pediatric syrup PK study (ages 6mo-<16y), not a general adult oral Tmax; presenting it as 'Drug reaches peak plasma concentration after a dose' overgeneralizes a conditional, population/formulation-specific figure."
+ },
+ {
+  "qid": "q_f7976e19dbd9",
+  "corpus": "dailymed",
+  "page": "f969e2bc-6297-4e29-89d3-a3685a2c7c6b",
+  "heading": null,
+  "present": true,
+  "supports": false,
+  "quote": "The median time to maximum plasma concentration (Tmax) across these four doses of ABSTRAL varied from 30 to 60 minutes (range of 15 - 240 minutes).",
+  "claims": [
+   "drug:fentanyl/tmax | Drug Fentanyl reaches its peak plasma concentration 0.5-1.0 hours after a dose."
+  ],
+  "note": "Quote is ABSTRAL's Tmax, a sublingual (oral mucosa) immediate-release tablet for breakthrough cancer pain, explicitly contrasted in the same paragraph with orally-swallowed fentanyl (which the label says undergoes pronounced first-pass metabolism). This is a different route from plain oral administration, not a general fentanyl Tmax."
  }
 ]

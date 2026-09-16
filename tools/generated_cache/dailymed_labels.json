@@ -1,0 +1,452 @@
+{
+ "alprazolam": {
+  "published_date": "Sep 02, 2026",
+  "setid": "a23063c0-099a-4256-b95f-3a857bbf704b",
+  "spl_version": 23,
+  "title": "ALPRAZOLAM TABLET [ACTAVIS PHARMA, INC.]"
+ },
+ "amantadine": {
+  "published_date": "Jun 24, 2026",
+  "setid": "5119801d-a5cb-4adf-96b2-08cc3a0ba594",
+  "spl_version": 6,
+  "title": "AMANTADINE CAPSULE [AMERICAN HEALTH PACKAGING]"
+ },
+ "amisulpride": {
+  "published_date": "Jun 23, 2026",
+  "setid": "ab23bc6e-b6a8-165f-e053-2a95a90ab144",
+  "spl_version": 8,
+  "title": "BARHEMSYS (AMISULPRIDE) INJECTION, SOLUTION [ACACIA PHARMA LTD]"
+ },
+ "amoxapine": {
+  "published_date": "Feb 23, 2026",
+  "setid": "a16297df-3158-48db-85e5-5cd506885556",
+  "spl_version": 20,
+  "title": "AMOXAPINE TABLET [ACTAVIS PHARMA, INC.]"
+ },
+ "asenapine": {
+  "published_date": "Apr 28, 2025",
+  "setid": "16e1cc9f-7699-49ea-b179-acb65e162304",
+  "spl_version": 16,
+  "title": "ASENAPINE TABLET [ALEMBIC PHARMACEUTICALS INC.]"
+ },
+ "atropine": {
+  "published_date": "Aug 04, 2026",
+  "setid": "a116af5c-ba4c-408c-9a02-4bc33772aa8d",
+  "spl_version": 4,
+  "title": "ATROPINE (ATROPINE SULFATE) SOLUTION/ DROPS [GLAND PHARMA LIMITED]"
+ },
+ "brivaracetam": {
+  "published_date": "Aug 25, 2026",
+  "setid": "11ca0e1d-1c0d-4357-9ebd-ee1e87185dde",
+  "spl_version": 2,
+  "title": "BRIVARACETAM TABLET, FILM COATED [NOVADOZ PHARMACEUTICALS LLC]"
+ },
+ "bromocriptine": {
+  "published_date": "Aug 03, 2026",
+  "setid": "d69003ee-0b6f-47a9-834e-ba59c02f566c",
+  "spl_version": 14,
+  "title": "BROMOCRIPTINE MESYLATE CAPSULE [ZYDUS PHARMACEUTICALS USA INC.]"
+ },
+ "cannabidiol": {
+  "published_date": "Jun 15, 2026",
+  "setid": "8bf27097-4870-43fb-94f0-f3d0871d1eec",
+  "spl_version": 35,
+  "title": "EPIDIOLEX (CANNABIDIOL) SOLUTION [JAZZ PHARMACEUTICALS, INC.]"
+ },
+ "carbamazepine": {
+  "published_date": "Sep 02, 2026",
+  "setid": "87d343a8-84d5-4cdd-b0a0-629311b51f11",
+  "spl_version": 6,
+  "title": "CARBAMAZEPINE TABLET [ALEMBIC PHARMACEUTICALS INC.]"
+ },
+ "carbidopa": {
+  "published_date": "Jun 29, 2026",
+  "setid": "9d4e886e-edec-471d-b619-bf4828a6b7ce",
+  "spl_version": 5,
+  "title": "CARBIDOPA, LEVODOPA AND ENTACAPONE TABLET, FILM COATED [ALEMBIC PHARMACEUTICALS INC.]"
+ },
+ "chlordiazepoxide": {
+  "published_date": "Jul 13, 2026",
+  "setid": "9aba3135-00ff-47ba-b926-55eb16b361bf",
+  "spl_version": 14,
+  "title": "CHLORDIAZEPOXIDE HYDROCHLORIDE CAPSULE [REMEDYREPACK INC.]"
+ },
+ "citalopram": {
+  "published_date": "Sep 07, 2026",
+  "setid": "0109f365-bebd-4810-a56f-4451e10245db",
+  "spl_version": 2,
+  "title": "CITALOPRAM (CITALOPRAM HYDROBROMIDE) TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "clobazam": {
+  "published_date": "Jul 13, 2026",
+  "setid": "07e0ae51-cc71-427f-83cb-311b7fcc5993",
+  "spl_version": 12,
+  "title": "CLOBAZAM SUSPENSION [ASCEND LABORATORIES, LLC]"
+ },
+ "cocaine": {
+  "published_date": "Jan 19, 2026",
+  "setid": "d724b5b4-6654-4bf5-9eed-e2c7943084ed",
+  "spl_version": 3,
+  "title": "NUMBRINO (COCAINE HYDROCHLORIDE NASAL) SOLUTION [OMNIVIUM PHARMACEUTICALS LLC.]"
+ },
+ "deutetrabenazine": {
+  "published_date": "Mar 24, 2025",
+  "setid": "7ea3c60a-45c7-44cc-afc2-d87fa53993c0",
+  "spl_version": 35,
+  "title": "AUSTEDO (DEUTETRABENAZINE) TABLET, COATED AUSTEDO (DEUTETRABENAZINE) KIT AUSTEDO XR (DEUTETRABENAZINE) TABLET, FILM COATED, EXTENDED RELEASE [TEVA NEUROSCIENCE, INC.]"
+ },
+ "diazepam": {
+  "published_date": "Sep 14, 2026",
+  "setid": "c397a9da-862f-4f3f-8109-7d21691de53a",
+  "spl_version": 16,
+  "title": "DIAZEPAM TABLET [MYLAN PHARMACEUTICALS INC.]"
+ },
+ "donepezil": {
+  "published_date": "Sep 10, 2026",
+  "setid": "de96349a-5fee-4de9-921c-e453d44b3203",
+  "spl_version": 2,
+  "title": "DONEPEZIL HYDROCHLORIDE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "entacapone": {
+  "published_date": "Jun 29, 2026",
+  "setid": "9d4e886e-edec-471d-b619-bf4828a6b7ce",
+  "spl_version": 5,
+  "title": "CARBIDOPA, LEVODOPA AND ENTACAPONE TABLET, FILM COATED [ALEMBIC PHARMACEUTICALS INC.]"
+ },
+ "escitalopram": {
+  "published_date": "Jul 27, 2026",
+  "setid": "2db02476-325f-ee47-a7e5-b5aed56c364c",
+  "spl_version": 15,
+  "title": "ESCITALOPRAM (ESCITALOPRAM OXALATE) TABLET, FILM COATED [JUBILANT CADISTA PHARMACEUTICALS INC.]"
+ },
+ "eszopiclone": {
+  "published_date": "Sep 11, 2026",
+  "setid": "9dfe774a-2c7a-4e10-bedd-cde64ad28676",
+  "spl_version": 2,
+  "title": "ESZOPICLONE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "fentanyl": {
+  "published_date": "Jan 14, 2015",
+  "setid": "f969e2bc-6297-4e29-89d3-a3685a2c7c6b",
+  "spl_version": 2,
+  "title": "ABSTRAL (FENTANYL CITRATE) TABLET [GALENA BIOPHARMA, INC.]"
+ },
+ "flibanserin": {
+  "published_date": "Dec 23, 2025",
+  "setid": "3819daf3-e935-2c53-c527-e1d57922f394",
+  "spl_version": 15,
+  "title": "ADDYI (FLIBANSERIN) TABLET, FILM COATED [SPROUT PHARMACEUTICALS, INC.]"
+ },
+ "flumazenil": {
+  "published_date": "Jul 13, 2026",
+  "setid": "56452ba8-521d-1f84-e063-6294a90af6fc",
+  "spl_version": 1,
+  "title": "FLUMAZENIL INJECTION, SOLUTION [HF ACQUISITION CO LLC, DBA HEALTHFIRST]"
+ },
+ "fluvoxamine": {
+  "published_date": "Sep 14, 2026",
+  "setid": "6eeb14df-6fcf-a737-5359-5744eb4accea",
+  "spl_version": 16,
+  "title": "FLUVOXAMINE MALEATE TABLET [APOTEX CORP]"
+ },
+ "furosemide": {
+  "published_date": "Sep 15, 2026",
+  "setid": "0b3d986c-eecc-adbe-e063-6294a90a0fb2",
+  "spl_version": 3,
+  "title": "FUROSEMIDE TABLET [NUCARE PHARMACEUTICALS,INC.]"
+ },
+ "galantamine": {
+  "published_date": "Jul 06, 2026",
+  "setid": "261889d3-41c8-4655-98f7-41317778e7a1",
+  "spl_version": 2,
+  "title": "GALANTAMINE TABLET, FILM COATED [BRYANT RANCH PREPACK]"
+ },
+ "guanfacine": {
+  "published_date": "Sep 15, 2026",
+  "setid": "4248d53e-4dc3-452b-96f8-5d715c254c26",
+  "spl_version": 3,
+  "title": "GUANFACINE TABLET [REMEDYREPACK INC.]"
+ },
+ "hydromorphone": {
+  "published_date": "Aug 26, 2026",
+  "setid": "59d88866-e1ba-9d97-e063-6394a90a7b27",
+  "spl_version": 1,
+  "title": "HYDROMORPHONE HYDROCHLORIDE TABLET [REDPHARM DRUG]"
+ },
+ "lacosamide": {
+  "published_date": "Aug 24, 2026",
+  "setid": "b9a0ca8c-593c-48e8-b2a7-d30d5f6e6a9b",
+  "spl_version": 3,
+  "title": "LACOSAMIDE SOLUTION [NOVADOZ PHARMACEUTICALS LLC]"
+ },
+ "levetiracetam": {
+  "published_date": "Sep 11, 2026",
+  "setid": "0348fec4-d919-4307-ac90-35360819bc00",
+  "spl_version": 7,
+  "title": "LEVETIRACETAM TABLET, FILM COATED [CARDINAL HEALTH 107, LLC]"
+ },
+ "lithium": {
+  "published_date": "Sep 10, 2026",
+  "setid": "b839ff4b-f62d-41ab-a823-550a756d58ec",
+  "spl_version": 3,
+  "title": "LITHIUM CARBONATE TABLET LITHIUM CARBONATE CAPSULE, GELATIN COATED [HIKMA PHARMACEUTICALS USA INC.]"
+ },
+ "lorazepam": {
+  "published_date": "Sep 11, 2026",
+  "setid": "c0810422-b732-4c04-97d8-c1521c401ef4",
+  "spl_version": 1,
+  "title": "LORAZEPAM TABLET [CLINICAL SOLUTIONS WHOLESALE, LLC]"
+ },
+ "lurasidone": {
+  "published_date": "Sep 15, 2026",
+  "setid": "b94e9272-ed67-4af8-827a-4b8cc3b168a1",
+  "spl_version": 2,
+  "title": "LURASIDONE HYDROCHLORIDE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "methadone": {
+  "published_date": "Sep 10, 2026",
+  "setid": "540edd43-165d-4257-b989-3bccc8f54afb",
+  "spl_version": 2,
+  "title": "METHADONE HYDROCHLORIDE TABLET [AMERICAN HEALTH PACKAGING]"
+ },
+ "metoclopramide": {
+  "published_date": "Aug 20, 2026",
+  "setid": "595439ae-cf01-821c-e063-6294a90af16a",
+  "spl_version": 1,
+  "title": "METOCLOPRAMIDE TABLET [APHENA PHARMA SOLUTIONS - TENNESSEE, LLC ]"
+ },
+ "midazolam": {
+  "published_date": "Jun 03, 2026",
+  "setid": "9a443652-6aff-4e27-83fe-90c65fa0f3c1",
+  "spl_version": 6,
+  "title": "MIDAZOLAM HYDROCHLORIDE SYRUP [PRECISION DOSE INC.]"
+ },
+ "mirtazapine": {
+  "published_date": "Sep 15, 2026",
+  "setid": "67e753ad-9919-416b-9e8f-aab0fa808066",
+  "spl_version": 23,
+  "title": "MIRTAZAPINE TABLET, FILM COATED [A-S MEDICATION SOLUTIONS]"
+ },
+ "molindone": {
+  "published_date": "Dec 19, 2025",
+  "setid": "1275e92f-9573-4d0c-8e77-1c9ac47696d2",
+  "spl_version": 5,
+  "title": "MOLINDONE HYDROCHLORIDE TABLET [EPIC PHARMA, LLC]"
+ },
+ "morphine": {
+  "published_date": "Aug 31, 2026",
+  "setid": "6654b91e-3b3f-4062-ac65-a2a70f942da4",
+  "spl_version": 4,
+  "title": "MORPHINE SULFATE SOLUTION [PRECISION DOSE, INC.]"
+ },
+ "nabilone": {
+  "published_date": "May 25, 2022",
+  "setid": "83c7ac15-ece9-47de-b83c-d575544fa449",
+  "spl_version": 2,
+  "title": "CESAMET (NABILONE) CAPSULE [BAUSCH HEALTH US LLC]"
+ },
+ "nefazodone": {
+  "published_date": "Nov 17, 2025",
+  "setid": "51ff7db5-aaf9-4c3c-86e6-958ebf16b60f",
+  "spl_version": 12,
+  "title": "NEFAZODONE HYDROCHLORIDE TABLET [TEVA PHARMACEUTICALS USA, INC.]"
+ },
+ "olanzapine": {
+  "published_date": "Sep 15, 2026",
+  "setid": "b7f27239-c22e-46d4-a313-50270cc19445",
+  "spl_version": 10,
+  "title": "OLANZAPINE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "oxazepam": {
+  "published_date": "Nov 17, 2025",
+  "setid": "a0d5a4c1-ec79-42e6-8e8f-ae4d144edb43",
+  "spl_version": 20,
+  "title": "OXAZEPAM CAPSULE, GELATIN COATED [ACTAVIS PHARMA, INC.]"
+ },
+ "paliperidone": {
+  "published_date": "Jun 15, 2026",
+  "setid": "71985eb4-07df-41c9-8b9a-85f39e92b7d0",
+  "spl_version": 5,
+  "title": "PALIPERIDONE TABLET, EXTENDED RELEASE [AJANTA PHARMA USA INC.]"
+ },
+ "pentazocine": {
+  "published_date": "Jun 22, 2026",
+  "setid": "a28450a0-ac93-4235-b9a6-58cdf24773cb",
+  "spl_version": 29,
+  "title": "PENTAZOCINE AND NALOXONE (PENTAZOCINE HYDROCHLORIDE AND NALOXONE HYDROCHLORIDE) TABLET [ACTAVIS PHARMA, INC.]"
+ },
+ "perampanel": {
+  "published_date": "Aug 20, 2026",
+  "setid": "bc8f7cf2-c19c-4235-859f-9ff1dd21908e",
+  "spl_version": 4,
+  "title": "PERAMPANEL TABLET, FILM COATED [TEVA PHARMACEUTICALS, INC.]"
+ },
+ "perphenazine": {
+  "published_date": "Sep 10, 2026",
+  "setid": "5fbfe9da-26e8-4705-98f3-42acd3d7b439",
+  "spl_version": 20,
+  "title": "PERPHENAZINE TABLET, FILM COATED [PAR HEALTH USA, LLC]"
+ },
+ "phenytoin": {
+  "published_date": "Jun 26, 2026",
+  "setid": "363cd347-d25e-42b9-9ce7-30642f3cb353",
+  "spl_version": 22,
+  "title": "EXTENDED PHENYTOIN SODIUM (PHENYTOIN SODIUM) CAPSULE [REMEDYREPACK INC.]"
+ },
+ "quazepam": {
+  "published_date": "Nov 17, 2025",
+  "setid": "f7d63f3f-5303-48ab-bce2-35fd62c45799",
+  "spl_version": 17,
+  "title": "QUAZEPAM TABLET [ATLAND PHARMACEUTICALS, LLC]"
+ },
+ "risperidone": {
+  "published_date": "Sep 14, 2026",
+  "setid": "3261e8cf-cc6e-4011-9246-aee623ad8971",
+  "spl_version": 3,
+  "title": "RISPERIDONE TABLET [REMEDYREPACK INC.]"
+ },
+ "rivastigmine": {
+  "published_date": "Nov 21, 2025",
+  "setid": "52781229-ee82-43f9-a113-4419a611978d",
+  "spl_version": 2,
+  "title": "RIVASTIGMINE TARTRATE CAPSULE [AMERICAN HEALTH PACKAGING]"
+ },
+ "rizatriptan": {
+  "published_date": "Aug 31, 2026",
+  "setid": "8e36b946-cf2a-44d9-9ba7-4385cfe6b360",
+  "spl_version": 1,
+  "title": "RIZAFILM (RIZATRIPTAN BENZOATE) FILM [A-S MEDICATION SOLUTIONS]"
+ },
+ "ropinirole": {
+  "published_date": "Sep 07, 2026",
+  "setid": "cdc63b7a-062a-4519-a63e-e48a356f641c",
+  "spl_version": 3,
+  "title": "ROPINIROLE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "rotigotine": {
+  "published_date": "Sep 14, 2026",
+  "setid": "939e28c5-f3a9-42c0-9a2d-8d471d82a6e0",
+  "spl_version": 22,
+  "title": "NEUPRO (ROTIGOTINE) PATCH, EXTENDED RELEASE NEUPRO (ROTIGOTINE) KIT [UCB, INC.]"
+ },
+ "sertraline": {
+  "published_date": "Sep 14, 2026",
+  "setid": "7efc1dd5-8671-4bed-9c16-ef6b9f36afc4",
+  "spl_version": 4,
+  "title": "SERTRALINE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "sildenafil": {
+  "published_date": "Sep 02, 2026",
+  "setid": "174ef537-e3e6-42bd-a478-47b930ddc761",
+  "spl_version": 7,
+  "title": "SILDENAFIL TABLET, FILM COATED [PREFERRED PHARMACEUTICALS, INC.]"
+ },
+ "sumatriptan": {
+  "published_date": "Sep 10, 2026",
+  "setid": "1d2cd01c-05e7-44cf-a71d-0f474e826b7e",
+  "spl_version": 16,
+  "title": "SUMATRIPTAN SUCCINATE TABLET, FILM COATED [MYLAN PHARMACEUTICALS INC.]"
+ },
+ "tapentadol": {
+  "published_date": "Sep 15, 2026",
+  "setid": "5b769a76-5ca5-b2e9-e063-6394a90a1b1b",
+  "spl_version": 1,
+  "title": "TAPENTADOL HYDROCHLORIDE TABLET, FILM COATED [AVKARE]"
+ },
+ "tasimelteon": {
+  "published_date": "Sep 03, 2026",
+  "setid": "ce5a2fa3-ed54-422d-96c2-1821496eb32f",
+  "spl_version": 6,
+  "title": "TASIMELTEON CAPSULE, GELATIN COATED [TEVA PHARMACEUTICALS, INC.]"
+ },
+ "temazepam": {
+  "published_date": "Sep 10, 2026",
+  "setid": "1c08d30d-7c27-a09a-5240-7050771d5cc7",
+  "spl_version": 22,
+  "title": "TEMAZEPAM CAPSULE [BRYANT RANCH PREPACK]"
+ },
+ "tetrabenazine": {
+  "published_date": "Apr 09, 2026",
+  "setid": "5867189c-17bd-4e70-a079-c4730f9950d1",
+  "spl_version": 9,
+  "title": "TETRABENAZINE TABLET [OCEANSIDE PHARMACEUTICALS]"
+ },
+ "tizanidine": {
+  "published_date": "Sep 11, 2026",
+  "setid": "a42f3479-f2c2-8214-d547-c5cae9bfed1e",
+  "spl_version": 16,
+  "title": "TIZANIDINE TABLET [DR. REDDY'S LABORATORIES LIMITED]"
+ },
+ "tolcapone": {
+  "published_date": "Jan 06, 2021",
+  "setid": "dd367eec-359a-4065-b5c3-7c0107c823fe",
+  "spl_version": 7,
+  "title": "TOLCAPONE TABLET, FILM COATED [OCEANSIDE PHARMACEUTICALS]"
+ },
+ "topiramate": {
+  "published_date": "Sep 07, 2026",
+  "setid": "3f99b26b-79b9-4efb-aa2c-2868e1e126c8",
+  "spl_version": 3,
+  "title": "TOPIRAMATE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "tramadol": {
+  "published_date": "Aug 26, 2026",
+  "setid": "e5005d9e-91cb-4ff8-bcf2-b5ee70cf4f3f",
+  "spl_version": 15,
+  "title": "TRAMADOL HYDROCHLORIDE TABLET, FILM COATED [AUROBINDO PHARMA LIMITED]"
+ },
+ "triazolam": {
+  "published_date": "Jul 13, 2026",
+  "setid": "5add318e-11b9-42f8-b052-0d8cebb32fcf",
+  "spl_version": 26,
+  "title": "TRIAZOLAM TABLET [MYLAN PHARMACEUTICALS INC.]"
+ },
+ "valproate": {
+  "published_date": "Jun 22, 2026",
+  "setid": "8d5fc1c1-d3c0-497e-971b-6c4dba9a3fad",
+  "spl_version": 3,
+  "title": "VALPROATE SODIUM INJECTION, SOLUTION [SAGENT PHARMACEUTICALS]"
+ },
+ "varenicline": {
+  "published_date": "Aug 27, 2026",
+  "setid": "59e125e3-5204-122b-e063-6394a90a0092",
+  "spl_version": 1,
+  "title": "VARENICLINE TABLET, FILM COATED [APHENA PHARMA SOLUTIONS - TENNESSEE, LLC ]"
+ },
+ "vigabatrin": {
+  "published_date": "Aug 14, 2026",
+  "setid": "93ba3894-fd97-4432-9f2d-e7050371e91f",
+  "spl_version": 2,
+  "title": "VIGABATRIN TABLET [EDENBRIDGE PHARMACEUTICALS LLC.]"
+ },
+ "vilazodone": {
+  "published_date": "Nov 17, 2025",
+  "setid": "061efdcc-40ea-4647-8cc8-01cd1ccca68b",
+  "spl_version": 2,
+  "title": "VILAZODONE HYDROCHLORIDE TABLET [PREFERRED PHARMACEUTICALS INC.]"
+ },
+ "xanomeline": {
+  "published_date": "Aug 21, 2026",
+  "setid": "8f0e73bf-6025-44f6-ab64-0983322de0df",
+  "spl_version": 6,
+  "title": "COBENFY (XANOMELINE AND TROSPIUM CHLORIDE) CAPSULE, COATED PELLETS COBENFY (XANOMELINE AND TROSPIUM CHLORIDE) KIT [E.R. SQUIBB & SONS, L.L.C.]"
+ },
+ "ziprasidone": {
+  "published_date": "Aug 28, 2026",
+  "setid": "b1f52226-4fb4-48bf-8bfd-0c9df6ca02fa",
+  "spl_version": 14,
+  "title": "ZIPRASIDONE HYDROCHLORIDE (ZIPRASIDONE HCL) CAPSULE [GOLDEN STATE MEDICAL SUPPLY, INC.]"
+ },
+ "zolpidem": {
+  "published_date": "Sep 07, 2026",
+  "setid": "59cc61da-838e-4add-b2d6-42b2b283a000",
+  "spl_version": 34,
+  "title": "ZOLPIDEM TARTRATE TABLET [A-S MEDICATION SOLUTIONS]"
+ },
+ "zuranolone": {
+  "published_date": "Jun 17, 2026",
+  "setid": "f18e53b0-d0bb-422d-8de7-ab64b7292b29",
+  "spl_version": 18,
+  "title": "ZURZUVAE (ZURANOLONE) CAPSULE [BIOGEN MA INC.]"
+ }
+}

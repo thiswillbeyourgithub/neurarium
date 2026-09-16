@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Build the time-to-peak (Tmax) worklist from the two corpora already on disk.
+"""Build the time-to-peak (Tmax) worklist from the three corpora already on disk.
 
 The simulation gives **every** drug one assumed 2 h time-to-peak (``TMAX_HOURS`` in
 ``js/sim-model.js``), so a drug that peaks in 20 minutes and one that peaks in 8 hours
@@ -12,15 +12,20 @@ This is the fetch / candidate-extraction half of the usual four-step pipeline, a
 states **no verdict of its own**: it offers, per drug, every line of the drug's own
 pages that names a peak AND carries a duration, already confirmed verbatim on a real
 page, and leaves the choosing to the LLM pass that reads
-``tools/generated_cache/tmax_worklist.json``. Two corpora are scanned, because neither
-covers the roster alone (measured over 301 drugs: Wikipedia prose reaches 102, Stahl
-13, and 190 state it nowhere):
+``tools/generated_cache/tmax_worklist.json``. Three corpora are scanned, because none
+covers the roster alone (measured over 301 drugs: Wikipedia prose reaches 102, Stahl 13,
+and 190 state it nowhere, which is what the labels are here for):
 
 * **#9 ``wikipedia_pharm``** (``page`` = the article slug), the drug's own stored
   English article, which states it as prose ("reaches peak levels after 1.0 to 2.5
   hours"). Every roster article is already stored, so this pass is fully offline.
 * **#1 ``stahl``** (``page`` = a page number), the monograph's Pharmacokinetics
   bullets, which state it on the newer monographs only.
+* **#14 ``dailymed``** (``page`` = a label set id), the US prescribing label's
+  pharmacokinetics section, which states a Tmax for essentially every oral drug
+  marketed in the US and is what reaches the drugs the two above miss. Stored by
+  ``tools/fetch/fetch_dailymed.py``, which picks one label per drug; this pass only
+  reads what that fetcher put on disk, so it stays offline too.
 
 The drugbox is deliberately NOT read. It has no Tmax row at all, and its ``Onset of
 action`` row is a different fact: on 60 of its 76 rows it is the clinical onset
@@ -60,6 +65,20 @@ import fetch_cyp_wikipedia as cypwiki                            # noqa: E402 (p
 import fetch_pharmacokinetics as pk                              # noqa: E402 (spans, units)
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "tmax_worklist.json"
+DAILYMED_PAGES = ROOT / "data_sources" / "dailymed" / "pages"
+DAILYMED_LABELS = ROOT / "tools" / "generated_cache" / "dailymed_labels.json"
+
+# Read once per process: the worklist walks every drug, and the label map is small.
+_LABELS_CACHE: dict | None = None
+
+
+def _dailymed_labels() -> dict:
+    """The drug -> chosen-label map ``fetch_dailymed.py`` wrote, empty when absent."""
+    global _LABELS_CACHE
+    if _LABELS_CACHE is None:
+        _LABELS_CACHE = (json.loads(DAILYMED_LABELS.read_text(encoding="utf-8"))
+                         if DAILYMED_LABELS.exists() else {})
+    return _LABELS_CACHE
 
 # A line worth offering: it names a PEAK. Kept permissive on purpose (a worklist
 # vetoes nothing), but it must name the peak itself, never merely an "onset", which is
@@ -162,6 +181,25 @@ def stahl_candidates(drug: dict, spans: dict) -> list[dict]:
     return out
 
 
+def dailymed_candidates(drug: dict) -> list[dict]:
+    """Candidates from the drug's stored US prescribing label (corpus #14).
+
+    The label chosen for a drug is whichever ``fetch_dailymed.py`` recorded in
+    ``dailymed_labels.json``, so the choice is made once, reviewably, in the fetcher
+    rather than re-litigated here.
+    """
+    labels = _dailymed_labels()
+    entry = labels.get(drug["id"])
+    if not entry:
+        return []
+    setid = entry.get("setid")
+    path = DAILYMED_PAGES / f"{setid}.md" if setid else None
+    if not path or not path.exists():
+        return []
+    return candidates_in(path.read_text(encoding="utf-8", errors="replace"),
+                         "dailymed", setid)
+
+
 def build(only: set[str] | None = None) -> dict[str, dict]:
     """The worklist: ``drug id -> {name, candidates[]}``, drugs with none omitted."""
     spans = pk.load_index() if pk.INDEX_PATH.exists() else {}
@@ -171,7 +209,11 @@ def build(only: set[str] | None = None) -> dict[str, dict]:
             continue
         # The article first: it is where this fact overwhelmingly lives, so the judged
         # index usually lands on candidate 0 and a Stahl line only corroborates it.
-        cands = wikipedia_candidates(drug) + stahl_candidates(drug, spans)
+        # The label comes last for the same reason and not because it is weaker: it is
+        # the primary source, but it is also the verbose one (a whole 12.3 section),
+        # and putting it first would push the one-sentence answers down the list.
+        cands = (wikipedia_candidates(drug) + stahl_candidates(drug, spans)
+                 + dailymed_candidates(drug))
         if cands:
             worklist[drug["id"]] = {"name": drug.get("name") or drug["id"],
                                     "candidates": cands}

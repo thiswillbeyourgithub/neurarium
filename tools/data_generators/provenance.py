@@ -697,6 +697,31 @@ SOURCE_CORPORA: dict[str, dict[str, str]] = {
         "export_sha256": dict(ENZYME_VARIABILITY_PINS),
         "machine": True,
     },
+    "dailymed": {
+        # Pharmacokinetics corpus #14: the US prescribing label (DailyMed / NLM
+        # Structured Product Labels). It exists for one fact the roster could not
+        # otherwise source: a drug's time to peak plasma concentration, which the
+        # already-stored corpora state for only a third of the drugs (Wikipedia prose
+        # 102, Stahl 13, 190 nowhere) while a label's section 12.3 states it for
+        # essentially every oral drug marketed in the US.
+        # tools/fetch/fetch_dailymed.py picks ONE label per drug (plain-oral forms
+        # preferred: a modified-release product states a real Tmax for a different
+        # product) and stores its pharmacokinetics sections as an author-side page;
+        # `page` is the label's **setid**, which is a stable public identifier, so a
+        # citation resolves to dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=<page>.
+        # The quote is a verbatim line of that page, gated exactly like a book page
+        # (author-side, skipped on a clone lacking data_sources/dailymed/, like every
+        # other pages*/). A primary regulatory source, unlike the tertiary #9.
+        # Licence: SPL content is submitted by manufacturers and published by the US
+        # National Library of Medicine as a government work under no copyright
+        # restriction; the citation below carries the attribution it asks for.
+        "ref": "DailyMed (U.S. NLM), prescribing label, clinical pharmacology",
+        "citation": "U.S. National Library of Medicine. DailyMed Structured Product "
+                    "Label, Pharmacokinetics section of the cited label. "
+                    "dailymed.nlm.nih.gov (label set id pinned per citation).",
+        "url": "https://dailymed.nlm.nih.gov/",
+        "pages_dir": "data_sources/dailymed/pages",
+    },
 }
 
 

@@ -44,6 +44,56 @@
    }
   ]
  },
+ "alprazolam": {
+  "name": "Alprazolam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "a23063c0-099a-4256-b95f-3a857bbf704b",
+    "line": "Following oral administration, peak plasma concentration of alprazolam (C max ) occurs in 1 to 2 hours post dose.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "amantadine": {
+  "name": "Amantadine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "5119801d-a5cb-4adf-96b2-08cc3a0ba594",
+    "line": "The time to peak concentration was 3.3 ± 1.5 hours (range 1.5 to 8 hours).",
+    "durations": [
+     {
+      "hours": 1.5
+     },
+     {
+      "hours": 1.5,
+      "hours_max": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "amisulpride": {
+  "name": "Amisulpride",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "ab23bc6e-b6a8-165f-e053-2a95a90ab144",
+    "line": "After an intravenous infusion, the peak plasma concentration of amisulpride is achieved at the end of the infusion period and the plasma concentration decreases to about 50% of the peak value within approximately 15 minutes.",
+    "durations": [
+     {
+      "hours": 0.25
+     }
+    ]
+   }
+  ]
+ },
  "amitriptyline": {
   "name": "Amitriptyline",
   "candidates": [
@@ -54,6 +104,21 @@
     "durations": [
      {
       "hours": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "amoxapine": {
+  "name": "Amoxapine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "a16297df-3158-48db-85e5-5cd506885556",
+    "line": "Amoxapine is absorbed rapidly and reaches peak blood levels approximately 90 minutes after ingestion.",
+    "durations": [
+     {
+      "hours": 1.5
      }
     ]
    }
@@ -168,6 +233,32 @@
      {
       "hours": 2.0,
       "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "asenapine": {
+  "name": "Asenapine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "16e1cc9f-7699-49ea-b179-acb65e162304",
+    "line": "Following a single 5 mg dose of asenapine, the mean C max was approximately 4 ng/mL and was observed at a mean t max of 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "16e1cc9f-7699-49ea-b179-acb65e162304",
+    "line": "Following sublingual administration, asenapine is rapidly absorbed with peak plasma concentrations occurring within 0.5 to 1.5 hours.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.5
      }
     ]
    }
@@ -353,6 +444,73 @@
    }
   ]
  },
+ "chlordiazepoxide": {
+  "name": "Chlordiazepoxide",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "9aba3135-00ff-47ba-b926-55eb16b361bf",
+    "line": "It takes several hours for peak blood levels to be reached and the half-life of the drug is between 24 and 48 hours.",
+    "durations": [
+     {
+      "hours": 48.0
+     }
+    ]
+   }
+  ]
+ },
+ "citalopram": {
+  "name": "Citalopram",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "0109f365-bebd-4810-a56f-4451e10245db",
+    "line": "Following a single oral dose (40 mg tablet) of citalopram, peak blood levels occur at about 4 hours.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "clobazam": {
+  "name": "Clobazam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "07e0ae51-cc71-427f-83cb-311b7fcc5993",
+    "line": "The time to peak concentrations (T max ) of clobazam tablets under fasted conditions ranged from 0.5 to 4 hours after single- or multiple-dose administrations.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 4.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "07e0ae51-cc71-427f-83cb-311b7fcc5993",
+    "line": "After single dose administration of the oral suspension under fasted conditions, the T max ranged from 0.5 to 2 hours.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "07e0ae51-cc71-427f-83cb-311b7fcc5993",
+    "line": "Co-administration of ketoconazole (a strong CYP3A4 inhibitor) 400 mg once-daily for 5 days increased clobazam AUC by 54%, with an insignificant effect on clobazam C max .",
+    "durations": [
+     {
+      "hours": 120.0
+     }
+    ]
+   }
+  ]
+ },
  "clomipramine": {
   "name": "Clomipramine",
   "candidates": [
@@ -460,6 +618,16 @@
       "hours": 0.052
      }
     ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d724b5b4-6654-4bf5-9eed-e2c7943084ed",
+    "line": "T max includes time 0 (the start of pledget insertion to pledget removal (20 minutes) to the time C max was observed, i.e.",
+    "durations": [
+     {
+      "hours": 0.333
+     }
+    ]
    }
   ]
  },
@@ -534,6 +702,35 @@
    }
   ]
  },
+ "deutetrabenazine": {
+  "name": "Deutetrabenazine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "7ea3c60a-45c7-44cc-afc2-d87fa53993c0",
+    "line": "Peak plasma concentrations (C max ) of deutetrabenazine, deuterated α-HTBZ, and β-HTBZ are reached within approximately 3 hours, followed by sustained plateaus for several hours allowing for a 24-hour dosing interval.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 24.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "7ea3c60a-45c7-44cc-afc2-d87fa53993c0",
+    "line": "Peak plasma concentrations (C max ) of deutetrabenazine, deuterated α-HTBZ and β-HTBZ are reached within 3 to 4 hours after dosing.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
  "diazepam": {
   "name": "Diazepam",
   "candidates": [
@@ -558,6 +755,34 @@
      {
       "hours": 0.167,
       "hours_max": 0.75
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "c397a9da-862f-4f3f-8109-7d21691de53a",
+    "line": "After oral administration > 90% of diazepam is absorbed and the average time to achieve peak plasma concentrations is 1-1.5 hours with a range of 0.25 to 2.5 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 1.5
+     },
+     {
+      "hours": 0.25,
+      "hours_max": 2.5
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "c397a9da-862f-4f3f-8109-7d21691de53a",
+    "line": "There is also an increase in the average time to achieve peak concentrations to about 2.5 hours in the presence of food as compared with 1.25 hours when fasting.",
+    "durations": [
+     {
+      "hours": 2.5
+     },
+     {
+      "hours": 1.25
      }
     ]
    }
@@ -643,6 +868,19 @@
       "hours": 3.5
      }
     ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "de96349a-5fee-4de9-921c-e453d44b3203",
+    "line": "Based on population pharmacokinetic analysis of plasma donepezil concentrations measured in patients with Alzheimer’s disease, following oral dosing, peak plasma concentration is achieved for donepezil hydrochloride 23 mg tablets in approximately 8 hours, compared with 3 hours for donepezil hydrochloride 10 mg tablets.",
+    "durations": [
+     {
+      "hours": 8.0
+     },
+     {
+      "hours": 3.0
+     }
+    ]
    }
   ]
  },
@@ -724,6 +962,44 @@
    }
   ]
  },
+ "escitalopram": {
+  "name": "Escitalopram",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "2db02476-325f-ee47-a7e5-b5aed56c364c",
+    "line": "Following a single oral dose (20 mg tablet or solution) of escitalopram, peak blood levels occur at about 5 hours.",
+    "durations": [
+     {
+      "hours": 5.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "2db02476-325f-ee47-a7e5-b5aed56c364c",
+    "line": "In subjects who had received 21 days of 40 mg/day racemic citalopram, combined administration of 400 mg twice a day cimetidine for 8 days resulted in an increase in citalopram AUC and C max of 43% and 39%, respectively.",
+    "durations": [
+     {
+      "hours": 504.0
+     },
+     {
+      "hours": 192.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "2db02476-325f-ee47-a7e5-b5aed56c364c",
+    "line": "Administration of 20 mg/day escitalopram for 21 days in healthy volunteers resulted in a 50% increase in C max and 82% increase in AUC of the beta-adrenergic blocker metoprolol (given in a single dose of 100 mg).",
+    "durations": [
+     {
+      "hours": 504.0
+     }
+    ]
+   }
+  ]
+ },
  "esketamine": {
   "name": "Esketamine",
   "candidates": [
@@ -751,6 +1027,72 @@
      {
       "hours": 1.0,
       "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "eszopiclone": {
+  "name": "Eszopiclone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "9dfe774a-2c7a-4e10-bedd-cde64ad28676",
+    "line": "Peak plasma concentrations are achieved within approximately 1 hour after oral administration.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "flibanserin": {
+  "name": "Flibanserin",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "3819daf3-e935-2c53-c527-e1d57922f394",
+    "line": "and prolonged median Tmax to 1.5, 0.9, 1.8 hours from 0.8 hours under fasted conditions, respectively.",
+    "durations": [
+     {
+      "hours": 1.8
+     },
+     {
+      "hours": 0.8
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "3819daf3-e935-2c53-c527-e1d57922f394",
+    "line": "In a study of 15 healthy female subjects, a fluconazole 400 mg loading dose followed by 200 mg administered once daily for 5 days increased flibanserin 100 mg single dose exposure (AUC 0-inf ) 7-fold and Cmax 2.2-fold compared to flibanserin 100 mg alone.",
+    "durations": [
+     {
+      "hours": 120.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "3819daf3-e935-2c53-c527-e1d57922f394",
+    "line": "In a study of 24 healthy female subjects, ketoconazole 400 mg administered once daily for 5 days following a light breakfast increased flibanserin 50 mg single-dose exposure (AUC 0-inf ) 4.5-fold and Cmax 1.8-fold compared to flibanserin 50 mg alone [ see Warnings and Precautions (5.2) , Adverse Reactions (6.1) and Drug Interactions (7) ] .",
+    "durations": [
+     {
+      "hours": 120.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "3819daf3-e935-2c53-c527-e1d57922f394",
+    "line": "In a study of 12 healthy male and female subjects, itraconazole 200 mg administered once daily for 4 days following a loading dose of 400 mg increased flibanserin 50 mg single dose exposure (AUC 0-inf ) 2.6-fold and Cmax 1.7-fold when flibanserin was given 2 hours after itraconazole on Day 5, compared to exposures with flibanserin 50 mg alone.",
+    "durations": [
+     {
+      "hours": 96.0
+     },
+     {
+      "hours": 2.0
      }
     ]
    }
@@ -825,6 +1167,40 @@
    }
   ]
  },
+ "fluvoxamine": {
+  "name": "Fluvoxamine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "6eeb14df-6fcf-a737-5359-5744eb4accea",
+    "line": "Maximum plasma concentrations at steady state occurred within 3 to 8 hours of dosing and reached concentrations averaging 88, 283 and 546 ng/mL, respectively.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "furosemide": {
+  "name": "Furosemide",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "0b3d986c-eecc-adbe-e063-6294a90a0fb2",
+    "line": "Although furosemide is more rapidly absorbed from the oral solution (50 minutes) than from the tablet (87 minutes), peak plasma levels and area under the plasma concentration-time curves do not differ significantly.",
+    "durations": [
+     {
+      "hours": 0.833
+     },
+     {
+      "hours": 1.45
+     }
+    ]
+   }
+  ]
+ },
  "gabapentin": {
   "name": "Gabapentin",
   "candidates": [
@@ -844,6 +1220,31 @@
    }
   ]
  },
+ "galantamine": {
+  "name": "Galantamine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "261889d3-41c8-4655-98f7-41317778e7a1",
+    "line": "Galantamine is absorbed with time to peak concentration of about 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "261889d3-41c8-4655-98f7-41317778e7a1",
+    "line": "Food did not affect the AUC of galantamine, but C max was decreased by 25% and T max was delayed by 1.5 hours, when galantamine was administered with food.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ]
+   }
+  ]
+ },
  "glutethimide": {
   "name": "Glutethimide",
   "candidates": [
@@ -855,6 +1256,27 @@
      {
       "hours": 1.0,
       "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "guanfacine": {
+  "name": "Guanfacine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "4248d53e-4dc3-452b-96f8-5d715c254c26",
+    "line": "Peak plasma concentrations occur from 1 hour to 4 hours with an average of 2.6 hours after single oral doses or at steady state.",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 4.0
+     },
+     {
+      "hours": 2.6
      }
     ]
    }
@@ -1038,6 +1460,44 @@
    }
   ]
  },
+ "levetiracetam": {
+  "name": "Levetiracetam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "0348fec4-d919-4307-ac90-35360819bc00",
+    "line": "Food does not affect the extent of absorption of levetiracetam but it decreases C max by 20% and delays T max by 1.5 hours.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "0348fec4-d919-4307-ac90-35360819bc00",
+    "line": "The evaluation of the pharmacokinetic profile of levetiracetam and its metabolite (ucb L057) in 14 pediatric patients demonstrated rapid absorption of levetiracetam at all doses with a T max of about 1 hour and a t 1/2 of 5 hours across the three dosing levels.",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 5.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "0348fec4-d919-4307-ac90-35360819bc00",
+    "line": "Following single dose administration (20 mg/kg) of a 10% oral solution to children with epilepsy (1 month to < 4 years), levetiracetam was rapidly absorbed and peak plasma concentrations were observed approximately 1 hour after dosing.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
  "lisdexamfetamine": {
   "name": "Lisdexamfetamine",
   "candidates": [
@@ -1069,6 +1529,26 @@
    }
   ]
  },
+ "lithium": {
+  "name": "Lithium",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "b839ff4b-f62d-41ab-a823-550a756d58ec",
+    "line": "Peak serum concentrations (T max ) occur 0.25 to 3 hours after oral administration of immediate release preparations and 2 to 6 hours after sustained-release preparations.",
+    "durations": [
+     {
+      "hours": 0.25,
+      "hours_max": 3.0
+     },
+     {
+      "hours": 2.0,
+      "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
  "lofexidine": {
   "name": "Lofexidine",
   "candidates": [
@@ -1082,6 +1562,21 @@
      },
      {
       "hours": 11.0
+     }
+    ]
+   }
+  ]
+ },
+ "lorazepam": {
+  "name": "Lorazepam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "c0810422-b732-4c04-97d8-c1521c401ef4",
+    "line": "Peak concentrations in plasma occur approximately 2 hours following administration.",
+    "durations": [
+     {
+      "hours": 2.0
      }
     ]
    }
@@ -1152,6 +1647,22 @@
      },
      {
       "hours": 18.0
+     }
+    ]
+   }
+  ]
+ },
+ "lurasidone": {
+  "name": "Lurasidone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "b94e9272-ed67-4af8-827a-4b8cc3b168a1",
+    "line": "Absorption and Distribution: Lurasidone hydrochloride is absorbed and reaches peak serum concentrations in approximately 1 to 3 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
      }
     ]
    }
@@ -1248,6 +1759,41 @@
    }
   ]
  },
+ "methadone": {
+  "name": "Methadone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "540edd43-165d-4257-b989-3bccc8f54afb",
+    "line": "Following oral administration the bioavailability of methadone ranges between 36 to 100% and peak plasma concentrations are achieved between 1 to 7.5 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 7.5
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "540edd43-165d-4257-b989-3bccc8f54afb",
+    "line": "Repeat dose administration of oral voriconazole (400 mg every 12 hours for 1 day, then 200 mg every 12 hours for 4 days) increased the peak plasma concentration (C",
+    "durations": [
+     {
+      "hours": 12.0
+     },
+     {
+      "hours": 24.0
+     },
+     {
+      "hours": 12.0
+     },
+     {
+      "hours": 96.0
+     }
+    ]
+   }
+  ]
+ },
  "methamphetamine": {
   "name": "Methamphetamine",
   "candidates": [
@@ -1300,6 +1846,22 @@
    }
   ]
  },
+ "midazolam": {
+  "name": "Midazolam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "9a443652-6aff-4e27-83fe-90c65fa0f3c1",
+    "line": "The mean T max values across dose groups (0.25, 0.5, and 1.0 mg/kg) range from 0.17 to 2.65 hours.",
+    "durations": [
+     {
+      "hours": 0.17,
+      "hours_max": 2.65
+     }
+    ]
+   }
+  ]
+ },
  "milnacipran": {
   "name": "Milnacipran",
   "candidates": [
@@ -1310,6 +1872,31 @@
     "durations": [
      {
       "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "mirtazapine": {
+  "name": "Mirtazapine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "67e753ad-9919-416b-9e8f-aab0fa808066",
+    "line": "Peak plasma concentrations of mirtazapine are reached within about 2 hours post dose.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "67e753ad-9919-416b-9e8f-aab0fa808066",
+    "line": "for 6.5 days) increased the peak plasma levels and the AUC of a single 30 mg dose of mirtazapine by approximately 40% and 50%, respectively [see Drug Interactions (7) ].",
+    "durations": [
+     {
+      "hours": 156.0
      }
     ]
    }
@@ -1361,6 +1948,21 @@
    }
   ]
  },
+ "molindone": {
+  "name": "Molindone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "1275e92f-9573-4d0c-8e77-1c9ac47696d2",
+    "line": "Unmetabolized drug reached a peak blood level at 1.5 hours.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ]
+   }
+  ]
+ },
  "naltrexone": {
   "name": "Naltrexone",
   "candidates": [
@@ -1371,6 +1973,32 @@
     "durations": [
      {
       "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "nefazodone": {
+  "name": "Nefazodone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "51ff7db5-aaf9-4c3c-86e6-958ebf16b60f",
+    "line": "Peak plasma concentrations occur at about one hour and the half-life of nefazodone is 2 to 4 hours.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "51ff7db5-aaf9-4c3c-86e6-958ebf16b60f",
+    "line": "there were also approximately 2 to 4 fold increases in C max after 5 days of BID dosing relative to the first dose, suggesting extensive and greater than predicted accumulation of nefazodone and its hydroxy metabolite with multiple dosing.",
+    "durations": [
+     {
+      "hours": 120.0
      }
     ]
    }
@@ -1426,6 +2054,31 @@
       "hours": 168.0
      }
     ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "b7f27239-c22e-46d4-a313-50270cc19445",
+    "line": "Oral Administration, Monotherapy — Olanzapine is well absorbed and reaches peak concentrations in approximately 6 hours following an oral dose.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "oxazepam": {
+  "name": "Oxazepam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "a0d5a4c1-ec79-42e6-8e8f-ae4d144edb43",
+    "line": "For the capsule and tablet, peak plasma levels averaged 450 mg/mL and were observed to occur about 3 hours after dosing.",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ]
    }
   ]
  },
@@ -1447,6 +2100,16 @@
       "hours": 768.0
      }
     ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "71985eb4-07df-41c9-8b9a-85f39e92b7d0",
+    "line": "Following a single dose, the plasma concentrations of paliperidone gradually rise to reach peak plasma concentration (C max ) approximately 24 hours after dosing.",
+    "durations": [
+     {
+      "hours": 24.0
+     }
+    ]
    }
   ]
  },
@@ -1465,6 +2128,89 @@
      {
       "hours": 168.0,
       "hours_max": 336.0
+     }
+    ]
+   }
+  ]
+ },
+ "perampanel": {
+  "name": "Perampanel",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "bc8f7cf2-c19c-4235-859f-9ff1dd21908e",
+    "line": "Median time to reach peak concentration (t max ) ranged from 0.5 to 2.5 hours under fasted condition.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 2.5
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bc8f7cf2-c19c-4235-859f-9ff1dd21908e",
+    "line": "The t max was delayed by approximately 1 to 3 hours in fed state compared to that under fasted conditions.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bc8f7cf2-c19c-4235-859f-9ff1dd21908e",
+    "line": "Perampanel C max and AUC 0-72h were not altered when a single 6 mg dose of perampanel tablet was administered to healthy female subjects following a 21 day course of oral contraceptives containing ethinylestradiol 30 mcg and levonorgestrel 150 mcg.",
+    "durations": [
+     {
+      "hours": 504.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bc8f7cf2-c19c-4235-859f-9ff1dd21908e",
+    "line": "Perampanel administered as 6 mg tablet once daily doses for 20 days decreased AUC 0-inf and C max of midazolam (a CYP3A4 substrate) by 13% and 15%, respectively, in healthy subjects.",
+    "durations": [
+     {
+      "hours": 480.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bc8f7cf2-c19c-4235-859f-9ff1dd21908e",
+    "line": "Coadministration of perampanel 4 mg tablet once daily with an oral contraceptive containing ethinylestradiol 30 mcg and levonorgestrel 150 mcg for 21 days did not alter C max or AUC 0-24h of either ethinylestradiol or levonorgestrel in healthy female subjects.",
+    "durations": [
+     {
+      "hours": 504.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bc8f7cf2-c19c-4235-859f-9ff1dd21908e",
+    "line": "Perampanel tablets administered as 4 mg once daily doses for 19 days had no effect on C max and AUC 0-inf of levodopa in healthy subjects.",
+    "durations": [
+     {
+      "hours": 456.0
+     }
+    ]
+   }
+  ]
+ },
+ "perphenazine": {
+  "name": "Perphenazine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "5fbfe9da-26e8-4705-98f3-42acd3d7b439",
+    "line": "Following oral administration of perphenazine tablets, mean peak plasma perphenazine concentrations were observed between 1 to 3 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
      }
     ]
    }
@@ -1498,6 +2244,22 @@
     "durations": [
      {
       "hours": 12.0
+     }
+    ]
+   }
+  ]
+ },
+ "phenytoin": {
+  "name": "Phenytoin",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "363cd347-d25e-42b9-9ce7-30642f3cb353",
+    "line": "For phenytoin sodium, peak serum levels occur 4 to 12 hours after administration.",
+    "durations": [
+     {
+      "hours": 4.0,
+      "hours_max": 12.0
      }
     ]
    }
@@ -1682,6 +2444,21 @@
    }
   ]
  },
+ "quazepam": {
+  "name": "Quazepam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "f7d63f3f-5303-48ab-bce2-35fd62c45799",
+    "line": "The peak plasma concentration of quazepam is approximately 20 ng/mL after a 15 mg dose and occurs at about 2 hours.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
  "quetiapine": {
   "name": "Quetiapine",
   "candidates": [
@@ -1750,6 +2527,29 @@
       "hours_max": 336.0
      }
     ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "3261e8cf-cc6e-4011-9246-aee623ad8971",
+    "line": "Following oral administration of solution or tablet, mean peak plasma concentrations of risperidone occurred at about 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "3261e8cf-cc6e-4011-9246-aee623ad8971",
+    "line": "Peak concentrations of 9-hydroxyrisperidone occurred at about 3 hours in extensive metabolizers, and 17 hours in poor metabolizers.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 17.0
+     }
+    ]
    }
   ]
  },
@@ -1764,6 +2564,53 @@
      {
       "hours": 1.4,
       "hours_max": 3.8
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "52781229-ee82-43f9-a113-4419a611978d",
+    "line": "Peak plasma concentrations are reached in approximately 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "52781229-ee82-43f9-a113-4419a611978d",
+    "line": "It readily crosses the blood-brain barrier, reaching CSF peak concentrations in 1.4 to 2.6 hours.",
+    "durations": [
+     {
+      "hours": 1.4,
+      "hours_max": 2.6
+     }
+    ]
+   }
+  ]
+ },
+ "ropinirole": {
+  "name": "Ropinirole",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "cdc63b7a-062a-4519-a63e-e48a356f641c",
+    "line": "Ropinirole is rapidly absorbed after oral administration, reaching peak concentration in approximately 1 to 2 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "cdc63b7a-062a-4519-a63e-e48a356f641c",
+    "line": "Food does not affect the extent of absorption of ropinirole, although its Tmax is increased by 2.5 hours and its Cmax is decreased by approximately 25% when the drug is taken with a high-fat meal.",
+    "durations": [
+     {
+      "hours": 2.5
      }
     ]
    }
@@ -1832,6 +2679,41 @@
     "durations": [
      {
       "hours": 8.4
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "7efc1dd5-8671-4bed-9c16-ef6b9f36afc4",
+    "line": "Following oral once-daily sertraline dosing over the range of 50 to 200 mg for 14 days, mean peak plasma concentrations (C",
+    "durations": [
+     {
+      "hours": 336.0
+     }
+    ]
+   }
+  ]
+ },
+ "sildenafil": {
+  "name": "Sildenafil",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "174ef537-e3e6-42bd-a478-47b930ddc761",
+    "line": "When sildenafil tablets are taken with a high fat meal, the rate of absorption is reduced, with a mean delay in T max of 60 minutes and a mean reduction in C max of 29%.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "174ef537-e3e6-42bd-a478-47b930ddc761",
+    "line": "When a single 100 mg dose of sildenafil tablets were administered with erythromycin, a moderate CYP3A4 inhibitor, at steady state (500 mg bid for 5 days), there was a 160% increase in sildenafil C max and a 182% increase in sildenafil AUC.",
+    "durations": [
+     {
+      "hours": 120.0
      }
     ]
    }
@@ -1942,6 +2824,62 @@
    }
   ]
  },
+ "tasimelteon": {
+  "name": "Tasimelteon",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "ce5a2fa3-ed54-422d-96c2-1821496eb32f",
+    "line": "The peak concentration (T max ) of tasimelteon occurred approximately 0.5 to 3 hours after fasted oral administration.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "ce5a2fa3-ed54-422d-96c2-1821496eb32f",
+    "line": "When administered with a high-fat meal, the C max of tasimelteon was 44% lower than when given in a fasted state, and the median T max was delayed by approximately 1.75 hours.",
+    "durations": [
+     {
+      "hours": 1.75
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "ce5a2fa3-ed54-422d-96c2-1821496eb32f",
+    "line": "Fluvoxamine (strong CYP1A2 inhibitor): the AUC 0-inf and C max of tasimelteon increased by 7-fold and 2-fold, respectively, when coadministered with fluvoxamine 50 mg (after 6 days of fluvoxamine 50 mg per day) [see Drug Interactions ( 7.1 )] .",
+    "durations": [
+     {
+      "hours": 144.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "ce5a2fa3-ed54-422d-96c2-1821496eb32f",
+    "line": "Midazolam (CYP3A4 substrate): Administration of tasimelteon 20 mg once a day for 14 days did not produce any significant changes in the T max , C max , or AUC of midazolam or 1-OH midazolam.",
+    "durations": [
+     {
+      "hours": 336.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "ce5a2fa3-ed54-422d-96c2-1821496eb32f",
+    "line": "Rosiglitazone (CYP2C8 substrate): Administration of tasimelteon 20 mg once a day for 16 days did not produce any clinically significant changes in the T max , C max , or AUC of rosiglitazone after oral administration of 4 mg.",
+    "durations": [
+     {
+      "hours": 384.0
+     }
+    ]
+   }
+  ]
+ },
  "temazepam": {
   "name": "Temazepam",
   "candidates": [
@@ -1952,6 +2890,39 @@
     "durations": [
      {
       "hours": 0.5
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "1c08d30d-7c27-a09a-5240-7050771d5cc7",
+    "line": "Following ingestion of a 30 mg temazepam capsule, measurable plasma concentrations were achieved 10 to 20 minutes after dosing with peak plasma levels ranging from 666 to 982 ng/mL (mean 865 ng/mL) occurring approximately 1.2 to 1.6 hours (mean 1.5 hours) after dosing.",
+    "durations": [
+     {
+      "hours": 0.167,
+      "hours_max": 0.333
+     },
+     {
+      "hours": 1.2,
+      "hours_max": 1.6
+     },
+     {
+      "hours": 1.5
+     }
+    ]
+   }
+  ]
+ },
+ "tetrabenazine": {
+  "name": "Tetrabenazine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "5867189c-17bd-4e70-a079-c4730f9950d1",
+    "line": "β-HTBZ is subsequently metabolized to another major circulating metabolite, 9-desmethyl-β-DHTBZ, for which C max is reached approximately 2 hours post-dosing.",
+    "durations": [
+     {
+      "hours": 2.0
      }
     ]
    }
@@ -2067,6 +3038,73 @@
    }
   ]
  },
+ "tizanidine": {
+  "name": "Tizanidine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "a42f3479-f2c2-8214-d547-c5cae9bfed1e",
+    "line": "Tmax was 1.0 hours after dosing",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "a42f3479-f2c2-8214-d547-c5cae9bfed1e",
+    "line": "Median Tmax was increased by 25 minutes, to 1 hour and 25 minutes.",
+    "durations": [
+     {
+      "hours": 0.417
+     },
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 0.417
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "a42f3479-f2c2-8214-d547-c5cae9bfed1e",
+    "line": "Tizanidine delayed the T max of acetaminophen by 16 minutes.",
+    "durations": [
+     {
+      "hours": 0.267
+     }
+    ]
+   }
+  ]
+ },
+ "topiramate": {
+  "name": "Topiramate",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "3f99b26b-79b9-4efb-aa2c-2868e1e126c8",
+    "line": "Absorption of topiramate is rapid, with peak plasma concentrations occurring at approximately 2 hours following a 400 mg oral dose.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "3f99b26b-79b9-4efb-aa2c-2868e1e126c8",
+    "line": "Following a single oral 100 mg dose, maximum plasma concentration for elderly and young adults was achieved at approximately 1 to 2 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
  "tranylcypromine": {
   "name": "Tranylcypromine",
   "candidates": [
@@ -2113,6 +3151,21 @@
    }
   ]
  },
+ "triazolam": {
+  "name": "Triazolam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "5add318e-11b9-42f8-b052-0d8cebb32fcf",
+    "line": "Peak plasma levels of triazolam are reached within 2 hours following oral administration.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
  "trihexyphenidyl": {
   "name": "Trihexyphenidyl",
   "candidates": [
@@ -2145,6 +3198,103 @@
    }
   ]
  },
+ "valproate": {
+  "name": "Valproate",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "8d5fc1c1-d3c0-497e-971b-6c4dba9a3fad",
+    "line": "Equivalent doses of intravenous (IV) valproate and oral valproate products are expected to result in equivalent C max , C min , and total systemic exposure to the valproate ion when the IV valproate is administered as a 60 minute infusion.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "8d5fc1c1-d3c0-497e-971b-6c4dba9a3fad",
+    "line": "Administration of divalproex sodium tablets and IV valproate (given as a one hour infusion), 250 mg every 6 hours for 4 days to 18 healthy male volunteers resulted in equivalent AUC, C max , C min at steady state, as well as after the first dose.",
+    "durations": [
+     {
+      "hours": 6.0
+     },
+     {
+      "hours": 96.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "8d5fc1c1-d3c0-497e-971b-6c4dba9a3fad",
+    "line": "The T max after IV Valproate Sodium Injection occurs at the end of the one hour infusion, while the T max after oral dosing with divalproex sodium occurs at approximately 4 hours.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "8d5fc1c1-d3c0-497e-971b-6c4dba9a3fad",
+    "line": "After the 5 minute infusions (mean rate of 2.8 mg/kg/min), mean C max was 145 ± 32 mcg/mL, while after the 60 minute infusions, mean C max was 115 ± 8 mcg/mL.",
+    "durations": [
+     {
+      "hours": 0.083
+     },
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "varenicline": {
+  "name": "Varenicline",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "59e125e3-5204-122b-e063-6394a90a0092",
+    "line": "Maximum plasma concentrations of varenicline occur typically within 3 to 4 hours after oral administration.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "vilazodone": {
+  "name": "Vilazodone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "061efdcc-40ea-4647-8cc8-01cd1ccca68b",
+    "line": "At steady-state, after daily dosing of vilazodone hydrochloride 40 mg under fed conditions, the mean C max value was 156 ng/mL, and the mean AUC (0-24 hours) value was 1645 ng·h/mL.",
+    "durations": [
+     {
+      "hours": 0.0,
+      "hours_max": 24.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "061efdcc-40ea-4647-8cc8-01cd1ccca68b",
+    "line": "Vilazodone concentrations peaked at a median of 4 to 5 hours (T max ) after vilazodone hydrochloride administration and declined with a terminal half-life of approximately 25 hours.",
+    "durations": [
+     {
+      "hours": 4.0,
+      "hours_max": 5.0
+     },
+     {
+      "hours": 25.0
+     }
+    ]
+   }
+  ]
+ },
  "vortioxetine": {
   "name": "Vortioxetine",
   "candidates": [
@@ -2156,6 +3306,21 @@
      {
       "hours": 7.0,
       "hours_max": 11.0
+     }
+    ]
+   }
+  ]
+ },
+ "xanomeline": {
+  "name": "Xanomeline",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "8f0e73bf-6025-44f6-ab64-0983322de0df",
+    "line": "Following COBENFY administration, xanomeline area under the plasma concentration-time curve during a 12-hour dosing interval (AUC 0-12 ) at steady state and maximum concentration (C max ) increased 50% when the COBENFY dose increased from 100 mg/20 mg twice daily to 125 mg/30 mg twice daily.",
+    "durations": [
+     {
+      "hours": 12.0
      }
     ]
    }
@@ -2201,6 +3366,17 @@
       "hours": 1.0
      }
     ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "b1f52226-4fb4-48bf-8bfd-0c9df6ca02fa",
+    "line": "Ziprasidone is well absorbed after oral administration, reaching peak plasma concentrations in 6 to 8 hours.",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 8.0
+     }
+    ]
    }
   ]
  },
@@ -2231,6 +3407,37 @@
      },
      {
       "hours": 2.4
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "59cc61da-838e-4add-b2d6-42b2b283a000",
+    "line": "In a single-dose crossover study in 45 healthy subjects administered 5 and 10 mg zolpidem tartrate tablets, the mean peak concentrations (C max ) were 59 (range: 29 to 113) and 121 (range: 58 to 272) ng/mL, respectively, occurring at a mean time (T max ) of 1.6 hours for both.",
+    "durations": [
+     {
+      "hours": 1.6
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "59cc61da-838e-4add-b2d6-42b2b283a000",
+    "line": "Results demonstrated that with food, mean AUC and C max were decreased by 15% and 25%, respectively, while mean T max was prolonged by 60% (from 1.4 to 2.2 hr).",
+    "durations": [
+     {
+      "hours": 1.4,
+      "hours_max": 2.2
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "59cc61da-838e-4add-b2d6-42b2b283a000",
+    "line": "A single-dose interaction study with zolpidem tartrate 5 mg and ketoconazole, a potent CYP3A4 inhibitor, given as 200 mg twice daily for 2 days increased C max of zolpidem (30%) and the total AUC of zolpidem (70%) compared to zolpidem alone and prolonged the elimination half-life (30%) along with an increase in the pharmacodynamic effects of zolpidem [",
+    "durations": [
+     {
+      "hours": 48.0
      }
     ]
    }
@@ -2307,6 +3514,34 @@
    }
   ]
  },
+ "bromocriptine": {
+  "name": "Bromocriptine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "d69003ee-0b6f-47a9-834e-ba59c02f566c",
+    "line": "Following single 5 mg bromocriptine mesylate capsules dose (two 2.5 mg tablets) to five healthy volunteers under fasted conditions, the mean peak bromocriptine plasma levels, time to reach peak bromocriptine plasma concentrations and elimination half-life were 465 pg/mL ± 226, 2.5 hours ± 2 and 4.9 hours, respectively.",
+    "durations": [
+     {
+      "hours": 2.5
+     },
+     {
+      "hours": 4.9
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d69003ee-0b6f-47a9-834e-ba59c02f566c",
+    "line": "Following administration of 5 mg of bromocriptine mesylate capsules twice daily for 14 days, the bromocriptine C max and AUC at steady-state were 628 ± 375 pg/mL and 2377 ± 1186 pg*hr/mL, respectively.",
+    "durations": [
+     {
+      "hours": 336.0
+     }
+    ]
+   }
+  ]
+ },
  "rasagiline": {
   "name": "Rasagiline",
   "candidates": [
@@ -2328,6 +3563,37 @@
     "durations": [
      {
       "hours": 2.1
+     }
+    ]
+   }
+  ]
+ },
+ "cannabidiol": {
+  "name": "Cannabidiol",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "8bf27097-4870-43fb-94f0-f3d0871d1eec",
+    "line": "Cannabidiol has a time to maximum plasma concentration (T max ) of 2.5 to 5 hours at steady state (C ss ).",
+    "durations": [
+     {
+      "hours": 2.5,
+      "hours_max": 5.0
+     }
+    ]
+   }
+  ]
+ },
+ "nabilone": {
+  "name": "Nabilone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "83c7ac15-ece9-47de-b83c-d575544fa449",
+    "line": "Following oral administration of a 2 mg dose of radiolabeled nabilone, peak plasma concentrations of approximately 2 ng/mL nabilone and 10 ng equivalents/mL total radioactivity are achieved within 2.0 hours.",
+    "durations": [
+     {
+      "hours": 2.0
      }
     ]
    }
@@ -2383,6 +3649,26 @@
    }
   ]
  },
+ "fentanyl": {
+  "name": "Fentanyl",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "f969e2bc-6297-4e29-89d3-a3685a2c7c6b",
+    "line": "The median time to maximum plasma concentration (Tmax) across these four doses of ABSTRAL varied from 30 to 60 minutes (range of 15 - 240 minutes).",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.0
+     },
+     {
+      "hours": 0.25,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
  "hydromorphone": {
   "name": "Hydromorphone",
   "candidates": [
@@ -2393,6 +3679,63 @@
     "durations": [
      {
       "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "tapentadol": {
+  "name": "Tapentadol",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "5b769a76-5ca5-b2e9-e063-6394a90a1b1b",
+    "line": "Maximum serum concentrations of tapentadol are typically observed at around 1.25 hours after dosing.",
+    "durations": [
+     {
+      "hours": 1.25
+     }
+    ]
+   }
+  ]
+ },
+ "pentazocine": {
+  "name": "Pentazocine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "a28450a0-ac93-4235-b9a6-58cdf24773cb",
+    "line": "The time to mean peak concentration in 24 normal volunteers was 1.7 hours (range 0.5 to 4 hours) after oral administration and the mean plasma elimination half-life was 3.6 hours (range 1.5 to 10 hours).",
+    "durations": [
+     {
+      "hours": 1.7
+     },
+     {
+      "hours": 0.5,
+      "hours_max": 4.0
+     },
+     {
+      "hours": 3.6
+     },
+     {
+      "hours": 1.5,
+      "hours_max": 10.0
+     }
+    ]
+   }
+  ]
+ },
+ "metoclopramide": {
+  "name": "Metoclopramide",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "595439ae-cf01-821c-e063-6294a90af16a",
+    "line": "Peak plasma concentrations occurred at about 1 to 2 hours after a single oral dose.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
      }
     ]
    }
@@ -2542,6 +3885,209 @@
    }
   ]
  },
+ "vigabatrin": {
+  "name": "Vigabatrin",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "93ba3894-fd97-4432-9f2d-e7050371e91f",
+    "line": "The time to maximum concentration (T max ) is approximately 1 hour for children and adolescents (3 years to 16 years of age) and adults, and approximately 2.5 hours for infants (5 months to 2 years of age).",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 2.5
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "93ba3894-fd97-4432-9f2d-e7050371e91f",
+    "line": "A food effect study involving administration of vigabatrin to healthy volunteers under fasting and fed conditions indicated that the C max was decreased by 33%, T max was increased to 2 hours, and AUC was unchanged under fed conditions.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "lacosamide": {
+  "name": "Lacosamide",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "b9a0ca8c-593c-48e8-b2a7-d30d5f6e6a9b",
+    "line": "Compared to lacosamide the major metabolite, O-desmethyl metabolite, has a longer T max (0.5 to 12 hours) and elimination half-life (15 to 23 hours).",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 12.0
+     },
+     {
+      "hours": 15.0,
+      "hours_max": 23.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "b9a0ca8c-593c-48e8-b2a7-d30d5f6e6a9b",
+    "line": "For the 15-minute intravenous infusion, bioequivalence was met for AUC (0-tz) but not for C max .",
+    "durations": [
+     {
+      "hours": 0.25
+     }
+    ]
+   }
+  ]
+ },
+ "brivaracetam": {
+  "name": "Brivaracetam",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "11ca0e1d-1c0d-4357-9ebd-ee1e87185dde",
+    "line": "The median T max for tablets taken without food is 1 hour (range 0.25 to 3 hours).",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 0.25,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "11ca0e1d-1c0d-4357-9ebd-ee1e87185dde",
+    "line": "Specifically, when a 50 mg tablet was administered with a high-fat meal, C max (maximum brivaracetam plasma concentration during a dose interval, an exposure metric) was decreased by 37% and T max was delayed by 3 hours, but AUC (area under the brivaracetam plasma concentration versus time curve, an exposure metric) was essentially unchanged (decreased by 5%).",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "carbidopa": {
+  "name": "Carbidopa",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "9d4e886e-edec-471d-b619-bf4828a6b7ce",
+    "line": "Following administration of carbidopa, levodopa and entacapone tablets as a single dose to healthy male and female subjects, the peak concentration of carbidopa was reached within 2.5 hours to 3.4 hours on average.",
+    "durations": [
+     {
+      "hours": 2.5
+     },
+     {
+      "hours": 3.4
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9d4e886e-edec-471d-b619-bf4828a6b7ce",
+    "line": "Following administration of carbidopa, levodopa and entacapone tablets as a single dose to healthy male and female subjects, the peak concentration of entacapone in plasma was reached within 0.8 hour to 1.2 hours on average.",
+    "durations": [
+     {
+      "hours": 0.8
+     },
+     {
+      "hours": 1.2
+     }
+    ]
+   }
+  ]
+ },
+ "entacapone": {
+  "name": "Entacapone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "9d4e886e-edec-471d-b619-bf4828a6b7ce",
+    "line": "Following administration of carbidopa, levodopa and entacapone tablets as a single dose to healthy male and female subjects, the peak concentration of carbidopa was reached within 2.5 hours to 3.4 hours on average.",
+    "durations": [
+     {
+      "hours": 2.5
+     },
+     {
+      "hours": 3.4
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9d4e886e-edec-471d-b619-bf4828a6b7ce",
+    "line": "Following administration of carbidopa, levodopa and entacapone tablets as a single dose to healthy male and female subjects, the peak concentration of entacapone in plasma was reached within 0.8 hour to 1.2 hours on average.",
+    "durations": [
+     {
+      "hours": 0.8
+     },
+     {
+      "hours": 1.2
+     }
+    ]
+   }
+  ]
+ },
+ "sumatriptan": {
+  "name": "Sumatriptan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "1d2cd01c-05e7-44cf-a71d-0f474e826b7e",
+    "line": "The C max is similar during a migraine attack and during a migraine-free period, but the T max is slightly later during the attack, approximately 2.5 hours compared with 2.0 hours.",
+    "durations": [
+     {
+      "hours": 2.5
+     },
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "rizatriptan": {
+  "name": "Rizatriptan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "8e36b946-cf2a-44d9-9ba7-4385cfe6b360",
+    "line": "The mean oral absolute bioavailability of the rizatriptan benzoate tablet is about 45% and mean peak plasma concentrations (Cmax) are reached in approximately 1-1.5 hours (Tmax).",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 1.5
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "8e36b946-cf2a-44d9-9ba7-4385cfe6b360",
+    "line": "The bioavailability and Cmax of rizatriptan were similar following administration of rizatriptan benzoate tablets and rizatriptan benzoate orally disintegrating tablets, but the rate of absorption is somewhat slower with the orally disintegrating tablets, with Tmax delayed by up to 0.7 hour.",
+    "durations": [
+     {
+      "hours": 0.7
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "8e36b946-cf2a-44d9-9ba7-4385cfe6b360",
+    "line": "the maximum peak plasma concentrations were achieved in 1.4 hours.",
+    "durations": [
+     {
+      "hours": 1.4
+     }
+    ]
+   }
+  ]
+ },
  "pizotifen": {
   "name": "Pizotifen",
   "candidates": [
@@ -2662,6 +4208,31 @@
     "durations": [
      {
       "hours": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "atropine": {
+  "name": "Atropine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "a116af5c-ba4c-408c-9a02-4bc33772aa8d",
+    "line": "Maximum concentration was reached in 28 ± 27 min after administration.",
+    "durations": [
+     {
+      "hours": 0.45
+     }
+    ]
+   },
+   {
+    "corpus": "dailymed",
+    "page": "a116af5c-ba4c-408c-9a02-4bc33772aa8d",
+    "line": "The mean (± standard deviation (SD)) Cmax of l-hyoscyamine in these patients was 860 ± 402 pg/mL, achieved within 8 minutes of eyedrop instillation.",
+    "durations": [
+     {
+      "hours": 0.133
      }
     ]
    }
