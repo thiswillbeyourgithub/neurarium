@@ -2,8 +2,21 @@
 // the maths can be tested on its own (node --test, tools/tests/sim_model.test.mjs)
 // and the tab (js/simulation.js) only draws what comes out of here.
 //
+// WHAT THIS IS FOR, both directions of one question about receptor occupancy:
+//   forward, what a combination of drugs does to the receptors ("these three drugs
+//   at this ratio, which receptors end up engaged and which way"); and backward,
+//   which combination would produce a wanted profile ("I want this much of these
+//   receptors and none of those, what should I take"), the second being the same
+//   matrix solved the other way (`solveCombination`).
+//
+// WHAT IT ACTUALLY COMPUTES IS NOT OCCUPANCY, and point 5 below says what it would
+// take to make it so. It is an engagement INDEX: a signed, ratio-weighted potency
+// that ranks receptors against each other and moves the right way with dose, but is
+// not a percentage of receptors bound and must never be read as one.
+//
 // What is simulated, and what is deliberately NOT (every shortcut below is also
-// listed for the visitor in the tab's warnings box, keyed `sim.warn.*`):
+// listed for the visitor in the tab's warnings box, keyed `sim.warn.*`, which says
+// in its own first line that the list is not exhaustive):
 //
 //   1. Pharmacokinetics. Only an elimination half-life is in the data (no dose, no
 //      Tmax, no bioavailability, no protein binding, no brain penetration), so each
@@ -34,6 +47,34 @@
 //      symmetric log: sign(v)·log10(1 + |v|/P_FLOOR), with P_FLOOR the potency of a
 //      10 µM Ki (the PDSP cut-off below which an assay is dropped as inactive). Ki
 //      1 nM at ratio 1 then reads 4, and multiplying a ratio by 10 adds ~1.
+//
+//   5. Why this is not occupancy, and what would make it so. Occupancy at one
+//      receptor is a saturating function of the CONCENTRATION AT THAT RECEPTOR, and
+//      with several ligands a competitive one:
+//
+//          occupancy_i = (C_i/Ki_i) / (1 + Σ_j C_j/Ki_j)
+//
+//      Ki gives the denominators of those ratios and nothing else, so a Ki without a
+//      C is a potency, never a percentage: the missing half is entirely
+//      pharmacokinetic, and it is per drug, not per receptor. Reaching a real C at
+//      the receptor needs, on top of the T½ this dataset has: the DOSE actually taken
+//      and the molar mass to put it in nM, the oral bioavailability F, the volume of
+//      distribution Vd (dose + F + Vd is what sets the plasma level at all), the
+//      plasma free fraction fu (bound drug binds no receptor), the unbound
+//      brain-to-plasma ratio Kp,uu (the blood-brain barrier and its efflux pumps
+//      make this vary ~100-fold between CNS drugs), and Tmax / an absorption rate for
+//      the time course, which is the one piece already on the roadmap. Two further
+//      terms are not PK at all and would still be missing: the endogenous ligand a
+//      drug competes with (dopamine at D2 is why an in-vivo occupancy never matches
+//      an in-vitro Ki), and efficacy, since occupancy is not effect.
+//
+//      This is also why the potencies simply ADD in point 3 instead of competing: the
+//      competitive form above is only meaningful once every C is on one real scale,
+//      and it would break the linearity the inverse solve rests on. The index is the
+//      honest thing to compute from a Ki alone. Adding the per-drug PK fields above
+//      (a graded node kind each, sourced from the labels) is what would turn the
+//      plot's unit from "index" into "% occupied"; until then the axis is deliberately
+//      unitless and the caption says so.
 
 export const TMAX_HOURS = 2; // assumed oral time-to-peak, every drug alike
 export const ASSUMED_PKI = 7; // a directed binding with no Ki: assumed 100 nM

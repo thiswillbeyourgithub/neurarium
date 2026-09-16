@@ -599,6 +599,51 @@ The sections above are about grading nodes we already have. This one is about no
 do **not** have: axes the dataset could gain. Each entry says what exists in the world, what
 it would cost, and the verdict, so a later session does not re-survey it.
 
+### Drug **time-to-peak (Tmax)**, and the wider PK the simulation would need (surveyed 2026-09-16)
+
+Asked for the simulation tab, which today gives **every** drug one assumed 2 h time-to-peak
+(`TMAX_HOURS` in `js/sim-model.js`), so a drug that peaks in 20 minutes and one that peaks in
+8 hours draw the same curve. Per-drug Tmax is the cheapest real fix, and unlike the rest of the
+PK list below it is genuinely sourceable.
+
+**Measured coverage over the 301 roster drugs**, against the corpora already on disk (a
+sentence counts only when it names a peak AND carries a duration):
+
+| source | drugs reached | shape |
+| --- | --- | --- |
+| Wikipedia article prose (corpus #9, 295 stored) | **102** | "reaches peak levels after 1.0 to 2.5 hours" |
+| Stahl monograph span (corpus #1, 158 indexed) | 13 | mostly the newer monographs' PK bullets |
+| union of both | **111** (37%) | 4 state it twice, 190 drugs state it nowhere |
+
+The Wikipedia **drugbox** is NOT the shortcut it looks like. It has no Tmax row at all (0 of
+295), and its `Onset of action` row is a *different fact*: of its 76 rows only **16** are
+explicitly annotated as a peak ("1-2 hours (T max)"), the other 60 being clinical onset
+(alprazolam's "30-60 minutes" is when it works, not when it peaks). Taking that row as Tmax
+would silently publish onset as peak on 60 drugs, so a code extraction is worth only those 16
+and the real pass is prose.
+
+**Verdict: a Wikipedia prose pass reaches a third of the roster and no stored corpus reaches
+the rest.** It is the same four-step shape as every other pass here (worklist of candidate
+sentences -> one LLM pass answering by index -> quote-gated applier -> recheck), riding the
+existing `fetch_pharmacokinetics.py` machinery since it already scans for durations. For the
+190 it cannot reach, the source to add would be **DailyMed** (the US SPL label archive: free,
+no key, machine-readable XML, and section 12.3 states Tmax for essentially every oral drug),
+as a new `pages_dir` corpus. Its limit is jurisdictional rather than technical: a roster drug
+never marketed in the US (alpidem, many EU-only agents) has no SPL, and the EMA's SmPC
+equivalent is PDF.
+
+**The rest of the PK list is a different story, and it is worth writing down why.** The
+simulation cannot report occupancy, only a relative engagement index, because occupancy is
+`(C/Ki)/(1 + Σ C/Ki)` and a Ki supplies only the denominators. Turning the index into a
+percentage needs, per drug: dose + molar mass, bioavailability F, volume of distribution Vd,
+plasma free fraction fu, and the unbound brain-to-plasma ratio **Kp,uu**. The drugbox does
+carry two of them as structured rows (bioavailability 221 of 295, protein binding 183), but
+the chain is only as strong as its weakest link and **Kp,uu is the link with no open source at
+all** (see "Drug blood-brain-barrier penetration" below: no machine-readable database exists,
+the compiled sets are small, paywalled and mostly rodent). Dose is not a drug property either;
+it is a prescription. So the index is not a stopgap: it is the honest ceiling of what a Ki
+plus a T½ can say, and the tab says so in as many words.
+
 ### Receptor expression **density** (how much, not just where)
 
 Today a "Found in" region is a boolean: a receptor is in a region or it is not. So M5 reads as

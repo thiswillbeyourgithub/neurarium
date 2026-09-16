@@ -172,6 +172,10 @@ export function createSimulation({ body, data, deps, ui }) {
     head.appendChild(el("span", "sim-warn-glyph", "⚠"));
     head.appendChild(el("span", "sim-warn-title", t("sim.warnTitle")));
     warnBox.appendChild(head);
+    // Said before the bullets, not after them: a reader who stops at the first line
+    // has to have been told that the list below is the known shortcuts and not the
+    // complete set of them.
+    warnBox.appendChild(el("p", "sim-warn-note", t("sim.warnNotExhaustive")));
     const list = el("ul", "sim-warn-list");
     const assumedKi = formatKi(Math.pow(10, 9 - ASSUMED_PKI));
     const bullets = [
@@ -179,6 +183,7 @@ export function createSimulation({ body, data, deps, ui }) {
       t("sim.warn.halfLife"),
       t("sim.warn.plasma"),
       t("sim.warn.dose", { h: TMAX_HOURS }),
+      t("sim.warn.endogenous"),
       t("sim.warn.additive"),
       t("sim.warn.unknown"),
       t("sim.warn.assumedKi", { ki: assumedKi }),
@@ -794,6 +799,12 @@ export function createSimulation({ body, data, deps, ui }) {
     buildPkSection();
     buildRxSection();
     buildSolveSection();
+    // The lead states the question the tab answers in both directions, and the unit
+    // it answers it in, before the warnings box qualifies that answer.
+    const lead = el("div", "sim-lead");
+    lead.appendChild(el("p", null, t("sim.lead")));
+    lead.appendChild(el("p", "sim-lead-unit", t("sim.leadUnit")));
+    body.appendChild(lead);
     body.appendChild(warnBox);
     body.appendChild(drugSec);
     body.appendChild(pkSec);

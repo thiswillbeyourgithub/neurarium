@@ -810,9 +810,20 @@ scene (the Enzymes section's caption says so, so a still scene reads as intended
 
 ## Simulation (beta)
 
-Pick a few drugs and see what the combination does: the only place in the app that **computes** a
-claim instead of reporting a sourced one, which is why the tab opens with a box listing what the
-model does not know (and why every string in it stays conditional).
+**Receptor occupancy, asked from both ends**: forward, what a combination of drugs engages, and
+backward, which combination would approach a profile the visitor describes. The only place in the
+app that **computes** a claim instead of reporting a sourced one, which is why the tab leads with
+what it answers and in what unit, then a box listing what the model does not know (stated as
+non-exhaustive, and every string in it conditional).
+
+**What it computes is an engagement index, never a percentage occupied**, and the distinction is
+load-bearing: occupancy is `(C/Ki)/(1 + Σ C/Ki)`, so a Ki supplies the denominators and the
+concentration at the receptor supplies everything else. Reaching a real C needs per-drug PK the
+dataset does not have (dose + molar mass, bioavailability, Vd, free fraction, unbound
+brain-to-plasma ratio, an absorption rate), plus two terms that are not PK at all (the endogenous
+transmitter the drug competes with, and efficacy). `js/sim-model.js`'s header point 5 spells this
+out; it is also why potencies add instead of competing, since competition is meaningless before
+every C is on one real scale and would break the linearity the inverse solve needs.
 
 - The maths live in `js/sim-model.js`, whose header states each shortcut once (one assumed
   time-to-peak, a range T½ collapsed to its midpoint, potencies added with no competition, a
