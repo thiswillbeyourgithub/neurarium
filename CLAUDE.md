@@ -692,9 +692,13 @@ fixed Stahl list.
   drug, action in `DRUG_ACTIONS`, the quote names the target under the very matcher that offered it,
   the quote verbatim on the page) and is the sole writer of the direction; `recheck_quotes.py`
   then stamps the judge. **Confirm-only**: it never adds a binding and never revises a direction
-  another corpus states. A binding whose article never discusses it stays a NOSOURCE
-  `drug_binding_action` node on purpose, which is most of them (an article states a handful of
-  directions, not a whole assay panel).
+  another corpus states. A **second input** reaches the targets prose never discusses:
+  `tools/fetch/fetch_binding_direction_tables.py` reads the `Action` column of the article's own Ki
+  table (an exact-vocabulary cell, one verbatim table row as the quote, `extraction: "code"`, so no
+  judge and no recheck, exactly like the Ki in the same row) into `binding_directions_tables.json`,
+  applied by the same applier's `--tables` through the gates above. A binding neither the prose nor
+  the table states stays a NOSOURCE `drug_binding_action` node on purpose, which is most of them (an
+  article states a handful of directions, not a whole assay panel).
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
   median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
   assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as

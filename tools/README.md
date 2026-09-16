@@ -441,6 +441,14 @@ Screenshots).
   one of that drug's affinity-only targets, with **no verdict of its own**, into
   `tools/generated_cache/binding_directions_worklist.json`. `--only <ids>` scopes. See CLAUDE.md Drugs
   (Binding directions).
+- `tools/fetch/fetch_binding_direction_tables.py`: `uv run` (deps: beautifulsoup4). Offline once the
+  articles are stored. The other direction input, a **code extraction**: it reuses
+  `fetch_wikipedia_pharmacology`'s grid, header detection, target resolver and row text to read the
+  `Action` column beside the Ki one, and proposes a direction only where the cell maps **exactly** onto
+  `DRUG_ACTIONS` (`Inhibitor`/`Blocker` typed by the target, a `ND` / glyph / percentage / slash reading
+  reported and left alone, two rows that disagree skipped), for a target the drug currently binds
+  `affinity_only`, into `tools/generated_cache/binding_directions_tables.json`. `--only <ids>` scopes.
+  See CLAUDE.md Drugs (Binding directions).
 - `tools/sourcing/apply_binding_directions.py`: stdlib. Quote-gates the judged directions
   (`binding_directions_judged.json`, a candidate **index** per row, never a quote string) and is the
   **sole writer** of an `action` onto an `affinity_only` binding in `drugs_data.jsonl`. Six gates: the
@@ -448,7 +456,12 @@ Screenshots).
   (confirm-only, so nothing is added or revised); the action is in `DRUG_ACTIONS`; the quote names the
   target (`tools/target_aliases.py`, the matcher the fetcher offered it with); the quote is verbatim on
   `data_sources/wikipedia/pages/<slug>.md`. Writes no `llm` stamp (`recheck_quotes.py`'s job).
-  Idempotent, `--dry-run`/`--verbose`. See CLAUDE.md Drugs (Binding directions).
+  Idempotent, `--dry-run`/`--verbose`. **`--tables`** applies the table proposals instead
+  (`binding_directions_tables.json`): gates 3, 4 and 6 are the same shared `_Gate`, there is no index
+  to resolve, and gate 5 becomes "the row opens with its target cell and that cell resolves to the
+  target claimed" under the fetcher's own resolver; the source is stamped `extraction: "code"`, so this
+  input needs no `recheck_quotes.py` pass. Needs beautifulsoup4 on the path for that resolver.
+  See CLAUDE.md Drugs (Binding directions).
 - `tools/target_aliases.py`: stdlib **library**, imported by both halves above: every name a modeled
   drug target goes by in prose (Greek folded to Latin, separator-tolerant, boundary-strict, so `d2`
   never fires on `CYP2D6` and `alpha2` never absorbs `alpha2A`). One definition, because a gate that
