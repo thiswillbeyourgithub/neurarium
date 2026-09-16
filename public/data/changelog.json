@@ -10,6 +10,13 @@
           "commits": [
             "ba42c5c"
           ]
+        },
+        {
+          "category": "docs",
+          "text": "The repository map and the tool reference describe how a receptor bar is coloured and the palette it reads from.",
+          "commits": [
+            "7cedab9"
+          ]
         }
       ]
     },
