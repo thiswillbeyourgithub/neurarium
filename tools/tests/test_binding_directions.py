@@ -9,14 +9,19 @@ pytest-discoverable.
 
 ``GateTest`` drives ``apply_binding_directions.apply`` over a hand-built worklist with a
 fake page store, so it runs on a clone that lacks the gitignored corpus #9 tree.
+``TableGateTest`` drives the other input, ``apply_tables``, the same way: a hand-built
+proposals file, a fake page and the fetcher's resolver injected, so the shared gate is
+exercised on both its callers without bs4.
 ``AliasTest`` pins the matcher both halves share: the fetcher offers a sentence because
 it names a target, and the applier lets the judge's pick through for the same reason, so
-a drift there would let the gate accept what the worklist never showed.
+a drift there would let the gate accept what the worklist never showed. ``TableCellTest``
+pins the other half of that pairing, the Action cell the table pass reads in its place.
 
 Built with the help of Claude Code.
 """
 
 import copy
+import importlib.util
 import json
 import sys
 import tempfile
@@ -29,6 +34,13 @@ sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
 import drugs_io  # noqa: E402
 import target_aliases as ta  # noqa: E402
 import apply_binding_directions as A  # noqa: E402
+
+# The table fetcher imports bs4 at module level, which a plain clone need not have; the
+# applier half it feeds is tested regardless, the resolver being injected.
+HAS_BS4 = importlib.util.find_spec("bs4") is not None
+if HAS_BS4:
+    sys.path.insert(0, str(ROOT / "tools" / "fetch"))
+    import fetch_binding_direction_tables as T  # noqa: E402
 
 # The one stored page every fixture quote must be verbatim on. `read_page` returns it
 # normalized, exactly as the real `page_text` does.
@@ -80,6 +92,40 @@ def run(judged, data=None):
 
 def binding(drug, target):
     return next(b for b in drug["bindings"] if b["target"] == target)
+
+
+# The table half of the pass. Its quote is one flattened row of the article's Ki table,
+# so the stored page holds those rows as `row_text` writes them.
+TABLE_PAGE = ("Binding profile\n"
+              "Target | Ki (nM) | Action\n"
+              "5-HT 2C | 3.0 | Antagonist\n"
+              "\u03b1 2A | 12 | Agonist\n"
+              "H 1 | 0.5 | Inverse agonist\n")
+
+# The fetcher's own resolver, injected exactly as the script injects it: a name it cannot
+# resolve is a name it never offered, so the gate can never accept one.
+WIKI_TARGETS = {"5-HT 2C": "5ht2c", "\u03b1 2A": "alpha2a", "H 1": "h1"}
+
+
+def read_table_page(slug):
+    return A.normalize_for_match(TABLE_PAGE) if slug == "testdrug" else None
+
+
+def table_row(target, wiki_name, cell, action, quote):
+    return {"target": target, "wiki_name": wiki_name, "cell": cell,
+            "action": action, "quote": quote}
+
+
+def run_tables(rows, data=None):
+    """Apply one proposals file; returns the mutated drug record and the reasons."""
+    data = data if data is not None else drugs()
+    stats, rejected = A.apply_tables({"testdrug": {"slug": "testdrug", "rows": rows}},
+                                     data, read_table_page, WIKI_TARGETS.get)
+    return data[0], [line.split("]")[0][1:] for line in rejected], stats
+
+
+GOOD_ROW = table_row("5ht2c", "5-HT 2C", "Antagonist", "antagonist",
+                     "5-HT 2C | 3.0 | Antagonist")
 
 
 class GateTest(unittest.TestCase):
@@ -240,6 +286,114 @@ class AliasTest(unittest.TestCase):
         self.assertNames("d2", "dopamine D 2 receptor antagonist")
         self.assertNames("d2", "metabolized by CYP2D6", False)
         self.assertNames("d2", "quick and 2 others", False)
+
+
+class TableGateTest(unittest.TestCase):
+    """The same gates over a copied table cell instead of a chosen sentence."""
+
+    def test_a_good_row_sets_the_direction_and_cites_the_row(self):
+        drug, why, _ = run_tables([GOOD_ROW])
+        b = binding(drug, "5ht2c")
+        self.assertEqual(why, [])
+        self.assertEqual(b["action"], "antagonist")
+        self.assertNotIn("affinity_only", b)
+        self.assertEqual(b["ki"]["source"]["corpus"], "pdsp_ki")
+        self.assertEqual(b["sources"], [{"corpus": "wikipedia_pharm", "page": "testdrug",
+                                         "quote": "5-HT 2C | 3.0 | Antagonist",
+                                         "provenance": "verified",
+                                         "extraction": "code"}])
+
+    def test_the_source_is_stamped_code_and_never_judged(self):
+        """A copied cell has no wrong-true-sentence failure mode, so `extraction: "code"`
+        stands in for the judge stamp the prose path waits on."""
+        drug, _why, _ = run_tables([GOOD_ROW])
+        self.assertNotIn("llm", binding(drug, "5ht2c")["sources"][0])
+
+    def test_a_quote_that_does_not_open_with_its_target_cell_is_rejected(self):
+        """The row text is the target cell first, so a quote starting anywhere else is not
+        the row the proposal claims to have read."""
+        drug, why, _ = run_tables([table_row("5ht2c", "5-HT 2C", "Antagonist", "antagonist",
+                                             "Binding profile 5-HT 2C | 3.0 | Antagonist")])
+        self.assertEqual(why, ["quote does not name the target"])
+        self.assertTrue(binding(drug, "5ht2c")["affinity_only"])
+
+    def test_a_name_resolving_elsewhere_cannot_be_paired_with_this_target(self):
+        """Gate 5 for a row: the cell resolves under the fetcher's resolver, and it must
+        resolve to the very target the row claims."""
+        drug, why, _ = run_tables([table_row("5ht2c", "\u03b1 2A", "Agonist", "agonist",
+                                             "\u03b1 2A | 12 | Agonist")])
+        self.assertEqual(why, ["quote does not name the target"])
+        self.assertTrue(binding(drug, "5ht2c")["affinity_only"])
+
+    def test_a_binding_that_already_states_a_direction_is_untouched(self):
+        drug, why, _ = run_tables([table_row("h1", "H 1", "Inverse agonist",
+                                             "inverse_agonist",
+                                             "H 1 | 0.5 | Inverse agonist")])
+        b = binding(drug, "h1")
+        self.assertEqual(why, ["binding already states a direction"])
+        self.assertEqual(b["action"], "antagonist")
+        self.assertEqual([src["corpus"] for src in b["sources"]], ["stahl"])
+
+    def test_an_action_outside_the_vocabulary_is_rejected(self):
+        drug, why, _ = run_tables([table_row("5ht2c", "5-HT 2C", "Blocks it", "blocks_it",
+                                             "5-HT 2C | 3.0 | Antagonist")])
+        self.assertEqual(why, ["unknown action"])
+        self.assertTrue(binding(drug, "5ht2c")["affinity_only"])
+
+    def test_a_row_that_is_not_on_the_page_fails_the_verbatim_gate(self):
+        drug, why, _ = run_tables([table_row("5ht2c", "5-HT 2C", "Partial agonist",
+                                             "partial_agonist",
+                                             "5-HT 2C | 3.0 | Partial agonist")])
+        self.assertEqual(why, ["quote not verbatim on the cited page"])
+        self.assertTrue(binding(drug, "5ht2c")["affinity_only"])
+
+    def test_second_run_changes_nothing_and_reports_no_rejection(self):
+        data = drugs()
+        run_tables([GOOD_ROW], data)
+        after_first = copy.deepcopy(data)
+        _drug, why, stats = run_tables([GOOD_ROW], data)
+        self.assertEqual(data, after_first)
+        self.assertEqual(why, [])
+        self.assertEqual(stats["skipped: already applied"], 1)
+
+    def test_a_drug_the_dataset_does_not_carry_is_rejected(self):
+        data = drugs()
+        _stats, rejected = A.apply_tables(
+            {"nosuchdrug": {"slug": "nosuchdrug", "rows": [GOOD_ROW]}},
+            data, read_table_page, WIKI_TARGETS.get)
+        self.assertEqual([line.split("]")[0][1:] for line in rejected],
+                         ["drug not in the dataset"])
+        self.assertTrue(binding(data[0], "5ht2c")["affinity_only"])
+
+
+@unittest.skipUnless(HAS_BS4, "the table fetcher imports bs4 at module level")
+class TableCellTest(unittest.TestCase):
+    """The Action cell -> action-key reading, the one judgement the table pass makes."""
+
+    def test_a_cell_in_the_vocabulary_reads_straight_through(self):
+        self.assertEqual(T.typed_action("Antagonist", "receptor"), "antagonist")
+
+    def test_a_footnote_does_not_hide_the_cell(self):
+        self.assertEqual(T.fold_cell("Inverse agonist [12]"), "inverse agonist")
+        self.assertEqual(T.typed_action("Inverse agonist [12]", "receptor"),
+                         "inverse_agonist")
+
+    def test_inhibitor_is_read_by_what_the_target_is(self):
+        # One word, three different nodes: a transporter is reuptake-inhibited, an enzyme
+        # enzyme-inhibited, a channel blocked, and on a receptor it says nothing.
+        self.assertEqual(T.typed_action("Inhibitor", "transporter"), "reuptake_inhibitor")
+        self.assertEqual(T.typed_action("Inhibitor", "enzyme"), "enzyme_inhibitor")
+        self.assertEqual(T.typed_action("Inhibitor", "ion_channel"), "blocker")
+        self.assertIsNone(T.typed_action("Inhibitor", "receptor"))
+
+    def test_a_cell_that_states_no_direction_is_left_alone(self):
+        self.assertIsNone(T.typed_action("ND", "receptor"))
+
+    def test_two_readings_in_one_cell_are_left_alone(self):
+        # The vocabulary holds one action per binding, so a slash reading is not ours to
+        # split.
+        self.assertIsNone(
+            T.typed_action("partial agonist / functional antagonist", "receptor"))
 
 
 if __name__ == "__main__":
