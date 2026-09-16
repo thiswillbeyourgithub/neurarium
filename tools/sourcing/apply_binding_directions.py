@@ -37,6 +37,15 @@ backed until a second model has agreed it supports the claim, and that stamp is
 ships unjudged"). Until it runs, ``check_data.py`` family 5 will flag these citations,
 which is the intended loud reminder.
 
+**The second input, ``--tables``** (``binding_directions_tables.json``, written by
+``tools/fetch/fetch_binding_direction_tables.py``): the direction read off the ``Action``
+column of the article's own Ki table, one verbatim table row as the quote. Gates 3, 4 and 6
+are the same; gates 1 and 2 have no index to resolve; gate 5 becomes "the row's target cell
+resolves to the target claimed" under the very resolver the fetcher offered it with
+(``fetch_wikipedia_pharmacology.resolve_wiki_target``). A cell is copied, not chosen, so
+that source is stamped ``extraction: "code"`` (pipeline ``page_code``) and needs no judge
+and no recheck: the Ki value in the same row is sourced exactly this way.
+
 Sole writer of a direction onto an affinity-only binding, and idempotent: a binding
 already carrying that exact ``wikipedia_pharm`` quote is skipped, so re-running with the
 same judged file changes nothing.
@@ -45,9 +54,11 @@ Usage (from the repo root), then regenerate + check::
 
     python tools/sourcing/apply_binding_directions.py --dry-run
     python tools/sourcing/apply_binding_directions.py
+    uv run --with beautifulsoup4 python tools/sourcing/apply_binding_directions.py --tables --dry-run
+    uv run --with beautifulsoup4 python tools/sourcing/apply_binding_directions.py --tables
     python tools/generate_data.py && python tools/check_data.py
 
-Stdlib only; author-side (the gate needs the gitignored corpus #9 page tree, so on a
+Stdlib only (``--tables`` imports the resolver, and so bs4, lazily); author-side (the gate needs the gitignored corpus #9 page tree, so on a
 clone without it the script refuses rather than writing ungated quotes).
 
 Built with the help of Claude Code.
@@ -73,6 +84,7 @@ CORPUS = "wikipedia_pharm"
 CACHE = os.path.join(REPO, "tools", "generated_cache")
 WORKLIST = os.path.join(CACHE, "binding_directions_worklist.json")
 JUDGED = os.path.join(CACHE, "binding_directions_judged.json")
+TABLES = os.path.join(CACHE, "binding_directions_tables.json")
 PAGES = os.path.join(REPO, "data_sources", "wikipedia", "pages")
 
 
@@ -123,13 +135,8 @@ def apply(worklist: list[dict], judged: dict, drugs: list[dict],
     by_work = {rec["drug"]: rec for rec in worklist}
     by_drug = {d["id"]: d for d in drugs}
     aliases = ta.aliases_by_target()
-    stats: collections.Counter = collections.Counter()
-    rejected: list[str] = []
-    pages: dict[str, str | None] = {}
-
-    def reject(why: str, detail: str) -> None:
-        stats[f"rejected: {why}"] += 1
-        rejected.append(f"[{why}] {detail}")
+    gate = _Gate(read_page)
+    stats, rejected, reject = gate.stats, gate.rejected, gate.reject
 
     for drug_id in sorted(judged):
         rec = by_work.get(drug_id)
@@ -152,41 +159,108 @@ def apply(worklist: list[dict], judged: dict, drugs: list[dict],
                 continue
             quote = cands[index]
 
-            binding = next((b for b in drug.get("bindings", [])
-                            if b.get("target") == target), None)
-            if binding is None:
-                reject("no binding on that target", label)
-                continue
-            if _already_applied(binding, quote):
-                stats["skipped: already applied"] += 1
-                continue
-            if not binding.get("affinity_only"):
-                # Confirm-only: this pass fills a direction in, it never revises one.
-                reject("binding already states a direction", label)
-                continue
-            if action not in DRUG_ACTIONS:
-                reject("unknown action", label)
-                continue
-            if not ta.mentions(quote, aliases.get(target, [])):
-                reject("quote does not name the target", f"{label}: {quote[:80]}")
-                continue
-            if slug not in pages:
-                pages[slug] = read_page(slug)
-            body = pages[slug]
-            if body is None:
-                reject("no stored page for the citation", f"{label} ({slug})")
-                continue
-            if normalize_for_match(quote) not in body:
-                reject("quote not verbatim on the cited page", f"{label}: {quote[:80]}")
-                continue
-
-            binding.pop("affinity_only", None)
-            binding["action"] = action
-            binding.setdefault("sources", []).append(
-                {"corpus": CORPUS, "page": slug, "quote": quote,
-                 "provenance": "verified"})
-            stats[f"node: {action}"] += 1
+            gate.write(drug, target, action, quote, slug, label,
+                       names_target=lambda: ta.mentions(quote, aliases.get(target, [])))
     return stats, rejected
+
+
+class _Gate:
+    """Gates 3 to 6 and the write, shared by both inputs (a judged sentence, a table row).
+
+    Holds the tally, the rejection log and the page cache so each caller only supplies
+    what differs: how gate 5 decides the quote names the target, and how the source is
+    stamped (a chosen sentence carries no ``extraction``; a copied cell is ``code``).
+    """
+
+    def __init__(self, read_page, extraction: str | None = None) -> None:
+        self.read_page = read_page
+        self.extraction = extraction
+        self.stats: collections.Counter = collections.Counter()
+        self.rejected: list[str] = []
+        self.pages: dict[str, str | None] = {}
+
+    def reject(self, why: str, detail: str) -> None:
+        self.stats[f"rejected: {why}"] += 1
+        self.rejected.append(f"[{why}] {detail}")
+
+    def write(self, drug: dict, target: str, action: str, quote: str, slug: str,
+              label: str, names_target) -> bool:
+        binding = next((b for b in drug.get("bindings", [])
+                        if b.get("target") == target), None)
+        if binding is None:
+            self.reject("no binding on that target", label)
+            return False
+        if _already_applied(binding, quote):
+            self.stats["skipped: already applied"] += 1
+            return False
+        if not binding.get("affinity_only"):
+            # Confirm-only: this pass fills a direction in, it never revises one.
+            self.reject("binding already states a direction", label)
+            return False
+        if action not in DRUG_ACTIONS:
+            self.reject("unknown action", label)
+            return False
+        if not names_target():
+            self.reject("quote does not name the target", f"{label}: {quote[:80]}")
+            return False
+        if slug not in self.pages:
+            self.pages[slug] = self.read_page(slug)
+        body = self.pages[slug]
+        if body is None:
+            self.reject("no stored page for the citation", f"{label} ({slug})")
+            return False
+        if normalize_for_match(quote) not in body:
+            self.reject("quote not verbatim on the cited page", f"{label}: {quote[:80]}")
+            return False
+
+        binding.pop("affinity_only", None)
+        binding["action"] = action
+        source = {"corpus": CORPUS, "page": slug, "quote": quote, "provenance": "verified"}
+        if self.extraction:
+            source["extraction"] = self.extraction
+        binding.setdefault("sources", []).append(source)
+        self.stats[f"node: {action}"] += 1
+        return True
+
+
+def apply_tables(proposals: dict, drugs: list[dict], read_page,
+                 resolve) -> tuple[collections.Counter, list[str]]:
+    """Run the gates over the table proposals, writing the survivors onto ``drugs``.
+
+    Parameters
+    ----------
+    proposals : dict
+        ``{drug id: {slug, rows: [{target, wiki_name, cell, action, quote}, ...]}}``.
+    drugs : list of dict
+        The authored drug records, **mutated in place** for every row that passes.
+    read_page : callable
+        ``slug -> normalized page text or None``.
+    resolve : callable
+        ``wiki_name -> target id or None``, the fetcher's own resolver, injected so the
+        gate is testable without bs4 and can never accept a name the fetcher could not
+        have offered.
+    """
+    by_drug = {d["id"]: d for d in drugs}
+    gate = _Gate(read_page, extraction="code")
+    for drug_id in sorted(proposals):
+        drug = by_drug.get(drug_id)
+        rec = proposals[drug_id]
+        if drug is None:
+            gate.reject("drug not in the dataset", drug_id)
+            continue
+        for row in rec.get("rows", []):
+            target, action, quote = row.get("target"), row.get("action"), row.get("quote")
+            name = row.get("wiki_name") or ""
+            label = f"{drug_id} {target}/{action} cell={row.get('cell')!r}"
+            if not isinstance(quote, str) or not quote:
+                gate.reject("no quote on the row", label)
+                continue
+            # Gate 5 for a table row: the row text opens with the target cell, and that
+            # cell resolves to the target the row claims.
+            gate.write(drug, target, action, quote, rec.get("slug", ""), label,
+                       names_target=lambda: bool(name) and quote.startswith(name)
+                       and resolve(name) == target)
+    return gate.stats, gate.rejected
 
 
 def main() -> int:
@@ -195,23 +269,44 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true", help="report without writing")
     ap.add_argument("--verbose", action="store_true", help="list every rejected row")
     ap.add_argument("--judged", default=JUDGED, help="judged file to apply")
+    ap.add_argument("--tables", nargs="?", const=TABLES, metavar="FILE",
+                    help="apply the table-column proposals instead (default file: "
+                         f"{os.path.relpath(TABLES, REPO)})")
     args = ap.parse_args()
 
     if not os.path.isdir(PAGES):
         print(f"missing the author-side corpus tree ({PAGES}); see CLAUDE.local.md",
               file=sys.stderr)
         return 1
-    for path in (WORKLIST, args.judged):
+    inputs = (args.tables,) if args.tables else (WORKLIST, args.judged)
+    for path in inputs:
         if not os.path.exists(path):
             print(f"missing {os.path.relpath(path, REPO)}", file=sys.stderr)
             return 1
 
-    with open(WORKLIST, encoding="utf-8") as f:
-        worklist = json.load(f)
-    with open(args.judged, encoding="utf-8") as f:
-        judged = json.load(f)
     drugs = drugs_io.load_drugs()
-    stats, rejected = apply(worklist, judged, drugs, page_text)
+    if args.tables:
+        # The fetcher's resolver, imported here only: it needs bs4, which the judged
+        # path (and a plain clone running the tests) does not.
+        sys.path.insert(0, os.path.join(REPO, "tools", "fetch"))
+        try:
+            import fetch_wikipedia_pharmacology as wiki  # noqa: E402
+        except ModuleNotFoundError as exc:
+            print(f"--tables needs the fetcher's resolver ({exc}); run it as\n"
+                  "  uv run --with beautifulsoup4 python "
+                  "tools/sourcing/apply_binding_directions.py --tables", file=sys.stderr)
+            return 1
+        valid_ids = wiki.load_valid_ids()
+        with open(args.tables, encoding="utf-8") as f:
+            proposals = json.load(f)
+        stats, rejected = apply_tables(proposals, drugs, page_text,
+                                       lambda name: wiki.resolve_wiki_target(name, valid_ids))
+    else:
+        with open(WORKLIST, encoding="utf-8") as f:
+            worklist = json.load(f)
+        with open(args.judged, encoding="utf-8") as f:
+            judged = json.load(f)
+        stats, rejected = apply(worklist, judged, drugs, page_text)
 
     written = sum(n for key, n in stats.items() if key.startswith("node: "))
     print(f"{written} affinity-only binding(s) given a sourced direction")
