@@ -2,6 +2,7 @@
 {"id": "q_0019a11cebbc", "corpus": "stahl", "page": 115, "quote": "Neuroactive steroid", "llm": "sonnet", "heading": ["Brexanolone", "Therapeutics", "Best Augmenting Combos for Partial Response or Treatment Resistance"]}
 {"id": "q_0046f0b3a048", "corpus": "stahl", "page": 915, "quote": "Atypical antipsychotic (serotonin– dopamine, serotonin; second-generation antipsychotic; also a mood stabilizer)", "llm": "sonnet", "heading": ["Ziprasidone", "Therapeutics", "Class"]}
 {"id": "q_004efb1eb3e6", "corpus": "wikipedia_fr", "page": "m_mantine", "quote": "Axura", "llm": "sonnet"}
+{"id": "q_00649b729dde", "corpus": "wikipedia_pharm", "page": "biperiden", "quote": "In young, healthy volunteers, peak plasma concentrations following a single oral 4 mg immediate-release dose are reached after 1.5 hours.", "llm": "sonnet"}
 {"id": "q_0070fd8dd655", "corpus": "stahl", "page": 798, "quote": "Metabolized by CYP1A2 and CYP3A4", "llm": "opus", "heading": ["Tasimelteon", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_0077ffe293e0", "corpus": "wikipedia_pharm", "page": "prochlorperazine", "quote": "5-HT 7 | 6,760 | Human"}
 {"id": "q_007c8889c167", "corpus": "stahl", "page": 267, "quote": "Antabuse", "llm": "sonnet", "heading": ["Disulfiram", "Therapeutics"]}
@@ -51,6 +52,7 @@
 {"id": "q_04bc6051c065", "corpus": "gtopdb_class", "page": 295, "quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | type: gpcr | family: Metabotropic glutamate receptors"}
 {"id": "q_04bd2c684a20", "corpus": "wikipedia_fr", "page": "m_mantine", "quote": "Ebixa", "llm": "sonnet"}
 {"id": "q_04bd8e6b683d", "corpus": "stahl", "page": 497, "quote": "Mean half-life approximately 51 hours", "llm": "sonnet", "heading": ["Maprotiline", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_04d2bd7dd3f3", "corpus": "wikipedia_pharm", "page": "quetiapine", "quote": "Peak levels of quetiapine occur 1.5 hours after a dose.", "llm": "sonnet"}
 {"id": "q_05170853c357", "corpus": "gtopdb", "page": 317, "quote": "Widely distributed throughout the CNS, most prominant expression in the forebrain regions. Caudate putamen, nucleus accumbens, amygdala, pontine nucleus, olfactory bulb, olfactory tubercle > interpeduncular nucleus, cortex (most dense in layers II-III and V-VI) > thalamus, hypothalamus, stria terminalis, hippocampus, globus pallidus, preoptic area, colliculi. Virtually no binding in the periaqueductal grey and raphe nuclei.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_0522ea2a2220", "corpus": "gtopdb_ki", "page": "triazolam", "quote": "triazolam at GABAA receptor α2 subunit (GABRA2, Human): Allosteric modulator / Positive, pKi 9.23 [PMID 10633039]", "species": "Human"}
 {"id": "q_055408330d53", "corpus": "stahl", "page": 456, "quote": "Metabolized by CYP2D6 and to a lesser extent by CYP1A2 and CYP2C19", "llm": "opus", "heading": ["Lofexidine", "Dosing and use", "Do Not Use"]}
@@ -78,6 +80,7 @@
 {"id": "q_0652762a6f2c", "corpus": "stahl", "page": 257, "quote": "Diastat", "llm": "sonnet", "heading": ["Diazepam", "Therapeutics", "Brands"]}
 {"id": "q_066666bc7f7b", "corpus": "stahl", "page": 271, "quote": "Aricept", "llm": "sonnet", "heading": ["Donepezil", "Therapeutics", "Brands"]}
 {"id": "q_06962e550039", "corpus": "stahl", "page": 761, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet", "heading": ["Sertindole", "Therapeutics", "Class"]}
+{"id": "q_06970b57ccb9", "corpus": "wikipedia_pharm", "page": "phenelzine", "quote": "The time to peak plasma concentration is 43 minutes, and the half-life is 11.6 hours.", "llm": "sonnet"}
 {"id": "q_069eddf12d0e", "corpus": "stahl", "page": 303, "quote": "Esketamine is a nonselective, noncompetitive open-channel inhibitor of the NMDA receptor; specifically, it binds to the phencyclidine site of the NMDA receptor", "llm": "sonnet", "heading": ["Esketamine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_06a1b3fea2cb", "corpus": "wikipedia_fr", "page": "m_thaqualone", "quote": "Quaalude", "llm": "sonnet"}
 {"id": "q_06af4a3b54ae", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "5-HT 1B | 519 | 406.8"}
@@ -92,6 +95,7 @@
 {"id": "q_07048706745c", "corpus": "wikipedia_fr", "page": "agom_latine", "quote": "Thymanax", "llm": "sonnet"}
 {"id": "q_0718bf290706", "corpus": "gtopdb_class", "page": 317, "quote": "δ receptor (OPRD1), GtoPdb target 317 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Phospholipase C stimulation, Potassium channel, Calcium channel, Other - See Comments"}
 {"id": "q_072b75a13d10", "corpus": "stahl_essential", "page": 338, "quote": "Certain general anesthetics (e.g., propofol, etomidate, alphaxolone, alfadalone) also bind at the same sites as neuroactive steroids, but are dosed much higher.", "llm": "sonnet"}
+{"id": "q_072fb9f9ccf0", "corpus": "stahl", "page": 305, "quote": "Time to maximum plasma concentration is approximately 20–40 minutes after the last administered nasal spray", "llm": "sonnet"}
 {"id": "q_0739866949dd", "corpus": "stahl_essential", "page": 473, "quote": "Alpha-2A receptors are linked to the molecule cyclic adenosine monophosphate (cAMP) via the inhibitory G protein (Gi) (Figure 11-17).", "llm": "sonnet", "heading": ["11 Attention Deficit Hyperactivity Disorder and Its Treatment"]}
 {"id": "q_07454a525b18", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Citaxin", "llm": "sonnet"}
 {"id": "q_0758d5cb5b21", "corpus": "stahl", "page": 787, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet", "heading": ["Sulpiride", "Therapeutics", "Class"]}
@@ -120,6 +124,7 @@
 {"id": "q_0949ab3e60d4", "corpus": "gtopdb", "page": 215, "quote": "Prelimbic cortex.", "species": "Mouse", "llm": "sonnet"}
 {"id": "q_094e2a4a34cc", "corpus": "kandel", "page": 1137, "quote": "Melatonin is made by the pineal gland, and the suprachiasmatic neurons time its release through communication with neurons in the paraventricular nucleus of the hypothalamus that activate sympathetic innervation of the pineal gland. Neurons in the suprachiasmatic nucleus contain melatonin receptors, which reinforce circadian rhythms.", "llm": "opus", "heading": ["44 Sleep and Wakefulness", "Sleep Is Regulated by Homeostatic and Circadian Drives", "Circadian Control of Sleep Depends on Hypothalamic Relays"]}
 {"id": "q_0970d2ad7b02", "corpus": "stahl", "page": 925, "quote": "Short elimination half-life (approximately 2.5 hours)", "llm": "sonnet", "heading": ["Zolpidem", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_0985ce684872", "corpus": "wikipedia_pharm", "page": "opipramol", "quote": "After single oral administration of 100 mg the maximum plasma concentration is reached after 3 hours and amounts to 33.2 ng/mL.", "llm": "sonnet"}
 {"id": "q_099ae4da974e", "corpus": "stahl", "page": 247, "quote": "Bupropion also blocks reuptake of both norepinephrine and dopamine", "llm": "sonnet", "heading": ["Dextromethorphan–Bupropion", "Therapeutics", "How the Drug Works"]}
 {"id": "q_09a1773b9853", "corpus": "wikipedia_pharm", "page": "tranylcypromine", "quote": "Tranylcypromine has been reported to inhibit several cytochrome P450 enzymes, including CYP2A6 , CYP2C19 , CYP2C9 , CYP2D6 , CYP3A4 , and CYP2B6 .", "llm": "opus"}
 {"id": "q_09a298a8cc93", "corpus": "allen_ahba", "page": "HTR6", "quote": "HTR6 detected in accumbens: probe 1055247 PACall present in 9/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -294,6 +299,7 @@
 {"id": "q_159e5a171e1a", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "α 2A | 20–158 | Human"}
 {"id": "q_15b82f1bb614", "corpus": "gtopdb_ki", "page": "thiothixene", "quote": "thiothixene at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 8.4 [PMID 12629531]", "species": "Human"}
 {"id": "q_15bfd0966d6c", "corpus": "gtopdb", "page": 25, "quote": "Brain: mainly postsynaptic in prefrontal cortex.", "species": "Human", "llm": "sonnet"}
+{"id": "q_15c0f131c461", "corpus": "wikipedia_pharm", "page": "pseudoephedrine", "quote": "The drug reaches peak concentrations after 1 to 4 hours (mean 1.9 hours) in the case of the immediate-release formulation and after 2 to 6 hours in the case of the extended-release formulation.", "llm": "sonnet"}
 {"id": "q_15dbd440f4f5", "corpus": "stahl", "page": 731, "quote": "Metabolized by CYP2D6", "llm": "opus", "heading": ["Risperidone", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_15e771debc77", "corpus": "stahl", "page": 577, "quote": "Blocks serotonin reuptake pump (serotonin transporter) and norepinephrine reuptake pump (norepinephrine transporter) less potently", "llm": "sonnet", "heading": ["Nefazodone", "Therapeutics", "How the Drug Works"]}
 {"id": "q_15ece6802afc", "corpus": "stahl", "page": 541, "quote": "Half-life 20–40 hours", "llm": "sonnet", "heading": ["Mirtazapine", "Dosing and use", "Pharmacokinetics"]}
@@ -328,6 +334,7 @@
 {"id": "q_17d8aef3bd04", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in pons: probe 1054302 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_17f885e4dad9", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "D 2 | 13.5"}
 {"id": "q_182904e2d8ce", "corpus": "stahl", "page": 915, "quote": "Geodon", "llm": "sonnet", "heading": ["Ziprasidone", "Therapeutics"]}
+{"id": "q_18304f2db484", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "C max (maximum plasma concentration) is achieved 3–5 hours after oral dosing.", "llm": "sonnet"}
 {"id": "q_184d40fe32fa", "corpus": "stahl", "page": 601, "quote": "Blocks serotonin 2A receptors, causing enhancement of dopamine release in certain brain regions", "llm": "sonnet", "heading": ["Olanzapine–Samidorphan", "Therapeutics", "How the Drug Works"]}
 {"id": "q_1852868ac4e7", "corpus": "stahl", "page": 721, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter)", "llm": "sonnet", "heading": ["Reboxetine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_185a6ad573d0", "corpus": "wikipedia_pharm", "page": "donepezil", "quote": "Metabolism | CYP2D6 , CYP3A4 , and glucuronidation . Four major metabolites, two of which are active.", "llm": "opus"}
@@ -402,6 +409,7 @@
 {"id": "q_1c4b16292140", "corpus": "stahl", "page": 713, "quote": "Parent drug has 6–7-hour half-life", "llm": "sonnet", "heading": ["Quetiapine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_1c4e963d1204", "corpus": "gtopdb_ki", "page": "yohimbine", "quote": "yohimbine at α2B-adrenoceptor (ADRA2B, Human): Antagonist / Antagonist, pKi 7.7-8.4 [PMID 7996470]", "species": "Human"}
 {"id": "q_1c4f37220791", "corpus": "wikipedia_pharm", "page": "ethosuximide", "quote": "Metabolism | liver ( CYP3A4 , CYP2E1 )", "llm": "opus"}
+{"id": "q_1c6cd400a901", "corpus": "stahl", "page": 439, "quote": "1 hour to maximum concentration of lisdexamfetamine, 3.5 hours to maximum concentration of dextroamphetamine", "llm": "sonnet"}
 {"id": "q_1c81cc1c8d30", "corpus": "wikipedia_pharm", "page": "mianserin", "quote": "α 2B | 27 | Human"}
 {"id": "q_1c8a17299056", "corpus": "stahl", "page": 805, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet", "heading": ["Thioridazine", "Therapeutics", "Class"]}
 {"id": "q_1c977d9f1435", "corpus": "stahl", "page": 127, "quote": "Mu opioid receptor partial agonist", "llm": "sonnet", "heading": ["Buprenorphine", "Therapeutics", "Class"]}
@@ -441,11 +449,13 @@
 {"id": "q_1ebf11122192", "corpus": "gtopdb", "page": 318, "quote": "CNS: olfactory bulb, nucleus accumbens, caudate nucleus, putamen, temporal cortex, parietal cortex, thalamic nuclei > amygdala, occipital cortex, frontal cortex, hypothalamus, ventral tegmental area, cerebellar cortex > hippocampus, corpus mamillare, locus coeruleus, pituitary, spinal cord > globus pallidus, substantia nigra, superior colliculus, inferior colliculus, olivary nucleus.", "species": "Human", "llm": "sonnet"}
 {"id": "q_1ec741d72575", "corpus": "stahl", "page": 718, "quote": "Mean elimination half-life of major metabolite, M-II, is 2–5 hours", "llm": "sonnet", "heading": ["Ramelteon", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_1edf30183c4f", "corpus": "wikipedia_pharm", "page": "alimemazine", "quote": "Alimemazine ( INN ), also known as trimeprazine , commonly provided as a tartrate salt, is a phenothiazine derivative that is used as an antipruritic (it prevents itching from causes such as eczema or poison ivy , by acting as an antihistamine ).", "llm": "sonnet"}
+{"id": "q_1ee323cf6614", "corpus": "wikipedia_pharm", "page": "alcohol_drug", "quote": "Onset of action | Peak concentrations : • Range: 30–90 minutes • Mean: 45–60 minutes • Fasting : 30 minutes", "llm": "sonnet"}
 {"id": "q_1ee859c36ba6", "corpus": "stahl", "page": 119, "quote": "Blocks serotonin 7 receptors", "llm": "sonnet", "heading": ["Brexpiprazole", "Therapeutics", "Commonly Prescribed for"]}
 {"id": "q_1eef71031dd5", "corpus": "allen_ahba", "page": "CHRM5", "quote": "CHRM5 detected in mammillary: probe 1058213 PACall present in 9/9 samples (donors 10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_1f2f6f25e00d", "corpus": "stahl", "page": 167, "quote": "Combination of dopamine D2, histamine H1, and cholinergic M1 blockade in the vomiting center may reduce nausea and vomiting", "llm": "sonnet", "heading": ["Chlorpromazine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_1f319e388313", "corpus": "stahl", "page": 167, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and improving other behaviors", "llm": "sonnet", "heading": ["Chlorpromazine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_1f46f443ca77", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "5-HT 1B | 33 | 120 | 55 | Partial agonist"}
+{"id": "q_1f49d7c88f0f", "corpus": "stahl", "page": 337, "quote": "Oral: maximum plasma concentrations within 3–8 hours", "llm": "sonnet"}
 {"id": "q_1f4e0311bcd0", "corpus": "wikipedia_pharm", "page": "salvinorin_a", "quote": "Salvinorin A is a κ-opioid receptor agonist and hallucinogen and is the main active constituent in Salvia divinorum", "llm": "sonnet"}
 {"id": "q_1f691174d6f0", "corpus": "wikipedia_pharm", "page": "pargyline", "quote": "Pargyline is N - demethylated and N - depropargylated by CYP2E1 to form arylalkylamine and other metabolites including benzylamine , N -methylbenzylamine, and N -propargylbenzylamine, among others.", "llm": "opus"}
 {"id": "q_1f7723b84bd3", "corpus": "wikipedia_pharm", "page": "perphenazine", "quote": "α 2B | 104.9 | - | -"}
@@ -483,6 +493,7 @@
 {"id": "q_21b63d8acaee", "corpus": "wikipedia_pharm", "page": "cyamemazine", "quote": "5-HT 3 | 2943 | Human"}
 {"id": "q_21d72a0dac6a", "corpus": "wikipedia_pharm", "page": "fluoxetine", "quote": "Both are potent inhibitors of CYP2D6 (which is also the chief enzyme responsible for their metabolism) and CYP2C19 , and mild to moderate inhibitors of CYP2B6 and CYP2C9 .", "llm": "opus"}
 {"id": "q_21da9b2cc696", "corpus": "stahl", "page": 621, "quote": "Invega Trinza", "llm": "sonnet", "heading": ["Paliperidone", "Therapeutics", "Brands"]}
+{"id": "q_21eb24bf8487", "corpus": "wikipedia_pharm", "page": "pitolisant", "quote": "Pitolisant is readily absorbed when taken by mouth and reaches peak blood concentrations approximately 3 hours after administration.", "llm": "sonnet"}
 {"id": "q_21f5ec58551c", "corpus": "stahl", "page": 695, "quote": "For PTSD, blockade of beta 1 adrenergic receptors may theoretically prevent fear conditioning and reconsolidation of fear", "llm": "sonnet", "heading": ["Propranolol", "Therapeutics", "How the Drug Works"]}
 {"id": "q_220ae17ad39d", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in putamen: probe 1027284 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_2213061bb4b0", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in medulla: probe 1017111 PACall present in 132/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -494,6 +505,7 @@
 {"id": "q_2263aec33efc", "corpus": "stahl", "page": 69, "quote": "Abilify Maintena", "llm": "sonnet", "heading": ["Aripiprazole", "Therapeutics", "Brands"]}
 {"id": "q_227a871d47a9", "corpus": "stahl", "page": 783, "quote": "Dopamine and norepinephrine reuptake inhibitor", "llm": "sonnet", "heading": ["Solriamfetol", "Therapeutics", "Class"]}
 {"id": "q_227c77d0f783", "corpus": "stahl", "page": 283, "quote": "Selectively and potently blocks histamine 1 receptors, presumably decreasing wakefulness and thus promoting sleep", "llm": "sonnet", "heading": ["Doxepin", "Therapeutics", "How the Drug Works"]}
+{"id": "q_228525d72e41", "corpus": "wikipedia_pharm", "page": "amitriptyline", "quote": "Absorption is gradual with the peak concentration in blood plasma reached after about 4 hours.", "llm": "sonnet"}
 {"id": "q_228a079ef83f", "corpus": "allen_ahba", "page": "SLC18A2", "quote": "SLC18A2 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1051381, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.95: locus_coeruleus +4.45 (3d), substantia_nigra +3.80 (5d), vta +3.30 (5d), raphe +2.80 (5d), putamen -0.10 (5d), caudate -0.21 (5d)", "species": "Human"}
 {"id": "q_229b2746433b", "corpus": "wikipedia_pharm", "page": "melperone", "quote": "Melperone is reported to be a CYP2D6 inhibitor.", "llm": "opus"}
 {"id": "q_22b8b1c45c93", "corpus": "stahl", "page": 849, "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)", "llm": "sonnet", "heading": ["Trifluoperazine", "Therapeutics", "Class"]}
@@ -564,8 +576,10 @@
 {"id": "q_28997565286f", "corpus": "stahl", "page": 546, "quote": "Elimination half-life approximately 1–4 hours", "llm": "sonnet", "heading": ["Moclobemide", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_28bd04c815d8", "corpus": "wikipedia_pharm", "page": "xenon", "quote": "Xenon has been used as a general anesthetic , but it is more expensive than conventional anesthetics.", "llm": "sonnet"}
 {"id": "q_28c73607e3d6", "corpus": "stahl", "page": 617, "quote": "Half-life of parent drug is approximately 2 hours; half-life of MHD is approximately 9 hours; thus oxcarbazepine is essentially a prodrug rapidly converted to its MHD, licarbazepine", "llm": "sonnet", "heading": ["Oxcarbazepine", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_28ce74fb7ab9", "corpus": "wikipedia_pharm", "page": "clonidine", "quote": "Peak concentrations in human plasma occur within 60–90 minutes for the \"immediate release\" (IR) version of the drug, which is shorter than the \"extended release\" (ER/XR) version.", "llm": "sonnet"}
 {"id": "q_28da62b225d0", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "5-HT 1D | 770 | Human"}
 {"id": "q_28f3277ffe75", "corpus": "gtopdb_ki", "page": "cabergoline", "quote": "cabergoline at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 7.7 [PMID 12388666]", "species": "Human"}
+{"id": "q_28f81aa98fc8", "corpus": "wikipedia_pharm", "page": "phentermine", "quote": "Peak concentrations of phentermine are reached 6 hours following oral administration of a dose of 15 mg.", "llm": "sonnet"}
 {"id": "q_28f8e8173034", "corpus": "stahl", "page": 941, "quote": "Clopixol", "llm": "sonnet", "heading": ["Zuclopenthixol", "Therapeutics", "Brands"]}
 {"id": "q_291282293aba", "corpus": "stahl", "page": 533, "quote": "Ixel", "llm": "sonnet", "heading": ["Milnacipran", "Therapeutics", "Brands"]}
 {"id": "q_2919b0cff425", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "α 2C | 390 | Human"}
@@ -573,6 +587,7 @@
 {"id": "q_2929c5341558", "corpus": "stahl", "page": 157, "quote": "Based on the time to reach steady state, the half-life for cariprazine is 2–4 days and for one of its active metabolites, didesmethyl cariprazine (DDCAR), is 1–3 weeks", "llm": "sonnet", "heading": ["Cariprazine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_29435f2ad3a6", "corpus": "allen_ahba", "page": "GRIN1", "quote": "GRIN1 detected in hippocampus: probe 1055938 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_295b29df497c", "corpus": "stahl", "page": 633, "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet", "heading": ["Paroxetine", "Therapeutics", "Class"]}
+{"id": "q_296e6eefb97c", "corpus": "wikipedia_pharm", "page": "rasagiline", "quote": "The time to peak levels of rasagiline is 0.5 to 0.7 hours and steady-state peak levels are on average 8.5 ng/mL.", "llm": "sonnet"}
 {"id": "q_2982038f68e8", "corpus": "stahl", "page": 533, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet", "heading": ["Milnacipran", "Therapeutics", "How the Drug Works"]}
 {"id": "q_299915597827", "corpus": "wikipedia_fr", "page": "estazolam", "quote": "Nuctalon", "llm": "sonnet"}
 {"id": "q_29a2d8894fdd", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "β 1 | 141 | Agonist"}
@@ -598,6 +613,7 @@
 {"id": "q_2b143bad1675", "corpus": "stahl", "page": 539, "quote": "Blocks alpha 2 adrenergic presynaptic receptor, thereby increasing norepinephrine neurotransmission", "llm": "sonnet", "heading": ["Mirtazapine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_2b2cf2617434", "corpus": "stahl", "page": 817, "quote": "Anticonvulsant; selective GABA reuptake inhibitor (SGRI)", "llm": "sonnet", "heading": ["Tiagabine", "Therapeutics", "Class"]}
 {"id": "q_2b353a51208c", "corpus": "stahl", "page": 675, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet", "heading": ["Pipothiazine", "Therapeutics", "Class"]}
+{"id": "q_2b5c26f12f49", "corpus": "wikipedia_pharm", "page": "sodium_oxybate", "quote": "The average time to peak plasma concentration ranges from 0.5 to 1.25 hours.", "llm": "sonnet"}
 {"id": "q_2b7a1d80e46b", "corpus": "wikipedia_pharm", "page": "paliperidone", "quote": "α 2C | 2.7"}
 {"id": "q_2b7b5663d6ae", "corpus": "wikipedia_fr", "page": "escitalopram", "quote": "Cipralex", "llm": "sonnet"}
 {"id": "q_2b8ce8813652", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "α 2A | 660 | Human"}
@@ -626,6 +642,7 @@
 {"id": "q_2d077db44550", "corpus": "gtopdb_ki", "page": "cabergoline", "quote": "cabergoline at D2 receptor (DRD2, Human): Agonist / Partial agonist, pKi 9-9.2 [PMID 12388666]", "species": "Human"}
 {"id": "q_2d082d0e00e2", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "5-HT 1F | 310 | ND"}
 {"id": "q_2d08c69e5810", "corpus": "stahl", "page": 919, "quote": "Metabolized by CYP3A4", "llm": "opus", "heading": ["Ziprasidone", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_2d29a1511f4d", "corpus": "wikipedia_pharm", "page": "sibutramine", "quote": "The drug itself reaches its peak plasma level after 1 hour and has also a half-life of 1 hour.", "llm": "sonnet"}
 {"id": "q_2d2cc75ffc60", "corpus": "wikipedia_pharm", "page": "apomorphine", "quote": "5-HT 1A | 2,523 | partial agonist"}
 {"id": "q_2d2eae5497ee", "corpus": "gtopdb_class", "page": 295, "quote": "mGlu7 receptor (GRM7), GtoPdb target 295 | transduction: Gi/Go family | effectors: Adenylyl cyclase inhibition, Calcium channel"}
 {"id": "q_2d511deb4d5e", "corpus": "wikipedia_pharm", "page": "methamphetamine", "quote": "Metabolism | CYP2D6 and FMO3", "llm": "opus"}
@@ -723,6 +740,7 @@
 {"id": "q_33fe72f2119b", "corpus": "gtopdb_ki", "page": "mianserin", "quote": "mianserin at 5-HT6 receptor (HTR6, Human): Antagonist / Antagonist, pKi 6.9-7.3 [PMID 8522988]", "species": "Human"}
 {"id": "q_33ff153077b2", "corpus": "stahl", "page": 839, "quote": "Neuroscience-based Nomenclature: serotonin receptor antagonist (S-MM)", "llm": "sonnet", "heading": ["Trazodone", "Therapeutics", "Class"]}
 {"id": "q_343652c82685", "corpus": "gtopdb_ki", "page": "risperidone", "quote": "risperidone at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 7.3 [PMID 35224877]", "species": "Human"}
+{"id": "q_346e1b3d4b93", "corpus": "wikipedia_pharm", "page": "armodafinil", "quote": "The time to peak levels of armodafinil when fasted has been reported be median 1.5 to 2 hours (range 0.5–6 hours).", "llm": "sonnet"}
 {"id": "q_346ed3893d13", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "Metabolism | hepatic (glucurinodation by UGT1A4 and oxidative metabolism by CYP1A2 )", "llm": "opus"}
 {"id": "q_347087a441fc", "corpus": "stahl", "page": 563, "quote": "mu and delta opioid receptor antagonist", "llm": "sonnet", "heading": ["Nalmefene", "Therapeutics", "Class"]}
 {"id": "q_348c63b58c80", "corpus": "stahl", "page": 941, "quote": "Conventional antipsychotic (neuroleptic, thioxanthene, dopamine 2 antagonist)", "llm": "sonnet", "heading": ["Zuclopenthixol", "Therapeutics", "Class"]}
@@ -804,6 +822,7 @@
 {"id": "q_3ac83c6eec5b", "corpus": "gtopdb_ki", "page": "zotepine", "quote": "zotepine at 5-ht1e receptor (HTR1E, Human): Antagonist / Antagonist, pKi 6.5 [PMID 8935801]", "species": "Human"}
 {"id": "q_3ac87cdd74c8", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 2C | 135"}
 {"id": "q_3addd74569a4", "corpus": "stahl", "page": 329, "quote": "Blocks serotonin reuptake pump (serotonin transporter)", "llm": "sonnet", "heading": ["Fluoxetine", "Therapeutics", "How the Drug Works"]}
+{"id": "q_3af1c1301846", "corpus": "wikipedia_pharm", "page": "amphetamine", "quote": "The immediate-release and extended release variants of salts of both isomers reach peak plasma concentrations at 3 hours and 7 hours post-dose respectively.", "llm": "sonnet"}
 {"id": "q_3b0b68d63a42", "corpus": "allen_ahba", "page": "ADRA1A", "quote": "ADRA1A detected in parietal: probe 1027138 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3b0da938e3eb", "corpus": "gtopdb", "page": 4, "quote": "Putamen > frontal cortex, globus pallidus.", "species": "Human", "llm": "sonnet"}
 {"id": "q_3b235323abec", "corpus": "gtopdb_class", "page": 3092, "quote": "carbonic anhydrase 2 (CA2), GtoPdb target 3092 | type: enzyme | family: Carbonic anhydrases"}
@@ -817,9 +836,11 @@
 {"id": "q_3b7899b8fdc0", "corpus": "stahl", "page": 353, "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)", "llm": "sonnet", "heading": ["Fluvoxamine", "Therapeutics", "Class"]}
 {"id": "q_3b7c4c7e25c7", "corpus": "wikipedia_pharm", "page": "propofol", "quote": "Drug class | GABA A receptor agonist ; sedative ; general anesthetic", "llm": "sonnet"}
 {"id": "q_3b7fedff016d", "corpus": "stahl", "page": 533, "quote": "Weak noncompetitive NMDA receptor antagonist (high doses), which may contribute to actions in chronic pain", "llm": "sonnet", "heading": ["Milnacipran", "Therapeutics", "How the Drug Works"]}
+{"id": "q_3b8f24f85587", "corpus": "wikipedia_pharm", "page": "iloperidone", "quote": "T max = 2–4 hours)", "llm": "sonnet"}
 {"id": "q_3b91bf676fa3", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "α 2C | 8.9 | 1.2 | Antagonist"}
 {"id": "q_3b9fc64a2633", "corpus": "allen_ahba", "page": "ADRA1B", "quote": "ADRA1B detected in occipital: probe 1023485 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_3ba606ce03bf", "corpus": "stahl", "page": 578, "quote": "A metabolite of nefazodone, mCPP (metachloro-phenyl-piperazine), can cause side effects if its levels rise significantly", "llm": "sonnet", "heading": ["Nefazodone", "Side effects", "How Drug Causes Side Effects"]}
+{"id": "q_3bce2bc6ebc5", "corpus": "wikipedia_pharm", "page": "duloxetine", "quote": "There is an average 2-hour lag until absorption begins with maximum plasma concentrations occurring about 6 hours post-dose.", "llm": "sonnet"}
 {"id": "q_3bd08ff21167", "corpus": "stahl", "page": 69, "quote": "Abilify", "llm": "sonnet", "heading": ["Aripiprazole", "Therapeutics", "Brands"]}
 {"id": "q_3be770a6311c", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Cilift", "llm": "sonnet"}
 {"id": "q_3c27ed2c0530", "corpus": "stahl", "page": 827, "quote": "Topimax", "llm": "sonnet", "heading": ["Topiramate", "Therapeutics", "Brands"]}
@@ -831,6 +852,7 @@
 {"id": "q_3c85fa04b95b", "corpus": "allen_ahba", "page": "CACNA1G", "quote": "CACNA1G relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1049164, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.89: thalamus +1.43 (5d), temporal +0.30 (5d), frontal +0.23 (5d)", "species": "Human"}
 {"id": "q_3c8eca520a21", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "5-HT 3 | 776 | Human"}
 {"id": "q_3c90aaddcfa3", "corpus": "allen_ahba", "page": "BCHE", "quote": "BCHE detected in temporal: probe 1058870 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_3c940660f790", "corpus": "wikipedia_pharm", "page": "isocarboxazid", "quote": "Isocarboxazid has low oral bioavailability, reaches peak levels after about 1–2 hours, and has an elimination half-life of about 1.5–4 hours.", "llm": "sonnet"}
 {"id": "q_3cd0b277a50f", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "Complex, nonlinear pharmacokinetics arise via autoinhibition of CYP2D6 and CYP2D8, resulting in zeroth order kinetics at higher doses. It is thought that this can result in sustained and higher concentrations of MDMA if the user takes consecutive doses of the drug.", "llm": "opus"}
 {"id": "q_3cfa78c2bcd0", "corpus": "stahl", "page": 133, "quote": "Aplenzin", "llm": "sonnet", "heading": ["Bupropion", "Therapeutics"]}
 {"id": "q_3cfea989d2f4", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "5-HT 7 | 9.9 | 0.13 | Antagonist"}
@@ -882,6 +904,7 @@
 {"id": "q_3f75fe644c42", "corpus": "stahl", "page": 227, "quote": "Half-life approximately 24 hours", "llm": "sonnet", "heading": ["Desipramine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_3f943544cbea", "corpus": "stahl", "page": 563, "quote": "Alcohol dependence treatment; mu and delta opioid receptor antagonist and kappa opioid receptor partial agonist", "llm": "sonnet", "heading": ["Nalmefene", "Therapeutics", "Class"]}
 {"id": "q_3fa1449c6c92", "corpus": "stahl", "page": 449, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)", "llm": "sonnet", "heading": ["Lofepramine", "Therapeutics", "Class"]}
+{"id": "q_3fa72c6e94ee", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "Peak levels of vortioxetine are reached within 7 to 11 hours post-dose with single or multiple doses.", "llm": "sonnet"}
 {"id": "q_3faf4eb1f8e3", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "5-HT 3 | 235 | ?"}
 {"id": "q_3fb09200608e", "corpus": "stahl", "page": 805, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet", "heading": ["Thioridazine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_3fb172dddd74", "corpus": "wikipedia_pharm", "page": "phenobarbital", "quote": "Direct blockade of glutamatergic AMPA and kainate receptors are also believed to contribute to the hypnotic/anticonvulsant effect that is observed with phenobarbital.\n\n## Pharmacokinetics\nPhenobarbital has an oral bioavailability of about 90%.", "llm": "sonnet"}
@@ -967,6 +990,7 @@
 {"id": "q_44bc27a78034", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "α 2C | 74.9 | ND | ND"}
 {"id": "q_44c493b6b723", "corpus": "stahl", "page": 277, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet", "heading": ["Dothiepin", "Therapeutics", "How the Drug Works"]}
 {"id": "q_44c9e3ae7f6f", "corpus": "wikipedia_pharm", "page": "selegiline", "quote": "Metabolism | Liver , other tissues ( CYP2B6 , CYP2C19 , others)", "llm": "opus"}
+{"id": "q_44cc05489da2", "corpus": "wikipedia_pharm", "page": "atomoxetine", "quote": "The time to peak levels of atomoxetine is 1 to 2 hours.", "llm": "sonnet"}
 {"id": "q_44f7765d0712", "corpus": "allen_ahba", "page": "CHRM4", "quote": "CHRM4 detected in cingulate: probe 1024432 PACall present in 105/123 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_450c0c54b727", "corpus": "stahl", "page": 669, "quote": "Neuroscience-based Nomenclature: dopamine receptor antagonist (D-RAn)", "llm": "sonnet", "heading": ["Pimozide", "Therapeutics", "Class"]}
 {"id": "q_452423dc0693", "corpus": "wikipedia_pharm", "page": "secobarbital", "quote": "Secobarbital is considered to be an obsolete sedative-hypnotic (sleeping pill) and has largely been replaced by the benzodiazepine family.", "llm": "sonnet"}
@@ -991,6 +1015,7 @@
 {"id": "q_460b76d97713", "corpus": "gtopdb_class", "page": 263, "quote": "H2 receptor (HRH2), GtoPdb target 263 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation"}
 {"id": "q_461aa3e9967f", "corpus": "wikipedia_pharm", "page": "sulpiride", "quote": "5-HT 7 | 5,011"}
 {"id": "q_462631182540", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in frontal: probe 1028488 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_462e3e3423e4", "corpus": "wikipedia_pharm", "page": "lemborexant", "quote": "The time to peak levels of lemborexant is 1 to 3 hours.", "llm": "sonnet"}
 {"id": "q_464648330f32", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in frontal: probe 1017111 PACall present in 440/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_465637d4a979", "corpus": "wikipedia_pharm", "page": "bromocriptine", "quote": "α 1A | 4.17 | 100% | Full agonist"}
 {"id": "q_46623c151e96", "corpus": "stahl", "page": 396, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet", "heading": ["Imipramine", "Side effects", "How Drug Causes Side Effects"]}
@@ -1054,6 +1079,7 @@
 {"id": "q_4b04a55e2889", "corpus": "wikipedia_pharm", "page": "bromocriptine", "quote": "α 2B | 34.7 | –100% | Full inverse agonist"}
 {"id": "q_4b083826e5e5", "corpus": "wikipedia_fr", "page": "l_vom_promazine", "quote": "Neurocil", "llm": "sonnet"}
 {"id": "q_4b13569926fb", "corpus": "wikipedia_pharm", "page": "nefazodone", "quote": "Metabolism | Liver ( CYP3A4 , CYP2D6 )", "llm": "opus"}
+{"id": "q_4b4a9bd75928", "corpus": "wikipedia_pharm", "page": "milnacipran", "quote": "Peak plasma concentrations are reached 2 hours after oral dosing.", "llm": "sonnet"}
 {"id": "q_4bb5f460b618", "corpus": "wikipedia_pharm", "page": "hydromorphone", "quote": "Hydromorphone , also known as dihydromorphinone , and sold under the brand name Dilaudid among others, is a morphinan opioid used to treat moderate to severe pain .", "llm": "sonnet"}
 {"id": "q_4bd18df0f745", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "α 2B | Agonist | 480"}
 {"id": "q_4be2a84acf63", "corpus": "stahl", "page": 893, "quote": "Neuroscience-based Nomenclature: serotonin multimodal (S-MM)", "llm": "sonnet", "heading": ["Vilazodone", "Therapeutics", "Class"]}
@@ -1075,6 +1101,7 @@
 {"id": "q_4cdaf1490fe3", "corpus": "stahl", "page": 222, "quote": "Metabolized primarily by CYP3A4", "llm": "opus", "heading": ["Daridorexant", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_4cdb1caf1ba0", "corpus": "gtopdb_class", "page": 318, "quote": "κ receptor (OPRK1), GtoPdb target 318 | type: gpcr | family: Opioid receptors"}
 {"id": "q_4ceacaa93cd9", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1059691, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.59: substantia_nigra +1.05 (5d), thalamus +0.93 (5d), vta +0.84 (5d), putamen +0.21 (5d), caudate +0.09 (5d), accumbens -0.08 (5d), parietal -0.40 (5d), occipital -0.48 (5d), frontal -0.50 (5d), temporal -0.53 (5d)", "species": "Human"}
+{"id": "q_4ceedf1304d8", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "Bioavailability | 95% (T max = 4 hours)", "llm": "sonnet"}
 {"id": "q_4d1b1aa2706f", "corpus": "stahl", "page": 713, "quote": "Substrate for CYP3A4", "llm": "opus", "heading": ["Quetiapine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_4d1b8266f11c", "corpus": "gtopdb_ki", "page": "dimethyltryptamine", "quote": "dimethyltryptamine at 5-HT6 receptor (HTR6, Human): Agonist / Full agonist, pKi 7.2 [PMID 8522988]", "species": "Human"}
 {"id": "q_4d2722e88c21", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "NET | 2,443 | Human"}
@@ -1084,6 +1111,7 @@
 {"id": "q_4d65f11ee108", "corpus": "stahl", "page": 459, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet", "heading": ["Loflazepate", "Therapeutics", "How the Drug Works"]}
 {"id": "q_4d7760becebe", "corpus": "gtopdb", "page": 291, "quote": "In the human brain mGlu3 receptors are mainly localised in neurones. Cerebellum (on the edge of the Purkinje cell layer, probably stellate cells, Golgi cells in the granule cell layer), cerebral cortex (particularly the deep layers IV-VI), hippocampus (granule cells of the dentate gyrus, caudate-putamen, reticular area of the thalamus).", "species": "Human", "llm": "sonnet"}
 {"id": "q_4d8dafcdbfe6", "corpus": "wikipedia_pharm", "page": "primidone", "quote": "In addition to being an inducer of CYP3A4, it is also an inducer of CYP1A2 , which causes it to interact with substrates such as fluvoxamine , clozapine , olanzapine , and tricyclic antidepressants .", "llm": "opus"}
+{"id": "q_4d94ad4d8dac", "corpus": "wikipedia_pharm", "page": "glutethimide", "quote": "Bioavailability | Variable ( T max = 1–6 hours)", "llm": "sonnet"}
 {"id": "q_4db53d7df540", "corpus": "wikipedia_pharm", "page": "sertraline", "quote": "α 1D | 2500 | Human"}
 {"id": "q_4db7ffbe7575", "corpus": "wikipedia_pharm", "page": "carbamazepine", "quote": "It is activated, mainly by CYP3A4, to carbamazepine-10,11- epoxide", "llm": "sonnet"}
 {"id": "q_4dbcc2a0a2b5", "corpus": "allen_ahba", "page": "GRIN1", "quote": "GRIN1 detected in temporal: probe 1055938 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1098,9 +1126,11 @@
 {"id": "q_4e2915fc8682", "corpus": "stahl", "page": 19, "quote": "Valdoxan", "llm": "sonnet", "heading": ["Agomelatine", "Therapeutics", "Brands"]}
 {"id": "q_4e2c6cd2e533", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in parietal: probe 1017111 PACall present in 185/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_4e36a6539a71", "corpus": "wikipedia_pharm", "page": "tramadol", "quote": "Metabolism | Liver -mediated demethylation and glucuronidation via CYP2D6 & CYP3A4", "llm": "opus"}
+{"id": "q_4e38d2f9b9d4", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "Cyproheptadine is well-absorbed following oral ingestion , with peak levels occurring after 1 to 4 hours.", "llm": "sonnet"}
 {"id": "q_4e5181cd80d6", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "D 5 | 258 | ND | ND"}
 {"id": "q_4e52adc971f6", "corpus": "stahl", "page": 127, "quote": "Zubsolv (with naloxone)", "llm": "sonnet", "heading": ["Buprenorphine", "Therapeutics"]}
 {"id": "q_4e71af0e0b76", "corpus": "allen_ahba", "page": "OPRM1", "quote": "OPRM1 detected in pons: probe 1017111 PACall present in 96/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_4e7276a586e3", "corpus": "wikipedia_pharm", "page": "naltrexone", "quote": "Peak concentrations of naltrexone are 19 to 44 μg/L after a single 100 mg oral dose and time to peak concentrations of naltrexone and 6β-naltrexol ( metabolite ) is within 1 hour.", "llm": "sonnet"}
 {"id": "q_4e74f7777af6", "corpus": "gtopdb_class", "page": 218, "quote": "D5 receptor (DRD5), GtoPdb target 218 | transduction: Gs family | effectors: Adenylyl cyclase stimulation"}
 {"id": "q_4e7ee8fd9984", "corpus": "wikipedia_fr", "page": "loflaz_pate_d_thyle", "quote": "Victan", "llm": "sonnet"}
 {"id": "q_4e88accb0432", "corpus": "wikipedia_fr", "page": "k_tamine", "quote": "Spravato", "llm": "sonnet"}
@@ -1153,6 +1183,7 @@
 {"id": "q_51aa778792df", "corpus": "wikipedia_pharm", "page": "clonidine", "quote": "α 1D | 125.89 | Human"}
 {"id": "q_51ab1ad4235b", "corpus": "stahl", "page": 359, "quote": "This closes N and P/Q presynaptic calcium channels, diminishing excessive neuronal activity and neurotransmitter release", "llm": "sonnet", "heading": ["Gabapentin", "Therapeutics", "How the Drug Works"]}
 {"id": "q_51ad592a334b", "corpus": "stahl", "page": 559, "quote": "Half-life approximately 1.5 hours", "llm": "sonnet", "heading": ["Molindone", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_51b8e96aeebd", "corpus": "wikipedia_pharm", "page": "tetrahydrocannabinol", "quote": "Following oral administration, concentrations of THC and its major active metabolite 11-hydroxy-THC (11-OH-THC) peak after 0.5 to 4 hours, with median time to peak of 1.0 to 2.5 hours at different doses.", "llm": "sonnet"}
 {"id": "q_51c08c9fc856", "corpus": "allen_ahba", "page": "MAOA", "quote": "MAOA detected in medulla: probe 1054334 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_51e674f04716", "corpus": "gtopdb", "page": 17, "quote": "CNS: substantia nigra, pars compacta and vental tegmental area.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_51f2559abbf7", "corpus": "stahl", "page": 167, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet", "heading": ["Chlorpromazine", "Therapeutics", "Class"]}
@@ -1161,6 +1192,7 @@
 {"id": "q_524c0da2af25", "corpus": "stahl_essential", "page": 25, "quote": "Electrical impulses open ion channels – both voltage-sensitive sodium channels (VSSCs) and voltage-sensitive calcium channels (VSCCs) – by changing the ionic charge across neuronal membranes.", "llm": "sonnet", "heading": ["1 Chemical Neurotransmission"]}
 {"id": "q_525197f898ad", "corpus": "wikipedia_pharm", "page": "tolcapone", "quote": "Elimination half-life | 2–3 hours", "llm": "sonnet"}
 {"id": "q_5285c22c88ea", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "α 2B | 106 | Human"}
+{"id": "q_5296bde20c86", "corpus": "wikipedia_pharm", "page": "fluoxetine", "quote": "The bioavailability of fluoxetine is relatively high (72%), and peak plasma concentrations are reached in 6–8 hours.", "llm": "sonnet"}
 {"id": "q_52be9d435385", "corpus": "allen_ahba", "page": "HTR2A", "quote": "HTR2A relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1028615, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.95: occipital +0.92 (5d), temporal +0.83 (5d), parietal +0.81 (5d), frontal +0.78 (5d), claustrum +0.60 (5d)", "species": "Human"}
 {"id": "q_52ef474437cc", "corpus": "stahl", "page": 233, "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet", "heading": ["Desvenlafaxine", "Therapeutics", "Class"]}
 {"id": "q_52f1c08055d4", "corpus": "allen_ahba", "page": "ABAT", "quote": "ABAT detected in frontal: probe 1010530 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
@@ -1171,6 +1203,7 @@
 {"id": "q_533df24c2f15", "corpus": "wikipedia_pharm", "page": "xanomeline", "quote": "CYP2D6 significantly contributes to the metabolism of xanomeline.", "llm": "opus"}
 {"id": "q_53478ffd76d8", "corpus": "gtopdb_ki", "page": "lysergide", "quote": "Lysergide at 5-HT2C receptor (HTR2C, Human): Agonist / Full agonist, pKi 8.2-8.6 [PMID 10611640]", "species": "Human"}
 {"id": "q_5368a2ae0717", "corpus": "kandel", "page": 549, "quote": "A major fiber bundle called the corpus callosum connects the two hemispheres, transmitting information across the midline.", "llm": "sonnet", "heading": ["Part IV Perception", "21 The Constructive Nature of Visual Processing", "Form, Color, Motion, and Depth Are Processed in Discrete Areas of the Cerebral Cortex"]}
+{"id": "q_53b77399f993", "corpus": "wikipedia_pharm", "page": "tiagabine", "quote": "The time to peak levels is approximately 1 hour, with a range of 0.8 to 1.5 hours.", "llm": "sonnet"}
 {"id": "q_53c4f6466c56", "corpus": "stahl", "page": 25, "quote": "Xanax", "llm": "sonnet", "heading": ["Alprazolam", "Therapeutics", "Brands"]}
 {"id": "q_53d6e545ef22", "corpus": "stahl", "page": 617, "quote": "Inhibits CYP2C19", "llm": "opus", "heading": ["Oxcarbazepine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_53dc256d1c22", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "M 5 | 6.8 | Human"}
@@ -1242,6 +1275,7 @@
 {"id": "q_5806022706b5", "corpus": "gtopdb_ki", "page": "pimozide", "quote": "pimozide at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 6.2 [PMID 12629531]", "species": "Human"}
 {"id": "q_58077bb56ae9", "corpus": "wikipedia_pharm", "page": "paliperidone", "quote": "5-HT 6 | 24"}
 {"id": "q_585554d29163", "corpus": "gtopdb_class", "page": 317, "quote": "δ receptor (OPRD1), GtoPdb target 317 | type: gpcr | family: Opioid receptors"}
+{"id": "q_5859d1af81d2", "corpus": "wikipedia_pharm", "page": "modafinil", "quote": "The time to peak levels of modafinil is typically 1.5 to 2.5 hours (range 1–4 hours).", "llm": "sonnet"}
 {"id": "q_5876d3f6330c", "corpus": "allen_ahba", "page": "OPRD1", "quote": "OPRD1 detected in temporal: probe 1028943 PACall present in 288/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_58a043f17645", "corpus": "wikipedia_fr", "page": "lisdexamf_tamine", "quote": "Samexid", "llm": "sonnet"}
 {"id": "q_58a6e571ec24", "corpus": "allen_ahba", "page": "CHRNA7", "quote": "CHRNA7 detected in hippocampus: probe 1022067 PACall present in 167/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1308,6 +1342,8 @@
 {"id": "q_5d10f1bc50ba", "corpus": "gtopdb_ki", "page": "duloxetine", "quote": "duloxetine at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 6.3 [PMID 11750180]", "species": "Human"}
 {"id": "q_5d18c25d9694", "corpus": "gtopdb_class", "page": 9, "quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | transduction: Gs family | effectors: Adenylyl cyclase stimulation, Calcium channel, Other - See Comments"}
 {"id": "q_5d2a4817d673", "corpus": "gtopdb_class", "page": 7, "quote": "5-HT2B receptor (HTR2B), GtoPdb target 7 | transduction: Gq/G11 family"}
+{"id": "q_5d50cfd03d48", "corpus": "wikipedia_pharm", "page": "selegiline", "quote": "The time to peak levels of selegiline with oral administration is about 0.5 to 1.5 hours.", "llm": "sonnet"}
+{"id": "q_5d62215d0569", "corpus": "wikipedia_pharm", "page": "acamprosate", "quote": "Its absorption and elimination are very slow, with a t max of 6 hours and an elimination half life of over 30 hours.", "llm": "sonnet"}
 {"id": "q_5d68a7e48731", "corpus": "wikipedia_fr", "page": "bupr_norphine", "quote": "Subutex", "llm": "sonnet"}
 {"id": "q_5d8075afed2a", "corpus": "stahl", "page": 471, "quote": "Conventional antipsychotic (neuroleptic, dopamine 2 antagonist, serotonin– dopamine antagonist)", "llm": "sonnet", "heading": ["Loxapine", "Therapeutics", "Class"]}
 {"id": "q_5d8627f2ac6a", "corpus": "wikipedia_pharm", "page": "protriptyline", "quote": "D 2 | 2,300 | Human"}
@@ -1348,6 +1384,7 @@
 {"id": "q_5f70f1cabfa0", "corpus": "stahl", "page": 443, "quote": "Lithium carbonate tablets", "llm": "sonnet", "heading": ["Lithium", "Therapeutics", "How Long Until It Works"]}
 {"id": "q_5f75b3eb8b48", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in parietal: probe 1020459 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_5f9f2e86ad35", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "5-HT 1D | 96"}
+{"id": "q_5fbc7da10c8f", "corpus": "wikipedia_pharm", "page": "pimozide", "quote": "Time to peak plasma concentration (T max ) | 6-8 hr", "llm": "sonnet"}
 {"id": "q_5fd6bc5742fc", "corpus": "gtopdb_ki", "page": "mianserin", "quote": "mianserin at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 7.3-7.6 [PMID 9298538]", "species": "Human"}
 {"id": "q_600915a56f1d", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "H 2 | 8.2 | 6.2 | Antagonist"}
 {"id": "q_6018739b7089", "corpus": "stahl", "page": 928, "quote": "Plasma elimination half-life approximately 63 hours", "llm": "sonnet", "heading": ["Zonisamide", "Dosing and use", "Pharmacokinetics"]}
@@ -1395,6 +1432,7 @@
 {"id": "q_624a612c6f1f", "corpus": "stahl", "page": 341, "quote": "Prolixin", "llm": "sonnet", "heading": ["Fluphenazine", "Therapeutics", "Brands"]}
 {"id": "q_624a6ed41718", "corpus": "wikipedia_fr", "page": "bupropion", "quote": "Mysimba", "llm": "sonnet"}
 {"id": "q_6277ac960af6", "corpus": "nieuwenhuys", "page": 939, "quote": "Comparable functional specializations have been observed in the organization of the projections from the lateral septal complex to the medial preoptico-hypothalamic zone.", "llm": "sonnet", "heading": ["23. Greater Limbic System"]}
+{"id": "q_627e4b3e5c4f", "corpus": "wikipedia_pharm", "page": "oxycodone", "quote": "After a dose of conventional (immediate-release) oral oxycodone, the onset of action is 10 to 30 minutes, and peak plasma levels of the drug are attained within roughly 30 to 60 minutes;", "llm": "sonnet"}
 {"id": "q_6285b3e6ca12", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "NET | 0% at 10 μM | Blocker"}
 {"id": "q_62b62e4c658a", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 1B | 273"}
 {"id": "q_62c9841965d9", "corpus": "gtopdb", "page": 27, "quote": "Striatum, caudate nucleus and putamen.", "species": "Human", "llm": "sonnet"}
@@ -1413,6 +1451,7 @@
 {"id": "q_6370219d1e2e", "corpus": "allen_ahba", "page": "HTR4", "quote": "HTR4 detected in putamen: probe 1022876 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_63851a9f80c2", "corpus": "stahl", "page": 721, "quote": "Neuroscience-based Nomenclature: norepinephrine reuptake inhibitor (N-RI)", "llm": "sonnet", "heading": ["Reboxetine", "Therapeutics", "Class"]}
 {"id": "q_63868f8f9fac", "corpus": "stahl", "page": 591, "quote": "Ziprexa", "llm": "sonnet", "heading": ["Olanzapine", "Therapeutics"]}
+{"id": "q_639b815cd0fe", "corpus": "wikipedia_pharm", "page": "clomipramine", "quote": "Peak plasma concentrations occur around 2–6 hours (with an average of 4.7 hours) after taking clomipramine orally and are in the range of 56–154 ng/mL (178–489 nmol/L).", "llm": "sonnet"}
 {"id": "q_63bde8bb609b", "corpus": "wikipedia_pharm", "page": "indalpine", "quote": "Indalpine , sold under the brand name Upstène , is a selective serotonin reuptake inhibitor (SSRI) that was briefly marketed as an antidepressant for treatment of depression .", "llm": "sonnet"}
 {"id": "q_63d107a9f8a4", "corpus": "stahl", "page": 817, "quote": "Selectively blocks reuptake of gammaaminobutyric acid (GABA) by presynaptic and glial GABA transporters", "llm": "sonnet", "heading": ["Tiagabine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_63d14277d50a", "corpus": "stahl", "page": 617, "quote": "A mild inducer of CYP3A4", "llm": "opus", "heading": ["Oxcarbazepine", "Dosing and use", "Pharmacokinetics"]}
@@ -1424,7 +1463,9 @@
 {"id": "q_63fdb5646831", "corpus": "gtopdb_ki", "page": "risperidone", "quote": "risperidone at 5-HT2C receptor (HTR2C, Human): Antagonist / Inverse agonist, pKi 7.5-7.6 [PMID 12629531]", "species": "Human"}
 {"id": "q_641011d9e89a", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "Brexpiprazole acts as a partial agonist of the serotonin 5-HT 1A receptor and the dopamine D 2 and D 3 receptors . Brexpiprazole is a less stimulating partial agonist of the dopamine receptors than its predecessor, aripiprazole , potentially decreasing its risk for agitation and restlessness. Brexpiprazole has a high affinity for the 5-HT 1A receptor , acting as a potent antagonist at 5-HT 2A receptors, and a potent partial agonist at dopamine D 2 receptors with lower intrinsic activity compared to aripiprazole . In vivo characterization of brexpiprazole shows that it may act as a near-full agonist of the 5-HT 1A receptor . This may further underlie a lower potential than aripiprazole to cause treatment-emergent, movement-related disorders such as akathisia due to the downstream dopamine release that is triggered by 5-HT 1A receptor agonism. It is also an antagonist of the serotonin 5-HT 2A , 5-HT 2B , and 5-HT 7 receptors , which may contribute to antidepressant effect. It also binds to and blocks the α 1A - , α 1B - , α 1D - , and α 2C -adrenergic receptors . The drug has negligible affinity for the muscarinic acetylcholine receptors , and hence has no anticholinergic effects. Although brexpiprazole has less affinity for H 1 compared to aripiprazole , weight gain can occur.", "llm": "sonnet"}
 {"id": "q_6420e4458f86", "corpus": "allen_ahba", "page": "MAOB", "quote": "MAOB detected in raphe: probe 1054302 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_6433224da4c8", "corpus": "wikipedia_pharm", "page": "pimavanserin", "quote": "Pimavanserin is slowly absorbed and has a time to peak levels of 6 hours.", "llm": "sonnet"}
 {"id": "q_644f3ee5cf76", "corpus": "wikipedia_pharm", "page": "seproxetine", "quote": "Seproxetine is both an inhibitor of serotonin and dopamine transporters , 5-HT 2A and 5-HT 2C receptors.", "llm": "sonnet"}
+{"id": "q_6465fccb6940", "corpus": "wikipedia_pharm", "page": "pramipexole", "quote": "Immediate-release pramipexole displays a T max of approximately 2 hours and 3 hours if taken with a high-fat meal.", "llm": "sonnet"}
 {"id": "q_6479ea783e88", "corpus": "kandel", "page": 986, "quote": "The subthalamus therefore receives phasic excitatory (glutamatergic) signals from the cerebral cortex, thalamus, and brain stem.", "llm": "sonnet", "heading": ["38 The Basal Ganglia", "Physiological Signals Provide Further Clues to Function in the Basal Ganglia", "Ventral Midbrain Dopamine Neurons Receive Input From External Structures and Other Basal Ganglia Nuclei"]}
 {"id": "q_647ae5d1c07d", "corpus": "wikipedia_pharm", "page": "sertraline", "quote": "σ 1 | 32–57 | Rat"}
 {"id": "q_647fc0e6a877", "corpus": "gtopdb", "page": 13, "quote": "CNS: hippocampus.", "species": "Rat", "llm": "sonnet"}
@@ -1441,6 +1482,7 @@
 {"id": "q_6507e74cca59", "corpus": "stahl", "page": 451, "quote": "Half-life of parent compound approximately 1.5–6 hours", "llm": "sonnet", "heading": ["Lofepramine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_650d0c17a875", "corpus": "stahl", "page": 717, "quote": "Neuroscience-based Nomenclature: melatonin receptor agonist (Mel-RA)", "llm": "sonnet", "heading": ["Ramelteon", "Therapeutics", "Class"]}
 {"id": "q_6512982f0401", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "DAT | 2560–3880 | Reuptake inhibitor"}
+{"id": "q_651809175d63", "corpus": "wikipedia_pharm", "page": "daridorexant", "quote": "It reaches peak concentrations within 1 to 2 hours following a dose.", "llm": "sonnet"}
 {"id": "q_6530980f5a19", "corpus": "wikipedia_pharm", "page": "amisulpride", "quote": "α 2A | 1114 | Human"}
 {"id": "q_6561a31210b0", "corpus": "wikipedia_pharm", "page": "levomepromazine", "quote": "Elimination half-life | ~20 hours", "llm": "sonnet"}
 {"id": "q_656d27d1ff9f", "corpus": "stahl", "page": 431, "quote": "SNRI (dual serotonin and norepinephrine reuptake inhibitor); antidepressant", "llm": "sonnet", "heading": ["Levomilnacipran", "Therapeutics", "Class"]}
@@ -1526,6 +1568,7 @@
 {"id": "q_6a9560f1623c", "corpus": "kandel", "page": 59, "quote": "The midbrain, rostral to the pons, controls many sensory and motor functions, including eye movement and the coordination of visual and auditory reflexes.", "llm": "sonnet", "heading": ["Part I Overall Perspective", "1 The Brain and Behavior", "The Brain Has Distinct Functional Regions"]}
 {"id": "q_6aa7f59a2961", "corpus": "stahl", "page": 713, "quote": "Quetiapine XR may theoretically generate increased concentrations of active metabolite norquetiapine, with theoretically improved profile for affective and anxiety disorders", "llm": "sonnet", "heading": ["Quetiapine", "Dosing and use", "Dosing Tips"]}
 {"id": "q_6aa8c7f262ca", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "D 3 | 2.30"}
+{"id": "q_6aaa4cf2f4ff", "corpus": "wikipedia_pharm", "page": "paroxetine", "quote": "When taken orally, it achieves maximum concentration in about 6–10 hours and reaches steady-state in 7–14 days.", "llm": "sonnet"}
 {"id": "q_6ac12e453071", "corpus": "stahl", "page": 233, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing noradrenergic neurotransmission", "llm": "sonnet", "heading": ["Desvenlafaxine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_6add534b5585", "corpus": "stahl", "page": 591, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet", "heading": ["Olanzapine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_6af06bdb591a", "corpus": "gtopdb_ki", "page": "tasimelteon", "quote": "tasimelteon at MT2 receptor (MTNR1B, Human): Agonist / Full agonist, pKi 10.2 [PMID 19054552]", "species": "Human"}
@@ -1545,6 +1588,7 @@
 {"id": "q_6bf377e07c43", "corpus": "allen_ahba", "page": "CHRM5", "quote": "CHRM5 detected in substantia_nigra: probe 1058213 PACall present in 43/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_6c19ec788c29", "corpus": "stahl", "page": 39, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine multimodal (SN-MM)", "llm": "sonnet", "heading": ["Amitriptyline", "Therapeutics", "Class"]}
 {"id": "q_6c1e531ce6fc", "corpus": "stahl", "page": 689, "quote": "Lyrica CR", "llm": "sonnet", "heading": ["Pregabalin", "Therapeutics", "Brands"]}
+{"id": "q_6c45b9cb169d", "corpus": "wikipedia_pharm", "page": "solriamfetol", "quote": "The median time to peak levels of solriamfetol is 2 hours, with a range of 1.25 to 3.0 hours.", "llm": "sonnet"}
 {"id": "q_6c5f945c8a14", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "α 2A | 184 | Human"}
 {"id": "q_6c6ee6773b6c", "corpus": "stahl", "page": 633, "quote": "Paroxetine may have mild norepinephrine reuptake blocking actions", "llm": "sonnet", "heading": ["Paroxetine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_6c8da9379de9", "corpus": "stahl", "page": 47, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet", "heading": ["Amoxapine", "Therapeutics", "How the Drug Works"]}
@@ -1579,6 +1623,7 @@
 {"id": "q_6e8942febeee", "corpus": "gtopdb_ki", "page": "aripiprazole", "quote": "aripiprazole at D4 receptor (Drd4, Rat): Antagonist / Antagonist, pKi 7.3 [PMID 10617689]", "species": "Rat"}
 {"id": "q_6e9aa522923e", "corpus": "allen_ahba", "page": "SLC6A3", "quote": "SLC6A3 detected in accumbens: probe 1051520 PACall present in 14/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_6ea565336ed0", "corpus": "stahl", "page": 257, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet", "heading": ["Diazepam", "Therapeutics", "How the Drug Works"]}
+{"id": "q_6ea66f7a0424", "corpus": "wikipedia_pharm", "page": "gabapentin", "quote": "Gabapentin at a low dose of 100 mg has a T max (time to peak levels ) of approximately 1.7 hours, while the T max increases to 3 to 4 hours at higher doses.", "llm": "sonnet"}
 {"id": "q_6eb2ea5eb7cf", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Seropram", "llm": "sonnet"}
 {"id": "q_6eb400d7deca", "corpus": "wikipedia_pharm", "page": "bromocriptine", "quote": "D 3 | 6.76 | 87% | Agonist"}
 {"id": "q_6ec7735e9b0e", "corpus": "allen_ahba", "page": "CHRNA4", "quote": "CHRNA4 detected in caudate: probe 1059691 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -1603,9 +1648,11 @@
 {"id": "q_70bf5f1915e3", "corpus": "allen_ahba", "page": "GRIK1", "quote": "GRIK1 detected in frontal: probe 1026815 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_70ce41b3f320", "corpus": "stahl", "page": 727, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet", "heading": ["Risperidone", "Therapeutics", "How the Drug Works"]}
 {"id": "q_70df0749e9b9", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "5-HT 6 | 148 | Rat"}
+{"id": "q_70ee3e88ccf9", "corpus": "wikipedia_pharm", "page": "methamphetamine", "quote": "Following oral administration, methamphetamine is well-absorbed into the bloodstream, with peak plasma methamphetamine concentrations achieved in approximately 3.13–6.3 hours post ingestion.", "llm": "sonnet"}
 {"id": "q_710a55181601", "corpus": "stahl", "page": 923, "quote": "Non-benzodiazepine hypnotic; alpha 1 isoform selective agonist of GABA-A/ benzodiazepine receptors", "llm": "sonnet", "heading": ["Zolpidem", "Therapeutics", "Class"]}
 {"id": "q_710c24fd8acb", "corpus": "gtopdb_ki", "page": "amitriptyline", "quote": "amitriptyline at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 9.3 [PMID 16782354]", "species": "Human"}
 {"id": "q_710fb524c37c", "corpus": "stahl", "page": 551, "quote": "Alertec", "llm": "sonnet", "heading": ["Modafinil", "Therapeutics", "Brands"]}
+{"id": "q_711e8c1201ad", "corpus": "wikipedia_pharm", "page": "apomorphine", "quote": "It reaches peak plasma concentration in 10–60 minutes.", "llm": "sonnet"}
 {"id": "q_7124355843cb", "corpus": "gtopdb_class", "page": 404, "quote": "GABAA receptor α1 subunit (GABRA1), GtoPdb target 404 | type: lgic | family: GABAA receptors"}
 {"id": "q_7127be47fb4f", "corpus": "gtopdb", "page": 19, "quote": "Brain: caudate nucleus.", "species": "Human", "llm": "sonnet"}
 {"id": "q_7130eac6d510", "corpus": "wikipedia_pharm", "page": "atropine", "quote": "Elimination half-life | 2 hours", "llm": "sonnet"}
@@ -1661,6 +1708,7 @@
 {"id": "q_74e4a11f6c81", "corpus": "wikipedia_pharm", "page": "brotizolam", "quote": "Elimination half-life | 4.4 hours (range, 2.6–6.9 h)", "llm": "sonnet"}
 {"id": "q_750228c27732", "corpus": "wikipedia_pharm", "page": "varenicline", "quote": "Varenicline displays full agonism on α 7 nicotinic acetylcholine receptors and is a partial agonist on the α 4 β 2 , α 3 β 4 , and α 6 β 2 subtypes.", "llm": "sonnet"}
 {"id": "q_750a4bf6cc30", "corpus": "wikipedia_pharm", "page": "sertraline", "quote": "α 2 | 477–4100 | Human"}
+{"id": "q_75234c04218e", "corpus": "wikipedia_pharm", "page": "bupropion", "quote": "After oral administration, bupropion is rapidly and completely absorbed, reaching the peak blood plasma concentration after 1.5 hours ( t max ).", "llm": "sonnet"}
 {"id": "q_75322cd20ea6", "corpus": "stahl", "page": 423, "quote": "lemborexant binds to orexin 1 and orexin 2 receptors, blocking orexin from binding there and thus preventing it from promoting wakefulness", "llm": "sonnet", "heading": ["Lemborexant", "Therapeutics", "How the Drug Works"]}
 {"id": "q_754a28f7cba3", "corpus": "stahl", "page": 225, "quote": "Tricyclic antidepressant (TCA)", "llm": "sonnet", "heading": ["Desipramine", "Therapeutics", "Class"]}
 {"id": "q_756bea28a599", "corpus": "wikipedia_pharm", "page": "cabergoline", "quote": "Cabergoline is a long-acting dopamine D 2 receptor agonist . In-vitro rat studies show a direct inhibitory effect of cabergoline on the prolactin secretion in the lactotroph cells of the pituitary gland and cabergoline decreases serum prolactin levels in reserpinized rats. Although cabergoline is commonly described principally as a D 2 receptor agonist, it also possesses significant affinity for the dopamine D 3 , and D 4 , serotonin 5-HT 1A , 5-HT 2A , 5-HT 2B , and 5-HT 2C , and α 2 -adrenergic receptors , as well as moderate/low affinity for the dopamine D 1 , serotonin 5-HT 7 , and α 1 -adrenergic receptors . Cabergoline functions as a partial or full agonist at all of these receptors except for the 5-HT 7 , α 1 -adrenergic, and α 2 -adrenergic receptors, where it acts as an antagonist . Cabergoline has been associated with cardiac valvulopathy due to activation of 5-HT 2B receptors.", "llm": "sonnet"}
@@ -1672,6 +1720,7 @@
 {"id": "q_762050b73189", "corpus": "gtopdb_ki", "page": "fluphenazine", "quote": "fluphenazine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 7.7 [PMID 1826762]", "species": "Human"}
 {"id": "q_763a77c9fb39", "corpus": "gtopdb_ki", "page": "mianserin", "quote": "mianserin at NET (Slc6a2, Rat): Inhibitor / Inhibition, pKi 7.59 [PMID 6747993]", "species": "Rat"}
 {"id": "q_763e0d417cd5", "corpus": "stahl", "page": 325, "quote": "Benzodiazepine (hypnotic)", "llm": "sonnet", "heading": ["Flunitrazepam", "Therapeutics", "Tests"]}
+{"id": "q_76476f1412c8", "corpus": "wikipedia_pharm", "page": "dosulepin", "quote": "Peak plasma concentrations of between 30.4 and 279 ng/mL (103–944 nmol/L) occur within 2–3 hours of oral administration.", "llm": "sonnet"}
 {"id": "q_764d3fbc9b28", "corpus": "wikipedia_pharm", "page": "sibutramine", "quote": "Elimination half-life | 1 hour (sibutramine), 14 hours (M 1 ) & 16 hours (M 2 )", "llm": "sonnet"}
 {"id": "q_7679f2bd55da", "corpus": "stahl", "page": 849, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis", "llm": "sonnet", "heading": ["Trifluoperazine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_767d30fa152d", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1028488, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.92: putamen +1.17 (5d), caudate +0.98 (5d), amygdala +0.87 (5d), hippocampus +0.78 (5d), cerebellum +0.55 (5d), temporal +0.31 (5d), frontal +0.30 (5d), parietal +0.10 (5d), occipital -0.05 (5d), globus_pallidus -1.16 (5d), substantia_nigra -1.17 (5d)", "species": "Human"}
@@ -1715,7 +1764,9 @@
 {"id": "q_78faa7205e42", "corpus": "kandel", "page": 129, "quote": "The thalamus is an egg-shaped structure that constitutes the dorsal portion of the diencephalon.", "llm": "sonnet", "heading": ["Part I Overall Perspective", "4 The Neuroanatomical Bases by Which Neural Circuits Mediate Behavior", "The Thalamus Is an Essential Link Between Sensory Receptors and the Cerebral Cortex"]}
 {"id": "q_792837fd2959", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "In addition to its actions as an SNDRA, MDMA directly interacts with a number of monoamine and other receptors . With varying potencies ranging from high to low, it is a partial agonist of several of the serotonin 5-HT 1 receptors , including the serotonin 5-HT 1A , 5-HT 1B , and 5-HT 1D receptors , and is a partial agonist of the serotonin 5-HT 2 receptors , including the serotonin 5-HT 2A , 5-HT 2B , and 5-HT 2C receptors . The drug also interacts with α 2 -adrenergic receptors , with the sigma σ 1 and σ 2 receptors , with the imidazoline I 1 receptor , and with other targets . Along with the preceding receptor interactions, MDMA is a potent partial agonist of the rodent trace amine-associated receptor 1 (TAAR1). Conversely however, due to species differences, it is far weaker in terms of potency as an agonist of the human TAAR1. The drug appears to act as a weak partial agonist of the human TAAR1 rather than as an efficacious agonist. In relation to the preceding findings, MDMA has been said to be essentially inactive as a human TAAR1 agonist. TAAR1 activation is thought to auto-inhibit and constrain the effects of amphetamines that possess TAAR1 agonism, for instance MDMA in rodents.", "llm": "sonnet"}
 {"id": "q_7940a8e66a89", "corpus": "stahl_essential", "page": 191, "quote": "The VMAT2 is an intraneuronal transporter located on synaptic vesicles. VMAT2 takes intraneuronal monoamines, including dopamine, up into the synaptic vesicles so that they can be stored until they are needed for release during neurotransmission.", "llm": "sonnet", "heading": ["5 Targeting Dopamine and Serotonin Receptors for Psychosis, Mood, and Beyond: So-Called “Antipsychotics”"]}
+{"id": "q_79639695ac19", "corpus": "wikipedia_pharm", "page": "trazodone", "quote": "Peak blood levels of trazodone occur 1 to 2 hours after ingestion and peak levels of the metabolite mCPP occur after 2 to 4 hours.", "llm": "sonnet"}
 {"id": "q_797b030951ec", "corpus": "stahl", "page": 621, "quote": "Invega", "llm": "sonnet", "heading": ["Paliperidone", "Therapeutics", "Brands"]}
+{"id": "q_798b81d4565a", "corpus": "wikipedia_pharm", "page": "methylphenidate", "quote": "The peak plasma time is achieved at about 2 hours.", "llm": "sonnet"}
 {"id": "q_798cfff57a96", "corpus": "wikipedia_pharm", "page": "amoxapine", "quote": "α 2 | 2,600 | Human"}
 {"id": "q_7998a53cac2c", "corpus": "allen_ahba", "page": "SLC18A2", "quote": "SLC18A2 detected in putamen: probe 1051381 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_79ccd0d2adf6", "corpus": "stahl", "page": 621, "quote": "Atypical antipsychotic (serotonin– dopamine antagonist; second-generation antipsychotic; also a mood stabilizer)", "llm": "sonnet", "heading": ["Paliperidone", "Therapeutics", "Class"]}
@@ -1885,6 +1936,7 @@
 {"id": "q_86e89ea9b771", "corpus": "stahl", "page": 525, "quote": "Neuroscience-based Nomenclature: norepinephrine multimodal (N-MM)", "llm": "sonnet", "heading": ["Mianserin", "Therapeutics", "Class"]}
 {"id": "q_87082b9b09fc", "corpus": "wikipedia_fr", "page": "l_vom_promazine", "quote": "Nozinan", "llm": "sonnet"}
 {"id": "q_870aa1fb8086", "corpus": "stahl", "page": 271, "quote": "Adlarity", "llm": "sonnet", "heading": ["Donepezil", "Therapeutics", "Brands"]}
+{"id": "q_870f8e3e778e", "corpus": "wikipedia_pharm", "page": "pregabalin", "quote": "Pregabalin is rapidly absorbed when administered on an empty stomach, with a T max (time to peak levels ) of generally less than or equal to 1 hour at doses of 300 mg or less.", "llm": "sonnet"}
 {"id": "q_8717bd28990e", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "H 4 | 6,920 | Human"}
 {"id": "q_872bc3c21d34", "corpus": "kandel", "page": 1114, "quote": "These neurons project to several areas of the brain, including the nucleus accumbens (the major component of the ventral striatum), the ventromedial portion of the head of the caudate nucleus (in the dorsal striatum), the basal forebrain, and regions of the prefrontal cortex (Figure 43–1B).", "llm": "sonnet", "heading": ["43 Motivation, Reward, and Addictive States", "Motivational States Influence Goal-Directed Behavior", "The Brain's Reward Circuitry Provides a Biological Substrate for Goal Selection"]}
 {"id": "q_873a9bbdb214", "corpus": "wikipedia_pharm", "page": "rizatriptan", "quote": "5-HT 1D | 1.5–138 (K i ) 1.6–16 ( EC 50 ) 83–105% ( E max )"}
@@ -1964,6 +2016,7 @@
 {"id": "q_8cca3a07d17c", "corpus": "gtopdb_ki", "page": "trifluoperazine", "quote": "trifluoperazine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 7.36 [PMID 9015795]", "species": "Human"}
 {"id": "q_8cd77867e099", "corpus": "wikipedia_pharm", "page": "lofexidine", "quote": "α 2B | 67"}
 {"id": "q_8ce6ada408e8", "corpus": "wikipedia_pharm", "page": "norquetiapine", "quote": "is a 5-HT 2B serotonin receptor modulator", "llm": "sonnet"}
+{"id": "q_8ce7e12393fb", "corpus": "wikipedia_pharm", "page": "zaleplon", "quote": "When taken orally, zaleplon reaches maximum concentration in about 45 minutes.", "llm": "sonnet"}
 {"id": "q_8cff3471d92a", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in cerebellum: probe 1059354 PACall present in 306/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_8d0e20e78ff6", "corpus": "gtopdb_ki", "page": "pimozide", "quote": "pimozide at 5-HT6 receptor (Htr6, Rat): Antagonist / Antagonist, pKi 7.2 [PMID 7908055]", "species": "Rat"}
 {"id": "q_8d14fbe19f44", "corpus": "stahl", "page": 471, "quote": "Although classified as a conventional antipsychotic, loxapine is a potent serotonin 2A antagonist", "llm": "sonnet", "heading": ["Loxapine", "Therapeutics", "How the Drug Works"]}
@@ -1985,6 +2038,7 @@
 {"id": "q_8eb82d2cf40c", "corpus": "stahl", "page": 717, "quote": "Rozerem", "llm": "sonnet", "heading": ["Ramelteon", "Therapeutics"]}
 {"id": "q_8eb90e397da8", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Stimuloton", "llm": "sonnet"}
 {"id": "q_8ecb467995a4", "corpus": "stahl", "page": 322, "quote": "Terminal half-life 41–79 minutes", "llm": "sonnet", "heading": ["Flumazenil", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_8ed4e7b91846", "corpus": "wikipedia_pharm", "page": "clonazepam", "quote": "Peak blood concentrations of 6.5–13.5 ng/mL were usually reached within 1–2 hours following a single 2 mg oral dose of micronized clonazepam in healthy adults.", "llm": "sonnet"}
 {"id": "q_8f259dcf55f3", "corpus": "stahl", "page": 783, "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), presumably increasing norepinephrine neurotransmission in the prefrontal cortex and throughout the brain", "llm": "sonnet", "heading": ["Solriamfetol", "Therapeutics", "How the Drug Works"]}
 {"id": "q_8f44e5c94abb", "corpus": "stahl", "page": 699, "quote": "Triptil", "llm": "sonnet", "heading": ["Protriptyline", "Therapeutics", "Brands"]}
 {"id": "q_8f4eba6a30bd", "corpus": "wikipedia_pharm", "page": "amobarbital", "quote": "Elimination half-life | 8–42 hours", "llm": "sonnet"}
@@ -2003,6 +2057,7 @@
 {"id": "q_9032484238a2", "corpus": "stahl", "page": 349, "quote": "Binds to benzodiazepine receptors at the GABA-A ligand-gated chloride channel complex", "llm": "sonnet", "heading": ["Flurazepam", "Therapeutics", "How the Drug Works"]}
 {"id": "q_904db39a7947", "corpus": "allen_ahba", "page": "ABAT", "quote": "ABAT detected in thalamus: probe 1010530 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_90514798b68c", "corpus": "wikipedia_pharm", "page": "mirtazapine", "quote": "5-HT 7 | 265 | Human"}
+{"id": "q_905e2ad5b844", "corpus": "wikipedia_pharm", "page": "suvorexant", "quote": "The time to peak levels of suvorexant is 2 to 3 hours regardless of dose but with wide variation (range 30 minutes to 8 hours).", "llm": "sonnet"}
 {"id": "q_905e5ba9dcbf", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in temporal: probe 1051414 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_907033f01eb9", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in medulla: probe 1059351 PACall present in 238/244 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_9092cada4791", "corpus": "stahl", "page": 601, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet", "heading": ["Olanzapine–Samidorphan", "Therapeutics", "How the Drug Works"]}
@@ -2118,6 +2173,7 @@
 {"id": "q_984dcffd26e6", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "5-HT 1A | 1,044–>10,000 nM"}
 {"id": "q_98692cd2bc5c", "corpus": "stahl", "page": 533, "quote": "Savella", "llm": "sonnet", "heading": ["Milnacipran", "Therapeutics", "Brands"]}
 {"id": "q_9876e773e1b2", "corpus": "gtopdb_class", "page": 24, "quote": "α1D-adrenoceptor (ADRA1D), GtoPdb target 24 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments"}
+{"id": "q_98797e6f4fd5", "corpus": "wikipedia_pharm", "page": "trimipramine", "quote": "The time to peak concentrations following a dose is 2 to 4 hours.", "llm": "sonnet"}
 {"id": "q_98831bf9cacc", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in cerebellum: probe 1059351 PACall present in 299/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_9889230eda92", "corpus": "stahl", "page": 314, "quote": "Terminal elimination half-life approximately 6 hours", "llm": "sonnet", "heading": ["Eszopiclone", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_988f46f78f4d", "corpus": "wikipedia_pharm", "page": "levodopa", "quote": "Levodopa , also known as L -DOPA , is a dopaminergic medication which is used in the treatment of Parkinson's disease (PD) and certain other conditions like dopamine-responsive dystonia and restless legs syndrome .", "llm": "sonnet"}
@@ -2197,6 +2253,7 @@
 {"id": "q_9d0ec3290855", "corpus": "gtopdb_ki", "page": "ziprasidone", "quote": "ziprasidone at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 8.3 [PMID 8935801]", "species": "Human"}
 {"id": "q_9d1b2e0e6941", "corpus": "wikipedia_pharm", "page": "sertindole", "quote": "5-HT 1F | 360"}
 {"id": "q_9d204633ef65", "corpus": "wikipedia_pharm", "page": "betahistine", "quote": "Betahistine is a weak antagonist or inverse agonist at histamine H 3 receptors and a weak partial agonist at histamine H 1 receptors .", "llm": "sonnet"}
+{"id": "q_9d250028b64e", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "Its time to peak levels is 0.53 to 2.3 hours on average, with a range of 0.25 to 5.0 hours.", "llm": "sonnet"}
 {"id": "q_9d48b7500254", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "α 1A | 3.8 | Antagonist"}
 {"id": "q_9d5724888443", "corpus": "kandel", "page": 735, "quote": "The axons of the mitral and tufted relay neurons of the olfactory bulb project through the lateral olfactory tract to the olfactory cortex (Figure 29–8 and see Figure 29–1).", "llm": "sonnet", "heading": ["29 Smell and Taste: The Chemical Senses", "Olfactory Information Is Transformed Along the Pathway to the Brain", "The Olfactory Bulb Transmits Information to the Olfactory Cortex"]}
 {"id": "q_9d5e48cc1e0b", "corpus": "gtopdb", "page": 14, "quote": "CNS: hippocampus.", "species": "Rat", "llm": "sonnet"}
@@ -2237,6 +2294,7 @@
 {"id": "q_9f7e8e462e0f", "corpus": "allen_ahba", "page": "HTR1A", "quote": "HTR1A relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1024804, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.92: raphe +2.12 (5d), hippocampus +1.36 (5d), temporal +0.77 (5d), frontal +0.52 (5d), parietal +0.31 (5d), amygdala +0.14 (5d), occipital +0.12 (5d), septal_nuclei -0.08 (5d)", "species": "Human"}
 {"id": "q_9f8a6dd251c1", "corpus": "gtopdb_ki", "page": "ziprasidone", "quote": "ziprasidone at 5-HT2C receptor (HTR2C, Human): Antagonist / Inverse agonist, pKi 7.9-9.01 [PMID 12629531]", "species": "Human"}
 {"id": "q_9f9465db5b92", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at α1B-adrenoceptor (ADRA1B, Human): Antagonist / Antagonist, pKi 7.4-8.2 [PMID 11459121]", "species": "Human"}
+{"id": "q_9f97aa9d1f20", "corpus": "wikipedia_pharm", "page": "mescaline", "quote": "Peak concentrations of mescaline occur after approximately 1.6 to 2.3 hours on average (range 1.0–6.0 hours).", "llm": "sonnet"}
 {"id": "q_9fa8f1d2f109", "corpus": "wikipedia_pharm", "page": "chlorpromazine", "quote": "Metabolism | Liver , mostly CYP2D6 -mediated", "llm": "opus"}
 {"id": "q_9fb9d66b5e87", "corpus": "wikipedia_pharm", "page": "tofisopam", "quote": "Tofisopam ( Emandaxin , Grandaxin , Sériel ) is an anxiolytic that is marketed in several European countries.", "llm": "sonnet"}
 {"id": "q_9fd8c1370da4", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "α 2A | 2,532–15,000"}
@@ -2282,8 +2340,10 @@
 {"id": "q_a234ceb85df5", "corpus": "wikipedia_fr", "page": "qu_tiapine", "quote": "Ketipinor", "llm": "sonnet"}
 {"id": "q_a239a827f244", "corpus": "allen_ahba", "page": "SLC12A2", "quote": "SLC12A2 detected in hippocampus: probe 1051414 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_a2482c8ec8c7", "corpus": "wikipedia_pharm", "page": "meclizine", "quote": "Meclizine is a first-generation antihistamine (nonselective H 1 antagonist ) of the piperazine class.", "llm": "sonnet"}
+{"id": "q_a262e158f226", "corpus": "wikipedia_pharm", "page": "2c_b", "quote": "The time to peak levels is 2.0 to 2.4 hours.", "llm": "sonnet"}
 {"id": "q_a27e425a153a", "corpus": "stahl", "page": 875, "quote": "Stavzor", "llm": "sonnet", "heading": ["Valproate", "Therapeutics", "Brands"]}
 {"id": "q_a28f4a3c87a1", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "D 5 | 290 | Antagonist"}
+{"id": "q_a28ffd3fc0c3", "corpus": "wikipedia_pharm", "page": "zolpidem", "quote": "The drug reaches peak concentration in about 2 hours and has a half-life in healthy adults of about 2–3 hours.", "llm": "sonnet"}
 {"id": "q_a298356b34d2", "corpus": "kandel", "page": 1117, "quote": "There are also GABAergic projections from the NAc to the VTA, with some in a direct pathway innervating the VTA and some in an indirect pathway innervating the VTA via intervening GABAergic neurons in the ventral pallidum", "llm": "sonnet", "heading": ["43 Motivation, Reward, and Addictive States", "Drug Addiction Is a Pathological Reward State", "All Drugs of Abuse Target Neurotransmitter Receptors, Transporters, or Ion Channels"]}
 {"id": "q_a298df5fafef", "corpus": "stahl", "page": 887, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)", "llm": "sonnet", "heading": ["Venlafaxine", "Therapeutics", "Class"]}
 {"id": "q_a2a0e4a721b4", "corpus": "wikipedia_pharm", "page": "fluphenazine", "quote": "5-HT 2C | 174–2,570 | Antagonist"}
@@ -2291,6 +2351,7 @@
 {"id": "q_a2d9433377cc", "corpus": "stahl", "page": 53, "quote": "ProCentra", "llm": "sonnet", "heading": ["Amphetamine (D)", "Therapeutics"]}
 {"id": "q_a2da0030cf2c", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "5-HT 5A | 140 | ND"}
 {"id": "q_a301718f7a43", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "M 1 | 67 | Human"}
+{"id": "q_a301f47d59ff", "corpus": "wikipedia_pharm", "page": "ramelteon", "quote": "The absorption of ramelteon is rapid, with peak levels being reached after approximately 0.75 hours (range 0.5–1.5 hours).", "llm": "sonnet"}
 {"id": "q_a30a697ff176", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in caudate: probe 1022773 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a335e80d2f14", "corpus": "wikipedia_pharm", "page": "vigabatrin", "quote": "Drug class | Anticonvulsant ; GABA-T inhibitor", "llm": "sonnet"}
 {"id": "q_a33bf4332cb2", "corpus": "allen_ahba", "page": "CACNA1G", "quote": "CACNA1G detected in frontal: probe 1049164 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -2298,6 +2359,7 @@
 {"id": "q_a358177d1ddb", "corpus": "stahl", "page": 935, "quote": "Zoleptil", "llm": "sonnet", "heading": ["Zotepine", "Therapeutics", "Brands"]}
 {"id": "q_a371cf02747d", "corpus": "gtopdb_ki", "page": "fluphenazine", "quote": "fluphenazine at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 7.7 [PMID 12629531]", "species": "Human"}
 {"id": "q_a375473087c6", "corpus": "stahl_essential", "page": 97, "quote": "The first group is the D1-like receptors, including both D1 and D5 receptors. D1-like receptors are excitatory, and positively linked to adenylate cyclase (Figure 4-4, left).", "llm": "sonnet", "heading": ["4 Psychosis, Schizophrenia, and the Neurotransmitter Networks Dopamine, Serotonin, and Glutamate"]}
+{"id": "q_a3769f3d4951", "corpus": "wikipedia_pharm", "page": "maprotiline", "quote": "The mean time to peak is 12 hours.", "llm": "sonnet"}
 {"id": "q_a380448e7b01", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Recital", "llm": "sonnet"}
 {"id": "q_a3849783dd76", "corpus": "wikipedia_pharm", "page": "diphenhydramine", "quote": "α 2A | 2900 | Human"}
 {"id": "q_a3bdb2d1bfdc", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in locus_coeruleus: probe 1059351 PACall present in 10/10 samples (donors 9861,10021,15697)", "species": "Human"}
@@ -2352,6 +2414,7 @@
 {"id": "q_a65ad5b650fb", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in substantia_nigra: probe 1028488 PACall present in 36/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a65b111a4b94", "corpus": "stahl", "page": 681, "quote": "Wakix", "llm": "sonnet", "heading": ["Pitolisant", "Therapeutics", "Brands"]}
 {"id": "q_a66c800b5a0c", "corpus": "wikipedia_pharm", "page": "opipramol", "quote": "σ 1 | 0.2–50 | Rodent"}
+{"id": "q_a66d674291a1", "corpus": "wikipedia_pharm", "page": "hydroxyzine", "quote": "The time to reach maximum concentration ( T max ) of hydroxyzine is about 2.0 hours in both adults and children and its elimination half-life is around 20.0 hours in adults (mean age 29.3 years) and 7.1 hours in children.", "llm": "sonnet"}
 {"id": "q_a679ce5649d2", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Serlain", "llm": "sonnet"}
 {"id": "q_a682c07c94be", "corpus": "gtopdb_ki", "page": "bromocriptine", "quote": "bromocriptine at D3 receptor (DRD3, Human): Agonist / Partial agonist, pKi 7.1-8.2 [PMID 12388666]", "species": "Human"}
 {"id": "q_a683d0903df4", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in temporal: probe 1020459 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -2415,6 +2478,7 @@
 {"id": "q_aa3dee2b15ad", "corpus": "stahl", "page": 187, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet", "heading": ["Clonazepam", "Therapeutics", "Class"]}
 {"id": "q_aa56d1157b61", "corpus": "gtopdb_ki", "page": "pipotiazine", "quote": "pipotiazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 9.7 [PMID 1586393]", "species": "Human"}
 {"id": "q_aa5ac57d16b3", "corpus": "wikipedia_pharm", "page": "tolcapone", "quote": "Tolcapone , sold under the brand name Tasmar , is a medication used to treat Parkinson's disease (PD). It is a selective, potent and reversible nitrocatechol-type inhibitor of the enzyme catechol- O -methyltransferase (COMT).", "llm": "sonnet"}
+{"id": "q_aa66934577a1", "corpus": "wikipedia_pharm", "page": "lsd", "quote": "Maximum plasma concentrations are typically observed 1.4 to 1.5 hours after oral administration of 100 μg and 200 μg, respectively, with a plasma half-life of approximately 2.6 hours (ranging from 2.2 to 3.4 hours among test subjects).", "llm": "sonnet"}
 {"id": "q_aa78a3fd0a86", "corpus": "gtopdb_class", "page": 214, "quote": "D1 receptor (DRD1), GtoPdb target 214 | type: gpcr | family: Dopamine receptors"}
 {"id": "q_aa97f38258b2", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 6.9 [PMID 8935801]", "species": "Human"}
 {"id": "q_aab4c1744dfe", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in hippocampus: probe 1059354 PACall present in 170/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -2459,6 +2523,7 @@
 {"id": "q_ade949a79cb3", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "5-HT 5A | 960–1520 | 87% | Near-full Agonist"}
 {"id": "q_adebd769abc2", "corpus": "stahl", "page": 901, "quote": "Half-life approximately 7 hours", "llm": "sonnet", "heading": ["Viloxazine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_ae018a33a59a", "corpus": "stahl", "page": 271, "quote": "Neuroscience-based Nomenclature: acetylcholine enzyme inhibitor (ACh-EI)", "llm": "sonnet", "heading": ["Donepezil", "Therapeutics", "Class"]}
+{"id": "q_ae0df1c8c76a", "corpus": "wikipedia_pharm", "page": "alpidem", "quote": "The absorption of alpidem is rapid and it reaches peak levels after 1.0 to 2.5 hours.", "llm": "sonnet"}
 {"id": "q_ae0fbd774216", "corpus": "gtopdb_ki", "page": "cabergoline", "quote": "cabergoline at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 6.5 [PMID 12388666]", "species": "Human"}
 {"id": "q_ae40562b4f10", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "NET | 113 | – | – | Inhibition"}
 {"id": "q_ae4a132fc202", "corpus": "stahl", "page": 61, "quote": "Adzenys XR-ODT", "llm": "sonnet", "heading": ["Amphetamine (D,L)", "Therapeutics", "Brands"]}
@@ -2524,6 +2589,7 @@
 {"id": "q_b1de80a3aac3", "corpus": "stahl", "page": 73, "quote": "Metabolized primarily by CYP2D6 and CYP3A4", "llm": "opus", "heading": ["Aripiprazole", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_b1e9cf37498a", "corpus": "stahl", "page": 390, "quote": "Metabolized by CYP2D6 and CYP3A4", "llm": "opus", "heading": ["Iloperidone", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_b20ea68d9f94", "corpus": "gtopdb_ki", "page": "mirtazapine", "quote": "mirtazapine at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7-7.7 [PMID 15771415]", "species": "Human"}
+{"id": "q_b21eda3c3caa", "corpus": "wikipedia_pharm", "page": "lofexidine", "quote": "Peak plasma concentrations occur at 3 hours after a single administration, with a half-life of 11 hours.", "llm": "sonnet"}
 {"id": "q_b2230a842932", "corpus": "gtopdb", "page": 22, "quote": "High expression levels of α1A-adrenoceptor mRNA are found in the heart, liver, cerebellum and cerebral cortex.", "species": "Human", "llm": "sonnet"}
 {"id": "q_b226b62b3a3a", "corpus": "stahl", "page": 525, "quote": "Blocks serotonin 2A, 2C, and 3 receptors", "llm": "sonnet", "heading": ["Mianserin", "Therapeutics", "If It Doesn’t Work"]}
 {"id": "q_b22fcc462367", "corpus": "stahl", "page": 517, "quote": "Ritalin", "llm": "sonnet", "heading": ["Methylphenidate (D,L)", "Therapeutics", "Brands"]}
@@ -2541,6 +2607,7 @@
 {"id": "q_b2c73aecc705", "corpus": "wikipedia_pharm", "page": "buspirone", "quote": "α 2 | 6,000 | Antagonist | Rat"}
 {"id": "q_b2e969f36269", "corpus": "wikipedia_pharm", "page": "prochlorperazine", "quote": "Metabolism | Mainly Liver ( CYP2D6 and/or CYP3A4 )", "llm": "opus"}
 {"id": "q_b2f4f8af1e4d", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "D 3 | 9.4 | 0.42 | Antagonist"}
+{"id": "q_b2fa1fde94b6", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "Following a single very low dose of 6 mg, peak plasma levels of doxepin are 0.854 ng/mL (3.06 nmol/L) at 3 hours without food and 0.951 ng/mL (3.40 nmol/L) at 6 hours with food.", "llm": "sonnet"}
 {"id": "q_b330cfb15c45", "corpus": "gtopdb_ki", "page": "olanzapine", "quote": "olanzapine at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 6.3 [PMID 8935801]", "species": "Human"}
 {"id": "q_b34e145b7494", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "M 5 | 5.6–75 | Human"}
 {"id": "q_b3504b062d39", "corpus": "wikipedia_pharm", "page": "apomorphine", "quote": "5-HT 1D | 1,230 | no action"}
@@ -2549,6 +2616,7 @@
 {"id": "q_b3a7cd444f80", "corpus": "allen_ahba", "page": "SCN1A", "quote": "SCN1A detected in frontal: probe 1022570 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_b3ad5a8f9f04", "corpus": "allen_ahba", "page": "DRD3", "quote": "DRD3 detected in putamen: probe 1025406 PACall present in 39/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_b3af927ccddf", "corpus": "wikipedia_fr", "page": "naltrexone", "quote": "Vivitrol", "llm": "sonnet"}
+{"id": "q_b3eabdef7040", "corpus": "wikipedia_pharm", "page": "lamotrigine", "quote": "Its absolute bioavailability is 98% and its plasma C max occurs from 1.4 to 4.8 hours.", "llm": "sonnet"}
 {"id": "q_b3fb40ebd938", "corpus": "wikipedia_pharm", "page": "chlorprothixene", "quote": "5-HT 3 | 398 | ND"}
 {"id": "q_b402f6996cb6", "corpus": "allen_ahba", "page": "HTR1E", "quote": "HTR1E detected in accumbens: probe 1055340 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_b414a208b494", "corpus": "stahl", "page": 776, "quote": "Parent drug and its active metabolite have ~4-hour terminal half-lives", "llm": "sonnet", "heading": ["Sildenafil", "Dosing and use", "Pharmacokinetics"]}
@@ -2600,6 +2668,7 @@
 {"id": "q_b7404e60466a", "corpus": "wikipedia_fr", "page": "bupropion", "quote": "Contrave", "llm": "sonnet"}
 {"id": "q_b741559e3d88", "corpus": "gtopdb_ki", "page": "perphenazine", "quote": "perphenazine at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 6.9 [PMID 12629531]", "species": "Human"}
 {"id": "q_b75d14fd8a12", "corpus": "stahl", "page": 517, "quote": "Stimulant", "llm": "sonnet", "heading": ["Methylphenidate (D,L)", "Therapeutics", "Class"]}
+{"id": "q_b77a32c405f3", "corpus": "wikipedia_pharm", "page": "diphenhydramine", "quote": "Oral bioavailability of diphenhydramine is in the range of 40% to 60%, and peak plasma concentration occurs about 2 to 3 hours after administration.", "llm": "sonnet"}
 {"id": "q_b788861d4403", "corpus": "stahl_essential", "page": 575, "quote": "synapse with postsynaptic sites containing μ-opioid receptors", "llm": "sonnet", "heading": ["13 Impulsivity, Compulsivity, and Addiction"]}
 {"id": "q_b7a2ab95b438", "corpus": "wikipedia_pharm", "page": "fenfluramine", "quote": "Elimination half-life | 13–30 hours", "llm": "sonnet"}
 {"id": "q_b7a43de4e899", "corpus": "wikipedia_pharm", "page": "perphenazine", "quote": "α 2A | 810 | - | -"}
@@ -2648,6 +2717,7 @@
 {"id": "q_ba0549cb19d5", "corpus": "allen_ahba", "page": "ABAT", "quote": "ABAT detected in temporal: probe 1010530 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
 {"id": "q_ba3f032dd141", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "D 2 | 74–112 | ↓"}
 {"id": "q_ba54e1df4d8e", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "NET | 1340–2840 | Reuptake inhibitor"}
+{"id": "q_ba72ab6537d3", "corpus": "wikipedia_pharm", "page": "tranylcypromine", "quote": "Tranylcypromine reaches its maximum concentration (t max ) within 1–2 hours.", "llm": "sonnet"}
 {"id": "q_ba78adce2bb2", "corpus": "allen_ahba", "page": "DRD4", "quote": "DRD4 detected in occipital: probe 1057541 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ba7991952023", "corpus": "allen_ahba", "page": "GRM2", "quote": "GRM2 detected in frontal: probe 1014136 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ba7b4d01d62e", "corpus": "wikipedia_pharm", "page": "pimozide", "quote": "α 2A | 1,593"}
@@ -2675,6 +2745,7 @@
 {"id": "q_bbf72b754844", "corpus": "wikipedia_pharm", "page": "mdma", "quote": "M 5 | 6,340–>10,000"}
 {"id": "q_bc4ba0d81fcb", "corpus": "gtopdb_ki", "page": "furosemide", "quote": "furosemide at Basolateral Na-K-Cl symporter (SLC12A2, Human): Inhibitor / Inhibition, pIC50 5.13 [PMID 11882915]"}
 {"id": "q_bc63bb1e4c25", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in occipital: probe 1022773 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_bc73090b3e15", "corpus": "wikipedia_pharm", "page": "scopolamine", "quote": "It has a bioavailability of 20–40%, reaches peak plasma concentration in about 45 minutes, and in healthy subjects has an average half-life of 5 hours (observed range 2–10 hours).", "llm": "sonnet"}
 {"id": "q_bc8b8004624a", "corpus": "stahl", "page": 133, "quote": "Wellbutrin XL", "llm": "sonnet", "heading": ["Bupropion", "Therapeutics"]}
 {"id": "q_bc8f24cec817", "corpus": "wikipedia_fr", "page": "isocarboxazide", "quote": "Enerzer", "llm": "sonnet"}
 {"id": "q_bc9738af3570", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "α 2C | Agonist | 550"}
@@ -2724,6 +2795,7 @@
 {"id": "q_c0129d0bf30f", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "Several lines of evidence suggest that haloperidol exhibits neurotoxicity . Some studies report an association between antipsychotic medications, especially first-generation agents, and a decline in gray matter volume. Haloperidol irreversibly blocks the sigma σ 1 receptor . It may exert deleterious effects on the dorsolateral prefrontal cortex (DLPFC) by attenuating brain-derived neurotrophic factor (BDNF) transcription and expression, associated with an increase in the long non-coding RNA BDNF-AS in the DLPFC. Besides the preceding mechanisms, haloperidol metabolizes into HPP + , a monoaminergic neurotoxin related to MPTP . This might be involved in the extrapyramidal symptoms that develop with long-term haloperidol therapy.", "llm": "sonnet"}
 {"id": "q_c034090e13ad", "corpus": "gtopdb_ki", "page": "ketanserin", "quote": "ketanserin at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 6.7 [PMID 1826762]", "species": "Human"}
 {"id": "q_c055f709b092", "corpus": "allen_ahba", "page": "HTR1A", "quote": "HTR1A detected in temporal: probe 1024804 PACall present in 417/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_c05b7ad2b67c", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "The time to peak concentration after oral dosing is about 2.5 hours, and food does not appear to affect the bioavailability of clozapine.", "llm": "sonnet"}
 {"id": "q_c072dd4120d2", "corpus": "wikipedia_pharm", "page": "apomorphine", "quote": "α 2B -adrenergic | 66.1 | antagonist"}
 {"id": "q_c0a034678372", "corpus": "wikipedia_pharm", "page": "clomethiazole", "quote": "Clomethiazole (also called chlormethiazole ) is a sedative and hypnotic originally developed by Hoffmann-La Roche in the 1930s.", "llm": "sonnet"}
 {"id": "q_c0b7aae8fc71", "corpus": "gtopdb", "page": 373, "quote": "Layers II-III of the neocortex, anterior olfactory nucleus, hippocampal formation, amygdala, trigeminal motor (V) and facial (VII) nuclei, dorsal and the ventral horn of the spinal cord.", "species": "Rat", "llm": "sonnet"}
@@ -2747,6 +2819,7 @@
 {"id": "q_c29bc536a8b2", "corpus": "stahl", "page": 665, "quote": "Nuplazid", "llm": "sonnet", "heading": ["Pimavanserin", "Therapeutics"]}
 {"id": "q_c2a1d12a5ccc", "corpus": "stahl", "page": 83, "quote": "Elimination half-life approximately 15 hours", "llm": "sonnet", "heading": ["Armodafinil", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_c2a48d16d0ce", "corpus": "stahl", "page": 173, "quote": "SSRI (selective serotonin reuptake inhibitor); often classified as an antidepressant, but it is not just an antidepressant", "llm": "sonnet", "heading": ["Citalopram", "Therapeutics", "Class"]}
+{"id": "q_c2b91e4c28bc", "corpus": "wikipedia_pharm", "page": "estazolam", "quote": "Peak plasma levels are achieved within 1–6 hours.", "llm": "sonnet"}
 {"id": "q_c2c2d01647df", "corpus": "allen_ahba", "page": "OPRD1", "quote": "OPRD1 detected in frontal: probe 1028943 PACall present in 346/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_c2cad9357367", "corpus": "allen_ahba", "page": "GRM5", "quote": "GRM5 detected in accumbens: probe 1020459 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_c2d31447334c", "corpus": "gtopdb_class", "page": 27, "quote": "α2C-adrenoceptor (ADRA2C), GtoPdb target 27 | transduction: Gi/Go family | effectors: Potassium channel, Calcium channel, Other - See Comments"}
@@ -2827,6 +2900,7 @@
 {"id": "q_c7d020cada63", "corpus": "kandel", "page": 986, "quote": "Following cortical activation, short-latency excitatory effects in the subthalamus are thought to be mediated via these \"hyperdirect\" connections, whereas longer-latency suppressive effects are more likely to come from indirect inhibitory inputs from other basal ganglia nuclei, principally the external globus pallidus.", "llm": "sonnet", "heading": ["38 The Basal Ganglia", "Physiological Signals Provide Further Clues to Function in the Basal Ganglia", "Ventral Midbrain Dopamine Neurons Receive Input From External Structures and Other Basal Ganglia Nuclei"]}
 {"id": "q_c7ec0ab0ee21", "corpus": "gtopdb_ki", "page": "solriamfetol", "quote": "solriamfetol at NET (SLC6A2, Human): Inhibitor / Inhibition, pKi 5.43 [PMID 29891587]", "species": "Human"}
 {"id": "q_c7f5deb59bc2", "corpus": "wikipedia_pharm", "page": "lurasidone", "quote": "D 4.4L | 30 | Positive allosteric modulator | ND | ND"}
+{"id": "q_c7fa497532e9", "corpus": "wikipedia_pharm", "page": "caffeine", "quote": "Peak blood concentration is reached within 1–2 hours.", "llm": "sonnet"}
 {"id": "q_c80cbe7c0455", "corpus": "wikipedia_pharm", "page": "mesoridazine", "quote": "It has central antiadrenergic, antidopaminergic, antiserotonergic and weak muscarinic anticholinergic effects.\nSerious side effects include akathisia , tardive dyskinesia and the potentially fatal neuroleptic malignant syndrome .\nMesoridazine was withdrawn from the United States market in 2004 due to dangerous side effects, namely irregular heart beat and QT-prolongation of the electrocardiogram.\nMesoridazine is on t", "llm": "sonnet"}
 {"id": "q_c855d463d74e", "corpus": "gtopdb_class", "page": 23, "quote": "α1B-adrenoceptor (ADRA1B), GtoPdb target 23 | type: gpcr | family: Adrenoceptors"}
 {"id": "q_c85e3f9d7e3d", "corpus": "gtopdb_ki", "page": "clonidine", "quote": "clonidine at α2B-adrenoceptor (ADRA2B, Human): Agonist / Partial agonist, pKi 6.3-9.5 [PMID 9824686]", "species": "Human"}
@@ -2853,6 +2927,7 @@
 {"id": "q_ca5577df7902", "corpus": "wikipedia_pharm", "page": "cabergoline", "quote": "D 3 | 0.80–1.0 | 86 | Full agonist"}
 {"id": "q_ca5b41ee2d6f", "corpus": "wikipedia_pharm", "page": "guanfacine", "quote": "α 2C | 1,120 – 3,890 | Human"}
 {"id": "q_ca66b788e9d4", "corpus": "allen_ahba", "page": "SIGMAR1", "quote": "SIGMAR1 detected in occipital: probe 1047600 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_ca7eacc61a6c", "corpus": "wikipedia_pharm", "page": "domperidone", "quote": "Peak levels of domperidone following an oral dose occur after about 60 minutes.", "llm": "sonnet"}
 {"id": "q_ca8fec6c103d", "corpus": "stahl", "page": 577, "quote": "Blocks serotonin 2A receptors potently", "llm": "sonnet", "heading": ["Nefazodone", "Therapeutics", "How the Drug Works"]}
 {"id": "q_cab1c8a0bbed", "corpus": "stahl", "page": 418, "quote": "Elimination half-life in healthy volunteers approximately 33 hours after a single dose of lamotrigine", "llm": "sonnet", "heading": ["Lamotrigine", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_cab5f7be22f0", "corpus": "gtopdb_ki", "page": "cyproheptadine", "quote": "cyproheptadine at 5-HT6 receptor (HTR6, Human): Antagonist / Antagonist, pKi 6.8 [PMID 8522988]", "species": "Human"}
@@ -2872,6 +2947,7 @@
 {"id": "q_cbe6bf31524b", "corpus": "allen_ahba", "page": "DRD5", "quote": "DRD5 detected in septal_nuclei: probe 1057496 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_cbe9d9a94a68", "corpus": "wikipedia_pharm", "page": "melperone", "quote": "5-HT 1D | 3,400"}
 {"id": "q_cbeeba738cd7", "corpus": "allen_ahba", "page": "ADRB1", "quote": "ADRB1 detected in parietal: probe 1021604 PACall present in 256/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_cc07c2dea820", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "Onset of action | 5 hours ( T max", "llm": "sonnet"}
 {"id": "q_cc19552bc7e9", "corpus": "wikipedia_pharm", "page": "oxcarbazepine", "quote": "In addition, oxcarbazepine and licarbazepine are CYP3A4 and CYP3A5 inducers and thus have the potential to decrease the plasma concentration of CYP3A4 and CYP3A5 substrates, including calcium channel antagonists against high blood pressure and oral contraceptives .", "llm": "opus"}
 {"id": "q_cc2ebb06fd46", "corpus": "wikipedia_pharm", "page": "blonanserin", "quote": "α 2 | 530 (Rat cloned) | -"}
 {"id": "q_cc338b708e8d", "corpus": "wikipedia_pharm", "page": "cyproheptadine", "quote": "α 2B | 220 | ?"}
@@ -2895,6 +2971,7 @@
 {"id": "q_cd926cfe58d0", "corpus": "wikipedia_pharm", "page": "bromocriptine", "quote": "α 2C | 28.2 | –30% | Partial inverse agonist"}
 {"id": "q_cdaa6898bebc", "corpus": "wikipedia_pharm", "page": "sumatriptan", "quote": "5-HT 7 | 25–1,380 (K i ) 6,030 ( EC 50 )"}
 {"id": "q_cdbed5780a3b", "corpus": "gtopdb_ki", "page": "aripiprazole", "quote": "aripiprazole at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 6.1 [PMID 12784105]", "species": "Human"}
+{"id": "q_cdc47d3d8fbb", "corpus": "wikipedia_pharm", "page": "memantine", "quote": "Time to peak levels of memantine are 3 to 7 hours.", "llm": "sonnet"}
 {"id": "q_cdc52b570239", "corpus": "gtopdb_ki", "page": "cabergoline", "quote": "cabergoline at α2B-adrenoceptor (ADRA2B, Human): Antagonist / Antagonist, pKi 7.1 [PMID 12388666]", "species": "Human"}
 {"id": "q_cdc86ca11158", "corpus": "kandel", "page": 982, "quote": "The substantia nigra pars reticulata is the second principal output nucleus. It also receives afferents from other basal ganglia nuclei and provides efferent connections to the thalamus and brain stem. Inhibitory (GABAergic) inputs come from the striatum and globus pallidus (external) and excitatory input from the subthalamus.", "llm": "sonnet", "heading": ["38 The Basal Ganglia", "The Internal Circuitry of the Basal Ganglia Regulates How the Components Interact", "The Traditional Model of the Basal Ganglia Emphasizes Direct and Indirect Pathways"]}
 {"id": "q_cdcd660bcd26", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "Metabolism | Liver (direct glucuronidation and CYP1A2 mediated oxidation)", "llm": "opus"}
@@ -2919,6 +2996,7 @@
 {"id": "q_cf1cdaff4964", "corpus": "gtopdb_ki", "page": "phenelzine", "quote": "phenelzine at Monoamine oxidase B (MAOB, Human): Inhibitor / Irreversible inhibition, pKi 7.82 [PMID 18426226]", "species": "Human"}
 {"id": "q_cf25b6e13647", "corpus": "stahl", "page": 887, "quote": "Effexor", "llm": "sonnet", "heading": ["Venlafaxine", "Therapeutics", "Brands"]}
 {"id": "q_cf431f98373f", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "M 2 | 34 | Human"}
+{"id": "q_cf4af48bd668", "corpus": "wikipedia_pharm", "page": "moclobemide", "quote": "Peak plasma levels occur 0.3 to 2 hours after oral administration.", "llm": "sonnet"}
 {"id": "q_cf58b8015c65", "corpus": "gtopdb", "page": 2, "quote": "Brain: substantia nigra, globus pallidus > caudate nucleus, putamen, nucleus accumbens, central gray, hippocampal formation > various cortical regions.", "species": "Human", "llm": "sonnet"}
 {"id": "q_cf5f382a79c0", "corpus": "stahl", "page": 621, "quote": "Invega Hafyera", "llm": "sonnet", "heading": ["Paliperidone", "Therapeutics", "Brands"]}
 {"id": "q_cf650326fa57", "corpus": "stahl", "page": 127, "quote": "Sublocade (subcutaneous injection)", "llm": "sonnet", "heading": ["Buprenorphine", "Therapeutics"]}
@@ -2957,6 +3035,7 @@
 {"id": "q_d1e5a618106a", "corpus": "wikipedia_pharm", "page": "phencyclidine", "quote": "Metabolism | Oxidative hydroxylation in liver by CYP450 enzymes , glucuronidation", "llm": "opus"}
 {"id": "q_d1e8d8f05699", "corpus": "stahl", "page": 883, "quote": "Chantix", "llm": "sonnet", "heading": ["Varenicline", "Therapeutics", "Brands"]}
 {"id": "q_d2031cc59ec4", "corpus": "stahl", "page": 371, "quote": "Neuroscience-based Nomenclature: norepinephrine receptor agonist (N-RA)", "llm": "sonnet", "heading": ["Guanfacine", "Therapeutics", "Class"]}
+{"id": "q_d20ba529f6da", "corpus": "wikipedia_pharm", "page": "propranolol", "quote": "Propranolol is rapidly and completely absorbed , with peak plasma levels achieved about 2 hours (range 1–3 hours) after ingestion.", "llm": "sonnet"}
 {"id": "q_d20bbad838be", "corpus": "gtopdb_ki", "page": "bromocriptine", "quote": "bromocriptine at D2 receptor (DRD2, Human): Agonist / Full agonist, pKi 7.3-8.3 [PMID 12388666]", "species": "Human"}
 {"id": "q_d214057ac872", "corpus": "carlat", "page": 121, "quote": "They also have secondary anticholinergic effects, which can cause side effects including dry mouth, constipation, and urinary retention, as well as cognitive impairment in susceptible populations.", "llm": "sonnet", "heading": ["Anxiolytic and Hypnotic Medications", "Antihistamines (Diphenhydramine, others) Fact Sheet [G]"]}
 {"id": "q_d219f938fe67", "corpus": "stahl", "page": 503, "quote": "Namenda", "llm": "sonnet", "heading": ["Memantine", "Therapeutics", "Brands"]}
@@ -2997,6 +3076,7 @@
 {"id": "q_d48de5fc842d", "corpus": "gtopdb_ki", "page": "biperiden", "quote": "biperiden at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKd 8.2 [PMID 1346637]", "species": "Human"}
 {"id": "q_d48e64365d16", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in cingulate: probe 1019914 PACall present in 116/123 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d4c5128a8e5b", "corpus": "stahl", "page": 175, "quote": "Metabolized by CYP3A4 and CYP2C19", "llm": "opus", "heading": ["Citalopram", "Dosing and use", "Dosing Tips"]}
+{"id": "q_d4c93eed8ccc", "corpus": "wikipedia_pharm", "page": "tiapride", "quote": "Bioavailability | ~75% (oral) ( T max = 1 hour)", "llm": "sonnet"}
 {"id": "q_d4d53fcc26e4", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "H 1 | 19 | Antagonist"}
 {"id": "q_d4e60037df2f", "corpus": "wikipedia_pharm", "page": "rotigotine", "quote": "α 2A | 338"}
 {"id": "q_d4ef8d5b758a", "corpus": "allen_ahba", "page": "DRD1", "quote": "DRD1 detected in cingulate: probe 1022773 PACall present in 123/123 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -3043,6 +3123,7 @@
 {"id": "q_d77f0f0e6fe9", "corpus": "wikipedia_pharm", "page": "erenumab", "quote": "Erenumab , sold under the brand name Aimovig , is a medication which blocks the calcitonin gene-related peptide receptor (CGRPR) for the prevention of migraine .", "llm": "sonnet"}
 {"id": "q_d798befd745c", "corpus": "stahl", "page": 915, "quote": "Neuroscience-based Nomenclature: dopamine, serotonin receptor antagonist (DS-RAn)", "llm": "sonnet", "heading": ["Ziprasidone", "Therapeutics", "Class"]}
 {"id": "q_d79fb0b0ed55", "corpus": "gtopdb_ki", "page": "perphenazine", "quote": "perphenazine at 5-HT7 receptor (HTR7, Human): Antagonist / Inverse agonist, pKi 7.2 [PMID 15821958]", "species": "Human"}
+{"id": "q_d7fb7214e457", "corpus": "wikipedia_pharm", "page": "doxylamine", "quote": "The T max of doxylamine is 1.5 to 2.5 hours.", "llm": "sonnet"}
 {"id": "q_d80b48906f31", "corpus": "stahl", "page": 767, "quote": "Neuroscience-based Nomenclature: serotonin reuptake inhibitor (S-RI)", "llm": "sonnet", "heading": ["Sertraline", "Therapeutics", "Class"]}
 {"id": "q_d813637c0402", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "VMAT2 | 22–540 nM"}
 {"id": "q_d8384e7709d3", "corpus": "allen_ahba", "page": "HRH3", "quote": "HRH3 detected in temporal: probe 1046403 PACall present in 229/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -3072,6 +3153,7 @@
 {"id": "q_d9b918d52292", "corpus": "wikipedia_pharm", "page": "sodium_thiopental", "quote": "Elimination half-life | 5.5 –26 hours", "llm": "sonnet"}
 {"id": "q_d9c4552e80fa", "corpus": "wikipedia_pharm", "page": "pimozide", "quote": "α 2C | 376.5"}
 {"id": "q_d9c97e0aa451", "corpus": "kandel", "page": 130, "quote": "The _anterior group_ receives its major input from the mammillary nuclei of the hypothalamus and from the presubiculum of the hippocampal formation.", "llm": "sonnet", "heading": ["Part I Overall Perspective", "4 The Neuroanatomical Bases by Which Neural Circuits Mediate Behavior", "The Thalamus Is an Essential Link Between Sensory Receptors and the Cerebral Cortex"]}
+{"id": "q_d9cc82e0f794", "corpus": "wikipedia_pharm", "page": "zonisamide", "quote": "Zonisamide has a variable, yet relatively rapid rate of absorption with a time to peak concentration of 2.8–3.9 hours.", "llm": "sonnet"}
 {"id": "q_d9d044f96f62", "corpus": "wikipedia_pharm", "page": "amisulpride", "quote": "5-HT 2A | 8304 | Human"}
 {"id": "q_d9d72b04ec47", "corpus": "wikipedia_pharm", "page": "glutethimide", "quote": "Elimination half-life | 8–12 hours", "llm": "sonnet"}
 {"id": "q_d9e2472acc42", "corpus": "allen_ahba", "page": "GRM1", "quote": "GRM1 detected in occipital: probe 1010994 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -3092,6 +3174,7 @@
 {"id": "q_dabe7d55b3fe", "corpus": "allen_ahba", "page": "DRD2", "quote": "DRD2 detected in substantia_nigra: probe 1030267 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_dacd80157ac1", "corpus": "stahl", "page": 101, "quote": "Antiparkinson agent; anticholinergic", "llm": "sonnet", "heading": ["Benztropine", "Therapeutics", "Class"]}
 {"id": "q_dae6458cde8e", "corpus": "stahl", "page": 595, "quote": "Substrate for CYP1A2 and CYP2D6", "llm": "opus", "heading": ["Olanzapine", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_dafc354a969b", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "However, there is a wide variance in reported mean T max and T 1/2 in different studies, ranging from 1.7 to 6.1 hours and 14.5 to 36.7 hours respectively.", "llm": "sonnet"}
 {"id": "q_db03aa5880bc", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "5-HT 6 | 57.05 | 380 | ND"}
 {"id": "q_db21e5c3e96b", "corpus": "gtopdb_ki", "page": "yohimbine", "quote": "yohimbine at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 5.6 [PMID 8226867]", "species": "Human"}
 {"id": "q_db369c87c0fc", "corpus": "gtopdb_ki", "page": "cyproheptadine", "quote": "cyproheptadine at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 6.9 [PMID 8226867]", "species": "Human"}
@@ -3141,6 +3224,7 @@
 {"id": "q_ddf432b4ca72", "corpus": "gtopdb_class", "page": 17, "quote": "M5 receptor (CHRM5), GtoPdb target 17 | type: gpcr | family: Acetylcholine receptors (muscarinic)"}
 {"id": "q_de1669fc9351", "corpus": "gtopdb_ki", "page": "pimozide", "quote": "pimozide at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 6.8 [PMID 9760039]", "species": "Human"}
 {"id": "q_de1e29d59df0", "corpus": "wikipedia_pharm", "page": "rasagiline", "quote": "It is metabolized primarily by hepatic N -dealkylation via the cytochrome P450 enzyme CYP1A2 which forms the major metabolite ( R )-1-aminoindan .", "llm": "opus"}
+{"id": "q_de342a0ecb5b", "corpus": "wikipedia_pharm", "page": "nitrazepam", "quote": "The time for nitrazepam to reach peak plasma concentrations following oral administration is about 2 hours (0.5 to 5 hours).", "llm": "sonnet"}
 {"id": "q_de36850ddf41", "corpus": "stahl", "page": 709, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet", "heading": ["Quetiapine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_de553477c69e", "corpus": "stahl", "page": 641, "quote": "Lullan", "llm": "sonnet", "heading": ["Perospirone", "Therapeutics", "Brands"]}
 {"id": "q_de58e919af3f", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "H 1 | silent antagonist | 1800"}
@@ -3268,6 +3352,7 @@
 {"id": "q_e61cce115405", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in substantia_nigra: probe 1027284 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e63648e66402", "corpus": "wikipedia_pharm", "page": "doxepin", "quote": "α 1B | 12 | Human"}
 {"id": "q_e646a99af935", "corpus": "gtopdb_ki", "page": "chlorpromazine", "quote": "chlorpromazine at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 7.6-8.2 [PMID 12629531]", "species": "Human"}
+{"id": "q_e64b10994ce7", "corpus": "wikipedia_pharm", "page": "lumateperone", "quote": "After taking the medication by mouth, lumateperone reaches maximum plasma concentrations within 1–2 hours and has a terminal elimination half-life of 18 hours.", "llm": "sonnet"}
 {"id": "q_e65117d51801", "corpus": "wikipedia_pharm", "page": "dexmedetomidine", "quote": "α 1D | 79 | Human"}
 {"id": "q_e65ed82af400", "corpus": "wikipedia_pharm", "page": "tropatepine", "quote": "Tropatepine (brand name Lepticur ) is an anticholinergic used as an antiparkinsonian agent.", "llm": "sonnet"}
 {"id": "q_e68181bee4c5", "corpus": "stahl", "page": 739, "quote": "Inhibits butyrylcholinesterase", "llm": "sonnet", "heading": ["Rivastigmine", "Therapeutics", "How the Drug Works"]}
@@ -3302,6 +3387,7 @@
 {"id": "q_e8881f1f65d6", "corpus": "wikipedia_fr", "page": "zolpidem", "quote": "Sublinox", "llm": "sonnet"}
 {"id": "q_e88e00665e13", "corpus": "allen_ahba", "page": "ACHE", "quote": "ACHE detected in temporal: probe 1022702 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_e8922a949057", "corpus": "allen_ahba", "page": "HTR2A", "quote": "HTR2A detected in parietal: probe 1028615 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
+{"id": "q_e89391fdfb21", "corpus": "wikipedia_pharm", "page": "zopiclone", "quote": "Time to peak plasma concentration is 1–2 hours.", "llm": "sonnet"}
 {"id": "q_e8a2fc35533e", "corpus": "wikipedia_pharm", "page": "dexmethylphenidate", "quote": "Accumulating evidence strongly indicates that CYP2B6, CYP2E1, and CYP3A4 contribute substantially to the clearance and metabolic fate of methylphenidate.", "llm": "opus"}
 {"id": "q_e8bbea4b89fe", "corpus": "stahl", "page": 775, "quote": "Viagra", "llm": "sonnet", "heading": ["Sildenafil", "Therapeutics"]}
 {"id": "q_e8bc8b88b42d", "corpus": "allen_ahba", "page": "OPRK1", "quote": "OPRK1 detected in amygdala: probe 1021758 PACall present in 42/60 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -3364,6 +3450,7 @@
 {"id": "q_eca7e7aacdd4", "corpus": "allen_ahba", "page": "GRM3", "quote": "GRM3 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1055926, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.79: frontal +0.47 (5d), temporal +0.40 (5d), parietal +0.34 (5d), thalamus +0.23 (5d), occipital +0.14 (5d), hippocampus -1.17 (5d)", "species": "Human"}
 {"id": "q_ecb30f489f29", "corpus": "allen_ahba", "page": "ADRA2C", "quote": "ADRA2C detected in vta: probe 1027284 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ecc615bc4f76", "corpus": "stahl", "page": 827, "quote": "Qudexy XR", "llm": "sonnet", "heading": ["Topiramate", "Therapeutics", "Brands"]}
+{"id": "q_ecc7d5eeffc8", "corpus": "stahl", "page": 112, "quote": "Tmax is approximately 1 hour", "llm": "sonnet"}
 {"id": "q_ed0255caf24c", "corpus": "wikipedia_pharm", "page": "prochlorperazine", "quote": "M 2 | 1413 | Human"}
 {"id": "q_ed0419d87792", "corpus": "allen_ahba", "page": "HTR2A", "quote": "HTR2A detected in claustrum: probe 1028615 PACall present in 42/42 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ed1832300c2b", "corpus": "gtopdb_ki", "page": "guanfacine", "quote": "guanfacine at α2A-adrenoceptor (ADRA2A, Human): Agonist / Partial agonist, pKi 6.6-7.3 [PMID 9605427]", "species": "Human"}
@@ -3420,6 +3507,7 @@
 {"id": "q_f062dc59ffbb", "corpus": "stahl", "page": 621, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet", "heading": ["Paliperidone", "Therapeutics", "How the Drug Works"]}
 {"id": "q_f06448bd53fa", "corpus": "gtopdb_ki", "page": "agomelatine", "quote": "agomelatine at 5-HT2B receptor (HTR2B, Human): Antagonist / Antagonist, pKi 6.6 [PMID 12750432]", "species": "Human"}
 {"id": "q_f078a743ddc3", "corpus": "allen_ahba", "page": "COMT", "quote": "COMT detected in frontal: probe 1028970 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)", "species": "Human"}
+{"id": "q_f08cc23e7b57", "corpus": "wikipedia_pharm", "page": "buspirone", "quote": "The time to peak plasma levels following ingestion is 0.9 to 1.5 hours.", "llm": "sonnet"}
 {"id": "q_f0b6e3d11eae", "corpus": "stahl", "page": 40, "quote": "Blockade of alpha adrenergic 1 receptors may explain dizziness, sedation, and hypotension", "llm": "sonnet", "heading": ["Amitriptyline", "Side effects", "How Drug Causes Side Effects"]}
 {"id": "q_f0e2e54951c3", "corpus": "gtopdb_ki", "page": "cannabidiol", "quote": "cannabidiol at Nav1.1 (SCN1A, Human): Channel blocker / None, pIC50 5.54 [PMID 30219789]", "species": "Human"}
 {"id": "q_f0ed12ee5d4b", "corpus": "stahl", "page": 511, "quote": "Focalin", "llm": "sonnet", "heading": ["Methylphenidate (D)", "Therapeutics", "Brands"]}
@@ -3623,6 +3711,7 @@
 {"id": "q_ff0c02eb39bd", "corpus": "kandel", "page": 1074, "quote": "Hormone secretion from these cells is controlled by stimulatory and inhibitory factors released by hypothalamic neurons into a specialized circulatory system that carries blood from the base of the brain (median eminence) to the anterior pituitary.", "llm": "sonnet", "heading": ["41 The Hypothalamus: Autonomic, Hormonal, and Behavioral Control of Survival", "The Neuroendocrine System Links the Brain to Physiological Responses Through Hormones", "Hypothalamic Axon Terminals in the Posterior Pituitary Release Oxytocin and Vasopressin Directly Into the Blood"]}
 {"id": "q_ff18fd5b85e4", "corpus": "stahl", "page": 161, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet", "heading": ["Chlordiazepoxide", "Therapeutics", "Class"]}
 {"id": "q_ff1fb40e4e28", "corpus": "stahl", "page": 887, "quote": "Weakly blocks dopamine reuptake pump (dopamine transporter), and may increase dopamine neurotransmission", "llm": "sonnet", "heading": ["Venlafaxine", "Therapeutics", "How the Drug Works"]}
+{"id": "q_ff27fe65ceae", "corpus": "wikipedia_pharm", "page": "meclizine", "quote": "Meclizine reaches peak plasma concentration in about 1.5 hours and has an elimination half-life of 5–6 hours.", "llm": "sonnet"}
 {"id": "q_ff323b3924ce", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "5-HT 6 | 2060 | Antagonist"}
 {"id": "q_ff44a79f9157", "corpus": "wikipedia_pharm", "page": "doxylamine", "quote": "H 1 | 42 | Human"}
 {"id": "q_ff4da96697ed", "corpus": "stahl", "page": 215, "quote": "Although classified as a conventional antipsychotic, cyamemazine is a potent serotonin 2A antagonist", "llm": "sonnet", "heading": ["Cyamemazine", "Therapeutics", "How the Drug Works"]}
@@ -3630,6 +3719,7 @@
 {"id": "q_ff5dac773971", "corpus": "wikipedia_pharm", "page": "buspirone", "quote": "5-HT 2B | 214 | ? | Human"}
 {"id": "q_ff5f6a03981a", "corpus": "stahl", "page": 403, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine, dopamine enzyme inhibitor (SN-EI)", "llm": "sonnet", "heading": ["Isocarboxazid", "Therapeutics", "Class"]}
 {"id": "q_ff630e7cc552", "corpus": "stahl", "page": 533, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)", "llm": "sonnet", "heading": ["Milnacipran", "Therapeutics", "Class"]}
+{"id": "q_ff657f52f32a", "corpus": "wikipedia_pharm", "page": "tiotixene", "quote": "Peak serum concentration of the drug is achieved after 1–3 hours.", "llm": "sonnet"}
 {"id": "q_ff71391cceb3", "corpus": "allen_ahba", "page": "HRH2", "quote": "HRH2 detected in caudate: probe 1019471 PACall present in 81/82 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ff825ad3a410", "corpus": "wikipedia_pharm", "page": "prochlorperazine", "quote": "D 1 | 251 | Human"}
 {"id": "q_ff8d5c8216db", "corpus": "wikipedia_pharm", "page": "thioridazine", "quote": "H 4 | 2400 | ND | ND"}

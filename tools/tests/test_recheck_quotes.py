@@ -71,7 +71,7 @@ class ClaimReconstructionTest(unittest.TestCase):
         return got
 
     def test_brands_half_lives_and_metabolites_are_reconstructed(self):
-        for kind in ("drug_brands", "drug_half_life", "drug_metabolites",
+        for kind in ("drug_brands", "drug_half_life", "drug_tmax", "drug_metabolites",
                      "drug_metabolite_bindings", "drug_metabolite_enzyme",
                      "drug_enzymes", "addons"):
             self._one(kind)
@@ -88,6 +88,16 @@ class ClaimReconstructionTest(unittest.TestCase):
                     if d.get("half_life_sources") and d.get("half_life"))
         qid = drug["half_life_sources"][0]["quote_id"]
         self.assertIn(R._hours(drug["half_life"]), " ".join(self.claims[qid]))
+
+    def test_a_tmax_claim_names_the_duration(self):
+        # Same guarantee as the T½ claim above, for the other end of the curve: a judge
+        # shown "reaches its peak ... " must see WHICH duration is being claimed, or it
+        # can only check that the sentence is about a peak at all.
+        drug = next(d for d in R._jsonl("drugs.jsonl")
+                    if d.get("tmax_sources") and d.get("tmax"))
+        qid = drug["tmax_sources"][0]["quote_id"]
+        self.assertIn(R._hours(drug["tmax"]), " ".join(self.claims[qid]))
+        self.assertEqual(self.kinds[qid], "drug_tmax")
 
     def test_a_claim_several_quotes_share_says_so(self):
         # A judge shown one quote beside a claim that two quotes back TOGETHER rejects a
@@ -140,7 +150,7 @@ class ClaimReconstructionTest(unittest.TestCase):
         self.assertFalse(ns.only_flagged)
 
     def test_nothing_in_those_kinds_falls_back_to_the_generic_claim(self):
-        scoped = {"drug_brands", "drug_half_life", "drug_metabolites",
+        scoped = {"drug_brands", "drug_half_life", "drug_tmax", "drug_metabolites",
                   "drug_metabolite_bindings"}
         for qid, kind in self.kinds.items():
             if kind in scoped:

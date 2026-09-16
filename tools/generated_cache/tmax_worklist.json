@@ -1,0 +1,2670 @@
+{
+ "acamprosate": {
+  "name": "Acamprosate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "acamprosate",
+    "line": "Its absorption and elimination are very slow, with a t max of 6 hours and an elimination half life of over 30 hours.",
+    "durations": [
+     {
+      "hours": 6.0
+     },
+     {
+      "hours": 30.0
+     }
+    ]
+   }
+  ]
+ },
+ "alpidem": {
+  "name": "Alpidem",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alpidem",
+    "line": "Onset of action | 1.0–2.5 hours ( C max )",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alpidem",
+    "line": "The absorption of alpidem is rapid and it reaches peak levels after 1.0 to 2.5 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.5
+     }
+    ]
+   }
+  ]
+ },
+ "amitriptyline": {
+  "name": "Amitriptyline",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "amitriptyline",
+    "line": "Absorption is gradual with the peak concentration in blood plasma reached after about 4 hours.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "amphetamine_d": {
+  "name": "Amphetamine (D)",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dextroamphetamine",
+    "line": "The immediate-release and extended release variants of salts of both isomers reach peak plasma concentrations at 3 hours and 7 hours post-dose respectively.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 7.0
+     }
+    ]
+   }
+  ]
+ },
+ "amphetamine_dl": {
+  "name": "Amphetamine (D,L)",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "amphetamine",
+    "line": "The immediate-release and extended release variants of salts of both isomers reach peak plasma concentrations at 3 hours and 7 hours post-dose respectively.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 7.0
+     }
+    ]
+   }
+  ]
+ },
+ "aripiprazole": {
+  "name": "Aripiprazole",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "aripiprazole",
+    "line": "C max (maximum plasma concentration) is achieved 3–5 hours after oral dosing.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 5.0
+     }
+    ]
+   },
+   {
+    "corpus": "stahl",
+    "page": 76,
+    "line": "|Tmax|6.5–7.1 days|28 days|41 days (single dose)|",
+    "durations": [
+     {
+      "hours": 156.0,
+      "hours_max": 170.4
+     },
+     {
+      "hours": 672.0
+     },
+     {
+      "hours": 984.0
+     }
+    ]
+   }
+  ]
+ },
+ "armodafinil": {
+  "name": "Armodafinil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "armodafinil",
+    "line": "The time to peak levels of armodafinil when fasted has been reported be median 1.5 to 2 hours (range 0.5–6 hours).",
+    "durations": [
+     {
+      "hours": 1.5,
+      "hours_max": 2.0
+     },
+     {
+      "hours": 0.5,
+      "hours_max": 6.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "armodafinil",
+    "line": "In one study however, the time to peak levels was median 6.5 hours (range 3–11 hours).",
+    "durations": [
+     {
+      "hours": 6.5
+     },
+     {
+      "hours": 3.0,
+      "hours_max": 11.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "armodafinil",
+    "line": "Taking armodafinil with food does not affect its overall bioavailability but has been found to delay time to peak levels by 2 to 4 hours.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "atomoxetine": {
+  "name": "Atomoxetine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "atomoxetine",
+    "line": "Onset of action | 1–2 hours ( T max",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "atomoxetine",
+    "line": "Similarly, paroxetine increased atomoxetine steady-state peak levels by 3.5-fold, total exposure (over 12 hours) by 6.5-fold, and elimination half-life by 2.5-fold.",
+    "durations": [
+     {
+      "hours": 12.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "atomoxetine",
+    "line": "The time to peak levels of atomoxetine is 1 to 2 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "atomoxetine",
+    "line": "It has been reported that the time to peak levels was 1.0 hours in CYP2D6 extensive metabolizers and 2.5 hours in CYP2D6 poor metabolizers.",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 2.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "atomoxetine",
+    "line": "In addition, food delays the time to peak levels by 3 hours.",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "biperiden": {
+  "name": "Biperiden",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "biperiden",
+    "line": "In young, healthy volunteers, peak plasma concentrations following a single oral 4 mg immediate-release dose are reached after 1.5 hours.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ]
+   }
+  ]
+ },
+ "bremelanotide": {
+  "name": "Bremelanotide",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 112,
+    "line": "Tmax is approximately 1 hour",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "brexpiprazole": {
+  "name": "Brexpiprazole",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "brexpiprazole",
+    "line": "Bioavailability | 95% (T max = 4 hours)",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "buprenorphine": {
+  "name": "Buprenorphine",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 130,
+    "line": "Implant: Tmax is 12 hours;",
+    "durations": [
+     {
+      "hours": 12.0
+     }
+    ]
+   }
+  ]
+ },
+ "bupropion": {
+  "name": "Bupropion",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "bupropion",
+    "line": "After oral administration, bupropion is rapidly and completely absorbed, reaching the peak blood plasma concentration after 1.5 hours ( t max ).",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "bupropion",
+    "line": "Sustained-release (SR) and extended-release (XL) formulations have been designed to slow down absorption, resulting in t max of 3 hours and 5 hours, respectively.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 5.0
+     }
+    ]
+   }
+  ]
+ },
+ "buspirone": {
+  "name": "Buspirone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "buspirone",
+    "line": "The time to peak plasma levels following ingestion is 0.9 to 1.5 hours.",
+    "durations": [
+     {
+      "hours": 0.9,
+      "hours_max": 1.5
+     }
+    ]
+   }
+  ]
+ },
+ "caffeine": {
+  "name": "Caffeine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "caffeine",
+    "line": "Peak blood concentration is reached within 1–2 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "clomipramine": {
+  "name": "Clomipramine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "clomipramine",
+    "line": "Peak plasma concentrations occur around 2–6 hours (with an average of 4.7 hours) after taking clomipramine orally and are in the range of 56–154 ng/mL (178–489 nmol/L).",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 6.0
+     },
+     {
+      "hours": 4.7
+     }
+    ]
+   }
+  ]
+ },
+ "clonazepam": {
+  "name": "Clonazepam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "clonazepam",
+    "line": "Peak blood concentrations of 6.5–13.5 ng/mL were usually reached within 1–2 hours following a single 2 mg oral dose of micronized clonazepam in healthy adults.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "clonazepam",
+    "line": "In some individuals, however, peak blood concentrations were reached at 4–8 hours.",
+    "durations": [
+     {
+      "hours": 4.0,
+      "hours_max": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "clonidine": {
+  "name": "Clonidine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "clonidine",
+    "line": "Peak concentrations in human plasma occur within 60–90 minutes for the \"immediate release\" (IR) version of the drug, which is shorter than the \"extended release\" (ER/XR) version.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 1.5
+     }
+    ]
+   }
+  ]
+ },
+ "clorazepate": {
+  "name": "Clorazepate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "clorazepate",
+    "line": "Peak plasma levels of the active metabolite desmethyl-diazepam are seen between 30 minutes and 2 hours after oral administration of clorazepate.",
+    "durations": [
+     {
+      "hours": 0.5
+     },
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "clozapine": {
+  "name": "Clozapine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "clozapine",
+    "line": "The time to peak concentration after oral dosing is about 2.5 hours, and food does not appear to affect the bioavailability of clozapine.",
+    "durations": [
+     {
+      "hours": 2.5
+     }
+    ]
+   }
+  ]
+ },
+ "cocaine": {
+  "name": "Cocaine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cocaine",
+    "line": "In a study of cocaine users, the average time taken to reach peak subjective effects was 3.1 minutes.",
+    "durations": [
+     {
+      "hours": 0.052
+     }
+    ]
+   }
+  ]
+ },
+ "cyproheptadine": {
+  "name": "Cyproheptadine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyproheptadine",
+    "line": "Cyproheptadine is well-absorbed following oral ingestion , with peak levels occurring after 1 to 4 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "daridorexant": {
+  "name": "Daridorexant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "daridorexant",
+    "line": "Onset of action | T max : 1–2 hours (delayed by 1.3 hours with food)",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     },
+     {
+      "hours": 1.3
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "daridorexant",
+    "line": "Compared to other marketed OX antagonists, daridorexant has a relatively short elimination half-life of 8 hours and a time to peak of about 1 to 2 hours.",
+    "durations": [
+     {
+      "hours": 8.0
+     },
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "daridorexant",
+    "line": "It reaches peak concentrations within 1 to 2 hours following a dose.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "daridorexant",
+    "line": "Food prolonged the time to peak by 1.3 to 2 hours and decreased the peak concentrations by 16 to 24%, but did not affect area-under-the-curve concentrations .",
+    "durations": [
+     {
+      "hours": 1.3,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "diazepam": {
+  "name": "Diazepam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "diazepam",
+    "line": "Peak plasma levels occur between 30 and 90 minutes after oral administration and between 30 and 60 minutes after intramuscular administration;",
+    "durations": [
+     {
+      "hours": 1.5
+     },
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "diazepam",
+    "line": "after rectal administration, peak plasma levels occur after 10 to 45 minutes.",
+    "durations": [
+     {
+      "hours": 0.167,
+      "hours_max": 0.75
+     }
+    ]
+   }
+  ]
+ },
+ "diphenhydramine": {
+  "name": "Diphenhydramine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "diphenhydramine",
+    "line": "Oral bioavailability of diphenhydramine is in the range of 40% to 60%, and peak plasma concentration occurs about 2 to 3 hours after administration.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "dmt": {
+  "name": "DMT",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dimethyltryptamine",
+    "line": "Closely coextending with peak psychedelic effects, the mean time to reach peak concentration ( T max ) has been determined to be 10 to 15 minutes in whole blood after intramuscular injection , and 2 to 3 minutes after intravenous administration .",
+    "durations": [
+     {
+      "hours": 0.167,
+      "hours_max": 0.25
+     },
+     {
+      "hours": 0.033,
+      "hours_max": 0.05
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dimethyltryptamine",
+    "line": "When taken orally mixed in an ayahuasca decoction or in freeze-dried ayahuasca gel caps , DMT T max is considerably delayed to 1.8 hours on average, and 1.5 to 2 hours, respectively.",
+    "durations": [
+     {
+      "hours": 1.8
+     },
+     {
+      "hours": 1.5,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "domperidone": {
+  "name": "Domperidone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "domperidone",
+    "line": "Peak levels of domperidone following an oral dose occur after about 60 minutes.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "donepezil": {
+  "name": "Donepezil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "donepezil",
+    "line": "A 2009 double-blind, placebo controlled study (n=24) investigating donepezil's effects across a variety of memory tests in reported an improvement in spatial memory accuracy both before (90 minutes after dosing) and at theoretical T max (210 minutes after dosing).",
+    "durations": [
+     {
+      "hours": 1.5
+     },
+     {
+      "hours": 3.5
+     }
+    ]
+   }
+  ]
+ },
+ "dothiepin": {
+  "name": "Dothiepin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dosulepin",
+    "line": "Peak plasma concentrations of between 30.4 and 279 ng/mL (103–944 nmol/L) occur within 2–3 hours of oral administration.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "doxepin": {
+  "name": "Doxepin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "doxepin",
+    "line": "Following a single very low dose of 6 mg, peak plasma levels of doxepin are 0.854 ng/mL (3.06 nmol/L) at 3 hours without food and 0.951 ng/mL (3.40 nmol/L) at 6 hours with food.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "doxylamine": {
+  "name": "Doxylamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "doxylamine",
+    "line": "The T max of doxylamine is 1.5 to 2.5 hours.",
+    "durations": [
+     {
+      "hours": 1.5,
+      "hours_max": 2.5
+     }
+    ]
+   }
+  ]
+ },
+ "duloxetine": {
+  "name": "Duloxetine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "duloxetine",
+    "line": "There is an average 2-hour lag until absorption begins with maximum plasma concentrations occurring about 6 hours post-dose.",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 6.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "duloxetine",
+    "line": "Food or bedtime administration has no significant impact on the C max of duloxetine, but delay time to reach peak concentration by 4 hours.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "esketamine": {
+  "name": "Esketamine",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 305,
+    "line": "Time to maximum plasma concentration is approximately 20–40 minutes after the last administered nasal spray",
+    "durations": [
+     {
+      "hours": 0.333,
+      "hours_max": 0.667
+     }
+    ]
+   }
+  ]
+ },
+ "estazolam": {
+  "name": "Estazolam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "estazolam",
+    "line": "Peak plasma levels are achieved within 1–6 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "fluoxetine": {
+  "name": "Fluoxetine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "fluoxetine",
+    "line": "The bioavailability of fluoxetine is relatively high (72%), and peak plasma concentrations are reached in 6–8 hours.",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "flupenthixol": {
+  "name": "Flupenthixol",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 337,
+    "line": "Oral: maximum plasma concentrations within 3–8 hours",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "fluphenazine": {
+  "name": "Fluphenazine",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 346,
+    "line": "|Vehicle<br>Sesame Oil<br>Tmax<br>0.3–1.5 days<br>T1/2 with multiple dosing<br>14 days<br>Able to be loaded<br>Yes<br>Time to reach steady state<br>4–6 weeks with<br>loading<br>Dosing schedule (maintenance)<br>2 weeks<br>Injection site<br>Intramuscular or<br>subcutaneous<br>Needle gauge<br>21<br>Dosage forms<br>25 mg<br>Injection volume<br>25 mg/mL||",
+    "durations": [
+     {
+      "hours": 7.2,
+      "hours_max": 36.0
+     },
+     {
+      "hours": 336.0
+     },
+     {
+      "hours": 672.0,
+      "hours_max": 1008.0
+     },
+     {
+      "hours": 336.0
+     }
+    ]
+   },
+   {
+    "corpus": "stahl",
+    "page": 346,
+    "line": "|Tmax|0.3–1.5 days|",
+    "durations": [
+     {
+      "hours": 7.2,
+      "hours_max": 36.0
+     }
+    ]
+   }
+  ]
+ },
+ "gabapentin": {
+  "name": "Gabapentin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "gabapentin",
+    "line": "Gabapentin at a low dose of 100 mg has a T max (time to peak levels ) of approximately 1.7 hours, while the T max increases to 3 to 4 hours at higher doses.",
+    "durations": [
+     {
+      "hours": 1.7
+     },
+     {
+      "hours": 3.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "glutethimide": {
+  "name": "Glutethimide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "glutethimide",
+    "line": "Bioavailability | Variable ( T max = 1–6 hours)",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "haloperidol": {
+  "name": "Haloperidol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "haloperidol",
+    "line": "However, there is a wide variance in reported mean T max and T 1/2 in different studies, ranging from 1.7 to 6.1 hours and 14.5 to 36.7 hours respectively.",
+    "durations": [
+     {
+      "hours": 1.7,
+      "hours_max": 6.1
+     },
+     {
+      "hours": 14.5,
+      "hours_max": 36.7
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "haloperidol",
+    "line": "The T max is 20 minutes in healthy individuals and 33.8 minutes in patients with schizophrenia.",
+    "durations": [
+     {
+      "hours": 0.333
+     },
+     {
+      "hours": 0.563
+     }
+    ]
+   },
+   {
+    "corpus": "stahl",
+    "page": 380,
+    "line": "|Tmax|3–9 days|",
+    "durations": [
+     {
+      "hours": 72.0,
+      "hours_max": 216.0
+     }
+    ]
+   }
+  ]
+ },
+ "hydroxyzine": {
+  "name": "Hydroxyzine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "hydroxyzine",
+    "line": "The time to reach maximum concentration ( T max ) of hydroxyzine is about 2.0 hours in both adults and children and its elimination half-life is around 20.0 hours in adults (mean age 29.3 years) and 7.1 hours in children.",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 20.0
+     },
+     {
+      "hours": 7.1
+     }
+    ]
+   }
+  ]
+ },
+ "iloperidone": {
+  "name": "Iloperidone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "iloperidone",
+    "line": "T max = 2–4 hours)",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "isocarboxazid": {
+  "name": "Isocarboxazid",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "isocarboxazid",
+    "line": "Isocarboxazid has low oral bioavailability, reaches peak levels after about 1–2 hours, and has an elimination half-life of about 1.5–4 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     },
+     {
+      "hours": 1.5,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "ketanserin": {
+  "name": "Ketanserin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ketanserin",
+    "line": "Its time to peak levels is 0.53 to 2.3 hours on average, with a range of 0.25 to 5.0 hours.",
+    "durations": [
+     {
+      "hours": 0.53,
+      "hours_max": 2.3
+     },
+     {
+      "hours": 0.25,
+      "hours_max": 5.0
+     }
+    ]
+   }
+  ]
+ },
+ "lamotrigine": {
+  "name": "Lamotrigine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lamotrigine",
+    "line": "Its absolute bioavailability is 98% and its plasma C max occurs from 1.4 to 4.8 hours.",
+    "durations": [
+     {
+      "hours": 1.4,
+      "hours_max": 4.8
+     }
+    ]
+   }
+  ]
+ },
+ "lemborexant": {
+  "name": "Lemborexant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lemborexant",
+    "line": "Lemborexant has a long elimination half-life of 17 to 55 hours and a time to peak of about 1 to 3 hours.",
+    "durations": [
+     {
+      "hours": 17.0,
+      "hours_max": 55.0
+     },
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lemborexant",
+    "line": "The time to peak levels of lemborexant is 1 to 3 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lemborexant",
+    "line": "A high-fat and high-calorie meal has been found to delay the time to peak levels by 2 hours.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "lisdexamfetamine": {
+  "name": "Lisdexamfetamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lisdexamfetamine",
+    "line": "The immediate-release and extended release variants of salts of both isomers reach peak plasma concentrations at 3 hours and 7 hours post-dose respectively.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 7.0
+     }
+    ]
+   },
+   {
+    "corpus": "stahl",
+    "page": 439,
+    "line": "1 hour to maximum concentration of lisdexamfetamine, 3.5 hours to maximum concentration of dextroamphetamine",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 3.5
+     }
+    ]
+   }
+  ]
+ },
+ "lofexidine": {
+  "name": "Lofexidine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lofexidine",
+    "line": "Peak plasma concentrations occur at 3 hours after a single administration, with a half-life of 11 hours.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 11.0
+     }
+    ]
+   }
+  ]
+ },
+ "lsd": {
+  "name": "LSD",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lsd",
+    "line": "The time to peak effects given orally is 2.2 to 2.8 hours on average, with a range of 1.3 to 6.5 hours.",
+    "durations": [
+     {
+      "hours": 2.2,
+      "hours_max": 2.8
+     },
+     {
+      "hours": 1.3,
+      "hours_max": 6.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lsd",
+    "line": "however, using more accurate techniques, Papac and Foltz (1990) reported that 1 μg/kg oral LSD given to a single male volunteer had an apparent plasma half-life of 5.1 hours, with a peak plasma concentration of 5 ng/mL at 3 hours post-dose.",
+    "durations": [
+     {
+      "hours": 5.1
+     },
+     {
+      "hours": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lsd",
+    "line": "Maximum plasma concentrations are typically observed 1.4 to 1.5 hours after oral administration of 100 μg and 200 μg, respectively, with a plasma half-life of approximately 2.6 hours (ranging from 2.2 to 3.4 hours among test subjects).",
+    "durations": [
+     {
+      "hours": 1.4,
+      "hours_max": 1.5
+     },
+     {
+      "hours": 2.6
+     },
+     {
+      "hours": 2.2,
+      "hours_max": 3.4
+     }
+    ]
+   }
+  ]
+ },
+ "lumateperone": {
+  "name": "Lumateperone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "lumateperone",
+    "line": "After taking the medication by mouth, lumateperone reaches maximum plasma concentrations within 1–2 hours and has a terminal elimination half-life of 18 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     },
+     {
+      "hours": 18.0
+     }
+    ]
+   }
+  ]
+ },
+ "maprotiline": {
+  "name": "Maprotiline",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "maprotiline",
+    "line": "The mean time to peak is 12 hours.",
+    "durations": [
+     {
+      "hours": 12.0
+     }
+    ]
+   },
+   {
+    "corpus": "stahl",
+    "page": 497,
+    "line": "Peak plasma concentration 8–24 hours",
+    "durations": [
+     {
+      "hours": 8.0,
+      "hours_max": 24.0
+     }
+    ]
+   }
+  ]
+ },
+ "mdma": {
+  "name": "MDMA",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "mdma",
+    "line": "In general, MDMA users report feeling the onset of subjective effects within 30 to 60 minutes of oral consumption and reaching peak effect at 75 to 120 minutes, which then plateaus for about 3.5 hours.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.0
+     },
+     {
+      "hours": 1.25,
+      "hours_max": 2.0
+     },
+     {
+      "hours": 3.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "mdma",
+    "line": "peak plasma methamphetamine concentration occurs after 4 hours .",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "mdma",
+    "line": "Whereas peak plasma concentrations and subjective effects occurred between 2 and 4 hours following administration, drug effect measures had largely returned to baseline values by 8 hours despite continued exposure to the drug (mean half-life = 8 hours following a 40 mg dose (Dolder et al., 2017)).",
+    "durations": [
+     {
+      "hours": 4.0
+     },
+     {
+      "hours": 8.0
+     },
+     {
+      "hours": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "memantine": {
+  "name": "Memantine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "memantine",
+    "line": "Time to peak levels of memantine are 3 to 7 hours.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 7.0
+     }
+    ]
+   }
+  ]
+ },
+ "methamphetamine": {
+  "name": "Methamphetamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "methamphetamine",
+    "line": "Following oral administration, methamphetamine is well-absorbed into the bloodstream, with peak plasma methamphetamine concentrations achieved in approximately 3.13–6.3 hours post ingestion.",
+    "durations": [
+     {
+      "hours": 3.13,
+      "hours_max": 6.3
+     }
+    ]
+   }
+  ]
+ },
+ "methylphenidate_dl": {
+  "name": "Methylphenidate (D,L)",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "methylphenidate",
+    "line": "A 39 nanograms/mL peak serum concentration of methylphenidate has been found to occur between 7.5–10.5 hours after administration.",
+    "durations": [
+     {
+      "hours": 7.5,
+      "hours_max": 10.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "methylphenidate",
+    "line": "The peak plasma time is achieved at about 2 hours.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "methylphenidate",
+    "line": "Peak plasma concentration occurs 14 hours following administration.",
+    "durations": [
+     {
+      "hours": 14.0
+     }
+    ]
+   }
+  ]
+ },
+ "milnacipran": {
+  "name": "Milnacipran",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "milnacipran",
+    "line": "Peak plasma concentrations are reached 2 hours after oral dosing.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "moclobemide": {
+  "name": "Moclobemide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "moclobemide",
+    "line": "Peak plasma levels occur 0.3 to 2 hours after oral administration.",
+    "durations": [
+     {
+      "hours": 0.3,
+      "hours_max": 2.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "moclobemide",
+    "line": "Moclobemide has good penetration across the blood brain barrier with peak plasma levels within the central nervous system occurring 2 hours after administration.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "modafinil": {
+  "name": "Modafinil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "modafinil",
+    "line": "The time to peak levels of modafinil is typically 1.5 to 2.5 hours (range 1–4 hours).",
+    "durations": [
+     {
+      "hours": 1.5,
+      "hours_max": 2.5
+     },
+     {
+      "hours": 1.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "naltrexone": {
+  "name": "Naltrexone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "naltrexone",
+    "line": "Peak concentrations of naltrexone are 19 to 44 μg/L after a single 100 mg oral dose and time to peak concentrations of naltrexone and 6β-naltrexol ( metabolite ) is within 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "nitrazepam": {
+  "name": "Nitrazepam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nitrazepam",
+    "line": "The time for nitrazepam to reach peak plasma concentrations following oral administration is about 2 hours (0.5 to 5 hours).",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 0.5,
+      "hours_max": 5.0
+     }
+    ]
+   }
+  ]
+ },
+ "olanzapine": {
+  "name": "Olanzapine",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 598,
+    "line": "|Vehicle<br>Water<br>Tmax<br>7 days<br>T1/2 with multiple dosing<br>30 days<br>Time to reach steady state<br>3 months<br>Able to be loaded<br>Yes<br>Dosing schedule<br>(maintenance)<br>2 weeks or 4 weeks<br>Injection site<br>Intramuscular gluteal<br>Needle gauge<br>19<br>Dosage forms<br>210 mg, 300 mg,<br>405 mg<br>Injection volume<br>150 mg/mL;",
+    "durations": [
+     {
+      "hours": 168.0
+     },
+     {
+      "hours": 720.0
+     },
+     {
+      "hours": 336.0
+     },
+     {
+      "hours": 672.0
+     }
+    ]
+   },
+   {
+    "corpus": "stahl",
+    "page": 598,
+    "line": "|Tmax|7 days|",
+    "durations": [
+     {
+      "hours": 168.0
+     }
+    ]
+   }
+  ]
+ },
+ "paliperidone": {
+  "name": "Paliperidone",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 627,
+    "line": "|**Tmax**|13 days|30−33 days|29−32 days|",
+    "durations": [
+     {
+      "hours": 312.0
+     },
+     {
+      "hours": 792.0
+     },
+     {
+      "hours": 768.0
+     }
+    ]
+   }
+  ]
+ },
+ "paroxetine": {
+  "name": "Paroxetine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "paroxetine",
+    "line": "When taken orally, it achieves maximum concentration in about 6–10 hours and reaches steady-state in 7–14 days.",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 10.0
+     },
+     {
+      "hours": 168.0,
+      "hours_max": 336.0
+     }
+    ]
+   }
+  ]
+ },
+ "phenelzine": {
+  "name": "Phenelzine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "phenelzine",
+    "line": "The time to peak plasma concentration is 43 minutes, and the half-life is 11.6 hours.",
+    "durations": [
+     {
+      "hours": 0.717
+     },
+     {
+      "hours": 11.6
+     }
+    ]
+   }
+  ]
+ },
+ "phenobarbital": {
+  "name": "Phenobarbital",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "phenobarbital",
+    "line": "Peak plasma concentrations (C max ) are reached eight to 12 hours after oral administration.",
+    "durations": [
+     {
+      "hours": 12.0
+     }
+    ]
+   }
+  ]
+ },
+ "pimavanserin": {
+  "name": "Pimavanserin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pimavanserin",
+    "line": "Pimavanserin is slowly absorbed and has a time to peak levels of 6 hours.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pimavanserin",
+    "line": "The half-life of ACP-103 was approximately 55 hours, with a tmax at 6 hours.",
+    "durations": [
+     {
+      "hours": 55.0
+     },
+     {
+      "hours": 6.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pimavanserin",
+    "line": "ACP-103 was slowly absorbed, with a median tmax consistently close to 6 hours for all doses tested.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pimavanserin",
+    "line": "Similar to the previous single-dose study, ACP-103 was slowly absorbed with a median tmax of 6 hours on day 1 and day 14 for all 3 doses of ACP-103.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "pimozide": {
+  "name": "Pimozide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pimozide",
+    "line": "Time to peak plasma concentration (T max ) | 6-8 hr",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "pipothiazine": {
+  "name": "Pipothiazine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pipotiazine",
+    "line": "After deep intramuscular injection, pipotiazine palmitate reaches maximum plasma concentration in 7-14 days, has an elimination half-life of 15 days, and reaches steady-state levels after 2 months of usual dosing (given every 4 weeks).",
+    "durations": [
+     {
+      "hours": 168.0,
+      "hours_max": 336.0
+     },
+     {
+      "hours": 360.0
+     },
+     {
+      "hours": 672.0
+     }
+    ]
+   }
+  ]
+ },
+ "pitolisant": {
+  "name": "Pitolisant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pitolisant",
+    "line": "Pitolisant is readily absorbed when taken by mouth and reaches peak blood concentrations approximately 3 hours after administration.",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "pramipexole": {
+  "name": "Pramipexole",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pramipexole",
+    "line": "Immediate-release pramipexole displays a T max of approximately 2 hours and 3 hours if taken with a high-fat meal.",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pramipexole",
+    "line": "Extended-release pramipexole displays a T max of ~6 hours and ~8 hours if taken with food.",
+    "durations": [
+     {
+      "hours": 6.0
+     },
+     {
+      "hours": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "pregabalin": {
+  "name": "Pregabalin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pregabalin",
+    "line": "Pregabalin is rapidly absorbed when administered on an empty stomach, with a T max (time to peak levels ) of generally less than or equal to 1 hour at doses of 300 mg or less.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pregabalin",
+    "line": "T max values for pregabalin of 0.6 hours in a fasted state and 3.2 hours in a fed state (5-fold difference), and the C max is reduced by 25–31% in a fed versus fasted state.",
+    "durations": [
+     {
+      "hours": 0.6
+     },
+     {
+      "hours": 3.2
+     }
+    ]
+   }
+  ]
+ },
+ "propranolol": {
+  "name": "Propranolol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "propranolol",
+    "line": "Propranolol is rapidly and completely absorbed , with peak plasma levels achieved about 2 hours (range 1–3 hours) after ingestion.",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "quetiapine": {
+  "name": "Quetiapine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "quetiapine",
+    "line": "Peak levels of quetiapine occur 1.5 hours after a dose.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ]
+   }
+  ]
+ },
+ "ramelteon": {
+  "name": "Ramelteon",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ramelteon",
+    "line": "The absorption of ramelteon is rapid, with peak levels being reached after approximately 0.75 hours (range 0.5–1.5 hours).",
+    "durations": [
+     {
+      "hours": 0.75
+     },
+     {
+      "hours": 0.5,
+      "hours_max": 1.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ramelteon",
+    "line": "Food increases peak concentrations of ramelteon by 22% and overall exposure by 31% and delays the time to peak levels by approximately 0.75 hours.",
+    "durations": [
+     {
+      "hours": 0.75
+     }
+    ]
+   }
+  ]
+ },
+ "risperidone": {
+  "name": "Risperidone",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 734,
+    "line": "|**Tmax**|21 days|14–17 days|2 peaks: frst at 4–6<br>hours and second at<br>10–14 days|2 peaks: frst at 6–24<br>hours and second at<br>8–14 days (median)|",
+    "durations": [
+     {
+      "hours": 504.0
+     },
+     {
+      "hours": 336.0,
+      "hours_max": 408.0
+     },
+     {
+      "hours": 240.0,
+      "hours_max": 336.0
+     },
+     {
+      "hours": 192.0,
+      "hours_max": 336.0
+     }
+    ]
+   }
+  ]
+ },
+ "rivastigmine": {
+  "name": "Rivastigmine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "rivastigmine",
+    "line": "Peak plasma concentrations are seen in about one hour, with peak cerebrospinal fluid concentrations at 1.4–3.8 hours.",
+    "durations": [
+     {
+      "hours": 1.4,
+      "hours_max": 3.8
+     }
+    ]
+   }
+  ]
+ },
+ "scopolamine": {
+  "name": "Scopolamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "scopolamine",
+    "line": "It has a bioavailability of 20–40%, reaches peak plasma concentration in about 45 minutes, and in healthy subjects has an average half-life of 5 hours (observed range 2–10 hours).",
+    "durations": [
+     {
+      "hours": 0.75
+     },
+     {
+      "hours": 5.0
+     },
+     {
+      "hours": 2.0,
+      "hours_max": 10.0
+     }
+    ]
+   }
+  ]
+ },
+ "selegiline": {
+  "name": "Selegiline",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "selegiline",
+    "line": "The time to peak levels of selegiline with oral administration is about 0.5 to 1.5 hours.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.5
+     }
+    ]
+   }
+  ]
+ },
+ "serdexmethylphenidate": {
+  "name": "Serdexmethylphenidate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "serdexmethylphenidate",
+    "line": "When administered alone, serdexmethylphenidate produces a dexmethylphenidate t max of 8 hours.",
+    "durations": [
+     {
+      "hours": 8.0
+     }
+    ]
+   }
+  ]
+ },
+ "sertraline": {
+  "name": "Sertraline",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "sertraline",
+    "line": "Following a single oral dose of sertraline, mean peak blood levels of sertraline occur between 4.5 and 8.4 hours.",
+    "durations": [
+     {
+      "hours": 8.4
+     }
+    ]
+   }
+  ]
+ },
+ "sodium_oxybate": {
+  "name": "Sodium Oxybate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "sodium_oxybate",
+    "line": "The average time to peak plasma concentration ranges from 0.5 to 1.25 hours.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.25
+     }
+    ]
+   }
+  ]
+ },
+ "solriamfetol": {
+  "name": "Solriamfetol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "solriamfetol",
+    "line": "The median time to peak levels of solriamfetol is 2 hours, with a range of 1.25 to 3.0 hours.",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 1.25,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "solriamfetol",
+    "line": "A high-fat meal has minimal influence on the peak and total concentrations of solriamfetol, but does delay time to peak levels by approximately 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "suvorexant": {
+  "name": "Suvorexant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "suvorexant",
+    "line": "The medication has an intermediate elimination half-life of 12 hours and a time to peak of about 2 to 3 hours.",
+    "durations": [
+     {
+      "hours": 12.0
+     },
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "suvorexant",
+    "line": "The time to peak levels of suvorexant is 2 to 3 hours regardless of dose but with wide variation (range 30 minutes to 8 hours).",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     },
+     {
+      "hours": 0.5
+     },
+     {
+      "hours": 8.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "suvorexant",
+    "line": "Taking suvorexant with food does not modify suvorexant peak levels or area-under-the-curve levels (overall exposure) but does delay the time to peak concentrations by about 1.5 hours.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "suvorexant",
+    "line": "The delayed time to peak levels (2–3 hours) and long elimination half-life (12 hours) of suvorexant are less than ideal for an insomnia medication as they result in a delayed onset of effect and significant next-day side effects such as daytime sedation.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     },
+     {
+      "hours": 12.0
+     }
+    ]
+   }
+  ]
+ },
+ "temazepam": {
+  "name": "Temazepam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "temazepam",
+    "line": "Oral administration of 15 to 45 mg of temazepam in humans resulted in rapid absorption with significant blood levels achieved in fewer than 30 minutes and peak levels at two to three hours.",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ]
+   }
+  ]
+ },
+ "thc": {
+  "name": "Tetrahydrocannabinol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tetrahydrocannabinol",
+    "line": "Following oral administration, concentrations of THC and its major active metabolite 11-hydroxy-THC (11-OH-THC) peak after 0.5 to 4 hours, with median time to peak of 1.0 to 2.5 hours at different doses.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 4.0
+     },
+     {
+      "hours": 1.0,
+      "hours_max": 2.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tetrahydrocannabinol",
+    "line": "In some cases, peak levels may not occur for as long as 6 hours.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tetrahydrocannabinol",
+    "line": "A high-fat meal delays time to peak concentrations of oral THC by 4 hours on average and increases area-under-the-curve exposure by 2.9-fold, but peak concentrations are not significantly altered.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tetrahydrocannabinol",
+    "line": "THC is detectable within seconds with inhalation and peak levels of THC occur after 3 to 10 minutes.",
+    "durations": [
+     {
+      "hours": 0.05,
+      "hours_max": 0.167
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tetrahydrocannabinol",
+    "line": "Because they are extremely lipid soluble, cannabinoids accumulate in fatty tissues, reaching peak concentrations in 4–5 days.",
+    "durations": [
+     {
+      "hours": 96.0,
+      "hours_max": 120.0
+     }
+    ]
+   }
+  ]
+ },
+ "thiothixene": {
+  "name": "Thiothixene",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tiotixene",
+    "line": "Peak serum concentration of the drug is achieved after 1–3 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
+     }
+    ]
+   }
+  ]
+ },
+ "tiagabine": {
+  "name": "Tiagabine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tiagabine",
+    "line": "The time to peak levels is approximately 1 hour, with a range of 0.8 to 1.5 hours.",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 0.8,
+      "hours_max": 1.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tiagabine",
+    "line": "Peak levels occur after 45 minutes in a fasted state and after 2.5 hours when taken with a high-fat meal.",
+    "durations": [
+     {
+      "hours": 0.75
+     },
+     {
+      "hours": 2.5
+     }
+    ]
+   }
+  ]
+ },
+ "tranylcypromine": {
+  "name": "Tranylcypromine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tranylcypromine",
+    "line": "Tranylcypromine reaches its maximum concentration (t max ) within 1–2 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "trazodone": {
+  "name": "Trazodone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "trazodone",
+    "line": "Onset of action | By mouth (IR) : 1 hour ( T max )",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "trazodone",
+    "line": "Peak blood levels of trazodone occur 1 to 2 hours after ingestion and peak levels of the metabolite mCPP occur after 2 to 4 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     },
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "trihexyphenidyl": {
+  "name": "Trihexyphenidyl",
+  "candidates": [
+   {
+    "corpus": "stahl",
+    "page": 856,
+    "line": "time to peak effect is 1–1.3 hours",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 1.3
+     }
+    ]
+   }
+  ]
+ },
+ "trimipramine": {
+  "name": "Trimipramine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "trimipramine",
+    "line": "The time to peak concentrations following a dose is 2 to 4 hours.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     }
+    ]
+   }
+  ]
+ },
+ "vortioxetine": {
+  "name": "Vortioxetine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "vortioxetine",
+    "line": "Peak levels of vortioxetine are reached within 7 to 11 hours post-dose with single or multiple doses.",
+    "durations": [
+     {
+      "hours": 7.0,
+      "hours_max": 11.0
+     }
+    ]
+   }
+  ]
+ },
+ "zaleplon": {
+  "name": "Zaleplon",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zaleplon",
+    "line": "When taken orally, zaleplon reaches maximum concentration in about 45 minutes.",
+    "durations": [
+     {
+      "hours": 0.75
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zaleplon",
+    "line": "Zaleplon (Sonata) has the shortest half-life of the Z-drugs of 1 hour and reaches peak plasma level in 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "ziprasidone": {
+  "name": "Ziprasidone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ziprasidone",
+    "line": "After a single dose intramuscular administration, the peak serum concentration typically occurs at about 60 minutes after the dose is administered, or earlier.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "zolpidem": {
+  "name": "Zolpidem",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolpidem",
+    "line": "The drug reaches peak concentration in about 2 hours and has a half-life in healthy adults of about 2–3 hours.",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolpidem",
+    "line": "The tmax of zolpidem MR (2.0 hours) was significantly longer than immediate-release zolpidem (2.4 hours) (p < 0.004).",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 2.4
+     }
+    ]
+   }
+  ]
+ },
+ "zonisamide": {
+  "name": "Zonisamide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zonisamide",
+    "line": "Zonisamide has a variable, yet relatively rapid rate of absorption with a time to peak concentration of 2.8–3.9 hours.",
+    "durations": [
+     {
+      "hours": 2.8,
+      "hours_max": 3.9
+     }
+    ]
+   }
+  ]
+ },
+ "zopiclone": {
+  "name": "Zopiclone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zopiclone",
+    "line": "Time to peak plasma concentration is 1–2 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "ethanol": {
+  "name": "Ethanol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alcohol_drug",
+    "line": "Onset of action | Peak concentrations : • Range: 30–90 minutes • Mean: 45–60 minutes • Fasting : 30 minutes",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.5
+     },
+     {
+      "hours": 0.75,
+      "hours_max": 1.0
+     },
+     {
+      "hours": 0.5
+     }
+    ]
+   }
+  ]
+ },
+ "apomorphine": {
+  "name": "Apomorphine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "apomorphine",
+    "line": "It reaches peak plasma concentration in 10–60 minutes.",
+    "durations": [
+     {
+      "hours": 0.167,
+      "hours_max": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "rasagiline": {
+  "name": "Rasagiline",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "rasagiline",
+    "line": "The time to peak levels of rasagiline is 0.5 to 0.7 hours and steady-state peak levels are on average 8.5 ng/mL.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 0.7
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "rasagiline",
+    "line": "At steady-state, the time to peak levels of rasagiline's major metabolite ( R )-1-aminoindan is 2.1 hours, its peak levels are 2.6 ng/mL, and its area-under-the-curve levels are 10.1 ng/h/mL.",
+    "durations": [
+     {
+      "hours": 2.1
+     }
+    ]
+   }
+  ]
+ },
+ "oxycodone": {
+  "name": "Oxycodone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "oxycodone",
+    "line": "Buccal bioavailability ~55%, Tmax ~60 min.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "oxycodone",
+    "line": "Sublingual bioavailability 20% (non alkalized) ~55% (alkalized) Tmax ~60 minutes.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "oxycodone",
+    "line": "After a dose of conventional (immediate-release) oral oxycodone, the onset of action is 10 to 30 minutes, and peak plasma levels of the drug are attained within roughly 30 to 60 minutes;",
+    "durations": [
+     {
+      "hours": 0.167,
+      "hours_max": 0.5
+     },
+     {
+      "hours": 0.5,
+      "hours_max": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "oxycodone",
+    "line": "After transmucosal administration, C max was between 16 and 22 ng/mL, T max was 60 min, and bioavailability was 55%",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "hydromorphone": {
+  "name": "Hydromorphone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "hydromorphone",
+    "line": "Peak plasma levels usually occur between 30 and 60 minutes after oral dosing.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "meclizine": {
+  "name": "Meclizine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "meclizine",
+    "line": "Meclizine reaches peak plasma concentration in about 1.5 hours and has an elimination half-life of 5–6 hours.",
+    "durations": [
+     {
+      "hours": 1.5
+     },
+     {
+      "hours": 5.0,
+      "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "dimenhydrinate": {
+  "name": "Dimenhydrinate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dimenhydrinate",
+    "line": "The diphenhydramine component requires about 2 hours to reach peak concentration after either oral or sublingual administration of dimen­hydrinate, and has a half-life of 5 – 6 hours in healthy adults.",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 5.0,
+      "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "psilocybin": {
+  "name": "Psilocybin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "psilocybin",
+    "line": "The mean time to peak levels for psilocin is 1.05 to 3.71 hours in different studies, with most around 2 hours and the upper limit of 3.71 hours being an outlier.",
+    "durations": [
+     {
+      "hours": 1.05,
+      "hours_max": 3.71
+     },
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 3.71
+     }
+    ]
+   }
+  ]
+ },
+ "mescaline": {
+  "name": "Mescaline",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "mescaline",
+    "line": "Mescaline induces a psychedelic experience characterized by visual changes , altered perception of time, space, and self, synesthesia , and spiritual experiences , with an onset of 30 to 60 minutes, a time to peak of 2 to 4 hours, and a duration that increases with dose and ranges from 6 to 14 hours.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.0
+     },
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     },
+     {
+      "hours": 6.0,
+      "hours_max": 14.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "mescaline",
+    "line": "Peak concentrations of mescaline occur after approximately 1.6 to 2.3 hours on average (range 1.0–6.0 hours).",
+    "durations": [
+     {
+      "hours": 1.6,
+      "hours_max": 2.3
+     },
+     {
+      "hours": 1.0,
+      "hours_max": 6.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "mescaline",
+    "line": "However, there is a delay of 1 to 2 hours following peak levels in terms of the drug producing maximal psychoactive and behavioral effects.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ]
+   }
+  ]
+ },
+ "2cb": {
+  "name": "2C-B",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "2c_b",
+    "line": "The drug's onset is about 0.5 to 1.2 hours, with a range of 0.3 to 1.5 hours, and its time to peak effects is about 2.5 hours on average.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.2
+     },
+     {
+      "hours": 0.3,
+      "hours_max": 1.5
+     },
+     {
+      "hours": 2.5
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "2c_b",
+    "line": "The time to peak levels is 2.0 to 2.4 hours.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 2.4
+     }
+    ]
+   }
+  ]
+ },
+ "pizotifen": {
+  "name": "Pizotifen",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pizotifen",
+    "line": "Onset of action | 5 hours ( T max",
+    "durations": [
+     {
+      "hours": 5.0
+     }
+    ]
+   }
+  ]
+ },
+ "phentermine": {
+  "name": "Phentermine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "phentermine",
+    "line": "Peak concentrations of phentermine are reached 6 hours following oral administration of a dose of 15 mg.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "pseudoephedrine": {
+  "name": "Pseudoephedrine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "pseudoephedrine",
+    "line": "The drug reaches peak concentrations after 1 to 4 hours (mean 1.9 hours) in the case of the immediate-release formulation and after 2 to 6 hours in the case of the extended-release formulation.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 4.0
+     },
+     {
+      "hours": 1.9
+     },
+     {
+      "hours": 2.0,
+      "hours_max": 6.0
+     }
+    ]
+   }
+  ]
+ },
+ "sibutramine": {
+  "name": "Sibutramine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "sibutramine",
+    "line": "The drug itself reaches its peak plasma level after 1 hour and has also a half-life of 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 1.0
+     }
+    ]
+   }
+  ]
+ },
+ "tiapride": {
+  "name": "Tiapride",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tiapride",
+    "line": "Bioavailability | ~75% (oral) ( T max = 1 hour)",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tiapride",
+    "line": "Peak plasma concentrations are attained between 0.4 and 1.5 hours following administration, and steady-state concentrations achieved 24 to 48 hours after beginning administration 3 times a day.",
+    "durations": [
+     {
+      "hours": 1.5
+     },
+     {
+      "hours": 24.0,
+      "hours_max": 48.0
+     }
+    ]
+   }
+  ]
+ },
+ "opipramol": {
+  "name": "Opipramol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opipramol",
+    "line": "After single oral administration of 50 mg, the peak plasma concentration of the drug is reached after 3.3 hours and amounts to 15.6 ng/mL.",
+    "durations": [
+     {
+      "hours": 3.3
+     }
+    ]
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opipramol",
+    "line": "After single oral administration of 100 mg the maximum plasma concentration is reached after 3 hours and amounts to 33.2 ng/mL.",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ]
+   }
+  ]
+ }
+}

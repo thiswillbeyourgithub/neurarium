@@ -832,8 +832,13 @@ def _drug_brands(drug_id: str, brands: Any) -> list[dict[str, Any]]:
     return out
 
 
-def _half_life(hl: Any, *, what: str) -> dict[str, Any]:
-    """Validate + normalize a half-life (T½) value into canonical hours.
+def _hours_value(hl: Any, *, what: str, field: str = "half_life") -> dict[str, Any]:
+    """Validate + normalize a duration value into canonical hours.
+
+    Shared by the two per-drug pharmacokinetic durations, which have the same authored
+    shape and the same reason for it: the elimination ``half_life`` (T½) and the
+    ``tmax`` (time to peak plasma concentration). ``field`` only names the one being
+    validated in the error messages.
 
     Authored as ``{hours, hours_max?}``: ``hours`` is the low/representative
     elimination half-life in **hours** (a positive number) and the optional
@@ -846,9 +851,11 @@ def _half_life(hl: Any, *, what: str) -> dict[str, Any]:
     Parameters
     ----------
     hl
-        The authored ``half_life`` object.
+        The authored duration object.
     what
         Human label for error messages.
+    field
+        The authored key's name, used only in the error messages.
 
     Returns
     -------
@@ -856,17 +863,17 @@ def _half_life(hl: Any, *, what: str) -> dict[str, Any]:
         ``{"hours": float}`` plus ``"hours_max": float`` when a range was authored.
     """
     if not isinstance(hl, dict):
-        raise TypeError(f"{what} half_life must be an object with an 'hours' number")
+        raise TypeError(f"{what} {field} must be an object with an 'hours' number")
     hours = hl.get("hours")
     # bool is an int subclass; reject it so a stray True/False can't pass as a value.
     if isinstance(hours, bool) or not isinstance(hours, (int, float)) or hours <= 0:
-        raise ValueError(f"{what} half_life 'hours' must be a positive number")
+        raise ValueError(f"{what} {field} 'hours' must be a positive number")
     rec: dict[str, Any] = {"hours": float(hours)}
     hi = hl.get("hours_max")
     if hi is not None:
         if isinstance(hi, bool) or not isinstance(hi, (int, float)) or hi < hours:
             raise ValueError(
-                f"{what} half_life 'hours_max' must be a number >= 'hours'")
+                f"{what} {field} 'hours_max' must be a number >= 'hours'")
         rec["hours_max"] = float(hi)
     return rec
 
@@ -1089,6 +1096,13 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # apply_pharmacokinetics.py). A drug with no half_life is simply not a node here.
     half_life_grades = [_strongest_grade(d.get("half_life_sources"))
                         for d in drugs if d.get("half_life")]
+    # Time-to-peak (Tmax) nodes, one per drug that carries a tmax, graded by that
+    # drug's own tmax_sources. Its own kind rather than a field of the T½ node: the
+    # two are separately sourced (a Wikipedia prose sentence for the peak, a Stahl
+    # bullet for the half-life) and separately missing, and the simulation reads them
+    # at the two ends of the same curve. See apply_tmax.py.
+    tmax_grades = [_strongest_grade(d.get("tmax_sources"))
+                   for d in drugs if d.get("tmax")]
     # Drug-metabolism nodes ("<drug> is a substrate of / inhibits / induces <enzyme>"),
     # one per (drug, enzyme, role) row. A pharmacokinetic claim, independent of the
     # drug's receptor bindings: it is what the derived drug -> drug interaction edges
@@ -1251,6 +1265,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_brands": tally(brand_grades),
         "drug_categories": tally(category_grades),
         "drug_half_life": tally(half_life_grades),
+        "drug_tmax": tally(tmax_grades),
         "drug_enzymes": tally(enzyme_grades),
         "drug_metabolites": tally(metabolite_grades),
         "drug_metabolite_enzyme": tally(metabolite_enzyme_grades),

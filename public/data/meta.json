@@ -3783,6 +3783,15 @@
         "nosource": 8,
         "missing": 8
       },
+      "drug_tmax": {
+        "total": 90,
+        "verified": 90,
+        "uncertain": 0,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0
+      },
       "drug_enzymes": {
         "total": 428,
         "verified": 425,
@@ -3956,14 +3965,14 @@
       }
     },
     "nodes": {
-      "total": 6419,
-      "verified": 5160,
+      "total": 6509,
+      "verified": 5250,
       "uncertain": 250,
       "sourced": 0,
       "llm": 310,
       "nosource": 699,
       "missing": 1009,
-      "backed": 5410,
+      "backed": 5500,
       "pct_backed": 84
     },
     "ki_coverage": {

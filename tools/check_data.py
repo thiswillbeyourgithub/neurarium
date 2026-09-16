@@ -118,7 +118,7 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # tally column, never a new quote to gate.
 NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "drug_brands",
               "drug_categories",
-              "drug_half_life", "drug_enzymes", "enzyme_variability",
+              "drug_half_life", "drug_tmax", "drug_enzymes", "enzyme_variability",
               "drug_metabolites",
               "drug_metabolite_enzyme", "drug_metabolite_bindings",
               "projections", "circuits", "projection_groups", "receptors",
@@ -863,6 +863,8 @@ def check_provenance(report, meta, structures, projections, circuits,
         # T½ / inline bindings) carry their own quote-level grades, same shape.
         for i, src in enumerate(drug.get("half_life_sources", []) or []):
             grade(src.get("provenance"), f"drug {drug.get('id')} half_life_sources[{i}]")
+        for i, src in enumerate(drug.get("tmax_sources", []) or []):
+            grade(src.get("provenance"), f"drug {drug.get('id')} tmax_sources[{i}]")
         for mi, m in enumerate(drug.get("metabolites", []) or []):
             mid = f"drug {drug.get('id')} metabolite {m.get('name')}"
             for i, src in enumerate(m.get("sources", []) or []):
@@ -1259,6 +1261,8 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
         # same way (verbatim substring on the cited corpus page).
         for i, src in enumerate(drug.get("half_life_sources", []) or []):
             check_one(f"drug {did} half_life_sources[{i}]", src)
+        for i, src in enumerate(drug.get("tmax_sources", []) or []):
+            check_one(f"drug {did} tmax_sources[{i}]", src)
         # Metabolism rows (fetch_cyp.py already gates these on the way in, but that
         # is the author-side pass; this is the backstop that also catches a later
         # hand-edit of the emitted data).

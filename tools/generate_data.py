@@ -143,7 +143,7 @@ from data_generators.provenance import (  # noqa: E402
     _GRADE_RANK,
     _binding_sources,
     _drug_brands,
-    _half_life,
+    _hours_value,
     _ki_annotation,
     _density_node,
     _location_sources,
@@ -999,7 +999,7 @@ def _drug_metabolites(drug_id: str, metabolites: Any,
         if m.get("drug_id"):
             rec["drug_id"] = m["drug_id"]
         if m.get("half_life"):
-            rec["half_life"] = _half_life(m["half_life"], what=label)
+            rec["half_life"] = _hours_value(m["half_life"], what=label)
             hl_sources = _quote_sources(m.get("half_life_sources"),
                                         f"{label} half_life")
             if hl_sources:
@@ -1199,12 +1199,24 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     # own sourced node (kind `drug_half_life`). Rendered between Brands and Acts-on,
     # formatted to days/hours/minutes by the viewer. See apply_pharmacokinetics.py.
     if drug.get("half_life"):
-        out["half_life"] = _half_life(drug["half_life"],
-                                      what=f"Drug {drug['id']!r}")
+        out["half_life"] = _hours_value(drug["half_life"],
+                                        what=f"Drug {drug['id']!r}")
         hl_sources = _quote_sources(drug.get("half_life_sources"),
                                     f"Drug {drug['id']!r} half_life")
         if hl_sources:
             out["half_life_sources"] = hl_sources
+    # Time to peak plasma concentration (Tmax), same canonical hours as the T½ above
+    # and its own sourced node (kind `drug_tmax`). It is the other end of the same
+    # curve: js/sim-model.js rises to this peak and then decays with the T½, and a
+    # drug without one falls back to the model's single assumed peak. Shown beside the
+    # T½ chip in the panel. See apply_tmax.py.
+    if drug.get("tmax"):
+        out["tmax"] = _hours_value(drug["tmax"], what=f"Drug {drug['id']!r}",
+                                   field="tmax")
+        tmax_sources = _quote_sources(drug.get("tmax_sources"),
+                                      f"Drug {drug['id']!r} tmax")
+        if tmax_sources:
+            out["tmax_sources"] = tmax_sources
     # Active metabolites named in the source (one graded node each, kind
     # `drug_metabolites`); a metabolite that is itself a modeled drug links via
     # drug_id and reuses its bindings/T½ (no duplication), see _drug_metabolites.

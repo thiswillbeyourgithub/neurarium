@@ -106,10 +106,11 @@ def _drug_facet(rest: list) -> str | None:
         return f"enzymes[{rest[1]}]"
     if head == "brands" and len(rest) >= 2:
         return f"brands[{rest[1]}]"
-    # The flat ones: `category_sources`, `nbn_sources`, `half_life_sources`. The site
-    # drops the `_sources` suffix, which says how the claim is stored, not what it is.
+    # The flat ones: `category_sources`, `nbn_sources`, `half_life_sources`,
+    # `tmax_sources`. The site drops the `_sources` suffix, which says how the claim is
+    # stored, not what it is.
     return {"category_sources": "categories", "nbn_sources": "nbn",
-            "half_life_sources": "half_life"}.get(head)
+            "half_life_sources": "half_life", "tmax_sources": "tmax"}.get(head)
 
 
 def _metabolite_facet(tail: list) -> str | None:

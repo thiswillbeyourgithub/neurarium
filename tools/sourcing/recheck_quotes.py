@@ -285,6 +285,11 @@ def reconstruct_claims(quotes):
             add(q, f"Drug {nm} has an elimination half-life of "
                    f"{_hours(d.get('half_life'))}.",
                 CS.site("drug", d["id"], "half_life"))
+        kind["now"] = "drug_tmax"
+        for q in _qids(d.get("tmax_sources", [])):
+            add(q, f"Drug {nm} reaches its peak plasma concentration "
+                   f"{_hours(d.get('tmax'))} after a dose.",
+                CS.site("drug", d["id"], "tmax"))
         kind["now"] = "drug_enzymes"
         for e in d.get("enzymes", []):
             tier = f", {e['strength']}" if e.get("strength") else ""
