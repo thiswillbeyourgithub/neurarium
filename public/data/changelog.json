@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.85.0",
+      "date": "2026-09-16",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "In the simulation, a receptor's bar now wears its own neurotransmitter's colour, the same one its pathways wear in the 3D brain: glutamate red, GABA blue, serotonin teal. Where two drugs share a receptor, the stronger one keeps the full colour and the others step down in shade, so the bar says which transmitter is engaged at a glance while still naming each drug on hover.",
+          "commits": [
+            "ba42c5c"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.84.0",
       "date": "2026-09-16",
       "entries": [
