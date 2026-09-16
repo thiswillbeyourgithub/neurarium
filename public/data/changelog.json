@@ -1,6 +1,46 @@
 {
   "versions": [
     {
+      "version": "3.83.0",
+      "date": "2026-09-16",
+      "entries": [
+        {
+          "category": "data",
+          "text": "A drug binding is now two claims, and each is graded on its own: that the drug binds the target (a measured affinity settles that) and in which direction it acts (agonist, antagonist, and so on), which only a written source can settle. Before, 767 bindings known only by their affinity counted as fully sourced; they now show a red \"no source\" mark on their direction, and the overall sourced figure drops from 95% to 83%, which is the honest number.",
+          "commits": [
+            "a8ddea2",
+            "569d73e",
+            "40c5586"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "A new sourcing pass reads each drug's own Wikipedia article for a sentence that states the direction of a binding known only by its affinity, checks the sentence is really on the page, and has a second model confirm it supports the claim. It closed 55 of those bindings; the rest stay marked as missing because the article never says.",
+          "commits": [
+            "7b5681a",
+            "f482b7f",
+            "711e13c"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "In the simulation's \"find drugs\" answer, a pick that pulls against what you asked for (it only compensates a drug you already listed overshooting the target) now says so, and the fit percentage states how many receptors it was judged over.",
+          "commits": [
+            "276a667"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The repository map lists the new binding-direction node kind and the Wikipedia pass that sources it.",
+          "commits": [
+            "40c5586",
+            "c55d661",
+            "e55a16c"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.82.0",
       "date": "2026-09-15",
       "entries": [
