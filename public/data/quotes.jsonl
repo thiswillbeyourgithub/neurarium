@@ -83,6 +83,7 @@
 {"id": "q_06af4a3b54ae", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "5-HT 1B | 519 | 406.8"}
 {"id": "q_06bee9178070", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "α 2C | 6 | 117.7"}
 {"id": "q_06c5782e6d01", "corpus": "wikipedia_pharm", "page": "nortriptyline", "quote": "5-HT 3 | 1,400 | Rat"}
+{"id": "q_06cf85883259", "corpus": "wikipedia_pharm", "page": "yohimbine", "quote": "SERT | 1,000 | Inhibitor | Human | Frontal cortex"}
 {"id": "q_06db981eec65", "corpus": "stahl", "page": 216, "quote": "Anticholinergic actions, especially at high doses, may cause sedation, blurred vision, constipation, dry mouth", "llm": "sonnet", "heading": ["Cyamemazine", "Side effects", "How Drug Causes Side Effects"]}
 {"id": "q_06e8f48b99cb", "corpus": "wikipedia_pharm", "page": "promethazine", "quote": "5-HT6 receptor (Human) | 1128"}
 {"id": "q_06ec91caeede", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 6.9 [PMID 1826762]", "species": "Human"}
@@ -274,6 +275,7 @@
 {"id": "q_144e9dd4910c", "corpus": "wikipedia_fr", "page": "sertraline", "quote": "Lustral", "llm": "sonnet"}
 {"id": "q_147619f9c1d8", "corpus": "gtopdb_ki", "page": "mianserin", "quote": "mianserin at 5-HT2B receptor (HTR2B, Human): Antagonist / Antagonist, pKi 7.9-8.8 [PMID 15322733]", "species": "Human"}
 {"id": "q_147cf84fbb6d", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "SERT | 202–432 | Human"}
+{"id": "q_14896bb11926", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "D 4 | 1.6–50 | Antagonist"}
 {"id": "q_149374c01535", "corpus": "gtopdb_ki", "page": "clozapine", "quote": "clozapine at H4 receptor (HRH4, Human): Antagonist / Antagonist, pKi 6.2-6.7 [PMID 11179434]", "species": "Human"}
 {"id": "q_149a6448a903", "corpus": "gtopdb_class", "page": 450, "quote": "GluK1 (GRIK1), GtoPdb target 450 | type: lgic | family: Ionotropic glutamate receptors"}
 {"id": "q_14bc0fb076f5", "corpus": "stahl", "page": 497, "quote": "Substrate for CYP2D6", "llm": "opus", "heading": ["Maprotiline", "Dosing and use", "Pharmacokinetics"]}
@@ -656,6 +658,7 @@
 {"id": "q_2f6c637b6d3f", "corpus": "allen_ahba", "page": "SLC18A2", "quote": "SLC18A2 detected in locus_coeruleus: probe 1051381 PACall present in 10/10 samples (donors 9861,10021,15697)", "species": "Human"}
 {"id": "q_2f82b76ce9fd", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "NET | 1,940–4,360 | Human"}
 {"id": "q_2fb1a345a6f3", "corpus": "stahl", "page": 355, "quote": "Inhibits CYP2C9/2C19", "llm": "opus", "heading": ["Fluvoxamine", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_2fb1af0190fd", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "D 3 | 7.8–91 | Antagonist"}
 {"id": "q_2fc651f3f759", "corpus": "gtopdb_ki", "page": "chlorpromazine", "quote": "chlorpromazine at 5-HT1A receptor (HTR1A, Human): Antagonist / Antagonist, pKi 6.2 [PMID 9760039]", "species": "Human"}
 {"id": "q_2fdc49044b7b", "corpus": "wikipedia_pharm", "page": "zimelidine", "quote": "Zimelidine and its principal active metabolite, norzimelidine, preferentially inhibit serotonin uptake while having little effect on the reuptake of noradrenaline or dopamine.", "llm": "sonnet"}
 {"id": "q_2fe6c62a72e0", "corpus": "wikipedia_pharm", "page": "cabergoline", "quote": "5-HT 2C | 5.8–692 | 96 | Full agonist"}
@@ -927,6 +930,7 @@
 {"id": "q_4201cd19ad5b", "corpus": "stahl", "page": 359, "quote": "Horizant", "llm": "sonnet", "heading": ["Gabapentin", "Therapeutics"]}
 {"id": "q_4228136b5d28", "corpus": "stahl_essential", "page": 355, "quote": "The enzyme MAO-A metabolizes serotonin (5HT) and norepinephrine (NE) as well as dopamine (DA) (left panels).", "llm": "sonnet", "heading": ["7 Treatments for Mood Disorders: So-Called “Antidepressants” and “Mood Stabilizers”"]}
 {"id": "q_42444b810499", "corpus": "stahl", "page": 609, "quote": "Neuroscience-based Nomenclature: GABA positive allosteric modulator (GABA-PAM)", "llm": "sonnet", "heading": ["Oxazepam", "Therapeutics", "Class"]}
+{"id": "q_424e2a35dfa5", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "5-HT 3 | 202 | Antagonist"}
 {"id": "q_4266ed851d25", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "5-HT 1B | 2,515–6,300 nM"}
 {"id": "q_42692641eefc", "corpus": "stahl", "page": 571, "quote": "Contrave", "llm": "sonnet", "heading": ["Naltrexone–Bupropion", "Therapeutics"]}
 {"id": "q_426cd37f2065", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "H 3 | 3713 | Antagonist"}
@@ -1002,6 +1006,7 @@
 {"id": "q_46f0be9ddaaf", "corpus": "gtopdb_ki", "page": "sumatriptan", "quote": "sumatriptan at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 5.6-5.8 [PMID 10193663]", "species": "Human"}
 {"id": "q_470b47a3548a", "corpus": "gtopdb_class", "page": 293, "quote": "mGlu5 receptor (GRM5), GtoPdb target 293 | type: gpcr | family: Metabotropic glutamate receptors"}
 {"id": "q_47176256a93a", "corpus": "stahl", "page": 286, "quote": "Half-life approximately 8–24 hours", "llm": "sonnet", "heading": ["Doxepin", "Dosing and use", "Pharmacokinetics"]}
+{"id": "q_471d47aab668", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "D 5 | 74–90 | Antagonist"}
 {"id": "q_471d864272b8", "corpus": "allen_ahba", "page": "HTR2C", "quote": "HTR2C detected in substantia_nigra: probe 1055276 PACall present in 42/44 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_4726a498c1a5", "corpus": "stahl", "page": 318, "quote": "Metabolized primarily by CYP3A4 and to a lesser extent by CYP2C19", "llm": "opus", "heading": ["Flibanserin", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_47488c9b74ef", "corpus": "stahl", "page": 335, "quote": "Depixol", "llm": "sonnet", "heading": ["Flupenthixol", "Therapeutics", "Brands"]}
@@ -1461,6 +1466,7 @@
 {"id": "q_66c7d0da4c6f", "corpus": "wikipedia_pharm", "page": "doxylamine", "quote": "M 4 | 380 | Human"}
 {"id": "q_66d0b93251fd", "corpus": "wikipedia_pharm", "page": "phentermine", "quote": "Drug class | Psychostimulant ; Appetite suppressant ; Norepinephrine–dopamine releasing agent", "llm": "sonnet"}
 {"id": "q_66e20391e73a", "corpus": "wikipedia_pharm", "page": "prothipendyl", "quote": "Prothipendyl is said to not possess antipsychotic effects, and in accordance, appears to be a weaker dopamine receptor antagonist than other phenothiazines.", "llm": "sonnet"}
+{"id": "q_66e8e36aef5d", "corpus": "wikipedia_pharm", "page": "phencyclidine", "quote": "σ 1 | >10,000 | Agonist | Guinea pig"}
 {"id": "q_66fe9ff0bc5b", "corpus": "wikipedia_pharm", "page": "asenapine", "quote": "α 2A | 8.9 | 1.2 | Antagonist"}
 {"id": "q_670703b99d72", "corpus": "stahl", "page": 681, "quote": "Histamine 3 antagonist/inverse agonist", "llm": "sonnet", "heading": ["Pitolisant", "Therapeutics", "Class"]}
 {"id": "q_670fde63b286", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "5-HT 6 | silent antagonist | 3666"}
@@ -1507,6 +1513,7 @@
 {"id": "q_698827b2bc3c", "corpus": "allen_ahba", "page": "CNR1", "quote": "CNR1 detected in parietal: probe 1028488 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_69a3a84fe82a", "corpus": "stahl", "page": 675, "quote": "Conventional antipsychotic (neuroleptic, phenothiazine, dopamine 2 antagonist)", "llm": "sonnet", "heading": ["Pipothiazine", "Therapeutics", "Class"]}
 {"id": "q_69b62dc105d1", "corpus": "wikipedia_pharm", "page": "cabergoline", "quote": "α 2C | 22–364 | 0 | Antagonist"}
+{"id": "q_69d1882c2ca7", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "5-HT 2C | silent antagonist | 10000+"}
 {"id": "q_69d8ef4a1df7", "corpus": "allen_ahba", "page": "HTR7", "quote": "HTR7 detected in hippocampus: probe 1026650 PACall present in 170/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_69de8808372d", "corpus": "wikipedia_pharm", "page": "pizotifen", "quote": "The elimination half-life of pizotifen is 23 hours.", "llm": "sonnet"}
 {"id": "q_69e2b24e0b4c", "corpus": "wikipedia_pharm", "page": "diphenhydramine", "quote": "α 2C | 2100 | Human"}
@@ -1960,6 +1967,7 @@
 {"id": "q_8cff3471d92a", "corpus": "allen_ahba", "page": "ADRA1D", "quote": "ADRA1D detected in cerebellum: probe 1059354 PACall present in 306/306 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_8d0e20e78ff6", "corpus": "gtopdb_ki", "page": "pimozide", "quote": "pimozide at 5-HT6 receptor (Htr6, Rat): Antagonist / Antagonist, pKi 7.2 [PMID 7908055]", "species": "Rat"}
 {"id": "q_8d14fbe19f44", "corpus": "stahl", "page": 471, "quote": "Although classified as a conventional antipsychotic, loxapine is a potent serotonin 2A antagonist", "llm": "sonnet", "heading": ["Loxapine", "Therapeutics", "How the Drug Works"]}
+{"id": "q_8d3912726b0d", "corpus": "wikipedia_pharm", "page": "fluphenazine", "quote": "5-HT 1B | 334 | Modulator"}
 {"id": "q_8d474a3cb483", "corpus": "wikipedia_fr", "page": "citalopram", "quote": "Ciazil", "llm": "sonnet"}
 {"id": "q_8d4a9294ca23", "corpus": "wikipedia_pharm", "page": "ketanserin", "quote": "D 5 | 2,500 nM"}
 {"id": "q_8d548d1bace4", "corpus": "stahl", "page": 343, "quote": "Mean half-life of oral formulation approximately 15 hours", "llm": "sonnet", "heading": ["Fluphenazine", "Dosing and use", "Pharmacokinetics"]}
@@ -2256,6 +2264,7 @@
 {"id": "q_a15124f1a2da", "corpus": "wikipedia_pharm", "page": "meta_chlorophenylpiperazine", "quote": "5-HT 1B | 89–501 | Human"}
 {"id": "q_a1647089e7a6", "corpus": "stahl", "page": 387, "quote": "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis and stabilizing affective symptoms", "llm": "sonnet", "heading": ["Iloperidone", "Therapeutics", "How the Drug Works"]}
 {"id": "q_a1717349e18e", "corpus": "wikipedia_pharm", "page": "propranolol", "quote": "β 3 | 450 | Mouse"}
+{"id": "q_a17d1d41b056", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "D 1 | 35–118 | Antagonist"}
 {"id": "q_a17d28d7584d", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "β 1 | 5,000 | 6,239"}
 {"id": "q_a184dc135768", "corpus": "stahl", "page": 691, "quote": "Elimination half-life approximately 5–7 hours", "llm": "sonnet", "heading": ["Pregabalin", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_a184ea20b641", "corpus": "wikipedia_fr", "page": "naltrexone", "quote": "Depade", "llm": "sonnet"}
@@ -2277,6 +2286,7 @@
 {"id": "q_a28f4a3c87a1", "corpus": "wikipedia_pharm", "page": "risperidone", "quote": "D 5 | 290 | Antagonist"}
 {"id": "q_a298356b34d2", "corpus": "kandel", "page": 1117, "quote": "There are also GABAergic projections from the NAc to the VTA, with some in a direct pathway innervating the VTA and some in an indirect pathway innervating the VTA via intervening GABAergic neurons in the ventral pallidum", "llm": "sonnet", "heading": ["43 Motivation, Reward, and Addictive States", "Drug Addiction Is a Pathological Reward State", "All Drugs of Abuse Target Neurotransmitter Receptors, Transporters, or Ion Channels"]}
 {"id": "q_a298df5fafef", "corpus": "stahl", "page": 887, "quote": "Neuroscience-based Nomenclature: serotonin, norepinephrine reuptake inhibitor (SN-RI)", "llm": "sonnet", "heading": ["Venlafaxine", "Therapeutics", "Class"]}
+{"id": "q_a2a0e4a721b4", "corpus": "wikipedia_pharm", "page": "fluphenazine", "quote": "5-HT 2C | 174–2,570 | Antagonist"}
 {"id": "q_a2bd2828aada", "corpus": "allen_ahba", "page": "SIGMAR1", "quote": "SIGMAR1 detected in pons: probe 1047600 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a2d9433377cc", "corpus": "stahl", "page": 53, "quote": "ProCentra", "llm": "sonnet", "heading": ["Amphetamine (D)", "Therapeutics"]}
 {"id": "q_a2da0030cf2c", "corpus": "wikipedia_pharm", "page": "brexpiprazole", "quote": "5-HT 5A | 140 | ND"}
@@ -2292,6 +2302,7 @@
 {"id": "q_a3849783dd76", "corpus": "wikipedia_pharm", "page": "diphenhydramine", "quote": "α 2A | 2900 | Human"}
 {"id": "q_a3bdb2d1bfdc", "corpus": "allen_ahba", "page": "ADRA2A", "quote": "ADRA2A detected in locus_coeruleus: probe 1059351 PACall present in 10/10 samples (donors 9861,10021,15697)", "species": "Human"}
 {"id": "q_a3c38ad2639c", "corpus": "gtopdb_ki", "page": "zotepine", "quote": "zotepine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 7.41 [PMID 8935801]", "species": "Human"}
+{"id": "q_a3d2e2beb920", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "H 2 | 44 | Antagonist"}
 {"id": "q_a3e6fff9a83f", "corpus": "wikipedia_pharm", "page": "perampanel", "quote": "Perampanel is a selective non-competitive antagonist of AMPA receptors , the major subtype of ionotropic glutamate receptors .", "llm": "sonnet"}
 {"id": "q_a404783e57b8", "corpus": "allen_ahba", "page": "HRH1", "quote": "HRH1 detected in parietal: probe 1019914 PACall present in 242/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a40e19ddceb2", "corpus": "gtopdb_ki", "page": "pipamperone", "quote": "pipamperone at 5-HT1B receptor (HTR1B, Human): Antagonist / Antagonist, pKi 6.2 [PMID 8935801]", "species": "Human"}
@@ -2374,6 +2385,7 @@
 {"id": "q_a8774052742e", "corpus": "stahl", "page": 449, "quote": "Deprimyl", "llm": "sonnet", "heading": ["Lofepramine", "Therapeutics"]}
 {"id": "q_a87f054b923c", "corpus": "wikipedia_pharm", "page": "primidone", "quote": "It is believed to work via interactions with voltage-gated sodium channels that inhibit high-frequency repetitive firing of action potentials.", "llm": "sonnet"}
 {"id": "q_a88fe4d36475", "corpus": "gtopdb_class", "page": 56, "quote": "CB1 receptor (CNR1), GtoPdb target 56 | type: gpcr | family: Cannabinoid receptors"}
+{"id": "q_a8a25ae8ee23", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "D 3 | 7.2 | Antagonist"}
 {"id": "q_a8a50b11b925", "corpus": "allen_ahba", "page": "HTR1F", "quote": "HTR1F detected in frontal: probe 1021596 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_a8a675ac3ab3", "corpus": "stahl", "page": 53, "quote": "Stimulant", "llm": "sonnet", "heading": ["Amphetamine (D)", "Therapeutics", "Class"]}
 {"id": "q_a8a7df0907bf", "corpus": "gtopdb_class", "page": 462, "quote": "nicotinic acetylcholine receptor α1 subunit (CHRNA1), GtoPdb target 462 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"}
@@ -2426,6 +2438,7 @@
 {"id": "q_ac34296f4bbb", "corpus": "allen_ahba", "page": "GRM1", "quote": "GRM1 detected in parietal: probe 1010994 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ac3c4724a573", "corpus": "gtopdb_ki", "page": "bromocriptine", "quote": "bromocriptine at 5-HT2A receptor (HTR2A, Human): Agonist / Partial agonist, pKi 7 [PMID 12388666]", "species": "Human"}
 {"id": "q_ac3f5f320902", "corpus": "gtopdb_ki", "page": "amitriptyline", "quote": "amitriptyline at M3 receptor (CHRM3, Human): Antagonist / Antagonist, pKi 7.89 [PMID 8100134]", "species": "Human"}
+{"id": "q_ac584b29e7ee", "corpus": "wikipedia_pharm", "page": "aripiprazole", "quote": "5-HT 2B | 0.25–0.47 | Inverse agonist"}
 {"id": "q_ac75cf1ecdbf", "corpus": "wikipedia_pharm", "page": "sibutramine", "quote": "Metabolism | Hepatic ( CYP3A4 -mediated)", "llm": "opus"}
 {"id": "q_ac768d04d38e", "corpus": "allen_ahba", "page": "GRM2", "quote": "GRM2 detected in parietal: probe 1014136 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_ac8723d844fa", "corpus": "gtopdb_class", "page": 5, "quote": "5-HT1F receptor (HTR1F), GtoPdb target 5 | type: gpcr | family: 5-Hydroxytryptamine receptors"}
@@ -3042,6 +3055,7 @@
 {"id": "q_d8e3639465cf", "corpus": "stahl", "page": 329, "quote": "Prozac", "llm": "sonnet", "heading": ["Fluoxetine", "Therapeutics", "Brands"]}
 {"id": "q_d8e415e91ea4", "corpus": "allen_ahba", "page": "CACNA1G", "quote": "CACNA1G detected in temporal: probe 1049164 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d8edde267cd3", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "D 1 | 30–130 | ND"}
+{"id": "q_d8f572e89516", "corpus": "wikipedia_pharm", "page": "haloperidol", "quote": "M 1 | silent antagonist | 10000+"}
 {"id": "q_d8faf1587146", "corpus": "stahl", "page": 841, "quote": "Half-life is biphasic; first phase is approximately 3–6 hours; second phase is approximately 5–9 hours", "llm": "sonnet", "heading": ["Trazodone", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_d9126f56f147", "corpus": "allen_ahba", "page": "DRD2", "quote": "DRD2 detected in putamen: probe 1030267 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
 {"id": "q_d915b706a2a9", "corpus": "allen_ahba", "page": "HTR5A", "quote": "HTR5A detected in hippocampus: probe 1021969 PACall present in 166/171 samples (donors 9861,10021,12876,14380,15697)", "species": "Human"}
@@ -3169,6 +3183,7 @@
 {"id": "q_e0a7cf98bfe5", "corpus": "wikipedia_pharm", "page": "ropinirole", "quote": "Ropinirole is metabolized primarily by cytochrome P450 CYP1A2 to form two metabolites ;", "llm": "opus"}
 {"id": "q_e0bb344a9423", "corpus": "kandel", "page": 1096, "quote": "The outputs of the hypothalamus reach the cingulate via the anterior thalamus, and the outputs of the cingulate reach the hypothalamus via the hippocampus.", "llm": "sonnet", "heading": ["Part VI The Biology of Emotion, Motivation, and Homeostasis", "42 Emotion", "The Modern Search for the Neural Circuitry of Emotion Began in the Late 19th Century"]}
 {"id": "q_e0d5d48495ea", "corpus": "stahl", "page": 839, "quote": "Blocks serotonin 2A receptors potently", "llm": "sonnet", "heading": ["Trazodone", "Therapeutics", "How the Drug Works"]}
+{"id": "q_e0d7696b7ab8", "corpus": "wikipedia_pharm", "page": "olanzapine", "quote": "5-HT 2B | 11.8–12.0 | Inverse agonist"}
 {"id": "q_e1031773d5b6", "corpus": "stahl", "page": 259, "quote": "Substrate for CYP2C19 and CYP3A4", "llm": "opus", "heading": ["Diazepam", "Dosing and use", "Pharmacokinetics"]}
 {"id": "q_e1066292f575", "corpus": "stahl", "page": 437, "quote": "Vyvanse", "llm": "sonnet", "heading": ["Lisdexamfetamine", "Therapeutics", "Brands"]}
 {"id": "q_e11218a8d8ab", "corpus": "gtopdb_ki", "page": "pramipexole", "quote": "pramipexole at D3 receptor (DRD3, Human): Agonist / Full agonist, pKi 8.4-8.7 [PMID 7756621]", "species": "Human"}
@@ -3422,6 +3437,7 @@
 {"id": "q_f263dbe6b012", "corpus": "stahl", "page": 329, "quote": "Fluoxetine also has antagonist properties at serotonin 2C receptors, which could increase norepinephrine and dopamine neurotransmission", "llm": "sonnet", "heading": ["Fluoxetine", "Therapeutics", "How the Drug Works"]}
 {"id": "q_f2741ce14e47", "corpus": "gtopdb_ki", "page": "melatonin", "quote": "melatonin at MT1 receptor (MTNR1A, Human): Agonist / Full agonist, pKi 9.1-9.7 [PMID 12764576]", "species": "Human"}
 {"id": "q_f27e79602f2a", "corpus": "stahl", "page": 375, "quote": "Haldol", "llm": "sonnet", "heading": ["Haloperidol", "Therapeutics"]}
+{"id": "q_f28412c5191e", "corpus": "wikipedia_pharm", "page": "ziprasidone", "quote": "D 4 | 0.8–105 | Antagonist"}
 {"id": "q_f290fc61240f", "corpus": "stahl", "page": 69, "quote": "Actions at dopamine 3 receptors could theoretically contribute to aripiprazole's efficacy", "llm": "sonnet", "heading": ["Aripiprazole", "Therapeutics", "How the Drug Works"]}
 {"id": "q_f29a0f3b30d9", "corpus": "gtopdb", "page": 25, "quote": "α2A-AR mRNA labeling in cerebral cortex, hypothalamic paraventricular nucleus, reticular thalamic nucleus, pontine nuclei, locus coeruleus, vestibular nuclei, trapezoid nuclei, deep cerebellar nuclei, nucleus tractus solitarii, ventrolateral medullary reticular formation, and intermediolateral cell column of thoracic spinal cord.", "species": "Rat", "llm": "sonnet"}
 {"id": "q_f29e7a315f5f", "corpus": "wikipedia_pharm", "page": "buprenorphine", "quote": "DOR | 2.9–6.1 0.82 | Antagonist | Human Monkey | 0"}

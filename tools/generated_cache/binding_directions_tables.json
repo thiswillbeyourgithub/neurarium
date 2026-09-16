@@ -1,0 +1,525 @@
+{
+ "aripiprazole": {
+  "slug": "aripiprazole",
+  "rows": [
+   {
+    "target": "sert",
+    "wiki_name": "SERT",
+    "cell": "Reuptake inhibitor",
+    "quote": "SERT | 900–1260 | Reuptake inhibitor",
+    "action": "reuptake_inhibitor"
+   },
+   {
+    "target": "net",
+    "wiki_name": "NET",
+    "cell": "Reuptake inhibitor",
+    "quote": "NET | 1340–2840 | Reuptake inhibitor",
+    "action": "reuptake_inhibitor"
+   },
+   {
+    "target": "dat",
+    "wiki_name": "DAT",
+    "cell": "Reuptake inhibitor",
+    "quote": "DAT | 2560–3880 | Reuptake inhibitor",
+    "action": "reuptake_inhibitor"
+   },
+   {
+    "target": "5ht2b",
+    "wiki_name": "5-HT 2B",
+    "cell": "Inverse agonist",
+    "quote": "5-HT 2B | 0.25–0.47 | Inverse agonist",
+    "action": "inverse_agonist"
+   },
+   {
+    "target": "5ht5a",
+    "wiki_name": "5-HT 5A",
+    "cell": "Near-full Agonist",
+    "quote": "5-HT 5A | 960–1520 | 87% | Near-full Agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "alpha2a",
+    "wiki_name": "α 2A",
+    "cell": "Antagonist",
+    "quote": "α 2A | 74.3 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2c",
+    "wiki_name": "α 2C",
+    "cell": "Antagonist",
+    "quote": "α 2C | 38 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "beta1",
+    "wiki_name": "β 1",
+    "cell": "Agonist",
+    "quote": "β 1 | 141 | Agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "beta2",
+    "wiki_name": "β 2",
+    "cell": "Agonist",
+    "quote": "β 2 | 163 | Agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "d1",
+    "wiki_name": "D 1L",
+    "cell": "Agonist",
+    "quote": "D 1L | 1290–2630 | Agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "d5",
+    "wiki_name": "D 5L",
+    "cell": "Agonist",
+    "quote": "D 5L | 1240–3940 | Agonist",
+    "action": "agonist"
+   }
+  ]
+ },
+ "benperidol": {
+  "slug": "benperidol",
+  "rows": [
+   {
+    "target": "d1",
+    "wiki_name": "D 1",
+    "cell": "Antagonist",
+    "quote": "D 1 | 4,100 | Antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "brexpiprazole": {
+  "slug": "brexpiprazole",
+  "rows": [
+   {
+    "target": "net",
+    "wiki_name": "NET",
+    "cell": "Blocker",
+    "quote": "NET | 0% at 10 μM | Blocker",
+    "action": "reuptake_inhibitor"
+   },
+   {
+    "target": "5ht2c",
+    "wiki_name": "5-HT 2C",
+    "cell": "Antagonist",
+    "quote": "5-HT 2C | 34 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "5ht6",
+    "wiki_name": "5-HT 6",
+    "cell": "Antagonist",
+    "quote": "5-HT 6 | 58 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2a",
+    "wiki_name": "α 2A",
+    "cell": "Antagonist",
+    "quote": "α 2A | 15 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2b",
+    "wiki_name": "α 2B",
+    "cell": "Antagonist",
+    "quote": "α 2B | 17 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "beta1",
+    "wiki_name": "β 1",
+    "cell": "Antagonist",
+    "quote": "β 1 | 59 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "beta2",
+    "wiki_name": "β 2",
+    "cell": "Antagonist",
+    "quote": "β 2 | 67 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "h1",
+    "wiki_name": "H 1",
+    "cell": "Antagonist",
+    "quote": "H 1 | 19 | Antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "buspirone": {
+  "slug": "buspirone",
+  "rows": [
+   {
+    "target": "5ht2a",
+    "wiki_name": "5-HT 2A",
+    "cell": "Antagonist",
+    "quote": "5-HT 2A | 138–3,240 | Antagonist | Human",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2a",
+    "wiki_name": "α 2A",
+    "cell": "Antagonist",
+    "quote": "α 2A | 7.3 ( 1-PP | Antagonist | Human",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "cariprazine": {
+  "slug": "cariprazine",
+  "rows": [
+   {
+    "target": "5ht2c",
+    "wiki_name": "5-HT 2C",
+    "cell": "Inverse agonist",
+    "quote": "5-HT 2C | 134 | Inverse agonist",
+    "action": "inverse_agonist"
+   },
+   {
+    "target": "5ht7",
+    "wiki_name": "5-HT 7",
+    "cell": "Antagonist",
+    "quote": "5-HT 7 | 111 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha1a",
+    "wiki_name": "α 1A",
+    "cell": "Antagonist",
+    "quote": "α 1A | 155 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "h1",
+    "wiki_name": "H 1",
+    "cell": "Antagonist",
+    "quote": "H 1 | 23.2 | Antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "fluphenazine": {
+  "slug": "fluphenazine",
+  "rows": [
+   {
+    "target": "5ht1b",
+    "wiki_name": "5-HT 1B",
+    "cell": "Modulator",
+    "quote": "5-HT 1B | 334 | Modulator",
+    "action": "modulator"
+   },
+   {
+    "target": "5ht2c",
+    "wiki_name": "5-HT 2C",
+    "cell": "Antagonist",
+    "quote": "5-HT 2C | 174–2,570 | Antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "haloperidol": {
+  "slug": "haloperidol",
+  "rows": [
+   {
+    "target": "5ht2c",
+    "wiki_name": "5-HT 2C",
+    "cell": "silent antagonist",
+    "quote": "5-HT 2C | silent antagonist | 10000+",
+    "action": "antagonist"
+   },
+   {
+    "target": "5ht6",
+    "wiki_name": "5-HT 6",
+    "cell": "silent antagonist",
+    "quote": "5-HT 6 | silent antagonist | 3666",
+    "action": "antagonist"
+   },
+   {
+    "target": "m1",
+    "wiki_name": "M 1",
+    "cell": "silent antagonist",
+    "quote": "M 1 | silent antagonist | 10000+",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2a",
+    "wiki_name": "α 2A",
+    "cell": "Agonist",
+    "quote": "α 2A | Agonist | 1130",
+    "action": "agonist"
+   },
+   {
+    "target": "alpha2b",
+    "wiki_name": "α 2B",
+    "cell": "Agonist",
+    "quote": "α 2B | Agonist | 480",
+    "action": "agonist"
+   },
+   {
+    "target": "alpha2c",
+    "wiki_name": "α 2C",
+    "cell": "Agonist",
+    "quote": "α 2C | Agonist | 550",
+    "action": "agonist"
+   }
+  ]
+ },
+ "lurasidone": {
+  "slug": "lurasidone",
+  "rows": [
+   {
+    "target": "d4",
+    "wiki_name": "D 4.4L",
+    "cell": "Positive allosteric modulator",
+    "quote": "D 4.4L | 30 | Positive allosteric modulator | ND | ND",
+    "action": "pam"
+   }
+  ]
+ },
+ "olanzapine": {
+  "slug": "olanzapine",
+  "rows": [
+   {
+    "target": "5ht2b",
+    "wiki_name": "5-HT 2B",
+    "cell": "Inverse agonist",
+    "quote": "5-HT 2B | 11.8–12.0 | Inverse agonist",
+    "action": "inverse_agonist"
+   },
+   {
+    "target": "5ht3",
+    "wiki_name": "5-HT 3",
+    "cell": "Antagonist",
+    "quote": "5-HT 3 | 202 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "5ht5a",
+    "wiki_name": "5-HT 5A",
+    "cell": "Full Agonist",
+    "quote": "5-HT 5A | 1212 | Full Agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "alpha2a",
+    "wiki_name": "α 2A",
+    "cell": "Antagonist",
+    "quote": "α 2A | 192–470 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2b",
+    "wiki_name": "α 2B",
+    "cell": "Antagonist",
+    "quote": "α 2B | 82–180 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2c",
+    "wiki_name": "α 2C",
+    "cell": "Antagonist",
+    "quote": "α 2C | 29–210 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "d1",
+    "wiki_name": "D 1",
+    "cell": "Antagonist",
+    "quote": "D 1 | 35–118 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "d3",
+    "wiki_name": "D 3",
+    "cell": "Antagonist",
+    "quote": "D 3 | 7.8–91 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "d4",
+    "wiki_name": "D 4",
+    "cell": "Antagonist",
+    "quote": "D 4 | 1.6–50 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "d5",
+    "wiki_name": "D 5",
+    "cell": "Antagonist",
+    "quote": "D 5 | 74–90 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "h2",
+    "wiki_name": "H 2",
+    "cell": "Antagonist",
+    "quote": "H 2 | 44 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "h3",
+    "wiki_name": "H 3",
+    "cell": "Antagonist",
+    "quote": "H 3 | 3713 | Antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "vortioxetine": {
+  "slug": "vortioxetine",
+  "rows": [
+   {
+    "target": "beta1",
+    "wiki_name": "β 1 -adr.",
+    "cell": "Antagonist",
+    "quote": "β 1 -adr. | 46 | – | – | Antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "ziprasidone": {
+  "slug": "ziprasidone",
+  "rows": [
+   {
+    "target": "5ht2b",
+    "wiki_name": "5-HT 2B",
+    "cell": "Antagonist",
+    "quote": "5-HT 2B | 27.2 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "5ht6",
+    "wiki_name": "5-HT 6",
+    "cell": "Antagonist",
+    "quote": "5-HT 6 | 61–76 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2a",
+    "wiki_name": "α 2A",
+    "cell": "Antagonist",
+    "quote": "α 2A | 160 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2b",
+    "wiki_name": "α 2B",
+    "cell": "Antagonist",
+    "quote": "α 2B | 48 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha2c",
+    "wiki_name": "α 2C",
+    "cell": "Antagonist",
+    "quote": "α 2C | 59–77 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "d3",
+    "wiki_name": "D 3",
+    "cell": "Antagonist",
+    "quote": "D 3 | 7.2 | Antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "d4",
+    "wiki_name": "D 4",
+    "cell": "Antagonist",
+    "quote": "D 4 | 0.8–105 | Antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "apomorphine": {
+  "slug": "apomorphine",
+  "rows": [
+   {
+    "target": "alpha1a",
+    "wiki_name": "α 1A -adrenergic",
+    "cell": "antagonist",
+    "quote": "α 1A -adrenergic | 1,995 | antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha1b",
+    "wiki_name": "α 1B -adrenergic",
+    "cell": "antagonist",
+    "quote": "α 1B -adrenergic | 676 | antagonist",
+    "action": "antagonist"
+   },
+   {
+    "target": "alpha1d",
+    "wiki_name": "α 1D -adrenergic",
+    "cell": "antagonist",
+    "quote": "α 1D -adrenergic | 64.6 | antagonist",
+    "action": "antagonist"
+   }
+  ]
+ },
+ "bromocriptine": {
+  "slug": "bromocriptine",
+  "rows": [
+   {
+    "target": "alpha1a",
+    "wiki_name": "α 1A",
+    "cell": "Full agonist",
+    "quote": "α 1A | 4.17 | 100% | Full agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "alpha1b",
+    "wiki_name": "α 1B",
+    "cell": "Full agonist",
+    "quote": "α 1B | 1.38 | 100% | Full agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "alpha1d",
+    "wiki_name": "α 1D",
+    "cell": "Full agonist",
+    "quote": "α 1D | 1.12 | 100% | Full agonist",
+    "action": "agonist"
+   }
+  ]
+ },
+ "phencyclidine": {
+  "slug": "phencyclidine",
+  "rows": [
+   {
+    "target": "sigma1",
+    "wiki_name": "σ 1",
+    "cell": "Agonist",
+    "quote": "σ 1 | >10,000 | Agonist | Guinea pig",
+    "action": "agonist"
+   }
+  ]
+ },
+ "yohimbine": {
+  "slug": "yohimbine",
+  "rows": [
+   {
+    "target": "sert",
+    "wiki_name": "SERT",
+    "cell": "Inhibitor",
+    "quote": "SERT | 1,000 | Inhibitor | Human | Frontal cortex",
+    "action": "reuptake_inhibitor"
+   },
+   {
+    "target": "d3",
+    "wiki_name": "D 3",
+    "cell": "Antagonist",
+    "quote": "D 3 | 3,235 | Antagonist | Human | Cloned",
+    "action": "antagonist"
+   }
+  ]
+ }
+}
