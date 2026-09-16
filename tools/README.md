@@ -506,7 +506,9 @@ there is no node-level catch-all `sources` block.
   no hardcoded palette): `projection_colors`, `kind_labels`, `group_labels`, `kind_signs`,
   `sign_colors`, `sign_labels`, `system_flow_kinds` (drug target system -> projection kind),
   the receptor maps (`receptor_family_labels` key order = legend family order,
-  `receptor_class_labels`, `synaptic_labels`), the drug maps (`drug_category_labels` key order =
+  `receptor_family_colors` = the same families' swatch colours, reusing `projection_colors`
+  where the family has a modeled pathway, so a view colouring by transmitter (the simulation's
+  receptor bars) matches the 3D scene; `receptor_class_labels`, `synaptic_labels`), the drug maps (`drug_category_labels` key order =
   Drugs legend order, `drug_actions` action->{label,effect}, `drug_effect_colors`,
   `drug_effect_labels`, `drug_targets` = every non-receptor target + every receptor id; a target
   with a direction-flipping `vesicular`/`sign`/`synaptic` flag also carries `polarity_provenance`

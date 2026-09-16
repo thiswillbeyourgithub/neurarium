@@ -820,7 +820,10 @@ model does not know (and why every string in it stays conditional).
   enzyme-sharing flags `pkFlags` derives from the picked drugs.
 - The tab is `js/simulation.js` (sections + state) over `js/sim-plots.js` (the two SVGs): a plasma
   plot whose scrub position re-reads the receptor plot at that hour, and a receptor plot of boost /
-  block stacks split per ligand, grouped by neurotransmitter system.
+  block stacks split per ligand, grouped by neurotransmitter system. A bar is filled in its
+  receptor's **transmitter** colour (`meta.receptor_family_colors`, so a column reads as its
+  pathways do in the scene); the ligands sharing one bar are told apart by stepped opacity,
+  strongest first, since the hue is spoken for.
 - **A direction-less (`affinity_only`) binding is not signed**: it draws as a hatched grey "binds,
   effect unknown" band above the boost stack and stays out of the net, so an occupied receptor
   nobody sourced a direction for reads as a gap rather than disappearing.
