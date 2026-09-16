@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.86.0",
+      "date": "2026-09-16",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The simulation tab now opens by saying what it is for, in both directions: how much of each receptor a combination of drugs engages, and which combination would come close to a profile you describe. It also says plainly what the bars are, a relative index rather than a percentage of receptors occupied, because an affinity says how tightly a drug holds a receptor and never how much of it gets there.",
+          "commits": [
+            "15a9403"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The simulation's list of what it does not know now says up front that it is not exhaustive, and gained the one omission that most often surprises: the brain's own dopamine or serotonin, which a drug competes with at every receptor and which is why a measured occupancy never matches a test-tube affinity.",
+          "commits": [
+            "15a9403"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.85.0",
       "date": "2026-09-16",
       "entries": [
