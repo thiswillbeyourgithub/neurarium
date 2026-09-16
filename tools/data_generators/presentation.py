@@ -128,6 +128,29 @@ RECEPTOR_FAMILY_LABELS: dict[str, str] = {
 }
 # Receptor mechanism class. "chaperone" is here for the sigma-1 receptor, which is
 # neither a ligand-gated channel nor a GPCR but an intracellular ER chaperone.
+# Swatch colour per neurotransmitter family, for any view that colours a thing by the
+# transmitter rather than by what a drug does to it (the simulation's receptor bars).
+# Deliberately the SAME values the arrows wear in the 3D scene (PROJECTION_COLORS), so
+# one transmitter reads as one colour across the app: glutamate is the excitatory red
+# and GABA/glycine the inhibitory blue, because that is the colour their projections
+# carry. The families with no modeled projection at all (opioid, cannabinoid, purinergic,
+# sigma) get their own hues, picked to stay apart from the nine above.
+RECEPTOR_FAMILY_COLORS: dict[str, str] = {
+    "adrenergic": PROJECTION_COLORS["noradrenergic"],
+    "cholinergic": PROJECTION_COLORS["cholinergic"],
+    "dopaminergic": PROJECTION_COLORS["dopaminergic"],
+    "gabaergic": PROJECTION_COLORS["inhibitory"],
+    "glutamatergic": PROJECTION_COLORS["excitatory"],
+    "glycinergic": PROJECTION_COLORS["inhibitory"],
+    "histaminergic": PROJECTION_COLORS["histaminergic"],
+    "opioidergic": "#c98a5e",      # warm tan, away from the pink/orange pair
+    "serotonergic": PROJECTION_COLORS["serotonergic"],
+    "cannabinoid": "#7fa86b",      # olive: green family, but not the dopamine green
+    "purinergic": "#6b9bd2",       # mid blue, lighter than the inhibitory blue
+    "sigma": "#a89bb5",            # muted lilac
+    "melatonergic": PROJECTION_COLORS["melatonergic"],
+}
+
 RECEPTOR_CLASS_LABELS: dict[str, str] = {
     "ionotropic": "Ionotropic (ligand-gated ion channel)",
     "metabotropic": "Metabotropic (GPCR)",

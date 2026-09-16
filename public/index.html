@@ -1970,7 +1970,8 @@
       .sim-axis-name { font-style: italic; }
       .sim-line { fill: none; stroke-width: 1.8; stroke-linejoin: round; }
       .sim-cursor { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
-      .sim-seg { stroke: var(--page-bg); stroke-width: 0.5; }
+      /* A bar segment is filled with its receptor transmitter colour, set as an attribute; this fill is the fallback for a family with no colour of its own. */
+      .sim-seg { fill: var(--muted); stroke: var(--page-bg); stroke-width: 0.5; }
       .sim-seg-metab { opacity: 0.55; }
       .sim-net { stroke: var(--text-strong); stroke-width: 1.6; }
       .sim-unknown-bg { fill: rgba(var(--ink), 0.06); }

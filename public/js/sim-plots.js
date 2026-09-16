@@ -148,6 +148,10 @@ export function buildPkPlot({ lines, tEnd, t }) {
 
 const COL_W = 26;      // one target column
 const GROUP_GAP = 12;  // the breathing space between two neurotransmitter systems
+// How far a stack's successive ligands step down in opacity, strongest first. It stops
+// at four because a fifth contributor to ONE receptor is already unreadable as a band,
+// and the tooltip is what answers there; every step past the fourth reuses the last.
+const SEG_SHADES = [1, 0.72, 0.52, 0.36];
 
 /**
  * The receptor plot: one column per engaged target, grouped by neurotransmitter
@@ -159,7 +163,9 @@ const GROUP_GAP = 12;  // the breathing space between two neurotransmitter syste
  * @param {object} opts
  * @param {Array<object>} opts.cols one per target, in draw order, each
  *   `{target, name, systemLabel, systemColor, boostAxis, blockAxis, unknownAxis,
- *     netAxis, up: [{key, color, frac, dim}], down: [...], groupStart: boolean}`
+ *     netAxis, up: [{key, color, shade, frac, dim}], down: [...], groupStart: boolean}`
+ *   (a segment's `shade` is its rank in the stack, which picks its opacity; `color` is
+ *   the drug's own swatch, used by the caller's tooltip, not by the fill)
  *   (`systemColor` null for a system with no modeled projection kind: the strip and
  *   the group label then fall back to the neutral token in the stylesheet)
  * @param {boolean} opts.showUnknown draw the hatched direction-less band
@@ -219,10 +225,13 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
     }, k === 0 ? "0" : String(Math.abs(k))));
   }
 
-  // A column says two things at once: WHICH system it belongs to and WHICH drug
-  // carries it. The stack segments are spoken for by the second (a bar has to name
-  // its ligands), so the system speaks through a strip under the column and through
-  // the group label's own ink, rather than through a fill the segments would overrule.
+  // A column is painted in its receptor's transmitter colour (the one its pathways
+  // wear in the 3D scene), so the plot reads as the brain does: a red glutamate
+  // column, a blue GABA one. Which drug carries which share of a stack is then said
+  // by SHADE, not by hue: the segments are the same colour stepped down in opacity,
+  // strongest contributor first, and each one names its drug on hover. A system with
+  // no colour of its own leaves the fill to the stylesheet's neutral token.
+  const shadeOf = (seg) => SEG_SHADES[Math.min(seg.shade || 0, SEG_SHADES.length - 1)];
   let groupFrom = null;
   const flushGroup = (endCol) => {
     if (!groupFrom || !endCol) return;
@@ -245,7 +254,7 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
       const r = svg("rect", {
         class: seg.dim ? "sim-seg sim-seg-metab" : "sim-seg",
         x: bx, y: yOf(acc + h), width: bw, height: Math.max(0.5, yOf(acc) - yOf(acc + h)),
-        fill: seg.color,
+        fill: col.systemColor, "fill-opacity": shadeOf(seg),
       });
       r.appendChild(svg("title", {}, segTitle(col, seg)));
       root.appendChild(r);
@@ -259,7 +268,7 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
       const r = svg("rect", {
         class: seg.dim ? "sim-seg sim-seg-metab" : "sim-seg",
         x: bx, y: yOf(acc), width: bw, height: Math.max(0.5, yOf(acc + h) - yOf(acc)),
-        fill: seg.color,
+        fill: col.systemColor, "fill-opacity": shadeOf(seg),
       });
       r.appendChild(svg("title", {}, segTitle(col, seg)));
       root.appendChild(r);

@@ -82,6 +82,7 @@ from data_generators.presentation import (  # noqa: E402
     KIND_TO_SIGN,
     PROJECTION_COLORS,
     RECEPTOR_CLASS_LABELS,
+    RECEPTOR_FAMILY_COLORS,
     RECEPTOR_FAMILY_LABELS,
     SIGN_COLORS,
     SIGN_LABELS,
@@ -1682,6 +1683,9 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # colour map. Object key order is the legend's family display order.
         "receptor_family_labels": {
             f: _t(label) for f, label in RECEPTOR_FAMILY_LABELS.items()},
+        # Family -> swatch colour (language-neutral), the transmitter's own colour
+        # wherever a view colours by transmitter rather than by drug effect.
+        "receptor_family_colors": dict(RECEPTOR_FAMILY_COLORS),
         "receptor_class_labels": {
             c: _t(label) for c, label in RECEPTOR_CLASS_LABELS.items()},
         "synaptic_labels": {

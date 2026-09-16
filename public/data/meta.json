@@ -141,6 +141,21 @@
     "sigma": "Sigma",
     "melatonergic": "Melatonergic"
   },
+  "receptor_family_colors": {
+    "adrenergic": "#ff9da7",
+    "cholinergic": "#edc948",
+    "dopaminergic": "#59a14f",
+    "gabaergic": "#4e79a7",
+    "glutamatergic": "#e15759",
+    "glycinergic": "#4e79a7",
+    "histaminergic": "#f0912e",
+    "opioidergic": "#c98a5e",
+    "serotonergic": "#76b7b2",
+    "cannabinoid": "#7fa86b",
+    "purinergic": "#6b9bd2",
+    "sigma": "#a89bb5",
+    "melatonergic": "#8d7be0"
+  },
   "receptor_class_labels": {
     "ionotropic": "Ionotropic (ligand-gated ion channel)",
     "metabotropic": "Metabotropic (GPCR)",

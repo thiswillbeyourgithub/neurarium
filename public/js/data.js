@@ -263,6 +263,9 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // Receptor legend maps (family heading, mechanism class, pre/post-synaptic
   // label). The per-receptor sign reuses signColors/signLabels above.
   const receptorFamilyLabels = localizeMap(metaRecord.receptor_family_labels);
+  // Family -> swatch colour, language-neutral: the transmitter's own colour for a
+  // view that colours by transmitter (the simulation's receptor bars).
+  const receptorFamilyColors = metaRecord.receptor_family_colors || {};
   const receptorClassLabels = localizeMap(metaRecord.receptor_class_labels);
   const synapticLabels = localizeMap(metaRecord.synaptic_labels);
   // Non-receptor drug-target presentation: type -> {en,fr} tag (localized) and
@@ -1394,6 +1397,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       signColors,
       signLabels,
       receptorFamilyLabels,
+      receptorFamilyColors,
       receptorClassLabels,
       synapticLabels,
       targetTypeLabels,

@@ -135,12 +135,11 @@ export function createSimulation({ body, data, deps, ui }) {
   const systemLabel = (system) => (system
     ? (meta.receptorFamilyLabels || {})[system] || system
     : t("sim.systemOther"));
-  /** A system's bar colour: the colour its projections already wear in the 3D scene,
-   *  so a serotonergic column reads the same here as the arrows do. */
-  const systemColor = (system) => {
-    const kind = (meta.systemFlowKinds || {})[system];
-    return (kind && (meta.projectionColors || {})[kind]) || null;
-  };
+  /** A system's bar colour: the transmitter's own colour (meta.receptorFamilyColors,
+   *  authored beside the arrow palette), so a serotonergic column reads the same here
+   *  as its pathways do in the 3D scene and glutamate stays the excitatory red. A
+   *  system with no entry returns null and the plot falls back to its neutral token. */
+  const systemColor = (system) => (meta.receptorFamilyColors || {})[system] || null;
   const targetName = (id) => {
     const tg = targetById.get(id);
     return tg ? tg.name : id;
@@ -555,10 +554,13 @@ export function createSimulation({ body, data, deps, ui }) {
         .filter(([, v]) => (positive ? v > 0 : v < 0))
         .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
       const sum = raw.reduce((s, [, v]) => s + Math.abs(v), 0) || 1;
-      return raw.map(([key, v]) => {
+      return raw.map(([key, v], i) => {
         const info = ligs.get(key) || {};
+        // `color` is the drug's own swatch, kept for the tooltip and the picked list;
+        // the bar itself is painted in its receptor's transmitter colour, so a stack of
+        // two drugs is told apart by `shade` (see buildRxPlot) rather than by hue.
         return { key, name: info.name || key, color: info.color || DRUG_COLORS[0],
-          dim: !!info.dim, frac: Math.abs(v) / sum, value: v };
+          shade: i, dim: !!info.dim, frac: Math.abs(v) / sum, value: v };
       });
     };
     rxCols = prof.rows.map((row) => {

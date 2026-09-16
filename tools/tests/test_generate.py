@@ -192,6 +192,21 @@ class MetaAndTranslationsTest(unittest.TestCase):
         meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
         self.assertIn("provenance_stats", meta)
 
+    def test_every_receptor_family_has_a_swatch_colour(self):
+        """The simulation paints a receptor bar in its transmitter's colour, reading
+        meta.receptor_family_colors, so a family present in the labels but missing
+        from the colours would draw a neutral grey column with no warning anywhere."""
+        meta = json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))
+        colors = meta["receptor_family_colors"]
+        self.assertEqual(set(colors), set(meta["receptor_family_labels"]))
+        for family, value in colors.items():
+            self.assertRegex(value, r"^#[0-9a-f]{6}$", family)
+        # The transmitter colours are the ones the arrows already wear, which is the
+        # whole point of the map: glutamate reads excitatory red, GABA inhibitory blue.
+        self.assertEqual(colors["glutamatergic"], meta["projection_colors"]["excitatory"])
+        self.assertEqual(colors["gabaergic"], meta["projection_colors"]["inhibitory"])
+        self.assertEqual(colors["serotonergic"], meta["projection_colors"]["serotonergic"])
+
     def test_sided_name_keeps_a_proper_noun_capitalized(self):
         """Prefixing "Right"/"Left" lowers only the base name's FIRST letter. It used
         to lowercase the whole string, which ate a proper noun sitting mid-name
