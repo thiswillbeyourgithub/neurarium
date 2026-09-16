@@ -661,13 +661,14 @@ fixed Stahl list.
   `tools/fetch/fetch_pharmacokinetics.py` scans the Stahl page spans into `pk_worklist.json`, one LLM pass
   writes `pk_judged.json`, and `tools/sourcing/apply_pharmacokinetics.py` quote-gates + merges T½/metabolites
   into `drugs_data.jsonl` (idempotent, sole writer).
-- **Time-to-peak (Tmax, Wikipedia + Stahl).** A drug carries a `tmax` in the same `{hours, hours_max?}`
+- **Time-to-peak (Tmax, Wikipedia + Stahl + DailyMed).** A drug carries a `tmax` in the same `{hours, hours_max?}`
   shape (kind `drug_tmax`, source `tmax_sources`), chipped beside the T½ in the panel's **Timing**
   section. It is what turns the simulation's single assumed peak into a per-drug one
   (`js/sim-model.js` `tmaxHours`): the T½ says how the curve falls, this says how it rises, and a drug
-  with no sourced peak keeps `TMAX_HOURS`. Four-step pipeline, over both corpora since neither covers
-  the roster (see `docs/SOURCING_GAPS.md`): `tools/fetch/fetch_tmax.py` offers every peak-naming,
-  duration-carrying line of the drug's own Wikipedia article (#9) and Stahl monograph (#1) into
+  with no sourced peak keeps `TMAX_HOURS`. Four-step pipeline, over three corpora since none covers
+  the roster alone (see `docs/SOURCING_GAPS.md`): `tools/fetch/fetch_tmax.py` offers every peak-naming,
+  duration-carrying line of the drug's own Wikipedia article (#9), Stahl monograph (#1) and US
+  prescribing label (#14, the one that reaches the drugs the prose corpora never mention) into
   `tmax_worklist.json` with **no verdict of its own**, one LLM pass answers by candidate **index** into
   `tmax_judged.json`, `tools/sourcing/apply_tmax.py` gates it (drug offered; index resolves; the judged
   hours are one the quote actually states, re-parsed by code, so the model never supplies a number;
@@ -1161,6 +1162,15 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
 - **#13 PharmFreq** (`pharmfreq`, `page` = the HGNC gene) is the one corpus whose raw tables are
   **committed** (`tools/data/pharmfreq/`), so it declares `tsv_dir` and no `pages_dir` and its quote
   is gated by re-derivation rather than by a page lookup: see Drug metabolism, Population variability.
+- **#14 DailyMed** (`dailymed`, `page` = a label **set id**) is the US prescribing label (NLM Structured
+  Product Labels), and the only **primary regulatory** source here. It exists for the time-to-peak node
+  (`drug_tmax`): a label's section 12.3 states a Tmax for essentially every oral drug marketed in the US,
+  where the stored prose corpora state it for a third of the roster. `fetch_dailymed.py` picks ONE label
+  per drug (plain-oral forms preferred, since a modified-release product states a real Tmax for a
+  different product) and stores that label's pharmacokinetics sections as the author-side page, so the
+  normal verbatim-quote gate applies unchanged. A set id resolves to a public page
+  (`dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=<page>`). Its limit is jurisdictional: a drug never
+  marketed in the US has no SPL at all. Content is a US government work under no copyright restriction.
 
 **Descriptions** are not a node kind (not tallied). Drugs, structures and non-receptor targets carry
 **no baked description**: their panel fetches the **current Wikipedia lead** (CC BY-SA) at runtime via

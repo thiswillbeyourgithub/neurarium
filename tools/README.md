@@ -424,8 +424,15 @@ Screenshots).
   (`pk_judged.json`) into `drugs_data.jsonl`, quote-gating each value verbatim on its Stahl page and
   resolving a metabolite's `drug_id` by norm-name match (never self-link). Idempotent, sole writer of
   `half_life`/`metabolites`. See CLAUDE.md Drugs (Half-life + active metabolites).
+- `tools/fetch/fetch_dailymed.py` — stdlib, network, resumable. Corpus #14 fetcher: searches DailyMed
+  for each drug's US prescribing label, picks ONE (plain-oral forms preferred, since a modified-release
+  product states a real Tmax for a different product; the first whose pharmacokinetics section actually
+  names a peak wins), and stores `data_sources/dailymed/raw/<setid>.xml` +
+  `data_sources/dailymed/pages/<setid>.md` (the 12.3 / Clinical Pharmacology text only) plus the chosen
+  label per drug in `generated_cache/dailymed_labels.json`. States no claim: it only puts pages on disk
+  for `fetch_tmax.py` to read. See CLAUDE.md Source provenance (corpus #14).
 - `tools/fetch/fetch_tmax.py` — stdlib. Offers, per drug, every line of its own stored Wikipedia article
-  (#9) and Stahl monograph (#1) that names a PEAK and carries a duration, pre-parsed into every
+  (#9), Stahl monograph (#1) and DailyMed label (#14) that names a PEAK and carries a duration, pre-parsed into every
   `{hours, hours_max?}` it states, into `tools/generated_cache/tmax_worklist.json`. States no verdict of
   its own: the LLM pass answers only which candidate **index** is the drug's own oral time-to-peak. The
   drugbox is deliberately not read (no Tmax row; its `Onset of action` is clinical onset). Importable as

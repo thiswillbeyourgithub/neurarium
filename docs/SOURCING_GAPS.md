@@ -601,11 +601,13 @@ it would cost, and the verdict, so a later session does not re-survey it.
 
 ### Drug **time-to-peak (Tmax)**, and the wider PK the simulation would need (surveyed 2026-09-16)
 
-> **Step 1 shipped (3.87.0).** The prose pass below is done: `fetch_tmax.py` ->
-> `apply_tmax.py` -> `recheck_quotes.py` put a sourced Tmax on **90 drugs** (kind `drug_tmax`,
-> all 90 `verified`), and `js/sim-model.js` now rises to a drug's own peak where one exists.
-> The gap this section measures is therefore the **211 drugs still on the assumed 2 h**, which
-> is what the DailyMed corpus below would address.
+> **Shipped (3.87.0, extended in 3.88.0).** Both passes below are done: the prose one, then
+> DailyMed as corpus #14. `fetch_tmax.py` -> `apply_tmax.py` -> `recheck_quotes.py` put a
+> sourced Tmax on **136 drugs** (kind `drug_tmax`, all 136 `verified`), and `js/sim-model.js`
+> rises to a drug's own peak where one exists. The gap this section measures is therefore the
+> **165 drugs still on the assumed 2 h**, and it is now mostly a jurisdictional one: a drug
+> never marketed in the US has no SPL, and the label of one that is states a peak for a
+> formulation or population the claim cannot generalise from.
 
 Asked for the simulation tab, which gave **every** drug one assumed 2 h time-to-peak
 (`TMAX_HOURS` in `js/sim-model.js`), so a drug that peaks in 20 minutes and one that peaks in
@@ -617,9 +619,10 @@ sentence counts only when it names a peak AND carries a duration):
 
 | source | drugs reached | shape |
 | --- | --- | --- |
-| Wikipedia article prose (corpus #9, 295 stored) | **102** | "reaches peak levels after 1.0 to 2.5 hours" |
+| Wikipedia article prose (corpus #9, 295 stored) | **104** | "reaches peak levels after 1.0 to 2.5 hours" |
 | Stahl monograph span (corpus #1, 158 indexed) | 13 | mostly the newer monographs' PK bullets |
-| union of both | **111** (37%) | 4 state it twice, 190 drugs state it nowhere |
+| DailyMed label section 12.3 (corpus #14, 75 labels) | **67** | "reaching peak plasma concentrations in 1.5 hours" |
+| union of the three | **169** (56%) | 56 of them only the label states, 132 drugs state it nowhere |
 
 The Wikipedia **drugbox** is NOT the shortcut it looks like. It has no Tmax row at all (0 of
 295), and its `Onset of action` row is a *different fact*: of its 76 rows only **16** are
@@ -628,20 +631,29 @@ explicitly annotated as a peak ("1-2 hours (T max)"), the other 60 being clinica
 would silently publish onset as peak on 60 drugs, so a code extraction is worth only those 16
 and the real pass is prose.
 
-**Verdict: a Wikipedia prose pass reaches a third of the roster and no stored corpus reaches
-the rest.** It is the same four-step shape as every other pass here (worklist of candidate
-sentences -> one LLM pass answering by index -> quote-gated applier -> recheck), riding the
-existing `fetch_pharmacokinetics.py` machinery since it already scans for durations. Done: the
-fetcher offered 113 drugs / 171 candidate lines, the extraction claimed 92 (21 skipped as a
-metabolite's peak, a depot formulation, a subjective-effects time course, or a range the
-duration parser cannot express), and the Sonnet judge rejected 2 more (the dextroamphetamine
-sentence is about the mixed-salts product, the dimenhydrinate one gives its diphenhydramine
-moiety's peak), leaving 90. For the
-190 it cannot reach, the source to add would be **DailyMed** (the US SPL label archive: free,
-no key, machine-readable XML, and section 12.3 states Tmax for essentially every oral drug),
-as a new `pages_dir` corpus. Its limit is jurisdictional rather than technical: a roster drug
-never marketed in the US (alpidem, many EU-only agents) has no SPL, and the EMA's SmPC
-equivalent is PDF.
+**How it went, in two passes.** Both are the same four-step shape as every other pass here
+(worklist of candidate sentences -> one LLM pass answering by index -> quote-gated applier ->
+recheck), riding the existing `fetch_pharmacokinetics.py` machinery since it already scans for
+durations.
+
+*Pass 1, the stored prose (3.87.0).* The fetcher offered 113 drugs / 171 candidate lines, the
+extraction claimed 92 (21 skipped as a metabolite's peak, a depot formulation, a
+subjective-effects time course, or a range the duration parser cannot express), and the Sonnet
+judge rejected 2 more (the dextroamphetamine sentence is about the mixed-salts product, the
+dimenhydrinate one gives its diphenhydramine moiety's peak), leaving 90.
+
+*Pass 2, DailyMed as corpus #14 (3.88.0).* `fetch_dailymed.py` searched the 211 drugs without a
+Tmax and stored 75 labels (67 have no SPL at all, 66 have one whose PK section never names a
+peak, 4 are roster combos it skips). That offered 79 more drugs / 140 candidate lines; the
+extraction claimed 50 and the Sonnet judge rejected 4, all for the same reason and a useful one
+to record: a label states a peak **conditionally**, so the sentence that names a figure often
+names it for one tablet strength (donepezil 23 mg vs 10 mg), one population (midazolam's
+pediatric syrup study), one route (fentanyl's sublingual ABSTRAL) or one state (sumatriptan
+during an attack vs between them), and none of those is the drug's general Tmax. 46 landed,
+for 136 in total.
+
+**What is left is jurisdictional, not technical.** A roster drug never marketed in the US
+(alpidem, many EU-only agents) has no SPL, and the EMA's SmPC equivalent is PDF.
 
 **The rest of the PK list is a different story, and it is worth writing down why.** The
 simulation cannot report occupancy, only a relative engagement index, because occupancy is

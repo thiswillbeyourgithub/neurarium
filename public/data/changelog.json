@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.88.0",
+      "date": "2026-09-17",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The US prescribing labels join the sources (DailyMed, the American drug-label archive), read for one fact: how long after a dose a drug peaks. It reaches the drugs the encyclopedia and the textbook never mention, and its labels are public documents anyone can open at the link on the source pill.",
+          "commits": [
+            "67d6f17"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The time to peak is now sourced for 136 drugs instead of 90, so that many more see their simulated curve rise at their own pace rather than at the assumed two hours.",
+          "commits": [
+            "67d6f17"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Four label sentences were claimed and then rejected by a second model, each for the same reason: a label often gives a peak for one tablet strength, one age group, one route or one moment, and none of those is the drug's general answer.",
+          "commits": [
+            "67d6f17"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.87.0",
       "date": "2026-09-16",
       "entries": [

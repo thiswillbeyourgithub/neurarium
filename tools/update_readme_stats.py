@@ -83,6 +83,7 @@ CORPUS_DESC = {
     "wikipedia_fr":    ("Encyclopedia (French, article prose)", "Drug brand names (European / French)"),
     "gtopdb_ki":       ("Molecular pharmacology (IUPHAR/BPS database)", "Drug binding affinities (Ki) and direction"),
     "gtopdb_class":    ("Molecular pharmacology (IUPHAR/BPS database)", "Receptor & target mechanism class, receptor sign"),
+    "dailymed":        ("US prescribing labels (NLM SPL archive)", "Drug time-to-peak (Tmax)"),
 }
 
 # Per-node-kind display labels for the README table (English; the README is English).
