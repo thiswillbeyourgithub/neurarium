@@ -671,3 +671,19 @@ class ProjectionClaimGateTest(unittest.TestCase):
                                 kind="histaminergic")
         self.assertTrue(report.errors)
         self.assertIn("has no word test", out)
+
+
+    def test_the_gate_covers_an_enzyme_row_too(self):
+        """The same helper gates the metabolism tier (drug_enzyme_strength)."""
+        src = {"corpus": "kandel", "page": 1, "quote": "Cleared by CYP3A4.",
+               "provenance": "verified", "pipeline": "page_llm_judged"}
+        drug = {"id": "d", "name": "D", "enzymes": [{
+            "enzyme": "cyp3a4", "role": "substrate", "strength": "major",
+            "sources": [src],
+            "claims": {"strength": {"grade": "verified", "sources": [src]}}}]}
+        report = check_data.Report()
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            check_data.check_sources(report, self.META, [drug], [], [], [], [])
+        self.assertTrue(report.errors)
+        self.assertIn("does not name the strength", buf.getvalue())

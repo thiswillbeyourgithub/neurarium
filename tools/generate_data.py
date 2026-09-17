@@ -232,6 +232,7 @@ from data_generators.quotes.uncertainty import (  # noqa: E402
     apply_projection_uncertainty,
 )
 from data_generators.quotes.attestation import (  # noqa: E402
+    apply_enzyme_strength_claims,
     apply_projection_claims,
 )
 
@@ -1616,6 +1617,10 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # derivation (see quotes/contradictions.py): a corpus denying what another states is
     # the one doubt this dataset cannot resolve, so both ship and the row says so.
     apply_enzyme_uncertainty(drugs)
+    # Split the metabolism row's compound claim the way the pathways' one is split: the
+    # CYP quote gate only ever checked that the quote names the isoform, so the strength
+    # tier (which the interaction reading leans on) rode a check nothing had given it.
+    apply_enzyme_strength_claims(drugs)
     # A hand-curated formed_by row whose (drug, metabolite) key matched nothing: the
     # metabolite was renamed or dropped by an applier re-run, so the node silently
     # vanished. Raise rather than publish a quieter dataset than the author wrote.

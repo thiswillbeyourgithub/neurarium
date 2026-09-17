@@ -80,8 +80,27 @@ SIGN_WORDS: dict[str, str] = {
     "inhibitory": r"inhibit",                        # inhibitory, inhibition, inhibits
 }
 
+# The metabolism twin of the two tables above. A drug's enzyme row states two things at
+# once as well: WHICH isoform clears the drug (or is modulated by it) and HOW MUCH of the
+# job it does, and the CYP applier's quote gate only ever checked the first ("the quote
+# names the isoform the row claims"). So "major substrate of CYP3A4" and "metabolized by
+# CYP3A4" both shipped a green check on the tier, though only one of them states it, and
+# the tier is what the interaction rows are read through (a major substrate meeting a
+# strong inhibitor is the pair that matters). Keyed by the ``ENZYME_STRENGTHS`` value.
+ENZYME_STRENGTH_WORDS: dict[str, str] = {
+    "major": r"\bmajor|\bprimar(?:y|ily)|\bprincipal",
+    "minor": r"\bminor",
+    # "potent" is the word the prose overwhelmingly uses where the regulatory tables say
+    # "strong"; the other two tiers have no such synonym in the corpora.
+    "strong": r"\bstrong|\bpotent",
+    "moderate": r"\bmoderate",
+    "weak": r"\bweak",
+}
+
 _TRANSMITTER_RE = {k: re.compile(v, re.IGNORECASE) for k, v in TRANSMITTER_WORDS.items()}
 _SIGN_RE = {k: re.compile(v, re.IGNORECASE) for k, v in SIGN_WORDS.items()}
+_STRENGTH_RE = {k: re.compile(v, re.IGNORECASE)
+                for k, v in ENZYME_STRENGTH_WORDS.items()}
 
 
 def _claim(sources: list[dict[str, Any]], pattern: re.Pattern) -> dict[str, Any]:
@@ -152,9 +171,10 @@ def pattern_for(claim: str, value: str) -> re.Pattern | None:
     Parameters
     ----------
     claim
-        ``"transmitter"`` or ``"sign"``, the key under a projection's ``claims``.
+        The key under a node's ``claims``: ``"transmitter"`` / ``"sign"`` on a
+        projection, ``"strength"`` on a drug's enzyme row.
     value
-        The claimed value: the English transmitter name, or the sign.
+        The claimed value: the English transmitter name, the sign, or the tier.
 
     Returns
     -------
@@ -163,5 +183,36 @@ def pattern_for(claim: str, value: str) -> re.Pattern | None:
         modulatory "sign", say), which is the caller's cue that there is nothing to
         attest rather than something that failed to attest.
     """
-    table = {"transmitter": _TRANSMITTER_RE, "sign": _SIGN_RE}.get(claim)
+    table = {"transmitter": _TRANSMITTER_RE, "sign": _SIGN_RE,
+             "strength": _STRENGTH_RE}.get(claim)
     return table.get(value) if table else None
+
+
+def apply_enzyme_strength_claims(drugs: list[dict[str, Any]]) -> None:
+    """Attach each metabolism row's strength claim, in place.
+
+    The metabolism twin of :func:`apply_projection_claims`, and the same shape of fix: a
+    row with no tier makes no claim and gets no node (like a modulatory pathway's absent
+    sign), while a row that states one is graded by whether a quote it already cites uses
+    that tier's word.
+
+    Its known over-reach is the mirror-image of the projection one and worth naming: a
+    single sentence often lists several isoforms at different tiers ("CYP1A2, CYP2D6;
+    minor: CYP2C19, CYP3A4"), and the word test cannot tell which isoform a tier word is
+    attached to, so a row cited on such a sentence can attest off its neighbour's word.
+    The bound is the same, too: it can only ever hand the sub-claim the grade the enzyme
+    row already carried.
+    """
+    for drug in drugs:
+        for row in drug.get("enzymes") or []:
+            strength = row.get("strength")
+            if not strength:
+                continue
+            pattern = _STRENGTH_RE.get(strength)
+            if pattern is None:
+                raise KeyError(
+                    f"drug {drug.get('id')!r} enzyme row {row.get('enzyme')!r} claims "
+                    f"strength {strength!r}, which has no ENZYME_STRENGTH_WORDS entry. "
+                    f"Add the word(s) a source sentence would state that tier by, or it "
+                    f"can never be attested.")
+            row["claims"] = {"strength": _claim(row.get("sources") or [], pattern)}

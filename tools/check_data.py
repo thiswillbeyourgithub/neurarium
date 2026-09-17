@@ -118,7 +118,8 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # tally column, never a new quote to gate.
 NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "drug_brands",
               "drug_categories",
-              "drug_half_life", "drug_tmax", "drug_enzymes", "enzyme_variability",
+              "drug_half_life", "drug_tmax", "drug_enzymes", "drug_enzyme_strength",
+              "enzyme_variability",
               "drug_metabolites",
               "drug_metabolite_enzyme", "drug_metabolite_bindings",
               "projections", "projection_transmitter", "projection_sign",
@@ -1196,6 +1197,37 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
             report.warn(f"{ctx}: quote is very short ({quote!r}); it matched "
                         f"but may be an incidental substring")
 
+    def check_claims(ctx, node, claimed):
+        """Gate a node's per-claim split (``claims``, see quotes/attestation.py).
+
+        A sub-claim's sources are a SUBSET of the owner's own, picked by a word test, so
+        the verbatim gate would already cover the text; what is checked here is the
+        SELECTION: every quote a sub-claim cites must really name what it is cited for,
+        and a sub-claim citing nothing must carry the base grade rather than a borrowed
+        check. Re-derived from the very vocabulary the generator graded it with, so a
+        hand-edited or stale ``claims`` block fails instead of shipping.
+
+        ``claimed`` maps each claim name to the value the node states for it (the
+        transmitter, the sign, the strength tier), which is what the word test is run
+        for.
+        """
+        for claim, entry in (node.get("claims") or {}).items():
+            srcs = entry.get("sources") or []
+            for i, src in enumerate(srcs):
+                where = f"{ctx} claims[{claim}] sources[{i}]"
+                check_one(where, src)
+                pattern = claim_pattern(claim, claimed.get(claim) or "")
+                if pattern is None:
+                    report.error(f"{where}: {claim} {claimed.get(claim)!r} has no word "
+                                 f"test, so nothing could have attested it")
+                elif not pattern.search(src.get("quote") or ""):
+                    report.error(f"{where}: the quote does not name the {claim} it is "
+                                 f"cited for ({claimed.get(claim)!r})")
+            if not srcs and entry.get("grade") != CLAIM_BASE_GRADE:
+                report.error(f"{ctx} claims[{claim}]: grade {entry.get('grade')!r} with "
+                             f"no source (an unattested sub-claim is "
+                             f"{CLAIM_BASE_GRADE!r})")
+
     def check_uncertainty(what, node):
         """Gate the "uncertain" badge's bullets on any node that carries them.
 
@@ -1273,6 +1305,9 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
             # The denial quote of a contradicted row is gated exactly like the claim it
             # doubts: both sides of a corpus disagreement earn their grade the same way.
             check_uncertainty(f"drug {did} enzyme {e.get('enzyme')} ({e.get('role')})", e)
+            # HOW MUCH of the clearing the row claims: its own node, so its own gate.
+            check_claims(f"drug {did} enzyme {e.get('enzyme')}", e,
+                         {"strength": e.get("strength")})
         for m in drug.get("metabolites", []) or []:
             mid = f"drug {did} metabolite {m.get('name')}"
             for i, src in enumerate(m.get("sources", []) or []):
@@ -1299,31 +1334,11 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
         pid = f"{proj.get('from')}->{proj.get('to')}"
         for i, src in enumerate(proj.get("sources", []) or []):
             check_one(f"projection {pid} sources[{i}]", src)
-        # The per-claim split (transmitter / sign). Its sources are a SUBSET of the
-        # pathway's own, picked by a word test, so the verbatim gate above would already
-        # cover the text; what is checked here is the SELECTION: every quote a sub-claim
-        # cites must really name what it is cited for, and a sub-claim citing nothing must
-        # carry the base grade rather than a borrowed check. Re-derived from the same
-        # closed vocabulary the generator graded it with (quotes/attestation.py), so a
-        # hand-edited or stale claims block fails instead of shipping.
-        claimed = {"transmitter": proj.get("neurotransmitter"),
-                   "sign": (meta.get("kind_signs") or {}).get(proj.get("kind"))}
-        for claim, entry in (proj.get("claims") or {}).items():
-            srcs = entry.get("sources") or []
-            for i, src in enumerate(srcs):
-                ctx = f"projection {pid} claims[{claim}] sources[{i}]"
-                check_one(ctx, src)
-                pattern = claim_pattern(claim, claimed.get(claim) or "")
-                if pattern is None:
-                    report.error(f"{ctx}: {claim} {claimed.get(claim)!r} has no word "
-                                 f"test, so nothing could have attested it")
-                elif not pattern.search(src.get("quote") or ""):
-                    report.error(f"{ctx}: the quote does not name the {claim} it is "
-                                 f"cited for ({claimed.get(claim)!r})")
-            if not srcs and entry.get("grade") != CLAIM_BASE_GRADE:
-                report.error(f"projection {pid} claims[{claim}]: grade "
-                             f"{entry.get('grade')!r} with no source (an unattested "
-                             f"sub-claim is {CLAIM_BASE_GRADE!r})")
+        # The per-claim split (transmitter / sign): gated by the shared helper above.
+        check_claims(f"projection {pid}", proj, {
+            "transmitter": proj.get("neurotransmitter"),
+            "sign": (meta.get("kind_signs") or {}).get(proj.get("kind")),
+        })
         # A pathway the book only states as a blanket sweep wears the same orange badge
         # a binding does, and its bullets are gated the same way.
         check_uncertainty(f"projection {pid}", proj)

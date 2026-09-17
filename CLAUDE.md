@@ -106,6 +106,9 @@ in `meta.provenance_stats.by_kind`):
   curve as the T½ above, separately sourced and separately missing, so a separate kind)
 - drug metabolism role -> a drug's `enzymes[]` (`{enzyme, role, strength?}`) -> `drug_enzymes`
   (one node per (enzyme, role) pair; pharmacokinetics, so it has no anatomy, see Drug metabolism)
+- drug metabolism **strength tier** -> that row's `claims.strength` -> `drug_enzyme_strength`
+  (only on a row that states a tier; the CYP quote gate checks the isoform is named, never the
+  tier, so it is graded by the same word test the pathway claims use, `quotes/attestation.py`)
 - enzyme population variability -> an enzyme's `variability` -> `enzyme_variability` (ONE node
   per isoform for the whole profile, not one per population group, for the same reason a density
   profile is one node: a single published aggregation ranking the groups against each other)

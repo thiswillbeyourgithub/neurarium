@@ -1137,6 +1137,13 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # as ``uncertain`` however strong its own quote is (quotes/contradictions.py).
     enzyme_grades = [(_strongest_grade(e.get("sources")), bool(e.get("uncertainty")))
                      for d in drugs for e in d.get("enzymes", [])]
+    # HOW MUCH of the clearing that isoform does (major/minor, strong/weak), split out of
+    # the row for the same reason a pathway's transmitter is (quotes/attestation.py): the
+    # CYP quote gate checks the isoform is named, never the tier. A row stating no tier
+    # makes no claim and contributes no node.
+    enzyme_strength_grades = [entry["grade"] for d in drugs
+                              for e in d.get("enzymes", [])
+                              if (entry := (e.get("claims") or {}).get("strength"))]
     # Active-metabolite identity nodes ("<name> is an active metabolite of <drug>"),
     # one per authored metabolite across all drugs, graded by that metabolite's own
     # sources (the Stahl line naming it). The metabolite's optional T½ is an extra
@@ -1305,6 +1312,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_half_life": tally(half_life_grades),
         "drug_tmax": tally(tmax_grades),
         "drug_enzymes": tally(enzyme_grades),
+        "drug_enzyme_strength": tally(enzyme_strength_grades),
         "drug_metabolites": tally(metabolite_grades),
         "drug_metabolite_enzyme": tally(metabolite_enzyme_grades),
         "drug_metabolite_bindings": tally(metabolite_binding_grades),

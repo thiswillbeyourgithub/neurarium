@@ -3807,6 +3807,15 @@
         "nosource": 0,
         "missing": 0
       },
+      "drug_enzyme_strength": {
+        "total": 147,
+        "verified": 87,
+        "uncertain": 0,
+        "sourced": 0,
+        "llm": 60,
+        "nosource": 0,
+        "missing": 60
+      },
       "drug_metabolites": {
         "total": 40,
         "verified": 39,
@@ -3989,15 +3998,15 @@
       }
     },
     "nodes": {
-      "total": 6688,
-      "verified": 5361,
+      "total": 6835,
+      "verified": 5448,
       "uncertain": 250,
       "sourced": 0,
-      "llm": 378,
+      "llm": 438,
       "nosource": 699,
-      "missing": 1077,
-      "backed": 5611,
-      "pct_backed": 84
+      "missing": 1137,
+      "backed": 5698,
+      "pct_backed": 83
     },
     "ki_coverage": {
       "bindings_total": 1844,

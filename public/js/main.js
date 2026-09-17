@@ -3066,6 +3066,14 @@ function createInfoPanel(data, sourcingModal) {
       text.appendChild(el("span", "bind-action", ` ${parts.join(" · ")}`));
     }
     li.appendChild(text);
+    // How MUCH of the clearing this isoform does is its own graded node (the CYP quote
+    // gate checks the isoform is named, never the tier), so the tier carries its own
+    // pill beside the row's rather than sharing it. See quotes/attestation.py.
+    const strength = (row.claims || {}).strength;
+    if (row.strengthLabel) {
+      li.appendChild(makeProvenancePill((strength && strength.grade) || "llm",
+        sourcesTip(strength && strength.sources)));
+    }
     // Through the shared node pill, so a metabolism row badges like every other node:
     // its quote in the tooltip, and the orange "another corpus denies this" lead when
     // the row carries one (quotes/contradictions.py).
@@ -5543,6 +5551,7 @@ const KIND_LABELS = {
   drug_half_life: "about.kindDrugHalfLife",
   drug_tmax: "about.kindDrugTmax",
   drug_enzymes: "about.kindDrugEnzymes",
+  drug_enzyme_strength: "about.kindDrugEnzymeStrength",
   enzyme_variability: "about.kindEnzymeVariability",
   drug_metabolites: "about.kindDrugMetabolites",
   drug_metabolite_enzyme: "about.kindDrugMetaboliteEnzyme",
@@ -5901,6 +5910,15 @@ function buildKindExample(kind, data, nav) {
         || focusableDrugs.find((x) => (x.enzymes || []).length);
       const e = d && (d.enzymes || [])[0];
       return e ? line(d.name, `${e.label}: ${e.roleLabel}`, () => nav.drug(d)) : null;
+    }
+    case "drug_enzyme_strength": {
+      // The tier that row states, which is the part the CYP quote gate never checked:
+      // e.g. Fluoxetine "CYP2D6: strong".
+      const d = pick(focusableDrugs,
+        (x) => (x.enzymes || []).some((e2) => e2.strengthLabel));
+      const e = d && (d.enzymes || []).find((e2) => e2.strengthLabel);
+      return e ? line(d.name, `${e.label}: ${e.strengthLabel}`,
+        () => nav.drug(d)) : null;
     }
     case "drug_metabolites": {
       const d = pick(focusableDrugs, (x) => x.id === "fluoxetine" && (x.metabolites || []).length)

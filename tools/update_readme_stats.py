@@ -97,6 +97,7 @@ KIND_LABELS = {
     "drug_half_life": "Drug half-life (T½)",
     "drug_tmax": "Drug time-to-peak (Tmax)",
     "drug_enzymes": "Drug metabolising enzymes",
+    "drug_enzyme_strength": "Drug metabolism strength tier",
     "drug_metabolites": "Drug active metabolites",
     "drug_metabolite_enzyme": "Metabolite-forming enzymes",
     "drug_metabolite_bindings": "Drug metabolite bindings",

@@ -445,7 +445,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // Reasons the quote does not actually state THIS pathway (the orange "uncertain"
     // badge a blanket sweep sentence earns, derived in quotes/uncertainty.py). Same
     // bullet shape a drug binding carries; always an array so the panel can test
-    // `.length` without a guard. The bullets' sources stay raw, like `p.sources`.
+    // `.length` without a guard. The bullets' sources stay raw, like `p.sources`, and
+    // so do those of its per-claim split (`p.claims`, transmitter + sign): every
+    // pathway source is read raw here, so normalizing one of them would be the odd
+    // one out.
     p.uncertainty = p.uncertainty || [];
   }
 
@@ -645,6 +648,18 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // model reading a book page.
       pipeline: s.pipeline || null,
     }));
+  // The per-claim split (tools/data_generators/quotes/attestation.py): a node that
+  // asserts several things at once carries one graded entry per part, so the part a
+  // quote does not name reads `llm` instead of borrowing the node's grade. Normalized
+  // like any other source list, since each entry's pill opens the same tooltip.
+  const mapClaims = (claims) => {
+    if (!claims) return null;
+    const out = {};
+    for (const [name, entry] of Object.entries(claims)) {
+      out[name] = { grade: entry.grade || "llm", sources: mapSources(entry.sources) };
+    }
+    return out;
+  };
   // Reasons the quote does not settle the claim (the orange "uncertain" badge; derived
   // or curated in tools/data_generators/quotes/). Each bullet is a reason `kind` + slot
   // `args` + its own source, or `absence` when the point IS that the corpus never says
@@ -806,6 +821,8 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
         // orange and its tooltip leads with the denial, then shows this row's own
         // quote. Empty for all but the handful of contradicted rows.
         uncertainty: mapUncertainty(e.uncertainty),
+        // How much of the clearing this isoform does is its own graded claim.
+        claims: mapClaims(e.claims),
       };
     });
     // Derived, never stored (like pkInteractionsOf below): the isoforms this drug

@@ -127,6 +127,7 @@ class ReferentialIntegrityTest(unittest.TestCase):
         cls.structures = _load_jsonl(DATA_DIR / "structures.jsonl")
         cls.receptors = _load_jsonl(DATA_DIR / "receptors.jsonl")
         cls.projections = _load_jsonl(DATA_DIR / "projections.jsonl")
+        cls.drugs = _load_jsonl(DATA_DIR / "drugs.jsonl")
         cls.struct_ids = {s["id"] for s in cls.structures}
         # A receptor location is a *base* id (no _L/_R hemisphere suffix);
         # accept both the exact id and the base form.
@@ -810,6 +811,7 @@ class ProjectionClaimTest(unittest.TestCase):
         from data_generators.quotes import attestation
         cls.mod = attestation
         cls.projections = _load_jsonl(DATA_DIR / "projections.jsonl")
+        cls.drugs = _load_jsonl(DATA_DIR / "drugs.jsonl")
 
     def _proj(self, kind, nt, quote):
         return {"from": "a_R", "to": "b_R", "kind": kind, "neurotransmitter": nt,
@@ -847,6 +849,28 @@ class ProjectionClaimTest(unittest.TestCase):
         with self.assertRaises(KeyError):
             self.mod.apply_projection_claims([p])
 
+    def test_an_enzyme_row_states_its_tier_or_makes_no_claim(self):
+        """The metabolism twin: the CYP gate checks the isoform, never the tier."""
+        def row(strength, quote):
+            return {"id": "d", "enzymes": [{"enzyme": "cyp3a4", "role": "substrate",
+                    **({"strength": strength} if strength else {}),
+                    "sources": [{"corpus": "stahl", "page": 1, "quote": quote,
+                                 "provenance": "verified"}]}]}
+        named = row("major", "Fluoxetine is a major substrate of CYP3A4.")
+        self.mod.apply_enzyme_strength_claims([named])
+        self.assertEqual(named["enzymes"][0]["claims"]["strength"]["grade"], "verified")
+
+        silent = row("major", "Fluoxetine is metabolized by CYP3A4.")
+        self.mod.apply_enzyme_strength_claims([silent])
+        entry = silent["enzymes"][0]["claims"]["strength"]
+        self.assertEqual(entry["grade"], self.mod.BASE_GRADE)
+        self.assertNotIn("sources", entry)
+
+        # A row with no tier asserts nothing about it, so it gets no node at all.
+        tierless = row(None, "Fluoxetine is metabolized by CYP3A4.")
+        self.mod.apply_enzyme_strength_claims([tierless])
+        self.assertNotIn("claims", tierless["enzymes"][0])
+
     def test_the_emitted_data_carries_one_claim_per_pathway(self):
         signed = {"excitatory", "inhibitory"}
         for p in self.projections:
@@ -858,3 +882,12 @@ class ProjectionClaimTest(unittest.TestCase):
                 if not entry.get("sources"):
                     self.assertEqual(entry["grade"], self.mod.BASE_GRADE,
                                      f"{p['from']}->{p['to']} {name} graded with no source")
+
+    def test_the_emitted_enzyme_rows_carry_a_claim_exactly_when_they_state_a_tier(self):
+        for d in self.drugs:
+            for e in d.get("enzymes") or []:
+                entry = (e.get("claims") or {}).get("strength")
+                self.assertEqual(bool(entry), bool(e.get("strength")),
+                                 f"{d['id']} {e['enzyme']} tier vs claim")
+                if entry and not entry.get("sources"):
+                    self.assertEqual(entry["grade"], self.mod.BASE_GRADE)

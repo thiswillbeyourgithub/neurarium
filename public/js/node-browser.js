@@ -49,6 +49,7 @@ const KIND_ORDER = [
   "drug_half_life",
   "drug_tmax",
   "drug_enzymes",
+  "drug_enzyme_strength",
   "drug_metabolites",
   "drug_metabolite_enzyme",
   "drug_metabolite_bindings",
@@ -296,6 +297,13 @@ export function collectNodes(data, deps, opts = {}) {
     }
     for (const e of d.enzymes || []) {
       push("drug_enzymes", d.name, `${e.label}: ${e.roleLabel}`, e.provenance, go, e);
+      // HOW MUCH of the clearing that isoform does: its own node, since the CYP quote
+      // gate only ever checked that the quote names the isoform, never the tier.
+      const strength = (e.claims || {}).strength;
+      if (e.strengthLabel) {
+        push("drug_enzyme_strength", d.name, `${e.label}: ${e.strengthLabel}`,
+          (strength && strength.grade) || "llm", go, strength);
+      }
     }
     for (const m of d.metabolites || []) {
       const mKey = (m.name || "").toLowerCase();
