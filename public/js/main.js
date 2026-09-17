@@ -8825,22 +8825,19 @@ async function main() {
     tour.start();
   });
   // Auto-start waits for the assemble intro to settle, and declines to stack on an
-  // open Sources popup: it no longer opens on launch, but a visitor could open it
-  // manually during the intro, so if it is up we defer and the observer retries the
-  // moment it closes. (Mid-tour the observer is a no-op: maybeAutoStart/start bail
-  // when the tour is already active, so the sourcing open / close steps can't restart it.)
-  // Two gates, not one. `sceneSettled` means the launch is over however it ended,
-  // which is all "What's new" needs; `introCompleted` means the assemble reached its
-  // natural end, which the tour additionally requires so it never starts over a
-  // user's own action. Conflating them cost the changelog every load where the
-  // visitor grabbed the spread slider or followed a deep link (both cancel the
-  // intro), which is a load like any other as far as release notes are concerned.
+  // open popup (Sources, or the "What's new" notes that now open at launch): the
+  // Sources one no longer opens on launch, but a visitor could open it manually
+  // during the intro, so if either is up we defer and the observer retries the moment
+  // it closes. (Mid-tour the observer is a no-op: maybeAutoStart/start bail when the
+  // tour is already active, so the sourcing open / close steps can't restart it.)
+  // Two gates, not one. `sceneSettled` means the launch is over however it ended;
+  // `introCompleted` means the assemble reached its natural end, which the tour
+  // requires so it never starts over a user's own action.
   let sceneSettled = false;
   let introCompleted = false;
-  let changelogTried = false;    // one-shot: it decides for itself, but only once
   let tourForcedStarted = false; // one-shot guard for the ?tour=1 forced start
-  const tourGateEl = tourEl("sourcing-modal");
-  const tourGateOpen = () => tourGateEl && !tourGateEl.hidden;
+  const tourGateEls = ["sourcing-modal", "changelog-modal"].map(tourEl).filter(Boolean);
+  const tourGateOpen = () => tourGateEls.some((el) => !el.hidden);
   const tryAutoTour = () => {
     if (!sceneSettled || tourGateOpen()) return;
     if (tourForced) {
@@ -8849,14 +8846,6 @@ async function main() {
     } else if (introCompleted) {
       tour.maybeAutoStart(tourEligible());
     }
-    // "What's new" rides the same gate, minus the natural-finish requirement, and is
-    // never stacked on the tour (a first visitor gets the tour and is silently marked
-    // up to date, so in practice only a returning visitor sees it). Fire-and-forget:
-    // it decides for itself whether there is anything to show.
-    if (!tour.active && !changelogTried) {
-      changelogTried = true;
-      changelog.showIfUnseen();
-    }
   };
   /** The launch is over; `completed` says the assemble reached its natural end. */
   const settleScene = (completed) => {
@@ -8864,10 +8853,25 @@ async function main() {
     if (completed) introCompleted = true;
     tryAutoTour();
   };
-  if (tourGateEl) {
+  for (const el of tourGateEls) {
     new MutationObserver(tryAutoTour)
-      .observe(tourGateEl, { attributes: true, attributeFilter: ["hidden"] });
+      .observe(el, { attributes: true, attributeFilter: ["hidden"] });
   }
+  /**
+   * "What's new" at LAUNCH, not at settle: release notes are about the build, not
+   * about the scene, so a returning visitor reads them the moment they click through
+   * the overlay rather than several seconds later once the assemble has finished.
+   * (It used to ride the tour's settle gate, which is what made it wait, and which
+   * also lost it entirely on a load where the intro was cancelled.) Fire-and-forget
+   * and one-shot: it decides for itself whether there is anything to show, and the
+   * tour gates on its popup above so the two never stack.
+   */
+  let changelogTried = false;
+  const showChangelogOnce = () => {
+    if (changelogTried) return;
+    changelogTried = true;
+    changelog.showIfUnseen();
+  };
 
   // Auto-play the "assemble" intro on a plain load. Grabbing the explode slider
   // cancels it so a manual drag wins. Skipped when ?explode= is pinned (deep
@@ -8925,10 +8929,15 @@ async function main() {
   // on the click, the assemble intro playing as the overlay fades.
   const introParams = new URLSearchParams(window.location.search);
   if (introParams.get("ui") === "0" || introParams.has("explode")) {
+    // An automated view (headless capture, deep-link screenshot) is not a visit, so it
+    // launches with no release notes over the shot.
     loading.done();
     beginScene();
   } else {
-    loading.waitForStart().then(beginScene);
+    loading.waitForStart().then(() => {
+      beginScene();
+      showChangelogOnce();
+    });
   }
 
   // ---- Deep links: the URL fragment IS the UI state ------------------------------

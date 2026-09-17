@@ -1268,7 +1268,10 @@ version doubles as a copy-paste check against the directory) then `## <Category>
 string). `docs/` is not web-exposed, so `generate_data.py` emits them newest-first to
 `public/data/changelog.json`.
 `js/changelog.js` `createChangelog()` fetches that **only when its popup opens**, and
-`showIfUnseen()` shows every release after the version in `localStorage`
+`showIfUnseen()` fires at **launch** (the "Start exploring" click), not once the assemble
+intro settles: the notes are about the build, not the scene. The tour therefore gates on
+that popup the way it gates on the Sources one, so the two never stack. It shows every
+release after the version in `localStorage`
 `neurarium.changelogSeen` (a first-ever visitor is silently marked current: they get the
 tour instead). What it records there is the newest release **the notes carry**, never the
 running build, and a failed fetch records nothing: `changelog.json` and `version.js` are
