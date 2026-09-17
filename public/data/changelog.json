@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.91.0",
+      "date": "2026-09-17",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Nearly every pathway in the brain is drawn on both sides, but the books describe a tract once: the mirrored copy is our reading of the anatomy, not something any source states. The Projections section now says so at the top, as a single node with a red \"no source\" badge, rather than leaving the assumption unspoken behind some ninety arrows.",
+          "commits": [
+            "625a0c9"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.90.0",
       "date": "2026-09-17",
       "entries": [
