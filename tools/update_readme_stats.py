@@ -101,6 +101,8 @@ KIND_LABELS = {
     "drug_metabolite_enzyme": "Metabolite-forming enzymes",
     "drug_metabolite_bindings": "Drug metabolite bindings",
     "projections": "Neuron pathways",
+    "projection_transmitter": "Pathway transmitter",
+    "projection_sign": "Pathway sign (excit./inhib.)",
     "circuits": "Functional circuits",
     "projection_groups": "Projection groups",
     "receptors": "Receptor system/family",
@@ -108,9 +110,12 @@ KIND_LABELS = {
     "receptor_sign": "Receptor sign (excit./inhib.)",
     "receptor_synaptic": "Receptor pre/postsynaptic site",
     "receptor_locations": "Receptor expression regions",
+    "receptor_density": "Receptor relative amount per region",
     "targets": "Target classifications",
     "target_polarity": "Target tone polarity",
     "target_locations": "Target expression regions",
+    "target_density": "Target relative amount per region",
+    "enzyme_variability": "Enzyme population variability",
     "structures": "Brain-region anatomy",
     "addons": "Panel annotations",
     "references": "Wikipedia reference links",
@@ -177,11 +182,18 @@ def render_block(stats: dict) -> str:
     # displayed % reads top-to-bottom monotonically even when two rows round to the
     # same figure); ties break by the larger denominator, then the KIND_LABELS order
     # for a stable, deterministic chart.
+    # Driven by the DATA's kinds, not by KIND_LABELS: iterating the label table instead
+    # made an unlabelled kind vanish from the chart silently (the headline still counted
+    # its nodes, so the bars quietly stopped adding up to it), which is exactly the
+    # failure a new node kind produces. An unknown kind title-cases its key, so the worst
+    # a missing label costs now is an ugly row, never an absent one.
     rows = []
-    for order, (kind, label) in enumerate(KIND_LABELS.items()):
-        c = stats["by_kind"].get(kind)
+    order_of = {kind: i for i, kind in enumerate(KIND_LABELS)}
+    for kind, c in stats["by_kind"].items():
         if not c or not c["total"]:
             continue
+        label = KIND_LABELS.get(kind) or kind.replace("_", " ").capitalize()
+        order = order_of.get(kind, len(order_of))
         # ``uncertain`` is backed: the claim rests on a quote-checked document, the
         # badge only flags that the sentence does not attribute it (see
         # tools/data_generators/quotes/uncertainty.py).

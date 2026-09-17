@@ -50,6 +50,29 @@ class ChartRenderTest(unittest.TestCase):
             self.assertEqual(self.block.count(f"{label}  "), 1,
                              f"kind {kind!r} ({label!r}) missing/duplicated in chart")
 
+    def test_every_EMITTED_kind_has_a_row(self):
+        """One row per kind the DATA carries, labelled or not.
+
+        The test above could only ever check the label table against itself, which is
+        how three emitted kinds (both density profiles + the enzyme variability) went
+        missing from the chart unnoticed: the renderer walked the labels, so a kind with
+        no entry was silently dropped while the headline kept counting its nodes. The
+        bars then no longer added up to the figure above them.
+        """
+        emitted = [k for k, c in self.stats["by_kind"].items() if c and c["total"]]
+        n_rows = sum(1 for line in self.block.splitlines() if "█" in line or "░" in line)
+        self.assertEqual(n_rows, len(emitted),
+                         f"{len(emitted)} emitted kind(s) but {n_rows} chart row(s): "
+                         f"a kind is missing from (or duplicated in) the chart")
+
+    def test_an_unlabelled_kind_titlecases_rather_than_vanishing(self):
+        """A brand-new node kind renders as an ugly row, never as no row at all."""
+        stats = {"nodes": {"total": 4, "backed": 2, "pct_backed": 50},
+                 "by_kind": {"future_node_kind": {
+                     "total": 4, "verified": 2, "uncertain": 0, "sourced": 0,
+                     "llm": 0, "nosource": 2, "missing": 2}}}
+        self.assertIn("Future node kind", _urs.render_block(stats))
+
 
 class UncertainCountsAsBackedTest(unittest.TestCase):
     """An ``uncertain`` node is backed: the badge doubts the *attribution* of a
