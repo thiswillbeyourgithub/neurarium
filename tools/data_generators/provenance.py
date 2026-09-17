@@ -1186,6 +1186,19 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # only as a blanket sweep buckets as ``uncertain`` however strong its quote is.
     projection_grades = [(_strongest_grade(p.get("sources")), bool(p.get("uncertainty")))
                          for p in projections]
+    # The two sub-claims split out of that same arrow (see quotes/attestation.py): what
+    # transmitter it carries, and, for the glutamate/GABA ones, its excitatory/inhibitory
+    # sign. Each is its own node for the same reason a receptor's four classification
+    # attributes are: one sentence rarely attests all of them, and the sign in particular
+    # colours every arrow in the viewer's Potential mode. A modulatory system makes no
+    # sign claim at all, so it contributes no ``projection_sign`` node (not an unsourced
+    # one). The uncertainty flag stays on the pathway node: a blanket sweep is doubt about
+    # which regions the arrow reaches, not about what it releases.
+    def _claim_grades(name: str) -> list[str]:
+        return [entry["grade"] for p in projections
+                if (entry := (p.get("claims") or {}).get(name))]
+    projection_transmitter_grades = _claim_grades("transmitter")
+    projection_sign_grades = _claim_grades("sign")
     # Functional-circuit + projection-group nodes: each a "these structures / pathways
     # form a system" claim, graded by its own sources (rank 0 => missing when unsourced,
     # matching the viewer's NOSOURCE pill). All missing today (no circuit/group is
@@ -1296,6 +1309,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_metabolite_enzyme": tally(metabolite_enzyme_grades),
         "drug_metabolite_bindings": tally(metabolite_binding_grades),
         "projections": tally(projection_grades),
+        "projection_transmitter": tally(projection_transmitter_grades),
+        "projection_sign": tally(projection_sign_grades),
         "circuits": tally(circuit_grades),
         "projection_groups": tally(projection_group_grades),
         "receptors": tally(receptor_family_grades),

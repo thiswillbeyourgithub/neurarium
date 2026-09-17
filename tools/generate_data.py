@@ -231,6 +231,9 @@ from data_generators.quotes.uncertainty import (  # noqa: E402
     apply_enzyme_uncertainty,
     apply_projection_uncertainty,
 )
+from data_generators.quotes.attestation import (  # noqa: E402
+    apply_projection_claims,
+)
 
 # Every METABOLITE_ENZYME_QUOTES key consumed while building the drugs, so a key naming
 # a metabolite no drug carries (a rename, a dropped metabolite) raises instead of
@@ -1406,6 +1409,11 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # to virtually every part of the neuraxis") rather than target by target. A post-pass
     # for the same reason: the flag counts the SIBLING arrows one sentence covers.
     apply_projection_uncertainty(projections, structures)
+    # Split each arrow's compound claim into the parts a quote can back one at a time:
+    # the pathway exists, it carries transmitter X, and (glutamate/GABA only) its sign is
+    # excitatory/inhibitory. Derived from the quotes the arrow already cites, so it runs
+    # here rather than in _projection_records, alongside the other derived post-passes.
+    apply_projection_claims(projections)
     # Typo guard: every PROJECTION_QUOTES key must address a real PROJECTIONS entry,
     # else its quote silently sources nothing.
     unmatched = set(PROJECTION_QUOTES) - {(p["from"], p["to"]) for p in PROJECTIONS}

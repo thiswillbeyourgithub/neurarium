@@ -3390,16 +3390,41 @@ function createInfoPanel(data, sourcingModal) {
       route.appendChild(provPill());
       body.appendChild(route);
 
-      // Kind swatch + kind/transmitter text + its source badge.
+      // Kind swatch + kind/transmitter text + its source badge. The kind line used to
+      // state two claims at once ("Excitatory · Glutamate") under the pathway's single
+      // grade, so a sentence that only said region A projects to region B also published
+      // a green check on the transmitter AND on the sign that colours the arrow in
+      // Potential mode. Each is its own graded node now (see the generator's
+      // quotes/attestation.py), so each gets its own pill, and a part no cited quote
+      // names reads grey rather than borrowing the route's check.
+      const claims = proj.claims || {};
+      const claimPill = (claim) => makeProvenancePill(
+        (claim && claim.grade) || "llm", sourcesTip(claim && claim.sources));
       const meta = el("div", "info-meta");
       const swatch = el("span", "swatch line");
       swatch.style.background = proj.color || "#fff";
       meta.appendChild(swatch);
-      // Localized functional kind + transmitter, via the shared colourMeaningOf so
-      // this type line and the arrow's colour-meaning tooltip can't drift.
-      meta.appendChild(el("span", null, colourMeaningOf(proj)));
-      meta.appendChild(provPill());
+      // A signed pathway splits into two rows (the sign here, the transmitter below);
+      // a modulatory one makes no sign claim at all, so its single line ("Histaminergic
+      // · Histamine") is entirely the transmitter claim. Localized via the shared
+      // colourMeaningOf so this type line and the arrow's colour-meaning tooltip cannot
+      // drift.
+      const kindLabel = (data.meta.kindLabels && data.meta.kindLabels[proj.kind])
+        || proj.kind || "";
+      meta.appendChild(el("span", null, claims.sign ? kindLabel : colourMeaningOf(proj)));
+      meta.appendChild(claimPill(claims.sign || claims.transmitter));
       body.appendChild(meta);
+      if (claims.sign && proj.neurotransmitter) {
+        const nt = el("div", "info-meta");
+        // An invisible swatch keeps this row aligned under the kind line above it
+        // (same indent, no second colour chip: the arrow has only one colour).
+        const spacer = el("span", "swatch line");
+        spacer.style.visibility = "hidden";
+        nt.appendChild(spacer);
+        nt.appendChild(el("span", null, proj.neurotransmitter));
+        nt.appendChild(claimPill(claims.transmitter));
+        body.appendChild(nt);
+      }
 
       // Short description + its source badge (inline at the end, like the receptor
       // baked-description pill).
@@ -5523,6 +5548,8 @@ const KIND_LABELS = {
   drug_metabolite_enzyme: "about.kindDrugMetaboliteEnzyme",
   drug_metabolite_bindings: "about.kindDrugMetaboliteBindings",
   projections: "about.kindProjections",
+  projection_transmitter: "about.kindProjectionTransmitter",
+  projection_sign: "about.kindProjectionSign",
   circuits: "about.kindCircuits",
   projection_groups: "about.kindProjectionGroups",
   receptors: "about.kindReceptors",
@@ -5962,6 +5989,18 @@ function buildKindExample(kind, data, nav) {
       const notion = (data.meta.signLabels || {})[proj.kind] || proj.neurotransmitter || proj.kind;
       const subj = regionName(proj.from) || proj.from;
       return line(subj, notion, () => nav.structure(proj.from));
+    }
+    // The two sub-claims of a pathway: the example names the arrow and then the one
+    // thing this node asserts about it, so a reader sees which part is being graded.
+    case "projection_transmitter": {
+      const p2 = pick(data.projections || [], (x) => (x.claims || {}).transmitter);
+      return p2 ? line(p2.label, p2.neurotransmitter || p2.kind,
+        () => nav.connection(p2)) : null;
+    }
+    case "projection_sign": {
+      const p2 = pick(data.projections || [], (x) => (x.claims || {}).sign);
+      return p2 ? line(p2.label, (data.meta.signLabels || {})[p2.sign] || p2.sign,
+        () => nav.connection(p2)) : null;
     }
     case "circuits":
       return circuit ? line(circuit.name, null, () => nav.circuit(circuit), true) : null;

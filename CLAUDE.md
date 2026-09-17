@@ -72,7 +72,13 @@ node, and **every node must be sourceable** so the coverage tally stays honest.
 **Node kinds and where each lives** (the emitted collection -> the sourcing-tally kind
 in `meta.provenance_stats.by_kind`):
 - brain region -> `structures.jsonl` -> `structures`
-- projection (pathway) -> `projections.jsonl` -> `projections`
+- projection (pathway) -> `projections.jsonl` -> `projections` (the route only), split from
+  the two claims that ride the same arrow: its *transmitter* -> a projection's
+  `claims.transmitter` -> `projection_transmitter` (on every pathway) and its *sign*
+  (excit./inhib.) -> `claims.sign` -> `projection_sign` (on the glutamate/GABA arrows only:
+  "modulatory" is the ABSENCE of a sign claim, not a third value). Each is graded by a closed
+  word test over the arrow's own quotes (derived, `quotes/attestation.py`), so a sentence that
+  only states the route no longer green-checks what it releases
 - functional circuit -> `circuits.jsonl` -> `circuits`
 - projection group -> `projection_groups.jsonl` -> `projection_groups`
 - receptor classification -> `receptors.jsonl`, split into four independent graded

@@ -27,6 +27,8 @@ const KIND_ORDER = [
   "addons",
   "structures",
   "projections",
+  "projection_transmitter",
+  "projection_sign",
   "circuits",
   "projection_groups",
   "receptors",
@@ -175,6 +177,18 @@ export function collectNodes(data, deps, opts = {}) {
     seenProjection.add(key);
     push("projections", p.label, p.neurotransmitter || p.kind,
       p.provenance, () => nav.connection(p), p);
+    // The two sub-claims split out of that arrow, each its own row with its own pill:
+    // a sentence that states a pathway rarely also names what it releases, and rarer
+    // still its sign (see the generator's quotes/attestation.py).
+    const claims = p.claims || {};
+    if (claims.transmitter) {
+      push("projection_transmitter", p.label, p.neurotransmitter || p.kind,
+        claims.transmitter.grade || "llm", () => nav.connection(p), claims.transmitter);
+    }
+    if (claims.sign) {
+      push("projection_sign", p.label, (meta.signLabels || {})[p.sign] || p.sign,
+        claims.sign.grade || "llm", () => nav.connection(p), claims.sign);
+    }
   }
 
   for (const c of data.circuits || []) {

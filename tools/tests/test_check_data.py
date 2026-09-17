@@ -616,3 +616,58 @@ class FamilyCountTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ProjectionClaimGateTest(unittest.TestCase):
+    """A pathway sub-claim may only cite a quote that names what it is cited for.
+
+    The transmitter / sign claims cite a SUBSET of the arrow's own sources, so the
+    verbatim gate alone would pass anything: it is the SELECTION that can be wrong (a
+    hand-edit, or a claims block left behind by an older generator run). Family 5
+    re-derives it with the same closed vocabulary the generator graded it with, so these
+    tests pin both failure shapes: a source on a claim its quote is silent about, and a
+    grade above the base one with no source at all.
+    """
+
+    META = {
+        "source_corpora": {"kandel": {"ref": "Kandel"}},
+        "quote_pipelines": {"page_llm_judged": ["raw", "extract_llm", "judge_llm",
+                                                "neurarium"]},
+        "kind_signs": {"excitatory": "excitatory", "histaminergic": "modulatory"},
+    }
+
+    def _run(self, claims, kind="excitatory"):
+        src = {"corpus": "kandel", "page": 1, "quote": "The cortex projects to the "
+               "putamen.", "provenance": "verified", "pipeline": "page_llm_judged"}
+        proj = {"from": "frontal_R", "to": "putamen_R", "kind": kind,
+                "neurotransmitter": "Glutamate", "sources": [src],
+                "claims": {k: (dict(v, sources=[src]) if v.pop("cite", False) else v)
+                           for k, v in claims.items()}}
+        report = check_data.Report()
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            check_data.check_sources(report, self.META, [], [proj], [], [], [])
+        return report, buf.getvalue()
+
+    def test_a_claim_citing_a_quote_that_does_not_name_it_fails(self):
+        report, out = self._run({"transmitter": {"grade": "verified", "cite": True}})
+        self.assertTrue(report.errors)
+        self.assertIn("does not name the transmitter", out)
+
+    def test_an_unattested_claim_graded_above_the_base_fails(self):
+        report, out = self._run({"sign": {"grade": "verified"}})
+        self.assertTrue(report.errors)
+        self.assertIn("with no source", out)
+
+    def test_an_honest_claim_passes(self):
+        report, _out = self._run({"transmitter": {"grade": "llm"},
+                                  "sign": {"grade": "llm"}})
+        self.assertFalse(report.errors)
+
+    def test_a_claim_whose_value_has_no_word_test_fails(self):
+        # A modulatory kind makes no sign claim, so a sign node on one is a claim
+        # nobody made: there is no vocabulary that could ever have attested it.
+        report, out = self._run({"sign": {"grade": "verified", "cite": True}},
+                                kind="histaminergic")
+        self.assertTrue(report.errors)
+        self.assertIn("has no word test", out)

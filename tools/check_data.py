@@ -121,7 +121,8 @@ NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "dru
               "drug_half_life", "drug_tmax", "drug_enzymes", "enzyme_variability",
               "drug_metabolites",
               "drug_metabolite_enzyme", "drug_metabolite_bindings",
-              "projections", "circuits", "projection_groups", "receptors",
+              "projections", "projection_transmitter", "projection_sign",
+              "circuits", "projection_groups", "receptors",
               "receptor_class", "receptor_sign", "receptor_synaptic",
               "receptor_locations", "receptor_density", "targets", "target_polarity",
               "target_locations", "target_density", "structures")
@@ -1298,6 +1299,31 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
         pid = f"{proj.get('from')}->{proj.get('to')}"
         for i, src in enumerate(proj.get("sources", []) or []):
             check_one(f"projection {pid} sources[{i}]", src)
+        # The per-claim split (transmitter / sign). Its sources are a SUBSET of the
+        # pathway's own, picked by a word test, so the verbatim gate above would already
+        # cover the text; what is checked here is the SELECTION: every quote a sub-claim
+        # cites must really name what it is cited for, and a sub-claim citing nothing must
+        # carry the base grade rather than a borrowed check. Re-derived from the same
+        # closed vocabulary the generator graded it with (quotes/attestation.py), so a
+        # hand-edited or stale claims block fails instead of shipping.
+        claimed = {"transmitter": proj.get("neurotransmitter"),
+                   "sign": (meta.get("kind_signs") or {}).get(proj.get("kind"))}
+        for claim, entry in (proj.get("claims") or {}).items():
+            srcs = entry.get("sources") or []
+            for i, src in enumerate(srcs):
+                ctx = f"projection {pid} claims[{claim}] sources[{i}]"
+                check_one(ctx, src)
+                pattern = claim_pattern(claim, claimed.get(claim) or "")
+                if pattern is None:
+                    report.error(f"{ctx}: {claim} {claimed.get(claim)!r} has no word "
+                                 f"test, so nothing could have attested it")
+                elif not pattern.search(src.get("quote") or ""):
+                    report.error(f"{ctx}: the quote does not name the {claim} it is "
+                                 f"cited for ({claimed.get(claim)!r})")
+            if not srcs and entry.get("grade") != CLAIM_BASE_GRADE:
+                report.error(f"projection {pid} claims[{claim}]: grade "
+                             f"{entry.get('grade')!r} with no source (an unattested "
+                             f"sub-claim is {CLAIM_BASE_GRADE!r})")
         # A pathway the book only states as a blanket sweep wears the same orange badge
         # a binding does, and its bullets are gated the same way.
         check_uncertainty(f"projection {pid}", proj)
@@ -1823,6 +1849,14 @@ from changelog import CATEGORIES as CHANGELOG_CATEGORIES  # noqa: E402
 # the whole point of the derivation gate (see data_generators/pharmfreq.py).
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_generators import pharmfreq  # noqa: E402
+
+# The pathway per-claim word tests, imported for the same reason: family 5 re-runs the
+# very test that graded a transmitter/sign sub-claim, so a hand-edited or stale ``claims``
+# block (a source that does not name what it is cited for) fails instead of shipping.
+from data_generators.quotes.attestation import (  # noqa: E402
+    BASE_GRADE as CLAIM_BASE_GRADE,
+    pattern_for as claim_pattern,
+)
 
 
 def check_innervation(report, meta, structures, projections, receptors):

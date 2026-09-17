@@ -792,3 +792,69 @@ class EnzymeContradictionTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class ProjectionClaimTest(unittest.TestCase):
+    """The pathway per-claim split (tools/data_generators/quotes/attestation.py).
+
+    An arrow asserts three things at once (the pathway exists, it carries transmitter X,
+    its sign is Y) and used to publish all three under one grade, so a sentence stating
+    only the route also green-checked the transmitter and the sign that colours the arrow
+    in Potential mode. The failure mode to guard is therefore a sub-claim that LOOKS
+    attested: a source kept on a claim its quote never names, or a grade above the base
+    one with nothing behind it."""
+
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(REPO_ROOT / "tools"))
+        from data_generators.quotes import attestation
+        cls.mod = attestation
+        cls.projections = _load_jsonl(DATA_DIR / "projections.jsonl")
+
+    def _proj(self, kind, nt, quote):
+        return {"from": "a_R", "to": "b_R", "kind": kind, "neurotransmitter": nt,
+                "sources": [{"corpus": "kandel", "page": 1, "quote": quote,
+                             "provenance": "verified"}]}
+
+    def test_a_naming_quote_grades_the_claim_and_keeps_only_its_own_source(self):
+        p = self._proj("excitatory", "Glutamate",
+                       "The corticostriatal projection is excitatory (glutamatergic).")
+        self.mod.apply_projection_claims([p])
+        self.assertEqual(p["claims"]["transmitter"]["grade"], "verified")
+        self.assertEqual(p["claims"]["sign"]["grade"], "verified")
+        self.assertEqual(len(p["claims"]["sign"]["sources"]), 1)
+
+    def test_a_route_only_quote_attests_neither_part(self):
+        """The whole point: stating the arrow is not stating what rides it."""
+        p = self._proj("excitatory", "Glutamate",
+                       "The frontal cortex projects to the putamen.")
+        self.mod.apply_projection_claims([p])
+        for claim in ("transmitter", "sign"):
+            self.assertEqual(p["claims"][claim]["grade"], self.mod.BASE_GRADE)
+            self.assertNotIn("sources", p["claims"][claim])
+
+    def test_a_modulatory_pathway_makes_no_sign_claim_at_all(self):
+        """"Modulatory" is the ABSENCE of a sign claim, not an unsourced third value."""
+        p = self._proj("histaminergic", "Histamine",
+                       "The tuberomammillary nucleus is the sole source of histamine.")
+        self.mod.apply_projection_claims([p])
+        self.assertNotIn("sign", p["claims"])
+        self.assertEqual(p["claims"]["transmitter"]["grade"], "verified")
+
+    def test_a_transmitter_with_no_word_test_raises(self):
+        """A new system must say how a sentence would attest it, or it never could."""
+        p = self._proj("excitatory", "Unobtainium", "Some sentence.")
+        with self.assertRaises(KeyError):
+            self.mod.apply_projection_claims([p])
+
+    def test_the_emitted_data_carries_one_claim_per_pathway(self):
+        signed = {"excitatory", "inhibitory"}
+        for p in self.projections:
+            claims = p.get("claims") or {}
+            self.assertIn("transmitter", claims, f"{p['from']}->{p['to']}")
+            self.assertEqual("sign" in claims, p["kind"] in signed,
+                             f"{p['from']}->{p['to']} sign claim vs kind {p['kind']!r}")
+            for name, entry in claims.items():
+                if not entry.get("sources"):
+                    self.assertEqual(entry["grade"], self.mod.BASE_GRADE,
+                                     f"{p['from']}->{p['to']} {name} graded with no source")
