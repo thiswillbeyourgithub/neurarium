@@ -639,7 +639,11 @@ def check_reachability(report, meta, structures, projections, circuits,
     addon_pools = {"drug": {d.get("id") for d in drugs},
                    "receptor": receptor_ids,
                    "target": set(targets),
-                   "structure": base_ids}
+                   "structure": base_ids,
+                   # A section addon annotates a whole browse view rather than a
+                   # node, so the "does the anchor exist" question is asked against
+                   # the emitted section vocabulary itself.
+                   "section": set(meta.get("addon_sections") or {})}
     for addon in addons:
         aid = addon.get("id")
         slot, kind = addon.get("slot"), addon.get("owner_kind")

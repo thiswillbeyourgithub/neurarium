@@ -10,9 +10,10 @@ with one extra property: **it says where it goes**. The record carries the ancho
 (which node's panel), the ``slot`` (where in that panel), and the ``display``
 (how to draw it), so adding one is a data edit and never a viewer edit.
 
-The three vocabularies below are closed and emitted into ``meta`` (``addon_slots``
-/ ``addon_displays`` / ``addon_tones``), so the viewer reads the hook registry from
-the data instead of hardcoding it and ``check_data.py`` can reject an unknown slot.
+The four vocabularies below are closed and emitted into ``meta`` (``addon_slots``
+/ ``addon_sections`` / ``addon_displays`` / ``addon_tones``), so the viewer reads the
+hook registry from the data instead of hardcoding it and ``check_data.py`` can reject
+an unknown slot.
 
 **A slot only exists if the viewer actually calls it.** Every key of
 :data:`ADDON_SLOTS` has a matching ``appendAddons(...)`` call site in
@@ -42,6 +43,22 @@ ADDON_SLOTS: dict[str, str] = {
     "receptor.top": "receptor",
     "target.top": "target",
     "structure.top": "structure",
+    # Top of the Projections browse section, above its first heading: a caveat about
+    # how the pathways as a whole are modeled. Its anchor is a SECTION, not a node
+    # (see ADDON_SECTIONS): the claim is true of every arrow at once, so pinning it
+    # to one pathway would misfile it and repeating it on each would be ~90 copies
+    # of one sentence.
+    "section.projections": "section",
+}
+
+# The browse sections an addon may anchor, section key -> its display label. This is
+# the one owner kind that is not a node: the claim it carries is about a whole view
+# (how its data is modeled), so there is no single datum to hang it on and no panel
+# to open from it. Closed like every other vocabulary here, so a typo'd section is a
+# generation error rather than a node that ships and never draws. A section addon's
+# ``owner`` is one of these keys.
+ADDON_SECTIONS: dict[str, dict[str, str]] = {
+    "projections": {"en": "Projections", "fr": "Voies de projection"},
 }
 
 # How an addon draws. One form today; the dispatch (ADDON_RENDERERS in js/main.js)
@@ -145,6 +162,41 @@ ADDONS: list[dict[str, Any]] = [
                 "llm": "opus",
             },
         ],
+    },
+    {
+        # The bilaterality caveat. Almost every pathway here is authored once and
+        # mirrored across the midline (``mirror: true``), and no corpus states the
+        # left-hand copy: an anatomy book describes a tract once. That makes the
+        # second arrow a modelling assumption, and it is one claim about the whole
+        # collection rather than ~90 separate ones, so it is stated once here
+        # instead of flagging every mirrored projection. Deliberately **sourceless**
+        # (a red NOSOURCE pill): the claim it makes is precisely that nothing backs
+        # the mirroring, so citing something for it would contradict its own text.
+        "id": "projection_bilaterality",
+        "owner_kind": "section",
+        "owner": "projections",
+        "slot": "section.projections",
+        "display": "admonition",
+        "tone": "info",
+        "title": {
+            "en": "Both sides are a modelling assumption",
+            "fr": "La bilatéralité est une hypothèse de modélisation",
+        },
+        "text": {
+            "en": "Nearly every pathway below is drawn on both sides of the brain: "
+                  "the dataset stores one arrow and the viewer reflects it left to "
+                  "right. The sources describe a tract once, so no quote backs the "
+                  "mirrored copy, and the symmetry is our reading of the anatomy "
+                  "rather than a claim any corpus makes. A mirrored pair therefore "
+                  "counts as one node here, not two.",
+            "fr": "Presque toutes les voies ci-dessous sont dessinées des deux "
+                  "côtés du cerveau : le jeu de données ne stocke qu'une flèche et "
+                  "l'affichage la reflète de gauche à droite. Les sources décrivent "
+                  "un faisceau une seule fois, donc aucune citation n'appuie la "
+                  "copie miroir : la symétrie est notre lecture de l'anatomie, pas "
+                  "une affirmation d'un corpus. Une paire miroir compte donc ici "
+                  "pour un seul nœud, pas deux.",
+        },
     },
 ]
 

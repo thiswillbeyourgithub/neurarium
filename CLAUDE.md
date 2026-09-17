@@ -881,23 +881,33 @@ with no such home (a caveat over a whole section, a flag on one drug), and it ea
 node like any other otherwise: quote-level `sources`, a grade, a pill, a row in the Data browser,
 a line in the tally.
 
-- **Data.** `tools/data_generators/addons.py`: the authored `ADDONS` list plus three **closed**
+- **Data.** `tools/data_generators/addons.py`: the authored `ADDONS` list plus four **closed**
   vocabularies emitted into meta so the hook registry is data, not JS: `ADDON_SLOTS`
-  (`meta.addon_slots`, slot -> the node kind whose panel it is in), `ADDON_DISPLAYS`, `ADDON_TONES`
-  (tone -> glyph; the colour ramp each tone paints with is chrome and lives in `index.html`).
+  (`meta.addon_slots`, slot -> the node kind whose panel it is in), `ADDON_SECTIONS`, `ADDON_DISPLAYS`,
+  `ADDON_TONES` (tone -> glyph; the colour ramp each tone paints with is chrome and lives in `index.html`).
 - **A slot exists only if the viewer calls it.** Each `ADDON_SLOTS` key has exactly one
   `appendAddons(host, ownerKind, ownerId, slot)` call in `js/main.js`; a slot with no call site
   would swallow its node silently (well-formed, graded, counted, never drawn), which is why the
   generator AND `check_data.py` both reject an unknown slot / display / tone or an anchor naming
-  no real node. Today: `drug.top`, `drug.metabolism`, `receptor.top`, `target.top`,
-  `structure.top` (a structure addon anchors the hemisphere-less **base**, so it shows on both).
+  no real node, and why `test_generate.AddonTest` looks each slot's literal up in `main.js`.
+  Today: `drug.top`, `drug.metabolism`, `receptor.top`, `target.top`,
+  `structure.top` (a structure addon anchors the hemisphere-less **base**, so it shows on both),
+  `section.projections`.
+- **A section anchor is the owner kind that is not a node** (`ADDON_SECTIONS`, `meta.addon_sections`,
+  section key -> label): for a claim true of a whole browse view at once, so there is no single datum
+  to hang it on and no panel to open from it (`focus` is null, the caveat already sits where it
+  applies). Its id pool is that vocabulary, and its one slot is filled from `buildLegend`, not from a
+  `show*()` view, so `createInfoPanel` exports `appendAddons` rather than the box being redrawn there.
 - **Viewer.** `js/data.js` resolves each addon's owner once (`ownerName` + a `focus` `{nav, arg}`
   recipe the Data browser and the Sources popup both hand to their own nav table) and indexes them
   as `addonsBySlot` keyed `${ownerKind}:${owner}:${slot}`. `js/main.js` `ADDON_RENDERERS` dispatches
   on `display`; a second form is one entry there plus one string in `ADDON_DISPLAYS`.
-- Two today, both `drug.metabolism`: paroxetine + MDMA inhibit the CYP2D6 that clears them
+- Three today. Two `drug.metabolism`: paroxetine + MDMA inhibit the CYP2D6 that clears them
   (mechanism-based / autoinhibition), so their kinetics are non-linear, which the per-isoform rows
-  below cannot state (a row gives a role, never a curve).
+  below cannot state (a row gives a role, never a curve). One `section.projections`: bilaterality
+  (nearly every pathway is authored once and mirrored) is a modelling assumption no corpus states,
+  so it is one deliberately **sourceless** node over the whole collection rather than an uncertainty
+  flag on ~90 arrows.
 - **The `drug.metabolism` slot has a derived fallback.** A drug that is both a substrate and a
   modulator of one isoform changes its own clearance, and that is computable: `js/data.js`
   `autoModulation` (an inference over the enzyme rows, like `pkInteractionsOf`) feeds

@@ -74,7 +74,8 @@ attribute a *different* quote than the main one, or several to back a compound v
      quote-level `category_sources` on the authored drug). Keep extraction strictly
      dump-sourced.
    - **Panel annotations (addons)**: append to `ADDONS` in `tools/data_generators/addons.py`:
-     `id`, `owner_kind` + `owner` (the node it annotates; a structure anchors its base),
+     `id`, `owner_kind` + `owner` (the node it annotates; a structure anchors its base, and
+     `section` anchors a whole browse view via an `ADDON_SECTIONS` key instead of a node),
      `slot` (an `ADDON_SLOTS` key, which is the panel hook the viewer offers), `display`
      (`admonition`), `tone` (`caution`/`info`), optional `title`, `text` (both inline
      `{en,fr}`) and `sources` (graded like any node). Use it for a claim no existing kind
@@ -542,6 +543,7 @@ there is no node-level catch-all `sources` block.
   `target_type_labels`/`target_type_colors`, `source_corpora`, `uncertainty_reasons` (the closed
   vocabulary a node's `uncertainty[]` bullets draw from, each `{source, absence, args}`),
   `addon_slots` (the addon-node hook registry, slot -> the node kind whose panel it is in) +
+  `addon_sections` (the browse views an addon may anchor instead of a node, key -> label) +
   `addon_displays` + `addon_tones` (tone -> glyph),
   `density_min_reliability` (the
   cross-donor r floor every published profile clears), `provenance_stats` (the sourcing
@@ -614,8 +616,9 @@ there is no node-level catch-all `sources` block.
   only when the file exists), `focusable`. No drug-level source: provenance is per-claim (see
   CLAUDE.md Source provenance).
 - `addons.jsonl` — **addon nodes**: a sourced annotation that carries its own insertion point.
-  `id`, `owner_kind` (`drug`/`receptor`/`target`/`structure`), `owner` (that node's id; a
-  structure anchors its hemisphere-less *base*), `slot` (a `meta.addon_slots` key), `display`
+  `id`, `owner_kind` (`drug`/`receptor`/`target`/`structure`/`section`), `owner` (that node's
+  id; a structure anchors its hemisphere-less *base*, a `section` anchors a `meta.addon_sections`
+  key rather than a node), `slot` (a `meta.addon_slots` key), `display`
   (a `meta.addon_displays` entry), `tone` (a `meta.addon_tones` key), optional `title{en,fr}`,
   `text{en,fr}` (the claim), `sources[{corpus,page,quote,provenance}]`. Tally kind `addons`.
   Authored in `data_generators/addons.py`; the vocabularies are closed, and both the generator

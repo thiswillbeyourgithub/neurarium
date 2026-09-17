@@ -728,6 +728,34 @@ class AddonTest(unittest.TestCase):
         with self.assertRaises(KeyError):
             self.mod._addon_record(self._authored(text=None))
 
+    def test_every_slot_has_a_call_site_in_the_viewer(self):
+        # The rule the whole kind rests on: a slot the viewer never asks for swallows
+        # its node silently (well-formed, graded, counted, never drawn). Nothing at
+        # runtime can notice that, so it is checked here, by looking for the slot's
+        # literal in the one file that fills slots.
+        js = (REPO_ROOT / "public" / "js" / "main.js").read_text(encoding="utf-8")
+        for slot in self.meta["addon_slots"]:
+            self.assertIn(f'"{slot}"', js,
+                          f"slot {slot!r} has no appendAddons() call site in main.js")
+
+    def test_a_section_addon_anchors_a_registered_section(self):
+        # A section anchor is the one owner kind with no node behind it (the claim is
+        # about a whole view), so the emitted vocabulary is what stands in for the id
+        # pool: an owner outside it would be drawn by nothing.
+        sections = self.meta["addon_sections"]
+        self.assertTrue(sections, "no addon sections emitted")
+        anchored = [a for a in self.addons if a["owner_kind"] == "section"]
+        self.assertTrue(anchored, "the bilaterality caveat is a section addon")
+        for a in anchored:
+            self.assertIn(a["owner"], sections)
+
+    def test_the_bilaterality_caveat_is_deliberately_sourceless(self):
+        # Its claim IS that nothing sources the mirroring, so a citation on it would
+        # contradict its own text. It must read as NOSOURCE, not as an llm guess.
+        a = next(x for x in self.addons if x["id"] == "projection_bilaterality")
+        self.assertEqual(a["sources"], [])
+        self.assertEqual(a["slot"], "section.projections")
+
     def test_the_tally_counts_them_as_nodes(self):
         c = self.meta["provenance_stats"]["by_kind"]["addons"]
         self.assertEqual(c["total"], len(self.addons))

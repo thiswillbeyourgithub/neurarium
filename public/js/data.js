@@ -309,6 +309,10 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // tone -> its glyph. The viewer renders addons generically off these rather than
   // knowing any slot by name, so a new hook is a generator edit plus one call site.
   const addonSlots = metaRecord.addon_slots || {};
+  // The browse sections an addon may anchor instead of a node (key -> label): the
+  // one owner kind that is a view rather than a datum, for a caveat true of a whole
+  // collection at once (see addonOwner below).
+  const addonSections = metaRecord.addon_sections || {};
   const addonTones = metaRecord.addon_tones || {};
   // How a quote came to be cited: pipeline key -> its chain of custody as ordered step
   // keys, rendered at the bottom of every source tooltip. Passed through as-is; the
@@ -1356,6 +1360,13 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // recipe ({nav, arg}) those views hand to their own nav table, so neither has to
   // know that a structure navigates by id while a drug navigates by object.
   const addonOwner = (kind, id) => {
+    // A section addon has no node to open: it annotates the browse view its claim is
+    // about (the caveat is already sitting where it applies), so it resolves to the
+    // section's label and a null focus, which every consumer already handles (an
+    // unfocusable drug resolves the same way).
+    if (kind === "section") {
+      return { name: localize(addonSections[id]) || id, focus: null };
+    }
     if (kind === "drug") {
       const d = drugs.find((x) => x.id === id);
       return d && { name: d.displayName || d.name,

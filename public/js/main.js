@@ -1153,9 +1153,13 @@ function projectionGroups(established, meta, signMode) {
  * the Projections rows follow the arrow colours without stacking onIsolate
  * listeners.
  * @param {boolean} signColorMode  Colour arrows/legend by excit/inhib sign.
+ * @param {(host: HTMLElement, ownerKind: string, ownerId: string, slot: string) => number}
+ *   appendAddons  the info panel's addon hook (see createInfoPanel), passed in because
+ *   the Projections section carries an addon slot of its own and an addon must render
+ *   identically here and in a detail panel.
  * @returns {(isolated: Set<THREE.Mesh>|null, focusedArrows: Set<object>) => void}
  */
-function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode, onPickStructure, onFocusCircuit, onFocusProjectionGroup) {
+function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, signColorMode, onPickStructure, onFocusCircuit, onFocusProjectionGroup, appendAddons) {
   // Populate the two collapsible bodies, not the panels themselves, so the
   // always-visible toggle headers (in index.html) are left untouched. If a section
   // authors a persistent actions container in the HTML (e.g. #structures-actions),
@@ -1174,6 +1178,11 @@ function buildLegend(data, meshById, arrows, selection, projVis, circuitAnim, si
   const projectionsActions = document.getElementById("projections-actions");
   if (projectionsActions) projectionsBody.replaceChildren(projectionsActions);
   else projectionsBody.replaceChildren();
+  // The Projections section's own addon slot, drawn above its first heading: the
+  // caveat it carries (bilaterality) is true of every pathway below at once, so it is
+  // anchored on the SECTION rather than on a node, and it reads before the rows it
+  // qualifies rather than after them. Rebuilt with the rest on a colour-mode toggle.
+  appendAddons(projectionsBody, "section", "projections", "section.projections");
 
   // Remember each structure row + the meshes it stands for, so the isolate state
   // can grey the ones that aren't selected. Headings are tracked too: clicking a
@@ -4713,6 +4722,15 @@ function createInfoPanel(data, sourcingModal) {
       body.appendChild(el("h2", "info-title", t("panel.simulation")));
       body.appendChild(elm);
     },
+
+    /**
+     * Fill an addon slot that lives OUTSIDE the info panel. The Projections browse
+     * section owns one (the bilaterality caveat, anchored on the section rather than
+     * on a node), and that section is built by buildLegend, not by a show*() view, so
+     * the hook is exported instead of duplicated: an addon must render the same way,
+     * with the same source pill, wherever its slot happens to sit.
+     */
+    appendAddons,
   };
 }
 
@@ -8184,7 +8202,9 @@ async function main() {
       (mesh) => selectStructure(mesh),
       // Circuit / projection-group row picks: isolate + open the sourced detail
       // panel + tab, exactly like a drug / target row.
-      focusCircuit, focusProjectionGroup);
+      focusCircuit, focusProjectionGroup,
+      // The Projections section hosts an addon slot; the hook lives on the info panel.
+      info.appendAddons);
     selection.refresh(); // re-grey the fresh rows for the current isolate state
   };
   rebuildLegend();

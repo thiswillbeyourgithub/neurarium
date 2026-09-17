@@ -72,6 +72,7 @@ log = logging.getLogger("generate_data")
 # the viewer reads the hook registry from the data.
 from data_generators.addons import (  # noqa: E402
     ADDON_DISPLAYS,
+    ADDON_SECTIONS,
     ADDON_SLOTS,
     ADDON_TONES,
     build_addons,
@@ -1642,6 +1643,9 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # A structure addon anchors the *base* (both hemispheres show it), matching
         # how a receptor location or a density profile keys its regions.
         "structure": receptor_bases,
+        # A section addon anchors a view, not a node, so its pool is the closed
+        # section vocabulary itself (see addons.ADDON_SECTIONS).
+        "section": set(ADDON_SECTIONS),
     }
     for addon in addons:
         pool = addon_pools[addon["owner_kind"]]
@@ -1755,6 +1759,10 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         # set of legal answers is part of the data contract, and check_data.py reads
         # the same list the generator validated against.
         "addon_slots": ADDON_SLOTS,
+        # The browse sections an addon may anchor instead of a node (section key ->
+        # its label): the one owner kind with no panel to open, for a caveat about a
+        # whole view rather than about one datum.
+        "addon_sections": ADDON_SECTIONS,
         "addon_displays": list(ADDON_DISPLAYS),
         "addon_tones": ADDON_TONES,
         # The closed vocabulary of "uncertain" reason kinds (see quotes/uncertainty.py).

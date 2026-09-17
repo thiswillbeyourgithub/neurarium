@@ -3613,7 +3613,11 @@
     "drug.metabolism": "drug",
     "receptor.top": "receptor",
     "target.top": "target",
-    "structure.top": "structure"
+    "structure.top": "structure",
+    "section.projections": "section"
+  },
+  "addon_sections": {
+    "projections": "Projections"
   },
   "addon_displays": [
     "admonition"
@@ -3718,13 +3722,13 @@
   "provenance_stats": {
     "by_kind": {
       "addons": {
-        "total": 2,
+        "total": 3,
         "verified": 2,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
-        "nosource": 0,
-        "missing": 0
+        "nosource": 1,
+        "missing": 1
       },
       "enzyme_variability": {
         "total": 5,
@@ -3998,13 +4002,13 @@
       }
     },
     "nodes": {
-      "total": 6835,
+      "total": 6836,
       "verified": 5448,
       "uncertain": 250,
       "sourced": 0,
       "llm": 438,
-      "nosource": 699,
-      "missing": 1137,
+      "nosource": 700,
+      "missing": 1138,
       "backed": 5698,
       "pct_backed": 83
     },

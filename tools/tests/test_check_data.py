@@ -687,3 +687,43 @@ class ProjectionClaimGateTest(unittest.TestCase):
             check_data.check_sources(report, self.META, [drug], [], [], [], [])
         self.assertTrue(report.errors)
         self.assertIn("does not name the strength", buf.getvalue())
+
+
+class SectionAddonAnchorTest(unittest.TestCase):
+    """An addon anchored on a browse SECTION rather than on a node (family 2).
+
+    A section is the one owner kind with no node behind it, so the usual "does the
+    anchored node exist" question is asked against the emitted section vocabulary
+    instead. That makes the vocabulary load-bearing: a section key nothing registers
+    is an addon that ships, is graded, is counted, and is never drawn, which is the
+    silent loss the whole addon check exists to prevent.
+    """
+
+    META = {
+        "addon_slots": {"section.projections": "section"},
+        "addon_displays": ["admonition"],
+        "addon_tones": {"info": "i"},
+        "addon_sections": {"projections": "Projections"},
+        "drug_targets": {},
+    }
+
+    def _run(self, **patch):
+        addon = {"id": "a", "owner_kind": "section", "owner": "projections",
+                 "slot": "section.projections", "display": "admonition",
+                 "tone": "info", "text": "Both sides are our assumption."}
+        addon.update(patch)
+        report = check_data.Report()
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            check_data.check_reachability(report, self.META, [], [], [], [], [], [],
+                                          [addon])
+        return report, buf.getvalue()
+
+    def test_a_registered_section_anchor_passes(self):
+        report, _out = self._run()
+        self.assertFalse(report.errors)
+
+    def test_an_unregistered_section_anchor_fails(self):
+        report, out = self._run(owner="circuits")
+        self.assertTrue(report.errors)
+        self.assertIn("not a known section id", out)
