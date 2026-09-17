@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.89.0",
+      "date": "2026-09-17",
+      "entries": [
+        {
+          "category": "data",
+          "text": "A pathway used to state three things under one badge: that it runs from A to B, what it carries, and whether it excites or inhibits. One sentence rarely says all three, so the transmitter and the sign are now separate facts with their own badges, and a source that only states the route no longer puts a green check on the rest. Of the 95 pathways, 56 have their transmitter attested and 9 of the 38 excitatory/inhibitory ones have their sign attested; the others read as unsourced, which is what they always were.",
+          "commits": [
+            "d778a8c"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The data browser lists the two new fact types on their own, so you can read every pathway sign we cannot source in one list.",
+          "commits": [
+            "d778a8c"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Three kinds of fact (the two expression-amount profiles and the enzyme population speeds) were missing from the coverage chart in the README: the chart was built from a list of labels rather than from the data, so a kind nobody had labelled silently vanished while the headline percentage kept counting it.",
+          "commits": [
+            "8487937"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.88.0",
       "date": "2026-09-17",
       "entries": [
