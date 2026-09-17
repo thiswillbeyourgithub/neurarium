@@ -1,0 +1,5 @@
+# 3.90.0 (2026-09-17)
+
+## Data
+- A metabolism row says two things: which liver enzyme clears the drug, and how much of the job it does (a major or minor route, a strong or weak effect). Only the first was ever checked against the source, so the second now has its own badge: 87 of the 147 rows that state a tier have a quote that really says it, and the other 60 read as unsourced. It matters because the drug-interaction rows are read through that tier: a major route meeting a strong inhibitor is the pair worth checking.
+  fr: Une ligne de métabolisme dit deux choses : quelle enzyme hépatique élimine le médicament, et quelle part du travail elle accomplit (voie principale ou secondaire, effet puissant ou faible). Seule la première était vérifiée face à la source ; la seconde a donc désormais son propre badge : 87 des 147 lignes qui annoncent une importance citent une phrase qui l'énonce vraiment, les 60 autres s'affichent comme non sourcées. Cela compte parce que les interactions se lisent à travers cette importance : une voie principale face à un inhibiteur puissant, voilà la paire à vérifier.
