@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.91.1",
+      "date": "2026-09-17",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "These release notes now appear as soon as you click \"Start exploring\", instead of waiting for the brain to finish assembling. They were also skipped entirely on any visit where that animation was cut short, such as grabbing the spread slider or following a link straight to a drug.",
+          "commits": [
+            "e7db81f"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.91.0",
       "date": "2026-09-17",
       "entries": [
