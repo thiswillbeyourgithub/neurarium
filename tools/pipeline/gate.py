@@ -11,6 +11,10 @@ module holds that last step plus the tally every applier prints:
   ``read(corpus, page)`` callable a caller (or a test) supplies.
 * :class:`Tally`: the ``stats`` counter and ``rejected`` log, one ``reject`` call each.
 
+Documented exception: ``tools/sourcing/apply_brand_names.py`` keeps its own page reads,
+since its brand dedup key (``brand_key``) folds accents differently from
+``normalize_for_match`` and its BDPM mode gates only a page's header line.
+
 Example::
 
     >>> gate = PageGate(read=lambda corpus, page: "drug x blocks d2")
