@@ -1,6 +1,38 @@
 {
   "versions": [
     {
+      "version": "3.131.7",
+      "date": "2026-10-18",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "The quote recheck tool reads uncertainty reasons containing quotation marks in English again instead of falling back to French",
+          "commits": [
+            "c9b31bf"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Viewer restructure: data loading, translations, startup, guided tour, data browser, search and the drug interactions section each split into small focused files, with one shared helper for grades, network fetches, link parameters and scene focus; nothing changes on screen",
+          "commits": [
+            "1f23795",
+            "dc3c9ba",
+            "1fc072c",
+            "f3fac99",
+            "df47401",
+            "3ccf449",
+            "45dcbba",
+            "2d4e225",
+            "983a2dd",
+            "d4609f0",
+            "e1e684d",
+            "ae54baa",
+            "f1d2c64"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.131.6",
       "date": "2026-10-18",
       "entries": [
