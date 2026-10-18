@@ -68,6 +68,7 @@ WIKI_PAGES = {
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes
 # check_data" by construction (no second, drifting implementation).
 from check_data import normalize_for_match  # noqa: E402
+from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 
 
 _norm = alnum_key  # lowercase alphanumerics only (tools/text_fold.py)
@@ -93,6 +94,7 @@ def apply_wikipedia(drugs, worklist, judged, pages=WIKI_PAGES):
         Drugs written, and one rejection line per refused pick.
     """
     by_id = {d["id"]: d for d in drugs}
+    gate = PageGate(pages)
     applied, misses = 0, []
     for did, picks in judged.items():
         if not picks:
@@ -111,11 +113,9 @@ def apply_wikipedia(drugs, worklist, judged, pages=WIKI_PAGES):
             if why:
                 misses.append(f"{did}: {why}")
                 continue
-            root = pages.get(c["corpus"])
-            path = root / f"{c['page']}.md" if root else None
-            needle = normalize_for_match(c["line"])
-            if not path or not path.exists() or not needle or needle not in \
-                    normalize_for_match(path.read_text(encoding="utf-8", errors="replace")):
+            # An empty needle would be "in" any page: refuse it before the page gate.
+            if not normalize_for_match(c["line"]) or \
+                    not gate.on_page(c["corpus"], c["page"], c["line"]):
                 misses.append(f"{did}: quote not on {c['corpus']}/{c['page']}: {c['line'][:80]!r}")
                 continue
             sources.append({"corpus": c["corpus"], "page": c["page"],
