@@ -52,9 +52,9 @@ from data_generators.presentation import (
     SYNAPTIC_LABELS,
     SYSTEM_FLOW_KINDS,
 )
+from data_generators.corpora import SOURCE_CORPORA
 from data_generators.provenance import (
     QUOTE_PIPELINES,
-    SOURCE_CORPORA,
     _provenance_stats,
     build_enzymes,
 )

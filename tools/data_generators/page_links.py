@@ -24,7 +24,7 @@ from typing import Any, Iterable
 
 from .freshness import ROOT, _repo, header_field
 from .freshness import load_ledger as _load_json_ledger
-from .provenance import SOURCE_CORPORA
+from .corpora import SOURCE_CORPORA
 
 LEDGER_PATH = os.path.join(ROOT, "tools", "generated_cache", "page_links.json")
 

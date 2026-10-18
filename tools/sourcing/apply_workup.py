@@ -57,7 +57,7 @@ from pipeline.gate import PageGate  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 import fetch_workup  # noqa: E402
 from data_generators import workup as W  # noqa: E402
-from data_generators.provenance import SOURCE_CORPORA  # noqa: E402
+from data_generators.corpora import SOURCE_CORPORA  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
 
 JUDGED_PATH = ROOT / "tools" / "generated_cache" / "workup_judged.json"

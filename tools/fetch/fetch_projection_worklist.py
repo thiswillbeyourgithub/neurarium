@@ -57,7 +57,7 @@ from data_generators.presentation import KIND_TO_SIGN  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "projection_worklist.json"
 DATA = ROOT / "public" / "data"
-from data_generators.provenance import SOURCE_CORPORA  # noqa: E402
+from data_generators.corpora import SOURCE_CORPORA  # noqa: E402
 
 # The prose corpora a pathway can be quoted from, each at its registered page tree
 # (Europe PMC, corpus #17, for what only a primary paper states, e.g. the claustrum).

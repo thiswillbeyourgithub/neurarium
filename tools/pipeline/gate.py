@@ -45,7 +45,7 @@ def registry_pages() -> dict[str, Path]:
     under the repo root, a corpus with no ``pages_dir`` (a CSV corpus) left out.
     """
     # Imported here, so a gate over one known corpus never loads the corpus registry.
-    from data_generators.provenance import SOURCE_CORPORA
+    from data_generators.corpora import SOURCE_CORPORA
 
     return {c: TOOLS.parent / e["pages_dir"] for c, e in SOURCE_CORPORA.items()
             if e.get("pages_dir")}

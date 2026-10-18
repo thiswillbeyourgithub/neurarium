@@ -71,7 +71,7 @@ class SourcePageKindTest(unittest.TestCase):
 
     def test_every_page_kind_is_translated_and_every_url_takes_the_page(self):
         sys.path.insert(0, str(ROOT / "tools"))
-        from data_generators.provenance import SOURCE_CORPORA
+        from data_generators.corpora import SOURCE_CORPORA
         en, fr = catalogues()
         for cid, c in SOURCE_CORPORA.items():
             if "page_kind" in c:
@@ -94,7 +94,7 @@ class SourcePageKindTest(unittest.TestCase):
 
     def test_europepmc_page_is_a_pmid(self):
         sys.path.insert(0, str(ROOT / "tools"))
-        from data_generators.provenance import SOURCE_CORPORA
+        from data_generators.corpora import SOURCE_CORPORA
         self.assertEqual(SOURCE_CORPORA["europepmc"].get("page_kind"), "pmid")
 
 

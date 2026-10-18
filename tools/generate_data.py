@@ -103,8 +103,9 @@ from data_generators.drugs import (  # noqa: E402
 )
 
 # ---------------------------------------------------------------------------
-# Source provenance: grades, override registries, SOURCE_CORPORA + the quote /
-# binding / Ki source validators live in data_generators.provenance.
+# Source provenance: grades, override registries + the quote /
+# binding / Ki source validators live in data_generators.provenance (the
+# SOURCE_CORPORA registry in data_generators.corpora).
 # ---------------------------------------------------------------------------
 from data_generators import provenance as provenance_registry  # noqa: E402 (registry loader)
 from data_generators.provenance import (  # noqa: E402

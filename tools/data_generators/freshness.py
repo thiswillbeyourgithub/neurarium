@@ -34,7 +34,8 @@ import re
 from typing import Any, Callable
 
 from . import clinpgx, cpic, pharmfreq
-from .provenance import SOURCE_CORPORA, corpus_page_path
+from .corpora import SOURCE_CORPORA
+from .provenance import corpus_page_path
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LEDGER_PATH = os.path.join(ROOT, "tools", "generated_cache", "fetch_dates.json")
