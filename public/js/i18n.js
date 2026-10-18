@@ -6,9 +6,9 @@
 //
 // It owns ONE message catalogue (the single source of every UI string, in both
 // languages) plus the language choice. The translatable *data* strings (region
-// names, pathway labels, ...) are NOT here: they live in the data file as
-// {en, fr} objects and are resolved by js/data.js using the language picked
-// here (see `pick`). Because js/data.js resolves at load time, switching the
+// names, pathway labels, ...) are NOT here: the data file holds them in English
+// and js/data.js resolves each through the French side table using the language
+// picked here (see `pick`). Because js/data.js resolves at load time, switching the
 // language reloads the page (setLang) rather than re-rendering the scene live.
 //
 // Static markup in index.html carries `data-i18n` / `data-i18n-html` /
