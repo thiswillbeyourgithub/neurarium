@@ -1,24 +1,6 @@
-// Graded-node helpers shared by every loader stage: the strongest grade among a
-// node's sources, and the normalized source / sub-claim / uncertainty shapes the
+// Graded-node helpers shared by every loader stage (the strongest-grade rule is
+// in ../grades.js): the normalized source / sub-claim / uncertainty shapes the
 // panel renders.
-
-// Provenance grade ordering (weakest -> strongest); the strongest grade among a
-// record's sources colours its summary source pill. Null when there are none.
-// Shared by projections (below) and drug bindings / NbN (further down), so the
-// "strongest grade wins" rule lives in one place.
-const GRADE_RANK = { llm: 1, sourced: 2, verified: 3 };
-export const strongestGrade = (sources) => {
-  let best = null;
-  let rank = 0;
-  for (const s of sources || []) {
-    const r = GRADE_RANK[s.provenance] || 0;
-    if (r > rank) {
-      rank = r;
-      best = s.provenance;
-    }
-  }
-  return best;
-};
 
 // Normalize a quote-level sources list (a binding's `sources` or a drug's
 // `nbn_sources`) into the shape the panel renders.

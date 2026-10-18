@@ -2,7 +2,8 @@
 // regulatory history, TDM, physicochemistry, workup. One graded node each.
 
 import { localize } from "./localize.js";
-import { strongestGrade, mapSources, mapUncertainty } from "./sources.js";
+import { strongestGrade } from "../grades.js";
+import { mapSources, mapUncertainty } from "./sources.js";
 
 /** Resolve one drug's fact fields in place. */
 export function resolveDrugFacts(d, v) {

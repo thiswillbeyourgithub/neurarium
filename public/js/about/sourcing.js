@@ -4,6 +4,7 @@
 import { exampleRow, KIND_LABELS } from "../kinds.js";
 import { formatHalfLife, NOSOURCE_GLYPH } from "../panel/format.js";
 import { collectNodes } from "../node-browser.js";
+import { backed } from "../grades.js";
 import { el, btn } from "../panel/dom.js";
 
 const { t } = window.__I18N__;
@@ -93,11 +94,11 @@ export function buildAboutSourcing(meta, opts = {}) {
     // (grey) so an out-of-date dataset still renders a sensible bar.
     const nosource = c.nosource != null ? c.nosource : 0;
     const llm = c.llm != null ? c.llm : (c.missing || 0) - nosource;
-    const backed = verified + uncertain + sourced;
-    const pct = Math.round((100 * backed) / c.total);
+    const backedCount = backed(c);
+    const pct = Math.round((100 * backedCount) / c.total);
     rows.push({
       kind, labelKey, verified, uncertain, sourced, llm, nosource,
-      unknown: c.unknown || 0, backed, total: c.total, pct,
+      unknown: c.unknown || 0, backed: backedCount, total: c.total, pct,
     });
   }
   rows.sort((x, y) => y.pct - x.pct || y.total - x.total);

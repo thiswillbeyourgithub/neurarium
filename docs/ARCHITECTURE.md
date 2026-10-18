@@ -477,6 +477,7 @@ Viewer (`public/`):
   enzymes + effects, `key.js`, shared `item.js`). `js/about/`: the popups (`modals.js`) and the
   Sources & provenance tally (`sourcing.js`). `js/search/query.js`: search text folding.
 - `js/util.js`: dependency-free shared helpers (`groupBy`, `stripSide`, `mirrorId`, `normName`).
+- `js/grades.js`: the provenance-grade orderings (`GRADE_RANK` stored, `DISPLAY_GRADE_ORDER` display incl. uncertain/unknown) + `strongestGrade`, `shownGrade`, `backed(counts)`.
 - `css/`: the stylesheets, linked from `index.html` in cascade order (order matters):
   `tokens.css` (both theme palettes, see Theme), `base.css`, `controls.css`, `modals.css`,
   `tour.css`, `segmented.css`, `search.css`, `labels.css`, `popups.css`, `legend.css`,

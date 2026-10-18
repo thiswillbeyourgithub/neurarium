@@ -3,7 +3,8 @@
 
 import { groupBy } from "../util.js";
 import { localize } from "./localize.js";
-import { strongestGrade, mapSources, mapUncertainty, mapClaims } from "./sources.js";
+import { strongestGrade } from "../grades.js";
+import { mapSources, mapUncertainty, mapClaims } from "./sources.js";
 
 /** The metabolizer-variability normalizer, closed over meta's phenotype vocab. */
 export function makeVariabilityEntry(metaRecord) {

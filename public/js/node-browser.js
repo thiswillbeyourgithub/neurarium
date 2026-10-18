@@ -25,20 +25,13 @@ import { formatWorkup } from "./workup.js";
 import { transmitterVars } from "./release-modulation.js";
 import { KIND_ORDER } from "./kinds.js";
 import { stripSide } from "./util.js";
-
-// Sort rank of a display grade, weakest to strongest. `uncertain` sits between
-// sourced and verified for the same reason the Sources popup's bar does: the quote
-// really was checked, it just may not attribute the claim.
-// `unknown` (searched, nothing states it) sorts just above nosource: still no source,
-// but a finding rather than a to-do.
-const GRADE_RANK = { nosource: 0, unknown: 0.5, llm: 1, sourced: 2, uncertain: 3, verified: 4 };
+import { DISPLAY_GRADE_ORDER, shownGrade } from "./grades.js";
 
 // How many rows render at once. The full list is several thousand nodes, so the
 // first paint is capped and each "show more" appends a bigger chunk (by then the
 // reader has decided the filter is the one they want).
 const PAGE_FIRST = 150;
 const PAGE_MORE = 300;
-
 
 /**
  * Enumerate every graded knowledge node in the dataset as a flat row list.
@@ -69,20 +62,6 @@ const PAGE_MORE = 300;
  *                  uncertain: boolean, go: (() => void)|null, sources: object[],
  *                  uncertainty: object[], ki: object|null}>}
  */
-/**
- * The grade a node displays: "uncertain" when it carries doubt bullets AND rests on a
- * document, else its own grade. A bare llm claim another corpus denies is still
- * missing its own source (the tally buckets it so too, provenance.py `bucket`), so
- * its bullets show in the tooltip without lifting its pill to the backed orange.
- * @param {string|null|undefined} grade the node's own grade
- * @param {object[]|null|undefined} uncertainty its bullets
- * @returns {string|null|undefined}
- */
-export function shownGrade(grade, uncertainty) {
-  const backed = grade === "verified" || grade === "sourced";
-  return uncertainty && uncertainty.length && backed ? "uncertain" : grade;
-}
-
 export function collectNodes(data, deps, opts = {}) {
   const { t, formatHalfLife, nav } = deps;
   const twins = opts.twins !== false;
@@ -634,7 +613,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     } else {
       const dir = mode === "strongest" ? -1 : 1;
       matches.sort((a, b) =>
-        dir * (GRADE_RANK[a.grade] - GRADE_RANK[b.grade]) || byName(a, b));
+        dir * (DISPLAY_GRADE_ORDER[a.grade] - DISPLAY_GRADE_ORDER[b.grade]) || byName(a, b));
     }
     // The twins choice only ever splits or collapses `structures` rows, so offer it
     // only while the current result contains some (both readings keep the kind, so

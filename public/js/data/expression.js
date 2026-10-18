@@ -1,7 +1,7 @@
 // Expression nodes: one "Found in" region entry and a relative-density profile,
 // shared by receptors and non-receptor targets (same node shapes).
 
-import { strongestGrade } from "./sources.js";
+import { strongestGrade } from "../grades.js";
 
 // Build one "Found in" region entry (its per-region expression provenance +
 // the assay species). An expression source (e.g. a GtoPdb tissue-distribution

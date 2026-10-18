@@ -1,7 +1,7 @@
 // Receptor stage: labels, concrete structure ids, per-region expression nodes.
 
 import { localize } from "./localize.js";
-import { strongestGrade } from "./sources.js";
+import { strongestGrade } from "../grades.js";
 import { locationEntry, densityEntry } from "./expression.js";
 
 export function resolveReceptors({ receptors, byId, baseName, allIds, v }) {

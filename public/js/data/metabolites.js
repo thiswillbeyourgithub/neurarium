@@ -3,7 +3,8 @@
 
 import { normName } from "../util.js";
 import { localize } from "./localize.js";
-import { strongestGrade, mapSources, mapUncertainty } from "./sources.js";
+import { strongestGrade } from "../grades.js";
+import { mapSources, mapUncertainty } from "./sources.js";
 
 export function resolveMetabolites({ drugs, v }, bindingDisplayFields) {
   const { enzymeDefs, enzymeReactions } = v;

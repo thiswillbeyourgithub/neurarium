@@ -4,7 +4,7 @@
 import { mirrorId, stripSide } from "../util.js";
 import { fetchOrThrow } from "./fetch.js";
 import { localize } from "./localize.js";
-import { strongestGrade } from "./sources.js";
+import { strongestGrade } from "../grades.js";
 
 /** Reflect every `mirror: true` projection to the other hemisphere, in place. */
 export function mirrorProjections(projections) {

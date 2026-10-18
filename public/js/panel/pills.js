@@ -6,7 +6,7 @@ import { NOSOURCE_GLYPH } from "./format.js";
 import { isWebUrl } from "../web-url.js";
 import { extLink, btn } from "./dom.js";
 import { attachTip, closeTip, linkifiedText } from "./tooltip.js";
-import { shownGrade } from "../node-browser.js";
+import { GRADE_RANK, shownGrade } from "../grades.js";
 import { withFetched } from "../data.js";
 
 const { t } = window.__I18N__;
@@ -304,7 +304,6 @@ export function makePills(P) {
   // than the binding beside it, so a row whose quote covers both stays a single pill and
   // the extra badge means something wherever it appears.
   const bindingActionPill = (binding) => {
-    const rank = { llm: 1, sourced: 2, verified: 3 };
     // The pill says what is missing about the DIRECTION, so its screen-reader label
     // replaces the generic grade text makeProvenancePill would otherwise announce.
     const pill = (level, why) => {
@@ -318,7 +317,7 @@ export function makePills(P) {
       return pill("unknown", `${t("drug.actionUnknown")}\n\n${unknownSearchTip(binding.unknown)}`);
     if (binding.affinityOnly) return pill(null, t("drug.actionNoSource"));
     if (binding.actionProvenance === "llm"
-        && (rank[binding.provenance] || 0) > 1)
+        && (GRADE_RANK[binding.provenance] || 0) > GRADE_RANK.llm)
       return pill("llm", t("drug.actionLlm"));
     return null;
   };

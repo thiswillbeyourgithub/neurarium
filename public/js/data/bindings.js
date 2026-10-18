@@ -3,7 +3,8 @@
 
 import { normName } from "../util.js";
 import { localize } from "./localize.js";
-import { strongestGrade, mapSources, mapUncertainty } from "./sources.js";
+import { strongestGrade } from "../grades.js";
+import { mapSources, mapUncertainty } from "./sources.js";
 
 /** The tone-rule lookups over meta.tone_rules / tone_factors (see toneBySystem). */
 export function makeToneRules(receptors, metaRecord) {

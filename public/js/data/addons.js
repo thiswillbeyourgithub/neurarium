@@ -2,7 +2,7 @@
 
 import { groupBy } from "../util.js";
 import { localize } from "./localize.js";
-import { strongestGrade } from "./sources.js";
+import { strongestGrade } from "../grades.js";
 
 export function resolveAddons({ drugs, targets, byId, v }, addonRecords) {
   const { addonSections, addonTones } = v;
