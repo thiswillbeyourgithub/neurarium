@@ -1,6 +1,60 @@
 {
   "versions": [
     {
+      "version": "3.131.4",
+      "date": "2026-10-18",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "A shared simulation link with an absurd dose ratio no longer breaks every curve: the ratio is kept between 0.1 and 100",
+          "commits": [
+            "7cac055"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "A bad ghost-opacity value in a view link is ignored instead of making the brain invisible",
+          "commits": [
+            "80827ed"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Clicking quickly between structures no longer fetches the same Wikipedia summary or changelog twice",
+          "commits": [
+            "90998e4"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The offline cache no longer grows with every language or tour link opened",
+          "commits": [
+            "b2974db"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Guided-tour text is escaped before display, closing a latent injection path",
+          "commits": [
+            "4a98efb"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Viewer cleanup: one helper for external links and buttons, no more state hidden on page elements, dead translation fallbacks and an unused export removed",
+          "commits": [
+            "0d35d36",
+            "ce3f84d",
+            "e8996db",
+            "e6c2c36",
+            "1204203",
+            "06e9972",
+            "744f095"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.131.3",
       "date": "2026-10-17",
       "entries": [
