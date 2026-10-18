@@ -29,7 +29,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from species import is_primate, species_key
+from lib.species import is_primate, species_key
 
 from .uncertainty import _uncertainty_bullet
 

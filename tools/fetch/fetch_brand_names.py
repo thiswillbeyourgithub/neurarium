@@ -63,8 +63,8 @@ sys.path.insert(0, HERE)                       # sibling fetch_wikipedia_pharmac
 sys.path.insert(0, os.path.join(REPO, "tools"))  # drugs_io
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch_page/store_page/etc.)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
-from io_atomic import atomic_write_json  # noqa: E402
-import drugs_io  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import drugs_io  # noqa: E402
 
 DATA_DIR = wikistore.DATA_DIR                                    # data_sources/wikipedia
 PAGES_FR = os.path.join(DATA_DIR, "pages_fr")

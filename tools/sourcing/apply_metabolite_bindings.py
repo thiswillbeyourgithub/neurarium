@@ -57,8 +57,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
-import drugs_io                                                 # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io                                                 # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 import fetch_ki                                                 # noqa: E402  (PDSP Ki lookup)
 import fetch_wikipedia_pharmacology as wp                       # noqa: E402  (Ki obj + page store)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)

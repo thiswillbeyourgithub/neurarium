@@ -58,10 +58,10 @@ REPO = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO / "tools"))
 sys.path.insert(0, str(REPO / "tools" / "fetch"))
 
-import chirality                                                   # noqa: E402
-import drugs_io                                                    # noqa: E402
-from io_atomic import atomic_write_json                            # noqa: E402
-import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib import chirality                                                   # noqa: E402
+from lib import drugs_io                                                    # noqa: E402
+from lib.io_atomic import atomic_write_json                            # noqa: E402
+from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib.gene_maps import RECEPTOR_GENES, TARGET_GENES             # noqa: E402
 
 OUT = REPO / "data_sources" / "gtopdb"

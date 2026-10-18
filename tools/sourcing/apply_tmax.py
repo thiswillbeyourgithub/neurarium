@@ -55,8 +55,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 
-import drugs_io                                                 # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io                                                 # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.judged import resolve  # noqa: E402
 from pipeline.gate import PageGate, registry_pages              # noqa: E402
 import fetch_tmax                                               # noqa: E402

@@ -54,7 +54,7 @@ CACHE = TOOLS / "generated_cache" / "gtopdb_ki.json"
 
 sys.path.insert(0, str(TOOLS))
 from pipeline.gate import PageGate                # noqa: E402  (the one applier quote gate)
-import drugs_io                                   # noqa: E402
+from lib import drugs_io                                   # noqa: E402
 
 CORPUS = "gtopdb_ki"
 

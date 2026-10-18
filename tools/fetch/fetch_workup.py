@@ -32,7 +32,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent  # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 from data_generators import workup as W  # noqa: E402
-import worklist_io  # noqa: E402
+from lib import worklist_io  # noqa: E402
 from data_generators.provenance import corpus_page_path  # noqa: E402
 
 CORPUS = "bdpm_rcp"

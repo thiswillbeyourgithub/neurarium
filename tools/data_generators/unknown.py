@@ -54,7 +54,7 @@ import os
 import re
 from typing import Any
 
-from text_fold import ascii_key
+from lib.text_fold import ascii_key
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 UNKNOWN_LOG_PATH = os.path.join(ROOT, "tools", "generated_cache", "unknown_searches.json")

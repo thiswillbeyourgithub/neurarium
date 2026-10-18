@@ -69,8 +69,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent  # repo root
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
-import drugs_io  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib.corpora import bdpm  # noqa: E402 (section_body, html_lines, the product join, RCP_URL)
 import fetch_ema_epar  # noqa: E402 (the EPAR found by name, for a drug with no CIS)
 

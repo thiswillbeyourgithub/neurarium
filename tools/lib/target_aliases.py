@@ -33,17 +33,12 @@ Built with the help of Claude Code.
 """
 from __future__ import annotations
 
-import os
 import re
-import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-if HERE not in sys.path:                  # so `data_generators` resolves when a caller
-    sys.path.insert(0, HERE)              # imported this module by path, not by package
-from text_fold import strip_accents  # noqa: E402
+from lib.text_fold import strip_accents
 
-from data_generators.drugs import DRUG_TARGETS  # noqa: E402  (authoring side, not meta.json)
-from data_generators.receptors import RECEPTORS  # noqa: E402
+from data_generators.drugs import DRUG_TARGETS  # authoring side, not meta.json
+from data_generators.receptors import RECEPTORS
 
 # Greek is spelled out rather than stripped, because an article writes the same
 # receptor both ways ("α2A" / "alpha-2A") and stripping would leave "2a", which no

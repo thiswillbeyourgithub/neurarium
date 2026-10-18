@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from io_atomic import atomic_write_json
+from lib.io_atomic import atomic_write_json
 from pipeline.judged import stamp
 
 

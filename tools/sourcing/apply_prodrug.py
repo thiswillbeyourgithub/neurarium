@@ -42,8 +42,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from data_generators.drugs import PRODRUG_OWN_ACTIONS  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 from pipeline.judged import resolve  # noqa: E402

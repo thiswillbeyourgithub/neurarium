@@ -34,10 +34,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from data_generators.provenance import brand_regions  # noqa: E402
-from text_fold import ascii_key, strip_accents  # noqa: E402
+from lib.text_fold import ascii_key, strip_accents  # noqa: E402
 
 PAGES_FR = ROOT / "data_sources" / "wikipedia" / "pages_fr"
 WORKLIST = ROOT / "tools" / "generated_cache" / "brand_worklist.json"

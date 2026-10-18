@@ -67,7 +67,7 @@ from data_generators.quote_table import quote_id  # noqa: E402
 from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 import citation_site as CS  # noqa: E402
-from io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
+from lib.io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
 
 # The applier-written caches that can hold a quote-bearing source. The hand-authored
 # registries are deliberately absent: see the module docstring.

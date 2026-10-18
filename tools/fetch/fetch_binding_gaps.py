@@ -70,14 +70,14 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-import binding_gaps as bg  # noqa: E402  (the predicates the applier re-runs)
-import drugs_io  # noqa: E402
+from lib import binding_gaps as bg  # noqa: E402  (the predicates the applier re-runs)
+from lib import drugs_io  # noqa: E402
 import fetch_binding_directions as bd  # noqa: E402  (DIRECTION_RE: a stated direction)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup + sentence split)
 import fetch_metabolite_bindings as mb  # noqa: E402  (prose action-line extractor)
-import target_aliases as ta  # noqa: E402
-import worklist_io  # noqa: E402
-from worklist_io import merge_scoped_list  # noqa: E402
+from lib import target_aliases as ta  # noqa: E402
+from lib import worklist_io  # noqa: E402
+from lib.worklist_io import merge_scoped_list  # noqa: E402
 
 WORKLIST = os.path.join(REPO, "tools", "generated_cache", "binding_gaps_worklist.json")
 

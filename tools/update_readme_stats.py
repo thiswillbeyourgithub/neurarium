@@ -44,7 +44,7 @@ import sys
 from pathlib import Path
 
 from data_generators import node_kinds
-from io_atomic import atomic_write_text
+from lib.io_atomic import atomic_write_text
 
 REPO = Path(__file__).resolve().parent.parent
 META = REPO / "public" / "data" / "meta.json"

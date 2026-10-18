@@ -67,8 +67,8 @@ sys.path.insert(0, os.path.join(REPO, "tools"))
 sys.path.insert(0, HERE)
 
 from lib.quote_match import normalize_for_match  # noqa: E402  (the quote gate's one normalizer)
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402
 from fetch_cyp import (  # noqa: E402  (one definition of each shared rule)
     ENZYME_RE,
     gate,

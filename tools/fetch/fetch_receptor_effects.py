@@ -50,11 +50,11 @@ from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of)
 import fetch_demographics as demog  # noqa: E402 (abstract_lines)
 import fetch_europepmc as epmc  # noqa: E402 (EFFECT_SEARCH_LEDGER)
 import fetch_gtopdb_function as gfunc  # noqa: E402 (RAW, offerable)
-import target_aliases  # noqa: E402
+from lib import target_aliases  # noqa: E402
 from data_generators.receptor_effects import RECEPTOR_EFFECTS  # noqa: E402
 from data_generators.unknown import effects_site  # noqa: E402
-import worklist_io  # noqa: E402
-from worklist_io import merge_scoped  # noqa: E402
+from lib import worklist_io  # noqa: E402
+from lib.worklist_io import merge_scoped  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "receptor_effects_worklist.json"
 

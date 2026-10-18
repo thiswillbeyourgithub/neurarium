@@ -46,7 +46,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
-import drugs_io  # noqa: E402
+from lib import drugs_io  # noqa: E402
 
 # The applier's one quote gate (check_data's own normalizer, every corpus's page tree),
 # so a quote accepted here cannot be rejected by the checker afterwards.

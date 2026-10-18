@@ -65,8 +65,8 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 sys.path.insert(0, HERE)
 
-from io_atomic import atomic_write_json  # noqa: E402
-import drugs_io  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import drugs_io  # noqa: E402
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (owns PAGE_ALIASES + the slug rule)
 import fetch_wikipedia_pharmacology as wiki  # noqa: E402 (grid, headers, resolver, row text)
 

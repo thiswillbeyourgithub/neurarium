@@ -27,8 +27,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root (script in tools/sourcing/)
 DATA = ROOT / "public" / "data"
 sys.path.insert(0, str(ROOT / "tools"))                # reach the shared text_fold module
-from text_fold import alnum_key  # noqa: E402
-import stahl_index  # noqa: E402 (the one INDEX.md reader + span search)
+from lib.text_fold import alnum_key  # noqa: E402
+from lib import stahl_index  # noqa: E402 (the one INDEX.md reader + span search)
 
 
 _norm = alnum_key  # lowercase alphanumerics only (tools/text_fold.py)

@@ -50,10 +50,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
-sys.path.insert(0, str(HERE))
-import chirality  # noqa: E402
-import polite_http  # noqa: E402 (the one polite GET)
-import salt_words  # noqa: E402 (the shared English salt words)
+from lib import chirality  # noqa: E402
+from lib import polite_http  # noqa: E402 (the one polite GET)
+from lib import salt_words  # noqa: E402 (the shared English salt words)
 from lib.corpora import bdpm  # noqa: E402 (fold, molecule_key)
 
 EMA = "https://www.ema.europa.eu/en/documents/report/"

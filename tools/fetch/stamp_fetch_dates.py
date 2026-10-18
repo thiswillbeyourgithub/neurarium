@@ -24,7 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from data_generators import freshness, page_links  # noqa: E402  (path shim above)
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 
 
 def main() -> int:

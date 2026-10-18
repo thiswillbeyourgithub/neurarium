@@ -48,7 +48,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent.parent   # script lives in tools/fetch/
 sys.path.insert(0, str(REPO / "tools"))
-import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib.gene_maps import RECEPTOR_GENES  # noqa: E402
 OUT = REPO / "data_sources" / "gtopdb"
 RAW = OUT / "raw"

@@ -57,11 +57,11 @@ sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_generators.receptor_effects import (  # noqa: E402
     CACHE, EFFECT_EVIDENCE, RECEPTOR_EFFECT_MODES, RECEPTOR_EFFECTS)
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from prose_gate import apply_picks, not_offered, run_applier  # noqa: E402
 from apply_classification_sources import PROSE_PAGES as _PROSE  # noqa: E402
 from data_generators.provenance import corpus_page_path  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 
 # The two prose corpora plus GtoPdb's function pages (corpus #23) and the Europe PMC
 # abstracts the owner-level effect search read (corpus #17).
@@ -119,7 +119,7 @@ def unknown_log(worklist: dict, cache: dict, kinds: dict[str, str], ledger: dict
     sys.path.insert(0, str(TOOLS / "fetch"))
     import fetch_gtopdb_function as gfunc                   # noqa: E402 (RAW, offerable)
     import fetch_receptor_effects as fre                    # noqa: E402 (owner_names)
-    import target_aliases                                   # noqa: E402
+    from lib import target_aliases                                   # noqa: E402
     from data_generators.unknown import effects_site       # noqa: E402
     aliases = target_aliases.aliases_by_target()
     log = dict(prior or {})

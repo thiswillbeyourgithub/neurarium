@@ -85,7 +85,7 @@ class ScopedWorklistMergeTest(unittest.TestCase):
     overwrite silently orphaned them (it once dropped 5600 lines of candidates)."""
 
     def test_only_build_keeps_other_drugs(self):
-        from worklist_io import merge_scoped
+        from lib.worklist_io import merge_scoped
         existing = {"vocabulary": {"a": "A"},
                     "drugs": {"x": {"candidates": [1]}, "y": {"candidates": [2]}}}
         scoped = {"vocabulary": {"a": "A", "b": "B"}, "drugs": {"y": {"candidates": [3]}}}
@@ -96,7 +96,7 @@ class ScopedWorklistMergeTest(unittest.TestCase):
     def test_list_worklist_merge_keeps_other_entries(self):
         """``fetch_metabolite_bindings --only`` once overwrote all 24 metabolite entries
         with the one it rebuilt; the list-shaped merge keeps them, in place."""
-        from worklist_io import merge_scoped_list
+        from lib.worklist_io import merge_scoped_list
         existing = [{"key": "a", "v": 1}, {"key": "b", "v": 2}]
         out = merge_scoped_list(existing, [{"key": "b", "v": 3}, {"key": "c", "v": 4}], "key")
         self.assertEqual(out, [{"key": "a", "v": 1}, {"key": "b", "v": 3},

@@ -49,10 +49,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
-import drugs_io  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402  (the gate's own normalizer)
-from text_fold import alnum_key  # noqa: E402
+from lib.text_fold import alnum_key  # noqa: E402
 
 CORPUS = "agnp_tdm"
 BOOK = ROOT / "data_sources" / "books" / "agnp_tdm_2026"

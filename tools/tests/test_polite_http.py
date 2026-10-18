@@ -20,7 +20,7 @@ from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import polite_http  # noqa: E402
+from lib import polite_http  # noqa: E402
 
 
 class _Resp(io.BytesIO):

@@ -32,7 +32,7 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
 from lib.quote_match import normalize_for_match  # noqa: E402 (the gate's one normalizer)
-from page_file import page_file  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
 from pipeline.judged import resolve_all  # noqa: E402
 
 

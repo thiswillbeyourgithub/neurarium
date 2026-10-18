@@ -45,8 +45,8 @@ OUT = TOOLS / "generated_cache" / "location_sources.json"
 
 sys.path.insert(0, str(TOOLS))
 from pipeline.gate import PageGate, registry_pages  # noqa: E402  (the applier's page gate)
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
-from io_atomic import atomic_write_text  # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib.io_atomic import atomic_write_text  # noqa: E402
 
 
 def load_worklist() -> dict[str, dict]:

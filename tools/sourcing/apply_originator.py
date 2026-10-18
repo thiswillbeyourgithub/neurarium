@@ -49,8 +49,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from lib.corpora import wikipedia as wikistore  # noqa: E402
 import fetch_originator as fo  # noqa: E402
 from data_generators import history, origin  # noqa: E402

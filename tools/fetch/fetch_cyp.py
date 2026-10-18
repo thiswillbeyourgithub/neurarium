@@ -39,7 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-import stahl_index  # noqa: E402 (the one INDEX.md reader)
+from lib import stahl_index  # noqa: E402 (the one INDEX.md reader)
 from lib.quote_match import normalize_for_match  # noqa: E402  (the quote gate's one normalizer)
 from data_generators.drugs import ENZYMES  # noqa: E402  (the modeled isoform ids)
 

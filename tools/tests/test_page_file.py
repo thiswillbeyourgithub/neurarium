@@ -14,7 +14,7 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
-import page_file  # noqa: E402
+from lib import page_file  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402
 from data_generators.provenance import corpus_page_path  # noqa: E402
 

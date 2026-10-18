@@ -101,9 +101,9 @@ ROOT = HERE.parent.parent                                       # repo root
 sys.path.insert(0, str(HERE))
 
 sys.path.insert(0, str(HERE.parent))
-import polite_http                                            # noqa: E402 (the one polite GET)
-from species import species_key                                # noqa: E402
-from io_atomic import atomic_write_json, atomic_write_text      # noqa: E402
+from lib import polite_http                                            # noqa: E402 (the one polite GET)
+from lib.species import species_key                                # noqa: E402
+from lib.io_atomic import atomic_write_json, atomic_write_text      # noqa: E402
 
 API = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 FULL_TEXT_API = "https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML"
@@ -506,9 +506,9 @@ def affinity_candidates(page: str) -> list[dict]:
 def ki_prose(only: set | None, refresh: bool) -> int:
     """The ``--ki-prose`` worklist (see the module docstring)."""
     sys.path.insert(0, str(ROOT / "tools"))
-    import drugs_io  # noqa: E402
-    import target_aliases as ta  # noqa: E402
-    import worklist_io  # noqa: E402
+    from lib import drugs_io  # noqa: E402
+    from lib import target_aliases as ta  # noqa: E402
+    from lib import worklist_io  # noqa: E402
     from lib.corpora.wikipedia import page_for  # noqa: E402 (drug -> stored article)
 
     names = ta.target_names()
@@ -563,7 +563,7 @@ def ki_prose(only: set | None, refresh: bool) -> int:
 def _alias_gene_maps() -> tuple[dict, dict]:
     """``(aliases, genes)``: every target's prose aliases and its HGNC gene symbols."""
     sys.path.insert(0, str(ROOT / "tools"))
-    import target_aliases as ta                             # noqa: E402
+    from lib import target_aliases as ta                             # noqa: E402
     from fetch_gtopdb_ki import owner_genes                 # noqa: E402 (gene map)
     aliases = ta.aliases_by_target()
     genes: dict[str, set] = {}
@@ -576,7 +576,7 @@ def _alias_gene_maps() -> tuple[dict, dict]:
 def binding_search(only: set | None, refresh: bool) -> int:
     """The UNKNOWN search's Europe PMC leg (see the module docstring)."""
     sys.path.insert(0, str(ROOT / "tools"))
-    import drugs_io                                         # noqa: E402
+    from lib import drugs_io                                         # noqa: E402
     from data_generators import unknown                     # noqa: E402
     aliases, genes = _alias_gene_maps()
     rows = [(r["site"], lambda r=r: direction_query(

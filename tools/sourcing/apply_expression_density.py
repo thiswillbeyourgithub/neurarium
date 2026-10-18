@@ -41,7 +41,7 @@ OUT = TOOLS / "generated_cache" / "expression_density.json"
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from apply_location_sources import owner_regions, quote_refuted  # noqa: E402  (same guards)
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 
 
 def collect() -> tuple[dict[str, dict], list[str], int]:

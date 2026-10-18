@@ -8,7 +8,7 @@ TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
 
 from data_generators.provenance import brand_regions  # noqa: E402
-from text_fold import alnum_key, ascii_key, strip_accents  # noqa: E402
+from lib.text_fold import alnum_key, ascii_key, strip_accents  # noqa: E402
 
 
 class TextFoldTest(unittest.TestCase):

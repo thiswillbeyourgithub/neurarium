@@ -53,8 +53,8 @@ CACHE = os.path.join(ROOT, "tools", "generated_cache", "cpic_guidance.json")
 DRUGS = os.path.join(ROOT, "tools", "data", "drugs_data.jsonl")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-from io_atomic import atomic_write_json  # noqa: E402
-import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from data_generators.cpic import (  # noqa: E402
     ASSUMED, EXPORT_NAME, PHENOTYPE_SLUGS, POPULATIONS, export_path,
     guidance_for, read_export, sha256)

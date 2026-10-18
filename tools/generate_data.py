@@ -195,7 +195,7 @@ import citation_site as CS  # noqa: E402
 # to public/data/changelog.json (docs/ is not web-exposed, so the emit is what makes
 # them reachable).
 from data_generators.changelog import load_changelog  # noqa: E402
-from io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
+from lib.io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
 from data_generators import llms_txt  # noqa: E402 (public/llms.txt for LLM agents)
 from data_generators import effect_index as EFFECT_INDEX  # noqa: E402 (llms.txt effects, BETA)
 
@@ -1526,7 +1526,7 @@ def _load_drugs() -> list[dict[str, Any]]:
     not an error (the drugs feature is simply empty), so the generator still runs
     on a checkout without it.
     """
-    import drugs_io
+    from lib import drugs_io
     if not drugs_io.DRUGS_PATH.exists():
         log.warning("no %s; drugs.jsonl will be empty", drugs_io.DRUGS_PATH.name)
         return []
@@ -1820,7 +1820,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     enzyme_rows = _load_drug_enzymes()
     seen_drug_ids: set[str] = set()
     authored_drugs = _load_drugs()
-    import drugs_io
+    from lib import drugs_io
     metabolites = _metabolite_records(drugs_io.load_metabolites(), authored_drugs,
                                       valid_targets)
     metabolite_store = {m["id"]: m for m in metabolites}

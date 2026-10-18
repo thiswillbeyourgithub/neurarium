@@ -28,9 +28,9 @@ import re
 from collections.abc import Callable
 from pathlib import Path
 
-from text_fold import alnum_key
+from lib.text_fold import alnum_key
 
-STAHL_DIR = Path(__file__).resolve().parent.parent / "data_sources" / "books" / "stahl"
+STAHL_DIR = Path(__file__).resolve().parents[2] / "data_sources" / "books" / "stahl"
 INDEX = STAHL_DIR / "INDEX.md"
 PAGES = STAHL_DIR / "pages"
 

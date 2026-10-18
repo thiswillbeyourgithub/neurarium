@@ -81,10 +81,10 @@ CACHE = os.path.join(ROOT, "tools", "generated_cache")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from data_generators.provenance import SOURCING_LLMS  # noqa: E402
-from page_file import page_file  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib.quote_match import emitted_page_dirs  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 # The claim walk lives in its own module (the generator runs it too); re-exported here
 # because this is where the judge's side of it is read and tested.
 from claim_walk import (  # noqa: E402,F401

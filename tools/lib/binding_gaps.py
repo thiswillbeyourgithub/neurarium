@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """The rules the binding-gap pass shares between its fetcher and its applier.
 
 The gap pass (``tools/fetch/fetch_binding_gaps.py`` -> one LLM pass ->
@@ -20,15 +19,14 @@ import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-if HERE not in sys.path:
-    sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(HERE, "fetch"))
+# tools/fetch, for fetch_ki (a script still owning COARSE_MEMBERS); tools/ itself is
+# already on the path of any caller that can import ``lib``.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "fetch"))
 
-import chirality  # noqa: E402  (the optical-rotation tag grammar, read not re-invented)
-import target_aliases as ta  # noqa: E402
+from lib import chirality  # noqa: E402  (the optical-rotation tag grammar, read not re-invented)
+from lib import target_aliases as ta  # noqa: E402
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup, stdlib)
-from drugs_io import is_combination  # noqa: E402
+from lib.drugs_io import is_combination  # noqa: E402
 from fetch_ki import COARSE_MEMBERS  # noqa: E402  (stdlib module)
 
 # A cue that the clause holding the target mention denies the action rather than

@@ -19,9 +19,9 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
 from pipeline.gate import PageGate  # noqa: E402 (the page gate, written once)
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.judged import resolve  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 
 
 def add_source(bucket: list, src: dict, key=None) -> bool:

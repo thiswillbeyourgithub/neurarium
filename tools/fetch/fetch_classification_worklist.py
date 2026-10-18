@@ -41,12 +41,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
-HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
-sys.path.insert(0, str(HERE))
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of, SENTENCE_SPLIT, REFERENCE_RE)
-import target_aliases  # noqa: E402
-import worklist_io  # noqa: E402
+from lib import target_aliases  # noqa: E402
+from lib import worklist_io  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "classification_worklist.json"
 WIKI_PAGES = ROOT / "data_sources" / "wikipedia" / "pages"

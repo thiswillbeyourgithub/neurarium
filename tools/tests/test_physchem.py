@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
-import drugs_io  # noqa: E402
+from lib import drugs_io  # noqa: E402
 import fetch_physchem as F  # noqa: E402
 from data_generators import physchem as P  # noqa: E402
 from data_generators.provenance import _quote_sources  # noqa: E402

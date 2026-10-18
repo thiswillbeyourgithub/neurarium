@@ -58,10 +58,10 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-import binding_gaps as bg  # noqa: E402  (the predicates the fetcher offered with)
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
-import drugs_io  # noqa: E402
-import target_aliases as ta  # noqa: E402
+from lib import binding_gaps as bg  # noqa: E402  (the predicates the fetcher offered with)
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io  # noqa: E402
+from lib import target_aliases as ta  # noqa: E402
 from apply_binding_directions import CORPUS, PAGES, BindingGate, page_text  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 from data_generators.drugs import DRUG_ACTIONS  # noqa: E402

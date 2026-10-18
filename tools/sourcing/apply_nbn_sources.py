@@ -40,9 +40,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root (script in tools/sourcing/)
 sys.path.insert(0, str(ROOT / "tools"))                # reach the shared drugs_io module
-import drugs_io  # noqa: E402
-from text_fold import alnum_key  # noqa: E402
-import stahl_index  # noqa: E402 (the one INDEX.md reader + span search)
+from lib import drugs_io  # noqa: E402
+from lib.text_fold import alnum_key  # noqa: E402
+from lib import stahl_index  # noqa: E402 (the one INDEX.md reader + span search)
 DRUGS_JSON = drugs_io.DRUGS_PATH
 
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes

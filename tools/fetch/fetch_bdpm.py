@@ -75,9 +75,9 @@ sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 
 from lib.corpora import bdpm                                    # noqa: E402 (the store + product join)
-import drugs_io                                                 # noqa: E402
-from io_atomic import atomic_write_json                         # noqa: E402
-import polite_http                                              # noqa: E402 (the one polite GET)
+from lib import drugs_io                                                 # noqa: E402
+from lib.io_atomic import atomic_write_json                         # noqa: E402
+from lib import polite_http                                              # noqa: E402 (the one polite GET)
 import fetch_half_life                                          # noqa: E402 (HALF_LIFE_RE)
 from lib.parse import durations  # noqa: E402
 

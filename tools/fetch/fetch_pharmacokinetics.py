@@ -41,10 +41,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
-import drugs_io                                                 # noqa: E402
+from lib import drugs_io                                                 # noqa: E402
 from lib.parse.durations import parse_duration  # noqa: E402
-import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
-from io_atomic import atomic_write_json  # noqa: E402
+from lib import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
+from lib.io_atomic import atomic_write_json  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "pk_worklist.json"
 

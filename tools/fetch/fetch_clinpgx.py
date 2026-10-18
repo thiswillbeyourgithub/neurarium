@@ -45,8 +45,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 ZIP = os.path.join(ROOT, "data_sources", "clinpgx", "clinicalAnnotations.zip")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-from io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
-import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib.io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
+from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from data_generators.clinpgx import (  # noqa: E402
     DOWNLOAD_URL, EXPORT_NAME, PIN_CACHE, VARIANT_LEVELS, export_path, owners_of,
     read_export, sha256)

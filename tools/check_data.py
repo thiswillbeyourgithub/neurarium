@@ -1996,10 +1996,10 @@ from changelog import CATEGORIES as CHANGELOG_CATEGORIES  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_generators import clinpgx, cpic, freshness, node_id, pharmfreq, unknown  # noqa: E402
 from data_generators.node_kinds import NODE_KINDS, backed  # noqa: E402
-from text_fold import alnum_key  # noqa: E402
-from drugs_io import is_combination  # noqa: E402
-from page_file import page_file  # noqa: E402 (refuses a path-like page)
-import stahl_index  # noqa: E402 (the one INDEX.md reader)
+from lib.text_fold import alnum_key  # noqa: E402
+from lib.drugs_io import is_combination  # noqa: E402
+from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
+from lib import stahl_index  # noqa: E402 (the one INDEX.md reader)
 from data_generators import release_modulation as RELMOD  # noqa: E402
 from data_generators import demographics as DEMOG  # noqa: E402
 # The drug + its formulations, the holders of brands / Tmax / T½ (one walker, so the

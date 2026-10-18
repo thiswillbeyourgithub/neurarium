@@ -44,12 +44,12 @@ ROOT = HERE.parent.parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "tools"))
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from prose_gate import add_source  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 from data_generators.quotes.attestation import pattern_for  # noqa: E402
 from data_generators.presentation import KIND_TO_SIGN  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 
 CACHE = ROOT / "tools" / "generated_cache"
 WORKLIST = CACHE / "projection_worklist.json"

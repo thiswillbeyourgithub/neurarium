@@ -67,9 +67,9 @@ sys.path.insert(0, HERE)          # sibling fetch_wikipedia_pharmacology.py + fe
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch/store/extract; no dup)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
 import fetch_ki as ki  # noqa: E402  (PDSP Ki: discover a metabolite's measured targets, corpus #5)
-from io_atomic import atomic_write_json  # noqa: E402
-import drugs_io  # noqa: E402
-from worklist_io import merge_scoped_list  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib.worklist_io import merge_scoped_list  # noqa: E402
 
 WORKLIST = os.path.join(REPO, "tools", "generated_cache",
                         "metabolite_bindings_worklist.json")

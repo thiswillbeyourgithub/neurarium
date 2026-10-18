@@ -46,7 +46,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 CACHE = os.path.join(ROOT, "tools", "generated_cache", "enzyme_variability.json")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 from data_generators.drugs import ENZYMES  # noqa: E402
 from data_generators.pharmfreq import (  # noqa: E402
     EXPORT_DIR, GENE_ENZYMES, ExportError, export_files, ordered_profile, quote_for,

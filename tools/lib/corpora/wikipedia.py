@@ -30,7 +30,7 @@ RAW_DIR = os.path.join(DATA_DIR, "raw")
 PAGES_DIR = os.path.join(DATA_DIR, "pages")
 META_PATH = os.path.join(REPO, "public", "data", "meta.json")
 
-import polite_http  # noqa: E402  (the one polite GET + User-Agent)
+from lib import polite_http  # noqa: E402  (the one polite GET + User-Agent)
 from data_generators.drugs import ENZYMES  # noqa: E402  (stdlib-only module)
 
 # The isoform ids the dataset models: ENZYMES itself, so a newly modeled isoform is
@@ -59,7 +59,7 @@ def title_slug(title: str) -> str:
     the writer and every stdlib reader agree. Greek letters are spelled out first, or
     "δ-opioid receptor" and "κ-opioid receptor" would both collapse to ``opioid_receptor``.
     """
-    from target_aliases import GREEK_TO_LATIN  # lazy: only a slug needs the map
+    from lib.target_aliases import GREEK_TO_LATIN  # lazy: only a slug needs the map
     t = title.strip()
     for greek, latin in GREEK_TO_LATIN.items():
         t = t.replace(greek, latin)

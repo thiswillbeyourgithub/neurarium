@@ -22,11 +22,11 @@ import json
 import re
 from pathlib import Path
 
-from io_atomic import atomic_write_text
-from text_fold import ascii_key
+from lib.io_atomic import atomic_write_text
+from lib.text_fold import ascii_key
 
-DRUGS_PATH = Path(__file__).resolve().parent / "data" / "drugs_data.jsonl"
-METABOLITES_PATH = Path(__file__).resolve().parent / "data" / "metabolites_data.jsonl"
+DRUGS_PATH = Path(__file__).resolve().parents[1] / "data" / "drugs_data.jsonl"
+METABOLITES_PATH = Path(__file__).resolve().parents[1] / "data" / "metabolites_data.jsonl"
 
 
 # A combination product's name joins its parts with + or an en / em dash ("Naltrexone +

@@ -38,8 +38,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
-import drugs_io                                                 # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io                                                 # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 
 # The corpora a judged quote may cite (``corpus`` defaults to ``stahl``): Stahl's
 # monograph prose, then the drug's (or the metabolite's) own English Wikipedia article.

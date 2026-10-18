@@ -50,15 +50,15 @@ ROOT = Path(__file__).resolve().parent.parent.parent  # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from lib.quote_match import normalize_for_match  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 import fetch_workup  # noqa: E402
 from data_generators import workup as W  # noqa: E402
 from data_generators.provenance import SOURCE_CORPORA  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 
 JUDGED_PATH = ROOT / "tools" / "generated_cache" / "workup_judged.json"
 CORPUS = fetch_workup.CORPUS

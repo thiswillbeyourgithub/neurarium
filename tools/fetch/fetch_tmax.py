@@ -63,10 +63,10 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 
-import drugs_io                                                 # noqa: E402
-import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
-from page_file import page_file  # noqa: E402 (refuses a path-like page)
-import worklist_io  # noqa: E402
+from lib import drugs_io                                                 # noqa: E402
+from lib import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
+from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
+from lib import worklist_io  # noqa: E402
 from lib.corpora import wikipedia as wikistore                            # noqa: E402 (page_for)
 from lib.parse.durations import PEAK_RE, durations_in, durations_in_fr, sentences  # noqa: E402
 import fetch_pharmacokinetics as pk                              # noqa: E402 (spans, units)

@@ -39,8 +39,8 @@ import urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))   # repo root (script in tools/fetch/)
 sys.path.insert(0, os.path.dirname(HERE))        # tools/ for the shared drugs_io module
-import chirality  # noqa: E402
-import drugs_io  # noqa: E402
+from lib import chirality  # noqa: E402
+from lib import drugs_io  # noqa: E402
 CSV_PATH = os.path.join(REPO, "data_sources", "books", "pdsp_ki", "KiDatabase.csv")
 DOWNLOAD_URL = "https://pdspdb.unc.edu/databases/kiDownload/download.php"
 # pdspdb.unc.edu chains to a root missing from the Mozilla store; this cross-cert

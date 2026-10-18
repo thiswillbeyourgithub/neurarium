@@ -13,8 +13,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from drugs_io import is_combination
-from page_file import page_file
+from lib.drugs_io import is_combination
+from lib.page_file import page_file
 
 from . import clinpgx, cpic, pharmfreq
 from . import node_kinds as node_kinds_mod

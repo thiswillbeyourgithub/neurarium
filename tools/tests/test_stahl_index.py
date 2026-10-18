@@ -15,8 +15,8 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import stahl_index  # noqa: E402
-from drugs_io import ascii_key  # noqa: E402
+from lib import stahl_index  # noqa: E402
+from lib.drugs_io import ascii_key  # noqa: E402
 
 # The shape tools/fetch/build_index.py writes: a header, then one row per monograph,
 # a one-page monograph spelled without a dash.

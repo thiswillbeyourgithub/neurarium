@@ -63,7 +63,7 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
 REPO = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
-import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib.gene_maps import TARGET_GENES  # noqa: E402
 ALLEN = REPO / "data_sources" / "allen"
 RAW = ALLEN / "raw"

@@ -68,10 +68,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
-import chirality  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
-import drugs_io  # noqa: E402
-import polite_http  # noqa: E402 (the one polite GET)
+from lib import chirality  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib import polite_http  # noqa: E402 (the one polite GET)
 from lib.corpora.wikipedia import page_for  # noqa: E402
 
 PUBCHEM_DIR = ROOT / "data_sources" / "pubchem" / "pages"

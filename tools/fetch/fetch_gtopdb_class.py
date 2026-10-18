@@ -51,7 +51,7 @@ from fetch_gtopdb import (  # noqa: E402  (path shim above)
     file_date,
     http_json,
 )
-from io_atomic import atomic_write_json  # noqa: E402  (tools/ is on sys.path via fetch_gtopdb)
+from lib.io_atomic import atomic_write_json  # noqa: E402  (tools/ is on sys.path via fetch_gtopdb)
 from lib.gene_maps import receptor_genes  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent   # script lives in tools/fetch/

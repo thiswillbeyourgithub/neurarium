@@ -59,7 +59,7 @@ sys.path.insert(0, str(HERE.parent))
 from fetch_gtopdb import BASE, clean, file_date, http_json  # noqa: E402
 from fetch_gtopdb_class import subject, target_record  # noqa: E402
 from data_generators import genes  # noqa: E402
-from species import species_key  # noqa: E402
+from lib.species import species_key  # noqa: E402
 
 REPO = HERE.parent.parent
 OUT = REPO / "data_sources" / "gtopdb"

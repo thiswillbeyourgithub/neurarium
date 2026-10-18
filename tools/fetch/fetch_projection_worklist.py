@@ -48,8 +48,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 from fetch_classification_worklist import sentences  # noqa: E402 (one sentence splitter)
-import worklist_io  # noqa: E402
-from worklist_io import merge_scoped  # noqa: E402
+from lib import worklist_io  # noqa: E402
+from lib.worklist_io import merge_scoped  # noqa: E402
 from data_generators.quotes.attestation import pattern_for  # noqa: E402
 from data_generators.quotes.uncertainty import (  # noqa: E402
     _base_id, _names_region, _region_designations)

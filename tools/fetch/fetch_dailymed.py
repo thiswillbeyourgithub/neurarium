@@ -74,9 +74,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 
-import drugs_io                                                 # noqa: E402
-from io_atomic import atomic_write_json                         # noqa: E402
-import polite_http  # noqa: E402 (the one polite GET)
+from lib import drugs_io                                                 # noqa: E402
+from lib.io_atomic import atomic_write_json                         # noqa: E402
+from lib import polite_http  # noqa: E402 (the one polite GET)
 
 API = "https://dailymed.nlm.nih.gov/dailymed/services/v2"
 LABEL_URL = "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid={setid}"

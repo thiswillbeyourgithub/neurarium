@@ -52,9 +52,9 @@ sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(TOOLS / "fetch"))
 
 from lib.quote_match import normalize_for_match                     # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.judged import resolve  # noqa: E402
-import drugs_io                                                # noqa: E402
+from lib import drugs_io                                                # noqa: E402
 from fetch_europepmc import (ARTICLE_URL, FULL_TEXT_MARKER, KI_PROSE_WORKLIST,  # noqa: E402
                              PAGES_DIR)
 

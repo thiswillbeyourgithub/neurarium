@@ -39,12 +39,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
-HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
-sys.path.insert(0, str(HERE))
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402
-from worklist_io import merge_scoped  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402
+from lib.worklist_io import merge_scoped  # noqa: E402
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (page_for, SENTENCE_SPLIT)
 from data_generators.drugs import DRUG_CATEGORY_LABELS  # noqa: E402
 

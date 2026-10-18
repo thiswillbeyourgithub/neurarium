@@ -39,7 +39,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
-import drugs_io  # noqa: E402
+from lib import drugs_io  # noqa: E402
 from data_generators import origin  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 import fetch_drugsfda as fda  # noqa: E402

@@ -15,7 +15,6 @@ from unittest import mock
 
 TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS / "fetch"))
-sys.path.insert(0, str(TOOLS / "sourcing"))
 sys.path.insert(0, str(TOOLS))
 import fetch_gtopdb_function as gf  # noqa: E402
 import fetch_receptor_effects as fre  # noqa: E402

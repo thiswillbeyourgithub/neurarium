@@ -73,7 +73,7 @@ from pathlib import Path
 # (same Wikimedia endpoint, User-Agent, retry/backoff and helpers). Both scripts
 # live in tools/, so a plain import resolves when run as `python tools/<name>.py`.
 from fetch_molecules import API as EN_API, _is_chrome, article_title, http_json
-from io_atomic import atomic_write_json  # tools/ is on sys.path via fetch_molecules
+from lib.io_atomic import atomic_write_json  # tools/ is on sys.path via fetch_molecules
 
 TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
 REPO = TOOLS.parent

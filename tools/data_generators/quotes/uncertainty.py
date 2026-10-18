@@ -67,7 +67,7 @@ import collections
 import re
 from typing import Any
 
-from text_fold import ascii_key
+from lib.text_fold import ascii_key
 
 from .. import quote_table
 

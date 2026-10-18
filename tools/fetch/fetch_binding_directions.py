@@ -83,9 +83,9 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)                              # sibling fetch_* modules
 sys.path.insert(0, os.path.join(REPO, "tools"))       # drugs_io, target_aliases
 
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402
-import target_aliases as ta  # noqa: E402  (the shared "quote names the target" test)
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402
+from lib import target_aliases as ta  # noqa: E402  (the shared "quote names the target" test)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup + PAGE_ALIASES)
 # Imported for `action_lines` only. It pulls in BeautifulSoup at import time, which is
 # why this script declares the beautifulsoup4 dependency above; no HTML is parsed here.

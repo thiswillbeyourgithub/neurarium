@@ -17,7 +17,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import worklist_io  # noqa: E402
+from lib import worklist_io  # noqa: E402
 
 
 class ReadTest(unittest.TestCase):

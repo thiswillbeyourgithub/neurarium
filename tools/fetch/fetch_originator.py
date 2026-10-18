@@ -41,10 +41,10 @@ ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
-from worklist_io import merge_scoped  # noqa: E402
+from lib.worklist_io import merge_scoped  # noqa: E402
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (page_for, PAGES_DIR)
 import fetch_drug_history  # noqa: E402 (section_sentences)
 from data_generators import history, origin  # noqa: E402

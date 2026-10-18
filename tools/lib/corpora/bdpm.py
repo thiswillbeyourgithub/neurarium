@@ -15,8 +15,8 @@ import json
 import re
 from pathlib import Path
 
-import chirality
-from text_fold import strip_accents
+from lib import chirality
+from lib.text_fold import strip_accents
 
 ROOT = Path(__file__).resolve().parents[3]                      # repo root
 

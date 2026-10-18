@@ -17,7 +17,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
-sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
 import apply_pharmacokinetics as PK  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
@@ -120,7 +119,7 @@ class NonModeledTest(unittest.TestCase):
     """Which store records a bindings pass sources: the ones not themselves a drug."""
 
     def test_linked_by_id_or_name_is_skipped_and_parents_are_listed(self):
-        import drugs_io
+        from lib import drugs_io
         drugs = [{"id": "venlafaxine", "name": "Venlafaxine",
                   "metabolites": [{"id": "odv"}, {"id": "temazepam"}]},
                  {"id": "desvenlafaxine", "name": "Desvenlafaxine"},

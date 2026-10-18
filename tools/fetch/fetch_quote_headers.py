@@ -63,10 +63,10 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-from io_atomic import atomic_write_json  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
 import check_data  # noqa: E402  (reuse the quote gate's normalizer + range gate)
 from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
-import stahl_index  # noqa: E402  (the one INDEX.md reader)
+from lib import stahl_index  # noqa: E402  (the one INDEX.md reader)
 
 STAHL = "stahl"
 QUOTES = os.path.join(REPO, "public", "data", "quotes.jsonl")

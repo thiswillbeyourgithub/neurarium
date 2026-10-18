@@ -55,11 +55,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
-import polite_http  # noqa: E402 (the one polite GET + User-Agent)
-import chirality  # noqa: E402
-from io_atomic import atomic_write_json  # noqa: E402
-import drugs_io  # noqa: E402
-import salt_words  # noqa: E402
+from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib import chirality  # noqa: E402
+from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import drugs_io  # noqa: E402
+from lib import salt_words  # noqa: E402
 
 EXPORT_URL = "https://download.open.fda.gov/drug/drugsfda/drug-drugsfda-0001-of-0001.json.zip"
 BASE = ROOT / "data_sources" / "drugsfda"

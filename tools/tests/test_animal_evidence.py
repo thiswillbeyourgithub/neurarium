@@ -9,7 +9,7 @@ TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
 
 from data_generators.quotes.animal_evidence import apply_animal_evidence  # noqa: E402
-from species import SPECIES, species_key  # noqa: E402
+from lib.species import SPECIES, species_key  # noqa: E402
 
 ROOT = TOOLS.parent
 

@@ -74,10 +74,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-import drugs_io  # noqa: E402
-import worklist_io  # noqa: E402 (the one judged / worklist reader)
-from io_atomic import atomic_write_json  # noqa: E402
-import target_aliases as ta  # noqa: E402  (the same matcher the fetcher offered with)
+from lib import drugs_io  # noqa: E402
+from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import target_aliases as ta  # noqa: E402  (the same matcher the fetcher offered with)
 from pipeline.gate import PageGate, Tally, registry_pages  # noqa: E402 (the applier's page gate)
 from pipeline.judged import resolve  # noqa: E402
 from data_generators.drugs import DRUG_ACTIONS  # noqa: E402  (the live action vocabulary)
