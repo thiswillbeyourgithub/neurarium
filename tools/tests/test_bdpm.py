@@ -176,10 +176,10 @@ class FrenchDurationTest(unittest.TestCase):
                          [{"hours": 2.0, "hours_max": 4.0}])
 
     def test_bdpm_page_resolves_through_the_registry(self):
-        import apply_tmax
-        self.assertEqual(apply_tmax.page_path("bdpm", "69071035"),
-                         ROOT / "data_sources" / "bdpm" / "pages" / "69071035.md")
-        self.assertIsNone(apply_tmax.page_path("nope", "1"))
+        from pipeline.gate import registry_pages
+        pages = registry_pages()
+        self.assertEqual(pages["bdpm"], ROOT / "data_sources" / "bdpm" / "pages")
+        self.assertNotIn("nope", pages)
 
 
 class BrandApplyTest(unittest.TestCase):

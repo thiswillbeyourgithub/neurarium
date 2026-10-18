@@ -58,7 +58,7 @@ sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 import drugs_io                                                 # noqa: E402
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.judged import resolve  # noqa: E402
-from data_generators.provenance import corpus_page_path         # noqa: E402
+from pipeline.gate import PageGate, registry_pages              # noqa: E402
 import fetch_tmax                                               # noqa: E402
 
 JUDGED_PATH = ROOT / "tools" / "generated_cache" / "tmax_judged.json"
@@ -68,15 +68,6 @@ WIKI_PAGES = ROOT / "data_sources" / "wikipedia" / "pages"
 # the oral single dose the simulation draws (gate 5). 24 h is generous: the slowest
 # oral peaks in the roster sit around 8 h.
 MAX_TMAX_HOURS = 24.0
-
-# Reuse check_data's canonical quote-gate normalization (single source of truth), so a
-# quote that passes here also passes check_data's later re-gate.
-from check_data import normalize_for_match  # noqa: E402
-
-
-# The stored page a candidate's ``(corpus, page)`` pair cites, via the corpus
-# registry's ``pages_dir``, so a corpus a worklist offers needs no branch here.
-page_path = corpus_page_path
 
 
 def same_duration(judged: dict, stated: dict) -> bool:
@@ -134,15 +125,9 @@ def apply_judged(judged: dict, offered: dict, drugs: list[dict], field: str,
         pass landed is stale, not wrong, so it is counted apart from the rejections).
     """
     by_id = {d["id"]: d for d in drugs}
-    text_cache: dict[str, str] = {}
-
-    def page_text(path: Path) -> str:
-        key = str(path)
-        if key not in text_cache:
-            text_cache[key] = (normalize_for_match(
-                path.read_text(encoding="utf-8", errors="replace"))
-                if path.exists() else "")
-        return text_cache[key]
+    # The stored page a candidate's ``(corpus, page)`` cites, via the corpus registry's
+    # ``pages_dir``, so a corpus a worklist offers needs no branch here.
+    pages = PageGate(registry_pages())
 
     written = 0
     rejected: list[str] = []
@@ -178,11 +163,10 @@ def apply_judged(judged: dict, offered: dict, drugs: list[dict], field: str,
         if value["hours"] > max_hours:
             reject(did, f"{value['hours']} h {too_long} (> {max_hours} h)")
             continue
-        path = page_path(cand["corpus"], cand["page"])
-        if not path or not path.exists():
+        if pages.text(cand["corpus"], cand["page"]) is None:
             reject(did, f"no stored page for {cand['corpus']} {cand['page']!r}")
             continue
-        if normalize_for_match(cand["line"]) not in page_text(path):
+        if not pages.on_page(cand["corpus"], cand["page"], cand["line"]):
             reject(did, "the quote is not verbatim on its page")
             continue
         drug[field] = value
