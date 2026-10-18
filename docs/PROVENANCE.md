@@ -192,7 +192,7 @@ verbatim on the drug's page range (region `na`, `verified`); a brand not found v
 guessed. The eu/fr brands come from Wikipedia (corpus #10 `wikipedia_fr`), region-tagged only for ordering.
 
 The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless noted:
-- **#1 Stahl / #2 Kandel / #3 Stahl Essential / #4 Carlat / #6 Nieuwenhuys** are `pages_dir` book
+- **#1 Stahl (`stahl`) / #2 Kandel (`kandel`) / #3 Stahl Essential (`stahl_essential`) / #4 Carlat (`carlat`) / #6 Nieuwenhuys (`nieuwenhuys`)** are `pages_dir` book
   corpora (`page` = a page number): drug bindings/NbN/class (Stahl), pathways + region anatomy (Kandel,
   Nieuwenhuys), receptor/target mechanism (Stahl Essential); see `CLAUDE.local.md` for the trees.
 - **#5 PDSP Ki** (`pdsp_ki`) has a `csv` path, not `pages_dir` (measured Ki values, not paged text). A
