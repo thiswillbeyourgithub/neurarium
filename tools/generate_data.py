@@ -747,7 +747,7 @@ def _check_genes() -> None:
     if missing:
         raise SystemExit(
             f"drug target(s) with no gene symbol: {missing}; add them to "
-            f"TARGET_GENES in tools/fetch/fetch_allen.py")
+            f"TARGET_GENES in tools/lib/gene_maps.py")
     # A receptor carrying regions is one a reader can look up; the stubs (no regions,
     # e.g. the rodent-only alpha2d) have no human gene and are exempt.
     missing = sorted(r["id"] for r in RECEPTORS
@@ -755,8 +755,7 @@ def _check_genes() -> None:
     if missing:
         raise SystemExit(
             f"receptor(s) with no gene symbol: {missing}; add them to RECEPTOR_GENES "
-            f"in tools/fetch/fetch_gtopdb.py (or EXTRA_RECEPTOR_GENES in "
-            f"fetch_gtopdb_class.py)")
+            f"(or EXTRA_RECEPTOR_GENES) in tools/lib/gene_maps.py")
 
 
 def _check_tone_rules() -> None:

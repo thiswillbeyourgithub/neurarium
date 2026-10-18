@@ -22,7 +22,7 @@ Pipeline (mirrors ``fetch_gtopdb.py`` -> ``apply_location_sources.py``):
      filtered as it streams so memory stays small.
   2. Map each tissue sample to our coarse ``base`` region via ``BASE_ALLEN`` (the Allen
      ontology-subtree crosswalk) using the cached ``raw/ontology.json`` structure paths.
-  3. For each gene (``TARGET_GENES`` / ``fetch_gtopdb.RECEPTOR_GENES``), pick the
+  3. For each gene (``TARGET_GENES`` / ``RECEPTOR_GENES``, both in ``lib/gene_maps.py``), pick the
      representative probe (most PACall detections) and, per base, the fraction of that
      base's samples that detect it. A base is **present** if that fraction >= ``PRESENT_MIN``
      (majority) across the downloaded donors.
@@ -64,6 +64,7 @@ TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools
 REPO = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
 import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib.gene_maps import TARGET_GENES  # noqa: E402
 ALLEN = REPO / "data_sources" / "allen"
 RAW = ALLEN / "raw"
 PAGES = ALLEN / "pages"
@@ -123,39 +124,6 @@ BASE_ALLEN = {
     "raphe": [9642, 9455, 9157],
     # olfactory_bulb + pituitary + subthalamic_nucleus: Allen does not sample them in this
     # atlas (pituitary is outside the brain block); left unmapped -> those regions stay llm.
-}
-
-# Non-receptor drug targets (the 25 target_locations owners) -> HGNC gene symbol(s). A
-# multi-gene group (muscarinic, the adrenergic/nicotinic groups, ...) is "present in B" if
-# ANY member gene detects there; the citation names the member gene that did.
-TARGET_GENES = {
-    "sert": ["SLC6A4"], "net": ["SLC6A2"], "dat": ["SLC6A3"], "gat": ["SLC6A1"],
-    # NKCC1, the chloride-gradient setter (SLC12A1 is its kidney-only sibling).
-    "nkcc1": ["SLC12A2"],
-    "vmat2": ["SLC18A2"], "mao_a": ["MAOA"], "mao_b": ["MAOB"],
-    "ache": ["ACHE"], "bche": ["BCHE"],
-    "carbonic_anhydrase": ["CA2"], "pde5": ["PDE5A"],
-    "nav": ["SCN1A", "SCN2A", "SCN3A", "SCN8A"],
-    "cav": ["CACNA1A", "CACNA1B", "CACNA1C"],
-    "cav_a2d": ["CACNA2D1", "CACNA2D2"],
-    "cav_t": ["CACNA1G", "CACNA1H", "CACNA1I"],
-    "sv2a": ["SV2A"],
-    # GABA transaminase, the enzyme that degrades GABA (vigabatrin's target).
-    "gaba_t": ["ABAT"],
-    # DOPA decarboxylase (levodopa's enzyme) and catechol-O-methyltransferase.
-    "aadc": ["DDC"], "comt": ["COMT"],
-    # The CGRP receptor is a heterodimer, so both halves are read: CALCRL is the
-    # GPCR, RAMP1 the accessory subunit that makes it CGRP-selective.
-    "cgrp": ["CALCRL", "RAMP1"],
-    "muscarinic": ["CHRM1", "CHRM2", "CHRM3", "CHRM4", "CHRM5"],
-    "nicotinic": ["CHRNA4", "CHRNB2", "CHRNA7"],
-    "alpha1": ["ADRA1A", "ADRA1B", "ADRA1D"],
-    "alpha2": ["ADRA2A", "ADRA2B", "ADRA2C"],
-    "beta": ["ADRB1", "ADRB2", "ADRB3"],
-    "glutamate": ["GRIN1", "GRIA1", "GRIA2"],
-    "melatonin": ["MTNR1A", "MTNR1B"],
-    "orexin": ["HCRTR1", "HCRTR2"],
-    "melanocortin": ["MC4R", "MC3R"],
 }
 
 
@@ -346,7 +314,7 @@ def main() -> int:
     args = ap.parse_args()
 
     # receptor genes reuse the GtoPdb map (Phase 2b); targets use TARGET_GENES.
-    from fetch_gtopdb import RECEPTOR_GENES  # noqa: E402
+    from lib.gene_maps import RECEPTOR_GENES
 
     owners: dict[str, tuple[str, list[str]]] = {}  # owner id -> (kind, [genes])
     for tid, genes in TARGET_GENES.items():

@@ -47,12 +47,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fetch_gtopdb import (  # noqa: E402  (path shim above)
     BASE,
-    RECEPTOR_GENES,
     clean,
     file_date,
     http_json,
 )
 from io_atomic import atomic_write_json  # noqa: E402  (tools/ is on sys.path via fetch_gtopdb)
+from lib.gene_maps import receptor_genes  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent   # script lives in tools/fetch/
 OUT = REPO / "data_sources" / "gtopdb"
@@ -61,25 +61,6 @@ PAGES = OUT / "pages_class"
 CACHE = REPO / "tools" / "generated_cache" / "gtopdb_class.json"
 RECEPTORS_JSONL = REPO / "public" / "data" / "receptors.jsonl"
 
-# The receptors ``RECEPTOR_GENES`` (the tissue pass) does not map, because that pass
-# only needed receptors carrying an explicit region list. Classification applies to
-# every receptor, so the map is completed here rather than widened there (the tissue
-# fetcher's docstring explains why its own map is narrow). A heteromer is mapped to
-# its representative principal subunit, exactly as there.
-EXTRA_RECEPTOR_GENES: dict[str, str] = {
-    "beta3": "ADRB3",
-    "nachr_muscle": "CHRNA1",
-    "gaba_a": "GABRA1",
-    "gaba_a_rho": "GABRR1",
-    "gaba_b": "GABBR1",
-    "nmda": "GRIN1",
-    "ampa": "GRIA1",
-    "mglur6": "GRM6",
-    "mglur7": "GRM7",
-    "h4": "HRH4",
-    # alpha2d is deliberately absent: it is a stub receptor (a rodent pharmacological
-    # subtype with no human gene), not a counted node.
-}
 
 # The non-receptor targets whose classification node is still unsourced. Each maps to
 # the gene of the isoform our entry actually models.
@@ -89,11 +70,6 @@ TARGET_GENES: dict[str, str] = {
     "cav_t": "CACNA1G",
     "melanocortin": "MC4R",
 }
-
-
-def receptor_genes() -> dict[str, str]:
-    """Every receptor id we can resolve to a gene (tissue map + the completion)."""
-    return {**RECEPTOR_GENES, **EXTRA_RECEPTOR_GENES}
 
 
 def target_record(gene: str) -> dict | None:

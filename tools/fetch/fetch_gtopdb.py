@@ -49,6 +49,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent.parent   # script lives in tools/fetch/
 sys.path.insert(0, str(REPO / "tools"))
 import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib.gene_maps import RECEPTOR_GENES  # noqa: E402
 OUT = REPO / "data_sources" / "gtopdb"
 RAW = OUT / "raw"
 PAGES = OUT / "pages"
@@ -56,38 +57,6 @@ WORKLIST = OUT / "worklist.json"
 RECEPTORS_JSONL = REPO / "public" / "data" / "receptors.jsonl"
 BASE = "https://www.guidetopharmacology.org/services"
 DELAY_S = 1.0  # polite gap between requests
-
-# receptor id (our ids) -> HGNC gene symbol, the key GtoPdb resolves via
-# ?geneSymbol=. Only receptors that carry an explicit region list are here
-# (ubiquitous receptors state "throughout the brain", a single ALL node, and the
-# locs=0 stubs have nothing to source). A heteromer/subfamily is mapped to its
-# representative principal subunit (nAChR alpha4beta2 -> CHRNA4, 5-HT3 -> HTR3A,
-# kainate -> GRIK1); the tissue-distribution join is by that gene.
-RECEPTOR_GENES: dict[str, str] = {
-    # serotonin
-    "5ht1a": "HTR1A", "5ht1b": "HTR1B", "5ht1d": "HTR1D", "5ht1e": "HTR1E",
-    "5ht1f": "HTR1F", "5ht2a": "HTR2A", "5ht2b": "HTR2B", "5ht2c": "HTR2C",
-    "5ht3": "HTR3A", "5ht4": "HTR4", "5ht5a": "HTR5A", "5ht6": "HTR6", "5ht7": "HTR7",
-    # dopamine
-    "d1": "DRD1", "d2": "DRD2", "d3": "DRD3", "d4": "DRD4", "d5": "DRD5",
-    # adrenergic
-    "alpha1a": "ADRA1A", "alpha1b": "ADRA1B", "alpha1d": "ADRA1D",
-    "alpha2a": "ADRA2A", "alpha2b": "ADRA2B", "alpha2c": "ADRA2C",
-    "beta1": "ADRB1", "beta2": "ADRB2",
-    # muscarinic + nicotinic
-    "m1": "CHRM1", "m2": "CHRM2", "m3": "CHRM3", "m4": "CHRM4", "m5": "CHRM5",
-    "nachr_a4b2": "CHRNA4", "nachr_a7": "CHRNA7",
-    # histamine
-    "h1": "HRH1", "h2": "HRH2", "h3": "HRH3",
-    # opioid
-    "mu": "OPRM1", "delta": "OPRD1", "kappa": "OPRK1",
-    # glutamate (metabotropic + kainate representative)
-    "mglur1": "GRM1", "mglur2": "GRM2", "mglur3": "GRM3", "mglur4": "GRM4",
-    "mglur5": "GRM5", "kainate": "GRIK1",
-    # others
-    "cb1": "CNR1", "a2a": "ADORA2A", "mt1": "MTNR1A", "mt2": "MTNR1B",
-    "sigma1": "SIGMAR1", "glycine": "GLRA1",
-}
 
 
 # GtoPdb's web services need a per-user API key since 2026-09 (an anonymous call
