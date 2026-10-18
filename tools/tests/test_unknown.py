@@ -15,10 +15,13 @@ import io
 import sys
 import unittest
 from contextlib import redirect_stdout
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import check_data  # noqa: E402
+from checks.common import Report  # noqa: E402
+from checks.freshness import check_freshness  # noqa: E402
+from checks.provenance import check_provenance  # noqa: E402
 from data_generators import unknown  # noqa: E402
 from data_generators.provenance import _provenance_stats  # noqa: E402
 
@@ -175,7 +178,7 @@ class TallyTest(unittest.TestCase):
 
 
 class CheckDataTest(unittest.TestCase):
-    TODAY = check_data.date(2026, 10, 12)
+    TODAY = date(2026, 10, 12)
     META = {"source_corpora": {"wikipedia_pharm": {"ref": "W", "editable": True}}}
 
     def _stamped(self, corpora=ALL, searched="2026-10-12"):
@@ -184,15 +187,15 @@ class CheckDataTest(unittest.TestCase):
         return ds
 
     def _provenance_errors(self, ds):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_provenance(report, {}, [], [], [], [], [], ds, [])
+            check_provenance(report, {}, [], [], [], [], [], ds, [])
         return report.errors
 
     def _freshness_errors(self, ds):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_freshness(report, self.META, [self.META, ds], today=self.TODAY)
+            check_freshness(report, self.META, [self.META, ds], today=self.TODAY)
         return report.errors
 
     def test_complete_search_passes(self):
@@ -212,9 +215,9 @@ class CheckDataTest(unittest.TestCase):
                               receptors=rs)
         if owner == "r1":   # forge a stamp beside a sourced effect
             rs[0]["effects_unknown"] = {"searched": "2026-10-16", "corpora": EFFECT_ALL}
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_provenance(report, {}, [], [], [], [], rs, [], [])
+            check_provenance(report, {}, [], [], [], [], rs, [], [])
         return report.errors
 
     def test_effects_search_complete_passes(self):

@@ -19,20 +19,35 @@ import re
 import sys
 import unittest
 from contextlib import redirect_stdout
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import check_data  # noqa: E402
+from checks.common import REPO_ROOT, Report  # noqa: E402
+from checks.duplicates import check_binding_dups, check_id_collection  # noqa: E402
+from checks.flow import _affinity_weight, _tone_of, check_flow_consistency  # noqa: E402
+from checks.freshness import check_freshness  # noqa: E402
+from checks.innervation import check_innervation  # noqa: E402
+from checks.provenance import check_provenance  # noqa: E402
+from checks.quotes import rehydrate_quotes  # noqa: E402
+from checks.reachability import check_reachability  # noqa: E402
+from checks.sources import check_sources  # noqa: E402
+from checks.sources.drugs import _NO_SUBJECT_QUOTE  # noqa: E402
+from checks.sources.gate import spans_heading  # noqa: E402
+from checks.sources.stahl import _fold_name, stahl_monograph_check  # noqa: E402
+from checks.todos import check_todos  # noqa: E402
+from checks.walks import iter_drug_sources  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402
 from data_generators.drugs import DRUG_ACTIONS, TONE_RULES  # noqa: E402
 
 
 def _run_check(meta, drugs, projections, receptors):
     """Run family 8 over synthetic data, returning (report, [review lines])."""
-    report = check_data.Report(verbose=True)
+    report = Report(verbose=True)
     buf = io.StringIO()
     with redirect_stdout(buf):
-        check_data.check_flow_consistency(report, meta, drugs, projections, receptors)
+        check_flow_consistency(report, meta, drugs, projections, receptors)
     warns = [ln.split("[review]", 1)[1].strip()
              for ln in buf.getvalue().splitlines() if "[review]" in ln]
     return report, warns
@@ -45,10 +60,10 @@ class SpansHeadingTest(unittest.TestCase):
     def test_heading_line_inside_a_quote(self):
         glued = ("Prazepam is a prodrug for desmethyldiazepam.\n\n## Interactions\n"
                  "Prazepam may interact with cimetidine .")
-        self.assertTrue(check_data.spans_heading(glued))
-        self.assertFalse(check_data.spans_heading(
+        self.assertTrue(spans_heading(glued))
+        self.assertFalse(spans_heading(
             "Prazepam is a prodrug for desmethyldiazepam."))
-        self.assertFalse(check_data.spans_heading("Ki | 5-HT2A | #3 site"))
+        self.assertFalse(spans_heading("Ki | 5-HT2A | #3 site"))
 
 
 class NormalizeForMatchTest(unittest.TestCase):
@@ -72,17 +87,17 @@ class NormalizeForMatchTest(unittest.TestCase):
 
 class AffinityWeightTest(unittest.TestCase):
     def test_no_ki_is_neutral_mid(self):
-        self.assertAlmostEqual(check_data._affinity_weight(None), 0.55)
-        self.assertAlmostEqual(check_data._affinity_weight({}), 0.55)
-        self.assertAlmostEqual(check_data._affinity_weight({"median": 0}), 0.55)
+        self.assertAlmostEqual(_affinity_weight(None), 0.55)
+        self.assertAlmostEqual(_affinity_weight({}), 0.55)
+        self.assertAlmostEqual(_affinity_weight({"median": 0}), 0.55)
 
     def test_ramp_monotonic_and_clamped(self):
-        w_strong = check_data._affinity_weight({"median": 1.0})     # 1 nM
-        w_weak = check_data._affinity_weight({"median": 1000.0})    # 1 uM
+        w_strong = _affinity_weight({"median": 1.0})     # 1 nM
+        w_weak = _affinity_weight({"median": 1000.0})    # 1 uM
         self.assertGreater(w_strong, w_weak)
         # clamped to [0.35, 1.0] at the extremes
-        self.assertLessEqual(check_data._affinity_weight({"median": 0.001}), 1.0)
-        self.assertGreaterEqual(check_data._affinity_weight({"median": 1e9}), 0.35)
+        self.assertLessEqual(_affinity_weight({"median": 0.001}), 1.0)
+        self.assertGreaterEqual(_affinity_weight({"median": 1e9}), 0.35)
 
 
 class ToneSignTest(unittest.TestCase):
@@ -100,7 +115,7 @@ class ToneSignTest(unittest.TestCase):
         self.rules = TONE_RULES
 
     def _tone(self, tgt, action, rec_meta=None):
-        return check_data._tone_of(tgt, action, rec_meta or {}, self.rules)
+        return _tone_of(tgt, action, rec_meta or {}, self.rules)
 
     def test_transporter_reuptake_raises(self):
         tgt = {"type": "transporter", "system": "serotonergic"}
@@ -232,7 +247,7 @@ class ReviewLevelTest(unittest.TestCase):
     """A review item is counted but printed only under --verbose (never a warning)."""
 
     def _out(self, verbose):
-        report = check_data.Report(verbose=verbose)
+        report = Report(verbose=verbose)
         buf = io.StringIO()
         with redirect_stdout(buf):
             report.review("drug 'x': intended split")
@@ -264,9 +279,9 @@ class MetaboliteStoreTest(unittest.TestCase):
 
     @staticmethod
     def _errors(drugs, metabolites):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_reachability(report, MetaboliteStoreTest.META,
+            check_reachability(report, MetaboliteStoreTest.META,
                                           [], [], [], [], [], drugs, [], metabolites)
         return report.errors
 
@@ -313,7 +328,7 @@ class NoSubjectQuoteTest(unittest.TestCase):
     the action, which look superficially similar."""
 
     def _m(self, quote):
-        return bool(check_data._NO_SUBJECT_QUOTE.match(quote))
+        return bool(_NO_SUBJECT_QUOTE.match(quote))
 
     def test_class_boilerplate_is_rejected(self):
         for quote in (
@@ -354,12 +369,12 @@ class StahlMonographRangeTest(unittest.TestCase):
             for p in pages], **extra}
 
     def test_own_monograph_passes(self):
-        pages, span, stray = check_data.stahl_monograph_check(
+        pages, span, stray = stahl_monograph_check(
             self._drug("Sulpiride", [786, 788]), self.RANGES)
         self.assertEqual((pages, span, stray), ([786, 788], (786, 790), []))
 
     def test_neighbouring_monograph_is_caught(self):
-        _pages, span, stray = check_data.stahl_monograph_check(
+        _pages, span, stray = stahl_monograph_check(
             self._drug("Sulpiride", [788, 771]), self.RANGES)
         self.assertEqual(span, (786, 790))
         self.assertEqual(stray, [771])
@@ -372,26 +387,26 @@ class StahlMonographRangeTest(unittest.TestCase):
         drug["metabolites"] = [{"name": "m", "sources": [
             {"corpus": "kandel", "page": 9, "quote": "x"},      # another corpus: ignored
             {"corpus": "stahl", "page": 789, "quote": "x"}]}]
-        pages, _span, stray = check_data.stahl_monograph_check(drug, self.RANGES)
+        pages, _span, stray = stahl_monograph_check(drug, self.RANGES)
         self.assertEqual(pages, [788, 789, 4242])
         self.assertEqual(stray, [4242])
 
     def test_combo_matches_either_half(self):
         """A combo is indexed under its own name here; when it is not, either
         constituent's monograph is the honest span."""
-        _pages, span, _stray = check_data.stahl_monograph_check(
+        _pages, span, _stray = stahl_monograph_check(
             self._drug("Bupropion + Naltrexone", [130]), self.RANGES)
         self.assertEqual(span, (128, 133))
 
     def test_unindexed_drug_reports_no_span(self):
         """A drug Stahl has no monograph for is unrangeable, not in violation."""
-        pages, span, stray = check_data.stahl_monograph_check(
+        pages, span, stray = stahl_monograph_check(
             self._drug("Psilocybin", [500]), self.RANGES)
         self.assertEqual((pages, span, stray), ([500], None, []))
 
     def test_name_folding_ignores_case_and_punctuation(self):
-        self.assertEqual(check_data._fold_name("Amphetamine (D,L)"),
-                         check_data._fold_name("amphetamine (d,l)"))
+        self.assertEqual(_fold_name("Amphetamine (D,L)"),
+                         _fold_name("amphetamine (d,l)"))
 
 
 class UncertaintyBulletTest(unittest.TestCase):
@@ -413,9 +428,9 @@ class UncertaintyBulletTest(unittest.TestCase):
              "hypotension, and syncope")
 
     def _errors(self, binding):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_sources(report, self.META,
+            check_sources(report, self.META,
                                      [{"id": "d", "bindings": [binding]}], [], [], [],
                                      [])
         return report.errors
@@ -440,9 +455,9 @@ class UncertaintyBulletTest(unittest.TestCase):
                        "pipeline": "page_llm_judged"}]}])), 1)
 
     def _contradiction_errors(self, binding, site):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_sources(report, self.META,
+            check_sources(report, self.META,
                                      [{"id": "d", "bindings": [binding]}], [], [], [],
                                      [], contradictions={site: {}})
         return report.errors
@@ -488,17 +503,17 @@ class UncertaintyBulletTest(unittest.TestCase):
         import tempfile
 
         def errors(ki_id, value):
-            with tempfile.TemporaryDirectory(dir=check_data.REPO_ROOT) as tmp:
+            with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmp:
                 Path(tmp, "ki.csv").write_text("Number,ki Val\n7,10000\n", encoding="utf-8")
-                rel = str(Path(tmp, "ki.csv").relative_to(check_data.REPO_ROOT))
+                rel = str(Path(tmp, "ki.csv").relative_to(REPO_ROOT))
                 meta = {**self.META, "source_corpora": {
                     **self.META["source_corpora"], "pdsp_ki": {"ref": "PDSP", "csv": rel}}}
-                report = check_data.Report()
+                report = Report()
                 binding = self._binding([{"kind": "contradicted", "sources": [
                     {"corpus": "pdsp_ki", "ki_id": ki_id, "value_nm": value,
                      "provenance": "verified"}]}])
                 with redirect_stdout(io.StringIO()):
-                    check_data.check_sources(report, meta, [{"id": "d", "bindings": [binding]}],
+                    check_sources(report, meta, [{"id": "d", "bindings": [binding]}],
                                              [], [], [], [])
                 return report.errors
         self.assertEqual(errors(7, 10000), 0)
@@ -520,13 +535,13 @@ class UncertaintyBulletTest(unittest.TestCase):
         bullets, so the walk must reach them there as well (the checklist trap again,
         one node kind further on)."""
         def errors(uncertainty):
-            report = check_data.Report()
+            report = Report()
             proj = {"from": "raphe", "to": "caudate_R", "uncertainty": uncertainty,
                     "sources": [{"corpus": "stahl", "page": 40, "quote": "x",
                                  "provenance": "verified",
                                  "pipeline": "page_llm_judged"}]}
             with redirect_stdout(io.StringIO()):
-                check_data.check_sources(report, self.META, [], [proj], [], [], [])
+                check_sources(report, self.META, [], [proj], [], [], [])
             return report.errors
         self.assertEqual(errors([{"kind": "not_a_mechanism", "absence": True}]), 0)
         self.assertEqual(errors([{"kind": "vibes", "absence": True}]), 1)
@@ -546,12 +561,12 @@ class InnervationCoverageTest(unittest.TestCase):
                ("raphe", "frontal", "occipital", "thalamus")]
 
     def _run(self, receptors, projections, meta=None):
-        report = check_data.Report()
+        report = Report()
         buf = io.StringIO()
         base_meta = {"system_flow_kinds": {"serotonergic": "serotonergic"},
                      "drug_targets": {}}
         with redirect_stdout(buf):
-            check_data.check_innervation(report, meta or base_meta, self.STRUCTS,
+            check_innervation(report, meta or base_meta, self.STRUCTS,
                                          projections, receptors)
         return [ln.split("[warn]", 1)[1].strip()
                 for ln in buf.getvalue().splitlines() if "[warn]" in ln]
@@ -625,10 +640,10 @@ class UnjudgedQuoteGateTest(unittest.TestCase):
             "sources": [{"corpus": "stahl", "page": 1, "quote": "x",
                          "provenance": "verified", "pipeline": pipeline}],
         }]}
-        report = check_data.Report()
+        report = Report()
         buf = io.StringIO()
         with redirect_stdout(buf):
-            check_data.check_sources(report, self.META, [drug], [], [], [], [])
+            check_sources(report, self.META, [drug], [], [], [], [])
         return report, buf.getvalue()
 
     def test_an_extracted_but_unjudged_quote_fails(self):
@@ -663,9 +678,9 @@ class CorpusUrlTest(unittest.TestCase):
 
     @staticmethod
     def _errors(corpora):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_todos(report, {"source_corpora": corpora},
+            check_todos(report, {"source_corpora": corpora},
                                    [], [], [], [], [], [])
         return report.errors
 
@@ -688,14 +703,14 @@ class FreshnessTest(unittest.TestCase):
     test does not itself go stale.
     """
 
-    TODAY = check_data.date(2026, 10, 11)
+    TODAY = date(2026, 10, 11)
     META = {"source_corpora": {"wikipedia_pharm": {"ref": "W", "editable": True},
                                "stahl": {"ref": "S"}}}
 
     def _errors(self, sources):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_freshness(report, self.META, [[{"sources": sources}]],
+            check_freshness(report, self.META, [[{"sources": sources}]],
                                        today=self.TODAY)
         return report.errors
 
@@ -779,7 +794,7 @@ class RehydrateQuotesTest(unittest.TestCase):
                         "a_future_field": 1}}
         node = {"sources": [{"quote_id": "q1", "provenance": "verified"}]}
         referenced, dangling = set(), []
-        check_data.rehydrate_quotes(node, by_id, referenced, dangling)
+        rehydrate_quotes(node, by_id, referenced, dangling)
         self.assertEqual(node["sources"][0], {"provenance": "verified", "corpus": "stahl",
                                               "page": 15, "quote": "x",
                                               "a_future_field": 1})
@@ -787,7 +802,7 @@ class RehydrateQuotesTest(unittest.TestCase):
 
     def test_dangling_id_reported(self):
         dangling = []
-        check_data.rehydrate_quotes([{"quote_id": "nope"}], {}, set(), dangling)
+        rehydrate_quotes([{"quote_id": "nope"}], {}, set(), dangling)
         self.assertEqual(dangling, ["nope"])
 
 
@@ -805,13 +820,13 @@ class ShortQuoteTest(unittest.TestCase):
         """The incidental-substring warnings check_sources prints for one drug, its
         quotes cited against a one-page synthetic corpus ``wiki`` holding PAGE."""
         import tempfile
-        with tempfile.TemporaryDirectory(dir=check_data.REPO_ROOT) as tmp:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as tmp:
             Path(tmp, "page.md").write_text(self.PAGE, encoding="utf-8")
-            rel = str(Path(tmp).relative_to(check_data.REPO_ROOT))
+            rel = str(Path(tmp).relative_to(REPO_ROOT))
             meta = {"source_corpora": {"wiki": {"pages_dir": rel}}}
             buf = io.StringIO()
             with redirect_stdout(buf):
-                check_data.check_sources(check_data.Report(), meta,
+                check_sources(Report(), meta,
                                          [{"id": "x", "bindings": [], **drug}], [], [], [], [])
         return [ln for ln in buf.getvalue().splitlines() if "incidental" in ln]
 
@@ -866,7 +881,7 @@ class DrugSourceWalkTest(unittest.TestCase):
 
         for line in path.read_text(encoding="utf-8").splitlines():
             drug = json.loads(line)
-            walk(drug, "drug", {id(src) for _, src, *_ in check_data.iter_drug_sources(drug)})
+            walk(drug, "drug", {id(src) for _, src, *_ in iter_drug_sources(drug)})
         self.assertEqual(missed, set())
 
     def test_grade_family_grades_what_the_quote_family_gates(self):
@@ -876,12 +891,12 @@ class DrugSourceWalkTest(unittest.TestCase):
         drug = {"id": "d", "enzymes": [{"enzyme": "CYP2D6", "sources": [bad]}],
                 "metabolites": [{"id": "m", "formed_by": [{"enzyme": "CYP3A4",
                                                             "sources": [bad]}]}]}
-        sites = [ctx for ctx, *_ in check_data.iter_drug_sources(drug)]
+        sites = [ctx for ctx, *_ in iter_drug_sources(drug)]
         self.assertEqual(sites, ["drug d enzyme CYP2D6 sources[0]",
                                  "drug d metabolite m formed_by CYP3A4 sources[0]"])
         buf = io.StringIO()
         with redirect_stdout(buf):
-            check_data.check_provenance(check_data.Report(), {}, [], [], [], [], [],
+            check_provenance(Report(), {}, [], [], [], [], [],
                                         [drug], [])
         self.assertEqual(sum("'bogus'" in ln for ln in buf.getvalue().splitlines()), 2)
 
@@ -915,10 +930,10 @@ class ProjectionClaimGateTest(unittest.TestCase):
                 "neurotransmitter": "Glutamate", "sources": [src],
                 "claims": {k: (dict(v, sources=[src]) if v.pop("cite", False) else v)
                            for k, v in claims.items()}}
-        report = check_data.Report()
+        report = Report()
         buf = io.StringIO()
         with redirect_stdout(buf):
-            check_data.check_sources(report, self.META, [], [proj], [], [], [])
+            check_sources(report, self.META, [], [proj], [], [], [])
         return report, buf.getvalue()
 
     def test_a_claim_citing_a_quote_that_does_not_name_it_fails(self):
@@ -953,10 +968,10 @@ class ProjectionClaimGateTest(unittest.TestCase):
             "enzyme": "cyp3a4", "role": "substrate", "strength": "major",
             "sources": [src],
             "claims": {"strength": {"grade": "verified", "sources": [src]}}}]}
-        report = check_data.Report()
+        report = Report()
         buf = io.StringIO()
         with redirect_stdout(buf):
-            check_data.check_sources(report, self.META, [drug], [], [], [], [])
+            check_sources(report, self.META, [drug], [], [], [], [])
         self.assertTrue(report.errors)
         self.assertIn("does not name the strength", buf.getvalue())
 
@@ -984,10 +999,10 @@ class SectionAddonAnchorTest(unittest.TestCase):
                  "slot": "section.projections", "display": "admonition",
                  "tone": "info", "text": "Both sides are our assumption."}
         addon.update(patch)
-        report = check_data.Report()
+        report = Report()
         buf = io.StringIO()
         with redirect_stdout(buf):
-            check_data.check_reachability(report, self.META, [], [], [], [], [], [],
+            check_reachability(report, self.META, [], [], [], [], [], [],
                                           [addon])
         return report, buf.getvalue()
 
@@ -1006,9 +1021,9 @@ class BindingDupTest(unittest.TestCase):
     releaser rows; family 1 must catch a (target, action) listed twice."""
 
     def _errors(self, drugs):
-        report = check_data.Report()
+        report = Report()
         with redirect_stdout(io.StringIO()):
-            check_data.check_binding_dups(report, drugs)
+            check_binding_dups(report, drugs)
         return report.errors
 
     def test_collapsed_pair_is_an_error(self):
@@ -1026,9 +1041,9 @@ class NodeIdShapeTest(unittest.TestCase):
     """An id becomes a file name under /api/, so a path-like id is a hard error."""
 
     def _errors(self, ids):
-        report = check_data.Report(verbose=True)
+        report = Report(verbose=True)
         with redirect_stdout(io.StringIO()):
-            check_data.check_id_collection(report, "drugs", [{"id": i, "name": i} for i in ids])
+            check_id_collection(report, "drugs", [{"id": i, "name": i} for i in ids])
         return report.errors
 
     def test_plain_ids_pass(self):

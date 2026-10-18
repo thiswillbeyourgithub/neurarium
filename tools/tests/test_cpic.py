@@ -23,7 +23,8 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
-import check_data  # noqa: E402
+from checks.common import Report  # noqa: E402
+from checks.cpic_guidance import check_cpic_enzyme_coverage  # noqa: E402
 from data_generators import cpic as C  # noqa: E402
 
 ROOT = TOOLS.parent
@@ -233,10 +234,10 @@ class CoverageWarningTest(unittest.TestCase):
     def _warnings(self, enzymes):
         guidance = C.guidance_for(EXPORT)
         drugs = [{"id": "nortriptyline", "enzymes": enzymes}]
-        report = check_data.Report()
+        report = Report()
         buf = io.StringIO()
         with redirect_stdout(buf):
-            check_data.check_cpic_enzyme_coverage(report, guidance, drugs)
+            check_cpic_enzyme_coverage(report, guidance, drugs)
         return [ln.split("[warn]", 1)[1].strip()
                 for ln in buf.getvalue().splitlines() if "[warn]" in ln]
 

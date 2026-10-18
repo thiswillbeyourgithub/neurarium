@@ -98,7 +98,6 @@ Built with the help of Claude Code.
 """
 
 import sys
-from datetime import date
 
 # The curated contradictions, keyed by citation site and resolved through the one site
 # grammar (tools/sourcing/citation_site.py), exactly as the generator applies them.
@@ -107,19 +106,11 @@ from data_generators.quotes.contradictions import CONTRADICTIONS
 from checks.baked_meshes import check_baked_meshes
 from checks.changelog import check_changelog
 from checks.clinpgx_variants import check_clinpgx_variants
-from checks.common import (
-    DATA_DIR,
-    REPO_ROOT,
-    Report,
-    expand_mirrored,
-    load_jsonl,
-    load_meta,
-)
+from checks.common import DATA_DIR, Report, expand_mirrored, load_jsonl, load_meta
 from checks.connectivity import check_connectivity
-from checks.cpic_guidance import check_cpic_enzyme_coverage
-from checks.duplicates import check_binding_dups, check_duplicates, check_id_collection
+from checks.duplicates import check_duplicates
 from checks.enzyme_variability import check_enzyme_variability
-from checks.flow import _affinity_weight, _tone_of, check_flow_consistency
+from checks.flow import check_flow_consistency
 from checks.freshness import check_freshness
 from checks.innervation import check_innervation
 from checks.ki_coverage import check_ki_coverage
@@ -127,15 +118,7 @@ from checks.provenance import check_provenance
 from checks.quotes import check_quotes, load_quotes, rehydrate_quotes
 from checks.reachability import check_reachability
 from checks.sources import check_sources
-from checks.sources.drugs import _NO_SUBJECT_QUOTE
-from checks.sources.gate import spans_heading
-from checks.sources.stahl import (
-    _fold_name,
-    stahl_monograph_check,
-    stahl_monograph_ranges,
-)
 from checks.todos import check_todos
-from checks.walks import iter_drug_sources
 
 
 def main():

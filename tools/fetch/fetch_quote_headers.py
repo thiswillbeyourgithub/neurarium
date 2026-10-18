@@ -64,7 +64,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
 from lib.io_atomic import atomic_write_json  # noqa: E402
-import check_data  # noqa: E402  (reuse the quote gate's normalizer + range gate)
+from checks.sources.stahl import stahl_monograph_ranges  # noqa: E402  (the range gate)
 from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
 from lib import stahl_index  # noqa: E402  (the one INDEX.md reader)
 
@@ -166,7 +166,7 @@ class StahlPages:
 
     def __init__(self, pages_dir: str) -> None:
         self.pages_dir = pages_dir
-        ranges = check_data.stahl_monograph_ranges()
+        ranges = stahl_monograph_ranges()
         self.ok = bool(ranges) and os.path.isdir(pages_dir)
         self.drug_names: set[str] = set()
         self.page_drug: dict[int, str] = {}
