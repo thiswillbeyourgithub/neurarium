@@ -34,9 +34,3 @@ export function formatHalfLife(hl) {
 export const bindingKi = (b) =>
   b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;
 
-/** `accumbens_R` -> `accumbens`: the side-stripped base id. A hemisphere is a
- * rendering detail, so anything keyed by region (expression, search rows, deep
- * links) keys by the base. */
-export function stripSide(id) {
-  return String(id == null ? "" : id).replace(/_[LR]$/, "");
-}

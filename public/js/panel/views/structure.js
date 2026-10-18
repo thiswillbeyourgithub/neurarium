@@ -1,7 +1,7 @@
 // The Structure view: one brain region, its pathways in and out, what is expressed
 // there, and its reference material.
 
-import { stripSide } from "../format.js";
+import { stripSide } from "../../util.js";
 
 const { t } = window.__I18N__;
 

@@ -2,7 +2,7 @@
 // projection visibility filter they drive.
 
 import { addLegendItem } from "./item.js";
-import { stripSide } from "../panel/format.js";
+import { stripSide } from "../util.js";
 
 const { t } = window.__I18N__;
 

@@ -22,19 +22,13 @@
 //     the top of the cycle if no seed reaches it, instead of breaking a single
 //     authored path.
 
+// mirrorId keeps the BFS seed set mirror-symmetric so the hemispheres animate symmetrically.
+import { mirrorId } from "./util.js";
+
 /** Structure id of a region mesh (set in js/main.js buildStructureMesh). */
 const nodeId = (mesh) => mesh.userData.structure.id;
 /** Region group ("lobe", "basal_ganglia", ...), used by the seed heuristic. */
 const nodeGroup = (mesh) => mesh.userData.structure.group;
-/**
- * The given structure id's left/right twin (a midline id, with no suffix, maps to
- * itself), following the data + viewer's `_R`/`_L` convention. Keeps the BFS seed
- * set mirror-symmetric so the hemispheres animate symmetrically.
- */
-const mirrorId = (id) =>
-  id.endsWith("_R") ? `${id.slice(0, -2)}_L`
-  : id.endsWith("_L") ? `${id.slice(0, -2)}_R`
-  : id;
 
 /**
  * Assign each arrow a firing slot (its tail's BFS depth from a per-component

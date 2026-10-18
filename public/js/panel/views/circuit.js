@@ -1,5 +1,7 @@
 // The Circuit view: a named circuit's member regions and the pathways between them.
 
+import { stripSide } from "../../util.js";
+
 const { t } = window.__I18N__;
 
 /**
@@ -51,7 +53,7 @@ export function showCircuit(P, circuit) {
   const names = [];
   const bases = [];
   for (const id of circuit.structures) {
-    const base = id.replace(/_[RL]$/, "");
+    const base = stripSide(id);
     if (seen.has(base)) continue;
     seen.add(base);
     const s = data.byId.get(id);

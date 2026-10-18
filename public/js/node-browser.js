@@ -24,6 +24,7 @@ import { formatBbb, formatLogP, formatTpsa } from "./physchem.js";
 import { formatWorkup } from "./workup.js";
 import { transmitterVars } from "./release-modulation.js";
 import { KIND_ORDER } from "./kinds.js";
+import { stripSide } from "./util.js";
 
 // Sort rank of a display grade, weakest to strongest. `uncertain` sits between
 // sourced and verified for the same reason the Sources popup's bar does: the quote
@@ -38,8 +39,6 @@ const GRADE_RANK = { nosource: 0, unknown: 0.5, llm: 1, sourced: 2, uncertain: 3
 const PAGE_FIRST = 150;
 const PAGE_MORE = 300;
 
-// A trailing `_R` / `_L` is a rendering detail, not part of a region's identity.
-const stripSide = (id) => String(id || "").replace(/_[RL]$/, "");
 
 /**
  * Enumerate every graded knowledge node in the dataset as a flat row list.

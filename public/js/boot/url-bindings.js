@@ -5,7 +5,7 @@
 import { LIST_SEP } from "../url-state.js";
 import { foldText } from "../search/query.js";
 import { setModalToggle } from "../about/modals.js";
-import { stripSide } from "../panel/format.js";
+import { stripSide } from "../util.js";
 
 export function wireUrlBindings({
   aboutModal, arrows, changelog, data, focusCircuit, focusDrug, focusEffect,

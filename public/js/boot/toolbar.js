@@ -5,7 +5,7 @@ import { controlName, foldText, parseSearchQuery } from "../search/query.js";
 import { flashRow } from "../panel/dom.js";
 import { loadSearchNames } from "../data.js";
 import { rankMatch } from "../search-rank.js";
-import { stripSide } from "../panel/format.js";
+import { stripSide } from "../util.js";
 
 const { t } = window.__I18N__;
 
