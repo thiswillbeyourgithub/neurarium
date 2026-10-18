@@ -8,7 +8,7 @@ Two palettes, one token block. `css/tokens.css`'s `:root` defines the dark palet
 
 `js/theme.js` (`createTheme`) owns only the decision, and it is short: the visitor's stored click, else **dark**. It does not read `prefers-color-scheme`, which is the non-obvious part: the feature dropped `no-preference`, so a light query answers `light` both for a visitor who asked and for one who never touched the setting, and following it would hand the un-art-directed palette to everyone who expressed nothing. So light is opt-in, one click on the `#toggle-theme` sun/moon button in the panel header (persisted `neurarium.theme`), and it sticks.
 
-The WebGL canvas is not CSS and cannot read tokens, so `apply()` hands the resolved `--page-bg` to `js/main.js`, which repaints `scene.background` and calls `repaint` (the module-scoped hook the render loop fills in with `invalidate`, since the two ends live in different functions).
+The WebGL canvas is not CSS and cannot read tokens, so `apply()` hands the resolved `--page-bg` to `js/scene/setup.js`, which repaints `scene.background` and calls `repaint` (the module-scoped hook the render loop fills in with `invalidate`, since the two ends live in different functions).
 
 
 ## Rendering
@@ -84,7 +84,7 @@ in sequence and looping. Split in two:
   (`BURST`: excitatory more/faster/brighter, inhibitory dimmer). On landing a bead fires a wash echo
   over the target (`buildWashShell` at `arrow.curve.getPoint(1)`, pathway colour, sign-keyed).
 
-Lifecycle (`js/main.js`): the row calls `selection.setCircuit(...)` then `circuitAnim.play(...)`.
+Lifecycle (`js/legend/anatomy.js`, `js/boot/focus.js`): the row calls `selection.setCircuit(...)` then `circuitAnim.play(...)`.
 Stopping rides the selection state: an `onIsolate` watcher `stop()`s whenever the pinned-arrow set is
 no longer exactly the animating circuit (`circuitAnim.matches`), so a clear / different circuit /
 group focus / legend isolate all stop it; a mere structure highlight keeps it. Circuit-only (a group
@@ -98,7 +98,7 @@ Every `show*()` detail panel (drug, receptor, target, enzyme, structure, circuit
 
 A Circuits row and a Projections (per-pathway) row each open a **sourced detail tab**, like a
 structure/drug row. Member pathways are never stored: a circuit's are the projections with both
-endpoints in its set, a group's are those whose `kind`/`sign` matches `key`. `js/data.js` localizes
+endpoints in its set, a group's are those whose `kind`/`sign` matches `key`. `js/data/anatomy.js` localizes
 both and indexes groups by `${mode}:${key}` (`projectionGroupsByKey`).
 
 - `showCircuit`: a "Functional circuit" heading with the loop's source pill (`circuit.provenance`),
@@ -125,7 +125,7 @@ enzymes, ion channels, receptor groups), so a target like SERT is explorable on 
 knowledge nodes (each target's own node + its "Found in" regions + the bindings on it via
 `data.drugsByTarget`), so a heavily-drugged system leads; "Other" is pinned last. **Members** order
 lexicographically (`localeCompare` `numeric`, so 5-HT2 precedes 5-HT10). Both sources are normalized
-in `js/data.js`.
+in `js/data/targets.js`.
 
 - A receptor row's swatch = its **sign** colour; a non-receptor row's = its **type** colour
   (`target_type_colors`) + a muted tag. Clicking focuses it: dims to its regions
@@ -203,7 +203,7 @@ regions the owner already claims, never adding one.
 
 ### Effects (BETA)
 
-- Each `receptor_effect` node is one row of a receptor / target panel's **Effects** section (`appendEffects` in `js/main.js`, folded, after "Found in", with the `.beta-tag`): `<effect> · <mode>` + the node's own grade pill.
+- Each `receptor_effect` node is one row of a receptor / target panel's **Effects** section (`appendEffects` in `js/panel/sections.js`, folded, after "Found in", with the `.beta-tag`): `<effect> · <mode>` + the node's own grade pill.
 - A drug panel adds a derived **Possible effects via its bindings** section (`appendPossibleEffects`, after "Direct molecular targets", from `data.possibleEffectsByDrug`): the build-time effect index (`tools/data_generators/effect_index.py`, see the Effects bullet below) joins the drug's bindings with its targets' effect nodes, **direction-aware** (a binding inherits a node only when its `action` is in that mode's `actions`, emitted in `meta.receptor_effect_modes`, so an antagonist never inherits agonism effects) and an `affinity_only` binding (no action) contributes nothing. Worded "could cause", never "causes": it is a statement about the receptors, not about the drug. Each chip jumps to the target; nothing lights the 3D scene.
 - The **Effects** browse section (`#effects`, `buildEffectLegend`, after Enzymes) turns the same nodes around: one row per effect some target carries (`data.effects`, read by `readEffectIndex` from `derived/effects.json`, which `tools/render_api.py --effects-out` writes from `tools/data_generators/effect_index.py` at image build time and `tools/serve.py` per request; never committed. One join, so the effect panel, every drug panel, llms.txt and `/api/` cannot disagree; a failed fetch raises a red banner and leaves both empty), tagged with its drug count. A row, a search hit (its label in both languages via `search_names.fr.json`) or any effect name in a receptor / drug panel opens `showEffect`: the receptors / targets carrying it grouped by mode with their pills, then "Drugs that could cause it", each naming the bindings that lead there. A panel-only focus like an enzyme's (`focusEffect`, no 3D state), deep-linked as `#tabs=effect:<id>`. The same module feeds llms.txt's "Clinical effects" section and the `/api/effect/<id>` pages.
 
@@ -246,7 +246,7 @@ a line in the tally.
   (`focus` is null, the caveat already sits where it applies). Its id pool is that vocabulary. One of
   its slots is filled from `buildLegend` rather than from a `show*()` view, which is why
   `createInfoPanel` exports `appendAddons` instead of the box being redrawn there.
-- **Viewer.** `js/data.js` resolves each addon's owner once (`ownerName` + a `focus` `{nav, arg}`
+- **Viewer.** `js/data/addons.js` resolves each addon's owner once (`ownerName` + a `focus` `{nav, arg}`
   recipe the Data browser and the Sources popup both hand to their own nav table) and indexes them
   as `addonsBySlot` keyed `${ownerKind}:${owner}:${slot}`. `js/panel/addons.js` `ADDON_RENDERERS` dispatches
   on `display`; a second form is one entry there plus one string in `ADDON_DISPLAYS`. Every form shares the `addonBox` shell (tone class, label, pill); `collapsible` is a `<details>` closed by default whose summary carries the label + pill (a pill click opens the Sources popup, never toggles), used for a caveat a reader needs once, not on every panel (`enzyme_list_not_exhaustive`).
@@ -264,9 +264,9 @@ a line in the tally.
   drug -> drug rows are derived from the same list, so an unnamed shared route is an interaction
   nothing draws (clomipramine gained 11 when its CYP2C19 row landed, 3.93.1).
 - **The `drug.metabolism` slot has a derived fallback.** A drug that is both a substrate and a
-  modulator of one isoform changes its own clearance, and that is computable: `js/data.js`
+  modulator of one isoform changes its own clearance, and that is computable: `js/data/pk.js`
   `autoModulation` (an inference over the enzyme rows, like `pkInteractionsOf`) feeds
-  `derivedAutoModulation` in `js/main.js`, which draws the same box worded conditionally, with no
+  `derivedAutoModulation` in `js/panel/addons.js`, which draws the same box worded conditionally, with no
   source pill and a line saying it is our reading of the two rows. It fires **only when the slot
   holds no authored addon** (`appendAddons` returns how many it drew): a sourced statement of the
   mechanism outranks the inference. So the rule covers the ~25 other self-modulating drugs for

@@ -239,7 +239,7 @@ could be reused headless.
    bindings (target name, net effect colour, the regions each binding lights), and
    fetches every
    referenced shape file in parallel.
-6. `main.js` builds the meshes (`buildStructureMesh`), the arrows (`buildArrows`),
+6. `main.js` builds the meshes (`buildStructureMeshes` in `js/boot/meshing.js`, over `buildStructureMesh`), the arrows (`buildArrows`),
    and the labels (`createLabels`), wires the controllers (below), and starts the
    render loop.
 7. The intro animation plays: regions start exploded and glide back together into
@@ -436,16 +436,16 @@ Viewer (`public/`):
   engine (spotlight ring / caption bubble, viewport-aware placement that never covers the target or
   the 3D scene, resize/scroll reposition, localStorage "seen" gate). The bubble is **drag-repositionable**
   (pointer-drag past a small jitter threshold; a dragged bubble opts out of auto-placement for the step)
-  and layered **above any `veil`** so it is never itself dimmed. There is **no Next button** (only
-  Back + Skip + Esc): the user advances by acting on the step, so they cannot fast-forward past a
-  hands-on demo. A step is passive/caption (a "click to continue" cue in the bubble, and a click on the
-  dim backdrop, advance it) or **`interactive`** (the blocker gets a clip-path click-through hole so the
-  user's real tap reaches the highlighted control; the cue is hidden and every off-target click + the
-  forward keys are inert, so the only way on is the real tap). An interactive step advances on that tap,
-  or with **`stayAfterTap`** stays put and steps its spotlight aside so the live demo it fired is
-  watchable (the cue then returns to move on). A step's `target` may be one element or an **array** (a group highlight: the ring spans
+  and layered **above any `veil`** so it is never itself dimmed. Forward is a **Next** button (right of Back + Skip; Esc also exits), but it stays **disabled** on a
+  hands-on step until the required action is done, so the user cannot fast-forward past a demo. A step is
+  passive/caption (Next enabled at once, and a click on the dim backdrop also advances it) or
+  **`interactive`** (the blocker gets a clip-path click-through hole so the user's real tap reaches the
+  highlighted control; Next stays greyed until that tap). An interactive step advances on that tap, or
+  with **`stayAfterTap`** stays put and steps its spotlight aside so the live demo it fired is watchable
+  (Next then ungreys to move on). A **gate** step (`gate(signal)`) waits for an app-fired gesture signal
+  (rotate, slider, scroll, modal close), then ungreys Next or auto-advances when `gateAdvances`. A step's `target` may be one element or an **array** (a group highlight: the ring spans
   their union, e.g. the four browse sections). Steps glide between positions (snap only on the first
-  step + during an active scroll). The app-specific step list is built in `js/main.js`. It opens with
+  step + during an active scroll). The app-specific step list is built in `js/boot/tour-steps.js`. It opens with
   how to *read* the app (Legend, then Sources & provenance, then the **Data browser** those grades
   count, whose reading mode motivates the two view toggles: bring the 3D back, fold the panel away),
   then walks the data; the data demos
@@ -501,7 +501,7 @@ Viewer (`public/`):
   `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`
   (Rendering / decoration draw order).
 - `js/physchem.js`: `appendPhyschemChips` (the drug panel's "Brain entry" section: XLogP3, TPSA and BBB chips on `tdm.js`'s `valueChip`) and the `formatLogP` / `formatTpsa` / `formatBbb` wording the node browser shares.
-- `js/workup.js`: `groupWorkup` (a drug's workup rows split before / during) and `formatWorkup` (one node as "test, timing"), shared by the drug panel's BETA "Checks the French label asks for" section in `main.js` and the node browser.
+- `js/workup.js`: `groupWorkup` (a drug's workup rows split before / during) and `formatWorkup` (one node as "test, timing"), shared by the drug panel's BETA "Checks the French label asks for" section (`js/panel/sections.js`) and the node browser.
 - `js/drug-history.js`: `appendDrugHistory` (a drug's first-approval + withdrawal fact rows) and the `formatApproval` / `formatWithdrawal` wording the node browser shares.
 - `js/node-browser.js` (re-exports `js/node-browser/`: `collect.js` the pure `collectNodes`, `view.js` the `createNodeBrowser` UI): the Data browser (`#nodes`): every
   graded knowledge node as one filterable/sortable list, opened as a **detail tab** (deep link

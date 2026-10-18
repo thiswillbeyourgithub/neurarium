@@ -24,7 +24,7 @@ before any ES module parses) covers the canvas above every panel/banner; `js/loa
 moves forward), `notice(text)` (a persistent caveat row, `#loading-note`, see the mesh
 budget below), `done()` (fill to 100%, fade out via the `.loaded` opacity transition,
 then detach) and `fail()` (detach at once so an error banner takes over). `js/main.js`
-drives it: the data fetch fills the first half (`loadBrainData`'s `onProgress` fires per
+(data fetch) and `js/boot/meshing.js` (SDF meshing) drive it: the data fetch fills the first half (`loadBrainData`'s `onProgress` fires per
 shape file), SDF meshing the back half (`sdf-pool` `meshAll`'s `onProgress`, captioned
 with the region being built), then `done()` fades it out as the assemble intro
 begins. Both phases caption a `(done/total)` counter, and the meshing bar is

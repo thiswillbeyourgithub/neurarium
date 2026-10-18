@@ -326,7 +326,7 @@ Views:
   pathway list. Each connection
   row: a bold `directionArrow` (inline SVG, pathway colour, out/in/both; wrapped in `withTip` so a
   tap explains direction without bubbling to the row click), the other endpoint, and the pathway's
-  summary pill (`proj.provenance`, resolved in `js/data.js`), orange ⚠ when the pathway is a blanket
+  summary pill (`proj.provenance`, resolved in `js/data/anatomy.js`), orange ⚠ when the pathway is a blanket
   claim. Left/right twin pathways collapse to
   one row (by direction + other-endpoint `base_name` + label). Then **Receptors found here**
   (`appendExpressedTargets`), the reverse of a receptor's "Found in": every target expressed in this

@@ -41,7 +41,7 @@ python tools/shot.py --params "only=putamen_R&view=iso" --out /tmp/putamen.png
 Needs `playwright` + `playwright install chromium` once (or `uv run tools/shot.py`,
 inline deps). `--headed` opens a real window; `--wait` ms before capture (default 6000).
 
-The `--params` string is the URL query parsed by `applyViewParams` in `js/main.js`.
+The `--params` string is the URL query parsed by `applyViewParams` in `js/scene/camera.js`.
 `explode` / `transparency` / `names` are ordinary UI state, so they are handed straight
 to the url-state views below rather than re-implemented there; the rest is
 screenshot-only. The keys also work as deep links:
@@ -83,7 +83,7 @@ Both directions run through the `key -> {read, write}` registry in
   about (say) animations leaves that visitor's own persisted preference alone.
 
 Each control registers its own pair as it is wired (`urlState.register` in
-`js/main.js`), and a value seen before its owner is wired is parked and applied the
+the `js/boot/*.js` wirings), and a value seen before its owner is wired is parked and applied the
 moment it registers.
 
 #### The keys
