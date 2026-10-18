@@ -306,7 +306,7 @@ Screenshots).
   writer** of both `tools/generated_cache/drug_enzymes.json` (Stahl) and
   `drug_enzymes_wikipedia.json` (corpus #9). Five gates: the drug and the index resolve; the
   (enzyme, role, strength) triple is in the vocabulary; the quote names the isoform the row
-  claims; the quote is verbatim on the cited page under `check_data.normalize_for_match`; one
+  claims; the quote is verbatim on the cited page under `lib.quote_match.normalize_for_match`; one
   (enzyme, role) pair per drug per corpus, keeping the reading that carries a strength tier.
   Stdlib, author-side (the gate needs the gitignored corpora). `--dry-run` reports, `--verbose`
   lists every rejected row. See docs/DRUGS.md Drug metabolism. Every source it writes is stamped `llm` with the model that
@@ -424,7 +424,7 @@ Screenshots).
   adds a target), PDSP-first (a `ki` only where there is none), and a `provisional_action` only on an
   `affinity_only` binding, so a stated direction always wins. A disagreement is reported, split into
   compatible refinements (`COMPATIBLE`) and genuine conflicts, never auto-resolved. Re-gates every quote
-  through `check_data.normalize_for_match`; idempotent (`strip_previous` rebuilds its own prior write).
+  through `lib.quote_match.normalize_for_match`; idempotent (`strip_previous` rebuilds its own prior write).
 - `tools/fetch/fetch_wikipedia_pharmacology.py` — `uv run` (deps: beautifulsoup4). Fetches a drug's
   English Wikipedia article pinned to its revision id, stores the whole page author-side
   (`data_sources/wikipedia/raw/<slug>.html` + `pages/<slug>.md`, corpus #9 `wikipedia_pharm`), and mines

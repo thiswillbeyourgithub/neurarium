@@ -88,7 +88,7 @@ class MetaboliteTest(unittest.TestCase):
         metabs = [{"id": "norfluoxetine", "name": "Norfluoxetine",
                    "bindings": metab_bindings}]
         # A fake page store: the one GtoPdb ligand page, already normalized.
-        from check_data import normalize_for_match
+        from lib.quote_match import normalize_for_match
         page = normalize_for_match(self.QUOTE)
         gate = apply_gtopdb_ki.PageGate(
             read=lambda corpus, slug: page if slug == "norfluoxetine" else None)

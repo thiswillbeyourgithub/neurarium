@@ -64,7 +64,7 @@ SEP = r"[^a-z0-9]{0,2}"
 def fold(text: str) -> str:
     """Canonicalize text for alias matching: Greek spelled out, accents dropped, lowercased.
 
-    Separators are **kept** (unlike ``check_data.normalize_for_match``, which collapses
+    Separators are **kept** (unlike ``lib.quote_match.normalize_for_match``, which collapses
     them): the boundary assertions in :func:`alias_pattern` need to see where a token
     starts and ends.
 

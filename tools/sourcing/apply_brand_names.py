@@ -44,7 +44,7 @@ WORKLIST = ROOT / "tools" / "generated_cache" / "brand_worklist.json"
 JUDGED = ROOT / "tools" / "generated_cache" / "brand_judged.json"
 
 # Reuse the checker's normalization so "accepted here" == "passes check_data".
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 
 
 BDPM_LABELS = ROOT / "tools" / "generated_cache" / "bdpm_labels.json"

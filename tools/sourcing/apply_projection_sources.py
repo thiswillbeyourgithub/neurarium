@@ -19,7 +19,7 @@ with an open claim, an LLM answers by index into ``projection_judged.json``
   transmitter / sign pick still carries the stored value's word
   (``attestation.pattern_for``), so the claim it is meant to close really moves;
 * the quote is re-found verbatim on its page (``pipeline.gate.PageGate``, i.e.
-  ``check_data.normalize_for_match``).
+  ``lib.quote_match.normalize_for_match``).
 
 Idempotent (dedup by quote). It writes no ``llm`` stamp, so
 ``tools/sourcing/recheck_quotes.py`` must judge the new citations afterwards.

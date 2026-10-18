@@ -27,7 +27,7 @@ reported rather than silently dropped:
    very matcher the fetcher used to offer the sentence (``tools/target_aliases.py``), so
    the gate can never accept what the worklist could not have shown;
 6. the quote is verbatim on ``data_sources/wikipedia/pages/<slug>.md``, re-derived here
-   under ``check_data.normalize_for_match`` rather than trusted from the worklist.
+   under ``lib.quote_match.normalize_for_match`` rather than trusted from the worklist.
 
 On a pass the binding loses ``affinity_only``, gains ``action``, keeps its ``ki``
 untouched, and gains a ``{corpus, page, quote, provenance: "verified"}`` source. **No

@@ -91,7 +91,7 @@ KEYWORDS: dict[str, re.Pattern[str]] = {
 def sentences(text: str) -> list[str]:
     """Prose sentences of a stored page: tables, headings, the stamp and references dropped.
 
-    Hyphenated line breaks are joined first, exactly as ``check_data.normalize_for_match``
+    Hyphenated line breaks are joined first, exactly as ``lib.quote_match.normalize_for_match``
     does, so a candidate taken from a hard-wrapped book page still re-finds verbatim.
     """
     text = re.sub(r"-\s*\n\s*", "", text)

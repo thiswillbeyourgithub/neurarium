@@ -11,7 +11,7 @@ sys.path.insert(0, str(TOOLS / "fetch"))
 sys.path.insert(0, str(TOOLS))
 
 from pdf_to_pages import pick_page_text  # noqa: E402
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 
 
 class PickPageTextTest(unittest.TestCase):

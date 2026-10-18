@@ -9,7 +9,7 @@ density pass into ``data_sources/allen/density.json``.
 Same guarantees as every other applier here: **confirm-only** (a profile is trimmed to the
 regions the owner already claims; it never adds one), **re-gated** (each quote is
 re-confirmed verbatim on ``data_sources/allen/pages/<gene>.md`` via
-``check_data.normalize_for_match``, so a stale input cannot smuggle an unsourced profile
+``lib.quote_match.normalize_for_match``, so a stale input cannot smuggle an unsourced profile
 through), and **idempotent** (the output is rewritten from the input each run; this script
 is its sole writer).
 

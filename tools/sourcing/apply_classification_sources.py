@@ -10,7 +10,7 @@ and onto a non-receptor target's classification node (``type``).
 GtoPdb's fact *agrees with the value the dataset already states*. A disagreement is
 reported for a human and changes nothing, because rewriting our data to match a source
 would make the grade meaningless. Every quote is re-confirmed on its cached page with
-``check_data.normalize_for_match`` before it is written, so a stale cache cannot
+``lib.quote_match.normalize_for_match`` before it is written, so a stale cache cannot
 smuggle an unsourced quote through. Idempotent (dedup by quote); safe to re-run.
 
 **The three mappings, and why each is honest.**
@@ -69,7 +69,7 @@ SITES = {"presynaptic": {"presynaptic"}, "postsynaptic": {"postsynaptic"},
          "both": {"presynaptic", "postsynaptic"}}
 
 sys.path.insert(0, str(TOOLS))
-from check_data import normalize_for_match  # noqa: E402  (reuse the gate's normalizer)
+from lib.quote_match import normalize_for_match  # noqa: E402  (reuse the gate's normalizer)
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 from prose_gate import add_source  # noqa: E402

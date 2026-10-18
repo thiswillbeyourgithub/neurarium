@@ -64,7 +64,7 @@ DATA = os.path.join(ROOT, "public", "data")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from data_generators.quote_table import quote_id  # noqa: E402
-from check_data import emitted_page_dirs, normalize_for_match  # noqa: E402
+from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 import citation_site as CS  # noqa: E402
 from io_atomic import atomic_write_json, atomic_write_text  # noqa: E402

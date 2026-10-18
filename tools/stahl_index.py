@@ -14,7 +14,7 @@ drug name is folded into a lookup key, so :func:`ranges` takes the fold as a par
 the row grammar lives here once.
 
 :func:`find_page` is the other repeated piece: "the first page of a span whose text holds
-this quote", under the quote gate's own ``check_data.normalize_for_match``, so a page found
+this quote", under the quote gate's own ``lib.quote_match.normalize_for_match``, so a page found
 here is a page ``check_data.py`` accepts by construction.
 
 Stdlib only; author-side (the book tree is gitignored, so on a clone :data:`INDEX` is
@@ -85,7 +85,7 @@ def find_page(start: int, end: int, quote: str, min_chars: int = 1,
     """The first page in ``start..end`` (inclusive) whose text holds ``quote``.
 
     The match is the quote gate's own: an exact substring test on
-    ``check_data.normalize_for_match`` of both sides, so the page returned is one
+    ``lib.quote_match.normalize_for_match`` of both sides, so the page returned is one
     ``check_data.py`` will accept. The whole span is searched, so the page is the one
     the text really sits on, never the one an LLM remembered.
 
@@ -108,9 +108,7 @@ def find_page(start: int, end: int, quote: str, min_chars: int = 1,
     int or None
         The page number, or ``None`` when no page in the span holds it.
     """
-    # Imported here, not at module top: check_data imports this module for its
-    # monograph-range gate, so a top-level import would be circular.
-    from check_data import normalize_for_match
+    from lib.quote_match import normalize_for_match
 
     needle = normalize_for_match(quote)
     if len(needle.replace(" ", "")) < min_chars:

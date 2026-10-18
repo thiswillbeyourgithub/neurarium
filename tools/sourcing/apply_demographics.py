@@ -49,7 +49,7 @@ from prose_gate import apply_picks, not_offered, run_applier  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 from apply_receptor_effects import current_kinds  # noqa: E402 (receptors + targets)
 from apply_release_modulation import current_structures  # noqa: E402
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 from fetch_europepmc import PAGES_DIR, SPECIES_LEDGER  # noqa: E402
 
 WORKLIST = TOOLS / "generated_cache" / "demographics_worklist.json"

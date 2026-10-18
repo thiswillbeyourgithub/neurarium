@@ -67,7 +67,7 @@ WIKI_PAGES = {
 
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes
 # check_data" by construction (no second, drifting implementation).
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 
 

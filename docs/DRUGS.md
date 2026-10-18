@@ -329,7 +329,7 @@ nothing draws.
   - `tools/sourcing/apply_cyp_sources.py` -> `generated_cache/drug_enzymes.json` (Stahl) +
     `drug_enzymes_wikipedia.json` (corpus #9), the **sole writer** of both. Five gates: drug and
     index resolve; the triple is in the vocabulary; **the quote names the isoform the row claims**;
-    the quote is verbatim on the cited page under `check_data.normalize_for_match`; one
+    the quote is verbatim on the cited page under `lib.quote_match.normalize_for_match`; one
     (enzyme, role) pair per drug per corpus, keeping the reading that carries a strength tier.
     A second judged file, `generated_cache/cyp_strength_judged.json`, is the **tier pass**: picks over
     the same worklist naming a sentence that states a kept row's tier in words. Confirm-only (a pick

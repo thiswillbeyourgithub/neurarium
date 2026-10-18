@@ -47,7 +47,7 @@ DRUGS_JSON = drugs_io.DRUGS_PATH
 
 # Reuse the exact normalization the checker uses, so "accepted here" == "passes
 # check_data" by construction (no second, drifting implementation).
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 
 # The NbN line, tolerant of the markdown bullet / optional bold markers Stahl's
 # PDF->Markdown pipeline emits. The captured group (the line from "Neuroscience"

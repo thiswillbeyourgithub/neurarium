@@ -25,7 +25,7 @@ Six gates, all re-derived here rather than trusted from the judged file:
    simulation models. A depot injection or an implant peaks in days (aripiprazole LAI
    at 6.5-7.1 days is a real number about a different formulation), and writing it
    would make the tablet's curve nonsense;
-6. the quote is verbatim, under ``check_data.normalize_for_match``, on the page it
+6. the quote is verbatim, under ``lib.quote_match.normalize_for_match``, on the page it
    cites: ``data_sources/books/stahl/pages/<n>.md`` for corpus #1,
    ``data_sources/wikipedia/pages/<slug>.md`` for corpus #9,
    ``data_sources/dailymed/pages/<setid>.md`` for corpus #14, or

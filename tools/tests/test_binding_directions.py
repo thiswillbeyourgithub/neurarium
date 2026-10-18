@@ -34,7 +34,7 @@ sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
 import drugs_io  # noqa: E402
 import target_aliases as ta  # noqa: E402
 import apply_binding_directions as A  # noqa: E402
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 from judged_fixture import fill  # noqa: E402
 
 # The table fetcher imports bs4 at module level, which a plain clone need not have; the

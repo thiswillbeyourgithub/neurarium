@@ -16,7 +16,7 @@ re-gated here rather than trusted from the judged file:
 5. ``timing`` is in ``workup.TIMINGS`` and the quote, or the RCP sub-heading it sits
    under (re-read off the page by the fetcher, not taken from the judged file), carries
    that timing's wording;
-6. the quote is verbatim, under ``check_data.normalize_for_match``, on the corpus #24
+6. the quote is verbatim, under ``lib.quote_match.normalize_for_match``, on the corpus #24
    page it cites (``data_sources/bdpm/pages_rcp4/<page>.md``);
 7. an optional ``condition`` (the label asks for the check only in some patients:
    "chez les patients diabétiques") is a verbatim span of that same quote.
@@ -52,7 +52,7 @@ sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 
 import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 import fetch_workup  # noqa: E402

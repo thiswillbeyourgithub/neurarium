@@ -65,6 +65,7 @@ sys.path.insert(0, os.path.join(REPO, "tools"))
 
 from io_atomic import atomic_write_json  # noqa: E402
 import check_data  # noqa: E402  (reuse the quote gate's normalizer + range gate)
+from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
 import stahl_index  # noqa: E402  (the one INDEX.md reader)
 
 STAHL = "stahl"
@@ -111,7 +112,7 @@ def book_corpora() -> dict[str, str]:
     Wikipedia) where "the heading above this quote" has no meaning.
     """
     out = {}
-    for name, pages in check_data.emitted_page_dirs().items():
+    for name, pages in emitted_page_dirs().items():
         pages = os.path.join(REPO, pages)
         if os.path.exists(os.path.join(os.path.dirname(pages), "INDEX.md")):
             out[name] = pages
@@ -148,7 +149,7 @@ def classify(text: str, drug_names: set[str]) -> tuple[str, str | None, str | No
             # subsection onto one line; "LEE DOSING AND USE" is OCR spill before it.
             tail = _subsection(_clean(text[at + len(section):]))
             return "section", section, (tail or None)
-    if check_data.normalize_for_match(text) in drug_names:
+    if normalize_for_match(text) in drug_names:
         return "drug", text, None
     letters = re.sub(r"[^A-Za-z]", "", text)
     if not letters or letters.isupper():
@@ -175,7 +176,7 @@ class StahlPages:
         if not self.ok:
             return
         for title, lo, hi in stahl_index.rows(missing_ok=True):
-            self.drug_names.add(check_data.normalize_for_match(title))
+            self.drug_names.add(normalize_for_match(title))
             for page in range(lo, hi + 1):
                 self.page_drug[page] = title
                 self.page_span[page] = (lo, hi)
@@ -199,7 +200,7 @@ class StahlPages:
             marks, parts, offset = [], [], 0
             for line in raw.splitlines():
                 head = _HEADING.match(line)
-                body = check_data.normalize_for_match(
+                body = normalize_for_match(
                     head.group(1) if head else line)
                 if head:
                     marks.append((offset,) + classify(_clean(head.group(1)),
@@ -243,7 +244,7 @@ class StahlPages:
         if not self.ok:
             return []
         marks, text = self.page(page)
-        at = text.find(check_data.normalize_for_match(quote))
+        at = text.find(normalize_for_match(quote))
         if at < 0:
             return []
         sub = positional = None

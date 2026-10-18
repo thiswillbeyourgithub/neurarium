@@ -6,7 +6,7 @@ Merges the output of either expression-sourcing pipeline into the committed
 ``_merge_external_location_sources`` into ``RECEPTOR_LOCATION_SOURCES`` /
 ``TARGET_LOCATION_SOURCES``). Both pipelines are **confirm-only** (they upgrade the
 grade on regions the dataset already lists; they never add or drop a region), and both
-re-confirm every quote against its cached page via ``check_data.normalize_for_match``
+re-confirm every quote against its cached page via ``lib.quote_match.normalize_for_match``
 so a stale input can't smuggle an unsourced quote through. It is the location analogue
 of ``apply_source_quotes.py`` / ``apply_category_sources.py``. Idempotent (dedup by
 quote); each corpus/pass merges rather than clobbers, so both can write the same file.

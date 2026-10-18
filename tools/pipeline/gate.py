@@ -2,7 +2,7 @@
 
 Every applier (step three of fetch -> judge -> apply -> recheck) ends the same way: the
 quote it is about to write must still be on the stored page it cites, compared under
-``check_data.normalize_for_match`` so "accepted here" means "passes check_data". This
+``lib.quote_match.normalize_for_match`` so "accepted here" means "passes check_data". This
 module holds that last step plus the tally every applier prints:
 
 * :class:`PageGate`: the normalized page text per ``(corpus, page)``, read once and
@@ -31,7 +31,7 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
-from check_data import normalize_for_match  # noqa: E402 (the gate's one normalizer)
+from lib.quote_match import normalize_for_match  # noqa: E402 (the gate's one normalizer)
 from page_file import page_file  # noqa: E402 (refuses a path-like page)
 from pipeline.judged import resolve_all  # noqa: E402
 

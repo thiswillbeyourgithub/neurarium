@@ -23,7 +23,7 @@ So this script decides **nothing**. It asks one deterministic question of every 
 The candidate is the quote
 --------------------------
 Every candidate is confirmed **verbatim on its own page here**, under
-``check_data.normalize_for_match`` (the same normalizer the gate uses), and is offered
+``lib.quote_match.normalize_for_match`` (the same normalizer the gate uses), and is offered
 to the judge under a stable index ``n``. The judge answers with that index, never with a
 string, so it cannot paraphrase a quote into existence: the worst it can do is pick the
 wrong true sentence. ``apply_cyp_sources.py`` re-gates anyway (a judge that edits a
@@ -66,7 +66,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 sys.path.insert(0, HERE)
 
-import check_data  # noqa: E402  (reuse the quote gate's normalizer, one definition)
+from lib.quote_match import normalize_for_match  # noqa: E402  (the quote gate's one normalizer)
 import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402
 from fetch_cyp import (  # noqa: E402  (one definition of each shared rule)
@@ -108,7 +108,7 @@ HEADING_RE = re.compile(r"^\s{0,3}(#{1,6})\s+(.*\S)\s*$")
 
 def _gated(quote: str, page_text_normalized: str) -> bool:
     """Is this candidate verbatim on its page, by the gate's own normalization?"""
-    return check_data.normalize_for_match(quote) in page_text_normalized
+    return normalize_for_match(quote) in page_text_normalized
 
 
 def stahl_candidates(name: str, span: tuple[int, int], answer: str) -> list[dict]:
@@ -147,7 +147,7 @@ def wikipedia_candidates(path: str, slug: str) -> list[dict]:
     """
     with open(path, encoding="utf-8") as f:
         text = f.read()
-    normalized = check_data.normalize_for_match(text)
+    normalized = normalize_for_match(text)
     out, seen, heading = [], set(), ""
     for raw in text.splitlines():
         head = HEADING_RE.match(raw)

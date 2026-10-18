@@ -28,7 +28,7 @@ per-drug facts this pass reads with pymupdf's table finder, pure code, no model:
 
 The quote is the table row's cells copied by code in the page's own reading order
 (``extraction: "code"``, so no judge), and is written only once it is found on the
-stored page by ``check_data.normalize_for_match``, the gate ``check_data.py`` runs.
+stored page by ``lib.quote_match.normalize_for_match``, the gate ``check_data.py`` runs.
 
 Writes ``tools/generated_cache/agnp_tdm.json`` (committed: the parsed values plus one
 row quote per drug, never the table) and the generated drug -> pages table at the end of
@@ -51,7 +51,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import drugs_io  # noqa: E402
 from io_atomic import atomic_write_json  # noqa: E402
-from check_data import normalize_for_match  # noqa: E402  (the gate's own normalizer)
+from lib.quote_match import normalize_for_match  # noqa: E402  (the gate's own normalizer)
 from text_fold import alnum_key  # noqa: E402
 
 CORPUS = "agnp_tdm"

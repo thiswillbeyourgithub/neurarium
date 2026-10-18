@@ -19,7 +19,7 @@ This script is the sole writer and gates every pick before it lands:
 * **an affinity, not a potency** - ``param`` must be a Ki or Kd (or their p-forms). An
   IC50 / EC50 / KB is a functional potency, the same line the GtoPdb pass draws.
 * **verbatim** - the quote must lie inside the picked candidate line and be found on the
-  stored page (``check_data.normalize_for_match``, the quote gate's own normalizer).
+  stored page (``lib.quote_match.normalize_for_match``, the quote gate's own normalizer).
 * **the number is in the quote** - ``value_nm`` (or, for a pKi, the value it converts
   from) must be written in the quote, so a correct sentence cannot carry a made-up value.
 
@@ -51,7 +51,7 @@ REPO = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(TOOLS / "fetch"))
 
-from check_data import normalize_for_match                     # noqa: E402
+from lib.quote_match import normalize_for_match                     # noqa: E402
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.judged import resolve  # noqa: E402
 import drugs_io                                                # noqa: E402

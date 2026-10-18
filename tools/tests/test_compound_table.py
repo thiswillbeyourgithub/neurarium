@@ -20,7 +20,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 
 import drugs_io  # noqa: E402
-from check_data import normalize_for_match  # noqa: E402
+from lib.quote_match import normalize_for_match  # noqa: E402
 
 HAS_BS4 = importlib.util.find_spec("bs4") is not None
 if HAS_BS4:

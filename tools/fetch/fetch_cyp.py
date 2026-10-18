@@ -40,7 +40,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
 import stahl_index  # noqa: E402 (the one INDEX.md reader)
-import check_data  # noqa: E402  (reuse the quote gate's normalizer, one definition)
+from lib.quote_match import normalize_for_match  # noqa: E402  (the quote gate's one normalizer)
 from data_generators.drugs import ENZYMES  # noqa: E402  (the modeled isoform ids)
 
 STAHL = os.path.join(REPO, "data_sources", "books", "stahl")
@@ -120,13 +120,13 @@ def isoforms(text: str) -> list[str]:
 
 def page_holding(quote: str, lo: int, hi: int) -> int | None:
     """The page-file number inside [lo, hi] whose text contains `quote` verbatim."""
-    needle = check_data.normalize_for_match(quote)
+    needle = normalize_for_match(quote)
     for page in range(lo, hi + 1):
         path = os.path.join(PAGES, f"{page}.md")
         if not os.path.exists(path):
             continue
         with open(path, encoding="utf-8") as f:
-            if needle in check_data.normalize_for_match(f.read()):
+            if needle in normalize_for_match(f.read()):
                 return page
     return None
 

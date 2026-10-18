@@ -20,7 +20,7 @@ under the same guarantees as every other applier here:
   binding otherwise read NOSOURCE beside a corpus spelling it out. Never an overwrite:
   a binding that already cites something is left untouched.
 * **re-gated** - each quote is re-confirmed verbatim on
-  ``data_sources/gtopdb/pages_ki/<slug>.md`` through ``check_data.normalize_for_match``,
+  ``data_sources/gtopdb/pages_ki/<slug>.md`` through ``lib.quote_match.normalize_for_match``,
   so a stale cache cannot smuggle an unsourced claim through.
 * **idempotent, sole writer** - its own prior writes (recognised by the
   ``provisional_action`` / ``confirmed_action`` markers, see ``strip_previous``) are

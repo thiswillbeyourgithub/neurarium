@@ -23,7 +23,7 @@ writing something weaker:
    an enzyme separately, so this is what stops the two being paired wrongly, and it is
    the check the index scheme cannot make redundant;
 4. the quote must be verbatim on the cited page, re-derived here under
-   ``check_data.normalize_for_match`` rather than trusted from the worklist, so a judge
+   ``lib.quote_match.normalize_for_match`` rather than trusted from the worklist, so a judge
    that edited a string fails instead of shipping a paraphrase;
 5. one (enzyme, role) pair per drug per corpus, so a claim an article states twice is
    one node. The kept quote is the **more specific** one: a later row carrying a
@@ -78,7 +78,7 @@ from data_generators.quotes.attestation import pattern_for  # noqa: E402  (the t
 
 # The shared prose gate re-finds a quote under check_data's own normalization, so a quote
 # accepted here is one check_data.py accepts too.
-from check_data import normalize_for_match  # noqa: E402 (the gate's normalizer)
+from lib.quote_match import normalize_for_match  # noqa: E402 (the gate's normalizer)
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 from prose_gate import add_source  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402

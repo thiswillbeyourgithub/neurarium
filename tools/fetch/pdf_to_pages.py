@@ -53,7 +53,7 @@ def pick_page_text(markdown: str, text_layer: str) -> str:
 
     The fallback is pymupdf's classic ``get_text()``: reading order cell by cell,
     one wrapped fragment per line, which the quote gate's normalization
-    (``check_data.normalize_for_match``: hyphen joins + whitespace collapse) reads
+    (``lib.quote_match.normalize_for_match``: hyphen joins + whitespace collapse) reads
     as the row's running text.
 
     >>> pick_page_text("Header", "Header Drug 12 h 80-200 ng/mL")
