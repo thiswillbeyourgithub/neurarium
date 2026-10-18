@@ -121,7 +121,7 @@ There is a **code** check too, since there is no build step to hold a linter: `t
 
 ## Internationalization (i18n)
 
-> Moved to [`docs/I18N.md`](docs/I18N.md) to keep this file terse: EN/FR, no build step; UI strings in `js/i18n.js`, data strings authored as `{en,fr}` via `_t()`/`FR` in `generate_data.py` but **emitted English-only** (a serialization-time `externalize` pass collapses each `{en,fr}` to English + deduplicates the French into `public/data/translations.fr.json`, fetched by the viewer only in French). Any new string needs both languages or the build raises.
+> Moved to [`docs/I18N.md`](docs/I18N.md) to keep this file terse: EN/FR, no build step; UI strings in `js/i18n/en.js` + `fr.js` (runtime `js/i18n.js`), data strings authored as `{en,fr}` via `_t()`/`FR` in `generate_data.py` but **emitted English-only** (a serialization-time `externalize` pass collapses each `{en,fr}` to English + deduplicates the French into `public/data/translations.fr.json`, fetched by the viewer only in French). Any new string needs both languages or the build raises.
 
 ## Analytics (umami)
 

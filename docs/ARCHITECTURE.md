@@ -488,7 +488,7 @@ Viewer (`public/`):
   env-filled copy into `/gen` and Caddy serves that. Generic name (not
   "analytics-*") so content filters don't 404 it. Carries `ANALYTICS_*`, `DEV`,
   `STARTED_AT`, `sourceUrl`.
-- Single-purpose modules, each detailed in its own section below: `js/i18n.js` (I18n),
+- Single-purpose modules, each detailed in its own section below: `js/i18n.js` (I18n, string tables in `js/i18n/en.js` + `fr.js`),
   `js/app-init.js` (Analytics), `js/dev-banner.js` (Dev banner), `js/error-banner.js` (Error
   banners), `js/theme.js` (Theme), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
   `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`

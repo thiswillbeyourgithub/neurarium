@@ -7,7 +7,9 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
-const SRC = readFileSync(new URL("../../public/js/i18n.js", import.meta.url), "utf8");
+// The string tables load first, as in index.html: i18n.js reads them off a global.
+const SRC = ["i18n/en.js", "i18n/fr.js", "i18n.js"]
+  .map((f) => readFileSync(new URL(`../../public/js/${f}`, import.meta.url), "utf8"));
 
 function loadI18n() {
   const window = { location: { search: "" } };
@@ -18,7 +20,8 @@ function loadI18n() {
     navigator: { languages: ["en"] },
     document: { documentElement: {}, addEventListener() {} },
   };
-  vm.runInNewContext(SRC, ctx);
+  vm.createContext(ctx);
+  for (const src of SRC) vm.runInContext(src, ctx);
   return window.__I18N__;
 }
 

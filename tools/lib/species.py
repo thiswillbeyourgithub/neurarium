@@ -14,7 +14,7 @@ Four corpora say which species a fact was measured in, each in its own spelling:
 label is not a species we can name), so the derived ``animal_evidence`` flag
 (``data_generators/quotes/uncertainty.py``) asks one question of every corpus: is any of a
 claim's evidence human or primate? The viewer labels a key through ``species.<key>`` in
-``js/i18n.js``, so a key added here needs both catalogue strings.
+``js/i18n/<lang>.js``, so a key added here needs both catalogue strings.
 
 Built with the help of Claude Code.
 """

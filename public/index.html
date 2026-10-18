@@ -89,7 +89,10 @@
     <!-- Internationalization (en / fr): a classic script so the later module
          (js/main.js) AND classic scripts (js/error-banner.js, js/dev-banner.js)
          can read window.__I18N__. Owns the UI message catalogue + the language
-         choice; loaded early so static markup is filled at DOMContentLoaded. -->
+         choice; loaded early so static markup is filled at DOMContentLoaded. The
+         per-language string tables load first (it reads them off a global). -->
+    <script src="js/i18n/en.js"></script>
+    <script src="js/i18n/fr.js"></script>
     <script src="js/i18n.js"></script>
 
     <!-- App version (single source). Read by js/main.js (which fills every

@@ -121,12 +121,11 @@ _UNCERTAIN_RE = re.compile(r'^\s*"uncertain\.([a-z_]+)":\s*"((?:[^"\\]|\\.)*)"',
 def _uncertainty_reasons():
     """``kind -> the English sentence the viewer prints for that doubt``.
 
-    Read off ``js/i18n.js`` rather than restated here: the judge must be shown the
+    Read off ``js/i18n/en.js`` rather than restated here: the judge must be shown the
     same words a reader is shown, and a second copy would drift the day a reason is
-    reworded. The EN catalogue is written first in that file, so the first match per
-    key wins and the FR one below it is ignored.
+    reworded.
     """
-    fn = os.path.join(ROOT, "public", "js", "i18n.js")
+    fn = os.path.join(ROOT, "public", "js", "i18n", "en.js")
     out = {}
     with open(fn, encoding="utf-8") as fh:
         for kind, text in _UNCERTAIN_RE.findall(fh.read()):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """The viewer's message catalogue: EN and FR must describe the same UI.
 
-`js/i18n.js` holds both catalogues, English first. A key added to one and forgotten
+`js/i18n/en.js` and `js/i18n/fr.js` hold the two catalogues. A key added to one and forgotten
 in the other does not crash: `pick` falls back to the English string, so the French
 site quietly turns English one label at a time, which is exactly the kind of rot
 nobody notices until it is everywhere. And a `{placeholder}` dropped in translation
@@ -19,17 +19,15 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-I18N = ROOT / "public" / "js" / "i18n.js"
+I18N_DIR = ROOT / "public" / "js" / "i18n"
 ENTRY = re.compile(r'^\s*"([A-Za-z0-9_.]+)":\s*"((?:[^"\\]|\\.)*)"', re.MULTILINE)
 PLACEHOLDER = re.compile(r"\{([a-zA-Z0-9_]+)\}")
 
 
 def catalogues():
-    """``(en, fr)`` as ``key -> string``, split where the keys start repeating."""
-    en, fr = {}, {}
-    for key, value in ENTRY.findall(I18N.read_text(encoding="utf-8")):
-        (fr if key in en else en)[key] = value
-    return en, fr
+    """``(en, fr)`` as ``key -> string``, one per language's table file."""
+    return tuple(dict(ENTRY.findall((I18N_DIR / f"{lang}.js").read_text(encoding="utf-8")))
+                 for lang in ("en", "fr"))
 
 
 class CatalogueParityTest(unittest.TestCase):
@@ -42,6 +40,13 @@ class CatalogueParityTest(unittest.TestCase):
         # A guard on the guard: if the regex ever stops matching, every assertion
         # below would pass over two empty dicts.
         self.assertGreater(len(self.en), 300)
+
+    def test_no_key_is_written_twice_in_one_table(self):
+        # A JS object literal keeps the last of two equal keys without a word, so a
+        # duplicate silently shadows the string someone is editing.
+        for lang in ("en", "fr"):
+            keys = [k for k, _ in ENTRY.findall((I18N_DIR / f"{lang}.js").read_text("utf-8"))]
+            self.assertEqual(sorted({k for k in keys if keys.count(k) > 1}), [], lang)
 
     def test_no_key_is_missing_its_translation(self):
         self.assertEqual(sorted(set(self.en) - set(self.fr)), [],

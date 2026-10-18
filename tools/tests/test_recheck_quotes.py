@@ -435,7 +435,7 @@ class DoubtsAlreadyRecordedTest(unittest.TestCase):
                       R._doubts({"uncertainty": [{"kind": "brand_new_doubt"}]}))
 
     def test_every_emitted_reason_has_an_english_sentence(self):
-        # The catalogue is scraped out of js/i18n.js, so a reason added to the
+        # The catalogue is scraped out of js/i18n/en.js, so a reason added to the
         # generator without its EN string would reach a judge as a bare key.
         with open(Path(R.DATA) / "meta.json", encoding="utf-8") as fh:
             emitted = set(json.load(fh).get("uncertainty_reasons", {}))

@@ -28,7 +28,7 @@
  *
  * Bump CACHE when the caching logic itself changes; activate() prunes older caches.
  */
-const CACHE = "neurarium-v7";
+const CACHE = "neurarium-v8";
 
 // Minimal app shell precached on install so a first offline launch has a page +
 // icons even before anything else was visited. The stylesheets ride with it, since a
@@ -37,6 +37,10 @@ const CACHE = "neurarium-v7";
 const SHELL = [
   ".",
   "index.html",
+  // The UI string tables + runtime: a shell without them renders bare keys.
+  "js/i18n/en.js",
+  "js/i18n/fr.js",
+  "js/i18n.js",
   "css/tokens.css",
   "css/base.css",
   "css/controls.css",

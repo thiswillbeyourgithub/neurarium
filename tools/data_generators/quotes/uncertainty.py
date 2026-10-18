@@ -51,7 +51,7 @@ derivation reproduces, binding for binding, the 89 that the hand audit in
 
 **No prose is stored.** A bullet is a ``kind`` from :data:`UNCERTAINTY_REASONS` plus
 optional slot ``args``; the viewer builds the sentence from an i18n key, so both languages
-live in ``public/js/i18n.js`` with every other display string and the flagged bindings do
+live in ``public/js/i18n/<lang>.js`` with every other display string and the flagged bindings do
 not carry a copy of the same sentences each.
 
 **Every bullet is itself sourced, or says so.** A bullet either resolves a real

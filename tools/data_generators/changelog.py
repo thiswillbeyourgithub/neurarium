@@ -33,7 +33,7 @@ from pathlib import Path
 from typing import Any
 
 # The categories a bullet can sit under. Closed on purpose: the labels are UI strings
-# (`changelog.cat.*` in js/i18n.js), not data, so a new category is a deliberate
+# (`changelog.cat.*` in js/i18n/<lang>.js), not data, so a new category is a deliberate
 # two-file change rather than a typo in a heading. Within a release the viewer keeps
 # the authored order, so this tuple is the vocabulary, not the running order.
 CATEGORIES = ("added", "improved", "fixed", "data", "docs")

@@ -17,7 +17,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from test_i18n import catalogues  # noqa: E402  the one parser of js/i18n.js
+from test_i18n import catalogues  # noqa: E402  the one parser of the js/i18n/ tables
 from viewer_source import viewer_js  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent.parent

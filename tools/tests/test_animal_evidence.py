@@ -37,7 +37,8 @@ class SpeciesKeyTest(unittest.TestCase):
         self.assertIsNone(species_key("Animals"))
 
     def test_every_key_has_both_viewer_labels(self):
-        i18n = (ROOT / "public" / "js" / "i18n.js").read_text("utf-8")
+        i18n = "".join((ROOT / "public" / "js" / "i18n" / f"{lang}.js").read_text("utf-8")
+                       for lang in ("en", "fr"))
         for key in SPECIES:
             self.assertEqual(i18n.count(f'"species.{key}":'), 2, key)
 
