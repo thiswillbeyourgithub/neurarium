@@ -97,18 +97,15 @@ export function rehydrateQuotes(node, byId) {
 }
 
 /**
- * Resolve a translatable field to the chosen language. The data file stores
- * translatable strings as `{en, fr}` objects (see generate_data.py's `_t`);
- * `window.__I18N__.pick` collapses one to the active language. A plain string
- * passes straight through, and if i18n hasn't loaded we fall back to the English
- * member, so the rest of the viewer can treat every name/label as a plain string.
- * @param {string|{en?:string,fr?:string}} field
+ * Resolve a data string to the chosen language. The emitted data is English-only
+ * (see generate_data.py's `externalize`); `window.__I18N__.pick` swaps in the
+ * French side-table translation when the visitor reads French. js/i18n.js is a
+ * classic script that runs before every module, so `__I18N__` is always there.
+ * @param {string} field
  * @returns {string}
  */
 function localize(field) {
-  if (window.__I18N__) return window.__I18N__.pick(field);
-  if (field && typeof field === "object") return field.en ?? field;
-  return field;
+  return window.__I18N__.pick(field);
 }
 
 /**
@@ -405,7 +402,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   // English string up in. Fetch + install it BEFORE any localize() runs, and ONLY
   // in French (English users never request it, and it stays an empty table). A
   // failed fetch is non-fatal: pick() then falls back to the English strings.
-  if (window.__I18N__ && window.__I18N__.lang === "fr") {
+  if (window.__I18N__.lang === "fr") {
     try {
       const tr = await (await fetchOrThrow(`${dataDir}/translations.fr.json`)).json();
       window.__I18N__.setDataTranslations(tr);
@@ -431,8 +428,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
       // without it, the red banner says what is missing.
       fetchOrThrow(derivedUrl(dataDir, "effects.json")).then((r) => r.json()).catch((e) => {
         console.error("Could not load the effect index.", e);
-        window.showErrorBanner?.(window.__I18N__
-          ? window.__I18N__.t("effects.loadError", { msg: e.message }) : e.message);
+        window.showErrorBanner?.(window.__I18N__.t("effects.loadError", { msg: e.message }));
         return null;
       }),
     ]);
@@ -1411,7 +1407,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
     // `primaryBrand` is the single most-iconic name shown after the drug name
     // everywhere (see drugDisplayName), `brandNames` the full list, `displayName` the
     // name + primary. All brand names also feed search. See docs/DRUGS.md "Drugs".
-    const brandRank = (window.__I18N__ && window.__I18N__.lang === "fr")
+    const brandRank = window.__I18N__.lang === "fr"
       ? { fr: 0, eu: 1, na: 2 }
       : { na: 0, eu: 1, fr: 2 };
     const brandSeen = new Set();
