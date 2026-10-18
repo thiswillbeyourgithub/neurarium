@@ -3,6 +3,8 @@
 // A tooltip's content may be a thunk, built on first open, so a panel with hundreds of
 // pills pays for none of their bubbles until one is read.
 
+import { extLink } from "./dom.js";
+
 // Only one tooltip is pinned at a time across the whole UI: opening one closes
 // whichever was open, so tapping a second pill / bar dismisses the first instead of
 // stacking popups. Holds the open tip's `close` (so its scroll/resize listeners are
@@ -41,10 +43,7 @@ export function linkifiedText(text) {
   const frag = document.createDocumentFragment();
   String(text ?? "").split(/(https?:\/\/\S+)/).forEach((part, i) => {
     if (i % 2 === 0) { if (part) frag.append(part); return; }
-    const a = document.createElement("a");
-    a.href = part; a.textContent = part;
-    a.target = "_blank"; a.rel = "noopener noreferrer";
-    frag.append(a);
+    frag.append(extLink(part, part));
   });
   return frag;
 }

@@ -4,6 +4,7 @@
 
 import { NOSOURCE_GLYPH } from "./format.js";
 import { isWebUrl } from "../web-url.js";
+import { extLink } from "./dom.js";
 import { attachTip, linkifiedText } from "./tooltip.js";
 import { shownGrade } from "../node-browser.js";
 import { withFetched } from "../data.js";
@@ -232,11 +233,7 @@ export function makePills(P) {
     const frag = document.createDocumentFragment();
     if (dash) frag.append("— ");
     if (refUrl) {
-      const a = el("a", null, label);
-      a.href = refUrl;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      frag.append(a);
+      frag.append(extLink(label, refUrl));
     } else {
       frag.append(label + (ki.reference ? "\n" + ki.reference : ""));
     }

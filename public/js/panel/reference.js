@@ -4,6 +4,7 @@
 
 import { clipLead, fetchWikiLead } from "../wiki.js";
 import { isWebUrl } from "../web-url.js";
+import { extLink } from "./dom.js";
 
 const { t } = window.__I18N__;
 
@@ -22,10 +23,7 @@ export function makeReference(P) {
     const ok = isWebUrl(url);
     const wrap = el("div", "info-wiki");
     if (ok) {
-      const a = el("a", null, t("info.wikipedia"));
-      a.href = url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
+      const a = extLink(t("info.wikipedia"), url);
       wrap.appendChild(a);
       // Stash the reference link so a successful live-lead fetch can relocate it
       // up into the description as that text's source marker (see
@@ -48,10 +46,7 @@ export function makeReference(P) {
   // never fetched, so the CSP is unaffected.
   const appendLookupLink = (wrap, labelKey, href, titleKey) => {
     wrap.appendChild(el("span", "ref-sep", "·"));
-    const a = el("a", null, t(labelKey));
-    a.href = href;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
+    const a = extLink(t(labelKey), href);
     a.title = t(titleKey);
     wrap.appendChild(a);
     return a;

@@ -3,6 +3,7 @@
 
 import { attachTip } from "./tooltip.js";
 import { isWebUrl } from "../web-url.js";
+import { extLink } from "./dom.js";
 import { deriveReleaseChanges, transmitterVars } from "../release-modulation.js";
 import { formatConditions, groupWorkup } from "../workup.js";
 import { groupByVariant, variantsForDrug } from "../receptor-variants.js";
@@ -193,10 +194,7 @@ export function makeSections(P) {
        row.population ? t("variant.population", { population: row.population }) : ""]
         .filter(Boolean).join(" · "));
     if (isWebUrl(row.url)) {
-      const a = el("a", null, t("variant.link"));
-      a.href = row.url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
+      const a = extLink(t("variant.link"), row.url);
       a.title = t("variant.linkTitle");
       if (meta.textContent) meta.appendChild(document.createTextNode(" · "));
       meta.appendChild(a);

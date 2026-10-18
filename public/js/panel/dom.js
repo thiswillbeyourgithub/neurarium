@@ -1,5 +1,8 @@
-// Panel DOM helpers: fold a panel's headed sections into <details>, and flash a row
-// a jump landed on (unfolding the section holding it).
+// Panel DOM helpers: element / button / external-link builders, fold a panel's headed
+// sections into <details>, and flash a row a jump landed on (unfolding the section
+// holding it).
+
+import { isWebUrl } from "../web-url.js";
 
 /**
  * `document.createElement(tag)` with an optional class name and text. The one
@@ -15,6 +18,36 @@ export function el(tag, cls, text) {
   if (cls) node.className = cls;
   if (text != null) node.textContent = text;
   return node;
+}
+
+/**
+ * A `<button type="button">` (never a form submit) with an optional class and text.
+ * @param {?string} [cls]
+ * @param {?string} [text]
+ * @returns {HTMLButtonElement}
+ */
+export function btn(cls, text) {
+  const b = el("button", cls, text);
+  b.type = "button";
+  return b;
+}
+
+/**
+ * An external link opening in a new tab (`rel="noopener noreferrer"`), or a plain
+ * `<span>` with the same text when `url` is not an absolute http(s) URL, so a stray
+ * `javascript:` / `data:` value can never become clickable (see isWebUrl).
+ * @param {string} text
+ * @param {?string} url
+ * @param {?string} [cls]
+ * @returns {HTMLAnchorElement|HTMLSpanElement}
+ */
+export function extLink(text, url, cls) {
+  if (!isWebUrl(url)) return el("span", cls, text);
+  const a = el("a", cls, text);
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  return a;
 }
 
 /**

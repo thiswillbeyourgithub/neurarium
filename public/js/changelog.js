@@ -12,6 +12,7 @@
 
 import { loadString, saveString } from "./prefs.js";
 import { isWebUrl } from "./web-url.js";
+import { extLink } from "./panel/dom.js";
 
 const STORAGE_KEY = "neurarium.changelogSeen";
 
@@ -161,15 +162,8 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
         for (const sha of entry.commits || []) {
           const url = commitUrl(sourceUrl, sha);
           const short = sha.slice(0, 7);
-          const tag = document.createElement(url ? "a" : "span");
-          tag.className = "changelog-commit";
-          tag.textContent = short;
-          if (url) {
-            tag.href = url;
-            tag.target = "_blank";
-            tag.rel = "noopener noreferrer";
-            tag.title = t("changelog.commit");
-          }
+          const tag = extLink(short, url, "changelog-commit");
+          if (url) tag.title = t("changelog.commit");
           li.append(" ", tag);
         }
         ul.append(li);
