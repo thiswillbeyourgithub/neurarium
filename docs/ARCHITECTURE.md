@@ -503,7 +503,7 @@ Viewer (`public/`):
 - `js/physchem.js`: `appendPhyschemChips` (the drug panel's "Brain entry" section: XLogP3, TPSA and BBB chips on `tdm.js`'s `valueChip`) and the `formatLogP` / `formatTpsa` / `formatBbb` wording the node browser shares.
 - `js/workup.js`: `groupWorkup` (a drug's workup rows split before / during) and `formatWorkup` (one node as "test, timing"), shared by the drug panel's BETA "Checks the French label asks for" section in `main.js` and the node browser.
 - `js/drug-history.js`: `appendDrugHistory` (a drug's first-approval + withdrawal fact rows) and the `formatApproval` / `formatWithdrawal` wording the node browser shares.
-- `js/node-browser.js`: `collectNodes` + `createNodeBrowser`, the Data browser (`#nodes`): every
+- `js/node-browser.js` (re-exports `js/node-browser/`: `collect.js` the pure `collectNodes`, `view.js` the `createNodeBrowser` UI): the Data browser (`#nodes`): every
   graded knowledge node as one filterable/sortable list, opened as a **detail tab** (deep link
   `#tabs=browser:1`) rather than an accordion section, each row carrying its own backing so its pill
   shows the same source the node's panel pill does (see [`docs/CONTROLS.md`](CONTROLS.md)).
