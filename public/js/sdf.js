@@ -24,7 +24,7 @@
 // z posterior(-)/anterior(+); brain centered on the origin; arbitrary units.
 
 import * as THREE from "three";
-import { meshSdfToArrays, evalNode } from "./sdf-core.js";
+import { meshSdfToArrays } from "./sdf-core.js";
 
 /**
  * Mesh an SDF spec to a smooth, welded, indexed BufferGeometry in world units.
@@ -59,5 +59,3 @@ export function geometryFromArrays(positions, indices) {
   return geometry;
 }
 
-// Exposed for the unit smoke test (a unit sphere should mesh to ~radius 1).
-export { evalNode };
