@@ -1,6 +1,36 @@
 {
   "versions": [
     {
+      "version": "3.131.6",
+      "date": "2026-10-18",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Data tooling restructure: shared helpers move out of individual scripts into one library folder, the data check is split into one small module per check family, and the data generator is split into small build stages with its corpus list and statistics in their own files; the published data is unchanged",
+          "commits": [
+            "ca3b5df",
+            "776f169",
+            "5aa0017",
+            "c0a6d51",
+            "8c43814",
+            "862edc1",
+            "b7bdc7a",
+            "62073b6",
+            "2902ce8",
+            "277960b",
+            "2de78ee",
+            "7fc1b44",
+            "dc2359c",
+            "4a55251",
+            "6aaa0c8",
+            "30216fa",
+            "f1e1aeb",
+            "98f2ca6"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.131.5",
       "date": "2026-10-18",
       "entries": [
