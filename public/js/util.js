@@ -36,3 +36,7 @@ export const mirrorId = (id) =>
   id.endsWith("_R") ? `${id.slice(0, -2)}_L`
     : id.endsWith("_L") ? `${id.slice(0, -2)}_R`
       : id;
+
+// Fold a drug / metabolite name for joining ("Desmethyldiazepam (nordazepam)" ->
+// "desmethyldiazepamnordazepam").
+export const normName = (s) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
