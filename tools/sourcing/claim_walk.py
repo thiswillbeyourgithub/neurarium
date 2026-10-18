@@ -114,7 +114,7 @@ UNRECONSTRUCTED_CLAIM = ("This quote is cited as the source of a dataset claim w
                          "verbatim on the page and states a coherent, correct fact.")
 
 
-_UNCERTAIN_RE = re.compile(r'^\s*"uncertain\.([a-z_]+)":\s*"((?:[^"\\\\]|\\\\.)*)"',
+_UNCERTAIN_RE = re.compile(r'^\s*"uncertain\.([a-z_]+)":\s*"((?:[^"\\]|\\.)*)"',
                            re.MULTILINE)
 
 

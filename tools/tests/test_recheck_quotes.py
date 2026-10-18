@@ -441,6 +441,12 @@ class DoubtsAlreadyRecordedTest(unittest.TestCase):
             emitted = set(json.load(fh).get("uncertainty_reasons", {}))
         self.assertEqual(emitted - set(R.UNCERTAINTY_REASONS), set())
 
+    def test_a_reason_with_an_escaped_quote_is_read_in_english(self):
+        # set_claim's sentence quotes \"the cerebral cortex\": the scraper's regex once
+        # double-escaped its backslash, so the EN line never matched and the judge was
+        # silently handed the French sentence instead.
+        self.assertIn('"the cerebral cortex"', R.UNCERTAINTY_REASONS["set_claim"])
+
     def test_the_real_flagged_claims_carry_their_flag(self):
         quotes = {q["id"]: q for q in R._jsonl("quotes.jsonl")}
         claims, _ = R.reconstruct_claims(quotes)
