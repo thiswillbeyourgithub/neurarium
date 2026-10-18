@@ -3,7 +3,7 @@
 
 import { attachTip } from "./tooltip.js";
 import { isWebUrl } from "../web-url.js";
-import { extLink } from "./dom.js";
+import { extLink, btn } from "./dom.js";
 import { deriveReleaseChanges, transmitterVars } from "../release-modulation.js";
 import { formatConditions, groupWorkup } from "../workup.js";
 import { groupByVariant, variantsForDrug } from "../receptor-variants.js";
@@ -232,8 +232,7 @@ export function makeSections(P) {
     }
     for (const [target, rows] of byTarget) {
       const head = el("h4", "var-name");
-      const chip = el("button", "var-target", target.name);
-      chip.type = "button";
+      const chip = btn("var-target", target.name);
       if (target.focusable) chip.addEventListener("click", () => onTargetPick(target));
       else chip.disabled = true;
       head.appendChild(chip);

@@ -4,7 +4,7 @@
 
 import { clipLead, fetchWikiLead } from "../wiki.js";
 import { isWebUrl } from "../web-url.js";
-import { extLink } from "./dom.js";
+import { extLink, btn } from "./dom.js";
 
 const { t } = window.__I18N__;
 
@@ -235,8 +235,7 @@ export function makeReference(P) {
     if (!gal.length) return;
     const wrap = el("div", "structure-gallery");
     wrap.hidden = true;
-    const toggle = el("button", "btn gallery-toggle");
-    toggle.type = "button";
+    const toggle = btn("btn gallery-toggle");
     let built = false;
     const sync = () => {
       toggle.textContent = wrap.hidden

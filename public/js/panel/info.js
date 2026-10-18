@@ -2,7 +2,7 @@
 // reference links, addon slots) and returns the show*() views, each in panel/views/.
 
 import { closeOpenTip } from "./tooltip.js";
-import { el, flashRow, foldSections } from "./dom.js";
+import { el, btn, flashRow, foldSections } from "./dom.js";
 import { showEffect } from "./views/effect.js";
 import { showCircuit } from "./views/circuit.js";
 import { showProjectionGroup } from "./views/projection-group.js";
@@ -165,10 +165,9 @@ export function createInfoPanel(data, sourcingModal) {
       const wrap = el("span", "fact-links");
       links.forEach((lk, i) => {
         if (i) wrap.appendChild(document.createTextNode(", "));
-        const btn = el("button", "fact-link", lk.text);
-        btn.type = "button";
-        btn.addEventListener("click", () => onSearchPick(lk.query));
-        wrap.appendChild(btn);
+        const link = btn("fact-link", lk.text);
+        link.addEventListener("click", () => onSearchPick(lk.query));
+        wrap.appendChild(link);
       });
       v.appendChild(wrap);
     } else {

@@ -15,7 +15,7 @@
 // this module never touches the scene.
 
 import { loadFlag, saveFlag } from "./prefs.js";
-import { el } from "./panel/dom.js";
+import { el, btn } from "./panel/dom.js";
 import {
   approvalLabel, formatApproval, formatHolder, formatOriginator, formatWithdrawal,
 } from "./drug-history.js";
@@ -545,8 +545,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   // width instead of being squeezed into the panel's: the keys stay over the cells
   // they name because both scroll as one block.
   const grid = el("div", "node-grid");
-  const moreBtn = el("button", "node-more");
-  moreBtn.type = "button";
+  const moreBtn = btn("node-more");
   moreBtn.hidden = true;
 
   // What a node IS, said once above the list, because a flat list of sentences does
@@ -554,8 +553,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   // then names those fields, and the "as files" link hands over the very same nodes
   // in their stored form.
   const intro = el("p", "node-intro", t("nodes.intro"));
-  const filesBtn = el("button", "node-datafiles", t("nodes.dataFiles"));
-  filesBtn.type = "button";
+  const filesBtn = btn("node-datafiles", t("nodes.dataFiles"));
   filesBtn.title = t("nodes.dataFilesHint");
   filesBtn.addEventListener("click", () => openDataFiles?.());
   intro.appendChild(document.createTextNode(" "));
@@ -588,8 +586,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     // opens on the node's verbatim quote (or its reasons to doubt, or its measured
     // Ki), exactly like the same node's pill inside a detail panel.
     wrap.appendChild(pill(r.grade, r));
-    const main = el("button", r.go ? "node-main clickable" : "node-main");
-    main.type = "button";
+    const main = btn(r.go ? "node-main clickable" : "node-main");
     main.appendChild(el("span", "node-name", r.name));
     // Always emitted, empty or not: it is a grid cell, and skipping it would slide
     // the kind tag up into the notion column.

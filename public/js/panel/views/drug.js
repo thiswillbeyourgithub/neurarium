@@ -5,7 +5,7 @@ import { appendDrugHistory } from "../../drug-history.js";
 import { appendPhyschemChips, hasPhyschem } from "../../physchem.js";
 import { appendTdmChips, valueChip } from "../../tdm.js";
 import { bindingKi, formatHalfLife } from "../format.js";
-import { flashRow } from "../dom.js";
+import { flashRow, btn } from "../dom.js";
 import { loadPkGrouping, savePkGrouping } from "../../legend/drugs.js";
 import { toneWeightOf } from "../../data.js";
 
@@ -50,8 +50,7 @@ export function showDrug(P, drug, opts = {}) {
       if (i) links.appendChild(document.createTextNode(" · "));
       const linked = c.drugId && drugById.get(c.drugId);
       if (linked && linked.focusable) {
-        const a = el("button", "combo-link", linked.displayName);
-        a.type = "button";
+        const a = btn("combo-link", linked.displayName);
         a.addEventListener("click", () => onDrugPick(linked));
         links.appendChild(a);
       } else {
@@ -784,21 +783,20 @@ export function showDrug(P, drug, opts = {}) {
       const modeSwitch = el("div", "seg-switch");
       const render = (mode) => {
         listBox.innerHTML = "";
-        for (const btn of modeSwitch.children) {
-          btn.classList.toggle("active", btn.dataset.mode === mode);
+        for (const seg of modeSwitch.children) {
+          seg.classList.toggle("active", seg.dataset.mode === mode);
         }
         if (mode === "enzyme") byEnzyme(listBox); else byDrug(listBox);
       };
       for (const [mode, key] of [["drug", "drug.pkByDrug"],
                                  ["enzyme", "drug.pkByEnzyme"]]) {
-        const btn = el("button", "seg-btn", t(key));
-        btn.type = "button";
-        btn.dataset.mode = mode;
-        btn.addEventListener("click", () => {
+        const seg = btn("seg-btn", t(key));
+        seg.dataset.mode = mode;
+        seg.addEventListener("click", () => {
           savePkGrouping(mode);
           render(mode);
         });
-        modeSwitch.appendChild(btn);
+        modeSwitch.appendChild(seg);
       }
       pkWrap.appendChild(modeSwitch);
       pkWrap.appendChild(listBox);

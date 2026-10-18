@@ -2,7 +2,7 @@
 // point (appendAddons, see CLAUDE.md "Addon nodes"), plus the derived fallback boxes
 // (auto-modulation, active metabolites) worded conditionally with no pill.
 
-import { flashRow } from "./dom.js";
+import { flashRow, btn } from "./dom.js";
 
 const { t } = window.__I18N__;
 
@@ -142,8 +142,7 @@ export function makeAddons(P) {
     const box = derivedBox("caution", t("drug.metabolites"));
     const p = el("p", "addon-text", `${t(names.length > 1 ? "drug.activeMetabWarnMany" : "drug.activeMetabWarnOne",
       { names: names.join(", ") })} `);
-    const go = el("button", "addon-jump", t("drug.activeMetabSee"));
-    go.type = "button";
+    const go = btn("addon-jump", t("drug.activeMetabSee"));
     go.addEventListener("click", () =>
       flashRow(body.querySelector('[data-tour-sec="metabolites"]')));
     p.appendChild(go);

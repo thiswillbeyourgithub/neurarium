@@ -1,6 +1,8 @@
 // Pathway lists: the direction arrow glyph, one row per projection (left/right twins
 // collapsed), the headed list on a structure panel, and a connection's endpoint link.
 
+import { btn } from "./dom.js";
+
 const { t } = window.__I18N__;
 
 export function makePathways(P) {
@@ -16,8 +18,7 @@ export function makePathways(P) {
   const endpointEl = (id) => {
     const name = nameOf(id);
     if (id && baseResolves(id)) {
-      const b = el("button", "conn-endpoint", name);
-      b.type = "button";
+      const b = btn("conn-endpoint", name);
       b.addEventListener("click", () => onStructurePick(id));
       return b;
     }

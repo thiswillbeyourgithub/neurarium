@@ -4,7 +4,7 @@
 
 import { NOSOURCE_GLYPH } from "./format.js";
 import { isWebUrl } from "../web-url.js";
-import { extLink } from "./dom.js";
+import { extLink, btn } from "./dom.js";
 import { attachTip, linkifiedText } from "./tooltip.js";
 import { shownGrade } from "../node-browser.js";
 import { withFetched } from "../data.js";
@@ -73,8 +73,7 @@ export function makePills(P) {
   // dismisses its own tooltip first. Replaces the verbose per-grade paragraph that
   // used to be inlined into every pill (see makeProvenancePill).
   const makeDetailsCue = () => {
-    const cue = el("button", "src-details-cue", t("info.provDetails"));
-    cue.type = "button";
+    const cue = btn("src-details-cue", t("info.provDetails"));
     cue.addEventListener("click", (e) => {
       e.stopPropagation();
       const tipEl = cue.closest(".help-tip");
@@ -104,8 +103,7 @@ export function makePills(P) {
     }
     tip.append(makeDetailsCue());
     const cls = spec ? `src-pill src-prov-${level}` : "src-pill src-todo";
-    const pill = el("button", cls, spec ? spec.glyph : NOSOURCE_GLYPH);
-    pill.type = "button";
+    const pill = btn(cls, spec ? spec.glyph : NOSOURCE_GLYPH);
     pill.setAttribute("aria-label", base);
     return withTip(pill, tip);
   };
@@ -311,9 +309,9 @@ export function makePills(P) {
     // replaces the generic grade text makeProvenancePill would otherwise announce.
     const pill = (level, why) => {
       const node = makeProvenancePill(level, why);
-      const btn = node.matches && node.matches(".src-pill")
+      const pillEl = node.matches && node.matches(".src-pill")
         ? node : node.querySelector(".src-pill");
-      if (btn) btn.setAttribute("aria-label", why);
+      if (pillEl) pillEl.setAttribute("aria-label", why);
       return node;
     };
     if (binding.affinityOnly && binding.unknown)

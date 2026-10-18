@@ -4,7 +4,7 @@
 import { exampleRow, KIND_LABELS } from "../kinds.js";
 import { formatHalfLife, NOSOURCE_GLYPH } from "../panel/format.js";
 import { collectNodes } from "../node-browser.js";
-import { el } from "../panel/dom.js";
+import { el, btn } from "../panel/dom.js";
 
 const { t } = window.__I18N__;
 
@@ -142,8 +142,7 @@ export function buildAboutSourcing(meta, opts = {}) {
     verified: a.verified || 0, uncertain: a.uncertain || 0, sourced: a.sourced || 0,
     llm: a.llm || 0, nosource: a.nosource || 0,
   };
-  const globalBtn = el("button", "src-global");
-  globalBtn.type = "button";
+  const globalBtn = btn("src-global");
   globalBtn.setAttribute("aria-expanded", "false");
   globalBtn.appendChild(el("p", "src-stat-headline",
     t("about.sourcingHeadline", { pct: a.pct_backed, total: a.total })));
@@ -166,8 +165,7 @@ export function buildAboutSourcing(meta, opts = {}) {
       { twins: false }));
   for (const r of rows) {
     const row = el("div", "src-stat-row");
-    const head = el("button", "src-stat-head");
-    head.type = "button";
+    const head = btn("src-stat-head");
     head.setAttribute("aria-expanded", "false");
     head.appendChild(el("span", "src-stat-label", t(r.labelKey)));
     head.appendChild(el("span", "src-stat-count", `${r.backed} / ${r.total} (${r.pct}%)`));
@@ -222,11 +220,10 @@ export function buildAboutSourcing(meta, opts = {}) {
   // with no panel to open it in).
   if (opts.nav && opts.nav.browser) {
     const line = el("p", "src-stat-browser", t("about.sourcingBrowser"));
-    const btn = el("button", "src-browser-link", t("about.sourcingBrowserLink"));
-    btn.type = "button";
-    btn.addEventListener("click", () => opts.nav.browser());
+    const link = btn("src-browser-link", t("about.sourcingBrowserLink"));
+    link.addEventListener("click", () => opts.nav.browser());
     line.appendChild(document.createTextNode(" "));
-    line.appendChild(btn);
+    line.appendChild(link);
     wrap.appendChild(line);
   }
   host.appendChild(wrap);
