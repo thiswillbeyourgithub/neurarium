@@ -338,41 +338,62 @@ async function main() {
   // pulse. The same path serves receptors and non-receptor targets; only the info
   // view differs (showReceptor vs the lighter showTarget).
   const receptorMarkers = createReceptorMarkers({ scene });
-  let activeTargetId = null;
-  let reflectTargets = () => {};
-  const refreshTargetRows = () => reflectTargets(activeTargetId);
-  const targetMeshesOf = (tgt) =>
-    tgt.structureIds.map((id) => meshById.get(id)).filter(Boolean);
-  const focusTarget = (tgt, { frame = false, preview = false } = {}) => {
-    const meshSet = targetMeshesOf(tgt);
-    selection.setCircuit(meshSet, []);
-    receptorMarkers.show(meshSet, tgt.swatchColor);
-    if (preview) return; // hover preview: dim + dots only, no panel/tab/spread
-    autoSpreadIfDeep(meshSet);
-    if (tgt.kind === "receptor") info.showReceptor(tgt.receptor);
-    else info.showTarget(tgt);
-    // From the search box, frame the regions (the whole brain for a ubiquitous
-    // receptor); from the legend row, leave the view where it is.
-    if (frame) focus.focusMeshes(meshSet);
-    activeTargetId = tgt.id;
-    refreshTargetRows();
-    openDetailTab(`target:${tgt.id}`, tgt.name, () => focusTarget(tgt));
+  const meshesOfIds = (ids) => ids.map((id) => meshById.get(id)).filter(Boolean);
+  // The shared shape of every focus that lights the scene (target, drug, circuit,
+  // projection group): `apply` sets the dim/pins + starts its animation and returns
+  // the focused mesh set; a hover `preview` stops there (no panel/tab/spread).
+  // Otherwise: spread a deep focus apart, render the panel, frame the set when
+  // `frame` (a search / panel pick; a legend row leaves the view where it is), light
+  // its legend row and open its tab, whose reopen thunk re-runs the focus. `watch`
+  // (an animation controller) drops the row highlight the moment the focus stops
+  // being exactly that region set; `buildLegend(toggle)` returns the row reflector.
+  const createSceneFocus = ({ kind, apply, show, title, watch = null, buildLegend = null }) => {
+    let activeId = null;
+    let reflect = () => {};
+    const go = (item, opts = {}) => {
+      const { frame = false, preview = false } = opts;
+      const meshSet = apply(item);
+      if (preview) return;
+      autoSpreadIfDeep(meshSet);
+      show(item, opts);
+      if (frame && meshSet.length) focus.focusMeshes(meshSet);
+      activeId = item.id;
+      reflect(activeId);
+      openDetailTab(`${kind}:${item.id}`, title(item), () => go(item));
+    };
+    const toggle = (item) => {
+      if (activeId === item.id) selection.clear(); // the watcher hides the animation
+      else go(item);
+    };
+    if (watch) {
+      selection.onIsolate((isolated) => {
+        if (watch.active && !watch.matches(isolated)) {
+          watch.hide();
+          activeId = null;
+          reflect(activeId);
+        }
+      });
+    }
+    if (buildLegend) reflect = buildLegend(toggle);
+    return go;
   };
-  const toggleTarget = (tgt) => {
-    if (activeTargetId === tgt.id) selection.clear(); // watcher hides dots
-    else focusTarget(tgt);
-  };
+  const focusTarget = createSceneFocus({
+    kind: "target",
+    apply: (tgt) => {
+      const meshSet = meshesOfIds(tgt.structureIds);
+      selection.setCircuit(meshSet, []);
+      receptorMarkers.show(meshSet, tgt.swatchColor);
+      return meshSet;
+    },
+    // Framing from the search box covers the whole brain for a ubiquitous receptor.
+    show: (tgt) => (tgt.kind === "receptor" ? info.showReceptor(tgt.receptor) : info.showTarget(tgt)),
+    title: (tgt) => tgt.name,
+    watch: receptorMarkers,
+    buildLegend: (toggle) => buildTargetLegend(data, toggle),
+  });
   // Picking a target in the search box always focuses it (and frames it), never
   // toggles it off, the same way a structure/connection search result behaves.
   const selectTarget = (tgt) => focusTarget(tgt, { frame: true });
-  selection.onIsolate((isolated) => {
-    if (receptorMarkers.active && !receptorMarkers.matches(isolated)) {
-      receptorMarkers.hide();
-      activeTargetId = null;
-      refreshTargetRows();
-    }
-  });
-  reflectTargets = buildTargetLegend(data, toggleTarget);
 
   // Enzyme focus (the Enzymes section + a drug panel's Metabolism row). Unlike every
   // other focus in this file it touches NOTHING in the 3D scene: a metabolic enzyme
@@ -439,63 +460,38 @@ async function main() {
   // watcher below, the flow via the shared circuitAnim watcher (its pinned-arrow
   // set stops matching).
   const drugAnim = createDrugAnimation({ scene });
-  let activeDrugId = null;
-  let reflectDrugs = () => {};
-  const refreshDrugRows = () => reflectDrugs(activeDrugId);
-  const drugMeshesOf = (drug) =>
-    drug.structureIds.map((id) => meshById.get(id)).filter(Boolean);
-  // The arrows carrying this drug's target transmitter systems (its mapped
-  // projection kinds), the set the flow overlay rides. Empty when the drug has no
-  // mapped system, so the overlay is simply absent for it.
-  const flowArrowsOf = (drug) => {
-    const kinds = new Set(drug.flowKinds || []);
+  // The arrows of a drug's mapped projection kinds: its target transmitter systems
+  // (`flowKinds`, the set the flow overlay rides) or its *context* systems
+  // (`contextKinds`, postsynaptic-receptor pathways pinned statically, dimmed, no
+  // beads, so a purely postsynaptic agent such as an antihistamine blocking H1 still
+  // visibly engages its system's fan without the flow overlay's tone claim). Empty
+  // when the drug has no mapped system, so the overlay is simply absent for it.
+  const arrowsOfKinds = (kindList) => {
+    const kinds = new Set(kindList || []);
     return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
   };
-  // The arrows for this drug's *context* systems (postsynaptic-receptor pathways, its
-  // `contextKinds` from js/data.js): pinned statically (dimmed, no beads) so a purely
-  // postsynaptic agent (an antihistamine blocking H1) still visibly engages its
-  // system's fan, without the flow overlay's tone claim.
-  const contextArrowsOf = (drug) => {
-    const kinds = new Set(drug.contextKinds || []);
-    return kinds.size ? arrows.filter((a) => kinds.has(a.projection.kind)) : [];
-  };
-  // highlightMetabolite / highlightEnzymes: pass-through "why did this open" hints for
-  // the panel (see info.showDrug), not focus state.
-  const focusDrug = (drug, {
-    frame = false, preview = false, highlightMetabolite = null, highlightEnzymes = null,
-  } = {}) => {
-    const meshSet = drugMeshesOf(drug);
-    const flowArrows = flowArrowsOf(drug);
-    const ctxArrows = contextArrowsOf(drug);
-    selection.setCircuit(meshSet, flowArrows, ctxArrows);
-    drugAnim.show(drug, meshById);
-    // Per-kind flow direction/weight (js/data.js flowSystems): the pulse rides
-    // "up" the fan when the drug raises that system's tone, damped "down" when it
-    // lowers it, its intensity scaled by the drug's affinity on that system.
-    circuitAnim.play(flowArrows, drug.flowSystems || {}); // no-op for a drug with no mapped pathways
-    if (preview) return; // hover preview: dim + dots + flow only, no panel/tab/spread
-    autoSpreadIfDeep(meshSet);
-    info.showDrug(drug, { highlightMetabolite, highlightEnzymes });
-    // From the search box, frame the affected regions; from the list row, leave
-    // the view where it is.
-    if (frame && meshSet.length) focus.focusMeshes(meshSet);
-    activeDrugId = drug.id;
-    refreshDrugRows();
-    openDetailTab(`drug:${drug.id}`, drug.displayName, () => focusDrug(drug));
-  };
-  const toggleDrug = (drug) => {
-    if (activeDrugId === drug.id) selection.clear(); // watcher hides the animation
-    else focusDrug(drug);
-  };
-  const selectDrug = (drug, opts = {}) => focusDrug(drug, { frame: true, ...opts });
-  selection.onIsolate((isolated) => {
-    if (drugAnim.active && !drugAnim.matches(isolated)) {
-      drugAnim.hide();
-      activeDrugId = null;
-      refreshDrugRows();
-    }
+  const focusDrug = createSceneFocus({
+    kind: "drug",
+    apply: (drug) => {
+      const meshSet = meshesOfIds(drug.structureIds);
+      const flowArrows = arrowsOfKinds(drug.flowKinds);
+      selection.setCircuit(meshSet, flowArrows, arrowsOfKinds(drug.contextKinds));
+      drugAnim.show(drug, meshById);
+      // Per-kind flow direction/weight (js/data.js flowSystems): the pulse rides
+      // "up" the fan when the drug raises that system's tone, damped "down" when it
+      // lowers it, its intensity scaled by the drug's affinity on that system.
+      circuitAnim.play(flowArrows, drug.flowSystems || {}); // no-op for a drug with no mapped pathways
+      return meshSet;
+    },
+    // highlightMetabolite / highlightEnzymes: pass-through "why did this open" hints
+    // for the panel (see info.showDrug), not focus state.
+    show: (drug, { highlightMetabolite = null, highlightEnzymes = null }) =>
+      info.showDrug(drug, { highlightMetabolite, highlightEnzymes }),
+    title: (drug) => drug.displayName,
+    watch: drugAnim,
+    buildLegend: (toggle) => buildDrugLegend(data, toggle),
   });
-  reflectDrugs = buildDrugLegend(data, toggleDrug);
+  const selectDrug = (drug, opts = {}) => focusDrug(drug, { frame: true, ...opts });
   // The Drugs section's two list controls. Registered here (once) rather than inside
   // buildDrugLegend, which re-runs on a language switch: the inputs are static markup,
   // so one registration covers every rebuild. Each write drives the input's own event,
@@ -699,21 +695,20 @@ async function main() {
   // circuitAnim watcher stops it on the next focus change); a projection group is
   // a static pinned-arrow focus (no pulse), matching the prior behaviour. Both
   // recompute their meshes/arrows from the data so the reopen thunk is durable.
-  const circuitMeshesOf = (circuit) =>
-    circuit.structures.map((id) => meshById.get(id)).filter(Boolean);
   const arrowsAmong = (meshSet) =>
     arrows.filter((a) => meshSet.has(a.fromMesh) && meshSet.has(a.toMesh));
-  const focusCircuit = (circuit, { frame = false, preview = false } = {}) => {
-    const cMeshes = circuitMeshesOf(circuit);
-    const cArrows = arrowsAmong(new Set(cMeshes));
-    selection.setCircuit(cMeshes, cArrows);
-    circuitAnim.play(cArrows);
-    if (preview) return; // hover preview: dim + pulse only, no panel/tab/spread
-    autoSpreadIfDeep(cMeshes);
-    info.showCircuit(circuit);
-    if (frame && cMeshes.length) focus.focusMeshes(cMeshes);
-    openDetailTab(`circuit:${circuit.id}`, circuit.name, () => focusCircuit(circuit));
-  };
+  const focusCircuit = createSceneFocus({
+    kind: "circuit",
+    apply: (circuit) => {
+      const cMeshes = meshesOfIds(circuit.structures);
+      const cArrows = arrowsAmong(new Set(cMeshes));
+      selection.setCircuit(cMeshes, cArrows);
+      circuitAnim.play(cArrows);
+      return cMeshes;
+    },
+    show: (circuit) => info.showCircuit(circuit),
+    title: (circuit) => circuit.name,
+  });
   // The (established) arrows this projection group stands for: by sign in sign
   // mode, by kind otherwise (the data record is per kind/sign). Tentative arrows
   // are excluded, matching the established-only legend rows.
@@ -721,16 +716,17 @@ async function main() {
     !a.tentative
     && (group.mode === "sign" ? a.projection.sign === group.key
                               : a.projection.kind === group.key));
-  const focusProjectionGroup = (group, { frame = false, preview = false } = {}) => {
-    const gArrows = groupArrowsOf(group);
-    const gMeshes = [...new Set(gArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
-    selection.setCircuit(gMeshes, gArrows); // pin the arrows, no pulse
-    if (preview) return; // hover preview: dim only, no panel/tab/spread
-    autoSpreadIfDeep(gMeshes);
-    info.showProjectionGroup(group);
-    if (frame && gMeshes.length) focus.focusMeshes(gMeshes);
-    openDetailTab(`group:${group.id}`, group.name, () => focusProjectionGroup(group));
-  };
+  const focusProjectionGroup = createSceneFocus({
+    kind: "group",
+    apply: (group) => {
+      const gArrows = groupArrowsOf(group);
+      const gMeshes = [...new Set(gArrows.flatMap((a) => [a.fromMesh, a.toMesh]))];
+      selection.setCircuit(gMeshes, gArrows); // pin the arrows, no pulse
+      return gMeshes;
+    },
+    show: (group) => info.showProjectionGroup(group),
+    title: (group) => group.name,
+  });
 
   const rebuildLegend = () => {
     reflectLegend = buildLegend(
