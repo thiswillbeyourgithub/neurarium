@@ -154,17 +154,6 @@ NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "dru
               "structures")
 
 
-def _backed(counts):
-    """Nodes resting on a real document: verified + uncertain + sourced.
-
-    ``uncertain`` counts here on purpose (see quotes/uncertainty.py): the claim does
-    have a quote-checked source, the badge only says the sentence does not attribute
-    it. Only ``missing`` (a bare llm assertion or nothing at all) is unbacked.
-    """
-    return (counts.get("verified", 0) + counts.get("uncertain", 0)
-            + counts.get("sourced", 0))
-
-
 def _flip_hemisphere(structure_id):
     """Flip a structure id to the other hemisphere; midline ids unchanged."""
     if structure_id.endswith("_R"):
@@ -860,14 +849,14 @@ def print_coverage(stats):
 
     def backed_pct(c):
         total = c.get("total", 0)
-        return round(100 * _backed(c) / total) if total else 0
+        return round(100 * backed(c) / total) if total else 0
 
     def row(label, c, pct=None, suffix=""):
         pct = backed_pct(c) if pct is None else pct
         m = c.get("missing", 0)
         s = c.get("sourced", 0)
         u = c.get("uncertain", 0)
-        sv = _backed(c)  # sourced-or-verified-or-uncertain = the backed count
+        sv = backed(c)  # sourced-or-verified-or-uncertain = the backed count
         print(f"    {label:<19}{m:>6}{s:>6}{u:>6}{sv:>6}"
               f"{c.get('total', 0):>8}{pct:>7}%{suffix}")
 
@@ -1066,11 +1055,11 @@ def check_provenance(report, meta, structures, projections, circuits,
             if a.get(key) != want:
                 report.error(f"provenance_stats nodes[{key}]={a.get(key)} "
                              f"!= sum over node kinds ({want})")
-        backed = _backed(a)
-        if a.get("backed") != backed:
+        n_backed = backed(a)
+        if a.get("backed") != n_backed:
             report.error(f"provenance_stats nodes.backed={a.get('backed')} "
-                         f"!= verified+uncertain+sourced ({backed})")
-        want_pct = round(100 * backed / a["total"]) if a.get("total") else 0
+                         f"!= verified+uncertain+sourced ({n_backed})")
+        want_pct = round(100 * n_backed / a["total"]) if a.get("total") else 0
         if a.get("pct_backed") != want_pct:
             report.error(f"provenance_stats nodes.pct_backed="
                          f"{a.get('pct_backed')} != {want_pct}")
@@ -2067,6 +2056,7 @@ from changelog import CATEGORIES as CHANGELOG_CATEGORIES  # noqa: E402
 # the whole point of the derivation gate (see data_generators/pharmfreq.py).
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_generators import clinpgx, cpic, freshness, node_id, pharmfreq, unknown  # noqa: E402
+from data_generators.node_kinds import backed  # noqa: E402
 from text_fold import alnum_key  # noqa: E402
 from drugs_io import is_combination  # noqa: E402
 from page_file import page_file  # noqa: E402 (refuses a path-like page)

@@ -17,6 +17,7 @@ from drugs_io import is_combination
 from page_file import page_file
 
 from . import clinpgx, cpic, pharmfreq
+from . import node_kinds as node_kinds_mod
 
 # ---------------------------------------------------------------------------
 # Source provenance grades. Every source / reference the viewer shows carries a
@@ -1849,7 +1850,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # ``uncertain`` counts as backed: the claim does rest on a real, quote-checked
     # document, and the badge says what is doubtful about it. Moving it out of
     # ``verified`` is the honest part; moving it out of ``backed`` would not be.
-    backed = nodes["verified"] + nodes["uncertain"] + nodes["sourced"]
+    backed = node_kinds_mod.backed(nodes)
     nodes["backed"] = backed
     nodes["pct_backed"] = (
         round(100 * backed / nodes["total"]) if nodes["total"] else 0)

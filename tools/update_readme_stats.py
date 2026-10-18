@@ -43,6 +43,7 @@ import json
 import sys
 from pathlib import Path
 
+from data_generators import node_kinds
 from io_atomic import atomic_write_text
 
 REPO = Path(__file__).resolve().parent.parent
@@ -231,7 +232,7 @@ def render_block(stats: dict) -> str:
         # ``uncertain`` is backed: the claim rests on a quote-checked document, the
         # badge only flags that the sentence does not attribute it (see
         # tools/data_generators/quotes/uncertainty.py).
-        backed = c["verified"] + c.get("uncertain", 0) + c["sourced"]
+        backed = node_kinds.backed(c)
         rows.append((backed, c["total"], order, label))
     rows.sort(key=lambda r: (-(r[0] / r[1]), -r[1], r[2]))
 
