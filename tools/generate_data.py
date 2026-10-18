@@ -139,7 +139,6 @@ from data_generators.provenance import (  # noqa: E402
     TARGET_CLASSIFICATION_SOURCES,
     TARGET_DENSITY,
     TARGET_LOCATION_SOURCES,
-    TARGET_POLARITY_PROVENANCE,
     WIKIPEDIA_DEFAULT_PROVENANCE,
     WIKIPEDIA_PROVENANCE,
     _GRADE_RANK,
@@ -306,7 +305,8 @@ from data_generators.geometry import (  # noqa: E402
     _scale_sdf,
     _scale_triple,
 )
-from data_generators.regions import MIDLINE, PAIRED, STRUCTURE_ALIASES  # noqa: E402
+from data_generators.regions import MIDLINE, PAIRED, STRUCTURE_ALIASES, structure_bases  # noqa: E402
+from data_generators import integrity as INTEGRITY  # noqa: E402 (authored-table typo guards)
 
 # Neurotransmitter receptors. Each entry is one receptor (the clinically relevant
 # brain receptors from Wikipedia's "Example neurotransmitter receptors" table plus
@@ -704,82 +704,6 @@ def _receptor_record(rec: dict[str, Any],
     if rec["id"] in RECEPTOR_GENES:
         out["gene"] = RECEPTOR_GENES[rec["id"]]
     return out
-
-
-def _check_drug_aliases(drug_ids: set[str]) -> None:
-    """Fail loud if a search alias is keyed on a drug id that does not exist.
-
-    An alias keyed on a typo is silently inert (nothing ever looks it up), which
-    would read as "GHB still doesn't find it" with nothing to grep for.
-    """
-    for name, table in (("DRUG_ALIASES", DRUG_ALIASES),
-                        ("DRUG_NAME_QUALIFIERS", DRUG_NAME_QUALIFIERS)):
-        unknown = sorted(set(table) - drug_ids)
-        if unknown:
-            raise SystemExit(
-                f"{name} keys are not drug ids: {unknown}; "
-                f"fix the id or drop the entry"
-            )
-
-
-def _check_structure_aliases() -> None:
-    """Fail loud when a STRUCTURE_ALIASES key is not a region base id (a typo would
-    be silently inert, exactly like a DRUG_ALIASES one)."""
-    bases = {e["base"] for e in PAIRED} | {e["base"] for e in MIDLINE}
-    unknown = sorted(set(STRUCTURE_ALIASES) - bases)
-    if unknown:
-        raise SystemExit(
-            f"STRUCTURE_ALIASES keys are not region base ids: {unknown}; "
-            f"fix the id or drop the entry"
-        )
-
-
-def _check_genes() -> None:
-    """Fail loud if a modeled receptor / target has no gene symbol.
-
-    The maps live with the fetchers (see data_generators.genes), so a rename on
-    either side would otherwise drop the gene silently: the panel would just stop
-    offering the gene-keyed ClinPGx link for that node, with nothing to grep for.
-    Checked in this direction (coverage, not key validity) because the fetcher maps
-    deliberately also bucket a few receptor *families* that are not target ids.
-    """
-    missing = sorted(tid for tid in DRUG_TARGETS if tid not in TARGET_GENES)
-    if missing:
-        raise SystemExit(
-            f"drug target(s) with no gene symbol: {missing}; add them to "
-            f"TARGET_GENES in tools/lib/gene_maps.py")
-    # A receptor carrying regions is one a reader can look up; the stubs (no regions,
-    # e.g. the rodent-only alpha2d) have no human gene and are exempt.
-    missing = sorted(r["id"] for r in RECEPTORS
-                     if r["locations"] and r["id"] not in RECEPTOR_GENES)
-    if missing:
-        raise SystemExit(
-            f"receptor(s) with no gene symbol: {missing}; add them to RECEPTOR_GENES "
-            f"(or EXTRA_RECEPTOR_GENES) in tools/lib/gene_maps.py")
-
-
-def _check_tone_rules() -> None:
-    """Fail loud if a tone rule names an action the drug vocabulary does not have.
-
-    A rule keyed on a typo is invisible at runtime: the action simply never matches,
-    the binding contributes no tone, and the drug quietly loses its flow overlay. So
-    the keys are confirmed against :data:`DRUG_ACTIONS` at generation instead, where a
-    mistake stops the build (the same fail-loud rule the rest of the generator uses).
-    """
-    for bucket, rules in TONE_RULES.items():
-        for action, rule in rules.items():
-            if action not in DRUG_ACTIONS:
-                raise SystemExit(
-                    f"TONE_RULES[{bucket!r}] names unknown action {action!r}; "
-                    f"add it to DRUG_ACTIONS or fix the typo"
-                )
-            if len(rule) != 2 or rule[0] not in (1, -1):
-                raise SystemExit(
-                    f"TONE_RULES[{bucket!r}][{action!r}] must be [+1|-1, mechanism]"
-                )
-    for bucket, factor in TONE_FACTORS.items():
-        if bucket not in TONE_RULES or not 0 < factor <= 1:
-            raise SystemExit(f"TONE_FACTORS[{bucket!r}] must name a TONE_RULES bucket, 0 < factor <= 1")
 
 
 def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -1629,74 +1553,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # A transmitter / sign only a set-level sentence states ("the cerebral cortex" ->
     # "the striatum") wears the orange badge on that sub-claim (quotes/uncertainty.py).
     apply_set_claim_uncertainty(projections, structures)
-    # Typo guard: every PROJECTION_QUOTES key must address a real PROJECTIONS entry,
-    # else its quote silently sources nothing.
-    unmatched = set(PROJECTION_QUOTES) - {(p["from"], p["to"]) for p in PROJECTIONS}
-    if unmatched:
-        raise KeyError(
-            f"PROJECTION_QUOTES keys match no PROJECTIONS entry: {sorted(unmatched)}")
-    unmatched = set(PROJECTION_SOURCES) - {(p["from"], p["to"]) for p in PROJECTIONS}
-    if unmatched:
-        raise KeyError(
-            f"projection_sources.json keys match no PROJECTIONS entry: {sorted(unmatched)}")
-    unmatched_bases = set(STRUCTURE_QUOTES) - {
-        e["base"] for e in (*PAIRED, *MIDLINE)}
-    if unmatched_bases:
-        raise KeyError(
-            f"STRUCTURE_QUOTES keys are not structure bases: "
-            f"{sorted(unmatched_bases)}")
-    unmatched_rq = set(STAHL_ESSENTIAL_RECEPTOR_QUOTES) - {r["id"] for r in RECEPTORS}
-    if unmatched_rq:
-        raise KeyError(
-            f"STAHL_ESSENTIAL_RECEPTOR_QUOTES keys are not receptor ids: "
-            f"{sorted(unmatched_rq)}")
-    # Every quoted receptor needs a coverage entry (else its quote would grade
-    # nothing) and vice-versa (a coverage entry with no quote grades nothing), and
-    # each covered attribute must be a real classification attribute. This keeps the
-    # per-attribute grading honest: a quote can only lift the attributes it names.
-    cov_no_quote = set(RECEPTOR_CLASSIFICATION_COVERAGE) - set(STAHL_ESSENTIAL_RECEPTOR_QUOTES)
-    quote_no_cov = set(STAHL_ESSENTIAL_RECEPTOR_QUOTES) - set(RECEPTOR_CLASSIFICATION_COVERAGE)
-    if cov_no_quote or quote_no_cov:
-        raise KeyError(
-            "RECEPTOR_CLASSIFICATION_COVERAGE must match the receptor-quote keys "
-            f"(coverage without quote: {sorted(cov_no_quote)}; quote without "
-            f"coverage: {sorted(quote_no_cov)})")
-    bad_attrs = {a for attrs in RECEPTOR_CLASSIFICATION_COVERAGE.values()
-                 for a in attrs if a not in CLASSIFICATION_ATTRS}
-    if bad_attrs:
-        raise KeyError(
-            f"RECEPTOR_CLASSIFICATION_COVERAGE has unknown attributes: "
-            f"{sorted(bad_attrs)} (valid: {CLASSIFICATION_ATTRS})")
-    # Per-attribute quote overrides must key real receptors and real attributes.
-    aq_no_receptor = set(RECEPTOR_ATTR_QUOTES) - {r["id"] for r in RECEPTORS}
-    if aq_no_receptor:
-        raise KeyError(
-            f"RECEPTOR_ATTR_QUOTES keys are not receptor ids: {sorted(aq_no_receptor)}")
-    bad_aq_attrs = {a for m in RECEPTOR_ATTR_QUOTES.values()
-                    for a in m if a not in CLASSIFICATION_ATTRS}
-    if bad_aq_attrs:
-        raise KeyError(
-            f"RECEPTOR_ATTR_QUOTES has unknown attributes: {sorted(bad_aq_attrs)} "
-            f"(valid: {CLASSIFICATION_ATTRS})")
-    unmatched_tq = set(STAHL_ESSENTIAL_TARGET_QUOTES) - set(DRUG_TARGETS)
-    if unmatched_tq:
-        raise KeyError(
-            f"STAHL_ESSENTIAL_TARGET_QUOTES keys are not DRUG_TARGETS ids: "
-            f"{sorted(unmatched_tq)}")
-    # A polarity quote must key a target that actually carries a polarity flag,
-    # else it grades a direction claim that is never emitted.
-    _polarity_ids = {tid for tid, spec in DRUG_TARGETS.items()
-                     if any(f in spec for f in ("vesicular", "sign", "synaptic"))}
-    unmatched_pq = set(TARGET_POLARITY_QUOTES) - _polarity_ids
-    if unmatched_pq:
-        raise KeyError(
-            f"TARGET_POLARITY_QUOTES keys have no polarity flag in DRUG_TARGETS: "
-            f"{sorted(unmatched_pq)}")
-    unmatched_pp = set(TARGET_POLARITY_PROVENANCE) - _polarity_ids
-    if unmatched_pp:
-        raise KeyError(
-            f"TARGET_POLARITY_PROVENANCE keys have no polarity flag in "
-            f"DRUG_TARGETS: {sorted(unmatched_pp)}")
+    INTEGRITY.validate_quote_registries()
 
     # Circuits: expand each base structure id to whatever was emitted (both
     # hemispheres for a paired form, the bare id for a midline one). Built from
@@ -1788,7 +1645,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # Receptors: validate + normalize each against the known structure bases
     # (locations reference bases like circuits do; the viewer expands them to
     # both hemispheres). Duplicate ids fail the build.
-    receptor_bases = {e["base"] for e in PAIRED} | {e["base"] for e in MIDLINE}
+    receptor_bases = structure_bases()
     seen_receptor_ids: set[str] = set()
     for rec in RECEPTORS:
         if rec["id"] in seen_receptor_ids:
@@ -1800,20 +1657,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # vocabularies + the merged target map (DRUG_TARGETS + receptor ids). Every
     # DRUG_TARGETS region must be a known structure base (typo guard), like a
     # receptor location. Duplicate drug ids fail the build.
-    for tid, spec in DRUG_TARGETS.items():
-        if spec["type"] not in TARGET_TYPE_LABELS or spec["type"] == "receptor":
-            raise KeyError(
-                f"DRUG_TARGETS[{tid!r}] type {spec['type']!r} is not a "
-                f"non-receptor TARGET_TYPE_LABELS key")
-        wiki = spec.get("wikipedia")
-        if wiki is not None and not str(wiki).startswith(("http://", "https://")):
-            raise ValueError(
-                f"DRUG_TARGETS[{tid!r}] wikipedia must be an http(s) URL or absent")
-        for base in spec["regions"]:
-            if base not in receptor_bases:
-                raise KeyError(
-                    f"DRUG_TARGETS[{tid!r}] region {base!r} is not a known "
-                    f"structure base")
+    INTEGRITY.validate_drug_targets()
     drug_targets = _build_drug_targets(receptors)
     valid_targets = set(drug_targets.keys())
     molecule_ids = _available_molecule_ids()
@@ -1831,7 +1675,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         drugs.append(
             _drug_record(drug, valid_targets, receptor_bases, molecule_ids,
                          enzyme_rows, metabolite_store))
-    _check_drug_aliases(seen_drug_ids)
+    INTEGRITY.validate_drug_aliases(seen_drug_ids)
     # The "uncertain" badges: a post-pass, not part of _drug_record, because two of the
     # bullets look across bindings (how many monographs print the same sentence, and how
     # many subtypes one sentence covers). See the module.
@@ -1858,64 +1702,15 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                                     projections=projections, receptors=receptors,
                                     targets=drug_targets)
     print(f"animal_evidence flags: {flagged}")
-    # A hand-curated formed_by row whose (drug, metabolite) key matched nothing: the
-    # metabolite was renamed or dropped by an applier re-run, so the node silently
-    # vanished. Raise rather than publish a quieter dataset than the author wrote.
-    orphans = sorted(set(METABOLITE_ENZYME_QUOTES) - _METABOLITE_ENZYME_SEEN)
-    if orphans:
-        raise KeyError(
-            "METABOLITE_ENZYME_QUOTES keys match no metabolite in drugs_data.jsonl: "
-            + ", ".join(f"{d}/{n}" for d, n in orphans))
+    INTEGRITY.validate_metabolite_enzyme_quotes(_METABOLITE_ENZYME_SEEN)
 
-    # Addon nodes: each carries its own insertion point, so the only cross-check the
-    # module cannot do on its own is whether the anchored node exists. A typo'd owner
-    # would emit a node the viewer never draws (it looks up addons by owner id), which
-    # is exactly the silent loss the fail-loud rule exists for.
+    # Addon nodes: each anchors the node whose panel it sits in (see integrity).
     addons = build_addons()
-    addon_pools = {
-        "drug": seen_drug_ids,
-        "receptor": {r["id"] for r in receptors},
-        "target": set(drug_targets),
-        # A structure addon anchors the *base* (both hemispheres show it), matching
-        # how a receptor location or a density profile keys its regions.
-        "structure": receptor_bases,
-        # A section addon anchors a view, not a node, so its pool is the closed
-        # section vocabulary itself (see addons.ADDON_SECTIONS).
-        "section": set(ADDON_SECTIONS),
-    }
-    for addon in addons:
-        pool = addon_pools[addon["owner_kind"]]
-        if addon["owner"] not in pool:
-            raise KeyError(
-                f"Addon {addon['id']!r} anchors {addon['owner_kind']} "
-                f"{addon['owner']!r}, which is not a known "
-                f"{addon['owner_kind']} id")
-
-    # Fail loudly if the data uses a kind or group with no entry in the maps above.
-    kinds = {r["kind"] for r in projections}
-    missing_kinds = kinds - PROJECTION_COLORS.keys()
-    if missing_kinds:
-        raise KeyError(
-            f"Projection kind(s) with no PROJECTION_COLORS entry: "
-            f"{sorted(missing_kinds)}")
-    groups = {r["group"] for r in structures}
-    missing_groups = groups - GROUP_LABELS.keys()
-    if missing_groups:
-        raise KeyError(
-            f"Structure group(s) with no GROUP_LABELS entry: "
-            f"{sorted(missing_groups)}")
-    known_bases = {e["base"] for e in PAIRED} | {e["base"] for e in MIDLINE}
-    unknown_wiki = WIKIPEDIA.keys() - known_bases
-    if unknown_wiki:
-        raise KeyError(
-            f"WIKIPEDIA entry for unknown structure base(s): "
-            f"{sorted(unknown_wiki)}")
-    # Every translatable string went through _t(); fail loudly (listing them all)
-    # if any had no FR entry, so the data can't ship half-translated.
-    if _MISSING_TRANSLATIONS:
-        raise KeyError(
-            "Missing FR translation for: "
-            + "; ".join(repr(s) for s in sorted(_MISSING_TRANSLATIONS)))
+    INTEGRITY.validate_addon_owners(
+        addons, drug_ids=seen_drug_ids, receptor_ids={r["id"] for r in receptors},
+        target_ids=set(drug_targets))
+    INTEGRITY.validate_presentation_maps(projections, structures)
+    INTEGRITY.validate_translations(_MISSING_TRANSLATIONS)
 
     # Presentation metadata (its own meta.json) so a consumer reading the dataset
     # is self-contained: arrow colours + legend headings live in the data, not
@@ -2066,9 +1861,9 @@ def write_artifacts(root: Path) -> None:
     ``data/shapes`` directory is cleared of stale ``*.json`` first so removing a
     structure here also removes its orphaned shape file.
     """
-    _check_tone_rules()
-    _check_genes()
-    _check_structure_aliases()
+    INTEGRITY.validate_tone_rules()
+    INTEGRITY.validate_genes()
+    INTEGRITY.validate_structure_aliases()
     data, shapes = build_records()
 
     data_dir = root / "data"

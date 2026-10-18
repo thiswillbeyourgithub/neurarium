@@ -54,3 +54,9 @@ STRUCTURE_ALIASES: dict[str, list[str]] = {
     "raphe": ["DRN", "dorsal raphe", "raphé dorsal"],
     "hypothalamus": ["HPA axis"],
 }
+
+
+def structure_bases() -> set[str]:
+    """Every region *base* id (paired and midline), the id a receptor location, a
+    target region, a structure quote or an addon anchor keys on (a fresh set)."""
+    return {e["base"] for e in PAIRED} | {e["base"] for e in MIDLINE}
