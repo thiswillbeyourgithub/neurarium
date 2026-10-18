@@ -33,7 +33,7 @@ all of them silhouette antialiasing from the position quantisation.
   how a format silently drifts.
 - **`public/js/baked-meshes.js`** loads the manifest and the files in the browser. It never
   throws: anything wrong (no manifest, unknown format version, a bad file, counts disagreeing
-  with the manifest) just means "no baked mesh for that shape", and `js/main.js` meshes the
+  with the manifest) just means "no baked mesh for that shape", and `js/boot/meshing.js` meshes the
   remainder at runtime exactly as before.
 
 ## The format

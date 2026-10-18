@@ -245,9 +245,9 @@ could be reused headless.
 7. The intro animation plays: regions start exploded and glide back together into
    the assembled brain (skipped when `?explode=` is pinned, e.g. screenshots).
 
-## Rendering and interaction (inside `main.js`)
+## Rendering and interaction (`main.js` + `js/boot/`)
 
-`main.js` is the only stateful orchestrator. Beyond scene setup and the render
+`main.js` (with the `js/boot/` stages it calls) is the only stateful orchestrator. Beyond scene setup and the render
 loop, it owns a few small controllers, each the single source of truth for one
 concern:
 
@@ -459,16 +459,21 @@ Viewer (`public/`):
   replayed from the About popup's "See the tutorial" button (`#about-tour`).
 - `js/changelog.js`: `createChangelog()`, the "What's new" popup (`#changelog-modal`). See
   Versioning / Changelog.
-- `js/main.js`: the boot/orchestration entry: loads data, builds meshes + arrows, creates the
-  controllers, defines the cross-cutting `focus*` / `select*` helpers, hands them to the wiring
-  modules below, and runs the on-demand render loop.
+- `js/main.js`: the short boot/orchestration entry: loads data, then hands explicit dependency
+  objects to the `js/boot/` modules in order (meshes, arrows, selection, focus, picking, legends,
+  views, controls, launch, URL bindings, render loop).
 - `js/scene/`: `setup.js` (renderer, camera, lights, OrbitControls, theme repaint), `camera.js`
   (named views + focus tween), `explode.js`, `see-inside.js`, `intro.js`, `quality.js`
   (adaptive quality), `selection.js` (halo + isolate state).
 - `js/boot/`: one `wire*()` per UI concern, called once from `main.js`: `controls.js` (Settings
   pane), `toolbar.js` (reset + search popup), `shortcuts.js`, `picking.js` (canvas click / tap /
   hover), `header-toggles.js` (theme + panel-only mode), `speed-slider.js`, `tour-steps.js` (the
-  guided tour's steps), `url-bindings.js` (data-bound deep-link keys), plus `query.js` (the `?query` parsed once + its named predicates, not a `wire*`).
+  guided tour's steps), `url-bindings.js` (data-bound deep-link keys), `legends.js` (anatomy legend +
+  colour key + arrow colour mode), plus the boot stages: `meshing.js` (baked / SDF-pool / synchronous
+  structure meshes), `focus.js` (`wireFocus`: every `focus*` / `select*` helper, `createSceneFocus` +
+  `createPanelOnlyFocus`, the panel cross-links), `views.js` (Data browser + Simulation tabs, the shared
+  `nodeNav`), `launch.js` (tour gating, assemble intro, launch changelog, loading dismissal),
+  `render-loop.js` (on-demand loop), `query.js` (the `?query` parsed once + its named predicates).
 - `js/panel/`: the detail panel: `info.js` (`createInfoPanel`, dispatching to `views/<kind>.js`,
   one `show*()` per node kind), `tabs.js` (detail-tab strip), and the shared row builders
   (`pills.js`, `tooltip.js`, `bindings.js`, `metabolism.js`, `expression.js`, `pathways.js`,

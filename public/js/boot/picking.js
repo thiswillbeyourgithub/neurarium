@@ -1,11 +1,39 @@
 // Canvas picking: click / tap selects the structure or arrow under the pointer (the
 // nearer one wins), hover highlights, and touch gestures that are not taps (pinch, drag)
-// never select. Inert while the guided tour is on screen.
+// never select; a double-click isolates a structure or recenters. Inert while the
+// guided tour is on screen.
+
+import * as THREE from "three";
+import { isPickableMesh } from "../scene/see-inside.js";
 
 export function wireCanvasPicking({
-  arrows, canvas, labels, meshes, pickStructureHit, raycaster, selectConnection,
-  selection, selectStructure, setPointer, tabs,
+  arrows, camera, canvas, focus, isolateGroupFor, labels, meshes, selectConnection,
+  selection, selectStructure, tabs,
 }) {
+  // Picking helpers, shared by mouse hover, click, and touch tap so the raycast
+  // logic isn't duplicated. `setPointer` maps screen coords to NDC and aims the
+  // ray once; the pick functions then intersect different object sets.
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  const setPointer = (clientX, clientY) => {
+    pointer.x = (clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+  };
+  // Nearest *visible* structure intersection under a screen point (the three.js
+  // hit record, so callers also get `.distance`), or null. The distance lets the
+  // click handler decide whether a structure or an arrow is the front-most thing
+  // under the cursor.
+  const pickStructureHit = (clientX, clientY) => {
+    setPointer(clientX, clientY);
+    for (const hit of raycaster.intersectObjects(meshes, false)) {
+      if (isPickableMesh(hit.object)) return hit;
+    }
+    return null;
+  };
+  // Just the nearest visible structure mesh (hover + double-click only need that).
+  const pickAt = (clientX, clientY) => pickStructureHit(clientX, clientY)?.object || null;
+
   // Arrow picking, two object sets for two purposes:
   //  - `arrowPickables` includes each arrow's fat invisible pick hull
   //    (PICK_RADIUS), so a thin arrow over empty space is still easy to
@@ -176,5 +204,20 @@ export function wireCanvasPicking({
     }
   });
 
-  return { tourOnScreen };
+  // Double-click to focus: on a structure, isolate it (both hemispheres) exactly
+  // like clicking its legend row; on empty space, recenter the whole brain (same
+  // as the reset button).
+  canvas.addEventListener("dblclick", (event) => {
+    if (tourOnScreen()) return; // brain interactions are inert during the tour
+    const mesh = pickAt(event.clientX, event.clientY);
+    if (mesh) {
+      // Same as clicking the structure's legend row: isolate/focus the pair.
+      selection.toggleIsolate(isolateGroupFor(mesh));
+    } else {
+      // Double-click on empty space is a full reset, same as the reset button.
+      focus.recenter();
+      selection.clear();
+    }
+  });
+
 }
