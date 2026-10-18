@@ -5,7 +5,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   TMAX_HOURS, P_FLOOR, bindingSign, toAxis, fromAxis, halfLifeHours, tmaxHours, oralDuration, pkCurve,
-  ligandsOf, receptorProfile, pkFlags, buildMatrix, nnls, solveCombination,
+  ligandsOf, receptorProfile, pkFlags, buildMatrix, nnls, solveCombination, parseRatio,
 } from "../../public/js/sim-model.js";
 
 const ki = (median) => ({ median });
@@ -180,4 +180,16 @@ test("ligandsOf: a salt keeps its constituent's borrowed bindings, a prodrug han
   assert.deepEqual(salt[0].bindings, [lent]);
   const pro = ligandsOf(drug("pro", [lent], { prodrug: { sources: [] } }), { metabolites: false });
   assert.deepEqual(pro[0].bindings, []);
+});
+
+test("parseRatio: finite, clamped to [0.1, 100], else 1", () => {
+  assert.equal(parseRatio(Infinity), 1);
+  assert.equal(parseRatio("Infinity"), 1);
+  assert.equal(parseRatio(NaN), 1);
+  assert.equal(parseRatio(undefined), 1);
+  assert.equal(parseRatio(-3), 1);
+  assert.equal(parseRatio(0), 1);
+  assert.equal(parseRatio(0.01), 0.1);
+  assert.equal(parseRatio(1e6), 100);
+  assert.equal(parseRatio("2.5"), 2.5);
 });

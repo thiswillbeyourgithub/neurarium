@@ -22,7 +22,7 @@ import { loadFlag, saveFlag } from "./prefs.js";
 import { el } from "./panel/dom.js";
 import {
   receptorProfile, ligandsOf, pkFlags, solveCombination,
-  toAxis, fromAxis, TMAX_HOURS, P_FLOOR, ASSUMED_PKI,
+  toAxis, fromAxis, TMAX_HOURS, P_FLOOR, ASSUMED_PKI, parseRatio,
 } from "./sim-model.js";
 import { buildPkPlot, buildRxPlot, formatKi, formatTime } from "./sim-plots.js";
 
@@ -821,7 +821,7 @@ export function createSimulation({ body, data, deps, ui }) {
         const drug = drugById.get(item.id);
         if (!drug || entries.some((e) => e.drug.id === drug.id)) continue;
         entries.push({
-          drug, ratio: Math.max(0.1, Number(item.ratio) || 1), hidden: false,
+          drug, ratio: parseRatio(item.ratio), hidden: false,
           color: DRUG_COLORS[entries.length % DRUG_COLORS.length],
         });
       }

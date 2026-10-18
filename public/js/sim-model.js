@@ -86,6 +86,16 @@ export const TMAX_HOURS = 2; // assumed oral time-to-peak, for a drug with no so
 export const ASSUMED_PKI = 7; // a directed binding with no Ki: assumed 100 nM
 export const P_FLOOR = 1e-4; // 1/Ki at 10 µM, the PDSP "inactive" cut-off
 const LN2 = Math.log(2);
+export const RATIO_MIN = 0.1;
+export const RATIO_MAX = 100;
+
+/** A dose ratio from untrusted input (the `#sim=` hash): a finite number clamped to
+ *  [RATIO_MIN, RATIO_MAX], else 1. `Infinity` would otherwise turn every curve NaN. */
+export function parseRatio(raw) {
+  const v = Number(raw);
+  if (!Number.isFinite(v) || v <= 0) return 1;
+  return Math.min(RATIO_MAX, Math.max(RATIO_MIN, v));
+}
 
 // Net-effect -> sign. `modulate` covers partial agonists + allosteric modulators.
 const EFFECT_SIGN = { boost: 1, block: -1, modulate: 0.5 };
