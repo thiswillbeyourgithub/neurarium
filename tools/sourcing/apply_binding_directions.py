@@ -78,8 +78,7 @@ import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from io_atomic import atomic_write_json  # noqa: E402
 import target_aliases as ta  # noqa: E402  (the same matcher the fetcher offered with)
-from check_data import normalize_for_match  # noqa: E402  (one canonical quote gate)
-from pipeline.gate import PageGate, Tally  # noqa: E402 (the applier's page gate)
+from pipeline.gate import PageGate, Tally, registry_pages  # noqa: E402 (the applier's page gate)
 from pipeline.judged import resolve  # noqa: E402
 from data_generators.drugs import DRUG_ACTIONS  # noqa: E402  (the live action vocabulary)
 
@@ -91,13 +90,13 @@ TABLES = os.path.join(CACHE, "binding_directions_tables.json")
 PAGES = os.path.join(REPO, "data_sources", "wikipedia", "pages")
 
 
+# The real page store behind the injectable readers below (tests pass their own).
+_STORE = PageGate(registry_pages())
+
+
 def page_text(slug: str) -> str | None:
     """The stored corpus #9 article a quote cites, normalized, or None when absent."""
-    path = os.path.join(PAGES, f"{slug}.md")
-    if not os.path.exists(path):
-        return None
-    with open(path, encoding="utf-8") as f:
-        return normalize_for_match(f.read())
+    return _STORE.text(CORPUS, slug)
 
 
 def _already_applied(binding: dict, quote: str, corpus: str = CORPUS) -> bool:
@@ -183,6 +182,16 @@ class BindingGate(Tally):
             else read_other(corpus, page) if read_other else None))
         self.extraction = extraction
 
+    def quote_on_page(self, corpus: str, slug: str, quote: str, label: str) -> bool:
+        """Gate 6: ``quote`` is verbatim on the cited stored page (rejects otherwise)."""
+        if self.pages.text(corpus, slug) is None:
+            self.reject("no stored page for the citation", f"{label} ({slug})")
+            return False
+        if not self.pages.on_page(corpus, slug, quote):
+            self.reject("quote not verbatim on the cited page", f"{label}: {quote[:80]}")
+            return False
+        return True
+
     def write(self, drug: dict, target: str, action: str, quote: str, slug: str,
               label: str, names_target, corpus: str = CORPUS) -> bool:
         """``drug`` is any record holding ``bindings`` (a drug, or a metabolite)."""
@@ -204,12 +213,7 @@ class BindingGate(Tally):
         if not names_target():
             self.reject("quote does not name the target", f"{label}: {quote[:80]}")
             return False
-        body = self.pages.text(corpus, slug)
-        if body is None:
-            self.reject("no stored page for the citation", f"{label} ({slug})")
-            return False
-        if normalize_for_match(quote) not in body:
-            self.reject("quote not verbatim on the cited page", f"{label}: {quote[:80]}")
+        if not self.quote_on_page(corpus, slug, quote, label):
             return False
 
         binding.pop("affinity_only", None)
@@ -273,11 +277,7 @@ SEARCH_JUDGED = os.path.join(CACHE, "binding_directions_search_judged.json")
 def read_other(corpus: str, page) -> str | None:
     """Any other corpus's stored page (French Wikipedia, a Europe PMC abstract),
     normalized, or None when absent (the tree is author-side)."""
-    from data_generators.provenance import corpus_page_path
-    path = corpus_page_path(corpus, page)
-    if path is None or not path.exists():
-        return None
-    return normalize_for_match(path.read_text(encoding="utf-8"))
+    return _STORE.text(corpus, page)
 
 
 def _owners(drugs: list[dict], rec: dict, metabolites: list[dict] = ()) -> list[dict]:

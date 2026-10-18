@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
 import binding_gaps as bg  # noqa: E402
 import target_aliases as ta  # noqa: E402
 import apply_binding_gaps as G  # noqa: E402
+from check_data import normalize_for_match  # noqa: E402
 from judged_fixture import fill  # noqa: E402
 
 HAS_BS4 = importlib.util.find_spec("bs4") is not None
@@ -59,7 +60,7 @@ def worklist(*cands):
 
 
 def read_page(slug):
-    return G.normalize_for_match(PAGE) if slug == "testdrug" else None
+    return normalize_for_match(PAGE) if slug == "testdrug" else None
 
 
 def run(cands, rows, data=None):

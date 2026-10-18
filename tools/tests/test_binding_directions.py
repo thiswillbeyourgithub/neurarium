@@ -34,6 +34,7 @@ sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
 import drugs_io  # noqa: E402
 import target_aliases as ta  # noqa: E402
 import apply_binding_directions as A  # noqa: E402
+from check_data import normalize_for_match  # noqa: E402
 from judged_fixture import fill  # noqa: E402
 
 # The table fetcher imports bs4 at module level, which a plain clone need not have; the
@@ -89,7 +90,7 @@ def drugs():
 
 
 def read_page(slug):
-    return A.normalize_for_match(PAGE) if slug == "testdrug" else None
+    return normalize_for_match(PAGE) if slug == "testdrug" else None
 
 
 def run(judged, data=None):
@@ -117,7 +118,7 @@ WIKI_TARGETS = {"5-HT 2C": "5ht2c", "\u03b1 2A": "alpha2a", "H 1": "h1"}
 
 
 def read_table_page(slug):
-    return A.normalize_for_match(TABLE_PAGE) if slug == "testdrug" else None
+    return normalize_for_match(TABLE_PAGE) if slug == "testdrug" else None
 
 
 def table_row(target, wiki_name, cell, action, quote):
@@ -467,7 +468,7 @@ class SearchTest(unittest.TestCase):
 
         def other(c, pg):
             seen.append((c, pg))
-            return A.normalize_for_match(self.LINE) if (c, pg) == (corpus, page) else None
+            return normalize_for_match(self.LINE) if (c, pg) == (corpus, page) else None
         work = self.worklist(corpus, page)
         stats, _ = A.apply_search(work, {self.SITE: fill({"index": 0, "action": "antagonist"},
                                                          work[0]["candidates"])},

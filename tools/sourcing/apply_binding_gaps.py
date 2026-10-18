@@ -63,7 +63,6 @@ import worklist_io  # noqa: E402 (the one judged / worklist reader)
 import drugs_io  # noqa: E402
 import target_aliases as ta  # noqa: E402
 from apply_binding_directions import CORPUS, PAGES, BindingGate, page_text  # noqa: E402
-from check_data import normalize_for_match  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 from data_generators.drugs import DRUG_ACTIONS  # noqa: E402
 
@@ -101,12 +100,7 @@ class GapGate(BindingGate):
             if not ok:
                 self.reject(why, f"{label}: {quote[:80]}")
                 return False
-        body = self.pages.text(CORPUS, slug)
-        if body is None:
-            self.reject("no stored page for the citation", f"{label} ({slug})")
-            return False
-        if normalize_for_match(quote) not in body:
-            self.reject("quote not verbatim on the cited page", f"{label}: {quote[:80]}")
+        if not self.quote_on_page(CORPUS, slug, quote, label):
             return False
         if bg.is_stahl(drug):
             self.stats["added: on a Stahl drug"] += 1
