@@ -291,6 +291,7 @@
   "Descending histaminergic (pontine)": "Histaminergique descendante (pontique)",
   "Descending serotonergic (cerebellar)": "Sérotoninergique descendante (cérébelleuse)",
   "Descending serotonergic (medullary)": "Sérotoninergique descendante (bulbaire)",
+  "Developer docs point at where the code lives after the restructure, the tools runbook gets a table of contents and one heading per sourcing pass, and a test now fails if a source corpus goes undocumented": "La documentation développeur pointe vers l'emplacement actuel du code après la restructuration, le guide des outils gagne une table des matières et un titre par passe de sourçage, et un test échoue désormais si un corpus source n'est pas documenté",
   "Diencephalon": "Diencéphale",
   "Dimenhydrinate is now shown as a salt of diphenhydramine and 8-chlorotheophylline and borrows diphenhydramine's bindings, each tagged so": "Le dimenhydrinate est désormais présenté comme un sel de diphénhydramine et de 8-chlorothéophylline et emprunte les liaisons de la diphénhydramine, chacune signalée comme telle",
   "Direct pathway (motor)": "Voie directe (motrice)",

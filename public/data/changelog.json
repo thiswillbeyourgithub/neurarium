@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "3.131.8",
+      "date": "2026-10-18",
+      "entries": [
+        {
+          "category": "docs",
+          "text": "Developer docs point at where the code lives after the restructure, the tools runbook gets a table of contents and one heading per sourcing pass, and a test now fails if a source corpus goes undocumented",
+          "commits": [
+            "0011709",
+            "8ddd4cf",
+            "6601cf5",
+            "8f0f987"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.131.7",
       "date": "2026-10-18",
       "entries": [
