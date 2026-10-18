@@ -1836,12 +1836,12 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "structures": tally(structure_grades),
         "references": tally(ref_grades),
     }
-    # The knowledge-node kinds (every node that carries a claim + a grade) are every
-    # by_kind entry except "references" (a reference points *at* a node, so it is
-    # tallied but excluded from the headline). Derived from the one by_kind dict above,
-    # so adding a node kind is a single-line edit (add it to by_kind) with no second
-    # list to keep in sync.
-    node_kinds = tuple(k for k in by_kind if k != "references")
+    # The headline sums over the one roster (node_kinds.py); a by_kind key outside it
+    # would be tallied yet silently left out of the headline, so refuse the drift.
+    drift = set(by_kind) ^ set(node_kinds_mod.NODE_KINDS + node_kinds_mod.TALLY_ONLY_KINDS)
+    if drift:
+        raise ValueError(f"by_kind keys out of sync with node_kinds.py: {sorted(drift)}")
+    node_kinds = node_kinds_mod.NODE_KINDS
     nodes = {"total": 0, "verified": 0, "uncertain": 0, "sourced": 0,
              "llm": 0, "nosource": 0, "missing": 0, "unknown": 0}
     for kind in node_kinds:

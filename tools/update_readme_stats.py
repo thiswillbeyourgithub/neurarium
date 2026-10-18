@@ -100,7 +100,8 @@ CORPUS_DESC = {
 }
 
 # Per-node-kind display labels for the README table (English; the README is English).
-# Keys mirror meta.provenance_stats.by_kind; an unknown kind would simply title-case.
+# Keys are node_kinds.NODE_KINDS + TALLY_ONLY_KINDS (pinned by tests/test_node_kinds.py);
+# an unknown kind would simply title-case.
 KIND_LABELS = {
     "drug_bindings": "Drug target bindings",
     "drug_binding_action": "Drug binding directions",
@@ -112,6 +113,9 @@ KIND_LABELS = {
     "drug_formulations": "Drug formulations (release type)",
     "drug_first_approval": "Drug first approval",
     "drug_withdrawals": "Drug market withdrawals",
+    "drug_holders": "Drug holders",
+    "drug_originator": "Drug originator",
+    "drug_originator_country": "Drug originator country",
     "drug_prodrug": "Drug prodrug flags",
     "drug_constituents": "Drug salt / combination constituents",
     "drug_therapeutic_range": "Drug therapeutic reference ranges",

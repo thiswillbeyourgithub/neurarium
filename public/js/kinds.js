@@ -13,6 +13,9 @@
 // not itself one (and every present link defaults to `sourced`, which would read as a
 // uniformly yellow bar). It stays in meta.provenance_stats.by_kind, just not rendered.
 // `enzyme_variability` has a bar but no browser rows (its rows live in the enzyme panel).
+// The canonical roster is tools/data_generators/node_kinds.py NODE_KINDS;
+// tools/tests/test_node_kinds.py pins this list to it (drug_pgx and receptor_variant
+// are not rendered here yet).
 
 export const KINDS = [
   { kind: "addons", label: "about.kindAddons" },

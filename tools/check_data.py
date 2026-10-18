@@ -122,10 +122,8 @@ _HEMISPHERE_RE = re.compile(r"_(R|L)$")
 # value the viewer renders as the grey/yellow/green source pill.
 _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 
-# The knowledge-node kinds folded into the headline coverage, in the generator's order
-# (mirrors provenance.py's by_kind minus "references", which points *at* a node rather
-# than being one). Adding a node kind means adding it here too, in one place: both the
-# coverage table and the self-consistency check read this.
+# The knowledge-node kinds folded into the headline coverage are NODE_KINDS, imported
+# from data_generators/node_kinds.py (the one roster) further down.
 # ``drug_binding_action`` is graded from the bindings' own quote sources, so its quotes
 # are already walked as part of drug_bindings / drug_metabolite_bindings: the kind adds a
 # tally column, never a new quote to gate.
@@ -133,25 +131,6 @@ _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 # drug_bbb, data_generators/physchem.py).
 PHYSCHEM_SOURCES = ("xlogp_sources", "tpsa_sources", "bbb_sources")
 
-NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "drug_brands",
-              "drug_categories",
-              "drug_half_life", "drug_tmax", "drug_formulations",
-              "drug_first_approval", "drug_withdrawals",
-              "drug_holders", "drug_originator", "drug_originator_country",
-              "drug_prodrug", "drug_constituents", "drug_therapeutic_range", "drug_alert_level",
-              "drug_lipophilicity", "drug_polar_surface", "drug_bbb", "drug_workup",
-              "drug_enzymes", "drug_enzyme_strength",
-              "enzyme_variability", "drug_pgx",
-              "drug_metabolites",
-              "drug_metabolite_enzyme", "drug_metabolite_bindings",
-              "projections", "projection_transmitter", "projection_sign",
-              "circuits", "projection_groups", "receptors",
-              "receptor_class", "receptor_sign", "receptor_synaptic",
-              "receptor_locations", "receptor_density", "targets", "target_polarity",
-              "target_locations", "target_density", "receptor_effect",
-              "receptor_release_modulation", "receptor_demographic",
-              "receptor_variant",
-              "structures")
 
 
 def _flip_hemisphere(structure_id):
@@ -2056,7 +2035,7 @@ from changelog import CATEGORIES as CHANGELOG_CATEGORIES  # noqa: E402
 # the whole point of the derivation gate (see data_generators/pharmfreq.py).
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_generators import clinpgx, cpic, freshness, node_id, pharmfreq, unknown  # noqa: E402
-from data_generators.node_kinds import backed  # noqa: E402
+from data_generators.node_kinds import NODE_KINDS, backed  # noqa: E402
 from text_fold import alnum_key  # noqa: E402
 from drugs_io import is_combination  # noqa: E402
 from page_file import page_file  # noqa: E402 (refuses a path-like page)
