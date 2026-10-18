@@ -477,7 +477,7 @@ Viewer (`public/`):
 - `js/panel/`: the detail panel: `info.js` (`createInfoPanel`, dispatching to `views/<kind>.js`,
   one `show*()` per node kind), `tabs.js` (detail-tab strip), and the shared row builders
   (`pills.js`, `tooltip.js`, `bindings.js`, `metabolism.js`, `expression.js`, `pathways.js`,
-  `sections.js`, `addons.js`, `reference.js`, `format.js`, `dom.js`).
+  `sections.js`, `addons.js`, `reference.js`, `format.js`, `dom.js`), plus `pk-interactions.js` (the drug panel's derived Drug interactions section).
 - `js/legend/`: the browse sections (`anatomy.js`, `targets.js`, `drugs.js`, `browse.js` for
   enzymes + effects, `key.js`, shared `item.js`). `js/about/`: the popups (`modals.js`) and the
   Sources & provenance tally (`sourcing.js`). `js/search/query.js`: search text folding; `js/search/index.js`: `buildSearchItems`, the search box's row index (every searchable thing + the `data-search` controls, each with its pick action).
