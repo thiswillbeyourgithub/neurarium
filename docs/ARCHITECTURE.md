@@ -468,7 +468,7 @@ Viewer (`public/`):
 - `js/boot/`: one `wire*()` per UI concern, called once from `main.js`: `controls.js` (Settings
   pane), `toolbar.js` (reset + search popup), `shortcuts.js`, `picking.js` (canvas click / tap /
   hover), `header-toggles.js` (theme + panel-only mode), `speed-slider.js`, `tour-steps.js` (the
-  guided tour's steps), `url-bindings.js` (data-bound deep-link keys).
+  guided tour's steps), `url-bindings.js` (data-bound deep-link keys), plus `query.js` (the `?query` parsed once + its named predicates, not a `wire*`).
 - `js/panel/`: the detail panel: `info.js` (`createInfoPanel`, dispatching to `views/<kind>.js`,
   one `show*()` per node kind), `tabs.js` (detail-tab strip), and the shared row builders
   (`pills.js`, `tooltip.js`, `bindings.js`, `metabolism.js`, `expression.js`, `pathways.js`,

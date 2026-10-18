@@ -61,6 +61,7 @@ import { wireUrlBindings } from "./boot/url-bindings.js";
 import { wireCanvasPicking } from "./boot/picking.js";
 import { wireHeaderToggles } from "./boot/header-toggles.js";
 import { wireSpeedSlider } from "./boot/speed-slider.js";
+import { AUTOMATED_VIEW, HAS_EXPLODE, TOUR_FORCED } from "./boot/query.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -938,18 +939,10 @@ async function main() {
     selection, selectStructure, setNo3d: (...a) => setNo3d(...a),
     showNodeBrowser: (...a) => showNodeBrowser(...a), sourcingModal, tabs, toolbar,
   });
-  // `?tour=1` forces the tour on every load, bypassing the once-per-visitor
-  // "seen" gate and the eligibility checks (handy for testing / a shared link
-  // that always runs it). It still waits for the intro (and won't stack on an
-  // open Sources popup) below.
-  const tourForced = new URLSearchParams(window.location.search).get("tour") === "1";
   // Auto-start only on a genuinely fresh view: not a screenshot / deep-link mode,
   // and nothing already focused (a hash deep link, or a click during the intro).
-  const tourEligible = () => {
-    const p = new URLSearchParams(window.location.search);
-    return p.get("ui") !== "0" && !p.has("explode")
-      && !tabs.activeKey() && !selection.getSelected();
-  };
+  const tourEligible = () =>
+    !AUTOMATED_VIEW && !tabs.activeKey() && !selection.getSelected();
   // Replay from the About popup (close it first so the tour isn't behind it).
   tourEl("about-tour")?.addEventListener("click", () => {
     aboutModal.close();
@@ -971,7 +964,7 @@ async function main() {
   const tourGateOpen = () => tourGateEls.some((el) => !el.hidden);
   const tryAutoTour = () => {
     if (!sceneSettled || tourGateOpen()) return;
-    if (tourForced) {
+    if (TOUR_FORCED) {
       // Forced: ignore the seen gate + eligibility, but never re-trigger.
       if (!tourForcedStarted) { tourForcedStarted = true; tour.start(); }
     } else if (introCompleted) {
@@ -1021,7 +1014,7 @@ async function main() {
   // The launch (assemble intro, or an instant settle when animations are off) is
   // wrapped so it can fire exactly when the loading overlay is dismissed below.
   const beginScene = () => {
-    if (!new URLSearchParams(window.location.search).has("explode")) {
+    if (!HAS_EXPLODE) {
       // Seat the resting pose on the exact framing the reset button produces, so a
       // fresh load already appears centered (not a hardcoded distance that only
       // roughly matched). Done first, so the DEV-banner nudge + intro capture build
@@ -1047,7 +1040,7 @@ async function main() {
         // short, so the tour is as welcome here as after a full assemble.
         setTimeout(() => settleScene(true), 500);
       }
-    } else if (tourForced) {
+    } else if (TOUR_FORCED) {
       // ?explode= pinned: the intro block above is skipped, so onSettle never fires.
       // A forced tour still wants to run, so settle the gate condition after a beat.
       setTimeout(() => settleScene(false), 500);
@@ -1058,8 +1051,7 @@ async function main() {
   // never trapped behind the overlay; a normal interactive load keeps it up showing
   // the "Start exploring" button (so the tagline + invite can be read) and launches
   // on the click, the assemble intro playing as the overlay fades.
-  const introParams = new URLSearchParams(window.location.search);
-  if (introParams.get("ui") === "0" || introParams.has("explode")) {
+  if (AUTOMATED_VIEW) {
     // An automated view (headless capture, deep-link screenshot) is not a visit, so it
     // launches with no release notes over the shot.
     loading.done();

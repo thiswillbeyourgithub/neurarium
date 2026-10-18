@@ -3,6 +3,7 @@
 
 import * as THREE from "three";
 import { EXPLODE_STRENGTH } from "./explode.js";
+import { QUERY } from "../boot/query.js";
 
 // Padding around the whole assembled brain when a load / the reset button frames it
 // (createCameraFocus fitAll): 1 would touch the viewport edge.
@@ -442,7 +443,7 @@ export function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) 
  * @param {object} bundle  { scene, camera, controls, meshes, arrows, labels, urlState }
  */
 export function applyViewParams(bundle) {
-  const q = new URLSearchParams(window.location.search);
+  const q = QUERY;
   if ([...q].length === 0) return;
   const { camera, controls, meshes, arrows, urlState } = bundle;
 
