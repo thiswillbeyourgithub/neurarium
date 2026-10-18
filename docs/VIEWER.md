@@ -195,7 +195,7 @@ regions the owner already claims, never adding one.
   -> `data_sources/allen/density.json` -> `tools/sourcing/apply_expression_density.py` ->
   the committed `tools/generated_cache/expression_density.json`, merged into `RECEPTOR_DENSITY` /
   `TARGET_DENSITY` + `DENSITY_MIN_RELIABILITY` (emitted as `meta.density_min_reliability`).
-- Viewer: `js/data.js` `densityEntry` normalizes it to `{profile, rel, reliability, donors,
+- Viewer: `js/data/expression.js` `densityEntry` normalizes it to `{profile, rel, reliability, donors,
   provenance, sources}` (`rel` = the z rescaled to 0.08..1 for the bar); `locationList` prepends a
   caption row ("Relative amount" + the donor-agreement r + the profile's grade pill) and
   `locationRow` appends a bar + signed z per region. **Caveat shipped in the caption tooltip:**

@@ -41,7 +41,7 @@ def owner_effects(receptors: list[dict[str, Any]],
 
 
 def _norm(name: str) -> str:
-    """A drug name folded like the viewer's ``normName`` (js/data.js)."""
+    """A drug name folded like the viewer's ``normName`` (js/util.js)."""
     return re.sub(r"[^a-z0-9]", "", (name or "").lower())
 
 

@@ -127,7 +127,7 @@ DRUG_ACTIONS: dict[str, dict[str, Any]] = {
     # A *vesicular* transporter inhibitor (VMAT2): unlike a plasma-membrane reuptake
     # pump, blocking vesicular loading DEPLETES the transmitter, so the net effect is
     # a block (tone down), not a boost. Kept distinct from reuptake_inhibitor so the
-    # direction is never conflated. See toneSignOf in js/data.js.
+    # direction is never conflated. See toneSignOf in js/data/bindings.js.
     "vesicular_inhibitor": {"label": {"en": "Vesicular transport inhibitor",
                                       "fr": "Inhibiteur du transport vésiculaire"},
                             "effect": "block"},
@@ -179,7 +179,7 @@ DRUG_EFFECT_LABELS: dict[str, dict[str, str]] = {
 # --- Tone rules (the by-mechanism flow model) ------------------------------------
 # Which bindings SET a transmitter's tone, and in which direction. This is the single
 # source of truth for the flow overlay: emitted as ``meta.tone_rules`` and read by
-# BOTH consumers (``toneSignOf`` in js/data.js, which animates it, and ``_tone_of`` in
+# BOTH consumers (``toneSignOf`` in js/data/bindings.js, which animates it, and ``_tone_of`` in
 # tools/check_data.py, which cross-checks it). It used to be transcribed by hand in
 # each language, which is exactly how the VMAT2 direction bug survived a release in
 # one copy: a rule you have to remember to change twice is a rule that drifts.
@@ -519,7 +519,7 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
               # vesicles, so inhibiting it DEPLETES releasable transmitter and
               # *lowers* the system's tone, the opposite of a plasma-membrane
               # reuptake transporter (SERT/DAT/NET). The viewer's flow overlay
-              # reads this flag to sign the tone correctly (js/data.js toneSignOf).
+              # reads this flag to sign the tone correctly (js/data/bindings.js toneSignOf).
               "vesicular": True,
               "wikipedia":
                   "https://en.wikipedia.org/wiki/Vesicular_monoamine_transporter_2",

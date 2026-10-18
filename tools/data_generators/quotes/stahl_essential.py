@@ -295,7 +295,7 @@ STAHL_ESSENTIAL_TARGET_QUOTES: dict[str, dict[str, Any]] = {
 # A non-receptor target's tone POLARITY (does engaging it raise or lower the
 # system's tone) is a *separate, direction-bearing* claim from its type/system
 # classification: the `vesicular` / `sign` / `synaptic` flags flip the drug-flow
-# overlay's sign (js/data.js toneSignOf), so a wrong flag inverts a drug's
+# overlay's sign (js/data/bindings.js toneSignOf), so a wrong flag inverts a drug's
 # apparent effect on tone (this is exactly the VMAT2 boost/block bug). It is
 # therefore its own graded node (kind `target_polarity`) instead of silently
 # inheriting the classification grade from a quote that never addressed direction.

@@ -408,7 +408,7 @@ nothing draws.
   variable, deliberately not in `js/prefs.js`): nothing should record which ancestry a clinician
   looked at. The caveat paragraph is part of the section rather than a tip, because the number is a
   group base rate and an ancestry is not a genotype.
-- **The drug -> drug edges are derived, never stored** (`pkInteractionsOf` in `js/data.js`, like
+- **The drug -> drug edges are derived, never stored** (`pkInteractionsOf` in `js/data/pk.js`, like
   `flowSystems`): an inhibitor/inducer of an enzyme meets its substrates, one row per (other drug,
   direction) naming every shared isoform. Rendered two ways from the same edges via a persisted
   segmented control (`PK_GROUP_KEY`): **by drug** (the four `PK_DIRECTIONS` buckets as headings,
