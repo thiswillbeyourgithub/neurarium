@@ -4,6 +4,8 @@
 // Repeat-visit speed/offline resilience for these files is handled by the service
 // worker (stale-while-revalidate for /data/*, see public/sw.js), not here.
 
+import { fetchOk } from "../net.js";
+
 /**
  * Parse JSONL text (one JSON object per line) into an array, skipping blank
  * lines. Kept tiny and dependency-free on purpose.
@@ -24,12 +26,9 @@ export function parseJsonl(text) {
  * @param {string} url
  * @returns {Promise<Response>}
  */
-export async function fetchOrThrow(url) {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);
-  }
-  return res;
+export function fetchOrThrow(url) {
+  return fetchOk(url, undefined,
+    (res) => `Failed to load ${url}: ${res.status} ${res.statusText}`);
 }
 
 /**

@@ -13,6 +13,7 @@
 // is a 4-second regression nobody would ever notice.
 
 import { decodeMesh, FORMAT_VERSION } from "./mesh-codec.js";
+import { fetchJson, fetchOk } from "./net.js";
 
 /**
  * @param {string} base  data directory, e.g. "data".
@@ -25,9 +26,7 @@ export async function loadBakedMeshes(base, onProgress = null) {
   const out = new Map();
   let manifest;
   try {
-    const res = await fetch(`${base}/meshes/index.json`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    manifest = await res.json();
+    manifest = await fetchJson(`${base}/meshes/index.json`);
   } catch (err) {
     console.info(`baked meshes: no manifest (${err.message}); meshing in the browser instead`);
     return out;
@@ -46,8 +45,7 @@ export async function loadBakedMeshes(base, onProgress = null) {
   onProgress?.({ loaded, total });
   await Promise.all(entries.map(async ([shapeFile, entry]) => {
     try {
-      const res = await fetch(`${base}/meshes/${entry.file}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const res = await fetchOk(`${base}/meshes/${entry.file}`);
       const mesh = decodeMesh(await res.arrayBuffer());
       // Cheap self-check: the manifest states what the file should hold, so a
       // truncated or mismatched download is caught here instead of rendering as

@@ -13,6 +13,7 @@
 import { loadString, saveString } from "./prefs.js";
 import { isWebUrl } from "./web-url.js";
 import { extLink } from "./panel/dom.js";
+import { fetchJson } from "./net.js";
 
 const STORAGE_KEY = "neurarium.changelogSeen";
 
@@ -107,9 +108,8 @@ export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
       pending = (async () => {
         // A plain fetch: the service worker already revalidates every same-origin
         // asset, so freshness is handled there rather than with a per-call cache mode.
-        const res = await fetch("data/changelog.json");
-        if (!res.ok) throw new Error(`changelog.json: HTTP ${res.status}`);
-        const data = await res.json();
+        const data = await fetchJson("data/changelog.json", undefined,
+          (res) => `changelog.json: HTTP ${res.status}`);
         cache = Array.isArray(data?.versions) ? data.versions : [];
         return cache;
       })();

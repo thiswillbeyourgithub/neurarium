@@ -22,6 +22,8 @@
 // docker/Caddyfile). Results are cached per drug+language (in-memory + a session
 // store) so re-opening a drug never refetches.
 
+import { fetchJson } from "./net.js";
+
 // `${url}::${lang}` -> Promise<{ text, lang } | null>, the in-flight promise so
 // concurrent callers share one fetch. A clean "no lead" null stays cached in-memory
 // only; a failed fetch is evicted so the next call retries; positives are also
@@ -62,11 +64,8 @@ function parseArticle(url) {
   }
 }
 
-async function fetchJson(url) {
-  const res = await fetch(url, { credentials: "omit", redirect: "follow" });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
-}
+// Wikipedia is cross-origin: never send cookies, follow its title redirects.
+const WIKI_INIT = { credentials: "omit", redirect: "follow" };
 
 // The full plain-text lead section (every introduction paragraph, i.e. everything
 // before the first section heading), via the action API's TextExtracts
@@ -78,7 +77,7 @@ async function leadExtract(lang, title) {
     `https://${lang}.wikipedia.org/w/api.php?action=query&prop=extracts` +
     `&exintro=1&explaintext=1&redirects=1&exlimit=1` +
     `&titles=${encodeURIComponent(title)}&format=json&origin=*`;
-  const data = await fetchJson(url);
+  const data = await fetchJson(url, WIKI_INIT);
   const pages = data && data.query && data.query.pages;
   if (!pages) return null;
   for (const k of Object.keys(pages)) {
@@ -96,7 +95,7 @@ async function langTitle(srcLang, title, target) {
     `https://${srcLang}.wikipedia.org/w/api.php?action=query&prop=langlinks` +
     `&lllang=${encodeURIComponent(target)}&lllimit=1&redirects=1` +
     `&titles=${encodeURIComponent(title)}&format=json&origin=*`;
-  const data = await fetchJson(url);
+  const data = await fetchJson(url, WIKI_INIT);
   const pages = data && data.query && data.query.pages;
   if (!pages) return null;
   for (const k of Object.keys(pages)) {

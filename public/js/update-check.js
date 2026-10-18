@@ -18,6 +18,8 @@
 //
 // Made with the help of Claude Code.
 
+import { fetchOk } from "./net.js";
+
 const TRIED_KEY = "neurarium-update-tried";
 const MIN_INTERVAL_MS = 30_000;
 export const RETRY_MS = 10 * 60_000;
@@ -62,11 +64,10 @@ function start() {
     last = now;
     let remote;
     try {
-      const res = await fetch("version.js", { cache: "no-store" });
-      if (!res.ok) return;
+      const res = await fetchOk("version.js", { cache: "no-store" });
       remote = extractAppVersion(await res.text());
     } catch {
-      return; // offline: keep the cached build
+      return; // offline or an error status: keep the cached build
     }
     let tried = null;
     try { tried = parseTried(sessionStorage.getItem(TRIED_KEY)); } catch { /* storage blocked */ }
