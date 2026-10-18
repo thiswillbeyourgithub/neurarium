@@ -20,7 +20,7 @@ Six gates, all re-derived here rather than trusted from the judged file:
    drug the fetcher never proposed cannot smuggle one in);
 3. the index resolves into that drug's candidate list;
 4. the judged ``{hours, hours_max?}`` equals one of the durations the candidate line
-   states (computed by ``fetch_tmax.durations_in``, not by the model);
+   states (computed by ``lib.parse.durations.durations_in``, not by the model);
 5. the value is a plausible ORAL time-to-peak (``MAX_TMAX_HOURS``), which is what the
    simulation models. A depot injection or an implant peaks in days (aripiprazole LAI
    at 6.5-7.1 days is a real number about a different formulation), and writing it

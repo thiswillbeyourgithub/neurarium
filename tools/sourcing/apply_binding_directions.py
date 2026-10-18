@@ -384,12 +384,13 @@ def main() -> int:
         sys.path.insert(0, os.path.join(REPO, "tools", "fetch"))
         try:
             import fetch_wikipedia_pharmacology as wiki  # noqa: E402
+            from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
         except ModuleNotFoundError as exc:
             print(f"--tables needs the fetcher's resolver ({exc}); run it as\n"
                   "  uv run --with beautifulsoup4 python "
                   "tools/sourcing/apply_binding_directions.py --tables", file=sys.stderr)
             return 1
-        valid_ids = wiki.load_valid_ids()
+        valid_ids = wikistore.load_valid_ids()
         proposals = worklist_io.read(args.tables)
         stats, rejected = apply_tables(proposals, drugs, page_text,
                                        lambda name: wiki.resolve_wiki_target(name, valid_ids))

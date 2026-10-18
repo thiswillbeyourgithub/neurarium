@@ -51,7 +51,7 @@ sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
 import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402
+from lib.corpora import wikipedia as wikistore  # noqa: E402
 import fetch_originator as fo  # noqa: E402
 from data_generators import history, origin  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
@@ -151,13 +151,13 @@ def main() -> int:
     ap.add_argument("--judged", type=Path, default=JUDGED_PATH)
     ap.add_argument("--dry-run", action="store_true", help="report, write nothing")
     args = ap.parse_args()
-    if not Path(cypwiki.PAGES).is_dir():
+    if not Path(wikistore.PAGES_DIR).is_dir():
         print("[error] data_sources/wikipedia/pages missing (author-side)", file=sys.stderr)
         return 1
     judged = worklist_io.read(args.judged)
     drugs = drugs_io.load_drugs()
     counts = apply(fo.build(), judged, drugs,
-                   PageGate({fo.CORPUS: Path(cypwiki.PAGES)}))
+                   PageGate({fo.CORPUS: Path(wikistore.PAGES_DIR)}))
     print(("[dry-run] " if args.dry_run else "") + ", ".join(
         f"{k} {v}" for k, v in counts.items()))
     if not args.dry_run:

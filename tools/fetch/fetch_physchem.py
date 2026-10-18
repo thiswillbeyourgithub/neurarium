@@ -17,7 +17,7 @@ The join, per roster drug:
    a drug carrying ``constituents``) gets nothing: one compound's properties are not the
    combination's.
 2. Its **PubChem CID** is the first id on the ``PubChem CID | <n>`` row of its stored
-   English Wikipedia drugbox (``fetch_cyp_wikipedia.page_for``; the salt ids after it,
+   English Wikipedia drugbox (``lib.corpora.wikipedia.page_for``; the salt ids after it,
    ``2130 as HCl: 64150``, are ignored). No row, no node.
 3. PubChem's batch property call gives XLogP3, TPSA, molecular weight, formula and the
    standard InChI, stored as ``data_sources/pubchem/pages/<cid>.md``. A CID whose InChI
@@ -72,7 +72,7 @@ import chirality  # noqa: E402
 from io_atomic import atomic_write_json  # noqa: E402
 import drugs_io  # noqa: E402
 import polite_http  # noqa: E402 (the one polite GET)
-from fetch_cyp_wikipedia import page_for  # noqa: E402
+from lib.corpora.wikipedia import page_for  # noqa: E402
 
 PUBCHEM_DIR = ROOT / "data_sources" / "pubchem" / "pages"
 B3DB_DIR = ROOT / "data_sources" / "b3db"

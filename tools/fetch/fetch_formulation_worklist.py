@@ -52,9 +52,9 @@ from pipeline.judged import ECHO_QID  # noqa: E402
 from worklist_io import merge_scoped  # noqa: E402
 from data_generators import formulations as F  # noqa: E402
 from data_generators.provenance import corpus_page_path  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402
-import fetch_tmax  # noqa: E402  (sentences(), durations_in / durations_in_fr)
-import fetch_bdpm  # noqa: E402  (the product table, its folding)
+from lib.corpora import wikipedia as wikistore  # noqa: E402
+from lib.parse import durations as dur  # noqa: E402  (sentences(), durations_in / durations_in_fr)
+from lib.corpora import bdpm  # noqa: E402  (the product table, its folding)
 import fetch_dailymed  # noqa: E402  (spl_routes: a label's route codes)
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "formulation_worklist.json"
@@ -71,7 +71,7 @@ MULTI_BRAND = re.compile(r",|/|\bor\b")
 def durations(corpus: str, line: str) -> list[dict]:
     """The durations a quote states, parsed in its page's language."""
     fr = corpus in ("bdpm", "wikipedia_fr")
-    return (fetch_tmax.durations_in_fr if fr else fetch_tmax.durations_in)(line)
+    return (dur.durations_in_fr if fr else dur.durations_in)(line)
 
 
 def product_line(corpus: str, page) -> tuple[str, str] | None:
@@ -116,7 +116,7 @@ def code_brand_release(brand: dict) -> tuple[str, dict] | None:
         # The brand pass cites ONE product per brand, but a French brand often spans
         # several (Sifrol is a tablet AND a prolonged-release tablet): the brand is one
         # formulation only when every marketed product carrying its name is.
-        if got and bdpm_brand_releases().get(fetch_bdpm.fold(src["quote"])) == {got[1]}:
+        if got and bdpm_brand_releases().get(bdpm.fold(src["quote"])) == {got[1]}:
             return got[1], _code_source(src["corpus"], src["page"], got[0])
     return None
 
@@ -133,14 +133,14 @@ def bdpm_brand_releases() -> dict[str, set]:
     global _BRAND_RELEASES
     if _BRAND_RELEASES is None:
         _BRAND_RELEASES = {}
-        path = fetch_bdpm.BASE_DIR / fetch_bdpm.PRODUCTS_FILE
-        rows = fetch_bdpm.read_table(path) if path.exists() else []
-        for p in fetch_bdpm.load_products(rows).values():
+        path = bdpm.BASE_DIR / bdpm.PRODUCTS_FILE
+        rows = bdpm.read_table(path) if path.exists() else []
+        for p in bdpm.load_products(rows).values():
             if not p["marketed"] or "active" not in p["status"].lower():
                 continue
             m = re.match(r"[^\W\d_][\w'’.-]*", p["denomination"])
             if m:
-                _BRAND_RELEASES.setdefault(fetch_bdpm.fold(m.group(0).rstrip(".-")),
+                _BRAND_RELEASES.setdefault(bdpm.fold(m.group(0).rstrip(".-")),
                                            set()).add(
                     F.classify_denomination(p["denomination"], p["route"]))
     return _BRAND_RELEASES
@@ -169,7 +169,7 @@ def _code_source(corpus: str, page, quote: str) -> dict:
 def _pages(drug: dict) -> list[tuple[str, str, Path]]:
     """``(corpus, slug, path)`` of the drug's stored EN and FR Wikipedia articles."""
     out = []
-    path = cypwiki.page_for(drug)
+    path = wikistore.page_for(drug)
     if path and os.path.exists(path):
         out.append(("wikipedia_pharm", Path(path).stem, Path(path)))
     fr = {s["page"] for b in drug.get("brands") or [] for s in b.get("sources") or []
@@ -186,7 +186,7 @@ def brand_candidates(drug: dict, name: str) -> list[dict]:
     word = re.compile(rf"(?<!\w){re.escape(name)}(?!\w)", re.IGNORECASE)
     out, seen = [], set()
     for corpus, slug, path in _pages(drug):
-        for s in fetch_tmax.sentences(path.read_text("utf-8", errors="replace")):
+        for s in dur.sentences(path.read_text("utf-8", errors="replace")):
             if len(s) > MAX_LINE or s in seen or not word.search(s):
                 continue
             rels = F.releases_in(s)

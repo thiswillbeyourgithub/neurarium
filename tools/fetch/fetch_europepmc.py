@@ -509,7 +509,7 @@ def ki_prose(only: set | None, refresh: bool) -> int:
     import drugs_io  # noqa: E402
     import target_aliases as ta  # noqa: E402
     import worklist_io  # noqa: E402
-    from fetch_cyp_wikipedia import page_for  # noqa: E402 (drug -> stored article)
+    from lib.corpora.wikipedia import page_for  # noqa: E402 (drug -> stored article)
 
     names = ta.target_names()
     RAW_DIR.mkdir(parents=True, exist_ok=True)

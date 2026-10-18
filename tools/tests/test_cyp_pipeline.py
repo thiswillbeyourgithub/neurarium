@@ -267,9 +267,9 @@ class VocabularyTest(unittest.TestCase):
         sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 
     def test_known_enzymes_is_the_modeled_vocabulary(self):
-        import fetch_cyp_wikipedia
+        from lib.corpora import wikipedia as wikistore
         from data_generators.drugs import ENZYMES
-        self.assertEqual(set(fetch_cyp_wikipedia.KNOWN_ENZYMES), set(ENZYMES))
+        self.assertEqual(set(wikistore.KNOWN_ENZYMES), set(ENZYMES))
 
     def test_every_modeled_ugt_isoform_is_read(self):
         import fetch_cyp

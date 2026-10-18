@@ -1218,7 +1218,7 @@ def _load_drug_enzymes() -> dict[str, list[dict[str, Any]]]:
     Two deterministic fetchers write these, both committed so this offline generator
     (and a clone with no author-side trees) reproduces the same data:
     ``tools/fetch/fetch_cyp.py`` from Stahl's Pharmacokinetics block, and
-    ``tools/fetch/fetch_cyp_wikipedia.py`` from the drug's English Wikipedia article
+    ``tools/lib/corpora/wikipedia.py`` from the drug's English Wikipedia article
     (corpus #9), which is the only source for the 149 drugs outside Stahl's roster.
 
     **Stahl wins.** A (enzyme, role) pair Stahl already states keeps its Stahl quote;

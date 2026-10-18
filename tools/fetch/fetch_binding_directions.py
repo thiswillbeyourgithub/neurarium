@@ -25,7 +25,7 @@ than a denial?) to the model that reads the worklist and to the applier's gates.
 regex cannot tell "is an antagonist at D2" from "unlike the antagonists at D2" or from
 a sentence about the drug's metabolite, so it does not try.
 
-Nothing here is duplicated: the stored-page lookup is ``fetch_cyp_wikipedia.page_for``
+Nothing here is duplicated: the stored-page lookup is ``lib.corpora.wikipedia.page_for``
 (which owns the ``PAGE_ALIASES`` redirect map and the slug rule), the prose-sentence
 extraction is ``fetch_metabolite_bindings.action_lines``, and the "does this sentence
 name this target" test is ``tools/target_aliases.py``, shared with the applier so the
@@ -86,7 +86,7 @@ sys.path.insert(0, os.path.join(REPO, "tools"))       # drugs_io, target_aliases
 import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402
 import target_aliases as ta  # noqa: E402  (the shared "quote names the target" test)
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402  (stored-page lookup + PAGE_ALIASES)
+from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup + PAGE_ALIASES)
 # Imported for `action_lines` only. It pulls in BeautifulSoup at import time, which is
 # why this script declares the beautifulsoup4 dependency above; no HTML is parsed here.
 import fetch_metabolite_bindings as mb  # noqa: E402
@@ -172,7 +172,7 @@ def build(drugs: list[dict], only: set[str] | None = None) -> tuple[list[dict], 
             # long before here, so this is a corruption report, not a routine skip.
             warnings.append(f"{drug['id']}: unmodeled target(s) {unknown} - not offered")
             targets = [t for t in targets if t in all_aliases]
-        path = cypwiki.page_for(drug)
+        path = wikistore.page_for(drug)
         if not path:
             warnings.append(f"{drug['id']}: no stored Wikipedia article "
                             f"(uv run tools/fetch/fetch_wikipedia_pharmacology.py "
@@ -305,7 +305,7 @@ def build_search(drugs: list[dict], metabolites: list[dict] = ()) -> list[dict]:
             en_pages = [os.path.join(EN_PAGES, f"{p}.md") for p in metab_pages.get(
                 unknown.fold(metab), [])]
         else:
-            en = cypwiki.page_for(drug)
+            en = wikistore.page_for(drug)
             en_pages = [en] if en else []
         en_hits = 0
         for path in en_pages:

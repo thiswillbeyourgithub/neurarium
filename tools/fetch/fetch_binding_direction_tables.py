@@ -19,7 +19,7 @@ same row already sources (``fetch_wikipedia_pharmacology.py``).
 Nothing here is duplicated: the table grid, the header detection, the target-name resolver
 and the row text (the one string both the stored page and every quote from it are made of)
 are ``fetch_wikipedia_pharmacology``'s, imported; the stored-page lookup is
-``fetch_cyp_wikipedia.page_for``; the write and its gates are
+``lib.corpora.wikipedia.page_for``; the write and its gates are
 ``tools/sourcing/apply_binding_directions.py --tables``, the sole writer of a direction.
 
 What it offers, per drug, into ``tools/generated_cache/binding_directions_tables.json``::
@@ -67,7 +67,7 @@ sys.path.insert(0, HERE)
 
 from io_atomic import atomic_write_json  # noqa: E402
 import drugs_io  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402 (owns PAGE_ALIASES + the slug rule)
+from lib.corpora import wikipedia as wikistore  # noqa: E402 (owns PAGE_ALIASES + the slug rule)
 import fetch_wikipedia_pharmacology as wiki  # noqa: E402 (grid, headers, resolver, row text)
 
 OUT = os.path.join(REPO, "tools", "generated_cache", "binding_directions_tables.json")
@@ -187,19 +187,19 @@ def proposals_for(html: str, drug: dict, valid_ids: set[str], target_types: dict
 
 
 def build(only: set[str] | None = None) -> tuple[dict[str, dict], collections.Counter]:
-    valid_ids = wiki.load_valid_ids()
-    with open(wiki.META_PATH, encoding="utf-8") as f:
+    valid_ids = wikistore.load_valid_ids()
+    with open(wikistore.META_PATH, encoding="utf-8") as f:
         target_types = {k: v.get("type") for k, v in json.load(f)["drug_targets"].items()}
     stats: collections.Counter = collections.Counter()
     proposals: dict[str, dict] = {}
     for drug in drugs_io.load_drugs():
         if only and drug["id"] not in only:
             continue
-        path = cypwiki.page_for(drug)
+        path = wikistore.page_for(drug)
         if not path:
             continue
         slug = os.path.splitext(os.path.basename(path))[0]
-        raw = os.path.join(wiki.RAW_DIR, f"{slug}.html")
+        raw = os.path.join(wikistore.RAW_DIR, f"{slug}.html")
         if not os.path.exists(raw):
             stats["drug: page stored without its raw html"] += 1
             continue

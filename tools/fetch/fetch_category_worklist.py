@@ -45,7 +45,7 @@ sys.path.insert(0, str(HERE))
 import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402
 from worklist_io import merge_scoped  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402 (page_for, SENTENCE_SPLIT)
+from lib.corpora import wikipedia as wikistore  # noqa: E402 (page_for, SENTENCE_SPLIT)
 from data_generators.drugs import DRUG_CATEGORY_LABELS  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "category_worklist.json"
@@ -78,7 +78,7 @@ def lead_sentences(text: str) -> list[str]:
             break
         if (len(line) < MIN_LINE or " | " in line or line.startswith(INFOBOX_PREFIXES)):
             continue
-        for part in cypwiki.SENTENCE_SPLIT.split(line):
+        for part in wikistore.SENTENCE_SPLIT.split(line):
             part = part.strip()
             if MIN_LINE <= len(part) <= MAX_LINE:
                 out.append(part)
@@ -94,7 +94,7 @@ def _fr_slug(drug: dict, brand: dict) -> str | None:
     slug = (brand.get(drug["id"]) or {}).get("fr_slug")
     if slug and (PAGES_FR / f"{slug}.md").exists():
         return slug
-    en = cypwiki.page_for(drug)
+    en = wikistore.page_for(drug)
     if en:
         guess = os.path.splitext(os.path.basename(en))[0]
         if (PAGES_FR / f"{guess}.md").exists():
@@ -104,7 +104,7 @@ def _fr_slug(drug: dict, brand: dict) -> str | None:
 
 def candidates(drug: dict, brand: dict) -> list[dict]:
     out: list[dict] = []
-    en = cypwiki.page_for(drug)
+    en = wikistore.page_for(drug)
     if en and os.path.exists(en):
         slug = os.path.splitext(os.path.basename(en))[0]
         text = Path(en).read_text(encoding="utf-8", errors="replace")

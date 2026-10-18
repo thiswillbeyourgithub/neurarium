@@ -71,15 +71,15 @@ sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 import drugs_io  # noqa: E402
 from io_atomic import atomic_write_json  # noqa: E402
-import fetch_bdpm  # noqa: E402 (section_body, html_lines, the product join, RCP_URL)
+from lib.corpora import bdpm  # noqa: E402 (section_body, html_lines, the product join, RCP_URL)
 import fetch_ema_epar  # noqa: E402 (the EPAR found by name, for a drug with no CIS)
 
-PAGES_DIR = fetch_bdpm.BASE_DIR / "pages_rcp4"
+PAGES_DIR = bdpm.BASE_DIR / "pages_rcp4"
 CACHE_PATH = ROOT / "tools" / "generated_cache" / "bdpm_rcp_labels.json"
 JUSTELESRCP = ROOT.parent / "justelesRCP"
 
 # Drug -> the molecules a combination may pair it with and still count as its RCP
-# (folded ``fetch_bdpm.molecule_key`` names). Levodopa is sold in France only with a
+# (folded ``bdpm.molecule_key`` names). Levodopa is sold in France only with a
 # decarboxylase inhibitor, and Sinemet's / Modopar's 4.3 / 4.4 asks concern the
 # levodopa; the partners themselves get no page (no label speaks for them alone).
 COMBO_PARTNERS = {"levodopa": ("CARBIDOPA", "BENSERAZIDE")}
@@ -109,7 +109,7 @@ def section_lines(body: str) -> list[str]:
     body = _SUBHEAD_P.sub(lambda m: m.group(0) + _HEAD_MARK, body)
     body = _ITEM_P.sub(lambda m: m.group(0) + _ITEM_MARK, body)
     out = []
-    for line in fetch_bdpm.html_lines(body):
+    for line in bdpm.html_lines(body):
         mark = line[:1] if line[:1] in (_HEAD_MARK, _ITEM_MARK) else ""
         rest = line.replace(_HEAD_MARK, "").replace(_ITEM_MARK, "")
         if mark:
@@ -125,7 +125,7 @@ def rcp_sections(page_html: str) -> dict[str, list[str]]:
     """``{"4.2": lines, "4.3": lines, "4.4": lines}`` for the sections the page has."""
     out = {}
     for number, anchor in SECTIONS:
-        body = fetch_bdpm.section_body(page_html, number, anchor)
+        body = bdpm.section_body(page_html, number, anchor)
         if body is not None:
             lines = section_lines(body)
             if lines:
@@ -174,7 +174,7 @@ def copies(cis: str, repo: Path, manifest: dict) -> list[dict]:
     copied_from}``. A copy known to hold no RCP (zero bytes, manifest ``empty``) is
     not one."""
     out = []
-    local = fetch_bdpm.RAW_DIR / f"{cis}.html"
+    local = bdpm.RAW_DIR / f"{cis}.html"
     if local.exists() and local.stat().st_size:
         out.append({"html": local.read_text(encoding="utf-8", errors="replace"),
                     "fetched": _mtime_date(local), "date_source": "file mtime",
@@ -233,7 +233,7 @@ def candidates(entry: dict, products: list[dict], keys: set[str]) -> list[str]:
     out = [b["cis"] for b in entry.get("brands") or [] if b.get("cis")]
     if entry.get("cis"):
         out.append(entry["cis"])
-    out += [p["cis"] for p, _ in fetch_bdpm.rank(products, keys)]
+    out += [p["cis"] for p, _ in bdpm.rank(products, keys)]
     out += sorted(p["cis"] for p in products
                   if p["marketed"] and "active" in p["status"].lower())
     return list(dict.fromkeys(out))
@@ -243,7 +243,7 @@ def page_text(product: dict, cis: str, copy: dict) -> str:
     """The stored quote-gate page: provenance header, then each section. A copy that
     is not a CIS product (an EPAR found by name) brings its own ``ids`` header lines."""
     head = [f"# {product.get('denomination') or cis}", *(copy.get("ids") or [f"cis: {cis}"]),
-            f"source: {copy.get('source') or fetch_bdpm.RCP_URL.format(cis=cis)}",
+            f"source: {copy.get('source') or bdpm.RCP_URL.format(cis=cis)}",
             f"fetched: {copy['fetched']}", f"date_source: {copy['date_source']}",
             f"copied_from: {copy['copied_from']}",
             f"licence: {copy.get('licence') or 'Licence Ouverte / Open Licence (Etalab)'}", ""]
@@ -297,11 +297,11 @@ def main() -> int:
     only = {d.strip() for d in args.only.split(",")} if args.only else None
     labels = json.loads((ROOT / "tools" / "generated_cache" / "bdpm_labels.json")
                         .read_text(encoding="utf-8"))
-    products = fetch_bdpm.load_products(fetch_bdpm.read_table(
-        fetch_bdpm.BASE_DIR / fetch_bdpm.PRODUCTS_FILE))
-    compo = fetch_bdpm.load_compo(fetch_bdpm.read_table(
-        fetch_bdpm.BASE_DIR / fetch_bdpm.COMPO_FILE))
-    titles = fetch_bdpm.fr_titles()
+    products = bdpm.load_products(bdpm.read_table(
+        bdpm.BASE_DIR / bdpm.PRODUCTS_FILE))
+    compo = bdpm.load_compo(bdpm.read_table(
+        bdpm.BASE_DIR / bdpm.COMPO_FILE))
+    titles = bdpm.fr_titles()
     manifest = load_manifest(args.justelesrcp)
     ema = load_manifest(args.justelesrcp, ".scrape-ema-manifest.json")
     cache = json.loads(CACHE_PATH.read_text(encoding="utf-8")) if CACHE_PATH.exists() else {}
@@ -313,8 +313,8 @@ def main() -> int:
         did = drug["id"]
         if (only and did not in only) or drugs_io.is_combination(drug):
             continue  # a combination's RCP is not this drug's
-        keys = fetch_bdpm.drug_keys(drug, titles)
-        found = fetch_bdpm.products_for(drug, keys, products, compo,
+        keys = bdpm.drug_keys(drug, titles)
+        found = bdpm.products_for(drug, keys, products, compo,
                                         COMBO_PARTNERS.get(did, ()))
         entry = labels.get(did, {})
         chosen = None

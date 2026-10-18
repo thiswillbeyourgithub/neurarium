@@ -53,13 +53,11 @@ Built with the help of Claude Code.
 from __future__ import annotations
 
 import argparse
-import datetime
 import json
 import os
 import re
 import sys
 import urllib.parse
-import urllib.request
 
 from bs4 import BeautifulSoup, Tag
 
@@ -68,12 +66,9 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)          # sibling fetch_ki.py
 import fetch_ki  # noqa: E402  (reuse norm / parse_ki / NAME_PATTERNS, no duplication)
 sys.path.insert(0, os.path.dirname(HERE))
-import polite_http  # noqa: E402 (the one polite GET + User-Agent)
+from lib.corpora.wikipedia import (  # noqa: E402  (the corpus #9 store, one reader)
+    PAGES_DIR, RAW_DIR, fetch_page, load_valid_ids, store_page, stored_meta, title_slug)
 
-DATA_DIR = os.path.join(REPO, "data_sources", "wikipedia")
-RAW_DIR = os.path.join(DATA_DIR, "raw")
-PAGES_DIR = os.path.join(DATA_DIR, "pages")
-META_PATH = os.path.join(REPO, "public", "data", "meta.json")
 API = "https://en.wikipedia.org/w/api.php"
 
 # Greek letters Wikipedia uses in receptor names -> the latin token our ids use
@@ -117,14 +112,6 @@ TARGET_HEAD_RE = re.compile(r"target|site|receptor|protein|compound")
 # one Ki can't be attributed to one target, so drop it. A range dash is flanked by
 # spaces, which never happens inside a single code ("5-HT 2A" has no spaced dash).
 RANGE_RE = re.compile(r".+\s[–—-]\s.+")
-
-
-def slugify(title: str) -> str:
-    """Filesystem slug for a page title (matches the ?title= form, lower-cased).
-
-    The rule lives in ``fetch_cyp_wikipedia.title_slug`` so stdlib readers share it."""
-    import fetch_cyp_wikipedia  # sibling module, stdlib-only
-    return fetch_cyp_wikipedia.title_slug(title)
 
 
 def clean_cell(text: str) -> str:
@@ -262,36 +249,6 @@ def parse_ki_cell(raw: str):
 # Fetch + store
 # --------------------------------------------------------------------------- #
 
-def fetch_page(title: str, lang: str = "en") -> dict:
-    """Fetch the rendered article (action=parse) pinned to its current revision.
-
-    `lang` selects the Wikipedia edition (en/fr/...); `langlinks` is returned so a
-    caller can hop to the same article on another edition (EN -> FR for brand names).
-    """
-    api = f"https://{lang}.wikipedia.org/w/api.php"
-    q = urllib.parse.urlencode({
-        "action": "parse", "page": title, "prop": "text|revid|displaytitle|langlinks",
-        "format": "json", "redirects": 1, "formatversion": 2})
-    req = polite_http.request(f"{api}?{q}")
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        data = json.load(resp)
-    if "error" in data:
-        raise SystemExit(f"Wikipedia API error for {title!r} ({lang}): {data['error']}")
-    p = data["parse"]
-    real = p["title"]
-    return {
-        "title": real,
-        "lang": lang,
-        "revid": p["revid"],
-        "html": p["text"],
-        "langlinks": p.get("langlinks", []),
-        "url": f"https://{lang}.wikipedia.org/wiki/{urllib.parse.quote(real.replace(' ', '_'))}",
-        "oldid_url": f"https://{lang}.wikipedia.org/w/index.php?oldid={p['revid']}",
-        "fetched_at": datetime.datetime.now(datetime.timezone.utc)
-                      .replace(microsecond=0).isoformat(),
-    }
-
-
 def row_text(tr: Tag) -> str:
     """One <tr> -> 'cell | cell | ...' (non-empty cells only). The single source of
     truth for a row's text, used BOTH for the stored page AND for a Ki source's
@@ -325,28 +282,6 @@ def render_page_text(soup: BeautifulSoup) -> str:
         elif el.name == "table":
             out.extend(table_to_text_rows(el))
     return "\n".join(out) + "\n"
-
-
-def store_page(page: dict, page_text: str,
-               pages_dir: str = PAGES_DIR, raw_dir: str = RAW_DIR) -> tuple[str, str]:
-    """Write raw/<slug>.html + pages/<slug>.md, both header-stamped. Returns paths.
-
-    `pages_dir`/`raw_dir` default to the EN store; the FR brand pass points them at
-    the FR sibling (pages_fr/, raw_fr/) so each edition keeps its own quote-gate tree.
-    """
-    os.makedirs(raw_dir, exist_ok=True)
-    os.makedirs(pages_dir, exist_ok=True)
-    slug = slugify(page["title"])
-    header = (f"source: {page['url']}\nrevision: {page['revid']}\n"
-              f"permalink: {page['oldid_url']}\nfetched_at: {page['fetched_at']}\n")
-    raw_path = os.path.join(raw_dir, f"{slug}.html")
-    with open(raw_path, "w", encoding="utf-8") as f:
-        f.write(f"<!--\n{header}-->\n{page['html']}")
-    pages_path = os.path.join(pages_dir, f"{slug}.md")
-    with open(pages_path, "w", encoding="utf-8") as f:
-        f.write(f"<!-- {page['title']} -->\n" + header.replace("\n", " | ") + "\n\n"
-                + page_text)
-    return raw_path, pages_path
 
 
 # --------------------------------------------------------------------------- #
@@ -550,11 +485,6 @@ def extract_bindings(soup: BeautifulSoup, valid_ids: set[str]) -> dict:
 
 # --------------------------------------------------------------------------- #
 
-def load_valid_ids() -> set[str]:
-    with open(META_PATH, encoding="utf-8") as f:
-        return set(json.load(f)["drug_targets"].keys())
-
-
 def drug_title(drug_id: str) -> str | None:
     """Best page title for a drug id: its Wikipedia URL leaf, else its name, else
     None for an id not on the roster. A corrupt ``drugs_data.jsonl`` raises rather
@@ -572,15 +502,6 @@ def drug_title(drug_id: str) -> str | None:
 # --apply: write the extracted Ki into drugs_data.jsonl (PDSP fallback)
 # --------------------------------------------------------------------------- #
 
-HEADER_RE = re.compile(r"revision:\s*(\S+).*?permalink:\s*(\S+)", re.S)
-
-
-def _stored_meta(raw_html: str) -> tuple[str, str]:
-    """(revid, permalink) from the header comment we stamped into raw/<slug>.html."""
-    m = HEADER_RE.search(raw_html[:400])
-    return (m.group(1), m.group(2)) if m else ("", "")
-
-
 def extract_stored(slug: str, valid_ids: set[str]) -> tuple[dict, str] | None:
     """Parse a stored raw/<slug>.html -> (extraction result, permalink), or None."""
     raw_path = os.path.join(RAW_DIR, f"{slug}.html")
@@ -588,7 +509,7 @@ def extract_stored(slug: str, valid_ids: set[str]) -> tuple[dict, str] | None:
         return None
     with open(raw_path, encoding="utf-8") as f:
         html = f.read()
-    _, permalink = _stored_meta(html)
+    _, permalink = stored_meta(html)
     return extract_bindings(BeautifulSoup(html, "html.parser"), valid_ids), permalink
 
 
@@ -639,13 +560,13 @@ def apply_all(only: str | None = None) -> None:
         title = drug_title(d["id"])
         if not title or fetch_ki.drugs_io.is_combination(d):
             continue
-        got = extract_stored(slugify(title), valid_ids)
+        got = extract_stored(title_slug(title), valid_ids)
         if got is None:
             continue
         res, permalink = got
         wiki = {t: w for t, w in res["bindings"].items()
                 if (d["id"], t) not in WIKI_KI_BLOCKLIST}
-        slug = slugify(title)
+        slug = title_slug(title)
         # Idempotency: drop our prior affinity_only adds + Ki annotations, keeping any
         # PDSP/other Ki and any hand-authored binding untouched.
         d["bindings"] = [b for b in d["bindings"]
@@ -718,8 +639,8 @@ def refresh_all(pause: float = 1.0) -> None:
             failed.append(f"{title} ({why}): {exc}")
             continue
         store_page(page, render_page_text(BeautifulSoup(page["html"], "html.parser")))
-        if not why.startswith("drug ") and slugify(page["title"]) != why:
-            moved.append(f"{why} -> {slugify(page['title'])}")
+        if not why.startswith("drug ") and title_slug(page["title"]) != why:
+            moved.append(f"{why} -> {title_slug(page['title'])}")
         print(f"[{i}/{len(titles)}] {page['title']} rev {page['revid']}", flush=True)
         time.sleep(pause)
     for line in moved:
@@ -756,7 +677,7 @@ def main() -> None:
     valid_ids = load_valid_ids()
 
     if args.no_fetch:
-        slug = slugify(title)
+        slug = title_slug(title)
         raw_path = os.path.join(RAW_DIR, f"{slug}.html")
         if not os.path.exists(raw_path):
             raise SystemExit(f"no stored page at {raw_path}; run without --no-fetch first")
@@ -773,7 +694,7 @@ def main() -> None:
     soup = BeautifulSoup(page["html"], "html.parser")
     res = extract_bindings(soup, valid_ids)
 
-    slug = slugify(page["title"])
+    slug = title_slug(page["title"])
     out = {
         "drug": args.drug, "title": page["title"], "slug": slug,
         "revid": page["revid"], "url": page.get("oldid_url", ""),

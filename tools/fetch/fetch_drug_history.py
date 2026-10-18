@@ -39,9 +39,9 @@ import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
 from worklist_io import merge_scoped  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402 (page_for)
+from lib.corpora import wikipedia as wikistore  # noqa: E402 (page_for)
 import fetch_category_worklist as catwl  # noqa: E402 (_fr_slug, PAGES_FR, BRAND_WORKLIST)
-import fetch_tmax  # noqa: E402 (sentences)
+from lib.parse import durations  # noqa: E402
 from data_generators import history  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "drug_history_worklist.json"
@@ -86,7 +86,7 @@ def section_sentences(text: str, corpus: str) -> list[str]:
             continue
         if current == "" or current in keep:
             lines.append(line)
-    return list(fetch_tmax.sentences("\n".join(lines)))
+    return list(durations.sentences("\n".join(lines)))
 
 
 def candidates_in(text: str, corpus: str, page: str) -> list[dict]:
@@ -109,7 +109,7 @@ def candidates_in(text: str, corpus: str, page: str) -> list[dict]:
 def candidates(drug: dict, brand: dict) -> list[dict]:
     """The drug's EN candidates, then its FR ones."""
     out: list[dict] = []
-    en = cypwiki.page_for(drug)
+    en = wikistore.page_for(drug)
     if en and os.path.exists(en):
         slug = os.path.splitext(os.path.basename(en))[0]
         out += candidates_in(Path(en).read_text("utf-8", errors="replace"),

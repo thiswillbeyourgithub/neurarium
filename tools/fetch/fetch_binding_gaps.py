@@ -25,7 +25,7 @@ Two inputs per drug, both minus every target it already covers
   of the stored line);
 * **prose**: the article's action-verb paragraphs (``fetch_metabolite_bindings.action_lines``,
   the same extractor the direction pass uses) cut into sentences
-  (``fetch_cyp_wikipedia.SENTENCE_SPLIT``), each carrying a direction word and naming a
+  (``lib.corpora.wikipedia.SENTENCE_SPLIT``), each carrying a direction word and naming a
   modeled target under the shared matcher ``tools/target_aliases.py``.
 
 A candidate is one (sentence, target) pair. Pairs are **dropped** here when the clause
@@ -73,7 +73,7 @@ sys.path.insert(0, os.path.join(REPO, "tools"))
 import binding_gaps as bg  # noqa: E402  (the predicates the applier re-runs)
 import drugs_io  # noqa: E402
 import fetch_binding_directions as bd  # noqa: E402  (DIRECTION_RE: a stated direction)
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402  (stored-page lookup + sentence split)
+from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup + sentence split)
 import fetch_metabolite_bindings as mb  # noqa: E402  (prose action-line extractor)
 import target_aliases as ta  # noqa: E402
 import worklist_io  # noqa: E402
@@ -108,7 +108,7 @@ def prose_sentences(page_text: str) -> list[str]:
     """
     out: list[str] = []
     for para in mb.action_lines(page_text, limit=None, max_commas=None):
-        for sent in cypwiki.SENTENCE_SPLIT.split(para):
+        for sent in wikistore.SENTENCE_SPLIT.split(para):
             sent = sent.strip()
             if sent and bd.DIRECTION_RE.search(sent) and sent not in out:
                 out.append(sent)
@@ -152,7 +152,7 @@ def build(drugs: list[dict], only: set[str] | None = None) -> tuple[list[dict], 
     for drug in sorted(drugs, key=lambda d: d["id"]):
         if (only is not None and drug["id"] not in only) or not bg.offerable(drug):
             continue
-        path = cypwiki.page_for(drug)
+        path = wikistore.page_for(drug)
         if not path:
             warnings.append(f"{drug['id']}: no stored Wikipedia article - skipped")
             continue

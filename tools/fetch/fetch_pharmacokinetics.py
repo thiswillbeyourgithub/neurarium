@@ -42,6 +42,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 import drugs_io                                                 # noqa: E402
+from lib.parse.durations import parse_duration  # noqa: E402
 import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
 from io_atomic import atomic_write_json  # noqa: E402
 
@@ -53,51 +54,8 @@ _HALF_LIFE = re.compile(r"half-?life", re.IGNORECASE)
 # (the negative "no active metabolites" is kept too: it is a real, useful signal).
 _METABOLITE = re.compile(r"metaboli", re.IGNORECASE)
 
-# One number, optionally a range "X-Y" / "X to Y", then a time unit. Handles the en
-# dash Stahl uses for ranges ("24-48") and decimals ("2.7 hours").
-_DURATION = re.compile(
-    r"(?P<lo>\d+(?:\.\d+)?)\s*(?:[-–]|to)?\s*(?P<hi>\d+(?:\.\d+)?)?\s*"
-    r"(?P<unit>minute|min|hour|hr|day|week)s?\b",
-    re.IGNORECASE,
-)
-_UNIT_HOURS = {
-    "minute": 1 / 60, "min": 1 / 60,
-    "hour": 1.0, "hr": 1.0,
-    "day": 24.0, "week": 168.0,
-}
-
 
 _norm_name = drugs_io.ascii_key  # a drug name folded for matching
-
-
-def parse_duration(line: str) -> dict | None:
-    """Parse the first duration in ``line`` into ``{hours, hours_max?}`` (or None).
-
-    Chooses the unit from the matched token and converts to canonical hours; a range
-    ("24-48 hours") yields ``hours`` + ``hours_max``. Returns None when the line names
-    no ``<number> <time-unit>`` duration.
-
-    Parameters
-    ----------
-    line
-        A candidate half-life line.
-
-    Returns
-    -------
-    dict or None
-        ``{"hours": float, "hours_max": float?}`` or None.
-    """
-    m = _DURATION.search(line)
-    if not m:
-        return None
-    unit = _UNIT_HOURS[m.group("unit").lower()]
-    lo = float(m.group("lo")) * unit
-    rec = {"hours": round(lo, 3)}
-    if m.group("hi"):
-        hi = float(m.group("hi")) * unit
-        if hi >= lo:
-            rec["hours_max"] = round(hi, 3)
-    return rec
 
 
 def load_index() -> dict[str, tuple[int, int]]:

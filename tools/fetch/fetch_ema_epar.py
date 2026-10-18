@@ -19,9 +19,9 @@ Both are downloaded once into ``data_sources/ema/raw/`` (``--refresh-ema`` re-pu
 Match (:func:`epar_matches`): a **human**, **authorised** EPAR whose active substance
 is exactly one molecule (a ``;`` / ``/`` / ``+`` / `` and `` list is a combination and
 never matches a single drug) and whose folded molecule, salt words stripped
-(``fetch_bdpm.molecule_key`` with :data:`EN_SALT_WORDS`), is one of the drug's
-own ``fetch_bdpm.drug_keys``. A stereo-qualified drug id joins only through
-``fetch_bdpm.FR_ALIASES`` (so dexmethylphenidate never meets methylphenidate) and a
+(``bdpm.molecule_key`` with :data:`EN_SALT_WORDS`), is one of the drug's
+own ``bdpm.drug_keys``. A stereo-qualified drug id joins only through
+``bdpm.FR_ALIASES`` (so dexmethylphenidate never meets methylphenidate) and a
 stereo-tagged substance is let through only by ``chirality.tag_allowed``. Several
 matches (the originator and its generics) are ranked: a brand the drug already lists
 first, then the non-generic, then the oldest authorisation.
@@ -54,7 +54,7 @@ sys.path.insert(0, str(HERE))
 import chirality  # noqa: E402
 import polite_http  # noqa: E402 (the one polite GET)
 import salt_words  # noqa: E402 (the shared English salt words)
-import fetch_bdpm  # noqa: E402 (fold, molecule_key)
+from lib.corpora import bdpm  # noqa: E402 (fold, molecule_key)
 
 EMA = "https://www.ema.europa.eu/en/documents/report/"
 MEDICINES_URL = EMA + "medicines-output-medicines_json-report_en.json"
@@ -90,13 +90,13 @@ def substances(active: str) -> list[tuple[str, str | None]]:
     [('BUPROPION', None), ('NALTREXONE', None)]
     """
     parts = [p for p in COMBO_SPLIT.split(active or "") if p.strip()]
-    return [fetch_bdpm.molecule_key(p, EN_SALT_WORDS) for p in parts]
+    return [bdpm.molecule_key(p, EN_SALT_WORDS) for p in parts]
 
 
 def epar_matches(drug: dict, keys: set[str], medicines: list[dict]) -> list[dict]:
     """The human, authorised, single-substance EPARs of ``drug`` (folded ``keys``,
-    ``fetch_bdpm.drug_keys``), best first (see the module docstring)."""
-    brands = {fetch_bdpm.fold(b.get("name") or "") for b in drug.get("brands") or []}
+    ``bdpm.drug_keys``), best first (see the module docstring)."""
+    brands = {bdpm.fold(b.get("name") or "") for b in drug.get("brands") or []}
     out = []
     for rec in medicines:
         if rec.get("category") != "Human" or rec.get("medicine_status") != "Authorised":
@@ -108,7 +108,7 @@ def epar_matches(drug: dict, keys: set[str], medicines: list[dict]) -> list[dict
         if molecule in keys and chirality.tag_allowed(tag, drug["id"]):
             out.append(rec)
     def rank(rec):
-        name = fetch_bdpm.fold(rec.get("name_of_medicine") or "")
+        name = bdpm.fold(rec.get("name_of_medicine") or "")
         named = name in brands or name.split(" ")[0] in brands
         return (not named, rec.get("generic") == "Yes",
                 iso(rec.get("marketing_authorisation_date") or "") or "9999",

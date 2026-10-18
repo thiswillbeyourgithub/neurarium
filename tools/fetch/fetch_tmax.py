@@ -55,7 +55,6 @@ Built with the help of Claude Code.
 import argparse
 import json
 import os
-import re
 import sys
 from pathlib import Path
 
@@ -68,7 +67,8 @@ import drugs_io                                                 # noqa: E402
 import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
 from page_file import page_file  # noqa: E402 (refuses a path-like page)
 import worklist_io  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki                            # noqa: E402 (page_for)
+from lib.corpora import wikipedia as wikistore                            # noqa: E402 (page_for)
+from lib.parse.durations import PEAK_RE, durations_in, durations_in_fr, sentences  # noqa: E402
 import fetch_pharmacokinetics as pk                              # noqa: E402 (spans, units)
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "tmax_worklist.json"
@@ -82,132 +82,10 @@ BDPM_LABELS = ROOT / "tools" / "generated_cache" / "bdpm_labels.json"
 # every drug, and the maps are small).
 _LABELS: dict[Path, dict] = {}
 
-# A line worth offering: it names a PEAK. Kept permissive on purpose (a worklist
-# vetoes nothing), but it must name the peak itself, never merely an "onset", which is
-# the clinical-effect fact this pass must not confuse with a Tmax.
-PEAK_RE = re.compile(
-    r"(t\s*_?max\b|\bc\s*max\b|peak\s+(?:plasma|serum|blood)|"
-    r"peak\s+(?:plasma\s+|serum\s+)?(?:concentration|level)|"
-    r"maximum\s+(?:plasma\s+|serum\s+)?concentration|time\s+to\s+peak|"
-    r"reach(?:es|ed|ing)?\s+(?:its\s+)?peak|"
-    # French (corpus #16 BDPM RCPs): "concentrations plasmatiques maximales", "pic
-    # plasmatique". Phrases no English page holds, so the English scan is unchanged.
-    r"concentrations?\s+(?:plasmatiques?\s+|s[ée]riques?\s+)?maximales?|"
-    r"pics?\s+(?:plasmatiques?|s[ée]riques?|de\s+concentration))", re.IGNORECASE)
 
 # A candidate line longer than this is a paragraph the page happens to hold on one
 # line, not a sentence: it would make a quote nobody can check by eye.
 MAX_LINE = 400
-
-
-def durations_in(line: str) -> list[dict]:
-    """Every ``{hours, hours_max?}`` duration stated in one line, left to right.
-
-    The applier gates a judged Tmax against this list, so a number the quote does not
-    contain cannot be written. Reuses ``fetch_pharmacokinetics``'s unit table rather
-    than restating it, since the two passes must agree on what "2-4 h" means.
-
-    Parameters
-    ----------
-    line
-        A candidate line.
-
-    Returns
-    -------
-    list of dict
-        One record per duration found; empty when the line states none.
-    """
-    out: list[dict] = []
-    for m in pk._DURATION.finditer(line):
-        unit = pk._UNIT_HOURS[m.group("unit").lower()]
-        lo = float(m.group("lo")) * unit
-        rec = {"hours": round(lo, 3)}
-        hi = m.group("hi")
-        if hi:
-            hi_h = float(hi) * unit
-            if hi_h >= lo:
-                rec["hours_max"] = round(hi_h, 3)
-        out.append(rec)
-    return out
-
-
-# The French duration shape of an RCP: "1 heure", "1,5 h", "1 h 30", "1 à 3 heures",
-# "entre 2 et 4 heures", "30 min à 1 heure 30", "30 minutes". Separate from
-# ``fetch_pharmacokinetics``'s English table so the English corpora's parsed durations
-# never change under them.
-_NUM_FR = r"\d+(?:[.,]\d+)?"
-_UNIT_FR = r"(?:heures?|h|minutes?|min|jours?|semaines?)(?![^\W\d_])"
-# One amount: "1,5 h", "30 minutes", or hours-and-minutes "1 h 30" / "1h30" / "1 heure 30".
-_AMOUNT_FR = (rf"(?:(?P<{{g}}h>\d+)\s*h(?:eures?)?\s*(?P<{{g}}m>[0-5]\d)(?!\s*(?:%|\d|[.,]\d))"
-              rf"|(?P<{{g}}n>{_NUM_FR})\s*(?P<{{g}}u>{_UNIT_FR})?)")
-_DURATION_FR = re.compile(
-    r"(?P<entre>\bentre\s+)?" + _AMOUNT_FR.format(g="lo")
-    + r"(?:\s*(?P<conn>[-–]|à|et)\s*" + _AMOUNT_FR.format(g="hi") + r")?",
-    re.IGNORECASE)
-_UNIT_HOURS_FR = {"heure": 1.0, "h": 1.0, "minute": 1 / 60, "min": 1 / 60,
-                  "jour": 24.0, "semaine": 168.0}
-
-
-def _hours_fr(m, g: str, unit: str | None) -> float | None:
-    """One matched amount in hours, or None when it carries no unit."""
-    if m.group(f"{g}h"):
-        return int(m.group(f"{g}h")) + int(m.group(f"{g}m")) / 60
-    unit = (m.group(f"{g}u") or unit or "").lower().rstrip("s")
-    if not unit:
-        return None
-    return float(m.group(f"{g}n").replace(",", ".")) * _UNIT_HOURS_FR[unit]
-
-
-def durations_in_fr(line: str) -> list[dict]:
-    """``durations_in`` for a French line (decimal comma, "à" ranges, "1 h 30").
-
-    A range's low end borrows the high end's unit ("1 à 3 heures"). "et" joins a range
-    only after "entre": "en 2 et 3 heures respectivement" is two values, not a range.
-
-    >>> durations_in_fr("un Tmax atteint en 1 heure environ")
-    [{'hours': 1.0}]
-    >>> durations_in_fr("entre 1,5 et 3 heures, ou 30 minutes")
-    [{'hours': 1.5, 'hours_max': 3.0}, {'hours': 0.5}]
-    >>> durations_in_fr("30 min à 1 heure 30 plus tard; environ 1h30 après")
-    [{'hours': 0.5, 'hours_max': 1.5}, {'hours': 1.5}]
-    >>> durations_in_fr("atteintes respectivement en 2 et 3 heures")
-    [{'hours': 2.0}, {'hours': 3.0}]
-    """
-    out: list[dict] = []
-    for m in _DURATION_FR.finditer(line):
-        has_hi = bool(m.group("hih") or m.group("hin"))
-        hi = _hours_fr(m, "hi", None) if has_hi else None
-        hi_unit = m.group("hiu") if has_hi else None
-        lo = _hours_fr(m, "lo", hi_unit if has_hi else None)
-        if lo is None:
-            continue
-        lo = round(lo, 3)
-        if hi is None:
-            out.append({"hours": lo})
-        elif m.group("conn").lower() == "et" and not m.group("entre"):
-            out += [{"hours": lo}, {"hours": round(hi, 3)}]
-        elif hi >= lo:
-            out.append({"hours": lo, "hours_max": round(hi, 3)})
-        else:
-            out.append({"hours": lo})
-    return out
-
-
-def sentences(text: str):
-    """Yield the page's checkable units: one sentence, or one flattened table row.
-
-    A stored article keeps each table as ``"cell | cell | ..."`` lines, which carry no
-    sentence punctuation, so splitting on ``.``/``;`` leaves such a row whole and it
-    stays quotable verbatim exactly as the Ki passes quote it.
-    """
-    for raw in text.splitlines():
-        line = raw.strip().lstrip("#*->").strip()
-        if not line:
-            continue
-        for part in re.split(r"(?<=[.;])\s+", line):
-            part = part.strip()
-            if part:
-                yield part
 
 
 def candidates_in(text: str, corpus: str, page, pattern=PEAK_RE,
@@ -233,7 +111,7 @@ def candidates_in(text: str, corpus: str, page, pattern=PEAK_RE,
 
 def wikipedia_candidates(drug: dict, pattern=PEAK_RE) -> list[dict]:
     """Candidates from the drug's own stored English article (corpus #9)."""
-    path = cypwiki.page_for(drug)
+    path = wikistore.page_for(drug)
     if not path or not os.path.exists(path):
         return []
     slug = os.path.splitext(os.path.basename(path))[0]

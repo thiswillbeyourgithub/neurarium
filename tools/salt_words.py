@@ -6,7 +6,7 @@ Upper-case; a caller folding to lower case compares ``word.upper()``. An ester t
 a long-acting form of the same molecule (haloperidol DECANOATE) is listed too: it is the
 same molecule for a name join.
 
-Not merged with the French ``fetch_bdpm.SALT_WORDS``: its "D" / "DE" would strip the
+Not merged with the French ``lib.corpora.bdpm.SALT_WORDS``: its "D" / "DE" would strip the
 "d-" of an English stereo prefix.
 
 Stdlib only. Built with the help of Claude Code.

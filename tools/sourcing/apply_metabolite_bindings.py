@@ -61,6 +61,7 @@ import drugs_io                                                 # noqa: E402
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
 import fetch_ki                                                 # noqa: E402  (PDSP Ki lookup)
 import fetch_wikipedia_pharmacology as wp                       # noqa: E402  (Ki obj + page store)
+from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
 from data_generators.drugs import DRUG_ACTIONS                  # noqa: E402  (valid action keys)
 
 WORKLIST = ROOT / "tools" / "generated_cache" / "metabolite_bindings_worklist.json"
@@ -78,10 +79,10 @@ GATE = PageGate(registry_pages())
 def _permalink(slug: str) -> str:
     """The revision permalink stamped into raw/<slug>.html (cited by a Wikipedia Ki)."""
     try:
-        html = open(wp.RAW_DIR + f"/{slug}.html", encoding="utf-8").read()
+        html = open(wikistore.RAW_DIR + f"/{slug}.html", encoding="utf-8").read()
     except OSError:
         return ""
-    return wp._stored_meta(html)[1]
+    return wikistore.stored_meta(html)[1]
 
 
 def _pdsp_ki(name: str, target: str) -> dict | None:
@@ -204,7 +205,7 @@ def main() -> int:
 
     worklist = {e["key"]: e for e in worklist_io.read(WORKLIST)}
     judged = worklist_io.read(JUDGED, required=False, default={})
-    valid_ids = wp.load_valid_ids()
+    valid_ids = wikistore.load_valid_ids()
     drugs = drugs_io.load_drugs()
     store = drugs_io.load_metabolites()
     by_id = {m["id"]: m for m in store}
@@ -221,7 +222,7 @@ def main() -> int:
         if only is not None and not only & set(mm["parents"]):
             continue
         m = by_id[mm["id"]]
-        key = wp.slugify(m["name"]).lower()
+        key = wikistore.title_slug(m["name"]).lower()
         entry = worklist.get(key)
         if not entry:
             warn(f"{m['name']}: no worklist entry (run the fetcher) - skipped")

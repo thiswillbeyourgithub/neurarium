@@ -114,7 +114,7 @@ def apply_bdpm(drugs: list[dict], labels: dict, pages: Path = BDPM_PAGES):
     """Add the French brands ``fetch_bdpm.py`` read off the BDPM product table.
 
     A code read, not a model's: the brand is the denomination's first word, already
-    stripped of generics by ``fetch_bdpm.brand_of``. Each is re-found on its product's
+    stripped of generics by ``lib.corpora.bdpm.brand_of``. Each is re-found on its product's
     stored header page (the denomination line), stamped ``extraction: "code"`` so no
     judge is needed, and tagged ``fr`` (every BDPM product is marketed in France).
     Returns ``(drugs touched, brands added, skipped-present, misses)``.

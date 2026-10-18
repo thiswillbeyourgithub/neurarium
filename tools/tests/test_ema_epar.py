@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
-import fetch_bdpm  # noqa: E402
+from lib.corpora import bdpm  # noqa: E402
 import fetch_bdpm_rcp as R  # noqa: E402
 import fetch_ema_epar as E  # noqa: E402
 import fetch_workup as FW  # noqa: E402
@@ -44,7 +44,7 @@ def drug(did, name, brands=()):
 
 def matches(d, medicines):
     return [r["name_of_medicine"] for r in
-            E.epar_matches(d, fetch_bdpm.drug_keys(d, {}), medicines)]
+            E.epar_matches(d, bdpm.drug_keys(d, {}), medicines)]
 
 
 class MatcherTest(unittest.TestCase):
@@ -151,7 +151,7 @@ class PageBuilderTest(unittest.TestCase):
 
     def test_page_is_the_epar_cited_at_its_ema_pdf(self):
         d = drug("guanfacine", "Guanfacine")
-        page, product, copy = R.epar_copy(d, fetch_bdpm.drug_keys(d, {}), self.epar,
+        page, product, copy = R.epar_copy(d, bdpm.drug_keys(d, {}), self.epar,
                                           Path(self.tmp.name), {}, False)
         self.assertEqual(page, "EMEA-H-C-003759")
         self.assertEqual(copy["ema"]["holder"], "Intuniv Holder")
@@ -167,7 +167,7 @@ class PageBuilderTest(unittest.TestCase):
 
     def test_no_epar_no_page(self):
         d = drug("atomoxetine", "Atomoxetine", ["Strattera"])
-        self.assertIsNone(R.epar_copy(d, fetch_bdpm.drug_keys(d, {}), self.epar,
+        self.assertIsNone(R.epar_copy(d, bdpm.drug_keys(d, {}), self.epar,
                                       Path(self.tmp.name), {}, False))
 
 

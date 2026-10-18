@@ -45,7 +45,7 @@ import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
 from worklist_io import merge_scoped  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402 (page_for, PAGES)
+from lib.corpora import wikipedia as wikistore  # noqa: E402 (page_for, PAGES_DIR)
 import fetch_drug_history  # noqa: E402 (section_sentences)
 from data_generators import history, origin  # noqa: E402
 
@@ -126,7 +126,7 @@ INSTRUCTIONS = (
 
 
 def page_path(slug: str) -> Path:
-    return Path(cypwiki.PAGES) / f"{slug}.md"
+    return Path(wikistore.PAGES_DIR) / f"{slug}.md"
 
 
 def _candidate(page: str, line: str) -> dict:
@@ -135,7 +135,7 @@ def _candidate(page: str, line: str) -> dict:
 
 def drug_candidates(drug: dict) -> list[dict]:
     """The drug's offered sentences: lead + history-like sections, originator words."""
-    en = cypwiki.page_for(drug)
+    en = wikistore.page_for(drug)
     if not en or not os.path.exists(en):
         return []
     slug = os.path.splitext(os.path.basename(en))[0]

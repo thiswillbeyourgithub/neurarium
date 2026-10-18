@@ -227,8 +227,8 @@ def has_peak(lines: list[str]) -> bool:
     Reuses ``fetch_tmax``'s own matcher rather than restating it, so a label is kept
     exactly when the later worklist pass would find something to offer on it.
     """
-    import fetch_tmax                                           # local: avoids a cycle
-    return any(fetch_tmax.PEAK_RE.search(l) and fetch_tmax.durations_in(l)
+    from lib.parse import durations
+    return any(durations.PEAK_RE.search(l) and durations.durations_in(l)
                for l in lines)
 
 

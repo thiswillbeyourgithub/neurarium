@@ -65,6 +65,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)          # sibling fetch_wikipedia_pharmacology.py + fetch_ki.py
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch/store/extract; no dup)
+from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
 import fetch_ki as ki  # noqa: E402  (PDSP Ki: discover a metabolite's measured targets, corpus #5)
 from io_atomic import atomic_write_json  # noqa: E402
 import drugs_io  # noqa: E402
@@ -212,8 +213,8 @@ def load_page(title: str, no_fetch: bool, refresh: bool):
 
     Returns ``(found, real_title, slug, page_text, soup)``; ``found`` is False (and the
     rest best-effort) when the page is neither stored nor fetchable."""
-    slug = wp.slugify(title)
-    raw_path = os.path.join(wp.RAW_DIR, f"{slug}.html")
+    slug = wikistore.title_slug(title)
+    raw_path = os.path.join(wikistore.RAW_DIR, f"{slug}.html")
     if no_fetch or (os.path.exists(raw_path) and not refresh):
         if not os.path.exists(raw_path):
             return (False, title, slug, "", None)
@@ -223,16 +224,16 @@ def load_page(title: str, no_fetch: bool, refresh: bool):
         real_title = hm.group(1) if hm else title
     else:
         try:
-            page = wp.fetch_page(title)
+            page = wikistore.fetch_page(title)
         except SystemExit:
             return (False, title, slug, "", None)
         soup0 = BeautifulSoup(page["html"], "html.parser")
-        wp.store_page(page, wp.render_page_text(soup0))
+        wikistore.store_page(page, wp.render_page_text(soup0))
         html = f"<!-- {page['title']} -->\n{page['html']}"
         real_title = page["title"]
-        slug = wp.slugify(real_title)   # store_page slugs on the real title
+        slug = wikistore.title_slug(real_title)   # store_page slugs on the real title
     soup = BeautifulSoup(html, "html.parser")
-    page_md = os.path.join(wp.PAGES_DIR, f"{slug}.md")
+    page_md = os.path.join(wikistore.PAGES_DIR, f"{slug}.md")
     page_text = open(page_md, encoding="utf-8").read() if os.path.exists(page_md) else ""
     return (True, real_title, slug, page_text, soup)
 
@@ -268,10 +269,10 @@ def main() -> int:
     args = ap.parse_args()
 
     drugs = drugs_io.load_drugs()
-    valid_ids = wp.load_valid_ids()
+    valid_ids = wikistore.load_valid_ids()
     ptitles = parent_titles(drugs)
     metabs = drugs_io.non_modeled_metabolites(drugs, drugs_io.load_metabolites(),
-                                              key=lambda n: wp.slugify(n).lower())
+                                              key=lambda n: wikistore.title_slug(n).lower())
     if args.only:
         want = {k.strip().lower() for k in args.only.split(",") if k.strip()}
         metabs = [m for m in metabs if m["key"] in want]

@@ -43,7 +43,7 @@ import drugs_io  # noqa: E402
 from data_generators import origin  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 import fetch_drugsfda as fda  # noqa: E402
-import fetch_bdpm as bdpm  # noqa: E402
+from lib.corpora import bdpm  # noqa: E402
 
 FDA_TITLE_RE = re.compile(r"^# (Drugs@FDA application (\S+) \((.+)\))\s*$")
 BDPM_HOLDER_RE = re.compile(r"^(holder:\s*(.+?))\s*$")

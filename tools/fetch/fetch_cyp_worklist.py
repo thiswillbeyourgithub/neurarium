@@ -7,7 +7,7 @@ for the ``drug_enzymes`` node kind, mirroring ``fetch_pharmacokinetics.py`` and
 
 Why this exists
 ---------------
-The two older passes (``fetch_cyp.py`` over Stahl, ``fetch_cyp_wikipedia.py`` over
+The two older passes (``fetch_cyp.py`` over Stahl, ``lib/corpora/wikipedia.py`` over
 Wikipedia) decide the role themselves, from regular expressions. For Stahl that is
 defensible: its ``Pharmacokinetics`` block is a telegraphic bullet list whose shape is
 nearly a grammar ("Substrate for CYP2D6", "Inhibits CYP2C19"). For **Wikipedia prose it
@@ -76,7 +76,7 @@ from fetch_cyp import (  # noqa: E402  (one definition of each shared rule)
     load_pk_blocks,
     strip_html,
 )
-from fetch_cyp_wikipedia import (  # noqa: E402
+from lib.corpora.wikipedia import (  # noqa: E402
     INFOBOX_RE,
     KNOWN_ENZYMES,
     REFERENCE_RE,

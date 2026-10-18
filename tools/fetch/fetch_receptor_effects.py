@@ -46,7 +46,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 import fetch_classification_worklist as cls  # noqa: E402 (sentences, stahl_sentences, aliases)
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402 (slug_of)
+from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of)
 import fetch_demographics as demog  # noqa: E402 (abstract_lines)
 import fetch_europepmc as epmc  # noqa: E402 (EFFECT_SEARCH_LEDGER)
 import fetch_gtopdb_function as gfunc  # noqa: E402 (RAW, offerable)
@@ -213,7 +213,7 @@ def candidates(oid: str, owner: dict, stahl: list[tuple[int, str]],
             if hit:
                 out.append({"corpus": "stahl_essential", "page": page, "line": line,
                             key: hit})
-    slug = cypwiki.slug_of(owner["wikipedia"]) if owner["wikipedia"] else ""
+    slug = wikistore.slug_of(owner["wikipedia"]) if owner["wikipedia"] else ""
     slug = cls.PAGE_ALIASES.get(slug, slug)
     path = cls.WIKI_PAGES / f"{slug}.md"
     if slug and path.exists():

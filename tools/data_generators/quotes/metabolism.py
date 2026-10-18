@@ -8,7 +8,7 @@ from codeine or tramadol and why a CYP2D6 inhibitor changes what a venlafaxine d
 delivers.
 
 **Hand-curated on purpose, unlike every other enzyme row.** ``fetch_cyp.py`` and
-``fetch_cyp_wikipedia.py`` grep their claims because the source sentence has a fixed shape.
+``lib/corpora/wikipedia.py`` grep their claims because the source sentence has a fixed shape.
 This claim does not: the corpora state it as prose, in a dozen shapes, and the near misses
 are all *wrong in the same direction*. Three traps a pattern would fall into, all met while
 surveying the 36 metabolite rows:

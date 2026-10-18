@@ -62,10 +62,11 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)                       # sibling fetch_wikipedia_pharmacology.py
 sys.path.insert(0, os.path.join(REPO, "tools"))  # drugs_io
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch_page/store_page/etc.)
+from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
 from io_atomic import atomic_write_json  # noqa: E402
 import drugs_io  # noqa: E402
 
-DATA_DIR = wp.DATA_DIR                                    # data_sources/wikipedia
+DATA_DIR = wikistore.DATA_DIR                                    # data_sources/wikipedia
 PAGES_FR = os.path.join(DATA_DIR, "pages_fr")
 RAW_FR = os.path.join(DATA_DIR, "raw_fr")
 WORKLIST = os.path.join(REPO, "tools", "generated_cache", "brand_worklist.json")
@@ -162,16 +163,16 @@ def main():
                 fr_title, fr_slug = prev["fr_title"], prev["fr_slug"]
                 page_text = open(os.path.join(PAGES_FR, f"{fr_slug}.md"), encoding="utf-8").read()
             else:
-                en_page = wp.fetch_page(en_title, "en")
+                en_page = wikistore.fetch_page(en_title, "en")
                 fr_title = fr_title_of(en_page)
                 if not fr_title:
                     no_fr.append(f"{d['id']}: no FR article ({en_title})")
                     time.sleep(args.sleep)
                     continue
-                fr_page = wp.fetch_page(fr_title, "fr")
+                fr_page = wikistore.fetch_page(fr_title, "fr")
                 page_text = wp.render_page_text(BeautifulSoup(fr_page["html"], "html.parser"))
-                wp.store_page(fr_page, page_text, pages_dir=PAGES_FR, raw_dir=RAW_FR)
-                fr_slug = wp.slugify(fr_page["title"])
+                wikistore.store_page(fr_page, page_text, pages_dir=PAGES_FR, raw_dir=RAW_FR)
+                fr_slug = wikistore.title_slug(fr_page["title"])
                 time.sleep(args.sleep)
         except Exception as e:  # noqa: BLE001  (best-effort author-side fetch)
             no_fr.append(f"{d['id']}: fetch error {e!r}")

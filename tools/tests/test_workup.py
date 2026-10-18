@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
-import fetch_bdpm  # noqa: E402
+from lib.corpora import bdpm  # noqa: E402
 import fetch_bdpm_rcp as R  # noqa: E402
 import fetch_workup as FW  # noqa: E402
 import apply_workup as A  # noqa: E402
@@ -74,10 +74,10 @@ class CopyDatingTest(unittest.TestCase):
         self.raw, self.repo = base / "raw", base / "justelesRCP"
         self.raw.mkdir()
         (self.repo / "data" / "rcp").mkdir(parents=True)
-        self._raw_dir, fetch_bdpm.RAW_DIR = fetch_bdpm.RAW_DIR, self.raw
+        self._raw_dir, bdpm.RAW_DIR = bdpm.RAW_DIR, self.raw
 
     def tearDown(self):
-        fetch_bdpm.RAW_DIR = self._raw_dir
+        bdpm.RAW_DIR = self._raw_dir
         self.tmp.cleanup()
 
     def _gz(self, cis, html, mtime):

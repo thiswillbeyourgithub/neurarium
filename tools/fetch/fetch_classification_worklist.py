@@ -44,7 +44,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402 (slug_of, SENTENCE_SPLIT, REFERENCE_RE)
+from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of, SENTENCE_SPLIT, REFERENCE_RE)
 import target_aliases  # noqa: E402
 import worklist_io  # noqa: E402
 
@@ -54,7 +54,7 @@ STAHL_ESS_PAGES = ROOT / "data_sources" / "books" / "stahl_essential_pharmacolog
 
 MIN_LINE, MAX_LINE = 30, 600
 # An owner whose article URL is a redirect: the store names the file after the resolved
-# title. Listed rather than guessed, like ``fetch_cyp_wikipedia.PAGE_ALIASES``.
+# title. Listed rather than guessed, like ``lib.corpora.wikipedia.PAGE_ALIASES``.
 PAGE_ALIASES: dict[str, str] = {
     "cannabinoid_receptor_type_1": "cannabinoid_receptor_1",
     "4_aminobutyrate_aminotransferase": "4_aminobutyrate_transaminase",
@@ -100,10 +100,10 @@ def sentences(text: str) -> list[str]:
         para = " ".join(ln.strip() for ln in para.splitlines()
                         if ln.strip() and " | " not in ln and not ln.lstrip().startswith(
                             ("#", "<!--", "source:")))
-        if not para or cypwiki.REFERENCE_RE.search(para):
+        if not para or wikistore.REFERENCE_RE.search(para):
             continue
         para = para.lstrip("- ").strip()
-        for part in cypwiki.SENTENCE_SPLIT.split(para):
+        for part in wikistore.SENTENCE_SPLIT.split(para):
             part = part.strip()
             if MIN_LINE <= len(part) <= MAX_LINE:
                 out.append(part)
@@ -150,7 +150,7 @@ def stahl_sentences() -> list[tuple[int, str]]:
 def candidates(oid: str, owner: dict, stahl: list[tuple[int, str]],
                aliases: dict[str, list[str]]) -> list[dict]:
     out: list[dict] = []
-    slug = cypwiki.slug_of(owner["wikipedia"]) if owner["wikipedia"] else ""
+    slug = wikistore.slug_of(owner["wikipedia"]) if owner["wikipedia"] else ""
     slug = PAGE_ALIASES.get(slug, slug)
     path = WIKI_PAGES / f"{slug}.md"
     if slug and path.exists():

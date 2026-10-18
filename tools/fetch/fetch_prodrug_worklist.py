@@ -37,8 +37,8 @@ import drugs_io  # noqa: E402
 import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
 from worklist_io import merge_scoped  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402
-import fetch_tmax  # noqa: E402  (sentences(): the shared page splitter)
+from lib.corpora import wikipedia as wikistore  # noqa: E402
+from lib.parse import durations  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "prodrug_worklist.json"
 # Words a prodrug sentence uses. Broad on purpose: the judge and the applier's own
@@ -51,12 +51,12 @@ MAX_LINE = 600
 
 def candidates(drug: dict) -> list[dict]:
     """Every offered sentence of the drug's own English article."""
-    path = cypwiki.page_for(drug)
+    path = wikistore.page_for(drug)
     if not path or not os.path.exists(path):
         return []
     slug = os.path.splitext(os.path.basename(path))[0]
     out, seen = [], set()
-    for s in fetch_tmax.sentences(Path(path).read_text("utf-8", errors="replace")):
+    for s in durations.sentences(Path(path).read_text("utf-8", errors="replace")):
         if "|" in s or len(s) > MAX_LINE or s in seen or not PRODRUG_RE.search(s):
             continue
         seen.add(s)

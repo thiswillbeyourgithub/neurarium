@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.join(HERE, "fetch"))
 
 import chirality  # noqa: E402  (the optical-rotation tag grammar, read not re-invented)
 import target_aliases as ta  # noqa: E402
-import fetch_cyp_wikipedia as cypwiki  # noqa: E402  (stored-page lookup, stdlib)
+from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup, stdlib)
 from drugs_io import is_combination  # noqa: E402
 from fetch_ki import COARSE_MEMBERS  # noqa: E402  (stdlib module)
 
@@ -79,7 +79,7 @@ def _names(drug: dict) -> tuple[set[str], set[str]]:
     name counts as its own only when unqualified: "Methylphenidate (D)" is the
     d-enantiomer, so on another article its stem "Methylphenidate" names the racemate.
     """
-    path = cypwiki.page_for(drug)
+    path = wikistore.page_for(drug)
     title = os.path.splitext(os.path.basename(path))[0].replace("_", " ") if path else ""
     name = drug.get("name") or drug["id"]
     stem = name.split("(")[0].strip()

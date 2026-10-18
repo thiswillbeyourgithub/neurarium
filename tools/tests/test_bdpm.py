@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Unit tests for the BDPM corpus #16 fetcher join (``tools/fetch/fetch_bdpm.py``) and the
+"""Unit tests for the BDPM corpus #16 fetcher join (``tools/lib/corpora/bdpm.py``) and the
 French duration parsing it feeds into ``fetch_tmax``.
 
 Stdlib ``unittest`` only, over hand-built table rows, so it runs on a clone that lacks the
@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
-import fetch_bdpm as B  # noqa: E402
-import fetch_tmax  # noqa: E402
+from lib.corpora import bdpm as B  # noqa: E402
+from lib.parse import durations  # noqa: E402
 
 
 def product(cis, denomination, form="comprimé", route="orale", marketed=True):
@@ -155,24 +155,24 @@ class BrandTest(unittest.TestCase):
 
 class FrenchDurationTest(unittest.TestCase):
     def test_durations(self):
-        self.assertEqual(fetch_tmax.durations_in_fr("un Tmax atteint en 1 heure environ"),
+        self.assertEqual(durations.durations_in_fr("un Tmax atteint en 1 heure environ"),
                          [{"hours": 1.0}])
-        self.assertEqual(fetch_tmax.durations_in_fr("entre 1,5 et 3 heures"),
+        self.assertEqual(durations.durations_in_fr("entre 1,5 et 3 heures"),
                          [{"hours": 1.5, "hours_max": 3.0}])
-        self.assertEqual(fetch_tmax.durations_in_fr("de 15 à 17 heures"),
+        self.assertEqual(durations.durations_in_fr("de 15 à 17 heures"),
                          [{"hours": 15.0, "hours_max": 17.0}])
 
     def test_hours_and_minutes_and_mixed_units(self):
-        self.assertEqual(fetch_tmax.durations_in_fr("environ 1h30 après la prise"),
+        self.assertEqual(durations.durations_in_fr("environ 1h30 après la prise"),
                          [{"hours": 1.5}])
-        self.assertEqual(fetch_tmax.durations_in_fr("30 min à 1 heure 30 plus tard"),
+        self.assertEqual(durations.durations_in_fr("30 min à 1 heure 30 plus tard"),
                          [{"hours": 0.5, "hours_max": 1.5}])
 
     def test_et_is_a_range_only_after_entre(self):
         """"en 2 et 3 heures respectivement" is venlafaxine's 2 h and ODV's 3 h."""
-        self.assertEqual(fetch_tmax.durations_in_fr("respectivement en 2 et 3 heures"),
+        self.assertEqual(durations.durations_in_fr("respectivement en 2 et 3 heures"),
                          [{"hours": 2.0}, {"hours": 3.0}])
-        self.assertEqual(fetch_tmax.durations_in_fr("entre 2 et 4 heures"),
+        self.assertEqual(durations.durations_in_fr("entre 2 et 4 heures"),
                          [{"hours": 2.0, "hours_max": 4.0}])
 
     def test_bdpm_page_resolves_through_the_registry(self):
