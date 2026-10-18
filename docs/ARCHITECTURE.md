@@ -466,7 +466,7 @@ Viewer (`public/`):
   (named views + focus tween), `explode.js`, `see-inside.js`, `intro.js`, `quality.js`
   (adaptive quality), `selection.js` (halo + isolate state).
 - `js/boot/`: one `wire*()` per UI concern, called once from `main.js`: `controls.js` (Settings
-  pane), `toolbar.js` (reset + search popup), `shortcuts.js`, `picking.js` (canvas click / tap /
+  pane), `toolbar.js` (reset + search popup over `search/index.js`), `shortcuts.js`, `picking.js` (canvas click / tap /
   hover), `header-toggles.js` (theme + panel-only mode), `speed-slider.js`, `tour-steps.js` (the
   guided tour's steps), `url-bindings.js` (data-bound deep-link keys), `legends.js` (anatomy legend +
   colour key + arrow colour mode), plus the boot stages: `meshing.js` (baked / SDF-pool / synchronous
@@ -480,7 +480,7 @@ Viewer (`public/`):
   `sections.js`, `addons.js`, `reference.js`, `format.js`, `dom.js`).
 - `js/legend/`: the browse sections (`anatomy.js`, `targets.js`, `drugs.js`, `browse.js` for
   enzymes + effects, `key.js`, shared `item.js`). `js/about/`: the popups (`modals.js`) and the
-  Sources & provenance tally (`sourcing.js`). `js/search/query.js`: search text folding.
+  Sources & provenance tally (`sourcing.js`). `js/search/query.js`: search text folding; `js/search/index.js`: `buildSearchItems`, the search box's row index (every searchable thing + the `data-search` controls, each with its pick action).
 - `js/util.js`: dependency-free shared helpers (`groupBy`, `stripSide`, `mirrorId`, `normName`).
 - `js/net.js`: `fetchOk(url, init, message)` / `fetchJson`, the one fetch + status check (each caller keeps its own error message).
 - `js/grades.js`: the provenance-grade orderings (`GRADE_RANK` stored, `DISPLAY_GRADE_ORDER` display incl. uncertain/unknown) + `strongestGrade`, `shownGrade`, `backed(counts)`.
