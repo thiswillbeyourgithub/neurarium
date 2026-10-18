@@ -187,7 +187,7 @@ fixed Stahl list.
   English Wikipedia article (corpus #9) often states that direction in prose where no assay can.
   Pipeline, the same four steps as the CYP one: `tools/fetch/fetch_binding_directions.py` offers, per
   drug, the prose lines naming one of its affinity-only targets (`fetch_metabolite_bindings.action_lines`
-  over the stored page, then the shared alias matcher `tools/target_aliases.py`) into
+  over the stored page, then the shared alias matcher `tools/lib/target_aliases.py`) into
   `binding_directions_worklist.json` with **no verdict of its own**; one LLM pass answers by candidate
   **index** into `binding_directions_judged.json`; `tools/sourcing/apply_binding_directions.py`
   gates it (drug offered, index resolves, target is a **currently** affinity-only binding of that
@@ -212,7 +212,7 @@ fixed Stahl list.
   `tools/sourcing/apply_binding_gaps.py` is the sole writer, gating index, target, action, not already
   bound, the shared matcher, a per-clause negation/hedge cue, stereo relatives (a racemate's article
   naming its enantiomer is another molecule), and the verbatim quote; `recheck_quotes.py` stamps the
-  judge. The predicates fetcher and applier share live in `tools/binding_gaps.py`. A Stahl drug takes a gap too:
+  judge. The predicates fetcher and applier share live in `tools/lib/binding_gaps.py`. A Stahl drug takes a gap too:
   its dump-sourced bindings are never overwritten (a gap only adds a target it does not list), and an unjudged index is reported, so a
   partial pass cannot read as complete.
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
@@ -321,7 +321,7 @@ nothing draws.
     builder, and the only pass that reads a corpus. It offers candidate sentences with **no
     verdict of its own**: Stahl's `Pharmacokinetics` bullets (via `fetch_cyp.py`) and the stored
     English Wikipedia article's drugbox `Metabolism` row plus its isoform-naming sentences (via
-    `fetch_cyp_wikipedia.py`), each already confirmed verbatim on a real page. It vetoes nothing:
+    `lib/corpora/wikipedia.py`), each already confirmed verbatim on a real page. It vetoes nothing:
     a negation or somebody else's drug is the judge's problem, not a regex's.
   - The extract pass answers per drug with a candidate **index** plus `(enzyme, role, strength?)`
     into `generated_cache/cyp_judged.json`. An index, never a string, so a paraphrase is not

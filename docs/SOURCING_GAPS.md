@@ -258,7 +258,7 @@ one source shape everywhere:
    hippocampus, cerebellum, caudate, putamen, pallidum, accumbens, midbrain, pons, medulla,
    olfactory bulb, insula and cingulate still need pinning from `Ontology.csv`. This is the
    analogue of `fetch_ki.py`'s `ALIAS` map, and it is one-time.
-2. **Gene maps.** Receptors already have `RECEPTOR_GENES` (in `fetch_gtopdb.py`, reuse it).
+2. **Gene maps.** Receptors already have `RECEPTOR_GENES` (in `tools/lib/gene_maps.py`, reuse it).
    Add a **`TARGET_GENES`** map for the 25 non-receptor targets (single genes: `sert`=SLC6A4,
    `mao_a`=MAOA, `vmat2`=SLC18A2, ...). The nine **`receptor_group`** targets (muscarinic =
    CHRM1-5, nicotinic, `alpha1`=ADRA1A/B/D, `alpha2`, `beta`, glutamate, melatonin =
@@ -277,7 +277,7 @@ one source shape everywhere:
   emit `sources/allen/pages/<gene>.md` + `sources/allen/worklist.json`. Stdlib urllib, polite,
   idempotent, `--only`/`--refresh` (mirror `fetch_gtopdb.py`). Filters to our genes' probes
   early so it caches only the slice, not the multi-hundred-MB full CSVs.
-- The Allen->base **crosswalk** + **`TARGET_GENES`** map (live in `fetch_allen.py`).
+- The Allen->base **crosswalk** + **`TARGET_GENES`** map (crosswalk in `fetch_allen.py`, `TARGET_GENES` in `tools/lib/gene_maps.py`).
 - **Apply step** — extend `tools/sourcing/apply_location_sources.py` with a deterministic
   `--corpus allen` mode (no judged file: it reads the worklist + the *existing* location
   lists straight from the emitted data and confirms) rather than a second tool, so the
@@ -1160,7 +1160,7 @@ nodes over 86 drugs** (121 substrate, 29 inhibitor, 9 inducer; 3A4 58, 2D6 44, 1
 
 **Step 2, the Wikipedia sweep, also landed, and also with no LLM.** The survey expected an
 extract-then-judge pass; the article's drugbox `Metabolism |` row turned out to be as regular as a
-Stahl bullet, so `fetch_cyp_wikipedia.py` imports `fetch_cyp.py`'s role/strength/victim rules and
+Stahl bullet, so `lib/corpora/wikipedia.py` imports `fetch_cyp.py`'s role/strength/victim rules and
 adds only what a long prose paragraph needs: a sentence split, a negation veto, a rule that the
 drug's own name must appear before the verb with no `which` / `that` / paren / comma between. Those
 rules are what stops the wrong claims a paragraph offers: "Smoking induces CYP1A2" read as
@@ -1173,7 +1173,7 @@ all verified.
 **Audited 2026-07-28 (the "does alcohol induce anything?" question), +5 nodes.** Re-running the
 pass's own rules over every stored article and printing the *rejected* role sentences showed 26
 drops, 22 of them right. The four wrong ones were two over-broad vetoes, both now fixed in
-`fetch_cyp_wikipedia.py`:
+`lib/corpora/wikipedia.py`:
 - the **victim frame was tested on the whole sentence**, so a genuine claim was vetoed by its own
   consequence clause ("Escitalopram weakly inhibits CYP2D6, and hence may increase plasma levels
   of some CYP2D6 substrates"). It is tested on the **head** only now: what follows the verb is

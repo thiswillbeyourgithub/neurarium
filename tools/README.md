@@ -130,7 +130,7 @@ Then `python tools/generate_data.py` compiles the whole tree into `data/changelo
 
 ## Refreshing external data (author-side)
 
-Every fetcher sends the one User-Agent of `tools/polite_http.py`, and most go through its polite GET (backoff on 429/503). Set `NEURARIUM_FETCH_CONTACT` to a real e-mail or URL before a large run (Wikimedia asks for a contact); unset, it sends "contact via repository".
+Every fetcher sends the one User-Agent of `tools/lib/polite_http.py`, and most go through its polite GET (backoff on 429/503). Set `NEURARIUM_FETCH_CONTACT` to a real e-mail or URL before a large run (Wikimedia asks for a contact); unset, it sends "contact via repository".
 
 To re-pull every third-party asset the dataset hot-links or vendors, run these (all
 network, idempotent, polite; each touches only what changed). Always finish with
@@ -203,7 +203,8 @@ What each authoring / fetch / check script in `tools/` is (one line each). The d
 tooling (`serve.py`, `shot.py`, `demos/`) is also summarized in `../CLAUDE.md` (Running,
 Screenshots).
 
-- Shared helpers (reuse, never copy): `polite_http.py` (the one GET + User-Agent), `pipeline/judged.py` (qid-checked index picks) + `pipeline/gate.py` (the applier's page gate), `salt_words.py` (EN salt words for name joins), `chirality.py` (enantiomer tags), `data_generators/caches.py` (`load`, `labels`, `attests` for committed caches), `data_generators/node_id.py` (the id shape `check_data` and `render_api` enforce).
+- Shared helpers (reuse, never copy): `lib/polite_http.py` (the one GET + User-Agent), `pipeline/judged.py` (qid-checked index picks) + `pipeline/gate.py` (the applier's page gate), `lib/salt_words.py` (EN salt words for name joins), `lib/chirality.py` (enantiomer tags), `data_generators/caches.py` (`load`, `labels`, `attests` for committed caches), `data_generators/node_id.py` (the id shape `check_data` and `render_api` enforce).
+- `tools/lib/`: shared libraries (no `main`, never run): the root helpers above, `quote_match.py` (`normalize_for_match`, `emitted_page_dirs`), `gene_maps.py` (owner -> HGNC gene), `corpora/wikipedia.py` + `corpora/bdpm.py` (stored corpus pages + their joins), `parse/durations.py` (EN/FR duration parsing). A script imports these as `from lib import X` after inserting `tools/` on `sys.path`; it never imports another script for a helper.
 - `generate_data.py` — single source of truth for the anatomy (stdlib-only, offline):
   defines every region/projection/receptor once, emits the artifacts below. Drugs are the
   exception (authored in `tools/data/drugs_data.jsonl`, read by `_load_drugs`). Display strings are
@@ -245,9 +246,9 @@ Screenshots).
 - `tools/data_generators/changelog.py` — parses the authored `docs/changelog/<version>/changelog.md`
   files into the `changelog.json` shape (stdlib, no deps). Fails loud with `file:line` on an unknown
   category, a bullet with no `fr:` line, or stray prose, so a typo cannot silently drop a bullet.
-- `tools/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
+- `tools/lib/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
-- `tools/text_fold.py`: shared name folding (`strip_accents`, `alnum_key`) for every author-side matcher; reuse it rather than re-spelling an NFKD fold or an INDEX-name key.
+- `tools/lib/text_fold.py`: shared name folding (`strip_accents`, `alnum_key`) for every author-side matcher; reuse it rather than re-spelling an NFKD fold or an INDEX-name key.
 - `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
 - `tools/check_js.py` — stdlib scope walk over `public/**/*.js`, reporting every identifier reference
   no enclosing scope binds (the `ReferenceError` a valid-syntax file still ships). Takes paths, else
@@ -288,7 +289,7 @@ Screenshots).
 - `tools/fetch/fetch_allen.py` — fetches the Allen Human Brain Atlas microarray (corpus #8
   `allen_ahba`), the source for **target expression regions** + the receptor regions GtoPdb
   misses; a PACall detection-boolean vote per (gene, region), no judge. `TARGET_GENES` +
-  `fetch_gtopdb.RECEPTOR_GENES` map owners to genes. Caches `data_sources/allen/` + `confirmed.json`.
+  `lib.gene_maps.RECEPTOR_GENES` map owners to genes. Caches `data_sources/allen/` + `confirmed.json`.
   The same run also emits the **density** profiles into `data_sources/allen/density.json`
   (`--skip-density` opts out of the heavy MicroarrayExpression read; `DENSITY_MIN_R` is the
   cross-donor reliability floor). See docs/PROVENANCE.md (corpora #7/#8) + docs/VIEWER.md Expression density.
@@ -400,7 +401,7 @@ Screenshots).
   numbered candidate list plus the enzyme/role/strength vocabularies the judge must answer in. It
   applies **no veto** and states no role: a negation or a sentence about another molecule is the
   judge's to reject. `--only <ids>` scopes. See docs/DRUGS.md Drug metabolism.
-- `tools/fetch/fetch_cyp.py` and `tools/fetch/fetch_cyp_wikipedia.py`: **libraries, not scripts**,
+- `tools/fetch/fetch_cyp.py` and `tools/lib/corpora/wikipedia.py`: **libraries, not scripts**,
   imported by the worklist builder. Each knows how one corpus is shaped (Stahl: monograph page
   spans, the dump's `Pharmacokinetics` answers, the isoform vocabulary, the verbatim gate that
   shortens a bullet once when a running header or a hyphenated line break defeats it; Wikipedia:
@@ -415,7 +416,7 @@ Screenshots).
 - `tools/fetch/fetch_gtopdb_ki.py` — stdlib. Downloads GtoPdb's bulk ligand-interaction CSV
   (`data_sources/gtopdb/interactions.csv`, author-side), joins it to our drugs by name (an HTML-stripping
   `norm` + a curated `LIGAND_ALIASES`) and to our targets by **case-folded gene symbol** (reusing
-  `fetch_gtopdb.RECEPTOR_GENES` + `TARGET_GENES`, plus `EXTRA_TARGET_GENES` for the ionotropic subunit
+  `lib.gene_maps.RECEPTOR_GENES` + `TARGET_GENES`, plus `EXTRA_TARGET_GENES` for the ionotropic subunit
   families), and writes one quotable row line per interaction into `data_sources/gtopdb/pages_ki/<slug>.md`
   (corpus #11 `gtopdb_ki`) + the proposals into `tools/generated_cache/gtopdb_ki.json`. Only a pKi/pKd
   becomes a Ki (`10^(9-pKi)` nM); a functional potency rides along as the direction's citation. No judge:
@@ -512,7 +513,7 @@ Screenshots).
 - `tools/fetch/fetch_binding_directions.py`: `uv run` (deps: beautifulsoup4, only because it imports
   `fetch_metabolite_bindings`; no HTML is parsed). Offline. The binding-direction worklist builder: for
   every drug with an `affinity_only` binding it reads the stored English Wikipedia article
-  (`fetch_cyp_wikipedia.page_for`, which owns the redirect aliases) and offers the prose lines naming
+  (`lib.corpora.wikipedia.page_for`, which owns the redirect aliases) and offers the prose lines naming
   one of that drug's affinity-only targets, with **no verdict of its own**, into
   `tools/generated_cache/binding_directions_worklist.json`. `--only <ids>` scopes. See docs/DRUGS.md Drugs
   (Binding directions).
@@ -529,7 +530,7 @@ Screenshots).
   **sole writer** of an `action` onto an `affinity_only` binding in `drugs_data.jsonl`. Six gates: the
   drug was offered; the index resolves; the target is a currently affinity-only binding of that drug
   (confirm-only, so nothing is added or revised); the action is in `DRUG_ACTIONS`; the quote names the
-  target (`tools/target_aliases.py`, the matcher the fetcher offered it with); the quote is verbatim on
+  target (`tools/lib/target_aliases.py`, the matcher the fetcher offered it with); the quote is verbatim on
   `data_sources/wikipedia/pages/<slug>.md`. Writes no `llm` stamp (`recheck_quotes.py`'s job).
   Idempotent, `--dry-run`/`--verbose`. **`--tables`** applies the table proposals instead
   (`binding_directions_tables.json`): gates 3, 4 and 6 are the same shared `BindingGate`, there is no index
@@ -552,7 +553,7 @@ Screenshots).
   was asked and returned) -> one LLM pick by index -> `apply_binding_directions.py --search` ->
   `recheck_quotes.py build --kinds drug_bindings,drug_metabolite_bindings --unjudged` + an independent
   judge + `apply --llm <model>` -> `apply_binding_directions.py --unknown-log` -> `generate_data.py`.
-- `tools/target_aliases.py`: stdlib **library**, imported by both halves above: every name a modeled
+- `tools/lib/target_aliases.py`: stdlib **library**, imported by both halves above: every name a modeled
   drug target goes by in prose (Greek folded to Latin, separator-tolerant, boundary-strict, so `d2`
   never fires on `CYP2D6` and `alpha2` never absorbs `alpha2A`). One definition, because a gate that
   disagreed with the offer would accept what the worklist could not have shown.
@@ -564,7 +565,7 @@ Screenshots).
   metadata) -> `python tools/sourcing/apply_binding_gaps.py --dry-run --verbose` then without
   `--dry-run` (stdlib, sole writer, `--verbose` lists the additions on Stahl drugs, whose own bindings stay untouched) ->
   `generate_data.py` -> `recheck_quotes.py build --kinds drug_bindings --unjudged` + judge +
-  `apply --llm <model>` -> `generate_data.py`. `tools/binding_gaps.py` (stdlib library) holds the
+  `apply --llm <model>` -> `generate_data.py`. `tools/lib/binding_gaps.py` (stdlib library) holds the
   predicates both halves run (negation per clause, stereo relatives, covered targets, Stahl detection).
   See docs/DRUGS.md Drugs (Binding gaps).
 - `tools/fetch/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
