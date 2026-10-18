@@ -28,7 +28,7 @@
  *
  * Bump CACHE when the caching logic itself changes; activate() prunes older caches.
  */
-const CACHE = "neurarium-v6";
+const CACHE = "neurarium-v7";
 
 // Minimal app shell precached on install so a first offline launch has a page +
 // icons even before anything else was visited. The stylesheets ride with it, since a
@@ -94,8 +94,10 @@ self.addEventListener("activate", (event) => {
 // `waitUntil` is the fetch event's: the cache write runs after the response is
 // handed back, so a large mesh/data file is not held until it is fully copied into
 // the Cache API, while the worker is still kept alive until that write finishes.
-async function revalidate(req, waitUntil) {
-  const cached = await caches.match(req);
+//
+// `key` is what the copy is stored and looked up under (default: the request).
+async function revalidate(req, waitUntil, key = req) {
+  const cached = await caches.match(key);
   const headers = new Headers();
   if (cached) {
     const etag = cached.headers.get("ETag");
@@ -116,9 +118,20 @@ async function revalidate(req, waitUntil) {
   if (!res.ok && cached) return cached;
   if (res.ok) {
     const copy = res.clone();
-    waitUntil(caches.open(CACHE).then((cache) => cache.put(req, copy)));
+    waitUntil(caches.open(CACHE).then((cache) => cache.put(key, copy)));
   }
   return res;
+}
+
+// The app shell's one cache key. A navigation to the shell (`/` or `/index.html`,
+// with any query: `?lang=fr`, `?tour=1`, a deep link) is stored under it, so query
+// strings never pile up one cache entry each, forever.
+const SHELL_URL = new URL("index.html", self.location.href).href;
+const SHELL_PATHS = new Set([new URL(".", SHELL_URL).pathname, new URL(SHELL_URL).pathname]);
+
+function cacheKey(req) {
+  if (req.mode === "navigate" && SHELL_PATHS.has(new URL(req.url).pathname)) return SHELL_URL;
+  return req;
 }
 
 self.addEventListener("fetch", (event) => {
@@ -132,10 +145,10 @@ self.addEventListener("fetch", (event) => {
   // `revalidate` already returns the cached copy; the catch below only handles the
   // case where there is nothing cached for this request at all.
   event.respondWith(
-    revalidate(req, (p) => event.waitUntil(p)).catch(async () => {
+    revalidate(req, (p) => event.waitUntil(p), cacheKey(req)).catch(async () => {
       // A navigation with nothing cached for it falls back to the app shell.
       if (req.mode === "navigate") {
-        const shell = await caches.match("index.html");
+        const shell = await caches.match(SHELL_URL);
         if (shell) return shell;
       }
       throw new Error("offline and not cached");

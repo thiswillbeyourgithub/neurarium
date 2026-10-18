@@ -16,12 +16,12 @@ function loadWorker({ stored = {}, network }) {
   const store = new Map(Object.entries(stored));
   const listeners = {};
   const cache = {
-    put: async (req, res) => { store.set(req.url, res); },
+    put: async (req, res) => { store.set(typeof req === "string" ? req : req.url, res); },
     add: async () => {},
   };
   const ctx = {
     self: {
-      location: { origin: ORIGIN },
+      location: { origin: ORIGIN, href: `${ORIGIN}/sw.js` },
       addEventListener: (type, fn) => { listeners[type] = fn; },
       skipWaiting() {},
       clients: { claim: async () => {} },
@@ -40,11 +40,13 @@ function loadWorker({ stored = {}, network }) {
 
 // Fire one GET through the listener; resolves to { res, pending } where `pending`
 // is everything the worker handed to event.waitUntil.
-async function fire(onFetch, url) {
+// A navigation is passed as a plain `{url, method, mode}` object, since node's
+// Request refuses `mode: "navigate"`.
+async function fire(onFetch, url, { navigate = false } = {}) {
   let answer;
   const pending = [];
   onFetch({
-    request: new Request(url),
+    request: navigate ? { url, method: "GET", mode: "navigate" } : new Request(url),
     respondWith: (p) => { answer = p; },
     waitUntil: (p) => { pending.push(p); },
   });
@@ -83,4 +85,24 @@ test("a fresh 200 is cached through waitUntil, not before answering", async () =
   assert.equal(await res.text(), "fresh");
   assert.equal(pending.length, 1, "cache write handed to event.waitUntil");
   assert.equal(await store.get(url).text(), "fresh");
+});
+
+test("shell navigations share the index.html cache key, whatever their query", async () => {
+  // Regression: every `?lang=` / `?tour=` navigation was cached under its own full
+  // URL, adding one entry per query string forever.
+  const { onFetch, store } = loadWorker({
+    network: async () => new Response("shell", { status: 200 }),
+  });
+  await fire(onFetch, `${ORIGIN}/?lang=fr`, { navigate: true });
+  await fire(onFetch, `${ORIGIN}/index.html?tour=1`, { navigate: true });
+  assert.deepEqual([...store.keys()], [`${ORIGIN}/index.html`]);
+});
+
+test("a non-shell navigation (an /api/ page) keeps its own key", async () => {
+  const url = `${ORIGIN}/api/drug/caffeine.md`;
+  const { onFetch, store } = loadWorker({
+    network: async () => new Response("md", { status: 200 }),
+  });
+  await fire(onFetch, url, { navigate: true });
+  assert.deepEqual([...store.keys()], [url]);
 });
