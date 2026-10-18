@@ -39,14 +39,12 @@ TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools
 REPO = TOOLS.parent
 GTOPDB = REPO / "data_sources" / "gtopdb"
 WORKLIST = GTOPDB / "worklist.json"
-PAGES = GTOPDB / "pages"
 ALLEN = REPO / "data_sources" / "allen"
-ALLEN_PAGES = ALLEN / "pages"
 ALLEN_CONFIRMED = ALLEN / "confirmed.json"
 OUT = TOOLS / "generated_cache" / "location_sources.json"
 
 sys.path.insert(0, str(TOOLS))
-from check_data import normalize_for_match  # noqa: E402  (reuse the gate's normalizer)
+from pipeline.gate import PageGate, registry_pages  # noqa: E402  (the applier's page gate)
 import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from io_atomic import atomic_write_text  # noqa: E402
 
@@ -58,10 +56,14 @@ def load_worklist() -> dict[str, dict]:
     return {w["receptor_id"]: w for w in worklist_io.read(WORKLIST)}
 
 
-def page_text(target_id: int) -> str:
-    """Cached tissue page for a GtoPdb target (the quote gate's reference text)."""
-    p = PAGES / f"{target_id}.md"
-    return p.read_text("utf-8") if p.exists() else ""
+# The gtopdb / allen_ahba page trees, through the registry's ``pages_dir``.
+PAGE_GATE = PageGate(registry_pages())
+
+
+def quote_refuted(corpus: str, page, quote: str) -> bool:
+    """Whether the stored page exists and lacks ``quote``. Lenient on a missing or
+    empty page (a clone without the author-side tree keeps the fetcher's own check)."""
+    return bool(PAGE_GATE.text(corpus, page)) and not PAGE_GATE.on_page(corpus, page, quote)
 
 
 def owner_regions() -> tuple[dict[str, set], dict[str, set]]:
@@ -91,7 +93,6 @@ def collect_gtopdb(judged_path: str, llm: str | None = None) -> tuple[list[tuple
             warnings.append(f"unknown receptor {rid!r} in judged file (skipped)")
             continue
         cands, tid = w["candidates"], w["target_id"]
-        ptext = normalize_for_match(page_text(tid))
         for m in entry.get("matches", []):
             base, idx = m["base"], m["candidate"]
             if base not in w["regions"]:
@@ -99,7 +100,7 @@ def collect_gtopdb(judged_path: str, llm: str | None = None) -> tuple[list[tuple
             if not isinstance(idx, int) or not (0 <= idx < len(cands)):
                 warnings.append(f"{rid}/{base}: candidate index {idx} out of range"); skipped += 1; continue
             quote = cands[idx]["quote"]
-            if ptext and normalize_for_match(quote) not in ptext:
+            if quote_refuted("gtopdb", tid, quote):
                 warnings.append(f"{rid}/{base}: quote not found on page {tid} (skipped)"); skipped += 1; continue
             src = {"corpus": "gtopdb", "page": tid, "quote": quote, "provenance": "verified"}
             if cands[idx].get("species"):
@@ -118,7 +119,6 @@ def collect_allen() -> tuple[list[tuple], list[str], int]:
         raise SystemExit(f"error: {ALLEN_CONFIRMED} missing; run tools/fetch/fetch_allen.py first")
     confirmed = json.loads(ALLEN_CONFIRMED.read_text("utf-8"))
     rec_regions, tgt_regions = owner_regions()
-    page_cache: dict[str, str] = {}
     out, warnings, skipped = [], [], 0
     for c in confirmed:
         kind, owner, base, gene, quote = (c["owner_kind"], c["owner"], c["base"],
@@ -126,10 +126,7 @@ def collect_allen() -> tuple[list[tuple], list[str], int]:
         claimed = (rec_regions if kind == "receptor" else tgt_regions).get(owner, set())
         if base not in claimed:
             warnings.append(f"{owner}/{base}: not a current region (skipped)"); skipped += 1; continue
-        if gene not in page_cache:
-            p = ALLEN_PAGES / f"{gene}.md"
-            page_cache[gene] = normalize_for_match(p.read_text("utf-8")) if p.exists() else ""
-        if page_cache[gene] and normalize_for_match(quote) not in page_cache[gene]:
+        if quote_refuted("allen_ahba", gene, quote):
             warnings.append(f"{owner}/{base}: quote not on page {gene} (skipped)"); skipped += 1; continue
         out.append((kind, owner, base, {"corpus": "allen_ahba", "page": gene,
                                         "quote": quote, "provenance": "verified",

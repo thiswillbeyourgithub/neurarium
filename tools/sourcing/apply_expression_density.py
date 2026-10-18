@@ -35,14 +35,12 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/sourcing/)
 REPO = TOOLS.parent
 ALLEN = REPO / "data_sources" / "allen"
-ALLEN_PAGES = ALLEN / "pages"
 ALLEN_DENSITY = ALLEN / "density.json"
 OUT = TOOLS / "generated_cache" / "expression_density.json"
 
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from check_data import normalize_for_match       # noqa: E402  (reuse the gate's normalizer)
-from apply_location_sources import owner_regions  # noqa: E402  (same confirm-only guard)
+from apply_location_sources import owner_regions, quote_refuted  # noqa: E402  (same guards)
 from io_atomic import atomic_write_json  # noqa: E402
 
 
@@ -53,7 +51,6 @@ def collect() -> tuple[dict[str, dict], list[str], int]:
     raw = json.loads(ALLEN_DENSITY.read_text("utf-8"))
     entries = raw["profiles"]
     rec_regions, tgt_regions = owner_regions()
-    page_cache: dict[str, str] = {}
     buckets: dict[str, dict] = {"receptors": {}, "targets": {},
                                 "min_reliability": raw["min_reliability"]}
     warnings, skipped = [], 0
@@ -68,10 +65,7 @@ def collect() -> tuple[dict[str, dict], list[str], int]:
             warnings.append(f"{owner}: fewer than 2 claimed regions ranked (skipped)")
             skipped += 1
             continue
-        if gene not in page_cache:
-            p = ALLEN_PAGES / f"{gene}.md"
-            page_cache[gene] = normalize_for_match(p.read_text("utf-8")) if p.exists() else ""
-        if page_cache[gene] and normalize_for_match(quote) not in page_cache[gene]:
+        if quote_refuted("allen_ahba", gene, quote):
             warnings.append(f"{owner}: density quote not on page {gene} (skipped)")
             skipped += 1
             continue
