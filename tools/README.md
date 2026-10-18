@@ -18,6 +18,7 @@ corpus locations are in `CLAUDE.local.md`.
   - [Meshes, dev server, screenshots, icons, demos](#meshes-dev-server-screenshots-icons-demos)
   - [Stahl quote sourcing (bindings, NbN, classes)](#stahl-quote-sourcing-bindings-nbn-classes)
   - [Expression and function (GtoPdb #7 / #23, Allen AHBA #8)](#expression-and-function-gtopdb-7--23-allen-ahba-8)
+  - [Receptor effects, release modulation and demographics (BETA)](#receptor-effects-release-modulation-and-demographics-beta)
   - [Quote recheck and citation sites](#quote-recheck-and-citation-sites)
   - [Pharmacogenomics (PharmFreq #13, CPIC #15, ClinPGx #20)](#pharmacogenomics-pharmfreq-13-cpic-15-clinpgx-20)
   - [Book heading resolution](#book-heading-resolution)
@@ -351,6 +352,38 @@ Screenshots).
 - `tools/generated_cache/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
 
+### Receptor effects, release modulation and demographics (BETA)
+
+Four-step passes (fetcher offers candidates, one LLM pass picks by index, applier gates, Opus recheck); concepts and gates in docs/DRUGS.md.
+
+Receptor effects (`receptor_effect`):
+
+```
+python tools/fetch/fetch_receptor_effects.py              # -> receptor_effects_worklist.json (keyword-offered candidates, no verdict)
+<one LLM pass>                                             # -> receptor_effects_judged.json ({owner: [{effect, mode, picks}]})
+python tools/sourcing/apply_receptor_effects.py --dry-run  # then without; sole writer of receptor_effects.json
+python tools/sourcing/recheck_quotes.py build --out <dir> --kinds receptor_effect   # independent Opus judge, then `apply --llm opus`
+```
+
+Release modulation (`receptor_release_modulation`):
+
+```
+python tools/fetch/fetch_release_modulation.py               # -> release_modulation_worklist.json (mechanism + transmitter cues, no verdict)
+<one LLM pass>                                                # -> release_modulation_judged.json ({owner: [{kind, structure, cell, modulates, effect, picks}]})
+python tools/sourcing/apply_release_modulation.py --dry-run   # then without; sole writer of release_modulation.json
+python tools/sourcing/recheck_quotes.py build --out <dir> --unstamped   # independent Opus judge, then `apply --llm opus`
+```
+
+Demographics (`receptor_demographic`, after adding the paper to `fetch_europepmc.PAPERS`):
+
+```
+python tools/fetch/fetch_europepmc.py                       # store any new paper (network)
+python tools/fetch/fetch_demographics.py                    # -> demographics_worklist.json (age / sex cues, no verdict)
+<one LLM pass>                                              # -> demographics_judged.json ({owner: [{factor, direction, structure, magnitude?, picks}]})
+python tools/sourcing/apply_demographics.py --dry-run       # then without; sole writer of receptor_demographics.json
+python tools/sourcing/recheck_quotes.py build --out <dir> --unstamped   # independent Opus judge, then `apply --llm opus`
+```
+
 ### Quote recheck and citation sites
 
 - `tools/sourcing/recheck_quotes.py` — re-verifies every emitted verified quote with a stronger model
@@ -564,7 +597,7 @@ Screenshots).
 ### Physicochemistry, workup and TDM (#19, #21, #22, #24)
 
 - `tools/fetch/fetch_physchem.py` stdlib, network (`pubchem.ncbi.nlm.nih.gov`, the B3DB TSV once from GitHub), author-side. Corpora #21 PubChem + #22 B3DB: reads each drug's CID off its stored Wikipedia drugbox, writes `data_sources/pubchem/pages/<cid>.md` (XLogP3, TPSA) and `data_sources/b3db/pages/<cid>.md` (BBB label + logBB rows, joined by CID else exact name, InChI-guarded), then `generated_cache/physchem.json`. `--only <ids>` scopes, `--refresh` re-downloads. No judge (code extraction); follow with `python tools/fetch/stamp_fetch_dates.py` and `python tools/generate_data.py`. See docs/DRUGS.md (Physicochemistry and brain entry).
-- `tools/fetch/fetch_bdpm_rcp.py`: stdlib, offline for drugs with a French product, author-side. Corpus #24 `bdpm_rcp`: per drug, picks the princeps (else #16's product) with an RCP 4.4 and writes `data_sources/bdpm/pages_rcp4/<cis>.md` (sections 4.2 / 4.3 / 4.4) from the freshest copy on disk (#16's `raw/` or `../justelesRCP/data/rcp/`, else EMA's SmPC in `../justelesRCP/data/eu/` for a centrally authorised drug, read only; `--justelesrcp` points elsewhere), plus `generated_cache/bdpm_rcp_labels.json`; prints the drugs with no page. A drug with no CIS product at all falls back to its EPAR found by name (`tools/fetch/fetch_ema_epar.py`: EMA's two EPAR JSON reports, cached in `data_sources/ema/raw/`; the SmPC PDF downloaded once and converted with justelesRCP's `src/ema_pdf.py`, so run `uv run --with pymupdf python tools/fetch/fetch_bdpm_rcp.py` when a new one is needed; `--offline` uses only stored SmPCs, `--refresh-ema` re-pulls the reports and SmPCs) into `pages_rcp4/EMEA-H-C-<n>.md`, the chosen EPAR recorded under `ema` in the cache; the run prints which drugs it reached that way. Then `python tools/fetch/fetch_workup.py` (worklist, no verdict) -> one LLM pass -> `generated_cache/workup_judged.json` (`{drug: [{index, test, timing, condition?}]}`, every offered drug keyed, `[]` = nothing) -> `python tools/sourcing/apply_workup.py --dry-run`, then real (seven gates, sole writer of `workup.json`) -> `python tools/fetch/stamp_fetch_dates.py` -> `python tools/generate_data.py` -> `python tools/sourcing/recheck_quotes.py build --kinds drug_workup --unjudged`, judge, `apply --llm opus` -> `generate_data.py` again. See docs/DRUGS.md (Pre-prescription workup).
+- `tools/fetch/fetch_bdpm_rcp.py`: stdlib, offline for drugs with a French product, author-side. Corpus #24 `bdpm_rcp`: per drug, picks the princeps (else #16's product) with an RCP 4.4 and writes `data_sources/bdpm/pages_rcp4/<cis>.md` (sections 4.2 / 4.3 / 4.4) from the freshest copy on disk (#16's `raw/` or `../justelesRCP/data/rcp/`, else EMA's SmPC in `../justelesRCP/data/eu/` for a centrally authorised drug, read only; `--justelesrcp` points elsewhere), plus `generated_cache/bdpm_rcp_labels.json`; prints the drugs with no page. A drug with no CIS product at all falls back to its EPAR found by name (`tools/fetch/fetch_ema_epar.py`: EMA's two EPAR JSON reports, cached in `data_sources/ema/raw/`; the SmPC PDF downloaded once and converted with justelesRCP's `src/ema_pdf.py`, so run `uv run --with pymupdf python tools/fetch/fetch_bdpm_rcp.py` when a new one is needed; `--offline` uses only stored SmPCs, `--refresh-ema` re-pulls the reports and SmPCs) into `pages_rcp4/EMEA-H-C-<n>.md`, the chosen EPAR recorded under `ema` in the cache; the run prints which drugs it reached that way. Then `python tools/fetch/fetch_workup.py` (worklist of the 4.2 / 4.3 / 4.4 lines naming a test, no verdict; excipient notices dropped) -> one LLM pass -> `generated_cache/workup_judged.json` (`{drug: [{index, test, timing, condition?}]}`, every offered drug keyed, `[]` = nothing, so `apply_workup.undecided` and `test_workup.JudgedCoverageTest` catch a drug nobody read) -> `python tools/sourcing/apply_workup.py --dry-run`, then real (seven gates, sole writer of `workup.json`) -> `python tools/fetch/stamp_fetch_dates.py` -> `python tools/generate_data.py` -> `python tools/sourcing/recheck_quotes.py build --kinds drug_workup --unjudged`, judge, `apply --llm opus` -> `generate_data.py` again. See docs/DRUGS.md (Pre-prescription workup).
 - `tools/fetch/fetch_agnp_tdm.py`: uv script (pymupdf), offline, author-side. Corpus #19: reads the AGNP TDM guideline's Table 5 (therapeutic range, alert level, TDM level) and Table 1 (substrate isoforms) by cell rectangle off `data_sources/books/agnp_tdm_2026/a-2860-7861.pdf`, gates each row quote on `pages/<n>.md`, writes `generated_cache/agnp_tdm.json` and the drug -> pages table of that book's `INDEX.md`. No judge (code extraction); `generate_data.py` reads the cache via `data_generators/tdm.py`.
 
 ### Prodrugs and metabolite bindings

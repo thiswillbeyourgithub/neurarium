@@ -246,12 +246,7 @@ real link, which `check_data.py` enforces.
 
 `receptor_effect` nodes (H1 antagonism -> sedation, 5-HT3 antagonism -> antiemetic: side effects and therapeutic effects share one vocabulary, the direction-aware join needs no inversion) come from Stahl Essential (#3) prose, with the receptor's own Wikipedia article (#9) as fallback, plus GtoPdb's curated target-function rows (#23: physiological functions, pathophysiology, altered gene expression; a row with a stated non-human species is never offered, see docs/PROVENANCE.md), human / clinical statements only (no knockout phenotype, no gene-association-only or "potential target" line, no ligand list). The GtoPdb candidates are appended after the prose ones, so adding the corpus never shifts an index the judged file answers by. The GtoPdb pages need one network step first (`python tools/fetch/fetch_gtopdb_function.py`, GtoPdb API key as for #7; `--no-fetch` re-flattens offline). Four-step pipeline, offline:
 
-```
-python tools/fetch/fetch_receptor_effects.py              # -> receptor_effects_worklist.json (keyword-offered candidates, no verdict)
-<one LLM pass>                                             # -> receptor_effects_judged.json ({owner: [{effect, mode, picks}]})
-python tools/sourcing/apply_receptor_effects.py --dry-run  # then without; sole writer of receptor_effects.json
-python tools/sourcing/recheck_quotes.py build --out <dir> --kinds receptor_effect   # independent Opus judge, then `apply --llm opus`
-```
+(runbook: [tools/README.md#receptor-effects-release-modulation-and-demographics-beta](../tools/README.md#receptor-effects-release-modulation-and-demographics-beta))
 
 The applier rebuilds the cache from the judged file every run, so dropping a pick there (after a judge reject) drops its node. Gates: closed vocabularies, `inhibition` on non-receptor targets only, the picked sentence was offered for that effect, verbatim on its page.
 
@@ -259,25 +254,14 @@ The applier rebuilds the cache from the judged file every run, so dropping a pic
 
 `receptor_release_modulation` nodes (a 2nd-order effect: H3 autoreceptors on presynaptic terminals decrease histamine release; 5-HT2C heteroreceptors on GABA interneurons decrease dopamine release) come from the same two corpora, human / clinical statements only. Same four steps, sharing the receptor-effect fetcher + `prose_gate.run_applier`:
 
-```
-python tools/fetch/fetch_release_modulation.py               # -> release_modulation_worklist.json (mechanism + transmitter cues, no verdict)
-<one LLM pass>                                                # -> release_modulation_judged.json ({owner: [{kind, structure, cell, modulates, effect, picks}]})
-python tools/sourcing/apply_release_modulation.py --dry-run   # then without; sole writer of release_modulation.json
-python tools/sourcing/recheck_quotes.py build --out <dir> --unstamped   # independent Opus judge, then `apply --llm opus`
-```
+(runbook: [tools/README.md#receptor-effects-release-modulation-and-demographics-beta](../tools/README.md#receptor-effects-release-modulation-and-demographics-beta))
 
 Gates: closed vocabularies (`RELEASE_KINDS` / `RELEASE_CELLS` / `RELEASE_TRANSMITTERS` / `RELEASE_EFFECTS`), `structure` a modeled structure or null, the sentence names the modulated transmitter (a receptor name like "5HT2C" does not name serotonin), an autoreceptor modulates its own system's transmitter and sits on the releasing neuron (never an interneuron). Use `--unstamped` rather than `--kinds receptor_release_modulation`: a quote shared with another kind is skipped by the `--kinds` filter and leaves the site unjudged.
 
 
 `receptor_demographic` nodes (receptor / transporter availability across age or sex, e.g. D2 declines ~7% per decade, MAO-B rises with age, 5-HT1A is higher in women) come from human PET / SPECT abstracts hand-listed in Europe PMC (#17) `PAPERS` and routed per owner by `fetch_demographics.PAPERS_BY_OWNER`. Same four steps on `prose_gate`:
 
-```
-python tools/fetch/fetch_europepmc.py                       # store any new paper (network)
-python tools/fetch/fetch_demographics.py                    # -> demographics_worklist.json (age / sex cues, no verdict)
-<one LLM pass>                                              # -> demographics_judged.json ({owner: [{factor, direction, structure, magnitude?, picks}]})
-python tools/sourcing/apply_demographics.py --dry-run       # then without; sole writer of receptor_demographics.json
-python tools/sourcing/recheck_quotes.py build --out <dir> --unstamped   # independent Opus judge, then `apply --llm opus`
-```
+(runbook: [tools/README.md#receptor-effects-release-modulation-and-demographics-beta](../tools/README.md#receptor-effects-release-modulation-and-demographics-beta))
 
 Gates: closed factor / direction vocabulary, `structure` a modeled structure or null, the factor's cue offered, every picked paper `human` in the MeSH species ledger (animal studies out), `magnitude` verbatim in a picked sentence (`check_data.py` re-checks it against the emitted quotes). A judge reject is dropped from the judged file (a subgroup-only finding, e.g. CB1 rising with age only in women, is not an unqualified age node).
 
@@ -294,7 +278,7 @@ A drug panel's "Checks the French label asks for" section (BETA, `js/workup.js`,
 
 Scope rule, applied at pick time and re-read by the judge: a check the label asks of **every** patient is a plain row; a check it asks only of some patients (diabetic or elderly patients, patients at risk, one ancestry for an HLA test) is a **conditional** row, its `conditions` a verbatim French span of the same RCP sentence (gated as a substring of the quote at apply time and again at build time), shown "only if: <condition>" ("seulement si : ..."). Still one node per (drug, test, timing): an unconditional ask outranks a conditional one for the same node. An optional "peut" and a correction ("doivent être corrigées") rather than a test are left out.
 
-Pipeline (corpus #24, see docs/PROVENANCE.md): `python tools/fetch/fetch_bdpm_rcp.py` (offline, builds `data_sources/bdpm/pages_rcp4/<cis>.md` from an RCP copy already on disk; a drug with no French product at all gets its EU EPAR found by name instead, EMA's French SmPC downloaded once, page `pages_rcp4/EMEA-H-C-<n>.md`, see docs/PROVENANCE.md #24) -> `python tools/fetch/fetch_workup.py` (worklist of 4.2 / 4.3 / 4.4 lines naming a test, no verdict; excipient notices dropped) -> one LLM pass writes `tools/generated_cache/workup_judged.json` (`{drug: [{index, test, timing, condition?}]}`, a key for **every** offered drug, `[]` = judged and nothing applies, so `apply_workup.undecided` and `test_workup.JudgedCoverageTest` catch a drug nobody read) -> `python tools/sourcing/apply_workup.py` (seven gates, sole writer of `workup.json`) -> `tools/sourcing/recheck_quotes.py --kinds drug_workup` (judge). Coverage: 246 nodes over 85 drugs, 85 of them conditional (170 drugs have an RCP page, 8 of them through an EPAR found by name: asenapine, brexpiprazole, cariprazine, deutetrabenazine, guanfacine, lurasidone, tasimelteon, zuranolone; 145 offer at least one candidate line; most others are neither marketed in France nor authorised in the EU), blood pressure 36, weight 32, ECG 29, blood glucose 25, liver tests 24, blood count 18.
+Pipeline: corpus #24 (see docs/PROVENANCE.md), fetch -> index pick -> `apply_workup.py` (seven gates, sole writer of `workup.json`) -> recheck (runbook: [tools/README.md#physicochemistry-workup-and-tdm-19-21-22-24](../tools/README.md#physicochemistry-workup-and-tdm-19-21-22-24)). Coverage: 246 nodes over 85 drugs, 85 of them conditional (170 drugs have an RCP page, 8 of them through an EPAR found by name: asenapine, brexpiprazole, cariprazine, deutetrabenazine, guanfacine, lurasidone, tasimelteon, zuranolone; 145 offer at least one candidate line; most others are neither marketed in France nor authorised in the EU), blood pressure 36, weight 32, ECG 29, blood glucose 25, liver tests 24, blood count 18.
 
 ## Drug metabolism
 
