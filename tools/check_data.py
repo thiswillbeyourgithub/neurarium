@@ -107,226 +107,71 @@ from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 
-from lib.quote_match import emitted_page_dirs, normalize_for_match
+# The PharmFreq export reader, imported rather than restated: family 12
+# rebuilds the emitted quotes with the very code that wrote them, which is
+# the whole point of the derivation gate (see data_generators/pharmfreq.py).
+from data_generators import (
+    clinpgx,
+    cpic,
+    demographics as DEMOG,
+    freshness,
+    node_id,
+    pharmfreq,
+    release_modulation as RELMOD,
+    unknown,
+)
+# The changelog category vocabulary, imported rather than restated: the authoring
+# module owns it (adding one there must not need an edit here).
+from data_generators.changelog import CATEGORIES as CHANGELOG_CATEGORIES
+from data_generators.node_kinds import NODE_KINDS, backed
+# The drug + its formulations, the holders of brands / Tmax / T½ (one walker, so the
+# grade and quote walks cannot skip a formulation's claims).
+from data_generators.provenance import product_holders
+# The pathway per-claim word tests, imported for the same reason: family 5 re-runs the
+# very test that graded a transmitter/sign sub-claim, so a hand-edited or stale ``claims``
+# block (a source that does not name what it is cited for) fails instead of shipping.
+from data_generators.quotes.attestation import (
+    BASE_GRADE as CLAIM_BASE_GRADE,
+    pattern_for as claim_pattern,
+)
+# The curated contradictions, keyed by citation site and resolved through the one site
+# grammar (tools/sourcing/citation_site.py), exactly as the generator applies them.
+from data_generators.quotes.contradictions import CONTRADICTIONS
+from lib import stahl_index  # (the one INDEX.md reader)
+from lib.drugs_io import is_combination
+from lib.page_file import page_file  # (refuses a path-like page)
+from lib.quote_match import normalize_for_match
+from lib.text_fold import alnum_key
+from sourcing import citation_site as CS
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "public" / "data"
-# Repo root, used to resolve a source corpus's author-side ``pages_dir`` (e.g.
-# ``data_sources/books/stahl/pages``) for the quote-in-page check (see check_sources).
-REPO_ROOT = DATA_DIR.parent.parent
+from checks.common import (
+    DATA_DIR,
+    HEMISPHERE_RE,
+    REPO_ROOT,
+    Report,
+    base_id,
+    display_name,
+    expand_mirrored,
+    load_jsonl,
+    load_meta,
+    normalize,
+    walk_strings,
+)
+from checks.quotes import check_quotes, load_quotes, rehydrate_quotes
+
 
 # A path like "...sources[3].url" (a citation) is a source url: its TODO is the
 # known backlog, reported on its own. Anything else is a stray TODO.
 _SOURCE_URL_RE = re.compile(r"\.sources\[\d+\]\.url$")
-# Trailing hemisphere suffix on a structure id ("frontal_R" -> "frontal").
-_HEMISPHERE_RE = re.compile(r"_(R|L)$")
 # Valid source provenance grades (mirrors generate_data.py PROVENANCE_LEVELS), the
 # value the viewer renders as the grey/yellow/green source pill.
 _PROVENANCE_LEVELS = {"llm", "sourced", "verified"}
 
-# The knowledge-node kinds folded into the headline coverage are NODE_KINDS, imported
-# from data_generators/node_kinds.py (the one roster) further down.
-# ``drug_binding_action`` is graded from the bindings' own quote sources, so its quotes
-# are already walked as part of drug_bindings / drug_metabolite_bindings: the kind adds a
-# tally column, never a new quote to gate.
+
 # The per-drug physicochemistry citations (kinds drug_lipophilicity / drug_polar_surface /
 # drug_bbb, data_generators/physchem.py).
 PHYSCHEM_SOURCES = ("xlogp_sources", "tpsa_sources", "bbb_sources")
 
-
-
-def _flip_hemisphere(structure_id):
-    """Flip a structure id to the other hemisphere; midline ids unchanged."""
-    if structure_id.endswith("_R"):
-        return structure_id[:-2] + "_L"
-    if structure_id.endswith("_L"):
-        return structure_id[:-2] + "_R"
-    return structure_id
-
-
-def _expand_mirrored(projections):
-    """Reflect ``mirror: true`` projections into the full bilateral connectome.
-
-    A symmetric pathway is emitted once carrying ``mirror: true`` (the file stores
-    only the right-hemisphere record; see generate_data.py ``_projection_records``).
-    The reachability + connectivity checks reason over the logical connectome, so
-    expand each flagged record into its hemisphere-flipped twin here, exactly as
-    ``js/data.js`` does at load, before any check runs."""
-    out = []
-    for proj in projections:
-        record = {k: v for k, v in proj.items() if k != "mirror"}
-        out.append(record)
-        if proj.get("mirror"):
-            out.append({**record,
-                        "from": _flip_hemisphere(record.get("from")),
-                        "to": _flip_hemisphere(record.get("to"))})
-    return out
-
-
-class Report:
-    """Collects errors/warnings while printing each section as it runs.
-
-    A third level, ``review``, is for the per-item lines of an eyeball list whose
-    flags are mostly intended (family 8's presynaptic-tone vs. postsynaptic-block
-    split, family 7's drugs without a Ki): counted and summarized, but listed only
-    under ``--verbose``, so the default run's warnings stay few enough to be read."""
-
-    def __init__(self, verbose=False):
-        self.errors = 0
-        self.warnings = 0
-        self.reviews = 0
-        self.verbose = verbose
-
-    def header(self, title):
-        print(f"\n{title}\n{'-' * len(title)}")
-
-    def ok(self, msg):
-        print(f"  [ok]    {msg}")
-
-    def error(self, msg):
-        self.errors += 1
-        print(f"  [ERROR] {msg}")
-
-    def warn(self, msg):
-        self.warnings += 1
-        print(f"  [warn]  {msg}")
-
-    def review(self, msg):
-        self.reviews += 1
-        if self.verbose:
-            print(f"  [review] {msg}")
-
-
-def normalize(value):
-    """Lowercase and keep only alphanumeric characters (Unicode-aware, so a
-    Greek receptor name like ``α1A`` collapses to ``α1a`` rather than vanishing).
-    Two strings that normalize equal are "the same entry" for the dup check."""
-    return "".join(ch for ch in str(value).lower() if ch.isalnum())
-
-
-def display_name(name):
-    """A display name. The emitted data is English-only, so it is normally a
-    plain string; the legacy ``{en, fr}`` object is still handled defensively
-    (use the English text). French lives in data/translations.fr.json."""
-    if isinstance(name, dict):
-        return name.get("en")
-    return name
-
-
-def load_jsonl(report, name):
-    path = DATA_DIR / f"{name}.jsonl"
-    records = []
-    if not path.exists():
-        report.error(f"missing data file: {path}")
-        return records
-    for lineno, line in enumerate(path.open(encoding="utf-8"), 1):
-        line = line.strip()
-        if not line:
-            continue
-        try:
-            records.append(json.loads(line))
-        except json.JSONDecodeError as exc:
-            report.error(f"{name}.jsonl:{lineno}: invalid JSON ({exc})")
-    return records
-
-
-def load_meta(report):
-    path = DATA_DIR / "meta.json"
-    if not path.exists():
-        report.error(f"missing data file: {path}")
-        return {}
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        report.error(f"meta.json: invalid JSON ({exc})")
-        return {}
-
-
-def walk_strings(obj, path):
-    """Yield ``(json_path, string_value)`` for every string anywhere in ``obj``,
-    so the TODO scan can both find placeholders and tell *where* they sit."""
-    if isinstance(obj, dict):
-        for key, value in obj.items():
-            yield from walk_strings(value, f"{path}.{key}")
-    elif isinstance(obj, list):
-        for index, value in enumerate(obj):
-            yield from walk_strings(value, f"{path}[{index}]")
-    elif isinstance(obj, str):
-        yield path, obj
-
-
-# --------------------------------------------------------------------------- #
-# Quote table (externalized source quotes)
-# --------------------------------------------------------------------------- #
-
-def load_quotes(report):
-    """Load ``quotes.jsonl`` into a ``quote_id -> quote node`` map.
-
-    Source quotes are emitted once into this side table; each node references
-    one by ``quote_id`` (see quote_table.py). A duplicate id is a hard error.
-    """
-    by_id = {}
-    for q in load_jsonl(report, "quotes"):
-        qid = q.get("id")
-        if not isinstance(qid, str):
-            report.error(f"quotes.jsonl: entry without a string id: {q!r}")
-            continue
-        if qid in by_id:
-            report.error(f"quotes.jsonl: duplicate quote id {qid!r}")
-        by_id[qid] = q
-    return by_id
-
-
-def rehydrate_quotes(node, by_id, referenced, dangling):
-    """Merge each ``{quote_id, ...}`` reference's excerpt back in place.
-
-    Mirrors the viewer's rehydration (js/data.js): copies every field of the quote
-    node except its ``id`` onto the reference (so a field the generator adds to the
-    quote node needs no edit here) and drops the ``quote_id`` key, so every later
-    check sees the original inline source shape.
-    Records each referenced id (for the orphan check) and any id with no entry.
-    """
-    if isinstance(node, dict):
-        qid = node.get("quote_id")
-        if isinstance(qid, str):
-            referenced.add(qid)
-            quote = by_id.get(qid)
-            if quote is None:
-                dangling.append(qid)
-            else:
-                node.update((k, v) for k, v in quote.items() if k != "id")
-            node.pop("quote_id", None)
-        for value in node.values():
-            rehydrate_quotes(value, by_id, referenced, dangling)
-    elif isinstance(node, list):
-        for value in node:
-            rehydrate_quotes(value, by_id, referenced, dangling)
-
-
-def check_quotes(report, quotes_by_id, referenced, dangling):
-    """Referential integrity of the externalized quote table.
-
-    Every node's ``quote_id`` must resolve to a quote node, and every quote node
-    must be referenced by at least one node (no orphans left behind by the
-    generator). ``referenced``/``dangling`` are collected during rehydration.
-    """
-    report.header("0. Quote table")
-    if dangling:
-        for qid in sorted(set(dangling)):
-            report.error(f"quote reference {qid!r} has no entry in quotes.jsonl")
-    else:
-        report.ok(f"all {len(referenced)} distinct quote references resolve "
-                  f"to a quote node")
-    orphans = sorted(set(quotes_by_id) - referenced)
-    if orphans:
-        report.error(f"{len(orphans)} quote(s) in quotes.jsonl are unreferenced "
-                     f"(orphans, e.g. {orphans[:3]})")
-    else:
-        report.ok(f"no orphan quotes ({len(quotes_by_id)} quotes all referenced)")
-
-
-# --------------------------------------------------------------------------- #
-# 1. Duplicates
-# --------------------------------------------------------------------------- #
 
 def check_id_collection(report, label, items, id_key="id", name_key="name"):
     """Exact + normalized duplicate ids (errors) and normalized duplicate display
@@ -404,15 +249,11 @@ def check_duplicates(report, meta, structures, projections, circuits,
     check_binding_dups(report, drugs)
 
 
-# --------------------------------------------------------------------------- #
-# 2. Reachability (referential integrity)
-# --------------------------------------------------------------------------- #
-
 def check_reachability(report, meta, structures, projections, circuits,
                        projection_groups, receptors, drugs, addons, metabolites=()):
     report.header("2. Reachability (dangling references)")
     structure_ids = {s.get("id") for s in structures}
-    base_ids = {_HEMISPHERE_RE.sub("", sid) for sid in structure_ids}
+    base_ids = {HEMISPHERE_RE.sub("", sid) for sid in structure_ids}
     receptor_ids = {r.get("id") for r in receptors}
     targets = meta.get("drug_targets", {})
     before = report.errors
@@ -687,10 +528,6 @@ def check_reachability(report, meta, structures, projections, circuits,
                   "(no mis-assigned boost/block/tone direction)")
 
 
-# --------------------------------------------------------------------------- #
-# 3. TODOs
-# --------------------------------------------------------------------------- #
-
 def check_todos(report, meta, structures, projections, circuits,
                 projection_groups, receptors, drugs):
     report.header("3. TODOs")
@@ -763,10 +600,6 @@ def check_todos(report, meta, structures, projections, circuits,
     else:
         report.ok("every source corpus carries a real url")
 
-
-# --------------------------------------------------------------------------- #
-# 4. Provenance grades
-# --------------------------------------------------------------------------- #
 
 def print_coverage(stats):
     """Print the per-kind, per-tier sourcing tally over the dataset's **nodes** (the
@@ -947,7 +780,7 @@ def check_provenance(report, meta, structures, projections, circuits,
     # UNKNOWN stamps (data_generators/unknown.py): only on a claim still unsourced, and
     # only after a search that covered every corpus its kind requires.
     n_unknown = 0
-    for where, kind, claim, stamp in _unknown_stamps(drugs, metabolites, receptors, meta):
+    for where, kind, claim, stamp in unknown_stamps(drugs, metabolites, receptors, meta):
         n_unknown += 1
         if kind == "drug_binding_action" and (
                 claim.get("action") or not claim.get("affinity_only")):
@@ -1008,10 +841,6 @@ def check_provenance(report, meta, structures, projections, circuits,
                       f"sourced or verified)")
         print_coverage(stats)
 
-
-# --------------------------------------------------------------------------- #
-# 5. Source quotes (verbatim in the cited corpus page)
-# --------------------------------------------------------------------------- #
 
 # A normalized quote shorter than this risks an incidental substring match (a few
 # common words appearing on the page by chance), so a too-short quote is warned
@@ -1685,10 +1514,6 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
         report.ok("every LLM-picked quote was judged by a second model")
 
 
-# --------------------------------------------------------------------------- #
-# 6. Structure connectivity
-# --------------------------------------------------------------------------- #
-
 def check_connectivity(report, structures, projections):
     """Warn about structures the connectome leaves stranded or one-sided.
 
@@ -1788,12 +1613,6 @@ def check_ki_coverage(report, meta, drugs):
                     "(sourced by quote only, or unsourced)")
     report.ok(f"{pct}% of {len(bindings)} bindings carry a measured Ki; "
               f"{len(no_ki)}/{len(ki_drugs)} drugs have none")
-
-
-def _base_id(structure_id):
-    """Drop a trailing ``_R`` / ``_L`` so a mirrored endpoint compares against a
-    base region name (a receptor ``location`` / target ``region`` is a base)."""
-    return _HEMISPHERE_RE.sub("", structure_id) if structure_id else structure_id
 
 
 def _affinity_weight(ki):
@@ -1898,7 +1717,7 @@ def check_flow_consistency(report, meta, drugs, projections, receptors):
     # about. (Projections are already mirror-expanded by the caller.)
     arrives_in = defaultdict(set)
     for proj in projections:
-        kind, dst = proj.get("kind"), _base_id(proj.get("to"))
+        kind, dst = proj.get("kind"), base_id(proj.get("to"))
         if kind and dst:
             arrives_in[kind].add(dst)
 
@@ -1984,43 +1803,8 @@ def check_flow_consistency(report, meta, drugs, projections, receptors):
 
 _APP_VERSION_RE = re.compile(r"""__APP_VERSION__\s*=\s*["']([^"']+)["']""")
 
-# The changelog category vocabulary, imported rather than restated: the authoring
-# module owns it (adding one there must not need an edit here). That module is
-# stdlib-only and imports nothing else, so this stays a cheap standalone script.
-sys.path.insert(0, str(Path(__file__).resolve().parent / "data_generators"))
-from changelog import CATEGORIES as CHANGELOG_CATEGORIES  # noqa: E402
 
-# The PharmFreq export reader, imported rather than restated: family 12
-# rebuilds the emitted quotes with the very code that wrote them, which is
-# the whole point of the derivation gate (see data_generators/pharmfreq.py).
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from data_generators import clinpgx, cpic, freshness, node_id, pharmfreq, unknown  # noqa: E402
-from data_generators.node_kinds import NODE_KINDS, backed  # noqa: E402
-from lib.text_fold import alnum_key  # noqa: E402
-from lib.drugs_io import is_combination  # noqa: E402
-from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
-from lib import stahl_index  # noqa: E402 (the one INDEX.md reader)
-from data_generators import release_modulation as RELMOD  # noqa: E402
-from data_generators import demographics as DEMOG  # noqa: E402
-# The drug + its formulations, the holders of brands / Tmax / T½ (one walker, so the
-# grade and quote walks cannot skip a formulation's claims).
-from data_generators.provenance import product_holders  # noqa: E402
-# The curated contradictions, keyed by citation site and resolved through the one site
-# grammar (tools/sourcing/citation_site.py), exactly as the generator applies them.
-from data_generators.quotes.contradictions import CONTRADICTIONS  # noqa: E402
-sys.path.insert(0, str(Path(__file__).resolve().parent / "sourcing"))
-import citation_site as CS  # noqa: E402
-
-# The pathway per-claim word tests, imported for the same reason: family 5 re-runs the
-# very test that graded a transmitter/sign sub-claim, so a hand-edited or stale ``claims``
-# block (a source that does not name what it is cited for) fails instead of shipping.
-from data_generators.quotes.attestation import (  # noqa: E402
-    BASE_GRADE as CLAIM_BASE_GRADE,
-    pattern_for as claim_pattern,
-)
-
-
-def _holder_ctxs(ctx, drug):
+def holder_ctxs(ctx, drug):
     """``(context label, holder)`` for the drug and each of its formulations."""
     return [(ctx if h is drug else f"{ctx} formulation {h.get('release')}", h)
             for h in product_holders(drug)]
@@ -2048,7 +1832,7 @@ def iter_drug_sources(drug):
                        "category", drug)
     # The molecule and each formulation: a release read off a brand's own suffix cites
     # that brand ("Seroquel XR"), a duration is one labelled cell ("Half-life 10 hours").
-    for hctx, h in _holder_ctxs(did, drug):
+    for hctx, h in holder_ctxs(did, drug):
         for f in ("half_life_sources", "tmax_sources", "release_sources"):
             yield from _listed(f"{hctx} {f}", h.get(f), True, f, h)
         for br in h.get("brands", []) or []:
@@ -2117,7 +1901,7 @@ def check_innervation(report, meta, structures, projections, receptors):
     if not flow:
         report.warn("meta.system_flow_kinds is empty; skipping innervation coverage")
         return
-    names = {_base_id(s["id"]): s.get("base_name") or _base_id(s["id"])
+    names = {base_id(s["id"]): s.get("base_name") or base_id(s["id"])
              for s in structures}
 
     # Where each system is expressed: its receptors' locations + its non-receptor
@@ -2148,9 +1932,9 @@ def check_innervation(report, meta, structures, projections, receptors):
     reached, sources = defaultdict(set), defaultdict(set)
     for p in projections:
         kind = p.get("kind")
-        reached[kind].add(_base_id(p.get("from")))
-        reached[kind].add(_base_id(p.get("to")))
-        sources[kind].add(_base_id(p.get("from")))
+        reached[kind].add(base_id(p.get("from")))
+        reached[kind].add(base_id(p.get("to")))
+        sources[kind].add(base_id(p.get("from")))
 
     for kind in sorted(set(flow.values())):
         exp, got = expressed[kind], reached[kind]
@@ -2659,7 +2443,7 @@ def _editable_sources(node, editable, out):
     return out
 
 
-def _unknown_stamps(drugs, metabolites=(), receptors=(), meta=None):
+def unknown_stamps(drugs, metabolites=(), receptors=(), meta=None):
     """Every emitted UNKNOWN stamp, as ``(where, kind, claim, stamp)``: a drug or
     metabolite binding direction (kind ``drug_binding_action``, claim = the binding),
     or a receptor's / non-receptor target's effects (kind ``receptor_effect``, claim =
@@ -2737,7 +2521,7 @@ def check_freshness(report, meta, collections, today=None, metabolites=(), recep
     drugs = next((c for c in collections if isinstance(c, list) and c
                   and isinstance(c[0], dict) and "bindings" in c[0]), [])
     old_searches = {}
-    for where, _k, _c, stamp in _unknown_stamps(drugs, metabolites, receptors, meta):
+    for where, _k, _c, stamp in unknown_stamps(drugs, metabolites, receptors, meta):
         searched = str(stamp.get("searched"))
         if re.fullmatch(r"\d{4}-\d{2}-\d{2}", searched) and freshness.is_stale(
                 searched, today, months):
@@ -2764,7 +2548,7 @@ def main():
 
     meta = load_meta(report)
     structures = load_jsonl(report, "structures")
-    projections = _expand_mirrored(load_jsonl(report, "projections"))
+    projections = expand_mirrored(load_jsonl(report, "projections"))
     circuits = load_jsonl(report, "circuits")
     projection_groups = load_jsonl(report, "projection_groups")
     receptors = load_jsonl(report, "receptors")

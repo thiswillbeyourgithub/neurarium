@@ -737,7 +737,10 @@ class FamilyCountTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        src = (cls.ROOT / "tools" / "check_data.py").read_text(encoding="utf-8")
+        # The families live in tools/checks/ (one module each), driven by check_data.py.
+        files = [cls.ROOT / "tools" / "check_data.py",
+                 *sorted((cls.ROOT / "tools" / "checks").rglob("*.py"))]
+        src = "\n".join(f.read_text(encoding="utf-8") for f in files)
         cls.numbers = sorted(int(n) for n in
                              re.findall(r'report\.header\("(\d+)\.', src))
 
