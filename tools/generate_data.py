@@ -1457,34 +1457,9 @@ def _load_drugs() -> list[dict[str, Any]]:
     return drugs_io.load_drugs()
 
 
-def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
-    """Expand the anatomy definition into the per-type record sets + shapes.
-
-    Paired entries are emitted twice (``_R`` and ``_L``) but share a *single*
-    right-side shape file: the left member references the same file and is
-    reflected across x at load time (``mirror``), so the two hemispheres are
-    true mirror images rather than copies, and there is exactly one geometry
-    file per distinct form (no duplication). Midline entries are emitted once.
-
-    Returns
-    -------
-    data
-        ``{"meta": <dict>, "structures": [...], "projections": [...],
-        "circuits": [...]}`` -- one entry per output file (``meta.json`` plus the
-        three ``*.jsonl``). Records carry **no** ``type`` field: the file a record
-        lives in encodes its type, so it is not duplicated onto every line.
-    shapes
-        Mapping of shape-file basename -> shape payload dict.
-    """
-    # The machine-written registries (location / density / classification sources,
-    # enzyme variability, CPIC) are read from tools/generated_cache/ here, not at import.
-    provenance_registry.load_external_registries()
+def _build_structures() -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
+    """Every structure record (paired ``_R`` / ``_L`` + midline) and the shape files."""
     structures: list[dict[str, Any]] = []
-    projections: list[dict[str, Any]] = []
-    circuits: list[dict[str, Any]] = []
-    projection_groups: list[dict[str, Any]] = []
-    receptors: list[dict[str, Any]] = []
-    drugs: list[dict[str, Any]] = []
     shapes: dict[str, dict[str, Any]] = {}
 
     # Same-group blob neighbours for the inter-region jigsaw clipping. Only
@@ -1502,7 +1477,6 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # hero) + structure_image_gallery (the GIFs are too large to vendor, unlike the
     # drug molecule SVGs). Circuits get the same, keyed by circuit id.
     structure_images = _load_structure_images()
-    circuit_images = _load_circuit_images()
 
     for entry in PAIRED:
         x, y, z = entry["pos"]
@@ -1538,7 +1512,12 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             _structure_record(entry, sid, name, name, entry["pos"], sid,
                               images=structure_images))
         shapes[sid] = _shape_record(entry, entry["pos"][0])
+    return structures, shapes
 
+
+def _build_projections(structures: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Every projection arrow (mirrored pairs expanded) plus its derived post-passes."""
+    projections: list[dict[str, Any]] = []
     for proj in PROJECTIONS:
         projections.extend(_projection_records(proj))
     # The "uncertain" badges again, for the pathways a book states as one sweep ("project
@@ -1553,12 +1532,16 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # A transmitter / sign only a set-level sentence states ("the cerebral cortex" ->
     # "the striatum") wears the orange badge on that sub-claim (quotes/uncertainty.py).
     apply_set_claim_uncertainty(projections, structures)
-    INTEGRITY.validate_quote_registries()
+    return projections
 
-    # Circuits: expand each base structure id to whatever was emitted (both
-    # hemispheres for a paired form, the bare id for a midline one). Built from
-    # the structure records already collected, so it can't reference a structure
-    # that doesn't exist.
+
+def _build_circuits(structures: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Every circuit record. Each base structure id expands to whatever was emitted
+    (both hemispheres for a paired form, the bare id for a midline one). Built from
+    the structure records already collected, so it can't reference a structure that
+    doesn't exist."""
+    circuits: list[dict[str, Any]] = []
+    circuit_images = _load_circuit_images()
     structure_ids = {r["id"] for r in structures}
     for circuit in CIRCUITS:
         ids: list[str] = []
@@ -1598,7 +1581,12 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             if cgallery:
                 record["structure_image_gallery"] = cgallery
         circuits.append(record)
+    return circuits
 
+
+def _build_projection_groups() -> list[dict[str, Any]]:
+    """Every projection-group record (the legend's per-pathway rows)."""
+    projection_groups: list[dict[str, Any]] = []
     # Projection groups: the legend's per-pathway rows as a sourced data structure
     # (see PROJECTION_GROUPS). One record per group, in BOTH colour modes; the
     # member pathways are derived in the viewer (the projections whose kind / sign
@@ -1641,24 +1629,32 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             record["sources"] = _expand_sources(
                 group["sources"], f"projection group {gid!r}")
         projection_groups.append(record)
+    return projection_groups
 
-    # Receptors: validate + normalize each against the known structure bases
-    # (locations reference bases like circuits do; the viewer expands them to
-    # both hemispheres). Duplicate ids fail the build.
-    receptor_bases = structure_bases()
+
+def _build_receptors(receptor_bases: set[str]) -> list[dict[str, Any]]:
+    """Every receptor record, validated + normalized against the known structure
+    bases (locations reference bases like circuits do; the viewer expands them to
+    both hemispheres). Duplicate ids fail the build."""
+    receptors: list[dict[str, Any]] = []
     seen_receptor_ids: set[str] = set()
     for rec in RECEPTORS:
         if rec["id"] in seen_receptor_ids:
             raise KeyError(f"Duplicate receptor id {rec['id']!r}")
         seen_receptor_ids.add(rec["id"])
         receptors.append(_receptor_record(rec, receptor_bases))
+    return receptors
 
-    # Drugs: authored in tools/data/drugs_data.jsonl, validated against the drug
-    # vocabularies + the merged target map (DRUG_TARGETS + receptor ids). Every
-    # DRUG_TARGETS region must be a known structure base (typo guard), like a
-    # receptor location. Duplicate drug ids fail the build.
-    INTEGRITY.validate_drug_targets()
-    drug_targets = _build_drug_targets(receptors)
+
+def _build_drugs(drug_targets: dict[str, dict[str, Any]], receptor_bases: set[str],
+                 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
+    """Every drug record + the metabolite store, and the set of drug ids.
+
+    Drugs are authored in tools/data/drugs_data.jsonl, validated against the drug
+    vocabularies + the merged target map (DRUG_TARGETS + receptor ids). Duplicate
+    drug ids fail the build.
+    """
+    drugs: list[dict[str, Any]] = []
     valid_targets = set(drug_targets.keys())
     molecule_ids = _available_molecule_ids()
     enzyme_rows = _load_drug_enzymes()
@@ -1676,6 +1672,13 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             _drug_record(drug, valid_targets, receptor_bases, molecule_ids,
                          enzyme_rows, metabolite_store))
     INTEGRITY.validate_drug_aliases(seen_drug_ids)
+    return drugs, metabolites, seen_drug_ids
+
+
+def _apply_uncertainty_passes(*, structures, projections, circuits, projection_groups,
+                              receptors, drug_targets, drugs, metabolites) -> None:
+    """The cross-node post-passes that flag claims (uncertain / unknown / contradicted /
+    animal evidence), in their dependency order (each comment says why)."""
     # The "uncertain" badges: a post-pass, not part of _drug_record, because two of the
     # bullets look across bindings (how many monographs print the same sentence, and how
     # many subtypes one sentence covers). See the module.
@@ -1702,16 +1705,11 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                                     projections=projections, receptors=receptors,
                                     targets=drug_targets)
     print(f"animal_evidence flags: {flagged}")
-    INTEGRITY.validate_metabolite_enzyme_quotes(_METABOLITE_ENZYME_SEEN)
 
-    # Addon nodes: each anchors the node whose panel it sits in (see integrity).
-    addons = build_addons()
-    INTEGRITY.validate_addon_owners(
-        addons, drug_ids=seen_drug_ids, receptor_ids={r["id"] for r in receptors},
-        target_ids=set(drug_targets))
-    INTEGRITY.validate_presentation_maps(projections, structures)
-    INTEGRITY.validate_translations(_MISSING_TRANSLATIONS)
 
+def _build_meta(*, structures, projections, circuits, projection_groups, receptors,
+                drug_targets, drugs, metabolites, addons) -> dict[str, Any]:
+    """The ``meta.json`` object: presentation maps, vocabularies and the tally."""
     # Presentation metadata (its own meta.json) so a consumer reading the dataset
     # is self-contained: arrow colours + legend headings live in the data, not
     # only in the viewer's JS.
@@ -1844,7 +1842,58 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             structures, projections, circuits, projection_groups,
             receptors, drugs, metabolites, drug_targets, addons, enzymes),
     }
+    return meta
 
+
+def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+    """Expand the anatomy definition into the per-type record sets + shapes.
+
+    Paired entries are emitted twice (``_R`` and ``_L``) but share a *single*
+    right-side shape file: the left member references the same file and is
+    reflected across x at load time (``mirror``), so the two hemispheres are
+    true mirror images rather than copies, and there is exactly one geometry
+    file per distinct form (no duplication). Midline entries are emitted once.
+
+    Returns
+    -------
+    data
+        ``{"meta": <dict>, "structures": [...], "projections": [...],
+        "circuits": [...]}`` -- one entry per output file (``meta.json`` plus the
+        three ``*.jsonl``). Records carry **no** ``type`` field: the file a record
+        lives in encodes its type, so it is not duplicated onto every line.
+    shapes
+        Mapping of shape-file basename -> shape payload dict.
+    """
+    # The machine-written registries (location / density / classification sources,
+    # enzyme variability, CPIC) are read from tools/generated_cache/ here, not at import.
+    provenance_registry.load_external_registries()
+    structures, shapes = _build_structures()
+    projections = _build_projections(structures)
+    INTEGRITY.validate_quote_registries()
+    circuits = _build_circuits(structures)
+    projection_groups = _build_projection_groups()
+    # Receptors and drug-target regions reference structure *bases* like circuits do
+    # (the viewer expands them to both hemispheres).
+    receptor_bases = structure_bases()
+    receptors = _build_receptors(receptor_bases)
+    INTEGRITY.validate_drug_targets()
+    drug_targets = _build_drug_targets(receptors)
+    drugs, metabolites, drug_ids = _build_drugs(drug_targets, receptor_bases)
+    nodes = dict(structures=structures, projections=projections, circuits=circuits,
+                 projection_groups=projection_groups, receptors=receptors,
+                 drug_targets=drug_targets, drugs=drugs, metabolites=metabolites)
+    _apply_uncertainty_passes(**nodes)
+    INTEGRITY.validate_metabolite_enzyme_quotes(_METABOLITE_ENZYME_SEEN)
+
+    # Addon nodes: each anchors the node whose panel it sits in (see integrity).
+    addons = build_addons()
+    INTEGRITY.validate_addon_owners(
+        addons, drug_ids=drug_ids, receptor_ids={r["id"] for r in receptors},
+        target_ids=set(drug_targets))
+    INTEGRITY.validate_presentation_maps(projections, structures)
+    INTEGRITY.validate_translations(_MISSING_TRANSLATIONS)
+
+    meta = _build_meta(**nodes, addons=addons)
     return ({"meta": meta, "structures": structures,
              "projections": projections, "circuits": circuits,
              "projection_groups": projection_groups,
