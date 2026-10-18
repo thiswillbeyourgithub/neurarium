@@ -1,6 +1,6 @@
 """The node-kind roster and the "backed" sum, shared by every tally reader.
 
-``provenance._provenance_stats`` emits one ``meta.provenance_stats.by_kind`` entry
+``provenance_stats._provenance_stats`` emits one ``meta.provenance_stats.by_kind`` entry
 per kind below; ``check_data.py`` re-checks that tally and ``update_readme_stats.py``
 renders it, so all three read these names instead of restating them.
 ``tools/tests/test_node_kinds.py`` pins the emitted meta, the README label table and

@@ -53,11 +53,8 @@ from data_generators.presentation import (
     SYSTEM_FLOW_KINDS,
 )
 from data_generators.corpora import SOURCE_CORPORA
-from data_generators.provenance import (
-    QUOTE_PIPELINES,
-    _provenance_stats,
-    build_enzymes,
-)
+from data_generators.provenance import QUOTE_PIPELINES, build_enzymes
+from data_generators.provenance_stats import _provenance_stats
 from data_generators.quotes import UNCERTAINTY_REASONS
 
 

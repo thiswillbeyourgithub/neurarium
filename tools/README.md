@@ -212,8 +212,10 @@ Screenshots).
 - `tools/data/drugs_data.jsonl` — the authored drug dataset (from Stahl 8th ed.), one compact
   JSON object per line, read by `_load_drugs`, emitted to `data/drugs.jsonl`. Edit to add/change a drug.
 - `tools/data_generators/` — pure-data modules imported by `generate_data.py`: `drugs.py`,
-  `provenance.py` (also houses the sourcing-tally helpers `_GRADE_RANK`/`_strongest_grade`/
-  `_binding_grade` + `_provenance_stats`, which reduce the emitted nodes to `meta.provenance_stats`),
+  `provenance.py` (grades, `_GRADE_RANK`, source validators), `corpora.py` (`SOURCE_CORPORA`),
+  `provenance_stats.py` (the sourcing tally `_strongest_grade`/`_binding_grade` + `_provenance_stats`,
+  which reduce the emitted nodes to `meta.provenance_stats`), `integrity.py` (authored-table typo
+  guards), `meta.py` (the `meta.json` builder),
   `i18n.py`, `quote_table.py` (the serialization-time source-quote externalize pass -> `quotes.jsonl`,
   mirroring the i18n externalize), and the `receptors/` subpackage (one module per neurotransmitter
   family, e.g. `serotonergic.py`, each exposing `ENTRIES`; `__init__.py` concatenates them into

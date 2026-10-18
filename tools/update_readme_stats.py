@@ -4,7 +4,7 @@
 The README quotes a "% of nodes sourced or verified" figure. So that number is a
 real count of the shipped data and never drifts from it, this tool reads the
 programmatic tally the generator emits (``public/data/meta.json`` ->
-``provenance_stats``, see ``generate_data.py`` ``_provenance_stats``) and rewrites
+``provenance_stats``, see ``data_generators/provenance_stats.py`` ``_provenance_stats``) and rewrites
 the block between the two marker comments in ``README.md``::
 
     <!-- SOURCING_STATS:START ... -->

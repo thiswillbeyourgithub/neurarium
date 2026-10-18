@@ -107,7 +107,7 @@ coloured **pill** on the row/heading that carries the claim: green `✓` verifie
 yellow `~` sourced, grey `?` llm, orange `NOSOURCE` when there is no source. A node's
 grade is never simply absent from a panel.
 
-**The coverage tally.** `_provenance_stats` (generator) reduces every node to its
+**The coverage tally.** `_provenance_stats` (`tools/data_generators/provenance_stats.py`) reduces every node to its
 single strongest grade and buckets it into **verified** / **sourced** / **missing**,
 where *missing* is "no source document at all" (a bare `llm` grade counts as missing:
 an LLM asserting something from memory is precisely *no document*). It emits

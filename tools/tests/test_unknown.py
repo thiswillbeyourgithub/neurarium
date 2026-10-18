@@ -23,7 +23,7 @@ from checks.common import Report  # noqa: E402
 from checks.freshness import check_freshness  # noqa: E402
 from checks.provenance import check_provenance  # noqa: E402
 from data_generators import unknown  # noqa: E402
-from data_generators.provenance import _provenance_stats  # noqa: E402
+from data_generators.provenance_stats import _provenance_stats  # noqa: E402
 
 ALL = list(unknown.UNKNOWN_REQUIRED_SOURCES["drug_binding_action"])
 
