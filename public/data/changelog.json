@@ -1,6 +1,25 @@
 {
   "versions": [
     {
+      "version": "3.131.5",
+      "date": "2026-10-18",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Data tooling cleanup: one list of node kinds and one \"backed\" count shared by the generator, the data check and the README stats, and more sourcing passes check their quotes through the shared page gate",
+          "commits": [
+            "adf0a30",
+            "7a891ef",
+            "1d18588",
+            "6585c8e",
+            "0626876",
+            "c840da4",
+            "459c2a7"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.131.4",
       "date": "2026-10-18",
       "entries": [
