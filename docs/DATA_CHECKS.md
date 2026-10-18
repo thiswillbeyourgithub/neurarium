@@ -6,7 +6,7 @@
 
 `tools/check_data.py` (stdlib) runs over the **emitted** `public/data/`,
 independent of `generate_data.py`. Exit 0 = no errors (warnings allowed), 1 =
-errors. Functions take loaded data as args (unit-testable). Fourteen families (numbered
+errors. It is only the CLI: each family is its own module under `tools/checks/` (shared report + loaders in `checks/common.py`, family 5's per-node-kind quote walks under `checks/sources/`), and every `check_*` takes loaded data as args (unit-testable). Fourteen families (numbered
 0-13 in the output):
 
 Three severities: `[ERROR]` fails the run, `[warn]` is printed for a human to act on, and `[review]` is an eyeball list whose flags are mostly intended (family 8's flow-vs-binding split, family 7's per-drug "no measured Ki"): counted in the summary but listed only with `python tools/check_data.py --verbose`, so the default run's warnings stay few enough to read. The short-quote warning (family 5) skips any flattened table row (`cell | cell`) and one-cell facts on the owner's own page (a brand, class label, duration, metabolism cell, tissue line); it still fires on a short binding or pathway quote, where an incidental substring is plausible.

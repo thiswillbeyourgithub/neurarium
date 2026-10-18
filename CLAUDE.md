@@ -115,7 +115,7 @@ Files (`public/`, the full per-file map is in `docs/ARCHITECTURE.md`): `main.js`
 
 ## Data checks
 
-> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib) over emitted `public/data/`: fourteen families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage, baked meshes, enzyme variability, freshness: an editable online corpus page cited but downloaded over 12 months ago fails, also run unskippably by `pre-push`).
+> Moved to [`docs/DATA_CHECKS.md`](docs/DATA_CHECKS.md) to keep this file terse: `tools/check_data.py` (stdlib CLI, one module per family in `tools/checks/`) over emitted `public/data/`: fourteen families (quote table, duplicates, reachability, TODOs, provenance grades, source quotes, connectivity, Ki coverage, drug flow consistency, changelog, innervation coverage, baked meshes, enzyme variability, freshness: an editable online corpus page cited but downloaded over 12 months ago fails, also run unskippably by `pre-push`).
 
 There is a **code** check too, since there is no build step to hold a linter: `tools/check_js.py` (stdlib) walks each `public/**/*.js` scope tree and fails on any identifier reference no enclosing scope binds. That is the crash `node --check` cannot see (the file parses; the browser raises only when that line runs), and it is what a missing destructured parameter looks like. It runs unskippably in `pre-push` and as `tools/tests/test_check_js.py`. It is a lint, not a parser: every ambiguity resolves toward silence, so it under-reports rather than crying wolf (its docstring lists which).
 

@@ -17,7 +17,8 @@ when any error is found, so it is usable as a gate (see the pre-push hook in
 ``tools/git-hooks/``).
 
 Fourteen families of checks, numbered 0 to 13 as the report headers print them
-(each ``check_*`` function's docstring holds the detail of its family):
+(each family lives in its own ``tools/checks/`` module, whose ``check_*`` docstring
+holds the detail; this file is only the CLI that loads the data and runs them in order):
 
 0. **Quote table** (``check_quotes``). Every ``quote_id`` resolves, none is orphaned.
 

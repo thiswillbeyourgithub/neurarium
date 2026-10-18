@@ -249,7 +249,7 @@ Screenshots).
 - `tools/lib/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
   used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
 - `tools/lib/text_fold.py`: shared name folding (`strip_accents`, `alnum_key`) for every author-side matcher; reuse it rather than re-spelling an NFKD fold or an INDEX-name key.
-- `tools/check_data.py` — stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks).
+- `tools/check_data.py`: stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks); the CLI only, one module per family in `tools/checks/` (family 5's walks in `tools/checks/sources/`).
 - `tools/check_js.py` — stdlib scope walk over `public/**/*.js`, reporting every identifier reference
   no enclosing scope binds (the `ReferenceError` a valid-syntax file still ships). Takes paths, else
   checks the whole viewer; exit 1 on a finding. Run by `pre-push` and by `tools/tests/test_check_js.py`.
