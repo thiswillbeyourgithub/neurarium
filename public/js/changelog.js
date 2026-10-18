@@ -95,17 +95,26 @@ function formatDate(iso, lang) {
 export function createChangelog({ version, sourceUrl, t, pick, wireModal }) {
   const body = document.getElementById("changelog-body");
   const ctrl = wireModal({ modalId: "changelog-modal", closeId: "changelog-close" });
+  // `cache` holds the loaded releases (read synchronously by shippedReleases);
+  // `pending` the in-flight promise, so concurrent callers share one fetch. A
+  // failed load is evicted so the next call retries.
   let cache = null;
+  let pending = null;
 
-  async function load() {
-    if (cache) return cache;
-    // A plain fetch: the service worker already revalidates every same-origin
-    // asset, so freshness is handled there rather than with a per-call cache mode.
-    const res = await fetch("data/changelog.json");
-    if (!res.ok) throw new Error(`changelog.json: HTTP ${res.status}`);
-    const data = await res.json();
-    cache = Array.isArray(data?.versions) ? data.versions : [];
-    return cache;
+  function load() {
+    if (!pending) {
+      pending = (async () => {
+        // A plain fetch: the service worker already revalidates every same-origin
+        // asset, so freshness is handled there rather than with a per-call cache mode.
+        const res = await fetch("data/changelog.json");
+        if (!res.ok) throw new Error(`changelog.json: HTTP ${res.status}`);
+        const data = await res.json();
+        cache = Array.isArray(data?.versions) ? data.versions : [];
+        return cache;
+      })();
+      pending.catch(() => { pending = null; });
+    }
+    return pending;
   }
 
   function seenVersion() {

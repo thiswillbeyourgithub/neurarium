@@ -22,8 +22,9 @@
 // docker/Caddyfile). Results are cached per drug+language (in-memory + a session
 // store) so re-opening a drug never refetches.
 
-// `${url}::${lang}` -> { text, lang } | null. A null (negative) result is cached
-// in-memory only, so a page reload retries a transient failure; positives are also
+// `${url}::${lang}` -> Promise<{ text, lang } | null>, the in-flight promise so
+// concurrent callers share one fetch. A clean "no lead" null stays cached in-memory
+// only; a failed fetch is evicted so the next call retries; positives are also
 // persisted to sessionStorage so a session never refetches the same lead.
 const memCache = new Map();
 const SS_PREFIX = "neurarium:wikilead:";
@@ -124,43 +125,48 @@ export function clipLead(text, max = 300) {
 // falling back to the article's own language (English) when the locale article is
 // missing. Resolves to { text, lang } or null; never rejects (the caller keeps the
 // baked description / no description on null).
-export async function fetchWikiLead(wikipediaUrl, lang) {
-  if (!wikipediaUrl) return null;
+export function fetchWikiLead(wikipediaUrl, lang) {
+  if (!wikipediaUrl) return Promise.resolve(null);
   const key = `${wikipediaUrl}::${lang}`;
   if (memCache.has(key)) return memCache.get(key);
   const cached = ssGet(key);
-  if (cached !== undefined) {
-    memCache.set(key, cached);
-    return cached;
-  }
+  const pending = cached !== undefined
+    ? Promise.resolve(cached)
+    // A failed fetch is evicted (the next call retries) and resolves null, so the
+    // baked description stands. The catch runs as a microtask, after the set below.
+    : loadWikiLead(wikipediaUrl, lang, key).catch(() => {
+      memCache.delete(key);
+      return null;
+    });
+  memCache.set(key, pending);
+  return pending;
+}
 
+// The live lookup behind fetchWikiLead: { text, lang } | null, rejecting on a
+// network / API failure.
+async function loadWikiLead(wikipediaUrl, lang, key) {
   let result = null;
-  try {
-    const art = parseArticle(wikipediaUrl);
-    if (art) {
-      if (lang === art.lang) {
+  const art = parseArticle(wikipediaUrl);
+  if (art) {
+    if (lang === art.lang) {
+      const text = await leadExtract(art.lang, art.title);
+      if (text) result = { text, lang: art.lang };
+    } else {
+      // Locale differs from the article's wiki: try the locale article first,
+      // else fall back to the article's own (English) lead.
+      const localTitle_ = await langTitle(art.lang, art.title, lang).catch(() => null);
+      const localized = localTitle_
+        ? await leadExtract(lang, localTitle_).catch(() => null)
+        : null;
+      if (localized) {
+        result = { text: localized, lang };
+      } else {
         const text = await leadExtract(art.lang, art.title);
         if (text) result = { text, lang: art.lang };
-      } else {
-        // Locale differs from the article's wiki: try the locale article first,
-        // else fall back to the article's own (English) lead.
-        const localTitle_ = await langTitle(art.lang, art.title, lang).catch(() => null);
-        const localized = localTitle_
-          ? await leadExtract(lang, localTitle_).catch(() => null)
-          : null;
-        if (localized) {
-          result = { text: localized, lang };
-        } else {
-          const text = await leadExtract(art.lang, art.title);
-          if (text) result = { text, lang: art.lang };
-        }
       }
     }
-  } catch {
-    result = null; // any failure -> baked description stands
   }
 
-  memCache.set(key, result);
   if (result) ssSet(key, result); // persist positives only
   return result;
 }

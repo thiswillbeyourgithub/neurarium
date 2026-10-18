@@ -41,3 +41,24 @@ test("opening online records the newest shipped release", async () => {
   await log.open();
   assert.equal(store.get(KEY), "3.131.0");
 });
+
+test("concurrent loads share one fetch, and a failed load is retried", async () => {
+  // Regression: the resolved value was cached, so two opens racing the first
+  // fetch each fired their own request.
+  let calls = 0;
+  let fail = true;
+  const versions = [{ version: "3.131.0", date: "2026-10-17", items: [] }];
+  const { log } = setup(async () => {
+    calls += 1;
+    await new Promise((r) => setTimeout(r, 5));
+    if (fail) throw new TypeError("offline");
+    return { ok: true, json: async () => ({ versions }) };
+  });
+  await Promise.all([log.open(), log.open()]);
+  assert.equal(calls, 1, "two concurrent opens fetch once");
+  fail = false;
+  await log.open();
+  assert.equal(calls, 2, "the failed load was evicted, so the next open retries");
+  await log.open();
+  assert.equal(calls, 2, "a successful load is cached");
+});
