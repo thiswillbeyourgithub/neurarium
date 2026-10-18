@@ -6,6 +6,35 @@ for **what each tool is** (Tool reference, below) and the **emitted data contrac
 file terse; CLAUDE.md keeps the viewer/runtime map and the non-obvious rules. Author-side
 corpus locations are in `CLAUDE.local.md`.
 
+## Contents
+
+- [Changing the data](#changing-the-data)
+- [Writing release notes](#writing-release-notes)
+- [Refreshing external data (author-side)](#refreshing-external-data-author-side)
+- [Tool reference](#tool-reference)
+  - [Shared libraries](#shared-libraries)
+  - [Generator and data modules](#generator-and-data-modules)
+  - [Code and data checks](#code-and-data-checks)
+  - [Meshes, dev server, screenshots, icons, demos](#meshes-dev-server-screenshots-icons-demos)
+  - [Stahl quote sourcing (bindings, NbN, classes)](#stahl-quote-sourcing-bindings-nbn-classes)
+  - [Expression and function (GtoPdb #7 / #23, Allen AHBA #8)](#expression-and-function-gtopdb-7--23-allen-ahba-8)
+  - [Quote recheck and citation sites](#quote-recheck-and-citation-sites)
+  - [Pharmacogenomics (PharmFreq #13, CPIC #15, ClinPGx #20)](#pharmacogenomics-pharmfreq-13-cpic-15-clinpgx-20)
+  - [Book heading resolution](#book-heading-resolution)
+  - [Drug metabolism (CYP roles)](#drug-metabolism-cyp-roles)
+  - [Binding Ki (PDSP #5, GtoPdb #11)](#binding-ki-pdsp-5-gtopdb-11)
+  - [Wikipedia articles and brand names (#9, #10)](#wikipedia-articles-and-brand-names-9-10)
+  - [Half-life and time to peak (Stahl, DailyMed #14, BDPM #16, Europe PMC #17)](#half-life-and-time-to-peak-stahl-dailymed-14-bdpm-16-europe-pmc-17)
+  - [Drug history, origin and approvals (Drugs@FDA #18)](#drug-history-origin-and-approvals-drugsfda-18)
+  - [Physicochemistry, workup and TDM (#19, #21, #22, #24)](#physicochemistry-workup-and-tdm-19-21-22-24)
+  - [Prodrugs and metabolite bindings](#prodrugs-and-metabolite-bindings)
+  - [Binding directions and UNKNOWN searches](#binding-directions-and-unknown-searches)
+  - [Binding gaps](#binding-gaps)
+  - [Book corpora (PDF to pages)](#book-corpora-pdf-to-pages)
+  - [README stats, images, git hooks](#readme-stats-images-git-hooks)
+- [Data contract (emitted `public/data/`)](#data-contract-emitted-publicdata)
+  - [Geometry](#geometry)
+
 ## Changing the data
 
 1. Edit the relevant list in `generate_data.py` (or `tools/data/drugs_data.jsonl` for drugs).
@@ -203,8 +232,16 @@ What each authoring / fetch / check script in `tools/` is (one line each). The d
 tooling (`serve.py`, `shot.py`, `demos/`) is also summarized in `../CLAUDE.md` (Running,
 Screenshots).
 
+### Shared libraries
+
 - Shared helpers (reuse, never copy): `lib/polite_http.py` (the one GET + User-Agent), `pipeline/judged.py` (qid-checked index picks) + `pipeline/gate.py` (the applier's page gate), `lib/salt_words.py` (EN salt words for name joins), `lib/chirality.py` (enantiomer tags), `data_generators/caches.py` (`load`, `labels`, `attests` for committed caches), `data_generators/node_id.py` (the id shape `check_data` and `render_api` enforce).
 - `tools/lib/`: shared libraries (no `main`, never run): the root helpers above, `quote_match.py` (`normalize_for_match`, `emitted_page_dirs`), `gene_maps.py` (owner -> HGNC gene), `corpora/wikipedia.py` + `corpora/bdpm.py` (stored corpus pages + their joins), `parse/durations.py` (EN/FR duration parsing). A script imports these as `from lib import X` after inserting `tools/` on `sys.path`; it never imports another script for a helper.
+- `tools/lib/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
+  used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
+- `tools/lib/text_fold.py`: shared name folding (`strip_accents`, `alnum_key`) for every author-side matcher; reuse it rather than re-spelling an NFKD fold or an INDEX-name key.
+
+### Generator and data modules
+
 - `generate_data.py` — single source of truth for the anatomy (stdlib-only, offline):
   defines every region/projection/receptor once, emits the artifacts below. Drugs are the
   exception (authored in `tools/data/drugs_data.jsonl`, read by `_load_drugs`). Display strings are
@@ -248,13 +285,16 @@ Screenshots).
 - `tools/data_generators/changelog.py` — parses the authored `docs/changelog/<version>/changelog.md`
   files into the `changelog.json` shape (stdlib, no deps). Fails loud with `file:line` on an unknown
   category, a bullet with no `fr:` line, or stray prose, so a typo cannot silently drop a bullet.
-- `tools/lib/drugs_io.py` — shared JSONL load/save for `drugs_data.jsonl` (`load_drugs`/`save_drugs`);
-  used by `generate_data.py`, `fetch_ki.py`, and the three `apply_*_sources.py` writers.
-- `tools/lib/text_fold.py`: shared name folding (`strip_accents`, `alnum_key`) for every author-side matcher; reuse it rather than re-spelling an NFKD fold or an INDEX-name key.
+
+### Code and data checks
+
 - `tools/check_data.py`: stdlib integrity checker over emitted `public/data/` (see CLAUDE.md Data checks); the CLI only, one module per family in `tools/checks/` (family 5's walks in `tools/checks/sources/`).
 - `tools/check_js.py` — stdlib scope walk over `public/**/*.js`, reporting every identifier reference
   no enclosing scope binds (the `ReferenceError` a valid-syntax file still ships). Takes paths, else
   checks the whole viewer; exit 1 on a finding. Run by `pre-push` and by `tools/tests/test_check_js.py`.
+
+### Meshes, dev server, screenshots, icons, demos
+
 - `tools/bake_meshes.mjs` — **Node** (no deps): meshes every distinct `sdf` shape author-side into
   `public/data/meshes/*.bin` + `index.json`, so a visitor downloads the geometry instead of
   rebuilding it (~0.7s instead of ~3.0s, more on a phone). Imports the browser's own
@@ -268,6 +308,9 @@ Screenshots).
 - `tools/demos/` — Playwright demo-video recorder: `recorder.py` (a `Demo` API) + `neurarium.py`
   (the showcase tour, writes the README hero `docs/images/preview.gif`). Needs ffmpeg+gifski+GPU; see
   `tools/demos/README.md`.
+
+### Stahl quote sourcing (bindings, NbN, classes)
+
 - `tools/sourcing/build_source_worklist.py` — lists not-yet-sourced drug bindings with Stahl page ranges
   (input to the source-extraction workflow; resumable).
 - `tools/sourcing/apply_source_quotes.py` — applies the extraction workflow's accepted quotes onto
@@ -283,6 +326,9 @@ Screenshots).
   model, and the page prose is too irregular to grep). Re-gates every quote with `check_data`'s own
   normalizer, never overwrites an existing source, and prints known cross-corpus `CONFLICTS` rather
   than resolving them. Idempotent; `--dry-run`.
+
+### Expression and function (GtoPdb #7 / #23, Allen AHBA #8)
+
 - `tools/fetch/fetch_gtopdb.py` — fetches receptor tissue-distribution comments from the Guide to
   Pharmacology API (corpus #7 `gtopdb`), the source for **receptor expression regions**;
   `RECEPTOR_GENES` maps receptor->gene->targetId. Caches `data_sources/gtopdb/` + `worklist.json`
@@ -304,16 +350,9 @@ Screenshots).
   deterministic). Idempotent. See docs/PROVENANCE.md (corpora #7/#8).
 - `tools/generated_cache/location_sources.json` — machine-written bulk location sources, loaded by
   `generate_data.py` into `RECEPTOR_LOCATION_SOURCES` / `TARGET_LOCATION_SOURCES`. Not served.
-- `tools/sourcing/apply_cyp_sources.py` — quote-gates the judged CYP roles
-  (`cyp_judged.json`, a candidate **index** per row, never a quote string) and is the **sole
-  writer** of both `tools/generated_cache/drug_enzymes.json` (Stahl) and
-  `drug_enzymes_wikipedia.json` (corpus #9). Five gates: the drug and the index resolve; the
-  (enzyme, role, strength) triple is in the vocabulary; the quote names the isoform the row
-  claims; the quote is verbatim on the cited page under `lib.quote_match.normalize_for_match`; one
-  (enzyme, role) pair per drug per corpus, keeping the reading that carries a strength tier.
-  Stdlib, author-side (the gate needs the gitignored corpora). `--dry-run` reports, `--verbose`
-  lists every rejected row. See docs/DRUGS.md Drug metabolism. Every source it writes is stamped `llm` with the model that
-  judged the file (`--llm`, default `opus`).
+
+### Quote recheck and citation sites
+
 - `tools/sourcing/recheck_quotes.py` — re-verifies every emitted verified quote with a stronger model
   (Sonnet) and stamps the sourcing LLM. `build --out <dir>` writes per-page batches (page text loaded
   once per batch to minimize tokens; Allen AHBA excluded as deterministic); an LLM judges each batch
@@ -356,6 +395,9 @@ Screenshots).
   files, whose shapes differ; `tools/tests/test_citation_site.py` cross-checks the two ends over
   the real dataset, because a divergence does not crash, it just quietly demotes nothing.
   Stdlib, author-side.
+
+### Pharmacogenomics (PharmFreq #13, CPIC #15, ClinPGx #20)
+
 - `tools/fetch/fetch_pharmfreq.py` — stdlib, offline, author-side. Reshapes PharmFreq's
   hand-downloaded "Metabolizer status tool" export (corpus #13) into the committed
   `tools/generated_cache/enzyme_variability.json`, which `build_enzymes()` merges onto
@@ -384,6 +426,9 @@ Screenshots).
   after the fetch, no judge: the API's own strings are the quotes (`extraction: "code"`). Re-running it
   is how you refresh the corpus; the pin makes generation fail loudly if the export moves without it.
 - `tools/fetch/fetch_clinpgx.py` (stdlib, network once, author-side): ClinPGx's clinical-annotations zip (corpus #20) filtered to our receptor/target genes at levels 1A-3, written as the committed export `tools/data/clinpgx/clinical_annotations.json` + its pin `tools/generated_cache/clinpgx_variants.json`; read by `data_generators/clinpgx.py` (`receptor_variant` nodes) and re-derived by check_data family 12. `--refresh` re-downloads, `--dry-run` reports.
+
+### Book heading resolution
+
 - `tools/fetch/fetch_quote_headers.py` — stdlib, offline, author-side. Resolves, for every emitted quote
   from a **book** corpus (a paged corpus whose page tree has an `INDEX.md`), the **trail** of headings it
   sits under, into the committed `tools/generated_cache/quote_headers.json` ({quote_id: [outermost, ...,
@@ -395,6 +440,9 @@ Screenshots).
   monographs, because the extraction drops ~30 section headings and the nearest surviving one then leaks in
   from the previous section or drug. Capped to `MAX_TRAIL` levels. A book missing from the checkout keeps
   its cached trails rather than dropping them. No LLM. `--dry-run` reports without writing. See docs/PROVENANCE.md ("Where a quote sits").
+
+### Drug metabolism (CYP roles)
+
 - `tools/fetch/fetch_cyp_worklist.py`: stdlib, offline. The `drug_enzymes` worklist builder, and the
   only pass that reads a corpus. Pulls Stahl's per-drug `Pharmacokinetics` bullets out of the
   author-side dump and the drugbox `Metabolism` row plus every isoform-naming sentence out of the
@@ -409,6 +457,19 @@ Screenshots).
   shortens a bullet once when a running header or a hyphenated line break defeats it; Wikipedia:
   which file an article lives in including redirect `PAGE_ALIASES`, the sentence split, the
   reference-list skip, the drugbox row). Neither decides whether a sentence supports a role.
+- `tools/sourcing/apply_cyp_sources.py` — quote-gates the judged CYP roles
+  (`cyp_judged.json`, a candidate **index** per row, never a quote string) and is the **sole
+  writer** of both `tools/generated_cache/drug_enzymes.json` (Stahl) and
+  `drug_enzymes_wikipedia.json` (corpus #9). Five gates: the drug and the index resolve; the
+  (enzyme, role, strength) triple is in the vocabulary; the quote names the isoform the row
+  claims; the quote is verbatim on the cited page under `lib.quote_match.normalize_for_match`; one
+  (enzyme, role) pair per drug per corpus, keeping the reading that carries a strength tier.
+  Stdlib, author-side (the gate needs the gitignored corpora). `--dry-run` reports, `--verbose`
+  lists every rejected row. See docs/DRUGS.md Drug metabolism. Every source it writes is stamped `llm` with the model that
+  judged the file (`--llm`, default `opus`).
+
+### Binding Ki (PDSP #5, GtoPdb #11)
+
 - `tools/fetch/fetch_ki.py` — parses the PDSP Ki CSV (`data_sources/books/pdsp_ki/`, author-side) into
   per-drug binding affinities; `--apply` writes each `ki` + adds median-stronger `affinity_only`
   bindings. A curated `ALIAS` map recovers drugs PDSP lists under a related compound. See docs/DRUGS.md Drugs.
@@ -428,6 +489,9 @@ Screenshots).
   `affinity_only` binding, so a stated direction always wins. A disagreement is reported, split into
   compatible refinements (`COMPATIBLE`) and genuine conflicts, never auto-resolved. Re-gates every quote
   through `lib.quote_match.normalize_for_match`; idempotent (`strip_previous` rebuilds its own prior write).
+
+### Wikipedia articles and brand names (#9, #10)
+
 - `tools/fetch/fetch_wikipedia_pharmacology.py` — `uv run` (deps: beautifulsoup4). Fetches a drug's
   English Wikipedia article pinned to its revision id, stores the whole page author-side
   (`data_sources/wikipedia/raw/<slug>.html` + `pages/<slug>.md`, corpus #9 `wikipedia_pharm`), and mines
@@ -444,6 +508,9 @@ Screenshots).
 - `tools/sourcing/apply_brand_names.py` — merges the LLM-extracted eu/fr brands (`brand_judged.json`) into
   `drugs_data.jsonl`, quote-gating each name verbatim on its FR page and tagging the first `fr`, the rest
   `eu` (na from Stahl is kept). Idempotent. See docs/PROVENANCE.md (corpus #10).
+
+### Half-life and time to peak (Stahl, DailyMed #14, BDPM #16, Europe PMC #17)
+
 - `tools/fetch/fetch_pharmacokinetics.py` — stdlib. Scans each drug's Stahl page span (from `INDEX.md`)
   for elimination half-life + active-metabolite lines, pre-parsing durations to hours, into a candidate
   worklist (`tools/generated_cache/pk_worklist.json`) for the LLM that extracts each drug's T½ +
@@ -473,6 +540,9 @@ Screenshots).
   hours equal a duration the quote states (re-parsed here, so the model supplies no number),
   `MAX_TMAX_HOURS` = 24 h oral plausibility, quote verbatim on its page). Idempotent, sole writer of
   `tmax`/`tmax_sources`; writes no `llm` stamp, so `recheck_quotes.py` must run after it.
+
+### Drug history, origin and approvals (Drugs@FDA #18)
+
 - `tools/fetch/fetch_drug_history.py` — stdlib, offline. Offers, per drug, every sentence of the lead and
   history-like sections (EN History / Society and culture / Legal status, FR Histoire / Historique / ...)
   of its stored EN and FR Wikipedia articles that carries a year and an approval or withdrawal word (plus
@@ -489,10 +559,16 @@ Screenshots).
 - `tools/fetch/fetch_originator.py` — stdlib, offline. Offers, per drug, the lead / history sentences of its stored EN article naming who discovered / synthesized / developed it, and, per originator company article listed in `COMPANY_ARTICLES` (fetched once with `fetch_wikipedia_pharmacology.py --title`), its Headquarters / Country rows and its country / successor sentences, into `generated_cache/originator_worklist.json`, no verdict.
 - `tools/sourcing/apply_originator.py` — stdlib. Merges `originator_judged.json` (`drugs: {id: {index, name, company}}`, `companies: {slug: {country: {index, country}, now: {index, name}}}`) behind gates (index resolves, name verbatim in an originator sentence, company lists that name, country attested, `now` in a successor sentence, quote verbatim on its page); sole writer of `originator*`; no `llm` stamp, so run `recheck_quotes.py build --kinds drug_originator,drug_originator_country` after it.
 - `tools/fetch/fetch_drugsfda.py` — stdlib, network once (`download.open.fda.gov`; `--refresh` re-downloads). Corpus #18: reads openFDA's bulk Drugs@FDA export and picks, per drug, the earliest original approval among the NDAs whose single active ingredient is that drug (salt words dropped, `FDA_NAMES` for US names, stereo-aware), only when that NDA is classed a new molecular entity and no matching NDA is undated. Writes `data_sources/drugsfda/pages/<appl>.md` and `generated_cache/drugsfda_approvals.json`. No judge (code extraction).
+- `tools/sourcing/apply_drugsfda.py` — stdlib. Fallback writer of a first **US** approval (`national: true`) onto a drug with none (or its own earlier one), gated (year in the quote, quote verbatim on its page); replaces a Wikipedia approval only when the FDA date is strictly earlier (earliest dated approval wins, `history.earliest_wins`, which `apply_drug_history.py` honours too, so run order does not matter); no `recheck_quotes.py` needed.
+
+### Physicochemistry, workup and TDM (#19, #21, #22, #24)
+
 - `tools/fetch/fetch_physchem.py` stdlib, network (`pubchem.ncbi.nlm.nih.gov`, the B3DB TSV once from GitHub), author-side. Corpora #21 PubChem + #22 B3DB: reads each drug's CID off its stored Wikipedia drugbox, writes `data_sources/pubchem/pages/<cid>.md` (XLogP3, TPSA) and `data_sources/b3db/pages/<cid>.md` (BBB label + logBB rows, joined by CID else exact name, InChI-guarded), then `generated_cache/physchem.json`. `--only <ids>` scopes, `--refresh` re-downloads. No judge (code extraction); follow with `python tools/fetch/stamp_fetch_dates.py` and `python tools/generate_data.py`. See docs/DRUGS.md (Physicochemistry and brain entry).
 - `tools/fetch/fetch_bdpm_rcp.py`: stdlib, offline for drugs with a French product, author-side. Corpus #24 `bdpm_rcp`: per drug, picks the princeps (else #16's product) with an RCP 4.4 and writes `data_sources/bdpm/pages_rcp4/<cis>.md` (sections 4.2 / 4.3 / 4.4) from the freshest copy on disk (#16's `raw/` or `../justelesRCP/data/rcp/`, else EMA's SmPC in `../justelesRCP/data/eu/` for a centrally authorised drug, read only; `--justelesrcp` points elsewhere), plus `generated_cache/bdpm_rcp_labels.json`; prints the drugs with no page. A drug with no CIS product at all falls back to its EPAR found by name (`tools/fetch/fetch_ema_epar.py`: EMA's two EPAR JSON reports, cached in `data_sources/ema/raw/`; the SmPC PDF downloaded once and converted with justelesRCP's `src/ema_pdf.py`, so run `uv run --with pymupdf python tools/fetch/fetch_bdpm_rcp.py` when a new one is needed; `--offline` uses only stored SmPCs, `--refresh-ema` re-pulls the reports and SmPCs) into `pages_rcp4/EMEA-H-C-<n>.md`, the chosen EPAR recorded under `ema` in the cache; the run prints which drugs it reached that way. Then `python tools/fetch/fetch_workup.py` (worklist, no verdict) -> one LLM pass -> `generated_cache/workup_judged.json` (`{drug: [{index, test, timing, condition?}]}`, every offered drug keyed, `[]` = nothing) -> `python tools/sourcing/apply_workup.py --dry-run`, then real (seven gates, sole writer of `workup.json`) -> `python tools/fetch/stamp_fetch_dates.py` -> `python tools/generate_data.py` -> `python tools/sourcing/recheck_quotes.py build --kinds drug_workup --unjudged`, judge, `apply --llm opus` -> `generate_data.py` again. See docs/DRUGS.md (Pre-prescription workup).
-- `tools/sourcing/apply_drugsfda.py` — stdlib. Fallback writer of a first **US** approval (`national: true`) onto a drug with none (or its own earlier one), gated (year in the quote, quote verbatim on its page); replaces a Wikipedia approval only when the FDA date is strictly earlier (earliest dated approval wins, `history.earliest_wins`, which `apply_drug_history.py` honours too, so run order does not matter); no `recheck_quotes.py` needed.
 - `tools/fetch/fetch_agnp_tdm.py`: uv script (pymupdf), offline, author-side. Corpus #19: reads the AGNP TDM guideline's Table 5 (therapeutic range, alert level, TDM level) and Table 1 (substrate isoforms) by cell rectangle off `data_sources/books/agnp_tdm_2026/a-2860-7861.pdf`, gates each row quote on `pages/<n>.md`, writes `generated_cache/agnp_tdm.json` and the drug -> pages table of that book's `INDEX.md`. No judge (code extraction); `generate_data.py` reads the cache via `data_generators/tdm.py`.
+
+### Prodrugs and metabolite bindings
+
 - `tools/fetch/fetch_prodrug_worklist.py` — stdlib, offline. Offers every prodrug / inactive sentence of
   each drug's stored EN Wikipedia article into `generated_cache/prodrug_worklist.json`, with no verdict
   (`--only` merges). See docs/DRUGS.md Drugs (Prodrugs).
@@ -512,6 +588,9 @@ Screenshots).
   the Wikipedia table value), and adds every remaining Ki-table target as `affinity_only`. Sole writer of
   a metabolite's `bindings`; `--only <parent drug ids>` scopes (use it: a full rerun clobbers later
   direction / Ki writes). See docs/DRUGS.md Drugs.
+
+### Binding directions and UNKNOWN searches
+
 - `tools/fetch/fetch_binding_directions.py`: `uv run` (deps: beautifulsoup4, only because it imports
   `fetch_metabolite_bindings`; no HTML is parsed). Offline. The binding-direction worklist builder: for
   every drug with an `affinity_only` binding it reads the stored English Wikipedia article
@@ -559,6 +638,9 @@ Screenshots).
   drug target goes by in prose (Greek folded to Latin, separator-tolerant, boundary-strict, so `d2`
   never fires on `CYP2D6` and `alpha2` never absorbs `alpha2A`). One definition, because a gate that
   disagreed with the offer would accept what the worklist could not have shown.
+
+### Binding gaps
+
 - The binding-gap pass (a **new** binding a drug's EN Wikipedia article states, corpus #9), end to end:
   `uv run tools/fetch/fetch_binding_gaps.py` (offline, `--only <ids>`; writes
   `tools/generated_cache/binding_gaps_worklist.json`, drugbox target cells + direction-stating prose
@@ -570,10 +652,16 @@ Screenshots).
   `apply --llm <model>` -> `generate_data.py`. `tools/lib/binding_gaps.py` (stdlib library) holds the
   predicates both halves run (negation per clause, stereo relatives, covered targets, Stahl detection).
   See docs/DRUGS.md Drugs (Binding gaps).
+
+### Book corpora (PDF to pages)
+
 - `tools/fetch/pdf_to_pages.py` — splits a PDF into one `<page>.md` per page (the quote-gate text);
   `uv run`, `--layout` for OCR.
 - `tools/fetch/build_toc_index.py` — `INDEX.md` from a PDF's embedded TOC (generic). `uv run`.
 - `tools/fetch/build_index.py` — Stahl-specific page index (by `THERAPEUTICS` heading). `uv run`.
+
+### README stats, images, git hooks
+
 - `tools/update_readme_stats.py` — rewrites the README `SOURCING_STATS` + `SOURCES_TABLE` blocks
   (and the headline %) from `meta`; `--check` exits 1 if stale (CI). Idempotent.
 - `tools/fetch/fetch_molecules.py` — downloads each drug's molecule SVG into `public/data/molecules/`;
@@ -730,6 +818,8 @@ there is no node-level catch-all `sources` block.
   node (an addon in a slot nothing draws would ship silently invisible).
 - `molecules/<id>.svg` — vendored per-drug structure diagrams (`fetch_molecules.py`). Structure
   illustrations are NOT vendored (hot-linked, see docs/VIEWER.md Images).
+
+### Geometry
 
 Geometry (`data/shapes/<name>.json`): one file per distinct *form*. L/R pairs share a single
 right-side file; the left member sets `mirror:true` on its structure record and the viewer
