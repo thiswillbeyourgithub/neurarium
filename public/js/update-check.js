@@ -49,7 +49,7 @@ export function shouldReload(local, remote, tried, now = Date.now(), force = fal
   return force || now - tried.at >= RETRY_MS;
 }
 
-/** Whether the guided tour is on screen (js/tour.js mounts `#tour-root`). */
+/** Whether the guided tour is on screen (js/tour/overlay.js mounts `#tour-root`). */
 const tourOpen = () => {
   const root = document.getElementById("tour-root");
   return Boolean(root && !root.hidden);

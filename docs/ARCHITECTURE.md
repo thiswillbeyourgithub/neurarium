@@ -432,7 +432,7 @@ Viewer (`public/`):
 - `js/web-url.js`: `isWebUrl(url)`, the one http(s) scheme guard every data-derived `href` goes through (DOM-free, so pure modules can import it).
 - `js/wiki.js`: `fetchWikiLead(url, lang)` runtime fetch of a Wikipedia lead; locale wins via
   langlinks, English fallback; cached; best-effort (failure -> null).
-- `js/tour.js`: `createTour({steps, labels, onEnd, seenKey})`, a generic, three.js-free coach-mark
+- `js/tour/` (re-exported by `js/tour.js`): `index.js` holds `createTour({steps, labels, onEnd, seenKey})` (the go / start / stop step machine), `overlay.js` the overlay DOM + bubble drag + veils, `layout.js` target resolution, ring, click-through hole and bubble placement, `scroll.js` scroll-into-view, the scroll arrow, the elastic clamp and scroll-follow. A generic, three.js-free coach-mark
   engine (spotlight ring / caption bubble, viewport-aware placement that never covers the target or
   the 3D scene, resize/scroll reposition, localStorage "seen" gate). The bubble is **drag-repositionable**
   (pointer-drag past a small jitter threshold; a dragged bubble opts out of auto-placement for the step)
