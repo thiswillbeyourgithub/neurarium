@@ -1834,18 +1834,34 @@
 
   // Look up a UI string, with optional {token} interpolation. Falls back to the
   // English entry, then to the key itself, so a missing translation is visible
-  // but never blank.
-  function t(key, vars) {
+  // but never blank. `fill` maps each interpolated value to its text.
+  function format(key, vars, fill) {
     var table = MESSAGES[lang] || MESSAGES.en;
     var s = table[key];
     if (s == null) s = MESSAGES.en[key];
     if (s == null) return key;
     if (vars) {
       s = s.replace(/\{(\w+)\}/g, function (m, name) {
-        return name in vars ? String(vars[name]) : m;
+        return name in vars ? fill(String(vars[name])) : m;
       });
     }
     return s;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function t(key, vars) {
+    return format(key, vars, String);
+  }
+
+  // `t` for a string bound for innerHTML: the catalogue entry's own markup is kept
+  // (it is authored here, trusted) but every interpolated value is HTML-escaped.
+  function tHtml(key, vars) {
+    return format(key, vars, escapeHtml);
   }
 
   // The data-translation side table (English string -> French), loaded from
@@ -1919,6 +1935,7 @@
   window.__I18N__ = {
     lang: lang,
     t: t,
+    tHtml: tHtml,
     ofNoun: ofNoun,
     pick: pick,
     setDataTranslations: setDataTranslations,

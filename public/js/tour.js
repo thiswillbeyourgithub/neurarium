@@ -27,7 +27,7 @@
 // A step:
 //   {
 //     title:   string,             // already localized (caller resolves via t())
-//     body:    string,             // already localized (may contain safe HTML)
+//     body:    string,             // already localized HTML (built with i18n tHtml, which escapes interpolated values)
 //     target?: string | () => Element | null,  // element to spotlight; a CSS
 //                                  // selector or a resolver. Absent/unresolved
 //                                  // => a caption step (no spotlight).

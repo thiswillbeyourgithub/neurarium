@@ -5,7 +5,7 @@
 import { applyExplode } from "../scene/explode.js";
 import { createTour } from "../tour.js";
 
-const { t } = window.__I18N__;
+const { t, tHtml } = window.__I18N__;
 
 export function createViewerTour({
   arrows, autoSpread, controls, data, focus, focusDrug, focusProjectionGroup,
@@ -247,38 +247,38 @@ export function createViewerTour({
   const tourCount = (n) => { const step = n >= 100 ? 50 : 10; return Math.floor(n / step) * step; };
   const tourSteps = [
     // 1. Welcome (caption). Fully reset the UI here so any entry point starts clean.
-    { title: t("tour.welcome.title"), body: t("tour.welcome.body"),
+    { title: t("tour.welcome.title"), body: tHtml("tour.welcome.body"),
       dim: true, placement: "center", before: tourFullReset },
     // 2. Rotate: dim just the panel (veil), keep the brain draggable; Next ungreys
     //    once the user actually drags it.
-    { title: t("tour.rotate.title"), body: t("tour.rotate.body"),
+    { title: t("tour.rotate.title"), body: tHtml("tour.rotate.body"),
       dim: false, placement: "brain", veil: ["#controls"], gate: tourGateRotate,
       before: tourReset },
     // 3. Separate: sweep the slider off -> max -> middle (replays on Back->Next); Next
     //    ungreys once the user grabs the slider themselves.
-    { title: t("tour.separate.title"), body: t("tour.separate.body"),
+    { title: t("tour.separate.title"), body: tHtml("tour.separate.body"),
       target: "#explode", dim: false, spotlightOnly: true, gate: tourGateSlider,
       clickThrough: "#explode",
       before: () => { tourReset(); tourEnsurePanel(); autoSpread.playSequence([0, 1, 0, 0.5]); } },
     // 4-5. The legend, before any data: the scene is already colour-coded, so the key
     //    to it belongs early. Same open/close shape as the Sources pair below.
-    { title: t("tour.legendOpen.title"), body: t("tour.legendOpen.body"),
+    { title: t("tour.legendOpen.title"), body: tHtml("tour.legendOpen.body"),
       target: "#legend-toggle", interactive: true, scrollTo: true,
       before: () => { tourReset(); tourEnsurePanel(); } },
-    { title: t("tour.legendLook.title"), body: t("tour.legendLook.body"),
+    { title: t("tour.legendLook.title"), body: tHtml("tour.legendLook.body"),
       target: "#legend-close", dim: false, spotlightOnly: true,
       clickThrough: "#legend-modal", bubbleDock: "bottom",
       gate: tourGateModalClosed("legend-modal"), gateAdvances: true,
       before: () => legendModal.open() },
     // 6. Sourcing: tap the Sources button (opens the popup, auto-advances).
-    { title: t("tour.sourcesOpen.title"), body: t("tour.sourcesOpen.body"),
+    { title: t("tour.sourcesOpen.title"), body: tHtml("tour.sourcesOpen.body"),
       target: "#sourcing-toggle", interactive: true, scrollTo: true,
       before: () => { tourReset(); tourEnsurePanel(); } },
     // 7. Sourcing detail: explain the popup, ringing just its close X with NO page
     //    dim (spotlightOnly) so the breakdown it points at stays fully readable. No
     //    blocker (a gate, not interactive), so the popup stays scrollable; clickThrough
     //    keeps its controls (incl. the X) live, and closing it advances (gateAdvances).
-    { title: t("tour.sourcesDetail.title"), body: t("tour.sourcesDetail.body"),
+    { title: t("tour.sourcesDetail.title"), body: tHtml("tour.sourcesDetail.body"),
       target: "#sourcing-close", dim: false, spotlightOnly: true,
       clickThrough: "#sourcing-modal", bubbleDock: "bottom",
       gate: tourGateModalClosed("sourcing-modal"), gateAdvances: true,
@@ -288,7 +288,7 @@ export function createViewerTour({
     //    reading mode (the rows are a wide table), which sets up the two view
     //    toggles below: the visitor has just seen the brain go away, so the button
     //    that brings it back has something to undo.
-    { title: t("tour.nodesOpen.title"), body: t("tour.nodesOpen.body"),
+    { title: t("tour.nodesOpen.title"), body: tHtml("tour.nodesOpen.body"),
       target: "#nodes-toggle", interactive: true, scrollTo: true,
       before: () => {
         tourReset();
@@ -297,7 +297,7 @@ export function createViewerTour({
         tourCollapseSettings();
         tourCollapseSections();
       } },
-    { title: t("tour.nodesLook.title"), body: t("tour.nodesLook.body"),
+    { title: t("tour.nodesLook.title"), body: tHtml("tour.nodesLook.body"),
       target: () => ["#nodes-filter", ".node-filters"],
       dim: false, scrollTo: true, scrollAlign: "top",
       before: () => {
@@ -306,10 +306,10 @@ export function createViewerTour({
       } },
     // 10-11. The two view toggles, as a pair of opposites: bring the 3D back (the
     //    browser above hid it), then fold the panel away and leave the brain alone.
-    { title: t("tour.show3d.title"), body: t("tour.show3d.body"),
+    { title: t("tour.show3d.title"), body: tHtml("tour.show3d.body"),
       target: "#toggle-3d", interactive: true,
       before: () => { tourReset(); setNo3d(true, { persist: false }); tourExpandPanel(); } },
-    { title: t("tour.collapsePanel.title"), body: t("tour.collapsePanel.body"),
+    { title: t("tour.collapsePanel.title"), body: tHtml("tour.collapsePanel.body"),
       // stayAfterTap: the fold is the thing to watch, so the step holds while the
       // panel collapses and Next (not the tap) moves on. The ring hugs the
       // "neurarium" title, not the full-row hit button, whose centre sits on the
@@ -324,7 +324,7 @@ export function createViewerTour({
     // 12. Browse: highlight the five sections as a group, each teased with a rounded-
     //    down count ("150+"), always an honest undercount (see tourCount).
     { title: t("tour.browse.title"),
-      body: t("tour.browse.body", {
+      body: tHtml("tour.browse.body", {
         structures: tourCount(data.structures.length),
         // data.projections is L/R-expanded at load (symmetric twins share one id),
         // so its length double-counts; the node count (what the collapsed browse
@@ -341,25 +341,25 @@ export function createViewerTour({
       before: () => { tourReset(); tourExpandPanel(); tourCollapseSettings(); tourCollapseSections(); } },
     // 13-14. Drugs first: open the list, then tap Olanzapine (opens its panel and plays
     //    the effect animation live on the brain).
-    { title: t("tour.openDrugs.title"), body: t("tour.openDrugs.body"),
+    { title: t("tour.openDrugs.title"), body: tHtml("tour.openDrugs.body"),
       target: "#drugs-toggle", interactive: true, scrollTo: true,
       before: () => { tourReset(); tourCloseSection("drugs"); } },
-    { title: t("tour.drugTap.title"), body: t("tour.drugTap.body"),
+    { title: t("tour.drugTap.title"), body: tHtml("tour.drugTap.body"),
       target: '[data-tour-id="drug:olanzapine"]', interactive: true, scrollTo: true,
       before: () => tourOpenSection("drugs") },
     // 15. The drug's "Direct molecular targets" list (dim:false so the live animation stays visible). The
     //    body flags the drug animations as the least-scientific, still-WIP part.
-    { title: t("tour.drugActs.title"), body: t("tour.drugActs.body"),
+    { title: t("tour.drugActs.title"), body: tHtml("tour.drugActs.body"),
       target: '[data-tour-sec="bindings"]', dim: false, scrollTo: true, scrollAlign: "top",
       before: tourDrugSec("bindings") },
     // 16-17. Still the same panel, further down: the pharmacokinetic half. The enzymes
     //    that clear it (sourced nodes), then the drug -> drug interactions those roles
     //    imply, collapsed so the user opens it themselves (stayAfterTap keeps the step
     //    up so the list it reveals is readable).
-    { title: t("tour.drugMetabolism.title"), body: t("tour.drugMetabolism.body"),
+    { title: t("tour.drugMetabolism.title"), body: tHtml("tour.drugMetabolism.body"),
       target: '[data-tour-sec="metabolism"]', dim: false, scrollTo: true,
       scrollAlign: "top", before: tourDrugSec("metabolism") },
-    { title: t("tour.drugPk.title"), body: t("tour.drugPk.body"),
+    { title: t("tour.drugPk.title"), body: tHtml("tour.drugPk.body"),
       target: () => {
         const d = tourPkDetails();
         return d ? d.querySelector("summary") : null;
@@ -368,64 +368,64 @@ export function createViewerTour({
       scrollAlign: "top", // the list it opens unfolds BELOW the summary: leave it room
       before: () => { tourDrugPanel(); tourCollapsePk(); } },
     // 18. Follow one binding, the H1 receptor row, to that receptor's own panel.
-    { title: t("tour.drugToReceptor.title"), body: t("tour.drugToReceptor.body"),
+    { title: t("tour.drugToReceptor.title"), body: tHtml("tour.drugToReceptor.body"),
       target: '[data-tour-id="ixtarget:h1"]', interactive: true, scrollTo: true,
       before: tourDrugSec("bindings") },
     // 19-20. Walk the receptor (H1) panel: how it is classified, then where it is found.
-    { title: t("tour.receptorFacts.title"), body: t("tour.receptorFacts.body"),
+    { title: t("tour.receptorFacts.title"), body: tHtml("tour.receptorFacts.body"),
       target: '[data-tour-sec="facts"]', dim: false, scrollTo: true,
       before: tourEnsureTab("target:h1", tourH1, focusTarget) },
-    { title: t("tour.receptorRegions.title"), body: t("tour.receptorRegions.body"),
+    { title: t("tour.receptorRegions.title"), body: tHtml("tour.receptorRegions.body"),
       target: '[data-tour-sec="regions"]', dim: false, scrollTo: true,
       before: tourOpenSec(tourEnsureTab("target:h1", tourH1, focusTarget), "regions") },
     // 21. Back out of the receptor panel by hand (tap its close ×).
-    { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
+    { title: t("tour.closePanel.title"), body: tHtml("tour.closePanel.body"),
       target: tourActiveTabClose, interactive: true,
       before: tourEnsureTab("target:h1", tourH1, focusTarget) },
     // 22-23. Structures: open the list, then tap the hippocampus row (isolates it).
-    { title: t("tour.openStructures.title"), body: t("tour.openStructures.body"),
+    { title: t("tour.openStructures.title"), body: tHtml("tour.openStructures.body"),
       target: "#structures-toggle", interactive: true, scrollTo: true,
       before: () => tourCloseSection("structures") },
-    { title: t("tour.structureTap.title"), body: t("tour.structureTap.body"),
+    { title: t("tour.structureTap.title"), body: tHtml("tour.structureTap.body"),
       target: '[data-tour-id="structure:hippocampus"]', interactive: true, scrollTo: true,
       before: () => tourOpenSection("structures") },
     // 24. Read the structure panel (illustration + description; scroll to proceed).
-    { title: t("tour.structureLook.title"), body: t("tour.structureLook.body"),
+    { title: t("tour.structureLook.title"), body: tHtml("tour.structureLook.body"),
       target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
       gate: tourGateScroll, gateAdvances: true,
       before: tourReadPanel("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
     // 25. Back out of the structure panel by hand.
-    { title: t("tour.closePanel.title"), body: t("tour.closePanel.body"),
+    { title: t("tour.closePanel.title"), body: tHtml("tour.closePanel.body"),
       target: tourActiveTabClose, interactive: true,
       before: tourEnsureTab("structure:hippocampus_R", tourStructMesh, tourShowStruct) },
     // 26-27. Projections: open the list, then tap a projection SYSTEM (Dopamine), NOT a
     //    circuit; it pins that system's pathways and streams the by-mechanism flow.
-    { title: t("tour.openProjections.title"), body: t("tour.openProjections.body"),
+    { title: t("tour.openProjections.title"), body: tHtml("tour.openProjections.body"),
       target: "#projections-toggle", interactive: true, scrollTo: true,
       before: () => tourCloseSection("projections") },
-    { title: t("tour.projectionTap.title"), body: t("tour.projectionTap.body"),
+    { title: t("tour.projectionTap.title"), body: tHtml("tour.projectionTap.body"),
       target: '[data-tour-id="group:kind:dopaminergic"]', interactive: true, scrollTo: true,
       before: () => tourOpenSection("projections") },
     // 28. Read the projection-system panel (member pathways + description).
-    { title: t("tour.projectionLook.title"), body: t("tour.projectionLook.body"),
+    { title: t("tour.projectionLook.title"), body: tHtml("tour.projectionLook.body"),
       target: tourPanelIntro, dim: false, scrollTo: true, scrollFree: true,
       gate: tourGateScroll, gateAdvances: true,
       before: tourReadPanel("group:kind_dopaminergic", tourDopGroup, tourShowDopGroup) },
     // 29-30. Get to search by hand: tap Settings (back to the main panel), then the
     //    magnifier (opens the search box). Both auto-advance on the real tap.
-    { title: t("tour.backToSettings.title"), body: t("tour.backToSettings.body"),
+    { title: t("tour.backToSettings.title"), body: tHtml("tour.backToSettings.body"),
       target: "#tab-settings", interactive: true,
       before: tourEnsureTab("group:kind_dopaminergic", tourDopGroup, tourShowDopGroup) },
-    { title: t("tour.openSearch.title"), body: t("tour.openSearch.body"),
+    { title: t("tour.openSearch.title"), body: tHtml("tour.openSearch.body"),
       target: "#search-toggle", interactive: true,
       before: () => tabs.showSettings() },
     // 31. Search demo: the box is open + live (dim:false); clickThrough keeps it
     //    clickable under the guard so they can focus + type a name.
-    { title: t("tour.search.title"), body: t("tour.search.body"),
+    { title: t("tour.search.title"), body: tHtml("tour.search.body"),
       target: "#search .search-modal", dim: false, clickThrough: "#search",
       before: () => { tourExpandPanel(); toolbar.openSearchWithQuery(""); } },
     // 32. Wrap (spotlight the About button, where the tour can be replayed).
-    { title: t("tour.wrap.title"), body: t("tour.wrap.body"),
+    { title: t("tour.wrap.title"), body: tHtml("tour.wrap.body"),
       target: "#about-toggle", before: () => { tourReset(); tourEnsurePanel(); } },
   ];
   const tour = createTour({
