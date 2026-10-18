@@ -23,7 +23,7 @@ const MIN_INTERVAL_MS = 30_000;
 export const RETRY_MS = 10 * 60_000;
 
 /** The version string a version.js body declares, or null. */
-export function parseVersion(text) {
+export function extractAppVersion(text) {
   const m = /__APP_VERSION__\s*=\s*["']([^"']+)["']/.exec(text || "");
   return m ? m[1] : null;
 }
@@ -64,7 +64,7 @@ function start() {
     try {
       const res = await fetch("version.js", { cache: "no-store" });
       if (!res.ok) return;
-      remote = parseVersion(await res.text());
+      remote = extractAppVersion(await res.text());
     } catch {
       return; // offline: keep the cached build
     }

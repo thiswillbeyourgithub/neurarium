@@ -2,12 +2,12 @@
 // tab should reload onto a newer deploy, run by tools/tests/test_js_units.py via `node --test`.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseTried, parseVersion, RETRY_MS, shouldReload } from "../../public/js/update-check.js";
+import { parseTried, extractAppVersion, RETRY_MS, shouldReload } from "../../public/js/update-check.js";
 
 test("reads the version a version.js body declares", () => {
-  assert.equal(parseVersion('// header\nwindow.__APP_VERSION__ = "3.128.0";\n'), "3.128.0");
-  assert.equal(parseVersion("<html>not found</html>"), null);
-  assert.equal(parseVersion(""), null);
+  assert.equal(extractAppVersion('// header\nwindow.__APP_VERSION__ = "3.128.0";\n'), "3.128.0");
+  assert.equal(extractAppVersion("<html>not found</html>"), null);
+  assert.equal(extractAppVersion(""), null);
 });
 
 test("reloads only for another version, once per version", () => {
