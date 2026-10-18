@@ -8,6 +8,10 @@ import { extLink, btn } from "./dom.js";
 
 const { t } = window.__I18N__;
 
+// A reference row's wiki wrap -> its Wikipedia link, so a successful live-lead fetch
+// can relocate that link (see liveWikiDescription).
+const refLinks = new WeakMap();
+
 export function makeReference(P) {
   const {
     body, el, makeProvenancePill, onImagePick,
@@ -30,7 +34,7 @@ export function makeReference(P) {
       // liveWikiDescription), in place of a grade pill: for a live verbatim read
       // the link both names the source and reaches it, so a checkmark beside a
       // link to the very same source is redundant.
-      wrap._refLink = a;
+      refLinks.set(wrap, a);
     } else {
       wrap.appendChild(el("span", null, t("info.reference")));
       wrap.appendChild(makeProvenancePill(null)); // no reference -> NOSOURCE pill
@@ -125,7 +129,7 @@ export function makeReference(P) {
       // so there is no duplicate) and style it as the green source pill, then
       // tidy the row it left: drop a now-leading "·" separator, and the whole row
       // if only the reference lived there (lookup links, if any, stay).
-      const refLink = linkWrap && linkWrap._refLink;
+      const refLink = linkWrap && refLinks.get(linkWrap);
       let marker;
       if (refLink && refLink.isConnected) {
         refLink.classList.add("src-pill", "src-prov-wikipedia", "wiki-src");

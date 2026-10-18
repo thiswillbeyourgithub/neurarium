@@ -10,6 +10,15 @@ import { extLink } from "./dom.js";
 // stacking popups. Holds the open tip's `close` (so its scroll/resize listeners are
 // torn down too, not just its `.show` class).
 let _openTip = null;
+// Each live tooltip bubble -> its `close`, for content inside a bubble that must
+// dismiss it (see closeTip).
+const tipClosers = new WeakMap();
+
+/** Close the tooltip whose bubble is `tipEl` (a no-op for anything else). */
+export function closeTip(tipEl) {
+  const close = tipEl && tipClosers.get(tipEl);
+  if (close) close();
+}
 
 /** Close whichever tooltip is open (pinned or hovered), if any. */
 export function closeOpenTip() {
@@ -164,7 +173,7 @@ export function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}
   };
   // Exposed so an interactive element *inside* the bubble (e.g. a provenance pill's
   // "Click for details" cue) can dismiss it cleanly before opening a popup.
-  tip._close = close;
+  tipClosers.set(tip, close);
   const scheduleHide = () => {
     clearTimeout(hideTimer);
     hideTimer = setTimeout(() => {

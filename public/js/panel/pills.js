@@ -5,7 +5,7 @@
 import { NOSOURCE_GLYPH } from "./format.js";
 import { isWebUrl } from "../web-url.js";
 import { extLink, btn } from "./dom.js";
-import { attachTip, linkifiedText } from "./tooltip.js";
+import { attachTip, closeTip, linkifiedText } from "./tooltip.js";
 import { shownGrade } from "../node-browser.js";
 import { withFetched } from "../data.js";
 
@@ -77,7 +77,7 @@ export function makePills(P) {
     cue.addEventListener("click", (e) => {
       e.stopPropagation();
       const tipEl = cue.closest(".help-tip");
-      if (tipEl && tipEl._close) tipEl._close();
+      closeTip(tipEl);
       if (sourcingModal && sourcingModal.open) sourcingModal.open();
     });
     return cue;

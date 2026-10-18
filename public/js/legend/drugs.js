@@ -66,12 +66,14 @@ export function buildDrugLegend(data, onPick) {
   container.replaceChildren();
   const rows = [];   // { row, id } for the focusable drugs (for reflect)
   const groups = []; // { heading, rows:[row,...] } for the live filter
+  // Filter state per legend row: { haystack, isMetab, ancestors } (see applyFilter).
+  const rowInfo = new WeakMap();
   const effectColors = data.meta.drugEffectColors || {};
   const cats = data.meta.drugCategoryLabels || {};
 
   // Active metabolites as discreet indented bullets under the parent drug, each
   // showing its own T½; a metabolite that is itself a modeled drug jumps to it.
-  // Toggled by #drugs-show-metabolites; marked _isMetab so applyFilter can gate them,
+  // Toggled by #drugs-show-metabolites; marked isMetab (rowInfo) so applyFilter can gate them,
   // and given a haystack (own + parent name) so filtering behaves.
   //
   // Recursive: a metabolite that IS a modeled drug has metabolites of its own
@@ -103,11 +105,9 @@ export function buildDrugLegend(data, onPick) {
         mrow.title = t("drug.metaboliteOf", { prodrug: owner.displayName });
         mrow.addEventListener("click", () => onPick(linked));
       }
-      mrow._haystack = foldText(`${m.name} ${owner.name}`);
-      mrow._isMetab = true;
       // The whole chain up to the drug row, so a match on a grandchild pulls every
       // level above it back into view rather than orphaning the bullet.
-      mrow._ancestorRows = ancestors;
+      rowInfo.set(mrow, { haystack: foldText(`${m.name} ${owner.name}`), isMetab: true, ancestors });
       container.appendChild(mrow);
       groupRows.push(mrow);
       if (linked && !seen.has(linked.id)) {
@@ -142,7 +142,7 @@ export function buildDrugLegend(data, onPick) {
       const row = addLegendItem(
         container, drugSwatchColor(drug, effectColors), drug.displayName, true);
       row.classList.add("drug-item");
-      row._haystack = foldText(`${drug.name} ${drug.keywords}`);
+      rowInfo.set(row, { haystack: foldText(`${drug.name} ${drug.keywords}`), isMetab: false, ancestors: [] });
       row.dataset.tourId = `drug:${drug.id}`; // guided-tour target hook
       // Every drug opens its panel, even one with nothing to light (see js/data.js).
       row.classList.add("clickable");
@@ -169,8 +169,9 @@ export function buildDrugLegend(data, onPick) {
     for (const g of groups) {
       for (const row of g.rows) {
         // A metabolite bullet is visible only when the toggle is on AND it matches.
-        const match = (!q || row._haystack.includes(q)) &&
-          (!row._isMetab || showMetab);
+        const info = rowInfo.get(row);
+        const match = (!q || info.haystack.includes(q)) &&
+          (!info.isMetab || showMetab);
         row.hidden = !match;
       }
       // A matched metabolite pulls its whole chain back into view even when no name
@@ -178,8 +179,9 @@ export function buildDrugLegend(data, onPick) {
       // bullet is never orphaned; "hydroxyamoxapine" shows loxapine AND the amoxapine
       // bullet between them, so the two-step route stays readable).
       for (const row of g.rows) {
-        if (row._isMetab && !row.hidden) {
-          for (const up of row._ancestorRows || []) up.hidden = false;
+        const info = rowInfo.get(row);
+        if (info.isMetab && !row.hidden) {
+          for (const up of info.ancestors) up.hidden = false;
         }
       }
       const groupVisible = g.rows.some((row) => !row.hidden);
