@@ -860,6 +860,31 @@ def _binding_action_grade(binding: dict[str, Any]) -> int | str:
     return max(1, _strongest_grade(binding.get("sources")))
 
 
+# The per-drug scalar node kinds: ONE node per drug carrying a truthy ``field``, graded
+# by its ``<field>_sources`` (absent field = no claim, not an unsourced node).
+# ``per_product`` walks each formulation as well as the molecule (product_holders).
+# (kind, field, per_product), with what each node claims:
+DRUG_SCALAR_KINDS: tuple[tuple[str, str, bool], ...] = (
+    ("drug_nbn", "nbn", False),                    # Neuroscience-based Nomenclature label
+    # Elimination T½ (Stahl verbatim; apply_pharmacokinetics.py).
+    ("drug_half_life", "half_life", True),
+    # Time to peak: its own kind, not a field of the T½ node, since the two are sourced
+    # and missing separately and the simulation reads both ends of one curve (apply_tmax.py).
+    ("drug_tmax", "tmax", True),
+    ("drug_first_approval", "first_approval", False),  # apply_drug_history.py
+    ("drug_originator", "originator", False),          # data_generators/origin.py
+    ("drug_originator_country", "originator_country", False),
+    # "Inactive until metabolised into X"; a drug active itself claims nothing (apply_prodrug.py).
+    ("drug_prodrug", "prodrug", False),
+    # A salt / combination lending its constituents' bindings; a combo named after its
+    # parts carries no such claim.
+    ("drug_constituents", "constituents", False),
+    # AGNP TDM, corpus #19 (data_generators/tdm.py).
+    ("drug_therapeutic_range", "therapeutic_range", False),
+    ("drug_alert_level", "alert_level", False),
+)
+
+
 def _provenance_stats(structures: list[dict[str, Any]],
                       projections: list[dict[str, Any]],
                       circuits: list[dict[str, Any]],
@@ -975,65 +1000,36 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drugs_without_ki": len(drugs_no_ki),
         "drugs_without_ki_ids": sorted(d["id"] for d in drugs_no_ki),
     }
-    nbn_grades = [_strongest_grade(d.get("nbn_sources"))
-                  for d in drugs if d.get("nbn")]
+    # The one-claim-per-drug scalar kinds (see DRUG_SCALAR_KINDS), keyed by kind.
+    holders = [h for d in drugs for h in product_holders(d)]
+    scalar = {kind: tally([_strongest_grade(d.get(f"{field}_sources"))
+                           for d in (holders if per_product else drugs) if d.get(field)])
+              for kind, field, per_product in DRUG_SCALAR_KINDS}
     # Commercial-brand nodes ("this drug is marketed as <brand>"), one per authored
     # brand across all drugs, graded by that brand's own sources (Stahl for na,
     # Wikipedia for eu/fr; see apply_brand_sources.py).
     # A formulation (drug_formulations) holds the brands / Tmax / T½ a source tied
     # to one release type, in the molecule's own shape: they are the same kinds,
     # tallied wherever they sit (see data_generators/formulations.py).
-    holders = [h for d in drugs for h in product_holders(d)]
     brand_grades = [_node_grade(br) for d in holders for br in d.get("brands", [])]
     # Drug class-classification nodes ("this drug is an SSRI/..."), one per drug that
     # has categories: the emitted category_provenance (llm unless overridden/sourced).
     category_grades = [d.get("category_provenance", DEFAULT_PROVENANCE)
                        for d in drugs if d.get("categories")]
-    # Elimination half-life (T½) nodes, one per drug that carries a half_life, graded
-    # by that drug's own half_life_sources (Stahl states it verbatim; see
-    # apply_pharmacokinetics.py). A drug with no half_life is simply not a node here.
-    half_life_grades = [_strongest_grade(d.get("half_life_sources"))
-                        for d in holders if d.get("half_life")]
-    # Time-to-peak (Tmax) nodes, one per drug that carries a tmax, graded by that
-    # drug's own tmax_sources. Its own kind rather than a field of the T½ node: the
-    # two are separately sourced (a Wikipedia prose sentence for the peak, a Stahl
-    # bullet for the half-life) and separately missing, and the simulation reads them
-    # at the two ends of the same curve. See apply_tmax.py.
-    tmax_grades = [_strongest_grade(d.get("tmax_sources"))
-                   for d in holders if d.get("tmax")]
     # Formulation nodes ("this drug is sold as an extended-release product"), ONE per
     # formulation, graded by the source naming its release type.
     formulation_grades = [_strongest_grade(f.get("release_sources"))
                           for d in drugs for f in d.get("formulations", [])]
-    # Regulatory history: ONE first-approval node per drug that carries one, and ONE
-    # node per market withdrawal (a drug never withdrawn has none: absence is not a
-    # claim). Both graded by their own quotes; see apply_drug_history.py.
-    first_approval_grades = [_strongest_grade(d.get("first_approval_sources"))
-                             for d in drugs if d.get("first_approval")]
+    # Regulatory history: ONE node per market withdrawal (a drug never withdrawn has
+    # none: absence is not a claim); see apply_drug_history.py.
     withdrawal_grades = [_node_grade(w) for d in drugs for w in d.get("withdrawals", [])]
     # Who the drug comes from (data_generators/origin.py): ONE holder node per (drug,
-    # market), ONE originator and ONE originator-country node per drug carrying one.
+    # market).
     holder_grades = [_node_grade(h) for d in drugs for h in d.get("holders", [])]
-    originator_grades = [_strongest_grade(d.get("originator_sources"))
-                         for d in drugs if d.get("originator")]
-    originator_country_grades = [_strongest_grade(d.get("originator_country_sources"))
-                                 for d in drugs if d.get("originator_country")]
-    # ONE node per prodrug ("inactive until metabolised into X"); a drug active itself
-    # carries no claim. See apply_prodrug.py.
-    prodrug_grades = [_strongest_grade(d.get("prodrug_sources"))
-                      for d in drugs if d.get("prodrug")]
-    # ONE node per salt / combination declaring its `constituents` (what the viewer
-    # lends it the bindings of); a combo named after its parts carries no such claim.
-    constituents_grades = [_strongest_grade(d.get("constituents_sources"))
-                           for d in drugs if d.get("constituents")]
-    # Therapeutic drug monitoring (AGNP, corpus #19): ONE therapeutic-range node and
-    # ONE alert-level node per drug carrying them (see data_generators/tdm.py).
-    trr_grades = [_strongest_grade(d.get("therapeutic_range_sources"))
-                  for d in drugs if d.get("therapeutic_range")]
-    alert_grades = [_strongest_grade(d.get("alert_level_sources"))
-                    for d in drugs if d.get("alert_level")]
     # Physicochemistry and brain entry (data_generators/physchem.py): ONE node per drug
     # for each of its computed XLogP3, its computed polar surface and its B3DB label.
+    # Not in DRUG_SCALAR_KINDS: presence is key membership (``in``), not truthiness, so
+    # a measured 0 still counts.
     physchem_grades = {f: [_strongest_grade(d.get(f"{f}_sources")) for d in drugs if f in d]
                        for f in ("xlogp", "tpsa", "bbb")}
     # Pre-prescription workup (data_generators/workup.py, BETA): ONE node per (drug,
@@ -1244,21 +1240,21 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "enzyme_variability": tally(variability_grades),
         "drug_bindings": tally(binding_grades),
         "drug_binding_action": tally(binding_action_grades),
-        "drug_nbn": tally(nbn_grades),
+        "drug_nbn": scalar["drug_nbn"],
         "drug_brands": tally(brand_grades),
         "drug_categories": tally(category_grades),
-        "drug_half_life": tally(half_life_grades),
-        "drug_tmax": tally(tmax_grades),
+        "drug_half_life": scalar["drug_half_life"],
+        "drug_tmax": scalar["drug_tmax"],
         "drug_formulations": tally(formulation_grades),
-        "drug_first_approval": tally(first_approval_grades),
+        "drug_first_approval": scalar["drug_first_approval"],
         "drug_withdrawals": tally(withdrawal_grades),
         "drug_holders": tally(holder_grades),
-        "drug_originator": tally(originator_grades),
-        "drug_originator_country": tally(originator_country_grades),
-        "drug_prodrug": tally(prodrug_grades),
-        "drug_constituents": tally(constituents_grades),
-        "drug_therapeutic_range": tally(trr_grades),
-        "drug_alert_level": tally(alert_grades),
+        "drug_originator": scalar["drug_originator"],
+        "drug_originator_country": scalar["drug_originator_country"],
+        "drug_prodrug": scalar["drug_prodrug"],
+        "drug_constituents": scalar["drug_constituents"],
+        "drug_therapeutic_range": scalar["drug_therapeutic_range"],
+        "drug_alert_level": scalar["drug_alert_level"],
         "drug_lipophilicity": tally(physchem_grades["xlogp"]),
         "drug_polar_surface": tally(physchem_grades["tpsa"]),
         "drug_bbb": tally(physchem_grades["bbb"]),
