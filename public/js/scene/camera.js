@@ -460,8 +460,10 @@ export function applyViewParams(bundle) {
   // unless the param asks for it) instead of letting the default keep spinning.
   // Unlike the keys above this is NOT the registry's "a missing key changes nothing"
   // rule: ANY query param means a framed view, hence a still one.
-  autorotate.checked = q.has("autorotate") && q.get("autorotate") !== "0";
-  autorotate.dispatchEvent(new Event("change"));
+  if (autorotate) {
+    autorotate.checked = q.has("autorotate") && q.get("autorotate") !== "0";
+    autorotate.dispatchEvent(new Event("change"));
+  }
   // ?ui=0 hides the control panel (which now nests the toolbar, legend and the
   // detail/info pane) for clean, uncluttered shots (e.g. reviewing a shape).
   if (q.get("ui") === "0") {
@@ -485,7 +487,9 @@ export function applyViewParams(bundle) {
   // framing below targets the solo set. Arrows hidden (form, not relationships).
   if (q.has("solo")) {
     const solo = new Set(q.get("solo").split(",").map((s) => s.trim()).filter(Boolean));
-    const ghost = q.has("ghost") ? Number(q.get("ghost")) : 0.06;
+    // A non-numeric `ghost` falls back to the default (never a NaN opacity); a number is clamped to [0, 1].
+    const ghostRaw = Number(q.get("ghost"));
+    const ghost = q.has("ghost") && Number.isFinite(ghostRaw) ? Math.min(1, Math.max(0, ghostRaw)) : 0.06;
     for (const mesh of meshes) {
       const isSolo = solo.has(mesh.userData.id);
       mesh.material.transparent = !isSolo;
