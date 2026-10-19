@@ -122,7 +122,7 @@ def header_date(path: str) -> str | None:
     return header_field(path, _HEADER_RE)
 
 
-def page_path(corpus: str, page: Any) -> str | None:
+def cited_page_file(corpus: str, page: Any) -> str | None:
     """The author-side page file a per-page corpus cites, or None for a bulk corpus."""
     path = None if corpus in BULK_DATES else corpus_page_path(corpus, page)
     return str(path) if path else None

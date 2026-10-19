@@ -59,7 +59,7 @@ def check_freshness(report, meta, collections, today=None, metabolites=(), recep
             continue
         if freshness.is_stale(fetched, today, months):
             stale[corpus][where] = fetched
-        path = freshness.page_path(corpus, page)
+        path = freshness.cited_page_file(corpus, page)
         on_disk = freshness.header_date(path) if path else None
         if on_disk and on_disk != fetched:
             drift[corpus].add(f"{where} (page {on_disk}, emitted {fetched})")
