@@ -600,8 +600,6 @@ window.__I18N_MESSAGES__.en = {
   "enzymes.title": "Enzymes",
   "enzymes.hint": "The drug-metabolising enzymes (mostly liver cytochrome P450). Not part of the brain: this is pharmacokinetics, so selecting one changes nothing in the 3D view.",
   "drug.actsOn": "Direct molecular targets",
-  "drug.activeMetabWarnOne": "This drug is turned into {names}, which acts in the body too: its own actions are not in this list.",
-  "drug.activeMetabWarnMany": "This drug is turned into {names}, which act in the body too: their own actions are not in this list.",
   "drug.activeMetabMixed": "Be careful: several compounds contribute to what is shown here, this drug and its active metabolites ({names}). Each row names the compound it comes from.",
   "drug.activeMetabSee": "See them",
   "drug.noTargets": "No mapped molecular targets yet.",

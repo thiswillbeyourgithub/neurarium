@@ -601,8 +601,6 @@ window.__I18N_MESSAGES__.fr = {
   "enzymes.title": "Enzymes",
   "enzymes.hint": "Les enzymes qui métabolisent les substances (surtout les cytochromes P450 du foie). Elles ne font pas partie du cerveau : c'est de la pharmacocinétique, donc en sélectionner une ne change rien à la vue 3D.",
   "drug.actsOn": "Cibles moléculaires directes",
-  "drug.activeMetabWarnOne": "Cette substance est transformée en {names}, qui agit aussi dans l'organisme : ses propres actions ne figurent pas dans cette liste.",
-  "drug.activeMetabWarnMany": "Cette substance est transformée en {names}, qui agissent aussi dans l'organisme : leurs propres actions ne figurent pas dans cette liste.",
   "drug.activeMetabMixed": "Prudence : plusieurs composés contribuent à ce qui est affiché ici, cette substance et ses métabolites actifs ({names}). Chaque ligne indique le composé dont elle provient.",
   "drug.activeMetabSee": "Les voir",
   "drug.noTargets": "Aucune cible moléculaire répertoriée pour l'instant.",

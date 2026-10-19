@@ -1,7 +1,7 @@
 // The drug panel's "Active metabolites" subsection, the top of its Metabolism
 // section (see views/drug.js).
 
-import { bindingKi, formatHalfLife } from "./format.js";
+import { formatHalfLife } from "./format.js";
 import { subSection } from "./dom.js";
 import { valueChip } from "../tdm.js";
 
@@ -17,16 +17,13 @@ const { t } = window.__I18N__;
  */
 export function activeMetabolitesSubsection(P, drug, opts = {}) {
   const {
-    bindingRow, drugById, drugNameLink, el, enzymeById, nodePill, onEnzymePick,
-    onTargetPick, targetById,
+    drugById, drugNameLink, el, enzymeById, nodePill, onEnzymePick,
   } = P;
   // Active metabolites: one row per metabolite (its own sourced identity node).
   // A metabolite that is itself a modeled drug links to it (jump via onDrugPick);
-  // each shows its own T½ underneath, a bit like a binding's Ki. A non-modeled
-  // metabolite's OWN receptor bindings (Wikipedia/PDSP-sourced) are listed under it
-  // via the same bindingRow the drug's "Direct molecular targets" uses, so a reader can see what the
-  // metabolite hits without hunting each receptor panel. (A linked metabolite shows
-  // none here: its bindings live on its own drug row, reachable via the link.)
+  // each shows its own T½ underneath, a bit like a binding's Ki. What a metabolite
+  // binds is not listed here: its rows sit in "Direct molecular targets" beside the
+  // parent's, each naming its compound (views/drug.js).
   if (!drug.metabolites || !drug.metabolites.length) return { sec: null, flash: null };
   const metaEl = subSection(t("drug.metabolites"), "info-metabolites");
   metaEl.dataset.tourSec = "metabolites";
@@ -76,20 +73,6 @@ export function activeMetabolitesSubsection(P, drug, opts = {}) {
       li.appendChild(valueChip({ el, nodePill }, {
         label: t("drug.halfLife"), value: hlStr, cls: "metab-hl", bare: true,
         provenance: m.halfLifeProvenance, sources: m.halfLifeSources }));
-    }
-    // A non-modeled metabolite's OWN sourced receptor bindings (m.ownBindings,
-    // resolved in js/data.js from its Wikipedia/PDSP pharmacology). Rendered with
-    // the same bindingRow the drug's "Direct molecular targets" uses, strongest-affinity first, each
-    // row jumping to its target when browsable.
-    if (m.ownBindings && m.ownBindings.length) {
-      const bul = el("ul", "metab-bindings");
-      const mbinds = [...m.ownBindings].sort((a, b) => bindingKi(a) - bindingKi(b));
-      for (const b of mbinds) {
-        const tgt = targetById.get(b.target);
-        const onActivate = tgt && tgt.focusable ? () => onTargetPick(tgt) : null;
-        bul.appendChild(bindingRow(b, drug, b.targetName, onActivate));
-      }
-      li.appendChild(bul);
     }
     ul.appendChild(li);
   }

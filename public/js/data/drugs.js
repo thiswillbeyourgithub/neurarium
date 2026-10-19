@@ -116,10 +116,10 @@ export function resolveDrugs({ drugs, receptors, byId, allIds, metaRecord, v },
     d.structureIds = [...affected];
     // Its active metabolites' bindings (borrowBindings `metabolite_bindings`, empty for
     // a prodrug, which already took them as its own), resolved the same way and
-    // flagged `fromMetabolite`. They stay out of the target list and the lit regions
-    // (those are the parent molecule's), but every readout derived from bindings reads
-    // `allBindings`: the tone and its flow overlay below, the inferred effects and
-    // the release changes, each row naming the compound (`viaMetabolite`).
+    // flagged `fromMetabolite`. They stay out of the lit regions (those are the parent
+    // molecule's), but every panel readout of bindings reads `allBindings`: the
+    // "Direct molecular targets" rows, the tone and its flow overlay below, the inferred
+    // effects and the release changes, each row naming the compound (`viaMetabolite`).
     const scratch = new Set();
     d.metaboliteBindings = (d.metabolite_bindings || [])
       .map((b) => ({ ...resolveBinding(b, scratch), fromMetabolite: true }));

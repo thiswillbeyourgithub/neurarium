@@ -135,7 +135,10 @@ export function makeBindings(P) {
   // row a clickable link. An affinity_only binding (PDSP Ki, no known direction)
   // gets a muted neutral glyph + an "affinity only" line and no source pill (Stahl
   // never stated it; the Ki's verified badge is its only source).
-  const bindingRow = (binding, drug, nameText, onActivate) => {
+  // `compound`, when given, names the molecule the row comes from (the drug or one
+  // of its active metabolites, see metaboliteContributors) as an .eff-from tag,
+  // which then replaces the "via" line.
+  const bindingRow = (binding, drug, nameText, onActivate, compound = null) => {
     const li = el("li");
     const affinity = binding.affinityOnly;
     if (binding.tentative) li.classList.add("tentative");
@@ -150,11 +153,12 @@ export function makeBindings(P) {
     // pill (its Ki's verified badge is the only source), so the name stands alone.
     const nameRow = el("div", "bind-name");
     nameRow.appendChild(el("span", "bind-target", nameText));
+    if (compound) nameRow.appendChild(el("span", "eff-from", compound));
     if (!affinity) nameRow.appendChild(nodePill(binding));
     txt.appendChild(nameRow);
     const parts = [affinity ? t("drug.affinityOnly") : binding.actionLabel,
                    binding.note,
-                   binding.viaMetabolite
+                   binding.viaMetabolite && !compound
                      ? t("drug.viaMetabolite", { name: binding.viaMetabolite }) : null];
     if (binding.tentative) parts.push(t("drug.speculative"));
     if (binding.peripheral) parts.push(t("drug.peripheral"));

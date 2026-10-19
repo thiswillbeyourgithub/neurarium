@@ -276,14 +276,6 @@
 .info-metabolites .metab-formed.clickable:hover .bind-target {
   color: var(--accent-light);
 }
-/* A metabolite's own receptor bindings, nested under its row: indented and
-   separated by a faint left rule so they read as sub-facts of the metabolite,
-   reusing the same bindingRow markup as the drug's "Direct molecular targets" list. */
-.info-metabolites .metab-bindings {
-  margin: 4px 0 2px 12px;
-  padding-left: 8px;
-  border-left: 1px solid rgba(var(--ink), 0.12);
-}
 /* A drug name that jumps to its drug (js/main.js drugNameLink): the Drugs-list
    row look (.legend-item.clickable), inline so it can sit in a sentence. */
 .drug-name-link { display: inline-flex; margin: 0; }

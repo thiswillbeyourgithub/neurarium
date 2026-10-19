@@ -341,8 +341,6 @@ export function showDrug(P, drug, opts = {}) {
   const acts = el("div", "info-bindings");
   acts.dataset.tourSec = "bindings"; // guided-tour section anchor
   acts.appendChild(el("h3", null, t("drug.actsOn")));
-  const metabWarn = derivedActiveMetabolites(drug, body);
-  if (metabWarn) acts.appendChild(metabWarn);
   // A prodrug's own graded claim (kind drug_prodrug): it binds nothing itself, so
   // every row below is borrowed from its active metabolite ("via ...").
   if (drug.prodrug) {
@@ -351,23 +349,29 @@ export function showDrug(P, drug, opts = {}) {
     p.appendChild(nodePill(drug.prodrug));
     acts.appendChild(p);
   }
-  if (!drug.bindings.length) {
+  // The active metabolites' own bindings are rows of this list too (allBindings, empty
+  // extra for a prodrug, which took them as its own): when one contributes, the shared
+  // "several compounds" box, and each row names its compound, like the tone terms.
+  const mix = metaboliteContributors(drug, drug.allBindings);
+  if (mix) acts.appendChild(derivedActiveMetabolites(drug, body, mix));
+  if (!drug.allBindings.length) {
     acts.appendChild(el("p", "info-desc", t("drug.noTargets")));
   } else {
     const ul = el("ul");
-    // Strongest-affinity first: order by the binding's representative Ki
-    // ascending, so the target a drug grips hardest tops the list; bindings with
-    // no measured Ki sink to the bottom. Sort a copy (leave the authored array
-    // untouched); a stable sort keeps the authored order within each tier.
-    const bindings = [...drug.bindings].sort((a, b) => bindingKi(a) - bindingKi(b));
-    for (const b of bindings) {
+    // Parent rows first, then each metabolite's, the order the tone terms use; within
+    // each, strongest affinity first (representative Ki ascending, no measured Ki
+    // last). Sorted copies, so the authored arrays stay untouched; a stable sort
+    // keeps the authored order within each tier.
+    const byKi = (list) => [...list].sort((a, b) => bindingKi(a) - bindingKi(b));
+    for (const b of [...byKi(drug.bindings), ...byKi(drug.metaboliteBindings)]) {
       // If this binding's target is browsable on its own (in the merged
       // "Receptors & targets" list and focusable), make the row jump to it.
       const tgt = targetById.get(b.target);
       const onActivate = tgt && tgt.focusable
         ? () => onTargetPick(tgt) : null;
-      const row = bindingRow(b, drug, b.targetName, onActivate);
-      row.dataset.tourId = `ixtarget:${b.target}`; // guided-tour hook: target row in a drug panel
+      const row = bindingRow(b, drug, b.targetName, onActivate, mix && mix.compoundOf(b));
+      // Guided-tour hook: the drug's own target row (a metabolite may share the target).
+      if (!b.fromMetabolite) row.dataset.tourId = `ixtarget:${b.target}`;
       ul.appendChild(row);
     }
     acts.appendChild(ul);
@@ -551,7 +555,7 @@ export function showDrug(P, drug, opts = {}) {
     if (pgx) metabWrap.appendChild(pgx);
     body.appendChild(metabWrap);
     // Arrived from a metabolite's receptor row: bring it into view and flash it, so
-    // the user sees why the parent drug opened and where its metabolite's bindings are.
+    // the user sees why the parent drug opened.
     flashRow(metab.flash);
   }
   // Psychotropic interactions (panel/pk-interactions.js), the panel's last section.
