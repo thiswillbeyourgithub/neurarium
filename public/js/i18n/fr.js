@@ -400,7 +400,7 @@ window.__I18N_MESSAGES__.fr = {
   "receptor.foundIn": "Présent dans",
   "effects.heading": "Effets",
   "effects.hint": "Effets cliniques qu'une source attribue à une action de ce type sur la cible, chez l'humain. Un énoncé sur le récepteur, pas sur un médicament en particulier.",
-  "effects.drugHeading": "Effets indésirables inférés",
+  "effects.drugHeading": "Effets inférés",
   "effects.drugHint": "Déduit, non sourcé pour ce médicament : ce que ses liaisons orientées pourraient causer, parce qu'une source attribue cet effet à la même action sur le récepteur. Une simple affinité (sens inconnu) n'apporte rien. Ni la liste de ce que ce médicament cause de façon avérée, ni un avis médical.",
   "effects.couldCause": "pourrait causer : {effect}",
   "effects.unknown": "Aucun effet trouvé dans les sources consultées",

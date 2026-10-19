@@ -1,7 +1,7 @@
 /**
  * receptor_effect nodes (BETA): resolve them for the receptor / target panel, and
  * read the build-time effect index behind the Effects section, the effect panel and a
- * drug's "Inferred side effects".
+ * drug's "Inferred effects".
  *
  * No three.js, no DOM: pure functions, unit-tested by
  * tools/tests/receptor_effects.test.mjs. The drug-side list is computed at build time

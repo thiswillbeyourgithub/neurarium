@@ -400,7 +400,7 @@ window.__I18N_MESSAGES__.en = {
   "receptor.foundIn": "Found in",
   "effects.heading": "Effects",
   "effects.hint": "Clinical effects a source attributes to acting on it this way, in humans. A statement about the receptor, not about any one drug.",
-  "effects.drugHeading": "Inferred side effects",
+  "effects.drugHeading": "Inferred effects",
   "effects.drugHint": "Derived, not sourced for this drug: what its directional bindings could cause, because a source attributes that effect to acting on the receptor the same way. Affinity alone (no known direction) contributes nothing. Not a list of what this drug is known to cause, and not medical advice.",
   "effects.couldCause": "could cause {effect}",
   "effects.unknown": "No effect found in the searched sources",

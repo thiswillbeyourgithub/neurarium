@@ -126,7 +126,7 @@ export function makeSections(P) {
     return mix;
   };
 
-  // The drug panel's derived "Inferred side effects" (BETA): the drug's
+  // The drug panel's derived "Inferred effects" (BETA): the drug's
   // directional bindings joined with the receptor_effect nodes of their targets, read
   // from the build-time effect index (data.possibleEffectsByDrug, see
   // tools/data_generators/effect_index.py). Never stored, and worded conditionally: it
