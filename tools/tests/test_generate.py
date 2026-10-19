@@ -7,11 +7,8 @@ Stdlib unittest only (no deps). Runnable directly:
 
 Also pytest-discoverable. Two families of test:
 
-* **Golden**: regenerate the dataset into a scratch dir via
-  ``generate_data.py --root <tmp>`` and assert every emitted file is
-  byte-identical to the committed baseline under ``public/data/``. This is the
-  load-bearing guard for the upcoming split of ``generate_data.py``: a pure
-  refactor must keep the output bytes unchanged.
+* **Golden**: the byte-identical regeneration of ``public/data/`` lives in
+  ``test_generated_artifacts_fresh.py`` (with every other generated artifact).
 * **Data-integrity**: read the *emitted* files under ``public/data/`` (never
   import generator internals) so these assertions survive the refactor.
 """
@@ -19,70 +16,17 @@ Also pytest-discoverable. Two families of test:
 import hashlib
 import json
 import re
-import subprocess
 import sys
-import tempfile
 import unittest
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = REPO_ROOT / "public" / "data"
-GENERATOR = REPO_ROOT / "tools" / "generate_data.py"
 
 
 def _load_jsonl(path):
     with path.open(encoding="utf-8") as fh:
         return [json.loads(line) for line in fh if line.strip()]
-
-
-def _rel_files(base):
-    """Every regular file under ``base``, as paths relative to ``base``."""
-    return {p.relative_to(base) for p in base.rglob("*") if p.is_file()}
-
-
-class GoldenTest(unittest.TestCase):
-    """Regenerating must reproduce the committed public/data byte-for-byte."""
-
-    def test_golden_byte_identical(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            proc = subprocess.run(
-                [sys.executable, str(GENERATOR), "--root", str(root)],
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(
-                proc.returncode,
-                0,
-                f"generator failed:\n{proc.stdout}\n{proc.stderr}",
-            )
-
-            gen_dir = root / "data"
-            self.assertTrue(gen_dir.is_dir(), "generator wrote no data/ dir")
-
-            committed = _rel_files(DATA_DIR)
-            generated = _rel_files(gen_dir)
-
-            # public/data also holds vendored, non-generated assets (molecules/,
-            # a .claude/ dir). Restrict the comparison to what the generator
-            # actually emits, but require it to emit no *fewer* of those.
-            missing = generated - committed
-            self.assertFalse(
-                missing,
-                f"generator emitted files absent from public/data: {sorted(map(str, missing))}",
-            )
-
-            mismatched = []
-            for rel in sorted(generated):
-                a = (gen_dir / rel).read_bytes()
-                b = (DATA_DIR / rel).read_bytes()
-                if a != b:
-                    mismatched.append(str(rel))
-            self.assertFalse(
-                mismatched,
-                "regenerated files differ from committed baseline: "
-                f"{mismatched}",
-            )
 
 
 class ReceptorTest(unittest.TestCase):

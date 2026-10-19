@@ -31,6 +31,9 @@ fresh clone runs it). Current:
   `tools/check_js.py` (under a second, no author-side data, so no prompt and no way
   past it) and aborts on an unbound JS reference; it likewise always runs
   `tools/check_data.py --only freshness` (committed files only) and aborts when an
-  editable online corpus is cited from a download over 12 months old; then it prompts on the terminal
+  editable online corpus is cited from a download over 12 months old; it always runs
+  `tools/tests/test_generated_artifacts_fresh.py` (offline, about two seconds) and aborts when
+  any committed generated artifact (`public/data/`, `public/llms.txt`, the README stats blocks,
+  the baked-mesh hashes) differs from what its generator writes; then it prompts on the terminal
   (`y/N`, via `/dev/tty`) to run `tools/check_data.py`; a check that reports
   **errors** aborts the push (warnings pass). A non-interactive push skips the prompt.

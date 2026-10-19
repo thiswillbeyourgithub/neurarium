@@ -71,6 +71,14 @@ fi
 # would exit the whole shell (killing the hook); the subshell contains that, and
 # its exit status is non-zero exactly when /dev/tty can't be opened, which is the
 # real "are we interactive?" question.
+if [ "$status" -eq 0 ] && [ -n "$py" ]; then
+  # Every committed generated artifact (public/data, llms.txt, the README blocks, the
+  # baked-mesh hashes) must match its generator: offline, about two seconds.
+  if ! "$py" -m unittest tools.tests.test_generated_artifacts_fresh >&2; then
+    echo "pre-push: a generated artifact is stale; regenerate it (see the test output). Aborting push." >&2
+    status=1
+  fi
+fi
 if [ "$status" -eq 0 ] && ( : >/dev/tty ) 2>/dev/null; then
   printf 'pre-push: run the data integrity check (tools/check_data.py) first? [y/N] ' >/dev/tty
   read -r answer </dev/tty
