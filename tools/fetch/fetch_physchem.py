@@ -68,7 +68,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import chirality  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib import drugs_io  # noqa: E402
@@ -318,15 +318,14 @@ def build(drugs: list[dict], rows: list[dict], fetched: str):
             skipped[did] = "combination"
             continue
         path = page_for(drug)
-        cid = drugbox_cid(Path(path).read_text(encoding="utf-8")) if path else None
+        cid = drugbox_cid(read_page_file(path)) if path else None
         if cid is None:
             skipped[did] = "no PubChem CID in the drugbox"
             continue
-        page = page_path(PUBCHEM_DIR, cid)
-        if not page.exists():
+        text = read_page(PUBCHEM_DIR, cid)
+        if text is None:
             skipped[did] = f"PubChem page {cid} not fetched"
             continue
-        text = page.read_text(encoding="utf-8")
         inchi = parse_page(text).get("inchi")
         why = compound_skip(inchi)
         if why:

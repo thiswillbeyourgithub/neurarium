@@ -16,7 +16,7 @@ from pathlib import Path
 # block (a source that does not name what it is cited for) fails instead of shipping.
 from data_generators.quotes.attestation import BASE_GRADE as CLAIM_BASE_GRADE
 from data_generators.quotes.attestation import pattern_for as claim_pattern
-from lib.page_file import page_file  # (refuses a path-like page)
+from lib.page_file import page_file, read_page_file  # (refuses a path-like page)
 from lib.quote_match import normalize_for_match
 
 from ..common import REPO_ROOT
@@ -76,7 +76,7 @@ class QuoteGate:
             text = None
             if tree is not None and tree.is_dir():
                 md = page_file(tree, page)
-                text = (normalize_for_match(md.read_text(encoding="utf-8"))
+                text = (normalize_for_match(read_page_file(md))
                         if md is not None and md.is_file() else "")
             self.page_cache[key] = text
         return self.page_cache[key]

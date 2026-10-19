@@ -101,7 +101,7 @@ ROOT = HERE.parent.parent                                       # repo root
 sys.path.insert(0, str(HERE))
 
 sys.path.insert(0, str(HERE.parent))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import polite_http                                            # noqa: E402 (the one polite GET)
 from lib.species import species_key                                # noqa: E402
 from lib.io_atomic import atomic_write_json, atomic_write_text      # noqa: E402
@@ -400,7 +400,7 @@ def store(rec: dict, refresh: bool = False, full_text: bool = False) -> bool:
     page = page_path(PAGES_DIR, pmid)
     want_full = full_text and licence_of(rec) is not None
     if page.exists() and not refresh and (
-            not want_full or FULL_TEXT_MARKER in page.read_text("utf-8")):
+            not want_full or FULL_TEXT_MARKER in read_page_file(page)):
         return True
     page_path(RAW_DIR, pmid, ".json").write_text(
         json.dumps(rec, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
@@ -538,13 +538,13 @@ def ki_prose(only: set | None, refresh: bool) -> int:
             rec = (json.loads(raw_rec.read_text("utf-8"))
                    if raw_rec.exists() and not refresh else None)
             if (not page.exists() or refresh or rec is None or (
-                    licence_of(rec) and FULL_TEXT_MARKER not in page.read_text("utf-8"))):
+                    licence_of(rec) and FULL_TEXT_MARKER not in read_page_file(page))):
                 rec = rec if rec is not None and not refresh else record(pmid)
                 if not rec or not store(rec, refresh, full_text=True):
                     failed += rec is None
                     continue
             cands += [{"corpus": "europepmc", "page": pmid, **c}
-                      for c in affinity_candidates(page.read_text("utf-8"))]
+                      for c in affinity_candidates(read_page_file(page))]
         if cands:
             drugs[d["id"]] = {"name": d["name"],
                               "missing": {t: names.get(t, t) for t in missing},

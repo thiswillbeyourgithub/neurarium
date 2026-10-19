@@ -39,7 +39,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from data_generators import origin  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
@@ -53,7 +53,7 @@ PAGES = {"drugsfda": fda.PAGES_DIR, "bdpm": bdpm.PAGES_DIR}
 
 
 def _read(path: Path) -> str | None:
-    return path.read_text("utf-8", errors="replace") if path.exists() else None
+    return read_page_file(path)
 
 
 def us_holder(rec: dict, pages_dir: Path) -> tuple[str, str, str] | None:

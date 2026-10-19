@@ -72,6 +72,7 @@ sys.path.insert(0, os.path.join(REPO, "tools"))
 
 from lib import binding_gaps as bg  # noqa: E402  (the predicates the applier re-runs)
 from lib import drugs_io  # noqa: E402
+from lib.page_file import read_page_file  # noqa: E402
 import fetch_binding_directions as bd  # noqa: E402  (DIRECTION_RE: a stated direction)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup + sentence split)
 import fetch_metabolite_bindings as mb  # noqa: E402  (prose action-line extractor)
@@ -156,8 +157,7 @@ def build(drugs: list[dict], only: set[str] | None = None) -> tuple[list[dict], 
         if not path:
             warnings.append(f"{drug['id']}: no stored Wikipedia article - skipped")
             continue
-        with open(path, encoding="utf-8") as f:
-            text = f.read()
+        text = read_page_file(path)
         cands = candidates_for(drug, text, aliases, names, bg.stereo_siblings(drug, drugs))
         if cands:
             records.append({"drug": drug["id"], "name": drug.get("name") or drug["id"],

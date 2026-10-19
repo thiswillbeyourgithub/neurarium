@@ -65,7 +65,7 @@ sys.path.insert(0, str(HERE))
 
 from lib import drugs_io                                                 # noqa: E402
 from lib import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
-from lib.page_file import page_file, page_path# noqa: E402 (refuses a path-like page)
+from lib.page_file import page_file, page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import worklist_io  # noqa: E402
 from lib.corpora import wikipedia as wikistore                            # noqa: E402 (page_for)
 from lib.parse.durations import PEAK_RE, durations_in, durations_in_fr, sentences  # noqa: E402
@@ -115,8 +115,7 @@ def wikipedia_candidates(drug: dict, pattern=PEAK_RE) -> list[dict]:
     if not path or not os.path.exists(path):
         return []
     slug = os.path.splitext(os.path.basename(path))[0]
-    with open(path, encoding="utf-8", errors="replace") as f:
-        return candidates_in(f.read(), "wikipedia_pharm", slug, pattern)
+    return candidates_in(read_page_file(path), "wikipedia_pharm", slug, pattern)
 
 
 def stahl_candidates(drug: dict, spans: dict, pattern=PEAK_RE) -> list[dict]:
@@ -128,7 +127,7 @@ def stahl_candidates(drug: dict, spans: dict, pattern=PEAK_RE) -> list[dict]:
     for page in range(span[0], span[1] + 1):
         path = page_path(stahl_index.PAGES, page)
         if path.exists():
-            out += candidates_in(path.read_text(encoding="utf-8", errors="replace"),
+            out += candidates_in(read_page_file(path),
                                  "stahl", page, pattern)
     return out
 
@@ -148,7 +147,7 @@ def _label_candidates(drug: dict, labels_path: Path, key: str, pages: Path,
     path = page_file(pages, page)
     if not path or not path.exists():
         return []
-    return candidates_in(path.read_text(encoding="utf-8", errors="replace"),
+    return candidates_in(read_page_file(path),
                          corpus, page, pattern, durations)
 
 

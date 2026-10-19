@@ -51,6 +51,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 from lib import drugs_io  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib.page_file import read_page_file  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402  (the gate's own normalizer)
 from lib.text_fold import alnum_key  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the one quote gate)
@@ -397,7 +398,7 @@ def read_grids(pdf: Path, page_range) -> list[dict]:
 
 def drug_pages(drugs: list[dict], pages_dir: Path = PAGES_DIR) -> list[tuple[str, list[int]]]:
     """Each roster drug's pages, a whole-word name match (reference pages included)."""
-    texts = {int(p.stem): normalize_for_match(p.read_text("utf-8"))
+    texts = {int(p.stem): normalize_for_match(read_page_file(p))
              for p in pages_dir.glob("*.md")}
     out = []
     for d in drugs:

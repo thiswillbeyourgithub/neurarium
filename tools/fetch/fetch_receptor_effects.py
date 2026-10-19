@@ -46,7 +46,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 import fetch_classification_worklist as cls  # noqa: E402 (sentences, stahl_sentences, aliases)
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page  # noqa: E402 (refuses a path-like page)
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of)
 import fetch_demographics as demog  # noqa: E402 (abstract_lines)
 import fetch_europepmc as epmc  # noqa: E402 (EFFECT_SEARCH_LEDGER)
@@ -216,9 +216,9 @@ def candidates(oid: str, owner: dict, stahl: list[tuple[int, str]],
                             key: hit})
     slug = wikistore.slug_of(owner["wikipedia"]) if owner["wikipedia"] else ""
     slug = cls.PAGE_ALIASES.get(slug, slug)
-    path = page_path(cls.WIKI_PAGES, slug)
-    if slug and path.exists():
-        for line in cls.sentences(path.read_text("utf-8", errors="replace")):
+    text = read_page(cls.WIKI_PAGES, slug) if slug else None
+    if text is not None:
+        for line in cls.sentences(text):
             hit = hits(line)
             if hit:
                 out.append({"corpus": "wikipedia_pharm", "page": slug, "line": line,

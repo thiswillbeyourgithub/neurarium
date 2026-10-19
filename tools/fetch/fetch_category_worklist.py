@@ -40,7 +40,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 sys.path.insert(0, str(ROOT / "tools"))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from lib.worklist_io import merge_scoped  # noqa: E402
@@ -104,14 +104,14 @@ def _fr_slug(drug: dict, brand: dict) -> str | None:
 def candidates(drug: dict, brand: dict) -> list[dict]:
     out: list[dict] = []
     en = wikistore.page_for(drug)
-    if en and os.path.exists(en):
+    text = read_page_file(en)
+    if text is not None:
         slug = os.path.splitext(os.path.basename(en))[0]
-        text = Path(en).read_text(encoding="utf-8", errors="replace")
         for line in drug_class_rows(text) + lead_sentences(text):
             out.append({"corpus": "wikipedia_pharm", "page": slug, "line": line})
     fr = _fr_slug(drug, brand)
     if fr:
-        text = page_path(PAGES_FR, fr).read_text(encoding="utf-8", errors="replace")
+        text = read_page(PAGES_FR, fr)
         for line in lead_sentences(text):
             out.append({"corpus": "wikipedia_fr", "page": fr, "line": line})
     seen: set[tuple] = set()

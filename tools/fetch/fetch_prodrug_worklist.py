@@ -31,6 +31,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
+from lib.page_file import read_page_file  # noqa: E402
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
@@ -54,7 +55,7 @@ def candidates(drug: dict) -> list[dict]:
         return []
     slug = os.path.splitext(os.path.basename(path))[0]
     out, seen = [], set()
-    for s in durations.sentences(Path(path).read_text("utf-8", errors="replace")):
+    for s in durations.sentences(read_page_file(path)):
         if "|" in s or len(s) > MAX_LINE or s in seen or not PRODRUG_RE.search(s):
             continue
         seen.add(s)

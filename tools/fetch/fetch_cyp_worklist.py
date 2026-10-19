@@ -68,6 +68,7 @@ sys.path.insert(0, HERE)
 
 from lib.quote_match import normalize_for_match  # noqa: E402  (the quote gate's one normalizer)
 from lib import drugs_io  # noqa: E402
+from lib.page_file import read_page_file  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from fetch_cyp import (  # noqa: E402  (one definition of each shared rule)
     ENZYME_RE,
@@ -145,8 +146,7 @@ def wikipedia_candidates(path: str, slug: str) -> list[dict]:
     are all offered, because telling them apart is what the judge is for and what the
     regexes got wrong.
     """
-    with open(path, encoding="utf-8") as f:
-        text = f.read()
+    text = read_page_file(path)
     normalized = normalize_for_match(text)
     out, seen, heading = [], set(), ""
     for raw in text.splitlines():

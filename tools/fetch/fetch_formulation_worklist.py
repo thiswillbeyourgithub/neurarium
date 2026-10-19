@@ -46,6 +46,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
+from lib.page_file import read_page_file  # noqa: E402
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
@@ -85,7 +86,7 @@ def product_line(corpus: str, page) -> tuple[str, str] | None:
     path = corpus_page_path(corpus, page)
     if not path or not path.exists():
         return None
-    lines = path.read_text("utf-8", errors="replace").splitlines()
+    lines = read_page_file(path).splitlines()
     if not lines or not lines[0].startswith("# "):
         return None
     title = lines[0][2:].strip()
@@ -186,7 +187,7 @@ def brand_candidates(drug: dict, name: str) -> list[dict]:
     word = re.compile(rf"(?<!\w){re.escape(name)}(?!\w)", re.IGNORECASE)
     out, seen = [], set()
     for corpus, slug, path in _pages(drug):
-        for s in dur.sentences(path.read_text("utf-8", errors="replace")):
+        for s in dur.sentences(read_page_file(path)):
             if len(s) > MAX_LINE or s in seen or not word.search(s):
                 continue
             rels = F.releases_in(s)

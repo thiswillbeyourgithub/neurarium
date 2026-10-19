@@ -34,7 +34,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from data_generators.provenance import brand_regions  # noqa: E402
@@ -131,8 +131,7 @@ def apply_bdpm(drugs: list[dict], labels: dict, pages: Path = BDPM_PAGES):
             if brand_key(b["name"]) in seen:
                 present += 1
                 continue
-            path = page_path(pages, b['cis'])
-            head = path.read_text(encoding="utf-8").split("\n", 1)[0] if path.exists() else ""
+            head = (read_page(pages, b['cis']) or "").split("\n", 1)[0]
             if normalize_for_match(b["quote"]) not in normalize_for_match(head):
                 misses.append(f"{d['id']}: {b['quote']!r} not on BDPM page {b['cis']} header")
                 continue
@@ -211,7 +210,7 @@ def main():
             no_page += 1
             continue
         if fr_slug not in page_cache:
-            page_cache[fr_slug] = normalize_for_match(fr_page.read_text(encoding="utf-8"))
+            page_cache[fr_slug] = normalize_for_match(read_page_file(fr_page))
         page_norm = page_cache[fr_slug]
 
         existing = d.setdefault("brands", [])

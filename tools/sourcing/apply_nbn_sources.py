@@ -39,7 +39,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root (script in tools/sourcing/)
 sys.path.insert(0, str(ROOT / "tools"))                # reach the shared drugs_io module
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import read_page  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib.text_fold import alnum_key  # noqa: E402
 from lib import stahl_index  # noqa: E402 (the one INDEX.md reader + span search)
@@ -68,10 +68,10 @@ def find_nbn_line(start, end):
     (None, None). The line is stripped of surrounding markdown emphasis markers so
     the stored quote reads cleanly, but stays a contiguous span of the page text."""
     for p in range(start, end + 1):
-        f = page_path(stahl_index.PAGES, p)
-        if not f.exists():
+        text = read_page(stahl_index.PAGES, p)
+        if text is None:
             continue
-        for raw in f.read_text(encoding="utf-8").splitlines():
+        for raw in text.splitlines():
             m = _NBN.search(raw)
             if m:
                 quote = m.group(1).strip().strip("*").strip()
@@ -86,10 +86,10 @@ def find_class_line(start, end):
     heading, stripped of its list bullet + emphasis markers but still a contiguous
     span of the page text (so the verbatim check passes)."""
     for p in range(start, end + 1):
-        f = page_path(stahl_index.PAGES, p)
-        if not f.exists():
+        text = read_page(stahl_index.PAGES, p)
+        if text is None:
             continue
-        lines = f.read_text(encoding="utf-8").splitlines()
+        lines = text.splitlines()
         for i, ln in enumerate(lines):
             if _CLASS_HEAD.match(ln):
                 for nxt in lines[i + 1:i + 8]:

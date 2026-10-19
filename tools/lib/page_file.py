@@ -71,7 +71,15 @@ def read_page(pages_dir: str | Path | None, page: Any) -> str | None:
     bytes are replaced, as every quote gate reads them. The one raw page reader: a gate
     normalizes it (``pipeline.gate.PageGate``), a judge's excerpt keeps it raw.
     """
-    path = page_file(pages_dir, page)
-    if path is None or not path.exists():
+    return read_page_file(page_file(pages_dir, page))
+
+
+def read_page_file(path: str | Path | None) -> str | None:
+    """The raw text of a page file a caller already holds the path of (a stored article
+    ``lib.corpora.wikipedia.page_for`` resolved, one entry of a page-tree glob), or None
+    when ``path`` is empty or absent. Undecodable bytes are replaced, as in
+    :func:`read_page`, which is this plus the page-id join.
+    """
+    if not path or not Path(path).exists():
         return None
-    return path.read_text("utf-8", errors="replace")
+    return Path(path).read_text("utf-8", errors="replace")

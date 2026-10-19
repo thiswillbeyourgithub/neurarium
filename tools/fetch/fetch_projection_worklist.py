@@ -48,6 +48,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 from fetch_classification_worklist import sentences  # noqa: E402 (one sentence splitter)
+from lib.page_file import read_page_file  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from lib.worklist_io import merge_scoped  # noqa: E402
 from data_generators.quotes.attestation import pattern_for  # noqa: E402
@@ -166,7 +167,7 @@ def book_windows() -> list[tuple[str, int, str]]:
         if not d.exists():
             continue
         for path in sorted(d.glob("*.md"), key=lambda q: int(q.stem)):
-            sents = sentences(path.read_text("utf-8", errors="replace"))
+            sents = sentences(read_page_file(path))
             for i, s in enumerate(sents):
                 out.append((corpus, int(path.stem), s))
                 if i + 1 < len(sents):

@@ -35,7 +35,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import read_page, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
@@ -111,13 +111,13 @@ def candidates(drug: dict, brand: dict) -> list[dict]:
     """The drug's EN candidates, then its FR ones."""
     out: list[dict] = []
     en = wikistore.page_for(drug)
-    if en and os.path.exists(en):
+    text = read_page_file(en)
+    if text is not None:
         slug = os.path.splitext(os.path.basename(en))[0]
-        out += candidates_in(Path(en).read_text("utf-8", errors="replace"),
-                             "wikipedia_pharm", slug)
+        out += candidates_in(text, "wikipedia_pharm", slug)
     fr = catwl._fr_slug(drug, brand)
     if fr:
-        out += candidates_in(page_path(catwl.PAGES_FR, fr).read_text("utf-8", errors="replace"),
+        out += candidates_in(read_page(catwl.PAGES_FR, fr),
                              "wikipedia_fr", fr)
     return out
 

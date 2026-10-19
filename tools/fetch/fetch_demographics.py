@@ -32,7 +32,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "tools"))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import read_page  # noqa: E402 (refuses a path-like page)
 import fetch_receptor_effects as fre  # noqa: E402 (owners, run_cli)
 from fetch_europepmc import FULL_TEXT_MARKER, PAGES_DIR, PAPERS  # noqa: E402
 
@@ -73,10 +73,10 @@ def factor_hits(line: str) -> list[str]:
 def abstract_lines(pmid: str, pages: Path = PAGES_DIR) -> list[str]:
     """The abstract sentences of a stored page: after the header block (title +
     ``key: value`` lines, up to the first blank line), before the full-text marker."""
-    path = page_path(pages, pmid)
-    if not path.exists():
+    text = read_page(pages, pmid)
+    if text is None:
         return []
-    text = path.read_text("utf-8").split(FULL_TEXT_MARKER, 1)[0]
+    text = text.split(FULL_TEXT_MARKER, 1)[0]
     _, _, body = text.partition("\n\n")
     return [ln.strip() for ln in body.splitlines() if ln.strip()]
 

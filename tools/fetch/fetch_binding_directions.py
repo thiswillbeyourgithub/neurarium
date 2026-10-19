@@ -83,7 +83,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)                              # sibling fetch_* modules
 sys.path.insert(0, os.path.join(REPO, "tools"))       # drugs_io, target_aliases
 
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from lib import target_aliases as ta  # noqa: E402  (the shared "quote names the target" test)
@@ -179,8 +179,7 @@ def build(drugs: list[dict], only: set[str] | None = None) -> tuple[list[dict], 
                             f"(uv run tools/fetch/fetch_wikipedia_pharmacology.py "
                             f"--drug {drug['id']}) - skipped")
             continue
-        with open(path, encoding="utf-8") as f:
-            page_text = f.read()
+        page_text = read_page_file(path)
         aliases = {t: all_aliases[t] for t in targets}
         records.append({
             "drug": drug["id"],
@@ -219,10 +218,9 @@ MAX_SEARCH_CANDIDATES = 12   # per binding, across all three prose corpora
 
 def _lines(path: str) -> list[str]:
     """A stored page's non-empty, non-heading lines (headers end at the first blank)."""
-    if not path or not os.path.exists(path):
+    text = read_page_file(path)
+    if text is None:
         return []
-    with open(path, encoding="utf-8", errors="replace") as f:
-        text = f.read()
     return [ln.strip() for ln in text.split("\n\n", 1)[-1].splitlines()
             if ln.strip() and not ln.startswith(("#", "<!--"))]
 

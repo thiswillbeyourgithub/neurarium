@@ -42,7 +42,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 sys.path.insert(0, str(ROOT / "tools"))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import read_page, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of, SENTENCE_SPLIT, REFERENCE_RE)
 from lib import target_aliases  # noqa: E402
 from lib import worklist_io  # noqa: E402
@@ -142,7 +142,7 @@ def stahl_sentences() -> list[tuple[int, str]]:
     if not STAHL_ESS_PAGES.exists():
         return out
     for p in sorted(STAHL_ESS_PAGES.glob("*.md"), key=lambda q: int(q.stem)):
-        out.extend((int(p.stem), s) for s in sentences(p.read_text("utf-8", errors="replace")))
+        out.extend((int(p.stem), s) for s in sentences(read_page_file(p)))
     return out
 
 
@@ -151,9 +151,9 @@ def candidates(oid: str, owner: dict, stahl: list[tuple[int, str]],
     out: list[dict] = []
     slug = wikistore.slug_of(owner["wikipedia"]) if owner["wikipedia"] else ""
     slug = PAGE_ALIASES.get(slug, slug)
-    path = page_path(WIKI_PAGES, slug)
-    if slug and path.exists():
-        for line in sentences(path.read_text("utf-8", errors="replace")):
+    text = read_page(WIKI_PAGES, slug) if slug else None
+    if text is not None:
+        for line in sentences(text):
             hit = _hits(line, owner["need"])
             if hit:
                 out.append({"corpus": "wikipedia_pharm", "page": slug, "line": line,

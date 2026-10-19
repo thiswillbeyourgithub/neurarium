@@ -74,7 +74,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io                                                 # noqa: E402
 from lib.io_atomic import atomic_write_json                         # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET)
@@ -313,7 +313,7 @@ def redownload(did: str, cache: dict) -> str:
         page_path(RAW_DIR, meta["setid"], ".xml").write_text(xml, encoding="utf-8")
         return "no-pk-section"
     page = page_path(PAGES_DIR, meta['setid'])
-    old = page.read_text(encoding="utf-8").split("\n\n", 1)[-1] if page.exists() else ""
+    old = (read_page_file(page) or "").split("\n\n", 1)[-1]
     _store(meta, xml, lines)
     return "same" if old == "\n".join(lines) + "\n" else "changed"
 

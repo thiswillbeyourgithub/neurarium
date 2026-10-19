@@ -41,7 +41,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
@@ -140,7 +140,7 @@ def drug_candidates(drug: dict) -> list[dict]:
     if not en or not os.path.exists(en):
         return []
     slug = os.path.splitext(os.path.basename(en))[0]
-    text = Path(en).read_text("utf-8", errors="replace")
+    text = read_page_file(en)
     out, seen = [], set()
     for s in fetch_drug_history.section_sentences(text, CORPUS):
         if s in seen or len(s) > MAX_LINE or not origin.ORIGINATOR_RE.search(s):
@@ -155,7 +155,7 @@ def company_candidates(slug: str) -> list[dict]:
     path = article_path(slug)
     if not path.exists():
         return []
-    text = path.read_text("utf-8", errors="replace")
+    text = read_page_file(path)
     rows = [ln.strip() for ln in text.splitlines() if LOCATION_ROW_RE.match(ln.strip())]
     out, seen = [], set()
     for s in rows + fetch_drug_history.section_sentences(text, CORPUS):
