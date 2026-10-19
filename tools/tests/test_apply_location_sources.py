@@ -19,5 +19,24 @@ class SerializeTest(unittest.TestCase):
         self.assertEqual(A.serialize(json.loads(raw)), raw)
 
 
+class PruneTest(unittest.TestCase):
+    """A cached source whose owner or region the data no longer claims is dropped,
+    so a removed owner's sources cannot sit in the cache going stale unseen."""
+
+    def test_drops_unclaimed_owner_and_region(self):
+        src = {"corpus": "allen_ahba", "page": "G", "quote": "q"}
+        buckets = {"receptor": {"r1": {"frontal": [src], "gone": [src]}},
+                   "target": {"beta": {"accumbens": [src]}, "t1": {"pons": [src]}}}
+        dropped = A.prune_unclaimed(buckets, {"r1": {"frontal"}}, {"t1": {"pons"}})
+        self.assertEqual(buckets, {"receptor": {"r1": {"frontal": [src]}},
+                                   "target": {"t1": {"pons": [src]}}})
+        self.assertEqual(len(dropped), 2)
+
+    def test_committed_cache_has_nothing_to_prune(self):
+        raw = json.loads(A.OUT.read_text(encoding="utf-8"))
+        buckets = {"receptor": raw.get("receptors", {}), "target": raw.get("targets", {})}
+        self.assertEqual(A.prune_unclaimed(buckets, *A.owner_regions()), [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -134,6 +134,27 @@ def collect_allen() -> tuple[list[tuple], list[str], int]:
     return out, warnings, skipped
 
 
+def prune_unclaimed(buckets: dict, rec_regions: dict, tgt_regions: dict) -> list[str]:
+    """Drop, in place, every cached (owner, base) the emitted data no longer claims.
+
+    The cache only ever merges, so an owner later removed or split (the ``beta`` /
+    ``muscarinic`` / ``nicotinic`` group targets once expanded into individual
+    receptors) kept its sources forever, and their gene pages were since rewritten
+    without those regions. Nothing emits them, so no gate saw them go stale. Returns
+    one warning per dropped entry."""
+    dropped = []
+    for kind, claims in (("receptor", rec_regions), ("target", tgt_regions)):
+        bucket = buckets[kind]
+        for owner in sorted(bucket):
+            for base in sorted(bucket[owner]):
+                if base not in claims.get(owner, ()):
+                    del bucket[owner][base]
+                    dropped.append(f"{kind} {owner}/{base}: no longer claimed (pruned)")
+            if not bucket[owner]:
+                del bucket[owner]
+    return dropped
+
+
 def serialize(payload: dict) -> str:
     """The committed cache's own format (indent 1, sorted keys, UTF-8 kept, no
     trailing newline), so a re-run diffs only what it changed."""
@@ -172,6 +193,7 @@ def main() -> int:
         bucket.append(src)
         n_applied += 1
 
+    warnings += prune_unclaimed(buckets, *owner_regions())
     payload = {}
     if buckets["receptor"]:
         payload["receptors"] = buckets["receptor"]
