@@ -11,7 +11,7 @@ Author-side: skipped on a clone without ``data_sources/``. ``FAST`` always runs 
 ``SLOW`` (tens of seconds each) runs only with ``NEURARIUM_SLOW_TESTS=1``.
 
 Not listed, because their committed caches are stale today (a rebuild is new data that wants
-its own judge pass, not a test edit): ``category_worklist``, ``classification_worklist``,
+its own judge pass, not a test edit): ``classification_worklist``,
 ``cyp_worklist``, ``formulation_worklist``, ``half_life``, ``prodrug_worklist``,
 ``projection_worklist``, ``receptor_effects``, ``tmax`` and ``fetch_metabolite_bindings``.
 Add one here once its cache has been refreshed.
@@ -33,6 +33,7 @@ CACHE = ROOT / "tools" / "generated_cache"
 
 # fetcher script (tools/fetch/<name>.py) -> the committed cache its default --out writes.
 FAST = {
+    "fetch_category_worklist": "category_worklist.json",
     "fetch_drug_history": "drug_history_worklist.json",
     "fetch_originator": "originator_worklist.json",
     "fetch_pharmacokinetics": "pk_worklist.json",

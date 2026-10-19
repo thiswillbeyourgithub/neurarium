@@ -211,7 +211,7 @@ Drug brand names                                 ██████████�
 Neuron pathways                                  ██████████████████████████   99%    115/116
 Drug target bindings                             ██████████████████████████   99%  1952/1970
 Drug half-life (T½)                              ██████████████████████████   98%    270/275
-Drug class                                       █████████████████████████░   96%    288/301
+Drug class                                       █████████████████████████░   98%    295/301
 Receptor expression regions                      ████████████████████████░░   94%    360/383
 Drug metabolism strength tier                    ████████████████████████░░   93%    138/148
 Receptor sign (excit./inhib.)                    ████████████████████████░░   91%      51/56

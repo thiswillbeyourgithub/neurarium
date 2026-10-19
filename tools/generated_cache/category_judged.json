@@ -327,7 +327,12 @@
    "qid": "d74562d1"
   }
  ],
- "tiapride": null,
+ "tiapride": [
+  {
+   "index": 6,
+   "qid": "1e07daff"
+  }
+ ],
  "meprobamate": [
   {
    "index": 0,
@@ -344,6 +349,42 @@
   {
    "index": 1,
    "qid": "1b036df2"
+  }
+ ],
+ "furosemide": [
+  {
+   "index": 1,
+   "qid": "1a034823"
+  }
+ ],
+ "bumetanide": [
+  {
+   "index": 11,
+   "qid": "6976d7a2"
+  }
+ ],
+ "cannabidiol": [
+  {
+   "index": 0,
+   "qid": "6c6f5e45"
+  }
+ ],
+ "cannabinol": [
+  {
+   "index": 3,
+   "qid": "9345a40a"
+  }
+ ],
+ "nabilone": [
+  {
+   "index": 4,
+   "qid": "45b08e76"
+  }
+ ],
+ "rimonabant": [
+  {
+   "index": 1,
+   "qid": "3f300b46"
   }
  ]
 }

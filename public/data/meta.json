@@ -10747,6 +10747,7 @@
         "bromocriptine": "https://en.wikipedia.org/w/index.php?oldid=1363856092",
         "bromperidol": "https://en.wikipedia.org/w/index.php?oldid=1371968174",
         "brotizolam": "https://en.wikipedia.org/w/index.php?oldid=1351748399",
+        "bumetanide": "https://en.wikipedia.org/w/index.php?oldid=1341349960",
         "buprenorphine": "https://en.wikipedia.org/w/index.php?oldid=1379258591",
         "bupropion": "https://en.wikipedia.org/w/index.php?oldid=1377736670",
         "buspirone": "https://en.wikipedia.org/w/index.php?oldid=1377204007",
@@ -10757,6 +10758,7 @@
         "calcrl": "https://en.wikipedia.org/w/index.php?oldid=1377976134",
         "cannabidiol": "https://en.wikipedia.org/w/index.php?oldid=1376409525",
         "cannabinoid_receptor_1": "https://en.wikipedia.org/w/index.php?oldid=1378813829",
+        "cannabinol": "https://en.wikipedia.org/w/index.php?oldid=1371938309",
         "carbamazepine": "https://en.wikipedia.org/w/index.php?oldid=1369634918",
         "carbidopa": "https://en.wikipedia.org/w/index.php?oldid=1377347584",
         "cariprazine": "https://en.wikipedia.org/w/index.php?oldid=1375757853",
@@ -11172,6 +11174,7 @@
         "tasimelt_on": "https://fr.wikipedia.org/w/index.php?oldid=236042753",
         "thiopental": "https://fr.wikipedia.org/w/index.php?oldid=240227877",
         "thioridazine": "https://fr.wikipedia.org/w/index.php?oldid=239769655",
+        "tiapride": "https://fr.wikipedia.org/w/index.php?oldid=237639423",
         "tropat_pine": "https://fr.wikipedia.org/w/index.php?oldid=238173866",
         "viloxazine": "https://fr.wikipedia.org/w/index.php?oldid=237044367",
         "zolpidem": "https://fr.wikipedia.org/w/index.php?oldid=237104440"
@@ -11791,12 +11794,12 @@
       },
       "drug_categories": {
         "total": 301,
-        "verified": 288,
+        "verified": 295,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 13,
+        "llm": 6,
         "nosource": 0,
-        "missing": 13,
+        "missing": 6,
         "unknown": 0
       },
       "drug_half_life": {
@@ -12232,14 +12235,14 @@
     },
     "nodes": {
       "total": 10199,
-      "verified": 9458,
+      "verified": 9465,
       "uncertain": 441,
       "sourced": 0,
-      "llm": 237,
+      "llm": 230,
       "nosource": 63,
-      "missing": 300,
+      "missing": 293,
       "unknown": 667,
-      "backed": 9899,
+      "backed": 9906,
       "pct_backed": 97
     },
     "ki_coverage": {

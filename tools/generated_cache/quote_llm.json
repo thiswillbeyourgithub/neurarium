@@ -1370,6 +1370,9 @@
 "q_1f2527938eb3": {
 "receptor:5ht7/release_modulation[heteroreceptor:-:gaba_interneuron:glutamate:decrease]": "opus"
 },
+"q_1f2830cadd84": {
+"drug:tiapride/categories": "opus"
+},
 "q_1f2f6f25e00d": {
 "drug:chlorpromazine/bindings[h1:antagonist]": "sonnet",
 "drug:chlorpromazine/bindings[m1:antagonist]": "sonnet"
@@ -4877,6 +4880,9 @@
 },
 "q_6f4416259cd5": {
 "metabolite:dextrorphan/bindings[nmda:antagonist]": "opus"
+},
+"q_6f514c49515f": {
+"drug:cannabinol/categories": "opus"
 },
 "q_6f5a7a927e9e": {
 "drug:tolcapone/workup[liver_function:during]": "opus"
@@ -9117,6 +9123,9 @@
 "drug:zuranolone/bindings[gaba_a:modulator]": "sonnet",
 "drug:zuranolone/categories": "sonnet"
 },
+"q_cc600a8a9aea": {
+"drug:rimonabant/categories": "opus"
+},
 "q_cc7d1c164518": {
 "drug:clomipramine/categories": "sonnet"
 },
@@ -9994,6 +10003,9 @@
 "q_e02eca7c5e6c": {
 "drug:amobarbital/bindings[gaba_a:pam]": "sonnet"
 },
+"q_e0ab1dc434a9": {
+"drug:nabilone/categories": "opus"
+},
 "q_e0afaab507f7": {
 "receptor:5ht2c/effects[agonism:anxiety]": "opus"
 },
@@ -10675,6 +10687,9 @@
 "q_ef2fe8fd0354": {
 "drug:buspirone/first_approval": "opus"
 },
+"q_ef35ab58c975": {
+"drug:cannabidiol/categories": "opus"
+},
 "q_ef445b3143ad": {
 "drug:clonidine/nbn": "sonnet"
 },
@@ -11042,6 +11057,9 @@
 "q_f6e9580cc2d5": {
 "drug:lurasidone/bindings[5ht2a:antagonist]": "sonnet"
 },
+"q_f713c96ca883": {
+"drug:bumetanide/categories": "opus"
+},
 "q_f718382ef2be": {
 "drug:doxepin/bindings[sert:reuptake_inhibitor]": "sonnet"
 },
@@ -11105,6 +11123,9 @@
 },
 "q_f7ffed3aa620": {
 "drug:bupropion/first_approval": "opus"
+},
+"q_f81f202b1265": {
+"drug:furosemide/categories": "opus"
 },
 "q_f82ff4f6d729": {
 "drug:temazepam/brands[Planum]": "sonnet"
