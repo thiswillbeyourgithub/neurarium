@@ -9,6 +9,7 @@ Built with the help of Claude Code.
 """
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -34,6 +35,21 @@ class PageFileTest(unittest.TestCase):
         self.assertIsNone(corpus_page_path("bdpm", "../../README"))
         self.assertTrue(str(corpus_page_path("bdpm", "69071035")).endswith(
             "bdpm/pages/69071035.md"))
+
+    def test_read_page_is_raw_and_refuses_traversal(self):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "7.md").write_text("Raw  TEXT, kept.\n", "utf-8")
+            self.assertEqual(page_file.read_page(d, 7), "Raw  TEXT, kept.\n")
+            self.assertIsNone(page_file.read_page(d, 8))
+            self.assertIsNone(page_file.read_page(d, "../7"))
+            self.assertIsNone(page_file.read_page(None, 7))
+
+    def test_empty_quote_is_never_on_a_page(self):
+        # Regression: "" is a substring of every page, so an empty quote passed.
+        gate = PageGate(read=lambda corpus, page: "some page text")
+        self.assertFalse(gate.on_page("stahl", 1, ""))
+        self.assertFalse(gate.on_page("stahl", 1, "  "))
+        self.assertTrue(gate.on_page("stahl", 1, "Page text"))
 
 
 if __name__ == "__main__":

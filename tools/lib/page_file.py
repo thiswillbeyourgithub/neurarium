@@ -62,3 +62,15 @@ def page_path(pages_dir: str | Path, page: Any) -> Path:
     if path is None:
         raise ValueError(f"refusing page id {page!r} under {pages_dir}: not a bare token")
     return path
+
+
+def read_page(pages_dir: str | Path | None, page: Any) -> str | None:
+    """The raw (unnormalized) text of ``<pages_dir>/<page>.md``, or None when there is
+    no directory, the page fails :func:`page_name`, or the file is absent. Undecodable
+    bytes are replaced, as every quote gate reads them. The one raw page reader: a gate
+    normalizes it (``pipeline.gate.PageGate``), a judge's excerpt keeps it raw.
+    """
+    path = page_file(pages_dir, page)
+    if path is None or not path.exists():
+        return None
+    return path.read_text("utf-8", errors="replace")

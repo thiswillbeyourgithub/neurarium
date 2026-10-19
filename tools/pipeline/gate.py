@@ -32,7 +32,7 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(TOOLS))
 from lib.quote_match import normalize_for_match  # noqa: E402 (the gate's one normalizer)
-from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
+from lib.page_file import read_page  # noqa: E402 (refuses a path-like page)
 from pipeline.judged import resolve_all  # noqa: E402
 
 
@@ -67,9 +67,8 @@ class PageGate:
     def _load(self, corpus: str, page) -> str | None:
         if self._read is not None:
             return self._read(corpus, page)
-        path = page_file(self.pages.get(corpus), page)
-        return (normalize_for_match(path.read_text("utf-8", errors="replace"))
-                if path and path.exists() else None)
+        raw = read_page(self.pages.get(corpus), page)
+        return None if raw is None else normalize_for_match(raw)
 
     def text(self, corpus: str, page) -> str | None:
         """The stored page, normalized, or None when the corpus has no such page file."""
@@ -79,8 +78,9 @@ class PageGate:
         return self._text[key]
 
     def on_page(self, corpus: str, page, line: str) -> bool:
-        body = self.text(corpus, page)
-        return bool(body) and normalize_for_match(line) in body
+        """Whether ``line`` is on its stored page. An empty quote is never on a page."""
+        body, needle = self.text(corpus, page), normalize_for_match(line)
+        return bool(body) and bool(needle) and needle in body
 
     def refuted(self, corpus: str, page, line: str) -> bool:
         """Whether ``line`` is NOT on its stored page. Lenient only when the corpus's
