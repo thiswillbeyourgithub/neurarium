@@ -13,6 +13,7 @@ kind appears exactly once.
 """
 import importlib.util
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -20,6 +21,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 META = REPO_ROOT / "public" / "data" / "meta.json"
 TOOL = REPO_ROOT / "tools" / "update_readme_stats.py"
 
+# The tool imports ``data_generators`` / ``lib`` off tools/, which only some other
+# test module had put on sys.path, so this file failed when run alone.
+sys.path.insert(0, str(REPO_ROOT / "tools"))
 _spec = importlib.util.spec_from_file_location("update_readme_stats", TOOL)
 _urs = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_urs)
