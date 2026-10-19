@@ -114,5 +114,25 @@ class KiProseGateTest(unittest.TestCase):
         self.assertEqual(ki["source"]["extraction"], "llm")
 
 
+class PageOfTest(unittest.TestCase):
+    """A judged pick's page id is untrusted: a path-like one reads nothing."""
+
+    def test_path_like_page_reads_nothing(self):
+        import tempfile
+        old = A.PAGES_DIR
+        with tempfile.TemporaryDirectory() as tmp:
+            pages = Path(tmp) / "pages"
+            pages.mkdir()
+            (pages / "123.md").write_text("abstract", "utf-8")
+            (Path(tmp) / "SECRET.md").write_text("outside the corpus", "utf-8")
+            try:
+                A.PAGES_DIR = pages
+                self.assertEqual(A.page_of({"page": "123"}), "abstract")
+                self.assertEqual(A.page_of({"page": "../SECRET"}), "")
+                self.assertEqual(A.page_of(None), "")
+            finally:
+                A.PAGES_DIR = old
+
+
 if __name__ == "__main__":
     unittest.main()

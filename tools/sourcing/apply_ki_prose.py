@@ -51,6 +51,7 @@ REPO = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(TOOLS / "fetch"))
 
+from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
 from lib.quote_match import normalize_for_match                     # noqa: E402
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.judged import resolve  # noqa: E402
@@ -112,6 +113,14 @@ def ki_object(pick: dict, cand: dict, page: str) -> dict:
     return {"median": value, "min": value, "max": value, "source": source}
 
 
+def page_of(cand: dict | None) -> str:
+    """The candidate's stored page text; "" when absent or its page id is path-like
+    (``page_file`` refuses ``../../README``, which would otherwise gate a quote
+    against a file outside the corpus)."""
+    path = page_file(PAGES_DIR, cand["page"]) if cand else None
+    return path.read_text("utf-8") if path and path.is_file() else ""
+
+
 def strip_previous(drugs: list[dict]) -> None:
     for d in drugs:
         for b in d.get("bindings", []):
@@ -143,8 +152,7 @@ def main() -> int:
                    and not bindings[t].get("ki")}
         for pick in picks:
             cand = resolve(cands, pick, key="candidate")[0]
-            path = PAGES_DIR / f"{cand['page']}.md" if cand else None
-            page = path.read_text("utf-8") if path and path.exists() else ""
+            page = page_of(cand)
             why = check_pick(pick, cand, page, missing)
             if why:
                 print(f"[gate] {drug_id} {pick.get('target')}: {why}")
