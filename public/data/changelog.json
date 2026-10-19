@@ -1,6 +1,52 @@
 {
   "versions": [
     {
+      "version": "3.132.0",
+      "date": "2026-10-19",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The drug panel is reorganised: class and nomenclature sit in Administrative, brain entry is a Pharmacokinetics subsection, active metabolites open the Metabolism section, and the genetics-driven dosing advice moves inside Metabolism as \"Genetics-caused posology adaptation\"",
+          "commits": [
+            "215d0f8",
+            "2420b16",
+            "cae0b91",
+            "89f8a4a"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Clearer section names: \"Genetic variability\", \"Psychotropic interactions\" (which now says only drugs present in Neurarium are compared) and \"Inferred side effects\"",
+          "commits": [
+            "23d4168",
+            "c2146a2",
+            "7882a78"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Brands are shown on one alphabetically sorted row",
+          "commits": [
+            "5b48034"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "A newly opened panel starts with its sections folded, while each open tab keeps the sections you unfolded",
+          "commits": [
+            "33f4bd0"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The neurotransmitter tone, inferred side effects and release changes of a drug now include its active metabolites, each contribution labelled by compound, under a warning that several compounds contribute",
+          "commits": [
+            "158e977"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.131.9",
       "date": "2026-10-19",
       "entries": [
