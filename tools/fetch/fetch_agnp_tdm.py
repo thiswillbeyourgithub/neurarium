@@ -49,11 +49,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402  (the gate's own normalizer)
 from lib.text_fold import alnum_key  # noqa: E402
+from pipeline.gate import PageGate  # noqa: E402 (the one quote gate)
 
 CORPUS = "agnp_tdm"
 BOOK = ROOT / "data_sources" / "books" / "agnp_tdm_2026"
@@ -229,28 +229,13 @@ def drug_ids(name: str, index: dict[str, list[str]]) -> list[str]:
     return []
 
 
-class Pages:
-    """The stored ``pages/<n>.md``, normalized once, for the quote gate."""
-
-    def __init__(self, pages_dir: Path = PAGES_DIR):
-        self.dir = pages_dir
-        self._cache: dict[int, str] = {}
-
-    def has(self, page: int, quote: str) -> bool:
-        if page not in self._cache:
-            path = page_path(self.dir, page)
-            self._cache[page] = (normalize_for_match(path.read_text("utf-8"))
-                                 if path.exists() else "")
-        return bool(quote) and normalize_for_match(quote) in self._cache[page]
-
-
 def _source(page: int, quote: str) -> dict:
     return {"corpus": CORPUS, "page": page, "quote": quote,
             "provenance": "verified", "extraction": "code"}
 
 
 def therapeutic_ranges(rows: list[dict], index: dict[str, list[str]],
-                       pages: Pages) -> tuple[dict, list[dict]]:
+                       pages: PageGate) -> tuple[dict, list[dict]]:
     """Per roster drug its first Table 5 row's range, alert level and TDM level.
 
     Returns ``(ranges, skipped)``; ``skipped`` names every roster drug the table has a
@@ -272,7 +257,7 @@ def therapeutic_ranges(rows: list[dict], index: dict[str, list[str]],
                          "cell": row["trr"]} for i in ids]
             continue
         quote = " ".join(row[f] for f in QUOTE_FIELDS if row[f])
-        if not pages.has(row["page"], quote):
+        if not pages.on_page(CORPUS, row["page"], quote):
             skipped += [{"drug": i, "page": row["page"], "why": "quote not on page",
                          "cell": quote} for i in ids]
             continue
@@ -322,7 +307,7 @@ def enzyme_tokens(cell: str) -> list[tuple[str, str]]:
 
 
 def enzyme_confirmations(rows: list[dict], index: dict[str, list[str]],
-                         pages: Pages) -> dict[str, list[dict]]:
+                         pages: PageGate) -> dict[str, list[dict]]:
     """Per roster drug, a substrate row per isoform Table 1 names, each with the
     longest leading run of the row's cell that is on its page and reaches it."""
     out: dict[str, list[dict]] = {}
@@ -335,7 +320,7 @@ def enzyme_confirmations(rows: list[dict], index: dict[str, list[str]],
         # with the next column in the page's reading order).
         quoted = 0
         for n in range(len(items), 0, -1):
-            if pages.has(row["page"], f"{row['drug']} {', '.join(items[:n])}"):
+            if pages.on_page(CORPUS, row["page"], f"{row['drug']} {', '.join(items[:n])}"):
                 quoted = n
                 break
         for k in range(quoted):
@@ -444,7 +429,7 @@ def main() -> int:
         raise SystemExit(f"PDF not found: {PDF.relative_to(ROOT)} (author-side)")
     drugs = drugs_io.load_drugs()
     index = roster_index(drugs)
-    pages = Pages()
+    pages = PageGate({CORPUS: PAGES_DIR})
 
     ranges, skipped = therapeutic_ranges(table5_rows(read_grids(PDF, TABLE5_PAGES)),
                                          index, pages)

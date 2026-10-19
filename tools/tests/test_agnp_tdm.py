@@ -69,7 +69,7 @@ class MidWordMarkupTest(unittest.TestCase):
             idx = F.roster_index([{"id": "paliperidone", "name": "Paliperidone"}])
             rows = [{"page": 10, "drug": "Paliperidone (9-hydroxyrisperidone)",
                      "enzymes": "Renal clearance, CYP3A4, UGT"}]
-            got = F.enzyme_confirmations(rows, idx, F.Pages(Path(d)))
+            got = F.enzyme_confirmations(rows, idx, F.PageGate({F.CORPUS: Path(d)}))
         self.assertEqual([r["enzyme"] for r in got["paliperidone"]], ["cyp3a4", "ugt"])
 
 
