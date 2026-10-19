@@ -213,9 +213,16 @@
 }
 .form-release { color: var(--text); }
 .form-head > .help-icon { margin-left: 0; }
-.form-brands { margin-top: var(--sp-xs); font-size: 12px; }
-.form-brand { display: inline-block; white-space: nowrap; margin-right: var(--sp-m); }
-.form-brand > .bind-target { margin-right: var(--sp-xs); }
+/* Brands (molecule row + per formulation): one wrapping row of chips, each a brand
+   name glued to its own pill, the chips held apart by a wider gap than the
+   name-to-pill one so a pill never reads as its neighbour's. */
+.brand-row {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: var(--sp-s) var(--sp-xl); font-size: 12px;
+}
+.brand-chip { display: inline-flex; align-items: baseline; gap: var(--sp-xs); white-space: nowrap; }
+.brand-chip > .help-icon { margin-left: 0; }
+.form-brands { margin-top: var(--sp-xs); }
 .hl-chip > .help-icon { margin-left: 0; }
 .hl-chip .hl-val { font-weight: 600; color: var(--text); white-space: nowrap; }
 .hl-chip .hl-label { color: var(--muted); font-size: 11px; }

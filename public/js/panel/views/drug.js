@@ -162,16 +162,22 @@ export function showDrug(P, drug, opts = {}) {
   }
 
   // Commercial brand names, each its own graded node (Stahl backs na, Wikipedia
-  // eu/fr). Listed in the locale's order (the primary/most-iconic brand first, the
-  // same one shown after the drug name everywhere); the region tag is never shown.
-  // Each brand carries its own provenance pill, so no node is left unbadged and a
-  // mixed-grade list (once eu/fr are added) reads honestly.
-  // A brand sold as one formulation (Seroquel XR) is listed under it in the
+  // eu/fr; the region tag is never shown). Listed on one wrapping row, sorted
+  // alphabetically (locale-aware, case-insensitive), each brand a chip holding its
+  // own provenance pill, so no node is left unbadged and the pill reads as that
+  // brand's. A brand sold as one formulation (Seroquel XR) is listed under it in the
   // Pharmacokinetics table instead (see below), so this row keeps the molecule's.
-  const appendBrand = (host, b) => {
-    host.appendChild(el("span", "bind-target", b.name));
-    // A brand's grade is its top-region source's (the one the row keeps).
-  host.appendChild(nodePill({ ...b, provenance: b.sources && b.sources.length ? b.sources[0].provenance : null }));
+  const brandRow = (brands) => {
+    const row = el("div", "brand-row");
+    const collator = new Intl.Collator(window.__I18N__.lang, { sensitivity: "base", numeric: true });
+    for (const b of [...brands].sort((x, y) => collator.compare(x.name, y.name))) {
+      const chip = el("span", "brand-chip");
+      chip.appendChild(el("span", "bind-target", b.name));
+      // A brand's grade is its top-region source's (the one the row keeps).
+      chip.appendChild(nodePill({ ...b, provenance: b.sources && b.sources.length ? b.sources[0].provenance : null }));
+      row.appendChild(chip);
+    }
+    return row;
   };
   // Administrative: the class and NbN nomenclature, the regulatory history (first
   // approval + years since, withdrawals) and the brands, i.e. what the drug is as a
@@ -217,13 +223,7 @@ export function showDrug(P, drug, opts = {}) {
     const brandsEl = el("div", "info-brands");
     brandsEl.dataset.tourSec = "brands"; // guided-tour section anchor
     brandsEl.appendChild(el("h4", null, t("drug.brands")));
-    const ul = el("ul");
-    for (const b of moleculeBrands) {
-      const li = el("li");
-      appendBrand(li, b);
-      ul.appendChild(li);
-    }
-    brandsEl.appendChild(ul);
+    brandsEl.appendChild(brandRow(moleculeBrands));
     admin.appendChild(brandsEl);
   }
   if (admin.childElementCount > 1) body.appendChild(admin);
@@ -315,13 +315,7 @@ export function showDrug(P, drug, opts = {}) {
         }
         row.appendChild(head);
         if (f.brands.length) {
-          const brands = el("div", "form-brands");
-          for (const br of f.brands) {
-            const item = el("span", "form-brand");
-            appendBrand(item, br);
-            brands.appendChild(item);
-          }
-          row.appendChild(brands);
+          row.appendChild(brandRow(f.brands)).classList.add("form-brands");
         }
         wrap.appendChild(row);
       }
