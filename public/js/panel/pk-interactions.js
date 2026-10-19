@@ -1,4 +1,4 @@
-// The drug panel's "Drug interactions" section (derived, never stored): the drugs
+// The drug panel's "Psychotropic interactions" section (derived, never stored): the drugs
 // this one meets at a shared enzyme, grouped by drug or by isoform. Split out of
 // panel/views/drug.js, which appends it as the panel's last section.
 
@@ -15,7 +15,7 @@ const { t } = window.__I18N__;
  */
 export function pkInteractionsSection(P, drug) {
   const { data, el, enzymeById, onDrugPick, onEnzymePick } = P;
-  // Drug interactions: derived, never stored (see pkInteractionsOf). This drug
+  // Psychotropic interactions: derived, never stored (see pkInteractionsOf). This drug
   // and the listed one meet at the same enzyme, so one COULD shift the other's
   // level; the wording stays conditional throughout because the edge is an
   // inference from the enzyme roles, not a measured interaction study.

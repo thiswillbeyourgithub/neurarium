@@ -146,7 +146,7 @@ export function createViewerTour({
     tourPanelToTop();
   };
   // The olanzapine panel, re-opened only when it is not already the active tab: the
-  // drug walk-through (Acts on -> Metabolism -> Drug interactions -> the H1 row) is
+  // drug walk-through (Acts on -> Metabolism -> Psychotropic interactions -> the H1 row) is
   // four sub-steps reading ONE panel, so they share this before().
   const tourDrugPanel = tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug);
   // Every detail panel's sections start folded (see foldSections): a step that points
@@ -158,7 +158,7 @@ export function createViewerTour({
     if (d) d.open = true;
   };
   const tourDrugSec = (sec) => tourOpenSec(tourDrugPanel, sec);
-  // The drug panel's collapsed "Drug interactions" <details> (see showDrug). Its step
+  // The drug panel's collapsed "Psychotropic interactions" <details> (see showDrug). Its step
   // is hands-on (the user opens it), so the step's before() re-collapses it: a Back
   // into the step must leave something to open.
   const tourPkDetails = () =>

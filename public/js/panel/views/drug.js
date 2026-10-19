@@ -633,7 +633,7 @@ export function showDrug(P, drug, opts = {}) {
     const pgx = pgxSection(drug);
     if (pgx) body.appendChild(pgx);
 
-    // Drug interactions (panel/pk-interactions.js), the panel's last section.
+    // Psychotropic interactions (panel/pk-interactions.js), the panel's last section.
     const pkSec = pkInteractionsSection(P, drug);
     if (pkSec) body.appendChild(pkSec);
   }

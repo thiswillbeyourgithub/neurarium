@@ -224,7 +224,7 @@ window.__I18N_MESSAGES__.en = {
     "Further down, its <b>metabolism</b>: the liver enzymes that break this drug down, or whose activity it changes. Each one is sourced, and clickable. This is pharmacokinetics, so nothing lights up in the 3D view.",
   "tour.drugPk.title": "And what that implies",
   "tour.drugPk.body":
-    "Open <b>Drug interactions</b>. These rows are <b>inferred</b> from the enzymes above, never measured: two drugs meeting at one enzyme <i>could</i> shift each other's blood level. Then <b>Next</b> to continue.",
+    "Open <b>Psychotropic interactions</b>. These rows are <b>inferred</b> from the enzymes above, never measured: two drugs meeting at one enzyme <i>could</i> shift each other's blood level. Then <b>Next</b> to continue.",
   "tour.drugToReceptor.title": "Follow it to a receptor",
   "tour.drugToReceptor.body":
     "Back up to the bindings: each one is a link. Click the <b>H1</b> row to open that receptor.",
@@ -567,8 +567,8 @@ window.__I18N_MESSAGES__.en = {
   "drug.autoPkInhibits": "This drug is listed below as both a substrate and an inhibitor of {enzymes}, so it could slow its own clearance: blood levels may then climb faster than the dose does.",
   "drug.autoPkInduces": "This drug is listed below as both a substrate and an inducer of {enzymes}, so it could speed up its own clearance over the first weeks: blood levels may then drift down at an unchanged dose.",
   "drug.autoPkDerived": "Derived from the enzyme rows below, each of which carries its own source. No source states this consequence for this drug: reading the two roles together is our own.",
-  "drug.pkInteractions": "Drug interactions",
-  "drug.pkInteractionsHint": "Inferred from the enzymes above, not measured: this drug and the listed one meet at the same enzyme, so one could shift the other's blood level. \"Could raise\" means the other drug's level may go up (this one inhibits the enzyme that clears it), \"could lower\" that it may go down (this one induces it). Whether it actually matters depends on the dose, the route and the person, so it is a flag worth checking with a prescriber, never a contraindication, and the absence of a row is not a safety claim.",
+  "drug.pkInteractions": "Psychotropic interactions",
+  "drug.pkInteractionsHint": "Only interactions between drugs present in Neurarium are considered: a drug outside its roster (most non-psychotropic medicines) is never listed, however much it interacts. Inferred from the enzymes above, not measured: this drug and the listed one meet at the same enzyme, so one could shift the other's blood level. \"Could raise\" means the other drug's level may go up (this one inhibits the enzyme that clears it), \"could lower\" that it may go down (this one induces it). Whether it actually matters depends on the dose, the route and the person, so it is a flag worth checking with a prescriber, never a contraindication, and the absence of a row is not a safety claim.",
   "info.more": "+{n} more",
   "structure.expressed": "Receptors found here",
   "structure.expressedCaption": "Receptors and other drug targets whose expression list names this region, grouped by neurotransmitter system. Each row carries that region's own source grade, the same claim the receptor's own panel shows from the other end.",

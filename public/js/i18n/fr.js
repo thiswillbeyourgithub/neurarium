@@ -224,7 +224,7 @@ window.__I18N_MESSAGES__.fr = {
     "Plus bas, son <b>métabolisme</b> : les enzymes hépatiques qui dégradent cette substance, ou dont elle modifie l'activité. Chacune est sourcée, et cliquable. C'est de la pharmacocinétique : rien ne s'allume dans la vue 3D.",
   "tour.drugPk.title": "Et ce que cela implique",
   "tour.drugPk.body":
-    "Ouvrez <b>Interactions médicamenteuses</b>. Ces lignes sont <b>déduites</b> des enzymes ci-dessus, jamais mesurées : deux substances qui se croisent sur une même enzyme <i>pourraient</i> déplacer leur concentration sanguine. Puis <b>Suivant</b> pour continuer.",
+    "Ouvrez <b>Interactions entre psychotropes</b>. Ces lignes sont <b>déduites</b> des enzymes ci-dessus, jamais mesurées : deux substances qui se croisent sur une même enzyme <i>pourraient</i> déplacer leur concentration sanguine. Puis <b>Suivant</b> pour continuer.",
   "tour.drugToReceptor.title": "Suivre vers un récepteur",
   "tour.drugToReceptor.body":
     "Remontez aux liaisons : chacune est un lien. Cliquez sur la ligne <b>H1</b> pour ouvrir ce récepteur.",
@@ -567,8 +567,8 @@ window.__I18N_MESSAGES__.fr = {
   "drug.autoPkInhibits": "Cette substance figure ci-dessous à la fois comme substrat et comme inhibiteur du {enzymes} : elle pourrait donc ralentir sa propre élimination, et les concentrations sanguines augmenter plus vite que la dose.",
   "drug.autoPkInduces": "Cette substance figure ci-dessous à la fois comme substrat et comme inducteur du {enzymes} : elle pourrait donc accélérer sa propre élimination au fil des premières semaines, et les concentrations sanguines baisser à dose constante.",
   "drug.autoPkDerived": "Déduit des lignes d'enzymes ci-dessous, dont chacune porte sa propre source. Aucune source n'énonce cette conséquence pour cette substance : rapprocher les deux rôles relève de notre lecture.",
-  "drug.pkInteractions": "Interactions médicamenteuses",
-  "drug.pkInteractionsHint": "Déduit des enzymes ci-dessus, non mesuré : cette substance et celle listée se rencontrent sur la même enzyme, donc l'une pourrait déplacer la concentration sanguine de l'autre. « Pourrait augmenter » signifie que la concentration de l'autre pourrait monter (celle-ci inhibe l'enzyme qui l'élimine), « pourrait diminuer » qu'elle pourrait baisser (elle l'induit). Que cela compte vraiment dépend de la dose, de la voie et de la personne : c'est un signal à vérifier avec un prescripteur, jamais une contre-indication, et l'absence de ligne ne vaut pas garantie d'innocuité.",
+  "drug.pkInteractions": "Interactions entre psychotropes",
+  "drug.pkInteractionsHint": "Seules les interactions entre médicaments présents dans Neurarium sont prises en compte : un médicament absent de sa liste (la plupart des médicaments non psychotropes) n'apparaît jamais, même s'il interagit fortement. Déduit des enzymes ci-dessus, non mesuré : cette substance et celle listée se rencontrent sur la même enzyme, donc l'une pourrait déplacer la concentration sanguine de l'autre. « Pourrait augmenter » signifie que la concentration de l'autre pourrait monter (celle-ci inhibe l'enzyme qui l'élimine), « pourrait diminuer » qu'elle pourrait baisser (elle l'induit). Que cela compte vraiment dépend de la dose, de la voie et de la personne : c'est un signal à vérifier avec un prescripteur, jamais une contre-indication, et l'absence de ligne ne vaut pas garantie d'innocuité.",
   "info.more": "+{n} de plus",
   "structure.expressed": "Récepteurs présents ici",
   "structure.expressedCaption": "Récepteurs et autres cibles médicamenteuses dont la liste d’expression nomme cette région, regroupés par système de neurotransmission. Chaque ligne porte la note de source propre à cette région, la même affirmation que la fiche du récepteur montre depuis l’autre bout.",
