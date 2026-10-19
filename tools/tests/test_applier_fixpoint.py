@@ -7,10 +7,6 @@ because each looked only at the molecule. They now all ask
 ``data_generators.formulations.placed``; this test re-runs each one for real against a scratch
 copy of ``drugs_data.jsonl`` + ``metabolites_data.jsonl`` and requires the bytes unchanged.
 
-``apply_pharmacokinetics.py`` is checked more weakly: its Stahl judged file predates later
-passes that re-picked some drugs' T½ (its ``--only`` help says a full re-run is not a no-op),
-so it must only never re-add a claim a formulation holds.
-
 Author-side: skipped on a clone without ``data_sources/``. Slow (each applier re-derives its
 worklist), so it runs only with ``NEURARIUM_SLOW_TESTS=1``.
 
@@ -45,9 +41,8 @@ STRICT = [
     ("apply_brand_names", []),
     ("apply_brand_names", ["--bdpm"]),
     ("apply_metabolite_bindings", []),
+    ("apply_pharmacokinetics", []),
 ]
-# Appliers that may legitimately rewrite other drugs but must never re-add a placed claim.
-NO_RELOCATED_CLAIM = [("apply_pharmacokinetics", [])]
 
 
 def rerun(module: str, argv: list[str], tmp: Path) -> tuple[bytes, list[dict]]:
@@ -105,11 +100,6 @@ class ApplierFixpointTest(unittest.TestCase):
                 self.assertTrue(got == self.committed,
                                 f"{module} {argv} rewrote drugs_data.jsonl or "
                                 f"metabolites_data.jsonl on a re-run")
-
-    def test_no_applier_re_adds_a_placed_claim(self):
-        for module, argv in NO_RELOCATED_CLAIM:
-            with self.subTest(applier=module):
-                self.assertEqual(relocated_on_molecule(rerun(module, argv, self.tmp)[1]), [])
 
 
 if __name__ == "__main__":

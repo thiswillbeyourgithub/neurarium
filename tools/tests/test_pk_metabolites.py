@@ -10,6 +10,7 @@ the corpus trees::
 Built with the help of Claude Code.
 """
 
+import json
 import sys
 import tempfile
 import unittest
@@ -65,7 +66,7 @@ class MergeTest(unittest.TestCase):
              "quote": "Elimination half-life | 36-200 hours"}
         judged = {"clorazepate": {"half_life": None, "metabolites": [
             dict(q, name="Nordazepam", half_life=dict(q, hours=36, hours_max=200))]}}
-        PK.apply(judged, drugs, self.pages, None, store)
+        PK.apply(judged, drugs, self.pages, {"clorazepate"}, store)   # an explicit re-apply
         d = drugs[0]
         self.assertNotIn("half_life", d)
         self.assertNotIn("half_life_sources", d)
@@ -75,6 +76,30 @@ class MergeTest(unittest.TestCase):
         self.assertEqual(m["half_life"], {"hours": 36.0, "hours_max": 200.0})
         self.assertEqual(ref["sources"][0]["page"], "nordazepam")
         self.assertEqual(m["bindings"], [{"target": "gaba_a"}])
+
+    def test_a_full_run_never_overwrites_or_clears(self):
+        """A full run is confirm-only, so re-running it is a no-op.
+
+        The judged file predates later passes: a full re-run once rewrote 12 drugs,
+        reverting flupenthixol's Wikipedia T½ (35 h) to Stahl's 192 h, re-adding
+        deutetrabenazine's T½ quote a judge had stripped, and swapping later metabolite
+        quotes (selegiline, ramelteon) back to Stahl's.
+        """
+        later = {"corpus": "wikipedia_pharm", "page": "flupentixol",
+                 "quote": "Elimination half-life | 35 hours"}
+        drugs = [{"id": "flupenthixol", "name": "Flupenthixol", "half_life": {"hours": 35.0},
+                  "half_life_sources": [later],
+                  "metabolites": [{"id": "desmethyldiazepam", "sources": [later]}]},
+                 {"id": "clorazepate", "name": "Clorazepate", "half_life": {"hours": 40.0}}]
+        store = [{"id": "desmethyldiazepam", "name": "Desmethyldiazepam (nordazepam)"}]
+        q = {"corpus": "wikipedia_pharm", "page": "nordazepam",
+             "quote": "Elimination half-life | 36-200 hours"}
+        judged = {"flupenthixol": {"half_life": dict(q, hours=192),
+                                   "metabolites": [dict(q, name="Nordazepam")]},
+                  "clorazepate": {"half_life": None}}
+        before = json.dumps([drugs, store], sort_keys=True)
+        PK.apply(judged, drugs, self.pages, None, store)
+        self.assertEqual(json.dumps([drugs, store], sort_keys=True), before)
 
     def test_two_parents_share_one_record(self):
         """The point of the store: a molecule two drugs make is defined once."""

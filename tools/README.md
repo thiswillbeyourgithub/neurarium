@@ -554,7 +554,7 @@ python tools/sourcing/recheck_quotes.py build --out <dir> --unstamped   # indepe
   (`pk_judged.json`) into `drugs_data.jsonl`, quote-gating each value verbatim on its Stahl page and
   resolving a metabolite's `drug_id` by norm-name match (never self-link). Sole writer of
   `half_life`/`metabolites`; merges by metabolite name, accepts `wikipedia_pharm` quotes, `--only <drug ids>` scopes
-  (use it: a full rerun is not a no-op). See docs/DRUGS.md Drugs (Half-life + active metabolites).
+  and re-applies those drugs as judged (a full run only fills what is absent, so re-running it is a no-op). See docs/DRUGS.md Drugs (Half-life + active metabolites).
 - `tools/fetch/fetch_dailymed.py` — stdlib, network, resumable. Corpus #14 fetcher: searches DailyMed
   for each drug's US prescribing label, picks ONE (plain-oral forms preferred, since a modified-release
   product states a real Tmax for a different product; the first whose pharmacokinetics section actually

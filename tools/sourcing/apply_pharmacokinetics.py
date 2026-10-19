@@ -98,7 +98,15 @@ def apply(judged: dict, drugs: list[dict], pages: PageGate,
     drug's reference. A metabolite the judged file does not name is left alone. Explicit
     ``"half_life": null`` clears a T½ (the parent's, or a metabolite's) the source
     states for someone else, e.g. a prodrug's figure that is its metabolite's.
+
+    A full run (``only`` None) is confirm-only: it fills a T½ or a metabolite reference's
+    source only where the record holds none, never overwriting or clearing what is there.
+    The judged file predates later passes (Wikipedia / BDPM / DailyMed T½, the
+    re-extraction that dropped rejected quotes), so overwriting would revert them; a
+    full re-run is therefore a no-op. ``only`` names drugs the author asked to re-apply
+    as judged, which may overwrite.
     """
+    force = only is not None
     metabolites = [] if metabolites is None else metabolites
     by_id = {d["id"]: d for d in drugs}
     drug_norm_to_id = {norm_name(d["name"]): d["id"] for d in drugs}
@@ -115,6 +123,8 @@ def apply(judged: dict, drugs: list[dict], pages: PageGate,
         """Apply ``rec["half_life"]`` (gated dict, or explicit None) onto ``owner``."""
         if "half_life" not in rec or F.placed(owner, "half_life"):
             return 0  # absent, or a per-release T½ the formulation pass placed
+        if not force and "half_life" in owner:
+            return 0  # held already (a later pass's, or one a judge stripped): confirm-only
         hl = rec["half_life"]
         if hl is None:
             owner.pop("half_life", None)
@@ -162,7 +172,7 @@ def apply(judged: dict, drugs: list[dict], pages: PageGate,
             if linked and linked != did:
                 mrec["drug_id"] = linked
             set_half_life(m, mrec, f"{did}/{name}")
-            if has_quote:
+            if has_quote and (force or not ref.get("sources")):
                 ref["sources"] = [source(m)]
             n_met += 1
         if not mets:
@@ -176,9 +186,8 @@ def main() -> int:
                     help="the LLM-judged pharmacokinetics file")
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would change without writing drugs_data.jsonl")
-    ap.add_argument("--only", help="comma-separated drug ids to apply (the judged file "
-                    "predates later passes that re-picked some drugs' T½, so a full "
-                    "re-run is not a no-op)")
+    ap.add_argument("--only", help="comma-separated drug ids to re-apply as judged, "
+                    "overwriting what they hold (a full run only fills what is absent)")
     args = ap.parse_args()
     only = {d.strip() for d in args.only.split(",") if d.strip()} if args.only else None
 
