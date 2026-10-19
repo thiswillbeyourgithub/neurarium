@@ -15,10 +15,11 @@ from .headings import check_heading_shapes
 from .ki import KiGate, check_ki_rows
 from .receptors import walk_receptors, walk_targets
 from .stahl import check_stahl_monographs
+from .sweep import sweep_committed_caches, sweep_quote_table
 
 
 def check_sources(report, meta, drugs, projections, structures, receptors, addons,
-                  metabolites=(), circuits=(), groups=(), contradictions=()):
+                  metabolites=(), circuits=(), groups=(), contradictions=(), quotes_by_id=None):
     """The core of the sourcing system: confirm every quote-level source (a
     binding's ``sources``, a drug's ``nbn_sources``, an enzyme's ``variability``
     sources, and a projection's quote-level ``sources``) is actually present in the
@@ -59,6 +60,13 @@ def check_sources(report, meta, drugs, projections, structures, receptors, addon
     walk_receptors(gate, meta, receptors, structures)
     walk_targets(gate, meta, structures)
     walk_enzymes(gate, meta)
+    # Coverage: every emitted quote and every committed cache quote, whichever kind.
+    if quotes_by_id is not None:
+        n_table = sweep_quote_table(gate, quotes_by_id)
+        n_cache = sweep_committed_caches(gate)
+        if report.errors == before:
+            report.ok(f"sweeps: {n_table} quotes.jsonl rows + {n_cache} committed cache "
+                      f"quotes present on their pages")
     gate.report_quotes(before)
 
     check_heading_shapes(report, gate.headings)

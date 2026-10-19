@@ -9,6 +9,7 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 """
 
 import re
+from pathlib import Path
 
 # The pathway per-claim word tests, imported for the same reason: family 5 re-runs the
 # very test that graded a transmitter/sign sub-claim, so a hand-edited or stale ``claims``
@@ -39,8 +40,9 @@ def spans_heading(quote):
 class QuoteGate:
     """The quote-level checks of family 5, plus the state they accumulate."""
 
-    def __init__(self, report, meta):
+    def __init__(self, report, meta, root=REPO_ROOT):
         self.report = report
+        self.root = Path(root)  # where each corpus's ``pages_dir`` is resolved
         self.corpora = meta.get("source_corpora", {})
         # The closed vocabulary the "uncertain" bullets draw their reason kinds from,
         # read from the data rather than restated here so the two cannot drift.
@@ -64,16 +66,42 @@ class QuoteGate:
         self.gated = set()         # id() of every node whose bullets were gated
 
     def page_text(self, corpus, page):
+        """The cited page, normalized; ``None`` when the corpus's page tree is absent
+        (a clone: skip + warn), ``""`` when the tree is present but the page file is
+        missing or the page id is path-like (an error, never a silent pass)."""
         key = (corpus, page)
         if key not in self.page_cache:
-            entry = self.corpora.get(corpus) or {}
-            pages_dir = entry.get("pages_dir")
+            pages_dir = (self.corpora.get(corpus) or {}).get("pages_dir")
+            tree = self.root / pages_dir if pages_dir else None
             text = None
-            md = page_file(REPO_ROOT / pages_dir, page) if pages_dir else None
-            if md and md.exists():
-                text = normalize_for_match(md.read_text(encoding="utf-8"))
+            if tree is not None and tree.is_dir():
+                md = page_file(tree, page)
+                text = (normalize_for_match(md.read_text(encoding="utf-8"))
+                        if md is not None and md.is_file() else "")
             self.page_cache[key] = text
         return self.page_cache[key]
+
+    def on_page(self, ctx, corpus, page, quote):
+        """Look ``quote`` up on its cited page: True when found, False when not (an
+        error is reported), None when this corpus cannot be looked up here (a
+        ``tsv_dir`` corpus is re-derived by its own family; an absent page tree is
+        skipped + warned)."""
+        entry = self.corpora.get(corpus) or {}
+        # A corpus shipping its raw tables (`tsv_dir`) has no prose page to look in:
+        # its quote is COMPOSED out of those tables, so family 13 re-derives it from
+        # them instead.
+        if entry.get("tsv_dir"):
+            return None
+        text = self.page_text(corpus, page) if entry.get("pages_dir") else None
+        if text is None:
+            self.skipped_corpora.add(corpus)
+            return None
+        if normalize_for_match(quote) not in text:
+            missing = "" if text else " (page file missing, empty, or path-like)"
+            self.report.error(f"{ctx}: quote NOT found verbatim on {corpus} "
+                              f"p.{page}{missing}: {quote!r}")
+            return False
+        return True
 
     def check_one(self, ctx, src, short_ok=False):
         report, corpora = self.report, self.corpora
@@ -108,24 +136,9 @@ class QuoteGate:
         if spans_heading(quote):
             report.error(f"{ctx}: quote runs across a page heading (two sections "
                          f"glued into one claim): {quote!r}")
-        entry = corpora.get(corpus) or {}
-        # A corpus shipping its raw tables (`tsv_dir`) has no prose page to look in:
-        # its quote is COMPOSED out of those tables, so family 13 re-derives it from
-        # them instead. Everything structural above still applies.
-        if entry.get("tsv_dir"):
-            return
-        if not entry.get("pages_dir"):
-            self.skipped_corpora.add(corpus)
-            return
-        text = self.page_text(corpus, page)
-        if text is None:
-            self.skipped_corpora.add(corpus)
+        if not self.on_page(ctx, corpus, page, quote):
             return
         needle = normalize_for_match(quote)
-        if needle not in text:
-            report.error(f"{ctx}: quote NOT found verbatim on {corpus} "
-                         f"p.{page}: {quote!r}")
-            return
         self.n_checked += 1
         # A brand quote IS a short proper noun (the name, verbatim) and a Ki quote one
         # table row: short by design (callers pass short_ok). Any flattened table row

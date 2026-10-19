@@ -45,7 +45,13 @@ Three severities: `[ERROR]` fails the run, `[warn]` is printed for a human to ac
   a `verified` source must carry page + quote, and the normalized quote must be an
   exact substring of the normalized cited page text. Page material is author-side
   (see CLAUDE.local.md); the quote check is skipped + warned on a clone without it.
-  A quote not on its page = error (the gate that keeps the LLM extraction honest).
+  A quote not on its page = error (the gate that keeps the LLM extraction honest), and so
+  is a page file missing (or a path-like page id) inside a page tree that is present.
+  Coverage does not depend on the node walks knowing a kind: `checks/sources/sweep.py`
+  also looks up every `quotes.jsonl` row and every quote-shaped source committed under
+  `tools/generated_cache/*.json` + `tools/data/*.jsonl` (a cached quote nothing emits,
+  such as a removed owner's, otherwise goes stale unseen), for every corpus with a
+  `pages_dir` (`tools/tests/test_quote_sweep.py` enumerates them off `SOURCE_CORPORA`).
   A corpus that ships its own raw tables declares `tsv_dir` instead of `pages_dir`, and
   the page lookup **stands down** for it rather than being skipped: there is no prose page
   to read, and a page generated out of the same numbers as the quote could not gate

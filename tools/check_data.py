@@ -166,7 +166,8 @@ def main():
     check_todos(*args)
     check_provenance(*args, addons, metabolites)
     check_sources(report, meta, drugs, projections, structures, receptors, addons,
-                  metabolites, circuits, projection_groups, CONTRADICTIONS)
+                  metabolites, circuits, projection_groups, CONTRADICTIONS,
+                  quotes_by_id)
     check_connectivity(report, structures, projections)
     check_ki_coverage(report, meta, drugs)
     check_flow_consistency(report, meta, drugs, projections, receptors)
