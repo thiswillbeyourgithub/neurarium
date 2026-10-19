@@ -81,7 +81,7 @@ CACHE = os.path.join(ROOT, "tools", "generated_cache")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from data_generators.provenance import SOURCING_LLMS  # noqa: E402
-from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
+from lib.page_file import read_page  # noqa: E402 (the raw page reader, refuses a path-like page)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib.quote_match import emitted_page_dirs  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
@@ -277,9 +277,8 @@ def cmd_build(args):
         key = (corpus, page)
         if key not in page_cache:
             page_dir = PAGE_DIR.get(corpus)
-            fn = page_file(os.path.join(ROOT, page_dir), page) if page_dir else None
-            page_cache[key] = (open(fn, encoding="utf-8", errors="replace").read()
-                               if fn and os.path.exists(fn) else None)
+            page_cache[key] = read_page(os.path.join(ROOT, page_dir) if page_dir else None,
+                                        page)
         return page_cache[key]
 
     batches, cur = [], {"items": [], "pages": {}}
