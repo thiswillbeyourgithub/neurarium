@@ -34,7 +34,7 @@
   },
   "amphetamine_dl": {
    "name": "Amphetamine (D,L)",
-   "bindings": 5,
+   "bindings": 6,
    "metabolites": [],
    "candidates": [
     {
@@ -89,7 +89,7 @@
   },
   "aripiprazole": {
    "name": "Aripiprazole",
-   "bindings": 35,
+   "bindings": 36,
    "metabolites": [
     {
      "name": "Dehydroaripiprazole",
@@ -132,7 +132,7 @@
   },
   "brexanolone": {
    "name": "Brexanolone",
-   "bindings": 1,
+   "bindings": 2,
    "metabolites": [],
    "candidates": [
     {
@@ -195,8 +195,13 @@
   },
   "clorazepate": {
    "name": "Clorazepate",
-   "bindings": 1,
-   "metabolites": [],
+   "bindings": 0,
+   "metabolites": [
+    {
+     "name": "Desmethyldiazepam (nordazepam)",
+     "drug_id": null
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -372,7 +377,16 @@
   "ketamine": {
    "name": "Ketamine",
    "bindings": 2,
-   "metabolites": [],
+   "metabolites": [
+    {
+     "name": "Norketamine",
+     "drug_id": null
+    },
+    {
+     "name": "Hydroxynorketamine",
+     "drug_id": null
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -384,8 +398,13 @@
   },
   "lisdexamfetamine": {
    "name": "Lisdexamfetamine",
-   "bindings": 5,
-   "metabolites": [],
+   "bindings": 0,
+   "metabolites": [
+    {
+     "name": "Dextroamphetamine",
+     "drug_id": "amphetamine_d"
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -481,8 +500,13 @@
   },
   "loflazepate": {
    "name": "Loflazepate",
-   "bindings": 1,
-   "metabolites": [],
+   "bindings": 0,
+   "metabolites": [
+    {
+     "name": "N-desalkylflurazepam (descarboxyloflazepate)",
+     "drug_id": null
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -562,8 +586,13 @@
   },
   "mdma": {
    "name": "MDMA",
-   "bindings": 16,
-   "metabolites": [],
+   "bindings": 18,
+   "metabolites": [
+    {
+     "name": "3,4-Methylenedioxyamphetamine (MDA)",
+     "drug_id": null
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -618,8 +647,13 @@
   },
   "methamphetamine": {
    "name": "Methamphetamine",
-   "bindings": 7,
-   "metabolites": [],
+   "bindings": 10,
+   "metabolites": [
+    {
+     "name": "Amphetamine",
+     "drug_id": "amphetamine_d"
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -645,7 +679,12 @@
   "nicotine": {
    "name": "Nicotine",
    "bindings": 1,
-   "metabolites": [],
+   "metabolites": [
+    {
+     "name": "Cotinine",
+     "drug_id": null
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -657,7 +696,7 @@
   },
   "oxcarbazepine": {
    "name": "Oxcarbazepine",
-   "bindings": 1,
+   "bindings": 0,
    "metabolites": [
     {
      "name": "Licarbazepine",
@@ -681,7 +720,7 @@
   },
   "prazepam": {
    "name": "Prazepam",
-   "bindings": 1,
+   "bindings": 0,
    "metabolites": [
     {
      "name": "Desmethyldiazepam (nordazepam)",
@@ -750,8 +789,13 @@
   },
   "serdexmethylphenidate": {
    "name": "Serdexmethylphenidate",
-   "bindings": 2,
-   "metabolites": [],
+   "bindings": 0,
+   "metabolites": [
+    {
+     "name": "Dexmethylphenidate",
+     "drug_id": "methylphenidate_d"
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -863,8 +907,13 @@
   },
   "codeine": {
    "name": "Codeine",
-   "bindings": 1,
-   "metabolites": [],
+   "bindings": 0,
+   "metabolites": [
+    {
+     "name": "Morphine",
+     "drug_id": "morphine"
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -882,7 +931,7 @@
   },
   "tapentadol": {
    "name": "Tapentadol",
-   "bindings": 3,
+   "bindings": 2,
    "metabolites": [],
    "candidates": [
     {
@@ -895,7 +944,7 @@
   },
   "heroin": {
    "name": "Heroin",
-   "bindings": 1,
+   "bindings": 0,
    "metabolites": [
     {
      "name": "6-Monoacetylmorphine",
@@ -929,7 +978,7 @@
   },
   "psilocybin": {
    "name": "Psilocybin",
-   "bindings": 2,
+   "bindings": 0,
    "metabolites": [
     {
      "name": "Psilocin",
@@ -989,7 +1038,7 @@
   },
   "mescaline": {
    "name": "Mescaline",
-   "bindings": 3,
+   "bindings": 7,
    "metabolites": [],
    "candidates": [
     {
@@ -1020,7 +1069,7 @@
   },
   "2cb": {
    "name": "2C-B",
-   "bindings": 3,
+   "bindings": 16,
    "metabolites": [],
    "candidates": [
     {
@@ -1069,7 +1118,7 @@
   },
   "phencyclidine": {
    "name": "Phencyclidine",
-   "bindings": 2,
+   "bindings": 3,
    "metabolites": [],
    "candidates": [
     {
@@ -1108,8 +1157,13 @@
   },
   "levodopa": {
    "name": "Levodopa",
-   "bindings": 6,
-   "metabolites": [],
+   "bindings": 1,
+   "metabolites": [
+    {
+     "name": "Dopamine",
+     "drug_id": null
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -1182,8 +1236,13 @@
   },
   "fenfluramine": {
    "name": "Fenfluramine",
-   "bindings": 14,
-   "metabolites": [],
+   "bindings": 15,
+   "metabolites": [
+    {
+     "name": "Norfenfluramine",
+     "drug_id": null
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -1213,7 +1272,7 @@
   },
   "sibutramine": {
    "name": "Sibutramine",
-   "bindings": 3,
+   "bindings": 0,
    "metabolites": [
     {
      "name": "Desmethylsibutramine",
