@@ -505,7 +505,7 @@ def drug_title(drug_id: str) -> str | None:
 
 def extract_stored(slug: str, valid_ids: set[str]) -> tuple[dict, str] | None:
     """Parse a stored raw/<slug>.html -> (extraction result, permalink), or None."""
-    raw_path = os.path.join(RAW_DIR, f"{slug}.html")
+    raw_path = page_path(RAW_DIR, slug, ".html")
     if not os.path.exists(raw_path):
         return None
     with open(raw_path, encoding="utf-8") as f:
@@ -679,7 +679,7 @@ def main() -> None:
 
     if args.no_fetch:
         slug = title_slug(title)
-        raw_path = os.path.join(RAW_DIR, f"{slug}.html")
+        raw_path = page_path(RAW_DIR, slug, ".html")
         if not os.path.exists(raw_path):
             raise SystemExit(f"no stored page at {raw_path}; run without --no-fetch first")
         with open(raw_path, encoding="utf-8") as f:

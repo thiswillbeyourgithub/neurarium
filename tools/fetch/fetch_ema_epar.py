@@ -50,6 +50,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like id)
 from lib import chirality  # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET)
 from lib import salt_words  # noqa: E402 (the shared English salt words)
@@ -217,7 +218,7 @@ class Epar:
     def smpc(self, page: str, url: str, refresh: bool = False) -> dict | None:
         """The converted SmPC ``{html, fetched, date_source, copied_from}`` for ``page``,
         read from ``data_sources/ema/raw/<page>.html`` or downloaded + converted."""
-        html_path, meta_path = RAW_DIR / f"{page}.html", RAW_DIR / f"{page}.json"
+        html_path, meta_path = page_path(RAW_DIR, page, ".html"), page_path(RAW_DIR, page, ".json")
         if not refresh and html_path.exists() and meta_path.exists():
             meta = json.loads(meta_path.read_text(encoding="utf-8"))
             if meta.get("source") == url:

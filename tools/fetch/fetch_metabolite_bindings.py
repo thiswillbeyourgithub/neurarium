@@ -215,7 +215,7 @@ def load_page(title: str, no_fetch: bool, refresh: bool):
     Returns ``(found, real_title, slug, page_text, soup)``; ``found`` is False (and the
     rest best-effort) when the page is neither stored nor fetchable."""
     slug = wikistore.title_slug(title)
-    raw_path = os.path.join(wikistore.RAW_DIR, f"{slug}.html")
+    raw_path = page_path(wikistore.RAW_DIR, slug, ".html")
     if no_fetch or (os.path.exists(raw_path) and not refresh):
         if not os.path.exists(raw_path):
             return (False, title, slug, "", None)

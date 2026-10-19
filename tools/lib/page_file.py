@@ -34,10 +34,11 @@ def page_name(page: Any) -> str | None:
     return text if _PAGE.fullmatch(text) else None
 
 
-def page_file(pages_dir: str | Path | None, page: Any) -> Path | None:
-    """``<pages_dir>/<page>.md``, or None when there is no directory or the page
+def page_file(pages_dir: str | Path | None, page: Any, suffix: str = ".md") -> Path | None:
+    """``<pages_dir>/<page><suffix>``, or None when there is no directory or the page
     fails :func:`page_name`. Whether the file exists is the caller's question (the
-    page trees are author-side, absent on a clone).
+    page trees are author-side, absent on a clone). ``suffix`` names a sibling store
+    keyed by the same id (a fetcher's ``raw/<id>.json`` / ``.html`` / ``.xml``).
 
     >>> page_file("data_sources/bdpm/pages", "69071035").as_posix()
     'data_sources/bdpm/pages/69071035.md'
@@ -47,18 +48,18 @@ def page_file(pages_dir: str | Path | None, page: Any) -> Path | None:
     name = page_name(page)
     if not pages_dir or name is None:
         return None
-    return Path(pages_dir) / f"{name}.md"
+    return Path(pages_dir) / f"{name}{suffix}"
 
 
-def page_path(pages_dir: str | Path, page: Any) -> Path:
-    """``<pages_dir>/<page>.md`` for a caller that writes or must read the page: a
+def page_path(pages_dir: str | Path, page: Any, suffix: str = ".md") -> Path:
+    """``<pages_dir>/<page><suffix>`` for a caller that writes or must read the file: a
     page id failing :func:`page_name` raises instead of returning None, so a path-like
     id can never name a file outside ``pages_dir``.
 
     >>> page_path("data_sources/gtopdb/pages", 61).as_posix()
     'data_sources/gtopdb/pages/61.md'
     """
-    path = page_file(pages_dir, page)
+    path = page_file(pages_dir, page, suffix)
     if path is None:
         raise ValueError(f"refusing page id {page!r} under {pages_dir}: not a bare token")
     return path

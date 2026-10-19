@@ -166,7 +166,7 @@ def main() -> int:
     n_no_data = 0
     for rid in want:
         gene = RECEPTOR_GENES[rid]
-        raw_path = RAW / f"{rid}.json"
+        raw_path = page_path(RAW, rid, ".json")
         if raw_path.exists() and not args.refresh:
             payload = json.loads(raw_path.read_text(encoding="utf-8"))
         else:

@@ -172,6 +172,7 @@ import citation_site as CS  # noqa: E402
 # to public/data/changelog.json (docs/ is not web-exposed, so the emit is what makes
 # them reachable).
 from data_generators.changelog import load_changelog  # noqa: E402
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like id)
 from lib.io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
 from data_generators import llms_txt  # noqa: E402 (public/llms.txt for LLM agents)
 from data_generators import effect_index as EFFECT_INDEX  # noqa: E402 (llms.txt effects, BETA)
@@ -1848,7 +1849,7 @@ def write_artifacts(root: Path) -> None:
     log.info("wrote %s (%d names)", sn_path, len(names))
 
     for sid, payload in shapes.items():
-        path = shapes_dir / f"{sid}.json"
+        path = page_path(shapes_dir, sid, ".json")
         atomic_write_json(path, payload, indent=2, ensure_ascii=True)
     log.info("wrote %d shape files to %s/", len(shapes), shapes_dir)
 

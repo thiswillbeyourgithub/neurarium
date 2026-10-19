@@ -1,4 +1,4 @@
-"""Lint: no tool joins a page id into a ``.md`` path by hand.
+"""Lint: no tool joins a page id into a ``.md`` (or raw ``.json`` / ``.html`` / ``.xml``) path by hand.
 
 A citation's ``page`` comes from untrusted places (an LLM's judged answer, an API
 response, a hand edit), and ``../../README`` joined into ``<pages_dir>/<page>.md``
@@ -8,6 +8,13 @@ greps every ``tools/**/*.py`` for the hand-rolled spellings of that join and fai
 any outside it. Like ``tools/check_js.py`` it is a lint, not a parser: it matches the
 spellings the codebase has used (an f-string ending ``{x}.md``, a ``".md"`` literal
 for concatenation / ``with_suffix`` / ``os.path.join``, ``%s.md`` / ``{}.md``).
+
+A fetcher's raw store (``raw/<id>.json`` / ``.html`` / ``.xml``) is keyed by the same
+data-derived ids (an API's setid, a Wikipedia slug), so its join goes through
+``page_path(dir, id, suffix)`` too; :data:`RAW_JOIN` catches a directory joined to an
+f-string that is only ``{id}.<ext>`` (``d / f"{x}.json"``, ``os.path.join(d,
+f"{x}.html")``, ``d + f"/{x}.xml"``). A name with a literal stem (``batch_{i}.json``)
+is not an id join and passes.
 
 Built with the help of Claude Code.
 """
@@ -19,6 +26,8 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent.parent
 
 JOIN = re.compile(r"""\}\.md["']|["']\.md["']|%s\.md|\{\}\.md""")
+_RAW_ID = r"""\{[^}]*\}\.(?:json|html|xml)["']"""
+RAW_JOIN = re.compile(rf"""/\s*f["']{_RAW_ID}|join\([^)]*f["']{_RAW_ID}|\+\s*f["']/{_RAW_ID}""")
 
 # path -> why its joins are safe. Keep it short: a new entry needs a reason a
 # reviewer accepts, never "it was there already".
@@ -37,7 +46,8 @@ def violations(root=TOOLS):
         if rel.startswith("tests/") or rel in ALLOWED:
             continue
         for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-            if JOIN.search(line) and not line.lstrip().startswith("#"):
+            if ((JOIN.search(line) or RAW_JOIN.search(line))
+                    and not line.lstrip().startswith("#")):
                 out.append((rel, n, line.strip()))
     return out
 
@@ -57,13 +67,18 @@ class PageJoinLintTest(unittest.TestCase):
         import tempfile
         spellings = ['p = PAGES / f"{page}.md"', 'p = os.path.join(d, page + ".md")',
                      'p = (d / page).with_suffix(".md")', 'p = "%s.md" % page',
-                     'p = "{}.md".format(page)', "p = d / f'{cand[\"page\"]}.md'"]
+                     'p = "{}.md".format(page)', "p = d / f'{cand[\"page\"]}.md'",
+                     'p = RAW / f"{owner}.json"', 'p = os.path.join(RAW, f"{slug}.html")',
+                     'p = RAW + f"/{slug}.html"', "(RAW_DIR / f'{meta[\"setid\"]}.xml')"]
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "sourcing").mkdir()
             (root / "sourcing" / "bad.py").write_text("\n".join(spellings), "utf-8")
             (root / "sourcing" / "ok.py").write_text(
-                'p = page_path(PAGES, page)\nif name.endswith(".mdx"): pass\n', "utf-8")
+                'p = page_path(PAGES, page)\nif name.endswith(".mdx"): pass\n'
+                'p = page_path(RAW, owner, ".json")\n'
+                'p = os.path.join(out, f"batch_{i}.json")\np = DATA / f"{name}.jsonl"\n',
+                "utf-8")
             self.assertEqual([n for _, n, _ in violations(root)],
                              list(range(1, len(spellings) + 1)))
 

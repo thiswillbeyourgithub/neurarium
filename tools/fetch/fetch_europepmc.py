@@ -402,13 +402,13 @@ def store(rec: dict, refresh: bool = False, full_text: bool = False) -> bool:
     if page.exists() and not refresh and (
             not want_full or FULL_TEXT_MARKER in page.read_text("utf-8")):
         return True
-    (RAW_DIR / f"{pmid}.json").write_text(
+    page_path(RAW_DIR, pmid, ".json").write_text(
         json.dumps(rec, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     body = None
     if want_full:
         xml = full_text_xml(rec)
         if xml:
-            (RAW_DIR / f"{pmid}.xml").write_text(xml, encoding="utf-8")
+            page_path(RAW_DIR, pmid, ".xml").write_text(xml, encoding="utf-8")
             body = full_text_lines(xml) or None
         else:
             print(f"[warn] {pmid}: open access but no full text served", file=sys.stderr)
@@ -525,14 +525,14 @@ def ki_prose(only: set | None, refresh: bool) -> int:
                           if (b.get("ki") or {}).get("source", {}).get("corpus", "europepmc")
                           == "europepmc"})
         path = page_for(d) if missing else None
-        raw = WIKI_RAW / f"{Path(path).stem}.html" if path else None
+        raw = page_path(WIKI_RAW, Path(path).stem, ".html") if path else None
         if not raw or not raw.exists():
             continue
         paragraphs = cited_affinity_pmids(raw.read_text("utf-8"))
         cands = []
         for pmid in sorted({pm for _, pms in paragraphs for pm in pms}):
             page = page_path(PAGES_DIR, pmid)
-            raw_rec = RAW_DIR / f"{pmid}.json"
+            raw_rec = page_path(RAW_DIR, pmid, ".json")
             # The full text is what a table row lives in: an abstract-only page whose
             # stored record says open access is re-stored once to add it.
             rec = (json.loads(raw_rec.read_text("utf-8"))

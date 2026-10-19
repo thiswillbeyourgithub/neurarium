@@ -144,7 +144,7 @@ def store_page(page: dict, page_text: str,
     slug = title_slug(page["title"])
     header = (f"source: {page['url']}\nrevision: {page['revid']}\n"
               f"permalink: {page['oldid_url']}\nfetched_at: {page['fetched_at']}\n")
-    raw_path = os.path.join(raw_dir, f"{slug}.html")
+    raw_path = page_path(raw_dir, slug, ".html")
     with open(raw_path, "w", encoding="utf-8") as f:
         f.write(f"<!--\n{header}-->\n{page['html']}")
     pages_path = page_path(pages_dir, slug)

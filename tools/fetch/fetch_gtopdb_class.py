@@ -92,7 +92,7 @@ def subject(rec: dict, gene: str) -> str:
 
 def fetch_one(owner: str, gene: str, kind: str, refresh: bool) -> dict | None:
     """Fetch (or reuse) one owner's classification facts and write its corpus page."""
-    raw_path = RAW / f"{owner}.json"
+    raw_path = page_path(RAW, owner, ".json")
     if raw_path.exists() and not refresh:
         payload = json.loads(raw_path.read_text(encoding="utf-8"))
     else:

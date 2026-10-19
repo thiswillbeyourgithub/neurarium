@@ -65,6 +65,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 sys.path.insert(0, HERE)
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like id)
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib import drugs_io  # noqa: E402
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (owns PAGE_ALIASES + the slug rule)
@@ -199,7 +200,7 @@ def build(only: set[str] | None = None) -> tuple[dict[str, dict], collections.Co
         if not path:
             continue
         slug = os.path.splitext(os.path.basename(path))[0]
-        raw = os.path.join(wikistore.RAW_DIR, f"{slug}.html")
+        raw = page_path(wikistore.RAW_DIR, slug, ".html")
         if not os.path.exists(raw):
             stats["drug: page stored without its raw html"] += 1
             continue

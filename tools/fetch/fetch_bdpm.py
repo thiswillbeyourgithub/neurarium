@@ -122,7 +122,7 @@ def fetch_rcp(drug: dict, ranked: list[tuple[dict, str]], *, refresh: bool,
         return "no-ir-product"            # only modified-release forms are marketed
     tried = 0
     for product, why in ranked:
-        raw_path = bdpm.RAW_DIR / f"{product['cis']}.html"
+        raw_path = page_path(bdpm.RAW_DIR, product["cis"], ".html")
         if refresh or not raw_path.exists():
             if tried >= MAX_TRIES:
                 break

@@ -152,8 +152,9 @@ def load_manifest(repo: Path, name: str = ".scrape-manifest.json") -> dict:
 def _scraped(repo: Path, folder: str, cis: str) -> tuple[str, Path, str] | None:
     """justelesRCP's copy of ``cis`` under ``data/<folder>/`` (gzipped or not) as
     ``(file name, path, html)``, or None when it has none (or a zero-byte one)."""
-    for name in (f"{cis}.html.gz", f"{cis}.html"):
-        path = repo / "data" / folder / name
+    for suffix in (".html.gz", ".html"):
+        path = page_path(repo / "data" / folder, cis, suffix)
+        name = path.name
         if not path.exists() or not path.stat().st_size:
             continue
         raw = path.read_bytes()
@@ -175,7 +176,7 @@ def copies(cis: str, repo: Path, manifest: dict) -> list[dict]:
     copied_from}``. A copy known to hold no RCP (zero bytes, manifest ``empty``) is
     not one."""
     out = []
-    local = bdpm.RAW_DIR / f"{cis}.html"
+    local = page_path(bdpm.RAW_DIR, cis, ".html")
     if local.exists() and local.stat().st_size:
         out.append({"html": local.read_text(encoding="utf-8", errors="replace"),
                     "fetched": _mtime_date(local), "date_source": "file mtime",

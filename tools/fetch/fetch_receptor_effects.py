@@ -161,7 +161,7 @@ def gtopdb_candidates(oid: str, hits, key: str) -> list[dict]:
     """The owner's offerable GtoPdb function lines hitting a cue (``[]`` without a page).
 
     The page is about the owner alone, so no alias match is needed (unlike the prose)."""
-    raw = gfunc.RAW / f"{oid}.json"
+    raw = page_path(gfunc.RAW, oid, ".json")
     if not raw.exists():
         return []
     payload = json.loads(raw.read_text("utf-8"))

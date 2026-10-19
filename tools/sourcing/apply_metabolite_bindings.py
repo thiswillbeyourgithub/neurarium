@@ -57,6 +57,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like id)
 from lib import drugs_io                                                 # noqa: E402
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 import fetch_ki                                                 # noqa: E402  (PDSP Ki lookup)
@@ -79,7 +80,7 @@ GATE = PageGate(registry_pages())
 def _permalink(slug: str) -> str:
     """The revision permalink stamped into raw/<slug>.html (cited by a Wikipedia Ki)."""
     try:
-        html = open(wikistore.RAW_DIR + f"/{slug}.html", encoding="utf-8").read()
+        html = open(page_path(wikistore.RAW_DIR, slug, ".html"), encoding="utf-8").read()
     except OSError:
         return ""
     return wikistore.stored_meta(html)[1]

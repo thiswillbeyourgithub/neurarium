@@ -161,7 +161,7 @@ def rows(data, comments: bool = False):
 
 def target_id(owner: str, gene: str) -> dict | None:
     """The GtoPdb target record, reused from the corpus #12 cache when it holds one."""
-    cached = CLASS_RAW / f"{owner}.json"
+    cached = page_path(CLASS_RAW, owner, ".json")
     if cached.exists():
         c = json.loads(cached.read_text("utf-8"))
         if c.get("gene") == gene:
@@ -180,7 +180,7 @@ def fetch_one(owner: str, gene: str, kind: str, refresh: bool, offline: bool) ->
     A cached payload is reused only when it was fetched for ``gene``: after a gene remap
     the old target's rows would otherwise be republished under the owner (refetched
     online; offline the owner is skipped with a warning)."""
-    raw_path = RAW / f"{owner}.json"
+    raw_path = page_path(RAW, owner, ".json")
     cached = json.loads(raw_path.read_text("utf-8")) if raw_path.exists() else None
     stale = cached is not None and cached.get("gene") != gene
     if stale:

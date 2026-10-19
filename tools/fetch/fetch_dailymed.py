@@ -201,7 +201,7 @@ def spl_routes(setid: str) -> set[str]:
     Read off ``raw/<setid>.xml``; empty when the label is not on disk. The title names
     only a dosage form, so this is what tells a sublingual tablet from a swallowed one.
     """
-    path = RAW_DIR / f"{setid}.xml"
+    path = page_path(RAW_DIR, setid, ".xml")
     if not path.exists():
         return set()
     xml = path.read_text("utf-8", errors="replace")
@@ -236,7 +236,7 @@ def has_peak(lines: list[str]) -> bool:
 def _store(meta: dict, xml: str, lines: list[str]) -> None:
     """Write one label's raw SPL and its quote-gate page."""
     RAW_DIR.mkdir(parents=True, exist_ok=True)
-    (RAW_DIR / f"{meta['setid']}.xml").write_text(xml, encoding="utf-8")
+    page_path(RAW_DIR, meta["setid"], ".xml").write_text(xml, encoding="utf-8")
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
     page_path(PAGES_DIR, meta['setid']).write_text(page_text(meta, lines), encoding="utf-8")
 
@@ -280,7 +280,7 @@ def fetch_drug(drug: dict, *, refresh: bool, cache: dict) -> str:
         setid = cand.get("setid")
         if not setid:
             continue
-        raw_path = RAW_DIR / f"{setid}.xml"
+        raw_path = page_path(RAW_DIR, setid, ".xml")
         if refresh or not raw_path.exists():
             xml = polite_http.fetch_or_none(f"{API}/spls/{setid}.xml")
             tried += 1
@@ -310,7 +310,7 @@ def redownload(did: str, cache: dict) -> str:
         return "gone"
     lines = section_texts(xml)
     if not lines:
-        (RAW_DIR / f"{meta['setid']}.xml").write_text(xml, encoding="utf-8")
+        page_path(RAW_DIR, meta["setid"], ".xml").write_text(xml, encoding="utf-8")
         return "no-pk-section"
     page = page_path(PAGES_DIR, meta['setid'])
     old = page.read_text(encoding="utf-8").split("\n\n", 1)[-1] if page.exists() else ""

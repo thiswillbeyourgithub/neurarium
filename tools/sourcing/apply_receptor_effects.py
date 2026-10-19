@@ -57,6 +57,7 @@ sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_generators.receptor_effects import (  # noqa: E402
     CACHE, EFFECT_EVIDENCE, RECEPTOR_EFFECT_MODES, RECEPTOR_EFFECTS)
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like id)
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from prose_gate import apply_picks, not_offered, run_applier  # noqa: E402
 from apply_classification_sources import PROSE_PAGES as _PROSE  # noqa: E402
@@ -136,7 +137,7 @@ def unknown_log(worklist: dict, cache: dict, kinds: dict[str, str], ledger: dict
                    for c in ("wikipedia_pharm", "gtopdb_function", "stahl_essential",
                              "europepmc")}
         none = "offered to the picker, none states an effect of acting on it in humans"
-        raw = gfunc.RAW / f"{oid}.json"
+        raw = page_path(gfunc.RAW, oid, ".json")
         lines = (json.loads(raw.read_text("utf-8")).get("lines") or []) if raw.exists() else []
         slug = (owner.get("wikipedia") or "").rstrip("/").rsplit("/", 1)[-1] or "none"
         log[site] = {
