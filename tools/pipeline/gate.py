@@ -82,6 +82,15 @@ class PageGate:
         body = self.text(corpus, page)
         return bool(body) and normalize_for_match(line) in body
 
+    def refuted(self, corpus: str, page, line: str) -> bool:
+        """Whether ``line`` is NOT on its stored page. Lenient only when the corpus's
+        whole page tree is absent (a clone); a missing or empty page file inside a
+        present tree refutes, exactly as check_data's quote gate fails it."""
+        tree = self.pages.get(corpus)
+        if self._read is None and (tree is None or not Path(tree).is_dir()):
+            return False
+        return not self.on_page(corpus, page, line)
+
     def sources(self, cands: list[dict], picks, what: str,
                 misses: list[str]) -> list[dict] | None:
         """The ``{corpus, page, quote, provenance}`` sources for ``picks`` (``{index, qid}``

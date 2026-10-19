@@ -61,9 +61,8 @@ PAGE_GATE = PageGate(registry_pages())
 
 
 def quote_refuted(corpus: str, page, quote: str) -> bool:
-    """Whether the stored page exists and lacks ``quote``. Lenient on a missing or
-    empty page (a clone without the author-side tree keeps the fetcher's own check)."""
-    return bool(PAGE_GATE.text(corpus, page)) and not PAGE_GATE.on_page(corpus, page, quote)
+    """Whether ``quote`` is not on its stored page (see ``PageGate.refuted``)."""
+    return PAGE_GATE.refuted(corpus, page, quote)
 
 
 def owner_regions() -> tuple[dict[str, set], dict[str, set]]:
