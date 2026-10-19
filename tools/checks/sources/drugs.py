@@ -21,6 +21,20 @@ _NO_SUBJECT_QUOTE = re.compile(
     r"^(Blocking\b|Antihistaminic actions\b)[^.]*\b(can|may) cause\b", re.I)
 
 
+def _check_ki_quote(gate, ctx, binding):
+    """Gate a binding's quote-carrying Ki source (drug or metabolite alike).
+
+    A wikipedia_pharm Ki (corpus #9) cites the verbatim affinity-table row, so it is
+    gated like any other quote. A PDSP Ki cites a CSV row (ki_id, no quote) and is
+    verified by the CSV gate (ki.py) instead, so only a Ki source carrying a quote is
+    fed here. The row (target | value | species) is short by design, and its number +
+    target make a chance match implausible, hence short_ok.
+    """
+    ki_src = (binding.get("ki") or {}).get("source")
+    if ki_src and ki_src.get("quote"):
+        gate.check_one(f"{ctx} ki.source", ki_src, short_ok=True)
+
+
 def walk_drugs(gate, drugs):
     """Every quote-level citation a drug record carries, its Ki quotes and bullets."""
     check_one, check_uncertainty = gate.check_one, gate.check_uncertainty
@@ -41,16 +55,7 @@ def walk_drugs(gate, drugs):
                     f"source a binding (an attributed one, 'By blocking X, IT can "
                     f"cause Y', can)")
         for binding in drug.get("bindings", []):
-            # A quote-carrying Ki source (corpus #9 wikipedia_pharm cites the verbatim
-            # affinity-table row) is gated here like any other quote. A PDSP Ki cites a
-            # CSV row (ki_id, no quote) and is verified by the CSV gate (ki.py) instead,
-            # so only feed a Ki source that actually carries a quote.
-            ki_src = (binding.get("ki") or {}).get("source")
-            if ki_src and ki_src.get("quote"):
-                # A Ki quote is one table row (target | value | species): short by
-                # design, and its number + target make a chance match implausible.
-                check_one(f"drug {did} binding {binding.get('target')} ki.source", ki_src,
-                          short_ok=True)
+            _check_ki_quote(gate, f"drug {did} binding {binding.get('target')}", binding)
             check_uncertainty(f"drug {did} binding {binding.get('target')}", binding)
         for e in drug.get("enzymes", []) or []:
             # The denial quote of a contradicted row is gated exactly like the claim it
@@ -74,12 +79,7 @@ def walk_metabolites(gate, metabolites):
         for binding in m.get("bindings", []) or []:
             for i, src in enumerate(binding.get("sources", []) or []):
                 check_one(f"{mid} binding {binding.get('target')} sources[{i}]", src)
-            # A metabolite binding's quote-carrying Ki (wikipedia_pharm table row) is
-            # gated exactly like a drug binding's (a PDSP CSV Ki is checked in ki.py).
-            ki_src = (binding.get("ki") or {}).get("source")
-            if ki_src and ki_src.get("quote"):
-                check_one(f"{mid} binding {binding.get('target')} ki.source", ki_src,
-                          short_ok=True)  # a table row, as for a drug's Ki above
+            _check_ki_quote(gate, f"{mid} binding {binding.get('target')}", binding)
             gate.check_uncertainty(f"{mid} binding {binding.get('target')}", binding)
 
 
