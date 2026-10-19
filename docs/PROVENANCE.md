@@ -145,7 +145,10 @@ is covered the day it lands. Six flags today, and a node hit by any is uncertain
 - **the subject-less side-effect rule** (89 bindings): the quote's heading trail ends in Stahl's *How Drug
   Causes Side Effects* and the sentence does not attribute the action to the drug (`_attributes_to_drug`:
   it neither names it, nor uses a pronoun subject, nor elides the subject in Stahl's telegraphic style).
-  This is what the heading trails were resolved for.
+  This is what the heading trails were resolved for. Repetition across monographs is deliberately not a
+  signal: Stahl prints "Blocks dopamine 2 receptors, reducing positive symptoms of psychosis" on every
+  antipsychotic, and every one does block D2; a bad quote is marked by its section plus a drug lacking
+  the property.
 - **the family-level claim** (`family_claim`, +22): one source sentence covers several of the drug's
   bindings on subtypes of one family (same id stem) and names none of them individually, so the split into
   subtypes is ours, not the book's ("Blockade of alpha adrenergic 1 receptors" -> alpha1A/B/D). Bearable

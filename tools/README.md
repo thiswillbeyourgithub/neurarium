@@ -209,7 +209,9 @@ network, idempotent, polite; each touches only what changed). Always finish with
    `tools/generated_cache/gtopdb_class.json`), then `python
    tools/sourcing/apply_classification_sources.py` maps + quote-gates + merges the confirm-only
    `verified` sources (no judge) into `tools/generated_cache/classification_sources.json`. See
-   docs/PROVENANCE.md (corpus #12).
+   docs/PROVENANCE.md (corpus #12). Gotchas: `/services/families/{id}` 404s (the family name
+   rides the target record instead), and a transducer cell can list several mechanisms, so it is
+   split on commas with "G protein independent mechanism" ignored (`SIGN_NEUTRAL_MECHANISMS`).
 9. **Drug metabolism** (the `drug_enzymes` rows): `python tools/fetch/fetch_cyp_worklist.py`
    re-reads Stahl's per-drug `Pharmacokinetics` block and the stored English Wikipedia articles
    (`data_sources/wikipedia/pages/`, corpus #9) into `tools/generated_cache/cyp_worklist.json`,

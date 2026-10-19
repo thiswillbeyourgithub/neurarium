@@ -18,9 +18,10 @@ fixed Stahl list.
 > psychiatry-shaped (Stahl's monographs, then the Wikipedia *psychotropic / psychiatric
 > medications* lists the roster pass diffed against), so whole CNS families were never
 > candidates and their absence looked deliberate when it was only an artefact of the
-> sources. The opioid analgesics closed the first such hole; the remaining families are
-> surveyed in `docs/SOURCING_GAPS.md`. A drug belongs here when it acts on a modeled
-> target, whatever specialty prescribes it.
+> sources. A drug belongs here when it acts on a modeled target, whatever specialty
+> prescribes it. Deliberately left out: never-marketed research compounds (the abandoned
+> non-benzodiazepine GABA-A modulators), and loperamide, a mu agonist that does not cross
+> the blood-brain barrier at therapeutic doses, so it would light regions it never reaches.
 
 - **Data.** The drugs live in `tools/data/drugs_data.jsonl`, read by `_load_drugs`. Vocabularies are
   defined once in `generate_data.py`: `DRUG_CATEGORY_LABELS`, `DRUG_ACTIONS` (action -> {label, net
