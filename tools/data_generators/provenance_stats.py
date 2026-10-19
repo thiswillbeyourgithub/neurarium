@@ -335,6 +335,12 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # when unsourced). A ubiquitous receptor is one "throughout the brain" node (its
     # "ALL"-keyed sources). Shared by receptors and their non-receptor-target mirror.
     _llm_rank = _GRADE_RANK[DEFAULT_PROVENANCE]
+    # The non-receptor drug targets: a receptor-linked target (``type: "receptor"``) is
+    # already counted as its receptor, so every target kind skips it, never twice.
+    own_targets = [t for t in drug_targets.values() if t.get("type") != "receptor"]
+    # The owners of the gene-keyed node kinds (effects, demographics, variants):
+    # receptors and non-receptor targets alike.
+    gene_owners = (*receptors, *own_targets)
 
     # A (grade, is_uncertain) pair, a region its animal-only evidence flags
     # (quotes/animal_evidence.py, ``location_uncertainty``) bucketing ``uncertain``.
@@ -355,42 +361,33 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # Non-receptor drug target classifications (type / system), graded per target.
     # Receptor-linked targets are skipped (already counted as receptors, not twice).
     target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
-                     for t in drug_targets.values() if t.get("type") != "receptor"]
+                     for t in own_targets]
     # Target expression-region nodes: the mirror of receptor_locations (a target never
     # sets ubiquitous, so only the per-region branch runs; receptor-linked targets are
     # skipped, their regions counted as the receptor's).
-    target_location_grades = [g for t in drug_targets.values()
-                              if t.get("type") != "receptor"
-                              for g in location_grades(t, "regions")]
-    target_density_grades = [t["density"]["grade"] for t in drug_targets.values()
-                             if t.get("type") != "receptor" and t.get("density")]
+    target_location_grades = [g for t in own_targets for g in location_grades(t, "regions")]
+    target_density_grades = [t["density"]["grade"] for t in own_targets if t.get("density")]
     # Target tone-polarity sub-claims: one graded node per non-receptor target that
     # carries a direction-flipping flag (vesicular / sign / synaptic). Kept distinct
     # from the target's type/system classification so a wrong direction shows honestly.
-    target_polarity_grades = [t["polarity_provenance"]
-                              for t in drug_targets.values()
-                              if t.get("type") != "receptor"
-                              and "polarity_provenance" in t]
+    target_polarity_grades = [t["polarity_provenance"] for t in own_targets
+                              if "polarity_provenance" in t]
     # Clinical-effect nodes (kind receptor_effect, BETA): one per (owner, mode, effect),
     # on receptors and non-receptor targets alike. Like a density profile, a node exists
     # only once sourced, and it is a stored quoted claim, so it sits in the headline.
     # An owner whose effects were searched everywhere with no hit (``effects_unknown``,
     # data_generators/unknown.py) adds one UNKNOWN, outside the denominator.
-    effect_owners = (*receptors, *(t for t in drug_targets.values()
-                                   if t.get("type") != "receptor"))
     # A (grade, is_uncertain) pair: an effect backed by isolated tissue only buckets
     # ``uncertain`` however strong its quote (receptor_effects.EFFECT_EVIDENCE).
-    receptor_effect_grades = [_node_grade(e, e["grade"]) for o in effect_owners
+    receptor_effect_grades = [_node_grade(e, e["grade"]) for o in gene_owners
                               for e in o.get("effects", [])] + [
-        "unknown" for o in effect_owners if o.get("effects_unknown")]
+        "unknown" for o in gene_owners if o.get("effects_unknown")]
     # Release-modulation nodes (kind receptor_release_modulation, BETA): one per (receptor,
     # kind, site, transmitter, direction); exists only once sourced, so in the headline.
     release_modulation_grades = [_node_grade(n, n["grade"]) for r in receptors
                                  for n in r.get("release_modulation", [])]
     # Availability-across-age/sex nodes (kind receptor_demographic, BETA): one per (owner,
     # factor, direction, structure), receptors and non-receptor targets alike.
-    gene_owners = (*receptors, *(t for t in drug_targets.values()
-                                 if t.get("type") != "receptor"))
     demographic_grades = [_node_grade(n, n["grade"]) for o in gene_owners
                           for n in o.get("demographics", [])]
     # Gene-variant associations (kind receptor_variant, ClinPGx #20): one per (owner,
@@ -407,9 +404,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
     for rec in (*structures, *receptors, *drugs):
         ref_grades.append(_GRADE_RANK.get(rec.get("wikipedia_provenance"), 0)
                           if rec.get("wikipedia") else 0)
-    for tgt in drug_targets.values():
-        if tgt.get("type") == "receptor":
-            continue
+    for tgt in own_targets:
         ref_grades.append(_GRADE_RANK.get(tgt.get("wikipedia_provenance"), 0)
                           if tgt.get("wikipedia") else 0)
 
