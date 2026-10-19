@@ -217,7 +217,7 @@ export function makeSections(P) {
     close();
   };
 
-  // The drug panel's "Gene variants annotated for this drug": every receptor_variant
+  // The drug panel's "Genetic variability": every receptor_variant
   // node naming this drug, grouped under the target whose gene carries it (the
   // heading jumps to that target). Folded with the rest of the drug panel.
   const appendDrugVariants = (drug) => {

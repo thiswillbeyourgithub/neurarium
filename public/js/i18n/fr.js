@@ -434,7 +434,7 @@ window.__I18N_MESSAGES__.fr = {
   "demog.magnitude": "« {magnitude} »",
   "variant.heading": "Variants génétiques",
   "variant.hint": "Variants de ce gène que ClinPGx (anciennement PharmGKB) annote comme associés à la réponse à un médicament, niveaux de preuve 1A à 3 (le niveau 4, cas isolés et signaux non répliqués, est écarté). Presque tous sont de niveau 3 : une seule étude, ou plusieurs qui ne concordent pas nettement. Survolez une pastille pour lire les phrases de ClinPGx par génotype.",
-  "variant.drugHeading": "Variants génétiques annotés pour ce médicament",
+  "variant.drugHeading": "Variabilité génétique",
   "variant.drugHint": "Variants des gènes de ses récepteurs et cibles que ClinPGx annote pour ce médicament nommément (une classe comme « opioids » n'est pas comptée), niveaux de preuve 1A à 3.",
   "variant.level": "Niveau {level} · {strength}",
   "variant.assoc": "pourrait être associé à : {category}, sous {drugs}",

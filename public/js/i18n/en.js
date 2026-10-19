@@ -434,7 +434,7 @@ window.__I18N_MESSAGES__.en = {
   "demog.magnitude": "“{magnitude}”",
   "variant.heading": "Genetic variants",
   "variant.hint": "Variants of this gene that ClinPGx (formerly PharmGKB) annotates as associated with how people respond to a drug, at evidence levels 1A to 3 (level 4, case reports and unreplicated signals, is left out). Almost all are level 3: a single study, or several that do not clearly agree. Hover a pill for ClinPGx's own per-genotype sentences.",
-  "variant.drugHeading": "Gene variants annotated for this drug",
+  "variant.drugHeading": "Genetic variability",
   "variant.drugHint": "Variants in the genes of its receptors and targets that ClinPGx annotates for this drug by name (a class such as \"opioids\" is not counted), evidence levels 1A to 3.",
   "variant.level": "Level {level} · {strength}",
   "variant.assoc": "may be associated with {category} under {drugs}",
