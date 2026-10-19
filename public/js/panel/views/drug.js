@@ -5,7 +5,7 @@ import { appendDrugHistory } from "../../drug-history.js";
 import { appendPhyschemChips, hasPhyschem } from "../../physchem.js";
 import { appendTdmChips, valueChip } from "../../tdm.js";
 import { bindingKi, formatHalfLife } from "../format.js";
-import { flashRow, btn } from "../dom.js";
+import { flashRow, btn, subSection } from "../dom.js";
 import { pkInteractionsSection } from "../pk-interactions.js";
 import { toneWeightOf } from "../../data.js";
 
@@ -251,7 +251,7 @@ export function showDrug(P, drug, opts = {}) {
   // the block: they are where on that curve the concentration should sit.
   const forms = drug.formulations || [];
   if (drug.halfLife || drug.tmax || drug.therapeuticRange || drug.alertLevel
-      || forms.length) {
+      || forms.length || hasPhyschem(drug)) {
     const hlEl = el("div", "info-bindings info-halflife");
     hlEl.appendChild(el("h3", null, t("drug.pkTiming")));
     const chipHelpers = { el, nodePill, t,
@@ -321,20 +321,16 @@ export function showDrug(P, drug, opts = {}) {
       }
       hlEl.appendChild(wrap);
     }
+    // Brain entry: the computed lipophilicity and polar surface (PubChem) beside the
+    // curated blood-brain-barrier label (B3DB), each its own node. A subsection, since
+    // the timing above says when the drug peaks and how long it stays, this whether
+    // and how easily it reaches the brain at all.
+    if (hasPhyschem(drug)) {
+      const pc = subSection(t("drug.physchem"), "info-physchem");
+      appendPhyschemChips(pc.appendChild(el("div", "pk-chips")), drug, chipHelpers);
+      hlEl.appendChild(pc);
+    }
     body.appendChild(hlEl);
-  }
-
-  // Physicochemistry and brain entry: the computed lipophilicity and polar surface
-  // (PubChem) beside the curated blood-brain-barrier label (B3DB), each its own
-  // node. Its own small section rather than the Pharmacokinetics block, which is
-  // about time (when the drug peaks, how long it stays); this is about whether
-  // and how easily it reaches the brain at all. Same chip layout (info-halflife).
-  if (hasPhyschem(drug)) {
-    const pc = el("div", "info-bindings info-halflife info-physchem");
-    pc.appendChild(el("h3", null, t("drug.physchem")));
-    appendPhyschemChips(pc, drug,
-      { el, nodePill, t, lang: window.__I18N__.lang });
-    body.appendChild(pc);
   }
 
   // (Ki ranking uses the shared bindingKi helper.)

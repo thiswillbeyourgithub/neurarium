@@ -26,6 +26,20 @@ export function el(tag, cls, text) {
  * @param {?string} [text]
  * @returns {HTMLButtonElement}
  */
+/**
+ * A titled subsection inside a panel section (Brain entry under Pharmacokinetics,
+ * Active metabolites under Metabolism): a `div.panel-subsec` headed by an `<h4>`.
+ * An `<h4>`, not an `<h3>`, so foldSections never folds it into a section of its own.
+ * @param {string} title  the localized heading
+ * @param {string} [cls]  extra classes for the wrapper
+ * @returns {HTMLDivElement}
+ */
+export function subSection(title, cls = "") {
+  const sec = el("div", `panel-subsec ${cls}`.trim());
+  sec.appendChild(el("h4", "panel-subsec-title", title));
+  return sec;
+}
+
 export function btn(cls, text) {
   const b = el("button", cls, text);
   b.type = "button";

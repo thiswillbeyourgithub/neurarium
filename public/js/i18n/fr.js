@@ -517,7 +517,7 @@ window.__I18N_MESSAGES__.fr = {
   "drug.therapeuticRangeTip": "La plage de concentration sanguine (en général résiduelle, à l'équilibre) dans laquelle la recommandation de consensus AGNP attend les meilleures chances de réponse avec une tolérance acceptable. Un repère de population, pas une cible pour chaque patient.",
   "drug.alertLevel": "Alerte",
   "drug.alertLevelTip": "Le seuil d'alerte du laboratoire : au-dessus de cette concentration sanguine, la recommandation de consensus AGNP demande au laboratoire de prévenir aussitôt le prescripteur, la tolérance ou la sécurité pouvant être en jeu.",
-  "drug.physchem": "Physicochimie et passage cérébral",
+  "drug.physchem": "Passage cérébral",
   "drug.xlogp": "XLogP3",
   "drug.xlogpTip": "Lipophilie : le log10 du partage de la molécule entre l'octanol (qui figure les graisses et les membranes cellulaires) et l'eau. Plus il est élevé, plus elle est liposoluble : 0 est un partage égal, 3 mille fois plus dans l'octanol. La plupart des médicaments agissant sur le cerveau se situent entre 1 et 4 environ ; bien plus bas, ils franchissent mal les membranes, bien plus haut, ils tendent à se fixer aux graisses et aux protéines. Une valeur que PubChem calcule à partir de la structure (XLogP3) : une estimation, pas une mesure.",
   "drug.tpsa": "Surface polaire",

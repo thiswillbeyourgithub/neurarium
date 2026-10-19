@@ -517,7 +517,7 @@ window.__I18N_MESSAGES__.en = {
   "drug.therapeuticRangeTip": "The blood concentration range (usually trough, at steady state) within which the AGNP consensus guideline expects the best chance of response with acceptable tolerability. A population orientation, not a target for every patient.",
   "drug.alertLevel": "Alert",
   "drug.alertLevelTip": "The laboratory alert level: above this blood concentration the AGNP consensus guideline asks the laboratory to inform the prescriber at once, since tolerability or safety may be at risk.",
-  "drug.physchem": "Physicochemistry and brain entry",
+  "drug.physchem": "Brain entry",
   "drug.xlogp": "XLogP3",
   "drug.xlogpTip": "Lipophilicity: the log10 of how the molecule splits between octanol (a stand-in for fat and cell membranes) and water. Higher means more fat-soluble: 0 is an even split, 3 a thousand times more in octanol. Most drugs acting on the brain sit around 1 to 4; much lower struggles to cross membranes, much higher tends to stick to fat and proteins. A value PubChem computes from the structure (XLogP3), an estimate, not a measurement.",
   "drug.tpsa": "Polar surface",

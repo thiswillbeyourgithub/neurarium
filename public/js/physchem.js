@@ -1,4 +1,4 @@
-// Physicochemistry and brain entry: the drug panel's lipophilicity, polar-surface and
+// Brain entry (a Pharmacokinetics subsection): the drug panel's lipophilicity, polar-surface and
 // blood-brain-barrier chips (node kinds drug_lipophilicity / drug_polar_surface /
 // drug_bbb, PubChem corpus #21 + B3DB corpus #22; mapped in js/data.js). Built on the
 // Pharmacokinetics block's own `valueChip` (js/tdm.js), so a chip reads, wraps and
