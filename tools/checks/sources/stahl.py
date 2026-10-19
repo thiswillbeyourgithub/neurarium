@@ -15,18 +15,12 @@ from lib import stahl_index  # (the one INDEX.md reader)
 from lib.text_fold import alnum_key
 
 
-def _fold_name(name):
-    """A drug name reduced to its letters+digits, so ``Amphetamine (d,l)`` and the
-    index's ``Amphetamine (D,L)`` compare equal."""
-    return alnum_key(name)
-
-
 def stahl_monograph_ranges():
     """``folded drug name -> (first page, last page)`` from Stahl's generated INDEX.md.
 
     ``None`` when the author-side book tree is absent (a plain clone), so the
     caller skips the check exactly like the verbatim-quote gate does."""
-    ranges = stahl_index.ranges(_fold_name, missing_ok=True)
+    ranges = stahl_index.ranges(alnum_key, missing_ok=True)
     return ranges or None
 
 
@@ -41,7 +35,7 @@ def stahl_monograph_check(drug, ranges):
     names = [drug.get("name") or ""]
     names += re.split(r"\s*\+\s*", names[0])          # a combo names both halves
     names += [b for b in (drug.get("brands") or []) if isinstance(b, str)]
-    span = next((ranges[k] for k in map(_fold_name, names) if k in ranges), None)
+    span = next((ranges[k] for k in map(alnum_key, names) if k in ranges), None)
     if span is None:
         return pages, None, []
     return pages, span, [p for p in pages if not span[0] <= p <= span[1]]
@@ -103,7 +97,7 @@ def check_stahl_monographs(report, drugs, headings):
         if corpus != "stahl" or page is None or not isinstance(trail, list):
             continue
         stahl_headings += 1
-        span = ranges.get(_fold_name(trail[0])) if trail else None
+        span = ranges.get(alnum_key(trail[0])) if trail else None
         if span is None:
             report.error(f"{ctx}: heading trail leads with {trail[:1]!r}, which "
                          f"is no INDEX.md monograph. A Stahl trail must open "

@@ -35,7 +35,8 @@ from checks.reachability import check_reachability  # noqa: E402
 from checks.sources import check_sources  # noqa: E402
 from checks.sources.drugs import _NO_SUBJECT_QUOTE  # noqa: E402
 from checks.sources.gate import spans_heading  # noqa: E402
-from checks.sources.stahl import _fold_name, stahl_monograph_check  # noqa: E402
+from checks.sources.stahl import stahl_monograph_check  # noqa: E402
+from lib.text_fold import alnum_key  # noqa: E402
 from checks.todos import check_todos  # noqa: E402
 from checks.walks import iter_drug_sources  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402
@@ -405,8 +406,8 @@ class StahlMonographRangeTest(unittest.TestCase):
         self.assertEqual((pages, span, stray), ([500], None, []))
 
     def test_name_folding_ignores_case_and_punctuation(self):
-        self.assertEqual(_fold_name("Amphetamine (D,L)"),
-                         _fold_name("amphetamine (d,l)"))
+        self.assertEqual(alnum_key("Amphetamine (D,L)"),
+                         alnum_key("amphetamine (d,l)"))
 
 
 class UncertaintyBulletTest(unittest.TestCase):
