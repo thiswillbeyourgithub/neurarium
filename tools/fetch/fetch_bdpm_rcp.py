@@ -71,7 +71,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib.corpora import bdpm  # noqa: E402 (section_body, html_lines, the product join, RCP_URL)
 import fetch_ema_epar  # noqa: E402 (the EPAR found by name, for a drug with no CIS)
 
@@ -350,7 +350,7 @@ def main() -> int:
         if best.get("ema"):
             cache[did]["ema"] = best["ema"]
     cache = dict(sorted(cache.items()))
-    atomic_write_json(CACHE_PATH, cache, indent=1, sort_keys=True)
+    cache_io.write(CACHE_PATH, cache)
     print(f"[ok] {len(cache)} drug(s) with an RCP 4.x page; {len(missing)} without: "
           f"{', '.join(missing)}")
     print(f"[ok] {len(by_name)} through an EPAR found by name: {', '.join(by_name)}")

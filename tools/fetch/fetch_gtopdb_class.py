@@ -52,7 +52,7 @@ from fetch_gtopdb import (  # noqa: E402  (path shim above)
     http_json,
 )
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
-from lib.io_atomic import atomic_write_json  # noqa: E402  (tools/ is on sys.path via fetch_gtopdb)
+from lib import cache_io  # noqa: E402
 from lib.gene_maps import TARGET_GENES as _TARGET_GENE_LISTS  # noqa: E402
 from lib.gene_maps import receptor_genes  # noqa: E402
 
@@ -187,7 +187,7 @@ def main() -> int:
         print(f"  [ok]   {owner:14s} ({gene:8s}) target {rec['target_id']:5d} "
               f"type={rec['type']:14s} transduction={len(rec['transduction'])}")
 
-    atomic_write_json(CACHE, cache, indent=2, sort_keys=True, ensure_ascii=True)
+    cache_io.write(CACHE, cache)
     print(f"\nwrote {CACHE.relative_to(REPO)}: {len(cache)} owners "
           f"({n_trans} with a transduction table this run)")
     print(f"pages under {PAGES.relative_to(REPO)}/")

@@ -46,7 +46,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 CACHE = os.path.join(ROOT, "tools", "generated_cache", "enzyme_variability.json")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from data_generators.drugs import ENZYMES  # noqa: E402
 from data_generators.pharmfreq import (  # noqa: E402
     EXPORT_DIR, GENE_ENZYMES, ExportError, export_files, ordered_profile, quote_for,
@@ -95,8 +95,7 @@ def main() -> None:
 
     missing = sorted(set(GENE_ENZYMES.values()) - set(enzymes))
     if not args.dry_run:
-        atomic_write_json(CACHE, {"export_sha256": pins, "enzymes": enzymes},
-                          trailing_newline=False, indent=1, sort_keys=True)
+        cache_io.write(CACHE, {"export_sha256": pins, "enzymes": enzymes})
     print(f"{len(enzymes)} enzyme(s) profiled across "
           f"{len({g for e in enzymes.values() for g in e['profile']})} population groups"
           f" from {len(pins)} pinned file(s)"

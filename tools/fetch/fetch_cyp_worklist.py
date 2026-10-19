@@ -214,7 +214,7 @@ def main() -> int:
                        "enzymes": sorted(KNOWN_ENZYMES)},
         "drugs": worklist,
     }
-    worklist_io.write(args.out, payload, sort_keys=True)
+    worklist_io.write(args.out, payload, name=OUT)
     print(f"{stats['drug: queued']} drugs, {stats['candidates']} candidate sentences")
     for key, n in sorted(stats.items()):
         if key != "candidates":

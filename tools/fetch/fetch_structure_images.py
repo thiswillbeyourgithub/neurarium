@@ -72,7 +72,7 @@ from pathlib import Path
 # (same Wikimedia endpoint, User-Agent, retry/backoff and helpers). Both scripts
 # live in tools/, so a plain import resolves when run as `python tools/<name>.py`.
 from fetch_molecules import API as EN_API, _is_chrome, article_title, http_json
-from lib.io_atomic import atomic_write_json  # tools/ is on sys.path via fetch_molecules
+from lib import cache_io  # noqa: E402
 from lib.structure_ids import base_id  # noqa: E402
 
 TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
@@ -483,7 +483,7 @@ def resolve_list(items: list[tuple[str, str]], sources: dict[str, dict],
 
 def _persist(sources: dict[str, dict], path: Path) -> None:
     """Write the resolved urls sorted (stable diff). Read by generate_data.py."""
-    atomic_write_json(path, dict(sorted(sources.items())), indent=2)
+    cache_io.write(path, dict(sorted(sources.items())))
     print(f"resolved urls -> {path}")
 
 

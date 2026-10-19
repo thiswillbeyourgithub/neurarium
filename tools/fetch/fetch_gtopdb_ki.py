@@ -61,7 +61,7 @@ sys.path.insert(0, str(REPO / "tools" / "fetch"))
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import chirality                                                   # noqa: E402
 from lib import drugs_io                                                    # noqa: E402
-from lib.io_atomic import atomic_write_json                            # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib.gene_maps import RECEPTOR_GENES, TARGET_GENES             # noqa: E402
 
@@ -480,9 +480,8 @@ def main() -> int:
         metab_proposals = prior_m
 
     CACHE.parent.mkdir(parents=True, exist_ok=True)
-    atomic_write_json(CACHE, {"version": version, "url": URL, "drugs": proposals,
-                              "metabolites": metab_proposals},
-                      indent=1, sort_keys=True)
+    cache_io.write(CACHE, {"version": version, "url": URL, "drugs": proposals,
+                           "metabolites": metab_proposals})
 
     if unmatched:
         log(f"no GtoPdb ligand for {len(unmatched)}: {', '.join(sorted(unmatched))}")

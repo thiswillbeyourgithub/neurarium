@@ -194,7 +194,7 @@ def main() -> int:
     wl = build(only)
     if only and args.out.exists():
         wl = merge_scoped(json.loads(args.out.read_text("utf-8")), wl, "drugs")
-    worklist_io.write(args.out, wl)
+    worklist_io.write(args.out, wl, name=OUT_PATH)
     n = sum(len(v["candidates"]) for v in wl["drugs"].values())
     missing = [s for s, c in wl["companies"].items() if not c["candidates"]]
     print(f"[ok] wrote {args.out}: {len(wl['drugs'])} drugs, {n} candidates, "

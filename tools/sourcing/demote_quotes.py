@@ -67,7 +67,8 @@ from data_generators.quote_table import quote_id  # noqa: E402
 from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 import citation_site as CS  # noqa: E402
-from lib.io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
+from lib.io_atomic import atomic_write_text  # noqa: E402
+from lib import cache_io  # noqa: E402
 
 # The applier-written caches that can hold a quote-bearing source. The hand-authored
 # registries are deliberately absent: see the module docstring.
@@ -263,7 +264,7 @@ def main() -> None:
             data = json.load(fh)
         data = ed.walk(data, name, ())
         if not args.dry_run:
-            atomic_write_json(path, data, trailing_newline=False, indent=1, sort_keys=True)
+            cache_io.write(path, data)
 
     # A stamp on a quote nobody cites any more is dead weight, and a flag on one that
     # has been dealt with would be re-proposed by the next pass, so both are cleared.
@@ -284,8 +285,7 @@ def main() -> None:
         else:
             data = [r for r in data if r.get("qid") not in ed.seen]
         if not args.dry_run:
-            atomic_write_json(path, data, trailing_newline=False,
-                              indent=0 if isinstance(data, dict) else 1, sort_keys=True)
+            cache_io.write(path, data)
 
     # A site that reached no citation is the one failure mode this abstraction adds:
     # the two ends name a claim differently and the demotion quietly does nothing. Say

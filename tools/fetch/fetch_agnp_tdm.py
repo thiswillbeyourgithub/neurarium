@@ -50,7 +50,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 from lib import drugs_io  # noqa: E402
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib.page_file import read_page_file  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402  (the gate's own normalizer)
 from lib.text_fold import alnum_key  # noqa: E402
@@ -440,7 +440,7 @@ def main() -> int:
              "enzymes": dict(sorted(enzymes.items())),
              "table1_named": dict(sorted(table1_named(t1, index).items())),
              "skipped": skipped}
-    atomic_write_json(CACHE_PATH, cache, indent=1)
+    cache_io.write(CACHE_PATH, cache)
     write_index_table(drugs)
     print(f"{len(ranges)} ranges ({sum('alert' in r for r in ranges.values())} with an "
           f"alert level), {len(skipped)} skipped, {len(enzymes)} drugs with Table 1 "

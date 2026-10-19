@@ -41,7 +41,7 @@ OUT = TOOLS / "generated_cache" / "expression_density.json"
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from apply_location_sources import owner_regions, quote_refuted  # noqa: E402  (same guards)
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 
 
 def collect() -> tuple[dict[str, dict], list[str], int]:
@@ -128,9 +128,7 @@ def main() -> int:
     if args.dry_run:
         print("(dry run: not written)")
         return 0
-    # demote_quotes.py rewrites this cache too: the same format, so neither writer's
-    # re-run reformats the other's output.
-    atomic_write_json(OUT, payload, indent=1, sort_keys=True, trailing_newline=False)
+    cache_io.write(OUT, payload)
     print(f"wrote {OUT.relative_to(REPO)}")
     return 0
 

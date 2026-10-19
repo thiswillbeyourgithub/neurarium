@@ -75,7 +75,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 from lib.page_file import page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io                                                 # noqa: E402
-from lib.io_atomic import atomic_write_json                         # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET)
 
 API = "https://dailymed.nlm.nih.gov/dailymed/services/v2"
@@ -361,8 +361,8 @@ def main() -> int:
         print(f"[{i}/{len(todo)}] {drug['id']}: {outcome}", flush=True)
         if outcome == "stored":        # persist as we go: the run is long and resumable
             CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
-            atomic_write_json(CACHE_PATH, cache, indent=1, sort_keys=True)
-    atomic_write_json(CACHE_PATH, cache, indent=1, sort_keys=True)
+            cache_io.write(CACHE_PATH, cache)
+    cache_io.write(CACHE_PATH, cache)
     print(f"[ok] {len(todo)} drug(s): "
           + ", ".join(f"{k}={v}" for k, v in sorted(counts.items()))
           + f"; {len(cache)} label(s) in {CACHE_PATH.relative_to(ROOT)}")

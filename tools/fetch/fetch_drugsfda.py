@@ -58,7 +58,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib import chirality  # noqa: E402
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import drugs_io  # noqa: E402
 from lib import salt_words  # noqa: E402
 
@@ -251,8 +251,7 @@ def main() -> int:
     for stale in PAGES_DIR.glob("*.md"):
         if stale.name not in keep:      # a drug no longer found: its page is not cited
             stale.unlink()
-    atomic_write_json(CACHE_PATH, {"export_last_updated": export_date, "drugs": out},
-                      indent=1, sort_keys=True)
+    cache_io.write(CACHE_PATH, {"export_last_updated": export_date, "drugs": out})
     print(f"{len(apps)} applications (export {export_date}); per drug: "
           + ", ".join(f"{k} {v}" for k, v in sorted(counts.items()))
           + f" -> {CACHE_PATH.relative_to(ROOT)}")

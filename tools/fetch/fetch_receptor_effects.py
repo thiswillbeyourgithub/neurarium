@@ -266,7 +266,7 @@ def run_cli(doc: str, out_path: Path, builder=build) -> int:
     wl = builder(only)
     if only and args.out.exists():
         wl = merge_scoped(json.loads(args.out.read_text("utf-8")), wl, "owners")
-    worklist_io.write(args.out, wl)
+    worklist_io.write(args.out, wl, name=out_path)
     n = sum(len(v["candidates"]) for v in wl["owners"].values())
     print(f"[ok] wrote {args.out}: {len(wl['owners'])} owners, {n} candidates")
     return 0

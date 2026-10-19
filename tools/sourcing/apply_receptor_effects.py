@@ -62,7 +62,7 @@ from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from prose_gate import apply_picks, not_offered, run_applier  # noqa: E402
 from apply_classification_sources import PROSE_PAGES as _PROSE  # noqa: E402
 from data_generators.provenance import corpus_page_path  # noqa: E402
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 
 # The two prose corpora plus GtoPdb's function pages (corpus #23) and the Europe PMC
 # abstracts the owner-level effect search read (corpus #17).
@@ -181,9 +181,7 @@ def _main_unknown_log() -> int:
     n = sum(1 for e in log.values() if e.get("kind") == "receptor_effect")
     print(f"  UNKNOWN log: {n} receptor_effect owner(s)")
     if not args.dry_run:   # entries keep their order (a small diff), fields sorted
-        atomic_write_json(unknown.UNKNOWN_LOG_PATH,
-                          {k: json.loads(json.dumps(v, sort_keys=True)) for k, v in log.items()},
-                          indent=1)
+        cache_io.write(unknown.UNKNOWN_LOG_PATH, log)
     return 0
 
 

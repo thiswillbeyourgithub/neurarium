@@ -64,7 +64,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
 from lib.page_file import read_page  # noqa: E402 (refuses a path-like page)
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from checks.sources.stahl import stahl_monograph_ranges  # noqa: E402  (the range gate)
 from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
 from lib import stahl_index  # noqa: E402  (the one INDEX.md reader)
@@ -410,7 +410,7 @@ def main() -> int:
     if args.dry_run:
         print("--dry-run: cache not written")
         return 0
-    atomic_write_json(CACHE, payload, indent=2)
+    cache_io.write(CACHE, payload)
     print(f"wrote {CACHE} ({len(resolved)} trails)")
     return 0
 

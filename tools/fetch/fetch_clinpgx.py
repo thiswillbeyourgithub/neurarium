@@ -46,6 +46,7 @@ ZIP = os.path.join(ROOT, "data_sources", "clinpgx", "clinicalAnnotations.zip")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from lib.io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from data_generators.clinpgx import (  # noqa: E402
     DOWNLOAD_URL, EXPORT_NAME, PIN_CACHE, VARIANT_LEVELS, export_path, owners_of,
@@ -134,8 +135,7 @@ def main() -> None:
         atomic_write_json(path, export, trailing_newline=False, indent=1, sort_keys=True)
         atomic_write_text(os.path.join(os.path.dirname(path), "LICENSE.txt"), licence_text)
         read_export(path)  # shape-check what was just written
-        atomic_write_json(PIN_CACHE, {"export_sha256": {EXPORT_NAME: sha256(path)}},
-                          indent=1, sort_keys=True, ensure_ascii=True)
+        cache_io.write(PIN_CACHE, {"export_sha256": {EXPORT_NAME: sha256(path)}})
 
     levels = Counter(r["level"] for r in rows)
     genes = Counter(g for r in rows for g in r["genes"] if owners_of([g]))

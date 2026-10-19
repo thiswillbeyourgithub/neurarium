@@ -254,7 +254,7 @@ def main() -> int:
     wl = build(only, args.max_candidates)
     if only and args.out.exists():
         wl = merge_scoped(json.loads(args.out.read_text("utf-8")), wl, "projections")
-    worklist_io.write(args.out, wl)
+    worklist_io.write(args.out, wl, name=OUT_PATH)
     n = sum(len(v["candidates"]) for v in wl["projections"].values())
     empty = [k for k, v in wl["projections"].items() if not v["candidates"]]
     print(f"[ok] wrote {args.out}: {len(wl['projections'])} projections, {n} candidates, "

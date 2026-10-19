@@ -84,7 +84,7 @@ from data_generators.provenance import SOURCING_LLMS  # noqa: E402
 from lib.page_file import read_page  # noqa: E402 (the raw page reader, refuses a path-like page)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib.quote_match import emitted_page_dirs  # noqa: E402
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 # The claim walk lives in its own module (the generator runs it too); re-exported here
 # because this is where the judge's side of it is read and tested.
 from claim_walk import (  # noqa: E402,F401
@@ -424,13 +424,10 @@ def cmd_apply(args):
     # ``.get``: the carried-over rows come from an older file that may predate a key.
     flagged.sort(key=lambda x: (bool(x.get("present")), bool(x.get("supports"))))
 
-    atomic_write_json(os.path.join(CACHE, "quote_llm.json"), stamped,
-                      trailing_newline=False, indent=0, sort_keys=True)
-    atomic_write_json(os.path.join(CACHE, "quote_recheck_flagged.json"), flagged,
-                      trailing_newline=False, indent=1)
-    atomic_write_json(os.path.join(CACHE, "quote_recheck_disputed.json"),
-                      sorted(disputed.values(), key=lambda d: d["qid"]),
-                      trailing_newline=False, indent=1)
+    cache_io.write(os.path.join(CACHE, "quote_llm.json"), stamped)
+    cache_io.write(os.path.join(CACHE, "quote_recheck_flagged.json"), flagged)
+    cache_io.write(os.path.join(CACHE, "quote_recheck_disputed.json"),
+                   sorted(disputed.values(), key=lambda d: d["qid"]))
     print(f"stamped {sum(map(len, stamped.values()))} sites over {len(stamped)} quotes "
           f"(this pass: '{args.llm}'); "
           f"flagged {len(flagged)}, disputed {len(disputed)}")

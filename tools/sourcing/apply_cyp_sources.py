@@ -82,7 +82,7 @@ from lib.quote_match import normalize_for_match  # noqa: E402 (the gate's normal
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 from prose_gate import add_source  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 
 CACHE = os.path.join(REPO, "tools", "generated_cache")
 WORKLIST = os.path.join(CACHE, "cyp_worklist.json")
@@ -257,7 +257,7 @@ def main() -> int:
         print("\n--dry-run: nothing written")
         return 0
     for corpus, path in OUT.items():
-        atomic_write_json(path, out[corpus], indent=1, sort_keys=True)
+        cache_io.write(path, out[corpus])
         print(f"wrote {os.path.relpath(path, REPO)}")
     return 0
 

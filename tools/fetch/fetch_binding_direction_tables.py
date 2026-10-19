@@ -66,7 +66,7 @@ sys.path.insert(0, os.path.join(REPO, "tools"))
 sys.path.insert(0, HERE)
 
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like id)
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import drugs_io  # noqa: E402
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (owns PAGE_ALIASES + the slug rule)
 import fetch_wikipedia_pharmacology as wiki  # noqa: E402 (grid, headers, resolver, row text)
@@ -231,7 +231,7 @@ def main() -> int:
     args = ap.parse_args()
     only = {d.strip() for d in args.only.split(",") if d.strip()} if args.only else None
     proposals, stats = build(only)
-    atomic_write_json(args.out, proposals, indent=1)
+    cache_io.write(args.out, proposals, name=OUT)
     print(f"{stats['proposal']} table-stated direction(s) over {len(proposals)} drug(s) "
           f"-> {os.path.relpath(args.out, REPO)}")
     for key, n in sorted(stats.items()):

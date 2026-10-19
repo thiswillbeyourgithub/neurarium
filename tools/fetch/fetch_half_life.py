@@ -62,7 +62,7 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=OUT_PATH, help="worklist output path")
     args = ap.parse_args()
     only = {d.strip() for d in args.only.split(",") if d.strip()} if args.only else None
-    fetch_tmax.write_worklist(build(only), args.out, "a half-life")
+    fetch_tmax.write_worklist(build(only), args.out, "a half-life", OUT_PATH)
     return 0
 
 

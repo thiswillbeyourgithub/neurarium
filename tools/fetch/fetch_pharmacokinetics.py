@@ -46,7 +46,7 @@ from lib import drugs_io                                                 # noqa:
 from lib import worklist_io  # noqa: E402
 from lib.parse.durations import parse_duration  # noqa: E402
 from lib import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "pk_worklist.json"
 
@@ -134,7 +134,7 @@ def main() -> int:
         }
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    atomic_write_json(args.out, worklist, trailing_newline=False, indent=2)
+    cache_io.write(args.out, worklist, name=OUT_PATH)
     n_hl = sum(1 for v in worklist.values() if v["half_life_candidates"])
     n_met = sum(1 for v in worklist.values() if v["metabolite_candidates"])
     print(f"[ok] wrote {worklist_io.shown(args.out.resolve(), ROOT)}: {matched} Stahl drugs "

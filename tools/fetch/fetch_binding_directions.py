@@ -392,7 +392,7 @@ def main() -> int:
                            .get("bindings", [])
                            if b.get("affinity_only") and b["target"] in reachable)
 
-    worklist_io.write(WORKLIST, records, indent=2)
+    worklist_io.write(WORKLIST, records)
     n_cand = sum(len(r["candidates"]) for r in records)
     print(f"\nwrote {os.path.relpath(WORKLIST, REPO)}")
     print(f"  {n_drugs} drug(s) with an affinity-only binding, "

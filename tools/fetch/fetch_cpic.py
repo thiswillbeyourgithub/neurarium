@@ -54,6 +54,7 @@ DRUGS = os.path.join(ROOT, "tools", "data", "drugs_data.jsonl")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from data_generators.cpic import (  # noqa: E402
     ASSUMED, EXPORT_NAME, PHENOTYPE_SLUGS, POPULATIONS, export_path,
@@ -222,9 +223,8 @@ def main() -> None:
         os.makedirs(os.path.dirname(path), exist_ok=True)
         atomic_write_json(path, export, trailing_newline=False, indent=1, sort_keys=True)
         guidance = guidance_for(read_export(path))
-        atomic_write_json(CACHE, {"export_sha256": {EXPORT_NAME: sha256(path)},
-                                  "guidance": guidance},
-                          trailing_newline=False, indent=1, sort_keys=True)
+        cache_io.write(CACHE, {"export_sha256": {EXPORT_NAME: sha256(path)},
+                               "guidance": guidance})
 
     drugs = {r["drug"] for r in rows}
     genes = {r["gene"] for r in rows}

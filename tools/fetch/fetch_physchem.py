@@ -70,7 +70,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 from lib.page_file import page_path, read_page, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib import chirality  # noqa: E402
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import drugs_io  # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET)
 from lib.corpora.wikipedia import page_for  # noqa: E402
@@ -379,7 +379,7 @@ def main() -> int:
         prior["skipped"].pop(did, None)
     prior["drugs"].update(entries)
     prior["skipped"].update(skipped)
-    atomic_write_json(CACHE_PATH, prior, indent=1, sort_keys=True)
+    cache_io.write(CACHE_PATH, prior)
     vals = prior["drugs"].values()
     print(f"{len(rows)} B3DB rows; {sum('xlogp' in e for e in vals)} XLogP3, "
           f"{sum('tpsa' in e for e in vals)} TPSA, {sum('bbb' in e for e in vals)} BBB "

@@ -190,9 +190,10 @@ def build(only: set[str] | None = None, pattern=PEAK_RE, skip=None) -> dict[str,
     return worklist
 
 
-def write_worklist(worklist: dict, out: Path, what: str) -> None:
-    """Write a worklist and print its per-corpus candidate counts."""
-    worklist_io.write(out, worklist)
+def write_worklist(worklist: dict, out: Path, what: str, name: Path = OUT_PATH) -> None:
+    """Write a worklist (in the format of the cache ``name``) and print its per-corpus
+    candidate counts."""
+    worklist_io.write(out, worklist, name=name)
     n_cand = sum(len(v["candidates"]) for v in worklist.values())
     by_corpus: dict[str, int] = {}
     for v in worklist.values():

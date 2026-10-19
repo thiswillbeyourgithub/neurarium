@@ -64,7 +64,7 @@ sys.path.insert(0, os.path.join(REPO, "tools"))  # drugs_io
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch_page/store_page/etc.)
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import drugs_io  # noqa: E402
 
 DATA_DIR = wikistore.DATA_DIR                                    # data_sources/wikipedia
@@ -199,7 +199,7 @@ def main():
         prior.update(worklist)
         worklist = prior
 
-    atomic_write_json(WORKLIST, worklist, trailing_newline=False, indent=2, sort_keys=True)
+    cache_io.write(WORKLIST, worklist)
     print(f"\nwrote {os.path.relpath(WORKLIST, REPO)} ({len(worklist)} drugs)")
     if no_fr:
         print(f"{len(no_fr)} skipped:")

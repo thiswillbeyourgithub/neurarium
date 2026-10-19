@@ -68,7 +68,7 @@ import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch/store/extr
 from lib.page_file import page_path, read_page_file  # noqa: E402 (refuses a path-like page)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
 import fetch_ki as ki  # noqa: E402  (PDSP Ki: discover a metabolite's measured targets, corpus #5)
-from lib.io_atomic import atomic_write_json  # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import drugs_io  # noqa: E402
 from lib.worklist_io import merge_scoped_list, shown  # noqa: E402
 
@@ -368,7 +368,7 @@ def main() -> int:
     if args.only and os.path.exists(args.out):
         with open(args.out, encoding="utf-8") as f:
             worklist = merge_scoped_list(json.load(f), worklist, "key")
-    atomic_write_json(args.out, worklist, indent=2)
+    cache_io.write(args.out, worklist, name=WORKLIST)
     n_found = sum(1 for e in worklist if e["found"])
     n_ki = sum(len(e["ki_bindings"]) for e in worklist)
     n_act = sum(len(e["action_candidates"]) for e in worklist)

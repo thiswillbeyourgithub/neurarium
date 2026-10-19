@@ -77,7 +77,7 @@ sys.path.insert(0, str(HERE))
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.corpora import bdpm                                    # noqa: E402 (the store + product join)
 from lib import drugs_io                                                 # noqa: E402
-from lib.io_atomic import atomic_write_json                         # noqa: E402
+from lib import cache_io  # noqa: E402
 from lib import polite_http                                              # noqa: E402 (the one polite GET)
 import fetch_half_life                                          # noqa: E402 (HALF_LIFE_RE)
 from lib.parse import durations  # noqa: E402
@@ -208,9 +208,9 @@ def main() -> int:
         counts[outcome] = counts.get(outcome, 0) + 1
         print(f"[{i}/{len(drugs)}] {did}: {outcome}")
         if outcome == "stored":
-            atomic_write_json(bdpm.CACHE_PATH, cache, indent=1, sort_keys=True)
+            cache_io.write(bdpm.CACHE_PATH, cache)
     bdpm.CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    atomic_write_json(bdpm.CACHE_PATH, cache, indent=1, sort_keys=True)
+    cache_io.write(bdpm.CACHE_PATH, cache)
     print("[ok] " + ", ".join(f"{k}={v}" for k, v in sorted(counts.items()))
           + f" -> {bdpm.CACHE_PATH.relative_to(ROOT)}")
     return 0

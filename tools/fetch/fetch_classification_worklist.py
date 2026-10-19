@@ -190,7 +190,7 @@ def main() -> int:
     args = ap.parse_args()
     only = {d.strip() for d in args.only.split(",") if d.strip()} if args.only else None
     wl = build(only)
-    worklist_io.write(args.out, wl)
+    worklist_io.write(args.out, wl, name=OUT_PATH)
     n = sum(len(v["candidates"]) for v in wl["owners"].values())
     print(f"[ok] wrote {args.out}: {len(wl['owners'])} owners, {n} candidates")
     return 0

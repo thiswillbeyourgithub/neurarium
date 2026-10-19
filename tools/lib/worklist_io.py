@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from lib.io_atomic import atomic_write_json
+from lib import cache_io
 from pipeline.judged import stamp
 
 
@@ -57,9 +57,10 @@ def shown(path, root) -> Path:
     return path.relative_to(root) if path.is_relative_to(root) else path
 
 
-def write(path, worklist, indent: int = 1, sort_keys: bool = False) -> None:
-    """Stamp ``qid`` on every candidate of ``worklist`` and write it as UTF-8 JSON."""
-    atomic_write_json(path, stamp(worklist), indent=indent, sort_keys=sort_keys)
+def write(path, worklist, name=None) -> None:
+    """Stamp ``qid`` on every candidate of ``worklist`` and write it in its cache's format
+    (``lib/cache_io``; ``name`` picks it when ``path`` is not the cache's own file)."""
+    cache_io.write(path, stamp(worklist), name=name)
 
 
 def read(path, required: bool = True, default: Any = None) -> Any:

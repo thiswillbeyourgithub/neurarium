@@ -98,7 +98,7 @@ def main() -> int:
     wl = build(only)
     if only and args.out.exists():
         wl = merge_scoped(json.loads(args.out.read_text("utf-8")), wl, "drugs")
-    worklist_io.write(args.out, wl)
+    worklist_io.write(args.out, wl, name=OUT_PATH)
     print(f"{len(wl['drugs'])} drugs with candidates -> {worklist_io.shown(args.out.resolve(), ROOT)}")
     return 0
 
