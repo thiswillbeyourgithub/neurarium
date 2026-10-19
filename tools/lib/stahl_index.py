@@ -28,7 +28,7 @@ import re
 from collections.abc import Callable
 from pathlib import Path
 
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.page_file import read_page  # noqa: E402 (refuses a path-like page)
 from lib.text_fold import alnum_key
 
 STAHL_DIR = Path(__file__).resolve().parents[2] / "data_sources" / "books" / "stahl"
@@ -115,7 +115,7 @@ def find_page(start: int, end: int, quote: str, min_chars: int = 1,
     if len(needle.replace(" ", "")) < min_chars:
         return None
     for p in range(start, end + 1):
-        f = page_path(pages, p)
-        if f.exists() and needle in normalize_for_match(f.read_text(encoding="utf-8")):
+        text = read_page(pages, p)
+        if text is not None and needle in normalize_for_match(text):
             return p
     return None
