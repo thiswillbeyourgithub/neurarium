@@ -138,6 +138,12 @@
     "page": 435,
     "quote": "The principal afferent systems to the striatum are glutamatergic fibres from the cerebral cortex [98, 221, 391] and from the intralaminar thalamic nucleus [351], dopaminergic fibres from the substantia nigra [233] and serotoninergic fibres from the dorsal raphe nucleus [243, 319].",
     "provenance": "verified"
+   },
+   {
+    "corpus": "stahl_essential",
+    "page": 468,
+    "quote": "Motor activity, such as hyperactivity and psychomotor agitation or retardation, can be modulated by a corticostriato-thalamo-cortical loop from the prefrontal motor cortex to the putamen (lateral striatum) to the thalamus and back to the prefrontal motor cortex.",
+    "provenance": "verified"
    }
   ],
   "globus_pallidus_R->subthalamic_nucleus_R": [
@@ -400,6 +406,12 @@
     "page": 435,
     "quote": "The principal afferent systems to the striatum are glutamatergic fibres from the cerebral cortex [98, 221, 391] and from the intralaminar thalamic nucleus [351], dopaminergic fibres from the substantia nigra [233] and serotoninergic fibres from the dorsal raphe nucleus [243, 319].",
     "provenance": "verified"
+   },
+   {
+    "corpus": "europepmc",
+    "page": 6664490,
+    "quote": "After the injections, cells containing the tracer delivered in caudate nucleus (caudate-labeled cells) and others labeled with the complementary tracer injected in putamen (putamen-labeled cells) occur in large number in intralaminar nuclei, substantia nigra pars compacta, midbrain raphe nuclei and central midbrain tegmentum.",
+    "provenance": "verified"
    }
   ],
   "raphe->cerebellum": [
@@ -457,6 +469,12 @@
     "corpus": "nieuwenhuys",
     "page": 435,
     "quote": "The principal afferent systems to the striatum are glutamatergic fibres from the cerebral cortex [98, 221, 391] and from the intralaminar thalamic nucleus [351], dopaminergic fibres from the substantia nigra [233] and serotoninergic fibres from the dorsal raphe nucleus [243, 319].",
+    "provenance": "verified"
+   },
+   {
+    "corpus": "europepmc",
+    "page": 6664490,
+    "quote": "After the injections, cells containing the tracer delivered in caudate nucleus (caudate-labeled cells) and others labeled with the complementary tracer injected in putamen (putamen-labeled cells) occur in large number in intralaminar nuclei, substantia nigra pars compacta, midbrain raphe nuclei and central midbrain tegmentum.",
     "provenance": "verified"
    }
   ],

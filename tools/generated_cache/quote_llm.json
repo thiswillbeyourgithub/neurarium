@@ -2296,6 +2296,9 @@
 "q_3434e05d5651": {
 "drug:perampanel/first_approval": "opus"
 },
+"q_344b6245e61a": {
+"projection:frontal_R->putamen_R": "opus"
+},
 "q_346dfd9495ac": {
 "drug:amphetamine_d/workup[blood_pressure:before]": "opus",
 "drug:amphetamine_d/workup[heart_rate:before]": "opus",
@@ -7844,6 +7847,10 @@
 },
 "q_afeb1ea8f69b": {
 "drug:methylphenidate_dl/brands[Cotempla XR-ODT]": "sonnet"
+},
+"q_afeb43cd34b8": {
+"projection:raphe->caudate_R": "opus",
+"projection:raphe->putamen_R": "opus"
 },
 "q_affaeab03718": {
 "drug:zopiclone/half_life": "sonnet"

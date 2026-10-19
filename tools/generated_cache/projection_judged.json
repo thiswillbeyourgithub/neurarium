@@ -131,6 +131,12 @@
     "index": 5,
     "qid": "39a782b1"
    }
+  ],
+  "route": [
+   {
+    "index": 5,
+    "qid": "3b0ded54"
+   }
   ]
  },
  "raphe->putamen_R": {
@@ -138,6 +144,12 @@
    {
     "index": 5,
     "qid": "39a782b1"
+   }
+  ],
+  "route": [
+   {
+    "index": 4,
+    "qid": "3b0ded54"
    }
   ]
  },
@@ -412,6 +424,12 @@
    {
     "index": 0,
     "qid": "a0f0fdc8"
+   }
+  ],
+  "route": [
+   {
+    "index": 17,
+    "qid": "d1e46ee4"
    }
   ]
  },

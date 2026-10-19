@@ -11,8 +11,9 @@ Author-side: skipped on a clone without ``data_sources/``. ``FAST`` always runs 
 ``SLOW`` (tens of seconds each) runs only with ``NEURARIUM_SLOW_TESTS=1``.
 
 Not listed, because their committed caches are stale today (a rebuild is new data that wants
-its own judge pass, not a test edit): ``projection_worklist``, ``receptor_effects``
-and ``fetch_metabolite_bindings``.
+its own judge pass, not a test edit): ``receptor_effects`` and
+``fetch_metabolite_bindings``. ``projection_worklist`` reproduces but is left out on
+runtime alone (about 17 minutes of single-threaded window matching).
 Add one here once its cache has been refreshed.
 
 Built with the help of Claude Code.
