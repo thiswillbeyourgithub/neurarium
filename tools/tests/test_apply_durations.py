@@ -40,5 +40,21 @@ class OwnedElsewhereTest(unittest.TestCase):
         self.assertEqual(skipped, [])
 
 
+class StahlOwnedTest(unittest.TestCase):
+    """The formulation pass moves a release-specific Stahl T½ off the molecule onto its
+    ``formulations[]``; the skip must still see it, or asenapine / propranolol came back
+    into the worklist for a Wikipedia molecule-level T½ next to Stahl's per-release one."""
+
+    def test_stahl_on_a_formulation_counts(self):
+        drug = {"id": "propranolol", "formulations": [
+            {"release": "ir", "half_life_sources": [{"corpus": "stahl"}]}]}
+        self.assertTrue(fetch_half_life.stahl_owned(drug))
+
+    def test_non_stahl_formulation_does_not(self):
+        drug = {"id": "x", "half_life_sources": [{"corpus": "wikipedia_pharm"}],
+                "formulations": [{"release": "ir", "half_life_sources": [{"corpus": "bdpm"}]}]}
+        self.assertFalse(fetch_half_life.stahl_owned(drug))
+
+
 if __name__ == "__main__":
     unittest.main()

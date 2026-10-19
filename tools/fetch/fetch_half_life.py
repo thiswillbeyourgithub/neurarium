@@ -9,7 +9,8 @@ time-to-peak pass reads (#9 Wikipedia prose, #1 Stahl, #14 DailyMed, #16 BDPM), 
 ``fetch_tmax``'s scan wholesale: only the fact a line must name changes.
 
 Stahl stays the owner of the T½ it states: a drug whose ``half_life_sources`` already
-cite Stahl is not offered, so this pass never revises a Stahl value and a re-run of
+cite Stahl, on the molecule or on one of its ``formulations[]`` (where the formulation pass
+moves a release-specific Stahl T½), is not offered, so this pass never revises a Stahl value and a re-run of
 ``apply_pharmacokinetics.py`` never collides with it.
 
 Pipeline (the usual four steps)::
@@ -43,8 +44,10 @@ HALF_LIFE_RE = re.compile(r"(half[\s-]?li(?:fe|ves)|\bt\s*(?:½|1/2|_?\{?1/2\}?)
 
 
 def stahl_owned(drug: dict) -> bool:
-    """Whether the drug's T½ already comes from Stahl (``apply_pharmacokinetics``)."""
-    return any(s.get("corpus") == "stahl" for s in drug.get("half_life_sources") or [])
+    """Whether the drug's T½ already comes from Stahl, on the molecule or a formulation."""
+    holders = [drug, *(drug.get("formulations") or [])]
+    return any(s.get("corpus") == "stahl"
+               for h in holders for s in h.get("half_life_sources") or [])
 
 
 def build(only: set[str] | None = None) -> dict[str, dict]:
