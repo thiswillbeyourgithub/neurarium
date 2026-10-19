@@ -102,7 +102,7 @@ OWN_ARTICLE = {
     "psilocin": "Psilocin",
     "desmethyldiazepam (nordazepam)": "Nordazepam",
     "o-desmethyltramadol (desmetramadol)": "Desmetramadol",
-    "norclozapine (n-desmethylclozapine)": "N-Desmethylclozapine",
+    "norclozapine (n-desmethylclozapine)": "Desmethylclozapine",
     "norfenfluramine": "Norfenfluramine",
     "dextrorphan": "Dextrorphan",
     "norbuprenorphine": "Norbuprenorphine",

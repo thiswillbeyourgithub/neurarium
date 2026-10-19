@@ -73,5 +73,26 @@ class CitedCorpusGateTest(unittest.TestCase):
         self.assertIn("europepmc page 19890256", warnings[0])
 
 
+@unittest.skipUnless(HAS_BS4, "beautifulsoup4 not installed")
+class OwnArticleStoredTest(unittest.TestCase):
+    """Every ``OWN_ARTICLE`` title must be the stored, post-redirect title. The store names
+    a page after the resolved title, so a redirect title ("N-Desmethylclozapine" ->
+    ``desmethylclozapine.html``) is found online but silently missed by ``--no-fetch``,
+    which then falls back to the parent's article and rewrites the worklist entry."""
+
+    def test_every_own_article_resolves_offline(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "tools" / "fetch"))
+        import fetch_metabolite_bindings as mb
+        from lib.corpora import wikipedia as wikistore
+        from lib.page_file import page_path
+        if not Path(wikistore.RAW_DIR).is_dir():
+            self.skipTest("author-side: data_sources/wikipedia/raw/ not on this clone")
+        missing = {k: t for k, t in mb.OWN_ARTICLE.items()
+                   if not Path(page_path(wikistore.RAW_DIR, wikistore.title_slug(t),
+                                         ".html")).exists()}
+        self.assertEqual(missing, {})
+
+
 if __name__ == "__main__":
     unittest.main()
