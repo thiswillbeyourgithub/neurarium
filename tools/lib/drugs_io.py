@@ -59,10 +59,30 @@ def load_drugs(path=None) -> list[dict]:
     return records
 
 
+def _in_prior_order(rec, order: list[str] | None):
+    """``rec`` with the keys the record held on disk (``order``) back in place, new ones last.
+
+    An applier that owns a field pops it and re-adds it, which moves the key to the end;
+    without this a re-run that changes nothing still rewrites every touched line.
+    """
+    if not order or not isinstance(rec, dict):
+        return rec
+    rank = {k: i for i, k in enumerate(order)}
+    return dict(sorted(rec.items(), key=lambda kv: rank.get(kv[0], len(rank))))
+
+
 def save_drugs(records, path=None) -> None:
-    """Write the records as JSONL (compact, key order preserved), one per line."""
+    """Write the records as JSONL (compact), one per line, so a re-run is byte-stable.
+
+    A record the file already holds (by ``id``) keeps its on-disk key order, see
+    :func:`_in_prior_order`; any other record keeps the order it was built in.
+    """
     p = Path(path) if path is not None else DRUGS_PATH
-    lines = [json.dumps(rec, ensure_ascii=False) for rec in records]
+    prior = ({r.get("id"): list(r) for r in load_drugs(p) if isinstance(r, dict)}
+             if p.exists() else {})
+    lines = [json.dumps(_in_prior_order(rec, prior.get(rec.get("id"))
+                                        if isinstance(rec, dict) else None),
+                        ensure_ascii=False) for rec in records]
     atomic_write_text(p, "\n".join(lines) + "\n")
 
 
