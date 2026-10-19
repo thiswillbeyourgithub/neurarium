@@ -88,7 +88,7 @@ from lib.io_atomic import atomic_write_json  # noqa: E402
 # The claim walk lives in its own module (the generator runs it too); re-exported here
 # because this is where the judge's side of it is read and tested.
 from claim_walk import (  # noqa: E402,F401
-    EXCLUDE_CORPUS, UNCERTAINTY_REASONS, UNPLACED, UNRECONSTRUCTED_CLAIM, _doubts, _hours,
+    UNCERTAINTY_REASONS, UNPLACED, UNRECONSTRUCTED_CLAIM, _doubts, _hours,
     _jsonl,
     reconstruct_claims, site_of)
 

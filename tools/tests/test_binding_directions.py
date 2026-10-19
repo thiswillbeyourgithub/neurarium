@@ -22,7 +22,6 @@ Built with the help of Claude Code.
 
 import copy
 import importlib.util
-import json
 import sys
 import tempfile
 import unittest
