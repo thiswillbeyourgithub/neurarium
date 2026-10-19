@@ -27,6 +27,18 @@ export function el(tag, cls, text) {
  * @returns {HTMLButtonElement}
  */
 /**
+ * A stable key for one folded panel section (a `details.panel-sec`), the same on
+ * every render of that panel: its tour anchor, else its heading text with the counts
+ * stripped ("Psychotropic interactions (12)" -> "Psychotropic interactions").
+ * @param {HTMLDetailsElement} det
+ * @returns {string}
+ */
+export function panelSectionKey(det) {
+  return det.dataset.tourSec
+    || (det.querySelector(":scope > summary")?.textContent || "").replace(/[\d()]/g, "").trim();
+}
+
+/**
  * A titled subsection inside a panel section (Brain entry under Pharmacokinetics,
  * Active metabolites under Metabolism): a `div.panel-subsec` headed by an `<h4>`.
  * An `<h4>`, not an `<h3>`, so foldSections never folds it into a section of its own.

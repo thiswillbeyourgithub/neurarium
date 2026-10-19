@@ -52,29 +52,10 @@ export function createInfoPanel(data, sourcingModal) {
     body.dataset.view = view;
     if (pane) pane.scrollTop = 0;
   };
-  // The sections a reader unfolded, remembered per kind of view (drug, receptor, ...)
-  // and re-opened on every later panel of that kind, so switching drug -> drug keeps
-  // Pharmacokinetics open for a side-by-side read instead of folding it back up.
-  // Kept current by the toggle listener below, which also sees a flashRow jump.
-  const openByView = new Map(); // view -> Set of section keys
-  const sectionKey = (det) => det.dataset.tourSec
-    || (det.querySelector(":scope > summary")?.textContent || "").replace(/[\d()]/g, "").trim();
-  body.addEventListener("toggle", (e) => {
-    const det = e.target;
-    if (det.parentElement !== body || !det.classList.contains("panel-sec")) return;
-    const view = body.dataset.view;
-    if (!openByView.has(view)) openByView.set(view, new Set());
-    const open = openByView.get(view);
-    if (det.open) open.add(sectionKey(det)); else open.delete(sectionKey(det));
-  }, true); // capture: toggle does not bubble
-  // foldSections, then unfold what the reader had open on this kind of view.
-  const foldBody = () => {
-    foldSections(body);
-    const open = openByView.get(body.dataset.view);
-    if (!open) return;
-    for (const det of body.querySelectorAll(":scope > details.panel-sec"))
-      if (open.has(sectionKey(det))) det.open = true;
-  };
+  // Every headed section folded (panel/dom.js foldSections): a freshly opened panel
+  // starts collapsed, and a tab the reader comes BACK to gets the sections they had
+  // open in it re-opened by panel/tabs.js, per tab.
+  const foldBody = () => foldSections(body);
   const nameOf = (id) => data.byId.get(id)?.name || id;
   // Hemisphere-stripped name ("Frontal lobe", not "Right frontal lobe"): used by
   // every pathway list so left/right twins collapse to one row (see pathwayList).

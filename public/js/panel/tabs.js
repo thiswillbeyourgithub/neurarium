@@ -1,6 +1,8 @@
 // The bottom-left panel's detail-tab strip (one tab per opened node, plus the Data
 // browser and Simulation tabs) and the helper that opens a collapsed controls section.
 
+import { panelSectionKey } from "./dom.js";
+
 const { t } = window.__I18N__;
 
 /**
@@ -73,6 +75,20 @@ export function createPanelTabs() {
   // instead of jumping to the top. Necessary because a tab switch re-runs the whole
   // show*(), and createInfoPanel's clearBody() zeroes the pane on every render.
   const scrollByKey = new Map(); // key -> scrollTop
+  // key -> keys of the panel sections open in that tab (panel/dom.js panelSectionKey).
+  // Like the scroll offset: a return to the tab (activate) re-opens them, a fresh open
+  // of a node (a new drug, or the same one picked again) starts with all folded.
+  const sectionsByKey = new Map();
+  let pendingSections = null; // single-shot, set by activate(), used by openDetail()
+  const openSectionKeys = () => [...detailsPane.querySelectorAll("details.panel-sec")]
+    .filter((d) => d.open).map(panelSectionKey);
+  // Kept current from the toggles themselves (a click, a tour step, a flashRow jump),
+  // read off the live pane so it always matches what the reader sees. Capture phase:
+  // toggle does not bubble. A detached panel's late toggle never reaches the pane.
+  detailsPane.addEventListener("toggle", (e) => {
+    if (activeKey === null || !e.target.classList?.contains("panel-sec")) return;
+    sectionsByKey.set(activeKey, openSectionKeys());
+  }, true);
   let pendingRestore = null; // single-shot offset, set by activate(), used by openDetail()
   // Record the live offset while a detail is shown: one hook covers every leave path
   // (a tab click, the Settings tab, a close, the Tab-key cycle).
@@ -157,6 +173,7 @@ export function createPanelTabs() {
     const tab = openTabs.find((tb) => tb.key === key);
     if (!tab) return;
     pendingRestore = scrollByKey.get(key) || 0;
+    pendingSections = sectionsByKey.get(key) || [];
     tab.reopen();
   };
 
@@ -165,6 +182,7 @@ export function createPanelTabs() {
     if (idx === -1) return;
     openTabs.splice(idx, 1);
     scrollByKey.delete(key); // reopening it later is a fresh open, so start at the top
+    sectionsByKey.delete(key);
     if (key !== activeKey) { render(); return; } // 3D unchanged; just drop the chip
     if (openTabs.length) {
       // Fall back to the neighbour that slid into this slot (or the new last one),
@@ -307,10 +325,26 @@ export function createPanelTabs() {
         openTabs.push(tab);
         if (openTabs.length > MAX_TABS) {
           const drop = openTabs.findIndex((tb) => tb.key !== key && tb.key !== activeKey);
-          if (drop !== -1) scrollByKey.delete(openTabs.splice(drop, 1)[0].key);
+          if (drop !== -1) {
+            const dropped = openTabs.splice(drop, 1)[0].key;
+            scrollByKey.delete(dropped);
+            sectionsByKey.delete(dropped);
+          }
         }
       }
       activeKey = key;
+      // Sections: a return re-opens what was open in this tab, a fresh open forgets it
+      // (the panel was just rendered all folded). Before the scroll restore, which
+      // needs the re-opened heights.
+      const reopenSections = pendingSections;
+      pendingSections = null;
+      if (reopenSections) {
+        const want = new Set(reopenSections);
+        for (const d of detailsPane.querySelectorAll("details.panel-sec"))
+          if (want.has(panelSectionKey(d))) d.open = true;
+      } else {
+        sectionsByKey.delete(key);
+      }
       expandPanel();
       showPane(true);
       render();
