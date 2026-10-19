@@ -66,7 +66,7 @@ fixed Stahl list.
   antipsychotic reads dopaminergic-**up** (blocking the D2 *autoreceptor* disinhibits release); its
   postsynaptic blockade shows in the block-coloured dots. (This is why the dataset carries the ascending
   monoamine pathways.)
-- **Panel** (`showDrug`): every `h3`-headed section (Administrative: class, NbN, history, brands; Pharmacokinetics with its Brain entry subsection; Direct molecular targets; Inferred effects; ...; Neurotransmitter tone; Metabolism, whose `h4` subsections (`panel/dom.js` `subSection`) are Active metabolites (`panel/active-metabolites.js`), Enzymes, Genetics-caused posology adaptation and Psychotropic interactions (`panel/pk-interactions.js`)) starts folded, like every detail panel (see
+- **Panel** (`showDrug`): every `h3`-headed section (Administrative: class, NbN, history, brands; Pharmacokinetics with its Brain entry subsection; Direct molecular targets; Neurotransmitter tone; Metabolism, whose `h4` subsections (`panel/dom.js` `subSection`) are Active metabolites (`panel/active-metabolites.js`), Enzymes, Genetics-caused posology adaptation and Psychotropic interactions (`panel/pk-interactions.js`); then the BETA sections, last: Inferred effects, Possible release changes, Genetic variability, Checks the French label asks for) starts folded, like every detail panel (see
   `docs/VIEWER.md` "Folded panel sections"). A name shown beside the INN (`DRUG_NAME_QUALIFIERS`, display-only + searchable:
   "Paliperidone (9-OH-risperidone)") becomes `drug.label`; a metabolite that is a modeled drug shows under that
   label as a plain `drugNameLink` (the Drugs-list row look), and that drug's own panel opens with "Active

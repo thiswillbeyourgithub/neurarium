@@ -377,10 +377,6 @@ export function showDrug(P, drug, opts = {}) {
     acts.appendChild(ul);
   }
   body.appendChild(acts);
-  appendPossibleEffects(drug);
-  appendReleaseChanges(drug);
-  appendDrugVariants(drug);
-  appendWorkup(drug);
 
   // No standalone drug-level "Source(s)" block: the Stahl citation that backs
   // the drug is shown per-binding (each binding's pill above), so a source
@@ -476,8 +472,9 @@ export function showDrug(P, drug, opts = {}) {
     body.appendChild(proj);
   }
 
-  // Metabolism, last: pharmacokinetics has no anatomy, so it sits AFTER the
-  // sections that do (Direct molecular targets / Neurotransmitter tone).
+  // Metabolism, last of the established sections: pharmacokinetics has no anatomy, so
+  // it sits AFTER the sections that do (Direct molecular targets / Neurotransmitter
+  // tone); only the BETA sections follow it.
   // Its active metabolites first (what the drug turns into), then the enzymes that
   // clear it or whose activity it changes, the CPIC dosing subsection, and the
   // drug -> drug interactions those roles imply.
@@ -562,6 +559,12 @@ export function showDrug(P, drug, opts = {}) {
     // the user sees why the parent drug opened.
     flashRow(metab.flash);
   }
+  // The BETA sections (panel/sections.js betaSection), at the bottom so they never
+  // push the established sections down, in this relative order.
+  appendPossibleEffects(drug);
+  appendReleaseChanges(drug);
+  appendDrugVariants(drug);
+  appendWorkup(drug);
   // Every headed section starts collapsed (a drug panel is long): the heading
   // opens it, its content indented under it.
   foldBody();
