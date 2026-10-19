@@ -128,7 +128,9 @@ def main() -> int:
     if args.dry_run:
         print("(dry run: not written)")
         return 0
-    atomic_write_json(OUT, payload, indent=2, sort_keys=True, ensure_ascii=True)
+    # demote_quotes.py rewrites this cache too: the same format, so neither writer's
+    # re-run reformats the other's output.
+    atomic_write_json(OUT, payload, indent=1, sort_keys=True, trailing_newline=False)
     print(f"wrote {OUT.relative_to(REPO)}")
     return 0
 
