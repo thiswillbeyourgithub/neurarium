@@ -76,12 +76,13 @@ fixed Stahl list.
   list (each row: an effect glyph + target + action·note, "· speculative" when tentative, plus a
   `bindingProvenancePill` = the binding's quote source, else its Ki (verified), else `NOSOURCE`, or the
   orange ⚠ when it carries `uncertainty[]`, see Source provenance),
-  sorted strongest-affinity first. Below it a **Neurotransmitter tone (indicative)** section (only when `flowKinds`
-  non-empty), opening with a derived "indicative only" caution box and the formula caption: one row per
+  sorted strongest-affinity first. Below it a **Neurotransmitter tone (indicative)** section (only when `flowKinds` or
+  `contextKinds` is non-empty), opening with a derived "indicative only" caution box and the formula caption: one row per
   ascending system whose tone the drug sets (jumps to that kind-mode group), an up/down arrow and the
   signed raw sum `flowSystems[kind].sum`, then one line per contributing binding (`toneBySystem` terms in
   `js/data/tone.js`: target, `tone.rule.<driver>` label from `meta.tone_rules`, `±1 × factor × toneWeightOf(ki)`,
-  its own pill). `toneWeightOf` is the floor-free Ki ramp (0 at 1 µM, 1 at 0.1 nM, 0.5 without a Ki) so weak hits
+  its own pill), then one neutral-swatch "no tone change" row per `contextKinds` system (engaged only
+  through a postsynaptic receptor, pathways lit statically, no beads). `toneWeightOf` is the floor-free Ki ramp (0 at 1 µM, 1 at 0.1 nM, 0.5 without a Ki) so weak hits
   add up without each counting as a strong one; `factor` comes from `meta.tone_factors` (`TONE_FACTORS` in
   `tools/data_generators/drugs.py`: an autoreceptor counts 0.5x, its brake on release being partial). The
   gem dots and the overlay's `weight` keep the floored `affinityWeightOf`. Class +
@@ -378,8 +379,8 @@ nothing draws.
   that carries the ethics of the section: these are frequencies across study cohorts, most groups
   contain every speed, and only a genetic test says which one a person has. `showDrug` gains a **Metabolism** list (caption, ClinPGx pathway-search link, the section caveats, then one `h4.enz-role` heading per role, "Substrate of" / "Inhibits" / ..., from `ENZYME_ROLES` `heading`, over single-line enzyme rows: enzyme, its role pill, then strength + its strength pill, clickable to the enzyme) and a **Psychotropic interactions**
   list, both **after** the anatomy sections
-  (pharmacokinetics lights nothing in the scene, so it does not interrupt Direct molecular targets -> Projections
-  affected -> Acts within); each **Active metabolites** row gains a `.metab-formed` "formed by
+  (pharmacokinetics lights nothing in the scene, so it does not interrupt Direct molecular targets -> Neurotransmitter tone);
+  each **Active metabolites** row gains a `.metab-formed` "formed by
   <enzyme>" line with its own pill. An **Enzymes** accordion section
   (`buildEnzymeLegend`) opens `showEnzyme`: a ClinPGx search (the variant / poor-vs-ultra-rapid
   metabolizer story this dataset does not model), the metabolites that isoform forms, then its drugs

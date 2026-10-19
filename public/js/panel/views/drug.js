@@ -388,11 +388,15 @@ export function showDrug(P, drug, opts = {}) {
   // vesicle target or a presynaptic autoreceptor, see js/data.js toneBySystem):
   // each row shows the signed sum (up arrow = raises the tone, down arrow = lowers
   // it), jumps to that projection group, and lists the per-binding arithmetic with
-  // each binding's own pill, so the value is traceable. A purely postsynaptic drug
-  // sets no tone -> empty flowKinds -> section omitted.
+  // each binding's own pill, so the value is traceable. A system the drug engages
+  // only through a POSTSYNAPTIC receptor (drug.contextKinds, e.g. an H1 / 5-HT2
+  // blocker) gets a "no tone change" row after them: its pathways light statically
+  // in the 3D view (dimmed, no beads), and the row says why it carries no value.
   const groupsByKey = data.projectionGroupsByKey;
   const projColors = data.meta.projectionColors || {};
-  if ((drug.flowKinds || []).length && groupsByKey) {
+  const flowKinds = drug.flowKinds || [];
+  const contextKinds = drug.contextKinds || [];
+  if ((flowKinds.length || contextKinds.length) && groupsByKey) {
     const proj = el("div", "info-connections info-tone");
     proj.appendChild(el("h3", null, t("drug.tone")));
     const warn = derivedBox("caution", t("drug.toneWarnTitle"));
@@ -404,10 +408,10 @@ export function showDrug(P, drug, opts = {}) {
     // The tone sums the active metabolites' tone-setters too (allBindings): when one
     // contributes, the shared "several compounds" box, and each term names its compound.
     const mix = metaboliteContributors(drug,
-      drug.flowKinds.flatMap((kind) => drug.flowSystems[kind].terms));
+      flowKinds.flatMap((kind) => drug.flowSystems[kind].terms));
     if (mix) proj.appendChild(derivedActiveMetabolites(drug, body, mix));
     const ul = el("ul");
-    for (const kind of drug.flowKinds) {
+    for (const kind of flowKinds) {
       const group = groupsByKey.get(`kind:${kind}`);
       if (!group) continue;
       const flow = drug.flowSystems[kind];
@@ -448,39 +452,28 @@ export function showDrug(P, drug, opts = {}) {
       }
       ul.appendChild(terms);
     }
-    proj.appendChild(ul);
-    body.appendChild(proj);
-  }
-
-  // Acts within (context): the ascending systems this drug engages only through a
-  // POSTSYNAPTIC receptor (drug.contextKinds, e.g. an H1 / 5-HT2 blocker). Their
-  // pathways light statically in the 3D view (dimmed, no beads); blocking a
-  // postsynaptic receptor makes NO tone claim, so they are listed apart from
-  // "Neurotransmitter tone" above, with a neutral swatch and no direction arrow.
-  // Excludes any system already flowing (that one is a tone-setter row above).
-  if ((drug.contextKinds || []).length && groupsByKey) {
-    const ctx = el("div", "info-connections");
-    ctx.appendChild(el("h3", null, t("drug.actsWithin")));
-    ctx.appendChild(el("p", "legend-caption", t("drug.actsWithinHint")));
-    const ul = el("ul");
-    for (const kind of drug.contextKinds) {
+    // Neutral swatch, no direction arrow: blocking a postsynaptic receptor makes NO
+    // tone claim. Excludes any system already flowing (a tone-setter row above).
+    for (const kind of contextKinds) {
       const group = groupsByKey.get(`kind:${kind}`);
       if (!group) continue;
-      const li = el("li", "clickable");
+      const li = el("li", "clickable tone-context");
       li.title = group.name;
       const sw = el("span", "swatch line");
       sw.style.background = projColors[kind] || "#fff";
       li.appendChild(sw);
       li.appendChild(el("span", "conn-label", group.name));
+      li.appendChild(el("span", "tone-value", t("drug.toneNone")));
       li.addEventListener("click", () => onProjectionGroupPick(group));
       ul.appendChild(li);
+      ul.appendChild(el("li", "tone-terms", t("drug.toneNoneWhy")));
     }
-    ctx.appendChild(ul);
-    body.appendChild(ctx);
+    proj.appendChild(ul);
+    body.appendChild(proj);
   }
 
   // Metabolism, last: pharmacokinetics has no anatomy, so it sits AFTER the
-  // sections that do (Direct molecular targets / Neurotransmitter tone / Acts within).
+  // sections that do (Direct molecular targets / Neurotransmitter tone).
   // Its active metabolites first (what the drug turns into), then the enzymes that
   // clear it or whose activity it changes, the CPIC dosing subsection, and the
   // drug -> drug interactions those roles imply.

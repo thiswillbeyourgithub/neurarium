@@ -57,7 +57,7 @@ export function createSelection({ meshes, arrows }) {
   const DIM = 0.12;
   // Opacity for *static context* arrows (a drug's postsynaptic-receptor pathways):
   // clearly visible so the engaged system reads, but below the flowing/pinned
-  // arrows (full, itself capped at ARROW_MAX_OPACITY) so "acts within" never looks
+  // arrows (full, itself capped at ARROW_MAX_OPACITY) so a "no tone change" system never looks
   // like the animated "sets the tone of".
   const CONTEXT_ARROW_OPACITY = 0.42;
   const white = new THREE.Color(0xffffff);
