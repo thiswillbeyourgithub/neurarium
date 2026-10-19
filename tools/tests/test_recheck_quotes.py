@@ -459,5 +459,58 @@ class DoubtsAlreadyRecordedTest(unittest.TestCase):
                         "rejection, so it must be the one a judge now sees")
 
 
+class PerSiteSelectionTest(unittest.TestCase):
+    """Every ``build`` selector decides one (quote, citation site) pair, never a quote.
+
+    Stamps are keyed per site, so a quote judged for one claim and newly cited at
+    another ships unjudged there. Norzimelidine's SERT binding reused the zimelidine
+    sentence already judged for "zimelidine has metabolite norzimelidine": the quote was
+    first seen as ``drug_metabolites``, so ``--unjudged --kinds
+    drug_metabolite_bindings`` dropped it and a second ``--unstamped --kinds
+    drug_metabolites`` pass was needed.
+    """
+
+    OLD = "drug:zimelidine/metabolites[norzimelidine]"
+    NEW = "metabolite:norzimelidine/bindings[sert:reuptake_inhibitor]"
+
+    def _select(self, *flags):
+        from unittest import mock
+        claims = {"q1": [f"{self.OLD} | Zimelidine has metabolite norzimelidine.",
+                         f"{self.NEW} | Norzimelidine inhibits SERT."]}
+        site_kinds = {("q1", self.OLD): "drug_metabolites",
+                      ("q1", self.NEW): "drug_metabolite_bindings"}
+        ap = argparse.ArgumentParser()
+        for f in ("--unjudged", "--unstamped", "--flagged", "--disputed",
+                  "--only-flagged", "--only-disputed"):
+            ap.add_argument(f, action="store_true")
+        ap.add_argument("--kinds", default="")
+        ap.add_argument("--stamped-by")
+        args = ap.parse_args(list(flags))
+        stamps = {"quote_llm.json": {"q1": {self.OLD: "opus"}}}
+        with mock.patch.object(R, "_load", lambda path, d: stamps.get(Path(path).name, d)), \
+                mock.patch.object(R, "_unjudged_quotes", lambda unjudged: {"q1"}), \
+                mock.patch.object(R, "_unjudged_pipelines", lambda: {"page_llm"}), \
+                mock.patch("builtins.print"):
+            got = R._select(claims, site_kinds, args, {}, {("q1", self.NEW)})
+        return [R.site_of(t) for t in got.get("q1", [])]
+
+    def test_unjudged_keeps_only_the_new_site_under_its_own_kind(self):
+        self.assertEqual(self._select("--unjudged", "--kinds", "drug_metabolite_bindings"),
+                         [self.NEW])
+
+    def test_unjudged_alone_skips_the_judged_site(self):
+        self.assertEqual(self._select("--unjudged"), [self.NEW])
+
+    def test_unstamped_is_per_site_too(self):
+        self.assertEqual(self._select("--unstamped"), [self.NEW])
+        self.assertEqual(self._select("--unstamped", "--kinds", "drug_metabolites"), [])
+
+    def test_stamped_by_reads_the_site_stamp(self):
+        self.assertEqual(self._select("--stamped-by", "opus"), [self.OLD])
+
+    def test_kinds_is_per_site(self):
+        self.assertEqual(self._select("--kinds", "drug_metabolite_bindings"), [self.NEW])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

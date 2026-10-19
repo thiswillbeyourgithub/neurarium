@@ -29,7 +29,7 @@ Three steps (the middle one is the only LLM spend):
    that one instead of condemning the sentence everywhere it is used.
 
    Scope it with ``--kinds a,b,c`` (the node kinds to judge, printed per pass),
-   ``--unstamped`` (skip what ``quote_llm.json`` already stamps), ``--stamped-by <m>``
+   ``--unstamped`` (skip the sites ``quote_llm.json`` already stamps; every selector decides per citation site), ``--stamped-by <m>``
    (re-read exactly what model ``m`` vouched for, so a second model corroborates it),
    ``--flagged`` and ``--disputed`` (always re-judge what a previous pass could not
    confirm, or what two models disagree about). A scoped pass is the normal case now
@@ -116,19 +116,27 @@ def _load(path, default):
 
 
 
-def _unjudged_quotes():
-    """Quote ids a model picked out of prose and no second model has ever judged.
+def _unjudged_pipelines():
+    """The ``pipeline`` keys whose chain has a model choosing the sentence and none judging it.
 
-    Read off the emitted citations rather than guessed: each carries the ``pipeline``
-    key its chain of custody resolved to (see provenance.quote_pipeline), and a chain in
-    which a model chose the sentence but none judged it is exactly what the rule in
-    CLAUDE.md forbids shipping. A quote code copied out of a table has no such failure
-    mode and is not selected here.
+    Read off the emitted registry rather than guessed (see provenance.quote_pipeline): such
+    a chain is exactly what the rule in CLAUDE.md forbids shipping. A quote code copied out
+    of a table has no such failure mode and is never selected by ``--unjudged``.
     """
     with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
         meta = json.load(fh)
-    unjudged = {k for k, steps in (meta.get("quote_pipelines") or {}).items()
-                if "extract_llm" in steps and "judge_llm" not in steps}
+    return {k for k, steps in (meta.get("quote_pipelines") or {}).items()
+            if "extract_llm" in steps and "judge_llm" not in steps}
+
+
+def _unjudged_quotes(unjudged):
+    """Quote ids with at least one emitted citation whose ``pipeline`` is in ``unjudged``.
+
+    Quote-level on purpose: it answers only for a claim the walk could not place (site
+    :data:`UNPLACED`); a placed claim is decided per site (see :func:`_select`).
+    """
+    with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as fh:
+        meta = json.load(fh)
     found = set()
 
     def walk(node):
@@ -155,45 +163,59 @@ def _strongest(models):
     return max(known, key=LLM_RANK.get) if known else None
 
 
-def _quote_llms():
-    """``{quote id: model}``: the strongest model that judged each quote at any site
-    (the central per-site stamps, else the quote node's source-level stamp)."""
-    stamps = {q["id"]: q["llm"] for q in _jsonl("quotes.jsonl") if q.get("llm")}
-    for qid, sites in _load(os.path.join(CACHE, "quote_llm.json"), {}).items():
-        stamps[qid] = _strongest(sites.values())
-    return stamps
+def _site_llm(quotes, stamped):
+    """``site_llm(qid, site)``: the strongest model that judged ``qid`` AT ``site``.
+
+    The central per-site stamp; a quote with no central stamp at all falls back to its
+    quote node's source-level ``llm`` (stamped by the pass that wrote that source).
+    """
+    def site_llm(qid, site):
+        if qid in stamped:
+            return stamped[qid].get(site)
+        return quotes.get(qid, {}).get("llm")
+    return site_llm
 
 
-def _select(claims, kinds, args):
-    """Narrow a build to the quotes this pass actually judges.
+def _select(claims, site_kinds, args, quotes=None, unjudged_sites=frozenset()):
+    """Narrow a build to the (quote, citation site) pairs this pass actually judges.
 
     A full rebuild embeds every cited page, so a pass that only needs the kinds nobody
     has ever rechecked (brands, half-lives, metabolites) would otherwise pay for the
-    whole corpus. ``--flagged`` is a union, not a filter: the quotes a previous pass
-    could not confirm come back whatever else is selected.
+    whole corpus. Every narrowing selector is ONE predicate on ``(qid, site)`` and
+    filters claim lines, never whole quotes: a stamp is keyed per site, so a quote judged
+    for one claim and newly cited at another (norzimelidine's binding reusing the
+    sentence judged for zimelidine's metabolite) must come back for exactly the new site,
+    whatever kind the quote was first seen under. ``site_kinds`` is ``{(qid, site):
+    kind}`` (see ``reconstruct_claims``), ``unjudged_sites`` the placed pairs whose
+    emitted citation reads unjudged. ``--flagged`` is a union, not a filter: the quotes
+    a previous pass could not confirm come back whatever else is selected.
     """
-    wanted = {k for k in args.kinds.split(",") if k} if args.kinds else None
-    keep = {q: c for q, c in claims.items()
-            if wanted is None or kinds.get(q) in wanted}
-    if wanted is not None:
-        unknown = wanted - set(kinds.values())
+    stamped = _load(os.path.join(CACHE, "quote_llm.json"), {})
+    preds = []
+    if args.kinds:
+        wanted = {k for k in args.kinds.split(",") if k}
+        unknown = wanted - set(site_kinds.values())
         if unknown:
             sys.exit(f"unknown --kinds: {', '.join(sorted(unknown))}")
+        preds.append(lambda q, s: site_kinds.get((q, s)) in wanted)
     if args.stamped_by:
-        # A quote only one model has ever read is not independently confirmed: a second,
-        # different model reading it is what makes the verdict a corroboration.
-        stamps = _quote_llms()
-        keep = {q: c for q, c in keep.items()
-                if stamps.get(q) == args.stamped_by}
+        # A quote only one model ever read is not independently confirmed: a second,
+        # different model reading it is what makes the verdict corroboration.
+        site_llm = _site_llm(quotes or {}, stamped)
+        preds.append(lambda q, s: site_llm(q, s) == args.stamped_by)
     if args.unjudged:
-        picked = _unjudged_quotes()
-        keep = {q: c for q, c in keep.items() if q in picked}
+        unplaced = _unjudged_quotes(_unjudged_pipelines())
+        preds.append(lambda q, s: (q, s) in unjudged_sites
+                     or (s == UNPLACED and q in unplaced))
     if args.unstamped:
-        # A quote is stamped only when EVERY site it backs today has a verdict: a site
-        # added since the last pass is exactly what a stamp must not silently cover.
-        stamped = _load(os.path.join(CACHE, "quote_llm.json"), {})
-        keep = {q: c for q, c in keep.items()
-                if not {site_of(t) for t in c} <= set(stamped.get(q, {}))}
+        # A site added since the last pass is exactly what a stamp must not silently cover.
+        preds.append(lambda q, s: s not in stamped.get(q, {}))
+    keep = {}
+    for q, lines in claims.items():
+        kept = [t for t in lines if all(p(q, site_of(t)) for p in preds)]
+        if kept:
+            keep[q] = kept
+
     # The RESTRICTIVE forms: judge that list and nothing else. A re-extraction or a
     # dispute-settling pass has one question about a handful of quotes ("is there a
     # better sentence on this page", "the stamping model is asked again"), so every
@@ -211,7 +233,8 @@ def _select(claims, kinds, args):
         for row in _load(os.path.join(CACHE, fname), []):
             if row.get("qid") in claims:
                 keep[row["qid"]] = claims[row["qid"]]
-    counts = collections.Counter(kinds.get(q) for q in keep)
+    counts = collections.Counter(site_kinds.get((q, site_of(t)))
+                                 for q, lines in keep.items() for t in lines)
     print("selected " + ", ".join(f"{k}={n}" for k, n in sorted(counts.items(),
                                                                key=lambda kv: str(kv[0]))))
     return keep
@@ -262,8 +285,13 @@ def _excerpt(text, quotes, cap):
 
 def cmd_build(args):
     quotes = {q["id"]: q for q in _jsonl("quotes.jsonl")}
-    claims, kinds = reconstruct_claims(quotes)
-    claims = _select(claims, kinds, args)
+    unjudged, unjudged_sites, site_kinds = _unjudged_pipelines(), set(), {}
+
+    def on_cite(site, ref):
+        if ref.get("pipeline") in unjudged:
+            unjudged_sites.add((ref["quote_id"], site))
+    claims, _ = reconstruct_claims(quotes, on_cite=on_cite, site_kinds=site_kinds)
+    claims = _select(claims, site_kinds, args, quotes, unjudged_sites)
     if not claims:
         sys.exit("nothing to build: every selected quote is filtered out")
     groups = collections.defaultdict(list)
@@ -423,7 +451,7 @@ def main():
                    help="judge only the quotes a model PICKED and none has judged "
                         "(the state check_data.py fails on)")
     b.add_argument("--unstamped", action="store_true",
-                   help="skip the quotes quote_llm.json already stamps")
+                   help="skip the citation sites quote_llm.json already stamps")
     b.add_argument("--only-flagged", action="store_true",
                    help="judge ONLY the flagged quotes (a re-extraction pass: pair it "
                         "with a large --max-page-chars so the whole page is offered)")

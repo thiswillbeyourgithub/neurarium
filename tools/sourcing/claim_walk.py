@@ -219,7 +219,7 @@ def _release_modulation_claims(add, kind, r, nm):
                 CS.site("receptor", r["id"], "release_modulation", RELMOD.node_key(**f)))
 
 
-def reconstruct_claims(quotes, data=None, on_cite=None):
+def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
     """``(claims, kinds)``: per quote id, the claim(s) it backs and its node kind.
 
     ``data`` is the emitted dataset (default: read off ``public/data``, see
@@ -255,6 +255,8 @@ def reconstruct_claims(quotes, data=None, on_cite=None):
             _place_bullets(site, node)
         if qid in quotes and quotes[qid]["corpus"] not in EXCLUDE_CORPUS:
             kinds.setdefault(qid, kind["now"])
+            if site_kinds is not None:
+                site_kinds.setdefault((qid, site or UNPLACED), kind["now"])
             # `site | text`, not `[site] text`: a site carries brackets of its own
             # (`bindings[5ht2a]`), so a bracketed prefix cannot be split back off it.
             claim += _doubts(node)
