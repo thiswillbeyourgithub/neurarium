@@ -11,6 +11,7 @@ Built with the help of Claude Code.
 """
 
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -53,6 +54,23 @@ class ReadTest(unittest.TestCase):
         for required in (True, False):
             with self.assertRaises(json.JSONDecodeError):
                 worklist_io.read(path, required=required, default={})
+
+
+class ShownTest(unittest.TestCase):
+    """A fetcher's log line must not crash on an ``--out`` outside the repo."""
+
+    def test_inside_root_is_relative_outside_is_unchanged(self):
+        root = Path("/r")
+        self.assertEqual(worklist_io.shown(Path("/r/tools/x.json"), root), Path("tools/x.json"))
+        self.assertEqual(worklist_io.shown(Path("/tmp/x.json"), root), Path("/tmp/x.json"))
+
+    def test_no_fetcher_relativizes_its_out_path_directly(self):
+        # The class-wide guard: ``args.out.relative_to(ROOT)`` raised ValueError after the
+        # write whenever ``--out`` pointed at a scratch dir outside the repo.
+        fetch = Path(__file__).resolve().parent.parent / "fetch"
+        offenders = [p.name for p in sorted(fetch.glob("*.py"))
+                     if re.search(r"\bout\.(resolve\(\)\.)?relative_to\(", p.read_text("utf-8"))]
+        self.assertEqual(offenders, [], "use worklist_io.shown(path, ROOT)")
 
 
 if __name__ == "__main__":

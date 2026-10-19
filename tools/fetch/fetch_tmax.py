@@ -199,7 +199,7 @@ def write_worklist(worklist: dict, out: Path, what: str) -> None:
         for c in v["candidates"]:
             by_corpus[c["corpus"]] = by_corpus.get(c["corpus"], 0) + 1
     total = len(drugs_io.load_drugs())
-    shown = out.resolve().relative_to(ROOT) if out.resolve().is_relative_to(ROOT) else out
+    shown = worklist_io.shown(out.resolve(), ROOT)
     print(f"[ok] wrote {shown}: {len(worklist)} of {total} drugs "
           f"offer {what} line ({n_cand} candidates)")
     for corpus, n in sorted(by_corpus.items()):

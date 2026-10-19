@@ -46,6 +46,17 @@ def merge_scoped_list(existing: list, scoped: list, key: str) -> list:
     return out + list(fresh.values())
 
 
+def shown(path, root) -> Path:
+    """``path`` relative to ``root`` for a fetcher's log line, else ``path`` unchanged: a
+    ``--out`` outside the repo (a scratch rebuild) must not crash after the write.
+
+    >>> str(shown(Path("/r/tools/x.json"), Path("/r"))), str(shown(Path("/tmp/x.json"), Path("/r")))
+    ('tools/x.json', '/tmp/x.json')
+    """
+    path = Path(path)
+    return path.relative_to(root) if path.is_relative_to(root) else path
+
+
 def write(path, worklist, indent: int = 1, sort_keys: bool = False) -> None:
     """Stamp ``qid`` on every candidate of ``worklist`` and write it as UTF-8 JSON."""
     atomic_write_json(path, stamp(worklist), indent=indent, sort_keys=sort_keys)

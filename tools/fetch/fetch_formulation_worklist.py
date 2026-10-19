@@ -255,7 +255,7 @@ def main() -> int:
         wl = merge_scoped(json.loads(args.out.read_text("utf-8")), wl, "drugs")
     worklist_io.write(args.out, wl)
     n = sum(len(v["items"]) for v in wl["drugs"].values())
-    print(f"{len(wl['drugs'])} drugs, {n} undecided claims -> {args.out.relative_to(ROOT)}")
+    print(f"{len(wl['drugs'])} drugs, {n} undecided claims -> {worklist_io.shown(args.out.resolve(), ROOT)}")
     return 0
 
 

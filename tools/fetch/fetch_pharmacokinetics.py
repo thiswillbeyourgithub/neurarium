@@ -43,6 +43,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 from lib.page_file import read_page  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io                                                 # noqa: E402
+from lib import worklist_io  # noqa: E402
 from lib.parse.durations import parse_duration  # noqa: E402
 from lib import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
 from lib.io_atomic import atomic_write_json  # noqa: E402
@@ -136,7 +137,7 @@ def main() -> int:
     atomic_write_json(args.out, worklist, trailing_newline=False, indent=2)
     n_hl = sum(1 for v in worklist.values() if v["half_life_candidates"])
     n_met = sum(1 for v in worklist.values() if v["metabolite_candidates"])
-    print(f"[ok] wrote {args.out.relative_to(ROOT)}: {matched} Stahl drugs "
+    print(f"[ok] wrote {worklist_io.shown(args.out.resolve(), ROOT)}: {matched} Stahl drugs "
           f"({skipped} non-Stahl skipped); {n_hl} have half-life lines, "
           f"{n_met} have metabolite lines.")
     return 0
