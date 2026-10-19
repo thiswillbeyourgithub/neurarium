@@ -3,34 +3,38 @@
 ``apply_formulations.py`` moves a release-specific claim (a brand, a Tmax, a T½) off the
 molecule onto ``formulations[]``. Every molecule-level applier of that claim once re-added it
 on a re-run (``apply_tmax.py`` put 78 per-release Tmax back, the brand appliers 94 brands),
-because each looked only at the molecule. They now all ask
-``data_generators.formulations.placed``; this test re-runs each one for real against a scratch
-copy of ``drugs_data.jsonl`` + ``metabolites_data.jsonl`` and requires the bytes unchanged.
+because each looked only at the molecule. Others clobbered what a later pass wrote
+(``apply_metabolite_bindings`` the later directions + GtoPdb Ki, ``apply_pharmacokinetics``
+12 drugs' later T½), or only reformatted (a popped key moved to the end, a cache written in
+another writer's indent). This test re-runs every offline applier for real, in place, and
+requires every byte under ``tools/data/`` and ``tools/generated_cache/`` unchanged; the
+snapshot is restored whatever happens. Not here: ``apply_source_quotes`` and
+``apply_category_sources`` without ``--wikipedia`` (each needs a results file nothing
+commits), and ``apply_gtopdb_ki``: four binding-gap rows added 2026-10-16 (benztropine DAT,
+fentanyl kappa, naltrexone delta / kappa) never had their Ki pass, so it would fill them
+before PDSP does (``fetch_ki.py --apply --only`` first, then this applier).
 
 Author-side: skipped on a clone without ``data_sources/``. Slow (each applier re-derives its
-worklist), so it runs only with ``NEURARIUM_SLOW_TESTS=1``.
+worklist), so it runs only with ``NEURARIUM_SLOW_TESTS=1``. It rewrites committed files for
+the length of one applier run, so do not run it while another session edits them.
 
 Built with the help of Claude Code.
 """
 from __future__ import annotations
 
-import contextlib
-import importlib
-import io
-import json
 import os
-import shutil
+import subprocess
 import sys
-import tempfile
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-for sub in ("tools", "tools/fetch", "tools/sourcing"):
-    sys.path.insert(0, str(ROOT / sub))
+sys.path.insert(0, str(ROOT / "tools"))
 
 from lib import drugs_io  # noqa: E402
 from data_generators import formulations as F  # noqa: E402
+
+WATCHED = (ROOT / "tools" / "data", ROOT / "tools" / "generated_cache")
 
 # (applier module, argv) pairs that must leave the committed data byte-identical.
 STRICT = [
@@ -42,26 +46,55 @@ STRICT = [
     ("apply_brand_names", ["--bdpm"]),
     ("apply_metabolite_bindings", []),
     ("apply_pharmacokinetics", []),
+    ("apply_binding_directions", []),
+    ("apply_binding_directions", ["--tables"]),
+    ("apply_binding_gaps", []),
+    ("apply_binding_sources", []),
+    ("apply_category_sources", ["--wikipedia"]),
+    ("apply_classification_sources", []),
+    ("apply_cyp_sources", []),
+    ("apply_demographics", []),
+    ("apply_drug_history", []),
+    ("apply_drug_holders", []),
+    ("apply_drugsfda", []),
+    ("apply_expression_density", []),
+    ("apply_ki_prose", []),
+    ("apply_location_sources", ["--corpus", "allen"]),
+    ("apply_location_sources", ["--judged", "data_sources/gtopdb/judged.json"]),
+    ("apply_nbn_sources", []),
+    ("apply_originator", []),
+    ("apply_prodrug", []),
+    ("apply_projection_sources", []),
+    ("apply_receptor_effects", []),
+    ("apply_release_modulation", []),
+    ("apply_workup", []),
 ]
 
 
-def rerun(module: str, argv: list[str], tmp: Path) -> tuple[bytes, list[dict]]:
-    """Run ``module.main()`` with ``argv`` against scratch copies.
+def snapshot() -> dict[Path, bytes]:
+    return {p: p.read_bytes() for d in WATCHED for p in d.rglob("*")
+            if p.is_file() and "__pycache__" not in p.parts}
 
-    Returns (drugs + metabolites bytes, drugs)."""
-    drugs, mets = tmp / "drugs_data.jsonl", tmp / "metabolites_data.jsonl"
-    shutil.copy(drugs_io.DRUGS_PATH, drugs)
-    shutil.copy(drugs_io.METABOLITES_PATH, mets)
-    saved = drugs_io.DRUGS_PATH, drugs_io.METABOLITES_PATH, sys.argv
-    drugs_io.DRUGS_PATH, drugs_io.METABOLITES_PATH = drugs, mets
-    sys.argv = [module, *argv]
+
+def rerun(module: str, argv: list[str]) -> tuple[int, str, list[str], list[dict]]:
+    """Run ``tools/sourcing/<module>.py argv`` in place, then restore every watched file.
+
+    Returns (exit code, output tail, the watched files it changed, the drugs it left)."""
+    before = snapshot()
     try:
-        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-            with contextlib.suppress(SystemExit):
-                importlib.import_module(module).main()
+        r = subprocess.run([sys.executable, str(ROOT / "tools" / "sourcing" / f"{module}.py"),
+                            *argv], cwd=ROOT, capture_output=True, text=True, timeout=1800)
+        drugs = drugs_io.load_drugs()
+        after = snapshot()
     finally:
-        drugs_io.DRUGS_PATH, drugs_io.METABOLITES_PATH, sys.argv = saved
-    return drugs.read_bytes() + mets.read_bytes(), drugs_io.load_drugs(drugs)
+        for p in set(snapshot()) - set(before):
+            p.unlink()
+        for p, data in before.items():
+            if not p.is_file() or p.read_bytes() != data:
+                p.write_bytes(data)
+    changed = sorted(str(p.relative_to(ROOT)) for p in set(before) | set(after)
+                     if before.get(p) != after.get(p))
+    return r.returncode, (r.stdout + r.stderr)[-800:], changed, drugs
 
 
 def relocated_on_molecule(drugs: list[dict]) -> list[str]:
@@ -82,24 +115,13 @@ def relocated_on_molecule(drugs: list[dict]) -> list[str]:
                      "slow: set NEURARIUM_SLOW_TESTS=1")
 class ApplierFixpointTest(unittest.TestCase):
 
-    def setUp(self):
-        # Inside the repo: some appliers print the path they wrote relative to it.
-        self._tmp = tempfile.TemporaryDirectory(dir=ROOT, prefix=".fixpoint_")
-        self.tmp = Path(self._tmp.name)
-        self.committed = (drugs_io.DRUGS_PATH.read_bytes()
-                          + drugs_io.METABOLITES_PATH.read_bytes())
-
-    def tearDown(self):
-        self._tmp.cleanup()
-
     def test_strict_appliers_change_nothing(self):
         for module, argv in STRICT:
             with self.subTest(applier=" ".join([module, *argv])):
-                got, drugs = rerun(module, argv, self.tmp)
+                code, tail, changed, drugs = rerun(module, argv)
+                self.assertEqual(code, 0, f"{module} {argv} failed:\n{tail}")
                 self.assertEqual(relocated_on_molecule(drugs), [])
-                self.assertTrue(got == self.committed,
-                                f"{module} {argv} rewrote drugs_data.jsonl or "
-                                f"metabolites_data.jsonl on a re-run")
+                self.assertEqual(changed, [], f"{module} {argv} rewrote these on a re-run")
 
 
 if __name__ == "__main__":
