@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.132.3",
+      "date": "2026-10-19",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "The server image builds again: the agent-facing /api pages renderer was missing two shared helpers, and a test now replays that build step locally",
+          "commits": [
+            "9cde484"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.132.2",
       "date": "2026-10-19",
       "entries": [
