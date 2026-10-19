@@ -3,6 +3,9 @@
 *
 !docker/entrypoint.sh
 !tools/render_api.py
+!tools/lib/__init__.py
+!tools/lib/page_file.py
+!tools/lib/structure_ids.py
 !tools/data_generators/llms_txt.py
 !tools/data_generators/effect_index.py
 !tools/data_generators/node_id.py

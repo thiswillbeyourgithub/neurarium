@@ -30,6 +30,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote
 
+# Both explicit: the Docker stage runs `python -I`, which never adds the script dir.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent / "data_generators"))
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.structure_ids import base_id  # noqa: E402 (the one hemisphere-suffix rule)

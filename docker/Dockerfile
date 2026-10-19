@@ -11,6 +11,9 @@ RUN xcaddy build --with github.com/mholt/caddy-ratelimit
 # deployed, so they are never committed. Stdlib only, so a bare python image.
 FROM python:3.13-alpine AS api
 COPY tools/render_api.py /src/tools/render_api.py
+COPY tools/lib/__init__.py /src/tools/lib/__init__.py
+COPY tools/lib/page_file.py /src/tools/lib/page_file.py
+COPY tools/lib/structure_ids.py /src/tools/lib/structure_ids.py
 COPY tools/data_generators/llms_txt.py /src/tools/data_generators/llms_txt.py
 COPY tools/data_generators/effect_index.py /src/tools/data_generators/effect_index.py
 COPY tools/data_generators/node_id.py /src/tools/data_generators/node_id.py
