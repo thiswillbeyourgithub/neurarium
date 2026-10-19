@@ -1,6 +1,38 @@
 {
   "versions": [
     {
+      "version": "3.131.9",
+      "date": "2026-10-19",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Leftover expression sources for receptor groups that were split long ago are pruned, and the data check now re-verifies every stored quote of every corpus against its page, so an orphaned quote can no longer hide",
+          "commits": [
+            "cf342a9",
+            "229172b",
+            "e64eaf6"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The README sourcing figures are up to date again, and one test now fails whenever any committed generated file falls behind its generator",
+          "commits": [
+            "33e48b3",
+            "d72191b"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Every data tool refuses a page name shaped like a file path, enforced by a lint test",
+          "commits": [
+            "82b5648",
+            "269e4b1",
+            "32e9fad"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.131.8",
       "date": "2026-10-18",
       "entries": [
