@@ -371,7 +371,7 @@
   "qid": "23f2ea32"
  },
  "mescaline": {
-  "index": 1,
+  "index": 2,
   "hours": 1.6,
   "hours_max": 2.3,
   "qid": "3501dacf"
@@ -666,7 +666,7 @@
  "tizanidine": {
   "index": 0,
   "hours": 1.0,
-  "qid": "0f1776c5"
+  "qid": "46d53393"
  },
  "topiramate": {
   "index": 0,

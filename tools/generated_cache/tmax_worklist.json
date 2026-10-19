@@ -2109,7 +2109,7 @@
    {
     "corpus": "wikipedia_pharm",
     "page": "mdma",
-    "line": "Whereas peak plasma concentrations and subjective effects occurred between 2 and 4 hours following administration, drug effect measures had largely returned to baseline values by 8 hours despite continued exposure to the drug (mean half-life = 8 hours following a 40 mg dose (Dolder et al., 2017)).",
+    "line": "Whereas peak plasma concentrations and subjective effects occurred between 2 and 4 hours following administration, drug effect measures had largely returned to baseline values by 8 hours despite continued exposure to the drug (mean half-life=8 hours following a 40 mg dose (Dolder et al., 2017)).",
     "durations": [
      {
       "hours": 4.0
@@ -2121,7 +2121,7 @@
       "hours": 8.0
      }
     ],
-    "qid": "9d91c4ff"
+    "qid": "e0b3f4a0"
    }
   ]
  },
@@ -3777,6 +3777,21 @@
   "name": "Tizanidine",
   "candidates": [
    {
+    "corpus": "wikipedia_pharm",
+    "page": "tizanidine",
+    "line": "The time to peak levels with tizanidine under fasting conditions is 1 hour and under fed conditions is 1.5 to 3 hours.",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 1.5,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "46d53393"
+   },
+   {
     "corpus": "dailymed",
     "page": "a42f3479-f2c2-8214-d547-c5cae9bfed1e",
     "line": "Tmax was 1.0 hours after dosing",
@@ -4689,6 +4704,25 @@
      }
     ],
     "qid": "96000e0e"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "mescaline",
+    "line": "Given intravenously, mescaline has been reported to have an onset of several minutes or within 10 minutes, a time to peak of 1 to 2 hours, and a duration of approximately 4 to 9 hours in different studies.",
+    "durations": [
+     {
+      "hours": 0.167
+     },
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     },
+     {
+      "hours": 4.0,
+      "hours_max": 9.0
+     }
+    ],
+    "qid": "3b173a2b"
    },
    {
     "corpus": "wikipedia_pharm",
