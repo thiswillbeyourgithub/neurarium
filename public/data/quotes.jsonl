@@ -6270,6 +6270,7 @@
 {"id": "q_b826d3648529", "corpus": "pubchem", "page": "15723", "quote": "XLogP3: 2.9", "fetched": "2026-10-15"}
 {"id": "q_b82b4e2f5f81", "corpus": "stahl", "page": 437, "quote": "Neuroscience-based Nomenclature: dopamine and norepinephrine reuptake inhibitor and releaser (DN-RIRe)", "llm": "sonnet", "heading": ["Lisdexamfetamine", "Therapeutics", "Class"]}
 {"id": "q_b83256b3ada3", "corpus": "clinpgx", "page": "1451277440", "quote": "Patients with two X-chromosomes and the GG genotype who are treated with risperidone may have a decreased, but not absent, risk of developing metabolic syndrome as compared to patients with the CG and CC genotype. Other genetic and clinical factors may also influence a patient's risk for developing metabolic syndrome. This gene is on the X chromosome therefore some individuals may have only one allele.", "fetched": "2026-10-13"}
+{"id": "q_b84e4de217cf", "corpus": "gtopdb_ki", "page": "fentanyl", "quote": "fentanyl at κ receptor (OPRK1, Human): Agonist / Partial agonist, pKi 7.1 [PMID 9686407]", "species": "Human", "fetched": "2026-10-12"}
 {"id": "q_b8544d9114d1", "corpus": "b3db", "page": "89594", "quote": "B3DB row 786: nicotine | CID 89594 | logBB 0.4 | BBB+ | group A | references R42", "fetched": "2026-10-15"}
 {"id": "q_b855eeefa68f", "corpus": "wikipedia_pharm", "page": "clozapine", "quote": "5HT 4 | 9.44 | 11.9", "fetched": "2026-10-11"}
 {"id": "q_b8598938e788", "corpus": "pubchem", "page": "941361", "quote": "XLogP3: 6", "fetched": "2026-10-15"}

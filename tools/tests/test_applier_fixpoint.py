@@ -10,9 +10,8 @@ another writer's indent). This test re-runs every offline applier for real, in p
 requires every byte under ``tools/data/`` and ``tools/generated_cache/`` unchanged; the
 snapshot is restored whatever happens. Not here: ``apply_source_quotes`` and
 ``apply_category_sources`` without ``--wikipedia`` (each needs a results file nothing
-commits), and ``apply_gtopdb_ki``: four binding-gap rows added 2026-10-16 (benztropine DAT,
-fentanyl kappa, naltrexone delta / kappa) never had their Ki pass, so it would fill them
-before PDSP does (``fetch_ki.py --apply --only`` first, then this applier).
+commits). ``apply_gtopdb_ki`` only fills what PDSP left empty, so after adding a binding run
+``fetch_ki.py --apply --only <drugs>`` first, then it, or this test sees it fill the new row.
 
 Author-side: skipped on a clone without ``data_sources/``. Slow (each applier re-derives its
 worklist), so it runs only with ``NEURARIUM_SLOW_TESTS=1``. It rewrites committed files for
@@ -58,6 +57,7 @@ STRICT = [
     ("apply_drug_holders", []),
     ("apply_drugsfda", []),
     ("apply_expression_density", []),
+    ("apply_gtopdb_ki", []),
     ("apply_ki_prose", []),
     ("apply_location_sources", ["--corpus", "allen"]),
     ("apply_location_sources", ["--judged", "data_sources/gtopdb/judged.json"]),
