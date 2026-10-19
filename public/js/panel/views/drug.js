@@ -553,15 +553,14 @@ export function showDrug(P, drug, opts = {}) {
     // clinician's question together, since the enzyme rows say who clears the drug
     // and these say what happens to someone who clears it slowly.
     if (pgx) metabWrap.appendChild(pgx);
+    // Psychotropic interactions (panel/pk-interactions.js), last: the drug -> drug
+    // edges the enzyme roles above imply.
+    const pkSec = hasEnzymes ? pkInteractionsSection(P, drug) : null;
+    if (pkSec) metabWrap.appendChild(pkSec);
     body.appendChild(metabWrap);
     // Arrived from a metabolite's receptor row: bring it into view and flash it, so
     // the user sees why the parent drug opened.
     flashRow(metab.flash);
-  }
-  // Psychotropic interactions (panel/pk-interactions.js), the panel's last section.
-  if (hasEnzymes) {
-    const pkSec = pkInteractionsSection(P, drug);
-    if (pkSec) body.appendChild(pkSec);
   }
   // Every headed section starts collapsed (a drug panel is long): the heading
   // opens it, its content indented under it.

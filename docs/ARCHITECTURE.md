@@ -450,7 +450,7 @@ Viewer (`public/`):
   count, whose reading mode motivates the two view toggles: bring the 3D back, fold the panel away),
   then walks the data; the data demos
   are hands-on and follow the data graph (focus a **drug** (olanzapine), read its pharmacodynamics then
-  its pharmacokinetics (**Metabolism**, then open the collapsed **Psychotropic interactions**), follow one of its
+  its pharmacokinetics (**Metabolism**, ending in **Psychotropic interactions**), follow one of its
   bindings to a **receptor** (H1), then visit a **structure** (hippocampus) and a **projection system**
   (dopamine, a static group, not a circuit); each opened by tapping the highlighted row via its
   `data-tour-id`, each panel section reached via its `data-tour-sec`),
@@ -477,7 +477,7 @@ Viewer (`public/`):
 - `js/panel/`: the detail panel: `info.js` (`createInfoPanel`, dispatching to `views/<kind>.js`,
   one `show*()` per node kind), `tabs.js` (detail-tab strip), and the shared row builders
   (`pills.js`, `tooltip.js`, `bindings.js`, `metabolism.js`, `expression.js`, `pathways.js`,
-  `sections.js`, `addons.js`, `reference.js`, `format.js`, `dom.js`), plus `pk-interactions.js` (the drug panel's derived Psychotropic interactions section) and `active-metabolites.js` (the Active metabolites subsection opening its Metabolism section).
+  `sections.js`, `addons.js`, `reference.js`, `format.js`, `dom.js`), plus `pk-interactions.js` (the drug panel's derived Psychotropic interactions subsection, last in Metabolism) and `active-metabolites.js` (the Active metabolites subsection opening its Metabolism section).
 - `js/legend/`: the browse sections (`anatomy.js`, `targets.js`, `drugs.js`, `browse.js` for
   enzymes + effects, `key.js`, shared `item.js`). `js/about/`: the popups (`modals.js`) and the
   Sources & provenance tally (`sourcing.js`). `js/search/query.js`: search text folding; `js/search/index.js`: `buildSearchItems`, the search box's row index (every searchable thing + the `data-search` controls, each with its pick action).

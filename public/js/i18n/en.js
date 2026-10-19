@@ -224,7 +224,7 @@ window.__I18N_MESSAGES__.en = {
     "Further down, its <b>metabolism</b>: the liver enzymes that break this drug down, or whose activity it changes. Each one is sourced, and clickable. This is pharmacokinetics, so nothing lights up in the 3D view.",
   "tour.drugPk.title": "And what that implies",
   "tour.drugPk.body":
-    "Open <b>Psychotropic interactions</b>. These rows are <b>inferred</b> from the enzymes above, never measured: two drugs meeting at one enzyme <i>could</i> shift each other's blood level. Then <b>Next</b> to continue.",
+    "Last in metabolism, <b>Psychotropic interactions</b>: these rows are <b>inferred</b> from the enzymes above, never measured: two drugs meeting at one enzyme <i>could</i> shift each other's blood level. Then <b>Next</b> to continue.",
   "tour.drugToReceptor.title": "Follow it to a receptor",
   "tour.drugToReceptor.body":
     "Back up to the bindings: each one is a link. Click the <b>H1</b> row to open that receptor.",

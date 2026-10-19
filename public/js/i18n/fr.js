@@ -224,7 +224,7 @@ window.__I18N_MESSAGES__.fr = {
     "Plus bas, son <b>métabolisme</b> : les enzymes hépatiques qui dégradent cette substance, ou dont elle modifie l'activité. Chacune est sourcée, et cliquable. C'est de la pharmacocinétique : rien ne s'allume dans la vue 3D.",
   "tour.drugPk.title": "Et ce que cela implique",
   "tour.drugPk.body":
-    "Ouvrez <b>Interactions entre psychotropes</b>. Ces lignes sont <b>déduites</b> des enzymes ci-dessus, jamais mesurées : deux substances qui se croisent sur une même enzyme <i>pourraient</i> déplacer leur concentration sanguine. Puis <b>Suivant</b> pour continuer.",
+    "En fin de métabolisme, <b>Interactions entre psychotropes</b> : ces lignes sont <b>déduites</b> des enzymes ci-dessus, jamais mesurées : deux substances qui se croisent sur une même enzyme <i>pourraient</i> déplacer leur concentration sanguine. Puis <b>Suivant</b> pour continuer.",
   "tour.drugToReceptor.title": "Suivre vers un récepteur",
   "tour.drugToReceptor.body":
     "Remontez aux liaisons : chacune est un lien. Cliquez sur la ligne <b>H1</b> pour ouvrir ce récepteur.",

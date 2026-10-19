@@ -158,12 +158,6 @@ export function createViewerTour({
     if (d) d.open = true;
   };
   const tourDrugSec = (sec) => tourOpenSec(tourDrugPanel, sec);
-  // The drug panel's collapsed "Psychotropic interactions" <details> (see showDrug). Its step
-  // is hands-on (the user opens it), so the step's before() re-collapses it: a Back
-  // into the step must leave something to open.
-  const tourPkDetails = () =>
-    document.querySelector('#details-pane [data-tour-sec="pk"]');
-  const tourCollapsePk = () => { const d = tourPkDetails(); if (d) d.open = false; };
 
   // --- Gesture gates: return a teardown; call signal() when the action happens. See
   // js/tour.js (a gate keeps Next greyed until fired, or auto-advances on gateAdvances).
@@ -354,19 +348,13 @@ export function createViewerTour({
       before: tourDrugSec("bindings") },
     // 16-17. Still the same panel, further down: the pharmacokinetic half. The enzymes
     //    that clear it (sourced nodes), then the drug -> drug interactions those roles
-    //    imply, collapsed so the user opens it themselves (stayAfterTap keeps the step
-    //    up so the list it reveals is readable).
+    //    imply, the last subsection of that same Metabolism section.
     { title: t("tour.drugMetabolism.title"), body: tHtml("tour.drugMetabolism.body"),
       target: '[data-tour-sec="metabolism"]', dim: false, scrollTo: true,
       scrollAlign: "top", before: tourDrugSec("metabolism") },
     { title: t("tour.drugPk.title"), body: tHtml("tour.drugPk.body"),
-      target: () => {
-        const d = tourPkDetails();
-        return d ? d.querySelector("summary") : null;
-      },
-      interactive: true, stayAfterTap: true, dim: false, scrollTo: true,
-      scrollAlign: "top", // the list it opens unfolds BELOW the summary: leave it room
-      before: () => { tourDrugPanel(); tourCollapsePk(); } },
+      target: '[data-tour-sec="pk"]', dim: false, scrollTo: true,
+      scrollAlign: "top", before: tourDrugSec("metabolism") },
     // 18. Follow one binding, the H1 receptor row, to that receptor's own panel.
     { title: t("tour.drugToReceptor.title"), body: tHtml("tour.drugToReceptor.body"),
       target: '[data-tour-id="ixtarget:h1"]', interactive: true, scrollTo: true,

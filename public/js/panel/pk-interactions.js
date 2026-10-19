@@ -1,14 +1,14 @@
-// The drug panel's "Psychotropic interactions" section (derived, never stored): the drugs
-// this one meets at a shared enzyme, grouped by drug or by isoform. Split out of
-// panel/views/drug.js, which appends it as the panel's last section.
+// The drug panel's "Psychotropic interactions" subsection (derived, never stored): the
+// drugs this one meets at a shared enzyme, grouped by drug or by isoform. Split out of
+// panel/views/drug.js, which appends it last in the Metabolism section.
 
-import { btn } from "./dom.js";
+import { btn, subSection } from "./dom.js";
 import { loadPkGrouping, savePkGrouping } from "../legend/drugs.js";
 
 const { t } = window.__I18N__;
 
 /**
- * The PK-interactions <details> for `drug`, or null when it shares no enzyme.
+ * The PK-interactions subsection for `drug`, or null when it shares no enzyme.
  * @param {object} P  the panel context showDrug receives
  * @param {object} drug
  * @returns {HTMLElement|null}
@@ -25,27 +25,12 @@ export function pkInteractionsSection(P, drug) {
     ...pk.affectedBy.map((x) => ({ ...x, outgoing: false })),
   ] : [];
   if (!edges.length) return null;
-  // info-interactors too: reuses that section's .drug-cat sub-heading style.
-  // Collapsed by default (a `disclosure` <details>, same caret as the receptor
-  // subtype dropdowns): a busy isoform yields dozens of derived rows, which
-  // otherwise bury the sourced sections above. The summary carries the count so
-  // the reader can see there is something worth opening.
-  const pkWrap = el("details", "info-bindings info-interactors disclosure");
+  // The last subsection of the drug's Metabolism section (an <h4>, see subSection),
+  // the count in its title so the reader sees how many rows follow. info-interactors
+  // reuses that section's .drug-cat sub-heading style.
+  const pkWrap = subSection(`${t("drug.pkInteractions")} (${edges.length})`,
+    "info-interactors");
   pkWrap.dataset.tourSec = "pk"; // guided-tour section anchor
-  const pkSummary = el(
-    "summary", null, `${t("drug.pkInteractions")} (${edges.length})`);
-  pkWrap.appendChild(pkSummary);
-  // It is the panel's LAST section, so opening it unfolds everything below the
-  // fold: bring the summary up to the top of the pane so what you see is the
-  // list you just asked for, not the rows above it.
-  pkWrap.addEventListener("toggle", () => {
-    // setTimeout, not rAF: let the newly shown rows lay out first, and the
-    // viewer's on-demand render loop can leave rAF idle.
-    if (pkWrap.open) {
-      setTimeout(
-        () => pkSummary.scrollIntoView({ block: "start", behavior: "smooth" }), 0);
-    }
-  });
   pkWrap.appendChild(el("p", "legend-caption", t("drug.pkInteractionsHint")));
 
   // One row = one (other drug, direction) edge, and it carries the drug name

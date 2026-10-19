@@ -107,8 +107,7 @@ export function flashRow(elm) {
  * Fold every headed section directly under `host` into a collapsed `<details>`: a
  * section whose first child is an `<h3>` becomes `details.disclosure.panel-sec` with
  * that heading as its `<summary>` and the rest in an indented `.panel-sec-body`; one
- * that already is a `<details>` (the drug panel's "Psychotropic interactions") just gets the
- * same classes and body. Classes and `data-tour-*` hooks carry over, so a tour step
+ * that already is a `<details>` just gets the same classes and body. Classes and `data-tour-*` hooks carry over, so a tour step
  * or flashRow still finds the section (and flashRow opens it). Unheaded blocks (the
  * title, intro, facts) stay as they are.
  * @param {HTMLElement} host
