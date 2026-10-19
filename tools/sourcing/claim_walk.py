@@ -178,7 +178,7 @@ def _effect_claims(add, kind, label, owner_kind, oid, nm, owner):
         for q in _qids(e.get("sources", [])):
             add(q, f"{label} {nm}: {mode} of it can cause (or contribute to) the "
                    f"clinical effect '{e['effect'].replace('_', ' ')}' in humans.",
-                CS.site(owner_kind, oid, "effects", f"{e['mode']}:{e['effect']}"))
+                CS.site(owner_kind, oid, "effects", f"{e['mode']}:{e['effect']}"), e)
 
 
 def _demographic_claims(add, kind, label, owner_kind, oid, nm, owner):
@@ -250,8 +250,7 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
         qid = ref if isinstance(ref, str) else ref["quote_id"]
         if on_cite is not None and site and not isinstance(ref, str):
             on_cite(site, ref)
-        if node is not None and site and id(node) not in bulleted:
-            bulleted.add(id(node))
+        if node is not None and site:
             _place_bullets(site, node)
         if qid in quotes and quotes[qid]["corpus"] not in EXCLUDE_CORPUS:
             kinds.setdefault(qid, kind["now"])
@@ -272,6 +271,9 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
         site. A bullet citing another sentence (a contradicting source, a measured Ki)
         is a claim of its own, judged at ``<site>/uncertainty[<kind>]``.
         """
+        if id(node) in bulleted:
+            return
+        bulleted.add(id(node))
         own = {r["quote_id"] for r in _qids(node.get("sources") or [])}
         for b in node.get("uncertainty") or []:
             for r in _qids(b.get("sources") or []):
@@ -442,7 +444,7 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
             kind["now"] = "drug_metabolites"
             for q in _qids(m.get("sources", [])):
                 add(q, f"Drug {nm} has an active metabolite, {mn}.",
-                    CS.site("drug", d["id"], f"metabolites[{m['id']}]"))
+                    CS.site("drug", d["id"], f"metabolites[{m['id']}]"), m)
             kind["now"] = "drug_metabolite_enzyme"
             for fb in m.get("formed_by", []):
                 step = f" by {fb['reaction']}" if fb.get("reaction") else ""
@@ -466,15 +468,17 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
             for q in _qids(mb.get("sources", [])):
                 add(q, f"{mn}, an active metabolite of {of}, acts on target "
                        f"'{mt}' as {mb.get('action') or 'a binder'}.",
-                    CS.site("metabolite", mid, f"bindings[{CS.binding_key(mb)}]"))
+                    CS.site("metabolite", mid, f"bindings[{CS.binding_key(mb)}]"), mb)
 
     for r in data["receptors"]:
         nm = r["name"]
         kind["now"] = "receptor_classification"
         for attr, info in (r.get("classification") or {}).items():
+            site = CS.site("receptor", r["id"], "classification", attr)
             for q in _qids(info.get("sources", [])):
-                add(q, f"Receptor {nm}: {attr} = '{r.get(attr)}'.",
-                    CS.site("receptor", r["id"], "classification", attr))
+                add(q, f"Receptor {nm}: {attr} = '{r.get(attr)}'.", site, info)
+            # An attribute no source attests can still be contradicted by one.
+            _place_bullets(site, info)
         kind["now"] = "receptor_locations"
         for region, srcs in (r.get("location_sources") or {}).items():
             for q in _qids(srcs):

@@ -512,5 +512,38 @@ class PerSiteSelectionTest(unittest.TestCase):
         self.assertEqual(self._select("--kinds", "drug_metabolite_bindings"), [self.NEW])
 
 
+class EveryPickedCitationIsPlacedTest(unittest.TestCase):
+    """The claim walk places every LLM-picked citation the dataset emits.
+
+    A citation the walk never reaches reads site ``*`` in the generator, so a judge
+    stamp at its real site never covers it and it ships unjudged forever: the
+    ``isolated_tissue`` bullets on five receptor effects did, because the effect walk
+    passed no node and its bullets were never placed (and check_data never gated them).
+    Code-copied rows (``machine`` / ``page_code``) need no judge and are not asked.
+    """
+
+    def test_no_picked_citation_is_left_unplaced(self):
+        import claim_walk as CW
+        data = CW.load_emitted()
+        quotes = {q["id"]: q for q in R._jsonl("quotes.jsonl")}
+        placed = set()
+        CW.reconstruct_claims(quotes, data, on_cite=lambda site, ref: placed.add(id(ref)))
+        missed = []
+
+        def walk(node, path):
+            if isinstance(node, dict):
+                if (node.get("quote_id") and id(node) not in placed
+                        and str(node.get("pipeline", "")).startswith("page_llm")):
+                    missed.append(f"{path}: {node['quote_id']}")
+                for k, v in node.items():
+                    walk(v, f"{path}.{k}")
+            elif isinstance(node, list):
+                for v in node:
+                    walk(v, path)
+        for name, rows in data.items():
+            walk(rows, name)
+        self.assertEqual(missed, [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

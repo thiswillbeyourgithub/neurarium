@@ -28,6 +28,7 @@ def check_effects(gate, meta, ctx, owner, is_receptor):
             report.error(f"{where}: an effect node with no source")
         for i, src in enumerate(e.get("sources") or []):
             gate.check_one(f"{where} sources[{i}]", src)
+        gate.check_uncertainty(where, e)
 
 
 def check_release_modulation(gate, r, bases):
