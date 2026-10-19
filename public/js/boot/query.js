@@ -13,6 +13,23 @@ export const QUERY = new URLSearchParams(window.location.search);
  */
 export const TOUR_FORCED = QUERY.get("tour") === "1";
 
+/**
+ * The query keys that describe a framed view (read by js/scene/camera.js
+ * applyViewParams, documented in docs/RUNNING.md "?params"). Only these freeze
+ * auto-rotate: a startup flag such as `?lang=fr` or `?tour=1` is not a view.
+ */
+export const VIEW_KEYS = Object.freeze(["view", "only", "solo", "ghost", "explode",
+  "transparency", "names", "autorotate", "ui"]);
+
+/**
+ * Whether a query names a framed view (any of VIEW_KEYS), so it should hold still.
+ * @param {URLSearchParams} params
+ * @returns {boolean}
+ */
+export function isFramedView(params) {
+  return VIEW_KEYS.some((k) => params.has(k));
+}
+
 /** `?explode=`: a deep link / screenshot fixes its own layout and framing. */
 export const HAS_EXPLODE = QUERY.has("explode");
 

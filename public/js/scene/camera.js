@@ -3,7 +3,7 @@
 
 import * as THREE from "three";
 import { EXPLODE_STRENGTH } from "./explode.js";
-import { QUERY } from "../boot/query.js";
+import { QUERY, isFramedView } from "../boot/query.js";
 
 // Padding around the whole assembled brain when a load / the reset button frames it
 // (createCameraFocus fitAll): 1 would touch the viewport edge.
@@ -444,7 +444,7 @@ export function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) 
  */
 export function applyViewParams(bundle) {
   const q = QUERY;
-  if ([...q].length === 0) return;
+  if (!isFramedView(q)) return;
   const { camera, controls, meshes, arrows, urlState } = bundle;
 
   const autorotate = document.getElementById("autorotate");
@@ -460,7 +460,8 @@ export function applyViewParams(bundle) {
   // wants its exact framed view to hold still, so set it explicitly here (off
   // unless the param asks for it) instead of letting the default keep spinning.
   // Unlike the keys above this is NOT the registry's "a missing key changes nothing"
-  // rule: ANY query param means a framed view, hence a still one.
+  // rule: any VIEW key (boot/query.js VIEW_KEYS) means a framed view, hence a still
+  // one; a query holding only startup flags (`?lang=`, `?tour=`) returned above.
   if (autorotate) {
     autorotate.checked = q.has("autorotate") && q.get("autorotate") !== "0";
     autorotate.dispatchEvent(new Event("change"));

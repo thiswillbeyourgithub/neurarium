@@ -56,7 +56,9 @@ screenshot-only. The keys also work as deep links:
 | `autorotate=1` | spin (deep links default auto-rotate off; this forces it on) |
 | `ui=0` | hide the panels + legend (clean shape shots) |
 
-`only`/`view` auto-fit the camera to whatever is visible.
+`only`/`view` auto-fit the camera to whatever is visible. `solo=id[,id2]` (with `ghost=0..1`) keeps the rest of the brain ghosted around the set (`tools/sculpt_shot.py`).
+
+Any of these view keys (the one list is `VIEW_KEYS` in `js/boot/query.js`) makes the page a framed view, so auto-rotate turns off unless `autorotate=1`; a query holding only startup flags (`?lang=fr`, `?tour=1`) is not a view and keeps the default spin.
 
 A separate startup flag, `?tour=1`, forces the guided tour to run on every load,
 bypassing the once-per-visitor "seen" gate (it still waits for the intro + Sources
