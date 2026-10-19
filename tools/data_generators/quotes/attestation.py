@@ -47,15 +47,11 @@ import re
 from typing import Any
 
 from ..presentation import KIND_TO_SIGN
+from ..provenance import _GRADE_RANK
 
 # The grade a sub-claim keeps when no cited quote names it: the value is still an
 # LLM-authored classification, exactly like an unattested receptor attribute.
 BASE_GRADE = "llm"
-
-# Strongest-first, so a claim attested by several quotes takes the best of them. Mirrors
-# ``_GRADE_RANK`` in generate_data.py; kept local so this module stays importable on its
-# own (it is a two-entry ordering, not a duplicated table).
-_GRADE_RANK = {"llm": 0, "sourced": 1, "verified": 2}
 
 # A transmitter is attested when the sentence names the substance or its "-ergic"
 # adjective. Keyed by the emitted ``neurotransmitter`` display string (English), which
