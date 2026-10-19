@@ -58,6 +58,7 @@ REPO = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO / "tools"))
 sys.path.insert(0, str(REPO / "tools" / "fetch"))
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import chirality                                                   # noqa: E402
 from lib import drugs_io                                                    # noqa: E402
 from lib.io_atomic import atomic_write_json                            # noqa: E402
@@ -347,7 +348,7 @@ def compound_proposals(cands: list[dict], gene_owner: dict[str, set[str]],
     pick, same Ki-vs-potency split, same 10 uM ceiling)."""
     slug = slugify(cands[0].get("Ligand"))
     lines = sorted({row_line(r) for r in cands})
-    (PAGES / f"{slug}.md").write_text(
+    page_path(PAGES, slug).write_text(
         f"# GtoPdb interactions: {plain(cands[0].get('Ligand'))}\n"
         f"# source: {URL} ({version})\n\n" + "\n".join(lines) + "\n",
         encoding="utf-8")

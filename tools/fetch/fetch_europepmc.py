@@ -101,6 +101,7 @@ ROOT = HERE.parent.parent                                       # repo root
 sys.path.insert(0, str(HERE))
 
 sys.path.insert(0, str(HERE.parent))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import polite_http                                            # noqa: E402 (the one polite GET)
 from lib.species import species_key                                # noqa: E402
 from lib.io_atomic import atomic_write_json, atomic_write_text      # noqa: E402
@@ -396,7 +397,7 @@ def store(rec: dict, refresh: bool = False, full_text: bool = False) -> bool:
     pmid = rec.get("pmid")
     if not pmid or not rec.get("abstractText"):
         return False
-    page = PAGES_DIR / f"{pmid}.md"
+    page = page_path(PAGES_DIR, pmid)
     want_full = full_text and licence_of(rec) is not None
     if page.exists() and not refresh and (
             not want_full or FULL_TEXT_MARKER in page.read_text("utf-8")):
@@ -530,7 +531,7 @@ def ki_prose(only: set | None, refresh: bool) -> int:
         paragraphs = cited_affinity_pmids(raw.read_text("utf-8"))
         cands = []
         for pmid in sorted({pm for _, pms in paragraphs for pm in pms}):
-            page = PAGES_DIR / f"{pmid}.md"
+            page = page_path(PAGES_DIR, pmid)
             raw_rec = RAW_DIR / f"{pmid}.json"
             # The full text is what a table row lives in: an abstract-only page whose
             # stored record says open access is re-stored once to add it.
@@ -768,7 +769,7 @@ def main() -> int:
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
     failed = 0
     for pmid in pmids:
-        page = PAGES_DIR / f"{pmid}.md"
+        page = page_path(PAGES_DIR, pmid)
         if page.exists() and not args.refresh:
             print(f"[skip] {pmid}: page on disk")
             continue

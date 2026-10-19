@@ -68,6 +68,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import chirality  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib import drugs_io  # noqa: E402
@@ -273,14 +274,14 @@ def pubchem_claims(cid: int, text: str) -> dict:
 def fetch_pubchem(cids: list[int], refresh: bool) -> None:
     """Write ``pubchem/pages/<cid>.md`` for every CID lacking one (all with --refresh)."""
     PUBCHEM_DIR.mkdir(parents=True, exist_ok=True)
-    todo = [c for c in cids if refresh or not (PUBCHEM_DIR / f"{c}.md").exists()]
+    todo = [c for c in cids if refresh or not page_path(PUBCHEM_DIR, c).exists()]
     today = _dt.date.today().isoformat()
     for i in range(0, len(todo), BATCH):
         chunk = todo[i:i + BATCH]
         url = PUBCHEM_PROPS.format(ids=",".join(map(str, chunk)))
         data = json.loads(polite_http.fetch(url))
         for props in data["PropertyTable"]["Properties"]:
-            (PUBCHEM_DIR / f"{props['CID']}.md").write_text(
+            page_path(PUBCHEM_DIR, props['CID']).write_text(
                 pubchem_page(props["CID"], props, today), encoding="utf-8")
         time.sleep(PAUSE_S)
     print(f"PubChem: {len(todo)} compound(s) fetched, {len(cids) - len(todo)} stored")
@@ -304,7 +305,7 @@ def write_b3db_pages(cited: dict[str, list[dict]], fetched: str) -> None:
                f"fetched: {fetched}", "licence: CC0 1.0", ""]
         for r in sorted({r["NO."]: r for r in rows}.values(), key=lambda r: int(r["NO."])):
             out += [row_line(r), f"B3DB row {r['NO.']} InChI: {r.get('Inchi') or '-'}"]
-        (B3DB_PAGES / f"{page}.md").write_text("\n".join(out) + "\n", encoding="utf-8")
+        page_path(B3DB_PAGES, page).write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
 def build(drugs: list[dict], rows: list[dict], fetched: str):
@@ -321,7 +322,7 @@ def build(drugs: list[dict], rows: list[dict], fetched: str):
         if cid is None:
             skipped[did] = "no PubChem CID in the drugbox"
             continue
-        page = PUBCHEM_DIR / f"{cid}.md"
+        page = page_path(PUBCHEM_DIR, cid)
         if not page.exists():
             skipped[did] = f"PubChem page {cid} not fetched"
             continue

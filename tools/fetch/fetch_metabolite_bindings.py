@@ -65,6 +65,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)          # sibling fetch_wikipedia_pharmacology.py + fetch_ki.py
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch/store/extract; no dup)
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
 import fetch_ki as ki  # noqa: E402  (PDSP Ki: discover a metabolite's measured targets, corpus #5)
 from lib.io_atomic import atomic_write_json  # noqa: E402
@@ -233,7 +234,7 @@ def load_page(title: str, no_fetch: bool, refresh: bool):
         real_title = page["title"]
         slug = wikistore.title_slug(real_title)   # store_page slugs on the real title
     soup = BeautifulSoup(html, "html.parser")
-    page_md = os.path.join(wikistore.PAGES_DIR, f"{slug}.md")
+    page_md = page_path(wikistore.PAGES_DIR, slug)
     page_text = open(page_md, encoding="utf-8").read() if os.path.exists(page_md) else ""
     return (True, real_title, slug, page_text, soup)
 

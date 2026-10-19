@@ -65,7 +65,7 @@ sys.path.insert(0, str(HERE))
 
 from lib import drugs_io                                                 # noqa: E402
 from lib import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
-from lib.page_file import page_file  # noqa: E402 (refuses a path-like page)
+from lib.page_file import page_file, page_path# noqa: E402 (refuses a path-like page)
 from lib import worklist_io  # noqa: E402
 from lib.corpora import wikipedia as wikistore                            # noqa: E402 (page_for)
 from lib.parse.durations import PEAK_RE, durations_in, durations_in_fr, sentences  # noqa: E402
@@ -126,7 +126,7 @@ def stahl_candidates(drug: dict, spans: dict, pattern=PEAK_RE) -> list[dict]:
         return []
     out: list[dict] = []
     for page in range(span[0], span[1] + 1):
-        path = stahl_index.PAGES / f"{page}.md"
+        path = page_path(stahl_index.PAGES, page)
         if path.exists():
             out += candidates_in(path.read_text(encoding="utf-8", errors="replace"),
                                  "stahl", page, pattern)

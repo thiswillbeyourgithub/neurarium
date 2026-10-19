@@ -42,6 +42,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 sys.path.insert(0, str(ROOT / "tools"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of, SENTENCE_SPLIT, REFERENCE_RE)
 from lib import target_aliases  # noqa: E402
 from lib import worklist_io  # noqa: E402
@@ -150,7 +151,7 @@ def candidates(oid: str, owner: dict, stahl: list[tuple[int, str]],
     out: list[dict] = []
     slug = wikistore.slug_of(owner["wikipedia"]) if owner["wikipedia"] else ""
     slug = PAGE_ALIASES.get(slug, slug)
-    path = WIKI_PAGES / f"{slug}.md"
+    path = page_path(WIKI_PAGES, slug)
     if slug and path.exists():
         for line in sentences(path.read_text("utf-8", errors="replace")):
             hit = _hits(line, owner["need"])

@@ -51,6 +51,7 @@ from fetch_gtopdb import (  # noqa: E402  (path shim above)
     file_date,
     http_json,
 )
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.io_atomic import atomic_write_json  # noqa: E402  (tools/ is on sys.path via fetch_gtopdb)
 from lib.gene_maps import receptor_genes  # noqa: E402
 
@@ -134,7 +135,7 @@ def fetch_one(owner: str, gene: str, kind: str, refresh: bool) -> dict | None:
             "quote": quote,
         })
 
-    page = PAGES / f"{payload['target_id']}.md"
+    page = page_path(PAGES, payload['target_id'])
     page.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     return {

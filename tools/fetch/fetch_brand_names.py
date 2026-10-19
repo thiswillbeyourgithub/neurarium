@@ -62,6 +62,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)                       # sibling fetch_wikipedia_pharmacology.py
 sys.path.insert(0, os.path.join(REPO, "tools"))  # drugs_io
 import fetch_wikipedia_pharmacology as wp  # noqa: E402  (reuse fetch_page/store_page/etc.)
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 store)
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib import drugs_io  # noqa: E402
@@ -161,7 +162,7 @@ def main():
                 if not prev:
                     continue
                 fr_title, fr_slug = prev["fr_title"], prev["fr_slug"]
-                page_text = open(os.path.join(PAGES_FR, f"{fr_slug}.md"), encoding="utf-8").read()
+                page_text = open(page_path(PAGES_FR, fr_slug), encoding="utf-8").read()
             else:
                 en_page = wikistore.fetch_page(en_title, "en")
                 fr_title = fr_title_of(en_page)

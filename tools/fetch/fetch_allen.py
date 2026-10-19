@@ -63,6 +63,7 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
 REPO = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib.gene_maps import TARGET_GENES  # noqa: E402
 ALLEN = REPO / "data_sources" / "allen"
@@ -441,7 +442,7 @@ def main() -> int:
 
     # emit one page per gene (the quote-gate reference text) + the confirm lists
     for g, lines in page_lines.items():
-        (PAGES / f"{g}.md").write_text("\n".join(sorted(set(lines))) + "\n", encoding="utf-8")
+        page_path(PAGES, g).write_text("\n".join(sorted(set(lines))) + "\n", encoding="utf-8")
     (ALLEN / "confirmed.json").write_text(json.dumps(confirmed, indent=2) + "\n", encoding="utf-8")
     if not args.skip_density:
         # The floor travels WITH the profiles (rather than being restated in the viewer)

@@ -59,6 +59,7 @@ sys.path.insert(0, str(HERE.parent))
 from fetch_gtopdb import BASE, clean, file_date, http_json  # noqa: E402
 from fetch_gtopdb_class import subject, target_record  # noqa: E402
 from data_generators import genes  # noqa: E402
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.species import species_key  # noqa: E402
 
 REPO = HERE.parent.parent
@@ -203,7 +204,7 @@ def fetch_one(owner: str, gene: str, kind: str, refresh: bool, offline: bool) ->
         payload["fetched"] = file_date(raw_path)
     payload["lines"] = flatten(payload)
     raw_path.write_text(json.dumps(payload, indent=1, ensure_ascii=False), encoding="utf-8")
-    (PAGES / f"{payload['target_id']}.md").write_text(
+    page_path(PAGES, payload['target_id']).write_text(
         page_text(payload, payload["lines"]), encoding="utf-8")
     return payload
 

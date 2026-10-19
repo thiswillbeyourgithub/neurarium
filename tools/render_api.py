@@ -31,6 +31,7 @@ from typing import Any
 from urllib.parse import quote
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "data_generators"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 import effect_index  # noqa: E402 (the effect -> receptors -> drugs join, BETA)
 import llms_txt  # noqa: E402 (SITE_URL + the version, defined once there)
 import node_id  # noqa: E402 (the id shape check_data enforces)
@@ -332,7 +333,7 @@ def render(data_dir: Path, out: Path, version: str) -> int:
         (out / kind).mkdir(parents=True)
         for ident, rec in records.items():
             _check_page_id(kind, ident)
-            (out / kind / f"{ident}.md").write_text(r.page(kind, ident, rec), encoding="utf-8")
+            page_path(out / kind, ident).write_text(r.page(kind, ident, rec), encoding="utf-8")
             n += 1
         (out / kind / "index.md").write_text(r.index(version, [kind]), encoding="utf-8")
     (out / "index.md").write_text(r.index(version), encoding="utf-8")

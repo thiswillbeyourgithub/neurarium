@@ -74,6 +74,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.corpora import bdpm                                    # noqa: E402 (the store + product join)
 from lib import drugs_io                                                 # noqa: E402
 from lib.io_atomic import atomic_write_json                         # noqa: E402
@@ -110,7 +111,7 @@ def page_text(product: dict, lines: list[str]) -> str:
 
 def write_page(product: dict, lines: list[str]) -> None:
     bdpm.PAGES_DIR.mkdir(parents=True, exist_ok=True)
-    (bdpm.PAGES_DIR / f"{product['cis']}.md").write_text(page_text(product, lines),
+    page_path(bdpm.PAGES_DIR, product['cis']).write_text(page_text(product, lines),
                                                     encoding="utf-8")
 
 
@@ -187,10 +188,10 @@ def main() -> int:
             entry = cache.get(did, {}) if not args.refresh else {}
             entry["brands"] = bdpm.brands_for(found, keys)
             for b in entry["brands"]:
-                if not (bdpm.PAGES_DIR / f"{b['cis']}.md").exists():
+                if not page_path(bdpm.PAGES_DIR, b['cis']).exists():
                     write_page(products[b["cis"]], [])
             wants = args.all or only or not drug.get("tmax") or not drug.get("half_life")
-            cached = entry.get("cis") and (bdpm.PAGES_DIR / f"{entry['cis']}.md").exists()
+            cached = entry.get("cis") and page_path(bdpm.PAGES_DIR, entry['cis']).exists()
             if not found:
                 outcome = "no-product"
             elif cached and not args.refresh:

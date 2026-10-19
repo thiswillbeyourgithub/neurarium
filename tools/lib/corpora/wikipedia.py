@@ -30,6 +30,7 @@ RAW_DIR = os.path.join(DATA_DIR, "raw")
 PAGES_DIR = os.path.join(DATA_DIR, "pages")
 META_PATH = os.path.join(REPO, "public", "data", "meta.json")
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import polite_http  # noqa: E402  (the one polite GET + User-Agent)
 from data_generators.drugs import ENZYMES  # noqa: E402  (stdlib-only module)
 
@@ -92,7 +93,7 @@ def page_for(drug: dict) -> str | None:
     slug = PAGE_ALIASES.get(drug["id"]) or slug_of(drug.get("wikipedia") or "")
     if not slug:
         return None
-    path = os.path.join(PAGES_DIR, f"{slug}.md")
+    path = page_path(PAGES_DIR, slug)
     return path if os.path.exists(path) else None
 
 
@@ -146,7 +147,7 @@ def store_page(page: dict, page_text: str,
     raw_path = os.path.join(raw_dir, f"{slug}.html")
     with open(raw_path, "w", encoding="utf-8") as f:
         f.write(f"<!--\n{header}-->\n{page['html']}")
-    pages_path = os.path.join(pages_dir, f"{slug}.md")
+    pages_path = page_path(pages_dir, slug)
     with open(pages_path, "w", encoding="utf-8") as f:
         f.write(f"<!-- {page['title']} -->\n" + header.replace("\n", " | ") + "\n\n"
                 + page_text)

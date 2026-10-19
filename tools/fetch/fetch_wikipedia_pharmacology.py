@@ -66,6 +66,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)          # sibling fetch_ki.py
 import fetch_ki  # noqa: E402  (reuse norm / parse_ki / NAME_PATTERNS, no duplication)
 sys.path.insert(0, os.path.dirname(HERE))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.corpora.wikipedia import (  # noqa: E402  (the corpus #9 store, one reader)
     PAGES_DIR, RAW_DIR, fetch_page, load_valid_ids, store_page, stored_meta, title_slug)
 
@@ -685,7 +686,7 @@ def main() -> None:
             html = f.read()
         page = {"title": title, "revid": "?", "url": "", "oldid_url": "",
                 "fetched_at": "(stored)", "html": html}
-        pages_path = os.path.join(PAGES_DIR, f"{slug}.md")
+        pages_path = page_path(PAGES_DIR, slug)
     else:
         page = fetch_page(title)
         soup0 = BeautifulSoup(page["html"], "html.parser")

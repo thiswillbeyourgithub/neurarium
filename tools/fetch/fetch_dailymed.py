@@ -74,6 +74,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io                                                 # noqa: E402
 from lib.io_atomic import atomic_write_json                         # noqa: E402
 from lib import polite_http  # noqa: E402 (the one polite GET)
@@ -237,14 +238,14 @@ def _store(meta: dict, xml: str, lines: list[str]) -> None:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     (RAW_DIR / f"{meta['setid']}.xml").write_text(xml, encoding="utf-8")
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
-    (PAGES_DIR / f"{meta['setid']}.md").write_text(page_text(meta, lines), encoding="utf-8")
+    page_path(PAGES_DIR, meta['setid']).write_text(page_text(meta, lines), encoding="utf-8")
 
 
 def fetch_quote_label(setid: str, *, refresh: bool) -> str:
     """Store one :data:`QUOTE_LABELS` label by set id. Returns a one-word outcome."""
     if not SETID.fullmatch(setid):
         raise ValueError(f"QUOTE_LABELS: {setid!r} is not a DailyMed set id (a UUID)")
-    if not refresh and (PAGES_DIR / f"{setid}.md").exists():
+    if not refresh and page_path(PAGES_DIR, setid).exists():
         return "cached"
     query = urllib.parse.urlencode({"setid": setid})
     body = polite_http.fetch_or_none(f"{API}/spls.json?{query}")
@@ -263,7 +264,7 @@ def fetch_drug(drug: dict, *, refresh: bool, cache: dict) -> str:
     """Store one drug's label. Returns a one-word outcome for the run summary."""
     did = drug["id"]
     if not refresh and did in cache:
-        page = PAGES_DIR / f"{cache[did]['setid']}.md"
+        page = page_path(PAGES_DIR, cache[did]['setid'])
         if page.exists():
             return "cached"
     name = drug.get("name") or did
@@ -311,7 +312,7 @@ def redownload(did: str, cache: dict) -> str:
     if not lines:
         (RAW_DIR / f"{meta['setid']}.xml").write_text(xml, encoding="utf-8")
         return "no-pk-section"
-    page = PAGES_DIR / f"{meta['setid']}.md"
+    page = page_path(PAGES_DIR, meta['setid'])
     old = page.read_text(encoding="utf-8").split("\n\n", 1)[-1] if page.exists() else ""
     _store(meta, xml, lines)
     return "same" if old == "\n".join(lines) + "\n" else "changed"

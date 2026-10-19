@@ -41,6 +41,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io                                                 # noqa: E402
 from lib.parse.durations import parse_duration  # noqa: E402
 from lib import stahl_index                                              # noqa: E402 (the one INDEX.md reader)
@@ -82,7 +83,7 @@ def scan_pages(start: int, end: int) -> tuple[list[dict], list[dict]]:
     seen_hl: set[str] = set()
     seen_met: set[str] = set()
     for page in range(start, end + 1):
-        path = stahl_index.PAGES / f"{page}.md"
+        path = page_path(stahl_index.PAGES, page)
         if not path.exists():
             continue
         for raw in path.read_text(encoding="utf-8").splitlines():

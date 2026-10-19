@@ -48,3 +48,17 @@ def page_file(pages_dir: str | Path | None, page: Any) -> Path | None:
     if not pages_dir or name is None:
         return None
     return Path(pages_dir) / f"{name}.md"
+
+
+def page_path(pages_dir: str | Path, page: Any) -> Path:
+    """``<pages_dir>/<page>.md`` for a caller that writes or must read the page: a
+    page id failing :func:`page_name` raises instead of returning None, so a path-like
+    id can never name a file outside ``pages_dir``.
+
+    >>> page_path("data_sources/gtopdb/pages", 61).as_posix()
+    'data_sources/gtopdb/pages/61.md'
+    """
+    path = page_file(pages_dir, page)
+    if path is None:
+        raise ValueError(f"refusing page id {page!r} under {pages_dir}: not a bare token")
+    return path

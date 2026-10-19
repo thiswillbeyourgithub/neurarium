@@ -39,6 +39,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 sys.path.insert(0, str(ROOT / "tools" / "sourcing"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from data_generators import origin  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
@@ -59,7 +60,7 @@ def us_holder(rec: dict, pages_dir: Path) -> tuple[str, str, str] | None:
     """``(name, quote, page)`` for one Drugs@FDA cache record, or None."""
     if rec.get("status") != "found" or not rec.get("application"):
         return None
-    text = _read(pages_dir / f"{rec['application']}.md")
+    text = _read(page_path(pages_dir, rec['application']))
     m = FDA_TITLE_RE.match((text or "").split("\n", 1)[0])
     if not m or m.group(2) != rec["application"] or m.group(3) == NO_SPONSOR:
         return None
@@ -70,7 +71,7 @@ def fr_holders(rec: dict, pages_dir: Path) -> list[tuple[str, str, str]]:
     """``(name, quote, page)`` per distinct holder of the drug's BDPM brand products."""
     out, seen = [], set()
     for brand in rec.get("brands") or []:
-        text = _read(pages_dir / f"{brand['cis']}.md") or ""
+        text = _read(page_path(pages_dir, brand['cis'])) or ""
         for line in text.splitlines():
             m = BDPM_HOLDER_RE.match(line)
             if m:

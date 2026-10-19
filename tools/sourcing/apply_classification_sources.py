@@ -69,6 +69,7 @@ SITES = {"presynaptic": {"presynaptic"}, "postsynaptic": {"postsynaptic"},
          "both": {"presynaptic", "postsynaptic"}}
 
 sys.path.insert(0, str(TOOLS))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.quote_match import normalize_for_match  # noqa: E402  (reuse the gate's normalizer)
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
@@ -138,7 +139,7 @@ SIGN_NEUTRAL_MECHANISMS = {"G protein independent mechanism"}
 def page_text(target_id: int, cache: dict[int, str]) -> str:
     """Normalized text of a target's cached classification page (the quote gate)."""
     if target_id not in cache:
-        p = PAGES / f"{target_id}.md"
+        p = page_path(PAGES, target_id)
         cache[target_id] = normalize_for_match(p.read_text("utf-8")) if p.exists() else ""
     return cache[target_id]
 

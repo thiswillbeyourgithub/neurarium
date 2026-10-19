@@ -41,6 +41,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from pipeline.judged import ECHO_QID  # noqa: E402
@@ -125,8 +126,8 @@ INSTRUCTIONS = (
     "a chain over several sentences is {picks: [{index, qid}, ...], name}.") + ECHO_QID
 
 
-def page_path(slug: str) -> Path:
-    return Path(wikistore.PAGES_DIR) / f"{slug}.md"
+def article_path(slug: str) -> Path:
+    return page_path(Path(wikistore.PAGES_DIR), slug)
 
 
 def _candidate(page: str, line: str) -> dict:
@@ -151,7 +152,7 @@ def drug_candidates(drug: dict) -> list[dict]:
 
 def company_candidates(slug: str) -> list[dict]:
     """A company article's location rows, then its country / successor sentences."""
-    path = page_path(slug)
+    path = article_path(slug)
     if not path.exists():
         return []
     text = path.read_text("utf-8", errors="replace")

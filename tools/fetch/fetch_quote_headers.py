@@ -63,6 +63,7 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from checks.sources.stahl import stahl_monograph_ranges  # noqa: E402  (the range gate)
 from lib.quote_match import emitted_page_dirs, normalize_for_match  # noqa: E402
@@ -191,7 +192,7 @@ class StahlPages:
         byte-identical to ``normalize_for_match`` over the whole file.
         """
         if page not in self._pages:
-            path = os.path.join(self.pages_dir, f"{page}.md")
+            path = page_path(self.pages_dir, page)
             if not os.path.exists(path):
                 self._pages[page] = ([], "")
                 return self._pages[page]

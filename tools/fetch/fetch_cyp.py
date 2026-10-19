@@ -39,6 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import stahl_index  # noqa: E402 (the one INDEX.md reader)
 from lib.quote_match import normalize_for_match  # noqa: E402  (the quote gate's one normalizer)
 from data_generators.drugs import ENZYMES  # noqa: E402  (the modeled isoform ids)
@@ -122,7 +123,7 @@ def page_holding(quote: str, lo: int, hi: int) -> int | None:
     """The page-file number inside [lo, hi] whose text contains `quote` verbatim."""
     needle = normalize_for_match(quote)
     for page in range(lo, hi + 1):
-        path = os.path.join(PAGES, f"{page}.md")
+        path = page_path(PAGES, page)
         if not os.path.exists(path):
             continue
         with open(path, encoding="utf-8") as f:

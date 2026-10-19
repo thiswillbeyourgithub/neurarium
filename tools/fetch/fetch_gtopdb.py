@@ -48,6 +48,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent.parent   # script lives in tools/fetch/
 sys.path.insert(0, str(REPO / "tools"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib.gene_maps import RECEPTOR_GENES  # noqa: E402
 OUT = REPO / "data_sources" / "gtopdb"
@@ -187,7 +188,7 @@ def main() -> int:
         # The header stamps the download date (data_generators/freshness.py reads it);
         # a raw cache from before stamping falls back to its own file date.
         lines = [clean(e.get("tissue", "")) for e in entries if e.get("tissue")]
-        page = PAGES / f"{payload['target_id']}.md"
+        page = page_path(PAGES, payload['target_id'])
         page.write_text(f"fetched: {payload.get('fetched') or file_date(raw_path)}\n"
                         + "\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
 

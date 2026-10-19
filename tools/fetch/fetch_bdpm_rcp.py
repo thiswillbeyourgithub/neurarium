@@ -69,6 +69,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent  # repo root
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(HERE))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib.corpora import bdpm  # noqa: E402 (section_body, html_lines, the product join, RCP_URL)
@@ -339,7 +340,7 @@ def main() -> int:
                 continue
             cis, product, best = got
             by_name.append(f"{did} ({best['ema']['product']}, {best['ema']['language']})")
-        (PAGES_DIR / f"{cis}.md").write_text(page_text(product, cis, best), encoding="utf-8")
+        page_path(PAGES_DIR, cis).write_text(page_text(product, cis, best), encoding="utf-8")
         cache[did] = {"page": cis, "denomination": product.get("denomination"),
                       "fetched": best["fetched"], "date_source": best["date_source"],
                       "sections": sorted(best["sections"])}

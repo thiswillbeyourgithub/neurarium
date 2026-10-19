@@ -55,6 +55,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import polite_http  # noqa: E402 (the one polite GET + User-Agent)
 from lib import chirality  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
@@ -243,9 +244,10 @@ def main() -> int:
         counts[rec["status"]] = counts.get(rec["status"], 0) + 1
         if rec["status"] == "found":
             app = by_num[rec["application"]]
-            (PAGES_DIR / f"{rec['application']}.md").write_text(
+            page_path(PAGES_DIR, rec['application']).write_text(
                 page_text(app, rec["date"], export_date, fetched), encoding="utf-8")
-    keep = {f"{r['application']}.md" for r in out.values() if r["status"] == "found"}
+    keep = {page_path(PAGES_DIR, r['application']).name for r in out.values()
+            if r["status"] == "found"}
     for stale in PAGES_DIR.glob("*.md"):
         if stale.name not in keep:      # a drug no longer found: its page is not cited
             stale.unlink()

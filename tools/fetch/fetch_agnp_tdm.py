@@ -49,6 +49,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402  (the gate's own normalizer)
@@ -237,7 +238,7 @@ class Pages:
 
     def has(self, page: int, quote: str) -> bool:
         if page not in self._cache:
-            path = self.dir / f"{page}.md"
+            path = page_path(self.dir, page)
             self._cache[page] = (normalize_for_match(path.read_text("utf-8"))
                                  if path.exists() else "")
         return bool(quote) and normalize_for_match(quote) in self._cache[page]

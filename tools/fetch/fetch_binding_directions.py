@@ -83,6 +83,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)                              # sibling fetch_* modules
 sys.path.insert(0, os.path.join(REPO, "tools"))       # drugs_io, target_aliases
 
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from lib import target_aliases as ta  # noqa: E402  (the shared "quote names the target" test)
@@ -302,7 +303,7 @@ def build_search(drugs: list[dict], metabolites: list[dict] = ()) -> list[dict]:
         if t_acts:
             elsewhere.append(f"wikipedia_pharm table says {', '.join(t_acts)}")
         if metab:
-            en_pages = [os.path.join(EN_PAGES, f"{p}.md") for p in metab_pages.get(
+            en_pages = [page_path(EN_PAGES, p) for p in metab_pages.get(
                 unknown.fold(metab), [])]
         else:
             en = wikistore.page_for(drug)
@@ -323,7 +324,7 @@ def build_search(drugs: list[dict], metabolites: list[dict] = ()) -> list[dict]:
                     "direction word", "hits": en_hits + len(t_acts)})
         # Wikipedia FR (#10): the prose.
         fr = catwl._fr_slug(drug, brand)
-        fr_lines = _offered(_lines(os.path.join(FR_PAGES, f"{fr}.md")) if fr else [], al,
+        fr_lines = _offered(_lines(page_path(FR_PAGES, fr)) if fr else [], al,
                             FR_DIRECTION_RE, must_mention=metab)
         cands += [{"corpus": "wikipedia_fr", "page": fr, "line": ln} for ln in fr_lines]
         log.append({"corpus": "wikipedia_fr", "lookup": f"article {fr or 'none found'}: "
@@ -334,7 +335,7 @@ def build_search(drugs: list[dict], metabolites: list[dict] = ()) -> list[dict]:
             for pmid in hit["read"]:
                 # An abstract is about many compounds, so its sentence must name this
                 # one (unlike a sentence of the drug's own article).
-                for ln in _offered(_lines(os.path.join(str(epmc.PAGES_DIR), f"{pmid}.md")),
+                for ln in _offered(_lines(page_path(epmc.PAGES_DIR, pmid)),
                                    al, DIRECTION_RE, must_mention=ligand):
                     cands.append({"corpus": "europepmc", "page": pmid, "line": ln})
             log.append({"corpus": "europepmc", "query": hit["query"], "hits": hit["hits"],

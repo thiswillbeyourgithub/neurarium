@@ -40,6 +40,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root
 sys.path.insert(0, str(ROOT / "tools"))
+from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from lib.worklist_io import merge_scoped  # noqa: E402
@@ -90,12 +91,12 @@ def drug_class_rows(text: str) -> list[str]:
 
 def _fr_slug(drug: dict, brand: dict) -> str | None:
     slug = (brand.get(drug["id"]) or {}).get("fr_slug")
-    if slug and (PAGES_FR / f"{slug}.md").exists():
+    if slug and page_path(PAGES_FR, slug).exists():
         return slug
     en = wikistore.page_for(drug)
     if en:
         guess = os.path.splitext(os.path.basename(en))[0]
-        if (PAGES_FR / f"{guess}.md").exists():
+        if page_path(PAGES_FR, guess).exists():
             return guess
     return None
 
@@ -110,7 +111,7 @@ def candidates(drug: dict, brand: dict) -> list[dict]:
             out.append({"corpus": "wikipedia_pharm", "page": slug, "line": line})
     fr = _fr_slug(drug, brand)
     if fr:
-        text = (PAGES_FR / f"{fr}.md").read_text(encoding="utf-8", errors="replace")
+        text = page_path(PAGES_FR, fr).read_text(encoding="utf-8", errors="replace")
         for line in lead_sentences(text):
             out.append({"corpus": "wikipedia_fr", "page": fr, "line": line})
     seen: set[tuple] = set()
