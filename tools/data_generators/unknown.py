@@ -56,6 +56,8 @@ from typing import Any
 
 from lib.text_fold import ascii_key
 
+from .provenance_stats import own_targets
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 UNKNOWN_LOG_PATH = os.path.join(ROOT, "tools", "generated_cache", "unknown_searches.json")
 
@@ -166,8 +168,7 @@ def apply_unknown(drugs: list[dict[str, Any]], metabolites: list[dict[str, Any]]
     owners = {("drug", d["id"]): d for d in drugs}
     owners.update({("metabolite", m["id"]): m for m in metabolites})
     owners.update({("receptor", r["id"]): r for r in receptors})
-    owners.update({("target", tid): t for tid, t in (targets or {}).items()
-                   if t.get("type") != "receptor"})
+    owners.update({("target", tid): t for tid, t in own_targets(targets or {}).items()})
     stats = {"stamped": 0, "superseded": 0}
     for key, entry in sorted(log.items()):
         kind = entry.get("kind")

@@ -16,6 +16,17 @@ from . import node_kinds as node_kinds_mod
 from .provenance import _GRADE_RANK, DEFAULT_PROVENANCE, product_holders
 
 
+def own_targets(drug_targets: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """The non-receptor drug targets, by id. A receptor-linked target (``type:
+    "receptor"``) is already its receptor's node, so every target kind skips it, never
+    counting it twice.
+
+    >>> sorted(own_targets({"sert": {"type": "transporter"}, "d2": {"type": "receptor"}}))
+    ['sert']
+    """
+    return {tid: t for tid, t in drug_targets.items() if t.get("type") != "receptor"}
+
+
 def _strongest_grade(sources: list[dict[str, Any]] | None) -> int:
     """The strongest provenance rank among a list of source objects (0 if none)."""
     best = 0
@@ -335,12 +346,10 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # when unsourced). A ubiquitous receptor is one "throughout the brain" node (its
     # "ALL"-keyed sources). Shared by receptors and their non-receptor-target mirror.
     _llm_rank = _GRADE_RANK[DEFAULT_PROVENANCE]
-    # The non-receptor drug targets: a receptor-linked target (``type: "receptor"``) is
-    # already counted as its receptor, so every target kind skips it, never twice.
-    own_targets = [t for t in drug_targets.values() if t.get("type") != "receptor"]
+    targets = list(own_targets(drug_targets).values())
     # The owners of the gene-keyed node kinds (effects, demographics, variants):
     # receptors and non-receptor targets alike.
-    gene_owners = (*receptors, *own_targets)
+    gene_owners = (*receptors, *targets)
 
     # A (grade, is_uncertain) pair, a region its animal-only evidence flags
     # (quotes/animal_evidence.py, ``location_uncertainty``) bucketing ``uncertain``.
@@ -361,16 +370,16 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # Non-receptor drug target classifications (type / system), graded per target.
     # Receptor-linked targets are skipped (already counted as receptors, not twice).
     target_grades = [t.get("classification_provenance", DEFAULT_PROVENANCE)
-                     for t in own_targets]
+                     for t in targets]
     # Target expression-region nodes: the mirror of receptor_locations (a target never
     # sets ubiquitous, so only the per-region branch runs; receptor-linked targets are
     # skipped, their regions counted as the receptor's).
-    target_location_grades = [g for t in own_targets for g in location_grades(t, "regions")]
-    target_density_grades = [t["density"]["grade"] for t in own_targets if t.get("density")]
+    target_location_grades = [g for t in targets for g in location_grades(t, "regions")]
+    target_density_grades = [t["density"]["grade"] for t in targets if t.get("density")]
     # Target tone-polarity sub-claims: one graded node per non-receptor target that
     # carries a direction-flipping flag (vesicular / sign / synaptic). Kept distinct
     # from the target's type/system classification so a wrong direction shows honestly.
-    target_polarity_grades = [t["polarity_provenance"] for t in own_targets
+    target_polarity_grades = [t["polarity_provenance"] for t in targets
                               if "polarity_provenance" in t]
     # Clinical-effect nodes (kind receptor_effect, BETA): one per (owner, mode, effect),
     # on receptors and non-receptor targets alike. Like a density profile, a node exists
@@ -404,7 +413,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
     for rec in (*structures, *receptors, *drugs):
         ref_grades.append(_GRADE_RANK.get(rec.get("wikipedia_provenance"), 0)
                           if rec.get("wikipedia") else 0)
-    for tgt in own_targets:
+    for tgt in targets:
         ref_grades.append(_GRADE_RANK.get(tgt.get("wikipedia_provenance"), 0)
                           if tgt.get("wikipedia") else 0)
 
