@@ -435,6 +435,43 @@ class TableCellTest(unittest.TestCase):
             T.typed_action("partial agonist / functional antagonist", "receptor"))
 
 
+@unittest.skipUnless(HAS_BS4, "the table fetcher imports bs4 at module level")
+class TableProposalsReproducibleTest(unittest.TestCase):
+    """A re-run after the applier must reproduce the committed proposals file: a binding
+    the table pass already directed stays proposed (the applier skips it as already
+    applied) instead of vanishing because it is no longer ``affinity_only``."""
+
+    HTML = ("<table><tr><th>Target</th><th>Ki (nM)</th><th>Action</th></tr>"
+            "<tr><td>SERT</td><td>900</td><td>Reuptake inhibitor</td></tr>"
+            "<tr><td>NET</td><td>1340</td><td>Reuptake inhibitor</td></tr>"
+            "<tr><td>DAT</td><td>2560</td><td>Reuptake inhibitor</td></tr></table>")
+
+    def proposed(self, bindings):
+        import collections
+        drug = {"id": "testdrug", "bindings": bindings}
+        types = {"sert": "transporter", "net": "transporter", "dat": "transporter"}
+        rows = T.proposals_for(self.HTML, drug, {"sert", "net", "dat"}, types,
+                               collections.Counter())
+        return [r["target"] for r in rows]
+
+    def test_an_applied_table_direction_stays_proposed(self):
+        self.assertEqual(self.proposed([
+            {"target": "sert", "affinity_only": True},
+            {"target": "net", "action": "reuptake_inhibitor", "sources": [
+                {"corpus": "wikipedia_pharm", "page": "testdrug",
+                 "quote": "NET | 1340 | Reuptake inhibitor", "extraction": "code"}]},
+        ]), ["sert", "net"])
+
+    def test_a_direction_from_elsewhere_is_never_proposed(self):
+        # DAT's direction came from Stahl (or the prose pass): confirm-only, left alone.
+        self.assertEqual(self.proposed([
+            {"target": "dat", "action": "reuptake_inhibitor", "sources": [
+                {"corpus": "stahl", "page": 12, "quote": "blocks DAT"}]},
+            {"target": "net", "action": "reuptake_inhibitor", "sources": [
+                {"corpus": "wikipedia_pharm", "page": "testdrug", "quote": "NET acts"}]},
+        ]), [])
+
+
 class SearchTest(unittest.TestCase):
     """The UNKNOWN search's applier (``apply_search``) and its log (``unknown_log``)."""
 

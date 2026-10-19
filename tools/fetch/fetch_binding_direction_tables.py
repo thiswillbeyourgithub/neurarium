@@ -159,10 +159,21 @@ def table_rows(table, valid_ids: set[str]) -> list[dict]:
     return rows
 
 
+def _table_applied(binding: dict) -> bool:
+    """Whether this pass's applier already wrote the binding's direction (a code-read
+    ``wikipedia_pharm`` source). Such a binding stays a proposal, so a re-run after
+    ``apply_binding_directions.py --tables`` reproduces the committed proposals file
+    instead of emptying it (the applier skips it as "already applied")."""
+    return any(src.get("corpus") == "wikipedia_pharm" and src.get("extraction") == "code"
+               for src in binding.get("sources", []))
+
+
 def proposals_for(html: str, drug: dict, valid_ids: set[str], target_types: dict[str, str],
                   stats: collections.Counter) -> list[dict]:
-    """The table-stated directions for one drug's affinity-only bindings, deduplicated."""
-    affinity_only = {b["target"] for b in drug.get("bindings", []) if b.get("affinity_only")}
+    """The table-stated directions for one drug's affinity-only bindings (and the ones this
+    pass already directed, see ``_table_applied``), deduplicated."""
+    affinity_only = {b["target"] for b in drug.get("bindings", [])
+                     if b.get("affinity_only") or _table_applied(b)}
     if not affinity_only:
         return []
     soup = BeautifulSoup(html, "html.parser")
