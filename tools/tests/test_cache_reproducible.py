@@ -11,8 +11,7 @@ Author-side: skipped on a clone without ``data_sources/``. ``FAST`` always runs 
 ``SLOW`` (tens of seconds each) runs only with ``NEURARIUM_SLOW_TESTS=1``.
 
 Not listed, because their committed caches are stale today (a rebuild is new data that wants
-its own judge pass, not a test edit): ``receptor_effects`` and
-``fetch_metabolite_bindings``. ``projection_worklist`` reproduces but is left out on
+its own judge pass, not a test edit): ``fetch_metabolite_bindings``. ``projection_worklist`` reproduces but is left out on
 runtime alone (about 17 minutes of single-threaded window matching).
 Add one here once its cache has been refreshed.
 
@@ -46,6 +45,7 @@ SLOW = {
     "fetch_classification_worklist": "classification_worklist.json",
     "fetch_binding_direction_tables": "binding_directions_tables.json",
     "fetch_tmax": "tmax_worklist.json",
+    "fetch_receptor_effects": "receptor_effects_worklist.json",
 }
 
 
