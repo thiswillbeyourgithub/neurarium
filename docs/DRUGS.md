@@ -85,7 +85,7 @@ fixed Stahl list.
   add up without each counting as a strong one; `factor` comes from `meta.tone_factors` (`TONE_FACTORS` in
   `tools/data_generators/drugs.py`: an autoreceptor counts 0.5x, its brake on release being partial). The
   gem dots and the overlay's `weight` keep the floored `affinityWeightOf`. Class +
-  Nomenclature are clickable (open search with a `class:`/`nbn:` filter) and each carries its grade
+  Nomenclature (rows of the "Administrative" section, above the regulatory history) are clickable (open search with a `class:`/`nbn:` filter) and each carries its grade
   pill: the NbN quote source, and the class classification's `category_provenance` (its own node, kind
   `drug_categories`, default `llm`, upgradeable via `DRUG_CATEGORY_PROVENANCE` / `category_sources`).
 - **Half-life + active metabolites (Stahl PK).** A drug carries an elimination `half_life`

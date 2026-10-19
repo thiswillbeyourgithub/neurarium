@@ -161,6 +161,23 @@ export function showDrug(P, drug, opts = {}) {
     introWrap.appendChild(wiki);
   }
 
+  // Commercial brand names, each its own graded node (Stahl backs na, Wikipedia
+  // eu/fr). Listed in the locale's order (the primary/most-iconic brand first, the
+  // same one shown after the drug name everywhere); the region tag is never shown.
+  // Each brand carries its own provenance pill, so no node is left unbadged and a
+  // mixed-grade list (once eu/fr are added) reads honestly.
+  // A brand sold as one formulation (Seroquel XR) is listed under it in the
+  // Pharmacokinetics table instead (see below), so this row keeps the molecule's.
+  const appendBrand = (host, b) => {
+    host.appendChild(el("span", "bind-target", b.name));
+    // A brand's grade is its top-region source's (the one the row keeps).
+  host.appendChild(nodePill({ ...b, provenance: b.sources && b.sources.length ? b.sources[0].provenance : null }));
+  };
+  // Administrative: the class and NbN nomenclature, the regulatory history (first
+  // approval + years since, withdrawals) and the brands, i.e. what the drug is as a
+  // named, marketed product rather than as a molecule.
+  const admin = el("div", "info-bindings info-admin");
+  admin.appendChild(el("h3", null, t("drug.admin")));
   // Classification facts: the coarse class(es) and the NbN nomenclature line.
   // Both are clickable: each runs a search (class:"..." / nbn:"...") that filters
   // to the matching drugs, so you can pivot from one drug to its whole class. The
@@ -192,29 +209,9 @@ export function showDrug(P, drug, opts = {}) {
       note: drug.nbnNonstandard ? t("drug.nbnNonstandard") : null,
     });
   }
-  if (facts.childElementCount) body.appendChild(facts);
-
-  // Commercial brand names, each its own graded node (Stahl backs na, Wikipedia
-  // eu/fr). Listed in the locale's order (the primary/most-iconic brand first, the
-  // same one shown after the drug name everywhere); the region tag is never shown.
-  // Each brand carries its own provenance pill, so no node is left unbadged and a
-  // mixed-grade list (once eu/fr are added) reads honestly.
-  // A brand sold as one formulation (Seroquel XR) is listed under it in the
-  // Pharmacokinetics table instead (see below), so this row keeps the molecule's.
-  const appendBrand = (host, b) => {
-    host.appendChild(el("span", "bind-target", b.name));
-    // A brand's grade is its top-region source's (the one the row keeps).
-  host.appendChild(nodePill({ ...b, provenance: b.sources && b.sources.length ? b.sources[0].provenance : null }));
-  };
-  // Administrative: the regulatory history (first approval + years since,
-  // withdrawals) and the brands, i.e. what the drug is as a marketed product rather
-  // than as a molecule. Omitted when it would hold nothing.
-  const admin = el("div", "info-bindings info-admin");
-  admin.appendChild(el("h3", null, t("drug.admin")));
-  const history = el("div", "info-facts");
-  appendDrugHistory(history, drug,
+  appendDrugHistory(facts, drug,
     { addFactRow, nodePill, t, lang: window.__I18N__.lang });
-  if (history.childElementCount) admin.appendChild(history);
+  if (facts.childElementCount) admin.appendChild(facts);
   const moleculeBrands = (drug.brandsOrdered || []).filter((b) => !b.release);
   if (moleculeBrands.length) {
     const brandsEl = el("div", "info-brands");
