@@ -46,8 +46,8 @@ reason itself a badged, quote-gated claim.
 **Nothing here is authored per site.** The flags and every bullet are derived from the
 emitted data (the heading trail, the quote text, the drug's other sources, the Ki), so a
 data edit cannot leave a stale flag behind and a new drug is covered the day it lands. The
-derivation reproduces, binding for binding, the 89 that the hand audit in
-``docs/SOURCING_GAPS.md`` had flagged.
+derivation reproduces, binding for binding, the 89 that a hand audit of every Stahl
+side-effect quote had flagged.
 
 **No prose is stored.** A bullet is a ``kind`` from :data:`UNCERTAINTY_REASONS` plus
 optional slot ``args``; the viewer builds the sentence from an i18n key, so both languages

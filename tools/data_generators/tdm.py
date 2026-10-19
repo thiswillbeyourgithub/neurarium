@@ -15,8 +15,8 @@ and one enzyme merge:
   lack while having a range (THC, tranylcypromine).
 * :func:`merge_enzymes`: Table 1's substrate isoforms, ranked after the other
   metabolism corpora: its quote is appended to a row another corpus already states,
-  and an isoform none states becomes a new substrate row (see
-  ``docs/SOURCING_GAPS.md`` 6d).
+  and an isoform none states becomes a new substrate row (rows left out:
+  ``NOT_ADDED``, and ``docs/SOURCING_GAPS.md`` "Metabolism coverage").
 
 Built with the help of Claude Code.
 """

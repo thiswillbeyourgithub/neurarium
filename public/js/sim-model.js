@@ -134,8 +134,8 @@ export function halfLifeHours(hl) {
 
 /**
  * The time-to-peak to draw a drug's rise with: its own sourced `tmax` where the
- * dataset has one, else the model-wide `TMAX_HOURS` assumption. Only ~30% of the
- * roster states a peak anywhere (see docs/SOURCING_GAPS.md), so the fallback is not
+ * dataset has one, else the model-wide `TMAX_HOURS` assumption. Much of the roster
+ * states no peak anywhere (live count in docs/SOURCING_GAPS.md), so the fallback is not
  * an edge case and the warnings box keeps saying so.
  */
 export function tmaxHours(drug) {

@@ -315,9 +315,9 @@ ENZYME_ROLES: dict[str, dict[str, Any]] = {
                 "heading": {"en": "Inducer of", "fr": "Inducteur de"}, "direction": -1},
 }
 
-# How much of the role. Ordinal on purpose (see docs/SOURCING_GAPS.md): the AUC
-# fold-changes that define the regulatory tiers are essentially never in the corpora,
-# and publishing a number we cannot source would be the logBB mistake again. A
+# How much of the role. Ordinal on purpose (see docs/DRUGS.md "Drug metabolism"): the
+# AUC fold-changes that define the regulatory tiers are essentially never in the corpora,
+# and a number we cannot source is never published. A
 # substrate is major/minor (which metabolic route dominates), an inhibitor or inducer
 # strong/moderate/weak. Absent when the source does not qualify it.
 ENZYME_STRENGTHS: dict[str, dict[str, str]] = {

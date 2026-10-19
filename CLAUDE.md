@@ -188,7 +188,7 @@ Full detail (panels, markers, density pipeline): [`docs/VIEWER.md`](docs/VIEWER.
 
 Full detail: [`docs/DRUGS.md`](docs/DRUGS.md).
 
-- Roster scope is **CNS-active, not psychiatric**: a drug belongs when it acts on a modeled target (gaps in `docs/SOURCING_GAPS.md`).
+- Roster scope is **CNS-active, not psychiatric**: a drug belongs when it acts on a modeled target (exclusions in `docs/DRUGS.md`; open sourcing gaps in `docs/SOURCING_GAPS.md`).
 - Drugs live in `tools/data/drugs_data.jsonl`, never in `public/data/`. Stahl bindings are **strictly dump-sourced** and never overwritten (a target Stahl omits may be added from a judged Wikipedia sentence); non-Stahl drugs get bindings from **PDSP Ki**.
 - Every LLM pass is four steps: fetcher offers candidates with **no verdict** -> LLM answers by **index** echoing the candidate's `qid` (`tools/pipeline/judged.py`, a shifted worklist is refused) -> applier gates (`tools/pipeline/gate.py`) and is **sole writer** -> `recheck_quotes.py` stamps the judge. An `extraction: "code"` path needs no recheck.
 - A hand-recorded Ki carries `ki.source.curated: true`, so `fetch_ki.py --apply` never strips it.

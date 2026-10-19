@@ -130,7 +130,7 @@ PAPERS: dict[str, str] = {
     "2896323": "VTA -> parietal cortex, dopaminergic (Macaca fascicularis, retrograde)",
     "2860583": "claustrum <-> insula connections (primate + human review)",
     # Transmitter / sign of the pathways no book sentence types (docs/SOURCING_GAPS.md
-    # section 6). Species in each line; primate/human where one exists.
+    # "Projections"). Species in each line; primate/human where one exists.
     "1374872": "frontal cortex -> pons: glutamatergic corticopontine fibres (review)",
     "173563": "frontal cortex -> pons: corticopontine excitation (cat)",
     "9133571": "pons -> cerebellum: excitatory mossy-fibre projection (rat)",

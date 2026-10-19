@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 """Store each drug's US prescribing-label pharmacokinetics as corpus #14 (DailyMed).
 
-The time-to-peak pass over the corpora already on disk (``fetch_tmax.py``) reaches a
-third of the roster and no stored corpus reaches the rest: an English Wikipedia article
-states a peak for 102 drugs, a Stahl monograph for 13, and 190 state it nowhere (see
-``docs/SOURCING_GAPS.md``). **DailyMed** is what reaches those: the US National Library
+The time-to-peak pass over the prose corpora already on disk (``fetch_tmax.py``: the
+English Wikipedia article and the Stahl monograph) misses most of the roster (the live
+count of drugs with no peak is in ``docs/SOURCING_GAPS.md``). **DailyMed** is what reaches those: the US National Library
 of Medicine's archive of Structured Product Labels, free, no key, machine-readable, and
 its section 12.3 (Pharmacokinetics) states a Tmax for essentially every oral drug
 marketed in the US. Its limit is jurisdictional rather than technical: a drug never
