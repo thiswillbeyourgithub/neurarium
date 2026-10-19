@@ -69,8 +69,6 @@ SITES = {"presynaptic": {"presynaptic"}, "postsynaptic": {"postsynaptic"},
          "both": {"presynaptic", "postsynaptic"}}
 
 sys.path.insert(0, str(TOOLS))
-from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
-from lib.quote_match import normalize_for_match  # noqa: E402  (reuse the gate's normalizer)
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 from prose_gate import add_source  # noqa: E402
@@ -134,14 +132,6 @@ SIGN_BY_TRANSDUCER: dict[str, str] = {
 # implies no sign; it is ignored rather than vetoing the row (D2 reads "Gi/Go family,
 # G protein independent mechanism", where the Gi/Go coupling is the whole sign claim).
 SIGN_NEUTRAL_MECHANISMS = {"G protein independent mechanism"}
-
-
-def page_text(target_id: int, cache: dict[int, str]) -> str:
-    """Normalized text of a target's cached classification page (the quote gate)."""
-    if target_id not in cache:
-        p = page_path(PAGES, target_id)
-        cache[target_id] = normalize_for_match(p.read_text("utf-8")) if p.exists() else ""
-    return cache[target_id]
 
 
 CORPUS = "gtopdb_class"
@@ -315,13 +305,13 @@ def main() -> int:
     tgt_out: dict[str, list] = existing.get("targets", {})
     replaced = strip_corpus(rec_out, tgt_out)
 
-    ptext: dict[int, str] = {}
+    class_gate = PageGate({CORPUS: PAGES})
     applied, conflicts, skipped = 0, [], []
 
     def gated(owner: str, attr: str, tid: int, quote: str) -> dict | None:
         """The source dict, or None when the quote is not verbatim on its page."""
-        text = page_text(tid, ptext)
-        if text and normalize_for_match(quote) not in text:
+        # Lenient on a missing or empty page (a clone), unlike PageGate.refuted().
+        if class_gate.text(CORPUS, tid) and not class_gate.on_page(CORPUS, tid, quote):
             skipped.append(f"{owner}/{attr}: quote not on page {tid}")
             return None
         return {"corpus": CORPUS, "page": tid, "quote": quote,
