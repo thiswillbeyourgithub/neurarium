@@ -53,6 +53,7 @@ from fetch_gtopdb import (  # noqa: E402  (path shim above)
 )
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
 from lib.io_atomic import atomic_write_json  # noqa: E402  (tools/ is on sys.path via fetch_gtopdb)
+from lib.gene_maps import TARGET_GENES as _TARGET_GENE_LISTS  # noqa: E402
 from lib.gene_maps import receptor_genes  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent   # script lives in tools/fetch/
@@ -64,13 +65,10 @@ RECEPTORS_JSONL = REPO / "public" / "data" / "receptors.jsonl"
 
 
 # The non-receptor targets whose classification node is still unsourced. Each maps to
-# the gene of the isoform our entry actually models.
-TARGET_GENES: dict[str, str] = {
-    "carbonic_anhydrase": "CA2",
-    "pde5": "PDE5A",
-    "cav_t": "CACNA1G",
-    "melanocortin": "MC4R",
-}
+# the representative gene (first listed in lib.gene_maps.TARGET_GENES), the isoform our
+# entry actually models.
+CLASS_TARGETS = ("carbonic_anhydrase", "pde5", "cav_t", "melanocortin")
+TARGET_GENES: dict[str, str] = {tid: _TARGET_GENE_LISTS[tid][0] for tid in CLASS_TARGETS}
 
 
 def target_record(gene: str) -> dict | None:
