@@ -7,6 +7,7 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 # The drug + its formulations, the holders of brands / Tmax / T½ (one walker, so the
 # grade and quote walks cannot skip a formulation's claims).
 from data_generators.provenance import product_holders
+from data_generators.provenance_stats import own_targets
 
 
 # The per-drug physicochemistry citations (kinds drug_lipophilicity / drug_polar_surface /
@@ -95,8 +96,8 @@ def unknown_stamps(drugs, metabolites=(), receptors=(), meta=None):
                 yield (f"{label} binding {b.get('target')}", "drug_binding_action", b,
                        b["unknown"])
     effect_owners = [(f"receptor {r.get('id')}", r) for r in receptors] + [
-        (f"target {tid}", t) for tid, t in ((meta or {}).get("drug_targets") or {}).items()
-        if isinstance(t, dict) and t.get("type") != "receptor"]
+        (f"target {tid}", t)
+        for tid, t in own_targets((meta or {}).get("drug_targets") or {}).items()]
     for label, owner in effect_owners:
         if owner.get("effects_unknown"):
             yield f"{label} effects", "receptor_effect", owner, owner["effects_unknown"]

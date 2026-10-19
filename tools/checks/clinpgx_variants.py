@@ -4,6 +4,7 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 """
 
 from data_generators import clinpgx
+from data_generators.provenance_stats import own_targets
 
 from .common import REPO_ROOT
 
@@ -29,8 +30,7 @@ def check_clinpgx_variants(report, meta, receptors):
         return
     got = {("receptor", r["id"]): r.get("variants") or [] for r in receptors}
     got.update((("target", tid), t.get("variants") or [])
-               for tid, t in (meta.get("drug_targets") or {}).items()
-               if isinstance(t, dict) and t.get("type") != "receptor")
+               for tid, t in own_targets(meta.get("drug_targets") or {}).items())
     keys = ("annotation", "variant", "genes", "level", "categories", "drugs",
             "drug_names", "phenotypes", "pmids", "genotypes", "population", "url")
     n = 0

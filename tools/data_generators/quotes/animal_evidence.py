@@ -31,6 +31,7 @@ from typing import Any
 
 from lib.species import is_primate, species_key
 
+from ..provenance_stats import own_targets
 from .uncertainty import _uncertainty_bullet
 
 _EPMC_LEDGER = (Path(__file__).resolve().parents[2] / "generated_cache"
@@ -134,8 +135,7 @@ def apply_animal_evidence(*, drugs: list[dict[str, Any]],
             counts[kind] = counts.get(kind, 0) + _append(entry, _bullet(
                 entry, _sources_evidence(entry.get("sources"), epmc), f"{what} {claim}"))
     owners = [("receptor_locations", r["id"], r) for r in receptors]
-    owners += [("target_locations", tid, t) for tid, t in targets.items()
-               if t.get("type") != "receptor"]
+    owners += [("target_locations", tid, t) for tid, t in own_targets(targets).items()]
     for kind, oid, owner in owners:
         flags = {}
         for region, sources in (owner.get("location_sources") or {}).items():

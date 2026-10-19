@@ -24,7 +24,8 @@ def own_targets(drug_targets: dict[str, dict[str, Any]]) -> dict[str, dict[str, 
     >>> sorted(own_targets({"sert": {"type": "transporter"}, "d2": {"type": "receptor"}}))
     ['sert']
     """
-    return {tid: t for tid, t in drug_targets.items() if t.get("type") != "receptor"}
+    return {tid: t for tid, t in drug_targets.items()
+            if isinstance(t, dict) and t.get("type") != "receptor"}
 
 
 def _strongest_grade(sources: list[dict[str, Any]] | None) -> int:

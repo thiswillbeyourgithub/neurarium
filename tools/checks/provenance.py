@@ -8,6 +8,7 @@ from collections import Counter
 
 from data_generators import unknown
 from data_generators.node_kinds import NODE_KINDS, backed
+from data_generators.provenance_stats import own_targets
 
 from .walks import iter_drug_sources, unknown_stamps
 
@@ -163,8 +164,9 @@ def check_provenance(report, meta, structures, projections, circuits,
         if "classification_provenance" in structure:
             grade(structure.get("classification_provenance"),
                   f"structure {structure.get('id')} classification_provenance")
+    own = own_targets(meta.get("drug_targets", {}))
     for key, target in meta.get("drug_targets", {}).items():
-        if target.get("type") != "receptor" and "classification_provenance" in target:
+        if key in own and "classification_provenance" in target:
             grade(target.get("classification_provenance"),
                   f"target {key} classification_provenance")
         # Tone-polarity sub-claim (kind target_polarity): its own grade + optional
