@@ -1,6 +1,35 @@
 {
   "versions": [
     {
+      "version": "3.134.0",
+      "date": "2026-10-20",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Direct molecular targets now lists the active metabolites' own bindings among the drug's, each row naming its compound, under a warning that several compounds contribute",
+          "commits": [
+            "2992e99"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Psychotropic interactions is now a subsection of Metabolism, and every beta section sits at the bottom of the drug panel",
+          "commits": [
+            "773c2be",
+            "c8d638a"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "\"Inferred side effects\" is renamed \"Inferred effects\", and Genetic variability carries the beta label",
+          "commits": [
+            "bbd50dc",
+            "4270254"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.133.0",
       "date": "2026-10-19",
       "entries": [
