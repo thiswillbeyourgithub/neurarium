@@ -44,8 +44,8 @@ export function resolveEffects(raw, modes, labels) {
  *   drugs: [{drug, via: [{target, action, mode, via_metabolite?}]}]}]}`.
  * @param {Map<string, object>} targetsById  merged receptor + target list by id.
  * @param {Map<string, object[]>} effectsByTarget  target id -> resolved effect rows.
- * @param {Map<string, object>} drugsById  drugs with resolved bindings
- *   (`{target, action, viaMetabolite}`).
+ * @param {Map<string, object>} drugsById  drugs with resolved `allBindings` (else
+ *   `bindings`), each `{target, action, viaMetabolite}`.
  * @param {Object<string,string>} labels  localized meta.receptor_effect_labels.
  * @returns {{effects: {id:string, label:string, owners:{target:object, node:object}[],
  *   drugs:{drug:object, via:{binding:object, node:object}[]}[]}[],
@@ -73,7 +73,8 @@ export function readEffectIndex(json, targetsById, effectsByTarget, drugsById, l
       if (!drug) continue;
       const via = [];
       for (const v of d.via || []) {
-        const binding = (drug.bindings || []).find((b) => b.target === v.target
+        // allBindings: the drug's own plus its active metabolites' (js/data/drugs.js).
+        const binding = (drug.allBindings || drug.bindings || []).find((b) => b.target === v.target
           && b.action === v.action && (b.viaMetabolite || null) === (v.via_metabolite || null));
         const node = nodeOf(v.target, v.mode, e.id);
         if (binding && node) via.push({ binding, node });

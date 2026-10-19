@@ -180,6 +180,13 @@
   color: var(--accent-bright); cursor: pointer; text-align: left;
 }
 .info-effects .eff-chip:hover { color: var(--accent-light); }
+/* The compound a derived row's binding comes from (the drug or one of its active
+   metabolites), shown only when a readout mixes them: muted, after the chip text.
+   Also on the Neurotransmitter tone terms. */
+.eff-from {
+  margin-left: var(--sp-s); padding: 0 var(--sp-s); border-radius: 3px;
+  font-size: 10px; color: var(--muted); background: rgba(var(--ink), 0.06);
+}
 /* A row head that opens another panel (an effect, a drug): see linkName. */
 .info-effects .eff-link { cursor: pointer; }
 .info-effects .eff-link:hover { color: var(--accent-light); text-decoration: underline; }

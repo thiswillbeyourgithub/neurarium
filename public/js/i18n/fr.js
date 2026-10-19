@@ -603,6 +603,7 @@ window.__I18N_MESSAGES__.fr = {
   "drug.actsOn": "Cibles moléculaires directes",
   "drug.activeMetabWarnOne": "Cette substance est transformée en {names}, qui agit aussi dans l'organisme : ses propres actions ne figurent pas dans cette liste.",
   "drug.activeMetabWarnMany": "Cette substance est transformée en {names}, qui agissent aussi dans l'organisme : leurs propres actions ne figurent pas dans cette liste.",
+  "drug.activeMetabMixed": "Prudence : plusieurs composés contribuent à ce qui est affiché ici, cette substance et ses métabolites actifs ({names}). Chaque ligne indique le composé dont elle provient.",
   "drug.activeMetabSee": "Les voir",
   "drug.noTargets": "Aucune cible moléculaire répertoriée pour l'instant.",
   "drug.tone": "Tonus des neurotransmetteurs (indicatif)",

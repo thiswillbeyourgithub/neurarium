@@ -19,7 +19,8 @@ export function showDrug(P, drug, opts = {}) {
     appendPossibleEffects, appendReference, appendReleaseChanges, appendWorkup,
     bindingRow, body, clearBody, clinpgxSearchUrl, data, derivedActiveMetabolites,
     derivedAutoModulation, derivedBox, directionArrow, drugById, drugNameLink, el,
-    enzymeById, enzymeRow, fmtTone, foldBody, netTone, nodePill, onDrugPick,
+    enzymeById, enzymeRow, fmtTone, foldBody, metaboliteContributors, netTone,
+    nodePill, onDrugPick,
     onEnzymePick, onImagePick, onProjectionGroupPick, onTargetPick, pgxSection,
     targetById,
   } = P;
@@ -400,6 +401,11 @@ export function showDrug(P, drug, opts = {}) {
     proj.appendChild(el("p", "legend-caption", t("drug.toneHow", {
       none: fmtTone(toneWeightOf(null)).slice(1),
       auto: fmtTone((data.meta.toneFactors || {}).autoreceptor ?? 1).slice(1) })));
+    // The tone sums the active metabolites' tone-setters too (allBindings): when one
+    // contributes, the shared "several compounds" box, and each term names its compound.
+    const mix = metaboliteContributors(drug,
+      drug.flowKinds.flatMap((kind) => drug.flowSystems[kind].terms));
+    if (mix) proj.appendChild(derivedActiveMetabolites(drug, body, mix));
     const ul = el("ul");
     for (const kind of drug.flowKinds) {
       const group = groupsByKey.get(`kind:${kind}`);
@@ -420,6 +426,7 @@ export function showDrug(P, drug, opts = {}) {
       for (const b of flow.terms) {
         const row = el("div", "tone-term");
         row.appendChild(el("span", "tone-term-target", b.targetName));
+        if (mix) row.appendChild(el("span", "eff-from", mix.compoundOf(b)));
         row.appendChild(el("span", "tone-term-rule", t(`tone.rule.${b.toneRule}`)));
         // "+1 × 0.50 × 0.43 = +0.21": sign, bucket factor (shown only when not 1),
         // Ki weight; the same product toneBySystem sums.

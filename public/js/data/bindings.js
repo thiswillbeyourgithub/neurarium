@@ -170,12 +170,22 @@ export function borrowBindings(drugs) {
         (part.bindings || []).map((b) => ({ ...b, via_metabolite: name })));
     }
   }
+  // Each active metabolite's raw bindings (its own `bindings[]`, else its linked
+  // modeled drug's), tagged with the metabolite's name.
+  const metaboliteBindings = (d) => (d.metabolites || []).flatMap((m) => {
+    const linked = m.drug_id ? rawDrugById.get(m.drug_id) : null;
+    const own = (m.bindings || []).length ? m.bindings : linked ? linked.bindings || [] : [];
+    return own.map((b) => ({ ...b, via_metabolite: m.name }));
+  });
+  // A prodrug takes them as its own bindings. Any other drug keeps them apart, in
+  // `metabolite_bindings`: its target list stays the parent's own, while the readouts
+  // derived from bindings (tone, inferred effects, release changes) add them, each
+  // labelled by the metabolite (resolveDrugs `allBindings`). Same rule as
+  // data_generators/effect_index.py drug_bindings. Computed before any prodrug is
+  // extended, so a prodrug never lends on rows it borrowed itself.
+  const lent = new Map(drugs.map((d) => [d, metaboliteBindings(d)]));
   for (const d of drugs) {
-    if (!d.prodrug) continue;
-    d.bindings = (d.bindings || []).concat((d.metabolites || []).flatMap((m) => {
-      const linked = m.drug_id ? rawDrugById.get(m.drug_id) : null;
-      const own = (m.bindings || []).length ? m.bindings : linked ? linked.bindings || [] : [];
-      return own.map((b) => ({ ...b, via_metabolite: m.name }));
-    }));
+    if (d.prodrug) d.bindings = (d.bindings || []).concat(lent.get(d));
+    else d.metabolite_bindings = lent.get(d);
   }
 }

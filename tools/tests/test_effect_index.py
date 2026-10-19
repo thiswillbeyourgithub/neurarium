@@ -50,6 +50,17 @@ class JoinTest(unittest.TestCase):
         self.assertEqual(set(got), {"pro", "active"})
         self.assertEqual(got["pro"][0][0]["via_metabolite"], "Active")
 
+    def test_any_drug_adds_its_active_metabolites_bindings_labelled(self):
+        # Not a prodrug: the parent's own H1 block and its metabolite's (own bindings,
+        # not a modeled drug) are two routes to sedation, the metabolite's tagged.
+        drugs = [{"id": "parent", "bindings": [{"target": "h1", "action": "antagonist"}],
+                  "metabolites": [{"id": "m"}]}]
+        metabolites = [{"id": "m", "name": "Normet",
+                        "bindings": [{"target": "h1", "action": "antagonist"}]}]
+        idx = {e["id"]: e for e in effect_index.build(RECEPTORS, drugs, metabolites, META)}
+        via = idx["sedation"]["drugs"][0]["via"]
+        self.assertEqual([b.get("via_metabolite") for b, _ in via], [None, "Normet"])
+
     def test_salt_borrows_its_modeled_constituents_bindings(self):
         drugs = [{"id": "salt", "name": "Salt", "bindings": [],
                   "constituents": ["Diphenhydramine", "8-Chlorotheophylline"]},

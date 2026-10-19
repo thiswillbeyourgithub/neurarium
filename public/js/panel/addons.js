@@ -131,17 +131,21 @@ export function makeAddons(P) {
   // overlay's capped `weight` only scales the animation.
   const netTone = (drug, kind) => ((drug.flowSystems || {})[kind] || { sum: 0 }).sum;
 
-  // Caution box leading "Direct molecular targets" for a drug with active
-  // metabolites: the rows list only the parent's own bindings, while the metabolites
-  // act too (their bindings live under Active metabolites or on their own drug panel).
-  // Derived from the drug's sourced metabolite nodes, so no pill of its own; the
-  // button jumps to that section, looked up at click time since it renders later.
-  const derivedActiveMetabolites = (drug, body) => {
-    const names = (drug.metabolites || []).map((m) => m.name);
-    if (!names.length || drug.prodrug) return null;
+  // Caution box for a drug with active metabolites, one component in two places.
+  // Leading "Direct molecular targets" (no `contributors`): the rows list only the
+  // parent's own bindings, while the metabolites act too (their bindings live under
+  // Active metabolites or on their own drug panel). Leading a readout derived from
+  // bindings that adds the metabolites' (`contributors`, see metaboliteContributors):
+  // several compounds make up what it shows. Derived from the drug's sourced
+  // metabolite nodes, so no pill of its own; the button jumps to Active metabolites,
+  // looked up at click time since it renders later.
+  const derivedActiveMetabolites = (drug, body, contributors = null) => {
+    const names = contributors ? contributors.names : (drug.metabolites || []).map((m) => m.name);
+    if (!names.length || (!contributors && drug.prodrug)) return null;
     const box = derivedBox("caution", t("drug.metabolites"));
-    const p = el("p", "addon-text", `${t(names.length > 1 ? "drug.activeMetabWarnMany" : "drug.activeMetabWarnOne",
-      { names: names.join(", ") })} `);
+    const key = contributors ? "drug.activeMetabMixed"
+      : names.length > 1 ? "drug.activeMetabWarnMany" : "drug.activeMetabWarnOne";
+    const p = el("p", "addon-text", `${t(key, { names: names.join(", ") })} `);
     const go = btn("addon-jump", t("drug.activeMetabSee"));
     go.addEventListener("click", () =>
       flashRow(body.querySelector('[data-tour-sec="metabolites"]')));
@@ -150,8 +154,18 @@ export function makeAddons(P) {
     return box;
   };
 
+  // The compounds behind a derived readout's bindings (a slice of the drug's
+  // `allBindings`, js/data/drugs.js): null when none comes from an active metabolite,
+  // else those metabolites' names and `compoundOf(binding)`, the name every row of
+  // that readout is labelled with (the metabolite's, else the drug's own).
+  const metaboliteContributors = (drug, bindings) => {
+    const names = [...new Set(bindings.filter((b) => b.fromMetabolite).map((b) => b.viaMetabolite))];
+    if (!names.length) return null;
+    return { names, compoundOf: (b) => b.viaMetabolite || drug.name };
+  };
+
   return {
     ADDON_RENDERERS, addonBox, appendAddons, derivedActiveMetabolites,
-    derivedAutoModulation, derivedBox, fmtTone, netTone,
+    derivedAutoModulation, derivedBox, fmtTone, metaboliteContributors, netTone,
   };
 }

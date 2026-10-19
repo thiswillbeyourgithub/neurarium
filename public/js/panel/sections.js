@@ -12,8 +12,8 @@ const { ofNoun, t } = window.__I18N__;
 
 export function makeSections(P) {
   const {
-    body, data, effectById, el, nodePill, onEffectPick, onTargetPick, resolveBase,
-    sourceBackedPill, targetById,
+    body, data, derivedActiveMetabolites, effectById, el, metaboliteContributors,
+    nodePill, onEffectPick, onTargetPick, resolveBase, sourceBackedPill, targetById,
   } = P;
 
   // receptor_effect (BETA) section heading: the label plus the same quiet "beta"
@@ -49,11 +49,14 @@ export function makeSections(P) {
   };
 
   // One derived "via" chip on a drug panel: the binding (jumps to its target) plus
-  // the pill of the receptor-level node it was joined with.
-  const viaChip = (binding, node) => {
+  // the pill of the receptor-level node it was joined with, and, when the readout
+  // mixes compounds, the compound this binding is (`compound`, see
+  // metaboliteContributors).
+  const viaChip = (binding, node, compound = null) => {
     const tgt = targetById.get(binding.target);
     const chip = el("button", "eff-chip",
       `${binding.targetName} (${binding.actionLabel || binding.action})`);
+    if (compound) chip.appendChild(el("span", "eff-from", compound));
     chip.type = "button";
     if (tgt && tgt.focusable) chip.addEventListener("click", () => onTargetPick(tgt));
     else chip.disabled = true;
@@ -63,12 +66,13 @@ export function makeSections(P) {
   };
 
   // One derived drug-panel row: its conditional sentence (or a ready head node, the
-  // effect panel's drug name), then one via chip each.
-  const derivedRow = (text, via) => {
+  // effect panel's drug name), then one via chip each, labelled by `compoundOf`.
+  const derivedRow = (text, via, compoundOf = null) => {
     const li = el("li", "eff-row");
     li.appendChild(typeof text === "string" ? el("span", "loc-name", text) : text);
     const box = el("span", "eff-via");
-    for (const { binding, node } of via) box.appendChild(viaChip(binding, node));
+    for (const { binding, node } of via)
+      box.appendChild(viaChip(binding, node, compoundOf && compoundOf(binding)));
     li.appendChild(box);
     return li;
   };
@@ -113,6 +117,15 @@ export function makeSections(P) {
     close();
   };
 
+  // A derived drug readout whose via chips include an active metabolite's bindings:
+  // the shared "several compounds" caution box goes above its list, and the returned
+  // contributors label every chip by compound. Null (no box) when all are the drug's own.
+  const mixedCompounds = (drug, sec, ul, via) => {
+    const mix = metaboliteContributors(drug, via.map((v) => v.binding));
+    if (mix) sec.insertBefore(derivedActiveMetabolites(drug, body, mix), ul);
+    return mix;
+  };
+
   // The drug panel's derived "Inferred side effects" (BETA): the drug's
   // directional bindings joined with the receptor_effect nodes of their targets, read
   // from the build-time effect index (data.possibleEffectsByDrug, see
@@ -122,10 +135,11 @@ export function makeSections(P) {
   const appendPossibleEffects = (drug) => {
     const effects = data.possibleEffectsByDrug.get(drug.id) || [];
     if (!effects.length) return;
-    const { ul, close } = betaSection("effects", "effects.drugHeading", "effects.drugHint");
+    const { sec, ul, close } = betaSection("effects", "effects.drugHeading", "effects.drugHint");
+    const mix = mixedCompounds(drug, sec, ul, effects.flatMap((e) => e.via));
     for (const e of effects) {
       ul.appendChild(derivedRow(effectLink(e.effect, t("effects.couldCause", { effect: e.label })),
-        e.via));
+        e.via, mix && mix.compoundOf));
     }
     close();
   };
@@ -248,12 +262,14 @@ export function makeSections(P) {
   // affinity_only contributing nothing. Computed, never stored, worded conditionally.
   const appendReleaseChanges = (drug) => {
     const changes = deriveReleaseChanges(
-      drug.bindings, (tid) => data.modulationByTarget.get(tid) || [], data.meta.effectModes);
+      drug.allBindings, (tid) => data.modulationByTarget.get(tid) || [], data.meta.effectModes);
     if (!changes.length) return;
-    const { ul, close } = betaSection("downstream", "relmod.drugHeading", "relmod.drugHint");
+    const { sec, ul, close } = betaSection("downstream", "relmod.drugHeading", "relmod.drugHint");
+    const mix = mixedCompounds(drug, sec, ul, changes.flatMap((c) => c.via));
     for (const c of changes) {
       ul.appendChild(derivedRow(t(`relmod.could.${c.direction}`,
-        { ...transmitterVars(c.transmitterLabel, ofNoun), where: inStructure(c.structure) }), c.via));
+        { ...transmitterVars(c.transmitterLabel, ofNoun), where: inStructure(c.structure) }),
+        c.via, mix && mix.compoundOf));
     }
     close();
   };

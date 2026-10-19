@@ -7,8 +7,8 @@ stage, ``tools/serve.py``), never committed. ``public/js/receptor-effects.js``
 ``readEffectIndex`` only resolves the ids in that file, it computes nothing. Rules: a
 drug's binding inherits a receptor_effect node only when its ``action`` is one of the
 actions that node's mode lists (``meta.receptor_effect_modes``); an affinity_only binding
-(no action) inherits nothing; a prodrug borrows its metabolites' bindings first (as
-``js/data.js`` does). Derived, never stored: a statement about the receptors a drug acts
+(no action) inherits nothing; every drug adds its active metabolites' bindings, each
+tagged with the metabolite (as ``js/data/drugs.js`` ``allBindings`` does). Derived, never stored: a statement about the receptors a drug acts
 on, not about the drug.
 
 Stdlib only, no package-relative import, so ``render_api`` can load it off ``sys.path``.
@@ -47,17 +47,17 @@ def _norm(name: str) -> str:
 
 def drug_bindings(drug: dict[str, Any], drugs_by_id: dict[str, dict[str, Any]],
                   metabolites_by_id: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
-    """The drug's bindings as the viewer joins them, borrowing tagged ``via_metabolite``
-    (the molecule lent from): a prodrug each metabolite's own bindings, else its linked
-    modeled drug's; a salt declaring ``constituents`` each modeled constituent's."""
+    """The drug's bindings as the viewer's derived readouts join them (``allBindings``,
+    ``js/data/drugs.js``), borrowing tagged ``via_metabolite`` (the molecule lent from):
+    each active metabolite's own bindings, else its linked modeled drug's (a prodrug's
+    only bindings, any other drug's on top of its own); a salt declaring
+    ``constituents`` each modeled constituent's."""
     out = list(drug.get("bindings") or [])
     for name in drug.get("constituents") or []:
         part = drugs_by_id.get(name.lower()) or next(
             (d for d in drugs_by_id.values() if _norm(d.get("name")) == _norm(name)), None)
         if part and part is not drug:
             out += [{**b, "via_metabolite": name} for b in part.get("bindings") or []]
-    if not drug.get("prodrug"):
-        return out
     for ref in drug.get("metabolites") or []:
         m = metabolites_by_id.get(ref.get("id"), {})
         linked = drugs_by_id.get(m.get("drug_id") or "")
@@ -77,7 +77,11 @@ def possible_effects(bindings: list[dict[str, Any]], effects_of: dict[str, tuple
             if b["action"] not in (modes.get(node["mode"]) or {}).get("actions", []):
                 continue
             via = out.setdefault(node["effect"], [])
-            if not any(vb.get("target") == b.get("target") and vn is node for vb, vn in via):
+            # One route per (target, compound): the parent and its active metabolite
+            # on one receptor are two contributions, each labelled by its compound.
+            if not any(vb.get("target") == b.get("target") and vn is node
+                       and vb.get("via_metabolite") == b.get("via_metabolite")
+                       for vb, vn in via):
                 via.append((b, node))
     return out
 
@@ -121,7 +125,7 @@ def to_json(index: list[dict[str, Any]]) -> dict[str, Any]:
                                  "via": [{"target": "5ht3", "action": "antagonist",
                                           "mode": "antagonism"}]}, ...]}]}
 
-    A via entry borrowed by a prodrug also names its ``via_metabolite`` (the
+    A via entry borrowed from an active metabolite or constituent also names its ``via_metabolite`` (the
     metabolite's name, as the viewer tags the binding). Order is the index's (effects by
     English label, drugs in data order)."""
     def via(b: dict[str, Any], node: dict[str, Any]) -> dict[str, Any]:

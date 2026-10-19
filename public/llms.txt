@@ -35,55 +35,55 @@ Each effect below is one a source attributes to acting on a receptor in some mod
 - [Akathisia](https://neurarium.olicorne.org/api/effect/akathisia) `akathisia`: antagonism of D2; 56 drugs could cause it
 - [Anticonvulsant effect](https://neurarium.olicorne.org/api/effect/anticonvulsant) `anticonvulsant`: agonism of GABA-A; antagonism of AMPA; 50 drugs could cause it
 - [Antidepressant effect](https://neurarium.olicorne.org/api/effect/antidepressant) `antidepressant`: agonism of 5-HT1A, D1, σ1; antagonism of 5-HT1B, 5-HT2A, 5-HT2C, 5-HT3, 5-HT7, D3, NMDA; inhibition of Monoamine oxidase A (MAO-A), Norepinephrine transporter (NET), Serotonin transporter (SERT); 149 drugs could cause it
-- [Antiemetic effect](https://neurarium.olicorne.org/api/effect/antiemetic) `antiemetic`: antagonism of 5-HT3; 17 drugs could cause it
-- [Antiparkinsonian effect](https://neurarium.olicorne.org/api/effect/antiparkinsonian) `antiparkinsonian`: agonism of D1, D2, D3; antagonism of A2A; inhibition of Monoamine oxidase B (MAO-B); 25 drugs could cause it
-- [Antipsychotic effect](https://neurarium.olicorne.org/api/effect/antipsychotic) `antipsychotic`: agonism of 5-HT1A, M1, M4; antagonism of 5-HT2A, D2, D3; 88 drugs could cause it
-- [Anxiety / agitation](https://neurarium.olicorne.org/api/effect/anxiety) `anxiety`: agonism of 5-HT2A, 5-HT2C, 5-HT3; antagonism of 5-HT2C; inhibition of Norepinephrine transporter (NET), Serotonin transporter (SERT); 99 drugs could cause it
+- [Antiemetic effect](https://neurarium.olicorne.org/api/effect/antiemetic) `antiemetic`: antagonism of 5-HT3; 18 drugs could cause it
+- [Antiparkinsonian effect](https://neurarium.olicorne.org/api/effect/antiparkinsonian) `antiparkinsonian`: agonism of D1, D2, D3; antagonism of A2A; inhibition of Monoamine oxidase B (MAO-B); 26 drugs could cause it
+- [Antipsychotic effect](https://neurarium.olicorne.org/api/effect/antipsychotic) `antipsychotic`: agonism of 5-HT1A, M1, M4; antagonism of 5-HT2A, D2, D3; 89 drugs could cause it
+- [Anxiety / agitation](https://neurarium.olicorne.org/api/effect/anxiety) `anxiety`: agonism of 5-HT2A, 5-HT2C, 5-HT3; antagonism of 5-HT2C; inhibition of Norepinephrine transporter (NET), Serotonin transporter (SERT); 101 drugs could cause it
 - [Anxiolytic effect](https://neurarium.olicorne.org/api/effect/anxiolytic) `anxiolytic`: agonism of 5-HT1A, GABA-A, mGluR2, mGluR3, σ1; antagonism of H1, α1A, α1B, α1D, β1; 148 drugs could cause it
 - [Ataxia (loss of coordination)](https://neurarium.olicorne.org/api/effect/ataxia) `ataxia`: agonism of GABA-A; antagonism of mGluR1; 50 drugs could cause it
 - [Bladder relaxation](https://neurarium.olicorne.org/api/effect/bladder_relaxation) `bladder_relaxation`: agonism of β3; 1 drug could cause it
 - [Blurred vision](https://neurarium.olicorne.org/api/effect/blurred_vision) `blurred_vision`: antagonism of M1, M2; 35 drugs could cause it
-- [Bronchoconstriction](https://neurarium.olicorne.org/api/effect/bronchoconstriction) `bronchoconstriction`: agonism of H1, M1, M3; 2 drugs could cause it
+- [Bronchoconstriction](https://neurarium.olicorne.org/api/effect/bronchoconstriction) `bronchoconstriction`: agonism of H1, M1, M3; 3 drugs could cause it
 - [Bronchodilation](https://neurarium.olicorne.org/api/effect/bronchodilation) `bronchodilation`: agonism of β2; 1 drug could cause it
 - [Cardiac valvulopathy](https://neurarium.olicorne.org/api/effect/cardiac_valvulopathy) `cardiac_valvulopathy`: agonism of 5-HT2B; 7 drugs could cause it
 - [Circadian rhythm shift](https://neurarium.olicorne.org/api/effect/circadian_shift) `circadian_shift`: agonism of MT1, MT2; 4 drugs could cause it
 - [Constipation](https://neurarium.olicorne.org/api/effect/constipation) `constipation`: agonism of μ (MOR); antagonism of M1, M2; 48 drugs could cause it
-- [Decreased appetite / satiety](https://neurarium.olicorne.org/api/effect/appetite_decrease) `appetite_decrease`: inhibition of Dopamine transporter (DAT); 24 drugs could cause it
+- [Decreased appetite / satiety](https://neurarium.olicorne.org/api/effect/appetite_decrease) `appetite_decrease`: inhibition of Dopamine transporter (DAT); 26 drugs could cause it
 - [Dizziness](https://neurarium.olicorne.org/api/effect/dizziness) `dizziness`: antagonism of α1A, α1B, α1D; 55 drugs could cause it
 - [Dry mouth](https://neurarium.olicorne.org/api/effect/dry_mouth) `dry_mouth`: antagonism of M1, M2; 35 drugs could cause it
-- [Dysphoria](https://neurarium.olicorne.org/api/effect/dysphoria) `dysphoria`: agonism of κ (KOR); 12 drugs could cause it
-- [Euphoria / reward](https://neurarium.olicorne.org/api/effect/euphoria) `euphoria`: agonism of GABA-A, Neuronal α4β2 nAChR, μ (MOR); inhibition of Dopamine transporter (DAT); 89 drugs could cause it
+- [Dysphoria](https://neurarium.olicorne.org/api/effect/dysphoria) `dysphoria`: agonism of κ (KOR); 13 drugs could cause it
+- [Euphoria / reward](https://neurarium.olicorne.org/api/effect/euphoria) `euphoria`: agonism of GABA-A, Neuronal α4β2 nAChR, μ (MOR); inhibition of Dopamine transporter (DAT); 91 drugs could cause it
 - [Exaggerated startle reflex](https://neurarium.olicorne.org/api/effect/exaggerated_startle) `exaggerated_startle`: antagonism of Glycine; 1 drug could cause it
 - [Extrapyramidal symptoms (parkinsonism)](https://neurarium.olicorne.org/api/effect/extrapyramidal_symptoms) `extrapyramidal_symptoms`: antagonism of D2; 56 drugs could cause it
-- [Hallucinations](https://neurarium.olicorne.org/api/effect/hallucinations) `hallucinations`: agonism of 5-HT2A, κ (KOR); antagonism of NMDA; 37 drugs could cause it
-- [Improved cognition](https://neurarium.olicorne.org/api/effect/pro_cognitive) `pro_cognitive`: agonism of 5-HT1A, D1, M1, Neuronal α7 nAChR, α2A; antagonism of 5-HT7; inhibition of Acetylcholinesterase; 66 drugs could cause it
-- [Increased gastric acid secretion](https://neurarium.olicorne.org/api/effect/gastric_acid_increase) `gastric_acid_increase`: agonism of H2, M1; 1 drug could cause it
+- [Hallucinations](https://neurarium.olicorne.org/api/effect/hallucinations) `hallucinations`: agonism of 5-HT2A, κ (KOR); antagonism of NMDA; 40 drugs could cause it
+- [Improved cognition](https://neurarium.olicorne.org/api/effect/pro_cognitive) `pro_cognitive`: agonism of 5-HT1A, D1, M1, Neuronal α7 nAChR, α2A; antagonism of 5-HT7; inhibition of Acetylcholinesterase; 67 drugs could cause it
+- [Increased gastric acid secretion](https://neurarium.olicorne.org/api/effect/gastric_acid_increase) `gastric_acid_increase`: agonism of H2, M1; 2 drugs could cause it
 - [Increased gut motility (prokinetic)](https://neurarium.olicorne.org/api/effect/gi_motility) `gi_motility`: agonism of 5-HT4; 1 drug could cause it
-- [Insomnia / activation](https://neurarium.olicorne.org/api/effect/insomnia) `insomnia`: agonism of 5-HT2A, 5-HT2C; inhibition of Serotonin transporter (SERT); 52 drugs could cause it
+- [Insomnia / activation](https://neurarium.olicorne.org/api/effect/insomnia) `insomnia`: agonism of 5-HT2A, 5-HT2C; inhibition of Serotonin transporter (SERT); 53 drugs could cause it
 - [Itch (pruritus)](https://neurarium.olicorne.org/api/effect/itch) `itch`: agonism of μ (MOR); 13 drugs could cause it
-- [Itch relief (antipruritic)](https://neurarium.olicorne.org/api/effect/antipruritic) `antipruritic`: agonism of κ (KOR); 12 drugs could cause it
-- [Lowered body temperature](https://neurarium.olicorne.org/api/effect/hypothermia) `hypothermia`: agonism of 5-HT1A; 29 drugs could cause it
+- [Itch relief (antipruritic)](https://neurarium.olicorne.org/api/effect/antipruritic) `antipruritic`: agonism of κ (KOR); 13 drugs could cause it
+- [Lowered body temperature](https://neurarium.olicorne.org/api/effect/hypothermia) `hypothermia`: agonism of 5-HT1A; 30 drugs could cause it
 - [Memory / cognitive impairment](https://neurarium.olicorne.org/api/effect/anticholinergic_cognitive) `anticholinergic_cognitive`: antagonism of M1; 35 drugs could cause it
 - [Migraine relief](https://neurarium.olicorne.org/api/effect/antimigraine) `antimigraine`: agonism of 5-HT1F; antagonism of CGRP receptor; 8 drugs could cause it
 - [Muscle weakness / paralysis](https://neurarium.olicorne.org/api/effect/muscle_weakness) `muscle_weakness`: antagonism of Muscle nAChR; 0 drugs could cause it
-- [Nausea / vomiting](https://neurarium.olicorne.org/api/effect/nausea) `nausea`: agonism of 5-HT3, D2, M3, μ (MOR); 30 drugs could cause it
+- [Nausea / vomiting](https://neurarium.olicorne.org/api/effect/nausea) `nausea`: agonism of 5-HT3, D2, M3, μ (MOR); 31 drugs could cause it
 - [Night blindness](https://neurarium.olicorne.org/api/effect/night_blindness) `night_blindness`: antagonism of mGluR6; 0 drugs could cause it
 - [Orthostatic hypotension](https://neurarium.olicorne.org/api/effect/orthostatic_hypotension) `orthostatic_hypotension`: antagonism of α1A, α1B, α1D; 55 drugs could cause it
-- [Pain relief (analgesia)](https://neurarium.olicorne.org/api/effect/analgesia) `analgesia`: agonism of CB1, H3, α2A, α2B, α2C, α2D, δ (DOR), κ (KOR), μ (MOR); inhibition of Norepinephrine transporter (NET); 70 drugs could cause it
-- [Prolactin elevation](https://neurarium.olicorne.org/api/effect/prolactin_elevation) `prolactin_elevation`: agonism of 5-HT2A, κ (KOR); antagonism of D2; 76 drugs could cause it
-- [Psychosis](https://neurarium.olicorne.org/api/effect/psychosis) `psychosis`: agonism of 5-HT2A, D2; antagonism of NMDA; 37 drugs could cause it
-- [Raised heart rate / blood pressure](https://neurarium.olicorne.org/api/effect/cardiovascular) `cardiovascular`: agonism of β2; inhibition of Monoamine oxidase A (MAO-A), Norepinephrine transporter (NET); 55 drugs could cause it
+- [Pain relief (analgesia)](https://neurarium.olicorne.org/api/effect/analgesia) `analgesia`: agonism of CB1, H3, α2A, α2B, α2C, α2D, δ (DOR), κ (KOR), μ (MOR); inhibition of Norepinephrine transporter (NET); 73 drugs could cause it
+- [Prolactin elevation](https://neurarium.olicorne.org/api/effect/prolactin_elevation) `prolactin_elevation`: agonism of 5-HT2A, κ (KOR); antagonism of D2; 79 drugs could cause it
+- [Psychosis](https://neurarium.olicorne.org/api/effect/psychosis) `psychosis`: agonism of 5-HT2A, D2; antagonism of NMDA; 40 drugs could cause it
+- [Raised heart rate / blood pressure](https://neurarium.olicorne.org/api/effect/cardiovascular) `cardiovascular`: agonism of β2; inhibition of Monoamine oxidase A (MAO-A), Norepinephrine transporter (NET); 57 drugs could cause it
 - [Reduced gastric acid secretion](https://neurarium.olicorne.org/api/effect/gastric_acid_reduction) `gastric_acid_reduction`: antagonism of H2; 7 drugs could cause it
 - [Respiratory depression](https://neurarium.olicorne.org/api/effect/respiratory_depression) `respiratory_depression`: agonism of μ (MOR); 13 drugs could cause it
 - [Sedation](https://neurarium.olicorne.org/api/effect/sedation) `sedation`: agonism of 5-HT1F, GABA-A, α2 adrenergic receptors, α2A, α2B, α2C, α2D, κ (KOR), μ (MOR); antagonism of H1, M1, α1A, α1B, α1D; 152 drugs could cause it
-- [Seizures](https://neurarium.olicorne.org/api/effect/seizures) `seizures`: agonism of AMPA, δ (DOR); antagonism of GABA-A; 8 drugs could cause it
-- [Sexual dysfunction](https://neurarium.olicorne.org/api/effect/sexual_dysfunction) `sexual_dysfunction`: agonism of 5-HT2A, 5-HT2C; inhibition of Serotonin transporter (SERT); 52 drugs could cause it
-- [Sleep promotion](https://neurarium.olicorne.org/api/effect/sleep_promotion) `sleep_promotion`: agonism of GABA-A, GABA-B, MT1, MT2; antagonism of 5-HT2A, 5-HT7, H1, Orexin receptors (OX1R/OX2R), α1A, α1B, α1D; 143 drugs could cause it
-- [Slowed heart rate](https://neurarium.olicorne.org/api/effect/bradycardia) `bradycardia`: agonism of 5-HT1A, M2, α2A; 36 drugs could cause it
+- [Seizures](https://neurarium.olicorne.org/api/effect/seizures) `seizures`: agonism of AMPA, δ (DOR); antagonism of GABA-A; 11 drugs could cause it
+- [Sexual dysfunction](https://neurarium.olicorne.org/api/effect/sexual_dysfunction) `sexual_dysfunction`: agonism of 5-HT2A, 5-HT2C; inhibition of Serotonin transporter (SERT); 53 drugs could cause it
+- [Sleep promotion](https://neurarium.olicorne.org/api/effect/sleep_promotion) `sleep_promotion`: agonism of GABA-A, GABA-B, MT1, MT2; antagonism of 5-HT2A, 5-HT7, H1, Orexin receptors (OX1R/OX2R), α1A, α1B, α1D; 144 drugs could cause it
+- [Slowed heart rate](https://neurarium.olicorne.org/api/effect/bradycardia) `bradycardia`: agonism of 5-HT1A, M2, α2A; 38 drugs could cause it
 - [Tardive dyskinesia](https://neurarium.olicorne.org/api/effect/tardive_dyskinesia) `tardive_dyskinesia`: antagonism of D2; 56 drugs could cause it
 - [Urinary retention](https://neurarium.olicorne.org/api/effect/urinary_retention) `urinary_retention`: antagonism of M2; 30 drugs could cause it
-- [Vasoconstriction](https://neurarium.olicorne.org/api/effect/vasoconstriction) `vasoconstriction`: agonism of 5-HT1B, 5-HT1D, H3, MT1, α1A, α1B, α1D, α2C; 25 drugs could cause it
-- [Vasodilation](https://neurarium.olicorne.org/api/effect/vasodilation) `vasodilation`: agonism of 5-HT1A, A2A, M3, M5, β2, β3; 30 drugs could cause it
+- [Vasoconstriction](https://neurarium.olicorne.org/api/effect/vasoconstriction) `vasoconstriction`: agonism of 5-HT1B, 5-HT1D, H3, MT1, α1A, α1B, α1D, α2C; 27 drugs could cause it
+- [Vasodilation](https://neurarium.olicorne.org/api/effect/vasodilation) `vasodilation`: agonism of 5-HT1A, A2A, M3, M5, β2, β3; 31 drugs could cause it
 - [Wakefulness / alertness](https://neurarium.olicorne.org/api/effect/wakefulness) `wakefulness`: agonism of H1; antagonism of H3; 4 drugs could cause it
 - [Weight gain](https://neurarium.olicorne.org/api/effect/weight_gain) `weight_gain`: antagonism of 5-HT2C, H1; 71 drugs could cause it
 

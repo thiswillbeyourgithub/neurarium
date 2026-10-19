@@ -30,7 +30,9 @@ export function resolveDrugs({ drugs, receptors, byId, allIds, metaRecord, v },
     resolveDrugFacts(d, v);
     resolveDrugMetabolism(d, v, metaRecord, variabilityEntry);
     const affected = new Set();
-    d.bindings = (d.bindings || []).map((b) => {
+    // `lit`: the structure ids this binding lights get added to (the drug's own
+    // bindings feed `affected`; a metabolite's lit set is discarded, see below).
+    const resolveBinding = (b, lit) => {
       // Display + provenance fields come from the shared resolver; the drug loop
       // then layers on the animation-only fields (structureIds/flow/weights). See
       // bindingDisplayFields. `tgt` is reused, `disp.tgt` is not returned to callers.
@@ -56,7 +58,7 @@ export function resolveDrugs({ drugs, receptors, byId, allIds, metaRecord, v },
           [bse, `${bse}_R`, `${bse}_L`].filter((id) => byId.has(id)),
         );
       }
-      if (!inert) for (const id of structureIds) affected.add(id);
+      if (!inert) for (const id of structureIds) lit.add(id);
       return {
         target: disp.target,
         targetName: disp.targetName,
@@ -104,19 +106,32 @@ export function resolveDrugs({ drugs, receptors, byId, allIds, metaRecord, v },
         uncertainty: disp.uncertainty,
         // The measured PDSP Ki (own verified badge), null when absent.
         ki: disp.ki,
-        // Borrowed by a prodrug from this active metabolite (see the prodrug pass
-        // above the loop); null on the drug's own bindings.
+        // The molecule this binding is lent from (a prodrug's or a salt's borrowing,
+        // or an active metabolite's binding, see borrowBindings); null on the drug's
+        // own bindings.
         viaMetabolite: b.via_metabolite || null,
       };
-    });
+    };
+    d.bindings = (d.bindings || []).map((b) => resolveBinding(b, affected));
     d.structureIds = [...affected];
+    // Its active metabolites' bindings (borrowBindings `metabolite_bindings`, empty for
+    // a prodrug, which already took them as its own), resolved the same way and
+    // flagged `fromMetabolite`. They stay out of the target list and the lit regions
+    // (those are the parent molecule's), but every readout derived from bindings reads
+    // `allBindings`: the tone and its flow overlay below, the inferred effects and
+    // the release changes, each row naming the compound (`viaMetabolite`).
+    const scratch = new Set();
+    d.metaboliteBindings = (d.metabolite_bindings || [])
+      .map((b) => ({ ...resolveBinding(b, scratch), fromMetabolite: true }));
+    d.allBindings = d.metaboliteBindings.length
+      ? [...d.bindings, ...d.metaboliteBindings] : d.bindings;
     // By-mechanism flow, split from the dots (approach 3): a projection kind gets a
     // flow overlay ONLY from *tone-setter* bindings (transporters, enzymes, vesicle
     // proteins, presynaptic inhibitory autoreceptors), never from a postsynaptic
     // receptor (those stay dots). Per engaged kind we sum toneSign*toneFactor*toneWeight so
     // combos and opposing autoreceptors resolve to a net signed tone; the sign is the
     // flow direction (boost vs damp) and the clamped magnitude its intensity.
-    d.flowSystems = toneBySystem(d.bindings);
+    d.flowSystems = toneBySystem(d.allBindings);
     // Normalize to a per-drug *relative* intensity (`rel`, 0..1): the drug's strongest
     // engaged system streams at 1, the rest in proportion. Dosage is highly variable,
     // so what the flow overlay should show is the relative "dirtiness" across systems,
@@ -140,7 +155,7 @@ export function resolveDrugs({ drugs, receptors, byId, allIds, metaRecord, v },
     // visibly engages its system's pathways, without falsely claiming a tone shift. A
     // kind already flowing (in flowSystems) is excluded, the beads already cover it.
     const ctxKinds = new Set();
-    for (const b of d.bindings) {
+    for (const b of d.allBindings) {
       if (b.flowKind && !b.toneSign && !d.flowSystems[b.flowKind]) ctxKinds.add(b.flowKind);
     }
     d.contextKinds = [...ctxKinds];

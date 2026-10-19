@@ -84,3 +84,12 @@ test("transmitterVars passes the label through the language's article", () => {
   assert.deepEqual(transmitterVars("histamine", ofNoun), { transmitter: "d'histamine" });
   assert.deepEqual(transmitterVars("histamine", (w) => w), { transmitter: "histamine" });
 });
+
+test("the parent and its active metabolite on one receptor are two chips", () => {
+  const out = deriveReleaseChanges([
+    { target: "h3", action: "antagonist" },
+    { target: "h3", action: "antagonist", viaMetabolite: "Norfoo" },
+  ], modsOf, modes);
+  assert.deepEqual(out.map((e) => e.via.map((v) => v.binding.viaMetabolite || null)),
+                   [[null, "Norfoo"]]);
+});

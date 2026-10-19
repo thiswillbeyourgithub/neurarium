@@ -94,9 +94,11 @@ export function deriveReleaseChanges(bindings, modsOf, modes) {
                        direction, structure: node.structure, via: [] });
       }
       const entry = out.get(key);
-      // One chip per receptor: two of its nodes (an autoreceptor on the cell body and
-      // on the terminal) landing on the same change are one route, not two.
-      if (!entry.via.some((v) => v.binding.target === b.target)) {
+      // One chip per (receptor, compound): two of its nodes (an autoreceptor on the
+      // cell body and on the terminal) landing on the same change are one route, not
+      // two, while the parent and its active metabolite on that receptor are two.
+      if (!entry.via.some((v) => v.binding.target === b.target
+          && (v.binding.viaMetabolite || null) === (b.viaMetabolite || null))) {
         entry.via.push({ binding: b, node });
       }
     }
