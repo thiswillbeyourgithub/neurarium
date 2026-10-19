@@ -1,6 +1,48 @@
 {
   "versions": [
     {
+      "version": "3.132.1",
+      "date": "2026-10-19",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "The Data browser now lists the gene-based dosing rows and the genetic-variant rows, and a test checks every kind's rows against the coverage tally",
+          "commits": [
+            "944a8f9"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Opening a link with only a language or tour setting no longer stops the brain from spinning; only a link that frames a specific view does",
+          "commits": [
+            "242499a"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Less duplicated code in the data tools: one gene map, one grade ranking, one Ki-quote check, one page reader and quote gate for every sourcing pass, one hemisphere-suffix rule, and unused imports removed, with no change to the published data",
+          "commits": [
+            "c8d3f83",
+            "8e2b105",
+            "fe37e5b",
+            "60c8532",
+            "60856f3",
+            "96d1331",
+            "a7e36ff",
+            "c7bf7e0",
+            "7c4b78e",
+            "1104ca4",
+            "adc8556",
+            "5f062db",
+            "806e979",
+            "a564772",
+            "fa4ec35",
+            "54e2634"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.132.0",
       "date": "2026-10-19",
       "entries": [
