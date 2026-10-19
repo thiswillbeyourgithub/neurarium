@@ -3,6 +3,7 @@
 // says follows (the group is never persisted).
 
 import { attachTip } from "./tooltip.js";
+import { subSection } from "./dom.js";
 
 const { t } = window.__I18N__;
 
@@ -68,7 +69,7 @@ export function makeMetabolism(P) {
   let pgxGroup = null;
 
   /**
-   * The CPIC guidance section of a drug panel (corpus #15), or null when it has none.
+   * The CPIC guidance subsection of a drug panel's Metabolism (corpus #15), or null when it has none.
    *
    * The one section here that states a clinical action, so it is built to be read as
    * what it is: CPIC's own two sentences per row, quoted verbatim with their pill, the
@@ -85,9 +86,9 @@ export function makeMetabolism(P) {
   const pgxSection = (drug) => {
     const blocks = drug.pgx || [];
     if (!blocks.length) return null;
-    const wrap = el("div", "info-bindings info-pgx");
+    // A subsection of the drug's Metabolism section, right under the isoforms.
+    const wrap = subSection(t("drug.pgx"), "info-pgx");
     wrap.dataset.tourSec = "pgx";
-    wrap.appendChild(el("h3", null, t("drug.pgx")));
     wrap.appendChild(el("p", "legend-caption", t("drug.pgxHint")));
 
     // One picker for the whole section: every block's profile covers the same groups,

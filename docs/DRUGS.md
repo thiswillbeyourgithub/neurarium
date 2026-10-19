@@ -384,7 +384,7 @@ nothing draws.
   (`buildEnzymeLegend`) opens `showEnzyme`: a ClinPGx search (the variant / poor-vs-ultra-rapid
   metabolizer story this dataset does not model), the metabolites that isoform forms, then its drugs
   grouped by role. Both ends share one `enzymeRow` builder (same node, either side).
-  `pgxSection` then adds **If the patient clears it slowly or fast** below the enzyme list: one
+  `pgxSection` then adds **Genetics-caused posology adaptation**, a subsection of Metabolism, below the enzyme list: one
   `<select>` picking a population group, then per gene a block (CPIC level + guideline link) whose
   rows run slowest to fastest, each a swatch from the *same* `--var-*` ramp as the enzyme bars, that
   group's frequency, a grade pill, CPIC's implication, its recommendation, the strength, and the

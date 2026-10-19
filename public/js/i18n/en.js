@@ -549,7 +549,7 @@ window.__I18N_MESSAGES__.en = {
   "drugs.showMetabolites": "Show active metabolites",
   "drug.metabolism": "Metabolism",
   "drug.metabolismHint": "The liver enzymes that clear this drug, or whose activity it changes. Pharmacokinetics, so nothing is lit in the 3D view.",
-  "drug.pgx": "If the patient clears it slowly or fast",
+  "drug.pgx": "Genetics-caused posology adaptation",
   "drug.pgxHint": "What a clearance speed means for this prescription, in CPIC's own words, beside how common that speed is. Pick a population group to put a number on each row.",
   "drug.pgxGroup": "Population group",
   "drug.pgxNoGroup": "Pick a group",

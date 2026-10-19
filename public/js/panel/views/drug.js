@@ -610,15 +610,14 @@ export function showDrug(P, drug, opts = {}) {
       }
       enzWrap.appendChild(enzUl);
     }
+    // What a clearance speed means for THIS prescription (CPIC, corpus #15), a
+    // subsection right under the isoforms that clear it: the two only answer a
+    // clinician's question together, since the enzyme rows say who clears the drug
+    // and these say what happens to someone who clears it slowly.
+    const pgx = pgxSection(drug);
+    if (pgx) enzWrap.appendChild(pgx);
     body.appendChild(enzWrap);
     flashRow(flashEnz);
-
-    // What a clearance speed means for THIS prescription (CPIC, corpus #15),
-    // right under the isoforms that clear it: the two only answer a clinician's
-    // question together, since the enzyme rows say who clears the drug and these
-    // say what happens to someone who clears it slowly.
-    const pgx = pgxSection(drug);
-    if (pgx) body.appendChild(pgx);
 
     // Psychotropic interactions (panel/pk-interactions.js), the panel's last section.
     const pkSec = pkInteractionsSection(P, drug);

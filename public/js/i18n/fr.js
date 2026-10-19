@@ -549,7 +549,7 @@ window.__I18N_MESSAGES__.fr = {
   "drugs.showMetabolites": "Afficher les métabolites actifs",
   "drug.metabolism": "Métabolisme",
   "drug.metabolismHint": "Les enzymes hépatiques qui éliminent cette substance, ou dont elle modifie l'activité. Pharmacocinétique : rien n'est allumé dans la vue 3D.",
-  "drug.pgx": "Si le patient l'élimine lentement ou vite",
+  "drug.pgx": "Adaptation posologique d'origine génétique",
   "drug.pgxHint": "Ce qu'une vitesse d'élimination implique pour cette prescription, dans les termes mêmes du CPIC, à côté de sa fréquence. Choisissez un groupe de population pour chiffrer chaque ligne.",
   "drug.pgxGroup": "Groupe de population",
   "drug.pgxNoGroup": "Choisir un groupe",
