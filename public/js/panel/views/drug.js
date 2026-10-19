@@ -7,6 +7,7 @@ import { appendTdmChips, valueChip } from "../../tdm.js";
 import { bindingKi, formatHalfLife } from "../format.js";
 import { flashRow, btn, subSection } from "../dom.js";
 import { pkInteractionsSection } from "../pk-interactions.js";
+import { activeMetabolitesSubsection } from "../active-metabolites.js";
 import { toneWeightOf } from "../../data.js";
 
 const { t } = window.__I18N__;
@@ -376,86 +377,6 @@ export function showDrug(P, drug, opts = {}) {
   appendDrugVariants(drug);
   appendWorkup(drug);
 
-  // Active metabolites: one row per metabolite (its own sourced identity node).
-  // A metabolite that is itself a modeled drug links to it (jump via onDrugPick);
-  // each shows its own T½ underneath, a bit like a binding's Ki. A non-modeled
-  // metabolite's OWN receptor bindings (Wikipedia/PDSP-sourced) are listed under it
-  // via the same bindingRow the drug's "Direct molecular targets" uses, so a reader can see what the
-  // metabolite hits without hunting each receptor panel. (A linked metabolite shows
-  // none here: its bindings live on its own drug row, reachable via the link.)
-  if (drug.metabolites && drug.metabolites.length) {
-    const metaEl = el("div", "info-bindings info-metabolites");
-    metaEl.dataset.tourSec = "metabolites";
-    metaEl.appendChild(el("h3", null, t("drug.metabolites")));
-    const ul = el("ul");
-    let flashLi = null; // the row to scroll to + flash (opts.highlightMetabolite)
-    for (const m of drug.metabolites) {
-      const li = el("li", "metab-row");
-      if (opts.highlightMetabolite && m.name === opts.highlightMetabolite) flashLi = li;
-      const head = el("div", "metab-head");
-      const linked = m.drugId ? drugById.get(m.drugId) : null;
-      if (linked && m.linkFocusable) {
-        // A metabolite that IS a modeled drug: its name is the link to that drug's
-        // panel, where its bindings live (never re-listed here: one source of truth).
-        const a = drugNameLink(linked, m.name);
-        if (linked.bindings.length)
-          a.title = t("drug.metabSeeBindings", { n: linked.bindings.length });
-        head.appendChild(a);
-      } else {
-        head.appendChild(el("span", "bind-target", m.name));
-      }
-      // The shared node pill, so a link another corpus denies reads orange.
-      head.appendChild(nodePill(m));
-      li.appendChild(head);
-      // Which enzyme makes it, each its own sourced node and clickable to that
-      // enzyme's panel: the prodrug story (why a CYP2D6 poor metabolizer gets a
-      // different drug than the label says). Absent for the metabolites no corpus
-      // pins down, which is most of them, so no NOSOURCE row is shown here.
-      for (const f of m.formedBy || []) {
-        const row = el("div", "metab-formed");
-        const text = el("span", "bind-text");
-        text.appendChild(el("span", "bind-action", `${t("drug.formedBy")} `));
-        const name = el("span", "bind-target", f.label);
-        text.appendChild(name);
-        if (f.reactionLabel)
-          text.appendChild(el("span", "bind-action", ` · ${f.reactionLabel}`));
-        row.appendChild(text);
-        row.appendChild(nodePill(f));
-        const enz = enzymeById.get(f.enzyme);
-        if (enz) {
-          row.classList.add("clickable");
-          row.addEventListener("click", () => onEnzymePick(enz));
-        }
-        li.appendChild(row);
-      }
-      const hlStr = formatHalfLife(m.halfLife);
-      if (hlStr) {
-        li.appendChild(valueChip({ el, nodePill }, {
-          label: t("drug.halfLife"), value: hlStr, cls: "metab-hl", bare: true,
-          provenance: m.halfLifeProvenance, sources: m.halfLifeSources }));
-      }
-      // A non-modeled metabolite's OWN sourced receptor bindings (m.ownBindings,
-      // resolved in js/data.js from its Wikipedia/PDSP pharmacology). Rendered with
-      // the same bindingRow the drug's "Direct molecular targets" uses, strongest-affinity first, each
-      // row jumping to its target when browsable.
-      if (m.ownBindings && m.ownBindings.length) {
-        const bul = el("ul", "metab-bindings");
-        const mbinds = [...m.ownBindings].sort((a, b) => bindingKi(a) - bindingKi(b));
-        for (const b of mbinds) {
-          const tgt = targetById.get(b.target);
-          const onActivate = tgt && tgt.focusable ? () => onTargetPick(tgt) : null;
-          bul.appendChild(bindingRow(b, drug, b.targetName, onActivate));
-        }
-        li.appendChild(bul);
-      }
-      ul.appendChild(li);
-    }
-    metaEl.appendChild(ul);
-    body.appendChild(metaEl);
-    // Arrived from a metabolite's receptor row: bring it into view and flash it, so
-    // the user sees why the parent drug opened and where its metabolite's bindings are.
-    flashRow(flashLi);
-  }
   // No standalone drug-level "Source(s)" block: the Stahl citation that backs
   // the drug is shown per-binding (each binding's pill above), so a source
   // always refers to a specific binding node rather than "the whole drug".
@@ -552,74 +473,89 @@ export function showDrug(P, drug, opts = {}) {
   }
 
   // Metabolism, last: pharmacokinetics has no anatomy, so it sits AFTER the
-  // sections that do (Direct molecular targets / Neurotransmitter tone / Acts within). The enzymes
-  // that clear this drug or whose activity it changes, then the drug -> drug
-  // interactions those roles imply.
-  if (drug.enzymes && drug.enzymes.length) {
-    const enzWrap = el("div", "info-bindings");
-    enzWrap.dataset.tourSec = "metabolism"; // guided-tour section anchor
-    enzWrap.appendChild(el("h3", null, t("drug.metabolism")));
-    enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
-    // Where to go read the pharmacokinetic pathways themselves: the enzyme rows
-    // below say *which* isoform, ClinPGx draws the route. A lookup link like the
-    // ones beside the reference, so it carries no provenance pill.
-    const pathRow = el("div", "info-wiki");
-    pathRow.appendChild(el("span", null, t("info.pathways")));
-    appendLookupLink(pathRow, "info.clinpgx",
-      clinpgxSearchUrl(drug.name, "Pathway"), "info.clinpgxPathwaysTitle");
-    enzWrap.appendChild(pathRow);
-    // Addon slot: the coverage caveat on the list below (a union of the routes
-    // some corpus names, never all of them). Anchored on the SECTION rather than
-    // on this drug, since the claim holds for every drug at once; read before the
-    // rows (folded to its title, so it does not push them down).
-    appendAddons(enzWrap, "section", "metabolism", "section.metabolism");
-    // Addon slot: a caveat about how this drug is cleared, which the per-isoform
-    // rows below cannot state (a row gives a role, never a curve). Above the
-    // first enzyme so it is read before them, not as a footnote after.
-    // An authored addon states a mechanism a source attests; failing one, the
-    // same slot takes the derived flag off the enzyme rows below.
-    if (!appendAddons(enzWrap, "drug", drug.id, "drug.metabolism")) {
-      const derived = derivedAutoModulation(drug);
-      if (derived) enzWrap.appendChild(derived);
-    }
-    // One heading per role ("Substrate of", then what it does to others), the
-    // isoforms indented under it, each carrying its role pill and, when a source
-    // qualifies it, its strength + pill (strength is per (enzyme, role), so it
-    // stays on the isoform's line rather than on the heading).
-    const roleOrder = ["substrate", "inhibitor", "inducer"];
-    const byRole = new Map();
-    for (const row of drug.enzymes) {
-      if (!byRole.has(row.role)) byRole.set(row.role, []);
-      byRole.get(row.role).push(row);
-    }
-    // opts.highlightEnzymes: arrived from another drug's interaction row, so land
-    // on the isoform the two share instead of making the reader find it.
-    const wanted = new Set(opts.highlightEnzymes || []);
-    let flashEnz = null;
-    const roles = [...roleOrder.filter((r) => byRole.has(r)),
-      ...[...byRole.keys()].filter((r) => !roleOrder.includes(r))];
-    for (const role of roles) {
-      const group = byRole.get(role).sort((a, b) => a.label.localeCompare(b.label));
-      enzWrap.appendChild(el("h4", "enz-role", group[0].roleHeading));
-      const enzUl = el("ul", "enz-role-list");
-      for (const row of group) {
-        const enz = enzymeById.get(row.enzyme);
-        const li = enzymeRow(row, row.label, enz ? () => onEnzymePick(enz) : null);
-        if (!flashEnz && wanted.has(row.enzyme)) flashEnz = li;
-        enzUl.appendChild(li);
+  // sections that do (Direct molecular targets / Neurotransmitter tone / Acts within).
+  // Its active metabolites first (what the drug turns into), then the enzymes that
+  // clear it or whose activity it changes, the CPIC dosing subsection, and the
+  // drug -> drug interactions those roles imply.
+  const metab = activeMetabolitesSubsection(P, drug, opts);
+  const hasEnzymes = Boolean(drug.enzymes && drug.enzymes.length);
+  const pgx = pgxSection(drug);
+  if (metab.sec || hasEnzymes || pgx) {
+    const metabWrap = el("div", "info-bindings");
+    metabWrap.dataset.tourSec = "metabolism"; // guided-tour section anchor
+    metabWrap.appendChild(el("h3", null, t("drug.metabolism")));
+    if (metab.sec) metabWrap.appendChild(metab.sec);
+    // Under a metabolites subsection the enzymes get one of their own, or their rows
+    // would read as part of the metabolites above.
+    const enzWrap = !hasEnzymes ? null
+      : metab.sec ? metabWrap.appendChild(subSection(t("drug.metabEnzymes")))
+      : metabWrap;
+    if (hasEnzymes) {
+      enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
+      // Where to go read the pharmacokinetic pathways themselves: the enzyme rows
+      // below say *which* isoform, ClinPGx draws the route. A lookup link like the
+      // ones beside the reference, so it carries no provenance pill.
+      const pathRow = el("div", "info-wiki");
+      pathRow.appendChild(el("span", null, t("info.pathways")));
+      appendLookupLink(pathRow, "info.clinpgx",
+        clinpgxSearchUrl(drug.name, "Pathway"), "info.clinpgxPathwaysTitle");
+      enzWrap.appendChild(pathRow);
+      // Addon slot: the coverage caveat on the list below (a union of the routes
+      // some corpus names, never all of them). Anchored on the SECTION rather than
+      // on this drug, since the claim holds for every drug at once; read before the
+      // rows (folded to its title, so it does not push them down).
+      appendAddons(enzWrap, "section", "metabolism", "section.metabolism");
+      // Addon slot: a caveat about how this drug is cleared, which the per-isoform
+      // rows below cannot state (a row gives a role, never a curve). Above the
+      // first enzyme so it is read before them, not as a footnote after.
+      // An authored addon states a mechanism a source attests; failing one, the
+      // same slot takes the derived flag off the enzyme rows below.
+      if (!appendAddons(enzWrap, "drug", drug.id, "drug.metabolism")) {
+        const derived = derivedAutoModulation(drug);
+        if (derived) enzWrap.appendChild(derived);
       }
-      enzWrap.appendChild(enzUl);
+      // One heading per role ("Substrate of", then what it does to others), the
+      // isoforms indented under it, each carrying its role pill and, when a source
+      // qualifies it, its strength + pill (strength is per (enzyme, role), so it
+      // stays on the isoform's line rather than on the heading).
+      const roleOrder = ["substrate", "inhibitor", "inducer"];
+      const byRole = new Map();
+      for (const row of drug.enzymes) {
+        if (!byRole.has(row.role)) byRole.set(row.role, []);
+        byRole.get(row.role).push(row);
+      }
+      // opts.highlightEnzymes: arrived from another drug's interaction row, so land
+      // on the isoform the two share instead of making the reader find it.
+      const wanted = new Set(opts.highlightEnzymes || []);
+      let flashEnz = null;
+      const roles = [...roleOrder.filter((r) => byRole.has(r)),
+        ...[...byRole.keys()].filter((r) => !roleOrder.includes(r))];
+      for (const role of roles) {
+        const group = byRole.get(role).sort((a, b) => a.label.localeCompare(b.label));
+        enzWrap.appendChild(el("h4", "enz-role", group[0].roleHeading));
+        const enzUl = el("ul", "enz-role-list");
+        for (const row of group) {
+          const enz = enzymeById.get(row.enzyme);
+          const li = enzymeRow(row, row.label, enz ? () => onEnzymePick(enz) : null);
+          if (!flashEnz && wanted.has(row.enzyme)) flashEnz = li;
+          enzUl.appendChild(li);
+        }
+        enzWrap.appendChild(enzUl);
+      }
+      flashRow(flashEnz);
     }
     // What a clearance speed means for THIS prescription (CPIC, corpus #15), a
     // subsection right under the isoforms that clear it: the two only answer a
     // clinician's question together, since the enzyme rows say who clears the drug
     // and these say what happens to someone who clears it slowly.
-    const pgx = pgxSection(drug);
-    if (pgx) enzWrap.appendChild(pgx);
-    body.appendChild(enzWrap);
-    flashRow(flashEnz);
-
-    // Psychotropic interactions (panel/pk-interactions.js), the panel's last section.
+    if (pgx) metabWrap.appendChild(pgx);
+    body.appendChild(metabWrap);
+    // Arrived from a metabolite's receptor row: bring it into view and flash it, so
+    // the user sees why the parent drug opened and where its metabolite's bindings are.
+    flashRow(metab.flash);
+  }
+  // Psychotropic interactions (panel/pk-interactions.js), the panel's last section.
+  if (hasEnzymes) {
     const pkSec = pkInteractionsSection(P, drug);
     if (pkSec) body.appendChild(pkSec);
   }

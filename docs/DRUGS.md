@@ -65,8 +65,7 @@ fixed Stahl list.
   antipsychotic reads dopaminergic-**up** (blocking the D2 *autoreceptor* disinhibits release); its
   postsynaptic blockade shows in the block-coloured dots. (This is why the dataset carries the ascending
   monoamine pathways.)
-- **Panel** (`showDrug`): every `h3`-headed section (Brands, Pharmacokinetics, Direct molecular targets, Active metabolites,
-  Neurotransmitter tone, ..., Psychotropic interactions) starts folded, like every detail panel (see
+- **Panel** (`showDrug`): every `h3`-headed section (Administrative: class, NbN, history, brands; Pharmacokinetics with its Brain entry subsection; Direct molecular targets; Inferred side effects; ...; Neurotransmitter tone; Metabolism, whose `h4` subsections (`panel/dom.js` `subSection`) are Active metabolites (`panel/active-metabolites.js`), Enzymes and Genetics-caused posology adaptation; Psychotropic interactions) starts folded, like every detail panel (see
   `docs/VIEWER.md` "Folded panel sections"). A name shown beside the INN (`DRUG_NAME_QUALIFIERS`, display-only + searchable:
   "Paliperidone (9-OH-risperidone)") becomes `drug.label`; a metabolite that is a modeled drug shows under that
   label as a plain `drugNameLink` (the Drugs-list row look), and that drug's own panel opens with "Active
@@ -95,7 +94,7 @@ fixed Stahl list.
   own `half_life`/`half_life_sources`, a `drug_id` when it is itself a modeled drug so the panel links to it,
   own `bindings`) is ONE record in `tools/data/metabolites_data.jsonl`, whatever drugs make it. `showDrug` renders T½ as an `hl-chip` (auto-scaled to min/h/days via
   `formatHalfLife`, in a **Pharmacokinetics** section between the brands and the **Direct molecular targets** list, beside the Tmax
-  chip below) and an **Active metabolites** section
+  chip below) and an **Active metabolites** subsection at the top of Metabolism
   (each row its name + its own T½ chip, "a bit like the Ki"; a link another corpus denies is active wears the orange `contradicted` pill, `CONTRADICTIONS` in docs/PROVENANCE.md). In `buildDrugLegend` a default-on
   **Show active metabolites** toggle (`#drugs-show-metabolites`, persisted `neurarium.metabolites`) adds
   discreet indented `.metab-item` bullets under each parent (a bullet + its parent both stay visible
