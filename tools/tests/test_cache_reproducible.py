@@ -10,8 +10,7 @@ a scratch path, compare with the committed bytes.
 Author-side: skipped on a clone without ``data_sources/``. ``FAST`` always runs there;
 ``SLOW`` (tens of seconds each) runs only with ``NEURARIUM_SLOW_TESTS=1``.
 
-Not listed, because their committed caches are stale today (a rebuild is new data that wants
-its own judge pass, not a test edit): ``fetch_metabolite_bindings``. ``projection_worklist`` reproduces but is left out on
+Every refreshed cache is listed; ``projection_worklist`` reproduces but is left out on
 runtime alone (about 17 minutes of single-threaded window matching).
 Add one here once its cache has been refreshed.
 
@@ -46,14 +45,16 @@ SLOW = {
     "fetch_binding_direction_tables": "binding_directions_tables.json",
     "fetch_tmax": "tmax_worklist.json",
     "fetch_receptor_effects": "receptor_effects_worklist.json",
+    # --no-fetch: without it the fetcher would download a page it has not stored.
+    "fetch_metabolite_bindings": ("metabolite_bindings_worklist.json", ["--no-fetch"]),
 }
 
 
-def rebuilt(script: str, out_dir: Path) -> bytes:
-    """Run ``script`` offline with ``--out`` in ``out_dir`` and return what it wrote."""
+def rebuilt(script: str, out_dir: Path, extra: list[str] = ()) -> bytes:
+    """Run ``script`` offline with ``--out`` in ``out_dir`` (+ ``extra``), return what it wrote."""
     out = out_dir / f"{script}.json"
     subprocess.run([sys.executable, str(ROOT / "tools" / "fetch" / f"{script}.py"),
-                    "--out", str(out)], cwd=ROOT, check=True,
+                    "--out", str(out), *extra], cwd=ROOT, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
     return out.read_bytes()
 
@@ -65,8 +66,9 @@ class CacheReproducibleTest(unittest.TestCase):
         # Inside the repo: some fetchers print their --out relative to it.
         with tempfile.TemporaryDirectory(dir=ROOT, prefix=".repro_") as tmp:
             for script, cache in table.items():
+                cache, extra = cache if isinstance(cache, tuple) else (cache, [])
                 with self.subTest(script=script):
-                    self.assertEqual(rebuilt(script, Path(tmp)), (CACHE / cache).read_bytes(),
+                    self.assertEqual(rebuilt(script, Path(tmp), extra), (CACHE / cache).read_bytes(),
                                      f"{script} no longer reproduces {cache}")
 
     def test_fast_fetchers_reproduce_their_cache(self):

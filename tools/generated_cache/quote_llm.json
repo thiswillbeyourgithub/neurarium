@@ -927,6 +927,10 @@
 "drug:valproate/workup[coagulation:before]": "opus",
 "drug:valproate/workup[coagulation:during]": "opus"
 },
+"q_1504d6c171f3": {
+"metabolite:noribogaine/bindings[kappa:agonist]": "opus",
+"metabolite:noribogaine/bindings[mu:agonist]": "opus"
+},
 "q_15682f6bd8cc": {
 "drug:vilazodone/first_approval": "opus"
 },
@@ -2105,7 +2109,8 @@
 "receptor:h1/effects[antagonism:sleep_promotion]": "opus"
 },
 "q_2fdc49044b7b": {
-"drug:zimelidine/metabolites[norzimelidine]": "sonnet"
+"drug:zimelidine/metabolites[norzimelidine]": "opus",
+"metabolite:norzimelidine/bindings[sert:reuptake_inhibitor]": "opus"
 },
 "q_2fe158c82e68": {
 "drug:dimenhydrinate/half_life": "opus"
@@ -8398,6 +8403,9 @@
 },
 "q_bbe2a935bb6c": {
 "receptor:kappa/effects[agonism:antipruritic]": "opus"
+},
+"q_bbf05ef20867": {
+"metabolite:noribogaine/bindings[sert:reuptake_inhibitor]": "opus"
 },
 "q_bc128dd5160e": {
 "receptor:kappa/effects[agonism:analgesia]": "opus"

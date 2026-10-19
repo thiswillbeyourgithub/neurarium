@@ -70,7 +70,7 @@ from lib.corpora import wikipedia as wikistore  # noqa: E402  (the corpus #9 sto
 import fetch_ki as ki  # noqa: E402  (PDSP Ki: discover a metabolite's measured targets, corpus #5)
 from lib.io_atomic import atomic_write_json  # noqa: E402
 from lib import drugs_io  # noqa: E402
-from lib.worklist_io import merge_scoped_list  # noqa: E402
+from lib.worklist_io import merge_scoped_list, shown  # noqa: E402
 
 WORKLIST = os.path.join(REPO, "tools", "generated_cache",
                         "metabolite_bindings_worklist.json")
@@ -265,6 +265,8 @@ def main() -> int:
                     help="re-fetch every page even if already stored")
     ap.add_argument("--no-fetch", action="store_true",
                     help="re-parse stored pages only (no network)")
+    ap.add_argument("--out", default=WORKLIST,
+                    help="where to write the worklist (default: the committed cache)")
     ap.add_argument("--only", default="",
                     help="comma-separated metabolite keys to limit to")
     args = ap.parse_args()
@@ -363,15 +365,15 @@ def main() -> int:
 
     # A scoped (--only) run merges into the committed worklist: overwriting it would
     # orphan every other metabolite's already-applied picks.
-    if args.only and os.path.exists(WORKLIST):
-        with open(WORKLIST, encoding="utf-8") as f:
+    if args.only and os.path.exists(args.out):
+        with open(args.out, encoding="utf-8") as f:
             worklist = merge_scoped_list(json.load(f), worklist, "key")
-    atomic_write_json(WORKLIST, worklist, indent=2)
+    atomic_write_json(args.out, worklist, indent=2)
     n_found = sum(1 for e in worklist if e["found"])
     n_ki = sum(len(e["ki_bindings"]) for e in worklist)
     n_act = sum(len(e["action_candidates"]) for e in worklist)
     n_pdsp = sum(len(e["pdsp_targets"]) for e in worklist)
-    print(f"\nwrote {WORKLIST}")
+    print(f"\nwrote {shown(os.path.abspath(args.out), REPO)}")
     print(f"  {len(worklist)} metabolites, {n_found} pages found, "
           f"{n_ki} Ki-table rows, {n_act} action candidate lines, "
           f"{n_pdsp} PDSP-discovered targets")

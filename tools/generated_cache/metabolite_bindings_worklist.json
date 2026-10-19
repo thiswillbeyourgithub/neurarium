@@ -1,5 +1,237 @@
 [
   {
+    "metabolite": "2-Oxoquazepam",
+    "parents": [
+      "quazepam"
+    ],
+    "key": "2_oxoquazepam",
+    "wiki_title": "Quazepam",
+    "slug": "quazepam",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "quazepam"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "nachr_a7",
+        "ki_id": 9376,
+        "value_nm": 205.0
+      }
+    ]
+  },
+  {
+    "metabolite": "3,4-Methylenedioxyamphetamine (MDA)",
+    "parents": [
+      "mdma"
+    ],
+    "key": "3_4_methylenedioxyamphetamine_mda",
+    "wiki_title": "3,4-Methylenedioxyamphetamine",
+    "slug": "3_4_methylenedioxyamphetamine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [
+      {
+        "target": "sert",
+        "wiki_name": "SERT",
+        "ki": {
+          "median": 5600.0,
+          "min": 5600.0,
+          "max": 5600.0,
+          "raw": "5,600–>10,000 (K i ) 478–4,900 ( IC 50"
+        },
+        "quote": "SERT | 5,600–>10,000 (K i ) 478–4,900 ( IC 50",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "5ht1a",
+        "wiki_name": "5-HT 1A",
+        "ki": {
+          "median": 3762.0,
+          "min": 3762.0,
+          "max": 3762.0,
+          "raw": "3,762–>10,000"
+        },
+        "quote": "5-HT 1A | 3,762–>10,000",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "5ht2a",
+        "wiki_name": "5-HT 2A",
+        "ki": {
+          "median": 3200.0,
+          "min": 3200.0,
+          "max": 3200.0,
+          "raw": "3,200–>10,000 (K i ) 630–1,767 ( EC 50 ) 57–99% ( E max"
+        },
+        "quote": "5-HT 2A | 3,200–>10,000 (K i ) 630–1,767 ( EC 50 ) 57–99% ( E max",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "5ht2b",
+        "wiki_name": "5-HT 2B",
+        "ki": {
+          "median": 95.5,
+          "min": 91.0,
+          "max": 100.0,
+          "raw": "91–100 (K i ) 190–850 ( EC 50 ) 51–80% ( E max )"
+        },
+        "quote": "5-HT 2B | 91–100 (K i ) 190–850 ( EC 50 ) 51–80% ( E max )",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "5ht2c",
+        "wiki_name": "5-HT 2C",
+        "ki": {
+          "median": 4709.0,
+          "min": 3000.0,
+          "max": 6418.0,
+          "raw": "3,000–6,418 (K i ) 98–4,800 ( EC 50 ) 79–118% ( E max )"
+        },
+        "quote": "5-HT 2C | 3,000–6,418 (K i ) 98–4,800 ( EC 50 ) 79–118% ( E max )",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "5ht7",
+        "wiki_name": "5-HT 7",
+        "ki": {
+          "median": 3548.0,
+          "min": 3548.0,
+          "max": 3548.0,
+          "raw": "3,548"
+        },
+        "quote": "5-HT 7 | 3,548",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "alpha1a",
+        "wiki_name": "α 1A",
+        "ki": {
+          "median": 8700.0,
+          "min": 8700.0,
+          "max": 8700.0,
+          "raw": "8,700–>10,000"
+        },
+        "quote": "α 1A | 8,700–>10,000",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "alpha2a",
+        "wiki_name": "α 2A",
+        "ki": {
+          "median": 1850.0,
+          "min": 1100.0,
+          "max": 2600.0,
+          "raw": "1,100–2,600"
+        },
+        "quote": "α 2A | 1,100–2,600",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "alpha2b",
+        "wiki_name": "α 2B",
+        "ki": {
+          "median": 690.0,
+          "min": 690.0,
+          "max": 690.0,
+          "raw": "690"
+        },
+        "quote": "α 2B | 690",
+        "page": "3_4_methylenedioxyamphetamine"
+      },
+      {
+        "target": "alpha2c",
+        "wiki_name": "α 2C",
+        "ki": {
+          "median": 229.0,
+          "min": 229.0,
+          "max": 229.0,
+          "raw": "229"
+        },
+        "quote": "α 2C | 229",
+        "page": "3_4_methylenedioxyamphetamine"
+      }
+    ],
+    "unresolved_ki": [
+      "'TAAR1' (Ki 220–250 (K i ) (rat) 740 ( EC 50 ) (rat) 86% ( E max ) (rat) 160–180 (K i ) (mouse) 580 ( EC 50 ) (mouse) 102% ( E max ) (rat) 3,600 ( EC 50 ) (human) 11% ( E max ) (human))"
+    ],
+    "action_candidates": [
+      "In terms of its pharmacology , MDA is a serotonin–norepinephrine–dopamine releasing agent (SNDRA) and a serotonin 5-HT 2 receptor agonist , including of the serotonin 5-HT 2A receptor . It has a duration of 5 to 8 hours or around 6 hours typically.",
+      "In terms of the subjective and behavioral effects of MDA, it is thought that serotonin release is required for its entactogenic effects, dopamine release is required for its euphoriant ( rewarding and addictive ) effects, dopamine and norepinephrine release are required for its psychostimulant effects, and direct agonism of the serotonin 5-HT 2A receptor is required for its mild psychedelic effects. The entactogenic effects of drugs like MDA are thought to be dependent on a precise balance of serotonin and dopamine release as well as serotonin receptor agonism. The longer duration of MDA compared to MDMA appears to be related to pharmacodynamics as opposed to pharmacokinetics , for instance the effects of MDA depending relatively more on serotonin 5-HT 2A receptor agonism than on serotonin release.",
+      "MDA constitutes part of the core structure of the β-adrenergic receptor agonist protokylol ."
+    ],
+    "pages": [
+      "3_4_methylenedioxyamphetamine",
+      "mdma"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "3-Hydroxybromazepam",
+    "parents": [
+      "bromazepam"
+    ],
+    "key": "3_hydroxybromazepam",
+    "wiki_title": "Bromazepam",
+    "slug": "bromazepam",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "bromazepam"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "6-Hydroxybupropion",
+    "parents": [
+      "bupropion"
+    ],
+    "key": "6_hydroxybupropion",
+    "wiki_title": "Hydroxybupropion",
+    "slug": "hydroxybupropion",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Compared to bupropion, hydroxybupropion is similar in its potency as a norepinephrine reuptake inhibitor ( IC 50 = 1.7 μM), but is substantially weaker as a dopamine reuptake inhibitor (IC 50 = >10 μM). Like bupropion, hydroxybupropion is also a non-competitive antagonist of nACh receptors , such as α 4 β 2 and α 3 β 4 , but is even more potent in comparison."
+    ],
+    "pages": [
+      "hydroxybupropion",
+      "bupropion"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "6-Monoacetylmorphine",
+    "parents": [
+      "heroin"
+    ],
+    "key": "6_monoacetylmorphine",
+    "wiki_title": "Heroin",
+    "slug": "heroin",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "heroin"
+    ],
+    "pdsp_targets": []
+  },
+  {
     "metabolite": "7-Hydroxyamoxapine",
     "parents": [
       "amoxapine"
@@ -52,62 +284,24 @@
     ]
   },
   {
-    "metabolite": "Dehydroaripiprazole",
+    "metabolite": "(+)-alpha-Dihydrotetrabenazine",
     "parents": [
-      "aripiprazole"
+      "valbenazine"
     ],
-    "key": "dehydroaripiprazole",
-    "wiki_title": "Aripiprazole",
-    "slug": "aripiprazole",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "aripiprazole"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "DM-3411",
-    "parents": [
-      "brexpiprazole"
-    ],
-    "key": "dm_3411",
-    "wiki_title": "Brexpiprazole",
-    "slug": "brexpiprazole",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "brexpiprazole"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "6-Hydroxybupropion",
-    "parents": [
-      "bupropion"
-    ],
-    "key": "6_hydroxybupropion",
-    "wiki_title": "Hydroxybupropion",
-    "slug": "hydroxybupropion",
+    "key": "alpha_dihydrotetrabenazine",
+    "wiki_title": "Dihydrotetrabenazine",
+    "slug": "dihydrotetrabenazine",
     "own_article": true,
     "found": true,
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "Compared to bupropion, hydroxybupropion is similar in its potency as a norepinephrine reuptake inhibitor ( IC 50 = 1.7 μM), but is substantially weaker as a dopamine reuptake inhibitor (IC 50 = >10 μM). Like bupropion, hydroxybupropion is also a non-competitive antagonist of nACh receptors , such as α 4 β 2 and α 3 β 4 , but is even more potent in comparison."
+      "DTBZ as a PET radioligand with affinity for VMAT2 was developed in the mid 1990s by David E. Kuhl and colleagues at the University of Michigan . There are two enantiomers of alpha-dihydrotetrabenazine, and the dextrorotary (or (+) isomer) has a high affinity of about 1 nanomolar K i whereas the levorotary (or (-) isomer) has approximately 1000 fold lower affinity with a K i of about 2 micromolar."
     ],
     "pages": [
-      "hydroxybupropion",
-      "bupropion"
+      "dihydrotetrabenazine",
+      "valbenazine"
     ],
     "pdsp_targets": []
   },
@@ -127,65 +321,6 @@
     "action_candidates": [],
     "pages": [
       "carbamazepine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Didesmethyl cariprazine",
-    "parents": [
-      "cariprazine"
-    ],
-    "key": "didesmethyl_cariprazine",
-    "wiki_title": "Cariprazine",
-    "slug": "cariprazine",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "cariprazine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Desmethylclomipramine",
-    "parents": [
-      "clomipramine"
-    ],
-    "key": "desmethylclomipramine",
-    "wiki_title": "Norclomipramine",
-    "slug": "norclomipramine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "norclomipramine",
-      "clomipramine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Diethyldithiocarbamate",
-    "parents": [
-      "disulfiram"
-    ],
-    "key": "diethyldithiocarbamate",
-    "wiki_title": "Sodium diethyldithiocarbamate",
-    "slug": "sodium_diethyldithiocarbamate",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "sodium_diethyldithiocarbamate",
-      "disulfiram"
     ],
     "pdsp_targets": []
   },
@@ -210,369 +345,36 @@
     "pdsp_targets": []
   },
   {
-    "metabolite": "Norfluoxetine",
+    "metabolite": "Cotinine",
     "parents": [
-      "fluoxetine"
+      "nicotine"
     ],
-    "key": "norfluoxetine",
-    "wiki_title": "Seproxetine",
-    "slug": "seproxetine",
+    "key": "cotinine",
+    "wiki_title": "Cotinine",
+    "slug": "cotinine",
     "own_article": true,
     "found": true,
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "The bioavailability of fluoxetine is relatively high (72%), and peak plasma concentrations are reached in 6–8 hours. It is highly bound to plasma proteins, mostly albumin and α 1 -glycoprotein. Fluoxetine is metabolized in the liver by isoenzymes of the cytochrome P450 system, including CYP2D6 . The role of CYP2D6 in the metabolism of fluoxetine may be clinically important, as there is great genetic variability in the function of this enzyme among people. CYP2D6 is responsible for converting fluoxetine to its only active metabolite, norfluoxetine . Both drugs are also potent inhibitors of CYP2D6."
+      "Similarly to nicotine, cotinine binds to, activates, and desensitizes neuronal nicotinic acetylcholine receptors , though at much lower potency in comparison. It has demonstrated nootropic and antipsychotic -like effects in animal models. Cotinine treatment has also been shown to reduce depression, anxiety , and fear -related behavior as well as memory impairment in animal models of depression , post-traumatic stress disorder, and Alzheimer's disease. Nonetheless, treatment with cotinine in humans was reported to have no significant physiologic, subjective, or performance effects in one study, though others suggest that this may not be the case.",
+      "A few studies indicate that the affinity for cotinine to the nicotinic acetylcholine receptors (nAChRs) is about 100 times lower than nicotine's. Some work suggests that cotinine may be a positive allosteric modulator of α7 nAChRs. If this is true, cotinine would facilitate endogenous neurotransmission without directly stimulating nAChRs."
     ],
     "pages": [
-      "seproxetine",
-      "fluoxetine"
-    ],
-    "pdsp_targets": [
-      {
-        "target": "5ht2a",
-        "ki_id": 5029,
-        "value_nm": 295.12
-      },
-      {
-        "target": "5ht2b",
-        "ki_id": 14123,
-        "value_nm": 5063.0
-      },
-      {
-        "target": "5ht2c",
-        "ki_id": 5091,
-        "value_nm": 91.2
-      },
-      {
-        "target": "dat",
-        "ki_id": 56017,
-        "value_nm": 3661.0
-      },
-      {
-        "target": "m1",
-        "ki_id": 41998,
-        "value_nm": 1200.0
-      },
-      {
-        "target": "m2",
-        "ki_id": 42017,
-        "value_nm": 4600.0
-      },
-      {
-        "target": "m3",
-        "ki_id": 42036,
-        "value_nm": 760.0
-      },
-      {
-        "target": "m4",
-        "ki_id": 42055,
-        "value_nm": 2600.0
-      },
-      {
-        "target": "m5",
-        "ki_id": 42074,
-        "value_nm": 2200.0
-      },
-      {
-        "target": "net",
-        "ki_id": 9630,
-        "value_nm": 3947.0
-      },
-      {
-        "target": "sert",
-        "ki_id": 56025,
-        "value_nm": 26.0
-      }
-    ]
-  },
-  {
-    "metabolite": "Meta-chlorophenylpiperazine",
-    "parents": [
-      "nefazodone",
-      "trazodone"
-    ],
-    "key": "meta_chlorophenylpiperazine",
-    "wiki_title": "meta-Chlorophenylpiperazine",
-    "slug": "meta_chlorophenylpiperazine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [
-      {
-        "target": "sert",
-        "wiki_name": "SERT",
-        "ki": {
-          "median": 317.0,
-          "min": 202.0,
-          "max": 432.0,
-          "raw": "202–432"
-        },
-        "quote": "SERT | 202–432 | Human"
-      },
-      {
-        "target": "net",
-        "wiki_name": "NET",
-        "ki": {
-          "median": 3150.0,
-          "min": 1940.0,
-          "max": 4360.0,
-          "raw": "1,940–4,360"
-        },
-        "quote": "NET | 1,940–4,360 | Human"
-      },
-      {
-        "target": "5ht1a",
-        "wiki_name": "5-HT 1A",
-        "ki": {
-          "median": 222.0,
-          "min": 44.0,
-          "max": 400.0,
-          "raw": "44–400"
-        },
-        "quote": "5-HT 1A | 44–400 | Human"
-      },
-      {
-        "target": "5ht1b",
-        "wiki_name": "5-HT 1B",
-        "ki": {
-          "median": 295.0,
-          "min": 89.0,
-          "max": 501.0,
-          "raw": "89–501"
-        },
-        "quote": "5-HT 1B | 89–501 | Human"
-      },
-      {
-        "target": "5ht1d",
-        "wiki_name": "5-HT 1D",
-        "ki": {
-          "median": 755.0,
-          "min": 210.0,
-          "max": 1300.0,
-          "raw": "210–1,300"
-        },
-        "quote": "5-HT 1D | 210–1,300 | Human"
-      },
-      {
-        "target": "5ht2a",
-        "wiki_name": "5-HT 2A",
-        "ki": {
-          "median": 215.0,
-          "min": 32.0,
-          "max": 398.0,
-          "raw": "32–398"
-        },
-        "quote": "5-HT 2A | 32–398 | Human"
-      },
-      {
-        "target": "5ht2b",
-        "wiki_name": "5-HT 2B",
-        "ki": {
-          "median": 33.1,
-          "min": 3.2,
-          "max": 63.0,
-          "raw": "3.2–63"
-        },
-        "quote": "5-HT 2B | 3.2–63 | Human"
-      },
-      {
-        "target": "5ht2c",
-        "wiki_name": "5-HT 2C",
-        "ki": {
-          "median": 127.2,
-          "min": 3.4,
-          "max": 251.0,
-          "raw": "3.4–251"
-        },
-        "quote": "5-HT 2C | 3.4–251 | Human"
-      },
-      {
-        "target": "5ht3",
-        "wiki_name": "5-HT 3",
-        "ki": {
-          "median": 427.0,
-          "min": 427.0,
-          "max": 427.0,
-          "raw": "427"
-        },
-        "quote": "5-HT 3 | 427 | Human"
-      },
-      {
-        "target": "5ht5a",
-        "wiki_name": "5-HT 5A",
-        "ki": {
-          "median": 1354.0,
-          "min": 1354.0,
-          "max": 1354.0,
-          "raw": "1,354"
-        },
-        "quote": "5-HT 5A | 1,354 | Human"
-      },
-      {
-        "target": "5ht6",
-        "wiki_name": "5-HT 6",
-        "ki": {
-          "median": 1748.0,
-          "min": 1748.0,
-          "max": 1748.0,
-          "raw": "1,748"
-        },
-        "quote": "5-HT 6 | 1,748 | Human"
-      },
-      {
-        "target": "5ht7",
-        "wiki_name": "5-HT 7",
-        "ki": {
-          "median": 163.0,
-          "min": 163.0,
-          "max": 163.0,
-          "raw": "163"
-        },
-        "quote": "5-HT 7 | 163 | Human"
-      },
-      {
-        "target": "alpha1a",
-        "wiki_name": "α 1A",
-        "ki": {
-          "median": 1386.0,
-          "min": 1386.0,
-          "max": 1386.0,
-          "raw": "1,386"
-        },
-        "quote": "α 1A | 1,386 | Human"
-      },
-      {
-        "target": "alpha1b",
-        "wiki_name": "α 1B",
-        "ki": {
-          "median": 915.0,
-          "min": 915.0,
-          "max": 915.0,
-          "raw": "915"
-        },
-        "quote": "α 1B | 915 | Human"
-      },
-      {
-        "target": "alpha2",
-        "wiki_name": "α 2",
-        "ki": {
-          "median": 341.0,
-          "min": 112.0,
-          "max": 570.0,
-          "raw": "112–570"
-        },
-        "quote": "α 2 | 112–570 | Human"
-      },
-      {
-        "target": "alpha2a",
-        "wiki_name": "α 2A",
-        "ki": {
-          "median": 145.0,
-          "min": 145.0,
-          "max": 145.0,
-          "raw": "145"
-        },
-        "quote": "α 2A | 145 | Human"
-      },
-      {
-        "target": "alpha2b",
-        "wiki_name": "α 2B",
-        "ki": {
-          "median": 106.0,
-          "min": 106.0,
-          "max": 106.0,
-          "raw": "106"
-        },
-        "quote": "α 2B | 106 | Human"
-      },
-      {
-        "target": "alpha2c",
-        "wiki_name": "α 2C",
-        "ki": {
-          "median": 124.0,
-          "min": 124.0,
-          "max": 124.0,
-          "raw": "124"
-        },
-        "quote": "α 2C | 124 | Human"
-      },
-      {
-        "target": "beta1",
-        "wiki_name": "β 1",
-        "ki": {
-          "median": 2359.0,
-          "min": 2359.0,
-          "max": 2359.0,
-          "raw": "2,359"
-        },
-        "quote": "β 1 | 2,359 | Human"
-      },
-      {
-        "target": "beta2",
-        "wiki_name": "β 2",
-        "ki": {
-          "median": 3474.0,
-          "min": 3474.0,
-          "max": 3474.0,
-          "raw": "3,474"
-        },
-        "quote": "β 2 | 3,474 | Human"
-      },
-      {
-        "target": "d1",
-        "wiki_name": "D 1",
-        "ki": {
-          "median": 7000.0,
-          "min": 7000.0,
-          "max": 7000.0,
-          "raw": "7,000"
-        },
-        "quote": "D 1 | 7,000 | Human"
-      },
-      {
-        "target": "h1",
-        "wiki_name": "H 1",
-        "ki": {
-          "median": 326.0,
-          "min": 326.0,
-          "max": 326.0,
-          "raw": "326"
-        },
-        "quote": "H 1 | 326 | Human"
-      }
-    ],
-    "unresolved_ki": [
-      "'α 1' (Ki 97–2,900)",
-      "'β' (Ki 2,500)",
-      "'σ 2' (Ki 8,350)",
-      "'I 1' (Ki 759)",
-      "'VDCC' (Ki 6,043)"
-    ],
-    "action_candidates": [
-      "mCPP is known to induce headaches in humans and has been used for testing potential antimigraine medications. It has potent anorectic effects and has encouraged the development of selective 5-HT 2C receptor agonists for the treatment of obesity as well.",
-      "mCPP possesses significant affinity for the 5-HT 1A , 5-HT 1B , 5-HT 1D , 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 3 , and 5-HT 7 receptors , as well as the SERT . It also has some affinity for α 1 -adrenergic , α 2 -adrenergic , H 1 , I 1 , and NET . It behaves as an agonist at most serotonin receptors. mCPP has been shown to act not only as a serotonin reuptake inhibitor but as a serotonin releasing agent as well.",
-      "mCPP's strongest actions are at the 5-HT 2B and 5-HT 2C receptors and its discriminative cue is mediated primarily by 5-HT 2C . Its negative effects such as anxiety , headaches , and appetite loss are likely mediated by its actions on the 5-HT 2C receptor. Other effects of mCPP include nausea , hypoactivity , and penile erection , the latter two the result of increased 5-HT 2C activity and the former likely via 5-HT 3 stimulation. mCPP is known to induce migraines and this may be mediated by serotonin 5-HT 2B receptor agonism.",
-      "In comparison studies, mCPP has approximately 10-fold selectivity for the human 5-HT 2C receptor over the human 5-HT 2A and 5-HT 2B receptors (K i = 3.4 nM vs. 32.1 and 28.8 nM). It acts as a partial agonist of the human 5-HT 2A and 5-HT 2C receptors but as an antagonist of the human 5-HT 2B receptors.",
-      "mCPP does not produce the head-twitch response , a behavioral proxy of psychedelic effects, in rodents. Instead, it has been found to dose-dependently antagonize the head-twitch response induced by the serotonergic psychedelic DOI . However, when mCPP is combined with the selective serotonin 5-HT 2C receptor antagonist SB-242084 , it is able to dose-dependently induce head twitches. These findings suggest that serotonin 5-HT 2C receptor activation inhibits and can mask the head-twitch response induced by serotonin 5-HT 2A receptor agonists.",
-      "The anxiety- and panic-inducing effects of mCPP in humans can be blocked or reduced by non-selective serotonin receptor antagonists such as metergoline and to a lesser extent methysergide as well as by the serotonin 5-HT 2A and 5-HT 2C receptor antagonist ritanserin . Chronic pre-treatment with serotonin reuptake inhibitors like fluoxetine and clomipramine can also reverse the anxiogenic effects of mCPP. Relatedly, serotonin reuptake inhibitors also reduce many other effects of mCPP and this is thought to be related to desensitization of serotonin 5-HT 2C and 5-HT 2A receptors. The benzodiazepine alprazolam can block mCPP-induced anxiety as well.",
-      "mCPP has been found to dose-dependently increase oxytocin levels in rodents. It can increase oxytocin levels by up to 3- to 6-fold at high doses. The oxytocin increases caused by mCPP are near-completely blocked by the serotonin 5-HT 2 receptor antagonists mianserin , LY-53857 , and metergoline , but are minimally affected by the serotonin 5-HT 2A receptor antagonist ketanserin . These findings suggest the involvement of the serotonin 5-HT 2C receptor in oxytocin secretion with mCPP rather than other serotonin receptors like the serotonin 5-HT 2A receptor. In humans, the drug robustly increased oxytocin levels in women but not in men."
-    ],
-    "pages": [
-      "meta_chlorophenylpiperazine",
-      "nefazodone"
+      "cotinine",
+      "nicotine"
     ],
     "pdsp_targets": []
   },
   {
-    "metabolite": "N-dealkylated samidorphan",
+    "metabolite": "Dehydroaripiprazole",
     "parents": [
-      "olanzapinesamidorphan"
+      "aripiprazole"
     ],
-    "key": "n_dealkylated_samidorphan",
-    "wiki_title": "Olanzapine/samidorphan",
-    "slug": "olanzapine_samidorphan",
+    "key": "dehydroaripiprazole",
+    "wiki_title": "Aripiprazole",
+    "slug": "aripiprazole",
     "own_article": false,
     "found": true,
     "from_parent": true,
@@ -580,18 +382,18 @@
     "unresolved_ki": [],
     "action_candidates": [],
     "pages": [
-      "olanzapine_samidorphan"
+      "aripiprazole"
     ],
     "pdsp_targets": []
   },
   {
-    "metabolite": "Samidorphan N-oxide",
+    "metabolite": "Demoxepam",
     "parents": [
-      "olanzapinesamidorphan"
+      "chlordiazepoxide"
     ],
-    "key": "samidorphan_n_oxide",
-    "wiki_title": "Olanzapine/samidorphan",
-    "slug": "olanzapine_samidorphan",
+    "key": "demoxepam",
+    "wiki_title": "Chlordiazepoxide",
+    "slug": "chlordiazepoxide",
     "own_article": false,
     "found": true,
     "from_parent": true,
@@ -599,91 +401,52 @@
     "unresolved_ki": [],
     "action_candidates": [],
     "pages": [
-      "olanzapine_samidorphan"
+      "chlordiazepoxide"
     ],
     "pdsp_targets": []
   },
   {
-    "metabolite": "Licarbazepine",
+    "metabolite": "Desmethylclomipramine",
     "parents": [
-      "oxcarbazepine"
+      "clomipramine"
     ],
-    "key": "licarbazepine",
-    "wiki_title": "Licarbazepine",
-    "slug": "licarbazepine",
+    "key": "desmethylclomipramine",
+    "wiki_title": "Norclomipramine",
+    "slug": "norclomipramine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "norclomipramine",
+      "clomipramine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Desmethyldiazepam (nordazepam)",
+    "parents": [
+      "chlordiazepoxide",
+      "clorazepate",
+      "diazepam",
+      "prazepam"
+    ],
+    "key": "desmethyldiazepam_nordazepam",
+    "wiki_title": "Nordazepam",
+    "slug": "nordazepam",
     "own_article": true,
     "found": true,
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "Licarbazepine is a voltage-gated sodium channel blocker with anticonvulsant and mood-stabilizing effects that is related to oxcarbazepine . It is an active metabolite of oxcarbazepine . In addition, an enantiomer of licarbazepine, eslicarbazepine (( S )-(+)-licarbazepine), is an active metabolite of eslicarbazepine acetate . Oxcarbazepine and eslicarbazepine acetate are inactive on their own, and behave instead as prodrugs to licarbazepine and eslicarbazepine, respectively, to produce their therapeutic effects.",
-      "Both oxcarbazepine and licarbazepine were found to show anticonvulsant properties in seizure models done on animals. These compounds had protective functions whenever tonic extension seizures were induced electrically, but such protection was less apparent whenever seizures were induced chemically. There was no observable tolerance during a four weeks course of treatment with daily administration of oxcarbazepine or licarbazepine in electroshock test on mice and rats. Most of the antiepileptic activity can be attributed to licarbazepine. Aside from its reduction in side effects, it is presumed to have the same main mechanism as carbamazepine, sodium channel inhibition, and is generally used to treat the same conditions."
+      "Nordazepam is a partial agonist at the GABA A receptor , which makes it less potent than other benzodiazepines, particularly in its amnesic and muscle-relaxing effects. Its elimination half-life is between 36 and 200 hours , with wide variation among individuals; factors such as age and sex are known to impact it. The variation of reported half-lives are attributed to differences in nordazepam metabolism and that of its metabolites as nordazepam is hydroxylated to active metabolites such as oxazepam, before finally being glucuronidated and excreted in the urine. This can be attributed to extremely variable hepatic and renal metabolic functions among individuals depending upon a number of factors (including age, ethnicity, disease, and current or previous use/abuse of other drugs/medicines)."
     ],
     "pages": [
-      "licarbazepine",
-      "oxcarbazepine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "N-Desmethylpimavanserin",
-    "parents": [
-      "pimavanserin"
-    ],
-    "key": "n_desmethylpimavanserin",
-    "wiki_title": "Pimavanserin",
-    "slug": "pimavanserin",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "pimavanserin"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Norquetiapine",
-    "parents": [
-      "quetiapine"
-    ],
-    "key": "norquetiapine",
-    "wiki_title": "Norquetiapine",
-    "slug": "norquetiapine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Norquetiapine , also known as N -desalkylquetiapine , is a 5-HT 2B serotonin receptor modulator , and norepinephrine reuptake inhibitor . It is the principal metabolite of quetiapine .",
-      "Since the noradrenaline transporter is responsible for most of the dopamine clearance in the prefrontal cortex, norquetiapine blocks reuptake of dopamine too, accumulating the dopamine in the synapse."
-    ],
-    "pages": [
-      "norquetiapine",
-      "quetiapine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "M-II",
-    "parents": [
-      "ramelteon"
-    ],
-    "key": "m_ii",
-    "wiki_title": "Ramelteon",
-    "slug": "ramelteon",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "ramelteon"
+      "nordazepam",
+      "chlordiazepoxide"
     ],
     "pdsp_targets": []
   },
@@ -715,448 +478,291 @@
     "pdsp_targets": []
   },
   {
-    "metabolite": "L-Amphetamine",
+    "metabolite": "Desmethylsibutramine",
     "parents": [
-      "selegiline"
+      "sibutramine"
     ],
-    "key": "l_amphetamine",
-    "wiki_title": "Levoamphetamine",
-    "slug": "levoamphetamine",
-    "own_article": true,
+    "key": "desmethylsibutramine",
+    "wiki_title": "Sibutramine",
+    "slug": "sibutramine",
+    "own_article": false,
     "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "In addition to its catecholamine-releasing activity, levoamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levoamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is similarly potent to selegiline and levomethamphetamine but is more potent than dextromethamphetamine and dextroamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism.",
-      "Levoamphetamine is a major active metabolite of selegiline ( L -deprenyl; N -propargyl- L -methamphetamine). Selegiline is a monoamine oxidase inhibitor (MAOI), specifically a selective inhibitor of monoamine oxidase B (MAO-B) at lower doses and a dual inhibitor of both monoamine oxidase A (MAO-A) and MAO-B at higher doses. It also has additional activities, such as acting as a catecholaminergic activity enhancer (CAE), possibly via agonism of the TAAR1 , and having potential neuroprotective effects. Selegiline is clinically used as an antiparkinsonian agent in the treatment of Parkinson's disease and as an antidepressant in the treatment of major depressive disorder ."
-    ],
-    "pages": [
-      "levoamphetamine",
-      "selegiline"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "L-Methamphetamine",
-    "parents": [
-      "selegiline"
-    ],
-    "key": "l_methamphetamine",
-    "wiki_title": "Levomethamphetamine",
-    "slug": "levomethamphetamine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "In addition to its norepinephrine-releasing activity, levomethamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levomethamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is 1- to 10-fold less potent than selegiline but is 3- to 5-fold more potent than dextromethamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism."
-    ],
-    "pages": [
-      "levomethamphetamine",
-      "selegiline"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "(+)-alpha-Dihydrotetrabenazine",
-    "parents": [
-      "valbenazine"
-    ],
-    "key": "alpha_dihydrotetrabenazine",
-    "wiki_title": "Dihydrotetrabenazine",
-    "slug": "dihydrotetrabenazine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "DTBZ as a PET radioligand with affinity for VMAT2 was developed in the mid 1990s by David E. Kuhl and colleagues at the University of Michigan . There are two enantiomers of alpha-dihydrotetrabenazine, and the dextrorotary (or (+) isomer) has a high affinity of about 1 nanomolar K i whereas the levorotary (or (-) isomer) has approximately 1000 fold lower affinity with a K i of about 2 micromolar."
-    ],
-    "pages": [
-      "dihydrotetrabenazine",
-      "valbenazine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "O-desmethylvenlafaxine",
-    "parents": [
-      "venlafaxine"
-    ],
-    "key": "o_desmethylvenlafaxine",
-    "wiki_title": "Desvenlafaxine",
-    "slug": "desvenlafaxine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
+    "from_parent": true,
     "ki_bindings": [
       {
         "target": "sert",
         "wiki_name": "SERT",
         "ki": {
-          "median": 40.2,
-          "min": 40.2,
-          "max": 40.2,
-          "raw": "40.2"
+          "median": 15.0,
+          "min": 15.0,
+          "max": 15.0,
+          "raw": "15"
         },
-        "quote": "SERT | 40.2 | 47.3"
+        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49",
+        "page": "sibutramine"
       },
       {
         "target": "net",
         "wiki_name": "NET",
         "ki": {
-          "median": 558.4,
-          "min": 558.4,
-          "max": 558.4,
-          "raw": "558.4"
-        },
-        "quote": "NET | 558.4 | 531.3"
-      }
-    ],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Desvenlafaxine , sold under the brand name Pristiq among others, is a medication used to treat major depressive disorder . It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class and is taken by mouth. It is recommended that the need for further treatment be occasionally reassessed. Studies have shown similar effectiveness compared to its parent compound venlafaxine .",
-      "Post-SSRI sexual dysfunction (PSSD) is an iatrogenic condition in which sexual side effects persist after discontinuation of serotonin reuptake inhibiting antidepressants, including desvenlafaxine. Characteristic symptoms include genital numbness, pleasureless or weak orgasm, loss of libido, and erectile dysfunction ; non-sexual symptoms such as emotional blunting and cognitive impairment may also occur. The condition can arise after even brief exposure to a serotonin reuptake inhibitor and may persist indefinitely; there is currently no established treatment. The DSM-5 noted in 2013 that serotonin reuptake inhibitor-induced sexual dysfunction may persist after the agent is discontinued.",
-      "As the primary active metabolite of venlafaxine , desvenlafaxine shares its parent compound's serotonin reuptake inhibiting mechanism, and PSSD has been reported with both drugs. A 2023 retrospective cohort study of over 12,000 males estimated the risk of irreversible sexual dysfunction at approximately 0.46% of patients treated with serotonergic antidepressants, including SNRIs, though the actual prevalence remains uncertain and the condition is likely underreported.",
-      "Desvenlafaxine is a synthetic form of the isolated major active metabolite of venlafaxine , and is categorized as a serotonin–norepinephrine reuptake inhibitor (SNRI). When most normal metabolizers take venlafaxine, approximately 70% of the dose is metabolized into desvenlafaxine, so the effects of the two drugs are expected to be very similar. It works by blocking the \"reuptake\" transporters for key neurotransmitters affecting mood, thereby leaving more active neurotransmitters in the synapse . The neurotransmitters affected are serotonin (5-hydroxytryptamine) and norepinephrine (noradrenaline). It is approximately 10 times more potent at inhibiting serotonin uptake than norepinephrine uptake."
-    ],
-    "pages": [
-      "desvenlafaxine",
-      "venlafaxine"
-    ],
-    "pdsp_targets": [
-      {
-        "target": "net",
-        "ki_id": 9626,
-        "value_nm": 2753.0
-      },
-      {
-        "target": "sert",
-        "ki_id": 9535,
-        "value_nm": 7.7
-      }
-    ]
-  },
-  {
-    "metabolite": "Norzotepine",
-    "parents": [
-      "zotepine"
-    ],
-    "key": "norzotepine",
-    "wiki_title": "Zotepine",
-    "slug": "zotepine",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [],
-    "pages": [
-      "zotepine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Desmethyldiazepam (nordazepam)",
-    "parents": [
-      "clorazepate",
-      "prazepam"
-    ],
-    "key": "desmethyldiazepam_nordazepam",
-    "wiki_title": "Nordazepam",
-    "slug": "nordazepam",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Nordazepam is a partial agonist at the GABA A receptor , which makes it less potent than other benzodiazepines, particularly in its amnesic and muscle-relaxing effects. Its elimination half-life is between 36 and 200 hours , with wide variation among individuals; factors such as age and sex are known to impact it. The variation of reported half-lives are attributed to differences in nordazepam metabolism and that of its metabolites as nordazepam is hydroxylated to active metabolites such as oxazepam, before finally being glucuronidated and excreted in the urine. This can be attributed to extremely variable hepatic and renal metabolic functions among individuals depending upon a number of factors (including age, ethnicity, disease, and current or previous use/abuse of other drugs/medicines)."
-    ],
-    "pages": [
-      "nordazepam",
-      "clorazepate"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Psilocin",
-    "parents": [
-      "psilocybin"
-    ],
-    "key": "psilocin",
-    "wiki_title": "Psilocin",
-    "slug": "psilocin",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [
-      {
-        "target": "5ht1a",
-        "wiki_name": "5-HT 1A",
-        "ki": {
-          "median": 308.0,
-          "min": 49.0,
-          "max": 567.0,
-          "raw": "49–567 (K i ) 130–>3,160 ( EC 50"
-        },
-        "quote": "5-HT 1A | 49–567 (K i ) 130–>3,160 ( EC 50"
-      },
-      {
-        "target": "5ht1b",
-        "wiki_name": "5-HT 1B",
-        "ki": {
-          "median": 168.0,
-          "min": 31.0,
-          "max": 305.0,
-          "raw": "31–305"
-        },
-        "quote": "5-HT 1B | 31–305"
-      },
-      {
-        "target": "5ht1d",
-        "wiki_name": "5-HT 1D",
-        "ki": {
-          "median": 27.5,
-          "min": 19.0,
-          "max": 36.0,
-          "raw": "19–36"
-        },
-        "quote": "5-HT 1D | 19–36"
-      },
-      {
-        "target": "5ht1e",
-        "wiki_name": "5-HT 1E",
-        "ki": {
-          "median": 48.0,
-          "min": 44.0,
-          "max": 52.0,
-          "raw": "44–52"
-        },
-        "quote": "5-HT 1E | 44–52"
-      },
-      {
-        "target": "5ht2a",
-        "wiki_name": "5-HT 2A",
-        "ki": {
-          "median": 173.0,
-          "min": 6.0,
-          "max": 340.0,
-          "raw": "6.0–340 (K i ) 2.4–3,836 ( EC 50 ) 16–98% ( E max )"
-        },
-        "quote": "5-HT 2A | 6.0–340 (K i ) 2.4–3,836 ( EC 50 ) 16–98% ( E max )"
-      },
-      {
-        "target": "5ht2b",
-        "wiki_name": "5-HT 2B",
-        "ki": {
-          "median": 207.3,
-          "min": 4.6,
-          "max": 410.0,
-          "raw": "4.6–410 (K i ) 2.4–>20,000 ( EC 50 ) 1.4–84% ( E max )"
-        },
-        "quote": "5-HT 2B | 4.6–410 (K i ) 2.4–>20,000 ( EC 50 ) 1.4–84% ( E max )"
-      },
-      {
-        "target": "5ht2c",
-        "wiki_name": "5-HT 2C",
-        "ki": {
-          "median": 75.5,
-          "min": 10.0,
-          "max": 141.0,
-          "raw": "10–141 (K i ) 9.1–30 ( EC 50 ) 86–95% ( E max )"
-        },
-        "quote": "5-HT 2C | 10–141 (K i ) 9.1–30 ( EC 50 ) 86–95% ( E max )"
-      },
-      {
-        "target": "5ht5a",
-        "wiki_name": "5-HT 5A",
-        "ki": {
-          "median": 77.0,
-          "min": 70.0,
-          "max": 84.0,
-          "raw": "70–84"
-        },
-        "quote": "5-HT 5A | 70–84"
-      },
-      {
-        "target": "5ht6",
-        "wiki_name": "5-HT 6",
-        "ki": {
-          "median": 64.5,
-          "min": 57.0,
-          "max": 72.0,
-          "raw": "57–72"
-        },
-        "quote": "5-HT 6 | 57–72"
-      },
-      {
-        "target": "5ht7",
-        "wiki_name": "5-HT 7",
-        "ki": {
-          "median": 37.75,
-          "min": 3.5,
-          "max": 72.0,
-          "raw": "3.5–72"
-        },
-        "quote": "5-HT 7 | 3.5–72"
-      },
-      {
-        "target": "alpha2a",
-        "wiki_name": "α 2A",
-        "ki": {
-          "median": 1711.5,
-          "min": 1379.0,
-          "max": 2044.0,
-          "raw": "1,379–2,044"
-        },
-        "quote": "α 2A | 1,379–2,044"
-      },
-      {
-        "target": "alpha2b",
-        "wiki_name": "α 2B",
-        "ki": {
-          "median": 1582.5,
-          "min": 1271.0,
-          "max": 1894.0,
-          "raw": "1,271–1,894"
-        },
-        "quote": "α 2B | 1,271–1,894"
-      },
-      {
-        "target": "alpha2c",
-        "wiki_name": "α 2C",
-        "ki": {
-          "median": 4404.0,
-          "min": 4404.0,
-          "max": 4404.0,
-          "raw": "4,404"
-        },
-        "quote": "α 2C | 4,404"
-      },
-      {
-        "target": "d1",
-        "wiki_name": "D 1",
-        "ki": {
           "median": 20.0,
           "min": 20.0,
           "max": 20.0,
-          "raw": "20–>14,000"
+          "raw": "20"
         },
-        "quote": "D 1 | 20–>14,000"
-      },
-      {
-        "target": "d2",
-        "wiki_name": "D 2",
-        "ki": {
-          "median": 3700.0,
-          "min": 3700.0,
-          "max": 3700.0,
-          "raw": "3,700–>10,000"
-        },
-        "quote": "D 2 | 3,700–>10,000"
-      },
-      {
-        "target": "d3",
-        "wiki_name": "D 3",
-        "ki": {
-          "median": 4500.5,
-          "min": 101.0,
-          "max": 8900.0,
-          "raw": "101–8,900"
-        },
-        "quote": "D 3 | 101–8,900"
-      },
-      {
-        "target": "h1",
-        "wiki_name": "H 1",
-        "ki": {
-          "median": 1600.0,
-          "min": 1600.0,
-          "max": 1600.0,
-          "raw": "1,600–>10,000"
-        },
-        "quote": "H 1 | 1,600–>10,000"
-      },
-      {
-        "target": "sert",
-        "wiki_name": "SERT",
-        "ki": {
-          "median": 3650.0,
-          "min": 3650.0,
-          "max": 3650.0,
-          "raw": "3,650–>10,000 (K i ) 662–3,900 ( IC 50"
-        },
-        "quote": "SERT | 3,650–>10,000 (K i ) 662–3,900 ( IC 50"
+        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49",
+        "page": "sibutramine"
       },
       {
         "target": "dat",
         "wiki_name": "DAT",
         "ki": {
-          "median": 6000.0,
-          "min": 6000.0,
-          "max": 6000.0,
-          "raw": "6,000–>30,000 (K i ) >100,000 ( IC 50 ) >10,000 ( EC 50 )"
+          "median": 49.0,
+          "min": 49.0,
+          "max": 49.0,
+          "raw": "49"
         },
-        "quote": "DAT | 6,000–>30,000 (K i ) >100,000 ( IC 50 ) >10,000 ( EC 50 )"
+        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49",
+        "page": "sibutramine"
+      }
+    ],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Sibutramine is reported to be a prodrug to two active metabolites , desmethylsibutramine (M1; BTS-54354) and didesmethylsibutramine (M2; BTS-54505), with much greater potency as monoamine reuptake inhibitors. Further studies have indicated that the ( R )-enantiomers of each metabolite exert significantly stronger anorectic effects than the ( S )-enantiomers."
+    ],
+    "pages": [
+      "sibutramine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Dextrorphan",
+    "parents": [
+      "dextromethorphanbupropion",
+      "dextromethorphanquinidine"
+    ],
+    "key": "dextrorphan",
+    "wiki_title": "Dextrorphan",
+    "slug": "dextrorphan",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [
+      {
+        "target": "nmda",
+        "wiki_name": "NMDAR (MK-801)",
+        "ki": {
+          "median": 696.0,
+          "min": 486.0,
+          "max": 906.0,
+          "raw": "486–906"
+        },
+        "quote": "NMDAR (MK-801) | 486–906 | Rat",
+        "page": "dextrorphan"
+      },
+      {
+        "target": "sigma1",
+        "wiki_name": "σ 1",
+        "ki": {
+          "median": 299.5,
+          "min": 118.0,
+          "max": 481.0,
+          "raw": "118–481"
+        },
+        "quote": "σ 1 | 118–481 | Rat",
+        "page": "dextrorphan"
+      },
+      {
+        "target": "mu",
+        "wiki_name": "MOR",
+        "ki": {
+          "median": 420.0,
+          "min": 420.0,
+          "max": 420.0,
+          "raw": "420 >1,000"
+        },
+        "quote": "MOR | 420 >1,000 | Rat Human",
+        "page": "dextrorphan"
+      },
+      {
+        "target": "kappa",
+        "wiki_name": "KOR",
+        "ki": {
+          "median": 5950.0,
+          "min": 5950.0,
+          "max": 5950.0,
+          "raw": "5,950"
+        },
+        "quote": "KOR | 5,950 | Rat",
+        "page": "dextrorphan"
+      },
+      {
+        "target": "sert",
+        "wiki_name": "SERT",
+        "ki": {
+          "median": 442.5,
+          "min": 401.0,
+          "max": 484.0,
+          "raw": "401–484"
+        },
+        "quote": "SERT | 401–484 | Rat",
+        "page": "dextrorphan"
+      },
+      {
+        "target": "5ht1b",
+        "wiki_name": "5-HT 1B / 1D",
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "raw": "54% at 1 μM"
+        },
+        "quote": "5-HT 1B / 1D | 54% at 1 μM | Rat",
+        "page": "dextrorphan"
+      },
+      {
+        "target": "h1",
+        "wiki_name": "H 1",
+        "ki": {
+          "median": 1000.0,
+          "min": 1000.0,
+          "max": 1000.0,
+          "raw": "95% at 1 μM"
+        },
+        "quote": "H 1 | 95% at 1 μM | Rat",
+        "page": "dextrorphan"
       }
     ],
     "unresolved_ki": [
-      "'I 2' (Ki 792)",
-      "'TAAR1' (Ki 1,400 (K i ) (rat) 17,000 (K i ) (mouse) 920–2,700 ( EC 50 ) (rodent) >30,000 ( EC 50 ) (human))"
+      "'β' (Ki 35% at 1 μM)",
+      "'mAChRs' (Ki 100% at 1 μM)"
     ],
     "action_candidates": [
-      "Psilocin is the pharmacologically active agent in the body after ingestion of psilocybin or some species of psychedelic mushrooms. Psilocybin is rapidly dephosphorylated in the body to psilocin which acts as a serotonin 5-HT 2A , 5-HT 2C and 5-HT 1A receptor agonist or partial agonist . Psilocin exhibits functional selectivity in that it activates phospholipase A2 instead of activating phospholipase C as the endogenous ligand serotonin does. Psilocin is structurally similar to serotonin (5-hydroxytryptamine), differing only by the hydroxyl group being on the 4-position rather than the 5 and the dimethyl groups on the nitrogen . Its effects are thought to come from its agonist activity at 5-HT 2A receptors in the prefrontal cortex . Psilocin's psychedelic effects are directly correlated with the drug's occupancy at these receptor sites . The drug shows pronounced biased agonism at the serotonin 5-HT 2C receptor. Psilocin has no significant effect on dopamine receptors and only affects the noradrenergic system at very high doses.",
-      "Psilocin has been reported to act as a highly potent positive allosteric modulator of the tropomyosin receptor kinase B (TrkB), one of the receptors of brain-derived neurotrophic factor (BDNF). However, subsequent studies failed to reproduce these findings and instead found no interaction of psilocin with TrkB.",
-      "1-Methylpsilocin is a serotonin 5-HT 2C receptor -preferring agonist . 4-Fluoro-DMT and 4-methyl-DMT are known. Another analogue of psilocin is 1-isopropyl-6-fluoropsilocin (O-4310).",
-      "Psilocin is the metabolite of psilocybin. The compound psilocybin itself is biologically inactive but quickly converted by the body to psilocin. Psilocybin is transformed into psilocin by dephosphorylation mediated via phosphatase enzymes . Psilocin is chemically related to the neurotransmitter serotonin and acts as a non-selective agonist of the serotonin receptors . Activation of one serotonin receptor, the serotonin 5-HT 2A receptor , is specifically responsible for the hallucinogenic effects of psilocin and other serotonergic psychedelics . Psilocybin is usually taken orally . By this route , its onset is about 20 to 50 minutes, peak effects occur in about 1 to 2 hours, and its duration is about 4 to 6 hours.",
-      "Psilocin is demethylated and oxidatively deaminated by monoamine oxidase (MAO), specifically monoamine oxidase A (MAO-A), into 4-hydroxyindole-3-acetaldehyde (4-HIAL or 4-HIA). 4-HIAL is then further oxidated into 4-hydroxyindole-3-acetic acid (4-HIAA) by aldehyde dehydrogenase (ALDH) or into 4-hydroxytryptophol (4-HTOL or 4-HTP) by alcohol dehydrogenase (ALD). Deamination of psilocin by MAO-A appears to be responsible for about 4% or 33% of its metabolism in different studies. In contrast to psilocin, its metabolites 4-HIAA and 4-HTP showed no affinity for or activation of multiple serotonin receptors and are considered inactive. Based on in vitro studies, it has been estimated that MAO-A is responsible for about 81% of psilocin's phase I hepatic metabolism. Psilocin and its metabolites are also glucuronidated by UDP-glucuronyltransferases (UGTs). UGT1A10 and UGT1A9 appear to be the most involved. Psilocybin's glucuronidated metabolites include psilocin- O -glucuronide and 4-HIAA- O -glucuronide. Approximately 80% of psilocin in blood plasma is in conjugated form, and conjugated psilocin levels are about fourfold higher than levels of free psilocin. Plasma 4-HIAA levels are also much higher than those of free psilocin."
+      "Dextrorphan ( DXO ) is a psychoactive drug of the morphinan class which acts as an antitussive or cough suppressant and in high doses a dissociative hallucinogen . It is the dextrorotatory enantiomer of racemorphan ; the levorotatory enantiomer is levorphanol . Dextrorphan is produced by O-demethylation of dextromethorphan by CYP2D6 . Dextrorphan is an NMDA antagonist and contributes to the psychoactive effects of dextromethorphan.",
+      "The pharmacology of dextrorphan is similar to that of dextromethorphan (DXM). However, dextrorphan is much more potent as an NMDA receptor antagonist and much less active as a serotonin reuptake inhibitor , but retains DXM's activity as a norepinephrine reuptake inhibitor . It also has more affinity for the opioid receptors than dextromethorphan, significantly so at high doses."
     ],
     "pages": [
-      "psilocin",
-      "psilocybin"
+      "dextrorphan",
+      "dextromethorphan_bupropion"
     ],
     "pdsp_targets": [
       {
-        "target": "5ht1a",
-        "ki_id": 16571,
-        "value_nm": 49.0
+        "target": "kappa",
+        "ki_id": 34425,
+        "value_nm": 5950.0
       },
       {
-        "target": "5ht2a",
-        "ki_id": 16562,
-        "value_nm": 25.0
+        "target": "mu",
+        "ki_id": 10299,
+        "value_nm": 1000.0
       },
       {
-        "target": "5ht2b",
-        "ki_id": 2722,
-        "value_nm": 450.0
+        "target": "net",
+        "ki_id": 34451,
+        "value_nm": 340.0
       },
       {
-        "target": "5ht2c",
-        "ki_id": 16563,
-        "value_nm": 10.0
+        "target": "sert",
+        "ki_id": 34476,
+        "value_nm": 401.0
       }
     ]
   },
   {
-    "metabolite": "Descarboxyloflazepate",
+    "metabolite": "Didesmethyl cariprazine",
     "parents": [
-      "loflazepate"
+      "cariprazine"
     ],
-    "key": "descarboxyloflazepate",
-    "wiki_title": "",
-    "slug": "",
+    "key": "didesmethyl_cariprazine",
+    "wiki_title": "Cariprazine",
+    "slug": "cariprazine",
     "own_article": false,
-    "found": false,
+    "found": true,
     "from_parent": true,
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [],
-    "pages": [],
+    "pages": [
+      "cariprazine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Didesmethylsibutramine",
+    "parents": [
+      "sibutramine"
+    ],
+    "key": "didesmethylsibutramine",
+    "wiki_title": "Sibutramine",
+    "slug": "sibutramine",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [
+      {
+        "target": "sert",
+        "wiki_name": "SERT",
+        "ki": {
+          "median": 20.0,
+          "min": 20.0,
+          "max": 20.0,
+          "raw": "20"
+        },
+        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49 / ( R )-Desmethylsibutramine | 44 | 4 | 12 / ( S )-Desmethylsibutramine | 9,200 | 870 | 180 / Didesmethylsibutramine | 20 | 15 | 45",
+        "page": "sibutramine"
+      },
+      {
+        "target": "net",
+        "wiki_name": "NET",
+        "ki": {
+          "median": 15.0,
+          "min": 15.0,
+          "max": 15.0,
+          "raw": "15"
+        },
+        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49 / ( R )-Desmethylsibutramine | 44 | 4 | 12 / ( S )-Desmethylsibutramine | 9,200 | 870 | 180 / Didesmethylsibutramine | 20 | 15 | 45",
+        "page": "sibutramine"
+      },
+      {
+        "target": "dat",
+        "wiki_name": "DAT",
+        "ki": {
+          "median": 45.0,
+          "min": 45.0,
+          "max": 45.0,
+          "raw": "45"
+        },
+        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49 / ( R )-Desmethylsibutramine | 44 | 4 | 12 / ( S )-Desmethylsibutramine | 9,200 | 870 | 180 / Didesmethylsibutramine | 20 | 15 | 45",
+        "page": "sibutramine"
+      }
+    ],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Sibutramine is reported to be a prodrug to two active metabolites , desmethylsibutramine (M1; BTS-54354) and didesmethylsibutramine (M2; BTS-54505), with much greater potency as monoamine reuptake inhibitors. Further studies have indicated that the ( R )-enantiomers of each metabolite exert significantly stronger anorectic effects than the ( S )-enantiomers."
+    ],
+    "pages": [
+      "sibutramine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Diethyldithiocarbamate",
+    "parents": [
+      "disulfiram"
+    ],
+    "key": "diethyldithiocarbamate",
+    "wiki_title": "Sodium diethyldithiocarbamate",
+    "slug": "sodium_diethyldithiocarbamate",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "sodium_diethyldithiocarbamate",
+      "disulfiram"
+    ],
     "pdsp_targets": []
   },
   {
@@ -1252,224 +858,6 @@
     ]
   },
   {
-    "metabolite": "N-desalkylflurazepam (descarboxyloflazepate)",
-    "parents": [
-      "loflazepate",
-      "quazepam"
-    ],
-    "key": "n_desalkylflurazepam_descarboxyloflazepate",
-    "wiki_title": "N-Desalkylflurazepam",
-    "slug": "n_desalkylflurazepam",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "N -Desalkylflurazepam (also known as norflurazepam ) is a benzodiazepine analog and an active metabolite of several other benzodiazepine drugs including flurazepam , flutoprazepam , fludiazepam , midazolam , flutazolam , quazepam , and ethyl loflazepate . It is long-acting, prone to accumulation, and binds unselectively to the various benzodiazepine receptor subtypes. It has been sold as a designer drug from 2016 onward."
-    ],
-    "pages": [
-      "n_desalkylflurazepam",
-      "ethyl_loflazepate"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Norbuprenorphine",
-    "parents": [
-      "buprenorphine"
-    ],
-    "key": "norbuprenorphine",
-    "wiki_title": "Norbuprenorphine",
-    "slug": "norbuprenorphine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Norbuprenorphine is a major active metabolite of the opioid modulator buprenorphine . It is a μ-opioid , δ-opioid , and nociceptin receptor full agonist , and a κ-opioid receptor partial agonist . In rats, unlike buprenorphine, norbuprenorphine produces marked respiratory depression but with very little antinociceptive effect. In explanation of these properties, norbuprenorphine has been found to be a high affinity P-glycoprotein substrate , and in accordance, shows very limited blood-brain-barrier penetration."
-    ],
-    "pages": [
-      "norbuprenorphine",
-      "buprenorphine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Dextrorphan",
-    "parents": [
-      "dextromethorphanbupropion",
-      "dextromethorphanquinidine"
-    ],
-    "key": "dextrorphan",
-    "wiki_title": "Dextrorphan",
-    "slug": "dextrorphan",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [
-      {
-        "target": "nmda",
-        "wiki_name": "NMDAR (MK-801)",
-        "ki": {
-          "median": 696.0,
-          "min": 486.0,
-          "max": 906.0,
-          "raw": "486–906"
-        },
-        "quote": "NMDAR (MK-801) | 486–906 | Rat"
-      },
-      {
-        "target": "sigma1",
-        "wiki_name": "σ 1",
-        "ki": {
-          "median": 299.5,
-          "min": 118.0,
-          "max": 481.0,
-          "raw": "118–481"
-        },
-        "quote": "σ 1 | 118–481 | Rat"
-      },
-      {
-        "target": "mu",
-        "wiki_name": "MOR",
-        "ki": {
-          "median": 420.0,
-          "min": 420.0,
-          "max": 420.0,
-          "raw": "420 >1,000"
-        },
-        "quote": "MOR | 420 >1,000 | Rat Human"
-      },
-      {
-        "target": "kappa",
-        "wiki_name": "KOR",
-        "ki": {
-          "median": 5950.0,
-          "min": 5950.0,
-          "max": 5950.0,
-          "raw": "5,950"
-        },
-        "quote": "KOR | 5,950 | Rat"
-      },
-      {
-        "target": "sert",
-        "wiki_name": "SERT",
-        "ki": {
-          "median": 442.5,
-          "min": 401.0,
-          "max": 484.0,
-          "raw": "401–484"
-        },
-        "quote": "SERT | 401–484 | Rat"
-      },
-      {
-        "target": "5ht1b",
-        "wiki_name": "5-HT 1B / 1D",
-        "ki": {
-          "median": 1000.0,
-          "min": 1000.0,
-          "max": 1000.0,
-          "raw": "54% at 1 μM"
-        },
-        "quote": "5-HT 1B / 1D | 54% at 1 μM | Rat"
-      },
-      {
-        "target": "h1",
-        "wiki_name": "H 1",
-        "ki": {
-          "median": 1000.0,
-          "min": 1000.0,
-          "max": 1000.0,
-          "raw": "95% at 1 μM"
-        },
-        "quote": "H 1 | 95% at 1 μM | Rat"
-      }
-    ],
-    "unresolved_ki": [
-      "'β' (Ki 35% at 1 μM)",
-      "'mAChRs' (Ki 100% at 1 μM)"
-    ],
-    "action_candidates": [
-      "Dextrorphan ( DXO ) is a psychoactive drug of the morphinan class which acts as an antitussive or cough suppressant and in high doses a dissociative hallucinogen . It is the dextrorotatory enantiomer of racemorphan ; the levorotatory enantiomer is levorphanol . Dextrorphan is produced by O-demethylation of dextromethorphan by CYP2D6 . Dextrorphan is an NMDA antagonist and contributes to the psychoactive effects of dextromethorphan.",
-      "The pharmacology of dextrorphan is similar to that of dextromethorphan (DXM). However, dextrorphan is much more potent as an NMDA receptor antagonist and much less active as a serotonin reuptake inhibitor , but retains DXM's activity as a norepinephrine reuptake inhibitor . It also has more affinity for the opioid receptors than dextromethorphan, significantly so at high doses."
-    ],
-    "pages": [
-      "dextrorphan",
-      "dextromethorphan_bupropion"
-    ],
-    "pdsp_targets": [
-      {
-        "target": "kappa",
-        "ki_id": 34425,
-        "value_nm": 5950.0
-      },
-      {
-        "target": "mu",
-        "ki_id": 10299,
-        "value_nm": 1000.0
-      },
-      {
-        "target": "net",
-        "ki_id": 34451,
-        "value_nm": 340.0
-      },
-      {
-        "target": "sert",
-        "ki_id": 34476,
-        "value_nm": 401.0
-      }
-    ]
-  },
-  {
-    "metabolite": "Nordoxepin",
-    "parents": [
-      "doxepin"
-    ],
-    "key": "nordoxepin",
-    "wiki_title": "Nordoxepin",
-    "slug": "nordoxepin",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Nordoxepin is pharmacologically active similarly to doxepin. In general, the demethylated variants of tertiary amine TCAs like doxepin are much more potent norepinephrine reuptake inhibitors , less potent serotonin reuptake inhibitors , and less potent in their antiadrenergic , antihistamine , and anticholinergic activities."
-    ],
-    "pages": [
-      "nordoxepin",
-      "doxepin"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Norketamine",
-    "parents": [
-      "ketamine"
-    ],
-    "key": "norketamine",
-    "wiki_title": "Norketamine",
-    "slug": "norketamine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Norketamine , or N -desmethylketamine , is the major active metabolite of ketamine , which is formed mainly by CYP3A4 . Similarly to ketamine, norketamine acts as a noncompetitive NMDA receptor antagonist , but is about 3–5 times less potent as an anesthetic in comparison.",
-      "Similarly to ketamine, norketamine acts as a noncompetitive NMDA receptor antagonist (K i = 1.7 μM and 13 μM for ( S )-(+)-norketamine and ( R )-(–)-norketamine, respectively). Also, similarly again to ketamine, norketamine binds to the μ- and κ-opioid receptors . Relative to ketamine, norketamine is much more potent as an antagonist of the α 7 -nicotinic acetylcholine receptor , and produces rapid antidepressant effects in animal models which have been reported to correlate with its activity at this receptor. However, norketamine is about 1/5 as potent as ketamine as an antidepressant in mice as per the forced swim test , and this seems also to be in accordance with its 3–5-fold reduced comparative potency in vivo as an NMDA receptor antagonist. Norketamine's metabolites, dehydronorketamine (DHNK) and hydroxynorketamine (HNK), are far less or negligibly active as NMDA receptor antagonists in comparison, but retain activity as potent antagonists of the α 7 -nicotinic acetylcholine receptor.",
-      "In 2024, norketamine was discovered to act as a highly potent positive allosteric modulator of the opioid receptors , including of the μ-opioid receptor (MOR). It shares this action with ketamine and hydroxynorketamine (HNK). They are all active in this action at very low concentrations, for instance 1 nM. Ketamine, norketamine, and HNK can potentiate the effects of endogenous opioids like met-enkephalin and exogenous opioids like morphine . Opioid receptor positive allosteric modulation by these agents may be involved in their therapeutic effects, for instance their antidepressant and analgesic effects.",
-      "While most research has historically focused on its precursor, researchers have taken notice of norketamine's putative effects. Beginning in the late 1990s, Danish researchers discovered its role as a NMDA receptor antagonist. Later research uncovered its use as an antinociceptive, or \"painkiller.\""
-    ],
-    "pages": [
-      "norketamine",
-      "ketamine"
-    ],
-    "pdsp_targets": []
-  },
-  {
     "metabolite": "Hydroxynorketamine",
     "parents": [
       "ketamine"
@@ -1503,69 +891,539 @@
     "pdsp_targets": []
   },
   {
-    "metabolite": "Cotinine",
+    "metabolite": "L-Amphetamine",
     "parents": [
-      "nicotine"
+      "selegiline"
     ],
-    "key": "cotinine",
-    "wiki_title": "Cotinine",
-    "slug": "cotinine",
+    "key": "l_amphetamine",
+    "wiki_title": "Levoamphetamine",
+    "slug": "levoamphetamine",
     "own_article": true,
     "found": true,
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "Similarly to nicotine, cotinine binds to, activates, and desensitizes neuronal nicotinic acetylcholine receptors , though at much lower potency in comparison. It has demonstrated nootropic and antipsychotic -like effects in animal models. Cotinine treatment has also been shown to reduce depression, anxiety , and fear -related behavior as well as memory impairment in animal models of depression , post-traumatic stress disorder, and Alzheimer's disease. Nonetheless, treatment with cotinine in humans was reported to have no significant physiologic, subjective, or performance effects in one study, though others suggest that this may not be the case.",
-      "A few studies indicate that the affinity for cotinine to the nicotinic acetylcholine receptors (nAChRs) is about 100 times lower than nicotine's. Some work suggests that cotinine may be a positive allosteric modulator of α7 nAChRs. If this is true, cotinine would facilitate endogenous neurotransmission without directly stimulating nAChRs."
+      "Levoamphetamine, similarly to dextroamphetamine , acts as a reuptake inhibitor and releasing agent of norepinephrine and dopamine in vitro . However, there are differences in potency between the two compounds. Levoamphetamine is either similar in potency or somewhat more potent in inducing the release of norepinephrine than dextroamphetamine, whereas dextroamphetamine is approximately 4-fold more potent in inducing the release of dopamine than levoamphetamine. In addition, as a reuptake inhibitor, levoamphetamine is about 3- to 7-fold less potent than dextroamphetamine in inhibiting dopamine reuptake but is only about 2-fold less potent in inhibiting norepinephrine reuptake. Dextroamphetamine is very weak as a reuptake inhibitor of serotonin , whereas levoamphetamine is essentially inactive in this regard. Levoamphetamine and dextroamphetamine are both also relatively weak reversible inhibitors of monoamine oxidase (MAO) and hence can inhibit catecholamine metabolism . However, this action may not occur significantly at clinical doses and may only be relevant to high doses.",
+      "In addition to its catecholamine-releasing activity, levoamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levoamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is similarly potent to selegiline and levomethamphetamine but is more potent than dextromethamphetamine and dextroamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism.",
+      "Levoamphetamine is a major active metabolite of selegiline ( L -deprenyl; N -propargyl- L -methamphetamine). Selegiline is a monoamine oxidase inhibitor (MAOI), specifically a selective inhibitor of monoamine oxidase B (MAO-B) at lower doses and a dual inhibitor of both monoamine oxidase A (MAO-A) and MAO-B at higher doses. It also has additional activities, such as acting as a catecholaminergic activity enhancer (CAE), possibly via agonism of the TAAR1 , and having potential neuroprotective effects. Selegiline is clinically used as an antiparkinsonian agent in the treatment of Parkinson's disease and as an antidepressant in the treatment of major depressive disorder ."
     ],
     "pages": [
-      "cotinine",
-      "nicotine"
+      "levoamphetamine",
+      "selegiline"
     ],
     "pdsp_targets": []
   },
   {
-    "metabolite": "Oxymorphone",
+    "metabolite": "L-Methamphetamine",
     "parents": [
-      "oxycodone"
+      "selegiline"
     ],
-    "key": "oxymorphone",
-    "wiki_title": "Oxymorphone",
-    "slug": "oxymorphone",
+    "key": "l_methamphetamine",
+    "wiki_title": "Levomethamphetamine",
+    "slug": "levomethamphetamine",
     "own_article": true,
     "found": true,
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "Oxymorphone , sold under the brand names Numorphan and Opana among others, is a highly potent opioid analgesic indicated for treatment of severe pain. Pain relief after injection begins after about 5–10 minutes; after oral administration it begins after about 30 minutes and lasts about 3–4 hours for immediate-release tablets and 12 hours for extended-release tablets. The elimination half-life of oxymorphone is much faster intravenously, and as such, the drug is most commonly used orally. Like oxycodone , which metabolizes to oxymorphone, oxymorphone has a high abuse potential.",
-      "Oxymorphone was developed in Germany in 1914. It was patented in 1955 and approved for medical use in 1959. In June 2017 the FDA asked Endo Pharmaceuticals to remove its product from the US market. This was in part due to the opioid epidemic in the US, and the fact that a 2012 reformulation failed to stop illicit injection of the drug. Endo responded by voluntarily removing Opana ER from the market a month later. Generic versions of extended-release oxymorphone, such as those manufactured by Amneal Pharmaceuticals , are still available in the US.",
-      "Oxymorphone elicits its effects by binding to and activating the μ-opioid receptor (MOR) and, to a much lesser extent, the δ-opioid receptor (DOR) and κ-opioid receptor (KOR). Its activity at the DOR may augment its action at the MOR. Oxymorphone is 10 times more potent than morphine.",
-      "In the United States, as of 2013 more than 12 million people abused opioid drugs at least once a year. In 2010, 16,652 deaths were related to opiate overdose, in 2015 this number increased to 33,091. In September 2013, new FDA labeling guidelines for long-acting and extended-release opioids required manufacturers to remove moderate pain as use indication, reserving the drug for \"pain severe enough to require daily, around-the-clock, long-term opioid treatment\" however it did not restrict physicians from prescribing opioids for moderate, \"as needed\" usage.",
-      "In June 2017, faced with the public health crisis, the opioid epidemic, the FDA asked Endo Pharmaceuticals to \"remove its opioid pain medication, reformulated Opana ER (oxymorphone hydrochloride), from the market\". In their 8 June 2017 press release they also noted that, this was the first time the FDA had taken steps to \"remove a currently marketed opioid pain medication from sale due to public health consequences of abuse.\" By 6 July 2017, Endo International voluntarily complied with the FDA removal request."
+      "In addition to its norepinephrine-releasing activity, levomethamphetamine is also an agonist of the trace amine-associated receptor 1 (TAAR1). Levomethamphetamine has also been found to act as a catecholaminergic activity enhancer (CAE), notably at much lower concentrations than its catecholamine releasing activity. It is 1- to 10-fold less potent than selegiline but is 3- to 5-fold more potent than dextromethamphetamine in this action. The CAE effects of such agents may be mediated by TAAR1 agonism."
     ],
     "pages": [
-      "oxymorphone",
-      "oxycodone"
+      "levomethamphetamine",
+      "selegiline"
     ],
-    "pdsp_targets": [
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Licarbazepine",
+    "parents": [
+      "oxcarbazepine"
+    ],
+    "key": "licarbazepine",
+    "wiki_title": "Licarbazepine",
+    "slug": "licarbazepine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Licarbazepine is a voltage-gated sodium channel blocker with anticonvulsant and mood-stabilizing effects that is related to oxcarbazepine . It is an active metabolite of oxcarbazepine . In addition, an enantiomer of licarbazepine, eslicarbazepine (( S )-(+)-licarbazepine), is an active metabolite of eslicarbazepine acetate . Oxcarbazepine and eslicarbazepine acetate are inactive on their own, and behave instead as prodrugs to licarbazepine and eslicarbazepine, respectively, to produce their therapeutic effects.",
+      "Both oxcarbazepine and licarbazepine were found to show anticonvulsant properties in seizure models done on animals. These compounds had protective functions whenever tonic extension seizures were induced electrically, but such protection was less apparent whenever seizures were induced chemically. There was no observable tolerance during a four weeks course of treatment with daily administration of oxcarbazepine or licarbazepine in electroshock test on mice and rats. Most of the antiepileptic activity can be attributed to licarbazepine. Aside from its reduction in side effects, it is presumed to have the same main mechanism as carbamazepine, sodium channel inhibition, and is generally used to treat the same conditions."
+    ],
+    "pages": [
+      "licarbazepine",
+      "oxcarbazepine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "M-II",
+    "parents": [
+      "ramelteon"
+    ],
+    "key": "m_ii",
+    "wiki_title": "Ramelteon",
+    "slug": "ramelteon",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "ramelteon"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Meta-chlorophenylpiperazine",
+    "parents": [
+      "nefazodone",
+      "trazodone"
+    ],
+    "key": "meta_chlorophenylpiperazine",
+    "wiki_title": "meta-Chlorophenylpiperazine",
+    "slug": "meta_chlorophenylpiperazine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [
       {
-        "target": "delta",
-        "ki_id": 36073,
-        "value_nm": 80.5
+        "target": "sert",
+        "wiki_name": "SERT",
+        "ki": {
+          "median": 317.0,
+          "min": 202.0,
+          "max": 432.0,
+          "raw": "202–432"
+        },
+        "quote": "SERT | 202–432 | Human",
+        "page": "meta_chlorophenylpiperazine"
       },
       {
-        "target": "kappa",
-        "ki_id": 36083,
-        "value_nm": 61.6
+        "target": "net",
+        "wiki_name": "NET",
+        "ki": {
+          "median": 3150.0,
+          "min": 1940.0,
+          "max": 4360.0,
+          "raw": "1,940–4,360"
+        },
+        "quote": "NET | 1,940–4,360 | Human",
+        "page": "meta_chlorophenylpiperazine"
       },
       {
-        "target": "mu",
-        "ki_id": 70674,
-        "value_nm": 11.0
+        "target": "5ht1a",
+        "wiki_name": "5-HT 1A",
+        "ki": {
+          "median": 222.0,
+          "min": 44.0,
+          "max": 400.0,
+          "raw": "44–400"
+        },
+        "quote": "5-HT 1A | 44–400 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht1b",
+        "wiki_name": "5-HT 1B",
+        "ki": {
+          "median": 295.0,
+          "min": 89.0,
+          "max": 501.0,
+          "raw": "89–501"
+        },
+        "quote": "5-HT 1B | 89–501 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht1d",
+        "wiki_name": "5-HT 1D",
+        "ki": {
+          "median": 755.0,
+          "min": 210.0,
+          "max": 1300.0,
+          "raw": "210–1,300"
+        },
+        "quote": "5-HT 1D | 210–1,300 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht2a",
+        "wiki_name": "5-HT 2A",
+        "ki": {
+          "median": 215.0,
+          "min": 32.0,
+          "max": 398.0,
+          "raw": "32–398"
+        },
+        "quote": "5-HT 2A | 32–398 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht2b",
+        "wiki_name": "5-HT 2B",
+        "ki": {
+          "median": 33.1,
+          "min": 3.2,
+          "max": 63.0,
+          "raw": "3.2–63"
+        },
+        "quote": "5-HT 2B | 3.2–63 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht2c",
+        "wiki_name": "5-HT 2C",
+        "ki": {
+          "median": 127.2,
+          "min": 3.4,
+          "max": 251.0,
+          "raw": "3.4–251"
+        },
+        "quote": "5-HT 2C | 3.4–251 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht3",
+        "wiki_name": "5-HT 3",
+        "ki": {
+          "median": 427.0,
+          "min": 427.0,
+          "max": 427.0,
+          "raw": "427"
+        },
+        "quote": "5-HT 3 | 427 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht5a",
+        "wiki_name": "5-HT 5A",
+        "ki": {
+          "median": 1354.0,
+          "min": 1354.0,
+          "max": 1354.0,
+          "raw": "1,354"
+        },
+        "quote": "5-HT 5A | 1,354 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht6",
+        "wiki_name": "5-HT 6",
+        "ki": {
+          "median": 1748.0,
+          "min": 1748.0,
+          "max": 1748.0,
+          "raw": "1,748"
+        },
+        "quote": "5-HT 6 | 1,748 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "5ht7",
+        "wiki_name": "5-HT 7",
+        "ki": {
+          "median": 163.0,
+          "min": 163.0,
+          "max": 163.0,
+          "raw": "163"
+        },
+        "quote": "5-HT 7 | 163 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "alpha1a",
+        "wiki_name": "α 1A",
+        "ki": {
+          "median": 1386.0,
+          "min": 1386.0,
+          "max": 1386.0,
+          "raw": "1,386"
+        },
+        "quote": "α 1A | 1,386 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "alpha1b",
+        "wiki_name": "α 1B",
+        "ki": {
+          "median": 915.0,
+          "min": 915.0,
+          "max": 915.0,
+          "raw": "915"
+        },
+        "quote": "α 1B | 915 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "alpha2",
+        "wiki_name": "α 2",
+        "ki": {
+          "median": 341.0,
+          "min": 112.0,
+          "max": 570.0,
+          "raw": "112–570"
+        },
+        "quote": "α 2 | 112–570 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "alpha2a",
+        "wiki_name": "α 2A",
+        "ki": {
+          "median": 145.0,
+          "min": 145.0,
+          "max": 145.0,
+          "raw": "145"
+        },
+        "quote": "α 2A | 145 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "alpha2b",
+        "wiki_name": "α 2B",
+        "ki": {
+          "median": 106.0,
+          "min": 106.0,
+          "max": 106.0,
+          "raw": "106"
+        },
+        "quote": "α 2B | 106 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "alpha2c",
+        "wiki_name": "α 2C",
+        "ki": {
+          "median": 124.0,
+          "min": 124.0,
+          "max": 124.0,
+          "raw": "124"
+        },
+        "quote": "α 2C | 124 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "beta1",
+        "wiki_name": "β 1",
+        "ki": {
+          "median": 2359.0,
+          "min": 2359.0,
+          "max": 2359.0,
+          "raw": "2,359"
+        },
+        "quote": "β 1 | 2,359 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "beta2",
+        "wiki_name": "β 2",
+        "ki": {
+          "median": 3474.0,
+          "min": 3474.0,
+          "max": 3474.0,
+          "raw": "3,474"
+        },
+        "quote": "β 2 | 3,474 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "d1",
+        "wiki_name": "D 1",
+        "ki": {
+          "median": 7000.0,
+          "min": 7000.0,
+          "max": 7000.0,
+          "raw": "7,000"
+        },
+        "quote": "D 1 | 7,000 | Human",
+        "page": "meta_chlorophenylpiperazine"
+      },
+      {
+        "target": "h1",
+        "wiki_name": "H 1",
+        "ki": {
+          "median": 326.0,
+          "min": 326.0,
+          "max": 326.0,
+          "raw": "326"
+        },
+        "quote": "H 1 | 326 | Human",
+        "page": "meta_chlorophenylpiperazine"
       }
-    ]
+    ],
+    "unresolved_ki": [
+      "'α 1' (Ki 97–2,900)",
+      "'β' (Ki 2,500)",
+      "'σ 2' (Ki 8,350)",
+      "'I 1' (Ki 759)",
+      "'VDCC' (Ki 6,043)"
+    ],
+    "action_candidates": [
+      "mCPP is known to induce headaches in humans and has been used for testing potential antimigraine medications. It has potent anorectic effects and has encouraged the development of selective 5-HT 2C receptor agonists for the treatment of obesity as well.",
+      "mCPP possesses significant affinity for the 5-HT 1A , 5-HT 1B , 5-HT 1D , 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 3 , and 5-HT 7 receptors , as well as the SERT . It also has some affinity for α 1 -adrenergic , α 2 -adrenergic , H 1 , I 1 , and NET . It behaves as an agonist at most serotonin receptors. mCPP has been shown to act not only as a serotonin reuptake inhibitor but as a serotonin releasing agent as well.",
+      "mCPP's strongest actions are at the 5-HT 2B and 5-HT 2C receptors and its discriminative cue is mediated primarily by 5-HT 2C . Its negative effects such as anxiety , headaches , and appetite loss are likely mediated by its actions on the 5-HT 2C receptor. Other effects of mCPP include nausea , hypoactivity , and penile erection , the latter two the result of increased 5-HT 2C activity and the former likely via 5-HT 3 stimulation. mCPP is known to induce migraines and this may be mediated by serotonin 5-HT 2B receptor agonism.",
+      "In comparison studies, mCPP has approximately 10-fold selectivity for the human 5-HT 2C receptor over the human 5-HT 2A and 5-HT 2B receptors (K i = 3.4 nM vs. 32.1 and 28.8 nM). It acts as a partial agonist of the human 5-HT 2A and 5-HT 2C receptors but as an antagonist of the human 5-HT 2B receptors.",
+      "mCPP does not produce the head-twitch response , a behavioral proxy of psychedelic effects, in rodents. Instead, it has been found to dose-dependently antagonize the head-twitch response induced by the serotonergic psychedelic DOI . However, when mCPP is combined with the selective serotonin 5-HT 2C receptor antagonist SB-242084 , it is able to dose-dependently induce head twitches. These findings suggest that serotonin 5-HT 2C receptor activation inhibits and can mask the head-twitch response induced by serotonin 5-HT 2A receptor agonists.",
+      "The anxiety- and panic-inducing effects of mCPP in humans can be blocked or reduced by non-selective serotonin receptor antagonists such as metergoline and to a lesser extent methysergide as well as by the serotonin 5-HT 2A and 5-HT 2C receptor antagonist ritanserin . Chronic pre-treatment with serotonin reuptake inhibitors like fluoxetine and clomipramine can also reverse the anxiogenic effects of mCPP. Relatedly, serotonin reuptake inhibitors also reduce many other effects of mCPP and this is thought to be related to desensitization of serotonin 5-HT 2C and 5-HT 2A receptors. The benzodiazepine alprazolam can block mCPP-induced anxiety as well.",
+      "mCPP has been found to dose-dependently increase oxytocin levels in rodents. It can increase oxytocin levels by up to 3- to 6-fold at high doses. The oxytocin increases caused by mCPP are near-completely blocked by the serotonin 5-HT 2 receptor antagonists mianserin , LY-53857 , and metergoline , but are minimally affected by the serotonin 5-HT 2A receptor antagonist ketanserin . These findings suggest the involvement of the serotonin 5-HT 2C receptor in oxytocin secretion with mCPP rather than other serotonin receptors like the serotonin 5-HT 2A receptor. In humans, the drug robustly increased oxytocin levels in women but not in men."
+    ],
+    "pages": [
+      "meta_chlorophenylpiperazine",
+      "nefazodone"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "N-dealkylated samidorphan",
+    "parents": [
+      "olanzapinesamidorphan"
+    ],
+    "key": "n_dealkylated_samidorphan",
+    "wiki_title": "Olanzapine/samidorphan",
+    "slug": "olanzapine_samidorphan",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "olanzapine_samidorphan"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "N-desalkylflurazepam (descarboxyloflazepate)",
+    "parents": [
+      "flurazepam",
+      "loflazepate",
+      "quazepam"
+    ],
+    "key": "n_desalkylflurazepam_descarboxyloflazepate",
+    "wiki_title": "N-Desalkylflurazepam",
+    "slug": "n_desalkylflurazepam",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "N -Desalkylflurazepam (also known as norflurazepam ) is a benzodiazepine analog and an active metabolite of several other benzodiazepine drugs including flurazepam , flutoprazepam , fludiazepam , midazolam , flutazolam , quazepam , and ethyl loflazepate . It is long-acting, prone to accumulation, and binds unselectively to the various benzodiazepine receptor subtypes. It has been sold as a designer drug from 2016 onward."
+    ],
+    "pages": [
+      "n_desalkylflurazepam",
+      "flurazepam"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "N-desmethylclobazam",
+    "parents": [
+      "clobazam"
+    ],
+    "key": "n_desmethylclobazam",
+    "wiki_title": "Clobazam",
+    "slug": "clobazam",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "clobazam"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "N-Desmethylpimavanserin",
+    "parents": [
+      "pimavanserin"
+    ],
+    "key": "n_desmethylpimavanserin",
+    "wiki_title": "Pimavanserin",
+    "slug": "pimavanserin",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "pimavanserin"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Norbuprenorphine",
+    "parents": [
+      "buprenorphine"
+    ],
+    "key": "norbuprenorphine",
+    "wiki_title": "Norbuprenorphine",
+    "slug": "norbuprenorphine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Norbuprenorphine is a major active metabolite of the opioid modulator buprenorphine . It is a μ-opioid , δ-opioid , and nociceptin receptor full agonist , and a κ-opioid receptor partial agonist . In rats, unlike buprenorphine, norbuprenorphine produces marked respiratory depression but with very little antinociceptive effect. In explanation of these properties, norbuprenorphine has been found to be a high affinity P-glycoprotein substrate , and in accordance, shows very limited blood-brain-barrier penetration."
+    ],
+    "pages": [
+      "norbuprenorphine",
+      "buprenorphine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Norclozapine (N-desmethylclozapine)",
+    "parents": [
+      "clozapine"
+    ],
+    "key": "norclozapine_n_desmethylclozapine",
+    "wiki_title": "Desmethylclozapine",
+    "slug": "desmethylclozapine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Unlike clozapine, it possesses intrinsic activity at the D 2 / D 3 receptors , and acts as a weak partial agonist at these sites similarly to aripiprazole and bifeprunox . Notably, NDMC has also been shown to act as a potent and efficacious agonist at the muscarinic acetylcholine M 1 receptor and the δ-opioid receptor , unlike clozapine as well. It is a moderate-efficacy partial agonist of the muscarinic acetylcholine M 1 and M 2 receptors , a very weak partial agonist or antagonist of the M 3 receptor , and a silent antagonist of the M 4 receptor . It also binds with high affinity to the M 5 receptor , but its intrinsic activity was not reported for this receptor."
+    ],
+    "pages": [
+      "desmethylclozapine",
+      "clozapine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Nordoxepin",
+    "parents": [
+      "doxepin"
+    ],
+    "key": "nordoxepin",
+    "wiki_title": "Nordoxepin",
+    "slug": "nordoxepin",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Nordoxepin is pharmacologically active similarly to doxepin. In general, the demethylated variants of tertiary amine TCAs like doxepin are much more potent norepinephrine reuptake inhibitors , less potent serotonin reuptake inhibitors , and less potent in their antiadrenergic , antihistamine , and anticholinergic activities."
+    ],
+    "pages": [
+      "nordoxepin",
+      "doxepin"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Norfenfluramine",
@@ -1698,277 +1556,202 @@
     ]
   },
   {
-    "metabolite": "Desmethylsibutramine",
+    "metabolite": "Norfluoxetine",
     "parents": [
-      "sibutramine"
+      "fluoxetine"
     ],
-    "key": "desmethylsibutramine",
-    "wiki_title": "Sibutramine",
-    "slug": "sibutramine",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [
-      {
-        "target": "sert",
-        "wiki_name": "SERT",
-        "ki": {
-          "median": 15.0,
-          "min": 15.0,
-          "max": 15.0,
-          "raw": "15"
-        },
-        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49",
-        "page": "sibutramine"
-      },
-      {
-        "target": "net",
-        "wiki_name": "NET",
-        "ki": {
-          "median": 20.0,
-          "min": 20.0,
-          "max": 20.0,
-          "raw": "20"
-        },
-        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49",
-        "page": "sibutramine"
-      },
-      {
-        "target": "dat",
-        "wiki_name": "DAT",
-        "ki": {
-          "median": 49.0,
-          "min": 49.0,
-          "max": 49.0,
-          "raw": "49"
-        },
-        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49",
-        "page": "sibutramine"
-      }
-    ],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Sibutramine is reported to be a prodrug to two active metabolites , desmethylsibutramine (M1; BTS-54354) and didesmethylsibutramine (M2; BTS-54505), with much greater potency as monoamine reuptake inhibitors. Further studies have indicated that the ( R )-enantiomers of each metabolite exert significantly stronger anorectic effects than the ( S )-enantiomers."
-    ],
-    "pages": [
-      "sibutramine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Didesmethylsibutramine",
-    "parents": [
-      "sibutramine"
-    ],
-    "key": "didesmethylsibutramine",
-    "wiki_title": "Sibutramine",
-    "slug": "sibutramine",
-    "own_article": false,
-    "found": true,
-    "from_parent": true,
-    "ki_bindings": [
-      {
-        "target": "sert",
-        "wiki_name": "SERT",
-        "ki": {
-          "median": 20.0,
-          "min": 20.0,
-          "max": 20.0,
-          "raw": "20"
-        },
-        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49 / ( R )-Desmethylsibutramine | 44 | 4 | 12 / ( S )-Desmethylsibutramine | 9,200 | 870 | 180 / Didesmethylsibutramine | 20 | 15 | 45",
-        "page": "sibutramine"
-      },
-      {
-        "target": "net",
-        "wiki_name": "NET",
-        "ki": {
-          "median": 15.0,
-          "min": 15.0,
-          "max": 15.0,
-          "raw": "15"
-        },
-        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49 / ( R )-Desmethylsibutramine | 44 | 4 | 12 / ( S )-Desmethylsibutramine | 9,200 | 870 | 180 / Didesmethylsibutramine | 20 | 15 | 45",
-        "page": "sibutramine"
-      },
-      {
-        "target": "dat",
-        "wiki_name": "DAT",
-        "ki": {
-          "median": 45.0,
-          "min": 45.0,
-          "max": 45.0,
-          "raw": "45"
-        },
-        "quote": "Compound | SERT | NET | DAT / Sibutramine | 298–2,800 | 350–5,451 | 943–1,200 / Desmethylsibutramine | 15 | 20 | 49 / ( R )-Desmethylsibutramine | 44 | 4 | 12 / ( S )-Desmethylsibutramine | 9,200 | 870 | 180 / Didesmethylsibutramine | 20 | 15 | 45",
-        "page": "sibutramine"
-      }
-    ],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Sibutramine is reported to be a prodrug to two active metabolites , desmethylsibutramine (M1; BTS-54354) and didesmethylsibutramine (M2; BTS-54505), with much greater potency as monoamine reuptake inhibitors. Further studies have indicated that the ( R )-enantiomers of each metabolite exert significantly stronger anorectic effects than the ( S )-enantiomers."
-    ],
-    "pages": [
-      "sibutramine"
-    ],
-    "pdsp_targets": []
-  },
-  {
-    "metabolite": "Norclozapine (N-desmethylclozapine)",
-    "parents": [
-      "clozapine"
-    ],
-    "key": "norclozapine_n_desmethylclozapine",
-    "wiki_title": "Desmethylclozapine",
-    "slug": "desmethylclozapine",
+    "key": "norfluoxetine",
+    "wiki_title": "Seproxetine",
+    "slug": "seproxetine",
     "own_article": true,
     "found": true,
     "from_parent": false,
     "ki_bindings": [],
     "unresolved_ki": [],
     "action_candidates": [
-      "Unlike clozapine, it possesses intrinsic activity at the D 2 / D 3 receptors , and acts as a weak partial agonist at these sites similarly to aripiprazole and bifeprunox . Notably, NDMC has also been shown to act as a potent and efficacious agonist at the muscarinic acetylcholine M 1 receptor and the δ-opioid receptor , unlike clozapine as well. It is a moderate-efficacy partial agonist of the muscarinic acetylcholine M 1 and M 2 receptors , a very weak partial agonist or antagonist of the M 3 receptor , and a silent antagonist of the M 4 receptor . It also binds with high affinity to the M 5 receptor , but its intrinsic activity was not reported for this receptor."
+      "Seproxetine , also known as ( S )-norfluoxetine , is a selective serotonin reuptake inhibitor (SSRI). It is the (S) enantiomer of norfluoxetine , the active metabolite of the widely used antidepressant fluoxetine ; it is nearly 4 times more selective for stimulating neurosteroid synthesis relative to serotonin reuptake inhibition than fluoxetine. It is formed through the demethylation , or removal of a methyl group , of fluoxetine. Seproxetine is both an inhibitor of serotonin and dopamine transporters , 5-HT 2A and 5-HT 2C receptors. It was being investigated by Eli Lilly and Company as an antidepressant; however, it causes cardiac arrhythmia by blocking the KvLQT1 protein, which is responsible for the management of the QT interval . This is the time it takes for the heart to contract and recover. Due to this, development of the medication was discontinued. Efficacy testing found that the drug was equivalent to fluoxetine, but sixteen times more powerful than the ( R) enantiomer of norfluoxetine.",
+      "The bioavailability of fluoxetine is relatively high (72%), and peak plasma concentrations are reached in 6–8 hours. It is highly bound to plasma proteins, mostly albumin and α 1 -glycoprotein. Fluoxetine is metabolized in the liver by isoenzymes of the cytochrome P450 system, including CYP2D6 . The role of CYP2D6 in the metabolism of fluoxetine may be clinically important, as there is great genetic variability in the function of this enzyme among people. CYP2D6 is responsible for converting fluoxetine to its only active metabolite, norfluoxetine . Both drugs are also potent inhibitors of CYP2D6."
     ],
     "pages": [
-      "desmethylclozapine",
-      "clozapine"
+      "seproxetine",
+      "fluoxetine"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "5ht2a",
+        "ki_id": 5029,
+        "value_nm": 295.12
+      },
+      {
+        "target": "5ht2b",
+        "ki_id": 14123,
+        "value_nm": 5063.0
+      },
+      {
+        "target": "5ht2c",
+        "ki_id": 5091,
+        "value_nm": 91.2
+      },
+      {
+        "target": "dat",
+        "ki_id": 56017,
+        "value_nm": 3661.0
+      },
+      {
+        "target": "m1",
+        "ki_id": 41998,
+        "value_nm": 1200.0
+      },
+      {
+        "target": "m2",
+        "ki_id": 42017,
+        "value_nm": 4600.0
+      },
+      {
+        "target": "m3",
+        "ki_id": 42036,
+        "value_nm": 760.0
+      },
+      {
+        "target": "m4",
+        "ki_id": 42055,
+        "value_nm": 2600.0
+      },
+      {
+        "target": "m5",
+        "ki_id": 42074,
+        "value_nm": 2200.0
+      },
+      {
+        "target": "net",
+        "ki_id": 9630,
+        "value_nm": 3947.0
+      },
+      {
+        "target": "sert",
+        "ki_id": 56025,
+        "value_nm": 26.0
+      }
+    ]
+  },
+  {
+    "metabolite": "Noribogaine",
+    "parents": [
+      "ibogaine"
+    ],
+    "key": "noribogaine",
+    "wiki_title": "Ibogaine",
+    "slug": "ibogaine",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Ibogaine's major active metabolite noribogaine has similar discriminative stimulus properties compared to ibogaine in rodent drug discrimination tests, but only partially substitutes for ibogaine. It appears that the stimulus properties of ibogaine may be primarily mediated by noribogaine. Noribogaine is most potent as a serotonin reuptake inhibitor . It acts as a moderate κ-opioid receptor agonist and weak μ-opioid receptor agonist or weak partial agonist. The action of ibogaine at the κ-opioid receptor may indeed contribute significantly to the psychoactive effects attributed to ibogaine ingestion; Salvia divinorum , another plant recognized for its strong hallucinogenic properties, contains the chemical salvinorin A , which is a highly selective κ-opioid agonist. Noribogaine is more potent than ibogaine in rat drug discrimination assays when tested for the subjective effects of ibogaine.",
+      "Noribogaine, but not ibogaine, produces psychoplastogenic effects in vitro in preclinical research . This can be blocked by the serotonin 5-HT 2A receptor antagonist ketanserin , by the mTOR inhibitor rapamycin , and by a TrkB antagonist."
+    ],
+    "pages": [
+      "ibogaine"
     ],
     "pdsp_targets": []
   },
   {
-    "metabolite": "3,4-Methylenedioxyamphetamine (MDA)",
+    "metabolite": "Norketamine",
     "parents": [
-      "mdma"
+      "ketamine"
     ],
-    "key": "3_4_methylenedioxyamphetamine_mda",
-    "wiki_title": "3,4-Methylenedioxyamphetamine",
-    "slug": "3_4_methylenedioxyamphetamine",
+    "key": "norketamine",
+    "wiki_title": "Norketamine",
+    "slug": "norketamine",
     "own_article": true,
     "found": true,
     "from_parent": false,
-    "ki_bindings": [
-      {
-        "target": "sert",
-        "wiki_name": "SERT",
-        "ki": {
-          "median": 5600.0,
-          "min": 5600.0,
-          "max": 5600.0,
-          "raw": "5,600–>10,000 (K i ) 478–4,900 ( IC 50"
-        },
-        "quote": "SERT | 5,600–>10,000 (K i ) 478–4,900 ( IC 50"
-      },
-      {
-        "target": "5ht1a",
-        "wiki_name": "5-HT 1A",
-        "ki": {
-          "median": 3762.0,
-          "min": 3762.0,
-          "max": 3762.0,
-          "raw": "3,762–>10,000"
-        },
-        "quote": "5-HT 1A | 3,762–>10,000"
-      },
-      {
-        "target": "5ht2a",
-        "wiki_name": "5-HT 2A",
-        "ki": {
-          "median": 3200.0,
-          "min": 3200.0,
-          "max": 3200.0,
-          "raw": "3,200–>10,000 (K i ) 630–1,767 ( EC 50 ) 57–99% ( E max"
-        },
-        "quote": "5-HT 2A | 3,200–>10,000 (K i ) 630–1,767 ( EC 50 ) 57–99% ( E max"
-      },
-      {
-        "target": "5ht2b",
-        "wiki_name": "5-HT 2B",
-        "ki": {
-          "median": 95.5,
-          "min": 91.0,
-          "max": 100.0,
-          "raw": "91–100 (K i ) 190–850 ( EC 50 ) 51–80% ( E max )"
-        },
-        "quote": "5-HT 2B | 91–100 (K i ) 190–850 ( EC 50 ) 51–80% ( E max )"
-      },
-      {
-        "target": "5ht2c",
-        "wiki_name": "5-HT 2C",
-        "ki": {
-          "median": 4709.0,
-          "min": 3000.0,
-          "max": 6418.0,
-          "raw": "3,000–6,418 (K i ) 98–4,800 ( EC 50 ) 79–118% ( E max )"
-        },
-        "quote": "5-HT 2C | 3,000–6,418 (K i ) 98–4,800 ( EC 50 ) 79–118% ( E max )"
-      },
-      {
-        "target": "5ht7",
-        "wiki_name": "5-HT 7",
-        "ki": {
-          "median": 3548.0,
-          "min": 3548.0,
-          "max": 3548.0,
-          "raw": "3,548"
-        },
-        "quote": "5-HT 7 | 3,548"
-      },
-      {
-        "target": "alpha1a",
-        "wiki_name": "α 1A",
-        "ki": {
-          "median": 8700.0,
-          "min": 8700.0,
-          "max": 8700.0,
-          "raw": "8,700–>10,000"
-        },
-        "quote": "α 1A | 8,700–>10,000"
-      },
-      {
-        "target": "alpha2a",
-        "wiki_name": "α 2A",
-        "ki": {
-          "median": 1850.0,
-          "min": 1100.0,
-          "max": 2600.0,
-          "raw": "1,100–2,600"
-        },
-        "quote": "α 2A | 1,100–2,600"
-      },
-      {
-        "target": "alpha2b",
-        "wiki_name": "α 2B",
-        "ki": {
-          "median": 690.0,
-          "min": 690.0,
-          "max": 690.0,
-          "raw": "690"
-        },
-        "quote": "α 2B | 690"
-      },
-      {
-        "target": "alpha2c",
-        "wiki_name": "α 2C",
-        "ki": {
-          "median": 229.0,
-          "min": 229.0,
-          "max": 229.0,
-          "raw": "229"
-        },
-        "quote": "α 2C | 229"
-      }
-    ],
-    "unresolved_ki": [
-      "'TAAR1' (Ki 220–250 (K i ) (rat) 740 ( EC 50 ) (rat) 86% ( E max ) (rat) 160–180 (K i ) (mouse) 580 ( EC 50 ) (mouse) 102% ( E max ) (rat) 3,600 ( EC 50 ) (human) 11% ( E max ) (human))"
-    ],
+    "ki_bindings": [],
+    "unresolved_ki": [],
     "action_candidates": [
-      "In terms of its pharmacology , MDA is a serotonin–norepinephrine–dopamine releasing agent (SNDRA) and a serotonin 5-HT 2 receptor agonist , including of the serotonin 5-HT 2A receptor . It has a duration of 5 to 8 hours or around 6 hours typically.",
-      "In terms of the subjective and behavioral effects of MDA, it is thought that serotonin release is required for its entactogenic effects, dopamine release is required for its euphoriant ( rewarding and addictive ) effects, dopamine and norepinephrine release are required for its psychostimulant effects, and direct agonism of the serotonin 5-HT 2A receptor is required for its mild psychedelic effects. The entactogenic effects of drugs like MDA are thought to be dependent on a precise balance of serotonin and dopamine release as well as serotonin receptor agonism. The longer duration of MDA compared to MDMA appears to be related to pharmacodynamics as opposed to pharmacokinetics , for instance the effects of MDA depending relatively more on serotonin 5-HT 2A receptor agonism than on serotonin release.",
-      "MDA constitutes part of the core structure of the β-adrenergic receptor agonist protokylol ."
+      "Norketamine , or N -desmethylketamine , is the major active metabolite of ketamine , which is formed mainly by CYP3A4 . Similarly to ketamine, norketamine acts as a noncompetitive NMDA receptor antagonist , but is about 3–5 times less potent as an anesthetic in comparison.",
+      "Similarly to ketamine, norketamine acts as a noncompetitive NMDA receptor antagonist (K i = 1.7 μM and 13 μM for ( S )-(+)-norketamine and ( R )-(–)-norketamine, respectively). Also, similarly again to ketamine, norketamine binds to the μ- and κ-opioid receptors . Relative to ketamine, norketamine is much more potent as an antagonist of the α 7 -nicotinic acetylcholine receptor , and produces rapid antidepressant effects in animal models which have been reported to correlate with its activity at this receptor. However, norketamine is about 1/5 as potent as ketamine as an antidepressant in mice as per the forced swim test , and this seems also to be in accordance with its 3–5-fold reduced comparative potency in vivo as an NMDA receptor antagonist. Norketamine's metabolites, dehydronorketamine (DHNK) and hydroxynorketamine (HNK), are far less or negligibly active as NMDA receptor antagonists in comparison, but retain activity as potent antagonists of the α 7 -nicotinic acetylcholine receptor.",
+      "In 2024, norketamine was discovered to act as a highly potent positive allosteric modulator of the opioid receptors , including of the μ-opioid receptor (MOR). It shares this action with ketamine and hydroxynorketamine (HNK). They are all active in this action at very low concentrations, for instance 1 nM. Ketamine, norketamine, and HNK can potentiate the effects of endogenous opioids like met-enkephalin and exogenous opioids like morphine . Opioid receptor positive allosteric modulation by these agents may be involved in their therapeutic effects, for instance their antidepressant and analgesic effects.",
+      "While most research has historically focused on its precursor, researchers have taken notice of norketamine's putative effects. Beginning in the late 1990s, Danish researchers discovered its role as a NMDA receptor antagonist. Later research uncovered its use as an antinociceptive, or \"painkiller.\""
     ],
     "pages": [
-      "3_4_methylenedioxyamphetamine",
-      "mdma"
+      "norketamine",
+      "ketamine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Norquetiapine",
+    "parents": [
+      "quetiapine"
+    ],
+    "key": "norquetiapine",
+    "wiki_title": "Norquetiapine",
+    "slug": "norquetiapine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Norquetiapine , also known as N -desalkylquetiapine , is a 5-HT 2B serotonin receptor modulator , and norepinephrine reuptake inhibitor . It is the principal metabolite of quetiapine .",
+      "Since the noradrenaline transporter is responsible for most of the dopamine clearance in the prefrontal cortex, norquetiapine blocks reuptake of dopamine too, accumulating the dopamine in the synapse."
+    ],
+    "pages": [
+      "norquetiapine",
+      "quetiapine"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Norzimelidine",
+    "parents": [
+      "zimelidine"
+    ],
+    "key": "norzimelidine",
+    "wiki_title": "Zimelidine",
+    "slug": "zimelidine",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Zimelidine and its principal active metabolite, norzimelidine, preferentially inhibit serotonin uptake while having little effect on the reuptake of noradrenaline or dopamine. The drug lacks monoamine oxidase inhibitory activity and has negligible affinity for histamine, adrenergic, and serotonin receptors at therapeutic concentrations, contributing to its greater selectivity compared with earlier antidepressants."
+    ],
+    "pages": [
+      "zimelidine"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "net",
+        "ki_id": 35089,
+        "value_nm": 360.0
+      },
+      {
+        "target": "sert",
+        "ki_id": 35067,
+        "value_nm": 450.0
+      }
+    ]
+  },
+  {
+    "metabolite": "Norzotepine",
+    "parents": [
+      "zotepine"
+    ],
+    "key": "norzotepine",
+    "wiki_title": "Zotepine",
+    "slug": "zotepine",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "zotepine"
     ],
     "pdsp_targets": []
   },
@@ -1991,6 +1774,366 @@
     "pages": [
       "desmetramadol",
       "tramadol"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Oxymorphone",
+    "parents": [
+      "oxycodone"
+    ],
+    "key": "oxymorphone",
+    "wiki_title": "Oxymorphone",
+    "slug": "oxymorphone",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Oxymorphone , sold under the brand names Numorphan and Opana among others, is a highly potent opioid analgesic indicated for treatment of severe pain. Pain relief after injection begins after about 5–10 minutes; after oral administration it begins after about 30 minutes and lasts about 3–4 hours for immediate-release tablets and 12 hours for extended-release tablets. The elimination half-life of oxymorphone is much faster intravenously, and as such, the drug is most commonly used orally. Like oxycodone , which metabolizes to oxymorphone, oxymorphone has a high abuse potential.",
+      "Oxymorphone was developed in Germany in 1914. It was patented in 1955 and approved for medical use in 1959. In June 2017 the FDA asked Endo Pharmaceuticals to remove its product from the US market. This was in part due to the opioid epidemic in the US, and the fact that a 2012 reformulation failed to stop illicit injection of the drug. Endo responded by voluntarily removing Opana ER from the market a month later. Generic versions of extended-release oxymorphone, such as those manufactured by Amneal Pharmaceuticals , are still available in the US.",
+      "Oxymorphone elicits its effects by binding to and activating the μ-opioid receptor (MOR) and, to a much lesser extent, the δ-opioid receptor (DOR) and κ-opioid receptor (KOR). Its activity at the DOR may augment its action at the MOR. Oxymorphone is 10 times more potent than morphine.",
+      "In the United States, as of 2013 more than 12 million people abused opioid drugs at least once a year. In 2010, 16,652 deaths were related to opiate overdose, in 2015 this number increased to 33,091. In September 2013, new FDA labeling guidelines for long-acting and extended-release opioids required manufacturers to remove moderate pain as use indication, reserving the drug for \"pain severe enough to require daily, around-the-clock, long-term opioid treatment\" however it did not restrict physicians from prescribing opioids for moderate, \"as needed\" usage.",
+      "In June 2017, faced with the public health crisis, the opioid epidemic, the FDA asked Endo Pharmaceuticals to \"remove its opioid pain medication, reformulated Opana ER (oxymorphone hydrochloride), from the market\". In their 8 June 2017 press release they also noted that, this was the first time the FDA had taken steps to \"remove a currently marketed opioid pain medication from sale due to public health consequences of abuse.\" By 6 July 2017, Endo International voluntarily complied with the FDA removal request."
+    ],
+    "pages": [
+      "oxymorphone",
+      "oxycodone"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "delta",
+        "ki_id": 36073,
+        "value_nm": 80.5
+      },
+      {
+        "target": "kappa",
+        "ki_id": 36083,
+        "value_nm": 61.6
+      },
+      {
+        "target": "mu",
+        "ki_id": 70674,
+        "value_nm": 11.0
+      }
+    ]
+  },
+  {
+    "metabolite": "Psilocin",
+    "parents": [
+      "psilocybin"
+    ],
+    "key": "psilocin",
+    "wiki_title": "Psilocin",
+    "slug": "psilocin",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [
+      {
+        "target": "5ht1a",
+        "wiki_name": "5-HT 1A",
+        "ki": {
+          "median": 308.0,
+          "min": 49.0,
+          "max": 567.0,
+          "raw": "49–567 (K i ) 130–>3,160 ( EC 50"
+        },
+        "quote": "5-HT 1A | 49–567 (K i ) 130–>3,160 ( EC 50",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht1b",
+        "wiki_name": "5-HT 1B",
+        "ki": {
+          "median": 168.0,
+          "min": 31.0,
+          "max": 305.0,
+          "raw": "31–305"
+        },
+        "quote": "5-HT 1B | 31–305",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht1d",
+        "wiki_name": "5-HT 1D",
+        "ki": {
+          "median": 27.5,
+          "min": 19.0,
+          "max": 36.0,
+          "raw": "19–36"
+        },
+        "quote": "5-HT 1D | 19–36",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht1e",
+        "wiki_name": "5-HT 1E",
+        "ki": {
+          "median": 48.0,
+          "min": 44.0,
+          "max": 52.0,
+          "raw": "44–52"
+        },
+        "quote": "5-HT 1E | 44–52",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht2a",
+        "wiki_name": "5-HT 2A",
+        "ki": {
+          "median": 173.0,
+          "min": 6.0,
+          "max": 340.0,
+          "raw": "6.0–340 (K i ) 2.4–3,836 ( EC 50 ) 16–98% ( E max )"
+        },
+        "quote": "5-HT 2A | 6.0–340 (K i ) 2.4–3,836 ( EC 50 ) 16–98% ( E max )",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht2b",
+        "wiki_name": "5-HT 2B",
+        "ki": {
+          "median": 207.3,
+          "min": 4.6,
+          "max": 410.0,
+          "raw": "4.6–410 (K i ) 2.4–>20,000 ( EC 50 ) 1.4–84% ( E max )"
+        },
+        "quote": "5-HT 2B | 4.6–410 (K i ) 2.4–>20,000 ( EC 50 ) 1.4–84% ( E max )",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht2c",
+        "wiki_name": "5-HT 2C",
+        "ki": {
+          "median": 75.5,
+          "min": 10.0,
+          "max": 141.0,
+          "raw": "10–141 (K i ) 9.1–30 ( EC 50 ) 86–95% ( E max )"
+        },
+        "quote": "5-HT 2C | 10–141 (K i ) 9.1–30 ( EC 50 ) 86–95% ( E max )",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht5a",
+        "wiki_name": "5-HT 5A",
+        "ki": {
+          "median": 77.0,
+          "min": 70.0,
+          "max": 84.0,
+          "raw": "70–84"
+        },
+        "quote": "5-HT 5A | 70–84",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht6",
+        "wiki_name": "5-HT 6",
+        "ki": {
+          "median": 64.5,
+          "min": 57.0,
+          "max": 72.0,
+          "raw": "57–72"
+        },
+        "quote": "5-HT 6 | 57–72",
+        "page": "psilocin"
+      },
+      {
+        "target": "5ht7",
+        "wiki_name": "5-HT 7",
+        "ki": {
+          "median": 37.75,
+          "min": 3.5,
+          "max": 72.0,
+          "raw": "3.5–72"
+        },
+        "quote": "5-HT 7 | 3.5–72",
+        "page": "psilocin"
+      },
+      {
+        "target": "alpha2a",
+        "wiki_name": "α 2A",
+        "ki": {
+          "median": 1711.5,
+          "min": 1379.0,
+          "max": 2044.0,
+          "raw": "1,379–2,044"
+        },
+        "quote": "α 2A | 1,379–2,044",
+        "page": "psilocin"
+      },
+      {
+        "target": "alpha2b",
+        "wiki_name": "α 2B",
+        "ki": {
+          "median": 1582.5,
+          "min": 1271.0,
+          "max": 1894.0,
+          "raw": "1,271–1,894"
+        },
+        "quote": "α 2B | 1,271–1,894",
+        "page": "psilocin"
+      },
+      {
+        "target": "alpha2c",
+        "wiki_name": "α 2C",
+        "ki": {
+          "median": 4404.0,
+          "min": 4404.0,
+          "max": 4404.0,
+          "raw": "4,404"
+        },
+        "quote": "α 2C | 4,404",
+        "page": "psilocin"
+      },
+      {
+        "target": "d1",
+        "wiki_name": "D 1",
+        "ki": {
+          "median": 20.0,
+          "min": 20.0,
+          "max": 20.0,
+          "raw": "20–>14,000"
+        },
+        "quote": "D 1 | 20–>14,000",
+        "page": "psilocin"
+      },
+      {
+        "target": "d2",
+        "wiki_name": "D 2",
+        "ki": {
+          "median": 3700.0,
+          "min": 3700.0,
+          "max": 3700.0,
+          "raw": "3,700–>10,000"
+        },
+        "quote": "D 2 | 3,700–>10,000",
+        "page": "psilocin"
+      },
+      {
+        "target": "d3",
+        "wiki_name": "D 3",
+        "ki": {
+          "median": 4500.5,
+          "min": 101.0,
+          "max": 8900.0,
+          "raw": "101–8,900"
+        },
+        "quote": "D 3 | 101–8,900",
+        "page": "psilocin"
+      },
+      {
+        "target": "h1",
+        "wiki_name": "H 1",
+        "ki": {
+          "median": 1600.0,
+          "min": 1600.0,
+          "max": 1600.0,
+          "raw": "1,600–>10,000"
+        },
+        "quote": "H 1 | 1,600–>10,000",
+        "page": "psilocin"
+      },
+      {
+        "target": "sert",
+        "wiki_name": "SERT",
+        "ki": {
+          "median": 3650.0,
+          "min": 3650.0,
+          "max": 3650.0,
+          "raw": "3,650–>10,000 (K i ) 662–3,900 ( IC 50"
+        },
+        "quote": "SERT | 3,650–>10,000 (K i ) 662–3,900 ( IC 50",
+        "page": "psilocin"
+      },
+      {
+        "target": "dat",
+        "wiki_name": "DAT",
+        "ki": {
+          "median": 6000.0,
+          "min": 6000.0,
+          "max": 6000.0,
+          "raw": "6,000–>30,000 (K i ) >100,000 ( IC 50 ) >10,000 ( EC 50 )"
+        },
+        "quote": "DAT | 6,000–>30,000 (K i ) >100,000 ( IC 50 ) >10,000 ( EC 50 )",
+        "page": "psilocin"
+      }
+    ],
+    "unresolved_ki": [
+      "'I 2' (Ki 792)",
+      "'TAAR1' (Ki 1,400 (K i ) (rat) 17,000 (K i ) (mouse) 920–2,700 ( EC 50 ) (rodent) >30,000 ( EC 50 ) (human))"
+    ],
+    "action_candidates": [
+      "Psilocin acts as a non-selective serotonin receptor agonist , including of the serotonin 5-HT 2A receptor among others. The drug produces its hallucinogenic effects specifically via activation of the serotonin 5-HT 2A receptor. However, other serotonin receptors , such as the serotonin 5-HT 1A and 5-HT 2C receptors , may also contribute to its effects. Notable analogues of psilocin include dimethyltryptamine (DMT), its positional isomer bufotenin (5-HO-DMT), its higher homologue 4-HO-MET (metocin), and others.",
+      "Psilocin is the pharmacologically active agent in the body after ingestion of psilocybin or some species of psychedelic mushrooms. Psilocybin is rapidly dephosphorylated in the body to psilocin which acts as a serotonin 5-HT 2A , 5-HT 2C and 5-HT 1A receptor agonist or partial agonist . Psilocin exhibits functional selectivity in that it activates phospholipase A2 instead of activating phospholipase C as the endogenous ligand serotonin does. Psilocin is structurally similar to serotonin (5-hydroxytryptamine), differing only by the hydroxyl group being on the 4-position rather than the 5 and the dimethyl groups on the nitrogen . Its effects are thought to come from its agonist activity at 5-HT 2A receptors in the prefrontal cortex . Psilocin's psychedelic effects are directly correlated with the drug's occupancy at these receptor sites . The drug shows pronounced biased agonism at the serotonin 5-HT 2C receptor. Psilocin has no significant effect on dopamine receptors and only affects the noradrenergic system at very high doses.",
+      "Psilocin has been reported to act as a highly potent positive allosteric modulator of the tropomyosin receptor kinase B (TrkB), one of the receptors of brain-derived neurotrophic factor (BDNF). However, subsequent studies failed to reproduce these findings and instead found no interaction of psilocin with TrkB.",
+      "1-Methylpsilocin is a serotonin 5-HT 2C receptor -preferring agonist . 4-Fluoro-DMT and 4-methyl-DMT are known. Another analogue of psilocin is 1-isopropyl-6-fluoropsilocin (O-4310).",
+      "Psilocin is the metabolite of psilocybin. The compound psilocybin itself is biologically inactive but quickly converted by the body to psilocin. Psilocybin is transformed into psilocin by dephosphorylation mediated via phosphatase enzymes . Psilocin is chemically related to the neurotransmitter serotonin and acts as a non-selective agonist of the serotonin receptors . Activation of one serotonin receptor, the serotonin 5-HT 2A receptor , is specifically responsible for the hallucinogenic effects of psilocin and other serotonergic psychedelics . Psilocybin is usually taken orally . By this route , its onset is about 20 to 50 minutes, peak effects occur in about 1 to 2 hours, and its duration is about 4 to 6 hours.",
+      "Psilocin is demethylated and oxidatively deaminated by monoamine oxidase (MAO), specifically monoamine oxidase A (MAO-A), into 4-hydroxyindole-3-acetaldehyde (4-HIAL or 4-HIA). 4-HIAL is then further oxidated into 4-hydroxyindole-3-acetic acid (4-HIAA) by aldehyde dehydrogenase (ALDH) or into 4-hydroxytryptophol (4-HTOL or 4-HTP) by alcohol dehydrogenase (ALD). Deamination of psilocin by MAO-A appears to be responsible for about 4% or 33% of its metabolism in different studies. In contrast to psilocin, its metabolites 4-HIAA and 4-HTP showed no affinity for or activation of multiple serotonin receptors and are considered inactive. Based on in vitro studies, it has been estimated that MAO-A is responsible for about 81% of psilocin's phase I hepatic metabolism. Psilocin and its metabolites are also glucuronidated by UDP-glucuronyltransferases (UGTs). UGT1A10 and UGT1A9 appear to be the most involved. Psilocybin's glucuronidated metabolites include psilocin- O -glucuronide and 4-HIAA- O -glucuronide. Approximately 80% of psilocin in blood plasma is in conjugated form, and conjugated psilocin levels are about fourfold higher than levels of free psilocin. Plasma 4-HIAA levels are also much higher than those of free psilocin."
+    ],
+    "pages": [
+      "psilocin",
+      "psilocybin"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "5ht1a",
+        "ki_id": 16571,
+        "value_nm": 49.0
+      },
+      {
+        "target": "5ht2a",
+        "ki_id": 16562,
+        "value_nm": 25.0
+      },
+      {
+        "target": "5ht2b",
+        "ki_id": 2722,
+        "value_nm": 450.0
+      },
+      {
+        "target": "5ht2c",
+        "ki_id": 16563,
+        "value_nm": 10.0
+      }
+    ]
+  },
+  {
+    "metabolite": "Samidorphan N-oxide",
+    "parents": [
+      "olanzapinesamidorphan"
+    ],
+    "key": "samidorphan_n_oxide",
+    "wiki_title": "Olanzapine/samidorphan",
+    "slug": "olanzapine_samidorphan",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "olanzapine_samidorphan"
+    ],
+    "pdsp_targets": []
+  },
+  {
+    "metabolite": "Trichloroethanol",
+    "parents": [
+      "chloral_hydrate"
+    ],
+    "key": "trichloroethanol",
+    "wiki_title": "Chloral hydrate",
+    "slug": "chloral_hydrate",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "chloral_hydrate"
     ],
     "pdsp_targets": []
   }

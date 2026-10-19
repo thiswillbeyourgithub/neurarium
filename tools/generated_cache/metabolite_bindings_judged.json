@@ -97,20 +97,6 @@
       }
     ]
   },
-  "o_desmethylvenlafaxine": {
-    "bindings": [
-      {
-        "target": "sert",
-        "action": "reuptake_inhibitor",
-        "quote": "It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class"
-      },
-      {
-        "target": "net",
-        "action": "reuptake_inhibitor",
-        "quote": "It is an antidepressant of the serotonin–norepinephrine reuptake inhibitor (SNRI) class"
-      }
-    ]
-  },
   "norfluoxetine": {
     "bindings": [
       {
@@ -453,6 +439,34 @@
         "quote": "These results suggest that sibutramine exhibits neurochemical and behavioral dopaminomimetic activity in vivo, which is mediated by dopamine reuptake inhibition by the active metabolites of sibutramine.",
         "corpus": "europepmc",
         "page": "15111248"
+      }
+    ]
+  },
+  "noribogaine": {
+    "bindings": [
+      {
+        "target": "sert",
+        "action": "reuptake_inhibitor",
+        "quote": "Noribogaine is most potent as a serotonin reuptake inhibitor ."
+      },
+      {
+        "target": "kappa",
+        "action": "agonist",
+        "quote": "Noribogaine is most potent as a serotonin reuptake inhibitor . It acts as a moderate κ-opioid receptor agonist and weak μ-opioid receptor agonist or weak partial agonist."
+      },
+      {
+        "target": "mu",
+        "action": "agonist",
+        "quote": "Noribogaine is most potent as a serotonin reuptake inhibitor . It acts as a moderate κ-opioid receptor agonist and weak μ-opioid receptor agonist or weak partial agonist."
+      }
+    ]
+  },
+  "norzimelidine": {
+    "bindings": [
+      {
+        "target": "sert",
+        "action": "reuptake_inhibitor",
+        "quote": "Zimelidine and its principal active metabolite, norzimelidine, preferentially inhibit serotonin uptake while having little effect on the reuptake of noradrenaline or dopamine."
       }
     ]
   }
