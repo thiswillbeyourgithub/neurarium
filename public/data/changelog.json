@@ -1,6 +1,48 @@
 {
   "versions": [
     {
+      "version": "3.132.2",
+      "date": "2026-10-19",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Six drugs (diazepam, diphenhydramine, lorazepam, mirtazapine, olanzapine, sildenafil) no longer list a brand literally named \"Other\", and a placeholder name can no longer enter as a brand, holder or originator",
+          "commits": [
+            "4d9fcf4"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Re-running the binding-direction table and metabolite fetchers offline reproduces their saved results again, and a test now checks the fetchers against their committed caches",
+          "commits": [
+            "5eb0171",
+            "dbed4a7",
+            "eb2a2f8"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The sourcing gaps document now lists only the gaps that are open today, with its figures generated from the data and a test keeping dates and stale counts out",
+          "commits": [
+            "789ed97",
+            "22b3048",
+            "a3c2f17",
+            "6ab7d4e"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Every source page is read through one shared reader, and the non-receptor target filter exists once",
+          "commits": [
+            "5efc669",
+            "e631955",
+            "61c8289",
+            "bd1f9ba"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.132.1",
       "date": "2026-10-19",
       "entries": [
