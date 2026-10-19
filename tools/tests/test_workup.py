@@ -190,7 +190,8 @@ class ApplierGateTest(unittest.TestCase):
                                      "Une lithiémie est contrôlée chaque semaine.")
         judged = {d: [fill(dict(p), self.OFFERED.get(d, {}).get("candidates", [])) for p in ps]
                   for d, ps in judged.items()}
-        return A.gate(judged, self.OFFERED, {"lithium", "clozapine"}, lambda cis: text)
+        return A.gate(judged, self.OFFERED, {"lithium", "clozapine"},
+                      A.PageGate(read=lambda corpus, cis: text))
 
     def test_accepts_and_merges_one_node_per_test_timing(self):
         out, rej = self.gate({"lithium": [

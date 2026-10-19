@@ -65,9 +65,9 @@ CORPUS = fetch_workup.CORPUS
 
 
 
-def gate(judged: dict, offered: dict, drug_ids: set[str], page_text
+def gate(judged: dict, offered: dict, drug_ids: set[str], pages: PageGate
          ) -> tuple[dict[str, list[dict]], list[str]]:
-    """Gate every judged pick. ``page_text(page)`` returns the normalized page (or "").
+    """Gate every judged pick, re-finding each quote on its ``pages`` (corpus #24).
 
     Returns ``({drug: [{test, timing, sources}]}, rejections)``.
     """
@@ -95,7 +95,7 @@ def gate(judged: dict, offered: dict, drug_ids: set[str], page_text
             if not W.attests(W.TIMINGS, timing, cand["quote"], cand["under"]):
                 rejected.append(f"{what}: neither the quote nor its heading states this timing")
                 continue
-            if normalize_for_match(cand["quote"]) not in page_text(entry["page"]):
+            if not pages.on_page(CORPUS, entry["page"], cand["quote"]):
                 rejected.append(f"{what}: the quote is not verbatim on its page")
                 continue
             cond = " ".join((p.get("condition") or "").split())
@@ -151,8 +151,7 @@ def main() -> int:
     pages = PageGate({CORPUS: pages_dir})
     drug_ids = {d["id"] for d in drugs_io.load_drugs()}
     offered = fetch_workup.build()
-    out, rejected = gate(judged, offered, drug_ids,
-                          lambda page: pages.text(CORPUS, page) or "")
+    out, rejected = gate(judged, offered, drug_ids, pages)
     for r in rejected:
         print(f"[reject] {r}")
     pending = undecided(judged, offered)
