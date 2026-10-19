@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from lib.page_file import page_file
+from lib.placeholder import is_placeholder
 
 from . import cpic, pharmfreq
 from .corpora import SOURCE_CORPORA
@@ -680,8 +681,9 @@ def _drug_brands(drug_id: str, brands: Any) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     for br in brands or []:
         name = br.get("name")
-        if not (isinstance(name, str) and name.strip()):
-            raise ValueError(f"Drug {drug_id!r} has a brand with no non-empty 'name'")
+        if is_placeholder(name):
+            raise ValueError(f"Drug {drug_id!r} has a brand with no real 'name' ({name!r}: "
+                             f"empty or a placeholder word, see lib.placeholder)")
         region = br.get("region")
         regions = brand_regions(region)
         if not regions or len(set(regions)) != len(regions) or any(

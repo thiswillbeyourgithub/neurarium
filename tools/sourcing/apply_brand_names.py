@@ -46,6 +46,7 @@ JUDGED = ROOT / "tools" / "generated_cache" / "brand_judged.json"
 
 # Reuse the checker's normalization so "accepted here" == "passes check_data".
 from lib.quote_match import normalize_for_match  # noqa: E402
+from lib.placeholder import is_placeholder  # noqa: E402
 
 
 BDPM_LABELS = ROOT / "tools" / "generated_cache" / "bdpm_labels.json"
@@ -70,9 +71,10 @@ def brand_key(name: str) -> str:
 
 def add_brand(existing: list, seen: set, name: str, region: str, source: dict) -> bool:
     """Append one brand node unless the drug already carries that name (any region,
-    see ``brand_key``). Returns whether it was added."""
+    see ``brand_key``) or the name is a placeholder word (``lib.placeholder``). Returns
+    whether it was added."""
     key = brand_key(name)
-    if not key or key in seen:
+    if is_placeholder(name) or not key or key in seen:
         return False
     seen.add(key)
     existing.append({"name": name, "region": region, "sources": [source]})

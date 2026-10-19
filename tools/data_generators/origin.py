@@ -31,6 +31,8 @@ import re
 from typing import Any
 
 from . import history
+from lib.placeholder import is_placeholder
+
 from .provenance import _quote_sources
 
 # The markets a holder is read for, in display order: one regulator register each.
@@ -64,7 +66,7 @@ def drug_origin(drug: dict[str, Any]) -> dict[str, Any]:
         if h.get("market") not in HOLDER_MARKETS:
             raise KeyError(f"Drug {did!r} holder market {h.get('market')!r} unknown")
         names = h.get("names")
-        if not names or not all(isinstance(n, str) and n for n in names):
+        if not names or any(is_placeholder(n) for n in names):
             raise ValueError(f"Drug {did!r} holder {h['market']} has no names: {h!r}")
         row: dict[str, Any] = {"market": h["market"], "names": list(names)}
         srcs = _quote_sources(h.get("sources"), f"Drug {did!r} holder {h['market']}")
@@ -75,7 +77,7 @@ def drug_origin(drug: dict[str, Any]) -> dict[str, Any]:
         out["holders"] = sorted(rows, key=lambda r: HOLDER_MARKETS.index(r["market"]))
     og = drug.get("originator")
     if og:
-        if not isinstance(og.get("name"), str) or not og["name"]:
+        if is_placeholder(og.get("name")):
             raise ValueError(f"Drug {did!r} originator has no name: {og!r}")
         out["originator"] = {k: og[k] for k in ("name", "now") if og.get(k)}
         srcs = _quote_sources(drug.get("originator_sources"), f"Drug {did!r} originator")

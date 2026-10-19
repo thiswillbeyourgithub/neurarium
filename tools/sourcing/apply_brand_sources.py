@@ -42,6 +42,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent   # repo root (script in to
 sys.path.insert(0, str(ROOT / "tools"))                # reach the shared drugs_io module
 from lib import drugs_io  # noqa: E402
 from lib.text_fold import alnum_key  # noqa: E402
+from lib.placeholder import is_placeholder  # noqa: E402
 from lib import stahl_index  # noqa: E402 (the one INDEX.md reader + span search)
 DRUGS_JSON = drugs_io.DRUGS_PATH
 STAHL = ROOT / "data_sources" / "books" / "stahl"
@@ -60,7 +61,7 @@ def parse_brands(answer):
 
     The answer is a ``<br/>``-delimited list of bulleted names, e.g.
     ``<b>•</b><b> </b>Xanax<br/>• Xanax XR<br/>``; strip the HTML tags and bullets,
-    collapse whitespace, drop empties. Order is preserved (Stahl lists the most
+    collapse whitespace, drop empties and placeholder words (``lib.placeholder``). Order is preserved (Stahl lists the most
     prominent brand first).
     """
     brands = []
@@ -70,7 +71,9 @@ def parse_brands(answer):
         # which `\s` does not match, so one leaked into a brand name and its quote.
         part = re.sub(r"[\x00-\x1f\x7f]", " ", part)
         part = re.sub(r"\s+", " ", part).strip()
-        if part:
+        # Stahl closes some lists with a literal "Other" bullet ("and other brands"),
+        # which is on the page, so only a vocabulary check can refuse it.
+        if not is_placeholder(part):
             brands.append(part)
     return brands
 

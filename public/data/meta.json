@@ -11780,13 +11780,13 @@
         "unknown": 0
       },
       "drug_brands": {
-        "total": 583,
+        "total": 577,
         "verified": 575,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
-        "nosource": 8,
-        "missing": 8,
+        "nosource": 2,
+        "missing": 2,
         "unknown": 0
       },
       "drug_categories": {
@@ -12231,13 +12231,13 @@
       }
     },
     "nodes": {
-      "total": 10205,
+      "total": 10199,
       "verified": 9458,
       "uncertain": 441,
       "sourced": 0,
       "llm": 237,
-      "nosource": 69,
-      "missing": 306,
+      "nosource": 63,
+      "missing": 300,
       "unknown": 667,
       "backed": 9899,
       "pct_backed": 97
