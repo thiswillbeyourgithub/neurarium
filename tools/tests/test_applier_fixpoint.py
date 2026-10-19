@@ -44,13 +44,16 @@ STRICT = [
     ("apply_brand_sources", []),
     ("apply_brand_names", []),
     ("apply_brand_names", ["--bdpm"]),
+    ("apply_metabolite_bindings", []),
 ]
 # Appliers that may legitimately rewrite other drugs but must never re-add a placed claim.
 NO_RELOCATED_CLAIM = [("apply_pharmacokinetics", [])]
 
 
 def rerun(module: str, argv: list[str], tmp: Path) -> tuple[bytes, list[dict]]:
-    """Run ``module.main()`` with ``argv`` against scratch copies; return (drugs bytes, drugs)."""
+    """Run ``module.main()`` with ``argv`` against scratch copies.
+
+    Returns (drugs + metabolites bytes, drugs)."""
     drugs, mets = tmp / "drugs_data.jsonl", tmp / "metabolites_data.jsonl"
     shutil.copy(drugs_io.DRUGS_PATH, drugs)
     shutil.copy(drugs_io.METABOLITES_PATH, mets)
@@ -63,7 +66,7 @@ def rerun(module: str, argv: list[str], tmp: Path) -> tuple[bytes, list[dict]]:
                 importlib.import_module(module).main()
     finally:
         drugs_io.DRUGS_PATH, drugs_io.METABOLITES_PATH, sys.argv = saved
-    return drugs.read_bytes(), drugs_io.load_drugs(drugs)
+    return drugs.read_bytes() + mets.read_bytes(), drugs_io.load_drugs(drugs)
 
 
 def relocated_on_molecule(drugs: list[dict]) -> list[str]:
@@ -88,7 +91,8 @@ class ApplierFixpointTest(unittest.TestCase):
         # Inside the repo: some appliers print the path they wrote relative to it.
         self._tmp = tempfile.TemporaryDirectory(dir=ROOT, prefix=".fixpoint_")
         self.tmp = Path(self._tmp.name)
-        self.committed = drugs_io.DRUGS_PATH.read_bytes()
+        self.committed = (drugs_io.DRUGS_PATH.read_bytes()
+                          + drugs_io.METABOLITES_PATH.read_bytes())
 
     def tearDown(self):
         self._tmp.cleanup()
@@ -99,7 +103,8 @@ class ApplierFixpointTest(unittest.TestCase):
                 got, drugs = rerun(module, argv, self.tmp)
                 self.assertEqual(relocated_on_molecule(drugs), [])
                 self.assertTrue(got == self.committed,
-                                f"{module} {argv} rewrote drugs_data.jsonl on a re-run")
+                                f"{module} {argv} rewrote drugs_data.jsonl or "
+                                f"metabolites_data.jsonl on a re-run")
 
     def test_no_applier_re_adds_a_placed_claim(self):
         for module, argv in NO_RELOCATED_CLAIM:

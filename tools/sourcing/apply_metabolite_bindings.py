@@ -194,13 +194,47 @@ def build_bindings(metab_name: str, entry: dict, judged: dict,
     return out
 
 
+# The Ki corpora this pass writes (PDSP first, else the Wikipedia table row). A Ki from
+# any other corpus was written by a later pass (``apply_gtopdb_ki.py`` fills what PDSP
+# left empty), so it is that pass's to keep or drop, never this one's.
+OWN_KI_CORPORA = frozenset({"pdsp_ki", "wikipedia_pharm"})
+
+
+def keep_foreign(old: list[dict], new: list[dict]) -> list[dict]:
+    """``new`` with every claim a LATER pass wrote onto ``old`` carried over.
+
+    This pass owns only what it derives: the judged actions and the PDSP / Wikipedia Ki.
+    A direction a later pass gave one of its affinity-only rows (``apply_binding_directions``
+    from prose or a Ki table, ``apply_gtopdb_ki`` from GtoPdb's action column) and a Ki
+    from a corpus it never writes survive a re-run, so a full run is a fixpoint instead
+    of clobbering the later passes (mCPP's 5-HT1A partial agonism, norquetiapine's
+    GtoPdb NET Ki).
+    """
+    prior = {b["target"]: b for b in old}
+    out = []
+    for b in new:
+        was = prior.get(b["target"])
+        if was is None:
+            out.append(b)
+            continue
+        b = dict(b)
+        if was.get("action") and not b.get("action"):
+            b.pop("affinity_only", None)
+            b.update({k: v for k, v in was.items() if k not in ("target", "ki", "affinity_only")})
+        ki = was.get("ki")
+        if ki and (ki.get("source") or {}).get("corpus") not in OWN_KI_CORPORA:
+            b["ki"] = ki
+        out.append({k: b[k] for k in [*was, *(k for k in b if k not in was)] if k in b})
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would change, write nothing")
     ap.add_argument("--only", help="comma-separated PARENT drug ids whose metabolites to "
-                    "rebuild (later passes, e.g. binding directions, write onto these "
-                    "lists, so a full re-run is not a no-op)")
+                    "rebuild (a full re-run keeps what later passes wrote, see "
+                    "keep_foreign)")
     args = ap.parse_args()
     only = {d.strip() for d in args.only.split(",") if d.strip()} if args.only else None
 
@@ -229,7 +263,8 @@ def main() -> int:
             warn(f"{m['name']}: no worklist entry (run the fetcher) - skipped")
             m.pop("bindings", None)
             continue
-        bindings = build_bindings(m["name"], entry, judged.get(key), valid_ids, warn)
+        bindings = keep_foreign(m.get("bindings") or [],
+                                build_bindings(m["name"], entry, judged.get(key), valid_ids, warn))
         if bindings:
             m["bindings"] = bindings
             n_metab += 1

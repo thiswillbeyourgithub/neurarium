@@ -94,5 +94,42 @@ class OwnArticleStoredTest(unittest.TestCase):
         self.assertEqual(missing, {})
 
 
+@unittest.skipUnless(HAS_BS4, "beautifulsoup4 not installed")
+class KeepForeignTest(unittest.TestCase):
+    """A full re-run keeps what later passes wrote onto this pass's rows.
+
+    It once rebuilt every list from its own worklist + picks only, so re-running it
+    dropped mCPP's 5-HT1A partial agonism (a binding-direction pass) and norquetiapine's
+    GtoPdb NET Ki.
+    """
+
+    def setUp(self):
+        self.m = _load()
+
+    def test_a_later_direction_survives(self):
+        old = [{"target": "5ht1a", "action": "partial_agonist", "sources": [{"q": 1}],
+                "ki": {"median": 222.0, "source": {"corpus": "wikipedia_pharm"}}}]
+        new = [{"target": "5ht1a", "affinity_only": True,
+                "ki": {"median": 222.0, "source": {"corpus": "wikipedia_pharm"}}}]
+        self.assertEqual(self.m.keep_foreign(old, new), old)
+
+    def test_a_foreign_ki_survives_and_an_own_ki_refreshes(self):
+        gtop = {"median": 12.0, "source": {"corpus": "gtopdb_ki"}}
+        old = [{"target": "net", "action": "reuptake_inhibitor", "ki": gtop},
+               {"target": "sert", "affinity_only": True,
+                "ki": {"median": 1.0, "source": {"corpus": "pdsp_ki"}}}]
+        fresh = {"median": 2.0, "source": {"corpus": "pdsp_ki"}}
+        new = [{"target": "net", "action": "reuptake_inhibitor"},
+               {"target": "sert", "affinity_only": True, "ki": fresh}]
+        got = self.m.keep_foreign(old, new)
+        self.assertEqual(got[0]["ki"], gtop)
+        self.assertEqual(got[1]["ki"], fresh)
+
+    def test_an_own_action_is_rebuilt(self):
+        old = [{"target": "sert", "action": "agonist", "sources": [{"q": 1}]}]
+        new = [{"target": "sert", "action": "reuptake_inhibitor", "sources": [{"q": 2}]}]
+        self.assertEqual(self.m.keep_foreign(old, new), new)
+
+
 if __name__ == "__main__":
     unittest.main()
