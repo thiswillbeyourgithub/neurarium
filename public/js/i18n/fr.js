@@ -858,6 +858,7 @@ window.__I18N_MESSAGES__.fr = {
   "about.kindDrugEnzymes": "Enzymes du métabolisme de la substance",
   "about.kindDrugEnzymeStrength": "Importance de la voie métabolique",
   "about.kindEnzymeVariability": "Vitesse d'élimination par population",
+  "about.kindDrugPgx": "Conseils de prescription selon la vitesse d'élimination",
   "about.kindDrugMetabolites": "Métabolites actifs de la substance",
   "about.kindDrugMetaboliteEnzyme": "Enzymes formant les métabolites",
   "about.kindDrugMetaboliteBindings": "Liaisons des métabolites",
@@ -879,6 +880,7 @@ window.__I18N_MESSAGES__.fr = {
   "about.kindReceptorEffect": "Effets cliniques des récepteurs (bêta)",
   "about.kindReleaseModulation": "Modulation de la libération par les récepteurs (bêta)",
   "about.kindDemographic": "Disponibilité des récepteurs selon l'âge et le sexe (bêta)",
+  "about.kindReceptorVariant": "Variants génétiques des récepteurs et cibles",
   "about.kindStructures": "Anatomie des régions",
   "about.kindAddons": "Annotations de panneau",
 

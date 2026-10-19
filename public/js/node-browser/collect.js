@@ -224,38 +224,32 @@ export function collectNodes(data, deps, opts = {}) {
         tg.densityInfo.provenance || "llm", go, tg.densityInfo);
     }
   }
-  // receptor_effect (BETA): one row per (owner, mode, effect) node, receptors and
-  // non-receptor targets alike (data.js resolves both onto the target list).
+  // The per-target node kinds, receptors and non-receptor targets alike (data.js
+  // resolves each onto the target list): receptor_effect (BETA, one row per (owner,
+  // mode, effect)), receptor_release_modulation (BETA, one per (receptor, kind, site,
+  // transmitter, direction)), receptor_demographic (BETA, one per (owner, factor,
+  // direction, structure)) and receptor_variant (one per ClinPGx clinical annotation
+  // on the owner's gene).
   for (const tg of data.targets || []) {
     owner = tg.id;
     const go = tg.focusable ? () => nav.target(tg) : null;
     for (const e of tg.effectInfo || []) {
       push("receptor_effect", tg.name, `${e.label} (${e.modeLabel})`, e.provenance, go, e);
     }
-  }
-
-  // receptor_release_modulation (BETA): one row per (receptor, kind, site, transmitter,
-  // direction) node (data.js resolves them onto the receptor's target entry).
-  for (const tg of data.targets || []) {
-    owner = tg.id;
-    const go = tg.focusable ? () => nav.target(tg) : null;
     for (const n of tg.modulationInfo || []) {
       push("receptor_release_modulation", tg.name,
         `${t(`relmod.activation.${n.effect}`,
           transmitterVars(n.transmitterLabel, window.__I18N__.ofNoun))} `
           + `(${n.kindLabel}, ${n.cellLabel})`, n.provenance, go, n);
     }
-  }
-
-  // receptor_demographic (BETA): one row per (owner, factor, direction, structure) node,
-  // receptors and non-receptor targets alike (data.js resolves both onto the target list).
-  for (const tg of data.targets || []) {
-    owner = tg.id;
-    const go = tg.focusable ? () => nav.target(tg) : null;
     for (const n of tg.demographicInfo || []) {
       push("receptor_demographic", tg.name,
         `${n.glyph} ${t(n.textKey, { where: n.structure ? ` (${n.structure})` : "" })}`,
         n.provenance, go, n);
+    }
+    for (const n of tg.variantInfo || []) {
+      push("receptor_variant", tg.name,
+        `${n.variant} (${[n.level, ...n.categories].join(", ")})`, n.provenance, go, n);
     }
   }
 
@@ -371,6 +365,13 @@ export function collectNodes(data, deps, opts = {}) {
       if (e.strengthLabel) {
         push("drug_enzyme_strength", d.name, `${e.label}: ${e.strengthLabel}`,
           (strength && strength.grade) || "llm", go, strength);
+      }
+    }
+    // CPIC's prescribing guidance: one node per (gene, phenotype) row, two citations
+    // (implication, recommendation) on one row (data/pk.js resolves the label).
+    for (const block of d.pgx || []) {
+      for (const r of block.rows || []) {
+        push("drug_pgx", d.name, `${block.label}: ${r.label}`, r.provenance, go, r);
       }
     }
     for (const m of d.metabolites || []) {

@@ -851,6 +851,7 @@ window.__I18N_MESSAGES__.en = {
   "about.kindDrugEnzymes": "Drug metabolising enzymes",
   "about.kindDrugEnzymeStrength": "Drug metabolism strength tier",
   "about.kindEnzymeVariability": "Enzyme clearance speed by population",
+  "about.kindDrugPgx": "Clearance-speed prescribing guidance",
   "about.kindDrugMetabolites": "Drug active metabolites",
   "about.kindDrugMetaboliteEnzyme": "Metabolite-forming enzymes",
   "about.kindDrugMetaboliteBindings": "Drug metabolite bindings",
@@ -872,6 +873,7 @@ window.__I18N_MESSAGES__.en = {
   "about.kindReceptorEffect": "Receptor clinical effects (beta)",
   "about.kindReleaseModulation": "Receptor release modulation (beta)",
   "about.kindDemographic": "Receptor availability across age and sex (beta)",
+  "about.kindReceptorVariant": "Receptor & target gene variants",
   "about.kindStructures": "Brain-region anatomy",
   "about.kindAddons": "Panel annotations",
 

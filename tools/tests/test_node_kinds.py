@@ -22,10 +22,6 @@ META = REPO_ROOT / "public" / "data" / "meta.json"
 KINDS_JS = REPO_ROOT / "public" / "js" / "kinds.js"
 CLAIM_WALK = REPO_ROOT / "tools" / "sourcing" / "claim_walk.py"
 
-# Node kinds the viewer registry does not render yet (no Data-browser rows, no Sources
-# bar): a known gap, listed so it stays a decision rather than an accident.
-JS_UNRENDERED_KINDS = {"drug_pgx", "receptor_variant"}
-
 # The claim walk labels its judge passes coarser or finer than the tally: one
 # ``receptor_classification`` pass covers the four per-attribute receptor kinds, and
 # ``other`` / ``target_other`` collect the citations no tally kind names.
@@ -48,7 +44,9 @@ class NodeKindRosterTest(unittest.TestCase):
     def test_viewer_registry_matches_roster(self):
         js = set(re.findall(r'\{\s*kind:\s*"(\w+)"', KINDS_JS.read_text(encoding="utf-8")))
         self.assertTrue(js, "parsed no kind out of public/js/kinds.js")
-        self.assertEqual(js, set(NODE_KINDS) - JS_UNRENDERED_KINDS)
+        # Exact equality: `references` (TALLY_ONLY_KINDS) is outside NODE_KINDS, and the
+        # viewer leaves it out on purpose (a pointer at a node, see kinds.js header).
+        self.assertEqual(js, set(NODE_KINDS))
 
     def test_claim_walk_labels_are_known_kinds(self):
         labels = set(re.findall(r'kind\["now"\] = "(\w+)"',

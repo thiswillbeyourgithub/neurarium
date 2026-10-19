@@ -14,8 +14,8 @@
 // uniformly yellow bar). It stays in meta.provenance_stats.by_kind, just not rendered.
 // `enzyme_variability` has a bar but no browser rows (its rows live in the enzyme panel).
 // The canonical roster is tools/data_generators/node_kinds.py NODE_KINDS;
-// tools/tests/test_node_kinds.py pins this list to it (drug_pgx and receptor_variant
-// are not rendered here yet).
+// tools/tests/test_node_kinds.py pins this list to it, and tools/tests/node_rows.test.mjs
+// checks each kind's Data-browser row count against the shipped by_kind tally.
 
 export const KINDS = [
   { kind: "addons", label: "about.kindAddons" },
@@ -38,6 +38,7 @@ export const KINDS = [
   { kind: "receptor_effect", label: "about.kindReceptorEffect", example: "5ht2a" },
   { kind: "receptor_release_modulation", label: "about.kindReleaseModulation", example: "5ht2a" },
   { kind: "receptor_demographic", label: "about.kindDemographic", example: "5ht2a" },
+  { kind: "receptor_variant", label: "about.kindReceptorVariant", example: "sert" },
   { kind: "drug_bindings", label: "about.kindBindings", example: "olanzapine" },
   { kind: "drug_binding_action", label: "about.kindBindingAction", example: "olanzapine" },
   { kind: "drug_nbn", label: "about.kindNbn", example: "olanzapine" },
@@ -62,6 +63,7 @@ export const KINDS = [
   { kind: "drug_enzymes", label: "about.kindDrugEnzymes", example: "olanzapine" },
   { kind: "drug_enzyme_strength", label: "about.kindDrugEnzymeStrength", example: "olanzapine" },
   { kind: "enzyme_variability", label: "about.kindEnzymeVariability" },
+  { kind: "drug_pgx", label: "about.kindDrugPgx", example: "citalopram" },
   { kind: "drug_metabolites", label: "about.kindDrugMetabolites", example: "fluoxetine" },
   { kind: "drug_metabolite_enzyme", label: "about.kindDrugMetaboliteEnzyme", example: "olanzapine" },
   { kind: "drug_metabolite_bindings", label: "about.kindDrugMetaboliteBindings", example: "olanzapine" },
