@@ -1,6 +1,6 @@
 # Neurarium
 
-> An interactive 3D brain visualizer with an open dataset of brain regions, pathways, neurotransmitter receptors and CNS drugs (bindings, pharmacokinetics, metabolism, pharmacogenomics). Every claim is a "node" carrying its own source quote and a provenance grade. Version 3.132.3. Not medical advice.
+> An interactive 3D brain visualizer with an open dataset of brain regions, pathways, neurotransmitter receptors and CNS drugs (bindings, pharmacokinetics, metabolism, pharmacogenomics). Every claim is a "node" carrying its own source quote and a provenance grade. Version 3.133.0. Not medical advice.
 
 ## Please do not crawl or index this site
 

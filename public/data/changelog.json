@@ -1,6 +1,70 @@
 {
   "versions": [
     {
+      "version": "3.133.0",
+      "date": "2026-10-19",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The drug panel's \"Acts within\" section is folded into Neurotransmitter tone: a system the drug reaches only through a postsynaptic receptor is now a \"no tone change\" row there, with one line saying why",
+          "commits": [
+            "ce5b137"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Every data-sourcing step can be re-run without undoing another step's work, every saved cache has one fixed format, and tests check both",
+          "commits": [
+            "858ff57",
+            "38cab71",
+            "bb552e4",
+            "1d060b0",
+            "8d0328d",
+            "8895765",
+            "990a06a",
+            "b683a65",
+            "ab3067e",
+            "38d1fca"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Seven more verified drug classes: bumetanide, cannabidiol, cannabinol, furosemide, nabilone, rimonabant and tiapride",
+          "commits": [
+            "1522e1b"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Three more sourced pathways: raphe to caudate, raphe to putamen, and frontal cortex to putamen",
+          "commits": [
+            "d5eb4ea"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Six more active-metabolite bindings: noribogaine at the serotonin transporter and the kappa and mu opioid receptors, norzimelidine at the serotonin and noradrenaline transporters, 2-oxoquazepam at the alpha7 nicotinic receptor",
+          "commits": [
+            "6fbbfdf"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Measured affinities for benztropine at the dopamine transporter, naltrexone at the delta and kappa opioid receptors and fentanyl at kappa, plus benztropine at 5-HT2A",
+          "commits": [
+            "abc3f10"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Five receptor-effect caveats are now judged like every other quote",
+          "commits": [
+            "1bceb28"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.132.3",
       "date": "2026-10-19",
       "entries": [
