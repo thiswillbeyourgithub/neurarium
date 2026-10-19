@@ -43,6 +43,7 @@ REPO = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_generators.release_modulation import CACHE, node_key, vocab_error  # noqa: E402
+from lib.structure_ids import bases_of  # noqa: E402
 from prose_gate import apply_picks, not_offered, run_applier  # noqa: E402
 from apply_classification_sources import PROSE_PAGES  # noqa: E402 (same two corpora)
 
@@ -62,7 +63,7 @@ def current_receptors() -> dict[str, str]:
 
 def current_structures() -> set[str]:
     """Modeled structure base ids (a mirrored ``x_R`` counts as ``x``)."""
-    return {s["id"].removesuffix("_R").removesuffix("_L") for s in _jsonl("structures.jsonl")}
+    return bases_of(_jsonl("structures.jsonl"))
 
 
 def apply(worklist: dict, judged: dict, receptors: dict[str, str], structures: set[str],

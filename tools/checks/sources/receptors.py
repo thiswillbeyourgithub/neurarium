@@ -9,11 +9,7 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 from data_generators import demographics as DEMOG
 from data_generators import release_modulation as RELMOD
 from lib.quote_match import normalize_for_match
-
-
-def structure_bases(structures):
-    """Every structure id with its hemisphere suffix dropped."""
-    return {s.get("id", "").removesuffix("_R").removesuffix("_L") for s in structures}
+from lib.structure_ids import bases_of
 
 
 def check_effects(gate, meta, ctx, owner, is_receptor):
@@ -85,7 +81,7 @@ def check_variants(gate, ctx, owner):
 
 def walk_receptors(gate, meta, receptors, structures):
     check_one = gate.check_one
-    bases = structure_bases(structures)
+    bases = bases_of(structures)
     for r in receptors:
         for attr, entry in (r.get("classification") or {}).items():
             for i, src in enumerate(entry.get("sources") or []):
@@ -111,7 +107,7 @@ def walk_receptors(gate, meta, receptors, structures):
 
 def walk_targets(gate, meta, structures):
     check_one = gate.check_one
-    bases = structure_bases(structures)
+    bases = bases_of(structures)
     for tid, tinfo in (meta.get("drug_targets", {}) or {}).items():
         if isinstance(tinfo, dict):
             for i, src in enumerate(tinfo.get("sources", []) or []):

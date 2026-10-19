@@ -52,7 +52,8 @@ from lib import worklist_io  # noqa: E402
 from lib.worklist_io import merge_scoped  # noqa: E402
 from data_generators.quotes.attestation import pattern_for  # noqa: E402
 from data_generators.quotes.uncertainty import (  # noqa: E402
-    _base_id, _names_region, _region_designations)
+    _names_region, _region_designations)
+from lib.structure_ids import base_id  # noqa: E402
 from data_generators.presentation import KIND_TO_SIGN  # noqa: E402
 
 OUT_PATH = ROOT / "tools" / "generated_cache" / "projection_worklist.json"
@@ -153,7 +154,7 @@ def designations() -> dict[str, set[str]]:
     for line in (DATA / "structures.jsonl").read_text("utf-8").splitlines():
         if line.strip():
             s = json.loads(line)
-            base = _base_id(s["id"])
+            base = base_id(s["id"])
             out[base] = _region_designations(base, s.get("base_name") or s.get("name"))
     return out
 
@@ -181,7 +182,7 @@ def names(text: str, base: str, des: dict[str, set[str]], coarse: bool = False) 
 
 def candidates(proj: dict, windows: list, des: dict[str, set[str]],
                cap: int = MAX_CANDIDATES) -> list[dict]:
-    src, dst = _base_id(proj["from"]), _base_id(proj["to"])
+    src, dst = base_id(proj["from"]), base_id(proj["to"])
     tx = pattern_for("transmitter", proj["transmitter"]) if "transmitter" in proj["need"] else None
     sg = pattern_for("sign", proj["sign"]) if "sign" in proj["need"] and proj["sign"] else None
     route = "route" in proj["need"]

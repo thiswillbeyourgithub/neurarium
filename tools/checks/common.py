@@ -5,7 +5,6 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 """
 
 import json
-import re
 from pathlib import Path
 
 
@@ -13,10 +12,6 @@ DATA_DIR = Path(__file__).resolve().parents[2] / "public" / "data"
 # Repo root, used to resolve a source corpus's author-side ``pages_dir`` (e.g.
 # ``data_sources/books/stahl/pages``) for the quote-in-page check (see check_sources).
 REPO_ROOT = DATA_DIR.parent.parent
-# Trailing hemisphere suffix on a structure id ("frontal_R" -> "frontal").
-HEMISPHERE_RE = re.compile(r"_(R|L)$")
-
-
 def flip_hemisphere(structure_id):
     """Flip a structure id to the other hemisphere; midline ids unchanged."""
     if structure_id.endswith("_R"):
@@ -135,9 +130,3 @@ def walk_strings(obj, path):
             yield from walk_strings(value, f"{path}[{index}]")
     elif isinstance(obj, str):
         yield path, obj
-
-
-def base_id(structure_id):
-    """Drop a trailing ``_R`` / ``_L`` so a mirrored endpoint compares against a
-    base region name (a receptor ``location`` / target ``region`` is a base)."""
-    return HEMISPHERE_RE.sub("", structure_id) if structure_id else structure_id

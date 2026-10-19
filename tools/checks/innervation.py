@@ -5,7 +5,7 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 
 from collections import defaultdict
 
-from .common import base_id
+from lib.structure_ids import base_id
 
 
 def check_innervation(report, meta, structures, projections, receptors):

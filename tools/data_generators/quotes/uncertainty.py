@@ -68,6 +68,7 @@ import re
 from typing import Any
 
 from lib.text_fold import ascii_key
+from lib.structure_ids import base_id
 
 from .. import quote_table
 
@@ -455,7 +456,7 @@ def _blanket_groups(projections: list[dict[str, Any]],
     by_quote: dict[tuple[str, str], list[int]] = collections.defaultdict(list)
     source_of: dict[tuple[str, str], dict[str, Any]] = {}
     for i, p in enumerate(projections):
-        des = designations.get(_base_id(p["to"]), set())
+        des = designations.get(base_id(p["to"]), set())
         hit = False
         for src in p.get("sources") or []:
             quote = src.get("quote")
@@ -481,11 +482,6 @@ def _blanket_groups(projections: list[dict[str, Any]],
     return out
 
 
-def _base_id(structure_id: str) -> str:
-    """``accumbens_R`` -> ``accumbens`` (a midline structure has no side suffix)."""
-    return re.sub(r"_[RL]$", "", structure_id)
-
-
 def _designations_by_base(structures: list[dict[str, Any]]) -> dict[str, set[str]]:
     """``base -> designations`` for every structure.
 
@@ -493,8 +489,8 @@ def _designations_by_base(structures: list[dict[str, Any]]) -> dict[str, set[str
     what a source names). ``base_name`` is the hemisphere-stripped display name; a
     midline structure carries only ``name``.
     """
-    return {_base_id(s["id"]): _region_designations(
-                _base_id(s["id"]), s.get("base_name") or s.get("name"))
+    return {base_id(s["id"]): _region_designations(
+                base_id(s["id"]), s.get("base_name") or s.get("name"))
             for s in structures}
 
 
@@ -541,7 +537,7 @@ def apply_set_claim_uncertainty(projections: list[dict[str, Any]],
     by_quote: dict[tuple[str, str], list[int]] = collections.defaultdict(list)
     source_of: dict[tuple[str, str], dict[str, Any]] = {}
     for i, p in enumerate(projections):
-        ends = (des.get(_base_id(p["from"]), set()), des.get(_base_id(p["to"]), set()))
+        ends = (des.get(base_id(p["from"]), set()), des.get(base_id(p["to"]), set()))
         for claim, sources in _set_claim_candidates(p):
             quotes = [s for s in sources if s.get("quote")]
             if not quotes or any(_names_region(s["quote"], d)
@@ -553,7 +549,7 @@ def apply_set_claim_uncertainty(projections: list[dict[str, Any]],
                 source_of.setdefault(key, s)
     widest: dict[tuple[int, str], tuple[int, dict[str, Any]]] = {}
     for key, idx in by_quote.items():
-        if len({_base_id(projections[i]["from"]) for i in idx}) < 2:
+        if len({base_id(projections[i]["from"]) for i in idx}) < 2:
             continue
         for i in idx:
             if (i, key[0]) not in widest or widest[(i, key[0])][0] < len(idx):

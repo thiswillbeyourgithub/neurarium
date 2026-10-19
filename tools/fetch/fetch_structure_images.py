@@ -64,7 +64,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 import time
 from pathlib import Path
@@ -74,6 +73,7 @@ from pathlib import Path
 # live in tools/, so a plain import resolves when run as `python tools/<name>.py`.
 from fetch_molecules import API as EN_API, _is_chrome, article_title, http_json
 from lib.io_atomic import atomic_write_json  # tools/ is on sys.path via fetch_molecules
+from lib.structure_ids import base_id  # noqa: E402
 
 TOOLS = Path(__file__).resolve().parent.parent   # tools/ (script lives in tools/fetch/)
 REPO = TOOLS.parent
@@ -165,14 +165,6 @@ def _override_entry(url: str) -> dict:
     low = name.lower()
     kind = "gif" if low.endswith(".gif") else "svg" if low.endswith(".svg") else "infobox"
     return {"file": f"File:{name}", "url": url, "title": "(manual override)", "kind": kind}
-
-
-def base_id(structure_id: str) -> str:
-    """Strip a trailing ``_R`` / ``_L`` hemisphere suffix to get the base id.
-
-    Midline structures (cerebellum, raphe, ...) have no suffix and pass through.
-    """
-    return re.sub(r"_(R|L)$", "", structure_id)
 
 
 def _file_url(file_title: str, api_url: str = EN_API) -> str | None:

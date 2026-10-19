@@ -8,7 +8,7 @@ from collections import defaultdict
 
 from lib.drugs_io import is_combination
 
-from .common import base_id
+from lib.structure_ids import base_id
 
 
 def _affinity_weight(ki):

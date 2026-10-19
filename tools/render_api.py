@@ -32,6 +32,7 @@ from urllib.parse import quote
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "data_generators"))
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like page)
+from lib.structure_ids import base_id  # noqa: E402 (the one hemisphere-suffix rule)
 import effect_index  # noqa: E402 (the effect -> receptors -> drugs join, BETA)
 import llms_txt  # noqa: E402 (SITE_URL + the version, defined once there)
 import node_id  # noqa: E402 (the id shape check_data enforces)
@@ -100,7 +101,7 @@ class Renderer:
         # structures list the emitted right-hand id ("frontal_R").
         self.base_to_structure = {}
         for sid in self.pages["structure"]:
-            self.base_to_structure.setdefault(sid.removesuffix("_R").removesuffix("_L"), sid)
+            self.base_to_structure.setdefault(base_id(sid), sid)
         self.addons: dict[tuple[str, str], list[dict[str, Any]]] = {}
         for a in data["addons"]:
             self.addons.setdefault((a["owner_kind"], a["owner"]), []).append(a)

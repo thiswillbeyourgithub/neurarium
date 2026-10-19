@@ -3,14 +3,14 @@
 Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 """
 
-from .common import HEMISPHERE_RE
+from lib.structure_ids import base_id
 
 
 def check_reachability(report, meta, structures, projections, circuits,
                        projection_groups, receptors, drugs, addons, metabolites=()):
     report.header("2. Reachability (dangling references)")
     structure_ids = {s.get("id") for s in structures}
-    base_ids = {HEMISPHERE_RE.sub("", sid) for sid in structure_ids}
+    base_ids = {base_id(sid) for sid in structure_ids}
     receptor_ids = {r.get("id") for r in receptors}
     targets = meta.get("drug_targets", {})
     before = report.errors
