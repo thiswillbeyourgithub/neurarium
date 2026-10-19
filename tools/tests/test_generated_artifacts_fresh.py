@@ -8,7 +8,8 @@ committed copy:
 * ``public/data/**`` (meta, every ``*.jsonl``, ``quotes.jsonl``, ``changelog.json``,
   ``translations.fr.json``, ``search_names.fr.json``, ``shapes/``) and
   ``public/llms.txt``: one ``generate_data.py --root <tmp>`` run, byte-compared;
-* the README.md / README.fr.md generated blocks: ``update_readme_stats.py --check``;
+* the README.md / README.fr.md and docs/SOURCING_GAPS.md generated blocks:
+  ``update_readme_stats.py --check``;
 * the baked meshes: ``public/data/meshes/index.json`` records each shape file's
   SHA-256 (re-meshing needs Node), re-hashed by check_data family 11.
 
