@@ -11,9 +11,8 @@ Author-side: skipped on a clone without ``data_sources/``. ``FAST`` always runs 
 ``SLOW`` (tens of seconds each) runs only with ``NEURARIUM_SLOW_TESTS=1``.
 
 Not listed, because their committed caches are stale today (a rebuild is new data that wants
-its own judge pass, not a test edit):
-``cyp_worklist``, ``half_life``,
-``projection_worklist``, ``receptor_effects``, ``tmax`` and ``fetch_metabolite_bindings``.
+its own judge pass, not a test edit): ``half_life``, ``projection_worklist``,
+``receptor_effects``, ``tmax`` and ``fetch_metabolite_bindings``.
 Add one here once its cache has been refreshed.
 
 Built with the help of Claude Code.
@@ -39,6 +38,7 @@ FAST = {
     "fetch_pharmacokinetics": "pk_worklist.json",
 }
 SLOW = {
+    "fetch_cyp_worklist": "cyp_worklist.json",
     "fetch_formulation_worklist": "formulation_worklist.json",
     "fetch_prodrug_worklist": "prodrug_worklist.json",
     "fetch_classification_worklist": "classification_worklist.json",
