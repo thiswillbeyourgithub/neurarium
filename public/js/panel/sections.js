@@ -238,7 +238,7 @@ export function makeSections(P) {
     const hits = variantsForDrug(drug.id, data.targets);
     if (!hits.length) return;
     const { group, close } = betaSection("variants", "variant.drugHeading", "variant.drugHint",
-      { beta: false, cls: "info-variants", grouped: true, caveatKey: "variant.caveat" });
+      { cls: "info-variants", grouped: true, caveatKey: "variant.caveat" });
     const byTarget = new Map();
     for (const { target, row } of hits) {
       if (!byTarget.has(target)) byTarget.set(target, []);
