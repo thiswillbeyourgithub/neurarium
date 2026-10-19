@@ -220,6 +220,24 @@ def labels() -> dict[str, dict[str, str]]:
     return {k: {"en": v["en"], "fr": v["fr"]} for k, v in RELEASES.items()}
 
 
+def placed(drug: dict[str, Any], field: str) -> list[Any]:
+    """Every ``field`` value ``apply_formulations.py`` already moved onto a formulation.
+
+    ``field`` is ``"tmax"`` / ``"half_life"`` (one value per formulation holding one) or
+    ``"brands"`` (flattened). Every molecule-level applier of a relocatable claim asks
+    this before writing, so a re-run leaves a placed claim where it sits instead of
+    re-adding it to the molecule (``tools/tests/test_applier_fixpoint.py`` guards it):
+    ``placed({"formulations": [{"release": "xr", "tmax": {"hours": 6}}]}, "tmax")``
+    is ``[{"hours": 6}]``.
+    """
+    out: list[Any] = []
+    for f in drug.get("formulations") or []:
+        v = f.get(field)
+        if v:
+            out.extend(v if isinstance(v, list) else [v])
+    return out
+
+
 def drug_formulations(drug: dict[str, Any]) -> dict[str, Any]:
     """The emitted ``formulations`` of one drug (validated), or ``{}``.
 

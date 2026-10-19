@@ -56,5 +56,16 @@ class StahlOwnedTest(unittest.TestCase):
         self.assertFalse(fetch_half_life.stahl_owned(drug))
 
 
+class PlacedOnFormulationTest(unittest.TestCase):
+    """A claim ``apply_formulations`` moved onto a formulation is not re-written on the molecule."""
+
+    def test_placed_tmax_is_skipped(self):
+        drug = {"id": "x", "formulations": [{"release": "xr", "tmax": {"hours": 6.0}}]}
+        written, rejected, skipped = apply_tmax.apply_judged(
+            {"x": {"index": 0, "hours": 6.0}}, {}, [drug], "tmax", 24.0, "too long")
+        self.assertEqual((written, rejected, skipped), (0, [], ["x"]))
+        self.assertNotIn("tmax", drug)
+
+
 if __name__ == "__main__":
     unittest.main()

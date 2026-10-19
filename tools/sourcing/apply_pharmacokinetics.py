@@ -40,6 +40,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent           # repo root
 sys.path.insert(0, str(ROOT / "tools"))
 from lib import drugs_io                                                 # noqa: E402
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from data_generators import formulations as F  # noqa: E402 (placed: a T½ already on a formulation)
 
 # The corpora a judged quote may cite (``corpus`` defaults to ``stahl``): Stahl's
 # monograph prose, then the drug's (or the metabolite's) own English Wikipedia article.
@@ -112,8 +113,8 @@ def apply(judged: dict, drugs: list[dict], pages: PageGate,
 
     def set_half_life(rec: dict, owner: dict, label: str) -> int:
         """Apply ``rec["half_life"]`` (gated dict, or explicit None) onto ``owner``."""
-        if "half_life" not in rec:
-            return 0
+        if "half_life" not in rec or F.placed(owner, "half_life"):
+            return 0  # absent, or a per-release T½ the formulation pass placed
         hl = rec["half_life"]
         if hl is None:
             owner.pop("half_life", None)

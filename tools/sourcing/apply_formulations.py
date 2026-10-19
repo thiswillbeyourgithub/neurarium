@@ -27,9 +27,8 @@ here, never trusted:
 What is placed leaves the molecule level (a brand merges by name into its formulation;
 a Tmax / T½ moves with its source, the release quote joining the formulation's
 ``release_sources``). What nothing places stays where it is. Idempotent: a re-run
-finds nothing left to move, and a brand / Tmax / T½ applier that re-adds a moved claim
-at molecule level is undone by re-running this (``generate_data.py`` refuses the
-duplicate until then). Writes no ``llm`` stamp, so ``tools/sourcing/recheck_quotes.py``
+finds nothing left to move, and every brand / Tmax / T½ applier skips a claim already
+placed (``formulations.placed``, guarded by ``tools/tests/test_applier_fixpoint.py``). Writes no ``llm`` stamp, so ``tools/sourcing/recheck_quotes.py``
 must judge the picked release quotes afterwards (``--kinds drug_formulations``).
 
 Usage (from the repo root)::

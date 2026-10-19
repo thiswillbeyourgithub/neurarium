@@ -57,6 +57,7 @@ sys.path.insert(0, str(ROOT / "tools" / "fetch"))
 
 from lib import drugs_io                                                 # noqa: E402
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
+from data_generators import formulations as F  # noqa: E402 (placed: a claim already on a formulation)
 from pipeline.judged import resolve  # noqa: E402
 from pipeline.gate import PageGate, registry_pages              # noqa: E402
 import fetch_tmax                                               # noqa: E402
@@ -141,7 +142,7 @@ def apply_judged(judged: dict, offered: dict, drugs: list[dict], field: str,
         if not drug:
             reject(did, "not a dataset drug")
             continue
-        if owned and owned(drug):
+        if (owned and owned(drug)) or F.placed(drug, field):
             skipped.append(did)
             continue
         entry = offered.get(did)

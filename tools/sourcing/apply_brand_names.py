@@ -38,6 +38,7 @@ from lib.page_file import page_path, read_page, read_page_file  # noqa: E402 (re
 from lib import drugs_io  # noqa: E402
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from data_generators.provenance import brand_regions  # noqa: E402
+from data_generators import formulations as F  # noqa: E402 (placed: brands already on a formulation)
 from lib.text_fold import ascii_key, strip_accents  # noqa: E402
 
 PAGES_FR = ROOT / "data_sources" / "wikipedia" / "pages_fr"
@@ -127,7 +128,7 @@ def apply_bdpm(drugs: list[dict], labels: dict, pages: Path = BDPM_PAGES):
     for d in drugs:
         brands = (labels.get(d["id"]) or {}).get("brands") or []
         existing = d.get("brands") or []
-        seen = {brand_key(b["name"]) for b in existing}
+        seen = {brand_key(b["name"]) for b in [*existing, *F.placed(d, "brands")]}
         new_here = 0
         for b in brands:
             if brand_key(b["name"]) in seen:
@@ -216,7 +217,7 @@ def main():
         page_norm = page_cache[fr_slug]
 
         existing = d.setdefault("brands", [])
-        seen = {brand_key(b["name"]) for b in existing}
+        seen = {brand_key(b["name"]) for b in [*existing, *F.placed(d, "brands")]}
         new_here = 0
         for name in names:
             name = (name or "").strip()

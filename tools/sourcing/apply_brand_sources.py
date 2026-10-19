@@ -41,6 +41,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent   # repo root (script in tools/sourcing/)
 sys.path.insert(0, str(ROOT / "tools"))                # reach the shared drugs_io module
 from lib import drugs_io  # noqa: E402
+from data_generators import formulations as F  # noqa: E402 (placed: brands already on a formulation)
 from lib.text_fold import alnum_key  # noqa: E402
 from lib.placeholder import is_placeholder  # noqa: E402
 from lib import stahl_index  # noqa: E402 (the one INDEX.md reader + span search)
@@ -115,7 +116,7 @@ def main():
     applied = brands_added = skipped = no_dump = no_range = 0
     misses = []
     for d in drugs:
-        if d.get("brands"):
+        if d.get("brands") or F.placed(d, "brands"):
             skipped += 1
             continue
         names = dump.get(_norm(d["name"]))
