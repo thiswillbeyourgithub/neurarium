@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.135.1",
+      "date": "2026-10-20",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "A fast test now checks that every guided-tour step still points at something the app has, and that its text exists in English and French",
+          "commits": [
+            "06212e2"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.135.0",
       "date": "2026-10-20",
       "entries": [
